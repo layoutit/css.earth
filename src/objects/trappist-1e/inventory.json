@@ -33,9 +33,27 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-dataset-cloud-model.webp",
+      "bytes": 2294,
+      "sha256": "0e288c176a35f5f9b98a0db0b1449cc351c901b02938c448837db60c05c2601e"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-dataset-heat-model.webp",
+      "bytes": 2196,
+      "sha256": "eff4c0967f556cc4a3a27b4a78714535d576a48c164ac6b7500c0f069f176bd6"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-dataset-illustration.webp",
       "bytes": 1884,
       "sha256": "c2345f17a9cc06780dfc84fa32ba62df4772f4e73e94cd458d86c5d44a261df8"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-dataset-sea-ice-model.webp",
+      "bytes": 412,
+      "sha256": "01ba0669231c848028e51a916a092c419faeaf092d7a895e46973c65407c21e6"
     },
     {
       "location": "public",
@@ -45,9 +63,33 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-dataset-vapor-model.webp",
+      "bytes": 2192,
+      "sha256": "c6988e829f245785db4842969a5b99fcbdff435df51733f31e67ca5429dde396"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-dataset-wind-model.webp",
+      "bytes": 1800,
+      "sha256": "9a985ae040e684bdad791bbd74a567a881cd5fe66aae26c94d5145490ffe0f6a"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-poles-climate-model@2x.webp",
       "bytes": 31014,
       "sha256": "8ac9564a9196859842e12d0720c33ff1534fb6816f402f4c31995817f3570e00"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-cloud-model@2x.webp",
+      "bytes": 18668,
+      "sha256": "1667c1a7e2922a89ab887d48cdcb64e9d4ba82336fb48492a33c0ae81e6a1c1b"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-heat-model@2x.webp",
+      "bytes": 22942,
+      "sha256": "cdf21a7f810a1a9ed38c2305e9f852774e73c0a8621437c5db764979372f3a60"
     },
     {
       "location": "public",
@@ -57,9 +99,27 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-poles-sea-ice-model@2x.webp",
+      "bytes": 1340,
+      "sha256": "19111962e157bbd618fcfb5b9f944823473582feadd0f4f0fb54985c1094a542"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-poles-shape@2x.webp",
       "bytes": 1340,
       "sha256": "bae899d7e4daab20b1fd6171e95b8da38a0f838f4101b9bc86f140782d897494"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-vapor-model@2x.webp",
+      "bytes": 7478,
+      "sha256": "c2c66a3aca4269ad05424e873a6ed4f28e8fccd9f601ce210727c2e4390bab40"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-wind-model@2x.webp",
+      "bytes": 17498,
+      "sha256": "849c88b50c4f88d370d95f406e536021d6e177c24931c8a6d63baba67e072687"
     },
     {
       "location": "public",
@@ -69,15 +129,45 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-surface-cloud-model@2x.webp",
+      "bytes": 125492,
+      "sha256": "b4fdcbfea3faa9c68f44976182758bf90c6aa80c62e8c995dc71fd46bf22a1c7"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-surface-heat-model@2x.webp",
+      "bytes": 175066,
+      "sha256": "d84116e89a24f164be9a166d4bc52af9e95786cbe2362db48ba20aa8be10cd73"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-surface-illustration@2x.webp",
       "bytes": 737934,
       "sha256": "35b67f83d60f2e4576827957ff44e4da4be3fbe370768900c2ed49f7672e984d"
     },
     {
       "location": "public",
+      "filename": "trappist-1e-surface-sea-ice-model@2x.webp",
+      "bytes": 49932,
+      "sha256": "08d585019327e8e0e8f34f8d9bb3602337860bbe25135a5cc59499f824c4fa10"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-surface-shape@2x.webp",
       "bytes": 38,
       "sha256": "a165c7dc1f385f70b2e406e0e8e1334a5b5d3838e5139cfa9c257ba59a1d919e"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-surface-vapor-model@2x.webp",
+      "bytes": 121980,
+      "sha256": "33335c260fc7c13aa68166211ca0827a176b735223b61c8f1bba30882be26d08"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-surface-wind-model@2x.webp",
+      "bytes": 74680,
+      "sha256": "25f3100b1128b092c4f125dd6ed304d3f04af1debe2502d353d25a402a4bdd58"
     },
     {
       "location": "prepared",
@@ -88,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18368,
-      "sha256": "92d8461f5930583421e290a6e1d21ab159b1475605fa2e84283016fc0f2aa60c"
+      "bytes": 19323,
+      "sha256": "cececf041b3f0c06a358a288034d5cb3de48053e4bffbaa4ec10db6827ce8a77"
     },
     {
       "location": "prepared",
@@ -100,14 +190,14 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1916,
-      "sha256": "949dad7fd7355d35f6ece31f5cd1b38056bcb1e9c63526bbcc2c1fe7d23bb6f0"
+      "bytes": 2811,
+      "sha256": "66266145184984dc00764a88e239d8d6c5a048cc0697eb5b958abce58f6f7e9a"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3503,
-      "sha256": "c320f682ac384bf18d425b4c6acd75a7545757655f57e4a45f2408ca76b61083"
+      "bytes": 13029,
+      "sha256": "4b159589d000cdd2db93f05ae01c0b5b5e6cf27640adca5076106a61fefdab04"
     },
     {
       "location": "prepared",
@@ -118,8 +208,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 307,
-      "sha256": "bbdefeefa14876783aba23ce73a19cf86f5ee5073d19a5b64f1a1cffb094f40d"
+      "bytes": 807,
+      "sha256": "6cbea585e00c8c45de25c9d972c31e3fc64989266f05c963ada87241789b6dac"
     },
     {
       "location": "prepared",
@@ -129,9 +219,27 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/cloud-model.webp",
+      "bytes": 2704,
+      "sha256": "6bef3f09c68d5be4d4e2f0cab8ca7b9ac26c1eef32252251862897b3fc088baa"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/heat-model.webp",
+      "bytes": 2184,
+      "sha256": "76c9b04db84f960896937fc0422738025f19789cb22ec74818baaaf3ca4d3427"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/illustration.webp",
       "bytes": 34280,
       "sha256": "c07626a267d4cc52c898ec15e0c7ee822500fdfe8cc0253b2aa53d995bf549c9"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/sea-ice-model.webp",
+      "bytes": 1844,
+      "sha256": "c406f671fa295a94f5c532a2690d4859f26fa15e154af3efcf2ad2debecb82f3"
     },
     {
       "location": "prepared",
@@ -141,15 +249,27 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/vapor-model.webp",
+      "bytes": 1642,
+      "sha256": "6cdf372960a5937f773a4603b6bb1acc920cf8ac2788fcd6203634d3a138a85b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/wind-model.webp",
+      "bytes": 1744,
+      "sha256": "eee8b6fb8984959130d1e5e905b5c93fa0ae82b2dd08ada7b4c438414b92db1f"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 96788,
-      "sha256": "05307e108bebe2f98161191e0e597cdf60de30cb1637b0a05638c6f71372e515"
+      "bytes": 115919,
+      "sha256": "ba0ce155adbf50d6047fa23aff31a86b202b8d390d7e758606f6781d33010a2f"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1507,
-      "sha256": "56b7eec307b260469b110ad22923d4ecf2608e89ce11a701c31c6d8f373279f1"
+      "bytes": 2425,
+      "sha256": "6a56ea695b2f57baea518db6307d49320e4910810b8fcb19392c91ee922d28c1"
     }
   ]
 }

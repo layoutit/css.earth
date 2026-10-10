@@ -97,6 +97,15 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Measurement record authored in this package from this project's own joint fit; repinned when edited."
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304 — JWST MIRI F1500W time series of TRAPPIST-1, programs 3077 (PI Gillon), 1177 and 2304: the visits this project's eclipse depth is measured in"
+          }
+        ]
       }
     },
     {

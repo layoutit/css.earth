@@ -39,6 +39,36 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1d-dataset-ocean-cloud-model.webp",
+      "bytes": 1856,
+      "sha256": "736616891be1e1ab92c8c8c3bd23db59cc3ae805aa068f32b4511c5fd3389fd0"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-dataset-ocean-model.webp",
+      "bytes": 1368,
+      "sha256": "2bad04b7ca4f70f3f00490c683b7a518e682293630f223f62d0567abadf53d3d"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-dataset-ocean-rain-model.webp",
+      "bytes": 1442,
+      "sha256": "fccd69ed1528cbd69f84faca97ae50e7f33e9e4b11fdc2dfe2e60aa90f96745e"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-dataset-ocean-vapor-model.webp",
+      "bytes": 1576,
+      "sha256": "cd05f897e1c5710afc63577b3919ae79b59043eaf4b4be5e8d47b64997e14dc2"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-dataset-ocean-wind-model.webp",
+      "bytes": 1240,
+      "sha256": "a55d7338e860a5f118409ecb5c25955b0ae0dc53622e01a452ba8cbe83488365"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1d-dataset-shape.webp",
       "bytes": 44,
       "sha256": "80e7e412b3c2bb0971724ae6b1ab18592b50d4bd3fd11fa3754c8343bc1bea29"
@@ -54,6 +84,36 @@
       "filename": "trappist-1d-poles-illustration@2x.webp",
       "bytes": 292274,
       "sha256": "380bee444e47f7c677b49232839f0e987091787aa8870694a554041132bf7ca7"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-poles-ocean-cloud-model@2x.webp",
+      "bytes": 30352,
+      "sha256": "ca591d6835f6658b0c637c87ceeb71f9b59a86a0e2783787d29435228a8db8dc"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-poles-ocean-model@2x.webp",
+      "bytes": 9504,
+      "sha256": "5eedb37bf6e75e9e981adbb2e97886a7730356216dba9a59968a3007e1a3a1ee"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-poles-ocean-rain-model@2x.webp",
+      "bytes": 47336,
+      "sha256": "02680cbb951718e105cd5188547e6cec1064b3532a405a90070d84501f67bcf6"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-poles-ocean-vapor-model@2x.webp",
+      "bytes": 8498,
+      "sha256": "e11e3f11a4f69d71ffe30ee731757b41c2b9303a95766be08bad2d28af3d8b05"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-poles-ocean-wind-model@2x.webp",
+      "bytes": 37204,
+      "sha256": "36bf49b121260aa45de91bea5200202b91752505e2a19f19f892e8739add658f"
     },
     {
       "location": "public",
@@ -75,6 +135,36 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1d-surface-ocean-cloud-model@2x.webp",
+      "bytes": 218400,
+      "sha256": "4cc4aa25353402a01fc5c477a3324123171d36d849a4f5d45b86a69058c8164d"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-surface-ocean-model@2x.webp",
+      "bytes": 80014,
+      "sha256": "3728af7b38a03f110bc89abe78d3cb3b8d90c95478f1071d3ad5c7b9e54b1e0c"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-surface-ocean-rain-model@2x.webp",
+      "bytes": 132700,
+      "sha256": "c548615ec0db906beaeff6256bfb9bc81b9c2fc4821225b8a6aedf5977e76c7c"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-surface-ocean-vapor-model@2x.webp",
+      "bytes": 74754,
+      "sha256": "17e8d0956d8eabc19a66e7b14145d547051170977c689631efb3f7f8444beb68"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1d-surface-ocean-wind-model@2x.webp",
+      "bytes": 119366,
+      "sha256": "b235ec78bb2858f8b7e796020da2e4ab5e5fa5ed3b8ebb61ac7f31a321d7866d"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1d-surface-shape@2x.webp",
       "bytes": 38,
       "sha256": "a165c7dc1f385f70b2e406e0e8e1334a5b5d3838e5139cfa9c257ba59a1d919e"
@@ -88,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18368,
-      "sha256": "a225d8dac6ecc285b4c1f2c79dfc6fe462bc230cb02b7ba9ffc9cdb5529c9141"
+      "bytes": 19411,
+      "sha256": "a9569d6564e21c4191460d5526b230e1b91a5c51de7d551afd0d7daf3c779184"
     },
     {
       "location": "prepared",
@@ -100,14 +190,14 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1916,
-      "sha256": "c02f4853c505fe216156655faa162e807873c351e0b5ca9e61e9627b6fb3dc93"
+      "bytes": 2811,
+      "sha256": "7b2d963076307e583519622370de2b586ee5dc946a5b64137c5be5b5a7bc44c4"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3521,
-      "sha256": "d34f4c2350bacf6951fdf4b17c51cd301f87d0ea947706ffa2a6f150ddf1abb8"
+      "bytes": 13152,
+      "sha256": "60bdafc6f17034bd09921cea4d9eef903cbceef427274565acbe0c2a409be1a9"
     },
     {
       "location": "prepared",
@@ -118,8 +208,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 307,
-      "sha256": "bbdefeefa14876783aba23ce73a19cf86f5ee5073d19a5b64f1a1cffb094f40d"
+      "bytes": 851,
+      "sha256": "1788e8d965f0935db3823331896362104d9932e96eddf689a4166dfde52467fe"
     },
     {
       "location": "prepared",
@@ -135,6 +225,36 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/ocean-cloud-model.webp",
+      "bytes": 2800,
+      "sha256": "61f3879fe0db0aaf747c279290eae82d5edb167b3ec80ae6219809ee48f08dfc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/ocean-model.webp",
+      "bytes": 2296,
+      "sha256": "56da7c703d56773c593b4202079f69e6e1a98d37a34ce71d30b39e2660b960a6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/ocean-rain-model.webp",
+      "bytes": 3160,
+      "sha256": "b8a162b09c3c6c90f1edcb7463a4632ec25af4f624e18dcdedb224a036b5c02e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/ocean-vapor-model.webp",
+      "bytes": 2200,
+      "sha256": "9a9b52f27e84c430937848e5ce3d17f95e327fd9fe66aa4296021ec7ffc5c2ea"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/ocean-wind-model.webp",
+      "bytes": 3182,
+      "sha256": "f28216abf6a24d605254683bc87467b90932d66f117c022a3a965696540c3879"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/shape.webp",
       "bytes": 444,
       "sha256": "0c9a8fd37b1d8a1b78ada82753c3b0df564c8d2e758c9170b5b2e314c031397d"
@@ -142,14 +262,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 96805,
-      "sha256": "f33aaf8596e87fb7f930b86914748cb4a7e2a93a15244d1c06d00b3e325f9800"
+      "bytes": 116335,
+      "sha256": "c43ab0289af6da5b32e777c2f824e910ad7efbd5fda22781942bce63a9aebe52"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1526,
-      "sha256": "cb38e5c86887223f58eb5cdfc912e27b81ac50d842da7c41e79dbc77dde9a6ec"
+      "bytes": 2486,
+      "sha256": "e852b9ef4d84baf29fdcdcb68ddd09faad6f9c6e92271b3c55d554293f9449bd"
     }
   ]
 }

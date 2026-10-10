@@ -43,6 +43,31 @@
               "id": "climate-model",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "ocean-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ocean-cloud-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ocean-rain-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ocean-vapor-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ocean-wind-model",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

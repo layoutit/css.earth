@@ -91,6 +91,246 @@
         "title": "Climate model · ExoCAM simulation",
         "sourceUrl": "https://arxiv.org/abs/2201.09797"
       }
+    },
+    {
+      "id": "cloud-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "cloud-model",
+        "label": "Model clouds",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.CLDTOT-time0.dat",
+        "variable": "CLDTOT",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "fraction",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "cloud-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "fraction",
+        "minimum": 0.1,
+        "maximum": 1,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0.1",
+          "0.55",
+          "1"
+        ],
+        "description": "Simulated cloud cover from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "Model clouds · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
+    },
+    {
+      "id": "sea-ice-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "sea-ice-model",
+        "label": "Model sea ice",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.ICEFRAC-time0.dat",
+        "variable": "ICEFRAC",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "fraction",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "sea-ice-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "fraction",
+        "minimum": 0,
+        "maximum": 1,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "0.5",
+          "1"
+        ],
+        "description": "Simulated sea ice cover from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "Model sea ice · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
+    },
+    {
+      "id": "vapor-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "vapor-model",
+        "label": "Model water vapor",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.TMQ-time0.dat",
+        "variable": "TMQ",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "kg/m2",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "vapor-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "kg/m²",
+        "minimum": 0,
+        "maximum": 40,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "20",
+          "40"
+        ],
+        "description": "Simulated water vapor column from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "Model water vapor · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
+    },
+    {
+      "id": "heat-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "heat-model",
+        "label": "Model heat to space",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.FLUT-time0.dat",
+        "variable": "FLUT",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "W/m2",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "heat-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 100,
+        "maximum": 300,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "100",
+          "200",
+          "300"
+        ],
+        "description": "Simulated outgoing heat from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "Model heat to space · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
+    },
+    {
+      "id": "wind-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "wind-model",
+        "label": "Model wind",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.U10-time0.dat",
+        "variable": "U10",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "m/s",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "wind-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "m/s",
+        "minimum": 0,
+        "maximum": 20,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "10",
+          "20"
+        ],
+        "description": "Simulated wind speed at 10 m from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "Model wind · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
     }
   ],
   "lighting": {

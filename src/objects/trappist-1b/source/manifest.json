@@ -152,6 +152,15 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by this repository's JWST reduction and joint fit; repinned when they are rerun."
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077 — JWST MIRI F1500W time series of TRAPPIST-1, programs 3077 (PI Gillon), 1177 and 2304: the ten visits this project reduced"
+          }
+        ]
       }
     },
     {

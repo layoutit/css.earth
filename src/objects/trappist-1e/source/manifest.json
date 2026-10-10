@@ -15,6 +15,15 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "spitzer",
+            "evidence": "https://doi.org/10.3847/PSJ/abd022 — Agol et al. (2021), abstract: the planets' sizes come from a photodynamical analysis of the Spitzer Space Telescope's light curves of the star, and their masses from transit times that Spitzer gathered over four years, with ground-based, HST and K2 times added"
+          }
+        ]
       }
     },
     {
@@ -145,6 +154,181 @@
       }
     },
     {
+      "id": "trappist-1e-cloud-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.CLDTOT-time0.dat",
+      "range": {
+        "offset": 1959800,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Cloud cover (CLDTOT) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of CLDTOT at time index 0 in ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-cloud-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-sea-ice-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.ICEFRAC-time0.dat",
+      "range": {
+        "offset": 29157944,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Sea ice cover (ICEFRAC) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of ICEFRAC at time index 0 in ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "sea-ice-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-sea-ice-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-vapor-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.TMQ-time0.dat",
+      "range": {
+        "offset": 42432440,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Water vapor column (TMQ) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of TMQ at time index 0 in ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "vapor-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-vapor-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-heat-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.FLUT-time0.dat",
+      "range": {
+        "offset": 22639928,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Outgoing heat (FLUT) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of FLUT at time index 0 in ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "heat-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-heat-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-wind-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.U10-time0.dat",
+      "range": {
+        "offset": 44565368,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Wind speed at 10 m (U10) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of U10 at time index 0 in ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "wind-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-wind-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
       "id": "trappist-1e-climate-model-simulation-grid",
       "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
       "range": {
@@ -166,7 +350,12 @@
       "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the first 460,604 bytes of ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc, its header and its coordinate variables.",
       "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
       "consumers": [
-        "climate-model-simulation"
+        "climate-model-simulation",
+        "cloud-model-simulation",
+        "sea-ice-model-simulation",
+        "vapor-model-simulation",
+        "heat-model-simulation",
+        "wind-model-simulation"
       ],
       "sourceBinding": {
         "kind": "catalogued",

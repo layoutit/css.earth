@@ -1,0 +1,40 @@
+{
+  "id": "source-trappist-1d-ocean-model-simulation",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TRAPPIST-1d · trappist 1d ocean model simulation",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "Trappist1d/FIGURES/DATA/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/14740675/files/Trappist1d.zip?download=1",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1d/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Way (2025); ROCKE-3D simulation",
+      "scope": "The trappist 1d ocean model simulation input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC0 1.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

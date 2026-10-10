@@ -155,6 +155,15 @@
             "evidence": "src/objects/trappist-1/source/photometry/gaia-dr3-xp-continuous.csv"
           }
         ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2635476908753563008&format=csv&DATA_STRUCTURE=RAW — ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2: the Gaia DR3 continuous BP/RP spectrum the star's color is computed from"
+          }
+        ]
       }
     },
     {

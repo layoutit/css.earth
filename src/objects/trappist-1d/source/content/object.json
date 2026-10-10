@@ -58,7 +58,47 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "distance-from-star",
+        "label": "Distance from its star",
+        "value": "0.02227 AU",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisAu; semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Density",
+        "value": "0.792 times Earth's",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "densityEarths; densitySource"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Surface gravity",
+        "value": "0.624 times Earth's",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "surfaceGravityEarths; surfaceGravitySource"
+        }
+      }
+    ]
   },
   "datasets": {
     "titleKey": "datasets",
@@ -153,6 +193,306 @@
           "sourceUrl": "https://arxiv.org/abs/2308.15110"
         },
         "notes": "Outgoing thermal radiation of TRAPPIST-1d in the Generic PCM simulation of Turbet et al. (2023): a model, not a measurement. The run assumes one bar of nitrogen with ten bars of water vapor, the steam atmosphere of a planet too hot for its water to condense, on a planet that keeps one face to its star. The map is one instant, the run's last output. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's transit spectrum is flat: it rules out thick clear atmospheres and leaves a thin one, one with high clouds, or none (Piaulet-Ghorayeb et al. 2025). Another model, given an Earth-like atmosphere, finds a temperate surface possible within narrow limits (Way 2025). The false color runs from 200 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "ocean-model",
+        "label": "Ocean model",
+        "qualification": "Simulation · ROCKE-3D · Way (2025) · False color",
+        "thumbnail": "trappist-1d-dataset-ocean-model.webp",
+        "surface": "trappist-1d-surface-ocean-model@2x.webp",
+        "poles": "trappist-1d-poles-ocean-model@2x.webp",
+        "source": {
+          "id": "trappist-1d-ocean-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2502.00132"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface air temperature",
+          "labels": [
+            "-10",
+            "20",
+            "50"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "-10",
+              "20",
+              "50"
+            ]
+          },
+          "meta": "°C",
+          "sourceUrl": "https://arxiv.org/abs/2502.00132"
+        },
+        "notes": "Surface air temperature of TRAPPIST-1d in the ROCKE-3D simulation of Way (2025): a model, not a measurement. The run assumes one bar of nitrogen with no carbon dioxide, water vapor its only greenhouse gas, over a global ocean 900 m deep that carries heat, the paper's simulation 06, on a planet that keeps one face to its star. The map is the mean of the run's orbits 29,001 to 30,000. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's transit spectrum is flat: it rules out thick clear atmospheres and leaves a thin one, one with high clouds, or none (Piaulet-Ghorayeb et al. 2025). Another model, given ten bars of steam, keeps the surface near 540 K (Turbet et al. 2023). The false color runs from -10 to 50 °C; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "ocean-cloud-model",
+        "label": "Ocean model clouds",
+        "qualification": "Simulation · ROCKE-3D · Way (2025) · False color",
+        "thumbnail": "trappist-1d-dataset-ocean-cloud-model.webp",
+        "surface": "trappist-1d-surface-ocean-cloud-model@2x.webp",
+        "poles": "trappist-1d-poles-ocean-cloud-model@2x.webp",
+        "source": {
+          "id": "trappist-1d-ocean-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2502.00132"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Cloud cover",
+          "labels": [
+            "50",
+            "75",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "50",
+              "75",
+              "100"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://arxiv.org/abs/2502.00132"
+        },
+        "notes": "Cloud cover of TRAPPIST-1d in the ROCKE-3D simulation of Way (2025): a model, not a measurement. The run assumes one bar of nitrogen with no carbon dioxide, water vapor its only greenhouse gas, over a global ocean 900 m deep that carries heat, the paper's simulation 06, on a planet that keeps one face to its star. The map is the mean of the run's orbits 29,001 to 30,000. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's transit spectrum is flat: it rules out thick clear atmospheres and leaves a thin one, one with high clouds, or none (Piaulet-Ghorayeb et al. 2025). Another model, given ten bars of steam, keeps the surface near 540 K (Turbet et al. 2023). The false color runs from 50 to 100 %; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "ocean-rain-model",
+        "label": "Ocean model rain",
+        "qualification": "Simulation · ROCKE-3D · Way (2025) · False color",
+        "thumbnail": "trappist-1d-dataset-ocean-rain-model.webp",
+        "surface": "trappist-1d-surface-ocean-rain-model@2x.webp",
+        "poles": "trappist-1d-poles-ocean-rain-model@2x.webp",
+        "source": {
+          "id": "trappist-1d-ocean-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2502.00132"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Precipitation",
+          "labels": [
+            "0",
+            "3",
+            "6"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "3",
+              "6"
+            ]
+          },
+          "meta": "mm/day",
+          "sourceUrl": "https://arxiv.org/abs/2502.00132"
+        },
+        "notes": "Precipitation of TRAPPIST-1d in the ROCKE-3D simulation of Way (2025): a model, not a measurement. The run assumes one bar of nitrogen with no carbon dioxide, water vapor its only greenhouse gas, over a global ocean 900 m deep that carries heat, the paper's simulation 06, on a planet that keeps one face to its star. The map is the mean of the run's orbits 29,001 to 30,000. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's transit spectrum is flat: it rules out thick clear atmospheres and leaves a thin one, one with high clouds, or none (Piaulet-Ghorayeb et al. 2025). Another model, given ten bars of steam, keeps the surface near 540 K (Turbet et al. 2023). The false color runs from 0 to 6 mm/day; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "ocean-vapor-model",
+        "label": "Ocean model vapor",
+        "qualification": "Simulation · ROCKE-3D · Way (2025) · False color",
+        "thumbnail": "trappist-1d-dataset-ocean-vapor-model.webp",
+        "surface": "trappist-1d-surface-ocean-vapor-model@2x.webp",
+        "poles": "trappist-1d-poles-ocean-vapor-model@2x.webp",
+        "source": {
+          "id": "trappist-1d-ocean-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2502.00132"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Water vapor column",
+          "labels": [
+            "0",
+            "150",
+            "300"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "150",
+              "300"
+            ]
+          },
+          "meta": "kg/m²",
+          "sourceUrl": "https://arxiv.org/abs/2502.00132"
+        },
+        "notes": "Water vapor column of TRAPPIST-1d in the ROCKE-3D simulation of Way (2025): a model, not a measurement. The run assumes one bar of nitrogen with no carbon dioxide, water vapor its only greenhouse gas, over a global ocean 900 m deep that carries heat, the paper's simulation 06, on a planet that keeps one face to its star. The map is the mean of the run's orbits 29,001 to 30,000. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's transit spectrum is flat: it rules out thick clear atmospheres and leaves a thin one, one with high clouds, or none (Piaulet-Ghorayeb et al. 2025). Another model, given ten bars of steam, keeps the surface near 540 K (Turbet et al. 2023). The false color runs from 0 to 300 kg/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "ocean-wind-model",
+        "label": "Ocean model wind",
+        "qualification": "Simulation · ROCKE-3D · Way (2025) · False color",
+        "thumbnail": "trappist-1d-dataset-ocean-wind-model.webp",
+        "surface": "trappist-1d-surface-ocean-wind-model@2x.webp",
+        "poles": "trappist-1d-poles-ocean-wind-model@2x.webp",
+        "source": {
+          "id": "trappist-1d-ocean-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2502.00132"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface wind speed",
+          "labels": [
+            "2",
+            "4.5",
+            "7"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "2",
+              "4.5",
+              "7"
+            ]
+          },
+          "meta": "m/s",
+          "sourceUrl": "https://arxiv.org/abs/2502.00132"
+        },
+        "notes": "Surface wind speed of TRAPPIST-1d in the ROCKE-3D simulation of Way (2025): a model, not a measurement. The run assumes one bar of nitrogen with no carbon dioxide, water vapor its only greenhouse gas, over a global ocean 900 m deep that carries heat, the paper's simulation 06, on a planet that keeps one face to its star. The map is the mean of the run's orbits 29,001 to 30,000. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's transit spectrum is flat: it rules out thick clear atmospheres and leaves a thin one, one with high clouds, or none (Piaulet-Ghorayeb et al. 2025). Another model, given ten bars of steam, keeps the surface near 540 K (Turbet et al. 2023). The false color runs from 2 to 7 m/s; it is not what an eye would see. With shadows on, the star's light darkens the night half."
       }
     ]
   },

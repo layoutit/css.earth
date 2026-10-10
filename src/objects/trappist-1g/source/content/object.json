@@ -58,7 +58,47 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "distance-from-star",
+        "label": "Distance from its star",
+        "value": "0.04683 AU",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisAu; semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Density",
+        "value": "0.917 times Earth's",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "densityEarths; densitySource"
+        }
+      },
+      {
+        "id": "gravity",
+        "label": "Surface gravity",
+        "value": "1.035 times Earth's",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "surfaceGravityEarths; surfaceGravitySource"
+        }
+      }
+    ]
   },
   "datasets": {
     "titleKey": "datasets",

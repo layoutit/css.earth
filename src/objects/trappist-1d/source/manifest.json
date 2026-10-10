@@ -15,6 +15,15 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "spitzer",
+            "evidence": "https://doi.org/10.3847/PSJ/abd022 — Agol et al. (2021), abstract: the planets' sizes come from a photodynamical analysis of the Spitzer Space Telescope's light curves of the star, and their masses from transit times that Spitzer gathered over four years, with ground-based, HST and K2 times added"
+          }
+        ]
       }
     },
     {
@@ -173,6 +182,41 @@
         "references": [
           {
             "catalogueId": "source-trappist-1d-climate-model-simulation-grid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1d-ocean-model-simulation",
+      "path": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "origin": "https://zenodo.org/records/14740675/files/Trappist1d.zip?download=1",
+      "productId": "Trappist1d/FIGURES/DATA/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "version": "10.5281/zenodo.14740675",
+      "sourceUrl": "https://zenodo.org/records/14740675",
+      "credit": "Way (2025); ROCKE-3D simulation",
+      "displayCredit": "Way (2025) · ROCKE-3D",
+      "license": "CC0 1.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/14740675",
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "title": "ROCKE-3D simulation of TRAPPIST-1d, Trappist1d/FIGURES/DATA/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc: Data for publication: TRAPPIST-1 d Exo-Venus, Exo-Earth or Exo-Dead?",
+      "acquisition": "Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.14740675: the member Trappist1d/FIGURES/DATA/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc of Trappist1d.zip (1.4 GB), unchanged and whole, because a member is taken out of a ZIP archive whole. A model output, not an observation.",
+      "redistribution": "Not redistributed in git; restored from Zenodo. CC0 1.0 with attribution.",
+      "consumers": [
+        "ocean-model-simulation",
+        "ocean-cloud-model-simulation",
+        "ocean-rain-model-simulation",
+        "ocean-vapor-model-simulation",
+        "ocean-wind-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1d-ocean-model-simulation",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
