@@ -6,7 +6,9 @@ export interface PreparedWorldFrame {
   current(): boolean;
   commit(camera: () => void): void;
 }
-export interface QueuedRequest extends WorldFrameRequest { cancelled?(): void; presented?(): void; }
+export interface QueuedRequest extends WorldFrameRequest { cancelled?(): void; presented?(): void;
+  /** The request as its owner made it, when a waiter was added to this one (`presentAndWait`). */
+  owner?: WorldFrameRequest; }
 
 /** Whether two world cameras are the same, value for value: frame, epoch, scale, the eye's exact place and its turn. */
 const sameWorldCamera = (wa: WorldFrameRequest['world'], wb: WorldFrameRequest['world']) =>
@@ -32,6 +34,9 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
   let running: QueuedRequest | null = null;
   let latest: QueuedRequest | null = null;
   let pending: QueuedRequest | null = null;
+  // The view on screen: the last request committed, as its owner made it. It stands for the view when the newest request's
+  // waiter has given up (a flight a press stopped), so a change of annotations is still replanned (`refresh`).
+  let shown: WorldFrameRequest | null = null;
   // `riders`: requests for the same view as a warmed frame, committed and acknowledged with it instead of planning it again.
   let completed: { request: QueuedRequest; frame: PreparedWorldFrame; riders: QueuedRequest[] | null } | null = null;
   // A warm-up plans a view nobody has asked the queue to draw yet. Its frame is used only by the next request for that
@@ -62,7 +67,7 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
           pending = null; request.cancelled?.();
           for (const rider of others) rider.cancelled?.();
           frame.commit(() => heir.commit());
-          committed++; heir.presented?.();
+          committed++; shown = heir.owner ?? heir; heir.presented?.();
           if (refreshPending && latest?.current()) { requested++; pending = latest; }
         } else {
           discarded++; request.cancelled?.();
@@ -79,7 +84,7 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
         const live = others.filter(rider => rider.current());
         for (const rider of others) if (!live.includes(rider)) rider.cancelled?.();
         frame.commit(() => { request.commit(); for (const rider of live) rider.commit(); });
-        committed++; ridden += live.length; request.presented?.(); for (const rider of live) rider.presented?.();
+        committed++; ridden += live.length; shown = request.owner ?? request; request.presented?.(); for (const rider of live) rider.presented?.();
         // An annotation change that arrived while this frame was planned is
         // published by one more delta frame, not by discarding this one.
         if (refreshPending && !pending && latest?.current()) { requested++; pending = latest; }
@@ -155,7 +160,7 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
         const cancel = () => settle(false);
         if (signal.aborted || destroyed) { cancel(); return; }
         signal.addEventListener('abort', cancel, { once: true });
-        present({ ...request, current: () => !signal.aborted && request.current(),
+        present({ ...request, owner: request, current: () => !signal.aborted && request.current(),
           cancelled: cancel, presented: () => settle(true),
           fail(error) { try { request.fail(error); } finally { settle(false, error); } } });
       });
@@ -182,6 +187,8 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
       return true;
     },
     refresh() {
+      // The newest request's waiter gave up and its owner still shows the last committed view: that view is replanned.
+      if (!destroyed && !latest?.current() && shown?.current()) latest = shown;
       // A change with no owner to replan it yet (the mounting scene has not enabled its presenter) follows the warm-up.
       if (destroyed || !latest?.current()) { staleWarm(); return false; }
       // A changed presentation revision invalidates an in-flight plan. Let it
@@ -196,7 +203,7 @@ export function createWorldFrameQueue(prepare: (request: WorldFrameRequest) => P
       inFlight: Number(running !== null), pending: Number(pending !== null), ready: Number(completed !== null), warm: Number(warming !== null || warmed !== null) }),
     destroy() { destroyed = true;
       for (const request of new Set([running, pending, completed?.request, ...(completed?.riders ?? []), latest, warming?.request, warmed?.request])) request?.cancelled?.();
-      pending = null; latest = null; completed = null; warming = null; warmed = null;
+      pending = null; latest = null; shown = null; completed = null; warming = null; warmed = null;
       if (presentationFrame !== null) clock.cancel(presentationFrame); presentationFrame = null; },
   };
 }
