@@ -20,6 +20,7 @@ Generated 2026-10-10 by [new-object-cli.mts](../../../packages/telescope-cli/src
 ## Known problems
 
 - **Tilt.** Earlier detections of the planet's spectrum gave an orbital speed near 133 km/s and a tilt of about 80° (Brogi et al. 2013; Birkby et al. 2017). Cont et al. (2026) measure 49.8° and say their mass and tilt differ from those works. The page draws the 2026 values, which are the NASA Exoplanet Archive's default set.
+- **Possible outer companion.** Morgan et al. (2026, [arXiv:2605.11127](https://arxiv.org/abs/2605.11127)) find curvature in the star's radial velocities that, with non-detections in imaging and astrometry, points to a super-Jupiter at about 15 to 100 au or a brown dwarf at about 20 to 170 au. The paper leaves open that the signal is spurious. Nothing is drawn for it, and the archive lists one planet.
 - **Size.** The radius of 1.26 Jupiter radii is the archive's value calculated from the mass. Nobody has measured the planet's size, because it does not transit.
 - **Quoted text.** The introduction quotes sentences of the Wikipedia article "51 Pegasi b" (revision 1378907328) verbatim, CC BY-SA 4.0.
 
