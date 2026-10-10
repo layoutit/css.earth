@@ -365,7 +365,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       if (starResponse && starJson === null) console.warn(`Prepared stars are unavailable for ${next.id}; continuing without the catalogue layer.`);
       const stars = starJson === null ? null : parsePreparedLmcStars(starJson, loaded.frame);
       if (disposed || version !== loadVersion) return;
-      const resourceUrl = (path: string) => localFile(`${directory}/prepared/${path}`);
+      // Each load asks for its images afresh: a rebake keeps the atlas's name, and the page would draw the new layout
+      // with the old image it holds.
+      const stamp = Date.now(), resourceUrl = (path: string) => `${localFile(`${directory}/prepared/${path}`)}?v=${stamp}`;
       // Decode the selected fixed bank before presenting it; no source processing happens in the lab renderer.
       const queue = [...loaded.resources];
       await Promise.all(Array.from({ length: Math.min(8, queue.length) }, async () => {

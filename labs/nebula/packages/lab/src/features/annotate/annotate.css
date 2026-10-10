@@ -1,5 +1,6 @@
-/* A selected patch: an outline on the drawn leaf only; its box, transform and texture are untouched. */
-#viewer s[data-annotated] { outline: 2px solid #ff4fd8 !important; outline-offset: -1px; }
+/* A selected patch: its drawn outline (the triangle of a mesh leaf), over the view; the leaf itself is untouched. */
+.annotate-outlines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: visible; }
+.annotate-outlines polygon { fill: rgb(255 79 216 / .12); stroke: #ff4fd8; stroke-width: 2; stroke-linejoin: round; }
 #viewer[data-annotating="true"] { cursor: cell !important; }
 .annotate-overlay { position: absolute; z-index: 7; left: calc(var(--workspace-left-width, 0px) + 12px); bottom: 12px;
   width: min(440px, calc(100% - var(--workspace-left-width, 0px) - var(--workspace-right-width, 0px) - 24px)); max-height: 40%; overflow-y: auto;

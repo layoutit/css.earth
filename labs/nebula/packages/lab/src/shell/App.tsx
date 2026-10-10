@@ -4,6 +4,7 @@ import { labObjects } from './controller';
 import { useLabController } from '../state/use-lab-controller';
 import { ControlPortalContents } from '../ui/control-portals';
 import { CameraPanel } from '../ui/camera-panel';
+import { RegionsTool } from '../features/regions/regions-tool';
 import { AlignmentControls } from '../pages/alignment/controls';
 import { ReconstructionControlsPanel } from '../pages/reconstruction/controls';
 import { subjects } from '../features/legacy-viewer/controller';
@@ -53,6 +54,7 @@ export function App() {
           </div>
           <CameraPanel shell={shell} controller={controller} step={step} />
           {step === 'edit' && shell.view === 'reconstruction' && <AnnotateOverlay shell={shell} controller={controller} />}
+          {step === 'edit' && shownSubject?.plates && <RegionsTool object={shownSubject.plates.object} />}
           {/* Hosts the shared controller still fills for density objects; hidden for every plate and site volume. */}
           <AlignmentControls shell={shell} controller={controller} updateAlignment={updateAlignment} />
           <ReconstructionControlsPanel shell={shell} controller={controller} />
@@ -65,6 +67,7 @@ export function App() {
       </section>
     </main>
     <ControlPortalContents controls={controls} />
-    <ProgressStrip />
+    <ProgressStrip onBaked={object => { const shown = subjects.find(item => item.id === (shell.subjectId ?? shell.objectId)), path = shown?.plates?.object ?? shown?.siteVolume?.object ?? '';
+      if (shell.objectId && (path === object || path.endsWith(`/${object}`))) reload(shell.objectId); }} />
   </>;
 }

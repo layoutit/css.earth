@@ -72,3 +72,37 @@
 [data-camera-model-panel] > .workspace-toolbox button { width: 100%; }
 [data-camera-model-panel] .workspace-tool-glyph { display: grid; place-items: center; height: 25px; }
 [data-camera-model-panel] .workspace-tool-glyph svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Two floating toolbars of round icon buttons over the view, each button named by its tooltip: the camera along the
+   bottom, the tools along the top, both centred. A toggle that is on wears a ring. A solver that docks its own model
+   panel on the left keeps the panel. */
+.workspace-content:not(:has(.workspace-model-panel)) { --workspace-left-width: 0px; }
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel {
+  inset: var(--workspace-navigation-height, 0px) var(--workspace-right-width) 0 0; width: auto; height: auto; max-height: none;
+  padding: 0; border: 0; background: transparent; overflow: visible; z-index: 9; pointer-events: none;
+}
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel > :is(.image-layer-buttons, .workspace-toolbox) {
+  position: absolute; left: 50%; transform: translateX(-50%); display: flex; flex-direction: row; gap: 8px; margin: 0; padding: 6px 8px;
+  border: 0; background: transparent; pointer-events: auto;
+}
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel > .image-layer-buttons:not(.workspace-toolbox) { top: auto; bottom: 14px; }
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel > .workspace-toolbox { top: 12px; bottom: auto; }
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel :is(.image-layer-buttons, .workspace-toolbox) button {
+  width: 40px; height: 40px; padding: 0; border-radius: 50%; display: grid; place-items: center; flex: none;
+  background: rgb(22 23 26 / .85); border: 1px solid #3c4046; color: #e6e8eb; opacity: 1;
+}
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel :is(.image-layer-buttons, .workspace-toolbox) button > span:first-child { font-size: 18px; line-height: 1; }
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel :is(.image-layer-buttons, .workspace-toolbox) button > span:not(:first-child) {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel :is(.image-layer-buttons, .workspace-toolbox) button:not([aria-disabled="true"]):hover { background: rgb(44 47 53 / .95); }
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel :is(.image-layer-buttons, .workspace-toolbox) button[aria-pressed="true"] {
+  background: #1f3557; border: 2px solid #6ea8ff; box-shadow: 0 0 0 3px rgb(110 168 255 / .25);
+}
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel :is(.image-layer-buttons, .workspace-toolbox) button[aria-disabled="true"] { opacity: .35; cursor: default; }
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel > :is(.interaction-hint, #density-adjustment-panel[hidden], #cloud-density-panel[hidden]) { display: none; }
+.workspace-content:not(:has(.workspace-model-panel)) > #inspection-panel > #status { position: absolute; left: 12px; bottom: 52px; pointer-events: auto; max-width: 220px; font-size: 11px; color: var(--text-secondary); }
+/* A tool's panel opens under the tools, the annotate table above the camera bar. */
+.workspace-content:not(:has(.workspace-model-panel)) .workspace-tools-left .workspace-tool-panel { left: 12px; top: 70px; }
+.workspace-content:not(:has(.workspace-model-panel)) .workspace-tools-left .workspace-tool-aside-left { left: 12px; bottom: 76px; }
+.workspace-content:not(:has(.workspace-model-panel)) .annotate-overlay { left: 12px; bottom: 76px; }

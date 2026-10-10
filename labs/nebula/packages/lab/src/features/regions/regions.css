@@ -1,0 +1,16 @@
+.regions-tool { position: absolute; inset: var(--workspace-navigation-height, 0px) var(--workspace-right-width, 0px) 0 var(--workspace-left-width, 0px); z-index: 20; display: grid; grid-template-columns: 1fr 240px; background: #0b0b0c; }
+.regions-canvas { position: relative; overflow: hidden; cursor: grab; touch-action: none; user-select: none; }
+.regions-canvas:active { cursor: grabbing; }
+.regions-canvas img { position: absolute; max-width: none; image-rendering: auto; pointer-events: none; }
+.regions-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.regions-saved { fill: rgb(110 168 255 / .18); stroke: #6ea8ff; stroke-width: 2; stroke-linejoin: round; }
+.regions-drawing { fill: none; stroke: #ff4fd8; stroke-width: 2; stroke-linejoin: round; stroke-dasharray: 5 3; }
+.regions-first { fill: #ff4fd8; }
+.regions-panel { padding: 14px; border-left: 1px solid var(--divider, #2a2d31); overflow: auto; font-size: 12px; color: #e6e8eb; }
+.regions-panel header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.regions-panel p { color: #9aa4ad; line-height: 1.4; margin: 0 0 10px; }
+.regions-panel ul { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 6px; }
+.regions-panel li { display: grid; grid-template-columns: 1fr auto auto; gap: 6px; align-items: center; }
+.regions-panel input { min-width: 0; }
+.regions-save { width: 100%; padding: 8px; margin-bottom: 6px; }
+.regions-status { margin-top: 8px; }

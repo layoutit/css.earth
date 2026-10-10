@@ -3,14 +3,17 @@ import type { LabControlsProps } from '../state/use-lab-controller';
 import type { LabStep } from '../features/legacy-viewer/lab-routing';
 import { InfoTip } from './info-tip';
 import { setAnnotating, useAnnotating } from '../features/annotate/annotate-store.ts';
+import { copyView } from '../features/annotate/annotate-overlay';
+import { setMarking, useMarking } from '../features/regions/regions-tool';
+import { useState } from 'react';
 import { FieldStarsToggle } from '../features/stars/field-stars-toggle';
 
 /** The left panel on every step: camera buttons, and in Edit the tools (Annotate and the circle tools). */
 export function CameraPanel({ shell, controller, step }: LabControlsProps & { step: LabStep }) {
   const cameraReady = !shell.presentation?.cameraDisabled;
-  const annotating = useAnnotating(), annotateReady = !shell.busy && shell.view === 'reconstruction';
+  const marking = useMarking(), annotating = useAnnotating(), annotateReady = !shell.busy && shell.view === 'reconstruction';
   const earthAvailable = shell.presentation?.densityCamera && !shell.presentation.referenceDisabled;
-  const editing = step === 'edit';
+  const editing = step === 'edit', [viewCopied, setViewCopied] = useState(false);
   return <CameraModelPanel id="inspection-panel" className="density-adjustment-panel" controlsId="render-controls"
     busy={shell.busy} showModel={false} camera={{
       earth: earthAvailable ? { id: 'reference-view', description: 'Reset orientation and distance to the prepared Earth observer.', onActivate: () => void controller.current?.referenceView() }
@@ -26,6 +29,15 @@ export function CameraPanel({ shell, controller, step }: LabControlsProps & { st
       <InfoTip content={annotateReady ? 'Click patches in the viewport to select them and copy their place, depth and stretch.' : 'Annotate works on a loaded object.'}>
         <button id="annotate-toggle" type="button" data-camera-action="annotate" aria-label="Annotate" aria-pressed={annotating} aria-disabled={!annotateReady}
           onClick={() => { if (annotateReady || annotating) setAnnotating(!annotating); }}><span aria-hidden="true">✎</span><span>Annotate</span></button>
+      </InfoTip>
+      <InfoTip content="Draw named regions on the original picture (Ctrl/⌘-click points, close on the first): the bake reads them.">
+        <button id="regions-toggle" type="button" data-camera-action="regions" aria-label="Regions" aria-pressed={marking} aria-disabled={!annotateReady}
+          onClick={() => { if (annotateReady || marking) setMarking(!marking); }}><span aria-hidden="true">⬠</span><span>Regions</span></button>
+      </InfoTip>
+      <InfoTip content={viewCopied ? 'Copied: paste it in chat to point at this direction.' : 'Copy this view\'s camera turn and distance as one line for chat.'}>
+        <button id="copy-view" type="button" data-camera-action="copy-view" aria-label="Copy view" aria-disabled={!annotateReady}
+          onClick={() => { if (annotateReady) void copyView(controller).then(text => { setViewCopied(Boolean(text)); setTimeout(() => setViewCopied(false), 1500); }); }}>
+          <span aria-hidden="true">⎘</span><span>{viewCopied ? 'Copied' : 'Copy view'}</span></button>
       </InfoTip>
       <div id="workspace-left-tools" />
     </> : undefined}
