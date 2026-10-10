@@ -25,7 +25,7 @@ import { HOSTED_PLANET_STYLESHEET } from '../new-hosted-planet.mts';
 import { installPhaseCurveDataset } from './phase-curve-dataset.mts';
 import { daysideLine, installDaysideDataset } from '../thermal/dayside-dataset.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
-import { installSimulationDataset, restoreSimulationField, restoreSimulationMember, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from '../simulation/simulation-dataset.mts';
+import { installSimulationDataset, memberFormat, restoreSimulationField, restoreSimulationMember, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from '../simulation/simulation-dataset.mts';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
@@ -370,9 +370,8 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
         const fetched = ranges ? ranges.fetched : await restoreSimulationMember(files, id, resolve(o, 'source'), entry, release, fetcher);
         if (fetched) progress(`${id}: ${fetched.toLocaleString('en-US')} bytes of ${entry.file} fetched from Zenodo record ${release.doi}`);
         const field = await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry), new Map(ranges ? [[paths.head, ranges.head], [paths.field, ranges.field]] : []));
-        // A member that opens with "CDF" is a classic file: kept whole because it came out of an archive, not for its format.
-        const classic = !ranges && (await readFile(resolve(o, 'source', entry.path))).subarray(0, 3).toString('latin1') === 'CDF';
-        const installed = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report, ranges, classic ? 'classic' : 'netcdf-4');
+        // A classic member is kept whole because it came out of an archive, not for its format.
+        const installed = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report, ranges, ranges ? undefined : await memberFormat(resolve(o, 'source', entry.path)));
         promoted ||= installed.promoted;
         lines.push(`${id}: ${entry.dataset} dataset from the ${entry.model} simulation of ${entry.credit}, ${installed.minimum}-${installed.maximum} ${entry.displayUnits ?? entry.units}, ${release.license.name}${installed.promoted ? '; the page now opens on it' : ''}`); progress(lines.at(-1)!);
       }

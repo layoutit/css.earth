@@ -12,7 +12,7 @@ import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import type { Archive } from '../archives/archives.mts';
 import { rebuildExistingDatasets } from '../planets/planet-datasets.mts';
-import { installSimulationDataset, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';
+import { installSimulationDataset, memberFormat, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
 const fixture = resolve(WORKSPACE, 'packages/bake/src/objects/raster/netcdf/fixtures/field-cdf2.nc');
@@ -129,10 +129,31 @@ test('the dataset is labelled as a model with its scenario, its range is the fil
     /trappist-1f, dataset climate-model: TS in field-cdf2\.nc runs from 300 to 337 K, outside the range 310 to 400 the entry gives \(field range\)/u);
   assert.deepEqual(installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ range: [180, 340] }), release, field.report, RANGES), { minimum: 180, maximum: 340, promoted: false });
   // A second field of the same file shares the file's one header record and is named among its consumers.
-  installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ dataset: 'cloud-model', label: 'Model clouds' }), release, field.report, RANGES);
-  const headers = after('source/manifest.json').inputs.filter((existing: { path: string }) => existing.path === grid.path);
-  assert.deepEqual(headers.map((existing: { id: string; consumers: string[] }) => [existing.id, existing.consumers]), [[grid.id, ['climate-model-simulation', 'cloud-model-simulation']]]);
-  assert.equal(after('source/preparation/acquisition.json').operations.filter((step: { path: string }) => step.path === grid.path).length, 1);
+  const second = { dataset: 'cloud-model', label: 'Model clouds', select: { time: 0 } }, elsewhere = { file: 'other.nc', path: 'science/wolf-2022/other.nc' };
+  const consumers = (path: string) => (after('source/manifest.json').inputs as { id: string; path: string; consumers: string[] }[]).filter(existing => existing.path === path).map(existing => [existing.id, existing.consumers]);
+  const steps = (path: string) => after('source/preparation/acquisition.json').operations.filter((step: { path: string }) => step.path === path).length;
+  assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ dataset: 'cloud-model', label: 'Model clouds' }), release, field.report, RANGES),
+    /dataset cloud-model: trappist-1f-climate-model-simulation already draws science\/wolf-2022\/field-cdf2\.TS-time1\.dat; one field is one dataset/u);
+  installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf(second), release, field.report, RANGES);
+  assert.deepEqual(consumers(grid.path), [[grid.id, ['climate-model-simulation', 'cloud-model-simulation']]]);
+  assert.equal(steps(grid.path), 1);
+  // Installed again, the first keeps the others among the header's consumers.
+  installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ range: [180, 340] }), release, field.report, RANGES);
+  assert.deepEqual(consumers(grid.path), [[grid.id, ['climate-model-simulation', 'cloud-model-simulation']]]);
+  // The header is declared under the first dataset's name: that one cannot move to another file while a second reads it.
+  assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf(elsewhere), release, field.report, RANGES),
+    /dataset climate-model: science\/wolf-2022\/field-cdf2\.head\.dat is declared under this dataset's name and cloud-model-simulation still reads it, so this dataset cannot move to another file/u);
+  // The second may: it leaves the old header's consumers, and takes its own header and steps along.
+  installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ ...second, ...elsewhere }), release, field.report, RANGES);
+  assert.deepEqual(consumers(grid.path), [[grid.id, ['climate-model-simulation']]]);
+  assert.deepEqual(consumers('science/wolf-2022/other.head.dat'), [['trappist-1f-cloud-model-simulation-grid', ['cloud-model-simulation']]]);
+  assert.deepEqual([steps('science/wolf-2022/field-cdf2.TS-time0.dat'), steps('science/wolf-2022/other.TS-time0.dat'), steps('science/wolf-2022/other.head.dat')], [0, 1, 1]);
+  // Alone on its file again, the first moves with its records: none of the old file stays, and no id is written twice.
+  installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ ...elsewhere, file: 'third.nc', path: 'science/wolf-2022/third.nc' }), release, field.report, RANGES);
+  assert.deepEqual([consumers(grid.path), steps(grid.path), steps(input.path)], [[], 0, 0]);
+  const ids = (after('source/manifest.json').inputs as { id: string }[]).map(existing => existing.id);
+  assert.equal(new Set(ids).size, ids.length);
+  installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ range: [180, 340] }), release, field.report, RANGES);
   // A planet that opens on a measured map keeps it: the simulation is added beside it.
   const measured = 'hd-189733b', m = `src/objects/${measured}`;
   const mapped = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${m}/${path}`, await readFile(resolve(WORKSPACE, m, path), 'utf8')] as const)));
@@ -213,6 +234,15 @@ test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field ca
     assert.match(wholes[0].acquisition, /unchanged and whole, because a member is taken out of a ZIP archive whole\. A model output/u);
     assert.deepEqual(after('source/content/object.json').datasets.controls.slice(-2).map((control: { source: { id: string } }) => control.source.id), [input.id, input.id]);
     assert.equal(after('source/preparation/acquisition.json').operations.filter((step: { path: string }) => step.path === input.path).length, 1);
+    // The whole file is declared under the first dataset's name: that one cannot move while the second reads it; the second can.
+    const moved = { ...member, member: 'run/other-nc4.nc', path: 'science/wolf-2022/other-nc4.nc' };
+    assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf(moved), release, field.report),
+      /dataset climate-model: science\/wolf-2022\/field-nc4\.nc is declared under this dataset's name and cloud-model-simulation still reads it/u);
+    installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ ...moved, dataset: 'cloud-model', label: 'Model clouds' }), release, field.report);
+    const records = (after('source/manifest.json').inputs as { id: string; path: string; consumers: string[] }[]).filter(existing => /-nc4\.nc$/u.test(existing.path)).map(existing => [existing.id, existing.path, existing.consumers]);
+    assert.deepEqual(records, [[input.id, input.path, ['climate-model-simulation']], ['trappist-1f-cloud-model-simulation', moved.path, ['cloud-model-simulation']]]);
+    assert.equal(after('source/content/object.json').datasets.controls.at(-1).source.id, 'trappist-1f-cloud-model-simulation');
+    assert.deepEqual([await memberFormat(netcdf4), await memberFormat(fixture)], ['netcdf-4', 'classic']);
   } finally {
     for (const name of await cached()) if (!before.has(name)) await rm(resolve(archives, name), { force: true });
     await rm(scratch, { recursive: true, force: true });
