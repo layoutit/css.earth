@@ -331,6 +331,150 @@
         "title": "Model wind · ExoCAM simulation",
         "sourceUrl": "https://arxiv.org/abs/2201.09797"
       }
+    },
+    {
+      "id": "co2-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "co2-model",
+        "label": "CO₂ model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.TS-time0.dat",
+        "variable": "TS",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "K",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "co2-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 250,
+        "maximum": 320,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "250",
+          "285",
+          "320"
+        ],
+        "description": "Simulated surface temperature from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "CO₂ model · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
+    },
+    {
+      "id": "co2-ice-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "co2-ice-model",
+        "label": "CO₂ model sea ice",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.ICEFRAC-time0.dat",
+        "variable": "ICEFRAC",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "fraction",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "co2-ice-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "fraction",
+        "minimum": 0,
+        "maximum": 1,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "0.5",
+          "1"
+        ],
+        "description": "Simulated sea ice cover from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "CO₂ model sea ice · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
+    },
+    {
+      "id": "co2-cloud-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "co2-cloud-model",
+        "label": "CO₂ model clouds",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.CLDTOT-time0.dat",
+        "variable": "CLDTOT",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "fraction",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "co2-cloud-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "fraction",
+        "minimum": 0.1,
+        "maximum": 1,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0.1",
+          "0.55",
+          "1"
+        ],
+        "description": "Simulated cloud cover from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "CO₂ model clouds · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
     }
   ],
   "lighting": {

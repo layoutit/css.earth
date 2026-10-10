@@ -68,6 +68,21 @@
               "id": "wind-model",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "co2-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "co2-ice-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "co2-cloud-model",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
