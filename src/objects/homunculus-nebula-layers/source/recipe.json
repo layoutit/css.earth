@@ -65,7 +65,17 @@
         "receding": "+z"
       },
       "starRadiusArcsec": 1.45,
-      "fitArcsec": 0.1
+      "fitArcsec": 0.1,
+      "edgeFit": {
+        "maxStretch": 0.15,
+        "smoothDeg": 6
+      },
+      "closedMesh": true,
+      "filaments": {
+        "path": "filaments.png",
+        "darkness": 0.65,
+        "detailPath": "detail.png"
+      }
     }
   },
   "bake": {

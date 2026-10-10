@@ -1,0 +1,36 @@
+{
+  "id": "publication-frangi-1998-vesselness",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Multiscale vessel enhancement filtering",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1007/BFb0056195"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1007/BFb0056195",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1007/BFb0056195",
+      "checkedOn": "2026-10-10",
+      "locator": "Lines found from the eigenvalues of the Hessian of an image smoothed by a Gaussian at several widths, scale-normalised: a line curves strongly across itself and little along itself. Used here for the Homunculus's dark dust lanes (packages/bake/src/image-layers/filaments.ts)."
+    }
+  ],
+  "creators": [
+    "Frangi, A. F.",
+    "Niessen, W. J.",
+    "Vincken, K. L.",
+    "Viergever, M. A."
+  ],
+  "publisher": "Medical Image Computing and Computer-Assisted Intervention, LNCS 1496, 130",
+  "publicationDate": "1998",
+  "relations": [],
+  "statements": []
+}

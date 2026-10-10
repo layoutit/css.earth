@@ -166,7 +166,7 @@ function surfacePatches(layer: ShapeLayer, width: number, height: number, facePi
 }
 
 /** The patches' textures on as few atlases as hold them, each with clear texels around it: where each patch lies. */
-export function packShapePatches(patches: readonly ShapePatch[]): { atlases: { width: number; height: number; rgba: Buffer }[]; places: { atlas: number; x: number; y: number }[] } {
+export function packShapePatches(patches: readonly Pick<ShapePatch, 'texture' | 'rgba'>[]): { atlases: { width: number; height: number; rgba: Buffer }[]; places: { atlas: number; x: number; y: number }[] } {
   const gutter = ATLAS_GUTTER_PIXELS, places: { atlas: number; x: number; y: number }[] = patches.map(() => ({ atlas: 0, x: 0, y: 0 })), sizes: { width: number; height: number }[] = [];
   // Shelves: the tallest patches first, each shelf as high as its first patch.
   const order = patches.map((_, index) => index).sort((a, b) => patches[b]!.texture[1] - patches[a]!.texture[1] || patches[b]!.texture[0] - patches[a]!.texture[0]);

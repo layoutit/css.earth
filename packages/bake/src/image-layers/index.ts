@@ -5,6 +5,7 @@ export * from './resize-rgba.ts';
 export * from './prepare.ts';
 export { imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerView } from './disc.ts';
 export { imageLayerBulgeModel } from './bulge.ts';
+export { filamentMap, lineStrengths, type FilamentSettings } from './filaments.ts';
 export { imageLayerShapeModel, lowerEnvelope } from './shape.ts';
 export { imageLayerShapeWalls } from './shape-walls.ts';
 export { densityGrid, imageLayerDensityModel } from './density-grid.ts';

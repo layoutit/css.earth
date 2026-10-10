@@ -15,7 +15,8 @@ import { imageLayerShapeModel, lowerEnvelope, smoothed, broadLight, filamentGlow
 import { pictureFade } from './fade-outline.ts';
 import { imageLayerShapeWalls, type ShapeWalls } from './shape-walls.ts';
 import { densityGrid, imageLayerDensityModel } from './density-grid.ts';
-import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles } from './surface.ts';
+import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles, surfaceEdgeStretch, SURFACE_MOST_CROSSINGS } from './surface.ts';
+import { imageLayerSurfaceMesh, type SurfaceTriangle } from './surface-mesh.ts';
 import { imageLayerShapePatches, packShapePatches } from './shape-patches.ts';
 import { imageLayerBodyModel } from './body.ts';
 import { COLOR_PEAK, paintTexel as paint } from './texel.ts';
@@ -211,11 +212,24 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   // speeds they say which wall a feature is on.
   // Surfaces at measured depths and a published surface are drawn as a mesh (./shape-patches.ts); a shell's walls as slices.
   const surface=recipe.geometry.surface,meshed=recipe.geometry.shape?.speeds?.depth==='speed'||Boolean(surface);
-  let shapeWalls:ShapeWalls|null=null;
+  let shapeWalls:ShapeWalls|null=null,meshTriangles:SurfaceTriangle[]|null=null;
   if(surface){const arcsec=distanceKpc*Math.PI/648000,sky=(px:number,py:number):[number,number]=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec];};
-    const crossings=imageLayerSurfaceCrossings(surface,stlTriangles(await readFile(resolve(options.sourceDirectory,surface.path)),`${recipe.id}: ${surface.path}`),info.width,info.height,sky);
-    shapeWalls=imageLayerSurfaceWalls(base,info.width,info.height,crossings,arcsec,Math.hypot(...difference3(placed(-1,0,0),placed(1,0,0)))/info.width,(px,py)=>Math.hypot(...sky(px,py)),surface.starRadiusArcsec);
-    if(!shapeWalls.pixels)throw new TypeError(`${recipe.id}: the surface (${surface.source}, ${surface.path}) holds no light of the picture: no sight line of the picture meets it.`);}
+    const triangles=stlTriangles(await readFile(resolve(options.sourceDirectory,surface.path)),`${recipe.id}: ${surface.path}`);let crossings=imageLayerSurfaceCrossings(surface,triangles,info.width,info.height,sky),edgeStretch:((east:number,north:number)=>number)|undefined;
+    // With `edgeFit` the surface is fitted here to the photograph's lobe edge, direction by direction about the star.
+    if(surface.edgeFit){const inside=new Uint8Array(info.width*info.height);for(let p=0;p<inside.length;p++)inside[p]=Number.isNaN(crossings.depths[SURFACE_MOST_CROSSINGS*p]!)?0:1;
+      crossings=imageLayerSurfaceCrossings(surface,triangles,info.width,info.height,sky,edgeStretch=surfaceEdgeStretch(base,info.width,info.height,inside,sky,surface.edgeFit,surface.starRadiusArcsec).stretch);}
+    if(surface.closedMesh){
+      // The surface drawn as its own closed mesh with the picture painted on it (./surface-mesh.ts): the picture's light
+      // is all the mesh's, so none is left on the flat picture. Its dark lanes are the filament map's, and the star's glare
+      // takes the ultraviolet detail (red 128 plus 40 times the detail, green how far it counts).
+      const count=info.width*info.height,filaments=surface.filaments?Float32Array.from(await sharp(resolve(options.sourceDirectory,surface.filaments.path)).greyscale().resize(info.width,info.height,{fit:'fill'}).raw().toBuffer(),value=>value/255):undefined;
+      const detailRgb=surface.filaments?.detailPath?await sharp(resolve(options.sourceDirectory,surface.filaments.detailPath)).removeAlpha().resize(info.width,info.height,{fit:'fill'}).raw().toBuffer():null;
+      const detail=detailRgb?{value:Float32Array.from({length:count},(_,p)=>(detailRgb[3*p]!-128)/40),weight:Float32Array.from({length:count},(_,p)=>detailRgb[3*p+1]!/255)}:undefined;
+      meshTriangles=await imageLayerSurfaceMesh(surface,triangles,Buffer.from(base),info.width,info.height,sky,edgeStretch,filaments,detail);
+      for(let p=0;p<count;p++)base[4*p+3]=0;
+    }else{
+      shapeWalls=imageLayerSurfaceWalls(base,info.width,info.height,crossings,arcsec,Math.hypot(...difference3(placed(-1,0,0),placed(1,0,0)))/info.width,(px,py)=>Math.hypot(...sky(px,py)),surface.starRadiusArcsec);
+      if(!shapeWalls.pixels)throw new TypeError(`${recipe.id}: the surface (${surface.source}, ${surface.path}) holds no light of the picture: no sight line of the picture meets it.`);}}
   if(shapeModel){const count=info.width*info.height,arcsec=distanceKpc*Math.PI/648000;
     // Each channel's light (color times opacity, 0 to 1) and its smooth floor under fine dark detail.
     const lights=[0,1,2].map(c=>{const light=new Float32Array(count);for(let p=0;p<count;p++)light[p]=base[4*p+c]!/255*Math.min(base[4*p+3]!/255,.998);return light;});
@@ -297,7 +311,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     pixel:(raDeg,decDeg)=>{const crop=view.crop(raDeg,decDeg);if(!crop)throw new TypeError(`${recipe.id}: ${raDeg}, ${decDeg} (geometry.${recipe.geometry.collision?'collision':'ellipsoid'}) is behind the photograph.`);return [(crop[0]+1)/2*info.width-.5,(1-crop[1])/2*info.height-.5];}}):null;
   let left=info.width,top=info.height,right=-1,bottom=-1;
   for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(base[4*(py*info.width+px)+3]){left=Math.min(left,px);right=Math.max(right,px);top=Math.min(top,py);bottom=Math.max(bottom,py);}
-  if(right<left){if(!gasBody?.lifted)throw new TypeError('Physical support removed the complete observation.');left=right=info.width>>1;top=bottom=info.height>>1;}
+  if(right<left){if(!gasBody?.lifted&&!recipe.geometry.surface?.closedMesh)throw new TypeError('Physical support removed the complete observation.');left=right=info.width>>1;top=bottom=info.height>>1;}
   left=Math.max(0,left-1);right=Math.min(info.width-1,right+1);top=Math.max(0,top-1);bottom=Math.min(info.height-1,bottom+1);
   const extractSized=(rgba:Buffer,width:number,x0:number,y0:number,x1:number,y1:number):Buffer=>{const out=Buffer.alloc((x1-x0)*(y1-y0)*4);for(let py=y0;py<y1;py++)rgba.copy(out,(py-y0)*(x1-x0)*4,4*(py*width+x0),4*(py*width+x1));return out;};
   const luminance=Buffer.alloc(info.width*info.height);for(let p=0;p<info.width*info.height;p++){const i=4*p,a=base[i+3]/255;luminance[p]=Math.round(a*(.2126*base[i]+.7152*base[i+1]+.0722*base[i+2]));}
@@ -367,7 +381,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       const w=r-l+1,h=b-t+1,pu0=2*l/W-1,pu1=2*(r+1)/W-1,pv0=1-2*t/H,pv1=1-2*(b+1)/H,path=`layers/plane-${plane.id}.webp`,bytes=await encode(extractSized(rgba,W,l,t,r+1,b+1),w,h,path);
       const v:[Vec3,Vec3,Vec3,Vec3]=[hit(pu0,pv0,plane.normal),hit(pu1,pv0,plane.normal),hit(pu1,pv1,plane.normal),hit(pu0,pv1,plane.normal)];
       for(const axis of ['z','x','y'] as const)leaf(`${axis}-${plane.id}`,axis,path,w,h,v,0,axis==='z'?bytes.length:0);}
-  }else
+  }else if(!recipe.geometry.surface?.closedMesh)
   {const path='layers/z-detail.webp',bytes=await encode(flat?extractSized(base,info.width,left,top,right+1,bottom+1):residualCrop,cropWidth,cropHeight,path),v:[Vec3,Vec3,Vec3,Vec3]=[intersect(u0,v0,0),intersect(u1,v0,0),intersect(u1,v1,0),intersect(u0,v1,0)];leaves.push({id:'z-detail',axis:'z',offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,cropWidth,cropHeight,leaves.length),bytes:bytes.length});
     // The runtime shows one stack per view axis: a flat bank gives each the same plane, so the disc draws from every side.
     if(flat&&!meshed)for(const axis of ['x','y'] as const)leaves.push({id:`${axis}-detail`,axis,offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,cropWidth,cropHeight,leaves.length),bytes:0});}
@@ -423,7 +437,27 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
         const ends=[place(0,0),place(along-1,0)],v=[intersect(ends[0].u,ends[0].v,height),intersect(ends[1].u,ends[1].v,height),intersect(ends[1].u,ends[1].v,-height),intersect(ends[0].u,ends[0].v,-height)] as Quad['verticesUnits'];
         await push(`bulge-${axis}-${String(s).padStart(2,'0')}`,axis,rgba,along,depthPx,v,axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2);}}}
   let shapeScenes:number[]|null=null;
-  if(shapeWalls&&meshed){
+  if(meshTriangles){
+    // The published surface as its own triangles, each a leaf whose texture is clear past the triangle.
+    const W=info.width,H=info.height,unitsPerArcsec=distanceKpc*Math.PI/648000,at=(c:readonly [number,number,number]):Vec3=>placed(2*(c[0]+.5)/W-1,1-2*(c[1]+.5)/H,c[2]*unitsPerArcsec);
+    // Each triangle is a scene of its own, which the renderer paints farthest from the camera first. Neighbours share an
+    // edge, so in a shared scene the browser cut each along the others' planes and, at some turns, left one out: a
+    // triangle of the Homunculus came and went over two degrees of a drag (2026-10-10). The triangles go in order along a
+    // curve through space that keeps neighbours together.
+    const middles=meshTriangles.map(t=>scale(add(...t.corners.map(at)),1/3) as number[]),low=[0,1,2].map(k=>Math.min(...middles.map(m=>m[k]!))),span=[0,1,2].map(k=>Math.max(...middles.map(m=>m[k]!))-low[k]!||1);
+    const cell=(m:number[])=>{const q=[0,1,2].map(k=>Math.min(1023,Math.floor(1024*(m[k]!-low[k]!)/span[k]!)));let rank=0;for(let bit=9;bit>=0;bit--)for(const k of [0,1,2])rank=rank*2+((q[k]!>>bit)&1);return rank;};
+    const order=meshTriangles.map((_,index)=>index).sort((a,b)=>cell(middles[a]!)-cell(middles[b]!)),{atlases,places}=packShapePatches(meshTriangles),files:{path:string;bytes:number}[]=[];
+    for(const [index,atlas] of atlases.entries()){const path=`layers/shape-${index}.webp`;files.push({path,bytes:(await encode(atlas.rgba,atlas.width,atlas.height,path,true)).length});}
+    const scenes:number[]=[];
+    for(const index of order){const triangle=meshTriangles[index]!,place=places[index]!,atlas=atlases[place.atlas]!,file=files[place.atlas]!;
+      scenes.push(1);
+      const [a,across,down]=triangle.corners.map(at) as [Vec3,Vec3,Vec3],[columns,rows]=triangle.texture;
+      const v:Quad['verticesUnits']=[a,across,add(across,difference3(down,a)),down],center=scale(add(a,across,down),1/3);
+      const u0=place.x/atlas.width,u1=(place.x+columns)/atlas.width,v0=place.y/atlas.height,v1=(place.y+rows)/atlas.height;
+      leaves.push({id:`shape-${String(leaves.length).padStart(4,'0')}`,axis:'z',offsetKpc:dot(center,diskNormal),centerUnits:center,doubleSided:true,texturePath:file.path,widthPx:columns,heightPx:rows,verticesUnits:v,uvs:[[u0,v0],[u1,v0],[u1,v1],[u0,v1]],
+        style:patchStyle(v,columns,rows,atlas,place),bytes:Math.round(file.bytes*columns*rows/(atlas.width*atlas.height))});}
+    shapeScenes=scenes;}
+  else if(shapeWalls&&meshed){
     // Surfaces at measured depths as leaves (./shape-patches.ts): each is a mesh of flat patches, the same from every
     // side, so the bank has one stack. A patch is a rectangle of the picture on a plane through the surface there: its
     // corners lie on their own sight lines, at the plane's depth, so from the Sun the patches add up to the photograph.

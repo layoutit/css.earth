@@ -106,9 +106,15 @@ export interface ImageLayerRecipe {
      * its receding end points to, `pole.rollDeg` the file's turn about the pole and `pole.receding` the end of the file's
      * z axis that recedes. The picture's light inside the surface's outline lies on the side that faces the Sun.
      * `starRadiusArcsec` is how far the central star's own light reaches in the picture: that light stays at the star,
-     * on no surface. `fitArcsec` is how closely the drawn patches follow the surface: presentation. */
+     * on no surface. `fitArcsec` is how closely the drawn patches follow the surface: presentation. With `edgeFit` the
+     * surface's outline is fitted to the picture's lobe edge, direction by direction about the star (./surface.ts
+     * `surfaceEdgeStretch`). With `closedMesh` the surface is drawn as its own closed mesh with the picture painted on it
+     * (./surface-mesh.ts), its dark lanes from the filament map at `filaments.path` drawn `filaments.darkness` dark, and
+     * the star's glare given the ultraviolet detail at `filaments.detailPath`; both maps are built beside the recipe by
+     * the body's authoring script. */
     surface?: { source: string; basis: string; path: string; arcsecPerUnit: number; originUnits: [number, number, number];
-      pole: { tiltDeg: number; paDeg: number; rollDeg: number; receding: '+z' | '-z' }; starRadiusArcsec?: number; fitArcsec: number };
+      pole: { tiltDeg: number; paDeg: number; rollDeg: number; receding: '+z' | '-z' }; starRadiusArcsec?: number; fitArcsec: number;
+      edgeFit?: { maxStretch: number; smoothDeg: number }; closedMesh?: true; filaments?: { path: string; darkness: number; detailPath?: string } };
     /** A nebula's published density grid (./density-grid.ts): a cube of gas densities a paper made from velocity cubes, a
      * speed standing for a depth. The file's rows are "x y z density", its first axis outermost. That first axis is the
      * sight line, toward the Sun at its `toward` end ("high" or "low"); its second axis points to position angle
@@ -291,7 +297,16 @@ const surfaceOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['surfac
   if (!Array.isArray(s.originUnits) || s.originUnits.length !== 3) throw new TypeError('geometry.surface.originUnits is the star in the file\'s units: x, y and z.');
   return { source: text(s.source, 'geometry.surface.source'), basis: text(s.basis, 'geometry.surface.basis'), path: path(s.path), arcsecPerUnit: positive(s.arcsecPerUnit, 'geometry.surface.arcsecPerUnit'),
     originUnits: [finite(s.originUnits[0], 'geometry.surface.originUnits[0]'), finite(s.originUnits[1], 'geometry.surface.originUnits[1]'), finite(s.originUnits[2], 'geometry.surface.originUnits[2]')],
-    pole: { tiltDeg: tilt, paDeg: finite(pole.paDeg, 'geometry.surface.pole.paDeg'), rollDeg: finite(pole.rollDeg, 'geometry.surface.pole.rollDeg'), receding: pole.receding }, ...(s.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(s.starRadiusArcsec, 'geometry.surface.starRadiusArcsec') }), fitArcsec: positive(s.fitArcsec, 'geometry.surface.fitArcsec') };
+    pole: { tiltDeg: tilt, paDeg: finite(pole.paDeg, 'geometry.surface.pole.paDeg'), rollDeg: finite(pole.rollDeg, 'geometry.surface.pole.rollDeg'), receding: pole.receding }, ...(s.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(s.starRadiusArcsec, 'geometry.surface.starRadiusArcsec') }), fitArcsec: positive(s.fitArcsec, 'geometry.surface.fitArcsec'),
+    ...(s.edgeFit === undefined ? {} : (() => { const fit = object(s.edgeFit, 'geometry.surface.edgeFit'), maxStretch = positive(fit.maxStretch, 'geometry.surface.edgeFit.maxStretch');
+      if (!(maxStretch < 1)) throw new TypeError(`geometry.surface.edgeFit.maxStretch is a share of the surface's radius, below 1; got ${maxStretch}.`);
+      return { edgeFit: { maxStretch, smoothDeg: positive(fit.smoothDeg, 'geometry.surface.edgeFit.smoothDeg') } }; })()),
+    ...(s.closedMesh === undefined ? {} : (() => { if (s.closedMesh !== true) throw new TypeError(`geometry.surface.closedMesh is true or left out, not ${JSON.stringify(s.closedMesh)}.`); return { closedMesh: true as const }; })()),
+    ...(s.filaments === undefined ? {} : (() => { const f = object(s.filaments, 'geometry.surface.filaments');
+      if (typeof f.path !== 'string' || !f.path) throw new TypeError('geometry.surface.filaments.path names the filament map beside the recipe.');
+      if (typeof f.darkness !== 'number' || !(f.darkness >= 0 && f.darkness <= 1)) throw new TypeError('geometry.surface.filaments.darkness is from 0 to 1.');
+      if (f.detailPath !== undefined && (typeof f.detailPath !== 'string' || !f.detailPath)) throw new TypeError('geometry.surface.filaments.detailPath names the detail map beside the recipe.');
+      return { filaments: { path: path(f.path), darkness: f.darkness, ...(f.detailPath ? { detailPath: path(f.detailPath) } : {}) } }; })()) };
 };
 const densityOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['densityGrid']> => {
   const d = object(v, 'geometry.densityGrid'), second = finite(d.secondAxisPaDeg, 'geometry.densityGrid.secondAxisPaDeg'), third = finite(d.thirdAxisPaDeg, 'geometry.densityGrid.thirdAxisPaDeg'), apart = (((third - second) % 360) + 360) % 360;

@@ -266,6 +266,28 @@ test('a stack mounts a camera for each of its scenes, and a stack without leaves
   assert.deepEqual(imageLayerAxisWeights([Math.SQRT1_2, 0, 0, Math.SQRT1_2], views.filter(view => view.axis === 'z')), { z: 1 });
 });
 
+test('a stack of patch runs paints the run farthest from the camera first, and turns the order round as the camera goes behind', () => {
+  const document = new ImageDocument(), host = document.createElement(), before = document.createElement();
+  host.appendChild(before);
+  const style = { width: '1px', height: '1px', transform: 'translate3d(0,0,0)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' };
+  const payload: PreparedCssImageLayers = {
+    schema: 'cssearth-css-volume@1', id: 'fixture',
+    frame: { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+      metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
+    anchors: [], bankViews: views.map(view => view.axis === 'z' ? { ...view, sceneSizes: [1, 1] } : view),
+    stacks: views.map(({ axis }) => ({ axis, leaves: axis === 'z' ? ([['near', 1], ['far', -1]] as const).map(([id, z]) => ({ id, centerUnits: [0, 0, z] as [number, number, number],
+      texturePath: 'atlas.png', widthPx: 1, heightPx: 1, style })) : [] })),
+    resources: [{ path: 'atlas.png', bytes: 1, width: 1, height: 1 }], provenance: {}, approximation: {},
+  };
+  const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource: path => `/prepared/${path}` });
+  const cameras = document.elements.filter(element => element.className === 'css-volume-camera'), stack = (id: string) => Number(cameras.find(camera => camera.children[0]!.children[0]!.children.some(leaf => leaf.dataset.imageLayerLeaf === id))!.style.zIndex);
+  const from = (z: number) => runtime.publish({ world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, 0, z], orientationXyzw: [0, 0, 0, 1] } }, viewport: { focalPixels: 600, principalOffsetPixels: [0, 0] } });
+  from(10);
+  assert.ok(stack('near') > stack('far'), `from +z the run at +1 paints over the one at -1: ${stack('near')} over ${stack('far')}`);
+  from(-10);
+  assert.ok(stack('far') > stack('near'), `from -z the run at -1 paints over: ${stack('far')} over ${stack('near')}`);
+});
+
 test('a decoded stack joins its runs unseen, one and then two a frame, and takes the picture when it is whole', async t => {
   // The document's frames, run by the test.
   const frames: ((time: number) => void)[] = [];

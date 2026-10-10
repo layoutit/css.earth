@@ -42,17 +42,11 @@ export function stlTriangles(bytes: Buffer, name: string): Float32Array {
  * receding end's lobe, 0 the approaching one's. */
 export interface SurfaceCrossings { depths: Float32Array; lobes: Uint8Array }
 
-/**
- * A nebula's published surface on the sky (`geometry.surface`): a closed mesh a paper made from spectra, placed where
- * the paper says. The file's own z axis is the nebula's pole, and the plane through the star across it parts the
- * surface into two lobes. `pole.tiltDeg` is that pole's angle from the sight line and `pole.paDeg` the position angle its receding
- * end points to; `pole.rollDeg` turns the file about the pole, and `pole.receding` says which end of the file's z axis
- * recedes. `originUnits` is the star in the file's units and `arcsecPerUnit` the file's unit on the sky.
- *
- * `sky` gives a face pixel's offset from the star, east and north in arcseconds.
- */
-export function imageLayerSurfaceCrossings(surface: Surface, triangles: Float32Array, width: number, height: number, sky: (px: number, py: number) => readonly [number, number]): SurfaceCrossings {
-  const rad = Math.PI / 180, tilt = surface.pole.tiltDeg * rad, pa = surface.pole.paDeg * rad, roll = surface.pole.rollDeg * rad, most = SURFACE_MOST_CROSSINGS, receding = surface.pole.receding === '+z' ? 1 : -1;
+/** Where a point of the surface file (in its units) falls on the picture: its column and row, as `sky` counts them, and
+ * its depth in arcseconds along the sight line from the star's plane of the sky, negative toward the Sun. With a fitted edge (`stretch`) the point is scaled about
+ * the star by its direction's scale, depth with it. */
+export function surfaceOnPicture(surface: Surface, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], stretch?: (east: number, north: number) => number): { place: (x: number, y: number, z: number) => [number, number, number]; across: (px: number, py: number) => number; toSun: [number, number, number] } {
+  const rad = Math.PI / 180, tilt = surface.pole.tiltDeg * rad, pa = surface.pole.paDeg * rad, roll = surface.pole.rollDeg * rad, receding = surface.pole.receding === '+z' ? 1 : -1;
   // The receding pole on the sky: east, north, away from the Sun; two axes across it, turned by the roll.
   const pole = [Math.sin(tilt) * Math.sin(pa), Math.sin(tilt) * Math.cos(pa), Math.cos(tilt)], across = Math.hypot(pole[0]!, pole[1]!);
   if (across < 1e-9) throw new RangeError('geometry.surface.pole.tiltDeg: a pole along the sight line has no position angle to turn about.');
@@ -63,13 +57,33 @@ export function imageLayerSurfaceCrossings(surface: Surface, triangles: Float32A
   const [e0, n0] = sky(0, 0), [e1, n1] = sky(width - 1, 0), [e2, n2] = sky(0, height - 1);
   const ax = (e1 - e0) / (width - 1), ay = (n1 - n0) / (width - 1), bx = (e2 - e0) / (height - 1), by = (n2 - n0) / (height - 1), det = ax * by - ay * bx;
   if (!(Math.abs(det) > 0)) throw new RangeError('The picture\'s columns and rows do not span the sky.');
-  const depths = new Float32Array(most * width * height).fill(NaN), lobes = new Uint8Array(most * width * height), px = [0, 0, 0], py = [0, 0, 0], depth = [0, 0, 0], [ox, oy, oz] = surface.originUnits;
-  // The plane through the star across the pole, on a pixel's sight line.
-  const across0 = (x: number, y: number) => -((e0 + ax * x + bx * y) * pole[0]! + (n0 + ay * x + by * y) * pole[1]!) / pole[2]!;
+  const [ox, oy, oz] = surface.originUnits;
+  return {
+    place: (fx, fy, fz) => { const x = fx - ox, y = fy - oy, z = fz - oz;
+      const onSky = surface.arcsecPerUnit * (x * ex[0]! + y * ey[0]! + z * ez[0]!), upSky = surface.arcsecPerUnit * (x * ex[1]! + y * ey[1]! + z * ez[1]!), scale = stretch ? stretch(onSky, upSky) : 1;
+      const east = scale * onSky - e0, north = scale * upSky - n0;
+      return [(east * by - north * bx) / det, (north * ax - east * ay) / det, scale * surface.arcsecPerUnit * (x * ex[2]! + y * ey[2]! + z * ez[2]!)]; },
+    // The plane through the star across the pole, on a pixel's sight line.
+    across: (px, py) => -((e0 + ax * px + bx * py) * pole[0]! + (n0 + ay * px + by * py) * pole[1]!) / pole[2]!,
+    // The direction toward the Sun in the file's axes.
+    toSun: [-ex[2]!, -ey[2]!, -ez[2]!],
+  };
+}
+
+/**
+ * A nebula's published surface on the sky (`geometry.surface`): a closed mesh a paper made from spectra, placed where
+ * the paper says. The file's own z axis is the nebula's pole, and the plane through the star across it parts the
+ * surface into two lobes. `pole.tiltDeg` is that pole's angle from the sight line and `pole.paDeg` the position angle its receding
+ * end points to; `pole.rollDeg` turns the file about the pole, and `pole.receding` says which end of the file's z axis
+ * recedes. `originUnits` is the star in the file's units and `arcsecPerUnit` the file's unit on the sky.
+ *
+ * `sky` gives a face pixel's offset from the star, east and north in arcseconds.
+ */
+export function imageLayerSurfaceCrossings(surface: Surface, triangles: Float32Array, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], stretch?: (east: number, north: number) => number): SurfaceCrossings {
+  const most = SURFACE_MOST_CROSSINGS, { place, across: across0 } = surfaceOnPicture(surface, width, height, sky, stretch);
+  const depths = new Float32Array(most * width * height).fill(NaN), lobes = new Uint8Array(most * width * height), px = [0, 0, 0], py = [0, 0, 0], depth = [0, 0, 0];
   for (let index = 0; index < triangles.length; index += 9) {
-    for (let corner = 0; corner < 3; corner++) { const x = triangles[index + 3 * corner]! - ox, y = triangles[index + 3 * corner + 1]! - oy, z = triangles[index + 3 * corner + 2]! - oz;
-      const east = surface.arcsecPerUnit * (x * ex[0]! + y * ey[0]! + z * ez[0]!) - e0, north = surface.arcsecPerUnit * (x * ex[1]! + y * ey[1]! + z * ez[1]!) - n0;
-      px[corner] = (east * by - north * bx) / det; py[corner] = (north * ax - east * ay) / det; depth[corner] = surface.arcsecPerUnit * (x * ex[2]! + y * ey[2]! + z * ez[2]!); }
+    for (let corner = 0; corner < 3; corner++) [px[corner], py[corner], depth[corner]] = place(triangles[index + 3 * corner]!, triangles[index + 3 * corner + 1]!, triangles[index + 3 * corner + 2]!);
     const area = (px[1]! - px[0]!) * (py[2]! - py[0]!) - (px[2]! - px[0]!) * (py[1]! - py[0]!); if (Math.abs(area) < 1e-12) continue;
     const x0 = Math.max(0, Math.ceil(Math.min(...px))), x1 = Math.min(width - 1, Math.floor(Math.max(...px))), y0 = Math.max(0, Math.ceil(Math.min(...py))), y1 = Math.min(height - 1, Math.floor(Math.max(...py)));
     for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) { const w1 = ((x - px[0]!) * (py[2]! - py[0]!) - (px[2]! - px[0]!) * (y - py[0]!)) / area, w2 = ((px[1]! - px[0]!) * (y - py[0]!) - (x - px[0]!) * (py[1]! - py[0]!)) / area; if (w1 < 0 || w2 < 0 || w1 + w2 > 1) continue;
@@ -78,6 +92,42 @@ export function imageLayerSurfaceCrossings(surface: Surface, triangles: Float32A
       for (let slot = 0; slot < most; slot++) { const held = depths[first + slot]!; if (Number.isNaN(held)) { depths[first + slot] = at; lobes[first + slot] = lobe; break; } if (at < held) { const other = lobes[first + slot]!; depths[first + slot] = at; lobes[first + slot] = lobe; at = held; lobe = other; } } }
   }
   return { depths, lobes };
+}
+
+/** Directions about the star the fitted edge is measured in, and where the edge is: where the lobe light falls below
+ * this share of its level well inside the outline (from `EDGE_INNER` to `EDGE_OUTER` of the outline's radius). */
+export const EDGE_DIRECTIONS = 360, EDGE_LEVEL = 0.12, EDGE_INNER = 0.6, EDGE_OUTER = 0.9;
+/**
+ * The surface's outline fitted here to the photograph's lobe edge (`geometry.surface.edgeFit`): in each direction about
+ * the star, the scale that brings the outline (`inside`, the pixels a sight line through the surface crosses) to where
+ * the picture's lobe light ends. The lobe light is the light a clean lobe's color gives from a pixel's green and blue
+ * (its red against each, summed inside the outline away from the star), so the red gas and skirt around the lobes weigh
+ * little; read in rings of a pixel in each direction, smoothed over the rings and the directions beside it. Its edge is
+ * where it falls below `EDGE_LEVEL` of its level inside the outline. Each direction's scale is at most `maxStretch` from
+ * 1, directions near the star (within twice `starRadiusArcsec`) keep 1, and the scales are averaged over `smoothDeg`.
+ * Returns the scale of a direction (east, north in arcseconds), read between the directions, and each direction's.
+ */
+export function surfaceEdgeStretch(base: Buffer, width: number, height: number, inside: Uint8Array, sky: (px: number, py: number) => readonly [number, number], fit: { maxStretch: number; smoothDeg: number }, starRadiusArcsec = 0): { stretch: (east: number, north: number) => number; scales: Float32Array } {
+  const count = width * height, bins = EDGE_DIRECTIONS, light = (p: number, c: number) => base[4 * p + c]! / 255 * base[4 * p + 3]! / 255;
+  const [e0, n0] = sky(0, 0), [e1, n1] = sky(1, 0), step = Math.hypot(e1 - e0, n1 - n0), binOf = (east: number, north: number) => Math.floor((Math.atan2(north, east) + Math.PI) / (2 * Math.PI) * bins) % bins;
+  const near = 2 * starRadiusArcsec, outline = new Float32Array(bins); let sr = 0, sg = 0, sb = 0;
+  const radius = new Float32Array(count), bin = new Int32Array(count);
+  for (let p = 0; p < count; p++) { const [east, north] = sky(p % width, Math.floor(p / width)); radius[p] = Math.hypot(east, north); bin[p] = binOf(east, north);
+    if (inside[p]) { outline[bin[p]!] = Math.max(outline[bin[p]!]!, radius[p]!); if (radius[p]! > near) { sr += light(p, 0); sg += light(p, 1); sb += light(p, 2); } } }
+  const fromGreen = sg > 0 ? sr / sg / 2 : 0, fromBlue = sb > 0 ? sr / sb / 2 : 0, rings = Math.ceil(Math.max(...outline) * (1 + fit.maxStretch) / step) + 4;
+  const sum = new Float64Array(bins * rings), seen = new Uint32Array(bins * rings);
+  for (let p = 0; p < count; p++) { const ring = Math.floor(radius[p]! / step); if (ring >= rings) continue; sum[bin[p]! * rings + ring] += fromGreen * light(p, 1) + fromBlue * light(p, 2); seen[bin[p]! * rings + ring]++; }
+  const level = (b: number, ring: number) => { let total = 0, n = 0; for (let db = -2; db <= 2; db++) for (let dr = -1; dr <= 1; dr++) { const k = ((b + db) % bins + bins) % bins, r = ring + dr; if (r < 0 || r >= rings) continue; total += sum[k * rings + r]!; n += seen[k * rings + r]!; } return n ? total / n : 0; };
+  const raw = new Float32Array(bins).fill(NaN);
+  for (let b = 0; b < bins; b++) { const reach = outline[b]!; if (!(reach > near)) continue;
+    const within: number[] = []; for (let ring = Math.floor(EDGE_INNER * reach / step); ring <= EDGE_OUTER * reach / step; ring++) within.push(level(b, ring)); within.sort((x, y) => x - y);
+    const threshold = EDGE_LEVEL * (within[Math.floor(within.length / 2)] ?? 0); if (!(threshold > 0)) continue;
+    let edge = (1 + fit.maxStretch) * reach; for (let ring = Math.floor(EDGE_OUTER * reach / step); ring < rings; ring++) if (level(b, ring) < threshold) { edge = ring * step; break; }
+    raw[b] = Math.max(1 - fit.maxStretch, Math.min(1 + fit.maxStretch, edge / reach)); }
+  const half = Math.round(fit.smoothDeg / 2 * bins / 360), scales = new Float32Array(bins);
+  for (let b = 0; b < bins; b++) { let total = 0; for (let d = -half; d <= half; d++) { const value = raw[((b + d) % bins + bins) % bins]!; total += Number.isNaN(value) ? 1 : value; } scales[b] = total / (2 * half + 1); }
+  const stretch = (east: number, north: number) => { const at = (Math.atan2(north, east) + Math.PI) / (2 * Math.PI) * bins - .5, lo = Math.floor(at), t = at - lo; return (1 - t) * scales[((lo % bins) + bins) % bins]! + t * scales[(((lo + 1) % bins) + bins) % bins]!; };
+  return { stretch, scales };
 }
 
 const layerOf = (count: number): ShapeLayer => ({ depth: new Float32Array(count).fill(NaN), tau: new Float32Array(count), hue: new Uint8Array(3 * count) });

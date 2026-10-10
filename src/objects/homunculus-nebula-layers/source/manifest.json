@@ -71,6 +71,82 @@
           }
         ]
       }
+    },
+    {
+      "id": "filaments",
+      "path": "src/objects/homunculus-nebula-layers/source/filaments.png",
+      "title": "The dust lanes on the lobes, 0 to 1 on the bank's face grid",
+      "origin": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973",
+      "sourceUrl": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973",
+      "credit": "NASA/ESA Hubble (GO 9973, 15289)",
+      "displayCredit": "Hubble",
+      "license": "Public NASA mission data: cite the programmes.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973"
+          }
+        ]
+      },
+      "generator": "packages/bake/authoring/homunculus-nebula/filament-map.mts",
+      "acquisition": "Built by the generator from the picture and HST ACS/HRC F220W and F550M (GO 9973, 2003), each registered on the picture by its lobes' fine detail: dark lines found at four widths (Frangi et al. 1998) and weighted into one map with the settings chosen on the Nebula Lab's filament tuner. Not tracked (the repository ignores pictures under source/): rebuilt by the generator from the downloads, or restored from the source cache once published there.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-hst-go9973-eta-carinae-acs-hrc",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973"
+          },
+          {
+            "catalogueId": "publication-frangi-1998-vesselness",
+            "role": "method",
+            "evidence": "https://doi.org/10.1007/BFb0056195"
+          }
+        ]
+      }
+    },
+    {
+      "id": "detail",
+      "path": "src/objects/homunculus-nebula-layers/source/detail.png",
+      "title": "The lobes' ultraviolet detail where the picture is the star's glare, on the bank's face grid",
+      "origin": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973",
+      "sourceUrl": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973",
+      "credit": "NASA/ESA Hubble (GO 9973, 15289)",
+      "displayCredit": "Hubble",
+      "license": "Public NASA mission data: cite the programmes.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973"
+          }
+        ]
+      },
+      "generator": "packages/bake/authoring/homunculus-nebula/filament-map.mts",
+      "acquisition": "Built by the generator from HST ACS/HRC F220W (GO 9973, 2003) and WFC3/UVIS F280N (GO 15289, 2018), each registered on the picture (F280N from free expansion since 1843): each band's log brightness less its 10-pixel blur, in units of its own scatter over the lobes, F280N's saturated pixels left out; red holds 128 plus 40 times the detail, green how far it counts. Not tracked (the repository ignores pictures under source/): rebuilt by the generator from the downloads, or restored from the source cache once published there.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-hst-go9973-eta-carinae-acs-hrc",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973"
+          },
+          {
+            "catalogueId": "mast-hst-go15289-eta-carinae-f280n",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=15289"
+          }
+        ]
+      }
     }
   ],
   "documents": [
