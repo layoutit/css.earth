@@ -25,7 +25,7 @@ test('research.json: the schema reads a whole record and refuses a wrong field',
 test('every site nebula keeps a research.json the schema reads, and each named record exists', async () => {
   const objects = configuredLabObjects(root), bySubject = new Map(objects.map(item => [item.subject, item]));
   const site = objects.filter(item => !item.parent || bySubject.get(item.parent)?.kind !== item.kind);
-  assert.equal(site.length, 18, 'the 17 site nebulae, M1 counted for its volume and its plates');
+  assert.equal(site.length, 17, 'the 16 site nebulae, M1 counted for its volume and its plates');
   for (const object of site) {
     const record = readResearchRecord(JSON.parse(await readFile(`${object.object}/source/research.json`, 'utf8')));
     assert.equal(record.id, object.id);
