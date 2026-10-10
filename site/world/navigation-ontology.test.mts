@@ -37,7 +37,8 @@ test('every scene and every package the host draws has exactly one searchable de
     assert.equal(system.route, `/${system.id}/`);
     // What kind of system it is is its classification: a planet's or small body's moons, a star with only stars inside its
     // system, or a star with a planet.
-    const inside = OBJECTS.filter(object => object.parent === system.id && object.id !== host.id);
+    // A system inside this one counts as its host: its bodies are that system's (Proxima Centauri's planets, inside Alpha Centauri).
+    const inside = OBJECTS.filter(object => object.parent === system.id && object.id !== host.id).map(object => object.system ? requireObject(object.system.host) : object);
     if (!['star', 'black-hole'].includes(host.classification)) assert.equal(system.classification, 'satellite-system', system.id);
     else if (inside.some(object => !['star', 'black-hole'].includes(object.classification))) assert.equal(system.classification, 'planetary-system', system.id);
     else if (inside.length) assert.equal(system.classification, 'star-system', system.id);
