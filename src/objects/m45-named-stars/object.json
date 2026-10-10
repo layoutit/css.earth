@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m45-named-stars",
+  "type": "catalogue-point-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/dots/points.json"
+    },
+    "host": "m45"
+  },
+  "prepared": {
+    "format": "cssearth-catalogue-points-bin@2",
+    "url": "prepared/dots.bin"
+  }
+}

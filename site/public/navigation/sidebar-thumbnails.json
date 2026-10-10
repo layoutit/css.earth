@@ -387,30 +387,6 @@
       "bytes": 16000
     },
     {
-      "path": "src/objects/m45-volume/prepared/presentation.json",
-      "bytes": 8231
-    },
-    {
-      "path": "site/public/scenes/m45-volume/datasets/optical-composite.webp",
-      "bytes": 14636
-    },
-    {
-      "path": "site/public/scenes/m45-volume/datasets/noirlab-optical.webp",
-      "bytes": 11712
-    },
-    {
-      "path": "site/public/scenes/m45-volume/datasets/spitzer-irac.webp",
-      "bytes": 14772
-    },
-    {
-      "path": "site/public/scenes/m45-volume/datasets/spitzer-irac-mips.webp",
-      "bytes": 13854
-    },
-    {
-      "path": "site/public/scenes/m45-volume/datasets/wise-four-band.webp",
-      "bytes": 20398
-    },
-    {
       "path": "src/objects/m49-volume/prepared/presentation.json",
       "bytes": 1409
     },
@@ -1564,60 +1540,6 @@
       "credit": "ESO/G. Beccari",
       "sourceUrl": "https://www.eso.org/public/images/eso1723a/"
     },
-    "m45-volume/optical-composite": {
-      "url2x": "/navigation/focus-m45-volume-optical-composite@2x.webp",
-      "inputs": [
-        "src/objects/m45-volume/prepared/presentation.json",
-        "site/public/scenes/m45-volume/datasets/optical-composite.webp"
-      ],
-      "credit": "Taavi Niittee / Tõrva Astronomy Club",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg"
-    },
-    "m45-volume/noirlab-optical": {
-      "url2x": "/navigation/focus-m45-volume-noirlab-optical@2x.webp",
-      "inputs": [
-        "src/objects/m45-volume/prepared/presentation.json",
-        "site/public/scenes/m45-volume/datasets/noirlab-optical.webp"
-      ],
-      "credit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
-      "sourceUrl": "https://noirlab.edu/public/images/noao-m45/"
-    },
-    "m45-volume/spitzer-irac": {
-      "url2x": "/navigation/focus-m45-volume-spitzer-irac@2x.webp",
-      "inputs": [
-        "src/objects/m45-volume/prepared/presentation.json",
-        "site/public/scenes/m45-volume/datasets/spitzer-irac.webp"
-      ],
-      "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
-      "sourceUrl": "https://science.nasa.gov/photojournal/pink-pleiades/"
-    },
-    "m45-volume/spitzer-irac-mips": {
-      "url2x": "/navigation/focus-m45-volume-spitzer-irac-mips@2x.webp",
-      "inputs": [
-        "src/objects/m45-volume/prepared/presentation.json",
-        "site/public/scenes/m45-volume/datasets/spitzer-irac-mips.webp"
-      ],
-      "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
-      "sourceUrl": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/"
-    },
-    "m45-volume/wise-four-band": {
-      "url2x": "/navigation/focus-m45-volume-wise-four-band@2x.webp",
-      "inputs": [
-        "src/objects/m45-volume/prepared/presentation.json",
-        "site/public/scenes/m45-volume/datasets/wise-four-band.webp"
-      ],
-      "credit": "NASA/JPL-Caltech/UCLA",
-      "sourceUrl": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
-    },
-    "m45-volume": {
-      "url2x": "/navigation/focus-object-m45-volume@2x.webp",
-      "inputs": [
-        "src/objects/m45-volume/prepared/presentation.json",
-        "site/public/scenes/m45-volume/datasets/optical-composite.webp"
-      ],
-      "credit": "Taavi Niittee / Tõrva Astronomy Club",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg"
-    },
     "m49-volume/legacy-optical": {
       "url2x": "/navigation/focus-m49-volume-legacy-optical@2x.webp",
       "inputs": [
@@ -2273,7 +2195,6 @@
     "m31-layers": "m31-layers",
     "m33-layers": "m33-layers",
     "m42-volume": "m42-volume",
-    "m45-volume": "m45-volume",
     "m49-volume": "m49-volume",
     "m8-volume": "m8-volume",
     "m81-layers": "m81-layers",

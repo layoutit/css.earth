@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "dots",
+  "published": true,
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+GaiaDR3%2C+RA_ICRS%2C+DE_ICRS%2C+'m45'+AS+grp%2C+134.84134308+AS+distpc%2C+Gmag%2C+%22BP-RP%22+FROM+%22J%2FA%2BA%2F673%2FA114%2Fmembers%22+WHERE+Name%3D'Melotte_22'+AND+inrt%3D'True'+AND+%22BP-RP%22+IS+NOT+NULL+AND+Gmag+IS+NOT+NULL+ORDER+BY+Gmag",
+    "bytes": 90517,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 5
+    },
+    "distanceUnit": "pc",
+    "groupDistance": {
+      "group": 4,
+      "distance": 5,
+      "depth": "isotropic",
+      "source": "hunt-reffert-2023-open-clusters",
+      "basis": "Every member sits at the cluster's distance, Hunt & Reffert's (2023) 134.8 pc for Melotte_22 (dist50; the query writes it into each row), spread in depth as widely as the members spread across the sky: that the cluster is as deep as it is wide is an assumption, not a measurement of any member's depth. A member's own parallax is not used: for the faint members its error spreads the cluster along the sight line several times more than the cluster is deep, and the brightest members' parallaxes are the least certain (Maia's 7.67 ± 0.31 mas, a range of about 11 pc)."
+    },
+    "exclude": {
+      "path": "../../../m45-named-stars/source/dots/table.csv",
+      "raDegColumn": "RArad",
+      "decDegColumn": "DErad",
+      "withinArcsec": 5,
+      "source": "doi-10-1051-0004-6361-20078357",
+      "basis": "The nine named stars are drawn by the Pleiades named-stars bank (src/objects/m45-named-stars), at the place their star objects stand; a member within 5 arcseconds of one is left out so no named star is drawn twice. 5 arcseconds holds the stars' motion between the Hipparcos epoch (1991.25) and Gaia's (2016.0), about 1.2 arcseconds."
+    }
+  },
+  "sample": "The 1,014 stars Hunt & Reffert (2023, A&A 673, A114) list as members of Melotte_22 within its tidal radius (inrt = True, their own selection of reliable members), of 1,721 members in all, that have a Gaia DR3 G magnitude and BP-RP color; none within the tidal radius lacks a color. The catalogue does not list Alcyone, Merope or Taygeta as members, and lists Atlas, Electra and Pleione outside its tidal-radius selection; the three named stars it keeps (Maia, Celaeno, Asterope) are left out by table.exclude, since the named-stars bank draws all nine.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "hunt-reffert-2023-open-clusters",
+  "meaning": "Member stars of the Pleiades from Hunt & Reffert's (2023) Gaia DR3 cluster census, one dot per star at its measured sky position, at the cluster's distance. Drawn when the cluster is selected.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "colorByBpRp": {
+      "column": 7,
+      "range": [
+        -0.4,
+        1.9
+      ],
+      "steps": 12,
+      "basis": "Measured Gaia DR3 BP-RP, as observed (not corrected for the little dust in front of the cluster), through Cardiel et al.'s (2021) RGB fit, as the nebula star fields color Gaia stars. A color beyond the range takes its end."
+    },
+    "toneBy": {
+      "magnitudeColumn": 6,
+      "band": "Gaia G, as observed",
+      "brightMagnitude": -2,
+      "faintMagnitude": 12,
+      "faintTone": 0.15,
+      "steps": 8,
+      "basis": "A display scale: each member's G magnitude minus the distance modulus of the cluster's distance (its absolute magnitude, as observed) darkens its color, from full at -2, the brightest B stars, to 15% at +12, the faint red dwarfs, linear in magnitude. The range spans the members' own absolute magnitudes, so the light of the cluster reads as it does in the sky: a few blue stars outshine the hundreds of red dwarfs. The little dust in front of the cluster (Hunt & Reffert's A_V 0.10 mag) is not removed."
+    },
+    "sizeBy": {
+      "shells": 1,
+      "tiers": [
+        {
+          "brightestShare": 0.03,
+          "radiusPx": 2.6
+        },
+        {
+          "brightestShare": 0.15,
+          "radiusPx": 1.6
+        }
+      ],
+      "radiusPx": 1,
+      "basis": "Presentation of a measured quantity: three dot sizes by G magnitude, ranked among the members (one shell: they share one distance). The brightest 3%, about 30 stars, the B and early A stars that give the cluster its blue light, draw 2.6 px; the next 12% 1.6 px; the rest 1 px."
+    }
+  }
+}

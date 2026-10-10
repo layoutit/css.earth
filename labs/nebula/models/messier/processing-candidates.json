@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-nebula-candidates@1",
   "candidates": [
-    { "id": "m45", "compilerRecipe": "src/objects/m45-volume/source/compiler.json" },
     { "id": "m1", "compilerRecipe": "src/objects/m1-volume/source/compiler.json" },
     { "id": "m8", "compilerRecipe": "src/objects/m8-volume/source/compiler.json" }
   ]

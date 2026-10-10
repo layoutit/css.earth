@@ -4,7 +4,7 @@
 
 Gaia's parallax, brightness and spectrum give it 3.4 solar radii and 3.36 solar masses (FLAME) and 11,577 K at its surface (GSP-Phot). It is also HD 23288, HR 1140, HIP 17489. The introduction is generated from Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)'s published values; the sections below are the data's own.
 
-**Star.** Placement: Gaia DR3 source 65287458566524928, parallax 7.385 ± 0.072 mas (135.41 pc). Radius 3.429 (3.353 to 3.507) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Mass 3.356 (3.313 to 3.399) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 11,577 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 65287458566524928: teff_gspphot 11576.752 K (16th-84th percentiles 11538.454-11611.823), the temperature FLAME used. log g 3.89 from the mass and radius.
+**Star.** Placement: Gaia DR3 source 65287458566524928, distance 135 pc from Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Celaeno is a member, as its sisters are placed; its own Gaia DR3 parallax agrees to 0.6 pc, within the cluster's depth (half its members within 2.70 pc of the centre); Gaia DR3's parallax, 7.385 ± 0.072 mas (102.0 standard errors), is not used. Radius 3.429 (3.353 to 3.507) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Mass 3.356 (3.313 to 3.399) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 11,577 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 65287458566524928: teff_gspphot 11576.752 K (16th-84th percentiles 11538.454-11611.823), the temperature FLAME used. log g 3.89 from the mass and radius.
 
 **Color.** A Planck spectrum at 11,577 K, because gSP-Phot fits an extinction A_G = 0.22 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature, through the CIE 1931 2° observer: #c2d2ff. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
@@ -12,7 +12,7 @@ Gaia's parallax, brightness and spectrum give it 3.4 solar radii and 3.36 solar 
 
 ## Evidence
 
-Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-10 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 
 ## Known problems

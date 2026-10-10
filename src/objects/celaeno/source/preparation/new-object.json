@@ -10,7 +10,9 @@
     "HIP 17489",
     "HD 23288"
   ],
+  "parent": "m45",
   "featured": true,
+  "order": 5514,
   "target": "HR 1140",
   "gaia": "65287458566524928",
   "paper": {
@@ -24,6 +26,12 @@
     "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 65287458566524928: teff_gspphot 11576.752 K (16th-84th percentiles 11538.454-11611.823), the temperature FLAME used",
     "url": "https://doi.org/10.1051/0004-6361/202243462",
     "uncertainty": 36.7
+  },
+  "distance": {
+    "value": 134.84134308,
+    "source": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Celaeno is a member, as its sisters are placed; its own Gaia DR3 parallax agrees to 0.6 pc, within the cluster's depth (half its members within 2.70 pc of the centre)",
+    "url": "https://doi.org/10.1051/0004-6361/202346285",
+    "uncertainty": 2.7
   },
   "color": {
     "skip": [
@@ -49,6 +57,5 @@
       "card": "Celaeno, designated 16 Tauri, is a star in the constellation of Taurus and a member of the Pleiades open star cluster (M45) of stars."
     }
   },
-  "notes": [],
-  "order": 5514
+  "notes": []
 }

@@ -23,7 +23,7 @@
       "surfaces": [],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 109203529398159.4
+        "radiusKm": 342813388933523.75
       },
       "sources": [
         {
@@ -51,50 +51,45 @@
     "catalog": {
       "name": "Pleiades",
       "systemName": "Milky Way",
-      "classification": "nebula",
+      "classification": "open-cluster",
       "color": "#9a9a9a",
-      "distanceAu": 28093266.61,
-      "description": "The Pleiades is an open star cluster surrounded by reflection nebulosity.",
+      "distanceAu": 27813023.5,
+      "description": "The Pleiades is an open star cluster in the Milky Way, about 135 parsecs away.",
       "aliases": [
         "M45",
-        "Seven Sisters",
-        "Pleiades reflection nebula"
+        "Messier 45",
+        "Melotte 22",
+        "Seven Sisters"
       ],
       "order": 5144,
-      "context": {},
-      "distanceSubject": {
-        "id": "m45-stellar-cluster",
-        "name": "Pleiades stellar cluster",
-        "relationship": "Associated illuminating stellar cluster",
-        "reason": "The stellar-cluster distance locates the reflection-nebula scene; individual dust-filament distances are not measured."
-      }
+      "context": {}
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        2103179275207847000,
-        3207881506511226400,
-        1717207646325540600
+        2086223803515467000,
+        3173531382034248000,
+        1699531018093939500
       ],
       "presentationToReference": [
-        0.5017109928322653,
+        0.5026845539836028,
         0,
-        0.8650353054478543,
-        0.793654375804942,
+        0.8644699180343444,
+        0.7931356429949269,
         0.3977771559319137,
-        -0.4603108362665233,
-        0.34409128358174174,
+        -0.46120406115920287,
+        0.3438663853843961,
         -0.9174820620691818,
-        -0.19956917182859527
+        -0.19995643221450007
       ],
       "orbitUpReference": [
         0,
         -0.3977771559319137,
         0.9174820620691818
       ],
-      "metersPerUnit": 352269449671481.94,
-      "bodyRadiusM": 109203529398159410
+      "metersPerUnit": 1105849641721044.5,
+      "bodyRadiusM": 342813388933523800
     }
   },
   "prepared": {

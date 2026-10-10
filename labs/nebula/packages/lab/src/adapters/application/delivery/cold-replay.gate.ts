@@ -1,6 +1,6 @@
 /** Explicit expensive gate (not default unit-test discovery):
  * node labs/nebula/packages/lab/src/adapters/application/delivery/run-cold-replay.mts --timeout-seconds 1800
- * Optional --objects m42,helix,m45,m8,m1 selects a bounded subset; every selected object's datasets run.
+ * Optional --objects m42,helix,m8,m1 selects a bounded subset; every selected object's datasets run.
  * Each child has a hard deadline, isolated cwd/root, and only declared compact inputs/profile.
  */
 import { isRecord as coreIsRecord } from '@cssearth/core';
@@ -16,7 +16,7 @@ import { replayCompactCompiler, replayCompactSampled } from '@cssearth/bake/volu
 import { readCompactCompiler, readCompilerBakeResult } from '@cssearth/objects';
 import { assertReplayScene, verifyReplayFiles } from './cold-replay-parity.ts';
 
-const ids = ['m42', 'helix', 'm45', 'm8', 'm1'];
+const ids = ['m42', 'helix', 'm8', 'm1'];
 const isRecord = coreIsRecord;
 const record = (v: unknown): Record<string, unknown> => { assert.ok(isRecord(v)); return v; };
 const pin = (v: unknown): { path: string } => {

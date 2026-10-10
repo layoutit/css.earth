@@ -13,7 +13,7 @@
           "catalogueId": "gaia-dr3-celaeno",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 FLAME",
-          "checked": "2026-10-03",
+          "checked": "2026-10-10",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -23,10 +23,10 @@
         "label": "Distance from the Sun",
         "value": "135 parsecs",
         "source": {
-          "catalogueId": "gaia-dr3-celaeno",
-          "url": "https://gea.esac.esa.int/archive/",
-          "label": "Gaia DR3 parallax",
-          "checked": "2026-10-03",
+          "catalogueId": "doi-10-1051-0004-6361-202346285",
+          "url": "https://doi.org/10.1051/0004-6361/202346285",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Celaeno is a member, as its sisters are placed; its own Gaia DR3 parallax agrees to 0.6 pc, within the cluster's depth (half its members within 2.70 pc of the centre)",
+          "checked": "2026-10-10",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
@@ -75,7 +75,7 @@
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/celaeno.json",
-      "credit": "Gaia DR3 FLAME radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+      "credit": "Gaia DR3 FLAME radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
     }
   }
 }

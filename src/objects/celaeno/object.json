@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "celaeno",
-  "parent": "milky-way",
+  "parent": "m45",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -98,7 +98,7 @@
       "name": "Celaeno",
       "classification": "star",
       "color": "#c2d2ff",
-      "distanceAu": 27929341.2,
+      "distanceAu": 27813060.6,
       "description": "A star about 140 parsecs away, 3.4 times the Sun's width, measured by Gaia.",
       "systemName": "Celaeno system",
       "aliases": [
@@ -111,26 +111,27 @@
       "order": 5514,
       "context": {
         "order": 5511
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        2118495455864436000,
-        3164697011708754400,
-        1718654761045288700
+        2109675344240683800,
+        3151521160506691600,
+        1711499340063356700
       ],
       "presentationToReference": [
-        0.5070385463781107,
+        0.5070385463781155,
         0.22882273949597956,
-        0.8309946247577825,
-        0.757435362018895,
+        0.8309946247577796,
+        0.7574353620188918,
         0.34182413422666896,
-        -0.5562804451205292,
+        -0.5562804451205334,
         0.411343633535367,
         -0.911480342711648,
-        4.223930461768376e-7
+        4.2239304384775344e-7
       ],
       "orbitUpReference": [
         -0.22882273949597956,

@@ -156,10 +156,8 @@ tolerance is `1e-10`, allowing the producer's 12-significant-digit rounding.
 This checks derivation consistency, not independent scientific accuracy.
 
 A distance describes its row's subject unless `distance.subject` identifies a
-different measured subject, its relationship and the adoption reason. M45 records
-the Pleiades stellar cluster as the measured subject; navigation carries that
-qualification into the distance description. It does not label the cluster's
-uncertainty as a measurement of each dust filament.
+different measured subject, its relationship and the adoption reason; navigation
+carries that qualification into the distance description.
 
 The legacy descriptor field `catalog.distanceAu` mixed orbital references,
 nominal spacing and positions. It is no longer published in an application

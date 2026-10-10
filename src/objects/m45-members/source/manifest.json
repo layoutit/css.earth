@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "members",
+      "path": "src/objects/m45-members/source/dots/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+GaiaDR3%2C+RA_ICRS%2C+DE_ICRS%2C+'m45'+AS+grp%2C+134.84134308+AS+distpc%2C+Gmag%2C+%22BP-RP%22+FROM+%22J%2FA%2BA%2F673%2FA114%2Fmembers%22+WHERE+Name%3D'Melotte_22'+AND+inrt%3D'True'+AND+%22BP-RP%22+IS+NOT+NULL+AND+Gmag+IS+NOT+NULL+ORDER+BY+Gmag",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+      "title": "Pleiades members within the tidal radius, table.csv",
+      "credit": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114; Gaia DR3 photometry (Gaia Collaboration 2023)",
+      "acquisition": "Query result downloaded unchanged from its CDS origin on 2026-10-10; not tracked. The query keeps Melotte_22's members inside the tidal radius that have a G magnitude and a BP-RP color, and writes the group name and the cluster's distance into each row; read by packages/bake/cli/prepare-catalogue-points.mts through dots/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hunt-reffert-2023-open-clusters",
+            "role": "material",
+            "evidence": "src/objects/m45-members/source/dots/points.json#/table"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m45-members/source/dots/points.json#/appearance/colorByBpRp"
+          }
+        ]
+      },
+      "dependencies": [
+        "named-stars"
+      ],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    },
+    {
+      "id": "named-stars",
+      "path": "src/objects/m45-named-stars/source/dots/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+HIP%2C+RArad%2C+DErad%2C+134.84134308+AS+distpc%2C+Hpmag%2C+%22B-V%22+FROM+%22I%2F311%2Fhip2%22+WHERE+HIP+IN+%2817702%2C17847%2C17499%2C17573%2C17608%2C17531%2C17851%2C17489%2C17579%29+ORDER+BY+Hpmag",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/311",
+      "title": "The nine named Pleiades stars, Hipparcos new reduction, table.csv",
+      "credit": "van Leeuwen (2007), A&A 474, 653, Hipparcos, the new reduction; CDS I/311",
+      "acquisition": "Query result downloaded unchanged from its CDS origin on 2026-10-10; not tracked. The query keeps the Hipparcos rows of the nine named stars and writes the cluster's distance into each row; read by packages/bake/cli/prepare-catalogue-points.mts through dots/points.json, here as table.exclude: the members within 5 arcseconds of a named star are left out.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1051-0004-6361-20078357",
+            "role": "material",
+            "evidence": "src/objects/m45-members/source/dots/points.json#/table/exclude"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/m45-members/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/m45-members/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

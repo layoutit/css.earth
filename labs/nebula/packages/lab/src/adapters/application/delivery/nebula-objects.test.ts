@@ -10,10 +10,11 @@ import { readVolumeDatasetBank } from '@cssearth/objects/node';
 import { prepareNebulaObject } from './nebula-objects.ts';
 
 test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {
-  const recipe: unknown = JSON.parse(await readFile('src/objects/m45-volume/source/delivery.json', 'utf8'));
+  // The retired Pleiades delivery was the only one to name a composite; its envelope is kept as a fixture.
+  const recipe: unknown = JSON.parse(await readFile('labs/nebula/packages/lab/src/adapters/application/delivery/fixtures/optical-composite-delivery.json', 'utf8'));
   const parsed = readNebulaDelivery(recipe);
   assert.equal(parsed.defaultDataset, 'optical-composite');
-  assert.equal(parsed.compositeRecipe?.path, 'src/objects/m45-volume/source/optical-composite.json');
+  assert.equal(parsed.compositeRecipe?.path, 'src/objects/pleiades-volume/source/optical-composite.json');
   assert.ok(parsed.compositeRecipe);
   assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@2', method: 'axial-symmetry' }), /requires compiler/);
   const ordinary = readNebulaDelivery(JSON.parse(await readFile('src/objects/m8-volume/source/delivery.json', 'utf8')));

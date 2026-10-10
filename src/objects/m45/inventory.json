@@ -3,57 +3,39 @@
   "assets": [
     {
       "location": "public",
-      "filename": "m45-dataset-noirlab-optical.webp",
-      "bytes": 11712,
-      "sha256": "7fe8aff6569baac0de4114d5c32ba685790f91e9196a8da414219bb1ec4e0dc5"
-    },
-    {
-      "location": "public",
-      "filename": "m45-dataset-optical-composite.webp",
-      "bytes": 14636,
-      "sha256": "b320e0f1b2b860bd1c084220be8bcbdea272887211883fbf0da265d0ab6cf279"
-    },
-    {
-      "location": "public",
-      "filename": "m45-dataset-spitzer-irac-mips.webp",
-      "bytes": 13854,
-      "sha256": "d818371e5d4d7337d4a8976bb3362e5e781c116bad69baaa6771ff49cff2fd8a"
-    },
-    {
-      "location": "public",
-      "filename": "m45-dataset-spitzer-irac.webp",
-      "bytes": 14772,
-      "sha256": "6a120665b6b734750f1ba4c2a052456f643c3563234438f5e61329550c61ee40"
-    },
-    {
-      "location": "public",
-      "filename": "m45-dataset-wise-four-band.webp",
-      "bytes": 20398,
-      "sha256": "c8787fbbd36c883b164b7dde13eba0818efa649c253d62ff45571b6157145011"
+      "filename": "m45-dataset-members.webp",
+      "bytes": 1026,
+      "sha256": "e405c0d79c9dd8f5d55fb5485a0a94d3cadc3a41aca0d22643cc668657fec8cf"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 753,
-      "sha256": "3878f9ebe5b6320efc68427f71c211ce155742cc0f5e6e31d82a8f8931953505"
+      "bytes": 4756,
+      "sha256": "8628e57b9c3a75175673d3b03f24c2cf63b7399c873479f7b0269b2d8664fe16"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2208,
-      "sha256": "bf2223b8f2e6a42905ee5b229eee1f421f838fdeebdf581f93f983b4054372d2"
+      "bytes": 541,
+      "sha256": "ccbc0324a347089093c8fe2331765c8af8b30b0d228c0b3880273630fd365dc2"
+    },
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1127,
+      "sha256": "7ac16efddb9344e6a5a62dfcb2aa0696376a8006655709a1e03f2e1441b1a263"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 5915,
-      "sha256": "fba6a51410bd6c4c8cdeafac85dbbd60d2223fd6017d9a2e9eb5da4c464b9089"
+      "bytes": 4632,
+      "sha256": "bb781279efbc3b2334371e308aede38efe0784a58f28bdf39d433c27f613855c"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3294,
-      "sha256": "d2db8077e5bb1356fc7a3edfc956da39036e4f893d7e34422e9d99701dbd1b73"
+      "bytes": 1781,
+      "sha256": "6b44e476716729202bf4aabed8efe5d750b3ee347a11f3671b4ed9b46602836d"
     }
   ]
 }

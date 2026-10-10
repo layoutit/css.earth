@@ -1,12 +1,11 @@
 # Prepared nebulae in the shared world
 
-M42, M2–9, Pleiades, Crab and Lagoon use the retained `volume-dataset-bank` capability, shared camera, focus card and source controls. Each has its page, `/m45/`, `/m1/`, `/m8/`, `/m42/` and `/m2-9/`: the shared world with the nebula selected and its card open. Search by common name or catalogue alias (Orion/M42/NGC 1976, Twin Jet/M2–9, Pleiades/M45/Seven Sisters, Crab/M1/NGC 1952, Lagoon/M8/NGC 6523), or browse the Nebulae category.
+M42, M2–9, Crab and Lagoon use the retained `volume-dataset-bank` capability, shared camera, focus card and source controls. Each has its page, `/m1/`, `/m8/`, `/m42/` and `/m2-9/`: the shared world with the nebula selected and its card open. Search by common name or catalogue alias (Orion/M42/NGC 1976, Twin Jet/M2–9, Crab/M1/NGC 1952, Lagoon/M8/NGC 6523), or browse the Nebulae category.
 
 | Object | Method | Datasets | Adopted distance |
 | --- | --- | --- | --- |
 | [M42](../../src/objects/m42-volume/README.md) | Image emission with an evidence-guided coherent depth surface | ESO optical and VISTA infrared | 414 ± 7 pc |
 | [M2–9](../../src/objects/m2-9-volume/README.md) | Axially symmetric image-conditioned emission | Hubble optical | 650 pc, uncertain |
-| [Pleiades · M45](../../src/objects/m45-volume/README.md) | Authored finite dust-display surface and observed stellar catalogue | NOIRLab + Niittee optical composite, NOIRLab optical, two Spitzer composites, WISE | 136.2 ± 1.2 pc |
 | [Crab · M1](../../src/objects/m1-volume/README.md) | Released SITELLE ejecta samples with conditional expansion depth and separate pulsar-wind components | Hubble, two Webb views, Spitzer, VLA, Chandra | 2,000 pc adopted model scale |
 | [Lagoon · M8](../../src/objects/m8-volume/README.md) | Authored coherent front with local published structure constraints | ESO optical, VISTA infrared, Spitzer infrared | 1,326 −69/+77 pc |
 | [LMC](../../src/objects/lmc-volume/README.md) | Registered image colors on a simulated stellar-density prior | VISTA infrared, Horálek visible light, WISE infrared | The Local Group catalogue owns its distance |
@@ -56,11 +55,6 @@ The source-card previews never feed the cloud bake. Shared geometry and star pos
 
 Selecting a dataset recolors the retained cloud and updates its source context and URL while keeping the camera and scene. Horálek's camera remains unidentified, so its attribution names the photographer without inventing an instrument.
 
-![Pleiades optical composite in the shared galaxy app](../images/nebulae/m45-galaxy.png)
-
-Pleiades: Taavi Niittee / Tõrva Astronomy Club wide optical image, with central
-NOIRLab detail.
-
 ![Crab optical cloud in the shared galaxy app](../images/nebulae/m1-galaxy.png)
 
 Crab: NASA/ESA, Allison Loll, Jeff Hester and Davide De Martin; released SITELLE
@@ -94,7 +88,7 @@ Each slab is cropped to its emission, so decoded atlas size follows how much of 
 
 The ordinary bake begins after scientific fitting and material assignment:
 
-- Orion, Pleiades and Lagoon retain analytic emission components, per-component colors, stars and integration settings.
+- Orion and Lagoon retain analytic emission components, per-component colors, stars and integration settings.
 - Crab retains its sampled/model material inputs.
 - M2–9 retains three compressed RGB emission grids.
 - LMC retains the small density grid and three registered starless RGB material planes.

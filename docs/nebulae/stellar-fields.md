@@ -1,7 +1,7 @@
 # Stars around nebulae
 
 The main application prepares a spherical stellar neighbourhood around Orion,
-M2–9, Pleiades, Crab and Lagoon. The source photograph does not select its
+M2–9, Crab and Lagoon. The source photograph does not select its
 boundary or assign stellar depth. Each object keeps its compact catalogue extract
 and display settings in `source/stellar-field.json`; `source/delivery.json` pins it.
 The lab's image residuals and reconstruction caches remain separate.
@@ -40,8 +40,8 @@ live archive query.
    approximation. These are exaggerated light footprints, not stellar radii.
    The shared point renderer supplies perspective scaling as the camera moves.
 
-Explicit retained sources preserve the bright Pleiades catalogue stars, Crab
-pulsar. These keep their previous depths; they are not relabelled
+An explicit retained source preserves the Crab
+pulsar. It keeps its previous depth; it is not relabelled
 as Bailer-Jones distances. Nearby Gaia directions are excluded within the declared
 angular matching radius to avoid doubled lights. All spectral datasets share the
 same surrounding optical starfield; changing a nebula's false-color dataset does not
@@ -68,7 +68,7 @@ sparse M2–9 and Lagoon fields are not a complete view of every surrounding sta
 
 The normal clean-checkout [nebula preparation command](README.md#reproduce-from-a-clean-checkout)
 rebuilds the points alongside the cloud. An intentional catalogue refresh uses
-`node packages/bake/cli/prepare-nebula-field-catalogues.mts --two-stage m42-volume m2-9-volume m45-volume m8-volume`
+`node packages/bake/cli/prepare-nebula-field-catalogues.mts --two-stage m42-volume m2-9-volume m8-volume`
 (the Crab without `--two-stage`), needs the telescope's astronomy packages installed, and requires
 updating the delivery/source pins after inspecting the new selection. It is not
 part of ordinary installation. Refresh reuses the saved radius and magnitude

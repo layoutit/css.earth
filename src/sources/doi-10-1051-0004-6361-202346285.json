@@ -1,0 +1,41 @@
+{
+  "id": "doi-10-1051-0004-6361-202346285",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hunt & Reffert (2023): Improving the open cluster census",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346285"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/202346285",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202346285",
+      "checkedOn": "2026-10-10",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hunt & Reffert (2023), Astronomy & Astrophysics 673 A114",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/202346285"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 673 A114",
+  "creators": [
+    "Emily L. Hunt",
+    "Sabine Reffert"
+  ],
+  "publicationDate": "2023"
+}
