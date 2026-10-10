@@ -147,6 +147,38 @@
           }
         ]
       }
+    },
+    {
+      "id": "regions",
+      "path": "src/objects/homunculus-nebula-layers/source/regions.json",
+      "title": "Regions drawn on the picture: the equatorial skirt where it lies on the sky, over the lobes too",
+      "origin": "https://esahubble.org/images/potw1208a/",
+      "sourceUrl": "https://esahubble.org/images/potw1208a/",
+      "credit": "Drawn by hand on ESA/Hubble & NASA's picture",
+      "displayCredit": "Hubble",
+      "acquisition": "Drawn by hand on the picture in the Nebula Lab's Regions tool, as closed paths of picture pixels: the skirt's two fans either side of the waist. Tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-potw1208a",
+            "role": "material",
+            "evidence": "https://esahubble.org/images/potw1208a/"
+          }
+        ]
+      },
+      "license": "CC-BY-4.0",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esahubble.org/images/potw1208a/"
+          }
+        ]
+      }
     }
   ],
   "documents": [

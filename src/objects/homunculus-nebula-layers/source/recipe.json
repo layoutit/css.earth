@@ -77,7 +77,8 @@
         "detailPath": "detail.png"
       },
       "skirt": {
-        "reachArcsec": 9
+        "reachArcsec": 9,
+        "regionsPath": "regions.json"
       }
     }
   },

@@ -17,7 +17,7 @@ import { imageLayerShapeWalls, type ShapeWalls } from './shape-walls.ts';
 import { densityGrid, imageLayerDensityModel } from './density-grid.ts';
 import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles, surfaceEdgeStretch, SURFACE_MOST_CROSSINGS } from './surface.ts';
 import { imageLayerSurfaceMesh, type SurfaceTriangle } from './surface-mesh.ts';
-import { flattenProtrusions, imageLayerSurfaceSkirt } from './surface-skirt.ts';
+import { flattenProtrusions, imageLayerSurfaceSkirt, regionMask, type PictureRegions } from './surface-skirt.ts';
 import { imageLayerShapePatches, packShapePatches } from './shape-patches.ts';
 import { imageLayerBodyModel } from './body.ts';
 import { COLOR_PEAK, paintTexel as paint } from './texel.ts';
@@ -227,9 +227,11 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       const count=info.width*info.height,filaments=surface.filaments?Float32Array.from(await sharp(resolve(options.sourceDirectory,surface.filaments.path)).greyscale().resize(info.width,info.height,{fit:'fill'}).raw().toBuffer(),value=>value/255):undefined;
       const detailRgb=surface.filaments?.detailPath?await sharp(resolve(options.sourceDirectory,surface.filaments.detailPath)).removeAlpha().resize(info.width,info.height,{fit:'fill'}).raw().toBuffer():null;
       const detail=detailRgb?{value:Float32Array.from({length:count},(_,p)=>(detailRgb[3*p]!-128)/40),weight:Float32Array.from({length:count},(_,p)=>detailRgb[3*p+1]!/255)}:undefined;
-      meshTriangles=await imageLayerSurfaceMesh(surface,triangles,Buffer.from(base),info.width,info.height,sky,edgeStretch,filaments,detail);
+      // The skirt's drawn regions (names starting "skirt"): the skirt takes the picture there and the lobes under it are filled.
+      const cover=surface.skirt?.regionsPath?regionMask(JSON.parse(await readFile(resolve(options.sourceDirectory,surface.skirt.regionsPath),'utf8')) as PictureRegions,'skirt',info.width,info.height,3):undefined;
+      meshTriangles=await imageLayerSurfaceMesh(surface,triangles,Buffer.from(base),info.width,info.height,sky,edgeStretch,filaments,detail,cover);
       // The equatorial skirt outside the lobes, on its plane (./surface-skirt.ts), sorted with the lobes' triangles.
-      if(surface.skirt)meshTriangles.push(...imageLayerSurfaceSkirt(surface,surface.skirt,Buffer.from(base),info.width,info.height,sky,crossings));
+      if(surface.skirt)meshTriangles.push(...imageLayerSurfaceSkirt(surface,surface.skirt,Buffer.from(base),info.width,info.height,sky,crossings,cover));
       for(let p=0;p<count;p++)base[4*p+3]=0;
     }else{
       shapeWalls=imageLayerSurfaceWalls(base,info.width,info.height,crossings,arcsec,Math.hypot(...difference3(placed(-1,0,0),placed(1,0,0)))/info.width,(px,py)=>Math.hypot(...sky(px,py)),surface.starRadiusArcsec);

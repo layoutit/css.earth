@@ -44,6 +44,24 @@ export function flattenProtrusions(surface: Surface, triangles: Float32Array): F
   return out;
 }
 
+/** Regions drawn on the picture (`source/regions.json`): closed paths of picture pixels, each named. */
+export interface PictureRegions { dimensions: readonly [number, number]; regions: readonly { name: string; points: readonly (readonly [number, number])[] }[] }
+/** Where the regions whose names start with `prefix` cover the face grid, 0 to 1: their paths filled (even-odd per
+ * path, any path counting), scaled from the picture's dimensions to the grid's, and feathered by a box blur of
+ * `feather` pixels twice. */
+export function regionMask(regions: PictureRegions, prefix: string, width: number, height: number, feather: number): Float32Array {
+  const mask = new Float32Array(width * height), sx = width / regions.dimensions[0], sy = height / regions.dimensions[1];
+  for (const region of regions.regions) { if (!region.name.startsWith(prefix)) continue; const points = region.points.map(([x, y]) => [x * sx, y * sy] as const);
+    for (let y = 0; y < height; y++) { const cy = y + .5, xs: number[] = [];
+      for (let i = 0, j = points.length - 1; i < points.length; j = i++) { const [xi, yi] = points[i]!, [xj, yj] = points[j]!; if ((yi > cy) !== (yj > cy)) xs.push(xi + (cy - yi) / (yj - yi) * (xj - xi)); }
+      xs.sort((a, b) => a - b); for (let k = 0; k + 1 < xs.length; k += 2) for (let x = Math.max(0, Math.ceil(xs[k]! - .5)); x <= Math.min(width - 1, Math.floor(xs[k + 1]! - .5)); x++) mask[y * width + x] = 1; } }
+  let out = mask; for (let pass = 0; pass < 2; pass++) { const row = new Float32Array(out.length), next = new Float32Array(out.length);
+    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { let sum = 0, n = 0; for (let k = Math.max(0, x - feather); k <= Math.min(width - 1, x + feather); k++) { sum += out[y * width + k]!; n++; } row[y * width + x] = sum / n; }
+    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { let sum = 0, n = 0; for (let k = Math.max(0, y - feather); k <= Math.min(height - 1, y + feather); k++) { sum += row[k * width + x]!; n++; } next[y * width + x] = sum / n; }
+    out = next; }
+  return out;
+}
+
 /** The skirt's sheet: tiles a side, the feather in face pixels from the lobes' outline over which the sheet takes over
  * the picture, and the share of its reach over which it fades out at its rim. */
 export const SKIRT_TILES = 8, SKIRT_OUTLINE_FEATHER_PIXELS = 6, SKIRT_RIM_FADE = 0.25;
@@ -52,13 +70,14 @@ export const SKIRT_TILES = 8, SKIRT_OUTLINE_FEATHER_PIXELS = 6, SKIRT_RIM_FADE =
  * A bipolar nebula's equatorial skirt (`geometry.surface.skirt`): a thin disc in the plane through the star across the
  * pole, the plane that parts the lobes. Steffen et al. (2014) find no H2 from it, so the published surface does not hold
  * it; the picture shows it outside the lobes, two flat fans either side of the waist. The sheet takes the picture where
- * it lies on the sky, only outside the lobes' outline (`crossings`, feathered over SKIRT_OUTLINE_FEATHER_PIXELS) and
+ * it lies on the sky: where `cover` says (the skirt's drawn regions, over the lobes too), or else only outside the lobes'
+ * outline (`crossings`, feathered over SKIRT_OUTLINE_FEATHER_PIXELS); and
  * clear of the star's glare (out to twice `starRadiusArcsec`), out to `reachArcsec` from the star, fading over its last
  * SKIRT_RIM_FADE. It is cut into SKIRT_TILES by SKIRT_TILES tiles so each sorts on its own against the lobes; a tile that
  * holds no light is left out. Each tile is returned as a parallelogram of the picture's place (column, row, depth in
  * arcseconds) with its texture over it, as the lobes' triangles are, with the whole box drawn.
  */
-export function imageLayerSurfaceSkirt(surface: Surface, skirt: { reachArcsec: number }, photo: Buffer, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], crossings: SurfaceCrossings): SurfaceTriangle[] {
+export function imageLayerSurfaceSkirt(surface: Surface, skirt: { reachArcsec: number }, photo: Buffer, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], crossings: SurfaceCrossings, cover?: Float32Array): SurfaceTriangle[] {
   const { place } = surfaceOnPicture(surface, width, height, sky), [ox, oy, oz] = surface.originUnits, reach = skirt.reachArcsec / surface.arcsecPerUnit, count = width * height;
   const arcsecPerPixel = Math.hypot(...sky(1, 0).map((value, k) => value - sky(0, 0)[k]!)), cellsPerUnit = surface.arcsecPerUnit / arcsecPerPixel;
   // How far each pixel is outside the lobes' outline, in pixels (a chamfer distance from the pixels the surface crosses).
@@ -71,7 +90,7 @@ export function imageLayerSurfaceSkirt(surface: Surface, skirt: { reachArcsec: n
   // A point of the plane (file units from the star along the file's x and y) as its texel: the picture there, kept outside the lobes.
   const texel = (x: number, y: number, out: number[]) => { const [px, py] = place(ox + x, oy + y, oz), cx = Math.round(px), cy = Math.round(py), r = Math.hypot(x, y) / reach;
     if (cx < 0 || cy < 0 || cx >= width || cy >= height || r >= 1) { out[0] = out[1] = out[2] = out[3] = 0; return; } const p = cy * width + cx;
-    const keep = smooth(outside[p]! / SKIRT_OUTLINE_FEATHER_PIXELS) * smooth((1 - r) / SKIRT_RIM_FADE) * (glare > 0 ? smooth((Math.hypot(...sky(cx, cy)) - glare / 2) / (glare / 2)) : 1);
+    const keep = (cover ? cover[p]! : smooth(outside[p]! / SKIRT_OUTLINE_FEATHER_PIXELS)) * smooth((1 - r) / SKIRT_RIM_FADE) * (glare > 0 ? smooth((Math.hypot(...sky(cx, cy)) - glare / 2) / (glare / 2)) : 1);
     for (let c = 0; c < 3; c++) out[c] = photo[4 * p + c]!; out[3] = Math.round(photo[4 * p + 3]! * keep); };
   const tiles: SurfaceTriangle[] = [], side = 2 * reach / SKIRT_TILES, cells = Math.max(2, Math.ceil(side * cellsPerUnit)), sample = [0, 0, 0, 0];
   for (let i = 0; i < SKIRT_TILES; i++) for (let j = 0; j < SKIRT_TILES; j++) {

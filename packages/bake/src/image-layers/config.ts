@@ -112,11 +112,13 @@ export interface ImageLayerRecipe {
      * (./surface-mesh.ts), its dark lanes from the filament map at `filaments.path` drawn `filaments.darkness` dark, and
      * the star's glare given the ultraviolet detail at `filaments.detailPath`; both maps are built beside the recipe by
      * the body's authoring script. With `skirt` the picture outside the lobes, out to `skirt.reachArcsec` from the star, lies
-     * on a thin disc in the plane through the star across the pole (./surface-skirt.ts). */
+     * on a thin disc in the plane through the star across the pole (./surface-skirt.ts); with `skirt.regionsPath` the
+     * picture inside the regions drawn there whose names start with "skirt", over the lobes too, and the lobes under them
+     * are filled. */
     surface?: { source: string; basis: string; path: string; arcsecPerUnit: number; originUnits: [number, number, number];
       pole: { tiltDeg: number; paDeg: number; rollDeg: number; receding: '+z' | '-z' }; starRadiusArcsec?: number; fitArcsec: number;
       edgeFit?: { maxStretch: number; smoothDeg: number }; closedMesh?: true; filaments?: { path: string; darkness: number; detailPath?: string };
-      skirt?: { reachArcsec: number } };
+      skirt?: { reachArcsec: number; regionsPath?: string } };
     /** A nebula's published density grid (./density-grid.ts): a cube of gas densities a paper made from velocity cubes, a
      * speed standing for a depth. The file's rows are "x y z density", its first axis outermost. That first axis is the
      * sight line, toward the Sun at its `toward` end ("high" or "low"); its second axis points to position angle
@@ -309,7 +311,8 @@ const surfaceOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['surfac
       if (typeof f.darkness !== 'number' || !(f.darkness >= 0 && f.darkness <= 1)) throw new TypeError('geometry.surface.filaments.darkness is from 0 to 1.');
       if (f.detailPath !== undefined && (typeof f.detailPath !== 'string' || !f.detailPath)) throw new TypeError('geometry.surface.filaments.detailPath names the detail map beside the recipe.');
       return { filaments: { path: path(f.path), darkness: f.darkness, ...(f.detailPath ? { detailPath: path(f.detailPath) } : {}) } }; })()),
-    ...(s.skirt === undefined ? {} : { skirt: { reachArcsec: positive(object(s.skirt, 'geometry.surface.skirt').reachArcsec, 'geometry.surface.skirt.reachArcsec') } }) };
+    ...(s.skirt === undefined ? {} : (() => { const k = object(s.skirt, 'geometry.surface.skirt');
+      return { skirt: { reachArcsec: positive(k.reachArcsec, 'geometry.surface.skirt.reachArcsec'), ...(k.regionsPath === undefined ? {} : { regionsPath: path(k.regionsPath) }) } }; })()) };
 };
 const densityOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['densityGrid']> => {
   const d = object(v, 'geometry.densityGrid'), second = finite(d.secondAxisPaDeg, 'geometry.densityGrid.secondAxisPaDeg'), third = finite(d.thirdAxisPaDeg, 'geometry.densityGrid.thirdAxisPaDeg'), apart = (((third - second) % 360) + 360) % 360;

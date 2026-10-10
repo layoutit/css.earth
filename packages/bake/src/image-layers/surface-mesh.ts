@@ -96,7 +96,7 @@ export function pushPull(values: Float32Array[], weight: Float32Array, width: nu
  * (`closedMesh`). The star's own light, to `starRadiusArcsec` and fading to twice that, is not the shell's: there the
  * shell's color and optical depth are carried in from the lobes around it (`pushPull`).
  */
-export async function imageLayerSurfaceMesh(surface: Surface, triangles: Float32Array, photo: Buffer, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], stretch?: (east: number, north: number) => number, filaments?: Float32Array, detail?: { value: Float32Array; weight: Float32Array }): Promise<SurfaceTriangle[]> {
+export async function imageLayerSurfaceMesh(surface: Surface, triangles: Float32Array, photo: Buffer, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], stretch?: (east: number, north: number) => number, filaments?: Float32Array, detail?: { value: Float32Array; weight: Float32Array }, cover?: Float32Array): Promise<SurfaceTriangle[]> {
   await MeshoptSimplifier.ready;
   const open = welded(triangles), { positions, indices } = closedMesh(open.positions, open.indices), [kept, error] = MeshoptSimplifier.simplify(indices, positions, 3, Math.min(indices.length, 3 * SURFACE_MESH_TRIANGLES), 0.05);
   if (!(kept.length >= 3)) throw new RangeError(`The surface (${surface.path}) simplified to no triangles (error ${error}).`);
@@ -173,7 +173,7 @@ export async function imageLayerSurfaceMesh(surface: Surface, triangles: Float32
     if (cx < 0 || cy < 0 || cx >= width || cy >= height) return { px, py, share: 0 }; const p = cy * width + cx;
     if (!crossed[p] || lobes[most * p] !== lobe || Math.abs(depths[most * p]! - depth) > MESH_VISIBLE_ARCSEC) return { px, py, share: 0 };
     const t = Math.max(0, Math.min(1, (facingCos(normal) - MESH_KNOWN_COS) / (MESH_SEEN_COS - MESH_KNOWN_COS))), u = Math.max(0, Math.min(1, (around[p]! * (lobe ? recedingGain : 1) / ramp.top - MESH_LOBE_LIGHT[0]) / (MESH_LOBE_LIGHT[1] - MESH_LOBE_LIGHT[0])));
-    return { px, py, share: known[p]! < 1 && !((detail?.weight[p] ?? 0) > MESH_DETAIL_KNOWN) ? 0 : t * t * (3 - 2 * t) * u * u * (3 - 2 * u) }; };
+    return { px, py, share: known[p]! < 1 && !((detail?.weight[p] ?? 0) > MESH_DETAIL_KNOWN) ? 0 : t * t * (3 - 2 * t) * u * u * (3 - 2 * u) * (1 - (cover?.[p] ?? 0)) }; };
   // Each lobe on a chart of its own: a Mercator projection about the sight line from the lobe's middle (latitude from
   // the plane across the sight line, +90 degrees the point facing the Sun; longitude about it), conformal, so the dust
   // keeps its shape and only its scale changes, by sec(latitude), which the synthesis allows for. MESH_CHART_FROM_DEG
