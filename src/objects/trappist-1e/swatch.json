@@ -1,0 +1,118 @@
+{
+  "hex": "#eff9ff",
+  "rgb": [
+    239,
+    249,
+    255
+  ],
+  "colorSpace": "sRGB",
+  "basis": "Modeled, not observed. The color of the whole planet in one published climate simulation, the one this planet's default dataset shows, in its own star's light. Nobody has detected an atmosphere on this planet or light it reflects. Brightness-normalized for a swatch; not a representation of how bright the planet is.",
+  "generator": "packages/bake/authoring/trappist-1/swatches.mts",
+  "source": {
+    "title": "Wolf et al. (2022), ExoCAM: A 3D Climate Model for Exoplanet Atmospheres, The Planetary Science Journal 3, 7",
+    "url": "https://doi.org/10.3847/PSJ/ac3f3d",
+    "dataUrl": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc",
+    "dataRecord": "https://doi.org/10.5281/zenodo.5532765",
+    "license": "CC BY 4.0",
+    "columns": "FUS_toa_int and FDS_toa_int 53 to 63: the shortwave flux leaving and arriving at the top of the atmosphere in each spectral interval, in W/m2 on the model's 72 x 46 grid, each read by one range request; gw, the grid's area weights. Interval edges: https://raw.githubusercontent.com/storyofthewolf/ExoRT/f16cd9e8f2908b88d52d66a93dceb26ce71d94cc/source/src.n68equiv/radgrid.F90 (wavenum_edge).",
+    "basis": "The control run of the THAI \"Hab 1\" case: one bar of nitrogen with 400 ppm of carbon dioxide over a global ocean. The protocol fixes the ocean's albedo at 0.06 and ice and snow at 0.25 at every wavelength (Fauchez et al. 2020, https://doi.org/10.5194/gmd-13-707-2020), so the hue is the model's air and clouds, not a surface. One scenario among several that fit what is measured.",
+    "intervals": [
+      {
+        "interval": 53,
+        "fromNm": 751.9,
+        "toNm": 781.9,
+        "reflectance": 0.4505
+      },
+      {
+        "interval": 54,
+        "fromNm": 691.1,
+        "toNm": 751.9,
+        "reflectance": 0.4386
+      },
+      {
+        "interval": 55,
+        "fromNm": 666.7,
+        "toNm": 691.1,
+        "reflectance": 0.4568
+      },
+      {
+        "interval": 56,
+        "fromNm": 625,
+        "toNm": 666.7,
+        "reflectance": 0.4572
+      },
+      {
+        "interval": 57,
+        "fromNm": 605,
+        "toNm": 625,
+        "reflectance": 0.4665
+      },
+      {
+        "interval": 58,
+        "fromNm": 566.6,
+        "toNm": 605,
+        "reflectance": 0.466
+      },
+      {
+        "interval": 59,
+        "fromNm": 549.5,
+        "toNm": 566.6,
+        "reflectance": 0.4738
+      },
+      {
+        "interval": 60,
+        "fromNm": 540,
+        "toNm": 549.5,
+        "reflectance": 0.4698
+      },
+      {
+        "interval": 61,
+        "fromNm": 450,
+        "toNm": 540,
+        "reflectance": 0.4966
+      },
+      {
+        "interval": 62,
+        "fromNm": 390,
+        "toNm": 450,
+        "reflectance": 0.5409
+      },
+      {
+        "interval": 63,
+        "fromNm": 341.2,
+        "toNm": 390,
+        "reflectance": 0.5901
+      }
+    ]
+  },
+  "conversion": {
+    "observer": {
+      "name": "CIE 1931 2 degree standard observer",
+      "path": "src/references/cie-1931-2deg/CIE_xyz_1931_2deg.csv"
+    },
+    "illuminant": {
+      "name": "The light of TRAPPIST-1: its Gaia DR3 XP sampled spectrum, as the star's color dataset reads it",
+      "path": "src/objects/trappist-1/source/photometry/gaia-dr3-xp-sampled.csv",
+      "source": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; BP/RP spectra: De Angeli et al. (2023), A&A 674, A2; external calibration: Montegriffo et al. (2023), A&A 674, A3",
+      "whitePointXy": [
+        0.4250570082,
+        0.4270996364
+      ]
+    },
+    "integration": "Reflectance times the star's flux times each CIE matching function, summed at the even wavelengths from 380 to 780 nm, normalized to Y = 1 for a perfect diffuser.",
+    "chromaticAdaptation": "Bradford adaptation from the star's white to the sRGB D65 white (x=0.3127, y=0.329): the surface as an eye adapted to that star's light sees it, the convention of the Solar System swatches. Unadapted, everything the star lights is orange.",
+    "brightnessNormalization": "Divide the three linear sRGB channels by their maximum, preserving channel ratios; apply the sRGB transfer function, multiply by 255, and round. No hue adjustment or gamut clipping.",
+    "implementation": "packages/bake/src/objects/color/reflected-light-swatch.ts",
+    "xyzStarWhiteY1": [
+      0.4647468876,
+      0.4761592277,
+      0.1757419239
+    ],
+    "linearSrgbD65": [
+      0.4430975159,
+      0.4852026588,
+      0.5132223172
+    ],
+    "reflectance": "Each interval's reflectance is the flux leaving over the flux arriving, both summed over the globe with the area weights; a wavelength takes the value of the interval that holds it."
+  }
+}

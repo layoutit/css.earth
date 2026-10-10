@@ -153,7 +153,8 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
 - `src/objects/` holds the shared object libraries the per-body preparation pipelines in `packages/bake/authoring/<body>/` (and `packages/telescope-cli/authoring/<body>/`) import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-color and asinh displays, palettes and tints, a placed star's catalogue color,
-    and the uniform color of whole-disc photometry. The host passes the CIE 1931 color-matching table in.
+    the uniform color of whole-disc photometry, and a body's world swatch from a reflectance spectrum in a given light
+    (`reflected-light-swatch.ts`). The host passes the CIE 1931 color-matching table in.
   - `objects/geometry`: shape models (OBJ, STL, PDS plate, vertex-facet and radius tables, FITS facet fields) and the records
     that describe them, radial meshes and their simplification, controlled shape cameras and band alignment, ellipsoids, the
     Lambert attenuation atlas and the radial-layer contract.
