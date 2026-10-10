@@ -407,6 +407,16 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   const c = (listed.spec.planets as { id: string; name: string; orbit: { planetName?: string } }[]).find(planet => planet.id === 'hd-1c')!;
   assert.deepEqual([c.name, c.orbit.planetName], ['HD 1 c', 'HD 1.01']);
   assert.match(listed.notes.join('; '), /HD 1 c: listed in the NASA Exoplanet Archive as HD 1\.01; named by its host and the archive's letter c/u);
+  // A Kepler star the archive lists by its KOI number takes the names of its table of Kepler names (Kepler-90 for KOI-351).
+  const koi = { ...archive, async text(url: string) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''), letter = /from keplernames where pl_name='KOI-1 ([a-z])'/u.exec(query)?.[1];
+    if (query.includes('from keplernames')) return `kepid,kepler_name\n${letter ? `"11442793","Kepler-9 ${letter}"\n` : ''}`;
+    const answer = await archive.text(url.replaceAll('KOI-1', 'HD+1')); return query.includes('from ps where hostname') ? answer.replaceAll('HD 1', 'KOI-1') : answer; } };
+  const kepler = await archiveSpec(koi, 'KOI-1', { ids: new Set(), names: new Map(), stars: [] }), keplerPlanets = kepler.spec.planets as { id: string; name: string; description: string; orbit: { planetName?: string } }[];
+  assert.deepEqual([kepler.spec.id, kepler.spec.name, kepler.spec.system, kepler.spec.target], ['kepler-9', 'Kepler-9', 'Kepler-9 system', 'KOI-1'], 'shown by its Kepler name, resolved by the archive\'s');
+  assert.deepEqual(keplerPlanets.map(planet => [planet.id, planet.name, planet.orbit.planetName]), [['kepler-9b', 'Kepler-9 b', 'KOI-1 b'], ['kepler-9c', 'Kepler-9 c', 'KOI-1 c']]);
+  assert.match(keplerPlanets[0]!.description, /^Transiting planet of Kepler-9 /u);
+  assert.equal((kepler.spec.text as { card: string }).card, '2 planets cross Kepler-9 as seen from Earth: b, c.');
+  assert.match(kepler.notes.join('; '), /Kepler-9 b: listed in the NASA Exoplanet Archive as KOI-1 b; named as its table of Kepler names does/u);
   // A host the universe names otherwise is found by the Gaia DR3 source its position cites.
   const byGaia = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-one']), names: new Map(), stars: [], gaia: new Map([['123456789', 'hd-one']]) });
   assert.equal(byGaia.spec.host, 'hd-one');

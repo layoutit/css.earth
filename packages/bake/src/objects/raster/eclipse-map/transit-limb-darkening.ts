@@ -10,6 +10,8 @@ import { measureTransitShift } from './transit-timing.ts';
 
 /** TESS times are BJD_TDB - 2457000; the hosted orbit's transit time is BJD_TDB - 2400000.5. */
 const BTJD_TO_BMJD = 2457000 - 2400000.5;
+/** Kepler times are BJD_TDB - 2454833. */
+const BKJD_TO_BMJD = 2454833 - 2400000.5;
 const HALF_WINDOW_DAYS = 0.2, OUT_OF_TRANSIT_DAYS = 0.06, IN_TRANSIT_DAYS = 0.05, MIN_OUTSIDE = 150, MIN_INSIDE = 60;
 
 /** Which samples a transit keeps: those within `halfWindowDays` of mid-transit, the baseline beyond `outsideDays`, and a transit
@@ -18,11 +20,13 @@ export interface TransitWindow { readonly halfWindowDays: number; readonly outsi
 export const DEFAULT_TRANSIT_WINDOW: TransitWindow = Object.freeze({ halfWindowDays: HALF_WINDOW_DAYS, outsideDays: OUT_OF_TRANSIT_DAYS, insideDays: IN_TRANSIT_DAYS, minOutside: MIN_OUTSIDE, minInside: MIN_INSIDE });
 
 /** A window from a published transit duration (first to fourth contact): the baseline from 0.6 to 1.5 durations either side of
- * mid-transit, the middle 80% of the transit counted as in it, and at 2-minute cadence at least half its samples on each side. */
+ * mid-transit, the middle 80% of the transit counted as in it, and at 2-minute cadence at least half its samples on each side.
+ * A slower cadence (Kepler's 30 minutes puts six samples in a three-hour transit) asks half its samples too, and never fewer than
+ * the four a baseline line and its scatter need and two in the transit. */
 export function transitWindow(durationHours: number, cadenceSeconds = 120): TransitWindow {
   if (!(durationHours > 0 && Number.isFinite(durationHours))) throw new RangeError(`A transit window needs a positive duration, not ${durationHours} h.`);
-  const d = durationHours / 24, perDay = 86400 / cadenceSeconds;
-  return { halfWindowDays: 1.5 * d, outsideDays: 0.6 * d, insideDays: 0.4 * d, minOutside: Math.max(10, Math.floor(0.9 * d * perDay)), minInside: Math.max(5, Math.floor(0.4 * d * perDay)) };
+  const d = durationHours / 24, perDay = 86400 / cadenceSeconds, [leastOutside, leastInside] = cadenceSeconds > 120 ? [4, 2] : [10, 5];
+  return { halfWindowDays: 1.5 * d, outsideDays: 0.6 * d, insideDays: 0.4 * d, minOutside: Math.max(leastOutside, Math.floor(0.9 * d * perDay)), minInside: Math.max(leastInside, Math.floor(0.4 * d * perDay)) };
 }
 
 export interface TessLightCurve {
@@ -51,9 +55,50 @@ export function readTessLightCurve(bytes: Buffer): TessLightCurve {
   return { sector, ticId, exposureSeconds: integrationSeconds, time: Float64Array.from(time), flux: Float64Array.from(flux), error: Float64Array.from(error) };
 }
 
+export interface KeplerLightCurve {
+  readonly quarter: number; readonly keplerId: number; readonly exposureSeconds: number; readonly cadenceSeconds: number;
+  readonly time: Float64Array; readonly flux: Float64Array; readonly error: Float64Array;
+}
+
+/** The good-quality (SAP_QUALITY 0) PDCSAP samples of a Kepler long-cadence light-curve file (one quarter, 30-minute cadence), on
+ * the BMJD_TDB scale. The header must state the TDB barycentric time system Kepler uses and the long cadence, or the file is refused. */
+export function readKeplerLightCurve(bytes: Buffer): KeplerLightCurve {
+  const [primary, table] = readFitsHdus(bytes);
+  if (!primary || !table || table.extname !== 'LIGHTCURVE') throw new TypeError('A Kepler light-curve file has a LIGHTCURVE table after its primary header.');
+  const { TIMESYS, BJDREFI, BJDREFF, TIMEUNIT } = table.header;
+  if (TIMESYS !== 'TDB' || BJDREFI !== 2454833 || BJDREFF !== 0 || TIMEUNIT !== 'd') throw new TypeError('The light curve must be in BJD_TDB - 2454833 days.');
+  const quarter = Number(primary.header.QUARTER), keplerId = Number(primary.header.KEPLERID);
+  if (!Number.isInteger(quarter) || !Number.isInteger(keplerId) || primary.header.OBSMODE !== 'long cadence') throw new TypeError('The light curve must state its quarter, its Kepler id and the long cadence.');
+  const integrationSeconds = Number(table.header.INT_TIME) * Number(table.header.NUM_FRM), cadenceSeconds = Number(table.header.TIMEDEL) * 86400;
+  if (!(Number.isFinite(integrationSeconds) && integrationSeconds > 0 && cadenceSeconds >= integrationSeconds && Number(table.header.TIMEPIXR) === .5))
+    throw new TypeError('The light curve must state its centered photon-accumulation duration and its cadence.');
+  const rows = binaryTable(table), columns = ['TIME', 'PDCSAP_FLUX', 'PDCSAP_FLUX_ERR', 'SAP_QUALITY'].map(name => tableColumn(rows, name));
+  const time: number[] = [], flux: number[] = [], error: number[] = [];
+  for (let row = 0; row < rows.rows; row++) {
+    const [t, f, e, quality] = columns.map(column => numbers(bytes, rows, row, column)[0]!);
+    if (quality === 0 && [t, f, e].every(Number.isFinite)) { time.push(t! + BKJD_TO_BMJD); flux.push(f!); error.push(e!); }
+  }
+  return { quarter, keplerId, exposureSeconds: integrationSeconds, cadenceSeconds, time: Float64Array.from(time), flux: Float64Array.from(flux), error: Float64Array.from(error) };
+}
+
+/** A light curve a transit is folded from, of either mission: `window` is its TESS sector or its Kepler quarter. */
+export interface TransitLightCurve {
+  readonly mission: 'TESS' | 'Kepler'; readonly window: number; readonly cadenceSeconds: number;
+  readonly time: Float64Array; readonly flux: Float64Array; readonly error: Float64Array;
+}
+/** TESS SPOC light curves are folded at their 2-minute cadence, the transit window's default. */
+const TESS_CADENCE_SECONDS = 120;
+/** The file's light curve by the mission its primary header names (TELESCOP): a TESS SPOC sector or a Kepler long-cadence quarter. */
+export function readTransitLightCurve(bytes: Buffer): TransitLightCurve {
+  const telescope = readFitsHdus(bytes)[0]?.header.TELESCOP;
+  if (telescope === 'Kepler') { const { quarter, cadenceSeconds, time, flux, error } = readKeplerLightCurve(bytes); return { mission: 'Kepler', window: quarter, cadenceSeconds, time, flux, error }; }
+  const { sector, time, flux, error } = readTessLightCurve(bytes);
+  return { mission: 'TESS', window: sector, cadenceSeconds: TESS_CADENCE_SECONDS, time, flux, error };
+}
+
 /** Every transit in the light curves with at least `MIN_OUTSIDE` samples beyond 0.06 d and `MIN_INSIDE` within 0.05 d of mid-transit
  * (inside a 0.2 d half-window), normalised by its out-of-transit line and folded onto the orbit's reference transit, in time order. */
-export function foldTransits(curves: readonly TessLightCurve[], orbit: Pick<HostedOrbit, 'periodDays' | 'transitTimeBmjdTdb'>, window: TransitWindow = DEFAULT_TRANSIT_WINDOW) {
+export function foldTransits(curves: readonly Pick<TessLightCurve, 'time' | 'flux' | 'error'>[], orbit: Pick<HostedOrbit, 'periodDays' | 'transitTimeBmjdTdb'>, window: TransitWindow = DEFAULT_TRANSIT_WINDOW) {
   const samples: [number, number, number][] = [];
   let transits = 0;
   for (const curve of curves) {

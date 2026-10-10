@@ -13,7 +13,7 @@ import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existi
 import { TIC, ticRow, wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';
 import { hasArchiveSpectrum, orbitFold, timingSigma } from './planets/planet-charts.mts';
-import { detectTransit, type TessArchive } from './planets/transit-chart.mts';
+import { detectTransit, keplerName, type TessArchive } from './planets/transit-chart.mts';
 import { thermalFromArchive } from './planets/planet-datasets.mts';
 
 const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum,disc_facility,sy_pnum';
@@ -60,8 +60,12 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   if (!rows.length) throw new Error(`The NASA Exoplanet Archive has no default parameter set for a host named ${hostname}.`);
   // A planet around both stars of a pair needs the pair's orbit, which only a paper gives: built by hand, as Kepler-16 is.
   if (rows.some(row => row.circumbinary)) throw new Error(`${hostname}: its planets orbit both stars of a pair (circumbinary); the pair's orbit comes from a paper, so build it by hand as Kepler-16 is.`);
+  // A Kepler star the archive still lists by its KOI number (KOI-351) is shown by the names its table of Kepler names gives its
+  // planets (Kepler-90 b for KOI-351 b); the archive's own names stay the ones its tables are asked by.
+  const koi = /^KOI-\d+$/u.test(hostname), kepler = new Map<string, string>();
+  if (koi) for (const row of rows) { const found = await keplerName(archive, row.planet); if (found) kepler.set(row.planet, found.name); }
   // A planet's name prefix names its host, except that a companion's planet (TOI-2267 d, around TOI-2267 B) is named by the system.
-  const first = rows[0]!, named = planetPrefix(first.planet, first.letter), prefix = named && hostname.match(/^(.+) [B-D]$/u)?.[1] === named ? undefined : named;
+  const first = rows[0]!, named = planetPrefix(kepler.get(first.planet) ?? first.planet, first.letter), host = koi && named ? named : hostname, prefix = named && hostname.match(/^(.+) [B-D]$/u)?.[1] === named ? undefined : named;
   // The host as the universe knows it, by id or name; else its id by the rule (identity.mts).
   // By the Gaia DR3 source its position cites first: the universe may name it otherwise (eps Indi A for the archive's eps Ind A).
   // A name is matched only to a placed star: TOI-2267 B, the host of TOI-2267 d, is not the planet TOI-2267 b (toi-2267b).
@@ -78,11 +82,12 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   const drafted = await Promise.all(rows.map(async (row): Promise<{ skip?: string; note: string[]; found?: Found }> => {
     // A confirmed planet the archive still lists by its TESS or Kepler number ("TOI-406.01", letter b) is named by its host and the
     // archive's letter; the archive's name stays the one its tables are asked by. A bare candidate number without a letter is refused.
-    const listed = /\.\d+$/u.test(row.planet), name = listed ? `${hostname} ${row.letter}` : row.planet;
+    const listed = /\.\d+$/u.test(row.planet), name = kepler.get(row.planet) ?? (listed ? `${hostname} ${row.letter}` : row.planet);
     const id = planetId(hostId, row.letter), planetRows = orbitRows.filter(entry => entry.name === row.planet), note: string[] = [];
     const held = duplicateName(universe, row.planet) ?? duplicateName(universe, name);
     if (listed && !/^[a-z]$/u.test(row.letter)) return { skip: `${row.planet}: a candidate designation with no planet letter in the archive`, note };
     if (listed) note.push(`${name}: listed in the NASA Exoplanet Archive as ${row.planet}; named by its host and the archive's letter ${row.letter}`);
+    else if (name !== row.planet) note.push(`${name}: listed in the NASA Exoplanet Archive as ${row.planet}; named as its table of Kepler names does`);
     if (existing(id) || held) return { note: [`${name} is already in the universe as ${held ?? id}`] };
     // A planet found without a transit takes the measured-orbit route: one paper's whole orbit, or it is left out with the reason.
     const measured = !row.transit, method = row.method.toLowerCase();
@@ -101,7 +106,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     const defaultRow = assembled.row ?? planetRows.find(entry => entry.isDefault)!;
     // A measured dayside temperature in the archive's emission table gives the planet its thermal color (planet-datasets.mts).
     if (!thermal) note.push(`${name}: ${why}; its gray takes the host's light`);
-    const quotes = await wikipediaQuotes(archive, [name, hostname], [name, row.planet]);
+    const quotes = await wikipediaQuotes(archive, [name, host], [name, row.planet]);
     if (!quotes) note.push(`${name}: no Wikipedia lead to quote`);
     if (measured) note.push(`${name}: found by ${method}; its whole orbit is ${defaultRow.label}'s fit${defaultRow.isDefault ? ', the archive\'s default' : ''}${modelSize ? ", and its size the archive's model from its mass" : ''}`);
     const massText = assembled.mass.unmeasured ? 'no pl_bmassj in pscomppars' : `pl_bmassj ${mass}`;
@@ -111,7 +116,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     // A facility the archive names with its abbreviation reads by it (TESS); "Multiple Observatories" names none.
     const facility = row.facility === undefined || /^multiple observatories$/iu.test(row.facility) ? undefined : /\(([^()]+)\)$/u.exec(row.facility)?.[1] ?? row.facility;
     const discovered = `${row.year ? ` in ${row.year}` : ''}${facility ? ` by ${facility}` : ''}`, system = row.systemPlanets ?? 0, count = system ? rows.length : 0;
-    const family = count > 1 ? `It is one of ${count} planets known around ${hostname}.` : count === 1 ? `It is the only planet known around ${hostname}.` : '';
+    const family = count > 1 ? `It is one of ${count} planets known around ${host}.` : count === 1 ? `It is the only planet known around ${host}.` : '';
     const facts = `disc_year ${row.year ?? 'none'}, disc_facility ${row.facility ?? 'none'}, sy_pnum ${system || 'none'}${system > count ? `, ${count} of them with hostname ${hostname}` : ''}`;
     const text = measured ? {
       card: fit(110, `${name} was found${discovered} by ${method}; it does not cross its star.`, `${name} was found by ${method}; it does not cross its star.`),
@@ -124,9 +129,9 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
       locator: `NASA Exoplanet Archive ps table, default parameter set (pl_refname ${defaultRow.reference}): ${facts}; pl_orbper ${period}, pl_radj ${radius}, ${massText}`,
     };
     return { note, found: { period, planet: row.planet, transits: !measured, entry: { id, name, ...(thermal ? { thermal } : {}),
-      description: measured ? `Planet of ${hostname} found by ${method}, with a ${short(period, 3)}-day year${year}.` : `Transiting planet of ${hostname} with a ${short(period, 3)}-day year${year}.`,
+      description: measured ? `Planet of ${host} found by ${method}, with a ${short(period, 3)}-day year${year}.` : `Transiting planet of ${host} with a ${short(period, 3)}-day year${year}.`,
       paper: { url: defaultRow.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: defaultRow.label },
-      orbit: { archive: 'nasa-ps', ...(measured ? { measured: true } : { reference: defaultRow.reference }), ...(listed ? { planetName: row.planet } : {}) },
+      orbit: { archive: 'nasa-ps', ...(measured ? { measured: true } : { reference: defaultRow.reference }), ...(name !== row.planet ? { planetName: row.planet } : {}) },
       text: { ...text,
         ...(quotes ? { quotes } : {}) } } } };
   }));
@@ -157,7 +162,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   const cited = (picked: ReturnType<typeof pick>, key: string) => picked === undefined ? 'gaia-flame' as const : { value: picked.value, ...(picked.err ? { uncertainty: picked.err } : {}), source: `${picked.row.label}, the stellar ${key} of ${from(picked.row)} in the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
   // "a star of 8,450 K" needs no article chosen by the number; the distance is set off by commas mid-sentence.
   const n = planets.length, dist = star.dist === undefined ? '' : `, ${short(star.dist, 3)} parsecs away`, mid = dist ? `${dist},` : '', allTransit = sorted.every(item => item.transits);
-  const kind = allTransit ? `transiting planet${n === 1 ? '' : 's'}` : `planet${n === 1 ? '' : 's'}`, names = planets.map(p => String((p as { name: string }).name)), list = names.map(name => name.replace(`${hostname} `, '')).sort((a, b) => a.localeCompare(b)).join(', ');
+  const kind = allTransit ? `transiting planet${n === 1 ? '' : 's'}` : `planet${n === 1 ? '' : 's'}`, names = planets.map(p => String((p as { name: string }).name)), list = names.map(name => name.replace(`${host} `, '')).sort((a, b) => a.localeCompare(b)).join(', ');
   if (existing(hostId)) notes.push(`${hostname} is already in the universe as ${hostId}`);
   const entry = existing(hostId) ? { host: hostId, planets, notes: skipped } : {
     // The host is named as its planets name it (pi Men for pi Men c), the archive's host name when they match.
@@ -165,12 +170,12 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     target: hostname, ...(star.gaiaDr3 ? { gaia: star.gaiaDr3 } : {}), paper: { url: star.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: star.label },
     radius: ticRadius ?? cited(rad, 'radius'), temperature: temperature ?? cited(teff, 'temperature'), mass: ticMass ?? cited(mass, 'mass'),
     // The factsheet shows the star's size and distance; the text names its planets and whose values the star follows.
-    text: { card: fit(110, allTransit ? (n === 1 ? `${names[0]} crosses ${hostname} as seen from Earth, which is how it was found.` : `${n} planets cross ${hostname} as seen from Earth: ${list}.`)
-        : n === 1 ? `${hostname}'s planet ${names[0]} is placed on the orbit its paper measured.` : `${hostname}'s planets ${list} are placed on the orbits their papers measured.`,
-      `${hostname} has ${n} known ${kind}.`),
+    text: { card: fit(110, allTransit ? (n === 1 ? `${names[0]} crosses ${host} as seen from Earth, which is how it was found.` : `${n} planets cross ${host} as seen from Earth: ${list}.`)
+        : n === 1 ? `${host}'s planet ${names[0]} is placed on the orbit its paper measured.` : `${host}'s planets ${list} are placed on the orbits their papers measured.`,
+      `${host} has ${n} known ${kind}.`),
       introduction: (([r, t]) => r === t ? `Its radius and temperature follow ${r}.` : `Its radius follows ${r}, and its temperature ${t}.`)([rad ? rad.row.label : ticRadius ? 'the TESS Input Catalog v8.2' : 'Gaia DR3 FLAME', teff ? teff.row.label : 'the TESS Input Catalog v8.2']),
       locator: `NASA Exoplanet Archive ps table (st_refname ${[...new Set([teff, rad, mass].flatMap(picked => picked ? [picked.row.reference] : []))].join(', ')}): ${teff ? `st_teff ${teff.value}` : `no st_teff; TIC ${tic!.TIC} Teff ${tic!.Teff}`}${rad ? `, st_rad ${rad.value}` : ''}${mass ? `, st_mass ${mass.value}` : ''}`,
-      ...await quotesFor([hostname], [hostname]) },
+      ...await quotesFor([host], [host]) },
     planets, notes: skipped };
   // The other stars of a multiple system: the wide ones Gaia separates, from El-Badry et al. (2021); the rest are named as missing.
   let companions: Record<string, unknown>[] = [];

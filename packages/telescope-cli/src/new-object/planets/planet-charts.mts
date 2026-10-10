@@ -77,14 +77,16 @@ async function transitFold(id: string): Promise<Fold> {
 }
 /** The same fold on an orbit given directly: the draft folds a planet on the archive orbit it assembled, before any record exists. */
 export async function orbitFold(orbitOf: () => { readonly periodDays: number; readonly transitTimeBmjdTdb: number }): Promise<Fold> {
-  const { foldTransits, readTessLightCurve, transitWindow } = await import('@cssearth/bake/objects/raster');
-  const read = (curves: readonly Buffer[]) => curves.map(bytes => readTessLightCurve(bytes)), none = { transits: 0, depthPpm: 0, errorPpm: Infinity };
+  const { foldTransits, readTransitLightCurve, transitWindow } = await import('@cssearth/bake/objects/raster');
+  // A file is read once: the dip is looked for at every 2-minute step of the ephemeris's uncertainty, over the same files.
+  const held = new WeakMap<Buffer, ReturnType<typeof readTransitLightCurve>>(), none = { transits: 0, depthPpm: 0, errorPpm: Infinity };
+  const read = (curves: readonly Buffer[]) => curves.map(bytes => { const curve = held.get(bytes) ?? readTransitLightCurve(bytes); held.set(bytes, curve); return curve; });
   return {
     midBmjd(curves) { const times = read(curves).flatMap(curve => [curve.time[0]!, curve.time.at(-1)!]); return (Math.min(...times) + Math.max(...times)) / 2; },
     measure(curves, durationHours, shiftMinutes) {
       try {
-        const base = orbitOf(), orbit = { ...base, transitTimeBmjdTdb: base.transitTimeBmjdTdb + shiftMinutes / 1440 }, window = transitWindow(durationHours);
-        const folded = foldTransits(read(curves), orbit, window), inside: number[] = [], outside: number[] = [];
+        const base = orbitOf(), orbit = { ...base, transitTimeBmjdTdb: base.transitTimeBmjdTdb + shiftMinutes / 1440 }, light = read(curves), window = transitWindow(durationHours, light[0]?.cadenceSeconds);
+        const folded = foldTransits(light, orbit, window), inside: number[] = [], outside: number[] = [];
         folded.time.forEach((time, i) => { const offset = Math.abs(time - orbit.transitTimeBmjdTdb); if (offset < 0.3 * durationHours / 24) inside.push(folded.flux[i]!); else if (offset > window.outsideDays) outside.push(folded.flux[i]!); });
         if (inside.length < 3 || outside.length < 3) return none;
         const mean = (values: number[]) => values.reduce((sum, value) => sum + value, 0) / values.length, level = mean(outside);
@@ -145,7 +147,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
     report.push(`${id}: ${spec.title} from ${first.label}, ${rows.length} bins${chosen.papers > 1 ? ` (of ${chosen.papers} papers)` : ''}`);
     drawn.push(`its ${spec.title}, ${rows.length} bins from ${first.label} in the archive's ${spec.table} table${chosen.papers > 1 ? `, the most of its ${chosen.papers} papers` : ''}`);
   }
-  // The transit as TESS recorded it (transit-chart.mts), after the spectra.
+  // The transit as TESS, or for a Kepler star Kepler, recorded it (transit-chart.mts), after the spectra.
   const transit = await installTransitChart(files, id, name, archive, tess ?? await liveTessArchive(), await transitFold(id), await timingSigma(archive, archiveName), archiveName);
   report.push(transit.report);
   if (transit.recipe) { charts.push(transit.recipe); controls.push(transit.control); inputs.push(...transit.inputs); operations.push(...transit.operations); drawn.push(transit.readme); }
@@ -154,14 +156,14 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
   content.charts = controls;
   files.set(`${s}/content/object.json`, json(content));
   const manifest = read(`${s}/manifest.json`);
-  manifest.inputs = [...manifest.inputs.filter((input: { id: string }) => !String(input.id).startsWith(`${id}-archive-`) && !String(input.id).startsWith(`${id}-tess-sector-`)), ...inputs];
+  manifest.inputs = [...manifest.inputs.filter((input: { id: string }) => !String(input.id).startsWith(`${id}-archive-`) && !String(input.id).startsWith(`${id}-tess-sector-`) && !String(input.id).startsWith(`${id}-kepler-quarter-`)), ...inputs];
   manifest.documents = [...(manifest.documents ?? []).filter((document: { path: string }) => document.path !== 'content/charts.json'),
     { path: 'content/charts.json', sourceBinding: { kind: 'local', reason: 'Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths.' } }];
   files.set(`${s}/manifest.json`, json(manifest));
   // The archive rows are bound to their own catalogue record, as a planet's emission-table rows are (dataset.mts).
   bindInputs(files, id);
   const plan = read(`${s}/preparation/acquisition.json`);
-  plan.operations = [...plan.operations.filter((operation: { path?: string }) => !/^(science\/archive-spectra|photometry\/tess)\//u.test(String(operation.path ?? ''))), ...operations];
+  plan.operations = [...plan.operations.filter((operation: { path?: string }) => !/^(science\/archive-spectra|photometry\/(tess|kepler))\//u.test(String(operation.path ?? ''))), ...operations];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   // The README, the package's source record, says what each chart draws; a rerun replaces its paragraph.
   const readme = `**Charts.** The orbits of ${host.name}'s planets from above, from their hosted-orbit records${drawn.length ? `, and ${drawn.join('; ')}` : ''}. Upper limits and rows without an error are left out.`;
@@ -184,8 +186,10 @@ export async function chartHosts(root: string, hostIds: readonly string[], archi
       for (const path of paths) files.set(`src/objects/${id}/${path}`, await readFile(resolve(root, 'src/objects', id, path), 'utf8'));
       const report = await installPlanetCharts(files, id, spec.planets[0].name, { id: hostId, name: host.displayName }, archive, undefined, spec.planets[0].orbit?.planetName);
       // Light curves a planet no longer charts (the gate refused it) are not left for the manifest check to find undeclared.
-      const tess = resolve(root, 'src/objects', id, 'source/photometry/tess');
-      for (const name of await readdir(tess).catch(() => [] as string[])) if (!files.has(`src/objects/${id}/source/photometry/tess/${name}`)) await rm(resolve(tess, name));
+      for (const mission of ['tess', 'kepler']) {
+        const held = resolve(root, 'src/objects', id, 'source/photometry', mission);
+        for (const name of await readdir(held).catch(() => [] as string[])) if (!files.has(`src/objects/${id}/source/photometry/${mission}/${name}`)) await rm(resolve(held, name));
+      }
       for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
       lines.push(`${id}: orbits${report.length ? `; ${report.join('; ').replaceAll(`${id}: `, '')}` : ''}`); progress(lines.at(-1)!);
     }
