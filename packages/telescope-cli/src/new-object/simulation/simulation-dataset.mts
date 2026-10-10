@@ -298,11 +298,15 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
     license: release.license.name, licenseEvidence: [release.recordUrl, release.license.url] };
   const kept = { redistribution: `Exact bytes of the release; ${release.license.name} with attribution.`, consumers: [consumer] };
   const title = `${entry.quantity} (${entry.variable}) of ${name} in the ${entry.model} simulation: ${release.title}`;
-  manifest.inputs = [...requireArray(manifest.inputs, `${id} manifest inputs`).filter(item => ![input, grid].includes(String(requireRecord(item, `${id} manifest input`).id))),
+  // A file's header is kept once: every dataset drawn from that file reads the same first bytes, and is named among its consumers.
+  const declared = requireArray(manifest.inputs, `${id} manifest inputs`).map(item => requireRecord(item, `${id} manifest input`)).filter(item => item.id !== input);
+  const header = ranges ? declared.find(item => item.path === paths.head) : declared.find(item => item.id === grid);
+  const readers = [...new Set([...(ranges && header ? requireArray(header.consumers, `${id} header consumers`).map(String) : []), consumer])];
+  manifest.inputs = [...declared.filter(item => item !== header),
     ...(ranges ? [{ id: input, path: paths.field, range: ranges.field, ...shared, title,
       acquisition: `One range request to Zenodo record ${release.doi}: the bytes of ${entry.variable}${selection} in ${entry.file}, where the file's header puts them. The ${sizeText(release.bytes)} file is never fetched whole. A model output, not an observation.`, ...kept },
-    { id: grid, path: paths.head, range: ranges.head, ...shared, title: `Header and coordinate variables of ${entry.file}, the ${entry.model} simulation of ${name}`,
-      acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...kept }]
+    { id: header?.id ?? grid, path: paths.head, range: ranges.head, ...shared, title: `Header and coordinate variables of ${entry.file}, the ${entry.model} simulation of ${name}`,
+      acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...kept, consumers: readers }]
     // A NetCDF-4 model file out of a ZIP release: one input, the whole member, which git does not hold.
     : [{ id: input, path: entry.path, ...shared, productId: entry.member, title,
       acquisition: `Restored through source/preparation/acquisition.json from Zenodo record ${release.doi}: the member ${entry.member} of ${entry.file} (${sizeText(release.bytes)}), unchanged and whole, because a NetCDF-4 file spreads its structure through itself. A model output, not an observation.`,

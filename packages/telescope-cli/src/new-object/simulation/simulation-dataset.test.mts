@@ -128,6 +128,11 @@ test('the dataset is labelled as a model with its scenario, its range is the fil
   assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ range: [310, 400] }), release, field.report, RANGES),
     /trappist-1f, dataset climate-model: TS in field-cdf2\.nc runs from 300 to 337 K, outside the range 310 to 400 the entry gives \(field range\)/u);
   assert.deepEqual(installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ range: [180, 340] }), release, field.report, RANGES), { minimum: 180, maximum: 340, promoted: false });
+  // A second field of the same file shares the file's one header record and is named among its consumers.
+  installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ dataset: 'cloud-model', label: 'Model clouds' }), release, field.report, RANGES);
+  const headers = after('source/manifest.json').inputs.filter((existing: { path: string }) => existing.path === grid.path);
+  assert.deepEqual(headers.map((existing: { id: string; consumers: string[] }) => [existing.id, existing.consumers]), [[grid.id, ['climate-model-simulation', 'cloud-model-simulation']]]);
+  assert.equal(after('source/preparation/acquisition.json').operations.filter((step: { path: string }) => step.path === grid.path).length, 1);
   // A planet that opens on a measured map keeps it: the simulation is added beside it.
   const measured = 'hd-189733b', m = `src/objects/${measured}`;
   const mapped = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${m}/${path}`, await readFile(resolve(WORKSPACE, m, path), 'utf8')] as const)));
