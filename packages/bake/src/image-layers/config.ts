@@ -114,11 +114,12 @@ export interface ImageLayerRecipe {
      * the body's authoring script. With `skirt` the picture outside the lobes, out to `skirt.reachArcsec` from the star, lies
      * on a thin disc in the plane through the star across the pole (./surface-skirt.ts); with `skirt.regionsPath` the
      * picture inside the regions drawn there whose names start with "skirt", over the lobes too, and the lobes under them
-     * are filled. */
+     * are filled; with `skirt.layers` and `skirt.openingDeg` the skirt is that many sheets fanning out that far either
+     * side of the plane, a thickness the bake models (the papers find the skirt thin and planar). */
     surface?: { source: string; basis: string; path: string; arcsecPerUnit: number; originUnits: [number, number, number];
       pole: { tiltDeg: number; paDeg: number; rollDeg: number; receding: '+z' | '-z' }; starRadiusArcsec?: number; fitArcsec: number;
       edgeFit?: { maxStretch: number; smoothDeg: number }; closedMesh?: true; filaments?: { path: string; darkness: number; detailPath?: string };
-      skirt?: { reachArcsec: number; regionsPath?: string } };
+      skirt?: { reachArcsec: number; regionsPath?: string; layers?: number; openingDeg?: number } };
     /** A nebula's published density grid (./density-grid.ts): a cube of gas densities a paper made from velocity cubes, a
      * speed standing for a depth. The file's rows are "x y z density", its first axis outermost. That first axis is the
      * sight line, toward the Sun at its `toward` end ("high" or "low"); its second axis points to position angle
@@ -312,7 +313,9 @@ const surfaceOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['surfac
       if (f.detailPath !== undefined && (typeof f.detailPath !== 'string' || !f.detailPath)) throw new TypeError('geometry.surface.filaments.detailPath names the detail map beside the recipe.');
       return { filaments: { path: path(f.path), darkness: f.darkness, ...(f.detailPath ? { detailPath: path(f.detailPath) } : {}) } }; })()),
     ...(s.skirt === undefined ? {} : (() => { const k = object(s.skirt, 'geometry.surface.skirt');
-      return { skirt: { reachArcsec: positive(k.reachArcsec, 'geometry.surface.skirt.reachArcsec'), ...(k.regionsPath === undefined ? {} : { regionsPath: path(k.regionsPath) }) } }; })()) };
+      if (k.layers !== undefined && !(Number.isInteger(k.layers) && (k.layers as number) >= 1 && (k.layers as number) <= 15)) throw new TypeError('geometry.surface.skirt.layers is a whole number from 1 to 15.');
+      return { skirt: { reachArcsec: positive(k.reachArcsec, 'geometry.surface.skirt.reachArcsec'), ...(k.regionsPath === undefined ? {} : { regionsPath: path(k.regionsPath) }),
+        ...(k.layers === undefined ? {} : { layers: k.layers as number }), ...(k.openingDeg === undefined ? {} : { openingDeg: positive(k.openingDeg, 'geometry.surface.skirt.openingDeg') }) } }; })()) };
 };
 const densityOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['densityGrid']> => {
   const d = object(v, 'geometry.densityGrid'), second = finite(d.secondAxisPaDeg, 'geometry.densityGrid.secondAxisPaDeg'), third = finite(d.thirdAxisPaDeg, 'geometry.densityGrid.thirdAxisPaDeg'), apart = (((third - second) % 360) + 360) % 360;

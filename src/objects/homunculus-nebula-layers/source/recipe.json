@@ -78,7 +78,9 @@
       },
       "skirt": {
         "reachArcsec": 9,
-        "regionsPath": "regions.json"
+        "regionsPath": "regions.json",
+        "layers": 5,
+        "openingDeg": 6
       }
     }
   },

@@ -64,7 +64,9 @@ export function regionMask(regions: PictureRegions, prefix: string, width: numbe
 
 /** The skirt's sheet: tiles a side, the feather in face pixels from the lobes' outline over which the sheet takes over
  * the picture, and the share of its reach over which it fades out at its rim. */
-export const SKIRT_TILES = 8, SKIRT_OUTLINE_FEATHER_PIXELS = 6, SKIRT_RIM_FADE = 0.25;
+export const SKIRT_TILES = 12, SKIRT_OUTLINE_FEATHER_PIXELS = 6, SKIRT_RIM_FADE = 0.25;
+/** The Gaussian, across the fan from -1 to 1, by which a skirt's sheets share its optical depth. */
+export const SKIRT_LAYER_SIGMA = 0.5;
 
 /**
  * A bipolar nebula's equatorial skirt (`geometry.surface.skirt`): a thin disc in the plane through the star across the
@@ -77,7 +79,7 @@ export const SKIRT_TILES = 8, SKIRT_OUTLINE_FEATHER_PIXELS = 6, SKIRT_RIM_FADE =
  * holds no light is left out. Each tile is returned as a parallelogram of the picture's place (column, row, depth in
  * arcseconds) with its texture over it, as the lobes' triangles are, with the whole box drawn.
  */
-export function imageLayerSurfaceSkirt(surface: Surface, skirt: { reachArcsec: number }, photo: Buffer, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], crossings: SurfaceCrossings, cover?: Float32Array): SurfaceTriangle[] {
+export function imageLayerSurfaceSkirt(surface: Surface, skirt: { reachArcsec: number; layers?: number; openingDeg?: number }, photo: Buffer, width: number, height: number, sky: (px: number, py: number) => readonly [number, number], crossings: SurfaceCrossings, cover?: Float32Array): SurfaceTriangle[] {
   const { place } = surfaceOnPicture(surface, width, height, sky), [ox, oy, oz] = surface.originUnits, reach = skirt.reachArcsec / surface.arcsecPerUnit, count = width * height;
   const arcsecPerPixel = Math.hypot(...sky(1, 0).map((value, k) => value - sky(0, 0)[k]!)), cellsPerUnit = surface.arcsecPerUnit / arcsecPerPixel;
   // How far each pixel is outside the lobes' outline, in pixels (a chamfer distance from the pixels the surface crosses).
@@ -87,18 +89,25 @@ export function imageLayerSurfaceSkirt(surface: Surface, skirt: { reachArcsec: n
     const p = y * width + x, d = pass ? 1 : -1; if (x - d >= 0 && x - d < width) outside[p] = Math.min(outside[p]!, outside[p - d]! + 1); if (y - d >= 0 && y - d < height) outside[p] = Math.min(outside[p]!, outside[p - d * width]! + 1); }
   const smooth = (t: number) => { const u = Math.max(0, Math.min(1, t)); return u * u * (3 - 2 * u); };
   const glare = 2 * (surface.starRadiusArcsec ?? 0);
-  // A point of the plane (file units from the star along the file's x and y) as its texel: the picture there, kept outside the lobes.
-  const texel = (x: number, y: number, out: number[]) => { const [px, py] = place(ox + x, oy + y, oz), cx = Math.round(px), cy = Math.round(py), r = Math.hypot(x, y) / reach;
+  // The skirt's thickness: `layers` sheets fanning out from the star, `openingDeg` either side of the plane at their
+  // farthest, the picture's optical depth shared among them by a Gaussian across the fan, most on the plane.
+  const layers = Math.max(1, Math.round(skirt.layers ?? 1)), opening = Math.tan((skirt.openingDeg ?? 0) * Math.PI / 180);
+  const spread = Array.from({ length: layers }, (_, k) => layers === 1 ? 0 : 2 * k / (layers - 1) - 1), raw = spread.map(t => Math.exp(-(t * t) / (2 * SKIRT_LAYER_SIGMA * SKIRT_LAYER_SIGMA))), total = raw.reduce((a, b) => a + b, 0), share = raw.map(w => w / total);
+  const lift = (x: number, y: number, layer: number) => oz + spread[layer]! * opening * Math.hypot(x, y);
+  // A point of a sheet (file units from the star along the file's x and y) as its texel: the picture where it lies on
+  // the sky, kept where the skirt is, with the sheet's share of its optical depth.
+  let layer = 0;
+  const texel = (x: number, y: number, out: number[]) => { const [px, py] = place(ox + x, oy + y, lift(x, y, layer)), cx = Math.round(px), cy = Math.round(py), r = Math.hypot(x, y) / reach;
     if (cx < 0 || cy < 0 || cx >= width || cy >= height || r >= 1) { out[0] = out[1] = out[2] = out[3] = 0; return; } const p = cy * width + cx;
     const keep = (cover ? cover[p]! : smooth(outside[p]! / SKIRT_OUTLINE_FEATHER_PIXELS)) * smooth((1 - r) / SKIRT_RIM_FADE) * (glare > 0 ? smooth((Math.hypot(...sky(cx, cy)) - glare / 2) / (glare / 2)) : 1);
-    for (let c = 0; c < 3; c++) out[c] = photo[4 * p + c]!; out[3] = Math.round(photo[4 * p + 3]! * keep); };
+    for (let c = 0; c < 3; c++) out[c] = photo[4 * p + c]!; const a = Math.min(.998, photo[4 * p + 3]! / 255 * keep); out[3] = Math.round(255 * (1 - (1 - a) ** share[layer]!)); };
   const tiles: SurfaceTriangle[] = [], side = 2 * reach / SKIRT_TILES, cells = Math.max(2, Math.ceil(side * cellsPerUnit)), sample = [0, 0, 0, 0];
-  for (let i = 0; i < SKIRT_TILES; i++) for (let j = 0; j < SKIRT_TILES; j++) {
+  for (layer = 0; layer < layers; layer++) for (let i = 0; i < SKIRT_TILES; i++) for (let j = 0; j < SKIRT_TILES; j++) {
     const x0 = -reach + i * side, y0 = -reach + j * side, rgba = Buffer.alloc(4 * cells * cells); let any = false;
     for (let row = 0; row < cells; row++) for (let column = 0; column < cells; column++) { texel(x0 + (column + .5) / cells * side, y0 + (row + .5) / cells * side, sample);
       const o = 4 * (row * cells + column); for (let c = 0; c < 4; c++) rgba[o + c] = sample[c]!; if (sample[3]! > 2) any = true; }
     if (!any) continue;
-    tiles.push({ corners: [place(ox + x0, oy + y0, oz), place(ox + x0 + side, oy + y0, oz), place(ox + x0, oy + y0 + side, oz)], texture: [cells, cells], rgba });
+    tiles.push({ corners: [place(ox + x0, oy + y0, lift(x0, y0, layer)), place(ox + x0 + side, oy + y0, lift(x0 + side, y0, layer)), place(ox + x0, oy + y0 + side, lift(x0, y0 + side, layer))], texture: [cells, cells], rgba });
   }
   return tiles;
 }
