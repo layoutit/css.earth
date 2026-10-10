@@ -63,13 +63,15 @@ test('a site that does not know a new object stops the billboard step before any
 test('a body the world context does not hold is placed before its photograph, and one it holds keeps its one world pass', async () => {
   const order = PREPARATION_STEPS.map(step => step.name), placement = PREPARATION_STEPS.find(step => step.name === 'placement')!;
   assert.ok(order.indexOf('placement') > order.indexOf('markers') && order.indexOf('placement') < order.indexOf('billboard'));
-  const root = await worldRoot(['hd-219134']), unprepared = await mkdtemp(resolve(tmpdir(), 'prepare-object-world-'));
+  const root = await worldRoot(['hd-219134']), unprepared = await mkdtemp(resolve(tmpdir(), 'prepare-object-world-')), unreadable = await worldRoot(['hd-219134']);
+  await writeFile(resolve(unreadable, 'src/objects', OBJECT_TREE_ROOT, 'prepared/world-index.json'), '{"order":');
   try {
     // A body in the index's order, the focus and an object with a file of bodies are all in the world already.
     for (const held of ['hd-219134', 'sun', OBJECT_TREE_ROOT]) assert.deepEqual(await placement.commands([held], { root }), [], held);
     assert.deepEqual(await placement.commands(['hd-219134', 'hd-219134b'], { root }), [['pnpm', 'prepare:world-context']]);
-    assert.deepEqual(await placement.commands(['hd-219134'], { root: unprepared }), [['pnpm', 'prepare:world-context']]);
-  } finally { await rm(root, { recursive: true }); await rm(unprepared, { recursive: true }); }
+    // No world yet, or one whose index does not read: the pass that writes it runs.
+    for (const without of [unprepared, unreadable]) assert.deepEqual(await placement.commands(['hd-219134'], { root: without }), [['pnpm', 'prepare:world-context']]);
+  } finally { for (const made of [root, unprepared, unreadable]) await rm(made, { recursive: true }); }
 });
 
 test('a site that read its world before a new body was placed stops the billboard step before any page is photographed', async () => {
@@ -77,10 +79,11 @@ test('a site that read its world before a new body was placed stops the billboar
   let named = false;
   const server = createServer((request, response) => {
     if (request.url === '/objects/new-star/entry.json') { response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(named ? { id: 'new-star', world: { files: ['milky-way'] } } : { id: 'new-star' })); }
-    else response.end();
+    else if (request.url === '/objects/unknown-star/entry.json') { response.statusCode = 404; response.end(); }
+    else response.end('<!doctype html>');
   });
   await new Promise<void>(done => server.listen(0, '127.0.0.1', done));
-  const address = server.address(), previous = process.env.CSSEARTH_BILLBOARD_ORIGIN, root = await worldRoot(['new-star']);
+  const address = server.address(), previous = process.env.CSSEARTH_BILLBOARD_ORIGIN, root = await worldRoot(['new-star', 'unknown-star', 'odd-star']);
   process.env.CSSEARTH_BILLBOARD_ORIGIN = `http://127.0.0.1:${typeof address === 'object' && address ? address.port : 0}`;
   const photographed = ['packages/bake/cli/prepare-arrival-billboard.mts', 'site/build/prepare/catalog/prepare-catalog.mts'];
   try {
@@ -89,6 +92,10 @@ test('a site that read its world before a new body was placed stops the billboar
     assert.deepEqual((await billboard.commands([OBJECT_TREE_ROOT], { root })).map(command => command[1]), photographed);
     named = true;
     assert.deepEqual((await billboard.commands(['new-star'], { root })).map(command => command[1]), photographed);
+    // A body the site has no entry for is unknown to it, even between two ids whose pages it serves.
+    await assert.rejects(billboard.commands(['new-star', 'unknown-star', 'new-star-b'], { root }), /does not know unknown-star \(404 for \/objects\/unknown-star\/entry\.json\).*Restart it/u);
+    // An entry that is not JSON says nothing of the world: the photograph is left to find what is wrong.
+    assert.deepEqual((await billboard.commands(['odd-star'], { root })).map(command => command[1]), photographed);
   } finally { server.close(); await rm(root, { recursive: true }); if (previous === undefined) delete process.env.CSSEARTH_BILLBOARD_ORIGIN; else process.env.CSSEARTH_BILLBOARD_ORIGIN = previous; }
 });
 

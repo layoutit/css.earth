@@ -22,7 +22,7 @@
 import { spawn } from 'node:child_process';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRecord, requireString } from '@cssearth/core';
+import { isRecord, requireRecord, requireString } from '@cssearth/core';
 import { projectRoot } from '@cssearth/core/node';
 
 export interface PreparationOptions { readonly reuseImages?: boolean; readonly addDatasets?: boolean; readonly root?: string }
@@ -44,15 +44,17 @@ const exists = (path: string) => access(path).then(() => true, () => false);
 
 /** What the prepared world context holds, from the root object's `prepared/world-index.json` and `world.json`: its `bodies`
  * (the index's order, each with a row in a world file) and every id it `knows` (those, the objects with a file of bodies
- * and the focus). Null while no world is prepared. `@cssearth/objects` is loaded here, after the builds step rebuilt it. */
+ * and the focus). Null while no world is prepared, or when its files do not read: the placement step then prepares it, where a
+ * refusal would leave only the world pass by hand. `@cssearth/objects` is loaded here, after the builds step rebuilt it. */
 async function preparedWorld(root: string): Promise<{ readonly bodies: ReadonlySet<string>; readonly knows: ReadonlySet<string> } | null> {
   const { OBJECT_TREE_ROOT, parsePreparedWorldIndex } = await import('@cssearth/objects');
-  const read = (name: string) => readFile(resolve(root, 'src/objects', OBJECT_TREE_ROOT, 'prepared', name), 'utf8').then((text): unknown => JSON.parse(text), () => null);
-  const [index, summary] = await Promise.all([read('world-index.json'), read('world.json')]);
-  if (index === null || summary === null) return null;
-  const { order, files } = parsePreparedWorldIndex(index);
-  const focus = requireString(requireRecord(requireRecord(summary, 'world summary').focus, 'world summary focus').id, 'world summary focus id');
-  return { bodies: new Set(order), knows: new Set([...order, ...files, focus]) };
+  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, 'src/objects', OBJECT_TREE_ROOT, 'prepared', name), 'utf8'));
+  try {
+    const [index, summary] = await Promise.all([read('world-index.json'), read('world.json')]);
+    const { order, files } = parsePreparedWorldIndex(index);
+    const focus = requireString(requireRecord(requireRecord(summary, 'world summary').focus, 'world summary focus').id, 'world summary focus id');
+    return { bodies: new Set(order), knows: new Set([...order, ...files, focus]) };
+  } catch { return null; }
 }
 
 /** The chain, in order. A step's purpose says what the next one needs from it. */
@@ -99,12 +101,15 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     // The site reads the world index once, when it starts (site/directory/world-context-plan.mts), and names a body's world files
     // from it in the body's entry (`world`, site/pages/objects/[id]/entry.json.ts). A site started before the placement step placed
     // a body names none for it, and never serves a world file the placement added: TrES-2 b's row went into its new system's file,
-    // which that site does not list (2026-10-09).
+    // which that site does not list (2026-10-09). Every body's entry is asked for, so an object the site does not know is caught
+    // here too when it is neither the first nor the last id.
     const bodies = (await preparedWorld(root))?.bodies;
     for (const id of ids) {
       if (!bodies?.has(id)) continue;
-      const entry: unknown = await fetch(new URL(`/objects/${id}/entry.json`, origin), { signal: AbortSignal.timeout(120_000) }).then(response => response.ok ? response.json() : null, () => null);
-      if (entry !== null && !Object.hasOwn(requireRecord(entry, `/objects/${id}/entry.json`), 'world')) throw new Error(`The site at ${origin} read the world context before ${id} was placed in it (/objects/${id}/entry.json names no world file), so it cannot serve the world files placed since. Restart it, then resume from the billboard step.`);
+      const response = await fetch(new URL(`/objects/${id}/entry.json`, origin), { signal: AbortSignal.timeout(120_000) }).catch(() => null);
+      if (response?.status === 404) throw new Error(`The site at ${origin} does not know ${id} (404 for /objects/${id}/entry.json): it was started before the object existed. Restart it, then resume from the billboard step.`);
+      const entry: unknown = response?.ok ? await response.json().catch(() => null) : null;
+      if (isRecord(entry) && !Object.hasOwn(entry, 'world')) throw new Error(`The site at ${origin} read the world context before ${id} was placed in it (/objects/${id}/entry.json names no world file), so it cannot serve the world files placed since. Restart it, then resume from the billboard step.`);
     }
     return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/catalog/prepare-catalog.mts')];
   } },
