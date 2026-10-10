@@ -14,7 +14,7 @@ const flat = () => 1;
 test('the adaptation and encoding reproduce the swatch Mars records, from the XYZ and solar white it records', async () => {
   const mars = JSON.parse(await readFile(new URL('src/objects/mars/swatch.json', pathToFileURL(findProjectRoot(import.meta.url) + '/')), 'utf8'));
   const adapted = adaptToSrgbWhite(mars.conversion.xyzSolarWhiteY1, mars.conversion.illuminant.whitePointXy);
-  // Colour Science's sRGB matrix differs from IEC's printed one in the fourth decimal.
+  // Color Science's sRGB matrix differs from IEC's printed one in the fourth decimal.
   const linear = [[3.2404542, -1.5371385, -0.4985314], [-0.969266, 1.8760108, 0.041556], [0.0556434, -0.2040259, 1.0572252]]
     .map(row => row[0]! * adapted[0] + row[1]! * adapted[1] + row[2]! * adapted[2]);
   linear.forEach((value, channel) => assert.ok(Math.abs(value - mars.conversion.linearSrgbD65[channel]) < 2e-4, `channel ${channel}: ${value}`));
