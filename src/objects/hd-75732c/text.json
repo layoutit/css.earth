@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-75732c",
+  "card": {
+    "text": "55 Cnc c was found in 2004 by radial velocity; it does not cross its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-11523",
+        "url": "https://arxiv.org/abs/2510.11523",
+        "label": "Moutou et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "Moutou et al. (2026), A&A 705, A190, Table 3: P 44.3936 d, Tconj 2455491.23, e 0.088, omega 0.54 rad, a 0.247 au, m sin i 56.6 Earth masses; Xiao et al. (2026), Table 4, 55 Cnc d: I 93.9 deg, Omega 124 deg (assumed for this planet); NASA Exoplanet Archive ps table: disc_year 2004, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 0.76"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ac",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ac",
+        "label": "Wikipedia, \"55 Cancri Ac\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1374105259",
+        "quote": "55 Cancri Ac, formally named Brahe, is an extrasolar planet in an eccentric orbit around the Sun-like star 55 Cancri A, making one revolution every 44.34 days."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 5 planets known around 55 Cnc; its size is a model. Its tilt is not measured: it is drawn in the plane measured for 55 Cnc d.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-11523",
+        "url": "https://arxiv.org/abs/2510.11523",
+        "label": "Moutou et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "Moutou et al. (2026), A&A 705, A190, Table 3: P 44.3936 d, Tconj 2455491.23, e 0.088, omega 0.54 rad, a 0.247 au, m sin i 56.6 Earth masses; Xiao et al. (2026), Table 4, 55 Cnc d: I 93.9 deg, Omega 124 deg (assumed for this planet); NASA Exoplanet Archive ps table: disc_year 2004, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 0.76"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ac",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ac",
+        "label": "Wikipedia, \"55 Cancri Ac\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1374105259",
+        "quote": "It is the third known planet in order of distance from its star."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

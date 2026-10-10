@@ -1,0 +1,52 @@
+{
+  "host": "hd-75732",
+  "planets": [
+    {
+      "id": "hd-75732d",
+      "name": "55 Cnc d",
+      "description": "Planet of 55 Cnc found by radial velocity, with a 5080-day year, found in 2002.",
+      "paper": {
+        "url": "https://arxiv.org/abs/2609.01377",
+        "credit": "Xiao et al. (2026)"
+      },
+      "radius": {
+        "value": 1.16,
+        "source": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc d does not transit",
+        "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      },
+      "mass": {
+        "value": 3.23,
+        "source": "Xiao et al. (2026), Table 4: 3.23 (+0.29, -0.30) Jupiter masses, the true mass from radial velocities joined with Hipparcos and Gaia astrometry",
+        "url": "https://arxiv.org/abs/2609.01377",
+        "uncertainty": 0.3
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 5084,
+          "semiMajorAxisStellarRadii": 1272.4,
+          "inclinationDegrees": 93.9,
+          "eccentricity": 0.0153,
+          "argumentOfPeriapsisDegrees": 203.8,
+          "transitTimeBmjdTdb": 51517.3,
+          "ascendingNodePositionAngleDegrees": 124
+        },
+        "epoch": "inferior-conjunction",
+        "source": "Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km)",
+        "url": "https://arxiv.org/abs/2609.01377"
+      },
+      "text": {
+        "card": "55 Cnc d was found in 2002 by radial velocity; it does not cross its star.",
+        "introduction": "It is one of 5 planets known around 55 Cnc. Its orbit, tilt included, follows Xiao et al. 2026's fit, and its size is the archive's model from its mass.",
+        "locator": "Xiao et al. (2026), Table 4: P 5084 d, e 0.0153, omega -156.2 deg, Omega 124 deg, I 93.9 deg, M_p 3.23 M_Jup, a 5.58 au; Moutou et al. (2026), Table 3: Tconj_d 2451517.8; NASA Exoplanet Archive ps table: disc_year 2002, disc_facility Lick Observatory, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 1.16",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/55_Cancri_Ad",
+          "title": "55 Cancri Ad",
+          "revision": "1377278261",
+          "card": "55 Cancri Ad, formally named Lipperhey, is an extrasolar planet in a long-period orbit around the Sun-like star 55 Cancri A. If confirmed, it would be at a similar distance from its star as Jupiter is from the Sun, and the fifth and outermost known planet in its planetary system.",
+          "introduction": "55 Cancri Ad was discovered on June 13, 2002."
+        }
+      },
+      "order": 5842
+    }
+  ]
+}

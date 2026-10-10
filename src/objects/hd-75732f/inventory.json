@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "hd-75732f-arrival.webp",
+      "bytes": 29790,
+      "sha256": "5b1fe1a032164cbd9d32f924c9a1789ff816ba8a6d93528b7a7b7c6b8ab30cd9"
+    },
+    {
+      "location": "public",
+      "filename": "hd-75732f-billboard.webp",
+      "bytes": 4836,
+      "sha256": "d20c5bb7d82275debbf664efdc82251b2b803007454cec81644b7a91a72d9668"
+    },
+    {
+      "location": "public",
+      "filename": "hd-75732f-dataset-shape.webp",
+      "bytes": 44,
+      "sha256": "9df8f679cb055be3c62cfa2a8e58a4b21d3b7f8458ea4745b8e7f6c1c354dc65"
+    },
+    {
+      "location": "public",
+      "filename": "hd-75732f-poles-shape@2x.webp",
+      "bytes": 1340,
+      "sha256": "260652bc1e609238ae5f301813d060dcf0e6940a1245730b0b50d64faf6fe560"
+    },
+    {
+      "location": "public",
+      "filename": "hd-75732f-surface-shape@2x.webp",
+      "bytes": 38,
+      "sha256": "1d95939d38515c85fa2679c96744da8e1f34e7348832a3d1a389d3cf1c8350b0"
+    },
+    {
+      "location": "public",
+      "filename": "hd-75732f-system-orbits.svg",
+      "bytes": 18494,
+      "sha256": "0bd98d7b967c00ebeac29009109818e726c8760a74751a078a62bf6752ea538e"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-sheet.webp",
+      "bytes": 573858,
+      "sha256": "f245cafd3cef183c26bb6b249125aeb163bcdf61e91b12dd109ea85190db3c52"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 311,
+      "sha256": "e49f2a1fca4b062eedc5220ff9ce02dce85a5351da42378a29fd995515dd70b7"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 17960,
+      "sha256": "2e99681b0a1c3b148f7dacc46ddac663c0c6f04943d24e505d6223a14e20b481"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 662,
+      "sha256": "d9ba917d9cb27e23a767caa11ef71dbe7b608070214e45da0bf3fceb19d0a9e5"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2814,
+      "sha256": "ee28c0fcdd810605741184129733cc704e4a65b13f7a15792611e7e99930adff"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 857,
+      "sha256": "d0669e248fd42b5fcac201de1c8f69765b9698c190c82244d0b3b65f8d7d5fc7"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 182576,
+      "sha256": "92a94c90f107f4fce4688235a7d605fef8c79fe0cdf228cb74966ca4bf5c1021"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/shape.webp",
+      "bytes": 436,
+      "sha256": "c44caf2e5f9c071cac3720ee185ec032deed3e41ed8366ecc5565bcad473f074"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 90251,
+      "sha256": "1e0d601574f272525f3db3520460b300f03bfba3472a595b254f444c6fb19883"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2206,
+      "sha256": "09222c1c83cfca4b8ee389e4cadd2f7191c93333ae3d70d495c07de46c0d7157"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "host": "hd-75732",
+  "planets": [
+    {
+      "id": "hd-75732c",
+      "name": "55 Cnc c",
+      "description": "Planet of 55 Cnc found by radial velocity, with a 44.4-day year, found in 2004.",
+      "order": 5844,
+      "paper": {
+        "url": "https://arxiv.org/abs/2510.11523",
+        "credit": "Moutou et al. (2026), A&A 705, A190"
+      },
+      "radius": {
+        "value": 0.76,
+        "source": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc c does not transit",
+        "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      },
+      "mass": {
+        "value": 0.1781,
+        "source": "Moutou et al. (2026), A&A 705, A190, Table 3: minimum mass (m sin i) 56.6 +/- 2.2 Earth masses from the star's radial velocities; at the assumed tilt of 93.9 degrees the mass is 0.2% more",
+        "url": "https://arxiv.org/abs/2510.11523",
+        "uncertainty": 0.0069
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 44.3936,
+          "semiMajorAxisStellarRadii": 56.32,
+          "inclinationDegrees": 93.9,
+          "eccentricity": 0.088,
+          "argumentOfPeriapsisDegrees": 30.9,
+          "transitTimeBmjdTdb": 55490.73,
+          "ascendingNodePositionAngleDegrees": 124
+        },
+        "epoch": "inferior-conjunction",
+        "source": "Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.247 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d",
+        "url": "https://arxiv.org/abs/2510.11523"
+      },
+      "text": {
+        "card": "55 Cnc c was found in 2004 by radial velocity; it does not cross its star.",
+        "introduction": "It is one of 5 planets known around 55 Cnc; its size is a model. Its tilt is not measured: it is drawn in the plane measured for 55 Cnc d.",
+        "locator": "Moutou et al. (2026), A&A 705, A190, Table 3: P 44.3936 d, Tconj 2455491.23, e 0.088, omega 0.54 rad, a 0.247 au, m sin i 56.6 Earth masses; Xiao et al. (2026), Table 4, 55 Cnc d: I 93.9 deg, Omega 124 deg (assumed for this planet); NASA Exoplanet Archive ps table: disc_year 2004, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 0.76",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/55_Cancri_Ac",
+          "title": "55 Cancri Ac",
+          "revision": "1374105259",
+          "card": "55 Cancri Ac, formally named Brahe, is an extrasolar planet in an eccentric orbit around the Sun-like star 55 Cancri A, making one revolution every 44.34 days.",
+          "introduction": "It is the third known planet in order of distance from its star."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "arxiv-2510-11523",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Moutou et al. (2025): Characterizing planetary systems with SPIRou: questions about the magnetic cycle of 55 Cnc A and two new planets around B",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2510.11523"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2510.11523",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2510.11523",
+      "checkedOn": "2026-10-10",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Moutou et al. (2025)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2510.11523"
+    }
+  ],
+  "creators": [
+    "C. Moutou",
+    "P. Petit",
+    "P. Charpentier",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

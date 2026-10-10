@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-75732d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.16 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc d does not transit.",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "3.23 Jupiter masses: Xiao et al. (2026), Table 4: 3.23 (+0.29, -0.30) Jupiter masses, the true mass from radial velocities joined with Hipparcos and Gaia astrometry (https://arxiv.org/abs/2609.01377).",
+      "evidence": [
+        "https://arxiv.org/abs/2609.01377"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km) (https://arxiv.org/abs/2609.01377): P 5084 d; Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km) (https://arxiv.org/abs/2609.01377): a/R* 1272.4, inclination 93.9 degrees; Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km) (https://arxiv.org/abs/2609.01377): e 0.0153; Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km) (https://arxiv.org/abs/2609.01377): omega 203.8 degrees (the star's); Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km) (https://arxiv.org/abs/2609.01377): transit (inferior conjunction) at 51517.3 BMJD_TDB; Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km) (https://arxiv.org/abs/2609.01377): ascending node 124 degrees east of north.",
+      "evidence": [
+        "https://arxiv.org/abs/2609.01377"
+      ]
+    }
+  ]
+}

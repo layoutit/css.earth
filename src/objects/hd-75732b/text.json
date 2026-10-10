@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-75732b",
+  "card": {
+    "text": "55 Cnc b was found in 1996 by radial velocity; it does not cross its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-11523",
+        "url": "https://arxiv.org/abs/2510.11523",
+        "label": "Moutou et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "Moutou et al. (2026), A&A 705, A190, Table 3: P 14.651552 d, Tconj 2455495.595, e 0.0029, omega 0.41 rad, a 0.118 au, m sin i 276 Earth masses; Xiao et al. (2026), Table 4, 55 Cnc d: I 93.9 deg, Omega 124 deg (assumed for this planet); NASA Exoplanet Archive ps table: disc_year 1996, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 1.24"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ab",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ab",
+        "label": "Wikipedia, \"55 Cancri Ab\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1375884878",
+        "quote": "55 Cancri Ab, formally named Galileo, is an exoplanet orbiting the Sun-like star 55 Cancri A every 14.65 days."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 5 planets known around 55 Cnc; its size is a model. Its tilt is not measured: it is drawn in the plane measured for 55 Cnc d.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2510-11523",
+        "url": "https://arxiv.org/abs/2510.11523",
+        "label": "Moutou et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "Moutou et al. (2026), A&A 705, A190, Table 3: P 14.651552 d, Tconj 2455495.595, e 0.0029, omega 0.41 rad, a 0.118 au, m sin i 276 Earth masses; Xiao et al. (2026), Table 4, 55 Cnc d: I 93.9 deg, Omega 124 deg (assumed for this planet); NASA Exoplanet Archive ps table: disc_year 1996, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 1.24"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ab",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ab",
+        "label": "Wikipedia, \"55 Cancri Ab\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1375884878",
+        "quote": "It is the second planet in order of distance from its star, and is an example of a hot Jupiter, or possibly rather \"warm Jupiter\"."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-75732c",
+  "radiusKm": 54333.9,
+  "radiusSource": "Radius 0.76 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc c does not transit (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 54,333.9 km at 71,492 km per Jupiter radius. GM from the mass 0.1781 +/- 0.0069 Jupiter masses (Moutou et al. (2026), A&A 705, A190, Table 3: minimum mass (m sin i) 56.6 +/- 2.2 Earth masses from the star's radial velocities; at the assumed tilt of 93.9 degrees the mass is 0.2% more, https://arxiv.org/abs/2510.11523) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 44.3936,
+  "orbitalPeriodSource": "Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.247 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): P 44.3936 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of 55 Cnc c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.1781 Jupiter masses: Moutou et al. (2026), A&A 705, A190, Table 3: minimum mass (m sin i) 56.6 +/- 2.2 Earth masses from the star's radial velocities; at the assumed tilt of 93.9 degrees the mass is 0.2% more (https://arxiv.org/abs/2510.11523)."
+}

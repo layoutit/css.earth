@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-75732d",
+  "card": {
+    "text": "55 Cnc d was found in 2002 by radial velocity; it does not cross its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-01377",
+        "url": "https://arxiv.org/abs/2609.01377",
+        "label": "Xiao et al. 2026",
+        "checked": "2026-10-10",
+        "locator": "Xiao et al. (2026), Table 4: P 5084 d, e 0.0153, omega -156.2 deg, Omega 124 deg, I 93.9 deg, M_p 3.23 M_Jup, a 5.58 au; Moutou et al. (2026), Table 3: Tconj_d 2451517.8; NASA Exoplanet Archive ps table: disc_year 2002, disc_facility Lick Observatory, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 1.16"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ad",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ad",
+        "label": "Wikipedia, \"55 Cancri Ad\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1377278261",
+        "quote": "55 Cancri Ad, formally named Lipperhey, is an extrasolar planet in a long-period orbit around the Sun-like star 55 Cancri A. If confirmed, it would be at a similar distance from its star as Jupiter is from the Sun, and the fifth and outermost known planet in its planetary system."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 5 planets known around 55 Cnc. Its orbit, tilt included, follows Xiao et al. 2026's fit, and its size is the archive's model from its mass.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-01377",
+        "url": "https://arxiv.org/abs/2609.01377",
+        "label": "Xiao et al. 2026",
+        "checked": "2026-10-10",
+        "locator": "Xiao et al. (2026), Table 4: P 5084 d, e 0.0153, omega -156.2 deg, Omega 124 deg, I 93.9 deg, M_p 3.23 M_Jup, a 5.58 au; Moutou et al. (2026), Table 3: Tconj_d 2451517.8; NASA Exoplanet Archive ps table: disc_year 2002, disc_facility Lick Observatory, sy_pnum 7, 5 of them with hostname 55 Cnc; pscomppars calculated pl_radj 1.16"
+      },
+      {
+        "catalogueId": "wikipedia-55-cancri-ad",
+        "url": "https://en.wikipedia.org/wiki/55_Cancri_Ad",
+        "label": "Wikipedia, \"55 Cancri Ad\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1377278261",
+        "quote": "55 Cancri Ad was discovered on June 13, 2002."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}
