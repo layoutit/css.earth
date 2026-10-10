@@ -1,0 +1,28 @@
+{
+ "id": "kepler-90b",
+ "classification": "exoplanet",
+ "order": 5826,
+ "physical": {
+  "name": "Kepler-90 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 8364.6,
+  "gravitationalParameterKm3PerS2": 904541.84,
+  "parent": "kepler-90"
+ },
+ "physicalNotes": "Radius 0.117 Jupiter radii from Cabrera et al. 2014 (2014ApJ...781...18C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract): 8,364.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00714 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.008151,
+  "semiMajorAxisStellarRadii": 13.2,
+  "inclinationDegrees": 89.4,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54970.1906,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Cabrera et al. 2014 (2014ApJ...781...18C), via the NASA Exoplanet Archive ps table (pl_refname CABRERA_ET_AL__2014): P 7.008151 d",
+   "shape": "Cabrera et al. 2014 (2014ApJ...781...18C), via the NASA Exoplanet Archive ps table (pl_refname CABRERA_ET_AL__2014): a/R* 13.2; Cabrera et al. 2014 (2014ApJ...781...18C), via the NASA Exoplanet Archive ps table (pl_refname CABRERA_ET_AL__2014): inclination 89.4 degrees",
+   "eccentricity": "Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive ps table (pl_refname WEISS_ET_AL__2024): e 0",
+   "phase": "Cabrera et al. 2014 (2014ApJ...781...18C), via the NASA Exoplanet Archive ps table (pl_refname CABRERA_ET_AL__2014): transit mid-time 2454970.6906 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 24 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

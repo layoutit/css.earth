@@ -1,0 +1,32 @@
+{
+  "host": "kepler-90",
+  "planets": [
+    {
+      "id": "kepler-90h",
+      "name": "Kepler-90 h",
+      "description": "Transiting planet of Kepler-90 with a 332-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+        "credit": "Shaw et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SHAW_ET_AL__2025",
+        "planetName": "KOI-351 h"
+      },
+      "text": {
+        "card": "Kepler-90 h was found in 2013 by Kepler as it crossed its star.",
+        "introduction": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Shaw et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHAW_ET_AL__2025): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 331.5972732, pl_radj 1.00383793, pl_bmassj 0.63870943",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-90h",
+          "title": "Kepler-90h",
+          "revision": "1370781363",
+          "card": "Kepler-90h is an exoplanet orbiting within the habitable zone of the early G-type main sequence star Kepler-90, the outermost of eight such planets discovered by NASA's Kepler spacecraft.",
+          "introduction": "It is located about 2,840 light-years, from Earth in the constellation Draco."
+        }
+      },
+      "order": 5833
+    }
+  ]
+}

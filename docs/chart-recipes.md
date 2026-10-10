@@ -60,6 +60,10 @@ The generator keeps an archive planet only when one of these charts shows a meas
 
 ![Charts tabs of GJ 1214 b, WASP-107 b and GJ 486 b: orbits, published spectra and TESS transits](images/exoplanet-batch-1.webp)
 
+TESS does not resolve the 14 planets of Kepler-11 and Kepler-90, so their transits are folded from Kepler's own quarters. Kepler-90 g's dip is smeared: its transits arrive hours early or late (Cabrera et al. 2014), and the fold uses one fixed period.
+
+![Transit charts of Kepler-11 e, Kepler-90 h and Kepler-90 g, folded from Kepler's 30-minute light curves](images/kepler-transit-charts.webp)
+
 ## Add or reuse one
 
 1. Copy the matching entry into the object's `source/content/charts.json`,

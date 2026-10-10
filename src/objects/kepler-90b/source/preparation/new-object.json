@@ -1,0 +1,25 @@
+{
+  "host": "kepler-90",
+  "planets": [
+    {
+      "id": "kepler-90b",
+      "name": "Kepler-90 b",
+      "description": "Transiting planet of Kepler-90 with a 7.01-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "credit": "Cabrera et al. 2014"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CABRERA_ET_AL__2014",
+        "planetName": "KOI-351 b"
+      },
+      "text": {
+        "card": "Kepler-90 b was found in 2013 by Kepler as it crossed its star.",
+        "introduction": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Cabrera et al. 2014's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CABRERA_ET_AL__2014): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 7.008151, pl_radj 0.117, pl_bmassj 0.00714"
+      },
+      "order": 5826
+    }
+  ]
+}

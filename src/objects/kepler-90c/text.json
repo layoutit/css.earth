@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-90c",
+  "card": {
+    "text": "Kepler-90 c was found in 2013 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "label": "Cabrera et al. 2014",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CABRERA_ET_AL__2014): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 8.719375, pl_radj 0.106, pl_bmassj 0.0057"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Cabrera et al. 2014's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "label": "Cabrera et al. 2014",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CABRERA_ET_AL__2014): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 8.719375, pl_radj 0.106, pl_bmassj 0.0057"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

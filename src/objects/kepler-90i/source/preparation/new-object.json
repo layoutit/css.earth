@@ -1,0 +1,31 @@
+{
+  "host": "kepler-90",
+  "planets": [
+    {
+      "id": "kepler-90i",
+      "name": "Kepler-90 i",
+      "description": "Transiting planet of Kepler-90 with a 14.4-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155...94S/abstract",
+        "credit": "Shallue & Vanderburg 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SHALLUE__AMP__VANDERBURG_2018"
+      },
+      "text": {
+        "card": "Kepler-90 i was found in 2017 by Kepler as it crossed its star.",
+        "introduction": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Shallue & Vanderburg 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHALLUE__AMP__VANDERBURG_2018): disc_year 2017, disc_facility Kepler, sy_pnum 8; pl_orbper 14.44912, pl_radj 0.11776251, pl_bmassj 0.00724",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-90i",
+          "title": "Kepler-90i",
+          "revision": "1328127392",
+          "card": "Kepler-90i (also known by its Kepler Object of Interest designation KOI-351.08) is a super-Earth exoplanet with a radius 1.32 times that of Earth, orbiting the early G-type main sequence star Kepler-90 every 14.45 days, discovered by NASA's Kepler spacecraft.",
+          "introduction": "It is located about 2,840 light-years (870 parsecs, or nearly 2.4078×1016 km) from Earth in the constellation Draco."
+        }
+      },
+      "order": 5828
+    }
+  ]
+}

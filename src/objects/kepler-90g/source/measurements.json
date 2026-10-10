@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-90g",
+  "radiusKm": 49226.2,
+  "radiusSource": "Radius 0.68855503 Jupiter radii from Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..270....8W/abstract): 49,226.2 km at 71,492 km per Jupiter radius. GM from the mass 0.04719528 Jupiter masses (Shaw et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..146S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 210.73514,
+  "orbitalPeriodSource": "Shaw et al. 2025 (2025AJ....170..146S), via the NASA Exoplanet Archive ps table (pl_refname SHAW_ET_AL__2025): P 210.73514 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of Kepler-90 g is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.04719528 Jupiter masses: Shaw et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..146S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract)."
+}

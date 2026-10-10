@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2009166043257_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009166043257_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2009259160929_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009259160929_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2009350155506_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009350155506_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2010009091648_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010009091648_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2010174085026_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010174085026_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2010265121752_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010265121752_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2010355172524_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010355172524_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2011177032512_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2011177032512_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2011271113734_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2011271113734_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2012004120508_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012004120508_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2012179063303_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012179063303_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2012277125453_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012277125453_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2013011073258_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2013011073258_llc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/kepler/kplr011442793-2013131215648_llc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2013131215648_llc.fits"
+    }
+  ]
+}

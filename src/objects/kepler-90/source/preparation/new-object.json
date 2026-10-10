@@ -1,0 +1,47 @@
+{
+  "id": "kepler-90",
+  "name": "Kepler-90",
+  "system": "Kepler-90 system",
+  "description": "Star of 6,080 K, 848 parsecs away, with 8 transiting planets.",
+  "parent": "milky-way",
+  "target": "KOI-351",
+  "gaia": "2132193431285570304",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+    "credit": "Cabrera et al. 2014"
+  },
+  "radius": {
+    "value": 1.2,
+    "source": "Cabrera et al. 2014, the stellar radius of the default parameter set of KOI-351 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+    "uncertainty": 0.1
+  },
+  "mass": {
+    "value": 1.2,
+    "source": "Cabrera et al. 2014, the stellar mass of the default parameter set of KOI-351 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+    "uncertainty": 0.1
+  },
+  "temperature": {
+    "value": 6080,
+    "source": "Cabrera et al. 2014, the stellar temperature of the default parameter set of KOI-351 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+    "uncertainty": 260
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "8 planets cross Kepler-90 as seen from Earth: b, c, d, e, f, g, h, i.",
+    "introduction": "Its radius and temperature follow Cabrera et al. 2014.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CABRERA_ET_AL__2014): st_teff 6080, st_rad 1.2, st_mass 1.2",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-90",
+      "title": "Kepler-90",
+      "revision": "1372465090",
+      "card": "Kepler-90, also designated 2MASS J18574403+4918185, is an F-type star located about 2,790 light-years (855 pc) from Earth in the constellation of Draco.",
+      "introduction": "It is notable for being the only confirmed planetary system with the same number of observed planets as the Solar System."
+    }
+  },
+  "notes": [],
+  "order": 5825
+}

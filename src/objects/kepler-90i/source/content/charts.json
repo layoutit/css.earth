@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-90i/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-90i-orbits",
+      "title": "Kepler-90 i: orbits around Kepler-90",
+      "output": "kepler-90i-system-orbits.svg",
+      "system": "kepler-90",
+      "highlight": "kepler-90i",
+      "description": "The orbits of Kepler-90's planets in this map from above, to scale, with Kepler-90 i highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): P 14.44912 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kepler-90i-transit",
+      "title": "Kepler-90 i: its transit",
+      "description": "Kepler-90 i crossing its star, as Kepler recorded it: 14 quarters (1 to 7, 9 to 11, 13 to 15, 17) of the Kepler pipeline's 30-minute light curves of KIC 11442793, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 14 minutes earlier to where Kepler measures the dip, inside the published ephemeris's 3-sigma uncertainty of 21 minutes at these dates, then averaged in 30-minute bins. Error bars are each bin's standard error.",
+      "output": "kepler-90i-transit.svg",
+      "metadata": {
+        "kic": "KIC 11442793",
+        "quarters": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          13,
+          14,
+          15,
+          17
+        ],
+        "pipeline": "Kepler pipeline, PDCSAP flux, quality 0"
+      },
+      "planet": "kepler-90i",
+      "sources": [
+        "photometry/kepler/kplr011442793-2009166043257_llc.fits",
+        "photometry/kepler/kplr011442793-2009259160929_llc.fits",
+        "photometry/kepler/kplr011442793-2009350155506_llc.fits",
+        "photometry/kepler/kplr011442793-2010009091648_llc.fits",
+        "photometry/kepler/kplr011442793-2010174085026_llc.fits",
+        "photometry/kepler/kplr011442793-2010265121752_llc.fits",
+        "photometry/kepler/kplr011442793-2010355172524_llc.fits",
+        "photometry/kepler/kplr011442793-2011177032512_llc.fits",
+        "photometry/kepler/kplr011442793-2011271113734_llc.fits",
+        "photometry/kepler/kplr011442793-2012004120508_llc.fits",
+        "photometry/kepler/kplr011442793-2012179063303_llc.fits",
+        "photometry/kepler/kplr011442793-2012277125453_llc.fits",
+        "photometry/kepler/kplr011442793-2013011073258_llc.fits",
+        "photometry/kepler/kplr011442793-2013131215648_llc.fits"
+      ],
+      "durationHours": 2.8,
+      "binMinutes": 30,
+      "alignMinutes": -14,
+      "notes": [
+        "Kepler 30-min · 14 quarters, 1 to 17",
+        "Aligned on Kepler's dip, 14 min early; 30-min bins.",
+        "The ephemeris's own 1σ there is 7 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+ "id": "kepler-11b",
+ "classification": "exoplanet",
+ "order": 5835,
+ "physical": {
+  "name": "Kepler-11 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 11510.2,
+  "gravitationalParameterKm3PerS2": 760119.19,
+  "parent": "kepler-11"
+ },
+ "physicalNotes": "Radius 0.161 Jupiter radii from Lissauer et al. 2013 (2013ApJ...770..131L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract): 11,510.2 km at 71,492 km per Jupiter radius. GM from the mass 0.006 Jupiter masses (Lissauer et al. 2013, the mass the NASA Exoplanet Archive's composite table adopts (2013ApJ...770..131L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.30402569,
+  "semiMajorAxisStellarRadii": 18.55,
+  "inclinationDegrees": 89.64,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54970.999474,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 10.30402569 d",
+   "shape": "Lissauer et al. 2013 (2013ApJ...770..131L), via the NASA Exoplanet Archive ps table (pl_refname LISSAUER_ET_AL__2013): a/R* 18.55; Lissauer et al. 2013 (2013ApJ...770..131L), via the NASA Exoplanet Archive ps table (pl_refname LISSAUER_ET_AL__2013): inclination 89.64 degrees",
+   "eccentricity": "Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive ps table (pl_refname WEISS_ET_AL__2024): e 0",
+   "phase": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454971.499474 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

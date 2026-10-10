@@ -1,0 +1,549 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "kepler-90h-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+      "credit": "Shaw et al. 2025",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "kepler-90h-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "datasets"
+      ]
+    },
+    {
+      "id": "kepler-90h-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "kepler-90h-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: composite mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "kepler-90h-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-1",
+      "path": "photometry/kepler/kplr011442793-2009166043257_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009166043257_llc.fits",
+      "productId": "kplr011442793-2009166043257_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 1",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009166043257_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-2",
+      "path": "photometry/kepler/kplr011442793-2009259160929_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009259160929_llc.fits",
+      "productId": "kplr011442793-2009259160929_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 2",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009259160929_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-3",
+      "path": "photometry/kepler/kplr011442793-2009350155506_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009350155506_llc.fits",
+      "productId": "kplr011442793-2009350155506_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 3",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009350155506_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-4",
+      "path": "photometry/kepler/kplr011442793-2010009091648_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010009091648_llc.fits",
+      "productId": "kplr011442793-2010009091648_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 4",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010009091648_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-5",
+      "path": "photometry/kepler/kplr011442793-2010174085026_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010174085026_llc.fits",
+      "productId": "kplr011442793-2010174085026_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 5",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010174085026_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-6",
+      "path": "photometry/kepler/kplr011442793-2010265121752_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010265121752_llc.fits",
+      "productId": "kplr011442793-2010265121752_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 6",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010265121752_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-7",
+      "path": "photometry/kepler/kplr011442793-2010355172524_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010355172524_llc.fits",
+      "productId": "kplr011442793-2010355172524_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 7",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2010355172524_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-9",
+      "path": "photometry/kepler/kplr011442793-2011177032512_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2011177032512_llc.fits",
+      "productId": "kplr011442793-2011177032512_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 9",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2011177032512_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-10",
+      "path": "photometry/kepler/kplr011442793-2011271113734_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2011271113734_llc.fits",
+      "productId": "kplr011442793-2011271113734_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 10",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2011271113734_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-11",
+      "path": "photometry/kepler/kplr011442793-2012004120508_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012004120508_llc.fits",
+      "productId": "kplr011442793-2012004120508_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 11",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012004120508_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-13",
+      "path": "photometry/kepler/kplr011442793-2012179063303_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012179063303_llc.fits",
+      "productId": "kplr011442793-2012179063303_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 13",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012179063303_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-14",
+      "path": "photometry/kepler/kplr011442793-2012277125453_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012277125453_llc.fits",
+      "productId": "kplr011442793-2012277125453_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 14",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2012277125453_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-15",
+      "path": "photometry/kepler/kplr011442793-2013011073258_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2013011073258_llc.fits",
+      "productId": "kplr011442793-2013011073258_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 15",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2013011073258_llc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-90h-kepler-quarter-17",
+      "path": "photometry/kepler/kplr011442793-2013131215648_llc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2013131215648_llc.fits",
+      "productId": "kplr011442793-2013131215648_llc.fits",
+      "title": "Kepler long-cadence light curve of Kepler-90 h's star (KIC 11442793), quarter 17",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA Kepler mission; Kepler pipeline (Jenkins et al. 2010); obtained from MAST",
+      "displayCredit": "Kepler",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the long-cadence light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-kepler-kic-11442793",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2013131215648_llc.fits"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "dataset-color-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "kepler-90h-observational-measurements",
+          "kepler-90h-preparation-raster"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/new-object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths."
+      }
+    }
+  ]
+}

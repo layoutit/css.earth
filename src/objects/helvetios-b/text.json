@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "helvetios-b",
+  "card": {
+    "text": "51 Peg b was found in 1995 by radial velocity; it does not cross its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2605-23582",
+        "url": "https://arxiv.org/abs/2605.23582",
+        "label": "Cont et al. 2026",
+        "checked": "2026-10-10",
+        "locator": "Cont et al. (2026), A&A 710, A345, Tables 1 and 2: P_orb 4.2307966 d, T_C 2456326.9323 BJD_TDB, i 49.8 deg, M_p 0.61 M_Jup, a 0.052 au; NASA Exoplanet Archive ps table (pl_refname CONT_ET_AL_2026): disc_year 1995, disc_facility Haute-Provence Observatory, sy_pnum 1; pscomppars calculated pl_radj 1.26"
+      },
+      {
+        "catalogueId": "wikipedia-51-pegasi-b",
+        "url": "https://en.wikipedia.org/wiki/51_Pegasi_b",
+        "label": "Wikipedia, \"51 Pegasi b\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1378907328",
+        "quote": "51 Pegasi b, officially named Dimidium, is an extrasolar planet approximately 50 light-years away in the Pegasus constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around 51 Peg. Its orbit, tilt included, follows Cont et al. 2026's fit, and its size is the archive's model from its mass.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2605-23582",
+        "url": "https://arxiv.org/abs/2605.23582",
+        "label": "Cont et al. 2026",
+        "checked": "2026-10-10",
+        "locator": "Cont et al. (2026), A&A 710, A345, Tables 1 and 2: P_orb 4.2307966 d, T_C 2456326.9323 BJD_TDB, i 49.8 deg, M_p 0.61 M_Jup, a 0.052 au; NASA Exoplanet Archive ps table (pl_refname CONT_ET_AL_2026): disc_year 1995, disc_facility Haute-Provence Observatory, sy_pnum 1; pscomppars calculated pl_radj 1.26"
+      },
+      {
+        "catalogueId": "wikipedia-51-pegasi-b",
+        "url": "https://en.wikipedia.org/wiki/51_Pegasi_b",
+        "label": "Wikipedia, \"51 Pegasi b\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1378907328",
+        "quote": "Dimidium was the first exoplanet to be discovered orbiting a main-sequence star, the Sun-like 51 Pegasi — a major astronomical discovery."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

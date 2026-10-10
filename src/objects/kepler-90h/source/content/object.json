@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "kepler-90h",
+  "displayName": "Kepler-90 h",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.0 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-ad0cab",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..270....8W",
+          "label": "Weiss et al. 2024",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "332 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ade67b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S",
+          "label": "Shaw et al. 2025",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.64 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ade67b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S",
+          "label": "Shaw et al. 2025",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-90; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "kepler-90h-dataset-shape.webp",
+        "surface": "kepler-90h-surface-shape@2x.webp",
+        "poles": "kepler-90h-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-90h-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or color of Kepler-90 h is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of kepler-90's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-90h-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-90h/kepler-90h-system-orbits.svg",
+      "alt": "The orbits of Kepler-90's planets in this map from above, to scale, with Kepler-90 h highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-90h-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S"
+      }
+    },
+    {
+      "id": "kepler-90h-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-90h/kepler-90h-transit.svg",
+      "alt": "Kepler-90 h crossing its star, as Kepler recorded it: 14 quarters (1 to 7, 9 to 11, 13 to 15, 17) of the Kepler pipeline's 30-minute light curves of KIC 11442793, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 58-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-90h-kepler-quarter-1",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009166043257_llc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Shaw et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+      "credit": "Shaw et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-90h.json",
+      "credit": "Radius from Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive; mass from Shaw et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..146S), via the NASA Exoplanet Archive; orbit from Shaw et al. 2025 (2025AJ....170..146S), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "host": "kepler-90",
+  "planets": [
+    {
+      "id": "kepler-90e",
+      "name": "Kepler-90 e",
+      "description": "Transiting planet of Kepler-90 with a 91.9-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "credit": "Cabrera et al. 2014"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CABRERA_ET_AL__2014",
+        "planetName": "KOI-351 e"
+      },
+      "text": {
+        "card": "Kepler-90 e was found in 2013 by Kepler as it crossed its star.",
+        "introduction": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Cabrera et al. 2014's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CABRERA_ET_AL__2014): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 91.93933735, pl_radj 0.237, pl_bmassj 0.0238",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-90e",
+          "title": "Kepler-90e",
+          "revision": "1328194360",
+          "card": "Kepler-90e is an exoplanet orbiting the star Kepler-90, located in the constellation Draco.",
+          "introduction": "It was discovered by the Kepler telescope in October 2013."
+        }
+      },
+      "order": 5830
+    }
+  ]
+}

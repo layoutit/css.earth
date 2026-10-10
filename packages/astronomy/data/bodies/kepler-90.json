@@ -1,0 +1,30 @@
+{
+ "id": "kepler-90",
+ "classification": "star",
+ "order": 5825,
+ "physical": {
+  "name": "Kepler-90",
+  "horizonsCode": null,
+  "meanRadiusKm": 834840,
+  "gravitationalParameterKm3PerS2": 159254928050.32724,
+  "parent": null,
+  "effectiveTemperatureK": 6080
+ },
+ "physicalNotes": "Radius 1.2 +/- 0.1 solar radii from Cabrera et al. 2014, the stellar radius of the default parameter set of KOI-351 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract): 834,840 km at 695,700 km per solar radius. Mass 1.2 +/- 0.1 solar masses from Cabrera et al. 2014, the stellar mass of the default parameter set of KOI-351 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract); GM is that mass times the JPL solar GM. Temperature 6080 +/- 260 K from Cabrera et al. 2014, the stellar temperature of the default parameter set of KOI-351 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 284.43346331745494,
+  "declinationDegrees": 49.305123431171154,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 855.1012610125896,
+  "properMotionRaMasPerYear": -4.350133635034354,
+  "properMotionDecMasPerYear": -3.2563737563331356,
+  "radialVelocityKmPerS": -15.541114,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2132193431285570304 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-90/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 1.1695 +/- 0.0112 mas (same row, RUWE 1.00): 855.10 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -4.350, -3.256 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -15.54 +/- 2.91 km/s"
+  }
+ }
+}

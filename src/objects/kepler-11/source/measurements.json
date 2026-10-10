@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-11",
+  "angularDiameterMas": 0.02,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 740,921 km at 646.18 pc = 0.02 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 646.1769421964719,
+  "distanceSource": "Gaia DR3 parallax 1.5476 +/- 0.0117 mas (same row, RUWE 0.98): 646.18 pc, no zero-point correction",
+  "radiusKm": 740920.5,
+  "radiusSource": "Radius 1.065 +/- 0.017 solar radii from Lissauer et al. 2013, the stellar radius of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract): 740,921 km at 695,700 km per solar radius. Mass 0.961 +/- 0.025 solar masses from Lissauer et al. 2013, the stellar mass of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract); GM is that mass times the JPL solar GM. Temperature 5663 +/- 55 K from Lissauer et al. 2013, the stellar temperature of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5663,
+  "effectiveTemperatureSource": "Lissauer et al. 2013, the stellar temperature of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract)",
+  "surfaceGravityLogg": 4.37,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-11.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.366, rounded to two decimals",
+  "spectralType": "G2V",
+  "spectralTypeSource": "SIMBAD, Kepler-11: spectral type G2V (2016A&A...594A..39F)",
+  "objectType": "Eruptive Variable",
+  "objectTypePath": "* > V* > Er*",
+  "objectTypeSource": "SIMBAD, Kepler-11: main object type Er*, Eruptive Variable",
+  "metallicityDex": 0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-11 (pscomppars): [Fe/H] 0.05 dex, from Fulton & Petigura 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..264F/abstract)",
+  "luminosityLogSolar": 0.12,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-11 (pscomppars): log10 of the luminosity in solar units 0.1202, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 8.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-11 (pscomppars): age 8.5 Gyr, from Lissauer et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract)",
+  "projectedRotationSpeedKmS": 0.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-11 (pscomppars): projected rotation speed 0.4 km/s, from Lissauer et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011Natur.470...53L/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

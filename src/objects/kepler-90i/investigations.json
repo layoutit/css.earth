@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-90i",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.11776251 Jupiter radii from Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....155...94S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.00724 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): P 14.44912 d; Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): a/R* 33.8; Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): inclination 89.2 degrees; Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive ps table (pl_refname WEISS_ET_AL__2024): e 0; Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): transit mid-time 2455644.3488 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 108 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....155...94S/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..270....8W/abstract"
+      ]
+    }
+  ]
+}

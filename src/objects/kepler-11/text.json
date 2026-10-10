@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-11",
+  "card": {
+    "text": "6 planets cross Kepler-11 as seen from Earth: b, c, d, e, f, g.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-770-2-131",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract",
+        "label": "Lissauer et al. (2013), The Astrophysical Journal 770 131",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LISSAUER_ET_AL__2013): st_teff 5663, st_rad 1.065, st_mass 0.961"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-11",
+        "url": "https://en.wikipedia.org/wiki/Kepler-11",
+        "label": "Wikipedia, \"Kepler-11\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1374405418",
+        "quote": "Kepler-11, also designated as 2MASS J19482762+4154328, is a Sun-like star slightly larger than the Sun in the constellation Cygnus, located some 2,110 light years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lissauer et al. 2013.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-770-2-131",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract",
+        "label": "Lissauer et al. (2013), The Astrophysical Journal 770 131",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LISSAUER_ET_AL__2013): st_teff 5663, st_rad 1.065, st_mass 0.961"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-11",
+        "url": "https://en.wikipedia.org/wiki/Kepler-11",
+        "label": "Wikipedia, \"Kepler-11\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1374405418",
+        "quote": "It is located within the field of vision of the Kepler space telescope, the satellite that NASA's Kepler Mission uses to detect planets that may be transiting their stars."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}
