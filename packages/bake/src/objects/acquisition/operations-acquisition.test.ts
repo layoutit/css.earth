@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { commandOutput, executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
+import { commandOutput, executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe, zipMemberFromTail, zipTailRange } from '@cssearth/bake/objects/acquisition';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
 const test = sourceTest();
@@ -318,6 +318,21 @@ test('one member of a remote ZIP is restored by byte range, and the archive is t
     await assert.rejects(run('run/DATA/absent.nc', 'absent.nc', serving(archive, [])), /lists no member run\/DATA\/absent\.nc/u);
     const damaged = Buffer.from(archive); damaged[damaged.indexOf(stored) + 3] ^= 0xff;
     await assert.rejects(run('run/stored.txt', 'damaged.txt', serving(damaged, [])), /run\/stored\.txt of .* does not unpack to the \d+ bytes and the CRC-32 its archive records/u);
+    // An archive this reader is not for is taken whole: ZIP64 counts in its end record, a member packed another way, an encrypted one.
+    const end = archive.lastIndexOf(Buffer.from([0x50, 0x4b, 0x05, 0x06])), entry = archive.indexOf(Buffer.from([0x50, 0x4b, 0x01, 0x02]));
+    const changed = (change: (bytes: Buffer) => void) => { const bytes = Buffer.from(archive); change(bytes); return bytes; };
+    const tail = async (bytes: Buffer, member: string) => { const host = serving(bytes, []), ranged = (range: string) => host.fetch(url, { headers: { Range: range } }); return zipMemberFromTail(await ranged(zipTailRange), ranged, url, member); };
+    // The directory's first entry, whose fields are changed below.
+    const listed = archive.subarray(entry + 46, entry + 46 + archive.readUInt16LE(entry + 28)).toString();
+    assert.equal(await tail(changed(bytes => { bytes.writeUInt16LE(0xffff, end + 8); bytes.writeUInt16LE(0xffff, end + 10); }), 'run/DATA/model.nc'), null);
+    assert.equal(await tail(changed(bytes => { bytes.writeUInt16LE(12, entry + 10); }), listed), null);
+    assert.equal(await tail(changed(bytes => { bytes.writeUInt16LE(bytes.readUInt16LE(entry + 8) | 1, entry + 8); }), listed), null);
+    await assert.rejects(tail(Buffer.alloc(5000, 1), 'run/DATA/model.nc'), /does not end as a ZIP archive does/u);
+    // A directory that begins before the archive's last bytes is asked for on its own: one request more.
+    for (let i = 0; i < 1500; i++) await writeFile(join(directory, `run/neighbour-with-a-long-name-so-the-directory-grows-${String(i).padStart(5, '0')}.bin`), Buffer.from([i & 255]));
+    execFileSync('zip', ['-q', '-r', 'many.zip', 'run'], { cwd: directory });
+    const many = await readFile(join(directory, 'many.zip')), far: string[] = [], manyHost = serving(many, far), manyRanged = (range: string) => manyHost.fetch(url, { headers: { Range: range } });
+    assert.deepEqual(Buffer.from((await zipMemberFromTail(await manyRanged(zipTailRange), manyRanged, url, 'run/DATA/model.nc'))!), model); assert.equal(far.length, 4);
     // A server that ignores ranges sends the archive: that one answer is the download, and unzip takes the member out.
     const whole: string[] = [];
     await run('run/DATA/model.nc', 'whole.nc', serving(archive, whole, false));
