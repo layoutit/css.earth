@@ -64,6 +64,16 @@ export function createWorldContextMarkerFactory(document: Document) {
 
 export type WorldContextMarkerPaint = ReturnType<typeof createWorldContextMarkerPaint>;
 
+/** How long a name or ring takes to appear or go when it lands after a coast (prepared-world-context.ts). */
+export const LANDING_FADE_MILLISECONDS = 200;
+/** Fades a marker's ring (`::before`) or a caption's name (`::after`) in from nothing, or out while keeping it drawn until
+ * it is gone. A document without Web Animations changes at once. */
+function fadeAnnotation(owner: HTMLElement, pseudoElement: '::before' | '::after', shown: boolean) {
+  if (typeof owner.animate !== 'function') return;
+  owner.animate(shown ? [{ offset: 0, opacity: 0 }] : [{ offset: 0, visibility: 'visible' }, { offset: 1, visibility: 'visible', opacity: 0 }],
+    { duration: LANDING_FADE_MILLISECONDS, pseudoElement });
+}
+
 /** Retained DOM and cached writes for one world-context marker. Presentation decisions stay with the publisher. */
 export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLElement, spriteLeaf: HTMLElement, caption: HTMLElement,
   body: { readonly color: string; readonly contextColor?: string; readonly dotColor?: string }, sprite: SpriteWithUrl | undefined, locator: SVGSVGElement) {
@@ -140,19 +150,26 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
     },
     /** Ends the marker's hover animation (prepared-world-context.ts settleHover). */
     stopAnimating() { if (animateState !== 'false') { marker.dataset.contextAnnotationsAnimate = 'false'; animateState = 'false'; } },
-    publishIndicator(visible: boolean, suppressedByFlight: boolean, coast: boolean) {
+    /** `fade`: the change lands after a coast, so on a marker that is shown the ring fades instead of changing in one
+     * frame. A marker hidden with it goes at once, as its body does. */
+    publishIndicator(visible: boolean, suppressedByFlight: boolean, coast: boolean, fade = false) {
       const state = String(visible && !suppressedByFlight);
-      if (!coast && indicatorState !== state) { marker.dataset.contextIndicatorVisible = state; indicatorState = state; }
+      if (coast || indicatorState === state) return;
+      marker.dataset.contextIndicatorVisible = state; indicatorState = state;
+      if (fade && billboardShown) fadeAnnotation(marker, '::before', visible && !suppressedByFlight);
     },
-    publishLabel(projected: ProjectedBody, visible: boolean, suppressedByFlight: boolean) {
-      const state = String(visible && !suppressedByFlight);
-      if (labelState !== state) { marker.dataset.contextLabelVisible = state; labelState = state; }
-      if (!visible || !projected.labelPosition) return;
-      const [x, y] = projected.labelPosition;
-      const offset = `translate(${Math.round((x - projected.x) * 1e6) / 1e6}px,${Math.round((y - projected.y) * 1e6) / 1e6}px)`;
-      if (labelOffset === offset) return;
-      caption.style.transform = offset;
-      labelOffset = offset;
+    /** `fade`: as for the ring. A name that changes side while shown fades in where it now is. */
+    publishLabel(projected: ProjectedBody, visible: boolean, suppressedByFlight: boolean, fade = false) {
+      const state = String(visible && !suppressedByFlight), changed = labelState !== state;
+      if (changed) { marker.dataset.contextLabelVisible = state; labelState = state; }
+      let moved = false;
+      if (visible && projected.labelPosition) {
+        const [x, y] = projected.labelPosition;
+        const offset = `translate(${Math.round((x - projected.x) * 1e6) / 1e6}px,${Math.round((y - projected.y) * 1e6) / 1e6}px)`;
+        moved = labelOffset !== offset;
+        if (moved) { caption.style.transform = offset; labelOffset = offset; }
+      }
+      if (fade && billboardShown && (changed || (moved && state === 'true'))) fadeAnnotation(caption, '::after', state === 'true');
     },
   };
 }
