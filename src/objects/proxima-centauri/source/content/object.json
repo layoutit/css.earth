@@ -51,7 +51,7 @@
           "url": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
         },
         "falseColor": false,
-        "notes": "Proxima Centauri in its own color, darker where its light in MEarth's images of December 2016 to October 2017 says it was darker. As the star turned once in 89 days its light rose and fell by 1.3%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 0.6% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
+        "notes": "Proxima Centauri in its own color, darker where its light in MEarth's images of December 2016 to October 2017 says it was darker. As the star turned once in 89 days its light rose and fell by 1.3%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 0.8% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
       },
       {
         "id": "brightness-season-2014",
@@ -74,9 +74,9 @@
           "kind": "scale",
           "title": "Surface brightness",
           "labels": [
-            "98%",
+            "97.5%",
             "100%",
-            "102%"
+            "102.5%"
           ],
           "recipe": {
             "palette": [
@@ -107,15 +107,15 @@
               ]
             ],
             "labels": [
-              "98%",
+              "97.5%",
               "100%",
-              "102%"
+              "102.5%"
             ]
           },
           "meta": "%",
           "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
         },
-        "notes": "Where the star's surface was darker and brighter in MEarth season 2014, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "notes": "Where the star's surface was darker and brighter in MEarth season 2014, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. The map is made at a tilt of 47°, the inclination published for the star's axis. Step through the 4 maps to see the spots change.",
         "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
       },
       {
@@ -139,9 +139,9 @@
           "kind": "scale",
           "title": "Surface brightness",
           "labels": [
-            "98%",
+            "97.5%",
             "100%",
-            "102%"
+            "102.5%"
           ],
           "recipe": {
             "palette": [
@@ -172,15 +172,15 @@
               ]
             ],
             "labels": [
-              "98%",
+              "97.5%",
               "100%",
-              "102%"
+              "102.5%"
             ]
           },
           "meta": "%",
           "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
         },
-        "notes": "Where the star's surface was darker and brighter in MEarth season 2015, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "notes": "Where the star's surface was darker and brighter in MEarth season 2015, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. The map is made at a tilt of 47°, the inclination published for the star's axis. Step through the 4 maps to see the spots change.",
         "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
       },
       {
@@ -204,9 +204,9 @@
           "kind": "scale",
           "title": "Surface brightness",
           "labels": [
-            "98%",
+            "97.5%",
             "100%",
-            "102%"
+            "102.5%"
           ],
           "recipe": {
             "palette": [
@@ -237,15 +237,15 @@
               ]
             ],
             "labels": [
-              "98%",
+              "97.5%",
               "100%",
-              "102%"
+              "102.5%"
             ]
           },
           "meta": "%",
           "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
         },
-        "notes": "Where the star's surface was darker and brighter in MEarth season 2016, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "notes": "Where the star's surface was darker and brighter in MEarth season 2016, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. The map is made at a tilt of 47°, the inclination published for the star's axis. Step through the 4 maps to see the spots change.",
         "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
       },
       {
@@ -269,9 +269,9 @@
           "kind": "scale",
           "title": "Surface brightness",
           "labels": [
-            "98%",
+            "97.5%",
             "100%",
-            "102%"
+            "102.5%"
           ],
           "recipe": {
             "palette": [
@@ -302,15 +302,15 @@
               ]
             ],
             "labels": [
-              "98%",
+              "97.5%",
               "100%",
-              "102%"
+              "102.5%"
             ]
           },
           "meta": "%",
           "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
         },
-        "notes": "Where the star's surface was darker and brighter in MEarth season 2017, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "notes": "Where the star's surface was darker and brighter in MEarth season 2017, worked out in this project from how its light rose and fell by 1.3% as it turned once in 89 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. The map is made at a tilt of 47°, the inclination published for the star's axis. Step through the 4 maps to see the spots change.",
         "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
       },
       {
