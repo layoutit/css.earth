@@ -41,7 +41,9 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     // A system inside another: the brown dwarfs Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's system.
     ['eps-indi-ab', 'eps-indi-a'], ['eps-indi-a', 'eps-indi-a'], ['eps-indi-ba', 'eps-indi-ba'], ['eps-indi-bb', 'eps-indi-ba'],
     // Stars nothing orbits, with the stars their records bind to them: a star system.
-    ['gj-820-a', 'gj-820-a'], ['gj-820-b', 'gj-820-a'], ['alpha-centauri-b', 'alpha-centauri-a'], ['proxima-centauri', 'alpha-centauri-a']] as const) {
+    ['gj-820-a', 'gj-820-a'], ['gj-820-b', 'gj-820-a'], ['alpha-centauri-b', 'alpha-centauri-a'],
+    // A bound star with planets of its own: Proxima Centauri's system is inside Alpha Centauri's, as Epsilon Indi B's is.
+    ['proxima-centauri', 'proxima-centauri'], ['proxima-centauri-b', 'proxima-centauri'], ['proxima-centauri-d', 'proxima-centauri']] as const) {
     assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
   }
   assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');

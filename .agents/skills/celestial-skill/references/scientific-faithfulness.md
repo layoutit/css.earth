@@ -177,7 +177,7 @@ An orbit whose plane no source measures is not drawn as if it were measured. Whe
 from a stated assumption, its record carries `placement: approximate` and says in `sources.placement` what is assumed, whose
 measurement it borrows, the published test of that assumption and which elements are measured (a generator spec's
 `orbit.assumedPlane`). The page then draws the path dashed and names the body "(approx)", as it does a moon whose published
-orbit is not unique (Dactyl, Selam). 55 Cnc b, c and f take the plane measured for 55 Cnc d this way.
+orbit is not unique (Dactyl, Selam). 55 Cnc b, c and f take the plane measured for 55 Cnc d this way, and Proxima Centauri b and d the star's equatorial plane, from its measured rotation axis.
 
 ## Factsheets and precision
 

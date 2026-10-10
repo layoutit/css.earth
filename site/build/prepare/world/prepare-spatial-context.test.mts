@@ -142,7 +142,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     assert.deepEqual(result.bodies.filter((body: { placement?: string }) => body.placement === 'approximate')
       .map((body: { id: string }) => body.id).sort(), ['dactyl', 'selam', ...HOSTED_PLANET_IDS.filter(id => hostedOrbit(id).placement === 'approximate')].sort(),
       'Catalogue preparation must preserve the source records’ placement qualification: a moon whose orbit is not unique, a planet on an assumed plane.');
-    assert.deepEqual(HOSTED_PLANET_IDS.filter(id => hostedOrbit(id).placement === 'approximate').sort(), ['hd-75732b', 'hd-75732c', 'hd-75732f'], 'Only 55 Cnc b, c and f take an assumed plane.');
+    assert.deepEqual(HOSTED_PLANET_IDS.filter(id => hostedOrbit(id).placement === 'approximate').sort(), ['hd-75732b', 'hd-75732c', 'hd-75732f', 'proxima-centauri-b', 'proxima-centauri-d'], 'Only 55 Cnc b, c, f and Proxima Centauri b, d take an assumed plane.');
     // Independently parse the retained Horizons output, bypassing the snapshot
     // loader, solar-geometry.mts and descriptor frames. Retained Sun-centered
     // records own the primary positions; other bodies retain their compact models.

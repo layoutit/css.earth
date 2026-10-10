@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "proxima-centauri-b",
+  "card": {
+    "text": "Proxima Centauri b was found in 2016 by radial velocity; it does not cross its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553728",
+        "url": "https://doi.org/10.1051/0004-6361/202553728",
+        "label": "Mascareño et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: P_orb 11.18465 +/- 0.00053 d, T0 2460548.59 +/- 0.12 BJD (time of inferior conjunction), a 0.04848 au, m sin i 1.055 Earth masses, e 0 (fixed); Klein et al. (2021), Table 1: stellar inclination 47 +/- 7 degrees (assumed for the orbit); NASA Exoplanet Archive ps table: disc_year 2016, sy_pnum 2; pscomppars calculated pl_radj 0.0913"
+      },
+      {
+        "catalogueId": "wikipedia-proxima-centauri-b",
+        "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
+        "label": "Wikipedia, \"Proxima Centauri b\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1378868101",
+        "quote": "Proxima Centauri b, also referred to as Proxima b, or Alpha Centauri Cb, is an exoplanet orbiting within the habitable zone of the red dwarf star Proxima Centauri in the constellation Centaurus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around Proxima Centauri; its size is a model. Its tilt is not measured: it is drawn in the star's equatorial plane.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553728",
+        "url": "https://doi.org/10.1051/0004-6361/202553728",
+        "label": "Mascareño et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: P_orb 11.18465 +/- 0.00053 d, T0 2460548.59 +/- 0.12 BJD (time of inferior conjunction), a 0.04848 au, m sin i 1.055 Earth masses, e 0 (fixed); Klein et al. (2021), Table 1: stellar inclination 47 +/- 7 degrees (assumed for the orbit); NASA Exoplanet Archive ps table: disc_year 2016, sy_pnum 2; pscomppars calculated pl_radj 0.0913"
+      },
+      {
+        "catalogueId": "wikipedia-proxima-centauri-b",
+        "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
+        "label": "Wikipedia, \"Proxima Centauri b\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1378868101",
+        "quote": "The host star is the closest star to the Sun, at a distance of about 4.2 light-years from Earth, and is part of the larger triple star system Alpha Centauri."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/proxima-centauri-d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "proxima-centauri-d-orbits",
+      "title": "Proxima Centauri d: orbits around Proxima Centauri",
+      "output": "proxima-centauri-d-system-orbits.svg",
+      "system": "proxima-centauri",
+      "highlight": "proxima-centauri-d",
+      "description": "The orbits of Proxima Centauri's planets in this map from above, to scale, with Proxima Centauri d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.02881 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844) (https://doi.org/10.1051/0004-6361/202553728): P 5.12338 d"
+      }
+    }
+  ]
+}

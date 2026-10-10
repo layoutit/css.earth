@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "proxima-centauri-d",
+  "displayName": "Proxima Centauri d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.69 Earth radii (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since Proxima Centauri d does not transit",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "5.12 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202553728",
+          "url": "https://doi.org/10.1051/0004-6361/202553728",
+          "label": "Mascareño et al. 2025",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.26 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202553728",
+          "url": "https://doi.org/10.1051/0004-6361/202553728",
+          "label": "Mascareño et al. 2025",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Alpha Centauri; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "proxima-centauri-d-dataset-shape.webp",
+        "surface": "proxima-centauri-d-surface-shape@2x.webp",
+        "poles": "proxima-centauri-d-poles-shape@2x.webp",
+        "source": {
+          "id": "proxima-centauri-d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202553728"
+        },
+        "falseColor": false,
+        "notes": "No image or color of Proxima Centauri d is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of proxima-centauri's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "proxima-centauri-d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/proxima-centauri-d/proxima-centauri-d-system-orbits.svg",
+      "alt": "The orbits of Proxima Centauri's planets in this map from above, to scale, with Proxima Centauri d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "proxima-centauri-d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://doi.org/10.1051/0004-6361/202553728"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Suárez Mascareño et al. (2025)",
+      "href": "https://doi.org/10.1051/0004-6361/202553728"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202553728",
+      "credit": "Suárez Mascareño et al. (2025)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/proxima-centauri-d.json",
+      "credit": "Radius from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since Proxima Centauri d does not transit; mass from Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: minimum mass (m sin i) 0.26 +/- 0.038 Earth masses from the star's radial velocities; the same table gives 0.357 +/- 0.072 Earth masses for an orbit in the star's equatorial plane, tilted 47 degrees; orbit from Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.02881 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844)"
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "proxima-centauri-d",
+  "parent": "proxima-centauri-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Proxima Centauri d",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4418.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Proxima Centauri d",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 268441,
+      "description": "Proxima Centauri d was found in 2025 by radial velocity; it does not cross its star.",
+      "systemName": "Proxima Centauri system",
+      "order": 5847,
+      "context": {
+        "order": 5847
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -14651212017132910,
+        -11188690531661018,
+        -35676838963741252
+      ],
+      "presentationToReference": [
+        0.14785050002238773,
+        -0.6930677500221574,
+        -0.7055475345590504,
+        -0.7456648570427111,
+        0.3905301817023789,
+        -0.5398797071116674,
+        -0.6497108207615161,
+        -0.6059234861422119,
+        0.4590561821026548
+      ],
+      "orbitUpReference": [
+        0.6930677500221574,
+        -0.3905301817023789,
+        0.6059234861422119
+      ],
+      "metersPerUnit": 14252.258064516129,
+      "bodyRadiusM": 4418200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
