@@ -43,7 +43,7 @@ This is one scenario. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's t
 | Ocean model vapor | `qatm`, water vapor column | 17.8 to 270.5 kg/m² | 144.3 | 162.9 | 125.7 | 0 to 300 kg/m² |
 | Ocean model wind | `wsurf`, surface wind speed | 2.55 to 6.91 m/s | 4.41 | 4.75 | 4.07 | 2 to 7 m/s |
 
-The release is one 1.4 GB ZIP archive that stores this 6 MB file compressed, so the bytes of one field cannot be asked for alone: the file is kept whole, outside git, and the source restore downloads the archive once and takes the file out of it. The copy read here was fetched from the archive by byte range and matches the checksum (CRC-32) the archive records for it.
+The release is one 1.4 GB ZIP archive that stores this 6 MB file compressed, so the bytes of one field cannot be asked for alone: the file is kept whole, outside git, and the source restore takes it out of the archive. The copy read here was fetched from the archive by byte range and matches the checksum (CRC-32) the archive records for it.
 
 The paper ran 16 cases for this planet. The other 15 are not shown: simulations 04 and 09 are not in balance by the paper's own account; 05 turns three times for every two orbits, which is not how this page turns the planet; 07 uses an older, higher starlight; 08 has an ocean that does not move; 01 to 03 give the planet Venus's mountains and 10 and 11 Earth's continents; 13 to 17 are at half a bar.
 
