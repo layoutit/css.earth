@@ -104,7 +104,7 @@ export interface BrightnessSurfaceMap extends SurfaceMap { /** The mission whose
   /** When the window's light was measured: its first and last days, UTC. */ readonly fromUtc: string; readonly toUtc: string;
   /** The light's own strongest period, when it is half the catalogued rotation and the star is taken to turn once in two of them. */ readonly lightPeriodDays?: number;
   /** The share of the light in the star's pixels that Gaia's other stars give, and how many they are. */ readonly neighbourShare?: number; readonly neighbours?: number;
-  /** Where the map's tilt comes from: the measured axis the page draws, the tilt the star's record works out, or none. */ readonly tiltFrom: 'page' | 'record' | 'assumed'; readonly codes: readonly string[];
+  /** Where the map's tilt comes from: the measured axis the page draws, the inclination a paper publishes for the star, the tilt the star's record works out, or none. */ readonly tiltFrom: 'page' | 'published' | 'record' | 'assumed'; readonly codes: readonly string[];
   /** The published method that judged the light a rotation, with what it measured. */
   readonly method: { readonly id: string; readonly citation: string; readonly url: string; /** The light curve the method's paper uses, which is the one read. */ readonly lightCurve: string; readonly reliability: string; /** How many of the star's windows were accepted and how many were read. */ readonly campaigns: number; readonly read: number;
     /** What the paper asks, what the method measured of this window and, where its paper judges them together, of all the star's windows, in a sentence's words. */ readonly asks: string; readonly says: string; readonly wholeSays?: string; /** The periodogram's peak and the three methods' periods, where the method is Reinhold & Hekker's. */ readonly peakHeight?: number; readonly periodsDays?: readonly [number, number, number];
@@ -172,11 +172,14 @@ export function mapRange(darkest: number, brightest: number, table: string): rea
 /** Where a map's table goes under the star's `source/`: its mission's directory, and `fine` under it for a table that
  * holds its map to seven decimals of the mean (archives/tess/map.mts `written`), which shows in a value whose last two
  * decimals of a percent are not zero. The source mirror keeps a path's first bytes: the narrow maps written again with
- * seven decimals took a new path there, and the tables written with five keep theirs. */
+ * seven decimals took a new path there, and the tables written with five keep theirs. For the same reason a map made at
+ * an inclination a paper publishes is filed under that tilt (`tilt-47`): the star's earlier tables, made at the assumed
+ * tilt, keep their paths. */
 export const FINE_DIRECTORY = 'fine';
-export function tableDirectory(mission: LightMission, table: string): string {
+export function tableDirectory(mission: LightMission, table: string, publishedTiltDegrees?: number): string {
   const fine = table.split('\n').some(line => { const cells = line.trim().split(/\s+/u); return cells.length === 3 && /^\d+\.\d{5}$/u.test(cells[2]!) && !cells[2]!.endsWith('00'); });
-  return fine ? `${MISSIONS[mission].directory}/${FINE_DIRECTORY}` : MISSIONS[mission].directory; }
+  const directory = fine ? `${MISSIONS[mission].directory}/${FINE_DIRECTORY}` : MISSIONS[mission].directory;
+  return publishedTiltDegrees === undefined ? directory : `${directory}/tilt-${Number(publishedTiltDegrees.toFixed(1))}`; }
 
 /** `curve` is the window's light curve as the reduction kept it: its times date the map. */
 export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, table: string, curve: unknown): BrightnessSurfaceMap {
@@ -206,7 +209,7 @@ export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, ta
   // A code pinned to a commit, which its author publishes no release of, is named with the commit's first seven characters.
   const fitter = MISSIONS[mission].fitter, pinned = fitter === undefined ? undefined : toolchain.find(pin => pin.startsWith(`${fitter} @ `)), commit = pinned === undefined ? undefined : /@([0-9a-f]{7})[0-9a-f]*$/u.exec(pinned)?.[1];
   if (fitter !== undefined && commit === undefined) throw new TypeError(`${choice.program}: its receipt does not name the pinned ${fitter}; reduce the star again.`);
-  const tiltFrom = map.inclinationFrom; if (tiltFrom !== 'page' && tiltFrom !== 'record' && tiltFrom !== 'assumed') throw new TypeError(`${choice.program}: its receipt does not say where the map's tilt comes from; reduce the star again.`);
+  const tiltFrom = map.inclinationFrom; if (tiltFrom !== 'page' && tiltFrom !== 'published' && tiltFrom !== 'record' && tiltFrom !== 'assumed') throw new TypeError(`${choice.program}: its receipt does not say where the map's tilt comes from; reduce the star again.`);
   if (map.table !== `${choice.program}.dat` || !table.includes('ZONE I=')) throw new TypeError(`${choice.program}: the receipt and the table do not describe one map.`);
   const [darkestPercent, brightestPercent] = mapRange(requireFiniteNumber(map.darkestPercent, 'darkestPercent'), requireFiniteNumber(map.brightestPercent, 'brightestPercent'), table);
   return { choice, table, targetName: requireString(star.name, 'receipt star name'), inclinationDegrees: requireFiniteNumber(map.inclinationDegrees, 'map inclination'), inclinationSource: source, periodDays: period,
@@ -224,11 +227,12 @@ const days = (period: number) => period >= 1 ? `${Number(period.toPrecision(3))}
 /** What is a brightness map's own in the records surface-maps.mts writes. */
 export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
   consumer: BRIGHTNESS_CONSUMER, consumers: Object.values(MISSIONS).map(mission => mission.consumer), consumerOf: map => MISSIONS[map.mission].consumer, inputTag: MISSIONS.TESS.inputTag, inputTagOf: map => MISSIONS[map.mission].inputTag,
-  directory: MISSIONS.TESS.directory, directoryOf: map => tableDirectory(map.mission, map.table), archiveOf: map => MISSIONS[map.mission].archive, generator: BRIGHTNESS_GENERATOR, stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
+  directory: MISSIONS.TESS.directory, directoryOf: map => tableDirectory(map.mission, map.table, map.tiltFrom === 'published' ? map.inclinationDegrees : undefined), archiveOf: map => MISSIONS[map.mission].archive, generator: BRIGHTNESS_GENERATOR, stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
   archiveUrl: MISSIONS.TESS.archive, references: [], referencesOf: map => [{ catalogueId: MISSIONS[map.mission].record, role: 'material', evidence: MISSIONS[map.mission].archive }, { catalogueId: PERIOD_METHODS[map.method.id]!.record, role: 'method', evidence: map.method.url }, { catalogueId: METHOD_RECORD, role: 'method', evidence: METHOD_URL }, { catalogueId: GAIA_RECORD, role: 'reference', evidence: GAIA_URL }], colors: COLORS, palette: PALETTE,
   scale: brightnessScale,
   words(map, { count, tilt, outlined }) { const { choice } = map, swing = `${percent(map.amplitude)}%`, turn = days(map.periodDays), from = MISSIONS[map.mission], where = windowName(map.mission, map.window);
     const tilted = map.tiltFrom === 'assumed' ? `No tilt of this star's axis is known: the map is made at ${tilt}°, the middle tilt of axes that point at random.`
+      : map.tiltFrom === 'published' ? `The map is made at a tilt of ${tilt}°, the inclination published for the star's axis.`
       : map.tiltFrom === 'record' ? `The map is made at a tilt of ${tilt}°, worked out from the star's rotation speed, period and radius.` : `The map is made at the tilt the page draws the star with, ${tilt}°.`;
     const outline = outlined ? ` Black line: ${tilt}° S; the star never shows us what lies below it.` : '';
     const halved = map.lightPeriodDays === undefined ? '' : ` The light repeats every ${days(map.lightPeriodDays)}, half the rotation period the catalogues print for the star: two groups of spots on opposite sides do that.`;

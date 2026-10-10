@@ -2,7 +2,7 @@
 /** A star's rotation and brightness map from the light curves a mission publishes of it: K2's when K2 watched the star,
  * TESS's 2-minute ones when K2 did not or its method refuses the star, and Kepler's when neither gives it a rotation.
  *
- *   node packages/telescope-cli/src/archives/tess/reduce.mts <star id>... | --all
+ *   node packages/telescope-cli/src/archives/tess/reduce.mts <star id>... | --all | --remap <star id>...
  *
  * A star is judged by the published method made for its kind of star and of light curve (methods.mts): every light
  * curve of the star that the method's paper covers is read from MAST as the mission publishes it
@@ -21,7 +21,9 @@
  * pinned request, the method, what it measured and why a rotation was or was not accepted, and the codes' versions. Each
  * light curve is kept beside it as the method prepared it, and a map is written as the table the star pages read.
  * Receipts are results: they stay in ignored output/ (docs/provenance/CONTRACT.md). `--all` skips a star already
- * judged this way, and keeps Gaia's answers in output/tess/gaia-neighbours.csv, so a star is asked once. */
+ * judged this way, and keeps Gaia's answers in output/tess/gaia-neighbours.csv, so a star is asked once. `--remap` makes a
+ * judged star's maps again at the tilt its records hold now, from the light curves kept beside its receipt: a tilt enters
+ * nowhere but the maps, so nothing is fetched or judged again. */
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -48,8 +50,22 @@ import { toolchainPins } from './toolchain.mts';
 export const ROTATION_SCHEMA = 'cssearth-tess-rotation@2';
 export const receiptPath = (id: string) => resolve(WORKSPACE, 'output/tess', id, 'rotation.json');
 
-/** Where a map's tilt comes from: the axis the star's page draws from a measurement, the tilt its record works out from its rotation, or none. */
-export type TiltFrom = 'page' | 'record' | 'assumed';
+/** Where a map's tilt comes from: the axis the star's page draws from a measurement, the inclination a paper publishes for the star and its record holds, the tilt its record works out from its rotation, or none. */
+export type TiltFrom = 'page' | 'published' | 'record' | 'assumed';
+/** The tilt a star's records hold for its map. `drawn` is the tilt of a measured axis the page draws. A published inclination
+ * is in the record as `spinInclinationPublishedDegrees`, with the paper in `spinInclinationPublishedSource`: it stands before
+ * the tilt the record works out, which no paper measured. */
+export function recordedTilt(id: string, rotationPath: string, drawn: number | undefined, record: unknown): { readonly tiltDegrees?: number; readonly tiltSource?: string; readonly tiltFrom: TiltFrom } {
+  if (drawn !== undefined && drawn <= 90) return { tiltDegrees: drawn, tiltSource: `${rotationPath}: the measured axis the star's page draws`, tiltFrom: 'page' };
+  const where = `src/objects/${id}/source/measurements.json`, published = isRecord(record) ? record.spinInclinationPublishedDegrees : undefined;
+  if (published !== undefined) {
+    if (typeof published !== 'number' || !(published > 0 && published <= 90)) throw new RangeError(`${where}: spinInclinationPublishedDegrees ${String(published)} is not a tilt from the line of sight, over 0 and up to 90 degrees.`);
+    const source = isRecord(record) ? record.spinInclinationPublishedSource : undefined;
+    if (typeof source !== 'string' || !source.trim()) throw new TypeError(`${where}: a published inclination names its paper in spinInclinationPublishedSource.`);
+    return { tiltDegrees: published, tiltSource: `${source.trim().replace(/\.$/u, '')} (${where}, spinInclinationPublishedDegrees)`, tiltFrom: 'published' };
+  }
+  return isRecord(record) && typeof record.spinInclinationDegrees === 'number' ? { tiltDegrees: record.spinInclinationDegrees, tiltSource: `${where}, spinInclinationDegrees`, tiltFrom: 'record' } : { tiltFrom: 'assumed' };
+}
 /** A star's place at `epochYear` and how it moves on the sky, degrees a year (the motion in right ascension as an arc on the sky). */
 export interface StarPlace extends StarKind { readonly id: string; readonly name: string; readonly raDegrees: number; readonly decDegrees: number; readonly epochYear: number; readonly motionRaDegreesPerYear: number; readonly motionDecDegreesPerYear: number;
   /** The rotation period the star's record holds from the catalogues. */ readonly cataloguedPeriodDays?: number; /** The period of an orbit at the star's surface, from its recorded radius and mass: it cannot turn faster. */ readonly fastestTurnDays?: number; /** Why SIMBAD's type of the star rules out reading a rotation in its light, when it does. */ readonly otherLight?: string; readonly tiltDegrees?: number; readonly tiltSource?: string; readonly tiltFrom: TiltFrom }
@@ -71,8 +87,7 @@ export async function starPlace(id: string): Promise<StarPlace | undefined> {
   // A page that measures its star's axis draws it tilted: the map is made at that tilt. Any other page draws the axis by convention.
   const rotationPath = `src/objects/${id}/source/preparation/rotation.json`, rotation = await readJson(resolve(WORKSPACE, rotationPath));
   const drawn = isRecord(rotation) && /inclination/iu.test(String(rotation.source ?? '')) && typeof rotation.rightAscensionDegrees === 'number' && typeof rotation.declinationDegrees === 'number' ? tiltOfPole(rotation.rightAscensionDegrees, rotation.declinationDegrees, star.rightAscensionDegrees as number, star.declinationDegrees as number) : undefined;
-  const tilt = drawn !== undefined && drawn <= 90 ? { tiltDegrees: drawn, tiltSource: `${rotationPath}: the measured axis the star's page draws`, tiltFrom: 'page' as const }
-    : isRecord(record) && typeof record.spinInclinationDegrees === 'number' ? { tiltDegrees: record.spinInclinationDegrees, tiltSource: `src/objects/${id}/source/measurements.json, spinInclinationDegrees`, tiltFrom: 'record' as const } : { tiltFrom: 'assumed' as const };
+  const tilt = recordedTilt(id, rotationPath, drawn, record);
   return { id, name: isRecord(body.physical) && typeof body.physical.name === 'string' ? body.physical.name : id, raDegrees: star.rightAscensionDegrees as number, decDegrees: star.declinationDegrees as number, epochYear: typeof star.positionEpochJulianYear === 'number' ? star.positionEpochJulianYear : 2000,
     motionRaDegreesPerYear: motion('properMotionRaMasPerYear'), motionDecDegreesPerYear: motion('properMotionDecMasPerYear'),
     ...(isRecord(record) && typeof record.effectiveTemperatureK === 'number' ? { effectiveTemperatureK: record.effectiveTemperatureK } : {}), ...(isRecord(record) && typeof record.surfaceGravityLogg === 'number' ? { surfaceGravityLogg: record.surfaceGravityLogg } : {}),
@@ -251,20 +266,49 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
   const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), mission, lightCurves: listed.map(one => ({ window: one.window, file: one.filename })), ...(catalogue ? { inputCatalogue: catalogue } : {}), ...(elsewhere ? { elsewhere } : {}), ...(blending ? { blending } : {}), tried,
     ...(whole ? { whole: { analysis: whole.measures, says: whole.says, verdict: whole.verdict } } : {}), ...(before.length ? { refused: before } : {}), ...(published ? { published } : {}), ...(papers.length > 1 ? { papers } : {}), ...(by ? { method: described(by) } : {}), rotation, toolchain: { id: codes.id, requirements: codes.entry.requirements } };
   // One map for each window whose light was accepted, all at the star's one period.
-  const maps: Record<string, unknown>[] = [];
-  const made = accepted.length ? await brightnessMaps(accepted, rotation.periodDays!, Math.min(star.tiltDegrees ?? ASSUMED_TILT_DEGREES, 90), mission === 'MEarth' ? MEARTH_MAP_DEGREE : undefined) : [];
-  for (const [index, read] of accepted.entries()) { const map = made[index]!, table = `${stem(mission, read.window)}.dat`, flat = map.values.flat();
-    await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${WINDOW[mission]} ${read.window} (period ${rotation.periodDays} d)`, map));
-    maps.push({ mission, window: read.window, table, degree: map.degree, inclinationDegrees: map.inclinationDegrees, inclinationFrom: star.tiltFrom, inclinationSource: star.tiltSource ?? `assumed: no tilt of the star is known, and ${ASSUMED_TILT_DEGREES} degrees is the middle tilt of axes that point at random`,
-      periodDays: map.periodDays, residual: Number(map.residual.toFixed(5)), noise: Number(map.noise.toFixed(5)), darkestPercent: Number((100 * Math.min(...flat)).toFixed(1)), brightestPercent: Number((100 * Math.max(...flat)).toFixed(1)), starry: map.starry }); }
+  const maps = accepted.length ? await mapsOf(star, mission, accepted, rotation.periodDays!) : [];
   if (maps.length) receipt.maps = maps;
   await writeFile(receiptPath(id), `${JSON.stringify(receipt, null, 1)}\n`);
   return receipt;
 }
 
+/** The map of each accepted window at the star's one period and tilt, written as a table beside the receipt, and what the receipt says of each. */
+async function mapsOf(star: StarPlace, mission: Mission, accepted: readonly { readonly window: number; readonly time: readonly number[]; readonly flux: readonly number[] }[], periodDays: number): Promise<Record<string, unknown>[]> {
+  const run = resolve(WORKSPACE, 'output/tess', star.id), maps: Record<string, unknown>[] = [];
+  const made = await brightnessMaps(accepted, periodDays, Math.min(star.tiltDegrees ?? ASSUMED_TILT_DEGREES, 90), mission === 'MEarth' ? MEARTH_MAP_DEGREE : undefined);
+  for (const [index, read] of accepted.entries()) { const map = made[index]!, table = `${windowStem(star.id, mission, read.window)}.dat`, flat = map.values.flat();
+    await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${WINDOW[mission]} ${read.window} (period ${periodDays} d)`, map));
+    maps.push({ mission, window: read.window, table, degree: map.degree, inclinationDegrees: map.inclinationDegrees, inclinationFrom: star.tiltFrom, inclinationSource: star.tiltSource ?? `assumed: no tilt of the star is known, and ${ASSUMED_TILT_DEGREES} degrees is the middle tilt of axes that point at random`,
+      periodDays: map.periodDays, residual: Number(map.residual.toFixed(5)), noise: Number(map.noise.toFixed(5)), darkestPercent: Number((100 * Math.min(...flat)).toFixed(1)), brightestPercent: Number((100 * Math.max(...flat)).toFixed(1)), starry: map.starry }); }
+  return maps;
+}
+
+/** A judged star's maps made again at the tilt its records hold now, from the light curves its receipt keeps beside it.
+ * A tilt enters a reduction nowhere but its maps, so nothing is fetched or judged again: this is for a star whose tilt
+ * record changed. The receipt keeps what was judged and takes the new tilt and maps. */
+export async function remapStar(id: string): Promise<Record<string, unknown>> {
+  const star = await starPlace(id), receipt = await readJson(receiptPath(id)), run = resolve(WORKSPACE, 'output/tess', id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
+  const rotation = isRecord(receipt) && isRecord(receipt.rotation) ? receipt.rotation : undefined, mission = isRecord(receipt) && typeof receipt.mission === 'string' && receipt.mission in WINDOW ? receipt.mission as Mission : undefined;
+  if (!isRecord(receipt) || receipt.schema !== ROTATION_SCHEMA || typeof rotation?.periodDays !== 'number' || mission === undefined || !Array.isArray(receipt.maps) || !receipt.maps.length) throw new Error(`${id}: ${receiptPath(id)} holds no maps to make again; reduce the star first.`);
+  const accepted: { window: number; time: number[]; flux: number[] }[] = [];
+  for (const map of receipt.maps) { const window = isRecord(map) && typeof map.window === 'number' ? map.window : NaN, curve = await readJson(resolve(run, `${windowStem(id, mission, window)}.curve.json`));
+    if (!isRecord(curve) || !Array.isArray(curve.time) || !Array.isArray(curve.flux) || curve.time.length !== curve.flux.length || !curve.time.length) throw new Error(`${id}: the light of ${WINDOW[mission]} ${window} is not kept beside its receipt; reduce the star again.`);
+    accepted.push({ window, time: curve.time as number[], flux: curve.flux as number[] }); }
+  const { tiltDegrees: _degrees, tiltSource: _source, tiltFrom: _from, ...judged } = isRecord(receipt.star) ? receipt.star : {};
+  const again = { ...receipt, star: { ...judged, ...(star.tiltDegrees === undefined ? {} : { tiltDegrees: star.tiltDegrees }), ...(star.tiltSource === undefined ? {} : { tiltSource: star.tiltSource }), tiltFrom: star.tiltFrom }, maps: await mapsOf(star, mission, accepted, rotation.periodDays) };
+  await writeFile(receiptPath(id), `${JSON.stringify(again, null, 1)}\n`);
+  return again;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const args = process.argv.slice(2), named = args.filter(argument => !argument.startsWith('--')), all = !named.length;
-  if (all && !args.includes('--all')) throw new TypeError('Usage: reduce.mts <star id>... | --all [--shard=K/N]');
+  if (all && !args.includes('--all')) throw new TypeError('Usage: reduce.mts <star id>... | --all [--shard=K/N] | --remap <star id>...');
+  // `--remap` makes a judged star's maps again at the tilt its records hold now, from its kept light curves.
+  if (args.includes('--remap')) { if (all) throw new TypeError('--remap needs the stars whose maps are made again.');
+    for (const id of named) { try { const again = await remapStar(id), maps = again.maps as { inclinationDegrees: number; inclinationFrom: string }[];
+      console.log(`${id}: ${maps.length} map${maps.length === 1 ? '' : 's'} made again at ${maps[0]!.inclinationDegrees} degrees (${maps[0]!.inclinationFrom})`); }
+      catch (error) { console.log(`${id}: failed: ${String(error instanceof Error ? error.message : error).split('\n')[0]!.slice(0, 200)}`); process.exitCode = 1; } }
+    process.exit(); }
   // `--shard=K/N` takes every Nth star, starting at the Kth: N runs side by side share the stars between them. MAST answers
   // requests sent side by side (measured: eight files at once in 2 s, eight position queries at once, none refused).
   const shard = args.find(argument => argument.startsWith('--shard='))?.slice(8).split('/').map(Number);

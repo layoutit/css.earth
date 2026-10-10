@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseNeighbours } from './neighbours.mts';
-import { placeAt, tiltOfPole } from './reduce.mts';
+import { placeAt, recordedTilt, remapStar, tiltOfPole } from './reduce.mts';
 
 test('the Gaia sources around a star are counted, with their share of the light', () => {
   // Three stars: one alone but for a faint neighbour, one with a neighbour as bright as itself 49 arcseconds away, one Gaia does not hold.
@@ -19,4 +19,20 @@ test('a star is looked for where it was in a given year, and a pole gives the ti
   assert.deepEqual(placeAt(star, 2016), { raDegrees: 269.448503, decDegrees: 4.73942 });
   // A pole in the plane of the sky is tilted 90 degrees; one pointing at us, 0.
   assert.equal(tiltOfPole(311.29, 58.66, 311.29, -31.34), 90); assert.equal(tiltOfPole(131.29, 31.34, 311.29, -31.34), 0);
+});
+
+test('a map\'s tilt is the axis the page draws, else the inclination a paper publishes, else the one the record works out', () => {
+  const path = 'src/objects/hd-1/source/preparation/rotation.json', where = 'src/objects/hd-1/source/measurements.json';
+  const published = { spinInclinationPublishedDegrees: 47, spinInclinationPublishedSource: '47 ± 7 degrees, Klein et al. (2021), MNRAS 500, 1844.', spinInclinationDegrees: 62.1 };
+  assert.deepEqual(recordedTilt('hd-1', path, 35, published), { tiltDegrees: 35, tiltSource: `${path}: the measured axis the star's page draws`, tiltFrom: 'page' });
+  assert.deepEqual(recordedTilt('hd-1', path, undefined, published), { tiltDegrees: 47, tiltSource: `47 ± 7 degrees, Klein et al. (2021), MNRAS 500, 1844 (${where}, spinInclinationPublishedDegrees)`, tiltFrom: 'published' });
+  assert.deepEqual(recordedTilt('hd-1', path, undefined, { spinInclinationDegrees: 62.1 }), { tiltDegrees: 62.1, tiltSource: `${where}, spinInclinationDegrees`, tiltFrom: 'record' });
+  assert.deepEqual(recordedTilt('hd-1', path, undefined, { radiusKm: 1 }), { tiltFrom: 'assumed' }); assert.deepEqual(recordedTilt('hd-1', path, undefined, null), { tiltFrom: 'assumed' });
+  // A published value states its paper, and is a tilt from the line of sight.
+  assert.throws(() => recordedTilt('hd-1', path, undefined, { spinInclinationPublishedDegrees: 47 }), /a published inclination names its paper in spinInclinationPublishedSource/u);
+  assert.throws(() => recordedTilt('hd-1', path, undefined, { spinInclinationPublishedDegrees: 133, spinInclinationPublishedSource: 'x' }), /spinInclinationPublishedDegrees 133 is not a tilt from the line of sight/u);
+});
+
+test('maps are made again only for a star, and only from a receipt that holds them', async () => {
+  await assert.rejects(remapStar('earth'), /earth is not a star with a place on the sky/u);
 });

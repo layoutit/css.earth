@@ -73,6 +73,22 @@ test('a brightness map becomes the star page\'s records, saying it is made here 
   assert.throws(() => reducedBrightness(brightnessChoice('hd-1', 'TESS', 27), receipt('page', 'x'), TABLE, LIGHT), /holds no map of that window/u);
 });
 
+test('a map made at an inclination a paper publishes says so, and the page keeps its conventional axis', () => {
+  const source = '47 ± 7 degrees from the line of sight, Klein et al. (2021), MNRAS 500, 1844 (src/objects/hd-1/source/measurements.json, spinInclinationPublishedDegrees)';
+  const choice = brightnessChoice('hd-1', 'TESS', 95), published = receipt('published', source), map = reducedBrightness(choice, { ...published, maps: [{ ...published.maps[0]!, inclinationDegrees: 47 }] }, TABLE, LIGHT);
+  assert.deepEqual([map.tiltFrom, map.inclinationDegrees, map.inclinationSource, BRIGHTNESS_MAPS.outlines!(map)], ['published', 47, source, false]);
+  const { files } = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: [choice] }, { id: 'hd-1', name: 'HD 1' }, [map], HOST());
+  // Its table takes a path of its own, under the tilt: the mirror keeps the table the star had at the assumed tilt.
+  assert.equal(files.get('src/objects/hd-1/source/science/tess/pdcsap/tilt-47/hd-1-s0095.dat'), TABLE); assert.equal(files.has('src/objects/hd-1/source/science/tess/pdcsap/hd-1-s0095.dat'), false);
+  assert.deepEqual([tableDirectory('MEarth', TABLE, 47), tableDirectory('K2', TABLE, 62.25)], ['science/mearth/tilt-47', 'science/k2/pdcsap/tilt-62.3']);
+  const surfaces = (JSON.parse(files.get('src/objects/hd-1/source/preparation/raster.json')!) as { surfaces: { science: { description?: string } }[] }).surfaces;
+  assert.match(surfaces.map(surface => surface.science.description ?? '').join(' '), /The map is made at a tilt of 47°, the inclination published for the star's axis\./u);
+  const readme = withBrightnessReadme('# HD 1\n\n## Sources\n\nGaia.\n\n## Evidence\n\nRun.\n\n## Known problems\n\n- None.\n', map, 15);
+  assert.match(readme, /The map is made at a tilt of 47°, the inclination published for the star's axis: 47 ± 7 degrees from the line of sight, Klein et al\. \(2021\), MNRAS 500, 1844 \(src\/objects\/hd-1\/source\/measurements\.json, spinInclinationPublishedDegrees\)\. The page draws the axis by convention\./u);
+  assert.doesNotMatch(readme, /No tilt of the axis is known/u);
+  assert.throws(() => reducedBrightness(choice, receipt('paper', source), TABLE, LIGHT), /its receipt does not say where the map's tilt comes from/u);
+});
+
 test('a K2 map is of the mission\'s own light curve and names the published method that judged it a rotation', () => {
   // K2-136 in campaign 13: the receipt names Reinhold & Hekker (2020), the light curve they use and what their three methods measured.
   const k2 = { ...receipt('record', 'measurements.json, spinInclinationDegrees'), light: { gaiaDr3: '1', magnitude: 10.1, neighbours: 0, neighbourShare: 0 }, rotation: { detected: true, periodDays: 14.46, amplitude: 0.0067 },

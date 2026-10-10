@@ -852,8 +852,10 @@ and shapes follow from that choice.
 The map is made at one tilt of the star's axis:
 
 1. the tilt the star's page draws, when its rotation record holds a measured one;
-2. otherwise the tilt its measurements record works out from its rotation speed, period and radius;
-3. otherwise 60°, the middle tilt of axes that point at random (half of them are tilted less).
+2. otherwise the inclination a paper publishes for the star, when its measurements record holds one with its paper
+   (`spinInclinationPublishedDegrees`, `spinInclinationPublishedSource`): Proxima Centauri's 47°;
+3. otherwise the tilt its measurements record works out from its rotation speed, period and radius;
+4. otherwise 60°, the middle tilt of axes that point at random (half of them are tilted less).
 
 Each map's text says which. A brightness map never changes the axis a page draws.
 
@@ -898,7 +900,8 @@ sector 52, 99.995% to 100.005%) held 11 distinct values at five decimals and hol
 written: no star gains or loses a map by it. Of the 488 maps, 61 are written with seven decimals, those of 18 stars: 56
 from TESS's light, 2 from K2's and 3 quarters of two Kepler stars (Kepler-538 and Kepler-1656). The other 427 tables
 are as they were, byte for byte. A table with seven decimals is filed under `fine/` beside the others, because the
-source mirror keeps the first bytes published at a path.
+source mirror keeps the first bytes published at a path. For the same reason the tables of a map made at an inclination
+a paper publishes are filed under that tilt (`tilt-47/`): Proxima Centauri's four, made first at the assumed 60°.
 
 ![Shangcheng's Brightness map of sector 52 in the app, from its table with five decimals and with seven](images/stellar-brightness-maps-narrow-map.webp)
 
