@@ -1,0 +1,40 @@
+{
+  "id": "source-trappist-1e-rocke3d-model-simulation",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TRAPPIST-1e · trappist 1e rocke3d model simulation",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "Trappist1d/FIGURES/DATA/21_ANN4500-4999.aijTrappist1e_04.nc"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/14740675/files/Trappist1d.zip?download=1",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1e/source/manifest.json",
+      "locator": "/inputs/17"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Way (2025); ROCKE-3D simulation",
+      "scope": "The trappist 1e rocke3d model simulation input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC0 1.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -69,6 +69,24 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-dataset-rocke3d-cloud-model.webp",
+      "bytes": 1698,
+      "sha256": "9b70cd32d9678d3c04232df7bfe85d8ba8a10d32717a79c4bb391a129cf39f3f"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-dataset-rocke3d-ice-model.webp",
+      "bytes": 1814,
+      "sha256": "416814ff0bbc5725151b4ab975447410724c5573b2c1cc4716c06b138f2a0542"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-dataset-rocke3d-model.webp",
+      "bytes": 898,
+      "sha256": "559a3e4cb49a96ad4436d7a7fa5d5454141ed1cdc398650f671116a1cde6a1cb"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-dataset-sea-ice-model.webp",
       "bytes": 412,
       "sha256": "01ba0669231c848028e51a916a092c419faeaf092d7a895e46973c65407c21e6"
@@ -132,6 +150,24 @@
       "filename": "trappist-1e-poles-illustration@2x.webp",
       "bytes": 333930,
       "sha256": "90b7d39d277fc579161423d139349d6be2718139c464e4df599d2d7ec6f0ac0c"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-rocke3d-cloud-model@2x.webp",
+      "bytes": 50392,
+      "sha256": "26b8a0098c69c7cbe41d0fbf94b61e77df5ddfff5471e368f87c3700bd3c7a88"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-rocke3d-ice-model@2x.webp",
+      "bytes": 7998,
+      "sha256": "c1afebc3603d94e5cbfa3f278cc2ada830ac01b8f9e80f85e48b9753c3f05394"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-rocke3d-model@2x.webp",
+      "bytes": 31598,
+      "sha256": "6726f1057ec51a586fb6926402cefbbc7f07ff536ddbbc448bfdce01d2c80a92"
     },
     {
       "location": "public",
@@ -201,6 +237,24 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-surface-rocke3d-cloud-model@2x.webp",
+      "bytes": 169384,
+      "sha256": "8425684e1eeed35f13fc64c288e75c208ffb96b82720c1a11b3cddfbdfa5860a"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-surface-rocke3d-ice-model@2x.webp",
+      "bytes": 88184,
+      "sha256": "d0f6a157f3f7af70e0b7d8833b6835e0d8fd54ce16e156489c80f7f516352e66"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-surface-rocke3d-model@2x.webp",
+      "bytes": 181336,
+      "sha256": "9079e56f6ddc7689db4feb4f41c443a79b694a9f4dfc40ddb0fd995a7d5581a6"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-surface-sea-ice-model@2x.webp",
       "bytes": 49932,
       "sha256": "08d585019327e8e0e8f34f8d9bb3602337860bbe25135a5cc59499f824c4fa10"
@@ -232,8 +286,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 19912,
-      "sha256": "5ca7de4174e3dc9f5ea78ddc1fde566443cdfd82fc183a468639d335c7825439"
+      "bytes": 20549,
+      "sha256": "f143cce1e3da5cf40b8bc3a6c2c4d4a0fae69af2673cd118765b464a5283e70a"
     },
     {
       "location": "prepared",
@@ -250,8 +304,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 18779,
-      "sha256": "1c4a4e58f489a28caaa4f0504d76c5cc542a78a96b14b4e84b8ba4b34770eaf2"
+      "bytes": 24573,
+      "sha256": "1bbf1125e45179e90a0201459ecc4f038554526d75d2416ff3e189dcf6e98a16"
     },
     {
       "location": "prepared",
@@ -262,8 +316,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1115,
-      "sha256": "3c6e1fd0a295b4b39412e6db853648b7d26cd0c7dbd359214ea876d59531a738"
+      "bytes": 1447,
+      "sha256": "5717aa630daea44294a7484122baac646f700d23b4df85f6e59de18dbbac8850"
     },
     {
       "location": "prepared",
@@ -309,6 +363,24 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/rocke3d-cloud-model.webp",
+      "bytes": 4206,
+      "sha256": "5d12098dc0ccd012b3e4b7fe53fc17ca3c1caaa1eb012de6f131e2b8ddaa2efc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/rocke3d-ice-model.webp",
+      "bytes": 3254,
+      "sha256": "37c29b9f8965d1b80be471aa7d3200da5a0096a4d32bbcbfe0ab16ff6d96a96b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/rocke3d-model.webp",
+      "bytes": 2890,
+      "sha256": "f084b678e8aa606e291df3b9dc48d8b31b8a38e3935932cf9a90422575ea0f07"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/sea-ice-model.webp",
       "bytes": 1844,
       "sha256": "c406f671fa295a94f5c532a2690d4859f26fa15e154af3efcf2ad2debecb82f3"
@@ -334,14 +406,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 127480,
-      "sha256": "2a66a49494e6b040808354bc8c967c2b47f2d7253ad2aa1916e4ba2b3fffbd83"
+      "bytes": 139247,
+      "sha256": "df9e753ea6150bd42ec1bca1076adfef1c803efb5a7c2bf49a720b83875d69cf"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2979,
-      "sha256": "d541d0fc7fdbb1707e8afd96bf9583bf28cb9368e5fcad5b39b23268f6ea6a1e"
+      "bytes": 3555,
+      "sha256": "71c4387a622ee31ae2533f5feabb40477d3aed58388f69a4288a73f417df4cb0"
     }
   ]
 }

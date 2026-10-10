@@ -428,6 +428,8 @@ src/objects/wasp-17b/source/science/valentine-2024/tmap.pkl
 src/objects/wasp-94-a-b/source/science/mukherjee-2025/WASP-94Ab_GCM.nc
 # TRAPPIST-1 d's ROCKE-3D run 06 (6 MB); a member of Way (2025)'s 1.4 GB ZIP release, restored from Zenodo (src/objects/trappist-1d/source/manifest.json).
 src/objects/trappist-1d/source/science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc
+# The same release's run 21, of TRAPPIST-1 e (6.7 MB); restored from Zenodo (src/objects/trappist-1e/source/manifest.json).
+src/objects/trappist-1e/source/science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc
 src/objects/hd-189733b/source/illustration/HD_189733_b.jpg
 src/objects/hd-29615/source/science/willamo-2022/*.dat
 src/objects/hd-35296/source/science/willamo-2022/*.dat

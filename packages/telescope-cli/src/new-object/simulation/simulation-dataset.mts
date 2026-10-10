@@ -133,13 +133,23 @@ export function parseSimulationEntries(value: unknown): Map<string, SimulationEn
 
 export interface SimulationRelease { readonly doi: string; readonly recordUrl: string; readonly title: string; readonly license: ReuseLicense; readonly fileUrl: string; readonly bytes: number }
 
+/** Whether a model file is named for the object: its name is in the file's, written with or without its spaces and
+ * hyphens, and is not the start of a longer one ("21_ANN4500-4999.aijTrappist1e_04.nc" and "runs/TRAPPIST-1e/ts.nc" for
+ * TRAPPIST-1e; a letter after the planet's letter, or a digit after a star's number, makes it another name). A release of
+ * many planets' runs names each in its files, and its record may name only the one its paper is about. */
+export function fileNamesObject(file: string, names: readonly string[]): boolean {
+  return names.map(name => name.toLowerCase().replace(/[^a-z0-9]/gu, '')).filter(name => name.length > 3)
+    .some(name => new RegExp(`${[...name].join('[^a-z0-9]?')}(?![${/[a-z]$/u.test(name) ? 'a-z' : '0-9'}])`, 'iu').test(file));
+}
+
 /** The release an entry names, as Zenodo states it today. Refused: a record under no license that allows reuse, one that
- * does not name this object (a model of a class of objects is not a model of this one), and one that lists no such file. */
+ * names this object neither in its title or description nor in the model file's own name (a model of a class of objects
+ * is not a model of this one), and one that lists no such file. */
 export async function simulationRelease(archive: Archive, id: string, names: readonly string[], entry: SimulationEntry): Promise<SimulationRelease> {
   const number = ZENODO_DOI.exec(entry.record)![1]!, record = parseZenodoRecord(JSON.parse(await archive.text(`${ZENODO_RECORDS}/${number}`)), `Zenodo record ${number}`);
   const license = reuseLicense(record.license), where = `${id}, dataset ${entry.dataset}: Zenodo record ${entry.record}`;
   if (!license) throw new Error(`${where} states ${record.license ? `the license ${record.license}` : 'no license'}; a simulation is shown only under a license known to allow reuse (field record).`);
-  if (!namesObject(record, names)) throw new Error(`${where} ("${record.title}") does not name ${names[0]} in its title or description; a model of a class of objects is not a model of this one (field record).`);
+  if (!namesObject(record, names) && !fileNamesObject(entry.member ?? entry.file, names)) throw new Error(`${where} ("${record.title}") does not name ${names[0]} in its title or description, and ${entry.member ?? entry.file} is not named for it; a model of a class of objects is not a model of this one (field record).`);
   const file = record.files.find(candidate => candidate.name === entry.file);
   if (!file) throw new Error(`${where} lists no file ${entry.file} (field file); it lists ${record.files.slice(0, 5).map(candidate => candidate.name).join(', ')}${record.files.length > 5 ? ` and ${record.files.length - 5} more` : ''}.`);
   return { doi: entry.record, recordUrl: record.url, title: record.title, license, fileUrl: file.url, bytes: file.bytes };

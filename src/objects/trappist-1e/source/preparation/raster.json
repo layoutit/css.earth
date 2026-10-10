@@ -475,6 +475,141 @@
         "title": "CO₂ model clouds · ExoCAM simulation",
         "sourceUrl": "https://arxiv.org/abs/2201.09797"
       }
+    },
+    {
+      "id": "rocke3d-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "rocke3d-model",
+        "label": "ROCKE-3D model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc",
+        "variable": "tsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "C",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "rocke3d-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "°C",
+        "minimum": -60,
+        "maximum": 10,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "-60",
+          "-25",
+          "10"
+        ],
+        "description": "Simulated surface air temperature from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "ROCKE-3D model · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
+    },
+    {
+      "id": "rocke3d-ice-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "rocke3d-ice-model",
+        "label": "ROCKE-3D sea ice",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc",
+        "variable": "oicefr",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "%",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "rocke3d-ice-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 0,
+        "maximum": 100,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "50",
+          "100"
+        ],
+        "description": "Simulated sea ice cover from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "ROCKE-3D sea ice · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
+    },
+    {
+      "id": "rocke3d-cloud-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "rocke3d-cloud-model",
+        "label": "ROCKE-3D clouds",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc",
+        "variable": "pcldt",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "%",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "rocke3d-cloud-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 30,
+        "maximum": 100,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "30",
+          "65",
+          "100"
+        ],
+        "description": "Simulated cloud cover from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "ROCKE-3D clouds · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
     }
   ],
   "lighting": {
