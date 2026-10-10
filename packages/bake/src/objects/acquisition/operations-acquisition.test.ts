@@ -285,6 +285,49 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
   }
 });
 
+test('one member of a remote ZIP is restored by byte range, and the archive is taken whole only when it must be', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-zip-range-')), archives = resolve('.local/source-archives');
+  const listArchives = async () => new Set(await readdir(archives).catch(() => [])), before = await listArchives();
+  /** An archive host: it answers a range with those bytes and their place, or ignores ranges as some servers do. */
+  const serving = (archive: Buffer, asked: string[], ranges = true) => ({ fetch: async (_url: string, init?: RequestInit) => {
+    const range = new Headers(init?.headers).get('range'); asked.push(range ?? 'whole');
+    if (!range || !ranges) return new Response(new Uint8Array(archive));
+    const suffix = /^bytes=-(\d+)$/u.exec(range), span = /^bytes=(\d+)-(\d+)$/u.exec(range);
+    const first = suffix ? Math.max(0, archive.length - Number(suffix[1])) : Number(span![1]), last = suffix ? archive.length - 1 : Math.min(Number(span![2]), archive.length - 1);
+    return new Response(new Uint8Array(archive.subarray(first, last + 1)), { status: 206, headers: { 'content-range': `bytes ${first}-${last}/${archive.length}` } });
+  } });
+  try {
+    // A deflated model file beside a larger neighbour, and a stored one: the two methods the reader takes.
+    const model = Buffer.from(`${'field '.repeat(4000)}${randomUUID()}\n`), stored = Buffer.from(`stored ${randomUUID()}\n`);
+    await mkdir(join(directory, 'run/DATA'), { recursive: true });
+    await writeFile(join(directory, 'run/DATA/model.nc'), model); await writeFile(join(directory, 'run/neighbour.bin'), Buffer.alloc(200_000, 7)); await writeFile(join(directory, 'run/stored.txt'), stored);
+    execFileSync('zip', ['-q', 'archive.zip', 'run/neighbour.bin', 'run/DATA/model.nc'], { cwd: directory }); execFileSync('zip', ['-q', '-0', 'archive.zip', 'run/stored.txt'], { cwd: directory });
+    const archive = await readFile(join(directory, 'archive.zip')), url = `https://example.test/${randomUUID()}.zip`;
+    const step = (member: string, path: string) => ({ kind: 'zip-member', path, url, member, groups: ['restore'] });
+    const run = (member: string, path: string, transport: { fetch(url: string, init?: RequestInit): Promise<Response> }) => executeAcquisition({ sourceRoot: directory, group: 'restore', transport,
+      plan: parseAcquisitionPlan({ schema: 'cssearth-acquisition-plan@1', operations: [step(member, path)] }), manifest: { schema: 'cssearth-authoritative-sources@3', inputs: [{ id: 'fixture', path }], generatedIntermediates: [], documents: [] } });
+    const asked: string[] = [];
+    await run('run/DATA/model.nc', 'model.nc', serving(archive, asked));
+    assert.deepEqual(await readFile(join(directory, 'model.nc')), model);
+    // The tail holds this small archive's directory: the member's header and its bytes are the only other requests.
+    assert.equal(asked[0], 'bytes=-65557'); assert.equal(asked.length, 3); assert.equal(asked.includes('whole'), false);
+    assert.ok(asked.slice(1).every(range => { const [first, last] = /^bytes=(\d+)-(\d+)$/u.exec(range)!.slice(1).map(Number); return last! - first! < model.length; }), 'only the header and the packed member are asked for');
+    await run('run/stored.txt', 'stored.txt', serving(archive, [])); assert.deepEqual(await readFile(join(directory, 'stored.txt')), stored);
+    assert.deepEqual([...await listArchives()].filter(name => !before.has(name)), [], 'no archive is kept for a member read by range');
+    // A member the directory does not list is refused at once, and so is one whose bytes are not the directory's.
+    await assert.rejects(run('run/DATA/absent.nc', 'absent.nc', serving(archive, [])), /lists no member run\/DATA\/absent\.nc/u);
+    const damaged = Buffer.from(archive); damaged[damaged.indexOf(stored) + 3] ^= 0xff;
+    await assert.rejects(run('run/stored.txt', 'damaged.txt', serving(damaged, [])), /run\/stored\.txt of .* does not unpack to the \d+ bytes and the CRC-32 its archive records/u);
+    // A server that ignores ranges sends the archive: that one answer is the download, and unzip takes the member out.
+    const whole: string[] = [];
+    await run('run/DATA/model.nc', 'whole.nc', serving(archive, whole, false));
+    assert.deepEqual(whole, ['bytes=-65557']); assert.deepEqual(await readFile(join(directory, 'whole.nc')), model);
+  } finally {
+    for (const name of await listArchives()) if (!before.has(name)) await rm(join(archives, name), { recursive: true, force: true });
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 // The ZIP test above restored an empty file on CI: unzip had finished a 59-byte member before the pinned write began to
 // read it, and Node discards what a finished child wrote that nothing reads yet. The reader here arrives late on purpose.
 test('a command\'s output is kept for a reader that arrives after the command has finished', async () => {
