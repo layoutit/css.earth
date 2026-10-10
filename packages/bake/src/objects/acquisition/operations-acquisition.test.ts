@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { commandOutput, executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
+import { commandOutput, executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe, zipMemberFromTail, zipTailRange } from '@cssearth/bake/objects/acquisition';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
 const test = sourceTest();
@@ -282,6 +282,64 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
   } finally {
     for (const name of await listArchives()) if (!before.has(name)) await rm(join(archives, name), { recursive: true, force: true });
     await rm(directory,{recursive:true,force:true});
+  }
+});
+
+test('one member of a remote ZIP is restored by byte range, and the archive is taken whole only when it must be', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-zip-range-')), archives = resolve('.local/source-archives');
+  const listArchives = async () => new Set(await readdir(archives).catch(() => [])), before = await listArchives();
+  /** An archive host: it answers a range with those bytes and their place, or ignores ranges as some servers do. */
+  const serving = (archive: Buffer, asked: string[], ranges = true) => ({ fetch: async (_url: string, init?: RequestInit) => {
+    const range = new Headers(init?.headers).get('range'); asked.push(range ?? 'whole');
+    if (!range || !ranges) return new Response(new Uint8Array(archive));
+    const suffix = /^bytes=-(\d+)$/u.exec(range), span = /^bytes=(\d+)-(\d+)$/u.exec(range);
+    const first = suffix ? Math.max(0, archive.length - Number(suffix[1])) : Number(span![1]), last = suffix ? archive.length - 1 : Math.min(Number(span![2]), archive.length - 1);
+    return new Response(new Uint8Array(archive.subarray(first, last + 1)), { status: 206, headers: { 'content-range': `bytes ${first}-${last}/${archive.length}` } });
+  } });
+  try {
+    // A deflated model file beside a larger neighbour, and a stored one: the two methods the reader takes.
+    const model = Buffer.from(`${'field '.repeat(4000)}${randomUUID()}\n`), stored = Buffer.from(`stored ${randomUUID()}\n`);
+    await mkdir(join(directory, 'run/DATA'), { recursive: true });
+    await writeFile(join(directory, 'run/DATA/model.nc'), model); await writeFile(join(directory, 'run/neighbour.bin'), Buffer.alloc(200_000, 7)); await writeFile(join(directory, 'run/stored.txt'), stored);
+    execFileSync('zip', ['-q', 'archive.zip', 'run/neighbour.bin', 'run/DATA/model.nc'], { cwd: directory }); execFileSync('zip', ['-q', '-0', 'archive.zip', 'run/stored.txt'], { cwd: directory });
+    const archive = await readFile(join(directory, 'archive.zip')), url = `https://example.test/${randomUUID()}.zip`;
+    const step = (member: string, path: string) => ({ kind: 'zip-member', path, url, member, groups: ['restore'] });
+    const run = (member: string, path: string, transport: { fetch(url: string, init?: RequestInit): Promise<Response> }) => executeAcquisition({ sourceRoot: directory, group: 'restore', transport,
+      plan: parseAcquisitionPlan({ schema: 'cssearth-acquisition-plan@1', operations: [step(member, path)] }), manifest: { schema: 'cssearth-authoritative-sources@3', inputs: [{ id: 'fixture', path }], generatedIntermediates: [], documents: [] } });
+    const asked: string[] = [];
+    await run('run/DATA/model.nc', 'model.nc', serving(archive, asked));
+    assert.deepEqual(await readFile(join(directory, 'model.nc')), model);
+    // The tail holds this small archive's directory: the member's header and its bytes are the only other requests.
+    assert.equal(asked[0], 'bytes=-65557'); assert.equal(asked.length, 3); assert.equal(asked.includes('whole'), false);
+    assert.ok(asked.slice(1).every(range => { const [first, last] = /^bytes=(\d+)-(\d+)$/u.exec(range)!.slice(1).map(Number); return last! - first! < model.length; }), 'only the header and the packed member are asked for');
+    await run('run/stored.txt', 'stored.txt', serving(archive, [])); assert.deepEqual(await readFile(join(directory, 'stored.txt')), stored);
+    assert.deepEqual([...await listArchives()].filter(name => !before.has(name)), [], 'no archive is kept for a member read by range');
+    // A member the directory does not list is refused at once, and so is one whose bytes are not the directory's.
+    await assert.rejects(run('run/DATA/absent.nc', 'absent.nc', serving(archive, [])), /lists no member run\/DATA\/absent\.nc/u);
+    const damaged = Buffer.from(archive); damaged[damaged.indexOf(stored) + 3] ^= 0xff;
+    await assert.rejects(run('run/stored.txt', 'damaged.txt', serving(damaged, [])), /run\/stored\.txt of .* does not unpack to the \d+ bytes and the CRC-32 its archive records/u);
+    // An archive this reader is not for is taken whole: ZIP64 counts in its end record, a member packed another way, an encrypted one.
+    const end = archive.lastIndexOf(Buffer.from([0x50, 0x4b, 0x05, 0x06])), entry = archive.indexOf(Buffer.from([0x50, 0x4b, 0x01, 0x02]));
+    const changed = (change: (bytes: Buffer) => void) => { const bytes = Buffer.from(archive); change(bytes); return bytes; };
+    const tail = async (bytes: Buffer, member: string) => { const host = serving(bytes, []), ranged = (range: string) => host.fetch(url, { headers: { Range: range } }); return zipMemberFromTail(await ranged(zipTailRange), ranged, url, member); };
+    // The directory's first entry, whose fields are changed below.
+    const listed = archive.subarray(entry + 46, entry + 46 + archive.readUInt16LE(entry + 28)).toString();
+    assert.equal(await tail(changed(bytes => { bytes.writeUInt16LE(0xffff, end + 8); bytes.writeUInt16LE(0xffff, end + 10); }), 'run/DATA/model.nc'), null);
+    assert.equal(await tail(changed(bytes => { bytes.writeUInt16LE(12, entry + 10); }), listed), null);
+    assert.equal(await tail(changed(bytes => { bytes.writeUInt16LE(bytes.readUInt16LE(entry + 8) | 1, entry + 8); }), listed), null);
+    await assert.rejects(tail(Buffer.alloc(5000, 1), 'run/DATA/model.nc'), /does not end as a ZIP archive does/u);
+    // A directory that begins before the archive's last bytes is asked for on its own: one request more.
+    for (let i = 0; i < 1500; i++) await writeFile(join(directory, `run/neighbour-with-a-long-name-so-the-directory-grows-${String(i).padStart(5, '0')}.bin`), Buffer.from([i & 255]));
+    execFileSync('zip', ['-q', '-r', 'many.zip', 'run'], { cwd: directory });
+    const many = await readFile(join(directory, 'many.zip')), far: string[] = [], manyHost = serving(many, far), manyRanged = (range: string) => manyHost.fetch(url, { headers: { Range: range } });
+    assert.deepEqual(Buffer.from((await zipMemberFromTail(await manyRanged(zipTailRange), manyRanged, url, 'run/DATA/model.nc'))!), model); assert.equal(far.length, 4);
+    // A server that ignores ranges sends the archive: that one answer is the download, and unzip takes the member out.
+    const whole: string[] = [];
+    await run('run/DATA/model.nc', 'whole.nc', serving(archive, whole, false));
+    assert.deepEqual(whole, ['bytes=-65557']); assert.deepEqual(await readFile(join(directory, 'whole.nc')), model);
+  } finally {
+    for (const name of await listArchives()) if (!before.has(name)) await rm(join(archives, name), { recursive: true, force: true });
+    await rm(directory, { recursive: true, force: true });
   }
 });
 

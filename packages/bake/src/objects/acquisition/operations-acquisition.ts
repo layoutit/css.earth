@@ -13,6 +13,7 @@ import type { SourceManifest, SourceEntry } from '../sources/index.ts';
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
 import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from './satellite-catalog.ts';
 import { prepareDskMesh, validateDskMeshRecipe } from './dsk-mesh.ts';
+import { zipMemberFromTail, zipTailRange } from './zip-range.ts';
 import { missingCoverageColor } from '../../raster/index.ts';
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
@@ -93,18 +94,27 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    await publish(step.path,data);
   }
   else if(step.kind==='zip-member'){
+   const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
    const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});
    // The archive is cached by its URL; a complete download is kept until the cache is cleared.
    const archivePath=resolve(cache,`${archiveCacheName(step.url)}.zip`);
+   let member:Uint8Array|null=null;
    if(!await lstat(archivePath).then(info=>info.isFile()&&info.size>0,()=>false)){
-    const response=await request(step.url);if(!response.body)throw new Error('ZIP download has no body.');
-    const temporary=`${archivePath}.partial-${process.pid}`;
-    try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
+    // The member alone is asked for first, by byte range (zip-range.ts): a deposit of gigabytes is not downloaded for a file of
+    // megabytes. A server that answers the first range with the archive itself, or an archive that reader is not for, is
+    // taken whole, and the answer already in hand is the download.
+    const ranged=(range:string)=>request(step.url,{headers:{Range:range}}),first=await ranged(zipTailRange);
+    if(first.status===206)member=await zipMemberFromTail(first,ranged,step.url,step.member);
+    if(!member){
+     const response=first.status===206?await request(step.url):first;if(!response.body)throw new Error('ZIP download has no body.');
+     const temporary=`${archivePath}.partial-${process.pid}`;
+     try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
+    }
    }
-   const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
+   if(member)await publishPinnedSource({sourceRoot,entry,bytes:member});
    // unzip writes the member straight into the pinned file, so one of hundreds of megabytes is never held in memory. A
    // member unzip could not read whole fails the stream before the file takes its place.
-   await publishPinnedSourceStream({sourceRoot,entry,stream:commandOutput('unzip',['-p',archivePath,step.member],`unzip could not read ${step.member} from ${step.url}`)});
+   else await publishPinnedSourceStream({sourceRoot,entry,stream:commandOutput('unzip',['-p',archivePath,step.member],`unzip could not read ${step.member} from ${step.url}`)});
   }
   else if(step.kind==='tar-gz-member'){
    const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});
