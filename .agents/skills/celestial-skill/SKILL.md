@@ -162,6 +162,10 @@ would use, so what it appears to establish has to be established again. Follow t
 for conflicting or undocumented conventions. Record the selected companion and
 any remaining inference in the existing recipe and body README.
 
+Scratch exploration in a body's ignored `.local/` is fine while a method is open. Once the owner accepts a step,
+port it to `packages/bake/authoring/<body>/` in TypeScript with a comparison against the scratch result before the
+next step builds on it; do not leave accepted processing in scratch for a batch port at the end.
+
 Blank body-fixed convenience fields in an image header do not establish that
 PDS lacks geometry. Inspect the mission SPICE release, including reconstructed
 ephemerides, pointing, instrument and body-orientation kernels. Distinguish
