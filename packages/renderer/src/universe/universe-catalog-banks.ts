@@ -87,7 +87,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   const points = (pointBanks ?? []).map(bank => ({ id: bank.id, url: bank.url, host: bank.host, stars: bank.stars === true, mounted: null as ReturnType<typeof mountCataloguePoints> | null }));
   lifetime.onDispose(() => { for (const bank of points) { bank.mounted?.destroy(); bank.mounted = null; } });
   // A package that is only a plane around a body is drawn on the same fixed planes, under the dots.
-  const planes = (planeBanks ?? []).map(bank => ({ id: bank.id, far: farPlanes.add(bank.id, bank.frame), orbitOpacity: bank.orbitOpacity ?? 1 }));
+  const planes = (planeBanks ?? []).map(bank => ({ id: bank.id, far: farPlanes.add(bank.id, bank.frame), orbitOpacity: bank.orbitOpacity ?? 1, bodyColors: bank.bodyColors ?? null }));
   const billboardEntries = images.flatMap(bank => {
     const billboard = prepared?.plan.banks.get(bank.id)?.billboard;
     return billboard ? [{ id: bank.id, frame: bank.frame, billboard }] : [];
@@ -214,24 +214,26 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     /** Planes declared after mount (their host's entry brought them); a known id is ignored. */
     addPlaneBanks(added: NonNullable<PreparedUniverseOptions['planeBanks']>) {
       if (lifetime.disposed) return;
-      for (const bank of added) if (!planes.some(plane => plane.id === bank.id)) planes.push({ id: bank.id, far: farPlanes.add(bank.id, bank.frame), orbitOpacity: bank.orbitOpacity ?? 1 });
+      for (const bank of added) if (!planes.some(plane => plane.id === bank.id)) planes.push({ id: bank.id, far: farPlanes.add(bank.id, bank.frame), orbitOpacity: bank.orbitOpacity ?? 1, bodyColors: bank.bodyColors ?? null });
     },
     /** Draw the plane the mounted scene's dataset shows (`selectedObjectId`), and hide every other. A plane shows once it
      * is large enough to read, as a bank's far picture does, and gives way as the camera closes on its centre, over the
      * distances its payload states (`centreFadeM`): among the bodies it lies between, a plane seen along itself is a line
-     * across the view. Returns the opacity the world's orbit lines take beside it: a plane that states one
-     * (`orbitOpacity`) dims them as far as its own picture, once loaded, shows. */
-    publishPlanes(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string): number {
-      if (lifetime.disposed) return 1;
-      let orbits = 1;
-      for (const { id, far, orbitOpacity } of planes) {
+     * across the view. Returns how the world's orbit lines are drawn beside it: the opacity they take, which a plane that
+     * states one (`orbitOpacity`) lowers as far as its own picture, once loaded, shows; and the colors the shown plane
+     * gives them (`bodyColors`), for as long as its dataset is the one selected. */
+    publishPlanes(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string): { opacity: number; colors: Readonly<Record<string, string>> | null } {
+      if (lifetime.disposed) return { opacity: 1, colors: null };
+      let orbits = 1, colors: Readonly<Record<string, string>> | null = null;
+      for (const { id, far, orbitOpacity, bodyColors } of planes) {
         const centre = far.loaded?.payload.centreFadeM;
         const opacity = id !== selectedObjectId ? 0 : projectedVolumeOpacity(world, viewport, far.frame, far.radiusUnits) *
           (centre ? logarithmicFade(eyeDistanceM(world.pose, far.frame.originM), centre[1], centre[0]) : 1);
         farPlanes.publish(far, opacity, world, viewport, coasting);
         if (far.loaded) orbits = Math.min(orbits, 1 - (1 - orbitOpacity) * opacity);
+        if (id === selectedObjectId) colors = bodyColors;
       }
-      return orbits;
+      return { opacity: orbits, colors };
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */
     setCoasting(active: boolean) { coasting = active; billboards?.setCoasting(active); catalog?.setCoasting(active); },

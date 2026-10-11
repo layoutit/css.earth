@@ -461,7 +461,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // the camera's own system (the frame's `otherSystems`).
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
                 { inside: selectionHolders, look: () => ({ opacity: (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, hiddenAtM: starPlaces }) });
-              spatial.setOrbitsOpacity(catalogBanks.publishPlanes(world, viewport, companion ?? undefined));
+              const orbits = catalogBanks.publishPlanes(world, viewport, companion ?? undefined);
+              spatial.setOrbitsOpacity(orbits.opacity); spatial.setBodyColors(orbits.colors);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
                 selectedBodyContextOpacity(world, viewport, captionBody), standIn,
                 destination ? { toM: destination.positionM, closeUp: selectedBodyContextOpacity(world, viewport, destination) } : undefined);

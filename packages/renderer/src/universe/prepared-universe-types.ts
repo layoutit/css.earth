@@ -67,8 +67,9 @@ export interface PreparedUniverseOptions {
    * system, such as a star's habitable zone laid in the plane of its planets' orbits. The plane draws while a dataset of
    * the mounted scene shows it, as a bank of dots a dataset names does; its picture, its box and the distances it fades
    * over come with its payload ({@link loadBacking}), read the first time it shows. `orbitOpacity` is the opacity the
-   * world's orbit lines take while the plane shows whole, for a picture that would compete with them. */
-  planeBanks?: readonly { id: string; frame: DensityVolumeFrame; orbitOpacity?: number }[];
+   * world's orbit lines take while the plane shows whole, for a picture that would compete with them; `bodyColors` the
+   * color each named body's orbit line and marker take while a dataset shows the plane. */
+  planeBanks?: readonly { id: string; frame: DensityVolumeFrame; orbitOpacity?: number; bodyColors?: Readonly<Record<string, string>> }[];
   /** Volume dataset banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all datasets, plus catalogue points) is fetched only through {@link loadVolumeDataset}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */

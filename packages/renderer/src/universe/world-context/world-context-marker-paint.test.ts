@@ -29,6 +29,25 @@ test('a marker moved by less than a thousandth of a pixel is not written again',
   assert.equal(writes.length, 2);
 });
 
+test('a dataset colors a marker: its ring by the marker\'s color, its flat dot by its own, never its name, and gives both back', () => {
+  const { document } = parseHTML('<html><body></body></html>');
+  const { mover, marker, spriteLeaf, caption } = createWorldContextMarkerFactory(document)(true);
+  marker.style.color = '#aabbcc';
+  const locator = document.createElementNS('http://www.w3.org/2000/svg', 'svg') as unknown as SVGSVGElement;
+  const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, caption, { color: '#ffffff', dotColor: '#808080' }, undefined, locator);
+  const fader = { visible() {}, multiply() {}, set() {} } as unknown as Fader;
+  const frame = (flatDot: boolean): Frame => ({ projected: { x: 10, y: 10, markerOpacity: 1, emphasis: 1 } as Frame['projected'], billboardShown: true, plannedShown: true,
+    markerShown: true, markerDiameter: 8, flatDot, zIndex: '3600', selected: false, hovered: false, animated: false, coast: false, policyChanged: false });
+  paint.tint('#f04624');
+  assert.equal(marker.style.color, '#f04624'); assert.equal(caption.style.color, '#aabbcc', 'the name keeps the body\'s own color');
+  paint.publish(frame(true), fader);
+  assert.equal(spriteLeaf.style.backgroundColor, '#f04624', 'a dot that becomes flat while tinted takes the tint');
+  paint.tint(null);
+  assert.equal(marker.style.color, '#aabbcc'); assert.equal(caption.style.color, ''); assert.equal(spriteLeaf.style.backgroundColor, '#808080');
+  paint.tint('#ffa851');
+  assert.equal(spriteLeaf.style.backgroundColor, '#ffa851', 'a flat dot is recolored at once');
+});
+
 test('what lands after a coast fades: a name and a ring in and out, and a name that changes side in again', () => {
   const { document } = parseHTML('<html><body></body></html>');
   const { mover, marker, spriteLeaf, caption } = createWorldContextMarkerFactory(document)(true);

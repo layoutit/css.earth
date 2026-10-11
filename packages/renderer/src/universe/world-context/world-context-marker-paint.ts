@@ -1,3 +1,4 @@
+import { DEFAULT_CONTEXT_COLOR } from '@cssearth/objects';
 import { applySpriteImage, type SpriteWithUrl } from '../../solar-system/heliocentric-sprites.js';
 import { BODY_INDICATOR_DIAMETER } from './context-scale.js';
 import type { PlannedWorldContext } from './world-context-planner.js';
@@ -85,7 +86,17 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
   // per marker per frame (the hottest line of a zoom out from the Sun through the stars, 2026-09-30). Only this painter
   // writes them; the template starts them at 'false', and selection starts unset.
   let animateState = 'false', indicatorState = 'false', labelState = 'false', selectedState: string | undefined;
+  // The marker's own color as its owner set it, and the one a shown dataset gives the body (tint).
+  const ownColor = marker.style.color; let tinted: string | null = null;
   return {
+    /** Draws the marker's ring and its flat dot in `color` while a dataset colors the body; null gives them back their
+     * own. The name keeps the body's own color, and a body drawn as its picture keeps the picture. */
+    tint(color: string | null) {
+      if (color === tinted) return;
+      tinted = color; marker.style.color = color ?? ownColor;
+      caption.style.color = color === null ? '' : ownColor || DEFAULT_CONTEXT_COLOR;
+      if (flatDot) spriteLeaf.style.backgroundColor = color ?? body.dotColor ?? body.color;
+    },
     get billboardShown() { return billboardShown; },
     get markerShown() { return markerShown; },
     get markerDiameter() { return markerDiameter; },
@@ -113,7 +124,7 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       if (flatDot !== frame.flatDot) {
         flatDot = frame.flatDot;
         const leaf = spriteLeaf.style;
-        if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = body.dotColor ?? body.color; leaf.borderRadius = '50%'; } else {
+        if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = tinted ?? body.dotColor ?? body.color; leaf.borderRadius = '50%'; } else {
           leaf.backgroundColor = leaf.borderRadius = '';
           if (sprite) applySpriteImage(spriteLeaf, sprite);
           spriteApplied = true;

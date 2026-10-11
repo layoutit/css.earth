@@ -23,6 +23,8 @@ export interface PreparedOrbitLines {
    * the compositor by writing it as `stroke-opacity` on every polyline. */
   readonly presentation: OrbitPresentation;
   publish(segments: readonly OrbitSegment[]): void;
+  /** Draws the orbit in `color` while a dataset colors it; null gives it back its own. */
+  setColor(color: string | null): void;
   /** Takes the orbit's paint out of the page until a publish draws it again (a retired system's member): a stroke group
    * leaves the shared svg; bars live in the orbit's own root, which its owner detaches. */
   detach(): void;
@@ -35,12 +37,12 @@ export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', 
   // An orbit-less body's root is never inserted; it has nothing to share.
   if (color) host.style.color = color;
   const root = strokeHost ?? host.parentElement?.closest<HTMLElement>('.prepared-world-context') ?? host.parentElement;
-  return renderer === 'strokes' && root ? mountOrbitStrokes(host, root, dashed, depthBase, id, color) : mountOrbitBars(host, capacity);
+  return renderer === 'strokes' && root ? mountOrbitStrokes(host, root, dashed, depthBase, id, color) : mountOrbitBars(host, capacity, color);
 }
 
 /** Fixed unit-line instances, bound once; each publication writes only the slots
  * whose transform or trail weight changed. A dashed orbit alternates by CSS. */
-function mountOrbitBars(host: HTMLElement, capacity: number): PreparedOrbitLines {
+function mountOrbitBars(host: HTMLElement, capacity: number, color?: string): PreparedOrbitLines {
   // About half a second of publications. Clipped chord counts oscillate across
   // block boundaries while the camera moves; a dip must not rebuild 64 leaf boxes.
   // A full zoom shows about 1.5% of the prepared capacity; the rest is never built.
@@ -50,6 +52,7 @@ function mountOrbitBars(host: HTMLElement, capacity: number): PreparedOrbitLines
   let count = 0, transformWrites = 0;
   return {
     elements: pool.elements, presentation: host,
+    setColor(next) { host.style.color = next ?? color ?? ''; },
     publish(segments) {
       if (segments.length > capacity) throw new RangeError('Prepared orbit line capacity is exceeded.');
       for (let slot = 0; slot < segments.length; slot++) {
@@ -203,6 +206,7 @@ function mountOrbitStrokes(host: HTMLElement, root: HTMLElement, dashed: boolean
       if (shown !== visible > 0) { shown = visible > 0; group.style.display = shown ? '' : 'none'; }
     },
     stats: () => ({ pointWrites, visibleRuns: membership.visible, builtRuns: membership.size }),
+    setColor(next) { group.style.color = next ?? color ?? ''; },
     detach() { group.remove(); },
     destroy() { group.remove(); },
   };

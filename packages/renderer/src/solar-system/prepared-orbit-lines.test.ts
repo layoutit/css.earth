@@ -30,6 +30,16 @@ function world() {
 }
 const chord = (x0: number, y0: number, x1: number, y1: number, weight: number): OrbitSegment => [x0, y0, x1, y1, weight];
 
+test('a dataset colors an orbit line, and taking the color away gives the orbit back its own', () => {
+  const { root, orbit } = world();
+  const lines = mountPreparedOrbitLines(orbit('mars').root, { renderer: 'strokes', id: 'mars', color: '#aabbcc', depthBase: 700 });
+  lines.publish([chord(0, 0, 10, 0, 1)]);
+  const group = root.children.find(child => child.tagName === 'svg')!.children[0]!;
+  assert.equal(group.style.color, '#aabbcc');
+  lines.setColor('#f0f921'); assert.equal(group.style.color, '#f0f921');
+  lines.setColor(null); assert.equal(group.style.color, '#aabbcc');
+});
+
 test('strokes share one svg per world context, name each group by its body and join chords into polylines per opacity level', () => {
   const { root, orbit } = world();
   const mars = orbit('mars'), earth = orbit('earth');
