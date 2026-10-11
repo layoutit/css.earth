@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.353 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453449",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+          "label": "Valdés et al. (2025), Astronomy & Astrophysics 698 A68",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,376 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453449",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+          "label": "Valdés et al. (2025), Astronomy & Astrophysics 698 A68",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.016 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453449",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+          "label": "Valdés et al. (2025), Astronomy & Astrophysics 698 A68",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3.0 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244056",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.155C/abstract",
+          "label": "Chaturvedi et al. (2022), Astronomy & Astrophysics 666 A155",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "42.5 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244056",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.155C/abstract",
+          "label": "Chaturvedi et al. (2022), Astronomy & Astrophysics 666 A155",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

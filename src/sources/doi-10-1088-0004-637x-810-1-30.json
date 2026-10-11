@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-810-1-30",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fulton et al. (2015): KELT-8b: A HIGHLY INFLATED TRANSITING HOT JUPITER AND A NEW TECHNIQUE FOR EXTRACTING HIGH-PRECISION RADIAL VELOCITIES FROM NOISY SPECTRA",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1505.06738"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/810/1/30"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...810...30F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810...30F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/810/1/30",
+      "label": "The Astrophysical Journal 810 30"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810...30F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fulton et al. (2015), The Astrophysical Journal 810 30",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810...30F"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 810 30",
+  "creators": [
+    "Benjamin J. Fulton",
+    "Karen A. Collins",
+    "B. Scott Gaudi",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

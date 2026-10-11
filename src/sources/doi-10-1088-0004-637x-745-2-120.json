@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-745-2-120",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Borucki et al. (2012): Kepler-22b: A 2.4 EARTH-RADIUS PLANET IN THE HABITABLE ZONE OF A SUN-LIKE STAR",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1112.1640"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/745/2/120"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012ApJ...745..120B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...745..120B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/745/2/120",
+      "label": "The Astrophysical Journal 745 120"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...745..120B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Borucki et al. (2012), The Astrophysical Journal 745 120",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012ApJ...745..120B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 745 120",
+  "creators": [
+    "William J. Borucki",
+    "David G. Koch",
+    "Natalie Batalha",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

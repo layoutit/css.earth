@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stv197",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mislis et al. (2015): High-precision multiband time series photometry of exoplanets Qatar-1b and TrES-5b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1503.02246"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stv197"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015MNRAS.448.2617M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.448.2617M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stv197",
+      "label": "Monthly Notices of the Royal Astronomical Society 448 2617-2623"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.448.2617M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mislis et al. (2015), Monthly Notices of the Royal Astronomical Society 448 2617-2623",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.448.2617M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 448 2617-2623",
+  "creators": [
+    "D. Mislis",
+    "L. Mancini",
+    "J. Tregloan-Reed",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

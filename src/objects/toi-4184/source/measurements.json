@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4184 (pscomppars): log10 of the luminosity in solar units -2.2644, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
   "ageGyr": 6.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4184 (pscomppars): age 6.7 Gyr, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "massSolar": 0.2109,
+  "massSource": "Mass 0.2109 +/- 0.029 solar masses from Barkaoui et al. 2023, the stellar mass of the default parameter set of TOI-4184 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

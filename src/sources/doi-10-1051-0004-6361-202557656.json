@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202557656",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Frensch et al. (2026): TOI-3288 b and TOI-4666 b: Two gas giants transiting low-mass stars characterised by NIRPS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2510.11703"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202557656"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026A&A...707A..73F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A..73F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202557656",
+      "label": "Astronomy & Astrophysics 707 A73"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A..73F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Frensch et al. (2026), Astronomy & Astrophysics 707 A73",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A..73F"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 707 A73",
+  "creators": [
+    "Yolanda G. C. Frensch",
+    "François Bouchy",
+    "Gaspare Lo Curto",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

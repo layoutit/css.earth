@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "9,845 K",
+        "source": {
+          "catalogueId": "doi-10-1071-as10010",
+          "url": "https://doi.org/10.1071/AS10010",
+          "label": "Davis et al. (2011), Publications of the Astronomical Society of Australia 28 58-65",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

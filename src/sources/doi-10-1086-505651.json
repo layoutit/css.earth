@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-505651",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "McCullough et al. (2006): A Transiting Planet of a Sun‐like Star",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/505651"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2006ApJ...648.1228M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2006ApJ...648.1228M",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2006ApJ...648.1228M",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "McCullough et al. (2006), The Astrophysical Journal 648 1228-1238",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2006ApJ...648.1228M"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 648 1228-1238",
+  "creators": [
+    "P. R. McCullough",
+    "J. E. Stys",
+    "Jeff A. Valenti",
+    "et al."
+  ],
+  "publicationDate": "2006"
+}

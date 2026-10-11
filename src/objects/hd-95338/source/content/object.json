@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.848 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202554040",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+          "label": "Kálmán et al. (2025), Astronomy & Astrophysics 701 A240",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,097 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202554040",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+          "label": "Kálmán et al. (2025), Astronomy & Astrophysics 701 A240",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.49 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staa1724",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.4330D/abstract",
+          "label": "Díaz et al. (2020), Monthly Notices of the Royal Astronomical Society 496 4330-4341",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K0.5 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staa1724",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.4330D/abstract",
+          "label": "Díaz et al. (2020), Monthly Notices of the Royal Astronomical Society 496 4330-4341",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "9.5 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202554040",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+          "label": "Kálmán et al. (2025), Astronomy & Astrophysics 701 A240",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

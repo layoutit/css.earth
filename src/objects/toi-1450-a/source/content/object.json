@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.48 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad500a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract",
+          "label": "Brady et al. (2024), The Astronomical Journal 168 67",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,437 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad500a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract",
+          "label": "Brady et al. (2024), The Astronomical Journal 168 67",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.027 times the Sun's",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3.0 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad500a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract",
+          "label": "Brady et al. (2024), The Astronomical Journal 168 67",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

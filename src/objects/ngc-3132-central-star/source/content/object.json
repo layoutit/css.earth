@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "110,000 K",
+        "source": {
+          "catalogueId": "arxiv-2301-02775",
+          "url": "https://arxiv.org/abs/2301.02775",
+          "label": "Marco et al. (2023), Nature Astronomy, 2022, Vol. 6, p. 1421",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

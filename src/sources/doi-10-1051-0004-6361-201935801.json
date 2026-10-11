@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201935801",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Luque et al. (2019): Planetary system around the nearby M dwarf GJ 357 including a transiting, hot, Earth-sized planet optimal for atmospheric characterization",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1904.12818"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201935801"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...628A..39L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...628A..39L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201935801",
+      "label": "Astronomy & Astrophysics 628 A39"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...628A..39L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Luque et al. (2019), Astronomy & Astrophysics 628 A39",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...628A..39L"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 628 A39",
+  "creators": [
+    "R. Luque",
+    "E. Pallé",
+    "D. Kossakowski",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

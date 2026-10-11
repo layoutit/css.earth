@@ -30,6 +30,32 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "11.4 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw255",
+          "url": "https://doi.org/10.1093/mnras/stw255",
+          "label": "Tkachenko et al. (2016), Monthly Notices of the Royal Astronomical Society 458 1964-1976",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "25,300 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw255",
+          "url": "https://doi.org/10.1093/mnras/stw255",
+          "label": "Tkachenko et al. (2016), Monthly Notices of the Royal Astronomical Society 458 1964-1976",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

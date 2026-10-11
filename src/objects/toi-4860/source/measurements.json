@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4860 (pscomppars): log10 of the luminosity in solar units -1.83565, from Triaud et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..98T/abstract)",
   "ageGyr": 4.5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4860 (pscomppars): age 4.5 Gyr, from Triaud et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..98T/abstract)",
+  "massSolar": 0.34,
+  "massSource": "Mass 0.34 +/- 0.009 solar masses from Almenara et al. 2024, the stellar mass of the default parameter set of TOI-4860 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

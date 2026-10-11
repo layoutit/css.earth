@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-80 (pscomppars): age 7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "projectedRotationSpeedKmS": 1.27,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-80 (pscomppars): projected rotation speed 1.27 km/s, from Triaud et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract)",
+  "massSolar": 0.577,
+  "massSource": "Mass 0.577 +/- 0.051 solar masses from Triaud et al. 2015, the stellar mass of the default parameter set of WASP-80 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

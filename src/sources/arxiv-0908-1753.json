@@ -1,0 +1,55 @@
+{
+  "id": "arxiv-0908-1753",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Döllinger et al. (2009): Planetary companions around the K giant stars 11 UMi and HD 32518",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0908.1753"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200911702"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009A&A...505.1311D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...505.1311D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200911702",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...505.1311D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Döllinger et al. (2009)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009A&A...505.1311D"
+    }
+  ],
+  "creators": [
+    "M. P. Döllinger",
+    "A. P. Hatzes",
+    "L. Pasquini",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2345 (pscomppars): age 6.3 Gyr, from Eschen et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
   "projectedRotationSpeedKmS": 2.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2345 (pscomppars): projected rotation speed 2.3 km/s, from Eschen et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
+  "massSolar": 0.727,
+  "massSource": "Mass 0.727 +/- 0.033 solar masses from Eschen et al. 2025, the stellar mass of the default parameter set of TOI-2345 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

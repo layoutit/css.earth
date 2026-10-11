@@ -16,6 +16,8 @@
   "objectTypeSource": "SIMBAD, GPM 149.735154+69.877723: main object type *, Star",
   "luminosityLogSolar": 3.191,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1070582519073738752, flags_flame 10: lum_flame 1551.6471 solar luminosities (16th to 84th percentiles 1272.5925 to 1806.1251); its log10 is recorded",
+  "massSolar": 5.7719,
+  "massSource": "Mass 5.772 (5.569 to 5.813) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

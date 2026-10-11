@@ -31,6 +31,8 @@
   "rotationPeriodMeasuredDays": 9.54,
   "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 28 and 106 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 9.54 d, the light swinging by 2.2% as the star turns",
   "rotationLightSwingPercent": 2.18,
+  "massSolar": 0.761,
+  "massSource": "Mass 0.761 +/- 0.038 solar masses from Lowson et al. 2024, the stellar mass of the default parameter set of HIP 113103 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.1146L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

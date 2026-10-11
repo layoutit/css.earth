@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.419 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psaf090",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025PASJ...77.1101I/abstract",
+          "label": "Ikuta et al. (2025), Publications of the Astronomical Society of Japan 77 1101-1112",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,521 K",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psaf090",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025PASJ...77.1101I/abstract",
+          "label": "Ikuta et al. (2025), Publications of the Astronomical Society of Japan 77 1101-1112",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.025 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psaf090",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025PASJ...77.1101I/abstract",
+          "label": "Ikuta et al. (2025), Publications of the Astronomical Society of Japan 77 1101-1112",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2 V",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psaf090",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025PASJ...77.1101I/abstract",
+          "label": "Ikuta et al. (2025), Publications of the Astronomical Society of Japan 77 1101-1112",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

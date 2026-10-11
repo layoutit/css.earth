@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-abc6af",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Giacalone et al. (2021): Vetting of 384 TESS Objects of Interest with TRICERATOPS and Statistical Validation of 12 Planet Candidates",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2002.00691"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abc6af"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....161...24G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/abc6af",
+      "label": "The Astronomical Journal 161 24"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Giacalone et al. (2021), The Astronomical Journal 161 24",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 161 24",
+  "creators": [
+    "Steven Giacalone",
+    "Courtney D. Dressing",
+    "Eric L. N. Jensen",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

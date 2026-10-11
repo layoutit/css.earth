@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202451311",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hernández et al. (2024): A sub-Earth-mass planet orbiting Barnard’s star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2410.00569"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202451311"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...690A..79G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202451311",
+      "label": "Astronomy & Astrophysics 690 A79"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hernández et al. (2024), Astronomy & Astrophysics 690 A79",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 690 A79",
+  "creators": [
+    "J. I. González Hernández",
+    "A. Suárez Mascareño",
+    "A. M. Silva",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.86 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-822-2-86",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+          "label": "Morton et al. (2016), The Astrophysical Journal 822 86",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,217 K",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-822-2-86",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+          "label": "Morton et al. (2016), The Astrophysical Journal 822 86",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.45 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-1674-4527-19-3-41",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract",
+          "label": "Gajdoš et al. (2019), Research in Astronomy and Astrophysics 19 041",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.3 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-822-2-86",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+          "label": "Morton et al. (2016), The Astrophysical Journal 822 86",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

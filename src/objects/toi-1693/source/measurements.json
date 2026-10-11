@@ -26,6 +26,8 @@
       "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 38 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.49,
+  "massSource": "Mass 0.49 +/- 0.03 solar masses from Giacalone et al. 2022, the stellar mass of the default parameter set of TOI-1693 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

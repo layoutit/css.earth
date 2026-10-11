@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1174 (pscomppars): log10 of the luminosity in solar units -0.4034, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
   "ageGyr": 2.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1174 (pscomppars): age 2.7 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "massSolar": 0.85,
+  "massSource": "Mass 0.85 +/- 0.1 solar masses from Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1174 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

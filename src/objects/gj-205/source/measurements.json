@@ -82,6 +82,8 @@
   ],
   "projectedRotationSpeedKmS": 4.2,
   "projectedRotationSpeedSource": "SIMBAD, HD 36395: projected rotation speed 4.2 km/s, the measurement SIMBAD prefers (2025A&A...698A..93J)",
+  "massSolar": 0.615,
+  "massSource": "Mass 0.615 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 205: mass 0.615 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

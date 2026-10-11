@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.497 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad3068",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract",
+          "label": "Hord et al. (2024), The Astronomical Journal 167 233",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,890 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad3068",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract",
+          "label": "Hord et al. (2024), The Astronomical Journal 167 233",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.8 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-abc6af",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G/abstract",
+          "label": "Giacalone et al. (2021), The Astronomical Journal 161 24",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.6 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-261",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

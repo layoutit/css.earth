@@ -20,6 +20,8 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4552 (pscomppars): [Fe/H] -0.07 dex, from Srivastava et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract)",
   "luminosityLogSolar": -2.078,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4552 (pscomppars): log10 of the luminosity in solar units -2.07779, from Srivastava et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract)",
+  "massSolar": 0.2619,
+  "massSource": "Mass 0.2619 +/- 0.0063 solar masses from Srivastava et al. 2026, the stellar mass of the default parameter set of TOI-4552 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

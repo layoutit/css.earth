@@ -34,6 +34,8 @@
       "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 25.21 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.7046,
+  "massSource": "Mass 0.704613 +/- 0.070461 solar masses from Dressing et al. 2017, the stellar mass of the default parameter set of K2-90 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

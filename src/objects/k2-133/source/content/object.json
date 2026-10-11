@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.461 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1334",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+          "label": "Wells et al. (2019), Monthly Notices of the Royal Astronomical Society 487 1865-1873",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,655 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1334",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+          "label": "Wells et al. (2019), Monthly Notices of the Royal Astronomical Society 487 1865-1873",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.033 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1334",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+          "label": "Wells et al. (2019), Monthly Notices of the Royal Astronomical Society 487 1865-1873",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1.5 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1334",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+          "label": "Wells et al. (2019), Monthly Notices of the Royal Astronomical Society 487 1865-1873",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

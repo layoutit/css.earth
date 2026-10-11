@@ -22,6 +22,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-707 (pscomppars): age 0.6 Gyr, from Rea et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract)",
   "projectedRotationSpeedKmS": 4.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-707 (pscomppars): projected rotation speed 4.9 km/s, from Rea et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract)",
+  "massSolar": 0.99,
+  "massSource": "Mass 0.99 +/- 0.06 solar masses from Rea et al. 2026, the stellar mass of the default parameter set of TOI-707 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

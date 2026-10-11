@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,896 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "58 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psab112",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74...92T/abstract",
+          "label": "Teng et al. (2022), Publications of the Astronomical Society of Japan 74 92-127",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G7 III",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psab112",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74...92T/abstract",
+          "label": "Teng et al. (2022), Publications of the Astronomical Society of Japan 74 92-127",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

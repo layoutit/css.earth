@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.94 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-adc5e4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+          "label": "Howard et al. (2025), The Astrophysical Journal Supplement Series 278 52",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,373 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-adc5e4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+          "label": "Howard et al. (2025), The Astrophysical Journal Supplement Series 278 52",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.65 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201628902",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract",
+          "label": "Barros et al. (2016), Astronomy & Astrophysics 594 A100",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K1",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202245004",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract",
+          "label": "Bourrier et al. (2023), Astronomy & Astrophysics 669 A63",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "600 million years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202245004",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract",
+          "label": "Bourrier et al. (2023), Astronomy & Astrophysics 669 A63",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

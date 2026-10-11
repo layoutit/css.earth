@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.06 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae778",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+          "label": "Livingston et al. (2018), The Astronomical Journal 156 277",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,772 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae778",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+          "label": "Livingston et al. (2018), The Astronomical Journal 156 277",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.2 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201628902",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract",
+          "label": "Barros et al. (2016), Astronomy & Astrophysics 594 A100",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G2 V",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-128-970-124403",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128l4403M/abstract",
+          "label": "Močnik et al. (2016), Publications of the Astronomical Society of the Pacific 128 124403",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-ac9da4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+          "label": "Kokori et al. (2023), The Astrophysical Journal Supplement Series 265 4",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

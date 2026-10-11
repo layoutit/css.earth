@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.11 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw880",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+          "label": "Kuhn et al. (2016), Monthly Notices of the Royal Astronomical Society 459 4281-4298",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,948 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw880",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+          "label": "Kuhn et al. (2016), Monthly Notices of the Royal Astronomical Society 459 4281-4298",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.6 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw880",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+          "label": "Kuhn et al. (2016), Monthly Notices of the Royal Astronomical Society 459 4281-4298",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw880",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+          "label": "Kuhn et al. (2016), Monthly Notices of the Royal Astronomical Society 459 4281-4298",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.5 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw880",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+          "label": "Kuhn et al. (2016), Monthly Notices of the Royal Astronomical Society 459 4281-4298",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

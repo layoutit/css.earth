@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1052 (pscomppars): rotation period 12.8 d, from Armstrong et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract)",
   "projectedRotationSpeedKmS": 5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1052 (pscomppars): projected rotation speed 5 km/s, from Armstrong et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract)",
+  "massSolar": 1.204,
+  "massSource": "Mass 1.204 +/- 0.025 solar masses from Armstrong et al. 2023, the stellar mass of the default parameter set of TOI-1052 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

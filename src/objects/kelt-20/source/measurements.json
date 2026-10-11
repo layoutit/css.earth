@@ -34,6 +34,8 @@
   ],
   "projectedRotationSpeedKmS": 117.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-20 (pscomppars): projected rotation speed 117.4 km/s, from Lund et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract)",
+  "massSolar": 1.76,
+  "massSource": "Mass 1.76 +/- 0.14 solar masses from Lund et al. 2017, the stellar mass of the default parameter set of KELT-20 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

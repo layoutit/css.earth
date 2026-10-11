@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.9 solar masses",
+        "source": {
+          "catalogueId": "gaia-dr3-bd-13-5809",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,821 K",
+        "source": {
+          "catalogueId": "gaia-2023-dr3",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355",
+          "label": "This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Cite Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "48 times the Sun's",
+        "source": {
+          "catalogueId": "gaia-dr3-bd-13-5809",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

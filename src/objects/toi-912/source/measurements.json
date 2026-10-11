@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-912 (pscomppars): age 0.8 Gyr, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
   "rotationPeriodDays": 45.9,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-912 (pscomppars): rotation period 45.9 d, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "massSolar": 0.418,
+  "massSource": "Mass 0.418 +/- 0.03 solar masses from Lacedelli et al. 2026, the stellar mass of the default parameter set of TOI-912 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

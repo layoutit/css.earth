@@ -34,6 +34,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-84 (pscomppars): projected rotation speed 2.558 km/s, from Anderson et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800L...9A/abstract)",
   "spinInclinationDegrees": 71.1,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.768 solar radii): sin i = v sin i × P / (2πR) = 0.946. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.853,
+  "massSource": "Mass 0.853 +/- 0.038 solar masses from Maciejewski et al. 2023, the stellar mass of the default parameter set of WASP-84 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

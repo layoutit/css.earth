@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-1088-1674-4527-19-3-41",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gajdoš et al. (2019): Transit timing variations and linear ephemerides of confirmed <i>Kepler</i> transiting exoplanets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1809.11104"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/1674-4527/19/3/41"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019RAA....19...41G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/1674-4527/19/3/41",
+      "label": "Research in Astronomy and Astrophysics 19 041"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gajdoš et al. (2019), Research in Astronomy and Astrophysics 19 041",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G"
+    }
+  ],
+  "publisher": "Research in Astronomy and Astrophysics 19 041",
+  "creators": [
+    "Pavol Gajdoš",
+    "Martin Vaňko",
+    "Štefan Parimucha"
+  ],
+  "publicationDate": "2019"
+}

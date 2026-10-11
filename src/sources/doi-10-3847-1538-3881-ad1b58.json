@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad1b58",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ment et al. (2024): LHS 475 b: A Potential Venus Analog Orbiting a Nearby M Dwarf",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2304.01920"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad1b58"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....167..197M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..197M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad1b58",
+      "label": "The Astronomical Journal 167 197"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..197M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ment et al. (2024), The Astronomical Journal 167 197",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..197M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 167 197",
+  "creators": [
+    "Kristo Ment",
+    "David Charbonneau",
+    "Jonathan Irwin",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

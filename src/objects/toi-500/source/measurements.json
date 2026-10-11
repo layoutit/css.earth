@@ -32,6 +32,8 @@
   ],
   "projectedRotationSpeedKmS": 1.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): projected rotation speed 1.1 km/s, from Serrano et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
+  "massSolar": 0.74,
+  "massSource": "Mass 0.74 +/- 0.017 solar masses from Serrano et al. 2022, the stellar mass of the default parameter set of TOI-500 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

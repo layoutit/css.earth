@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2211 (pscomppars): log10 of the luminosity in solar units -0.32094, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 4.992,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6796762076358897408, flags_flame 00: age_flame 4.9918976 Gyr (16th to 84th percentiles 3.5534673 to 6.441602)",
+  "massSolar": 0.9,
+  "massSource": "Mass 0.9 +/- 0.11 solar masses from Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-2211.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

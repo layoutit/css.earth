@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.901 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556081",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+          "label": "Manni et al. (2025), Astronomy & Astrophysics 701 A230",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,715 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556081",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+          "label": "Manni et al. (2025), Astronomy & Astrophysics 701 A230",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.1 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556081",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+          "label": "Manni et al. (2025), Astronomy & Astrophysics 701 A230",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G3 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556081",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+          "label": "Manni et al. (2025), Astronomy & Astrophysics 701 A230",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "10 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556081",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+          "label": "Manni et al. (2025), Astronomy & Astrophysics 701 A230",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

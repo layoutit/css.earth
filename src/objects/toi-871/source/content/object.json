@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.758 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1017-pasa-2024-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+          "label": "Mistry et al. (2024), Publications of the Astronomical Society of Australia 41 e030",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,929 K",
+        "source": {
+          "catalogueId": "doi-10-1017-pasa-2024-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+          "label": "Mistry et al. (2024), Publications of the Astronomical Society of Australia 41 e030",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.28 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1017-pasa-2024-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+          "label": "Mistry et al. (2024), Publications of the Astronomical Society of Australia 41 e030",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.9 billion years",
+        "source": {
+          "catalogueId": "doi-10-1017-pasa-2024-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+          "label": "Mistry et al. (2024), Publications of the Astronomical Society of Australia 41 e030",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -14,6 +14,8 @@
   "objectType": "Eclipsing Binary",
   "objectTypePath": "* > ** > EB*",
   "objectTypeSource": "SIMBAD, UGCS J162358.09-263719.0: main object type EB*, Eclipsing Binary",
+  "massSolar": 0.7665,
+  "massSource": "Mass 0.7665 +/- 0.0053 solar masses from Primary mass (solar masses) 0.7665 +/- 0.0053, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K) (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

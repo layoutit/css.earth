@@ -34,6 +34,8 @@
   ],
   "projectedRotationSpeedKmS": 3.96,
   "projectedRotationSpeedSource": "SIMBAD, TOI-5713: projected rotation speed 3.96 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "massSolar": 0.2653,
+  "massSource": "Mass 0.2653 +/- 0.0061 solar masses from Ghachoui et al. 2024, the stellar mass of the default parameter set of TOI-5713 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

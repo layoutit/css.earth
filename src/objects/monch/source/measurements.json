@@ -42,6 +42,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 130322 (pscomppars): projected rotation speed 0.5 km/s, from Hinkel et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...803....8H/abstract)",
   "spinInclinationDegrees": 17,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.881 solar radii): sin i = v sin i × P / (2πR) = 0.293. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.8647,
+  "massSource": "Mass 0.865 (0.825 to 0.905) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

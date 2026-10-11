@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "7,510 K",
+        "source": {
+          "catalogueId": "arxiv-0906-2241",
+          "url": "https://arxiv.org/abs/0906.2241",
+          "label": "Imaging and Modeling Rapidly Rotating Stars: alpha Cephei and alpha Ophiuchi",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

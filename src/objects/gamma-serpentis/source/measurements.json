@@ -32,6 +32,8 @@
   "projectedRotationSpeedSource": "SIMBAD, * gam Ser: projected rotation speed 11.71 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "spinInclinationDegrees": 77.1,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.472 solar radii): sin i = v sin i × P / (2πR) = 0.975. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 1.184,
+  "massSource": "Mass 1.184 +/- 0.012 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 142860: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.184 +/- 0.012 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 736) (photometry/stellar-color.json); no image of the photosphere exists."

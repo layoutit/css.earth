@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TIC 46432937 (pscomppars): log10 of the luminosity in solar units -1.3851, from Hartman et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
   "ageGyr": 7.4,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TIC 46432937 (pscomppars): age 7.4 Gyr, from Hartman et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
+  "massSolar": 0.563,
+  "massSource": "Mass 0.563 +/- 0.029 solar masses from Hartman et al. 2024, the stellar mass of the default parameter set of TIC 46432937 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

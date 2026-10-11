@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-342016",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Adams et al. (2002): Structure of the Praesepe Star Cluster",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/342016"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2002AJ....124.1570A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2002AJ....124.1570A",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2002AJ....124.1570A",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Adams et al. (2002), The Astronomical Journal 124 1570-1584",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2002AJ....124.1570A"
+    }
+  ],
+  "publisher": "The Astronomical Journal 124 1570-1584",
+  "creators": [
+    "Joseph D. Adams",
+    "John R. Stauffer",
+    "Michael F. Skrutskie",
+    "et al."
+  ],
+  "publicationDate": "2002"
+}

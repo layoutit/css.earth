@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.454 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psab106",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract",
+          "label": "Fukui et al. (2022), Publications of the Astronomical Society of Japan 74 L1-L8",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,491 K",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psab106",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract",
+          "label": "Fukui et al. (2022), Publications of the Astronomical Society of Japan 74 L1-L8",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.029 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psab106",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract",
+          "label": "Fukui et al. (2022), Publications of the Astronomical Society of Japan 74 L1-L8",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.14 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1344",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract",
+          "label": "Barragán et al. (2024), Monthly Notices of the Royal Astronomical Society 531 4275-4292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,995 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1344",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract",
+          "label": "Barragán et al. (2024), Monthly Notices of the Royal Astronomical Society 531 4275-4292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.3 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1344",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract",
+          "label": "Barragán et al. (2024), Monthly Notices of the Royal Astronomical Society 531 4275-4292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F9/G0",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1344",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract",
+          "label": "Barragán et al. (2024), Monthly Notices of the Royal Astronomical Society 531 4275-4292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "35 million years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1344",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract",
+          "label": "Barragán et al. (2024), Monthly Notices of the Royal Astronomical Society 531 4275-4292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "3.0 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202450679",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..15D/abstract",
+          "label": "Damasso et al. (2024), Astronomy & Astrophysics 688 A15",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

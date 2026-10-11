@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-26 (pscomppars): age 9 Gyr, from A-thano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..223A/abstract)",
   "projectedRotationSpeedKmS": 1.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-26 (pscomppars): projected rotation speed 1.9 km/s, from Mancini et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...664A.162M/abstract)",
+  "massSolar": 1.12,
+  "massSource": "Mass 1.12 +/- 0.36 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-26 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

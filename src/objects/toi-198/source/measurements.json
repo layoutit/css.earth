@@ -30,6 +30,8 @@
       "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 46 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.417,
+  "massSource": "Mass 0.417 +/- 0.045 solar masses from Zapatero Osorio et al. 2026, the stellar mass of the default parameter set of TOI-198 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

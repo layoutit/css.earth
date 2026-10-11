@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.8 solar masses",
+        "source": {
+          "catalogueId": "gaia-dr3-lionrock",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,253 K",
+        "source": {
+          "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+          "url": "https://doi.org/10.1051/0004-6361/202243462",
+          "label": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Andrae et al. (2023), A&A 674, A27",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "15 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1086-653809",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010PASP..122..701J/abstract",
+          "label": "Johnson et al. (2010), Publications of the Astronomical Society of the Pacific 122 701-711",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G8 IV",
+        "source": {
+          "catalogueId": "publication-1988mss-c04-0h",
+          "url": "https://ui.adsabs.harvard.edu/abs/1988MSS...C04....0H/abstract",
+          "label": "Reference 1988MSS...C04....0H, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6 billion years",
+        "source": {
+          "catalogueId": "doi-10-1086-653809",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010PASP..122..701J/abstract",
+          "label": "Johnson et al. (2010), Publications of the Astronomical Society of the Pacific 122 701-711",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

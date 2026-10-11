@@ -14,6 +14,8 @@
   "objectType": "Star",
   "objectTypePath": "*",
   "objectTypeSource": "SIMBAD, UCAC4 638-070501: main object type *, Star",
+  "massSolar": 1.542,
+  "massSource": "Mass (Mosser scale, solar masses) 1.542 +/- 0.0649 (https://arxiv.org/abs/2410.00102). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

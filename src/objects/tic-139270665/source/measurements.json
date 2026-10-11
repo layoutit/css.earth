@@ -34,6 +34,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TIC 139270665 (pscomppars): projected rotation speed 4.2 km/s, from Peluso et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)",
   "spinInclinationDegrees": 4.5,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.016 solar radii): sin i = v sin i × P / (2πR) = 0.079. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 1.035,
+  "massSource": "Mass 1.035 +/- 0.052 solar masses from Peluso et al. 2024, the stellar mass of the default parameter set of TIC 139270665 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

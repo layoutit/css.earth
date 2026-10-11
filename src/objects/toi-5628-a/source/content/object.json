@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.36 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae8af1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract",
+          "label": "Gan et al. (2026), The Astrophysical Journal Letters 1006 L63",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,310 K",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae8af1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract",
+          "label": "Gan et al. (2026), The Astrophysical Journal Letters 1006 L63",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3.0±1.0",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae8af1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract",
+          "label": "Gan et al. (2026), The Astrophysical Journal Letters 1006 L63",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "27.9 days",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae8af1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract",
+          "label": "Gan et al. (2026), The Astrophysical Journal Letters 1006 L63",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

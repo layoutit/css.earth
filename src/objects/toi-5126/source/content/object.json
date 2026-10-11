@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.24 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3036",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+          "label": "Fairnington et al. (2024), Monthly Notices of the Royal Astronomical Society 527 8768-8783",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,150 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3036",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+          "label": "Fairnington et al. (2024), Monthly Notices of the Royal Astronomical Society 527 8768-8783",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "2 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3036",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+          "label": "Fairnington et al. (2024), Monthly Notices of the Royal Astronomical Society 527 8768-8783",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3036",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+          "label": "Fairnington et al. (2024), Monthly Notices of the Royal Astronomical Society 527 8768-8783",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "800 million years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3036",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+          "label": "Fairnington et al. (2024), Monthly Notices of the Royal Astronomical Society 527 8768-8783",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

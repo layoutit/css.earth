@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,125 K",
+        "source": {
+          "catalogueId": "arxiv-2307-07559",
+          "url": "https://arxiv.org/abs/2307.07559",
+          "label": "Groenewegen & Lub (2023), A&A 676, A136 (2023)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

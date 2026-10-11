@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac7c66",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Curiel et al. (2022): 3D Orbital Architecture of a Dwarf Binary System and Its Planetary Companion",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2208.14553"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac7c66"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....164...93C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...93C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac7c66",
+      "label": "The Astronomical Journal 164 93"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...93C",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Curiel et al. (2022), The Astronomical Journal 164 93",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...93C"
+    }
+  ],
+  "publisher": "The Astronomical Journal 164 93",
+  "creators": [
+    "Salvador Curiel",
+    "Gisela N. Ortiz-León",
+    "Amy J. Mioduszewski",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

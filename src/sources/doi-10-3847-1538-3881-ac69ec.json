@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac69ec",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Beard et al. (2022): TOI-1696 and TOI-2136: Constraining the Masses of Two Mini-Neptunes with the Habitable-Zone Planet Finder",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2204.09063"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac69ec"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....163..286B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..286B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac69ec",
+      "label": "The Astronomical Journal 163 286"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..286B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Beard et al. (2022), The Astronomical Journal 163 286",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..286B"
+    }
+  ],
+  "publisher": "The Astronomical Journal 163 286",
+  "creators": [
+    "Corey Beard",
+    "Paul Robertson",
+    "Shubham Kanodia",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

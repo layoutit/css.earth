@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-3847-1538-3881-abf932",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Venner et al. (2021): True Masses of the Long-period Companions to HD 92987 and HD 221420 from Hipparcos–Gaia Astrometry",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2104.13941"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abf932"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....162...12V"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...12V",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/abf932",
+      "label": "The Astronomical Journal 162 12"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...12V",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Venner et al. (2021), The Astronomical Journal 162 12",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...12V"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 12",
+  "creators": [
+    "Alexander Venner",
+    "Andrew Vanderburg",
+    "Logan A. Pearce"
+  ],
+  "publicationDate": "2021"
+}

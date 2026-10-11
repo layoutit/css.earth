@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.515 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557155",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+          "label": "Poultourtzidis et al. (2026), Astronomy & Astrophysics 707 A106",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,515 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557155",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+          "label": "Poultourtzidis et al. (2026), Astronomy & Astrophysics 707 A106",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.036 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557155",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+          "label": "Poultourtzidis et al. (2026), Astronomy & Astrophysics 707 A106",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2.0 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557155",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+          "label": "Poultourtzidis et al. (2026), Astronomy & Astrophysics 707 A106",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

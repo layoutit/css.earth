@@ -30,6 +30,19 @@
           "catalogueId": "arxiv-2407-09641",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,015 K",
+        "source": {
+          "catalogueId": "doi-10-1111-j-1365-2966-2005-09353-x",
+          "url": "https://doi.org/10.1111/j.1365-2966.2005.09353.x",
+          "label": "Usenko et al. (2005), Monthly Notices of the Royal Astronomical Society 362 1219-1224",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

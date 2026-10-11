@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-201014164",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Przybilla et al. (2010): Mixing of CNO-cycled matter in massive stars",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201014164"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/201014164",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/201014164",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Przybilla et al. (2010), Astronomy and Astrophysics 517 A38",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/201014164"
+    }
+  ],
+  "publisher": "Astronomy and Astrophysics 517 A38",
+  "creators": [
+    "N. Przybilla",
+    "M. Firnstein",
+    "M. F. Nieva",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

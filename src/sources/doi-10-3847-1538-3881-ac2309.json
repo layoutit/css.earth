@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac2309",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zink et al. (2021): Scaling K2. IV. A Uniform Planet Sample for Campaigns 1–8 and 10–18",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2109.02675"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac2309"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....162..259Z"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..259Z",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac2309",
+      "label": "The Astronomical Journal 162 259"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..259Z",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zink et al. (2021), The Astronomical Journal 162 259",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..259Z"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 259",
+  "creators": [
+    "Jon K. Zink",
+    "Kevin K. Hardegree-Ullman",
+    "Jessie L. Christiansen",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

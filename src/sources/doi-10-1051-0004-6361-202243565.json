@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202243565",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cacciapuoti et al. (2022): TESS discovery of a super-Earth and two sub-Neptunes orbiting the bright, nearby, Sun-like star HD 22946",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2209.09597"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202243565"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...668A..85C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A..85C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243565",
+      "label": "Astronomy & Astrophysics 668 A85"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A..85C",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cacciapuoti et al. (2022), Astronomy & Astrophysics 668 A85",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A..85C"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 668 A85",
+  "creators": [
+    "Luca Cacciapuoti",
+    "Laura Inno",
+    "Giovanni Covone",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

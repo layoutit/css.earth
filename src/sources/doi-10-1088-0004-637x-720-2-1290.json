@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-720-2-1290",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ghezzi et al. (2010): STELLAR PARAMETERS AND METALLICITIES OF STARS HOSTING JOVIAN AND NEPTUNIAN MASS PLANETS: A POSSIBLE DEPENDENCE OF PLANETARY MASS ON METALLICITY",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1007.2681"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/720/2/1290"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010ApJ...720.1290G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1290G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/720/2/1290",
+      "label": "The Astrophysical Journal 720 1290-1302"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1290G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ghezzi et al. (2010), The Astrophysical Journal 720 1290-1302",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1290G"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 720 1290-1302",
+  "creators": [
+    "L. Ghezzi",
+    "K. Cunha",
+    "V. V. Smith",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

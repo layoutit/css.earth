@@ -30,6 +30,8 @@
       "source": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 74.5 d, the row 0.3 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.763,
+  "massSource": "Mass 0.763 +/- 0.026 solar masses from Reller et al. 2026, the stellar mass of the default parameter set of TOI-4409 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

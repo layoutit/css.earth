@@ -18,6 +18,8 @@
   "objectTypeSource": "SIMBAD, G 273-20: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -1.202,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-417 (pscomppars): log10 of the luminosity in solar units -1.20204, from Incha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract)",
+  "massSolar": 0.569,
+  "massSource": "Mass 0.569 +/- 0.012 solar masses from Incha et al. 2023, the stellar mass of the default parameter set of K2-417 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

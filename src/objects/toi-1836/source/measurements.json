@@ -34,6 +34,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1836 (pscomppars): projected rotation speed 4 km/s, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "spinInclinationDegrees": 73.9,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.645 solar radii): sin i = v sin i × P / (2πR) = 0.961. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 1.2518,
+  "massSource": "Mass 1.2518 +/- 0.0243 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1836 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.13 solar masses",
+        "source": {
+          "catalogueId": "arxiv-1201-2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+          "label": "Muirhead et al. (2012)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,068 K",
+        "source": {
+          "catalogueId": "arxiv-1201-2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+          "label": "Muirhead et al. (2012)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0024 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-1201-2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+          "label": "Muirhead et al. (2012)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M",
+        "source": {
+          "catalogueId": "arxiv-1201-2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+          "label": "Muirhead et al. (2012)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.5 billion years",
+        "source": {
+          "catalogueId": "arxiv-1201-2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+          "label": "Muirhead et al. (2012)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

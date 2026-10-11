@@ -56,6 +56,58 @@
           "path": "source/measurements.json",
           "locator": "effectiveTemperatureK; effectiveTemperatureSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.24 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz2912",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490.5002F/abstract",
+          "label": "Feng et al. (2019), Monthly Notices of the Royal Astronomical Society 490 5002-5016",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K5 V",
+        "source": {
+          "catalogueId": "arxiv-2603-08787",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..115S/abstract",
+          "label": "Sanghi et al. (2026)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.5 billion years",
+        "source": {
+          "catalogueId": "arxiv-2603-08787",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..115S/abstract",
+          "label": "Sanghi et al. (2026)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "18.3 days",
+        "source": {
+          "catalogueId": "arxiv-2603-08787",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..115S/abstract",
+          "label": "Sanghi et al. (2026)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

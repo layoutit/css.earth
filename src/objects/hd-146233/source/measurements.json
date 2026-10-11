@@ -84,6 +84,8 @@
   "projectedRotationSpeedSource": "SIMBAD, * 18 Sco: projected rotation speed 2.3 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "spinInclinationDegrees": 60.4,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.166 solar radii): sin i = v sin i × P / (2πR) = 0.869. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.887,
+  "massSource": "Mass 0.887 +/- 0.019 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 146233: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 0.887 +/- 0.019 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

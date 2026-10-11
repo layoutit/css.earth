@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staa1724",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Díaz et al. (2020): The Magellan/PFS Exoplanet Search: a 55-d period dense Neptune transiting the bright (<i>V</i> = 8.6) star HD 95338",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2003.10319"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staa1724"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020MNRAS.496.4330D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.4330D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staa1724",
+      "label": "Monthly Notices of the Royal Astronomical Society 496 4330-4341"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.4330D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Díaz et al. (2020), Monthly Notices of the Royal Astronomical Society 496 4330-4341",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.4330D"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 496 4330-4341",
+  "creators": [
+    "Matías R Díaz",
+    "James S Jenkins",
+    "Fabo Feng",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

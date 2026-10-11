@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202557806",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Stoeva et al. (2026): Long-period magnetic activity in the K dwarf GJ1137 and a new super-Earth on a 9-day orbit",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2603.04919"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202557806"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026A&A...708A.232S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A.232S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202557806",
+      "label": "Astronomy & Astrophysics 708 A232"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A.232S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Stoeva et al. (2026), Astronomy & Astrophysics 708 A232",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A.232S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 708 A232",
+  "creators": [
+    "Denitza Stoeva",
+    "Atanas K. Stefanov",
+    "Stefan Y. Stefanov",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

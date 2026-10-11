@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,300 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ac626c",
+          "url": "https://doi.org/10.3847/1538-4357/ac626c",
+          "label": "Jencson et al. (2022), The Astrophysical Journal 930 81",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

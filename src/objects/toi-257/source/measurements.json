@@ -32,6 +32,8 @@
   ],
   "projectedRotationSpeedKmS": 9.4,
   "projectedRotationSpeedSource": "SIMBAD, HD 19916: projected rotation speed 9.4 km/s, the measurement SIMBAD prefers (2025A&A...697A.102T)",
+  "massSolar": 1.407,
+  "massSource": "Mass 1.407 +/- 0.045 solar masses from Addison et al. 2021, the stellar mass of the default parameter set of TOI-257 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

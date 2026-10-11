@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.54 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+          "label": "Esparza-Borges et al. (2022), Astronomy & Astrophysics 666 A10",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,800 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+          "label": "Esparza-Borges et al. (2022), Astronomy & Astrophysics 666 A10",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.046 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+          "label": "Esparza-Borges et al. (2022), Astronomy & Astrophysics 666 A10",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1.0",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+          "label": "Esparza-Borges et al. (2022), Astronomy & Astrophysics 666 A10",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

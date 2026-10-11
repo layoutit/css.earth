@@ -24,6 +24,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HATS-72 (pscomppars): rotation period 48.725 d, from Hartman et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
   "projectedRotationSpeedKmS": 0.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HATS-72 (pscomppars): projected rotation speed 0.8 km/s, from Hartman et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
+  "massSolar": 0.7311,
+  "massSource": "Mass 0.7311 +/- 0.0028 solar masses from Hartman et al. 2020, the stellar mass of the default parameter set of HATS-72 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

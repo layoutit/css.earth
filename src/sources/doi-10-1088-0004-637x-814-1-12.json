@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-814-1-12",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Vogt et al. (2015): SIX PLANETS ORBITING HD 219134",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1509.07912"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/814/1/12"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...814...12V"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...814...12V",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/814/1/12",
+      "label": "The Astrophysical Journal 814 12"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...814...12V",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Vogt et al. (2015), The Astrophysical Journal 814 12",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...814...12V"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 814 12",
+  "creators": [
+    "Steven S. Vogt",
+    "Jennifer Burt",
+    "Stefano Meschiari",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

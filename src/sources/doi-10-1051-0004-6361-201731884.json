@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201731884",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bonfils et al. (2018): Radial velocity follow-up of GJ1132 with HARPS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1806.03870"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201731884"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018A&A...618A.142B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A.142B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201731884",
+      "label": "Astronomy & Astrophysics 618 A142"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A.142B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bonfils et al. (2018), Astronomy & Astrophysics 618 A142",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A.142B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 618 A142",
+  "creators": [
+    "X. Bonfils",
+    "J.-M. Almenara",
+    "R. Cloutier",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

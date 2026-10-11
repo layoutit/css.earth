@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-669 (pscomppars): log10 of the luminosity in solar units -0.06248, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 7.9,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-669 (pscomppars): age 7.9 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "massSolar": 0.9245,
+  "massSource": "Mass 0.9245 +/- 0.0327 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-669 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

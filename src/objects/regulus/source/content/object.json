@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "12,901 K",
+        "source": {
+          "catalogueId": "arxiv-astro-ph-0501261",
+          "url": "https://arxiv.org/abs/astro-ph/0501261",
+          "label": "McAlister et al. (2005), Astrophys.J. 628 (2005) 439-452",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

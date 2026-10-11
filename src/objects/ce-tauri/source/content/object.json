@@ -43,6 +43,19 @@
           "catalogueId": "source-ce-tauri-cds-dec-avg",
           "locator": "angularDiameterMas; angularDiameterSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,801 K",
+        "source": {
+          "catalogueId": "arxiv-1802-06086",
+          "url": "https://doi.org/10.1051/0004-6361/201731471",
+          "label": "The convective photosphere of the red supergiant CE Tau. I. VLTI/PIONIER H-band interferometric imaging",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

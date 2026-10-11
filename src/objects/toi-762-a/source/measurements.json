@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-762 A (pscomppars): log10 of the luminosity in solar units -1.73283, from Hartman et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
   "ageGyr": 9.3,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-762 A (pscomppars): age 9.3 Gyr, from Hartman et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
+  "massSolar": 0.442,
+  "massSource": "Mass 0.442 +/- 0.025 solar masses from Hartman et al. 2024, the stellar mass of the default parameter set of TOI-762 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

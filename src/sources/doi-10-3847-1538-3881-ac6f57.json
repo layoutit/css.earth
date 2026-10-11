@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac6f57",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hord et al. (2022): The Discovery of a Planetary Companion Interior to Hot Jupiter WASP-132 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2205.02501"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac6f57"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....164...13H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...13H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac6f57",
+      "label": "The Astronomical Journal 164 13"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...13H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hord et al. (2022), The Astronomical Journal 164 13",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...13H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 164 13",
+  "creators": [
+    "Benjamin J. Hord",
+    "Knicole D. Colón",
+    "Travis A. Berger",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

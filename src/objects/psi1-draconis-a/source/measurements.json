@@ -32,6 +32,8 @@
   "projectedRotationSpeedSource": "SIMBAD, * psi01 Dra A: projected rotation speed 13 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "spinInclinationDegrees": 26.9,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (2.329 solar radii): sin i = v sin i × P / (2πR) = 0.452. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 1.311,
+  "massSource": "Mass 1.311 +/- 0.016 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 162003: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.311 +/- 0.016 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

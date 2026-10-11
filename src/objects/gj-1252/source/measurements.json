@@ -38,6 +38,8 @@
       "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 64 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.381,
+  "massSource": "Mass 0.381 +/- 0.019 solar masses from Shporer et al. 2020, the stellar mass of the default parameter set of GJ 1252 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

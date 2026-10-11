@@ -18,6 +18,8 @@
   "objectTypeSource": "SIMBAD, 2MASS J00001041+4922394: main object type AB?, Asymptotic Giant Branch Star Candidate",
   "luminosityLogSolar": 2.883,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 393490889188346368, flags_flame 10: lum_flame 763.4254 solar luminosities (16th to 84th percentiles 660.8835 to 921.43805); its log10 is recorded",
+  "massSolar": 5.1998,
+  "massSource": "Mass 5.200 (4.995 to 5.405) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

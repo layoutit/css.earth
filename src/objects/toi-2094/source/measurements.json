@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2094 (pscomppars): log10 of the luminosity in solar units -1.74473, from Jiang et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract)",
   "projectedRotationSpeedKmS": 2.31,
   "projectedRotationSpeedSource": "SIMBAD, TOI-2094: projected rotation speed 2.31 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "massSolar": 0.425,
+  "massSource": "Mass 0.425 +/- 0.059 solar masses from Jiang et al. 2026, the stellar mass of the default parameter set of TOI-2094 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

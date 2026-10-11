@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-200913489",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Santos et al. (2010): The HARPS search for southern extra-solar planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0912.3216"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200913489"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010A&A...512A..47S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...512A..47S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200913489",
+      "label": "Astronomy and Astrophysics 512 A47"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...512A..47S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Santos et al. (2010), Astronomy and Astrophysics 512 A47",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010A&A...512A..47S"
+    }
+  ],
+  "publisher": "Astronomy and Astrophysics 512 A47",
+  "creators": [
+    "N. C. Santos",
+    "M. Mayor",
+    "W. Benz",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

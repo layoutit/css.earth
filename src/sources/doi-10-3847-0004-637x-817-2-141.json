@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-0004-637x-817-2-141",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Stevenson et al. (2016): A SEARCH FOR WATER IN THE ATMOSPHERE OF HAT-P-26b USING LDSS-3C",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1511.08226"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-637X/817/2/141"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016ApJ...817..141S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...817..141S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0004-637X/817/2/141",
+      "label": "The Astrophysical Journal 817 141"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...817..141S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Stevenson et al. (2016), The Astrophysical Journal 817 141",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016ApJ...817..141S"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 817 141",
+  "creators": [
+    "Kevin B. Stevenson",
+    "Jacob L. Bean",
+    "Andreas Seifahrt",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

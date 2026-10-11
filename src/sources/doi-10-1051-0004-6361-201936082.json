@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201936082",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hjorth et al. (2019): MASCARA-3b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1906.05254"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201936082"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...631A..76H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..76H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201936082",
+      "label": "Astronomy & Astrophysics 631 A76"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..76H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hjorth et al. (2019), Astronomy & Astrophysics 631 A76",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..76H"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 631 A76",
+  "creators": [
+    "M. Hjorth",
+    "S. Albrecht",
+    "G. J. J. Talens",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

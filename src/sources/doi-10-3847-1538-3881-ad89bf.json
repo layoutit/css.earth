@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad89bf",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gupta et al. (2025): The NEID Earth Twin Survey. I. Confirmation of a 31 Day Planet Orbiting HD 86728",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2409.12315"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad89bf"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....169....1G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad89bf",
+      "label": "The Astronomical Journal 169 1"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gupta et al. (2025), The Astronomical Journal 169 1",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 169 1",
+  "creators": [
+    "Arvind F. Gupta",
+    "Jacob K. Luhn",
+    "Jason T. Wright",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

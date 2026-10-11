@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.372 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4115",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+          "label": "Hori et al. (2024), The Astronomical Journal 167 289",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,412 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4115",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+          "label": "Hori et al. (2024), The Astronomical Journal 167 289",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.018 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4115",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+          "label": "Hori et al. (2024), The Astronomical Journal 167 289",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "42.3 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4115",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+          "label": "Hori et al. (2024), The Astronomical Journal 167 289",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

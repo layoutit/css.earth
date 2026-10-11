@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-130 (pscomppars): age 2 Gyr, from Hellier et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract)",
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-130 (pscomppars): projected rotation speed 0.5 km/s, from Hellier et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract)",
+  "massSolar": 1.04,
+  "massSource": "Mass 1.04 +/- 0.04 solar masses from Hellier et al. 2017, the stellar mass of the default parameter set of WASP-130 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

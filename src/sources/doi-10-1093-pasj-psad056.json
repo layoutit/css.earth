@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-pasj-psad056",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Teng et al. (2023): Revisiting planetary systems in the Okayama Planet Search Program: A new long-period planet, RV astrometry joint analysis, and a multiplicity-metallicity trend around evolved stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2308.05343"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/pasj/psad056"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023PASJ...75.1030T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/pasj/psad056",
+      "label": "Publications of the Astronomical Society of Japan 75 1030-1071"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Teng et al. (2023), Publications of the Astronomical Society of Japan 75 1030-1071",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of Japan 75 1030-1071",
+  "creators": [
+    "Huan-Yu Teng",
+    "Bun’ei Sato",
+    "Masayuki Kuzuhara",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

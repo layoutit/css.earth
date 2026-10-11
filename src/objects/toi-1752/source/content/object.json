@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.524 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag713",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract",
+          "label": "Peláez-Torres et al. (2026), Monthly Notices of the Royal Astronomical Society 548 stag713",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,762 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag713",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract",
+          "label": "Peláez-Torres et al. (2026), Monthly Notices of the Royal Astronomical Society 548 stag713",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.05 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag713",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract",
+          "label": "Peláez-Torres et al. (2026), Monthly Notices of the Royal Astronomical Society 548 stag713",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1.0±0.5 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag713",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract",
+          "label": "Peláez-Torres et al. (2026), Monthly Notices of the Royal Astronomical Society 548 stag713",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "13 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-1752",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

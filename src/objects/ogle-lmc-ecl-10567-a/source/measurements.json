@@ -14,6 +14,8 @@
   "objectType": "Eclipsing Binary",
   "objectTypePath": "* > ** > EB*",
   "objectTypeSource": "SIMBAD, Gaia DR3 4658354927055221632: main object type EB*, Eclipsing Binary",
+  "massSolar": 3.333,
+  "massSource": "Mass 3.333 +/- 0.029 solar masses from Primary mass (solar masses) 3.333 +/- 0.029, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G) (https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

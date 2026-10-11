@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.41 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3785",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract",
+          "label": "Bieryla et al. (2024), Monthly Notices of the Royal Astronomical Society 527 10955-10964",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,560 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3785",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract",
+          "label": "Bieryla et al. (2024), Monthly Notices of the Royal Astronomical Society 527 10955-10964",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "5 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3785",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract",
+          "label": "Bieryla et al. (2024), Monthly Notices of the Royal Astronomical Society 527 10955-10964",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad3785",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract",
+          "label": "Bieryla et al. (2024), Monthly Notices of the Royal Astronomical Society 527 10955-10964",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

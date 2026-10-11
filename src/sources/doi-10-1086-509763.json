@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-509763",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Takeda et al. (2007): Structure and Evolution of Nearby Stars with Planets. II. Physical Properties of ∼1000 Cool Stars from the SPOCS Catalog",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/509763"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2007ApJS..168..297T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Takeda et al. (2007), The Astrophysical Journal Supplement Series 168 297-318",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 168 297-318",
+  "creators": [
+    "Genya Takeda",
+    "Eric B. Ford",
+    "Alison Sills",
+    "et al."
+  ],
+  "publicationDate": "2007"
+}

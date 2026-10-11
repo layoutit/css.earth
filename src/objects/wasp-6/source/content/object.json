@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.854 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acb154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+          "label": "McGruder et al. (2023), The Astrophysical Journal Letters 944 L56",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,438 K",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acb154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+          "label": "McGruder et al. (2023), The Astrophysical Journal Letters 944 L56",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.5 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-834-1-50",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...834...50B/abstract",
+          "label": "Barstow et al. (2017), The Astrophysical Journal 834 50",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.2 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acb154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+          "label": "McGruder et al. (2023), The Astrophysical Journal Letters 944 L56",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "28.3 days",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acb154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+          "label": "McGruder et al. (2023), The Astrophysical Journal Letters 944 L56",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

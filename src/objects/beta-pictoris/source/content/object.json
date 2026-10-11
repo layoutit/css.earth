@@ -56,6 +56,45 @@
           "path": "source/measurements.json",
           "locator": "effectiveTemperatureK; effectiveTemperatureSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "9 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-6256-152-4-97",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...97W/abstract",
+          "label": "Wang et al. (2016), The Astronomical Journal 152 97",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "A6 V",
+        "source": {
+          "catalogueId": "arxiv-2606-23801",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..10S/abstract",
+          "label": "Sutlieff, Bonse et al. (2026)",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "23 million years",
+        "source": {
+          "catalogueId": "arxiv-2606-23801",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..10S/abstract",
+          "label": "Sutlieff, Bonse et al. (2026)",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

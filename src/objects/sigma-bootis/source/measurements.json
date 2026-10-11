@@ -18,6 +18,8 @@
   "objectTypeSource": "SIMBAD, * sig Boo: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 7.32,
   "projectedRotationSpeedSource": "SIMBAD, * sig Boo: projected rotation speed 7.32 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
+  "massSolar": 1.194,
+  "massSource": "Mass 1.194 +/- 0.013 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 128167: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.194 +/- 0.013 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

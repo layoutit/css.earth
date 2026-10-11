@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1431 (pscomppars): age 0.29 Gyr, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
   "projectedRotationSpeedKmS": 6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1431 (pscomppars): projected rotation speed 6 km/s, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
+  "massSolar": 1.9,
+  "massSource": "Mass 1.9 +/- 0.1 solar masses from Addison et al. 2021, the stellar mass of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

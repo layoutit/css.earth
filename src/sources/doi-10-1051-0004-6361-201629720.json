@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201629720",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Esposito et al. (2017): The GAPS Programme with HARPS-N at TNG",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1702.03136"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201629720"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017A&A...601A..53E"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...601A..53E",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201629720",
+      "label": "Astronomy & Astrophysics 601 A53"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...601A..53E",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Esposito et al. (2017), Astronomy & Astrophysics 601 A53",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017A&A...601A..53E"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 601 A53",
+  "creators": [
+    "M. Esposito",
+    "E. Covino",
+    "S. Desidera",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

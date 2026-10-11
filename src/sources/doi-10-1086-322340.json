@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1086-322340",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Belle et al. (2001): Altair’s Oblateness and Rotation Velocity from Long‐Baseline Interferometry",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/322340"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1086/322340",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1086/322340",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Belle et al. (2001), The Astrophysical Journal 559 1155-1164",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1086/322340"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 559 1155-1164",
+  "creators": [
+    "Gerard T. van Belle",
+    "David R. Ciardi",
+    "Robert R. Thompson",
+    "et al."
+  ],
+  "publicationDate": "2001"
+}

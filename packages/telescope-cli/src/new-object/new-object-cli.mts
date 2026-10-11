@@ -9,6 +9,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --metadata --all | <star id>... [--periods [fresh]]
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --facts --all | <star id>... [--papers]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --all | <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb <id>...
@@ -90,6 +91,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     if (!ids.filter(id => id !== 'fresh').length && !args.includes('--all')) throw new TypeError('Usage: --metadata --all | <star id>... [--periods [fresh]]');
     const lines = await writeStarMetadata(checkoutProjectRoot(import.meta.url), ids.filter(id => id !== 'fresh'), liveArchive, line => process.stdout.write(`${line}\n`), args.includes('--periods') ? ids.includes('fresh') ? 'fresh' : 'kept' : undefined);
     process.stdout.write(`${lines.at(-1)}\n${lines.length - 1} record(s) changed.\n`);
+  } else if (args.includes('--facts') && !specPath) {
+    // The facts each star's measurements record gives, into its page's factsheet: `--facts --all | STAR_ID...` (new-object/metadata/facts.mts).
+    const { writeStarFacts } = await import('./metadata/facts.mts'), { liveArchive } = await import('./archives/archives.mts'), ids = args.filter(argument => !argument.startsWith('--'));
+    if (!ids.length && !args.includes('--all')) throw new TypeError('Usage: --facts --all | <star id>... [--papers]');
+    const lines = await writeStarFacts(checkoutProjectRoot(import.meta.url), ids, line => process.stdout.write(`${line}\n`), args.includes('--papers') ? liveArchive : undefined);
+    process.stdout.write(`${lines.at(-1)}\n${lines.length - 1} factsheet(s) changed. Republish them: node packages/bake/cli/prepare-factsheets.mts\n`);
   } else if (args.includes('--retext') && !specPath) {
     // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/revise/retext.mts).
     const { retextHosts } = await import('./revise/retext.mts'), { liveArchive } = await import('./archives/archives.mts');

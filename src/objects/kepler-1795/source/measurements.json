@@ -78,6 +78,8 @@
   ],
   "projectedRotationSpeedKmS": 3.27,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-1795: projected rotation speed 3.27 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "massSolar": 0.768,
+  "massSource": "Mass 0.768 +/- 0.024 solar masses from Q1-Q17 DR25 KOI Table, the stellar mass of the default parameter set of Kepler-1795 b in the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

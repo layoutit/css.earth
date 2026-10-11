@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,232 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "3.3 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-693-2-1084",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...693.1084W/abstract",
+          "label": "Wright et al. (2009), The Astrophysical Journal 693 1084-1099",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F8 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201015693",
+          "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...525A..78C/abstract",
+          "label": "Curiel et al. (2011), Astronomy & Astrophysics 525 A78",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201015693",
+          "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...525A..78C/abstract",
+          "label": "Curiel et al. (2011), Astronomy & Astrophysics 525 A78",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "12.0 days",
+        "source": {
+          "catalogueId": "doi-10-1086-310444",
+          "url": "https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract",
+          "label": "Butler et al. (1997), The Astrophysical Journal 474 L115-L118",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.56 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-818-1-87",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract",
+          "label": "Schlieder et al. (2016), The Astrophysical Journal 818 87",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,785 K",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-818-1-87",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract",
+          "label": "Schlieder et al. (2016), The Astrophysical Journal 818 87",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.049 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-818-1-87",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract",
+          "label": "Schlieder et al. (2016), The Astrophysical Journal 818 87",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1.0 V",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-818-1-87",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract",
+          "label": "Schlieder et al. (2016), The Astrophysical Journal 818 87",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-818-1-87",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract",
+          "label": "Schlieder et al. (2016), The Astrophysical Journal 818 87",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

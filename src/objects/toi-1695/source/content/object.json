@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.513 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acbdfd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+          "label": "Cherubim et al. (2023), The Astronomical Journal 165 167",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,690 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acbdfd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+          "label": "Cherubim et al. (2023), The Astronomical Journal 165 167",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.044 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acbdfd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+          "label": "Cherubim et al. (2023), The Astronomical Journal 165 167",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acbdfd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+          "label": "Cherubim et al. (2023), The Astronomical Journal 165 167",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "47.7 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acbdfd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+          "label": "Cherubim et al. (2023), The Astronomical Journal 165 167",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

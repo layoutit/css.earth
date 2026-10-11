@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-200913521",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mordasini et al. (2011): The HARPS search for southern extra-solar planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1010.0856"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200913521"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011A&A...526A.111M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...526A.111M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200913521",
+      "label": "Astronomy & Astrophysics 526 A111"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...526A.111M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mordasini et al. (2011), Astronomy & Astrophysics 526 A111",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011A&A...526A.111M"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 526 A111",
+  "creators": [
+    "C. Mordasini",
+    "M. Mayor",
+    "S. Udry",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

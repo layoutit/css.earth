@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-200809611",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lacour et al. (2008): The limb-darkened Arcturus: imaging with the IOTA/IONIC interferometer",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:200809611"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361:200809611",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361:200809611",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lacour et al. (2008), Astronomy & Astrophysics 485 561-570",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361:200809611"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 485 561-570",
+  "creators": [
+    "S. Lacour",
+    "S. Meimon",
+    "E. Thiébaut",
+    "et al."
+  ],
+  "publicationDate": "2008"
+}

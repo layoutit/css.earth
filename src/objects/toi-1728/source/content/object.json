@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.646 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-aba0a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract",
+          "label": "Kanodia et al. (2020), The Astrophysical Journal 899 29",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,980 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-aba0a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract",
+          "label": "Kanodia et al. (2020), The Astrophysical Journal 899 29",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.088 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-aba0a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract",
+          "label": "Kanodia et al. (2020), The Astrophysical Journal 899 29",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M0",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-aba0a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract",
+          "label": "Kanodia et al. (2020), The Astrophysical Journal 899 29",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-aba0a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract",
+          "label": "Kanodia et al. (2020), The Astrophysical Journal 899 29",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

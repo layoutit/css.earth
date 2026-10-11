@@ -42,6 +42,8 @@
   "projectedRotationSpeedSource": "SIMBAD, K2-275: projected rotation speed 4.7 km/s, the measurement SIMBAD prefers (2018AJ....155...21P)",
   "spinInclinationDegrees": 54.1,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.69 solar radii): sin i = v sin i × P / (2πR) = 0.810. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.77,
+  "massSource": "Mass 0.77 +/- 0.01 solar masses from Castro-González et al. 2022, the stellar mass of the default parameter set of K2-275 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

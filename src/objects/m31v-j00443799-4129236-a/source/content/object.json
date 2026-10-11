@@ -30,6 +30,32 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "23.1 solar masses",
+        "source": {
+          "catalogueId": "page-arxiv-org-abs-astro-ph-0511045",
+          "url": "https://arxiv.org/abs/astro-ph/0511045",
+          "label": "Web page arxiv.org/abs/astro-ph/0511045",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "33,900 K",
+        "source": {
+          "catalogueId": "page-arxiv-org-abs-astro-ph-0511045",
+          "url": "https://arxiv.org/abs/astro-ph/0511045",
+          "label": "Web page arxiv.org/abs/astro-ph/0511045",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

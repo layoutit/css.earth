@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.318 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,407 K",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.016 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451646",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract",
+          "label": "Cortés-Zuleta et al. (2025), Astronomy & Astrophysics 693 A164",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451646",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract",
+          "label": "Cortés-Zuleta et al. (2025), Astronomy & Astrophysics 693 A164",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.2 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451646",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract",
+          "label": "Cortés-Zuleta et al. (2025), Astronomy & Astrophysics 693 A164",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "103 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451646",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract",
+          "label": "Cortés-Zuleta et al. (2025), Astronomy & Astrophysics 693 A164",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

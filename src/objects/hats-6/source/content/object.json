@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.574 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-149-5-166",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract",
+          "label": "Hartman et al. (2015), The Astronomical Journal 149 166",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,724 K",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-149-5-166",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract",
+          "label": "Hartman et al. (2015), The Astronomical Journal 149 166",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.079 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1 V",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-149-5-166",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract",
+          "label": "Hartman et al. (2015), The Astronomical Journal 149 166",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "8.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-149-5-166",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract",
+          "label": "Hartman et al. (2015), The Astronomical Journal 149 166",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

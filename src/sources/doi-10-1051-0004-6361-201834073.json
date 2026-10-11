@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201834073",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lam et al. (2018): K2-265 b: a transiting rocky super-Earth",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1809.08869"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201834073"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018A&A...620A..77L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...620A..77L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201834073",
+      "label": "Astronomy & Astrophysics 620 A77"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...620A..77L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lam et al. (2018), Astronomy & Astrophysics 620 A77",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018A&A...620A..77L"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 620 A77",
+  "creators": [
+    "K. W. F. Lam",
+    "A. Santerne",
+    "S. G. Sousa",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

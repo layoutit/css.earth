@@ -61,6 +61,8 @@
   "rotationPeriodMeasuredDays": 2.39,
   "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 5, 32, 106 and 107 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 2.39 d, the light swinging by 3.0% as the star turns",
   "rotationLightSwingPercent": 2.97,
+  "massSolar": 0.9825,
+  "massSource": "Mass 0.983 (0.942 to 1.023) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

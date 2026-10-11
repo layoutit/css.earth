@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2605-26805",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Darcis et al. (2026): The spectral energy distribution of YSES 1 b and its circumplanetary disc",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2605.26805"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026arXiv260526805D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260526805D",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260526805D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Darcis et al. (2026)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026arXiv260526805D"
+    }
+  ],
+  "creators": [
+    "Michiel Darcis",
+    "Sebastiaan Y. Haffert",
+    "Tomas Stolker",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

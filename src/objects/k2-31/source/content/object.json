@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.91 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-6256-152-5-132",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+          "label": "Grziwa et al. (2016), The Astronomical Journal 152 132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,280 K",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-6256-152-5-132",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+          "label": "Grziwa et al. (2016), The Astronomical Journal 152 132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.78 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201628902",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract",
+          "label": "Barros et al. (2016), Astronomy & Astrophysics 594 A100",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G7 V",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-6256-152-5-132",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+          "label": "Grziwa et al. (2016), The Astronomical Journal 152 132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "9.7 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-k2-31",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "18.4 days",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-6256-152-5-132",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+          "label": "Grziwa et al. (2016), The Astronomical Journal 152 132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

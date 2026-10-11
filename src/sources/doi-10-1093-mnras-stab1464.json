@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stab1464",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Georgieva et al. (2021): Hot planets around cool stars – two short-period mini-Neptunes transiting the late K-dwarf TOI-1260",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2104.05653"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab1464"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021MNRAS.505.4684G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.4684G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab1464",
+      "label": "Monthly Notices of the Royal Astronomical Society 505 4684-4701"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.4684G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Georgieva et al. (2021), Monthly Notices of the Royal Astronomical Society 505 4684-4701",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.4684G"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 505 4684-4701",
+  "creators": [
+    "I Y Georgieva",
+    "C M Persson",
+    "O Barragán",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

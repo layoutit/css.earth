@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-pasj-62-4-1063",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sato et al. (2010): Substellar Companions to Evolved Intermediate-Mass Stars: HD 145457 and HD 180314",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1005.2860"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/pasj/62.4.1063"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010PASJ...62.1063S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010PASJ...62.1063S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/pasj/62.4.1063",
+      "label": "Publications of the Astronomical Society of Japan 62 1063-1069"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010PASJ...62.1063S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sato et al. (2010), Publications of the Astronomical Society of Japan 62 1063-1069",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010PASJ...62.1063S"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of Japan 62 1063-1069",
+  "creators": [
+    "Bun’ei Sato",
+    "Masashi Omiya",
+    "Yujuan Liu",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

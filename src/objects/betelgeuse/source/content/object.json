@@ -43,6 +43,19 @@
           "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
           "locator": "angularDiameterMas; angularDiameterSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,600 K",
+        "source": {
+          "catalogueId": "arxiv-2002-10463",
+          "url": "https://arxiv.org/abs/2002.10463",
+          "label": "Levesque & Massey (2020)",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

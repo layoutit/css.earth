@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-913 (pscomppars): log10 of the luminosity in solar units -0.53057, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 10.108,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5772195974332632192, flags_flame 00: age_flame 10.107988 Gyr (16th to 84th percentiles 7.9526954 to 12.262695)",
+  "massSolar": 0.82,
+  "massSource": "Mass 0.82 +/- 0.0973 solar masses from Mistry et al. 2023, the stellar mass of the default parameter set of TOI-913 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

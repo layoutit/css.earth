@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.522 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa7140",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+          "label": "Mann et al. (2017), The Astronomical Journal 153 267",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,713 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa7140",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+          "label": "Mann et al. (2017), The Astronomical Journal 153 267",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.043 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa7140",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+          "label": "Mann et al. (2017), The Astronomical Journal 153 267",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "13 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-kepler-1651",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

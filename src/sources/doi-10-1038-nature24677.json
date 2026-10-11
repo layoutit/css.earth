@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1038-nature24677",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bourrier et al. (2018): Orbital misalignment of the Neptune-mass exoplanet GJ 436b with the spin of its cool star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1712.06638"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/nature24677"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018Natur.553..477B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018Natur.553..477B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/nature24677",
+      "label": "Nature 553 477-480"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018Natur.553..477B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bourrier et al. (2018), Nature 553 477-480",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018Natur.553..477B"
+    }
+  ],
+  "publisher": "Nature 553 477-480",
+  "creators": [
+    "Vincent Bourrier",
+    "Christophe Lovis",
+    "Hervé Beust",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

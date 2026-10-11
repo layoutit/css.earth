@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-1086-682056",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Iglesias-Marzoa et al. (2015): The <tt>rvfit</tt> Code: A Detailed Adaptive Simulated Annealing Code for Fitting Binaries and Exoplanets Radial Velocities",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1505.04767"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/682056"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015PASP..127..567I"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015PASP..127..567I",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/682056",
+      "label": "Publications of the Astronomical Society of the Pacific 127 567-582"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015PASP..127..567I",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Iglesias-Marzoa et al. (2015), Publications of the Astronomical Society of the Pacific 127 567-582",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015PASP..127..567I"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of the Pacific 127 567-582",
+  "creators": [
+    "Ramón Iglesias-Marzoa",
+    "Mercedes López-Morales",
+    "María Jesús Arévalo Morales"
+  ],
+  "publicationDate": "2015"
+}

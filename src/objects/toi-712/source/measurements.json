@@ -38,6 +38,8 @@
   "projectedRotationSpeedSource": "SIMBAD, TOI-712: projected rotation speed 1.55 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "spinInclinationDegrees": 34.5,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.674 solar radii): sin i = v sin i × P / (2πR) = 0.566. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.732,
+  "massSource": "Mass 0.732 +/- 0.027 solar masses from Vach et al. 2022, the stellar mass of the default parameter set of TOI-712 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...71V/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

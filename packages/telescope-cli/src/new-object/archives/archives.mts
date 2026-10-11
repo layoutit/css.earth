@@ -221,7 +221,8 @@ export function parseCrossref(json: string, doi: string, url: string): Publicati
   const message = (JSON.parse(json) as { message?: Record<string, any> }).message;
   if (!message) throw new TypeError(`DOI ${doi}: Crossref returned no record.`);
   const title = requireString(message.title?.[0], `DOI ${doi} title`), year = String(message.issued?.['date-parts']?.[0]?.[0] ?? '');
-  const creators = (message.author ?? []).map((a: { given?: string; family?: string }) => clean(`${a.given ?? ''} ${a.family ?? ''}`));
+  // A collaboration is listed by one name, with no given and family name (the Gaia Collaboration's papers).
+  const creators = (message.author ?? []).map((a: { given?: string; family?: string; name?: string }) => clean(a.family ? `${a.given ?? ''} ${a.family}` : a.name ?? a.given ?? ''));
   const container = message['container-title']?.[0], volume = message.volume, page = message.page ?? message['article-number'];
   return { id: `doi-${doi.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/-$/u, '')}`, title: clean(title), creators, year, url, doi,
     ...(container ? { publisher: clean([container, volume, page].filter(Boolean).join(' ')) } : {}) };

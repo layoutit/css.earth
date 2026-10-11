@@ -1,0 +1,36 @@
+{
+  "id": "publication-2001a-a-375-205n",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2001A&A...375..205N, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2001A&A...375..205N"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N",
+      "checkedOn": "2026-10-11",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N"
+    }
+  ],
+  "publicationDate": "2001"
+}

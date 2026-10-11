@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-338768",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Vogt et al. (2002): Ten Low‐Mass Companions from the Keck Precision Velocity Survey",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/338768"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2002ApJ...568..352V"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2002ApJ...568..352V",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2002ApJ...568..352V",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Vogt et al. (2002), The Astrophysical Journal 568 352-362",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2002ApJ...568..352V"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 568 352-362",
+  "creators": [
+    "Steven S. Vogt",
+    "R. Paul Butler",
+    "Geoffrey W. Marcy",
+    "et al."
+  ],
+  "publicationDate": "2002"
+}

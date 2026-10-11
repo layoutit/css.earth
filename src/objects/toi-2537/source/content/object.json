@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.771 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451519",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+          "label": "Heidari et al. (2025), Astronomy & Astrophysics 694 A36",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,870 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451519",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+          "label": "Heidari et al. (2025), Astronomy & Astrophysics 694 A36",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.3 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451519",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+          "label": "Heidari et al. (2025), Astronomy & Astrophysics 694 A36",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451519",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+          "label": "Heidari et al. (2025), Astronomy & Astrophysics 694 A36",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "19.0 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451519",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+          "label": "Heidari et al. (2025), Astronomy & Astrophysics 694 A36",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

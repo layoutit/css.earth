@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stu410",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hellier et al. (2014): Transiting hot Jupiters from WASP-South, Euler and TRAPPIST: WASP-95b to WASP-101b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1310.5630"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stu410"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014MNRAS.440.1982H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stu410",
+      "label": "Monthly Notices of the Royal Astronomical Society 440 1982-1992"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hellier et al. (2014), Monthly Notices of the Royal Astronomical Society 440 1982-1992",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 440 1982-1992",
+  "creators": [
+    "Coel Hellier",
+    "D. R. Anderson",
+    "A. Collier Cameron",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

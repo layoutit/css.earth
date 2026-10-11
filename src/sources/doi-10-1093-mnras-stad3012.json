@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad3012",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Finociety et al. (2023): Monitoring the young planet host V1298 Tau with SPIRou: planetary system and evolving large-scale magnetic field",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2310.02613"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad3012"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.526.4627F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.526.4627F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad3012",
+      "label": "Monthly Notices of the Royal Astronomical Society 526 4627-4672"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.526.4627F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Finociety et al. (2023), Monthly Notices of the Royal Astronomical Society 526 4627-4672",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.526.4627F"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 526 4627-4672",
+  "creators": [
+    "B Finociety",
+    "J-F Donati",
+    "P I Cristofari",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

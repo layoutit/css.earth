@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3 solar masses",
+        "source": {
+          "catalogueId": "gaia-dr3-baekdu",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,860 K",
+        "source": {
+          "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+          "url": "https://doi.org/10.1051/0004-6361/202243462",
+          "label": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Andrae et al. (2023), A&A 674, A27",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "53 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-06029-0",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.618..917H/abstract",
+          "label": "Hon et al. (2023), Nature 618 917-920",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K0",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201527076",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...584A..79L/abstract",
+          "label": "Lee et al. (2015), Astronomy & Astrophysics 584 A79",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201527076",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...584A..79L/abstract",
+          "label": "Lee et al. (2015), Astronomy & Astrophysics 584 A79",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

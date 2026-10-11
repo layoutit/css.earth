@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 43197 (pscomppars): log10 of the luminosity in solar units -0.137, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
   "projectedRotationSpeedKmS": 2.18,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 43197 (pscomppars): projected rotation speed 2.18 km/s, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
+  "massSolar": 0.8792,
+  "massSource": "Mass 0.879 (0.839 to 0.919) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

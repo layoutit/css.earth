@@ -56,6 +56,58 @@
           "path": "source/preparation/rotation.json",
           "locator": "equatorialRotationPeriod"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "10,170 K",
+        "source": {
+          "catalogueId": "arxiv-1706-06723",
+          "url": "https://arxiv.org/abs/1706.06723",
+          "label": "Gaudi et al. (2017)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "39 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201935718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B/abstract",
+          "label": "Borsa et al. (2019), Astronomy & Astrophysics 631 A34",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "A",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201935718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B/abstract",
+          "label": "Borsa et al. (2019), Astronomy & Astrophysics 631 A34",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "450 million years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201935718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B/abstract",
+          "label": "Borsa et al. (2019), Astronomy & Astrophysics 631 A34",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

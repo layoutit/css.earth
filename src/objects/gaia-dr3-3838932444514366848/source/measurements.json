@@ -13,6 +13,8 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-3838932444514366848.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.248, rounded to two decimals",
   "luminosityLogSolar": 2.36,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3838932444514366848, flags_flame 10: lum_flame 229.04552 solar luminosities (16th to 84th percentiles 196.1952 to 275.86856); its log10 is recorded",
+  "massSolar": 3.4051,
+  "massSource": "Mass 3.405 (3.365 to 3.445) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

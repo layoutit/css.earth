@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.39 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2410-00102",
+          "url": "https://arxiv.org/abs/2410.00102",
+          "label": "Pinsonneault et al. (2024), The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,050 K",
+        "source": {
+          "catalogueId": "arxiv-2410-00102",
+          "url": "https://arxiv.org/abs/2410.00102",
+          "label": "Pinsonneault et al. (2024), The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "50 times the Sun's",
+        "source": {
+          "catalogueId": "gaia-dr3-kic-3438609",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "40,000 K",
+        "source": {
+          "catalogueId": "arxiv-1204-1200",
+          "url": "https://arxiv.org/abs/1204.1200",
+          "label": "Kaschinski et al. (2012)",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

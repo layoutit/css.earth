@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-200913670",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sanz-Forcada et al. (2010): A scenario of planet erosion by coronal radiation",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1002.1875"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200913670"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010A&A...511L...8S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511L...8S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200913670",
+      "label": "Astronomy and Astrophysics 511 L8"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511L...8S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sanz-Forcada et al. (2010), Astronomy and Astrophysics 511 L8",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010A&A...511L...8S"
+    }
+  ],
+  "publisher": "Astronomy and Astrophysics 511 L8",
+  "creators": [
+    "J. Sanz-Forcada",
+    "I. Ribas",
+    "G. Micela",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

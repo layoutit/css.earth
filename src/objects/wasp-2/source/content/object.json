@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.895 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-ab03aa",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract",
+          "label": "Addison et al. (2019), Publications of the Astronomical Society of the Pacific 131 115003",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,180 K",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-ab03aa",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract",
+          "label": "Addison et al. (2019), Publications of the Astronomical Society of the Pacific 131 115003",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.49 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-ab03aa",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract",
+          "label": "Addison et al. (2019), Publications of the Astronomical Society of the Pacific 131 115003",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K1",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201014525",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...524A..25T/abstract",
+          "label": "Triaud et al. (2010), Astronomy & Astrophysics 524 A25",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "8.2 billion years",
+        "source": {
+          "catalogueId": "doi-10-1111-j-1365-2966-2012-21756-x",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012MNRAS.426.1291S/abstract",
+          "label": "Southworth (2012), Monthly Notices of the Royal Astronomical Society 426 1291-1323",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

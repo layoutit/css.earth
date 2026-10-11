@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-344298",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Marcy et al. (2002): A Planet at 5 AU around 55 Cancri",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/344298"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2002ApJ...581.1375M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2002ApJ...581.1375M",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2002ApJ...581.1375M",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Marcy et al. (2002), The Astrophysical Journal 581 1375-1388",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2002ApJ...581.1375M"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 581 1375-1388",
+  "creators": [
+    "Geoffrey W. Marcy",
+    "R. Paul Butler",
+    "Debra A. Fischer",
+    "et al."
+  ],
+  "publicationDate": "2002"
+}

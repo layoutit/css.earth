@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.679 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stac3639",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+          "label": "Lam et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,227 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stac3639",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+          "label": "Lam et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.13 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stac3639",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+          "label": "Lam et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K6 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab1464",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.4684G/abstract",
+          "label": "Georgieva et al. (2021), Monthly Notices of the Royal Astronomical Society 505 4684-4701",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stac3639",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+          "label": "Lam et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

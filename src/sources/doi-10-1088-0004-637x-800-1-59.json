@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-800-1-59",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Vanderburg et al. (2015): CHARACTERIZING K2 PLANET DISCOVERIES: A SUPER-EARTH TRANSITING THE BRIGHT K DWARF HIP 116454",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1412.5674"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/800/1/59"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...800...59V"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800...59V",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/800/1/59",
+      "label": "The Astrophysical Journal 800 59"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800...59V",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Vanderburg et al. (2015), The Astrophysical Journal 800 59",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800...59V"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 800 59",
+  "creators": [
+    "Andrew Vanderburg",
+    "Benjamin T. Montet",
+    "John Asher Johnson",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

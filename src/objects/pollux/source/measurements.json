@@ -19,6 +19,8 @@
       "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 227 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 1.91,
+  "massSource": "Mass 1.91 +/- 0.09 solar masses from Hatzes et al. (2012), A&A 543, A98, abstract: M = 1.91 +/- 0.09 solar masses from the p-mode frequency spacing (7.14 +/- 0.12 microHz) and the interferometric radius (https://doi.org/10.1051/0004-6361/201219332). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

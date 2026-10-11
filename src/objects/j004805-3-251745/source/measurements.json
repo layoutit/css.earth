@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Comerón et al. (2003), A&A 400, 137, section 3.1: T_eff = 15,000 K, uncertain by about 3,000 K, from its B-V color through the color, temperature and bolometric correction relations of Castelli (1999) (https://doi.org/10.1051/0004-6361:20021909)",
   "surfaceGravityLogg": 2.76,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/j004805-3-251745.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.757, rounded to two decimals",
+  "massSolar": 12,
+  "massSource": "Mass 12 solar masses from Comerón et al. (2003), A&A 400, 137, abstract and section 3.1: a mass of 12 M_sun, the initial mass that the evolutionary models of Meynet & Maeder (2000) give at its temperature and luminosity; not a dynamical measurement (https://doi.org/10.1051/0004-6361:20021909). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -39,6 +39,8 @@
   "rotationPeriodMeasuredDays": 5.05,
   "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 38, 39 and 100 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 5.05 d, the light swinging by 1.3% as the star turns",
   "rotationLightSwingPercent": 1.34,
+  "massSolar": 1.08,
+  "massSource": "Mass 1.08 +/- 0.05 solar masses from Wood et al. 2023, the stellar mass of the default parameter set of HD 109833 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

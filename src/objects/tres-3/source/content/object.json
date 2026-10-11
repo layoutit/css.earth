@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.928 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+          "label": "Sozzetti et al. (2009), The Astrophysical Journal 691 1145-1158",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,650 K",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+          "label": "Sozzetti et al. (2009), The Astrophysical Journal 691 1145-1158",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.63 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+          "label": "Sozzetti et al. (2009), The Astrophysical Journal 691 1145-1158",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G4 V",
+        "source": {
+          "catalogueId": "doi-10-1086-519793",
+          "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...663L..37O/abstract",
+          "label": "O'Donovan et al. (2007), The Astrophysical Journal 663 L37-L40",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "900 million years",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+          "label": "Sozzetti et al. (2009), The Astrophysical Journal 691 1145-1158",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

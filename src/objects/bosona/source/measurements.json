@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 206610 (pscomppars): age 3 Gyr, from Johnson et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010PASP..122..701J/abstract)",
   "projectedRotationSpeedKmS": 1.77,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 206610 (pscomppars): projected rotation speed 1.77 km/s, from Jofré et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J/abstract)",
+  "massSolar": 1.1415,
+  "massSource": "Mass 1.142 (1.091 to 1.199) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

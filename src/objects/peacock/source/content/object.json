@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "17,880 K",
+        "source": {
+          "catalogueId": "doi-10-1086-154093",
+          "url": "https://doi.org/10.1086/154093",
+          "label": "Code et al. (1976), The Astrophysical Journal 203 417",
+          "checked": "2026-10-07",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

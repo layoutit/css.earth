@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201628331",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Díaz et al. (2016): The SOPHIE search for northern extrasolar planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1604.07610"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201628331"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016A&A...591A.146D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016A&A...591A.146D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201628331",
+      "label": "Astronomy & Astrophysics 591 A146"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016A&A...591A.146D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Díaz et al. (2016), Astronomy & Astrophysics 591 A146",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016A&A...591A.146D"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 591 A146",
+  "creators": [
+    "R. F. Díaz",
+    "J. Rey",
+    "O. Demangeon",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

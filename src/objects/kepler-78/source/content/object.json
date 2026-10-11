@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.779 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+          "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,058 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+          "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.32 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1086-682056",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015PASP..127..567I/abstract",
+          "label": "Iglesias-Marzoa et al. (2015), Publications of the Astronomical Society of the Pacific 127 567-582",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-774-1-54",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...774...54S/abstract",
+          "label": "Sanchis-Ojeda et al. (2013), The Astrophysical Journal 774 54",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "630 million years",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-808-2-127",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G/abstract",
+          "label": "Grunblatt et al. (2015), The Astrophysical Journal 808 127",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "12.9 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+          "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

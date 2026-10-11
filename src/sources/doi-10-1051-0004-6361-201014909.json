@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201014909",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Boisse et al. (2010): The SOPHIE search for northern extrasolar planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1006.4984"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201014909"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010A&A...523A..88B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...523A..88B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201014909",
+      "label": "Astronomy & Astrophysics 523 A88"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...523A..88B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Boisse et al. (2010), Astronomy & Astrophysics 523 A88",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010A&A...523A..88B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 523 A88",
+  "creators": [
+    "I. Boisse",
+    "A. Eggenberger",
+    "N. C. Santos",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

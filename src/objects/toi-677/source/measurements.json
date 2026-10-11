@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-677 (pscomppars): age 2.92 Gyr, from Jordán et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract)",
   "projectedRotationSpeedKmS": 7.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-677 (pscomppars): projected rotation speed 7.8 km/s, from Jordán et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract)",
+  "massSolar": 1.181,
+  "massSource": "Mass 1.181 +/- 0.058 solar masses from Jordán et al. 2020, the stellar mass of the default parameter set of TOI-677 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

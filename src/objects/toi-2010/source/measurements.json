@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2010 (pscomppars): log10 of the luminosity in solar units 0.11361, from Mann et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract)",
   "ageGyr": 1.9,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2010 (pscomppars): age 1.9 Gyr, from Mann et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract)",
+  "massSolar": 1.112,
+  "massSource": "Mass 1.112 +/- 0.048 solar masses from Mann et al. 2023, the stellar mass of the default parameter set of TOI-2010 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

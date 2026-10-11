@@ -18,6 +18,8 @@
   "objectTypeSource": "SIMBAD, HD 80607: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "SIMBAD, HD 80607: projected rotation speed 2 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "massSolar": 0.97,
+  "massSource": "Mass 0.97 +/- 0.13 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 457134361 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 80607) (photometry/stellar-color.json); no image of the photosphere exists."

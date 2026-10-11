@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.847 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acaf03",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+          "label": "Thygesen et al. (2023), The Astronomical Journal 165 155",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,160 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acaf03",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+          "label": "Thygesen et al. (2023), The Astronomical Journal 165 155",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.4 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acaf03",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+          "label": "Thygesen et al. (2023), The Astronomical Journal 165 155",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acaf03",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+          "label": "Thygesen et al. (2023), The Astronomical Journal 165 155",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "19.8 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw2345",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..850G/abstract",
+          "label": "Gaidos et al. (2017), Monthly Notices of the Royal Astronomical Society 464 850-862",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

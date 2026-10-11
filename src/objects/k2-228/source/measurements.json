@@ -31,6 +31,8 @@
   "rotationPeriodMeasuredDays": 18.22,
   "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 102 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 18.22 d, the light swinging by 0.24% as the star turns",
   "rotationLightSwingPercent": 0.24,
+  "massSolar": 0.71,
+  "massSource": "Mass 0.71 +/- 0.02 solar masses from Livingston et al. 2018, the stellar mass of the default parameter set of K2-228 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

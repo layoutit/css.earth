@@ -36,6 +36,8 @@
   ],
   "projectedRotationSpeedKmS": 3.15,
   "projectedRotationSpeedSource": "SIMBAD, * bet CVn: projected rotation speed 3.15 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
+  "massSolar": 0.852,
+  "massSource": "Mass 0.852 +/- 0.023 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 109358: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 0.852 +/- 0.023 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

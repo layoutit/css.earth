@@ -56,6 +56,45 @@
           "path": "source/measurements.json",
           "locator": "effectiveTemperatureK; effectiveTemperatureSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "2.9 times the Sun's",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F5 V",
+        "source": {
+          "catalogueId": "arxiv-2208-04867",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671L...5H/abstract",
+          "label": "Hinkley et al. (2023)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "160 million years",
+        "source": {
+          "catalogueId": "arxiv-2208-04867",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671L...5H/abstract",
+          "label": "Hinkley et al. (2023)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

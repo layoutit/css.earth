@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 22946 (pscomppars): age 2.5 Gyr, from Garai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract)",
   "projectedRotationSpeedKmS": 2.81,
   "projectedRotationSpeedSource": "SIMBAD, HD 22946: projected rotation speed 2.81 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "massSolar": 1.098,
+  "massSource": "Mass 1.098 +/- 0.04 solar masses from Garai et al. 2023, the stellar mass of the default parameter set of TOI-411 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

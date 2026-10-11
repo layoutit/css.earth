@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-11 (pscomppars): age 8.5 Gyr, from Lissauer et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract)",
   "projectedRotationSpeedKmS": 0.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-11 (pscomppars): projected rotation speed 0.4 km/s, from Lissauer et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011Natur.470...53L/abstract)",
+  "massSolar": 0.961,
+  "massSource": "Mass 0.961 +/- 0.025 solar masses from Lissauer et al. 2013, the stellar mass of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

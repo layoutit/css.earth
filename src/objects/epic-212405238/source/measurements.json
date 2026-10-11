@@ -14,6 +14,8 @@
   "objectType": "Horizontal Branch Star",
   "objectTypePath": "* > Ev* > HB*",
   "objectTypeSource": "SIMBAD, UCAC4 377-065539: main object type HB*, Horizontal Branch Star",
+  "massSolar": 0.7889,
+  "massSource": "Mass 0.7889 +/- 0.0294 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212405238 (K2 campaign 17): PARAM mass (solar masses) 0.788856 (16th-84th percentiles 0.765824-0.824532), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

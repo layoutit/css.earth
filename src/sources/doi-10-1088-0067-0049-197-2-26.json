@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0067-0049-197-2-26",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Johnson et al. (2011): RETIRED A STARS AND THEIR COMPANIONS. VII. 18 NEW JOVIAN PLANETS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1108.4205"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0067-0049/197/2/26"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJS..197...26J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...26J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0067-0049/197/2/26",
+      "label": "The Astrophysical Journal Supplement Series 197 26"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...26J",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Johnson et al. (2011), The Astrophysical Journal Supplement Series 197 26",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...26J"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 197 26",
+  "creators": [
+    "John Asher Johnson",
+    "Christian Clanton",
+    "Andrew W. Howard",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

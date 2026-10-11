@@ -30,6 +30,8 @@
   ],
   "projectedRotationSpeedKmS": 65.7,
   "projectedRotationSpeedSource": "SIMBAD, K2-124: projected rotation speed 65.7 km/s, the measurement SIMBAD prefers (2018AJ....155...21P)",
+  "massSolar": 0.39,
+  "massSource": "Mass 0.39 +/- 0.013 solar masses from Livingston et al. 2019, the stellar mass of the default parameter set of K2-124 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

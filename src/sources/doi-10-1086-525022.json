@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1086-525022",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bakos et al. (2007): HAT-P-5b: A Jupiter-like Hot Jupiter Transiting a Bright Star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0710.1841"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/525022"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2007ApJ...671L.173B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...671L.173B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/525022",
+      "label": "The Astrophysical Journal 671 L173-L176"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...671L.173B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bakos et al. (2007), The Astrophysical Journal 671 L173-L176",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2007ApJ...671L.173B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 671 L173-L176",
+  "creators": [
+    "G. Á. Bakos",
+    "A. Shporer",
+    "A. Pál",
+    "et al."
+  ],
+  "publicationDate": "2007"
+}

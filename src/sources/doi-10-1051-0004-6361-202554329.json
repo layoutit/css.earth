@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202554329",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Jenkins et al. (2025): Sub-Jupiter gas giants orbiting giant stars uncovered using a Bayesian framework",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2509.02507"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202554329"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...704A.283J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.283J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202554329",
+      "label": "Astronomy & Astrophysics 704 A283"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.283J",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jenkins et al. (2025), Astronomy & Astrophysics 704 A283",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.283J"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 704 A283",
+  "creators": [
+    "J. S. Jenkins",
+    "M. I. Jones",
+    "J. I. Vines",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

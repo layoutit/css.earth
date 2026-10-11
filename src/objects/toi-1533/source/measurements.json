@@ -24,6 +24,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1533 (pscomppars): rotation period 20.02 d, from Mantovan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
   "projectedRotationSpeedKmS": 2.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1533 (pscomppars): projected rotation speed 2.5 km/s, from Mantovan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
+  "massSolar": 0.88,
+  "massSource": "Mass 0.88 +/- 0.04 solar masses from Mantovan et al. 2026, the stellar mass of the default parameter set of TOI-1533 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.79 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1369",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract",
+          "label": "Tuson et al. (2023), Monthly Notices of the Royal Astronomical Society 523 3090-3118",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,757 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1369",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract",
+          "label": "Tuson et al. (2023), Monthly Notices of the Royal Astronomical Society 523 3090-3118",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.27 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1369",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract",
+          "label": "Tuson et al. (2023), Monthly Notices of the Royal Astronomical Society 523 3090-3118",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1369",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract",
+          "label": "Tuson et al. (2023), Monthly Notices of the Royal Astronomical Society 523 3090-3118",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

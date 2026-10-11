@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-0004-637x-819-1-27",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fukui et al. (2016): DEMONSTRATING HIGH-PRECISION, MULTIBAND TRANSIT PHOTOMETRY WITH MUSCAT: A CASE FOR HAT-P-14B",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1510.03997"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-637X/819/1/27"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016ApJ...819...27F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...819...27F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0004-637X/819/1/27",
+      "label": "The Astrophysical Journal 819 27"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...819...27F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fukui et al. (2016), The Astrophysical Journal 819 27",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016ApJ...819...27F"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 819 27",
+  "creators": [
+    "Akihiko Fukui",
+    "Norio Narita",
+    "Yui Kawashima",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

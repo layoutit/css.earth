@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-pasj-64-2-34",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Omiya et al. (2012): A Planetary Companion to the Intermediate-Mass Giant HD 100655",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1111.3746"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/pasj/64.2.34"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012PASJ...64...34O"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...34O",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/pasj/64.2.34",
+      "label": "Publications of the Astronomical Society of Japan 64 34"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...34O",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Omiya et al. (2012), Publications of the Astronomical Society of Japan 64 34",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...34O"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of Japan 64 34",
+  "creators": [
+    "Masashi Omiya",
+    "Inwoo Han",
+    "Hideyuki Izumiura",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

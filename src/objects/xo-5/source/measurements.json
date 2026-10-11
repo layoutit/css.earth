@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of XO-5 (pscomppars): age 8.5 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "projectedRotationSpeedKmS": 1.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of XO-5 (pscomppars): projected rotation speed 1.8 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "massSolar": 1.04,
+  "massSource": "Mass 1.04 +/- 0.03 solar masses from Smith 2015, the stellar mass of the default parameter set of XO-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -22,6 +22,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5573 (pscomppars): age 9.7 Gyr, from Fernandes et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5573 (pscomppars): projected rotation speed 2 km/s, from Fernandes et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract)",
+  "massSolar": 0.619,
+  "massSource": "Mass 0.619 +/- 0.023 solar masses from Fernandes et al. 2025, the stellar mass of the default parameter set of TOI-5573 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

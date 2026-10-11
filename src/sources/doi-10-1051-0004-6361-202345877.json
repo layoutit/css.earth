@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202345877",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rosa et al. (2023): Direct imaging discovery of a super-Jovian around the young Sun-like star AF Leporis",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2302.06332"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202345877"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...672A..94D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202345877",
+      "label": "Astronomy & Astrophysics 672 A94"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rosa et al. (2023), Astronomy & Astrophysics 672 A94",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 672 A94",
+  "creators": [
+    "Robert J. De Rosa",
+    "Eric L. Nielsen",
+    "Zahed Wahhaj",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

@@ -65,6 +65,17 @@ in each, and the record keeps them all (`rotationPeriodsCatalogued`). One is ado
 two that disagree, often a rotation and its half, are left for a person or a fit to choose between. The registry is how a new kind of value is found too:
 ask it which tables print the column before reading any paper.
 
+What a star's page says of those values is the same folder: `--facts --all | STAR_ID... [--papers]` adds to each star's
+factsheet (`panel.facts` of its `source/content/object.json`) its mass, surface temperature, luminosity, spectral type,
+age and day, each cited to the sentence its measurements record keeps for it. `star-facts.mts` owns the facts, their
+words and the rule for a citation: a fact names the source record that holds an address of the sentence, or the star's
+own Gaia record for a value of Gaia DR3, and a value that leads to no record is left out and counted. `facts.mts` reads
+the catalogue, copies the mass each star's body record takes its GM from into the measurements record, and with
+`--papers` first makes the record of each paper the sentences name, as the generator makes a paper's. A day is held back
+when the catalogued periods the record lists adopt another. The pass never replaces a fact a page lists and bakes
+nothing: `node packages/bake/cli/prepare-factsheets.mts` republishes the changed factsheets, and their inventories are
+then published.
+
 The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the generator's `--from-table` route
 (`src/new-object/archives/tables/table-stars.mts`) read VizieR's table metadata and SIMBAD through the same two modules,
 `vizier-tables.mts` and `simbad-tap.mts` beside it; a star class is a branch of SIMBAD's own type tree, never a

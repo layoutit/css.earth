@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4463 A (pscomppars): age 4.1 Gyr, from Yee et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract)",
   "projectedRotationSpeedKmS": 3.4,
   "projectedRotationSpeedSource": "SIMBAD, HD 349013: projected rotation speed 3.4 km/s, the measurement SIMBAD prefers (2023ApJS..265....1Y)",
+  "massSolar": 1.056,
+  "massSource": "Mass 1.056 +/- 0.059 solar masses from Yee et al. 2023, the stellar mass of the default parameter set of TOI-4463 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

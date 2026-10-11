@@ -66,6 +66,8 @@
   ],
   "projectedRotationSpeedKmS": 5.86,
   "projectedRotationSpeedSource": "SIMBAD, * kap01 Cet: projected rotation speed 5.86 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
+  "massSolar": 1.037,
+  "massSource": "Mass 1.037 +/- 0.042 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 20630: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.037 +/- 0.042 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 20630) (photometry/stellar-color.json); no image of the photosphere exists."

@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1794 (pscomppars): log10 of the luminosity in solar units 0.19728, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 10.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1794 (pscomppars): age 10.8 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "massSolar": 0.9698,
+  "massSource": "Mass 0.9698 +/- 0.0328 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1794 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

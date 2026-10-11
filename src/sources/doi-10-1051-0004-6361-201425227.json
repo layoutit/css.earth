@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201425227",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sousa et al. (2015): Homogeneous spectroscopic parameters for bright planet host stars from the northern hemisphere",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1503.02443"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201425227"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015A&A...576A..94S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...576A..94S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201425227",
+      "label": "Astronomy & Astrophysics 576 A94"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...576A..94S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sousa et al. (2015), Astronomy & Astrophysics 576 A94",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015A&A...576A..94S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 576 A94",
+  "creators": [
+    "S. G. Sousa",
+    "N. C. Santos",
+    "A. Mortier",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

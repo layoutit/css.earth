@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Primary Teff 33600 +/- 600 K, Vilardell et al. (2010), A&A 509, A70, Table 3 (https://arxiv.org/abs/0911.3391)",
   "surfaceGravityLogg": 3.85,
   "surfaceGravitySource": "Primary log g 3.85 +/- 0.02 (cgs), Vilardell et al. (2010), A&A 509, A70, Table 2 (https://arxiv.org/abs/0911.3391)",
+  "massSolar": 21.7,
+  "massSource": "Mass 21.7 +/- 1.7 solar masses from Primary mass 21.7 +/- 1.7 solar masses, Vilardell et al. (2010), A&A 509, A70, Table 2 (https://arxiv.org/abs/0911.3391). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

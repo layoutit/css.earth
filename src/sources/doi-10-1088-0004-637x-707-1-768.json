@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-707-1-768",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Niedzielski et al. (2009): SUBSTELLAR-MASS COMPANIONS TO THE K-DWARF BD+14 4559 AND THE K-GIANTS HD 240210 AND BD+20 2457",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0906.1804"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/707/1/768"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009ApJ...707..768N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...707..768N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/707/1/768",
+      "label": "The Astrophysical Journal 707 768-777"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...707..768N",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Niedzielski et al. (2009), The Astrophysical Journal 707 768-777",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009ApJ...707..768N"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 707 768-777",
+  "creators": [
+    "A. Niedzielski",
+    "G. Nowak",
+    "M. Adamów",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

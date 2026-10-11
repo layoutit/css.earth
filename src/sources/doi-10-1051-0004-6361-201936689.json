@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201936689",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Frustagli et al. (2020): An ultra-short period rocky super-Earth orbiting the G2-star HD 80653",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2001.02217"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201936689"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020A&A...633A.133F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...633A.133F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201936689",
+      "label": "Astronomy & Astrophysics 633 A133"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...633A.133F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Frustagli et al. (2020), Astronomy & Astrophysics 633 A133",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020A&A...633A.133F"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 633 A133",
+  "creators": [
+    "G. Frustagli",
+    "E. Poretti",
+    "T. Milbourne",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

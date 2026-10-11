@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.821 solar masses",
+        "source": {
+          "catalogueId": "publication-2026a-a-707a-197b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+          "label": "Bonomo et al. (2026), Astronomy & Astrophysics 707 A197",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,185 K",
+        "source": {
+          "catalogueId": "publication-2026a-a-707a-197b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+          "label": "Bonomo et al. (2026), Astronomy & Astrophysics 707 A197",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.47 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2026a-a-707a-197b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+          "label": "Bonomo et al. (2026), Astronomy & Astrophysics 707 A197",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K1 V",
+        "source": {
+          "catalogueId": "publication-2026a-a-707a-197b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+          "label": "Bonomo et al. (2026), Astronomy & Astrophysics 707 A197",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "9.4 billion years",
+        "source": {
+          "catalogueId": "publication-2026a-a-707a-197b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+          "label": "Bonomo et al. (2026), Astronomy & Astrophysics 707 A197",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

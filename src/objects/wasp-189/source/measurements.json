@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-189 (pscomppars): rotation period 1.198 d, from Deline et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...659A..74D/abstract)",
   "projectedRotationSpeedKmS": 93.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-189 (pscomppars): projected rotation speed 93.1 km/s, from Lendl et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract)",
+  "massSolar": 2.03,
+  "massSource": "Mass 2.03 +/- 0.066 solar masses from Lendl et al. 2020, the stellar mass of the default parameter set of WASP-189 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A flattened sphere, the polar radius 2.88% smaller than the equatorial (Deline et al. (2022), A&A 659, A74), colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json) and darkened by latitude from the same fit. No image of the photosphere exists."

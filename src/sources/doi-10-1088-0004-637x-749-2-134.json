@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-749-2-134",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Howard et al. (2012): HAT-P-17b,c: A TRANSITING, ECCENTRIC, HOT SATURN AND A LONG-PERIOD, COLD JUPITER",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1008.3898"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/749/2/134"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012ApJ...749..134H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...749..134H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/749/2/134",
+      "label": "The Astrophysical Journal 749 134"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...749..134H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Howard et al. (2012), The Astrophysical Journal 749 134",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012ApJ...749..134H"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 749 134",
+  "creators": [
+    "A. W. Howard",
+    "G. Á. Bakos",
+    "J. Hartman",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

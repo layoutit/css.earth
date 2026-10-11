@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.758 solar masses",
+        "source": {
+          "catalogueId": "publication-2015apj-799-170c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+          "label": "Campante et al. (2015), The Astrophysical Journal 799 170",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,046 K",
+        "source": {
+          "catalogueId": "publication-2015apj-799-170c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+          "label": "Campante et al. (2015), The Astrophysical Journal 799 170",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.38 times the Sun's",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-kepler-koi-docs",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "label": "Web page exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K",
+        "source": {
+          "catalogueId": "publication-2015apj-799-170c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+          "label": "Campante et al. (2015), The Astrophysical Journal 799 170",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "11 billion years",
+        "source": {
+          "catalogueId": "publication-2015apj-799-170c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+          "label": "Campante et al. (2015), The Astrophysical Journal 799 170",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

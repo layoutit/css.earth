@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-201629505",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kervella et al. (2017): The radii and limb darkenings of<i>α</i>Centauri A and B",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201629505"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/201629505",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/201629505",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kervella et al. (2017), Astronomy & Astrophysics 597 A137",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/201629505"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 597 A137",
+  "creators": [
+    "P. Kervella",
+    "L. Bigot",
+    "A. Gallenne",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

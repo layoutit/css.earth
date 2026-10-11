@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.4 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4993",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract",
+          "label": "Thao et al. (2024), The Astronomical Journal 168 41",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,326 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4993",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract",
+          "label": "Thao et al. (2024), The Astronomical Journal 168 41",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.02 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4993",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract",
+          "label": "Thao et al. (2024), The Astronomical Journal 168 41",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "210 million years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4993",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract",
+          "label": "Thao et al. (2024), The Astronomical Journal 168 41",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "30 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4993",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract",
+          "label": "Thao et al. (2024), The Astronomical Journal 168 41",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

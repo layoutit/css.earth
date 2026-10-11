@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.7 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-024-08123-3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+          "label": "Barber et al. (2024), Nature 635 574-577",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,080 K",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-024-08123-3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+          "label": "Barber et al. (2024), Nature 635 574-577",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.47 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-024-08123-3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+          "label": "Barber et al. (2024), Nature 635 574-577",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3 million years",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-024-08123-3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+          "label": "Barber et al. (2024), Nature 635 574-577",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "11.3 days",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-024-08123-3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+          "label": "Barber et al. (2024), Nature 635 574-577",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

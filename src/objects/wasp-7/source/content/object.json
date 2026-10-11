@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.28 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201016183",
+          "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S/abstract",
+          "label": "Southworth et al. (2011), Astronomy & Astrophysics 527 A8",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,400 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201016183",
+          "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S/abstract",
+          "label": "Southworth et al. (2011), Astronomy & Astrophysics 527 A8",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "3.4 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201016183",
+          "url": "https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract",
+          "label": "Southworth et al. (2011), Astronomy & Astrophysics 527 A8",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

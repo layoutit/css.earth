@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202346612",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Philipot et al. (2023): A multi-technique approach to identifying and/or constraining radial-velocity substellar companions",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2308.05417"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346612"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...678A.107P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A.107P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202346612",
+      "label": "Astronomy & Astrophysics 678 A107"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A.107P",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Philipot et al. (2023), Astronomy & Astrophysics 678 A107",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A.107P"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 678 A107",
+  "creators": [
+    "F. Philipot",
+    "A.-M. Lagrange",
+    "F. Kiefer",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

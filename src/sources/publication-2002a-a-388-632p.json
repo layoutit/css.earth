@@ -1,0 +1,36 @@
+{
+  "id": "publication-2002a-a-388-632p",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2002A&A...388..632P, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2002A&A...388..632P"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2002A&A...388..632P",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2002A&A...388..632P",
+      "checkedOn": "2026-10-11",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2002A&A...388..632P"
+    }
+  ],
+  "publicationDate": "2002"
+}

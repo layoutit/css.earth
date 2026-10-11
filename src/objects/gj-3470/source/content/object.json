@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.539 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw2148",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract",
+          "label": "Awiphan et al. (2016), Monthly Notices of the Royal Astronomical Society 463 2574-2582",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,600 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw2148",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract",
+          "label": "Awiphan et al. (2016), Monthly Notices of the Royal Astronomical Society 463 2574-2582",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.029 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaf79c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...97K/abstract",
+          "label": "Kosiarek et al. (2019), The Astronomical Journal 157 97",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1.5",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaf79c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...97K/abstract",
+          "label": "Kosiarek et al. (2019), The Astronomical Journal 157 97",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-ac9da4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+          "label": "Kokori et al. (2023), The Astrophysical Journal Supplement Series 265 4",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "21.5 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaf79c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...97K/abstract",
+          "label": "Kosiarek et al. (2019), The Astronomical Journal 157 97",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

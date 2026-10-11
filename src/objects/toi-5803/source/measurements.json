@@ -16,6 +16,8 @@
   "objectTypeSource": "SIMBAD, TYC 556-982-1: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -0.439,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5803 (pscomppars): log10 of the luminosity in solar units -0.43899, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "massSolar": 0.87,
+  "massSource": "Mass 0.87 +/- 0.1032 solar masses from Mistry et al. 2023, the stellar mass of the default parameter set of TOI-5803 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

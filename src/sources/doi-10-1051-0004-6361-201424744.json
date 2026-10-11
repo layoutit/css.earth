@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201424744",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Neveu-VanMalle et al. (2014): WASP-94 A and B planets: hot-Jupiter cousins in a twin-star system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1409.7566"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201424744"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014A&A...572A..49N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...572A..49N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201424744",
+      "label": "Astronomy & Astrophysics 572 A49"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...572A..49N",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Neveu-VanMalle et al. (2014), Astronomy & Astrophysics 572 A49",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014A&A...572A..49N"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 572 A49",
+  "creators": [
+    "M. Neveu-VanMalle",
+    "D. Queloz",
+    "D. R. Anderson",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

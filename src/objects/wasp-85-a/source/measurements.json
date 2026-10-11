@@ -45,6 +45,8 @@
   "rotationPeriodMeasuredDays": 13.4,
   "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 1 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 13.4 d, the light swinging by 0.67% as the star turns (the light repeats every 6.7 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
   "rotationLightSwingPercent": 0.67,
+  "massSolar": 1.09,
+  "massSource": "Mass 1.09 +/- 0.08 solar masses from Mo&#x10D;nik et al. 2016, the stellar mass of the default parameter set of WASP-85 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

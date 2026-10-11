@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1051-0004-6361-201015693",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Curiel et al. (2011): A fourth planet orbiting<i>υ</i> Andromedae",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201015693"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011A&A...525A..78C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...525A..78C",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...525A..78C",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Curiel et al. (2011), Astronomy & Astrophysics 525 A78",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011A&A...525A..78C"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 525 A78",
+  "creators": [
+    "S. Curiel",
+    "J. Cantó",
+    "L. Georgiev",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

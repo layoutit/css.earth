@@ -22,6 +22,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6303 (pscomppars): age 6.4 Gyr, from Hotnisky et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6303 (pscomppars): projected rotation speed 2 km/s, from Hotnisky et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
+  "massSolar": 0.644,
+  "massSource": "Mass 0.644 +/- 0.024 solar masses from Hotnisky et al. 2025, the stellar mass of the default parameter set of TOI-6303 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

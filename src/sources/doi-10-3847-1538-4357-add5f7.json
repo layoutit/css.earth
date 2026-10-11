@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-3847-1538-4357-add5f7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "杨 et al. (2025): A Third Star in the HAT-P-7 System and a New Dynamical Pathway to Misaligned Hot Jupiters",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2505.07927"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/add5f7"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025ApJ...986..117Y"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...986..117Y",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/add5f7",
+      "label": "The Astrophysical Journal 986 117"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...986..117Y",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "杨 et al. (2025), The Astrophysical Journal 986 117",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025ApJ...986..117Y"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 986 117",
+  "creators": [
+    "Eritas 晴 Yang 杨",
+    "Yubo 宇博 Su 苏",
+    "Joshua N. 乔书 Winn 温"
+  ],
+  "publicationDate": "2025"
+}

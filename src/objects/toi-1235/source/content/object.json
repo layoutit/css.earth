@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.63 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038160",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract",
+          "label": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,997 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038160",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract",
+          "label": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.088 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038160",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract",
+          "label": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M0.5 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038160",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract",
+          "label": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.3 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038160",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract",
+          "label": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "44.7 days",
+        "source": {
+          "catalogueId": "vizier-j-aj-163-228-wasp-43",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..228P/abstract",
+          "label": "J. A. Patel and N. Espinoza (2022), AJ 163, 228; VizieR catalogue J/AJ/163/228 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201322608",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lee et al. (2014): Planetary companions in K giants<i>β</i>Cancri,<i>μ</i> Leonis, and<i>β</i>Ursae Minoris",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1405.2127"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201322608"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014A&A...566A..67L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201322608",
+      "label": "Astronomy & Astrophysics 566 A67"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lee et al. (2014), Astronomy & Astrophysics 566 A67",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 566 A67",
+  "creators": [
+    "B.-C. Lee",
+    "I. Han",
+    "M.-G. Park",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

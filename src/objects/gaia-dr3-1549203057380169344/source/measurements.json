@@ -16,6 +16,8 @@
   "objectTypeSource": "SIMBAD, UCAC4 720-051743: main object type Pe*, Chemically Peculiar Star",
   "luminosityLogSolar": 2.589,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1549203057380169344, flags_flame 10: lum_flame 387.96323 solar luminosities (16th to 84th percentiles 332.46786 to 468.22607); its log10 is recorded",
+  "massSolar": 4.1755,
+  "massSource": "Mass 4.176 (3.971 to 4.216) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

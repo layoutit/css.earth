@@ -43,6 +43,19 @@
           "catalogueId": "arxiv-1304-4800",
           "locator": "angularDiameterMas; angularDiameterSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,660 K",
+        "source": {
+          "catalogueId": "arxiv-1304-4800",
+          "url": "https://arxiv.org/abs/1304.4800",
+          "label": "High spectral resolution imaging of the dynamical atmosphere of the red supergiant Antares in the CO first overtone lines with VLTI/AMBER",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

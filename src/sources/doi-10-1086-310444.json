@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-310444",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Butler et al. (1997): Three New “51 Pegasi–Type” Planets",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/310444"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "1997ApJ...474L.115B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Butler et al. (1997), The Astrophysical Journal 474 L115-L118",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 474 L115-L118",
+  "creators": [
+    "R. Paul Butler",
+    "Geoffrey W. Marcy",
+    "Eric Williams",
+    "et al."
+  ],
+  "publicationDate": "1997"
+}

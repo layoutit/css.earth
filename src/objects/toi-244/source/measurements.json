@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-244 (pscomppars): age 7 Gyr, from Castro-González et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
   "rotationPeriodDays": 53.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-244 (pscomppars): rotation period 53.3 d, from Castro-González et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
+  "massSolar": 0.428,
+  "massSource": "Mass 0.428 +/- 0.029 solar masses from Castro-González et al. 2023, the stellar mass of the default parameter set of TOI-244 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

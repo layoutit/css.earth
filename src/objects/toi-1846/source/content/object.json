@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.418 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1030",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract",
+          "label": "Soubkiou et al. (2025), Monthly Notices of the Royal Astronomical Society 541 3249-3268",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,568 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1030",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract",
+          "label": "Soubkiou et al. (2025), Monthly Notices of the Royal Astronomical Society 541 3249-3268",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.023 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1030",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract",
+          "label": "Soubkiou et al. (2025), Monthly Notices of the Royal Astronomical Society 541 3249-3268",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.2 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1030",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract",
+          "label": "Soubkiou et al. (2025), Monthly Notices of the Royal Astronomical Society 541 3249-3268",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,955 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.34 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2003a-a-406-373s",
+          "url": "https://ui.adsabs.harvard.edu/abs/2003A&A...406..373S/abstract",
+          "label": "Reference 2003A&A...406..373S, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K2 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac082a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..176P/abstract",
+          "label": "Paredes et al. (2021), The Astronomical Journal 162 176",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-754-1-37",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...754...37D/abstract",
+          "label": "Dragomir et al. (2012), The Astrophysical Journal 754 37",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

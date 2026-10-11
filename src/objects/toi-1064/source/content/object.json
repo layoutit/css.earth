@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.748 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab3799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract",
+          "label": "Wilson et al. (2022), Monthly Notices of the Royal Astronomical Society 511 1043-1071",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,734 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab3799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract",
+          "label": "Wilson et al. (2022), Monthly Notices of the Royal Astronomical Society 511 1043-1071",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.24 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab3799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract",
+          "label": "Wilson et al. (2022), Monthly Notices of the Royal Astronomical Society 511 1043-1071",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "9.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab3799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract",
+          "label": "Wilson et al. (2022), Monthly Notices of the Royal Astronomical Society 511 1043-1071",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

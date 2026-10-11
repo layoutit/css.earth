@@ -16,6 +16,8 @@
   "objectTypeSource": "SIMBAD, UCAC4 333-081802: main object type RG*, Red Giant Branch star",
   "luminosityLogSolar": 1.545,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6236355602576888064, flags_flame 10: lum_flame 35.07816 solar luminosities (16th to 84th percentiles 33.048145 to 37.581436); its log10 is recorded",
+  "massSolar": 1.0485,
+  "massSource": "Mass 1.0485 +/- 0.0823 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 204138910 (K2 campaign 2): PARAM mass (solar masses) 1.048536 (16th-84th percentiles 0.961551-1.126176), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

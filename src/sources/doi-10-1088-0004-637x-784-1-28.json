@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-784-1-28",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kipping et al. (2014): THE HUNT FOR EXOMOONS WITH<i>KEPLER</i>(HEK). IV. A SEARCH FOR MOONS AROUND EIGHT M DWARFS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1401.1210"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/784/1/28"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014ApJ...784...28K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784...28K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/784/1/28",
+      "label": "The Astrophysical Journal 784 28"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784...28K",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kipping et al. (2014), The Astrophysical Journal 784 28",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784...28K"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 784 28",
+  "creators": [
+    "D. M. Kipping",
+    "D. Nesvorný",
+    "L. A. Buchhave",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,504 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "63 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201322608",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L/abstract",
+          "label": "Lee et al. (2014), Astronomy & Astrophysics 566 A67",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K2 III",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201322608",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L/abstract",
+          "label": "Lee et al. (2014), Astronomy & Astrophysics 566 A67",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201322608",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L/abstract",
+          "label": "Lee et al. (2014), Astronomy & Astrophysics 566 A67",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

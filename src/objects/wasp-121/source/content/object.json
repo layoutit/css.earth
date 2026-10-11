@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,481 K",
+        "source": {
+          "catalogueId": "arxiv-2506-01771",
+          "url": "https://arxiv.org/abs/2506.01771",
+          "label": "Evans-Soma et al. (2025)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "4.4 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8205-822-1-l4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822L...4E/abstract",
+          "label": "Evans et al. (2016), The Astrophysical Journal 822 L4",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F6 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw522",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.458.4025D/abstract",
+          "label": "Delrez et al. (2016), Monthly Notices of the Royal Astronomical Society 458 4025-4043",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad7fe7",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..231S/abstract",
+          "label": "Sing et al. (2024), The Astronomical Journal 168 231",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

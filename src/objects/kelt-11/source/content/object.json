@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.44 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243998",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+          "label": "Mounzer et al. (2022), Astronomy & Astrophysics 668 A1",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,375 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243998",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+          "label": "Mounzer et al. (2022), Astronomy & Astrophysics 668 A1",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "5.5 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-ac9da4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+          "label": "Kokori et al. (2023), The Astrophysical Journal Supplement Series 265 4",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G8/K0 IV",
+        "source": {
+          "catalogueId": "publication-1999mctd-book-h",
+          "url": "https://ui.adsabs.harvard.edu/abs/1999mctd.book.....H/abstract",
+          "label": "Reference 1999mctd.book.....H, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

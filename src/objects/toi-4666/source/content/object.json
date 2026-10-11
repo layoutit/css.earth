@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.576 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag448",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+          "label": "Dransfield et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag448",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,793 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag448",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+          "label": "Dransfield et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag448",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.064 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag448",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+          "label": "Dransfield et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag448",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2±0.5",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag448",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+          "label": "Dransfield et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag448",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag448",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+          "label": "Dransfield et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag448",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "15.3 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557656",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A..73F/abstract",
+          "label": "Frensch et al. (2026), Astronomy & Astrophysics 707 A73",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.905 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaadff",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract",
+          "label": "Mayo et al. (2018), The Astronomical Journal 155 136",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,631 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaadff",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract",
+          "label": "Mayo et al. (2018), The Astronomical Journal 155 136",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.86 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw1373",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract",
+          "label": "Pope et al. (2016), Monthly Notices of the Royal Astronomical Society 461 3399-3409",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-k2-190",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

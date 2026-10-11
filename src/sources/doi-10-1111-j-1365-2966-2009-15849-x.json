@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1111-j-1365-2966-2009-15849-x",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Pál et al. (2010): Refined stellar, orbital and planetary parameters of the eccentric HAT-P-2 planetary system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0908.1705"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2009.15849.x"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010MNRAS.401.2665P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010MNRAS.401.2665P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2009.15849.x",
+      "label": "Monthly Notices of the Royal Astronomical Society 401 2665-2674"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010MNRAS.401.2665P",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Pál et al. (2010), Monthly Notices of the Royal Astronomical Society 401 2665-2674",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010MNRAS.401.2665P"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 401 2665-2674",
+  "creators": [
+    "András Pál",
+    "Gáspár Á. Bakos",
+    "Guillermo Torres",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

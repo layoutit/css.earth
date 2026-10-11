@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-125 (pscomppars): age 6.8 Gyr, from Nielsen et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
   "projectedRotationSpeedKmS": 1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-125 (pscomppars): projected rotation speed 1 km/s, from Nielsen et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
+  "massSolar": 0.859,
+  "massSource": "Mass 0.859 +/- 0.044 solar masses from Nielsen et al. 2020, the stellar mass of the default parameter set of TOI-125 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

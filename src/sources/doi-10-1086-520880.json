@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1086-520880",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wittenmyer et al. (2007): Dynamical and Observational Constraints on Additional Planets in Highly Eccentric Planetary Systems",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0706.1962"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/520880"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2007AJ....134.1276W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007AJ....134.1276W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/520880",
+      "label": "The Astronomical Journal 134 1276-1284"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2007AJ....134.1276W",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wittenmyer et al. (2007), The Astronomical Journal 134 1276-1284",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2007AJ....134.1276W"
+    }
+  ],
+  "publisher": "The Astronomical Journal 134 1276-1284",
+  "creators": [
+    "Robert A. Wittenmyer",
+    "Michael Endl",
+    "William D. Cochran",
+    "et al."
+  ],
+  "publicationDate": "2007"
+}

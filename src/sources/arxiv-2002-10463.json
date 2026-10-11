@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-2002-10463",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Levesque & Massey (2020): Betelgeuse Just Isn't That Cool: Effective Temperature Alone Cannot Explain the Recent Dimming of Betelgeuse",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2002.10463"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ab7935"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2002.10463",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ab7935",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2002.10463",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Levesque & Massey (2020)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2002.10463"
+    }
+  ],
+  "creators": [
+    "Emily M. Levesque",
+    "Philip Massey"
+  ],
+  "publicationDate": "2020"
+}

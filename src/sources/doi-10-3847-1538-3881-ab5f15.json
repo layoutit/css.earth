@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ab5f15",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Stefansson et al. (2020): A Sub-Neptune-sized Planet Transiting the M2.5 Dwarf G 9-40: Validation with the Habitable-zone Planet Finder",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1912.00291"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab5f15"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....159..100S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..100S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab5f15",
+      "label": "The Astronomical Journal 159 100"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..100S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Stefansson et al. (2020), The Astronomical Journal 159 100",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..100S"
+    }
+  ],
+  "publisher": "The Astronomical Journal 159 100",
+  "creators": [
+    "Gudmundur Stefansson",
+    "Caleb Cañas",
+    "John Wisniewski",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

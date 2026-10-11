@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.394 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+          "label": "Hobson et al. (2023), The Astrophysical Journal Letters 946 L4",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,389 K",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+          "label": "Hobson et al. (2023), The Astrophysical Journal Letters 946 L4",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.016 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+          "label": "Hobson et al. (2023), The Astrophysical Journal Letters 946 L4",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M V",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+          "label": "Hobson et al. (2023), The Astrophysical Journal Letters 946 L4",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-55 (pscomppars): log10 of the luminosity in solar units -0.78432, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
   "projectedRotationSpeedKmS": 2.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-55 (pscomppars): projected rotation speed 2.2 km/s, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
+  "massSolar": 0.688,
+  "massSource": "Mass 0.688 +/- 0.069 solar masses from Howard et al. 2025, the stellar mass of the default parameter set of K2-55 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

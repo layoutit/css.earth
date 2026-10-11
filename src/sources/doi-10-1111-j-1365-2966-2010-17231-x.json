@@ -1,0 +1,53 @@
+{
+  "id": "doi-10-1111-j-1365-2966-2010-17231-x",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Southworth (2010): Homogeneous studies of transiting extrasolar planets - III. Additional planets and stellar models",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1006.4443"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2010.17231.x"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010MNRAS.408.1689S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010MNRAS.408.1689S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2010.17231.x",
+      "label": "Monthly Notices of the Royal Astronomical Society 408 1689-1713"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010MNRAS.408.1689S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Southworth (2010), Monthly Notices of the Royal Astronomical Society 408 1689-1713",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010MNRAS.408.1689S"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 408 1689-1713",
+  "creators": [
+    "John Southworth"
+  ],
+  "publicationDate": "2010"
+}

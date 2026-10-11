@@ -24,6 +24,8 @@
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1438168463332034816, flags_flame 00: age_flame 13.148961 Gyr (16th to 84th percentiles 7.2674665 to 13.5)",
   "projectedRotationSpeedKmS": 2.94,
   "projectedRotationSpeedSource": "SIMBAD, LSPM J1653+6042: projected rotation speed 2.94 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "massSolar": 0.524,
+  "massSource": "Mass 0.524 +/- 0.012 solar masses from Peláez-Torres et al. 2026, the stellar mass of the default parameter set of TOI-1752 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

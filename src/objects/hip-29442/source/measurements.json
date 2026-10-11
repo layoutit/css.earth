@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-469 (pscomppars): rotation period 40 d, from Damasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...679A..33D/abstract)",
   "projectedRotationSpeedKmS": 1.94,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-469 (pscomppars): projected rotation speed 1.94 km/s, from Damasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...679A..33D/abstract)",
+  "massSolar": 0.901,
+  "massSource": "Mass 0.901 +/- 0.043 solar masses from Egger et al. 2024, the stellar mass of the default parameter set of HIP 29442 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

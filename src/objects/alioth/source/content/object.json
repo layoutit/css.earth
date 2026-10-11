@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "8,908 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad08be",
+          "url": "https://doi.org/10.3847/1538-3881/ad08be",
+          "label": "Baines et al. (2023), The Astronomical Journal 166 268",
+          "checked": "2026-10-07",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

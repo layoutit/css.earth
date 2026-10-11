@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-34 (pscomppars): age 1.7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "projectedRotationSpeedKmS": 24,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-34 (pscomppars): projected rotation speed 24 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "massSolar": 1.392,
+  "massSource": "Mass 1.392 +/- 0.047 solar masses from Bonomo et al. 2017, the stellar mass of the default parameter set of HAT-P-34 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,56 @@
+{
+  "id": "arxiv-1101-3511",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Béky et al. (2011): HAT-P-27b: A hot Jupiter transiting a G star on a 3 day orbit",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1101.3511"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/734/2/109"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011arXiv1101.3511B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011arXiv1101.3511B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/734/2/109",
+      "label": "Béky, B., et al. 2011, ApJ, 734, 109"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011arXiv1101.3511B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Béky et al. (2011), Béky, B., et al. 2011, ApJ, 734, 109",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011arXiv1101.3511B"
+    }
+  ],
+  "publisher": "Béky, B., et al. 2011, ApJ, 734, 109",
+  "creators": [
+    "Bence Béky",
+    "Gáspár Á. Bakos",
+    "Joel Hartman",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

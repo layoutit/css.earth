@@ -22,6 +22,8 @@
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2713130535941345792, flags_flame 00: age_flame 0.33954233 Gyr (16th to 84th percentiles 0.29636672 to 0.38281426)",
   "projectedRotationSpeedKmS": 107,
   "projectedRotationSpeedSource": "SIMBAD, * rho Peg: projected rotation speed 107 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
+  "massSolar": 2.8544,
+  "massSource": "Mass 2.854 (2.811 to 2.898) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-504637",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gray et al. (2006): Contributions to the Nearby Stars (NStars) Project: Spectroscopy of Stars Earlier than M0 within 40 pc--The Southern Sample",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/504637"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2006AJ....132..161G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2006AJ....132..161G",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2006AJ....132..161G",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gray et al. (2006), The Astronomical Journal 132 161-170",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2006AJ....132..161G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 132 161-170",
+  "creators": [
+    "R. O. Gray",
+    "C. J. Corbally",
+    "R. F. Garrison",
+    "et al."
+  ],
+  "publicationDate": "2006"
+}

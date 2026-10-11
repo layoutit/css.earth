@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,790 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "78 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2009rea-a-9-1l",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ReA&A...9....1L/abstract",
+          "label": "Reference 2009ReA&A...9....1L, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G8",
+        "source": {
+          "catalogueId": "publication-2009rea-a-9-1l",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ReA&A...9....1L/abstract",
+          "label": "Reference 2009ReA&A...9....1L, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201425227",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...576A..94S/abstract",
+          "label": "Sousa et al. (2015), Astronomy & Astrophysics 576 A94",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "18,000 K",
+        "source": {
+          "catalogueId": "arxiv-1901-05277",
+          "url": "https://arxiv.org/abs/1901.05277",
+          "label": "Solovyeva et al. (2019)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

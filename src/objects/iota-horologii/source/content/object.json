@@ -43,6 +43,58 @@
           "path": "source/preparation/rotation.json",
           "locator": "source"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,080 K",
+        "source": {
+          "catalogueId": "arxiv-1710-02438",
+          "url": "https://arxiv.org/abs/1710.02438",
+          "label": "Alvarado-Gómez et al. (2018)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.8 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0V",
+        "source": {
+          "catalogueId": "doi-10-48550-arxiv-1510-01731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract",
+          "label": "Turnbull (2015), arXiv",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-48550-arxiv-1510-01731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract",
+          "label": "Turnbull (2015), arXiv",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

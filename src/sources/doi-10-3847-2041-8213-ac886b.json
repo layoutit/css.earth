@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ac886b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Crossfield et al. (2022): GJ 1252b: A Hot Terrestrial Super-Earth with No Atmosphere",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2208.09479"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ac886b"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022ApJ...937L..17C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...937L..17C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ac886b",
+      "label": "The Astrophysical Journal Letters 937 L17"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...937L..17C",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Crossfield et al. (2022), The Astrophysical Journal Letters 937 L17",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022ApJ...937L..17C"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 937 L17",
+  "creators": [
+    "Ian J. M. Crossfield",
+    "Matej Malik",
+    "Michelle L. Hill",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

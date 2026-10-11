@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.33 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2607-19756",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract",
+          "label": "Lillo-Box et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,730 K",
+        "source": {
+          "catalogueId": "arxiv-2607-19756",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract",
+          "label": "Lillo-Box et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "3.5 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-2607-19756",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract",
+          "label": "Lillo-Box et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F3 V",
+        "source": {
+          "catalogueId": "arxiv-2607-19756",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract",
+          "label": "Lillo-Box et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.3 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-5806",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

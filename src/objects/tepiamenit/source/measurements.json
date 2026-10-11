@@ -64,6 +64,8 @@
   ],
   "projectedRotationSpeedKmS": 14.98,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): projected rotation speed 14.98 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
+  "massSolar": 1.2496,
+  "massSource": "Mass 1.250 (1.210 to 1.290) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

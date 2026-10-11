@@ -18,6 +18,8 @@
   "objectTypeSource": "SIMBAD, * alf Vir: main object type bC*, beta Cep Variable",
   "projectedRotationSpeedKmS": 90,
   "projectedRotationSpeedSource": "SIMBAD, * alf Vir: projected rotation speed 90 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "massSolar": 11.43,
+  "massSource": "Mass 11.43 +/- 1.15 solar masses from Tkachenko et al. (2016), MNRAS 458, 1964, Table 7: dynamical mass of the primary 11.43 +/- 1.15 solar masses (https://doi.org/10.1093/mnras/stw255). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

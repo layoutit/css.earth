@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.23 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202452611",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+          "label": "August et al. (2025), Astronomy & Astrophysics 695 A171",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,415 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202452611",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+          "label": "August et al. (2025), Astronomy & Astrophysics 695 A171",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0074 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202452611",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+          "label": "August et al. (2025), Astronomy & Astrophysics 695 A171",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "m3 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202140618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...649A.144S/abstract",
+          "label": "Soto et al. (2021), Astronomy & Astrophysics 649 A144",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

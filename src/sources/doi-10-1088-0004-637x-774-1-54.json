@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-774-1-54",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sanchis-Ojeda et al. (2013): TRANSITS AND OCCULTATIONS OF AN EARTH-SIZED PLANET IN AN 8.5 hr ORBIT",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1305.4180"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/774/1/54"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013ApJ...774...54S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...774...54S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/774/1/54",
+      "label": "The Astrophysical Journal 774 54"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...774...54S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sanchis-Ojeda et al. (2013), The Astrophysical Journal 774 54",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013ApJ...774...54S"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 774 54",
+  "creators": [
+    "Roberto Sanchis-Ojeda",
+    "Saul Rappaport",
+    "Joshua N. Winn",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

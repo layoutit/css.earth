@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.13 solar masses",
+        "source": {
+          "catalogueId": "arxiv-1008-3388",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+          "label": "Bakos et al. (2010)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,905 K",
+        "source": {
+          "catalogueId": "arxiv-1008-3388",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+          "label": "Bakos et al. (2010)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.6 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-1008-3388",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+          "label": "Bakos et al. (2010)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0",
+        "source": {
+          "catalogueId": "arxiv-1008-3388",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+          "label": "Bakos et al. (2010)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4 billion years",
+        "source": {
+          "catalogueId": "arxiv-1008-3388",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+          "label": "Bakos et al. (2010)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

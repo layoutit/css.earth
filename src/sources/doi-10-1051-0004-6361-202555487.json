@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202555487",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Grouffal et al. (2025): The star HIP 41378 potentially misaligned with its cohort of long-period planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2507.01807"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202555487"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...701A.173G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.173G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202555487",
+      "label": "Astronomy & Astrophysics 701 A173"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.173G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Grouffal et al. (2025), Astronomy & Astrophysics 701 A173",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.173G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 701 A173",
+  "creators": [
+    "S. Grouffal",
+    "A. Santerne",
+    "V. Bourrier",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aaa5b5",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Malavolta et al. (2018): An Ultra-short Period Rocky Super-Earth with a Secondary Eclipse and a Neptune-like Companion around K2-141",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1801.03502"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aaa5b5"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018AJ....155..107M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..107M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aaa5b5",
+      "label": "The Astronomical Journal 155 107"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..107M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Malavolta et al. (2018), The Astronomical Journal 155 107",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..107M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 155 107",
+  "creators": [
+    "Luca Malavolta",
+    "Andrew W. Mayo",
+    "Tom Louden",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

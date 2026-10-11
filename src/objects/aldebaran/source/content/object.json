@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,934 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-20041765",
+          "url": "https://doi.org/10.1051/0004-6361:20041765",
+          "label": "Richichi & Roccatagliata (2005), Astronomy & Astrophysics 433 305-312",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "470 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-48550-arxiv-1510-01731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract",
+          "label": "Turnbull (2015), arXiv",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K5 III",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201425519",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...580A..31H/abstract",
+          "label": "Hatzes et al. (2015), Astronomy & Astrophysics 580 A31",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201425519",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...580A..31H/abstract",
+          "label": "Hatzes et al. (2015), Astronomy & Astrophysics 580 A31",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

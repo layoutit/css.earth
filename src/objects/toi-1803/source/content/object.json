@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.756 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451180",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract",
+          "label": "Zingales et al. (2025), Astronomy & Astrophysics 695 A273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,687 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451180",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract",
+          "label": "Zingales et al. (2025), Astronomy & Astrophysics 695 A273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.22 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451180",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract",
+          "label": "Zingales et al. (2025), Astronomy & Astrophysics 695 A273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451180",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract",
+          "label": "Zingales et al. (2025), Astronomy & Astrophysics 695 A273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "13.7 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451180",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract",
+          "label": "Zingales et al. (2025), Astronomy & Astrophysics 695 A273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

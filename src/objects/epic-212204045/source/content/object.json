@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.824 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346196",
+          "url": "https://doi.org/10.1051/0004-6361/202346196",
+          "label": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,768 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346196",
+          "url": "https://doi.org/10.1051/0004-6361/202346196",
+          "label": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "41 times the Sun's",
+        "source": {
+          "catalogueId": "gaia-dr3-epic-212204045",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "660 million years",
+        "source": {
+          "catalogueId": "gaia-dr3-epic-212204045",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

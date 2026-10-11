@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.01 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad9aa6",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+          "label": "Crossfield et al. (2025), The Astronomical Journal 169 89",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,690 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad9aa6",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+          "label": "Crossfield et al. (2025), The Astronomical Journal 169 89",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.87 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+          "label": "Polanski et al. (2024), The Astrophysical Journal Supplement Series 272 32",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.1 billion years",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+          "label": "Polanski et al. (2024), The Astrophysical Journal Supplement Series 272 32",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

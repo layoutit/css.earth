@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2443 (pscomppars): age 7.5 Gyr, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract)",
   "projectedRotationSpeedKmS": 1.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2443 (pscomppars): projected rotation speed 1.7 km/s, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract)",
+  "massSolar": 0.642,
+  "massSource": "Mass 0.642 +/- 0.026 solar masses from Naponiello et al. 2025, the stellar mass of the default parameter set of TOI-2443 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

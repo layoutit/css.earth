@@ -42,6 +42,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1268 (pscomppars): projected rotation speed 4.12 km/s, from &Scaron;ubjak et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract)",
   "spinInclinationDegrees": 74.8,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.92 solar radii): sin i = v sin i × P / (2πR) = 0.965. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.96,
+  "massSource": "Mass 0.96 +/- 0.04 solar masses from &Scaron;ubjak et al. 2022, the stellar mass of the default parameter set of TOI-1268 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.15 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2607-19325",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+          "label": "Naponiello et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,959 K",
+        "source": {
+          "catalogueId": "arxiv-2607-19325",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+          "label": "Naponiello et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.6 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-2607-19325",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+          "label": "Naponiello et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0 V",
+        "source": {
+          "catalogueId": "arxiv-2607-19325",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+          "label": "Naponiello et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.3 billion years",
+        "source": {
+          "catalogueId": "arxiv-2607-19325",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+          "label": "Naponiello et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "19.8 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201936689",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...633A.133F/abstract",
+          "label": "Frustagli et al. (2020), Astronomy & Astrophysics 633 A133",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []
