@@ -87,6 +87,8 @@ export interface PlaneBankPicture {
   readonly centreFadeM: readonly number[];
   /** The opacity the orbit lines take while the plane shows whole; left out, they keep theirs. */
   readonly orbitOpacity?: number;
+  /** The color each named body's orbit line and marker take while a dataset shows the plane; left out, they keep theirs. */
+  readonly bodyColors?: Readonly<Record<string, string>>;
 }
 
 /** Write a plane bank's descriptor, prepared plane, picture and inventory. */
@@ -109,6 +111,6 @@ export async function writePlaneBank(bank: PlaneBankPicture): Promise<void> {
   await writeFile(resolve(prepared, bank.texturePath), bank.webp);
   await writeFile(resolve(prepared, 'plane.json'), `${JSON.stringify(backing)}\n`);
   await writeFile(resolve(objectDirectory, 'object.json'), `${JSON.stringify({ schema: OBJECT_SCHEMA, id, type: 'plane-bank',
-    properties: { preparation: { source: bank.recipe }, host: bank.host, frame, ...(bank.orbitOpacity === undefined ? {} : { orbitOpacity: bank.orbitOpacity }) }, prepared: { format: GALAXY_BACKING_SCHEMA, url: 'prepared/plane.json' } }, null, 2)}\n`);
+    properties: { preparation: { source: bank.recipe }, host: bank.host, frame, ...(bank.orbitOpacity === undefined ? {} : { orbitOpacity: bank.orbitOpacity }), ...(bank.bodyColors === undefined ? {} : { bodyColors: bank.bodyColors }) }, prepared: { format: GALAXY_BACKING_SCHEMA, url: 'prepared/plane.json' } }, null, 2)}\n`);
   await inventoryPreparedAssets({ objectId: id, objectDirectory });
 }

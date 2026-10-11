@@ -1,0 +1,51 @@
+{
+  "id": "doi-10-1051-0004-6361-201731992",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Interior structures and tidal heating in the TRAPPIST-1 planets",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201731992"
+    },
+    {
+      "type": "arXiv",
+      "value": "1712.05641"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201731992",
+      "label": "10.1051/0004-6361/201731992"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1712.05641",
+      "label": "arXiv:1712.05641"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1712.05641",
+      "checkedOn": "2026-10-11",
+      "locator": "Table 3, results of the tidal heating calculations: tidal heat flux F_tidal in W/m^2 for planets b to h: 2.68 (+1.33, -1.81), 1.32 (+0.3, -0.47), 0.16 (+0.35, -0.16), 0.18 (+0.09, -0.18), 0.14 (+0.05, -0.14), 0 and 0; no equilibrium mantle temperature was found for g and h. Section 1: Io's tidal heat flux is about 1 to 2 W/m^2."
+    }
+  ],
+  "creators": [
+    "A. C. Barr",
+    "V. Dobos",
+    "L. L. Kiss"
+  ],
+  "publisher": "A&A 613, A37",
+  "publicationDate": "2018",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barr, Dobos & Kiss (2018), A&A 613, A37",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/201731992"
+    }
+  ]
+}

@@ -139,7 +139,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const planeBank = (descriptor: ReturnType<typeof parseObjectDescriptor>) => {
       const bank = parsePlaneBankDescriptor(descriptor);
       planeUrls.set(bank.id, bank.url);
-      return { id: bank.id, frame: bank.frame, ...(bank.orbitOpacity === undefined ? {} : { orbitOpacity: bank.orbitOpacity }) };
+      return { id: bank.id, frame: bank.frame, ...(bank.orbitOpacity === undefined ? {} : { orbitOpacity: bank.orbitOpacity }), ...(bank.bodyColors === undefined ? {} : { bodyColors: bank.bodyColors }) };
     };
     const planeBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'plane-bank').map(planeBank);
     // A body's row says whether it is a plain dot (no billboard) and what it is (an asteroid's sprite stays smaller).

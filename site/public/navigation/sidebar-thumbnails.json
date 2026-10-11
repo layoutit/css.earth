@@ -695,6 +695,18 @@
       "bytes": 66390
     },
     {
+      "path": "src/objects/trappist-1-tidal-heating/object.json",
+      "bytes": 1222
+    },
+    {
+      "path": "src/objects/trappist-1-tidal-heating/prepared/plane.json",
+      "bytes": 1303
+    },
+    {
+      "path": "src/objects/trappist-1-tidal-heating/prepared/heating/heating.webp",
+      "bytes": 25334
+    },
+    {
       "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
       "bytes": 712646
     }
@@ -2208,6 +2220,16 @@
       ],
       "credit": "Garraffo et al. (2017), Figure 3 left (TrB2_2D_0deg_tot.png of https://arxiv.org/e-print/1706.04617v1)",
       "sourceUrl": "https://arxiv.org/e-print/1706.04617v1"
+    },
+    "trappist-1/tidal-heating": {
+      "url2x": "/navigation/focus-trappist-1-tidal-heating@2x.webp",
+      "inputs": [
+        "src/objects/trappist-1-tidal-heating/object.json",
+        "src/objects/trappist-1-tidal-heating/prepared/plane.json",
+        "src/objects/trappist-1-tidal-heating/prepared/heating/heating.webp"
+      ],
+      "credit": "Barr, Dobos & Kiss (2018), A&A 613, A37, Table 3, column F_tidal: tidal heat flux in W/m^2, with its upper and lower uncertainty (https://doi.org/10.1051/0004-6361/201731992)",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361/201731992"
     }
   },
   "defaults": {

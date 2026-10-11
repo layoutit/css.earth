@@ -182,6 +182,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const interactions = createWorldContextInteractions(host, root);
   // Captured frames go stale on every presentation change; the planner's policy only on semantic ones.
   let presentationRevision = 0, policyDirty = true;
+  // The colors a shown dataset gives bodies, by id (setBodyColors); a body that arrives later takes its own at once.
+  let bodyColors: Readonly<Record<string, string>> | null = null;
   const contextFrames = createWorldContextFrameReceiver();
   let previousHeader: { emphasizedId: string | null; width: number; height: number } | null = null;
   let publishCount = 0;
@@ -236,11 +238,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // The orbit owner sets the body's color on its root.
     const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, depthBase, strokeHost: root, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
       ...(color ? { color: color } : {}) });
+    if (bodyColors?.[body.id]) piecePool.setColor(bodyColors[body.id]!);
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const interaction = createWorldContextBodyInteraction(marker, orbitRoot, host, body, orbit !== null);
     const paint = createWorldContextMarkerPaint(marker, mover, spriteLeaf, caption, body, sprite, locator);
+    if (bodyColors?.[body.id]) paint.tint(bodyColors[body.id]!);
     // The dot a body's circle holds, sized by its radius. A placed star's is capped when drawn: sized by radius, every
     // giant reached the largest dot and thousands buried the view.
     const dotDiameter = sprite ? indicatorDotDiameter(body.radiusM, plan.focus.radiusM, MINIMUM_BODY_MARKER_DIAMETER_PIXELS) : null;
@@ -463,6 +467,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       orbitsOpacity = next;
       invalidatePolicy();
       refresh();
+    },
+    /** The colors a shown dataset gives bodies, by id: each one's orbit line and marker (its ring, name and flat dot); null
+     * gives each back its own. A change of the selected dataset, never of the camera, so each color is written once. */
+    setBodyColors(colors: Readonly<Record<string, string>> | null) {
+      if (colors === bodyColors || destroyed) return;
+      const before = bodyColors; bodyColors = colors;
+      for (const entry of bodies) if (before?.[entry.body.id] !== colors?.[entry.body.id]) { const color = colors?.[entry.body.id] ?? null; entry.piecePool.setColor(color); entry.paint.tint(color); }
     },
     setOverview(enabled: boolean, preserveSelection = false) {
       const selected = enabled && preserveSelection;

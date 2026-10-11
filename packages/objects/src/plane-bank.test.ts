@@ -25,3 +25,9 @@ test('a plane bank may state the opacity the orbit lines take beside its picture
   assert.equal(stating(.4).orbitOpacity, .4);
   for (const refused of [0, 1, 1.5, '0.4']) assert.throws(() => stating(refused), /properties\.orbitOpacity: expected an opacity between 0 and 1/u, String(refused));
 });
+test('a plane bank may state the color each body\'s orbit line takes while its dataset shows', () => {
+  const stating = (bodyColors: unknown) => parsePlaneBankDescriptor({ ...descriptor(), properties: { ...descriptor().properties, bodyColors } });
+  assert.equal(parsePlaneBankDescriptor(descriptor()).bodyColors, undefined);
+  assert.deepEqual(stating({ 'planet-b': '#f0f921' }).bodyColors, { 'planet-b': '#f0f921' });
+  for (const refused of [{}, [], { 'planet-b': 'yellow' }, { 'Planet B': '#f0f921' }, '#f0f921']) assert.throws(() => stating(refused), /properties\.bodyColors: expected a color like #a0b0c0 for each named body/u, JSON.stringify(refused));
+});

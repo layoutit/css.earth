@@ -1,0 +1,31 @@
+{
+  "provenance": {
+    "name": "TRAPPIST-1's tidal heating",
+    "products": [
+      {
+        "id": "heating",
+        "label": "Modeled tidal heat flux of each planet (Barr, Dobos & Kiss 2018, Table 3)",
+        "process": "Give each planet the color of its tidal heat flux on a scale from gray (no heat) through amber to red (the table's highest value), for the world to draw its orbit line and marker in, and draw the seven orbits as thin circles in those colors on the mean plane of the seven orbits.",
+        "recipe": "source/heating.json",
+        "selector": "",
+        "inputs": [
+          "tidal-heat-table"
+        ],
+        "outputs": [
+          "prepared/plane.json",
+          "prepared/heating/heating.webp"
+        ],
+        "interpretation": {
+          "kind": "modeled-heat-flux",
+          "sourceKind": "published-model"
+        },
+        "limitations": [
+          "A model of each planet's interior, not an observation; no heat from any of these planets has been measured.",
+          "The uncertainties are large: planet b's 2.68 W/m^2 stands between 0.87 and 4.01.",
+          "The model rests on the masses and orbit shapes published in 2017; later papers give other values for some planets.",
+          "The color is on the whole orbit; the heat is inside the planet, not along its path."
+        ]
+      }
+    ]
+  }
+}

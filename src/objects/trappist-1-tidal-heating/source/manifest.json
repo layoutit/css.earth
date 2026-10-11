@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "tidal-heat-table",
+      "path": "src/objects/trappist-1-tidal-heating/source/barr-2018/table-3.json",
+      "origin": "https://arxiv.org/abs/1712.05641",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361/201731992",
+      "title": "Barr, Dobos & Kiss (2018), Table 3: tidal heat flux of the seven TRAPPIST-1 planets",
+      "credit": "A. C. Barr, V. Dobos, L. L. Kiss; A&A 613, A37 (2018)",
+      "acquisition": "Transcribed 2026-10-11 from Table 3 of the preprint (arXiv:1712.05641): the column F_tidal with its upper and lower uncertainty, seven rows, unchanged.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1051-0004-6361-201731992",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1712.05641"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Seven published numbers with their uncertainties, kept with their citation."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/trappist-1-tidal-heating/source/heating.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/trappist-1-tidal-heating/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "heating/heating.webp",
+      "bytes": 25334,
+      "sha256": "8cfe182a2dceaaeb81703dc018e5de44336c4d2f2a132c96cbeae51fb90e9623"
+    },
+    {
+      "location": "prepared",
+      "filename": "plane.json",
+      "bytes": 1303,
+      "sha256": "49d84d5e642332d7496227d4f8aff050513230d33dc2d8aa717f8fcb977c5e32"
+    }
+  ]
+}
