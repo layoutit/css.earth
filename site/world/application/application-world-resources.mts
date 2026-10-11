@@ -1,4 +1,4 @@
-import { IMAGE_MESH_SCHEMA, bankCataloguePoints, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, bankCataloguePoints, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor, parsePlaneBankDescriptor } from '@cssearth/objects';
 import { DATASET_VISIBILITY } from '../../browser/runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
@@ -133,6 +133,15 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // they draw while it or a body inside it is selected, so no other page asks for them.
     const pointBanks = [...parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(pointBank),
       ...WORLD_DOT_BANKS.map(id => ({ id: `${id}/plain-stars`, url: `/world/dots/${id}.bin`, host: id, stars: true as const }))];
+    // Packages that are only a picture on a plane around a body (a star's habitable zone): each draws while a dataset of
+    // the mounted scene shows it, from the one prepared plane its descriptor names.
+    const planeUrls = new Map<string, string>();
+    const planeBank = (descriptor: ReturnType<typeof parseObjectDescriptor>) => {
+      const bank = parsePlaneBankDescriptor(descriptor);
+      planeUrls.set(bank.id, bank.url);
+      return { id: bank.id, frame: bank.frame };
+    };
+    const planeBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'plane-bank').map(planeBank);
     // A body's row says whether it is a plain dot (no billboard) and what it is (an asteroid's sprite stays smaller).
     const billboards = (bodies: readonly (Parameters<typeof preparedBodyBillboards>[0][number] & { readonly plainDot?: true; readonly classification?: string })[]) => {
       const asteroids = new Set(bodies.filter(body => body.classification === 'asteroid').map(body => body.id));
@@ -163,8 +172,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // A bank drawn from afar by its backing plane (its billboard facts say so), a volume dataset bank or an image-layer
     // bank, reads it from its own file list.
     const loadBacking = createInFlightLoader(async (id: string) => {
-      if (!volumeDatasetIds.has(id) && !imageLayerIds.has(id)) throw new TypeError(`Unknown prepared bank with a backing: ${id}.`);
-      const set = await bankSet(id), path = 'prepared/backing.json';
+      const plane = planeUrls.get(id);
+      if (plane === undefined && !volumeDatasetIds.has(id) && !imageLayerIds.has(id)) throw new TypeError(`Unknown prepared bank with a backing: ${id}.`);
+      // A plane bank's files come with its descriptor; every other bank names its own when it is first loaded.
+      const set = plane === undefined ? await bankSet(id) : resourceSet(id), path = plane ?? 'prepared/backing.json';
       return { payload: parseGalaxyBacking(JSON.parse(new TextDecoder().decode(await set.transport.read(path))), `${id}/${path}`),
         resolveResource: (resource: string) => set.resolve(`prepared/${resource}`) };
     });
@@ -189,7 +200,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyCataloguePoints: ['globular-clusters', 'old-star-dots', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: plan, volume, pointAppearance, sprites,
-      imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset, loadBacking,
+      imageLayerBanks, loadImageLayer, pointBanks, planeBanks, volumeDatasetBanks, loadVolumeDataset, loadBacking,
       backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the object it bounds.
@@ -212,12 +223,13 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
     // A bank drawn only for the bodies that hold it arrives in their object entries (`/objects/<id>/entry.json` `banks`,
     // site/world/hosted-banks.mts): a page reads the entry of each object it opens before it mounts it, so the bank is declared
-    // before that object's datasets ask for it. Only volume dataset banks and packages of catalogue dots travel this way.
+    // before that object's datasets ask for it. Only volume dataset banks, packages of catalogue dots and planes travel this way.
     onObjectEntry((objectId, entry) => {
       const carried = isRecord(entry) ? entry.banks : undefined;
       if (carried === undefined) return;
       if (!Array.isArray(carried)) throw new TypeError(`/objects/${objectId}/entry.json banks: expected a list of banks, not ${JSON.stringify(carried)}.`);
       const volumes: { id: string; frame: ReturnType<typeof parseDensityVolumeFrame> }[] = [], points: { id: string; url: string; host?: string }[] = [];
+      const planes: ReturnType<typeof planeBank>[] = [];
       for (const bank of carried) {
         if (!isRecord(bank) || bank.files !== undefined && !isRecord(bank.files)) throw new TypeError(`/objects/${objectId}/entry.json banks: expected a descriptor with its files, not ${JSON.stringify(bank)}.`);
         const descriptor = parseObjectDescriptor(bank.descriptor), key = `../src/objects/${descriptor.id}/object.json`;
@@ -229,9 +241,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
           volumeDatasetIds.add(descriptor.id);
           volumes.push({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) });
         } else if (descriptor.type === 'catalogue-point-bank') points.push(pointBank(descriptor));
-        else throw new TypeError(`/objects/${objectId}/entry.json banks: ${descriptor.id} is a ${descriptor.type}; an entry carries volume dataset banks and catalogue dots only.`);
+        else if (descriptor.type === 'plane-bank') planes.push(planeBank(descriptor));
+        else throw new TypeError(`/objects/${objectId}/entry.json banks: ${descriptor.id} is a ${descriptor.type}; an entry carries volume dataset banks, catalogue dots and planes only.`);
       }
-      universe.addBanks({ volumeDatasetBanks: volumes, pointBanks: points });
+      universe.addBanks({ volumeDatasetBanks: volumes, pointBanks: points, planeBanks: planes });
     });
     // Other systems' bodies join the world as their files arrive (site/directory/world-context-plan.mts), with their billboards and
     // their annotation strengths and tiers, which the first plan's tables did not hold.

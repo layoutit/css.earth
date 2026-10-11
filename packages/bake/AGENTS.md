@@ -25,7 +25,8 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   tracks and dataset navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
   tests are `node --test` suites in `src/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
-  slice stacks into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
+  slice stacks into retained PolyCSS leaves, their bounds and depth order, and the volume impostors; and the leaf of one
+  picture on a plane (`plane-leaf.ts`), which a galaxy's backing and a plane bank are laid with.
   It imports `scene` and `volume`.
 - `src/stars/` is published as `@cssearth/bake/stars` (Node only): the point-field star bake (recipes, catalogue
   sources, palette, hierarchy, point atlas and photometry, diffuse sky, encoded bank). It imports `raster` and `volume`.

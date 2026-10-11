@@ -2,9 +2,11 @@ import assert from 'node:assert/strict';
 import { mock, test } from 'node:test';
 import { importWithJson } from './fixtures/module-import.mts';
 const bank = { schema: 'cssearth-object@2', id: 'dots', type: 'catalogue-point-bank', properties: { host: 'star' } };
+const plane = { schema: 'cssearth-object@2', id: 'zone', type: 'plane-bank', properties: { host: 'sun' } };
 mock.module(new URL('../prepared/prepared-hosted-banks.json', import.meta.url).href, { defaultExport: {
   dots: { carriers: ['star'], descriptor: bank, files: { 'prepared/dots.bin': '/dots.bin' } },
   volume: { carriers: ['cloud'], descriptor: { id: 'volume', type: 'volume-dataset-bank' } },
+  zone: { carriers: ['sun'], descriptor: plane, files: { 'prepared/plane.json': '/plane.json' } },
 } });
 const { hostedBanksOf } = await import('./hosted-banks.mts');
 test('banks select direct carriers and only the orbital centre’s point bank', () => {
@@ -12,6 +14,8 @@ test('banks select direct carriers and only the orbital centre’s point bank', 
   assert.deepEqual(hostedBanksOf('planet', 'star'), hostedBanksOf('star'));
   assert.deepEqual(hostedBanksOf('missing'), []);
   assert.deepEqual(hostedBanksOf('cloud'), [{ descriptor: { id: 'volume', type: 'volume-dataset-bank' } }]);
+  assert.deepEqual(hostedBanksOf('sun'), [{ descriptor: plane, files: { 'prepared/plane.json': '/plane.json' } }], 'a plane goes with its carriers');
+  assert.deepEqual(hostedBanksOf('earth', 'sun'), [], 'and not with the bodies that orbit its host: a dataset of the host shows it');
 });
 test('hosted-bank import refuses malformed carriers, descriptors and file URLs', () => {
   const subject = new URL('./hosted-banks.mts', import.meta.url), dependency = new URL('../prepared/prepared-hosted-banks.json', import.meta.url);

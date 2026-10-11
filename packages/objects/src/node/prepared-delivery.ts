@@ -58,6 +58,7 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   { name: 'presentation.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-context-availability.mts' },
   { name: 'delivery.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-volume-presentation.mts' },
   { name: 'backing.json', reader: 'page', read: 'site/world/application/application-world-resources.mts' },
+  { name: 'plane.json', reader: 'page', read: 'site/world/application/application-world-resources.mts reads a plane bank\'s one plane' },
   { name: 'catalogue.json', reader: 'page', read: 'site/server/dot-catalogue-data.mts' },
   { name: 'display-sample.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-catalog.mts' },
   { name: 'image-layers.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },

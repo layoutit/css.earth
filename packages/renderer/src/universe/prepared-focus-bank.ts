@@ -32,6 +32,17 @@ export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame
   };
 }
 
+/** A bank that is one picture on a plane: one dataset, the plane, read when it first shows. */
+export function createPlaneFocusBank(objectId: string): PreparedFocusBank {
+  const state: PreparedFocusDatasets = { objectId, id: 'plane', defaultDataset: 'plane', selectedDataset: 'plane', starsVisible: false,
+    datasets: [{ id: 'plane', label: 'Plane', title: 'Prepared plane', description: 'One prepared picture on a plane', sourceUrl: '' }] };
+  return {
+    objectId, framingRadiusM: () => { throw new TypeError('A plane is framed by its scene.'); }, state: () => state, load: () => Promise.resolve(),
+    selectDataset(id) { if (id !== 'plane') throw new TypeError('Unknown plane dataset.'); },
+    subscribe: () => () => {},
+  };
+}
+
 /** A context package the world always draws (the galaxy's volume, the Local Group's catalogue): the dataset a level object
  * names it by has nothing to load or to switch. */
 export function createContextFocusBank(objectId: string): PreparedFocusBank {

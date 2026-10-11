@@ -63,6 +63,11 @@ export interface PreparedUniverseOptions {
    * or is inside it (`setSelectionHolders`), dim as every other star does, leave out the dot at the place of a star a body
    * marker draws, and paint under the layers mounted after the world's own star dots. */
   pointBanks?: readonly { id: string; url: string; host?: string; stars?: true }[];
+  /** Packages that are only one prepared picture on a plane around a body (`plane-bank` descriptors): a zone of its
+   * system, such as a star's habitable zone laid in the plane of its planets' orbits. The plane draws while a dataset of
+   * the mounted scene shows it, as a bank of dots a dataset names does; its picture, its box and the distances it fades
+   * over come with its payload ({@link loadBacking}), read the first time it shows. */
+  planeBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
   /** Volume dataset banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all datasets, plus catalogue points) is fetched only through {@link loadVolumeDataset}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */

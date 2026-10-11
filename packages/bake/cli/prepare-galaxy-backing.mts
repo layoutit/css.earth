@@ -26,7 +26,7 @@ import { imageLayerBillboard, sunFacingImpostorView } from '@cssearth/bake/site-
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { compileCssVolume } from '@cssearth/bake/volume-leaves';
+import { compilePlaneLeaf } from '@cssearth/bake/volume-leaves';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 
 type Vector3 = [number, number, number];
@@ -41,16 +41,7 @@ const objectDirectory = resolve(objectArgument), prepared = resolve(objectDirect
 const recipePath = resolve(sourceDirectory, 'recipe.json');
 const recipeValue = JSON.parse(await readFile(recipePath, 'utf8')) as Record<string, unknown>;
 
-/** Compile one quad in `frame` with the same PolyCSS volume compiler as a galaxy's other planes: the leaf's box and matrix. */
-const compileLeaf = (frame: DensityVolumeFrame, quad: VolumeSliceQuad) => {
-  // The compiler wants a normal for every axis; empty quads carry the other two and compile to no leaf.
-  const empty = (axis: 'x' | 'y', normal: Vector3): VolumeSliceQuad => ({ id: `${axis}-empty`, axis, sliceIndex: 0, texturePath: `${id}/${axis}-empty`, widthPx: 1, heightPx: 1,
-    vertices: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0], normal, bytes: 0, alphaCoverage: 0 });
-  const compiled = compileCssVolume({ id, frame, recipe: { anchors: [] }, slices: { quads: [quad, empty('x', [-1, 0, 0]), empty('y', [0, 1, 0])],
-    boundsUnits: { min: [...frame.boundsUnits.min] as Vector3, max: [...frame.boundsUnits.max] as Vector3 }, provenance: null, approximation: { method: '', radialEmission: 'None.', limitations: [], samplesPerSlab: 1, opticalWeight: 1,
-      exposureGain: 1, sliceCounts: { x: 0, y: 0, z: 1 }, slabPitchUnits: { x: 0, y: 0, z: 0 } } } });
-  return compiled.stacks.find(stack => stack.axis === 'z')!.leaves[0]!;
-};
+const compileLeaf = (frame: DensityVolumeFrame, quad: VolumeSliceQuad) => compilePlaneLeaf(id!, frame, quad);
 
 if (recipeValue.view === 'sun-facing-impostor') {
   if (recipeValue.schema !== 'cssearth-galaxy-backing-source@1' || recipeValue.id !== id || typeof recipeValue.source !== 'string' || typeof recipeValue.meaning !== 'string') {
