@@ -1,6 +1,5 @@
 /**
- * The Hubble [N II] F658N epochs of the outer ejecta on the common grid (./sky-grid.mts), the original study's
- * hst_grid.py and hst_wfpc2.py.
+ * The Hubble [N II] F658N epochs of the outer ejecta on the common grid (./sky-grid.mts).
  *
  * ACS/WFC (2005.54, 2014.59) and WFC3/UVIS (2018.56, 2020.12) drizzled products are Gaia-aligned as MAST serves them:
  * each is put on the grid (`reprojectOnGrid`), in electrons per second, and the visits of one epoch averaged where they
@@ -37,7 +36,7 @@ export const EPOCHS = [...Object.keys(GAIA_ALIGNED_EPOCHS), ...Object.keys(WFPC2
 export type GridImage = Float32Array;
 const SHAPE = [SIDE, SIDE] as const;
 
-/** An epoch of drizzled ACS or WFC3 products averaged on the grid (hst_grid.py). */
+/** An epoch of drizzled ACS or WFC3 products averaged on the grid. */
 export async function gaiaAlignedEpoch(directory: string, files: readonly string[], log = console.log): Promise<GridImage> {
   const acc = new Float64Array(SIDE * SIDE), count = new Float64Array(SIDE * SIDE);
   for (const file of files) {
@@ -89,7 +88,7 @@ export function leastSquares3(X: readonly (readonly [number, number, number])[],
   return c as [number, number, number];
 }
 
-/** A WFPC2 visit on the grid, tied to the reference epoch by its field stars (hst_wfpc2.py). */
+/** A WFPC2 visit on the grid, tied to the reference epoch by its field stars. */
 export async function wfpc2Visit(path: string, reference: { detail: Float32Array; stars: [number, number][] }, log = console.log): Promise<GridImage> {
   const image = await readScienceImage(path), img = await reprojectOnGrid(image), b = starDetail(img), P: [number, number][] = [], Q: [number, number][] = [];
   const window = (values: ArrayLike<number>, y: number, x: number, out: Float64Array) => { for (let j = 0; j < 31; j++) for (let i = 0; i < 31; i++) out[j * 31 + i] = values[(y - 15 + j) * SIDE + x - 15 + i]!; return out; };

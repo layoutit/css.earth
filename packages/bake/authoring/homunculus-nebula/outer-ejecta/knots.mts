@@ -1,5 +1,5 @@
 /**
- * The outer ejecta's knots in 3D (the original study's knots3d.py): each moving tile of the Hubble motions
+ * The outer ejecta's knots in 3D: each moving tile of the Hubble motions
  * (./hubble-motions.mts) with its line-of-sight speed from MUSE H-beta (./muse-hbeta.mts).
  *
  * A tile counts when its motion is measured well (sigma under 6 mas a year, rms under 2.5 pixels) and points away from

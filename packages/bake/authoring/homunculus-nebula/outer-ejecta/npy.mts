@@ -1,6 +1,6 @@
 /**
- * NumPy's `.npy` files (format versions 1.0 to 3.0, little-endian, C order): the outer-ejecta port keeps its working
- * arrays in them so each stage's output can be set beside the original scripts' and compared value for value.
+ * NumPy's `.npy` files (format versions 1.0 to 3.0, little-endian, C order): the outer-ejecta chain keeps its working
+ * arrays in them, so each stage's output can be read back by the next stage or by NumPy and compared value for value.
  * `writeNpy` writes the bytes `np.save` writes (version 1.0 while the header fits, the header padded with room to
  * grow the first axis and to a multiple of 64 bytes).
  */

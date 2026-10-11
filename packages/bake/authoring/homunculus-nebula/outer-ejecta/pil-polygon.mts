@@ -1,6 +1,6 @@
 /**
  * A filled polygon exactly as Pillow 12.3.0 draws one with `ImageDraw.Draw(image).polygon(points, fill=...)` and no
- * outline: the outer-ejecta scripts raster the Homunculus's lobes (the Steffen et al. 2014 mesh, triangle by
+ * outline: the outer-ejecta cloud rasters the Homunculus's lobes (the Steffen et al. 2014 mesh, triangle by
  * triangle) this way, and which sky cells the lobes cover decides where the gas dots go.
  *
  * Pillow's path (_imaging.c `_draw_polygon`, Draw.c `ImagingDrawPolygon` and `polygon_generic`):

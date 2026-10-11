@@ -10,7 +10,7 @@ test('Nelder-Mead walks SciPy\'s simplex exactly: the same iterations, evaluatio
   assert.equal(tight.nit, 259); assert.equal(tight.nfev, 469); assert.equal(tight.status, 0);
   assert.deepEqual(Array.from(tight.x), [1.0000000003795209, 1.0000000005816028, 1.0000000008671737]);
   assert.equal(tight.fun, 1.239424259374864e-17);
-  // register_heic.py's tolerances.
+  // The heic1912a registration's tolerances (./heic-registration.mts).
   const loose = nelderMead(rosenbrock, [-1.2, 1, 0.5], { xatol: 0.05, fatol: 1e-5, maxiter: 600 });
   assert.equal(loose.nit, 187); assert.equal(loose.nfev, 333);
   assert.deepEqual(Array.from(loose.x), [1.0005608225226292, 1.001243084196544, 1.002387664861785]);

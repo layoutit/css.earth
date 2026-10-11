@@ -1,7 +1,6 @@
 /**
  * Python's `json.dump(value, file)` with its defaults, to the byte, and Python's `round(x, ndigits)`: the outer-ejecta
- * source records were written by Python, so the port writes them the same way and a regenerated record shows no
- * difference where the values agree.
+ * source records are written in this form, so a regenerated record shows no difference where the values agree.
  *
  * - Separators ', ' and ': ', no indentation, keys in insertion order (a Map keeps any key order; a plain object
  *   orders integer-like keys first, as JavaScript does).

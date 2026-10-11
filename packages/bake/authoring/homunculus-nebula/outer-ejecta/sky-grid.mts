@@ -1,12 +1,11 @@
 /**
  * The outer ejecta's common sky grid and the readers that put an archive image or cube on it.
  *
- * The grid (hst_grid.py in the original study): 0.05 arcsec pixels, 2,600 a side (130 arcsec), north up and east left,
+ * The grid: 0.05 arcsec pixels, 2,600 a side (130 arcsec), north up and east left,
  * a gnomonic (TAN) projection about the star at RA 161.264775, Dec -59.684431 (ICRS), its reference pixel between the
  * middle two pixels. Row 0 is the grid's south edge, as numpy holds it.
  *
- * `reprojectOnGrid` is reproject 0.21's `reproject_interp` (bilinear) with Astropy 8's coordinate handling, as the original
- * study ran it: each grid pixel's sky direction in the grid's frame (ICRS) is carried into the image's own frame (an FK5
+ * `reprojectOnGrid` is reproject 0.21's `reproject_interp` (bilinear) with Astropy 8's coordinate handling: each grid pixel's sky direction in the grid's frame (ICRS) is carried into the image's own frame (an FK5
  * J2000 image gets the IAU frame bias of USNO Circular 179, as Astropy's ICRS-to-FK5 transform does), its pixel there read
  * bilinearly as scipy.ndimage.map_coordinates does (./ndimage.mts), a pixel within half a pixel outside the image taken as
  * its edge pixel, and a pixel whose position does not come back to within one pixel of itself left unknown (NaN).
@@ -21,7 +20,7 @@ export const HALF = 1300, PIX = 0.05, STAR_RA_DEG = 161.264775, STAR_DEC_DEG = -
 /** The grid's side in pixels. */
 export const SIDE = 2 * HALF;
 
-/** The grid's projection, as hst_grid.py builds its Astropy WCS (CDELT, no rotation; reference pixel HALF + 0.5, one-based). */
+/** The grid's projection, as an Astropy WCS holds it (CDELT, no rotation; reference pixel HALF + 0.5, one-based). */
 export function gridProjection(): SkyProjection {
   return skyProjection({ CTYPE1: 'RA---TAN', CTYPE2: 'DEC--TAN', CRVAL1: STAR_RA_DEG, CRVAL2: STAR_DEC_DEG, CRPIX1: HALF + 0.5, CRPIX2: HALF + 0.5,
     CDELT1: -PIX / 3600, CDELT2: PIX / 3600, CUNIT1: 'deg', CUNIT2: 'deg' });

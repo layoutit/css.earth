@@ -1,6 +1,6 @@
 /**
- * NumPy's `np.random.default_rng(seed)` for an integer seed, draw for draw (NumPy 2.5.4): the outer-ejecta scripts
- * scatter their dots with it, so the port draws the same numbers in the same order.
+ * NumPy's `np.random.default_rng(seed)` for an integer seed, draw for draw (NumPy 2.5.4): the outer-ejecta cloud
+ * scatters its dots with it, so a seed gives NumPy's numbers in NumPy's order.
  *
  * - The seed is mixed into four 32-bit words by NumPy's SeedSequence (its hash and mix functions), and four 64-bit
  *   words drawn from them seed PCG64: the 128-bit state and increment, as `pcg64_set_seed` takes them.

@@ -60,7 +60,7 @@ test('a bounded Rosenbrock valley: each iterate on the way is SciPy\'s (reflecti
   }
 });
 
-test('a knot\'s ambient-line fit (knots3d.py) that wanders: SciPy\'s path while it is defined, and SciPy\'s end with the same residuals', () => {
+test('a knot\'s ambient-line fit (./knots.mts) that wanders: SciPy\'s path while it is defined, and SciPy\'s end with the same residuals', () => {
   // One knot's spectrum near rest velocity. Its fit is ill-posed: SciPy with NumPy's exp ends at A 145509 on the width's
   // bound after 90 evaluations, but with an exp one last bit different (or computed as below, identically in both
   // languages) SciPy itself stops at A 74805. The exp here is (1 + t/2^20)^(2^20) by squaring, so both sides see the

@@ -2,10 +2,10 @@
  * Bounded nonlinear least squares, as SciPy 1.18.1's `scipy.optimize.least_squares(method='trf')` solves it with
  * bounds (Branch, Coleman and Li 1999's Trust Region Reflective algorithm, scipy/optimize/_lsq/trf.py `trf_bounds`),
  * and `curveFit`, `scipy.optimize.curve_fit` with bounds on top of it. The outer ejecta's chain fits two things with it:
- * the Carina nebula's own H-beta line under each knot (a Gaussian, knots3d.py's stage) and Mehner et al. (2016)'s bent tube to the
- * MUSE points (soft L1 loss, fit_tube.py's stage).
+ * the Carina nebula's own H-beta line under each knot (a Gaussian, ./knots.mts) and Mehner et al. (2016)'s bent tube to the
+ * MUSE points (soft L1 loss, ./tube.mts).
  *
- * The port follows SciPy step by step: the Jacobian by forward differences that turn back at a bound
+ * It follows SciPy step by step: the Jacobian by forward differences that turn back at a bound
  * (scipy/optimize/_numdiff.py, step `sqrt(eps) * sign(x) * max(1, |x|)`), Coleman and Li's scaling, the exact trust-region
  * solve on the singular value decomposition of the scaled, regularized Jacobian (Moré's iteration on the
  * Levenberg-Marquardt parameter), the reflective step choice, `make_strictly_feasible`, and the same termination tests

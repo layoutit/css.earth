@@ -3,7 +3,7 @@
  * runs it without bounds and with the standard coefficients (`_minimize_neldermead`, adaptive=False): reflection 1,
  * expansion 2, contraction 0.5, shrink 0.5; the first simplex the start and, for each parameter, the start with that
  * parameter 5% larger (0.00025 where it is zero). The outer ejecta's chain registers heic1912a on the sky with it
- * (register_heic.py's stage).
+ * (./heic-registration.mts).
  *
  * The simplex is reordered by value after every iteration with a stable sort. SciPy calls NumPy's default argsort, which
  * for four or fewer values (three parameters) is an insertion sort and so also stable; equal values in a larger simplex

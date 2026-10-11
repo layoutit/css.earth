@@ -97,10 +97,10 @@
       ]
     },
     {
-      "id": "python-port",
-      "subject": "The outer ejecta's chain, ported from the exploratory Python",
+      "id": "outer-ejecta-chain",
+      "subject": "The outer ejecta's chain, run from the archives",
       "status": "included",
-      "finding": "The original study's Python was rerun and gave the same bytes. Run stage by stage on its inputs, the TypeScript port matches it exactly or to float32's last bits everywhere but the sky motions: skimage's match_template computes in float32, and its rounding made false matches in masked areas, which are zero (one tile in 2020 at correlation 0.925 across a 49 px jump, where float64 finds at most 0.496). The Python's fit recomputed in float64 gives exactly the port's motions. The shipped records come from the port: 891 knots instead of 853, 7,358 dots instead of 7,384, the tube within 0.8 degrees and 0.54 arcsec."
+      "finding": "outer-ejecta.mts, run from the archive downloads on 2026-10-11, wrote the three shipped source records: 891 knots, the tube and 7,358 dots; rebaking them reproduces every prepared file byte for byte. Sky motions are matched in double precision: in masked areas, which are zero, single-precision rounding can make a false match (one tile in 2020 at correlation 0.925 across a 49 px jump, where the true best is 0.496)."
     },
     {
       "id": "cross-instrument-motions",

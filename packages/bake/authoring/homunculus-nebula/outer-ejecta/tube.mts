@@ -1,6 +1,6 @@
 /**
  * Mehner et al. (2016)'s outer shell, a bent tube about the Homunculus, fitted to the MUSE H-beta emission of the 1840s
- * material (the original study's fit_tube.py).
+ * material.
  *
  * The points (./muse-hbeta.mts `emissionPoints`): those faster than 450 km/s along the line of sight, less those on a sky
  * spot whose detections spread over more than 1,200 km/s (leftover starlight or a spike, not a wall crossing; spots of
@@ -43,10 +43,10 @@ export function centreline(q: ArrayLike<number>, samples: Float64Array = SAMPLES
 /** The wall's radius at a sample: rNear to rFar between -15 and 15 arcsec. */
 export function radius(q: ArrayLike<number>, s: number): number { const t = Math.min(1, Math.max(0, (s + 15) / 30)); return q[7]! * (1 - t) + q[8]! * t; }
 
-/** The points the tube is fitted to and their weights (fit_tube.py's D and W). */
+/** The points the tube is fitted to and their weights. */
 export function tubePoints(points: Float32Array, fit: readonly ArrayLike<number>[]): { X: Float64Array; W: Float64Array; count: { all: number; fast: number; kept: number } } {
   const n = points.length / 5, old: [number, number][] = [];
-  // fit_tube.py's own reading of the rows: mu from the pixel motion, then to arcsec.
+  // Each row's motion: mu from the pixel motion, then to arcsec.
   for (const row of fit) {
     const [x, y, vx, vy, sig, , , rms] = Array.from(row) as number[], east = -(x! - HALF) * PIX, north = (y! - HALF) * PIX, mu = Math.hypot(vx!, vy!) * PIX;
     if (sig! * PIX < 0.006 && rms! < 2.5 && MOTION_EPOCH - Math.hypot(east, north) / Math.max(mu, 1e-9) < 1780) old.push([east, north]);
@@ -66,7 +66,7 @@ export function tubePoints(points: Float32Array, fit: readonly ArrayLike<number>
   return { X: Float64Array.from(X), W: Float64Array.from(W), count: { all: n, fast, kept: W.length } };
 }
 
-/** Each point's weighted distance to the wall (fit_tube.py's resid). */
+/** Each point's weighted distance to the wall. */
 export function tubeResiduals(q: ArrayLike<number>, X: Float64Array, W: Float64Array): Float64Array {
   const C = centreline(q), out = new Float64Array(W.length);
   for (let i = 0; i < W.length; i++) {

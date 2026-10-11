@@ -1,19 +1,18 @@
 // Entry script: node packages/bake/authoring/homunculus-nebula/outer-ejecta.mts [--downloads=<directory>] [--work=<directory>] [--stages=<a,b,...>] [--fetch] [--write-source]
 /**
  * The Homunculus's outer ejecta from the archive: Hubble F658N motions, MUSE H-beta speeds, the bent tube they lie on and
- * the dots that draw them. A TypeScript port of the original study's Python (see ./outer-ejecta/*.mts, each naming the
- * script it follows), stage by stage:
+ * the dots that draw them. Stage by stage (./outer-ejecta/*.mts):
  *
- *   epochs  - the eleven F658N epochs on the common grid            (hst_grid.py, hst_wfpc2.py)  -> hst-grid/<epoch>.npy
- *   masks   - each epoch's artefacts                                (hst_masks.py)               -> hst-masks/<epoch>.npy
- *   motions - each tile's motion across the sky                     (hst_fit.py)                 -> fit.npy
- *   heic    - heic1912a's registration on the sky                   (register_heic.py)           -> heic-registration.npy
- *   hbeta   - the cube's continuum-subtracted H-beta channels       (muse_look.py)               -> hbeta/E.npy, v.npy, header.json
- *   points  - MUSE emission points                                  (muse_sheets.py)             -> points-clean.npy
- *   knots   - the knots in 3D                                       (knots3d.py)                 -> knots3d.npy
- *   tube    - Mehner et al. (2016)'s bent tube fitted to the points (fit_tube.py)                -> tube.npy
- *   cloud   - the gas and dust dots and the lobes' occluder         (gas_from_images.py, export_cloud_source.py) -> clump-points.json, cloud-points.json
- *   records - the kinematics and tube source records                                              -> kinematics.json, tube.json
+ *   epochs  - the eleven F658N epochs on the common grid            -> hst-grid/<epoch>.npy
+ *   masks   - each epoch's artefacts                                -> hst-masks/<epoch>.npy
+ *   motions - each tile's motion across the sky                     -> fit.npy
+ *   heic    - heic1912a's registration on the sky                   -> heic-registration.npy
+ *   hbeta   - the cube's continuum-subtracted H-beta channels       -> hbeta/E.npy, v.npy, header.json
+ *   points  - MUSE emission points                                  -> points-clean.npy
+ *   knots   - the knots in 3D                                       -> knots3d.npy
+ *   tube    - Mehner et al. (2016)'s bent tube fitted to the points -> tube.npy
+ *   cloud   - the gas and dust dots and the lobes' occluder         -> clump-points.json, cloud-points.json
+ *   records - the kinematics and tube source records                -> kinematics.json, tube.json
  *
  * Inputs (declared in src/objects/homunculus-nebula-layers/source/manifest.json; not tracked) under `--downloads`
  * (default: the body's `.local/`): `hst-epochs/` (MAST products), `muse/ADP.2016-06-20T21:41:31.322.fits` (ESO),

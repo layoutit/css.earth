@@ -1,6 +1,6 @@
 /**
- * The image filters and resampling the outer-ejecta chain was written with (scipy.ndimage 1.18.1 and numpy.gradient),
- * ported so the TypeScript chain gives the numbers the Python one did. Each follows scipy's C code
+ * The image filters and resampling of the outer-ejecta chain, as scipy.ndimage 1.18.1 and numpy.gradient compute
+ * them. Each follows scipy's C code
  * (`scipy/ndimage/src/ni_filters.c`, `ni_interpolation.c`, `ni_splines.c`, `ni_support.c`): the same kernel, the same
  * order of additions and the same edge rules, so a filter gives scipy's bits wherever JavaScript's `Math.exp` agrees
  * with the platform's (the Gaussian's weights are its only transcendental step).
@@ -138,7 +138,7 @@ function correlate1d(input: ArrayLike<number>, out: Values, shape: readonly numb
     for (let i = 1; i <= size1; i++) if (Math.abs(weights[i + size1]! - weights[size1 - i]!) > Number.EPSILON) { symmetric = 0; break; }
     if (!symmetric) { symmetric = -1; for (let i = 1; i <= size1; i++) if (Math.abs(weights[size1 + i]! + weights[size1 - i]!) > Number.EPSILON) { symmetric = 0; break; } }
   }
-  // How scipy's compiled symmetric loop adds (measured on the macOS arm64 wheel of scipy 1.18.1 the originals ran with):
+  // How scipy's compiled symmetric loop adds (measured on the macOS arm64 wheel of scipy 1.18.1):
   // from 10 terms a side, the first multiple of 8 are a vector body of separate multiplies and in-order adds, and the
   // rest scalar fused multiply-adds; below 10, all fused.
   const plain = size1 >= 10 ? size1 - size1 % 8 : 0;
@@ -348,7 +348,7 @@ export function label(mask: Uint8Array, shape: readonly number[]): { labels: Int
   return { labels, count };
 }
 
-/** ni_interpolation.c `map_coordinate` for an index past the edge, with the boundary modes this port uses. */
+/** ni_interpolation.c `map_coordinate` for an index past the edge, with the boundary modes this chain uses. */
 function mapIndex(i: number, len: number, mode: 'mirror' | 'nearest'): number {
   if (mode === 'nearest') return i < 0 ? 0 : i > len - 1 ? len - 1 : i;
   if (len <= 1) return 0;

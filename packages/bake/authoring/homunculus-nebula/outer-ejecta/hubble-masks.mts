@@ -1,5 +1,5 @@
 /**
- * Each Hubble epoch's artefacts on the grid (the original study's hst_masks.py): straight lines through the star
+ * Each Hubble epoch's artefacts on the grid: straight lines through the star
  * (diffraction spikes and bleed trails), field stars, pixels no product covers, and the star's own 9 arcsec.
  *
  *   field stars - local maxima of 2005.54's fine detail above its 99.9th percentile, beyond 9 arcsec, that stay put to

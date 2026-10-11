@@ -1,6 +1,5 @@
 /**
- * The red gas and dark dust around the Homunculus as dots (the original study's gas_from_images.py and
- * export_cloud_source.py), and the lobes' occluder.
+ * The red gas and dark dust around the Homunculus as dots, and the lobes' occluder.
  *
  *   where   - every measured knot (./knots.mts) within 45 arcsec of the star's plane of the sky. A sky cell takes its
  *             dots' depths from its six nearest knots as the Earth view places them: one knot's depth (with a 1 arcsec
@@ -18,8 +17,8 @@
  *   size    - each dot's diameter follows the image's detail: 0.5 arcsec over the opacity's gradient, 1 to 2.5 arcsec,
  *             no larger than twice the distance to the lobes (at least 0.4) off them. Its opacity is shared so the dots
  *             over a cell add up to the cell's (gain 2.5 / 0.3).
- * Random draws are NumPy's PCG64 stream from seed 5 (./numpy-random.mts), in the original order, so the dots are the
- * original's. The record keeps each dot at 80% of that opacity.
+ * Random draws are NumPy's PCG64 stream from seed 5 (./numpy-random.mts), drawn in a fixed order (the gas
+ * cells, then the dust cells, each in grid order), so the dots are reproducible. The record keeps each dot at 80% of that opacity.
  *
  * The occluder: an ellipsoid for each lobe of Steffen et al. (2014)'s mesh as the recipe places it (each side of the
  * plane through the star across the pole): its vertices' mean, and their covariance's principal axes (signed as NumPy's
@@ -79,7 +78,7 @@ export function lobeTriangles(triangles: Float32Array, placement: SurfacePlaceme
 /** Where the Earth view sees a place: its east and north scaled by the view's perspective. */
 export const skyAt = (east: number, north: number, depth: number): [number, number] => [east * EARTH_VIEW / (EARTH_VIEW + depth), north * EARTH_VIEW / (EARTH_VIEW + depth)];
 
-/** One dot as the original writes it (gas_from_images.py's clump points). */
+/** One dot, before the record rounds it and scales its opacity. */
 export interface Dot { eastArcsec: number; northArcsec: number; depthArcsec: number; diameterArcsec: number; colorCss: string; opacity: number }
 
 export interface CloudInputs {
@@ -90,7 +89,7 @@ export interface CloudInputs {
   /** The surface model's triangles and the recipe's placing of them. */ triangles: Float32Array; placement: SurfacePlacement;
 }
 
-/** The dots (gas_from_images.py). */
+/** The dots. */
 export async function cloudDots(inputs: CloudInputs, log = console.log): Promise<Dot[]> {
   const { pole } = poleFrame(inputs.placement), G = inputs.knots.filter(row => Math.abs(row[2]!) < 45).map(row => [row[0]!, row[1]!, row[2]!] as Vec);
   // heic1912a's red, and its field stars (bluish and bright).
@@ -156,7 +155,7 @@ export async function cloudDots(inputs: CloudInputs, log = console.log): Promise
   // Dot sizes: the opacity's detail, and near the lobes no larger than twice the distance to them.
   const nearLobe = distanceTransformEdt(Uint8Array.from(lobeSky, value => value ? 0 : 1), [CELLS, CELLS]).map(value => value * CELL), [gr, gc] = gradient(gaussianFilter(A, [CELLS, CELLS], 1), [CELLS, CELLS]);
   const detail = Float64Array.from({ length: n }, (_, p) => { const d = Math.min(2.5, Math.max(1.0, 0.5 / Math.max(Math.hypot(gr[p]!, gc[p]!) / CELL, 1e-3))); return lobeSky[p] ? d : Math.min(d, Math.max(2 * nearLobe[p]!, 0.4)); });
-  // The dots, in the original's order and random stream.
+  // The dots: the gas cells, then the dust cells, each in grid order, from one random stream.
   const kE = Float64Array.from(G, g => skyAt(...g)[0]), kN = Float64Array.from(G, g => skyAt(...g)[1]);
   const nearest = (e: number, nn: number) => Array.from(G.keys()).map(i => [(kE[i]! - e) ** 2 + (kN[i]! - nn) ** 2, i] as const).sort((a, b) => a[0] - b[0] || a[1] - b[1]).slice(0, 6).map(([, i]) => i);
   const rng = defaultRng(5, { fusedMultiplyAdd: true }), cloud = GAS_COLOR.map(c => c / 255), out: Dot[] = [], hex = (c: number) => c.toString(16).padStart(2, '0');
@@ -184,7 +183,7 @@ export async function cloudDots(inputs: CloudInputs, log = console.log): Promise
 /** numpy's round(x, decimals): x scaled, rounded half to even (keeping the sign of a zero, as rint does), scaled back. */
 export const npRound = (x: number, decimals: number) => { const s = 10 ** decimals, y = x * s, f = Math.floor(y), r = y - f, k = r > 0.5 || r === 0.5 && f % 2 !== 0 ? f + 1 : f; return k === 0 && (y < 0 || Object.is(y, -0)) ? -0 : k / s; };
 
-/** The lobes' occluder: an ellipsoid for each side of the plane through the star across the pole (export_cloud_source.py). */
+/** The lobes' occluder: an ellipsoid for each side of the plane through the star across the pole. */
 export function lobeOccluder(triangles: Float32Array, placement: SurfacePlacement): { centre: number[]; axes: number[][] }[] {
   const T = lobeTriangles(triangles, placement), { pole } = poleFrame(placement), out: { centre: number[]; axes: number[][] }[] = [];
   for (const receding of [true, false]) {
@@ -200,7 +199,7 @@ export function lobeOccluder(triangles: Float32Array, placement: SurfacePlacemen
   return out;
 }
 
-/** The cloud points' source record (source/cloud-points.json), as export_cloud_source.py writes it, with this generator. */
+/** The cloud points' source record (source/cloud-points.json), with this generator. */
 export function cloudPointsRecord(dots: readonly Dot[], occluder: readonly { centre: number[]; axes: number[][] }[], generator: string): PyJson {
   return { schema: 'cssearth-cloud-points-source@1', generator, units: 'arcsec east, north, depth (away from Earth) from the star',
     points: dots.map(p => ({ east: pyRound(p.eastArcsec, 3), north: pyRound(p.northArcsec, 3), depth: pyRound(p.depthArcsec, 3), diameter: pyRound(p.diameterArcsec, 3), color: p.colorCss, opacity: pyRound(Math.min(1, p.opacity * STRENGTH), 4) })),

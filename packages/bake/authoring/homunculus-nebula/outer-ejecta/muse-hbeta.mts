@@ -1,5 +1,5 @@
 /**
- * MUSE H-beta about the outer ejecta (the original study's muse_look.py and the first half of muse_sheets.py).
+ * MUSE H-beta about the outer ejecta: the cube's H-beta channels and the emission points in them.
  *
  * The cube: ESO's MUSE science cube of Eta Carinae (Mehner et al. 2016's deep wide-field data). The 160 channels from
  * 4755 to 4955 Angstrom, less a straight continuum per spaxel through the medians of 4760-4800 and 4935-4950 Angstrom,
@@ -31,7 +31,7 @@ export interface HbetaCube { E: Float32Array; v: Float32Array; channels: number;
 /** numpy.searchsorted(sorted, value) (side left). */
 const searchLeft = (sorted: Float64Array, value: number) => { let lo = 0, hi = sorted.length; while (lo < hi) { const mid = (lo + hi) >> 1; if (sorted[mid]! < value) lo = mid + 1; else hi = mid; } return lo; };
 
-/** The continuum-subtracted H-beta channels of the cube (muse_look.py). */
+/** The continuum-subtracted H-beta channels of the cube. */
 export async function hbetaCube(path: string): Promise<HbetaCube> {
   const hdus = await readFitsFileHdus(path), hdu = hdus[1];
   if (!hdu || hdu.dimensions.length !== 3) throw new TypeError(`${path}: its first extension is not a cube.`);
@@ -57,7 +57,7 @@ export function cubeProjection(header: FitsHeader): SkyProjection {
   return skyProjection(Object.fromEntries(Object.entries(header).filter(([key]) => /^(CTYPE[12]|CRPIX[12]|CRVAL[12]|CD[12]_[12]|CDELT[12]|PC[12]_[12]|CUNIT[12]|RADESYS|LONPOLE)$/u.test(key))));
 }
 
-/** Each spaxel's offset from the star: arcsec east and north, and the distance (muse_sheets.py: the RA offset times the cosine of the star's declination). */
+/** Each spaxel's offset from the star: arcsec east and north, and the distance (the RA offset times the cosine of the star's declination). */
 export function spaxelOffsets(cube: Pick<HbetaCube, 'width' | 'height' | 'header'>): { east: Float64Array; north: Float64Array; r: Float64Array } {
   const projection = cubeProjection(cube.header), n = cube.width * cube.height, east = new Float64Array(n), north = new Float64Array(n), r = new Float64Array(n), cos = Math.cos(STAR_DEC_DEG * Math.PI / 180);
   for (let y = 0; y < cube.height; y++) for (let x = 0; x < cube.width; x++) {

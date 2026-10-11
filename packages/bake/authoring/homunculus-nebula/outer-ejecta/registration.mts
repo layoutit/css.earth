@@ -1,16 +1,16 @@
 /**
- * Image-to-image registration as the outer-ejecta scripts did it with scikit-image 0.26.0:
+ * Image-to-image registration as scikit-image 0.26.0 does it, for the outer-ejecta chain:
  *
  * - `phaseCrossCorrelation`: skimage.registration.phase_cross_correlation with space 'real', normalization 'phase',
- *   no disambiguation and no masks (hst_wfpc2.py ties each WFPC2 epoch to 2005 by the field stars' 31 x 31 windows,
+ *   no disambiguation and no masks (./hubble-epochs.mts ties each WFPC2 epoch to 2005 by the field stars' 31 x 31 windows,
  *   upsampled 20 times). The whole-pixel peak of the phase correlation, refined by a matrix-multiply DFT of the
  *   30 x 30 neighbourhood on the upsampled grid (Guizar-Sicairos et al. 2008).
- * - `matchTemplate`: skimage.feature.match_template with pad_input false (hst_fit.py follows each 2.4 arcsec tile
+ * - `matchTemplate`: skimage.feature.match_template with pad_input false (./hubble-motions.mts follows each 2.4 arcsec tile
  *   through the epochs): the normalized cross-correlation of the template with every window of the image that holds
  *   it whole.
  *
- * Both compute in double precision. The scripts passed single-precision arrays (scikit-image then works in single
- * precision), so the two agree to that precision, not bit for bit: the tests state the measured agreement.
+ * Both compute in double precision. scikit-image given the chain's single-precision arrays works in single
+ * precision, so the two agree to that precision, not bit for bit: the tests state the measured agreement.
  */
 import { fft2, ifft2, transformColumnsThenRows, transformRowsThenColumns, type Complex } from './fft.mts';
 
@@ -131,7 +131,7 @@ function workFor(rows: number, columns: number): CorrelationWork {
  * skimage's match_template(image, template) (pad_input false): for each placement of the template wholly inside the
  * image, (rows - templateRows + 1) x (columns - templateColumns + 1) of them, the correlation of the window with the
  * template less its mean, over the square roots of their sums of squares about their means. A window whose
- * denominator is not above `epsilon` (skimage: the working precision's epsilon, `FLOAT32_EPSILON` for the scripts'
+ * denominator is not above `epsilon` (skimage: the working precision's epsilon, `FLOAT32_EPSILON` for the chain's
  * single-precision images) is left at zero.
  *
  * The cross-correlation is circular over a power-of-two square at least as large as the image, which wraps nothing a

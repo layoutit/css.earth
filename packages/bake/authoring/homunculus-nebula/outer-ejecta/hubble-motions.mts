@@ -1,5 +1,5 @@
 /**
- * The motions of the outer ejecta across the sky (the original study's hst_fit.py): each 2.4 arcsec tile of the 2014.59
+ * The motions of the outer ejecta across the sky: each 2.4 arcsec tile of the 2014.59
  * epoch followed through every epoch, and a straight line of position against time fitted to where it is found.
  *
  * Each epoch's fine detail (a Gaussian blur of 1.5 pixels less one of 10, masked pixels 0) is put in units of its own

@@ -10,7 +10,7 @@ test('seeding gives the bit generator state NumPy reports', () => {
   assert.equal(defaultRng(5).state.inc, 0xaf6f7b8c936ab4a44f020b7b2d10234dn);
 });
 
-test('choice, normal and uniform interleave as gas_from_images.py draws them', () => {
+test('choice, normal and uniform interleave as the cloud dots draw them', () => {
   const rng = defaultRng(5), depths = [1.5, 2.5, 3.5, 4.5, 5.5, 6.5], got: number[] = [];
   for (let k = 0; k < 4; k++) got.push(rng.choice(depths), rng.normal(0, 1.0), rng.uniform(-0.3, 0.3), rng.uniform(-0.3, 0.3), rng.uniform(1, 4));
   assert.deepEqual(got, [5.5, -1.324358995628145, 0.009195336625285199, -0.12851917194711504, 1.1617921071449693, 5.5, 0.10970639932180819, -0.05491607674800081,

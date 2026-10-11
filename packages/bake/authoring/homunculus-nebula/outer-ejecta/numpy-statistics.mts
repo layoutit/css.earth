@@ -1,5 +1,5 @@
 /**
- * NumPy's reductions as the outer-ejecta scripts call them, to the last bit (NumPy 2.5.4, one-dimensional data):
+ * NumPy's reductions as the outer-ejecta chain uses them, to the last bit (NumPy 2.5.4, one-dimensional data):
  *
  * - `sum` and `mean`: `np.add.reduce` over contiguous data is NumPy's pairwise summation (fewer than eight values in
  *   order from -0; eight running sums over blocks of at most 128 values; longer runs split in halves on multiples of

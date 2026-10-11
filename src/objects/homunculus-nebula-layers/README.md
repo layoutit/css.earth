@@ -111,20 +111,7 @@ node packages/bake/cli/prepare-cloud-points.mts src/objects/homunculus-nebula-la
 
 The three screenshots above: the site's dev server in desktop Chrome on 2026-10-11, the default arrival camera, scaled to 941 × 455 px.
 
-**The chain against the original study.** The outer ejecta were first worked out in exploratory Python; [outer-ejecta.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta.mts) is its TypeScript port. Rerun twice, the Python gave the same bytes, so it is a fixed baseline. Each port stage was run on the Python's own inputs and compared (2026-10-11):
-
-| Stage | Result |
-| --- | --- |
-| Epochs on the grid | 97.3% to 99.95% of pixels bit-identical, the rest in float32's last bits |
-| Masks | No pixel differs |
-| Sky motions | 1,946 tiles against 1,932: 1,919 shared |
-| heic1912a registration, MUSE H-beta cube | Identical |
-| MUSE detections | 99.997% identical, the rest within 1 × 10⁻⁶ |
-| Knots | 85.7% of values bit-identical, 99% within 3 × 10⁻¹³; one knot's count of peaks differs (2 against 1), not its speed or depth |
-| Tube | Within 0.21° of tilt and 0.15″ of centre |
-| The three records, written from the Python's knots and tube | Identical |
-
-Only the sky motions differ. The Python's template matching computes in float32. In masked areas, which are zero, its rounding made false matches: one tile in 2020 matched at 0.925 across a 49 px jump, where float64 finds no match above 0.50. The Python's own fit, recomputed in float64, gives exactly the port's motions. The shipped records come from the port: 891 knots instead of 853, 7,358 dots instead of 7,384, and the tube within 0.8° and 0.54″ of the Python's.
+**The chain from the archives.** [outer-ejecta.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta.mts) was run from the archive downloads on 2026-10-11 and wrote the three source records shipped here: 891 knots, the tube and 7,358 dots. Rebaking from those records reproduces every prepared file byte for byte. Sky motions are matched in double precision: in the masked areas, which are zero, single-precision rounding can make a false match (a tile in 2020 scored 0.925 across a 49 px jump, where the true best is 0.496, below the 0.50 threshold).
 
 **Tests.** [chain.test.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/chain.test.mts) and the other tests beside it check the chain's numerical parts against NumPy, SciPy and Astropy values: a knot moving straight out gets depth over distance equal to v<sub>los</sub> / v<sub>tan</sub>, only clean outward tiles count, and a point on a straight tube's wall has no residual. [cloud-points.test.ts](../../../packages/objects/src/prepared-data/cloud/cloud-points.test.ts) and [cloud-segments.test.ts](../../../packages/objects/src/prepared-data/cloud/cloud-segments.test.ts) carry each bank through a file and back and refuse a malformed one. 61 of 61 pass (2026-10-11).
 

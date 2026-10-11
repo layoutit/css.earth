@@ -1,6 +1,6 @@
 /**
  * heic1912a (ESA/Hubble's [N II] composite of Eta Carinae) on the sky: its scale and the star's pixel, fitted against the
- * Gaia-aligned 2014.59 F658N epoch on the grid (the original study's register_heic.py). Both are north up.
+ * Gaia-aligned 2014.59 F658N epoch on the grid. Both are north up.
  *
  * Compared between 3 and 14 arcsec of the star on every second grid pixel of a 30-arcsec square: the epoch's log
  * brightness (after a Gaussian blur of 2 pixels, at least 1e-3) against heic1912a's red channel (blurred by 2 of its

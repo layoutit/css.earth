@@ -25,7 +25,7 @@ test('pythonJson writes what json.dumps writes', () => {
   assert.throws(() => pyInt(0.5), RangeError);
 });
 
-test('the source records Python wrote read back and rewrite to the same bytes', async t => {
+test('the tracked source records read back and rewrite to the same bytes', async t => {
   const source = resolve(import.meta.dirname, '../../../../../src/objects/homunculus-nebula-layers/source');
   for (const file of ['cloud-points.json', 'tube.json', 'kinematics.json']) {
     const text = await readFile(resolve(source, file), 'utf8').catch(() => undefined);
