@@ -57,8 +57,8 @@ export interface WorldContextView {
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
   orbitLodPixels?: number;
   anchorOnly: boolean;
-  /** The view has left the systems' scale, or also the galaxy's (prepared-world-context.ts setSystemRetired). */
-  systemRetired?: boolean; galaxyRetired?: boolean;
+  /** The view has left the systems' scale, or also the galaxy's (prepared-world-context.ts setSystemRetired). `orbitsOpacity` dims every orbit line nothing points at, under a picture laid among the orbits (setOrbitsOpacity). */
+  systemRetired?: boolean; galaxyRetired?: boolean; orbitsOpacity?: number;
   bodies: readonly WorldBodyPresentation[];
   contextCommittedId?: number;
 }
@@ -338,7 +338,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const ownOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity));
         const markerOpacity = ownOpacity * (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
-        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
+        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity * (hovered || highlighted ? 1 : view.orbitsOpacity ?? 1);
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
