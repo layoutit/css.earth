@@ -86,6 +86,18 @@ How the Worker behaves:
   submitted search (`q`) and everything a reader without scripts would get are not rendered.
 - The Worker answers every find request itself; the browser keeps an answer for five minutes.
 
+### Page views and referrers
+
+Cloudflare writes its Web Analytics beacon into the pages it serves ("Automatic setup" in the dashboard), so the
+repository holds no analytics code. Set to "Enable, excluding visitor data in the EU", that setup leaves out visitors in
+Europe: on 2026-10-11 it had no page views from the EU, the United Kingdom, Switzerland or Norway. `pnpm analytics [days]` reads the result through Cloudflare’s GraphQL Analytics API
+([the command](../deploy/cloudflare/analytics.mts)): page views and visits for each day, the referrers and the pages, for
+the last 7 days unless told otherwise. The dashboard shows a referrer’s host only; the API also gives its path.
+
+It needs `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_ANALYTICS_TOKEN`, an API token whose only permission is Account
+Analytics: Read. On macOS it also reads them from the Keychain, under the services `cssearth-cloudflare-account` and
+`cssearth-cloudflare-analytics`.
+
 ## ENSO daily refresh
 
 Earth's ENSO dataset steps through NASA's newest MUR analysis and the thirteen days before it. The
