@@ -5,6 +5,7 @@ import sharp from 'sharp';
 import { parseDatasetControl } from '../../../content/prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
+import { readPreparedControls } from '@cssearth/objects/node';
 import { objectThumbnail } from '@cssearth/bake/site-assets';
 
 const root = process.cwd();
@@ -87,18 +88,19 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
     await read(descriptorPath);
     const bank = parsePlaneBankDescriptor(descriptor), planePath = `src/objects/${bank.id}/${sourcePath(bank.url)}`, plane = readGalaxyBackingSource(await json(planePath));
     const texturePath = `src/objects/${bank.id}/prepared/${sourcePath(sourceObject(plane.leaf).texturePath)}`;
-    const contentPath = `src/objects/${bank.host}/source/content/object.json`;
-    const shown = sourceArray(sourceObject(sourceObject(await json(contentPath)).datasets).controls, sourceObject)
+    const controls = await readPreparedControls(resolve(root, 'src/objects', bank.host, 'prepared'));
+    const shown = sourceArray(sourceObject(sourceObject(controls).datasets).controls, sourceObject)
       .filter(control => control.volume !== undefined && sourceObject(control.volume).objectId === bank.id);
-    if (!shown.length) throw new TypeError(`${contentPath}: no dataset shows the plane ${bank.id}.`);
+    if (!shown.length) throw new TypeError(`src/objects/${bank.host}/prepared: no dataset shows the plane ${bank.id}.`);
     const { data, info } = await sharp(await read(texturePath)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     let most = 0;
     for (let at = 3; at < data.length; at += 4) most = Math.max(most, data[at]!);
     if (most === 0) throw new TypeError(`${texturePath}: the plane's picture is empty.`);
     for (let at = 3; at < data.length; at += 4) data[at] = Math.round(data[at]! * 255 / most);
     const picture = await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } }).png().toBuffer();
-    for (const control of shown) await makeThumbnail(bank.host, sourceId(control.id), picture, { inputs: [descriptorPath, planePath, texturePath, contentPath],
-      credit: sourceText(plane.source), sourceUrl: sourceText(sourceObject(control.source).url) });
+    // The plane's own record names where its picture comes from.
+    const credit = sourceText(plane.source), sourceUrl = /https?:\/\/[^\s),]+/u.exec(credit)?.[0] ?? '';
+    for (const control of shown) await makeThumbnail(bank.host, sourceId(control.id), picture, { inputs: [descriptorPath, planePath, texturePath], credit, sourceUrl });
   }
   if (sourceObject(descriptor).type !== 'density-volume') continue;
   await read(descriptorPath);
