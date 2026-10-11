@@ -17,3 +17,4 @@ export { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles } from
 export { imageLayerRingsCover, imageLayerRingsModel, imageLayerRingsSheet, RINGS_OPACITY_REACH_PIXELS } from './rings.ts';
 export { imageLayerRingsCells, imageLayerRingsCurtains, imageLayerRingsGlow, imageLayerRingsSheets } from './rings-volume.ts';
 export { removeForegroundStars, removeCompanionGalaxies } from './foreground.ts';
+export { prepareCloudOverlays, prepareImageLayerOverlays, readCloudSource, readTubeSource, readKinematicsSource } from './cloud-overlays.ts';
