@@ -4,6 +4,7 @@ import DatasetLegend from './DatasetLegend.astro';
 import DatasetThumbnail from './DatasetThumbnail.astro';
 import DatasetDescription from './DatasetDescription.astro';
 import SequencePlayer from './SequencePlayer.astro';
+import SelectedContent from './SelectedContent.astro';
 import { sidebarThumbnail } from '../content/sidebar-thumbnails.mts';
 interface Props {
   objectId: string;
@@ -35,6 +36,10 @@ const opening = (members: Control[]) => members[0]?.step?.opens === 'last' ? mem
 const listed = (dataset: Control) => !dataset.step || opening(stepMembers(dataset))?.id === dataset.id;
 const defaultControl = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
 const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultControl))?.id : defaultControl?.id;
+// A system's card lists the datasets authored for the whole system (ObjectInformationPanel.astro). When the body opens on
+// a dataset of its own, that dataset is the system's "Off": the same control, named there for what it does, so the card
+// always shows which entry is selected, as the Observable Universe's own Off does.
+const systemOffId = !page && defaultControl && !defaultControl.systemDataset && datasets.controls.some(dataset => dataset.systemDataset) ? defaultListedId : undefined;
 import Detached from './Detached.astro';
 ---
 <section id={`${objectId}-dataset-list`} class="object-datasets">
@@ -62,6 +67,7 @@ import Detached from './Detached.astro';
     <nav class="object-observation-controls" aria-label="Datasets">
       {datasets.controls.map((dataset) => (
         <div id={`${objectId}-${dataset.id}-option`} class="object-observation-option" data-dataset-option data-system-dataset={dataset.systemDataset ? dataset.id : undefined}
+          data-system-dataset-off={dataset.id === systemOffId ? '' : undefined}
           data-step-group={dataset.step?.group} data-step-autoplay={dataset.step?.autoplay === false ? 'false' : undefined}
           data-step-listed={dataset.step ? String(listed(dataset)) : undefined} hidden={!listed(dataset) || undefined}>
           <button
@@ -77,6 +83,7 @@ import Detached from './Detached.astro';
             <DatasetThumbnail class="object-dataset-icon" src={previewUrl(dataset)} />
             <span class="object-dataset-label">{dataset.label}</span>
             {dataset.detail && <span class="object-dataset-detail">{dataset.detail}</span>}
+            {dataset.id === systemOffId && <><span class="object-dataset-label" data-system-off>Off</span><span class="object-dataset-detail" data-system-off>No dataset</span></>}
           </button>
         </div>
       ))}
@@ -94,9 +101,12 @@ import Detached from './Detached.astro';
         id={`${objectId}-${dataset.id}-details`}
         data-dataset-details={page ? undefined : dataset.id}
         data-system-dataset-details={!page && dataset.systemDataset ? dataset.id : undefined}
+        data-system-off-details={dataset.id === systemOffId ? '' : undefined}
         data-page-dataset-details={page ? dataset.id : undefined}
         hidden={dataset.id !== datasets.defaultDataset}
       >
+        {dataset.id === systemOffId && <div data-system-off><SelectedContent title="Bodies and orbits only"
+          description="The system's bodies and their orbits, with none of its datasets drawn over them." /></div>}
         <DatasetDescription {dataset}>
           {dataset.texture && <div
               class="object-surface-minimap"

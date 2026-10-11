@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-habitable-zone-source@1",
+  "id": "trappist-1-habitable-zone",
+  "host": "trappist-1",
+  "edges": {
+    "source": "source/hzgallery/trappist-1.json",
+    "system": "TRAPPIST-1",
+    "fields": {
+      "optimisticInnerAu": "hz_r0_au",
+      "conservativeInnerAu": "hz_r1_au",
+      "conservativeOuterAu": "hz_r2_au",
+      "optimisticOuterAu": "hz_r3_au"
+    }
+  },
+  "plane": {
+    "orbits": [
+      "trappist-1b",
+      "trappist-1c",
+      "trappist-1d",
+      "trappist-1e",
+      "trappist-1f",
+      "trappist-1g",
+      "trappist-1h"
+    ]
+  },
+  "picture": {
+    "sizePx": 1024,
+    "outerRadiusPx": 500,
+    "color": "#7bd88f",
+    "conservativeOpacity": 0.16,
+    "optimisticOpacity": 0.075
+  },
+  "centreFadeOuterRadii": [
+    2,
+    1.25
+  ],
+  "meaning": "The habitable zone of TRAPPIST-1 as the Habitable Zone Gallery calculates it: the conservative zone between the runaway greenhouse and maximum greenhouse limits, and the optimistic zone that extends it to the recent Venus and early Mars limits (Kopparapu et al. 2013, 2014). A drawing of four calculated distances in the plane of the planets' orbits, not an observation."
+}

@@ -4,3 +4,4 @@ export * from './leaf-bounds.ts';
 export * from './volume-order.ts';
 export * from './volume.ts';
 export * from './volume-impostors.ts';
+export * from './plane-leaf.ts';

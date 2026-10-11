@@ -324,3 +324,40 @@ test('a nebula with a backing is drawn from afar on that one fixed plane, never 
   lifetime.destroy();
   assert.equal(root.querySelector('.prepared-galaxy-backing'), null, 'the scene takes its plane with it');
 });
+
+test('a plane a dataset shows draws on its prepared picture, and gives way as the camera closes on its centre', async () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const style = { width: '256px', height: '256px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,-128,-128,0,1)', backgroundSize: '256px 256px', backgroundPosition: '0px 0px' };
+  const loads: string[] = [];
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
+    planeBanks: [{ id: 'zone', frame }],
+    loadBacking: async id => { loads.push(id); return { payload: { id, frame, leaf: { texturePath: 'zone/zone.webp', style }, centreFadeM: [4, 2] as const }, resolveResource: path => `/${path}` }; } });
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as [number, number], widthPixels: 400, heightPixels: 300 };
+  const publish = (distanceM: number, shown?: string) =>
+    banks.publishPlanes({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, distanceM], orientationXyzw: [0, 0, 0, 1] } }, viewport, shown);
+  assert.deepEqual(banks.focusBank('zone')?.state()?.datasets.map(dataset => dataset.id), ['plane'], 'a dataset names it as a bank of one dataset');
+  publish(10);
+  publish(10, 'another-bank');
+  assert.deepEqual(loads, [], 'a plane no dataset shows is not read');
+  publish(10, 'zone');
+  await waitFor(() => assert.deepEqual(loads, ['zone'], 'read the first time a dataset shows it'));
+  publish(10, 'zone');
+  const plane = root.querySelector<HTMLElement>('.prepared-galaxy-backing > [data-galaxy-backing="zone"]')!;
+  const opacity = () => plane.style.display === 'none' ? 0 : Number(plane.style.opacity);
+  assert.equal(opacity(), 1, 'whole from beyond the far distance of its fade');
+  assert.equal(plane.querySelector('img')!.getAttribute('src'), '/zone/zone.webp');
+  publish(3, 'zone');
+  assert.ok(opacity() > 0 && opacity() < 1, `fading between its two distances, got ${opacity()}`);
+  publish(1.5, 'zone');
+  assert.equal(opacity(), 0, 'gone within the near distance');
+  publish(10, 'zone');
+  assert.equal(opacity(), 1);
+  publish(10);
+  assert.equal(opacity(), 0, 'hidden once the dataset no longer shows it');
+  banks.addPlaneBanks([{ id: 'zone', frame }]);
+  publish(10, 'zone');
+  assert.equal(root.querySelectorAll('[data-galaxy-backing="zone"]').length, 1, 'a known plane is not declared twice');
+  lifetime.destroy();
+});

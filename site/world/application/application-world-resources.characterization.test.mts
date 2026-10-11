@@ -166,12 +166,15 @@ isolatedTest('carried banks validate structure, ignore duplicates and unavailabl
   assert.throws(() => onEntry('host', { banks: [null] }), /expected a descriptor with its files/);
   assert.throws(() => onEntry('host', { banks: [{ files: [] }] }), /expected a descriptor with its files/);
   const carried = descriptor('carried', 'volume-dataset-bank', { frame }), points = descriptor('carried-points', 'catalogue-point-bank', { host: 'host' });
+  const plane = descriptor('carried-plane', 'plane-bank', { host: 'host', frame }, 'cssearth-galaxy-backing@1');
   onEntry('host', { banks: [{ descriptor: carried, files: filesFor('carried', carried) }, { descriptor: points, files: filesFor('carried-points', points) },
+    { descriptor: plane, files: filesFor('carried-plane', plane) },
     { descriptor: descriptor('unavailable', 'volume-dataset-bank', { frame }) }] });
   const effect = effects.at(-1); assert.ok(Array.isArray(effect));
-  assert.deepEqual(effect[1], { volumeDatasetBanks: [{ id: 'carried', frame }], pointBanks: [{ id: 'carried-points', url: '/fixture/carried-points/payload.json', host: 'host' }] });
-  onEntry('host', { banks: [{ descriptor: carried }] }); assert.deepEqual(effects.at(-1), ['banks', { volumeDatasetBanks: [], pointBanks: [] }]);
-  assert.throws(() => onEntry('host', { banks: [{ descriptor: descriptor('wrong', 'surface-shell') }] }), /an entry carries volume dataset banks and catalogue dots only/);
+  assert.deepEqual(effect[1], { volumeDatasetBanks: [{ id: 'carried', frame }], pointBanks: [{ id: 'carried-points', url: '/fixture/carried-points/payload.json', host: 'host' }],
+    planeBanks: [{ id: 'carried-plane', frame }] });
+  onEntry('host', { banks: [{ descriptor: carried }] }); assert.deepEqual(effects.at(-1), ['banks', { volumeDatasetBanks: [], pointBanks: [], planeBanks: [] }]);
+  assert.throws(() => onEntry('host', { banks: [{ descriptor: descriptor('wrong', 'surface-shell') }] }), /an entry carries volume dataset banks, catalogue dots and planes only/);
   const added = { ...APPLICATION_WORLD_CONTEXT.bodies[0]!, id: 'added-body' };
   const next = { ...APPLICATION_WORLD_CONTEXT, bodies: [...APPLICATION_WORLD_CONTEXT.bodies, added] };
   onSystems(next); onSystems(next);

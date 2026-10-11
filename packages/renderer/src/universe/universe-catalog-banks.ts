@@ -1,8 +1,8 @@
-import { createImageFocusBank, createPointFocusBank } from './prepared-focus-bank.js';
+import { createImageFocusBank, createPlaneFocusBank, createPointFocusBank } from './prepared-focus-bank.js';
 import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { type PreparedCatalogObject, type DensityVolumeFrame } from '@cssearth/objects';
-import { type WorldCameraPose } from '@cssearth/engine';
+import { eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { enteredVolumeOpacity, outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits, volumeHolds } from '../volume/projected-volume-visibility.js';
@@ -11,6 +11,7 @@ import { mountDatasetBillboards } from './dataset-billboards.js';
 import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
+import { logarithmicFade } from './world-context/context-scale.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions, PreparedImageLayerMount } from './prepared-universe-types.js';
 
 interface ImageBank {
@@ -41,7 +42,7 @@ interface ImageBank {
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
   initialCatalog, catalogBank, loadCatalog, loadImageLayer, loadBacking, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardImage,
-  pointBanks = [], imagesBefore = end, picturesBefore = imagesBefore }: {
+  pointBanks = [], planeBanks = [], imagesBefore = end, picturesBefore = imagesBefore }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   /** Where a galaxy's billboard and its image slices mount: under the world's dot layer, so its catalogue's dots and its
    * stars' show over its picture. Without one they mount where every other layer does. */
@@ -66,6 +67,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   billboards?: PreparedUniverseOptions['datasetBillboards'];
   /** Packages that are only catalogue dots (PreparedUniverseOptions.pointBanks). */
   pointBanks?: PreparedUniverseOptions['pointBanks'];
+  /** Packages that are only a picture on a plane in their host's system (PreparedUniverseOptions.planeBanks). */
+  planeBanks?: PreparedUniverseOptions['planeBanks'];
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
@@ -83,6 +86,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   // A package that is only catalogue dots mounts them the first time its catalogue row is selected; they draw while it is.
   const points = (pointBanks ?? []).map(bank => ({ id: bank.id, url: bank.url, host: bank.host, stars: bank.stars === true, mounted: null as ReturnType<typeof mountCataloguePoints> | null }));
   lifetime.onDispose(() => { for (const bank of points) { bank.mounted?.destroy(); bank.mounted = null; } });
+  // A package that is only a plane around a body is drawn on the same fixed planes, under the dots.
+  const planes = (planeBanks ?? []).map(bank => ({ id: bank.id, far: farPlanes.add(bank.id, bank.frame) }));
   const billboardEntries = images.flatMap(bank => {
     const billboard = prepared?.plan.banks.get(bank.id)?.billboard;
     return billboard ? [{ id: bank.id, frame: bank.frame, billboard }] : [];
@@ -186,8 +191,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     focusBank(id: string) {
       const bank = byId.get(id);
       if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank));
-      // A bank of dots has one dataset, its members; the dots mount when they are first shown.
-      return points.some(point => point.id === id) ? createPointFocusBank(id) : null;
+      // A bank of dots has one dataset, its members, and a plane has one, its picture; each mounts when it is first shown.
+      return points.some(point => point.id === id) ? createPointFocusBank(id) : planes.some(plane => plane.id === id) ? createPlaneFocusBank(id) : null;
     },
     /** Draw the selected package's catalogue dots, and those of the selected body's system (`systemIds`: the body and the
      * centre it orbits), and hide every other's. `stars`: a bank of plain-dot stars draws too while the selected body is
@@ -204,6 +209,24 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         const shown = selected && bank.stars ? stars?.look() : undefined;
         if (shown) bank.mounted.publish({ world, viewport }, shown.opacity, shown.hiddenAtM);
         else bank.mounted.publish({ world, viewport }, selected ? 1 : 0);
+      }
+    },
+    /** Planes declared after mount (their host's entry brought them); a known id is ignored. */
+    addPlaneBanks(added: NonNullable<PreparedUniverseOptions['planeBanks']>) {
+      if (lifetime.disposed) return;
+      for (const bank of added) if (!planes.some(plane => plane.id === bank.id)) planes.push({ id: bank.id, far: farPlanes.add(bank.id, bank.frame) });
+    },
+    /** Draw the plane the mounted scene's dataset shows (`selectedObjectId`), and hide every other. A plane shows once it
+     * is large enough to read, as a bank's far picture does, and gives way as the camera closes on its centre, over the
+     * distances its payload states (`centreFadeM`): among the bodies it lies between, a plane seen along itself is a line
+     * across the view. */
+    publishPlanes(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string) {
+      if (lifetime.disposed) return;
+      for (const { id, far } of planes) {
+        const centre = far.loaded?.payload.centreFadeM;
+        const opacity = id !== selectedObjectId ? 0 : projectedVolumeOpacity(world, viewport, far.frame, far.radiusUnits) *
+          (centre ? logarithmicFade(eyeDistanceM(world.pose, far.frame.originM), centre[1], centre[0]) : 1);
+        farPlanes.publish(far, opacity, world, viewport, coasting);
       }
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */

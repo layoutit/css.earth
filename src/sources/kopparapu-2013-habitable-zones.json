@@ -1,0 +1,53 @@
+{
+  "id": "kopparapu-2013-habitable-zones",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Habitable Zones around Main-sequence Stars: New Estimates",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/765/2/131"
+    },
+    {
+      "type": "ads",
+      "value": "2013ApJ...765..131K"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/765/2/131",
+      "label": "10.1088/0004-637X/765/2/131"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://hzgallery.org/about.html",
+      "checkedOn": "2026-10-10",
+      "locator": "The Habitable Zone Gallery names this paper as the method of its boundaries, with Kopparapu et al. (2014)."
+    }
+  ],
+  "creators": [
+    "R. K. Kopparapu",
+    "R. Ramirez",
+    "J. F. Kasting",
+    "V. Eymet",
+    "T. D. Robinson",
+    "S. Mahadevan",
+    "R. C. Terrien",
+    "S. Domagal-Goldman",
+    "V. Meadows",
+    "R. Deshpande"
+  ],
+  "publisher": "ApJ 765, 131",
+  "publicationDate": "2013",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kopparapu et al. (2013), ApJ 765, 131.",
+      "scope": "The limits of TRAPPIST-1's habitable zone",
+      "evidence": "https://hzgallery.org/about.html"
+    }
+  ]
+}

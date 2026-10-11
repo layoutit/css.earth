@@ -77,8 +77,8 @@ export function splitContextObjectAssets(contexts: readonly { id: string; type?:
 }
 
 /** A bank the world draws only for the bodies that hold it travels with them, in their object entries
- * (`pages/objects/[id]/entry.json.ts`), not in every page's code: a package of catalogue dots, drawn while its host or a
- * body that orbits it is selected, or a dataset names it; and a cloud attached to a body (its source recipe's
+ * (`pages/objects/[id]/entry.json.ts`), not in every page's code: a package of catalogue dots or of one plane (a star's
+ * habitable zone), drawn while its host or a body that orbits it is selected, or a dataset names it; and a cloud attached to a body (its source recipe's
  * `attachedTo`), drawn only while a dataset shows it. Each names the objects that carry it: its host, the body it is
  * attached to and the entries whose datasets show it (`datasetBanks`). Every other bank is drawn from any page (a
  * galaxy's image layers and a free nebula show their billboards from everywhere), so the world knows it at startup. */
@@ -86,7 +86,7 @@ export async function readHostedContextBanks(contexts: readonly { id: string; ty
   datasetBanks: readonly (readonly [string, string])[], projectRoot: string) {
   const hosted: Record<string, string[]> = {};
   for (const { id, type } of contexts) {
-    if (type !== 'catalogue-point-bank' && type !== 'volume-dataset-bank') continue;
+    if (type !== 'catalogue-point-bank' && type !== 'volume-dataset-bank' && type !== 'plane-bank') continue;
     const descriptor = descriptors.get(id), path = `src/objects/${id}/object.json`;
     if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`${path}: a bank's descriptor has properties.`);
     const { host, preparation } = descriptor.properties;

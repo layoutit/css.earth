@@ -21,7 +21,7 @@ to clean up before `SIGKILL`; the parent then preserves the received signal. An 
 | `@cssearth/bake/raster` | raster recipes, surface maps, pages and poles, lighting banks, atmospheres and halos, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/scene` | geometry profiles, projected surface leaves, polar caps, ring wedges, cutaways, solid-body surfaces | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/presentation` | the retained node tree, leaf boxes, offline CSSOM reads, activation groups, authored presentation-envelope checks, cubic-sky and directional-Sun standards and preparers (shared formats: `@cssearth/objects`) | Node only (`node:*`, Playwright) |
-| `@cssearth/bake/volume-leaves` | slice stacks as retained PolyCSS leaves, depth order, volume impostors | Node only (`node:*`, PolyCSS) |
+| `@cssearth/bake/volume-leaves` | slice stacks as retained PolyCSS leaves, depth order, volume impostors, the leaf of one picture on a plane | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/stars` | point-field recipes, catalogue sources, point atlas and photometry, the encoded point bank | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/shell` | surface-shell recipes, meshes and atlas, the CSS shell compiler | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/sky` | cubic sky recipes, the EXR source, baked faces, the CSS sky compiler | Node only (`node:*`, `sharp`) |
