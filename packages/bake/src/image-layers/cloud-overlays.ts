@@ -13,7 +13,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { encodeCloudPoints, encodeCloudSegments, encodePreparedBank, parseObjectDescriptor, readCloudPoints, readCloudSegments, parseDensityVolumeFrame } from '@cssearth/objects';
 import { packPreparedBinary } from '@cssearth/objects/node';
-import { writeLossyWebp } from '../raster/lossy-lane.ts';
+import { writeLossyWebp } from '../raster/index.ts';
 import { basisSpansSpace, rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 
 /** Clusters: about 25 dots each, small enough that their dots barely shift against each other as the view turns. */
