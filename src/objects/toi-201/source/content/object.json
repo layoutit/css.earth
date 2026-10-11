@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.32 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+          "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,423 K",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+          "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "2.6 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+          "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+          "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "670 million years",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+          "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "53.0 days",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+          "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

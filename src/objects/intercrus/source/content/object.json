@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.7 solar masses",
+        "source": {
+          "catalogueId": "gaia-dr3-intercrus",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,026 K",
+        "source": {
+          "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+          "url": "https://doi.org/10.1051/0004-6361/202243462",
+          "label": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Andrae et al. (2023), A&A 674, A27",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "60 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psad056",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract",
+          "label": "Teng et al. (2023), Publications of the Astronomical Society of Japan 75 1030-1071",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K0 III-IV",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psad056",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract",
+          "label": "Teng et al. (2023), Publications of the Astronomical Society of Japan 75 1030-1071",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.5 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201424474",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J/abstract",
+          "label": "Jofré et al. (2015), Astronomy & Astrophysics 574 A50",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -16,6 +16,8 @@
   "objectTypeSource": "SIMBAD, TOI-1105: main object type V*, Variable Star",
   "luminosityLogSolar": -0.613,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1105 (pscomppars): log10 of the luminosity in solar units -0.61342, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "massSolar": 0.7371,
+  "massSource": "Mass 0.737 (0.697 to 0.777) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

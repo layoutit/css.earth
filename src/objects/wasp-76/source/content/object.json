@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,329 K",
+        "source": {
+          "catalogueId": "arxiv-2003-05528",
+          "url": "https://arxiv.org/abs/2003.05528",
+          "label": "Ehrenreich et al. (2020)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "4.5 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac1200",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..108F/abstract",
+          "label": "Fu et al. (2021), The Astronomical Journal 162 108",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F7",
+        "source": {
+          "catalogueId": "arxiv-2003-05528",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020Natur.580..597E/abstract",
+          "label": "Ehrenreich et al. (2020)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.8 billion years",
+        "source": {
+          "catalogueId": "arxiv-2003-05528",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020Natur.580..597E/abstract",
+          "label": "Ehrenreich et al. (2020)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

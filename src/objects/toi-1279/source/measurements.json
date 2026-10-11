@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1279 (pscomppars): log10 of the luminosity in solar units -0.24336, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 4.2,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1279 (pscomppars): age 4.2 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "massSolar": 0.8784,
+  "massSource": "Mass 0.8784 +/- 0.0267 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1279 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.519 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556887",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+          "label": "Lamontagne et al. (2026), Astronomy & Astrophysics 706 A278",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,707 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556887",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+          "label": "Lamontagne et al. (2026), Astronomy & Astrophysics 706 A278",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.045 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556887",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+          "label": "Lamontagne et al. (2026), Astronomy & Astrophysics 706 A278",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556887",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+          "label": "Lamontagne et al. (2026), Astronomy & Astrophysics 706 A278",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "17.9 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556887",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+          "label": "Lamontagne et al. (2026), Astronomy & Astrophysics 706 A278",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

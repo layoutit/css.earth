@@ -24,6 +24,8 @@
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2881784280929695360, flags_flame 00: age_flame 2.4038742 Gyr (16th to 84th percentiles 1.9501057 to 2.8623726)",
   "projectedRotationSpeedKmS": 56,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-1 (pscomppars): projected rotation speed 56 km/s, from Siverd et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract)",
+  "massSolar": 1.335,
+  "massSource": "Mass 1.335 +/- 0.063 solar masses from Siverd et al. 2012, the stellar mass of the default parameter set of KELT-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

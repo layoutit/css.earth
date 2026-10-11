@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1173 (pscomppars): age 8.7 Gyr, from Galarza et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1173 (pscomppars): projected rotation speed 2 km/s, from Galarza et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G/abstract)",
+  "massSolar": 0.911,
+  "massSource": "Mass 0.911 +/- 0.028 solar masses from Galarza et al. 2024, the stellar mass of TOI-1173 b's parameter set from Galarza et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

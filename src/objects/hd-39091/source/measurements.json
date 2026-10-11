@@ -40,6 +40,8 @@
   ],
   "projectedRotationSpeedKmS": 3.34,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): projected rotation speed 3.34 km/s, from Hatzes et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract)",
+  "massSolar": 1.07,
+  "massSource": "Mass 1.07 +/- 0.04 solar masses from Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar mass of the default parameter set of pi Men c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

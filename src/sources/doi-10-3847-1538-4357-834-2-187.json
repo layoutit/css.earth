@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4357-834-2-187",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Benneke et al. (2017): SPITZER OBSERVATIONS CONFIRM AND RESCUE THE HABITABLE-ZONE SUPER-EARTH K2-18b FOR FUTURE CHARACTERIZATION",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1610.07249"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/834/2/187"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017ApJ...834..187B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...834..187B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/834/2/187",
+      "label": "The Astrophysical Journal 834 187"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...834..187B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Benneke et al. (2017), The Astrophysical Journal 834 187",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017ApJ...834..187B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 834 187",
+  "creators": [
+    "Björn Benneke",
+    "Michael Werner",
+    "Erik Petigura",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2602-10919",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Xiao et al. (2026): HD 164604 c: a second giant planet on a 15-yr orbit and the constraint of the planet-planet mutual inclination",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2602.10919"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026arXiv260210919X"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260210919X",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260210919X",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Xiao et al. (2026)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026arXiv260210919X"
+    }
+  ],
+  "creators": [
+    "Guang-Yao Xiao",
+    "Fabo Feng",
+    "R. Paul Butler",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

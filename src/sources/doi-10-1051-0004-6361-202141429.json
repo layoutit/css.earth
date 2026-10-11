@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202141429",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Heidari et al. (2022): HD 207897 b: A dense sub-Neptune transiting a nearby and bright K-type star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2110.08597"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202141429"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...658A.176H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A.176H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202141429",
+      "label": "Astronomy & Astrophysics 658 A176"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A.176H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Heidari et al. (2022), Astronomy & Astrophysics 658 A176",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A.176H"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 658 A176",
+  "creators": [
+    "N. Heidari",
+    "I. Boisse",
+    "J. Orell-Miquel",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

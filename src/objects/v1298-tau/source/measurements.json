@@ -63,6 +63,8 @@
   "rotationPeriodMeasuredDays": 2.84,
   "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 4 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 2.84 d, the light swinging by 4.6% as the star turns",
   "rotationLightSwingPercent": 4.55,
+  "massSolar": 1.1,
+  "massSource": "Mass 1.1 +/- 0.05 solar masses from Livingston et al. 2026, the stellar mass of the default parameter set of V1298 Tau c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

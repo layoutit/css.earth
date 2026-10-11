@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.04 solar masses",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,735 K",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G5V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad2765",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..151H/abstract",
+          "label": "Hill et al. (2024), The Astronomical Journal 167 151",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.2 billion years",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

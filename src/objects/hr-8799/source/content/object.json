@@ -56,6 +56,45 @@
           "path": "source/measurements.json",
           "locator": "effectiveTemperatureK; effectiveTemperatureSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "5.4 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-6256-152-2-28",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...28K/abstract",
+          "label": "Konopacky et al. (2016), The Astronomical Journal 152 28",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "A5",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201935253",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G/abstract",
+          "label": "GRAVITY Collaboration (2019), Astronomy & Astrophysics 623 L11",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "30 million years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201935253",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G/abstract",
+          "label": "GRAVITY Collaboration (2019), Astronomy & Astrophysics 623 L11",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

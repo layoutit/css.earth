@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.17 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-128-964-064401",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+          "label": "Turner et al. (2016), Publications of the Astronomical Society of the Pacific 128 064401",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,740 K",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-128-964-064401",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+          "label": "Turner et al. (2016), Publications of the Astronomical Society of the Pacific 128 064401",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.5 times the Sun's",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G5",
+        "source": {
+          "catalogueId": "doi-10-1002-asna-20224012",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+          "label": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.9 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-ac9da4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+          "label": "Kokori et al. (2023), The Astrophysical Journal Supplement Series 265 4",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

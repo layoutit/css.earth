@@ -43,6 +43,8 @@
   "rotationPeriodMeasuredDays": 18.1,
   "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 6 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 18.1 d, the light swinging by 1.5% as the star turns",
   "rotationLightSwingPercent": 1.51,
+  "massSolar": 0.743,
+  "massSource": "Mass 0.743 +/- 0.021 solar masses from Mancini et al. 2014, the stellar mass of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

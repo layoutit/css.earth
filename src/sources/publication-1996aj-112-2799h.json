@@ -1,0 +1,36 @@
+{
+  "id": "publication-1996aj-112-2799h",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 1996AJ....112.2799H, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "1996AJ....112.2799H"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1996AJ....112.2799H",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/1996AJ....112.2799H",
+      "checkedOn": "2026-10-11",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/1996AJ....112.2799H"
+    }
+  ],
+  "publicationDate": "1996"
+}

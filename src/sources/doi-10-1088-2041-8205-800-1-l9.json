@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-2041-8205-800-1-l9",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Anderson et al. (2015): THE WELL-ALIGNED ORBIT OF WASP-84b: EVIDENCE FOR DISK MIGRATION OF A HOT JUPITER",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1409.6335"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/800/1/L9"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...800L...9A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800L...9A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/800/1/L9",
+      "label": "The Astrophysical Journal 800 L9"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800L...9A",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Anderson et al. (2015), The Astrophysical Journal 800 L9",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800L...9A"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 800 L9",
+  "creators": [
+    "D. R. Anderson",
+    "A. H. M. J. Triaud",
+    "O. D. Turner",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

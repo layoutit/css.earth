@@ -22,6 +22,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2049 (pscomppars): age 2.2 Gyr, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
   "projectedRotationSpeedKmS": 16,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2049 (pscomppars): projected rotation speed 16 km/s, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
+  "massSolar": 1.57,
+  "massSource": "Mass 1.57 +/- 0.03 solar masses from Guenther et al. 2026, the stellar mass of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

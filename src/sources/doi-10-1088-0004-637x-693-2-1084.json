@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-693-2-1084",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wright et al. (2009): TEN NEW AND UPDATED MULTIPLANET SYSTEMS AND A SURVEY OF EXOPLANETARY SYSTEMS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0812.1582"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/693/2/1084"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009ApJ...693.1084W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...693.1084W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/693/2/1084",
+      "label": "The Astrophysical Journal 693 1084-1099"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...693.1084W",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wright et al. (2009), The Astrophysical Journal 693 1084-1099",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009ApJ...693.1084W"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 693 1084-1099",
+  "creators": [
+    "J. T. Wright",
+    "S. Upadhyay",
+    "G. W. Marcy",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

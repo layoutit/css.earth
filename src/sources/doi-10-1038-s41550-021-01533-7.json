@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1038-s41550-021-01533-7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mascareño et al. (2022): Rapid contraction of giant planets orbiting the 20-million-year-old star V1298 Tau",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2111.09193"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41550-021-01533-7"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022NatAs...6..232S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..232S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41550-021-01533-7",
+      "label": "Nature Astronomy 6 232-240"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..232S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mascareño et al. (2022), Nature Astronomy 6 232-240",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..232S"
+    }
+  ],
+  "publisher": "Nature Astronomy 6 232-240",
+  "creators": [
+    "A. Suárez Mascareño",
+    "M. Damasso",
+    "N. Lodieu",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

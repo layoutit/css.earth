@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202244790",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ehrenreich et al. (2023): A full transit of <i>v</i><sup>2</sup> Lupi d and the search for an exomoon in its Hill sphere with CHEOPS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2302.01853"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202244790"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...671A.154E"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.154E",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202244790",
+      "label": "Astronomy & Astrophysics 671 A154"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.154E",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ehrenreich et al. (2023), Astronomy & Astrophysics 671 A154",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.154E"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 671 A154",
+  "creators": [
+    "D. Ehrenreich",
+    "L. Delrez",
+    "B. Akinsanmi",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

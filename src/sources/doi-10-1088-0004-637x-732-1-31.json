@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1088-0004-637x-732-1-31",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tinney et al. (2011): THE ANGLO-AUSTRALIAN PLANET SEARCH. XXI. A GAS-GIANT PLANET IN A ONE YEAR ORBIT AND THE HABITABILITY OF GAS-GIANT SATELLITES",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/732/1/31"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJ...732...31T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...732...31T",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...732...31T",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Tinney et al. (2011), The Astrophysical Journal 732 31",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJ...732...31T"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 732 31",
+  "creators": [
+    "C. G. Tinney",
+    "Robert A. Wittenmyer",
+    "R. Paul Butler",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

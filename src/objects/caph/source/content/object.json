@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,825 K",
+        "source": {
+          "catalogueId": "arxiv-1105-0740",
+          "url": "https://arxiv.org/abs/1105.0740",
+          "label": "Colder and Hotter: Interferometric imaging of beta Cassiopeiae and alpha Leonis",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

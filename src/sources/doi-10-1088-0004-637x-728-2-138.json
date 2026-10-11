@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-728-2-138",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hartman et al. (2011): HAT-P-26b: A LOW-DENSITY NEPTUNE-MASS PLANET TRANSITING A K STAR",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1010.1008"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/728/2/138"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJ...728..138H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...728..138H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/728/2/138",
+      "label": "The Astrophysical Journal 728 138"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...728..138H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hartman et al. (2011), The Astrophysical Journal 728 138",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJ...728..138H"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 728 138",
+  "creators": [
+    "J. D. Hartman",
+    "G. Á. Bakos",
+    "D. M. Kipping",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

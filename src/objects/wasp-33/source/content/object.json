@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.5 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+          "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "7,430 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+          "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "6.6 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-2041-8205-810-2-l23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810L..23J/abstract",
+          "label": "Johnson et al. (2015), The Astrophysical Journal 810 L23",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "A",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stac620",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.512.4404W/abstract",
+          "label": "Watanabe et al. (2022), Monthly Notices of the Royal Astronomical Society 512 4404-4418",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "870 million years",
+        "source": {
+          "catalogueId": "gaia-dr3-wasp-33",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -16,6 +16,8 @@
   "objectType": "Red Giant Branch star",
   "objectTypePath": "* > Ev* > RG*",
   "objectTypeSource": "SIMBAD, TYC 3134-1502-1: main object type RG*, Red Giant Branch star",
+  "massSolar": 1.5025,
+  "massSource": "Mass (Mosser scale, solar masses) 1.5025 +/- 0.0578 (https://arxiv.org/abs/2410.00102). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ab8bcc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Knapp et al. (2020): Demonstrating High-precision Photometry with a CubeSat: ASTERIA Observations of 55 Cancri e",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2005.14155"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab8bcc"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....160...23K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...23K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab8bcc",
+      "label": "The Astronomical Journal 160 23"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...23K",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Knapp et al. (2020), The Astronomical Journal 160 23",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...23K"
+    }
+  ],
+  "publisher": "The Astronomical Journal 160 23",
+  "creators": [
+    "Mary Knapp",
+    "Sara Seager",
+    "Brice-Olivier Demory",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

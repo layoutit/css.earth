@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad7fe7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sing et al. (2024): An Absolute Mass, Precise Age, and Hints of Planetary Winds for WASP-121A and b from a JWST NIRSpec Phase Curve",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2501.03844"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad7fe7"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....168..231S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..231S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad7fe7",
+      "label": "The Astronomical Journal 168 231"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..231S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sing et al. (2024), The Astronomical Journal 168 231",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..231S"
+    }
+  ],
+  "publisher": "The Astronomical Journal 168 231",
+  "creators": [
+    "David K. Sing",
+    "Thomas M. Evans-Soma",
+    "Zafar Rustamkulov",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

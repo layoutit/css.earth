@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.05 solar masses",
+        "source": {
+          "catalogueId": "gaia-dr3-sika",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,783 K",
+        "source": {
+          "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+          "url": "https://doi.org/10.1051/0004-6361/202243462",
+          "label": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Andrae et al. (2023), A&A 674, A27",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.9 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913489",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A%26A...512A..47S/abstract",
+          "label": "Santos et al. (2010), Astronomy and Astrophysics 512 A47",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G1 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913489",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A%26A...512A..47S/abstract",
+          "label": "Santos et al. (2010), Astronomy and Astrophysics 512 A47",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "8.8 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-sika",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

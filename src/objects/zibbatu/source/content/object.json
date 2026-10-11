@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,136 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "3.8 times the Sun's",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.9 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-zibbatu",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

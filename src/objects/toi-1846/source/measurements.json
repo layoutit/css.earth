@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1846 (pscomppars): log10 of the luminosity in solar units -1.63714, from Soubkiou et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract)",
   "ageGyr": 7.2,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1846 (pscomppars): age 7.2 Gyr, from Soubkiou et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract)",
+  "massSolar": 0.418,
+  "massSource": "Mass 0.418 +/- 0.025 solar masses from Soubkiou et al. 2025, the stellar mass of the default parameter set of TOI-1846 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

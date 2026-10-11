@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac1b31",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hill et al. (2021): Asteroseismology of iota Draconis and Discovery of an Additional Long-period Companion",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2107.13583"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac1b31"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....162..211H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..211H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac1b31",
+      "label": "The Astronomical Journal 162 211"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..211H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hill et al. (2021), The Astronomical Journal 162 211",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..211H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 211",
+  "creators": [
+    "Michelle L. Hill",
+    "Stephen R. Kane",
+    "Tiago L. Campante",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

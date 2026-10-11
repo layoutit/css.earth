@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.15 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract",
+          "label": "Nicholson et al. (2024), Monthly Notices of the Royal Astronomical Society 532 4632-4644",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,310 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract",
+          "label": "Nicholson et al. (2024), Monthly Notices of the Royal Astronomical Society 532 4632-4644",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "2.8 times the Sun's",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab1253",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.1827E/abstract",
+          "label": "Eisner et al. (2021), Monthly Notices of the Royal Astronomical Society 505 1827-1840",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract",
+          "label": "Nicholson et al. (2024), Monthly Notices of the Royal Astronomical Society 532 4632-4644",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

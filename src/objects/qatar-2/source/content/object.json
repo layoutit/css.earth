@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.743 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stu1286",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+          "label": "Mancini et al. (2014), Monthly Notices of the Royal Astronomical Society 443 2391-2409",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,645 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stu1286",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+          "label": "Mancini et al. (2014), Monthly Notices of the Royal Astronomical Society 443 2391-2409",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.21 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw1373",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract",
+          "label": "Pope et al. (2016), Monthly Notices of the Royal Astronomical Society 461 3399-3409",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stu1286",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+          "label": "Mancini et al. (2014), Monthly Notices of the Royal Astronomical Society 443 2391-2409",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "18.0 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1557",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.471..394M/abstract",
+          "label": "Močnik et al. (2017), Monthly Notices of the Royal Astronomical Society 471 394-403",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

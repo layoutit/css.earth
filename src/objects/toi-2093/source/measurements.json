@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2093 (pscomppars): rotation period 43.8 d, from Sanz-Forcada et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2093 (pscomppars): projected rotation speed 2 km/s, from Sanz-Forcada et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract)",
+  "massSolar": 0.745,
+  "massSource": "Mass 0.745 +/- 0.034 solar masses from Sanz-Forcada et al. 2025, the stellar mass of the default parameter set of TOI-2093 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

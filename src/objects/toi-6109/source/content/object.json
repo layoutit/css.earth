@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.03 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae0a35",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+          "label": "Dattilo et al. (2025), The Astronomical Journal 170 318",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,660 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae0a35",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+          "label": "Dattilo et al. (2025), The Astronomical Journal 170 318",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.88 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae0a35",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+          "label": "Dattilo et al. (2025), The Astronomical Journal 170 318",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G3",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae0a35",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+          "label": "Dattilo et al. (2025), The Astronomical Journal 170 318",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "75 million years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae0a35",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+          "label": "Dattilo et al. (2025), The Astronomical Journal 170 318",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "3.0 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae0a35",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+          "label": "Dattilo et al. (2025), The Astronomical Journal 170 318",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

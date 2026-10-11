@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.425 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag367",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+          "label": "Jiang et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag367",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,435 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag367",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+          "label": "Jiang et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag367",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.018 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag367",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+          "label": "Jiang et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag367",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag367",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+          "label": "Jiang et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag367",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

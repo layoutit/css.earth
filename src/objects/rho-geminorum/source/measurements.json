@@ -25,6 +25,8 @@
   "rotationPeriodMeasuredDays": 1.36,
   "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 20, 44, 45, 46, 47, 60, 71 and 72 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 1.36 d, the light swinging by 0.09% as the star turns",
   "rotationLightSwingPercent": 0.09,
+  "massSolar": 1.355,
+  "massSource": "Mass 1.355 +/- 0.013 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 58946: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.355 +/- 0.013 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 478) (photometry/stellar-color.json); no image of the photosphere exists."

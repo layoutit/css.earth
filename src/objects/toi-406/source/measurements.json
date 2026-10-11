@@ -22,6 +22,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-406 (pscomppars): log10 of the luminosity in solar units -1.71444, from Lacedelli et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract)",
   "rotationPeriodDays": 29.2,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-406 (pscomppars): rotation period 29.2 d, from Lacedelli et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract)",
+  "massSolar": 0.408,
+  "massSource": "Mass 0.408 +/- 0.046 solar masses from Lacedelli et al. 2024, the stellar mass of the default parameter set of TOI-406 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

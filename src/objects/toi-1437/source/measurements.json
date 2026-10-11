@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1437 (pscomppars): age 6.7 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
   "projectedRotationSpeedKmS": 5.14,
   "projectedRotationSpeedSource": "SIMBAD, HD 154840: projected rotation speed 5.14 km/s, the measurement SIMBAD prefers (2020AJ....160..120J)",
+  "massSolar": 1.1,
+  "massSource": "Mass 1.1 +/- 0.1 solar masses from Pidhorodetska et al. 2024, the stellar mass of the default parameter set of TOI-1437 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..135P/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

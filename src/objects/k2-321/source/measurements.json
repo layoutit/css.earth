@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-321 (pscomppars): log10 of the luminosity in solar units -1.20066, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "ageGyr": 10.874,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3856449627544923392, flags_flame 00: age_flame 10.874001 Gyr (16th to 84th percentiles 6.185155 to 13.5)",
+  "massSolar": 0.578,
+  "massSource": "Mass 0.578 +/- 0.03 solar masses from Thygesen et al. 2023, the stellar mass of the default parameter set of K2-321 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -34,6 +34,8 @@
   ],
   "projectedRotationSpeedKmS": 3.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-52 (pscomppars): projected rotation speed 3.6 km/s, from Hebrard et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract)",
+  "massSolar": 0.87,
+  "massSource": "Mass 0.87 +/- 0.03 solar masses from Hebrard et al. 2013, the stellar mass of the default parameter set of WASP-52 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

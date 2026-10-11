@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.76 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+          "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,050 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+          "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "5.9 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F8",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201220727",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...552A.120S/abstract",
+          "label": "Smith et al. (2013), Astronomy & Astrophysics 552 A120",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201629882",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+          "label": "Bonomo et al. (2017), Astronomy & Astrophysics 602 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

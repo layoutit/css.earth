@@ -1,0 +1,53 @@
+{
+  "id": "doi-10-1111-j-1365-2966-2012-21756-x",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Southworth (2012): Homogeneous studies of transiting extrasolar planets - V. New results for 38 planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1207.5796"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2012.21756.x"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012MNRAS.426.1291S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012MNRAS.426.1291S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2012.21756.x",
+      "label": "Monthly Notices of the Royal Astronomical Society 426 1291-1323"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012MNRAS.426.1291S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Southworth (2012), Monthly Notices of the Royal Astronomical Society 426 1291-1323",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012MNRAS.426.1291S"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 426 1291-1323",
+  "creators": [
+    "John Southworth"
+  ],
+  "publicationDate": "2012"
+}

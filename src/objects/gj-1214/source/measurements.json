@@ -44,6 +44,8 @@
   ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 1214 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "massSolar": 0.182,
+  "massSource": "Mass 0.182 +/- 0.0042 solar masses from Mahajan et al. 2024, the stellar mass of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

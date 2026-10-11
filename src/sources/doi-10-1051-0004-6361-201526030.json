@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201526030",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mancini et al. (2015): The GAPS Programme with HARPS-N at TNG",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1503.01787"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201526030"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015A&A...579A.136M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...579A.136M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201526030",
+      "label": "Astronomy & Astrophysics 579 A136"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...579A.136M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mancini et al. (2015), Astronomy & Astrophysics 579 A136",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015A&A...579A.136M"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 579 A136",
+  "creators": [
+    "L. Mancini",
+    "M. Esposito",
+    "E. Covino",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

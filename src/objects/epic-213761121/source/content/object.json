@@ -30,6 +30,32 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.85 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346196",
+          "url": "https://doi.org/10.1051/0004-6361/202346196",
+          "label": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,606 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346196",
+          "url": "https://doi.org/10.1051/0004-6361/202346196",
+          "label": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

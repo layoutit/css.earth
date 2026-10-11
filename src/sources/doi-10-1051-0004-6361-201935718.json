@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201935718",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Borsa et al. (2019): The GAPS Programme with HARPS-N at TNG",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1907.10078"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201935718"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...631A..34B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201935718",
+      "label": "Astronomy & Astrophysics 631 A34"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Borsa et al. (2019), Astronomy & Astrophysics 631 A34",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 631 A34",
+  "creators": [
+    "F. Borsa",
+    "M. Rainer",
+    "A. S. Bonomo",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

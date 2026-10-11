@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-544 (pscomppars): rotation period 19.343 d, from Osborne et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract)",
   "projectedRotationSpeedKmS": 1.8,
   "projectedRotationSpeedSource": "SIMBAD, HD 290498: projected rotation speed 1.8 km/s, the measurement SIMBAD prefers (2022AJ....163...99G)",
+  "massSolar": 0.631,
+  "massSource": "Mass 0.631 +/- 0.018 solar masses from Osborne et al. 2024, the stellar mass of the default parameter set of TOI-544 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

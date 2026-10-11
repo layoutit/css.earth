@@ -24,6 +24,8 @@
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3855246074629979264, flags_flame 00: age_flame 10.562985 Gyr (16th to 84th percentiles 7.7862673 to 13.398531)",
   "projectedRotationSpeedKmS": 1.66,
   "projectedRotationSpeedSource": "SIMBAD, K2-266: projected rotation speed 1.66 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
+  "massSolar": 0.686,
+  "massSource": "Mass 0.686 +/- 0.033 solar masses from Rodriguez et al. 2018, the stellar mass of the default parameter set of K2-266 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.857 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+          "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,596 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+          "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.65 times the Sun's",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-kepler-koi-docs",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "label": "Web page exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G5 V",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-745-2-120",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...745..120B/abstract",
+          "label": "Borucki et al. (2012), The Astrophysical Journal 745 120",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+          "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

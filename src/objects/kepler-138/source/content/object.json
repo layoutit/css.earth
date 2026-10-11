@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.535 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-022-01835-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+          "label": "Piaulet et al. (2023), Nature Astronomy",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,841 K",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-022-01835-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+          "label": "Piaulet et al. (2023), Nature Astronomy",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.056 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-022-01835-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+          "label": "Piaulet et al. (2023), Nature Astronomy",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1 V",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-784-1-28",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784...28K/abstract",
+          "label": "Kipping et al. (2014), The Astrophysical Journal 784 28",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.2 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2207",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3277G/abstract",
+          "label": "Gaidos et al. (2024), Monthly Notices of the Royal Astronomical Society 534 3277-3290",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

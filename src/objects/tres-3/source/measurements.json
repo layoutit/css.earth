@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TrES-3 (pscomppars): age 0.9 Gyr, from Sozzetti et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)",
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TrES-3 (pscomppars): projected rotation speed 1.5 km/s, from Sozzetti et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)",
+  "massSolar": 0.928,
+  "massSource": "Mass 0.928 +/- 0.028 solar masses from Sozzetti et al. 2009, the stellar mass of the default parameter set of TrES-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

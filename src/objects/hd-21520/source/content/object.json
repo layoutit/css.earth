@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.09 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2079",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract",
+          "label": "Nies et al. (2024), Monthly Notices of the Royal Astronomical Society 534 3744-3760",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,871 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2079",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract",
+          "label": "Nies et al. (2024), Monthly Notices of the Royal Astronomical Society 534 3744-3760",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.2 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2079",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract",
+          "label": "Nies et al. (2024), Monthly Notices of the Royal Astronomical Society 534 3744-3760",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.3 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2079",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract",
+          "label": "Nies et al. (2024), Monthly Notices of the Royal Astronomical Society 534 3744-3760",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

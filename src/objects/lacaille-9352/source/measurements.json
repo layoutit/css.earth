@@ -36,6 +36,8 @@
   ],
   "projectedRotationSpeedKmS": 2.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): projected rotation speed 2.5 km/s, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
+  "massSolar": 0.522,
+  "massSource": "Mass 0.522 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 887: mass 0.522 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

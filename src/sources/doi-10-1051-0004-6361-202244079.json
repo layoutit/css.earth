@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202244079",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Naponiello et al. (2022): The GAPS programme at TNG",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2207.03293"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202244079"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...667A...8N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A...8N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202244079",
+      "label": "Astronomy & Astrophysics 667 A8"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A...8N",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Naponiello et al. (2022), Astronomy & Astrophysics 667 A8",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A...8N"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 667 A8",
+  "creators": [
+    "L. Naponiello",
+    "L. Mancini",
+    "M. Damasso",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

@@ -56,6 +56,71 @@
           "path": "source/preparation/rotation.json",
           "locator": "equatorialRotationPeriod"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.9 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202141645",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+          "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "7,490 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202141645",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+          "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "12 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202141645",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+          "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "A8",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201731282",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...606A..73T/abstract",
+          "label": "Talens et al. (2017), Astronomy & Astrophysics 606 A73",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "800 million years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202141645",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+          "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

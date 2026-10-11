@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-344570",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Butler et al. (2003): Seven New Keck Planets Orbiting G and K Dwarfs",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/344570"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2003ApJ...582..455B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2003ApJ...582..455B",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2003ApJ...582..455B",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Butler et al. (2003), The Astrophysical Journal 582 455-466",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2003ApJ...582..455B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 582 455-466",
+  "creators": [
+    "R. Paul Butler",
+    "Geoffrey W. Marcy",
+    "Steven S. Vogt",
+    "et al."
+  ],
+  "publicationDate": "2003"
+}

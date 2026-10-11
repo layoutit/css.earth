@@ -22,6 +22,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6564 (pscomppars): age 4 Gyr, from Battley et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract)",
   "projectedRotationSpeedKmS": 1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6564 (pscomppars): projected rotation speed 1 km/s, from Battley et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract)",
+  "massSolar": 1.18,
+  "massSource": "Mass 1.18 +/- 0.16 solar masses from Battley et al. 2026, the stellar mass of the default parameter set of TOI-6564 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

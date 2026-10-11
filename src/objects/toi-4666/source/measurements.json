@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4666 (pscomppars): age 3 Gyr, from Dransfield et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract)",
   "rotationPeriodDays": 15.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4666 (pscomppars): rotation period 15.3 d, from Frensch et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..73F/abstract)",
+  "massSolar": 0.576,
+  "massSource": "Mass 0.576 +/- 0.012 solar masses from Dransfield et al. 2026, the stellar mass of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

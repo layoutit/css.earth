@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stab1253",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Eisner et al. (2021): Planet Hunters TESS III: two transiting planets around the bright G dwarf HD 152843",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2106.04603"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab1253"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021MNRAS.505.1827E"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.1827E",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab1253",
+      "label": "Monthly Notices of the Royal Astronomical Society 505 1827-1840"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.1827E",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Eisner et al. (2021), Monthly Notices of the Royal Astronomical Society 505 1827-1840",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.1827E"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 505 1827-1840",
+  "creators": [
+    "N L Eisner",
+    "B A Nicholson",
+    "O Barragán",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

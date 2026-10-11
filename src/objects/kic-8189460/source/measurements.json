@@ -28,6 +28,8 @@
       "source": "VizieR J/A+A/686/A93/s-lines (RGs Chromospheric indices from LAMOST spect.), column Prot: 112 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 2.3029,
+  "massSource": "Mass (Mosser scale, solar masses) 2.3029 +/- 0.0955 (https://arxiv.org/abs/2410.00102). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

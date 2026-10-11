@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201016034",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Forveille et al. (2011): The HARPS search for southern extra-solar planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1012.1168"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201016034"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011A&A...526A.141F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...526A.141F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201016034",
+      "label": "Astronomy & Astrophysics 526 A141"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...526A.141F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Forveille et al. (2011), Astronomy & Astrophysics 526 A141",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011A&A...526A.141F"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 526 A141",
+  "creators": [
+    "T. Forveille",
+    "X. Bonfils",
+    "G. Lo Curto",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

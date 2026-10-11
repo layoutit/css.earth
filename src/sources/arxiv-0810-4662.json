@@ -1,0 +1,55 @@
+{
+  "id": "arxiv-0810-4662",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Moutou et al. (2009): The HARPS search for southern extra-solar planets XVII. Six long-period giant planets around BD -17 0063, HD 20868, HD 73267, HD 131664, HD 145377, HD 153950",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0810.4662"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:200810941"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009A&A...496..513M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..513M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:200810941",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..513M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Moutou et al. (2009)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..513M"
+    }
+  ],
+  "creators": [
+    "C. Moutou",
+    "M. Mayor",
+    "G. Lo Curto",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

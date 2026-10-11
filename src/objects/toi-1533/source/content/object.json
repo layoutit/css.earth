@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.88 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2606-30799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+          "label": "Mantovan et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,146 K",
+        "source": {
+          "catalogueId": "arxiv-2606-30799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+          "label": "Mantovan et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.45 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-2606-30799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+          "label": "Mantovan et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.9 billion years",
+        "source": {
+          "catalogueId": "arxiv-2606-30799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+          "label": "Mantovan et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "20.0 days",
+        "source": {
+          "catalogueId": "arxiv-2606-30799",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+          "label": "Mantovan et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

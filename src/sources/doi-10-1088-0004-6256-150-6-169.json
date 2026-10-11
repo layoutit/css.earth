@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-6256-150-6-169",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hinkel et al. (2015): A NEW ANALYSIS OF THE EXOPLANET HOSTING SYSTEM HD 6434",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1510.01746"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/150/6/169"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015AJ....150..169H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-6256/150/6/169",
+      "label": "The Astronomical Journal 150 169"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hinkel et al. (2015), The Astronomical Journal 150 169",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 150 169",
+  "creators": [
+    "Natalie R. Hinkel",
+    "Stephen R. Kane",
+    "Genady Pilyavsky",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.151 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+          "label": "Nagel et al. (2026), Astronomy & Astrophysics 710 A311",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,080 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+          "label": "Nagel et al. (2026), Astronomy & Astrophysics 710 A311",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0027 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+          "label": "Nagel et al. (2026), Astronomy & Astrophysics 710 A311",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M4.5-M5.0",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+          "label": "Nagel et al. (2026), Astronomy & Astrophysics 710 A311",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.8 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+          "label": "Nagel et al. (2026), Astronomy & Astrophysics 710 A311",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "130 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202557841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+          "label": "Nagel et al. (2026), Astronomy & Astrophysics 710 A311",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

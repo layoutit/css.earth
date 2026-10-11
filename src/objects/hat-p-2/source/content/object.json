@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.33 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae1f5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract",
+          "label": "Ment et al. (2018), The Astronomical Journal 156 213",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,380 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae1f5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract",
+          "label": "Ment et al. (2018), The Astronomical Journal 156 213",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "3.8 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1111-j-1365-2966-2009-15849-x",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010MNRAS.401.2665P/abstract",
+          "label": "Pál et al. (2010), Monthly Notices of the Royal Astronomical Society 401 2665-2674",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F8",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae1f5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract",
+          "label": "Ment et al. (2018), The Astronomical Journal 156 213",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.4 billion years",
+        "source": {
+          "catalogueId": "vizier-j-aj-163-228-wasp-43",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..228P/abstract",
+          "label": "J. A. Patel and N. Espinoza (2022), AJ 163, 228; VizieR catalogue J/AJ/163/228 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

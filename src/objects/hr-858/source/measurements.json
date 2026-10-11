@@ -34,6 +34,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HR 858 (pscomppars): projected rotation speed 7.5 km/s, from Bonfanti et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract)",
   "spinInclinationDegrees": 52.1,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.258 solar radii): sin i = v sin i × P / (2πR) = 0.790. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 1.204,
+  "massSource": "Mass 1.204 +/- 0.052 solar masses from Bonfanti et al. 2025, the stellar mass of the default parameter set of HR 858 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

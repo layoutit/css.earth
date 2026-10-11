@@ -43,6 +43,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.00055 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2....1A/abstract",
+          "label": "E. Agol, C. Dorn, S. L. Grimm et al. (2021), PSJ 2, 1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M8.0 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-adf207",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract",
+          "label": "Piaulet-Ghorayeb et al. (2025), The Astrophysical Journal 989 181",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-adf207",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract",
+          "label": "Piaulet-Ghorayeb et al. (2025), The Astrophysical Journal 989 181",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.0898 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "E. Agol, C. Dorn, S. L. Grimm et al. (2021), PSJ 2, 1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
       }
     ],
     "moreFacts": []

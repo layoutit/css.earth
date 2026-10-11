@@ -30,6 +30,32 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,625 K",
+        "source": {
+          "catalogueId": "arxiv-2002-02186",
+          "url": "https://arxiv.org/abs/2002.02186",
+          "label": "Groenewegen (2020), A&A 635, A33 (2020)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "2,100 times the Sun's",
+        "source": {
+          "catalogueId": "gaia-dr3-yz-sgr",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

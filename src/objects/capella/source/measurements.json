@@ -26,6 +26,8 @@
   ],
   "projectedRotationSpeedKmS": 35,
   "projectedRotationSpeedSource": "SIMBAD, * alf Aur: projected rotation speed 35 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "massSolar": 2.5687,
+  "massSource": "Mass 2.5687 +/- 0.0074 solar masses from Torres et al. (2015), ApJ 807, 26, Table 4: dynamical mass of the primary 2.5687 +/- 0.0074 solar masses (https://doi.org/10.1088/0004-637X/807/1/26). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-abac67",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cañas et al. (2020): A Warm Jupiter Transiting an M Dwarf: A TESS Single-transit Event Confirmed with the Habitable-zone Planet Finder",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2007.07098"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abac67"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....160..147C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..147C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/abac67",
+      "label": "The Astronomical Journal 160 147"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..147C",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cañas et al. (2020), The Astronomical Journal 160 147",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..147C"
+    }
+  ],
+  "publisher": "The Astronomical Journal 160 147",
+  "creators": [
+    "Caleb I. Cañas",
+    "Gudmundur Stefansson",
+    "Shubham Kanodia",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-48550-arxiv-0805-2921",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "McCullough et al. (2008): XO-4b: An Extrasolar Planet Transiting an F5V Star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0805.2921"
+    },
+    {
+      "type": "DOI",
+      "value": "10.48550/arXiv.0805.2921"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2008arXiv0805.2921M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2008arXiv0805.2921M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.48550/arXiv.0805.2921",
+      "label": "arXiv"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2008arXiv0805.2921M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "McCullough et al. (2008), arXiv",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2008arXiv0805.2921M"
+    }
+  ],
+  "publisher": "arXiv",
+  "creators": [
+    "P. R. McCullough",
+    "Christopher J. Burke",
+    "Jeff A. Valenti",
+    "et al."
+  ],
+  "publicationDate": "2008"
+}

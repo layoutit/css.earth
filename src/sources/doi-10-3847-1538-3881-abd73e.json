@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-abd73e",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Daylan et al. (2021): TESS Discovery of a Super-Earth and Three Sub-Neptunes Hosted by the Bright, Sun-like Star HD 108236",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2004.11314"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abd73e"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....161...85D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...85D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/abd73e",
+      "label": "The Astronomical Journal 161 85"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...85D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Daylan et al. (2021), The Astronomical Journal 161 85",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...85D"
+    }
+  ],
+  "publisher": "The Astronomical Journal 161 85",
+  "creators": [
+    "Tansu Daylan",
+    "Kartik Pinglé",
+    "Jasmine Wright",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

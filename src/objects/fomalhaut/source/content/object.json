@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "8,590 K",
+        "source": {
+          "catalogueId": "doi-10-1088-2041-8205-754-2-l20",
+          "url": "https://doi.org/10.1088/2041-8205/754/2/L20",
+          "label": "Mamajek (2012), The Astrophysical Journal 754 L20",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

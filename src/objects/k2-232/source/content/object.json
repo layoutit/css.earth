@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.12 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2609-09077",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+          "label": "Ranshaw et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,100 K",
+        "source": {
+          "catalogueId": "arxiv-2609-09077",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+          "label": "Ranshaw et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.6 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aad6e7",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y/abstract",
+          "label": "Yu et al. (2018), The Astronomical Journal 156 127",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F",
+        "source": {
+          "catalogueId": "arxiv-2609-09077",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+          "label": "Ranshaw et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.9 billion years",
+        "source": {
+          "catalogueId": "arxiv-2609-09077",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+          "label": "Ranshaw et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

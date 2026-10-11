@@ -20,6 +20,8 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2406 (pscomppars): [Fe/H] -0.26 dex, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
   "luminosityLogSolar": -2.462,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2406 (pscomppars): log10 of the luminosity in solar units -2.46218, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
+  "massSolar": 0.166,
+  "massSource": "Mass 0.166 +/- 0.004 solar masses from Hori et al. 2024, the stellar mass of the default parameter set of TOI-2406 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

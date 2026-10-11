@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.96 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913507",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract",
+          "label": "Gillon et al. (2010), Astronomy and Astrophysics 511 A3",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,625 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913507",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract",
+          "label": "Gillon et al. (2010), Astronomy and Astrophysics 511 A3",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.74 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stv788",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.3101B/abstract",
+          "label": "Baluev et al. (2015), Monthly Notices of the Royal Astronomical Society 450 3101-3113",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913507",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract",
+          "label": "Gillon et al. (2010), Astronomy and Astrophysics 511 A3",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "4.5 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201629882",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+          "label": "Bonomo et al. (2017), Astronomy & Astrophysics 602 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

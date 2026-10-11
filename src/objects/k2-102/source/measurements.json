@@ -109,6 +109,8 @@
   "rotationPeriodMeasuredDays": 11.5,
   "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curves of campaigns 5, 16 and 18 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 11.5 d, the mean of the campaigns' 11.54, 11.7 and 11.25 d, the light swinging by 2.0% as the star turns",
   "rotationLightSwingPercent": 2.02,
+  "massSolar": 0.77,
+  "massSource": "Mass 0.77 +/- 0.06 solar masses from Mann et al. 2017, the stellar mass of the default parameter set of K2-102 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...64M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

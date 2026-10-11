@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.977 solar masses",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://doi.org/10.3847/1538-3881/ab3467",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,547 K",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://doi.org/10.3847/1538-3881/ab3467",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.75 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G8 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202348042",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+          "label": "Ruggieri et al. (2024), Astronomy & Astrophysics 684 A116",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201424339",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...567L...6D/abstract",
+          "label": "Desidera et al. (2014), Astronomy & Astrophysics 567 L6",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

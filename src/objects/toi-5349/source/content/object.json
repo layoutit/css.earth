@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.61 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae16a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract",
+          "label": "Sandoval et al. (2026), The Astronomical Journal 171 43",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,751 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae16a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract",
+          "label": "Sandoval et al. (2026), The Astronomical Journal 171 43",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.063 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae16a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract",
+          "label": "Sandoval et al. (2026), The Astronomical Journal 171 43",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1+/-0.5",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae16a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract",
+          "label": "Sandoval et al. (2026), The Astronomical Journal 171 43",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "9 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae16a2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract",
+          "label": "Sandoval et al. (2026), The Astronomical Journal 171 43",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

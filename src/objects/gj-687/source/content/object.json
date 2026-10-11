@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.413 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,413 K",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-757-2-112",
+          "url": "https://doi.org/10.1088/0004-637X/757/2/112",
+          "label": "Boyajian et al. (2012), The Astrophysical Journal 757 112",
+          "checked": "2026-10-02",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.021 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-789-2-114",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..114B/abstract",
+          "label": "Burt et al. (2014), The Astrophysical Journal 789 114",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3.0V",
+        "source": {
+          "catalogueId": "doi-10-48550-arxiv-1510-01731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract",
+          "label": "Turnbull (2015), arXiv",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

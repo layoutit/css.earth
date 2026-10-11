@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aac436",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Chakraborty et al. (2018): Evidence of a Sub-Saturn around EPIC 211945201",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1805.03466"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aac436"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018AJ....156....3C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156....3C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aac436",
+      "label": "The Astronomical Journal 156 3"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156....3C",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Chakraborty et al. (2018), The Astronomical Journal 156 3",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018AJ....156....3C"
+    }
+  ],
+  "publisher": "The Astronomical Journal 156 3",
+  "creators": [
+    "Abhijit Chakraborty",
+    "Arpita Roy",
+    "Rishikesh Sharma",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

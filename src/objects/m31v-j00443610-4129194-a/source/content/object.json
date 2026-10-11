@@ -30,6 +30,32 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "21.7 solar masses",
+        "source": {
+          "catalogueId": "arxiv-0911-3391",
+          "url": "https://arxiv.org/abs/0911.3391",
+          "label": "Vilardell et al. (2009)",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "33,600 K",
+        "source": {
+          "catalogueId": "arxiv-0911-3391",
+          "url": "https://arxiv.org/abs/0911.3391",
+          "label": "Vilardell et al. (2009)",
+          "checked": "2026-10-01",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

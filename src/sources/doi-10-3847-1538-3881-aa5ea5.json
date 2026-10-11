@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aa5ea5",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Petigura et al. (2017): Four Sub-Saturns with Dissimilar Densities: Windows into Planetary Cores and Envelopes",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1702.00013"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aa5ea5"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017AJ....153..142P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..142P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aa5ea5",
+      "label": "The Astronomical Journal 153 142"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..142P",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Petigura et al. (2017), The Astronomical Journal 153 142",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..142P"
+    }
+  ],
+  "publisher": "The Astronomical Journal 153 142",
+  "creators": [
+    "Erik A. Petigura",
+    "Evan Sinukoff",
+    "Eric D. Lopez",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

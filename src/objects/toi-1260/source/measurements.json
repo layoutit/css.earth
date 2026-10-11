@@ -32,6 +32,8 @@
   ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): projected rotation speed 1.5 km/s, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
+  "massSolar": 0.679,
+  "massSource": "Mass 0.679 +/- 0.095 solar masses from Lam et al. 2023, the stellar mass of the default parameter set of TOI-1260 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

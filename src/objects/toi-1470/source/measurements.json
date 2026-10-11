@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1470 (pscomppars): rotation period 29 d, from González-Álvarez et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1470 (pscomppars): projected rotation speed 2 km/s, from González-Álvarez et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract)",
+  "massSolar": 0.471,
+  "massSource": "Mass 0.471 +/- 0.011 solar masses from González-Álvarez et al. 2023, the stellar mass of the default parameter set of TOI-1470 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

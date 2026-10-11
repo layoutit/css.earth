@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-128 (pscomppars): log10 of the luminosity in solar units 0.18874, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 4.807,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4621607053580909568, flags_flame 00: age_flame 4.80733 Gyr (16th to 84th percentiles 3.9731648 to 5.6410327)",
+  "massSolar": 0.852,
+  "massSource": "Mass 0.851969 solar masses from Hord et al. 2024, the stellar mass of the default parameter set of TOI-128.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

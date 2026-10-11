@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-736-1-12",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Berta et al. (2011): THE GJ1214 SUPER-EARTH SYSTEM: STELLAR VARIABILITY, NEW TRANSITS, AND A SEARCH FOR ADDITIONAL PLANETS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1012.0518"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/736/1/12"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJ...736...12B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...736...12B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/736/1/12",
+      "label": "The Astrophysical Journal 736 12"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...736...12B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Berta et al. (2011), The Astrophysical Journal 736 12",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJ...736...12B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 736 12",
+  "creators": [
+    "Zachory K. Berta",
+    "David Charbonneau",
+    "Jacob Bean",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

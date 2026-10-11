@@ -48,6 +48,8 @@
   ],
   "projectedRotationSpeedKmS": 2.04,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): projected rotation speed 2.04 km/s, from Hirano et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...890L..27H/abstract)",
+  "massSolar": 0.0898,
+  "massSource": "Mass 0.0898 +/- 0.0023 solar masses from Agol et al. (2021, PSJ 2, 1; https://doi.org/10.3847/PSJ/abd022), who take it from Mann et al. (2019). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the catalogue radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."

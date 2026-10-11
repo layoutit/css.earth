@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.531 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-add2ef",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+          "label": "Hotnisky et al. (2025), The Astronomical Journal 170 1",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,539 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-add2ef",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+          "label": "Hotnisky et al. (2025), The Astronomical Journal 170 1",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.037 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-add2ef",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+          "label": "Hotnisky et al. (2025), The Astronomical Journal 170 1",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-add2ef",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+          "label": "Hotnisky et al. (2025), The Astronomical Journal 170 1",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "36.0 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-add2ef",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+          "label": "Hotnisky et al. (2025), The Astronomical Journal 170 1",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

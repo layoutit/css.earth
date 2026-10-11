@@ -56,6 +56,58 @@
           "path": "source/measurements.json",
           "locator": "effectiveTemperatureK; effectiveTemperatureSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.9 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-48550-arxiv-1510-01731",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract",
+          "label": "Turnbull (2015), arXiv",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F8",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453108",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A...6D/abstract",
+          "label": "Denis et al. (2025), Astronomy & Astrophysics 696 A6",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "24 million years",
+        "source": {
+          "catalogueId": "arxiv-2302-05420",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...950L..19F/abstract",
+          "label": "Franson et al. (2023)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "23 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202345877",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D/abstract",
+          "label": "Rosa et al. (2023), Astronomy & Astrophysics 672 A94",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

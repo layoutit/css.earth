@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1002-asna-200811200",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Raetz et al. (2009): Planetary transit observations at the University Observatory Jena: XO‐1b and TrES‐1",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0905.1833"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1002/asna.200811200"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009AN....330..475R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009AN....330..475R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/asna.200811200",
+      "label": "Astronomische Nachrichten 330 475-481"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009AN....330..475R",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Raetz et al. (2009), Astronomische Nachrichten 330 475-481",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009AN....330..475R"
+    }
+  ],
+  "publisher": "Astronomische Nachrichten 330 475-481",
+  "creators": [
+    "St. Raetz",
+    "M. Mugrauer",
+    "T.O.B. Schmidt",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

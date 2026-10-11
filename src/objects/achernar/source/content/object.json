@@ -43,6 +43,32 @@
           "path": "source/photometry/gravity-darkening.json",
           "locator": "note"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "5.99 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244009",
+          "url": "https://doi.org/10.1051/0004-6361/202244009",
+          "label": "Kervella et al. (2022), Astronomy & Astrophysics 667 A111",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "15,539 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244009",
+          "url": "https://doi.org/10.1051/0004-6361/202244009",
+          "label": "Kervella et al. (2022), Astronomy & Astrophysics 667 A111",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

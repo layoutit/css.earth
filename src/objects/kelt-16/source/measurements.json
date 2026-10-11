@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of KELT-16 (pscomppars): age 3.1 Gyr, from Oberst et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
   "projectedRotationSpeedKmS": 7.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-16 (pscomppars): projected rotation speed 7.6 km/s, from Oberst et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
+  "massSolar": 1.211,
+  "massSource": "Mass 1.211 +/- 0.043 solar masses from Oberst et al. 2017, the stellar mass of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

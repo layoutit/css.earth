@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.828 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202660043",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+          "label": "Mancini et al. (2026), Astronomy & Astrophysics 712 A147",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,985 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202660043",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+          "label": "Mancini et al. (2026), Astronomy & Astrophysics 712 A147",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.34 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202660043",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+          "label": "Mancini et al. (2026), Astronomy & Astrophysics 712 A147",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K2 V - K3 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202660043",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+          "label": "Mancini et al. (2026), Astronomy & Astrophysics 712 A147",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202660043",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+          "label": "Mancini et al. (2026), Astronomy & Astrophysics 712 A147",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "28.3 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac7ce1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...97M/abstract",
+          "label": "MacDougall et al. (2022), The Astronomical Journal 164 97",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

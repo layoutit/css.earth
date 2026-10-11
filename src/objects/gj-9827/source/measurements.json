@@ -37,6 +37,8 @@
   "rotationPeriodMeasuredDays": 31.88,
   "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 12 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 31.88 d, the light swinging by 0.32% as the star turns (the light repeats every 15.94 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
   "rotationLightSwingPercent": 0.32,
+  "massSolar": 0.62,
+  "massSource": "Mass 0.62 +/- 0.04 solar masses from Passegger et al. 2024, the stellar mass of the default parameter set of GJ 9827 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..22P/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

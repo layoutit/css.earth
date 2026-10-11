@@ -43,6 +43,32 @@
           "path": "source/measurements.json",
           "locator": "radiusSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "1,334 K",
+        "source": {
+          "catalogueId": "arxiv-1508-01767",
+          "url": "https://arxiv.org/abs/1508.01767",
+          "label": "Filippazzo et al. (2015)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.000022 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-1708-02714",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...846...97G/abstract",
+          "label": "Garcia et al. (2017)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

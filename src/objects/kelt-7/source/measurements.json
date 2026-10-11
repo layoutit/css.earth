@@ -35,6 +35,8 @@
   "rotationPeriodMeasuredDays": 1.33,
   "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 43, 44, 45, 59 and 86 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 1.33 d, the light swinging by 0.09% as the star turns",
   "rotationLightSwingPercent": 0.09,
+  "massSolar": 1.76,
+  "massSource": "Mass 1.76 +/- 0.25 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of KELT-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

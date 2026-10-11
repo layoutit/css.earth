@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stv788",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baluev et al. (2015): Benchmarking the power of amateur observatories for TTV exoplanets detection",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1501.06748"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stv788"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015MNRAS.450.3101B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.3101B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stv788",
+      "label": "Monthly Notices of the Royal Astronomical Society 450 3101-3113"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.3101B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Baluev et al. (2015), Monthly Notices of the Royal Astronomical Society 450 3101-3113",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.3101B"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 450 3101-3113",
+  "creators": [
+    "Roman V. Baluev",
+    "Evgenii N. Sokov",
+    "Vakhit Sh. Shaidulin",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

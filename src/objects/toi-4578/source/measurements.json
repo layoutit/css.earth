@@ -16,6 +16,8 @@
   "objectTypeSource": "SIMBAD, TYC 4550-1607-1: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -0.069,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4578 (pscomppars): log10 of the luminosity in solar units -0.06918, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "massSolar": 1.077,
+  "massSource": "Mass 1.077 +/- 0.138 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 154474036 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME (https://doi.org/10.3847/1538-3881/ab3467). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

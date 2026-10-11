@@ -24,6 +24,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1273 (pscomppars): rotation period 42 d, from Serrano Bell et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract)",
   "projectedRotationSpeedKmS": 2.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1273 (pscomppars): projected rotation speed 2.8 km/s, from Serrano Bell et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract)",
+  "massSolar": 1.06,
+  "massSource": "Mass 1.06 +/- 0.06 solar masses from Serrano Bell et al. 2024, the stellar mass of the default parameter set of TOI-1273 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

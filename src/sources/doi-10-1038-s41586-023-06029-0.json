@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1038-s41586-023-06029-0",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hon et al. (2023): A close-in giant planet escapes engulfment by its star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2306.15877"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-023-06029-0"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023Natur.618..917H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.618..917H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-023-06029-0",
+      "label": "Nature 618 917-920"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.618..917H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hon et al. (2023), Nature 618 917-920",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023Natur.618..917H"
+    }
+  ],
+  "publisher": "Nature 618 917-920",
+  "creators": [
+    "Marc Hon",
+    "Daniel Huber",
+    "Nicholas Z. Rui",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

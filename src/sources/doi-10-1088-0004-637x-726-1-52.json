@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-726-1-52",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hartman et al. (2011): HAT-P-18b AND HAT-P-19b: TWO LOW-DENSITY SATURN-MASS PLANETS TRANSITING METAL-RICH K STARS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1007.4850"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/726/1/52"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJ...726...52H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...726...52H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/726/1/52",
+      "label": "The Astrophysical Journal 726 52"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...726...52H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hartman et al. (2011), The Astrophysical Journal 726 52",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJ...726...52H"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 726 52",
+  "creators": [
+    "J. D. Hartman",
+    "G. Á. Bakos",
+    "B. Sato",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

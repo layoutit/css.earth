@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.17 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag710",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T/abstract",
+          "label": "Timmermans et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag710",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,226 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag710",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T/abstract",
+          "label": "Timmermans et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag710",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0041 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag710",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T/abstract",
+          "label": "Timmermans et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag710",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M4.5 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-abc3b9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract",
+          "label": "Waalkes et al. (2021), The Astronomical Journal 161 13",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.5 billion years",
+        "source": {
+          "catalogueId": "vizier-j-aj-163-228-wasp-43",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..228P/abstract",
+          "label": "J. A. Patel and N. Espinoza (2022), AJ 163, 228; VizieR catalogue J/AJ/163/228 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

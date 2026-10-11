@@ -43,6 +43,58 @@
           "path": "source/preparation/rotation.json",
           "locator": "source"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.1 solar masses",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-35296",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,170 K",
+        "source": {
+          "catalogueId": "arxiv-2110-06729",
+          "url": "https://arxiv.org/abs/2110.06729",
+          "label": "Willamo et al. (2021), A&amp;A 659, A71 (2022)",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.8 times the Sun's",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-35296",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.7 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-35296",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

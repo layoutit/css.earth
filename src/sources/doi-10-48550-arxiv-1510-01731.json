@@ -1,0 +1,53 @@
+{
+  "id": "doi-10-48550-arxiv-1510-01731",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Turnbull (2015): ExoCat-1: The Nearby Stellar Systems Catalog for Exoplanet Imaging Missions",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1510.01731"
+    },
+    {
+      "type": "DOI",
+      "value": "10.48550/arXiv.1510.01731"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015arXiv151001731T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.48550/arXiv.1510.01731",
+      "label": "arXiv"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Turnbull (2015), arXiv",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T"
+    }
+  ],
+  "publisher": "arXiv",
+  "creators": [
+    "Margaret C Turnbull"
+  ],
+  "publicationDate": "2015"
+}

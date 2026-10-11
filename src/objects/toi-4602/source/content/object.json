@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.9 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202659402",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+          "label": "Maio et al. (2026), Astronomy & Astrophysics 709 A270",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,966 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202659402",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+          "label": "Maio et al. (2026), Astronomy & Astrophysics 709 A270",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.3 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202659402",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+          "label": "Maio et al. (2026), Astronomy & Astrophysics 709 A270",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G5",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202659402",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+          "label": "Maio et al. (2026), Astronomy & Astrophysics 709 A270",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.4 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-4602",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

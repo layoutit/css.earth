@@ -1,0 +1,41 @@
+{
+  "id": "doi-10-1051-0004-6361-20041765",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Richichi & Roccatagliata (2005): Aldebaran's angular diameter: How well do we know it?",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20041765"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361:20041765",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361:20041765",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Richichi & Roccatagliata (2005), Astronomy & Astrophysics 433 305-312",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361:20041765"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 433 305-312",
+  "creators": [
+    "A. Richichi",
+    "V. Roccatagliata"
+  ],
+  "publicationDate": "2005"
+}

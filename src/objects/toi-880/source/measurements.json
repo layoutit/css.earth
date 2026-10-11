@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-880 (pscomppars): age 5.2 Gyr, from Zhang et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract)",
   "projectedRotationSpeedKmS": 1.57,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-880 (pscomppars): projected rotation speed 1.57 km/s, from Zhang et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract)",
+  "massSolar": 0.87,
+  "massSource": "Mass 0.87 +/- 0.03 solar masses from Zhang et al. 2025, the stellar mass of the default parameter set of TOI-880.02 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

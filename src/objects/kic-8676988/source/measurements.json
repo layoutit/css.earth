@@ -14,6 +14,8 @@
   "objectType": "Horizontal Branch Star",
   "objectTypePath": "* > Ev* > HB*",
   "objectTypeSource": "SIMBAD, 2MASS J19050455+4450492: main object type HB*, Horizontal Branch Star",
+  "massSolar": 1.363,
+  "massSource": "Mass (Mosser scale, solar masses) 1.363 +/- 0.0529 (https://arxiv.org/abs/2410.00102). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

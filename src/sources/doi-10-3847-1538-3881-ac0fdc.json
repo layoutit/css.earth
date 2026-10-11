@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac0fdc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hirano et al. (2021): Two Bright M Dwarfs Hosting Ultra-Short-Period Super-Earths with Earth-like Compositions*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2103.12760"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac0fdc"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....162..161H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..161H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac0fdc",
+      "label": "The Astronomical Journal 162 161"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..161H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hirano et al. (2021), The Astronomical Journal 162 161",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..161H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 161",
+  "creators": [
+    "Teruyuki Hirano",
+    "John H. Livingston",
+    "Akihiko Fukui",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.956 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202345961",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+          "label": "Georgieva et al. (2023), Astronomy & Astrophysics 674 A117",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,585 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202345961",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+          "label": "Georgieva et al. (2023), Astronomy & Astrophysics 674 A117",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.82 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202345961",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+          "label": "Georgieva et al. (2023), Astronomy & Astrophysics 674 A117",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202345961",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+          "label": "Georgieva et al. (2023), Astronomy & Astrophysics 674 A117",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202345961",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+          "label": "Georgieva et al. (2023), Astronomy & Astrophysics 674 A117",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

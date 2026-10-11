@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-acfeea",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A-thano et al. (2023): Revisiting the Transit Timing and Atmosphere Characterization of the Neptune-mass Planet HAT-P-26 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2303.03610"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/acfeea"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023AJ....166..223A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..223A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/acfeea",
+      "label": "The Astronomical Journal 166 223"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..223A",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A-thano et al. (2023), The Astronomical Journal 166 223",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..223A"
+    }
+  ],
+  "publisher": "The Astronomical Journal 166 223",
+  "creators": [
+    "Napaporn A-thano",
+    "Supachai Awiphan",
+    "Ing-Guey Jiang",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

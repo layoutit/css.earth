@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,757 K",
+        "source": {
+          "catalogueId": "arxiv-1507-06723",
+          "url": "https://arxiv.org/abs/1507.06723",
+          "label": "Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.2 times the Sun's",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-kepler-koi-docs",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "label": "Web page exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G2",
+        "source": {
+          "catalogueId": "arxiv-1507-06723",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150...56J/abstract",
+          "label": "Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6 billion years",
+        "source": {
+          "catalogueId": "arxiv-1507-06723",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150...56J/abstract",
+          "label": "Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

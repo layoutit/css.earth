@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.502 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac0157",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C/abstract",
+          "label": "Cloutier et al. (2021), The Astronomical Journal 162 79",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,550 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac0157",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C/abstract",
+          "label": "Cloutier et al. (2021), The Astronomical Journal 162 79",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.026 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac0fdc",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..161H/abstract",
+          "label": "Hirano et al. (2021), The Astronomical Journal 162 161",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac0157",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C/abstract",
+          "label": "Cloutier et al. (2021), The Astronomical Journal 162 79",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "77.0 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag520",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract",
+          "label": "Palethorpe et al. (2026), Monthly Notices of the Royal Astronomical Society 548 stag520",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Primary log Teff 3.79 +/- 0.007, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 6166 K (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K)",
   "surfaceGravityLogg": 4.388,
   "surfaceGravitySource": "Primary log g 4.388 +/- 0.077, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K) (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K)",
+  "massSolar": 0.7842,
+  "massSource": "Mass 0.7842 +/- 0.0045 solar masses from Primary mass (solar masses) 0.7842 +/- 0.0045, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K) (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

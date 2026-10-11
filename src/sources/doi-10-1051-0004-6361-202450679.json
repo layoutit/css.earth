@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202450679",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Damasso et al. (2024): TOI-837 b: Characterisation, formation, and evolutionary history of an infant warm Saturn-mass planet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2406.08949"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202450679"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...688A..15D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..15D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202450679",
+      "label": "Astronomy & Astrophysics 688 A15"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..15D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Damasso et al. (2024), Astronomy & Astrophysics 688 A15",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..15D"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 688 A15",
+  "creators": [
+    "M. Damasso",
+    "D. Polychroni",
+    "D. Locci",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

@@ -16,6 +16,8 @@
   "objectTypeSource": "SIMBAD, UCAC4 540-010495: main object type HB*, Horizontal Branch Star",
   "luminosityLogSolar": 1.717,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3409401114658881280, flags_flame 10: lum_flame 52.125885 solar luminosities (16th to 84th percentiles 50.496716 to 54.675655); its log10 is recorded",
+  "massSolar": 1.101,
+  "massSource": "Mass 1.101 +/- 0.085 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 247021587 (K2 campaign 13): PARAM mass (solar masses) 1.100956 (16th-84th percentiles 1.025322-1.195331), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

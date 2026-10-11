@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.72 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1906",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+          "label": "Jofré et al. (2025), Monthly Notices of the Royal Astronomical Society 544 3994-4013",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,442 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1906",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+          "label": "Jofré et al. (2025), Monthly Notices of the Royal Astronomical Society 544 3994-4013",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "10 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1906",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+          "label": "Jofré et al. (2025), Monthly Notices of the Royal Astronomical Society 544 3994-4013",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1906",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+          "label": "Jofré et al. (2025), Monthly Notices of the Royal Astronomical Society 544 3994-4013",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

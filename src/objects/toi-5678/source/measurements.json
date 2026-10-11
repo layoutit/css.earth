@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5678 (pscomppars): age 8.5 Gyr, from Ulmer-Moll et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)",
   "projectedRotationSpeedKmS": 3.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5678 (pscomppars): projected rotation speed 3.1 km/s, from Ulmer-Moll et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)",
+  "massSolar": 0.905,
+  "massSource": "Mass 0.905 +/- 0.039 solar masses from Ulmer-Moll et al. 2023, the stellar mass of the default parameter set of TOI-5678 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

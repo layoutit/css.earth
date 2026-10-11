@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.96 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202348042",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+          "label": "Ruggieri et al. (2024), Astronomy & Astrophysics 684 A116",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,290 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202348042",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+          "label": "Ruggieri et al. (2024), Astronomy & Astrophysics 684 A116",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.82 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stv788",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.3101B/abstract",
+          "label": "Baluev et al. (2015), Monthly Notices of the Royal Astronomical Society 450 3101-3113",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G8 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202348042",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+          "label": "Ruggieri et al. (2024), Astronomy & Astrophysics 684 A116",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.8 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201629882",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+          "label": "Bonomo et al. (2017), Astronomy & Astrophysics 602 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

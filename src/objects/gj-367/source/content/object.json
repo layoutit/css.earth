@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.451 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2606-18355",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract",
+          "label": "Lee et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,535 K",
+        "source": {
+          "catalogueId": "arxiv-2606-18355",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract",
+          "label": "Lee et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.029 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1126-science-aay3253",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021Sci...374.1271L/abstract",
+          "label": "Lam et al. (2021), Science 374 1271-1275",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M V",
+        "source": {
+          "catalogueId": "arxiv-2606-18355",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract",
+          "label": "Lee et al. (2026)",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "51.3 days",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ace0c7",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...955L...3G/abstract",
+          "label": "Goffo et al. (2023), The Astrophysical Journal Letters 955 L3",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

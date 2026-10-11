@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6038 A (pscomppars): age 3.65 Gyr, from Baliwal et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract)",
   "projectedRotationSpeedKmS": 7.94,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6038 A (pscomppars): projected rotation speed 7.94 km/s, from Baliwal et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract)",
+  "massSolar": 1.291,
+  "massSource": "Mass 1.291 +/- 0.066 solar masses from Baliwal et al. 2025, the stellar mass of the default parameter set of TOI-6038 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

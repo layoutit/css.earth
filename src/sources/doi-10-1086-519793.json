@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1086-519793",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "O'Donovan et al. (2007): TrES-3: A Nearby, Massive, Transiting Hot Jupiter in a 31 Hour Orbit",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0705.2004"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/519793"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2007ApJ...663L..37O"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...663L..37O",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/519793",
+      "label": "The Astrophysical Journal 663 L37-L40"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...663L..37O",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "O'Donovan et al. (2007), The Astrophysical Journal 663 L37-L40",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2007ApJ...663L..37O"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 663 L37-L40",
+  "creators": [
+    "Francis T. O'Donovan",
+    "David Charbonneau",
+    "Gáspár Á. Bakos",
+    "et al."
+  ],
+  "publicationDate": "2007"
+}

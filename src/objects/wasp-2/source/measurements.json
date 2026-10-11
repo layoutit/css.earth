@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-2 (pscomppars): age 8.2 Gyr, from Southworth 2012 (https://ui.adsabs.harvard.edu/abs/2012MNRAS.426.1291S/abstract)",
   "projectedRotationSpeedKmS": 0.99,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-2 (pscomppars): projected rotation speed 0.99 km/s, from Triaud et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A&A...524A..25T/abstract)",
+  "massSolar": 0.895,
+  "massSource": "Mass 0.895 +/- 0.077 solar masses from Addison et al. 2019, the stellar mass of the default parameter set of WASP-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

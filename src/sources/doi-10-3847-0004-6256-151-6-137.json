@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-0004-6256-151-6-137",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hoyer et al. (2016): RULING OUT THE ORBITAL DECAY OF THE WASP-43B EXOPLANET",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1603.01144"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-6256/151/6/137"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016AJ....151..137H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..137H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0004-6256/151/6/137",
+      "label": "The Astronomical Journal 151 137"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..137H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hoyer et al. (2016), The Astronomical Journal 151 137",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..137H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 151 137",
+  "creators": [
+    "Sergio Hoyer",
+    "Enric Pallé",
+    "Diana Dragomir",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

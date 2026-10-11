@@ -30,6 +30,8 @@
       "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 41.72 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.4861,
+  "massSource": "Mass 0.4861 +/- 0.006 solar masses from Bakos et al. 2020, the stellar mass of the default parameter set of HATS-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

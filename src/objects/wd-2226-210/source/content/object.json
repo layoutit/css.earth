@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "107,200 K",
+        "source": {
+          "catalogueId": "arxiv-2109-12114",
+          "url": "https://arxiv.org/abs/2109.12114",
+          "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

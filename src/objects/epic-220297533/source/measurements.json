@@ -24,6 +24,8 @@
       "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 13.687821 d, the row 0.2 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.9769,
+  "massSource": "Mass 0.9769 +/- 0.065 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 220297533 (K2 campaign 8): PARAM mass (solar masses) 0.97692 (16th-84th percentiles 0.911329-1.041404), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

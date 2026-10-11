@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1126-science-aay3253",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lam et al. (2021): GJ 367b: A dense, ultrashort-period sub-Earth planet transiting a nearby red dwarf star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2112.01309"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1126/science.aay3253"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021Sci...374.1271L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021Sci...374.1271L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1126/science.aay3253",
+      "label": "Science 374 1271-1275"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021Sci...374.1271L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lam et al. (2021), Science 374 1271-1275",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021Sci...374.1271L"
+    }
+  ],
+  "publisher": "Science 374 1271-1275",
+  "creators": [
+    "Kristine W. F. Lam",
+    "Szilárd Csizmadia",
+    "Nicola Astudillo-Defru",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

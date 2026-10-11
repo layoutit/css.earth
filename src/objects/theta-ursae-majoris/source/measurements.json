@@ -18,6 +18,8 @@
   "objectTypeSource": "SIMBAD, * tet UMa: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 8.77,
   "projectedRotationSpeedSource": "SIMBAD, * tet UMa: projected rotation speed 8.77 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
+  "massSolar": 1.506,
+  "massSource": "Mass 1.506 +/- 0.095 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 82328: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.506 +/- 0.095 (https://doi.org/10.1088/0004-637X/746/1/101). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

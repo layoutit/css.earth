@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-152-6-223",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Obermeier et al. (2016): K2 DISCOVERS A BUSY BEE: AN UNUSUAL TRANSITING NEPTUNE FOUND IN THE BEEHIVE CLUSTER",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1608.04760"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/152/6/223"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016AJ....152..223O"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..223O",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/152/6/223",
+      "label": "The Astronomical Journal 152 223"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..223O",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Obermeier et al. (2016), The Astronomical Journal 152 223",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..223O"
+    }
+  ],
+  "publisher": "The Astronomical Journal 152 223",
+  "creators": [
+    "Christian Obermeier",
+    "Thomas Henning",
+    "Joshua E. Schlieder",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

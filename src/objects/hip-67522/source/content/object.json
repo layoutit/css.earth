@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.22 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+          "label": "Barber et al. (2024), The Astrophysical Journal Letters 973 L30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,675 K",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+          "label": "Barber et al. (2024), The Astrophysical Journal Letters 973 L30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.7 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+          "label": "Barber et al. (2024), The Astrophysical Journal Letters 973 L30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G1 V",
+        "source": {
+          "catalogueId": "publication-1978mss-c02-0h",
+          "url": "https://ui.adsabs.harvard.edu/abs/1978MSS...C02....0H/abstract",
+          "label": "Reference 1978MSS...C02....0H, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "17 million years",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+          "label": "Barber et al. (2024), The Astrophysical Journal Letters 973 L30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "34 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+          "label": "Barber et al. (2024), The Astrophysical Journal Letters 973 L30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

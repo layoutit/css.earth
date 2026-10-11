@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnrasl-slad097",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Triaud et al. (2023): An M dwarf accompanied by a close-in giant orbiter with SPECULOOS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2308.02253"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnrasl/slad097"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.525L..98T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..98T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnrasl/slad097",
+      "label": "Monthly Notices of the Royal Astronomical Society: Letters 525 L98-L104"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..98T",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Triaud et al. (2023), Monthly Notices of the Royal Astronomical Society: Letters 525 L98-L104",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..98T"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society: Letters 525 L98-L104",
+  "creators": [
+    "Amaury H M J Triaud",
+    "Georgina Dransfield",
+    "Taiki Kagetani",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

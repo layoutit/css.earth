@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1111-j-1365-2966-2005-09353-x",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Usenko et al. (2005): Polaris, the nearest Cepheid in the Galaxy: atmosphere parameters, reddening and chemical composition",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2005.09353.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1111/j.1365-2966.2005.09353.x",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1111/j.1365-2966.2005.09353.x",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Usenko et al. (2005), Monthly Notices of the Royal Astronomical Society 362 1219-1224",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1111/j.1365-2966.2005.09353.x"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 362 1219-1224",
+  "creators": [
+    "I. A. Usenko",
+    "A. S. Miroshnichenko",
+    "V. G. Klochkova",
+    "et al."
+  ],
+  "publicationDate": "2005"
+}

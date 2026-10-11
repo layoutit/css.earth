@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.864 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+          "label": "Coy et al. (2026), The Astrophysical Journal Letters 1005 L77",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,338 K",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+          "label": "Coy et al. (2026), The Astrophysical Journal Letters 1005 L77",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.55 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+          "label": "Coy et al. (2026), The Astrophysical Journal Letters 1005 L77",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K0 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa832d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..122C/abstract",
+          "label": "Christiansen et al. (2017), The Astronomical Journal 154 122",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "8.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+          "label": "Coy et al. (2026), The Astrophysical Journal Letters 1005 L77",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

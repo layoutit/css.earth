@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6383 A (pscomppars): log10 of the luminosity in solar units -1.48678, from Bernab&ograve; et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6383 A (pscomppars): projected rotation speed 2 km/s, from Bernab&ograve; et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract)",
+  "massSolar": 0.458,
+  "massSource": "Mass 0.458 +/- 0.011 solar masses from Bernab&ograve; et al. 2024, the stellar mass of the default parameter set of TOI-6383 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

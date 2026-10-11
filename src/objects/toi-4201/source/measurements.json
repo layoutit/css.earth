@@ -34,6 +34,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4201 (pscomppars): projected rotation speed 1.65 km/s, from Gan et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...969L..24G/abstract)",
   "spinInclinationDegrees": 63.6,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.63 solar radii): sin i = v sin i × P / (2πR) = 0.896. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.61,
+  "massSource": "Mass 0.61 +/- 0.02 solar masses from Gan et al. 2023, the stellar mass of the default parameter set of TOI-4201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..165G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

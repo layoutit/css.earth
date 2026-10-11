@@ -43,6 +43,19 @@
           "path": "source/measurements.json",
           "locator": "angularDiameterMas; angularDiameterSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "2,710 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ab3d2a",
+          "url": "https://doi.org/10.3847/1538-4357/ab3d2a",
+          "label": "Ohnaka et al. (2019), The Astrophysical Journal 883 89",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

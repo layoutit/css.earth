@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-200911976",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Demory et al. (2009): Mass-radius relation of low and very low-mass stars revisited with the VLTI",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200911976"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/200911976",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/200911976",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Demory et al. (2009), Astronomy & Astrophysics 505 205-215",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/200911976"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 505 205-215",
+  "creators": [
+    "B.-O. Demory",
+    "D. Ségransan",
+    "T. Forveille",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

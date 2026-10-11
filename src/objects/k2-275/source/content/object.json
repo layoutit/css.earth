@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.77 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab2669",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+          "label": "Castro-González et al. (2022), Monthly Notices of the Royal Astronomical Society 509 1075-1095",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,841 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab2669",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+          "label": "Castro-González et al. (2022), Monthly Notices of the Royal Astronomical Society 509 1075-1095",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.26 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw1373",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract",
+          "label": "Pope et al. (2016), Monthly Notices of the Royal Astronomical Society 461 3399-3409",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.9 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-k2-275",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

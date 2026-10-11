@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201630063",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wyttenbach et al. (2017): Hot Exoplanet Atmospheres Resolved with Transit Spectroscopy (HEARTS)",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1702.00448"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201630063"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017A&A...602A..36W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A..36W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201630063",
+      "label": "Astronomy & Astrophysics 602 A36"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A..36W",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wyttenbach et al. (2017), Astronomy & Astrophysics 602 A36",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A..36W"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 602 A36",
+  "creators": [
+    "A. Wyttenbach",
+    "C. Lovis",
+    "D. Ehrenreich",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

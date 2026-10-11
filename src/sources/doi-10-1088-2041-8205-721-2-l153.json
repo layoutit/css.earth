@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-2041-8205-721-2-l153",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Johnson et al. (2010): A HOT JUPITER ORBITING THE 1.7 <i>M</i> <sub>☉</sub> SUBGIANT HD 102956",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1007.4555"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/721/2/L153"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010ApJ...721L.153J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...721L.153J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/721/2/L153",
+      "label": "The Astrophysical Journal 721 L153-L157"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...721L.153J",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Johnson et al. (2010), The Astrophysical Journal 721 L153-L157",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010ApJ...721L.153J"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 721 L153-L157",
+  "creators": [
+    "John Asher Johnson",
+    "Brendan P. Bowler",
+    "Andrew W. Howard",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202142653",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kemmer et al. (2022): Discovery and mass measurement of the hot, transiting, Earth-sized planet, GJ 3929 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2202.00970"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202142653"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...659A..17K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...659A..17K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202142653",
+      "label": "Astronomy & Astrophysics 659 A17"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...659A..17K",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kemmer et al. (2022), Astronomy & Astrophysics 659 A17",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...659A..17K"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 659 A17",
+  "creators": [
+    "J. Kemmer",
+    "S. Dreizler",
+    "D. Kossakowski",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

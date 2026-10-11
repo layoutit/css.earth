@@ -18,6 +18,8 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3860897633116024320, flags_flame 00: lum_flame 48.00521 solar luminosities (16th to 84th percentiles 43.27497 to 53.028687); its log10 is recorded",
   "ageGyr": 0.557,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3860897633116024320, flags_flame 00: age_flame 0.55731976 Gyr (16th to 84th percentiles 0.50013316 to 0.61450523)",
+  "massSolar": 0.9764,
+  "massSource": "Mass 0.9764 +/- 0.1061 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 248557858 (K2 campaign 14): PARAM mass (solar masses) 0.97638 (16th-84th percentiles 0.875502-1.087661), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

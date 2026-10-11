@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.731 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+          "label": "Hartman et al. (2020), The Astronomical Journal 159 173",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,656 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+          "label": "Hartman et al. (2020), The Astronomical Journal 159 173",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.22 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+          "label": "Hartman et al. (2020), The Astronomical Journal 159 173",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "12 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+          "label": "Hartman et al. (2020), The Astronomical Journal 159 173",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "48.7 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+          "label": "Hartman et al. (2020), The Astronomical Journal 159 173",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

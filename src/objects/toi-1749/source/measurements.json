@@ -34,6 +34,8 @@
   ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "SIMBAD, TOI-1749: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "massSolar": 0.58,
+  "massSource": "Mass 0.58 +/- 0.03 solar masses from Fukui et al. 2021, the stellar mass of the default parameter set of TOI-1749 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

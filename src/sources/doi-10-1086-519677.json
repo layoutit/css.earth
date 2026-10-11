@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1086-519677",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Johnson et al. (2007): Retired A Stars and Their Companions: Exoplanets Orbiting Three Intermediate‐Mass Subgiants",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0704.2455"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/519677"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2007ApJ...665..785J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/519677",
+      "label": "The Astrophysical Journal 665 785-793"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Johnson et al. (2007), The Astrophysical Journal 665 785-793",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 665 785-793",
+  "creators": [
+    "John Asher Johnson",
+    "Debra A. Fischer",
+    "Geoffrey W. Marcy",
+    "et al."
+  ],
+  "publicationDate": "2007"
+}

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.262 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-023-02064-z",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract",
+          "label": "Lustig-Yaeger et al. (2023), Nature Astronomy 7 1317-1328",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,300 K",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-023-02064-z",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract",
+          "label": "Lustig-Yaeger et al. (2023), Nature Astronomy 7 1317-1328",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0086 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad1b58",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..197M/abstract",
+          "label": "Ment et al. (2024), The Astronomical Journal 167 197",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3.5 V",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-023-02064-z",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract",
+          "label": "Lustig-Yaeger et al. (2023), Nature Astronomy 7 1317-1328",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "79.3 days",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-023-02064-z",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract",
+          "label": "Lustig-Yaeger et al. (2023), Nature Astronomy 7 1317-1328",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

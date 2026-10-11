@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-200913580",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ségransan et al. (2011): The HARPS search for southern extra-solar planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1107.0339"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200913580"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011A&A...535A..54S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...535A..54S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200913580",
+      "label": "Astronomy & Astrophysics 535 A54"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...535A..54S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ségransan et al. (2011), Astronomy & Astrophysics 535 A54",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011A&A...535A..54S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 535 A54",
+  "creators": [
+    "D. Ségransan",
+    "M. Mayor",
+    "S. Udry",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

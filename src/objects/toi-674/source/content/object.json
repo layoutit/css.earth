@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.42 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202140718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract",
+          "label": "Murgas et al. (2021), Astronomy & Astrophysics 653 A60",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,514 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202140718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract",
+          "label": "Murgas et al. (2021), Astronomy & Astrophysics 653 A60",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.024 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202140718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract",
+          "label": "Murgas et al. (2021), Astronomy & Astrophysics 653 A60",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202140718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract",
+          "label": "Murgas et al. (2021), Astronomy & Astrophysics 653 A60",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "52.0 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202140718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract",
+          "label": "Murgas et al. (2021), Astronomy & Astrophysics 653 A60",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

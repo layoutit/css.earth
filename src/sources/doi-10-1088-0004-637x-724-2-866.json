@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-724-2-866",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kovács et al. (2010): HAT-P-15b: A 10.9 DAY EXTRASOLAR PLANET TRANSITING A SOLAR-TYPE STAR",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1005.5300"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/724/2/866"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010ApJ...724..866K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...724..866K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/724/2/866",
+      "label": "The Astrophysical Journal 724 866-877"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...724..866K",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kovács et al. (2010), The Astrophysical Journal 724 866-877",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010ApJ...724..866K"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 724 866-877",
+  "creators": [
+    "G. Kovács",
+    "G. Á. Bakos",
+    "J. D. Hartman",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

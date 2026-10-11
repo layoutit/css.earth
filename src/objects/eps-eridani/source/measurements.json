@@ -82,6 +82,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of eps Eri (pscomppars): projected rotation speed 2.4 km/s, from Valenti & Fischer 2005 (https://ui.adsabs.harvard.edu/abs/2005ApJS..159..141V/abstract)",
   "spinInclinationDegrees": 45.4,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.74 solar radii): sin i = v sin i × P / (2πR) = 0.712. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.82,
+  "massSource": "Mass 0.82 +/- 0.02 solar masses from Thompson et al. (2025), AJ 170, 301, the stellar mass their orbit fit of ε Eridani b adopts, via the NASA Exoplanet Archive default parameter set (https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 22049) (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201935253",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "GRAVITY Collaboration (2019): First direct detection of an exoplanet by optical interferometry",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1903.11903"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201935253"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...623L..11G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201935253",
+      "label": "Astronomy & Astrophysics 623 L11"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "GRAVITY Collaboration (2019), Astronomy & Astrophysics 623 L11",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 623 L11",
+  "creators": [
+    "GRAVITY Collaboration",
+    "S. Lacour",
+    "M. Nowak",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

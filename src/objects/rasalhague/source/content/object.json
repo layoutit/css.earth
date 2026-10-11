@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "8,336 K",
+        "source": {
+          "catalogueId": "arxiv-1012-0787",
+          "url": "https://arxiv.org/abs/1012.0787",
+          "label": "Rotationally-modulated g-modes in the rapidly-rotating delta Scuti star Rasalhague (alpha Ophiuchi)",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

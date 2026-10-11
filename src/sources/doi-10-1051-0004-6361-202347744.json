@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202347744",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Martioli et al. (2023): TOI-1736 and TOI-2141: Two systems including sub-Neptunes around solar analogs revealed by TESS and SOPHIE",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2311.07011"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202347744"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...680A..84M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202347744",
+      "label": "Astronomy & Astrophysics 680 A84"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Martioli et al. (2023), Astronomy & Astrophysics 680 A84",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 680 A84",
+  "creators": [
+    "E. Martioli",
+    "G. Hébrard",
+    "L. de Almeida",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

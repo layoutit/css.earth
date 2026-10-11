@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-2041-8205-783-1-l17",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zhou et al. (2014): ACCRETION ONTO PLANETARY MASS COMPANIONS OF LOW-MASS YOUNG STARS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1401.6545"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/783/1/L17"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014ApJ...783L..17Z"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...783L..17Z",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/783/1/L17",
+      "label": "The Astrophysical Journal 783 L17"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...783L..17Z",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zhou et al. (2014), The Astrophysical Journal 783 L17",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014ApJ...783L..17Z"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 783 L17",
+  "creators": [
+    "Yifan Zhou",
+    "Gregory J. Herczeg",
+    "Adam L. Kraus",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

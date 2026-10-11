@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202449563",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rubenstein et al. (2025): Destruction of “peas in a pod?”: A candidate multi-planet system around the nearby bright star HD 208487",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2508.12447"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202449563"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...702A.139R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202449563",
+      "label": "Astronomy & Astrophysics 702 A139"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rubenstein et al. (2025), Astronomy & Astrophysics 702 A139",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 702 A139",
+  "creators": [
+    "Rafael I. Rubenstein",
+    "James S. Jenkins",
+    "Pablo A. Peña R.",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

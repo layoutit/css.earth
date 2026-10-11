@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.635 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202450047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+          "label": "Mallorquín et al. (2024), Astronomy & Astrophysics 689 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,540 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202450047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+          "label": "Mallorquín et al. (2024), Astronomy & Astrophysics 689 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.1 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1193",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract",
+          "label": "Donati et al. (2023), Monthly Notices of the Royal Astronomical Society 525 455-475",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202450047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+          "label": "Mallorquín et al. (2024), Astronomy & Astrophysics 689 A132",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "18 million years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1193",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract",
+          "label": "Donati et al. (2023), Monthly Notices of the Royal Astronomical Society 525 455-475",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "4.9 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1193",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract",
+          "label": "Donati et al. (2023), Monthly Notices of the Royal Astronomical Society 525 455-475",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

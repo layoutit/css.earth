@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4357-adf207",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Piaulet-Ghorayeb et al. (2025): Strict Limits on Potential Secondary Atmospheres on the Temperate Rocky Exo-Earth TRAPPIST-1 d",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2508.08416"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/adf207"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025ApJ...989..181P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/adf207",
+      "label": "The Astrophysical Journal 989 181"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Piaulet-Ghorayeb et al. (2025), The Astrophysical Journal 989 181",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 989 181",
+  "creators": [
+    "Caroline Piaulet-Ghorayeb",
+    "Björn Benneke",
+    "Martin Turbet",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.73 solar masses",
+        "source": {
+          "catalogueId": "publication-2022mnras-514-1606b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+          "label": "Barragán et al. (2022), Monthly Notices of the Royal Astronomical Society 514 1606-1627",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,511 K",
+        "source": {
+          "catalogueId": "publication-2022mnras-514-1606b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+          "label": "Barragán et al. (2022), Monthly Notices of the Royal Astronomical Society 514 1606-1627",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.18 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac9834",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...10E/abstract",
+          "label": "Mufti et al. (2023), The Astronomical Journal 165 10",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K4 V",
+        "source": {
+          "catalogueId": "publication-2022mnras-514-1606b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+          "label": "Barragán et al. (2022), Monthly Notices of the Royal Astronomical Society 514 1606-1627",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "480 million years",
+        "source": {
+          "catalogueId": "publication-2022mnras-514-1606b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+          "label": "Barragán et al. (2022), Monthly Notices of the Royal Astronomical Society 514 1606-1627",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

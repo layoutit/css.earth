@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1736 (pscomppars): rotation period 28 d, from Martioli et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M/abstract)",
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1736 (pscomppars): projected rotation speed 4 km/s, from Martioli et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M/abstract)",
+  "massSolar": 1.0373,
+  "massSource": "Mass 1.0373 +/- 0.0368 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1736 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

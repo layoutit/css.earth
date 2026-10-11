@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-177 (pscomppars): age 9.7 Gyr, from Turner et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract)",
   "projectedRotationSpeedKmS": 1.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-177 (pscomppars): projected rotation speed 1.8 km/s, from Turner et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract)",
+  "massSolar": 0.876,
+  "massSource": "Mass 0.876 +/- 0.038 solar masses from Turner et al. 2019, the stellar mass of the default parameter set of WASP-177 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

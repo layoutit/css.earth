@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.15 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stt1859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+          "label": "Nikolov et al. (2014), Monthly Notices of the Royal Astronomical Society 437 46-66",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,980 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stt1859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+          "label": "Nikolov et al. (2014), Monthly Notices of the Royal Astronomical Society 437 46-66",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.7 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-834-1-50",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...834...50B/abstract",
+          "label": "Barstow et al. (2017), The Astrophysical Journal 834 50",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae1f5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract",
+          "label": "Ment et al. (2018), The Astronomical Journal 156 213",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae1f5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract",
+          "label": "Ment et al. (2018), The Astronomical Journal 156 213",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

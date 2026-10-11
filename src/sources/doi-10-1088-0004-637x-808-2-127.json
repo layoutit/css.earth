@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-1088-0004-637x-808-2-127",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Grunblatt et al. (2015): DETERMINING THE MASS OF KEPLER-78b WITH NONPARAMETRIC GAUSSIAN PROCESS ESTIMATION",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1501.00369"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/808/2/127"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...808..127G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/808/2/127",
+      "label": "The Astrophysical Journal 808 127"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Grunblatt et al. (2015), The Astrophysical Journal 808 127",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 808 127",
+  "creators": [
+    "Samuel K. Grunblatt",
+    "Andrew W. Howard",
+    "Raphaëlle D. Haywood"
+  ],
+  "publicationDate": "2015"
+}

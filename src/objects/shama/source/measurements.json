@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 99109 (pscomppars): age 1 Gyr, from Ghezzi et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1290G/abstract)",
   "projectedRotationSpeedKmS": 1.86,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 99109 (pscomppars): projected rotation speed 1.86 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
+  "massSolar": 0.8532,
+  "massSource": "Mass 0.853 (0.813 to 0.893) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

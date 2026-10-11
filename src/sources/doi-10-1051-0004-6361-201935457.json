@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201935457",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dumusque et al. (2019): Hot, rocky and warm, puffy super-Earths orbiting TOI-402 (HD 15337)",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1903.05419"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201935457"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...627A..43D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...627A..43D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201935457",
+      "label": "Astronomy & Astrophysics 627 A43"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...627A..43D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Dumusque et al. (2019), Astronomy & Astrophysics 627 A43",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...627A..43D"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 627 A43",
+  "creators": [
+    "Xavier Dumusque",
+    "Oliver Turner",
+    "Caroline Dorn",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

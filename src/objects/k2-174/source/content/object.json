@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.7 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaff69",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract",
+          "label": "Livingston et al. (2019), The Astronomical Journal 157 102",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,455 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaff69",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract",
+          "label": "Livingston et al. (2019), The Astronomical Journal 157 102",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.17 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa89f2",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+          "label": "Dressing et al. (2017), The Astronomical Journal 154 207",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.3 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-k2-174",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

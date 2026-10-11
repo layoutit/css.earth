@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.642 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+          "label": "Naponiello et al. (2025), Astronomy & Astrophysics 693 A7",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,375 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+          "label": "Naponiello et al. (2025), Astronomy & Astrophysics 693 A7",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.14 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+          "label": "Naponiello et al. (2025), Astronomy & Astrophysics 693 A7",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K5 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+          "label": "Naponiello et al. (2025), Astronomy & Astrophysics 693 A7",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7.5 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+          "label": "Naponiello et al. (2025), Astronomy & Astrophysics 693 A7",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

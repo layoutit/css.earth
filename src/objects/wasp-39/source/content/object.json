@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,485 K",
+        "source": {
+          "catalogueId": "arxiv-1802-03859",
+          "url": "https://arxiv.org/abs/1802.03859",
+          "label": "The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.74 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202345975",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..51P/abstract",
+          "label": "Panek et al. (2023), Astronomy & Astrophysics 677 A51",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "8.5 billion years",
+        "source": {
+          "catalogueId": "arxiv-1802-03859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...613A..41M/abstract",
+          "label": "The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.19 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract",
+          "label": "Barkaoui et al. (2025), Monthly Notices of the Royal Astronomical Society 544 2637-2652",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,099 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract",
+          "label": "Barkaoui et al. (2025), Monthly Notices of the Royal Astronomical Society 544 2637-2652",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0041 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract",
+          "label": "Barkaoui et al. (2025), Monthly Notices of the Royal Astronomical Society 544 2637-2652",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M4.5+/-0.5",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract",
+          "label": "Barkaoui et al. (2025), Monthly Notices of the Royal Astronomical Society 544 2637-2652",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract",
+          "label": "Barkaoui et al. (2025), Monthly Notices of the Royal Astronomical Society 544 2637-2652",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

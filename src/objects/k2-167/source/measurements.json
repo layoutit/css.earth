@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-167 (pscomppars): age 5.3 Gyr, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "projectedRotationSpeedKmS": 2.88,
   "projectedRotationSpeedSource": "SIMBAD, HD 212657: projected rotation speed 2.88 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
+  "massSolar": 1.084,
+  "massSource": "Mass 1.084 +/- 0.1 solar masses from Thygesen et al. 2023, the stellar mass of the default parameter set of K2-167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

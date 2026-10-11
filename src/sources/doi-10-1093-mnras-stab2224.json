@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stab2224",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gan et al. (2021): HD 183579b: a warm sub-Neptune transiting a solar twin detected by <i>TESS</i>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2107.14015"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab2224"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021MNRAS.507.2220G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2220G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab2224",
+      "label": "Monthly Notices of the Royal Astronomical Society 507 2220-2240"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2220G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gan et al. (2021), Monthly Notices of the Royal Astronomical Society 507 2220-2240",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2220G"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 507 2220-2240",
+  "creators": [
+    "Tianjun Gan",
+    "Megan Bedell",
+    "Sharon Xuesong Wang",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

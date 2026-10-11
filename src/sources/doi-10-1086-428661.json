@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-428661",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tinney et al. (2005): Three Low‐Mass Planets from the Anglo‐Australian Planet Search",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/428661"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2005ApJ...623.1171T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2005ApJ...623.1171T",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2005ApJ...623.1171T",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Tinney et al. (2005), The Astrophysical Journal 623 1171-1179",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2005ApJ...623.1171T"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 623 1171-1179",
+  "creators": [
+    "C. G. Tinney",
+    "R. Paul Butler",
+    "Geoffrey W. Marcy",
+    "et al."
+  ],
+  "publicationDate": "2005"
+}

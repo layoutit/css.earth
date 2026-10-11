@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,457 K",
+        "source": {
+          "catalogueId": "arxiv-1805-00830",
+          "url": "https://arxiv.org/abs/1805.00830",
+          "label": "The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.025 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-1909-04642",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...887L..14B/abstract",
+          "label": "Water Vapor and Clouds on the Habitable-Zone Sub-Neptune Exoplanet K2-18b",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2.5 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-834-2-187",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...834..187B/abstract",
+          "label": "Benneke et al. (2017), The Astrophysical Journal 834 187",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "38.6 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201731558",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...608A..35C/abstract",
+          "label": "Cloutier et al. (2017), Astronomy & Astrophysics 608 A35",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

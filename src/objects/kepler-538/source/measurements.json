@@ -94,6 +94,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-538 (pscomppars): projected rotation speed 1.1 km/s, from Mayo et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..165M/abstract)",
   "spinInclinationDegrees": 38.9,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.872 solar radii): sin i = v sin i × P / (2πR) = 0.629. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.892,
+  "massSource": "Mass 0.892 +/- 0.051 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-538 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

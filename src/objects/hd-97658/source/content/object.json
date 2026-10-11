@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.85 solar masses",
+        "source": {
+          "catalogueId": "publication-2021aj-162-118e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+          "label": "Ellis et al. (2021), The Astronomical Journal 162 118",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,212 K",
+        "source": {
+          "catalogueId": "publication-2021aj-162-118e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+          "label": "Ellis et al. (2021), The Astronomical Journal 162 118",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.35 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2021aj-162-118e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+          "label": "Ellis et al. (2021), The Astronomical Journal 162 118",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K1 V",
+        "source": {
+          "catalogueId": "publication-2021aj-162-118e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+          "label": "Ellis et al. (2021), The Astronomical Journal 162 118",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.9 billion years",
+        "source": {
+          "catalogueId": "publication-2021aj-162-118e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+          "label": "Ellis et al. (2021), The Astronomical Journal 162 118",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

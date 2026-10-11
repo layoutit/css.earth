@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,755 K",
+        "source": {
+          "catalogueId": "arxiv-1501-01101",
+          "url": "https://arxiv.org/abs/1501.01101",
+          "label": "Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.055 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-1501-01101",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract",
+          "label": "Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1",
+        "source": {
+          "catalogueId": "doi-10-1126-science-1249403",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014Sci...344..277Q/abstract",
+          "label": "Quintana et al. (2014), Science 344 277-280",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4 billion years",
+        "source": {
+          "catalogueId": "arxiv-1501-01101",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract",
+          "label": "Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

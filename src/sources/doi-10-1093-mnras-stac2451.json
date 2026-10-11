@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stac2451",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mantovan et al. (2022): Validation of TESS exoplanet candidates orbiting solar analogues in the all-sky PLATO input catalogue",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2208.12276"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stac2451"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022MNRAS.516.4432M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.516.4432M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stac2451",
+      "label": "Monthly Notices of the Royal Astronomical Society 516 4432-4447"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.516.4432M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mantovan et al. (2022), Monthly Notices of the Royal Astronomical Society 516 4432-4447",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.516.4432M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 516 4432-4447",
+  "creators": [
+    "Giacomo Mantovan",
+    "Marco Montalto",
+    "Giampaolo Piotto",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

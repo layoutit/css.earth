@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.386 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab3483",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+          "label": "Kaye et al. (2022), Monthly Notices of the Royal Astronomical Society 510 5464-5485",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,506 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab3483",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+          "label": "Kaye et al. (2022), Monthly Notices of the Royal Astronomical Society 510 5464-5485",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.019 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab2143",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2154V/abstract",
+          "label": "Eylen et al. (2021), Monthly Notices of the Royal Astronomical Society stab2143",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aca90b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...84M/abstract",
+          "label": "Mikal-Evans et al. (2023), The Astronomical Journal 165 84",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

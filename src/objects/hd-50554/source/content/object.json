@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.04 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae7deb",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract",
+          "label": "刘 et al. (2026), The Astronomical Journal 172 72",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,968 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae7deb",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract",
+          "label": "刘 et al. (2026), The Astronomical Journal 172 72",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.5 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2003a-a-410-1039p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2003A&A...410.1039P/abstract",
+          "label": "Reference 2003A&A...410.1039P, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F8 V",
+        "source": {
+          "catalogueId": "doi-10-1088-1674-4527-accb7e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023RAA....23e5022X/abstract",
+          "label": "Xiao et al. (2023), Research in Astronomy and Astrophysics 23 055022",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.2 billion years",
+        "source": {
+          "catalogueId": "doi-10-1088-1674-4527-14-11-008",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014RAA....14.1447L/abstract",
+          "label": "Liu et al. (2014), Research in Astronomy and Astrophysics 14 1447-1457",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

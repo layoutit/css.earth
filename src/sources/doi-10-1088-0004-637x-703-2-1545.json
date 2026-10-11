@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-703-2-1545",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fischer et al. (2009): FIVE PLANETS AND AN INDEPENDENT CONFIRMATION OF HD 196885Ab FROM LICK OBSERVATORY",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0908.1596"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/703/2/1545"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009ApJ...703.1545F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...703.1545F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/703/2/1545",
+      "label": "The Astrophysical Journal 703 1545-1556"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...703.1545F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fischer et al. (2009), The Astrophysical Journal 703 1545-1556",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009ApJ...703.1545F"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 703 1545-1556",
+  "creators": [
+    "Debra Fischer",
+    "Peter Driscoll",
+    "Howard Isaacson",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

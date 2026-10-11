@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202243548",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Caballero et al. (2022): A detailed analysis of the Gl 486 planetary system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2206.09990"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202243548"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...665A.120C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243548",
+      "label": "Astronomy & Astrophysics 665 A120"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Caballero et al. (2022), Astronomy & Astrophysics 665 A120",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 665 A120",
+  "creators": [
+    "J. A. Caballero",
+    "E. González-Álvarez",
+    "M. Brady",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aa9791",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mann et al. (2018): Zodiacal Exoplanets in Time (ZEIT). VI. A Three-planet System in the Hyades Cluster Including an Earth-sized Planet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1709.10328"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aa9791"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018AJ....155....4M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155....4M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aa9791",
+      "label": "The Astronomical Journal 155 4"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155....4M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mann et al. (2018), The Astronomical Journal 155 4",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018AJ....155....4M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 155 4",
+  "creators": [
+    "Andrew W. Mann",
+    "Andrew Vanderburg",
+    "Aaron C. Rizzuto",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

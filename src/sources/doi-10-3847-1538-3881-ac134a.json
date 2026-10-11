@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac134a",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Llop-Sayson et al. (2021): Constraining the Orbit and Mass of epsilon Eridani b with Radial Velocities, Hipparcos IAD-Gaia DR2 Astrometry, and Multiepoch Vortex Coronagraphy Upper Limits",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2108.02305"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac134a"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....162..181L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..181L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac134a",
+      "label": "The Astronomical Journal 162 181"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..181L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Llop-Sayson et al. (2021), The Astronomical Journal 162 181",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..181L"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 181",
+  "creators": [
+    "Jorge Llop-Sayson",
+    "Jason J. Wang",
+    "Jean-Baptiste Ruffio",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

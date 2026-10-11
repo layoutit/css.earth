@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of KOI-351 (pscomppars): age 0.53 Gyr, from Q1-Q8 KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
   "projectedRotationSpeedKmS": 4.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KOI-351 (pscomppars): projected rotation speed 4.6 km/s, from Liang et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..202L/abstract)",
+  "massSolar": 1.2,
+  "massSource": "Mass 1.2 +/- 0.1 solar masses from Cabrera et al. 2014, the stellar mass of the default parameter set of KOI-351 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

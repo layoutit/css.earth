@@ -34,6 +34,8 @@
   "projectedRotationSpeedSource": "SIMBAD, HD 83342: projected rotation speed 7.44 km/s, the measurement SIMBAD prefers (2024ApJ...968L...2L)",
   "spinInclinationDegrees": 5.6,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.613 solar radii): sin i = v sin i × P / (2πR) = 0.098. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 1.2484,
+  "massSource": "Mass 1.2484 +/- 0.0261 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1898 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

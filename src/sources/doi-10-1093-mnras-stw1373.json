@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-1093-mnras-stw1373",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Pope et al. (2016): Transiting exoplanet candidates from<i>K2</i>Campaigns 5 and 6",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1606.01264"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stw1373"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016MNRAS.461.3399P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stw1373",
+      "label": "Monthly Notices of the Royal Astronomical Society 461 3399-3409"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Pope et al. (2016), Monthly Notices of the Royal Astronomical Society 461 3399-3409",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 461 3399-3409",
+  "creators": [
+    "Benjamin J. S. Pope",
+    "Hannu Parviainen",
+    "Suzanne Aigrain"
+  ],
+  "publicationDate": "2016"
+}

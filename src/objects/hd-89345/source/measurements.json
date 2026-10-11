@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 89345 (pscomppars): age 7.53 Gyr, from Yu et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y/abstract)",
   "projectedRotationSpeedKmS": 0.58,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 89345 (pscomppars): projected rotation speed 0.58 km/s, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
+  "massSolar": 1.157,
+  "massSource": "Mass 1.157 +/- 0.04 solar masses from Yu et al. 2018, the stellar mass of the default parameter set of HD 89345 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

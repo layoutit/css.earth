@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,450 K",
+        "source": {
+          "catalogueId": "arxiv-1109-3432",
+          "url": "https://arxiv.org/abs/1109.3432",
+          "label": "Kepler-16: A Transiting Circumbinary Planet",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.13 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.8 billion years",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-kepler-koi-docs",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "label": "Web page exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

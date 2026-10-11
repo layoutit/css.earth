@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,432 K",
+        "source": {
+          "catalogueId": "arxiv-2301-08192",
+          "url": "https://arxiv.org/abs/2301.08192",
+          "label": "Coulombe et al. (2023)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "2.7 times the Sun's",
+        "source": {
+          "catalogueId": "arxiv-2001-11112",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+          "label": "Cortés-Zuleta et al. (2020)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F6 IV-V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201425243",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...576A..42S/abstract",
+          "label": "Salz et al. (2015), Astronomy & Astrophysics 576 A42",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.6 billion years",
+        "source": {
+          "catalogueId": "arxiv-2001-11112",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+          "label": "Cortés-Zuleta et al. (2020)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

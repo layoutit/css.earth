@@ -24,6 +24,8 @@
       "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 24.01 d, the row 0.2 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.11,
+  "massSource": "Mass 0.11 +/- 0.02 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 452866792 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -34,6 +34,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of XO-2 N (pscomppars): projected rotation speed 1.07 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "spinInclinationDegrees": 37.3,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.998 solar radii): sin i = v sin i × P / (2πR) = 0.606. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 0.96,
+  "massSource": "Mass 0.96 +/- 0.05 solar masses from Ruggieri et al. 2024, the stellar mass of the default parameter set of XO-2 N b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

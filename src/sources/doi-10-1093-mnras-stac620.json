@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stac620",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Watanabe et al. (2022): Nodal precession of WASP-33b for 11 yr by Doppler tomographic and transit photometric observations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2203.02003"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stac620"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022MNRAS.512.4404W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.512.4404W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stac620",
+      "label": "Monthly Notices of the Royal Astronomical Society 512 4404-4418"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.512.4404W",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Watanabe et al. (2022), Monthly Notices of the Royal Astronomical Society 512 4404-4418",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.512.4404W"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 512 4404-4418",
+  "creators": [
+    "Noriharu Watanabe",
+    "Norio Narita",
+    "Enric Palle",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

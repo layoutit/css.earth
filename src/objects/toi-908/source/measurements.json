@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-908 (pscomppars): rotation period 21.932 d, from Hawthorn et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract)",
   "projectedRotationSpeedKmS": 2.56,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-908 (pscomppars): projected rotation speed 2.56 km/s, from Hawthorn et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract)",
+  "massSolar": 0.95,
+  "massSource": "Mass 0.95 +/- 0.01 solar masses from Hawthorn et al. 2023, the stellar mass of the default parameter set of TOI-908 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

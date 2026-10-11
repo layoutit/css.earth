@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.837 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-aded0d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract",
+          "label": "Yee et al. (2025), The Astrophysical Journal Supplement Series 280 30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,930 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-aded0d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract",
+          "label": "Yee et al. (2025), The Astrophysical Journal Supplement Series 280 30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.33 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-aded0d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract",
+          "label": "Yee et al. (2025), The Astrophysical Journal Supplement Series 280 30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.8 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-aded0d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract",
+          "label": "Yee et al. (2025), The Astrophysical Journal Supplement Series 280 30",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

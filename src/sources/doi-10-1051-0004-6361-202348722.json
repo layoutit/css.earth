@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202348722",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Castro-González et al. (2024): Signs of magnetic star-planet interactions in HD 118203",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2401.17272"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202348722"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...684A.160C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.160C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202348722",
+      "label": "Astronomy & Astrophysics 684 A160"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.160C",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Castro-González et al. (2024), Astronomy & Astrophysics 684 A160",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.160C"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 684 A160",
+  "creators": [
+    "A. Castro-González",
+    "J. Lillo-Box",
+    "A. C. M. Correia",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.984 solar masses",
+        "source": {
+          "catalogueId": "gaia-dr3-nenque",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,777 K",
+        "source": {
+          "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+          "url": "https://doi.org/10.1051/0004-6361/202243462",
+          "label": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Andrae et al. (2023), A&A 674, A27",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.1 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2004a-a-415-391m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2004A&A...415..391M/abstract",
+          "label": "Reference 2004A&A...415..391M, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G2/3 V",
+        "source": {
+          "catalogueId": "publication-1978mss-c02-0h",
+          "url": "https://ui.adsabs.harvard.edu/abs/1978MSS...C02....0H/abstract",
+          "label": "Reference 1978MSS...C02....0H, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "11 billion years",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-150-6-169",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H/abstract",
+          "label": "Hinkel et al. (2015), The Astronomical Journal 150 169",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

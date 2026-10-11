@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.207 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-025-02552-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+          "label": "Bryant et al. (2025), Nature Astronomy 9 1031-1044",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,007 K",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-025-02552-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+          "label": "Bryant et al. (2025), Nature Astronomy 9 1031-1044",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0037 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-025-02552-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+          "label": "Bryant et al. (2025), Nature Astronomy 9 1031-1044",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stw522",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Delrez et al. (2016): WASP-121 b: a hot Jupiter close to tidal disruption transiting an active F star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1506.02471"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stw522"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016MNRAS.458.4025D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.458.4025D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stw522",
+      "label": "Monthly Notices of the Royal Astronomical Society 458 4025-4043"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.458.4025D",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Delrez et al. (2016), Monthly Notices of the Royal Astronomical Society 458 4025-4043",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.458.4025D"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 458 4025-4043",
+  "creators": [
+    "L. Delrez",
+    "A. Santerne",
+    "J.-M. Almenara",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

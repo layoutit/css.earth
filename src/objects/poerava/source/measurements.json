@@ -40,6 +40,8 @@
   ],
   "projectedRotationSpeedKmS": 3.92,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): projected rotation speed 3.92 km/s, from Tsantaki et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...570A..80T/abstract)",
+  "massSolar": 1.1421,
+  "massSource": "Mass 1.142 (1.102 to 1.182) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

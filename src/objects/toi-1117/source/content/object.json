@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.97 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf939",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+          "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,635 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf939",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+          "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.36 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf939",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+          "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G5 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf939",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+          "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf939",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+          "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "40.0 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf939",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+          "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

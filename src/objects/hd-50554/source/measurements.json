@@ -38,6 +38,8 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 50554 (pscomppars): projected rotation speed 3.88 km/s, from Fischer et al. 2002 (https://ui.adsabs.harvard.edu/abs/2002PASP..114..529F/abstract)",
   "spinInclinationDegrees": 47.4,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.146 solar radii): sin i = v sin i × P / (2πR) = 0.736. Not a measurement of the axis: the three numbers come from different papers.",
+  "massSolar": 1.04,
+  "massSource": "Mass 1.04 +/- 0.05 solar masses from Liu et al. 2026, the stellar mass of the default parameter set of HD 50554 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

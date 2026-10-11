@@ -43,6 +43,19 @@
           "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
           "locator": "angularDiameterMas; angularDiameterSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,200 K",
+        "source": {
+          "catalogueId": "eso-release-eso1741",
+          "url": "https://doi.org/10.1038/nature25001",
+          "label": "ESO; the research is C. Paladini, F. Baron, A. Jorissen, J.-B. Le Bouquin, B. Freytag, S. Van Eck, M. Wittkowski, J. Hron, A. Chiavassa, J.-P. Berger, C. Siopis, A. Mayer, G. Sadowski, K. Kravchenko, S. Shetye, F. Kerschbaum, J. Kluska and S. Ramstedt, Nature 553, 310 (2018)",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

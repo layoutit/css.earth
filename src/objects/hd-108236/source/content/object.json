@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.869 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202039608",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract",
+          "label": "Bonfanti et al. (2021), Astronomy & Astrophysics 646 A157",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,660 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202039608",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract",
+          "label": "Bonfanti et al. (2021), Astronomy & Astrophysics 646 A157",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.71 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202039608",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract",
+          "label": "Bonfanti et al. (2021), Astronomy & Astrophysics 646 A157",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G3 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-abd73e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...85D/abstract",
+          "label": "Daylan et al. (2021), The Astronomical Journal 161 85",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202039608",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract",
+          "label": "Bonfanti et al. (2021), Astronomy & Astrophysics 646 A157",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

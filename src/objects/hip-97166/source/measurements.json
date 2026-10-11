@@ -30,6 +30,8 @@
       "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 10.289 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 0.9342,
+  "massSource": "Mass 0.9342 +/- 0.0158 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of HIP 97166 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

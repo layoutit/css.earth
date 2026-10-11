@@ -74,6 +74,8 @@
   ],
   "projectedRotationSpeedKmS": 0.8,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-1542: projected rotation speed 0.8 km/s, the measurement SIMBAD prefers (2018ApJS..237...38B)",
+  "massSolar": 0.94,
+  "massSource": "Mass 0.94 +/- 0.032 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1542 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

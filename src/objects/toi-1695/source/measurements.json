@@ -24,6 +24,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1695 (pscomppars): rotation period 47.7 d, from Cherubim et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract)",
   "projectedRotationSpeedKmS": 1.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1695 (pscomppars): projected rotation speed 1.3 km/s, from Cherubim et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract)",
+  "massSolar": 0.513,
+  "massSource": "Mass 0.513 +/- 0.012 solar masses from Cherubim et al. 2023, the stellar mass of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

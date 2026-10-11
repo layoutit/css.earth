@@ -57,6 +57,8 @@
   "rotationPeriodMeasuredDays": 14.46,
   "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 13 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 14.46 d, the light swinging by 0.67% as the star turns",
   "rotationLightSwingPercent": 0.67,
+  "massSolar": 0.742,
+  "massSource": "Mass 0.742 +/- 0.039 solar masses from Mayo et al. 2023, the stellar mass of the default parameter set of K2-136 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

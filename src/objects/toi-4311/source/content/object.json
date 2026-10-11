@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.816 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag952",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+          "label": "Eschen et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag952",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,063 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag952",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+          "label": "Eschen et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag952",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.42 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag952",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+          "label": "Eschen et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag952",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag952",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+          "label": "Eschen et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag952",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stag952",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+          "label": "Eschen et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag952",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

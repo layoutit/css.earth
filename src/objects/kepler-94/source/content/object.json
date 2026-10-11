@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.81 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+          "label": "Marcy et al. (2014), The Astrophysical Journal Supplement Series 210 20",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,781 K",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+          "label": "Marcy et al. (2014), The Astrophysical Journal Supplement Series 210 20",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.24 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-1674-4527-19-3-41",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract",
+          "label": "Gajdoš et al. (2019), Research in Astronomy and Astrophysics 19 041",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M0 V",
+        "source": {
+          "catalogueId": "doi-10-1088-2041-8205-750-2-l37",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..37M/abstract",
+          "label": "Muirhead et al. (2012), The Astrophysical Journal 750 L37",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.4 billion years",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+          "label": "Marcy et al. (2014), The Astrophysical Journal Supplement Series 210 20",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-504701",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Butler et al. (2006): Catalog of Nearby Exoplanets",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/504701"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2006ApJ...646..505B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Butler et al. (2006), The Astrophysical Journal 646 505-522",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 646 505-522",
+  "creators": [
+    "R. P. Butler",
+    "J. T. Wright",
+    "G. W. Marcy",
+    "et al."
+  ],
+  "publicationDate": "2006"
+}

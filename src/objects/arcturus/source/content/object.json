@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,295 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200809611",
+          "url": "https://doi.org/10.1051/0004-6361:200809611",
+          "label": "Lacour et al. (2008), Astronomy & Astrophysics 485 561-570",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

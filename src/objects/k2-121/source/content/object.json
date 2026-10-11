@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.71 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-adc5e4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+          "label": "Howard et al. (2025), The Astrophysical Journal Supplement Series 278 52",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,526 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-adc5e4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+          "label": "Howard et al. (2025), The Astrophysical Journal Supplement Series 278 52",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.18 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw1373",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract",
+          "label": "Pope et al. (2016), Monthly Notices of the Royal Astronomical Society 461 3399-3409",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

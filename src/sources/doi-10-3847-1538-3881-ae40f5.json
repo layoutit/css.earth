@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ae40f5",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wu et al. (2026): Detection of Four Cold Jupiters through Combined Analyses of Radial Velocity and Astrometry Data*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2601.11280"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae40f5"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026AJ....171..189W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..189W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae40f5",
+      "label": "The Astronomical Journal 171 189"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..189W",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wu et al. (2026), The Astronomical Journal 171 189",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..189W"
+    }
+  ],
+  "publisher": "The Astronomical Journal 171 189",
+  "creators": [
+    "Yiyun Wu",
+    "Guang-Yao Xiao",
+    "R. Paul Butler",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

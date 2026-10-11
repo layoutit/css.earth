@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-702-2-989",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Valenti et al. (2009): TWO EXOPLANETS DISCOVERED AT KECK OBSERVATORY",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0908.1612"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/702/2/989"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009ApJ...702..989V"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...702..989V",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/702/2/989",
+      "label": "The Astrophysical Journal 702 989-997"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...702..989V",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Valenti et al. (2009), The Astrophysical Journal 702 989-997",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009ApJ...702..989V"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 702 989-997",
+  "creators": [
+    "Jeff A. Valenti",
+    "Debra Fischer",
+    "Geoffrey W. Marcy",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

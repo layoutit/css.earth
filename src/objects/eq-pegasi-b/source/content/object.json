@@ -43,6 +43,32 @@
           "path": "source/preparation/rotation.json",
           "locator": "source"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.25 solar masses",
+        "source": {
+          "catalogueId": "arxiv-0808-1423",
+          "url": "https://arxiv.org/abs/0808.1423",
+          "label": "Morin et al. (2008), Mon.Not.Roy.Astron.Soc.390:567-581,2010",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,210 K",
+        "source": {
+          "catalogueId": "page-www-pas-rochester-edu-emamajek-eem-dwarf-ubvijhk-colors-teff-txt",
+          "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+          "label": "Web page www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

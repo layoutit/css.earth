@@ -34,6 +34,8 @@
   ],
   "projectedRotationSpeedKmS": 17.03,
   "projectedRotationSpeedSource": "SIMBAD, HD 222259B: projected rotation speed 17.03 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "massSolar": 0.74,
+  "massSource": "Mass 0.74 +/- 0.089 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 410214984 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

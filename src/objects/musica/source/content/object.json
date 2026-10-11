@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,020 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "43 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psad056",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract",
+          "label": "Teng et al. (2023), Publications of the Astronomical Society of Japan 75 1030-1071",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G6 III",
+        "source": {
+          "catalogueId": "doi-10-1093-pasj-psad056",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract",
+          "label": "Teng et al. (2023), Publications of the Astronomical Society of Japan 75 1030-1071",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-701-1-154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...701..154B/abstract",
+          "label": "Baines et al. (2009), The Astrophysical Journal 701 154-162",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

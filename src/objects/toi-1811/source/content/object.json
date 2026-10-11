@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.817 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad595",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.2765R/abstract",
+          "label": "Rodriguez et al. (2023), Monthly Notices of the Royal Astronomical Society 521 2765-2785",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,766 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad595",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.2765R/abstract",
+          "label": "Rodriguez et al. (2023), Monthly Notices of the Royal Astronomical Society 521 2765-2785",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.28 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad595",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.2765R/abstract",
+          "label": "Rodriguez et al. (2023), Monthly Notices of the Royal Astronomical Society 521 2765-2785",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "5.9 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad595",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.2765R/abstract",
+          "label": "Rodriguez et al. (2023), Monthly Notices of the Royal Astronomical Society 521 2765-2785",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

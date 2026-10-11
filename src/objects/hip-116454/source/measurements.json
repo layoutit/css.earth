@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 116454 (pscomppars): age 5.5 Gyr, from Thygesen et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 116454 (pscomppars): projected rotation speed 2 km/s, from Vanderburg et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...59V/abstract)",
+  "massSolar": 0.8,
+  "massSource": "Mass 0.8 +/- 0.033 solar masses from Thygesen et al. 2024, the stellar mass of the default parameter set of HIP 116454 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

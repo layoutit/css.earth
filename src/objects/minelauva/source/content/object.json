@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,657 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "500 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243725",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A.106L/abstract",
+          "label": "Lee et al. (2023), Astronomy & Astrophysics 678 A106",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1 III",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243725",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A.106L/abstract",
+          "label": "Lee et al. (2023), Astronomy & Astrophysics 678 A106",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "4,200 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202243725",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A.106L/abstract",
+          "label": "Lee et al. (2023), Astronomy & Astrophysics 678 A106",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

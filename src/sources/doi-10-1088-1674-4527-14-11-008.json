@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-1674-4527-14-11-008",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Liu et al. (2014): Precise determination of fundamental parameters of six exoplanet host stars and their planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1406.2173"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/1674-4527/14/11/008"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014RAA....14.1447L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014RAA....14.1447L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/1674-4527/14/11/008",
+      "label": "Research in Astronomy and Astrophysics 14 1447-1457"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014RAA....14.1447L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Liu et al. (2014), Research in Astronomy and Astrophysics 14 1447-1457",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014RAA....14.1447L"
+    }
+  ],
+  "publisher": "Research in Astronomy and Astrophysics 14 1447-1457",
+  "creators": [
+    "Kang Liu",
+    "Shao-Lan Bi",
+    "Tan-Da Li",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

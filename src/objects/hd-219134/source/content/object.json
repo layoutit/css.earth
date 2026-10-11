@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.81 solar masses",
+        "source": {
+          "catalogueId": "publication-2017natas-1e-56g",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+          "label": "Gillon et al. (2017), Nature Astronomy 1 0056",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,699 K",
+        "source": {
+          "catalogueId": "publication-2017natas-1e-56g",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+          "label": "Gillon et al. (2017), Nature Astronomy 1 0056",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.26 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2017natas-1e-56g",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+          "label": "Gillon et al. (2017), Nature Astronomy 1 0056",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K3 V",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-814-1-12",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...814...12V/abstract",
+          "label": "Vogt et al. (2015), The Astrophysical Journal 814 12",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "11 billion years",
+        "source": {
+          "catalogueId": "publication-2017natas-1e-56g",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+          "label": "Gillon et al. (2017), Nature Astronomy 1 0056",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

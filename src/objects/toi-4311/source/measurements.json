@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4311 (pscomppars): age 6.6 Gyr, from Eschen et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
   "projectedRotationSpeedKmS": 1.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4311 (pscomppars): projected rotation speed 1.1 km/s, from Eschen et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
+  "massSolar": 0.816,
+  "massSource": "Mass 0.816 +/- 0.047 solar masses from Eschen et al. 2026, the stellar mass of the default parameter set of TOI-4311 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

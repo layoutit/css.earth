@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202039455",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Luque et al. (2021): A planetary system with two transiting mini-Neptunes near the radius valley transition around the bright M dwarf TOI-776",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2009.08338"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202039455"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021A&A...645A..41L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..41L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202039455",
+      "label": "Astronomy & Astrophysics 645 A41"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..41L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Luque et al. (2021), Astronomy & Astrophysics 645 A41",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..41L"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 645 A41",
+  "creators": [
+    "R. Luque",
+    "L. M. Serrano",
+    "K. Molaverdikhani",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

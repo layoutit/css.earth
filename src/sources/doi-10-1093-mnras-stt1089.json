@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stt1089",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Southworth et al. (2013): High-precision photometry by telescope defocusing – V. WASP-15 and WASP-16★",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1306.3509"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stt1089"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013MNRAS.434.1300S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013MNRAS.434.1300S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stt1089",
+      "label": "Monthly Notices of the Royal Astronomical Society 434 1300-1308"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013MNRAS.434.1300S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Southworth et al. (2013), Monthly Notices of the Royal Astronomical Society 434 1300-1308",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013MNRAS.434.1300S"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 434 1300-1308",
+  "creators": [
+    "John Southworth",
+    "L. Mancini",
+    "P. Browne",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

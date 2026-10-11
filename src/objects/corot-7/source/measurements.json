@@ -36,6 +36,8 @@
   ],
   "projectedRotationSpeedKmS": 3.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): projected rotation speed 3.5 km/s, from Leger et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...506..287L/abstract)",
+  "massSolar": 0.82,
+  "massSource": "Mass 0.82 +/- 0.17 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of CoRoT-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,814 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.48 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-707-1-768",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...707..768N/abstract",
+          "label": "Niedzielski et al. (2009), The Astrophysical Journal 707 768-777",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K2 V",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-707-1-768",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...707..768N/abstract",
+          "label": "Niedzielski et al. (2009), The Astrophysical Journal 707 768-777",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

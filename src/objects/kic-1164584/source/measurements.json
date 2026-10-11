@@ -26,6 +26,8 @@
       "source": "VizieR J/ApJS/211/24/table2 (Rotation periods of Kepler MS stars), column Prot: 0.378 d, the row 0.1 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 1.1945,
+  "massSource": "Mass (Mosser scale, solar masses) 1.1945 +/- 0.0495 (https://arxiv.org/abs/2410.00102). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

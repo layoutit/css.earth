@@ -39,6 +39,8 @@
   "rotationPeriodMeasuredDays": 7.33,
   "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curve of sector 48 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 7.33 d, the light swinging by 1.2% as the star turns",
   "rotationLightSwingPercent": 1.18,
+  "massSolar": 1.146,
+  "massSource": "Mass 1.146 +/- 0.013 solar masses from Mantovan et al. 2024, the stellar mass of the default parameter set of TOI-5398 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.129M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

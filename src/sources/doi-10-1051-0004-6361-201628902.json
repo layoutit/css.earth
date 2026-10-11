@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-1051-0004-6361-201628902",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Barros et al. (2016): New planetary and eclipsing binary candidates from campaigns 1−6 of the K2 mission",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1607.02339"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201628902"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016A&A...594A.100B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201628902",
+      "label": "Astronomy & Astrophysics 594 A100"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barros et al. (2016), Astronomy & Astrophysics 594 A100",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 594 A100",
+  "creators": [
+    "S. C. C. Barros",
+    "O. Demangeon",
+    "M. Deleuil"
+  ],
+  "publicationDate": "2016"
+}

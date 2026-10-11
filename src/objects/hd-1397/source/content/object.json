@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.32 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201834577",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract",
+          "label": "Nielsen et al. (2019), Astronomy & Astrophysics 623 A100",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,521 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201834577",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract",
+          "label": "Nielsen et al. (2019), Astronomy & Astrophysics 623 A100",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "4.6 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201834577",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract",
+          "label": "Nielsen et al. (2019), Astronomy & Astrophysics 623 A100",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G5 III/IV",
+        "source": {
+          "catalogueId": "publication-1975mss-c01-0h",
+          "url": "https://ui.adsabs.harvard.edu/abs/1975MSS...C01....0H/abstract",
+          "label": "Reference 1975MSS...C01....0H, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.5 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201834577",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract",
+          "label": "Nielsen et al. (2019), Astronomy & Astrophysics 623 A100",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

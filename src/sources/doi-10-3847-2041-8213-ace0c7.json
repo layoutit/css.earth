@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ace0c7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Goffo et al. (2023): Company for the Ultra-high Density, Ultra-short Period Sub-Earth GJ 367 b: Discovery of Two Additional Low-mass Planets at 11.5 and 34 Days*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2307.09181"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ace0c7"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023ApJ...955L...3G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...955L...3G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ace0c7",
+      "label": "The Astrophysical Journal Letters 955 L3"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...955L...3G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Goffo et al. (2023), The Astrophysical Journal Letters 955 L3",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023ApJ...955L...3G"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 955 L3",
+  "creators": [
+    "Elisa Goffo",
+    "Davide Gandolfi",
+    "Jo Ann Egger",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

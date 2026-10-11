@@ -14,6 +14,8 @@
   "objectType": "Red Giant Branch star",
   "objectTypePath": "* > Ev* > RG*",
   "objectTypeSource": "SIMBAD, UCAC4 410-141835: main object type RG*, Red Giant Branch star",
+  "massSolar": 0.931,
+  "massSource": "Mass 0.931 +/- 0.0951 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 206313684 (K2 campaign 3): PARAM mass (solar masses) 0.930998 (16th-84th percentiles 0.853062-1.043333), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

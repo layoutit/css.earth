@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.437 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+          "label": "Greklek-McKeon et al. (2025), The Astronomical Journal 169 292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,563 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+          "label": "Greklek-McKeon et al. (2025), The Astronomical Journal 169 292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.026 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+          "label": "Greklek-McKeon et al. (2025), The Astronomical Journal 169 292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M2",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+          "label": "Greklek-McKeon et al. (2025), The Astronomical Journal 169 292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "4.6 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+          "label": "Greklek-McKeon et al. (2025), The Astronomical Journal 169 292",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

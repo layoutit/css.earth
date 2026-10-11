@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1086-339740",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Aufdenberg et al. (2002): The Spectral Energy Distribution and Mass‐Loss Rate of the A‐Type Supergiant Deneb",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/339740"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1086/339740",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1086/339740",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Aufdenberg et al. (2002), The Astrophysical Journal 570 344-368",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1086/339740"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 570 344-368",
+  "creators": [
+    "J. P. Aufdenberg",
+    "P. H. Hauschildt",
+    "E. Baron",
+    "et al."
+  ],
+  "publicationDate": "2002"
+}

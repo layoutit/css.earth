@@ -1,0 +1,36 @@
+{
+  "id": "publication-2000a-a-356-590u",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2000A&A...356..590U, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2000A&A...356..590U"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2000A&A...356..590U",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2000A&A...356..590U",
+      "checkedOn": "2026-10-11",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2000A&A...356..590U"
+    }
+  ],
+  "publicationDate": "2000"
+}

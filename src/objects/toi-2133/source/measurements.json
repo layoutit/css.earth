@@ -20,6 +20,8 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2133 (pscomppars): log10 of the luminosity in solar units -0.85248, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 1.408,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1333818968701222272, flags_flame 00: age_flame 1.408341 Gyr (16th to 84th percentiles 0.2 to 5.9947004)",
+  "massSolar": 0.644,
+  "massSource": "Mass 0.644 +/- 0.019 solar masses from Morello et al. 2026, the stellar mass of the default parameter set of TOI-2133 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

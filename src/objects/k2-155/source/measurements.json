@@ -30,6 +30,8 @@
   ],
   "projectedRotationSpeedKmS": 1.2,
   "projectedRotationSpeedSource": "SIMBAD, LP 415-17: projected rotation speed 1.2 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
+  "massSolar": 0.65,
+  "massSource": "Mass 0.65 +/- 0.06 solar masses from Díez Alonso et al. 2018, the stellar mass of the default parameter set of K2-155 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

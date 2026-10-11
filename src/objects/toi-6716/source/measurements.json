@@ -20,6 +20,8 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6716 (pscomppars): [Fe/H] 0 dex, from Scott et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag070S/abstract)",
   "luminosityLogSolar": -2.319,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6716 (pscomppars): log10 of the luminosity in solar units -2.31942, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "massSolar": 0.223,
+  "massSource": "Mass 0.223 +/- 0.011 solar masses from Scott et al. 2026, the stellar mass of the default parameter set of TOI-6716 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag070S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

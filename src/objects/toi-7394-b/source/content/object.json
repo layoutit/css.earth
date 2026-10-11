@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.624 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae82d3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+          "label": "Premnath et al. (2026), The Astronomical Journal 172 92",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,717 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae82d3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+          "label": "Premnath et al. (2026), The Astronomical Journal 172 92",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.068 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae82d3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+          "label": "Premnath et al. (2026), The Astronomical Journal 172 92",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1 V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ae82d3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+          "label": "Premnath et al. (2026), The Astronomical Journal 172 92",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

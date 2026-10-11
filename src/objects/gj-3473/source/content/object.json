@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.36 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038967",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+          "label": "Kemmer et al. (2020), Astronomy & Astrophysics 642 A236",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,347 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038967",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+          "label": "Kemmer et al. (2020), Astronomy & Astrophysics 642 A236",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.015 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038967",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+          "label": "Kemmer et al. (2020), Astronomy & Astrophysics 642 A236",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M4",
+        "source": {
+          "catalogueId": "publication-1996aj-112-2799h",
+          "url": "https://ui.adsabs.harvard.edu/abs/1996AJ....112.2799H/abstract",
+          "label": "Reference 1996AJ....112.2799H, as the NASA Exoplanet Archive cites it.",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "168 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038967",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+          "label": "Kemmer et al. (2020), Astronomy & Astrophysics 642 A236",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

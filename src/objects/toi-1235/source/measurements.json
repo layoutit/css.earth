@@ -44,6 +44,8 @@
   ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1235 (pscomppars): projected rotation speed 2 km/s, from Bluhm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract)",
+  "massSolar": 0.63,
+  "massSource": "Mass 0.63 +/- 0.024 solar masses from Bluhm et al. 2020, the stellar mass of the default parameter set of TOI-1235 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac7ce1",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "MacDougall et al. (2022): The TESS–Keck Survey. XIII. An Eccentric Hot Neptune with a Similar-mass Outer Companion around TOI-1272",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2206.14327"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac7ce1"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....164...97M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...97M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac7ce1",
+      "label": "The Astronomical Journal 164 97"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...97M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "MacDougall et al. (2022), The Astronomical Journal 164 97",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...97M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 164 97",
+  "creators": [
+    "Mason G. MacDougall",
+    "Erik A. Petigura",
+    "Tara Fetherolf",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

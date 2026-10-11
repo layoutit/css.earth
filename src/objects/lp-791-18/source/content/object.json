@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.139 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-05934-8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract",
+          "label": "Peterson et al. (2023), Nature 617 701-705",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "2,960 K",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-05934-8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract",
+          "label": "Peterson et al. (2023), Nature 617 701-705",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.0023 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-05934-8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract",
+          "label": "Peterson et al. (2023), Nature 617 701-705",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M(6.1 +/- 0.7) V",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-05934-8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract",
+          "label": "Peterson et al. (2023), Nature 617 701-705",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "500 million years",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-023-05934-8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract",
+          "label": "Peterson et al. (2023), Nature 617 701-705",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

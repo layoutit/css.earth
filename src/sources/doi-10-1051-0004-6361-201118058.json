@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201118058",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Patience et al. (2012): Spectroscopy across the brown dwarf/planetary mass boundary",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1201.3921"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201118058"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012A&A...540A..85P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012A&A...540A..85P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201118058",
+      "label": "Astronomy & Astrophysics 540 A85"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012A&A...540A..85P",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Patience et al. (2012), Astronomy & Astrophysics 540 A85",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012A&A...540A..85P"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 540 A85",
+  "creators": [
+    "J. Patience",
+    "R. R. King",
+    "R. J. De Rosa",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

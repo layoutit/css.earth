@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): rotation period 33 d, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): projected rotation speed 2 km/s, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
+  "massSolar": 0.577,
+  "massSource": "Mass 0.577 +/- 0.024 solar masses from Geraldía-González et al. 2025, the stellar mass of the default parameter set of Ross 176 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

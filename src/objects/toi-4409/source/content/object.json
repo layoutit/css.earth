@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.763 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract",
+          "label": "Reller et al. (2026), Astronomy & Astrophysics 712 A142",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,928 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract",
+          "label": "Reller et al. (2026), Astronomy & Astrophysics 712 A142",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.27 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract",
+          "label": "Reller et al. (2026), Astronomy & Astrophysics 712 A142",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract",
+          "label": "Reller et al. (2026), Astronomy & Astrophysics 712 A142",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "7 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451047",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract",
+          "label": "Reller et al. (2026), Astronomy & Astrophysics 712 A142",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

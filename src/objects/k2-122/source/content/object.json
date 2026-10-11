@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.63 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab2669",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+          "label": "Castro-González et al. (2022), Monthly Notices of the Royal Astronomical Society 509 1075-1095",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "4,009 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab2669",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+          "label": "Castro-González et al. (2022), Monthly Notices of the Royal Astronomical Society 509 1075-1095",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.079 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaa9c1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract",
+          "label": "Hirano et al. (2018), The Astronomical Journal 155 127",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

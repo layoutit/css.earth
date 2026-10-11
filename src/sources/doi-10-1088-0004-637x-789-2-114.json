@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-789-2-114",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Burt et al. (2014): THE LICK-CARNEGIE EXOPLANET SURVEY: GLIESE 687 b—A NEPTUNE-MASS PLANET ORBITING A NEARBY RED DWARF",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1405.2929"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/789/2/114"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014ApJ...789..114B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..114B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/789/2/114",
+      "label": "The Astrophysical Journal 789 114"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..114B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Burt et al. (2014), The Astrophysical Journal 789 114",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..114B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 789 114",
+  "creators": [
+    "Jennifer Burt",
+    "Steven S. Vogt",
+    "R. Paul Butler",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

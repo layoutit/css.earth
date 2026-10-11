@@ -14,6 +14,8 @@
   "objectType": "Star",
   "objectTypePath": "*",
   "objectTypeSource": "SIMBAD, UCAC4 324-082491: main object type *, Star",
+  "massSolar": 0.9054,
+  "massSource": "Mass 0.9054 +/- 0.125 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 203677770 (K2 campaign 2): PARAM mass (solar masses) 0.905443 (16th-84th percentiles 0.80668-1.056734), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

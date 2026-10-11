@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-0004-637x-827-1-78",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sinukoff et al. (2016): ELEVEN MULTIPLANET SYSTEMS FROM K2 CAMPAIGNS 1 AND 2 AND THE MASSES OF TWO HOT SUPER-EARTHS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1511.09213"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-637X/827/1/78"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016ApJ...827...78S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...827...78S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0004-637X/827/1/78",
+      "label": "The Astrophysical Journal 827 78"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...827...78S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sinukoff et al. (2016), The Astrophysical Journal 827 78",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016ApJ...827...78S"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 827 78",
+  "creators": [
+    "Evan Sinukoff",
+    "Andrew W. Howard",
+    "Erik A. Petigura",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

@@ -56,6 +56,45 @@
           "path": "source/measurements.json",
           "locator": "effectiveTemperatureK; effectiveTemperatureSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "6.6 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201423839",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...565L...4G/abstract",
+          "label": "Galicher et al. (2014), Astronomy & Astrophysics 565 L4",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "A8 III",
+        "source": {
+          "catalogueId": "doi-10-1088-2041-8205-772-2-l15",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..15R/abstract",
+          "label": "Rameau et al. (2013), The Astrophysical Journal 772 L15",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "17 million years",
+        "source": {
+          "catalogueId": "doi-10-1088-2041-8205-779-2-l26",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...779L..26R/abstract",
+          "label": "Rameau et al. (2013), The Astrophysical Journal 779 L26",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

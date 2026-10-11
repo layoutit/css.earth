@@ -30,6 +30,19 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "8,197 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

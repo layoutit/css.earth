@@ -18,6 +18,8 @@
   "objectTypeSource": "SIMBAD, * alf Eri: main object type Be*, Be Star",
   "projectedRotationSpeedKmS": 235,
   "projectedRotationSpeedSource": "SIMBAD, * alf Eri: projected rotation speed 235 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "massSolar": 5.99,
+  "massSource": "Mass 5.99 +/- 0.6 solar masses from Kervella et al. (2022), A&A 667, A111, Table 4: mass of A 5.99 +/- 0.60 solar masses, the orbit's total mass less B's model mass (https://doi.org/10.1051/0004-6361/202244009). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A Roche surface flattened by rotation, 9.16 solar radii at the equator and 6.78 at the poles, its pole 60.6 degrees from the line of sight at position angle 216.9 degrees, and gravity darkened with exponent 0.166 from a 17,124 K pole: Domiciano de Souza et al. (2014), A&A 569, A10 (https://doi.org/10.1051/0004-6361/201424144). The disc color is the star's measured one; only the pole-to-equator contrast is the model's."

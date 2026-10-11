@@ -34,6 +34,8 @@
   ],
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-199 (pscomppars): projected rotation speed 0.5 km/s, from Hobson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract)",
+  "massSolar": 0.936,
+  "massSource": "Mass 0.936 +/- 0.003 solar masses from Hobson et al. 2023, the stellar mass of the default parameter set of TOI-199 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

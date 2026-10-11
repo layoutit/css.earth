@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-astro-ph-0501261",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "McAlister et al. (2005): First Results from the CHARA Array. I. An Interferometric and Spectroscopic Study of the Fast Rotator alpha Leonis (Regulus)",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0501261"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/430730"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0501261",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/430730",
+      "label": "Astrophys.J. 628 (2005) 439-452"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0501261",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "McAlister et al. (2005), Astrophys.J. 628 (2005) 439-452",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/astro-ph/0501261"
+    }
+  ],
+  "publisher": "Astrophys.J. 628 (2005) 439-452",
+  "creators": [
+    "H. A. McAlister",
+    "T. A. ten Brummelaar",
+    "D. R. Gies",
+    "et al."
+  ],
+  "publicationDate": "2005"
+}

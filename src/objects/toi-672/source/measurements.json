@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-672 (pscomppars): rotation period 18.5 d, from Osborn et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
   "projectedRotationSpeedKmS": 3.75,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-672 (pscomppars): projected rotation speed 3.75 km/s, from Osborn et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
+  "massSolar": 0.54,
+  "massSource": "Mass 0.54 +/- 0.03 solar masses from Osborn et al. 2026, the stellar mass of the default parameter set of TOI-672 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac1200",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fu et al. (2021): The Hubble PanCET Program: Transit and Eclipse Spectroscopy of the Strongly Irradiated Giant Exoplanet WASP-76b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2005.02568"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac1200"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....162..108F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..108F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac1200",
+      "label": "The Astronomical Journal 162 108"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..108F",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fu et al. (2021), The Astronomical Journal 162 108",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..108F"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 108",
+  "creators": [
+    "Guangwei Fu",
+    "Drake Deming",
+    "Joshua Lothringer",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

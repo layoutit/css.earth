@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.07 solar masses",
+        "source": {
+          "catalogueId": "publication-2021mnras-502-2893k",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+          "label": "Hodžić et al. (2021), Monthly Notices of the Royal Astronomical Society 502 2893-2911",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,998 K",
+        "source": {
+          "catalogueId": "publication-2021mnras-502-2893k",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+          "label": "Hodžić et al. (2021), Monthly Notices of the Royal Astronomical Society 502 2893-2911",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.4 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-abf932",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...12V/abstract",
+          "label": "Venner et al. (2021), The Astronomical Journal 162 12",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202556735",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.104P/abstract",
+          "label": "Piccinini et al. (2026), Astronomy & Astrophysics 707 A104",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "3.9 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac5dcb",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract",
+          "label": "Hatzes et al. (2022), The Astronomical Journal 163 223",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "18.3 days",
+        "source": {
+          "catalogueId": "publication-2021mnras-502-2893k",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+          "label": "Hodžić et al. (2021), Monthly Notices of the Royal Astronomical Society 502 2893-2911",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

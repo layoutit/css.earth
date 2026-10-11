@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201423839",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Galicher et al. (2014): Near-infrared detection and characterization of the exoplanet HD 95086 b with the Gemini Planet Imager",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1404.4635"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201423839"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014A&A...565L...4G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...565L...4G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201423839",
+      "label": "Astronomy & Astrophysics 565 L4"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...565L...4G",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Galicher et al. (2014), Astronomy & Astrophysics 565 L4",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014A&A...565L...4G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 565 L4",
+  "creators": [
+    "R. Galicher",
+    "J. Rameau",
+    "M. Bonnefoy",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

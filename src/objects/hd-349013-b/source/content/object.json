@@ -30,6 +30,32 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.323 solar masses",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://doi.org/10.3847/1538-3881/ab3467",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,328 K",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://doi.org/10.3847/1538-3881/ab3467",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
       }
     ],
     "moreFacts": []

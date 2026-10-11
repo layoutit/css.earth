@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad79ed",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lubin et al. (2024): The HD 191939 Exoplanet System is Well Aligned and Flat",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2409.06795"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad79ed"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....168..196L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..196L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad79ed",
+      "label": "The Astronomical Journal 168 196"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..196L",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lubin et al. (2024), The Astronomical Journal 168 196",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..196L"
+    }
+  ],
+  "publisher": "The Astronomical Journal 168 196",
+  "creators": [
+    "Jack Lubin",
+    "Erik A. Petigura",
+    "Judah Van Zandt",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

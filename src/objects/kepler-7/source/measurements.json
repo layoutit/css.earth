@@ -62,6 +62,8 @@
   ],
   "projectedRotationSpeedKmS": 4.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): projected rotation speed 4.2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "massSolar": 1.359,
+  "massSource": "Mass 1.359 +/- 0.031 solar masses from Esteves et al. 2015, the stellar mass of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

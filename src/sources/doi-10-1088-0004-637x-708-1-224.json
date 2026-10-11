@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-708-1-224",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hebb et al. (2010): WASP-19b: THE SHORTEST PERIOD TRANSITING EXOPLANET YET DISCOVERED",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1001.0403"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/708/1/224"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010ApJ...708..224H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...708..224H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/708/1/224",
+      "label": "The Astrophysical Journal 708 224-231"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...708..224H",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hebb et al. (2010), The Astrophysical Journal 708 224-231",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010ApJ...708..224H"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 708 224-231",
+  "creators": [
+    "L. Hebb",
+    "A. Collier-Cameron",
+    "A.H.M.J. Triaud",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

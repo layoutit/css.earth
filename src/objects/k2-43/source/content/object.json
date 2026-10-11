@@ -30,6 +30,45 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.571 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ab2a74",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+          "label": "Hedges et al. (2019), The Astrophysical Journal Letters 880 L5",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,841 K",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ab2a74",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+          "label": "Hedges et al. (2019), The Astrophysical Journal Letters 880 L5",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.061 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
       }
     ],
     "moreFacts": []

@@ -14,6 +14,8 @@
   "objectType": "Star",
   "objectTypePath": "*",
   "objectTypeSource": "SIMBAD, TYC 9197-1442-1: main object type *, Star",
+  "massSolar": 1.2492,
+  "massSource": "Mass 1.2492 +/- 0.0396 solar masses from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 306823161 (observed by TESS): PARAM mass (solar masses) 1.249186 (16th-84th percentiles 1.218919-1.298179), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

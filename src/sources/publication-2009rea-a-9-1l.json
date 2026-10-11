@@ -1,0 +1,36 @@
+{
+  "id": "publication-2009rea-a-9-1l",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reference 2009ReA&A...9....1L, as the NASA Exoplanet Archive cites it.",
+  "identifiers": [
+    {
+      "type": "bibliography-key",
+      "value": "2009ReA&A...9....1L"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ReA&A...9....1L",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ReA&A...9....1L",
+      "checkedOn": "2026-10-11",
+      "locator": "ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009ReA&A...9....1L"
+    }
+  ],
+  "publicationDate": "2009"
+}

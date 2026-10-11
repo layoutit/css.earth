@@ -30,6 +30,71 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.549 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac7807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+          "label": "Diamond-Lowe et al. (2022), The Astronomical Journal 164 172",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,844 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac7807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+          "label": "Diamond-Lowe et al. (2022), The Astronomical Journal 164 172",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.059 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac7807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+          "label": "Diamond-Lowe et al. (2022), The Astronomical Journal 164 172",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M V",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac7807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+          "label": "Diamond-Lowe et al. (2022), The Astronomical Journal 164 172",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "6.9 billion years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac7807",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+          "label": "Diamond-Lowe et al. (2022), The Astronomical Journal 164 172",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 205739 (pscomppars): age 2.84 Gyr, from Lopez-Morales et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008AJ....136.1901L/abstract)",
   "projectedRotationSpeedKmS": 4.48,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 205739 (pscomppars): projected rotation speed 4.48 km/s, from Lopez-Morales et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008AJ....136.1901L/abstract)",
+  "massSolar": 1.185,
+  "massSource": "Mass 1.185 (1.145 to 1.225) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

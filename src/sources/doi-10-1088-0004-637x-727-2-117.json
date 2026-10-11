@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-727-2-117",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Meschiari et al. (2011): THE LICK-CARNEGIE SURVEY: FOUR NEW EXOPLANET CANDIDATES",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1011.4068"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/727/2/117"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJ...727..117M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...727..117M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/727/2/117",
+      "label": "The Astrophysical Journal 727 117"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJ...727..117M",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Meschiari et al. (2011), The Astrophysical Journal 727 117",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJ...727..117M"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 727 117",
+  "creators": [
+    "Stefano Meschiari",
+    "Gregory Laughlin",
+    "Steven S. Vogt",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

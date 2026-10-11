@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-425256",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Alonso et al. (2004): TrES-1: The Transiting Planet of a Bright K0 V Star",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/425256"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2004ApJ...613L.153A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2004ApJ...613L.153A",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2004ApJ...613L.153A",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Alonso et al. (2004), The Astrophysical Journal 613 L153-L156",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2004ApJ...613L.153A"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 613 L153-L156",
+  "creators": [
+    "Roi Alonso",
+    "Timothy M. Brown",
+    "Guillermo Torres",
+    "et al."
+  ],
+  "publicationDate": "2004"
+}

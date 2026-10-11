@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.471 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346292",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract",
+          "label": "González-Álvarez et al. (2023), Astronomy & Astrophysics 675 A177",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,709 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346292",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract",
+          "label": "González-Álvarez et al. (2023), Astronomy & Astrophysics 675 A177",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.038 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346292",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract",
+          "label": "González-Álvarez et al. (2023), Astronomy & Astrophysics 675 A177",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M1.5 V",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346292",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract",
+          "label": "González-Álvarez et al. (2023), Astronomy & Astrophysics 675 A177",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "1.3 billion years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346292",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract",
+          "label": "González-Álvarez et al. (2023), Astronomy & Astrophysics 675 A177",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "29.0 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346292",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract",
+          "label": "González-Álvarez et al. (2023), Astronomy & Astrophysics 675 A177",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

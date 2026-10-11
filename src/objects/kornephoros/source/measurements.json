@@ -28,6 +28,8 @@
   ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "SIMBAD, * bet Her: projected rotation speed 3 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
+  "massSolar": 2.91,
+  "massSource": "Mass 2.91 +/- 0.11 solar masses from Baines et al. (2018), AJ 155, 30, HD 148856: mass 2.91 +/- 0.11 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

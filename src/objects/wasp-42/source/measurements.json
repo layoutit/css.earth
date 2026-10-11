@@ -22,6 +22,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-42 (pscomppars): age 4.4 Gyr, from Southworth et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract)",
   "projectedRotationSpeedKmS": 2.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-42 (pscomppars): projected rotation speed 2.7 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "massSolar": 0.951,
+  "massSource": "Mass 0.951 +/- 0.063 solar masses from Southworth et al. 2016, the stellar mass of the default parameter set of WASP-42 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

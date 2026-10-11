@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.19 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1903",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+          "label": "Hellier et al. (2019), Monthly Notices of the Royal Astronomical Society 488 3067-3075",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "6,050 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1903",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+          "label": "Hellier et al. (2019), Monthly Notices of the Royal Astronomical Society 488 3067-3075",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "1.9 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201833051",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract",
+          "label": "Gaia Collaboration (2018), Astronomy & Astrophysics 616 A1",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "F9 V",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1903",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+          "label": "Hellier et al. (2019), Monthly Notices of the Royal Astronomical Society 488 3067-3075",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "2.1 billion years",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1903",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+          "label": "Hellier et al. (2019), Monthly Notices of the Royal Astronomical Society 488 3067-3075",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "12.1 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz1903",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+          "label": "Hellier et al. (2019), Monthly Notices of the Royal Astronomical Society 488 3067-3075",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

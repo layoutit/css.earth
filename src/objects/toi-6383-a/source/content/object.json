@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.458 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad7fe8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract",
+          "label": "Bernabò et al. (2024), The Astronomical Journal 168 273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,444 K",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad7fe8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract",
+          "label": "Bernabò et al. (2024), The Astronomical Journal 168 273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.033 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad7fe8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract",
+          "label": "Bernabò et al. (2024), The Astronomical Journal 168 273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "M3",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad7fe8",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract",
+          "label": "Bernabò et al. (2024), The Astronomical Journal 168 273",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
       }
     ],
     "moreFacts": []

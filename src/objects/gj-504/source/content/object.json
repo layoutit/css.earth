@@ -43,6 +43,58 @@
           "path": "source/measurements.json",
           "locator": "effectiveTemperatureK; effectiveTemperatureSource"
         }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "2.1 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-774-1-11",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract",
+          "label": "Kuzuhara et al. (2013), The Astrophysical Journal 774 11",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "G0 V",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-774-1-11",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract",
+          "label": "Kuzuhara et al. (2013), The Astrophysical Journal 774 11",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "160 million years",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-774-1-11",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract",
+          "label": "Kuzuhara et al. (2013), The Astrophysical Journal 774 11",
+          "checked": "2026-10-11",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "3.3 days",
+        "source": {
+          "catalogueId": "arxiv-1609-02530",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...598A..19D/abstract",
+          "label": "D'Orazi et al. (2017)",
+          "checked": "2026-09-23",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

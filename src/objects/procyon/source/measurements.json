@@ -27,6 +27,8 @@
       "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 23 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "massSolar": 1.478,
+  "massSource": "Mass 1.478 +/- 0.012 solar masses from Bond et al. (2015), ApJ 813, 106, Table 10: dynamical mass 1.478 +/- 0.012 solar masses (https://doi.org/10.1088/0004-637X/813/2/106). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

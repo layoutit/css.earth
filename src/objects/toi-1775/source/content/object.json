@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.922 solar masses",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,284 K",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.48 times the Sun's",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "800 million years",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-24",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

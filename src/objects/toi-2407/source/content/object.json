@@ -30,6 +30,58 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.548 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf946",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract",
+          "label": "Muñoz et al. (2025), Monthly Notices of the Royal Astronomical Society 541 630-641",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "3,530 K",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf946",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract",
+          "label": "Muñoz et al. (2025), Monthly Notices of the Royal Astronomical Society 541 630-641",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.045 times the Sun's",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf946",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract",
+          "label": "Muñoz et al. (2025), Monthly Notices of the Royal Astronomical Society 541 630-641",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "13 billion years",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-2407",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
       }
     ],
     "moreFacts": []

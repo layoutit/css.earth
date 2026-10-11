@@ -140,6 +140,8 @@
   ],
   "projectedRotationSpeedKmS": 5.39,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-411: projected rotation speed 5.39 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "massSolar": 0.87,
+  "massSource": "Mass 0.87 +/- 0.039 solar masses from Sun et al. 2019, the stellar mass of the default parameter set of Kepler-411 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201628932",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Osborn et al. (2017): K2-110 b: a massive mini-Neptune exoplanet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1605.04291"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201628932"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017A&A...604A..19O"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...604A..19O",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201628932",
+      "label": "Astronomy & Astrophysics 604 A19"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...604A..19O",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Osborn et al. (2017), Astronomy & Astrophysics 604 A19",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017A&A...604A..19O"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 604 A19",
+  "creators": [
+    "H. P. Osborn",
+    "A. Santerne",
+    "S. C. C. Barros",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

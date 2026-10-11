@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stw2316",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Brown et al. (2017): Rossiter–McLaughlin models and their effect on estimates of stellar rotation, illustrated using six WASP systems",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1610.00600"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stw2316"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017MNRAS.464..810B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..810B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stw2316",
+      "label": "Monthly Notices of the Royal Astronomical Society 464 810-839"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..810B",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Brown et al. (2017), Monthly Notices of the Royal Astronomical Society 464 810-839",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..810B"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 464 810-839",
+  "creators": [
+    "D. J. A. Brown",
+    "A. H. M. J. Triaud",
+    "A. P. Doyle",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

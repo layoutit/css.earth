@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-232 (pscomppars): age 3.9 Gyr, from Ranshaw et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract)",
   "projectedRotationSpeedKmS": 4.16,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-232 (pscomppars): projected rotation speed 4.16 km/s, from Ranshaw et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract)",
+  "massSolar": 1.121,
+  "massSource": "Mass 1.121 +/- 0.063 solar masses from Ranshaw et al. 2026, the stellar mass of the default parameter set of K2-232 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

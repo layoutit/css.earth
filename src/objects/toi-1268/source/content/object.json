@@ -30,6 +30,84 @@
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.96 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202142883",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+          "label": "Šubjak et al. (2022), Astronomy & Astrophysics 662 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSolar; massSource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "5,300 K",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202142883",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+          "label": "Šubjak et al. (2022), Astronomy & Astrophysics 662 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "luminosity",
+        "label": "Luminosity",
+        "value": "0.52 times the Sun's",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+          "label": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "luminosityLogSolar; luminositySource"
+        }
+      },
+      {
+        "id": "spectral-type",
+        "label": "Spectral type",
+        "value": "K1-K2",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202142883",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+          "label": "Šubjak et al. (2022), Astronomy & Astrophysics 662 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "spectralType; spectralTypeSource"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "250 million years",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202142883",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+          "label": "Šubjak et al. (2022), Astronomy & Astrophysics 662 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "ageGyr; ageSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "10.9 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202142883",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+          "label": "Šubjak et al. (2022), Astronomy & Astrophysics 662 A107",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "rotationPeriodDays; rotationPeriodSource"
+        }
       }
     ],
     "moreFacts": []

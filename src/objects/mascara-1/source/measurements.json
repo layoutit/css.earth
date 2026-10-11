@@ -26,6 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of MASCARA-1 (pscomppars): rotation period 0.853 d, from Hooton et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract)",
   "projectedRotationSpeedKmS": 101.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of MASCARA-1 (pscomppars): projected rotation speed 101.7 km/s, from Hooton et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract)",
+  "massSolar": 1.9,
+  "massSource": "Mass 1.9 +/- 0.063 solar masses from Hooton et al. 2022, the stellar mass of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A flattened sphere, the polar radius 4.39% smaller than the equatorial (Hooton et al. (2022), A&A 658, A75), colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json) and darkened by latitude from the same fit. No image of the photosphere exists."

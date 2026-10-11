@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-2041-8205-772-2-l15",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rameau et al. (2013): DISCOVERY OF A PROBABLE 4-5 JUPITER-MASS EXOPLANET TO HD 95086 BY DIRECT IMAGING",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1305.7428"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/772/2/L15"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013ApJ...772L..15R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..15R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/772/2/L15",
+      "label": "The Astrophysical Journal 772 L15"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..15R",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rameau et al. (2013), The Astrophysical Journal 772 L15",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..15R"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 772 L15",
+  "creators": [
+    "J. Rameau",
+    "G. Chauvin",
+    "A.-M. Lagrange",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

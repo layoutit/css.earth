@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1088-2041-8205-761-1-l3",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Monnier et al. (2012): RESOLVING VEGA AND THE INCLINATION CONTROVERSY WITH CHARA/MIRC",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/761/1/L3"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1088/2041-8205/761/1/L3",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1088/2041-8205/761/1/L3",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Monnier et al. (2012), The Astrophysical Journal 761 L3",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1088/2041-8205/761/1/L3"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 761 L3",
+  "creators": [
+    "J. D. Monnier",
+    "Xiao Che",
+    "Ming Zhao",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

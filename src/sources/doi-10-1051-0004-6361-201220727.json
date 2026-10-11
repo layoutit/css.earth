@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201220727",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Smith et al. (2013): WASP-71b: a bloated hot Jupiter in a 2.9-day, prograde orbit around an evolved F8 star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1211.3045"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201220727"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013A&A...552A.120S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A.120S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201220727",
+      "label": "Astronomy & Astrophysics 552 A120"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A.120S",
+      "checkedOn": "2026-10-11",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Smith et al. (2013), Astronomy & Astrophysics 552 A120",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A.120S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 552 A120",
+  "creators": [
+    "A. M. S. Smith",
+    "D. R. Anderson",
+    "F. Bouchy",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

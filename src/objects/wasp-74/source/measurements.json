@@ -24,6 +24,8 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-74 (pscomppars): age 3.49 Gyr, from Luque et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..50L/abstract)",
   "projectedRotationSpeedKmS": 6.03,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-74 (pscomppars): projected rotation speed 6.03 km/s, from Mancini et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5168M/abstract)",
+  "massSolar": 0.98,
+  "massSource": "Mass 0.98 +/- 0.24 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of WASP-74 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
