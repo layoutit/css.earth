@@ -1,0 +1,136 @@
+{
+  "id": "mast-hst-eta-carinae-f658n-wfpc2",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HST WFPC2 [N II] F658N of Eta Carinae, 1993 to 2008 (HAP visit mosaics)",
+  "identifiers": [
+    {
+      "type": "MAST product",
+      "value": "hst_5188_05_wfpc2_pc_f658n_u24105_drz.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "hst_5239_02_wfpc2_pc_f658n_u2dh02_drz.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "hst_7253_01_wfpc2_pc_f658n_u44601_drz.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "hst_8178_01_wfpc2_pc_f658n_u5je01_drz.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "hst_9226_01_wfpc2_pc_f658n_u6ck01_drz.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "hst_9775_01_wfpc2_pc_f658n_u8pb01_drz.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "hst_11500_01_wfpc2_pc_f658n_ub7c01_drz.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=5188",
+      "label": "MAST, programme 5188"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=5239",
+      "label": "MAST, programme 5239"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=7253",
+      "label": "MAST, programme 7253"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=8178",
+      "label": "MAST, programme 8178"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9226",
+      "label": "MAST, programme 9226"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9775",
+      "label": "MAST, programme 9775"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=11500",
+      "label": "MAST, programme 11500"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_5188_05_wfpc2_pc_f658n_u24105_drz.fits",
+      "label": "hst_5188_05_wfpc2_pc_f658n_u24105_drz.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_5239_02_wfpc2_pc_f658n_u2dh02_drz.fits",
+      "label": "hst_5239_02_wfpc2_pc_f658n_u2dh02_drz.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_7253_01_wfpc2_pc_f658n_u44601_drz.fits",
+      "label": "hst_7253_01_wfpc2_pc_f658n_u44601_drz.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_8178_01_wfpc2_pc_f658n_u5je01_drz.fits",
+      "label": "hst_8178_01_wfpc2_pc_f658n_u5je01_drz.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_9226_01_wfpc2_pc_f658n_u6ck01_drz.fits",
+      "label": "hst_9226_01_wfpc2_pc_f658n_u6ck01_drz.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_9775_01_wfpc2_pc_f658n_u8pb01_drz.fits",
+      "label": "hst_9775_01_wfpc2_pc_f658n_u8pb01_drz.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_11500_01_wfpc2_pc_f658n_ub7c01_drz.fits",
+      "label": "hst_11500_01_wfpc2_pc_f658n_ub7c01_drz.fits"
+    },
+    {
+      "role": "rights",
+      "url": "https://archive.stsci.edu/publishing/data-use",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_5188_05_wfpc2_pc_f658n_u24105_drz.fits",
+      "checkedOn": "2026-10-11",
+      "locator": "Each file's primary header read: WFPC2 F658N visits of ETA-CAR on 1993-12-31 (programme 5188), 1995-06-10 (5239), 1997-07-11 (7253), 1999-06-12 (8178), 2001-06-04 (9226), 2003-08-07 (9775) and 2008-09-05 (11500). Every original link answered a byte-range request with the size of the file used. Tied to the 2005 ACS epoch by field stars before the motions are measured; the 2003 visit also lights the gas beyond heic1912a's field."
+    }
+  ],
+  "publisher": "MAST (STScI)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA Hubble Space Telescope, programmes 5188, 5239, 7253, 8178, 9226, 9775, 11500, from MAST",
+      "scope": "Published source",
+      "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=5188"
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data; acknowledge the archive and cite the programmes.",
+      "scope": "Published source",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ]
+}

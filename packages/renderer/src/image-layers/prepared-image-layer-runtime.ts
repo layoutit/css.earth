@@ -67,7 +67,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     const textures: { element: HTMLElement; own: string; path: string; sheet: Sheet | null; shown: string;
       /** Where the leaf stands along its stack's normal, its place in that order, and the paint order last written. */
       along: number; rank: number; over: string }[] = [];
-    const runs: { camera: HTMLElement; scene: HTMLElement; mesh: HTMLElement; leaves: HTMLElement[] }[] = [];
+    const runs: { camera: HTMLElement; scene: HTMLElement; mesh: HTMLElement; leaves: HTMLElement[]; centre: number[]; over: string }[] = [];
     const view = views.find(view => view.axis === stack.axis);
     let next = 0;
     for (const size of view?.sceneSizes ?? [stack.leaves.length]) {
@@ -86,7 +86,9 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       }
       next += size;
       scene.appendChild(mesh); camera.appendChild(scene); projection.appendChild(camera);
-      runs.push({ camera, scene, mesh, leaves });
+      // The run's middle: its leaves' centres, averaged.
+      const centre = [0, 1, 2].map(axis => stack.leaves.slice(next - size, next).reduce((sum, leaf) => sum + leaf.centerUnits[axis]!, 0) / Math.max(1, size));
+      runs.push({ camera, scene, mesh, leaves, centre, over: '' });
     }
     [...textures].sort((a, b) => a.along - b.along).forEach((texture, rank) => { texture.rank = rank; });
     root.appendChild(projection);
@@ -124,6 +126,16 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     bank.joined = bank.drawn ? bank.runs.length : 0;
     for (const texture of bank.textures) { texture.element.style.transform = texture.own; if (texture.over !== '') { texture.over = ''; texture.element.style.zIndex = ''; } }
     bank.apart?.remove(); bank.apart = null;
+  };
+  /** A surface's runs of patches paint farthest from the camera first, each run a 3D scene of its own, so a closed
+   * surface reads right from every side: in the stack's order alone, fixed farthest from the Sun first, a lobe nearer
+   * the camera than the Sun was painted under the other one, and a nebula seen from behind its plane of the sky turned
+   * inside out (the Homunculus, 2026-10-10). One write a run whose place changes. */
+  const runOrder = (bank: (typeof banks)[number], cameraUnits: readonly number[]) => {
+    if (!bank.patches || bank.runs.length < 2) return;
+    const far = bank.runs.map((run, index) => ({ run, index, distance: Math.hypot(run.centre[0]! - cameraUnits[0]!, run.centre[1]! - cameraUnits[1]!, run.centre[2]! - cameraUnits[2]!) }))
+      .sort((a, b) => b.distance - a.distance || a.index - b.index);
+    for (const [rank, { run }] of far.entries()) { const over = String(rank); if (run.over !== over) { run.over = over; run.camera.style.zIndex = over; } }
   };
   /** Parallel sheets that are apart paint farthest first on each side of the camera: a sight line crosses the sheets of
    * one side only, so the two sides need no order between them, and a sheet's place changes only when the camera
@@ -233,6 +245,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           if (bank.perspective !== perspective) { bank.perspective = perspective; for (const { camera } of bank.runs) camera.style.perspective = perspective; }
           if (bank.perspectiveOrigin !== perspectiveOrigin) { bank.perspectiveOrigin = perspectiveOrigin; for (const { camera } of bank.runs) camera.style.perspectiveOrigin = perspectiveOrigin; }
           if (bank.transform !== cssTransform) { bank.transform = cssTransform; for (const { scene } of bank.runs) scene.style.transform = cssTransform; }
+          runOrder(bank, local.positionUnits);
         }
         const weight = weights[bank.axis], wanted = weight > 0 || bank === held;
         if (wanted && !bank.images) {

@@ -59,7 +59,7 @@
     "optical": {
       "title": "The Homunculus, ultraviolet to visible",
       "detail": "1089 × 1033 px",
-      "summary": "Hubble's picture on the nebula's published 3D surface: two closed lobes, their pole 41° from the sight line.",
+      "summary": "Hubble's picture on the published 3D lobes, inside a gas cloud derived here from Hubble and MUSE motions and images.",
       "sources": [
         {
           "catalogueId": "esahubble-potw1208a",
@@ -88,6 +88,62 @@
           "label": "Smith (2006), ApJ 644, 1151: the structure of the Homunculus, shape and latitude dependence from H2 and [Fe II] velocity maps",
           "checked": "2026-10-04",
           "locator": "Sect. 4: the pole's inclination and the distance"
+        },
+        {
+          "catalogueId": "esahubble-heic1912a",
+          "url": "https://esahubble.org/images/heic1912a/",
+          "label": "ESA/Hubble heic1912a: the Homunculus in ultraviolet and [N II] light, the gas cloud's brightness and color",
+          "checked": "2026-10-11",
+          "locator": "The red [N II] glow around the lobes"
+        },
+        {
+          "catalogueId": "publication-kiminki-2016-eta-carinae-proper-motions",
+          "url": "https://arxiv.org/abs/1609.00362",
+          "label": "Kiminki et al. (2016), MNRAS: proper motions of eta Car's outer ejecta on Hubble images",
+          "checked": "2026-10-11",
+          "locator": "The method behind the knots' motions across the sky"
+        },
+        {
+          "catalogueId": "publication-mehner-2016-homunculus-outer-ejecta",
+          "url": "https://arxiv.org/abs/1610.01688",
+          "label": "Mehner et al. (2016), A&A 595, A120: MUSE spectra of eta Car's outer ejecta",
+          "checked": "2026-10-11",
+          "locator": "The knots' speeds along the sight line"
+        }
+      ]
+    },
+    "outer-shell": {
+      "title": "The outer shell of the 1840s ejecta",
+      "detail": "Model",
+      "summary": "The 1840s ejecta's outer shell, a bent cylinder after Mehner et al. (2016), refitted to MUSE spectra.",
+      "sources": [
+        {
+          "catalogueId": "publication-mehner-2016-homunculus-outer-ejecta",
+          "url": "https://arxiv.org/abs/1610.01688",
+          "label": "Mehner et al. (2016), A&A 595, A120: MUSE spectra and a SHAPE model of eta Car's outer ejecta",
+          "checked": "2026-10-11",
+          "locator": "The outer shell of the 1840s ejecta as a bent tube"
+        }
+      ]
+    },
+    "motions": {
+      "title": "How the outer ejecta move",
+      "detail": "764 knots",
+      "summary": "Each knot's next century: sky motion from Hubble images, line-of-sight speed from MUSE. Blue approaches.",
+      "sources": [
+        {
+          "catalogueId": "publication-kiminki-2016-eta-carinae-proper-motions",
+          "url": "https://arxiv.org/abs/1609.00362",
+          "label": "Kiminki et al. (2016), MNRAS: proper motions of eta Car's outer ejecta on Hubble images",
+          "checked": "2026-10-11",
+          "locator": "Proper motions measured within each Hubble instrument"
+        },
+        {
+          "catalogueId": "publication-mehner-2016-homunculus-outer-ejecta",
+          "url": "https://arxiv.org/abs/1610.01688",
+          "label": "Mehner et al. (2016), A&A 595, A120: MUSE spectra and a SHAPE model of eta Car's outer ejecta",
+          "checked": "2026-10-11",
+          "locator": "The outer shell of the 1840s ejecta as a bent tube"
         }
       ]
     }

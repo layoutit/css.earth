@@ -3,7 +3,7 @@ import { OBJECT_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA } from '@cssearth/objec
 import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseImageLayerRecipe, prepareImageLayers } from '@cssearth/bake/image-layers';
+import { parseImageLayerRecipe, prepareImageLayers, prepareImageLayerOverlays } from '@cssearth/bake/image-layers';
 
 export async function prepareImageLayerObject(objectDirectory: string) {
   const root=resolve(objectDirectory), sourceDirectory=resolve(root,'source'), outputDirectory=resolve(root,'prepared');
@@ -28,6 +28,7 @@ export async function prepareImageLayerObject(objectDirectory: string) {
   for(const path of previous)if(!retained.has(path)){if(!path.startsWith('layers/')||path.split('/').includes('..'))throw new TypeError('Refusing to retire an uncontained image-layer resource.');try{await unlink(resolve(outputDirectory,path));}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}}
   const total=prepared.resources.reduce((sum,r)=>sum+r.bytes,0), decoded=prepared.resources.reduce((sum,r)=>sum+r.width*r.height*4,0);
   console.log(`PREPARED ${recipe.id}: ${prepared.resources.length} retained images; ${total} bytes; ${decoded} decoded bytes`);
+  await prepareImageLayerOverlays(root,(kept as {overlays?:unknown}).overlays,recipe.id);
   return prepared;
 }
 const direct=process.argv[1]!==undefined&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href;

@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-heic1912a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cosmic Fireworks in Ultraviolet (heic1912a)",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "heic1912a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/heic1912a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://esahubble.org/media/archives/images/original/heic1912a.tif",
+      "label": "TIFF, 1779 x 1805 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/heic1912a/",
+      "checkedOn": "2026-10-11",
+      "locator": "1779 x 1805 px, north up; WFC3 Mg II 280 nm (blue), u 336 nm and [N II] 658 nm (red); released 1 July 2019. The original TIFF answered with 12,871,876 bytes, the file used. Its red channel lights the outer ejecta's gas dots; its scale (0.02294 arcsec a pixel) and the star's pixel are fitted against the 2014 F658N epoch."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, N. Smith (University of Arizona, Tucson), and J. Morse (BoldlyGo Institute, New York)",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/heic1912a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

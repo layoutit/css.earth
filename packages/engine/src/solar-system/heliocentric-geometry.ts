@@ -195,6 +195,15 @@ export function determinant(basis:readonly Vector3[]) {
   return dot(a, cross(b, c));
 }
 
+/** Three vectors that span space: each of some finite length, and together not flat (their triple product a real share
+ * of their lengths' product). An ellipsoid given by such axes has an inside. */
+export function basisSpansSpace(basis: readonly (readonly number[])[]): boolean {
+  if (basis.length !== 3 || !basis.every(v => v.length === 3 && v.every(Number.isFinite))) return false;
+  const [a, b, c] = basis as readonly Vector3[];
+  const scale = Math.hypot(...a!) * Math.hypot(...b!) * Math.hypot(...c!);
+  return scale > 0 && Number.isFinite(scale) && Math.abs(determinant([a!, b!, c!])) > 1e-6 * scale;
+}
+
 export function add(a:Vector3, b:Vector3): number[] {
   return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 }

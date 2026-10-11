@@ -82,6 +82,68 @@
           "url": "https://esahubble.org/images/potw1208a/"
         },
         "falseColor": true
+      },
+      {
+        "id": "outer-shell",
+        "label": "Outer shell · model",
+        "thumbnail": "homunculus-nebula-dataset-optical.webp",
+        "volume": {
+          "objectId": "homunculus-nebula-layers",
+          "datasetId": "outer-shell",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "homunculus-nebula-layers-outer-shell",
+          "path": "../../homunculus-nebula-layers/source/manifest.json",
+          "url": "https://arxiv.org/abs/1610.01688"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "The outer shell, a bent cylinder",
+          "items": [
+            {
+              "label": "Traced",
+              "description": "MUSE sees the 1840s gas on the wall here",
+              "color": "#96cdff"
+            },
+            {
+              "label": "Model only",
+              "description": "Open parts of the cylinder no spectrum has seen",
+              "color": "#2c3d4c"
+            }
+          ]
+        }
+      },
+      {
+        "id": "motions",
+        "label": "Motions · measured",
+        "thumbnail": "homunculus-nebula-dataset-optical.webp",
+        "volume": {
+          "objectId": "homunculus-nebula-layers",
+          "datasetId": "motions",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "homunculus-nebula-layers-motions",
+          "path": "../../homunculus-nebula-layers/source/manifest.json",
+          "url": "https://arxiv.org/abs/1609.00362"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Each arrow: a knot's next 100 years",
+          "items": [
+            {
+              "label": "Approaching",
+              "description": "Moving toward us along the sight line",
+              "color": "#6eaaff"
+            },
+            {
+              "label": "Receding",
+              "description": "Moving away from us along the sight line",
+              "color": "#ff6e5a"
+            }
+          ]
+        }
       }
     ]
   },

@@ -8,7 +8,9 @@ import type { WorldPlannerSource } from './world-context/world-context-planner-c
 
 export type PreparedImageLayerMount = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
-  cataloguePointUrls?: readonly string[] };
+  cataloguePointUrls?: readonly string[];
+  /** By dataset, the overlay banks drawn over it while that dataset is selected (`prepared/<id>.bin`, cloud-points.ts). */
+  overlayUrls?: Readonly<Record<string, readonly string[]>> };
 /** `payload` is the catalogue's dots as the data worker reads them (@cssearth/objects catalogue-dots.ts); a caller that
  * holds the catalogues whole passes the galaxy catalogue with its sample and the other two. */
 export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
@@ -54,7 +56,7 @@ export interface PreparedUniverseOptions {
   imageLayers?: readonly PreparedImageLayerMount[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus.
    * `surrounds`: the bank's light lies on walls around its middle, so it also draws around a body that stands inside it. */
-  imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame; surrounds?: true }[];
+  imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame; surrounds?: true; host?: string; datasets?: readonly string[] }[];
   loadImageLayer?(id: string): Promise<PreparedImageLayerMount>;
   /** Packages that are only a prepared catalogue point bank (`catalogue-point-bank` descriptors), by URL: fetched and drawn
    * while the catalogue row that details to them (`detailedObjectId`) is selected, or, for a bank that belongs to a body's

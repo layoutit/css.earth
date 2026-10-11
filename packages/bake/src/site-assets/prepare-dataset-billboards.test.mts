@@ -12,8 +12,10 @@ test('a bank mixing slices and shell shape leaves is drawn from its slices', () 
   assert.deepEqual(imageLayerQuadLeaves('cassiopeia-a-layers', leaves).map(leaf => leaf.id), ['z-detail', 'z-wide']);
 });
 
-test('a bank of shape leaves only has no billboard to draw', () => {
-  assert.throws(() => imageLayerQuadLeaves('cassiopeia-a-layers', [shape('shape-0000')]), /no source-facing slice/u);
+test('a bank of shape leaves only (a closed mesh) is drawn from its patches, and a bank with neither has no billboard', () => {
+  assert.deepEqual(imageLayerQuadLeaves('homunculus-nebula-layers', [shape('shape-0000'), shape('shape-0001')]).map(leaf => leaf.id), ['shape-0000', 'shape-0001']);
+  // a shape leaf that is not one quad is no patch of the picture
+  assert.throws(() => imageLayerQuadLeaves('homunculus-nebula-layers', [{ ...shape('shape-0000'), verticesUnits: square.slice(0, 3) }]), /no source-facing slice/u);
 });
 
 test('a leaf that is neither a corner quad nor a shape leaf is refused', () => {

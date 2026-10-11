@@ -80,7 +80,9 @@ export function imageLayerQuadLeaves(id: string, leaves: readonly Record<string,
     if (vertices.length !== 4 || JSON.stringify(leaf.uvs) !== '[[0,0],[1,0],[1,1],[0,1]]') throw new TypeError(`${id} ${String(leaf.id)}: a slice must be one quad with corner UVs.`);
     return true;
   });
-  if (!quads.length) throw new TypeError(`${id}: no source-facing slice is one quad with corner UVs.`);
+  // A bank of patches alone (a closed mesh, `geometry.surface.closedMesh`): its far picture is its patches, each the rectangle of the atlas its UVs name.
+  if (!quads.length) { const patches = leaves.filter(leaf => typeof leaf.id === 'string' && leaf.id.startsWith('shape-') && requireArray(leaf.verticesUnits, `${id} ${String(leaf.id)} vertices`).length === 4);
+    if (patches.length) return patches; throw new TypeError(`${id}: no source-facing slice is one quad with corner UVs.`); }
   return quads;
 }
 
@@ -96,7 +98,7 @@ export async function imageLayerBillboard(id: string, descriptor: Record<string,
   if (!bank) throw new TypeError(`${id}: no source-facing (z) bank.`);
   const leaves = imageLayerQuadLeaves(id, requireArray(bank.leaves, `${id} z leaves`).map(value => requireRecord(value))).map(leaf => {
     const corners = requireArray(leaf.verticesUnits, `${id} ${String(leaf.id)} vertices`).map((value, index) => vector(value, `${id} ${String(leaf.id)} vertex ${index}`));
-    return { id: String(leaf.id), texture: requireString(leaf.texturePath, `${id} ${String(leaf.id)} texture`), corners, depth: dot(vector(leaf.centerUnits, `${id} centre`), toViewer) };
+    return { id: String(leaf.id), texture: requireString(leaf.texturePath, `${id} ${String(leaf.id)} texture`), uvs: leaf.uvs as number[][], corners, depth: dot(vector(leaf.centerUnits, `${id} centre`), toViewer) };
   });
   // The billboard's axes follow the slices' own image axes, laid flat across the line of sight.
   const [origin, first, , last] = leaves[0]!.corners as [Vector, Vector, Vector, Vector];
@@ -112,8 +114,12 @@ export async function imageLayerBillboard(id: string, descriptor: Record<string,
     const [p0, p1, , p3] = leaf.corners.map(pixel) as [readonly [number, number], readonly [number, number], unknown, readonly [number, number]];
     const ax = p1[0] - p0[0], ay = p1[1] - p0[1], bx = p3[0] - p0[0], by = p3[1] - p0[1], determinant = ax * by - ay * bx;
     const width = Math.max(1, Math.round(Math.hypot(ax, ay))), height = Math.max(1, Math.round(Math.hypot(bx, by)));
-    const { data: texels } = await sharp(await readFile(resolve(objects, id, 'prepared', leaf.texture))).ensureAlpha()
-      .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).raw().toBuffer({ resolveWithObject: true });
+    const file = await readFile(resolve(objects, id, 'prepared', leaf.texture)), uv = leaf.uvs, corner = JSON.stringify(uv) === '[[0,0],[1,0],[1,1],[0,1]]';
+    let image = sharp(file).ensureAlpha();
+    if (!corner) { const { width: w = 1, height: h = 1 } = await sharp(file).metadata(), us = uv.map(point => point[0]!), vs = uv.map(point => point[1]!);
+      const left = Math.floor(Math.min(...us) * w), top = Math.floor(Math.min(...vs) * h);
+      image = sharp(file).ensureAlpha().extract({ left, top, width: Math.max(1, Math.ceil(Math.max(...us) * w) - left), height: Math.max(1, Math.ceil(Math.max(...vs) * h) - top) }); }
+    const { data: texels } = await image.resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).raw().toBuffer({ resolveWithObject: true });
     for (let py = 0; py < CELL_PX; py++) for (let px = 0; px < CELL_PX; px++) {
       const dx = px + .5 - p0[0], dy = py + .5 - p0[1];
       const u = (dx * by - dy * bx) / determinant, v = (ax * dy - ay * dx) / determinant;

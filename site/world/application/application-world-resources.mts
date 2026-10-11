@@ -114,14 +114,17 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       .map(parseImageLayerBankDescriptor);
     const imageLayerIds = new Set(imageLayerDescriptors.map(descriptor => descriptor.id));
     const imageLayerCataloguePoints = new Map(imageLayerDescriptors.map(descriptor => [descriptor.id, descriptor.cataloguePoints]));
+    const imageLayerOverlays = new Map(imageLayerDescriptors.map(descriptor => [descriptor.id, descriptor.overlays]));
     const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame,
-      ...(descriptor.surrounds ? { surrounds: true as const } : {}), ...(descriptor.host === undefined ? {} : { host: descriptor.host }) }));
+      ...(descriptor.surrounds ? { surrounds: true as const } : {}), ...(descriptor.host === undefined ? {} : { host: descriptor.host }),
+      datasets: Object.keys(descriptor.overlays) }));
     const loadImageLayer = createInFlightLoader(async (id: string) => {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
       const set = await bankSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-        cataloguePointUrls: imageLayerCataloguePoints.get(id)!.map(bank => set.resolve(`prepared/${bank}.bin`)) };
+        cataloguePointUrls: imageLayerCataloguePoints.get(id)!.map(bank => set.resolve(`prepared/${bank}.bin`)),
+        overlayUrls: Object.fromEntries(Object.entries(imageLayerOverlays.get(id)!).map(([dataset, banks]) => [dataset, banks.map(bank => set.resolve(`prepared/${bank}.bin`))])) };
     });
     // Packages that are only catalogue dots: a galaxy cluster's members draw while their catalogue row is selected, and a
     // body's (a planet's moons without a page) while that body or one that orbits it is.

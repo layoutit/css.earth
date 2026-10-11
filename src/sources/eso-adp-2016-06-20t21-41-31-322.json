@@ -1,0 +1,45 @@
+{
+  "id": "eso-adp-2016-06-20t21-41-31-322",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "ESO VLT/MUSE science cube ADP.2016-06-20T21:41:31.322 of Eta Carinae (2014 December 12)",
+  "identifiers": [
+    {
+      "type": "ESO dp_id",
+      "value": "ADP.2016-06-20T21:41:31.322"
+    },
+    {
+      "type": "ESO programme",
+      "value": "094.D-0215(A)"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://dataportal.eso.org/dataPortal/file/ADP.2016-06-20T21:41:31.322",
+      "label": "ESO Science Archive"
+    },
+    {
+      "role": "rights",
+      "url": "https://archive.eso.org/cms/eso-data-access-policy.html",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archive.eso.org/tap_obs/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+dp_id,obs_release_date,proposal_id,target_name,obs_collection,access_estsize,dataproduct_type+FROM+ivoa.ObsCore+WHERE+dp_id='ADP.2016-06-20T21:41:31.322'",
+      "checkedOn": "2026-10-11",
+      "locator": "ObsCore row: proposal 094.D-0215(A), target eta Car, MUSE cube, released 2015-12-12, about 17.9 GB. The file's header: DATE-OBS 2014-12-12T07:44:35.890, PRODCATG SCIENCE.CUBE.IFS, wide-field mode, 0.2 arcsec spaxels, 1.25 Angstrom channels from 4750 Angstrom. Its H-beta channels give the outer ejecta's line-of-sight speeds (Mehner et al. 2016's deep data)."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Based on observations collected at the European Organisation for Astronomical Research in the Southern Hemisphere under ESO programme 094.D-0215(A).",
+      "scope": "The archived cube.",
+      "evidence": "https://dataportal.eso.org/dataPortal/file/ADP.2016-06-20T21:41:31.322"
+    }
+  ],
+  "publisher": "European Southern Observatory"
+}

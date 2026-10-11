@@ -1,0 +1,166 @@
+{
+  "id": "mast-hst-eta-carinae-f658n-acs-wfc3",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HST ACS/WFC and WFC3/UVIS [N II] F658N of Eta Carinae, 2005 to 2020 (drizzled, Gaia-aligned)",
+  "identifiers": [
+    {
+      "type": "MAST product",
+      "value": "j900a6010_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "j900a7010_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "j900b7010_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "j900b7020_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "jcdha6010_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "jcdha7010_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "jcdhb6010_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "jcdhb6020_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "jcdhb7010_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "jcdhb7020_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "idtl01080_drc.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "ie2w040c0_drc.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=10241",
+      "label": "MAST, programme 10241"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=13390",
+      "label": "MAST, programme 13390"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=15596",
+      "label": "MAST, programme 15596"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=15823",
+      "label": "MAST, programme 15823"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/j900a6010_drc.fits",
+      "label": "j900a6010_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/j900a7010_drc.fits",
+      "label": "j900a7010_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/j900b7010_drc.fits",
+      "label": "j900b7010_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/j900b7020_drc.fits",
+      "label": "j900b7020_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/jcdha6010_drc.fits",
+      "label": "jcdha6010_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/jcdha7010_drc.fits",
+      "label": "jcdha7010_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/jcdhb6010_drc.fits",
+      "label": "jcdhb6010_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/jcdhb6020_drc.fits",
+      "label": "jcdhb6020_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/jcdhb7010_drc.fits",
+      "label": "jcdhb7010_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/jcdhb7020_drc.fits",
+      "label": "jcdhb7020_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/idtl01080_drc.fits",
+      "label": "idtl01080_drc.fits"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/ie2w040c0_drc.fits",
+      "label": "ie2w040c0_drc.fits"
+    },
+    {
+      "role": "rights",
+      "url": "https://archive.stsci.edu/publishing/data-use",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/j900a6010_drc.fits",
+      "checkedOn": "2026-10-11",
+      "locator": "Each file's primary header read: PROPOSID 10241, ACS/WFC F658N, 2005-07-18 (four products, 1000 s each); 13390, ACS/WFC F658N, 2014-08-04 (six, 1040 s); 15596, WFC3/UVIS F658N, 2018-07-25 (540 s); 15823, WFC3/UVIS F658N, 2020-02-12 (720 s). Every original link answered a byte-range request with the size of the file used. The outer ejecta's motions are measured on these epochs (packages/bake/authoring/homunculus-nebula/outer-ejecta.mts)."
+    }
+  ],
+  "publisher": "MAST (STScI)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA Hubble Space Telescope, programmes 10241, 13390, 15596, 15823, from MAST",
+      "scope": "Published source",
+      "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=10241"
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data; acknowledge the archive and cite the programmes.",
+      "scope": "Published source",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ]
+}

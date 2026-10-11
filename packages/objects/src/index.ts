@@ -149,6 +149,8 @@ export type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, Pre
 export { parsePreparedSurfaceFeatureCatalog } from './prepared-data/surface/surface-feature-catalog.js';
 export { GALAXY_DISPLAY_SAMPLE_SCHEMA, parseGalaxyDisplaySample } from './prepared-data/catalogue/galaxy-display-sample.js';
 export { PREPARED_CATALOGUE_DOTS_SCHEMA, catalogueDots, encodeCatalogueDots, decodeCatalogueDots } from './prepared-data/catalogue/catalogue-dots.js';
+export { PREPARED_CLOUD_POINTS_SCHEMA, encodeCloudPoints, readCloudPoints, type CloudPointEllipsoid, type PreparedCloudPoints } from './prepared-data/cloud/cloud-points.js';
+export { PREPARED_CLOUD_SEGMENTS_SCHEMA, encodeCloudSegments, readCloudSegments, type PreparedCloudSegments } from './prepared-data/cloud/cloud-segments.js';
 export type { PreparedCatalogueDots } from './prepared-data/catalogue/catalogue-dots.js';
 export type { PreparedGalaxyDisplaySample, GalaxyDisplaySample } from './prepared-data/catalogue/galaxy-display-sample.js';
 

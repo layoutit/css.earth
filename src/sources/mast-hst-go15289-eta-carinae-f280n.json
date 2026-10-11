@@ -1,0 +1,52 @@
+{
+  "id": "mast-hst-go15289-eta-carinae-f280n",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HST WFC3/UVIS F280N of Eta Carinae, GO 15289, 2018 March 5 (HAP drizzled)",
+  "identifiers": [
+    {
+      "type": "MAST product",
+      "value": "hst_15289_01_wfc3_uvis_f280n_idm501_drc.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=15289",
+      "label": "MAST"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_15289_01_wfc3_uvis_f280n_idm501_drc.fits",
+      "label": "F280N drizzled product"
+    },
+    {
+      "role": "rights",
+      "url": "https://archive.stsci.edu/publishing/data-use",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=15289",
+      "checkedOn": "2026-10-10",
+      "locator": "F280N (Mg II 2800 Angstrom) of Smith & Morse (2019), 0.0396 arcsec a pixel. Registered on the picture by the lobes' detail from free expansion since 1843: scale 1.090 about the star. Its saturated pixels about the star are left out."
+    }
+  ],
+  "publisher": "MAST (STScI)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA Hubble Space Telescope, GO 15289, from MAST",
+      "scope": "Published source",
+      "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=15289"
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data; acknowledge the archive and cite the programme.",
+      "scope": "Published source",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ]
+}

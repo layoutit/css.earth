@@ -20,7 +20,7 @@ export { cssDirectionToViewDirection } from './solar-system/solar-view-direction
 
 export { viewSunDirectionToPreparedLightDirection, viewSunDirectionToPhysicalLightDirection } from './solar-system/directional-sun-coordinate.js';
 
-export { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, offAxisFrame, silhouetteEllipse, rotationFromMatrix3d, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, eyeFraction, lerp } from './solar-system/heliocentric-geometry.js';
+export { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, offAxisFrame, silhouetteEllipse, rotationFromMatrix3d, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, eyeFraction, lerp, basisSpansSpace } from './solar-system/heliocentric-geometry.js';
 export type { OffAxisFrame } from './solar-system/heliocentric-geometry.js';
 
 export { cssViewFromOrientation, cssCameraAxesFromOrientation, flipWorldRotationY, referenceRotationFromPresentation, validateWorldPosition, transposeWorldRotation, rotateWorldPosition, scaleWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion, worldRotationCss, nearestWorldRotation } from './navigation/world-camera-math.js';

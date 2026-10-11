@@ -1,0 +1,39 @@
+{
+  "id": "publication-kiminki-2016-eta-carinae-proper-motions",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ancient eruptions of Eta Carinae: A tale written in proper motions",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1609.00362"
+    },
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/stw2019"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1609.00362",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1609.00362",
+      "checkedOn": "2026-10-11",
+      "locator": "Proper motions of eta Car's outer ejecta from Hubble [N II] images over about two decades, measured within each instrument; ejection dates from the 13th century to the 1840s."
+    }
+  ],
+  "creators": [
+    "Kiminki, M. M.",
+    "Reiter, M.",
+    "Smith, N."
+  ],
+  "publisher": "MNRAS",
+  "publicationDate": "2016",
+  "relations": [],
+  "statements": []
+}

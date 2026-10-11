@@ -402,7 +402,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       }
       view.setRadius((bankFramingRadius = framingRadius) ?? next.framingRadiusUnits ?? Math.max(...loaded.frame.boundsUnits.max.map((v, index) => (v - loaded.frame.boundsUnits.min[index]) / 2)));
       status = `${loaded.resources.length} prepared images · ${(loaded.resources.reduce((sum, item) => sum + item.bytes, 0) / 1e6).toFixed(1)} MB`;
-      if (retain) restoreCamera(retain); else if (currentMode === 'density') await referenceView(); else reset();
+      // A fresh object opens as seen from Earth when it can be; a re-bake keeps the camera where it was.
+      if (retain) restoreCamera(retain); else await referenceView().catch(() => reset());
       if (disposed || version !== loadVersion) return;
       host.dataset.mode = currentMode; host.dataset.subject = id; host.dataset.ready = 'true';
       host.dataset.bankDirectory = directory; host.dataset.bankDataset = shownDataset ?? ''; schedule(); report();

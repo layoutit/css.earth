@@ -16,19 +16,30 @@ export interface PreparedFocusBank {
   subscribe(listener: () => void): () => void;
 }
 
-export function imageFocusDatasets(objectId: string): PreparedFocusDatasets {
-  return { objectId, id: 'optical', defaultDataset: 'optical', selectedDataset: 'optical', starsVisible: false,
-    datasets: [{ id: 'optical', label: 'Optical', title: 'Visible-light observation', description: 'Prepared image layers', sourceUrl: '' }] };
+/** An image-layer bank's datasets: its picture with what each draws over it (ImageLayerBankDescriptor `overlays`), the
+ * first the default. Their names and sources are the host's dataset controls'. */
+export function imageFocusDatasets(objectId: string, ids: readonly string[] = ['optical'], selected = ids[0]!): PreparedFocusDatasets {
+  return { objectId, id: selected, defaultDataset: ids[0]!, selectedDataset: selected, starsVisible: false,
+    datasets: ids.map(id => ({ id, label: id, title: id, description: 'Prepared image layers', sourceUrl: '' })) };
 }
 
-export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame, load: () => Promise<void>): PreparedFocusBank {
-  const state = imageFocusDatasets(objectId);
+export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame, load: () => Promise<void>,
+  datasets: readonly string[] = ['optical'], selection?: { current(): string; select(dataset: string): void }): PreparedFocusBank {
+  // The bank keeps the selection: a focus bank asked for again reads the dataset it shows.
+  let state = imageFocusDatasets(objectId, datasets, selection?.current());
+  const listeners = new Set<() => void>();
   // Image framing is already authored in the descriptor; it does not wait for the layers to decode.
   const radiusM = Math.max(...frame.boundsUnits.max.map((value, axis) => Math.abs(value - frame.boundsUnits.min[axis]!) / 2)) * frame.metersPerUnit;
   return {
-    objectId, framingRadiusM: () => radiusM, state: () => state, load,
-    selectDataset(id) { if (id !== 'optical') throw new TypeError('Unknown image-layer dataset.'); },
-    subscribe: () => () => {},
+    objectId, framingRadiusM: () => radiusM, load,
+    state: () => { const current = selection?.current(); if (current !== undefined && current !== state.selectedDataset) state = imageFocusDatasets(objectId, datasets, current); return state; },
+    selectDataset(id) {
+      if (!datasets.includes(id)) throw new TypeError('Unknown image-layer dataset.');
+      if (id === state.selectedDataset && id === (selection?.current() ?? id)) return;
+      state = imageFocusDatasets(objectId, datasets, id); selection?.select(id);
+      for (const listener of listeners) listener();
+    },
+    subscribe: listener => { listeners.add(listener); return () => { listeners.delete(listener); }; },
   };
 }
 

@@ -5,6 +5,7 @@ export * from './resize-rgba.ts';
 export * from './prepare.ts';
 export { imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerView } from './disc.ts';
 export { imageLayerBulgeModel } from './bulge.ts';
+export { filamentMap, lineStrengths, type FilamentSettings } from './filaments.ts';
 export { imageLayerShapeModel, lowerEnvelope } from './shape.ts';
 export { imageLayerShapeWalls } from './shape-walls.ts';
 export { densityGrid, imageLayerDensityModel } from './density-grid.ts';
@@ -16,3 +17,4 @@ export { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles } from
 export { imageLayerRingsCover, imageLayerRingsModel, imageLayerRingsSheet, RINGS_OPACITY_REACH_PIXELS } from './rings.ts';
 export { imageLayerRingsCells, imageLayerRingsCurtains, imageLayerRingsGlow, imageLayerRingsSheets } from './rings-volume.ts';
 export { removeForegroundStars, removeCompanionGalaxies } from './foreground.ts';
+export { prepareCloudOverlays, prepareImageLayerOverlays, readCloudSource, readTubeSource, readKinematicsSource } from './cloud-overlays.ts';

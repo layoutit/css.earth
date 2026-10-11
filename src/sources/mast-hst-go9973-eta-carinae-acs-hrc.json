@@ -1,0 +1,61 @@
+{
+  "id": "mast-hst-go9973-eta-carinae-acs-hrc",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HST ACS/HRC F550M and F220W of Eta Carinae, GO 9973, 2003 (drizzled)",
+  "identifiers": [
+    {
+      "type": "MAST product",
+      "value": "hst_9973_6a_acs_hrc_f550m_j8ma6a_drz.fits"
+    },
+    {
+      "type": "MAST product",
+      "value": "hst_9973_5a_acs_hrc_f220w_j8ma5a_drz.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973",
+      "label": "MAST"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_9973_6a_acs_hrc_f550m_j8ma6a_drz.fits",
+      "label": "F550M drizzled product"
+    },
+    {
+      "role": "original",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/hst_9973_5a_acs_hrc_f220w_j8ma5a_drz.fits",
+      "label": "F220W drizzled product"
+    },
+    {
+      "role": "rights",
+      "url": "https://archive.stsci.edu/publishing/data-use",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973",
+      "checkedOn": "2026-10-10",
+      "locator": "F550M on 2003-11-14 (43 s) and F220W on 2003-09-13 (84 s), 0.025 arcsec a pixel; the images of Smith et al. (2004) and of the bank's picture. Registered on the picture by the lobes' detail (packages/bake/authoring/homunculus-nebula/sky-registration.mts): scale 1.005 and 1.004, the star 1.39 arcsec east and 0.11 north, and 0.65 east and 0.51 north, of where the files' coordinates put it."
+    }
+  ],
+  "publisher": "MAST (STScI)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA Hubble Space Telescope, GO 9973, from MAST",
+      "scope": "Published source",
+      "evidence": "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973"
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data; acknowledge the archive and cite the programme.",
+      "scope": "Published source",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ]
+}

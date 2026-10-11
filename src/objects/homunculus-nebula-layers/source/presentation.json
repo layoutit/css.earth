@@ -16,14 +16,20 @@
       "path": "src/objects/homunculus-nebula-layers/source/provenance.json"
     }
   ],
-  "sharedInputs": [],
+  "sharedInputs": [
+    "optical",
+    "surface-model",
+    "filaments",
+    "detail",
+    "regions"
+  ],
   "datasets": [
     {
       "id": "optical",
       "label": "Hubble · optical",
       "title": "The Homunculus, ultraviolet to visible",
-      "description": "ESA/Hubble's picture of the Homunculus Nebula, at 220, 250, 330, 550 and 660 nm: dust lit by the star Eta Carinae inside it. It lies on the surface Steffen et al. (2014) made from spectra of the whole nebula: two hollow lobes, their pole 41° from the sight line (Smith 2006), the south-east one tipped toward the Sun. The picture is on the side of each lobe that faces the Sun; the other sides, which no one has photographed, repeat it.",
-      "summary": "Hubble's picture on the nebula's published 3D surface: two closed lobes, their pole 41° from the sight line.",
+      "description": "ESA/Hubble's picture of the Homunculus Nebula, at 220, 250, 330, 550 and 660 nm: dust lit by the star Eta Carinae inside it. It lies on the surface Steffen et al. (2014) made from spectra of the whole nebula: two hollow lobes, their pole 41° from the sight line (Smith 2006), the south-east one tipped toward the Sun. The picture is on the side of each lobe that faces the Sun; the other sides, which no one has photographed, repeat it. Around the lobes, a gas cloud this repository derived, neither observed in 3D nor published: each knot of the outer ejecta placed in depth from its motion across the sky (Hubble) and its speed along the sight line (MUSE), its brightness and color from Hubble's [N II] images, and the far side mirrored from the near one.",
+      "summary": "Hubble's picture on the published 3D lobes, inside a gas cloud derived here from Hubble and MUSE motions and images.",
       "detail": "1089 × 1033 px",
       "facts": [
         {
@@ -48,6 +54,41 @@
         }
       ],
       "input": "optical",
+      "preview": {
+        "path": "src/objects/homunculus-nebula-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg"
+      },
+      "inputEvidence": [
+        {
+          "sourceId": "cloud",
+          "role": "appearance",
+          "evidence": "The gas cloud drawn around the lobes in this dataset: source/cloud-points.json, baked into billboards by packages/bake/cli/prepare-cloud-points.mts."
+        }
+      ]
+    },
+    {
+      "id": "outer-shell",
+      "label": "Outer shell · model",
+      "title": "The outer shell of the 1840s ejecta",
+      "description": "the 1840s ejecta outside the Homunculus as one bent tube, after the SHAPE model of Mehner et al. (2016), its wall refitted here to MUSE H-beta emission. A model, not an observation.",
+      "summary": "The 1840s ejecta's outer shell, a bent cylinder after Mehner et al. (2016), refitted to MUSE spectra.",
+      "detail": "Model",
+      "facts": [],
+      "input": "outer-shell",
+      "preview": {
+        "path": "src/objects/homunculus-nebula-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg"
+      }
+    },
+    {
+      "id": "motions",
+      "label": "Motions · measured",
+      "title": "How the outer ejecta move",
+      "description": "each knot of the outer ejecta and where it moves in the next century: its motion across the sky measured on Hubble images, its speed along the sight line from MUSE spectra.",
+      "summary": "Each knot's next century: sky motion from Hubble images, line-of-sight speed from MUSE. Blue approaches.",
+      "detail": "764 knots",
+      "facts": [],
+      "input": "motions",
       "preview": {
         "path": "src/objects/homunculus-nebula-layers/source/source.jpg",
         "url": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg"

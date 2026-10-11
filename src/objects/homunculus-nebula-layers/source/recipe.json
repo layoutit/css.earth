@@ -65,7 +65,28 @@
         "receding": "+z"
       },
       "starRadiusArcsec": 1.45,
-      "fitArcsec": 0.1
+      "fitArcsec": 0.1,
+      "edgeFit": {
+        "maxStretch": 0.15,
+        "smoothDeg": 6
+      },
+      "closedMesh": true,
+      "filaments": {
+        "path": "filaments.png",
+        "darkness": 0.65,
+        "detailPath": "detail.png"
+      },
+      "skirt": {
+        "reachArcsec": 9,
+        "regionsPath": "regions.json",
+        "layers": 5,
+        "openingDeg": 6
+      },
+      "star": {
+        "coreArcsec": 0.15,
+        "haloArcsec": 0.6,
+        "glowArcsec": 2.5
+      }
     }
   },
   "bake": {

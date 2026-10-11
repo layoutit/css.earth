@@ -20,6 +20,20 @@ mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
     return { root, drawing: () => !decoding.has(payload.id), publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() { resumed.push(payload.id); }, destroy() { root.remove(); } };
   },
 } });
+/** Every overlay bank mounted, in order: its address, whether it was taken away, how many publications it was given and
+ * the last one's opacity, whether it was told the camera coasts, where it was told its files are, and whether it was
+ * retired. As the real owner (cloud-points.ts) does, one retired mid-coast is taken away when the coast ends. */
+const overlays: { url: string; destroyed: boolean; published: number; opacity: number; coasting: boolean[]; retired: boolean; resolveResource(path: string): string }[] = [];
+mock.module('./cloud-points.js', { namedExports: {
+  mountCloudOverlay: ({ url, resolveResource }: { url: string; resolveResource(path: string): string }) => {
+    const overlay = { url, destroyed: false, published: 0, opacity: NaN, coasting: [] as boolean[], retired: false, resolveResource };
+    overlays.push(overlay);
+    return { publish(_publication: unknown, opacity: number) { overlay.published++; overlay.opacity = opacity; },
+      setCoasting(active: boolean) { overlay.coasting.push(active); if (!active && overlay.retired) overlay.destroyed = true; },
+      retire() { overlay.retired = true; if (overlay.coasting.at(-1) !== true) overlay.destroyed = true; },
+      destroy() { overlay.destroyed = true; } };
+  },
+} });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { createUniverseCatalogBanks } = await import('./universe-catalog-banks.js');
 const { parseDatasetBillboards } = await import('@cssearth/objects');
@@ -374,4 +388,111 @@ test('a plane a dataset shows draws on its prepared picture, and gives way as th
   assert.equal(publish(10, 'heat').colors, heat); assert.equal(publish(1.5, 'heat').colors, heat, 'the colors are the dataset\'s, not the picture\'s');
   assert.equal(publish(10, 'wind').colors, null); assert.equal(publish(10).colors, null);
   lifetime.destroy();
+});
+
+test("only the selected dataset's overlay banks are mounted: a pick takes the last one's away and mounts its own", async t => {
+  t.after(() => { overlays.length = 0; });
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: [{ id: 'nebula', frame, datasets: ['optical', 'outer-ejecta', 'model'] }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame }, overlayUrls: { optical: [], 'outer-ejecta': ['/ejecta.bin', '/motions.bin'], model: ['/model.bin'] } }) as never });
+  const publish = () => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 'nebula');
+  const live = () => overlays.filter(overlay => !overlay.destroyed).map(overlay => overlay.url);
+  const focus = banks.focusBank('nebula')!;
+  assert.deepEqual(focus.state()!.datasets.map(dataset => dataset.id), ['optical', 'outer-ejecta', 'model']);
+  publish();
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
+  assert.equal(overlays.length, 0, 'the default dataset draws nothing over its layers: nothing is mounted');
+  focus.selectDataset('outer-ejecta');
+  assert.deepEqual(live(), ['/ejecta.bin', '/motions.bin'], "the picked dataset's banks are mounted");
+  publish();
+  assert.deepEqual(overlays.map(overlay => overlay.published), [1, 1], 'and drawn with the layers');
+  focus.selectDataset('model');
+  assert.deepEqual([live(), overlays.filter(overlay => overlay.destroyed).map(overlay => overlay.url)], [['/model.bin'], ['/ejecta.bin', '/motions.bin']],
+    "another pick takes the last dataset's banks away and mounts its own");
+  assert.equal(banks.focusBank('nebula')!.state()!.selectedDataset, 'model', 'a focus bank asked for again shows the dataset the bank shows');
+  focus.selectDataset('optical');
+  assert.deepEqual(live(), [], 'back on a dataset with none, nothing is drawn over the layers');
+  lifetime.destroy();
+});
+
+test('a dataset picked before its bank loads mounts its overlays when the bank does, and the scene takes them away', async t => {
+  t.after(() => { overlays.length = 0; });
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: [{ id: 'nebula', frame, datasets: ['optical', 'outer-ejecta'] }, { id: 'plain', frame }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame }, ...(id === 'nebula' ? { overlayUrls: { optical: [], 'outer-ejecta': ['/ejecta.bin'] } } : {}) }) as never });
+  const publish = (detailed: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed);
+  banks.focusBank('nebula')!.selectDataset('outer-ejecta');
+  assert.equal(overlays.length, 0, 'nothing mounts before the bank does');
+  publish('nebula');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
+  assert.deepEqual(overlays.map(overlay => [overlay.url, overlay.destroyed]), [['/ejecta.bin', false]]);
+  assert.deepEqual(banks.focusBank('plain')!.state()!.datasets.map(dataset => dataset.id), ['optical'], 'a bank without overlays has its one dataset');
+  publish('plain');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '2'));
+  assert.equal(overlays.length, 1, 'and mounts nothing over its layers');
+  lifetime.destroy();
+  assert.deepEqual(overlays.map(overlay => overlay.destroyed), [true], 'the scene takes the overlays with it');
+});
+
+test("an overlay finds its files where its bank's are, is told when the camera coasts, and is told to hide when its bank stops showing", async t => {
+  t.after(() => { overlays.length = 0; });
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: [{ id: 'nebula', frame, datasets: ['outer-ejecta'] }, { id: 'other', frame }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame }, resolveResource: (path: string) => `https://assets.example/${id}-files/${path}`,
+      overlayUrls: { 'outer-ejecta': ['/ejecta.bin'] } }) as never });
+  const publish = (detailed: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed);
+  banks.setCoasting(true);
+  publish('nebula');
+  await waitFor(() => assert.equal(overlays.length, 1));
+  const [overlay] = overlays;
+  assert.equal(overlay!.resolveResource('ejecta-atlas.webp'), 'https://assets.example/nebula-files/ejecta-atlas.webp', "its atlas is found through its bank's resolver");
+  assert.deepEqual(overlay!.coasting, [true], 'mounted mid-coast, it knows the camera coasts');
+  banks.setCoasting(false);
+  assert.deepEqual(overlay!.coasting, [true, false], 'and is told when the coast ends');
+  publish('nebula');
+  assert.ok(overlay!.opacity > 0, 'shown with its bank');
+  publish('other');
+  assert.equal(overlay!.opacity, 0, 'another object selected, it is told to hide (its owner then takes it off the page)');
+  lifetime.destroy();
+});
+
+test("a dataset left mid-coast keeps its overlays until the coast ends, then they are taken away; the scene takes any still waiting", async t => {
+  t.after(() => { overlays.length = 0; });
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: [{ id: 'nebula', frame, datasets: ['outer-ejecta', 'model', 'optical'] }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame }, resolveResource: (path: string) => path, overlayUrls: { 'outer-ejecta': ['/ejecta.bin'], model: ['/model.bin'], optical: [] } }) as never });
+  banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 'nebula');
+  await waitFor(() => assert.equal(overlays.length, 1));
+  const focus = banks.focusBank('nebula')!, [ejecta] = overlays;
+  banks.setCoasting(true);
+  focus.selectDataset('model');
+  assert.deepEqual([ejecta!.retired, ejecta!.destroyed], [true, false], 'picked away mid-coast, it is retired and stays until the coast ends');
+  banks.setCoasting(false);
+  assert.equal(ejecta!.destroyed, true, 'the coast ends: it is taken away');
+  const model = overlays[1]!;
+  focus.selectDataset('optical');
+  assert.deepEqual([model.retired, model.destroyed], [true, true], 'picked away with the camera still: taken away at once');
+  focus.selectDataset('model');
+  const again = overlays[2]!;
+  banks.setCoasting(true);
+  focus.selectDataset('optical');
+  assert.equal(again.destroyed, false);
+  lifetime.destroy();
+  assert.equal(again.destroyed, true, 'the scene takes an overlay still waiting for the coast to end');
 });
