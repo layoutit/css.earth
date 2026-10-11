@@ -63,6 +63,20 @@
           "locator": "Rows of TRAPPIST-1: its star's four habitable zone distances in au"
         }
       ]
+    },
+    "stellar-wind": {
+      "title": "Wind pressure and magnetic boundary",
+      "detail": "Modeled, not observed",
+      "summary": "A model of the star's wind: yellow where it presses hardest. Inside the dashed line its magnetic field still holds the wind.",
+      "sources": [
+        {
+          "catalogueId": "garraffo-2017-trappist-1-wind",
+          "url": "https://doi.org/10.3847/2041-8213/aa79ed",
+          "label": "Garraffo et al. (2017)",
+          "checked": "2026-10-11",
+          "locator": "Figure 3, left: the wind's total pressure in the plane of the orbits and the Alfvén surface, for a 600 G field"
+        }
+      ]
     }
   }
 }

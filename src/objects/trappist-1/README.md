@@ -51,6 +51,11 @@ band in the plane of the planets' orbits. The band is its own package, a drawing
 Gallery calculates by Kopparapu et al. (2013, 2014); its sources, processing and limits are in
 [its README](../trappist-1-habitable-zone/README.md). It is a calculation, not an observation.
 
+**Stellar wind dataset.** A second dataset of the whole system: the star in its color, with a model of its wind's
+pressure as a color map in the plane of the planets' orbits, and as a dashed line the boundary inside which the star's
+magnetic field still holds the wind. It is its own package, read from a figure of Garraffo et al. (2017); its sources,
+processing and limits are in [its README](../trappist-1-stellar-wind/README.md). It is a model, not an observation.
+
 **Catalogue color.** the swatch that search, the catalogue and the minimap show is this dataset's prepared color, #ffcd6a.
 
 ## Evidence

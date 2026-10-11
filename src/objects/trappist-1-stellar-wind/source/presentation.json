@@ -1,0 +1,31 @@
+{
+  "provenance": {
+    "name": "TRAPPIST-1's stellar wind",
+    "products": [
+      {
+        "id": "wind",
+        "label": "Modeled wind pressure and Alfvén surface (Garraffo et al. 2017, Figure 3)",
+        "process": "Read each pixel's place on the figure's color scale and the white line's coverage, fill the field under the figure's orbit circles from its neighbors, lay the circles of planets b to g on the orbits the world draws, and draw the pressure on the application's scale palette, more opaque where it is higher, with the Alfvén surface over it as a dashed white line, on the mean plane of the seven planets' orbits.",
+        "recipe": "source/wind.json",
+        "selector": "",
+        "inputs": [
+          "wind-figure"
+        ],
+        "outputs": [
+          "prepared/plane.json",
+          "prepared/wind/wind.webp"
+        ],
+        "interpretation": {
+          "kind": "modeled-wind",
+          "sourceKind": "published-simulation"
+        },
+        "limitations": [
+          "A magnetohydrodynamic model, not an observation. TRAPPIST-1's magnetic map is not measured: the model uses the map of the proxy star GJ 3622, scaled to a mean field of 600 G.",
+          "The figure prints no color bar, so the colors show where the pressure is higher, not by how much.",
+          "The pattern turns with the star, once in 3.3 days; the picture holds one moment, and its turn about the star is arbitrary.",
+          "The figure ends at its own circle for planet h, which lies 3.0 % inside the orbit the world draws."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-stellar-wind-source@1",
+  "id": "trappist-1-stellar-wind",
+  "host": "trappist-1",
+  "figure": {
+    "source": "source/garraffo-2017/TrB2_2D_0deg_tot.png",
+    "bundle": "https://arxiv.org/e-print/1706.04617v1",
+    "member": "TrB2_2D_0deg_tot.png",
+    "memberBytes": 131566,
+    "orbits": [
+      "trappist-1b",
+      "trappist-1c",
+      "trappist-1d",
+      "trappist-1e",
+      "trappist-1f",
+      "trappist-1g",
+      "trappist-1h"
+    ],
+    "registerOn": [
+      "trappist-1b",
+      "trappist-1c",
+      "trappist-1d",
+      "trappist-1e",
+      "trappist-1f",
+      "trappist-1g"
+    ]
+  },
+  "picture": {
+    "sizePx": 1024,
+    "outerRadiusPx": 500,
+    "palette": [
+      [
+        13,
+        8,
+        135
+      ],
+      [
+        126,
+        3,
+        168
+      ],
+      [
+        204,
+        71,
+        120
+      ],
+      [
+        248,
+        149,
+        64
+      ],
+      [
+        240,
+        249,
+        33
+      ]
+    ],
+    "opacity": {
+      "low": 0.35,
+      "high": 0.75
+    },
+    "boundaryColor": "#ffffff",
+    "boundaryOpacity": 0.85,
+    "boundaryWidthPx": 3,
+    "boundaryDashPx": [
+      20,
+      14
+    ]
+  },
+  "orbitOpacity": 0.4,
+  "centreFadeOuterRadii": [
+    2,
+    1.25
+  ],
+  "meaning": "The wind of TRAPPIST-1 in the plane of its planets' orbits, as the magnetohydrodynamic model of Garraffo et al. (2017) gives it for a mean surface field of 600 G: the wind's total pressure, magnetic plus dynamic, on a color scale from dark blue (lowest) to yellow (highest), and as a dashed white line the Alfven surface, the boundary inside which the star's magnetic field still holds the wind. Read from the paper's Figure 3 (left); a model, not an observation."
+}

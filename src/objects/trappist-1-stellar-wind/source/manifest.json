@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "wind-figure",
+      "path": "src/objects/trappist-1-stellar-wind/source/garraffo-2017/TrB2_2D_0deg_tot.png",
+      "origin": "https://arxiv.org/e-print/1706.04617v1",
+      "sourceUrl": "https://arxiv.org/abs/1706.04617v1",
+      "title": "Garraffo et al. (2017), Figure 3, left: total pressure of TRAPPIST-1's wind in the plane of the orbits, 600 G field",
+      "credit": "C. Garraffo, J. J. Drake, O. Cohen, J. D. Alvarado-Gómez, S. P. Moschou; ApJL 843, L33 (2017)",
+      "acquisition": "Read 2026-10-11 by packages/bake/authoring/trappist-1/stellar-wind.mts from the source bundle of arXiv:1706.04617v1 (7,485,505 bytes): the member TrB2_2D_0deg_tot.png, 131,566 bytes, unchanged. The file is not tracked and not mirrored; the script fetches it again when it is missing.",
+      "generator": "packages/bake/authoring/trappist-1/stellar-wind.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "garraffo-2017-trappist-1-wind",
+            "role": "material",
+            "evidence": "https://arxiv.org/e-print/1706.04617v1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "arXiv's non-exclusive license to distribute (https://arxiv.org/licenses/nonexclusive-distrib/1.0/). The figure is not redistributed; the prepared picture is this project's drawing of values read from it, with credit."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/trappist-1-stellar-wind/source/wind.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/trappist-1-stellar-wind/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}
