@@ -5,7 +5,8 @@ import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from './tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 import { createObjectBrowserController } from './object-browser.mts';
-import { applySeoHead, objectSeo } from '../content/seo.mts';
+import { applySeoHead, seoAtAddress } from '../content/seo.mts';
+import { ROOT_OBJECT_ID } from '../model/root-object.mts';
 import { knownObject, loadObject } from '../directory/object-directory.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -121,7 +122,7 @@ export function mountObjectShell({
     // (navigation/system-address.mts). Its head and forms follow, once that object's entry is read.
     const pageId = subject.objectId;
     void loadObject(pageId).then(page => {
-      if (page && presentedSubject === subject && !lifetime.disposed) presentPage(page.route, objectSeo(page));
+      if (page && presentedSubject === subject && !lifetime.disposed) presentPage(page.route, seoAtAddress(windowTarget.location.pathname, page, ROOT_OBJECT_ID));
     }, error => { console.error(`The page of ${pageId} could not be read for its title.`, error); });
   }
   function own<T extends { destroy(): void }>(controller: T) {

@@ -24,6 +24,13 @@ export function homeSeo(earth: ReturnType<typeof objectSeo>) {
     canonical: new URL("/", SITE_ORIGIN).href };
 }
 
+/** The head a page shows while its address is `pathname`: the site's own on `/` while it shows the object it opens on,
+ * the object's own everywhere else. */
+export function seoAtAddress(pathname: string, object: Parameters<typeof objectSeo>[0], rootObjectId: string) {
+  const seo = objectSeo(object);
+  return pathname === "/" && object.id === rootObjectId ? homeSeo(seo) : seo;
+}
+
 /** schema.org for the home page: the site's name, which search results show beside its address. */
 export function websiteJsonLd() {
   return { "@context": "https://schema.org", "@type": "WebSite", name: "cssEarth", alternateName: "css.earth", url: new URL("/", SITE_ORIGIN).href };

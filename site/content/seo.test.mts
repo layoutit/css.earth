@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from "@cssearth/objects/node/source-test";
 const test = sourceTest();
 import { SCENE_OBJECTS, requireObject } from "../directory/objects.mts";
-import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "./seo.mts";
+import { breadcrumbJsonLd, homeSeo, objectSeo, seoAtAddress, websiteJsonLd } from "./seo.mts";
 import { pageTrail } from "./seo-trail.mts";
 import { availableSocialImages, billboardSocialImages, committedSocialImages } from "../server/social-images.mts";
 
@@ -12,6 +12,14 @@ test("the home page is named and addressed as the site, not as the Earth page it
   assert.notEqual(home.title, earth.title);
   assert.equal(home.image, earth.image);
   assert.equal(websiteJsonLd().url, "https://css.earth/");
+});
+
+test("the running page keeps the site's head on `/` and writes an object's own head at every other address", () => {
+  const earth = requireObject("earth"), home = homeSeo(objectSeo(earth));
+  assert.deepEqual(seoAtAddress("/", earth, "earth"), home);
+  assert.deepEqual(seoAtAddress("/earth/", earth, "earth"), objectSeo(earth));
+  // Zoomed out on the front page, the subject is the system: its head is its own.
+  assert.deepEqual(seoAtAddress("/", requireObject("earth-system"), "earth"), objectSeo(requireObject("earth-system")));
 });
 
 test("breadcrumbs follow the object tree from the Observable Universe down to the page", () => {
