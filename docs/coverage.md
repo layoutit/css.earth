@@ -409,7 +409,6 @@ Both server build sets have identical per-file results; one server column suffic
 | view-readout.mts | 14–14/109; 0–0/71; 1–1/31 | 79–79/109; 38–38/71; 17–17/31 | 61–61/109; 34–34/71; 17–17/31 | 0–0/109; 0–0/71; 0–0/31 |
 | view-url-runtime.mts | 52–52/58; 14–14/29; 10–10/12 | 48–48/58; 15–15/29; 8–8/12 | 36–36/58; 12–12/29; 8–8/12 | 0–0/58; 0–0/29; 0–0/12 |
 | volume-presentation.mts | 17–17/17; 11–11/11; 5–5/5 | 0–0/17; 0–0/11; 0–0/5 | 0–0/17; 0–0/11; 0–0/5 | 0–0/17; 0–0/11; 0–0/5 |
-| web-analytics.mts | 2–2/2; 0–0/0; 0–0/0 | 0–0/2; 0–0/0; 0–0/0 | 0–0/2; 0–0/0; 0–0/0 | 0–0/2; 0–0/0; 0–0/0 |
 | world-approach.mts | 0–0/37; 0–0/21; 0–0/9 | 32–32/37; 16–16/21; 5–5/9 | 27–27/37; 13–13/21; 5–5/9 | 0–0/37; 0–0/21; 0–0/9 |
 | world-camera.mts | 0–0/2; 0–0/5; 0–0/0 | 2–2/2; 2–2/5; 0–0/0 | 2–2/2; 2–2/5; 0–0/0 | 0–0/2; 0–0/5; 0–0/0 |
 | world-context-plan.mts | 58–58/82; 17–17/47; 14–14/26 | 50–50/82; 15–15/47; 14–14/26 | 47–47/82; 13–13/47; 14–14/26 | 41–41/82; 14–14/47; 7–7/26 |
@@ -522,7 +521,6 @@ first runs; the preceding table records five-run ranges and the sole varying uni
 | view-readout.mts | 61 → 79 | 34 → 38 | 17 → 17 |
 | view-url-runtime.mts | 36 → 48 | 12 → 15 | 8 → 8 |
 | volume-presentation.mts | 0 → 0 | 0 → 0 | 0 → 0 |
-| web-analytics.mts | 0 → 0 | 0 → 0 | 0 → 0 |
 | world-approach.mts | 27 → 32 | 13 → 16 | 5 → 5 |
 | world-camera.mts | 2 → 2 | 2 → 2 | 0 → 0 |
 | world-context-plan.mts | 47 → 50 | 13 → 15 | 14 → 14 |
