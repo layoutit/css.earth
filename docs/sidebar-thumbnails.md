@@ -18,6 +18,10 @@ ESA artist's impression used by the map. It is artwork, not an observation;
 its [source recipe](../src/objects/milky-way-volume/source/backing/recipe.json) retains that qualification.
 The former slab-derived icon no longer matched the delivered galaxy view.
 
+A dataset that shows a plane bank, such as a star's habitable zone, uses the picture of that plane. The world draws the
+picture faint, among the orbits, so the tile keeps its colors and scales its opacity until its most opaque pixel is whole.
+The tile is listed under the host's own dataset (`trappist-1/habitable-zone`), since a plane bank has no row of its own.
+
 The [prepared receipt](../site/public/navigation/sidebar-thumbnails.json) records every
 input path and byte count, source credit and image URL. Original datasets and repaired
 runtime assets are read-only inputs. The preparer writes only its sidebar images

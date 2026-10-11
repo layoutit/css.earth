@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-sidebar-thumbnails@1",
-  "method": "Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. Each object row shows its default image inside a margin, faded out before the image frame.",
+  "method": "Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. A dataset that shows a plane bank uses the picture of that plane, its opacity scaled so its most opaque pixel is whole. Each object row shows its default image inside a margin, faded out before the image frame.",
   "inputs": [
     {
       "path": "src/objects/abell-1689-layers/prepared/presentation.json",
@@ -669,6 +669,34 @@
     {
       "path": "src/objects/milky-way-volume/prepared/backing/backing.webp",
       "bytes": 183564
+    },
+    {
+      "path": "src/objects/trappist-1-habitable-zone/object.json",
+      "bytes": 892
+    },
+    {
+      "path": "src/objects/trappist-1-habitable-zone/prepared/plane.json",
+      "bytes": 1172
+    },
+    {
+      "path": "src/objects/trappist-1/source/content/object.json",
+      "bytes": 8139
+    },
+    {
+      "path": "src/objects/trappist-1-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17200
+    },
+    {
+      "path": "src/objects/trappist-1-stellar-wind/object.json",
+      "bytes": 915
+    },
+    {
+      "path": "src/objects/trappist-1-stellar-wind/prepared/plane.json",
+      "bytes": 1280
+    },
+    {
+      "path": "src/objects/trappist-1-stellar-wind/prepared/wind/wind.webp",
+      "bytes": 66390
     },
     {
       "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
@@ -2164,6 +2192,28 @@
       ],
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
+    },
+    "trappist-1/habitable-zone": {
+      "url2x": "/navigation/focus-trappist-1-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/trappist-1-habitable-zone/object.json",
+        "src/objects/trappist-1-habitable-zone/prepared/plane.json",
+        "src/objects/trappist-1-habitable-zone/prepared/zone/zone.webp",
+        "src/objects/trappist-1/source/content/object.json"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of TRAPPIST-1",
+      "sourceUrl": "https://hzgallery.org/table.html"
+    },
+    "trappist-1/stellar-wind": {
+      "url2x": "/navigation/focus-trappist-1-stellar-wind@2x.webp",
+      "inputs": [
+        "src/objects/trappist-1-stellar-wind/object.json",
+        "src/objects/trappist-1-stellar-wind/prepared/plane.json",
+        "src/objects/trappist-1-stellar-wind/prepared/wind/wind.webp",
+        "src/objects/trappist-1/source/content/object.json"
+      ],
+      "credit": "Garraffo et al. (2017), Figure 3 left (TrB2_2D_0deg_tot.png of https://arxiv.org/e-print/1706.04617v1)",
+      "sourceUrl": "https://doi.org/10.3847/2041-8213/aa79ed"
     }
   },
   "defaults": {

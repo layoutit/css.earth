@@ -1,4 +1,4 @@
-import { readVolumePresentationPreviews, readGalaxyBackingSource, parsePreparedGalaxyCatalog, parseObjectDescriptor } from '@cssearth/objects';
+import { readVolumePresentationPreviews, readGalaxyBackingSource, parsePreparedGalaxyCatalog, parseObjectDescriptor, parsePlaneBankDescriptor } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -81,6 +81,25 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
   // The galaxy catalogue is found by what it is; its rows are read below.
   if (sourceObject(descriptor).type === 'galaxy-catalog') galaxyCatalogues.push(folder.name);
+  // A plane bank has no row of its own: its picture is the image of the host's dataset that shows it. The world draws the
+  // picture faint, among orbits; the tile keeps its colors and scales its opacity so that its most opaque pixel is whole.
+  if (sourceObject(descriptor).type === 'plane-bank') {
+    await read(descriptorPath);
+    const bank = parsePlaneBankDescriptor(descriptor), planePath = `src/objects/${bank.id}/${sourcePath(bank.url)}`, plane = readGalaxyBackingSource(await json(planePath));
+    const texturePath = `src/objects/${bank.id}/prepared/${sourcePath(sourceObject(plane.leaf).texturePath)}`;
+    const contentPath = `src/objects/${bank.host}/source/content/object.json`;
+    const shown = sourceArray(sourceObject(sourceObject(await json(contentPath)).datasets).controls, sourceObject)
+      .filter(control => control.volume !== undefined && sourceObject(control.volume).objectId === bank.id);
+    if (!shown.length) throw new TypeError(`${contentPath}: no dataset shows the plane ${bank.id}.`);
+    const { data, info } = await sharp(await read(texturePath)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    let most = 0;
+    for (let at = 3; at < data.length; at += 4) most = Math.max(most, data[at]!);
+    if (most === 0) throw new TypeError(`${texturePath}: the plane's picture is empty.`);
+    for (let at = 3; at < data.length; at += 4) data[at] = Math.round(data[at]! * 255 / most);
+    const picture = await sharp(data, { raw: { width: info.width, height: info.height, channels: 4 } }).png().toBuffer();
+    for (const control of shown) await makeThumbnail(bank.host, sourceId(control.id), picture, { inputs: [descriptorPath, planePath, texturePath, contentPath],
+      credit: sourceText(plane.source), sourceUrl: sourceText(sourceObject(control.source).url) });
+  }
   if (sourceObject(descriptor).type !== 'density-volume') continue;
   await read(descriptorPath);
   const id = folder.name, backingPath = `src/objects/${id}/prepared/backing.json`;
@@ -102,7 +121,7 @@ for (const id of galaxyCatalogues) {
       defaults[sourceText(object.id)] = defaults[object.detailedObjectId];
   }
 }
-const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. Each object row shows its default image inside a margin, faded out before the image frame.',
+const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. A dataset that shows a plane bank uses the picture of that plane, its opacity scaled so its most opaque pixel is whole. Each object row shows its default image inside a margin, faded out before the image frame.',
   inputs: [...inputs.values()], images, defaults };
 await output('site/public/navigation/sidebar-thumbnails.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log(`${check ? 'Verified' : 'Prepared'} ${Object.keys(images).length} sidebar images at 80 px.`);
