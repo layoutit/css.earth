@@ -1,4 +1,4 @@
-import { readVolumeAttachment, readVolumePresentationPreviews, hasVolumePresentationSource, PREPARED_VOLUME_PRESENTATION_SCHEMA, validatePreparedImageLayerBank, parseVolumePresentationSource, parseVolumeSourceManifest, readObjectContentDatasets, isTrackedVolumeSourcePreview, scratchSourceCachePath, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { readVolumeAttachment, readVolumePresentationPreviews, hasVolumePresentationSource, PREPARED_VOLUME_PRESENTATION_SCHEMA, validatePreparedImageLayerBank, parseVolumePresentationSource, parseVolumeSourceManifest, readObjectContentDatasets, isTrackedVolumeSourcePreview, scratchSourceCachePath, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor, parseImageLayerBankDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -35,7 +35,7 @@ function presentation(raw: unknown): Presentation {
   return record;
 }
 /** Which manifest sources each dataset reads: its own image, its further inputs and the shared inputs. */
-function volumeLineage(record: Presentation, manifest: Record<string, unknown>, imageLayer: boolean): ObjectLineage {
+export function volumeLineage(record: Presentation, manifest: Record<string, unknown>, imageLayer: boolean): ObjectLineage {
   const sources = imageLayer ? manifestSources(manifest) : sourceArray(manifest.inputs, raw => lineageSource(raw));
   const bySource = new Map(sources.map(source => [source.id, source]));
   const products = record.datasets.map((dataset, index) => {
@@ -97,6 +97,11 @@ export async function readPreparedVolumes({ root = process.cwd(), input = path =
   }
   return results;
 }
+export function imageLayerDatasetsMatch(descriptor: ReturnType<typeof parseObjectDescriptor>, record: { defaultDataset: string; datasets: readonly { id: string }[] }) {
+  const ids = Object.keys(parseImageLayerBankDescriptor(descriptor).overlays);
+  return record.defaultDataset === ids[0] && record.datasets.length === ids.length && record.datasets.every((dataset, i) => dataset.id === ids[i]);
+}
+
 /** Every volume package's source presentation, manifest and descriptor, checked against each other. */
 async function volumeSources(root: string, input: (path: string) => Promise<Buffer>, objectId?: string) {
   const results = [];
@@ -112,7 +117,8 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASET_INDEX_SCHEMA) ||
-      (descriptor.type === 'image-layer-bank' && format === PREPARED_IMAGE_LAYER_BANK_SCHEMA && record.datasets.length === 1 && record.defaultDataset === 'optical')))
+      // an image-layer bank's datasets are its overlays' (ImageLayerBankDescriptor `overlays`), its default the first
+      (descriptor.type === 'image-layer-bank' && format === PREPARED_IMAGE_LAYER_BANK_SCHEMA && imageLayerDatasetsMatch(descriptor, record))))
       throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
     results.push({ base, record, manifest, descriptor });
   }

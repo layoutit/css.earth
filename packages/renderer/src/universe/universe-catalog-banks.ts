@@ -10,6 +10,7 @@ import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
 import { mountCataloguePoints } from './catalogue-points.js';
+import { mountCloudOverlay } from './cloud-points.js';
 import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import { logarithmicFade } from './world-context/context-scale.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions, PreparedImageLayerMount } from './prepared-universe-types.js';
@@ -20,7 +21,7 @@ interface ImageBank {
   readonly radiusUnits: number;
   mounted: ReturnType<typeof mountPreparedCssImageLayers> | null;
   /** Its catalogue dots, mounted beside its slices and given their opacity, or their own from inside the galaxy. */
-  points: ReturnType<typeof mountCataloguePoints>[];
+  points: { publish(publication: { world: WorldCameraPose; viewport: WorldCameraViewport }, opacity: number): void; destroy(): void }[];
   /** Whether the dots drew on the last publication: a hidden bank is told once, not every frame. */
   dotsShown: boolean;
   loading: Promise<void> | null;
@@ -37,6 +38,14 @@ interface ImageBank {
   host: string | undefined;
   /** The selected body it was last shown for: it is kept in layout only while that body stays selected. */
   shownFor: unknown;
+  /** Its datasets (the first the default), the one selected, and what that one draws over its layers: only the selected
+   * dataset's overlay banks are mounted (cloud-points.ts `mountCloudOverlay`). */
+  datasets: readonly string[];
+  dataset: string;
+  overlay: ReturnType<typeof mountCloudOverlay>[];
+  overlayUrls: Readonly<Record<string, readonly string[]>>;
+  /** Where its prepared files are (PreparedImageLayerMount `resolveResource`): an overlay's atlas has its own address. */
+  resolveResource: ((path: string) => string) | null;
 }
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
@@ -51,7 +60,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
    * volumes are, so that no dot paints on it. A nebula stands among the galaxy's dots, and they stay around a selected
    * one: under the dot layer the Helix's picture had the galaxy's dots and its globular clusters painted on it. */
   picturesBefore?: Element;
-  declarations: readonly { id: string; frame: DensityVolumeFrame; surrounds?: true; host?: string }[];
+  declarations: readonly { id: string; frame: DensityVolumeFrame; surrounds?: true; host?: string; datasets?: readonly string[] }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerMount>;
   volumeDeclarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialCatalog?: PreparedCatalogBank;
@@ -73,6 +82,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
   let billboardCount = 0, coasting = false;
+  /** Overlays retired while the camera coasted, taken away when it stops. */
+  let retiring: ReturnType<typeof mountCloudOverlay>[] = [];
   // A bank with a backing is drawn from afar on that fixed plane, where the billboards go (far-backing-planes.ts).
   const farPlanes = createFarBackingPlanes({ root, before: imagesBefore, lifetime, load: loadBacking, requestPublication });
   const images: ImageBank[] = declarations.map(bank => {
@@ -80,7 +91,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     return { id: bank.id, frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], dotsShown: false, loading: null, publishedOpacity: NaN,
       billboardIndex: facts?.billboard ? billboardCount++ : -1, billboardRadiusUnits: facts?.billboard?.radiusUnits ?? 0,
       far: facts?.backing ? farPlanes.add(bank.id, bank.frame) : null,
-      independent: facts?.contextVisibility === 'independent', surrounds: bank.surrounds === true, host: bank.host, shownFor: undefined };
+      independent: facts?.contextVisibility === 'independent', surrounds: bank.surrounds === true, host: bank.host, shownFor: undefined,
+      datasets: bank.datasets?.length ? bank.datasets : ['optical'], dataset: bank.datasets?.[0] ?? 'optical', overlay: [], overlayUrls: {}, resolveResource: null };
   });
   const byId = new Map(images.map(bank => [bank.id, bank]));
   // A package that is only catalogue dots mounts them the first time its catalogue row is selected; they draw while it is.
@@ -104,9 +116,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     mounted?.destroy();
   });
   for (const bank of images) lifetime.onDispose(() => {
-    const mounted = bank.mounted, points = bank.points;
+    const mounted = bank.mounted, points = [...bank.points, ...bank.overlay, ...retiring.splice(0)];
     bank.mounted = null;
-    bank.points = [];
+    bank.points = []; bank.overlay = [];
     bank.loading = null;
     for (const layer of points) layer.destroy();
     mounted?.destroy();
@@ -149,6 +161,16 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     publishResidency();
     return catalogLoading;
   }
+  /** The selected dataset's overlay banks, over its slices, dimmed behind its body; the last dataset's are retired: taken
+   * away, or while the camera coasts cleared and taken away when it stops (cloud-points.ts `retire`). */
+  function mountOverlay(bank: ImageBank) {
+    for (const layer of bank.overlay) { layer.retire(); retiring.push(layer); }
+    bank.overlay = (bank.overlayUrls[bank.dataset] ?? []).map(url => {
+      const overlay = mountCloudOverlay({ host: root, before: end, url, resolveResource: bank.resolveResource! });
+      overlay.setCoasting(coasting); return overlay;
+    });
+    bank.dotsShown = true;
+  }
   function ensureImage(bank: ImageBank): Promise<void> {
     if (lifetime.disposed || bank.mounted) return Promise.resolve();
     if (bank.loading) return bank.loading;
@@ -166,8 +188,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         onDrawn: () => { requestPublication?.(); } });
       bank.mounted.root.style.display = 'none';
       // The dots are mounted beside the slices, not inside them: from inside the galaxy they draw without its photograph.
-      bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host: root, before: end, url,
-        loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) }));
+      bank.points = [...(loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host: root, before: end, url,
+        loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) }))];
+      bank.overlayUrls = loaded.overlayUrls ?? {}; bank.resolveResource = loaded.resolveResource;
+      mountOverlay(bank);
       requestPublication?.();
     }).finally(() => { bank.loading = null; publishResidency(); });
     publishResidency();
@@ -190,7 +214,12 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     },
     focusBank(id: string) {
       const bank = byId.get(id);
-      if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank));
+      if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank), bank.datasets, { current: () => bank.dataset, select(dataset) {
+        if (dataset === bank.dataset) return;
+        bank.dataset = dataset;
+        if (bank.mounted) mountOverlay(bank);
+        requestPublication?.();
+      } });
       // A bank of dots has one dataset, its members, and a plane has one, its picture; each mounts when it is first shown.
       return points.some(point => point.id === id) ? createPointFocusBank(id) : planes.some(plane => plane.id === id) ? createPlaneFocusBank(id) : null;
     },
@@ -236,7 +265,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       return { opacity: orbits, colors };
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */
-    setCoasting(active: boolean) { coasting = active; billboards?.setCoasting(active); catalog?.setCoasting(active); },
+    setCoasting(active: boolean) { coasting = active; billboards?.setCoasting(active); catalog?.setCoasting(active); for (const bank of images) for (const overlay of bank.overlay) overlay.setCoasting(active);
+      for (const overlay of retiring) overlay.setCoasting(active); if (!active) retiring = []; },
     /** Whether that bank's framing sphere holds `positionM`. */
     imageBankHolds(id: string, positionM: readonly number[]): boolean {
       const bank = byId.get(id);
@@ -303,6 +333,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         }
         if (dotOpacity > 0 || bank.dotsShown) {
           for (const points of bank.points) points.publish({ world, viewport }, dotOpacity);
+          for (const overlay of bank.overlay) overlay.publish({ world, viewport }, dotOpacity);
           bank.dotsShown = dotOpacity > 0;
         }
         if (shown !== bank.publishedOpacity) {
