@@ -4,6 +4,7 @@ import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseImageLayerRecipe, prepareImageLayers } from '@cssearth/bake/image-layers';
+import { prepareCloudOverlays } from './prepare-cloud-points.mts';
 
 export async function prepareImageLayerObject(objectDirectory: string) {
   const root=resolve(objectDirectory), sourceDirectory=resolve(root,'source'), outputDirectory=resolve(root,'prepared');
@@ -28,7 +29,16 @@ export async function prepareImageLayerObject(objectDirectory: string) {
   for(const path of previous)if(!retained.has(path)){if(!path.startsWith('layers/')||path.split('/').includes('..'))throw new TypeError('Refusing to retire an uncontained image-layer resource.');try{await unlink(resolve(outputDirectory,path));}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}}
   const total=prepared.resources.reduce((sum,r)=>sum+r.bytes,0), decoded=prepared.resources.reduce((sum,r)=>sum+r.width*r.height*4,0);
   console.log(`PREPARED ${recipe.id}: ${prepared.resources.length} retained images; ${total} bytes; ${decoded} decoded bytes`);
+  await prepareImageLayerOverlays(root,(kept as {overlays?:unknown}).overlays,recipe.id);
   return prepared;
+}
+/** What its datasets draw over the layers (./prepare-cloud-points.mts), placed in the frame the bake just wrote. Only the
+ * probe for its source may find nothing; a bank whose descriptor names overlay banks (`overlays`) needs that source. */
+export async function prepareImageLayerOverlays(root:string,overlays:unknown,id:string){
+  const cloudSource=await readFile(resolve(root,'source','cloud-points.json')).then(()=>true,(error:NodeJS.ErrnoException)=>{if(error.code==='ENOENT')return false;throw error;});
+  const declared=Object.values((overlays??{}) as Record<string,unknown>).some(banks=>Array.isArray(banks)&&banks.length>0);
+  if(cloudSource)await prepareCloudOverlays(root);
+  else if(declared)throw new TypeError(`${id}: object.json names overlay banks but source/cloud-points.json is missing.`);
 }
 const direct=process.argv[1]!==undefined&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href;
 if(direct){if(!process.argv[2]||process.argv[3])throw new TypeError('Usage: prepare-image-layers <object-directory>');await prepareImageLayerObject(process.argv[2]);}

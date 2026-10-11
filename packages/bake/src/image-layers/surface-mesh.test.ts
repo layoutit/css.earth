@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.ts';
-import { closedMesh, imageLayerSurfaceMesh, MESH_OPACITY_FLOOR, pushPull } from './surface-mesh.ts';
+import { closedMesh, edgeShare, imageLayerSurfaceMesh, MESH_OPACITY_FLOOR, pushPull } from './surface-mesh.ts';
 import { stlTriangles } from './surface.ts';
 
 type Surface = NonNullable<ImageLayerRecipe['geometry']['surface']>;
@@ -57,4 +57,18 @@ test('a recipe draws its surface as a closed mesh with its filament and detail m
   assert.throws(with_({ closedMesh: false }), /closedMesh is true or left out/u);
   assert.throws(with_({ filaments: { path: 'filaments.png', darkness: 2 } }), /darkness is from 0 to 1/u);
   assert.throws(with_({ edgeFit: { maxStretch: 1.5, smoothDeg: 6 } }), /maxStretch is a share/u);
+});
+
+test('two triangles over their shared edge band make the face\'s opacity together: no gap, no edge drawn twice', () => {
+  for (const a of [0, .1, .5, .9, 1]) {
+    assert.equal(edgeShare(a, .5), a, 'half a texel inside, a triangle draws its face whole');
+    assert.equal(edgeShare(a, 3), a);
+    assert.equal(edgeShare(a, -.5), 0, 'half a texel outside, it draws nothing');
+    assert.equal(edgeShare(a, -3), 0);
+    for (const inside of [-.49, 0, .49]) {
+      // A texel in the band is drawn by both triangles, one over the other: together 1 - (1 - s)^2.
+      const s = edgeShare(a, inside), together = 1 - (1 - s) ** 2;
+      assert.ok(Math.abs(together - a) < 1e-12, `a = ${a}, ${inside} texels in: the two make ${together}`);
+    }
+  }
 });

@@ -36,6 +36,15 @@ export const MESH_CHART_FROM_DEG = -88, MESH_CHART_TO_DEG = 88, MESH_QUILT_BLOCK
  * much of a point's light a full patch takes away. */
 export const MESH_PATCH_AROUND = 24, MESH_PATCH_NEAR = 4, MESH_PATCH_FROM = 0.12, MESH_PATCH_TO = 0.45, MESH_PATCH_DARK = 0.75;
 
+/** Texels a triangle reaches past each side, where it meets its neighbour (see edgeShare). */
+export const MESH_EDGE_MARGIN = 1;
+/** A texel's opacity by its distance in texels inside its triangle's nearest side (negative outside): the face's own
+ * opacity a inside, none past half a texel out, and across the half-texel band either side of the side, which the
+ * neighbour also draws, 1 - sqrt(1 - a), so the two together are a. */
+export function edgeShare(a: number, inside: number): number {
+  if (inside >= .5) return a; if (inside <= -.5) return 0; return 1 - Math.sqrt(Math.max(0, 1 - a));
+}
+
 /** One triangle of the drawn surface: its corners on the picture (column, row, depth in arcseconds from the star's plane
  * of the sky, negative toward the Sun) and its texture over the parallelogram the corners span (corner 0, then along to
  * corner 1, down to corner 2): clear past the triangle. */
@@ -281,16 +290,20 @@ export async function imageLayerSurfaceMesh(surface: Surface, triangles: Float32
     const normals = [apex, (apex + 1) % 3, (apex + 2) % 3].map(k => cornerNormal(index / 3 + k));
     const along = side((apex + 1) % 3, apex), down = side((apex + 2) % 3, apex);
     const columns = Math.max(2, Math.min(MESH_MOST_TEXELS, Math.ceil(along * MESH_TEXELS_PER_PIXEL) + 2)), rows = Math.max(2, Math.min(MESH_MOST_TEXELS, Math.ceil(down * MESH_TEXELS_PER_PIXEL) + 2));
-    const rgba = Buffer.alloc(4 * columns * rows), across = Math.hypot(1 / columns, 1 / rows);
-    for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) { const s = (column + .5) / columns, t = (row + .5) / rows;
-      const o = 4 * (row * columns + column), mixed = [0, 0, 0, 0];
+    // Every edge is shared: each triangle reaches MESH_EDGE_MARGIN texels past all three of its sides, and the band half
+    // a texel either side of a side holds 1 - sqrt(1 - a) of the face's opacity a, so the two triangles over it make a
+    // together, opaque or clear: no gap shows the wall behind and no edge is covered twice.
+    const m = MESH_EDGE_MARGIN, wide = columns + 2 * m, tall = rows + 2 * m, rgba = Buffer.alloc(4 * wide * tall), across = Math.hypot(1 / columns, 1 / rows);
+    for (let row = 0; row < tall; row++) for (let column = 0; column < wide; column++) { const s = (column - m + .5) / columns, t = (row - m + .5) / rows;
+      const o = 4 * (row * wide + column), mixed = [0, 0, 0, 0];
       surfaceTexel([0, 1, 2].map(axis => file[0]![axis]! + s * (file[1]![axis]! - file[0]![axis]!) + t * (file[2]![axis]! - file[0]![axis]!)), [0, 1, 2].map(axis => normals[0]![axis]! + s * (normals[1]![axis]! - normals[0]![axis]!) + t * (normals[2]![axis]! - normals[0]![axis]!)), mixed);
       // Color is kept under clear texels too, so the lossy encoding has no dark edge to bleed in.
       for (let c = 0; c < 3; c++) rgba[o + c] = Math.round(mixed[c]!);
-      // A texel is drawn whole out to half a texel past the long side, so the triangle beside it overlaps it there: two
-      // half-covered texels over one another let the background show through as a line along every edge.
-      rgba[o + 3] = Math.round(mixed[3]! * Math.max(0, Math.min(1, 1 - (s + t - 1) / across))); }
-    made.push({ corners: ordered, texture: [columns, rows], rgba });
+      rgba[o + 3] = Math.round(255 * edgeShare(mixed[3]! / 255, Math.min(t * rows, s * columns, (1 - s - t) / across))); }
+    const du = ordered[1].map((value, k) => (value - ordered[0][k]!) / columns), dv = ordered[2].map((value, k) => (value - ordered[0][k]!) / rows);
+    const origin = ordered[0].map((value, k) => value - m * du[k]! - m * dv[k]!);
+    const grown = [origin, origin.map((value, k) => value + wide * du[k]!), origin.map((value, k) => value + tall * dv[k]!)] as SurfaceTriangle['corners'];
+    made.push({ corners: grown, texture: [wide, tall], rgba });
   }
   return made;
 }
