@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { encodeCloudPoints, encodeCloudSegments, type PreparedBank, type PreparedCloudPoints, type PreparedCloudSegments } from '@cssearth/objects';
 import { packPreparedBank } from '@cssearth/objects/node';
-import { createCloudPoints, mountCloudOverlay, retainedStyle } from './cloud-points.js';
+import { createCloudPoints, mountCloudOverlay } from './cloud-points.js';
+import { retainedStyle } from './cloud-overlay-layer.js';
 import { readPreparedHere } from '../prepared-data/readers.js';
 import type { CloudOverlayData } from './cloud-overlay-reader.js';
 
@@ -222,4 +223,12 @@ test('the overlay reader reads billboards or lines by the bank\'s schema, hands 
   assert.deepEqual([...(points.value as Extract<CloudOverlayData, { kind: 'points' }>).points.positions], [...cloud.positions]);
   assert.deepEqual([points.transfer.length, segments.transfer.length], [1, 1], 'the columns are views of one buffer, handed over once');
   await assert.rejects(readPreparedHere('cloud-overlay', '/other.bin', fetcher), /\/other\.bin: an overlay is cssearth-cloud-points@1 or cssearth-cloud-segments@1, not cssearth-catalogue-dots@1/u);
+});
+
+test('the overlay reader refuses an occluder whose axes do not span space: it has no inside to dim behind', async () => {
+  for (const axesUnits of [[[1, 0, 0], [0, 1, 0], [0, 0, 0]], [[1, 0, 0], [0, 1, 0], [1, 1, 0]]] as [number, number, number][][]) {
+    const flat = encodeCloudSegments({ ...lines, occluder: [{ centreUnits: [0, 0, 0], axesUnits }] });
+    const fetcher = (async (url: string) => new Response(new Uint8Array(packPreparedBank(flat, url)))) as unknown as typeof fetch;
+    await assert.rejects(readPreparedHere('cloud-overlay', '/flat.bin', fetcher), /\/flat\.bin: every occluder's axes span space/u, JSON.stringify(axesUnits));
+  }
 });

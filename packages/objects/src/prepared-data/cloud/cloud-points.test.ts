@@ -36,11 +36,9 @@ test('a bank that is not cloud points, or whose billboards, atlas or occluder ar
   for (const width of [0, -1, Number.NaN, Infinity]) assert.throws(() => readCloudPoints(columns({ diameter: Float32Array.from([.05, width]) }), 'cloud.bin'), /cloud.bin: every billboard has a positive width/u, String(width));
   assert.throws(() => readCloudPoints(columns({ cell: new Uint16Array(2) }), 'cloud.bin'), /column cell must be u16 with 4 values/u);
   for (const occluder of [{}, [{ centreUnits: [0, 0], axesUnits: ellipsoid.axesUnits }], [{ centreUnits: [0, 0, 0], axesUnits: ellipsoid.axesUnits.slice(0, 2) }],
-    [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [0, 1, 0], [0, 0, Number.NaN]] }], [null],
-    // a zero axis, and three axes in one plane: no inside to dim behind
-    [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [0, 1, 0], [0, 0, 0]] }], [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [0, 1, 0], [1, 1, 0]] }]])
-    assert.throws(() => readCloudPoints(fields({ occluder }), 'cloud.bin'), /cloud.bin: occluder is a list of ellipsoids, each a centre and three axes that span space/u, JSON.stringify(occluder));
+    [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [0, 1, 0], [0, 0, Number.NaN]] }], [null]])
+    assert.throws(() => readCloudPoints(fields({ occluder }), 'cloud.bin'), /cloud.bin: occluder is a list of ellipsoids, each a centre and three axes/u, JSON.stringify(occluder));
   assert.throws(() => readCloudPoints(fields({ frame: { ...frame, metersPerUnit: 0 } }), 'cloud.bin'), /metres per unit must be positive/u);
-  assert.equal(readCloudPoints(fields({ occluder: [{ centreUnits: [0, 0, 0], axesUnits: [[0, 1, 1], [1, 0, 1], [1, 1, 0]] }] }), 'cloud.bin').occluder.length, 1, 'oblique axes that span space are an ellipsoid');
+  assert.equal(readCloudPoints(fields({ occluder: [{ centreUnits: [0, 0, 0], axesUnits: [[0, 1, 1], [1, 0, 1], [1, 1, 0]] }] }), 'cloud.bin').occluder.length, 1, 'oblique axes are an ellipsoid (whether they span space is the reader\'s check: cloud-overlay-reader.ts)');
   assert.equal(readCloudPoints(fields({ occluder: [] }), 'cloud.bin').occluder.length, 0, 'a cloud with no body hides nothing');
 });

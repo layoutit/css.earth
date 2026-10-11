@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, rotationFromMatrix3d, offAxisFrame, silhouetteEllipse, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle } from '@cssearth/engine';
+import { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, rotationFromMatrix3d, offAxisFrame, silhouetteEllipse, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, basisSpansSpace } from '@cssearth/engine';
 
 test('off-axis physical distance preserves the requested tangential apparent radius', () => {
   for (const bodyRadius of [1, 243.97, 605.18]) for (const focal of [300, 1247]) {
@@ -45,4 +45,12 @@ test('a planet offset from the Sun cannot falsely occult it while a kiloparsec o
   }
   assert.equal(rayHitsSphereBefore([0, 0, -distance], [0, 0, -distance + separation], radius), true);
   assert.equal(rayHitsSphereBefore([0, 0, -distance], [0, 0, -distance - separation], radius), false);
+});
+
+test('three axes span space unless one is zero, they lie in one plane, or a component is not finite', () => {
+  assert.equal(basisSpansSpace([[1, 0, 0], [0, 2, 0], [0, 0, 3]]), true);
+  assert.equal(basisSpansSpace([[0, 1, 1], [1, 0, 1], [1, 1, 0]]), true, 'oblique axes span space');
+  for (const basis of [[[1, 0, 0], [0, 1, 0], [0, 0, 0]], [[1, 0, 0], [0, 1, 0], [1, 1, 0]], [[1, 0, 0], [2, 0, 0], [0, 0, 1]], [[1, 0, 0], [0, 1, 0]],
+    [[1, 0, 0], [0, 1, 0], [0, 0, Number.NaN]], [[1, 0, 0], [0, Infinity, 0], [0, 0, 1]]])
+    assert.equal(basisSpansSpace(basis), false, JSON.stringify(basis));
 });

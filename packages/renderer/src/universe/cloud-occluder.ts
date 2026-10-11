@@ -24,7 +24,7 @@ export function occluderDepth(occluder: readonly CloudPointEllipsoid[]) {
 }
 
 /** The rows of the inverse of the 3x3 matrix whose columns are `axes`: row k of it, dotted with an offset, is that
- * offset's k-th coordinate along the axes. The axes span space (@cssearth/objects `occluderAxesSpanSpace`). */
+ * offset's k-th coordinate along the axes. The axes span space (@cssearth/engine `basisSpansSpace`, checked by cloud-overlay-reader.ts). */
 function inverseRows(axes: readonly (readonly [number, number, number])[]): number[][] {
   const [a, b, c] = [axes[0]!, axes[1]!, axes[2]!];
   // the rows of the inverse are the cross products of the other two columns over the determinant

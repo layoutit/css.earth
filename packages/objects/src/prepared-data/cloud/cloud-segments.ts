@@ -1,6 +1,6 @@
 import { preparedBankColumn, type PreparedBank } from '../../prepared-bank.js';
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '../../density-volume.js';
-import { occluderAxesSpanSpace, type CloudPointEllipsoid } from './cloud-points.js';
+import type { CloudPointEllipsoid } from './cloud-points.js';
 
 /**
  * Cloud segments (`cssearth-cloud-segments@1`): straight lines in an object's frame, drawn a fixed number of pixels wide
@@ -46,8 +46,8 @@ export function readCloudSegments(bank: PreparedBank, at = 'cloud segments'): Pr
   if (from.some(value => !Number.isFinite(value)) || to.some(value => !Number.isFinite(value))) throw new TypeError(`${at}: every line has finite ends.`);
   if (heads.some(value => value > 1)) throw new TypeError(`${at}: head is 0 or 1.`);
   if (!Array.isArray(occluder) || !occluder.every(e => e && typeof e === 'object' && vector((e as CloudPointEllipsoid).centreUnits) &&
-    Array.isArray((e as CloudPointEllipsoid).axesUnits) && (e as CloudPointEllipsoid).axesUnits.length === 3 && (e as CloudPointEllipsoid).axesUnits.every(vector) && occluderAxesSpanSpace((e as CloudPointEllipsoid).axesUnits)))
-    throw new TypeError(`${at}: occluder is a list of ellipsoids, each a centre and three axes that span space.`);
+    Array.isArray((e as CloudPointEllipsoid).axesUnits) && (e as CloudPointEllipsoid).axesUnits.length === 3 && (e as CloudPointEllipsoid).axesUnits.every(vector)))
+    throw new TypeError(`${at}: occluder is a list of ellipsoids, each a centre and three axes.`);
   if (label !== undefined && !(label && typeof label === 'object' && typeof (label as { text?: unknown }).text === 'string' && (label as { text: string }).text.length > 0 && vector((label as { atUnits?: unknown }).atUnits)))
     throw new TypeError(`${at}: label is a text and a place.`);
   return { id, frame: parseDensityVolumeFrame(frame), count: n, from, to, rgba, heads, widthPixels, occluder: occluder as CloudPointEllipsoid[],

@@ -2,7 +2,7 @@ import { presentPhysicalPoseInVolume, cssCameraAxesFromOrientation } from '@csse
 import type { PreparedCloudSegments } from '@cssearth/objects';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import { OCCLUDED_FLOOR, occluderDepth } from './cloud-occluder.js';
-import { retainedStyle, type CloudOverlayLayer } from './cloud-points.js';
+import { retainedStyle, type CloudOverlayLayer } from './cloud-overlay-layer.js';
 
 /** A line element's own length, scaled to the line's on screen; an arrowhead is this many line widths long. */
 const BASE_PX = 100, HEAD_WIDTHS = 4;

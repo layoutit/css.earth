@@ -36,9 +36,8 @@ test('a bank that is not cloud segments, or whose lines, width, heads, occluder 
   assert.throws(() => readCloudSegments(columns({ to: Float64Array.from([.1, .2, .3, 0, 0, Infinity]) }), 'lines.bin'), /every line has finite ends/u);
   assert.throws(() => readCloudSegments(columns({ head: Uint8Array.from([0, 2]) }), 'lines.bin'), /lines.bin: head is 0 or 1/u);
   assert.throws(() => readCloudSegments(columns({ rgba: new Uint8Array(4) }), 'lines.bin'), /column rgba must be u8 with 8 values/u);
-  for (const occluder of [null, [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [0, 1, 0]] }], [{ centreUnits: [0, 0, 'x'], axesUnits: ellipsoid.axesUnits }],
-    [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [0, 0, 0], [0, 0, 1]] }], [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [2, 0, 0], [0, 0, 1]] }]])
-    assert.throws(() => readCloudSegments(fields({ occluder }), 'lines.bin'), /lines.bin: occluder is a list of ellipsoids, each a centre and three axes that span space/u, JSON.stringify(occluder));
+  for (const occluder of [null, [{ centreUnits: [0, 0, 0], axesUnits: [[1, 0, 0], [0, 1, 0]] }], [{ centreUnits: [0, 0, 'x'], axesUnits: ellipsoid.axesUnits }]])
+    assert.throws(() => readCloudSegments(fields({ occluder }), 'lines.bin'), /lines.bin: occluder is a list of ellipsoids, each a centre and three axes/u, JSON.stringify(occluder));
   for (const label of [null, 'a model', { text: '', atUnits: [0, 0, 0] }, { text: 'model', atUnits: [0, 0] }, { text: 'model', atUnits: [0, 0, Number.NaN] }, { atUnits: [0, 0, 0] }])
     assert.throws(() => readCloudSegments(fields({ label }), 'lines.bin'), /lines.bin: label is a text and a place/u, JSON.stringify(label));
 });

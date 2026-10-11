@@ -34,15 +34,6 @@ export function encodeCloudPoints(cloud: PreparedCloudPoints): PreparedBank {
 }
 
 const vector = (value: unknown): value is [number, number, number] => Array.isArray(value) && value.length === 3 && value.every(Number.isFinite);
-/** Three axes that span space: each of some length, and together not flat (their triple product a real share of their
- * lengths' product). A flat or zero axis has no inside to dim behind. */
-export const occluderAxesSpanSpace = (axes: readonly (readonly number[])[]) => {
-  if (axes.length !== 3) return false;
-  const a = axes[0]!, b = axes[1]!, c = axes[2]!, length = (v: readonly number[]) => Math.hypot(v[0]!, v[1]!, v[2]!);
-  const triple = a[0]! * (b[1]! * c[2]! - b[2]! * c[1]!) - a[1]! * (b[0]! * c[2]! - b[2]! * c[0]!) + a[2]! * (b[0]! * c[1]! - b[1]! * c[0]!);
-  const scale = length(a) * length(b) * length(c);
-  return scale > 0 && Number.isFinite(scale) && Math.abs(triple) > 1e-6 * scale;
-};
 
 /** A fetched bank, checked: its frame, a finite place and a positive size for every billboard, and well-formed ellipsoids. */
 export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): PreparedCloudPoints {
@@ -57,7 +48,7 @@ export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): Prepar
   if (positions.some(value => !Number.isFinite(value))) throw new TypeError(`${at}: every billboard has a finite place.`);
   if (diameters.some(value => !(value > 0) || !Number.isFinite(value))) throw new TypeError(`${at}: every billboard has a positive width.`);
   if (!Array.isArray(occluder) || !occluder.every(e => e && typeof e === 'object' && vector((e as CloudPointEllipsoid).centreUnits) &&
-    Array.isArray((e as CloudPointEllipsoid).axesUnits) && (e as CloudPointEllipsoid).axesUnits.length === 3 && (e as CloudPointEllipsoid).axesUnits.every(vector) && occluderAxesSpanSpace((e as CloudPointEllipsoid).axesUnits)))
-    throw new TypeError(`${at}: occluder is a list of ellipsoids, each a centre and three axes that span space.`);
+    Array.isArray((e as CloudPointEllipsoid).axesUnits) && (e as CloudPointEllipsoid).axesUnits.length === 3 && (e as CloudPointEllipsoid).axesUnits.every(vector)))
+    throw new TypeError(`${at}: occluder is a list of ellipsoids, each a centre and three axes.`);
   return { id, frame: parseDensityVolumeFrame(frame), count: n, positions, diameters, cells, atlas, cellTexels: cellTexels as number, occluder: occluder as CloudPointEllipsoid[] };
 }

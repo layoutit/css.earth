@@ -5,25 +5,13 @@ import { readPrepared } from '../prepared-data-worker-client.js';
 import { readPreparedHere } from '../prepared-data/readers.js';
 import { cloudOverlayReader, type CloudOverlayData } from './cloud-overlay-reader.js';
 import { createCloudSegments } from './cloud-segments.js';
+import { retainedStyle, type CloudOverlayLayer } from './cloud-overlay-layer.js';
 import { OCCLUDED_FLOOR, occluderDepth } from './cloud-occluder.js';
 
 /** The camera has rested this long (ms) when billboards are put in order, far to near. */
 const REST_MS = 350;
 /** A failed overlay read is tried again on a later publication, waiting RETRY_MS, then twice as long, up to RETRIES times. */
 const RETRY_MS = 2000, RETRIES = 4;
-
-/** What an overlay's builder hands its owner: its root, built off the page, how to place it for a publication, and what
- * it does once the camera rests. */
-export interface CloudOverlayLayer { readonly root: HTMLElement; place(publication: VolumeCameraPublication): void; atRest?(): void }
-
-/** A style written only when its value changes: a still camera publishes the same values every frame. */
-export function retainedStyle(element: HTMLElement) {
-  let transform = '', opacity = '';
-  return {
-    transform(value: string) { if (value !== transform) { transform = value; element.style.transform = value; } },
-    opacity(value: string) { if (value !== opacity) { opacity = value; element.style.opacity = value; } },
-  };
-}
 
 /**
  * A dataset's overlay bank (`prepared/<id>.bin`, read by the data worker: cloud-overlay-reader.ts), drawn over its image
