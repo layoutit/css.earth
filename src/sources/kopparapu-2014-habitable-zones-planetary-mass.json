@@ -1,0 +1,49 @@
+{
+  "id": "kopparapu-2014-habitable-zones-planetary-mass",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Habitable Zones around Main-sequence Stars: Dependence on Planetary Mass",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/2041-8205/787/2/L29"
+    },
+    {
+      "type": "ads",
+      "value": "2014ApJ...787L..29K"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/787/2/L29",
+      "label": "10.1088/2041-8205/787/2/L29"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://hzgallery.org/about.html",
+      "checkedOn": "2026-10-10",
+      "locator": "The Habitable Zone Gallery names this paper as the method of its boundaries, with Kopparapu et al. (2013)."
+    }
+  ],
+  "creators": [
+    "R. K. Kopparapu",
+    "R. M. Ramirez",
+    "J. SchottelKotte",
+    "J. F. Kasting",
+    "S. Domagal-Goldman",
+    "V. Eymet"
+  ],
+  "publisher": "ApJ 787, L29",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kopparapu et al. (2014), ApJ 787, L29.",
+      "scope": "The limits of TRAPPIST-1's habitable zone",
+      "evidence": "https://hzgallery.org/about.html"
+    }
+  ]
+}

@@ -46,6 +46,11 @@ the shallow eclipse of b and c together, the star's own flares, and the detector
 the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](../trappist-1b/README.md)'s temperature map and
 [TRAPPIST-1c](../trappist-1c/README.md)'s measured dayside come from the same data.
 
+**Habitable zone dataset.** A dataset of the whole system: the star in its color, with its habitable zone as a green
+band in the plane of the planets' orbits. The band is its own package, a drawing of four distances the Habitable Zone
+Gallery calculates by Kopparapu et al. (2013, 2014); its sources, processing and limits are in
+[its README](../trappist-1-habitable-zone/README.md). It is a calculation, not an observation.
+
 **Catalogue color.** the swatch that search, the catalogue and the minimap show is this dataset's prepared color, #ffcd6a.
 
 ## Evidence

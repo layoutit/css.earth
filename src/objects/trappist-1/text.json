@@ -49,6 +49,20 @@
           "quote": "I+z (TRAPPIST): u1 0.65±0.10, u2 0.28±0.12"
         }
       ]
+    },
+    "habitable-zone": {
+      "title": "Conservative and optimistic zones",
+      "detail": "Calculated, not observed",
+      "summary": "Where a planet with enough air could keep liquid water, as calculated. Darker: conservative limits; lighter: optimistic.",
+      "sources": [
+        {
+          "catalogueId": "kane-2012-habitable-zone-gallery",
+          "url": "https://hzgallery.org/table.html",
+          "label": "Habitable Zone Gallery",
+          "checked": "2026-10-10",
+          "locator": "Rows of TRAPPIST-1: its star's four habitable zone distances in au"
+        }
+      ]
     }
   }
 }

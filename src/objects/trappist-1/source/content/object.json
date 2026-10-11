@@ -65,6 +65,24 @@
         },
         "falseColor": false,
         "notes": "No image of this photosphere exists: at 12.47 parsecs its disc is about 0.09 milliarcseconds across. The color is its measured spectrum through the CIE 1931 observer; below about 450 nm the star is too faint for Gaia to measure and those samples are read as no emission. Its I+z (about 750 to 1100 nm) limb plate uses Gillon et al. (2016) u1 = 0.65 and u2 = 0.28, inferred from atmosphere tables and used as transit priors; it is a model, not a resolved measurement."
+      },
+      {
+        "id": "habitable-zone",
+        "label": "Habitable zone",
+        "scope": "system",
+        "thumbnail": "trappist-1-dataset-color.webp",
+        "volume": {
+          "objectId": "trappist-1-habitable-zone",
+          "datasetId": "plane",
+          "surface": "color"
+        },
+        "source": {
+          "id": "trappist-1-habitable-zone",
+          "path": "../../trappist-1-habitable-zone/source/manifest.json",
+          "url": "https://hzgallery.org/table.html"
+        },
+        "falseColor": false,
+        "notes": "The star in the color of its spectrum, with its habitable zone drawn as a green band in the plane of its planets' orbits. The band is a calculation, not an observation: the distances at which a planet of Earth's mass with a carbon dioxide, water and nitrogen atmosphere could keep liquid water on its surface, by the model of Kopparapu et al. (2013, 2014), as the Habitable Zone Gallery (Kane & Gelino 2012) calculates them from the star's temperature and luminosity. The darker band is the conservative zone, 0.0246 to 0.0499 au, between the runaway greenhouse and maximum greenhouse limits; the lighter strips extend it to the optimistic zone, 0.0194 to 0.0527 au, between the recent Venus and early Mars limits. Planets e, f and g orbit in the conservative zone and d in the optimistic strip inside it. A planet in the zone is not known to be habitable, and the star is 34 K cooler than the coolest star the model was fitted to."
       }
     ]
   },
