@@ -38,7 +38,9 @@ hidden until the next drag, which then mounted its 458 nodes in a frame of 620 t
 Annotations (markers, names, orbits, the footer) and content (sky faces, a nebula's slice stack changing axis) are
 held differently while coasting:
 
-- **Annotations** wait for the coast to stop.
+- **Annotations** wait for the coast to stop. The names and rings that then appear, go or change side fade over 200 ms
+  (`LANDING_FADE_MILLISECONDS` in `world-context-marker-paint.ts`) instead of changing in one frame: on the Solar System
+  page 26 to 36 of about 120 labels changed in the frame after a 6.8 s coast (v0.7570, 2026-10-10).
 - **Content** has to appear as it turns into view, or the scene would show holes. It is staged ahead instead: made
   resident a margin before it enters the view (image loaded, `display` on, opacity 0), then faded in. During a coast
   content is only added, never retired; retirement waits for the coast to stop.

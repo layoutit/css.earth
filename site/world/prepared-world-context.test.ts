@@ -52,6 +52,8 @@ function mountTestContext({ annotationPriorities, annotationLandmarks, ...option
 
 /** Every style, data-attribute and attribute write that changes a value, while a test records: the browser fast-path check. */
 let writeLog: string[] | null = null;
+/** The fades a test's elements were asked for (Element.animate), as `tag pseudo-element`. */
+let fadeLog: string[] | null = null;
 const logWrite = (element: FakeElement, what: string, before: unknown, after: unknown) => {
   if (writeLog && String(before ?? '') !== String(after ?? '')) writeLog.push(`${element.tagName} ${what}`);
 };
@@ -91,6 +93,7 @@ class FakeElement extends EventTarget {
   readonly attributes = new Map<string, string>();
   setAttribute(name: string, value: string): void { logWrite(this, `@${name}`, this.attributes.get(name), value); this.attributes.set(name, value); }
   getAttribute(name: string): string | null { return this.attributes.get(name) ?? null; }
+  animate(_keyframes: unknown, options: { pseudoElement?: string }): void { fadeLog?.push(`${this.tagName} ${options.pseudoElement}`); }
   removeAttribute(name: string): void { this.attributes.delete(name); }
   append(...entries: FakeElement[]): void { for (const entry of entries) this.insertBefore(entry, null); }
   appendChild(entry: FakeElement): FakeElement { this.append(entry); return entry; }
@@ -2986,16 +2989,29 @@ const tally = (writes: readonly string[]) => Object.entries(writes.reduce<Record
   .sort((a, b) => b[1] - a[1]).map(([write, count]) => `${count}x ${write}`);
 
 test('a coast around Earth writes only transform and opacity, and the orbit strokes', async () => {
-  const { layer, writes, publish } = await orbitEarth({ coast: true });
+  const { layer, writes, publish, document } = await orbitEarth({ coast: true });
   const offPath = writes.filter(write => !/ style\.(transform|opacity|strokeOpacity)$| @points$/u.test(write));
   assert.deepEqual(tally(offPath), [], `${writes.length} writes over a 90-frame coast; off the fast path`);
   // The coast stops: the membership it held lands.
-  writeLog = [];
+  writeLog = []; fadeLog = [];
   layer.setCoasting(false);
   layer.setRotationActive(false);
   publish(Math.PI / 2);
-  const settled = writeLog; writeLog = null;
+  const settled = writeLog, faded = fadeLog; writeLog = null;
   assert.equal(settled.some(write => / style\.visibility$| data-contextLabelVisible$| data-contextIndicatorVisible$/u.test(write)), true, tally(settled).slice(0, 8).join(', '));
+  // The names and rings that appeared or went with it on shown markers fade instead of changing in that one frame.
+  const count = (list: readonly string[], pattern: RegExp) => list.filter(entry => pattern.test(entry)).length;
+  const names = count(faded, /^u ::after$/u), rings = count(faded, /^s ::before$/u);
+  assert.equal(names > 0 && names + rings === faded.length, true, tally(faded).join(', '));
+  assert.equal(rings > 0 && rings <= count(settled, / data-contextIndicatorVisible$/u), true, `${tally(faded).join(', ')}; ${tally(settled).slice(0, 8).join(', ')}`);
+  // Only then: half a second on, a drag changes names at once again.
+  document.defaultView.advance(500);
+  fadeLog = []; writeLog = [];
+  layer.setRotationActive(true);
+  publish(Math.PI);
+  assert.equal(count(writeLog, / data-contextLabelVisible$/u) > 0, true);
+  assert.deepEqual(fadeLog, []);
+  writeLog = fadeLog = null;
   layer.destroy();
 });
 

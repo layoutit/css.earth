@@ -4,7 +4,7 @@ import { isExtendedClassification, type PreparedWorldContext, type PreparedConte
 import { createContextLocator } from './context-locator.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
-import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
+import { LANDING_FADE_MILLISECONDS, createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createCaptionMeasurer } from './world-context/world-context-caption-measure.js';
 import type { PlannedWorldContext } from './world-context/world-context-planner.js';
@@ -293,6 +293,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, shown bodies only move and
   // fade; nothing is revealed, retired, restyled, restacked or re-announced until the coast stops.
   let coasting = false;
+  // What a coast held back lands faded (world-context-marker-paint.ts) instead of all changing in one frame: the plan
+  // that lands it and the plans its caption measurements ask for, until this time or the next press or wheel.
+  let landingUntil = 0;
   let plainPlaces: readonly (readonly number[])[] = [], plainPlacesFor = -1;
   // Systems that arrived while the camera coasted, in order, each joined once the coast has stopped (addBodies).
   const heldAdditions: { next: PreparedWorldContext; nextSprites: Readonly<Record<string, SpriteWithUrl>>; annotations: WorldBodyAnnotations }[] = [];
@@ -341,7 +344,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     }
     animatedAnnotations.clear();
   };
-  const beginCameraInput = () => { hoverIntent = false; settleHover(); };
+  const beginCameraInput = () => { hoverIntent = false; landingUntil = 0; settleHover(); };
   // The shared input surface is a sibling of the paint host. Match the
   // picking owner's capture boundary so cancellation precedes its hover clear.
   windowTarget.addEventListener('pointerdown', beginCameraInput, { capture: true });
@@ -497,6 +500,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (destroyed || active === coasting) return;
       coasting = active;
       if (active) { hoverIntent = false; settleHover(); return; }
+      landingUntil = windowTarget.performance.now() + 2 * LANDING_FADE_MILLISECONDS;
       publishOutsideGalaxy();
       joinHeldSystems();
       invalidatePolicy();
@@ -601,6 +605,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       fader.batch(() => {
       const cameraChanged = !sameCamera(world, viewport);
       const rotating = rotationPhase === 'dragging', coast = coasting;
+      const landing = landingUntil !== 0 && windowTarget.performance.now() < landingUntil;
+      if (!landing) landingUntil = 0;
       const interactiveHover = hoverIntent && !cameraChanged && !rotating && !navigationInFlight && !coast;
       if (cameraChanged || rotating || navigationInFlight) settleHover();
       hoverIntent = false;
@@ -710,7 +716,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           policyChanged }, fader);
         entry.interaction.updateMarker(projected, rank, entry, navigationSuppressed);
         const indicatorVisible = entry.indicatorShown;
-        entry.paint.publishIndicator(indicatorVisible, navigationInFlight && body.id === emphasizedId, coast);
+        entry.paint.publishIndicator(indicatorVisible, navigationInFlight && body.id === emphasizedId, coast, landing);
         const plannedOrbit = orbitVisibility > 0 && segments.length > 0;
         // Coasting: a drawn orbit stays drawn (fading if the plan drops it), an undrawn one waits for the coast to stop.
         const orbitShown = coast ? entry.previousCount > 0 : plannedOrbit;
@@ -746,7 +752,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         }
         if (!coast && (mask & (ContextChange.label | ContextChange.marker))) {
           const labelVisible = entry.labelShown;
-          entry.paint.publishLabel(projected, labelVisible, navigationInFlight && body.id === emphasizedId);
+          entry.paint.publishLabel(projected, labelVisible, navigationInFlight && body.id === emphasizedId, landing);
           entry.interaction.updateLabel(projected, rank, labelVisible, entry.labelSize, navigationSuppressed);
         }
         // Flights and rotations keep keyboard/accessibility targets; they catch up after.
