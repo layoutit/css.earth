@@ -357,7 +357,16 @@ test('a plane a dataset shows draws on its prepared picture, and gives way as th
   publish(10);
   assert.equal(opacity(), 0, 'hidden once the dataset no longer shows it');
   banks.addPlaneBanks([{ id: 'zone', frame }]);
-  publish(10, 'zone');
+  assert.equal(publish(10, 'zone'), 1, 'a plane that states no orbit opacity leaves the orbit lines theirs');
   assert.equal(root.querySelectorAll('[data-galaxy-backing="zone"]').length, 1, 'a known plane is not declared twice');
+  // A plane that states one dims the orbit lines as far as its own picture shows, once that picture is read.
+  banks.addPlaneBanks([{ id: 'wind', frame, orbitOpacity: .4 }]);
+  assert.equal(publish(10, 'wind'), 1, 'not before its picture is read');
+  await waitFor(() => assert.deepEqual(loads, ['zone', 'wind']));
+  assert.ok(Math.abs(publish(10, 'wind') - .4) < 1e-12, 'whole, the orbit lines take its opacity');
+  const fading = publish(3, 'wind');
+  assert.ok(fading > .4 && fading < 1, `between while the picture fades, got ${fading}`);
+  assert.equal(publish(1.5, 'wind'), 1, 'theirs again once the picture is gone');
+  assert.equal(publish(10, 'zone'), 1, 'and while another plane shows');
   lifetime.destroy();
 });

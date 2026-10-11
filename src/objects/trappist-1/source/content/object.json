@@ -83,6 +83,67 @@
         },
         "falseColor": false,
         "notes": "The star in the color of its spectrum, with its habitable zone drawn as a green band in the plane of its planets' orbits. The band is a calculation, not an observation: the distances at which a planet of Earth's mass with a carbon dioxide, water and nitrogen atmosphere could keep liquid water on its surface, by the model of Kopparapu et al. (2013, 2014), as the Habitable Zone Gallery (Kane & Gelino 2012) calculates them from the star's temperature and luminosity. The darker band is the conservative zone, 0.0246 to 0.0499 au, between the runaway greenhouse and maximum greenhouse limits; the lighter strips extend it to the optimistic zone, 0.0194 to 0.0527 au, between the recent Venus and early Mars limits. Planets e, f and g orbit in the conservative zone and d in the optimistic strip inside it. A planet in the zone is not known to be habitable, and the star is 34 K cooler than the coolest star the model was fitted to."
+      },
+      {
+        "id": "stellar-wind",
+        "label": "Stellar wind",
+        "scope": "system",
+        "thumbnail": "trappist-1-dataset-color.webp",
+        "volume": {
+          "objectId": "trappist-1-stellar-wind",
+          "datasetId": "plane",
+          "surface": "color"
+        },
+        "source": {
+          "id": "trappist-1-stellar-wind",
+          "path": "../../trappist-1-stellar-wind/source/manifest.json",
+          "url": "https://doi.org/10.3847/2041-8213/aa79ed"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Total pressure of the wind",
+          "labels": [
+            "Low",
+            "High"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "Low",
+              "High"
+            ]
+          },
+          "meta": "relative",
+          "sourceUrl": "https://doi.org/10.3847/2041-8213/aa79ed"
+        },
+        "notes": "The star in the color of its spectrum, with a model of its wind drawn in the plane of its planets' orbits. The wind is the gas the star blows off; no telescope has seen TRAPPIST-1's. This is the simulation of Garraffo et al. (2017), read from the paper's Figure 3. The colors are the wind's total pressure, magnetic plus dynamic: yellow where it is highest, near the star, through orange and purple to dark blue where it is lowest. The dashed white line is the Alfvén surface: inside it the star's magnetic field still holds the wind, and outside it the wind has broken free. On the figure, planets c to g cross the line four times each orbit, b touches it twice and h stays outside. The model gives wind speeds up to about 1,400 km/s and pressures at the orbits a thousand to a million times the solar wind's at Earth. It uses the magnetic map of another star, GJ 3622, scaled to TRAPPIST-1's measured mean field of 600 G. The pattern turns with the star every 3.3 days, so the picture holds one moment; the figure prints no scale, so the colors show where the pressure is higher, not by how much."
       }
     ]
   },

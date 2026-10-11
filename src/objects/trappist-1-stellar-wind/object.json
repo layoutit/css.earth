@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "trappist-1-stellar-wind",
+  "type": "plane-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/wind.json"
+    },
+    "host": "trappist-1",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        372794614150033150,
+        -88610827847518910,
+        -33826922007004276
+      ],
+      "localToReferenceXyzw": [
+        -0.5863459605657784,
+        0.39500891901664653,
+        0.25125405714440424,
+        0.6610883202673992
+      ],
+      "metersPerUnit": 899708283.7259061,
+      "boundsUnits": {
+        "min": [
+          -10.24,
+          -10.24,
+          -0.1024
+        ],
+        "max": [
+          10.24,
+          10.24,
+          0.1024
+        ]
+      }
+    },
+    "orbitOpacity": 0.4
+  },
+  "prepared": {
+    "format": "cssearth-galaxy-backing@1",
+    "url": "prepared/plane.json"
+  }
+}

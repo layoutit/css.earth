@@ -1,0 +1,64 @@
+{
+  "id": "garraffo-2017-trappist-1-wind",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Threatening Magnetic and Plasma Environment of the TRAPPIST-1 Planets",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/2041-8213/aa79ed"
+    },
+    {
+      "type": "arxiv",
+      "value": "1706.04617"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/aa79ed",
+      "label": "10.3847/2041-8213/aa79ed"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1706.04617v1",
+      "label": "arXiv:1706.04617"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1706.04617v1",
+      "checkedOn": "2026-10-11",
+      "locator": "Section 2: the wind is modeled with the BATS-R-US code's Alfvén Wave Solar Model, driven by the magnetic map of the proxy star GJ 3622 scaled to mean surface fields of about 600 G and 300 G. Section 3: wind speeds reach close to 1,400 km/s; plasma densities at the planets are 10^4 to 10^5 times the solar wind's at 1 au; all but the outermost planet spend a large fraction of their orbits inside the Alfvén surface, crossing it four times an orbit; the total pressure at the orbits is 3 to 6 orders of magnitude above the solar wind's at 1 au; the mass loss is about 3e-14 solar masses a year."
+    },
+    {
+      "url": "https://arxiv.org/e-print/1706.04617v1",
+      "checkedOn": "2026-10-11",
+      "locator": "Source bundle, 7,485,505 bytes; member TrB2_2D_0deg_tot.png (131,566 bytes, 2,000 by 1,778 pixels) is Figure 3, left: the total pressure in the plane of the orbits for the 600 G field, the seven orbits as colored circles and the Alfvén surface as a white line. The figure prints no color bar."
+    }
+  ],
+  "creators": [
+    "C. Garraffo",
+    "J. J. Drake",
+    "O. Cohen",
+    "J. D. Alvarado-Gómez",
+    "S. P. Moschou"
+  ],
+  "publisher": "ApJL 843, L33",
+  "publicationDate": "2017",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Garraffo et al. (2017), ApJL 843, L33.",
+      "scope": "TRAPPIST-1's stellar wind",
+      "evidence": "https://doi.org/10.3847/2041-8213/aa79ed"
+    },
+    {
+      "kind": "rights",
+      "text": "The preprint is under arXiv's non-exclusive license to distribute (https://arxiv.org/licenses/nonexclusive-distrib/1.0/), which grants no reuse of its figures. The figure is not redistributed; the prepared picture is this project's drawing of values read from it.",
+      "scope": "TRAPPIST-1's stellar wind",
+      "evidence": "https://arxiv.org/abs/1706.04617v1"
+    }
+  ]
+}

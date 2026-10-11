@@ -11,20 +11,16 @@
  * the kept rows are read. The plane is the mean of the planets' orbit planes as the world draws them, through the star's
  * world position, so the world step runs first. Writes the descriptor, the prepared plane and picture, and the inventory.
  */
-import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
-import { hostedPlanetStateRelativeKm, type HostedPlanetId } from '@cssearth/astronomy';
-import { GALAXY_BACKING_SCHEMA, OBJECT_SCHEMA, parseDensityVolumeFrame, parseGalaxyBacking, type VolumeSliceQuad } from '@cssearth/objects';
-import { inventoryPreparedAssets } from '@cssearth/objects/node';
-import { compilePlaneLeaf } from '@cssearth/bake/volume-leaves';
+import { AU_M, systemOrbitPlane, writePlaneBank } from './system-plane.mts';
 
-type Vector3 = [number, number, number];
-const AU_M = 149597870700, GALLERY = 'https://hzgallery.org/data/hzgallery.json';
+const GALLERY = 'https://hzgallery.org/data/hzgallery.json';
 const root = findProjectRoot(import.meta.url), id = 'trappist-1-habitable-zone';
-const objectDirectory = resolve(root, 'src/objects', id), prepared = resolve(objectDirectory, 'prepared');
+const objectDirectory = resolve(root, 'src/objects', id);
 const recipe = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'source/zone.json'), 'utf8')));
 if (recipe.schema !== 'cssearth-habitable-zone-source@1' || recipe.id !== id) throw new TypeError(`source/zone.json: expected a cssearth-habitable-zone-source@1 record of ${id}.`);
 const host = requireString(recipe.host), edges = requireRecord(recipe.edges), system = requireString(edges.system);
@@ -52,44 +48,8 @@ const edge = (name: string) => {
 const au = [edge('optimisticInnerAu'), edge('conservativeInnerAu'), edge('conservativeOuterAu'), edge('optimisticOuterAu')] as const;
 if (!(au[0] > 0 && au[0] < au[1] && au[1] < au[2] && au[2] < au[3])) throw new TypeError(`The zone's distances must rise from the inside out, not ${au.join(', ')} au.`);
 
-// The world's frame and the star's place in it, as the world step prepared them.
-const world = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects/observable-universe/prepared/world-context.json'), 'utf8')));
-const worldFrame = requireRecord(world.frame), bodies = [requireRecord(world.focus), ...requireArray(world.bodies).map(body => requireRecord(body))];
-const placeOf = (body: string) => {
-  const found = bodies.find(candidate => candidate.id === body);
-  if (!found) throw new TypeError(`The prepared world holds no ${body}; run the world step first.`);
-  return requireArray(found.positionM).map(value => requireFiniteNumber(value)) as Vector3;
-};
-const originM = placeOf(host), epochJdTt = requireFiniteNumber(worldFrame.epochJdTt);
-
-// The plane: the mean of the planets' orbit normals, each the cross product of its position and velocity about the star.
-const cross = (a: Vector3, b: Vector3): Vector3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-const unit = (v: Vector3): Vector3 => { const length = Math.hypot(...v); return [v[0] / length, v[1] / length, v[2] / length]; };
-const dot = (a: Vector3, b: Vector3) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const planets = requireArray(requireRecord(recipe.plane).orbits).map(value => requireString(value));
-const normals = planets.map(planet => {
-  const state = hostedPlanetStateRelativeKm(planet as HostedPlanetId, epochJdTt);
-  if (state.hostId !== host) throw new TypeError(`${planet} orbits ${state.hostId}, not ${host}.`);
-  return unit(cross([...state.positionKm] as Vector3, [...state.velocityKmPerDay] as Vector3));
-});
-const z = unit([0, 1, 2].map(axis => normals.reduce((sum, normal) => sum + normal[axis]!, 0)) as Vector3);
-const spreadDegrees = Math.max(...normals.map(normal => Math.acos(Math.min(1, dot(normal, z))) * 180 / Math.PI));
-// Any direction in the plane serves a picture that is the same all the way round: the first planet's, taken into the plane.
-const toward = placeOf(planets[0]!).map((value, axis) => value - originM[axis]!) as Vector3, along = dot(toward, z);
-const x = unit(toward.map((value, axis) => value - along * z[axis]!) as Vector3), y = cross(z, x);
-const offPlaneDegrees = Math.max(...planets.map(planet => {
-  const from = placeOf(planet).map((value, axis) => value - originM[axis]!) as Vector3;
-  return Math.abs(Math.asin(dot(from, z) / Math.hypot(...from))) * 180 / Math.PI;
-}));
-if (!(offPlaneDegrees < 1)) throw new TypeError(`A planet stands ${offPlaneDegrees.toFixed(2)} degrees off the zone's plane; the plane is not the planets'.`);
-// The rotation with columns x, y, z as a unit quaternion (local to reference).
-const trace = x[0] + y[1] + z[2];
-const quaternion = ((): [number, number, number, number] => {
-  if (trace > 0) { const s = 2 * Math.sqrt(trace + 1); return [(y[2] - z[1]) / s, (z[0] - x[2]) / s, (x[1] - y[0]) / s, s / 4]; }
-  if (x[0] > y[1] && x[0] > z[2]) { const s = 2 * Math.sqrt(1 + x[0] - y[1] - z[2]); return [s / 4, (y[0] + x[1]) / s, (z[0] + x[2]) / s, (y[2] - z[1]) / s]; }
-  if (y[1] > z[2]) { const s = 2 * Math.sqrt(1 + y[1] - x[0] - z[2]); return [(y[0] + x[1]) / s, s / 4, (z[1] + y[2]) / s, (z[0] - x[2]) / s]; }
-  const s = 2 * Math.sqrt(1 + z[2] - x[0] - y[1]); return [(z[0] + x[2]) / s, (z[1] + y[2]) / s, s / 4, (x[1] - y[0]) / s];
-})();
+const plane = await systemOrbitPlane(root, host, planets);
 
 // The picture: three flat rings of one color, the conservative zone and the optimistic zone's two extensions of it.
 const picture = requireRecord(recipe.picture), size = requireFiniteNumber(picture.sizePx), outerPx = requireFiniteNumber(picture.outerRadiusPx);
@@ -102,26 +62,9 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${s
 // Two flat values and their edges: kept lossless.
 const webp = await sharp(Buffer.from(svg)).webp({ lossless: true, effort: 6 }).toBuffer();
 
-// One frame unit is a tenth of the outer distance; the picture's half side reaches a little past it, as its margin does.
-const metersPerUnit = au[3] * AU_M / 10, half = 10 * centre / outerPx;
-const frame = parseDensityVolumeFrame({ referenceFrame: requireString(worldFrame.referenceFrame), epochJdTt, originM, localToReferenceXyzw: quaternion, metersPerUnit,
-  boundsUnits: { min: [-half, -half, -half / 100], max: [half, half, half / 100] } });
-const texturePath = 'zone/zone.webp';
-const quad: VolumeSliceQuad = { id, axis: 'z', sliceIndex: 0, texturePath, widthPx: size, heightPx: size,
-  vertices: [[-half, half, 0], [half, half, 0], [half, -half, 0], [-half, -half, 0]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0], normal: [0, 0, 1],
-  bytes: webp.length, alphaCoverage: Math.PI * (px[3]! ** 2 - px[0]! ** 2) / size ** 2 };
-const leaf = compilePlaneLeaf(id, frame, quad);
-const fade = requireArray(recipe.centreFadeOuterRadii).map(value => requireFiniteNumber(value) * au[3] * AU_M);
-const plane = { schema: GALAXY_BACKING_SCHEMA, id, source: `Habitable Zone Gallery (${GALLERY}), rows of ${system}`, meaning: requireString(recipe.meaning),
-  frame, leaf: { texturePath: leaf.texturePath, style: leaf.style }, centreFadeM: fade };
-parseGalaxyBacking(plane, `${id}/prepared/plane.json`);
-
-await rm(prepared, { recursive: true, force: true });
-await mkdir(resolve(prepared, 'zone'), { recursive: true });
-await writeFile(resolve(prepared, texturePath), webp);
-await writeFile(resolve(prepared, 'plane.json'), `${JSON.stringify(plane)}\n`);
-await writeFile(resolve(objectDirectory, 'object.json'), `${JSON.stringify({ schema: OBJECT_SCHEMA, id, type: 'plane-bank',
-  properties: { preparation: { source: 'source/zone.json' }, host, frame }, prepared: { format: GALAXY_BACKING_SCHEMA, url: 'prepared/plane.json' } }, null, 2)}\n`);
-await inventoryPreparedAssets({ objectId: id, objectDirectory });
+await writePlaneBank({ id, objectDirectory, host, recipe: 'source/zone.json', plane, texturePath: 'zone/zone.webp', webp, sizePx: size,
+  alphaCoverage: Math.PI * (px[3]! ** 2 - px[0]! ** 2) / size ** 2, outerRadiusPx: outerPx, outerRadiusM: au[3] * AU_M,
+  source: `Habitable Zone Gallery (${GALLERY}), rows of ${system}`, meaning: requireString(recipe.meaning),
+  centreFadeM: requireArray(recipe.centreFadeOuterRadii).map(value => requireFiniteNumber(value) * au[3] * AU_M) });
 console.log(`${id}: optimistic ${au[0].toFixed(4)} to ${au[3].toFixed(4)} au, conservative ${au[1].toFixed(4)} to ${au[2].toFixed(4)} au; ` +
-  `the planets' orbit normals lie within ${spreadDegrees.toFixed(3)} degrees of the plane's, and no planet stands more than ${offPlaneDegrees.toFixed(3)} degrees off it; picture ${webp.length} bytes.`);
+  `the planets' orbit normals lie within ${plane.spreadDegrees.toFixed(3)} degrees of the plane's, and no planet stands more than ${plane.offPlaneDegrees.toFixed(3)} degrees off it; picture ${webp.length} bytes.`);

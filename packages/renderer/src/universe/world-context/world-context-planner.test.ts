@@ -131,6 +131,20 @@ test('overview does not resurrect the selected billboard over a resolved surface
   assert.equal(marker(false).markerOpacity, 0);
 });
 
+test('a picture laid among the orbits dims every orbit line nothing points at', () => {
+  const visibilities = (input: WorldContextView) => createWorldContextPlanner(plan)(input).projectedBodies.map(body => body.orbitVisibility);
+  const whole = visibilities(view()), dimmed = visibilities({ ...view(), orbitsOpacity: .5 });
+  assert.ok(whole.some(value => value > 0), 'the fixture draws orbits');
+  // An orbit fading with its size on screen moves in sixty-fourths (orbit-presentation.ts), so half of one lands on a step.
+  assert.ok(dimmed.every((value, at) => Math.abs(value - whole[at]! * .5) <= 1 / 128), 'each is half what it was');
+  assert.ok(dimmed.filter((value, at) => value === whole[at]! * .5).length > dimmed.length * .99);
+  // A hovered body's orbit keeps its own opacity: the reader asked for it.
+  const index = whole.findIndex(value => value > 0), pointing = { ...view(), orbitsOpacity: .5 };
+  pointing.bodies[index]!.hovered = true;
+  const pointedAt = { ...view() }; pointedAt.bodies[index]!.hovered = true;
+  assert.equal(visibilities(pointing)[index], visibilities(pointedAt)[index]);
+});
+
 test('a departed focus outside the view cannot blank the surrounding orbit field', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.overview = false; input.navigationInFlight = true; input.selectionPreview = 'arrokoth';

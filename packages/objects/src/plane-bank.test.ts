@@ -19,3 +19,9 @@ test('a plane bank without a host, with another prepared format or with an unkno
   const tilted = descriptor(); tilted.properties.frame.localToReferenceXyzw[3] = 2;
   assert.throws(() => parsePlaneBankDescriptor(tilted), /unit quaternion/u);
 });
+test('a plane bank may state the opacity the orbit lines take beside its picture', () => {
+  const stating = (orbitOpacity: unknown) => parsePlaneBankDescriptor({ ...descriptor(), properties: { ...descriptor().properties, orbitOpacity } });
+  assert.equal(parsePlaneBankDescriptor(descriptor()).orbitOpacity, undefined, 'left out, the orbits keep theirs');
+  assert.equal(stating(.4).orbitOpacity, .4);
+  for (const refused of [0, 1, 1.5, '0.4']) assert.throws(() => stating(refused), /properties\.orbitOpacity: expected an opacity between 0 and 1/u, String(refused));
+});
