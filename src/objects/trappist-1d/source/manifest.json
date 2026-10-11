@@ -208,8 +208,6 @@
       "consumers": [
         "ocean-model-simulation",
         "ocean-cloud-model-simulation",
-        "ocean-rain-model-simulation",
-        "ocean-vapor-model-simulation",
         "ocean-wind-model-simulation"
       ],
       "sourceBinding": {

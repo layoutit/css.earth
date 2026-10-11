@@ -39,8 +39,6 @@ This is one scenario. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's t
 |---|---|---|---|---|---|---|
 | Ocean model | `tsurf`, surface air temperature | -3.1 to 45.8 °C | 23.1 | 28.8 | 17.5 | -10 to 50 °C |
 | Ocean model clouds | `pcldt`, cloud cover | 58.7 to 92.4 % | 74.3 | 71.9 | 76.7 | 50 to 100 % |
-| Ocean model rain | `prec`, precipitation | 0.32 to 6.00 mm/day | 2.16 | 1.91 | 2.42 | 0 to 6 mm/day |
-| Ocean model vapor | `qatm`, water vapor column | 17.8 to 270.5 kg/m² | 144.3 | 162.9 | 125.7 | 0 to 300 kg/m² |
 | Ocean model wind | `wsurf`, surface wind speed | 2.55 to 6.91 m/s | 4.41 | 4.75 | 4.07 | 2 to 7 m/s |
 
 The release is one 1.4 GB ZIP archive that stores this 6 MB file compressed, so the bytes of one field cannot be asked for alone: the file is kept whole, outside git, and the source restore takes it out of the archive. The copy read here was fetched from the archive by byte range and matches the checksum (CRC-32) the archive records for it.
@@ -53,6 +51,7 @@ The paper ran 16 cases for this planet. The other 15 are not shown: simulations 
 
 ![The six model datasets of TRAPPIST-1d as their prepared sidebar maps: the steam model's outgoing heat, then the ocean model's air temperature, cloud cover, rain, water vapor and wind speed; longitude 0, the point under the star, is at the left edge, 10 October 2026](evidence/2026-10-10/ocean-model-fields.webp)
 
+- Run of 2026-10-11: Ocean model rain and Ocean model vapor were parked. Eight files left the inventory; no delivered image changed. The picture above still shows them.
 - Run of 2026-10-10: the five ocean-model datasets were added. The picture shows the maps preparation wrote, not the page: the page was not yet driven in a browser for this change. The file read here reproduces the paper's table for simulation 06 (296 K, 270 to 319 K, 74 % cloud, 144 kg/m² of water vapor). The 20 files the package already delivered are byte-identical to main's. [`simulation-dataset.test.mts`](../../../packages/telescope-cli/src/new-object/simulation/simulation-dataset.test.mts) checks that a second dataset of one archived file cites the file's one source record.
 - Run of 2026-10-04: all 3,185 stored cells of the kept range equal an independent range read of the release, and after deleting both kept parts [`restore-source-inputs.mts`](../../../packages/bake/cli/restore-source-inputs.mts) brought them back from Zenodo byte for byte. The page as it opens is shown with [TRAPPIST-1e](../trappist-1e/README.md#evidence). [`netcdf-lonlat-field.test.mts`](../../../packages/bake/src/objects/raster/netcdf/netcdf-lonlat-field.test.mts) checks the repeated meridian and the two-range form.
 - Run of 2026-09-24: [`node packages/bake/src/prepare-object/index.ts`](../../../packages/bake/cli/prepare-object.mts) added the Illustration dataset; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../packages/bake/src/objects/interpretation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the dataset opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
@@ -63,6 +62,17 @@ The paper ran 16 cases for this planet. The other 15 are not shown: simulations 
 - [`object-systems.test.mts`](../../../site/world/systems/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
 - Driven in a real browser: the seven orbits and labels draw around the star in the system view, and this planet's page opens on the
   climate model at the measured radius.
+
+## Parked datasets
+
+Parked on 2026-10-11, after a review of the seven planets' datasets. A parked dataset is no longer prepared or delivered. Both are fields of the ocean model's file, which is still kept, and both repeat the pattern of the Ocean model's temperature map: the area-weighted correlation with it is -0.82 for rain and 0.93 for vapor.
+
+| Dataset | Variable | In the file | Mean | Day half | Night half | Drawn |
+|---|---|---|---|---|---|---|
+| Ocean model rain | `prec`, precipitation | 0.32 to 6.00 mm/day | 2.16 | 1.91 | 2.42 | 0 to 6 mm/day |
+| Ocean model vapor | `qatm`, water vapor column | 17.8 to 270.5 kg/m² | 144.3 | 162.9 | 125.7 | 0 to 300 kg/m² |
+
+To bring one back, restore its entries in `source/preparation/raster.json`, `source/content/object.json`, `source/manifest.json`, `text.json` and `object.json` from the commit before the parking, with the source files it read, and bake.
 
 ## Known problems
 

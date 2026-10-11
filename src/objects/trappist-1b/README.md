@@ -16,12 +16,6 @@ is a neutral gray schematic with a curvature cue, not measured limb darkening or
 - **Thermal data.** The ten MIRI/F1500W visits Gillon, Ducrot et al. (2025) fitted together: the 59-hour phase curve of
   program 3077, five eclipses of b from program 1177 (Greene et al. 2023) and four eclipses of c from program 2304
   (Zieba et al. 2023).
-- **Illustration.** NASA's artist's concept from its [Eyes on Exoplanets](https://eyes.nasa.gov/apps/exo/) app
-  ([`TRAPPIST-1_b.jpg`](https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_b.jpg), 2,048 × 1,024),
-  credited NASA/JPL-Caltech. NASA says each planet in the app shows "an artist's concept of what it might look like"
-  ([tutorial](https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/)). NASA content is generally not subject
-  to copyright in the United States and is credited to NASA
-  ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
 - **Color in the world.** The planet's orbit, marker and caption take the color of [`swatch.json`](swatch.json):
   the light reflected by the airless model with a fresh ultramafic surface (60% olivine, 40% enstatite) that Ducrot et
   al. (2024, [Nature Astronomy 9, 358](https://doi.org/10.1038/s41550-024-02428-z)) find favoured by the eclipse depths
@@ -55,9 +49,6 @@ through the F1500W response and a BT-Settl model of the star (2600 K, log g 5.0)
 harmonics to degree 2) fits the same 6,905 samples no better (BIC 6903 against 6900) and spreads heat onto the night
 side, which the data do not measure.
 
-**Illustration.** The map is resized unchanged onto the sphere with its left edge at 0° longitude
-([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)).
-
 **Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 **World color.** [`swatches.mts`](../../../packages/bake/authoring/trappist-1/swatches.mts) divides the flux leaving
@@ -81,8 +72,19 @@ caption in the world.
   1.039 with the 2015 elements'.
 - The rendered [day side](source/reference/rendered-thermal-day.png),
   [terminator](source/reference/rendered-thermal-terminator.png) and
-  [night side](source/reference/rendered-thermal-night.png) show the sharp edge at the terminator. The Illustration
-  dataset is shown with the other planets in [this capture](../../../docs/images/eyes-on-exoplanets-illustrations.webp).
+  [night side](source/reference/rendered-thermal-night.png) show the sharp edge at the terminator.
+
+## Parked datasets
+
+Parked on 2026-10-11, after a review of the seven planets' datasets. A parked dataset is no longer prepared or delivered.
+
+- **Illustration.** NASA's artist's concept from its [Eyes on Exoplanets](https://eyes.nasa.gov/apps/exo/) app
+  ([`TRAPPIST-1_b.jpg`](https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_b.jpg), credited
+  NASA/JPL-Caltech). It paints a blue-green surface on the planet whose measured map, on the same page, is read as bare
+  rock. It is shown with the other planets in [this capture](../../../docs/images/eyes-on-exoplanets-illustrations.webp).
+
+To bring one back, restore its entries in `source/preparation/raster.json`, `source/content/object.json`,
+`source/manifest.json`, `text.json` and `object.json` from the commit before the parking, with the source files it read, and bake.
 
 ## Known problems
 
@@ -96,7 +98,5 @@ caption in the world.
   The color also tells little: the paper's seven rock types all come out between `#fff0d8` and `#fffcf9` here.
 - **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations
   of -1.2 to +0.1 minutes are not drawn.
-- **The Illustration dataset is art, not data.** Nobody has resolved this planet's disc. Its colors, clouds and terrain
-  are the artist's, its longitudes are arbitrary, and NASA does not say how it was made.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

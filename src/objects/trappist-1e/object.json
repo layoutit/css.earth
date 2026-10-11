@@ -50,47 +50,12 @@
               "material": "lighting"
             },
             {
-              "id": "sea-ice-model",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "vapor-model",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
               "id": "heat-model",
               "source": "content",
               "material": "lighting"
             },
             {
-              "id": "wind-model",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "co2-model",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "co2-ice-model",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "co2-cloud-model",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
               "id": "rocke3d-model",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "rocke3d-ice-model",
               "source": "content",
               "material": "lighting"
             },

@@ -56,50 +56,15 @@
       "detail": "Published simulation",
       "summary": "Cloud cover in a published model, in false color. It shows one scenario, not a measurement."
     },
-    "sea-ice-model": {
-      "title": "ExoCAM simulation",
-      "detail": "Published simulation",
-      "summary": "Sea ice cover in a published model, in false color. It shows one scenario, not a measurement."
-    },
-    "vapor-model": {
-      "title": "ExoCAM simulation",
-      "detail": "Published simulation",
-      "summary": "Water vapor column in a published model, in false color. It shows one scenario, not a measurement."
-    },
     "heat-model": {
       "title": "ExoCAM simulation",
       "detail": "Published simulation",
       "summary": "Outgoing heat in a published model, in false color. It shows one scenario, not a measurement."
     },
-    "wind-model": {
-      "title": "ExoCAM simulation",
-      "detail": "Published simulation",
-      "summary": "Wind speed at 10 m in a published model, in false color. It shows one scenario, not a measurement."
-    },
-    "co2-model": {
-      "title": "ExoCAM simulation",
-      "detail": "Published simulation",
-      "summary": "Surface temperature in a published model, in false color. It shows one scenario, not a measurement."
-    },
-    "co2-ice-model": {
-      "title": "ExoCAM simulation",
-      "detail": "Published simulation",
-      "summary": "Sea ice cover in a published model, in false color. It shows one scenario, not a measurement."
-    },
-    "co2-cloud-model": {
-      "title": "ExoCAM simulation",
-      "detail": "Published simulation",
-      "summary": "Cloud cover in a published model, in false color. It shows one scenario, not a measurement."
-    },
     "rocke3d-model": {
       "title": "ROCKE-3D simulation",
       "detail": "Published simulation",
       "summary": "Surface air temperature in a published model, in false color. It shows one scenario, not a measurement."
-    },
-    "rocke3d-ice-model": {
-      "title": "ROCKE-3D simulation",
-      "detail": "Published simulation",
-      "summary": "Sea ice cover in a published model, in false color. It shows one scenario, not a measurement."
     },
     "rocke3d-cloud-model": {
       "title": "ROCKE-3D simulation",
