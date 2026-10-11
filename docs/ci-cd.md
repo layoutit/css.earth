@@ -88,8 +88,9 @@ How the Worker behaves:
 
 ### Page views and referrers
 
-Cloudflare writes its Web Analytics beacon into every page it serves ("Automatic setup" in the dashboard), so the
-repository holds no analytics code. `pnpm analytics [days]` reads the result through Cloudflare’s GraphQL Analytics API
+Cloudflare writes its Web Analytics beacon into the pages it serves ("Automatic setup" in the dashboard), so the
+repository holds no analytics code. Set to "Enable, excluding visitor data in the EU", that setup leaves out visitors in
+Europe: on 2026-10-11 it had no page views from the EU, the United Kingdom, Switzerland or Norway. `pnpm analytics [days]` reads the result through Cloudflare’s GraphQL Analytics API
 ([the command](../deploy/cloudflare/analytics.mts)): page views and visits for each day, the referrers and the pages, for
 the last 7 days unless told otherwise. The dashboard shows a referrer’s host only; the API also gives its path.
 

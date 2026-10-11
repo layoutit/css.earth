@@ -1,8 +1,8 @@
 // Entry script: node deploy/cloudflare/analytics.mts [days]
 /**
  * Page views, visits and referrers of css.earth, read from Cloudflare Web Analytics through the GraphQL Analytics API.
- * Cloudflare writes the beacon into every page it serves; this repository holds no analytics code. The dashboard shows a
- * referrer's host only; the API also gives its path.
+ * Cloudflare writes the beacon into the pages it serves. The dashboard shows a referrer's host only; the API also gives
+ * its path.
  *
  * A page view is one HTML page load. A visit is a page view whose referrer is another site, or none.
  *
@@ -41,7 +41,7 @@ function groupsOf(answer: unknown): Group[] {
     if (!isRecord(row) || typeof row.count !== 'number' || !isRecord(row.sum) || typeof row.sum.visits !== 'number') return refuse();
     if (!isRecord(row.avg) || typeof row.avg.sampleInterval !== 'number' || !isRecord(row.dimensions)) return refuse();
     const dimensions: Record<string, string> = {};
-    for (const [name, value] of Object.entries(row.dimensions)) dimensions[name] = typeof value === 'string' ? value : refuse();
+    for (const [name, value] of Object.entries(row.dimensions)) dimensions[name] = typeof value === 'string' || typeof value === 'number' ? String(value) : refuse();
     return { count: row.count, visits: row.sum.visits, sampleInterval: row.avg.sampleInterval, dimensions };
   });
 }
@@ -70,15 +70,19 @@ const days = Number(process.argv[2] ?? 7);
 if (!Number.isInteger(days) || days < 1 || days > MAX_DAYS) throw new Error(`days must be a whole number from 1 to ${MAX_DAYS}`);
 const since = { datetime_geq: new Date(Date.now() - days * 86_400_000).toISOString() };
 
-// Cloudflare may hold more than one Web Analytics site for css.earth. Adding them would count a page twice, so the
-// site with the most page views is the one reported.
-const sites = await groups({ ...since, requestHost_in: HOSTS }, ['siteTag'], 'count_DESC', 10);
-const siteTag = sites[0]?.dimensions.siteTag;
-if (siteTag === undefined) throw new Error(`Cloudflare has no page views for ${HOSTS.join(' or ')} in the last ${days} days.`);
-const site = { ...since, siteTag };
+// css.earth has had two Web Analytics sites: Cloudflare's automatic one, which left out visitors in Europe, and a snippet
+// that counted them. Measured on 2026-10-11 they do not overlap, because the snippet does not report where the automatic
+// beacon runs, so the tables add them. Page loads that Cloudflare flags as bots are left out and counted on one line.
+const everyone = { ...since, requestHost_in: HOSTS };
+const people = { ...everyone, bot: 0 };
+const sites = await groups(people, ['siteTag'], 'count_DESC', 10);
+if (sites.length === 0) throw new Error(`Cloudflare has no page views for ${HOSTS.join(' or ')} in the last ${days} days.`);
+const bots = await groups({ ...everyone, bot: 1 }, ['bot'], 'count_DESC', 1);
 
-console.log(table(`Sites, last ${days} days`, sites, row => `site …${(row.dimensions.siteTag ?? '').slice(-4)}`));
-console.log(table('By day', await groups(site, ['date'], 'date_ASC', MAX_DAYS + 1), row => row.dimensions.date ?? ''));
-console.log(table('Referrers', await groups({ ...site, refererHost_notin: ['', ...HOSTS] }, ['refererHost', 'refererPath'], 'sum_visits_DESC', 50),
+console.log(table(`Trackers, last ${days} days`, sites, row => `site …${(row.dimensions.siteTag ?? '').slice(-4)}`));
+console.log(`\nLeft out as bots: ${bots[0]?.count ?? 0} page views`);
+console.log(table('By day', await groups(people, ['date'], 'date_ASC', MAX_DAYS + 1), row => row.dimensions.date ?? ''));
+console.log(table('Countries', await groups(people, ['countryName'], 'count_DESC', 15), row => row.dimensions.countryName ?? ''));
+console.log(table('Referrers', await groups({ ...people, refererHost_notin: ['', ...HOSTS] }, ['refererHost', 'refererPath'], 'sum_visits_DESC', 50),
   row => `${row.dimensions.refererHost ?? ''}${row.dimensions.refererPath ?? ''}`));
-console.log(table('Pages', await groups(site, ['requestPath'], 'count_DESC', 30), row => row.dimensions.requestPath ?? ''));
+console.log(table('Pages', await groups(people, ['requestPath'], 'count_DESC', 30), row => row.dimensions.requestPath ?? ''));
