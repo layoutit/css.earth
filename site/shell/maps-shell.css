@@ -610,8 +610,15 @@
 /* The system's datasets come before its tabs and its body list, as on the card it had. */
 .object-information-panel[data-card-subject="system"] > :is(.object-card-tabs, .object-card-tabpanel)[data-view-part="system"] { order: 1; }
 /* The system's card shows the datasets authored for the whole system (a debris disc) and its gallery, not the star's own. */
-.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] :is([data-dataset-option]:not([data-system-dataset]), [data-dataset-details]:not([data-system-dataset-details]), .object-mobile-information-heading),
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] :is([data-dataset-option]:not([data-system-dataset], [data-system-dataset-off]), [data-dataset-details]:not([data-system-dataset-details], [data-system-off-details]), .object-mobile-information-heading),
 .object-information-panel[data-card-subject="system"] > [data-system-view-datasets] > summary {
+  display: none !important;
+}
+/* The dataset the body opens on is the system's "Off" (DatasetList.astro): the same control and details, with the name
+   and the text they have on the system's card. */
+.object-information-panel:not([data-card-subject="system"]) [data-system-off],
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] [data-system-dataset-off] :is(.object-dataset-label, .object-dataset-detail):not([data-system-off]),
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] [data-system-off-details] > :not([data-system-off]) {
   display: none !important;
 }
 .object-results-scroll .object-empty {
