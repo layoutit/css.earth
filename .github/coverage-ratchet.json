@@ -96,7 +96,6 @@
       "site/shell/view-readout.mts",
       "site/navigation/view-url-runtime.mts",
       "site/content/volume-presentation.mts",
-      "site/startup/web-analytics.mts",
       "site/world/application/world-approach.mts",
       "site/world/world-camera.mts",
       "site/directory/world-context-plan.mts",
@@ -576,11 +575,6 @@
       "functions": 91.6
     },
     "site/content/volume-presentation.mts": {
-      "lines": 100,
-      "branches": 100,
-      "functions": 100
-    },
-    "site/startup/web-analytics.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
