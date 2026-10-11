@@ -3,7 +3,19 @@
   "assets": [
     {
       "location": "public",
+      "filename": "datasets/motions.webp",
+      "bytes": 9448,
+      "sha256": "4af8d340a1b299644edc2956af92edc24ac8e2cddae1bd60410c65ad66487d22"
+    },
+    {
+      "location": "public",
       "filename": "datasets/optical.webp",
+      "bytes": 9448,
+      "sha256": "4af8d340a1b299644edc2956af92edc24ac8e2cddae1bd60410c65ad66487d22"
+    },
+    {
+      "location": "public",
+      "filename": "datasets/outer-shell.webp",
       "bytes": 9448,
       "sha256": "4af8d340a1b299644edc2956af92edc24ac8e2cddae1bd60410c65ad66487d22"
     },
@@ -21,15 +33,51 @@
     },
     {
       "location": "prepared",
+      "filename": "cloud-atlas.webp",
+      "bytes": 370872,
+      "sha256": "15b7f1b5c3932eca990e384a564fe82cef66c6083016f3e8a6c3839f60b5f4a2"
+    },
+    {
+      "location": "prepared",
+      "filename": "cloud.bin",
+      "bytes": 8908,
+      "sha256": "79e3023da883b81819c878f6644e3bcc600cf790455263ce561bbaa2de9abd50"
+    },
+    {
+      "location": "prepared",
       "filename": "image-layers.json",
-      "bytes": 2107958,
-      "sha256": "758069e9949e7b057743076c1b0612214d027668b97077a0a5b8ea88462d8d5d"
+      "bytes": 2348115,
+      "sha256": "b75368489240af4196e9d156b90a6b2955449285060126ab9a5adaef92f9e57f"
     },
     {
       "location": "prepared",
       "filename": "layers/shape-0.webp",
-      "bytes": 459380,
-      "sha256": "e6631b6bec33d6e51bf98a1c6bb446717230bae73e86b5702b3b8d60299b7e38"
+      "bytes": 1224318,
+      "sha256": "adac4864a7517cbdb2268fae76a3c6e0ef72580297a9d70da54a69e486c63282"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-1.webp",
+      "bytes": 2908,
+      "sha256": "26681bb78a11c8821b171e3371cfafa4b9ff84ee3cfdfb0f99802ba839133460"
+    },
+    {
+      "location": "prepared",
+      "filename": "motions.bin",
+      "bytes": 33107,
+      "sha256": "a9089ce18fd4be52d776262af6a715b9ce91c32eeadd64fd6ba7f81f1663a3fa"
+    },
+    {
+      "location": "prepared",
+      "filename": "outer-shell.bin",
+      "bytes": 18389,
+      "sha256": "5d1a75b515edb6f8e587f823213d9caec24c65bb61980ed503021fe8386e7590"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 3783,
+      "sha256": "032d5e97d63a016b62ef5e3c1026cdc37d91d1883e41af385d49378b54a47202"
     }
   ]
 }

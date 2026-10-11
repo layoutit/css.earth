@@ -37,31 +37,152 @@
       "id": "unseen-sides",
       "subject": "The sides the picture does not show",
       "status": "included",
-      "finding": "One picture shows the side of each lobe that faces the Sun. The far sides, and the part of the north-west lobe behind the south-east one, have not been photographed. Each repeats the picture along its own sight line, so the lobes are closed and lit from every side: a presentation choice, not what those sides look like.",
+      "finding": "One picture shows the side of each lobe that faces the Sun. The far sides, and the part of the north-west lobe behind the south-east one, have not been photographed. Each lobe is unwrapped on a Mercator chart about the sight line and its unseen cells filled block by block from the seen ones of both lobes (image quilting, Efros and Freeman 2001), the seams relaxed by Poisson blending: a presentation choice, not what those sides look like.",
       "evidence": [
         "https://esahubble.org/images/potw1208a/"
       ]
     },
     {
       "id": "skirt",
-      "subject": "The equatorial skirt and the outer ejecta",
-      "status": "deferred",
-      "finding": "Steffen et al. (2014) and Smith (2006) find no H2 from the thin equatorial skirt, so the model has no surface for it. They call it a thin equatorial disc: the skirt, and the faint ejecta around the lobes with it, lie on the plane through the star across the pole. The outer ejecta are not in that plane; no surface is published for them.",
+      "subject": "The equatorial skirt",
+      "status": "included",
+      "finding": "Steffen et al. (2014) and Smith (2006) find no H2 from the thin equatorial skirt, so the model has no surface for it. Smith (2009) and Davidson et al. (2001) find it thin and planar. Its two fans are regions drawn by hand on the picture (source/regions.json) and laid on five sheets fanning 6 degrees either side of the plane through the star across the pole: a thickness the papers do not measure, so modeled.",
       "evidence": [
         "https://arxiv.org/abs/1407.4096",
         "https://arxiv.org/abs/astro-ph/0602464"
-      ],
-      "revisitWhen": "A published shape for the skirt, or for the outer ejecta, exists as data."
+      ]
     },
     {
       "id": "heic1912a",
       "subject": "Hubble's 2019 ultraviolet picture",
-      "status": "deferred",
-      "finding": "ESA/Hubble heic1912a (WFC3, Mg II 280 nm, 336 nm and [N II] 658 nm; 1779 × 1805 px over 40 arcsec) shows the lobes about 800 px long inside the glowing outer ejecta. The nebula is larger in it than in the 2012 picture: it expands. The ejecta have no published surface and would lie flat.",
+      "status": "included",
+      "finding": "ESA/Hubble heic1912a (WFC3, Mg II 280 nm, 336 nm and [N II] 658 nm; 1779 x 1805 px, released 1 July 2019) is not drawn as a picture: the nebula has expanded since the 2012 picture the lobes carry. Its red channel lights the gas cloud's dots in the optical dataset. Its scale, 0.02294 arcsec a pixel, and the star's pixel are fitted against the 2014 Hubble F658N image (correlation 0.68; packages/bake/authoring/homunculus-nebula/outer-ejecta/heic-registration.mts).",
       "evidence": [
-        "https://esahubble.org/images/heic1912a/"
+        "https://esahubble.org/images/heic1912a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "dataset-optical",
+      "subject": "Hubble · optical: the picture on the lobes, and the gas cloud around them",
+      "status": "included",
+      "finding": "The default dataset. The lobes: ESA/Hubble potw1208a on Steffen et al. (2014)'s closed mesh, as the entries above describe. The gas cloud: 7,358 dots (source/cloud-points.json), derived by this repository, neither observed in 3D nor published. Their places are the 762 measured knots within 45 arcsec of the star's sky plane, each depth mirrored to the far side by assumption; their light heic1912a's [N II] red, and beyond its field the 2003 WFPC2 F658N mosaic scaled by 3.42 from the 412 knots both see; 638 are dark dust where the optical picture is darker than the gas around it. The lobes' occluder is two ellipsoids fitted to the mesh. Baked by packages/bake/cli/prepare-cloud-points.mts into 300 billboards of about 25 dots, each drawn once from Earth into a 96 px atlas cell (prepared/cloud.bin, cssearth-cloud-points@1).",
+      "evidence": [
+        "https://esahubble.org/images/potw1208a/",
+        "https://esahubble.org/images/heic1912a/",
+        "https://arxiv.org/abs/1407.4096",
+        "https://arxiv.org/abs/1609.00362"
+      ]
+    },
+    {
+      "id": "dataset-outer-shell",
+      "subject": "Outer shell · model: the 1840s ejecta's outer shell",
+      "status": "included",
+      "finding": "Mehner et al. (2016, A&A 595, A120) model the 1840s material outside the Homunculus with SHAPE as a bent, partial cylinder; the open parts are not seen in MUSE (their Fig. 4), and SHAPE fits brightness, not density. The model is not released as data, so packages/bake/authoring/homunculus-nebula/outer-ejecta/tube.mts refits that shape to 17,097 MUSE H-beta detections faster than 450 km/s: position angle 322.7 degrees, tilt 26.6 degrees, radius 11.5 to 16.7 arcsec; 68% of the detections within 3 arcsec of the wall (source/tube.json). Drawn as 744 wireframe segments (prepared/outer-shell.bin); the 216 within 3 arcsec of a detection solid, the rest faint. Labeled a model.",
+      "evidence": [
+        "https://arxiv.org/abs/1610.01688",
+        "https://dataportal.eso.org/dataPortal/file/ADP.2016-06-20T21:41:31.322"
+      ]
+    },
+    {
+      "id": "dataset-motions",
+      "subject": "Motions · measured: the outer ejecta's knots and where they move",
+      "status": "included",
+      "finding": "891 knots (source/kinematics.json): 2.4 arcsec tiles of the 2014 F658N image tracked through eleven Hubble epochs, 1993 to 2020, by normalized cross-correlation after Kiminki et al. (2016), with a MUSE H-beta line-of-sight speed each and a depth of rho v_los / v_tan, which assumes motion straight out from the star. 764 knots within 60 arcsec of the sky plane are drawn as arrows of their motion over 100 years at 2.3 kpc, blue approaching and red receding (prepared/motions.bin). The others are left out: their line-of-sight speed is too large for their sky motion to be the same material's.",
+      "evidence": [
+        "https://arxiv.org/abs/1609.00362",
+        "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=13390",
+        "https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9775",
+        "https://dataportal.eso.org/dataPortal/file/ADP.2016-06-20T21:41:31.322"
+      ]
+    },
+    {
+      "id": "python-port",
+      "subject": "The outer ejecta's chain, ported from the exploratory Python",
+      "status": "included",
+      "finding": "The original study's Python was rerun and gave the same bytes. Run stage by stage on its inputs, the TypeScript port matches it exactly or to float32's last bits everywhere but the sky motions: skimage's match_template computes in float32, and its rounding made false matches in masked areas, which are zero (one tile in 2020 at correlation 0.925 across a 49 px jump, where float64 finds at most 0.496). The Python's fit recomputed in float64 gives exactly the port's motions. The shipped records come from the port: 891 knots instead of 853, 7,358 dots instead of 7,384, the tube within 0.8 degrees and 0.54 arcsec."
+    },
+    {
+      "id": "cross-instrument-motions",
+      "subject": "Motions within one instrument",
+      "status": "deferred",
+      "finding": "The tracker matches every epoch, WFPC2, ACS and WFC3, against the 2014 ACS image. Kiminki et al. (2016, Sect. 2.2) measure only WFPC2 to WFPC2 and ACS to ACS: WFPC2's F658N passes [N II] from -615 to +1,130 km/s, ACS's up to +-1,600 km/s with much H-alpha, so a knot's shape can differ between them. Matching also reads masked pixels as zero rather than ignoring them, and reflection ghosts have no mask of their own.",
+      "evidence": [
+        "https://arxiv.org/abs/1609.00362"
       ],
-      "revisitWhen": "A second dataset is wanted; the model must be fitted to that picture's own epoch."
+      "revisitWhen": "Motions measured within each instrument, with mask-aware matching, are compared with these."
+    },
+    {
+      "id": "ejection-dates",
+      "subject": "Dating each knot by rho / mu",
+      "status": "excluded",
+      "finding": "An ejection year of rho / mu, with no slowing down, is unreliable here: in source/kinematics.json 645 of 891 knots date before 1780 and 71 before the year 0. No date is shown. The tube fit still drops detections near tiles dated before 1780, so it rests on these dates.",
+      "evidence": [
+        "https://arxiv.org/abs/1609.00362"
+      ],
+      "revisitWhen": "Dates are measured with deceleration or taken from Kiminki et al.'s within-instrument catalogue."
+    },
+    {
+      "id": "shape-model-release",
+      "subject": "Mehner et al.'s SHAPE model as data",
+      "status": "deferred",
+      "finding": "The paper's SHAPE model is not released as data, so the shape is refitted here. The refit's tilt, 26.6 degrees, lies near its 25 degree lower bound, so the bound may set it.",
+      "evidence": [
+        "https://arxiv.org/abs/1610.01688"
+      ],
+      "revisitWhen": "The authors release the SHAPE model, or the refit is rerun with a wider tilt range and compared."
+    },
+    {
+      "id": "cloud-svg-sprites",
+      "subject": "Every dot redrawn each frame as an SVG sprite",
+      "status": "excluded",
+      "finding": "On an iPad (9th generation) a frame took about 131 to 170 ms, and the page was blocked while the camera moved.",
+      "revisitWhen": "A browser redraws thousands of SVG sprites a frame within the frame budget on the iPad."
+    },
+    {
+      "id": "cloud-affine-warp",
+      "subject": "One 2D affine warp of the whole dot layer while the camera moves",
+      "status": "excluded",
+      "finding": "27 to 42 frames a second on the iPad, but visibly wrong: a single warp cannot show parallax about the orbit target, and the layer jumped when the camera settled.",
+      "revisitWhen": "Only for a layer without depth; one warp cannot draw parallax."
+    },
+    {
+      "id": "cloud-depth-slabs",
+      "subject": "Five depth slabs, each warped",
+      "status": "excluded",
+      "finding": "31 to 49 frames a second on the iPad; the nearest slab streaked.",
+      "revisitWhen": "The billboards prove too slow on a target device."
+    },
+    {
+      "id": "cloud-3d-sprites",
+      "subject": "Dots as 3D sprites in the lobes' CSS scene",
+      "status": "excluded",
+      "finding": "About 12 times slower than the billboards on the desktop.",
+      "revisitWhen": "Browsers composite thousands of 3D-transformed elements cheaply."
+    },
+    {
+      "id": "textured-tube",
+      "subject": "The tube textured with the photo or F658N; nested tubes; a cocoon",
+      "status": "excluded",
+      "finding": "The tube textured with the photo or the F658N image showed seams and wrong colors. Nested tubes and a cocoon around the lobes were tried and not kept. The wireframe shows only the fitted shape, and which parts MUSE sees.",
+      "evidence": [
+        "https://arxiv.org/abs/1610.01688"
+      ],
+      "revisitWhen": "A measured emission map on the shell exists."
+    },
+    {
+      "id": "envelope-red-filter",
+      "subject": "Envelope shells as a red filtering medium in front of the lobes",
+      "status": "excluded",
+      "finding": "Meant to explain the lobes' color difference. Each shell applied one transmission to all three channels and added red light: grey attenuation plus emission, not wavelength-dependent extinction, and it counted shell crossings rather than path length. An independent review (Codex) also found that the papers attribute the lobes' reddening to dust in their walls and scattering geometry, and that faint surrounding emission does not measure dust optical depth.",
+      "revisitWhen": "A dust scattering and extinction model of the lobes themselves is fitted."
+    },
+    {
+      "id": "crossed-square-clumps",
+      "subject": "Gas clumps as crossed squares",
+      "status": "excluded",
+      "finding": "Clumps of gas drawn on crossed squares were tried and not kept; the billboards, which always face the camera, replaced them.",
+      "revisitWhen": "Clumps need a shape of their own seen from the side."
     }
   ]
 }

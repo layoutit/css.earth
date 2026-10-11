@@ -2,6 +2,12 @@
 
 ESA/Hubble's picture of the Homunculus, the two-lobed cloud of dust around the star Eta Carinae, on the surface its spectra give. **The surface is the model Steffen et al. (2014) made from spectra of the whole nebula, as NASA publishes it; its tilt and direction are Smith's (2006). How the model's file lies on the picture is not published: it is measured here.**
 
+The page has three datasets, and each draws the lobes:
+
+- **Hubble · optical** (the default): the picture on the lobes, and the red gas and dark dust around them as dots. **The gas cloud is derived here: neither observed in 3D nor published.** Its places come from knots measured on Hubble and MUSE data, its light from Hubble pictures.
+- **Outer shell · model:** the outer shell of the 1840s ejecta as the bent cylinder of Mehner et al. (2016). **Their fitted shape is not released: the cylinder is refitted here to MUSE H-beta.**
+- **Motions · measured:** 764 knots, each an arrow of its motion over 100 years. The sky motions are measured here on Hubble F658N images, the line-of-sight speeds on the MUSE cube.
+
 ## Sources
 
 | Selected source | Input and meaning |
@@ -13,6 +19,12 @@ ESA/Hubble's picture of the Homunculus, the two-lobed cloud of dust around the s
 | [HST ACS/HRC F220W and F550M, GO 9973](https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9973) | [Record](../../sources/mast-hst-go9973-eta-carinae-acs-hrc.json). The ultraviolet and visible exposures of 2003 the picture was made from, as drizzled FITS. Dust absorbs the ultraviolet most, so F220W shows the dust lanes deepest; it also sees the lobes' cells up to the star, where the picture is the star's glare. Downloaded to the generator; not tracked. |
 | [HST WFC3/UVIS F280N, GO 15289](https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=15289) | [Record](../../sources/mast-hst-go15289-eta-carinae-f280n.json). Mg II 2800 Å, 2018: the lobes' detail beside the star where the picture is glare. Its saturated pixels about the star are left out. Downloaded to the generator; not tracked. |
 | [Frangi et al. (1998)](https://doi.org/10.1007/BFb0056195) | [Record](../../sources/publication-frangi-1998-vesselness.json). The line detector the dust lanes are found with. |
+| [ESA/Hubble heic1912a](https://esahubble.org/images/heic1912a/) | [Record](../../sources/esahubble-heic1912a.json). Cosmic Fireworks in Ultraviolet, released 1 July 2019: WFC3 Mg II 280 nm, 336 nm and [N II] 658 nm; 1779 × 1805 px, north up. Its red channel lights the gas dots. Its scale, 0.02294″ per pixel, and the star's pixel are fitted here against the 2014 F658N image (correlation 0.68). Credit: NASA, ESA, N. Smith, J. Morse. Downloaded to the generator; not tracked. |
+| [HST F658N, ACS/WFC and WFC3/UVIS, 2005 to 2020](https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=13390) | [Record](../../sources/mast-hst-eta-carinae-f658n-acs-wfc3.json). [N II] images from programmes 10241 (2005), 13390 (2014), 15596 (2018) and 15823 (2020), drizzled. The 2014 image is the reference the motions are measured against. Downloaded to the generator; not tracked. |
+| [HST F658N, WFPC2, 1993 to 2008](https://mast.stsci.edu/search/ui/#/hst/results?proposal_id=9775) | [Record](../../sources/mast-hst-eta-carinae-f658n-wfpc2.json). Seven [N II] visit mosaics, 1993 to 2008. They lengthen the motions' time span; the 2003 visit also lights the gas beyond heic1912a's field. Downloaded to the generator; not tracked. |
+| [ESO VLT/MUSE cube ADP.2016-06-20T21:41:31.322](https://dataportal.eso.org/dataPortal/file/ADP.2016-06-20T21:41:31.322) | [Record](../../sources/eso-adp-2016-06-20t21-41-31-322.json). Programme 094.D-0215(A), observed 12 December 2014: 0.2″ spaxels, 1.25 Å channels. Its H-beta channels give the line-of-sight speeds. About 17.9 GB; downloaded to the generator, not tracked. |
+| [Mehner et al. (2016)](https://arxiv.org/abs/1610.01688) | [Record](../../sources/publication-mehner-2016-homunculus-outer-ejecta.json). A&A 595, A120. MUSE spectra of the outer ejecta and a SHAPE model of the 1840s material outside the Homunculus as a bent, tube-like shell along its axis. They see only parts of the cylinder. The model fits brightness, not density. |
+| [Kiminki et al. (2016)](https://arxiv.org/abs/1609.00362) | [Record](../../sources/publication-kiminki-2016-eta-carinae-proper-motions.json). MNRAS, doi [10.1093/mnras/stw2019](https://doi.org/10.1093/mnras/stw2019). Proper motions of the outer ejecta on Hubble [N II] images over about two decades, measured within each instrument. The method the motions here follow. |
 | [SIMBAD, eta Car](https://simbad.cds.unistra.fr/simbad/sim-id?Ident=eta+Car) | [Record](../../sources/simbad-eta-carinae.json). The star's place, from UCAC4. |
 
 ## The picture
@@ -33,6 +45,47 @@ ESA/Hubble's picture of the Homunculus, the two-lobed cloud of dust around the s
 - **Size:** 27.0 × 25.6 arcsec, 0.31 pc wide at 2,350 pc; the lobes reach 10.6″ from the star along their pole.
 - **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's triangles as seen from the Sun onto the picture's plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/homunculus-nebula-layers backing` again.
 
+## The outer ejecta, measured
+
+The three new datasets rest on one chain, [outer-ejecta.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta.mts), which writes three tracked records: [kinematics.json](source/kinematics.json), [tube.json](source/tube.json) and [cloud-points.json](source/cloud-points.json). Its stages:
+
+1. **Hubble images on one grid:** the eleven F658N epochs, 1993 to 2020, are put on a common sky grid. The WFPC2 visits are tied to the 2005 ACS epoch by 21 to 43 field stars each, with 4.5 to 7.4 mas scatter.
+2. **Artefacts:** each epoch's diffraction spikes, bleed trails, field stars, uncovered pixels and the star's own 9″ are masked, and the masked pixels set to zero.
+3. **Sky motions:** each 2.4″ tile of the 2014 image, between 9.5″ and 57″ from the star, is found again in every other epoch by normalized cross-correlation. A straight line of position against time gives its motion. A tile needs four epochs over ten years: 1,946 of 2,715 tiles qualify. After Kiminki et al. (2016); see the known problems for how it differs from their method.
+4. **Line-of-sight speeds:** a tile counts when its motion is measured to within 6 mas a year and points away from the star (cosine above 0.85). Its MUSE H-beta spectrum, less the ring around it and the Carina Nebula's own line, gives its speed: the strongest peak between 230 and 3,200 km/s. 891 of 1,103 such tiles have one.
+5. **Depth:** a knot moving straight out from the star lies as far behind or in front of the star, over its distance on the sky, as its line-of-sight speed over its sky speed: depth = ρ · v<sub>los</sub> / v<sub>tan</sub>. Sky speeds are at 2.3 kpc. No ejection date is assumed.
+
+[knots.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/knots.mts), [hubble-motions.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/hubble-motions.mts) and [hubble-masks.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/hubble-masks.mts) hold every constant.
+
+## Hubble · optical: the gas cloud
+
+![The page as it opens on Hubble · optical: the lobes inside the red gas cloud](evidence/2026-10-11/optical.webp)
+
+The red gas and dark dust around the lobes are 7,358 dots in [cloud-points.json](source/cloud-points.json), each with a place, a diameter, a color and an opacity. **The cloud is derived by this repository from the measurements above and two pictures. It is not an observation of the gas in 3D, and no paper publishes it.** [cloud-points.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/cloud-points.mts) builds it:
+
+- **Places:** the 762 knots within 45″ of the star's sky plane. A sky cell of 0.6″ takes its dots' depths from its six nearest knots, with 1″ of scatter. Each depth is also mirrored to the far side of the star: the ejecta are taken as symmetric front to back. This is an assumption: the far side is filled, and the Earth view is unchanged.
+- **Light:** the [N II] light where Earth sees the cell. Inside heic1912a's field it is heic1912a's red channel. Beyond it, the 2003 WFPC2 F658N mosaic, scaled by 3.42 to heic1912a: the median ratio on the 412 knots both images see. On the lobes the dots carry no light: the lobes' light is their own.
+- **Dust:** 638 dots are dark dust. They lie where the optical picture is darker than the gas around it, more than 2″ from the lobes, at a knot's depth.
+- **The lobes' occluder:** two ellipsoids, one for each lobe of Steffen et al.'s mesh as the recipe places it. A dot behind them is dimmed to 15% of its opacity at an ellipsoid's middle.
+- **Drawing:** [prepare-cloud-points.mts](../../../packages/bake/cli/prepare-cloud-points.mts) groups the dots into 300 clusters of about 25 (k-means). Each cluster is drawn once, as Earth sees it, into a 96 px cell of `prepared/cloud-atlas.webp` through the lossy lane. `prepared/cloud.bin` ([cssearth-cloud-points@1](../../../packages/objects/src/prepared-data/cloud/cloud-points.ts)) holds each cluster's centre, width, cell and the occluder. The [renderer](../../../packages/renderer/src/universe/cloud-points.ts) places each cluster as a billboard facing the camera and dims it by how deep its sight line passes through the occluder. While the camera moves, only each billboard's transform and opacity change; their order, far to near, is set once the camera rests.
+
+## Outer shell · model
+
+![The page on Outer shell · model: the refitted cylinder, traced segments solid and the rest faint](evidence/2026-10-11/outer-shell.webp)
+
+Mehner et al. (2016) model the 1840s material outside the Homunculus as a bent, partial cylinder along its axis. Their SHAPE model is not released as data. So [tube.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/tube.mts) refits that shape to the MUSE H-beta emission:
+
+- **Points:** 98,787 MUSE detections; 34,384 move faster than 450 km/s along the sight line; 17,097 remain after those near Hubble tiles dated before 1780 are dropped. A detection's depth is its speed times the 172 years since 1843, at 2.3 kpc.
+- **Fit:** a centreline along a position angle and a tilt from the sight line, bent toward one side, and a radius that grows from the near end to the far end. Bounded least squares with a soft L1 loss, from 12 starts. Only detections pull on the wall: the unseen parts cost nothing.
+- **Result:** position angle 322.7°, tilt 26.6° from the sight line, radius 11.5″ at the near end and 16.7″ at the far end. 68% of the detections lie within 3″ of the wall. [tube.json](source/tube.json) keeps the centreline and radius from −45″ to 45″, the parameters and the 1,721 traced cells.
+- **Drawing:** a wireframe of 16 rings and 12 lines along the wall, 744 segments (`prepared/outer-shell.bin`, cssearth-cloud-segments@1). The 216 segments within 3″ of a MUSE detection are solid, **Traced**. The others are faint, **Model only**: Mehner et al. (Fig. 4) say the open parts of the cylinder are not seen in the MUSE data. The label reads "Outer shell (model)".
+
+## Motions · measured
+
+![The page on Motions · measured: 764 arrows, blue approaching and red receding](evidence/2026-10-11/motions.webp)
+
+764 arrows (`prepared/motions.bin`), one for each knot of [kinematics.json](source/kinematics.json) placed within 60″ of the star's sky plane, 764 of 891. Each runs from the knot to where its motion takes it in 100 years at 2.3 kpc. The sky velocity is the measured motion of the knot's tile; the line-of-sight speed is MUSE's. Blue approaches, red recedes. The knots placed farther out are left out: their line-of-sight speed is too large for their sky motion to be the same material's. [cloud-segments.ts](../../../packages/renderer/src/universe/cloud-segments.ts) draws the lines, dimmed behind the lobes' occluder.
+
 ## Rebuilding
 
 The lane and detail maps are built from the downloaded HST products, then the bank is baked and its far view composited:
@@ -45,16 +98,62 @@ node packages/bake/cli/prepare-galaxy-backing.mts src/objects/homunculus-nebula-
 
 Without the downloads, `filaments.png` and `detail.png` are restored from the source cache once published there.
 
+The outer ejecta's records are rebuilt from the archive, then baked into the three overlay banks:
+
+```
+node packages/bake/authoring/homunculus-nebula/outer-ejecta.mts --fetch --write-source
+node packages/bake/cli/prepare-cloud-points.mts src/objects/homunculus-nebula-layers
+```
+
+`--fetch` downloads the missing inputs into the body's `.local/` (URLs and sizes in [inputs.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/inputs.mts)). The chain's work files go to `output/homunculus-outer-ejecta/`; `--stages=` runs some stages alone. Without `--write-source` the tracked records are left as they are.
+
 ## Evidence
+
+The three screenshots above: the site's dev server in desktop Chrome on 2026-10-11, the default arrival camera, scaled to 941 × 455 px.
+
+**The chain against the original study.** The outer ejecta were first worked out in exploratory Python; [outer-ejecta.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta.mts) is its TypeScript port. Rerun twice, the Python gave the same bytes, so it is a fixed baseline. Each port stage was run on the Python's own inputs and compared (2026-10-11):
+
+| Stage | Result |
+| --- | --- |
+| Epochs on the grid | 97.3% to 99.95% of pixels bit-identical, the rest in float32's last bits |
+| Masks | No pixel differs |
+| Sky motions | 1,946 tiles against 1,932: 1,919 shared |
+| heic1912a registration, MUSE H-beta cube | Identical |
+| MUSE detections | 99.997% identical, the rest within 1 × 10⁻⁶ |
+| Knots | 85.7% of values bit-identical, 99% within 3 × 10⁻¹³; one knot's count of peaks differs (2 against 1), not its speed or depth |
+| Tube | Within 0.21° of tilt and 0.15″ of centre |
+| The three records, written from the Python's knots and tube | Identical |
+
+Only the sky motions differ. The Python's template matching computes in float32. In masked areas, which are zero, its rounding made false matches: one tile in 2020 matched at 0.925 across a 49 px jump, where float64 finds no match above 0.50. The Python's own fit, recomputed in float64, gives exactly the port's motions. The shipped records come from the port: 891 knots instead of 853, 7,358 dots instead of 7,384, and the tube within 0.8° and 0.54″ of the Python's.
+
+**Tests.** [chain.test.mts](../../../packages/bake/authoring/homunculus-nebula/outer-ejecta/chain.test.mts) and the other tests beside it check the chain's numerical parts against NumPy, SciPy and Astropy values: a knot moving straight out gets depth over distance equal to v<sub>los</sub> / v<sub>tan</sub>, only clean outward tiles count, and a point on a straight tube's wall has no residual. [cloud-points.test.ts](../../../packages/objects/src/prepared-data/cloud/cloud-points.test.ts) and [cloud-segments.test.ts](../../../packages/objects/src/prepared-data/cloud/cloud-segments.test.ts) carry each bank through a file and back and refuse a malformed one. 61 of 61 pass (2026-10-11).
+
+**Speed.** On an iPad (9th generation), scripted three-second rotation drags (2026-10-11): the page with the cloud's billboards ran at 26 to 53 frames a second, the lobes alone at 39 to 47, and Uranus at 38 to 43. Rejected ways of drawing the cloud are in the [investigation ledger](investigations.json).
 
 The bake's tests ([surface-mesh.test.ts](../../../packages/bake/src/image-layers/surface-mesh.test.ts), [filaments.test.ts](../../../packages/bake/src/image-layers/filaments.test.ts)) close a surface with a hole so that every edge is held by two triangles, fill a hole in a field from its rim, draw a closed ball as triangles each opaque inside itself and clear past its long side, find a dark line as a filament and a dark spot of the same depth as far less of one, and read the recipe's closed mesh and maps and refuse what they cannot. The renderer's test paints the run nearest the camera last, and turns the order round from behind.
 
 ## Known problems
 
+The lobes:
+
 - The faces the picture does not show are filled with the pattern of the faces it does: plausible dust, not what is there.
 - The far lobe's own pattern is seen through the skirt; its color is the near lobe's, by assumption.
 - Within 2.9″ of the star the detail is the ultraviolet bands', and its brightness the light carried in from around the glare.
 - The model's unit, turn and star are measured on this picture, not published. A model made from 2012 spectra is laid on a picture made from earlier exposures; the nebula expands.
-- The skirt's fans are drawn by hand and its thickness is modeled. The outer ejecta and the red nebulosity around the lobes are left out.
+- The skirt's fans are drawn by hand and its thickness is modeled.
 - Each triangle is its own scene: the bank comes in two scenes a frame, which takes a few seconds.
 - Colors are the publisher's display composite, not a measurement.
+
+The outer ejecta:
+
+- **Depth assumes radial motion.** depth = ρ · v<sub>los</sub> / v<sub>tan</sub> holds only for material moving straight out from the star. The selection lets in motion up to 32° off radial (cosine 0.85). The ratio grows errors where the sky speed is small: 127 of the 891 knots lie more than 60″ from the sky plane, from −1,207″ to +3,352″. The arrows leave those out, and the cloud uses knots within 45″.
+- **Which spectrum belongs to which knot is not checked.** Each tile takes the strongest H-beta peak in a 1.2″ aperture; 450 of the 891 have more than one peak. No uncertainty is carried into the depths.
+- **Cross-instrument motions.** The tracker matches every epoch against the 2014 ACS image. Kiminki et al. (2016, Sect. 2.2) measure only within one instrument: WFPC2's F658N passes −615 to +1,130 km/s of [N II], ACS's up to ±1,600 km/s and much Hα, so a knot's shape can differ between them.
+- **Masked pixels are zero during matching.** A match is refused when more than 30% of its search is masked, but the matching does not ignore masked pixels. Reflection ghosts have no mask of their own, and everything within 9″ of the star is masked.
+- **Dates are not used, except once.** The record's `year`, ρ / μ with no slowing down, is unreliable: 645 of 891 knots date before 1780, and 71 before the year 0. The page shows no dates. The tube fit still drops detections near tiles dated before 1780.
+- **The tube's tilt sits near its bound.** The fit allows 25° to 60°; it found 26.6°. The bound, not the data, may set it.
+- **The tube is a refit, not Mehner et al.'s model,** and their model fits brightness, not density. Only 216 of 744 segments are traced.
+- **The cloud is derived.** Its far side is a mirror of the measured near side, by assumption. No knot lies within 10.1″ of the star, so the gas in front of the lobes takes its depth from knots outside it. Its brightness is [N II] light, not gas or dust mass; the dark dots are where the picture is darker, not a measured dust column.
+- **Two distances.** The outer ejecta are measured at 2.3 kpc; the lobes are placed at 2,350 pc. Depths in arcseconds are unaffected; speeds and the 100-year arrows differ by 2%.
+- A cluster of dots is drawn as Earth sees it: turned far from the Earth view, its dots keep their Earth-view pattern.
+- VLT/MUSE is not in the facility catalogue: the records name it as unresolved.
