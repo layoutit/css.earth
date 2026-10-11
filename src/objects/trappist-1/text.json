@@ -77,6 +77,20 @@
           "locator": "Figure 3, left: the wind's total pressure in the plane of the orbits and the Alfvén surface, for a 600 G field"
         }
       ]
+    },
+    "tidal-heating": {
+      "title": "Heat from tides, planet by planet",
+      "detail": "Modeled, not observed",
+      "summary": "Each orbit in the color of the heat tides raise in its planet: most in b and c, little in d to f, none in g and h.",
+      "sources": [
+        {
+          "catalogueId": "doi-10-1051-0004-6361-201731992",
+          "url": "https://doi.org/10.1051/0004-6361/201731992",
+          "label": "Barr, Dobos & Kiss (2018)",
+          "checked": "2026-10-11",
+          "locator": "Table 3: tidal heat flux of each planet in W/m²"
+        }
+      ]
     }
   }
 }

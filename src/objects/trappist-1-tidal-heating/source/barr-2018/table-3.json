@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-tidal-heating-table@1",
+  "paper": "Barr, Dobos & Kiss (2018), A&A 613, A37",
+  "locator": "Table 3, column F_tidal: tidal heat flux in W/m^2, with its upper and lower uncertainty",
+  "rows": [
+    {
+      "planet": "trappist-1b",
+      "tidalHeatFluxWm2": 2.68,
+      "plus": 1.33,
+      "minus": 1.81
+    },
+    {
+      "planet": "trappist-1c",
+      "tidalHeatFluxWm2": 1.32,
+      "plus": 0.3,
+      "minus": 0.47
+    },
+    {
+      "planet": "trappist-1d",
+      "tidalHeatFluxWm2": 0.16,
+      "plus": 0.35,
+      "minus": 0.16
+    },
+    {
+      "planet": "trappist-1e",
+      "tidalHeatFluxWm2": 0.18,
+      "plus": 0.09,
+      "minus": 0.18
+    },
+    {
+      "planet": "trappist-1f",
+      "tidalHeatFluxWm2": 0.14,
+      "plus": 0.05,
+      "minus": 0.14
+    },
+    {
+      "planet": "trappist-1g",
+      "tidalHeatFluxWm2": 0,
+      "plus": 0,
+      "minus": 0
+    },
+    {
+      "planet": "trappist-1h",
+      "tidalHeatFluxWm2": 0,
+      "plus": 0,
+      "minus": 0
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-tidal-heating-source@1",
+  "id": "trappist-1-tidal-heating",
+  "host": "trappist-1",
+  "table": {
+    "source": "source/barr-2018/table-3.json",
+    "field": "tidalHeatFluxWm2"
+  },
+  "picture": {
+    "sizePx": 1024,
+    "outerRadiusPx": 480,
+    "palette": [
+      [
+        223,
+        223,
+        223
+      ],
+      [
+        255,
+        196,
+        112
+      ],
+      [
+        255,
+        138,
+        48
+      ],
+      [
+        240,
+        70,
+        36
+      ]
+    ],
+    "ringPx": 3,
+    "ringOpacity": 0.05
+  },
+  "centreFadeOuterRadii": [
+    2,
+    1.25
+  ],
+  "meaning": "The heat that tides raise inside each planet of TRAPPIST-1, as the model of Barr, Dobos & Kiss (2018) gives it in their Table 3: each planet's orbit line takes the color of its tidal heat flux, from the plain gray of an orbit (none) through amber to red (2.68 watts per square metre, planet b). A model, not an observation."
+}

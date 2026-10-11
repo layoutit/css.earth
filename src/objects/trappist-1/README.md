@@ -56,6 +56,10 @@ pressure as a color map in the plane of the planets' orbits, and as a dashed lin
 magnetic field still holds the wind. It is its own package, read from a figure of Garraffo et al. (2017); its sources,
 processing and limits are in [its README](../trappist-1-stellar-wind/README.md). It is a model, not an observation.
 
+**Tidal heating dataset.** A third dataset of the whole system: each planet's orbit line and marker in the color of the
+heat tides raise inside the planet, by the model of Barr, Dobos & Kiss (2018). It is its own package; its sources, processing
+and limits are in [its README](../trappist-1-tidal-heating/README.md). It is a model, not an observation.
+
 **Catalogue color.** the swatch that search, the catalogue and the minimap show is this dataset's prepared color, #ffcd6a.
 
 ## Evidence
