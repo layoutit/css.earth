@@ -1,0 +1,58 @@
+{
+  "id": "koda-2025-m83-co-line-ratio",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dynamically Driven Evolution of Molecular Gas in the Barred Spiral Galaxy M83 Traced by CO J = 2-1/1-0 Line Ratio Variations",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2025ApJ...986...29K"
+    },
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/add1dc"
+    },
+    {
+      "type": "arxiv",
+      "value": "2505.08876"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...986...29K",
+      "label": "2025ApJ...986...29K"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2505.08876",
+      "label": "arXiv:2505.08876"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2505.08876",
+      "checkedOn": "2026-10-12",
+      "locator": "Abstract: the CO J = 2-1/1-0 line ratio across M83 from ALMA data at 46 pc resolution. The paper ESO's picture of the week potw2640a links."
+    }
+  ],
+  "creators": [
+    "Jin Koda",
+    "Fumi Egusa",
+    "Akihiko Hirota",
+    "Amanda M. Lee",
+    "Tsuyoshi Sawada",
+    "Fumiya Maeda"
+  ],
+  "publisher": "ApJ 986, 29",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Koda et al. (2025), ApJ 986, 29.",
+      "scope": "M83 molecular gas",
+      "evidence": "https://arxiv.org/abs/2505.08876"
+    }
+  ]
+}

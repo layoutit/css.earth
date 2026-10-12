@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m83-alma-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      2903,
+      2879
+    ],
+    "originalDimensions": [
+      2903,
+      2879
+    ],
+    "publisherUrl": "https://www.eso.org/public/images/potw2640a/",
+    "downloadUrl": "https://cdn.eso.org/images/large/potw2640a.jpg",
+    "credit": "ALMA(ESO/NAOJ/NRAO)/J. Koda et al.",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 204.247881,
+    "centerDecDeg": -29.868878,
+    "fieldOfViewDeg": [
+      0.201441,
+      0.199837
+    ],
+    "northClockwiseDeg": 0.015
+  },
+  "target": {
+    "centerRaDeg": 204.2504167,
+    "centerDecDeg": -29.8678,
+    "distancePc": 4897788.193684456
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 24,
+    "lineOfNodesPaDeg": 45,
+    "thicknessKpc": 0.00861,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 8.4,
+    "supportTaperFraction": 0.93,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.0863,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

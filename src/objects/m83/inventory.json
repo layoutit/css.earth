@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "m83-dataset-molecular-gas.webp",
+      "bytes": 15744,
+      "sha256": "5fe94d96099ebd6d653632fac16b7b6544841a26fd8dc98f3699c9b55e30b364"
+    },
+    {
+      "location": "public",
       "filename": "m83-dataset-optical.webp",
       "bytes": 14088,
       "sha256": "7ceaa18996340683c680851ac16ff43d2e45a227ece97d38d00dab970dc3478b"
@@ -16,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 526,
-      "sha256": "dff19c0c07739fadd1f6496008bd53cd1656d04d58735dd026f7ed355f2edacf"
+      "bytes": 894,
+      "sha256": "7e73595ad80e3a45729755d73f2ea454760c06cb31148f87a2f99e5cc333cf54"
     },
     {
       "location": "prepared",
@@ -28,14 +34,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4568,
-      "sha256": "bb156e93d3357cb040c74901a48ab4cc85628efc419406eacf88f401c3c2b44f"
+      "bytes": 4851,
+      "sha256": "7099ba23ca56cf815c72fcb6771a1ba66c79b687fb224c8cc3144888127b76df"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1139,
-      "sha256": "05d92fd285abf864d66b4650c7f93fc80c7d54e9148f3a07cb8fd866137899f7"
+      "bytes": 1786,
+      "sha256": "764586ac250fcfc7749d5eece39134ba5fd53a628df682f6745033196e27da2b"
     }
   ]
 }

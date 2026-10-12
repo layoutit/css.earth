@@ -1,0 +1,127 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m83-alma-layers/source/source.jpg",
+      "origin": "https://cdn.eso.org/images/large/potw2640a.jpg",
+      "sourceUrl": "https://www.eso.org/public/images/potw2640a/",
+      "title": "A swirling galaxy",
+      "credit": "ALMA(ESO/NAOJ/NRAO)/J. Koda et al.",
+      "displayCredit": "ALMA(ESO/NAOJ/NRAO)/J. Koda et al.",
+      "acquisition": "The publisher Large JPEG (2903 x 2879 px), restored from its origin; not tracked. The file carries no sky coordinates: its place on the sky is measured from Gaia stars in the visible-light picture ESO released with it (recipe observation).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-potw2640a",
+            "role": "material",
+            "evidence": "src/objects/m83-alma-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "ALMA, molecular gas",
+            "evidence": "https://www.eso.org/public/images/potw2640a/",
+            "reason": "The publisher's picture; its page names neither the observations nor the spectral line."
+          }
+        ]
+      }
+    },
+    {
+      "id": "registration-visible",
+      "path": "src/objects/m83-alma-layers/source/registration-visible.jpg",
+      "origin": "https://cdn.eso.org/images/large/potw2640b.jpg",
+      "sourceUrl": "https://www.eso.org/public/images/potw2640b/",
+      "title": "The M83 galaxy in visible light (crop)",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "The publisher Large JPEG (2903 x 2879 px), restored from its origin; not tracked. ESO's visible-light picture of the same frame, released with the gas picture for a comparison. Not drawn: its stars give the frame's place on the sky (packages/bake/authoring/m83/place-gas-picture.mts).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-potw2640b",
+            "role": "reference",
+            "evidence": "src/objects/m83-alma-layers/README.md"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit."
+    },
+    {
+      "id": "gaia-dr3-field",
+      "path": "src/objects/m83-alma-layers/source/gaia-dr3-field.csv",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ra%2C+dec%2C+phot_g_mean_mag%2C+pmra%2C+pmdec+FROM+gaiadr3.gaia_source+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C204.2538%2C-29.8658%2C0.2%29%29+AND+phot_g_mean_mag%3C18.5",
+      "sourceUrl": "https://gea.esac.esa.int/archive/",
+      "title": "Gaia DR3 sources within 0.2 degrees of M83 brighter than G 18.5",
+      "credit": "ESA/Gaia/DPAC",
+      "displayCredit": "ESA/Gaia/DPAC",
+      "acquisition": "Query result downloaded unchanged from the ESA Gaia archive; not tracked. The stars that place the frame on the sky (packages/bake/authoring/m83/place-gas-picture.mts).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "src/objects/m83-alma-layers/README.md"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "Gaia archive terms; credit ESA/Gaia/DPAC."
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m83-alma-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m83-alma-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m83-alma-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

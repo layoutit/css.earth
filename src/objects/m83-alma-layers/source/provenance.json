@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "A swirling galaxy",
+  "publisher": "ESO",
+  "sourceId": "potw2640a",
+  "sourcePage": "https://www.eso.org/public/images/potw2640a/",
+  "download": "https://cdn.eso.org/images/large/potw2640a.jpg",
+  "credit": "ALMA(ESO/NAOJ/NRAO)/J. Koda et al.",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      2903,
+      2879
+    ],
+    "bands": [
+      "ALMA",
+      "molecular",
+      "gas"
+    ],
+    "fieldOfViewDeg": [
+      0.201441,
+      0.199837
+    ]
+  },
+  "checkedSource": {
+    "kind": "Publisher Large JPEG",
+    "dimensions": [
+      2903,
+      2879
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 24,
+    "lineOfNodesPaDeg": 45,
+    "reference": "Lundgren et al. 2004"
+  },
+  "displayModel": "The picture lies as one flat image on the midplane of the disc the photograph uses, tilted 24°. Nothing in it has depth: no thickness of M83's molecular gas is drawn.",
+  "coverage": "The picture's own frame, 12.09 × 11.99 arcmin; its light ends 7.8 kpc from the centre in the disc's plane, inside the frame.",
+  "acquisition": {
+    "url": "https://cdn.eso.org/images/large/potw2640a.jpg",
+    "dimensions": [
+      2903,
+      2879
+    ],
+    "operation": "Download the publisher Large JPEG; no crop or resample."
+  }
+}

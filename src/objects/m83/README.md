@@ -1,6 +1,6 @@
 # Southern Pinwheel (M83)
 
-Southern Pinwheel (M83) as an object of the world: its place, its card and its list marker. It has no surface. Its datasets show the [Southern Pinwheel (M83) image layers](../m83-layers/README.md) bank, whose README holds the sources, processing, evidence and known problems of the imagery.
+Southern Pinwheel (M83) as an object of the world: its place, its card and its list marker. It has no surface. Its two datasets are two pictures on the same disc, each a bank with a README that holds the sources, processing, evidence and known problems of its imagery: [the photograph](../m83-layers/README.md), which the page opens on, and [ALMA's picture of the molecular gas](../m83-alma-layers/README.md).
 
 ## Sources
 

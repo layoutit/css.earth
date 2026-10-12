@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m83-alma-layers",
+  "name": "Southern Pinwheel (M83)",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m83-alma-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m83-alma-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m83-alma-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ALMA · molecular gas",
+      "title": "The Southern Pinwheel's molecular gas",
+      "description": "ALMA's picture of M83 in the light of cold gas molecules, the gas that stars form from, as ESO published it on 5 October 2026 with the carbon monoxide survey of Koda et al. (2025). It lies as one flat image on the disc the photograph uses, tilted 24°. The orange is the publisher's color, and the picture's brightness is drawn as opacity.",
+      "summary": "ALMA's picture of the galaxy's cold molecular gas, flat on its disc; nothing in it has depth.",
+      "detail": "2903 × 2879 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Molecular gas, shown in orange"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "2903 × 2879"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "12.09 × 11.99 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m83-alma-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/large/potw2640a.jpg"
+      }
+    }
+  ]
+}

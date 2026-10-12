@@ -49,6 +49,22 @@
           "url": "https://www.eso.org/public/images/m83/"
         },
         "falseColor": false
+      },
+      {
+        "id": "molecular-gas",
+        "label": "ALMA \u00b7 molecular gas",
+        "thumbnail": "m83-dataset-molecular-gas.webp",
+        "volume": {
+          "objectId": "m83-alma-layers",
+          "datasetId": "optical",
+          "surface": "molecular-gas"
+        },
+        "source": {
+          "id": "m83-alma-layers-optical",
+          "path": "../../m83-alma-layers/source/manifest.json",
+          "url": "https://www.eso.org/public/images/potw2640a/"
+        },
+        "falseColor": true
       }
     ]
   },
