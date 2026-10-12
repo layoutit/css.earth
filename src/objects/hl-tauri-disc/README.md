@@ -33,7 +33,7 @@ The browser renders the disc as five retained sheets. These full-page Chrome cap
 
 ![The modeled thin disc turned steeply toward edge-on](evidence/disc-edge-on.png)
 
-The native-detail bake passes its pixel-contrast and physical-orientation checks. The bank is 34 files and 457,333 bytes, and the browser keeps the same 59 nodes inside the bank’s element during sixteen inspected camera poses. Drawn as 60, 60 and 35 slabs across its three axes it was 36 files, 862,094 bytes and 419 nodes. The earlier bake’s cache-free replay was not repeated for this one. These checks establish preparation and retained rendering, not a frame-rate measurement.
+The native-detail bake passes its pixel-contrast and physical-orientation checks. The bank is 34 files and 457,344 bytes, and the browser keeps the same 59 nodes inside the bank’s element during sixteen inspected camera poses. Drawn as 60, 60 and 35 slabs across its three axes it was 36 files, 862,094 bytes and 419 nodes. The earlier bake’s cache-free replay was not repeated for this one. These checks establish preparation and retained rendering, not a frame-rate measurement.
 
 ## Known problems
 
