@@ -63,7 +63,7 @@ import Detached from './Detached.astro';
     const credited = contributors(context);
     const tabbed = credited.length > 1, byBand = distinctBands(credited);
     const groups = credited.length ? [credited] : [];
-    return <Detached detached={context.dataset.id !== datasets?.defaultDataset}><div data-dataset-context={context.dataset.id} data-system-dataset-context={context.dataset.systemDataset ? context.dataset.id : undefined} hidden={context.dataset.id !== datasets?.defaultDataset}>
+    return <Detached detached={context.dataset.id !== datasets?.defaultDataset}><div data-dataset-context={context.dataset.id} data-system-dataset-context={context.dataset.systemDataset || context.dataset.id === datasets?.defaultDataset && datasets.controls.some(dataset => dataset.systemDataset) ? context.dataset.id : undefined} hidden={context.dataset.id !== datasets?.defaultDataset}>
       {groups.map(group => <ObjectCard class="object-dataset-context-card" role="region"
         aria-label={tabbed ? 'Credited machines' : group[0].title}>
         {tabbed && <InformationTabs idPrefix={`${objectId}-${context.dataset.id}`}

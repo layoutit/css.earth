@@ -542,7 +542,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-ui-layer:has(.object-facility-toggle:not(:checked)) .object-dataset-context-rail,
 .object-settings-panel:popover-open ~ .object-sidebar-frame .object-dataset-context-rail,
 .object-information-panel[aria-busy="true"] > .object-dataset-context-rail,
-/* A system's card shows the machines of a dataset authored for the whole system, never those of the body's own dataset. */
+/* A system's card shows the machines of the datasets it lists: those authored for the whole system and its Off, the dataset
+   the body opens on. A system that lists none shows no machine card. */
 .object-information-panel[data-card-view="overview"] > .object-dataset-context-rail:not(:has([data-system-dataset-context]:not([hidden]) > *)),
 .object-information-panel > .object-dataset-content:not([open]) ~ .object-dataset-context-rail,
 .object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
