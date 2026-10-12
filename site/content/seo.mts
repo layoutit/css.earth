@@ -9,7 +9,7 @@ export function objectSeo(object: Pick<import("../directory/objects.mts").Naviga
   const picturedId = object.system?.host ?? object.id;
   const socialId = !socialImages || socialImages.has(picturedId) ? picturedId : defaultSocialImageId;
   return {
-    title: `${object.name} | cssEarth`,
+    title: `${object.name} | css.earth`,
     description: object.description,
     canonical: new URL(object.route, SITE_ORIGIN).href,
     image: new URL(`/social/${socialId}.jpg`, SITE_ORIGIN).href,
@@ -19,7 +19,7 @@ export function objectSeo(object: Pick<import("../directory/objects.mts").Naviga
 
 /** The site's own page, `/`: it opens on Earth but is named and addressed as the site. */
 export function homeSeo(earth: ReturnType<typeof objectSeo>) {
-  return { ...earth, title: "cssEarth: the universe in HTML and CSS",
+  return { ...earth, title: "css.earth: the universe in HTML and CSS",
     description: "Explore planets, moons, stars and galaxies built from open space data as 3D HTML and CSS, without WebGL or canvas.",
     canonical: new URL("/", SITE_ORIGIN).href };
 }
