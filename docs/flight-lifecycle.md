@@ -75,6 +75,10 @@ orientation. Responsive fitting chooses the apparent size and derives an
 optical framing scale at that same distance. Cross-object selection reads the
 destination's responsive camera plan, including its prepared shape fit, before
 starting the flight; it does not inherit the departing body's size allowance.
+A star's fit also stops at 600 px across (`STAR_MAXIMUM_DIAMETER_PIXELS` in
+`camera-layout.ts`): a star is a plain disc, so a window larger than a
+laptop's does not enlarge it. The limit is the shell's, set where a definition
+is loaded, so no star is baked again to change it.
 Scaling a distant photograph to
 match a closer mesh's bounding sphere would change the visible surface features
 at the reveal, even when their outlines agree.

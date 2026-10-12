@@ -291,7 +291,8 @@ left unscaled, which drew each polar cap as a hole, and the body had one fixed s
 the pose of a fresh mount, framed at the share of the viewport width the live camera fits a body to
 (`site/world/default-width-share.mts`), and the photograph of a page without script is sized by the same share. The live
 camera also keeps a body within a share of the viewport's height; a page without script now takes the smaller of the
-two, as a scale on the drawn stage and a cap on the photograph. Before that a window wide for its height drew the body
+two, as a scale on the drawn stage and a cap on the photograph. A star's limit in pixels (`STAR_MAXIMUM_DIAMETER_PIXELS`,
+`camera-layout.ts`) is a third bound on both. Before that a window wide for its height drew the body
 too large: Saturn was 475 px across at 1320×559 against 338 px with script, and is 338 px in Chromium 148, WebKit 26.4
 and Firefox 150 now. The pairs below are the Moon's Tycho link at 1280×800 and Europa with shadows at 390×844, before
 and after.

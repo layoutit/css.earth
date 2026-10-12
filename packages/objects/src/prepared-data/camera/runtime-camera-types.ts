@@ -18,6 +18,9 @@ export interface CameraPlan extends PitchCalibration {
   logicalBodyDiameter: number; responsiveFit: ResponsiveFit;
   /** Volume-equivalent radius over the body's largest radius when below 1 (an elongated body); the fit is already scaled by it. */
   framingScale?: number;
+  /** The widest the fit draws the body, in CSS pixels. No bake writes it: the loader sets it from the body's class
+   * (camera-layout.ts, `classFramedCamera`). */
+  maximumBodyDiameterPixels?: number;
   projection?: { model: string; cssPerspective: string };
   dolly?: { model: string; wheelStepPerDelta: number; minimumDistanceRadii: number;
     maximumDistanceOverOrbitExtent: number;

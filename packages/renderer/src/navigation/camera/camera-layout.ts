@@ -1,7 +1,7 @@
 import { type CameraPlan } from '@cssearth/objects';
 
 /** The camera plan fields the responsive fit reads; a page bakes them for its startup cover (site/startup/startup-cover.mts). */
-export type ResponsiveZoomPlan = Pick<CameraPlan, 'responsiveFit' | 'logicalBodyDiameter' | 'defaultZoom' | 'framingScale' | 'projection'>;
+export type ResponsiveZoomPlan = Pick<CameraPlan, 'responsiveFit' | 'logicalBodyDiameter' | 'defaultZoom' | 'framingScale' | 'maximumBodyDiameterPixels' | 'projection'>;
 export interface ResponsiveZoomOptions { plan: ResponsiveZoomPlan; mobile: boolean; framingReferenceZoom?: number; viewport: import('./camera-viewport.js').CameraViewport; }
 import { smoothstep } from "@cssearth/engine";
 
@@ -10,6 +10,16 @@ import { smoothstep } from "@cssearth/engine";
 export const MOBILE_OPEN_AREA_SHARE = .60;
 /** Phones frame a little closer while leaving the tablet fit unchanged. */
 export const PHONE_OPEN_AREA_SHARE = .72;
+/** A star's widest disc on arrival, in CSS pixels. A star is a plain disc, so a window larger than a laptop's only
+ * enlarges it: 799 px across in a 2560 × 1310 window read as too close, where a 1728 × 995 window gives 607 px
+ * (2026-10-12). Planets and moons carry detail and keep growing with the window. */
+export const STAR_MAXIMUM_DIAMETER_PIXELS = 600;
+
+/** The camera plan with what its body's class adds to the prepared fit. A star's prepared camera carries the shares
+ * every body has; its limit is the shell's, so no star is baked again to change it. */
+export function classFramedCamera<Camera extends { maximumBodyDiameterPixels?: number }>(camera: Camera, classification: unknown): Camera {
+  return classification === 'star' ? { ...camera, maximumBodyDiameterPixels: STAR_MAXIMUM_DIAMETER_PIXELS } : camera;
+}
 
 export function selectPreparedResponsiveZoom({
   plan,
@@ -68,13 +78,14 @@ export function selectPreparedResponsiveZoom({
   // An elongated body reaches past its volume-equivalent diameter; its framing scale keeps the whole shape in the area.
   const openHeight = mobile && measured.openArea ? measured.openArea.bottom - measured.openArea.top : null;
   const openShare = (stageBounds.width < 700 ? PHONE_OPEN_AREA_SHARE : MOBILE_OPEN_AREA_SHARE) * (plan.framingScale ?? 1);
-  const targetDiameter = openHeight !== null
+  const fittedDiameter = openHeight !== null
     ? Math.min(stageBounds.width * Math.max(widthShare, openShare), openHeight * openShare)
     : Math.min(
       stageBounds.width * widthShare,
       stageBounds.height * fit.maximumHeightShare,
       maximumMobileDiameter,
     );
+  const targetDiameter = Math.min(fittedDiameter, plan.maximumBodyDiameterPixels ?? Number.POSITIVE_INFINITY);
   const framingRatio = targetDiameter / plan.logicalBodyDiameter;
   const zoom = framingRatio * framingReferenceZoom;
   return Object.freeze({ model: fit.model, widthShare, zoom });

@@ -90,7 +90,10 @@ const billboardWidthWithoutScript = (() => {
   const billboard = startup?.arrival?.billboard;
   if (!billboard || !sceneShare) return '70vmin';
   const width = sceneShare.diameterOverWidth * 100 * billboard.size / 2 / billboardBodyRadiusPixels(billboard, objectRecord.worldFrame.bodyRadiusM);
-  return heightOverWidthShare ? `min(${width}vw, ${width * heightOverWidthShare}cqh)` : `${width}vw`;
+  // The photograph's width per pixel of body diameter is `width` over the body's share of 100 viewport widths.
+  const limits = [...(heightOverWidthShare ? [`${width * heightOverWidthShare}cqh`] : []),
+    ...(sceneShare.maximumDiameterPixels ? [`${sceneShare.maximumDiameterPixels * width / (sceneShare.diameterOverWidth * 100)}px`] : [])];
+  return limits.length ? `min(${width}vw, ${limits.join(', ')})` : `${width}vw`;
 })();
 // A saved view names its own camera distance and keeps it; the wheel's rule multiplies this fit (native-input.mts). The
 // scaled stage stops clipping, or it would cut the drawing to its own smaller box; the viewport still clips.
@@ -104,8 +107,11 @@ const billboardWidthWithoutScript = (() => {
 // reader without script does. `data-ready` would tell that page apart, but no rule reads it, and reading it here would
 // add style work to each of its changes, two a load and two a flight (23 to 150 µs each on Earth, 2026-10-07).
 const withoutScript = 'html:not([data-body-pending]) body:not([data-sheet])';
+// A class limit in pixels (a star's) is a third bound: the limit over the diameter the width share gives.
+const pixelFitWithoutScript = sceneShare?.maximumDiameterPixels
+  ? `, calc(tan(atan2(${sceneShare.maximumDiameterPixels}px, var(--native-stage-width))) / ${sceneShare.diameterOverWidth})` : '';
 const fitWithoutScript = heightOverWidthShare
-  ? `${withoutScript} .object-stage[data-prepared-object]:not([data-prepared-view]) { --native-stage-height: 100cqh; --native-stage-width: 100vw; --native-fit: min(1, calc(${heightOverWidthShare} * tan(atan2(var(--native-stage-height), var(--native-stage-width))))); scale: var(--native-fit); overflow: visible; }` : '';
+  ? `${withoutScript} .object-stage[data-prepared-object]:not([data-prepared-view]) { --native-stage-height: 100cqh; --native-stage-width: 100vw; --native-fit: min(1, calc(${heightOverWidthShare} * tan(atan2(var(--native-stage-height), var(--native-stage-width))))${pixelFitWithoutScript}); scale: var(--native-fit); overflow: visible; }` : '';
 const billboardWithoutScript = `${withoutScript} .object-stage:not([data-prepared-object]) ~ img[data-startup-billboard] { opacity: 1 !important; width: ${billboardWidthWithoutScript}; height: auto; left: 50vw; top: 50%; transform: translate(-50%, -50%); }`;
 // The phone sheet rests at its peek: it is hidden until its controller publishes a snap state (shell-layout.css). A page
 // restored from the back-forward cache has neither mark until its shell mounts again, and the sheet is the one element
