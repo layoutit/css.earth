@@ -38,6 +38,25 @@ export const MESH_PATCH_AROUND = 24, MESH_PATCH_NEAR = 4, MESH_PATCH_FROM = 0.12
 
 /** Texels a triangle reaches past each side, where it meets its neighbour (see edgeShare). */
 export const MESH_EDGE_MARGIN = 1;
+/** The most triangles one 3D scene holds, and how far a scene reaches from its first triangle at most, as a share of
+ * the mesh's longest reach. A browser sorts a scene's leaves by depth against one another and cuts each along the
+ * planes of the others; the scenes themselves are painted farthest from the camera first, by their middles. The
+ * Homunculus's 1,345 in one scene took Chrome's display compositor 58 ms of each frame of a turn, 18 frames a second;
+ * in scenes of 24, 16.5 ms; of 12, 10.9 ms and 57 frames a second (headless Chrome on a GPU, M3 Max, a 1458 by 1202
+ * window, 2026-10-12). A scene that spans a jump of the triangles' order has its middle between two places and is
+ * painted out of turn. */
+export const MESH_SCENE_TRIANGLES = 12, MESH_SCENE_REACH = 0.2;
+/** The sizes of the consecutive runs of a mesh's triangles, given their middles in their order, that share a 3D scene:
+ * a run ends at MESH_SCENE_TRIANGLES, or before a triangle farther than MESH_SCENE_REACH from the run's first. */
+export function meshScenes(middles: readonly (readonly number[])[]): number[] {
+  const reach = Math.max(0, ...[0, 1, 2].map(axis => Math.max(...middles.map(middle => middle[axis]!)) - Math.min(...middles.map(middle => middle[axis]!))));
+  const scenes: number[] = [];
+  for (let first = 0, index = 1; index <= middles.length; index++) {
+    if (index < middles.length && index - first < MESH_SCENE_TRIANGLES && Math.hypot(...[0, 1, 2].map(axis => middles[index]![axis]! - middles[first]![axis]!)) <= MESH_SCENE_REACH * reach) continue;
+    scenes.push(index - first); first = index;
+  }
+  return scenes;
+}
 /** A texel's opacity by its distance in texels inside its triangle's nearest side (negative outside): the face's own
  * opacity a inside, none past half a texel out, and across the half-texel band either side of the side, which the
  * neighbour also draws, 1 - sqrt(1 - a), so the two together are a. */

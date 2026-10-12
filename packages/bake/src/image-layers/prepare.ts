@@ -16,7 +16,7 @@ import { pictureFade } from './fade-outline.ts';
 import { imageLayerShapeWalls, type ShapeWalls } from './shape-walls.ts';
 import { densityGrid, imageLayerDensityModel } from './density-grid.ts';
 import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles, surfaceEdgeStretch, SURFACE_MOST_CROSSINGS } from './surface.ts';
-import { imageLayerSurfaceMesh, type SurfaceTriangle } from './surface-mesh.ts';
+import { imageLayerSurfaceMesh, meshScenes, type SurfaceTriangle } from './surface-mesh.ts';
 import { flattenProtrusions, imageLayerSurfaceSkirt, regionMask, type PictureRegions } from './surface-skirt.ts';
 import { imageLayerSurfaceStar } from './surface-star.ts';
 import { imageLayerShapePatches, packShapePatches } from './shape-patches.ts';
@@ -449,24 +449,21 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   if(meshTriangles){
     // The published surface as its own triangles, each a leaf whose texture is clear past the triangle.
     const W=info.width,H=info.height,unitsPerArcsec=distanceKpc*Math.PI/648000,at=(c:readonly [number,number,number]):Vec3=>placed(2*(c[0]+.5)/W-1,1-2*(c[1]+.5)/H,c[2]*unitsPerArcsec);
-    // The triangles are one scene, as PolyCSS draws a mesh: the browser sorts them itself. Once a scene of their own
-    // each (a triangle came and went over two degrees of a drag in a shared one, 2026-10-10), now the shell is closed
-    // and its triangles share exact edges, and one scene draws the same at every turn tried (0.03% of pixels apart,
-    // edge antialiasing) while the page shows in half a second instead of 43 (2026-10-11). The triangles still go in
-    // order along a curve through space that keeps neighbours together.
+    // The triangles go in order along a curve through space that keeps neighbours together, and share 3D scenes in
+    // runs along it (meshScenes): the browser sorts a run's triangles itself, and the runtime paints the runs farthest
+    // from the camera first. Once a scene of their own each: the page took 43 seconds to show. Then one scene for all
+    // (2026-10-11): shown in half a second and sorted exactly, but that sort took 58 ms of every frame of a turn.
     const middles=meshTriangles.map(t=>scale(add(...t.corners.map(at)),1/3) as number[]),low=[0,1,2].map(k=>Math.min(...middles.map(m=>m[k]!))),span=[0,1,2].map(k=>Math.max(...middles.map(m=>m[k]!))-low[k]!||1);
     const cell=(m:number[])=>{const q=[0,1,2].map(k=>Math.min(1023,Math.floor(1024*(m[k]!-low[k]!)/span[k]!)));let rank=0;for(let bit=9;bit>=0;bit--)for(const k of [0,1,2])rank=rank*2+((q[k]!>>bit)&1);return rank;};
     const order=meshTriangles.map((_,index)=>index).sort((a,b)=>cell(middles[a]!)-cell(middles[b]!)),{atlases,places}=packShapePatches(meshTriangles),files:{path:string;bytes:number}[]=[];
     for(const [index,atlas] of atlases.entries()){const path=`layers/shape-${index}.webp`;files.push({path,bytes:(await encode(atlas.rgba,atlas.width,atlas.height,path,true)).length});}
-    const scenes:number[]=[];
     for(const index of order){const triangle=meshTriangles[index]!,place=places[index]!,atlas=atlases[place.atlas]!,file=files[place.atlas]!;
-      scenes.push(1);
       const [a,across,down]=triangle.corners.map(at) as [Vec3,Vec3,Vec3],[columns,rows]=triangle.texture;
       const v:Quad['verticesUnits']=[a,across,add(across,difference3(down,a)),down],center=scale(add(a,across,down),1/3);
       const u0=place.x/atlas.width,u1=(place.x+columns)/atlas.width,v0=place.y/atlas.height,v1=(place.y+rows)/atlas.height;
       leaves.push({id:`shape-${String(leaves.length).padStart(4,'0')}`,axis:'z',offsetKpc:dot(center,diskNormal),centerUnits:center,doubleSided:true,texturePath:file.path,widthPx:columns,heightPx:rows,verticesUnits:v,uvs:[[u0,v0],[u1,v0],[u1,v1],[u0,v1]],
         style:patchStyle(v,columns,rows,atlas,place),bytes:Math.round(file.bytes*columns*rows/(atlas.width*atlas.height))});}
-    shapeScenes=[scenes.length];}
+    shapeScenes=meshScenes(order.map(index=>middles[index]!));}
   else if(shapeWalls&&meshed){
     // Surfaces at measured depths as leaves (./shape-patches.ts): each is a mesh of flat patches, the same from every
     // side, so the bank has one stack. A patch is a rectangle of the picture on a plane through the surface there: its

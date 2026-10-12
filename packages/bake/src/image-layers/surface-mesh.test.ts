@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.ts';
-import { closedMesh, edgeShare, imageLayerSurfaceMesh, MESH_OPACITY_FLOOR, pushPull } from './surface-mesh.ts';
+import { closedMesh, edgeShare, imageLayerSurfaceMesh, MESH_OPACITY_FLOOR, MESH_SCENE_TRIANGLES, meshScenes, pushPull } from './surface-mesh.ts';
 import { stlTriangles } from './surface.ts';
 
 type Surface = NonNullable<ImageLayerRecipe['geometry']['surface']>;
@@ -71,4 +71,14 @@ test('two triangles over their shared edge band make the face\'s opacity togethe
       assert.ok(Math.abs(together - a) < 1e-12, `a = ${a}, ${inside} texels in: the two make ${together}`);
     }
   }
+});
+
+test('a mesh shares 3D scenes in runs of its triangles: none larger than a browser sorts in a frame, none across a jump of their order', () => {
+  // Thirty triangles in a row, a jump of half the mesh, then five more.
+  const row = (from: number, count: number) => Array.from({ length: count }, (_, index) => [from + index * 0.001, 0, 0]);
+  const middles = [...row(0, 30), ...row(0.5, 5)], scenes = meshScenes(middles);
+  assert.deepEqual(scenes, [MESH_SCENE_TRIANGLES, MESH_SCENE_TRIANGLES, 30 - 2 * MESH_SCENE_TRIANGLES, 5], 'a run ends when it is full, and before the jump');
+  assert.equal(scenes.reduce((sum, size) => sum + size, 0), middles.length, 'every triangle is in a scene');
+  assert.deepEqual(meshScenes([]), []);
+  assert.deepEqual(meshScenes([[1, 2, 3]]), [1]);
 });
