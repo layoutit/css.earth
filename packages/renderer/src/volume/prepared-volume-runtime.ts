@@ -378,9 +378,13 @@ function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stack
   // Each axis is scaled by √(thinnest extent / its extent), so a thin axis keeps its slabs until √(2.5/20) ≈ 0.35 of the
   // view lies along it (20° from edge-on), where three optical copies still carry its gain. Equal extents are unscaled.
   const extents = AXES.map((_, index) => bounds.max[index]! - bounds.min[index]!), thinnest = Math.min(...extents);
-  const strengths = cosines.map((cosine, index) => cosine * Math.sqrt(thinnest / extents[index]!));
+  // A stack without leaves draws nothing and takes no part in the choice of view: a thin disc prepared as sheets has one
+  // stack, which keeps the whole weight at every angle.
+  const drawn = AXES.map(axis => (stacks.find(stack => stack.axis === axis)?.leaves.length ?? 0) > 0);
+  const strengths = cosines.map((cosine, index) => drawn[index] ? cosine * Math.sqrt(thinnest / extents[index]!) : 0);
   const maximum = Math.max(...strengths);
   return strengths.map((value, index) => {
+    if (!drawn[index]) return { weight: 0, opticalGain: 1 };
     const t = Math.max(0, Math.min(1, (value - maximum + 0.16) / 0.16));
     const weight = t * t * (3 - 2 * t);
     // Crossing count is |d_i|*L/pitch_i, but each texture integrates pitch_i.

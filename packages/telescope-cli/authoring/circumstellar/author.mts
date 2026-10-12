@@ -21,8 +21,8 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type EdgeOnReconstruction, type CircumstellarOpacity } from '@cssearth/objects';
-import { alignDiscGrid } from './disc-aligned-grid.mts';
-import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, reachAbovePlane, ringLightBeyond, tiltedRingDensity, type TiltedRing } from './tilted-ring.mts';
+import { alignDiscGrid, normaliseColumns } from './disc-aligned-grid.mts';
+import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, reachAbovePlane, ringLightBeyond, tiltedRingDensity, tiltedRingFan, type TiltedRing } from './tilted-ring.mts';
 import { jwstAcquisition } from './jwst-acquisition.mts';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -43,6 +43,8 @@ import { midplaneGeometry, registerStarByPlanet, type MidplaneGeometry, type Pla
 import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from '@cssearth/astronomy';
 
 const METERS_PER_PARSEC = 3.085677581491367e16;
+/** Depth samples a sheet takes through its share of a disc's thickness, several times a grid cell deep. */
+const SHEET_DEPTH_SAMPLES = 8;
 const repositoryRoot = checkoutProjectRoot(import.meta.url);
 
 /** The telescope behind an image: its facility in site/source/facilities, and the mission it flew as when the catalogue pairs
@@ -157,7 +159,10 @@ export interface CircumstellarRecipe {
   readonly schema: 'cssearth-circumstellar-volume@2';
   readonly id: string; readonly host: string; readonly name: string; readonly description: string; readonly sourceUrl: string;
   readonly credit: string; readonly license: { readonly spdx: string; readonly note: string; readonly url: string };
-  readonly grid: { readonly size: number; readonly halfUnits: number; readonly slabs: number; readonly alignedDiscHalfHeightUnits?: number };
+  /** `sheets`, with a disc-aligned grid: the disc is drawn as that many sheets through its thickness, not as three stacks
+   * of `slabs`. A drag over GW Orionis's 334 slabs held single draws of 161 and 268 ms (Chrome, 2026-10-12). Seen exactly
+   * edge-on a sheet has no area. */
+  readonly grid: { readonly size: number; readonly halfUnits: number; readonly slabs: number; readonly alignedDiscHalfHeightUnits?: number; readonly sheets?: number };
   readonly defaultDataset: string;
   readonly datasets: readonly CircumstellarDataset[];
 }
@@ -295,18 +300,21 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
   const alignedDiscHalfHeightUnits = grid.alignedDiscHalfHeightUnits === undefined ? undefined : requireFiniteNumber(grid.alignedDiscHalfHeightUnits);
   if (alignedDiscHalfHeightUnits !== undefined && (!(alignedDiscHalfHeightUnits > 0) || datasets.length !== 1 || !datasets[0]!.publishedProfileDisc))
     throw new TypeError('A disc-aligned grid requires one published-profile disc and a positive half height.');
+  const sheets = grid.sheets === undefined ? undefined : requireFiniteNumber(grid.sheets);
+  if (sheets !== undefined && (!Number.isInteger(sheets) || sheets < 1 || alignedDiscHalfHeightUnits === undefined))
+    throw new TypeError('grid.sheets is a whole number of sheets through a disc-aligned grid.');
   for (const dataset of datasets) if (!(dataset.outerUnits <= requireFiniteNumber(grid.halfUnits) && dataset.topAlpha > 0 && dataset.topAlpha < 1 && (dataset.geometry === 'edge-on' || dataset.heightOfRadius > 0)))
     throw new TypeError(`${dataset.id}: scoring ends inside the grid, and the top alpha lies in (0, 1).`);
   return { schema: row.schema, id: requireString(row.id), host: requireString(row.host), name: requireString(row.name), description: requireString(row.description), sourceUrl: requireString(row.sourceUrl),
     credit: requireString(row.credit), license: { spdx: requireString(license.spdx), note: requireString(license.note), url: requireString(license.url) },
     grid: { size: requireFiniteNumber(grid.size), halfUnits: requireFiniteNumber(grid.halfUnits), slabs: requireFiniteNumber(grid.slabs),
-      ...(alignedDiscHalfHeightUnits === undefined ? {} : { alignedDiscHalfHeightUnits }) }, defaultDataset, datasets };
+      ...(alignedDiscHalfHeightUnits === undefined ? {} : { alignedDiscHalfHeightUnits }), ...(sheets === undefined ? {} : { sheets }) }, defaultDataset, datasets };
 }
 
 const compass = (positionAngleDeg: number) => ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(((positionAngleDeg % 360) + 360) % 360 / 45) % 8]!;
 /** What a dataset's record says of its tilted ring: the published plane, and how its light was told from the outer disc's. */
-const tiltedRingReading = (ring: TiltedRing, measured: { ridgeUnits: number; endsUnits: number; mutualTiltDeg: number; reachUnits: number; lightBeyondGrid: number }) =>
-  ` An inner ring lies in a plane of its own: tilted ${ring.inclinationDeg}° with nodes at position angle ${ring.positionAngleDeg}° and its ${compass(ring.nearSidePositionAngleDeg)} side nearer (${ring.citation}; ${ring.nearSideSource}), ${measured.mutualTiltDeg.toFixed(0)}° from the disc's plane. Its light is what the image's median brightness in circles about its published sky centre (${ring.skyCentreSource}) holds above the level of the gap beyond it, out to ${measured.endsUnits.toFixed(0)} au from that centre, where the gap is lowest; its ridge lies ${measured.ridgeUnits.toFixed(0)} au from the centre. That light is drawn on the ring's plane, which holds the star, with a ${ring.heightUnits} au Gaussian height (${ring.heightSource}); the disc's profile is measured on the image less it, so no light is drawn twice. The ring's ridge, with three of its heights, reaches ${measured.reachUnits.toFixed(1)} au from the disc's plane; ${measured.lightBeyondGrid > 0 ? `its faint skirt climbs past the grid's height, and the ${(100 * measured.lightBeyondGrid).toFixed(2)}% of the ring's light that lies there is not drawn` : 'the grid holds all of its light'}.`;
+const tiltedRingReading = (ring: TiltedRing, measured: { ridgeUnits: number; endsUnits: number; mutualTiltDeg: number; reachUnits: number; lightBeyondGrid: number; fanTiltDeg?: number }) =>
+  ` An inner ring lies in a plane of its own: tilted ${ring.inclinationDeg}° with nodes at position angle ${ring.positionAngleDeg}° and its ${compass(ring.nearSidePositionAngleDeg)} side nearer (${ring.citation}; ${ring.nearSideSource}), ${measured.mutualTiltDeg.toFixed(0)}° from the disc's plane. Its light is what the image's median brightness in circles about its published sky centre (${ring.skyCentreSource}) holds above the level of the gap beyond it, out to ${measured.endsUnits.toFixed(0)} au from that centre, where the gap is lowest; its ridge lies ${measured.ridgeUnits.toFixed(0)} au from the centre. That light is drawn on the ring's plane, which holds the star, with a ${ring.heightUnits} au Gaussian height (${ring.heightSource}); the disc's profile is measured on the image less it, so no light is drawn twice. ${measured.fanTiltDeg !== undefined ? `It is drawn on five sheets through the star: its plane, and four tilted ${measured.fanTiltDeg.toFixed(1)}° from it, the angle its height subtends at its ridge, two about each of two axes in the plane. A point's light is shared among them by its distance from each, so none is drawn twice, and seen along the plane the sheets tilted across the view show the ring's height. The fan is a display model of that height` : `The ring's ridge, with three of its heights, reaches ${measured.reachUnits.toFixed(1)} au from the disc's plane; ${measured.lightBeyondGrid > 0 ? `its faint skirt climbs past the grid's height, and the ${(100 * measured.lightBeyondGrid).toFixed(2)}% of the ring's light that lies there is not drawn` : 'the grid holds all of its light'}`}.`;
 const smoothstep = (a: number, b: number, t: number) => { const u = Math.max(0, Math.min(1, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
 /** Filters of deposit bands, registered as recipes are parsed: a deposit's band is not a JWST band. */
 const DEPOSIT_FILTERS = new Map<string, string>();
@@ -509,16 +517,21 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
   const faceShare = (d: (x: number, y: number, z: number) => number) => faceShareOf(sky, innerMaskUnits, taperFromUnits, d, planeRadius);
   const cubeFaceShare = { gaussianRing: faceShare(discDensity(drawnModel)), measuredProfileDisc: faceShare(density) };
   const shown = shownChannels(dataset, sky, read.channels, innerMaskUnits, taperFromUnits, planeRadius);
-  // The tilted ring leaves the outer disc's plane: a grid aligned with that plane has to be tall enough to hold it.
+  // The tilted ring leaves the outer disc's plane: a grid aligned with that plane has to be tall enough to hold it. Drawn as
+  // sheets, the ring is on a fan of sheets about its own plane, each from a grid of its own (tilted-ring.mts
+  // tiltedRingFan), and the disc's grid holds the disc alone.
+  const ownRingGrid = recipe.grid.sheets !== undefined && ring !== undefined;
   const tiltedRing = tilted && { centreUnits: tilted.centreUnits, ridgeUnits: tilted.ridgeUnits, endsUnits: tilted.endsUnits, gapLevel: tilted.gapLevel, ridgeOverNoise: tilted.ridgeOverNoise,
     mutualTiltDeg: mutualTiltDeg(dataset.tiltedRing!, drawnModel), reachUnits: reachAbovePlane(dataset.tiltedRing!, tilted, drawnModel),
     // What the aligned grid leaves out of the ring's faint skirt, which climbs past the ridge's reach; a cube holds it all.
-    lightBeyondGrid: recipe.grid.alignedDiscHalfHeightUnits === undefined ? 0 : ringLightBeyond(sky, dataset.tiltedRing!, tilted, drawnModel, recipe.grid.alignedDiscHalfHeightUnits) };
-  if (tiltedRing && recipe.grid.alignedDiscHalfHeightUnits !== undefined && recipe.grid.alignedDiscHalfHeightUnits < tiltedRing.reachUnits)
+    lightBeyondGrid: recipe.grid.alignedDiscHalfHeightUnits === undefined || ownRingGrid ? 0 : ringLightBeyond(sky, dataset.tiltedRing!, tilted, drawnModel, recipe.grid.alignedDiscHalfHeightUnits) };
+  if (tiltedRing && !ownRingGrid && recipe.grid.alignedDiscHalfHeightUnits !== undefined && recipe.grid.alignedDiscHalfHeightUnits < tiltedRing.reachUnits)
     throw new Error(`${dataset.id}: the tilted ring's ridge reaches ${tiltedRing.reachUnits.toFixed(1)} units from the disc plane; the aligned grid's half height (${recipe.grid.alignedDiscHalfHeightUnits}) must hold it.`);
-  const aligned = recipe.grid.alignedDiscHalfHeightUnits === undefined ? undefined : alignDiscGrid(sky, shown, density, drawnModel, recipe.grid.alignedDiscHalfHeightUnits);
+  const columns = ownRingGrid ? normaliseColumns(sky, shown, density) : undefined;
+  const aligned = recipe.grid.alignedDiscHalfHeightUnits === undefined ? undefined : alignDiscGrid(sky, shown, density, drawnModel, recipe.grid.alignedDiscHalfHeightUnits, columns ? { weight: disc, columns } : undefined);
+  const ringFan = columns ? tiltedRingFan(sky, shown, density, dataset.tiltedRing!, tilted!, ring!, columns) : undefined;
   const encoded = aligned ?? spreadAlong(sky, shown, density);
-  return { kind: 'ring' as const, dataset, bands, geometry, fit, profileScore, cubeFaceShare, ...(centreDepthUnits === undefined ? {} : { centreDepthUnits }), ...(tiltedRing ? { tiltedRing } : {}), innerMaskUnits, taperFromUnits, radialProfile, differences, ...(aligned ? { aligned } : {}), ...(await finishDataset(dataset, sky, shown, encoded)) };
+  return { kind: 'ring' as const, dataset, bands, geometry, fit, profileScore, cubeFaceShare, ...(centreDepthUnits === undefined ? {} : { centreDepthUnits }), ...(tiltedRing ? { tiltedRing: ringFan ? { ...tiltedRing, fanTiltDeg: ringFan.tiltDeg } : tiltedRing } : {}), innerMaskUnits, taperFromUnits, radialProfile, differences, ...(aligned ? { aligned } : {}), ...(ringFan ? { ringFan } : {}), ...(await finishDataset(dataset, sky, shown, encoded)) };
 }
 
 /** How much light an envelope would put on the cube's front and back faces: the share of every drawn column's depth weight
@@ -835,7 +848,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
   };
   const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n');
   const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes]];
-  const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string } }[] = [];
+  const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string }; tilted?: { path: string }[] }[] = [], tiltedGrids: string[] = [];
   for (const b of built) {
     const file = `density-${b.dataset.id}.ktx2`, baseRecipe = {
       schema: VOLUME_RECIPE_SCHEMA,
@@ -849,15 +862,28 @@ export async function author(id: string, options: { sources?: readonly string[] 
     const aligned = b.kind === 'ring' ? b.aligned : undefined;
     const preparedRecipe = aligned ? { ...baseRecipe, frame: aligned.frame,
       grid: { ...baseRecipe.grid, dimensions: aligned.dimensions, bounds: aligned.bounds },
-      bake: { ...baseRecipe.bake, imageWidth: aligned.dimensions[0], sliceCounts: { x: slabs, y: slabs, z: aligned.dimensions[2] } } } : baseRecipe;
+      bake: { ...baseRecipe.bake, imageWidth: aligned.dimensions[0], ...(recipe.grid.sheets === undefined ? { sliceCounts: { x: slabs, y: slabs, z: aligned.dimensions[2] } }
+        : { sliceCounts: { x: 0, y: 0, z: recipe.grid.sheets }, samplesPerSlab: SHEET_DEPTH_SAMPLES }) } } : baseRecipe;
     const recipeBytes = Buffer.from(JSON.stringify(preparedRecipe, null, 2) + '\n');
     outputs.push([file, Buffer.from(b.ktx2)], [`volume-${b.dataset.id}.json`, recipeBytes], [`previews/${b.dataset.id}.png`, b.previewPng]);
-    deliveryGrids.push({ id: b.dataset.id, label: b.dataset.label, sourceUrl: recipe.sourceUrl, recipe: { path: `${packageBase}/volume-${b.dataset.id}.json` } });
+    // The tilted ring's fan: a grid and a recipe for each sheet, the same material on the gain the grid's own peak gives. A
+    // sheet is one slab through its whole grid, a sample a cell.
+    const fan = b.kind === 'ring' ? b.ringFan?.grids ?? [] : [], ringRecipes: { path: string }[] = [];
+    for (const [sheet, grid] of fan.entries()) {
+      const ringFile = `density-${b.dataset.id}-ring-${sheet}.ktx2`, ringRecipe = `volume-${b.dataset.id}-ring-${sheet}.json`;
+      outputs.push([ringFile, Buffer.from(grid.ktx2)], [ringRecipe, Buffer.from(JSON.stringify({ ...baseRecipe, frame: grid.frame,
+        grid: { ...baseRecipe.grid, path: ringFile, dimensions: grid.dimensions, bounds: grid.bounds },
+        material: { ...baseRecipe.material, exposureGain: exposureAndOpacity(b.dataset.topAlpha, grid.peak, grid.integral).exposureGain },
+        bake: { ...baseRecipe.bake, imageWidth: grid.dimensions[0], sliceCounts: { x: 0, y: 0, z: 1 }, samplesPerSlab: grid.dimensions[2] } }, null, 2) + '\n')]);
+      tiltedGrids.push(ringFile); ringRecipes.push({ path: `${packageBase}/${ringRecipe}` });
+    }
+    deliveryGrids.push({ id: b.dataset.id, label: b.dataset.label, sourceUrl: recipe.sourceUrl, recipe: { path: `${packageBase}/volume-${b.dataset.id}.json` },
+      ...(ringRecipes.length ? { tilted: ringRecipes } : {}) });
   }
   const request = deliveryGrids.find(grid => grid.id === recipe.defaultDataset)!.recipe;
   outputs.push(['delivery.json', Buffer.from(JSON.stringify({
     schema: NEBULA_DELIVERY_SCHEMA, id, method: 'density-grid', request,
-    inputPins: [{ path: `${packageBase}/provenance.json` }, ...built.map(b => ({ path: `${packageBase}/density-${b.dataset.id}.ktx2` }))],
+    inputPins: [{ path: `${packageBase}/provenance.json` }, ...built.map(b => ({ path: `${packageBase}/density-${b.dataset.id}.ktx2` })), ...tiltedGrids.map(file => ({ path: `${packageBase}/${file}` }))],
     sky: { centerIcrsDegrees: [raDeg, decDeg], distancePc, imageRotationDegrees: 0, arcsecPerUnit: 1 / distancePc },
     sourceUrl: recipe.sourceUrl, description: recipe.description, defaultDataset: recipe.defaultDataset, framingRadiusUnits: halfUnits,
     attachedTo: recipe.host, acceptedLabResult: `${id}-density-grids`, compactInputs: request, compactMethod: 'density-grid', grids: deliveryGrids,

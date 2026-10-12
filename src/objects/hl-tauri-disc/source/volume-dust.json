@@ -60,13 +60,13 @@
   },
   "bake": {
     "sliceCounts": {
-      "x": 60,
-      "y": 60,
-      "z": 35
+      "x": 0,
+      "y": 0,
+      "z": 9
     },
     "unitsPerSourceUnit": 1,
     "imageWidth": 1024,
-    "samplesPerSlab": 4,
+    "samplesPerSlab": 8,
     "cropTransparent": true,
     "opticalWeight": 1,
     "imageEncoding": {

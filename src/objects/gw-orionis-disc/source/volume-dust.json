@@ -5,19 +5,19 @@
     "dimensions": [
       1024,
       1024,
-      94
+      24
     ],
     "encoding": "sqrt-density-unorm8",
     "bounds": {
       "min": [
         -700,
         -700,
-        -64
+        -16
       ],
       "max": [
         700,
         700,
-        64
+        16
       ]
     }
   },
@@ -56,17 +56,17 @@
     ],
     "absorption": [],
     "emissionTransfer": "shared-opacity",
-    "exposureGain": 0.22008181738889324
+    "exposureGain": 0.14620393096184375
   },
   "bake": {
     "sliceCounts": {
-      "x": 120,
-      "y": 120,
-      "z": 94
+      "x": 0,
+      "y": 0,
+      "z": 9
     },
     "unitsPerSourceUnit": 1,
     "imageWidth": 1024,
-    "samplesPerSlab": 4,
+    "samplesPerSlab": 8,
     "cropTransparent": true,
     "opticalWeight": 1,
     "imageEncoding": {
@@ -106,12 +106,12 @@
       "min": [
         -700,
         -700,
-        -64
+        -16
       ],
       "max": [
         700,
         700,
-        64
+        16
       ]
     }
   }

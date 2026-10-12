@@ -1,5 +1,6 @@
 import { readNonemptyText, requireRecord } from '@cssearth/core';
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseVolumeRecipe, parseDensityVolumeFrame, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseVolumeRecipe, parseDensityVolumeFrame, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame, type VolumeSliceQuad } from '@cssearth/objects';
+import { tiltedSheetQuads } from './tilted-sheets.ts';
 import { readVolumeDatasetBank, writeVolumeDatasetBank } from '@cssearth/objects/node';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
@@ -40,6 +41,17 @@ function pin(v: unknown): CompilerPin {
   return { path };
 }
 async function pinned(root: string, p: CompilerPin) { const bytes = await readFile(local(root,p.path)); return bytes; }
+/** Bake a density grid's tilted recipes under `output` and turn their sheets into the grid's frame (tilted-sheets.ts). */
+async function tiltedSheets(root: string, pins: readonly CompilerPin[], host: DensityVolumeFrame, framed: boolean, firstSliceIndex: number, output: string): Promise<VolumeSliceQuad[]> {
+  const quads: VolumeSliceQuad[] = [];
+  for (const [index, recipePin] of pins.entries()) {
+    if (!framed) throw new TypeError('A density grid with tilted recipes states its frame.');
+    const raw = requireRecord(JSON.parse((await pinned(root, recipePin)).toString()) as unknown);
+    const part = await prepareVolumeSlices({ sourceDirectory: dirname(local(root, recipePin.path)), outputDirectory: resolve(output, `tilted-${index}`), recipe: parseVolumeRecipe(raw) });
+    quads.push(...tiltedSheetQuads(part.quads, parseDensityVolumeFrame(raw.frame), host, index, firstSliceIndex + quads.length));
+  }
+  return quads;
+}
 /** Reuse an installed bank only when its receipt records the current recipe and its descriptor and every resource it
  * names are present. The receipt keeps the whole recipe, so a changed recipe is compared, not trusted. */
 async function installed(directory: string, recipe: unknown): Promise<boolean> {
@@ -89,7 +101,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   try {
     const add = async (id: string,label: string,sourceUrl: string,volumePath: string,
       frame: ReturnType<typeof embedNebulaFrame>,stars: PreparedVolumeDataset['stars'],anchorPoints?: PreparedVolumeDataset['stars']['points'],
-      occultingCentreUnits?: readonly [number,number,number]) => {
+      occultingCentreUnits?: readonly [number,number,number], tilted?: ReadonlySet<string>) => {
       const raw = record(JSON.parse((await pinned(root,{path:volumePath})).toString()));
       const volume = sanitizeVolumeProvenance(validatePreparedCssVolume(raw.data ?? raw));
       for (const resource of volume.resources) {
@@ -98,7 +110,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       }
       const brightness: PreparedVolumeDataset['brightness'] = {overall:1,x:1,y:1,z:1};
       const projected = await prepareVolumeImpostors({
-        volume:embedNebulaVolume(volume,frame,`${recipe.id}-${id}`,id),brightness,prefix:`${id}/impostors`,
+        volume:embedNebulaVolume(volume,frame,`${recipe.id}-${id}`,id),brightness,prefix:`${id}/impostors`,...(tilted ? { tilted } : {}),
         readResource:path=>readFile(local(staging,path)),
         writeResource:(path,bytes)=>put(local(staging,path),bytes),
       });
@@ -168,13 +180,15 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         // Every dataset of one bank shares a frame, so navigation and framing do not change with the dataset.
         if (shared && !isDeepStrictEqual(shared, source)) throw new TypeError('Density-grid datasets must share their frame.');
         shared ??= source;
+        const tilted = await tiltedSheets(root, grid.tilted ?? [], source, rawRecipe.frame !== undefined, volumeRecipe.bake.sliceCounts.z, output);
+        slices.quads.push(...tilted);
         const compiled = json({ schema: PREPARED_OBJECT_SCHEMA, id: `${recipe.id}-${grid.id}`, type: 'density-volume', format: DENSITY_VOLUME_FORMAT,
           data: compileCssVolume({ id: `${recipe.id}-${grid.id}`, frame: source, slices, recipe: volumeRecipe }) });
         const volumePath = resolve(output, 'volume.json');
         await put(volumePath, compiled);
         const frame = embedNebulaFrame(source, recipe.sky, [0, 0, 0], rawRecipe.frame !== undefined);
         await add(grid.id, grid.label, grid.sourceUrl ?? recipe.sourceUrl, relative(root, volumePath), frame, { frame, points: [] },
-          undefined, grid.occultingCentreUnits);
+          undefined, grid.occultingCentreUnits, tilted.length ? new Set(tilted.map(quad => quad.id)) : undefined);
       }
     } else if (recipe.compactInputs && !research) {
       const result = await replayCompactSymmetry(root, recipe.compactInputs, relative(root, resolve(staging, 'compact')), nebulaBakeBackend);

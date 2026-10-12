@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { profileDiscDensity, type DiscModel, type SkyPlane } from './disc-envelope.mts';
-import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, planeNormal, reachAbovePlane, ringLightBeyond, tiltedRingDensity, type TiltedRing } from './tilted-ring.mts';
+import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
+import { normaliseColumns } from './disc-aligned-grid.mts';
+import { FAN_SHARE, fanShare, measureTiltedRing, mutualTiltDeg, parseTiltedRing, planeNormal, reachAbovePlane, ringLightBeyond, tiltedRingDensity, tiltedRingFan, type TiltedRing } from './tilted-ring.mts';
 
 const ring: TiltedRing = { citation: 'a paper', url: 'https://example.org/paper', inclinationDeg: 25, positionAngleDeg: 105, nearSidePositionAngleDeg: 195, nearSideSource: 'its figure',
   skyCentreArcsec: [0.2, -0.1], skyCentreSource: 'its table', heightUnits: 0.6, heightSource: 'its model' };
@@ -56,4 +58,33 @@ test('a tilted ring states its plane, its centre and its height', () => {
   assert.deepEqual(parseTiltedRing({ ...ring }, 'ring'), ring);
   assert.throws(() => parseTiltedRing({ ...ring, heightUnits: 0 }, 'ring'), /positive height/);
   assert.throws(() => parseTiltedRing({ ...ring, skyCentreArcsec: [0.2] }, 'ring'));
+});
+
+test('a fan of five sheets shares the ring\'s light, and its tilted sheets show a face seen along the ring\'s plane', () => {
+  const size = 64, halfUnits = 32, step = 1, plane = new Float32Array(size * size);
+  for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
+    const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step;
+    plane[j * size + i] = 2 + 40 * Math.exp(-(((Math.hypot(x, y) - 6) / 1.5) ** 2) / 2) + 10 * Math.exp(-(((Math.hypot(x, y) - 24) / 2) ** 2) / 2);
+  }
+  const sky: SkyPlane = { size, halfUnits, step, plane, background: 0, noise: 1, backgroundPixels: 0, mosaicArcsecPerPixel: 1, starPixel: [0, 0], unit: '' };
+  const centred = { ...ring, skyCentreArcsec: [0, 0] as const }, measure = measureTiltedRing(sky, centred, 1, 24);
+  const share = tiltedRingDensity(centred, measure, { gaussianHeightUnits: 0.4, inclinationDeg: 37 });
+  const fan = tiltedRingFan(sky, [plane], share, centred, measure, share, normaliseColumns(sky, [plane], share));
+  assert.equal(fan.grids.length, 5);
+  assert.ok(Math.abs(Math.tan(fan.tiltDeg * Math.PI / 180) - centred.heightUnits / measure.ridgeUnits) < 1e-12);
+  // The first sheet is the ring's plane; the others stand the fan's tilt from it, and none of them is edge-on with it.
+  const normals = fan.grids.map(grid => rotateWorldPosition(worldRotationFromQuaternion(grid.frame.localToReferenceXyzw), [0, 0, 1]));
+  const [east, north, toward] = planeNormal(centred), own = normals[0]!;
+  assert.ok(Math.abs(own[0] + east) < 1e-9 && Math.abs(own[1] - north) < 1e-9 && Math.abs(own[2] - toward) < 1e-9, 'the ring\'s plane, x west');
+  for (const normal of normals.slice(1)) assert.ok(Math.abs(Math.acos(normal[0] * own[0] + normal[1] * own[1] + normal[2] * own[2]) * 180 / Math.PI - fan.tiltDeg) < 1e-9);
+  // Seen along either axis of the ring's plane, two sheets are tilted across the view.
+  for (const axis of [[1, 0, 0], [0, 1, 0]] as const) {
+    const view = rotateWorldPosition(worldRotationFromQuaternion(fan.grids[0]!.frame.localToReferenceXyzw), axis);
+    const faces = normals.filter(normal => Math.abs(normal[0] * view[0] + normal[1] * view[1] + normal[2] * view[2]) > 1e-6);
+    assert.equal(faces.length, 2);
+  }
+  // A point's shares add up to one, wherever it is.
+  for (const [x, y, z] of [[0, 0, 0], [5, -3, 1], [-6, 6, -4], [20, 1, 9]] as const)
+    assert.ok(Math.abs(normals.reduce((sum, _, sheet) => sum + fanShare(normals as [number, number, number][], FAN_SHARE * centred.heightUnits, sheet, x, y, z), 0) - 1) < 1e-12);
+  for (const grid of fan.grids) assert.ok(grid.peak > 0 && grid.filledVoxels > 0);
 });

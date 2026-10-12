@@ -15,7 +15,8 @@
     "size": 512,
     "halfUnits": 700,
     "slabs": 120,
-    "alignedDiscHalfHeightUnits": 64
+    "alignedDiscHalfHeightUnits": 16,
+    "sheets": 9
   },
   "defaultDataset": "dust",
   "datasets": [

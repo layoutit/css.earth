@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-volume-recipe@1",
+  "grid": {
+    "path": "density-dust-ring-1.ktx2",
+    "dimensions": [
+      181,
+      181,
+      61
+    ],
+    "encoding": "sqrt-density-unorm8",
+    "bounds": {
+      "min": [
+        -123.6063609086165,
+        -123.6063609086165,
+        -41.65188087530467
+      ],
+      "max": [
+        123.6063609086165,
+        123.6063609086165,
+        41.65188087530467
+      ]
+    }
+  },
+  "material": {
+    "intensityScale": 1,
+    "stepScale": 1,
+    "stepMetric": "source",
+    "emission": [
+      {
+        "channel": 0,
+        "color": [
+          1,
+          0,
+          0
+        ],
+        "strength": 1
+      },
+      {
+        "channel": 1,
+        "color": [
+          0,
+          1,
+          0
+        ],
+        "strength": 1
+      },
+      {
+        "channel": 2,
+        "color": [
+          0,
+          0,
+          1
+        ],
+        "strength": 1
+      }
+    ],
+    "absorption": [],
+    "emissionTransfer": "shared-opacity",
+    "exposureGain": 0.0889126331294632
+  },
+  "bake": {
+    "sliceCounts": {
+      "x": 0,
+      "y": 0,
+      "z": 1
+    },
+    "unitsPerSourceUnit": 1,
+    "imageWidth": 181,
+    "samplesPerSlab": 61,
+    "cropTransparent": true,
+    "opticalWeight": 1,
+    "imageEncoding": {
+      "format": "webp",
+      "quality": 90
+    }
+  },
+  "anchors": [
+    {
+      "id": "gw-orionis",
+      "referencePositionM": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "provenance": {
+    "path": "provenance.json"
+  },
+  "frame": {
+    "referenceFrame": "lab-sky-west-north-toward",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "localToReferenceXyzw": [
+      -0.03524138140995028,
+      0.2676848677827455,
+      0.9546243893305201,
+      -0.12567868511320562
+    ],
+    "metersPerUnit": 1,
+    "boundsUnits": {
+      "min": [
+        -123.6063609086165,
+        -123.6063609086165,
+        -41.65188087530467
+      ],
+      "max": [
+        123.6063609086165,
+        123.6063609086165,
+        41.65188087530467
+      ]
+    }
+  }
+}

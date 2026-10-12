@@ -13,6 +13,8 @@
  *
  * The outer disc's profile is measured on the image less the ring's light, so no light is drawn twice. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import type { WorldRotation } from '@cssearth/core';
+import { alignDiscGrid, discGridRotation, type NormalisedColumns } from './disc-aligned-grid.mts';
 import type { DiscModel, SkyPlane } from './disc-envelope.mts';
 
 const DEG = Math.PI / 180;
@@ -135,4 +137,45 @@ export function reachAbovePlane(ring: TiltedRing, measure: TiltedRingMeasure, ot
     reach = Math.max(reach, Math.abs(-x * o[0] + y * o[1] + z * o[2]));
   }
   return reach + 3 * ring.heightUnits;
+}
+
+/** How wide, as a share of the ring's height, the Gaussian of distance is by which a fan's sheets share the ring's light. */
+export const FAN_SHARE = 0.5;
+
+/** The turns, about the ring's own x and y axes, that make a fan's five sheets: the ring's plane, and four planes through
+ * the star tilted `tiltRadians` from it, two about each axis. */
+const fanTurns = (tiltRadians: number): WorldRotation[] => { const c = Math.cos(tiltRadians), s = Math.sin(tiltRadians);
+  return [[1, 0, 0, 0, 1, 0, 0, 0, 1], [1, 0, 0, 0, c, -s, 0, s, c], [1, 0, 0, 0, c, s, 0, -s, c], [c, 0, s, 0, 1, 0, -s, 0, c], [c, 0, -s, 0, 1, 0, s, 0, c]]; };
+const turned = (a: WorldRotation, b: WorldRotation): WorldRotation => [0, 1, 2].flatMap(row => [0, 1, 2].map(column =>
+  a[3 * row]! * b[column]! + a[3 * row + 1]! * b[3 + column]! + a[3 * row + 2]! * b[6 + column]!)) as unknown as WorldRotation;
+
+/** A fan sheet's share of a point's light: a Gaussian of the point's distance from the sheet's plane, over the same for
+ * every sheet of the fan. The shares of one point add up to one. */
+export function fanShare(normals: readonly (readonly [number, number, number])[], widthUnits: number, sheet: number, x: number, y: number, z: number): number {
+  let total = 0, own = 0;
+  for (const [index, normal] of normals.entries()) {
+    const distance = x * normal[0] + y * normal[1] + z * normal[2], weight = Math.exp(-(distance * distance) / (2 * widthUnits * widthUnits));
+    total += weight; if (index === sheet) own = weight;
+  }
+  return total > 0 ? own / total : 0;
+}
+
+/** The ring's own grids, for a disc drawn as sheets: one for each sheet of a fan about the ring's plane. A ring 4.7 au high at
+ * 43 au is not thin, and flat sheets on its plane have no area seen edge-on. So its light is drawn on five planes through
+ * the star: the ring's own, and four tilted from it by the angle its height subtends at its ridge, two about each of two
+ * axes in its plane. Seen along the plane, the sheets tilted across the view show their faces, the ring's height tall. A
+ * point's light is shared among the sheets by its distance from each (`fanShare`), so no light is drawn twice. Each grid
+ * is aligned with its sheet, holds its share of each column out to where the ring's light ends, and is tall enough to hold
+ * six of the ring's heights about the ring's plane. The fan is a display model of the thickness, as the tilt is the
+ * paper's and the height its model's. `columns` are the sky columns normalised by the whole `density`. */
+export function tiltedRingFan(sky: Pick<SkyPlane, 'size' | 'halfUnits' | 'step'>, channels: readonly Float32Array[], density: (x: number, y: number, z: number) => number,
+  ring: TiltedRing, measure: Pick<TiltedRingMeasure, 'endsUnits' | 'centreUnits' | 'ridgeUnits'>, share: (x: number, y: number, z: number) => number, columns: NormalisedColumns) {
+  const model = { inclinationDeg: ring.inclinationDeg, positionAngleDeg: ring.positionAngleDeg, nearSidePositionAngleDeg: ring.nearSidePositionAngleDeg,
+    centreUnits: [0, 0] as const, gaussianHeightUnits: ring.heightUnits };
+  const tiltRadians = Math.atan2(ring.heightUnits, measure.ridgeUnits), plane = discGridRotation(model);
+  const rotations = fanTurns(tiltRadians).map(turn => turned(plane, turn)), normals = rotations.map(rotation => [rotation[2], rotation[5], rotation[8]] as const);
+  const reachUnits = Math.min(sky.halfUnits, (measure.endsUnits + Math.hypot(...measure.centreUnits)) / Math.cos(ring.inclinationDeg * DEG) + 3 * ring.heightUnits);
+  const halfHeightUnits = 6 * ring.heightUnits * Math.cos(tiltRadians) + reachUnits * Math.sin(tiltRadians);
+  return { tiltDeg: tiltRadians / DEG, grids: rotations.map((rotation, sheet) => alignDiscGrid(sky, channels, density, model, Math.max(6 * ring.heightUnits, halfHeightUnits),
+    { weight: (x, y, z) => { const light = share(x, y, z); return light > 0 ? light * fanShare(normals, FAN_SHARE * ring.heightUnits, sheet, x, y, z) : 0; }, planarHalfUnits: reachUnits, rotation, columns })) };
 }
