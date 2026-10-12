@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pds.nasa.gov/ds-view/pds/viewBundle.jsp?identifier=urn:nasa:pds:dione.rhea_cassini_vims_ir-mosaic_scipioni_2022&version=1.0",
+      "label": "PDS bundle page"
+    },
+    {
+      "role": "original",
       "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_vims_cubes_list.tab",
       "label": "Source"
     }

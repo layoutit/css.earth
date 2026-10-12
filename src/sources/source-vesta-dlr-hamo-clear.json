@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+      "label": "DLR data page"
+    },
+    {
+      "role": "original",
       "url": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.png",
       "label": "Source"
     }

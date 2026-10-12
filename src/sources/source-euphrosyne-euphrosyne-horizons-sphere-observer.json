@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "JPL Horizons"
+    },
+    {
+      "role": "original",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "label": "Source"
     }

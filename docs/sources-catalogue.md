@@ -31,8 +31,8 @@ from these records and the existing product lineage, with
 "Sources" link shows, and the rows of the body card's Sources tab. A published
 work is one row: its title, kind, publisher and landing page. Files that have no
 published title are one row per credit line, with their count and the datasets
-they feed, linked to the first of them. Every row leads to the source's own
-site; the README is the footer's link.
+they feed, linked to the page of the first of them. Every row leads to a page
+on the source's own site, never to a file; the README is the footer's link.
 The pages read only the credits file: the whole catalogue is tens of megabytes.
 The three prepared files are ignored build outputs; do not edit or commit them.
 
@@ -54,6 +54,11 @@ evidence and plain language. Keep scientific tables in their existing records.
 2. If it is absent, create `src/sources/<id>.json`, with `id` matching the filename.
    Use the existing [source record fields](../packages/objects/src/sources/catalog.ts).
    Add its published title, provider identifiers and citation link.
+   Its `landing` link is the page that presents the work: a product or dataset
+   page, an archive folder that lists the file, a DOI. The address of a file,
+   a download or a query service is its `original` link. The catalogue refuses
+   a record whose reader link (the landing link, else the first citation link)
+   is one of those (`isFileAddress`, which judges an address by its form).
    Record authors, date and version when established by the source. Cite the
    provider page with a checked date and locator, or the repository file and
    field that cites it. Git history records when. Do not invent a release or archive
@@ -61,7 +66,11 @@ evidence and plain language. Keep scientific tables in their existing records.
 3. Add a `sourceBinding` to the body's input. It names the canonical ID, the
    source's role (`material`, `method`, `reference` or `artwork`) and the evidence
    connecting it to this input. Keep the local ID and path. Used documents
-   and intermediate files also need bindings.
+   and intermediate files also need bindings. An input whose `origin` is a
+   file or a query address names the page that presents it in `sourceUrl`,
+   unless [archive pages](../packages/bake/src/sources/archive-pages.ts) lists
+   its archive. `author-source-records` links the new record to that page and
+   keeps the origin as its original link.
 4. Update the body README when the source choice, values, processing or limits
    change. Follow [preparation and checks](#prepare-and-check) below.
 

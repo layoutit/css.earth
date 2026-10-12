@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "Horizons system page"
+    },
+    {
+      "role": "original",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-32%27&CENTER=%27500%40704%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272446453.231171118%0A2446453.237837784%0A2446453.241171117%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
       "label": "Source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/354Eleonora/Deconv/d354Eleonora_2018-12-18T01_27_13.137_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

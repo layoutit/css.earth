@@ -13,6 +13,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pds.nasa.gov/ds-view/pds/viewBundle.jsp?identifier=urn:nasa:pds:dart.spice",
+      "label": "PDS bundle page"
+    },
+    {
+      "role": "original",
       "url": "https://pds.nasa.gov/api/search/1/products/urn%3Anasa%3Apds%3Adart.spice",
       "label": "PDS registry record of the DART SPICE bundle"
     },

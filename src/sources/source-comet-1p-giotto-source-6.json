@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/vega2.trj",
       "label": "Source"
     }

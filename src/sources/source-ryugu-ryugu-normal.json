@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
       "label": "Source"
     }

@@ -3,13 +3,13 @@
  * (2026-09-29) `site/prepared/prepared-sources.json` reached 41 MB, and importing it put the dev server and the site typecheck past 4 GB.
  * The complete author and institutional credits stay in each body's README, which the link opens. */
 import { isRecord } from '@cssearth/core';
-import type { SourceKind, SourceRecord, SourceResolver } from '../sources/catalog.js';
+import { sourceCitationUrl, type SourceKind, type SourceRecord, type SourceResolver } from '../sources/catalog.js';
 import type { SourceUsage, SourceUseKind } from './source-usage.js';
 
 export const SOURCE_CREDITS_SCHEMA = 'cssearth-prepared-source-credits@2';
 /** One row of a Sources tab: a published work (its title, what it is and who publishes it, its landing page), or the files one
- * credit line supplied (the credit, how many files and the datasets they feed), which links to the first of them. Every link
- * leads to the source's own site; the object's README is the footer's link. */
+ * credit line supplied (the credit, how many files and the datasets they feed), which links to the page of the first of them.
+ * Every link leads to a page on the source's own site, never to a file; the object's README is the footer's link. */
 export interface SourceCreditRow { readonly title: string; readonly detail: string; readonly url: string;
   /** Whose site serves it (`sourceIconKey`): the key of its favicon in `site/source/source-icons.json`. */
   readonly icon: string }
@@ -33,8 +33,7 @@ const KIND_LABELS: Readonly<Record<SourceKind, string>> = { 'data-product': 'Dat
   'reference-page': 'Reference page', software: 'Software', artwork: 'Artwork' };
 const USE_ORDER: readonly SourceUseKind[] = ['product-input', 'artwork', 'method', 'shared-context', 'citation'];
 const creditRow = (source: SourceRecord): SourceCreditRow => {
-  const url = (source.links.find(link => link.role === 'landing') ?? source.links[0])?.url;
-  if (!url) throw new TypeError(`Source ${source.id} has no link for its Sources row.`);
+  const url = sourceCitationUrl(source);
   // A record without a publisher names the host that serves it.
   const from = source.publisher ?? /^https?:\/\/(?:www\.)?([^/:?#]+)/u.exec(url)?.[1];
   return Object.freeze({ title: source.title, detail: `${KIND_LABELS[source.kind]}${from ? ` · ${from}` : ''}`, url, icon: sourceIconKey(url) });

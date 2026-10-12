@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/230Athamantis/Deconv/d230Athamantis_2018-09-26T01_23_47.590_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

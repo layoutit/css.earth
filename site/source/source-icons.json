@@ -11,9 +11,17 @@
     "sourceUrl": "https://almascience.eso.org/",
     "assetUrl": "https://almascience.eso.org/++theme++alma-theme-2021/barceloneta-apple-touch-icon.png"
   },
+  "almascience.nrao.edu": {
+    "sourceUrl": "https://almascience.nrao.edu/",
+    "assetUrl": "https://almascience.nrao.edu/++theme++alma-theme-2021/barceloneta-apple-touch-icon.png"
+  },
   "almascience.org": {
     "sourceUrl": "https://almascience.nrao.edu/",
     "assetUrl": "https://almascience.nrao.edu/++theme++alma-theme-2021/barceloneta-apple-touch-icon.png"
+  },
+  "archive.eso.org": {
+    "sourceUrl": "https://archive.eso.org/cms.html",
+    "assetUrl": "https://archive.eso.org/favicon.ico"
   },
   "archive.stsci.edu": {
     "sourceUrl": "https://archive.stsci.edu/",
@@ -27,52 +35,24 @@
     "sourceUrl": "https://arxiv.org/",
     "assetUrl": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
   },
-  "asc-astropedia.s3.us-west-2.amazonaws.com": {
-    "sourceUrl": "https://aws.amazon.com/",
-    "assetUrl": "https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"
-  },
-  "asc-pds-services.s3.us-west-2.amazonaws.com": {
-    "sourceUrl": "https://aws.amazon.com/",
-    "assetUrl": "https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"
-  },
-  "assets.science.nasa.gov": {
-    "sourceUrl": "https://science.nasa.gov/",
-    "assetUrl": "https://science.nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-228x228.png"
-  },
-  "astrogeo-ard.s3-us-west-2.amazonaws.com": {
-    "sourceUrl": "https://aws.amazon.com/",
-    "assetUrl": "https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"
-  },
-  "astrogeo-ard.s3.amazonaws.com": {
-    "sourceUrl": "https://aws.amazon.com/",
-    "assetUrl": "https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"
-  },
   "astrogeology.usgs.gov": {
     "sourceUrl": "https://www.usgs.gov/",
     "assetUrl": "https://www.usgs.gov/themes/custom/usgs_tantalum/favicon.ico"
+  },
+  "bjj.mmedia.is": {
+    "sourceUrl": "https://bjj.mmedia.is/"
   },
   "cdsarc.cds.unistra.fr": {
     "sourceUrl": "https://cdsarc.cds.unistra.fr/",
     "assetUrl": "https://cdsarc.cds.unistra.fr/favicon.ico"
   },
-  "commons.wikimedia.org": {
-    "sourceUrl": "https://commons.wikimedia.org/wiki/Main_Page",
-    "assetUrl": "https://commons.wikimedia.org/static/apple-touch/commons.png"
-  },
-  "d2pn8kiwq2w21t.cloudfront.net": {
-    "sourceUrl": "https://d2pn8kiwq2w21t.cloudfront.net/"
-  },
-  "d9-wret.s3.us-west-2.amazonaws.com": {
-    "sourceUrl": "https://aws.amazon.com/",
-    "assetUrl": "https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"
+  "chandra.harvard.edu": {
+    "sourceUrl": "https://chandra.harvard.edu/",
+    "assetUrl": "https://chandra.harvard.edu/favicon.ico"
   },
   "damit.cuni.cz": {
     "sourceUrl": "https://damit.cuni.cz/",
     "assetUrl": "https://damit.cuni.cz/projects/damit/favicon.png"
-  },
-  "dap.ceda.ac.uk": {
-    "sourceUrl": "https://www.ceda.ac.uk/",
-    "assetUrl": "https://www.ceda.ac.uk/img/favicon_hu_16ebf8e88a5b85bd.png"
   },
   "data.astro.cornell.edu": {
     "sourceUrl": "https://astro.cornell.edu/",
@@ -89,10 +69,6 @@
   "data.mendeley.com": {
     "sourceUrl": "https://data.mendeley.com/",
     "assetUrl": "https://static.data.mendeley.com/favicon.ico"
-  },
-  "dataportal.eso.org": {
-    "sourceUrl": "https://www.eso.org/public/",
-    "assetUrl": "https://www.eso.org/public/archives/favicon.ico"
   },
   "dawngis.dlr.de": {
     "sourceUrl": "https://www.dlr.de/de",
@@ -131,6 +107,9 @@
   "doi:10.1051": {
     "sourceUrl": "https://www.aanda.org/"
   },
+  "doi:10.1071": {
+    "sourceUrl": "https://www.cambridge.org/"
+  },
   "doi:10.1086": {
     "sourceUrl": "https://iopscience.iop.org/",
     "assetUrl": "https://iopscience.iop.org/favicon.ico"
@@ -157,6 +136,9 @@
   "doi:10.1126": {
     "sourceUrl": "https://www.science.org/"
   },
+  "doi:10.1134": {
+    "sourceUrl": "https://link.springer.com/"
+  },
   "doi:10.1146": {
     "sourceUrl": "https://www.annualreviews.org/"
   },
@@ -176,6 +158,10 @@
     "sourceUrl": "https://archive.stsci.edu/",
     "assetUrl": "https://archive.stsci.edu/modules/stsci-www-assets/assets/favicons/mast/coast-228x228.png"
   },
+  "doi:10.2458": {
+    "sourceUrl": "https://uapress.arizona.edu/",
+    "assetUrl": "https://uapress.arizona.edu/app/themes/pilot/image/apple-touch-icon.png"
+  },
   "doi:10.25039": {
     "sourceUrl": "https://cie.co.at/",
     "assetUrl": "https://cie.co.at/themes/custom/cie/favicon.ico"
@@ -183,10 +169,6 @@
   "doi:10.26033": {
     "sourceUrl": "https://www.psi.edu/",
     "assetUrl": "https://www.psi.edu/wp-content/uploads/cropped-psi-logo-300x300.png"
-  },
-  "doi:10.26093": {
-    "sourceUrl": "https://cdsarc.cds.unistra.fr/",
-    "assetUrl": "https://cdsarc.cds.unistra.fr/favicon.ico"
   },
   "doi:10.3133": {
     "sourceUrl": "https://pubs.usgs.gov/",
@@ -199,6 +181,10 @@
     "sourceUrl": "https://iopscience.iop.org/",
     "assetUrl": "https://iopscience.iop.org/favicon.ico"
   },
+  "doi:10.48550": {
+    "sourceUrl": "https://arxiv.org/",
+    "assetUrl": "https://arxiv.org/static/browse/0.3.4/images/icons/apple-touch-icon.png"
+  },
   "doi:10.5061": {
     "sourceUrl": "https://datadryad.org/"
   },
@@ -209,6 +195,10 @@
   "doi:10.5281": {
     "sourceUrl": "https://zenodo.org/",
     "assetUrl": "https://zenodo.org/static/apple-touch-icon-180.png"
+  },
+  "doi:10.5285": {
+    "sourceUrl": "https://www.bodc.ac.uk/",
+    "assetUrl": "https://www.bodc.ac.uk/apple-touch-icon.png"
   },
   "doi:10.57780": {
     "sourceUrl": "https://www.cosmos.esa.int/",
@@ -224,10 +214,6 @@
   "echo.jpl.nasa.gov": {
     "sourceUrl": "https://www.jpl.nasa.gov/",
     "assetUrl": "https://www.jpl.nasa.gov/img/android-chrome-256x256.png"
-  },
-  "eoimages.gsfc.nasa.gov": {
-    "sourceUrl": "https://science.nasa.gov/",
-    "assetUrl": "https://science.nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/favicon-228x228.png"
   },
   "era.ed.ac.uk": {
     "sourceUrl": "https://era.ed.ac.uk/",
@@ -253,10 +239,6 @@
     "sourceUrl": "https://gea.esac.esa.int/archive/",
     "assetUrl": "https://gea.esac.esa.int/archive/images/favicon.ico"
   },
-  "gibs.earthdata.nasa.gov": {
-    "sourceUrl": "https://www.earthdata.nasa.gov/",
-    "assetUrl": "https://www.earthdata.nasa.gov/themes/custom/project/hds_earthdata/favicon.ico"
-  },
   "github.com": {
     "sourceUrl": "https://github.com/",
     "assetUrl": "https://github.githubassets.com/favicons/favicon.svg"
@@ -281,9 +263,9 @@
     "sourceUrl": "https://www.villanova.edu/university.html",
     "assetUrl": "https://www.villanova.edu/etc/designs/villanova/favicon.ico"
   },
-  "liu-se.cdn.openspaceproject.com": {
-    "sourceUrl": "https://openspaceproject.com/",
-    "assetUrl": "https://openspaceproject.com//assets/brand/favicon.webp"
+  "lweb.cfa.harvard.edu": {
+    "sourceUrl": "https://www.cfa.harvard.edu/",
+    "assetUrl": "https://www.cfa.harvard.edu/themes/cfa/static/favicons/favicon-196x196.png"
   },
   "mars.asu.edu": {
     "sourceUrl": "https://mars.asu.edu/",
@@ -300,8 +282,13 @@
     "sourceUrl": "https://naif.jpl.nasa.gov/",
     "assetUrl": "https://naif.jpl.nasa.gov/favicon.ico"
   },
-  "ndownloader.figshare.com": {
-    "sourceUrl": "https://ndownloader.figshare.com/"
+  "nasa-gibs.github.io": {
+    "sourceUrl": "https://pages.github.com/",
+    "assetUrl": "https://pages.github.com/favicon.ico"
+  },
+  "ned.ipac.caltech.edu": {
+    "sourceUrl": "https://ned.ipac.caltech.edu/",
+    "assetUrl": "https://ned.ipac.caltech.edu/sites/default/files/NEDVectorLogo_Favicon_1Text_0.png"
   },
   "noirlab.edu": {
     "sourceUrl": "https://noirlab.edu/public/",
@@ -314,10 +301,6 @@
   "observations.lam.fr": {
     "sourceUrl": "https://www.lam.fr/",
     "assetUrl": "https://www.lam.fr/wp-content/themes/lam/images/favicon.ico"
-  },
-  "occultations.org": {
-    "sourceUrl": "https://occultations.org/",
-    "assetUrl": "https://occultations.org/favicon.ico"
   },
   "oidb.jmmc.fr": {
     "sourceUrl": "https://oidb.jmmc.fr/index.html",
@@ -351,10 +334,6 @@
     "sourceUrl": "https://planetarydata.jpl.nasa.gov/",
     "assetUrl": "https://planetarydata.jpl.nasa.gov/assets/images/favicon.ico"
   },
-  "planetarymaps.usgs.gov": {
-    "sourceUrl": "https://www.usgs.gov/",
-    "assetUrl": "https://www.usgs.gov/themes/custom/usgs_tantalum/favicon.ico"
-  },
   "planetarynames.wr.usgs.gov": {
     "sourceUrl": "https://www.usgs.gov/",
     "assetUrl": "https://www.usgs.gov/themes/custom/usgs_tantalum/favicon.ico"
@@ -383,6 +362,10 @@
     "sourceUrl": "https://www.jhuapl.edu/",
     "assetUrl": "https://www.jhuapl.edu/themes/custom/jhu_apl/favicon.png"
   },
+  "sbn.psi.edu": {
+    "sourceUrl": "https://www.psi.edu/",
+    "assetUrl": "https://www.psi.edu/wp-content/uploads/cropped-psi-logo-300x300.png"
+  },
   "sbnarchive.psi.edu": {
     "sourceUrl": "https://www.psi.edu/",
     "assetUrl": "https://www.psi.edu/wp-content/uploads/cropped-psi-logo-300x300.png"
@@ -406,6 +389,10 @@
   "ssd.jpl.nasa.gov": {
     "sourceUrl": "https://www.jpl.nasa.gov/",
     "assetUrl": "https://www.jpl.nasa.gov/img/android-chrome-256x256.png"
+  },
+  "stac.astrogeology.usgs.gov": {
+    "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/",
+    "assetUrl": "https://stac.astrogeology.usgs.gov/docs/favicon/favicon.svg"
   },
   "stereo-ssc.nascom.nasa.gov": {
     "sourceUrl": "https://www.nasa.gov/",
@@ -438,17 +425,25 @@
     "sourceUrl": "https://vizier.cds.unistra.fr/",
     "assetUrl": "https://vizier.cds.unistra.fr/favicon.ico"
   },
-  "web.archive.org": {
-    "sourceUrl": "https://web.archive.org/",
-    "assetUrl": "https://web-static.archive.org/_static/images/archive.ico"
+  "www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca": {
+    "sourceUrl": "https://www.canada.ca/",
+    "assetUrl": "https://www.canada.ca/etc/designs/canada/wet-boew/assets/favicon.ico"
   },
   "www.eso.org": {
     "sourceUrl": "https://www.eso.org/public/",
     "assetUrl": "https://www.eso.org/public/archives/favicon.ico"
   },
+  "www.giss.nasa.gov": {
+    "sourceUrl": "https://www.giss.nasa.gov/",
+    "assetUrl": "https://www.giss.nasa.gov/gfx/apple-touch-icon-192x192.png"
+  },
   "www.hou.usra.edu": {
     "sourceUrl": "https://www.hou.usra.edu/",
     "assetUrl": "https://www.hou.usra.edu/favicon.ico"
+  },
+  "www.jpl.nasa.gov": {
+    "sourceUrl": "https://www.jpl.nasa.gov/",
+    "assetUrl": "https://www.jpl.nasa.gov/img/android-chrome-256x256.png"
   },
   "www.lamost.org": {
     "sourceUrl": "https://www.lamost.org/"
@@ -469,6 +464,10 @@
     "sourceUrl": "https://idp.nature.com/transit?redirect_uri=https%3A%2F%2Fwww.nature.com%2Fnature&code=2c9938f5-12d9-4f52-8f6b-5fd29f889b7e",
     "assetUrl": "https://idp.nature.com/favicon.ico"
   },
+  "www.pas.rochester.edu": {
+    "sourceUrl": "https://www.pas.rochester.edu/",
+    "assetUrl": "https://www.rochester.edu/assets/images/brand/favicon/favicon.svg"
+  },
   "www.sciencebase.gov": {
     "sourceUrl": "https://www.sciencebase.gov/",
     "assetUrl": "https://www.sciencebase.gov/favicon.ico"
@@ -483,6 +482,10 @@
   "www.stsci.edu": {
     "sourceUrl": "https://www.stsci.edu/",
     "assetUrl": "https://www.stsci.edu/modules/stsci-www-assets/assets/favicons/www/coast-228x228.png"
+  },
+  "www.usgs.gov": {
+    "sourceUrl": "https://www.usgs.gov/",
+    "assetUrl": "https://www.usgs.gov/themes/custom/usgs_tantalum/favicon.ico"
   },
   "www2.boulder.swri.edu": {
     "sourceUrl": "https://www.boulder.swri.edu/",

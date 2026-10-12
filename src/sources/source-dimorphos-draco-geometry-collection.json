@@ -17,6 +17,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pds.nasa.gov/ds-view/pds/viewCollection.jsp?identifier=urn:nasa:pds:dart:data_dracoddp",
+      "label": "PDS collection page"
+    },
+    {
+      "role": "original",
       "url": "https://pds.nasa.gov/api/search/1/products/urn%3Anasa%3Apds%3Adart%3Adata_dracoddp",
       "label": "PDS registry record"
     },

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-10-15T09_00_40.475_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

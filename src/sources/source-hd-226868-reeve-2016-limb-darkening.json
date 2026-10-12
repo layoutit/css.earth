@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/MNRAS/456/1294",
+      "label": "VizieR catalogue J/MNRAS/456/1294"
+    },
+    {
+      "role": "original",
       "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "label": "Source"
     }

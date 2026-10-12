@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pubs.usgs.gov/sim/3237/downloads/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "label": "Source"
     }

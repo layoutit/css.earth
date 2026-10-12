@@ -11,6 +11,11 @@
   ],
   "links": [
     {
+      "role": "landing",
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/",
+      "label": "Archive folder"
+    },
+    {
       "role": "archive",
       "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/eso-chajnantor.alma_1.2.xml",
       "label": "Source"

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/preflight/flat_v.lbl",
       "label": "Source"
     }

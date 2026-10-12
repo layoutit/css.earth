@@ -11,6 +11,11 @@
   ],
   "links": [
     {
+      "role": "landing",
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/",
+      "label": "Archive folder"
+    },
+    {
       "role": "archive",
       "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/eso-paranal.vlt_melipal_8m2_ut3_1.2.xml",
       "label": "Source"

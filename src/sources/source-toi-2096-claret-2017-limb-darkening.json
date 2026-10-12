@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/600/A30",
+      "label": "VizieR catalogue J/A+A/600/A30"
+    },
+    {
+      "role": "original",
       "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "label": "Source"
     }

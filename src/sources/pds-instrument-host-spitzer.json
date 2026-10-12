@@ -11,6 +11,11 @@
   ],
   "links": [
     {
+      "role": "landing",
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/instrument_host/",
+      "label": "Archive folder"
+    },
+    {
       "role": "archive",
       "url": "https://pds.nasa.gov/data/pds4/context-pds4/instrument_host/spacecraft.spitzer_1.0.xml",
       "label": "Source"

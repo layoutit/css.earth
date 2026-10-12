@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://www.stsci.edu/hst-program-info/program/?program=6549",
+      "label": "Programme page"
+    },
+    {
+      "role": "original",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/u35i0101r_c0m.fits",
       "label": "Source"
     }

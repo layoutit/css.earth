@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://archive.stsci.edu/hlsp/opal",
+      "label": "MAST collection page"
+    },
+    {
+      "role": "original",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
       "label": "Source"
     }

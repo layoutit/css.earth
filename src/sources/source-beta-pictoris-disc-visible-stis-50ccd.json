@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A114/fits/",
+      "label": "CDS catalogue folder"
+    },
+    {
+      "role": "original",
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A114/fits/Beta_Pic_STIS.fits",
       "label": "Source"
     }
