@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/ROS_V33.TF",
       "label": "Source"
     }

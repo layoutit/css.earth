@@ -351,12 +351,13 @@ const surveyTerms = { license: 'Public scientific release from the source-author
 
 function frameInput(objectId: string, frame: LamFrame, bytes: Buffer) {
   const { width, height } = readFitsImageSize(bytes);
-  return { id: `${objectId}-sphere-${frame.second.replace(/\D/gu, '')}`, path: `observations/${frame.file}`, origin: frame.url, credit: SURVEY_CREDIT, capture: surveyCapture, ...surveyTerms,
+  return { id: `${objectId}-sphere-${frame.second.replace(/\D/gu, '')}`, path: `observations/${frame.file}`, origin: frame.url, sourceUrl: `${LAM}/`, credit: SURVEY_CREDIT, capture: surveyCapture, ...surveyTerms,
     consumers: ['sphere-photograph'], width, height, datasetId: DATASET_ID, label: 'Deconvolved ZIMPOL frame',
     coverage: 'Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.' };
 }
-function adamInput(objectId: string, number: number, name: string, path: string, bytes: Buffer, archive?: { model: string; shape: string }) {
-  return { id: `${objectId}-adam-shape`, path, origin: archive?.shape ?? shapeUrl(number, name, 'adam'),
+function adamInput(objectId: string, number: number, name: string, path: string, bytes: Buffer, archive?: { source: string; model: string; shape: string }) {
+  // A reader is sent to the page that presents the file: the survey's database, or the archive's page for its copy of the model.
+  return { id: `${objectId}-adam-shape`, path, origin: archive?.shape ?? shapeUrl(number, name, 'adam'), sourceUrl: archive?.source ?? `${LAM}/`,
     credit: archive ? `${SURVEY_CREDIT}; distributed as ${archive.model} by DAMIT, Astronomical Institute of Charles University` : SURVEY_CREDIT,
     capture: surveyCapture, ...(archive ? damitTerms : surveyTerms), consumers: ['adam-terrain'],
     projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'kilometers' },

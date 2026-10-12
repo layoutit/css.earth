@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://archive.stsci.edu/hlsp/opal",
+      "label": "MAST collection page"
+    },
+    {
+      "role": "original",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
       "label": "Source"
     }

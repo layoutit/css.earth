@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/52Europa/Deconv/d52Europa_2018-07-13T07_39_56.926_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

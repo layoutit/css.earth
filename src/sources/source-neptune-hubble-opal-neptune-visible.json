@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://archive.stsci.edu/hlsp/opal",
+      "label": "MAST collection page"
+    },
+    {
+      "role": "original",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
       "label": "Source"
     }

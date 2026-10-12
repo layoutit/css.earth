@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://nasa-gibs.github.io/gibs-api-docs/access-advanced-topics/",
+      "label": "GIBS documentation"
+    },
+    {
+      "role": "original",
       "url": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
       "label": "Source"
     }

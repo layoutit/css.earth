@@ -20,6 +20,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://alasky.cds.unistra.fr/Spitzer/IRAC4/",
+      "label": "HiPS page"
+    },
+    {
+      "role": "original",
       "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSPITZER%2FIRAC4&get=record&fmt=json",
       "label": "HiPS record"
     },

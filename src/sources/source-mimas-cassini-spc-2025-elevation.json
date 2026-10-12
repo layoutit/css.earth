@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif",
       "label": "Source"
     }

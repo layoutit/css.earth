@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/ROS_OSIRIS_V15.TI",
       "label": "Source"
     }

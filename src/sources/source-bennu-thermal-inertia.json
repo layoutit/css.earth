@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.fits",
       "label": "PDS Small Bodies Node"
     },

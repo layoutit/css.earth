@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://nasa-gibs.github.io/gibs-api-docs/access-basics/",
+      "label": "GIBS documentation"
+    },
+    {
+      "role": "original",
       "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
       "label": "Source"
     }

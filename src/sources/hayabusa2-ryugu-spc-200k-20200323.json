@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
       "label": "Source"
     }

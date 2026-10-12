@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/opus/#/view=detail&detail=vg-iss-2-j-c2065221",
+      "label": "OPUS observation page"
+    },
+    {
+      "role": "original",
       "url": "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-j-c2065221.json",
       "label": "Source"
     }

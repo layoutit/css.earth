@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-08T04_58_53.920_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
+      "label": "USGS product page"
+    },
+    {
+      "role": "original",
       "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
       "label": "Source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "original",
       "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2991284369063612928&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "label": "Source"
     }

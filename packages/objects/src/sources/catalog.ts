@@ -56,6 +56,24 @@ export function sourceUrl(input: unknown): string {
   if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password) throw new TypeError('Invalid source URL.');
   return value;
 }
+/** Name endings of a file a browser downloads or shows raw, where a reader expects a page: data, tables, images, models,
+ * archives, documents and query endpoints. A link whose ending is not listed is taken for a page, so the list grows with
+ * the archives used. */
+const FILE_ENDING = /\.(?:api|asc|asset|bds|bsp|bz2|csv|cub|das|dat|dbf|dods|ecsv|fit|fits|fz|gif|glb|glsl|gz|h5|hdf|hdr|img|info|jpeg|jpg|json|lbl|lblx|mat|md|mov|mp4|nc|obj|pdf|ply|png|psv|qub|shp|stl|sum|svg|tab|tar|tf|tgz|ti|tif|tiff|tls|tpc|trj|tsv|txt|uce|vg2|vot|webp|wf|wms|wrl|xml|zip)$/iu;
+/** Pages whose address ends like a file: a repository's view of a file, a wiki's page about one. */
+const FILE_PAGE = /^https?:\/\/(?:github\.com\/[^/]+\/[^/]+\/(?:blob|tree)\/|[^/]+\/wiki\/File:)/u;
+/** Paths that answer with data whatever their name: a table service's query endpoint (TAP, VizieR ASU), a programming
+ * interface (an `api.` host, an `/api/` or `/wp-json/` folder), and a `pdf`, `file` or `datafile` folder's entries. */
+const DATA_PATH = /(?:[/-]tap\/a?sync|\/viz-bin\/asu-[a-z]+|\/(?:pdf|file|datafile)\/[^/]+)$|^https?:\/\/(?:api\.[^/]+\/|[^/]+\/(?:.*\/)?(?:api|wp-json)\/)./iu;
+/** Whether an address serves a file instead of a page. The form of an address decides; what a server answers is not asked. */
+export function isFileAddress(url: string): boolean {
+  if (FILE_PAGE.test(url)) return false;
+  const [address = ''] = url.split('#'), mark = address.indexOf('?'), path = mark < 0 ? address : address.slice(0, mark);
+  const name = path.slice(path.lastIndexOf('/') + 1), query = mark < 0 ? [] : address.slice(mark + 1).split('&');
+  if (FILE_ENDING.test(name) || query.some(pair => /^download(?:=|$)/u.test(pair) || /^format=(?:csv|fits|json|text|tsv|txt|votable|xml)$/iu.test(pair) || FILE_ENDING.test(pair))) return true;
+  // A page's own name overrules its folder: a meeting's `program.htm` sits in a `pdf` folder.
+  return !/\.(?:s?html?|php|aspx?|jsp)$/iu.test(name) && (name === 'download' || name === 'file_downloaded' || DATA_PATH.test(path));
+}
 export function sourceDate(input: unknown, full = false): string {
   const value = sourceText(input);
   if (!(full ? /^\d{4}-\d{2}-\d{2}$/ : /^\d{4}(?:-\d{2}(?:-\d{2})?)?$/).test(value)) throw new TypeError('Invalid source date.');
@@ -118,6 +136,9 @@ export function parseSourceCatalog(raw: unknown): SourceCatalog {
     const links = sourceArray(record.links, raw => { const link = sourceObject(raw, ['role','url','label']); return Object.freeze({role: sourceEnum(link.role, ['landing','archive','original','mirror','rights']), url: sourceUrl(link.url), label: sourceText(link.label)}); });
     sourceUnique(links.map(link => `${link.role}:${link.url}`), 'link');
     if (!links.some(link => link.role !== 'rights')) throw new TypeError('Source needs a citation link.');
+    // The Sources tab sends its reader to this link (sourceCitationUrl). 9,983 of 16,476 records sent them to a download or a query address until 2026-10-12.
+    const reader = sourceCitationUrl({ links });
+    if (isFileAddress(reader)) throw new TypeError(`Source ${String(record.id)} sends its reader to a file, ${reader}. Add a landing link to the page that presents the file, and keep the file as its original link.`);
     const identityLevel = sourceEnum(record.identityLevel, ['work','release']);
     if (identityLevel === 'release' && record.version === undefined) throw new TypeError('A release needs its evidenced version.');
     const relations = sourceArray(record.relations, raw => { const relation = sourceObject(raw, ['kind','catalogueId','evidence']); return Object.freeze({ kind: sourceEnum(relation.kind, ['version-of','part-of','derived-from']), catalogueId: sourceId(relation.catalogueId), evidence: sourceText(relation.evidence) }); });
@@ -146,4 +167,5 @@ export function sourceResolver(catalog: SourceCatalog): SourceResolver {
   return Object.freeze(Object.fromEntries(catalog.records.map(record => [record.id, record])));
 }
 
-export function sourceCitationUrl(source: SourceRecord): string { return (source.links.find(link => link.role === 'landing') ?? source.links.find(link => link.role !== 'rights'))!.url; }
+/** The link a reader follows: the landing page, else the first citation link. The parser refuses a record where it is a file. */
+export function sourceCitationUrl(source: Pick<SourceRecord, 'links'>): string { return (source.links.find(link => link.role === 'landing') ?? source.links.find(link => link.role !== 'rights'))!.url; }

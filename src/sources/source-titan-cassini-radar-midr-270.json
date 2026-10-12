@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
       "label": "Source"
     }

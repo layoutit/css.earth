@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img",
       "label": "Source"
     }

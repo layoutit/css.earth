@@ -6,6 +6,11 @@
   "identifiers": [],
   "links": [
     {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "label": "JPL page"
+    },
+    {
       "role": "archive",
       "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
       "label": "Internet Archive copy, 2019-08-03"

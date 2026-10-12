@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/albedo_arrokoth4_fp36h2_masked1.fits",
       "label": "Source"
     }

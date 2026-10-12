@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m",
+      "label": "USGS product page"
+    },
+    {
+      "role": "original",
       "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
       "label": "Source"
     }

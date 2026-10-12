@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://dawngis.dlr.de/data/Vesta/dtm_vesta.php",
+      "label": "DLR data page"
+    },
+    {
+      "role": "original",
       "url": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip",
       "label": "Source"
     }

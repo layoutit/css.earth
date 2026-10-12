@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/overview/WASP-107%20b",
+      "label": "NASA Exoplanet Archive overview"
+    },
+    {
+      "role": "original",
       "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%27WASP-107+b%27+order+by+centralwavelng&format=csv",
       "label": "Source"
     }

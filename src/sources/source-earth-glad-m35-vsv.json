@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/GLAD-M35.r0.1-n4c.nc",
       "label": "Source"
     }

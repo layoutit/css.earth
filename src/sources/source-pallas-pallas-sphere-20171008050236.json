@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-08T05_02_36.395_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

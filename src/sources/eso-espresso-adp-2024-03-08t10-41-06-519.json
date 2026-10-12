@@ -11,6 +11,11 @@
   ],
   "links": [
     {
+      "role": "landing",
+      "url": "https://archive.eso.org/dataset/ADP.2024-03-08T10:41:06.519",
+      "label": "ESO dataset page"
+    },
+    {
       "role": "original",
       "url": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
       "label": "ESO native FITS spectrum"

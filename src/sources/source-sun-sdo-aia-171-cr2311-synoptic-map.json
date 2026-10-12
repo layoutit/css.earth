@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://sdo.gsfc.nasa.gov/data/synoptic/",
+      "label": "SDO synoptic data page"
+    },
+    {
+      "role": "original",
       "url": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits",
       "label": "Source"
     }

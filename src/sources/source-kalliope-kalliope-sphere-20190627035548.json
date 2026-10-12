@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2019-06-27T03_55_48.285_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }
