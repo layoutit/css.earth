@@ -288,7 +288,7 @@ test('a stack of patch runs paints the run farthest from the camera first, and t
   assert.ok(stack('far') > stack('near'), `from -z the run at -1 paints over: ${stack('far')} over ${stack('near')}`);
 });
 
-test('a decoded stack joins its runs unseen, one and then two a frame, and takes the picture when it is whole', async t => {
+test('a decoded stack joins its runs unseen, a full run of leaves and then two a frame, and takes the picture when it is whole', async t => {
   // The document's frames, run by the test.
   const frames: ((time: number) => void)[] = [];
   let now = 0;
@@ -306,8 +306,9 @@ test('a decoded stack joins its runs unseen, one and then two a frame, and takes
     schema: 'cssearth-css-volume@1', id: 'fixture',
     frame: { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
       metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
-    anchors: [], bankViews: views.map(view => view.axis === 'z' ? { ...view, sceneSizes: [1, 1, 1, 1, 1] } : view),
-    stacks: views.map(({ axis }) => ({ axis, leaves: (axis === 'z' ? ['a', 'b', 'c', 'd', 'e'] : ['only']).map(id => ({ id: `${axis}-${id}`, centerUnits: [0, 0, 0] as [number, number, number],
+    // Three full runs, then four of half as many leaves.
+    anchors: [], bankViews: views.map(view => view.axis === 'z' ? { ...view, sceneSizes: [24, 24, 24, 12, 12, 12, 12] } : view),
+    stacks: views.map(({ axis }) => ({ axis, leaves: (axis === 'z' ? Array.from({ length: 120 }, (_, index) => String(index)) : ['only']).map(id => ({ id: `${axis}-${id}`, centerUnits: [0, 0, 0] as [number, number, number],
       texturePath: `${axis}.png`, widthPx: 1, heightPx: 1, style })) })),
     resources: views.map(({ axis }) => ({ path: `${axis}.png`, bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {},
@@ -321,16 +322,16 @@ test('a decoded stack joins its runs unseen, one and then two a frame, and takes
     viewport: { focalPixels: 600, principalOffsetPixels: [0, 0] },
   });
   publish([0, 0, 0, 1]);
-  assert.deepEqual([stack.children.length, joined(), stack.style.visibility], [5, 0, 'hidden'], 'decoding: no run is in layout');
+  assert.deepEqual([stack.children.length, joined(), stack.style.visibility], [7, 0, 'hidden'], 'decoding: no run is in layout');
   for (const settle of waiting.splice(0)) settle();
   await new Promise(done => setTimeout(done, 0));
   assert.deepEqual([joined(), stack.style.visibility, stack.style.opacity, runtime.drawing()], [0, 'visible', '0', false], 'decoded: its runs join from the next frame, unseen');
   frame();
-  assert.deepEqual([joined(), stack.style.opacity], [1, '0'], 'the first frame makes one run');
+  assert.deepEqual([joined(), stack.style.opacity], [1, '0'], 'the first frame makes one full run');
   frame();
-  assert.deepEqual([joined(), stack.style.opacity, drawn.mock.callCount()], [3, '0', 0]);
+  assert.deepEqual([joined(), stack.style.opacity, drawn.mock.callCount()], [3, '0', 0], 'the next makes two full runs');
   frame();
-  assert.deepEqual([joined(), stack.style.opacity, runtime.drawing(), drawn.mock.callCount()], [5, '0.999', true, 1], 'whole: it is shown, and who waits for it is told once');
+  assert.deepEqual([joined(), stack.style.opacity, runtime.drawing(), drawn.mock.callCount()], [7, '0.999', true, 1], 'four runs of half the leaves are one frame; whole, it is shown, and who waits for it is told once');
   // Turned away to a stack of one run: that one is whole in its first frame, and the stack left takes its runs out of layout.
   publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
   for (const settle of waiting.splice(0)) settle();
