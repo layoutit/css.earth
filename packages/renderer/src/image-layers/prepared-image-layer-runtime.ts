@@ -31,8 +31,10 @@ function withinReach(sheet: Sheet, p: readonly number[], reach: number): boolean
 }
 
 /** Transparent prepared layer banks. No opaque viewport matte is allowed here. */
-/** How many runs of a stack join the layer tree in its first frame, and in each frame after (`join`). */
-const JOIN_FIRST_RUNS = 1, JOIN_RUNS = 2;
+/** How many leaves of a stack join the layer tree in its first frame, and in each frame after (`join`): whole runs, and
+ * at least one. A run holds 24 leaves at most (the bake's SCENE_MOST_PATCHES), so these are the one run and the two
+ * runs a frame the pacing was measured with. */
+const JOIN_FIRST_LEAVES = 24, JOIN_LEAVES = 48;
 
 export function mountPreparedCssImageLayers({ host, before, payload, resolveResource, onDrawn }: {
   host: HTMLElement; before: Element; payload: PreparedCssImageLayers; resolveResource(path: string): string;
@@ -176,14 +178,17 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
    * to 48 ms, and the stack shown after them one of 18 to 39 ms; three a frame, 60 to 62 ms; four runs a frame in view
    * as they joined, 47 to 77 ms (2026-10-06). Safari makes the surfaces of layers that join under an opacity of 0 and
    * keeps them; what the stack replaces stays on screen meanwhile (`mix`). A stack of one run joins in one frame, as
-   * before. */
+   * before. The share is counted in leaves: the Homunculus's 149 runs of 12 at most, two a frame, kept its lobes out of
+   * the flight to it until 2.6 s after the click, where one scene of all showed them from 1.5 s (2026-10-12). */
   const join = createSettlePacer(() => {
     if (destroyed) return 0;
     for (const bank of banks) {
       if (!bank.drawn || !bank.ready || whole(bank)) continue;
-      const share = bank.joined === 0 ? JOIN_FIRST_RUNS : JOIN_RUNS;
-      let written = 0;
-      while (written < share && bank.joined < bank.runs.length) { bank.runs[bank.joined++]!.camera.style.display = ''; written++; }
+      const share = bank.joined === 0 ? JOIN_FIRST_LEAVES : JOIN_LEAVES;
+      let written = 0, leaves = 0;
+      while (bank.joined < bank.runs.length && (written === 0 || leaves + bank.runs[bank.joined]!.leaves.length <= share)) {
+        const run = bank.runs[bank.joined++]!; run.camera.style.display = ''; leaves += run.leaves.length; written++;
+      }
       if (whole(bank) && mixed) { mix(mixed); onDrawn?.(); }
       return written;
     }
