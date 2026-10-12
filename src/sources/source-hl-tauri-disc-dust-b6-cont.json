@@ -1,0 +1,55 @@
+{
+  "id": "source-hl-tauri-disc-dust-b6-cont",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "ALMA HL Tau Band 6 · 2014 Long Baseline Campaign Science Verification continuum image",
+  "identifiers": [
+    {
+      "type": "ALMA project",
+      "value": "2011.0.00015.SV"
+    },
+    {
+      "type": "Archive product",
+      "value": "HLTau_B6cont_mscale_ap.image.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/",
+      "label": "ALMA Band 6 Science Verification release"
+    },
+    {
+      "role": "original",
+      "url": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/HLTau_Band6_ReferenceImages.tgz",
+      "label": "Original FITS image bundle"
+    },
+    {
+      "role": "rights",
+      "url": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/HLTau_Band6_Readme",
+      "label": "Release notes and required acknowledgement"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hl-tauri-disc/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA (ESO/NAOJ/NRAO), project 2011.0.00015.SV; ALMA Partnership et al. (2015), ApJL 808, L3",
+      "scope": "The dust b6 cont input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ALMA science-verification data, reused with the acknowledgement specified by the release; no Creative Commons identifier is stated.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "HLTau_Band6_Readme, publications section."
+    }
+  ],
+  "version": "Band 6 reference image, 2015-02-11"
+}

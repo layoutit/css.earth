@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "hl-tauri-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/hl-tauri-disc/source/volume-dust.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/hl-tauri-disc/source/provenance.json"
+    },
+    {
+      "path": "src/objects/hl-tauri-disc/source/density-dust.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      67.91017023147441,
+      18.2324938751983
+    ],
+    "distancePc": 140.00000000019367,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.007142857142847262
+  },
+  "sourceUrl": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/",
+  "description": "The nested bright and dark dust rings around HL Tauri, in their own emission at 1.3 millimeters, observed by ALMA in 2014. The image supplies the rings and gaps; a published inclined plane and a stated 1 au Gaussian height supply their modeled depth.",
+  "defaultDataset": "dust",
+  "framingRadiusUnits": 180,
+  "attachedTo": "hl-tauri",
+  "acceptedLabResult": "hl-tauri-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/hl-tauri-disc/source/volume-dust.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dust",
+      "label": "ALMA · planet-forming rings, 1.3 mm",
+      "sourceUrl": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/",
+      "recipe": {
+        "path": "src/objects/hl-tauri-disc/source/volume-dust.json"
+      }
+    }
+  ]
+}

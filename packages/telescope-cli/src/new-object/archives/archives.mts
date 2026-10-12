@@ -1,6 +1,6 @@
 /** Every archive the star generator reads, behind one small fetch interface so the tests run offline on fixtures. Each call names
  * the URL it read; a failed request says which archive, which URL and which status. */
-import { requireString } from '@cssearth/core';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { assertRangeResponse, rangeRequestHeader, type SourceRange } from '@cssearth/objects/node';
 import type { CataloguePosition } from '../spec-types.mts';
 import type { Archive, CatalogueRow } from './archive.mts';
@@ -148,7 +148,13 @@ export async function fetchCatalogueRow(archive: Archive, position: CataloguePos
   if (position.archive === 'paper') {
     const columns = position.columns!, ra = sexagesimal(position.row[columns.ra]!) * 15, dec = sexagesimal(position.row[columns.dec]!);
     if (!(ra >= 0 && ra < 360 && Math.abs(dec) <= 90)) throw new RangeError(`${where}: ${columns.ra} ${position.row[columns.ra]}, ${columns.dec} ${position.row[columns.dec]} is not a place on the sky.`);
-    return { catalogue: position.catalogue, tsv: '', form: {}, cells: position.row, ra, dec, columns, archive: 'DOI', paper: { url: position.url }, epoch: 2000,
+    const motion = (column: string) => {
+      const cell = position.row[column], value = Number(cell);
+      if (!cell?.trim() || !Number.isFinite(value)) throw new TypeError(`${where}: the paper's row has no finite proper motion in ${column}.`);
+      return value;
+    };
+    return { catalogue: position.catalogue, tsv: '', form: {}, cells: position.row, ra, dec, columns, archive: 'DOI', paper: { url: position.url }, epoch: position.motion?.epoch ?? 2000,
+      ...(position.motion ? { pmra: motion(position.motion.ra), pmdec: motion(position.motion.dec) } : {}),
       words: `${position.catalogue} row ${Object.entries(position.row).map(([column, cell]) => `${column} = ${cell}`).join(', ')}` };
   }
   // The response's dated comment lines and blank lines are dropped so the archived bytes are stable (CATALOGUE_ROW_REPLACEMENTS).
@@ -221,8 +227,14 @@ export function parseCrossref(json: string, doi: string, url: string): Publicati
   const message = (JSON.parse(json) as { message?: Record<string, any> }).message;
   if (!message) throw new TypeError(`DOI ${doi}: Crossref returned no record.`);
   const title = requireString(message.title?.[0], `DOI ${doi} title`), year = String(message.issued?.['date-parts']?.[0]?.[0] ?? '');
-  // A collaboration is listed by one name, with no given and family name (the Gaia Collaboration's papers).
-  const creators = (message.author ?? []).map((a: { given?: string; family?: string; name?: string }) => clean(a.family ? `${a.given ?? ''} ${a.family}` : a.name ?? a.given ?? ''));
+  const creators = requireArray(message.author ?? [], `DOI ${doi} authors`).flatMap(value => {
+    const author = requireRecord(value, `DOI ${doi} author`);
+    const group = author.name === undefined || author.name === '' ? '' : requireString(author.name, `DOI ${doi} group author`);
+    const person = [author.given, author.family].filter(part => part !== undefined && part !== null && part !== '')
+      .map(part => requireString(part, `DOI ${doi} author name`)).join(' ');
+    const name = clean(group || person);
+    return name ? [name] : [];
+  });
   const container = message['container-title']?.[0], volume = message.volume, page = message.page ?? message['article-number'];
   return { id: `doi-${doi.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/-$/u, '')}`, title: clean(title), creators, year, url, doi,
     ...(container ? { publisher: clean([container, volume, page].filter(Boolean).join(' ')) } : {}) };

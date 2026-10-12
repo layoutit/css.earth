@@ -87,7 +87,7 @@ export function placement(spec: StarSpec, row: GaiaRow | CatalogueRow) {
     const parsecs = spec.distance.value, kmPerSecondPerMas = 4.74047 * parsecs / 1000;
     return { parsecs, source: `${spec.distance.source} (${spec.distance.url}): ${spec.distance.value}${spec.distance.uncertainty ? ` +/- ${spec.distance.uncertainty}` : ''} pc; Gaia DR3 cannot see the star`,
       readme: `distance ${parsecs < 100 ? parsecs.toFixed(2) : Math.round(parsecs).toLocaleString('en-US')} pc from ${spec.distance.source}`,
-      properMotion: row.pmra !== undefined ? { ra: row.pmra, dec: row.pmdec!, source: `VizieR ${row.words} (same row): ${row.pmra}, ${row.pmdec} mas/yr` } : { ra: 0, dec: 0, source: `${row.words} measures no proper motion; zero is assumed (at ${Math.round(parsecs).toLocaleString('en-US')} pc, 1 mas/yr would be ${Math.round(kmPerSecondPerMas).toLocaleString('en-US')} km/s across the sky)` },
+      properMotion: row.pmra !== undefined ? { ra: row.pmra, dec: row.pmdec!, source: `${row.archive} ${row.words} (same row): ${row.pmra}, ${row.pmdec} mas/yr` } : { ra: 0, dec: 0, source: `${row.words} measures no proper motion; zero is assumed (at ${Math.round(parsecs).toLocaleString('en-US')} pc, 1 mas/yr would be ${Math.round(kmPerSecondPerMas).toLocaleString('en-US')} km/s across the sky)` },
       cited: spec.distance };
   }
   const parallax = row.parallax === undefined ? undefined : { value: row.parallax, error: row.parallaxError!, sigma: row.parallax / row.parallaxError!, ruwe: row.ruwe! };

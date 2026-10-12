@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hl-tauri",
+  "angularDiameterMas": 0.46,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 4,804,531 km at 140.00 pc = 0.46 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 140,
+  "distanceSource": "The 140 pc distance adopted by ALMA Partnership et al. (2015), Section 1, and Pinte et al. (2016), Section 1. The package uses the published radio position; Gaia astrometry is not used.",
+  "radiusKm": 4804531.1,
+  "radiusSource": "Radius 6.906038653092741 solar radii from Model radius derived from Pinte et al. (2016), Section 3.1: L = 11 solar luminosities and T = 4000 K; R/Rsun = sqrt(11) (5772/4000)^2, using the IAU nominal solar temperature. No resolved stellar radius is measured here (https://doi.org/10.3847/0004-637X/816/1/25): 4,804,531 km at 695,700 km per solar radius. Mass 1.7 solar masses from Pinte et al. (2016), Sections 3.1 and 5: central mass inferred from the CO and HCO+ gas kinematics (https://doi.org/10.3847/0004-637X/816/1/25); GM is that mass times the JPL solar GM. Temperature 4000 K from Pinte et al. (2016), Section 3.1: adopted stellar effective temperature, a model input (https://doi.org/10.3847/0004-637X/816/1/25). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4000,
+  "effectiveTemperatureSource": "Pinte et al. (2016), Section 3.1: adopted stellar effective temperature, a model input (https://doi.org/10.3847/0004-637X/816/1/25)",
+  "surfaceGravityLogg": 2.99,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hl-tauri.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.990, rounded to two decimals",
+  "spectralType": "K5",
+  "spectralTypeSource": "SIMBAD, V* HL Tau: spectral type K5 (2004ApJ...616..998W)",
+  "objectType": "Orion Variable",
+  "objectTypePath": "* > Y*O > Or*",
+  "objectTypeSource": "SIMBAD, V* HL Tau: main object type Or*, Orion Variable",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "An unresolved reference sphere at a model radius derived from the adopted stellar luminosity and temperature, colored with a 4000 K blackbody; no photospheric image is claimed."
+  }
+}

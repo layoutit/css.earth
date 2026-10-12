@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hl-tauri",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HL Tauri",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4804531.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hl-tauri-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HL Tauri",
+      "classification": "star",
+      "color": "#ffd3a5",
+      "distanceAu": 28877072.9,
+      "description": "A young star surrounded by a disc of bright dust rings and dark gaps.",
+      "systemName": "HL Tauri system",
+      "aliases": [
+        "HL Tau",
+        "V* HL Tau"
+      ],
+      "order": 5848,
+      "context": {
+        "order": 5845
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1542997624205654300,
+        3801880757855104000,
+        1351597966541279500
+      ],
+      "presentationToReference": [
+        0.35717947396257843,
+        0.11765997116341045,
+        0.9265953564343183,
+        0.8800750875167787,
+        0.28990825255257235,
+        -0.37605989607275125,
+        0.31287483713483616,
+        -0.9497943652642604,
+        3.3227472198102066e-7
+      ],
+      "orbitUpReference": [
+        -0.11765997116341045,
+        -0.28990825255257235,
+        0.9497943652642604
+      ],
+      "metersPerUnit": 15498487.41935484,
+      "bodyRadiusM": 4804531100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
