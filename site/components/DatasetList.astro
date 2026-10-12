@@ -4,7 +4,6 @@ import DatasetLegend from './DatasetLegend.astro';
 import DatasetThumbnail from './DatasetThumbnail.astro';
 import DatasetDescription from './DatasetDescription.astro';
 import SequencePlayer from './SequencePlayer.astro';
-import SelectedContent from './SelectedContent.astro';
 import { sidebarThumbnail } from '../content/sidebar-thumbnails.mts';
 interface Props {
   objectId: string;
@@ -38,7 +37,7 @@ const defaultControl = datasets.controls.find(dataset => dataset.id === datasets
 const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultControl))?.id : defaultControl?.id;
 // A system's card lists the datasets authored for the whole system (ObjectInformationPanel.astro). When the body opens on
 // a dataset of its own, that dataset is the system's "Off": the same control, named there for what it does, so the card
-// always shows which entry is selected, as the Observable Universe's own Off does.
+// always shows which entry is selected, as the Observable Universe's own Off does. Selected there, it shows no description.
 const systemOffId = !page && defaultControl && !defaultControl.systemDataset && datasets.controls.some(dataset => dataset.systemDataset) ? defaultListedId : undefined;
 import Detached from './Detached.astro';
 ---
@@ -101,12 +100,9 @@ import Detached from './Detached.astro';
         id={`${objectId}-${dataset.id}-details`}
         data-dataset-details={page ? undefined : dataset.id}
         data-system-dataset-details={!page && dataset.systemDataset ? dataset.id : undefined}
-        data-system-off-details={dataset.id === systemOffId ? '' : undefined}
         data-page-dataset-details={page ? dataset.id : undefined}
         hidden={dataset.id !== datasets.defaultDataset}
       >
-        {dataset.id === systemOffId && <div data-system-off><SelectedContent title="Bodies and orbits only"
-          description="The system's bodies and their orbits, with none of its datasets drawn over them." /></div>}
         <DatasetDescription {dataset}>
           {dataset.texture && <div
               class="object-surface-minimap"

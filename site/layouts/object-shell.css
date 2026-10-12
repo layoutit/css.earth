@@ -2013,7 +2013,8 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     padding: 12px 0 20px;
   }
   /* The chosen dataset follows its list, under the list's own rule. */
-  .object-information-panel > .object-dataset-content > .object-dataset-details { margin-top: 12px; }
+  .object-information-panel > .object-dataset-content > .object-dataset-details,
+  .object-information-panel[data-card-subject="system"] > .object-dataset-content[data-system-view-datasets] [data-system-dataset-details] { margin-top: 12px; }
 
   /* The focus card's datasets are one panel: it takes the right, and the factsheet rises beside it. */
   .object-prepared-information-panel > .object-selected-panel,

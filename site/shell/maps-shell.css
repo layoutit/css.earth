@@ -610,15 +610,14 @@
 /* The system's datasets come before its tabs and its body list, as on the card it had. */
 .object-information-panel[data-card-subject="system"] > :is(.object-card-tabs, .object-card-tabpanel)[data-view-part="system"] { order: 1; }
 /* The system's card shows the datasets authored for the whole system (a debris disc) and its gallery, not the star's own. */
-.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] :is([data-dataset-option]:not([data-system-dataset], [data-system-dataset-off]), [data-dataset-details]:not([data-system-dataset-details], [data-system-off-details]), .object-mobile-information-heading),
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] :is([data-dataset-option]:not([data-system-dataset], [data-system-dataset-off]), [data-dataset-details]:not([data-system-dataset-details]), .object-mobile-information-heading),
 .object-information-panel[data-card-subject="system"] > [data-system-view-datasets] > summary {
   display: none !important;
 }
-/* The dataset the body opens on is the system's "Off" (DatasetList.astro): the same control and details, with the name
-   and the text they have on the system's card. */
+/* The dataset the body opens on is the system's "Off" (DatasetList.astro): the same control, with the name it has on the
+   system's card. Its details are the body's, so the rule above hides them there and Off shows no description. */
 .object-information-panel:not([data-card-subject="system"]) [data-system-off],
-.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] [data-system-dataset-off] :is(.object-dataset-label, .object-dataset-detail):not([data-system-off]),
-.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] [data-system-off-details] > :not([data-system-off]) {
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] [data-system-dataset-off] :is(.object-dataset-label, .object-dataset-detail):not([data-system-off]) {
   display: none !important;
 }
 .object-results-scroll .object-empty {
@@ -770,7 +769,8 @@
 /* Dataset sections are no longer accordions; own their spacing explicitly. */
 .object-dataset-content > .object-datasets { padding-bottom: 0; }
 .object-card-tabpanel .object-observation-controls { padding-bottom: 0; }
-.object-dataset-content > .object-dataset-details {
+.object-dataset-content > .object-dataset-details,
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] [data-system-dataset-details] {
   position: relative;
   width: auto;
   /* The dataset rows end 4px above this box and its title's line starts 1px inside its padding. */
@@ -779,7 +779,8 @@
   padding: calc(var(--explorer-divider-gap) + var(--explorer-divider-width) + 1px) 0 0;
   border: 0;
 }
-.object-dataset-content > .object-dataset-details::before {
+.object-dataset-content > .object-dataset-details::before,
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] [data-system-dataset-details]::before {
   content: '';
   position: absolute;
   top: 0;
@@ -787,6 +788,10 @@
   left: calc(-1 * var(--explorer-card-padding-inline-start));
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
+/* On the system's card the selected system dataset's details draw that box themselves. "Off" has no details there, so
+   the list ends with no divider and no empty space under it. */
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] > .object-dataset-details { min-height: 0; margin-top: 0; padding-top: 0; }
+.object-information-panel[data-card-subject="system"] > [data-system-view-datasets] > .object-dataset-details::before { content: none; }
 .object-card-tabpanel :is(.object-surface-minimap, .object-dataset-legend-panel, .object-facility-preview) + .object-dataset-details-copy { margin-top: 12px; margin-inline-end: 0; }
 .object-card-tabpanel .object-dataset-legend-panel { width: 100%; min-height: 28px; }
 /* A sequence plays over the bottom of its map like a short video: segments above, play and step label below. */
