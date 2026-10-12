@@ -1,23 +1,23 @@
 {
   "schema": "cssearth-volume-recipe@1",
   "grid": {
-    "path": "density-dust-ring-0.ktx2",
+    "path": "density-dust-ring.ktx2",
     "dimensions": [
       181,
       181,
-      61
+      42
     ],
     "encoding": "sqrt-density-unorm8",
     "bounds": {
       "min": [
         -123.6063609086165,
         -123.6063609086165,
-        -41.65188087530467
+        -28.200000000000003
       ],
       "max": [
         123.6063609086165,
         123.6063609086165,
-        41.65188087530467
+        28.200000000000003
       ]
     }
   },
@@ -56,17 +56,17 @@
     ],
     "absorption": [],
     "emissionTransfer": "shared-opacity",
-    "exposureGain": 0.11579099695535723
+    "exposureGain": 0.21745389040586482
   },
   "bake": {
     "sliceCounts": {
       "x": 0,
       "y": 0,
-      "z": 1
+      "z": 48
     },
     "unitsPerSourceUnit": 1,
     "imageWidth": 181,
-    "samplesPerSlab": 61,
+    "samplesPerSlab": 8,
     "cropTransparent": true,
     "opticalWeight": 1,
     "imageEncoding": {
@@ -106,12 +106,12 @@
       "min": [
         -123.6063609086165,
         -123.6063609086165,
-        -41.65188087530467
+        -28.200000000000003
       ],
       "max": [
         123.6063609086165,
         123.6063609086165,
-        41.65188087530467
+        28.200000000000003
       ]
     }
   }

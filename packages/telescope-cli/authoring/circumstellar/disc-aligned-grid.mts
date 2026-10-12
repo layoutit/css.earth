@@ -14,9 +14,9 @@ export function discGridRotation(model: Pick<DiscModel, 'inclinationDeg' | 'posi
 }
 
 /** One of the planes a column's light is shared between: the grid holds only this part of the density, out to
- * `planarHalfUnits` in its plane (the whole sky plane when absent). `rotation` is the grid's own, when it is not the
- * model's plane (a sheet of a fan about it); `columns` are the columns already normalised by the whole density. */
-export interface DiscGridPart { readonly weight: (x: number, y: number, z: number) => number; readonly planarHalfUnits?: number; readonly rotation?: WorldRotation; readonly columns?: NormalisedColumns }
+ * `planarHalfUnits` in its plane (the whole sky plane when absent). `columns` are the columns already normalised by the
+ * whole density. */
+export interface DiscGridPart { readonly weight: (x: number, y: number, z: number) => number; readonly planarHalfUnits?: number; readonly columns?: NormalisedColumns }
 
 /** Each measured sky column over the density along its sight line: what a point of the column holds per unit of density.
  * A column the density leaves empty is dropped, and counted. */
@@ -54,7 +54,7 @@ export function alignDiscGrid(sky: Pick<SkyPlane, 'size' | 'halfUnits' | 'step'>
   const planar = part?.planarHalfUnits ?? half, weigh = part?.weight ?? density;
   if (!(planar > 0 && planar <= half)) throw new RangeError('A part of the disc lies inside the sky plane.');
   const width = part?.planarHalfUnits === undefined ? 2 * size : Math.ceil(2 * planar / (step / 2)), depth = Math.ceil(2 * halfHeightUnits / (step / 2));
-  const dimensions: [number, number, number] = [width, width, depth], rotation = part?.rotation ?? discGridRotation(model);
+  const dimensions: [number, number, number] = [width, width, depth], rotation = discGridRotation(model);
   const bounds = { min: [-planar, -planar, -halfHeightUnits] as [number, number, number], max: [planar, planar, halfHeightUnits] as [number, number, number] };
   const raw = new Uint8Array(width * width * depth * 4);
   const column = (values: Float64Array, x: number, y: number) => {

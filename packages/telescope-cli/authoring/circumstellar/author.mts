@@ -22,7 +22,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type EdgeOnReconstruction, type CircumstellarOpacity } from '@cssearth/objects';
 import { alignDiscGrid, normaliseColumns } from './disc-aligned-grid.mts';
-import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, reachAbovePlane, ringLightBeyond, tiltedRingDensity, tiltedRingFan, type TiltedRing } from './tilted-ring.mts';
+import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, reachAbovePlane, ringLightBeyond, tiltedRingDensity, tiltedRingGrid, type TiltedRing } from './tilted-ring.mts';
 import { jwstAcquisition } from './jwst-acquisition.mts';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -313,8 +313,8 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
 
 const compass = (positionAngleDeg: number) => ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(((positionAngleDeg % 360) + 360) % 360 / 45) % 8]!;
 /** What a dataset's record says of its tilted ring: the published plane, and how its light was told from the outer disc's. */
-const tiltedRingReading = (ring: TiltedRing, measured: { ridgeUnits: number; endsUnits: number; mutualTiltDeg: number; reachUnits: number; lightBeyondGrid: number; fanTiltDeg?: number }) =>
-  ` An inner ring lies in a plane of its own: tilted ${ring.inclinationDeg}° with nodes at position angle ${ring.positionAngleDeg}° and its ${compass(ring.nearSidePositionAngleDeg)} side nearer (${ring.citation}; ${ring.nearSideSource}), ${measured.mutualTiltDeg.toFixed(0)}° from the disc's plane. Its light is what the image's median brightness in circles about its published sky centre (${ring.skyCentreSource}) holds above the level of the gap beyond it, out to ${measured.endsUnits.toFixed(0)} au from that centre, where the gap is lowest; its ridge lies ${measured.ridgeUnits.toFixed(0)} au from the centre. That light is drawn on the ring's plane, which holds the star, with a ${ring.heightUnits} au Gaussian height (${ring.heightSource}); the disc's profile is measured on the image less it, so no light is drawn twice. ${measured.fanTiltDeg !== undefined ? `It is drawn on five sheets through the star: its plane, and four tilted ${measured.fanTiltDeg.toFixed(1)}° from it, the angle its height subtends at its ridge, two about each of two axes in the plane. A point's light is shared among them by its distance from each, so none is drawn twice, and seen along the plane the sheets tilted across the view show the ring's height. The fan is a display model of that height` : `The ring's ridge, with three of its heights, reaches ${measured.reachUnits.toFixed(1)} au from the disc's plane; ${measured.lightBeyondGrid > 0 ? `its faint skirt climbs past the grid's height, and the ${(100 * measured.lightBeyondGrid).toFixed(2)}% of the ring's light that lies there is not drawn` : 'the grid holds all of its light'}`}.`;
+const tiltedRingReading = (ring: TiltedRing, measured: { ridgeUnits: number; endsUnits: number; mutualTiltDeg: number; reachUnits: number; lightBeyondGrid: number; sheetsApartUnits?: number }) =>
+  ` An inner ring lies in a plane of its own: tilted ${ring.inclinationDeg}° with nodes at position angle ${ring.positionAngleDeg}° and its ${compass(ring.nearSidePositionAngleDeg)} side nearer (${ring.citation}; ${ring.nearSideSource}), ${measured.mutualTiltDeg.toFixed(0)}° from the disc's plane. Its light is what the image's median brightness in circles about its published sky centre (${ring.skyCentreSource}) holds above the level of the gap beyond it, out to ${measured.endsUnits.toFixed(0)} au from that centre, where the gap is lowest; its ridge lies ${measured.ridgeUnits.toFixed(0)} au from the centre. That light is drawn on the ring's plane, which holds the star, with a ${ring.heightUnits} au Gaussian height (${ring.heightSource}); the disc's profile is measured on the image less it, so no light is drawn twice. ${measured.sheetsApartUnits !== undefined ? `It is drawn as sheets on its own plane, ${measured.sheetsApartUnits.toFixed(2)} au apart, a quarter of its height, so that seen from the side their faces overlap into one band` : `The ring's ridge, with three of its heights, reaches ${measured.reachUnits.toFixed(1)} au from the disc's plane; ${measured.lightBeyondGrid > 0 ? `its faint skirt climbs past the grid's height, and the ${(100 * measured.lightBeyondGrid).toFixed(2)}% of the ring's light that lies there is not drawn` : 'the grid holds all of its light'}`}.`;
 const smoothstep = (a: number, b: number, t: number) => { const u = Math.max(0, Math.min(1, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
 /** Filters of deposit bands, registered as recipes are parsed: a deposit's band is not a JWST band. */
 const DEPOSIT_FILTERS = new Map<string, string>();
@@ -518,8 +518,8 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
   const cubeFaceShare = { gaussianRing: faceShare(discDensity(drawnModel)), measuredProfileDisc: faceShare(density) };
   const shown = shownChannels(dataset, sky, read.channels, innerMaskUnits, taperFromUnits, planeRadius);
   // The tilted ring leaves the outer disc's plane: a grid aligned with that plane has to be tall enough to hold it. Drawn as
-  // sheets, the ring is on a fan of sheets about its own plane, each from a grid of its own (tilted-ring.mts
-  // tiltedRingFan), and the disc's grid holds the disc alone.
+  // sheets, the ring is on sheets of its own plane, from a grid of its own (tilted-ring.mts tiltedRingGrid), and the
+  // disc's grid holds the disc alone.
   const ownRingGrid = recipe.grid.sheets !== undefined && ring !== undefined;
   const tiltedRing = tilted && { centreUnits: tilted.centreUnits, ridgeUnits: tilted.ridgeUnits, endsUnits: tilted.endsUnits, gapLevel: tilted.gapLevel, ridgeOverNoise: tilted.ridgeOverNoise,
     mutualTiltDeg: mutualTiltDeg(dataset.tiltedRing!, drawnModel), reachUnits: reachAbovePlane(dataset.tiltedRing!, tilted, drawnModel),
@@ -529,9 +529,9 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
     throw new Error(`${dataset.id}: the tilted ring's ridge reaches ${tiltedRing.reachUnits.toFixed(1)} units from the disc plane; the aligned grid's half height (${recipe.grid.alignedDiscHalfHeightUnits}) must hold it.`);
   const columns = ownRingGrid ? normaliseColumns(sky, shown, density) : undefined;
   const aligned = recipe.grid.alignedDiscHalfHeightUnits === undefined ? undefined : alignDiscGrid(sky, shown, density, drawnModel, recipe.grid.alignedDiscHalfHeightUnits, columns ? { weight: disc, columns } : undefined);
-  const ringFan = columns ? tiltedRingFan(sky, shown, density, dataset.tiltedRing!, tilted!, ring!, columns) : undefined;
+  const ringGrid = columns ? tiltedRingGrid(sky, shown, density, dataset.tiltedRing!, tilted!, ring!, columns) : undefined;
   const encoded = aligned ?? spreadAlong(sky, shown, density);
-  return { kind: 'ring' as const, dataset, bands, geometry, fit, profileScore, cubeFaceShare, ...(centreDepthUnits === undefined ? {} : { centreDepthUnits }), ...(tiltedRing ? { tiltedRing: ringFan ? { ...tiltedRing, fanTiltDeg: ringFan.tiltDeg } : tiltedRing } : {}), innerMaskUnits, taperFromUnits, radialProfile, differences, ...(aligned ? { aligned } : {}), ...(ringFan ? { ringFan } : {}), ...(await finishDataset(dataset, sky, shown, encoded)) };
+  return { kind: 'ring' as const, dataset, bands, geometry, fit, profileScore, cubeFaceShare, ...(centreDepthUnits === undefined ? {} : { centreDepthUnits }), ...(tiltedRing ? { tiltedRing: ringGrid ? { ...tiltedRing, sheetsApartUnits: ringGrid.sheetsApartUnits } : tiltedRing } : {}), innerMaskUnits, taperFromUnits, radialProfile, differences, ...(aligned ? { aligned } : {}), ...(ringGrid ? { ringGrid } : {}), ...(await finishDataset(dataset, sky, shown, encoded)) };
 }
 
 /** How much light an envelope would put on the cube's front and back faces: the share of every drawn column's depth weight
@@ -866,19 +866,18 @@ export async function author(id: string, options: { sources?: readonly string[] 
         : { sliceCounts: { x: 0, y: 0, z: recipe.grid.sheets }, samplesPerSlab: SHEET_DEPTH_SAMPLES }) } } : baseRecipe;
     const recipeBytes = Buffer.from(JSON.stringify(preparedRecipe, null, 2) + '\n');
     outputs.push([file, Buffer.from(b.ktx2)], [`volume-${b.dataset.id}.json`, recipeBytes], [`previews/${b.dataset.id}.png`, b.previewPng]);
-    // The tilted ring's fan: a grid and a recipe for each sheet, the same material on the gain the grid's own peak gives. A
-    // sheet is one slab through its whole grid, a sample a cell.
-    const fan = b.kind === 'ring' ? b.ringFan?.grids ?? [] : [], ringRecipes: { path: string }[] = [];
-    for (const [sheet, grid] of fan.entries()) {
-      const ringFile = `density-${b.dataset.id}-ring-${sheet}.ktx2`, ringRecipe = `volume-${b.dataset.id}-ring-${sheet}.json`;
+    // The tilted ring's own grid and recipe: the same material on the gain the grid's own peak gives, cut into its sheets.
+    const ringGrid = b.kind === 'ring' ? b.ringGrid : undefined, ringFile = `density-${b.dataset.id}-ring.ktx2`, ringRecipe = `volume-${b.dataset.id}-ring.json`;
+    if (ringGrid) {
+      const { grid } = ringGrid;
       outputs.push([ringFile, Buffer.from(grid.ktx2)], [ringRecipe, Buffer.from(JSON.stringify({ ...baseRecipe, frame: grid.frame,
         grid: { ...baseRecipe.grid, path: ringFile, dimensions: grid.dimensions, bounds: grid.bounds },
         material: { ...baseRecipe.material, exposureGain: exposureAndOpacity(b.dataset.topAlpha, grid.peak, grid.integral).exposureGain },
-        bake: { ...baseRecipe.bake, imageWidth: grid.dimensions[0], sliceCounts: { x: 0, y: 0, z: 1 }, samplesPerSlab: grid.dimensions[2] } }, null, 2) + '\n')]);
-      tiltedGrids.push(ringFile); ringRecipes.push({ path: `${packageBase}/${ringRecipe}` });
+        bake: { ...baseRecipe.bake, imageWidth: grid.dimensions[0], sliceCounts: { x: 0, y: 0, z: ringGrid.sheets }, samplesPerSlab: SHEET_DEPTH_SAMPLES } }, null, 2) + '\n')]);
+      tiltedGrids.push(ringFile);
     }
     deliveryGrids.push({ id: b.dataset.id, label: b.dataset.label, sourceUrl: recipe.sourceUrl, recipe: { path: `${packageBase}/volume-${b.dataset.id}.json` },
-      ...(ringRecipes.length ? { tilted: ringRecipes } : {}) });
+      ...(ringGrid ? { tilted: [{ path: `${packageBase}/${ringRecipe}` }] } : {}) });
   }
   const request = deliveryGrids.find(grid => grid.id === recipe.defaultDataset)!.recipe;
   outputs.push(['delivery.json', Buffer.from(JSON.stringify({

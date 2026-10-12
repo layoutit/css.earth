@@ -13,19 +13,7 @@
       "path": "src/objects/gw-orionis-disc/source/density-dust.ktx2"
     },
     {
-      "path": "src/objects/gw-orionis-disc/source/density-dust-ring-0.ktx2"
-    },
-    {
-      "path": "src/objects/gw-orionis-disc/source/density-dust-ring-1.ktx2"
-    },
-    {
-      "path": "src/objects/gw-orionis-disc/source/density-dust-ring-2.ktx2"
-    },
-    {
-      "path": "src/objects/gw-orionis-disc/source/density-dust-ring-3.ktx2"
-    },
-    {
-      "path": "src/objects/gw-orionis-disc/source/density-dust-ring-4.ktx2"
+      "path": "src/objects/gw-orionis-disc/source/density-dust-ring.ktx2"
     }
   ],
   "sky": {
@@ -57,19 +45,7 @@
       },
       "tilted": [
         {
-          "path": "src/objects/gw-orionis-disc/source/volume-dust-ring-0.json"
-        },
-        {
-          "path": "src/objects/gw-orionis-disc/source/volume-dust-ring-1.json"
-        },
-        {
-          "path": "src/objects/gw-orionis-disc/source/volume-dust-ring-2.json"
-        },
-        {
-          "path": "src/objects/gw-orionis-disc/source/volume-dust-ring-3.json"
-        },
-        {
-          "path": "src/objects/gw-orionis-disc/source/volume-dust-ring-4.json"
+          "path": "src/objects/gw-orionis-disc/source/volume-dust-ring.json"
         }
       ]
     }
