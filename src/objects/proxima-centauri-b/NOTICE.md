@@ -3,3 +3,5 @@
 Radius: the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since Proxima Centauri b does not transit. Mass: Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: minimum mass (m sin i) 1.055 +/- 0.055 Earth masses from the star's radial velocities; the same table gives 1.44 +/- 0.21 Earth masses for an orbit in the star's equatorial plane, tilted 47 degrees.
 
 Orbit: Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.04848 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844).
+
+Climate model: Del Genio et al. (2019), NASA GISS/NCCS, ROCKE-3D control scenario, doi:10.1089/ast.2017.1760. Published native model output reused with attribution as permitted by the release README. No observed atmosphere, ocean or surface texture is represented.

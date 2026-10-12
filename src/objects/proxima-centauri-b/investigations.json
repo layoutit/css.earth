@@ -28,6 +28,30 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202553728"
       ]
+    },
+    {
+      "id": "rocke3d-control-climate",
+      "subject": "Published climate maps",
+      "status": "included",
+      "finding": "The NASA NCCS release provides the original control-run NetCDF for Del Genio et al. (2019). Its tsurf variable is surface air temperature in C on a complete 72 × 46 grid. The selected scenario assumes a 0.984-bar nitrogen atmosphere, 376 ppm carbon dioxide, a 900 m dynamic ocean, salinity 35.4 psu and synchronous rotation. Neither atmosphere nor ocean is detected. The native range is -63.2461 to 3.2427 °C; the file reports a 100-model-day averaging interval. The paper rounds its control summary to -59 to 3 °C; that minimum differs from this released field, so no exact reproduction of the table is claimed. The map keeps the release values, and is presented as a model.",
+      "evidence": [
+        "https://doi.org/10.1089/ast.2017.1760",
+        "https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/README.txt",
+        "https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/README.txt",
+        "https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/01_Control_ANN3900-3999.aijProxCenb04bTL.nc"
+      ]
+    },
+    {
+      "id": "resolved-surface-map",
+      "subject": "Measured surface maps",
+      "status": "unresolved",
+      "finding": "The telescope API NASA archive query gives radial-velocity measurements with no measured radius or orbital inclination. The examined Proxima b climate papers and NASA supplement provide simulations, not observed surface maps. No reusable measured surface map was found in these sources.",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/overview/Proxima",
+        "https://doi.org/10.1089/ast.2017.1760",
+        "https://doi.org/10.3847/PSJ/ad769d"
+      ],
+      "revisitWhen": "A released observation-derived Proxima b surface map with a coordinate frame, resolution and reuse terms becomes available."
     }
   ]
 }
