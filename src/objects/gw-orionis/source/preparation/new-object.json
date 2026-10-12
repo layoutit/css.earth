@@ -1,0 +1,58 @@
+{
+  "id": "gw-orionis",
+  "name": "GW Orionis",
+  "system": "GW Orionis system",
+  "description": "Young triple star inside an ALMA-resolved disc broken into misaligned rings.",
+  "aliases": [
+    "GW Ori",
+    "V* GW Ori"
+  ],
+  "parent": "milky-way",
+  "featured": true,
+  "order": 5849,
+  "target": "GW Ori",
+  "paper": {
+    "url": "https://doi.org/10.1126/science.aba4633",
+    "credit": "Kraus et al. (2020), Science 369, 1233"
+  },
+  "radius": {
+    "value": 7.630508,
+    "source": "Model radius derived from Kraus et al. (2020), Table S3: L = 48 solar luminosities and T = 5500 K; R/Rsun = sqrt(48) (5772/5500)^2, using the IAU nominal solar temperature. The luminosity is the unresolved light of three stars, so this is the sphere that would give that light, not a measured stellar radius",
+    "url": "https://doi.org/10.1126/science.aba4633"
+  },
+  "mass": {
+    "value": 5.26,
+    "source": "Kraus et al. (2020), Table S5: total dynamical mass of the three stars, 5.26 +/- 0.22 solar masses, from their astrometric and radial-velocity orbits",
+    "url": "https://doi.org/10.1126/science.aba4633"
+  },
+  "temperature": {
+    "value": 5500,
+    "source": "Kraus et al. (2020), Table S3: adopted effective temperature",
+    "url": "https://doi.org/10.1126/science.aba4633"
+  },
+  "radialVelocity": {
+    "value": 27.96,
+    "source": "Kraus et al. (2020), Table S5: velocity of the system's centre of mass, +27.96 +/- 0.12 km/s",
+    "url": "https://doi.org/10.1126/science.aba4633"
+  },
+  "distance": {
+    "value": 388,
+    "source": "Kraus et al. (2020), Table S3: adopted distance, 388 +/- 5 pc, the one the paper's ring radii in astronomical units assume",
+    "url": "https://doi.org/10.1126/science.aba4633"
+  },
+  "limb": {
+    "none": "The sphere stands for the unresolved light of three stars. No resolved photosphere or applicable measured limb law is claimed."
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A triple star whose planet-forming disc is broken into rings that lie in different planes.",
+    "introduction": "ALMA resolves three dust rings around the three stars of GW Orionis. The innermost ring is tilted out of the plane of the outer two.",
+    "locator": "Kraus et al. (2020), abstract and Table S6"
+  },
+  "notes": [
+    "The three stars are drawn as one sphere: they lie 1.2 and 8.9 astronomical units apart, and their orbits are not drawn.",
+    "The disc's millimeter emission is observed; its third dimension is a reconstruction on the published ring planes.",
+    "The warped surface the paper models between the middle and inner rings from scattered light is not drawn."
+  ]
+}

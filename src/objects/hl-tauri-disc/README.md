@@ -25,19 +25,21 @@ The [source preview](source/previews/dust.png) shows the sampled observation in 
 
 ![ALMA Band 6 observation sampled in the calibrated brightness display](source/previews/dust.png)
 
-The browser renders the disc as retained 3D slabs. These full-page Chrome captures show the observed inclination and an almost edge-on view, at the same camera distance:
+- **Opacity:** a column keeps the scale’s hue, and its opacity follows its brightness across the scale’s range, not the brightness of its color. Taken from the color, the gap near 64 au, 4% of the top of the scale, was 62% opaque and the median drawn line of sight 0.64; now that gap is 11% opaque, the median line of sight is 0.11, nine in ten are under 0.34, and the brightest still reaches 0.95.
+
+The browser renders the disc as retained 3D slabs. These full-page Chrome captures show the observed inclination and a steeply turned view, at the same camera distance:
 
 ![HL Tauri disc in the shared 3D scene](evidence/disc-inclined.png)
 
-![The modeled thin disc viewed almost edge-on](evidence/disc-edge-on.png)
+![The modeled thin disc turned steeply toward edge-on](evidence/disc-edge-on.png)
 
-The native-detail bake passes its pixel-contrast and physical-orientation checks. A cache-free replay reproduces all 34 prepared files byte for byte. The browser keeps the same 450 resident bank nodes during the three inspected camera poses, below the 500-element budget. These checks establish preparation and retained rendering, not a frame-rate measurement.
+The native-detail bake passes its pixel-contrast and physical-orientation checks. With the opacity above the bank is 36 files and 862,094 bytes, and the browser keeps the same 419 nodes inside the bank’s element during five inspected camera poses. The earlier bake’s cache-free replay was not repeated for this one. These checks establish preparation and retained rendering, not a frame-rate measurement.
 
 ## Known problems
 
 The observation has two spatial axes. Depth is a thin-disc prior on the published plane, and a constant 1 au height simplifies Pinte et al.’s grain-dependent settling model. Southwest is drawn nearer as a stated tilt-sign convention; this continuum image alone cannot determine the nearer side.
 
-The colors represent millimeter brightness. Volume opacity and the browser’s eight-bit compositing are display approximations, so the scene is not a quantitative dust-mass or radiative-transfer model. Nothing finer than the restoring beam or prepared sampling is claimed. Dark gaps retain the emission the image measures, rather than becoming invented empty holes.
+The colors represent millimeter brightness. Opacity follows that brightness as a display choice, so the disc is fainter here than in the paper’s figure. It and the browser’s eight-bit compositing are display approximations, so the scene is not a quantitative dust-mass or radiative-transfer model. Seen within about 20° of edge-on, the X and Y slab stacks show as parallel lines, as the second capture does. Nothing finer than the restoring beam or prepared sampling is claimed. Dark gaps retain the emission the image measures, rather than becoming invented empty holes.
 
 The published color-bar caption says −2 rms at its low end, but the actual vector bar and printed tick positions reproduce +2 rms. The calibration follows those nine ticks, giving 0.022 to 5.832 mJy per beam; its measurements and fitted curve are preserved in the [color-map record](source/alma-2015-figure-2-colormap.json).
 

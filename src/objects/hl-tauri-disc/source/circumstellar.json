@@ -56,7 +56,8 @@
         ],
         "unitScale": 1000,
         "unit": "mJy/beam",
-        "source": "ALMA Partnership et al. (2015), ApJL 808, L3, Figure 2(b), page 6 of arXiv:1503.02649v3. The 256 underlying vector-painted RGB rectangles supply the colors, excluding overlaid tick strokes. Their nine printed flux ticks calibrate a power transfer, fitted on seven ticks and checked on the withheld 0.6 and 3.0 mJy/beam ticks. The recovered bar runs from +0.022 to 5.832 mJy/beam, with display power approximately 0.55. The caption says -2 rms at the low end, but its tick positions reproduce +2 rms to within 0.1 microJy/beam; this table follows the actual calibrated bar. 512 entries sample equal flux intervals. This is a false-color brightness display for millimeter emission, not visible color."
+        "source": "ALMA Partnership et al. (2015), ApJL 808, L3, Figure 2(b), page 6 of arXiv:1503.02649v3. The 256 underlying vector-painted RGB rectangles supply the colors, excluding overlaid tick strokes. Their nine printed flux ticks calibrate a power transfer, fitted on seven ticks and checked on the withheld 0.6 and 3.0 mJy/beam ticks. The recovered bar runs from +0.022 to 5.832 mJy/beam, with display power approximately 0.55. The caption says -2 rms at the low end, but its tick positions reproduce +2 rms to within 0.1 microJy/beam; this table follows the actual calibrated bar. 512 entries sample equal flux intervals. This is a false-color brightness display for millimeter emission, not visible color.",
+        "opacityFollowsBrightness": "The figure’s scale is a 0.55 power: it draws the gap near 64 au, 4% of the top of the scale, at 32% red, and opacity taken from that color would make it 62% opaque. Opacity proportional to brightness keeps faint dust faint, so a gap is seen through; the disc is therefore fainter here than in the paper’s figure."
       },
       "channels": {
         "red": [

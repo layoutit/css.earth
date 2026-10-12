@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gw-orionis-disc",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1572887928262147800,
+        11610364465127760000,
+        2462669801100698000
+      ],
+      "localToReferenceXyzw": [
+        -0.5787355451189575,
+        0.28797141168938656,
+        0.6350319364865545,
+        0.4229327068312663
+      ],
+      "metersPerUnit": 149597870700,
+      "boundsUnits": {
+        "min": [
+          -700,
+          -700,
+          -64
+        ],
+        "max": [
+          700,
+          700,
+          64
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "gw-orionis"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

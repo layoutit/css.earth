@@ -58,7 +58,7 @@
         "label": "Planet-forming rings · ALMA 1.3 mm",
         "scope": "system",
         "thumbnail": "hl-tauri-dataset-color.webp",
-        "notes": "The bright and dark dust rings observed by ALMA in 2014 at 1.3 millimeters, in the paper’s brightness color scale. The image supplies the ring structure; the depth is a modeled thin disc at the published inclination. Its Gaussian height is fixed at 1 au, the millimeter-dust scale near 100 au in Pinte et al. (2016), rather than the gas’s much larger height. The star’s reference sphere uses that paper’s adopted stellar parameters. The observation does not place planets in the gaps.",
+        "notes": "The bright and dark dust rings observed by ALMA in 2014 at 1.3 millimeters, in the paper’s brightness color scale. The image supplies the ring structure; the depth is a modeled thin disc at the published inclination. Its Gaussian height is fixed at 1 au, the millimeter-dust scale near 100 au in Pinte et al. (2016), rather than the gas’s much larger height. Opacity follows the measured brightness, so faint dust is fainter here than in the paper’s figure. The star’s reference sphere uses that paper’s adopted stellar parameters. The observation does not place planets in the gaps.",
         "volume": {
           "objectId": "hl-tauri-disc",
           "datasetId": "dust",

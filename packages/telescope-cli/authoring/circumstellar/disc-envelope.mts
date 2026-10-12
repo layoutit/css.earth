@@ -352,8 +352,12 @@ export function discDensity(model: DiscModel): (x: number, y: number, z: number)
  * in rings of the disc plane, deprojected with the ring's geometry. Every line of sight then crosses the plane where the image
  * says the light is, halo included. A narrow gaussian ring cannot do that for sight lines through the halo: its density along
  * them never peaks inside the cube, so their light lands on the cube's faces. A small floor keeps every column on the plane. */
-export function profileDiscDensity(model: DiscModel, profile: readonly { readonly radiusUnits: number; readonly value: number }[]): (x: number, y: number, z: number) => number {
+export function profileDiscDensity(model: DiscModel, profile: readonly { readonly radiusUnits: number; readonly value: number }[], holdFromUnits?: number): (x: number, y: number, z: number) => number {
   if (profile.length < 2) throw new RangeError('A profile disc needs at least two rings.');
+  // Past `holdFromUnits` the surface keeps the level it has there. Where the light has ended the profile is noise about zero,
+  // and a ring whose median is negative falls to the floor beside rings that are not: a column normalised on one side of that
+  // step and drawn on the other is wrong by their ratio. A held level draws nothing itself, since every column is normalised.
+  if (holdFromUnits !== undefined && !(holdFromUnits > profile[0]!.radiusUnits)) throw new RangeError('The profile is held from a radius inside it.');
   const phi = model.positionAngleDeg * DEG, i = model.inclinationDeg * DEG;
   const nodes = [Math.sin(phi), Math.cos(phi), 0], minor = [Math.cos(phi), -Math.sin(phi), 0];
   const nearAlongMinor = Math.cos((model.nearSidePositionAngleDeg - (model.positionAngleDeg + 90)) * DEG) >= 0 ? 1 : -1;
@@ -361,7 +365,8 @@ export function profileDiscDensity(model: DiscModel, profile: readonly { readonl
   const normal = [-nearAlongMinor * minor[0]! * Math.sin(i), -nearAlongMinor * minor[1]! * Math.sin(i), Math.cos(i)];
   const h = model.gaussianHeightUnits, [cx, cy] = model.centreUnits, cz = model.centreDepthUnits ?? 0, peak = Math.max(...profile.map(ring => ring.value));
   const floor = 1e-6 * peak, radii = profile.map(ring => ring.radiusUnits), values = profile.map(ring => Math.max(floor, ring.value));
-  const surface = (r: number) => {
+  const surface = (radius: number) => {
+    const r = holdFromUnits === undefined ? radius : Math.min(radius, holdFromUnits);
     if (r <= radii[0]!) return values[0]!;
     if (r >= radii.at(-1)!) return floor;
     let k = 1; while (radii[k]! < r) k++;

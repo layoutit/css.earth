@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gw-orionis",
+  "angularDiameterMas": 0.18,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 5,308,544 km at 388.00 pc = 0.18 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 388,
+  "distanceSource": "Kraus et al. (2020), Table S3: adopted distance, 388 +/- 5 pc, the one the paper's ring radii in astronomical units assume (https://doi.org/10.1126/science.aba4633): 388 pc; Gaia DR3 parallax 2.4510 +/- 0.0623 mas (same row, RUWE 4.23), 39.3 standard errors, is not used",
+  "radiusKm": 5308544.4,
+  "radiusSource": "Radius 7.630508 solar radii from Model radius derived from Kraus et al. (2020), Table S3: L = 48 solar luminosities and T = 5500 K; R/Rsun = sqrt(48) (5772/5500)^2, using the IAU nominal solar temperature. The luminosity is the unresolved light of three stars, so this is the sphere that would give that light, not a measured stellar radius (https://doi.org/10.1126/science.aba4633): 5,308,544 km at 695,700 km per solar radius. Mass 5.26 solar masses from Kraus et al. (2020), Table S5: total dynamical mass of the three stars, 5.26 +/- 0.22 solar masses, from their astrometric and radial-velocity orbits (https://doi.org/10.1126/science.aba4633); GM is that mass times the JPL solar GM. Temperature 5500 K from Kraus et al. (2020), Table S3: adopted effective temperature (https://doi.org/10.1126/science.aba4633). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5500,
+  "effectiveTemperatureSource": "Kraus et al. (2020), Table S3: adopted effective temperature (https://doi.org/10.1126/science.aba4633)",
+  "surfaceGravityLogg": 3.39,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gw-orionis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.394, rounded to two decimals",
+  "spectralType": "G5/8Ve",
+  "spectralTypeSource": "SIMBAD, V* GW Ori: spectral type G5/8Ve (1977ApJ...214..747H)",
+  "objectType": "T Tauri Star",
+  "objectTypePath": "* > Y*O > TT*",
+  "objectTypeSource": "SIMBAD, V* GW Ori: main object type TT*, T Tauri Star",
+  "projectedRotationSpeedKmS": 4.4,
+  "projectedRotationSpeedSource": "SIMBAD, V* GW Ori: projected rotation speed 4.4 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

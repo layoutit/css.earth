@@ -1,0 +1,35 @@
+{
+  "id": "source-gw-orionis-disc-dust-b6-cont",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gw Orionis Disc · dust b6 cont",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sourceforge.net/projects/aba4633/files/ALMA/kraus.gwori.ALMA.fits/download",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gw-orionis-disc/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA (ESO/NAOJ/NRAO), projects 2018.1.00813.S and 2012.1.00496.S; Kraus et al. (2020), Science 369, 1233",
+      "scope": "The dust b6 cont input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "The authors’ deposit (SourceForge project aba4633, named in the paper’s data statement) states no license. The image is their reduction of public ALMA observations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
