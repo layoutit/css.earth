@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hl-tauri-disc",
+  "entries": [
+    {
+      "id": "dataset-dust",
+      "status": "included",
+      "subject": "Native Band 6 continuum image",
+      "finding": "The public CASA 4.2.2 science-verification FITS reference image is obtainable and retains its original WCS, units and restoring beam. Its peak and noise agree with the published measurements.",
+      "evidence": [
+        "README.md",
+        "source/circumstellar.json"
+      ]
+    },
+    {
+      "id": "published-disc-plane",
+      "status": "included",
+      "finding": "The published eight-ring ellipse fit provides the common plane. The full native radial profile supplies the rings and gaps; depth remains inferred.",
+      "evidence": [
+        "README.md",
+        "source/provenance.json"
+      ]
+    },
+    {
+      "id": "millimeter-dust-height",
+      "status": "included",
+      "finding": "Use a constant 1 au Gaussian approximation anchored to Pinte et al.’s settled millimeter dust near 100 au, with the simplification stated. Do not use the gas’s 10 au scale height.",
+      "evidence": [
+        "source/circumstellar.json",
+        "README.md"
+      ]
+    },
+    {
+      "id": "single-gaussian-belt",
+      "status": "excluded",
+      "finding": "The initial one-belt fit reached its radial-width boundary at 0.6 of the reference radius. The image contains multiple rings. Keep this Gaussian as a baseline and require the measured-profile disc to beat it, the shell and constant depth.",
+      "evidence": [
+        "source/provenance.json"
+      ],
+      "revisitWhen": "A distinct single-belt dataset is selected."
+    },
+    {
+      "id": "published-brightness-colorbar",
+      "status": "included",
+      "finding": "Decode the 256 underlying vector colors without tick strokes and calibrate the nonlinear flux axis with the nine printed ticks. Two held-out ticks validate the recovered display power near 0.55. The positive 2-rms lower endpoint is supported by the actual ticks despite the caption’s negative sign.",
+      "evidence": [
+        "source/alma-2015-figure-2-colormap.json",
+        "README.md"
+      ]
+    },
+    {
+      "id": "alma-band-7",
+      "status": "deferred",
+      "finding": "The 2014 release also provides a resolved 0.87 mm continuum image. The selected 1.3 mm view already supplies the requested ring scene and matches the adopted millimeter-dust prior.",
+      "evidence": [
+        "https://almascience.nrao.edu/almadata/sciver/HLTauBand7/"
+      ],
+      "revisitWhen": "A wavelength comparison is requested."
+    },
+    {
+      "id": "alma-band-9",
+      "status": "deferred",
+      "finding": "Guerra-Alvarado et al. (2024), A&A 686, A298, resolves 0.45 mm emission at 2 au and discusses a thicker inner emitting layer. It is a different tracer and is not substituted for the settled 1.3 mm dust.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202349046"
+      ],
+      "revisitWhen": "Its own native image and wavelength-specific vertical model are selected for a separate dataset."
+    }
+  ]
+}

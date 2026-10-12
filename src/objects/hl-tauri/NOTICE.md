@@ -1,0 +1,9 @@
+# HL Tauri credits
+
+Disc observations and brightness colors: ALMA Partnership et al. (2015), the ALMA Band 6 Science Verification release and its published Figure 2(b). The [disc credits](../hl-tauri-disc/NOTICE.md) carry the release acknowledgement and links to the native product.
+
+Radius, mass and temperature: Radius 6.906038653092741 solar radii from Model radius derived from Pinte et al. (2016), Section 3.1: L = 11 solar luminosities and T = 4000 K; R/Rsun = sqrt(11) (5772/4000)^2, using the IAU nominal solar temperature. No resolved stellar radius is measured here (https://doi.org/10.3847/0004-637X/816/1/25); Mass 1.7 solar masses from Pinte et al. (2016), Sections 3.1 and 5: central mass inferred from the CO and HCO+ gas kinematics (https://doi.org/10.3847/0004-637X/816/1/25); temperature from Pinte et al. (2016), Section 3.1: adopted stellar effective temperature, a model input.
+
+Color: a Planck spectrum at the temperature of Pinte et al. (2016), Section 3.1: adopted stellar effective temperature, a model input, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+
+Placement: position from ALMA Partnership et al. (2015), ApJL 808, L3, Table 1 (Band 6 continuum peak, ICRS/J2000 at epoch 2014.83) and Section 3.1.1 (proper motion, mas/yr, RA including cos Dec), DOI 10.1088/2041-8205/808/1/L3 row ID = HL Tau · Band 6, RA = 04:31:38.42548, Dec = +18:13:57.242, pmRA = 18.5, pmDec = -22.3 (as the paper prints them); distance: Pinte et al. (2016), Section 1; the adopted Taurus distance used by both this model and the ALMA ring radii; radial velocity: No heliocentric stellar radial velocity is supplied by this reconstruction. Zero is assumed for display propagation; the paper gives gas velocities in the LSR frame, which are not substituted for it.

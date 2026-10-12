@@ -1,0 +1,106 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "dust-b6-cont",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hl-tauri-disc-dust-b6-cont",
+            "role": "material",
+            "evidence": "src/objects/hl-tauri-disc/source/manifest.json#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/hl-tauri-disc/observations/HLTau_B6cont_mscale_ap.image.fits",
+      "origin": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/HLTau_Band6_ReferenceImages.tgz",
+      "sourceUrl": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/",
+      "title": "HL Tau Band 6 Science Verification · HLTau_B6cont_mscale_ap.image.fits (CASA 4.2.2 reference image, release 2015-02-11)",
+      "credit": "ALMA (ESO/NAOJ/NRAO), project 2011.0.00015.SV; ALMA Partnership et al. (2015), ApJL 808, L3",
+      "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+      "acquisition": "The unchanged FITS member HLTau_Band6_ReferenceImages/HLTau_B6cont_mscale_ap.image.fits from the public HLTau_Band6_ReferenceImages.tgz, restored by node packages/telescope-cli/authoring/hl-tauri/restore.mts or the source cache.",
+      "license": "Public ALMA science-verification data with the acknowledgement specified in HLTau_Band6_Readme; no Creative Commons license is stated in that release.",
+      "datasetId": "dust",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "alma",
+            "evidence": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/HLTau_Band6_ReferenceImages.tgz — ALMA (ESO/NAOJ/NRAO), project 2011.0.00015.SV; ALMA Partnership et al. (2015), ApJL 808, L3"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "circumstellar-json",
+      "path": "src/objects/hl-tauri-disc/source/circumstellar.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe: the datasets, their pinned program and bands, the stated conventions and the published geometry each is checked against."
+      }
+    },
+    {
+      "id": "alma-2015-figure-2-colormap-json",
+      "path": "src/objects/hl-tauri-disc/source/alma-2015-figure-2-colormap.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The publisher's color map the dust dataset is shown in, read from the published figure as the file itself records (ALMA Partnership et al. (2015), ApJL 808, L3, Figure 2(b), page 6 of arXiv:1503.02649v3. The 256 underlying vector-painted RGB rectangles supply the colors, excluding overlaid tick strokes. Their nine printed flux ticks calibrate a power transfer, fitted on seven ticks and checked on the withheld 0.6 and 3.0 mJy/beam ticks. The recovered bar runs from +0.022 to 5.832 mJy/beam, with display power approximately 0.55. The caption says -2 rms at the low end, but its tick positions reproduce +2 rms to within 0.1 microJy/beam; this table follows the actual calibrated bar. 512 entries sample equal flux intervals. This is a false-color brightness display for millimeter emission, not visible color.)."
+      }
+    },
+    {
+      "id": "delivery-json",
+      "path": "src/objects/hl-tauri-disc/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/hl-tauri-disc/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/hl-tauri-disc/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-dust-ktx2",
+      "path": "src/objects/hl-tauri-disc/source/density-dust.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-dust-json",
+      "path": "src/objects/hl-tauri-disc/source/volume-dust.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-dust-png",
+      "path": "src/objects/hl-tauri-disc/source/previews/dust.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    }
+  ]
+}

@@ -56,7 +56,8 @@
  * A star whose paper prints its coordinates in a table that no archive holds yet is placed at them, cited by the paper's DOI and
  * with nothing archived: { "archive": "paper", "catalogue": "10.3847/1538-4357/ae47d8", "row": { "ID": "124", "RA": "12:21:55.068",
  * "Dec": "+04:29:12.310" }, "columns": { "ra": "RA", "dec": "Dec" }, "credit", "url" }, where `row` is the cells as printed (right
- * ascension in hours, declination in degrees, both sexagesimal).
+ * ascension in hours, declination in degrees, both sexagesimal). When that position is at another epoch, `motion` gives its
+ * Julian year and the row's proper-motion columns in mas/yr, with right ascension already multiplied by cos(declination).
  * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
  * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
  * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
@@ -227,22 +228,27 @@ function cataloguePosition(value: unknown, label: string): CataloguePosition {
   if (!entries.length) throw new TypeError(`${label}.row names no column: give the values that pick one row of ${catalogue}.`);
   const url = requireString(input.url, `${label}.url`);
   if (!URL_PATTERN.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
-  const motion = input.motion === undefined ? undefined : requireRecord(input.motion, `${label}.motion`), epoch = motion && requireFiniteNumber(motion.epoch, `${label}.motion.epoch`);
-  if (epoch !== undefined && !(epoch >= 1900 && epoch <= 2100)) throw new RangeError(`${label}.motion.epoch is the Julian year of the position, not ${epoch}.`);
+  const motion = input.motion === undefined ? undefined : positionMotion(input.motion, label);
   const columns = input.columns === undefined ? undefined : requireRecord(input.columns, `${label}.columns`);
   return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url, ...(simbad ? { archive: 'simbad' as const } : {}),
     ...(columns ? { columns: { ra: requireString(columns.ra, `${label}.columns.ra`), dec: requireString(columns.dec, `${label}.columns.dec`) } } : {}),
-    ...(motion ? { motion: { epoch: epoch!, ra: requireString(motion.ra, `${label}.motion.ra`), dec: requireString(motion.dec, `${label}.motion.dec`) } } : {}) };
+    ...(motion ? { motion } : {}) };
+}
+function positionMotion(value: unknown, label: string): NonNullable<CataloguePosition['motion']> {
+  const motion = requireRecord(value, `${label}.motion`), epoch = requireFiniteNumber(motion.epoch, `${label}.motion.epoch`);
+  if (!(epoch >= 1900 && epoch <= 2100)) throw new RangeError(`${label}.motion.epoch is the Julian year of the position, not ${epoch}.`);
+  return { epoch, ra: requireString(motion.ra, `${label}.motion.ra`), dec: requireString(motion.dec, `${label}.motion.dec`) };
 }
 /** Coordinates as a paper prints them in a table: sexagesimal right ascension (hours) and declination (degrees), cited by the paper's DOI. */
 function paperPosition(input: Record<string, unknown>, label: string): CataloguePosition {
   const catalogue = requireString(input.catalogue, `${label}.catalogue`), row = requireRecord(input.row, `${label}.row`), url = requireString(input.url, `${label}.url`), columns = requireRecord(input.columns, `${label}.columns`);
   const ra = requireString(columns.ra, `${label}.columns.ra`), dec = requireString(columns.dec, `${label}.columns.dec`), cells = Object.fromEntries(Object.entries(row).map(([column, cell]) => [column, requireString(cell, `${label}.row.${column}`)]));
   if (!/^10\.\d{4,9}\/\S+$/u.test(catalogue)) throw new TypeError(`${label}.catalogue is the paper's DOI (10.3847/1538-4357/ae47d8), not ${catalogue}.`);
-  if (!/^\d{1,2}:\d{2}:\d{2}(?:\.\d+)?$/u.test(cells[ra] ?? '') || !/^[+-]\d{1,2}:\d{2}:\d{2}(?:\.\d+)?$/u.test(cells[dec] ?? '') || Object.keys(cells).length < 3 || input.motion !== undefined || input.firstPixel !== undefined)
-    throw new TypeError(`${label}: a paper's position is { "archive": "paper", "catalogue": DOI, "row": { "ID": "124", "RA": "12:21:55.068", "Dec": "+04:29:12.310" }, "columns": { "ra": "RA", "dec": "Dec" } }: the row's name and its coordinates as printed (hh:mm:ss.s and a signed dd:mm:ss.s), with no motion.`);
+  if (!/^\d{1,2}:\d{2}:\d{2}(?:\.\d+)?$/u.test(cells[ra] ?? '') || !/^[+-]\d{1,2}:\d{2}:\d{2}(?:\.\d+)?$/u.test(cells[dec] ?? '') || Object.keys(cells).length < 3 || input.firstPixel !== undefined)
+    throw new TypeError(`${label}: a paper's position is { "archive": "paper", "catalogue": DOI, "row": { "ID": "124", "RA": "12:21:55.068", "Dec": "+04:29:12.310" }, "columns": { "ra": "RA", "dec": "Dec" } }: the row's name and its coordinates as printed (hh:mm:ss.s and a signed dd:mm:ss.s).`);
   if (!URL_PATTERN.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
-  return { catalogue, row: cells, columns: { ra, dec }, credit: requireString(input.credit, `${label}.credit`), url, archive: 'paper' };
+  return { catalogue, row: cells, columns: { ra, dec }, credit: requireString(input.credit, `${label}.credit`), url, archive: 'paper',
+    ...(input.motion === undefined ? {} : { motion: positionMotion(input.motion, label) }) };
 }
 /** A pixel of one extension of a MAST product, as its paper prints it. */
 function imagePosition(input: Record<string, unknown>, label: string): CataloguePosition {

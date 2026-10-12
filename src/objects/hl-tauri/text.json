@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hl-tauri",
+  "card": {
+    "text": "A young star surrounded by a disc of bright dust rings and dark gaps.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-816-1-25",
+        "url": "https://doi.org/10.3847/0004-637X/816/1/25",
+        "label": "Pinte et al. (2015), The Astrophysical Journal 816 25",
+        "checked": "2026-10-11",
+        "locator": "Pinte et al. (2016), Sections 1 and 3.1; ALMA Partnership et al. (2015), Sections 1 and 3.1.3"
+      },
+      {
+        "catalogueId": "doi-10-1088-2041-8205-808-1-l3",
+        "url": "https://doi.org/10.1088/2041-8205/808/1/L3",
+        "label": "ALMA Partnership et al. (2015), Sections 1 and 3.1.3",
+        "checked": "2026-10-11"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ALMA resolves HL Tauri’s planet-forming disc into nested rings. The disc’s depth is modeled; the star is an unresolved model sphere.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-816-1-25",
+        "url": "https://doi.org/10.3847/0004-637X/816/1/25",
+        "label": "Pinte et al. (2015), The Astrophysical Journal 816 25",
+        "checked": "2026-10-11",
+        "locator": "Pinte et al. (2016), Sections 1 and 3.1; ALMA Partnership et al. (2015), Sections 1 and 3.1.3"
+      },
+      {
+        "catalogueId": "doi-10-1088-2041-8205-808-1-l3",
+        "url": "https://doi.org/10.1088/2041-8205/808/1/L3",
+        "label": "ALMA Partnership et al. (2015), Sections 1 and 3.1.3",
+        "checked": "2026-10-11"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Stellar model, 4000 K",
+      "detail": "Pinte et al. model",
+      "summary": "The star is an unresolved reference sphere. Its color follows a 4000 K blackbody model."
+    },
+    "dust-rings": {
+      "title": "Planet-forming rings, 1.3 mm",
+      "detail": "ALMA · 2014",
+      "summary": "Bright dust rings and dark gaps in millimeter emission. Their depth is a modeled thin disc.",
+      "sources": [
+        {
+          "catalogueId": "source-hl-tauri-disc-dust-b6-cont",
+          "url": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/",
+          "label": "ALMA · HL Tau Band 6 Science Verification",
+          "checked": "2026-10-11"
+        },
+        {
+          "catalogueId": "doi-10-1088-2041-8205-808-1-l3",
+          "url": "https://doi.org/10.1088/2041-8205/808/1/L3",
+          "label": "ALMA Partnership et al. (2015), Sections 1 and 3.1.3",
+          "checked": "2026-10-11"
+        }
+      ]
+    }
+  }
+}

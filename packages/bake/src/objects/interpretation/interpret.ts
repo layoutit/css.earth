@@ -534,7 +534,11 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           throw new TypeError(`${objectId}/${surface.id}: choose one spot interpretation per dataset.`);
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
         // A fitted or explicitly modeled limb-darkening law darkens the disc through the limb plate, fitted edge to edge.
-        if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);
+        // A grid that names a band per screen channel colors the plate: the limb changes hue as well as brightness.
+        const limbChannels = limbDarkening && 'channels' in limbDarkening ? limbDarkening.channels : undefined;
+        if (limbChannels && (surface.science.spotOccultation !== undefined || surface.science.spotFigure !== undefined))
+          throw new TypeError(`${objectId}/${surface.id}: a spot is drawn on a black limb plate, not on one with a law per channel.`);
+        if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color, limbChannels);
         const spot = surface.science.spotOccultation === undefined ? null : await (async () => {
           if (!limbDarkening) throw new TypeError(`${objectId}/${surface.id}: a spot reconstruction requires a limb plate.`);
           const path = requireString(surface.science.spotOccultation, 'science.spotOccultation');
@@ -582,11 +586,13 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
               meanTemperatureK: Math.round(gravity.meanK), omega: gravity.record.omega, beta: gravity.record.beta, poleSrgb: gravity.rows[0], equatorSrgb: gravity.rows[Math.floor(height / 2)] } } : {}),
             ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: limbIntensity(0, limbDarkening.coefficients),
               basis: modeledLimb ? 'model' : 'transit-fit',
+              ...(limbChannels ? { channels: Object.fromEntries((['red', 'green', 'blue'] as const).map((name, channel) => [name,
+                { u1: limbChannels[channel]!.u1, u2: limbChannels[channel]!.u2, limbToCentre: limbIntensity(0, limbChannels[channel]!) }])) } : {}),
               ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
             ...(spot ? { spotOccultation: spot } : {}),
             ...(spotFigure ? { spotFigure } : {}),
             meaning: `${temperature ? 'Planck color at the catalogued photometric temperature' : range ? 'Color of the measured Gaia XP spectrum' : 'Color of the measured spectrum'}${limbDarkening
-              ? `, dimmed toward the limb by a ${modeledLimb ? 'theoretical atmosphere model' : 'law fitted to transits'}; not a resolved photosphere.` : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
+              ? `, dimmed${limbChannels ? ' and reddened' : ''} toward the limb by a ${modeledLimb ? `theoretical atmosphere model${limbChannels ? ', one band per color channel' : ''}` : 'law fitted to transits'}; not a resolved photosphere.` : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }

@@ -79,7 +79,7 @@ test('a Gaia XP sampled spectrum gives the color of the star\'s own light: HD 18
 
 test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectrum, with samples consistent with zero read as no emission', async () => {
   const { readXpSampledSpectrum, xpSampledColor, NOISE_FLOOR_SIGMA } = await import('@cssearth/bake/objects/stellar');
-  const system = new URL('src/objects/trappist-1/source', pathToFileURL(findProjectRoot(import.meta.url) + '/'));
+  const system = new URL('src/objects/trappist-1/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/'));
   const { color, range, temperature, spectrum } = await loadStellarPhotometricColor(
     async path => readFile(new URL(path, system)), {}, 'photometry/stellar-color.json');
   assert.equal(temperature, null);
@@ -99,24 +99,44 @@ test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectr
   assert.throws(() => xpSampledColor(broken, colorMatching, flux.fluxError), /consistent with zero/u);
 });
 
-test('TRAPPIST-1 bakes its cited I+z model-prior limb law without off-disc light', async () => {
-  const system = new URL('src/objects/trappist-1/source', pathToFileURL(findProjectRoot(import.meta.url) + '/'));
+test('TRAPPIST-1 bakes one model limb law per color channel: the limb reddens, without off-disc light', async () => {
+  const system = new URL('src/objects/trappist-1/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/'));
   const source = async (path: string) => readFile(new URL(path, system));
   const science = JSON.parse((await source('preparation/raster.json')).toString('utf8')).surfaces[0].science;
   const { limbDarkening, color } = await loadStellarPhotometricColor(source, science, 'photometry/stellar-color.json');
-  assert.ok(limbDarkening);
-  assert.equal(limbDarkening.recipe.source, 'published');
-  if ('alpha' in limbDarkening.coefficients) throw new TypeError('TRAPPIST-1 publishes a quadratic law.');
-  assert.equal(limbDarkening.coefficients.u1, 0.65);
-  assert.equal(limbDarkening.coefficients.u2, 0.28);
-  assert.ok('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior');
-  assert.ok(Math.abs(limbDarkening.coefficients.u1Bounds[0] - 0.55) < 1e-12);
-  assert.ok(Math.abs(limbDarkening.coefficients.u2Bounds[0] - 0.16) < 1e-12);
-  assert.ok(Math.abs(quadraticIntensity(0, 0.65, 0.28) - 0.07) < 1e-12);
-  const plate = limbDarkeningPlate(256, limbDarkening.coefficients, color);
+  assert.ok(limbDarkening && 'channels' in limbDarkening && limbDarkening.channels);
+  assert.equal(limbDarkening.recipe.source, 'grid');
+  // Claret, Hauschildt & Witte (2012), tableab: the R, V and B nodes at 2,500 and 2,600 K, log g 5.0 and 5.5, read at 2,566 K and log g 5.2396.
+  const [red, green, blue] = limbDarkening.channels;
+  assert.ok(Math.abs(red.u1 - 0.9531) < 1e-3 && Math.abs(red.u2 + 0.0787) < 1e-3, `${red.u1}, ${red.u2}`);
+  assert.ok(Math.abs(green.u1 - 1.0563) < 1e-3 && Math.abs(green.u2 + 0.1650) < 1e-3, `${green.u1}, ${green.u2}`);
+  assert.ok(Math.abs(blue.u1 - 1.4154) < 1e-3 && Math.abs(blue.u2 + 0.4632) < 1e-3, `${blue.u1}, ${blue.u2}`);
+  // The green channel's law stands for the disc where one law is asked for.
+  assert.equal(limbDarkening.coefficients, green);
+  // Blue darkens most and red least at every radius: the limb is redder than the centre.
+  const shown = (law: typeof red, mu: number) => quadraticIntensity(mu, law.u1, law.u2);
+  for (const mu of [0.8, 0.5, 0.2, 0]) assert.ok(shown(blue, mu) < shown(green, mu) && shown(green, mu) < shown(red, mu), `mu ${mu}`);
+  const size = 256, plate = limbDarkeningPlate(size, limbDarkening.coefficients, color, limbDarkening.channels);
   assert.equal(plate.data[3], 0);
-  assert.equal(plate.data[(128 * 256 + 128) * 4 + 3], 0);
-  assert.ok(plate.data[(128 * 256 + 254) * 4 + 3]! > 100);
+  assert.equal(plate.data[(128 * size + 128) * 4 + 3], 0);
+  // Near the edge the plate is no longer black: red is its strongest channel, and blue, which darkens most, is left to the alpha.
+  const edge = (128 * size + 250) * 4;
+  assert.ok(plate.data[edge]! > plate.data[edge + 1]! && plate.data[edge + 1]! > 0 && plate.data[edge + 2] === 0 && plate.data[edge + 3]! > 100, [...plate.data.subarray(edge, edge + 4)].join(' '));
+  // Composited over the photosphere as a browser does, on encoded values, every channel shows its own law to about one 8-bit step.
+  let worst = 0;
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const radial = Math.hypot(x + 0.5 - size / 2, y + 0.5 - size / 2) / (size / 2), at = (y * size + x) * 4;
+    if (radial > 1) { assert.equal(plate.data[at + 3], 0); continue; }
+    const mu = Math.sqrt(1 - radial * radial), alpha = plate.data[at + 3]! / 255;
+    limbDarkening.channels.forEach((law, channel) => {
+      const composited = color.srgb[channel]! * (1 - alpha) + plate.data[at + channel]! * alpha;
+      worst = Math.max(worst, Math.abs(composited - 255 * linearToSrgb(color.linear[channel]! * Math.max(0, shown(law, mu)))));
+    });
+  }
+  assert.ok(worst < 1.5, `worst channel error ${worst}`);
+  // The band column belongs to the channels: a recipe that also fixes it in its models is refused.
+  await assert.rejects(loadStellarPhotometricColor(source, { ...science, limbDarkening: { ...science.limbDarkening, grid: { ...science.limbDarkening.grid, models: { ...science.limbDarkening.grid.models, Filt: 'V' } } } },
+    'photometry/stellar-color.json'), /must not fix it/u);
 });
 
 test("an imaged planet's one-color disc takes its limb law from the model nodes beside it: YSES 1 b in the H band", async () => {

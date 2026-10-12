@@ -20,7 +20,7 @@
     {
       "id": "trappist-1-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: measured Gaia color on the reference sphere and a modeled I+z limb-darkening plate",
+      "origin": "Repository-authored raster recipe: measured Gaia color on the reference sphere and a model limb-darkening plate with one law per color channel",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -167,13 +167,16 @@
       }
     },
     {
-      "id": "trappist-1-gillon-2016-limb-darkening",
-      "path": "photometry/gillon-2016-limb-darkening.json",
-      "origin": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/",
-      "credit": "Gillon et al. (2016), Temperate Earth-sized planets transiting a nearby ultracool dwarf star, Nature 533, 221, Extended Data Table 2",
-      "license": "Factual numerical coefficients; source attribution retained",
-      "acquisition": "Transcribed the I+z row of Extended Data Table 2 with its one-sigma uncertainties and theoretical-prior qualification",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "id": "trappist-1-claret-2012-limb-darkening",
+      "path": "photometry/claret-2012-bvr-quadratic.tsv",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat",
+      "credit": "Claret, Hauschildt & Witte (2012), A&A 546, A14 (CDS J/A+A/546/A14)",
+      "license": "CDS catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Rows of tableab.dat: the quadratic R, V and B coefficients (least-squares fits, quasi-spherical models) of the four grid nodes the star's temperature and gravity lie between (2,500 and 2,600 K, log g 5.0 and 5.5), each cell as printed, the fixed columns rewritten as tabs.",
+      "redistribution": "Catalogue rows retained with their citation.",
       "consumers": [
         "assets",
         "datasets"
@@ -182,9 +185,9 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "doi-10-1038-nature17448",
+            "catalogueId": "source-trappist-1-claret-2012-limb-darkening",
             "role": "material",
-            "evidence": "src/objects/trappist-1/source/photometry/gillon-2016-limb-darkening.json#/u1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -283,7 +286,7 @@
           "trappist-1-stellar-color",
           "trappist-1-gaia-dr3-source",
           "trappist-1-gaia-dr3-xp-continuous",
-          "trappist-1-gillon-2016-limb-darkening",
+          "trappist-1-claret-2012-limb-darkening",
           "trappist-1-preparation-raster"
         ]
       },
@@ -316,6 +319,13 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /trappist-1/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors: the star's disc in the color of its own Gaia spectrum, with the planets' orbits edge-on across it."
+      }
+    },
+    {
+      "path": "reference/limb-before-after.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the disc at /trappist-1/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2), cropped to the disc and reduced to 520 px a side, taken 2026-10-12. Left: css.earth as published, with the one I+z law. Right: the branch's dev server, with one law per color channel."
       }
     },
     {

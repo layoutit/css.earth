@@ -1,6 +1,7 @@
 import { type DensityVolumeFrame, type PreparedCssVolume, type VolumeVector } from '@cssearth/objects';
 
 import { balanceVolumeSlices } from '../volume-leaves/index.ts';
+import { worldRotationFromQuaternion } from '@cssearth/engine';
 
 export const METERS_PER_PARSEC = 3.085677581491367e16;
 export const ARCSECOND_RADIANS = Math.PI / 648000;
@@ -16,7 +17,7 @@ function quaternion(x: VolumeVector, y: VolumeVector, z: VolumeVector): [number,
 const towardFrame = (source?: Pick<DensityVolumeFrame, 'referenceFrame'>) => source?.referenceFrame === 'lab-sky-west-north-toward';
 /** Historical angular source frames reflect X; physical west/north/toward frames rotate X and Z. */
 export function embedNebulaFrame(source: DensityVolumeFrame, sky: NebulaSkyFrame,
-  originUnits: VolumeVector = [0,0,0]): DensityVolumeFrame {
+  originUnits: VolumeVector = [0,0,0], rotateSourceGrid = false): DensityVolumeFrame {
   if (!sky.centerIcrsDegrees.every(Number.isFinite) || sky.centerIcrsDegrees[0] < 0 || sky.centerIcrsDegrees[0] >= 360 ||
       Math.abs(sky.centerIcrsDegrees[1]) > 90 || !(sky.distancePc > 0) || !Number.isFinite(sky.distancePc) ||
       !(sky.arcsecPerUnit > 0) || !Number.isFinite(sky.arcsecPerUnit) || !Number.isFinite(sky.imageRotationDegrees)) throw new TypeError('Invalid physical nebula sky frame.');
@@ -25,10 +26,17 @@ export function embedNebulaFrame(source: DensityVolumeFrame, sky: NebulaSkyFrame
   const north: VolumeVector = [-Math.sin(dec)*Math.cos(ra), -Math.sin(dec)*Math.sin(ra), Math.cos(dec)];
   const away: VolumeVector = [Math.cos(dec)*Math.cos(ra), Math.cos(dec)*Math.sin(ra), Math.sin(dec)];
   const angle = sky.imageRotationDegrees*Math.PI/180, c = Math.cos(angle), s = Math.sin(angle);
-  const x = vector(east.map((n,i) => n*c + north[i]!*s)), y = vector(north.map((n,i) => n*c-east[i]!*s));
+  let x = vector(east.map((n,i) => n*c + north[i]!*s)), y = vector(north.map((n,i) => n*c-east[i]!*s)), z = away;
+  if (rotateSourceGrid) {
+    // Conjugate by the same source handedness that embedNebulaVolume applies to its leaves.
+    const r = worldRotationFromQuaternion(source.localToReferenceXyzw), signs = [-1, 1, towardFrame(source) ? -1 : 1];
+    const axes = [x, y, z];
+    [x, y, z] = [0, 1, 2].map(column => vector([0, 1, 2].map(row =>
+      [0, 1, 2].reduce((sum, axis) => sum + axes[axis]![row]! * r[axis * 3 + column]! * signs[axis]! * signs[column]!, 0))));
+  }
   const metersPerUnit = sky.distancePc*METERS_PER_PARSEC*ARCSECOND_RADIANS*sky.arcsecPerUnit;
   return { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, metersPerUnit,
-    localToReferenceXyzw: quaternion(x,y,away),
+    localToReferenceXyzw: quaternion(x,y,z),
     originM: vector(away.map((n,i) => n*sky.distancePc*METERS_PER_PARSEC +
       (-x[i]!*originUnits[0]+y[i]!*originUnits[1]+n*originUnits[2])*metersPerUnit)),
     boundsUnits: { min: [-source.boundsUnits.max[0],source.boundsUnits.min[1],towardFrame(source) ? -source.boundsUnits.max[2] : source.boundsUnits.min[2]],

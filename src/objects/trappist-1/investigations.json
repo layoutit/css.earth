@@ -16,8 +16,9 @@
       "id": "stellar-limb-model",
       "subject": "A source-backed radial brightness profile for TRAPPIST-1",
       "status": "included",
-      "finding": "Gillon et al. (2016), Extended Data Table 2, gives I+z quadratic coefficients u1 = 0.65 +/- 0.10 and u2 = 0.28 +/- 0.12, inferred from theoretical atmosphere tables and used as transit priors. The selected red-band model darkens the Gaia-colored disc through a prepared black-alpha limb plate; it is not a resolved or directly measured stellar limb.",
+      "finding": "Claret, Hauschildt & Witte (2012) compute quadratic laws from PHOENIX model atmospheres in each band. Read at 2,566 K and log g 5.2396 they give u1 0.953, u2 -0.079 in R, u1 1.056, u2 -0.165 in V and u1 1.415, u2 -0.463 in B. One band darkens each color channel through a prepared colored limb plate, so the edge is dimmer and redder than the centre; it is not a resolved or directly measured stellar limb. The single I+z law of Gillon et al. (2016), a near-infrared transit prior from atmosphere tables, darkened all three channels alike before it and is no longer used.",
       "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat",
         "https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/",
         "https://github.com/layoutit/css.earth/pull/565"
       ]

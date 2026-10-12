@@ -414,8 +414,9 @@ export interface EnvelopeFit {
   readonly heightResiduals: readonly { readonly heightOfRadius: number; readonly residualRms: number }[];
 }
 
-/** Score the candidate envelopes against the image and keep the ring, or refuse. */
-export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: { innerMaskUnits: number; outerUnits: number; nearSidePositionAngleDeg: number; heightOfRadius: number; search?: EnvelopeSearch; depthSamples?: number; publishedWidthUnits?: number }): EnvelopeFit {
+/** Score candidate envelopes. A published profile disc uses these only as baselines: its measured-profile projection must
+ * beat them separately, so an unbounded single-belt width does not reject a disc with several observed rings. */
+export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: { innerMaskUnits: number; outerUnits: number; nearSidePositionAngleDeg: number; heightOfRadius: number; search?: EnvelopeSearch; depthSamples?: number; publishedWidthUnits?: number; comparisonOnly?: boolean }): EnvelopeFit {
   const { size, halfUnits, step, plane } = sky, search = options.search ?? DEFAULT_SEARCH, depth = options.depthSamples ?? size;
   const scored: number[] = [];
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
@@ -466,9 +467,9 @@ export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: 
   }
   const flat = score(() => 1).residualRms;
   const widthOfRadius = ring!.gaussianWidthUnits / R;
-  if (!options.publishedWidthUnits && (widthOfRadius <= search.widthOfRadius[0] || widthOfRadius >= search.widthOfRadius[1]))
+  if (!options.comparisonOnly && !options.publishedWidthUnits && (widthOfRadius <= search.widthOfRadius[0] || widthOfRadius >= search.widthOfRadius[1]))
     throw new Error(`The ring's best width sits on the edge of the search (${widthOfRadius.toFixed(3)} of the radius), so it is not a fit.`);
-  if (!(ring!.residualRms < shell.residualRms && ring!.residualRms < flat))
+  if (!options.comparisonOnly && !(ring!.residualRms < shell.residualRms && ring!.residualRms < flat))
     throw new Error(`No inclined ring beats the alternatives (ring ${ring!.residualRms.toExponential(3)}, shell ${shell.residualRms.toExponential(3)}, constant depth ${flat.toExponential(3)}).`);
   return { shape: 'inclined-ring', ring: ring!, shell, constantDepthResidualRms: flat, signalRms, scoredPixels: scored.length, heightResiduals };
 }

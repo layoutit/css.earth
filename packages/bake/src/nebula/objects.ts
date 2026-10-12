@@ -1,5 +1,5 @@
-import { readNonemptyText } from '@cssearth/core';
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
+import { readNonemptyText, requireRecord } from '@cssearth/core';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseVolumeRecipe, parseDensityVolumeFrame, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
 import { readVolumeDatasetBank, writeVolumeDatasetBank } from '@cssearth/objects/node';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
@@ -157,18 +157,22 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       let shared: DensityVolumeFrame | undefined;
       for (const grid of recipe.grids!) {
         const output = resolve(staging, 'compact', grid.id), recipeDirectory = dirname(local(root, grid.recipe.path));
-        const volumeRecipe = parseVolumeRecipe(JSON.parse((await pinned(root, grid.recipe)).toString()));
+        const rawRecipe = requireRecord(JSON.parse((await pinned(root, grid.recipe)).toString()) as unknown);
+        const volumeRecipe = parseVolumeRecipe(rawRecipe);
         const slices = await prepareVolumeSlices({ sourceDirectory: recipeDirectory, outputDirectory: output, recipe: volumeRecipe });
-        const source: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0],
-          localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: slices.boundsUnits };
+        const source: DensityVolumeFrame = rawRecipe.frame === undefined ? { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0],
+          localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: slices.boundsUnits }
+          : parseDensityVolumeFrame(rawRecipe.frame);
+        if (JSON.stringify(source.boundsUnits) !== JSON.stringify(slices.boundsUnits) || source.metersPerUnit !== 1 || source.originM.some(value => value !== 0))
+          throw new TypeError('A density-grid source frame must share the grid bounds, unit scale and zero origin.');
         // Every dataset of one bank shares a frame, so navigation and framing do not change with the dataset.
-        if (shared && JSON.stringify(shared.boundsUnits) !== JSON.stringify(source.boundsUnits)) throw new TypeError('Density-grid datasets must share their bounds.');
+        if (shared && !isDeepStrictEqual(shared, source)) throw new TypeError('Density-grid datasets must share their frame.');
         shared ??= source;
         const compiled = json({ schema: PREPARED_OBJECT_SCHEMA, id: `${recipe.id}-${grid.id}`, type: 'density-volume', format: DENSITY_VOLUME_FORMAT,
           data: compileCssVolume({ id: `${recipe.id}-${grid.id}`, frame: source, slices, recipe: volumeRecipe }) });
         const volumePath = resolve(output, 'volume.json');
         await put(volumePath, compiled);
-        const frame = embedNebulaFrame(source, recipe.sky);
+        const frame = embedNebulaFrame(source, recipe.sky, [0, 0, 0], rawRecipe.frame !== undefined);
         await add(grid.id, grid.label, grid.sourceUrl ?? recipe.sourceUrl, relative(root, volumePath), frame, { frame, points: [] },
           undefined, grid.occultingCentreUnits);
       }
