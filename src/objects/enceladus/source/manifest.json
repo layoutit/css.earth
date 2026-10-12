@@ -438,7 +438,7 @@
       "id": "enceladus-vims-ice-absorption",
       "path": "vims-chemistry/enceladus-vims-depth.tif",
       "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; css.earth offline index and partial mapping",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -485,7 +485,7 @@
       "id": "enceladus-vims-infrared-ratio",
       "path": "vims-chemistry/enceladus-vims-ratio.tif",
       "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; css.earth offline index and partial mapping",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -554,7 +554,7 @@
       "id": "enceladus-surface-features-source",
       "path": "features/manifest.json",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored factual metadata",
       "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
@@ -570,7 +570,7 @@
       "id": "enceladus-preparation-features",
       "path": "preparation/features.json",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored preparation parameters",
       "acquisition": "Authored beside the other preparation recipes.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -586,7 +586,7 @@
       "id": "enceladus-surface-map-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored presentation parameters",
       "acquisition": "Authored from the shared mesh convention.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -963,7 +963,7 @@
         ]
       },
       "origin": "https://doi.org/10.1016/j.icarus.2021.114803",
-      "credit": "G. Filacchione and co-authors (2022), Icarus 375, 114803; transcription: cssEarth.",
+      "credit": "G. Filacchione and co-authors (2022), Icarus 375, 114803; transcription: css.earth.",
       "acquisition": "Coefficients transcribed from the cited paper's open copy (arXiv 2111.15541) into a project document; no data file was downloaded."
     }
   ]

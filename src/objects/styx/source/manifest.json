@@ -5,7 +5,7 @@
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
-      "credit": "Porter et al. (2025) fitted dimensions; cssEarth analytic ellipsoid",
+      "credit": "Porter et al. (2025) fitted dimensions; css.earth analytic ellipsoid",
       "license": "MIT representation of published scientific dimensions",
       "licenseEvidence": [
         "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
@@ -36,7 +36,7 @@
       "id": "model-surface",
       "path": "material/neutral.png",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
-      "credit": "cssEarth standard no-coverage grid",
+      "credit": "css.earth standard no-coverage grid",
       "license": "MIT representation of published scientific dimensions",
       "licenseEvidence": [
         "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
@@ -126,7 +126,7 @@
       "id": "prepared-ellipsoid-context",
       "path": "presentation/context.png",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
-      "credit": "Porter et al. (2025) dimensions; cssEarth shape visualization",
+      "credit": "Porter et al. (2025) dimensions; css.earth shape visualization",
       "license": "MIT representation of scientific dimensions; retain attribution.",
       "consumers": [
         "navigation"

@@ -1,6 +1,6 @@
 # @cssearth/astronomy
 
-Time scales, float64 vectors and the reference-frame tree behind [cssEarth](https://github.com/layoutit/cssEarth).
+Time scales, float64 vectors and the reference-frame tree behind [cssEarth](https://github.com/layoutit/css.earth).
 
 Shared source contracts come from `@cssearth/objects`; there are no browser globals. Everything here runs in Node, a worker, or the browser.
 

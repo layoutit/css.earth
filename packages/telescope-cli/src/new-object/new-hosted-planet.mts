@@ -177,7 +177,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   const local = (reason: string) => ({ kind: 'local', reason });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, origin,
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
-    credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',
+    credit: 'css.earth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',
     acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
   put(`${o}/source/manifest.json`, { schema: SOURCE_MANIFEST_SCHEMA, inputs: [
     { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit,

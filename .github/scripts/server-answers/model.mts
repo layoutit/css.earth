@@ -31,8 +31,8 @@ export function sorted(value: unknown): unknown {
 }
 export const serialise = (value: unknown) => JSON.stringify(sorted(value), null, 2) + '\n';
 export function canonicalSourceLinks(value: string): string {
-  return value.replace(/https:\/\/github\.com\/layoutit\/cssEarth\/blob\/[0-9a-f]{40}\//gu,
-    'https://github.com/layoutit/cssEarth/blob/' + '0'.repeat(40) + '/');
+  return value.replace(/https:\/\/github\.com\/layoutit\/css\.earth\/blob\/[0-9a-f]{40}\//gu,
+    'https://github.com/layoutit/css.earth/blob/' + '0'.repeat(40) + '/');
 }
 function canonicalJson(value: unknown): unknown {
   if (typeof value === 'string') return canonicalSourceLinks(value);

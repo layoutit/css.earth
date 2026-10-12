@@ -5,7 +5,7 @@
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
       "origin": "https://doi.org/10.1051/0004-6361/201322416",
-      "credit": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+      "credit": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by css.earth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -39,8 +39,8 @@
         "kind": "local",
         "reason": "Project-authored grid marking unavailable surface imagery."
       },
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth missing-coverage grid",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth missing-coverage grid",
       "license": "MIT",
       "consumers": [
         "surfaces"
@@ -92,7 +92,7 @@
       "id": "prepared-source-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1051/0004-6361/201322416",
-      "credit": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+      "credit": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by css.earth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
       "license": "Authored display of scientific model; source attribution retained.",
       "consumers": [
         "navigation"

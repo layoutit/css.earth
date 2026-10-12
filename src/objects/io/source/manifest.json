@@ -140,7 +140,7 @@
       "id": "io-surface-minimap-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored presentation metadata",
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
@@ -470,7 +470,7 @@
       "id": "io-muse-spectral-slope-night-1",
       "path": "muse/io/485nm_slope-night-1.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
@@ -526,7 +526,7 @@
       "id": "io-muse-spectral-slope-night-2",
       "path": "muse/io/485nm_slope-night-2.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
@@ -582,7 +582,7 @@
       "id": "io-muse-spectral-slope-night-3",
       "path": "muse/io/485nm_slope-night-3.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
@@ -638,7 +638,7 @@
       "id": "io-muse-visible-absorption-night-1",
       "path": "muse/io/560nm_band-night-1.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
@@ -694,7 +694,7 @@
       "id": "io-muse-visible-absorption-night-2",
       "path": "muse/io/560nm_band-night-2.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
@@ -750,7 +750,7 @@
       "id": "io-muse-visible-absorption-night-3",
       "path": "muse/io/560nm_band-night-3.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
@@ -834,7 +834,7 @@
       "id": "io-surface-features-source",
       "path": "features/manifest.json",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored factual metadata",
       "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
@@ -850,7 +850,7 @@
       "id": "io-preparation-features",
       "path": "preparation/features.json",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored preparation parameters",
       "acquisition": "Authored beside the other preparation recipes.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -866,7 +866,7 @@
       "id": "io-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored Io solar-system recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -885,7 +885,7 @@
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored Io raster recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -902,7 +902,7 @@
       "id": "io-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored Io geometry recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -919,7 +919,7 @@
       "id": "io-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Io presentation recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -935,7 +935,7 @@
       "id": "io-preparation-navigation",
       "path": "preparation/navigation.json",
       "origin": "Repository-authored Io navigation recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -951,7 +951,7 @@
       "id": "io-preparation-acquisition",
       "path": "preparation/acquisition.json",
       "origin": "Repository-authored Io acquisition recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -968,7 +968,7 @@
       "id": "io-object-content",
       "path": "content/object.json",
       "origin": "Repository-authored Io object recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -985,7 +985,7 @@
       "id": "io-jiram-m-night-recipe",
       "path": "science/jiram/recipe.json",
       "origin": "Repository-authored reduction recipe selecting 90 Juno JIRAM RDR frames on six visits by volume and product id, with matching raw EDR detector checks on the 31 close-pass frames.",
-      "credit": "Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by cssEarth contributors",
+      "credit": "Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by css.earth contributors",
       "license": "Public NASA mission data; repository-authored recipe",
       "acquisition": "Native products and geometry kernels are named by the recipe. Run node packages/bake/authoring/juno/jiram-mosaic.mts src/objects/io/source/science/jiram/recipe.json --frames output/jiram/frames --fetch. Labels validate product identity, layout and matched EDR exposures; the measured receipt records byte identities.",
       "redistribution": "Recipe, labels and measured receipt are tracked; original frames and generated map bytes are restored from the archive or source cache.",
@@ -1007,7 +1007,7 @@
       "id": "io-jiram-perry-recipe",
       "path": "science/jiram/perry-recipe.json",
       "origin": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip",
-      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; css.earth reduction",
       "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
       "licenseEvidence": [
         "https://doi.org/10.3847/PSJ/adbae3"
@@ -1108,7 +1108,7 @@
       "id": "io-jiram-m-night-map",
       "path": "science/jiram/io-jiram-perry-2017-2023.IMG",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-perry-2017-2023.IMG",
-      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; css.earth reduction",
       "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
       "consumers": [
         "volcanic-heat"
@@ -1135,7 +1135,7 @@
       "id": "io-jiram-m-night-label",
       "path": "science/jiram/io-jiram-perry-2017-2023.LBL",
       "origin": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip",
-      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; css.earth reduction",
       "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
       "consumers": [
         "volcanic-heat"
@@ -1162,7 +1162,7 @@
       "id": "io-jiram-m-night-receipt",
       "path": "science/jiram/perry-receipt.json",
       "origin": "https://rgcps.asu.edu/downloads/perry_etal_2025.zip",
-      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; cssEarth reduction",
+      "credit": "Perry, Davies, Williams and Nelson (2025); Juno JIRAM team; css.earth reduction",
       "license": "Perry et al. (2025) original content, CC BY 4.0; public NASA mission inputs",
       "consumers": [
         "volcanic-heat"
@@ -1189,7 +1189,7 @@
       "id": "io-jiram-six-visit-map",
       "path": "science/jiram/io-jiram-m-night-2023-background.IMG",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-m-night-2023-background.IMG",
-      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by css.earth contributors",
       "license": "Public NASA mission data",
       "consumers": [
         "historical-evidence"
@@ -1216,7 +1216,7 @@
       "id": "io-jiram-six-visit-label",
       "path": "science/jiram/io-jiram-m-night-2023-background.LBL",
       "origin": "https://atmos.nmsu.edu/PDS/data/",
-      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by css.earth contributors",
       "license": "Public NASA mission data",
       "consumers": [
         "historical-evidence"
@@ -1243,7 +1243,7 @@
       "id": "io-jiram-six-visit-receipt",
       "path": "science/jiram/receipt.json",
       "origin": "https://atmos.nmsu.edu/PDS/data/",
-      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by css.earth contributors",
       "license": "Public NASA mission data",
       "consumers": [
         "historical-evidence"
@@ -1549,7 +1549,7 @@
       "id": "sim3168-archive-index-json",
       "path": "science/geology-sim3168/archive-index.json",
       "origin": "https://pubs.usgs.gov/sim/3168/",
-      "credit": "USGS source data; cssEarth intake record",
+      "credit": "USGS source data; css.earth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
       "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
       "redistribution": "Metadata only; retained in Git.",
@@ -1562,7 +1562,7 @@
       "id": "sim3168-intake-downloads-json",
       "path": "science/geology-sim3168/intake-downloads.json",
       "origin": "https://pubs.usgs.gov/sim/3168/",
-      "credit": "USGS source data; cssEarth intake record",
+      "credit": "USGS source data; css.earth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
       "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
       "redistribution": "Metadata only; retained in Git.",
@@ -1575,7 +1575,7 @@
       "id": "sim3168-display-categories-json",
       "path": "science/geology-sim3168/display-categories.json",
       "origin": "https://pubs.usgs.gov/sim/3168/",
-      "credit": "USGS source data; cssEarth intake record",
+      "credit": "USGS source data; css.earth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
       "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
       "redistribution": "Metadata only; retained in Git.",
@@ -1588,7 +1588,7 @@
       "id": "sim3168-registration-anchors",
       "path": "science/geology-sim3168/registration-anchors.json",
       "origin": "https://pubs.usgs.gov/sim/3168/",
-      "credit": "USGS point and polygon layers; cssEarth comparison",
+      "credit": "USGS point and polygon layers; css.earth comparison",
       "license": "Repository-authored validation metadata of public domain GIS data",
       "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained.",
       "redistribution": "Small source-validation metadata.",
@@ -1675,7 +1675,7 @@
         ]
       },
       "origin": "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km",
-      "credit": "Limb-darkening coefficient: USGS Astrogeology Science Center (Becker and Geissler, 2005). Transcription and emission limit: cssEarth.",
+      "credit": "Limb-darkening coefficient: USGS Astrogeology Science Center (Becker and Geissler, 2005). Transcription and emission limit: css.earth.",
       "acquisition": "Coefficient transcribed from the product's process description into a project document; the emission limit is computed from the image scale the PDS Ring-Moon Systems Node lists; no data file was downloaded."
     }
   ]

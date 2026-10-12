@@ -75,7 +75,7 @@
       "origin": "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
       "sourceUrl": "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
       "title": "The Little Dumbbell's ring and two inner lobes as one closed surface, 18240 triangles",
-      "credit": "cssEarth contributors, from Bryce et al. (1996)",
+      "credit": "css.earth contributors, from Bryce et al. (1996)",
       "displayCredit": "Bryce et al. (1996)",
       "acquisition": "Built by the generator (`node packages/bake/authoring/m76/lobe-surface.mts src/objects/m76-layers`) from the transcribed record lobe-model.json: a surface of revolution about the bipolar axis, a binary STL in arcseconds from the star. Restored from the source cache; not tracked. Read by the image-layer bake for where each sight line crosses the surface.",
       "generator": "packages/bake/authoring/m76/lobe-surface.mts",
@@ -119,7 +119,7 @@
       },
       "kind": "authored-document",
       "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "title": "Image-layer preparation recipe",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -132,7 +132,7 @@
       },
       "kind": "authored-document",
       "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "title": "Published image interpretation and acquisition record",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -145,7 +145,7 @@
       },
       "kind": "authored-document",
       "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "title": "Dataset presentation and prepared-bank bindings",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -158,7 +158,7 @@
       },
       "kind": "authored-document",
       "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "title": "The ring and lobes: the published sizes and the two measured here",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     }

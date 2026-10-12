@@ -5,7 +5,7 @@
       "id": "shape-approximation",
       "path": "shape/model.tab",
       "origin": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
-      "credit": "Denk et al. model constraints; cssEarth approximate envelope",
+      "credit": "Denk et al. model constraints; css.earth approximate envelope",
       "license": "MIT authored approximation from cited scientific constraints",
       "licenseEvidence": [
         "https://tilmanndenk.de/outersaturnianmoons/ymir/"
@@ -134,7 +134,7 @@
       "id": "prepared-shape-context",
       "path": "presentation/context.png",
       "origin": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
-      "credit": "Denk et al. model constraints; cssEarth approximate envelope",
+      "credit": "Denk et al. model constraints; css.earth approximate envelope",
       "license": "MIT display representation from published scientific measurements; retain source citation.",
       "consumers": [
         "navigation"

@@ -5,7 +5,7 @@
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-      "credit": "Karkoschka (2003); cssEarth measured-axes model",
+      "credit": "Karkoschka (2003); css.earth measured-axes model",
       "license": "Scientific measurements attributed to Karkoschka (2003); cssEarth model representation under MIT.",
       "licenseEvidence": [
         "https://doi.org/10.1016/S0019-1035(03)00002-2"
@@ -36,7 +36,7 @@
       "id": "model-surface",
       "path": "material/neutral.png",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-      "credit": "Karkoschka (2003); cssEarth measured-axes model",
+      "credit": "Karkoschka (2003); css.earth measured-axes model",
       "license": "Scientific measurements attributed to Karkoschka (2003); cssEarth model representation under MIT.",
       "licenseEvidence": [
         "https://doi.org/10.1016/S0019-1035(03)00002-2"
@@ -132,7 +132,7 @@
       "id": "prepared-ellipsoid-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-      "credit": "Karkoschka (2003); cssEarth standard grid shape visualization",
+      "credit": "Karkoschka (2003); css.earth standard grid shape visualization",
       "license": "Scientific measurements attributed to Karkoschka (2003); cssEarth model representation under MIT.",
       "consumers": [
         "navigation"

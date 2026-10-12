@@ -38,11 +38,11 @@
     {
       "id": "model-surface",
       "path": "material/model-coverage.png",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "Farnham & Thomas (2013), NASA PDS flags; cssEarth coverage material",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "Farnham & Thomas (2013), NASA PDS flags; css.earth coverage material",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in material, reproduced from the original PDS constraint flags during preparation.",
       "redistribution": "Authored neutral material under the repository MIT license.",
@@ -209,11 +209,11 @@
     {
       "id": "mv10110413-6000001-001-r-controlPath",
       "path": "photography/mri/mv10110413_6000001_001_r.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -296,11 +296,11 @@
     {
       "id": "mv10110413-6000002-001-r-controlPath",
       "path": "photography/mri/mv10110413_6000002_001_r.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -383,11 +383,11 @@
     {
       "id": "mv10110414-6000003-001-r-controlPath",
       "path": "photography/mri/mv10110414_6000003_001_r.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -470,11 +470,11 @@
     {
       "id": "hv10110413-5004004-001-d050-controlPath",
       "path": "photography/hri/hv10110413_5004004_001_d050.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -557,11 +557,11 @@
     {
       "id": "hv10110413-5004008-001-d050-controlPath",
       "path": "photography/hri/hv10110413_5004008_001_d050.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -577,7 +577,7 @@
       "id": "comet-103p-features-landmarks",
       "path": "features/landmarks.json",
       "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -599,7 +599,7 @@
       "id": "comet-103p-features-manifest",
       "path": "features/manifest.json",
       "origin": "Byte pins and source qualifications for the surface-place compilation.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -615,7 +615,7 @@
       "id": "comet-103p-preparation-features",
       "path": "preparation/features.json",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -631,7 +631,7 @@
       "id": "comet-103p-presentation-surface-map",
       "path": "presentation/surface-map.json",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -647,7 +647,7 @@
       "id": "hrii-fields",
       "path": "science/hrii/fields.csv.gz",
       "origin": "object:source/science/hrii/fields.csv.gz",
-      "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
+      "credit": "css.earth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
       "license": "MIT; underlying PDS scientific data",
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
@@ -4678,7 +4678,7 @@
       "id": "hrii-preparation-json",
       "path": "science/hrii/preparation.json",
       "origin": "object:source/science/hrii/preparation.json",
-      "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
+      "credit": "css.earth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
       "license": "MIT; underlying PDS scientific data",
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
@@ -4697,7 +4697,7 @@
       "id": "hrii-scan-json",
       "path": "science/hrii/scan.json",
       "origin": "object:source/science/hrii/scan.json",
-      "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
+      "credit": "css.earth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
       "license": "MIT; underlying PDS scientific data",
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"

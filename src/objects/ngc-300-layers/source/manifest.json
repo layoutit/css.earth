@@ -153,7 +153,7 @@
       },
       "kind": "authored-document",
       "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "title": "Image-layer preparation recipe",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -166,7 +166,7 @@
       },
       "kind": "authored-document",
       "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "title": "Published image interpretation and acquisition record",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -179,7 +179,7 @@
       },
       "kind": "authored-document",
       "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "title": "Dataset presentation and prepared-bank bindings",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -202,7 +202,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-300-layers/source/dots/merge.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored merge of the catalogue dot banks into one layer.",
       "sourceBinding": {
         "kind": "local",
@@ -214,7 +214,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-300-layers/source/pena-pne/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the A catalog of planetary nebula candidates in the Sculptor spiral galaxy NGC300 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -226,7 +226,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-300-layers/source/pietrzynski-cepheids/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the The ARAUCARIA project: discovery of Cepheid variables in NGC 300 from a wide-field imaging survey rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -238,7 +238,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-300-layers/source/pietrzynski-ob/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the A catalog of OB associations in the spiral galaxy NGC 300 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -250,7 +250,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-300-layers/source/soffner-hii/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the Planetary nebulae and HII regions in NGC 300 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -262,7 +262,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-300-layers/source/vucetic-snr/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",

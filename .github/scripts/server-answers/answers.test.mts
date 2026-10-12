@@ -140,19 +140,19 @@ test('fallback diagnostic can never pass the recorder guard', () => {
 
 test('source-link commit normalization covers bodies and headers but preserves paths and unrelated hex', async () => {
   const commitA = 'a'.repeat(40), commitB = 'b'.repeat(40);
-  const link = (commit: string, path = 'src/objects/earth/README.md') => `https://github.com/layoutit/cssEarth/blob/${commit}/${path}`;
+  const link = (commit: string, path = 'src/objects/earth/README.md') => `https://github.com/layoutit/css.earth/blob/${commit}/${path}`;
   for (const type of ['text/html', 'text/plain', 'application/json']) {
     const ask = (commit: string, path?: string) => recordAnswer('source', new Response(type.includes('json') ? JSON.stringify({ objects: { rows: [{ source: { document: link(commit, path) } }] } }) : `<a href="${link(commit, path)}">source</a>`, { headers: { 'content-type': type, 'x-source': link(commit, path) } }), origin);
     assert.equal(serialise(await ask(commitA)), serialise(await ask(commitB)));
     assert.notEqual(serialise(await ask(commitA)), serialise(await ask(commitB, 'src/objects/mars/README.md')));
   }
-  const untouched = `${commitA} https://github.com/other/cssEarth/blob/${commitA}/x https://github.com/layoutit/cssEarth/blob/${'A'.repeat(40)}/x`;
+  const untouched = `${commitA} https://github.com/other/cssEarth/blob/${commitA}/x https://github.com/layoutit/css.earth/blob/${'A'.repeat(40)}/x`;
   const answer = await recordAnswer('source', new Response(untouched, { headers: { 'content-type': 'text/plain' } }), origin);
   assert.deepEqual(answer.body, { kind: 'text', value: untouched });
 });
 
 test('source-link normalization precedes static and remainder lengths and md5 and rewritten region storage', () => {
-  const link = (commit: string) => `https://github.com/layoutit/cssEarth/blob/${commit}/src/objects/earth/README.md`;
+  const link = (commit: string) => `https://github.com/layoutit/css.earth/blob/${commit}/src/objects/earth/README.md`;
   const html = (commit: string, region = 'static') => `<a data-source-document="${link(commit)}">source</a><!--search-shell:start-->${region} ${link(commit)}<!--search-shell:end-->`;
   const before = html('a'.repeat(40)), after = html('b'.repeat(40));
   assert.equal(canonicalHtml(before).length, before.length);

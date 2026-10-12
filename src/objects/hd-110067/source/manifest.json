@@ -25,7 +25,7 @@
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and attribution."
       },
-      "credit": "cssEarth and the institutional sources identified in this record",
+      "credit": "css.earth and the institutional sources identified in this record",
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -42,7 +42,7 @@
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and attribution."
       },
-      "credit": "cssEarth and the institutional sources identified in this record",
+      "credit": "css.earth and the institutional sources identified in this record",
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -59,7 +59,7 @@
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and attribution."
       },
-      "credit": "cssEarth and the institutional sources identified in this record",
+      "credit": "css.earth and the institutional sources identified in this record",
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -75,7 +75,7 @@
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and attribution."
       },
-      "credit": "cssEarth and the institutional sources identified in this record",
+      "credit": "css.earth and the institutional sources identified in this record",
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -113,7 +113,7 @@
       "id": "hd-110067-stellar-color",
       "path": "photometry/stellar-color.json",
       "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2024-03-08T10:41:06.519",
-      "credit": "ESO spectrum; cssEarth visible-color integration",
+      "credit": "ESO spectrum; css.earth visible-color integration",
       "license": "Authored recipe; CIE-derived color assets CC BY-SA 4.0",
       "acquisition": "Project-authored interpretation of the selected native spectrum",
       "redistribution": "Project-authored recipe",
@@ -155,7 +155,7 @@
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1038/s41586-023-06692-3",
-      "credit": "ESO ESPRESSO spectrum and CIE color matching; cssEarth starMarker",
+      "credit": "ESO ESPRESSO spectrum and CIE color matching; css.earth starMarker",
       "license": "Derived color marker under CC BY-SA 4.0",
       "consumers": [
         "navigation"

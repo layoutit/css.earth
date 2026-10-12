@@ -493,7 +493,7 @@
       "source": "site/components/ObjectShell.astro:72",
       "tag": "a",
       "selector": ".explorer-brand-version",
-      "markup": "<a class=\"explorer-brand-version\" title=\"GitHub\" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href=\"https://github.com/layoutit/cssEarth\" target=\"_blank\" rel=\"noopener noreferrer\">"
+      "markup": "<a class=\"explorer-brand-version\" title=\"GitHub\" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href=\"https://github.com/layoutit/css.earth\" target=\"_blank\" rel=\"noopener noreferrer\">"
     },
     {
       "id": "control:site:components:ObjectShell:a:markup:2",
@@ -509,7 +509,7 @@
       "source": "site/components/ObjectShell.astro:113",
       "tag": "a",
       "selector": ".object-header-link",
-      "markup": "<a class=\"object-header-link\" href=\"https://github.com/layoutit/cssEarth\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"GitHub\" title=\"GitHub\">"
+      "markup": "<a class=\"object-header-link\" href=\"https://github.com/layoutit/css.earth\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"GitHub\" title=\"GitHub\">"
     },
     {
       "id": "control:site:components:ObjectShell:a:markup:4",
@@ -517,7 +517,7 @@
       "source": "site/components/ObjectShell.astro:249",
       "tag": "a",
       "selector": ".explorer-brand-version",
-      "markup": "<a class=\"explorer-brand-version\" title=\"GitHub\" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href=\"https://github.com/layoutit/cssEarth\" target=\"_blank\" rel=\"noopener noreferrer\">"
+      "markup": "<a class=\"explorer-brand-version\" title=\"GitHub\" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href=\"https://github.com/layoutit/css.earth\" target=\"_blank\" rel=\"noopener noreferrer\">"
     },
     {
       "id": "control:site:components:ObjectShell:button:markup:1",

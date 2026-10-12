@@ -138,7 +138,7 @@ export async function refreshEarthEnso(root = checkoutProjectRoot(import.meta.ur
     { id: `nasa-mur-gibs-mosaic-${receipt.date}`, path: `${murDateDirectory(receipt.date)}/mosaic.png`, origin: 'packages/bake/authoring/earth/mur-imagery.mts',
       generator: 'packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science',
       description: 'Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.',
-      consumers: [murDatasetId(receipt.date)], credit: `${credit}; mosaic preparation by cssEarth contributors`, sourceBinding: catalogued(receipt.date) }]),
+      consumers: [murDatasetId(receipt.date)], credit: `${credit}; mosaic preparation by css.earth contributors`, sourceBinding: catalogued(receipt.date) }]),
   'manifest intermediates');
   manifest.generatedIntermediates = intermediates;
 

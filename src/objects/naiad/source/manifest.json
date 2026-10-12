@@ -5,7 +5,7 @@
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-      "credit": "Erich Karkoschka (2003) measured axes; cssEarth ellipsoid representation",
+      "credit": "Erich Karkoschka (2003) measured axes; css.earth ellipsoid representation",
       "license": "MIT representation of published scientific dimensions",
       "licenseEvidence": [
         "https://doi.org/10.1016/S0019-1035(03)00002-2"
@@ -36,7 +36,7 @@
       "id": "model-surface",
       "path": "material/neutral.png",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-      "credit": "cssEarth standard no-coverage indicator",
+      "credit": "css.earth standard no-coverage indicator",
       "license": "MIT display representation from public NASA/NAIF scientific parameters",
       "licenseEvidence": [
         "https://naif.jpl.nasa.gov/naif/rules.html"
@@ -120,7 +120,7 @@
       "id": "prepared-ellipsoid-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-      "credit": "Karkoschka (2003) dimensions; cssEarth shape visualization",
+      "credit": "Karkoschka (2003) dimensions; css.earth shape visualization",
       "license": "Public PDS scientific data; retain mission and model attribution.",
       "consumers": [
         "navigation"

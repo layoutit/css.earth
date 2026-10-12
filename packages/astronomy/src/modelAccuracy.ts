@@ -32,7 +32,7 @@ export interface FrameModelAccuracy {
 const VSOP_SOURCE_URL = 'https://cdsarc.cds.unistra.fr/viz-bin/cat/VI/81'
 const ELP_SOURCE_URL = 'https://cdsarc.cds.unistra.fr/viz-bin/cat/VI/79'
 const HORIZONS_SOURCE_URL = 'https://ssd.jpl.nasa.gov/horizons/'
-const PROJECT_SOURCE_URL = 'https://github.com/layoutit/cssEarth/blob/main/packages/astronomy/AGENTS.md'
+const PROJECT_SOURCE_URL = 'https://github.com/layoutit/css.earth/blob/main/packages/astronomy/AGENTS.md'
 
 const VSOP_KEY_BY_PLANET: Record<PlanetId, Vsop87BodyKey> = {
   mercury: 'mercury',

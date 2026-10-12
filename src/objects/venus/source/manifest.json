@@ -227,7 +227,7 @@
       "id": "venus-object-content",
       "path": "content/object.json",
       "origin": "Repository-authored Venus panel, dataset, chart, and provenance data.",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside Venus inputs.",
       "redistribution": "Prepared shell content with source provenance.",
@@ -245,7 +245,7 @@
       "id": "venus-chart-assets",
       "path": "content/charts.json",
       "origin": "Repository-authored Venus chart asset recipe bound to scientific source records.",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked chart recipe maintained beside Venus inputs.",
       "redistribution": "Prepared source-backed chart SVGs.",
@@ -261,7 +261,7 @@
       "id": "venus-preparation-acquisition",
       "path": "preparation/acquisition.json",
       "origin": "Repository-authored Venus acquisition and qualification recipe.",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
       "redistribution": "Preparation provenance and reproducibility.",
@@ -279,7 +279,7 @@
       "id": "venus-preparation-navigation",
       "path": "preparation/navigation.json",
       "origin": "Repository-authored Venus navigation asset recipe.",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
       "redistribution": "Prepared navigation asset.",
@@ -295,7 +295,7 @@
       "id": "venus-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored Venus CSS geometry recipe.",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
       "redistribution": "Prepared retained CSS scene geometry.",
@@ -312,7 +312,7 @@
       "id": "venus-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Venus presentation capability recipe.",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
       "redistribution": "Prepared CSS presentation capabilities.",
@@ -328,7 +328,7 @@
       "id": "venus-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored Venus raster preparation recipe.",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
       "redistribution": "Prepared raster assets.",
@@ -345,7 +345,7 @@
       "id": "venus-surface-minimap-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored presentation metadata",
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
@@ -391,7 +391,7 @@
       "id": "venus-surface-features-source",
       "path": "features/manifest.json",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored factual metadata",
       "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
@@ -407,7 +407,7 @@
       "id": "venus-preparation-features",
       "path": "preparation/features.json",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored preparation parameters",
       "acquisition": "Authored beside the other preparation recipes.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -958,7 +958,7 @@
         ]
       },
       "origin": "https://doi.org/10.1002/2017JE005406",
-      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: cssEarth.",
+      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -976,7 +976,7 @@
         ]
       },
       "origin": "https://doi.org/10.1002/2017JE005406",
-      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: cssEarth.",
+      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -994,7 +994,7 @@
         ]
       },
       "origin": "https://doi.org/10.1002/2017JE005406",
-      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: cssEarth.",
+      "credit": "Santiago Perez-Hoyos and co-authors; preprint arXiv:1801.03820; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -1012,7 +1012,7 @@
         ]
       },
       "origin": "https://hub.docker.com/r/nasapsg/psg",
-      "credit": "NASA GSFC Planetary Spectrum Generator (Villanueva et al. 2018, 2022); computed by cssEarth with a local nasapsg/psg container.",
+      "credit": "NASA GSFC Planetary Spectrum Generator (Villanueva et al. 2018, 2022); computed by css.earth with a local nasapsg/psg container.",
       "acquisition": "Generated on 2026-09-25 by `node packages/bake/cli/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`; the answers are cached in output/psg-limb/venus.jsonl."
     },
     {
@@ -1030,7 +1030,7 @@
         ]
       },
       "origin": "https://hub.docker.com/r/nasapsg/psg",
-      "credit": "NASA GSFC Planetary Spectrum Generator; configuration written by cssEarth from PSG's own template.",
+      "credit": "NASA GSFC Planetary Spectrum Generator; configuration written by css.earth from PSG's own template.",
       "acquisition": "Written by `node packages/bake/cli/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`."
     },
     {
@@ -1048,7 +1048,7 @@
         ]
       },
       "origin": "https://hub.docker.com/r/nasapsg/psg",
-      "credit": "NASA GSFC Planetary Spectrum Generator; configuration written by cssEarth from PSG's own template.",
+      "credit": "NASA GSFC Planetary Spectrum Generator; configuration written by css.earth from PSG's own template.",
       "acquisition": "Written by `node packages/bake/cli/acquire-psg-limb-table.mts --body=venus --psg-name=Venus --altitudes=75,80,85,90,95,100,110,120 --nmax=6 --lmax=41 --window-nm=5 --api=http://localhost:3000/api.php --container=psg`."
     },
     {
