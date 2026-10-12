@@ -46,6 +46,11 @@ replaces one near-infrared law (Gillon et al. 2016, I+z at 885 nm, a transit pri
 channels alike, so the hue never changed across the disc. This is a **model**, not a resolved image or a measured profile, and it
 claims no off-limb glow.
 
+![The disc with one law for all channels, and with one law per channel](source/reference/limb-before-after.png)
+
+Left: css.earth on 2026-10-12, with the one I+z law. Right: this recipe, from the branch's site. Both are the default view in
+headless Chrome at 1440 by 900 (DPR 2), cropped to the disc.
+
 **Axis.** No rotation axis is measured. The period is known from spot modulation — 3.295 days (Luger et al. 2017) — but not the
 direction of the axis on the sky, so the display axis is celestial north at the star, a convention.
 
