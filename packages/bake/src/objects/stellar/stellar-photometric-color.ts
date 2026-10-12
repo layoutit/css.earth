@@ -151,6 +151,11 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
   const limbDarkening = science.limbDarkening === undefined ? null : await (async () => {
     const recipe = parseLimbDarkeningRecipe(science.limbDarkening);
     if (recipe.source === 'table') return { recipe, coefficients: readQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
+    if (recipe.source === 'grid' && recipe.channels) {
+      // The green channel's law stands for the disc wherever one law is asked for (the report's limb-to-centre ratio).
+      const channels = interpolateChannelLimbDarkening((await read(recipe.path)).toString('utf8'), recipe);
+      return { recipe, coefficients: channels[1], channels };
+    }
     if (recipe.source === 'grid') return { recipe, coefficients: interpolateQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
     if (recipe.source === 'published') {
       const record: unknown = JSON.parse((await read(recipe.path)).toString('utf8'));
@@ -388,8 +393,14 @@ export type LimbDarkeningRecipe = {
   readonly law: 'quadratic'; readonly source: 'grid'; readonly path: string; readonly teffK: number; readonly logg: number;
   /** Spherical grids (Neilson & Lester 2013) also tabulate the model's mass: the star's own, in solar masses, and its column. */
   readonly massSolar?: number;
+  /** One band of the grid per screen channel: the limb then changes hue as well as brightness (limbDarkeningPlate). */
+  readonly channels?: LimbChannelBands;
   readonly models: Readonly<Record<string, string>>; readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string; readonly mass?: string };
 };
+/** The grid column that names a row's band, and the band read for the red, the green and the blue channel. */
+export interface LimbChannelBands { readonly column: string; readonly red: string; readonly green: string; readonly blue: string }
+/** One law per screen channel: red, green, blue. */
+export type ChannelLimbDarkening = readonly [QuadraticLimbDarkening, QuadraticLimbDarkening, QuadraticLimbDarkening];
 export interface QuadraticLimbDarkening { readonly u1: number; readonly u2: number; readonly u1Bounds: readonly [number, number]; readonly u2Bounds: readonly [number, number]; readonly basis?: 'transit-fit' | 'model-prior' }
 
 export function parseLimbDarkeningRecipe(value: unknown): LimbDarkeningRecipe {
@@ -424,10 +435,18 @@ export function parseLimbDarkeningRecipe(value: unknown): LimbDarkeningRecipe {
     return { law: 'quadratic', source: 'grid', path: requireString(input.path, 'limbDarkening.path'), teffK: requireFiniteNumber(grid.teffK, 'limbDarkening.grid.teffK'),
       logg: requireFiniteNumber(grid.logg, 'limbDarkening.grid.logg'), models: Object.fromEntries(Object.entries(models).map(([key, value]) => [key, requireString(value)])),
       ...(grid.massSolar === undefined ? {} : { massSolar: requireFiniteNumber(grid.massSolar, 'limbDarkening.grid.massSolar') }),
+      ...(grid.channels === undefined ? {} : { channels: parseChannelBands(grid.channels, models) }),
       columns: { teff: column('teff'), logg: column('logg'), u1: column('u1'), u2: column('u2'), ...(columns.mass === undefined ? {} : { mass: column('mass') }) } };
   }
   return { law: 'quadratic', source: 'table', path: requireString(input.path, 'limbDarkening.path'), star: requireString(input.star, 'limbDarkening.star'),
     columns: { u1: column('u1'), u2: column('u2'), u1Upper: column('u1Upper'), u1Lower: column('u1Lower'), u2Upper: column('u2Upper'), u2Lower: column('u2Lower') } };
+}
+
+function parseChannelBands(value: unknown, models: Record<string, unknown>): LimbChannelBands {
+  const channels = requireRecord(value, 'limbDarkening.grid.channels'), band = (name: string) => requireString(channels[name], `limbDarkening.grid.channels.${name}`);
+  const column = band('column');
+  if (column in models) throw new TypeError(`Limb darkening by channel reads ${column} per channel: the grid's models must not fix it.`);
+  return { column, red: band('red'), green: band('green'), blue: band('blue') };
 }
 
 /** The coefficients for one star from a VizieR tab-separated table: a header row, a dashed rule, then data rows. Upper and lower
@@ -451,6 +470,13 @@ export function readQuadraticLimbDarkening(tsv: string, recipe: Extract<LimbDark
 export function interpolateQuadraticLimbDarkening(tsv: string, recipe: Extract<LimbDarkeningRecipe, { source: 'grid' }>): QuadraticLimbDarkening {
   const { u1, u2, u1Bounds, u2Bounds } = readLimbGrid(tsv, recipe);
   return { u1, u2, u1Bounds, u2Bounds };
+}
+/** One law per screen channel, each read between the same nodes in its own band of the grid. */
+export function interpolateChannelLimbDarkening(tsv: string, recipe: Extract<LimbDarkeningRecipe, { source: 'grid' }>): ChannelLimbDarkening {
+  const bands = recipe.channels;
+  if (!bands) throw new TypeError('The limb-darkening grid names no band per channel.');
+  const read = (band: string) => interpolateQuadraticLimbDarkening(tsv, { ...recipe, models: { ...recipe.models, [bands.column]: band } });
+  return [read(bands.red), read(bands.green), read(bands.blue)];
 }
 /** The law a one-color disc names (an imaged planet's band color), read from the model grid beside it. A star's law is read with
  * its color (loadStellarPhotometricColor). */
@@ -484,17 +510,34 @@ export const displayedLuminance = (linear: readonly number[]) => linear.reduce((
 
 /** A square RGBA limb plate `size` texels across whose disc fills it edge to edge: black, with alpha such that the photosphere color
  * under it shows the displayed luminance of the color dimmed by I(mu) / I(1), dithered to within one 8-bit step. Outside the disc it
- * is transparent. */
-export function limbDarkeningPlate(size: number, coefficients: LimbLaw | Pick<QuadraticLimbDarkening, 'u1' | 'u2'>, color: StellarColor) {
+ * is transparent.
+ *
+ * With `channels`, one law per screen channel, the plate is not black. Its alpha takes the channel that darkens most to its displayed
+ * value, and its color lifts the other two to theirs under ordinary alpha compositing, so the limb changes hue as well as
+ * brightness. The color is computed from the exact alpha, so it stays smooth under the dither; each channel is within one 8-bit
+ * step of its law. */
+export function limbDarkeningPlate(size: number, coefficients: LimbLaw | Pick<QuadraticLimbDarkening, 'u1' | 'u2'>, color: StellarColor,
+  channels?: readonly [LimbLaw | Pick<QuadraticLimbDarkening, 'u1' | 'u2'>, LimbLaw | Pick<QuadraticLimbDarkening, 'u1' | 'u2'>, LimbLaw | Pick<QuadraticLimbDarkening, 'u1' | 'u2'>]) {
   const data = new Uint8Array(size * size * 4), centre = size / 2, full = displayedLuminance(color.linear);
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const radial = Math.hypot(x + 0.5 - centre, y + 0.5 - centre) / centre;
     if (radial > 1) continue;
-    const ratio = Math.max(0, limbIntensity(Math.sqrt(1 - radial * radial), coefficients));
-    const shown = displayedLuminance(color.linear.map(value => value * ratio)) / full;
+    const mu = Math.sqrt(1 - radial * radial), at = (y * size + x) * 4;
     // A fixed ordered dither (4 x 4 Bayer) keeps the 8-bit alpha from banding when the plate is stretched over a close-up disc; it moves
     // no texel by more than one step from the exact value.
-    data[(y * size + x) * 4 + 3] = Math.max(0, Math.min(255, Math.floor((1 - shown) * 255 + BAYER_4[(y % 4) * 4 + (x % 4)]!)));
+    const dithered = (alpha: number) => Math.max(0, Math.min(255, Math.floor(alpha * 255 + BAYER_4[(y % 4) * 4 + (x % 4)]!)));
+    if (!channels) {
+      const ratio = Math.max(0, limbIntensity(mu, coefficients));
+      data[at + 3] = dithered(1 - displayedLuminance(color.linear.map(value => value * ratio)) / full);
+      continue;
+    }
+    // What each channel shows of its photosphere value, on encoded values as the browser composites them. A channel the color
+    // lacks asks for nothing.
+    const shown = channels.map((law, channel) => color.srgb[channel]! ? Math.min(1, linearToSrgb(color.linear[channel]! * Math.max(0, limbIntensity(mu, law))) * 255 / color.srgb[channel]!) : 1);
+    const least = Math.min(...shown);
+    if (least === 1) continue;
+    for (let channel = 0; channel < 3; channel++) data[at + channel] = Math.round(color.srgb[channel]! * (shown[channel]! - least) / (1 - least));
+    data[at + 3] = dithered(1 - least);
   }
   return { data, size, lossless: true };
 }

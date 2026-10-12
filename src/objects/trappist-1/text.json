@@ -31,7 +31,7 @@
     "color": {
       "title": "Photosphere color",
       "detail": "From its spectrum",
-      "summary": "Gaia color with modeled I+z limb darkening from Gillon et al. (2016); no resolved image.",
+      "summary": "The color of the star's light, dimmed and reddened toward the edge by a model atmosphere; no resolved image.",
       "sources": [
         {
           "catalogueId": "gaia-dr3-trappist-1",
@@ -41,12 +41,11 @@
           "locator": "BP/RP continuous spectrum, source 2635476908753563008"
         },
         {
-          "catalogueId": "doi-10-1038-nature17448",
-          "url": "https://doi.org/10.1038/nature17448",
-          "label": "Gillon et al. 2016",
-          "checked": "2026-09-23",
-          "locator": "Extended Data Table 2, I+z row",
-          "quote": "I+z (TRAPPIST): u1 0.65±0.10, u2 0.28±0.12"
+          "catalogueId": "source-trappist-1-claret-2012-limb-darkening",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat",
+          "label": "Claret et al. 2012",
+          "checked": "2026-10-12",
+          "locator": "tableab.dat, quadratic law by least squares: the R, V and B rows at 2,500 and 2,600 K, log g 5.0 and 5.5"
         }
       ]
     },

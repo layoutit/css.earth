@@ -27,12 +27,29 @@ below zero. A sample that is not positive but lies within three times its own er
 wavelength; anything more negative would fail the build. Moving every sample one standard error down and up moves the blue channel
 from 34 to 156, which is the honest width of this color.
 
-**Limb layer.** [Gillon et al. (2016), Extended Data Table 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC5321506/) gives TRAPPIST-1's
-I+z quadratic limb-darkening coefficients `u1 = 0.65 ± 0.10` and `u2 = 0.28 ± 0.12` (effective wavelength 885 ± 5 nm). The authors
-inferred them from theoretical atmosphere tables and used them as transit priors. The prepared black-alpha plate applies
-`I(μ)/I(1) = 1 - u1(1 - μ) - u2(1 - μ)²` to the Gaia-colored sphere, with transparent pixels outside it. At the modeled edge,
-the intensity is 7% of the centre. This is a **red-band model**, not a resolved image, a measured spatial profile or a visible-light
-broadband measurement. The plate changes brightness without claiming a new hue or off-limb glow.
+**Limb layer.** Nothing resolves this disc, so its limb is a model.
+[Claret, Hauschildt & Witte (2012)](https://doi.org/10.1051/0004-6361/201219849) compute quadratic limb-darkening laws,
+`I(μ)/I(1) = 1 - u1(1 - μ) - u2(1 - μ)²`, from PHOENIX model atmospheres in each photometric band.
+[`claret-2012-bvr-quadratic.tsv`](source/photometry/claret-2012-bvr-quadratic.tsv) keeps their R, V and B rows at the four grid
+nodes around the star (2,500 and 2,600 K, log g 5.0 and 5.5). Read at the star's 2,566 K and log g 5.2396 (Agol et al. 2021,
+through the NASA Exoplanet Archive), one band darkens each color channel:
+
+| Channel | Band | u1 | u2 | At 87% of the radius | At the edge |
+| --- | --- | --- | --- | --- | --- |
+| Red | R | 0.953 | -0.079 | 54% of the centre | 13% |
+| Green | V | 1.056 | -0.165 | 51% | 11% |
+| Blue | B | 1.415 | -0.463 | 41% | 5% |
+
+Blue darkens most and red least, so the edge is dimmer and redder than the centre. The prepared plate is colored, not black: its
+alpha darkens the blue channel, and its color holds red and green at their own laws, with transparent pixels outside the disc. It
+replaces one near-infrared law (Gillon et al. 2016, I+z at 885 nm, a transit prior from atmosphere tables) that darkened the three
+channels alike, so the hue never changed across the disc. This is a **model**, not a resolved image or a measured profile, and it
+claims no off-limb glow.
+
+![The disc with one law for all channels, and with one law per channel](source/reference/limb-before-after.png)
+
+Left: css.earth on 2026-10-12, with the one I+z law. Right: this recipe, from the branch's site. Both are the default view in
+headless Chrome at 1440 by 900 (DPR 2), cropped to the disc.
 
 **Axis.** No rotation axis is measured. The period is known from spot modulation — 3.295 days (Luger et al. 2017) — but not the
 direction of the axis on the sky, so the display axis is celestial north at the star, a convention.
@@ -65,7 +82,8 @@ and limits are in [its README](../trappist-1-tidal-heating/README.md). It is a m
 ## Evidence
 
 - [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) covers the color
-  path, including the rule for samples consistent with zero and the quadratic limb plate.
+  path, including the rule for samples consistent with zero and the limb plate with one law per color channel: composited over
+  the photosphere color, each channel is within 1.5 of 255 steps of its law.
 - `source.test.mts` checks every package's source pins, and that each planet turns
   synchronously with longitude 0 on the star and orbits it.
 - [`object-systems.test.mts`](../../../site/world/systems/object-systems.test.mts) checks that the system holds all seven planets.
@@ -78,6 +96,9 @@ and limits are in [its README](../trappist-1-tidal-heating/README.md). It is a m
 
 **The blue end of the spectrum is noise.** Below about 450 nm this star is too faint for Gaia to measure, and those samples are
 read as no emission. The one-sigma range above bounds what that can move.
+
+**The limb's color is a three-band approximation.** The table's B, V and R bands stand for the screen's blue, green and red; the
+spectrum is not passed through a law at each wavelength. The table is for solar metallicity.
 
 **No image, diameter or axis.** The disc is about 0.09 milliarcseconds across; nothing resolves it.
 

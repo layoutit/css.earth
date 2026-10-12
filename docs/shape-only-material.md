@@ -69,7 +69,11 @@ gaia-xp-sampled`) and the measured flux replaces the Planck model: HD 189733 A a
 A limb-darkening law measured from a transiting planet draws a limb plate, either read
 from a published table (WASP-43) or fitted to pinned TESS light curves
 ([transit-limb-darkening.ts](../packages/bake/src/objects/raster/eclipse-map/transit-limb-darkening.ts),
-HD 189733 A). A star with such a color stays on the map even without imagery
+HD 189733 A). A star no fit covers reads its law from a model-atmosphere grid at its own
+temperature and gravity. A grid recipe that names one band per screen channel
+(`grid.channels`) draws a colored limb plate instead of a black one, so the limb reddens
+as well as dims: TRAPPIST-1, with the R, V and B laws of Claret, Hauschildt & Witte (2012).
+A star with such a color stays on the map even without imagery
 (discovery `sourceColor`).
 
 Photographic, observed-color, and scientific datasets retain their own pixels.

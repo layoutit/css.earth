@@ -26,11 +26,30 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by Gillon et al. (2016) I+z quadratic coefficients inferred from atmosphere tables. The disc is unresolved: the limb is a red-band model, not an image or a directly measured profile. Self-luminous, so no lighting.",
+        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed and reddened toward the limb by the quadratic laws Claret, Hauschildt & Witte (2012) compute from PHOENIX model atmospheres at 2,566 K and log g 5.2396: their R band for the red channel, V for green and B for blue. The disc is unresolved: the limb is a model, not an image or a measured profile. Self-luminous, so no lighting.",
         "limbDarkening": {
           "law": "quadratic",
-          "published": true,
-          "path": "photometry/gillon-2016-limb-darkening.json"
+          "path": "photometry/claret-2012-bvr-quadratic.tsv",
+          "grid": {
+            "teffK": 2566,
+            "logg": 5.2396,
+            "models": {
+              "Met": "L",
+              "Mod": "qs"
+            },
+            "channels": {
+              "column": "Filt",
+              "red": "R",
+              "green": "V",
+              "blue": "B"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
         }
       }
     }
@@ -53,7 +72,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "black alpha darkens the Gaia-colored sphere according to the Gillon et al. (2016) I+z model-prior quadratic law; transparent outside the silhouette",
+        "composition": "a colored plate over the Gaia-colored sphere: its alpha darkens the channel the Claret, Hauschildt & Witte (2012) model laws darken most, and its color holds the other two at their own laws; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },
