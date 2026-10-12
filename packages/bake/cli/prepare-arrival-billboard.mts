@@ -4,14 +4,14 @@ import { readFile, mkdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import sharp from 'sharp';
-import { requireRecord, requireFiniteNumber, requireString, isRecord } from '@cssearth/core';
+import { requireRecord, requireArray, requireFiniteNumber, requireString, isRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
 import { arrivalLook, writeWorldBillboard } from '@cssearth/bake/site-assets';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
 import { requireCamera, parseArrivalBillboard } from '@cssearth/objects';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/engine';
-import { readInventory, readPreparedObjects, readPreparedRuntimeHead, updateInventory } from '@cssearth/objects/node';
+import { readInventory, readPreparedObjects, readPreparedRuntimeHead, readVolumeDatasetBank, updateInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../../..'), args = process.argv.slice(2);
 const SCENE_OBJECTS = readPreparedObjects(root).sceneObjects;
@@ -56,7 +56,16 @@ try {
     const rotation = preparedDefaultViewRotation(runtime.camera);
     const controls = requireRecord(requireRecord(runtime.controls).datasets);
     const dataset = requireString(controls.defaultDataset);
+    const selected = requireArray(controls.controls).map(value => requireRecord(value)).find(control => control.id === dataset);
+    const volumeId = selected?.volume === undefined ? undefined : requireString(requireRecord(selected.volume).objectId);
+    if (volumeId !== undefined && !/^[a-z][a-z0-9-]*$/.test(volumeId)) throw new TypeError('Invalid arrival volume id.');
     let distanceM = object.worldFrame.bodyRadiusM * distanceRadii;
+    if (volumeId) {
+      const bank = await readVolumeDatasetBank(resolve(root, 'src/objects', volumeId, 'prepared'));
+      const frame = bank.datasets[0]!.volume.frame, bounds = frame.boundsUnits;
+      const radius = Math.hypot(...[0, 1, 2].map(axis => Math.max(Math.abs(bounds.min[axis]!), Math.abs(bounds.max[axis]!))));
+      distanceM = Math.max(distanceM, radius * frame.metersPerUnit * distanceRadii);
+    }
     const filename = `${object.id}-arrival.webp`, receiptPath = resolve(output, `${object.id}.json`);
     const identity = { size, distanceRadii, version: 4 };
     if (!force) {
@@ -64,7 +73,7 @@ try {
       // A receipt holds while the runtime it was rendered from has not changed since it was written.
       const written = await stat(receiptPath).then(info => info.mtimeMs, () => -Infinity);
       if (isRecord(previous) && JSON.stringify(previous.identity) === JSON.stringify(identity) &&
-          !await anyChangedAfter([resolve(prepared, 'runtime.json')], written)) {
+          !await anyChangedAfter([resolve(prepared, 'runtime.json'), ...(volumeId ? [resolve(root, 'src/objects', volumeId, 'inventory.json')] : [])], written)) {
         const inventory = await readInventory(object.id, objectDirectory);
         const assets = inventory?.assets.filter(asset => asset.location === 'public' && asset.filename === filename ||
           asset.location === 'prepared' && asset.filename === 'arrival-billboard.json') ?? [];
@@ -82,7 +91,7 @@ try {
         }
       }
     }
-    const look = await lookOf(object.id, runtime, objectDirectory), same = photographed.get(look);
+    const look = `${await lookOf(object.id, runtime, objectDirectory)}${volumeId ? `:${volumeId}` : ''}`, same = photographed.get(look);
     const publish = (billboard: ReturnType<typeof parseArrivalBillboard>, bytes: Buffer, from: string | undefined, errors: readonly string[]) => {
       const metadata = Buffer.from(JSON.stringify(billboard, null, 2) + '\n');
       const report = { id: object.id, identity, billboard, bytes: bytes.length, renderer: browser.version(), errors, ...(from ? { sharedWith: from } : {}) };
@@ -126,8 +135,9 @@ try {
         html,body,.object-stage { background:transparent!important; }
         body > :not(.object-viewport) { display:none!important; }
         .object-viewport { inset:0!important; }
-        .object-viewport-search-band,.object-world-stage > :not(.object-stage),
+        .object-viewport-search-band,.object-world-stage > :not(.object-stage)${volumeId ? ':not(.prepared-universe)' : ''},
         .object-input-surface,.object-scene-overlays,.prepared-surface-features { display:none!important; }
+        ${volumeId ? `.prepared-universe > :not([data-volume-dataset-object="${volumeId}"]) { display:none!important; }` : ''}
         .object-stage > .object-render-root { translate:none!important; transform-origin:50% 50%!important; }
       ` });
       await page.evaluate(() => new Promise<void>(done => requestAnimationFrame(() => requestAnimationFrame(() => done()))));

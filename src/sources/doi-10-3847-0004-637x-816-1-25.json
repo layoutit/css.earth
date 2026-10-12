@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-3847-0004-637x-816-1-25",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Pinte et al. (2015): DUST AND GAS IN THE DISK OF HL TAURI: SURFACE DENSITY, DUST SETTLING, AND DUST-TO-GAS RATIO",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-637X/816/1/25"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.3847/0004-637X/816/1/25",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/0004-637X/816/1/25",
+      "checkedOn": "2026-10-11",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Pinte et al. (2015), The Astrophysical Journal 816 25",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/0004-637X/816/1/25"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 816 25",
+  "creators": [
+    "C. Pinte",
+    "W. R. F. Dent",
+    "F. Ménard",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

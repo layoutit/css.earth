@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hl-tauri-disc",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1542997624205655300,
+        3801880757855104000,
+        1351597966541279500
+      ],
+      "localToReferenceXyzw": [
+        0.787358217009705,
+        -0.0637893029322056,
+        0.47935071006854985,
+        -0.38238836239548213
+      ],
+      "metersPerUnit": 149597870700,
+      "boundsUnits": {
+        "min": [
+          -180,
+          -180,
+          -6
+        ],
+        "max": [
+          180,
+          180,
+          6
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "hl-tauri"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}
