@@ -36,7 +36,7 @@ export interface SimulationSearch {
 export interface ReuseLicense { readonly name: string; readonly url: string }
 
 /** Licenses that allow a derived picture to be made and shown with attribution. A no-derivatives license does not, and an
- * identifier outside this list is not assumed to. cssEarth is non-commercial, so the non-commercial terms can be met. */
+ * identifier outside this list is not assumed to. css.earth is non-commercial, so the non-commercial terms can be met. */
 const REUSE: Readonly<Record<string, ReuseLicense>> = {
   'cc-by-4.0': { name: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' },
   'cc-by-sa-4.0': { name: 'CC BY-SA 4.0', url: 'https://creativecommons.org/licenses/by-sa/4.0/' },

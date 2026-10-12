@@ -1,5 +1,5 @@
 /** Finds the favicon of each site the Sources tab links to and records its address in `site/source/source-icons.json`. The
- * rows load each icon from its own site: no copy of a site's mark is kept in the repository or served by cssEarth. A key is a
+ * rows load each icon from its own site: no copy of a site's mark is kept in the repository or served by css.earth. A key is a
  * link's host, or a DOI registrant prefix, which is resolved to its publisher's site through one of its DOIs. Keys already
  * recorded are kept, so a run after new sources arrive asks only the new sites; `--retry` asks the sites recorded without an
  * icon again and `--all` asks every site again.

@@ -26,7 +26,7 @@ and rounds to float32. The TIFF central meridian is −1 degree so the circular
 seam lies on a pixel edge. Nearest sampling preserves nodes; physical out-of-range
 latitudes and no-data remain missing. A one-native-node validity-edge buffer is
 withheld without inspecting brightness. This is a conservative support choice,
-not a pointing correction. No spectral fitting or smoothing occurs in cssEarth.
+not a pointing correction. No spectral fitting or smoothing occurs in css.earth.
 
 ## Coverage, seams and display
 

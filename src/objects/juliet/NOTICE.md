@@ -3,7 +3,7 @@
 Adopted shape dimensions: Erich Karkoschka (2001), Icarus 151, 51–68,
 DOI 10.1006/icar.2001.6596. Reported shape uncertainties: French et al. (2024),
 arXiv:2401.04634, reproducing Karkoschka's Voyager Table V.
-The analytic prolate representation and standard coverage grid are cssEarth
+The analytic prolate representation and standard coverage grid are css.earth
 code/data under the repository MIT license; no paper graphics are redistributed.
 
 Rotation: NASA/JPL NAIF PCK00011, BODY711. Observational research: NASA/JPL,

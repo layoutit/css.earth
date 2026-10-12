@@ -25,7 +25,7 @@ do not establish long-term perturbed-orbit accuracy. Horizons' TDB epoch is
 approximated as TT, with a difference below two milliseconds.
 
 The local `source/scene-epoch/` closure and `cli/scene-ephemeris.mts` /
-`cli/acquire-scene-ephemeris.mts` belong to cssEarth's fixed-date preparation.
+`cli/acquire-scene-ephemeris.mts` belong to css.earth's fixed-date preparation.
 The local manifest lists the raw NASA/JPL responses; preparation
 and independent world-context tests verify their centers, time conventions and
 actual published state. See that directory's README for the acquisition and

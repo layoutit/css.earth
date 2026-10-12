@@ -56,7 +56,7 @@
         "https://bjj.mmedia.is/acknow.html"
       ],
       "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh downloads the JPEG the author publishes: 1,800 × 900 pixels, simple cylindrical, 90° N to 90° S, 66,303 bytes, last modified 2016-01-13. The clouds move, so longitude 0 marks no place on the planet. The file is read as published; nothing is recolored. The OpenSpace project distributes the same bytes as venus_clouds.jpg, which is where this input came from until 2026-10-07.",
-      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. cssEarth does not mirror the JPEG: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP pages are projected derivatives of it.",
+      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. css.earth does not mirror the JPEG: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP pages are projected derivatives of it.",
       "consumers": [
         "scene",
         "datasets"

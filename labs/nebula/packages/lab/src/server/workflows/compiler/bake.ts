@@ -1,4 +1,4 @@
-/** cssEarth renderer adapter for the deterministic internal baker. */
+/** css.earth renderer adapter for the deterministic internal baker. */
 import { bakeCompiler as bake, type BakeCompilerOptions } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { CSS_COMPILER_RENDER_BUDGET, validatePreparedCssVolume } from '@cssearth/objects';

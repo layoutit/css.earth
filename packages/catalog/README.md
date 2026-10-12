@@ -1,6 +1,6 @@
 # @cssearth/catalog
 
-The `.gxct` packed-column binary format used by [cssEarth](https://github.com/layoutit/css.earth) for point catalogues — stars, galaxies, exoplanets.
+The `.gxct` packed-column binary format used by [css.earth](https://github.com/layoutit/css.earth) for point catalogues — stars, galaxies, exoplanets.
 
 Zero dependencies. Numeric columns are typed-array views over the original buffer, so a catalogue goes from `fetch` to GPU buffer with no copy and no parse pass.
 

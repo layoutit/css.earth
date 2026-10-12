@@ -1,5 +1,5 @@
 /** starry owns spherical-harmonic brightness maps, their intensities and the star-planet light curves they make (Luger et al. 2019).
- * cssEarth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
+ * css.earth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
  * (starry-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install */
 import { runToolchainProcess } from './toolchain/process.js';

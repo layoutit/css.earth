@@ -11,7 +11,7 @@
         "value": "46 × 46 × 46 km",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
-          "label": "JPL Small-Body Database, absolute magnitude H = 10.38 for 49036 Pelion (1998 QM107); diameter estimated by cssEarth with an assumed albedo of 0.059",
+          "label": "JPL Small-Body Database, absolute magnitude H = 10.38 for 49036 Pelion (1998 QM107); diameter estimated by css.earth with an assumed albedo of 0.059",
           "checked": "2026-09-21",
           "path": "source/measurements.json",
           "catalogueId": "jpl-small-body-database",
@@ -60,7 +60,7 @@
     {
       "label": "Shape source",
       "role": "surface",
-      "description": "JPL Small-Body Database, absolute magnitude H = 10.38 for 49036 Pelion (1998 QM107); diameter estimated by cssEarth with an assumed albedo of 0.059",
+      "description": "JPL Small-Body Database, absolute magnitude H = 10.38 for 49036 Pelion (1998 QM107); diameter estimated by css.earth with an assumed albedo of 0.059",
       "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
     },
     {

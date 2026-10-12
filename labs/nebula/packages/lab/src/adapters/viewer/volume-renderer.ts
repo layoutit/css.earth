@@ -1,4 +1,4 @@
-/** Canonical cssEarth retained-volume binding shared by the lab's prepared viewers. */
+/** Canonical css.earth retained-volume binding shared by the lab's prepared viewers. */
 import type { VolumeViewerBackend } from '@cssearth/volume-viewer/scene/backend';
 import { mountPreparedCssVolume } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';
 import { validatePreparedCssVolume, type PreparedCssVolume } from '@cssearth/objects';

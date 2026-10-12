@@ -32,7 +32,7 @@ Apply [ISO 24495-1:2023, first edition](https://www.iso.org/standard/78907.html)
 [public preview](https://cdn.standards.iteh.ai/samples/78907/d194fac21d6a45f38bfcfec9657f7498/ISO-24495-1-2023.pdf)
 includes the principles and the start of the guidelines.
 
-This is a cssEarth adaptation using Markdown, existing manifests, the R2 delivery inventory,
+This is a css.earth adaptation using Markdown, existing manifests, the R2 delivery inventory,
 reproduction comparisons and browser evidence. It claims neither
 PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XML labels or archive submission.
 
@@ -236,7 +236,7 @@ Run it when capture noise could affect an actual matched comparison, not as a
 standalone delivery gate.
 
 **When using Pixelmatch for matched visual evidence, use threshold `0.1`.** This
-cssEarth requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
+css.earth requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
 captures or identical documented crops. State the input paths, Pixelmatch version,
 threshold, anti-aliasing setting, mismatch count and compared pixel count with
 the result, and show the diff image where the result is reported. Choose settings before
@@ -307,7 +307,7 @@ are unavailable, keep the PR in draft and identify what is missing.
 
 Contributors maintain the shared guidance and update rules affected by their
 changes without an extra approval step. Add a shared rule only
-for a demonstrated gap, identifying its standard/section or its cssEarth purpose.
+for a demonstrated gap, identifying its standard/section or its css.earth purpose.
 Use existing source records, preparation tools and checks.
 
 ## Plain language

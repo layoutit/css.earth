@@ -2,7 +2,7 @@ import list from '../../../source/usno-navigational-stars.json' with { type: 'js
 import { isRecord } from '@cssearth/core';
 
 // The famous stars are a published list, not a selection made here: the 57 stars, and Polaris, that the Nautical and Air
-// Almanacs print for navigation, as the US Naval Observatory's service returns them. This binds each to its cssEarth object
+// Almanacs print for navigation, as the US Naval Observatory's service returns them. This binds each to its css.earth object
 // by the name the source prints. A star of the list without a binding has no page yet.
 const objectByName = Object.freeze({
   'Schedar': 'schedar',
@@ -69,7 +69,7 @@ function sourceNames(source: unknown) {
 /** The names the source prints, in its order. */
 export const NAVIGATIONAL_STAR_NAMES: readonly string[] = Object.freeze(sourceNames(list));
 for (const name of Object.keys(objectByName)) if (!NAVIGATIONAL_STAR_NAMES.includes(name)) {
-  throw new TypeError(`cssEarth navigational-star binding is absent from the source: ${name}.`);
+  throw new TypeError(`css.earth navigational-star binding is absent from the source: ${name}.`);
 }
 
 export const NAVIGATIONAL_STAR_OBJECT_IDS: readonly string[] = Object.freeze(Object.values(objectByName));

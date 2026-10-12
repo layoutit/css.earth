@@ -6,4 +6,4 @@ Thermal color: the dayside brightness temperature of Zellem, R. T., Lewis, N. K.
 
 Temperature map: drawn from the phase-curve fit of the same paper (its Tables 2 and 3). Only the published table values are used; no figure is copied. The map is the inversion of Cowan, N. B. & Agol, E. (2008), ApJ 678, L129, doi:10.1086/589232. This work is based in part on observations made with the Spitzer Space Telescope, operated by the Jet Propulsion Laboratory, California Institute of Technology, under a contract with NASA.
 
-Numerical extraction and sphere: cssEarth, MIT.
+Numerical extraction and sphere: css.earth, MIT.

@@ -1,4 +1,4 @@
-/** F07: cdflib owns CDF decoding; cssEarth pins bytes and preserves native TT2000/frequency coordinates. */
+/** F07: cdflib owns CDF decoding; css.earth pins bytes and preserves native TT2000/frequency coordinates. */
 import {spawn} from 'node:child_process';
 import { astroqueryToolchain } from '@cssearth/telescope/node';import type {FamilyHandler,FamilyOperation} from '../family-handler.mts';import type {DescriptorMember,ProductDescriptor} from '../products/product-descriptor.mts';import {descriptor,stable} from './common.mts';
 export const WIND_RAD1_FIXTURE={url:'https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf',variable:'PSD_V2_S'} as const;

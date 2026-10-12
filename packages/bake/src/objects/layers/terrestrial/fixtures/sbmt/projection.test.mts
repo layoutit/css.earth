@@ -23,7 +23,7 @@ test('native fixture compares complete source, pointing, image and visibility st
     assert.ok(c.nativeFootprintCells>0);
     const uv=c.stages.find(s=>s.name==='in-image-UV')!;
     // Keep the preselected quarter-pixel criterion. Native SBMT's angular UV
-    // approximation is NOT identical to the pinhole camera used by cssEarth.
+    // approximation is NOT identical to the pinhole camera used by css.earth.
     if(c.id==='itokawa-sum'){
       assert.equal(uv.status,'different');assert.ok(uv.maximumError>1);
       assert.equal(c.status,'different');

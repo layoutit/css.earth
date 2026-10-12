@@ -16,7 +16,7 @@ export const objectAdapter = Object.freeze({
     } else {
       const loaded = objects ? objects.find(({ id }) => id === objectId) : await loadObject(objectId);
       const objectRecord = loaded ?? null;
-      if (!objectRecord) throw new Error(`Unknown cssEarth object: ${objectId ?? "unknown"}.`);
+      if (!objectRecord) throw new Error(`Unknown css.earth object: ${objectId ?? "unknown"}.`);
       mount = await objectRecord.loadScene(signal);
     }
     if (typeof mount !== "function") {

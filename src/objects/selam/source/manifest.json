@@ -6,9 +6,9 @@
       "path": "shape/model.json",
       "origin": "https://doi.org/10.1038/s41586-024-07378-0",
       "credit": "Levison et al. (2024), Lucy science team",
-      "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "license": "Numerical scientific facts; independent css.earth tessellation MIT. Cite the original paper.",
       "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
-      "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "redistribution": "Numerical scientific facts; independent css.earth tessellation MIT. Cite the original paper.",
       "consumers": [
         "terrain",
         "shape"
@@ -32,7 +32,7 @@
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1038/s41586-024-07378-0",
       "credit": "Levison et al. (2024), Lucy science team",
-      "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "license": "Numerical scientific facts; independent css.earth tessellation MIT. Cite the original paper.",
       "consumers": [
         "navigation"
       ],

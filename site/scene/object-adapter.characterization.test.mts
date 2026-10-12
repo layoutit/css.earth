@@ -25,8 +25,8 @@ test('descriptor loading validates identity and forwards the signal to the packa
 
 test('explicit lists skip directory lookup and unknown ids or invalid loaders reject', async () => {
   entry = null;
-  await assert.rejects(objectAdapter.load('missing', undefined, []), /Unknown cssEarth object: missing\./);
-  await assert.rejects(objectAdapter.load('missing'), /Unknown cssEarth object: missing\./);
+  await assert.rejects(objectAdapter.load('missing', undefined, []), /Unknown css.earth object: missing\./);
+  await assert.rejects(objectAdapter.load('missing'), /Unknown css.earth object: missing\./);
   const signal = new AbortController().signal;
   // The adapter reads only the id and scene loader of a directory entry.
   const object = { id: 'body', async loadScene(receivedSignal?: AbortSignal) { assert.equal(receivedSignal, signal); return mount; } } as ObjectEntry;

@@ -1,4 +1,4 @@
-# cssEarth project contract
+# css.earth project contract
 
 This is the shared agent contract. `CLAUDE.md` is a symlink to this file;
 directory-specific `AGENTS.md` files add guidance for their owners.

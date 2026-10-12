@@ -10,7 +10,7 @@ Crantor is 83982 Crantor, provisional designation 2002 GO9. The JPL Small-Body D
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Illustrative sphere at 91.2 km, estimated from JPL's absolute magnitude H = 8.89 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured. JPL Small-Body Database, absolute magnitude H = 8.89 for 83982 Crantor (2002 GO9); diameter estimated by cssEarth with an assumed albedo of 0.059.
+Illustrative sphere at 91.2 km, estimated from JPL's absolute magnitude H = 8.89 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured. JPL Small-Body Database, absolute magnitude H = 8.89 for 83982 Crantor (2002 GO9); diameter estimated by css.earth with an assumed albedo of 0.059.
 
 The orbit comes from JPL Horizons osculating elements and vectors, through the shared asteroid generator.
 

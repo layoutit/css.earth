@@ -1,6 +1,6 @@
 // The two globes and the one pointer stream between them. Left: a CesiumJS globe with Cesium's own camera controller.
-// Right: cssEarth's drag controller (ours.mts), its orientation drawn by a second Cesium globe that takes no input.
-// Both stand at the same pole, distance and field of view. Nothing on the left runs cssEarth code.
+// Right: css.earth's drag controller (ours.mts), its orientation drawn by a second Cesium globe that takes no input.
+// Both stand at the same pole, distance and field of view. Nothing on the left runs css.earth code.
 import { cesiumLibrary } from './cesium.mts';
 import type { Camera, Widget } from './cesium.mts';
 import { createOurs } from './ours.mts';
@@ -39,7 +39,7 @@ export function viewColumns({ rollDeg, towardEyeDeg, lonDeg }: View): Columns {
 
 export function createOracle(document: Document) {
   const C = cesiumLibrary();
-  // A sphere, as cssEarth's pan uses: the comparison is about the drag, not the flattening.
+  // A sphere, as css.earth's pan uses: the comparison is about the drag, not the flattening.
   const sphere = new C.Ellipsoid(RADIUS, RADIUS, RADIUS);
   C.Ellipsoid.default = sphere;
   const side = (id: string): Side => {
@@ -62,9 +62,9 @@ export function createOracle(document: Document) {
 
   // ---- one screen for both: the body centred in the panel, the same focal length and distance ------------------------
   let distance: number = OPENING.distance;
-  // cssEarth leans its pole on screen and its drags keep that lean. Cesium keeps north up, and a rolled Cesium camera
+  // css.earth leans its pole on screen and its drags keep that lean. Cesium keeps north up, and a rolled Cesium camera
   // loses its roll at the poles. So Cesium runs with north up and the two meet through this turn about the line of
-  // sight: a point on cssEarth's screen is the same point on Cesium's, turned back by the lean.
+  // sight: a point on css.earth's screen is the same point on Cesium's, turned back by the lean.
   let roll = 0;
   const geometry = (of: Side = right): Geometry => {
     // Cesium casts its rays over the canvas's whole-pixel client size; both sides use that same screen.
@@ -84,7 +84,7 @@ export function createOracle(document: Document) {
     const row = (i: number, sign: number, length = 1) => new C.Cartesian3(c[0][i]! * sign * length, c[1][i]! * sign * length, c[2][i]! * sign * length);
     camera.setView({ destination: row(2, 1, distance * RADIUS), orientation: { direction: row(2, -1), up: row(1, -1) } });
   };
-  /** Cesium's orientation as cssEarth's screen shows it. */
+  /** Cesium's orientation as css.earth's screen shows it. */
   const cesiumColumns = () => rotZ(columnsOf(left.camera), roll);
 
   const surface = document.createElement('div');
@@ -122,7 +122,7 @@ export function createOracle(document: Document) {
       surface.dispatchEvent(event);
     }
   };
-  /** The surface point under a point of cssEarth's screen, in body axes; null off the disc. */
+  /** The surface point under a point of css.earth's screen, in body axes; null off the disc. */
   const bodyPoint = (columns: Columns, [x, y]: Point): V3 | null => {
     const g = geometry(), ray = [x - g.width / 2, y - g.height / 2, -g.focal], n = Math.hypot(...ray), u = ray.map(v => v / n);
     const along = -u[2]! * distance, discriminant = along * along - (distance * distance - 1);

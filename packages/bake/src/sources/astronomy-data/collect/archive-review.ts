@@ -17,7 +17,7 @@ export function screen(key: string, title: string, target: string): Decision {
     return {
       decision: "outside-current-scope",
       reason:
-        "Microgravity laboratory experiment; no celestial-body measurement proposed for cssEarth.",
+        "Microgravity laboratory experiment; no celestial-body measurement proposed for css.earth.",
       plans: [],
     };
   if (

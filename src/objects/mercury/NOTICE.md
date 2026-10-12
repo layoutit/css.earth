@@ -2,7 +2,7 @@
 
 NASA, NASA Solar System Treks, NASA/JHU APL/Carnegie, NASA/PDS, USGS Astrogeology, and NASA GSFC data are credited in the interface and source manifest. Their inclusion does not imply endorsement.
 
-Native BDR, LOI, MD3 color and enhanced-color maps: Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins Applied Physics Laboratory; Carnegie Science; published by USGS Astrogeology, edition 1 (2016). USGS states no access restrictions and requests author credit. cssEarth reduces the original GeoTIFFs for display and marks missing coverage. The legacy NASA Trek BDR snapshot remains in the interior illustration.
+Native BDR, LOI, MD3 color and enhanced-color maps: Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins Applied Physics Laboratory; Carnegie Science; published by USGS Astrogeology, edition 1 (2016). USGS states no access restrictions and requests author credit. css.earth reduces the original GeoTIFFs for display and marks missing coverage. The legacy NASA Trek BDR snapshot remains in the interior illustration.
 
 The global MESSENGER MASCS spectrum is derived from M. D'Amore's DLR dataset, DOI 10.5281/zenodo.7433033, under CC-BY-4.0. See `source/spectrum/LICENSE.md`.
 
@@ -16,4 +16,4 @@ Feature caption notes: 486 lead summaries from the English Wikipedia (Wikipedia 
 
 Landing, touchdown and impact sites (1): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.
 
-Numeric MESSENGER global DEM v2 (2016): USGS Astrogeology and the NASA/JHU APL/Carnegie MESSENGER team. cssEarth samples native cells, converts half-metre DNs to heights above the 2,439.4 km reference sphere, and applies its own matching palette and legend.
+Numeric MESSENGER global DEM v2 (2016): USGS Astrogeology and the NASA/JHU APL/Carnegie MESSENGER team. css.earth samples native cells, converts half-metre DNs to heights above the 2,439.4 km reference sphere, and applies its own matching palette and legend.

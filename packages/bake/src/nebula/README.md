@@ -12,7 +12,7 @@ invoke the lab CLI or import research implementations.
 
 In `@cssearth/bake/nebula`:
 
-- `backend.ts`: explicit cssEarth volume/FITS/stellar-profile adapter.
+- `backend.ts`: explicit css.earth volume/FITS/stellar-profile adapter.
 - `objects.ts`: compiler, sampled and symmetry deliveries, source verification and installation.
 - `density-object.ts` / `density-delivery.ts`: accepted density/material delivery replay and exact atlas verification.
 - `references.ts`: byte-identical source-owned copies of historical research JSON pins. Original delivery recipes and pin identities remain unchanged.

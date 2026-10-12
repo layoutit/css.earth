@@ -1,4 +1,4 @@
-/** cssEarth camera representation binding; generic view math lives in volume-viewer. */
+/** css.earth camera representation binding; generic view math lives in volume-viewer. */
 import type { ShapeCloudCameraBackend } from '@cssearth/volume-viewer/camera/shape-cloud';
 import { worldCameraFromCenteredPresentation, worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
 import { preparedVolumeCameraTransform } from '@cssearth/renderer/volume/prepared-volume-runtime.ts';

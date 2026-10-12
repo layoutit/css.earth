@@ -29,7 +29,7 @@
 
 Bienor is an elongated Centaur. The full approximation dimensions are 254 × 110 × 90 km. Full axes are halved once; their semiaxes’ geometric mean sets the rendering reference radius. This is not an independently observed radius or the volume of a convex reconstruction. Formal axis uncertainties are retained where supplied by the source.
 
-The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. Ecliptic J2000 coordinates are converted to ICRF using the preparation recipe. The 2024 study uses its refined period to compute rotational phase; cssEarth’s arbitrary display phase is a separate choice. [measurements.json](source/measurements.json) records the radius-table formula, pole conversion and numerical extraction checked on 2026-09-09.
+The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. Ecliptic J2000 coordinates are converted to ICRF using the preparation recipe. The 2024 study uses its refined period to compute rotational phase; css.earth’s arbitrary display phase is a separate choice. [measurements.json](source/measurements.json) records the radius-table formula, pole conversion and numerical extraction checked on 2026-09-09.
 
 ### Orbit
 

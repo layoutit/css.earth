@@ -1,4 +1,4 @@
-/** Versioned mapping from archive product labels to cssEarth observational families. */
+/** Versioned mapping from archive product labels to css.earth observational families. */
 import type { FamilyId } from './product-descriptor.mts';
 
 export const IVOA_PRODUCT_TYPE_VOCABULARY='http://www.ivoa.net/rdf/product-type/2026-01-15' as const;

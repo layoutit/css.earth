@@ -5,7 +5,7 @@ The Sun, planets and all five dwarf planets remain orientation anchors. Prepared
 imagery promotes most destinations automatically; `properties.catalog.featured`
 can also recommend a reviewed package. Asteroids are the exception: their
 default labels, circles and orbits come from JPL's spacecraft-mission target
-catalogue, not from which cssEarth packages happen to contain imagery. Name
+catalogue, not from which css.earth packages happen to contain imagery. Name
 searches and direct links retain all registered objects.
 
 ## Search results
@@ -56,7 +56,7 @@ The famous stars are a published list: the 57 navigational stars, and Polaris, t
 Almanac print, as the US Naval Observatory's [Celestial Navigation Data](https://aa.usno.navy.mil/data/celnav) service
 returns them. [`site/source/usno-navigational-stars.json`](../site/source/usno-navigational-stars.json) preserves the names
 and numbers as the service printed them, with the date and the requests.
-[`navigational-stars.mts`](../site/build/prepare/world/navigational-stars.mts) binds each name to its cssEarth object; a
+[`navigational-stars.mts`](../site/build/prepare/world/navigational-stars.mts) binds each name to its css.earth object; a
 star of the list without a binding has no page yet (13 of the 58 on 2026-10-06). It adds no score and no brightness threshold.
 
 ![Twelve of the navigational stars' pages in the app](images/navigational-stars.webp)
@@ -68,11 +68,11 @@ of a featured planet).
 
 ## Sourced asteroid context
 
-The default asteroid context is the intersection of registered cssEarth objects
+The default asteroid context is the intersection of registered css.earth objects
 and JPL Solar System Dynamics' [Small-Body Targets of Spacecraft Missions](https://ssd.jpl.nasa.gov/sb/targets.html).
 [`site/source/jpl-small-body-mission-targets.json`](../site/source/jpl-small-body-mission-targets.json)
 preserves the checked source identifiers and mission names. The accompanying
-module binds JPL SBDB identifiers to cssEarth object identifiers; it does not
+module binds JPL SBDB identifiers to css.earth object identifiers; it does not
 add an editorial score, size threshold or hand-picked fallback.
 
 This selection means "spacecraft mission targets", not that other asteroids are

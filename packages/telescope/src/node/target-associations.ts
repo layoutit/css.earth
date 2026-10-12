@@ -1,7 +1,7 @@
 /** Cited claims that a body is present in exact archive observations filed under another target.
  *
  * The checked-in claim stores only the semantic join. MAST remains authoritative for the observation's programme, mode,
- * archive target, filter and time; cssEarth reads those facts live through the pinned Astroquery boundary. */
+ * archive target, filter and time; css.earth reads those facts live through the pinned Astroquery boundary. */
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { ArchiveTransportError } from './astroquery.js';
 import { mastObservations, type MastObservationResult } from './mast.js';

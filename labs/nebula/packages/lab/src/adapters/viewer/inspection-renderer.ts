@@ -1,4 +1,4 @@
-/** cssEarth image-bank/volume binding for retained contribution inspection. */
+/** css.earth image-bank/volume binding for retained contribution inspection. */
 import type { InspectionMountBackend } from '@cssearth/volume-viewer/scene/inspection-banks';
 import { mountPreparedCssImageLayers } from '@cssearth/renderer/image-layers/prepared-image-layer-runtime.ts';
 import { type PreparedCssImageLayers, type PreparedCssVolume } from '@cssearth/objects';

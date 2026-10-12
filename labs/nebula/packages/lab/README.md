@@ -9,7 +9,7 @@ src/
   features/        Domain-specific controls
   state/           Workflow and persisted display state
   server/          Durable jobs, routes and workers
-  adapters/        Explicit integration with the cssEarth host
+  adapters/        Explicit integration with the css.earth host
   cli/             Named commands and test discovery
 browser/           Application interaction checks
 ```

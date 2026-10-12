@@ -17,7 +17,7 @@ all distributed data under [CC-BY-4.0](https://creativecommons.org/licenses/by/4
 Credit: **NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université**.
 The archive requests research citations to [Brown et al. 2004](https://doi.org/10.1007/s11214-004-1453-x)
 and [Le Mouélic et al. 2019](https://doi.org/10.1016/j.icarus.2018.09.017).
-cssEarth derived the scalar indices and conservative masked projections.
+css.earth derived the scalar indices and conservative masked projections.
 No institutional endorsement is implied; no institutional logos are included.
 
 The portal identifies its data as CC BY 4.0 on its

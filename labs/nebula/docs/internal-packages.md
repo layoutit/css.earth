@@ -24,7 +24,7 @@ Each branch means an allowed import. Reconstruction, baking and viewing do not i
 | `@cssearth/nebula-reconstruction` | Configured acquisition, registration, separation, image evidence and scientific fitting |
 | `@cssearth/volume-viewer` | Retained scene lifecycle, camera and inspection through an injected renderer; prepared assets only |
 
-The app owns object selection and processing decisions. React owns controls and their visibility; its rerenders retain the plain TypeScript scene. Direct integration with cssEarth renderer, preparation and source internals belongs in `packages/lab/src/adapters`. Imports between packages use public exports rather than private source paths. Authored source files have a 600-line limit.
+The app owns object selection and processing decisions. React owns controls and their visibility; its rerenders retain the plain TypeScript scene. Direct integration with css.earth renderer, preparation and source internals belongs in `packages/lab/src/adapters`. Imports between packages use public exports rather than private source paths. Authored source files have a 600-line limit.
 
 The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration work and verification. Authored code owners now live under `packages/`; historical source paths are resolved at loading boundaries without changing receipt bytes. The plan distinguishes completed moves from remaining verification.
 

@@ -1,4 +1,4 @@
-/** PICASO owns the radiative transfer of a substellar atmosphere (Batalha et al. 2019). cssEarth passes a published Sonora Bobcat
+/** PICASO owns the radiative transfer of a substellar atmosphere (Batalha et al. 2019). css.earth passes a published Sonora Bobcat
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
  * (picaso-toolchain.json says what each is). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install */

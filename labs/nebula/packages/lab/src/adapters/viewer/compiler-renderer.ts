@@ -1,4 +1,4 @@
-/** Explicit cssEarth renderer binding; selectors and renderer payloads stay outside volume-viewer. */
+/** Explicit css.earth renderer binding; selectors and renderer payloads stay outside volume-viewer. */
 import { volumeRenderer } from './volume-renderer';
 import type { CompilerViewerBackend } from '@cssearth/volume-viewer/scene/compiler-viewer';
 import { presentPhysicalPoseInVolume, cssViewFromOrientation } from '@cssearth/engine';

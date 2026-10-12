@@ -1,4 +1,4 @@
-/** Compatibility API with an explicit cssEarth camera binding. */
+/** Compatibility API with an explicit css.earth camera binding. */
 import { shapeCloudCamera as createCamera, shapeCloudOrthographicCamera as createOrthographicCamera } from '@cssearth/volume-viewer/camera/shape-cloud';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { ViewFraming as ShapeCloudFraming } from '@cssearth/volume-viewer/camera/framing';

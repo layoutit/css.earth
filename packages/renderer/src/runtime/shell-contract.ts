@@ -17,7 +17,7 @@ export function requireSceneLifecycle(mount: unknown, objectId = "unknown"): Sce
       typeof mount.resume !== "function" ||
       typeof mount.destroy !== "function") {
     throw new TypeError(
-      `cssEarth scene ${objectId} must provide ready, pause, resume, and destroy.`,
+      `css.earth scene ${objectId} must provide ready, pause, resume, and destroy.`,
     );
   }
   return mount as SceneLifecycle;

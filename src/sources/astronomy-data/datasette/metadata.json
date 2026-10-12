@@ -49,7 +49,7 @@
       }
      },
      "incss": {
-      "title": "Of them in cssEarth",
+      "title": "Of them in css.earth",
       "db": "ledger",
       "query": "SELECT count(DISTINCT l.body_id) n FROM dataset_bodies l JOIN bodies b ON b.id=l.body_id WHERE l.role='target' AND b.cssearth_object<>''",
       "library": "metric",
@@ -166,7 +166,7 @@
       }
      },
      "top": {
-      "title": "Bodies in cssEarth with the most dataset families, by archive",
+      "title": "Bodies in css.earth with the most dataset families, by archive",
       "db": "ledger",
       "library": "vega-lite",
       "query": "WITH top AS (SELECT l.body_id FROM dataset_bodies l JOIN bodies b ON b.id=l.body_id JOIN datasets d ON d.source=l.source AND d.id=l.dataset_id WHERE l.role='target' AND b.cssearth_object<>'' GROUP BY l.body_id ORDER BY count(DISTINCT d.source||char(0)||d.family) DESC LIMIT 30) SELECT b.name AS body, CASE l.source WHEN 'photojournal' THEN 'Photojournal' WHEN 'usgs' THEN 'USGS maps' WHEN 'pds' THEN 'PDS4 bundles' WHEN 'umd' THEN 'Maryland' WHEN 'darts' THEN 'DARTS' WHEN 'opus' THEN 'OPUS' ELSE l.source END AS archive, count(DISTINCT d.source||char(0)||d.family) AS datasets FROM dataset_bodies l JOIN bodies b ON b.id=l.body_id JOIN datasets d ON d.source=l.source AND d.id=l.dataset_id WHERE l.role='target' AND l.body_id IN (SELECT body_id FROM top) GROUP BY body, archive",

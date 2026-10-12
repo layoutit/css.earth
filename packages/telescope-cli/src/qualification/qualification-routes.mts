@@ -11,7 +11,7 @@ export interface QualificationObservation {
   readonly startIso: string;
   readonly endIso?: string;
   readonly filter?: string;
-  /** Archive spelling used to retrieve this observation. It is distinct from the canonical cssEarth target id. */
+  /** Archive spelling used to retrieve this observation. It is distinct from the canonical css.earth target id. */
   readonly archiveTarget?: string;
   /** A route may qualify one observing night when the archive programme spans several nights. */
   readonly night?: string;

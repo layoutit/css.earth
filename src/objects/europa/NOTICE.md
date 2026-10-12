@@ -13,7 +13,7 @@ B. Archinal, E. Smith and B. Wheeler (2021)**,
 The 332 controlled CLEAR-filter GeoTIFFs are released under **CC0-1.0**.
 Published projection and measured I/F are retained; overlap selection, sampling,
 bounded overlap-based grayscale display matching, the global-mosaic fallback and
-missing-coverage grid are prepared by cssEarth. This is a display adjustment, not
+missing-coverage grid are prepared by css.earth. This is a display adjustment, not
 additional radiometric or photometric calibration.
 
 Prepared surface textures preserve photographed terrain. Gray grids are
@@ -33,7 +33,7 @@ VLT/SPHERE composition release: Oliver King, Leigh Fletcher and Nicolas Ligier
 (2022), [Compositional Mapping of Europa](https://doi.org/10.3847/PSJ/ac596d),
 [Zenodo 6034904](https://doi.org/10.5281/zenodo.6034904), and tagged
 [v1.0.2 source](https://github.com/ortk95/king-2022-compositional-mapping-europa/tree/v1.0.2).
-cssEarth preserves the released ratio and posterior-component interpretation with
+css.earth preserves the released ratio and posterior-component interpretation with
 source no-data. No explicit licence for the numerical release was located; it is
 retained for local preview and a private draft PR only, with no public composition
 asset publication.

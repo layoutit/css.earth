@@ -6,4 +6,4 @@ The source site's CC-BY-4.0 license applies except where stated otherwise. Retai
 
 - https://damit.cuni.cz/projects/damit/references/view/167
 
-The published reconstruction supplies geometry, not a photographic surface texture. The grid is cssEarth's missing-imagery convention. Derived shape and elevation displays retain model attribution.
+The published reconstruction supplies geometry, not a photographic surface texture. The grid is css.earth's missing-imagery convention. Derived shape and elevation displays retain model attribution.

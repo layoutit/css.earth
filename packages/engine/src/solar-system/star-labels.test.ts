@@ -62,7 +62,7 @@ test("row-major cube rotation, CSS y direction and principal offset all move the
 
 // Captured by executing ../galaxio's pointPhotometry.ts with its real tuning
 // and fov modules, resetExposureAdaptation(), then refreshExposure(width,height).
-// These oracle values are independent of cssEarth's forward/inverse functions.
+// These oracle values are independent of css.earth's forward/inverse functions.
 const oracleRows = [
   { fovDegrees: 60, width: 800, height: 600, adaptationLuminanceCdM2: 0.052, magnitude: 6, hints: 6.42105722861681, radius: 0.6, alpha: 0.141557456552083 },
   { fovDegrees: 60, width: 800, height: 600, adaptationLuminanceCdM2: 0.052, magnitude: 5, hints: 6.42105722861681, radius: 0.8162491737415192, alpha: 0.4388340028827883 },

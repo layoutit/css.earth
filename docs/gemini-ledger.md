@@ -1,4 +1,4 @@
-# What the Gemini archive holds for cssEarth
+# What the Gemini archive holds for css.earth
 Written by `packages/telescope-cli/src/archives/gemini/archive-ledger.mts` from the archive itself on 2026-09-19. Nothing here is
 typed in by hand: the counts are the archive's own `GROUP BY` results and each capability's state is read from the
 pinned programs and the receipts beside them. Re-run the command to bring it up to date.
@@ -104,7 +104,7 @@ Of the four Galilean moons, all four have public Gemini science frames (io, euro
 | io | NIRI | OBJECT | science | Kcon(227) | 2735 | GN-2013B-DD-3, GN-2014A-Q-34, GN-2016A-Q-34, GN-2016B-Q-5, GN-2017A-Q-53, GN-2018A-Q-124, GN-2019A-Q-130, GN-2021A-FT-110, GN-2021B-FT-209, GN-2022A-Q-229 |
 | io | NIRI | OBJECT | science | L(prime) | 3174 | GN-2010B-Q-83, GN-2013B-DD-3, GN-2014A-Q-34, GN-2016A-Q-33, GN-2016A-Q-34, GN-2016B-Q-5, GN-2017A-Q-53, GN-2018A-Q-124, GN-2019A-Q-130, GN-2021A-FT-110, GN-2021B-FT-209, GN-2022A-Q-229 |
 | io | NIRI | OBJECT | science | M(prime) | 72 | GN-2010B-Q-83 |
-## cssEarth objects Gemini observed
+## css.earth objects Gemini observed
 Science frames and acquisition frames counted apart, because an acquisition frame is a pointing exposure and never an
 observation. A body whose only Gemini frames are acquisitions has no Gemini observation at all.
 | object | science frames | acquisition frames | programmes | instruments |

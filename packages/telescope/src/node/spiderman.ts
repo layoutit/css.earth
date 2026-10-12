@@ -1,4 +1,4 @@
-/** SPIDERMAN owns spherical-harmonic brightness maps and the phase curves they make (Louden & Kreidberg 2018). cssEarth passes a
+/** SPIDERMAN owns spherical-harmonic brightness maps and the phase curves they make (Louden & Kreidberg 2018). css.earth passes a
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
  * (spiderman-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install */
@@ -49,7 +49,7 @@ out = sys.stdout
 sys.stdout = sys.stderr
 # spiderman/plot.py imports matplotlib._png (removed in Matplotlib 3.3) for its logo art; nothing here plots.
 png = types.ModuleType('matplotlib._png')
-def read_png(*args, **kwargs): raise NotImplementedError('SPIDERMAN plotting is not used by cssEarth')
+def read_png(*args, **kwargs): raise NotImplementedError('SPIDERMAN plotting is not used by css.earth')
 png.read_png = read_png
 sys.modules['matplotlib._png'] = png
 import numpy as np

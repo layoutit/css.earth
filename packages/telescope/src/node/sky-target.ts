@@ -1,6 +1,6 @@
 /** A target that is not in the application catalogue, named and placed by SIMBAD (CDS).
  *
- * The catalogue names what cssEarth ships; a search should not need a package first. SIMBAD owns object names and
+ * The catalogue names what css.earth ships; a search should not need a package first. SIMBAD owns object names and
  * positions, so a name the catalogue does not know is resolved there, through the pinned PyVO TAP client, and the search
  * then uses SIMBAD's identifiers and its position. The resolution travels in the request and is saved with the
  * exploration, so a later `get` reuses the same identity. The pinned SIMBAD answers are evidence beside the request, not

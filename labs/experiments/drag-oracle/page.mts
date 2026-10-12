@@ -87,7 +87,7 @@ function paint() {
 // ---- a hand drag on either panel goes to both ---------------------------------------------------------------------------
 let playing = false;
 const bindInput = (side: Side) => {
-  // Positions are kept as cssEarth's screen has them; a pointer on Cesium's panel is turned onto it.
+  // Positions are kept as css.earth's screen has them; a pointer on Cesium's panel is turned onto it.
   const local = (event: PointerEvent): Point => {
     const box = side.input.getBoundingClientRect(), p: Point = [event.clientX - box.left, event.clientY - box.top];
     return side === left ? oracle.turned(p, oracle.roll, oracle.geometry(left)) : p;

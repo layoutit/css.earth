@@ -4,7 +4,7 @@ Charles Kowal found Chiron in 1977 beyond Saturn, and it was the first Centaur k
 
 ## Identity
 
-JPL's Small-Body Database returns the same record for `sstr=2060` and for `sstr=95P`: designation `2060`, SPK identifier `20002060`, full name **2060 Chiron (1977 UB)**, orbit class `CEN` (Centaur), with alternate designations `1977 UB` and `95P`. cssEarth registers **one** scene for it; 2060 Chiron, (2060) Chiron, 1977 UB, 95P and 95P/Chiron all refer to this body. The [retained SBDB response](source/reference/sbdb.json) holds those fields.
+JPL's Small-Body Database returns the same record for `sstr=2060` and for `sstr=95P`: designation `2060`, SPK identifier `20002060`, full name **2060 Chiron (1977 UB)**, orbit class `CEN` (Centaur), with alternate designations `1977 UB` and `95P`. css.earth registers **one** scene for it; 2060 Chiron, (2060) Chiron, 1977 UB, 95P and 95P/Chiron all refer to this body. The [retained SBDB response](source/reference/sbdb.json) holds those fields.
 
 ## Sources
 

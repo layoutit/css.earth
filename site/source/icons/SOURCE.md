@@ -2,7 +2,7 @@
 
 These SVGs preserve the six Unicode symbols used by the sidebar. Their
 Wikimedia Commons vectors were adapted to one 20 by 20 pixel outer box, an
-optical height of approximately 15 to 16 pixels, and the existing cssEarth
+optical height of approximately 15 to 16 pixels, and the existing css.earth
 `#aaa` icon color. Each symbol keeps its natural width.
 
 | Local source | Sidebar section | Wikimedia Commons source |

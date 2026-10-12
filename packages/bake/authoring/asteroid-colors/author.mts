@@ -73,7 +73,7 @@ const putJson = (path: string, value: unknown) => put(path, `${JSON.stringify(va
 const swap = (text: string, pairs: readonly (readonly [string, string])[]) => pairs.reduce((result, [from, to]) => result.split(from).join(to), text);
 /** The packages word the gray convention several ways; a colored shape has no gap to mark. */
 const ungray = (text: string) => swap(text.replace(/\b(?:the )?(?:neutral gray|grid) marks unavailable imagery/giu, match => /^[A-Z]/u.test(match) ? 'No surface imagery exists' : 'no surface imagery exists'), [
-  [" The grid is cssEarth's missing-imagery convention.", ''], ['The grid is an explicit no-imagery treatment; no', 'No'], [' The neutral gray marks missing imagery.', ' The color is one whole-disc mean.'],
+  [" The grid is css.earth's missing-imagery convention.", ''], ['The grid is an explicit no-imagery treatment; no', 'No'], [' The neutral gray marks missing imagery.', ' The color is one whole-disc mean.'],
   ['The Shape view uses the shared normal grid because the source release provides no registered surface imagery. The grid is a coordinate guide, not regolith, measured albedo or an optical photograph.',
     'The source release provides no registered surface imagery; the shape shows one whole-disc color.'],
   ['Both views therefore retain the shared neutral-gray material or a clearly labeled visualization of the selected model radius.', 'The views therefore show one whole-disc color or a clearly labeled visualization of the selected model radius.'],

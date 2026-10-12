@@ -61,7 +61,7 @@
     },
     {
       "id": "unmapped-surface-grid",
-      "subject": "cssEarth missing-coverage grid as the surface",
+      "subject": "css.earth missing-coverage grid as the surface",
       "status": "included",
       "finding": "No resolved global imagery is available in these source products, so the manifest supplies the project-authored missing-coverage grid and the normal grid marks unmapped terrain with Shadows off by default.",
       "evidence": [

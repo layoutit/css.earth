@@ -1,6 +1,6 @@
 ---
 name: celestial-skill
-description: "Create, repair, and qualify source-backed celestial body packages for cssEarth through its generic object contract. Use for planets, moons, dwarf planets, asteroids, stars, and unfinished body packages. Excludes general astronomy questions and unrelated application refactors."
+description: "Create, repair, and qualify source-backed celestial body packages for css.earth through its generic object contract. Use for planets, moons, dwarf planets, asteroids, stars, and unfinished body packages. Excludes general astronomy questions and unrelated application refactors."
 ---
 
 # Celestial Skill
@@ -34,7 +34,7 @@ the entries by that key's value.
 <id>` the declared sources. Each takes several ids and `--json`.
 
 Build a body whose appearance is supported by its sources and whose behavior
-comes from cssEarth's shared application. Follow this workflow for a new body;
+comes from css.earth's shared application. Follow this workflow for a new body;
 for a repair, enter at the affected stage and reuse valid work already done.
 Research and review requests do not imply implementation or publication.
 
