@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://oidb.jmmc.fr/collection.html?id=f9418307-0127-49cf-8183-070127f9cf08",
+      "label": "OiDB collection"
+    },
+    {
+      "role": "original",
       "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T004522_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_Chop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
       "label": "Source"
     }

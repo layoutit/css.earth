@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.fits",
       "label": "PDS Small Bodies Node"
     },

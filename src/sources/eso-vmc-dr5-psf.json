@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://archive.eso.org/scienceportal/home?data_collection=VMC",
+      "label": "ESO collection page"
+    },
+    {
+      "role": "original",
       "url": "https://www.eso.org/rm/api/v1/public/releaseDescriptions/155",
       "label": "Published source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://www.stsci.edu/jwst-program-info/program/?program=4758",
+      "label": "Programme page"
+    },
+    {
+      "role": "original",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
       "label": "Source"
     }

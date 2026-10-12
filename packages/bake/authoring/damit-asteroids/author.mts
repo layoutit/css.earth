@@ -403,7 +403,7 @@ async function authorBody(body: Body) {
   const manifest: Record<string, unknown> = {
     schema: SOURCE_MANIFEST_SCHEMA,
     inputs: [
-      { id: shapeId, path: shapePath, origin: shapeUrl, credit, license: 'CC-BY-4.0, DAMIT; retain original model and authors attribution.',
+      { id: shapeId, path: shapePath, origin: shapeUrl, sourceUrl: modelUrl, credit, license: 'CC-BY-4.0, DAMIT; retain original model and authors attribution.',
         acquisition: 'Restore original uncalibrated counted triangle table through the pinned acquisition recipe.',
         redistribution: 'Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.', consumers: ['terrain', 'shape', 'elevation'], datasetId: 'elevation',
         projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'uncalibrated source coordinates', metersPerUnit, referenceRadiusMeters: radiusMeters },

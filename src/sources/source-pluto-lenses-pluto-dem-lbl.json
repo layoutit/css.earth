@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m",
+      "label": "USGS product page"
+    },
+    {
+      "role": "original",
       "url": "https://astrogeology.usgs.gov/ckan/dataset/f1332f71-8003-4a75-a330-acce6a3bf09f/resource/70d0d3ac-6ccb-4062-9cc7-25565ef776a4/download/pluto_newhorizons_global_dem_300m_jul2017_16bit.lbl",
       "label": "Source"
     }

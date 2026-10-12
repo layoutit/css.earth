@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/opus/#/view=detail&detail=vg-iss-2-u-c2683625",
+      "label": "OPUS observation page"
+    },
+    {
+      "role": "original",
       "url": "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-u-c2683625.json",
       "label": "Source"
     }

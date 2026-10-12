@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGPF97%5D+c01",
+      "label": "SIMBAD object page"
+    },
+    {
+      "role": "original",
       "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync",
       "label": "Source"
     }

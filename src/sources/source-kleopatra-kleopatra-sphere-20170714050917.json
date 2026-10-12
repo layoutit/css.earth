@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/d216Kleopatra_2017-07-14T05_09_17.825_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

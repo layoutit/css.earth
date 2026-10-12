@@ -12,5 +12,6 @@ Radial velocity: Jeffers et al. (2020), through SIMBAD (Centre de Données astro
 
 Color matching: CIE 1931 2-degree observer, International Commission on Illumination, CC BY-SA 4.0.
 
-Modeled I+z limb darkening: Gillon et al. (2016), Nature 533, 221, Extended Data Table 2. The coefficients came from theoretical
-stellar-atmosphere tables and were used as transit priors; no resolved photospheric image is reproduced.
+Modeled limb darkening: Claret, Hauschildt & Witte (2012), A&A 546, A14, through the CDS (J/A+A/546/A14). The coefficients come
+from PHOENIX model atmospheres; no resolved photospheric image is reproduced. Effective temperature and surface gravity: Agol and
+others (2021), through the NASA Exoplanet Archive.

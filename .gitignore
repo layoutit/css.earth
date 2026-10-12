@@ -544,3 +544,6 @@ src/objects/ngc-3132-miri-layers/source/ngc3132_density_structure_101.dat
 # CDS ReadMe files of the Magellanic star catalogues: cited by their pinned URLs and restored on read.
 /src/objects/lmc-volume/source/stars/source/Bonanos2009-ReadMe.txt
 /src/objects/smc-volume/source/stars/source/Bonanos2010-ReadMe.txt
+
+# Proxima b: NASA control-run climate output restored by its acquisition recipe.
+src/objects/proxima-centauri-b/source/science/del-genio-2019/01_Control_ANN3900-3999.aijProxCenb04bTL.nc

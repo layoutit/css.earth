@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl",
       "label": "PDS3 label"
     },

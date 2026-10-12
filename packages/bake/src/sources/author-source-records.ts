@@ -1,14 +1,17 @@
 /**
  * Bind an object's inputs to the source catalogue, in one pass. Every input needs a catalogued binding and a record
  * in `src/sources/<catalogueId>.json`. A new binding says where its identity comes from: the entry's own origin and
- * product identifier. A new record names the manifest entry that cites it. Documents cite records authored by hand,
+ * product identifier. A new record names the manifest entry that cites it and links readers to a page: when its origin
+ * is a file or a query address, the entry's `sourceUrl` or its archive's own page, and the origin stays as the original
+ * link. Documents cite records authored by hand,
  * such as the publication behind a photometric model record; each must exist. Existing bindings and records are
  * never rewritten. Git history records when each was added.
  */
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
-import { SOURCE_CATALOG_SCHEMA, parseSourceCatalog } from '@cssearth/objects/sources';
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { SOURCE_CATALOG_SCHEMA, isFileAddress, parseSourceCatalog } from '@cssearth/objects/sources';
+import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { archivePage } from './archive-pages.ts';
 
 /** What an authored binding rests on: the manifest entry it sits in. */
 export const ENTRY_EVIDENCE = 'Origin and product identifier recorded on this manifest entry.';
@@ -29,6 +32,12 @@ export async function authorSourceRecords({ root, objectId, write = true }: Auth
   const content = await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8').then(raw => requireRecord(JSON.parse(raw)), () => ({}) as Record<string, unknown>);
   const objectName = text(content.displayName) ?? text(content.title) ?? objectId.replace(/-/gu, ' ').replace(/\b[a-z]/gu, letter => letter.toUpperCase());
   const productIds = inputs.map(input => text(input.productId)), result: AuthoringResult = { bindings: [], records: [] };
+  // The request recorded for an entry completes a query service's address: a VizieR query names its table in the form it sends.
+  const operations: unknown = await readFile(resolve(objectDirectory, 'source/preparation/acquisition.json'), 'utf8').then(raw => requireRecord(JSON.parse(raw), 'acquisition plan').operations, () => []);
+  const requestSent = (path: unknown, url: string): Record<string, string> => {
+    const operation = (Array.isArray(operations) ? operations : []).find((candidate: unknown) => isRecord(candidate) && candidate.path === path && candidate.url === url);
+    return isRecord(operation) && isRecord(operation.form) ? Object.fromEntries(Object.entries(operation.form).filter((entry): entry is [string, string] => typeof entry[1] === 'string')) : {};
+  };
   let manifestChanged = false;
 
   for (const [index, input] of inputs.entries()) {
@@ -51,9 +60,14 @@ export async function authorSourceRecords({ root, objectId, write = true }: Auth
         const productId = text(input.productId), unique = productId !== undefined && productIds.filter(id => id === productId).length === 1;
         const origin = text(input.origin) ?? text(input.sourceUrl);
         if (!origin) throw new TypeError(`Input ${inputId} has no origin URL; a catalogue record needs a citation link.`);
+        // A reader lands on a page. An entry downloaded as a file names the page that presents it in `sourceUrl`, unless
+        // its archive's addresses say which page that is (archive-pages.ts).
+        const page = [text(input.sourceUrl), origin, archivePage(origin, requestSent(input.path, origin))].find(url => url !== undefined && !isFileAddress(url));
+        if (!page) throw new TypeError(`Input ${inputId} comes from a file, ${origin}. Record the page that presents it as the entry's sourceUrl; its catalogue record links readers there.`);
         record = { id: catalogueId, kind: 'data-product', identityLevel: 'work', title: `${objectName} · ${inputId.replace(/[-_]+/gu, ' ')}`,
           identifiers: unique ? [{ type: 'pds4-lidvid', value: productId }] : [],
-          links: origin ? [{ role: 'landing', url: origin, label: 'Source' }] : [],
+          links: page === origin ? [{ role: 'landing', url: origin, label: 'Source' }]
+            : [{ role: 'landing', url: page, label: 'Source page' }, { role: 'original', url: origin, label: 'Source file' }],
           evidence: [{ path: repositoryPath, locator }], relations: [],
           statements: [...(text(input.credit) ? [{ kind: 'credit', text: text(input.credit), scope: `The ${inputId.replace(/[-_]+/gu, ' ')} input.`, evidence: 'Manifest credit field.' }] : []),
             ...(text(input.license) ? [{ kind: 'rights', text: text(input.license), scope: 'Redistributed display derivatives.', evidence: 'Manifest license field.' }] : [])] };

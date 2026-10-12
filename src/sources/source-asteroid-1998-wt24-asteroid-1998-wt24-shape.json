@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+      "label": "Shape model index"
+    },
+    {
+      "role": "original",
       "url": "https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj",
       "label": "Source"
     }

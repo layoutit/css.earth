@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/31Euphrosyne/Deconv/d31Euphrosyne_2019-04-10T07_30_24.898_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

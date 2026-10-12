@@ -12,18 +12,26 @@ Proxima Centauri b is the first planet found around the nearest star to the Sun.
 
 **Color.** No image or measured color exists. The neutral gray is lit by proxima-centauri's measured color (#ffd06e, the color dataset of proxima-centauri (src/objects/proxima-centauri/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Climate model.** The default dataset is surface air temperature from the published ROCKE-3D simulation of [Del Genio et al. (2019)](https://doi.org/10.1089/ast.2017.1760), experiment 1, Control. It assumes a 0.984-bar nitrogen atmosphere with 376 ppm carbon dioxide, a dynamic global ocean 900 m deep with salinity 35.4 psu, and synchronous rotation with an 11.2-day period. None of that atmosphere, ocean or rotation has been measured on Proxima b. This is a climate scenario, not its observed appearance. The neutral shape remains selectable.
+
+The [NASA NCCS native release](https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/) supplies `01_Control_ANN3900-3999.aijProxCenb04bTL.nc`. The shared NetCDF reader reads `tsurf`, which the file calls SURFACE AIR TEMPERATURE, in degrees Celsius, on 72 longitude samples by 46 latitude samples (5° × 4°), including both poles. The star is overhead at source longitude 180°: the incoming-radiation field peaks at its two nearest grid nodes, ±177.5°, so that meridian becomes body longitude zero. The prepared map uses bilinear sampling and keeps the native field unchanged; its false-color legend spans -70 to 10 °C.
+
+**Averaging and limits.** The file is a released mean with the filename interval `ANN3900-3999`; its `fromto` attribute reports 100.00 model days. These labels are preserved without turning them into Earth calendar dates or a number of orbital periods. The field ranges from -63.2461 to 3.2427 °C with no missing cells. Table 5 rounds the paper’s control summary to -59 to 3 °C: its minimum differs from this released surface-air field, so this view does not claim to reproduce that table exactly. Other published atmosphere, salinity and rotation scenarios have different climates; they are not averaged into this one. With Shadows on, lighting darkens the night half visually.
+
 **Charts.** The orbits of Proxima Centauri's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
 
 ## Evidence
 
 Generated 2026-10-10 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/proxima-centauri-b.json).
 
+Validated 2026-10-11 for the climate dataset and orientation-label changes in this package. The telescope API query of NASA’s archive confirmed the period and orbital size and returned no inclination. All 3,312 native grid cells matched SciPy’s independent NetCDF reader exactly after the longitude convention was applied. The [source/acquisition/NetCDF/content checks](../../../packages/bake/src/objects/raster/netcdf/netcdf-lonlat-field.test.mts) passed (20 tests across the affected owners); the [actual package and retained-DOM checks](../../../site/world/runtime-package.test.mts) passed (8 tests), including both dataset selections. Browser inspection verified the default model, neutral-shape switch, legend, minimum-mass and unknown-orientation facts, and the dashed orbit marked “(approx)” in the system view. The input restored byte-for-byte through the acquisition recipe, and all 37 runtime files in the three changed inventories were verified live on the asset origin.
 
 ## Known problems
 
+- **Model climate.** No measured surface map was found in the examined sources. The climate map does not establish an atmosphere, ocean, weather or habitability. Its scenario predates the current radial-velocity fit and keeps the paper’s 11.2-day synchronous rotation; the navigable orbit retains the 2025 fit’s 11.18465-day period.
 - **Assumed tilt.** See "Assumed plane" above. If the planet does not orbit in the star's equatorial plane, the orbit drawn here is tilted wrongly by an unknown angle. It does not transit: Jenkins et al. (2019), MNRAS 487, 268 rule out transits at the 200 ppm level with Spitzer, so its tilt is not 90°.
 - **Mass.** 1.055 ± 0.055 Earth masses is the minimum mass (m sin i) from radial velocities. For the assumed 47° the paper gives 1.44 ± 0.21 Earth masses.
 - **Size.** The radius is the NASA Exoplanet Archive's value calculated from the mass. Nobody has measured the planet's size, because it does not transit.
-- **Quoted text.** The introduction quotes sentences of the Wikipedia article "Proxima Centauri b" (revision 1378868101) verbatim, CC BY-SA 4.0.
+- **Quoted text.** The discovery card preserves a quotation from the Wikipedia article "Proxima Centauri b" (revision 1378868101) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

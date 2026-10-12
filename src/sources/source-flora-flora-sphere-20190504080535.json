@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

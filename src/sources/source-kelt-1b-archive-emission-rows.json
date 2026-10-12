@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/overview/KELT-1%20b",
+      "label": "NASA Exoplanet Archive overview"
+    },
+    {
+      "role": "original",
       "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27KELT-1+b%27+order+by+centralwavelng&format=csv",
       "label": "Source"
     }

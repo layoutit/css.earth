@@ -6,6 +6,11 @@
   "identifiers": [],
   "links": [
     {
+      "role": "landing",
+      "url": "https://sbmt.jhuapl.edu/",
+      "label": "Small Body Mapping Tool"
+    },
+    {
       "role": "original",
       "url": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM",
       "label": "Native SBMT file"

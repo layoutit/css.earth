@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://github.com/nasa-gibs/worldview/blob/main/config/default/common/config/metadata/layers/multi-mission/ghrsst/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies.md",
+      "label": "File on GitHub"
+    },
+    {
+      "role": "original",
       "url": "https://raw.githubusercontent.com/nasa-gibs/worldview/main/config/default/common/config/metadata/layers/multi-mission/ghrsst/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies.md",
       "label": "Source"
     }

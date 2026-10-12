@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/callisto-galileo-nims-hyperspectral-map-products-registered-archive",
+      "label": "USGS product page"
+    },
+    {
+      "role": "original",
       "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
       "label": "Source"
     }

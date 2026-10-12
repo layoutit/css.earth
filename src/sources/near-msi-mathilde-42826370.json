@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml",
       "label": "PDS calibrated image and metadata"
     }

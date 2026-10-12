@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/16Psyche/Deconv/d16Psyche_2018-06-04T00_06_43.574_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

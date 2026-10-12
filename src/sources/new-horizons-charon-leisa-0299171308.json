@@ -14,6 +14,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx",
       "label": "Spectra, wavelengths and surface coordinates"
     }

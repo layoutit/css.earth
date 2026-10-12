@@ -12,6 +12,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/opus/#/view=detail&detail=go-ssi-c0359986578",
+      "label": "OPUS observation page"
+    },
+    {
+      "role": "original",
       "url": "https://opus.pds-rings.seti.org/opus/api/metadata/go-ssi-c0359986578.json",
       "label": "Source"
     }

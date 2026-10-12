@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.fit",
       "label": "Source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://oidb.jmmc.fr/collection.html?id=PIONIER",
+      "label": "OiDB collection"
+    },
+    {
+      "role": "original",
       "url": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-22T04:10:33.991_oidataCalibrated.fits",
       "label": "Source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/15Eunomia/Deconv/d15Eunomia_2018-05-05T01_07_32.953_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

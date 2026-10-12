@@ -72,10 +72,11 @@ export async function starMarker(id: string, { requireLimbDarkening = true } = {
   const { color, limbDarkening } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), science, 'photometry/stellar-color.json');
   if (!limbDarkening && requireLimbDarkening) throw new Error(`${id} has no limb-darkening record.`);
   const law = limbDarkening?.coefficients ?? { u1: 0, u2: 0 };
-  // Intensity scales every linear channel; the color's chromaticity stays.
+  // Intensity scales every linear channel and the color's chromaticity stays, unless the dataset names a law per channel.
+  const laws = (limbDarkening && 'channels' in limbDarkening ? limbDarkening.channels : undefined) ?? [law, law, law] as const;
   return disc((x, y) => {
-    const ratio = Math.max(0, limbIntensity(Math.sqrt(Math.max(0, 1 - x * x - y * y)), law));
-    return color.linear.map(value => Math.round(255 * linearToSrgb(value * ratio))) as unknown as [number, number, number];
+    const mu = Math.sqrt(Math.max(0, 1 - x * x - y * y));
+    return color.linear.map((value, channel) => Math.round(255 * linearToSrgb(value * Math.max(0, limbIntensity(mu, laws[channel]!))))) as unknown as [number, number, number];
   });
 }
 

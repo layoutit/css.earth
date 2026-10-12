@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75",
+      "label": "VizieR catalogue J/A+A/529/A75"
+    },
+    {
+      "role": "original",
       "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/529/A75/table-af&-out.max=500&Teff=7250..7500&logg=4.0..4.5&Z==0&xi==2&Filt=V&Met=L&Mod=A&-out=logg,Teff,Z,xi,a,b,Filt,Met,Mod",
       "label": "Source"
     }

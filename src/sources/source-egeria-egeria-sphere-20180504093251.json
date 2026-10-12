@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://observations.lam.fr/astero/",
+      "label": "Survey database"
+    },
+    {
+      "role": "original",
       "url": "https://observations.lam.fr/astero/Data/13Egeria/Deconv/d13Egeria_2018-05-04T09_32_51.219_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }

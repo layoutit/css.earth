@@ -33,7 +33,7 @@
       },
       {
         "id": "mass",
-        "label": "Mass",
+        "label": "Minimum mass",
         "value": "1.1 Earth masses",
         "source": {
           "catalogueId": "doi-10-1051-0004-6361-202553728",
@@ -43,18 +43,31 @@
           "path": "source/measurements.json",
           "locator": "massSource"
         }
+      },
+      {
+        "id": "orbital-orientation",
+        "label": "Orbit orientation",
+        "value": "Unknown; 47° assumed",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202553728",
+          "url": "https://doi.org/10.1051/0004-6361/202553728",
+          "label": "Suárez Mascareño et al. (2025), Table 3; assumed stellar equatorial plane",
+          "checked": "2026-10-11",
+          "path": "source/preparation/new-object.json",
+          "locator": "planets[0].orbit.assumedPlane; planets[0].orbit.elements.inclinationDegrees"
+        }
       }
     ],
     "moreFacts": []
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "climate-model",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by Alpha Centauri; the neutral gray is a display convention, not a measured color.",
+        "qualification": "Estimated radius · Neutral shape · Orbital orientation unknown",
         "thumbnail": "proxima-centauri-b-dataset-shape.webp",
         "surface": "proxima-centauri-b-surface-shape@2x.webp",
         "poles": "proxima-centauri-b-poles-shape@2x.webp",
@@ -64,7 +77,67 @@
           "url": "https://doi.org/10.1051/0004-6361/202553728"
         },
         "falseColor": false,
-        "notes": "No image or color of Proxima Centauri b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of proxima-centauri's light, as its color dataset measures it."
+        "notes": "No image or measured visible color of Proxima Centauri b is available. The sphere uses the archive's model radius, not a measured size; gray marks the unresolved surface. Its host star's measured color tints the gray. Orbital orientation is unknown: the displayed 47° tilt assumes the star's equatorial plane."
+      },
+      {
+        "id": "climate-model",
+        "label": "Climate model",
+        "qualification": "Model · ROCKE-3D · Del Genio et al. (2019) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-climate-model.webp",
+        "surface": "proxima-centauri-b-surface-climate-model@2x.webp",
+        "poles": "proxima-centauri-b-poles-climate-model@2x.webp",
+        "falseColor": true,
+        "notes": "Surface air temperature from Del Genio et al. (2019), ROCKE-3D control run: a model, not an observation. Assumes a 0.984-bar nitrogen atmosphere with 376 ppm carbon dioxide, a 900 m deep global ocean of salinity 35.4 psu, and synchronous rotation (11.2 days). No atmosphere, ocean or surface map has been detected on Proxima b. This is the released mean ANN3900-3999; the file reports an averaging interval of 100 model days. Orbital orientation is unknown; the displayed 47° tilt is assumed. False color spans -70 to 10 °C. Shadows darken the night half visually.",
+        "source": {
+          "id": "proxima-centauri-b-climate-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1089/ast.2017.1760"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface air temperature",
+          "labels": [
+            "-70",
+            "-30",
+            "10"
+          ],
+          "meta": "°C",
+          "sourceUrl": "https://doi.org/10.1089/ast.2017.1760",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "-70",
+              "-30",
+              "10"
+            ]
+          }
+        }
       }
     ]
   },
@@ -84,7 +157,7 @@
       "id": "proxima-centauri-b-orbits",
       "titleKey": "systemOrbits",
       "src": "/scenes/proxima-centauri-b/proxima-centauri-b-system-orbits.svg",
-      "alt": "The orbits of Proxima Centauri's planets in this map from above, to scale, with Proxima Centauri b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "alt": "Schematic Proxima Centauri planetary orbits to scale. Proxima b is highlighted; its period and orbital size are measured, but its plane is assumed and its orientation on the sky is unknown.",
       "source": {
         "id": "proxima-centauri-b-observational-measurements",
         "path": "../manifest.json",

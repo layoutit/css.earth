@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG",
       "label": "Source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/data_sb/missions/lucy/index.shtml",
+      "label": "Mission archive page"
+    },
+    {
+      "role": "original",
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.mission:document-v2.0/Donaldjohanson_Coordinate_System_Description_v1.pdf",
       "label": "Source"
     }

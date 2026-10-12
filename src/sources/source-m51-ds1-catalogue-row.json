@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NAME+M51-DS1",
+      "label": "SIMBAD object page"
+    },
+    {
+      "role": "original",
       "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync",
       "label": "Source"
     }

@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://oidb.jmmc.fr/collection.html?id=19f7e2cf-2a03-4bb2-b7e2-cf2a03bbb245",
+      "label": "OiDB collection"
+    },
+    {
+      "role": "original",
       "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
       "label": "Source"
     }

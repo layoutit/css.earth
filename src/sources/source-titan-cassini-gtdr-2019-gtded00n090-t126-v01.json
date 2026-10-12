@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "label": "Archive folder"
+    },
+    {
+      "role": "original",
       "url": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz",
       "label": "Source"
     }

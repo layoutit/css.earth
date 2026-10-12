@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/603/A55/",
+      "label": "CDS catalogue folder"
+    },
+    {
+      "role": "original",
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/603/A55/table1.dat",
       "label": "Alí-Lagoa and Delbo (2017), A&A 603, A55, Table 1"
     }

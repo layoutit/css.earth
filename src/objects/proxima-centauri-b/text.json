@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "It is one of 2 planets known around Proxima Centauri; its size is a model. Its tilt is not measured: it is drawn in the star's equatorial plane.",
+    "text": "Orbital orientation unknown: the 47° plane is assumed. The map is a ROCKE-3D climate scenario; no atmosphere or ocean has been detected.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202553728",
@@ -32,20 +32,24 @@
         "locator": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: P_orb 11.18465 +/- 0.00053 d, T0 2460548.59 +/- 0.12 BJD (time of inferior conjunction), a 0.04848 au, m sin i 1.055 Earth masses, e 0 (fixed); Klein et al. (2021), Table 1: stellar inclination 47 +/- 7 degrees (assumed for the orbit); NASA Exoplanet Archive ps table: disc_year 2016, sy_pnum 2; pscomppars calculated pl_radj 0.0913"
       },
       {
-        "catalogueId": "wikipedia-proxima-centauri-b",
-        "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_b",
-        "label": "Wikipedia, \"Proxima Centauri b\"",
-        "checked": "2026-10-10",
-        "locator": "Lead section, revision 1378868101",
-        "quote": "The host star is the closest star to the Sun, at a distance of about 4.2 light-years from Earth, and is part of the larger triple star system Alpha Centauri."
+        "catalogueId": "source-proxima-centauri-b-climate-model-simulation",
+        "url": "https://www.giss.nasa.gov/pubs/abs/de09600r.html",
+        "label": "Del Genio et al. (2019), ROCKE-3D control scenario",
+        "checked": "2026-10-11",
+        "locator": "Table 4, experiment 1; NASA NCCS original control-run tsurf field; model assumptions, not detections"
       }
     ]
   },
   "datasets": {
     "shape": {
       "title": "Shape only",
-      "detail": "Published radius",
-      "summary": "A sphere at the published size. No picture of its surface exists."
+      "detail": "Estimated radius",
+      "summary": "A neutral sphere at an estimated radius; no surface image is measured. Orbit orientation is unknown (47° assumed)."
+    },
+    "climate-model": {
+      "title": "ROCKE-3D control",
+      "detail": "ROCKE-3D control · °C",
+      "summary": "Simulated surface air temperature with an assumed ocean and atmosphere. Neither is detected; orbital orientation is unknown."
     }
   }
 }

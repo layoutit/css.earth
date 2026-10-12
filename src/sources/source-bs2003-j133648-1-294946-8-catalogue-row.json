@@ -7,6 +7,11 @@
   "links": [
     {
       "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/ApJ/591/L111",
+      "label": "VizieR catalogue J/ApJ/591/L111"
+    },
+    {
+      "role": "original",
       "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "label": "Source"
     }
