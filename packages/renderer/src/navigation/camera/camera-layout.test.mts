@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import mercury from '../../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
 import venus from '../../../../../src/objects/venus/prepared/runtime.json' with { type: 'json' };
-import { MOBILE_OPEN_AREA_SHARE, PHONE_OPEN_AREA_SHARE, selectPreparedResponsiveZoom } from './camera-layout.ts';
+import { MOBILE_OPEN_AREA_SHARE, PHONE_OPEN_AREA_SHARE, STAR_MAXIMUM_DIAMETER_PIXELS, classFramedCamera, selectPreparedResponsiveZoom } from './camera-layout.ts';
 
 type ResponsiveFitOptions = Parameters<typeof selectPreparedResponsiveZoom>[0];
 function responsiveFit(plan: ResponsiveFitOptions["plan"], width: number, height: number, options: Partial<ResponsiveFitOptions> = {}) {
@@ -64,4 +64,15 @@ test('a portrait phone frames more closely without changing the tablet fit', () 
   const diameter = (width: number) => fit(width).zoom / plan.defaultZoom * plan.logicalBodyDiameter;
   assert.ok(Math.abs(diameter(390) - 390 * PHONE_OPEN_AREA_SHARE) < 1e-9);
   assert.ok(Math.abs(diameter(768) - 428 * MOBILE_OPEN_AREA_SHARE) < 1e-9);
+});
+
+test('a star stops growing with the window at its widest disc, and no other class is limited', () => {
+  const planet = mercury.camera, star = classFramedCamera(planet, 'star');
+  const diameter = (plan: typeof planet, width: number, height: number) => responsiveFit(plan, width, height).zoom / plan.defaultZoom * plan.logicalBodyDiameter;
+  for (const classification of ['planet', 'satellite', 'exoplanet', undefined]) assert.equal(classFramedCamera(planet, classification), planet);
+  // A 27-inch window: the shares give 799 px, the star keeps its limit.
+  assert.ok(Math.abs(diameter(planet, 2560, 1310) - 1310 * .61) < 1e-9);
+  assert.equal(diameter(star, 2560, 1310), STAR_MAXIMUM_DIAMETER_PIXELS);
+  // Windows whose shares stay under the limit frame a star as they frame a planet.
+  for (const [width, height] of [[1440, 780], [1512, 860], [390, 844]] as const) assert.equal(diameter(star, width, height), diameter(planet, width, height));
 });

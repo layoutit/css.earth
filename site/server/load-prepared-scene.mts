@@ -12,7 +12,7 @@ export async function loadPreparedSceneMarkup(id: string) {
   });
   const { textures, ...markup } = serializePreparedScene(definition);
   // The fields the page's startup cover fits its photograph with, before the scene's code arrives (startup-cover.mts).
-  const { responsiveFit, logicalBodyDiameter, defaultZoom, framingScale, projection } = definition.camera;
-  const coverPlan = { responsiveFit, logicalBodyDiameter, defaultZoom, framingScale, projection };
+  const { responsiveFit, logicalBodyDiameter, defaultZoom, framingScale, maximumBodyDiameterPixels, projection } = definition.camera;
+  const coverPlan = { responsiveFit, logicalBodyDiameter, defaultZoom, framingScale, maximumBodyDiameterPixels, projection };
   return { ...markup, coverPlan, descriptor: await withPreparedAssetOrigin(descriptor, undefined, { addresses: textures.map(texture => texture.address) }) };
 }

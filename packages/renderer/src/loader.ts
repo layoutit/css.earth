@@ -3,6 +3,7 @@ import { type ObjectRuntimeDefinition, preparedDatasetReference } from '@csseart
 import { decodePreparedCssObject, requirePreparedCssDescriptor } from './prepared-object-decoder.js';
 import { decodePreparedObjectInWorker } from './prepared-data-worker-client.js';
 import { adoptPreparedDatasetTables } from './prepared-data/dataset-tables.js';
+import { classFramedCamera } from './navigation/camera/camera-layout.js';
 
 export interface PreparedCssTransport {
   /** Return the exact bytes addressed by the prepared reference. The decoder
@@ -29,7 +30,9 @@ export async function loadPreparedCssObject(
   // they never silently repeat the expensive decode on the UI thread.
   const definition = typeof Worker === 'undefined' ? await decodePreparedCssObject(descriptor, bytes) : await decodePreparedObjectInWorker({ descriptor, bytes }, { signal });
   if (definition.deferredDatasets?.length) datasetTransports.set(definition.assets, { reference: descriptor.prepared!.url, transport, loads: new Map() });
-  return definition;
+  const catalog: unknown = descriptor.properties.catalog;
+  const camera = classFramedCamera(definition.camera, typeof catalog === 'object' && catalog !== null && 'classification' in catalog ? catalog.classification : undefined);
+  return camera === definition.camera ? definition : { ...definition, camera };
 }
 
 /** Make a dataset's tables part of a definition (dataset-tables.ts): at once when they are, otherwise read through the
