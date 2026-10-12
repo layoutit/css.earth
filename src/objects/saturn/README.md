@@ -162,6 +162,14 @@ by body and rings. NASA's
 [Cassini mission reference](https://science.nasa.gov/wp-content/uploads/2023/09/cassini.pdf)
 gives cloud-top periods, recorded on 16 latitude bands.
 
+Saturn opens at 0.856 of the size the shared fit gives a globe, so that the
+globe and rings together are as tall as another planet's globe. At the shared
+size they were 933 px tall against a globe's 799 px in a 2560 × 1310 window, and
+the rings ran 1,792 px across it (2026-10-12); at the new size the globe is
+684 px and globe and rings together 798 px. The four shares of `responsiveFit`
+in `source/preparation/presentation.json` carry the factor. Phones and tablets
+size the globe to their open area and are unchanged.
+
 ## Other views
 
 The ultraviolet and methane views use OPAL Cycle 32 F225W and FQ889N maps.
