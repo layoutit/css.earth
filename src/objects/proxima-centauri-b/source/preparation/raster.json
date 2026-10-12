@@ -33,6 +33,50 @@
           "source": "the color dataset of proxima-centauri (src/objects/proxima-centauri/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "climate-model",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/del-genio-2019/01_Control_ANN3900-3999.aijProxCenb04bTL.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "climate-model",
+        "label": "Climate model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/del-genio-2019/01_Control_ANN3900-3999.aijProxCenb04bTL.nc",
+        "variable": "tsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "sourceUnits": "C",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "climate-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "°C",
+        "minimum": -70,
+        "maximum": 10,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "-70",
+          "-30",
+          "10"
+        ],
+        "description": "Simulated surface air temperature from the ROCKE-3D control scenario of Del Genio et al. (2019), not a measurement.",
+        "title": "Climate model · ROCKE-3D control",
+        "sourceUrl": "https://doi.org/10.1089/ast.2017.1760"
+      }
     }
   ],
   "lighting": {

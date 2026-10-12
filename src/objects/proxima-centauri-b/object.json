@@ -33,6 +33,11 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "climate-model",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
