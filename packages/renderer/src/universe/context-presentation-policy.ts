@@ -1,5 +1,6 @@
 import type { OrbitLineFade } from '@cssearth/objects';
 import { orbitLineOpacity } from '../navigation/camera/perspective-dolly.js';
+import { framedRadiiFade } from './detailed-focus-context.js';
 
 // Every dimming of the world context is one of these four, and the planner applies each in one place.
 /** Context paths while the focused body fills the view. */
@@ -101,6 +102,19 @@ export function namedBesideSubject(subject: ContextSubject, satelliteOf: string 
 export function otherSystemsOpacity(ownSystemOpacity: number, starField: number): number {
   return ownSystemOpacity > .5
     ? OTHER_SYSTEM_OPACITY + (1 - OTHER_SYSTEM_OPACITY) * Math.round(starField * OTHER_SYSTEM_STEPS) / OTHER_SYSTEM_STEPS : 1;
+}
+
+/** How far the star field has come up around a body a picture is attached to (a star's disc, `pictureReachM` the radius
+ * its page frames; 0 for none): no further than the picture has stopped being the view (detailed-focus-context.ts). */
+export function starFieldAroundPicture(starField: number, distanceM: number, pictureReachM: number): number {
+  return pictureReachM > 0 ? Math.min(starField, framedRadiiFade(distanceM / pictureReachM)) : starField;
+}
+
+/** A star with nothing in orbit has no system, so a camera beside it is in none. It is a system of one: with that star
+ * selected, or a flight headed to it, the other stars' bodies dim around it as they do inside a system, and come up to
+ * full with the star field around it. `starField` is that field at the camera's distance from the star, 0 to 1. */
+export function loneStarOtherSystems(starField: number, distanceM: number, pictureReachM: number): number {
+  return otherSystemsOpacity(1, starFieldAroundPicture(starField, distanceM, pictureReachM));
 }
 
 /** The one alpha a body's marker, caption and path share on top of their own fades. A hovered body is never dimmed. */

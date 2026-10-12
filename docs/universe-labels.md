@@ -106,11 +106,22 @@ hidden-orbit settings still apply.
 A family is read by a path's own centre. A body that circles an unrendered
 barycentre is therefore outside its host's family; this is a known gap.
 
-Markers, circles and captions do not dim with selection. They share one
-emphasis with their path: 30% outside a highlighted category, and 30% for
-another star's bodies seen from inside a star's system (the Sun's or any placed
-star's), rising to full as the surrounding stars fill the view. A hovered body is never dimmed. These
-multipliers do not decide label admission or navigation availability.
+Markers, circles and captions share one emphasis with their path: 30% outside
+a highlighted category, and 30% for another star's bodies seen from inside a
+star's system (the Sun's or any placed star's), rising to full as the
+surrounding stars fill the view. That follows the camera's place, not the
+selection, with one exception. A star with nothing in orbit has no system, so
+a camera beside it is in none: with that star selected, or a flight headed to
+it, it is a system of one, and the other stars' bodies dim around it the same
+way. Where a picture is attached to the star (its disc, while that dataset
+shows), they stay dimmed while the picture fills the view: inside 8 of the
+radii its page frames, whole again by 32. The galaxy's catalogue dots follow
+the same rule. A hovered body is never dimmed. These multipliers do not decide
+label admission or navigation availability.
+
+The selected star's own name is then over its disc. It is written as a name
+over a nebula's picture is: white at full strength over a dark grey copy of
+itself one pixel down and right.
 
 ## Verification
 

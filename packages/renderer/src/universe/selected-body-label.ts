@@ -15,7 +15,9 @@ const VIEWPORT_EDGE_PX = 4;
 const HEADER_CLEARANCE_PX = 64;
 const FOOTER_CLEARANCE_PX = 30;
 
-export interface SelectedLabelFlags { overview: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge }
+/** `pictured`: a picture attached to the body (a star's disc) is drawn behind its name, which is then written as a name
+ * over a nebula's picture is (world-context.css). */
+export interface SelectedLabelFlags { overview: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge; pictured?: boolean }
 interface SelectedLabelPlacement { left: number; top: number; rect: LabelScreenRect }
 
 /** What a caption is placed from: a body's centre and radius, and where its package asks for the caption. */
@@ -74,7 +76,7 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
   label.style.opacity = '0';
   host.appendChild(label);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock);
-  let preparedId = '', measuredId = '', width = 0, height = 0;
+  let preparedId = '', measuredId = '', width = 0, height = 0, pictured = false;
   const observer = new ResizeObserver(entries => {
     const entry = entries.find(entry => entry.target === label);
     if (!entry || !preparedId) return;
@@ -84,7 +86,7 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
   });
   const measure = (body: PreparedContextPoint) => {
     if (preparedId === body.id) return;
-    label.textContent = body.name;
+    label.textContent = label.dataset.labelName = body.name;
     label.dataset.selectedBodyLabel = body.id;
     if (body.labelCase === 'upper') label.dataset.labelCase = 'upper'; else if ('labelCase' in label.dataset) delete label.dataset.labelCase;
     preparedId = body.id; measuredId = '';
@@ -109,7 +111,12 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       if (!placement) return hide();
       const transform = `translate(${Number(placement.left.toFixed(3))}px,${Number(placement.top.toFixed(3))}px) translate(-50%,0)`;
       writeStyle(label, 'transform', transform);
-      fader.set(label, DEFAULT_CONTEXT_LABEL_OPACITY);
+      // A change of the page's dataset, never of the camera: written once.
+      if (pictured !== (flags.pictured === true)) {
+        pictured = flags.pictured === true;
+        if (pictured) label.dataset.labelBackdrop = 'picture'; else delete label.dataset.labelBackdrop;
+      }
+      fader.set(label, pictured ? 1 : DEFAULT_CONTEXT_LABEL_OPACITY);
       return placement.rect;
     },
     destroy() { observer.disconnect(); fader.destroy(); label.remove(); },

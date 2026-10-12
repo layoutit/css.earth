@@ -273,6 +273,11 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         subscribe: listener => subscribe(id, listener),
       } : null;
     },
+    /** The radius a bank's page frames, in metres; 0 for a bank that is not declared. */
+    framingRadiusM(id: string): number {
+      const bank = byId.get(id);
+      return bank ? bank.framing.radiusUnits * bank.framing.frame.metersPerUnit : 0;
+    },
     setEnabled(id: string, enabled: boolean) {
       if (lifetime.disposed || typeof enabled !== 'boolean') return;
       const bank = byId.get(id);

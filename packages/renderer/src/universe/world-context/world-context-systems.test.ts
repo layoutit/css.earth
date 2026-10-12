@@ -95,6 +95,25 @@ test('inside a placed star\'s system the bodies of every other system dim, as th
   assert.deepEqual(emphasis(fullM), [1, 1, 1, 1]);
 });
 
+test('a selected star with nothing in orbit is a system of one, and its disc keeps the other stars dim while it fills the view', () => {
+  const points = [summary.focus, ...summary.bodies], at = (id: string) => points.findIndex(point => point.id === id), star = points[at('betelgeuse')]!;
+  const calculate = createWorldContextPlanner(summary);
+  const emphasis = (distanceM: number, selectionReachM = 0, selectedId = 'betelgeuse') => {
+    const frame = calculate({ ...view(points.length), selectedId, selectionReachM, world: { referenceFrame: summary.frame.referenceFrame, epochJdTt: summary.frame.epochJdTt,
+      pose: { positionM: [star.positionM[0], star.positionM[1], star.positionM[2] + distanceM], orientationXyzw: [0, 0, 0, 1] } } });
+    return ['betelgeuse', 'sun', 'trappist-1'].map(id => frame.projectedBodies.find(body => body.index === at(id))!.emphasis);
+  };
+  // Beside the star; then where the stars around it fill the view, as around a system.
+  const fullM = summary.system.fadeOutStartDistanceM, au = 1.495978707e11;
+  assert.deepEqual(emphasis(2e12), [1, .3, .3]);
+  assert.deepEqual(emphasis(fullM), [1, 1, 1]);
+  // A disc of 100 au attached to it: the others stay dim inside 8 of its radii, and are whole by 32.
+  assert.deepEqual(emphasis(fullM, 100 * au), [1, .3, .3]);
+  assert.deepEqual(emphasis(32 * 100 * au, 100 * au), [1, 1, 1]);
+  // Another body's page seen from beside the star dims nothing: the star is neither selected nor flown to.
+  assert.deepEqual(emphasis(2e12, 0, 'sun'), [1, 1, 1]);
+});
+
 test('the planner client sends a system just before the first view that holds its bodies', async () => {
   const posted: unknown[] = [];
   const worker: WorldPlannerWorker = { onmessage: null, onerror: null, postMessage: value => { posted.push(value); }, terminate() {} };

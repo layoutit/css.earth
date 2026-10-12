@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { closeOrbitFades, contextEmphasis, contextSubject, inSubjectFamily, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity,
-  pathOpacity } from './context-presentation-policy.js';
+import { closeOrbitFades, contextEmphasis, contextSubject, inSubjectFamily, loneStarOtherSystems, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity,
+  pathOpacity, starFieldAroundPicture } from './context-presentation-policy.js';
 
 const saturn = { id: 'saturn', centreId: 'sun' }, titan = { id: 'titan', centreId: 'saturn' }, jupiter = { id: 'jupiter', centreId: 'sun' };
 const sun = { id: 'sun', centreId: undefined }, isStar = (id: string) => id === 'sun';
@@ -85,4 +85,14 @@ test('a marker, its caption and its path share one emphasis, and a hovered body 
   assert.equal(contextEmphasis(true, true, false, .3), 1);
   // Other systems read as not belonging inside the camera's own system, and come up with the star field.
   assert.deepEqual([otherSystemsOpacity(1, 0), otherSystemsOpacity(1, 1), otherSystemsOpacity(.4, 0)], [.3, 1, 1]);
+});
+
+test('a star with nothing in orbit is a system of one, and a picture attached to it holds the star field back', () => {
+  // With no picture the other stars follow the star field alone, as inside a system.
+  assert.deepEqual([loneStarOtherSystems(0, 1, 0), loneStarOtherSystems(1, 1, 0)], [.3, 1]);
+  // A picture of radius 1: the field stays down inside 8 radii, and is whole by 32, however far the star field has come.
+  assert.deepEqual([starFieldAroundPicture(1, 8, 1), starFieldAroundPicture(1, 32, 1), starFieldAroundPicture(.25, 32, 1), starFieldAroundPicture(.5, 1, 0)], [0, 1, .25, .5]);
+  assert.deepEqual([loneStarOtherSystems(1, 6, 1), loneStarOtherSystems(1, 40, 1)], [.3, 1]);
+  const between = loneStarOtherSystems(1, 20, 1);
+  assert.ok(between > .3 && between < 1, `between: ${between}`);
 });
