@@ -138,20 +138,14 @@ export function reachAbovePlane(ring: TiltedRing, measure: TiltedRingMeasure, ot
   return reach + 3 * ring.heightUnits;
 }
 
-/** How many sheets a ring's Gaussian height is cut into. */
-export const RING_SHEETS_PER_HEIGHT = 4;
-
 /** The ring's own grid, for a disc drawn as sheets: aligned with the ring's plane through the star, out to where the ring's
  * light ends in that plane, and six of its heights tall, the least `alignDiscGrid` takes. It holds the ring's `share` of
- * each column; `columns` are the sky columns normalised by the whole `density`. A ring 4.7 au high at 43 au is not thin:
- * five sheets through it, 6.3 au apart, showed as separate bands from near its plane, and a fan of five tilted sheets
- * drew one ring as crossing strands. So its sheets stand RING_SHEETS_PER_HEIGHT to its height, and seen from the side
- * their faces overlap into one band. `sheets` is how many the grid's height is cut into. */
+ * each column; `columns` are the sky columns normalised by the whole `density`. The bake cuts it into the recipe's
+ * sheets, as the disc's grid. */
 export function tiltedRingGrid(sky: Pick<SkyPlane, 'size' | 'halfUnits' | 'step'>, channels: readonly Float32Array[], density: (x: number, y: number, z: number) => number,
   ring: TiltedRing, measure: Pick<TiltedRingMeasure, 'endsUnits' | 'centreUnits'>, share: (x: number, y: number, z: number) => number, columns: NormalisedColumns) {
-  const reachUnits = (measure.endsUnits + Math.hypot(...measure.centreUnits)) / Math.cos(ring.inclinationDeg * DEG) + 3 * ring.heightUnits, heights = 6;
-  return { sheets: 2 * heights * RING_SHEETS_PER_HEIGHT, sheetsApartUnits: ring.heightUnits / RING_SHEETS_PER_HEIGHT,
-    grid: alignDiscGrid(sky, channels, density, { inclinationDeg: ring.inclinationDeg, positionAngleDeg: ring.positionAngleDeg,
-      nearSidePositionAngleDeg: ring.nearSidePositionAngleDeg, centreUnits: [0, 0], gaussianHeightUnits: ring.heightUnits },
-    heights * ring.heightUnits, { weight: share, planarHalfUnits: Math.min(sky.halfUnits, reachUnits), columns }) };
+  const reachUnits = (measure.endsUnits + Math.hypot(...measure.centreUnits)) / Math.cos(ring.inclinationDeg * DEG) + 3 * ring.heightUnits;
+  return alignDiscGrid(sky, channels, density, { inclinationDeg: ring.inclinationDeg, positionAngleDeg: ring.positionAngleDeg,
+    nearSidePositionAngleDeg: ring.nearSidePositionAngleDeg, centreUnits: [0, 0], gaussianHeightUnits: ring.heightUnits },
+  6 * ring.heightUnits, { weight: share, planarHalfUnits: Math.min(sky.halfUnits, reachUnits), columns });
 }

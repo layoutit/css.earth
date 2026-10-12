@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { profileDiscDensity, type DiscModel, type SkyPlane } from './disc-envelope.mts';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
 import { normaliseColumns } from './disc-aligned-grid.mts';
-import { RING_SHEETS_PER_HEIGHT, measureTiltedRing, mutualTiltDeg, parseTiltedRing, planeNormal, reachAbovePlane, ringLightBeyond, tiltedRingDensity, tiltedRingGrid, type TiltedRing } from './tilted-ring.mts';
+import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, planeNormal, reachAbovePlane, ringLightBeyond, tiltedRingDensity, tiltedRingGrid, type TiltedRing } from './tilted-ring.mts';
 
 const ring: TiltedRing = { citation: 'a paper', url: 'https://example.org/paper', inclinationDeg: 25, positionAngleDeg: 105, nearSidePositionAngleDeg: 195, nearSideSource: 'its figure',
   skyCentreArcsec: [0.2, -0.1], skyCentreSource: 'its table', heightUnits: 0.6, heightSource: 'its model' };
@@ -60,7 +60,7 @@ test('a tilted ring states its plane, its centre and its height', () => {
   assert.throws(() => parseTiltedRing({ ...ring, skyCentreArcsec: [0.2] }, 'ring'));
 });
 
-test('the ring\'s own grid lies on its plane and is cut into close sheets', () => {
+test('the ring\'s own grid lies on its plane, six of its heights tall', () => {
   const size = 64, halfUnits = 32, step = 1, plane = new Float32Array(size * size);
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step;
@@ -70,12 +70,9 @@ test('the ring\'s own grid lies on its plane and is cut into close sheets', () =
   const centred = { ...ring, skyCentreArcsec: [0, 0] as const }, measure = measureTiltedRing(sky, centred, 1, 24);
   const share = tiltedRingDensity(centred, measure, { gaussianHeightUnits: 0.4, inclinationDeg: 37 });
   const own = tiltedRingGrid(sky, [plane], share, centred, measure, share, normaliseColumns(sky, [plane], share));
-  // Six heights either side, four sheets to a height.
-  assert.equal(own.sheets, 48); assert.equal(own.sheetsApartUnits, centred.heightUnits / RING_SHEETS_PER_HEIGHT);
-  assert.equal(own.grid.bounds.max[2], 6 * centred.heightUnits);
-  assert.ok(Math.abs(own.grid.bounds.max[2] * 2 / own.sheets - own.sheetsApartUnits) < 1e-12);
+  assert.equal(own.bounds.max[2], 6 * centred.heightUnits);
   // The grid's z is the ring's normal, x west.
-  const normal = rotateWorldPosition(worldRotationFromQuaternion(own.grid.frame.localToReferenceXyzw), [0, 0, 1]), [east, north, toward] = planeNormal(centred);
+  const normal = rotateWorldPosition(worldRotationFromQuaternion(own.frame.localToReferenceXyzw), [0, 0, 1]), [east, north, toward] = planeNormal(centred);
   assert.ok(Math.abs(normal[0] + east) < 1e-9 && Math.abs(normal[1] - north) < 1e-9 && Math.abs(normal[2] - toward) < 1e-9);
-  assert.ok(own.grid.peak > 0 && own.grid.filledVoxels > 0 && own.grid.bounds.max[0] < halfUnits);
+  assert.ok(own.peak > 0 && own.filledVoxels > 0 && own.bounds.max[0] < halfUnits);
 });
