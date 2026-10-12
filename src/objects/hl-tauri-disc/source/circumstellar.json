@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-circumstellar-volume@2",
+  "id": "hl-tauri-disc",
+  "host": "hl-tauri",
+  "name": "HL Tauri planet-forming disc",
+  "description": "The nested bright and dark dust rings around HL Tauri, in their own emission at 1.3 millimeters, observed by ALMA in 2014. The image supplies the rings and gaps; a published inclined plane and a stated 1 au Gaussian height supply their modeled depth.",
+  "sourceUrl": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/",
+  "credit": "ALMA (ESO/NAOJ/NRAO), project 2011.0.00015.SV; ALMA Partnership et al. (2015); Pinte et al. (2016)",
+  "license": {
+    "spdx": "LicenseRef-ALMA-Science-Verification",
+    "url": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/HLTau_Band6_Readme",
+    "note": "Public ALMA science-verification data, reused with the acknowledgement required by this release. The release specifies no Creative Commons identifier."
+  },
+  "grid": {
+    "size": 512,
+    "halfUnits": 180,
+    "slabs": 60,
+    "alignedDiscHalfHeightUnits": 6
+  },
+  "defaultDataset": "dust",
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · planet-forming rings, 1.3 mm",
+      "title": "HL Tauri’s nested dust rings in ALMA’s 1.3 millimeter emission",
+      "summary": "Bright dust rings and dark gaps in a young planetary system, with the depth of a modeled thin disc.",
+      "description": "ALMA’s 2014 long-baseline observations resolve bright rings and dark gaps in HL Tauri’s planet-forming disc. The native FITS continuum image supplies their brightness and structure. The disc is drawn in the plane measured from eight rings by the ALMA Partnership, tilted 46.72 degrees, with nodes at position angle 138.02 degrees. Its 1 au Gaussian height is a display approximation anchored to Pinte et al.’s millimeter-dust model near 100 au, not a measured third axis. The rings are thermal emission at 1.3 millimeters, shown in the paper’s brightness color scale. No planets are inferred or placed in the gaps.",
+      "program": "",
+      "archive": {
+        "band": "ALMA-B6-CONT",
+        "path": ".local/hl-tauri-disc/observations/HLTau_B6cont_mscale_ap.image.fits",
+        "url": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/HLTau_Band6_ReferenceImages.tgz",
+        "bundleMember": "HLTau_Band6_ReferenceImages/HLTau_B6cont_mscale_ap.image.fits",
+        "landing": "https://almascience.nrao.edu/almadata/sciver/HLTauBand6/",
+        "bytes": 10376640,
+        "unit": "Jy/beam",
+        "filter": "Band 6 continuum, 233 GHz (1.3 mm)",
+        "instrument": "ALMA 12-m array, 2014 Long Baseline Campaign",
+        "observed": "October and November 2014; FITS DATE-OBS 2014-10-24T06:58:24.288000",
+        "title": "HL Tau Band 6 Science Verification · HLTau_B6cont_mscale_ap.image.fits (CASA 4.2.2 reference image, release 2015-02-11)",
+        "credit": "ALMA (ESO/NAOJ/NRAO), project 2011.0.00015.SV; ALMA Partnership et al. (2015), ApJL 808, L3",
+        "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+        "license": "Public ALMA science-verification data with the acknowledgement specified in HLTau_Band6_Readme; no Creative Commons license is stated in that release.",
+        "acquisition": "The unchanged FITS member HLTau_Band6_ReferenceImages/HLTau_B6cont_mscale_ap.image.fits from the public HLTau_Band6_ReferenceImages.tgz, restored by node packages/telescope-cli/authoring/hl-tauri/restore.mts or the source cache.",
+        "limitation": "This is the science-verification reference image used by the published analysis, with a 35.06 by 21.81 mas restoring beam and 5 mas pixels. Each displayed sky column keeps the image’s brightness structure; depth is a thin-disc model and does not recover a three-dimensional dust mass distribution.",
+        "facility": {
+          "facilityId": "alma"
+        }
+      },
+      "geometry": "ring",
+      "colorMap": {
+        "path": "alma-2015-figure-2-colormap.json",
+        "range": [
+          0.02200699970963679,
+          5.832045807837766
+        ],
+        "unitScale": 1000,
+        "unit": "mJy/beam",
+        "source": "ALMA Partnership et al. (2015), ApJL 808, L3, Figure 2(b), page 6 of arXiv:1503.02649v3. The 256 underlying vector-painted RGB rectangles supply the colors, excluding overlaid tick strokes. Their nine printed flux ticks calibrate a power transfer, fitted on seven ticks and checked on the withheld 0.6 and 3.0 mJy/beam ticks. The recovered bar runs from +0.022 to 5.832 mJy/beam, with display power approximately 0.55. The caption says -2 rms at the low end, but its tick positions reproduce +2 rms to within 0.1 microJy/beam; this table follows the actual calibrated bar. 512 entries sample equal flux intervals. This is a false-color brightness display for millimeter emission, not visible color."
+      },
+      "channels": {
+        "red": [
+          "ALMA-B6-CONT"
+        ],
+        "green": [
+          "ALMA-B6-CONT"
+        ],
+        "blue": [
+          "ALMA-B6-CONT"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: these are the dust’s own thermal-emission intensities in Jy per beam.",
+      "innerMaskArcsec": 0,
+      "innerMaskSource": "No coronagraph and no artificial central hole. The observed central dust emission remains in the disc.",
+      "outerUnits": 140,
+      "backgroundAnnulusArcsec": [
+        1.5,
+        2.5
+      ],
+      "nearSidePositionAngleDeg": 228.02,
+      "nearSideSource": "Southwest (228.02 degrees) is the stated tilt-sign convention; this continuum image alone does not determine which side is nearer.",
+      "heightOfRadius": 0.014534883720930232,
+      "heightSource": "A constant 1 au Gaussian height, the thin millimeter-dust scale near 100 au in Pinte et al. (2016), abstract and Section 4.2. This simplifies their grain-dependent settled vertical distribution; it does not apply the gas’s 10 au scale height to millimeter dust.",
+      "adoptPublishedRing": "The published eight-ring ellipse fit supplies the common disc plane. B5’s 68.8 au radius is a reference for the height only; every observed ring and gap is kept through the measured radial profile, rather than replaced by one Gaussian ring.",
+      "noiseFade": {
+        "fromNoise": 1,
+        "toNoise": 2,
+        "source": "A stated display fade from one to two times the noise measured in the 1.5 to 2.5 arcsecond annulus. Every channel fades together."
+      },
+      "topAlpha": 0.95,
+      "published": {
+        "citation": "ALMA Partnership et al. (2015), ApJL 808, L3, Section 3.1.3 (average plane) and Table 2 (B5 reference radius)",
+        "url": "https://doi.org/10.1088/2041-8205/808/1/L3",
+        "radiusUnits": 68.8,
+        "inclinationDeg": 46.72,
+        "positionAngleDeg": 138.02,
+        "toleranceDeg": 1,
+        "radiusTolerance": 0.05
+      },
+      "publishedProfileDisc": "The eight-ring fit published by the ALMA Partnership fixes the plane. The full measured radial profile supplies multiple rings and gaps; a one-belt Gaussian is a diagnostic baseline, not the accepted spatial shape.",
+      "envelopeDepthSamples": 128
+    }
+  ]
+}

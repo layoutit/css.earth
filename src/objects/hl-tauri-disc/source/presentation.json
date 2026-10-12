@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "hl-tauri-disc",
+  "name": "HL Tauri planet-forming disc",
+  "defaultDataset": "dust",
+  "bank": {
+    "path": "src/objects/hl-tauri-disc/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "dust",
+      "path": "src/objects/hl-tauri-disc/source/volume-dust.json"
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · planet-forming rings, 1.3 mm",
+      "title": "HL Tauri’s nested dust rings in ALMA’s 1.3 millimeter emission",
+      "description": "ALMA’s 2014 long-baseline observations resolve bright rings and dark gaps in HL Tauri’s planet-forming disc. The native FITS continuum image supplies their brightness and structure. The disc is drawn in the plane measured from eight rings by the ALMA Partnership, tilted 46.72 degrees, with nodes at position angle 138.02 degrees. Its 1 au Gaussian height is a display approximation anchored to Pinte et al.’s millimeter-dust model near 100 au, not a measured third axis. The rings are thermal emission at 1.3 millimeters, shown in the paper’s brightness color scale. No planets are inferred or placed in the gaps.",
+      "summary": "Bright dust rings and dark gaps in a young planetary system, with the depth of a modeled thin disc.",
+      "detail": "2014-10-24T06:58:24.288000, 5.0 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "ALMA 12-m array, 2014 Long Baseline Campaign, October and November 2014; FITS DATE-OBS 2014-10-24T06:58:24.288000: b6-cont"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "value": "Brightness in mJy/beam, from 0.02200699970963679 to 5.832045807837766, in the publisher's color map"
+        },
+        {
+          "id": "ring",
+          "label": "Reference ring and common disc plane",
+          "value": "68.8 au, tilted 46.72°, nodes at position angle 138.02°: the published fit to these observations, not measured on this image"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "0 to 180 au; the light reaches the noise at 140 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the published plane and a stated 1.0 au Gaussian height, with its south-west side nearer by convention"
+        }
+      ],
+      "input": "dust-b6-cont",
+      "preview": {
+        "path": "src/objects/hl-tauri-disc/source/previews/dust.png",
+        "authoredFrom": "dust-b6-cont"
+      }
+    }
+  ]
+}

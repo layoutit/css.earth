@@ -1,0 +1,90 @@
+{
+  "id": "hl-tauri",
+  "name": "HL Tauri",
+  "system": "HL Tauri system",
+  "description": "Young star surrounded by an ALMA-resolved planet-forming disc.",
+  "aliases": [
+    "HL Tau",
+    "V* HL Tau"
+  ],
+  "parent": "milky-way",
+  "featured": true,
+  "paper": {
+    "url": "https://doi.org/10.3847/0004-637X/816/1/25",
+    "credit": "Pinte et al. (2016), ApJ 816, 25"
+  },
+  "radius": {
+    "value": 6.906038653092741,
+    "source": "Model radius derived from Pinte et al. (2016), Section 3.1: L = 11 solar luminosities and T = 4000 K; R/Rsun = sqrt(11) (5772/4000)^2, using the IAU nominal solar temperature. No resolved stellar radius is measured here",
+    "url": "https://doi.org/10.3847/0004-637X/816/1/25"
+  },
+  "mass": {
+    "value": 1.7,
+    "source": "Pinte et al. (2016), Sections 3.1 and 5: central mass inferred from the CO and HCO+ gas kinematics",
+    "url": "https://doi.org/10.3847/0004-637X/816/1/25"
+  },
+  "temperature": {
+    "value": 4000,
+    "source": "Pinte et al. (2016), Section 3.1: adopted stellar effective temperature, a model input",
+    "url": "https://doi.org/10.3847/0004-637X/816/1/25"
+  },
+  "radialVelocity": {
+    "value": 0,
+    "source": "No heliocentric stellar radial velocity is supplied by this reconstruction. Zero is assumed for display propagation; the paper gives gas velocities in the LSR frame, which are not substituted for it",
+    "url": "https://doi.org/10.3847/0004-637X/816/1/25"
+  },
+  "distance": {
+    "value": 140,
+    "source": "Pinte et al. (2016), Section 1; the adopted Taurus distance used by both this model and the ALMA ring radii",
+    "url": "https://doi.org/10.3847/0004-637X/816/1/25"
+  },
+  "position": {
+    "catalogue": "10.1088/2041-8205/808/1/L3",
+    "row": {
+      "ID": "HL Tau · Band 6",
+      "RA": "04:31:38.42548",
+      "Dec": "+18:13:57.242",
+      "pmRA": "18.5",
+      "pmDec": "-22.3"
+    },
+    "columns": {
+      "ra": "RA",
+      "dec": "Dec"
+    },
+    "credit": "ALMA Partnership et al. (2015), ApJL 808, L3, Table 1 (Band 6 continuum peak, ICRS/J2000 at epoch 2014.83) and Section 3.1.1 (proper motion, mas/yr, RA including cos Dec)",
+    "url": "https://doi.org/10.1088/2041-8205/808/1/L3",
+    "archive": "paper",
+    "motion": {
+      "epoch": 2014.83,
+      "ra": "pmRA",
+      "dec": "pmDec"
+    }
+  },
+  "limb": {
+    "none": "The star is an unresolved sphere using the published disc model’s adopted stellar parameters. No resolved photosphere or applicable measured limb law is claimed."
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "ALMA Partnership et al. (2015), Section 1, describes a heavily obscured star with no directly detected optical photosphere. Its reference sphere uses the 4000 K stellar model of Pinte et al. (2016), rather than treating scattered optical light as a photospheric spectrum."
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A young star surrounded by a disc of bright dust rings and dark gaps.",
+    "introduction": "ALMA resolves HL Tauri’s planet-forming disc into nested rings. The disc’s depth is modeled; the star is an unresolved model sphere.",
+    "locator": "Pinte et al. (2016), Sections 1 and 3.1; ALMA Partnership et al. (2015), Sections 1 and 3.1.3"
+  },
+  "notes": [
+    "The disc’s millimeter emission is observed; its third dimension is a thin-disc reconstruction.",
+    "The stellar temperature and radius are model inputs, not a resolved image of the photosphere.",
+    "No planets are placed in the gaps: the image does not measure their positions."
+  ],
+  "order": 5848
+}

@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1088-2041-8205-808-1-l3",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Partnership et al. (2015): THE 2014 ALMA LONG BASELINE CAMPAIGN: FIRST RESULTS FROM HIGH ANGULAR RESOLUTION OBSERVATIONS TOWARD THE HL TAU REGION",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/808/1/L3"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1088/2041-8205/808/1/L3",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1088/2041-8205/808/1/L3",
+      "checkedOn": "2026-10-12",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Partnership et al. (2015), The Astrophysical Journal 808 L3",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1088/2041-8205/808/1/L3"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 808 L3",
+  "creators": [
+    "ALMA Partnership",
+    "C. L. Brogan",
+    "L. M. Pérez",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}
