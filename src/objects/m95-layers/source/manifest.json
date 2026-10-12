@@ -116,8 +116,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Image-layer preparation recipe",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -129,8 +129,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Published image interpretation and acquisition record",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -142,8 +142,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Dataset presentation and prepared-bank bindings",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -152,7 +152,7 @@
       "kind": "authored-document",
       "path": "src/objects/m95-layers/source/dots/merge.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored merge of the catalogue dot banks into one layer.",
       "sourceBinding": {
         "kind": "local",
@@ -164,7 +164,7 @@
       "kind": "authored-document",
       "path": "src/objects/m95-layers/source/groves-nebulae/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the The PHANGS-MUSE nebular catalogue rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -176,7 +176,7 @@
       "kind": "authored-document",
       "path": "src/objects/m95-layers/source/scheuermann-pne/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -188,7 +188,7 @@
       "kind": "authored-document",
       "path": "src/objects/m95-layers/source/scheuermann-snr/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",

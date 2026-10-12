@@ -66,13 +66,13 @@ not inferred from the repository.
 - [Flocks performance review](https://github.com/layoutit/cssGraphics/blob/a16aa807b252607130ec56249d2d9ccd3c4ba802/src/adapters/flocks/README.md):
   324 retained roots and 1,944 leaves, with three qualified desktop traces and
   explicit geometry, color and DOM identity checks. Its recorded p95 range is
-  16.667–16.720 ms; this is evidence for that adapter, not a cssEarth forecast.
+  16.667–16.720 ms; this is evidence for that adapter, not a css.earth forecast.
 - [Cityflow performance review](https://github.com/layoutit/cssGraphics/blob/a16aa807b252607130ec56249d2d9ccd3c4ba802/src/adapters/cityflow/README.md):
   prepared material/transform tables, suppressed redundant writes and a full-loop
   layer census. The review distinguishes qualified normal playback from a
   diagnostic-only CPU stress trace.
 
-These examples motivate smaller stable publication surfaces. cssEarth's free
+These examples motivate smaller stable publication surfaces. css.earth's free
 camera and screen-width orbits prevent copying a prerecorded transform schedule.
 
 ## Validation

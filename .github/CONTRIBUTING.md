@@ -1,4 +1,4 @@
-# Contributing to cssEarth
+# Contributing to css.earth
 
 Thanks for helping. This page is the short route into the guides that already
 exist; it does not repeat them.

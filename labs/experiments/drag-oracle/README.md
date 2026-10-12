@@ -3,11 +3,11 @@
 Earth's drag is meant to feel like dragging a CesiumJS globe. This lab puts the two side by side and gives both the same
 pointer stream, so a change to the drag can be checked against Cesium instead of by feel.
 
-- Left: CesiumJS 1.145.0 with its own `ScreenSpaceCameraController`. No cssEarth code runs on this side.
+- Left: CesiumJS 1.145.0 with its own `ScreenSpaceCameraController`. No css.earth code runs on this side.
 - Right: this checkout's drag controller (`packages/renderer/src/navigation/input/camera-input.ts`) and engine math
   (`packages/engine/src/navigation/pole-drag.ts`). A second Cesium globe draws its orientation and takes no input.
 
-Both stand at the same pole, distance and field of view. Cesium keeps north up; cssEarth leans Earth's pole 8° on
+Both stand at the same pole, distance and field of view. Cesium keeps north up; css.earth leans Earth's pole 8° on
 screen, so the two are compared through that turn about the line of sight.
 
 ## Run it
@@ -70,8 +70,8 @@ Four rules of Cesium's had to be matched, each found by a drag that differed:
 
 - The right side runs the shipped controller with a trackball mirrored from the app (`ours.mts`). It is not the app's
   page: the body is centred, and the sidebar offset is not represented.
-- Both sides use a sphere. cssEarth's pan uses one; Cesium's default is the WGS84 ellipsoid.
-- Below 2.3 radii Cesium answers a press off the globe by looking around. cssEarth has no such mode, and the stress run
+- Both sides use a sphere. css.earth's pan uses one; Cesium's default is the WGS84 ellipsoid.
+- Below 2.3 radii Cesium answers a press off the globe by looking around. css.earth has no such mode, and the stress run
   starts those presses on the globe.
 - Under the real clock the two sides read time from different sources, so a coast can end a few tenths of a degree
   apart, more beside a pole. The stress run gives both the same clock.

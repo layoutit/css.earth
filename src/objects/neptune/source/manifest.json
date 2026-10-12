@@ -212,7 +212,7 @@
       "id": "neptune-authored-preparation-rings",
       "path": "preparation/rings.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -228,7 +228,7 @@
       "id": "neptune-authored-preparation-navigation",
       "path": "preparation/navigation.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -244,7 +244,7 @@
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -283,7 +283,7 @@
       "id": "neptune-authored-observations",
       "path": "preparation/observations.json",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
-      "credit": "cssEarth and the institutional sources identified in the recipe",
+      "credit": "css.earth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -299,7 +299,7 @@
       "id": "neptune-authored-geometry",
       "path": "preparation/geometry.json",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
-      "credit": "cssEarth",
+      "credit": "css.earth",
       "license": "Project-authored specification",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
@@ -315,7 +315,7 @@
       "id": "neptune-authored-presentation",
       "path": "preparation/presentation.json",
       "origin": "Checked retained scene composition, physical presentation and material residency policy",
-      "credit": "cssEarth",
+      "credit": "css.earth",
       "license": "Project-authored specification",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
@@ -331,7 +331,7 @@
       "id": "neptune-authored-charts",
       "path": "content/charts.json",
       "origin": "Checked source-dependent chart axes and source/provenance declarations",
-      "credit": "cssEarth and NASA GSFC Planetary Spectrum Generator",
+      "credit": "css.earth and NASA GSFC Planetary Spectrum Generator",
       "license": "Project-authored scientific specification with cited authority",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with institutional provenance",
@@ -370,7 +370,7 @@
       "id": "neptune-authored-acquisition",
       "path": "preparation/acquisition.json",
       "origin": "Checked source restoration and verification operations",
-      "credit": "cssEarth with original source credits preserved per input",
+      "credit": "css.earth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
@@ -386,7 +386,7 @@
       "id": "neptune-authored-raster",
       "path": "preparation/raster.json",
       "origin": "Checked lighting bank parameters for the shared sphere lane",
-      "credit": "cssEarth",
+      "credit": "css.earth",
       "license": "Project-authored specification",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
@@ -402,7 +402,7 @@
       "id": "neptune-authored-solar-system",
       "path": "presentation/solar-system.json",
       "origin": "Project-authored physical scene scale",
-      "credit": "cssEarth",
+      "credit": "css.earth",
       "license": "Project-authored specification",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
@@ -7908,7 +7908,7 @@
       "id": "neptune-authored-voyager-map",
       "path": "preparation/voyager-map.json",
       "origin": "Checked frame selection, grids and color tie for the Voyager 2 map",
-      "credit": "cssEarth and the institutional sources identified in the recipe",
+      "credit": "css.earth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; frame source terms retained",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source",
@@ -7931,7 +7931,7 @@
       "consumers": [
         "datasets"
       ],
-      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; map assembled by cssEarth contributors",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; map assembled by css.earth contributors",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -7974,7 +7974,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -7992,7 +7992,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -8010,7 +8010,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     }
   ]

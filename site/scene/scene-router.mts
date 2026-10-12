@@ -861,9 +861,9 @@ registerDirectoryRuntimeLoader(importPackagedObjectRuntime);
 
 if (typeof document !== "undefined") {
   const stage = document.querySelector(".object-stage");
-  if (!(stage instanceof HTMLElement)) throw new Error("Missing cssEarth planet stage.");
+  if (!(stage instanceof HTMLElement)) throw new Error("Missing css.earth planet stage.");
   const objectId = stage.dataset.objectId;
-  if (!objectId) throw new Error("Missing cssEarth object identity.");
+  if (!objectId) throw new Error("Missing css.earth object identity.");
   const persistentWorldContext = createWorldContextOwner();
   createSceneRouter({ stage, objectId, persistentWorldContext });
 }

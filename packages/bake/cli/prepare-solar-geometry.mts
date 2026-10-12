@@ -23,7 +23,7 @@ import { cross3 as cross, requireArray, requireRecord, requireString } from '@cs
 // ecliptic pole reproduces the tabulated inclinations (Earth's, which defines
 // the ecliptic, comes out at 0.003 degrees). Regenerating requires that
 // package's build (`pnpm prepare:solar-geometry` builds it first).
-// cssEarth builds this combined module locally; it is not committed.
+// css.earth builds this combined module locally; it is not committed.
 
 import type { BodyId, SceneSatelliteRecord, RotationElements } from "@cssearth/astronomy";
 import { readJsonSource } from "@cssearth/bake/objects/sources";

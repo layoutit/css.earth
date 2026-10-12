@@ -5,7 +5,7 @@
       "id": "karkoschka-belinda-prolate",
       "path": "shape/ellipsoid.tab",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
-      "credit": "Karkoschka (2001), Table IV; French et al. (2024), Table 3; cssEarth analytic sampling",
+      "credit": "Karkoschka (2001), Table IV; French et al. (2024), Table 3; css.earth analytic sampling",
       "license": "Factual measurements; MIT implementation",
       "licenseEvidence": [
         "NOTICE.md",
@@ -38,7 +38,7 @@
       "id": "model-surface",
       "path": "material/neutral.png",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
-      "credit": "cssEarth standard no-coverage visualization",
+      "credit": "css.earth standard no-coverage visualization",
       "license": "MIT",
       "licenseEvidence": [
         "../../../../LICENSE"
@@ -125,7 +125,7 @@
       "id": "prepared-belinda-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
-      "credit": "Karkoschka (2001) shape measurements; cssEarth grid and portrait",
+      "credit": "Karkoschka (2001) shape measurements; css.earth grid and portrait",
       "license": "Factual measurements; MIT presentation",
       "consumers": [
         "navigation"

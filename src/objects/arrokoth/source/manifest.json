@@ -77,8 +77,8 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth missing-coverage grid",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth missing-coverage grid",
       "license": "MIT",
       "consumers": [
         "surfaces"
@@ -236,7 +236,7 @@
         "photography-reference"
       ],
       "origin": "Derived from the pinned New Horizons WCS and source mesh registration.",
-      "credit": "cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
+      "credit": "css.earth; NASA / JHUAPL / SwRI; Porter (2024)",
       "license": "MIT for authored registration; original source notices retained.",
       "acquisition": "node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts",
       "sourceBinding": {
@@ -252,7 +252,7 @@
         "lorri-observation"
       ],
       "origin": "Derived from the pinned New Horizons WCS and source mesh registration.",
-      "credit": "cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
+      "credit": "css.earth; NASA / JHUAPL / SwRI; Porter (2024)",
       "license": "MIT for authored registration; original source notices retained.",
       "acquisition": "node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts",
       "sourceBinding": {
@@ -268,7 +268,7 @@
         "photography-reference"
       ],
       "origin": "Project-authored mesh registration.",
-      "credit": "cssEarth",
+      "credit": "css.earth",
       "license": "MIT",
       "sourceBinding": {
         "kind": "local",
@@ -349,7 +349,7 @@
         "mvic-observation"
       ],
       "origin": "Source-bound image registration",
-      "credit": "cssEarth; New Horizons science team",
+      "credit": "css.earth; New Horizons science team",
       "license": "MIT; retain upstream source attribution.",
       "redistribution": "Retain source attribution and enhanced-color qualifications.",
       "acquisition": "node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts",
@@ -507,7 +507,7 @@
       "id": "prepared-source-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.26007/97r3-1e19",
-      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS; NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team; cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
+      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS; NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team; css.earth; NASA / JHUAPL / SwRI; Porter (2024)",
       "license": "NASA PDS scientific data; retain attribution; NASA PDS scientific archive; retain original attribution and notices; MIT for authored registration; original source notices retained.",
       "consumers": [
         "navigation"

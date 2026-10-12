@@ -71,7 +71,7 @@ export async function bodyLineage(objectDirectory: string): Promise<ObjectLineag
     }
     const authored = kind === 'authored-content' || kind === 'authored-document';
     sources.set(localId, lineageSource(entry.raw, { id: localId, dependencies,
-      ...(entry.kind === 'source-input' ? {} : { credit: authored ? 'cssEarth contributors' : 'Credit not recorded in source manifest.' }) }));
+      ...(entry.kind === 'source-input' ? {} : { credit: authored ? 'css.earth contributors' : 'Credit not recorded in source manifest.' }) }));
     idByPath.set(path, localId);
     return localId;
   };

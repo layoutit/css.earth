@@ -2,7 +2,7 @@
 
 The original mesh and model metadata are from **DAMIT**, maintained by the Astronomical Institute of Charles University, Josef Ďurech and Vojtěch Sidorin. Selected model: [5985](https://damit.cuni.cz/projects/damit/asteroid_models/view/5985); original shape authors/reference: Hanuš et al. (2021).
 
-DAMIT states that its content is licensed under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) unless otherwise indicated. Original shape bytes are preserved. cssEarth applies a documented uniform physical scale, simplifies the display mesh with the existing meshoptimizer recipe, and prepares a shared grid and shape-derived scientific colors. Those derived views are not spacecraft imagery, measured reflectance, resolved terrain or material identification.
+DAMIT states that its content is licensed under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) unless otherwise indicated. Original shape bytes are preserved. css.earth applies a documented uniform physical scale, simplifies the display mesh with the existing meshoptimizer recipe, and prepares a shared grid and shape-derived scientific colors. Those derived views are not spacecraft imagery, measured reflectance, resolved terrain or material identification.
 
 Thermal diameter data and definitions from **ISAS/JAXA**, Usui et al. (2011), AcuA v1.0, remain attributed to that catalog. The [ISAS data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/) permits public-data use, copying, forwarding and modification with source attribution and a description of modifications, subject to any stated third-party terms. Assigning an effective diameter to the mesh volume is explicitly disclosed as an approximation where used.
 

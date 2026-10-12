@@ -29,7 +29,7 @@ NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS: MUR v4.1
 sea-surface temperature anomaly imagery for the daily analyses the source
 manifest lists, read from
 the GIBS `GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies` layer. NASA open
-Earth science imagery with attribution. cssEarth assembles the tiles into its
+Earth science imagery with attribution. css.earth assembles the tiles into its
 own mosaic. The NOAA Climate Prediction Center ENSO advisory is cited for
 context. No NASA or NOAA endorsement is implied.
 
@@ -51,7 +51,7 @@ repository DOI 10.17611/dp/emc.2024.gladm35.1.
 EMC publicly distributes this scientific model and requests citation of the
 authors and repository. The downloaded model metadata and author repository do
 not state a separate data license; we do not label the data as CC BY merely
-because the paper is open access. cssEarth retains a numeric scientific-data
+because the paper is open access. css.earth retains a numeric scientific-data
 subset and creates its own false-color textures, with the coordinate,
 interpolation, reference-mean and seam transformations described in [README](README.md).
 No published illustration is copied and no author or EarthScope endorsement is
@@ -77,6 +77,6 @@ Buenos Aires APrA, 2025 daytime noise map, licensed under [CC BY 2.5 Argentina](
 
 GEBCO Bathymetric Compilation Group 2026 (2026). The GEBCO_2026 Grid — a continuous terrain model for oceans and land at 15 arc-second intervals. NERC EDS British Oceanographic Data Centre NOC. DOI: 10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa.
 
-The GEBCO Grid is public domain, with source acknowledgement required by its published terms. cssEarth samples the numeric grid, applies its own height palette and cartographic relief, and prepares textures. No GEBCO, IHO or IOC endorsement is implied. The grid includes inferred depths and is not for navigation or safety at sea. [Terms and interpretation](https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid).
+The GEBCO Grid is public domain, with source acknowledgement required by its published terms. css.earth samples the numeric grid, applies its own height palette and cartographic relief, and prepares textures. No GEBCO, IHO or IOC endorsement is implied. The grid includes inferred depths and is not for navigation or safety at sea. [Terms and interpretation](https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid).
 
 Place and region names: Natural Earth 1:10m populated places, geographic regions, marine areas and rivers (public domain; Tom Patterson, Nathaniel Vaughn Kelso and contributors); see `source/features/manifest.json`.

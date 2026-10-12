@@ -186,8 +186,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Image-layer preparation recipe",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -199,8 +199,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Published image interpretation and acquisition record",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -212,8 +212,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Dataset presentation and prepared-bank bindings",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -236,7 +236,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/disc-geometry.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored disc orientation that places catalogue dots on the photograph's disc; its values cite their papers inside the file.",
       "sourceBinding": {
         "kind": "local",
@@ -248,7 +248,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/azimlu-hii/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the A new catalog of H II regions in M31 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -260,7 +260,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/dots/merge.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored merge of the catalogue dot banks into one layer.",
       "sourceBinding": {
         "kind": "local",
@@ -272,7 +272,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/lee-snr/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the A new optical survey of supernova remnant candidates in M31 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -284,7 +284,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/lggs-stars/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -296,7 +296,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/merrett-pne/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the A deep kinematic survey of planetary nebulae in the Andromeda galaxy using the Planetary Nebula Spectrograph rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -308,7 +308,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/pandromeda-cepheids/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the Properties of M31. II. A Cepheid disk sample derived from the first year of PS1 PAndromeda data rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -320,7 +320,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/phat-clusters/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the PHAT stellar cluster survey. II. Andromeda Project cluster catalog rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -332,7 +332,7 @@
       "kind": "authored-document",
       "path": "src/objects/m31-layers/source/stars/merge.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored merge of the catalogue dot banks into one layer.",
       "sourceBinding": {
         "kind": "local",

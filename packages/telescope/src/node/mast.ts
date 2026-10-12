@@ -1,4 +1,4 @@
-/** Shared MAST boundary. Astroquery owns the service protocol and downloads; cssEarth validates returned identities and bytes. */
+/** Shared MAST boundary. Astroquery owns the service protocol and downloads; css.earth validates returned identities and bytes. */
 import { access, mkdir, rm, stat, symlink, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { WORKSPACE } from './paths.js';

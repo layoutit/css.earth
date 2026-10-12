@@ -11,7 +11,7 @@
         "value": "6.10 × 6.10 × 6.10 km",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/horizons/",
-          "label": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+          "label": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by css.earth with an assumed geometric albedo of 0.04",
           "checked": "2026-09-22",
           "path": "source/measurements.json",
           "catalogueId": "jpl-horizons",
@@ -59,7 +59,7 @@
     {
       "label": "Shape source",
       "role": "surface",
-      "description": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "description": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by css.earth with an assumed geometric albedo of 0.04",
       "href": "https://ssd.jpl.nasa.gov/horizons/"
     },
     {
@@ -78,11 +78,11 @@
   "provenance": {
     "editorial": {
       "url": "https://ssd.jpl.nasa.gov/horizons/",
-      "credit": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by cssEarth with an assumed geometric albedo of 0.04"
+      "credit": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by css.earth with an assumed geometric albedo of 0.04"
     },
     "physical": {
       "path": "../measurements.json",
-      "credit": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by cssEarth with an assumed geometric albedo of 0.04"
+      "credit": "JPL Horizons apparent magnitude for Isonoe (body 526); diameter estimated by css.earth with an assumed geometric albedo of 0.04"
     }
   }
 }

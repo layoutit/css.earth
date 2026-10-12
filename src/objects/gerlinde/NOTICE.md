@@ -2,7 +2,7 @@
 
 The selected geometry and spin originate from [DAMIT model 5661](https://damit.cuni.cz/projects/damit/asteroid_models/view/5661), version 2019-10-23, credited to Ďurech et al. (2020), Astronomy and Astrophysics 643, A59 and the contributing observers cited by that record. DAMIT distributes its database under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) as stated in the archived model page. Preserve attribution, source links and notice of changes.
 
-Changes for cssEarth: apply the separately documented physical scale; simplify within the stated error allowance, to at most 800 faces, for a retained raster presentation through the existing preparer; add the shared coordinate grid and a false-color, shape-derived radial-relief view. The original source mesh and spin bytes remain intact. These outputs are derived visualizations; they are not photographs or newly measured terrain.
+Changes for css.earth: apply the separately documented physical scale; simplify within the stated error allowance, to at most 800 faces, for a retained raster presentation through the existing preparer; add the shared coordinate grid and a false-color, shape-derived radial-relief view. The original source mesh and spin bytes remain intact. These outputs are derived visualizations; they are not photographs or newly measured terrain.
 
 Physical-size credit: [JPL Small-Body Database, physical parameters of (663) Gerlinde](https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=663). JPL Small-Body Database and Horizons records are credited to NASA/JPL. Article PDFs and reference documents retain their own publication notices; the DAMIT CC BY license does not override those notices.
 

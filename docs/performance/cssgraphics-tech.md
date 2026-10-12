@@ -1,4 +1,4 @@
-# cssGraphics techniques for cssEarth performance
+# cssGraphics techniques for css.earth performance
 
 Source review and focused verification: **2026-09-09**.
 
@@ -10,7 +10,7 @@ retain element identity, and write only the final values that changed. Moving
 calculation to a worker is one part of this design. It does not remove the
 browser's style, layout, paint, and compositor work after those writes.
 
-For cssEarth, the latest stress trace makes that distinction concrete: an 87.1 ms
+For css.earth, the latest stress trace makes that distinction concrete: an 87.1 ms
 main-thread task contained 65.3 ms of style recalculation. A worker reply sent
 during that task waited 91.4 ms for delivery, then took only 0.49 ms to handle.
 The next optimization must reduce the browser work caused by publication as well
@@ -35,7 +35,7 @@ live website currently serves; deployment parity was not audited here.
 | Chaos / Dysts | Prepared trajectories and handoff controls, worker formatting, transferable coordinates | Source and 7 passing transport/playback tests |
 | Blackhole / Luminet | Shared prepared trajectory samples plus indexed descriptors and sparse repairs; chunked worker output | Source; numerical/browser qualification not rerun |
 
-The cssEarth comparison uses the working source rooted
+The css.earth comparison uses the working source rooted
 plus its existing uncommitted performance changes. These are not all changes in
 that commit. The trace matched the existing candidate build's bundle names;
 that match is not an exact source-map or clean-commit attribution.
@@ -58,8 +58,8 @@ flowchart LR
     I[Current input and camera] --> E
 ```
 
-The input/camera branch is cssEarth's requirement. A prerecorded adapter can
-prepare almost every frame value; cssEarth cannot enumerate every future camera
+The input/camera branch is css.earth's requirement. A prerecorded adapter can
+prepare almost every frame value; css.earth cannot enumerate every future camera
 position. It can prepare source geometry, imagery, hierarchy, atlas mappings and
 static metadata, then project those prepared facts for the current view. Moving
 that projection between threads does not authorize runtime generation of geometry,
@@ -83,7 +83,7 @@ transition schedule: frame offsets, face indices and color indices. Normal
 playback does not rebuild color declarations for every face on every frame.
 Sources: [transform encoding][cityflow-table], [player and state validation][cityflow-player].
 
-**cssEarth application:** preserve prepared identities and make the worker result
+**css.earth application:** preserve prepared identities and make the worker result
 describe changed channels, not ask the DOM owner to reconstruct a full scene.
 The baseline for a delta must be the last **committed** view. A canceled or
 unpublished worker result must not silently advance the baseline. New or newly
@@ -108,7 +108,7 @@ they are **cloned**, not transferred. Galaxy sends them in ordered chunks of up
 to 60,000 assignments, with start/chunk/end messages and declared counts. The
 receiver validates that sequence and adopts the chunks without flattening them
 into another giant array. These chunk sizes are adapter choices, not recommended
-cssEarth constants.
+css.earth constants.
 
 **Flocks differs:** it intentionally copies bank bytes with `slice()` before
 transferring them. **Chaos differs:** it transfers the coordinate buffer but
@@ -116,7 +116,7 @@ returns the transform array in one response. There is no universal zero-copy
 transport shared by every adapter. Sources: [Flocks loader][flocks-stream],
 [Chaos materializer][chaos-worker].
 
-**cssEarth application:** its planner already retains the prepared world plan in
+**css.earth application:** its planner already retains the prepared world plan in
 a persistent worker. The remaining opportunity is the repeatedly cloned
 `PlannedWorldContext` response and main-thread work around it. Compact changed
 indices and numeric columns may reduce copying and allocation, but strings still
@@ -142,7 +142,7 @@ prefetch failure arriving after a newer seek: the old failure must not poison
 the new request. Sources: [stream lifecycle][flocks-stream],
 [playback and lookahead][flocks-player], [lifecycle tests][flocks-tests].
 
-**cssEarth application:** distinguish prepared bytes cached for reuse from images
+**css.earth application:** distinguish prepared bytes cached for reuse from images
 decoded for an active view and elements participating in browser rendering. A
 cache hit is not evidence that publication is cheap. Preserve the current object
 contract: one detailed mount, the canonical dataset independent of DPR, and
@@ -168,7 +168,7 @@ It fills a preallocated target by validated offsets. Worker unavailability has
 a local materialization fallback, so this adapter is not unconditionally
 worker-only. Source: [Cloth stream and adoption queue][cloth-stream].
 
-**cssEarth application:** apply this to background prepared-page decoding and
+**css.earth application:** apply this to background prepared-page decoding and
 large result adoption. Ordinary camera input must not wait for an idle callback.
 The currently visible prepared surface must remain usable while a required
 resource is preparing. A view must not reveal partially adopted data. Retain
@@ -189,7 +189,7 @@ avoid repeated DOM searches. The PolyCSS Morph target used by Cityflow supplies
 guarded direct-property writes, not a scheduler or a per-frame object graph.
 Source: [Cityflow target binding][cityflow-player].
 
-**cssEarth application:** keep the retained pools and survivor slot identities
+**css.earth application:** keep the retained pools and survivor slot identities
 already present. Optimize the hot write set and the browser participation of
 those pools. Removing every class is not the same as removing style invalidation;
 flattening every wrapper is not safe when a wrapper owns a coordinate space,
@@ -211,7 +211,7 @@ and layout together. A visibility scheme needs measurements of transition
 bursts, style element counts, layout dirtiness, paint bounds and layer work,
 not just a lower visible-leaf count.
 
-**cssEarth application:** its pools already use guarded per-leaf visibility
+**css.earth application:** its pools already use guarded per-leaf visibility
 inside 64-leaf blocks, with `display: none` / `contents` at block boundaries.
 One stress-trace style pass was scheduled from that block activation path.
 That identifies a concrete experiment, not proof that every block gate should
@@ -228,9 +228,9 @@ Sources: [Cityflow scheduler][cityflow-scheduler], [scheduler tests][cityflow-sc
 [Galaxy playback][galaxy-player].
 
 These adapters own finite animation timelines. Copying their adjacent-frame
-policy into cssEarth could slow the user's camera or distort inertia. The useful
+policy into css.earth could slow the user's camera or distort inertia. The useful
 part is explicit admission, one coherent publication and clear handling of late
-results. cssEarth already has one in-flight plan, one completed plan awaiting
+results. css.earth already has one in-flight plan, one completed plan awaiting
 publication and coalesced latest input. Preserve that bounded queue and its
 committed label/visibility history; do not replace it with speculative plans
 that repeatedly invalidate one another.
@@ -246,13 +246,13 @@ handoff controls instead of running the source attractor simulation in the
 browser. Sources: [Galaxy codec][galaxy-codec], [Flocks codec][flocks-codec],
 [Cityflow table][cityflow-table], [Luminet rails][blackhole-rails], [Chaos codec][chaos-codec].
 
-For cssEarth, repeated static marker/atlas metadata and prepared numeric arrays
+For css.earth, repeated static marker/atlas metadata and prepared numeric arrays
 are plausible candidates for shared tables. Arbitrary view-dependent screen
 coordinates are not a finite filmstrip. Any quantization requires an explicit
 error bound across the app's zoom range; Flocks' tolerance is evidence for Flocks,
 not an acceptable default for planetary coordinates.
 
-## 3. What the latest cssEarth trace establishes
+## 3. What the latest css.earth trace establishes
 
 Input: `Trace-20260909T224754.json.gz`.
 The selected page is the candidate on port 4243; the analyzed window is 19.05 s.
@@ -297,9 +297,9 @@ Local processed evidence, including `agent-brief.json`, `analysis.json`,
 `output/performance/trace-briefs/Trace-20260909T224754-e411a2e9/`.
 This was the user's manual trace, not a new synchronized video/recorder capture.
 
-## 4. Where cssEarth already matches, and where it does not
+## 4. Where css.earth already matches, and where it does not
 
-| Boundary | Current cssEarth behavior | Remaining opportunity |
+| Boundary | Current css.earth behavior | Remaining opportunity |
 | --- | --- | --- |
 | Static ownership | Prepared assets, world plan registered once in worker, retained scene | Preserve this; no runtime source/geometry pipeline |
 | Request admission | Bounded queue; latest pending input replaces older pending input | Preserve camera, annotations and picking as one captured view |
@@ -357,8 +357,8 @@ document does not claim that the current app meets its smoothness target.
 | --- | --- |
 | Queue every style write in a generic manager | The local Mario experiment ledger measured a regression for normal playback; sparse producers and local equality guards are the better starting point |
 | “cssGraphics never uses CSS variables” | Galaxy uses static palette variables in its prepared stylesheet. Static mount-time configuration differs from per-frame inherited-variable mutation |
-| Throttle colors or fades to reduce painting | Flocks staggers root colors every five frames while preserving every transform state. That is an adapter presentation policy, not authorization to alter cssEarth colors or fade cadence |
-| Copy Mario's complete runtime | Its title-head interaction path includes triangle fitting for deformation. That path is outside cssEarth's prepared-geometry contract |
+| Throttle colors or fades to reduce painting | Flocks staggers root colors every five frames while preserving every transform state. That is an adapter presentation policy, not authorization to alter css.earth colors or fade cadence |
+| Copy Mario's complete runtime | Its title-head interaction path includes triangle fitting for deformation. That path is outside css.earth's prepared-geometry contract |
 | Copy a source animation's late-frame policy into navigation | Finite playback and a user-controlled camera have different time semantics |
 | Replace all visibility gates with one rule | Hidden work saved must exceed hide/reveal and activation costs; keeping all dormant nodes active may regress styles |
 | Use another renderer to escape CSS costs | Detailed body rendering stays PolyCSS, with the current project's renderer and runtime restrictions |
@@ -385,7 +385,7 @@ tick but commit only the final retained state. It reports 63.30% fewer catch-up
 mutations per due tick, 63.23% lower catch-up callback p95, and pixel-identical
 317 numbered commits covering 820 logical ticks. Normal single-tick work was
 unchanged. These are historical ledger results, not benchmarks rerun here or
-measurements of cssEarth. The current ledger explicitly leaves SR-10 unexecuted.
+measurements of css.earth. The current ledger explicitly leaves SR-10 unexecuted.
 
 PolyCSS's Morph prepared-DOM target (`packages/morph/src/render/preparedDomTarget.ts` in the PolyCSS repository) was also inspected.
 It binds stable elements and guards individual transform, visibility, opacity and

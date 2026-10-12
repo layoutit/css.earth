@@ -380,7 +380,7 @@ const table = (header: readonly string[], rows: readonly (readonly string[])[]) 
 export function ledgerMarkdown(ledger: Ledger): string {
   const supported = ledger.capabilities.filter(entry => entry.support === 'supported');
   return [
-    '# What the Gemini archive holds for cssEarth',
+    '# What the Gemini archive holds for css.earth',
     '',
     `Written by \`packages/telescope-cli/src/archives/gemini/archive-ledger.mts\` from the archive itself on ${ledger.measured}. Nothing here is`,
     'typed in by hand: the counts are the archive\'s own `GROUP BY` results and each capability\'s state is read from the',
@@ -415,7 +415,7 @@ export function ledgerMarkdown(ledger: Ledger): string {
       ledger.galileanMoons.rows.map(row => [row.moon, row.instrument, row.type, row.intent, row.filter || 'none',
         String(row.frames), row.programmes.join(', ') || 'none'])),
     '',
-    '## cssEarth objects Gemini observed',
+    '## css.earth objects Gemini observed',
     '',
     'Science frames and acquisition frames counted apart, because an acquisition frame is a pointing exposure and never an',
     'observation. A body whose only Gemini frames are acquisitions has no Gemini observation at all.',

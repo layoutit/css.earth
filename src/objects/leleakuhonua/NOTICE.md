@@ -6,4 +6,4 @@ Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km f
 
 Orbit: JPL Horizons elements and vectors, NASA/JPL Solar System Dynamics.
 
-Published numerical facts are credited. The analytical model extraction and missing-coverage grid are cssEarth MIT work. Papers are cited, not kept; scientific figures are not copied into surface maps.
+Published numerical facts are credited. The analytical model extraction and missing-coverage grid are css.earth MIT work. Papers are cited, not kept; scientific figures are not copied into surface maps.

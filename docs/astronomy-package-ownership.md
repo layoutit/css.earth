@@ -1,7 +1,7 @@
 # Astronomy package ownership
 
-cssEarth uses upstream packages where they can own a complete mechanical boundary. Scientific selection, input pins, reducers,
-product records and evidence remain cssEarth contracts.
+css.earth uses upstream packages where they can own a complete mechanical boundary. Scientific selection, input pins, reducers,
+product records and evidence remain css.earth contracts.
 
 The machine-readable contract is
 [`packages/telescope/toolchains/ownership.json`](../packages/telescope/toolchains/ownership.json). Telescope's runtime
@@ -16,9 +16,9 @@ The WWT catalog has a separate preparation-only Python boundary and ships as che
   Horizons calls used by Chandra, Hubble and Juno.
 - **Astropy owns the table, units and coordinates inside that Python boundary.** Its FITS/WCS implementation remains the
   independent oracle for the TypeScript production reader.
-- **Peppi 0.5.0 owns complete, paginated PDS4 Registry discovery.** cssEarth supplies an exact target identity and explicit
+- **Peppi 0.5.0 owns complete, paginated PDS4 Registry discovery.** css.earth supplies an exact target identity and explicit
   processing scope, verifies the returned label identities and bytes, and decides which product metadata is scientifically usable.
-- **pdr 1.4.4 owns supported PDS3/PDS4 array and table decoding.** cssEarth pins the complete referenced file set and records
+- **pdr 1.4.4 owns supported PDS3/PDS4 array and table decoding.** css.earth pins the complete referenced file set and records
   label-declared special values, conventions and scientific limitations; a successful decode alone is not qualification.
 
 ## Whole implementations retained here
@@ -73,4 +73,4 @@ The bounded PNG exporter does not handle all WWT projections. WWT indexes Ceres 
 
 [Toasty](https://toasty.readthedocs.io/en/latest/overview.html) prepares 256-pixel tile pyramids and TOAST projections. Our prepared body surfaces use equirectangular source maps and PolyCSS atlases, with tracked inventories and restored output. A Toasty pyramid cannot replace that preparation by changing a URL; a candidate needs a projection/asset-contract comparison and an output diff on a source-backed body. WWT's WebGL engine is excluded by the [CSS runtime contract](../AGENTS.md); neither a viewer handoff nor a runtime tile request belongs to this integration. ESLint rejects WWT engine imports in the site runtime and the renderer.
 
-These are bounded decisions, not a claim that WWT lacks other extensions or that cssEarth's presentation is better. Telescope remains responsible for connecting supported discovery, selected retrieval, qualification and evidence. WWT contributes both curated display imagery for offline CSS preparation and hosted scientific FITS tiles that Telescope can preserve and inspect. The PHAT tile path does not claim a fulfilled calibrated observation request when its source metadata is incomplete.
+These are bounded decisions, not a claim that WWT lacks other extensions or that css.earth's presentation is better. Telescope remains responsible for connecting supported discovery, selected retrieval, qualification and evidence. WWT contributes both curated display imagery for offline CSS preparation and hosted scientific FITS tiles that Telescope can preserve and inspect. The PHAT tile path does not claim a fulfilled calibrated observation request when its source metadata is incomplete.

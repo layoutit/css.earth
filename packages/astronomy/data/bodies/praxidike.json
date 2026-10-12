@@ -9,7 +9,7 @@
     "gravitationalParameterKm3PerS2": 0,
     "parent": "jupiter"
   },
-  "physicalNotes": "Radius estimated by cssEarth: JPL Horizons gives an apparent magnitude of 23.448 on 2026-Sep-03 at r = 5.3921 au and delta = 6.2792 au, so H = 15.8 with no phase term, and an assumed geometric albedo of 0.04 gives a diameter of 4.6 km. Not a measurement. No GM published.",
+  "physicalNotes": "Radius estimated by css.earth: JPL Horizons gives an apparent magnitude of 23.448 on 2026-Sep-03 at r = 5.3921 au and delta = 6.2792 au, so H = 15.8 with no phase term, and an assumed geometric albedo of 0.04 gives a diameter of 4.6 km. Not a measurement. No GM published.",
   "acquisition": {
     "satellite": {
       "target": "527",

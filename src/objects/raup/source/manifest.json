@@ -120,7 +120,7 @@
       "path": "reference/survey-model.json",
       "purpose": "Selected model fields from the deposit's spin table, independently calculated source-mesh measurements and the comparison with earlier published values.",
       "origin": "https://doi.org/10.5281/zenodo.22812438",
-      "credit": "Published model fields: Ďurech & Hanuš (2026). Mesh measurements, comparison and selection notes: cssEarth.",
+      "credit": "Published model fields: Ďurech & Hanuš (2026). Mesh measurements, comparison and selection notes: css.earth.",
       "acquisition": "Values recorded from the deposit's spin_results table; the shape file is pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     }
   ]

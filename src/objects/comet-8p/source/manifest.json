@@ -5,11 +5,11 @@
       "id": "contact-model",
       "path": "shape/model.json",
       "origin": "https://arxiv.org/abs/1911.04897",
-      "credit": "Lamy et al.; Groussin et al. (2019); cssEarth tessellation",
-      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "credit": "Lamy et al.; Groussin et al. (2019); css.earth tessellation",
+      "license": "Published scientific parameters; css.earth implementation MIT",
       "licenseEvidence": [
         "https://arxiv.org/abs/1911.04897",
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in numeric model and uncertainty; no source image is a texture.",
       "redistribution": "Preserve attribution and inferred-model qualification.",
@@ -30,11 +30,11 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth neutral model material",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth neutral model material",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
       "redistribution": "Authored neutral material under the repository MIT license.",
@@ -61,11 +61,11 @@
       "id": "arecibo-model",
       "path": "shape/arecibo.json",
       "origin": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
-      "credit": "Harmon et al. (2010); cssEarth tessellation",
-      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "credit": "Harmon et al. (2010); css.earth tessellation",
+      "license": "Published scientific parameters; css.earth implementation MIT",
       "licenseEvidence": [
         "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in published radar shape parameters; full lobe dimensions divided by two.",
       "redistribution": "Preserve attribution and inferred-model qualification.",
@@ -86,11 +86,11 @@
     {
       "id": "arecibo-surface",
       "path": "material/arecibo-neutral.png",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth neutral model material",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth neutral model material",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
       "redistribution": "Authored neutral material under the repository MIT license.",
@@ -117,7 +117,7 @@
       "id": "comet-8p-features-landmarks",
       "path": "features/landmarks.json",
       "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -139,7 +139,7 @@
       "id": "comet-8p-features-manifest",
       "path": "features/manifest.json",
       "origin": "Byte pins and source qualifications for the surface-place compilation.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -155,7 +155,7 @@
       "id": "comet-8p-preparation-features",
       "path": "preparation/features.json",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -171,7 +171,7 @@
       "id": "comet-8p-presentation-surface-map",
       "path": "presentation/surface-map.json",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
-      "credit": "cssEarth contributors; authors cited per place",
+      "credit": "css.earth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
       "acquisition": "Authored and checked in beside the body source records.",
       "redistribution": "Factual records and coordinates with citations; no publication images.",
@@ -189,11 +189,11 @@
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1911.04897",
-      "credit": "Lamy et al.; Groussin et al. (2019); cssEarth tessellation",
-      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "credit": "Lamy et al.; Groussin et al. (2019); css.earth tessellation",
+      "license": "Published scientific parameters; css.earth implementation MIT",
       "licenseEvidence": [
         "https://arxiv.org/abs/1911.04897",
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Reproduced by shared model preparation from the pinned parameters and neutral material.",
       "redistribution": "Preserve attribution and inferred-model qualification.",

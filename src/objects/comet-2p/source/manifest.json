@@ -5,11 +5,11 @@
       "id": "shape-parameters",
       "path": "shape/model.json",
       "origin": "https://doi.org/10.1016/j.icarus.2005.01.012",
-      "credit": "Harmon & Nolan (2005); cssEarth approximation",
-      "license": "Published numeric scientific parameters; cssEarth implementation MIT",
+      "credit": "Harmon & Nolan (2005); css.earth approximation",
+      "license": "Published numeric scientific parameters; css.earth implementation MIT",
       "licenseEvidence": [
         "https://doi.org/10.1016/j.icarus.2005.01.012",
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in numeric constraints from the cited paper. Original paper bytes are pinned for review but are not redistributed.",
       "redistribution": "Preserve the source credit and model assumptions.",
@@ -33,11 +33,11 @@
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1016/j.icarus.2005.01.012",
-      "credit": "Harmon & Nolan (2005); cssEarth approximation",
-      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "credit": "Harmon & Nolan (2005); css.earth approximation",
+      "license": "Published scientific parameters; css.earth implementation MIT",
       "licenseEvidence": [
         "https://doi.org/10.1016/j.icarus.2005.01.012",
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Reproduced from the shape approximation and shared missing-imagery grid.",
       "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",

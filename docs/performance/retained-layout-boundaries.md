@@ -27,7 +27,7 @@ Chromium's [incremental inline-style path](https://chromium.googlesource.com/chr
 can reuse computed style for eligible direct property updates. This is not
 equivalent to skipping style, paint or layer work. cssGraphics' Galaxy adapter
 similarly publishes prepared transforms directly to retained leaf styles;
-its prerecorded transforms are not a substitute for cssEarth's free camera.
+its prerecorded transforms are not a substitute for css.earth's free camera.
 
 ## Changed allocation boundary
 

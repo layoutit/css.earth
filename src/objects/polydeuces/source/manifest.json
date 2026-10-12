@@ -5,7 +5,7 @@
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
       "origin": "https://arxiv.org/abs/1912.09192",
-      "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
+      "credit": "Hedman et al. (2020), Table 1 and Appendix B; css.earth standard grid",
       "license": "MIT display representation from published scientific dimensions",
       "licenseEvidence": [
         "https://arxiv.org/abs/1912.09192"
@@ -177,7 +177,7 @@
       "id": "prepared-ellipsoid-context",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1912.09192",
-      "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
+      "credit": "Hedman et al. (2020), Table 1 and Appendix B; css.earth standard grid",
       "license": "MIT display representation from published scientific measurements; retain source citation.",
       "consumers": [
         "navigation"

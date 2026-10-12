@@ -1,4 +1,4 @@
-/** cssEarth binding for generic retained-bank registration. */
+/** css.earth binding for generic retained-bank registration. */
 import { registerComponentBanks as register } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume, type CompilerBakeResult, type CompilerDatasetVolume, type CompilerPin } from '@cssearth/objects';

@@ -4,7 +4,7 @@ The navigation uses one prepared atlas of source-derived raster markers.
 This table lists the Sun and the eight planets. A marker source marked adapter-owned, like every
 other object's, lives with its exact preparation recipe inside the object's adapter. The shared
 assembler reads every input and applies those recipes without an
-object-specific branch. No cssEarth scene capture is used by the markers.
+object-specific branch. No css.earth scene capture is used by the markers.
 
 | Object | Source |
 | --- | --- |

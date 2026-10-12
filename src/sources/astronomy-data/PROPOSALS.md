@@ -16,7 +16,7 @@ For a qualification proposal, a negative result is a documented source decision 
 
 ### Bennu: heat storage, roughness and predicted temperatures
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -57,7 +57,7 @@ PDS bundle IDs: `urn:nasa:pds:orex.thermal`.
 
 ### Bennu: hydrated minerals and carbon-bearing material
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -97,7 +97,7 @@ PDS bundle IDs: `urn:nasa:pds:orex.spectral_analysis`.
 
 ### Ceres: hydrogen and iron
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -136,7 +136,7 @@ PDS bundle IDs: `urn:nasa:pds:dawn-grand-ceres`.
 
 ### Vesta: hydrogen and iron signal
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -186,7 +186,7 @@ PDS bundle IDs: `urn:nasa:pds:dawn-grand-vesta`.
 
 ### Ceres and Vesta: gravity, anomalies and geoid
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -227,7 +227,7 @@ PDS bundle IDs: `urn:nasa:pds:dawn-rss-der-ceres`, `urn:nasa:pds:dawn-rss-der-ve
 
 ### Bennu: gravity anomaly on the observed shape
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -266,7 +266,7 @@ PDS bundle IDs: `urn:nasa:pds:orex.derived_gravity`.
 
 ### Eros: 334 mapped pond locations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -306,7 +306,7 @@ PDS bundle IDs: `urn:nasa:pds:ast-eros.roberts.ponds-catalog`.
 
 ### Mimas: relative reflectivity
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -345,7 +345,7 @@ PDS bundle IDs: `urn:nasa:pds:satellite-mimas.cassini.shape-models-maps`.
 
 ### Moon: nine Kaguya reflected-light bands
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -384,7 +384,7 @@ USGS catalogue IDs: `lunar-kaguya-multiband-imager-mosaics`, `kaguya_lunar_multi
 
 ### Moon: improve existing photography and height sampling
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -433,7 +433,7 @@ USGS catalogue IDs: `moon_lro_lola_selene_kaguya_tc_dem_merge_60n60s_59m`, `moon
 
 ### Europa: expand registered infrared coverage
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -484,7 +484,7 @@ USGS catalogue IDs: `europa-galileo-nims-hyperspectral-map-products-registered-a
 
 ### Callisto: expand registered infrared coverage
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -535,7 +535,7 @@ USGS catalogue IDs: `callisto-galileo-nims-hyperspectral-map-products-registered
 
 ### Ryugu: thermal-corrected infrared spectra
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -572,7 +572,7 @@ Join the 107 spectrum products and 109 geometry products by identifiers, not row
 
 ### Itokawa: more AMICA wavelengths
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -612,7 +612,7 @@ PDS bundle IDs: `urn:nasa:pds:hay.amica`, `urn:nasa:pds:hay.amica.itokawa.backpl
 
 ### Ceres: qualified Urvara and crater close-ups
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -669,7 +669,7 @@ PDS bundle IDs: `urn:nasa:pds:dwarf_planet-ceres.dawn-fc.urvara-mosaics`.
 
 ### Ceres: millimetre observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -708,7 +708,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.ast-ceres.alma.images-spectra`.
 
 ### Small bodies: reconcile diameters and albedos
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -766,7 +766,7 @@ PDS bundle IDs: `urn:nasa:pds:iras`, `urn:nasa:pds:msx.mimps`, `urn:nasa:pds:ast
 
 ### Small bodies: measured rotation periods and light curves
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -813,7 +813,7 @@ PDS bundle IDs: `urn:nasa:pds:ast_lightcurve_derived_parameters`, `urn:nasa:pds:
 
 ### Small bodies: masses, densities and binary properties
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -857,11 +857,11 @@ PDS bundle IDs: `urn:nasa:pds:ast_binary_parameters_compilation`, `urn:nasa:pds:
 
 ### Asteroid spectral libraries and taxonomy
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
-Potential additional scientific content; no claim that every target or classification is absent from cssEarth.
+Potential additional scientific content; no claim that every target or classification is absent from css.earth.
 
 Source-backed whole-object spectra and spectral classifications across many asteroids.
 
@@ -928,7 +928,7 @@ PDS bundle IDs: `urn:nasa:pds:ast_spectra_reddy_neos_marscrossers`, `urn:nasa:pd
 
 ### Asteroids: source-backed family membership
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -970,7 +970,7 @@ PDS bundle IDs: `urn:nasa:pds:ast-high-inclination.gil-hutton.families`, `urn:na
 
 ### Small bodies: measured colors, phase curves and polarization
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1026,7 +1026,7 @@ PDS bundle IDs: `urn:nasa:pds:asteroid_polarimetric_database`, `urn:nasa:pds:com
 
 ### Eros: qualify X-ray, gamma-ray and infrared composition data
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1066,7 +1066,7 @@ PDS bundle IDs: `urn:nasa:pds:near.grs`, `urn:nasa:pds:near.nis`, `urn:nasa:pds:
 
 ### Gaspra and Ida: resolve the existing NIMS blockers
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1107,7 +1107,7 @@ PDS bundle IDs: `urn:nasa:pds:galileo.ast-gaspra.nims.spectra`, `urn:nasa:pds:ga
 
 ### Eros: qualify derived gravity and physical parameters
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1145,7 +1145,7 @@ PDS bundle IDs: `urn:nasa:pds:near_rss_derived`.
 
 ### Preserve quantitative map precision and source support
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1202,7 +1202,7 @@ USGS catalogue IDs: `bennu_osiris_rex_ocams_global_pan_mosaic_5cm`, `bennu_osiri
 
 ### Mercury: qualify regional stereo maps
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1250,7 +1250,7 @@ USGS catalogue IDs: `mercury_messenger_mdis_dtms_fassett_2016`, `mercury_messeng
 
 ### Moon: qualify regional terrain and photometric products
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1301,7 +1301,7 @@ USGS catalogue IDs: `regional_topography_and_photometric_cube_data_for_lunar_loc
 
 ### Io: resolve the limits of the Tvashtar stereo product
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1339,7 +1339,7 @@ USGS catalogue IDs: `io_galileo_ssi_tvashtar_paterae_dem_and_orthoimages_900m`.
 
 ### Mercury: magnesium and other elemental measurements
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1383,7 +1383,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Vesta: qualify VIR mineral and rock signatures
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1439,7 +1439,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Vesta: mapped geological units
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1487,7 +1487,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: observed infrared surface coverage
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1539,7 +1539,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: measured seasonal temperature by latitude
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1583,7 +1583,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ganymede: infrared ice and grain-size signatures
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1627,7 +1627,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ganymede: Galileo brightness temperatures
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1671,7 +1671,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Phoebe, Iapetus and Enceladus: measured heat radiation
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1723,7 +1723,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Enceladus: published geyser source locations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1767,7 +1767,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ceres: catalogue of bright deposits
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1811,7 +1811,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Pluto: geological units around Sputnik Planitia
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1857,7 +1857,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Io: dated volcanic changes and thermal observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1949,7 +1949,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Jupiter: dated visible and infrared observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2097,7 +2097,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Saturn: coherent historical observing sets
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2159,7 +2159,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Saturn rings: qualify radial spectral measurements
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2209,7 +2209,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Tempel 1: qualify a body package and thermal observation
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2255,7 +2255,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Moon: GRAIL gravity anomalies
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2303,7 +2303,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Moon and Mercury: observed polar illumination
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2351,7 +2351,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: measured soil moisture and freeze/thaw
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2407,7 +2407,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: ocean salinity and sea-level anomalies
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2457,7 +2457,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: monthly gravity changes from GRACE
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2501,7 +2501,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: thermal emissivity and mapped surface minerals
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2549,7 +2549,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: atmospheric gases and microwave observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2607,7 +2607,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: measured ice motion
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2659,7 +2659,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: qualify regional change and hazard maps
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2801,7 +2801,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Europa: measure the value of controlled regional mosaics
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2862,7 +2862,7 @@ USGS catalogue IDs: `photogrammetrically_controlled_galileo_image_mosaics_of_eur
 
 ### Pluto, Ceres and Vesta: qualify historical telescope maps
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2913,7 +2913,7 @@ PDS bundle IDs: `urn:nasa:pds:hst.ast-ceres.images-albedo-shape`.
 
 ### Ganymede: controlled close-up photography
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2971,7 +2971,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Callisto: controlled close-up photography
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3027,7 +3027,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Neptune: a dated Voyager cloud observation
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3071,7 +3071,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth and Moon: historical Galileo spectral observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3135,7 +3135,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Venus: qualify regional Magellan radar detail
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3181,7 +3181,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: calibrated radar mosaics and land measurements
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3235,7 +3235,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Eros: qualify low-altitude MSI close-ups
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3301,7 +3301,7 @@ PDS bundle IDs: `urn:nasa:pds:near.msi`, `urn:nasa:pds:nearmsi.shapebackplane`.
 
 ### Jupiter rings: qualify a measured radial profile
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3345,7 +3345,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Mercury: historical and additional spectral observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3397,7 +3397,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: regional elevation and bathymetry improvements
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3449,7 +3449,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: spectral mosaics and vegetation observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3505,7 +3505,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Saturn moons: controlled ISS regional photography
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3569,7 +3569,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: dated ISS and radar observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3647,7 +3647,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Enceladus and Titan: published fracture and terrain maps
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3697,7 +3697,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: qualify Huygens descent imaging
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3749,7 +3749,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### HD 189733b: qualify a historical Spitzer thermal comparison
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3795,7 +3795,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Atlas: qualify additional observed ISS coverage
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3839,7 +3839,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Planck: qualified all-sky scientific maps
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3887,7 +3887,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### NED and the stellar halo: qualify catalogue measurements
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3933,7 +3933,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Nebulae: calibrated infrared image layers
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3979,7 +3979,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### 3I/ATLAS: measured infrared coma spectra
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4023,7 +4023,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: coastal water measurements and their interpretation
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4067,7 +4067,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Jupiter: gravity-constrained deep winds
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4111,7 +4111,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: the measured south-polar HCN signature
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4155,7 +4155,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ceres: measured topography inside polar craters
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4193,7 +4193,7 @@ PDS bundle IDs: `urn:nasa:pds:dwarf_planet-ceres.dawn.shape-models-maps`.
 
 ### Itokawa: calibrated near-infrared spectra
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4231,7 +4231,7 @@ PDS bundle IDs: `urn:nasa:pds:hay.nirs`.
 
 ### Ryugu: dated infrared temperature observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4269,7 +4269,7 @@ PDS bundle IDs: `urn:jaxa:darts:hyb2_tir`.
 
 ### Ryugu: MASCOT's local temperature measurements
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4308,7 +4308,7 @@ PDS bundle IDs: `urn:jaxa:darts:hyb2_mascot_mara`, `urn:jaxa:darts:hyb2_mascot_m
 
 ### Eros and Ryugu: measured magnetic constraints
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4347,7 +4347,7 @@ PDS bundle IDs: `urn:jaxa:darts:hyb2_mascot_mag`, `urn:nasa:pds:near.mag`.
 
 ### Moon and giant-planet systems: measured dust observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4390,7 +4390,7 @@ PDS bundle IDs: `urn:nasa:pds:cassini_cda`, `urn:nasa:pds:cassini_high_rate_dete
 
 ### Explain spectral signatures with measured laboratory references
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4430,7 +4430,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.ices.mastrapa.lab-spectra`, `urn:nasa:pds:gbo.
 
 ### Pluto: observed atmospheric occultation profiles
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4468,7 +4468,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.pluto.benecchi-etal.occultation`.
 
 ### Small bodies: calibrated MSX infrared observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4506,7 +4506,7 @@ PDS bundle IDs: `urn:nasa:pds:msx.sb.images`.
 
 ### Small bodies: qualify historical map observations
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4545,7 +4545,7 @@ PDS bundle IDs: `urn:nasa:pds:ast-sat.thomas.shape-models`, `urn:nasa:pds:small_
 
 ### Moon: Clementine spectral bands and calibration comparison
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4586,7 +4586,7 @@ USGS catalogue IDs: `moon_clementine_uvvis_global_mosaic_118m`, `moon_clementine
 
 ### Moon: qualify the published polar ice-favorability model
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4625,7 +4625,7 @@ USGS catalogue IDs: `moon_ice_favorability_index_north_pole_591mp`, `moon_ice_fa
 
 ### Venus: published regional geological units
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4664,7 +4664,7 @@ USGS catalogue IDs: `venus_geologic_map_of_the_snegurochka_planitia_quadrangle`,
 
 ### Moon: qualify historical and illumination-specific photographs
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4706,7 +4706,7 @@ USGS catalogue IDs: `moon_lunar_orbiter_digital_photographic_global_mosaic_59m`,
 
 ### Asteroids: measured radar Doppler spectra
 
-Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with css.earth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4744,7 +4744,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.ast.radar.arecibo.doppler_spectra_of_asteroids
 
 ### Saturn rings: compare measured opacity profiles
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4782,7 +4782,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranus rings: replace broad opacity assumptions with measured profiles
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4821,7 +4821,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Neptune rings: measured radial profiles and dated arc observations
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4860,7 +4860,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Saturn moons: qualify additional infrared bands and coverage
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4900,7 +4900,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Saturn moons: measured ultraviolet spectra
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4938,7 +4938,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Jupiter moons: distinguish ultraviolet surface and atmospheric signals
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4976,7 +4976,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranus: a dated Voyager cloud observation
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5014,7 +5014,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranian moons: qualify numeric Voyager filter measurements
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5052,7 +5052,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Neptune moons: qualify useful native filter measurements
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5090,7 +5090,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Pluto and Charon: native MVIC spectral bands
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5129,7 +5129,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Pluto small moons: preserve and resolve native-image blockers
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5167,7 +5167,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Venus: native Galileo and Cassini cloud observations
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5205,7 +5205,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Giant planets: measured ultraviolet and infrared spectra
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5243,7 +5243,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Enceladus: measured ultraviolet occultation light curves
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5281,7 +5281,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranus: observed atmospheric occultation light curves
 
-Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with css.earth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 

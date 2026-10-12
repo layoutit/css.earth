@@ -1,4 +1,4 @@
-# cssEarth implementation map
+# css.earth implementation map
 
 Paths are relative to the selected repository. The documentation links were
 checked on 2026-09-09.

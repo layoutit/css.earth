@@ -8,7 +8,7 @@
  *     its deposited value and no point goes beyond its neighbours, so the pixel grid's edges go without inventing structure or
  *     lowering contrast, as a blur would.
  *
- * astropy-healpix, in the pinned astronomy toolchain, owns the pixel geometry and the interpolation; cssEarth passes it the
+ * astropy-healpix, in the pinned astronomy toolchain, owns the pixel geometry and the interpolation; css.earth passes it the
  * longitudes and latitudes of a fine sampling grid once and reads the grid back. HEALPix colatitude theta and azimuth phi are
  * latitude 90 - theta and longitude phi; the dataset record says why phi is east longitude for its map. */
 import { spawnSync } from 'node:child_process';

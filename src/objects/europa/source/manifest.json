@@ -1412,7 +1412,7 @@
       "id": "europa-surface-minimap-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored presentation metadata",
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
@@ -1656,7 +1656,7 @@
       "id": "europa-surface-features-source",
       "path": "features/manifest.json",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored factual metadata",
       "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
@@ -1672,7 +1672,7 @@
       "id": "europa-preparation-features",
       "path": "preparation/features.json",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored preparation parameters",
       "acquisition": "Authored beside the other preparation recipes.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -1688,7 +1688,7 @@
       "id": "europa-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored Europa solar-system recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -1707,7 +1707,7 @@
       "id": "europa-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored Europa raster recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -1724,7 +1724,7 @@
       "id": "europa-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored Europa geometry recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -1741,7 +1741,7 @@
       "id": "europa-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Europa presentation recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -1757,7 +1757,7 @@
       "id": "europa-preparation-navigation",
       "path": "preparation/navigation.json",
       "origin": "Repository-authored Europa navigation recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -1773,7 +1773,7 @@
       "id": "europa-preparation-acquisition",
       "path": "preparation/acquisition.json",
       "origin": "Repository-authored Europa acquisition recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -1790,7 +1790,7 @@
       "id": "europa-object-content",
       "path": "content/object.json",
       "origin": "Repository-authored Europa object recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -20661,7 +20661,7 @@
         ]
       },
       "origin": "https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf",
-      "credit": "Published disk function: Geissler, Keszthelyi and Weller (2022), LPSC 53, abstract 1691. Selection and transcription: cssEarth.",
+      "credit": "Published disk function: Geissler, Keszthelyi and Weller (2022), LPSC 53, abstract 1691. Selection and transcription: css.earth.",
       "acquisition": "Model family transcribed from the cited abstract into a project document; no data file was downloaded."
     },
     {
@@ -20698,7 +20698,7 @@
           {
             "catalogueId": "doi-10-3847-psj-ac06d6",
             "role": "method",
-            "evidence": "Table 2, ridged plains, gives the Minnaert parameters as lines in phase from 21 images at 10 to 128 degrees: k = 0.004a + 0.532 and B0 = -0.002a + 0.728. The record follows that line for k from 57 degrees, where it reaches the 1983 value at 30 degrees (0.76), to 128 degrees (1.044), and holds 0.76 between 30 and 57 degrees so the exponent never falls as phase grows; that join is cssEarth's reading, not either paper's. B0 is the record's phase function, held beyond 128 degrees. The paper's own fit of its lowest-phase image, Voyager C2060513 at 10 degrees, is k = 0.65 for the whole disc and 0.64 for ridged plains (Figures 4 and 6), the value the 1983 polynomial gives there (0.644), where the Table 2 line gives 0.57: the reason the line is not used at low phase. The paper states no emission range; the limit 84.5 degrees is derived as before from Voyager 2 wide-angle frame C2065221.",
+            "evidence": "Table 2, ridged plains, gives the Minnaert parameters as lines in phase from 21 images at 10 to 128 degrees: k = 0.004a + 0.532 and B0 = -0.002a + 0.728. The record follows that line for k from 57 degrees, where it reaches the 1983 value at 30 degrees (0.76), to 128 degrees (1.044), and holds 0.76 between 30 and 57 degrees so the exponent never falls as phase grows; that join is css.earth's reading, not either paper's. B0 is the record's phase function, held beyond 128 degrees. The paper's own fit of its lowest-phase image, Voyager C2060513 at 10 degrees, is k = 0.65 for the whole disc and 0.64 for ridged plains (Figures 4 and 6), the value the 1983 polynomial gives there (0.644), where the Table 2 line gives 0.57: the reason the line is not used at low phase. The paper states no emission range; the limit 84.5 degrees is derived as before from Voyager 2 wide-angle frame C2065221.",
             "locator": "Table 2, ridged plains row; Figures 4 and 6; Table 1"
           },
           {
@@ -20710,7 +20710,7 @@
         ]
       },
       "origin": "https://doi.org/10.3847/PSJ/ac06d6",
-      "credit": "Alfred S. McEwen and Laurence A. Soderblom, Reports of Planetary Geology Program 1983 (NASA TM-86246), page 261; Rajani D. Dhingra, Bonnie J. Buratti and Benoît Seignovert (2021), The Planetary Science Journal 2, 144, CC BY 4.0. Transcription, the join between the two fits and the emission limit: cssEarth.",
+      "credit": "Alfred S. McEwen and Laurence A. Soderblom, Reports of Planetary Geology Program 1983 (NASA TM-86246), page 261; Rajani D. Dhingra, Bonnie J. Buratti and Benoît Seignovert (2021), The Planetary Science Journal 2, 144, CC BY 4.0. Transcription, the join between the two fits and the emission limit: css.earth.",
       "acquisition": "Coefficients transcribed from the two cited sources into a project document; the emission limit is computed from the image scale the PDS Ring-Moon Systems Node lists; no data file was downloaded."
     }
   ]

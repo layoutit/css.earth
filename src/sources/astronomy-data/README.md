@@ -24,7 +24,7 @@ sqlite3 -header -column src/sources/astronomy-data/ledger.sqlite \
 | --------------------- | ---- |
 | `datasets`            | One row per dataset: stable source/id, title, target text, instrument, count, decision, reason, source URL, family; native metadata in `details_json` |
 | `inventory`           | Listings that repeat datasets: OPUS volumes and geometry, Maryland holdings, DARTS collections and indexes; same columns |
-| `bodies`              | Every body a dataset names: cssEarth id when cssEarth catalogues it, name, kind, parent, cssEarth package |
+| `bodies`              | Every body a dataset names: css.earth id when css.earth catalogues it, name, kind, parent, css.earth package |
 | `dataset_bodies`      | Dataset-to-body links with the name the source used; `role` is `parent` for a Photojournal tag of a tagged body's parent |
 | `missions`            | Every spacecraft, telescope or programme an instrument belongs to, with other names (DARTS "KAGUYA" is also "SELENE") |
 | `instruments`         | Every instrument, keyed by mission (`rosetta/osinac`, `mro/hirise`): one row even when archives spell it differently |

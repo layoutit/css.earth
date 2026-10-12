@@ -22,7 +22,7 @@
     },
     {
       "id": "unmapped-surface-grid",
-      "subject": "cssEarth missing-coverage grid as the surface",
+      "subject": "css.earth missing-coverage grid as the surface",
       "status": "included",
       "finding": "No surface imagery exists for this body, so the manifest supplies the project-authored missing-coverage grid, the normal grid marks unmapped terrain and Shadows defaults off.",
       "evidence": [

@@ -494,7 +494,7 @@ The virtual-telescope routes use one pinned archive client where Astroquery has 
 `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install` and check it with the same command's `verify` mode. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure once under `~/.cache/css-earth/astroquery/<pin digest>` (or `CSS_EARTH_ASTROQUERY_CACHE/<pin digest>`). Checkouts with the same pins reuse it without copying the environment. A valid older `output/toolchains/astroquery` install still works; a dangling link there no longer hides a valid shared cache. Installation holds a per-pin lock, verifies the packages, and writes the completion marker last. A query never starts an installation itself.
 
 Astroquery is the archive client for MAST catalogue queries and complete-file downloads, ALMA TAP and DataLink, and the VizieR
-JMDC cone query. cssEarth does not implement those protocols beside it. cssEarth still checks catalogue fields, observation
+JMDC cone query. css.earth does not implement those protocols beside it. css.earth still checks catalogue fields, observation
 identity, byte counts and hashes, and owns the reducers, product records and evidence. A bounded MAST HTTP range read remains
 for FITS primary-header validation because Astroquery exposes only complete-file downloads; it is not a second catalogue or
 download route.
@@ -504,7 +504,7 @@ WDB forms rather than that TAP table. Chandra CDA, Keck KOA and the retired Spit
 Astroquery client used by these routes. DataCite is publication metadata, not an observatory archive. These are explicit
 non-overlapping exceptions rather than fallbacks for the same operation.
 
-Astroquery stays an external dependency: no upstream source is copied into cssEarth. Its BSD 3-Clause license, attribution,
+Astroquery stays an external dependency: no upstream source is copied into css.earth. Its BSD 3-Clause license, attribution,
 citation and the separate status of archive-data rights are recorded in
 [`packages/telescope/toolchains/NOTICE.md`](../packages/telescope/toolchains/NOTICE.md). Acquisition alone supplies no scientific evidence.
 
@@ -829,14 +829,14 @@ PDS3 labels establish product identity, time, filter, units and surface sampling
 unresolved.
 
 `telescope:discover` is an operator command for auditing or refreshing one archive. It resolves the object's names and
-source-label target names against PDS context products through Peppi; cssEarth keeps no target-LID lookup table. PDS discovery
+source-label target names against PDS context products through Peppi; css.earth keeps no target-LID lookup table. PDS discovery
 is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
 
 ```
 node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target charon --write
 ```
 
-Peppi exhausts the target's `Product_Observational` records across processing levels. cssEarth verifies every returned label against the Registry,
+Peppi exhausts the target's `Product_Observational` records across processing levels. css.earth verifies every returned label against the Registry,
 retains each target's search scope and total without replacing earlier searches, and indexes only product profiles whose scientific metadata it understands. The Charon
 acceptance route reads all 28 registry products in the committed search and admits the mapped MVIC color product because its own PDS4 label supplies
 four wavelength bins, cartography and 1 km grid sampling. Its emitted qualification action pins the complete label and image,
@@ -1014,7 +1014,7 @@ The qualified COR1 profile now also writes a pinned F16 descriptor. `telescope o
 `spherical-grid-inspect` and `spherical-grid-prepare-volume` from that delivered observation. The
 latter uses Astropy to validate the archive FITS and its default-UTC time convention, SciPy to
 resample the longitude/latitude/radius field into explicitly sized Cartesian voxels, and the
-existing cssEarth density-volume preparer and loader for the result. The transfer remains an
+existing css.earth density-volume preparer and loader for the result. The transfer remains an
 explicit caller choice. The native source and resampled float FITS remain available beside the
 RGBA8/KTX2 display approximation; transparent voxels outside the measured 1.5–4.0 solar-radius
 shell do not become zero-density measurements.

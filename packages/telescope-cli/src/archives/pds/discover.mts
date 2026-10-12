@@ -146,7 +146,7 @@ export function pdsTargetNameCandidates(values: readonly string[]) {
   return [...names];
 }
 
-/** Resolve a PDS context target through Peppi. Archive identity is package-owned data, not a cssEarth target table. */
+/** Resolve a PDS context target through Peppi. Archive identity is package-owned data, not a css.earth target table. */
 export async function pdsTarget(root: string, id: string) {
   const descriptor = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')) as unknown, `${id} object`);
   const catalog = requireRecord(requireRecord(descriptor.properties, `${id} properties`).catalog, `${id} catalog`);

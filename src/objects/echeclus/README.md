@@ -4,7 +4,7 @@ Echeclus is a centaur: a small body orbiting the Sun among the giant planets.
 
 ## Identity
 
-Echeclus is 60558 Echeclus, provisional designation 2000 EC98. The JPL Small-Body Database classes its orbit as Centaur. It has shown comet activity and is also designated 174P/Echeclus; cssEarth registers one scene for both names.
+Echeclus is 60558 Echeclus, provisional designation 2000 EC98. The JPL Small-Body Database classes its orbit as Centaur. It has shown comet activity and is also designated 174P/Echeclus; css.earth registers one scene for both names.
 
 ## Sources
 

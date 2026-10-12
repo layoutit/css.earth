@@ -98,8 +98,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Image-layer preparation recipe",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -111,8 +111,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Published image interpretation and acquisition record",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -124,8 +124,8 @@
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
       },
       "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
       "title": "Dataset presentation and prepared-bank bindings",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
     },
@@ -134,7 +134,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-2903-layers/source/dots/merge.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored merge of the catalogue dot banks into one layer.",
       "sourceBinding": {
         "kind": "local",
@@ -146,7 +146,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-2903-layers/source/popping-hii/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the Multiwavelength study of the star-formation in the bar of NGC 2903 rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",
@@ -158,7 +158,7 @@
       "kind": "authored-document",
       "path": "src/objects/ngc-2903-layers/source/vucetic-snr/points.json",
       "origin": "project-authored",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "acquisition": "Authored selection, frame and color of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
       "sourceBinding": {
         "kind": "local",

@@ -138,7 +138,7 @@
       "id": "ganymede-surface-minimap-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored presentation metadata",
       "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
       "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
@@ -360,14 +360,14 @@
       "id": "ganymede-muse-oxygen-signature-night-1",
       "path": "muse/ganymede/577.3nm_band-night-1.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "vlt-ut3",
             "missionId": "eso-muse-galilean-moons",
-            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation"
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation"
           }
         ]
       },
@@ -416,14 +416,14 @@
       "id": "ganymede-muse-oxygen-signature-night-2",
       "path": "muse/ganymede/577.3nm_band-night-2.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "vlt-ut3",
             "missionId": "eso-muse-galilean-moons",
-            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation"
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation"
           }
         ]
       },
@@ -472,14 +472,14 @@
       "id": "ganymede-muse-oxygen-signature-night-3",
       "path": "muse/ganymede/577.3nm_band-night-3.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
-      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "vlt-ut3",
             "missionId": "eso-muse-galilean-moons",
-            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation"
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); css.earth grid interpretation and display preparation"
           }
         ]
       },
@@ -556,7 +556,7 @@
       "id": "ganymede-surface-features-source",
       "path": "features/manifest.json",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored factual metadata",
       "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
@@ -572,7 +572,7 @@
       "id": "ganymede-preparation-features",
       "path": "preparation/features.json",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored preparation parameters",
       "acquisition": "Authored beside the other preparation recipes.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -588,7 +588,7 @@
       "id": "ganymede-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored Ganymede solar-system recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -607,7 +607,7 @@
       "id": "ganymede-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored Ganymede raster recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -624,7 +624,7 @@
       "id": "ganymede-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored Ganymede geometry recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -641,7 +641,7 @@
       "id": "ganymede-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Ganymede presentation recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -657,7 +657,7 @@
       "id": "ganymede-preparation-navigation",
       "path": "preparation/navigation.json",
       "origin": "Repository-authored Ganymede navigation recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -673,7 +673,7 @@
       "id": "ganymede-preparation-acquisition",
       "path": "preparation/acquisition.json",
       "origin": "Repository-authored Ganymede acquisition recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -690,7 +690,7 @@
       "id": "ganymede-object-content",
       "path": "content/object.json",
       "origin": "Repository-authored Ganymede object recipe",
-      "credit": "cssEarth project",
+      "credit": "css.earth project",
       "license": "Repository-authored factual data",
       "acquisition": "Checked preparation recipe maintained beside the inputs.",
       "redistribution": "Prepared package configuration.",
@@ -1067,7 +1067,7 @@
       "id": "sim3237-archive-index-json",
       "path": "science/geology-sim3237/archive-index.json",
       "origin": "https://pubs.usgs.gov/sim/3237/",
-      "credit": "USGS source data; cssEarth intake record",
+      "credit": "USGS source data; css.earth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
       "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
       "redistribution": "Metadata only; retained in Git.",
@@ -1080,7 +1080,7 @@
       "id": "sim3237-intake-downloads-json",
       "path": "science/geology-sim3237/intake-downloads.json",
       "origin": "https://pubs.usgs.gov/sim/3237/",
-      "credit": "USGS source data; cssEarth intake record",
+      "credit": "USGS source data; css.earth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
       "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
       "redistribution": "Metadata only; retained in Git.",
@@ -1093,7 +1093,7 @@
       "id": "sim3237-display-categories-json",
       "path": "science/geology-sim3237/display-categories.json",
       "origin": "https://pubs.usgs.gov/sim/3237/",
-      "credit": "Collins et al. (2013), USGS; cssEarth intake record",
+      "credit": "Collins et al. (2013), USGS; css.earth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
       "acquisition": "Unit colors read from the GeologyUnits renderer in member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_ArcMap10.mxd of the official USGS ZIP (fetched by HTTP byte range, not vendored) and converted from the stored CIE L*a*b* with the ArcGIS conversion recorded in the file; unit names and symbols from the Description of Map Units on the SIM 3237 map sheet.",
       "redistribution": "Metadata only; retained in Git.",
@@ -1106,7 +1106,7 @@
       "id": "sim3237-registration-anchors",
       "path": "science/geology-sim3237/registration-anchors.json",
       "origin": "https://pubs.usgs.gov/sim/3237/",
-      "credit": "USGS point and polygon layers; cssEarth comparison",
+      "credit": "USGS point and polygon layers; css.earth comparison",
       "license": "Repository-authored validation metadata of public domain GIS data",
       "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes (point TERRAIN against polygon UNITNAME). Original discrepancies are retained.",
       "redistribution": "Small source-validation metadata.",
@@ -1197,7 +1197,7 @@
         ]
       },
       "origin": "https://doi.org/10.1016/0019-1035(81)90203-7",
-      "credit": "Steven W. Squyres and Joseph Veverka, Reports of Planetary Geology Program 1980 (NASA TM-82385), page 67, and Icarus 46, 137 (1981). Transcription and emission limit: cssEarth.",
+      "credit": "Steven W. Squyres and Joseph Veverka, Reports of Planetary Geology Program 1980 (NASA TM-82385), page 67, and Icarus 46, 137 (1981). Transcription and emission limit: css.earth.",
       "acquisition": "Law transcribed from the authors' summary in NASA TM-82385 into a project document; the emission limit is computed from the image scale the PDS Ring-Moon Systems Node lists; no data file was downloaded."
     }
   ]

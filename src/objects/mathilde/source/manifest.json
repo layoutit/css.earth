@@ -160,7 +160,7 @@
       "id": "mathilde-surface-features-source",
       "path": "features/manifest.json",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored factual metadata",
       "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
@@ -176,7 +176,7 @@
       "id": "mathilde-preparation-features",
       "path": "preparation/features.json",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored preparation parameters",
       "acquisition": "Authored beside the other preparation recipes.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -192,7 +192,7 @@
       "id": "mathilde-surface-map-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored presentation parameters",
       "acquisition": "Authored from the shared mesh convention.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -360,7 +360,7 @@
       "id": "mathilde-near-msi-42826360-camera",
       "path": "observations/near-msi/42826360-camera.json",
       "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
-      "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
+      "credit": "P. C. Thomas and the NEAR MSI team; css.earth camera conversion",
       "license": "Public mission scientific data and project-authored coordinate conversion.",
       "acquisition": "node packages/bake/authoring/near-msi/prepare-cameras.mts src/objects/mathilde/source",
       "redistribution": "Derived camera coefficients with source attribution.",
@@ -376,7 +376,7 @@
       "id": "mathilde-near-msi-42826370-camera",
       "path": "observations/near-msi/42826370-camera.json",
       "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
-      "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
+      "credit": "P. C. Thomas and the NEAR MSI team; css.earth camera conversion",
       "license": "Public mission scientific data and project-authored coordinate conversion.",
       "acquisition": "node packages/bake/authoring/near-msi/prepare-cameras.mts src/objects/mathilde/source",
       "redistribution": "Derived camera coefficients with source attribution.",
@@ -399,7 +399,7 @@
         "near-msi-camera"
       ],
       "origin": "Project-authored recipe",
-      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; css.earth source selection",
       "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
       "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
       "redistribution": "Preserve scientific source attribution and model limitations."
@@ -421,7 +421,7 @@
         ]
       },
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml",
-      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; css.earth source selection",
       "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
       "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
       "redistribution": "Preserve scientific source attribution and model limitations."
@@ -443,7 +443,7 @@
         ]
       },
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml",
-      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; css.earth source selection",
       "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
       "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
       "redistribution": "Preserve scientific source attribution and model limitations."
@@ -465,7 +465,7 @@
         ]
       },
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.xml",
-      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; css.earth source selection",
       "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
       "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
       "redistribution": "Preserve scientific source attribution and model limitations."

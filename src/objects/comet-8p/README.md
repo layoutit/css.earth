@@ -70,6 +70,6 @@ A uniform #b8b6b2 material makes the geometry readable. It is an illustration, n
 <details>
 <summary>Credits</summary>
 
-Credits and restoration pins remain beside the package. Source papers are cited, not relicensed as cssEarth assets.
+Credits and restoration pins remain beside the package. Source papers are cited, not relicensed as css.earth assets.
 
 </details>

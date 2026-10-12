@@ -17,7 +17,7 @@ LEISA ice maps: A. E. Drozdov and N. V. Emelyanov (2026), *New surface
 composition and temperature maps of Pluto from New Horizons LEISA data*,
 [Zenodo release 18825240](https://doi.org/10.5281/zenodo.18825240),
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Their maps derive
-from New Horizons NASA/JHUAPL/SwRI observations. cssEarth selects the three
+from New Horizons NASA/JHUAPL/SwRI observations. css.earth selects the three
 ice-fraction extensions, masks uncomputed or unconstrained cells and applies
 a numeric color scale. The manuscript's license is separate from the data's
 CC BY 4.0 license. No author or mission endorsement is implied.

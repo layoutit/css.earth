@@ -13,7 +13,7 @@ and `/robots.txt` advertises it.
 
 Each page carries one schema.org record in JSON-LD. The homepage has a
 `WebSite` record, which lets search results show the site's name. A body page
-has a `BreadcrumbList` down its orbit chain (cssEarth › Sun › Mars › Phobos),
+has a `BreadcrumbList` down its orbit chain (css.earth › Sun › Mars › Phobos),
 built by `site/content/seo-trail.mts` from the prepared world context. A centre without
 a page, such as a binary's barycentre, is skipped.
 

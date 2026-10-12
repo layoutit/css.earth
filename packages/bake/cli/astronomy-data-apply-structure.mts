@@ -5,7 +5,7 @@
 //   and geometry (the same 1,627,081 observations as `opus`, split two other ways), Maryland holdings (directory
 //   listings of Maryland datasets), and DARTS collections and indexes (containers).
 // - Rebuilds `bodies` and `dataset_bodies` from each dataset's full target list (details.targets when a source shortened
-//   the target text) through bodies.ts: every body keyed by its cssEarth id when cssEarth catalogues it, otherwise by
+//   the target text) through bodies.ts: every body keyed by its css.earth id when css.earth catalogues it, otherwise by
 //   its own name with a kind read from its designation. A Photojournal tag of a tagged body's parent is role `parent`.
 // - Sets `datasets.family`. Maryland archives Rosetta per tracking pass and per mission phase (1,660 rows are one RSI
 //   gravity series), so its rows group by title without the session date, mission phase and version; every other
@@ -54,7 +54,7 @@ try {
     CREATE TABLE bodies(id TEXT PRIMARY KEY,name TEXT NOT NULL,kind TEXT NOT NULL,parent TEXT NOT NULL,cssearth_object TEXT NOT NULL,catalogued INTEGER NOT NULL CHECK(catalogued IN (0,1))) STRICT;
     CREATE TABLE dataset_bodies(source TEXT NOT NULL,dataset_id TEXT NOT NULL,body_id TEXT NOT NULL REFERENCES bodies(id),name_in_source TEXT NOT NULL,role TEXT NOT NULL CHECK(role IN ('target','parent')),PRIMARY KEY(source,dataset_id,body_id),FOREIGN KEY(source,dataset_id) REFERENCES datasets(source,id)) STRICT;`);
   const bodies = new Map<string, Body>();
-  // Prefer "Tempel 1" over "TEMPEL 1" over "tempel 1" for a body cssEarth does not name.
+  // Prefer "Tempel 1" over "TEMPEL 1" over "tempel 1" for a body css.earth does not name.
   const score = (t: string) => (t !== t.toLowerCase() && t !== t.toUpperCase() ? 2 : t !== t.toLowerCase() ? 1 : 0);
   const keep = (b: Body) => {
     const old = bodies.get(b.key);

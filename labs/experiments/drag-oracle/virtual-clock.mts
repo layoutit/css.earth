@@ -1,6 +1,6 @@
 // A clock stepped by hand, installed before CesiumJS loads when the page is opened with ?virtual: animation frames and
 // the time advance only on step(), so thousands of frames run without waiting for the display and both controllers read
-// the same time. Cesium times its inertia with Date, cssEarth with event and frame timestamps; all three come from here.
+// the same time. Cesium times its inertia with Date, css.earth with event and frame timestamps; all three come from here.
 const RealDate = Date, base = RealDate.now();
 let now = 0, queue: [number, FrameRequestCallback][] = [], next = 0;
 window.requestAnimationFrame = callback => { queue.push([++next, callback]); return next; };

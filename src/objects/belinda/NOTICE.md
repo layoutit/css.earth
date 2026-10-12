@@ -9,4 +9,4 @@
   grant or imply a resolved photographic surface.
 - NASA/NAIF text kernels retain their original notices and provenance. Kernel
   URLs are declared in the acquisition plan. NASA credit is not endorsement.
-- cssEarth grid, preparation data and presentation code: repository MIT license.
+- css.earth grid, preparation data and presentation code: repository MIT license.

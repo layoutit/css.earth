@@ -43,7 +43,7 @@ named resources, not an exhaustive claim that no Torifune model exists.
 
 ## Known problems
 
-**A scientific mesh has not been retrieved.** The existing cssEarth asteroid
+**A scientific mesh has not been retrieved.** The existing css.earth asteroid
 pipeline can render a suitable mesh, but published axis ratios, a paper figure,
 or an archive search result cannot stand in for its vertices and faces.
 

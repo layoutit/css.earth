@@ -10,14 +10,14 @@
 
 SHAP7 region cells: Thomas et al. (2018), Mendeley Data version 1,
 https://doi.org/10.17632/2845znt54k.1, Creative Commons Attribution 4.0:
-https://creativecommons.org/licenses/by/4.0/. cssEarth recolors and transfers
+https://creativecommons.org/licenses/by/4.0/. css.earth recolors and transfers
 original region IDs to the reduced SHAP7 display mesh. The released VTK coordinates also supply the mesh every dataset draws on, the neutral model included; mesh reduction, the neutral material, prepared lighting and the context rendering are derived changes.
 
 Geological paths and feature locations: European Space Agency, 2021,
 ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0, https://doi.org/10.5270/esa-kokoti7;
 Leon-Dasi et al. (2021), https://doi.org/10.1051/0004-6361/202140497.
 Attribution follows Product User Guide §2.1. No additional Creative Commons
-license is asserted for these ESA archive products. cssEarth projects and
+license is asserted for these ESA archive products. css.earth projects and
 rasterizes their coordinates; line and point sizes are cartographic symbols.
 
 Landing, touchdown and impact sites (2): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.

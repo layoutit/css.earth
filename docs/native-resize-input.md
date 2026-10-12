@@ -208,7 +208,7 @@ here. Browser reload resets the stored dimensions. The combined wheel zoom and
 world-link checks belong to the newer Saturn experiment above.
 
 Native resize still performs style and layout work. The small indicator's trace
-cannot establish the performance of a fully integrated cssEarth camera. The
+cannot establish the performance of a fully integrated css.earth camera. The
 separately captured Saturn JS drag has a different scene and workload; its raw
 trace is reference evidence, not a controlled speed comparison.
 

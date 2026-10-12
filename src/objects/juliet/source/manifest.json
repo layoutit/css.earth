@@ -5,7 +5,7 @@
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
-      "credit": "Karkoschka (2001) adopted dimensions; cssEarth analytic prolate spheroid",
+      "credit": "Karkoschka (2001) adopted dimensions; css.earth analytic prolate spheroid",
       "license": "MIT representation of published scientific dimensions",
       "licenseEvidence": [
         "https://doi.org/10.1006/icar.2001.6596"
@@ -36,7 +36,7 @@
       "id": "model-surface",
       "path": "material/neutral.png",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
-      "credit": "cssEarth standard no-coverage grid",
+      "credit": "css.earth standard no-coverage grid",
       "license": "MIT representation of published scientific dimensions",
       "licenseEvidence": [
         "https://doi.org/10.1006/icar.2001.6596"
@@ -123,7 +123,7 @@
       "id": "prepared-ellipsoid-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
-      "credit": "Karkoschka (2001) prolate dimensions; cssEarth shape visualization",
+      "credit": "Karkoschka (2001) prolate dimensions; css.earth shape visualization",
       "license": "MIT representation of scientific dimensions; retain attribution.",
       "consumers": [
         "navigation"

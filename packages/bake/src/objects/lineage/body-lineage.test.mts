@@ -102,7 +102,7 @@ test('documents keep their declared credit; authored records credit the project'
   observation.kind = 'authored-document';
   await writeFile(manifestPath, JSON.stringify(manifest));
   lineage = await bodyLineage(root);
-  assert.equal(present(lineage.sources[0], 'document').credit, 'cssEarth contributors');
+  assert.equal(present(lineage.sources[0], 'document').credit, 'css.earth contributors');
   Object.assign(observation, { kind: 'provider-label', credit: 'Fixture mission' });
   await writeFile(manifestPath, JSON.stringify(manifest));
   lineage = await bodyLineage(root);

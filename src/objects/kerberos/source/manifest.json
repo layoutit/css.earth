@@ -5,7 +5,7 @@
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
-      "credit": "Porter, Verbiscer and Canup (2025); cssEarth standard no-coverage visualization",
+      "credit": "Porter, Verbiscer and Canup (2025); css.earth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
       "licenseEvidence": [
         "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
@@ -36,7 +36,7 @@
       "id": "model-surface",
       "path": "material/neutral.png",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
-      "credit": "Porter, Verbiscer and Canup (2025); cssEarth standard no-coverage visualization",
+      "credit": "Porter, Verbiscer and Canup (2025); css.earth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
       "licenseEvidence": [
         "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
@@ -120,7 +120,7 @@
       "id": "prepared-ellipsoid-context",
       "path": "presentation/context.png",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
-      "credit": "Porter, Verbiscer and Canup (2025) approximate dimensions; cssEarth standard no-coverage grid",
+      "credit": "Porter, Verbiscer and Canup (2025) approximate dimensions; css.earth standard no-coverage grid",
       "license": "MIT display representation from published scientific measurements; retain source citation.",
       "consumers": [
         "navigation"

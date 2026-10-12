@@ -452,7 +452,7 @@
       "id": "ida-surface-features-source",
       "path": "features/manifest.json",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored factual metadata",
       "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
@@ -468,7 +468,7 @@
       "id": "ida-preparation-features",
       "path": "preparation/features.json",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored preparation parameters",
       "acquisition": "Authored beside the other preparation recipes.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -484,7 +484,7 @@
       "id": "ida-surface-map-frame",
       "path": "presentation/surface-map.json",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
+      "credit": "css.earth contributors",
       "license": "Repository-authored presentation parameters",
       "acquisition": "Authored from the shared mesh convention.",
       "redistribution": "Repository-authored parameters; no imagery",
@@ -795,7 +795,7 @@
         ]
       },
       "origin": "https://doi.org/10.1006/icar.1996.0036",
-      "credit": "Published Hapke parameters: Helfenstein et al. (1996), doi:10.1006/icar.1996.0036. Selection and transcription: cssEarth.",
+      "credit": "Published Hapke parameters: Helfenstein et al. (1996), doi:10.1006/icar.1996.0036. Selection and transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
     },
     {

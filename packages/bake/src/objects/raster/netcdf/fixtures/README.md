@@ -101,7 +101,7 @@ variables:
 	double UNWRITTEN(lat) ;          UNWRITTEN:units = "K" ;   // declared, never written
 	char label(chars) ;              // "abcd"
 // global attributes:
-		:title = "cssEarth NetCDF-4 reader fixture" ;
+		:title = "css.earth NetCDF-4 reader fixture" ;
 }
 ```
 

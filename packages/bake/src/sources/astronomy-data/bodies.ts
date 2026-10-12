@@ -1,5 +1,5 @@
-// Matches the targets the ledger's sources name to cssEarth's own bodies; apply-structure.mts stores the result in the
-// ledger's `bodies` and `dataset_bodies` tables. A target first matches a body cssEarth
+// Matches the targets the ledger's sources name to css.earth's own bodies; apply-structure.mts stores the result in the
+// ledger's `bodies` and `dataset_bodies` tables. A target first matches a body css.earth
 // catalogues: a record in packages/astronomy/data/bodies, a moon in site/source/moon-catalogues.json, or an object
 // package in src/objects. Sources spell one body many ways ("67P/Churyumov-Gerasimenko 1 (1969 R1)", "(4) Vesta",
 // "alp CMa (Sirius)", "S/2004 S 12", "Saturn rings"), so every alias in the name is tried. A target that matches nothing

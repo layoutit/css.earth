@@ -10,7 +10,7 @@ export interface Gesture { view: View; distance: number; points: Point[]; legs: 
   samplesPerFrame: number; holdFrames: number; jitter: number; noiseSeed: number; }
 export interface FrameNote { phase: string; x: number | null; y: number | null; apartDeg: number; cesium: { lonDeg: number; latDeg: number }; ours: { lonDeg: number; latDeg: number }; cesiumRotating: boolean; }
 /** One frame of a press as Cesium's controller receives it: the pointer's movement in the frame, whether Cesium turned
- * by viewport share (off the globe) rather than panned, and its pole and meridian after it, on cssEarth's screen. */
+ * by viewport share (off the globe) rather than panned, and its pole and meridian after it, on css.earth's screen. */
 export interface RecordedFrame { movement: [number, number, number, number] | null; rotating: boolean; pole: number[]; meridian: number[]; }
 
 // Whole milliseconds a frame: Cesium times its inertia with Date, which keeps none of the fraction.
@@ -29,7 +29,7 @@ export function randomGesture(oracle: Oracle, random: () => number): Gesture {
   const towardEyeDeg = (random() < .3 ? pick(70, 89.5) : pick(0, 70)) * (random() < .5 ? -1 : 1);
   const rollDeg = random() < .5 ? OPENING.rollDeg : random() < .5 ? 0 : pick(-40, 40);
   const view = { towardEyeDeg, lonDeg: pick(-180, 180), rollDeg }, distance = Math.exp(pick(Math.log(1.3), Math.log(14)));
-  // Points on cssEarth's screen in pixels: over the globe, or anywhere on the panel and a little past its edges.
+  // Points on css.earth's screen in pixels: over the globe, or anywhere on the panel and a little past its edges.
   const geo = oracle.geometry(), disc = geo.focal / Math.sqrt(distance * distance - 1), cx = geo.width / 2, cy = geo.height / 2;
   const onScreen = ([x, y]: Point) => x > -.1 * geo.width && x < 1.1 * geo.width && y > -.1 * geo.height && y < 1.1 * geo.height;
   const onGlobe = (): Point => { for (;;) { const r = Math.sqrt(random()) * .98 * disc, a = pick(0, 2 * Math.PI), q: Point = [cx + r * Math.cos(a), cy + r * Math.sin(a)]; if (onScreen(q)) return q; } };
@@ -137,7 +137,7 @@ export function createStress(oracle: Oracle, clock: VirtualClock) {
     },
     /** What Cesium does with the first `count` short gestures of a seed, for the engine's and the renderer's tests: the
      * screen, the start, each frame of the press and where the globe rests after its coast. Positions are in pixels from
-     * the panel's corner, as cssEarth's screen has them. Gestures that amplify rounding are left out. */
+     * the panel's corner, as css.earth's screen has them. Gestures that amplify rounding are left out. */
     record(seed: number, count: number, maximumFrames = 30) {
       begin();
       const digits = (values: readonly number[]) => values.map(value => Number(value.toPrecision(13)));

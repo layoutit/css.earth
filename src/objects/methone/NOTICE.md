@@ -6,7 +6,7 @@ data. Retain mission, calibration and archive credits.
 
 Measured shape: P. C. Thomas and colleagues (2013),
 DOI 10.1016/j.icarus.2013.07.022; NAIF PCK00011 BODY632_RADII.
-The analytic representation of the published dimensions is cssEarth data under
+The analytic representation of the published dimensions is css.earth data under
 the repository MIT license. Mission body orientation and reconstructed camera
 attitude: NASA/JPL NAIF Cassini SPICE kernel archive.
 

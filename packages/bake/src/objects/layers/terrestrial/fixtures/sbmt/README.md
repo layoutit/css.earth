@@ -2,14 +2,14 @@
 
 This is an optional native backend for the [shared oracle framework](../../../../../../../core/src/node/oracle/README.md).
 It runs the released Small Body Mapping Tool's readers, mesh intersection and
-texture-coordinate code, then compares saved results with cssEarth preparation
+texture-coordinate code, then compares saved results with css.earth preparation
 code. It supplies test evidence; it never supplies production source data,
 camera solutions, atlases or runtime assets.
 
 ```mermaid
 flowchart LR
   A[Pinned source files and query cases] --> B[Released SBMT and VTK]
-  A --> C[cssEarth preparation code]
+  A --> C[css.earth preparation code]
   B --> D[Committed reference fixture]
   C --> E[Comparison by stage]
   D --> E
@@ -96,9 +96,9 @@ and incomplete stages fail explicitly.
 | --- | --- | --- |
 | SUM and INFO | Native `SumFileReader` / `InfoFileReader`, independently decoded in `candidate.mts` | Origin, corner order, normalization, km units and camera basis |
 | Rectangular and square images | NEAR 537×244; AMICA 1024×1024; synthetic 2×2 | Raw detector dimensions and unequal pixel scales are explicit |
-| Source geometry and visibility | Native `loadPDSShapeModel`, `vtkOBBTree`, cssEarth `parsePdsVertexFacetShape` and `mesh.intersect` | 121 rays per case; nearest hits, off-limb misses, multiple intersections and concavity |
-| Footprints | Native `SmallBodyModel.computeFrustumIntersection` | Diagnostics only; they do not prove a cssEarth footprint implementation |
-| Image coordinates and UVs | Native `PolyDataUtil.generateTextureCoordinates` versus cssEarth `project` | Flips, quarter turns, crop, boundary, off-image and behind-camera cases |
+| Source geometry and visibility | Native `loadPDSShapeModel`, `vtkOBBTree`, css.earth `parsePdsVertexFacetShape` and `mesh.intersect` | 121 rays per case; nearest hits, off-limb misses, multiple intersections and concavity |
+| Footprints | Native `SmallBodyModel.computeFrustumIntersection` | Diagnostics only; they do not prove a css.earth footprint implementation |
+| Image coordinates and UVs | Native `PolyDataUtil.generateTextureCoordinates` versus css.earth `project` | Flips, quarter turns, crop, boundary, off-image and behind-camera cases |
 | FITS image values | SBMT's bundled nom-tam-fits versus `readFitsImage` | Raw axes, encoding and up to 65 samples per image; no photometric claim |
 | FITS encodings and extensions | Existing [FITS oracle](../../../../../../../core/src/node/oracle/README.md) and `packages/bake/src/objects/cameras/core.oracle.test.mts` | Not reimplemented here |
 | PDS3/PDS4 image and geometry planes | Existing [PDS oracle comparisons](../../../../../../../core/src/node/oracle/README.md) | This backend consumes SUM/INFO, not SPICE kernels or geometry cubes |
@@ -124,7 +124,7 @@ comparison uses a physical-distance tolerance.
 | Itokawa SUM | 1.0021 px | **Different** |
 | Synthetic concave prism | 0.0541 px | Match |
 
-SBMT's angular UV approximation and cssEarth's projective camera are not
+SBMT's angular UV approximation and css.earth's projective camera are not
 identical. The Itokawa difference stays visible and makes `check.mts` exit 1.
 Do not fit a camera to the native UV fixture, loosen the limit or adopt SBMT's
 approximation to manufacture agreement.

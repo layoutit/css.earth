@@ -7,7 +7,7 @@ https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php and
 https://dawngis.dlr.de/data/Vesta/dtm_vesta.php.
 
 Scientific facts: NASA Science. Physical and orbital data: NASA/JPL Horizons.
-The prepared display and its simplification are cssEarth's interpretation;
+The prepared display and its simplification are css.earth's interpretation;
 the source institutions do not endorse it.
 
 Clementine ratio composite: NASA/JPL-Caltech/UCLA/MPS/DLR/IDA; DLR Institute of Planetary Research. Retain the published scientific attribution and source notices.

@@ -46,7 +46,7 @@ Lim and Nittler (2009) recalibrated the X-ray data of [Nittler et al. (2001)](ht
 
 The mesh is simplified with meshoptimizer 1.2.0 to 796 faces, one connected component with Euler characteristic two. Measured from 3,200 equal-area samples of the full source, mean / 95th percentile / sampled maximum nearest-surface distances were 52.033 / 132.260 / 275.739 m. This is a one-direction sample, not an exhaustive Hausdorff bound.
 
-The [shared SBMT oracle](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md) reads the full Gaskell ver128q mesh and NEAR MSI exposure M0146235607 directly. The native reference and cssEarth give identical sampled image values and matching visible intercepts; the maximum tested UV difference is 0.0817 pixel. This does not qualify the frame's physical registration.
+The [shared SBMT oracle](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md) reads the full Gaskell ver128q mesh and NEAR MSI exposure M0146235607 directly. The native reference and css.earth give identical sampled image values and matching visible intercepts; the maximum tested UV difference is 0.0817 pixel. This does not qualify the frame's physical registration.
 
 The native-value check compares all seven samplers with independent reads of the original ISIS labels. At most 0.13% of valid native samples in any band lie outside the common display range.
 

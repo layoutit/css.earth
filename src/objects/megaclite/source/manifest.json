@@ -5,7 +5,7 @@
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
       "origin": "https://ssd.jpl.nasa.gov/horizons/",
-      "credit": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "credit": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by css.earth with an assumed geometric albedo of 0.04",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -39,8 +39,8 @@
         "kind": "local",
         "reason": "Project-authored grid marking unavailable surface imagery."
       },
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth missing-coverage grid",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth missing-coverage grid",
       "license": "MIT",
       "consumers": [
         "surfaces"
@@ -92,7 +92,7 @@
       "id": "prepared-source-context",
       "path": "presentation/context.png",
       "origin": "https://ssd.jpl.nasa.gov/horizons/",
-      "credit": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "credit": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by css.earth with an assumed geometric albedo of 0.04",
       "license": "Authored display of scientific model; source attribution retained.",
       "consumers": [
         "navigation"

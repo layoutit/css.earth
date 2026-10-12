@@ -1,6 +1,6 @@
 # @cssearth/astronomy
 
-Time scales, float64 vectors and the reference-frame tree behind [cssEarth](https://github.com/layoutit/cssEarth).
+Time scales, float64 vectors and the reference-frame tree behind [css.earth](https://github.com/layoutit/css.earth).
 
 Shared source contracts come from `@cssearth/objects`; there are no browser globals. Everything here runs in Node, a worker, or the browser.
 
@@ -16,7 +16,7 @@ Maintainers add physical values and retained orbit data in
 `data/bodies/<id>.json`. Acquisition choices and source URLs stay with each
 record; independent shared vector samples live in `data/fixtures/`.
 `pnpm build`, `pnpm test` and `pnpm typecheck` assemble their TypeScript exports
-locally. Building needs neither source downloads nor the cssEarth application.
+locally. Building needs neither source downloads nor the css.earth application.
 
 ```bash
 npm install @cssearth/astronomy

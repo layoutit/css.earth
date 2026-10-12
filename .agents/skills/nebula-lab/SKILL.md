@@ -1,6 +1,6 @@
 ---
 name: nebula-lab
-description: "The Nebula Lab: cssEarth's volumetric baking lab. Turn images plus a spatial prior into a 3D emission field and bake it into stacked axis-aligned slab textures PolyCSS composites. Use to understand what the lab is, its packages, boundaries, routes and baking methods, to process a new image candidate end to end, and to avoid the defects that cost whole rounds before."
+description: "The Nebula Lab: css.earth's volumetric baking lab. Turn images plus a spatial prior into a 3D emission field and bake it into stacked axis-aligned slab textures PolyCSS composites. Use to understand what the lab is, its packages, boundaries, routes and baking methods, to process a new image candidate end to end, and to avoid the defects that cost whole rounds before."
 ---
 
 # Nebula Lab
@@ -61,7 +61,7 @@ remain unchanged and report when over budget. See
 - **volume-viewer** — the retained-DOM scene.
 
 `pnpm check:nebula-boundaries` (an alias of `pnpm check:architecture`, whose `nebula-boundaries` rule this is) enforces the graph: a package may import itself, anything may
-import `@cssearth/bake/volume`, and only `lab` may import the rest. **In the cssEarth app only preparation code
+import `@cssearth/bake/volume`, and only `lab` may import the rest. **In the css.earth app only preparation code
 (`packages/bake/`, `packages/telescope-cli/` and `site/build/`) may import `@cssearth/bake`; the runtime imports
 nothing from it, not even a type.** Never widen the rule to make code fit;
 move the pure part down and keep a lab-side re-export shim. Moving code between packages

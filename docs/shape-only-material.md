@@ -1,7 +1,7 @@
 # Shape-only material
 
 Every terrestrial `shapeViews` dataset uses the same neutral gray: **#808080 in
-sRGB**. This is a cssEarth display convention, not measured color, physical
+sRGB**. This is a css.earth display convention, not measured color, physical
 albedo, or any external standard. The model supplies the shape; the material
 adds no craters, mottling, grid lines, or other invented surface detail.
 

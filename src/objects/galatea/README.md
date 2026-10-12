@@ -16,7 +16,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - The smooth ellipsoid interpolates those three measurements; it contains no measured craters or local elevation.
 
-- All surface texels are unavailable. The existing preparation recipe marks its constant source material as no-data and paints cssEarth's standard neutral grid.
+- All surface texels are unavailable. The existing preparation recipe marks its constant source material as no-data and paints css.earth's standard neutral grid.
 
 - The pole and rotation follow that pinned IAU/NAIF PCK; aligning the long ellipsoid axis toward Neptune is a synchronous model assumption, not a resolved cartographic control network.
 

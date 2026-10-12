@@ -25,6 +25,6 @@ export function ancestorsOf(id: string): readonly NavigableObject[] {
 
 export function requireObject(id: string) {
   const object = OBJECTS.find(candidate => candidate.id === id);
-  if (!object) throw new Error(`Unknown cssEarth object: ${id}`);
+  if (!object) throw new Error(`Unknown css.earth object: ${id}`);
   return object;
 }

@@ -5,7 +5,7 @@
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
       "origin": "https://arxiv.org/abs/2401.04634",
-      "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage visualization",
+      "credit": "Karkoschka (2001); French et al. (2024); css.earth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
       "licenseEvidence": [
         "https://arxiv.org/abs/2401.04634"
@@ -36,7 +36,7 @@
       "id": "model-surface",
       "path": "material/neutral.png",
       "origin": "https://arxiv.org/abs/2401.04634",
-      "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage visualization",
+      "credit": "Karkoschka (2001); French et al. (2024); css.earth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
       "licenseEvidence": [
         "https://arxiv.org/abs/2401.04634"
@@ -117,7 +117,7 @@
       "id": "prepared-ellipsoid-context",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2401.04634",
-      "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage grid",
+      "credit": "Karkoschka (2001); French et al. (2024); css.earth standard no-coverage grid",
       "license": "MIT display representation from published scientific measurements; retain source citation.",
       "consumers": [
         "navigation"

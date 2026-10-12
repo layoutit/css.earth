@@ -8,7 +8,7 @@ both Abergel and Stooke. Retain the product identity and those credits with
 derived geometry. This is publicly distributed scientific archive data; no
 blanket ESA image licence is asserted for the numerical table.
 
-The gray surface grid and display orientation are cssEarth visualization choices
+The gray surface grid and display orientation are css.earth visualization choices
 under the repository MIT licence. The material is not measured albedo.
 
 Ephemeris: NASA/JPL Horizons; exact queries and raw responses accompany the source.

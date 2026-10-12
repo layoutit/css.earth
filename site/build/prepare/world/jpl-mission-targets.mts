@@ -3,7 +3,7 @@ import { isRecord } from '@cssearth/core';
 
 // This is identity binding, not an editorial selection: membership comes only
 // from the vendored JPL target table. Unbound JPL targets are simply not yet
-// registered cssEarth objects.
+// registered css.earth objects.
 const objectBySbdbId = Object.freeze({
   a0000001: 'ceres',
   a0000004: 'vesta',
@@ -49,7 +49,7 @@ function sourceTargetIds(source: unknown) {
 
 const sourceIds = sourceTargetIds(targets);
 for (const sbdbId of Object.keys(objectBySbdbId)) if (!sourceIds.has(sbdbId)) {
-  throw new TypeError(`cssEarth mission-target binding is absent from the JPL source: ${sbdbId}.`);
+  throw new TypeError(`css.earth mission-target binding is absent from the JPL source: ${sbdbId}.`);
 }
 
 export const JPL_MISSION_TARGET_OBJECT_IDS = Object.freeze(Object.values(objectBySbdbId));

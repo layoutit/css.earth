@@ -64,7 +64,7 @@
     },
     {
       "id": "unmapped-surface-grid",
-      "subject": "cssEarth missing-coverage grid as the surface",
+      "subject": "css.earth missing-coverage grid as the surface",
       "status": "included",
       "finding": "Surface detail is unresolved, so the manifest supplies the project-authored missing-data grid to mark unmapped terrain, with Shadows off by default and no reconstruction from surface spectra.",
       "evidence": [

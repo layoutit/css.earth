@@ -37,8 +37,8 @@
     {
       "id": "saturn-approved-fixed-material",
       "path": "approved/saturn-fixed-material.webp",
-      "origin": "accepted cssEarth Saturn fixed-camera material prepared from the declared Saturn surface, rings, camera, lighting, and atmosphere model",
-      "credit": "cssEarth adapter preparation",
+      "origin": "accepted css.earth Saturn fixed-camera material prepared from the declared Saturn surface, rings, camera, lighting, and atmosphere model",
+      "credit": "css.earth adapter preparation",
       "license": "project-authored prepared presentation",
       "acquisition": "checked accepted preparation snapshot; decoded RGBA is validated before derivative generation",
       "redistribution": "project runtime asset",
@@ -47,7 +47,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+        "reason": "The retained record explicitly identifies a css.earth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
       }
     },
     {
@@ -108,7 +108,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+        "reason": "The retained record explicitly identifies a css.earth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
       }
     },
     {
@@ -280,7 +280,7 @@
       "id": "saturn-authored-preparation-rings",
       "path": "preparation/rings.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -296,7 +296,7 @@
       "id": "saturn-authored-preparation-navigation",
       "path": "preparation/navigation.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -335,7 +335,7 @@
       "id": "saturn-authored-content",
       "path": "content/object.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -351,7 +351,7 @@
       "id": "saturn-authored-geometry",
       "path": "preparation/geometry.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -367,7 +367,7 @@
       "id": "saturn-authored-surface",
       "path": "preparation/surface.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -383,7 +383,7 @@
       "id": "saturn-authored-materials",
       "path": "preparation/materials.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -399,7 +399,7 @@
       "id": "saturn-authored-radial-motion",
       "path": "preparation/radial-motion.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -415,7 +415,7 @@
       "id": "saturn-authored-presentation",
       "path": "preparation/presentation.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -431,7 +431,7 @@
       "id": "saturn-authored-charts",
       "path": "content/charts.json",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "credit": "css.earth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -447,7 +447,7 @@
       "id": "saturn-authored-acquisition",
       "path": "preparation/acquisition.json",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
-      "credit": "cssEarth and the institutional sources identified in this recipe",
+      "credit": "css.earth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -463,7 +463,7 @@
       "id": "saturn-authored-satellite-catalog",
       "path": "preparation/satellite-catalog.json",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
-      "credit": "cssEarth and the institutional sources identified in this recipe",
+      "credit": "css.earth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -1665,7 +1665,7 @@
       "id": "saturn-authored-observations",
       "path": "preparation/observations.json",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
-      "credit": "cssEarth and the institutional sources identified in the recipe",
+      "credit": "css.earth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
@@ -1808,7 +1808,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -1826,7 +1826,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -1844,7 +1844,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -1862,7 +1862,7 @@
         ]
       },
       "origin": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.tab",
-      "credit": "E. Karkoschka (1998), Icarus 133, 134-146, archived by the NASA Planetary Data System Atmospheres Node; color computation: cssEarth.",
+      "credit": "E. Karkoschka (1998), Icarus 133, 134-146, archived by the NASA Planetary Data System Atmospheres Node; color computation: css.earth.",
       "acquisition": "Color computed once from the cited PDS table and recorded in a project document; the table itself is not stored with the body."
     },
     {
@@ -1880,7 +1880,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -1898,7 +1898,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: css.earth.",
       "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
     },
     {
@@ -1922,7 +1922,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: css.earth.",
       "acquisition": "Derived by packages/bake/authoring/saturn/display-limb.mts from the per-filter records and the cited PDS table; the table itself is not stored with the body."
     },
     {
@@ -1946,7 +1946,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: css.earth.",
       "acquisition": "Derived by packages/bake/authoring/saturn/display-limb.mts from the per-filter records and the cited PDS table; the table itself is not stored with the body."
     },
     {
@@ -1970,7 +1970,7 @@
         ]
       },
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
-      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: cssEarth.",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: css.earth.",
       "acquisition": "Derived by packages/bake/authoring/saturn/display-limb.mts from the per-filter records and the cited PDS table; the table itself is not stored with the body."
     }
   ]

@@ -74,6 +74,6 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   return Object.freeze({ entries: Object.freeze(entries), objects, sceneObjects: scenes, worldObjects, requireSceneObject(id: string) {
     const object = scenes.find(candidate => candidate.id === id);
     if (object) return object;
-    throw new Error(`Unknown cssEarth object: ${id}`);
+    throw new Error(`Unknown css.earth object: ${id}`);
   } });
 }

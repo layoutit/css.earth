@@ -5,7 +5,7 @@
       "id": "pallene-ellipsoid",
       "path": "shape/ellipsoid.tab",
       "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
-      "credit": "Thomas et al. (2013); NAIF/JPL; cssEarth analytic sampling",
+      "credit": "Thomas et al. (2013); NAIF/JPL; css.earth analytic sampling",
       "license": "Published measurement values; MIT analytic representation",
       "licenseEvidence": [
         "measurements.json",
@@ -268,7 +268,7 @@
       "id": "prepared-cassini-context",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
-      "credit": "NASA/JPL-Caltech/Space Science Institute; Thomas et al.; cssEarth preparation",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; Thomas et al.; css.earth preparation",
       "license": "NASA/PDS data; MIT preparation",
       "consumers": [
         "navigation"

@@ -29,20 +29,20 @@ export const NAVIGATION_GITHUB_SOURCE = Object.freeze({
 export const NAVIGATION_SETTINGS_SOURCE = Object.freeze({
   path: "settings-mark.svg",
   origin: "Project-authored navigation control",
-  credit: "cssEarth",
+  credit: "css.earth",
   license: "MIT",
 });
 
 export const NAVIGATION_DOWNLOAD_SOURCE = Object.freeze({
   path: "download-mark.svg",
   origin: "Project-authored navigation control",
-  credit: "cssEarth",
+  credit: "css.earth",
   license: "MIT",
 });
 
 export const NAVIGATION_SHARE_SOURCE = Object.freeze({
   path: "share-mark.svg",
   origin: "Project-authored navigation control",
-  credit: "cssEarth",
+  credit: "css.earth",
   license: "MIT",
 });

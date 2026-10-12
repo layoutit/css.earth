@@ -30,5 +30,5 @@ The ammonia band ratio and Organa coordinate follow W. M. Grundy et al.,
 *Surface compositions across Pluto and Charon*, Science 351 (2016),
 DOI 10.1126/science.aad9189, supplementary methods p. 3 and Fig. S6.
 The supplementary paper is retained as a method reference, not relicensed or
-delivered as a runtime asset. Organa is an informal mission name. cssEarth's
+delivered as a runtime asset. Organa is an informal mission name. css.earth's
 band-map preparation, water-depth diagnostic and display recipes are MIT.

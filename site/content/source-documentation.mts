@@ -68,7 +68,7 @@ export function sourceDocumentation(objectId: string, name: string) {
     if (!existsSync(resolve(root, path))) throw new Error(`Missing source document: ${path}`);
     checked.add(path);
   }
-  return { href: `https://github.com/layoutit/cssEarth/blob/${revision}/${path}`,
+  return { href: `https://github.com/layoutit/css.earth/blob/${revision}/${path}`,
     label: creditLabel(sourceProviders(objectId)) };
 }
 

@@ -1,6 +1,6 @@
 # Milky Way preparation
 
-Nobody has seen the Milky Way from outside. cssEarth draws its bulge as a simulated volume and the rest as catalogued objects, each a sharp dot at its published position, over a faint backing that shows the galaxy's overall shape. From inside the Solar System the sky is NASA's Milky Way map. Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Nobody has seen the Milky Way from outside. css.earth draws its bulge as a simulated volume and the rest as catalogued objects, each a sharp dot at its published position, over a faint backing that shows the galaxy's overall shape. From inside the Solar System the sky is NASA's Milky Way map. Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Sources
 

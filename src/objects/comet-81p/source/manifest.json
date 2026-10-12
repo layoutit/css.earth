@@ -73,11 +73,11 @@
     {
       "id": "model-surface",
       "path": "material/model-coverage.png",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "NASA/Stardust/PDS plate provenance; cssEarth gray coverage grid",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "NASA/Stardust/PDS plate provenance; css.earth gray coverage grid",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in coverage material, reproduced from the original PDS plate flags during preparation.",
       "redistribution": "Authored neutral material under the repository MIT license.",
@@ -179,11 +179,11 @@
     {
       "id": "n2073we02-rr-controlPath",
       "path": "photography/navcam/n2073we02_rr.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -267,11 +267,11 @@
     {
       "id": "n2075we02-rr-controlPath",
       "path": "photography/navcam/n2075we02_rr.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -354,11 +354,11 @@
     {
       "id": "n2077we02-rr-controlPath",
       "path": "photography/navcam/n2077we02_rr.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -509,11 +509,11 @@
     {
       "id": "n2079we02-rr-controlPath",
       "path": "photography/navcam/n2079we02_rr.json",
-      "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth source-camera registration",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "css.earth source-camera registration",
       "license": "MIT",
       "licenseEvidence": [
-        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
@@ -529,7 +529,7 @@
       "id": "comet-81p-features-landmarks",
       "path": "features/landmarks.json",
       "origin": "Authored surface-place records with publication references and placement limits.",
-      "credit": "cssEarth contributors; Stardust science team",
+      "credit": "css.earth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
       "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
       "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
@@ -545,7 +545,7 @@
       "id": "comet-81p-features-manifest",
       "path": "features/manifest.json",
       "origin": "Authored surface-place records with publication references and placement limits.",
-      "credit": "cssEarth contributors; Stardust science team",
+      "credit": "css.earth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
       "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
       "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
@@ -561,7 +561,7 @@
       "id": "comet-81p-preparation-features",
       "path": "preparation/features.json",
       "origin": "Authored surface-place records with publication references and placement limits.",
-      "credit": "cssEarth contributors; Stardust science team",
+      "credit": "css.earth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
       "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
       "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
@@ -577,7 +577,7 @@
       "id": "comet-81p-presentation-surface-map",
       "path": "presentation/surface-map.json",
       "origin": "Authored surface-place records with publication references and placement limits.",
-      "credit": "cssEarth contributors; Stardust science team",
+      "credit": "css.earth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
       "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
       "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
@@ -593,7 +593,7 @@
       "id": "comet-81p-features-image-registration-json",
       "path": "features/image-registration.json",
       "origin": "Measured image correspondences and explicit source-camera projection recipe.",
-      "credit": "cssEarth contributors; Stardust science team",
+      "credit": "css.earth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
       "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
       "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
@@ -609,7 +609,7 @@
       "id": "comet-81p-features-control-measurements-json",
       "path": "features/control-measurements.json",
       "origin": "Local image-correlation measurements, manual diagram controls and recorded selection limits.",
-      "credit": "cssEarth contributors; Stardust science team",
+      "credit": "css.earth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
       "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
       "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",
@@ -625,7 +625,7 @@
       "id": "comet-81p-features-evidence-image-landmarks-json",
       "path": "features/evidence/image-landmarks.json",
       "origin": "Generated residuals and source-mesh placement evidence.",
-      "credit": "cssEarth contributors; Stardust science team",
+      "credit": "css.earth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
       "acquisition": "Checked in; landmark coordinates and evidence regenerate with project-encounter-landmarks.mts.",
       "redistribution": "Factual measurements and authored compilation; underlying source credits retained.",

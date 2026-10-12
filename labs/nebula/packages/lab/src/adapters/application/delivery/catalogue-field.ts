@@ -1,2 +1,2 @@
-/** Compatibility bridge to the cssEarth preparation adapter. */
+/** Compatibility bridge to the css.earth preparation adapter. */
 export * from '@cssearth/bake/nebula';

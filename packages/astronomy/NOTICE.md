@@ -1,6 +1,6 @@
 # Astronomy notice
 
-`@cssearth/astronomy` is cssEarth's own package, by Juan Cruz Fortunatti,
+`@cssearth/astronomy` is css.earth's own package, by Juan Cruz Fortunatti,
 copyright (c) 2026, distributed under the MIT License in `LICENSE`.
 
 The package embeds published ephemeris models: the VSOP87A planetary series
@@ -10,7 +10,7 @@ Their citations and accuracy statements are carried inside the source files
 themselves.
 
 The repository-only `source/scene-epoch` directory retains seven NASA/JPL
-Horizons API responses for cssEarth's fixed-date scene preparation. Its manifest
+Horizons API responses for css.earth's fixed-date scene preparation. Its manifest
 records the exact queries; its README describes the time conversion,
 center conventions and limits. These snapshots are not exported as a general-time
 model by the astronomy package. Credit: NASA/JPL Solar System Dynamics,
