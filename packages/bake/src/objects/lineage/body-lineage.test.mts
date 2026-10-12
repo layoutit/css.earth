@@ -46,6 +46,16 @@ test('controlled photographic inserts bind every consumed photograph alongside t
   assert.deepEqual(productSourceIds(await bodyLineage(root), 'surface').sort(), ['observation', 'unused']);
 });
 
+test('a sphere map reads the measurement its lighting bank takes the radius from, as its geometry', async t => {
+  const { root, rasterPath } = await fixture(t), recipe = await read(rasterPath);
+  recipe.lighting = { bank: 'sphere', metadata: { sourceRadius: 'unused.dat#radiusKm' } };
+  await writeFile(rasterPath, JSON.stringify(recipe));
+  const lineage = await bodyLineage(root), roles = productInputRoles(lineage, 'surface');
+  assert.deepEqual(roles.get('observation'), ['appearance']);
+  assert.deepEqual(roles.get('unused'), ['geometry']);
+  assert.deepEqual(productSourceIds(lineage, 'lighting'), []);
+});
+
 test('an acquired file depends on the file it was built from', async t => {
   const { root, source } = await fixture(t);
   await writeFile(resolve(source, 'preparation/acquisition.json'), JSON.stringify({ operations: [

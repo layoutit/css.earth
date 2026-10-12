@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { datasetSourceDetail, datasetContributors } from './dataset-context.mts';
+import { datasetSourceDetail, datasetContributors, shownDatasetContributors } from './dataset-context.mts';
 import { lineageSource, FACILITY_CATALOG_SCHEMA } from '@cssearth/objects/provenance';
 import type { ExplorationCatalog, ContributionGraph, CaptureAttribution } from '@cssearth/objects/provenance';
 const cited = <T,>(value: T) => ({ value, citations: [] });
@@ -33,4 +33,14 @@ test('contributors filter direct sources and keep the last unresolved reason for
   assert.deepEqual(datasetContributors('earth', 'normal', graph, catalog, []).missions, []);
   assert.deepEqual(datasetContributors('missing', 'normal', graph, catalog), { missions: [], facilities: [], notes: [] });
   assert.deepEqual(datasetContributors('earth', 'other', graph, catalog).notes, []);
+});
+test('a bank dataset shows the bank\'s own input, and the body\'s credit when the bank credits no machine', () => {
+  const edge = (objectId: string, sourceId: string, datasetId: string, facilityId: string) => ({ objectId, productId: datasetId, sourceId, datasetIds: [datasetId], attribution: { kind: 'facility' as const, facilityId, evidence: 'e' } });
+  const edges = [edge('nebula-volume', 'optical', 'optical', 'vst'), edge('nebula-volume', 'radio', 'optical', 'other'), edge('star', 'color', 'zone', 'other')];
+  const graph: ContributionGraph = { datasets: [], byObject: { 'nebula-volume': [0, 1], star: [2] }, byMission: {}, byFacility: {}, edges };
+  const shown = (objectId: string, id: string, bank: string, datasetId: string) => shownDatasetContributors(objectId, { id, volume: { objectId: bank, datasetId } }, graph, catalog).facilities.map(x => x.id);
+  assert.deepEqual(shown('nebula', 'optical', 'nebula-volume', 'optical'), ['vst']);
+  assert.deepEqual(shown('star', 'zone', 'star-zone', 'plane'), ['other']);
+  assert.deepEqual(shown('star', 'wind', 'star-wind', 'plane'), []);
+  assert.deepEqual(shownDatasetContributors('star', { id: 'zone' }, graph, catalog).facilities.map(x => x.id), ['other']);
 });

@@ -37,7 +37,11 @@ Each product records its label, the datasets it shows, its input IDs, parent
 products, interpretation and limitations. Acquisition operations
 (`source/preparation/acquisition.json`) add the file an input was built from, and
 its conversion recipe, as dependencies of that input. A dataset that borrows
-another dataset's plates has that dataset as its parent. A recipe may describe a
+another dataset's plates has that dataset as its parent. Every map of a sphere
+also reads, as its geometry, the measurement its lighting bank takes the radius
+from, so a planet's model maps credit the telescope that measured its size. A
+dataset drawn from a bank that credits no machine shows the card of the body it
+is drawn around. A recipe may describe a
 scientific model or an illustration; recording lineage does not turn either into
 an observation.
 
