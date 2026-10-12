@@ -13,7 +13,7 @@ export function objectSeo(object: Pick<import("../directory/objects.mts").Naviga
     description: object.description,
     canonical: new URL(object.route, SITE_ORIGIN).href,
     image: new URL(`/social/${socialId}.jpg`, SITE_ORIGIN).href,
-    imageAlt: `${object.name} in the cssEarth 3D explorer`,
+    imageAlt: `${object.name} in the css.earth 3D explorer`,
   };
 }
 
@@ -33,13 +33,13 @@ export function seoAtAddress(pathname: string, object: Parameters<typeof objectS
 
 /** schema.org for the home page: the site's name, which search results show beside its address. */
 export function websiteJsonLd() {
-  return { "@context": "https://schema.org", "@type": "WebSite", name: "cssEarth", alternateName: "css.earth", url: new URL("/", SITE_ORIGIN).href };
+  return { "@context": "https://schema.org", "@type": "WebSite", name: "css.earth", url: new URL("/", SITE_ORIGIN).href };
 }
 
-/** schema.org for a body's page: the pages from the site down its orbit chain (cssEarth › Sun › Mars › Phobos). */
+/** schema.org for a body's page: the pages from the site down its orbit chain (css.earth › Sun › Mars › Phobos). */
 export function breadcrumbJsonLd(trail: readonly { readonly name: string; readonly route: string }[]) {
   return { "@context": "https://schema.org", "@type": "BreadcrumbList",
-    itemListElement: [{ name: "cssEarth", route: "/" }, ...trail].map((step, index) => ({
+    itemListElement: [{ name: "css.earth", route: "/" }, ...trail].map((step, index) => ({
       "@type": "ListItem", position: index + 1, name: step.name, item: new URL(step.route, SITE_ORIGIN).href })) };
 }
 

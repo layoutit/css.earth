@@ -24,7 +24,7 @@ test("the running page keeps the site's head on `/` and writes an object's own h
 
 test("breadcrumbs follow the object tree from the Observable Universe down to the page", () => {
   const names = (id: string) => breadcrumbJsonLd(pageTrail(requireObject(id))).itemListElement.map(step => step.name);
-  assert.deepEqual(names("phobos"), ["cssEarth", "Observable Universe", "Nearby Universe", "Local Group", "Milky Way", "Solar System", "Mars system", "Phobos"]);
+  assert.deepEqual(names("phobos"), ["css.earth", "Observable Universe", "Nearby Universe", "Local Group", "Milky Way", "Solar System", "Mars system", "Phobos"]);
   assert.deepEqual(names("sun").slice(-3), ["Milky Way", "Solar System", "Sun"]);
   // Kepler-16 b orbits the A–B barycentre, which is no object: it is inside Kepler-16 A's system.
   assert.deepEqual(names("kepler-16ab-b").slice(-2), [requireObject("kepler-16-a-system").name, requireObject("kepler-16ab-b").name]);
