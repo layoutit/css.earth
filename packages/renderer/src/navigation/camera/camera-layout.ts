@@ -17,7 +17,7 @@ export const STAR_MAXIMUM_DIAMETER_PIXELS = 600;
 
 /** The camera plan with what its body's class adds to the prepared fit. A star's prepared camera carries the shares
  * every body has; its limit is the shell's, so no star is baked again to change it. */
-export function classFramedCamera<Camera extends { maximumBodyDiameterPixels?: number }>(camera: Camera, classification: unknown): Camera {
+export function classFramedCamera<Camera extends object>(camera: Camera, classification: unknown): Camera & { maximumBodyDiameterPixels?: number } {
   return classification === 'star' ? { ...camera, maximumBodyDiameterPixels: STAR_MAXIMUM_DIAMETER_PIXELS } : camera;
 }
 
