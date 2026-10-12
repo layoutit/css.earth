@@ -93,6 +93,7 @@ test('an archive whose addresses name their page needs no sourceUrl: a query ser
     ['https://zenodo.org/api/records/4558194/files/diviner.tiff/content', 'https://zenodo.org/records/4558194'],
     ['https://raw.githubusercontent.com/owner/repository/abc123/data/frame.fits', 'https://github.com/owner/repository/blob/abc123/data/frame.fits'],
     ['https://arxiv.org/pdf/1612.00834', 'https://arxiv.org/abs/1612.00834'],
+    ['https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat', 'https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/'],
   ] as const) assert.equal(archivePage(address), page, address);
   assert.equal(archivePage('https://vizier.cds.unistra.fr/viz-bin/asu-tsv', { '-source': 'I/355/gaiadr3' }), 'https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/355');
   assert.equal(archivePage('https://archive.example/frame-01.fits'), undefined, 'an archive not listed names its page in sourceUrl');

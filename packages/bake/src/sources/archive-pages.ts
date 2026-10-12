@@ -1,8 +1,9 @@
 /**
  * The page that presents what an archive address serves, where the address itself says so: a query service's own page,
- * the record a deposited file belongs to, a repository's view of a raw file. A manifest entry fetched from one of these
- * needs no `sourceUrl`; any other file names its page there (`author-source-records.ts`). Each page was fetched on
- * 2026-10-12, when 9,983 catalogue records that led with a file or a query address were given theirs.
+ * the record a deposited file belongs to, a repository's view of a raw file, the folder that lists a catalogue's files.
+ * A manifest entry fetched from one of these needs no `sourceUrl`; any other file names its page there
+ * (`author-source-records.ts`). Each page was fetched on 2026-10-12, when 9,983 catalogue records that led with a file
+ * or a query address were given theirs.
  */
 type Request = Readonly<Record<string, string>>;
 
@@ -20,6 +21,8 @@ const PAGES: readonly (readonly [RegExp, (match: RegExpExecArray, request: Reque
   [/^https:\/\/zenodo\.org\/(?:api\/)?records?\/(\d+)\/files\//u, match => `https://zenodo.org/records/${match[1]}`],
   [/^https:\/\/raw\.githubusercontent\.com\/([^/]+\/[^/]+)\/([^/]+)\/(.+)$/u, match => `https://github.com/${match[1]}/blob/${match[2]}/${match[3]}`],
   [/^https:\/\/arxiv\.org\/pdf\/(.+?)(?:\.pdf)?$/u, match => `https://arxiv.org/abs/${match[1]}`],
+  // A catalogue file at the CDS sits in a folder whose page lists it with the catalogue's ReadMe.
+  [/^(https:\/\/cdsarc\.cds\.unistra\.fr\/ftp\/.+\/)[^/?#]+/u, match => match[1]!],
 ];
 
 /** The page for an archive address, with the request sent to it when the address is a query service's; undefined for an archive not listed. */
