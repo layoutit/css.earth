@@ -468,6 +468,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       invalidatePolicy();
       refresh();
     },
+    /** The selected body is a star with nothing in orbit: a system of one (loneStarOtherSystems). */
+    loneStarSelected(): boolean {
+      const body = selectedEntry.body;
+      return 'classification' in body && body.classification === 'star' && !('orbit' in body && body.orbit) && !systemFade.isSystemStar(body.id);
+    },
     /** The radius of the picture attached to the selected body, a star's disc while its dataset shows; 0 for none. The other
      * stars' bodies stay dimmed around a star with nothing in orbit while that picture fills the view (loneStarOtherSystems). */
     setSelectionReach(reachM: number) {

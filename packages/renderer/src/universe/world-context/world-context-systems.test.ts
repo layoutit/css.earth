@@ -98,8 +98,8 @@ test('inside a placed star\'s system the bodies of every other system dim, as th
 test('a selected star with nothing in orbit is a system of one, and its disc keeps the other stars dim while it fills the view', () => {
   const points = [summary.focus, ...summary.bodies], at = (id: string) => points.findIndex(point => point.id === id), star = points[at('betelgeuse')]!;
   const calculate = createWorldContextPlanner(summary);
-  const emphasis = (distanceM: number, selectionReachM = 0, selectedId = 'betelgeuse') => {
-    const frame = calculate({ ...view(points.length), selectedId, selectionReachM, world: { referenceFrame: summary.frame.referenceFrame, epochJdTt: summary.frame.epochJdTt,
+  const emphasis = (distanceM: number, selectionReachM = 0, selectedId = 'betelgeuse', selectionPreview?: string) => {
+    const frame = calculate({ ...view(points.length), selectedId, selectionReachM, ...(selectionPreview ? { selectionPreview, navigationInFlight: true } : {}), world: { referenceFrame: summary.frame.referenceFrame, epochJdTt: summary.frame.epochJdTt,
       pose: { positionM: [star.positionM[0], star.positionM[1], star.positionM[2] + distanceM], orientationXyzw: [0, 0, 0, 1] } } });
     return ['betelgeuse', 'sun', 'trappist-1'].map(id => frame.projectedBodies.find(body => body.index === at(id))!.emphasis);
   };
@@ -112,6 +112,10 @@ test('a selected star with nothing in orbit is a system of one, and its disc kee
   assert.deepEqual(emphasis(32 * 100 * au, 100 * au), [1, 1, 1]);
   // Another body's page seen from beside the star dims nothing: the star is neither selected nor flown to.
   assert.deepEqual(emphasis(2e12, 0, 'sun'), [1, 1, 1]);
+  // A flight headed to the star dims the others as it arrives, before the star is the selection; the disc's reach is the
+  // selected body's, so it does not hold them for a destination.
+  assert.deepEqual(emphasis(2e12, 0, 'sun', 'betelgeuse'), [1, .3, .3]);
+  assert.deepEqual(emphasis(fullM, 100 * au, 'sun', 'betelgeuse'), [1, 1, 1]);
 });
 
 test('the planner client sends a system just before the first view that holds its bodies', async () => {

@@ -334,7 +334,7 @@
      translation, pulling the caption back across the body's projected limb. */
   .prepared-selected-body-label { font-size: 10.5px; line-height: 13.5px; height: 13.5px; }
 }
-/* A selected star's name over the picture attached to it (its disc, while that dataset shows) is written as a name over a
+/* A selected star's name over the picture attached to it (its disc, shell or corona, while that dataset shows) is written as a name over a
    nebula's picture is: white at full strength over a dark grey copy of itself one pixel down and right. The copy is the
    same text painted a second time under the name, no stroke, shadow or blend (selected-body-label.ts sets the mark). */
 .prepared-selected-body-label[data-label-backdrop="picture"] {

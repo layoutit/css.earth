@@ -22,7 +22,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type EdgeOnReconstruction, type CircumstellarOpacity } from '@cssearth/objects';
 import { alignDiscGrid } from './disc-aligned-grid.mts';
-import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, reachAbovePlane, tiltedRingDensity, type TiltedRing } from './tilted-ring.mts';
+import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, reachAbovePlane, ringLightBeyond, tiltedRingDensity, type TiltedRing } from './tilted-ring.mts';
 import { jwstAcquisition } from './jwst-acquisition.mts';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -305,8 +305,8 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
 
 const compass = (positionAngleDeg: number) => ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(((positionAngleDeg % 360) + 360) % 360 / 45) % 8]!;
 /** What a dataset's record says of its tilted ring: the published plane, and how its light was told from the outer disc's. */
-const tiltedRingReading = (ring: TiltedRing, measured: { ridgeUnits: number; endsUnits: number; mutualTiltDeg: number }) =>
-  ` An inner ring lies in a plane of its own: tilted ${ring.inclinationDeg}° with nodes at position angle ${ring.positionAngleDeg}° and its ${compass(ring.nearSidePositionAngleDeg)} side nearer (${ring.citation}; ${ring.nearSideSource}), ${measured.mutualTiltDeg.toFixed(0)}° from the disc's plane. Its light is what the image's median brightness in circles about its published sky centre (${ring.skyCentreSource}) holds above the level of the gap beyond it, out to ${measured.endsUnits.toFixed(0)} au from that centre, where the gap is lowest; its ridge lies ${measured.ridgeUnits.toFixed(0)} au from the centre. That light is drawn on the ring's plane, which holds the star, with a ${ring.heightUnits} au Gaussian height (${ring.heightSource}); the disc's profile is measured on the image less it, so no light is drawn twice.`;
+const tiltedRingReading = (ring: TiltedRing, measured: { ridgeUnits: number; endsUnits: number; mutualTiltDeg: number; reachUnits: number; lightBeyondGrid: number }) =>
+  ` An inner ring lies in a plane of its own: tilted ${ring.inclinationDeg}° with nodes at position angle ${ring.positionAngleDeg}° and its ${compass(ring.nearSidePositionAngleDeg)} side nearer (${ring.citation}; ${ring.nearSideSource}), ${measured.mutualTiltDeg.toFixed(0)}° from the disc's plane. Its light is what the image's median brightness in circles about its published sky centre (${ring.skyCentreSource}) holds above the level of the gap beyond it, out to ${measured.endsUnits.toFixed(0)} au from that centre, where the gap is lowest; its ridge lies ${measured.ridgeUnits.toFixed(0)} au from the centre. That light is drawn on the ring's plane, which holds the star, with a ${ring.heightUnits} au Gaussian height (${ring.heightSource}); the disc's profile is measured on the image less it, so no light is drawn twice. The ring's ridge, with three of its heights, reaches ${measured.reachUnits.toFixed(1)} au from the disc's plane; ${measured.lightBeyondGrid > 0 ? `its faint skirt climbs past the grid's height, and the ${(100 * measured.lightBeyondGrid).toFixed(2)}% of the ring's light that lies there is not drawn` : 'the grid holds all of its light'}.`;
 const smoothstep = (a: number, b: number, t: number) => { const u = Math.max(0, Math.min(1, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
 /** Filters of deposit bands, registered as recipes are parsed: a deposit's band is not a JWST band. */
 const DEPOSIT_FILTERS = new Map<string, string>();
@@ -511,9 +511,11 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
   const shown = shownChannels(dataset, sky, read.channels, innerMaskUnits, taperFromUnits, planeRadius);
   // The tilted ring leaves the outer disc's plane: a grid aligned with that plane has to be tall enough to hold it.
   const tiltedRing = tilted && { centreUnits: tilted.centreUnits, ridgeUnits: tilted.ridgeUnits, endsUnits: tilted.endsUnits, gapLevel: tilted.gapLevel, ridgeOverNoise: tilted.ridgeOverNoise,
-    mutualTiltDeg: mutualTiltDeg(dataset.tiltedRing!, drawnModel), reachUnits: reachAbovePlane(dataset.tiltedRing!, tilted, drawnModel) };
+    mutualTiltDeg: mutualTiltDeg(dataset.tiltedRing!, drawnModel), reachUnits: reachAbovePlane(dataset.tiltedRing!, tilted, drawnModel),
+    // What the aligned grid leaves out of the ring's faint skirt, which climbs past the ridge's reach; a cube holds it all.
+    lightBeyondGrid: recipe.grid.alignedDiscHalfHeightUnits === undefined ? 0 : ringLightBeyond(sky, dataset.tiltedRing!, tilted, drawnModel, recipe.grid.alignedDiscHalfHeightUnits) };
   if (tiltedRing && recipe.grid.alignedDiscHalfHeightUnits !== undefined && recipe.grid.alignedDiscHalfHeightUnits < tiltedRing.reachUnits)
-    throw new Error(`${dataset.id}: the tilted ring reaches ${tiltedRing.reachUnits.toFixed(1)} units from the disc plane; the aligned grid's half height (${recipe.grid.alignedDiscHalfHeightUnits}) must hold it.`);
+    throw new Error(`${dataset.id}: the tilted ring's ridge reaches ${tiltedRing.reachUnits.toFixed(1)} units from the disc plane; the aligned grid's half height (${recipe.grid.alignedDiscHalfHeightUnits}) must hold it.`);
   const aligned = recipe.grid.alignedDiscHalfHeightUnits === undefined ? undefined : alignDiscGrid(sky, shown, density, drawnModel, recipe.grid.alignedDiscHalfHeightUnits);
   const encoded = aligned ?? spreadAlong(sky, shown, density);
   return { kind: 'ring' as const, dataset, bands, geometry, fit, profileScore, cubeFaceShare, ...(centreDepthUnits === undefined ? {} : { centreDepthUnits }), ...(tiltedRing ? { tiltedRing } : {}), innerMaskUnits, taperFromUnits, radialProfile, differences, ...(aligned ? { aligned } : {}), ...(await finishDataset(dataset, sky, shown, encoded)) };

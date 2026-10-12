@@ -113,15 +113,18 @@ surrounding stars fill the view. That follows the camera's place, not the
 selection, with one exception. A star with nothing in orbit has no system, so
 a camera beside it is in none: with that star selected, or a flight headed to
 it, it is a system of one, and the other stars' bodies dim around it the same
-way. Where a picture is attached to the star (its disc, while that dataset
-shows), they stay dimmed while the picture fills the view: inside 8 of the
-radii its page frames, whole again by 32. The galaxy's catalogue dots follow
-the same rule. A hovered body is never dimmed. These multipliers do not decide
-label admission or navigation availability.
+way. A nebula's central star is such a star. Where a picture is attached to
+that star (its disc, while that dataset shows), they stay dimmed while the
+picture fills the view: inside 8 of the radii its page frames, whole again by
+32. The galaxy's catalogue dots follow the same rule. A star with a system
+keeps the system's own distances, whatever is attached to it. A hovered body
+is never dimmed. These multipliers do not decide label admission or
+navigation availability.
 
-The selected star's own name is then over its disc. It is written as a name
-over a nebula's picture is: white at full strength over a dark grey copy of
-itself one pixel down and right.
+A selected star's own name sits over the picture attached to it (its disc,
+shell or corona) while that dataset shows. It is then written as a name over
+a nebula's picture is: white at full strength over a dark grey copy of itself
+one pixel down and right. Other kinds of body keep the ordinary name.
 
 ## Verification
 

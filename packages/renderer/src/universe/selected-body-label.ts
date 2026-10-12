@@ -15,8 +15,8 @@ const VIEWPORT_EDGE_PX = 4;
 const HEADER_CLEARANCE_PX = 64;
 const FOOTER_CLEARANCE_PX = 30;
 
-/** `pictured`: a picture attached to the body (a star's disc) is drawn behind its name, which is then written as a name
- * over a nebula's picture is (world-context.css). */
+/** `pictured`: a picture attached to the body (a star's disc, shell or corona) is drawn behind its name, which is then
+ * written as a name over a nebula's picture is (world-context.css). */
 export interface SelectedLabelFlags { overview: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge; pictured?: boolean }
 interface SelectedLabelPlacement { left: number; top: number; rect: LabelScreenRect }
 

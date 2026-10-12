@@ -41,7 +41,7 @@
     {
       "id": "opacity-follows-brightness",
       "status": "included",
-      "finding": "The paper’s color scale is a 0.285 power. Opacity taken from the displayed color made the dust between the rings, 3% of the peak brightness, 82% opaque, with a median line of sight at 0.84. Opacity now follows the measured brightness and the column keeps the scale’s hue; the median line of sight is 0.125.",
+      "finding": "The paper’s color scale is a 0.285 power. Opacity taken from the displayed color made the dust between the rings, 3.3% of the top of the scale, 82% opaque, with a median line of sight at 0.84. Opacity now follows the measured brightness and the column keeps the scale’s hue; the median line of sight is 0.125.",
       "evidence": [
         "source/circumstellar.json",
         "source/provenance.json"

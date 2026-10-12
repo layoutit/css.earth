@@ -260,7 +260,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // The first `selectObject` always applies: the mounted default differs from a selection in its caption framing.
         let selectionApplied = false, selectedFramingScale = 1;
         const caption = () => previewCaption ?? captionBody;
-        const captionFlags = () => ({ overview: selectionPreview ? false : overview && !systemSelection, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge, pictured: previewCaption === null && attachedReachM() > 0 });
+        const captionFlags = () => ({ overview: selectionPreview ? false : overview && !systemSelection, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge, pictured: previewCaption === null && 'classification' in selected && selected.classification === 'star' && attachedReachM() > 0 });
         // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
         let companion: string | null = null;
         // The bank the selected body's scene will show once its flight delivers its dataset (`expectVolumeDataset`).
@@ -268,7 +268,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const detailStandIn = createDetailStandIn();
         // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
         const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...declaredVolumes.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
-        // The radius of the picture attached to the selected body, a star's disc while its dataset shows; 0 for none.
+        // The radius of the picture attached to the selected body (a star's disc, shell or corona) while its dataset shows; 0 for none.
         const attachedReachM = () => companion !== null && !subjectBanks.has(companion) ? datasets.framingRadiusM(companion) : 0;
         // Banks declared after this mount (`addBanks`) join its layers, and a free cloud becomes a subject as at mount.
         const bankMount = { add(volumes: typeof declaredVolumes, points: typeof declaredPoints, planes: typeof declaredPlanes) {
@@ -431,8 +431,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
-              // A star's disc dims nothing itself, but the other stars stay dimmed around the star while it fills the view.
-              const reachM = attachedReachM();
+              // A star's disc dims nothing itself, but around a star with nothing in orbit the other stars, markers and dots
+              // alike, stay dimmed while it fills the view. A star with a system keeps the system's own distances.
+              const reachM = spatial.loneStarSelected() ? attachedReachM() : 0;
               spatial.setSelectionReach(reachM);
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.

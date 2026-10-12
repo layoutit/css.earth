@@ -56,7 +56,7 @@
         "unitScale": 1000,
         "unit": "mJy/beam",
         "source": "Kraus et al. (2020), Science 369, 1233, Figure 1A, as printed in the accepted manuscript (ESO science paper eso2014a.pdf, page 20). Colors read up the figure’s color bar; its nine printed flux ticks calibrate a power transfer through zero. 1024 entries sample equal flux intervals. This is a false-color brightness display for millimeter emission, not visible color.",
-        "opacityFollowsBrightness": "The figure’s scale is a 0.285 power: it draws the dust between the rings, 3% of the peak brightness, at 58% red, and opacity taken from that color would make it 82% opaque. Opacity proportional to brightness keeps faint dust faint, so the rings are seen through it; the disc is therefore fainter here than in the paper’s figure."
+        "opacityFollowsBrightness": "The figure’s scale is a 0.285 power: it draws the dust between the rings, 3.3% of the top of the scale, at 56% red, and opacity taken from that color would make it 82% opaque. Opacity proportional to brightness keeps faint dust faint, so the rings are seen through it; the disc is therefore fainter here than in the paper’s figure."
       },
       "channels": {
         "red": [

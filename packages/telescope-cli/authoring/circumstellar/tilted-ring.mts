@@ -99,7 +99,33 @@ export function tiltedRingDensity(ring: TiltedRing, measure: TiltedRingMeasure, 
   };
 }
 
-/** How far the drawn ring reaches above and below another plane through the star, in units: the grid's half height must hold it. */
+/** The standard normal distribution's share below `v` (Abramowitz & Stegun 7.1.26, to 1.5e-7). */
+function normalBelow(v: number): number {
+  const x = Math.abs(v) / Math.SQRT2, t = 1 / (1 + 0.3275911 * x);
+  const erf = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+  return v >= 0 ? 0.5 * (1 + erf) : 0.5 * (1 - erf);
+}
+
+/** The share of the ring's light that a grid of half height `halfHeightUnits` about another plane through the star leaves
+ * out. The ring's light is drawn out to where its gap is lowest, well past its ridge, and that faint skirt climbs away from
+ * the other plane: each sky sample's light, with its Gaussian thickness, is counted where it lies farther than the grid is tall. */
+export function ringLightBeyond(sky: Pick<SkyPlane, 'size' | 'halfUnits' | 'step'>, ring: TiltedRing, measure: TiltedRingMeasure,
+  other: Parameters<typeof planeNormal>[0], halfHeightUnits: number): number {
+  const n = planeNormal(ring), o = planeNormal(other), spread = ring.heightUnits * Math.abs(o[2] / n[2]), { size, halfUnits, step } = sky;
+  let total = 0, beyond = 0;
+  for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
+    const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step, light = measure.brightness(x, y);
+    if (!(light > 0)) continue;
+    // Where the sight line crosses the ring's plane, and how far that point is from the other plane.
+    const z = -(-x * n[0] + y * n[1]) / n[2], height = -x * o[0] + y * o[1] + z * o[2];
+    total += light;
+    beyond += light * (1 - (normalBelow((halfHeightUnits - height) / spread) - normalBelow((-halfHeightUnits - height) / spread)));
+  }
+  return total > 0 ? beyond / total : 0;
+}
+
+/** How far the ring's ridge, with three of its heights, reaches above and below another plane through the star, in units:
+ * the grid's half height must hold it. The ring's faint skirt beyond the ridge may pass it (`ringLightBeyond`). */
 export function reachAbovePlane(ring: TiltedRing, measure: TiltedRingMeasure, other: Parameters<typeof planeNormal>[0]): number {
   const n = planeNormal(ring), o = planeNormal(other), [cx, cy] = measure.centreUnits;
   let reach = 0;

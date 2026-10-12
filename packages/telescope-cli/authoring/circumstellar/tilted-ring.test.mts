@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { profileDiscDensity, type DiscModel, type SkyPlane } from './disc-envelope.mts';
-import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, planeNormal, reachAbovePlane, tiltedRingDensity, type TiltedRing } from './tilted-ring.mts';
+import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, planeNormal, reachAbovePlane, ringLightBeyond, tiltedRingDensity, type TiltedRing } from './tilted-ring.mts';
 
 const ring: TiltedRing = { citation: 'a paper', url: 'https://example.org/paper', inclinationDeg: 25, positionAngleDeg: 105, nearSidePositionAngleDeg: 195, nearSideSource: 'its figure',
   skyCentreArcsec: [0.2, -0.1], skyCentreSource: 'its table', heightUnits: 0.6, heightSource: 'its model' };
@@ -42,7 +42,14 @@ test('the ring is the light above its gap, and no more', () => {
   let discColumn = 0, ringColumn = 0;
   for (let z = -30; z <= 30; z += 0.01) { discColumn += disc(cx + 6, cy, z); ringColumn += tilted(cx + 6, cy, z); }
   assert.ok(Math.abs(ringColumn / discColumn / (measure.brightness(cx + 6, cy) / level) - 1) < 0.01, `the columns stand as ${ringColumn / discColumn}`);
-  assert.ok(reachAbovePlane(ring, measure, outer) > 6 * Math.sin(40 * Math.PI / 180));
+  // The ridge of radius 6, on planes 49 degrees apart, climbs at most 6 sin 49 / cos 25 from the other plane, plus three heights.
+  const reach = reachAbovePlane(ring, measure, outer), d = Math.PI / 180, climb = 6 * Math.sin(mutualTiltDeg(ring, outer) * d) / Math.cos(25 * d);
+  assert.ok(reach > climb && reach < climb + 3 * ring.heightUnits + 1.2, `the ridge reaches ${reach}`);
+  // A grid as tall as that leaves out only the faint skirt beyond the ridge; a short one cuts the ring, a tall one nothing.
+  const cut = (halfHeight: number) => ringLightBeyond(sky, ring, measure, outer, halfHeight);
+  assert.ok(cut(reach) > 0 && cut(reach) < 0.02, `past the ridge's reach: ${cut(reach)}`);
+  assert.ok(cut(2) > 0.3 && cut(2) < 1, `a grid 2 units tall: ${cut(2)}`);
+  assert.ok(cut(40) < 1e-9);
 });
 
 test('a tilted ring states its plane, its centre and its height', () => {
