@@ -20,13 +20,13 @@
     "yawBounded": false,
     "responsiveFit": {
       "model": "continuous-aspect-smoothstep",
-      "portraitBaseWidthShare": 0.34,
-      "narrowPortraitWidthShareGain": 0.08,
-      "landscapeWidthShareGain": 0.02,
+      "portraitBaseWidthShare": 0.29104,
+      "narrowPortraitWidthShareGain": 0.06848,
+      "landscapeWidthShareGain": 0.01712,
       "narrowPortraitAspectRatio": 0.46,
       "portraitAspectRatio": 0.75,
       "squareAspectRatio": 1,
-      "maximumHeightShare": 0.61,
+      "maximumHeightShare": 0.52216,
       "maximumMobilePreviewShare": 0.925,
       "minimumZoom": 0.42,
       "maximumZoom": 2
