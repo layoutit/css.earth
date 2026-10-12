@@ -16,14 +16,20 @@
     {
       "location": "public",
       "filename": "proxima-centauri-b-arrival.webp",
-      "bytes": 31900,
-      "sha256": "cfe6634008c52a1218a885027910163ab5b1152be7af0f02e01cb5473ddc3ee5"
+      "bytes": 35364,
+      "sha256": "db5608f4abc9aee7b01d048a4a2d164d5102cd0811317a7697e19a524bb3afd7"
     },
     {
       "location": "public",
       "filename": "proxima-centauri-b-billboard.webp",
-      "bytes": 5264,
-      "sha256": "62835bab4522c2c35fd03801573e1b1f07433ea6ffc4aa0b5046ef45b12eaf4c"
+      "bytes": 6082,
+      "sha256": "014aa028002f421abd900313bf315b6c9f9c64c5521e0c27783f0957da1f648d"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-dataset-climate-model.webp",
+      "bytes": 818,
+      "sha256": "59c5e5246e4737ee06fb47d906c441e8ae095c912a35982027e972671261ecb7"
     },
     {
       "location": "public",
@@ -33,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "proxima-centauri-b-poles-climate-model@2x.webp",
+      "bytes": 32812,
+      "sha256": "ed0e7e8b914fe2e7492e7019a50c5a3ba2ace5d8c53e636c0624599bf6cbf290"
+    },
+    {
+      "location": "public",
       "filename": "proxima-centauri-b-poles-shape@2x.webp",
       "bytes": 1340,
       "sha256": "419f34a3395ff1e0303e350a624d11d4307e5a0a62c8ebc9dc54cb0dba167256"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-surface-climate-model@2x.webp",
+      "bytes": 136922,
+      "sha256": "e93fe5389677b5c735e692209de494c522f1fd74b9b2332376784983a79946b2"
     },
     {
       "location": "public",
@@ -52,14 +70,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 328,
-      "sha256": "5e1022dc80a820236d65d4775cb0ddf9b89db470cbc3df3542d77f6ab1c44bdf"
+      "bytes": 336,
+      "sha256": "4a9efd62f3b75c78026ae2c6829fd6dc3700b5876d632d3ebd7c350ebd4430ca"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18022,
-      "sha256": "f67c4655a420828ba3278c8d2ee54f6f1fae69743fb09c3559c814ff34ce9cb2"
+      "bytes": 18249,
+      "sha256": "e7632322da7ecdd63b894d94ea0a3691c4cc66b4482a62052bbb0068353b46f3"
     },
     {
       "location": "prepared",
@@ -70,14 +88,14 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 3040,
-      "sha256": "c939b5cad5176c0d3bb719f910405c81d72074caf56a2630134692bfb8e6df87"
+      "bytes": 3388,
+      "sha256": "9c609f1da87bab67d15a4d481044d1c9b68af67ea4dcc18faa1f3c22eb6df813"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 984,
-      "sha256": "00535b730e05c7b6e1f5d88e90a20b82222493a040bd754cf9dd424bfc9a6498"
+      "bytes": 2950,
+      "sha256": "c7dc8b5620f7d97c5ba413867dbf4970831e5f7f56224b193d404b3ecf720485"
     },
     {
       "location": "prepared",
@@ -88,8 +106,14 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
+      "bytes": 205,
+      "sha256": "1cb5b611cd59ec5b9d9c3125351508bc03d443185ac23bfd23232609102275e1"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/climate-model.webp",
+      "bytes": 3418,
+      "sha256": "b3374e1199374b550b97b77abeba919a343913b8c0e92c88654822474d63389f"
     },
     {
       "location": "prepared",
@@ -100,14 +124,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 90412,
-      "sha256": "eb3648b7faa31b269b6cc8a934e326088fb465f6c9080151e47cb176e16869dc"
+      "bytes": 94393,
+      "sha256": "7b8c1d33653a9f873516324f4e5e15c4f7632a1bf7ed6f75a52db31cb874c9d2"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2493,
-      "sha256": "36d3ac49bf09760a528b1ee36581efef5c3c019c569b5f4a9ac8a0eab8ed1a41"
+      "bytes": 2691,
+      "sha256": "4e059ad80388b7be9176009d3473e6a57c6ae659e3aa6f6e240f8eb6702b3c03"
     }
   ]
 }
