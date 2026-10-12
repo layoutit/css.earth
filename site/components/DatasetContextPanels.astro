@@ -5,7 +5,7 @@ interface Props {
   datasets?: Pick<NonNullable<ShellProps['datasets']>, 'controls' | 'defaultDataset'>;
   directSourceIdsByDataset?: Readonly<Record<string, readonly string[]>>;
 }
-import { datasetContributors } from '../content/dataset-context.mts';
+import { shownDatasetContributors } from '../content/dataset-context.mts';
 import { EXPLORATION } from '../content/exploration-catalog.mts';
 import ObjectCard from './ObjectCard.astro';
 import InformationTabs from './InformationTabs.astro';
@@ -13,12 +13,12 @@ import SelectedContent from './SelectedContent.astro';
 const { objectId, datasets, directSourceIdsByDataset } = Astro.props;
 // A dataset drawn from a bank (a nebula's volume, a galaxy's layers) is recorded under the bank, not the body that shows
 // it: the Crab's six observation datasets had no telescope card (2026-10-02). A bank records every input against every
-// dataset it bakes, so the dataset's own input, which carries its id, is the one its card credits.
-const contexts = (datasets?.controls ?? []).map(dataset => {
-  const owner = dataset.volume?.objectId ?? objectId, datasetId = dataset.volume?.datasetId ?? dataset.id;
-  const own = dataset.volume && (EXPLORATION.graph.byObject[owner] ?? []).some(index => EXPLORATION.graph.edges[index].sourceId === datasetId) ? [datasetId] : undefined;
-  return { dataset, ...datasetContributors(owner, datasetId, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByDataset?.[dataset.id] ?? own) };
-});
+// dataset it bakes, so the dataset's own input, which carries its id, is the one its card credits. A bank that credits no
+// machine (a model on a plane around a star) leaves the card to the body, still drawn from its own dataset: TRAPPIST-1's
+// three system datasets had none (2026-10-12).
+const contexts = (datasets?.controls ?? []).map(dataset => ({ dataset,
+  ...shownDatasetContributors(objectId, dataset, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByDataset?.[dataset.id]),
+}));
 // A card shows years; the record keeps the precision its source gave (OSIRIS-REx ended on 2023-09-24).
 const year = (date: { value: string }) => date.value.slice(0, 4), span = (from?: { value: string }, to?: { value: string }) => from ? `${year(from)}${to ? `–${year(to)}` : ''}` : null;
 // Missions and facilities share one contributor shape, so a body that credits several of them collapses into a single tabbed card
@@ -63,7 +63,7 @@ import Detached from './Detached.astro';
     const credited = contributors(context);
     const tabbed = credited.length > 1, byBand = distinctBands(credited);
     const groups = credited.length ? [credited] : [];
-    return <Detached detached={context.dataset.id !== datasets?.defaultDataset}><div data-dataset-context={context.dataset.id} hidden={context.dataset.id !== datasets?.defaultDataset}>
+    return <Detached detached={context.dataset.id !== datasets?.defaultDataset}><div data-dataset-context={context.dataset.id} data-system-dataset-context={context.dataset.systemDataset ? context.dataset.id : undefined} hidden={context.dataset.id !== datasets?.defaultDataset}>
       {groups.map(group => <ObjectCard class="object-dataset-context-card" role="region"
         aria-label={tabbed ? 'Credited machines' : group[0].title}>
         {tabbed && <InformationTabs idPrefix={`${objectId}-${context.dataset.id}`}

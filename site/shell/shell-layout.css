@@ -541,7 +541,9 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-settings-panel[popover] { color: var(--shell-text-secondary); }
 .object-ui-layer:has(.object-facility-toggle:not(:checked)) .object-dataset-context-rail,
 .object-settings-panel:popover-open ~ .object-sidebar-frame .object-dataset-context-rail,
-.object-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .object-dataset-context-rail,
+.object-information-panel[aria-busy="true"] > .object-dataset-context-rail,
+/* A system's card shows the machines of a dataset authored for the whole system, never those of the body's own dataset. */
+.object-information-panel[data-card-view="overview"] > .object-dataset-context-rail:not(:has([data-system-dataset-context]:not([hidden]) > *)),
 .object-information-panel > .object-dataset-content:not([open]) ~ .object-dataset-context-rail,
 .object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
 @media (min-width: 821px) and (orientation: landscape) {

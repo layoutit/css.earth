@@ -81,6 +81,13 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
         ...(illustration(plan) ? { observationAttribution: 'none' as const, interpretation: kind('illustrative-model') } : {}),
       });
     });
+    // Every map of a sphere is drawn on the radius its lighting bank names, so the measurement behind that radius is each
+    // map's geometry: a planet's model maps credit the telescope that measured its size.
+    const radiusPath = optionalText(maybeRecord(maybeRecord(raster.lighting)?.metadata)?.sourceRadius)?.replace(/#.*$/u, '');
+    if (radiusPath && declared.has(radiusPath)) for (const product of products) if (!product.inputPaths.includes(radiusPath)) {
+      product.inputPaths.push(radiusPath);
+      product.inputRoles = { ...product.inputRoles, [radiusPath]: { role: 'geometry', evidence: 'Sphere radius selected at /lighting/metadata/sourceRadius.' } };
+    }
     if (raster.interior) {
       const plan = record(raster.interior);
       add('interior', [text(plan.source), text(plan.surface)], { observationAttribution: 'none', interpretation: kind('schematic-interior') });

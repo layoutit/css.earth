@@ -604,7 +604,7 @@
 
 /* The selected subject chooses the parts of the card: the body's, or its system's. */
 .object-information-panel:not([data-card-subject="system"]) > [data-view-part="system"],
-.object-information-panel[data-card-subject="system"] > :not([data-view-part="system"], [data-system-view-datasets]) {
+.object-information-panel[data-card-subject="system"] > :not([data-view-part="system"], [data-system-view-datasets], .object-dataset-context-rail) {
   display: none !important;
 }
 /* The system's datasets come before its tabs and its body list, as on the card it had. */

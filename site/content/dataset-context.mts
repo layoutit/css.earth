@@ -41,3 +41,12 @@ export function datasetContributors(objectId: string, datasetId: string, graph: 
     notes,
   };
 }
+
+/** The contributors of a dataset a body shows: the bank's own when it is drawn from a bank that credits a machine, otherwise the body's. */
+export function shownDatasetContributors(objectId: string, dataset: { readonly id: string; readonly volume?: { readonly objectId: string; readonly datasetId: string } },
+  graph: ContributionGraph, catalog: ExplorationCatalog, directSourceIds?: readonly string[]) {
+  const owner = dataset.volume?.objectId ?? objectId, datasetId = dataset.volume?.datasetId ?? dataset.id;
+  const own = dataset.volume && (graph.byObject[owner] ?? []).some(index => graph.edges[index].sourceId === datasetId) ? [datasetId] : undefined;
+  const banked = datasetContributors(owner, datasetId, graph, catalog, directSourceIds ?? own);
+  return banked.missions.length + banked.facilities.length + banked.notes.length ? banked : datasetContributors(objectId, dataset.id, graph, catalog, directSourceIds);
+}
