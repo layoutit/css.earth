@@ -43,6 +43,22 @@ test('the caption sits below a body that fits, and leaves once it cannot sit cle
   label.destroy();
 });
 
+test('a name over the picture attached to its body is marked for it, at full strength, and gives the mark back', () => {
+  const label = mountSelectedBodyLabel(host, clock);
+  label.prepare(body(10)); deliverSize(label.label);
+  label.publish(camera, viewport, body(10), view);
+  assert.equal(label.label.dataset.labelBackdrop, undefined);
+  assert.equal(label.label.style.opacity, '0.65');
+  label.publish(camera, viewport, body(10), { ...view, pictured: true });
+  assert.equal(label.label.dataset.labelBackdrop, 'picture');
+  // The copy under the name reads the name from the label itself.
+  assert.equal(label.label.dataset.labelName, 'Earth');
+  assert.equal(label.label.style.opacity, '1');
+  label.publish(camera, viewport, body(10), view);
+  assert.equal(label.label.dataset.labelBackdrop, undefined);
+  label.destroy();
+});
+
 test('the caption box offered to the context planner is the box it publishes for the same camera', () => {
   const label = mountSelectedBodyLabel(host, clock);
 

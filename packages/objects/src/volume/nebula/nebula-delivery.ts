@@ -27,7 +27,9 @@ export function readNebulaDelivery(v: unknown) {
   if (r.compactInputs !== undefined && ((r.compactMethod === 'symmetry') !== (r.method === 'axial-symmetry'))) throw new TypeError('Compact method and delivery method differ.');
   // A density-grid delivery bakes checked-in volume recipes and their grids, one per dataset.
   if ((r.compactMethod === 'density-grid') !== (r.method === 'density-grid')) throw new TypeError('Density-grid delivery names its own compact method.');
-  let grids: { id: string; label: string; recipe: Pin; sourceUrl?: string; occultingCentreUnits?: [number,number,number] }[] | undefined;
+  // A grid's `tilted` recipes are more grids of the same dataset, each in a frame of its own about the same origin: light on
+  // another plane (the inner ring of a broken disc), whose sheets are drawn with the grid's.
+  let grids: { id: string; label: string; recipe: Pin; tilted?: Pin[]; sourceUrl?: string; occultingCentreUnits?: [number,number,number] }[] | undefined;
   if (r.method === 'density-grid') {
     if (!Array.isArray(r.grids) || !r.grids.length) throw new TypeError('A density-grid delivery lists its grids.');
     grids = r.grids.map(value => {
@@ -37,7 +39,9 @@ export function readNebulaDelivery(v: unknown) {
       const centre = row.occultingCentreUnits;
       if (centre !== undefined && (!Array.isArray(centre) || centre.length !== 3 || !centre.every(value => typeof value === 'number' && Number.isFinite(value))))
         throw new TypeError('Invalid density-grid occulting centre.');
+      if (row.tilted !== undefined && (!Array.isArray(row.tilted) || !row.tilted.length)) throw new TypeError('A density grid lists its tilted recipes or leaves them out.');
       return { id: readNonemptyText(row.id, '', invalidText), label: readNonemptyText(row.label, '', invalidText), recipe: pin(row.recipe),
+        ...(row.tilted === undefined ? {} : { tilted: (row.tilted as unknown[]).map(pin) }),
         ...(row.sourceUrl === undefined ? {} : { sourceUrl: readNonemptyText(row.sourceUrl, '', invalidText) }),
         ...(centre === undefined ? {} : { occultingCentreUnits: [centre[0], centre[1], centre[2]] as [number,number,number] }) };
     });

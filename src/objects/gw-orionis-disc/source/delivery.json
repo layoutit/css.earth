@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "gw-orionis-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/gw-orionis-disc/source/volume-dust.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/gw-orionis-disc/source/provenance.json"
+    },
+    {
+      "path": "src/objects/gw-orionis-disc/source/density-dust.ktx2"
+    },
+    {
+      "path": "src/objects/gw-orionis-disc/source/density-dust-ring.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      82.28495249683687,
+      11.8701821967984
+    ],
+    "distancePc": 388.0003051311125,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.0025773175607737768
+  },
+  "sourceUrl": "https://sourceforge.net/projects/aba4633/",
+  "description": "The three dust rings around the triple star GW Orionis, in their own emission at 1.3 millimeters, observed by ALMA. The image supplies the rings; two published planes supply their depth: the outer rings share one, and the inner ring lies in another, tilted 49 degrees from it.",
+  "defaultDataset": "dust",
+  "framingRadiusUnits": 700,
+  "attachedTo": "gw-orionis",
+  "acceptedLabResult": "gw-orionis-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/gw-orionis-disc/source/volume-dust.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dust",
+      "label": "ALMA · broken disc, 1.3 mm",
+      "sourceUrl": "https://sourceforge.net/projects/aba4633/",
+      "recipe": {
+        "path": "src/objects/gw-orionis-disc/source/volume-dust.json"
+      },
+      "tilted": [
+        {
+          "path": "src/objects/gw-orionis-disc/source/volume-dust-ring.json"
+        }
+      ]
+    }
+  ]
+}

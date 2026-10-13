@@ -29,6 +29,8 @@ export async function prepareVolumeImpostors(options: {
   readResource: (path: string) => Promise<Uint8Array>;
   writeResource: (path: string, bytes: Uint8Array) => Promise<void>;
   prefix: string;
+  /** The ids of the leaves that are sheets on planes of their own, not parallel to their stack's slabs. */
+  tilted?: ReadonlySet<string>;
 }): Promise<PreparedCssVolume> {
   const volume = validatePreparedCssVolume(options.volume);
   const { brightness, readResource, writeResource } = options;
@@ -51,7 +53,7 @@ export async function prepareVolumeImpostors(options: {
   if (views.some(view => remainingPaths.has(view.texturePath))) throw new TypeError('Impostor output would overwrite a source resource.');
   const stacks = AXES.map(axis => {
     const stack = volume.stacks.find(candidate => candidate.axis === axis)!;
-    return { axis, planes: stack.leaves.map(leaf => plane(leaf, axis)) };
+    return { axis, planes: stack.leaves.map(leaf => plane(leaf, axis, options.tilted?.has(leaf.id))) };
   });
   const metadata = new Map(volume.resources.map(resource => [resource.path, resource]));
   const textures = new Map<string, Pixels>();
@@ -108,7 +110,7 @@ function directions(prefix: string): View[] {
   return views;
 }
 
-function plane(leaf: PreparedVolumeLeaf, axis: VolumeAxis): Plane {
+function plane(leaf: PreparedVolumeLeaf, axis: VolumeAxis, tilted = false): Plane {
   const match = /^matrix3d\(([^)]+)\)$/u.exec(leaf.style.transform.trim());
   const m = match?.[1].split(',').map(Number);
   if (!m || m.length !== 16 || !m.every(Number.isFinite) || m[3] !== 0 || m[7] !== 0 || m[11] !== 0 || m[15] !== 1) {
@@ -119,8 +121,8 @@ function plane(leaf: PreparedVolumeLeaf, axis: VolumeAxis): Plane {
   const v: VolumeVector = [m[5] / 50, m[4] / 50, m[6] / 50];
   const origin: VolumeVector = [m[13] / 50, m[12] / 50, m[14] / 50];
   const normal = cross(u, v), normalLength = Math.hypot(...normal), component = AXES.indexOf(axis);
-  if (!(normalLength > 0) || Math.abs(u[component]) > Math.hypot(...u) * 1e-8 ||
-      Math.abs(v[component]) > Math.hypot(...v) * 1e-8) {
+  if (!(normalLength > 0) || (!tilted && (Math.abs(u[component]) > Math.hypot(...u) * 1e-8 ||
+      Math.abs(v[component]) > Math.hypot(...v) * 1e-8))) {
     throw new TypeError(`Impostor leaf ${leaf.id} must be a nondegenerate plane parallel to its declared stack.`);
   }
   const [backgroundWidth, backgroundHeight] = cssPixels(leaf.style.backgroundSize);
@@ -133,10 +135,14 @@ function plane(leaf: PreparedVolumeLeaf, axis: VolumeAxis): Plane {
 function render(view: View, stacks: readonly { axis: VolumeAxis; planes: readonly Plane[] }[], textures: ReadonlyMap<string, Pixels>,
   radius: number, brightness: PreparedVolumeDatasetBrightness): Buffer {
   const image = new Float64Array(SIZE * SIZE * 4);
-  const strengths = view.back.map(Math.abs), maximum = Math.max(...strengths);
+  // A stack without leaves draws nothing and takes no part in the choice of view, as in the runtime; the stack that is
+  // left draws nothing seen exactly edge-on.
+  const drawn = stacks.filter(stack => stack.planes.length > 0);
+  const strengths = view.back.map(Math.abs), maximum = Math.max(...drawn.map(stack => strengths[AXES.indexOf(stack.axis)]!));
   let cumulativeWeight = 0, brightnessSum = 0;
-  for (const { axis, planes } of stacks) {
+  for (const { axis, planes } of drawn) {
     const component = AXES.indexOf(axis), strength = strengths[component];
+    if (!(strength > 1e-9)) continue;
     const t = Math.max(0, Math.min(1, (strength - maximum + 0.16) / 0.16)), weight = t * t * (3 - 2 * t);
     if (weight === 0) continue;
     cumulativeWeight += weight; brightnessSum += weight * brightness[axis];
@@ -154,7 +160,7 @@ function render(view: View, stacks: readonly { axis: VolumeAxis; planes: readonl
     }
   }
   // The dataset runtime attenuates the completed cloud, never individual slabs.
-  const attenuation = brightness.overall * brightnessSum / cumulativeWeight;
+  const attenuation = cumulativeWeight > 0 ? brightness.overall * brightnessSum / cumulativeWeight : 0;
   const rgba = Buffer.alloc(image.length);
   for (let p = 0; p < image.length; p += 4) {
     const alpha = image[p + 3];

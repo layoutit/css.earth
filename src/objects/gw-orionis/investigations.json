@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gw-orionis",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3340856533286969600: position at J2016.0. Distance: Kraus et al. (2020), Table S3: adopted distance, 388 +/- 5 pc, the one the paper's ring radii in astronomical units assume (https://doi.org/10.1126/science.aba4633): 388 pc; Gaia DR3 parallax 2.4510 +/- 0.0623 mas (same row, RUWE 4.23), 39.3 standard errors, is not used. Proper motion: Gaia DR3 (same row): -2.351, -0.396 mas/yr. Radial velocity from Kraus et al. (2020), Table S5: velocity of the system's centre of mass, +27.96 +/- 0.12 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1126/science.aba4633"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 7.630508 solar radii from Model radius derived from Kraus et al. (2020), Table S3: L = 48 solar luminosities and T = 5500 K; R/Rsun = sqrt(48) (5772/5500)^2, using the IAU nominal solar temperature. The luminosity is the unresolved light of three stars, so this is the sphere that would give that light, not a measured stellar radius (https://doi.org/10.1126/science.aba4633). Mass 5.26 solar masses from Kraus et al. (2020), Table S5: total dynamical mass of the three stars, 5.26 +/- 0.22 solar masses, from their astrometric and radial-velocity orbits (https://doi.org/10.1126/science.aba4633). Temperature 5500 K from Kraus et al. (2020), Table S3: adopted effective temperature.",
+      "evidence": [
+        "https://doi.org/10.1126/science.aba4633"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 3340856533286969600, through the CIE 1931 2-degree observer: #ffddc3. Routes tried in order: stis-ngsl: HD 244138 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3340856533286969600&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    }
+  ]
+}

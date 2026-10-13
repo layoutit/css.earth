@@ -21,7 +21,8 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type EdgeOnReconstruction, type CircumstellarOpacity } from '@cssearth/objects';
-import { alignDiscGrid } from './disc-aligned-grid.mts';
+import { alignDiscGrid, normaliseColumns } from './disc-aligned-grid.mts';
+import { measureTiltedRing, mutualTiltDeg, parseTiltedRing, reachAbovePlane, ringLightBeyond, tiltedRingDensity, tiltedRingGrid, type TiltedRing } from './tilted-ring.mts';
 import { jwstAcquisition } from './jwst-acquisition.mts';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -42,6 +43,8 @@ import { midplaneGeometry, registerStarByPlanet, type MidplaneGeometry, type Pla
 import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from '@cssearth/astronomy';
 
 const METERS_PER_PARSEC = 3.085677581491367e16;
+/** Depth samples a sheet takes through its share of a grid's height: two a cell, and no fewer than eight. */
+const sheetDepthSamples = (depthCells: number, sheets: number) => Math.max(8, 2 * Math.ceil(depthCells / sheets));
 const repositoryRoot = checkoutProjectRoot(import.meta.url);
 
 /** The telescope behind an image: its facility in site/source/facilities, and the mission it flew as when the catalogue pairs
@@ -88,7 +91,10 @@ export interface CircumstellarDataset {
   readonly pointSources?: { readonly sources: readonly { readonly id: string; readonly raDeg: number; readonly decDeg: number; readonly peak: number }[]; readonly source: string };
   /** The publisher's own color map, shown in place of a stretch: the figure's color bar, sampled evenly from `range[0]` to
    * `range[1]` in the image's unit times `unitScale`, as the recipe's `path` (under source/) holds it with how it was read. */
-  readonly colorMap?: { readonly path: string; readonly range: readonly [number, number]; readonly unitScale: number; readonly unit: string; readonly source: string };
+  readonly colorMap?: { readonly path: string; readonly range: readonly [number, number]; readonly unitScale: number; readonly unit: string; readonly source: string;
+    /** Why a column's opacity follows its brightness, not the brightness of its color: a steep map draws faint light bright,
+     * and opacity taken from that color makes faint light a wall. The column keeps the map's hue. */
+    readonly opacityFollowsBrightness?: string };
   /** Hubble coronagraph images made here: the drizzled products of a PSF subtraction (packages/telescope-cli/src/archives/hst/psf-subtract.mts), two
    * telescope rolls per band averaged on the sky, each band divided by the star's own count rate in it, which is computed from
    * a published Vega magnitude and the instrument's published zero point. The products are named by roll and size; the run
@@ -132,6 +138,8 @@ export interface CircumstellarDataset {
   readonly adoptPublishedRing?: string;
   /** Several rings on one published plane: the measured profile must beat every baseline, but is not one Gaussian belt. */
   readonly publishedProfileDisc?: string;
+  /** A published-profile disc only: an inner ring its paper puts in another plane (tilted-ring.mts). */
+  readonly tiltedRing?: TiltedRing;
   /** Line-of-sight samples for envelope comparisons only; the delivered field always uses the complete source grid. */
   readonly envelopeDepthSamples?: number;
   /** A ring only: why its plane is drawn through the star when its measured centre is off it, as an eccentric ring's is. The centre
@@ -151,7 +159,11 @@ export interface CircumstellarRecipe {
   readonly schema: 'cssearth-circumstellar-volume@2';
   readonly id: string; readonly host: string; readonly name: string; readonly description: string; readonly sourceUrl: string;
   readonly credit: string; readonly license: { readonly spdx: string; readonly note: string; readonly url: string };
-  readonly grid: { readonly size: number; readonly halfUnits: number; readonly slabs: number; readonly alignedDiscHalfHeightUnits?: number };
+  /** `sheets`, with a disc-aligned grid: each plane of the disc is drawn as that many sheets through its thickness, not as
+   * three stacks of `slabs`. A drag over GW Orionis's 334 slabs held single draws of 161 and 268 ms (Chrome, 2026-10-12).
+   * Seen exactly edge-on a sheet has no area. One sheet draws a plane with no height: for a disc whose height at the
+   * observed wavelength no source gives. */
+  readonly grid: { readonly size: number; readonly halfUnits: number; readonly slabs: number; readonly alignedDiscHalfHeightUnits?: number; readonly sheets?: number };
   readonly defaultDataset: string;
   readonly datasets: readonly CircumstellarDataset[];
 }
@@ -213,7 +225,8 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
       const c = requireRecord(dataset.colorMap, 'colorMap'), range = requireArray(c.range).map(v => requireFiniteNumber(v, 'colorMap range'));
       if (range.length !== 2 || !(range[1]! > range[0]!)) throw new TypeError(`${String(dataset.id)}: a color map runs from a lower to a higher value, not ${range.join(', ')}.`);
       const unitScale = requireFiniteNumber(c.unitScale, 'colorMap unitScale'); if (!(unitScale > 0)) throw new TypeError(`${String(dataset.id)}: colorMap unitScale ${unitScale} is not positive.`);
-      return { path: requireString(c.path, 'colorMap path'), range: [range[0]!, range[1]!] as const, unitScale, unit: requireString(c.unit, 'colorMap unit'), source: requireString(c.source, 'colorMap source') };
+      return { path: requireString(c.path, 'colorMap path'), range: [range[0]!, range[1]!] as const, unitScale, unit: requireString(c.unit, 'colorMap unit'), source: requireString(c.source, 'colorMap source'),
+        ...(c.opacityFollowsBrightness === undefined ? {} : { opacityFollowsBrightness: requireString(c.opacityFollowsBrightness, 'colorMap opacityFollowsBrightness') }) };
     })();
     if ([deposit, hst, archive].filter(Boolean).length > 1) throw new TypeError(`${String(dataset.id)}: a dataset reads one of a deposit, HST products or an archive image.`);
     const single = deposit ?? archive;
@@ -265,6 +278,10 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
         return depth;
       })() }),
       ...(dataset.planeThroughStar === undefined ? {} : { planeThroughStar: requireString(dataset.planeThroughStar) }),
+      ...(dataset.tiltedRing === undefined ? {} : { tiltedRing: (() => {
+        if (dataset.publishedProfileDisc === undefined) throw new TypeError('A tilted ring lies inside a published-profile disc.');
+        return parseTiltedRing(dataset.tiltedRing, `${String(dataset.id)} tiltedRing`);
+      })() }),
       ...(dataset.taperInPlane === undefined ? {} : { taperInPlane: requireString(dataset.taperInPlane) }),
       topAlpha: number('topAlpha'),
       ...(dataset.beyondGrid === undefined ? {} : { beyondGrid: requireString(dataset.beyondGrid) }),
@@ -284,15 +301,21 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
   const alignedDiscHalfHeightUnits = grid.alignedDiscHalfHeightUnits === undefined ? undefined : requireFiniteNumber(grid.alignedDiscHalfHeightUnits);
   if (alignedDiscHalfHeightUnits !== undefined && (!(alignedDiscHalfHeightUnits > 0) || datasets.length !== 1 || !datasets[0]!.publishedProfileDisc))
     throw new TypeError('A disc-aligned grid requires one published-profile disc and a positive half height.');
+  const sheets = grid.sheets === undefined ? undefined : requireFiniteNumber(grid.sheets);
+  if (sheets !== undefined && (!Number.isInteger(sheets) || sheets < 1 || alignedDiscHalfHeightUnits === undefined))
+    throw new TypeError('grid.sheets is a whole number of sheets through a disc-aligned grid.');
   for (const dataset of datasets) if (!(dataset.outerUnits <= requireFiniteNumber(grid.halfUnits) && dataset.topAlpha > 0 && dataset.topAlpha < 1 && (dataset.geometry === 'edge-on' || dataset.heightOfRadius > 0)))
     throw new TypeError(`${dataset.id}: scoring ends inside the grid, and the top alpha lies in (0, 1).`);
   return { schema: row.schema, id: requireString(row.id), host: requireString(row.host), name: requireString(row.name), description: requireString(row.description), sourceUrl: requireString(row.sourceUrl),
     credit: requireString(row.credit), license: { spdx: requireString(license.spdx), note: requireString(license.note), url: requireString(license.url) },
     grid: { size: requireFiniteNumber(grid.size), halfUnits: requireFiniteNumber(grid.halfUnits), slabs: requireFiniteNumber(grid.slabs),
-      ...(alignedDiscHalfHeightUnits === undefined ? {} : { alignedDiscHalfHeightUnits }) }, defaultDataset, datasets };
+      ...(alignedDiscHalfHeightUnits === undefined ? {} : { alignedDiscHalfHeightUnits }), ...(sheets === undefined ? {} : { sheets }) }, defaultDataset, datasets };
 }
 
 const compass = (positionAngleDeg: number) => ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(((positionAngleDeg % 360) + 360) % 360 / 45) % 8]!;
+/** What a dataset's record says of its tilted ring: the published plane, and how its light was told from the outer disc's. */
+const tiltedRingReading = (ring: TiltedRing, measured: { ridgeUnits: number; endsUnits: number; mutualTiltDeg: number; reachUnits: number; lightBeyondGrid: number; sheets?: number }) =>
+  ` An inner ring lies in a plane of its own: tilted ${ring.inclinationDeg}° with nodes at position angle ${ring.positionAngleDeg}° and its ${compass(ring.nearSidePositionAngleDeg)} side nearer (${ring.citation}; ${ring.nearSideSource}), ${measured.mutualTiltDeg.toFixed(0)}° from the disc's plane. Its light is what the image's median brightness in circles about its published sky centre (${ring.skyCentreSource}) holds above the level of the gap beyond it, out to ${measured.endsUnits.toFixed(0)} au from that centre, where the gap is lowest; its ridge lies ${measured.ridgeUnits.toFixed(0)} au from the centre. That light is drawn on the ring's plane, which holds the star, with a ${ring.heightUnits} au Gaussian height (${ring.heightSource}); the disc's profile is measured on the image less it, so no light is drawn twice. ${measured.sheets !== undefined ? (measured.sheets === 1 ? 'It is drawn as one sheet on that plane: the height places no light off the plane, and is not drawn' : `It is drawn as ${measured.sheets} sheets across that height, on that plane`) : `The ring's ridge, with three of its heights, reaches ${measured.reachUnits.toFixed(1)} au from the disc's plane; ${measured.lightBeyondGrid > 0 ? `its faint skirt climbs past the grid's height, and the ${(100 * measured.lightBeyondGrid).toFixed(2)}% of the ring's light that lies there is not drawn` : 'the grid holds all of its light'}`}.`;
 const smoothstep = (a: number, b: number, t: number) => { const u = Math.max(0, Math.min(1, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
 /** Filters of deposit bands, registered as recipes are parsed: a deposit's band is not a JWST band. */
 const DEPOSIT_FILTERS = new Map<string, string>();
@@ -459,11 +482,13 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
   // falls to the per-pixel noise. The taper starts there, and a grid that would cut light above the noise is refused.
   const cosI = Math.cos(geometry.inclinationDeg * Math.PI / 180), phi = geometry.positionAngleDeg * Math.PI / 180, ringWidth = 2 * step;
   const rings = new Map<number, number[]>();
+  // A ring the paper puts in another plane: its light is measured on the image and left out of the outer disc's profile.
+  const tilted = dataset.tiltedRing ? measureTiltedRing(sky, dataset.tiltedRing, 1 / distancePc, published.radiusUnits!) : undefined;
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     const v = sky.plane[j * size + i]!; if (!Number.isFinite(v)) continue;
-    const e = -(-halfUnits + (i + 0.5) * step - geometry.centreUnits[0]), n = -halfUnits + (j + 0.5) * step - geometry.centreUnits[1];
+    const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step, e = -(x - geometry.centreUnits[0]), n = y - geometry.centreUnits[1];
     const inPlane = Math.hypot(e * Math.sin(phi) + n * Math.cos(phi), (e * Math.cos(phi) - n * Math.sin(phi)) / cosI);
-    const k = Math.floor(inPlane / ringWidth); (rings.get(k) ?? rings.set(k, []).get(k)!).push(v);
+    const k = Math.floor(inPlane / ringWidth); (rings.get(k) ?? rings.set(k, []).get(k)!).push(tilted ? v - tilted.brightness(x, y) : v);
   }
   const radialProfile = [...rings].sort((p, q) => p[0] - q[0]).map(([k, values]) => { values.sort((p, q) => p - q); return { radiusUnits: (k + 0.5) * ringWidth, median: values[values.length >> 1]!, samples: values.length }; });
   const lightEndsUnits = radialProfile.find(ring => ring.radiusUnits > geometry.semiMajorUnits && ring.median <= sky.noise)?.radiusUnits;
@@ -482,7 +507,9 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
     const e = -(x - geometry.centreUnits[0]), n = y - geometry.centreUnits[1];
     return Math.hypot(e * Math.sin(phi) + n * Math.cos(phi), (e * Math.cos(phi) - n * Math.sin(phi)) / cosI);
   } : undefined;
-  const density = profileDiscDensity(drawnModel, planeProfile);
+  // A disc with a tilted ring holds its profile past the light's end (disc-envelope.mts profileDiscDensity).
+  const disc = profileDiscDensity(drawnModel, planeProfile, tilted ? taperFromUnits : undefined), ring = tilted ? tiltedRingDensity(dataset.tiltedRing!, tilted, drawnModel) : undefined;
+  const density = ring ? (x: number, y: number, z: number) => disc(x, y, z) + ring(x, y, z) : disc;
   const profileScore = scoreEnvelope(sky, density, { innerMaskUnits, outerUnits: dataset.outerUnits, ...(dataset.envelopeDepthSamples === undefined ? {} : { depthSamples: dataset.envelopeDepthSamples }) });
   if (!(profileScore.residualRms < fit.ring.residualRms && profileScore.residualRms < fit.shell.residualRms && profileScore.residualRms < fit.constantDepthResidualRms))
     throw new Error(`${dataset.id}: the measured-profile disc (${profileScore.residualRms.toExponential(3)}) does not beat the ring (${fit.ring.residualRms.toExponential(3)}), the shell (${fit.shell.residualRms.toExponential(3)}) and constant depth (${fit.constantDepthResidualRms.toExponential(3)}).`);
@@ -491,9 +518,21 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
   const faceShare = (d: (x: number, y: number, z: number) => number) => faceShareOf(sky, innerMaskUnits, taperFromUnits, d, planeRadius);
   const cubeFaceShare = { gaussianRing: faceShare(discDensity(drawnModel)), measuredProfileDisc: faceShare(density) };
   const shown = shownChannels(dataset, sky, read.channels, innerMaskUnits, taperFromUnits, planeRadius);
-  const aligned = recipe.grid.alignedDiscHalfHeightUnits === undefined ? undefined : alignDiscGrid(sky, shown, density, drawnModel, recipe.grid.alignedDiscHalfHeightUnits);
+  // The tilted ring leaves the outer disc's plane: a grid aligned with that plane has to be tall enough to hold it. Drawn as
+  // sheets, the ring is on sheets of its own plane, from a grid of its own (tilted-ring.mts tiltedRingGrid), and the
+  // disc's grid holds the disc alone.
+  const ownRingGrid = recipe.grid.sheets !== undefined && ring !== undefined;
+  const tiltedRing = tilted && { centreUnits: tilted.centreUnits, ridgeUnits: tilted.ridgeUnits, endsUnits: tilted.endsUnits, gapLevel: tilted.gapLevel, ridgeOverNoise: tilted.ridgeOverNoise,
+    mutualTiltDeg: mutualTiltDeg(dataset.tiltedRing!, drawnModel), reachUnits: reachAbovePlane(dataset.tiltedRing!, tilted, drawnModel),
+    // What the aligned grid leaves out of the ring's faint skirt, which climbs past the ridge's reach; a cube holds it all.
+    lightBeyondGrid: recipe.grid.alignedDiscHalfHeightUnits === undefined || ownRingGrid ? 0 : ringLightBeyond(sky, dataset.tiltedRing!, tilted, drawnModel, recipe.grid.alignedDiscHalfHeightUnits) };
+  if (tiltedRing && !ownRingGrid && recipe.grid.alignedDiscHalfHeightUnits !== undefined && recipe.grid.alignedDiscHalfHeightUnits < tiltedRing.reachUnits)
+    throw new Error(`${dataset.id}: the tilted ring's ridge reaches ${tiltedRing.reachUnits.toFixed(1)} units from the disc plane; the aligned grid's half height (${recipe.grid.alignedDiscHalfHeightUnits}) must hold it.`);
+  const columns = ownRingGrid ? normaliseColumns(sky, shown, density) : undefined;
+  const aligned = recipe.grid.alignedDiscHalfHeightUnits === undefined ? undefined : alignDiscGrid(sky, shown, density, drawnModel, recipe.grid.alignedDiscHalfHeightUnits, columns ? { weight: disc, columns } : undefined);
+  const ringGrid = columns ? tiltedRingGrid(sky, shown, density, dataset.tiltedRing!, tilted!, ring!, columns) : undefined;
   const encoded = aligned ?? spreadAlong(sky, shown, density);
-  return { kind: 'ring' as const, dataset, bands, geometry, fit, profileScore, cubeFaceShare, ...(centreDepthUnits === undefined ? {} : { centreDepthUnits }), innerMaskUnits, taperFromUnits, radialProfile, differences, ...(aligned ? { aligned } : {}), ...(await finishDataset(dataset, sky, shown, encoded)) };
+  return { kind: 'ring' as const, dataset, bands, geometry, fit, profileScore, cubeFaceShare, ...(centreDepthUnits === undefined ? {} : { centreDepthUnits }), ...(tiltedRing ? { tiltedRing: ringGrid ? { ...tiltedRing, sheets: recipe.grid.sheets! } : tiltedRing } : {}), innerMaskUnits, taperFromUnits, radialProfile, differences, ...(aligned ? { aligned } : {}), ...(ringGrid ? { ringGrid } : {}), ...(await finishDataset(dataset, sky, shown, encoded)) };
 }
 
 /** How much light an envelope would put on the cube's front and back faces: the share of every drawn column's depth weight
@@ -528,9 +567,16 @@ export function shownChannels(dataset: CircumstellarDataset, sky: SkyPlane, read
     const { range, unitScale } = dataset.colorMap!, t = (value * unitScale - range[0]) / (range[1] - range[0]);
     return lut![Math.max(0, Math.min(lut!.length - 1, Math.floor(t * lut!.length)))]![channel]! / 255;
   };
+  // A map whose opacity follows brightness: the column keeps the map's hue at its value, and its amount, which the renderer
+  // turns into opacity, is the value's place in the map's range. A steep map then no longer makes faint light opaque.
+  const hueAtBrightness = (value: number, channel: number) => {
+    const { range, unitScale } = dataset.colorMap!, t = (value * unitScale - range[0]) / (range[1] - range[0]);
+    const rgb = lut![Math.max(0, Math.min(lut!.length - 1, Math.floor(t * lut!.length)))]!, top = Math.max(...rgb);
+    return top > 0 ? rgb[channel]! / top * Math.max(0, Math.min(1, t)) : 0;
+  };
   const stretch = dataset.stretch ? stretchOf(dataset.stretch.a, dataset.stretch.top) : undefined;
   if (!lut && !stretch) throw new Error(`${dataset.id}: no stretch and no color map to show it through.`);
-  const display = (value: number, channel: number) => lut ? mapped(value, channel) : stretch!(value);
+  const display = (value: number, channel: number) => lut ? (dataset.colorMap!.opacityFollowsBrightness ? hueAtBrightness(value, channel) : mapped(value, channel)) : stretch!(value);
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step, p = j * size + i, r = Math.hypot(x, y);
     if (r < innerMaskUnits || !read.every(channel => Number.isFinite(channel[p]!))) continue;
@@ -703,7 +749,7 @@ export function edgeOnReading(dataset: CircumstellarDataset, bandCount: number, 
 }
 /** What a dataset's colors are, as its presentation says it. */
 export function colorFact(dataset: CircumstellarDataset): string {
-  return dataset.colorMap ? `Brightness in ${dataset.colorMap.unit}, from ${dataset.colorMap.range[0]} to ${dataset.colorMap.range[1]}, in the publisher's color map` : dataset.deposit ? `Brightness only: one filter (${dataset.deposit.filter}) in every channel, in the deposit's ${dataset.deposit.unit}`
+  return dataset.colorMap ? `Brightness in ${dataset.colorMap.unit}, from ${dataset.colorMap.range[0]} to ${dataset.colorMap.range[1]}, in the publisher's color map${dataset.colorMap.opacityFollowsBrightness ? '; opacity follows the brightness' : ''}` : dataset.deposit ? `Brightness only: one filter (${dataset.deposit.filter}) in every channel, in the deposit's ${dataset.deposit.unit}`
     : dataset.archive ? `Brightness only: one band (${dataset.archive.filter}) in every channel, in the archive image's ${dataset.archive.unit}`
     : `Reflectance: each filter over the star's own flux, ${CHANNELS.map(channel => `${channel} ${dataset.channels[channel].map(filterOf).join(' + ')}`).join(', ')}`;
 }
@@ -758,7 +804,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     channels: b.dataset.channels, stellarFluxJy: b.dataset.stellarFluxJy, stellarFluxSource: b.dataset.stellarFluxSource, stretch: b.dataset.stretch,
     innerMaskUnits: b.innerMaskUnits, lightEndsUnits: b.taperFromUnits, radialProfile: b.radialProfile.filter(ring => ring.radiusUnits <= halfUnits), ridgeSamples: b.geometry.ridge.length, ringCentreUnits: b.geometry.centreUnits, ...(b.centreDepthUnits === undefined ? {} : { ringCentreDepthUnits: b.centreDepthUnits }), semiMajorUnits: b.geometry.semiMajorUnits, semiMinorUnits: b.geometry.semiMinorUnits,
     inclinationDeg: b.geometry.inclinationDeg, positionAngleDeg: b.geometry.positionAngleDeg, ridgeResidualUnits: b.geometry.ridgeResidualUnits, binningSpread: b.geometry.binningSpread, ...(b.dataset.adoptPublishedRing ? { ringGeometry: 'published fit, not measured' } : {}),
-    published: b.dataset.published, differences: b.differences,
+    published: b.dataset.published, differences: b.differences, ...(b.tiltedRing ? { tiltedRing: { published: b.dataset.tiltedRing, measured: b.tiltedRing } } : {}),
     envelope: { shape: 'measured-profile-disc', residualRms: b.profileScore.residualRms, cubeFaceShare: b.cubeFaceShare, heightUnits: b.fit.ring.gaussianHeightUnits,
       [b.dataset.publishedProfileDisc ? "gaussianBaseline" : "fittedRing"]: { gaussianWidthUnits: b.fit.ring.gaussianWidthUnits, gaussianHeightUnits: b.fit.ring.gaussianHeightUnits, residualRms: b.fit.ring.residualRms }, signalRms: b.fit.signalRms, scoredPixels: b.fit.scoredPixels,
       alternatives: { sphericalShell: b.fit.shell, constantDepthResidualRms: b.fit.constantDepthResidualRms }, ...(b.dataset.publishedProfileDisc ? { publishedProfileDisc: b.dataset.publishedProfileDisc, comparisonDepthSamples: b.dataset.envelopeDepthSamples ?? size, gaussianBaselineAtWidthBoundary: b.fit.ring.gaussianWidthUnits / b.geometry.semiMajorUnits >= DEFAULT_SEARCH.widthOfRadius[1] } : {}), heightResiduals: b.fit.heightResiduals, search: DEFAULT_SEARCH },
@@ -774,7 +820,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
         role: `the primary beam of ${b.dataset.archive.title}, which the ${b.dataset.id} image is multiplied by` }] : [])),
     paper: built.map(b => ({ dataset: b.dataset.id, citation: b.dataset.published.citation, url: b.dataset.published.url })),
     measured: { sceneOriginRaDecDeg: [raDeg, decDeg], distancePc, arcsecPerUnit: 1 / distancePc, grid: recipe.grid, datasets: measured },
-    models: Object.fromEntries(built.map(b => [b.dataset.id, b.kind === 'edge-on' ? `Fitted edge-on disc. ${edgeOnReading(b.dataset, b.bands.length, String(b.bands[0]!.primary['DATE-OBS']))} The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle ${b.geometry.positionAngleDeg.toFixed(2)}° (published ${b.dataset.published.positionAngleDeg}°) with the star ${b.geometry.starOffsetUnits.toFixed(1)} au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted ${(90 - b.dataset.published.inclinationDeg).toFixed(1)}° from the sky toward the ${compass(b.dataset.nearSidePositionAngleDeg)} side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to ${JSON.stringify(b.reconstruction.checks.relativeProjectionError)} (relative error by channel); ${b.reconstruction.ktx2.path} and ${reconstructionPath(b.dataset)} record it.` : `${b.dataset.archive ? `${b.dataset.publishedProfileDisc ? "A measured-profile disc on a published plane" : "Fitted ring"}, in the color map the publisher shows. The archive image (${b.dataset.archive.title}) is read through its own WCS onto a sky plane in astronomical units, about the star where its catalogue position and proper motion put it on ${String(b.bands[0]!.primary['DATE-OBS'])}. ${b.dataset.pointSources ? `${b.dataset.pointSources.sources.length === 1 ? 'One point source' : `${b.dataset.pointSources.sources.length} point sources`} (${b.dataset.pointSources.sources.map(p => p.id).join(', ')}) ${b.dataset.pointSources.sources.length === 1 ? 'is' : 'are'} removed first, each the image's own beam at its published position and peak (${b.dataset.pointSources.source}). ` : ''}${b.dataset.archive.primaryBeam ? `It is multiplied by the same product's primary beam (${b.dataset.archive.primaryBeam.source}). ` : ''}${b.dataset.smoothTo ? `It is smoothed to a ${b.dataset.smoothTo.beamArcsec[0]}″ × ${b.dataset.smoothTo.beamArcsec[1]}″ beam at ${b.dataset.smoothTo.positionAngleDeg}° and rescaled to Jy per that beam (${b.dataset.smoothTo.source}). ` : ''}Its background, the median in the ${b.dataset.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted; it is the dust's own glow, not starlight, so it is not divided by the star, and the one band feeds every channel.` : `Fitted ring, in the reflectance color the publisher shows. Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the ${b.dataset.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.dataset.stellarFluxSource}), which leaves how the dust reflects starlight at that wavelength. The channels average them in pairs: ${CHANNELS.map(channel => `${channel} ${b.dataset.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`} ${b.dataset.adoptPublishedRing ? `The ring's geometry is not measured on this image: it is the fit of ${b.dataset.published.citation} to the same observations, ${b.dataset.published.radiusUnits} au${b.dataset.published.widthFwhmUnits === undefined ? "" : `, ${b.dataset.published.widthFwhmUnits} au wide at half maximum`}, inclination ${b.dataset.published.inclinationDeg}°, line of nodes at position angle ${b.dataset.published.positionAngleDeg}°, centred on the star (${b.dataset.adoptPublishedRing}).` : `The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis ${b.geometry.semiMajorUnits.toFixed(1)} au, axis ratio ${(b.geometry.semiMinorUnits / b.geometry.semiMajorUnits).toFixed(3)} (inclination ${b.geometry.inclinationDeg.toFixed(1)}°), line of nodes at position angle ${b.geometry.positionAngleDeg.toFixed(1)}°, centre ${Math.hypot(...b.geometry.centreUnits).toFixed(1)} au from the star; the single binnings scatter by ${b.geometry.binningSpread.semiMajorUnits.toFixed(1)} au, ${b.geometry.binningSpread.inclinationDeg.toFixed(1)}° and ${b.geometry.binningSpread.positionAngleDeg.toFixed(1)}°. This stands against ${b.dataset.published.citation}'s ${b.dataset.published.radiusUnits} au, ${b.dataset.published.inclinationDeg}° and ${b.dataset.published.positionAngleDeg}°.`}${b.centreDepthUnits === undefined ? '' : ` The ring's plane is drawn through the star, so its centre lies ${Math.abs(b.centreDepthUnits).toFixed(1)} au ${b.centreDepthUnits >= 0 ? 'nearer' : 'farther'} than the star (${b.dataset.planeThroughStar}).`} Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of ${b.profileScore.residualRms.toExponential(2)} against a signal of ${b.fit.signalRms.toExponential(2)}, where a single gaussian ring of radial width ${b.fit.ring.gaussianWidthUnits.toFixed(1)} au leaves ${b.fit.ring.residualRms.toExponential(2)}, a spherical shell ${b.fit.shell.residualRms.toExponential(2)} and constant depth, what an extrusion assumes, ${b.fit.constantDepthResidualRms.toExponential(2)}. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is ${b.dataset.heightSource ? `${b.dataset.heightOfRadius} of its radius, from ${b.dataset.heightSource}` : `a stated ${b.dataset.heightOfRadius} of its radius`} (the projection changes by ${heightSpread(b)}% across the heights tried), and which side is nearer is a convention: ${b.dataset.nearSideSource}. ${b.dataset.colorMap ? `Each column is shown in the color the publisher's map gives its value, linear from ${b.dataset.colorMap.range[0]} to ${b.dataset.colorMap.range[1]} ${b.dataset.colorMap.unit} (${b.dataset.colorMap.source}).` : `Each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / ${b.dataset.stretch!.top} and a = ${b.dataset.stretch!.a}; ${b.dataset.stretch!.source}.`} Every channel shares one depth profile, so each column is spread along the ring and keeps its color. The top of the ${b.dataset.colorMap ? 'map' : 'stretch'} reaches an alpha of ${b.dataset.topAlpha}, the renderer's convention for a volume; the median drawn line of sight reaches ${b.opacity.median.toFixed(2)}. The image is drawn from ${b.innerMaskUnits.toFixed(0)} au to the grid edge at ${halfUnits} au, tapering from ${b.taperFromUnits.toFixed(0)} au, where the mean ${b.dataset.archive ? 'brightness' : 'reflectance'} in the disc plane falls to its per-pixel noise.${b.dataset.taperInPlane ? ` The taper counts radius in the ring's plane, not on the sky (${b.dataset.taperInPlane}).` : ''}`])),
+    models: Object.fromEntries(built.map(b => [b.dataset.id, b.kind === 'edge-on' ? `Fitted edge-on disc. ${edgeOnReading(b.dataset, b.bands.length, String(b.bands[0]!.primary['DATE-OBS']))} The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle ${b.geometry.positionAngleDeg.toFixed(2)}° (published ${b.dataset.published.positionAngleDeg}°) with the star ${b.geometry.starOffsetUnits.toFixed(1)} au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted ${(90 - b.dataset.published.inclinationDeg).toFixed(1)}° from the sky toward the ${compass(b.dataset.nearSidePositionAngleDeg)} side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to ${JSON.stringify(b.reconstruction.checks.relativeProjectionError)} (relative error by channel); ${b.reconstruction.ktx2.path} and ${reconstructionPath(b.dataset)} record it.` : `${b.dataset.archive ? `${b.dataset.publishedProfileDisc ? "A measured-profile disc on a published plane" : "Fitted ring"}, in the color map the publisher shows. The archive image (${b.dataset.archive.title}) is read through its own WCS onto a sky plane in astronomical units, about the star where its catalogue position and proper motion put it on ${String(b.bands[0]!.primary['DATE-OBS'])}. ${b.dataset.pointSources ? `${b.dataset.pointSources.sources.length === 1 ? 'One point source' : `${b.dataset.pointSources.sources.length} point sources`} (${b.dataset.pointSources.sources.map(p => p.id).join(', ')}) ${b.dataset.pointSources.sources.length === 1 ? 'is' : 'are'} removed first, each the image's own beam at its published position and peak (${b.dataset.pointSources.source}). ` : ''}${b.dataset.archive.primaryBeam ? `It is multiplied by the same product's primary beam (${b.dataset.archive.primaryBeam.source}). ` : ''}${b.dataset.smoothTo ? `It is smoothed to a ${b.dataset.smoothTo.beamArcsec[0]}″ × ${b.dataset.smoothTo.beamArcsec[1]}″ beam at ${b.dataset.smoothTo.positionAngleDeg}° and rescaled to Jy per that beam (${b.dataset.smoothTo.source}). ` : ''}Its background, the median in the ${b.dataset.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted; it is the dust's own glow, not starlight, so it is not divided by the star, and the one band feeds every channel.` : `Fitted ring, in the reflectance color the publisher shows. Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the ${b.dataset.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.dataset.stellarFluxSource}), which leaves how the dust reflects starlight at that wavelength. The channels average them in pairs: ${CHANNELS.map(channel => `${channel} ${b.dataset.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`} ${b.dataset.adoptPublishedRing ? `The ring's geometry is not measured on this image: it is the fit of ${b.dataset.published.citation} to the same observations, ${b.dataset.published.radiusUnits} au${b.dataset.published.widthFwhmUnits === undefined ? "" : `, ${b.dataset.published.widthFwhmUnits} au wide at half maximum`}, inclination ${b.dataset.published.inclinationDeg}°, line of nodes at position angle ${b.dataset.published.positionAngleDeg}°, centred on the star (${b.dataset.adoptPublishedRing}).` : `The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis ${b.geometry.semiMajorUnits.toFixed(1)} au, axis ratio ${(b.geometry.semiMinorUnits / b.geometry.semiMajorUnits).toFixed(3)} (inclination ${b.geometry.inclinationDeg.toFixed(1)}°), line of nodes at position angle ${b.geometry.positionAngleDeg.toFixed(1)}°, centre ${Math.hypot(...b.geometry.centreUnits).toFixed(1)} au from the star; the single binnings scatter by ${b.geometry.binningSpread.semiMajorUnits.toFixed(1)} au, ${b.geometry.binningSpread.inclinationDeg.toFixed(1)}° and ${b.geometry.binningSpread.positionAngleDeg.toFixed(1)}°. This stands against ${b.dataset.published.citation}'s ${b.dataset.published.radiusUnits} au, ${b.dataset.published.inclinationDeg}° and ${b.dataset.published.positionAngleDeg}°.`}${b.centreDepthUnits === undefined ? '' : ` The ring's plane is drawn through the star, so its centre lies ${Math.abs(b.centreDepthUnits).toFixed(1)} au ${b.centreDepthUnits >= 0 ? 'nearer' : 'farther'} than the star (${b.dataset.planeThroughStar}).`} Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of ${b.profileScore.residualRms.toExponential(2)} against a signal of ${b.fit.signalRms.toExponential(2)}, where a single gaussian ring of radial width ${b.fit.ring.gaussianWidthUnits.toFixed(1)} au leaves ${b.fit.ring.residualRms.toExponential(2)}, a spherical shell ${b.fit.shell.residualRms.toExponential(2)} and constant depth, what an extrusion assumes, ${b.fit.constantDepthResidualRms.toExponential(2)}. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is ${b.dataset.heightSource ? `${b.dataset.heightOfRadius} of its radius, from ${b.dataset.heightSource}` : `a stated ${b.dataset.heightOfRadius} of its radius`} (the projection changes by ${heightSpread(b)}% across the heights tried)${recipe.grid.sheets === 1 ? '; the disc is drawn as one sheet on its plane, so that height is not drawn' : ''}, and which side is nearer is a convention: ${b.dataset.nearSideSource}. ${b.dataset.colorMap ? `Each column is shown in the color the publisher's map gives its value, linear from ${b.dataset.colorMap.range[0]} to ${b.dataset.colorMap.range[1]} ${b.dataset.colorMap.unit} (${b.dataset.colorMap.source}).${b.dataset.colorMap.opacityFollowsBrightness ? ` It keeps that color's hue, and its opacity follows its brightness across the same range, not the brightness of the color (${b.dataset.colorMap.opacityFollowsBrightness}).` : ''}` :`Each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / ${b.dataset.stretch!.top} and a = ${b.dataset.stretch!.a}; ${b.dataset.stretch!.source}.`} Every channel shares one depth profile, so each column is spread along the ring and keeps its color. The top of the ${b.dataset.colorMap ? 'map' : 'stretch'} reaches an alpha of ${b.dataset.topAlpha}, the renderer's convention for a volume; the median drawn line of sight reaches ${b.opacity.median.toFixed(2)}. The image is drawn from ${b.innerMaskUnits.toFixed(0)} au to the grid edge at ${halfUnits} au, tapering from ${b.taperFromUnits.toFixed(0)} au, where the mean ${b.dataset.archive ? 'brightness' : 'reflectance'} in the disc plane falls to its per-pixel noise.${b.dataset.taperInPlane ? ` The taper counts radius in the ring's plane, not on the sky (${b.dataset.taperInPlane}).` : ''}${b.dataset.tiltedRing && b.tiltedRing ? tiltedRingReading(b.dataset.tiltedRing, b.tiltedRing) : ''}`])),
     limitations: built.some(b => b.kind === 'edge-on') ? edgeOnLimitations(built.map(b => b.dataset)) : built.some(b => b.dataset.archive) ? [
       built.some(b => b.dataset.publishedProfileDisc)
         ? 'One image, one epoch, one wavelength: no third axis was observed. The depth is a published disc plane with a stated thin vertical profile; observed brightness supplies every ring and gap. A single Gaussian belt is a comparison only.'
@@ -803,7 +849,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
   };
   const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n');
   const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes]];
-  const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string } }[] = [];
+  const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string }; tilted?: { path: string }[] }[] = [], tiltedGrids: string[] = [];
   for (const b of built) {
     const file = `density-${b.dataset.id}.ktx2`, baseRecipe = {
       schema: VOLUME_RECIPE_SCHEMA,
@@ -817,15 +863,27 @@ export async function author(id: string, options: { sources?: readonly string[] 
     const aligned = b.kind === 'ring' ? b.aligned : undefined;
     const preparedRecipe = aligned ? { ...baseRecipe, frame: aligned.frame,
       grid: { ...baseRecipe.grid, dimensions: aligned.dimensions, bounds: aligned.bounds },
-      bake: { ...baseRecipe.bake, imageWidth: aligned.dimensions[0], sliceCounts: { x: slabs, y: slabs, z: aligned.dimensions[2] } } } : baseRecipe;
+      bake: { ...baseRecipe.bake, imageWidth: aligned.dimensions[0], ...(recipe.grid.sheets === undefined ? { sliceCounts: { x: slabs, y: slabs, z: aligned.dimensions[2] } }
+        : { sliceCounts: { x: 0, y: 0, z: recipe.grid.sheets }, samplesPerSlab: sheetDepthSamples(aligned.dimensions[2], recipe.grid.sheets) }) } } : baseRecipe;
     const recipeBytes = Buffer.from(JSON.stringify(preparedRecipe, null, 2) + '\n');
     outputs.push([file, Buffer.from(b.ktx2)], [`volume-${b.dataset.id}.json`, recipeBytes], [`previews/${b.dataset.id}.png`, b.previewPng]);
-    deliveryGrids.push({ id: b.dataset.id, label: b.dataset.label, sourceUrl: recipe.sourceUrl, recipe: { path: `${packageBase}/volume-${b.dataset.id}.json` } });
+    // The tilted ring's own grid and recipe: the same material on the gain the grid's own peak gives, cut into its sheets.
+    const ringGrid = b.kind === 'ring' ? b.ringGrid : undefined, ringFile = `density-${b.dataset.id}-ring.ktx2`, ringRecipe = `volume-${b.dataset.id}-ring.json`;
+    if (ringGrid) {
+      const grid = ringGrid, sheets = recipe.grid.sheets!;
+      outputs.push([ringFile, Buffer.from(grid.ktx2)], [ringRecipe, Buffer.from(JSON.stringify({ ...baseRecipe, frame: grid.frame,
+        grid: { ...baseRecipe.grid, path: ringFile, dimensions: grid.dimensions, bounds: grid.bounds },
+        material: { ...baseRecipe.material, exposureGain: exposureAndOpacity(b.dataset.topAlpha, grid.peak, grid.integral).exposureGain },
+        bake: { ...baseRecipe.bake, imageWidth: grid.dimensions[0], sliceCounts: { x: 0, y: 0, z: sheets }, samplesPerSlab: sheetDepthSamples(grid.dimensions[2], sheets) } }, null, 2) + '\n')]);
+      tiltedGrids.push(ringFile);
+    }
+    deliveryGrids.push({ id: b.dataset.id, label: b.dataset.label, sourceUrl: recipe.sourceUrl, recipe: { path: `${packageBase}/volume-${b.dataset.id}.json` },
+      ...(ringGrid ? { tilted: [{ path: `${packageBase}/${ringRecipe}` }] } : {}) });
   }
   const request = deliveryGrids.find(grid => grid.id === recipe.defaultDataset)!.recipe;
   outputs.push(['delivery.json', Buffer.from(JSON.stringify({
     schema: NEBULA_DELIVERY_SCHEMA, id, method: 'density-grid', request,
-    inputPins: [{ path: `${packageBase}/provenance.json` }, ...built.map(b => ({ path: `${packageBase}/density-${b.dataset.id}.ktx2` }))],
+    inputPins: [{ path: `${packageBase}/provenance.json` }, ...built.map(b => ({ path: `${packageBase}/density-${b.dataset.id}.ktx2` })), ...tiltedGrids.map(file => ({ path: `${packageBase}/${file}` }))],
     sky: { centerIcrsDegrees: [raDeg, decDeg], distancePc, imageRotationDegrees: 0, arcsecPerUnit: 1 / distancePc },
     sourceUrl: recipe.sourceUrl, description: recipe.description, defaultDataset: recipe.defaultDataset, framingRadiusUnits: halfUnits,
     attachedTo: recipe.host, acceptedLabResult: `${id}-density-grids`, compactInputs: request, compactMethod: 'density-grid', grids: deliveryGrids,
@@ -843,8 +901,9 @@ export async function author(id: string, options: { sources?: readonly string[] 
         ...(b.kind === 'edge-on'
           ? [{ id: 'midplane', label: 'Midplane measured here', value: `Position angle ${b.geometry.positionAngleDeg.toFixed(1)}° (published ${b.dataset.published.positionAngleDeg}°); the ${compass(b.geometry.positionAngleDeg)} side is ${b.geometry.sideBrightness.ratio.toFixed(2)} times as bright as the ${compass(b.geometry.positionAngleDeg + 180)}` }]
           : [b.dataset.adoptPublishedRing ? { id: 'ring', label: b.dataset.publishedProfileDisc ? 'Reference ring and common disc plane' : 'Ring', value: `${b.dataset.published.radiusUnits} au, tilted ${b.dataset.published.inclinationDeg}°, nodes at position angle ${b.dataset.published.positionAngleDeg}°: the published fit to these observations, not measured on this image` } : { id: 'ring', label: 'Ring measured here', value: `${b.geometry.semiMajorUnits.toFixed(0)} au, tilted ${b.geometry.inclinationDeg.toFixed(0)}°, nodes at position angle ${b.geometry.positionAngleDeg.toFixed(0)}°; published ${b.dataset.published.radiusUnits} au, ${b.dataset.published.inclinationDeg}°, ${b.dataset.published.positionAngleDeg}°` }]),
+        ...(b.kind === 'ring' && b.dataset.tiltedRing && b.tiltedRing ? [{ id: 'tilted-ring', label: 'Inner ring', value: `Tilted ${b.dataset.tiltedRing.inclinationDeg}°, nodes at position angle ${b.dataset.tiltedRing.positionAngleDeg}°, ${b.tiltedRing.mutualTiltDeg.toFixed(0)}° from the outer disc's plane: the published plane, not measured on this image` }] : []),
         { id: 'extent', label: 'Drawn extent', value: `${b.innerMaskUnits.toFixed(0)} to ${halfUnits} au; the light reaches the noise at ${b.taperFromUnits.toFixed(0)} au` },
-        { id: 'depth', label: 'Depth', value: b.kind === 'edge-on' ? `Not measured; reconstructed from the image by axial symmetry about the disc's normal, tilted toward its ${compass(b.dataset.nearSidePositionAngleDeg)} side by convention` : b.dataset.publishedProfileDisc ? `Not measured; the published plane and a stated ${b.fit.ring.gaussianHeightUnits.toFixed(1)} au Gaussian height, with its ${compass(b.dataset.nearSidePositionAngleDeg)} side nearer by convention` : `Not measured; the inclined ring that best projects to the images, with its ${compass(b.dataset.nearSidePositionAngleDeg)} side nearer by convention` },
+        { id: 'depth', label: 'Depth', value: b.kind === 'edge-on' ? `Not measured; reconstructed from the image by axial symmetry about the disc's normal, tilted toward its ${compass(b.dataset.nearSidePositionAngleDeg)} side by convention` : b.dataset.publishedProfileDisc ? `Not measured; the published plane${recipe.grid.sheets === 1 ? ', drawn as a sheet with no height' : ` and a stated ${b.fit.ring.gaussianHeightUnits.toFixed(1)} au Gaussian height`}, with its ${compass(b.dataset.nearSidePositionAngleDeg)} side nearer by convention` : `Not measured; the inclined ring that best projects to the images, with its ${compass(b.dataset.nearSidePositionAngleDeg)} side nearer by convention` },
       ],
       input: inputOf(b.dataset, b.bands[0]!),
       preview: { path: `${packageBase}/previews/${b.dataset.id}.png`, authoredFrom: inputOf(b.dataset, b.bands[0]!) } })),

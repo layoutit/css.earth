@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "gw-orionis-disc",
+  "name": "GW Orionis broken disc",
+  "defaultDataset": "dust",
+  "bank": {
+    "path": "src/objects/gw-orionis-disc/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "dust",
+      "path": "src/objects/gw-orionis-disc/source/volume-dust.json"
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · broken disc, 1.3 mm",
+      "title": "GW Orionis’s three dust rings in ALMA’s 1.3 millimeter emission",
+      "description": "ALMA resolves three rings of dust around the three stars of GW Orionis. The authors’ FITS continuum image supplies their brightness and structure. The two outer rings are drawn in the plane Kraus et al. fit to the middle ring, tilted 37 degrees with its eastern side nearer. The inner ring is drawn in the plane the same paper derives for it from the shadows it casts in scattered light, tilted 25 degrees with its southern side nearer, 49 degrees from the outer plane; that plane carries the paper’s uncertainties of 16 degrees in tilt and 30 degrees in direction. Thickness is a stated thin layer for the outer rings and the paper’s model value for the inner ring, not a measured third axis. The rings are thermal emission at 1.3 millimeters, shown in the paper’s brightness color scale. The three stars, 1.2 and 8.9 astronomical units apart, are one sphere, and the warped surface the paper models between the middle and inner rings is not drawn.",
+      "summary": "Three dust rings around a triple star, the inner one in a plane of its own.",
+      "detail": "2015-05-14T20:43:00.335999, 4.9 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "ALMA 12-m array, 5 July 2019 (project 2018.1.00813.S), combined with shorter baselines of project 2012.1.00496.S; FITS DATE-OBS 2015-05-14T20:43:00.335999: b6-cont"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "value": "Brightness in mJy/beam, from 0 to 0.8388602264623205, in the publisher's color map; opacity follows the brightness"
+        },
+        {
+          "id": "ring",
+          "label": "Reference ring and common disc plane",
+          "value": "182 au, tilted 37°, nodes at position angle 180°: the published fit to these observations, not measured on this image"
+        },
+        {
+          "id": "tilted-ring",
+          "label": "Inner ring",
+          "value": "Tilted 25°, nodes at position angle 105°, 49° from the outer disc's plane: the published plane, not measured on this image"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "0 to 700 au; the light reaches the noise at 539 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the published plane, drawn as a sheet with no height, with its east side nearer by convention"
+        }
+      ],
+      "input": "dust-b6-cont",
+      "preview": {
+        "path": "src/objects/gw-orionis-disc/source/previews/dust.png",
+        "authoredFrom": "dust-b6-cont"
+      }
+    }
+  ]
+}

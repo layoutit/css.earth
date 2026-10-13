@@ -24,6 +24,11 @@ test('nebula envelopes preserve all historical method and optional-record subset
     compactMethod: 'symmetry', symmetryDirectory: 'output' });
   assert.equal(symmetry.symmetryDirectory, 'output');
   assert.deepEqual(readNebulaDelivery(gridFixture()).grids?.[0]?.occultingCentreUnits, [0, 1, 2]);
+  // A grid's tilted recipes: light on another plane, drawn with the grid.
+  assert.equal(readNebulaDelivery(gridFixture()).grids?.[0]?.tilted, undefined);
+  const tilted = (value: unknown) => readNebulaDelivery({ ...gridFixture(), grids: [{ ...gridFixture().grids[0]!, tilted: value }] }).grids?.[0]?.tilted;
+  assert.deepEqual(tilted([{ path: 'ring.json', ignored: true }]), [{ path: 'ring.json' }]);
+  assert.throws(() => tilted([]), /lists its tilted recipes or leaves them out/u);
   // Envelope admission historically checks finiteness, not physical sky constraints.
   assert.equal(readNebulaDelivery({ ...fixture(), sky: { ...fixture().sky, distancePc: -1 } }).sky.distancePc, -1);
 });

@@ -3,7 +3,7 @@ import { eyeAnchor, eyeDistanceM, type PositionM, type WorldCameraPose, cssViewF
 import { isExtendedClassification, type PreparedContextOrbit, type PreparedContextOrbitGeometry, type PreparedWorldContext, type PreparedWorldContextGeometry } from '@cssearth/objects';
 import type { WorldCameraViewport } from '../../navigation/camera/world-camera.js';
 import { levelOfDetailFor } from '../../navigation/camera/perspective-dolly.js';
-import { closeOrbitFades, contextEmphasis, contextSubject, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity, pathOpacity, selectedOrbitDepthFade, inSubjectFamily } from '../context-presentation-policy.js';
+import { closeOrbitFades, contextEmphasis, contextSubject, loneStarOtherSystems, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity, pathOpacity, selectedOrbitDepthFade, inSubjectFamily } from '../context-presentation-policy.js';
 import { billboardImageScale } from '../../navigation/prepared-body-billboards.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '@cssearth/engine';
@@ -57,8 +57,8 @@ export interface WorldContextView {
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
   orbitLodPixels?: number;
   anchorOnly: boolean;
-  /** The view has left the systems' scale, or also the galaxy's (prepared-world-context.ts setSystemRetired). `orbitsOpacity` dims every orbit line nothing points at, under a picture laid among the orbits (setOrbitsOpacity). */
-  systemRetired?: boolean; galaxyRetired?: boolean; orbitsOpacity?: number;
+  /** The view has left the systems' scale, or also the galaxy's (prepared-world-context.ts setSystemRetired). `orbitsOpacity` dims every orbit line nothing points at, under a picture laid among the orbits (setOrbitsOpacity). `selectionReachM` is the radius of the picture attached to the selected body, a star's disc (setSelectionReach); 0 or absent for none. */
+  systemRetired?: boolean; galaxyRetired?: boolean; orbitsOpacity?: number; selectionReachM?: number;
   bodies: readonly WorldBodyPresentation[];
   contextCommittedId?: number;
 }
@@ -186,9 +186,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const focusShare = focusInView ? focusDiameter / height : 0;
       const fades = closeOrbitFades(plan.camera.presentation.orbitLineFade, focusShare);
       const outsideFamily = outsideFamilyOrbitOpacity(subject.id === null || subject.hostIsStar ? undefined : byId.get(subject.hostId), host => Math.hypot(...frame.eye(host)));
-      const highlighting = bodies.some(entry => entry.highlighted === true), otherSystems = otherSystemsOpacity(systemFade.ownOpacity(), starFieldFade(systemFade.ownStarDistanceM(), plan.system));
-      const near = opacity > 0
-        ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
+      const lone = overview || systemFade.ownOpacity() > .5 ? [] : [selectedEntry, orbitFocus].filter(entry => entry.kind === 'star' && entry.orbit === null && !systemFade.isSystemStar(entry.body.id)).map(entry => ({ entry, distanceM: Math.hypot(...frame.eye(entry.body)) })); // The selected star and a flight's destination, when nothing circles them (loneStarOtherSystems).
+      const highlighting = bodies.some(entry => entry.highlighted === true), otherSystems = lone.length ? Math.min(...lone.map(({ entry, distanceM }) => loneStarOtherSystems(starFieldFade(distanceM, plan.system), distanceM, entry === selectedEntry ? view.selectionReachM ?? 0 : 0))) : otherSystemsOpacity(systemFade.ownOpacity(), starFieldFade(systemFade.ownStarDistanceM(), plan.system));
+      const near = opacity > 0 ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
       // the orbit's nearest depth with the off-axis perspective margin. Selection
       // depends on this view alone; a change between banks is below 0.1 px.
@@ -232,7 +232,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // growth, as its own orbit does, and return as the camera pulls back. A hover or preview shows a path at any range.
         const hostPageMoon = entry.satellite && subject.page && entry.parent!.id === subject.focusId && !hovered && !highlighted;
         const bodyOrbitOpacity = pathOpacity(subject, inSubjectFamily(subject, entry.orbit?.centerBodyId), emphasised, isOrbitFocus || hostPageMoon, hovered || highlighted, fades, outsideFamily);
-        const emphasis = contextEmphasis(hovered, highlighting && !highlighted, systemFade.inOwnSystem(entry.index), otherSystems);
+        const emphasis = contextEmphasis(hovered, highlighting && !highlighted, lone.length ? lone.some(star => star.entry === entry) : systemFade.inOwnSystem(entry.index), otherSystems);
         const systemOpacity = systemFade.of(entry.index);
         // A body of a faded-out system that nothing targets or shows has no marker, path or caption: the stub, unprojected.
         const retiredWithSystem = entry.retired = systemOpacity === 0 && entry.orbit !== null && !ownsDetail && !targeted && !entry.indicatorShown && !entry.labelShown;

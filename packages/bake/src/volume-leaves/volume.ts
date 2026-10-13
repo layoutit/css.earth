@@ -56,10 +56,12 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
   return { schema: PREPARED_CSS_VOLUME_SCHEMA, id, frame,
     anchors: recipe.anchors.map(anchor => ({ id: anchor.id, positionUnits: referencePositionToUnits(anchor.referencePositionM, frame) })),
     stacks: axes.map((axis, index) => {
-      const quads = slices.quads.filter(quad => quad.axis === axis), normal = quads[0]?.normal;
+      // A tilted sheet is drawn with the stack's slabs and is not parallel to them.
+      const quads = slices.quads.filter(quad => quad.axis === axis), slabs = quads.filter(quad => !quad.tilted), normal = slabs[0]?.normal;
       // A volume that draws no slices (recipe drawSlices: false) keeps its frame, anchors and sky with empty stacks.
-      if (!slices.quads.length) return { axis, leaves: [] };
-      if (!normal || Math.abs(Math.hypot(...normal) - 1) > 1e-8 || quads.some(quad =>
+      // So does an axis a recipe gives no slabs (bake.sliceCounts).
+      if (!quads.length) return { axis, leaves: [] };
+      if (!normal || Math.abs(Math.hypot(...normal) - 1) > 1e-8 || slabs.some(quad =>
         Math.abs(Math.abs(quad.normal.reduce((sum, value, i) => sum + value * normal[i]!, 0)) - 1) > 1e-8))
         throw new TypeError('Volume bank needs parallel unit normals.');
       const rotated = normal.some((value, i) => i !== index && Math.abs(value) > 1e-10);

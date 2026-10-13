@@ -32,13 +32,18 @@ export function createDetailStandIn() {
 const HIDDEN_WITHIN_RADII = 8;
 const RESTORED_BY_RADII = 32;
 
+/** What surrounds a framed picture, by the camera's distance in the radii its page frames: 0 while the picture is the
+ * view, 1 once it is one thing among others. */
+export function framedRadiiFade(radii: number): number {
+  const progress = Math.max(0, Math.min(1, (radii - HIDDEN_WITHIN_RADII) / (RESTORED_BY_RADII - HIDDEN_WITHIN_RADII)));
+  return progress * progress * (3 - 2 * progress);
+}
+
 /** Fade surrounding detailed banks, without changing the observer or the Sun-distance sky policy. */
 export function detailedFocusContextOpacity(world: WorldCameraPose,
   focus: SelectedBank | null): number {
   if (!focus) return 1;
-  const radii = eyeDistanceM(world.pose, focus.positionM) / focus.framingRadiusM;
-  const progress = Math.max(0, Math.min(1, (radii - HIDDEN_WITHIN_RADII) / (RESTORED_BY_RADII - HIDDEN_WITHIN_RADII)));
-  return progress * progress * (3 - 2 * progress);
+  return framedRadiiFade(eyeDistanceM(world.pose, focus.positionM) / focus.framingRadiusM);
 }
 
 /** Distant clouds stay out of body close-ups. Fade between a body occupying

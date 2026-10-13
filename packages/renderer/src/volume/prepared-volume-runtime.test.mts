@@ -277,6 +277,18 @@ test('a stack alone in the mix stays just under opaque, so its root never crosse
   runtime.destroy();
 });
 
+test('a stack without leaves takes no part in the choice of view: the stack that draws keeps the whole weight', () => {
+  // A thin disc prepared as sheets has leaves in one stack only.
+  const sheets = payload(3), only = { ...sheets, stacks: sheets.stacks.map(stack => stack.axis === 'z' ? stack : { ...stack, leaves: [] }),
+    resources: sheets.resources.filter(resource => resource.path === 'z.png') };
+  const { runtime, roots } = mount(only);
+  for (const direction of [[0, 0, 1], [1, 1, 1], [1, 0, .3], [1, 0, .05], [0, 1, .01]] as const) {
+    runtime.publish(publication(direction));
+    assert.deepEqual(roots.map(root => root.style.opacity), ['0', '0', '0.999'], `view ${direction.join(',')}`);
+  }
+  runtime.destroy();
+});
+
 test('material replacement survives first visibility of every deferred axis', () => {
   const { runtime, meshes } = mount(payload(3));
   runtime.publish(publication([0, 0, 1]));

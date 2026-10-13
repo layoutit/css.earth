@@ -265,3 +265,16 @@ test('an atlased leaf whose background does not cover its texture is refused', a
     leaves: stack.leaves.map(leaf => ({ ...leaf, style: { ...leaf.style, backgroundSize: '3px 3px' } })) }) };
   await assert.rejects(bake(input, WHITE, broken), /background does not cover/u);
 });
+
+test('a volume with one drawn stack keeps its whole weight at every view, and draws nothing seen edge-on', async () => {
+  // A thin disc prepared as sheets: leaves in the z stack only.
+  const input = await fixture([{ axis: 'z', depth: 0, color: [200, 100, 50, 128] }]);
+  const baked = await bake(input), centre = 4 * (128 * 256 + 128);
+  const faceOn = await baked.image([0, 0, 1]);
+  near(faceOn.data[centre]!, 200); near(faceOn.data[centre + 3]!, 128);
+  // Among three stacks this one has a third of the mix at the diagonal; alone it is whole, with its gain along the view.
+  const oblique = await baked.image([1, 1, 1]);
+  assert.ok(oblique.data[centre + 3]! >= 128, `alpha ${oblique.data[centre + 3]}`);
+  const edgeOn = await baked.image([1, 0, 0]);
+  assert.ok(edgeOn.data.every(value => value === 0), 'a sheet has no area seen edge-on');
+});

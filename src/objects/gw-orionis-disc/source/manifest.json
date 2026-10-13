@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "dust-b6-cont",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gw-orionis-disc-dust-b6-cont",
+            "role": "material",
+            "evidence": "src/objects/gw-orionis-disc/source/manifest.json#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/gw-orionis-disc/observations/kraus.gwori.ALMA.fits",
+      "origin": "https://sourceforge.net/projects/aba4633/files/ALMA/kraus.gwori.ALMA.fits/download",
+      "sourceUrl": "https://sourceforge.net/projects/aba4633/",
+      "title": "Kraus et al. (2020) deposit · ALMA/kraus.gwori.ALMA.fits (self-calibrated 1.3 mm continuum image, 24.9 by 19.9 mas beam)",
+      "credit": "ALMA (ESO/NAOJ/NRAO), projects 2018.1.00813.S and 2012.1.00496.S; Kraus et al. (2020), Science 369, 1233",
+      "displayCredit": "ALMA (ESO/NAOJ/NRAO), Kraus et al.",
+      "acquisition": "The unchanged FITS file ALMA/kraus.gwori.ALMA.fits of the authors’ deposit, https://sourceforge.net/projects/aba4633/, downloaded from its file page.",
+      "license": "The authors’ deposit (SourceForge project aba4633, named in the paper’s data statement) states no license. The image is their reduction of public ALMA observations.",
+      "datasetId": "dust",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "alma",
+            "evidence": "https://sourceforge.net/projects/aba4633/files/ALMA/kraus.gwori.ALMA.fits/download — ALMA (ESO/NAOJ/NRAO), projects 2018.1.00813.S and 2012.1.00496.S; Kraus et al. (2020), Science 369, 1233"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "circumstellar-json",
+      "path": "src/objects/gw-orionis-disc/source/circumstellar.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe: the datasets, their pinned program and bands, the stated conventions and the published geometry each is checked against."
+      }
+    },
+    {
+      "id": "kraus-2020-figure-1-colormap-json",
+      "path": "src/objects/gw-orionis-disc/source/kraus-2020-figure-1-colormap.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The publisher's color map the dust dataset is shown in, read from the published figure as the file itself records (Kraus et al. (2020), Science 369, 1233, Figure 1A, as printed in the accepted manuscript (ESO science paper eso2014a.pdf, page 20). Colors read up the figure’s color bar; its nine printed flux ticks calibrate a power transfer through zero. 1024 entries sample equal flux intervals. This is a false-color brightness display for millimeter emission, not visible color.)."
+      }
+    },
+    {
+      "id": "delivery-json",
+      "path": "src/objects/gw-orionis-disc/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/gw-orionis-disc/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/gw-orionis-disc/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-dust-ktx2",
+      "path": "src/objects/gw-orionis-disc/source/density-dust.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-dust-json",
+      "path": "src/objects/gw-orionis-disc/source/volume-dust.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-dust-png",
+      "path": "src/objects/gw-orionis-disc/source/previews/dust.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "density-dust-ring-ktx2",
+      "path": "src/objects/gw-orionis-disc/source/density-dust-ring.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-dust-ring-json",
+      "path": "src/objects/gw-orionis-disc/source/volume-dust-ring.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    }
+  ]
+}
