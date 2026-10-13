@@ -48,6 +48,13 @@ jobs:
           [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || missing CLOUDFLARE_ACCOUNT_ID "the Cloudflare account id"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Restore generated share images
+        id: share-images-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/share-image-cache
+          key: share-images-v1-${{ runner.os }}-${{ runner.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: share-images-v1-${{ runner.os }}-${{ runner.arch }}-
       - name: Build the site
         # The deploy build regenerates its ignored source/facility catalogues from committed inputs and the restored
         # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;
@@ -89,6 +96,11 @@ jobs:
             git diff --name-only -- src/objects
             exit 1
           fi
+      - name: Save validated share images
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/share-image-cache
+          key: ${{ steps.share-images-cache.outputs.cache-primary-key }}
       - name: Publish the prebuilt site to Cloudflare
         # Bundles the Worker, answers one search and one page from the bundle, and uploads it with the built pages as its
         # static assets (deploy/cloudflare/wrangler.jsonc, the `production` environment). docs/ci-cd.md, "Serving the site from Cloudflare".
