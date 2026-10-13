@@ -3,6 +3,7 @@ import { lstatSync, readFileSync, readdirSync, statSync, writeFileSync } from 'n
 import { isAbsolute, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { compiledCiCacheKeys, type CompiledPackageInput } from './ci-cache-key.mts';
+import { workspacePackageDirectories } from './workspace-packages.mts';
 
 export type CiBuildMode = 'lint' | 'full' | 'packages' | 'generators';
 interface CompiledDirectory { path: string; required: readonly string[]; }
@@ -18,8 +19,8 @@ const record = (value: unknown): value is Record<string, unknown> => value !== n
 const safePath = (value: unknown): value is string => typeof value === 'string' && Boolean(value) && !isAbsolute(value) && !value.split(/[\\/]/u).includes('..');
 
 function packageOutputs(root: string): CompiledDirectory[] {
-  return readdirSync(resolve(root, 'packages'), { withFileTypes: true }).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name, 'en')).flatMap(entry => {
-    const path = `packages/${entry.name}`, manifest: unknown = JSON.parse(readFileSync(resolve(root, path, 'package.json'), 'utf8'));
+  return workspacePackageDirectories(root).flatMap(directory => {
+    const path = `packages/${directory}`, manifest: unknown = JSON.parse(readFileSync(resolve(root, path, 'package.json'), 'utf8'));
     if (!record(manifest) || !record(manifest.scripts)) throw new TypeError(`Invalid package manifest: ${path}`);
     if (typeof manifest.scripts.build !== 'string') return [];
     const entries = [manifest.main, manifest.module, manifest.types, ...Object.values(record(manifest.bin) ? manifest.bin : {})].filter(value => value !== undefined);
