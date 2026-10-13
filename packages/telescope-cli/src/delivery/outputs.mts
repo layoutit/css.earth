@@ -6,6 +6,7 @@ import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { writeProductRecord, sciencePackage, plotProduct } from '@cssearth/telescope-core/node';
+import { deliveryDisplaySources } from './viewer-metadata.mts';
 import { parseProductRecord } from '@cssearth/objects';
 import { VERSION } from '../help.mts';
 import { parseNativeMetadata, type NativeMetadata } from '../products/native-metadata.mts';
@@ -148,9 +149,10 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     const rows=requireArray(answer.structures).map(v=>requireRecord(v)),found=rows.filter(s=>s.fitsHdu===request.hdu);
     if(found.length!==1||found[0].extraction===undefined)throw new Error('Selected HDU is not an unambiguous science array');
     const data=requireRecord(found[0].extraction);
-    const plotted=await plotProduct(staging,d.target ?? 'ICRS field',data,input.file,{...request});
+    const plotted=await plotProduct(staging,d.target ?? 'ICRS field',data,input.file,{...request,figureStretch:'percentile'});
+    const displaySources=await deliveryDisplaySources(d.directory,d.files,answer.primary);
     const fresh=await delivery(resultPath);if(!fresh.recordBytes.equals(d.recordBytes))throw new Error(`${resultPath} changed while producing output`);
-    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,bytes:d.pin.bytes},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:VERSION},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
+    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,bytes:d.pin.bytes},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),bytes:f.bytes}))],parameters:{selection:request,displaySources,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:VERSION},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),run,names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});
@@ -175,7 +177,7 @@ async function exportSourceOutput(source:NonNullable<Awaited<ReturnType<typeof o
     const rows=requireArray(answer.structures).map(v=>requireRecord(v)),found=rows.filter(s=>s.fitsHdu===request.hdu);
     if(found.length!==1||found[0].extraction===undefined)throw new Error('Selected HDU is not an unambiguous science array');
     const data=requireRecord(found[0].extraction);
-    const plotted=await plotProduct(staging,label,data,file,{...request});
+    const plotted=await plotProduct(staging,label,data,file,{...request,figureStretch:'percentile'});
     const fresh=pds?await openPdsSource(source.path):await openFitsSource(source.path);
     if(!fresh||!fresh.source.recordBytes.equals(source.source.recordBytes))throw new Error(`${source.source.file} changed while producing output`);
     const names=requireArray(plotted.files).map(v=>requireString(v));
@@ -189,7 +191,7 @@ async function exportSourceOutput(source:NonNullable<Awaited<ReturnType<typeof o
               if(!output)throw new Error(`${role} FITS companion ${path} is not an output of ${source.source.file}`);
               return {role:`FITS ${role}`,identity:path,bytes:output.bytes};
             })])],
-      parameters:{selection:request,label,status:'unresolved',limitations:source.limitations,...(prepared?.native?{native:prepared.native}:{}),
+      parameters:{selection:request,label,status:'unresolved',limitations:source.limitations,displaySources:{header:answer.primary},...(prepared?.native?{native:prepared.native}:{}),
         definition:data.definition??(request.kind==='image'?'Native sampled image plane; no registered surface map.':'Selected samples from a pinned source.'),
         measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},
         metadata:parseNativeMetadata(found[0]),software:plotted},

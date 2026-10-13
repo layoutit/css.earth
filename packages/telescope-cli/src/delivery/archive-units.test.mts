@@ -11,8 +11,32 @@ import { requireArray, requireRecord } from '@cssearth/core';
 import sharp from 'sharp';
 
 test('science owns detector aliases without changing SI case or admitting unknown units', async () => {
-  const result = await sciencePackage({ operation: 'units', units: ['ADU', 'adu', 'AdU', 'COUNTS', 'counts', 'DN', 'dn', 'ELECTRONS', 'ADU/s', 'm', 'MJy', 'unknown-detector-unit'] });
-  assert.deepEqual(result.units, ['adu', 'adu', 'adu', 'ct', 'ct', 'adu', 'adu', 'electron', 'adu / s', 'm', 'MJy', null]);
+  const result = await sciencePackage({ operation: 'units', units: ['dN', 'dN/s', 'ADU', 'adu', 'AdU', 'COUNTS', 'counts', 'DN', 'dn', 'ELECTRONS', 'ADU/s', 'm', 'MJy', 'unknown-detector-unit'] });
+  // Astropy has a native digital-number unit (DN), distinct from adu; exact parsing retains it.
+  assert.deepEqual(result.units, ['dN', 'dN / s', 'adu', 'adu', null, 'ct', null, 'DN', 'DN', 'electron', 'adu / s', 'm', 'MJy', null]);
+});
+
+test('decinewton science refuses detector-count uncertainty and retains force scaling', async () => {
+  const root=await mkdtemp(resolve(tmpdir(),'force-units-')),tc=await astroqueryToolchain();
+  try {
+    const file=resolve(root,'force.fits');
+    execFileSync(tc.python,['-c',String.raw`
+import sys,numpy as np
+from astropy.io import fits
+h=fits.PrimaryHDU(np.ones((2,3)));h.header['BUNIT']='dN'
+err=fits.ImageHDU(np.ones((2,3)),name='ERR');err.header['BUNIT']='ADU'
+fits.HDUList([h,err]).writeto(sys.argv[1])`,file],{env:telescopePythonEnvironment(tc.env)});
+    await assert.rejects(sciencePackage({operation:'extract',path:file,kind:'image',hdu:0}),/Uncertainty units disagree with science/u);
+    execFileSync(tc.python,['-c',String.raw`
+import sys
+from astropy.io import fits
+with fits.open(sys.argv[1],mode='update') as f:f['ERR'].header['BUNIT']='N'
+`,file],{env:telescopePythonEnvironment(tc.env)});
+    const answer=await sciencePackage({operation:'extract',path:file,kind:'image',hdu:0});
+    const row=requireRecord(requireArray(answer.structures)[0]);
+    assert.equal(requireRecord(row.units).canonical,'dN');
+    assert.deepEqual(requireRecord(row.extraction).sigma,[[10,10,10],[10,10,10]]);
+  }finally{await rm(root,{recursive:true,force:true});}
 });
 
 test('unsupported beam table units stay a limitation during native image export', async () => {
@@ -63,7 +87,7 @@ fits.HDUList(hdus).writeto(sys.argv[1])`, file, unit], { env: telescopePythonEnv
           assert.match(JSON.stringify(requireRecord(requireRecord(parameters.software).presentation).warnings), /unsupported science unit: unknown-detector-unit/u);
         } else {
           assert.equal(requireRecord(metadata.units).value, unit);
-          if (unit === 'ELECTRONS') assert.match(JSON.stringify(requireRecord(requireRecord(parameters.software).presentation).warnings), /not representable in standard FITS syntax/u);
+          if (unit === 'ELECTRONS'||unit==='DN') assert.match(JSON.stringify(requireRecord(requireRecord(parameters.software).presentation).warnings), /not representable in standard FITS syntax/u);
         }
         execFileSync(tc.python, ['-c', String.raw`
 import sys,numpy as np
@@ -73,7 +97,7 @@ with fits.open(sys.argv[1]) as f:
  np.testing.assert_equal(f[0].data,np.arange(12).reshape(3,4))
  if sys.argv[2]!='unknown-detector-unit': np.testing.assert_equal(f['ERR'].data,1)
  else: assert 'ERR' not in f
-`, resolve(directory, 'image.fits'), unit === 'COUNTS' ? 'count' : unit === 'ELECTRONS' ? 'electron' : unit === 'unknown-detector-unit' ? unit : 'adu'], { env: telescopePythonEnvironment(tc.env) });
+`, resolve(directory, 'image.fits'), unit === 'COUNTS' ? 'count' : unit === 'ELECTRONS' ? 'electron' : unit === 'unknown-detector-unit'||unit==='DN' ? unit : 'adu'], { env: telescopePythonEnvironment(tc.env) });
         if (kind === 'html') {
           const html = await readFile(resolve(directory, 'viewer.html'), 'utf8');
           assert.match(html, /data:image\/png;base64,/u);

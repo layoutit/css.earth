@@ -77,10 +77,14 @@ with (out/'values.csv').open('w',newline='') as file:
   product.writeto(out/'image.fits');product.close();files.append('image.fits')
   fig,ax=plt.subplots(figsize=(8,5),layout='constrained',subplot_kw={'projection':spatial} if spatial is not None else {})
   lo,hi=float(np.nanmin(values)),float(np.nanmax(values))
+  display=r['selection'].get('figureStretch','minmax')
+  if display not in ('minmax','percentile'):raise ValueError('figureStretch must be minmax or percentile')
+  if display=='percentile':lo,hi=map(float,np.percentile(values[np.isfinite(values)],[.5,99.5]))
   if kind=='feature-map':hi=max(abs(lo),abs(hi));lo=-hi
-  norm=ImageNormalize(vmin=lo,vmax=hi,stretch=LinearStretch(),clip=False)
+  norm=ImageNormalize(vmin=lo,vmax=hi,stretch=LinearStretch(),clip=display=='percentile')
   cmap='RdBu_r' if kind=='feature-map' else 'viridis'
   presentation['normalization']={'owner':'astropy.visualization.ImageNormalize','stretch':'linear','minimum':lo,'maximum':hi,'colormap':cmap,'missing':'transparent'}
+  if display=='percentile':presentation['normalization'].update(limits='percentile',percentiles=[.5,99.5],samples='finite unmasked native values',clip=True)
   stride=max(1,int(np.ceil(max(values.shape)/1600)))
   preview=values[::stride,::stride]
   presentation['preview']={'method':'nearest sample','stride':stride,'shape':list(preview.shape),'numericProducts':'full native grid; no downsampling'}

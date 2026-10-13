@@ -11,16 +11,20 @@ from astropy import units as u
 def archive_unit(text):
     if text is None: return None
     text = str(text).strip()
+    def parse(value):
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter('error')
+                return u.Unit(value, parse_strict='raise')
+        except (ValueError, TypeError, Warning): return None
+    # Astropy's case-sensitive vocabulary wins: dN is decinewton, never DN.
+    exact = parse(text)
+    if exact is not None: return exact
     aliases = {'I/F':'1', 'DIMENSIONLESS':'1', 'METER':'m', 'METERS':'m', 'W/M**2/SR/NM':'W m-2 sr-1 nm-1'}
     text = aliases.get(text, text)
-    # Normalize only known detector tokens; arbitrary SI unit case carries meaning.
-    tokens = {'adu':'adu', 'dn':'adu', 'count':'count', 'counts':'count', 'electron':'electron', 'electrons':'electron'}
-    text = re.sub(r'\b(?:adu|dn|counts?|electrons?)\b', lambda match: tokens[match.group().lower()], text, flags=re.IGNORECASE)
-    try:
-        with warnings.catch_warnings():
-            warnings.simplefilter('error')
-            return u.Unit(text, parse_strict='raise')
-    except (ValueError, TypeError, Warning): return None
+    tokens = {'ADU':'adu', 'DN':'adu', 'COUNT':'count', 'COUNTS':'count', 'ELECTRON':'electron', 'ELECTRONS':'electron'}
+    text = re.sub(r'\b(?:ADU|DN|COUNTS?|ELECTRONS?)\b', lambda match: tokens[match.group()], text)
+    return parse(text)
 
 def required_archive_unit(text, label):
     parsed = archive_unit(text)
