@@ -230,6 +230,326 @@
         "noData": true
       },
       {
+        "id": "infrared-2016-12-14",
+        "label": "Thermal infrared",
+        "shortLabel": "4.7 µm",
+        "step": {
+          "group": "gemini-thermal",
+          "label": "2016-12-14"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-infrared-2016-12-14.webp",
+        "surface": "/scenes/jupiter/jupiter-infrared-2016-12-14@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-infrared-2016-12-14-poles@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "Gemini North NIRI · 2016-12-14",
+        "notes": "Jupiter's own thermal emission at 4.7 µm (M′ filter), mapped from Gemini North NIRI images of 14 December 2016, 14:21 to 16:18 UT, by Wong et al. (2020), who kept the sharpest of many short exposures. Shown in the colors and square-root stretch of the archive's picture of this map. The values are uncalibrated counts on this night's own scale, so compare shapes between nights, not brightness. The gray grid marks longitudes that did not turn into view that night and latitudes beyond 80°.",
+        "source": {
+          "id": "gemini-niri-jupiter-2016-12-14-mprime",
+          "path": "../telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2016-pj03_mprime_v1_1214ut1520-mosaic.fits",
+          "url": "https://archive.stsci.edu/hlsp/wfcj"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness at 4.7 µm",
+          "meta": "M′ · uncalibrated counts, square-root scale",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/wfcj",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                48,
+                0,
+                0
+              ],
+              [
+                99,
+                0,
+                0
+              ],
+              [
+                151,
+                0,
+                0
+              ],
+              [
+                194,
+                0,
+                0
+              ],
+              [
+                238,
+                68,
+                1
+              ],
+              [
+                255,
+                147,
+                2
+              ],
+              [
+                254,
+                203,
+                121
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "Fainter",
+              "Brighter"
+            ]
+          }
+        }
+      },
+      {
+        "id": "infrared-2017-01-23",
+        "label": "Thermal infrared",
+        "shortLabel": "4.7 µm",
+        "step": {
+          "group": "gemini-thermal",
+          "label": "2017-01-23"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-infrared-2017-01-23.webp",
+        "surface": "/scenes/jupiter/jupiter-infrared-2017-01-23@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-infrared-2017-01-23-poles@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "Gemini North NIRI · 2017-01-23",
+        "notes": "Jupiter's own thermal emission at 4.7 µm (M′ filter), mapped from Gemini North NIRI images of 23 January 2017, 12:25 to 16:17 UT, by Wong et al. (2020), who kept the sharpest of many short exposures. Shown in the colors and square-root stretch of the archive's picture of this map. The values are uncalibrated counts on this night's own scale, so compare shapes between nights, not brightness. The gray grid marks longitudes that did not turn into view that night and latitudes beyond 80°.",
+        "source": {
+          "id": "gemini-niri-jupiter-2017-01-23-mprime",
+          "path": "../telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2017-pj03b_mprime_v1_0123ut1421-mosaic.fits",
+          "url": "https://archive.stsci.edu/hlsp/wfcj"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness at 4.7 µm",
+          "meta": "M′ · uncalibrated counts, square-root scale",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/wfcj",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                48,
+                0,
+                0
+              ],
+              [
+                99,
+                0,
+                0
+              ],
+              [
+                151,
+                0,
+                0
+              ],
+              [
+                194,
+                0,
+                0
+              ],
+              [
+                238,
+                68,
+                1
+              ],
+              [
+                255,
+                147,
+                2
+              ],
+              [
+                254,
+                203,
+                121
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "Fainter",
+              "Brighter"
+            ]
+          }
+        }
+      },
+      {
+        "id": "infrared-2018-07-16",
+        "label": "Thermal infrared",
+        "shortLabel": "4.7 µm",
+        "step": {
+          "group": "gemini-thermal",
+          "label": "2018-07-16"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-infrared-2018-07-16.webp",
+        "surface": "/scenes/jupiter/jupiter-infrared-2018-07-16@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-infrared-2018-07-16-poles@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "Gemini North NIRI · 2018-07-16",
+        "notes": "Jupiter's own thermal emission at 4.7 µm (M′ filter), mapped from Gemini North NIRI images of 16 July 2018, 06:01 to 08:44 UT, by Wong et al. (2020), who kept the sharpest of many short exposures. Shown in the colors and square-root stretch of the archive's picture of this map. The values are uncalibrated counts on this night's own scale, so compare shapes between nights, not brightness. The gray grid marks longitudes that did not turn into view that night and latitudes beyond 80°.",
+        "source": {
+          "id": "gemini-niri-jupiter-2018-07-16-mprime",
+          "path": "../telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2018-pj14_mprime_v1_0716ut0722-mosaic.fits",
+          "url": "https://archive.stsci.edu/hlsp/wfcj"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness at 4.7 µm",
+          "meta": "M′ · uncalibrated counts, square-root scale",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/wfcj",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                48,
+                0,
+                0
+              ],
+              [
+                99,
+                0,
+                0
+              ],
+              [
+                151,
+                0,
+                0
+              ],
+              [
+                194,
+                0,
+                0
+              ],
+              [
+                238,
+                68,
+                1
+              ],
+              [
+                255,
+                147,
+                2
+              ],
+              [
+                254,
+                203,
+                121
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "Fainter",
+              "Brighter"
+            ]
+          }
+        }
+      },
+      {
+        "id": "infrared-2019-04-06",
+        "label": "Thermal infrared",
+        "shortLabel": "4.7 µm",
+        "step": {
+          "group": "gemini-thermal",
+          "label": "2019-04-06"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-infrared-2019-04-06.webp",
+        "surface": "/scenes/jupiter/jupiter-infrared-2019-04-06@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-infrared-2019-04-06-poles@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "Gemini North NIRI · 2019-04-06",
+        "notes": "Jupiter's own thermal emission at 4.7 µm (M′ filter), mapped from Gemini North NIRI images of 6 April 2019, 12:23 to 14:50 UT, by Wong et al. (2020), who kept the sharpest of many short exposures. Shown in the colors and square-root stretch of the archive's picture of this map. The values are uncalibrated counts on this night's own scale, so compare shapes between nights, not brightness. The gray grid marks longitudes that did not turn into view that night and latitudes beyond 80°.",
+        "source": {
+          "id": "gemini-niri-jupiter-2019-04-06-mprime",
+          "path": "../telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2019-pj19_mprime_v1_0406ut1336-mosaic.fits",
+          "url": "https://archive.stsci.edu/hlsp/wfcj"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness at 4.7 µm",
+          "meta": "M′ · uncalibrated counts, square-root scale",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/wfcj",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                48,
+                0,
+                0
+              ],
+              [
+                99,
+                0,
+                0
+              ],
+              [
+                151,
+                0,
+                0
+              ],
+              [
+                194,
+                0,
+                0
+              ],
+              [
+                238,
+                68,
+                1
+              ],
+              [
+                255,
+                147,
+                2
+              ],
+              [
+                254,
+                203,
+                121
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "Fainter",
+              "Brighter"
+            ]
+          }
+        }
+      },
+      {
         "id": "visible-2015a",
         "label": "Hubble dates",
         "shortLabel": "Hubble",

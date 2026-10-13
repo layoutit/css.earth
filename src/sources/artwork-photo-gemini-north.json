@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-gemini-north",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "Gemini North telescope photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Dome_of_the_Gemini_North_Telescope_on_Maunakea_(noirlab-20160318-pv-shots-176).jpg",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Dome_of_the_Gemini_North_Telescope_on_Maunakea_%28noirlab-20160318-pv-shots-176%29.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Dome_of_the_Gemini_North_Telescope_on_Maunakea_(noirlab-20160318-pv-shots-176).jpg",
+      "checkedOn": "2026-10-13",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "International Gemini Observatory/NOIRLab/NSF/AURA/J. Pollard"
+  ]
+}

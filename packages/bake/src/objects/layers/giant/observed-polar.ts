@@ -31,7 +31,7 @@ export function parseObservedPolarRecipe(input: unknown) {
     ids.add(dataset.id);source(dataset.source);
     for(const filename of Object.values(dataset.files)){validateRelativePath(filename);if(outputs.has(filename))throw new TypeError('Observed polar outputs must be unique.');outputs.add(filename);}
     if(dataset.operation==='rgb-measured-rows'&&(!Number.isInteger(dataset.coverage.columnStride)||dataset.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
-    if(dataset.operation==='rgb-measured-rows'&&dataset.planetographicAxisRatio!==undefined&&!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('An ellipsoid ratio must be at least 1.');
+    if((dataset.operation==='rgb-measured-rows'||dataset.operation==='scalar-observed-gaps')&&dataset.planetographicAxisRatio!==undefined&&!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('An ellipsoid ratio must be at least 1.');
     if(dataset.operation==='rgb-observed-gaps'){
       if(dataset.coverageSources.length!==POLAR_RECIPE_POLICY.rgbComponents||!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('RGB maps require three component coverage maps and an ellipsoid ratio.');
       dataset.coverageSources.forEach(source);
@@ -150,10 +150,20 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
       const measuredSource=measureScalarCoverage(scalar,dataset.scalar);
       sourceRange=dataset.scalar.range??finitePercentiles(measuredSource.values,...dataset.scalar.percentiles,dataset.scalar.minimumCoverageFraction,measuredSource.missing);
       if(!(sourceRange[1]>sourceRange[0]))throw new Error('Scalar observation has no measured dynamic range.');
-      const original={data:falseColorMap(measuredSource,dataset.palette,...sourceRange,dataset.scalar.gamma),info:{width:scalar.width,height:scalar.height,channels:4},missing:measuredSource.missing};
+      let mapData: Buffer=falseColorMap(measuredSource,dataset.palette,...sourceRange,dataset.scalar.gamma),mapMissing: Uint8Array=measuredSource.missing;
+      measured={firstMeasuredRow:measuredSource.firstMeasuredRow,lastMeasuredRow:measuredSource.lastMeasuredRow,sourceMissingPixels:measuredSource.sourceMissingPixels};
+      if(dataset.planetographicAxisRatio!==undefined) {
+        // The stretch above is read from the source's own rows; from here the map is in the mesh's latitude, and a row that
+        // mixes a measured row with a missing one is missing.
+        mapData=planetographicRowsToMeshLatitude(mapData,scalar.width,scalar.height,4,dataset.planetographicAxisRatio);
+        const meshData=mapData;
+        mapMissing=Uint8Array.from({length:scalar.width*scalar.height},(_,i)=>meshData[i*4+3]===255?0:1);
+        if(!mapMissing.includes(0))throw new Error('Scalar map has no measured coverage.');
+        measured={firstMeasuredRow:Math.floor(mapMissing.indexOf(0)/scalar.width),lastMeasuredRow:Math.floor(mapMissing.lastIndexOf(0)/scalar.width),sourceMissingPixels:mapMissing.reduce((sum,n)=>sum+n,0)};
+      }
+      const original={data:mapData,info:{width:scalar.width,height:scalar.height,channels:4},missing:mapMissing};
       source2x=resizeObservedRgb(original,width*2,height*2);
       source1x=resizeObservedRgb(original,width,height);
-      measured={firstMeasuredRow:measuredSource.firstMeasuredRow,lastMeasuredRow:measuredSource.lastMeasuredRow,sourceMissingPixels:measuredSource.sourceMissingPixels};
       polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...dataset.projection});
     }
     if(poleProjection){

@@ -3984,6 +3984,61 @@
         ]
       },
       "imageId": "mayall-4m"
+    },
+    {
+      "id": "gemini-north",
+      "name": {
+        "value": "Gemini North telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-gemini-north",
+            "checkedOn": "2026-10-13",
+            "locator": "Title: Gemini North telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "An 8.1-metre telescope on Maunakea in Hawai‘i, 4,214 m above the sea. Its twin, Gemini South, is in Chile.",
+        "citations": [
+          {
+            "catalogueId": "reference-gemini-north",
+            "checkedOn": "2026-10-13",
+            "locator": "Overview: The International Gemini Observatory consists of twin 8.1-meter diameter optical/infrared telescopes. Table: Site Maunakea, Hawai‘i, USA; Altitude 4214 meters; Type Optical/Infrared telescope; Diameter: Primary M1 8.1 meters"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-gemini-north",
+            "checkedOn": "2026-10-13",
+            "locator": "Table: Site Maunakea, Hawai‘i, USA; Altitude 4214 meters; Type Optical/Infrared telescope; Diameter: Primary M1 8.1 meters"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-gemini-north",
+            "checkedOn": "2026-10-13",
+            "locator": "Table: Site Maunakea, Hawai‘i, USA; Altitude 4214 meters; Type Optical/Infrared telescope; Diameter: Primary M1 8.1 meters"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical and infrared",
+        "citations": [
+          {
+            "catalogueId": "reference-gemini-north",
+            "checkedOn": "2026-10-13",
+            "locator": "Table: Site Maunakea, Hawai‘i, USA; Altitude 4214 meters; Type Optical/Infrared telescope; Diameter: Primary M1 8.1 meters"
+          }
+        ]
+      },
+      "imageId": "gemini-north"
     }
   ],
   "missions": [
