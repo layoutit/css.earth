@@ -1,7 +1,7 @@
 /** F13 keeps ESO's paired intensity/DOLP products distinct from Stokes products. */
+import { telescopePythonEnvironment, astroqueryToolchain, plotNumericPreview, type FigureOptions, fileSize } from '@cssearth/telescope-core/node';
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain, plotNumericPreview, type FigureOptions, fileSize } from '@cssearth/telescope/node';
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
 import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';
@@ -71,7 +71,7 @@ else:
  out=data[tuple(slice(None) if a['role'] in want else sl[a['id']] for a in axes)]
  result={'operation':r['operation'],'component':r['component'],'shape':[int(x) for x in out.shape],'axes':[a for a in axes if a['role'] in want],'selection':sl,'values':np.asarray(out,dtype=float).tolist(),'conventions':{'basis':'FITS STOKES WCS codes','sign':'as declared by archive FITS/WCS','frame':str(q.get('RADESYS',q.get('EQUINOX','unspecified')))},'astropy':astropy.__version__}
 json.dump(result,sys.stdout,allow_nan=False)`;
-async function stokesRun(pin:StokesPin,selection:StokesSelection):Promise<any>{const toolchain=await astroqueryToolchain();return new Promise((done,fail)=>{const child=spawn(toolchain.python,['-c',stokesPython],{env:{...process.env,...toolchain.env},stdio:['pipe','pipe','pipe']});let out='',err='';child.stdout.setEncoding('utf8').on('data',x=>out+=x);child.stderr.setEncoding('utf8').on('data',x=>err+=x);child.on('error',fail);child.on('close',code=>{if(code!==0)return fail(new Error(`Astropy Stokes owner failed: ${err.slice(-1000)}`));try{done(JSON.parse(out));}catch(error){fail(error);}});child.stdin.end(JSON.stringify({path:pin.path,...selection}));});}
+async function stokesRun(pin:StokesPin,selection:StokesSelection):Promise<any>{const toolchain=await astroqueryToolchain();return new Promise((done,fail)=>{const child=spawn(toolchain.python,['-c',stokesPython],{env: telescopePythonEnvironment(toolchain.env),stdio:['pipe','pipe','pipe']});let out='',err='';child.stdout.setEncoding('utf8').on('data',x=>out+=x);child.stderr.setEncoding('utf8').on('data',x=>err+=x);child.on('error',fail);child.on('close',code=>{if(code!==0)return fail(new Error(`Astropy Stokes owner failed: ${err.slice(-1000)}`));try{done(JSON.parse(out));}catch(error){fail(error);}});child.stdin.end(JSON.stringify({path:pin.path,...selection}));});}
 export async function inspectStokesFits(pin:StokesPin){return stokesRun(pin,{operation:'stokes-inspect'});}
 export async function extractStokesFits(pin:StokesPin,selection:StokesSelection){if(selection.operation==='stokes-inspect')throw new TypeError('Use inspectStokesFits for inspection.');return stokesRun(pin,selection);}
 /** Render an already extracted native Stokes image or one-dimensional cut. No component or convention is changed. */

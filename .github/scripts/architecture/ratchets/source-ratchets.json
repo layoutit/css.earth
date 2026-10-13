@@ -39,11 +39,10 @@
     }
   },
   "cwd": {
-    "ceiling": 5,
+    "ceiling": 4,
     "entries": {
-      "packages/telescope-cli/src/session.mts": "User output directory telescope-runs is intentionally relative to the invoking working directory.",
+      "packages/telescope-cli/src/cli-workspace.mts": "CLI entries admit the invoking directory before their dependencies capture roots, and pass it explicitly to library workspace discovery.",
       "packages/telescope-cli/src/cli-format.mts": "Display paths relative to the invoking working directory; does not choose a checkout root.",
-      "packages/telescope-cli/src/bin.mts": "CLI --workspace defaults to the invoking directory and discovers the workspace above it.",
       "packages/bake/cli/refresh-sphere-photographs.mts": "Print refreshed output paths relative to the invoking directory; does not choose a checkout root.",
       "packages/bake/cli/object-operations.mts": "Object operations entry is documented to run from the checkout working directory."
     }

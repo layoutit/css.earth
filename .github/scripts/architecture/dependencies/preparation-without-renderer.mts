@@ -7,12 +7,16 @@ import { importedSpecifiers } from './declared-dependencies.mts';
 
 export interface RendererException { readonly path: string; readonly reason: string }
 export const PREPARATION_RENDERER_EXCEPTIONS: readonly RendererException[] = [
-  { path: 'packages/telescope-cli/package.json', reason: 'Declares renderer for the four named runtime transport/publication consumers.' },
-  { path: 'packages/telescope-cli/src/implementation-dependencies.mts', reason: 'Reads the declared renderer build config input to follow its entry sources; never runs renderer here.' },
-  { path: 'packages/telescope-cli/src/delivery/spatial-handoff.mts', reason: 'Runs application loaders, including compressed binary point banks, for physical resource handoff.' },
+  { path: 'packages/telescope-cli/package.json', reason: 'Declares renderer for the named runtime transport/publication consumers and their build inputs.' },
+  { path: 'packages/telescope-cli/src/package/implementation-dependencies.mts', reason: 'Reads the declared renderer build config input to follow its entry sources; never runs renderer here.' },
+  { path: 'packages/telescope-cli/src/delivery/viewer-lane.mts', reason: 'Exports the application spatial loaders and publication adapters as the bundled viewer entry.' },
+  { path: 'packages/telescope-cli/src/delivery/points-html.mts', reason: 'Publishes verified point fields using the retained renderer point layer and photometry.' },
+  { path: 'packages/telescope-cli/src/delivery/volume-html.mts', reason: 'Serializes the retained slab renderer for verified volume HTML.' },
+  { path: 'packages/telescope-cli/src/delivery/html-outputs.mts', reason: 'Copies the renderer volume stylesheet into standalone HTML publication.' },
+  { path: 'packages/telescope-cli/src/package/package-data.mts', reason: 'Copies the preserved renderer volume stylesheet into packaged runtime data.' },
+  { path: 'packages/telescope-cli/tsup.config.ts', reason: 'Names renderer source paths for bundled viewer and sphere declaration resolution.' },
   { path: 'packages/telescope-cli/src/sphere/native-scroll/native-camera.mts', reason: 'Reads retained renderer variants and camera transforms for native CSS publication.' },
   { path: 'packages/telescope-cli/src/sphere/sphere-html.mts', reason: 'Serializes and publishes retained renderer scenes into sphere HTML.' },
-  { path: 'packages/telescope-cli/src/sphere/sphere-oracle.mts', reason: 'Runs the world-context renderer to generate oracle scenes.' },
 ];
 const PREPARATION = /^packages\/(?:bake|telescope-cli)\//u;
 const SOURCE = /\.[cm]?[jt]sx?$/u;

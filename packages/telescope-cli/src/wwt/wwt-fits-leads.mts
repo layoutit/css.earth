@@ -1,8 +1,9 @@
 /** Curated target associations for WWT-hosted numeric FITS collections. They are leads, not field or detection checks. */
+import { inputPath } from '../paths.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import type { TargetCatalogueEntry } from '@cssearth/telescope';
+import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 
 export interface WwtFitsLead { readonly pick:number;readonly target:string;readonly catalog:string;
   readonly imageset:string;readonly bandPass:string;readonly evidence:string;readonly sourceUrl:string }
@@ -17,7 +18,7 @@ const catalogName=(value:unknown):string=>{
 
 export async function loadWwtFitsLeads(root:string,target:TargetCatalogueEntry):Promise<WwtFitsLeads>{
   try{
-    const directory=resolve(root,'src/sources/wwt'),index=requireRecord(JSON.parse(await readFile(resolve(directory,'fits-associations.json'),'utf8')),'WWT FITS associations');
+    const directory=inputPath(root, 'src/sources/wwt'),index=requireRecord(JSON.parse(await readFile(resolve(directory,'fits-associations.json'),'utf8')),'WWT FITS associations');
     if(index.schema!=='cssearth-wwt-fits-associations@1')throw new TypeError('Unsupported WWT FITS association schema');
     const entries=requireArray(index.associations,'WWT FITS associations'),matches:WwtFitsLead[]=[],seen=new Set<string>();
     for(const raw of entries){
@@ -54,5 +55,5 @@ export async function resolveWwtFitsLead(root:string,explorationPath:string,pick
   const current=fresh.matches.find(row=>row.catalog===selected.catalog&&row.imageset===selected.imageset);
   if(!current||current.target!==selected.target||current.evidence!==selected.evidence||current.sourceUrl!==selected.sourceUrl||current.bandPass!==selected.bandPass)
     throw new Error('WWT FITS catalog or target association changed; explore again');
-  return {catalog:resolve(root,'src/sources/wwt',catalogName(current.catalog)),imageset:current.imageset};
+  return {catalog:resolve(inputPath(root, 'src/sources/wwt'),catalogName(current.catalog)),imageset:current.imageset};
 }

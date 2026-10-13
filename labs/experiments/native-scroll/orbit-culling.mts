@@ -1,4 +1,4 @@
-import type { NativeCameraRotation } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
+import type { NativeCameraRotation } from '../../../packages/telescope-cli/src/sphere/native-scroll/native-camera.mts';
 import { ORBIT_RENDERER_LOD_PIXELS } from '@cssearth/renderer/solar-system/prepared-orbit-lines.ts';
 
 interface Level { readonly vertexIndices:readonly number[]; readonly deviationM:number }

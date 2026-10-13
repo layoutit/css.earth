@@ -6,8 +6,8 @@ import type { ConstraintVerdict, RequestSatisfaction } from '../requests/request
 import type { SourceIntakeIssue } from '../products/source-intake.mts';
 import type { LoadedSourceProduct } from '../products/source-products.mts';
 import type { QualificationAction } from '../qualification/qualification-routes.mts';
-import type { TargetAssociation } from '@cssearth/telescope/node';
-import type { TargetCatalogueEntry, TargetResolution } from '@cssearth/telescope';
+import type { TargetAssociation } from '@cssearth/telescope-core/node';
+import type { TargetCatalogueEntry, TargetResolution } from '@cssearth/telescope-core';
 
 export const ARCSEC_PER_RADIAN = 206_264.806_247;
 export const TARGET_ASSOCIATIONS_PATH = 'src/sources/telescopes/target-associations.json';
@@ -80,9 +80,9 @@ export type ProviderSearchState = 'sampled' | 'overflow' | 'empty-in-scope' | 'u
 export interface TargetCoverage { readonly telescope: string; readonly ledger: string; readonly state: TargetCoverageState; readonly reason: string;
   readonly registryProducts?: number; readonly admittedProducts?: number; readonly rejected?: readonly { readonly lidvid: string; readonly reason: string }[] }
 /** A bounded answer describes only configured searches; incomplete evidence cannot support a negative. */
-export function assessSearchCoverage(input:{readonly resolution:TargetResolution;readonly indexed:readonly TargetCoverage[];
+export function assessSearchCoverage(input:{readonly resolution:TargetResolution | { readonly status: 'position' };readonly indexed:readonly TargetCoverage[];
   readonly providers:readonly {readonly state:ProviderSearchState}[];readonly sourceIncomplete?:boolean;readonly unresolved?:boolean}):SearchCoverage {
-  if(input.resolution.status!=='resolved')return 'target-unresolved';
+  if(input.resolution.status!=='resolved' && input.resolution.status!=='position')return 'target-unresolved';
   return input.unresolved||input.sourceIncomplete||input.indexed.some(item=>item.state==='not-searched'||item.state==='unanswered')
     ||input.providers.some(service=>service.state==='unavailable'||service.state==='overflow')?'incomplete':'bounded';
 }

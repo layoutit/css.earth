@@ -13,7 +13,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '@cssearth/telescope/node';
+import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '@cssearth/telescope-core/node';
 import { bandOfFilters } from './archive.mts';
 
 export interface SurveyedObservation {

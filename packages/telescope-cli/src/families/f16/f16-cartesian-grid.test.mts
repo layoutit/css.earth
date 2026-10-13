@@ -5,7 +5,7 @@ const test = sourceTest();
 import {mkdir,mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import { astroqueryToolchain, fileSize, readProductRecord } from '@cssearth/telescope/node';
+import { astroqueryToolchain, fileSize, readProductRecord } from '@cssearth/telescope-core/node';
 import {executeFamilyOperation} from '../../family-operation.mts';
 import {listArtifactOutputs} from '../../delivery/artifact-outputs.mts';
 import {importLocalArtifact} from '../../local-import.mts';

@@ -81,3 +81,26 @@ test('value tokens with one hyphen are accepted; errors keep their original prec
   assert.deepEqual(parseCli(['wwt-fits','catalog','--set','name','--level','0','--x','0','--y','0','--out','out']),
     { command:'wwt-fits', catalog:resolve('catalog'), setName:'name', level:0, x:0, y:0, directory:resolve('out'), ...common });
 });
+
+test('explore accepts a circle without a name, refuses neither, and validates all coordinate bounds', () => {
+  const parsed = parseCli(['explore', '--icrs-circle', '83.82,-5.39,0.1', '--json']);
+  assert.equal(parsed.command, 'explore');
+  if (parsed.command !== 'explore') throw new Error('Expected exploration.');
+  assert.deepEqual(parsed.request, { search: 'position', footprint: { frame: 'icrs', shape: 'circle', raDegrees: 83.82, decDegrees: -5.39, radiusDegrees: 0.1 } });
+  assert.equal(parsed.json, true);
+  assert.throws(() => parseCli(['explore']), /Use telescope explore TARGET or telescope explore --icrs-circle/u);
+  for (const circle of ['-1,0,1', '360,0,1', '0,-91,1', '0,91,1', '0,0,0', '0,0,-1', '0,0,181', 'NaN,0,1', '0,Infinity,1', ',0,1', '0,,1', '0,0,'])
+    assert.throws(() => parseCli(['explore', '--icrs-circle', circle]), TypeError, circle);
+  const named = parseCli(['explore', 'eris', '--icrs-circle', '83.82,-5.39,0.1']);
+  assert.equal(named.command, 'explore');
+  if (named.command === 'explore') assert.deepEqual(named.request, { target: 'eris', region: parsed.request.footprint });
+});
+
+
+test('toolchain commands admit only shipped installer names and modes', () => {
+  assert.deepEqual(parseCli(['toolchain', 'install', 'astroquery', '--json']), { command: 'toolchain', mode: 'install', name: 'astroquery', json: true, verbose: false });
+  assert.equal(parseCli(['toolchain', 'verify', 'pds']).command, 'toolchain');
+  assert.equal(parseCli(['toolchain', 'install', 'casa']).command, 'toolchain');
+  for (const args of [['toolchain', 'install', 'constructor'], ['toolchain', 'remove', 'astroquery'], ['toolchain', 'install', 'astroquery', '--bad']])
+    assert.throws(() => parseCli(args), TypeError);
+});

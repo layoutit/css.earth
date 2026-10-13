@@ -1,8 +1,8 @@
 /** Decode through the existing format owners, then hand arrays to Astropy/Matplotlib. */
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment, pdsPackages, astroqueryToolchain } from '@cssearth/telescope-core/node';
 import { mkdir,readFile,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { pdsPackages, astroqueryToolchain } from '@cssearth/telescope/node';
 import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import { isisMetadata,pdsMetadata } from '../products/native-metadata.mts';
 import { requireRecord,requireArray,requireString } from '@cssearth/core';
@@ -18,13 +18,12 @@ from pathlib import Path
 import numpy as np
 from astropy.io import fits
 from astropy import units as u
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin);meta=r['metadata'];path=Path(r['directory'])
 a=np.load(path/r['array'],mmap_mode='r') if r['encoding']=='npy' else np.memmap(path/r['array'],mode='r',dtype='<f4',shape=tuple(r['shape']))
 h=fits.PrimaryHDU(a);hdus=[h]
 def fits_unit(text):
- aliases={'I/F':'1','DIMENSIONLESS':'1','DN':'adu','METER':'m','METERS':'m','W/M**2/SR/NM':'W m-2 sr-1 nm-1'}
- try:return u.Unit(aliases.get(text,text)).to_string('fits') or '1'
- except (ValueError,TypeError):return None
+ return archive_fits_unit(text)[0]
 if meta.get('units'):
  unit=fits_unit(meta['units']['value'])
  if unit:h.header['BUNIT']=unit
@@ -84,6 +83,6 @@ export async function nativeFigureInput(d:NativeFigureInput,directory:string,str
     encoding='npy';metadata=pdsMetadata({...decoded,structures:selected}).nativeMetadata!;
   }else throw new Error(`No native figure reader for ${decoder}`);
   const tc=await astroqueryToolchain();
-  execFileSync(tc.python,['-c',CONVERT],{input:JSON.stringify({directory,array,encoding,shape,metadata,companions}),env:{...process.env,...tc.env},maxBuffer:1024*1024});
+  execFileSync(tc.python,['-c',CONVERT],{input:JSON.stringify({directory,array,encoding,shape,metadata,companions}),env:telescopePythonEnvironment(tc.env),maxBuffer:1024*1024});
   return {file:resolve(directory,'native.fits'),native:{decoder,structure:metadata.structure,metadata,packages,companions,qualityPolicy:'IMAGE associates SIGMA_MAP_IMAGE as standard deviation and QUALITY_MAP_IMAGE as flags; finite zero flags only. Other structures require explicit selection.',coordinates:'Pixel coordinates; native planetary projection is not converted to celestial WCS.',conversion:'Decoded values and masked special constants; no recalibration. Spectral centers preserved as WAVE-TAB; edges are not inferred.'}};
 }

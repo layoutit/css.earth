@@ -1,141 +1,40 @@
 {
-  "name": "@cssearth/telescope-cli",
+  "name": "@cssearth/telescope",
   "version": "0.2.0",
   "description": "The telescope command: explore, retrieve and qualify telescope products, and turn them into outputs.",
   "type": "module",
   "license": "MIT",
   "exports": {
-    "./archives/hst/archive": {
-      "types": "./src/archives/hst/archive.mts",
-      "default": "./src/archives/hst/archive.mts"
-    },
-    "./archives/hst/line-stack-reduction": {
-      "types": "./src/archives/hst/line-stack-reduction.mts",
-      "default": "./src/archives/hst/line-stack-reduction.mts"
-    },
-    "./archives/hst/slit-scan-frames": {
-      "types": "./src/archives/hst/slit-scan-frames.mts",
-      "default": "./src/archives/hst/slit-scan-frames.mts"
-    },
-    "./archives/hst/slit-scan-reduction": {
-      "types": "./src/archives/hst/slit-scan-reduction.mts",
-      "default": "./src/archives/hst/slit-scan-reduction.mts"
-    },
-    "./archives/interferometry/alma-disc-selfcal": {
-      "types": "./src/archives/interferometry/alma-disc-selfcal.mts",
-      "default": "./src/archives/interferometry/alma-disc-selfcal.mts"
-    },
-    "./archives/interferometry/disc-fit": {
-      "types": "./src/archives/interferometry/disc-fit.mts",
-      "default": "./src/archives/interferometry/disc-fit.mts"
-    },
-    "./archives/jwst/imaging/bands": {
-      "types": "./src/archives/jwst/imaging/bands.mts",
-      "default": "./src/archives/jwst/imaging/bands.mts"
-    },
-    "./archives/jwst/imaging/image3": {
-      "types": "./src/archives/jwst/imaging/image3.mts",
-      "default": "./src/archives/jwst/imaging/image3.mts"
-    },
-    "./archives/juno/archive": {
-      "types": "./src/archives/juno/archive.mts",
-      "default": "./src/archives/juno/archive.mts"
-    },
-    "./archives/juno/archive-ledger": {
-      "types": "./src/archives/juno/archive-ledger.mts",
-      "default": "./src/archives/juno/archive-ledger.mts"
-    },
-    "./archives/juno/measure": {
-      "types": "./src/archives/juno/measure.mts",
-      "default": "./src/archives/juno/measure.mts"
-    },
-    "./archives/ledger": {
-      "types": "./src/archives/ledger.mts",
-      "default": "./src/archives/ledger.mts"
-    },
-    "./archives/naco/archive": {
-      "types": "./src/archives/naco/archive.mts",
-      "default": "./src/archives/naco/archive.mts"
-    },
-    "./archives/sky-position": {
-      "types": "./src/archives/sky-position.mts",
-      "default": "./src/archives/sky-position.mts"
-    },
-    "./archives/targets": {
-      "types": "./src/archives/targets.mts",
-      "default": "./src/archives/targets.mts"
-    },
-    "./archives/toolchain-descriptor": {
-      "types": "./src/archives/toolchain-descriptor.mts",
-      "default": "./src/archives/toolchain-descriptor.mts"
-    },
-    "./body-map-publication": {
-      "types": "./src/delivery/body-map-publication.mts",
-      "default": "./src/delivery/body-map-publication.mts"
-    },
-    "./query": {
-      "types": "./src/observation-query/query.mts",
-      "default": "./src/observation-query/query.mts"
-    },
-    "./query-contract": {
-      "types": "./src/observation-query/query-contract.mts",
-      "default": "./src/observation-query/query-contract.mts"
-    },
-    "./request-satisfaction": {
-      "types": "./src/requests/request-satisfaction.mts",
-      "default": "./src/requests/request-satisfaction.mts"
-    },
-    "./selected-product": {
-      "types": "./src/observation-query/selected-product.mts",
-      "default": "./src/observation-query/selected-product.mts"
-    },
-    "./sky/author-sky-bands": {
-      "types": "./src/sky/author-sky-bands.mts",
-      "default": "./src/sky/author-sky-bands.mts"
-    },
-    "./sky/sky-band-composite": {
-      "types": "./src/sky/sky-band-composite.mts",
-      "default": "./src/sky/sky-band-composite.mts"
-    },
-    "./sphere/native-scroll/carry-values": {
-      "types": "./src/sphere/native-scroll/carry-values.mts",
-      "default": "./src/sphere/native-scroll/carry-values.mts"
-    },
-    "./sphere/native-scroll/native-camera": {
-      "types": "./src/sphere/native-scroll/native-camera.mts",
-      "default": "./src/sphere/native-scroll/native-camera.mts"
-    },
-    "./sphere/native-scroll/resize-input": {
-      "types": "./src/sphere/native-scroll/resize-input.mts",
-      "default": "./src/sphere/native-scroll/resize-input.mts"
-    },
     "./package.json": "./package.json",
     "./sphere/lane": {
       "types": "./dist/sphere-lane.d.ts",
       "import": "./dist/sphere-lane.js",
       "require": "./dist/sphere-lane.cjs"
+    },
+    "./viewer/lane": {
+      "types": "./dist/viewer-lane.d.ts",
+      "import": "./dist/viewer-lane.js",
+      "require": "./dist/viewer-lane.cjs"
     }
   },
   "bin": {
-    "telescope": "dist/telescope.mjs"
+    "telescope": "run-typed-module.mjs"
   },
   "files": [
     "dist",
-    "README.md"
+    "data",
+    "run-typed-module.mjs",
+    "README.md",
+    "skills",
+    ".claude-plugin",
+    ".codex-plugin",
+    ".factory-plugin"
   ],
   "engines": {
     "node": "^22.18.0 || >=24.0.0"
   },
   "publishConfig": {
-    "access": "public",
-    "exports": {
-      "./package.json": "./package.json",
-      "./sphere/lane": {
-        "types": "./dist/sphere-lane.d.ts",
-        "import": "./dist/sphere-lane.js",
-        "require": "./dist/sphere-lane.cjs"
-      }
-    }
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -144,10 +43,22 @@
   },
   "scripts": {
     "build": "node build.mts",
-    "prepack": "npm run build",
+    "prepack": "npm run build && node prepack.mts",
+    "verify:pack": "node verify-pack.mts",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
   "dependencies": {
+    "sharp": "0.35.3",
+    "linkedom": "^0.18.13",
+    "@layoutit/polycss": "0.2.11",
+    "geotiff": "3.0.5"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.7",
+    "@types/pngjs": "6.0.5",
+    "pngjs": "7.0.0",
+    "typescript": "5.9.3",
+    "tsup": "^8.0.1",
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/bake": "workspace:*",
     "@cssearth/core": "workspace:*",
@@ -156,18 +67,49 @@
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
-    "@cssearth/telescope": "workspace:*",
-    "sharp": "0.35.3",
-    "linkedom": "^0.18.13"
+    "@cssearth/telescope-core": "workspace:*",
+    "@types/node": "^26.4.0"
   },
-  "devDependencies": {
-    "@types/node": "^26.4.0",
-    "@types/pngjs": "6.0.5",
-    "esbuild": "0.27.7",
-    "pngjs": "7.0.0",
-    "sharp": "0.35.3",
-    "typescript": "5.9.3",
-    "tsup": "^8.0.1"
+  "oracleManifest": "oracle-manifest.json",
+  "pi": {
+    "skills": [
+      "./skills/telescope"
+    ]
   },
-  "oracleManifest": "oracle-manifest.json"
+  "imports": {
+    "#telescope/archives/hst/archive": "./src/archives/hst/archive.mts",
+    "#telescope/archives/hst/line-stack-reduction": "./src/archives/hst/line-stack-reduction.mts",
+    "#telescope/archives/hst/slit-scan-frames": "./src/archives/hst/slit-scan-frames.mts",
+    "#telescope/archives/hst/slit-scan-reduction": "./src/archives/hst/slit-scan-reduction.mts",
+    "#telescope/archives/interferometry/alma-disc-selfcal": "./src/archives/interferometry/alma-disc-selfcal.mts",
+    "#telescope/archives/interferometry/disc-fit": "./src/archives/interferometry/disc-fit.mts",
+    "#telescope/archives/jwst/imaging/bands": "./src/archives/jwst/imaging/bands.mts",
+    "#telescope/archives/jwst/imaging/image3": "./src/archives/jwst/imaging/image3.mts",
+    "#telescope/archives/juno/archive": "./src/archives/juno/archive.mts",
+    "#telescope/archives/juno/archive-ledger": "./src/archives/juno/archive-ledger.mts",
+    "#telescope/archives/juno/measure": "./src/archives/juno/measure.mts",
+    "#telescope/archives/ledger": "./src/archives/ledger.mts",
+    "#telescope/archives/naco/archive": "./src/archives/naco/archive.mts",
+    "#telescope/archives/sky-position": "./src/archives/sky-position.mts",
+    "#telescope/archives/targets": "./src/archives/targets.mts",
+    "#telescope/archives/toolchain-descriptor": "./src/archives/toolchain-descriptor.mts",
+    "#telescope/body-map-publication": "./src/delivery/body-map-publication.mts",
+    "#telescope/query": "./src/observation-query/query.mts",
+    "#telescope/query-contract": "./src/observation-query/query-contract.mts",
+    "#telescope/request-satisfaction": "./src/requests/request-satisfaction.mts",
+    "#telescope/selected-product": "./src/observation-query/selected-product.mts",
+    "#telescope/sky/author-sky-bands": "./src/sky/author-sky-bands.mts",
+    "#telescope/sky/sky-band-composite": "./src/sky/sky-band-composite.mts",
+    "#telescope/sphere/native-scroll/carry-values": "./src/sphere/native-scroll/carry-values.mts",
+    "#telescope/sphere/native-scroll/native-camera": "./src/sphere/native-scroll/native-camera.mts",
+    "#telescope/sphere/native-scroll/resize-input": "./src/sphere/native-scroll/resize-input.mts"
+  },
+  "peerDependencies": {
+    "@types/node": "^26.4.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    }
+  }
 }

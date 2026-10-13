@@ -11,10 +11,12 @@
  *
  * The interferometry toolchains install the same way, but that installer reads its own descriptor and its own list of ids
  * (packages/telescope-cli/src/archives/interferometry/toolchain.mts), and NACO is not an interferometer. What is shared is what runs the result:
- * `esoEnvironment` and `runRecipe` from `@cssearth/telescope/node` (`eso-pipeline.ts`), which this module does not repeat.
+ * `esoEnvironment` and `runRecipe` from `@cssearth/telescope-core/node` (`eso-pipeline.ts`), which this module does not repeat.
  *
  * An installed toolchain keeps the text of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another
  * pin. The downloaded archive is deleted after the build. */
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, copyFile, link, readdir, readFile, rm, stat } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -23,11 +25,10 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
 
-const repository = WORKSPACE;
+const repository = USER_ROOT;
 /** The toolchain pin sits beside this code and the programs it reduces. */
-export const DESCRIPTOR = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/toolchain.json');
+export const DESCRIPTOR = packagePath('packages/telescope-cli/src/archives/naco/toolchain.json');
 export const TOOLCHAIN_ROOT = resolve(repository, 'output/toolchains/naco');
 
 const exists = (path: string) => access(path).then(() => true, () => false);
@@ -46,7 +47,7 @@ export async function nacoRecipes(): Promise<readonly string[]> {
 }
 
 function run(command: string, args: readonly string[], options: { cwd: string; env?: NodeJS.ProcessEnv; input?: string }) {
-  const result = spawnSync(command, args, { cwd: options.cwd, env: { ...process.env, ...options.env },
+  const result = spawnSync(command, args, { cwd: options.cwd, env: telescopePythonEnvironment({ ...options.env }),
     ...(options.input === undefined ? { stdio: 'inherit' } : { input: options.input, stdio: ['pipe', 'inherit', 'inherit'] }) });
   if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${options.cwd} (status ${String(result.status)}).`);
 }
@@ -74,36 +75,37 @@ async function fetchKit(record: Record<string, unknown>, directory: string, cach
 }
 
 export async function installNacoToolchain(caches: readonly string[] = []) {
-  const pins = await nacoToolchainDescriptor(), { entry } = pins, root = TOOLCHAIN_ROOT, downloads = resolve(root, 'downloads');
-  if (await nacoToolchainPath().then(() => true, () => false)) return root;
-  await mkdir(downloads, { recursive: true });
-  const kitArchive = requireString(entry.kit, 'kit');
-  const archives = await Promise.all(requireArray(entry.downloads, 'downloads').map(record => fetchKit(requireRecord(record, 'download'), downloads, caches)));
-  const build = resolve(root, 'build');
-  await mkdir(build, { recursive: true });
-  run('tar', ['-xzf', archives.find(path => path.endsWith(kitArchive))!], { cwd: build });
-  const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
-  // ESO's installer asks for confirmation when a target directory is missing and refuses to ask without a terminal: both
-  // exist before it runs, and it reads an empty answer. It writes its own configuration into HOME, which is the kit's own.
-  const home = resolve(root, 'home');
-  for (const directory of [home, resolve(root, 'pipeline'), resolve(root, 'calib')]) await mkdir(directory, { recursive: true });
-  run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', env: { HOME: home } });
-  const esorex = resolve(root, 'pipeline/bin/esorex');
-  if (!await exists(esorex)) throw new Error(`install_pipeline wrote no esorex at ${esorex}.`);
-  const plugins = resolve(root, 'pipeline/lib/esopipes-plugins');
-  const installed = (await readdir(plugins).catch(() => [])).filter(name => name.startsWith('naco-'));
-  if (installed.length !== 1) throw new Error(`${installed.length} naco plugin directories in ${plugins}.`);
-  // The build tree is not needed at run time, and neither is the downloaded archive; the disk is kept for data.
-  await rm(kit, { recursive: true, force: true });
-  await rm(downloads, { recursive: true, force: true });
-  writeInstalledMarker(root, pins);
-  return root;
+  assertManagedPythonPlatform();
+  const root = TOOLCHAIN_ROOT, downloads = resolve(root, 'downloads');
+  return installManagedToolchain(root, nacoToolchainDescriptor, null, async ({ entry }) => {
+    await mkdir(downloads, { recursive: true });
+    const kitArchive = requireString(entry.kit, 'kit');
+    const archives = await Promise.all(requireArray(entry.downloads, 'downloads').map(record => fetchKit(requireRecord(record, 'download'), downloads, caches)));
+    const build = resolve(root, 'build');
+    await mkdir(build, { recursive: true });
+    run('tar', ['-xzf', archives.find(path => path.endsWith(kitArchive))!], { cwd: build });
+    const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
+    // ESO's installer asks for confirmation when a target directory is missing and refuses to ask without a terminal: both
+    // exist before it runs, and it reads an empty answer. It writes its own configuration into HOME, which is the kit's own.
+    const home = resolve(root, 'home');
+    for (const directory of [home, resolve(root, 'pipeline'), resolve(root, 'calib')]) await mkdir(directory, { recursive: true });
+    run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', env: { HOME: home } });
+    // The build tree is not needed at run time, and neither is the downloaded archive; the disk is kept for data.
+    await rm(kit, { recursive: true, force: true });
+    await rm(downloads, { recursive: true, force: true });
+  }, async () => {
+    await verifyToolchainExecutables([resolve(root, 'pipeline/bin/esorex')]);
+    const plugins = resolve(root, 'pipeline/lib/esopipes-plugins');
+    const installed = (await readdir(plugins).catch(() => [])).filter(name => name.startsWith('naco-'));
+    if (installed.length !== 1) throw new Error(`${installed.length} naco plugin directories in ${plugins}.`);
+  });
 }
 
 /** The installed toolchain's root, refusing a missing install or one built from a different pin. */
 export async function nacoToolchainPath() {
-  assertInstalledMarker(TOOLCHAIN_ROOT, await nacoToolchainDescriptor(), 'NACO', 'node packages/telescope-cli/src/archives/naco/toolchain.mts install');
-  return TOOLCHAIN_ROOT;
+  const pins = await nacoToolchainDescriptor(), root = resolveInstalledToolchain(TOOLCHAIN_ROOT, pins) ?? TOOLCHAIN_ROOT;
+  assertInstalledMarker(root, await nacoToolchainDescriptor(), 'NACO', 'node packages/telescope-cli/src/archives/naco/toolchain.mts install');
+  return root;
 }
 
 /** The recipes the installed pipeline actually offers, from esorex itself. */
@@ -111,10 +113,10 @@ export async function installedRecipes() {
   const root = await nacoToolchainPath();
   // esorex writes an esorex.log into its working directory, so it is given one inside the toolchain: without a cwd it
   // inherits this process's and drops the file in the repository root.
-  const logs = resolve(root, 'logs');
+  const logs = resolve(TOOLCHAIN_ROOT, 'logs');
   await mkdir(logs, { recursive: true });
   const result = spawnSync(resolve(root, 'pipeline/bin/esorex'), [`--recipe-dir=${resolve(root, 'pipeline/lib/esopipes-plugins')}`, '--recipes'],
-    { cwd: logs, env: { ...process.env, HOME: resolve(root, 'home'), DYLD_LIBRARY_PATH: resolve(root, 'pipeline/lib') }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    { cwd: logs, env: telescopePythonEnvironment({ HOME: resolve(TOOLCHAIN_ROOT, 'home'), DYLD_LIBRARY_PATH: resolve(root, 'pipeline/lib') }), encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   if (result.status !== 0) throw new Error(`esorex --recipes failed (status ${String(result.status)}): ${result.stderr}`);
   return [...`${result.stdout}`.matchAll(/^\s{2}(naco_\w+)\s/gmu)].map(match => match[1]!);
 }

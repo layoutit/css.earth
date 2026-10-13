@@ -18,6 +18,9 @@
  *
  * A pointing whose target name marks it as background, blank sky, an offset or a calibration field is never counted as an
  * observation of an object, however close to one it lands. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../site-targets.mts';
+import { programStorePath, inputPath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -25,8 +28,6 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { countRecord, isCommand, ledgerFiles, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
 import { cxcQuery, observationMode, parseChandraProgram, PROGRAMS, REFUSED_MODES, type ChandraObservation } from './archive.mts';
 
-const OBJECTS = resolve(REPOSITORY, 'src/objects');
-const BODIES = resolve(REPOSITORY, 'packages/astronomy/data/bodies');
 
 /** A pointing named like this is a background, blank-sky, offset or dark field: never an observation of the object nearest it. */
 export const NOT_AN_OBJECT = /BLANKSKY|BLANK_SKY|BACKGROUND|BKG|OFFSET|DARK|STOWED|FIELD\b|CALIBRATION/u;
@@ -37,11 +38,12 @@ export const OBJECT_RADIUS_DEGREES = 0.25;
 
 /** A shipped object the ledger searches for. A moving target has no fixed position and is found by the names the archive gives
  * it; everything else is found by a box about the position this repository states. */
-export interface ShippedObject { readonly id: string; readonly raDeg?: number; readonly decDeg?: number; readonly source: string }
+export type { ChandraObject as ShippedObject } from '../site-target-contracts.mts';
+import type { ChandraObject as ShippedObject } from '../site-target-contracts.mts';
 /** The archive's own names for a shipped Solar System body, which is caught by name and never by position. They are data beside the
  * programs, because this package names no body. */
 export const CHANDRA_MOVING_TARGETS = 'packages/telescope-cli/src/archives/chandra/moving-targets.json';
-export function chandraMovingTargets(path = resolve(REPOSITORY, CHANDRA_MOVING_TARGETS)): Readonly<Record<string, readonly string[]>> {
+export function chandraMovingTargets(path = inputPath(REPOSITORY, CHANDRA_MOVING_TARGETS)): Readonly<Record<string, readonly string[]>> {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Chandra moving targets');
   if (record.schema !== 'cssearth-archive-moving-targets@1') throw new TypeError(`${path} is not an archive moving-target list.`);
   return Object.fromEntries(Object.entries(requireRecord(record.targets, 'moving targets'))
@@ -54,8 +56,10 @@ export const movingTargets = () => movingTargetList ??= chandraMovingTargets();
 /** Every shipped object that states a sky position, from the files that own it: a nebula catalogue beside the object, the
  * prepared Local Group catalogue, or the body record's own star position. Nothing is listed here that the repository does not
  * state. */
-export async function shippedSkyObjects(): Promise<ShippedObject[]> {
-  const ids = new Set(await shippedObjectIds());
+export async function shippedSkyObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).sky;
+  const ids = new Set(await shippedObjectIds(repository));
+  const OBJECTS = resolve(repository, 'src/objects'), BODIES = resolve(repository, 'packages/astronomy/data/bodies');
   const found = new Map<string, ShippedObject>();
   const add = (id: string, raDeg: unknown, decDeg: unknown, source: string) => {
     if (!ids.has(id) || found.has(id)) return;
@@ -100,12 +104,13 @@ export function objectBox(object: ShippedObject, radiusDegrees = OBJECT_RADIUS_D
 }
 
 /** Every shipped object the ledger searches for: the moving targets this module names, then everything with a stated position. */
-export async function chandraShippedObjects(): Promise<ShippedObject[]> {
-  const ids = new Set(await shippedObjectIds());
+export async function chandraShippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).chandra;
+  const ids = new Set(await shippedObjectIds(repository));
   const targets = movingTargets();
   const moving = Object.keys(targets).filter(id => ids.has(id))
     .map(id => ({ id, source: CHANDRA_MOVING_TARGETS }));
-  const fixed = (await shippedSkyObjects()).filter(object => !targets[object.id]);
+  const fixed = (await shippedSkyObjects(repository)).filter(object => !targets[object.id]);
   return [...moving, ...fixed].sort((a, b) => a.id.localeCompare(b.id));
 }
 
@@ -174,7 +179,7 @@ export function parseSolarSystemReceipt(value: unknown, label: string): { progra
 
 /** Every pinned program, every observation a receipt proved, and every receipt that could not be accepted. A receipt proves the
  * one observation it names, and only when the product, mode and archive file it compared are the ones that program pins. */
-export async function pinnedState(directory = PROGRAMS) {
+export async function pinnedState(directory = programStorePath(PROGRAMS)) {
   const files = (await readdir(directory)).sort();
   const programs: { id: string; observations: readonly ChandraObservation[] }[] = [];
   for (const file of files.filter(name => name.endsWith('.json') && !name.includes('.'.concat('reproduction')) && !name.includes('.solar-system') && name.split('.').length === 2)) {

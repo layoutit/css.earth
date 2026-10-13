@@ -6,9 +6,10 @@ export { testLaneFiles } from '../../../packages/core/src/node/script-test-files
  *   node .github/scripts/ci/affected-tests.mts <base ref>    append test_packages and test_site to $GITHUB_OUTPUT
  *   node .github/scripts/ci/affected-tests.mts               (no base: a push) test everything */
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, existsSync, readdirSync, readFileSync } from 'node:fs';
+import { appendFileSync, existsSync, readFileSync } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { workspacePackageDirectories } from './workspace-packages.mts';
 
 export interface Workspace { readonly directory: string; readonly name: string; readonly dependencies: readonly string[]; }
 export interface AffectedTests { readonly packages: 'all' | readonly string[]; readonly site: boolean; readonly files: readonly string[]; }
@@ -106,13 +107,17 @@ function workspaceDependencies(manifest: Record<string, unknown>): string[] {
     .filter(name => name.startsWith('@cssearth/'));
 }
 
+export function readWorkspaces(root: string): Workspace[] {
+  return workspacePackageDirectories(root).map(directory => {
+    const manifest = JSON.parse(readFileSync(resolve(root, 'packages', directory, 'package.json'), 'utf8')) as Record<string, unknown>;
+    return { directory, name: String(manifest.name), dependencies: workspaceDependencies(manifest) };
+  });
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const root = resolve(import.meta.dirname, '../../..'), base = process.argv[2];
   const read = (path: string) => JSON.parse(readFileSync(resolve(root, path), 'utf8')) as Record<string, unknown>;
-  const packages = readdirSync(resolve(root, 'packages'), { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => {
-    const manifest = read(`packages/${entry.name}/package.json`);
-    return { directory: entry.name, name: String(manifest.name), dependencies: workspaceDependencies(manifest) };
-  });
+  const packages = readWorkspaces(root);
   const paths = base ? execFileSync('git', ['diff', '--name-only', `${base}...HEAD`], { cwd: root, encoding: 'utf8', maxBuffer: 1 << 30 }).split('\n').filter(Boolean) : null;
   const result = affectedTests(paths, packages, workspaceDependencies(read('package.json')));
   const testPackages = result.packages === 'all' ? 'all' : result.packages.join(' ');

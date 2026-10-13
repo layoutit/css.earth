@@ -1,4 +1,4 @@
-import { pds4Blocks, pds4Elements, pds4Field } from '@cssearth/telescope';
+import { pds4Blocks, pds4Elements, pds4Field } from '@cssearth/telescope-core';
 import { readFitsHdu, type FitsHeader } from '@cssearth/fits';
 import type { GeometryCubeDeclaration } from '../../../raster/index.ts';
 

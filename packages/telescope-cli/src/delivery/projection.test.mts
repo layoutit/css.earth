@@ -6,10 +6,12 @@ import { resolve } from 'node:path';
 import { parseGeometry } from './projection.mts';
 import { verifiedProduct, localOutput } from '../products/verified-product.mts';
 import { parseCli } from '../cli-arguments.mts';
-import { writeProductRecord, WORKSPACE, fileSize } from '@cssearth/telescope/node';
+import {  writeProductRecord, requireWorkspace, fileSize  } from '@cssearth/telescope-core/node';
 import { exportSphere } from '../sphere/sphere.mts';
+import { parseHTML } from 'linkedom';
+import { assertStandaloneHtml } from '../sphere/sphere-oracle.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
-import { inspectMeasurementSphere } from '@cssearth/telescope-cli/sphere/lane';
+import { inspectMeasurementSphere } from '@cssearth/telescope/sphere/lane';
 import { bodyMapFits, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapProduct } from '@cssearth/objects';
 import sharp from 'sharp';
@@ -42,7 +44,7 @@ async function mapFixture(root:string,target='mercury'){
   const png=await sharp({create:{width:2,height:2,channels:4,background:'#6688aaff'}}).png().toBuffer();await writeFile(files.texture,png);await writeFile(files.poles,png);
   await writeFile(files.navigation,JSON.stringify({radiiKm:[2439.7,2439.7,2439.7],shape:'reference ellipsoid',registration:{method:'disc'},uncertainty:'source uncertainty',normalization:{minimum:1,maximum:4,colormap:'viridis',missing:'#333941'},sourceContext:{...explorationContext,target}}));
   const outputs=[{path:'map.fits',file:files.map},{path:'map.fits.body-map.json',file:files.metadata},{path:'texture.png',file:files.texture},{path:'poles.png',file:files.poles},{path:'navigation.json',file:files.navigation}];
-  await writeProductRecord(files.record,{telescope:'Fixture',stage:'body-map',inputs:[],parameters:{},software:[]},outputs);
+  await writeProductRecord(files.record,{telescope:'Fixture',stage:'body-map',inputs:[],parameters:{credit:'Fixture Observatory'},software:[]},outputs);
   return {files,outputs};
 }
 test('navigation refuses implicit centering, unpinned disc registration and invalid map budgets',()=>{
@@ -62,13 +64,14 @@ test('CLI separates measurement, navigation and sphere; selectors cannot leak be
 test('sphere inspection validates the map contract, navigation and existing sphere owner',async()=>{
   // The sphere owner reads Mercury's restored prepared runtime; reading it first lets an unrestored checkout skip through sourceTest
   // instead of reporting the missing file as an unavailable sphere.
-  await inspectMeasurementSphere(WORKSPACE,'mercury');
+  await inspectMeasurementSphere(requireWorkspace(),'mercury');
   const root=await mkdtemp(resolve(tmpdir(),'sphere-outputs-'));
   try{
     const {files,outputs}=await mapFixture(root),ready=await listArtifactOutputs(files.record);
     assert.equal(ready.target,'mercury');assert.deepEqual(ready.sourceContext,explorationContext);assert.ok(ready.outputs.some(output=>output.kind==='sphere'&&output.available));
     await assert.rejects(listArtifactOutputs(files.record,'VALUE'),/structure applies only/);
     const sphere=await exportSphere(files.record,resolve(root,'sphere-ready'),await import(new URL('../../../../src/platform/solar-geometry.mts',import.meta.url).href)),receipt=JSON.parse(await readFile(sphere.receipt,'utf8'));
+    const html=await readFile(sphere.html,'utf8');assertStandaloneHtml(html);assert.ok(parseHTML(html).document.querySelector('details pre')!.textContent?.includes('Fixture Observatory'));
     assert.deepEqual(receipt.parameters.sourceContext,explorationContext);assert.deepEqual(sphere.sourceContext,explorationContext);
     await writeFile(files.metadata,'{}');await writeProductRecord(files.record,{telescope:'Fixture',stage:'body-map',inputs:[],parameters:{},software:[]},outputs);
     const malformed=await listArtifactOutputs(files.record);assert.ok(malformed.outputs.some(output=>output.kind==='sphere'&&!output.available));

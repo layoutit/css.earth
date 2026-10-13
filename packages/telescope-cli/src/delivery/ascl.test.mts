@@ -3,7 +3,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { writeProductRecord } from '@cssearth/telescope/node';
+import { writeProductRecord } from '@cssearth/telescope-core/node';
 import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
 import { main } from '../cli.mts';
 import { parseCli } from '../cli-arguments.mts';

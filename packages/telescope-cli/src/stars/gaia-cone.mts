@@ -5,7 +5,7 @@
  * selects from the rows. */
 import { mkdir, rename, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 
 export const GAIA_CONE_SCHEMA = 'cssearth-telescope-gaia-cone@1';
 export const GAIA_CONE_SERVICE = 'https://dc.g-vo.org/tap';

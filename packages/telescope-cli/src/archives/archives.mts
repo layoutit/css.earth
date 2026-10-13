@@ -3,7 +3,7 @@
  * `ledgerCommand`; and an archive with a ledger has a coverage reader under the same id (observation-query/query-modes.mts `ADAPTERS`, which
  * archives.test.mts holds to this list). An archive's own code stays in its folder; this is the list, not the code. */
 import type { IcrsCircle } from '@cssearth/objects';
-import type { TargetCatalogueEntry } from '@cssearth/telescope';
+import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService, type LeadPosition } from '../archive-adapters/archive-leads.mts';
 import { searchChandraLeads, searchSpitzerLeads } from '../archive-adapters/other-leads.mts';
 import { SERVICES } from '../vo/discovery.mts';
@@ -24,7 +24,7 @@ export interface ArchiveDescription {
   /** Its TAP service as the registry of Virtual Observatory services names it, and the address pinned for it here. */
   readonly registry?: { readonly ivoid: string; readonly address: string };
   /** The live search `explore` runs for a target, beside the observation search of the VO profiles (vo/discovery.mts). */
-  readonly search?: (root: string, target: TargetCatalogueEntry, context: ArchiveSearchContext) => Promise<ArchiveLeadService>;
+  readonly search?: (root: string, target: TargetCatalogueEntry | undefined, context: ArchiveSearchContext) => Promise<ArchiveLeadService>;
   /** The command that builds its ledger, `src/sources/<id>/ledger.json`. */
   readonly ledgerCommand?: string;
   /** True when that command takes `--write` and `--local` (archives/ledger.mts `runArchiveLedger`). */

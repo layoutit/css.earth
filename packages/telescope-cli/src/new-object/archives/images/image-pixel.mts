@@ -11,7 +11,7 @@
  * 2003) falls 1.2" from SIMBAD's position of it (checked 2026-10-04). */
 import { readFitsHeader, skyProjection } from '@cssearth/fits';
 import { locateFitsHdus } from '@cssearth/fits/node';
-import { mastDownloadUrl } from '@cssearth/telescope/node';
+import { mastDownloadUrl } from '@cssearth/telescope-core/node';
 import type { CataloguePosition } from '../../spec-types.mts';
 import type { Archive, CatalogueRow } from '../archive.mts';
 

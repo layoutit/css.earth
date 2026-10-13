@@ -20,8 +20,16 @@ export function requireAstroqueryTests(tap: string, minimum = 1): void {
 }
 
 interface TestRun { readonly status: number | null; readonly stdout: string; readonly stderr: string; readonly error?: Error; }
+function runAstroqueryFile(root: string, file: string): TestRun {
+  const env = { ...process.env };
+  // A nested test process must emit TAP rather than the parent runner's binary protocol.
+  delete env.NODE_TEST_CONTEXT;
+  return spawnSync(process.execPath, ['--import', resolve(root, 'packages/core/src/node/register-vite-suffix.mts'),
+    '--experimental-test-module-mocks', '--test', '--test-reporter=tap', file],
+  { cwd: root, env, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+}
 export function runAstroqueryFiles(root: string, run: (file: string) => TestRun = file =>
-  spawnSync(process.execPath, ['--test', '--test-reporter=tap', file], { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }),
+  runAstroqueryFile(root, file),
 ): number {
   const files = astroqueryLaneFiles(root);
   if (!files.length) throw new Error('No astroquery tests discovered.');
@@ -43,7 +51,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (process.argv[2] === '--list') console.log(files.join('\n'));
   else if (process.argv[2] === '--run') {
     const ran = runAstroqueryFiles(root, file => {
-      const result = spawnSync(process.execPath, ['--test', '--test-reporter=tap', file], { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+      const result = runAstroqueryFile(root, file);
       process.stdout.write(result.stdout ?? '');
       process.stderr.write(result.stderr ?? '');
       return result;

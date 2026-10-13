@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -126,6 +126,23 @@ test('equal receipts skip builds; mismatches and incomplete restores rebuild exa
   assert.deepEqual(packageRebuildClosure(packages, ['a']), ['a', 'b', 'c']);
 });
 
+test('cache validation prunes orphaned dist on a warm hit and preserves current outputs and unrelated files', async t => {
+  const root = fixture(t), { packages } = await compiledCiCacheKeys({ root, runtime });
+  await buildCi({ root, mode: 'packages', packages, run: async task => {
+    for (const output of task.outputs ?? []) for (const file of output.required) put(root, `${output.path}/${file}`, 'compiled');
+  } });
+  const receipt = readFileSync(resolve(root, 'packages/a/dist/.ci-build-files.json'), 'utf8');
+  put(root, 'packages/removed/dist/index.js', 'restored stale output');
+  put(root, 'packages/removed/notes.txt', 'preserve');
+  mkdirSync(resolve(root, 'packages/empty/dist'), { recursive: true });
+  const result = await buildCi({ root, mode: 'packages', packages, run: async () => assert.fail('warm outputs must not rebuild') });
+  assert.equal(result[0]?.cached, true);
+  assert.equal(existsSync(resolve(root, 'packages/removed/dist')), false);
+  assert.equal(existsSync(resolve(root, 'packages/empty/dist')), false);
+  assert.equal(readFileSync(resolve(root, 'packages/removed/notes.txt'), 'utf8'), 'preserve');
+  assert.equal(readFileSync(resolve(root, 'packages/a/dist/.ci-build-files.json'), 'utf8'), receipt);
+});
+
 test('a command that returns successfully without compiled outputs never writes valid receipts', async t => {
   const root = fixture(t), { packages } = await compiledCiCacheKeys({ root, runtime });
   await assert.rejects(buildCi({ root, mode: 'packages', packages, run: async () => {} }), /ENOENT/);
@@ -164,9 +181,11 @@ test('source mutations remove closure, root input and package isolation and each
   mkdirSync(resolve(import.meta.dirname, '../../../output'), { recursive: true });
   const directory = mkdtempSync(resolve(import.meta.dirname, '../../../output/ci-cache-mutants-'));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
+  writeFileSync(resolve(directory, 'workspace-packages.mts'), `export { workspacePackageDirectories } from ${JSON.stringify(pathToFileURL(resolve(import.meta.dirname, 'workspace-packages.mts')).href)};\n`);
   const cacheSource = readFileSync(resolve(import.meta.dirname, 'ci-cache-key.mts'), 'utf8');
   const buildSource = readFileSync(resolve(import.meta.dirname, 'build-ci.mts'), 'utf8');
   for (const [label, owner, from, to, pattern] of [
+    ['orphan cleanup', 'build', '  pruneOrphanedCompiledOutputs(root);', '', 'cache validation prunes orphaned'],
     ['closure', 'build', 'let changed = true;', 'let changed = false;', 'equal receipts'],
     ['root input', 'cache', 'selected: new Set(shared)', 'selected: new Set<string>()', 'root config input'],
     ['whole tree', 'cache', 'const digest = gitKey(root, canonical([identity, [...pkg.selected].sort().map(inputState), lockInputs(lock, pkg.directory), upstream]));', 'const digest = ciCacheKeys({ root, runtime }).buildDigest;', 'unrelated site'],

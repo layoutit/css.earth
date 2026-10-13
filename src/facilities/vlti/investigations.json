@@ -8,7 +8,7 @@
       "status": "included",
       "finding": "The ESO archive serves VLTI raw frames anonymously: the raw table by TAP, calibration association trees by calselector, headers by its header service and frames by the data portal. A PIONIER frame took about 10 s on one connection, so nights download four at a time. The portal also answers 401 for minutes at a time to public frames (a Betelgeuse MATISSE exposure public since 2021 on 17 September 2026), so a 401 is retried before it is reported; frames still in their proprietary period are refused.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/packages/telescope/src/node/eso-pipeline.ts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/telescope-core/src/node/eso-pipeline.ts",
         "https://github.com/layoutit/css.earth/blob/main/docs/interferometric-imaging.md#known-limits",
         "https://archive.eso.org/cms/eso-data-access-policy.html"
       ]

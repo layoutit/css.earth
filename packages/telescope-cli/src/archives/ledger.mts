@@ -10,9 +10,10 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { loadSiteTargets } from './site-targets.mts';
+import { WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
 
-export const REPOSITORY = WORKSPACE;
+export const REPOSITORY = WORKSPACE ?? USER_ROOT;
 
 /** The two files a ledger is: the JSON record and the guide page generated from it, both repository-relative. */
 export interface LedgerFiles { readonly ledger: string; readonly guide: string }
@@ -54,6 +55,7 @@ export interface ArchiveLedger<L> {
 export const ledgerJson = <L,>(archive: ArchiveLedger<L>, ledger: L) => `${JSON.stringify(ledger, null, archive.indent)}\n`;
 
 export async function writeLedger<L>(archive: ArchiveLedger<L>, ledger: L): Promise<void> {
+  requireWorkspace(undefined, 'This command writes archive ledger records.');
   await mkdir(dirname(archive.files.ledger), { recursive: true });
   await writeFile(archive.files.ledger, ledgerJson(archive, ledger));
   await writeFile(archive.files.guide, archive.guide(ledger));
@@ -81,6 +83,7 @@ export async function refreshLocalLedger<L>(archive: ArchiveLedger<L>): Promise<
 
 /** An archive ledger's command: `[--write] [--local]` and whatever arguments the archive's own survey reads. */
 export async function runArchiveLedger<L>(archive: ArchiveLedger<L>, args: readonly string[] = process.argv.slice(2)): Promise<L> {
+  requireWorkspace();
   const write = args.includes('--write'), { ledger, local } = await buildLedger(archive, args);
   const policy = local ? archive.local!.writes : archive.writes;
   if (policy === 'always' || write) await writeLedger(archive, ledger);
@@ -112,6 +115,7 @@ export const receiptProblemsParagraph = (problems: readonly string[]) => problem
 
 /** The shipped object ids: the directories of src/objects, in the order the file system lists them. */
 export async function shippedObjectIds(repository = REPOSITORY): Promise<string[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).ids;
   return (await readdir(resolve(repository, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name);
 }
 

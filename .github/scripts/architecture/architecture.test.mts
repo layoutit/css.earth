@@ -187,18 +187,18 @@ test('nothing imports a package command entry: another entry, package code and t
   ], 'an entry may import libraries; a folder named cli inside src is not an entry folder');
 });
 
-test('packages/telescope never imports @cssearth/bake: production, tests and type-only imports', () => {
+test('packages/telescope-core never imports @cssearth/bake: production, tests and type-only imports', () => {
   const violations = evaluateRules(graph(
-    ['packages/telescope/src/archive.ts', 'packages/bake/src/raster/index.ts'],
-    ['packages/telescope/src/archive.test.ts', 'packages/bake/src/volume/index.ts'],
-    ['packages/telescope/src/node/fetch.ts', 'packages/bake/src/objects/color/index.ts', 'type'],
-    ['packages/telescope/src/archive.ts', 'packages/core/src/index.ts'], ['packages/telescope-cli/src/run.mts', 'packages/bake/src/raster/index.ts'],
-    ['packages/bake/src/raster/index.ts', 'packages/telescope/src/index.ts'],
+    ['packages/telescope-core/src/archive.ts', 'packages/bake/src/raster/index.ts'],
+    ['packages/telescope-core/src/archive.test.ts', 'packages/bake/src/volume/index.ts'],
+    ['packages/telescope-core/src/node/fetch.ts', 'packages/bake/src/objects/color/index.ts', 'type'],
+    ['packages/telescope-core/src/archive.ts', 'packages/core/src/index.ts'], ['packages/telescope-cli/src/run.mts', 'packages/bake/src/raster/index.ts'],
+    ['packages/bake/src/raster/index.ts', 'packages/telescope-core/src/index.ts'],
   ));
   assert.deepEqual((violations.get('telescope-imports-no-bake') ?? []).map(item => `${item.from}>${item.to}`), [
-    'packages/telescope/src/archive.test.ts>packages/bake/src/volume/index.ts',
-    'packages/telescope/src/archive.ts>packages/bake/src/raster/index.ts',
-    'packages/telescope/src/node/fetch.ts>packages/bake/src/objects/color/index.ts',
+    'packages/telescope-core/src/archive.test.ts>packages/bake/src/volume/index.ts',
+    'packages/telescope-core/src/archive.ts>packages/bake/src/raster/index.ts',
+    'packages/telescope-core/src/node/fetch.ts>packages/bake/src/objects/color/index.ts',
   ], 'the telescope CLI and bake itself may use the telescope library');
 });
 
@@ -368,7 +368,7 @@ test('retired root tests and dependent integration owners fail without a baselin
     assert.equal(broken(), true, 'a tracked root tests file is red');
     assert.equal(isBroken(repositoryFindings(root, repositoryFiles(root), rules.filter(rule => rule.id !== 'retired-folders'))), false, 'disabling retirement makes the mutation green');
     rmSync(join(root, 'tests'), { recursive: true });
-    assert.equal(broken(), true, 'a tracked tests file missing from disk is still red');
+    assert.equal(broken(), false, 'a pending worktree deletion is no longer a checkout owner');
     execFileSync('git', ['rm', '-f', 'tests/new.mts'], { cwd: root });
     mkdirSync(join(root, 'tests'));
     assert.equal(broken(), true, 'an empty root tests directory is red too');

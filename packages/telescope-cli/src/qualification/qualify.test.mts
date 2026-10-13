@@ -1,3 +1,4 @@
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -8,8 +9,8 @@ import { card, imageFixture } from '@cssearth/fits/test-support';
 import { fitsObservationInterval, recordQualification, QUALIFICATION_SCHEMA } from './qualify.mts';
 import { loadQualifiedObservations } from './qualified-observations.mts';
 import { assessRequest } from '../requests/request-satisfaction.mts';
-import { productRecordPath } from '@cssearth/telescope';
-import { writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath } from '@cssearth/telescope-core';
+import { writeProductRecord } from '@cssearth/telescope-core/node';
 
 const dates = { 'DATE-BEG': '2022-08-30T07:49:58.558', 'DATE-END': '2022-08-30T08:03:50.173' };
 const expected = { startIso: '2022-08-30T07:49:58.558Z', endIso: '2022-08-30T08:03:50.173Z' };

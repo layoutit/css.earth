@@ -2,10 +2,11 @@
  *
  * This is the legacy half of the PDS adapter. Peppi owns PDS4 Registry discovery; this reader exposes exact PDS3 products
  * that css.earth already pins, without asking a scientific-query caller to run a separate archive command first. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope';
+import { pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope-core';
 
 const measurement = (value: string, field: string) => {
   const match = /^([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[Ee][+-]?\d+)?)\s*<([^<>]+)>$/u.exec(value.trim());
@@ -36,6 +37,7 @@ export interface SourcePds3Observation {
  * enter through native intake; a map or incomplete label must not hide unrelated observations. */
 export async function sourcePds3Observations(root: string, targetId: string,
   reportIssue: (path: string, reason: string) => void = () => {}): Promise<SourcePds3Observation[]> {
+  if (root === USER_ROOT) return [];
   const sourceRoot = resolve(root, 'src/objects', targetId, 'source');
   const manifestValue = await readFile(resolve(sourceRoot, 'manifest.json'), 'utf8').then(text => JSON.parse(text) as unknown).catch((error: unknown) => {
     if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined;

@@ -1,8 +1,9 @@
 import { spawn } from 'node:child_process';
-import { lstatSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { lstatSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { isAbsolute, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { compiledCiCacheKeys, type CompiledPackageInput } from './ci-cache-key.mts';
+import { workspacePackageDirectories } from './workspace-packages.mts';
 
 export type CiBuildMode = 'lint' | 'full' | 'packages' | 'generators';
 interface CompiledDirectory { path: string; required: readonly string[]; }
@@ -18,11 +19,13 @@ const record = (value: unknown): value is Record<string, unknown> => value !== n
 const safePath = (value: unknown): value is string => typeof value === 'string' && Boolean(value) && !isAbsolute(value) && !value.split(/[\\/]/u).includes('..');
 
 function packageOutputs(root: string): CompiledDirectory[] {
-  return readdirSync(resolve(root, 'packages'), { withFileTypes: true }).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name, 'en')).flatMap(entry => {
-    const path = `packages/${entry.name}`, manifest: unknown = JSON.parse(readFileSync(resolve(root, path, 'package.json'), 'utf8'));
+  return workspacePackageDirectories(root).flatMap(directory => {
+    const path = `packages/${directory}`, manifest: unknown = JSON.parse(readFileSync(resolve(root, path, 'package.json'), 'utf8'));
     if (!record(manifest) || !record(manifest.scripts)) throw new TypeError(`Invalid package manifest: ${path}`);
     if (typeof manifest.scripts.build !== 'string') return [];
-    const entries = [manifest.main, manifest.module, manifest.types, ...Object.values(record(manifest.bin) ? manifest.bin : {})].filter(value => value !== undefined);
+    // Tracked launchers exist before compilation; cache only generated dist entries.
+    const binaries = Object.values(record(manifest.bin) ? manifest.bin : {}).filter(value => typeof value === 'string' && value.replace(/^\.\//u, '').startsWith('dist/'));
+    const entries = [manifest.main, manifest.module, manifest.types, ...binaries].filter(value => value !== undefined);
     // A package with only subpath entries (`@cssearth/bake/volume`) declares its compiled outputs in `exports`.
     const exported = (value: unknown): unknown[] => typeof value === 'string' ? [value] : record(value) ? Object.values(value).flatMap(exported) : [];
     const declared = entries.length ? entries : exported(manifest.exports).filter(value => typeof value === 'string' && value.startsWith('./dist/'));
@@ -84,6 +87,15 @@ function outputInventory(directory: string): string[] {
   return files;
 }
 
+/** Prefix cache restores can resurrect a removed package. Prune only its compiled outputs, never source files. */
+export function pruneOrphanedCompiledOutputs(root: string): void {
+  const current = new Set(workspacePackageDirectories(root));
+  for (const directory of workspacePackageDirectories(root, { requireManifest: false })) {
+    if (current.has(directory)) continue;
+    rmSync(resolve(root, 'packages', directory, 'dist'), { recursive: true, force: true });
+  }
+}
+
 export function compiledOutputsValid(root: string, output: CompiledDirectory, digest: string): boolean {
   try {
     const directory = resolve(root, output.path), receipt: unknown = JSON.parse(readFileSync(resolve(directory, RECEIPT), 'utf8'));
@@ -127,6 +139,7 @@ export function packageRebuildClosure(packages: readonly CompiledPackageInput[],
 export async function buildCi({ root = resolve(import.meta.dirname, '../../..'), mode, packages, run = execute,
 }: { root?: string; mode: CiBuildMode; packages?: readonly CompiledPackageInput[];
   run?: (task: CiBuildTask, root: string) => Promise<void> }) {
+  pruneOrphanedCompiledOutputs(root);
   packages ??= (await compiledCiCacheKeys({ root })).packages;
   const inputs = new Map(packages.map(pkg => [`${pkg.directory}/dist`, pkg]));
   const plan = ciBuildPlan(root, mode), pending = new Map<string, Promise<void>>(), results: { id: string; cached: boolean; seconds: number; rebuilt?: string[] }[] = [];

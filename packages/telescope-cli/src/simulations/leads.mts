@@ -18,6 +18,8 @@
  * settles is marked and leaves the worklist (read.mts). JWST's time series of a planet's star are set on the planet's orbit:
  * a whole orbit watched is a phase curve in the archive, with the day it is public (observed.mts). And a survey of the
  * exoplanets names the planets with no page that a paper's title says have a phase curve or a map (unpaged.mts). */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../archives/site-targets.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
@@ -188,6 +190,7 @@ export function formatLeads(result: LeadSearch, directory?: string): string {
 /** What an object's page opens on: the science kind of its default dataset ("neutral-shape", "dayside-thermal-color"), with the
  * format of a scientific map ("terrestrial-scientific:published-phase-curve-map"), or "image" for a photographed surface. */
 export async function opensOn(root: string, id: string): Promise<string | undefined> {
+  if (root === USER_ROOT) return (await loadSiteTargets()).opensOn[id];
   const read = async (path: string) => JSON.parse(await readFile(resolve(root, 'src/objects', id, path), 'utf8')) as unknown;
   try {
     const content = requireRecord(await read('source/content/object.json'), `${id} content`), raster = requireRecord(await read('source/preparation/raster.json'), `${id} raster recipe`);

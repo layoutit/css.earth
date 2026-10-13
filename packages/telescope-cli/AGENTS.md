@@ -1,19 +1,22 @@
 # Telescope command package instructions
 
-Own the `telescope` command. `src/bin.mts` is the installed binary (bundled by `build.mts` into `dist/telescope.mjs`): it
-handles `--help`, `--version` and the workspace lookup (`--workspace PATH`, `CSSEARTH_WORKSPACE`, or the working directory's
-ancestors), then runs that checkout's copy of this package's sources, `src/cli.mts`, with the same arguments, TTY state
+Own the `telescope` command. The tracked `run-typed-module.mjs` bin launches `src/bin.mts` in a checkout or its compiled
+`dist/telescope.mjs` in an installed package. `build.mts` compiles code only; `prepack.mts` prepares shipped data from a
+prepared checkout when `npm pack` or `npm publish` runs. The binary
+handles `--help`, `--version` and optional workspace admission (`--workspace PATH`, `CSSEARTH_WORKSPACE`, or a source entry
+launched inside its own checkout), then runs the bundled `dist/cli.mjs` without a workspace or that checkout's `src/cli.mts`, with the same arguments, TTY state
 (`CSSEARTH_TELESCOPE_*_TTY`) and exit code. `src/cli.mts` and the modules beside it are the command's implementation, run
 from source (`pnpm telescope` in the checkout). Keep the arguments, help text, `--version`, workspace lookup, TTY forwarding
 and exit codes unchanged unless that is the change. The command guide is [README.md](README.md), which the help text links to.
 
-This package is the layer above the libraries: it imports `@cssearth/telescope`, `@cssearth/bake` and the other packages, and
-`@cssearth/telescope` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
-`@cssearth/telescope/node`, never by counting `../` from its own location. Two kinds of workspace code remain outside it:
+This package is the layer above the libraries: it imports `@cssearth/telescope-core`, `@cssearth/bake` and the other packages, and
+`@cssearth/telescope-core` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
+`@cssearth/telescope-core/node`, never by counting `../` from its own location. Without a workspace the implementation and its shipped data are package-relative. `USER_ROOT` owns caches,
+toolchains and scratch; `requireWorkspace()` gates site work. Read-only inputs use `src/paths.mts` package ownership. The owners are:
 - the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
   ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer, Juno, HST, JWST and IHW keep
   their programs, receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`,
-  `moving-targets.json`, `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; JWST keeps one `jwst/programs/` root: time-series directories and imaging, cube and KLIP JSON files.
+  `moving-targets.json`, `horizons-bodies.json`) beside that code. Programs and receipts resolve through `src/paths.mts`'s shared program store: the selected workspace for reads and writes, or read-only shipped programs without a workspace. Other archive records remain package-relative; JWST keeps one `jwst/programs/` root: time-series directories and imaging, cube and KLIP JSON files.
   Receipts retain their original bytes and are matched by program id, band and pinned product, never the previous directory. The
   interferometry reduction (`src/archives/interferometry/`: ALMA restores, VLTI calibration, star imaging) keeps its
   toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`: a sky-plane image of one epoch with SQUEEZE, `cssearth-star-season@1`, or one surface fitted to several nights of a turning star with ROTIR, `cssearth-star-surface-season@1`) and test fixtures beside
@@ -23,14 +26,13 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   where `src/archives/programs.mts` puts them. No archive module names a body.
   The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
-- the entry scripts it runs by path as processes and the built sphere package entry (`src/workspace-commands/`, the sphere
-  lane exported as `@cssearth/telescope-cli/sphere/lane` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
-  application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
+- the entry scripts it runs by path as processes and the built viewer package entries (`src/workspace-commands/`, the sphere
+  lane exported as `@cssearth/telescope/sphere/lane` and `src/sphere/sphere-html.mts`), because workspace commands read the checkout. Sphere export uses a compressed pack-time sphere bank containing shared geometry, selected raster layouts, CSS, physical frames and the two navigation directions when no workspace is admitted; `./viewer/lane` bundles the site's spatial loaders, SVG point layer and slab renderer without runtime compilation. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
   this package's `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in
   `labs/experiments/` also imports); they followed the lane out of `tools/experiments/` (now `labs/experiments/`);
 - the installer of the pinned Python astronomy toolchains (`src/toolchains/astronomy-toolchains.mts`, run as
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
-  `@cssearth/telescope/node` errors name when a toolchain is missing.
+  `@cssearth/telescope-core/node` errors name when a toolchain is missing.
 
 `src/archives/archives.mts` describes every archive once (registry identifier and pinned address, the search `explore` runs, the ledger command); `explore`, the registry check and `src/archives/ledgers.mts`, which runs every ledger command, read that list, and a new archive is added there, not in each of them. `src/archives/memory.mts` is the memory between explorations: a question asked in the last day is answered from the evidence file it saved, never from anything else, and `--fresh` turns it off.
 
@@ -89,7 +91,7 @@ Magnetic maps of stars from archived polarised spectra are `src/archives/espadon
 Canadian Astronomy Data Centre, `reduce.mts` reduces it, and `compare.mts` and `benchmark.mts` set the result beside what papers
 print for the same run. The science is not this package's: Korg computes each line's depth in the star's model atmosphere, LSDpy
 averages the lines, SpecpolFlow measures the longitudinal field and ZDIpy fits the map. `toolchain.json` pins them and
-`toolchain.mts install` puts them under `output/toolchains/zdi`; the GPL codes are run as tools and never copied here. What is
+`toolchain.mts install` puts them under the user root’s `output/toolchains/zdi`; the GPL codes are run as tools and never copied here. What is
 written here is the archive reader (`cadc.mts`, `product.mts`), the Kurucz line list with its Landé factors (`kurucz.mts`), the
 files those codes read and the conversion of what they write (`mask.mts`, `lsd.mts`, `zdi.mts`); `tools.py` and `korg/depths.jl`
 hold calls and nothing else. Do not add a step of physics to these modules: when a step is missing, find the published code that
@@ -241,10 +243,10 @@ format parsing belongs there, while wording generation and editorial policy stay
 
 See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE pins, rotation records and published limb coefficients.
 
-`src/implementation-dependencies.mts` declares `RENDERER_BUILD_CONFIG_PATH` for its entry-source closure.
+`src/package/implementation-dependencies.mts` declares `RENDERER_BUILD_CONFIG_PATH` for its entry-source closure.
 The architecture rule names this metadata reader separately from runtime consumers; its guard rejects an unlisted reader.
 
-Sphere export runs the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.
+Sphere export runs the built `@cssearth/telescope/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope build` before exporting again.
 
 The library/command split is accepted: bake imports the light telescope library, while telescope-cli depends on bake for preparation; merging them would create a cycle. Reconsider only when the command no longer needs bake.
 

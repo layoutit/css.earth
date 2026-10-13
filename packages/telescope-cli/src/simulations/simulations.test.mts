@@ -2,12 +2,13 @@
  * TRAPPIST-1e on 2026-10-03, as served: descriptions cut at 700 characters and file lists at five, nothing reworded. Three
  * are climate-model outputs, one is the data of an observation, one is under a no-derivatives license and one names
  * the planet's star in passing. */
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import { parseCli } from '../cli-arguments.mts';
 import { formatSimulations, nameForms, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, searchSimulations, sizeText, speaksOfSimulation, zenodoQuery } from './simulations.mts';
 
@@ -76,7 +77,7 @@ test('the survey lists the records that name the object and speak of a model, sa
   const directory = await mkdtemp(resolve(tmpdir(), 'simulations-')), asked: string[] = [];
   try {
     const body = await served();
-    const result = await searchSimulations(WORKSPACE, { target: 'trappist-1e', directory, fetcher: (async (url: string | URL | Request) => { asked.push(String(url)); return answering(body)(url); }) as typeof fetch });
+    const result = await searchSimulations(requireWorkspace(), { target: 'trappist-1e', directory, fetcher: (async (url: string | URL | Request) => { asked.push(String(url)); return answering(body)(url); }) as typeof fetch });
     assert.deepEqual(result.target, { id: 'trappist-1e', name: 'TRAPPIST-1e' });
     assert.equal(asked.length, 1, 'one search request, no file request');
     assert.equal(result.naming, 4);
@@ -90,9 +91,9 @@ test('the survey lists the records that name the object and speak of a model, sa
     // A license that forbids derivatives, and a record that states none, are said so.
     const records = parseZenodoSearch(body), nd = { ...records[4]!, reuse: reuseLicense(records[4]!.license) }, bare = { ...records[0]!, license: null, reuse: null };
     assert.match(formatSimulations({ ...result, records: [nd, bare] }), /license: cc-by-nc-nd-4\.0, not one this tool knows allows reuse[\s\S]*license: none stated/u);
-    const none = await searchSimulations(WORKSPACE, { target: 'An Unpackaged Star', fetcher: answering({ hits: { hits: [] } }) });
+    const none = await searchSimulations(requireWorkspace(), { target: 'An Unpackaged Star', fetcher: answering({ hits: { hits: [] } }) });
     assert.match(formatSimulations(none), /No Zenodo dataset names this object and speaks of a simulation or a model\./u);
-    await assert.rejects(searchSimulations(WORKSPACE, { target: 'trappist-1e', fetcher: answering({}, 429) }), /Zenodo returned HTTP 429 for https:\/\/zenodo\.org\/api\/records\?q=/u);
+    await assert.rejects(searchSimulations(requireWorkspace(), { target: 'trappist-1e', fetcher: answering({}, 429) }), /Zenodo returned HTTP 429 for https:\/\/zenodo\.org\/api\/records\?q=/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

@@ -142,8 +142,9 @@ test('a workspace import the graph cannot place stops the check instead of vanis
   });
 });
 
-test('a tracked .astro file missing from disk makes the graph incomplete', async () => {
+test('a sparse tracked .astro file missing from disk makes the graph incomplete', async () => {
   await withFixture({}, async root => {
+    execFileSync('git', ['update-index', '--skip-worktree', 'site/Card.astro'], { cwd: root });
     rmSync(join(root, 'site/Card.astro'));
     await assert.rejects(buildImportGraph(root, { details: false }), (error: unknown) =>
       error instanceof IncompleteGraphError && !(error instanceof UnresolvedImportError) && /site\/Card\.astro/u.test(error.message));

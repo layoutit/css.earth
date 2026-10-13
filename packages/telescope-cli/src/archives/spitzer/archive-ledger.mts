@@ -24,6 +24,9 @@
  * checked only then. --write replaces src/sources/spitzer/ledger.json and docs/spitzer-ledger.md; --local rewrites only the
  * repository's own state from the ledger already on disk, for when a program is pinned or a receipt written and nothing the
  * archive said has changed. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../site-targets.mts';
+import { programStorePath, packagePath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -58,15 +61,8 @@ export const SPITZER_MODES: readonly { readonly mode: string; readonly records: 
   { mode: 'MIPS IER', records: 'MIPS data taken on an engineering request', tool: null },
 ];
 
-export interface ShippedObject {
-  readonly id: string;
-  readonly name: string;
-  readonly classification: string;
-  /** How this object is asked for, and why, when it cannot be. */
-  readonly query: { readonly kind: 'naif'; readonly naifId: number }
-    | { readonly kind: 'position'; readonly raDeg: number; readonly decDeg: number; readonly radiusDeg: number }
-    | { readonly kind: 'none'; readonly reason: string };
-}
+export type { SpitzerObject as ShippedObject } from '../site-target-contracts.mts';
+import type { SpitzerObject as ShippedObject } from '../site-target-contracts.mts';
 
 const readJson = async (path: string): Promise<unknown> => readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, () => null);
 /** The NAIF id of a body from the Horizons code its package carries, or null with the reason it has none. A bare integer is
@@ -83,6 +79,7 @@ export function naifIdFromHorizonsCode(code: unknown): { naifId: number } | { re
 
 /** Every object package, with the one question the archive can be asked about it. */
 export async function spitzerShippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).spitzer;
   const ids = (await shippedObjectIds(repository)).sort();
   const bodies = new Map<string, Record<string, unknown>>();
   for (const id of ids) { const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`)); if (isRecord(body)) bodies.set(id, body); }
@@ -150,7 +147,7 @@ export interface RepositoryState {
 
 /** What this repository holds: the programs pinned, and the products a reproduction receipt names and validates. A receipt
  * that does not parse, or that names a product no pinned program holds, counts for nothing. */
-export async function repositoryState(programs = PROGRAMS) {
+export async function repositoryState(programs = programStorePath(PROGRAMS)) {
   const files = await readdir(programs).catch(() => [] as string[]);
   const pinned = new Map<string, number>(), checked = new Map<string, number>();
   const programIds = new Map<string, string[]>(), checkedProgramIds = new Map<string, string[]>(), receiptPaths = new Map<string, string[]>();
@@ -292,7 +289,7 @@ const table = (header: readonly string[], rows: readonly (readonly string[])[]) 
 /** The group of objects the guide answers for by name, and what it says of them: data beside the programs, because this package
  * names no body. */
 export interface LedgerFocus { readonly heading: string; readonly objects: readonly string[]; readonly noneObserved: string; readonly allObserved: string }
-export const SPITZER_LEDGER_FOCUS = resolve(REPOSITORY, 'packages/telescope-cli/src/archives/spitzer/ledger-focus.json');
+export const SPITZER_LEDGER_FOCUS = packagePath('packages/telescope-cli/src/archives/spitzer/ledger-focus.json');
 export function spitzerLedgerFocus(path = SPITZER_LEDGER_FOCUS): LedgerFocus {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Spitzer ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);

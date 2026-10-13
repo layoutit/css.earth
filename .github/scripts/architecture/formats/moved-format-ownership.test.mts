@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { repositoryFiles } from '../import-graph/graph.mts';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
@@ -11,7 +11,7 @@ const schemas = new Set(['PRODUCT_RECORD_SCHEMA', 'VO_METADATA_SCHEMA', 'VO_DISC
   'NEBULA_DELIVERY_SCHEMA', 'VOLUME_SOURCE_MANIFEST_SCHEMA']);
 // Publishers serialize schemas; these are not permission to validate them locally.
 const publishers = new Set([
-  'packages/telescope/src/node/product-record.ts', 'packages/telescope-cli/src/delivery/body-map-publication.mts',
+  'packages/telescope-core/src/node/product-record.ts', 'packages/telescope-cli/src/delivery/body-map-publication.mts',
   'packages/telescope-cli/src/vo/discovery.mts', 'packages/telescope-cli/authoring/circumstellar/author.mts',
   'packages/bake/authoring/betelgeuse-shell/author.mts', 'packages/bake/authoring/eps-eridani-corona/author.mts', 'packages/bake/authoring/galileo-lucy/orbits.mts',
   'packages/bake/cli/prepare-nebula-field-catalogues.mts', 'packages/telescope-cli/src/new-object/corona/corona-bank.mts', 'site/build/fixtures/context-package.mts',
@@ -68,7 +68,7 @@ function violations(path: string, text: string): string[] {
         const maximum = path === 'packages/telescope-cli/src/delivery/artifact-outputs.mts' ? 2 : 1;
         if (count > maximum) locate(node, 'An admitted routing expression was copied');
       }
-      const pythonMetadata = path === 'packages/telescope/src/node/astroquery.ts' && ts.isTemplateSpan(parent) && node.text === 'VO_METADATA_SCHEMA';
+      const pythonMetadata = path === 'packages/telescope-core/src/node/astroquery.ts' && ts.isTemplateSpan(parent) && node.text === 'VO_METADATA_SCHEMA';
       if (!imported && !published && !routed && !pythonMetadata) locate(node, `Moved schema reference ${node.text} must stay in objects`);
     }
     if (ts.isStringLiteralLike(node) || ts.isTemplateHead(node) || ts.isTemplateMiddle(node) || ts.isTemplateTail(node)) {
@@ -83,7 +83,7 @@ function violations(path: string, text: string): string[] {
 
 test('git-tracked source cannot return a moved parser under another name', () => {
   assert.ok(diagnostics.length > 10, 'The diagnostic scan must inspect the parser owners.');
-  const paths = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 128 * 1024 * 1024 }).split('\0')
+  const paths = repositoryFiles(root)
     .filter(path => /\.(?:[cm]?[jt]sx?)$/u.test(path) && !path.startsWith('packages/objects/') &&
       !/(?:\.test\.|\.spec\.|\/dist\/|\/generated\/|\/vendor\/)/u.test(path));
   const findings = paths.flatMap(path => violations(path, readFileSync(new URL(path, new URL('../../../../', import.meta.url)), 'utf8')));

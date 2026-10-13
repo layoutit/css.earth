@@ -1,67 +1,32 @@
 /** A measurement dataset for an existing standard sphere. No geometry or camera is authored here. */
-import { OBJECT_TREE_ROOT, objectPageCss, parsePreparedObjectRuntime, parsePreparedWorldContext } from '@cssearth/objects';
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
 
+import { existsSync } from 'node:fs';
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
-import { LEAF_BOXES_FILE, joinPreparedRuntimeText } from '@cssearth/objects/node';
+import { LEAF_BOXES_FILE } from '@cssearth/objects/node';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-import { outputName, readRasterRecipe, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
+import { outputName, prepareRasterAssets, rasterPageOutput } from '@cssearth/bake/raster';
 
-import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 
-export async function inspectMeasurementSphere(root:string,target:string){
-  const id = target.toLowerCase();
-  if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
-  const object = resolve(root, 'src/objects', id);
-  const inputs: { role: string; identity: string; bytes: number }[] = [];
-  const pinned = async (file: string) => {
-    const bytes = await readFile(file);
-    inputs.push({ role: 'standard sphere input', identity: file, bytes: bytes.length });
-    return bytes;
-  };
-  const json = async (file: string): Promise<unknown> => JSON.parse((await pinned(file)).toString());
-  await pinned(resolve(root, 'pnpm-lock.yaml'));
-  const geometry = parseGeometryProfile(await json(resolve(object, 'source/preparation/geometry.json')));
-  if (geometry.namespace !== id) throw new Error('Standard sphere geometry belongs to another body');
-  const recipe = readRasterRecipe(await json(resolve(object, 'source/preparation/raster.json')));
-  await pinned(resolve(object, 'inventory.json'));
-  const original = parsePreparedObjectRuntime(JSON.parse(await joinPreparedRuntimeText((await pinned(resolve(object, 'prepared/runtime.json'))).toString(),
-    async () => (await pinned(resolve(object, 'prepared', LEAF_BOXES_FILE))).toString())));
-  if (original.id !== id || original.destinations)
-    throw new Error('This sphere requires application capabilities that cannot be exported');
-  const datasetId = original.controls.datasets?.defaultDataset;
-  const surface = recipe.surfaces.find(item => item.id === datasetId);
-  if (!datasetId || !surface) throw new Error('Standard sphere has no matching prepared surface dataset');
-  // A paged body binds each page of the dataset (`surface:<id>:<page>`); an unpaged one its whole atlas.
-  const replacementKeys=new Set([`surface:${datasetId}`,`poles:${datasetId}`,'poles']),pagePrefix=`surface:${datasetId}:`;
-  const variant = original.variants.find(item => item.when.datasetId === datasetId && item.when.shadows !== true && item.when.atmosphere !== true);
-  if (!variant) throw new Error('Standard sphere has no unshadowed surface variant');
-  const required = variant.required.filter(key => replacementKeys.has(key) || key.startsWith(pagePrefix) && /^\d+$/.test(key.slice(pagePrefix.length)));
-  if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
-  const descriptor = requireRecord(await json(resolve(object, 'object.json'))),properties = requireRecord(descriptor.properties),worldFrame = properties.worldFrame;
-  // The shared body rules and the shell, then the page's own stylesheets (a lane template names the object as __object__).
-  const shared = ['src/renderers/css/styles/body-surfaces.css', 'site/layouts/object-shell.css'];
-  const own = requireArray(requireRecord(properties.page).stylesheets).map(path => requireString(path)).filter(path => !shared.includes(path));
-  const styles = await Promise.all([...shared, ...own].map(async file => Buffer.from(objectPageCss((await pinned(resolve(root, file))).toString(), id))));
-  if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');
-  const context = parsePreparedWorldContext(await json(resolve(root, 'src/objects', OBJECT_TREE_ROOT, 'prepared/world-context.json')));
-  return {id,object,inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context};
-}
+export { inspectMeasurementSphere } from './sphere-inputs.mts';
+import { inspectMeasurementSphere } from './sphere-inputs.mts';
 
 export async function measurementSphere(root: string, target: string, texture: string, output: string,
   focus: { longitudeDegrees: number; latitudeDegrees: number; zoom: number }, solarGeometry: SolarGeometry) {
   const id=target.toLowerCase();
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
-  const assetsToInstall = await inventoryAssets(root, [id], { location: 'prepared' });
-  await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json' || asset.filename === LEAF_BOXES_FILE));
-  const {inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context}=await inspectMeasurementSphere(root,target);
+  if (!existsSync(resolve(root, 'sphere-bank.json.gz'))) {
+    const assetsToInstall = await inventoryAssets(root, [id], { location: 'prepared' });
+    await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json' || asset.filename === LEAF_BOXES_FILE));
+  }
+  const {inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame}=await inspectMeasurementSphere(root,target);
   // Keep the original packing, gutters, pole atlas and density. The standard raster lane
   // receives already projected colors and uses nearest/lossless handling for measurements.
   const rasterDirectory = resolve(output, 'raster');
@@ -136,8 +101,8 @@ export async function measurementSphere(root: string, target: string, texture: s
   for (const entry of original.assets.entries) {
     if (!oldToNew.has(entry.url) && serialized.includes(entry.url)) throw new Error(`Unembedded standard sphere asset: ${entry.key}`);
   }
-  return { definition, worldFrame, context, css, inputs, embeddedAssets: Object.fromEntries(oldToNew), owner: {
-    object: id, runtime: { file: `src/objects/${id}/prepared/runtime.json`, bytes: inputs.find(input => input.identity.endsWith('/prepared/runtime.json'))!.bytes },
+  return { definition, worldFrame, css, inputs, embeddedAssets: Object.fromEntries(oldToNew), owner: {
+    object: id, runtime: inputs.find(input => input.role==='prepared sphere bank'||/\/prepared\/runtime\.json$/.test(input.identity)),
     geometry: 'existing standard sphere; unchanged nodes and geometry; inactive image bindings cleared', inactiveImageProperties,
     physicalFrame: worldFrame, projectionShape: 'standard reference sphere', surfaceUrl: selected.url,
     rasterToolchain: { node: process.version, sharp: sharp.versions },

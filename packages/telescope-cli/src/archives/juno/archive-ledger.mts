@@ -11,6 +11,7 @@
  * receipt that says anything else is reported as a problem and proves nothing. The pixel scale is the label altitude times
  * the camera's pixel angle, which the instrument kernel in the kernel bank states; it is the scale straight below the
  * spacecraft, not across the whole image. --local leaves the dated index counts alone. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -91,7 +92,7 @@ export function checkRegistration(value: unknown, file: string, program: ReturnT
 
 /** Programs with their receipts (which images of which target were measured within the budget), and every receipt that could
  * not be accepted. A program with no receipt measures nothing; a program whose receipt cannot be accepted is a problem. */
-export async function junoReceipts(directory = PROGRAMS) {
+export async function junoReceipts(directory = programStorePath(PROGRAMS)) {
   const files = (await readdir(directory).catch(() => [] as string[])).sort();
   const measured: { program: string; target: string; images: number }[] = [], problems: string[] = [];
   for (const file of files.filter(name => name.endsWith('.json') && !name.endsWith('.registration.json'))) {
@@ -107,7 +108,7 @@ export async function junoReceipts(directory = PROGRAMS) {
 }
 
 /** The measured programs alone, for everything that asks what was registered rather than what went wrong. */
-export async function measuredPrograms(directory = PROGRAMS) {
+export async function measuredPrograms(directory = programStorePath(PROGRAMS)) {
   return (await junoReceipts(directory)).measured;
 }
 

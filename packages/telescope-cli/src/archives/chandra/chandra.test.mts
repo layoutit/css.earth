@@ -1,11 +1,12 @@
+import '../../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { addProductEvidence, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
-import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, readProductRecord, writeProductRecord } from '@cssearth/telescope-core/node';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope-core';
 import { observationMode, obsidDirectory, parseChandraProgram, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
 import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS_DEGREES, pinnedState, CHANDRA_LEDGER } from './archive-ledger.mts';
 import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';

@@ -20,20 +20,21 @@
  *
  * Which way the aperture's first axis lies on the sky is **not assumed**: `--mirror` runs the opposite choice as well and the
  * receipt reports what each one does to the agreement between visits that saw the same ground. */
+import { programStorePath, workspacePath } from '../../src/paths.mts';
 import { BODY_MAP_SCHEMA, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHdus } from '@cssearth/fits';
 import { requireFiniteNumber } from '@cssearth/core';
-import { HST_PROGRAMS, PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
+import { HST_PROGRAMS, PROGRAMS } from '#telescope/archives/hst/archive';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap, combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
+import { bodyMapProductRecord, formatProductRecord } from '#telescope/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
-import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '@cssearth/telescope-cli/archives/hst/slit-scan-reduction';
-import { ARCSEC_PER_RADIAN, DEGREE, type PreparedFrame, REPOSITORY, type VisitRegistration, prepareFrames, readFrameRegion, registerVisits } from '@cssearth/telescope-cli/archives/hst/slit-scan-frames';
+import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '#telescope/archives/hst/slit-scan-reduction';
+import { ARCSEC_PER_RADIAN, DEGREE, type PreparedFrame, REPOSITORY, type VisitRegistration, prepareFrames, readFrameRegion, registerVisits } from '#telescope/archives/hst/slit-scan-frames';
 
 /** The pinned reference spectrum, read from the binary table it is distributed as. Only two single-precision columns are
  * taken, named in the definition, and the wavelengths must rise; nothing else about the file is assumed. */
@@ -416,7 +417,7 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
   await writeFile(resolve(outputDirectory, name), fits);
   await writeFile(resolve(outputDirectory, `${name}.body-map.json`), metadata);
   await writeFile(resolve(outputDirectory, 'registration.json'), registration);
-  const definitionBytes = await readFile(scanPath(definition.id)), responsesBytes = await readFile(resolve(PROGRAMS, definition.horizons.responses));
+  const definitionBytes = await readFile(scanPath(definition.id)), responsesBytes = await readFile(resolve(programStorePath(PROGRAMS), definition.horizons.responses));
   const inputs: ProductInput[] = [{ role: 'slit-scan definition', identity: `${HST_PROGRAMS.path}/${definition.id}.scan.json`, bytes: definitionBytes.byteLength },
     ...definition.frames.map(frame => ({ role: frame.rejected ? 'rejected archive frame' : 'archive rectified frame', identity: frame.uri, bytes: frame.bytes })),
     { role: 'solar reference', identity: definition.reference.url, bytes: definition.reference.bytes },
@@ -429,7 +430,7 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
 }
 
 // ---- the stage --------------------------------------------------------------------------------------------------------
-export const scanPath = (id: string) => resolve(PROGRAMS, `${id}.scan.json`);
+export const scanPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.scan.json`);
 export const readSlitScan = async (id: string) => parseSlitScan(JSON.parse(await readFile(scanPath(id), 'utf8')));
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -451,7 +452,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     `${receipt.map.strongest.westLongitude}°W ${receipt.map.strongest.latitude}°`);
   console.log(`wrote ${written.join(', ')} to ${output}`);
   if (flags.includes('--receipt')) {
-    const path = resolve(PROGRAMS, `${definition.id}.scan.reproduction.json`);
+    const path = workspacePath(resolve(programStorePath(PROGRAMS), `${definition.id}.scan.reproduction.json`));
     await writeFile(path, `${JSON.stringify(receipt, null, 1)}\n`);
     console.log(`wrote ${path}`);
   }

@@ -3,9 +3,9 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { sourcePds3Observations } from './source-observations.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
-const ROOT = WORKSPACE;
+const ROOT = requireWorkspace();
 
 test('source-pinned Wild 2 PDS3 images enter the PDS adapter without inventing a filter width', async () => {
   const observations = await sourcePds3Observations(ROOT, 'comet-81p');
@@ -16,7 +16,7 @@ test('source-pinned Wild 2 PDS3 images enter the PDS adapter without inventing a
 });
 
 test('ordinal UTC is validated without requiring a product processing-level field',async()=>{
- const {pds3TimeIso}=await import('@cssearth/telescope');
+ const {pds3TimeIso}=await import('@cssearth/telescope-core');
  assert.equal(pds3TimeIso('2004-163T16:09:09.703'),'2004-06-11T16:09:09.703Z');
  assert.throws(()=>pds3TimeIso('2003-366T00:00:00'),/day of year/);
  for(const target of ['phoebe','tethys']){

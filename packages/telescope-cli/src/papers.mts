@@ -10,11 +10,13 @@
  * Before a paper's numbers are used, what followed it is read (`papers/follow-ups.mts`): each reported work is given the other
  * works published under its title (an erratum is printed that way), whether the index marks it retracted, and the later works
  * that cite it and name the target. Several targets at once are a sweep: one search each, no copies fetched. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from './archives/site-targets.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
 import { loadTargetCatalogue } from './observation-query/query.mts';
-import { resolveTarget } from '@cssearth/telescope';
+import { resolveTarget } from '@cssearth/telescope-core';
 import { LATER_NAMED, laterWorks, sameTitleQuery, sameTitleWorks, type LaterWork, type SameTitleWork } from './papers/follow-ups.mts';
 import { forms, spellings } from './papers/names.mts';
 import { UNREAD, evidenceSentences, mentions, mentionsAny, plainText } from './papers/text.mts';
@@ -220,6 +222,7 @@ async function readCopy(work: OpenAlexWork, session: Session, progress: (line: s
  * name such as "S2" is searched as the star orbiting Sgr A* rather than the cell line. Moons and planets keep a plain search.
  */
 export async function hostNames(root: string, id: string, catalogue: Awaited<ReturnType<typeof loadTargetCatalogue>>): Promise<readonly string[]> {
+  if (root === USER_ROOT) return (await loadSiteTargets()).hosts[id] ?? [];
   const path = resolve(root, 'packages/astronomy/data/bodies', `${id}.json`);
   const text = await readFile(path, 'utf8').catch((error: unknown) => {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;

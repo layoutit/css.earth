@@ -4,24 +4,35 @@ import { cxcQuery, TAP as CHANDRA_TAP } from '../archives/chandra/archive.mts';
 import { observationRecords, spitzerShippedObjects as spitzerObjects } from '../archives/spitzer/archive-ledger.mts';
 import { SEARCH as SPITZER_SEARCH, shaSearch } from '../archives/spitzer/archive.mts';
 import { leadTime, saveArchiveLeadEvidence, type ArchiveLeadFilter, type ArchiveLeadService, type ChandraSourceLead, type SpitzerSourceLead } from './archive-leads.mts';
-import type { TargetCatalogueEntry } from '@cssearth/telescope';
-import type { IcrsCircle } from '@cssearth/objects';
+import { requireString } from '@cssearth/core';
+import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
+import { parseRegion, type IcrsCircle } from '@cssearth/objects';
 
 const errorText = (error: unknown) => error instanceof Error ? error.message : String(error);
 const LIMIT = 100;
+async function chandraField(region: IcrsCircle, query: typeof cxcQuery, filter?: ArchiveLeadFilter) {
+  const circle = parseRegion(region), time = leadTime(filter), instrument = filter?.instrument;
+  if (instrument && /['\\;\u0000-\u001f]/u.test(instrument)) throw new TypeError('Unsafe archive instrument.');
+  const rows = await query(`SELECT TOP ${LIMIT} obsid,target_name,instrument,grating,exposure_time,start_date FROM cxc.observation WHERE status='archived' AND 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',${circle.raDegrees},${circle.decDegrees},${circle.radiusDegrees}))${instrument ? ` AND instrument='${instrument}'` : ''}${time ? ` AND start_date >= '${time.fromIso}' AND start_date <= '${time.toIso}'` : ''} ORDER BY exposure_time DESC, obsid`);
+  return rows.map(row => {
+    const obsid = Number(requireString(row.obsid, 'Chandra ObsID'));
+    if (!Number.isSafeInteger(obsid) || obsid < 1) throw new TypeError('Chandra returned an invalid ObsID.');
+    return { obsid, targetName: row.target_name ?? '', instrument: requireString(row.instrument), grating: requireString(row.grating), startDate: requireString(row.start_date) };
+  });
+}
 
-export async function searchChandraLeads(root: string, target: TargetCatalogueEntry, region?: IcrsCircle,
+export async function searchChandraLeads(root: string, target: TargetCatalogueEntry | undefined, region?: IcrsCircle,
   query: typeof cxcQuery = cxcQuery, filter?: ArchiveLeadFilter): Promise<ArchiveLeadService> {
   const time = leadTime(filter);
-  const scope = `Chandra archived observations for the target's shipped name or sky position${filter?.instrument ? `, instrument ${filter.instrument}` : ''}${time ? `, UTC dates ${time.fromIso.slice(0, 10)} to ${time.toIso.slice(0, 10)}` : ''}; first ${LIMIT} matching archive rows, up to 3 ObsIDs per instrument`;
+  const scope = `Chandra archived observations ${target ? "for the target's shipped name or sky position" : 'in the requested ICRS field'}${filter?.instrument ? `, instrument ${filter.instrument}` : ''}${time ? `, UTC dates ${time.fromIso.slice(0, 10)} to ${time.toIso.slice(0, 10)}` : ''}; first ${LIMIT} matching archive rows, up to 3 ObsIDs per instrument`;
   try {
-    const object = (await chandraObjects()).find(entry => entry.id === target.id) ??
-      (region ? { id: target.id, raDeg: region.raDegrees, decDeg: region.decDegrees, source: 'explicit ICRS search region' } : undefined);
-    if (!object) return { service: CHANDRA_TAP, state: 'unavailable', scope, reason: 'No Chandra name or sky-position search mapping exists for this target.', instruments: [] };
-    const rows = await observationsOf(object, query, region?.radiusDegrees, LIMIT, {
+    const object = target ? (await chandraObjects()).find(entry => entry.id === target.id) ??
+      (region ? { id: target.id, raDeg: region.raDegrees, decDeg: region.decDegrees, source: 'explicit ICRS search region' } : undefined) : undefined;
+    if (!object && !region) return { service: CHANDRA_TAP, state: 'unavailable', scope, reason: 'No Chandra name or sky-position search mapping exists for this target.', instruments: [] };
+    const rows = target && object ? await observationsOf(object, query, region?.radiusDegrees, LIMIT, {
       ...(filter?.instrument ? { instrument: filter.instrument } : {}),
       ...(time ? { fromIso: time.fromIso, toIso: time.toIso } : {}),
-    }), pin = await saveArchiveLeadEvidence(root, CHANDRA_TAP, object, rows);
+    }) : await chandraField(region!, query, filter), pin = await saveArchiveLeadEvidence(root, CHANDRA_TAP, target ? object : region, rows);
     const groups = new Map<string, { telescope: string; instrument: string; records: number; sample: string }>();
     const sources: ChandraSourceLead[] = [];
     for (const row of rows) {
@@ -37,12 +48,12 @@ export async function searchChandraLeads(root: string, target: TargetCatalogueEn
   } catch (error) { return { service: CHANDRA_TAP, state: 'unavailable', scope, reason: errorText(error), instruments: [] }; }
 }
 
-export async function searchSpitzerLeads(root: string, target: TargetCatalogueEntry, region?: IcrsCircle,
+export async function searchSpitzerLeads(root: string, target: TargetCatalogueEntry | undefined, region?: IcrsCircle,
   query: typeof shaSearch = shaSearch, filter?: ArchiveLeadFilter): Promise<ArchiveLeadService> {
   const time = leadTime(filter);
-  const scope = `Spitzer Heritage Archive AORs by the target's NAIF identity or sky position${filter?.instrument ? `, instrument ${filter.instrument}` : ''}${time ? `, UTC ${time.fromIso} to ${time.toIso}` : ''}; first ${LIMIT} matching returned rows, up to 3 AORs per mode`;
+  const scope = `Spitzer Heritage Archive AORs ${target ? "by the target's NAIF identity or sky position" : 'in the requested ICRS field'}${filter?.instrument ? `, instrument ${filter.instrument}` : ''}${time ? `, UTC ${time.fromIso} to ${time.toIso}` : ''}; first ${LIMIT} matching returned rows, up to 3 AORs per mode`;
   try {
-    const object = (await spitzerObjects()).find(entry => entry.id === target.id);
+    const object = target ? (await spitzerObjects()).find(entry => entry.id === target.id) : undefined;
     const route = object?.query.kind === 'none' || !object ? region ? { kind: 'position' as const, raDeg: region.raDegrees,
       decDeg: region.decDegrees, radiusDeg: region.radiusDegrees } : undefined : object.query;
     if (!route) return { service: SPITZER_SEARCH, state: 'unavailable', scope,

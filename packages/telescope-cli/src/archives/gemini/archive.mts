@@ -28,16 +28,18 @@
  * disagreement stops the pin.
  *
  * The program is written to packages/telescope-cli/src/archives/gemini/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';
 import { artifactName, isRawName, primaryHeaderBytes, query, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+
 
 /** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/gemini/programs');
+export const PROGRAMS = packagePath('packages/telescope-cli/src/archives/gemini/programs');
 /** What a raw Gemini frame can be. `ACQUISITION` is a pointing exposure: real data, never a science frame. */
 export const FRAME_TYPES = ['OBJECT', 'BIAS', 'DARK', 'FLAT', 'ARC', 'ACQUISITION'] as const;
 export const CALIBRATION_KINDS = ['BIAS', 'DARK', 'FLAT'] as const;
@@ -192,14 +194,14 @@ export const programFiles = (program: GeminiProgram): GeminiFrame[] => [...progr
 
 export async function writeGeminiProgram(program: GeminiProgram): Promise<GeminiProgram> {
   const checked = parseGeminiProgram(program);
-  await mkdir(PROGRAMS, { recursive: true });
-  await writeFile(resolve(PROGRAMS, `${checked.id}.json`), `${JSON.stringify(checked, null, 2)}\n`);
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  await writeFile(programStorePath(resolve(programStorePath(PROGRAMS), `${checked.id}.json`), 'write'), `${JSON.stringify(checked, null, 2)}\n`);
   return checked;
 }
 
 export async function readGeminiProgram(id: string): Promise<GeminiProgram> {
   requireProgramId(id);
-  return parseGeminiProgram(JSON.parse(await readFile(resolve(PROGRAMS, `${id}.json`), 'utf8')) as unknown);
+  return parseGeminiProgram(JSON.parse(await readFile(resolve(programStorePath(PROGRAMS), `${id}.json`), 'utf8')) as unknown);
 }
 
 export const FRAME_COLUMNS = 'o.observationID, o.type, o.intent, o.instrument_name, o.proposal_id, o.proposal_pi, o.target_name, ' +

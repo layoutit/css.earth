@@ -31,7 +31,7 @@ import { readFitsHeader, readFitsImage } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { ALMA, horizonsTables, horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { placeResolvedDisc, combineUnderPolicy, renderBodyMapProduct, bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '#telescope/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
 const REPOSITORY = checkoutProjectRoot(import.meta.url);

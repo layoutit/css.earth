@@ -1,0 +1,18 @@
+{
+  "header": {"INSTRUME":"HAWKI","DATE-OBS":"2008-09-09T08:45:08.3406","FILTER":"J","ORIGIN":"ESO-PARANAL","BUNIT":"ADU"},
+  "acquisition": {
+    "schema":"cssearth-telescope-product@1",
+    "stage":"archive-acquisition",
+    "parameters": {
+      "parent":{"obs_publisher_did":"ivo://eso.org/ID?ADP.2016-07-26T11:56:18.726","obs_id":"200179486"},
+      "acquisition":"{\"product\":\"{\\\"binding\\\":{\\\"observation\\\":{\\\"instrument\\\":\\\"HAWKI\\\",\\\"startIso\\\":\\\"2008-09-09T08:45:08.341Z\\\",\\\"endIso\\\":\\\"2008-09-09T08:51:29.196Z\\\",\\\"wavelengthsMicrometres\\\":[1.181,1.335]}}}\"}"
+    }
+  },
+  "snapshot": {
+    "schema":"cssearth-vo-discovery@1",
+    "response":{"rows":[
+      {"obs_publisher_did":"other","obs_id":"other","instrument_name":"unrelated camera","filter":"unrelated filter","s_pixel_scale":99},
+      {"obs_publisher_did":"ivo://eso.org/ID?ADP.2016-07-26T11:56:18.726","obs_id":"200179486","instrument_name":"HAWKI","filter":"J","s_pixel_scale":0.1066,"s_resolution":0.38,"obs_creator_name":"SNODGRASS, COLIN"}
+    ]}
+  }
+}

@@ -7,7 +7,7 @@ const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { evidenceFor } from '@cssearth/telescope';
+import { evidenceFor } from '@cssearth/telescope-core';
 import { EVIDENCE_KINDS, parseProductRecord } from '@cssearth/objects';
 import {
   ARCHIVE_FINAL_SCHEMA, ARCHIVE_FINAL_STAGE, archiveCalibration, 

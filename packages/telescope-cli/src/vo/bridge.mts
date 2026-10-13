@@ -1,9 +1,9 @@
 /** VO observations enter the public query directly, without a synthetic instrument ledger. */
 import { resolve } from 'node:path';
-import { astroquery, parseLimits } from '@cssearth/telescope/node';
+import { astroquery, parseLimits, USER_ROOT } from '@cssearth/telescope-core/node';
 import { assessRequest, type RequestSatisfaction, type ProductFacts } from '../requests/request-satisfaction.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
-import type { TargetCatalogueEntry } from '@cssearth/telescope';
+import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 import type { QualifiedObservation } from '../qualification/qualified-observations.mts';
 import type { QualificationAction } from '../qualification/qualification-routes.mts';
 import { type DiscoverySnapshot, type MetadataResponse } from '@cssearth/objects';
@@ -13,6 +13,7 @@ type DiscoveredObservation, type DiscoveryRequest
 } from './discovery.mts';
 import { nativeQualificationRoute, planAccess, type AcquisitionSpec, type MetadataLoader } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
+import { snapshotPublisher } from './snapshot-store.mts';
 
 export interface VoInputs {
   readonly records: readonly { readonly observation: DiscoveredObservation; readonly snapshot: DiscoverySnapshot; readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }[];
@@ -28,26 +29,28 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
   if (selectedService && !SERVICES.some(profile => profile.service === selectedService)) throw new TypeError(`The selected archive service is not registered: ${selectedService}`);
   const identities = catalogue.map(t => ({ id: t.id, names: [t.name, ...t.aliases], classification: t.archiveClass, classificationSource: t.classificationSource }));
   const target = identities.find(t => t.id === request.target);
-  if (!target) return { records: [], services: [] };
+  if (!target && request.target) return { records: [], services: [] };
+  if (!target && !searchCircle(request)) throw new TypeError('Position discovery requires an ICRS circle.');
   const limits = parseLimits(request.transferLimits), records: VoInputs['records'][number][] = [], services: VoInputs['services'][number][] = [];
   let metadataRequests = 0;
   const metadata = new Map<string, Promise<MetadataResponse>>();
   // Run archive clients one at a time; a faceted MAST search must not start many Python processes together.
   for (const profile of SERVICES) {
     if (selectedService && profile.service !== selectedService) continue;
+    if (!target && profile.model !== 'obscore-1.1') continue;
     let snapshots: DiscoverySnapshot[] = [], facet: Awaited<ReturnType<typeof faceter>> | undefined;
     const discoveryFailures: string[] = [];
     try {
       if (profile.facetByInstrument && !request.instrument && !(profile.spatialMatch === 'mast-api-cone' && searchCircle(request))) {
-        facet = await faceter(root, profile, request, target.names, limits);
+        facet = await faceter(root, profile, request, target?.names ?? [], limits);
         for (const instrument of facet.names) {
-          try { snapshots.push(await discoverer(root, profile, { ...request, instrument }, target.names, limits, INSTRUMENT_SAMPLE_LIMIT)); }
+          try { snapshots.push(await discoverer(root, profile, { ...request, instrument }, target?.names ?? [], limits, INSTRUMENT_SAMPLE_LIMIT)); }
           catch (error) { discoveryFailures.push(`${instrument}: ${error instanceof Error ? error.message : String(error)}`); }
         }
-      } else snapshots = [await discoverer(root, profile, request, target.names, limits)];
+      } else snapshots = [await discoverer(root, profile, request, target?.names ?? [], limits)];
     } catch (error) { discoveryFailures.push(error instanceof Error ? error.message : String(error)); }
     if (!snapshots.length && discoveryFailures.length) {
-      services.push({ service: profile.label ?? profile.service, state: 'unavailable', scope: 'Target-name query', reason: discoveryFailures.join('; ') });
+      services.push({ service: profile.label ?? profile.service, state: 'unavailable', scope: request.target ? 'Target-name query' : 'ICRS field query', reason: discoveryFailures.join('; ') });
       continue;
     }
     const rows = snapshots.reduce((count, snapshot) => count + snapshot.response.rows.length, 0);
@@ -58,25 +61,28 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
         ...snapshots.flatMap(snapshot => snapshot.response.issues), ...facet?.issues ?? [], ...discoveryFailures,
         `${rows} sampled rows; this is not a complete archive inventory.`].join('; ') });
     let accessLimitReached = false;
-    for (const snapshot of snapshots) for (const observation of snapshot.completeness === 'failed' ? [] : normalizeSnapshot(snapshot, profile, target, identities)) {
-      if (selectedObservation !== undefined && observation.key !== selectedObservation) { records.push({ observation, snapshot, products: [], issues: ['Access descriptions were not refreshed because get selected a different observation.'] }); continue; }
-      const plan = await planAccess(root, observation, snapshot, request, async (url, parameters) => {
-        const key = JSON.stringify([url, parameters ?? {}]);
-        let pending = metadata.get(key);
-        if (!pending) {
-          if (metadataRequests >= limits.metadataRequests) {
-            accessLimitReached = true;
-            throw new Error('The query-wide access-description request limit was reached.');
+    for (const snapshot of snapshots) {
+      const publishSnapshot = snapshotPublisher(snapshot);
+      for (const observation of snapshot.completeness === 'failed' ? [] : normalizeSnapshot(snapshot, profile, target, identities)) {
+        if (selectedObservation !== undefined && observation.key !== selectedObservation) { records.push({ observation, snapshot, products: [], issues: ['Access descriptions were not refreshed because get selected a different observation.'] }); continue; }
+        const plan = await planAccess(root, observation, snapshot, request, async (url, parameters) => {
+          const key = JSON.stringify([url, parameters ?? {}]);
+          let pending = metadata.get(key);
+          if (!pending) {
+            if (metadataRequests >= limits.metadataRequests) {
+              accessLimitReached = true;
+              throw new Error('The query-wide access-description request limit was reached.');
+            }
+            metadataRequests++;
+            pending = metadataLoader ? metadataLoader(url, parameters) : astroquery({ operation: 'vo-links', url, parameters,
+              directory: resolve(USER_ROOT, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
+              allowedPrivateHosts: policy.allowedPrivateHosts }).then(answer => answer.vo!);
+            metadata.set(key, pending);
           }
-          metadataRequests++;
-          pending = metadataLoader ? metadataLoader(url, parameters) : astroquery({ operation: 'vo-links', url, parameters,
-            directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
-            allowedPrivateHosts: policy.allowedPrivateHosts }).then(answer => answer.vo!);
-          metadata.set(key, pending);
-        }
-        return pending;
-      }, policy).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
-      records.push({ observation, snapshot, ...plan });
+          return pending;
+        }, policy, publishSnapshot).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
+        records.push({ observation, snapshot, ...plan });
+      }
     }
     if (accessLimitReached) {
       const previous = services.at(-1)!;
@@ -91,7 +97,7 @@ export function voCandidates(request: CapabilityRequest, inputs: VoInputs | unde
   return (inputs?.records ?? []).flatMap(entry => entry.products.map(spec => {
     const observation = entry.observation, product = qualified.find(p => p.program === spec.key && p.target === request.target && p.observation === observation.key);
     const [lo, hi] = observation.wavelengthsMicrometres;
-    const advertised: ProductFacts = { target: observation.target.target, verified: false, kind: spec.kind, result: 'telescope-product',
+    const advertised: ProductFacts = { target: observation.target.target ?? '', verified: false, kind: spec.kind, result: 'telescope-product',
       ...(lo !== null && hi !== null ? { wavelengthIntervalsMicrometres: [[lo, hi]] } : {}),
       ...(observation.startIso ? { startIso: observation.startIso } : {}), ...(observation.endIso ? { endIso: observation.endIso } : {}) };
     const satisfaction = assessRequest(request, product?.facts ?? advertised);

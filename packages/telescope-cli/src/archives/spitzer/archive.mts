@@ -25,6 +25,8 @@
  *    application backend, not a published API, and it may change without notice; everything it returns is validated here.
  *
  * The program is written to packages/telescope-cli/src/archives/spitzer/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, open, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -33,13 +35,12 @@ import { pipeline } from 'node:stream/promises';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
 import { archivePrograms } from '../programs.mts';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const SPITZER_PROGRAMS = archivePrograms('spitzer');
-export const PROGRAMS = resolve(WORKSPACE, SPITZER_PROGRAMS.path);
-export const REPOSITORY = WORKSPACE;
+export const PROGRAMS = packagePath(SPITZER_PROGRAMS.path);
+export const REPOSITORY = WORKSPACE ?? USER_ROOT;
 export const SEARCH = 'https://irsa.ipac.caltech.edu/applications/Spitzer/SHA/sticky/CmdSrv';
 export const DATA = 'https://irsa.ipac.caltech.edu/ibe/data/spitzer';
 const SCHEMA = 'cssearth-spitzer-program@1';
@@ -344,14 +345,14 @@ export function parseSpitzerProgram(value: unknown): SpitzerProgram {
     mode: requireString(row.mode, 'mode'), observedFrom: requireString(row.observedFrom, 'start'), observedTo: requireString(row.observedTo, 'end'), channels };
 }
 
-export const programPath = (id: string) => resolve(PROGRAMS, `${id}.json`);
+export const programPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.json`);
 export const readSpitzerProgram = async (id: string): Promise<SpitzerProgram> => parseSpitzerProgram(JSON.parse(await readFile(programPath(id), 'utf8')) as unknown);
 export async function writeSpitzerProgram(program: SpitzerProgram): Promise<void> {
-  await mkdir(PROGRAMS, { recursive: true });
-  await writeFile(programPath(program.id), `${JSON.stringify(program, null, 2)}\n`);
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  await writeFile(programStorePath(programPath(program.id), 'write'), `${JSON.stringify(program, null, 2)}\n`);
 }
 /** Where a program's pinned bytes live by default: outside the repository, because they are megabytes of archive data. */
-export const defaultDataRoot = resolve(REPOSITORY, 'output/spitzer');
+export const defaultDataRoot = resolve(USER_ROOT, 'output/spitzer');
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), [id, key] = positionalArguments(args, ['--channels', '--data']);

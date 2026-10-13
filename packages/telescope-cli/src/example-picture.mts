@@ -15,6 +15,8 @@
  *
  * Related: ../charts/fits-gallery-image.mts, whose rules for sky images this follows (north up, east left, every source
  * pixel a square). */
+import { packagePath, inputPath } from './paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -23,7 +25,7 @@ import { fitsImageAccessor, imageExtent, readFitsHdus, type FitsHeader, skyDispl
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { column, eventTable } from './archives/chandra/events.mts';
 import { decodeJunocam } from '@cssearth/bake/objects/layers/terrestrial';
-import { WORKSPACE } from '@cssearth/telescope/node';
+
 
 /** An enlarged picture stays small enough to read in a document and to commit beside it. */
 const MAX_OUTPUT_EDGE = 1024;
@@ -256,7 +258,7 @@ export function binEventCounts(x: Float64Array, y: Float64Array, source: Extract
 
 /** A product path inside this checkout, or inside the sibling worktree the toolkit ran in. */
 export function productPath(recipe: Pick<ExampleRecipe, 'producedIn'>, path: string, root: string) {
-  const here = resolve(root, path);
+  const here = inputPath(root, path);
   if (existsSync(here) || !recipe.producedIn) return here;
   return resolve(root, '..', recipe.producedIn, path);
 }
@@ -406,9 +408,9 @@ export async function makeExamplePicture(recipe: ExampleRecipe, root: string) {
 
 if (process.argv[1] && import.meta.filename === resolve(process.argv[1])) {
   const { writeFile, mkdir } = await import('node:fs/promises');
-  const repository = WORKSPACE;
+  const repository = requireWorkspace();
   const only = process.argv.slice(2).filter(argument => !argument.startsWith('--'));
-  const recipes = parseExampleRecipes(JSON.parse(await readFile(resolve(import.meta.dirname, 'examples.json'), 'utf8')));
+  const recipes = parseExampleRecipes(JSON.parse(await readFile(packagePath('src/examples.json'), 'utf8')));
   const directory = resolve(repository, 'docs/telescopes');
   await mkdir(directory, { recursive: true });
   for (const recipe of recipes.filter(recipe => !only.length || only.includes(recipe.id))) {

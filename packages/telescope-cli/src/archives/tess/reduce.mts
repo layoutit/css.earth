@@ -28,7 +28,7 @@ import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isRecord } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { ASSUMED_TILT_DEGREES, brightnessMaps, brightnessTable } from './map.mts';
 import { HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId } from '@cssearth/astronomy';
 import { kepseismicAt, readKepseismic } from '../kepler/kepseismic.mts';
@@ -48,7 +48,7 @@ import { toolchainPins } from './toolchain.mts';
 /** `@2`: every verdict is a published method's, or a paper's own published verdict, on the mission's own light curves. A
  * receipt of `@1` is of this repository's earlier rule on full-frame pixels, and is not read. */
 export const ROTATION_SCHEMA = 'cssearth-tess-rotation@2';
-export const receiptPath = (id: string) => resolve(WORKSPACE, 'output/tess', id, 'rotation.json');
+export const receiptPath = (id: string) => resolve(requireWorkspace(), 'output/tess', id, 'rotation.json');
 
 /** Where a map's tilt comes from: the axis the star's page draws from a measurement, the inclination a paper publishes for the star and its record holds, the tilt its record works out from its rotation, or none. */
 export type TiltFrom = 'page' | 'published' | 'record' | 'assumed';
@@ -81,11 +81,11 @@ const readJson = async (path: string): Promise<unknown> => JSON.parse(await read
 
 /** A star's place and motion from its astronomy record, and the tilt its page or its record holds. */
 export async function starPlace(id: string): Promise<StarPlace | undefined> {
-  const body = await readJson(resolve(WORKSPACE, 'packages/astronomy/data/bodies', `${id}.json`)), record = await readJson(resolve(WORKSPACE, 'src/objects', id, 'source/measurements.json'));
+  const body = await readJson(resolve(requireWorkspace(), 'packages/astronomy/data/bodies', `${id}.json`)), record = await readJson(resolve(requireWorkspace(), 'src/objects', id, 'source/measurements.json'));
   if (!isRecord(body) || !isRecord(body.star) || typeof body.star.rightAscensionDegrees !== 'number' || typeof body.star.declinationDegrees !== 'number') return undefined;
   const star = body.star, motion = (key: string) => typeof star[key] === 'number' ? star[key] / 3.6e6 : 0;
   // A page that measures its star's axis draws it tilted: the map is made at that tilt. Any other page draws the axis by convention.
-  const rotationPath = `src/objects/${id}/source/preparation/rotation.json`, rotation = await readJson(resolve(WORKSPACE, rotationPath));
+  const rotationPath = `src/objects/${id}/source/preparation/rotation.json`, rotation = await readJson(resolve(requireWorkspace(), rotationPath));
   const drawn = isRecord(rotation) && /inclination/iu.test(String(rotation.source ?? '')) && typeof rotation.rightAscensionDegrees === 'number' && typeof rotation.declinationDegrees === 'number' ? tiltOfPole(rotation.rightAscensionDegrees, rotation.declinationDegrees, star.rightAscensionDegrees as number, star.declinationDegrees as number) : undefined;
   const tilt = recordedTilt(id, rotationPath, drawn, record);
   return { id, name: isRecord(body.physical) && typeof body.physical.name === 'string' ? body.physical.name : id, raDegrees: star.rightAscensionDegrees as number, decDegrees: star.declinationDegrees as number, epochYear: typeof star.positionEpochJulianYear === 'number' ? star.positionEpochJulianYear : 2000,
@@ -97,14 +97,14 @@ export async function starPlace(id: string): Promise<StarPlace | undefined> {
 }
 
 /** Every rotation period a star's record holds from the catalogues, each with its table (new-object/metadata `--periods`). */
-export async function cataloguedOf(id: string): Promise<Catalogued[]> { const record = await readJson(resolve(WORKSPACE, 'src/objects', id, 'source/measurements.json')), held = isRecord(record) && Array.isArray(record.rotationPeriodsCatalogued) ? record.rotationPeriodsCatalogued : [];
+export async function cataloguedOf(id: string): Promise<Catalogued[]> { const record = await readJson(resolve(requireWorkspace(), 'src/objects', id, 'source/measurements.json')), held = isRecord(record) && Array.isArray(record.rotationPeriodsCatalogued) ? record.rotationPeriodsCatalogued : [];
   return held.filter(isRecord).flatMap(one => typeof one.days === 'number' && typeof one.source === 'string' ? [{ days: one.days, source: one.source }] : []); }
 
 /** Each star's own and neighbouring light from Gaia, by star id: the stars are asked at their places at Gaia's epoch. Gaia's
  * answer for every star is one request of some ten minutes, so `--all` keeps it under output/tess. `radiusArcsec` is how far
  * a neighbour counts: each mission's own (neighbours.mts PIXELS). */
-const KEPT_LIGHT = { csv: resolve(WORKSPACE, 'output/tess/gaia-neighbours.csv'), asked: resolve(WORKSPACE, 'output/tess/gaia-neighbours.asked.txt') };
-export const lightOf = (stars: readonly StarPlace[], keep = false, radiusArcsec: number = PIXELS.TESS.radiusArcsec) => pixelLight(stars.map(star => ({ id: star.id, ...placeAt(star, GAIA_EPOCH_YEAR) })), keep ? KEPT_LIGHT : undefined, radiusArcsec);
+const keptLight = () => ({ csv: resolve(requireWorkspace(), 'output/tess/gaia-neighbours.csv'), asked: resolve(requireWorkspace(), 'output/tess/gaia-neighbours.asked.txt') });
+export const lightOf = (stars: readonly StarPlace[], keep = false, radiusArcsec: number = PIXELS.TESS.radiusArcsec) => pixelLight(stars.map(star => ({ id: star.id, ...placeAt(star, GAIA_EPOCH_YEAR) })), keep ? keptLight() : undefined, radiusArcsec);
 /** The Gaia sources around a star, counted within TESS's radius and within K2's; `null` where Gaia has no source at its place. */
 export interface StarLight { readonly wide: PixelLight | null; readonly near: PixelLight | null }
 /** The years a mission's target is looked for at, beside the star's recorded place. K2's target list took its places
@@ -120,7 +120,7 @@ export const windowStem = (id: string, mission: Mission, window: number) => `${i
 /** The transits a star's light holds, from its planets' published orbits (packages/astronomy) and the published duration
  * each planet's transit chart is drawn with: what a method masks, as its paper masks the transits it knows of. */
 export async function transitsOf(id: string): Promise<Transit[]> { const transits: Transit[] = [];
-  for (const planet of HOSTED_PLANET_IDS) { if (hostedOrbitCentreId(planet) !== id) continue; const orbit = hostedOrbit(planet), charts = await readJson(resolve(WORKSPACE, 'src/objects', planet, 'source/content/charts.json'));
+  for (const planet of HOSTED_PLANET_IDS) { if (hostedOrbitCentreId(planet) !== id) continue; const orbit = hostedOrbit(planet), charts = await readJson(resolve(requireWorkspace(), 'src/objects', planet, 'source/content/charts.json'));
     const chart = isRecord(charts) && Array.isArray(charts.charts) ? charts.charts.filter(isRecord).find(one => one.kind === 'folded-transit' && typeof one.durationHours === 'number') : undefined;
     if (chart && typeof orbit.transitTimeBmjdTdb === 'number') transits.push({ periodDays: orbit.periodDays, epochBjd: orbit.transitTimeBmjdTdb + 2400000.5, durationDays: (chart.durationHours as number) / 24 }); }
   return transits; }
@@ -131,9 +131,9 @@ interface Listed { readonly window: number; readonly filename: string; readonly 
 /** One mission's light curves of a star as a method judged them. */
 interface Attempt { readonly mission: Mission; readonly method: PeriodMethod; readonly listed: readonly Listed[]; readonly fetched: readonly (Listed & { readonly url: string; readonly bytes: number })[]; readonly judged: StarResult }
 /** Where a paper's table is kept, so every star of every run asks for it once; and the index of the MEarth release. */
-const keptTable = (id: string) => resolve(WORKSPACE, 'output/tess/published', `${id}.json`), KEPT_MEARTH_INDEX = resolve(WORKSPACE, 'output/tess/published/mearth-south-index.html');
+const keptTable = (id: string) => resolve(requireWorkspace(), 'output/tess/published', `${id}.json`), keptMearthIndex = () => resolve(requireWorkspace(), 'output/tess/published/mearth-south-index.html');
 /** Whether a body is a star. A galaxy, a cluster or a nebula has a place on the sky too, and a light curve at its place is another object's. */
-const isStar = async (id: string) => { const body = await readJson(resolve(WORKSPACE, 'packages/astronomy/data/bodies', `${id}.json`)); return isRecord(body) && body.classification === 'star'; };
+const isStar = async (id: string) => { const body = await readJson(resolve(requireWorkspace(), 'packages/astronomy/data/bodies', `${id}.json`)); return isRecord(body) && body.classification === 'star'; };
 const described = (by: PeriodMethod | PublishedPaper) => ({ id: by.id, citation: by.citation, url: by.url, where: by.where, lightCurve: by.lightCurve, asks: by.asks, reliability: by.reliability, ...('table' in by ? { published: by.table, swing: by.swing } : {}) });
 
 /** One star, judged on the light curves the missions publish of it.
@@ -156,7 +156,7 @@ const described = (by: PeriodMethod | PublishedPaper) => ({ id: by.id, citation:
  * page to say, never to refuse the star. */
 export async function reduceStar(id: string, light?: StarLight): Promise<Record<string, unknown>> {
   const star = await starPlace(id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
-  const run = resolve(WORKSPACE, 'output/tess', id), files = resolve(run, 'light-curves'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
+  const run = resolve(requireWorkspace(), 'output/tess', id), files = resolve(run, 'light-curves'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
   const tried: Record<string, unknown>[] = [], checked = (verdict: RotationVerdict) => withinBreakup(besideCatalogued(verdict, star.cataloguedPeriodDays), star.fastestTurnDays);
   let kind: StarKind = { ...star, transits: await transitsOf(id) };
   const applies = (one: Mission) => methodFor(one, kind);
@@ -244,7 +244,7 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
       published = { id: paper.id, citation: paper.citation, url: paper.url, table: paper.table, twomass: row.twomass, row, verdict: said };
       if (!kept.detected) { reasons.push(kept.reason!); rotation = { detected: false, reason: reasons.join(' ') }; continue; }
       // Every light curve the release holds of the star, one a telescope; the paper's model is fitted to the longest.
-      const fetched = await Promise.all(filesOf(await southIndex(KEPT_MEARTH_INDEX), row.twomass).map(name => fetchMearth(name, files)));
+      const fetched = await Promise.all(filesOf(await southIndex(keptMearthIndex()), row.twomass).map(name => fetchMearth(name, files)));
       const read = await newtonStar(row, await Promise.all(fetched.map(async one => ({ filename: one.filename, curve: parseLightCurve(await readFile(one.file, 'utf8')) }))), place), file = fetched.find(one => one.filename === read.filename);
       published = { ...published, ...(read.note ? { note: read.note } : {}) };
       for (const season of read.seasons) { const name = `${stem('MEarth', season.season)}.curve.json`;
@@ -274,7 +274,7 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
 
 /** The map of each accepted window at the star's one period and tilt, written as a table beside the receipt, and what the receipt says of each. */
 async function mapsOf(star: StarPlace, mission: Mission, accepted: readonly { readonly window: number; readonly time: readonly number[]; readonly flux: readonly number[] }[], periodDays: number): Promise<Record<string, unknown>[]> {
-  const run = resolve(WORKSPACE, 'output/tess', star.id), maps: Record<string, unknown>[] = [];
+  const run = resolve(requireWorkspace(), 'output/tess', star.id), maps: Record<string, unknown>[] = [];
   const made = await brightnessMaps(accepted, periodDays, Math.min(star.tiltDegrees ?? ASSUMED_TILT_DEGREES, 90), mission === 'MEarth' ? MEARTH_MAP_DEGREE : undefined);
   for (const [index, read] of accepted.entries()) { const map = made[index]!, table = `${windowStem(star.id, mission, read.window)}.dat`, flat = map.values.flat();
     await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${WINDOW[mission]} ${read.window} (period ${periodDays} d)`, map));
@@ -287,7 +287,7 @@ async function mapsOf(star: StarPlace, mission: Mission, accepted: readonly { re
  * A tilt enters a reduction nowhere but its maps, so nothing is fetched or judged again: this is for a star whose tilt
  * record changed. The receipt keeps what was judged and takes the new tilt and maps. */
 export async function remapStar(id: string): Promise<Record<string, unknown>> {
-  const star = await starPlace(id), receipt = await readJson(receiptPath(id)), run = resolve(WORKSPACE, 'output/tess', id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
+  const star = await starPlace(id), receipt = await readJson(receiptPath(id)), run = resolve(requireWorkspace(), 'output/tess', id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
   const rotation = isRecord(receipt) && isRecord(receipt.rotation) ? receipt.rotation : undefined, mission = isRecord(receipt) && typeof receipt.mission === 'string' && receipt.mission in WINDOW ? receipt.mission as Mission : undefined;
   if (!isRecord(receipt) || receipt.schema !== ROTATION_SCHEMA || typeof rotation?.periodDays !== 'number' || mission === undefined || !Array.isArray(receipt.maps) || !receipt.maps.length) throw new Error(`${id}: ${receiptPath(id)} holds no maps to make again; reduce the star first.`);
   const accepted: { window: number; time: number[]; flux: number[] }[] = [];
@@ -314,7 +314,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const shard = args.find(argument => argument.startsWith('--shard='))?.slice(8).split('/').map(Number);
   if (shard && !(shard.length === 2 && Number.isInteger(shard[0]) && Number.isInteger(shard[1]) && shard[1]! > 0 && shard[0]! >= 0 && shard[0]! < shard[1]!)) throw new TypeError('--shard=K/N needs 0 <= K < N.');
   const stars: StarPlace[] = [];
-  for (const id of all ? (await readdir(resolve(WORKSPACE, 'src/objects'))).sort() : named) { const star = await starPlace(id); if (star) stars.push(star); else if (!all) console.log(`${id}: not a star with a place on the sky.`); }
+  for (const id of all ? (await readdir(resolve(requireWorkspace(), 'src/objects'))).sort() : named) { const star = await starPlace(id); if (star) stars.push(star); else if (!all) console.log(`${id}: not a star with a place on the sky.`); }
   const wide = await lightOf(stars, true), near = await lightOf(stars, true, PIXELS.K2.radiusArcsec);
   for (const [index, star] of stars.entries()) {
     if (shard && index % shard[1]! !== shard[0]) continue;

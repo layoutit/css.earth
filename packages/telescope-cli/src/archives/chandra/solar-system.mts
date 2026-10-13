@@ -25,11 +25,12 @@
  * registration.
  *
  * One receipt: programs/<program id>.<obsid>.solar-system.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, addProductEvidence, readProductRecord, writeProductRecord, astroqueryRows, toolchainPython, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, readProductRecord, writeProductRecord, WORKSPACE, astroqueryRows, toolchainPython } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductEvidence, type ProductInput, type ProductRun } from '@cssearth/objects';
 import type { FitsHeader } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -45,7 +46,7 @@ export const CHANDRA_OBSERVER = '500@-151';
  * the programs (`packages/telescope-cli/src/archives/chandra/horizons-bodies.json`), because this package's code names no body, and are read when a target is
  * frozen, not when the module loads. */
 export const CHANDRA_HORIZONS_BODIES = 'packages/telescope-cli/src/archives/chandra/horizons-bodies.json';
-export async function chandraHorizonsBodies(path = resolve(WORKSPACE, CHANDRA_HORIZONS_BODIES)): Promise<Readonly<Record<string, string>>> {
+export async function chandraHorizonsBodies(path = packagePath(CHANDRA_HORIZONS_BODIES)): Promise<Readonly<Record<string, string>>> {
   const record = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, 'Chandra Horizons bodies');
   if (record.schema !== 'cssearth-chandra-horizons-bodies@1') throw new TypeError(`${path} is not a Chandra Horizons body list.`);
   return Object.fromEntries(Object.entries(requireRecord(record.bodies, 'Horizons bodies')).map(([name, body]) => {
@@ -161,6 +162,7 @@ export const discRegistration = (product: string, receipt: string, diameterArcse
 export const FREEZE_PARAMETERS: Readonly<Record<string, string | number>> = { clobber: 'yes', verbose: 1 };
 
 export async function freezeSolarSystem(id: string, obsid: number, work: string, options: { sources?: readonly string[] } = {}) {
+  requireWorkspace(undefined, 'This command writes archive records.');
   const { program, entry } = await chandraFiles(id, obsid, resolve(work, 'archive'), options.sources, 'inputs');
   const target = entry.targetName.trim().toUpperCase();
   const bodies = await chandraHorizonsBodies(), horizonsBody = bodies[target];
@@ -237,10 +239,10 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
     // The control: in fixed sky coordinates the body drifts across the field during the observation.
     fixedSky: { file: written[0]!, columns: ['x', 'y'], ...measure(ours, 'x', 'y') },
   };
-  const path = resolve(PROGRAMS, `${id}.${obsid}.solar-system.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${obsid}.solar-system.json`), 'write');
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
   // Where the body landed is added to the record of each run whose list was measured, naming that list and this receipt.
-  const receiptPath = relative(WORKSPACE, path);
+  const receiptPath = relative(USER_ROOT, path);
   await addProductEvidence(reproRecord, [discRegistration(written[0]!, receiptPath, horizons.angularDiameterArcseconds)], recorded => resolve(repro, recorded));
   await addProductEvidence(freezeRecord, [discRegistration(basename(frozen), receiptPath, horizons.angularDiameterArcseconds)], recorded => resolve(work, recorded));
   return { path, receipt, program };

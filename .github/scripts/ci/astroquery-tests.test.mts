@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { resolve } from 'node:path';
 import { parse } from 'yaml';
 import { requireRecord, requireArray } from '@cssearth/core';
 import { astroqueryTestFiles, astroqueryLaneFiles, astroqueryTriggerPaths, ASTROQUERY_EXCLUSIONS } from './astroquery-discovery.mts';
@@ -18,7 +20,7 @@ test('toolchain lane rejects skipped, empty, truncated, failed and short TAP run
 });
 test('astroquery classification and workflow preserve the protected lane', async () => {
   const config = await loadCiAreasConfig();
-  for (const path of ['packages/telescope/src/node/toolchain/python.ts', 'packages/telescope/toolchains/toolchain.json', 'packages/telescope/toolchains/requirements.lock', 'packages/telescope-cli/src/toolchains/astronomy-toolchains.mts', 'packages/telescope-cli/src/archives/jwst/toolchain.json', 'packages/telescope-cli/src/archives/toolchain-descriptor.mts', 'packages/telescope-cli/src/vo/package.mts', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.mts', '.github/ci-areas.json', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts', 'packages/telescope-cli/src/vo/package.test.mts', '.github/workflows/universe.yml'])
+  for (const path of ['packages/telescope-core/src/node/toolchain/python.ts', 'packages/telescope-core/toolchains/toolchain.json', 'packages/telescope-core/toolchains/requirements.lock', 'packages/telescope-cli/src/toolchains/astronomy-toolchains.mts', 'packages/telescope-cli/src/archives/jwst/toolchain.json', 'packages/telescope-cli/src/archives/toolchain-descriptor.mts', 'packages/telescope-cli/src/vo/package.mts', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.mts', '.github/ci-areas.json', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts', 'packages/telescope-cli/src/vo/package.test.mts', '.github/workflows/universe.yml'])
     assert.ok(classifyAffectedPaths([path], config).jobs.has('astroquery'), path);
   for (const path of ['README.md', 'site/browser/runtime-policy.mts'])
     assert.equal(classifyAffectedPaths([path], config).jobs.has('astroquery'), false, path);
@@ -62,7 +64,7 @@ test('every TAP summary must be present exactly once', () => {
 test('filtered astroquery classification survives projection into the runnable job list', async () => {
   const { affectedJobNames } = await import('./ci-affected.mts');
   const config = await loadCiAreasConfig();
-  const selected = classifyAffectedPaths(['packages/telescope/src/node/toolchain/python.ts'], config);
+  const selected = classifyAffectedPaths(['packages/telescope-core/src/node/toolchain/python.ts'], config);
   assert.ok(affectedJobNames(selected).includes('astroquery'), 'the selected filtered lane must remain runnable');
   const ordinary = classifyAffectedPaths(['README.md'], config);
   assert.ok(!affectedJobNames(ordinary).includes('astroquery'), 'ordinary documentation does not run the filtered lane');
@@ -79,7 +81,7 @@ test('all toolchain-importing files are discovered; only named source exclusions
   assert.equal(files.length, all.length - Object.keys(ASTROQUERY_EXCLUSIONS).length);
   assert.deepEqual(all.filter(file => !files.includes(file)), Object.keys(ASTROQUERY_EXCLUSIONS).sort());
   const triggers = astroqueryTriggerPaths(root);
-  for (const name of ['telescope-cli', 'telescope', 'core', 'objects', 'fits', 'bake', 'renderer', 'astronomy', 'engine', 'spice']) assert.ok(triggers.includes(`packages/${name}/**`));
+  for (const name of ['telescope-cli', 'telescope-core', 'core', 'objects', 'fits', 'bake', 'renderer', 'astronomy', 'engine', 'spice']) assert.ok(triggers.includes(`packages/${name}/**`));
 });
 
 
@@ -90,4 +92,28 @@ test('runner executes exactly the derived files and a skip makes the run red', (
   const ran = runAstroqueryFiles(root, file => { visited.push(file); return { status: 0, stdout: stub(1), stderr: '' }; });
   assert.equal(ran, files.length);
   assert.deepEqual(visited, files);
+});
+
+test('the protected runner loads source siblings and enables provisioning module mocks', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'astroquery-runner-'));
+  try {
+    const loader = resolve(root, 'packages/core/src/node'), owner = resolve(root, 'packages/telescope-core/src/node/toolchain');
+    await mkdir(loader, { recursive: true }); await mkdir(owner, { recursive: true });
+    for (const name of ['register-vite-suffix.mts', 'vite-suffix-loader.mts'])
+      await copyFile(new URL(`../../../packages/core/src/node/${name}`, import.meta.url), resolve(loader, name));
+    await writeFile(resolve(owner, 'toolchain.ts'), 'export const astroqueryToolchain = () => "original";\n');
+    await writeFile(resolve(owner, 'provisioning.test.mts'), `
+      import assert from 'node:assert/strict';
+      import test, { mock } from 'node:test';
+      import { astroqueryToolchain } from './toolchain.js';
+      test('source loader and provisioning mock both run', async () => {
+        assert.equal(astroqueryToolchain(), 'original');
+        const replacement = mock.module(new URL('./toolchain.ts', import.meta.url).href,
+          { namedExports: { astroqueryToolchain: () => 'mocked' } });
+        try { assert.equal((await import('./toolchain.js')).astroqueryToolchain(), 'mocked'); }
+        finally { replacement.restore(); }
+      });
+    `);
+    assert.equal(runAstroqueryFiles(root), 1);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

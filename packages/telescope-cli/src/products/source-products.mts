@@ -1,11 +1,12 @@
 /** Package-owned observations enter the same query as archive holdings. Pins stay in the existing source manifest. */
+import { inputPath } from '../paths.mts';
 import { inside, safeId, parseSourceProducts, sourceReceipt, sourceRecordComplete, assertPinnedLabel, type SourceProduct } from './source-product-contract.mts';
 import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { VERSION } from '../help.mts';
 import { hasErrorCode, requireRecord } from '@cssearth/core';
-import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, sameRun, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
 import { sourcePds3Observations } from '../archives/pds/source-observations.mts';
 import { parseProductFacts, type QualifiedObservation } from '../qualification/qualified-observations.mts';
@@ -20,6 +21,7 @@ export async function sourceRun(root: string, product: SourceProduct, dependenci
 }
 export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = [], options: { readonly fetchRemote?: boolean } = {}): Promise<LoadedSourceProduct[]> {
   safeId(target, 'target');
+  if (root === USER_ROOT) return [];
   const source = resolve(root, 'src/objects', target, 'source');
   const value = await readFile(resolve(source, 'observations.json'), 'utf8').then(text => JSON.parse(text) as unknown).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
   const declared = value === undefined ? [] : parseSourceProducts(value, JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')) as unknown, target);
@@ -42,7 +44,7 @@ export async function loadSourceProducts(root: string, target: string, issues: S
   for (const product of declared) {
     const receipt = sourceReceipt(product);
     let record;
-    try { record = await readProductRecord(resolve(root, receipt)); } catch { loaded.push({ ...product, qualified: false, receipt, receiptProblem: 'Qualification receipt is malformed.' }); continue; }
+    try { record = await readProductRecord(inputPath(root, receipt)); } catch { loaded.push({ ...product, qualified: false, receipt, receiptProblem: 'Qualification receipt is malformed.' }); continue; }
     let qualified = false, receiptProblem: string | undefined;
     const savedFacts = record ? await readFile(resolve(root, `output/telescopes/${target}/${product.id}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined):undefined;
     if (record) {

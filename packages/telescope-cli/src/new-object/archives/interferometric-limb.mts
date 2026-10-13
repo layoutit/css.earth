@@ -1,5 +1,5 @@
 /** A star's limb fitted to its own interferometry, for a star no paper gives a law for and no model grid reaches: the power law
- * I(mu) = mu^alpha that fitPowerLawDisc (@cssearth/telescope-cli, disc-fit.mts) fits inside the first lobe of the calibrated
+ * I(mu) = mu^alpha that fitPowerLawDisc (@cssearth/telescope, disc-fit.mts) fits inside the first lobe of the calibrated
  * visibilities an observation season records for it (packages/telescope-cli/src/archives/interferometry/seasons/). The first lobe
  * is where the whole disc dominates; past the null a spotted star's cells do. The law is written as a record beside the star, with
  * the tool, the input and the data it was fitted to, and star-limb.mts installs it as it installs a paper's. */

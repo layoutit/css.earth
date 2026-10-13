@@ -3,6 +3,7 @@ import { JWST_CUBE_COVERAGE } from '../archives/jwst/imaging/bands.mts';
 import { bandOfFilters } from '../archives/jwst/imaging/archive.mts';
 import { validateCapabilityRequest, type CapabilityRequest } from '../requests/recipe-request.mts';
 import type { DiscoveryRequest } from '../vo/discovery.mts';
+import { WORKSPACE, WORKSPACE_REQUIRED } from '@cssearth/telescope-core/node';
 
 export interface QualificationObservation {
   readonly id: string;
@@ -30,6 +31,16 @@ export type QualificationConfiguration =
   | { readonly kind: 'jwst-band'; readonly band: string; readonly wavelengthMicrometres: readonly [number, number] }
   | { readonly kind: 'naco-program-night'; readonly programme: string; readonly archiveTarget: string; readonly night: string }
   | { readonly kind: 'pds-product'; readonly targetLid: string; readonly targetName: string; readonly lidvid: string };
+
+/** These reductions write archive programs or refresh checkout ledgers. Native and source acquisition do neither. */
+const WORKSPACE_PREREQUISITES: Readonly<Record<QualificationConfiguration['kind'], boolean>> = {
+  'archive-acquisition': false, 'source-product': false, 'spitzer-irac-channel': true,
+  'jwst-band': true, 'naco-program-night': true, 'pds-product': true,
+};
+/** Discovery and execution consult the same prerequisite before offering or starting a reduction. */
+export function qualificationPrerequisite(configuration: QualificationConfiguration, workspace = WORKSPACE): string | undefined {
+  return WORKSPACE_PREREQUISITES[configuration.kind] && workspace === undefined ? WORKSPACE_REQUIRED : undefined;
+}
 
 export interface QualificationAction {
   readonly kind: 'qualify-observation';
@@ -162,23 +173,28 @@ export interface ExplorationQualificationAvailability {
   readonly reason: string;
 }
 
+function availableQualification(configuration: QualificationConfiguration, reason: string): ExplorationQualificationAvailability {
+  const prerequisite = qualificationPrerequisite(configuration);
+  return { available: prerequisite === undefined, configuration, missingParameters: [], reason: prerequisite ?? reason };
+}
+
 /** Describe the exact existing route without manufacturing a wavelength merely to make it selectable. */
 export function explorationQualificationFor(telescope: string, mode: string, target: string, observation: QualificationObservation,
   request: Pick<DiscoveryRequest, 'wavelengthMicrometres' | 'time'>): ExplorationQualificationAvailability {
-  if (observation.sourceProductId) return { available: true, configuration: { kind: 'source-product', id: observation.sourceProductId }, missingParameters: [], reason: 'Package-owned source product can be qualified through its pinned source closure.' };
+  if (observation.sourceProductId) return availableQualification({ kind: 'source-product', id: observation.sourceProductId }, 'Package-owned source product can be qualified through its pinned source closure.');
   const route = routeFor(telescope, mode);
   const needsWavelength = telescope === 'Spitzer' && mode === 'IRAC Map' || telescope === 'JWST' && mode === 'NIRSPEC/IFU';
   if (needsWavelength && !request.wavelengthMicrometres) return { available: false, missingParameters: ['wavelength'], reason: 'This reduction route needs an explicit wavelength interval to select its channel or band.' };
   if (route) {
     const action = route.actions({ target, wavelengthMicrometres: request.wavelengthMicrometres, time: request.time, observations: [observation] })[0];
-    return action ? { available: true, configuration: action.configuration, missingParameters: [], reason: 'The existing telescope-specific qualification route accepts this observation and the supplied filters.' }
+    return action ? availableQualification(action.configuration, 'The existing telescope-specific qualification route accepts this observation and the supplied filters.')
       : { available: false, missingParameters: [], reason: 'The existing telescope-specific route cannot qualify this observation with the supplied filters.' };
   }
   if (observation.kind === 'image' && observation.targetLid && observation.archiveTarget && observation.productLidvid && observation.observatory && observation.instrument) {
     if (!request.wavelengthMicrometres) return { available: false, missingParameters: ['wavelength'], reason: 'This PDS route needs an explicit wavelength interval to bind a supported product.' };
-    if (productCovers(observation, request.wavelengthMicrometres)) return { available: true,
-      configuration: { kind: 'pds-product', targetLid: observation.targetLid, targetName: observation.archiveTarget, lidvid: observation.productLidvid },
-      missingParameters: [], reason: 'The existing PDS product route accepts this exact archive identity.' };
+    if (productCovers(observation, request.wavelengthMicrometres)) return availableQualification(
+      { kind: 'pds-product', targetLid: observation.targetLid, targetName: observation.archiveTarget, lidvid: observation.productLidvid },
+      'The existing PDS product route accepts this exact archive identity.');
   }
   return { available: false, missingParameters: [], reason: `No qualification route handles ${telescope} ${mode} for this observation.` };
 }

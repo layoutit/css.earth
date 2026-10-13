@@ -11,24 +11,25 @@
  * reference library. The run happens on the klip toolchain (toolchain.json), whose pins are the paper's pipeline version and CRDS
  * context. The result is spaceKLIP's own KLIP product, one image per KL mode count, north up. The run is stopped if its resident
  * memory passes the ceiling (default 6 GiB). */
+import { programStorePath, packagePath } from '../../../paths.mts';
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython, WORKSPACE } from '@cssearth/telescope/node';
+import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../../programs.mts';
 import { jwstToolchain } from '../toolchain.mts';
 
 /** The pinned programs share the JWST programs root, found through the checkout. */
 export const JWST_KLIP_PROGRAMS = archivePrograms('jwst');
-const PROGRAMS = resolve(WORKSPACE, JWST_KLIP_PROGRAMS.path);
+const PROGRAMS = packagePath(JWST_KLIP_PROGRAMS.path);
 
 export interface KlipBand { readonly band: string; readonly science: readonly string[]; readonly references: readonly string[] }
 export interface KlipProgram { readonly id: string; readonly crdsContext: string; readonly settings: Record<string, unknown>; readonly bands: readonly KlipBand[]; readonly files: ReadonlyMap<string, { readonly uri: string; readonly bytes: number }> }
 
 export async function readKlipProgram(id: string): Promise<KlipProgram> {
-  const path = resolve(PROGRAMS, `${id}.json`), entry = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, path);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`), entry = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, path);
   if (entry.schema !== 'cssearth-jwst-klip-program@1') throw new Error(`${path}: schema is ${String(entry.schema)}, not cssearth-jwst-klip-program@1.`);
   const files = new Map(requireArray(entry.files, `${path} files`).map(record => {
     const file = requireRecord(record, `${path} file`);

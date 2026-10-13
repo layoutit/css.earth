@@ -10,7 +10,7 @@
  * with it and is the caller's to keep or leave. */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 import { describeProduct, headerOf, NORMALISED_ROWS } from './product.mts';
 
 export const CADC_TAP = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus';

@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
-import { RENDERER_BUILD_CONFIG_PATH } from '../../../../packages/telescope-cli/src/implementation-dependencies.mts';
+import { RENDERER_BUILD_CONFIG_PATH } from '../../../../packages/telescope-cli/src/package/implementation-dependencies.mts';
 import { preparationRendererFindings, rendererUses, type RendererException } from './preparation-without-renderer.mts';
 
 const path = 'packages/telescope-cli/src/sphere/publication.mts';
@@ -49,7 +49,7 @@ test('literal sibling URLs and configuration dependency mutations fail, restorat
 });
 
 test('declared renderer build inputs need a checked metadata exception', () => {
-  const path = 'packages/telescope-cli/src/implementation-dependencies.mts';
+  const path = 'packages/telescope-cli/src/package/implementation-dependencies.mts';
   const text = "const RENDERER_BUILD_CONFIG_PATH = 'packages/renderer/tsup.config.ts'; import(pathToFileURL(resolve(WORKSPACE, RENDERER_BUILD_CONFIG_PATH)).href);";
   assert.equal(rendererUses(path, text), true);
   assert.match(preparationRendererFindings(new Map([[path, text]]), [])[0]!, /must not depend on renderer/u);

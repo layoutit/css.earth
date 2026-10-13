@@ -1,3 +1,4 @@
+import './test-support/index.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -10,7 +11,7 @@ import { forms, spellings } from './papers/names.mts';
 import { evidenceSentences, mentions } from './papers/text.mts';
 import { abstractText, arxivIdOf, arxivQuery, citingQuery, openAlexQuery, parseArxivResponse, parseOpenAlexResponse, rankWorks } from './papers/works.mts';
 import { parseCli } from './cli-arguments.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
 const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-papers');
 const openAlex = async (): Promise<unknown> => JSON.parse(await readFile(resolve(fixtures, 'openalex-works.json'), 'utf8'));
@@ -75,7 +76,7 @@ test('a temporary OpenAlex failure falls back to source-identified arXiv works w
   // A workspace holding Io's descriptor alone: the search reads every descriptor it finds, and the checkout has thousands.
   const workspace = await mkdtemp(resolve(tmpdir(), 'cssearth-papers-'));
   await mkdir(resolve(workspace, 'src/objects/io'), { recursive: true });
-  await writeFile(resolve(workspace, 'src/objects/io/object.json'), await readFile(resolve(WORKSPACE, 'src/objects/io/object.json')));
+  await writeFile(resolve(workspace, 'src/objects/io/object.json'), await readFile(resolve(requireWorkspace(), 'src/objects/io/object.json')));
   const result = await searchPapers(workspace, { target: 'Io', instrument: 'JIRAM', fetcher });
   assert.equal(result.source, 'arxiv'); assert.match(result.sourceIssue!, /429/u);
   // The arXiv PDF is not fetched to be discarded: its HTML rendering is asked for, then what else was published under the title.
@@ -206,7 +207,7 @@ test('the other works under a paper\'s title are found by title: an erratum is p
 const galaxyWorkspace = async (): Promise<string> => {
   const workspace = await mkdtemp(resolve(tmpdir(), 'cssearth-papers-'));
   await mkdir(resolve(workspace, 'src/objects/m61'), { recursive: true });
-  await writeFile(resolve(workspace, 'src/objects/m61/object.json'), await readFile(resolve(WORKSPACE, 'src/objects/m61/object.json')));
+  await writeFile(resolve(workspace, 'src/objects/m61/object.json'), await readFile(resolve(requireWorkspace(), 'src/objects/m61/object.json')));
   return workspace;
 };
 const indexed = (id: string, title: string, abstract: string, more: Readonly<Record<string, unknown>> = {}) => ({ id: `https://openalex.org/${id}`, doi: `https://doi.org/10.0000/${id}`, title, publication_year: 2026,

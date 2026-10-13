@@ -1,6 +1,6 @@
 /** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
 import { parseRegion, type ResolutionAssumption } from '@cssearth/objects';
-import { parseLimits } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope-core/node';
 import { requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 export function inputWavelengths(request: CapabilityRequest): readonly [number,number] {
   if (!request.continuumMicrometres) return request.wavelengthMicrometres;
@@ -25,7 +25,7 @@ export type RequestedResult = typeof REQUESTED_RESULTS[number];
 export interface CapabilityRequest {
   readonly region?: import('@cssearth/objects').IcrsCircle;
   readonly spectralFrame?: 'barycentric';
-  readonly transferLimits?: import('@cssearth/telescope/node').TransferLimits;
+  readonly transferLimits?: import('@cssearth/telescope-core/node').TransferLimits;
   readonly continuumMicrometres?: readonly [readonly [number,number],readonly [number,number]];
   readonly acceptedAssumptions?: readonly ResolutionAssumption[];
   readonly target: string;

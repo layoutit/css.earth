@@ -4,6 +4,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { readMeasuredSpectrum, renderMeasuredSpectrum, parseMeasuredSpectrum } from '@cssearth/bake/objects/charts';
+import { parseHTML } from 'linkedom';
 
 const recipe = {
   kind: 'measured-spectrum', id: 'fixture', title: 'Measurements', description: 'Published bins',
@@ -51,4 +52,23 @@ test('rejects unsafe paths and malformed scales and axes before reading', () => 
   for (const path of ['../escape', '/absolute', 'a\\b', '']) assert.throws(() => parseMeasuredSpectrum({ ...recipe, source: { ...recipe.source, path } }));
   for (const scale of [-1, 0, Infinity]) assert.throws(() => parseMeasuredSpectrum({ ...recipe, source: { ...recipe.source, yScale: scale } }));
   assert.throws(() => parseMeasuredSpectrum({ ...recipe, x: { ...recipe.x, ticks: [2, 1] } }));
+});
+
+test('sampled spectrum keeps masked gaps and paints isolated uncertainties after absent errors', () => {
+  const input = { id: 'samples', title: 'Spectrum', description: 'Observed samples', metadata: {}, xLabel: 'Wavelength', yLabel: 'Value',
+    samples: [{ x: 1, y: 2, sigma: .1 }, { x: 2, y: 3, sigma: .2 }, { x: 3, y: null, sigma: null },
+      { x: 4, y: 2, sigma: null }, { x: 5, y: 1, sigma: .3 }] };
+  const svg = parseHTML(renderMeasuredSpectrum(input)).document;
+  assert.equal(svg.querySelectorAll('.object-chart-line').length, 2);
+  assert.equal(svg.querySelector('.object-chart-line')!.getAttribute('d')!.split('L').length, 2);
+  const bar = svg.querySelector('path.uncertainty[data-x="5"]')!;
+  const d = /^M([\d.-]+) ([\d.-]+)V([\d.-]+)$/u.exec(bar.getAttribute('d')!);
+  assert.ok(d);assert.ok(Number(d[3]) > Number(d[2]), 'Final sample error must paint a segment with positive length.');
+  assert.ok(Number(bar.getAttribute('stroke-width')) > 0);assert.notEqual(bar.getAttribute('stroke'), 'none');
+  const isolated = parseHTML(renderMeasuredSpectrum({ ...input, samples: [input.samples[4]!] })).document;
+  assert.ok(isolated.querySelector('circle'));assert.match(isolated.querySelector('.uncertainty')!.getAttribute('d')!, /V203\.000$/u);
+  assert.equal(parseHTML(renderMeasuredSpectrum({ ...input, samples: input.samples.toReversed() })).document.querySelectorAll('.object-chart-line').length, 2);
+  assert.throws(() => renderMeasuredSpectrum({ ...input, samples: [{ x: 1, y: null, sigma: null }] }), /no usable/);
+  assert.throws(() => renderMeasuredSpectrum({ ...input, samples: [{ x: 1, y: 1, sigma: -1 }] }), /uncertainty/);
+  assert.throws(() => renderMeasuredSpectrum({ ...input, samples: [input.samples[0]!, input.samples[0]!] }), /monotonic/);
 });

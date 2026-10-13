@@ -4,6 +4,8 @@
  * rebuilt, because the hosted-planet scaffold places the body with the package's own orbit code. Phase two writes the package:
  * the scaffold's shape-only planet (lit by its star, or glowing with its own heat when a temperature is cited), or, for a
  * companion star, the same color dataset a placed star has (dataset.mts), from a Planck spectrum at its cited temperature. */
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../paths.mts';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -76,8 +78,8 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     const measurements = await readFile(resolve(o.measurements), 'utf8'), csvName = o.measurements.split('/').at(-1)!;
     const pick = { whereistheplanetKey: o.whereistheplanet, ...(o.body ? { body: o.body } : {}), measurements: csvName, measurementsSource: o.measurementsSource };
     await writeFile(resolve(work, csvName), measurements); await writeFile(resolve(work, 'pick.json'), json(pick));
-    const { astroqueryToolchainSync } = await import('@cssearth/telescope/node'), toolchain = astroqueryToolchainSync();
-    execFileSync(toolchain.python, [resolve(import.meta.dirname, 'hosted-orbits/posterior-pick.py'), resolve(work, 'pick.json'), resolve(work, 'orbit.json')], { env: { ...process.env, ...toolchain.env }, stdio: ['ignore', 'ignore', 'inherit'] });
+    const { astroqueryToolchainSync } = await import('@cssearth/telescope-core/node'), toolchain = astroqueryToolchainSync();
+    execFileSync(toolchain.python, [packagePath('src/new-object/hosted-orbits/posterior-pick.py'), resolve(work, 'pick.json'), resolve(work, 'orbit.json')], { env: telescopePythonEnvironment(toolchain.env), stdio: ['ignore', 'ignore', 'inherit'] });
     const orbitText = await readFile(resolve(work, 'orbit.json'), 'utf8');
     orbit = orbitizeHostedOrbit(JSON.parse(orbitText), hostRadiusKm, distance, `${o.source} (${o.url})`, `src/objects/${spec.id}/source/orbits/pick.json`);
     for (const [name, text] of [[csvName, measurements], ['pick.json', json(pick)], ['orbit.json', orbitText]] as const) documents.set(`orbits/${name}`, text);

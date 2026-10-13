@@ -9,15 +9,16 @@
  * start, which checks the trajectory reader against a source that shares none of its code. Nothing external runs here:
  * the reader, the cameras and the fit are this repository's TypeScript.
  *
- * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, packages/telescope/src/product-record.ts):
+ * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, packages/telescope-core/src/product-record.ts):
  * the images and kernels it read at their pinned sizes, the policy the fit was held to, and the software that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
  * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
+import { programStorePath } from '../../paths.mts';
 import { VERSION } from '../../help.mts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, writeProductRecord, WORKSPACE, astroqueryRows } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, writeProductRecord, astroqueryRows, requireWorkspace } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
@@ -94,7 +95,7 @@ export function registrationRun(program: JunocamProgram, kernels: readonly { pat
 /** What fitting the lit limb establishes, added to the record of the run that measured it. It is registration against the
  * geometry the kernels state, and nothing else: it is not agreement with an archive product, and an error the kernels and the
  * fit share would not show in it. A receipt with no record beside it is refused rather than reported as checked. */
-export async function addRegistrationEvidence(receiptPath: string, repository = WORKSPACE) {
+export async function addRegistrationEvidence(receiptPath: string, repository = requireWorkspace()) {
   const product = basename(receiptPath);
   return addProductEvidence(productRecordPath(receiptPath), [{
     kind: 'geometric-registration', receipt: receiptPath, product,
@@ -121,7 +122,7 @@ export async function measureProgram(id: string, work: string, { raw, horizons =
   const receipt = { schema: RECEIPT_SCHEMA, program: program.id, measured: new Date().toISOString().slice(0, 10), target: { ...program.target, radiiKm }, policy: POLICY,
     kernels: set.kernels.map(kernel => ({ path: program.kernels.find(path => kernel.path.endsWith(path)) ?? kernel.path, bytes: kernel.bytes })), images,
     ...(horizons ? { horizons: await horizonsCheck(set, program) } : {}) };
-  const path = resolve(PROGRAMS, `${program.id}.registration.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${program.id}.registration.json`), 'write');
   await writeFile(path, JSON.stringify(receipt, null, 2) + '\n');
   // The record of what this measurement read, then the measurement itself as the one kind of evidence it is.
   await writeProductRecord(productRecordPath(path), registrationRun(program, receipt.kernels, await registrationSoftware()),

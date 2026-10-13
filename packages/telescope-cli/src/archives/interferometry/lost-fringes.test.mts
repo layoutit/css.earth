@@ -5,9 +5,9 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '@cssearth/bake/objects/raster';
 import { findLostFringes, pairVisibilities, removeLostFringes, type ExposureVisibilities } from './lost-fringes.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
-const repository = WORKSPACE;
+const repository = requireWorkspace();
 const exposure = (id: string, block: number, pairs: Record<string, number>, object = 'STAR'): ExposureVisibilities => ({ id, object, block, pairs: new Map(Object.entries(pairs)) });
 
 test('a pair lost for one block is found against the blocks around it, and a pair near a null is not', () => {

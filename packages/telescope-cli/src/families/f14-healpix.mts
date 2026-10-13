@@ -1,6 +1,6 @@
 /** F14 HEALPix: Astropy reads FITS metadata; astropy-healpix owns native pixel indexing. */
+import { telescopePythonEnvironment, astroqueryToolchain } from '@cssearth/telescope-core/node';
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain } from '@cssearth/telescope/node';
 import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';
 import type { DescriptorMember, ProductDescriptor } from '../products/product-descriptor.mts';
 import { descriptor, stable } from './common.mts';
@@ -37,7 +37,7 @@ pix=r.get('pixels');
 if not isinstance(pix,list) or not pix or any(not isinstance(v,int) or v<0 or v>=hp.npix for v in pix): raise ValueError('Region selection needs non-empty in-bounds native HEALPix pixel indices')
 values={c:[float(components[c][i]) for i in pix] for c in wanted}
 json.dump({**base,'selection':{'pixels':pix,'components':wanted},'values':values},sys.stdout,allow_nan=False)`;
-async function run(pin:HealpixPin, payload:any):Promise<any>{const tc=await astroqueryToolchain();return await new Promise((resolve,reject)=>{const p=spawn(tc.python,['-c',python],{env:{...process.env,...tc.env},stdio:['pipe','pipe','pipe']});let out='',err='';p.stdout.setEncoding('utf8').on('data',x=>out+=x);p.stderr.setEncoding('utf8').on('data',x=>err+=x);p.on('error',reject);p.on('close',code=>{if(code!==0)return reject(new Error(`Astropy HEALPix owner failed: ${err.slice(-1000)}`));try{resolve(JSON.parse(out));}catch(e){reject(e);}});p.stdin.end(JSON.stringify({path:pin.path,...payload}));});}
+async function run(pin:HealpixPin, payload:any):Promise<any>{const tc=await astroqueryToolchain();return await new Promise((resolve,reject)=>{const p=spawn(tc.python,['-c',python],{env:telescopePythonEnvironment(tc.env),stdio:['pipe','pipe','pipe']});let out='',err='';p.stdout.setEncoding('utf8').on('data',x=>out+=x);p.stderr.setEncoding('utf8').on('data',x=>err+=x);p.on('error',reject);p.on('close',code=>{if(code!==0)return reject(new Error(`Astropy HEALPix owner failed: ${err.slice(-1000)}`));try{resolve(JSON.parse(out));}catch(e){reject(e);}});p.stdin.end(JSON.stringify({path:pin.path,...payload}));});}
 export async function inspectHealpix(pin:HealpixPin):Promise<HealpixMap>{return run(pin,{operation:'healpix-inspect'});}
 export async function selectHealpix(pin:HealpixPin,selection:HealpixSelect):Promise<any>{return run(pin,{operation:'healpix-select',...selection});}
 export function validateHealpixMap(map:HealpixMap):HealpixMap{if(!Number.isInteger(map.nside)||map.nside<1||map.pixels!==12*map.nside*map.nside)throw new TypeError('HEALPix NSIDE/pixel count is invalid.');if(map.ordering!=='RING'&&map.ordering!=='NESTED')throw new TypeError('HEALPix ordering must be RING or NESTED.');if(!map.frame||!map.quantity)throw new TypeError('HEALPix frame and quantity are required.');if(map.semantics!=='probability-mass'&&map.semantics!=='density')throw new TypeError('HEALPix quantity semantics must distinguish probability mass from density.');if(map.semantics==='density'&&!/sr(?:\*\*-?1|-1)|\/\s*sr/iu.test(map.unit??''))throw new TypeError('HEALPix density requires explicit per-steradian units.');if(Math.abs(map.pixelAreaSteradians-4*Math.PI/map.pixels)>1e-14)throw new TypeError('HEALPix pixel area disagrees with NSIDE.');return map;}

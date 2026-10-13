@@ -1,4 +1,5 @@
 /** Snapshot a WWT WTML FITS collection with WWT's own parser for runtime-free lookup. */
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { spawnSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
@@ -34,7 +35,7 @@ if (!inputArgument || !sourceUrl || !outputArgument || process.argv.length !== 5
   throw new TypeError('Usage: wwt-fits-catalog-build.mts INPUT.wtml HTTPS_SOURCE_URL OUTPUT.json');
 const input = resolve(inputArgument), output = resolve(outputArgument);
 const result = spawnSync(process.env.CSSEARTH_WWT_PYTHON ?? 'python3', ['-c', parser, input],
-  { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
+  { env: telescopePythonEnvironment(), encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
 if (result.status !== 0) throw new Error(`WWT FITS catalog parse failed: ${result.error?.message ?? result.stderr}`);
 const imagesets: unknown = JSON.parse(result.stdout);
 if (!Array.isArray(imagesets) || !imagesets.length || imagesets.some(row => !row || typeof row !== 'object' ||

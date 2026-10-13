@@ -22,7 +22,7 @@ import { dirname, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Transform } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { tapAnswer } from '@cssearth/telescope/node';
+import { tapAnswer } from '@cssearth/telescope-core/node';
 
 export const KOA = 'https://koa.ipac.caltech.edu';
 export const TAP_SYNC = `${KOA}/TAP`;

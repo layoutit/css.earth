@@ -1,6 +1,6 @@
 /** Archive tables and DataLink answers, asked and decoded by PyVO through the telescope's bridge (`tap-query`, `vo-links`): the
  * lab builds no TAP request and reads no VOTable itself. Node only; the commands pass these to the catalogue code that needs them. */
-import { astroquery, type AstroqueryAnswer, type AstroqueryRequest } from '@cssearth/telescope/node';
+import { astroquery, type AstroqueryAnswer, type AstroqueryRequest } from '@cssearth/telescope-core/node';
 import type { AskTap } from '@cssearth/nebula-reconstruction/observations/tap';
 
 type Ask = (request: Extract<AstroqueryRequest, { operation: 'tap-query' }>) => Promise<AstroqueryAnswer>;

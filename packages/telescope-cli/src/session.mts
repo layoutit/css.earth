@@ -1,9 +1,10 @@
 /** Saved requests connect the public query and qualifier. They never authorize stale archive actions. */
+import { inputPath } from './paths.mts';
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
-import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { fileSize, readProductRecord } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRecord } from '@cssearth/objects';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection } from './observation-query/query.mts';
 import { type CapabilityAnswer, type QueryInputs } from './observation-query/query-contract.mts';
@@ -18,6 +19,7 @@ import { SERVICES } from './vo/discovery.mts';
 import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery/delivery-context.mts';
 import { canonical } from '@cssearth/objects';
 import { sourceQuestionFromRequest } from './products/source-relevance.mts';
+import { admittedArtifactFile, artifactFile, relativeFile } from './delivery/artifact-paths.mts';
 
 export const SESSION_SCHEMA = 'cssearth-telescope-session@1';
 export interface Choice {
@@ -110,18 +112,18 @@ export async function saveSession(root: string, args: readonly string[], directo
 
 export interface ExplorationSession {
   readonly schema: typeof EXPLORATION_SCHEMA; readonly createdAt: string; readonly arguments: readonly string[];
-  readonly target: string; readonly choices: readonly ExplorationChoice[]; readonly answer: ExplorationAnswer;
+  readonly target?: string; readonly choices: readonly ExplorationChoice[]; readonly answer: ExplorationAnswer;
 }
 const runDirectory = (target: string) => {
   const stamp = new Date().toISOString().replace(/[-:.TZ]/gu, '');
   const canonical = target.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '') || 'unknown-target';
-  return resolve(process.cwd(), 'telescope-runs', `${canonical}-${stamp}-${randomUUID().slice(0, 8)}`);
+  return resolve(USER_ROOT, 'telescope-runs', `${canonical}-${stamp}-${randomUUID().slice(0, 8)}`);
 };
 /** Save the unfiltered archive exploration separately from a scientific query. */
 export async function saveExploration(root: string, args: readonly string[], directory?: string, api: SessionServices = services, progress?: (stage:string)=>void): Promise<ExplorationSession & { readonly directory: string }> {
   const request = parseExplorationArguments(args), initial = await exploreForRequest(api, root, request, undefined, progress);
   progress?.('Saving exploration');
-  const destination = directory ?? runDirectory(initial.target);
+  const destination = directory ?? runDirectory(initial.target ?? 'field');
   return locked(destination, async () => {
     const path = resolve(destination, 'explore.json');
     try { await readFile(path); throw new Error(`${path} already exists. Use a new --out directory to preserve its numbered choices.`); }
@@ -135,7 +137,7 @@ export async function saveExploration(root: string, args: readonly string[], dir
         const evidenceDirectory = resolve(destination, 'archive-source-evidence');
         await mkdir(evidenceDirectory, { recursive: true });
         for (const pin of pins) {
-          const original = resolve(root, 'output/telescopes/archive-leads', `${pin}.json`);
+          const original = resolve(USER_ROOT, 'output/telescopes/archive-leads', `${pin}.json`);
           await copyFile(original, resolve(evidenceDirectory, `${pin}.json`)).catch((error: unknown) => {
             throw new Error(`Archive discovery evidence ${pin} is missing at ${original}; explore again.`, { cause: error }); });
         }
@@ -164,17 +166,12 @@ interface Artifact {
   readonly file: string; readonly receipt: string; readonly record: string; readonly outputRoot: string;
   readonly facts: ProductFacts; readonly extraEvidence: readonly string[];
 }
-function relativeFile(root: string, file: string): string {
-  const path = relative(root, resolve(root, file));
-  if (!path || path === '..' || path.startsWith('../') || isAbsolute(path)) throw new Error(`Artifact is outside the repository: ${file}`);
-  return path;
-}
 async function resolveArtifact(root: string, answer: CapabilityAnswer, choice: Choice): Promise<Artifact> {
   if (!choice.product) throw new Error('The route did not produce a current, selectable artifact.');
   // Bind this observation even when a program contains several qualified observations.
   const selected = await selectedProductInput(root, { ...selectObservation(answer, choice.telescope, choice.mode, choice.program), product: choice.product });
   const q = selected.qualification;
-  return { file: selected.file, receipt: resolve(root, q.receipt), record: resolve(root, q.productRecord), outputRoot: resolve(root, q.outputRoot), facts: selected.facts,
+  return { file: selected.file, receipt: inputPath(root, q.receipt), record: inputPath(root, q.productRecord), outputRoot: resolve(root, q.outputRoot), facts: selected.facts,
     extraEvidence: [...(q.facts.calibrationDependencies??[]).flatMap(d=>d.file?[resolve(root,d.file)]:[]), ...(q.facts.angularResolutionBound ? [resolve(root, q.facts.angularResolutionBound.receipt)] : []),
       ...(q.facts.resolutionEvidence ?? []).flatMap(e => e.receipt ? [resolve(root, e.receipt.file)] : [])] };
 }
@@ -191,12 +188,12 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
     expected.set(path, await fileSize(path));
   }
   for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await fileSize(path));
-  const files: ExportFile[] = [], realRoot = await realpath(root);
+  const files: ExportFile[] = [];
   for (const [file, pin] of expected) {
-    relativeFile(realRoot, await realpath(file));
+    const original = await admittedArtifactFile(root, file);
     const source = await fileSize(file).catch(() => null);
     if (source?.bytes !== pin.bytes) throw new Error(`Artifact ${file} is ${source ? `${source.bytes} bytes` : 'missing'}; its qualification records ${pin.bytes} bytes.`);
-    const original = relativeFile(root, file), path = `files/${original}`, target = resolve(destination, path);
+    const path = `files/${original}`, target = resolve(destination, path);
     await mkdir(dirname(target), { recursive: true });
     progress(`${reuse ? 'Verifying' : 'Copying'} ${basename(file)} (${(pin.bytes / 1e6).toFixed(1)} MB)`);
     if (!reuse) await copyFile(file, target);
@@ -227,7 +224,7 @@ async function getScientificSession(root: string, directory: string, pick: numbe
       if (!choice.configuration) throw new Error('No current qualification action.');
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
       const qualification = { target: answer.target, telescope: choice.telescope, mode: choice.mode, observation: choice.observation, configuration: choice.configuration };
-      await locked(resolve(root, 'output/telescopes'), () => api.qualify(root, qualification));
+      await locked(resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, qualification));
       inputs = choice.acquisitionKey ? { ...inputs, qualifiedProducts: await loadQualifiedObservations(root, answer.target) } : await loadForRequest(api, root, { ...request, target: answer.target });
       answer = queryCapabilities(request, inputs);
       choice = observationChoices(answer).find(entry => choiceKey(entry) === saved.key);
@@ -241,10 +238,10 @@ async function getScientificSession(root: string, directory: string, pick: numbe
       if (old.schema !== 'cssearth-telescope-delivery@3' || old.choice !== saved.key || JSON.stringify(requireRecord(old.context).request) !== JSON.stringify(answer.request))
         throw new Error('Saved result identity differs. Preserve it and use a new query directory.');
       const { files, record } = await exportArtifact(root, dirname(resultPath), artifact, progress, true);
-      const product = `files/${relativeFile(root, artifact.file)}`;
+      const product = `files/${artifactFile(root, artifact.file)}`;
       const context: DeliveryContext = { kind: 'scientific-request', request: answer.request, assessment: satisfaction };
-      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
-        receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${artifactFile(root, artifact.outputRoot)}`,
+        receipt: `files/${artifactFile(root, artifact.receipt)}`, record: `files/${artifactFile(root, artifact.record)}`, facts: artifact.facts,
         evidence: record.evidence, files, reused: true };
       const temporary = `${resultPath}.${randomUUID()}.partial`;
       try { await writeFile(temporary, `${JSON.stringify(result, null, 2)}\n`); await rename(temporary, resultPath); }
@@ -255,10 +252,10 @@ async function getScientificSession(root: string, directory: string, pick: numbe
     await mkdir(staging);
     try {
       const { files, record } = await exportArtifact(root, staging, artifact, progress);
-      const product = `files/${relativeFile(root, artifact.file)}`;
+      const product = `files/${artifactFile(root, artifact.file)}`;
       const context: DeliveryContext = { kind: 'scientific-request', request: answer.request, assessment: satisfaction };
-      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
-        receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product, outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${artifactFile(root, artifact.outputRoot)}`,
+        receipt: `files/${artifactFile(root, artifact.receipt)}`, record: `files/${artifactFile(root, artifact.record)}`, facts: artifact.facts,
         evidence: record.evidence, files, reused: false };
       await writeFile(resolve(staging, 'result.json'), `${JSON.stringify(result, null, 2)}\n`);
       await rename(staging, dirname(resultPath));
@@ -278,20 +275,20 @@ function readExplorationChoice(value: unknown, pick: number) {
   const reference = requireRecord(choice.reference, 'saved exploration reference');
   const archiveService = reference.kind === 'vo-acquisition' && choice.archiveService !== undefined ? requireString(choice.archiveService, 'saved archive service') : undefined;
   if (archiveService && !SERVICES.some(profile => profile.service === archiveService)) throw new TypeError('Saved archive service is not registered.');
-  return { args, target: requireString(session.target, 'saved exploration target'), key: requireString(choice.key, 'saved exploration key'), observation: requireString(choice.observation, 'saved exploration observation'), reference,
+  return { args, target: session.target === undefined ? undefined : requireString(session.target, 'saved exploration target'), key: requireString(choice.key, 'saved exploration key'), observation: requireString(choice.observation, 'saved exploration observation'), reference,
     ...(archiveService ? { archiveService } : {}) };
 }
 
 async function resolveExplorationArtifact(root: string, choice: ExplorationChoice): Promise<Artifact> {
   if (!choice.product) throw new Error('The route did not produce a current, selectable artifact.');
-  const selected = await qualifiedProductInput(root, choice.product), q = selected.qualification;
-  return { file: selected.file, receipt: resolve(root, q.receipt), record: resolve(root, q.productRecord), outputRoot: resolve(root, q.outputRoot), facts: selected.facts,
+  const selected = await qualifiedProductInput(root, choice.product, { indexedSources: choice.target !== undefined }), q = selected.qualification;
+  return { file: selected.file, receipt: inputPath(root, q.receipt), record: inputPath(root, q.productRecord), outputRoot: resolve(root, q.outputRoot), facts: selected.facts,
     extraEvidence: [...(q.facts.calibrationDependencies ?? []).flatMap(entry => entry.file ? [resolve(root, entry.file)] : []), ...(q.facts.angularResolutionBound ? [resolve(root, q.facts.angularResolutionBound.receipt)] : []),
       ...(q.facts.resolutionEvidence ?? []).flatMap(entry => entry.receipt ? [resolve(root, entry.receipt.file)] : [])] };
 }
 
-const explorationContext = (target: string, reference: Record<string, unknown>): DeliveryContext => ({
-  kind: 'exploration', target,
+const explorationContext = (target: string | null, reference: Record<string, unknown>, region?: import('@cssearth/objects').IcrsCircle): DeliveryContext => ({
+  kind: 'exploration', target, ...(region ? { region } : {}),
   discovery: { schema: EXPLORATION_SCHEMA, choice: reference } as unknown as DeliveryExplorationReference,
   assessment: { status: 'not-requested' },
 });
@@ -314,7 +311,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
     const resultPath = resolve(directory, `pick-${pick}`, 'result.json');
     if (options.offline) {
       const { delivery } = await import('./delivery/outputs.mts'), local = await delivery(resultPath);
-      if (local.context.kind !== 'exploration' || local.context.target !== saved.target || local.record.choice !== saved.key || canonical(local.context.discovery) !== canonical({ schema: EXPLORATION_SCHEMA, choice: saved.reference }))
+      if (local.context.kind !== 'exploration' || canonical(local.context.region ?? null) !== canonical(saved.target === undefined ? request.region ?? request.footprint : null) || saved.target !== undefined && local.context.target !== saved.target || local.record.choice !== saved.key || canonical(local.context.discovery) !== canonical({ schema: EXPLORATION_SCHEMA, choice: saved.reference }))
         throw new Error('Offline delivery differs from its saved exploration or choice.');
       progress('Replaying the pinned local delivery; no remote archive was refreshed.');
       return { resultPath, product: local.file, context: local.context, assessment: local.context.assessment, reused: true, replay: 'pinned-local-artifact' as const };
@@ -329,18 +326,18 @@ async function getExplorationSession(root: string, directory: string, pick: numb
       if (!choice.configuration) throw new Error('No current qualification action.');
       const qualifying = choice;
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
-      await locked(resolve(root, 'output/telescopes'), () => api.qualify(root, { target: answer.target, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
+      await locked(resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, { target: answer.target ?? qualifying.archiveTargetName ?? null, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
       answer = await exploreForRequest(api, root, { ...request, ...answer.request.skyTarget ? { skyTarget: answer.request.skyTarget } : {} }, saved.observation, undefined, archiveSelection);
       choice = savedChoice(answer.choices, saved);
       if (!choice || choice.state !== 'ready') throw new Error('Qualification did not produce a selectable artifact for the original exploration. Explore again for the current result.');
     }
-    const artifact = await resolveExplorationArtifact(root, choice), context = explorationContext(answer.target, saved.reference);
+    const artifact = await resolveExplorationArtifact(root, choice), context = explorationContext(answer.target ?? choice.archiveTargetName ?? null, saved.reference, answer.target === undefined ? answer.request.region ?? answer.request.footprint : undefined);
     const previous = await readFile(resultPath, 'utf8').catch((error: unknown) => hasErrorCode(error, 'ENOENT') ? undefined : Promise.reject(error));
     const write = async (destination: string, reuse: boolean) => {
-      const { files, record } = await exportArtifact(root, destination, artifact, progress, reuse), product = `files/${relativeFile(root, artifact.file)}`;
-      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product,
-        outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${relativeFile(root, artifact.outputRoot)}`,
-        receipt: `files/${relativeFile(root, artifact.receipt)}`, record: `files/${relativeFile(root, artifact.record)}`, facts: artifact.facts, evidence: record.evidence, files, reused: reuse };
+      const { files, record } = await exportArtifact(root, destination, artifact, progress, reuse), product = `files/${artifactFile(root, artifact.file)}`;
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest({ ...answer.request, target: answer.target ?? choice!.archiveTargetName ?? null, archiveTargetName: choice!.archiveTargetName }), observation: choice.observation, product,
+        outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${artifactFile(root, artifact.outputRoot)}`,
+        receipt: `files/${artifactFile(root, artifact.receipt)}`, record: `files/${artifactFile(root, artifact.record)}`, facts: artifact.facts, evidence: record.evidence, files, reused: reuse };
       return { result, product };
     };
     if (previous !== undefined) {

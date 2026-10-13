@@ -5,7 +5,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {requireRecord,requireString,requireFiniteNumber} from '@cssearth/core';
-import {toolchainPython} from '@cssearth/telescope/node';
+import {toolchainPython} from '@cssearth/telescope-core/node';
 
 const root=resolve(import.meta.dirname,'../../..');
 const script=String.raw`
@@ -51,7 +51,7 @@ export async function prepareMagneticMap(path:string,python:string){
   const output=local(recipe.output);
   if(model==='langlais2019'){local(recipe.coefficients);if(requireFiniteNumber(recipe.radiusMeters)!==3393500)throw new Error('Langlais Figure 6 uses the 3393.5 km reference sphere.');}
   else for(const key of ['equatorialRadiusKm','polarRadiusKm'])if(!(requireFiniteNumber(recipe[key])>0))throw new Error('Positive ellipsoid radii required.');
-  const pins=requireRecord(JSON.parse(await readFile(resolve(root,'packages/telescope/toolchains/magnetic-toolchain.json'),'utf8')));
+  const pins=requireRecord(JSON.parse(await readFile(resolve(root,'packages/telescope-core/toolchains/magnetic-toolchain.json'),'utf8')));
   const psh=requireRecord(pins.psh), cache=resolve(root,'output/toolchains/magnetic');await mkdir(cache,{recursive:true});
   const upstream=resolve(cache,'jovian_jrm33_order13_internal_rtp.py');
   if(model==='jrm33'){

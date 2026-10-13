@@ -7,7 +7,7 @@ import { createServer } from 'node:http';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery, astroqueryToolchain, astroqueryRows } from '@cssearth/telescope/node';
+import { astroquery, astroqueryToolchain, astroqueryRows } from '@cssearth/telescope-core/node';
 test.before(async () => { await astroqueryToolchain(); });
 
 // Gaia DR3 3404512999496164736 as GAVO serves it: the identifier is above 2**53 and pmra is a 32-bit column.

@@ -1,11 +1,12 @@
 /** Leads (leads.mts), offline: DataCite's two answers for GJ 1214 b as served on 2026-10-04, five data records and four
  * arXiv papers with the fields the parser reads (fixtures/telescope-simulations/datacite-gj-1214b.json). */
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import { hostedOrbit, starAstrometry, type HostedPlanetId, type StarId } from '@cssearth/astronomy';
 import { dataciteQuery, formatLeads, formatSurvey, leadFor, opensOn, parseDatacite, rankLeads, searchLeads, surveyLeads, type Lead } from './leads.mts';
 
@@ -61,7 +62,7 @@ test('DataCite\'s answer is read as served: the repository, the year, the stated
 test('telescope leads OBJECT asks twice, keeps the records that are leads and saves them', async () => {
   const asked: string[] = [], directory = await mkdtemp(resolve(tmpdir(), 'leads-'));
   try {
-    const result = await searchLeads(WORKSPACE, { target: 'gj-1214b', fetcher: await datacite(asked), wait: async () => {}, directory });
+    const result = await searchLeads(requireWorkspace(), { target: 'gj-1214b', fetcher: await datacite(asked), wait: async () => {}, directory });
     assert.equal(asked.length, 2, 'the data releases, then the papers');
     assert.deepEqual(result.target, { id: 'gj-1214b', name: 'GJ 1214 b' });
     // The measured phase curve leads: the MAST data, the paper and the authors' release. The ESA proposal record is no lead.
@@ -82,7 +83,7 @@ test('a survey asks for every object of a class ten at a time, matches each reco
   const body = await served();
   let answered = 0;
   const fetcher = (async (url: unknown) => { asked.push(String(url)); const first = answered++ < 2; return new Response(JSON.stringify(first ? (String(url).includes('arxiv.content') ? body.paper : body.data) : { data: [], meta: { totalPages: 1 } }), { status: 200 }); }) as typeof fetch;
-  const survey = await surveyLeads(WORKSPACE, { archiveClass: 'exoplanet', fetcher, wait: async ms => { waits.push(ms); }, progress: line => { progress.push(line); } });
+  const survey = await surveyLeads(requireWorkspace(), { archiveClass: 'exoplanet', fetcher, wait: async ms => { waits.push(ms); }, progress: line => { progress.push(line); } });
   assert.equal(survey.requests, asked.length);
   assert.equal(asked.length, 2 * Math.ceil(survey.objects / 10), 'a data search and a paper search for every ten objects');
   assert.ok(waits.every(ms => ms === 400) && waits.length === asked.length - 1, 'every request after the first waits 400 ms');
@@ -90,11 +91,11 @@ test('a survey asks for every object of a class ten at a time, matches each reco
   const row = survey.rows.find(candidate => candidate.id === 'gj-1214b');
   assert.ok(row, 'GJ 1214 b has leads');
   assert.equal(row.leads[0]!.class, 'map');
-  assert.equal(row.opensOn, await opensOn(WORKSPACE, 'gj-1214b'));
+  assert.equal(row.opensOn, await opensOn(requireWorkspace(), 'gj-1214b'));
   assert.match(formatSurvey(survey), /^\d+ exoplanet objects asked in \d+ requests: \d+ have a lead, \d+ of them on a page that opens on no map\n/u);
   // A busy answer is asked for again twice, after 5 and 10 seconds, before the group is given up and named.
   const retried: number[] = [];
-  const failing = await surveyLeads(WORKSPACE, { archiveClass: 'exoplanet', fetcher: (async () => new Response('', { status: 503 })) as typeof fetch, wait: async ms => { retried.push(ms); } });
+  const failing = await surveyLeads(requireWorkspace(), { archiveClass: 'exoplanet', fetcher: (async () => new Response('', { status: 503 })) as typeof fetch, wait: async ms => { retried.push(ms); } });
   assert.deepEqual(retried.slice(0, 2), [5000, 10000]);
   assert.equal(failing.requests, 3 * 2 * Math.ceil(failing.objects / 10));
   assert.equal(failing.rows.length, 0);
@@ -103,9 +104,9 @@ test('a survey asks for every object of a class ten at a time, matches each reco
 });
 
 test('what a page opens on is read from its package: the default dataset\'s kind, and a map\'s format', async () => {
-  assert.equal(await opensOn(WORKSPACE, 'trappist-1f'), 'neutral-shape');
-  assert.equal(await opensOn(WORKSPACE, 'kelt-9b'), 'terrestrial-scientific:published-phase-curve-map');
-  assert.equal(await opensOn(WORKSPACE, 'no-such-object'), undefined);
+  assert.equal(await opensOn(requireWorkspace(), 'trappist-1f'), 'neutral-shape');
+  assert.equal(await opensOn(requireWorkspace(), 'kelt-9b'), 'terrestrial-scientific:published-phase-curve-map');
+  assert.equal(await opensOn(requireWorkspace(), 'no-such-object'), undefined);
 });
 
 /** One time series of a planet's star, from the star's catalogue place at its own epoch, `orbits` of the planet long. */
@@ -119,14 +120,14 @@ const onePaper = (doi: string, title: string) => (async (url: unknown) => new Re
 
 test('a lead the page\'s ledger settles says so, and the archive\'s visits of the star are set beside the papers', async () => {
   const fetcher = onePaper('10.48550/arXiv.2512.05175', 'TESS phase curve of ultra-hot Jupiter WASP-189 b');
-  const result = await searchLeads(WORKSPACE, { target: 'wasp-189b', fetcher, wait: async () => {}, timeSeries: async () => [series('wasp-189', 'wasp-189b', 0.2, 0.4)] });
+  const result = await searchLeads(requireWorkspace(), { target: 'wasp-189b', fetcher, wait: async () => {}, timeSeries: async () => [series('wasp-189', 'wasp-189b', 0.2, 0.4)] });
   assert.deepEqual(result.leads.map(lead => lead.read), [{ status: 'excluded', entry: 'published-phase-curves' }]);
   assert.deepEqual(result.watched?.map(visit => [visit.part, visit.orbits]), [['eclipse', 0.2]]);
   const text = formatLeads(result);
   assert.match(text, /https:\/\/doi\.org\/10\.48550\/arXiv\.2512\.05175\n {5}already read: excluded in the page's ledger \(published-phase-curves\)\n/u);
   assert.match(text, /Watched by JWST \(1 visit of its star in MAST\)\n {3}\d{4}-\d\d-\d\d · MIRI · program 9999 \(Someone\) · [\d.]+ h, 0\.2 orbits from phase 0\.4 · eclipse(?: \(the recorded orbit[^)]*\))? · public\n {3}An eclipse is looked for half an orbit after transit/u);
   // Without the archive nothing is said of it, and an object that is not a planet with a transit has no visits to set.
-  assert.equal((await searchLeads(WORKSPACE, { target: 'wasp-189b', fetcher, wait: async () => {} })).watched, undefined);
+  assert.equal((await searchLeads(requireWorkspace(), { target: 'wasp-189b', fetcher, wait: async () => {} })).watched, undefined);
 });
 
 test('a survey leaves a settled lead out of the worklist and lists whole orbits watched and planets with no page', async () => {
@@ -134,7 +135,7 @@ test('a survey leaves a settled lead out of the worklist and lists whole orbits 
     { name: 'TrES-2 b', host: 'TrES-2', hostPaged: false, papers: [], archiveEclipse: true }], requests: 4 }; };
   let asked = 0;
   const paper = onePaper('10.48550/arXiv.2512.05175', 'TESS phase curve of ultra-hot Jupiter WASP-189 b'), fetcher = (async (url: unknown) => { asked++; return paper(url as string); }) as typeof fetch;
-  const survey = await surveyLeads(WORKSPACE, { archiveClass: 'exoplanet', fetcher, wait: async () => {}, timeSeries: async () => [series('trappist-1', 'trappist-1f', 1.2)], unpaged });
+  const survey = await surveyLeads(requireWorkspace(), { archiveClass: 'exoplanet', fetcher, wait: async () => {}, timeSeries: async () => [series('trappist-1', 'trappist-1f', 1.2)], unpaged });
   assert.equal(survey.requests, asked + 1 + 4, 'DataCite, one request for the time series, and the unpaged search\'s own');
   assert.deepEqual(survey.rows.find(row => row.id === 'trappist-1f')?.watched?.map(visit => visit.part), ['whole-orbit']);
   assert.equal(survey.rows.find(row => row.id === 'trappist-1f')?.leads.length, 0, 'a row needs no paper');
@@ -145,7 +146,7 @@ test('a survey leaves a settled lead out of the worklist and lists whole orbits 
   assert.match(text, /No page yet, a phase curve or map named in a paper's title \(1\)\n {3}KELT-1 b \(star KELT-1, no page\): 2019 Spitzer Phase Curves of KELT-1b https:\/\/doi\.org\/10\.0\/k\n/u);
   assert.match(text, /No page yet, an eclipse in the NASA Exoplanet Archive's own tables \(1\): TrES-2 b\n/u);
   // A source that fails is named and the rest is still reported.
-  const failed = await surveyLeads(WORKSPACE, { archiveClass: 'exoplanet', fetcher, wait: async () => {}, timeSeries: async () => { throw new Error('MAST is down'); } });
+  const failed = await surveyLeads(requireWorkspace(), { archiveClass: 'exoplanet', fetcher, wait: async () => {}, timeSeries: async () => { throw new Error('MAST is down'); } });
   assert.match(formatSurvey(failed), /Not asked: JWST time series: MAST is down/u);
 });
 

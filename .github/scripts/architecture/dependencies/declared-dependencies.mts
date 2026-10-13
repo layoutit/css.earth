@@ -1,8 +1,8 @@
 /** The `declared-dependencies` repository rule: a `packages/*` file imports a workspace package only when its own
  * `package.json` declares it. pnpm hoists every workspace package to the root `node_modules`, so an undeclared import
  * resolves anyway; nothing else notices until an isolated install or a build order drops it. Any dependency field
- * counts as a declaration for tests and for packages that run from source (telescope-cli has no tsup build). A package
- * tsup builds must ship what its library code imports; checkout-only cli/ scripts may use dev dependencies. Type-only imports are included since `dist/*.d.ts` keeps them:
+ * counts as a declaration for tests and for packages that run from source. A package
+ * tsup builds must ship or explicitly bundle what its library code imports; checkout-only cli/ scripts may use dev dependencies. Type-only imports are included since `dist/*.d.ts` keeps them:
  * tsup keeps `dependencies` (and peer, optional) external but inlines a `devDependencies` package into `dist/`, or
  * leaves `dist/` importing a package its consumers never install. */
 import { existsSync, readFileSync } from 'node:fs';
@@ -11,6 +11,7 @@ import { isRecord } from '@cssearth/core';
 import ts from 'typescript';
 import { moduleSpecifiers } from '../import-graph/astro-imports.mts';
 import { isTestPath } from '../zones.mts';
+import { tsupBundles } from './tsup-bundles.mts';
 
 const WORKSPACE_MANIFEST = /^(?:packages|labs\/nebula\/packages)\/[^/]+\/package\.json$/u;
 const SOURCE = /\.(?:[cm]?[jt]s|tsx)$/u;
@@ -20,9 +21,10 @@ const SHIPPED_FIELDS = ['dependencies', 'peerDependencies', 'optionalDependencie
  * build keeps external, and whether tsup builds it (a `tsup.config.ts` beside the manifest). */
 export interface DeclaredPackage {
   readonly directory: string; readonly name: string; readonly declared: ReadonlySet<string>; readonly shipped: ReadonlySet<string>; readonly built: boolean;
+  readonly bundled: (specifier: string) => boolean;
 }
 
-export function declaredPackage(path: string, manifest: unknown, built = false): DeclaredPackage {
+export function declaredPackage(path: string, manifest: unknown, built = false, config = ''): DeclaredPackage {
   if (!isRecord(manifest) || typeof manifest.name !== 'string') throw new TypeError(`${path} has no package name.`);
   const names = (fields: readonly string[]) => new Set(fields.flatMap(field => {
     const value = manifest[field];
@@ -31,7 +33,7 @@ export function declaredPackage(path: string, manifest: unknown, built = false):
     return Object.keys(value);
   }));
   return { directory: path.slice(0, -'/package.json'.length), name: manifest.name,
-    declared: names([...SHIPPED_FIELDS, 'devDependencies']), shipped: names(SHIPPED_FIELDS), built };
+    declared: names([...SHIPPED_FIELDS, 'devDependencies']), shipped: names(SHIPPED_FIELDS), built, bundled: tsupBundles(config) };
 }
 
 /** `moduleSpecifiers` (ESM, dynamic and type imports) plus CommonJS `require('…')` / `require.resolve('…')` and TypeScript `import x = require('…')`. */
@@ -64,7 +66,7 @@ export function undeclaredImports(packages: readonly DeclaredPackage[], sources:
       if (!imported || imported === importer) continue;
       const manifest = `${importer.directory}/package.json`;
       if (!importer.declared.has(imported.name)) findings.add(`${path}: imports ${imported.name}, which ${manifest} does not declare`);
-      else if (needsShipped && !importer.shipped.has(imported.name))
+      else if (needsShipped && !importer.shipped.has(imported.name) && !importer.bundled(specifier))
         findings.add(`${path}: imports ${imported.name}, which ${manifest} lists only in devDependencies although tsup builds this package`);
     }
   }
@@ -76,7 +78,11 @@ export function checkDeclaredDependencies(root: string, files: readonly string[]
   const read = (path: string) => readFileSync(resolve(root, path), 'utf8');
   const tracked = new Set(files);
   const packages = files.filter(path => WORKSPACE_MANIFEST.test(path) && existsSync(resolve(root, path)))
-    .map(path => declaredPackage(path, JSON.parse(read(path)), tracked.has(path.replace(/package\.json$/u, 'tsup.config.ts'))));
+    .map(path => {
+      const config = path.replace(/package\.json$/u, 'tsup.config.ts');
+      const built = tracked.has(config) && existsSync(resolve(root, config));
+      return declaredPackage(path, JSON.parse(read(path)), built, built ? read(config) : '');
+    });
   const sources = new Map(files
     .filter(path => path.startsWith('packages/') && SOURCE.test(path) && existsSync(resolve(root, path)))
     .map(path => [path, read(path)] as const));

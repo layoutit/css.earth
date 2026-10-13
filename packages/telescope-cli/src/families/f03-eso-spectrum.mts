@@ -69,10 +69,10 @@ export function readEsoSpectrum(bytes: Buffer): EsoSpectrum {
     fluxCalibration: typeof primary.FLUXCAL === 'string' ? primary.FLUXCAL : null };
 }
 
-export function describeEsoSpectrum(id: string, target: string, source: EsoSpectrum): ProductDescriptor {
+export function describeEsoSpectrum(id: string, target: string | null, source: EsoSpectrum): ProductDescriptor {
   const shape = [source.nativeSamples], memberId = 'science';
   return descriptor({ schema: 'cssearth-telescope-product-descriptor@1',
-    dataset: { id, target, acquisition: { kind: 'archive', identity: id }, producingRecord: 'qualified.product.json',
+    dataset: { id, ...(target === null ? {} : { target }), acquisition: { kind: 'archive', identity: id }, producingRecord: 'qualified.product.json',
       sourceClassifications: [{ term: 'SCIENCE.SPECTRUM', vocabulary: 'ESO SDP PRODCATG', version: '8', status: 'source' }],
       families: ['F03'], profiles: [{ handlerId: 'f03-spectrum', profileId: ESO_SPECTRUM_PROFILE }] },
     members: [{ id: memberId, path: 'science.fits', role: 'science', mediaType: 'application/fits' }],

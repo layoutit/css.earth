@@ -12,16 +12,17 @@
  * from other pins, and refuses one whose `reduce` or `caldb` is missing.
  *
  * Nothing here needs a display: DRAGONS' interactive tools are not used and MPLBACKEND is forced to Agg. */
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
 
-const repository = WORKSPACE;
+const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/gemini');
+const PINS = packagePath('packages/telescope-cli/src/archives/gemini');
 export const GEMINI_ROOT = resolve(repository, 'output/toolchains/gemini');
 const DESCRIPTOR = resolve(PINS, 'toolchain.json');
 
@@ -35,36 +36,37 @@ async function descriptor(): Promise<ToolchainPins & { readonly lock: string; re
 }
 
 function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
+  const result = spawnSync(command, args, { env: telescopePythonEnvironment({ ...env }), encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
   if (result.status !== 0) throw new Error(`${command} ${args.slice(0, 4).join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-4000)}`);
   return result.stdout;
 }
 
 /** The explicit list micromamba resolved: one package URL per line. That is the lock, and it is what a later install uses, so
  * the second machine gets these builds and not whatever the channels hold that day. */
-const explicitList = (prefix: string, env: NodeJS.ProcessEnv) =>
-  run('micromamba', ['list', '--explicit', '-p', prefix], env);
+const explicitList = (micromamba: string, prefix: string, env: NodeJS.ProcessEnv) =>
+  run(micromamba, ['list', '--explicit', '-p', prefix], env);
 
 export async function installGemini() {
-  const { entry, lock, lockPath } = await descriptor(), prefix = resolve(GEMINI_ROOT, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  const platform = requireString(mamba.platform, 'platform');
-  const channels = requireArray(mamba.channels, 'channels').flatMap(value => ['-c', requireString(value, 'channel')]);
-  await rm(GEMINI_ROOT, { recursive: true, force: true });
-  await mkdir(GEMINI_ROOT, { recursive: true });
-  const env = { MAMBA_ROOT_PREFIX: resolve(GEMINI_ROOT, 'mamba'), CONDA_SUBDIR: platform };
-  if (lock) {
-    await writeFile(resolve(GEMINI_ROOT, 'packages.lock'), lock);
-    run('micromamba', ['create', '-y', '-q', '-p', prefix, '--platform', platform, '-f', resolve(GEMINI_ROOT, 'packages.lock')], env);
-  } else {
-    run('micromamba', ['create', '-y', '-q', '-p', prefix, '--platform', platform, ...channels,
-      ...requireArray(mamba.packages, 'packages').map(value => requireString(value, 'package'))], env);
-    await writeFile(lockPath, explicitList(prefix, env));
-  }
-  await rm(resolve(GEMINI_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  // A first install wrote the lock it resolved; the marker holds the pins as they are now, lock included.
-  writeInstalledMarker(GEMINI_ROOT, await descriptor());
-  return GEMINI_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(GEMINI_ROOT, 'env');
+  return installManagedToolchain(GEMINI_ROOT, descriptor, prefix, async pins => {
+    const { entry, lock, lockPath } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+    const platform = requireString(mamba.platform, 'platform');
+    const channels = requireArray(mamba.channels, 'channels').flatMap(value => ['-c', requireString(value, 'channel')]);
+    const micromamba = await resolveMicromamba();
+    await mkdir(GEMINI_ROOT, { recursive: true });
+    const env = { MAMBA_ROOT_PREFIX: resolve(GEMINI_ROOT, 'mamba'), CONDA_SUBDIR: platform };
+    if (lock) {
+      await writeFile(resolve(GEMINI_ROOT, 'packages.lock'), lock);
+      run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, '-f', resolve(GEMINI_ROOT, 'packages.lock')], env);
+    } else {
+      run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, ...channels,
+        ...requireArray(mamba.packages, 'packages').map(value => requireString(value, 'package'))], env);
+      await writeFile(lockPath, explicitList(micromamba, prefix, env));
+    }
+    await rm(resolve(GEMINI_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+    // A first install wrote the lock it resolved; the marker holds the pins as they are now, lock included.
+  }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }
 
 export interface GeminiToolchain {
@@ -76,8 +78,8 @@ export interface GeminiToolchain {
 }
 
 export async function geminiToolchain(): Promise<GeminiToolchain> {
-  const pins = await descriptor(), { entry } = pins, bin = resolve(GEMINI_ROOT, 'env/bin');
-  assertInstalledMarker(GEMINI_ROOT, pins, 'Gemini', INSTALL);
+  const pins = await descriptor(), { entry } = pins, root = resolveInstalledToolchain(GEMINI_ROOT, pins) ?? GEMINI_ROOT, bin = resolve(root, 'env/bin');
+  assertInstalledMarker(root, pins, 'Gemini', INSTALL);
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {
     binaries[name] = resolve(bin, requireString(file, name));
@@ -97,7 +99,7 @@ export const SOFTWARE_PROBE = 'import astrodata, numpy, astropy, sys\n' +
   'print(astrodata.version()); print(numpy.__version__); print(astropy.__version__); print("%d.%d.%d" % sys.version_info[:3])';
 
 export function dragonsToolchainVersions(toolchain: GeminiToolchain): { name: string; version: string }[] {
-  const result = spawnSync(toolchain.python, ['-c', SOFTWARE_PROBE], { encoding: 'utf8', env: { ...process.env, ...toolchain.env } });
+  const result = spawnSync(toolchain.python, ['-c', SOFTWARE_PROBE], { encoding: 'utf8', env: telescopePythonEnvironment({ ...toolchain.env }) });
   if (result.status !== 0) throw new Error(`DRAGONS did not import: ${(result.stderr ?? '').slice(-2000)}`);
   const lines = result.stdout.trim().split('\n').map(line => line.trim());
   if (lines.length !== 4 || lines.some(line => !line)) throw new Error(`The environment did not state its versions: ${result.stdout}`);
@@ -113,9 +115,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   else if (mode === 'verify') {
     const toolchain = await geminiToolchain();
     const version = spawnSync(toolchain.python, ['-c', 'import astrodata, geminidr, gemini_instruments; print(astrodata.version())'],
-      { encoding: 'utf8', env: { ...process.env, ...toolchain.env } });
+      { encoding: 'utf8', env: telescopePythonEnvironment({ ...toolchain.env }) });
     if (version.status !== 0) throw new Error(`DRAGONS did not import: ${(version.stderr ?? '').slice(-2000)}`);
-    const reduce = spawnSync(toolchain.binaries.reduce!, ['--version'], { encoding: 'utf8', env: { ...process.env, ...toolchain.env } });
+    const reduce = spawnSync(toolchain.binaries.reduce!, ['--version'], { encoding: 'utf8', env: telescopePythonEnvironment({ ...toolchain.env }) });
     console.log(`Gemini ready: DRAGONS ${version.stdout.trim()}; ${(reduce.stdout || reduce.stderr).trim()}`);
   } else throw new TypeError('Usage: toolchain <install|verify>');
 }

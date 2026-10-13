@@ -9,6 +9,7 @@
  * against the published share. Runs reduce.mts gave no map to show (field not detected, or a fit that does not describe the
  * spectra) are listed with the reason and not scored. Over the scored runs: the median ratio of mean fields, its spread (the rms of log ratios, as a
  * factor), and the mean and rms difference of toroidal shares. This is how `KNEE` is settled: on the papers, not on taste. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -20,7 +21,7 @@ export interface LadderStep { readonly target: number; readonly chiSquare: numbe
 export interface Scored { readonly id: string; readonly spectra: number; readonly target: number; readonly steps: number; readonly meanGauss: number; readonly toroidalPercent: number; readonly axisymmetricPercent: number; readonly publishedMeanGauss?: number; readonly publishedToroidalPercent?: number }
 /** The programs with a star and a published block of the same tilt and period, each with its receipt's ladder when it has been reduced and a field was found. */
 export async function benchmarkRuns(only?: string) { const runs: { program: EspadonsProgram; spectra?: number; ladder?: LadderStep[]; /** Why reduce.mts made no map to show of this run. */ refused?: string }[] = [];
-  for (const name of (await readdir(PROGRAMS)).filter(file => file.endsWith('.json')).sort()) { const value = JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as { schema?: string }; if (value.schema !== PROGRAM_SCHEMA) continue;
+  for (const name of (await readdir(programStorePath(PROGRAMS))).filter(file => file.endsWith('.json')).sort()) { const value = JSON.parse(await readFile(resolve(programStorePath(PROGRAMS), name), 'utf8')) as { schema?: string }; if (value.schema !== PROGRAM_SCHEMA) continue;
     const program = parseProgram(value); if (!program.published || program.published.otherGeometry || !program.star || (only && !program.id.includes(only))) continue;
     const map = await readFile(receiptPath(program.id), 'utf8').then(text => (JSON.parse(text) as { map?: unknown }).map, () => undefined);
     if (map === undefined) { runs.push({ program }); continue; }

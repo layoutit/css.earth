@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import { identifiers, markOf, readMarks } from './read.mts';
 
 test('a text\'s DOIs and arXiv numbers are its identifiers, however they are written', () => {
@@ -29,7 +29,7 @@ test('a lead is read when an entry of the page\'s ledger names it; a body with n
 });
 
 test('the checkout\'s own ledgers read: WASP-189 b\'s two phase-curve papers are settled, with the entry that says why', async () => {
-  const marks = await readMarks(WORKSPACE, 'wasp-189b');
+  const marks = await readMarks(requireWorkspace(), 'wasp-189b');
   assert.deepEqual(markOf('10.48550/arxiv.2512.05175', marks), { status: 'excluded', entry: 'published-phase-curves' });
   assert.deepEqual(markOf('10.48550/arxiv.2201.04518', marks), { status: 'excluded', entry: 'published-phase-curves' });
 });

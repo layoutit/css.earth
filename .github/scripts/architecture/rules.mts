@@ -18,7 +18,7 @@ export interface Violation { readonly from: string; readonly to: string }
 const under = (path: string, ...prefixes: readonly string[]) => prefixes.some(prefix => path.startsWith(prefix));
 const topLevel = (path: string) => path.includes('/') ? path.slice(0, path.indexOf('/')) : '';
 
-/** Code that works ahead of runtime: `@cssearth/bake` and the telescope command `@cssearth/telescope-cli`. The `tools/` folder that
+/** Code that works ahead of runtime: `@cssearth/bake` and the telescope command `@cssearth/telescope`. The `tools/` folder that
  * held the rest is retired (`retired-folders` in repository-rules.mts). */
 export const PREPARATION_CODE = ['packages/bake/', 'packages/telescope-cli/'] as const;
 
@@ -84,7 +84,7 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'runtime-imports-no-preparation',
-    description: 'site/ (except its build-time site/build/) and packages/renderer/src/ must not import @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
+    description: 'site/ (except its build-time site/build/) and packages/renderer/src/ must not import @cssearth/bake or @cssearth/telescope (type-only imports count; tests may)',
     forbids: (from, to) => under(from, ...RUNTIME_CODE) && !from.startsWith(SITE_BUILD) && under(to, ...PREPARATION_CODE),
   },
   {
@@ -101,8 +101,8 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'telescope-imports-no-bake',
-    description: 'packages/telescope must never import @cssearth/bake: acquisition stays below preparation (tests and type-only imports count)',
-    forbids: (from, to) => from.startsWith('packages/telescope/') && to.startsWith('packages/bake/'),
+    description: 'packages/telescope-core must never import @cssearth/bake: acquisition stays below preparation (tests and type-only imports count)',
+    forbids: (from, to) => from.startsWith('packages/telescope-core/') && to.startsWith('packages/bake/'),
     includeTests: true,
   },
   {

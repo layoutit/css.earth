@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { constants } from 'node:fs';
 import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, resolve } from 'node:path';
-import { fileSize, writeProductRecord, pyuvdataUvfits, figureBackground, type FigureBackground, type FigureOptions } from '@cssearth/telescope/node';
+import { fileSize, writeProductRecord, pyuvdataUvfits, figureBackground, requireWorkspace, type FigureBackground, type FigureOptions } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 import { VERSION } from './help.mts';
 import { operationsForDescriptor } from './family-handlers.mts';
@@ -315,6 +315,7 @@ async function polarimetryOutput(loaded:Awaited<ReturnType<typeof loadDescriptor
 
 /** Execute only a compile-time allowlisted owner. The descriptor and every member are re-pinned before dispatch. */
 export async function executeFamilyOperation(descriptorPath:string,rawParameters:FamilyOperationParameters,outputDirectory:string):Promise<FamilyOperationResult>{
+  if(rawParameters.operationId==='physical-grid-prepare-volume'||rawParameters.operationId==='spherical-grid-prepare-volume')requireWorkspace(undefined, 'This command writes volume records and bakes prepared assets.');
   const params=parameters(rawParameters),loaded=await loadDescriptor(descriptorPath),operation=executableOperation(loaded.descriptor,params.operationId,rawParameters.componentId);
   if(PREVIEW_OPERATIONS.has(params.operationId))return previewOutput(loaded,operation,params,outputDirectory);
   if(params.operationId==='export-bundle')return calibrationBundleOutput(loaded,operation,outputDirectory);

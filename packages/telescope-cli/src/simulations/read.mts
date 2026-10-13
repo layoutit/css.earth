@@ -6,11 +6,14 @@
  * is a version of. The leads take a mark as settling a lead only when its entry is not `included` (leads.mts): a paper a
  * ledger cites for a radius or an orbit is not thereby read for its phase curve. For the same reason the README and the
  * manifest are not searched: to settle a lead, write its entry. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../archives/site-targets.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseInvestigationLedger, type InvestigationStatus } from '@cssearth/objects';
+import { parseInvestigationLedger } from '@cssearth/objects';
 
-export interface ReadMark { readonly status: InvestigationStatus; /** The ledger entry that settles the lead. */ readonly entry: string }
+export type { ReadMark } from '../archives/site-target-contracts.mts';
+import type { ReadMark } from '../archives/site-target-contracts.mts';
 
 const DOI = /10\.\d{4,9}\/[^\s"<>]+/giu, ARXIV = /arxiv(?:\.org\/(?:abs|pdf)\/|[.:]\s?)(\d{4}\.\d{4,5})/giu;
 /** The DOIs and arXiv numbers a text names, as keys: a DOI in lower case without closing punctuation, `arxiv:2503.12521`. */
@@ -21,6 +24,7 @@ export function identifiers(text: string): string[] {
 
 /** The identifiers a page's ledger names, each with the entry that names it. A body without a ledger has read nothing. */
 export async function readMarks(root: string, id: string): Promise<Map<string, ReadMark>> {
+  if (root === USER_ROOT) return new Map((await loadSiteTargets()).marks[id] ?? []);
   const marks = new Map<string, ReadMark>(), path = resolve(root, 'src/objects', id, 'investigations.json');
   const text = await readFile(path, 'utf8').catch((error: unknown) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return undefined; throw error; });
   if (text === undefined) return marks;

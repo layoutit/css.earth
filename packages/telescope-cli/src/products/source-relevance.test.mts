@@ -9,7 +9,7 @@ import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
 import { formatArtifact } from '../cli-format.mts';
 import { main } from '../cli.mts';
 import { assessSourceRelevance } from './source-relevance.mts';
-import { SIMBAD_TAP } from '@cssearth/telescope/node';
+import { SIMBAD_TAP } from '@cssearth/telescope-core/node';
 
 const fits=resolve(import.meta.dirname,'../vo/fixtures/telescope-vo/eso-circle.fits');
 const position={raDegrees:88.79293875,decDegrees:7.40706389};

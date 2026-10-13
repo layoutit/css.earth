@@ -2,7 +2,7 @@
  * that the cloud-free Sonora Bobcat atmospheres (Marley et al. 2021) around the dwarf's temperature and gravity emit at eight
  * viewing angles, the quadratic law is fitted to each, and the color dataset reads between those nodes as it reads any grid. The
  * nodes are written as a small grid file beside the star, with each node's intensities, so the law can be checked without the
- * toolchain; `--star-limb` recomputes it (packages/telescope/toolchains/picaso-toolchain.json pins what runs).
+ * toolchain; `--star-limb` recomputes it (packages/telescope-core/toolchains/picaso-toolchain.json pins what runs).
  *
  * An imaged planet colder than every table takes the same route (`--imaged-limb`, imaged/imaged-limb.mts) in the middle band of
  * its infrared color, from the model a paper fitted to it: a cloudy Sonora Diamondback model (Morley et al. 2024) with that
@@ -10,7 +10,7 @@
  * abundances of its disequilibrium chemistry, or a cloudy model of Exo-REM's public grid (Charnay et al. 2018), whose release
  * states each layer's abundances and the optical depth and particle radius of its iron and silicate clouds. The band, the body
  * and the models are the three things a caller names. */
-import { bobcatNodes, diamondbackGrid, diamondbackNodes, elfOwlGrid, elfOwlNodes, exoRemGrid, exoRemNodes, picasoLimbNodes, picasoPassband, picasoToolchainSync, type PicasoGrid, type PicasoNode } from '@cssearth/telescope/node';
+import { bobcatNodes, diamondbackGrid, diamondbackNodes, elfOwlGrid, elfOwlNodes, exoRemGrid, exoRemNodes, picasoLimbNodes, picasoPassband, picasoToolchainSync, type PicasoGrid, type PicasoNode } from '@cssearth/telescope-core/node';
 import { interpolateGrid, readLimbGrid } from '@cssearth/bake/objects/stellar';
 import type { LimbChoice } from './limb-choice.mts';
 
@@ -94,7 +94,7 @@ export function fromPicaso(id: string, teffK: number, starLogg: number, band: Pi
     files: [{ path: band.file, text }], grid: 'picaso', coefficients: { u1: coefficients.u1, u2: coefficients.u2, u1Bounds: coefficients.u1Bounds, u2Bounds: coefficients.u2Bounds },
     inputs: [{ id: `${id}-${models.input}`, path: band.file, origin: models.release, credit: `${PICASO.cite} on ${models.name} profiles`,
       license: models.license ?? 'Project-computed model values; the Sonora profiles and PICASO correlated-k tables are CC BY 4.0, PICASO is GPL-3.0',
-      acquisition: `Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts ${body.flag} ${id} (packages/telescope-cli/src/new-object/darkening/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes ${chosen.map(profile).join(', ')}.`,
+      acquisition: `Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts ${body.flag} ${id} (packages/telescope-cli/src/new-object/darkening/picaso-limb.mts, @cssearth/telescope-core/node picasoLimbNodes) at the nodes ${chosen.map(profile).join(', ')}.`,
       redistribution: 'Model coefficients and the intensities they are fitted to, with the model and tool cited.', consumers: ['assets', 'datasets'],
       sourceBinding: { kind: 'local', reason: `Computed with the pinned PICASO toolchain; ${body.flag} recomputes it.` } }],
     sentence: `dimmed toward the limb by the quadratic law fitted to the ${band.name} intensity ${PICASO.cite} computes from ${models.name} model atmospheres at ${teffK.toLocaleString('en-US')} K and log g ${starLogg}, read between the models ${chosen.map(node => (models.short ?? (name => name))(profile(node))).join(', ')} (u1 ${coefficient(coefficients.u1)}, u2 ${coefficient(coefficients.u2)}; the law fits each model's eight angles within ${(worst * 100).toFixed(2)}% of the centre): ${models.kind}, ${body.because}`,

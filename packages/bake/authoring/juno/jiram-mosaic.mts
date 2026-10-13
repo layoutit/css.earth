@@ -34,7 +34,7 @@ import sharp from 'sharp';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import { numbers, utcToEt, spiceCamera, type PixelModelKeys } from '@cssearth/spice';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dot3 as dot, flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECIPE_SCHEMA = 'cssearth-jiram-mosaic@1';

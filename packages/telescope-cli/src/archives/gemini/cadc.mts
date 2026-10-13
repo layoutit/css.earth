@@ -13,7 +13,7 @@
 import { spawn } from 'node:child_process';
 import { access, mkdir, rm, stat, symlink } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 
 export const CADC_TAP = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus';
 export const CADC_FILES = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/raven/files';

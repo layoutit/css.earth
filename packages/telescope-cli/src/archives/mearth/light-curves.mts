@@ -19,8 +19,8 @@
  *
  * What is this module's and is printed in neither paper is said where it is done: which of a star's light curves is read
  * (`longest`), a night's light as one point (`nightly`) and where a season begins (`seasonsOf`). */
+import { telescopeScratch } from '@cssearth/telescope-core/node';
 import { mkdir, mkdtemp, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { medianAveraged, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { USER_AGENT } from '../tess/mast.mts';
@@ -114,7 +114,7 @@ export interface MearthModel { /** The baseline magnitude of each segment that h
 /** The paper's sinusoid model of a light curve at `periodDays`, by its authors' code (tools.py `model`). */
 export async function modelled(curve: MearthLightCurve, periodDays: number): Promise<MearthModel & { readonly sfit: string; readonly chiSquaredNull: number; readonly chiSquared: number }> {
   if (!(periodDays > 0)) throw new RangeError('The model is fitted at a rotation period.');
-  const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'mearth-')), job = join(directory, 'job.json'), base = Math.floor(curve.bjd[0]!);
+  const { python } = await toolchainPaths(), directory = await telescopeScratch('mearth-'), job = join(directory, 'job.json'), base = Math.floor(curve.bjd[0]!);
   try { await writeFile(job, JSON.stringify({ periodDays, curves: [{ time: curve.bjd.map(one => one - base), magnitude: curve.magnitude, error: curve.error, commonMode: curve.commonMode, segment: curve.segment }] }));
     const answer = requireRecord(runTool(python, ['model', job]), 'sfit\'s answer'), fit = requireRecord(requireArray(answer.curves, 'curves')[0], 'the fitted light curve'), number = (key: string) => requireFiniteNumber(fit[key], key);
     const corrected = requireArray(fit.corrected, 'corrected').map((one, index) => requireFiniteNumber(one, `corrected[${index}]`)); if (corrected.length !== curve.bjd.length) throw new Error('sfit returned a light curve of another length.');

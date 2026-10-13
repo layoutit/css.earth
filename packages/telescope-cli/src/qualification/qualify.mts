@@ -6,7 +6,7 @@ import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
 import { readProductScience } from './product-science.mts';
-import { pdsPackages, WORKSPACE, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { pdsPackages, readProductRecord, sameRun, requireWorkspace } from '@cssearth/telescope-core/node';
 import { measureCubeResolution } from '../archives/jwst/cubes/resolution.mts';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
@@ -23,27 +23,28 @@ import { compareTemplates } from '../archives/naco/compare.mts';
 import { reduceProgram as reduceNacoProgram } from '../archives/naco/reduce.mts';
 import { qualifyPdsArchiveProduct } from '../archives/pds/archive-final.mts';
 import { buildPdsLedger } from '../archives/pds/archive-ledger.mts';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { compareChannel, receiptPath } from '../archives/spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../archives/spitzer/archive.mts';
 import { SPITZER_LEDGER } from '../archives/spitzer/archive-ledger.mts';
 import { refreshLocalLedger } from '../archives/ledger.mts';
 import { defaultWorkRoot, remosaicChannel } from '../archives/spitzer/mosaic.mts';
 import { loadQueryInputs, queryCapabilities } from '../observation-query/query.mts';
-import { qualificationConfigurationFromArguments, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';
+import { qualificationConfigurationFromArguments, qualificationPrerequisite, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';
 
 export const QUALIFICATION_SCHEMA = 'cssearth-telescope-qualification@2';
 export interface QualificationRequest {
-  readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly configuration: QualificationConfiguration;
+  readonly target: string | null; readonly telescope: string; readonly mode: string; readonly observation: string; readonly configuration: QualificationConfiguration;
 }
 export interface QualificationResult {
-  readonly schema: typeof QUALIFICATION_SCHEMA; readonly target: string; readonly telescope: string; readonly mode: string;
+  readonly schema: typeof QUALIFICATION_SCHEMA; readonly target: string | null; readonly telescope: string; readonly mode: string;
   readonly observation: string; readonly program: string; readonly configuration: QualificationConfiguration; readonly product: string; readonly receipt: string;
   readonly archiveProgramme?: string;
 }
 
 const indexedObservation = async (root: string, request: QualificationRequest, wavelengthMicrometres: readonly [number, number]) => {
   if (!supportsQualificationRoute(request.telescope, request.mode, request.configuration)) throw new TypeError(`No qualification route handles ${request.telescope} ${request.mode} ${request.configuration.kind}.`);
+  if (request.target === null) throw new TypeError('Indexed qualification requires a named target.');
   const answer = queryCapabilities({ target: request.target, wavelengthMicrometres }, await loadQueryInputs(root, request.target));
   if (answer.targetResolution.status === 'unknown') throw new TypeError(`Unknown target ${request.target}.`);
   const candidate = answer.candidates.find(entry => entry.telescope === request.telescope && entry.mode === request.mode);
@@ -142,9 +143,11 @@ const QUALIFIERS: Readonly<Record<string, (root: string, request: QualificationR
 });
 
 export async function qualifyObservation(root: string, request: QualificationRequest): Promise<QualificationResult> {
+  const prerequisite = qualificationPrerequisite(request.configuration);
+  if (prerequisite) throw new TypeError(prerequisite);
   if (request.configuration.kind === 'archive-acquisition') {
     const configuration = request.configuration;
-    if (configuration.request.target !== request.target) throw new Error('Acquisition target differs from qualification target.');
+    if (configuration.request.target !== undefined && configuration.request.target !== request.target) throw new Error('Acquisition target differs from qualification target.');
     const inputs = await loadQueryInputs(root, configuration.request, request.observation, undefined, { archiveService: request.telescope });
     const spec = inputs.vo?.records.flatMap(r => r.products).find(p => p.key === configuration.key && p.observation.key === request.observation && p.observation.service === request.telescope && `native-${p.kind}` === request.mode);
     if (!spec) throw new Error('The saved archive acquisition is no longer available. Query again.');
@@ -231,6 +234,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const target = flagValue(args, '--target'), telescope = flagValue(args, '--telescope'), mode = flagValue(args, '--mode'), observation = flagValue(args, '--observation');
     if (!target || !telescope || !mode || !observation) throw new TypeError(QUALIFY_HELP);
     const configuration = qualificationConfigurationFromArguments(telescope, mode, args);
-    process.stdout.write(`${JSON.stringify(await qualifyObservation(WORKSPACE, { target, telescope, mode, observation, configuration }), null, 2)}\n`);
+    process.stdout.write(`${JSON.stringify(await qualifyObservation(requireWorkspace(), { target, telescope, mode, observation, configuration }), null, 2)}\n`);
   }
 }

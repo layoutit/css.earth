@@ -1,0 +1,1 @@
+export const COMPOSITE_VOLUME_PLANNED = 'Standalone HTML for composite volume kinds (sky banks, impostor banks and dataset banks) is planned for v2; export a plain density-volume object for this release.';

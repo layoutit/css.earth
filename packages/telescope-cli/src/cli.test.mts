@@ -10,7 +10,7 @@ import { parseCli } from './cli-arguments.mts';
 import type { ExplorationSession, Session } from './session.mts';
 import { loadWwtImagery } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads } from './wwt/wwt-fits-leads.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
   reference:{kind:'indexed-observation' as const,telescope:'Fixture telescope',mode:'camera',observation:'obs-1',programme:'eris-obs-1'},
@@ -66,7 +66,7 @@ test('default help is concise; explicit help keeps the full command reference',a
 });
 
 test('packaged entrypoint recognizes the current science workspace script',()=>{
-  const root=WORKSPACE;
+  const root=requireWorkspace();
   const result=spawnSync(process.execPath,['--import','tsx',resolve(root,'packages/telescope-cli/src/bin.mts'),
     '--workspace',root,'unknown-command','--json'],{cwd:root,encoding:'utf8'});
   assert.equal(result.status,2);

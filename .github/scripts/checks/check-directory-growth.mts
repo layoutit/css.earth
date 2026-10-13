@@ -13,6 +13,7 @@
  *   node .github/scripts/checks/check-directory-growth.mts --write   record the current counts as the baseline
  */
 import { execFile } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -34,12 +35,17 @@ const EXEMPT = [
 ];
 export const isExempt = (directory: string) => EXEMPT.some(pattern => pattern.test(directory));
 
-/** Tracked files only. Counting the working tree would let generated output into the baseline —
+/** Tracked and unignored new files still present in the checkout. Ignored generated output stays out of the baseline —
  * `src/platform/solar-geometry.mts` alone is 26,968 generated lines — and would make the count
- * depend on whether the reader had run `pnpm prebuild`. */
+ * depend on whether the reader had run `pnpm prebuild`. Unstaged moves must count at their new locations. */
 export async function trackedFiles(root = process.cwd()): Promise<string[]> {
-  const { stdout } = await promisify(execFile)('git', ['ls-files', '-z', '--', ...ROOTS], { cwd: root, maxBuffer: 64 * 1024 * 1024 });
-  return stdout.split('\0').filter(Boolean);
+  const { stdout } = await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z', '--', ...ROOTS], { cwd: root, maxBuffer: 64 * 1024 * 1024 });
+  return presentFiles(root, stdout.split('\0'));
+}
+
+/** Git may list an unstaged deletion and duplicate cached/new paths; count existing owners once. */
+export function presentFiles(root: string, files: readonly string[]): string[] {
+  return [...new Set(files.filter(path => path && existsSync(resolve(root, path))))];
 }
 
 /** Authored modules directly in each directory. Tests are counted separately from implementations

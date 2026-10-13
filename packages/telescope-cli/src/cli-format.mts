@@ -1,4 +1,5 @@
 /** The telescope's human screens: a saved session, an exploration and an artifact's outputs, with the commands they suggest. */
+import { fieldLabel } from './exploration.mts';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { formatAnswer } from './observation-query/query.mts';
 import { assessRequest } from './requests/request-satisfaction.mts';
@@ -61,7 +62,7 @@ function displayWavelengths(value:readonly (number|null)[]|readonly (readonly [n
 }
 export function formatExploration(session:ExplorationSession & {readonly directory:string},verbose=false):string {
   const answer=session.answer,resolution=answer.targetResolution;
-  const title=resolution.status==='resolved'?resolution.canonical.name:answer.target;
+  const title=resolution.status==='position'?fieldLabel(resolution.region):resolution.status==='resolved'?resolution.canonical.name:answer.target!;
   const lines=[title,''];
   if(answer.outcome.coverage==='target-unresolved')lines.push('Target unresolved; no archive search was run.');
   else if(answer.outcome.selection==='available')lines.push(`${session.choices.length} retrievable choice(s) in this bounded search.${answer.outcome.coverage==='incomplete'?' Search coverage is incomplete.':''}`);
@@ -158,14 +159,14 @@ export function formatExploration(session:ExplorationSession & {readonly directo
 }
 
 export interface ArtifactInspection {
-  readonly artifact:string;readonly target?:string;readonly source:string;readonly productReceipt?:string;readonly sourceContext?:DeliveryContext;
+  readonly artifact:string;readonly target?:string | null;readonly source:string;readonly productReceipt?:string;readonly sourceContext?:DeliveryContext;
   readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];
 }
 export interface InspectedArtifact {
   readonly artifact:string;readonly target?:unknown;readonly source:unknown;readonly productReceipt?:string;readonly sourceContext?:DeliveryContext;
   readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];
 }
-export const artifactScreen=(result:InspectedArtifact,path:string):ArtifactInspection=>({artifact:result.artifact,...(result.productReceipt||/\.product\.json$/u.test(path)?{productReceipt:resolve(result.productReceipt??path)}:{}),...(typeof result.target==='string'?{target:result.target}:{}),source:resolve(requireString(result.source,'artifact source')),...(result.sourceContext?{sourceContext:result.sourceContext}:{}),outputs:result.outputs,...(result.terminal?{terminal:true}:{}),...(result.profiles?{profiles:result.profiles}:{}),...(result.issues?{issues:result.issues}:{}),...(result.familyOperations?{familyOperations:result.familyOperations}:{}),...(result.relevance?{relevance:result.relevance}:{}),...(result.software?{software:result.software}:{}),...(result.sourceProcessing?{sourceProcessing:result.sourceProcessing}:{})});
+export const artifactScreen=(result:InspectedArtifact,path:string):ArtifactInspection=>({artifact:result.artifact,...(result.productReceipt||/\.product\.json$/u.test(path)?{productReceipt:resolve(result.productReceipt??path)}:{}),...(result.sourceContext?.kind === 'exploration' && result.sourceContext.region ? { target: fieldLabel(result.sourceContext.region) } : result.relevance?.region ? { target: fieldLabel(result.relevance.region) } : typeof result.target==='string'?{target:result.target}:{}),source:resolve(requireString(result.source,'artifact source')),...(result.sourceContext?{sourceContext:result.sourceContext}:{}),outputs:result.outputs,...(result.terminal?{terminal:true}:{}),...(result.profiles?{profiles:result.profiles}:{}),...(result.issues?{issues:result.issues}:{}),...(result.familyOperations?{familyOperations:result.familyOperations}:{}),...(result.relevance?{relevance:result.relevance}:{}),...(result.software?{software:result.software}:{}),...(result.sourceProcessing?{sourceProcessing:result.sourceProcessing}:{})});
 export function contextText(context:DeliveryContext|undefined):string|undefined {
   if(!context)return undefined;
   return context.kind==='exploration'?'No scientific acceptance criteria requested.':`Scientific request: ${context.assessment.status}.`;
@@ -186,7 +187,7 @@ export function formatArtifact(result:ArtifactInspection,verbose=false):string {
   const context=contextText(result.sourceContext);if(context)lines.push(context);
   if(result.relevance){
     const relevance=result.relevance;
-    lines.push('',`Source relevance for ${relevance.target}:`,
+    lines.push('',`Source relevance for ${relevance.region ? fieldLabel(relevance.region) : relevance.target}:`,
       `Archive name: ${relevance.archiveTarget.status}${relevance.archiveTarget.name?` (${relevance.archiveTarget.name})`:''}. ${relevance.archiveTarget.reason}`,
       `Recorded field: ${relevance.field.status}${relevance.field.basis?` (${relevance.field.basis})`:''}. ${relevance.field.reason}`,
       `Detection: ${relevance.detection.status}. ${relevance.detection.reason}`);

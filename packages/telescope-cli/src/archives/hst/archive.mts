@@ -19,8 +19,10 @@
  * `*CORR` calibration switches are recorded too. They are how the archive's own run was configured, and a re-run that differs
  * from MAST's product differs first in one of them (compare.mts).
  *
- * MAST catalogue access and complete-file downloads use the shared pinned Astroquery boundary (`@cssearth/telescope/node`).
+ * MAST catalogue access and complete-file downloads use the shared pinned Astroquery boundary (`@cssearth/telescope-core/node`).
  * The program is written to packages/telescope-cli/src/archives/hst/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile } from '@cssearth/telescope-core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -28,12 +30,11 @@ import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { binaryTable, numbers, tableColumn, text as cell } from '@cssearth/bake/objects/raster';
 import { readRepeatingHeader } from './product-file.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
 import { archivePrograms } from '../programs.mts';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const HST_PROGRAMS = archivePrograms('hst');
-export const PROGRAMS = resolve(WORKSPACE, HST_PROGRAMS.path);
+export const PROGRAMS = packagePath(HST_PROGRAMS.path);
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** What an instrument pipeline reads: the raw exposure, and the wavecal, association, support and jitter files beside it. */
 export const INPUT_KINDS = ['RAW', 'WAV', 'ASN', 'SPT', 'JIT'] as const;
@@ -236,7 +237,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const [id, crdsContext, ...observations] = process.argv.slice(2);
   if (!id || !NAME.test(id) || !crdsContext || !/^hst_\d+\.pmap$/u.test(crdsContext) || !observations.length)
     throw new TypeError('Usage: archive <program id> <crds context> <obs_id> [...]');
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.json`), 'write');
   const existing = await readFile(path, 'utf8').then(text => parseHstProgram(JSON.parse(text)), () => null);
   const entries = [...existing?.observations ?? []];
   let programme = existing?.programme, target = existing?.target;
@@ -251,7 +252,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       entry.association ? `, ${entry.association.members.length} association members` : ''}, ${[...new Set(entry.products.map(p => suffixOf(p.name)))].join(' ')}`);
   }
   const program = parseHstProgram({ schema: 'cssearth-hst-program@1', id, programme, target, crdsContext, observations: entries });
-  await mkdir(PROGRAMS, { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`HST_PROGRAM ${path}`);
 }

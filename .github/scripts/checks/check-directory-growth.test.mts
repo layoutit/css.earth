@@ -70,3 +70,14 @@ test('module counting keeps moved tests separate and excludes declarations and p
     'packages/example/prepared/reader.ts', 'packages/example/src/world/check-browser.mts']);
   assert.deepEqual([...counts], [['packages/example/src/world', { implementations: 1, tests: 2 }]]);
 });
+
+test('an unstaged move counts its present owner once and drops the missing old owner', async () => {
+  const { presentFiles } = await import('./check-directory-growth.mts');
+  const root = await mkdtemp(resolve(tmpdir(), 'directory-move-'));
+  try {
+    await mkdir(resolve(root, 'packages/example/src/topic'), { recursive: true });
+    const moved = 'packages/example/src/topic/index.ts';
+    await writeFile(resolve(root, moved), 'export {};');
+    assert.deepEqual(presentFiles(root, ['packages/example/src/old.ts', moved, moved, '']), [moved]);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

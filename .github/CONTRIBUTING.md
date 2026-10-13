@@ -216,11 +216,11 @@ from. It groups the files into folders and fails when a change adds:
 - an import from `packages/*` into any other tree;
 - an import into `site/`, `labs/` or `.github/` from outside that tree (the
   Cloudflare Worker in `deploy/` and root `*.config.*` files are allowed);
-- an import of `@cssearth/bake` or `@cssearth/telescope-cli` from `site/` or
+- an import of `@cssearth/bake` or `@cssearth/telescope` from `site/` or
   `packages/renderer/src/` (renderer tests may use bake);
 - an import of a `packages/*/cli/` command entry, including from another
   entry or the package itself (tests included);
-- an import of `@cssearth/bake` from `packages/telescope`, tests included;
+- an import of `@cssearth/bake` from `packages/telescope-core`, tests included;
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 
 Bake declares no renderer dependency or exception. Shared prepared schema literals

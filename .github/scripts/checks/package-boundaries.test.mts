@@ -63,7 +63,7 @@ test('runtime packages cannot reach site, legacy sources, Node tooling, or rever
 
 test('host-neutral packages keep Node in node/: nothing else imports a Node built-in or a node/ module, or uses Buffer', async () => {
   const offenders: string[] = [];
-  for (const name of ['core', 'fits', 'objects', 'spice', 'telescope']) {
+  for (const name of ['core', 'fits', 'objects', 'spice', 'telescope-core']) {
     const source = path.join(root, 'packages', name, 'src');
     for (const file of await sourceFiles(source)) {
       const relative = path.relative(source, file).replaceAll('\\', '/');

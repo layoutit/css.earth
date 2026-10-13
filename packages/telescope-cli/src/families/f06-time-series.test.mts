@@ -1,6 +1,6 @@
 import assert from'node:assert/strict';import{sourceTest}from'@cssearth/objects/node/source-test';import{readFile}from'node:fs/promises';import{resolve}from'node:path';import{readTessLightCurve}from'@cssearth/bake/objects/raster';import{member}from'./common.mts';import{binTimeSeries,describeTimeSeries,foldTimeSeries,selectTimeSeries,timeSeriesPlotData}from'./f06-time-series.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
-const root=WORKSPACE,path='src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
+const root=requireWorkspace(),path='src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits';
 const test=sourceTest();
 let loading:Promise<{bytes:Buffer;samples:{id:string;segment:string;time:number;value:number;uncertainty:number}[]}>|undefined;
 const load=()=>loading??=(async()=>{const bytes=await readFile(resolve(root,path)),curve=readTessLightCurve(bytes),samples=Array.from(curve.time,(time,index)=>({id:String(index),segment:'sector-41',time,value:curve.flux[index]!,uncertainty:curve.error[index]!}));return{bytes,samples};})();

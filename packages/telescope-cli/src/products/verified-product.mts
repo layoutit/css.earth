@@ -2,7 +2,7 @@
 import { readFile, realpath } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { parseProductRecord } from '@cssearth/objects';
-import { sameRun } from '@cssearth/telescope/node';
+import { sameRun } from '@cssearth/telescope-core/node';
 
 export function localOutput(root: string, name: string): string {
   const path = resolve(root, name), rel = relative(root, path);

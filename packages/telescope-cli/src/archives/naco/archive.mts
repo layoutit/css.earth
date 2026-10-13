@@ -20,14 +20,15 @@
  * modules, and `associationTree` for the calibration tree. Nothing here repeats them.
  *
  * The program is written to packages/telescope-cli/src/archives/naco/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, archiveHeader, column, type RawRow, associationTree, type Association, tapRows } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { archiveHeader, column, type RawRow, associationTree, type Association, tapRows, WORKSPACE } from '@cssearth/telescope/node';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
-export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/programs');
+export const PROGRAMS = packagePath('packages/telescope-cli/src/archives/naco/programs');
 export const SCHEMA = 'cssearth-naco-program@1';
 export const INSTRUMENT = 'NAOS+CONICA';
 export const TAP = 'https://archive.eso.org/tap_obs';
@@ -325,12 +326,12 @@ async function calibrationRow(dpId: string) {
   return rows[0]!;
 }
 
-export const programPath = (program: string) => resolve(PROGRAMS, `${program}.json`);
+export const programPath = (program: string) => resolve(programStorePath(PROGRAMS), `${program}.json`);
 
 export async function writeProgram(value: NacoProgram) {
-  await mkdir(PROGRAMS, { recursive: true });
-  await writeFile(programPath(value.program), `${JSON.stringify(value, null, 2)}\n`);
-  return programPath(value.program);
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  await writeFile(programStorePath(programPath(value.program), 'write'), `${JSON.stringify(value, null, 2)}\n`);
+  return programStorePath(programPath(value.program), 'write');
 }
 
 /** A pinned program, with every field checked rather than asserted. */

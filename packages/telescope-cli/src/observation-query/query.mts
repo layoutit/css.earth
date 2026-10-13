@@ -20,8 +20,9 @@
  *
  * Mode capabilities are the one authored input, in `modes.json`, each with the citation it was read from. A mode with no entry
  * is reported as "capabilities not recorded" rather than guessed. */
+import { TARGET_CATALOGUE_SNAPSHOT, inputPath, packagePath } from '../paths.mts';
 import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest, inputWavelengths } from '../requests/recipe-request.mts';
-import { skyCatalogueEntry, WORKSPACE, parseLimits, loadTargetAssociations, parseTargetAssociationSources } from '@cssearth/telescope/node';
+import { skyCatalogueEntry, parseLimits, loadTargetAssociations, parseTargetAssociationSources, requireWorkspace, USER_ROOT } from '@cssearth/telescope-core/node';
 import { parseRegion, parseAcceptedAssumptions } from '@cssearth/objects';
 import { loadVoInputs, voCandidates } from '../vo/bridge.mts';
 import type { DiscoveryRequest } from '../vo/discovery.mts';
@@ -35,7 +36,7 @@ import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm }
 
 import type { SourceIntakeIssue } from '../products/source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations } from '../products/source-products.mts';
-import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry } from '@cssearth/telescope';
+import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry } from '@cssearth/telescope-core';
 import { ARCSEC_PER_RADIAN, type Candidate, type CapabilityAnswer, type ModeCapability, OBSERVATION_SELECTION_SCHEMA, type ObservationSelection, ObservationSelectionError, type QueryInputs, type ReportedResolution, type SelectionAssessment, type SelectionBlocker, TARGET_ASSOCIATIONS_PATH, type TargetCoverage, type ToolkitLevel, type ToolkitSupport, type UnassignedEvidence, assessSearchCoverage } from './query-contract.mts';
 import { ADAPTERS, EVIDENCE_TELESCOPE_NAMES, type TargetMode, forTarget, intersectIntervals, intervalWords, mergeIntervals, missingRequestFields, parseModeCapabilities, sourceModes, stringList, targetCoverage, workflowAssessment } from './query-modes.mts';
 
@@ -346,6 +347,7 @@ export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
 
 /** Load only the shipped target catalogue, so human entry points can resolve ambiguity before archive access. */
 export async function loadTargetCatalogue(root: string): Promise<TargetCatalogueEntry[]> {
+  if (root === USER_ROOT) return loadTargetCatalogueSnapshot();
   // These package descriptors are the source of the application's generated catalogue. Reading them keeps this CLI usable
   // in a clean checkout, before `prepare` has emitted site/prepared/prepared-catalogue.mjs.
   const objectRoot = resolve(root, 'src/objects'), targetCatalogue: TargetCatalogueEntry[] = [];
@@ -373,13 +375,33 @@ export async function loadTargetCatalogue(root: string): Promise<TargetCatalogue
   return targetCatalogue;
 }
 
+/** The generated package snapshot is an array of target entries, with the same names as the checkout catalogue. */
+export async function loadTargetCatalogueSnapshot(path = TARGET_CATALOGUE_SNAPSHOT): Promise<TargetCatalogueEntry[]> {
+  const raw = await readJsonSource(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
+  if (raw === undefined) return [];
+  return requireArray(raw, 'target catalogue snapshot').map(value => {
+    const entry = requireRecord(value, 'target catalogue entry'), id = requireString(entry.id, 'target id');
+    return { id, name: requireString(entry.name, `${id} name`), aliases: stringList(entry.aliases, `${id} aliases`),
+      ...(entry.archiveClass === undefined ? {} : { archiveClass: requireString(entry.archiveClass, `${id} archive class`) }),
+      ...(entry.classificationSource === undefined ? {} : { classificationSource: requireString(entry.classificationSource, `${id} classification source`) }) };
+  });
+}
+
 /** Read everything the query needs from the repository. The query itself reads nothing. */
 /** The string overload retains legacy archive loading; an explicit request also searches bounded VO services. */
 export interface ArchiveSelection { readonly archiveService: string }
 export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string, progress?: (stage:string)=>void,
   archiveSelection?: ArchiveSelection): Promise<QueryInputs> {
+  if (typeof targetOrRequest !== 'string' && targetOrRequest.target === undefined) {
+    parseRegion(targetOrRequest.region ?? ('footprint' in targetOrRequest ? targetOrRequest.footprint : undefined));
+    const vo = await loadVoInputs(root, targetOrRequest, [], selectedObservation, undefined, {}, undefined, undefined, archiveSelection?.archiveService);
+    const targets = [...new Set(vo.records.map(entry => entry.observation.rawTarget))];
+    const qualifiedProducts = (await Promise.all(targets.map(target => loadQualifiedObservations(root, target)))).flat();
+    return { vo, ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [], qualifiedProducts };
+  }
   progress?.('Reading local evidence');
   const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
+  if (target === undefined) throw new TypeError('A name or an ICRS circle is required.');
   const sky = typeof targetOrRequest !== 'string' && 'skyTarget' in targetOrRequest ? targetOrRequest.skyTarget : undefined;
   const objectRoot = resolve(root, 'src/objects'), catalogue = [...await loadTargetCatalogue(root), ...sky ? [skyCatalogueEntry(sky)] : []];
   const resolution = resolveTarget(target, catalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
@@ -389,7 +411,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
     : withRequestedTargetName(enteredName, canonicalTarget, catalogue);
   if (archiveSelection && typeof targetOrRequest !== 'string' && resolution.status === 'resolved') {
     progress?.('Revalidating the selected archive observation');
-    const vo = await loadVoInputs(root, canonicalTargetRequest(targetOrRequest, canonicalTarget), targetCatalogue,
+    const vo = await loadVoInputs(root, canonicalTargetRequest({ ...targetOrRequest, target }, canonicalTarget), targetCatalogue,
       selectedObservation, undefined, {}, undefined, undefined, archiveSelection.archiveService);
     return { vo, ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], sourceProducts: [],
       qualifiedProducts: await loadQualifiedObservations(root, canonicalTarget) };
@@ -397,28 +419,28 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
     const path = `src/sources/${telescope}/ledger.json`;
-    const value = await readJsonSource(resolve(root, path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
+    const value = await readJsonSource(inputPath(root, path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
     if (value !== undefined) {
       const prepared = ADAPTERS[telescope]!.prepare ? await ADAPTERS[telescope]!.prepare!(root, canonicalTarget, value) : { value };
       ledgers.push({ telescope, path, value: prepared.value });
       if (prepared.capabilities) dynamicCapabilities.push(...prepared.capabilities);
     }
   }
-  const capabilities = [...parseModeCapabilities(await readJsonSource(resolve(root, 'packages/telescope-cli/src/modes.json'))), ...dynamicCapabilities];
-  const associationSources = parseTargetAssociationSources(await readJsonSource(resolve(root, TARGET_ASSOCIATIONS_PATH)));
+  const capabilities = [...parseModeCapabilities(await readJsonSource(packagePath('packages/telescope-cli/src/modes.json'))), ...dynamicCapabilities];
+  const associationSources = parseTargetAssociationSources(await readJsonSource(inputPath(root, TARGET_ASSOCIATIONS_PATH)));
   const associationFailures: { collection: string; reason: string }[] = [];
   const targetAssociations = await loadTargetAssociations(associationSources.filter(entry => entry.target === canonicalTarget), { failures: associationFailures });
   const source = resolve(root, 'src/objects', canonicalTarget, 'source');
-  const names = await readdir(source, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return [] as string[]; throw error; });
+  const names = root === USER_ROOT ? [] : await readdir(source, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return [] as string[]; throw error; });
   const bodyMaps: { path: string; value: unknown }[] = [];
   for (const name of names.filter(entry => entry.endsWith('.body-map.json')).sort()) bodyMaps.push({ path: `src/objects/${canonicalTarget}/source/${name}`, value: await readJsonSource(resolve(source, name)) });
   const investigationPath = `src/objects/${canonicalTarget}/investigations.json`;
-  const investigations = await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
+  const investigations = root === USER_ROOT ? undefined : await readJsonSource(resolve(root, investigationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined; throw error; });
   const sourceIntakeIssues: SourceIntakeIssue[] = [];
   const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues, { fetchRemote: false }) : [];
   if(typeof targetOrRequest !== 'string' && resolution.status === 'resolved')progress?.('Searching VO archives and access descriptions');
   const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root,
-    canonicalTargetRequest(targetOrRequest, canonicalTarget), targetCatalogue, selectedObservation) : undefined;
+    canonicalTargetRequest({ ...targetOrRequest, target }, canonicalTarget), targetCatalogue, selectedObservation) : undefined;
   return { ...(vo ? { vo } : {}), sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 
@@ -530,7 +552,7 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').at(-1
   if (args.includes('--help') || args.includes('-h')) { process.stdout.write(`${QUERY_HELP}\n`); process.exitCode = 0; }
   else {
   const request = requestFromArguments(args);
-  const answer = queryCapabilities(request, await loadQueryInputs(WORKSPACE, request));
+  const answer = queryCapabilities(request, await loadQueryInputs(requireWorkspace(), request));
   const telescope = flagValue(args, '--select-telescope'), mode = flagValue(args, '--select-mode'), programme = flagValue(args, '--program');
   if ([telescope, mode, programme].some(Boolean) && ![telescope, mode, programme].every(Boolean)) throw new TypeError('--select-telescope, --select-mode and --program are given together.');
   process.stdout.write(telescope && mode && programme ? `${JSON.stringify(selectObservation(answer, telescope, mode, programme), null, 2)}\n`

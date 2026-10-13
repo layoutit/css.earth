@@ -9,7 +9,8 @@ export const ASTROQUERY_EXCLUSIONS: Readonly<Record<string, string>> = {
 export function astroqueryTestFiles(root: string): string[] {
   return globSync('packages/**/*.test.{ts,mts}', { cwd: root }).filter(path => {
     const text = readFileSync(resolve(root, path), 'utf8');
-    return /import\s*(?:\{[^}]*\bastroqueryToolchain\b[^}]*\})\s*from\s*['"]@cssearth\/telescope\/node['"]/su.test(text);
+    // Relative dynamic imports and subprocess scripts exercise the same protected owner.
+    return /\bastroqueryToolchain\b/u.test(text);
   }).sort();
 }
 export function astroqueryLaneFiles(root: string): string[] {
@@ -22,9 +23,12 @@ export function astroqueryTriggerPaths(root: string): string[] {
     visited.add(name);
     const manifest: unknown = JSON.parse(readFileSync(resolve(root, 'packages', name, 'package.json'), 'utf8'));
     if (!manifest || typeof manifest !== 'object') throw new TypeError(`Invalid ${name} package manifest`);
-    const dependencies = Reflect.get(manifest, 'dependencies');
-    if (dependencies && typeof dependencies === 'object') for (const dependency of Object.keys(dependencies)) {
-      if (dependency.startsWith('@cssearth/')) visit(dependency.slice('@cssearth/'.length));
+    // Bundled implementation owners are development dependencies of the published CLI.
+    for (const field of ['dependencies', 'devDependencies']) {
+      const dependencies = Reflect.get(manifest, field);
+      if (dependencies && typeof dependencies === 'object') for (const dependency of Object.keys(dependencies)) {
+        if (dependency.startsWith('@cssearth/')) visit(dependency === '@cssearth/telescope' ? 'telescope-cli' : dependency.slice('@cssearth/'.length));
+      }
     }
   };
   for (const file of astroqueryLaneFiles(root)) {

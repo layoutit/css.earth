@@ -15,6 +15,7 @@
  * `EUROPA` is Jupiter's moon, `52_EUROPA` is the asteroid this project ships as `europa-52`, and `195EURYKLEIA-26T0400` is a
  * third body with an ephemeris stamp glued to its name. Acquisition, sky and offset frames are never counted as an
  * observation of the object, because they are pointing and background exposures. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -190,7 +191,7 @@ export function checkReceipt(value: unknown, file: string, program: Record<strin
 
 /** Each mode's state, read from the pinned programs and the receipts beside them, with every receipt that could not be
  * accepted reported rather than counted or dropped. */
-export async function modeStates(byMode: Readonly<Record<string, number>>, directory = PROGRAMS): Promise<{ modes: ModeState[]; problems: string[] }> {
+export async function modeStates(byMode: Readonly<Record<string, number>>, directory = programStorePath(PROGRAMS)): Promise<{ modes: ModeState[]; problems: string[] }> {
   const files = (await readdir(directory).catch(() => [] as string[])).sort();
   const pinned = new Map<string, string[]>(), programs = new Map<string, Record<string, unknown>>();
   for (const name of files.filter(name => name.endsWith('.json') && !name.includes('.reproduction.'))) {

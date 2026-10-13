@@ -1,8 +1,8 @@
 /** Source-qualified planetary coordinate grids. This adapter validates and exports bytes; it owns no inversion physics. */
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment, astroqueryToolchain, fileSize } from '@cssearth/telescope-core/node';
 import {spawn} from 'node:child_process';
 import {copyFile} from 'node:fs/promises';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '@cssearth/core';
-import { astroqueryToolchain, fileSize } from '@cssearth/telescope/node';
 import type {FamilyHandler,FamilyOperation} from '../../family-handler.mts';
 import {
   PLANETARY_AXIS_ROLES,
@@ -71,6 +71,7 @@ const python=String.raw`import json,sys,numpy as np,astropy
 from astropy.io import fits
 from astropy import units as u
 from astropy.wcs import WCS
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin);c=r['context']
 with fits.open(r['path'],memmap=True) as h:
  d=np.asarray(h[0].data);hdr=h[0].header
@@ -91,7 +92,7 @@ with fits.open(r['path'],memmap=True) as h:
  for i,expected in enumerate(c['axes'],start=1):
   unit=str(w.world_axis_units[i-1]).strip()
   try:
-   native_unit=u.Unit(unit);qualified_unit=u.Unit(expected['unit']);physical_unit={'length':u.m,'time':u.s,'pressure':u.Pa,'angle':u.rad}[expected['physicalType']]
+   native_unit=required_archive_unit(unit, 'FITS axis');qualified_unit=required_archive_unit(expected['unit'], 'Qualified axis');physical_unit={'length':u.m,'time':u.s,'pressure':u.Pa,'angle':u.rad}[expected['physicalType']]
   except Exception as error:raise ValueError('Planetary grid axis has an invalid physical unit at axis '+str(i)) from error
   if not qualified_unit.is_equivalent(physical_unit):raise ValueError('Qualified planetary axis unit has a different physical dimension from its role at axis '+str(i))
   if not native_unit.is_equivalent(physical_unit):raise ValueError('FITS axis unit has a different physical dimension from its role at axis '+str(i))
@@ -111,7 +112,7 @@ with fits.open(r['path'],memmap=True) as h:
   plane=np.take(d,index,axis=d.ndim-1-fits_axis);ordered=np.transpose(plane) if plane.ndim>1 else plane;remaining=[a for i,a in enumerate(axes) if i!=fits_axis]
   flat=np.asarray(ordered,dtype=float).ravel();valid=np.isfinite(flat);answer['slice']={'axis':role,'index':index,'shape':[int(v) for v in ordered.shape],'axes':[a['role'] for a in remaining],'values':[float(value) if ok else None for value,ok in zip(flat,valid)],'valid':[bool(value) for value in valid]}
 json.dump(answer,sys.stdout,allow_nan=False)`;
-async function run(pin:PinnedDepthFile,context:PlanetaryGridExecutionContext,operation:'inspect'|'slice',axis?:string,index?:number):Promise<any>{const toolchain=await astroqueryToolchain();return new Promise((resolveResult,reject)=>{const child=spawn(toolchain.python,['-c',python],{env:{...process.env,...toolchain.env},stdio:['pipe','pipe','pipe']});let text='',error='';child.stdout.setEncoding('utf8').on('data',value=>text+=value);child.stderr.setEncoding('utf8').on('data',value=>error+=value);child.on('error',reject);child.on('close',code=>{if(code!==0)return reject(new Error(`Astropy planetary-grid owner failed: ${error.slice(-1000)}`));try{resolveResult(JSON.parse(text));}catch(cause){reject(cause);}});child.stdin.end(JSON.stringify({path:pin.path,context,operation,axis,index}));});}
+async function run(pin:PinnedDepthFile,context:PlanetaryGridExecutionContext,operation:'inspect'|'slice',axis?:string,index?:number):Promise<any>{const toolchain=await astroqueryToolchain();return new Promise((resolveResult,reject)=>{const child=spawn(toolchain.python,['-c',python],{env: telescopePythonEnvironment(toolchain.env),stdio:['pipe','pipe','pipe']});let text='',error='';child.stdout.setEncoding('utf8').on('data',value=>text+=value);child.stderr.setEncoding('utf8').on('data',value=>error+=value);child.on('error',reject);child.on('close',code=>{if(code!==0)return reject(new Error(`Astropy planetary-grid owner failed: ${error.slice(-1000)}`));try{resolveResult(JSON.parse(text));}catch(cause){reject(cause);}});child.stdin.end(JSON.stringify({path:pin.path,context,operation,axis,index}));});}
 const contextFromQualification=(qualification:PlanetaryGridQualification):PlanetaryGridExecutionContext=>({quantity:qualification.quantity.name,unit:qualification.quantity.unit,axes:qualification.axes.map(axis=>({role:axis.role,physicalType:axis.physicalType,unit:axis.unit,reference:axis.reference}))});
 export const inspectPlanetaryDepthGrid=(pin:PinnedDepthFile,context:PlanetaryGridExecutionContext|PlanetaryGridQualification):Promise<PlanetaryDepthInspection>=>run(pin,'schema'in context?contextFromQualification(context):context,'inspect');
 export const slicePlanetaryDepthGrid=(pin:PinnedDepthFile,context:PlanetaryGridExecutionContext,axis:string,index:number):Promise<PlanetaryDepthSlice>=>run(pin,context,'slice',axis,index);

@@ -28,6 +28,7 @@
  *
  * --arcsec-per-pixel builds the cube on a finer sky grid than the pipeline's 0.1 arcsecond instead. That cube has no MAST twin, so
  * it is not compared; run the default first, so the receipt shows these exposures and this toolchain reproduce MAST's cube. */
+import { programStorePath } from '../../../paths.mts';
 import { mkdir, readdir, rm, stat, writeFile, open } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
@@ -35,9 +36,9 @@ import { pathToFileURL } from 'node:url';
 import { sampleAgreement } from '../sample-agreement.mts';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireRecord } from '@cssearth/core';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun } from '@cssearth/objects';
-import { readProductRecord, sameRun, writeProductRecord, mastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
+import { readProductRecord, sameRun, writeProductRecord, mastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope-core/node';
 import { eurekaToolchain } from '../toolchain.mts';
 import { PROGRAMS } from '../imaging/archive.mts';
 import { bandOfHeader, JWST_BANDS, type JwstBand } from '../imaging/bands.mts';
@@ -209,7 +210,7 @@ export async function compareCubeWithMast(id: string, band: string, local: strin
     mast: { ...entry.level3, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX }, local: { name: basename(local), bytes: (await stat(local)).size, calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance,
     comparison,
     grid: { width: ours.width, height: ours.height, planes: ours.planes, arcsecPerPixel: ours.arcsecPerPixel, micrometres: [ours.wavelength(0), ours.wavelength(ours.planes - 1)] }, samples };
-  const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${band}.reproduction.json`), 'write');
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
   if (!acceptance.accepted) throw new Error(`Cube comparison did not meet ${acceptance.policy}; measurements retained at ${path}. No archive agreement was established.`);
   // Added to the record of the run that built this cube; a cube with no record beside it is refused, because nothing states

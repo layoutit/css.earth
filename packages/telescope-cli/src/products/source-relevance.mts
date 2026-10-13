@@ -5,29 +5,31 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import type { NativeMetadata } from './native-metadata.mts';
 import type { ProductDescriptor } from './product-descriptor.mts';
 import { PRODUCT_KINDS } from '../requests/recipe-request.mts';
-import { parseSkyTarget } from '@cssearth/telescope/node';
+import { parseSkyTarget } from '@cssearth/telescope-core/node';
 import { parseRegion } from '@cssearth/objects';
 
 type Verdict = { readonly status:'supported'|'unsupported'|'unknown'|'not-requested';readonly reason:string };
 export interface SourceQuestion {
-  readonly target:string;
-  readonly archiveTargetName?:string;
+  readonly target:string | null;
+  readonly region?:import('@cssearth/objects').IcrsCircle;
+  readonly archiveTargetName?:string | null;
   readonly kind?:string;
   readonly wavelengthMicrometres?:readonly [number,number];
   readonly family?:string;
   readonly position?:{ readonly raDegrees:number;readonly decDegrees:number;readonly basis:'SIMBAD position'|'requested ICRS circle centre' };
 }
 /** Save only the question that can be tested against native bytes in a portable delivery. */
-export function sourceQuestionFromRequest(request:{readonly target:string;readonly kind?:string;readonly family?:string;readonly wavelengthMicrometres?:readonly [number,number];readonly skyTarget?:{readonly raDegrees:number;readonly decDegrees:number};readonly region?:{readonly raDegrees:number;readonly decDegrees:number}}):SourceQuestion{
-  const point=request.skyTarget??request.region;
-  return {target:request.target,...(request.kind?{kind:request.kind}:{}),...(request.family?{family:request.family}:{}),
+export function sourceQuestionFromRequest(request:{readonly target:string | null;readonly archiveTargetName?:string | null;readonly kind?:string;readonly family?:string;readonly wavelengthMicrometres?:readonly [number,number];readonly skyTarget?:{readonly raDegrees:number;readonly decDegrees:number};readonly region?:{readonly raDegrees:number;readonly decDegrees:number};readonly footprint?:{readonly raDegrees:number;readonly decDegrees:number};readonly search?:'position'}):SourceQuestion{
+  const point=request.skyTarget??request.region??(request.search === 'position' ? request.footprint : undefined);
+  return {target:request.target,...(request.archiveTargetName === undefined ? {} : { archiveTargetName: request.archiveTargetName }),...(request.kind?{kind:request.kind}:{}),...(request.family?{family:request.family}:{}),
     ...(request.wavelengthMicrometres?{wavelengthMicrometres:request.wavelengthMicrometres}:{}),
+    ...(request.search === 'position' ? { region: parseRegion(request.footprint ?? request.region) } : {}),
     ...(point?{position:{raDegrees:point.raDegrees,decDegrees:point.decDegrees,basis:request.skyTarget?'SIMBAD position':'requested ICRS circle centre'} as const}:{})};
 }
-export function parseSourceQuestion(value:unknown,target:string):SourceQuestion{
+export function parseSourceQuestion(value:unknown,target:string | null):SourceQuestion{
   const row=requireRecord(value,'delivery source question');
-  for(const key of Object.keys(row))if(!['target','kind','wavelengthMicrometres','family','position'].includes(key))throw new TypeError(`Unknown source question field ${key}`);
-  if(requireString(row.target,'source question target')!==target)throw new TypeError('Source question target differs from delivery');
+  for(const key of Object.keys(row))if(!['target','archiveTargetName','region','kind','wavelengthMicrometres','family','position'].includes(key))throw new TypeError(`Unknown source question field ${key}`);
+  if((row.target===null?null:requireString(row.target,'source question target'))!==target)throw new TypeError('Source question target differs from delivery');
   const kind=row.kind===undefined?undefined:requireString(row.kind,'source question kind');
   if(kind&&!(PRODUCT_KINDS as readonly string[]).includes(kind))throw new TypeError('Unknown source question kind');
   const wavelengths=row.wavelengthMicrometres===undefined?undefined:requireArray(row.wavelengthMicrometres,'source wavelengths').map(value=>requireFiniteNumber(value,'source wavelength'));
@@ -38,13 +40,14 @@ export function parseSourceQuestion(value:unknown,target:string):SourceQuestion{
   if(basis&&basis!=='SIMBAD position'&&basis!=='requested ICRS circle centre')throw new TypeError('Invalid source position basis');
   const ra=position===undefined?undefined:requireFiniteNumber(position.raDegrees,'source RA'),dec=position===undefined?undefined:requireFiniteNumber(position.decDegrees,'source Dec');
   if(ra!==undefined&&(ra<0||ra>=360||dec! < -90||dec! > 90))throw new TypeError('Invalid source position');
-  return {target,
+  return {target, ...(row.archiveTargetName === undefined ? {} : { archiveTargetName: row.archiveTargetName === null ? null : requireString(row.archiveTargetName, 'archive target name') }), ...(row.region === undefined ? {} : { region: parseRegion(row.region) }),
     ...(kind?{kind}:{}),...(row.family===undefined?{}:{family:requireString(row.family,'source family')}),
     ...(wavelengths?{wavelengthMicrometres:wavelengths as [number,number]}:{}),
     ...(position?{position:{raDegrees:ra!,decDegrees:dec!,basis:basis as NonNullable<SourceQuestion['position']>['basis']}}:{})};
 }
 export interface SourceRelevance {
-  readonly target:string;
+  readonly target:string | null;
+  readonly region?:import('@cssearth/objects').IcrsCircle;
   readonly archiveTarget:{readonly status:'named'|'unknown';readonly name?:string;readonly reason:string};
   readonly field:{readonly status:'in-field'|'outside-field'|'unknown';readonly basis?:string;readonly reason:string};
   readonly detection:{readonly status:'unassessed';readonly reason:string};
@@ -61,19 +64,20 @@ export async function readSourceQuestion(root:string):Promise<SourceQuestion>{
   const exploration=requireRecord(JSON.parse(await readFile(resolve(root,'explore.json'),'utf8')),'pinned exploration');
   const answer=requireRecord(exploration.answer,'exploration answer'),request=requireRecord(answer.request,'exploration request');
   const target=requireString(source.target,'source target');
-  if(target!==exploration.target||target!==answer.target||target!==request.target)throw new TypeError('Source and exploration targets disagree');
+  if(request.target === undefined) parseRegion(request.region ?? request.footprint);
+  if(request.target !== undefined && (target!==exploration.target||target!==answer.target||target!==request.target))throw new TypeError('Source and exploration targets disagree');
   const discovery=source.discovery===undefined?undefined:requireRecord(source.discovery,'source discovery');
   const selected=source.selected===undefined?undefined:requireRecord(source.selected,'selected source');
   const archiveTargetName=[selected?.targetName,discovery?.targetName,discovery?.opusTarget].find(value=>typeof value==='string'&&value.trim());
   const wavelength=request.wavelengthMicrometres===undefined?undefined:requireArray(request.wavelengthMicrometres,'requested wavelength').map(value=>requireFiniteNumber(value,'requested wavelength'));
   if(wavelength&&(wavelength.length!==2||wavelength[0]!<=0||wavelength[1]!<wavelength[0]!))throw new TypeError('Invalid saved wavelength request');
   const sky=request.skyTarget===undefined?undefined:parseSkyTarget(request.skyTarget);
-  const circle=request.region===undefined?undefined:parseRegion(request.region);
+  const circle=request.region===undefined&&request.footprint===undefined?undefined:parseRegion(request.region ?? request.footprint);
   const point=sky??circle;
   const position=point?{raDegrees:requireFiniteNumber(point.raDegrees,'position RA'),decDegrees:requireFiniteNumber(point.decDegrees,'position Dec'),basis:sky?'SIMBAD position' as const:'requested ICRS circle centre' as const}:undefined;
   if(position&&(position.raDegrees<0||position.raDegrees>=360||position.decDegrees < -90||position.decDegrees>90))throw new TypeError('Invalid saved sky position');
   if(request.kind!==undefined&&!(PRODUCT_KINDS as readonly string[]).includes(requireString(request.kind,'requested kind')))throw new TypeError('Invalid saved product kind');
-  return {target,...(typeof archiveTargetName==='string'?{archiveTargetName}:{}),
+  return {target, ...(request.target === undefined && circle ? { region: circle } : {}), ...(typeof archiveTargetName==='string'?{archiveTargetName}:{}),
     ...(typeof request.kind==='string'?{kind:request.kind}:{}),...(wavelength?{wavelengthMicrometres:wavelength as [number,number]}:{}),
     ...(typeof request.family==='string'?{family:request.family}:{}),...(position?{position}:{})};
 }
@@ -147,7 +151,7 @@ export function assessSourceRelevance(question:SourceQuestion,metadata:readonly 
     :available.length?`Inspect the available ${[...new Set(available)].join(', ')} operation(s) below and choose explicit selectors; source fitness remains unassessed.`
     :descriptor?.components.length?'Inspect the family operations below; this descriptor does not itself establish target detection or scientific fitness.'
     :'No supported science output route recognizes these pinned bytes; inspect the original archive files or add a qualified native decoder.';
-  return {target:question.target,archiveTarget:question.archiveTargetName?{status:'named',name:question.archiveTargetName,reason:'The archive supplied this name; naming does not establish field coverage or detection.'}:{status:'unknown',reason:'No separate source target name was pinned.'},
+  return {target:question.target, ...(question.region ? { region: question.region } : {}), archiveTarget:question.archiveTargetName?{status:'named',name:question.archiveTargetName,reason:'The archive supplied this name; naming does not establish field coverage or detection.'}:{status:'unknown',reason:'No separate source target name was pinned.'},
     field,detection:{status:'unassessed',reason:'Source inspection does not measure or identify the requested target in the data.'},
     requested:{...(question.kind?{kind:question.kind}:{}),...(question.wavelengthMicrometres?{wavelengthMicrometres:question.wavelengthMicrometres}:{}),...(question.family?{family:question.family}:{})},
     fit:{kind,wavelength,family},contents,next};

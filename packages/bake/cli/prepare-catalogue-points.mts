@@ -306,7 +306,7 @@ json.dump({'rows': rows, 'selected': len(kept) + missing, 'missingDistance': mis
   'points': [[round(float(v), 4) for v in p] for p in xyz], 'names': [k[0] for k in kept], 'groups': grouped if r['group'] else None, 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'bands': [k[7] for k in kept], 'redshifts': redshifts,
   'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'sky': [[k[1], k[2]] for k in kept] if r['disc'] else None,
   'maxDistanceKpc': 0 if r['disc'] else max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus', 'redshift-planck18') else 1)}, sys.stdout)`;
-const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
+const { astroqueryToolchainSync } = await import('@cssearth/telescope-core/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
   input: JSON.stringify({ table: resolve(sourceDirectory, table.path), gzip: table.gzip === true, columns: table.columns, unit: table.distanceUnit ?? null,

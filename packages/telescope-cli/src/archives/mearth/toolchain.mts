@@ -5,43 +5,45 @@
  *
  * A Python environment with sfit, the MEarth Project's own fitting code, at a pinned commit. An installed toolchain keeps
  * the text of its descriptor; `verify` and `toolchainPaths` refuse one built from other pins. */
+import { resolveInstalledToolchain, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
-import { access, mkdir, readFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
 
-const FILE = 'packages/telescope-cli/src/archives/mearth/toolchain.json', ROOT = resolve(WORKSPACE, 'output/toolchains/mearth'), INSTALL = 'node packages/telescope-cli/src/archives/mearth/toolchain.mts install';
+const FILE = 'packages/telescope-cli/src/archives/mearth/toolchain.json';
+export const MEARTH_ROOT = resolve(USER_ROOT, 'output/toolchains/mearth');
+const INSTALL = 'node packages/telescope-cli/src/archives/mearth/toolchain.mts install';
 
 export async function toolchainPins(): Promise<ToolchainPins> {
-  const descriptor = await readFile(resolve(import.meta.dirname, 'toolchain.json'), 'utf8'), entry = requireRecord(JSON.parse(descriptor) as unknown, FILE);
+  const descriptor = await readFile(packagePath(FILE), 'utf8'), entry = requireRecord(JSON.parse(descriptor) as unknown, FILE);
   return { id: requireString(entry.id, 'id'), file: FILE, descriptor, lock: null, entry };
 }
 function run(command: string, args: readonly string[], cwd: string) {
-  const result = spawnSync(command, args, { cwd, stdio: 'inherit' });
+  const result = spawnSync(command, args, { cwd, stdio: 'inherit', env: telescopePythonEnvironment() });
   if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${cwd} (status ${result.status}).`);
 }
 
 export async function installToolchain() {
-  const pins = await toolchainPins(), python = resolve(ROOT, 'venv/bin/python');
-  await mkdir(ROOT, { recursive: true });
-  if (!await access(python).then(() => true, () => false)) run(requireString(pins.entry.python, 'python'), ['-m', 'venv', resolve(ROOT, 'venv')], ROOT);
-  run(resolve(ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(pins.entry.requirements).map(value => requireString(value))], ROOT);
-  writeInstalledMarker(ROOT, pins);
-  return ROOT;
+  assertManagedPythonPlatform();
+  return ensureToolchainPython(resolve(MEARTH_ROOT, 'venv'), toolchainPins, async pins => {
+    run(resolve(MEARTH_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(pins.entry.requirements).map(value => requireString(value))], MEARTH_ROOT);
+  });
 }
 
 /** The installed interpreter, refusing a missing install or one built from other pins. */
 export async function toolchainPaths() {
   const pins = await toolchainPins();
-  assertInstalledMarker(ROOT, pins, 'MEarth photometry', INSTALL);
-  return { python: resolve(ROOT, 'venv/bin/python'), pins };
+  const root = resolveInstalledToolchain(MEARTH_ROOT, pins) ?? MEARTH_ROOT;
+  assertInstalledMarker(root, pins, 'MEarth photometry', INSTALL);
+  return { python: resolve(root, 'venv/bin/python'), pins };
 }
 
 /** Run tools.py with the toolchain's interpreter and return the JSON document it printed. */
 export function runTool(python: string, args: readonly string[]): unknown {
-  const result = spawnSync(python, ['-I', resolve(import.meta.dirname, 'tools.py'), ...args], { encoding: 'utf8', maxBuffer: 1 << 28 });
+  const result = spawnSync(python, ['-I', packagePath('src/archives/mearth/tools.py'), ...args], { encoding: 'utf8', maxBuffer: 1 << 28, env: telescopePythonEnvironment() });
   if (result.status !== 0) throw new Error(`tools.py ${args[0] ?? ''} failed (status ${result.status}): ${result.stderr.trim().split('\n').slice(-3).join(' ')}`);
   return JSON.parse(result.stdout.slice(result.stdout.indexOf('{')));
 }

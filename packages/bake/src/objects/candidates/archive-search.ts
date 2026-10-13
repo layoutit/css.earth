@@ -17,7 +17,7 @@
  * that no DataCite record describes.
  */
 import { requireArray, requireRecord } from '@cssearth/core';
-import { astroqueryRows, tapRows, mastRequest } from '@cssearth/telescope/node';
+import { astroqueryRows, tapRows, mastRequest } from '@cssearth/telescope-core/node';
 
 export const ESO_TAP = 'https://archive.eso.org/tap_obs', ALMA_TAP = 'https://almascience.eso.org/tap', DATACITE_API = 'https://api.datacite.org/dois';
 

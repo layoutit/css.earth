@@ -3,11 +3,11 @@ import{test}from'node:test';
 import{copyFile,mkdtemp,readFile,rm,writeFile}from'node:fs/promises';
 import{tmpdir}from'node:os';
 import{resolve}from'node:path';
-import { readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import {  readProductRecord, requireWorkspace  } from '@cssearth/telescope-core/node';
 import{executeFamilyOperation}from'../family-operation.mts';
 import{member}from'./common.mts';
 import{describeChandraEvents,energyHistogram,exportSelectedEventsCsv,F10_CHANDRA_EXAMPLE,gtiLightCurve,inspectChandraEvents,nativeCountImage}from'./f10-events.mts';
-const root=WORKSPACE,fixture=resolve(root,F10_CHANDRA_EXAMPLE.member),archive=await readFile(fixture),product=inspectChandraEvents(archive);
+const root=requireWorkspace(),fixture=resolve(root,F10_CHANDRA_EXAMPLE.member),archive=await readFile(fixture),product=inspectChandraEvents(archive);
 
 test('F10 authentic Chandra EVENTS+GTI baseline preserves event and exposure facts',()=>{assert.equal(product.rows.length,62471);assert.equal(product.gtis.length,9);assert.equal(product.target,'Polaris');assert.equal(product.observationId,'6431');assert.ok(product.exposureSeconds>9_900&&product.exposureSeconds<10_000);const descriptor=describeChandraEvents({id:'polaris-6431-events',target:'polaris',member:member('events',F10_CHANDRA_EXAMPLE.member,'science',archive,'application/gzip'),archiveBytes:archive,producingRecord:'packages/telescope-cli/src/archives/chandra/programs/polaris-vfaint.acisf06431N003_evt2.reproduction.json'});assert.deepEqual(descriptor.dependencies[0]!.memberIds,['events']);assert.deepEqual(descriptor.components[0]!.locations,[{memberId:'events',structure:'EVENTS'}]);assert.match(descriptor.issues[0]!.reason,/No ARF\/RMF/u);});
 

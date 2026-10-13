@@ -12,13 +12,14 @@
  * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and sizes, and the
  * agreement it establishes is added as `archive-agreement` evidence to the product record the stage wrote beside the mosaic. A
  * mosaic with no record is refused. */
+import { programStorePath } from '../../../paths.mts';
+import { requireWorkspace, mastFile } from '@cssearth/telescope-core/node';
 import { sampleAgreement } from '../sample-agreement.mts';
 import { stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { skyProjection } from '@cssearth/fits';
-import { mastFile } from '@cssearth/telescope/node';
 import { PROGRAMS } from './archive.mts';
 import { bandOfHeader } from './bands.mts';
 import { readImagingProgram, recordProductEvidence } from './image3.mts';
@@ -55,6 +56,7 @@ function starAnnuli(theirs: Awaited<ReturnType<typeof science>>, projection: Ret
 const quantile = (sorted: Float32Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))]!;
 
 export async function compareWithMast(id: string, band: string, local: string, sources: readonly string[] = []) {
+  requireWorkspace(undefined, 'This command writes archive records.');
   const { program } = await readImagingProgram(id), entry = program.bands.find(other => other.band === band);
   if (!entry) throw new Error(`${id} has no ${band} band.`);
   const mastPath = await mastFile(entry.level3, resolve(local, '..', '..', 'mast'), sources);
@@ -118,7 +120,7 @@ export async function compareWithMast(id: string, band: string, local: string, s
       aboveMedian: { pixels: n, rmsDifferenceOverRms: Math.sqrt(sdd / n) / Math.sqrt(sbb / n),
         correlation: (n * sab - sa * sb) / Math.sqrt((n * saa - sa * sa) * (n * sbb - sb * sb)) }, ratioBins, ...(annuli ? { annuli } : {}) },
   };
-  const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${band}.reproduction.json`), 'write');
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
   if (!acceptance.accepted) throw new Error(`Image comparison did not meet ${acceptance.policy}; measurements retained at ${path}. No archive agreement was established.`);
   // What this comparison establishes, added to the record of the run that made the mosaic. A mosaic with no record beside it is

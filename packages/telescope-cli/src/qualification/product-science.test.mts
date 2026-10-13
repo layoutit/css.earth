@@ -1,3 +1,4 @@
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { after } from 'node:test';
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -5,11 +6,12 @@ import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { astroqueryToolchain, fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { astroqueryToolchain, fileSize, sciencePackage, writeProductRecord } from '@cssearth/telescope-core/node';
+import { requireArray, requireRecord } from '@cssearth/core';
 import { readProductScience } from './product-science.mts';
 import { calibrationDependencies, verifyCalibrationDependencies, calibrationOrigin } from '../requests/calibration-dependencies.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { recordQualification, QUALIFICATION_SCHEMA, type QualificationResult } from './qualify.mts';
 import { loadQualifiedObservations } from './qualified-observations.mts';
 import type { SourceProduct } from '../products/source-product-contract.mts';
@@ -73,10 +75,15 @@ test('Astropy units and associated ERR/DQ control sampled coverage',async()=>{
  const f=await read('masked.fits');assert.equal(f.nativeMetadata?.uncertainty?.status,'validated');assert.equal(f.nativeMetadata?.quality?.usable,8);assert.equal(f.nativeMetadata?.quality?.flagged,4);
  assert.deepEqual(f.nativeMetadata?.spectral?.usableBands,[true,false,true]);assert.equal(f.wavelengthIntervalsMicrometres?.length,2);assert.equal(f.nativeMetadata?.units?.value,'erg / (s cm2 Angstrom)');
 });
-test('shape, unit and unmasked negative uncertainty contradictions are refused',async()=>{
+test('contradictions are refused; unknown uncertainty units retain native values without asserting sigma',async()=>{
  await assert.rejects(read('ambiguous.fits'),/Ambiguous science association/);
  await assert.rejects(read('bad-unit.fits'),/units disagree/);await assert.rejects(read('bad-shape.fits'),/shape mismatch/);await assert.rejects(read('negative.fits'),/Negative unmasked/);
- const unknown=await read('missing-unit.fits');assert.equal(unknown.nativeMetadata?.uncertainty?.status,'unknown');assert.equal(unknown.nativeMetadata?.quality?.usable,0);assert.deepEqual(unknown.wavelengthIntervalsMicrometres,[]);
+ const unknown=await read('missing-unit.fits');assert.equal(unknown.nativeMetadata?.uncertainty?.status,'unknown');assert.equal(unknown.nativeMetadata?.quality?.usable,12);assert.deepEqual(unknown.nativeMetadata?.spectral?.usableBands,[true,true,true]);
+ assert.ok(unknown.nativeMetadata?.limitations.some(line=>line.includes('Uncertainty units cannot be established')));
+ const path=resolve(root,'missing-unit.fits'),extracted=await sciencePackage({operation:'extract',path,kind:'image',hdu:1,plane:0});
+ const data=requireRecord(requireRecord(requireArray(extracted.structures)[0]).extraction);
+ assert.deepEqual(data.values,[[1,1],[1,1]]);assert.deepEqual(data.sigma,[[null,null],[null,null]]);
+ await assert.rejects(sciencePackage({operation:'extract',path,kind:'band-image',hdu:1,band:[1,1.2],uncertainty:'independent'}),/validated sample uncertainties/u);
 });
 test('ESO science data products are read by their declared roles and links, not by extension names',async()=>{
  const f=await read('eso.fits');

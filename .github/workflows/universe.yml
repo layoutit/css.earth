@@ -617,7 +617,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
-      CSS_EARTH_ASTROQUERY_CACHE: /home/runner/.cache/css-earth/astroquery
+      CSSEARTH_TELESCOPE_HOME: /home/runner/.cache/cssearth-telescope
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -636,18 +636,18 @@ jobs:
           python-version: '3.12'
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          path: ~/.cache/css-earth/astroquery
-          key: astroquery-${{ runner.os }}-${{ hashFiles('packages/telescope/toolchains/toolchain.json', 'packages/telescope/toolchains/requirements.lock') }}
+          path: ${{ env.CSSEARTH_TELESCOPE_HOME }}/astroquery
+          key: astroquery-${{ runner.os }}-${{ hashFiles('packages/telescope-core/toolchains/toolchain.json', 'packages/telescope-core/toolchains/requirements.lock') }}
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build the telescope dependency closure
-        run: node .github/scripts/architecture/workspace-builds.mts --run @cssearth/telescope-cli @cssearth/bake
+        run: node .github/scripts/architecture/workspace-builds.mts --run @cssearth/telescope @cssearth/bake
       - name: Install micromamba for the toolchain installer
         # The installer runs `micromamba create` and the runner image has no micromamba. A pinned release binary, so the
         # install cannot change under the lane.
         run: |
           mkdir -p "$HOME/.local/bin"
-          curl -fsSL "https://github.com/mamba-org/micromamba-releases/releases/download/2.0.5-0/micromamba-linux-64" -o "$HOME/.local/bin/micromamba"
+          curl -fsSL "https://github.com/mamba-org/micromamba-releases/releases/download/2.9.0-0/micromamba-linux-64" -o "$HOME/.local/bin/micromamba"
           chmod +x "$HOME/.local/bin/micromamba"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           "$HOME/.local/bin/micromamba" --version

@@ -4,9 +4,9 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { arrayTimeToDate, parseExecution, readTarHead } from './alma-execution.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
-const root = WORKSPACE;
+const root = requireWorkspace();
 const read = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');
 
 /** A tar stream carrying the named members in order, each padded to the 512-byte block. */

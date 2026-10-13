@@ -13,8 +13,8 @@ import { pathToFileURL } from 'node:url';
 import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/core';
 import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
-import { productRecordPath } from '@cssearth/telescope';
-import { runKey, sameRun, WORKSPACE } from '@cssearth/telescope/node';
+import { productRecordPath } from '@cssearth/telescope-core';
+import { runKey, sameRun, requireWorkspace } from '@cssearth/telescope-core/node';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from '../observation-query/query.mts';
 import { type ObservationSelection } from '../observation-query/query-contract.mts';
 import type { ConstraintVerdict } from '../requests/request-satisfaction.mts';
@@ -141,7 +141,7 @@ export function assertMapAnswersRequest(product: BodyMapProduct, selection: Obse
 }
 
 /** Verify the complete chain at publication time and return the small descriptor the body package can consume. */
-export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection, root = WORKSPACE): Promise<TelescopeLayer> {
+export async function qualifyBodyMap(mapPath: string, selection: ObservationSelection, root = requireWorkspace()): Promise<TelescopeLayer> {
   const metadataPath = resolve(mapPath), product = readBodyMapProduct(JSON.parse((await publicationFile(metadataPath, selection, 'body-map metadata')).toString('utf8')) as unknown);
   const planePath = resolve(dirname(metadataPath), product.planes.file), expectedMetadata = `${planePath}.body-map.json`;
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
@@ -195,7 +195,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), telescope = flagValue(args, '--select-telescope'), mode = flagValue(args, '--select-mode'), programme = flagValue(args, '--program'), map = flagValue(args, '--map');
   if (!telescope || !mode || !programme || !map) throw new TypeError('Usage: body-map-publication.mts --target <id> --wavelength <from,to> --kind <kind> (--from <ISO> --to <ISO> | --any-time) (--min-arcsec <N> | --min-km <N> | --min-elements <N>) --result body-map --select-telescope <name> --select-mode <mode> --program <id> --map <map.fits.body-map.json> [--out <layer.json>]');
-  const request = requestFromArguments(args), answer = queryCapabilities(request, await loadQueryInputs(WORKSPACE, request.target));
+  const request = requestFromArguments(args), answer = queryCapabilities(request, await loadQueryInputs(requireWorkspace(), request.target));
   const layer = await qualifyBodyMap(map, selectObservation(answer, telescope, mode, programme)), text = `${JSON.stringify(layer, null, 2)}\n`, out = flagValue(args, '--out');
   if (out) await writeFile(resolve(out), text); else process.stdout.write(text);
 }

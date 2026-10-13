@@ -17,14 +17,15 @@
  * pinned sizes, the settings and CRDS context, the pinned pipeline, and the mosaic with the units and conventions its own
  * header states. Its evidence list starts empty; compare.mts adds the archive agreement it establishes. A mosaic whose record
  * says this same run made it is not made again. */
+import { programStorePath, packagePath } from '../../../paths.mts';
 import { readFile, writeFile, mkdir, rm, stat } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireRecord, MissingSourceInputError } from '@cssearth/core';
-import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, WORKSPACE, mastFile, type MastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, mastFile, type MastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';
 import { parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';
@@ -54,7 +55,7 @@ export function gridResample(grid: SkyGrid) {
 }
 
 export async function readImagingProgram(id: string) {
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`);
   return { path, program: parseImagingProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 
@@ -82,8 +83,8 @@ export function pipelineSoftware(lock: string): readonly ProductSoftware[] {
  * built from other pins by the time a stage gets here. */
 export async function eurekaPins(): Promise<{ software: readonly ProductSoftware[] }> {
   await stat(resolve(EUREKA_ROOT, 'installed.json'))
-    .catch(() => { throw new MissingSourceInputError('Eureka! is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install'); });
-  return { software: pipelineSoftware(await readFile(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst/requirements.lock'), 'utf8')) };
+    .catch(() => { throw new MissingSourceInputError('Eureka! is not installed: telescope toolchain install eureka'); });
+  return { software: pipelineSoftware(await readFile(packagePath('packages/telescope-cli/src/archives/jwst/requirements.lock'), 'utf8')) };
 }
 
 /** What identifies one level-3 run of a pinned program band: the exposures it was given at their pinned sizes, the settings

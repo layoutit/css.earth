@@ -8,13 +8,15 @@ import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { assertBodyMapPlanes } from '../delivery/body-map-publication.mts';
-import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { writeProductRecord } from '@cssearth/telescope-core/node';
 import { verifiedProduct, localOutput } from '../products/verified-product.mts';
 import { contextTarget, sourceContext } from '../delivery/delivery-context.mts';
+import { assertStandaloneHtml } from './html-policy.mts';
 import { VERSION } from '../help.mts';
-import * as sphereOwner from '@cssearth/telescope-cli/sphere/lane';
+import * as sphereOwner from '@cssearth/telescope/sphere/lane';
 
-const root=WORKSPACE;
+import { sphereRoot, sphereSolarGeometry } from './sphere-root.mts';
+const workspace = sphereRoot;
 /** Prepared package entry: callers supply solar geometry; the owner never discovers it globally. */
 export type SphereOwner = Pick<typeof sphereOwner, 'inspectMeasurementSphere' | 'measurementSphere' | 'sphereHtml'>;
 export async function validateSphereBundle(source:Awaited<ReturnType<typeof verifiedProduct>>){
@@ -32,23 +34,25 @@ export async function validateSphereBundle(source:Awaited<ReturnType<typeof veri
   if(contextTarget(context)!==map.frame.body)throw new Error('Source context target disagrees with the body map');
   return {source,map,nav,radii,norm,context,plane};
 }
-export async function validateSphereSource(source:Awaited<ReturnType<typeof verifiedProduct>>,workspaceRoot=root,heldOwner?:SphereOwner){
+export async function validateSphereSource(source:Awaited<ReturnType<typeof verifiedProduct>>,workspaceRoot=workspace(),heldOwner?:SphereOwner){
   const bundle=await validateSphereBundle(source);
   if(heldOwner)await heldOwner.inspectMeasurementSphere(workspaceRoot,bundle.map.frame.body);
   else await sphereOwner.inspectMeasurementSphere(workspaceRoot,bundle.map.frame.body);
   return bundle;
 }
-export async function sphereSource(recordPath:string,workspaceRoot=root){return validateSphereSource(await verifiedProduct(recordPath),workspaceRoot);}
+export async function sphereSource(recordPath:string,workspaceRoot=workspace()){return validateSphereSource(await verifiedProduct(recordPath),workspaceRoot);}
 
-export async function exportSphere(recordPath:string,outputDirectory:string,solarGeometry:SolarGeometry){
-  const source=await verifiedProduct(recordPath),bundle=await validateSphereBundle(source);
+export async function exportSphere(recordPath:string,outputDirectory:string,solarGeometry?:SolarGeometry){
+  solarGeometry ??= await sphereSolarGeometry();
+  const root=workspace(),source=await verifiedProduct(recordPath),bundle=await validateSphereBundle(source);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
-  const owner=sphereOwner;await owner.inspectMeasurementSphere(root,bundle.map.frame.body);const {map,nav,radii,norm,context}=bundle;
+  const owner=sphereOwner;const {map,nav,radii,norm,context}=bundle;
   const longitude=(360-map.observations[0].subObserver.westLongitudeDegrees)%360,latitude=map.observations[0].subObserver.latitudeDegrees;
   const prepared=await owner.measurementSphere(root,map.frame.body,localOutput(source.root,'texture.png'),staging,{longitudeDegrees:longitude,latitudeDegrees:latitude,zoom:1.1},solarGeometry);
-  const metadata={target:map.frame.body,radiiKm:radii,shape:nav.shape,grid:map.grid,units:map.definition.units,normalization:norm,registration:nav.registration,sourceContext:context,uncertainty:nav.uncertainty,map:{file:map.planes.file,bytes:(await readFile(localOutput(source.root,map.planes.file))).length},renderer:prepared.owner};
+  const metadata={target:map.frame.body,radiiKm:radii,shape:nav.shape,grid:map.grid,units:map.definition.units,normalization:norm,registration:nav.registration,sourceContext:context,uncertainty:nav.uncertainty,map:{file:map.planes.file,bytes:(await readFile(localOutput(source.root,map.planes.file))).length},renderer:prepared.owner,receipt:source.record};
   const html=owner.sphereHtml(prepared,metadata,`${map.frame.body} · ${map.definition.quantity}`,`${map.definition.units} · ${Number(norm.minimum).toPrecision(4)}–${Number(norm.maximum).toPrecision(4)} · grey: unobserved`);
+    assertStandaloneHtml(html);
     await writeFile(resolve(staging,'sphere.html'),html);
     const fresh=await verifiedProduct(source.file);if(!fresh.recordBytes.equals(source.recordBytes))throw new Error(`${source.file} changed during sphere preparation`);
     await writeProductRecord(resolve(staging,'sphere.product.json'),{telescope:source.record.telescope,stage:'telescope-sphere',inputs:[{role:'body-map record',identity:source.file,...source.pin},...prepared.inputs.filter(input=>!input.identity.startsWith(staging)),...source.record.outputs.map(o=>({role:'body-map output',identity:localOutput(source.root,o.path),bytes:o.bytes}))],parameters:metadata,software:[{name:'cssEarth / PolyCSS prepared sphere',version:VERSION}]},[{path:'sphere.html',file:resolve(staging,'sphere.html')}]);

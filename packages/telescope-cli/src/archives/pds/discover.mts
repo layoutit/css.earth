@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 /** Complete, scoped Peppi target search -> verified labels -> product-level candidates for the shared query. */
+import { loadTargetCatalogue } from '../../observation-query/query.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { pds4Blocks, pds4Elements, pds4Field } from '@cssearth/telescope';
-import { pdsPackages, WORKSPACE } from '@cssearth/telescope/node';
+import { pds4Blocks, pds4Elements, pds4Field } from '@cssearth/telescope-core';
+import { pdsPackages, WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
 import { normalizeDiscoveredPdsProduct, type DiscoveredPdsProduct } from './archive-final.mts';
 import { sourcePds3Observations } from './source-observations.mts';
 
-const ROOT = WORKSPACE;
+const ROOT = WORKSPACE ?? USER_ROOT;
 export const PDS_DISCOVERY_SCHEMA = 'cssearth-pds-discovery@1';
 export const PDS_DISCOVERY_STORE_SCHEMA = 'cssearth-pds-discovery@2';
 export const PDS_DISCOVERY = resolve(ROOT, 'src/sources/pds/discovery.json');
@@ -148,8 +149,9 @@ export function pdsTargetNameCandidates(values: readonly string[]) {
 
 /** Resolve a PDS context target through Peppi. Archive identity is package-owned data, not a css.earth target table. */
 export async function pdsTarget(root: string, id: string) {
-  const descriptor = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')) as unknown, `${id} object`);
-  const catalog = requireRecord(requireRecord(descriptor.properties, `${id} properties`).catalog, `${id} catalog`);
+  const catalog = root === USER_ROOT ? (await loadTargetCatalogue(root)).find(entry => entry.id === id)
+    : requireRecord(requireRecord(requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')) as unknown, `${id} object`).properties, `${id} properties`).catalog, `${id} catalog`);
+  if (!catalog) throw new TypeError(`No shipped target catalogue entry exists for ${id}.`);
   const sourceNames = (await sourcePds3Observations(root, id)).map(observation => observation.targetName);
   const names = pdsTargetNameCandidates([requireString(catalog.name, `${id} name`), ...sourceNames]);
   const targets = (await pdsPackages({ operation: 'resolve-target', names })).targets ?? [];
@@ -161,6 +163,7 @@ export async function pdsTarget(root: string, id: string) {
 
 export const DISCOVER_HELP = 'Usage: node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target TARGET [--write]';
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  requireWorkspace();
   const args = process.argv.slice(2), archive = flagValue(args, '--archive'), target = flagValue(args, '--target');
   if (args.includes('--help') || args.includes('-h')) process.stdout.write(`${DISCOVER_HELP}\n`);
   else {

@@ -12,6 +12,7 @@
  * across Kepler's orbit and the clocks' offset come to under 6 minutes for its field, the grid's rounding to at most 15),
  * and no two quarters are closer than 0.7 days, so a point is given to the quarter whose limits hold its time within one
  * step of the grid. */
+import { packagePath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
@@ -27,7 +28,7 @@ export function parseQuarters(value: unknown): Quarter[] {
   if (!quarters.length || !quarters.every((one, index) => one.quarter === index && one.firstCadenceMjd < one.lastCadenceMjd && (index === 0 || quarters[index - 1]!.lastCadenceMjd < one.firstCadenceMjd))) throw new TypeError('quarters.json does not list the quarters in order, each after the one before.');
   return quarters;
 }
-export const KEPLER_QUARTERS: readonly Quarter[] = parseQuarters(JSON.parse(readFileSync(resolve(import.meta.dirname, 'quarters.json'), 'utf8')) as unknown);
+export const KEPLER_QUARTERS: readonly Quarter[] = parseQuarters(JSON.parse(readFileSync(packagePath('src/archives/kepler/quarters.json'), 'utf8')) as unknown);
 
 /** A time on the Kepler mission's clock (a barycentric Julian date less 2454833) as a modified Julian date. */
 export const mjdOf = (keplerTime: number) => keplerTime + KEPLER_TIME_ZERO - 2400000.5;

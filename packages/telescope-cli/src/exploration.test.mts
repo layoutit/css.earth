@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { explorationAnswer, explorationOutcome, parseExplorationArguments } from './exploration.mts';
-import { canonicalTargetRequest, withRequestedTargetName } from '@cssearth/telescope';
+import { canonicalTargetRequest, withRequestedTargetName } from '@cssearth/telescope-core';
 import { associateTarget, SERVICES, targetQuery } from './vo/discovery.mts';
 
 test('a uniquely resolved entered name reaches archives without becoming a permanent alias', () => {
@@ -139,4 +139,16 @@ test('an archive-owned physical-grid profile makes a cube selectable as F16',()=
   const source={id:'density',target:'sun',telescope:'STEREO-A',mode:'SECCHI/COR1 tomography',kind:'cube' as const,archiveProductId:'archive-density',decoder:'fits-image' as const,files:[],identity:{NAXIS:3},familyEvidence,units:'cm^-3',meaning:'electron density',citation:'https://example.test/',limitations:[],qualified:false,receipt:'density.receipt'};
   const answer=explorationAnswer({target:'sun',family:'F16'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'sun',name:'Sun',aliases:[]}],targetAssociations:[],bodyMaps:[],sourceProducts:[source],qualifiedProducts:[]});
   assert.equal(answer.choices.length,1);assert.deepEqual(answer.choices[0]!.familyEvidence.families,['F16']);assert.equal(answer.unresolved.length,0);
+});
+
+
+test('one shared source-build prerequisite leaves Python-free archive results visible', () => {
+  const reason = 'Managed source-build prerequisite: The astroquery source builds need a working C compiler. xcode-select --install.';
+  const answer = explorationAnswer({ target: 'eris' }, { ledgers: [], capabilities: [], targetCatalogue: [{ id: 'eris', name: 'Eris', aliases: [] }], targetAssociations: [], bodyMaps: [],
+    vo: { records: [], services: ['ESO', 'ALMA', 'MAST'].map(service => ({ service, state: 'unavailable' as const, scope: 'Target query', reason })) },
+    archiveLeads: [{ service: 'Chandra', state: 'sampled', scope: 'Target query', reason: 'one record', instruments: [{ telescope: 'Chandra', instrument: 'ACIS', records: 1, sample: '123' }] }] });
+  assert.equal(answer.issues.filter(issue => issue.reason.includes('xcode-select --install')).length, 1);
+  assert.equal(answer.services.find(service => service.service === 'Chandra')?.state, 'sampled');
+  assert.equal(answer.services.filter(service => service.state === 'unavailable').length, 3);
+  assert.equal(answer.outcome.coverage, 'incomplete');
 });

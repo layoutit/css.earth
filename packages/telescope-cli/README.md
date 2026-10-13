@@ -1,20 +1,88 @@
-# @cssearth/telescope-cli
+# @cssearth/telescope
 
-The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. `package.json` exposes a `telescope` binary, not an HTTP API. The implementation is this package's `src/`; the library it builds on is [`@cssearth/telescope`](../telescope/README.md#library).
+The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. `package.json` exposes a `telescope` binary, not an HTTP API. The implementation is this package's `src/`; the library it builds on is [`@cssearth/telescope-core`](../telescope-core/README.md#library).
 
-The package supplies the command, not the observatory pipelines or catalogue. It needs a **css.earth science checkout** with the telescope API, source manifests and any required Python environments. Pass `--workspace PATH` or set `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically and runs the checkout's `packages/telescope-cli/src/cli.mts` with the same arguments, TTY state and exit code. Caches stay in the checkout; deliveries go to your `--out` directory. npm installation does not download a checkout, install Python or run pipelines. Updating the npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
+The installed CLI runs without a css.earth checkout. Async astronomy queries install their pinned Python environment on first use; npm installation itself does not run pipelines. The npm package includes the implementation, target catalogue and archive inputs.
+
+Paths are owned by the library:
+
+- **User root:** `CSSEARTH_TELESCOPE_HOME`, otherwise `~/Library/Caches/cssearth-telescope` on macOS, `$XDG_CACHE_HOME/cssearth-telescope` or `~/.cache/cssearth-telescope` on Linux, and `%LOCALAPPDATA%\cssearth-telescope` on Windows. Archive answers, MAST and Astroquery caches, toolchains, installed markers and scratch use this root, including in checkout mode. Exploration sessions default to its `telescope-runs/`; `--out` selects a delivery directory.
+- **Optional workspace:** `--workspace PATH` takes precedence over `CSSEARTH_WORKSPACE`. Source entries launched from inside their own css.earth checkout also admit it, as `pnpm telescope` does. Merely importing checkout sources from another directory does not. Site authoring, `new-object`, bake and developer reductions require it and fail with `this command needs a css.earth checkout: pass --workspace` when absent.
+- **Package data:** requirements locks, descriptors, notices, examples and modes resolve from the owning package. Programs and their preserved receipts use the selected workspace's archive program folders for both reading and authoring. Without a workspace, shipped programs are read-only and authoring is refused. Outside a workspace, the target loader reads `data/target-catalogue.json` in this package; `prepack` generates that array and the sphere bank from a prepared checkout. `build` compiles code only. Before `npm pack` or `npm publish` from this package, run `pnpm setup:prepared` and `pnpm prepare:inputs` from the checkout root. If the snapshot is missing, unknown targets still go to SIMBAD. Malformed snapshots are errors. Read-only archive ledgers and WWT catalogues use `data/src/sources/` outside a workspace.
+
+With a workspace, target names and site records still come from `src/objects` and `src/sources`. Compatible toolchains in an admitted checkout or the legacy home Astroquery cache can be read after exact pin validation. New installs and writable caches use the selected user root.
+
+Without a workspace, `new-object` (every drafter, `SPEC.json`, `--check`, `--bake` and `--skip-existing`) and physical volume preparation exit 2 before writing site records. The standalone alternative is `telescope export RESULT --output html --out DIRECTORY`.
 
 ## Setup
 
-Use Node 22.18+ (22.x) or Node 24+. Run `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install` once for the pinned archive client (it includes pinned Matplotlib), then `verify` in place of `install` to check it. PDS decoding uses the same script with `pds install`. Some reduction routes need instrument toolchains described in their own guides.
+Use Node 22.18+ (22.x) or Node 24+. No system Python or micromamba is required: installers obtain Python from conda-forge. The telescope uses `CSSEARTH_TELESCOPE_MICROMAMBA` first, then a micromamba on `PATH` only if it is 2.0.7 or later, otherwise downloads official micromamba release 2.9.0-0 over HTTPS into the user root and verifies the downloaded binary runs and reports the pinned version before installing it atomically. Download progress goes to stderr; interrupted transfers restart cleanly when the same command is retried with network access.
 
-Inside the repository, use `pnpm telescope --help`. To test the distributable:
+Managed Python toolchains need macOS or Linux; on Windows use WSL. Commands that need no Python remain available on Windows. Some instrument locks target a specific Unix platform; consult their descriptors before installing.
+
+Archive clients and PDS decoding install their pinned Python environments on demand. The astronomy environment builds orbitize and batman from source: a working C compiler and C standard-library headers are prerequisites. On macOS, install the Command Line Tools and SDK with `xcode-select --install`; on Debian/Ubuntu use `sudo apt install build-essential`; on Fedora use `sudo dnf install gcc`. The installer checks these before creating the environment. Python-free archives remain searchable if this prerequisite is missing. Install explicitly with `telescope toolchain install astroquery`, and check it with `telescope toolchain verify astroquery`. Some reduction routes need instrument toolchains described in their own guides; native compilers, Julia, IDL or Rosetta requirements still follow those descriptors.
+
+Install the command without a checkout:
 
 ```sh
-pnpm --filter @cssearth/telescope-cli pack --pack-destination .
-npm install -g ./cssearth-telescope-cli-0.2.0.tgz
-export CSSEARTH_WORKSPACE=/path/to/css.earth
+npm i -g @cssearth/telescope
+telescope --help
 ```
+
+For site development, use `telescope --workspace /path/to/css.earth …` with the checkout's installed dependencies. This uses that checkout's data and scripts for `new-object` and bake. Inside the checkout, `pnpm telescope …` runs the source implementation directly.
+
+## Agent skill
+
+The npm package ships one [telescope skill](skills/telescope/SKILL.md). Choose the host you use after installing the CLI; each line below is an independent host choice.
+
+```sh
+npm install -g @cssearth/telescope
+telescope --help
+telescope skill install --provider claude
+telescope skill install --provider codex
+telescope skill install --provider agents
+telescope skill install --provider grok
+telescope skill install --provider agy
+telescope skill install --provider antigravity
+telescope skill install --provider cursor
+telescope skill install --provider opencode
+```
+
+For another host or a project, use `telescope skill install --dest /absolute/path/to/skills`. Add `--copy` for independent files, including where Windows directory symlinks are unavailable. The default link points into the installed npm package: keep that installation in place. Use a persistent install before linking, or `npx @cssearth/telescope skill install --provider codex --copy` for a copy. Add `--json` for machine-readable results.
+
+Destinations:
+
+| Host | Skills directory |
+| --- | --- |
+| Claude | `$CLAUDE_CONFIG_DIR/skills`, otherwise `~/.claude/skills` |
+| Codex | `$CODEX_HOME/skills`, otherwise `~/.codex/skills` |
+| Agents, Grok | `~/.agents/skills` |
+| Agy | `~/.gemini/antigravity-cli/skills` |
+| Antigravity | `~/.gemini/config/skills` |
+| Cursor | `~/.cursor/skills` |
+| OpenCode | `$XDG_CONFIG_HOME/opencode/skills`, otherwise `~/.config/opencode/skills` |
+
+A provider or destination is required. Repeated installation is a no-op. Unrelated files, directories and links are refused. Copies carry `.telescope-install.json`, recording ownership and exact file bytes and directory membership. To switch modes or update an unchanged copy, uninstall first. Changed copies remain intact. `telescope skill uninstall --provider NAME` (or `--dest DIRECTORY`) removes only this package's link or an unchanged owned copy; it leaves other skills and host configuration alone. Restart the host to rediscover installed skills.
+
+### Native plugin marketplaces
+
+The repository's marketplaces list `@cssearth/telescope` as an npm plugin source. These commands require a published npm release and the marketplace files on the selected repository branch. From a local checkout, replace `layoutit/css.earth` with its absolute root path.
+
+```sh
+claude plugin marketplace add layoutit/css.earth
+claude plugin install telescope@cssearth-telescope
+codex plugin marketplace add layoutit/css.earth
+codex plugin add telescope@cssearth-telescope
+droid plugin marketplace add layoutit/css.earth
+droid plugin marketplace list
+droid plugin install telescope@css.earth --scope user
+```
+
+Choose only your host's pair of commands. Factory derives the registered marketplace name from the source; use the name printed by `marketplace list` in `telescope@NAME` (a local checkout's directory name can differ). Claude and Codex use the manifest's `cssearth-telescope` name. The package keeps skills at its root and ships all three host manifests, including Codex's compatibility manifest. It needs no lifecycle script to build the skill.
+
+Schema checks were compared with current [Claude plugin](https://code.claude.com/docs/en/plugins-reference) and [marketplace](https://code.claude.com/docs/en/plugins/marketplace-reference), [OpenAI plugin](https://developers.openai.com/plugins/build/plugins), and [Factory plugin](https://docs.factory.com/harness/plugins) documentation. All document npm plugin sources. Claude and Codex accept root-relative skill paths; Factory discovers `skills/<name>/SKILL.md` by layout and does not read the manifest's component fields. Native plugin installation and standalone skill installation are separate; use one route per host.
+
+Pi reads `pi.skills` from the npm metadata: `pi install npm:@cssearth/telescope`. Other supported hosts can discover the packaged folder through `npx skills add https://github.com/layoutit/css.earth/tree/main/packages/telescope-cli/skills/telescope`; this depends on the current skills CLI and the folder being available on that branch.
 
 ## Use
 
@@ -24,9 +92,9 @@ telescope explore eris --kind cube --wavelength 2.2,2.4 --out runs/eris
 telescope explore "Sgr A*" --kind cube --instrument ERIS
 ```
 
-A name the catalogue does not ship is resolved by SIMBAD, and records are selected by SIMBAD's identifiers and position error circle. `--icrs-circle` is a cutout: it cuts the product and replaces that search circle. Use `--instrument NAME` and `--from ISO --to ISO` to narrow live Keck, Gemini and Chandra queries.
+A name the catalogue does not ship is resolved by SIMBAD, and records are selected by SIMBAD's identifiers and position error circle. With a TARGET, `--icrs-circle` is a cutout: it cuts the product and replaces that search circle. `telescope explore --icrs-circle 83.82,-5.39,0.1` searches a field without a target name; name-only archives are reported as not searched, with incomplete coverage. Use `--instrument NAME` and `--from ISO --to ISO` to narrow live Keck, Gemini and Chandra queries.
 
-In a terminal, `explore` shows the observations, unknown metadata, unsupported records and provider limits, then asks which observation to retrieve. Press Enter to keep the exploration without retrieving. With `--json` or redirected input or output it never prompts. Without `--out` it creates a run under `./telescope-runs/`. The saved `outcome` has a `selection` (`available` or `none`) and a `coverage` (`target-unresolved`, `incomplete` or `bounded`). Even `bounded` describes only the configured searches, not every observatory. An empty search is not proof that no observations exist.
+In a terminal, `explore` shows the observations, unknown metadata, unsupported records and provider limits, then asks which observation to retrieve. Reductions that write workspace programs or ledgers are listed as unsupported without an admitted workspace, with the reason `needs a css.earth checkout: pass --workspace`; they remain selectable with a workspace. Press Enter to keep the exploration without retrieving. With `--json` or redirected input or output it never prompts. Without `--out` it creates a run under the user root's `telescope-runs/`. The saved `outcome` has a `selection` (`available` or `none`) and a `coverage` (`target-unresolved`, `incomplete` or `bounded`). Even `bounded` describes only the configured searches, not every observatory. An empty search is not proof that no observations exist.
 
 `explore` asks every archive at once and reports the ledgers that index the target, the ESPaDOnS polarised spectra at CADC among them; an archive that drops the connection is asked again, twice. Keck and Gemini are asked by the target's place on the sky as well as by name. A question asked in the last day is answered from its saved answer; `--fresh` asks every archive again.
 
@@ -60,6 +128,8 @@ The number binds to the recorded observation identity in that snapshot. `get` re
 
 ### Magnetic maps of stars from archived spectra
 
+The following source scripts and authoring examples require a development checkout. Toolchain installations and reduction outputs use the user root; programs are written to the admitted workspace.
+
 A star's magnetic field can be mapped from a series of polarised spectra taken through one rotation. The tools of
 `src/archives/espadons/` do that for the spectra of CFHT's ESPaDOnS spectropolarimeter in the Canadian Astronomy Data Centre,
 with the codes the method's authors publish (Korg, LSDpy, SpecpolFlow and ZDIpy), which `toolchain.mts install` installs once.
@@ -76,7 +146,7 @@ node packages/telescope-cli/src/archives/espadons/reduce.mts hd-189733-2007-06
 `archive.mts` writes a program beside the code, with each spectrum pinned by its size. Before `reduce.mts` can run, the
 program needs three blocks a person fills from catalogues and papers, each value with where it is printed: `atmosphere`
 (temperature, gravity), `radialVelocity`, and `star` (rotation period, tilt, projected rotation speed, the highest harmonic
-degree). `reduce.mts` writes a receipt, the map as a table and a picture under ignored `output/espadons/`; git holds the program, not the result.
+degree). `reduce.mts` writes a receipt, the map as a table and a picture under `output/espadons/` in the user root; git holds the program, not the result.
 `telescope new-object --from-spectra STAR --out SPEC.json` then drafts the star's reduced maps as datasets of its page.
 
 ### A star's rotation and brightness map from the TESS, K2 and Kepler missions' light curves
@@ -96,7 +166,7 @@ node packages/telescope-cli/src/archives/tess/reduce.mts au-mic      # or --all:
 ```
 
 `reduce.mts` asks MAST for the star's light curves, has the method judge them, and writes a receipt, each light curve and,
-when the rotation is accepted, one map a sector, campaign or quarter as a table under ignored `output/tess/`. A TESS
+when the rotation is accepted, one map a sector, campaign or quarter as a table under `output/tess/` in the user root. A TESS
 target whose pixels the TESS Input Catalog gives too much of other stars' light (a contamination ratio of 0.2 or more) is
 not read.
 `telescope new-object --from-pixels all --out SPEC.json` then drafts every reduced star's maps as datasets of its page.
@@ -127,8 +197,11 @@ no Gaia source: the one Cepheid of that table within an arcsecond of its place, 
 | --- | --- | --- |
 | Qualified native delivery | image, spectrum, band image, aperture spectrum or feature map when `outputs` offers it | Explicit selectors reported by `outputs` |
 | Exported 2D measurement | projected body map | Pinned navigation geometry |
-| Projected body map | standalone interactive sphere | Complete embeddable standard body package |
+| Exported image or spectrum | standalone HTML with its receipt | None |
+| Projected body map | standalone fixed sphere | Complete embeddable standard body package |
 | Existing prepared point field, density volume or volume dataset bank | portable renderer handoff | None |
+| Existing prepared point field | standalone HTML using the site SVG point layer | None |
+| Prepared density volume without sky or impostor banks | standalone HTML using the site slab renderer | None |
 
 These are supported transitions, not claims that every product supports every row. Run `telescope outputs ARTIFACT` to see what an artifact actually supports. Export never turns an unresolved or refused request into a fulfilled one.
 
@@ -161,9 +234,13 @@ In a terminal, `outputs` also asks which available operation to run. Family oper
 - `aperture-spectrum` is the mean over a rectangle `X0,Y0,X1,Y1` (exclusive upper bounds), minus a disjoint `--background` box or `--background none`. It is not total source flux.
 - `feature-map` integrates the residual above a linear continuum from two `--continuum` bands, in the source unit × µm. It makes no chemical-identification or detection claim.
 
+HTML embeds its images, styles and receipt and opens offline without scripts. Spectrum charts retain masked gaps and supplied uncertainties. Sphere HTML shows the prepared fixed view; the native CSS camera is omitted because it requires drawing variables. Point HTML uses the site SVG point layer in a prepared fixed view. Limits: composite volumes with sky banks, impostor banks or dataset banks are refused; these HTML viewers are planned for v2.
+
 Every contributing sample must be valid. Aggregate uncertainties are omitted unless you pass `--uncertainty independent`. Select ambiguous PDS arrays with `--structure NAME` and `--hdu 0`. [Real Eris examples](../../docs/virtual-telescopes.md#example-exports-eris-jwst-nirspec-ifu).
 
 ```sh
+telescope export MEASUREMENT/output.product.json --output html --out VIEWER
+telescope export OBJECT_JSON --output html --out VOLUME_VIEWER
 telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP
 telescope export MAP/map.fits.product.json --output sphere --out SPHERE
 telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars
@@ -173,15 +250,18 @@ telescope export src/objects/lmc-volume/object.json --output volume-dataset-bank
 
 The navigation file pins SPICE kernels. The sphere is a standalone HTML file with no JavaScript. See the [navigation contract](../../docs/virtual-telescopes.md#projection-and-sphere). Physical handoffs copy prepared renderer files and credits; restore missing inputs with `setup:prepared --object=ID`.
 
+The published declarations reference Node types. TypeScript consumers install `@types/node` (an optional peer); the JavaScript CLI does not require it at runtime.
+
 ## Independent output checks
 
-The [output oracle](src/delivery/output-oracle.mts) reads the pinned FITS data independently of the production reducer, using Specutils 2.4.0 and Photutils 3.0.0 as optional test dependencies:
+These optional checks run from a development checkout with its dependencies installed; they are not installed CLI commands. The [output oracle](src/delivery/output-oracle.mts) reads the pinned FITS data independently of the production reducer, using Specutils 2.4.0 and Photutils 3.0.0 as optional test dependencies:
 
 ```sh
-output/toolchains/astroquery/env/bin/python -m venv --system-site-packages work/telescope-oracles/env
-work/telescope-oracles/env/bin/python -m pip install -c packages/telescope/toolchains/requirements.lock -r packages/telescope/toolchains/oracle-requirements.txt
-node packages/telescope-cli/src/delivery/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
-CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test packages/telescope-cli/src/delivery/cube-outputs.test.mts
+export CSSEARTH_TELESCOPE_HOME="$PWD/output/telescope-oracle-user"
+node --input-type=module -e 'import { astroqueryToolchain } from "@cssearth/telescope-core/node"; const { execFileSync } = await import("node:child_process"); const { python } = await astroqueryToolchain(); execFileSync(python, ["-m", "venv", "--system-site-packages", "output/telescope-oracles/env"], { stdio: "inherit" });'
+output/telescope-oracles/env/bin/python -m pip install -c packages/telescope-core/toolchains/requirements.lock -r packages/telescope-core/toolchains/oracle-requirements.txt
+node packages/telescope-cli/src/delivery/output-oracle.mts figures/eris-band output/telescope-oracles/env/bin/python output/oracles/eris-band
+CSSEARTH_ORACLE_PYTHON="$PWD/output/telescope-oracles/env/bin/python" node --import ./packages/core/src/node/register-vite-suffix.mts --test packages/telescope-cli/src/delivery/cube-outputs.test.mts
 ```
 
 It fails above 1e-10 of the reference peak. It verifies numerical extraction only, not archive calibration, covariance, aperture corrections or detection significance.
@@ -191,6 +271,19 @@ Sphere silhouette framing uses `@cssearth/engine`; prepared loader and retained 
 Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/dependencies/preparation-without-renderer.mts):
 `src/delivery/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
-The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
+The published JavaScript and declarations bundle these renderer consumers; the renderer is a checkout development dependency. F16 validation uses objects contracts.
 
-Sphere export imports the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.
+Sphere export imports the built `@cssearth/telescope/sphere/lane` entry from `dist`. Without a workspace, it reads the compressed sphere bank shipped at build time, including shared geometry, raster layouts, styles and physical frames. With a workspace, it loads that checkout's generated solar geometry. The lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope build` before exporting again.
+
+## Maintainer packaging verification
+
+The unit lane checks bundled dependency namespaces, runtime dependency declarations, data exclusions and public export structure offline. The real consumer install is a separate integration gate, `verify:pack`; it runs `npm pack` with the normal build/prepack lifecycle, checks the 15 MB tarball budget and contents, installs the tarball, compiles public imports, and runs help plus FITS image/HTML exports outside the checkout. Dependency installation may need registry access. It does not run during unit tests or recursively from `prepack`.
+
+From a clean checkout, prepare the inputs and run the gate:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm setup:prepared
+pnpm prepare:inputs
+pnpm --filter @cssearth/telescope verify:pack
+```

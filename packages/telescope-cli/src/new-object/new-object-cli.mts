@@ -31,7 +31,7 @@
  * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape dataset and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
  * packages/telescope-cli/src/new-object/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { checkoutProjectRoot } from '../paths.mts';
 import { realpathSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

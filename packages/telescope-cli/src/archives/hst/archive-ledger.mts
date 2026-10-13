@@ -25,11 +25,12 @@
  * altogether partway through a pass. A count or a listing that will not answer stops the pass, because the ledger would be
  * wrong without it; a cone search that will not answer is recorded as unanswered and the pass goes on, because which objects
  * were asked and which were not is itself the honest result. */
+import { programStorePath, packagePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastRequest, runKey } from '@cssearth/telescope/node';
-import { evidenceFor } from '@cssearth/telescope';
+import { mastRequest, runKey } from '@cssearth/telescope-core/node';
+import { evidenceFor } from '@cssearth/telescope-core';
 import { parseProductRecord, type ProductRecord } from '@cssearth/objects';
 import { HST_PROGRAMS, parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
@@ -230,7 +231,7 @@ export function archiveFinalQualification(program: ArchiveFinalProgram, record: 
 
 /** Every archive-final program in this repository, by the configuration it pins, with the ones a record qualifies. */
 export async function repositoryArchiveFinal(repository = REPOSITORY) {
-  const directory = resolve(repository, HST_PROGRAMS.path), files = (await readdir(directory).catch(() => [])).sort();
+  const directory = programStorePath(HST_PROGRAMS.path), files = (await readdir(directory).catch(() => [])).sort();
   const state = new Map<string, { programs: Set<string>; qualified: Set<string> }>(), problems: string[] = [];
   for (const file of files.filter(name => name.endsWith('.archive-final.json'))) {
     const id = file.slice(0, -'.archive-final.json'.length);
@@ -254,7 +255,7 @@ export async function repositoryArchiveFinal(repository = REPOSITORY) {
  * could not be accepted. A program counts as re-calibrated in a configuration only when a receipt names one of its observations
  * in that configuration and the MAST product the program pins for it, at the size it compared. */
 export async function repositoryReceipts(repository = REPOSITORY) {
-  const directory = resolve(repository, HST_PROGRAMS.path), files = (await readdir(directory)).sort();
+  const directory = programStorePath(HST_PROGRAMS.path), files = (await readdir(directory)).sort();
   const state = new Map<string, { programs: Set<string>; checked: Set<string> }>(), problems: string[] = [];
   // A pinned program is `<id>.json`. Everything else here carries a second name segment (a reproduction receipt, a line
   // stack, the Horizons responses a line stack pins) and is not a program.

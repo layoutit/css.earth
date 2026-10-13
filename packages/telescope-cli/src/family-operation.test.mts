@@ -1,10 +1,11 @@
+import './test-support/index.mts';
 import assert from'node:assert/strict';
 import { test as nodeTest } from 'node:test';
 import{sourceTest}from'@cssearth/objects/node/source-test';const test=sourceTest();
 import{copyFile,mkdtemp,readFile,readdir,rm,stat,writeFile}from'node:fs/promises';
 import{tmpdir}from'node:os';
 import{dirname,relative,resolve}from'node:path';
-import { readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import {  readProductRecord, requireWorkspace  } from '@cssearth/telescope-core/node';
 import{member}from'./families/common.mts';
 import{describeFitsTable}from'./families/f08-table.mts';
 import{describeStandaloneSpectrum}from'./families/f03-spectrum.mts';
@@ -22,7 +23,7 @@ import{executeFamilyOperation,executableFamilyOperations,verifiedExecutableFamil
 import{listArtifactOutputs}from'./delivery/artifact-outputs.mts';
 import { parseProductDescriptor } from './products/product-descriptor.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-const root=WORKSPACE;
+const root=requireWorkspace();
 const temporary=async()=>mkdtemp(resolve(tmpdir(),'family-operation-'));
 async function save(root:string,value:unknown){const path=resolve(root,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return path;}
 

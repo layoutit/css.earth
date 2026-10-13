@@ -1,6 +1,5 @@
 import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import type { SimplifierFlags } from 'meshoptimizer/simplifier';
-import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import type { PreparedTriangle, SourceMesh, SourceScalar } from './contracts.ts';
 import { removeOppositeFacePairs } from './mesh-face-pairs.ts';
 import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.ts';
@@ -44,6 +43,7 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
       !Number.isInteger(profile.faceBudget) || ceiling > profile.faceBudget || profile.faceBudget > 2000 ||
       !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0) ||
       (['regularize', 'prune'] as const).some(key => profile.simplification[key] !== undefined && typeof profile.simplification[key] !== 'boolean')) throw new TypeError('Invalid source mesh simplification.');
+  const { MeshoptSimplifier } = await import('meshoptimizer/simplifier');
   await MeshoptSimplifier.ready;
   const preserveSource = profile.simplification.method === 'source-meshoptimizer';
   const open = profile.sourceTopology === 'open';
@@ -272,6 +272,7 @@ export async function simplifyRadialTerrain(sample: RadiusSampler, profile: Radi
   }
   const dense = sampleRadialTriangles(sample, profile.latitudeSegments, profile.longitudeSegments, scale, true);
   if (dense.length < targetFaces) throw new TypeError('Radial source mesh is smaller than its simplification target.');
+  const { MeshoptSimplifier } = await import('meshoptimizer/simplifier');
   await MeshoptSimplifier.ready;
   const sourceVertices = dense.flatMap(face => face.vertices);
   // Exact-position welding removes face duplication and joins the longitude

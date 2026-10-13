@@ -6,7 +6,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import type { Archive } from '../archives/archives.mts';
 import { checkDayside, depthRecord, hostAtmosphere, installRockEclipseDataset, parseRockEclipseEntries, restoreRockInputs, rockInputs, rockRecipe, throughputRelease } from './rock-eclipse-dataset.mts';
 
@@ -41,7 +41,7 @@ test('an entry holds the measured depth, the band, the star\'s model and the pap
 
 test('the filter curve and the model spectrum come from the SVO once, and the spectrum must be the grid point nearest the star', async () => {
   // LHS 1140's package cites 3,096 K and log g 5.04: the 3100 K, log g 5.0 grid point, SVO file 172.
-  const sourceRoot = await mkdtemp(resolve(tmpdir(), 'rock-inputs-')), entry = entryOf({ star: { teffK: 3100, logg: 5.0, fid: 172 } }), host = { id: 'lhs-1140', ...await hostAtmosphere(WORKSPACE, 'lhs-1140') };
+  const sourceRoot = await mkdtemp(resolve(tmpdir(), 'rock-inputs-')), entry = entryOf({ star: { teffK: 3100, logg: 5.0, fid: 172 } }), host = { id: 'lhs-1140', ...await hostAtmosphere(requireWorkspace(), 'lhs-1140') };
   try {
     assert.deepEqual([host.teffK, host.logg], [3096, 5.04]);
     const asked: string[] = [];
@@ -65,7 +65,7 @@ test('the filter curve and the model spectrum come from the SVO once, and the sp
 });
 
 test('the dataset says it is a model set by one measurement, draws the rock the reader found and takes the default from a neutral shape', async () => {
-  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
   const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>, entry = entryOf();
   assert.equal(after('source/content/object.json').datasets.defaultDataset, 'shape', 'TRAPPIST-1f opens on its neutral shape');
   const installed = installRockEclipseDataset(files, id, 'TRAPPIST-1f', 'trappist-1', entry, { substellarK: 1287.4, substellarRangeK: [1180.2, 1391.6] });
@@ -115,7 +115,7 @@ test('a depth summed over a spectrograph takes a released throughput table as it
   await assert.rejects(throughputRelease(zenodo(record('cc-by-nd-4.0')), 'trappist-1f, dataset temperature', table), /a throughput table is used only under a license known to allow reuse \(field throughput\.record\)/u);
   await assert.rejects(throughputRelease(zenodo(record('cc-by-4.0')), 'trappist-1f, dataset temperature', { ...table, file: 'other.zip' }), /lists no file other\.zip \(field throughput\.file\)/u);
   // Installed, the table is the package's own pinned copy, restored as a member of the release's ZIP.
-  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
   const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
   assert.throws(() => installRockEclipseDataset(files, id, 'TRAPPIST-1f', 'trappist-1', entry, { substellarK: 800, substellarRangeK: [780, 820] }), /a throughput table is installed with its checked release/u);
   installRockEclipseDataset(files, id, 'TRAPPIST-1f', 'trappist-1', entry, { substellarK: 800, substellarRangeK: [780, 820] }, release);

@@ -1,4 +1,6 @@
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
+import { beforeEach } from 'node:test';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createServer } from 'node:http';
@@ -6,9 +8,9 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, readFile, rm, appendFile, readdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '@cssearth/telescope/node';
+import { astroquery, USER_ROOT } from '@cssearth/telescope-core/node';
 import { saveSession, getSession, type SessionServices, saveExploration, sessionRequest } from '../session.mts';
-import { loadQualifiedObservations } from '../qualification/qualified-observations.mts';
+import { loadQualifiedObservations, qualificationDirectory } from '../qualification/qualified-observations.mts';
 import { delivery, listOutputs, exportOutput } from '../delivery/outputs.mts';
 import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
@@ -19,6 +21,9 @@ import { parseSnapshot, jsonValue } from '@cssearth/objects';
 import { planAccess } from './access.mts';
 import { qualifyVoProduct } from './qualify.mts';
 import type { QueryInputs } from '../observation-query/query-contract.mts';
+
+// Each scenario starts without the preceding scenario's acquired or qualified products.
+beforeEach(() => rm(resolve(USER_ROOT, 'output/telescopes'), { recursive: true, force: true }));
 
 test('confirmed direct FITS table reaches F08 export through saved exploration and get', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-table-session-'));
@@ -50,8 +55,8 @@ test('confirmed direct FITS table reaches F08 export through saved exploration a
     assert.equal(data.record.schema, 'cssearth-telescope-delivery@3');
     assert.deepEqual(data.record.facts, { target: target.id, verified: true, kind: 'table', result: 'telescope-product' });
     const outputs = await listArtifactOutputs(result.resultPath);
-    assert.ok(outputs.familyOperations?.some(operation => operation.id === 'table-export'));
-    assert.equal(outputs.outputs.length, 0);
+    assert.equal(outputs.familyOperations?.find(operation => operation.id === 'table-export')?.available, true);
+    assert.deepEqual(outputs.outputs, [], 'Table deliveries offer family operations, with no HTML viewer.');
     const descriptor = outputs.source;
     assert.equal(typeof descriptor, 'string');
     const described = JSON.parse(await readFile(descriptor as string, 'utf8'));
@@ -60,6 +65,10 @@ test('confirmed direct FITS table reaches F08 export through saved exploration a
     assert.deepEqual(described.members, [{ id: 'science', path: 'science.fits', role: 'science', mediaType: 'application/fits' }]);
     const exported = await executeFamilyOperation(descriptor as string, { operationId: 'table-export' }, resolve(root, 'table-export'));
     assert.match(await readFile(exported.product, 'utf8'), /FLUX\n1\.5\n2\.5\n/u);
+    const exportedOutputs = await listArtifactOutputs(exported.record);
+    assert.equal(exportedOutputs.artifact, 'telescope-family-operation');
+    assert.deepEqual(exportedOutputs.outputs, [], 'Exported tables have no HTML viewer.');
+    assert.equal(exportedOutputs.terminal, true);
     const qualified = await loadQualifiedObservations(root, target.id);
     assert.equal(qualified.length, 1);
     assert.equal(qualified[0]!.facts.angularResolutionArcsec, undefined);
@@ -113,7 +122,7 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     const replay = await getSession(root, directory, 1, () => {}, api, { offline: true });
     assert.equal(replay.replay, 'pinned-local-artifact');
     await assert.rejects(getSession(root, directory, 1, () => {}, api), /no longer available/u);
-    await appendFile(resolve(root, 'output/telescopes/vo/acquired', plan.products[0]!.key, 'science.fits'), 'changed');
+    await appendFile(resolve(USER_ROOT, 'output/telescopes/vo/acquired', plan.products[0]!.key, 'science.fits'), 'changed');
     await assert.rejects(qualifyVoProduct(root, plan.products[0]!, { allowedPrivateHosts: ['127.0.0.1'] }), /stale|changed/u);
     const metadata = data.files.find(f => f.path.endsWith('.xml'))!;
     await appendFile(resolve(data.directory, metadata.path), '\nchanged');
@@ -175,7 +184,7 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     assert.notEqual(firstScience.path, secondScience.path);
     // Deliveries name files by path and size (PR #531); the two copies are compared byte for byte.
     assert.ok((await readFile(resolve(firstDelivery.directory, firstScience.path))).equals(await readFile(resolve(secondDelivery.directory, secondScience.path))));
-    const qualifications = await readdir(resolve(root, 'output/telescopes', target.id, 'qualifications'));
+    const qualifications = await readdir(qualificationDirectory(target.id), { recursive: true });
     assert.equal(qualifications.filter(name => name.endsWith('.json')).length, 2);
     assert.ok(requests.some(url => url.includes('CIRCLE=88.792938'))); assert.equal(requests.length, 2);
     const replay = await getSession(root, firstDirectory, 1, () => {}, api);

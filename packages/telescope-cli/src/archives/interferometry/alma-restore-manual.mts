@@ -29,6 +29,7 @@
  * Europa is an ephemeris field: it moves several arcseconds across one execution, far more than the 0.77 arcsecond disc, so
  * the image must follow the ephemeris importasdm attached. The run checks for that ephemeris and images with
  * `phasecenter='TRACKFIELD'`; a field that turns out not to carry one stops the route rather than being imaged smeared. */
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
@@ -40,8 +41,8 @@ import {
 } from './alma-manual-calibration.mts';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 
 /** The imaging a manual delivery performed, read from the two scripts it ships instead of a command log. Both set their
@@ -376,7 +377,7 @@ export async function recordArchiveComparison(image: string, archive: string, co
 /** The field imaged when no --target is given. Which body that is sits in data beside this code (`manual-restore-focus.json`),
  * because the archive code names no body. */
 export async function manualRestoreTarget() {
-  const record = requireRecord(JSON.parse(await readFile(resolve(import.meta.dirname, 'manual-restore-focus.json'), 'utf8')) as unknown, 'manual-restore-focus.json');
+  const record = requireRecord(JSON.parse(await readFile(packagePath('src/archives/interferometry/manual-restore-focus.json'), 'utf8')) as unknown, 'manual-restore-focus.json');
   if (record.schema !== 'cssearth-alma-manual-restore-focus@1') throw new TypeError('manual-restore-focus.json is not an ALMA manual restore focus.');
   return requireString(record.target, 'target');
 }

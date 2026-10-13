@@ -24,18 +24,19 @@
  * Memory: the pipeline is a separate executable, so the ceiling is applied to the whole process group, not to Python alone.
  * The group is sampled every second and the pipeline is stopped if it passes the ceiling (2 GiB by default).
  *
- * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope/src/product-record.ts):
+ * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope-core/src/product-record.ts):
  * the observation's pinned inputs at their sizes, the CRDS context and the reference files that chose the calibration, and the
  * pipeline and CRDS versions the run reported.
  * Its evidence list is empty. What a product was checked against is added by the stage that checked it: compare.mts adds the
  * agreement with the archive's own product. */
+import { programStorePath } from '../../paths.mts';
 import { cp, mkdir, readFile, readdir, rm } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastFile, type MastFile, freeMemoryPercent, toolchainPython, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { mastFile, type MastFile, freeMemoryPercent, toolchainPython, writeProductRecord } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { parseHstProgram, PROGRAMS, suffixOf, type HstObservation, type HstProgram } from './archive.mts';
 import { readHstFileHdus } from './product-file.mts';
@@ -120,7 +121,7 @@ print(json.dumps({'seconds': round(time.time() - start, 1), 'peakRssBytes': peak
 `;
 
 export async function readHstProgram(id: string) {
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`);
   return { path, program: parseHstProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 

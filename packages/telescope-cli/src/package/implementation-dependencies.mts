@@ -1,0 +1,108 @@
+/** The workspace packages a bundled lane compiles from their TypeScript sources rather than their builds. */
+import { resolve } from 'node:path';
+import type { Plugin } from 'esbuild';
+import { pathToFileURL } from 'node:url';
+
+
+/** Workspace entries a bundled lane compiles from their TypeScript sources, so the lane runs the checkout's code rather than
+ * a build. Other packages stay external. */
+const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
+  '@cssearth/fits': 'packages/fits/src/index.ts',
+  '@cssearth/catalog': 'packages/catalog/src/index.ts',
+  '@cssearth/fits/node': 'packages/fits/src/node/index.ts',
+  '@cssearth/objects': 'packages/objects/src/index.ts',
+  '@cssearth/objects/sources': 'packages/objects/src/sources/index.ts',
+  '@cssearth/objects/provenance': 'packages/objects/src/provenance/index.ts',
+  '@cssearth/objects/node': 'packages/objects/src/node/index.ts',
+  '@cssearth/spice': 'packages/spice/src/index.ts',
+  '@cssearth/spice/node': 'packages/spice/src/node/index.ts',
+  '@cssearth/telescope-core': 'packages/telescope-core/src/index.ts',
+  '@cssearth/telescope-core/node': 'packages/telescope-core/src/node/index.ts',
+  '@cssearth/bake/photometry': 'packages/bake/src/photometry/index.ts',
+  '@cssearth/bake/raster': 'packages/bake/src/raster/index.ts',
+  '@cssearth/bake/scene': 'packages/bake/src/scene/index.ts',
+  '@cssearth/bake/presentation': 'packages/bake/src/presentation/index.ts',
+  '@cssearth/bake/nebula': 'packages/bake/src/nebula/index.ts',
+  '@cssearth/bake/world-context': 'packages/bake/src/world-context/index.ts',
+  '@cssearth/bake/cluster-catalog': 'packages/bake/src/cluster-catalog/index.ts',
+  '@cssearth/bake/galaxy-catalog': 'packages/bake/src/galaxy-catalog/index.ts',
+  '@cssearth/bake/environment': 'packages/bake/src/environment/index.ts',
+  '@cssearth/bake/image-layers': 'packages/bake/src/image-layers/index.ts',
+  '@cssearth/bake/density': 'packages/bake/src/density/index.ts',
+  '@cssearth/bake/sky': 'packages/bake/src/sky/index.ts',
+  '@cssearth/bake/shell': 'packages/bake/src/shell/index.ts',
+  '@cssearth/bake/stars': 'packages/bake/src/stars/index.ts',
+  '@cssearth/bake/volume-leaves': 'packages/bake/src/volume-leaves/index.ts',
+  '@cssearth/bake/objects/color': 'packages/bake/src/objects/color/index.ts',
+  '@cssearth/bake/objects/cameras': 'packages/bake/src/objects/cameras/index.ts',
+  '@cssearth/bake/objects/geometry': 'packages/bake/src/objects/geometry/index.ts',
+  '@cssearth/bake/objects/raster': 'packages/bake/src/objects/raster/index.ts',
+  '@cssearth/bake/objects/scene': 'packages/bake/src/objects/scene/index.ts',
+  '@cssearth/bake/objects/sources': 'packages/bake/src/objects/sources/index.ts',
+  '@cssearth/bake/objects/charts': 'packages/bake/src/objects/charts/index.ts',
+  '@cssearth/bake/objects/content': 'packages/bake/src/objects/content/index.ts',
+  '@cssearth/bake/objects/surface-features': 'packages/bake/src/objects/surface-features/index.ts',
+  '@cssearth/bake/objects/layers/observation': 'packages/bake/src/objects/layers/observation/index.ts',
+  '@cssearth/bake/objects/layers/shape-model': 'packages/bake/src/objects/layers/shape-model/index.ts',
+  '@cssearth/bake/objects/layers/cutaway': 'packages/bake/src/objects/layers/cutaway/index.ts',
+  '@cssearth/bake/objects/layers/giant': 'packages/bake/src/objects/layers/giant/index.ts',
+  '@cssearth/bake/objects/layers/material-composition': 'packages/bake/src/objects/layers/material-composition/index.ts',
+  '@cssearth/bake/objects/layers/observed-surfaces': 'packages/bake/src/objects/layers/observed-surfaces/index.ts',
+  '@cssearth/bake/objects/layers/paged-ellipsoid': 'packages/bake/src/objects/layers/paged-ellipsoid/index.ts',
+  '@cssearth/bake/objects/layers/terrestrial': 'packages/bake/src/objects/layers/terrestrial/index.ts',
+  '@cssearth/bake/objects/stellar': 'packages/bake/src/objects/stellar/index.ts',
+  '@cssearth/bake/objects/candidates': 'packages/bake/src/objects/candidates/index.ts',
+  '@cssearth/bake/objects/acquisition': 'packages/bake/src/objects/acquisition/index.ts',
+  '@cssearth/bake/objects/sphere-survey': 'packages/bake/src/objects/sphere-survey/index.ts',
+  '@cssearth/bake/objects/default-view': 'packages/bake/src/objects/default-view/index.ts',
+  '@cssearth/bake/objects/celestial': 'packages/bake/src/objects/celestial/index.ts',
+  '@cssearth/bake/objects/host-adapters': 'packages/bake/src/objects/host-adapters/index.ts',
+  '@cssearth/bake/objects/interpretation': 'packages/bake/src/objects/interpretation/index.ts',
+  '@cssearth/bake/runtime-source': 'packages/bake/src/runtime-source/index.ts',
+  '@cssearth/bake/prepared-presentation': 'packages/bake/src/prepared-presentation/index.ts',
+  '@cssearth/bake/delivery': 'packages/bake/src/delivery/index.ts',
+  '@cssearth/bake/sources': 'packages/bake/src/sources/index.ts',
+  '@cssearth/bake/contract': 'packages/bake/src/contract/index.ts',
+  '@cssearth/bake/astronomy': 'packages/bake/src/astronomy/index.ts',
+  '@cssearth/bake/navigation': 'packages/bake/src/navigation/index.ts',
+  '@cssearth/bake/site-assets': 'packages/bake/src/site-assets/index.ts',
+  '@cssearth/bake/facility-renders': 'packages/bake/src/facility-renders/index.ts',
+  '@cssearth/bake/asset-publication': 'packages/bake/src/asset-publication/index.ts',
+  '@cssearth/bake/surface-previews': 'packages/bake/src/surface-previews/index.ts',
+  '@cssearth/bake/preparation': 'packages/bake/src/preparation/index.ts',
+  '@cssearth/bake/thread-pool': 'packages/bake/src/thread-pool/index.ts',
+  '@cssearth/objects/node/contract': 'packages/objects/src/node/contract/index.ts',
+};
+/** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
+ * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its
+ * tsup configuration names (`@cssearth/renderer/navigation` → `src/navigation/index.ts`); its source subpaths name the file. */
+/** Declared renderer build metadata input, checked by the preparation architecture rule. */
+export const RENDERER_BUILD_CONFIG_PATH = 'packages/renderer/tsup.config.ts';
+const rendererEntries = new Map<string, Promise<Readonly<Record<string, string>>>>();
+/** Read once, when a bundle first reaches the renderer, so a change to the renderer's entry list touches only those. */
+function loadRendererEntries(root: string): Promise<Readonly<Record<string, string>>> {
+  let entries = rendererEntries.get(root);
+  if (!entries) {
+    entries = import(pathToFileURL(resolve(root, RENDERER_BUILD_CONFIG_PATH)).href)
+      .then((config: { default: { entry: Record<string, string> } }) => Object.fromEntries(Object.entries(config.default.entry)
+        .map(([name, source]) => [name, `src/${source.slice(source.lastIndexOf('/src/') + '/src/'.length)}`])));
+    rendererEntries.set(root, entries);
+  }
+  return entries;
+}
+async function rendererSource(root: string, specifier: string): Promise<string | undefined> {
+  if (specifier !== '@cssearth/renderer' && !specifier.startsWith('@cssearth/renderer/')) return undefined;
+  const subpath = specifier.slice('@cssearth/renderer/'.length);
+  const built = (await loadRendererEntries(root))[subpath || 'index'];
+  if (built) return `packages/renderer/${built}`;
+  return /^[a-z-]+\/[\w./-]+\.ts$/u.test(subpath) && !subpath.split('/').includes('..') ? `packages/renderer/src/${subpath}` : undefined;
+}
+/** An esbuild plugin that bundles the followed workspace entries from their sources under `root`. */
+export function followedWorkspaceSources(root: string): Plugin {
+  return { name: 'followed-workspace-sources', setup(builder) {
+    builder.onResolve({ filter: /^@cssearth\// }, async args => {
+      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(root, args.path);
+      return source ? { path: resolve(root, source) } : undefined;
+    });
+  } };
+}

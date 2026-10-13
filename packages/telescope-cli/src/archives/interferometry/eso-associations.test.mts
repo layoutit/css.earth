@@ -6,11 +6,11 @@ import { resolve } from 'node:path';
 import { GRAVITY_REDUCTION } from './calibrate-gravity.mts';
 import { MATISSE_REDUCTION } from './calibrate-matisse.mts';
 import { archiveFrameId, reduceAssociation, stepFiles, type InstrumentReduction, type ReductionIo } from './eso-associations.mts';
-import { parseAssociationTree, WORKSPACE, parseHeaderCards, type EsoHeader } from '@cssearth/telescope/node';
+import {  parseAssociationTree, requireWorkspace, parseHeaderCards, type EsoHeader  } from '@cssearth/telescope-core/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, text, type BinaryTable } from '@cssearth/bake/objects/raster';
 
 const fixture = (name: string) => resolve(import.meta.dirname, 'fixtures', name);
-const repository = WORKSPACE;
+const repository = requireWorkspace();
 
 /** A reduction planned against the archive's recorded tree and headers, with recipes that only name their products. */
 async function plan(reduction: InstrumentReduction, prefix: string, dpId: string) {

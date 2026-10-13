@@ -3,7 +3,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { parseAcceptedAssumptions, jsonValue, parseRegion, type Json } from '@cssearth/objects';
 import { inputWavelengths, PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from '../requests/recipe-request.mts';
 import type { ConstraintVerdict, RequestSatisfaction } from '../requests/request-satisfaction.mts';
-import { parseLimits } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope-core/node';
 
 export interface ExplorationReference {
   readonly schema: 'cssearth-telescope-exploration@1';
@@ -16,7 +16,9 @@ export interface ScientificDeliveryContext {
 }
 export interface ExplorationDeliveryContext {
   readonly kind: 'exploration';
-  readonly target: string;
+  /** Archive label for a position search, canonical identity for a named search. */
+  readonly target: string | null;
+  readonly region?: import('@cssearth/objects').IcrsCircle;
   readonly discovery: ExplorationReference;
   readonly assessment: { readonly status: 'not-requested' };
 }
@@ -117,11 +119,11 @@ export function parseDeliveryContext(value: unknown): DeliveryContext {
     return { kind, request: parseCapabilityRequest(context.request), assessment: parseRequestSatisfaction(context.assessment) };
   }
   if (kind === 'exploration') {
-    allowed(context, ['kind','target','discovery','assessment'], 'exploration context');
-    const target = requireString(context.target, 'exploration target'), assessment = requireRecord(context.assessment, 'exploration assessment');
+    allowed(context, ['kind','target','region','discovery','assessment'], 'exploration context');
+    const target = context.target === null ? null : requireString(context.target, 'exploration target'), assessment = requireRecord(context.assessment, 'exploration assessment');
     allowed(assessment, ['status'], 'exploration assessment');
-    if (!target || assessment.status !== 'not-requested') throw new TypeError('Invalid exploration target or assessment.');
-    return { kind, target, discovery: parseExplorationReference(context.discovery), assessment: { status: 'not-requested' } };
+    if (!target && context.region === undefined || assessment.status !== 'not-requested') throw new TypeError('Invalid exploration target or assessment.');
+    return { kind, target, ...(context.region === undefined ? {} : { region: parseRegion(context.region) }), discovery: parseExplorationReference(context.discovery), assessment: { status: 'not-requested' } };
   }
   throw new TypeError(`Unsupported delivery context kind ${kind}.`);
 }
@@ -144,4 +146,4 @@ export function sourceContext(parametersValue: unknown): DeliveryContext {
   return parseDeliveryContext({ kind: 'scientific-request', request: parameters.sourceRequest, assessment: parameters.sourceSatisfaction });
 }
 
-export const contextTarget = (context: DeliveryContext): string => context.kind === 'scientific-request' ? context.request.target : context.target;
+export const contextTarget = (context: DeliveryContext): string | null => context.kind === 'scientific-request' ? context.request.target : context.target;

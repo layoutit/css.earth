@@ -6,15 +6,16 @@
  * star's lines are looked for, `star` the rotation and the tilt a map cannot find by itself, and `published` the numbers
  * a re-reduction is compared with. A program without `atmosphere` can be pinned but not reduced; one without `star` can be
  * averaged but not mapped. */
+import { programStorePath, packagePath } from '../../paths.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 import { PRODUCT, type ArchivedProduct } from './cadc.mts';
 
 export const PROGRAM_SCHEMA = 'cssearth-espadons-program@1', MAP_SCHEMA = 'cssearth-espadons-map@2';
-export const PROGRAMS = resolve(WORKSPACE, archivePrograms('espadons').path), DOWNLOADS = resolve(WORKSPACE, '.local/espadons');
+export const PROGRAMS = packagePath(archivePrograms('espadons').path), DOWNLOADS = resolve(USER_ROOT, '.local/espadons');
 const ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 
 /** A number a person read, with where it is printed. */
@@ -57,7 +58,7 @@ export function parseProgram(value: unknown): EspadonsProgram {
   return { schema: PROGRAM_SCHEMA, id, target: { name: requireString(target.name, 'target.name'), ...(target.object === undefined ? {} : { object: requireString(target.object, 'target.object') }), raDegrees: number(target, 'raDegrees', 'target'), decDegrees: number(target, 'decDegrees', 'target'), radiusDegrees: number(target, 'radiusDegrees', 'target') },
     span: { fromMjd: number(span, 'fromMjd', 'span'), toMjd: number(span, 'toMjd', 'span') }, observations, ...(atmosphere ? { atmosphere } : {}), ...(radialVelocity ? { radialVelocity } : {}), ...(star ? { star } : {}), ...(published ? { published } : {}) };
 }
-export const programPath = (id: string) => { if (!ID.test(id)) throw new TypeError(`${id} is not a program id.`); return resolve(PROGRAMS, `${id}.json`); };
+export const programPath = (id: string) => { if (!ID.test(id)) throw new TypeError(`${id} is not a program id.`); return resolve(programStorePath(PROGRAMS), `${id}.json`); };
 /** A run's receipt. It is a result, not an input: reduce.mts writes it under ignored output/ and git never holds it. */
-export const receiptPath = (id: string) => { if (!ID.test(id)) throw new TypeError(`${id} is not a program id.`); return resolve(WORKSPACE, 'output/espadons', id, `${id}.map.json`); };
+export const receiptPath = (id: string) => { if (!ID.test(id)) throw new TypeError(`${id} is not a program id.`); return resolve(USER_ROOT, 'output/espadons', id, `${id}.map.json`); };
 export const readProgram = async (id: string) => parseProgram(JSON.parse(await readFile(programPath(id), 'utf8')));

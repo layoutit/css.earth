@@ -29,14 +29,14 @@
  * `cssearth-telescope-product@1` record beside its product, and is skipped when that record says this same run already made
  * the files that are there (`sameRun`). Nothing needs a display: DRAGONS' interactive tools are not used and matplotlib is
  * forced to a non-interactive backend by the toolchain. */
+import { telescopePythonEnvironment, readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '@cssearth/core';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/objects';
-import { readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE } from '@cssearth/telescope/node';
 import { readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { dragonsToolchainVersions, geminiToolchain, type GeminiToolchain } from './toolchain.mts';
@@ -51,7 +51,7 @@ export type Half = (typeof HALVES)[number];
 
 /** A path inside the repository, as the repository sees it: a record is committed, so it never carries a local absolute
  * path. A path outside the repository is recorded as it is, because nothing here can shorten it honestly. */
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 export const repositoryPath = (path: string) => path.startsWith(`${REPOSITORY}/`) ? path.slice(REPOSITORY.length + 1) : path;
 
 /** What DRAGONS calls the product of each stage. `reduce` names its output for the first frame that went in and for what it
@@ -192,7 +192,7 @@ function runReduce(toolchain: GeminiToolchain, directory: string, files: readonl
     ...(userCal.length ? ['--user_cal', ...userCal] : [])];
   const started = process.hrtime.bigint();
   const result = spawnSync(toolchain.binaries.reduce!, args,
-    { cwd: directory, encoding: 'utf8', env: { ...process.env, ...toolchain.env }, maxBuffer: 64 * 1024 * 1024 });
+    { cwd: directory, encoding: 'utf8', env: telescopePythonEnvironment(toolchain.env), maxBuffer: 64 * 1024 * 1024 });
   const seconds = Number(process.hrtime.bigint() - started) / 1e9;
   if (result.status !== 0)
     throw new Error(`reduce failed (status ${result.status}): ${(result.stderr || result.stdout || '').slice(-4000)}`);

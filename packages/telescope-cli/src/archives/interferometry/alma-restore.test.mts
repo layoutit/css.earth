@@ -8,9 +8,9 @@ import { parseCalibrationRecord } from './alma-calibration.mts';
 import { pipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration } from './alma-selfcal.mts';
 import { applycalStatement, pipelineTcleanArguments, restoreScript, type ReplayedFlags } from './alma-restore.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
-const root = WORKSPACE;
+const root = requireWorkspace();
 const record = () => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt'), 'utf8');
 const fixture = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');
 const imaging = async () => pipelineImaging(await fixture('casa_commands.tclean.log'), 'R_Dor');

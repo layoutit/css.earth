@@ -25,19 +25,19 @@
  *
  * Only KCWI is re-run. toolchain.json says why: the OSIRIS DRP is IDL, and no other Keck pipeline is installed here. A program
  * of another instrument is refused rather than reduced by something that is not that instrument's pipeline. */
+import { telescopePythonEnvironment, assertInputs, readProductRecord, sameRun, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { spawn, spawnSync } from 'node:child_process';
 import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
-import { assertInputs, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { DOWNLOADS, readKeckProgram, type KeckFile, type KeckObservation, type KeckProgram } from './archive.mts';
 import { keckToolchain, type KeckToolchain } from './toolchain.mts';
 
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 
 /** The instruments this toolkit can re-run: the pipeline's executable, the channel a frame belongs to, the arguments that
  * reduce that channel, and the configuration file the pipeline ships and this run edits only to turn plotting off. */
@@ -80,7 +80,7 @@ export async function keckSoftware(toolchain: KeckToolchain): Promise<ProductSof
   const names = ['kcwidrp', 'keckdrpframework', 'astropy', 'numpy', 'scipy', 'ccdproc', 'astroscrappy'];
   const result = spawnSync(toolchain.python, ['-c',
     `import platform, json; from importlib.metadata import version as v; print(json.dumps({"python": platform.python_version(), **{n: v(n) for n in ${JSON.stringify(names)}}}))`],
-    { env: { ...process.env, ...toolchain.env }, encoding: 'utf8' });
+    { env: telescopePythonEnvironment(toolchain.env), encoding: 'utf8' });
   if (result.status !== 0) throw new Error(`The Keck toolchain does not state its versions: ${(result.stderr ?? '').slice(-2000)}`);
   return Object.entries(JSON.parse(result.stdout.trim()) as Record<string, string>).map(([name, version]) => ({ name, version }));
 }
@@ -126,7 +126,7 @@ export async function runPipeline(binary: string, args: readonly string[], cwd: 
   const code = await new Promise<number>((ok, fail) => {
     // The pipeline asks a question at the terminal when a run looks wrong to it; with no stdin it takes the default and the
     // run never blocks. A run that needed an answer is a run whose inputs were chosen wrongly here.
-    const child = spawn(binary, args, { cwd, env: { ...process.env, ...env }, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(binary, args, { cwd, env: telescopePythonEnvironment(env), stdio: ['ignore', 'pipe', 'pipe'] });
     child.stdout.pipe(out, { end: false });
     child.stderr.pipe(out, { end: false });
     child.on('error', fail);
@@ -202,7 +202,7 @@ export async function reduceObservation(id: string, koaid: string, run: string):
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [id, koaid, directory] = positionalArguments(process.argv.slice(2));
   if (!id || !koaid) throw new TypeError('Usage: reduce <program id> <koaid> [<run directory>]');
-  const run = resolve(directory ?? resolve(REPOSITORY, 'output/keck', id, koaid.replace(/\.fits$/u, '')));
+  const run = resolve(directory ?? resolve(USER_ROOT, 'output/keck', id, koaid.replace(/\.fits$/u, '')));
   const result = await reduceObservation(id, koaid, run);
   console.log(`KECK_RUN ${result.redux} (${result.products.length} products, ${result.staged.length} frames staged${result.reused ? ', reused' : ''})`);
 }

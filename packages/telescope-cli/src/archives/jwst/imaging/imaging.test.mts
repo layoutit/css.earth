@@ -1,3 +1,4 @@
+import '../../../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -8,8 +9,8 @@ import { bandOfFilters, parseImagingProgram, PROGRAMS } from './archive.mts';
 import { bandMode, bandOfHeader, isCubeBand, JWST_BANDS } from './bands.mts';
 import { assertCubeMembers, spec3Steps } from '../cubes/spec3.mts';
 import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidence } from './image3.mts';
-import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, runKey, writeProductRecord, toolchainPython } from '@cssearth/telescope/node';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope-core';
+import { readProductRecord, runKey, writeProductRecord, toolchainPython } from '@cssearth/telescope-core/node';
 import { findPointSources } from '@cssearth/bake/objects/layers/observation';
 
 const member = (name: string, bytes = 1000) => ({ name, uri: `mast:JWST/product/${name}`, bytes });

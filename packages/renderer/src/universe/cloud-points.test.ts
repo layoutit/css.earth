@@ -6,7 +6,7 @@ import { packPreparedBank } from '@cssearth/objects/node';
 import { createCloudPoints, mountCloudOverlay } from './cloud-points.js';
 import { retainedStyle } from './cloud-overlay-layer.js';
 import { readPreparedHere } from '../prepared-data/readers.js';
-import type { CloudOverlayData } from './cloud-overlay-reader.js';
+import { cloudOverlayReader, type CloudOverlayData } from './cloud-overlay-reader.js';
 
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
   metersPerUnit: 1, boundsUnits: { min: [-10, -10, -10] as const, max: [10, 10, 10] as const } };
@@ -79,16 +79,28 @@ test('billboards are built off the page, placed by transform and opacity only, d
 });
 
 /** A page whose fetch answers each address with a bank, or fails while `failing` says so. */
-function fetching(banks: Record<string, PreparedBank>) {
+function fetching(banks: Record<string, PreparedBank>, delayTurns = 0) {
   const { window, host } = page(), asked: string[] = [];
   const state = { failing: false };
   (window as unknown as { fetch: typeof fetch }).fetch = (async (url: string) => {
     asked.push(url);
+    for (let turn = 0; turn < delayTurns; turn++) await new Promise(resolve => setImmediate(resolve));
     return state.failing ? new Response('', { status: 503 }) : new Response(new Uint8Array(packPreparedBank(banks[url]!, url)));
   }) as typeof fetch;
   return { host, asked, state };
 }
-const mocked = (t: TestContext) => { t.mock.timers.enable({ apis: ['setTimeout', 'Date'] }); };
+function mocked(t: TestContext) {
+  t.mock.timers.enable({ apis: ['setTimeout', 'Date'] });
+  const reader = t.mock.method(cloudOverlayReader, 'read');
+  return async ({ fails = false } = {}) => {
+    const reading = reader.mock.calls.at(-1)?.result;
+    assert.ok(reading, 'a bank read has started');
+    if (fails) await assert.rejects(reading);
+    else await reading;
+    // The bank is fetched, decoded and validated. Drain its delivery callbacks before inspecting the overlay.
+    await new Promise(resolve => setImmediate(resolve));
+  };
+}
 
 test('an overlay is attached only while it shows, and a hidden one is never mounted', async t => {
   mocked(t);
@@ -113,13 +125,13 @@ test('an overlay is attached only while it shows, and a hidden one is never moun
 });
 
 test('while the camera coasts an overlay is neither attached nor detached, and it never reorders; the coast\'s end applies both', async t => {
-  mocked(t);
-  const { host } = fetching({ '/points.bin': encodeCloudPoints(cloud) });
+  const settleRead = mocked(t);
+  // Loading outlasts the old 201-turn wait, so ending the coast must wait for the actual read.
+  const { host } = fetching({ '/points.bin': encodeCloudPoints(cloud) }, 1000);
   const overlay = mountCloudOverlay({ host, url: '/points.bin', resolveResource });
   overlay.setCoasting(true);
   overlay.publish(at(10), 1);
-  await new Promise(resolve => setImmediate(resolve));
-  for (let turn = 0; turn < 200; turn++) await new Promise(resolve => setImmediate(resolve));
+  await settleRead();
   assert.equal(host.children.length, 0, 'read mid-coast, it waits off the page');
   overlay.setCoasting(false);
   assert.equal(host.children.length, 1, 'the coast ends: it is attached');
@@ -169,22 +181,22 @@ test('an overlay retired with the camera still is taken away at once; retired mi
 });
 
 test('an overlay taken away before its bank arrives never mounts', async t => {
-  mocked(t);
-  const { host } = fetching({ '/points.bin': encodeCloudPoints(cloud) });
+  const settleRead = mocked(t);
+  const { host } = fetching({ '/points.bin': encodeCloudPoints(cloud) }, 1000);
   const overlay = mountCloudOverlay({ host, url: '/points.bin', resolveResource });
   overlay.publish(at(10), 1);
   overlay.destroy();
-  for (let turn = 0; turn < 500; turn++) await new Promise(resolve => setImmediate(resolve));
+  await settleRead();
   assert.equal(host.children.length, 0);
 });
 
 test('a failed read is tried again on a later publication, waiting twice as long each time, at most four times', async t => {
-  mocked(t);
+  const settleRead = mocked(t);
   const warned = t.mock.method(console, 'warn', () => {});
-  const { host, asked, state } = fetching({ '/points.bin': encodeCloudPoints(cloud) });
+  const { host, asked, state } = fetching({ '/points.bin': encodeCloudPoints(cloud) }, 1000);
   state.failing = true;
   const overlay = mountCloudOverlay({ host, url: '/points.bin', resolveResource });
-  const settle = async () => { for (let turn = 0; turn < 50; turn++) await new Promise(resolve => setImmediate(resolve)); };
+  const settle = () => settleRead({ fails: true });
   overlay.publish(at(10), 1); await settle();
   assert.deepEqual([asked.length, warned.mock.callCount()], [1, 1], 'the failure is told, not thrown');
   overlay.publish(at(10), 1); await settle();

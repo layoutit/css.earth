@@ -15,7 +15,7 @@ import { spawnSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchainSync } from '@cssearth/telescope/node';
+import { astroqueryToolchainSync } from '@cssearth/telescope-core/node';
 import { readNpy } from './numpy/npy-lonlat-grid.ts';
 
 /** Grid step, in degrees, at which the map is looked up; a point takes its nearest grid node. */

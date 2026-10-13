@@ -5,10 +5,10 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { loadWwtFitsLeads, resolveWwtFitsLead } from './wwt-fits-leads.mts';
 import { parseCli } from '../cli-arguments.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
 test('M31 exploration links the pinned PHAT FITS collection without treating tiles as observations',async()=>{
-  const root=WORKSPACE,m31=await loadWwtFitsLeads(root,{id:'m31',name:'Andromeda Galaxy',aliases:['M31']});
+  const root=requireWorkspace(),m31=await loadWwtFitsLeads(root,{id:'m31',name:'Andromeda Galaxy',aliases:['M31']});
   assert.equal(m31.state,'indexed');if(m31.state!=='indexed')return;
   assert.deepEqual(m31.matches.map(row=>row.imageset),['PHAT-f475w','PHAT-f814w']);
   assert.ok(m31.matches.every(row=>row.catalog==='phat-fits.json'&&row.evidence==='https://archive.stsci.edu/hlsp/phat'));

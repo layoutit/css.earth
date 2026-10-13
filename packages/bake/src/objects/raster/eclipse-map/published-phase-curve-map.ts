@@ -21,9 +21,9 @@
  *   The last four are the same Fourier series as the first, written from another phase origin or scale, and take the same Cowan &
  *   Agol map.
  * - `spiderman-spherical`: the fit's SPIDERMAN spherical-harmonic coefficients, evaluated by SPIDERMAN itself
- *   (`@cssearth/telescope/node`, spiderman.ts).
+ *   (`@cssearth/telescope-core/node`, spiderman.ts).
  * - `starry`: the fit's starry map (amplitude, spherical-harmonic coefficients and phase offset), evaluated by starry itself
- *   (`@cssearth/telescope/node`, starry.ts). The offset turns the map east: starry's own frame puts the brightest point of a Y(1,0)
+ *   (`@cssearth/telescope-core/node`, starry.ts). The offset turns the map east: starry's own frame puts the brightest point of a Y(1,0)
  *   dipole at its longitude 0, so the map here is starry's intensity at longitude - offset.
  *
  * Both give the planet's intensity relative to the star's disc-averaged intensity, r. A uniform planet of intensity ratio r shows the
@@ -44,7 +44,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { planckRadiance } from './eigenmap-fit.ts';
-import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap, starryMapGrid, type StarryMap, type StarrySystem } from '@cssearth/telescope/node';
+import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap, starryMapGrid, type StarryMap, type StarrySystem } from '@cssearth/telescope-core/node';
 
 const cell = (value: unknown, label: string) => requireFiniteNumber(requireRecord(value, label).value, `${label}.value`);
 

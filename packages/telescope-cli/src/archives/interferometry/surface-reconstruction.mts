@@ -16,6 +16,7 @@
  *
  * Defaults are the geometry used for a star without a measured axis: inclination 90 and position angle 0 put the pole North in
  * the sky plane, as the display-orientation records do. Only squared visibilities and closure phases are fitted. */
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -72,8 +73,8 @@ export function parseSurfaceSummary(text: string) {
 export async function reconstructSurface(oifits: string | readonly string[], directory: string, options: SurfaceOptions) {
   const root = await toolchainPath('rotir'), { entry } = await toolchainDescriptor('rotir');
   await mkdir(directory, { recursive: true });
-  const script = resolve(import.meta.dirname, 'rotir/surface.jl');
-  const run = spawnSync(resolve(root, requireString(entry.executable)), [`--threads=${options.threads ?? 8}`, `--project=${toolchainEnvironment(entry)}`, script, ...surfaceArguments(oifits, directory, options)],
+  const script = packagePath('src/archives/interferometry/rotir/surface.jl');
+  const run = spawnSync(resolve(root, requireString(entry.executable)), [`--threads=${options.threads ?? 8}`, `--project=${toolchainEnvironment(entry, root)}`, script, ...surfaceArguments(oifits, directory, options)],
     { env: { ...process.env, JULIA_DEPOT_PATH: resolve(root, 'depot') }, stdio: ['ignore', 'inherit', 'pipe'], encoding: 'utf8' });
   // ROTIR prints five warnings about OITOOLS bindings at load; they are known and harmless on the pinned commits.
   const errors = String(run.stderr).split('\n').filter(line => line.trim() && !/Imported binding OITOOLS\.visibility_|^\s*[└│┌]\s*$/u.test(line));

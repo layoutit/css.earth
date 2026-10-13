@@ -17,10 +17,11 @@
  * `52 Europa`. It is reduced to letters and digits, and a name carrying a minor-planet number matches only an id that carries
  * the same number, so 52 Europa is never Jupiter's moon. Only `koaimtyp='object'` rows count: a pointing, bias or flat frame
  * is not an observation of the object. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';
-import { readProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord } from '@cssearth/telescope-core/node';
 import { PROGRAMS, parseKeckProgram, type KeckProgram } from './archive.mts';
 import { INSTRUMENT_TABLES, koaQuery, type InstrumentTable } from './koa.mts';
 import { REDUCIBLE } from './reduce.mts';
@@ -189,12 +190,12 @@ export async function checkReceipt(file: string, value: Record<string, unknown>,
 /** Every pinned program, every receipt that stands up to `checkReceipt`, and, for each that does not, why. A receipt only
  * counts when a pinned program holds the exact observation it names AND everything else above still holds. */
 export async function pinnedEvidence() {
-  const names = await readdir(PROGRAMS).catch(() => [] as string[]);
+  const names = await readdir(programStorePath(PROGRAMS)).catch(() => [] as string[]);
   const entries = names.filter(entry => entry.endsWith('.json')).sort();
   const programs: KeckProgram[] = [], candidates: { file: string; value: Record<string, unknown> }[] = [];
   const problems: ReceiptProblem[] = [];
   for (const name of entries) {
-    const value = requireRecord(JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as unknown, name);
+    const value = requireRecord(JSON.parse(await readFile(resolve(programStorePath(PROGRAMS), name), 'utf8')) as unknown, name);
     if (value.schema === 'cssearth-keck-program@1') programs.push(parseKeckProgram(value));
     else if (value.schema === 'cssearth-keck-reproduction@1') candidates.push({ file: name, value });
     else problems.push({ file: name, problem: `it is neither a program nor a receipt (${String(value.schema)}).` });

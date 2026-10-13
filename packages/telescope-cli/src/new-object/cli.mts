@@ -1,7 +1,8 @@
 /** `telescope new-object`: the object generator and the bake it hands its objects to, run as the workspace's own process.
  * The telescope parses and checks the command line, then runs this with the parsed options as one JSON argument; the result
  * text and exit code, or the failure, go back over the IPC channel, and everything printed here is the telescope's stderr. */
-import { projectRoot as checkoutProjectRoot, answerParent } from '@cssearth/core/node';
+import { checkoutProjectRoot } from '../paths.mts';
+import { answerParent } from '@cssearth/core/node';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

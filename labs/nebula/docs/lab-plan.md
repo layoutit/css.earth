@@ -152,7 +152,7 @@ The UI keeps buttons for these, and each button runs the command.
 ## 5. Real stars around any nebula
 
 - **CLI:** `stars <id> [--radius-deg=] [--magnitude-limit=]`. It runs a Gaia DR3 cone search of the picture's field and writes `src/objects/<id>/.local/stars-cone.json`, which holds positions, parallax distances, BP−RP colors and proper motion.
-  - The query and the coordinate logic already exist in `packages/bake/cli/prepare-nebula-field-catalogues.mts` (GAVO TAP via `@cssearth/telescope/node` `tapRows`; cache `.local/nebula-lab/stellar-fields/`).
+  - The query and the coordinate logic already exist in `packages/bake/cli/prepare-nebula-field-catalogues.mts` (GAVO TAP via `@cssearth/telescope-core/node` `tapRows`; cache `.local/nebula-lab/stellar-fields/`).
   - **Missing telescope-cli command:** a generic `telescope gaia-cone RA DEC RADIUS [--magnitude-limit] [--out]`. Today `telescope stars` is a SIMBAD/VizieR survey of a galaxy's stars, not a cone search. `stars <id>` should call the new command and take RA, Dec and distance from the object.
 - **UI:** one big **Stars** toggle on the left, for every nebula.
   - It draws with the site's own star renderer: the volume dataset bank's `stars.bin` path (`packages/renderer/src/volume/prepared-volume-datasets.ts`), the same one the site uses for `m2-9-volume`.

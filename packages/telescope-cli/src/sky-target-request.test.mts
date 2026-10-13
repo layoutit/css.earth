@@ -1,10 +1,11 @@
+import './test-support/index.mts';
 import assert from 'node:assert/strict';
 import { mkdir, mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { readSkyTarget, simbadObjectQuery, skyRegion, type SkyTarget } from '@cssearth/telescope/node';
+import { readSkyTarget, simbadObjectQuery, skyRegion, type SkyTarget } from '@cssearth/telescope-core/node';
 import { type MetadataResponse } from '@cssearth/objects';
 import { skyTargetRequest } from './exploration.mts';
 import { SERVICES, searchCircle, targetQuery } from './vo/discovery.mts';

@@ -21,6 +21,7 @@
  * The Galilean moons get a census of their own, because Europa is this project's showcase body and the answer for it is a
  * negative one that a summary line would hide. Its three neighbours are asked for beside it so that "is there anything here
  * for the Galilean moons" is answered from the archive rather than from one moon and a guess. */
+import { programStorePath, inputPath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -90,7 +91,7 @@ export interface LedgerFocus {
   readonly member: string; readonly rows: string;
 }
 export const GEMINI_LEDGER_FOCUS = 'packages/telescope-cli/src/archives/gemini/ledger-focus.json';
-export function geminiLedgerFocus(path = resolve(REPOSITORY, GEMINI_LEDGER_FOCUS)): LedgerFocus {
+export function geminiLedgerFocus(path = inputPath(REPOSITORY, GEMINI_LEDGER_FOCUS)): LedgerFocus {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Gemini ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);
   const text = (key: string) => requireString(record[key], `focus ${key}`);
@@ -277,7 +278,7 @@ export async function productRecords(work: string | null): Promise<Map<string, u
 
 /** Each instrument's state, read from the pinned programs and the receipts beside them. */
 export async function capabilityStates(instruments: readonly InstrumentCount[], work: string | null,
-  directory = PROGRAMS): Promise<{ capabilities: CapabilityState[]; problems: string[] }> {
+  directory = programStorePath(PROGRAMS)): Promise<{ capabilities: CapabilityState[]; problems: string[] }> {
   const files = (await readdir(directory).catch(() => [] as string[])).sort();
   const programs = new Map<string, GeminiProgram>();
   const problems: string[] = [];

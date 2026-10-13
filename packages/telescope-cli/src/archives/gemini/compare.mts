@@ -31,13 +31,14 @@
  *
  * The receipt is written to packages/telescope-cli/src/archives/gemini/programs/<program id>.<product>.reproduction.json, and the evidence it
  * establishes is added to the product record beside the product it is about. */
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace, addProductEvidence, assertInputs, readProductRecord, sameRun } from '@cssearth/telescope-core/node';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence, assertInputs, readProductRecord, sameRun } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type EvidenceKind, type ProductInput, type ProductRecord } from '@cssearth/objects';
 import { PROGRAMS, readGeminiProgram, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
@@ -349,9 +350,10 @@ export async function compareHalves(firstPath: string, secondPath: string): Prom
 export const RECEIPT_SCHEMA = 'cssearth-gemini-reproduction@1';
 
 /** Where a receipt for one product lives: beside the program it is about, named for that product. */
-export const receiptPath = (id: string, product: string) => resolve(PROGRAMS, `${id}.${product.replace(/\.fits$/u, '')}.reproduction.json`);
+export const receiptPath = (id: string, product: string) => resolve(programStorePath(PROGRAMS), `${id}.${product.replace(/\.fits$/u, '')}.reproduction.json`);
 
 async function writeReceipt(path: string, body: Record<string, unknown>) {
+  path = programStorePath(path, 'write');
   await writeFile(path, `${JSON.stringify({ schema: RECEIPT_SCHEMA, ...body }, null, 2)}\n`);
   return path;
 }

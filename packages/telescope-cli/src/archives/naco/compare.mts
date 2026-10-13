@@ -29,13 +29,14 @@
  * added to the product record each reduction wrote beside its own product, as `internal-consistency` evidence. That is the
  * only kind this route can add: with no archive product and no ESO master calibration to agree with, nothing here is
  * archive agreement. A product whose run wrote no record takes no evidence at all, and the comparison says so. */
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace, addProductEvidence, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence, WORKSPACE } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { PROGRAMS, readProgram } from './archive.mts';
 
 /** The two halves a nodded-spectroscopy set is split into: one template per night, so halves are what there is. */
@@ -43,7 +44,7 @@ export const NOD_HALVES = ['a-half', 'b-half'] as const;
 
 /** A path inside the repository, as the repository sees it: a receipt is committed, so it never carries a local absolute
  * path. A path outside the repository is recorded as it is, because nothing here can shorten it honestly. */
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 export const repositoryPath = (path: string) => path.startsWith(`${REPOSITORY}/`) ? path.slice(REPOSITORY.length + 1) : path;
 import { readReduction, type ReductionResult } from './reduce.mts';
 
@@ -142,6 +143,7 @@ export async function addComparisonEvidence(value: Pick<Reproduction, 'kind' | '
 
 /** Compare two templates' combined images and write the receipt. */
 export async function compareTemplates(programId: string, work: string, templates: readonly [string, string]): Promise<Reproduction> {
+  requireWorkspace(undefined, 'This command writes archive records.');
   const program = await readProgram(programId);
   // For imaging the two labels are object templates of the night; for spectroscopy they are the two halves of its nod set,
   // which is one template. Either way they must be two, and each must have been reduced.
@@ -205,7 +207,7 @@ export async function compareTemplates(programId: string, work: string, template
     statistics: await compareImage({ path: a.result.combined, hdu: a.hdu }, { path: b.result.combined, hdu: b.hdu }, overlap),
     differingCards,
   };
-  const receipt = resolve(PROGRAMS, `${program.program}.${value.product}.reproduction.json`);
+  const receipt = resolve(programStorePath(PROGRAMS), `${program.program}.${value.product}.reproduction.json`);
   // The evidence goes to the records first, so a product whose run wrote none leaves no receipt claiming it was checked.
   await addComparisonEvidence(value, [a.result.combined, b.result.combined], receipt);
   await writeFile(receipt, `${JSON.stringify(value, null, 2)}\n`);

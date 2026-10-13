@@ -1,5 +1,6 @@
 /** The STIS slit-scan frames a map is read from: their headers, background-subtracted read windows and row spectra, the
  * geometry of every exposure from Horizons, and where the body sat in each visit, measured from the scan itself. */
+import { programStorePath } from '../../paths.mts';
 import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 import { stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -7,12 +8,12 @@ import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@csseart
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses, type HorizonsResponses } from './line-stack-ephemeris.mts';
 import { acrossSlitCentre, discChord, type Chord, type SlitScanDefinition } from './slit-scan-reduction.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 
 export const MJD_TO_JD = 2400000.5, ARCSEC_PER_RADIAN = 206264.806247, DEGREE = Math.PI / 180;
 /** Characters 1-6 of a rootname are the HST visit: one scan of the disc, at one pointing and one roll. */
 const VISIT_LENGTH = 6;
-export const REPOSITORY = WORKSPACE;
+export const REPOSITORY = WORKSPACE ?? USER_ROOT;
 
 
 // ---- frames -----------------------------------------------------------------------------------------------------------
@@ -192,7 +193,7 @@ export async function prepareFrames(definition: SlitScanDefinition, directory: s
     }
     headers.push(header);
   }
-  const responsesPath = resolve(PROGRAMS, definition.horizons.responses), responses = await readHorizonsResponses(responsesPath);
+  const responsesPath = resolve(programStorePath(PROGRAMS), definition.horizons.responses), responses = await readHorizonsResponses(responsesPath);
   const before = Object.keys(responses).length;
   const ephemerides = await scanEphemerides(definition, responses, headers.map(header => (header.startMjd + header.endMjd) / 2 + MJD_TO_JD), mayAsk);
   if (Object.keys(responses).length !== before) await writeHorizonsResponses(responsesPath, responses);

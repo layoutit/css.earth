@@ -11,7 +11,7 @@
  * strip's optical centre, the distortion coefficients, the start-time bias and the interframe delta. Everything about
  * the exposure comes from the product's own PDS3 label: START_TIME, INTERFRAME_DELAY, the filter order and the size.
  */
-import { pds3Keyword, pds3Values } from '@cssearth/telescope';
+import { pds3Keyword, pds3Values } from '@cssearth/telescope-core';
 import type { KernelSet } from '@cssearth/spice/node';
 import { number as kernelNumber, string as kernelString, utcToEt, spiceCamera, type Aberration, type PixelModel } from '@cssearth/spice';
 import { project } from './osiris-geo.ts';

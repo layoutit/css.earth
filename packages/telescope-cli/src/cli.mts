@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { configureCliWorkspace } from './cli-workspace.mts';
+import { manageToolchain } from './toolchains/astronomy-toolchains.mts';
 import { resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
@@ -8,12 +10,14 @@ import { formatAnswer } from './observation-query/query.mts';
 import type { RequestSatisfaction } from './requests/request-satisfaction.mts';
 import { getSession, saveExploration, saveSession, saveFamilyRequestSession, type ExplorationSession, type Session } from './session.mts';
 import { exportSpatialObject } from './delivery/spatial-handoff.mts';
+import { exportHtml } from './delivery/html-outputs.mts';
 import { exportOutput } from './delivery/outputs.mts';
 import { listArtifactOutputs } from './delivery/artifact-outputs.mts';
 import { projectOutput } from './delivery/projection.mts';
 import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
 import { HELP, SHORT_HELP, VERSION } from './help.mts';
+import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
@@ -37,7 +41,7 @@ import { runWorkspaceCommand } from './workspace-commands.mts';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
@@ -57,13 +61,14 @@ export interface CliServices {
   readonly saveExploration:typeof saveExploration;
   readonly getSession:(root:string,directory:string,pick:number,progress:(text:string)=>void,api?:undefined,options?:{readonly offline?:boolean})=>Promise<RetrievedResult>;
   readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
+  readonly exportHtml?:typeof exportHtml;
   readonly exportOutput:typeof exportOutput;
   readonly projectOutput:typeof projectOutput;
   readonly exportSphere:(recordPath:string,outputDirectory:string)=>ReturnType<typeof exportSphere>;
   readonly exportSpatialObject:typeof exportSpatialObject;
   readonly executeFamilyOperation:typeof executeFamilyOperation;
 }
-const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere:async(recordPath,outputDirectory)=>exportSphere(recordPath,outputDirectory,await import(pathToFileURL(resolve(WORKSPACE,'src/platform/solar-geometry.mts')).href)),exportSpatialObject,executeFamilyOperation};
+const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportHtml,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
   let terminal:ReturnType<typeof createInterface>|undefined;
@@ -96,8 +101,9 @@ function startProgress(io:CliIo,initial:string){
       if(terminal)io.error(`\r${line}${' '.repeat(Math.max(0,width-line.length))}\n`);else io.error(`${line}\n`);}
   };
 }
-type ExecutableOutput=Extract<CliOptions,{readonly command:'export'|'project'|'sphere'|'spatial'}>;
+type ExecutableOutput=Extract<CliOptions,{readonly command:'export'|'project'|'sphere'|'spatial'|'html'}>;
 async function executeOutput(options:ExecutableOutput,api:CliServices):Promise<string>{
+  if(options.command==='html'){const result=await (api.exportHtml??exportHtml)(options.result,options.directory);return `HTML: ${result.html}\nEvidence: ${result.receipt}\n`;}
   if(options.command==='project'){
     const result=await api.projectOutput(options.result,options.geometry,options.directory);
     return `Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;
@@ -180,7 +186,7 @@ async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices
       io.error(`${error.message}. Enter the required values again, or press Enter to cancel.\n`);
       continue;
     }
-    if(options.command!=='export'&&options.command!=='project'&&options.command!=='sphere'&&options.command!=='spatial')throw new TypeError('Selected output has no executable owner');
+    if(options.command!=='export'&&options.command!=='project'&&options.command!=='sphere'&&options.command!=='spatial'&&options.command!=='html')throw new TypeError('Selected output has no executable owner');
     io.write(await executeOutput(options,api));return 0;
   }
 }
@@ -200,18 +206,28 @@ async function guidedExploration(root:string,session:ExplorationSession&{readonl
   return guidedArtifact(artifactScreen(await api.listArtifactOutputs(result.resultPath),result.resultPath),io,api,verbose);
 }
 
-export async function main(args: readonly string[], root = WORKSPACE, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices): Promise<number> {
+export async function main(args: readonly string[], root: string | undefined = undefined, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices): Promise<number> {
   const io=injectedIo??processIo(output);
   try {
+    args = configureCliWorkspace(args);
+    root ??= WORKSPACE ?? USER_ROOT;
     const options = parseCli(args);
     if (options.command === 'help') { io.write(options.short ? SHORT_HELP : HELP); return 0; }
     if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
+    if (options.command === 'skill') {
+      const result = manageSkill(options);
+      io.write(options.json ? `${JSON.stringify(result)}\n` : `${result.status}: ${result.target} (${result.mode})\n`);
+      return 0;
+    }
     // Instrument tools own their logging. Keep every such message off machine-readable stdout.
     const stdout = process.stdout.write;
     let text: string, code: number;
     process.stdout.write = process.stderr.write.bind(process.stderr);
     try {
-      if(options.command==='wwt-fits'){
+      if(options.command==='toolchain'){
+        const message = await manageToolchain(options.name, options.mode);
+        text = options.json ? `${JSON.stringify({ toolchain: options.name, mode: options.mode, message })}\n` : `${message}\n`; code = 0;
+      }else if(options.command==='wwt-fits'){
         const selected=options.pick?await resolveWwtFitsLead(root,options.exploration!,options.pick):{catalog:options.catalog!,imageset:options.setName!};
         const result=await acquireWwtFits(selected.catalog,selected.imageset,options.level,options.x,options.y,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Original FITS: ${result.source}\nNumeric image: ${result.data}\nValues: ${result.values}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\n${result.limitations.map(line=>`  ${line}\n`).join('')}`;code=0;
@@ -245,7 +261,7 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
         const result=options.product?await matchProductSoftware(options.product):await searchAscl(options.query!);
         text=options.json?`${JSON.stringify(result)}\n`:formatAscl(result);code=result.mode==='query'&&!result.entries?.length?3:0;
       }else if(options.command==='new-object'){
-        ({text,code}=await runWorkspaceCommand(root,NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
+        ({text,code}=await runWorkspaceCommand(requireWorkspace(root === USER_ROOT ? WORKSPACE : root,'new-object drafts specs, writes css.earth site records, and optionally bakes them.'),NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
       }else if(options.command==='papers'){
         const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.targets.length>1){
@@ -295,6 +311,8 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
         const result=await api.projectOutput(options.result,options.geometry,options.directory);text=options.json?JSON.stringify(result)+'\n':`Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='spatial'){
         const result=await api.exportSpatialObject(options.result,options.kind,options.directory);text=options.json?JSON.stringify(result)+'\n':`Object: ${result.object}\nEvidence: ${result.receipt}\n`;code=0;
+      }else if(options.command==='html'){
+        const result=await (api.exportHtml??exportHtml)(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`HTML: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='sphere'){
         const result=await api.exportSphere(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`Sphere: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='outputs'){

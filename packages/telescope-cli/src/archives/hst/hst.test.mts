@@ -11,8 +11,8 @@ import type { NamedShippedObject as ShippedObject } from '../targets.mts';
 import { calibrationRun, PIPELINES, productUnits, type PinnedFile } from './calibrate.mts';
 import { archiveSky, drizzleRun, drizzleSettings } from './drizzle.mts';
 import { compareImage, compareTable, pairExtensions } from './compare.mts';
-import { productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { productRecordPath } from '@cssearth/telescope-core';
+import { readProductRecord, writeProductRecord } from '@cssearth/telescope-core/node';
 import { readHstFileHdus } from './product-file.mts';
 import { hstToolchain } from './toolchain.mts';
 

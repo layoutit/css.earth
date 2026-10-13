@@ -1,6 +1,6 @@
 /** Bounded Gaia DR3/Bailer-Jones stellar neighbourhood intake, recorded by its archive query. */
 import { GAIA_NEBULA_FIELD_SCHEMA } from '@cssearth/objects';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises';
 
 const arguments_=process.argv.slice(2), magnitudeOptions=arguments_.filter(value=>value.startsWith('--magnitude-limit='));

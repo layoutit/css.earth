@@ -6,11 +6,11 @@
  * work here is the part a catalogue can do: pick the bodies of a system out of the object registry, name the published
  * orbit each one is predicted from, hand the epochs to those tools, and record and draw what comes back.
  */
+import { telescopePythonEnvironment, astroqueryToolchain, plotNumericPreview, type FigureOptions } from '@cssearth/telescope-core/node';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { BODIES, HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitStateRelativeBmjdTdb, skyBasis, starAstrometry, STAR_IDS, type HostedPlanetId, type StarId } from '@cssearth/astronomy';
-import { astroqueryToolchain, plotNumericPreview, type FigureOptions } from '@cssearth/telescope/node';
 
 const KM_PER_AU = 1.495978707e8;
 const GM_SUN_KM3_S2 = 132712440041.93938;
@@ -196,7 +196,7 @@ interface BridgeResult {
 async function bridge(request: unknown): Promise<BridgeResult> {
   const toolchain = await astroqueryToolchain();
   const text = await new Promise<string>((accept, reject) => {
-    const child = spawn(toolchain.python, ['-c', BRIDGE], { env: { ...process.env, ...toolchain.env }, stdio: ['pipe', 'pipe', 'pipe'] });
+    const child = spawn(toolchain.python, ['-c', BRIDGE], { env: telescopePythonEnvironment(toolchain.env), stdio: ['pipe', 'pipe', 'pipe'] });
     let out = '', error = ''; child.stdout.setEncoding('utf8').on('data', chunk => { out += chunk; }); child.stderr.setEncoding('utf8').on('data', chunk => { error += chunk; });
     child.on('error', reject); child.on('close', code => code === 0 ? accept(out) : reject(new Error(`whereistheplanet bridge failed: ${error.slice(-1500)}`)));
     child.stdin.end(JSON.stringify(request));

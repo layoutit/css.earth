@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync, WORKSPACE } from '@cssearth/telescope/node';
+import {  diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync, requireWorkspace  } from '@cssearth/telescope-core/node';
 import type { PackageFiles } from '../dataset.mts';
 import { exoRem } from '../darkening/picaso-limb.mts';
 import { ATMOSPHERE_FIT, CLARET_2012, claret2012Grid, claretBand, documentImagedColor, fittedImagedLimb, imagedLimb, installImagedLimb, parseAtmosphereFit, type ImagedLimb } from './imaged-limb.mts';
@@ -157,7 +157,7 @@ test('PICASO on the Diamondback release reproduces how its published colors chan
 // A law computed from a release file (Sonora Elf Owl) carries its own check: the file holds the spectrum its authors computed,
 // and each node records the band flux computed here over theirs.
 test("Epsilon Indi Ab's nodes record that the Elf Owl release's own flux was reproduced within 5%", async () => {
-  const nodes = await readFile(resolve(WORKSPACE, 'src/objects/eps-indi-ab/source/photometry/picaso-elf-owl-f1065c-quadratic.tsv'), 'utf8');
+  const nodes = await readFile(resolve(requireWorkspace(), 'src/objects/eps-indi-ab/source/photometry/picaso-elf-owl-f1065c-quadratic.tsv'), 'utf8');
   const ratios = [...nodes.matchAll(/band flux ([\d.]+) of the release's own spectrum/gu)].map(match => Number(match[1]));
   assert.equal(ratios.length, 4);
   assert.ok(ratios.every(ratio => Math.abs(ratio - 1) < 0.05), ratios.join(', '));
@@ -166,7 +166,7 @@ test("Epsilon Indi Ab's nodes record that the Elf Owl release's own flux was rep
 // A law computed from an Exo-REM grid model carries the same check, and it is what told the two solvers apart: across a thick
 // cloud PICASO's two-stream flux fell to 60% of the release's, and four-term spherical harmonics stay within the bounds here.
 test('every Exo-REM law records, for each model it is read between, the share of the release\'s band flux PICASO finds', async () => {
-  const objects = resolve(WORKSPACE, 'src/objects'), files: string[] = [];
+  const objects = resolve(requireWorkspace(), 'src/objects'), files: string[] = [];
   for (const id of await readdir(objects)) for (const file of await readdir(resolve(objects, id, 'source/photometry')).catch(() => [])) if (/^picaso-exo-rem-.*-quadratic\.tsv$/u.test(file)) files.push(resolve(objects, id, 'source/photometry', file));
   assert.ok(files.length > 0);
   for (const file of files) {

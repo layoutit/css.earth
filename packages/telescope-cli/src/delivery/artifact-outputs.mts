@@ -7,21 +7,45 @@ import { delivery, listOutputs as listDeliveryOutputs, type OutputChoice } from 
 import { validateProjectionSource } from './projection.mts';
 import { verifiedProduct } from '../products/verified-product.mts';
 import { validateSphereSource } from '../sphere/sphere.mts';
-import { inspectSpatialObject } from './spatial-handoff.mts';
+import { inspectSpatialObject, validateSpatialObject } from './spatial-handoff.mts';
 import { contextTarget, sourceContext } from './delivery-context.mts';
 import type { FamilyOperation } from '../family-handler.mts';
 import { verifiedExecutableFamilyOperations } from '../family-operation.mts';
 import { openPdsSource } from '../archive-adapters/pds-source.mts';
 import { parseProductDescriptor } from '../products/product-descriptor.mts';
 import { assessSourceRelevance, readSourceQuestion, type SourceRelevance } from '../products/source-relevance.mts';
+import { COMPOSITE_VOLUME_PLANNED } from './html-limits.mts';
 import { recordedSourceProcessing, type SourceProcessingSoftware } from '../products/source-product-contract.mts';
 import type { ProductSoftware } from '@cssearth/objects';
 
 const unavailable = (kind:OutputChoice['kind'],reason:string):OutputChoice => ({kind,available:false,reason});
 const available = (kind:OutputChoice['kind'],reason:string,parameters:readonly string[]=[]):OutputChoice => ({kind,available:true,reason,...(parameters.length?{parameters}:{})});
-export interface ArtifactOutputInspection {readonly artifact:string;readonly target?:string;readonly source:unknown;readonly productReceipt?:string;readonly sourceContext?:ReturnType<typeof sourceContext>;readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];readonly [key:string]:unknown}
+export interface ArtifactOutputInspection {readonly artifact:string;readonly target?:string | null;readonly source:unknown;readonly productReceipt?:string;readonly sourceContext?:ReturnType<typeof sourceContext>;readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];readonly [key:string]:unknown}
 
 export async function listArtifactOutputs(path:string,structure?:string):Promise<ArtifactOutputInspection>{
+  const result=await inspectArtifactOutputs(path,structure);
+  let html:OutputChoice|undefined;
+  if(result.artifact==='physical-object'||result.artifact==='physical-grid-volume') {
+    const volume=result.outputs.find(choice=>choice.kind==='volume');
+    const spatial=volume?.available?await validateSpatialObject(String(result.source), 'volume'):undefined;
+    const plain=spatial?.kind==='volume'&&!spatial.payload.sky&&!spatial.payload.impostors&&spatial.payload.stacks.some(stack=>stack.leaves.length);
+    html=result.outputs.some(choice=>choice.kind==='points'&&choice.available)?available('html','Offline point viewer using the site SVG point layer.'):plain?available('html','Offline prepared density-volume viewer with credits and provenance.'):unavailable('html',volume?.available||result.outputs.some(choice=>choice.kind==='volume-dataset-bank'&&choice.available)?COMPOSITE_VOLUME_PLANNED:volume?.reason??'No standalone renderer for this physical object.');
+  }else if(result.artifact==='telescope-source-output'||result.artifact==='telescope-output'){
+    const product=await verifiedProduct(path),selection=product.record.parameters.selection;
+    const kind=selection===undefined?undefined:requireRecord(selection,'exported selection').kind;
+    if(kind==='image'||kind==='band-image'||kind==='feature-map')html=available('html','Offline image viewer with its source receipt.');
+    else if(kind==='spectrum'||kind==='aperture-spectrum')html=available('html','Offline spectrum viewer with its source receipt.');
+  }
+  else if(result.artifact==='body-map'){const sphere=result.outputs.find(choice=>choice.kind==='sphere');html=sphere?.available?available('html','Offline standard sphere viewer with its source receipt.'):unavailable('html',sphere?.reason??'Standard sphere unavailable.');}
+  else if(result.artifact==='telescope-spatial-handoff'){
+    const product=await verifiedProduct(path),object=resolve(product.root,'object.json'),spatial=await validateSpatialObject(object,undefined);
+    const plain=spatial.kind==='volume'&&!spatial.payload.sky&&!spatial.payload.impostors&&spatial.payload.stacks.some(stack=>stack.leaves.length);
+    html=spatial.kind==='points'?available('html','Offline point viewer using the site SVG point layer with its handoff receipt.'):plain?available('html','Offline prepared density-volume viewer with its handoff receipt.'):unavailable('html',COMPOSITE_VOLUME_PLANNED);
+  }
+  else if(result.artifact==='delivery'&&result.outputs.some(choice=>choice.kind==='image'||choice.kind==='spectrum')){const images=result.outputs.filter(choice=>choice.kind==='image'&&choice.available&&choice.shape?.length===2);html=images.length===1?available('html','Export the unambiguous image as an offline page with its receipt.'):unavailable('html','Export an explicit image or spectrum first, then its output.product.json as HTML.');}
+  return html?{...result,terminal:false,outputs:[html,...result.outputs]}:result;
+}
+async function inspectArtifactOutputs(path:string,structure?:string):Promise<ArtifactOutputInspection>{
   const artifact=resolve(path),raw=requireRecord(JSON.parse(await readFile(artifact,'utf8')));
   if(raw.schema==='cssearth-telescope-local-import@1'){
     if(structure!==undefined)throw new TypeError('--structure does not select a local-import member.');
@@ -123,6 +147,7 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
   }
   if(stage==='telescope-sphere'){const context=sourceContext(source.record.parameters);return {artifact:stage,target:contextTarget(context),source:artifact,sourceContext:context,outputs:[],terminal:true};}
   if(stage==='telescope-spatial-handoff')return {artifact:stage,...(typeof source.record.parameters.target==='string'?{target:source.record.parameters.target}:{}),source:artifact,outputs:[],terminal:true};
+  if(stage==='telescope-html')return {artifact:stage,source:artifact,outputs:[],terminal:true};
   if(stage==='telescope-family-operation')return{artifact:stage,...(typeof source.record.parameters.target==='string'?{target:source.record.parameters.target}:{}),source:artifact,outputs:[],terminal:true};
   throw new TypeError(`Product stage ${stage} has no public telescope output route`);
 }

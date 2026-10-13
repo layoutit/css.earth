@@ -21,13 +21,14 @@
  *
  * Memory: chandra_repro spawns the CIAO tools as separate executables, so the ceiling is applied to the whole process group, not
  * to Python alone. The group is sampled every second and the run is stopped if it passes the ceiling (2 GiB by default). */
+import { programStorePath } from '../../paths.mts';
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { freeMemoryPercent, toolchainPython, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductRun } from '@cssearth/objects';
 import { chandraFile, parseChandraProgram, PROGRAMS, type ChandraFile, type ChandraObservation, type ChandraProgram } from './archive.mts';
 import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts';
@@ -70,7 +71,7 @@ print(json.dumps({'seconds': round(time.time() - start, 1), 'peakRssBytes': peak
 `;
 
 export async function readChandraProgram(id: string) {
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`);
   return { path, program: parseChandraProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 
@@ -92,7 +93,7 @@ export async function chandraFiles(id: string, obsid: number, directory: string,
   if (inputs.changed || products.changed) {
     const updated: ChandraProgram = { ...program, observations: program.observations.map(other =>
       other.obsid === obsid ? { ...other, inputs: inputs.measured, products: products.measured } : other) };
-    await writeFile(path, `${JSON.stringify(updated, null, 2)}\n`);
+    await writeFile(programStorePath(path, 'write'), `${JSON.stringify(updated, null, 2)}\n`);
   }
   return { program, entry: { ...entry, inputs: inputs.measured, products: products.measured }, inputs: inputs.files, products: products.files };
 }

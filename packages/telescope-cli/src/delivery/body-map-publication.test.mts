@@ -1,3 +1,4 @@
+import '../test-support/index.mts';
 import { bodyMapFits, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
@@ -133,7 +134,7 @@ test('exact UTC request edges agree with their Julian dates',async()=>{
 });
 
 test('publication establishes input kind only from a current qualified artifact with matching input bytes',async()=>{
- const {writeProductRecord,fileSize}=await import('@cssearth/telescope/node'),{productRecordPath}=await import('@cssearth/telescope');
+ const {writeProductRecord,fileSize}=await import('@cssearth/telescope-core/node'),{productRecordPath}=await import('@cssearth/telescope-core');
  const {rememberQualification,loadQualifiedObservations}=await import('../qualification/qualified-observations.mts');
  const f=await fixture(),root=f.directory,cube=resolve(root,'selected.fits'),receipt=resolve(root,'comparison.json');
  await writeFile(cube,'verified cube fixture');await writeFile(receipt,'{}');

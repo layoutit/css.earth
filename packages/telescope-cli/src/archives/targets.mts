@@ -3,6 +3,8 @@
  * kept apart from the name, and a numbered body is never taken for the unnumbered one that shares its name (52 Europa is
  * not Jupiter's moon). Archive-specific matchers (Chandra's names and boxes, Keck's time stamps, JunoCam's slugs,
  * Spitzer's NAIF ids) stay with their archive. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from './site-targets.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireFiniteNumber } from '@cssearth/core';
@@ -34,18 +36,21 @@ export function matchNumberedTarget(target: string, shipped: ReadonlySet<string>
 }
 
 /** A shipped object with the names a proposer might have used and, for what does not move, where it is on the sky. */
-export interface NamedShippedObject { readonly id: string; readonly names: readonly string[]; readonly position?: { readonly raDeg: number; readonly decDeg: number; readonly radiusDeg: number } }
+export type { NamedShippedObject } from './site-target-contracts.mts';
+import type { NamedShippedObject } from './site-target-contracts.mts';
 
 /** Every object package with its id and display name, and a position for what does not move: a star within half an
  * arcminute, a nebula within a sixth of a degree of the centre its recipe records. `read` is how the archive reads a body
  * record or nebula recipe that may be absent (Hubble treats only a missing file as absent; JWST treats any unreadable one
  * so). */
 export async function namedShippedObjects(read: (path: string) => Promise<unknown>, repository = REPOSITORY): Promise<NamedShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).named;
   const ids = await shippedObjectIds(repository);
   return Promise.all(ids.map(id => namedShippedObject(id, read, repository)));
 }
 /** One object package, read the same way: what a search of a single target needs without reading every body. */
 export async function namedShippedObject(id: string, read: (path: string) => Promise<unknown> = readJsonOrNull, repository = REPOSITORY): Promise<NamedShippedObject> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).named.find(o => o.id === id) ?? { id, names: [id] };
   const body = await read(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`));
   const names = [id], physical = isRecord(body) && isRecord(body.physical) ? body.physical : undefined;
   if (physical && typeof physical.name === 'string') names.push(physical.name);

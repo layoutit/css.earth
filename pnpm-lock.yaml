@@ -53,10 +53,10 @@ importers:
         version: link:packages/spice
       '@cssearth/telescope':
         specifier: workspace:*
-        version: link:packages/telescope
-      '@cssearth/telescope-cli':
-        specifier: workspace:*
         version: link:packages/telescope-cli
+      '@cssearth/telescope-core':
+        specifier: workspace:*
+        version: link:packages/telescope-core
       '@cssearth/volume-viewer':
         specifier: workspace:*
         version: link:packages/volume-viewer
@@ -162,9 +162,9 @@ importers:
       '@cssearth/renderer':
         specifier: workspace:*
         version: link:../../../../packages/renderer
-      '@cssearth/telescope':
+      '@cssearth/telescope-core':
         specifier: workspace:*
-        version: link:../../../../packages/telescope
+        version: link:../../../../packages/telescope-core
       '@cssearth/volume-viewer':
         specifier: workspace:*
         version: link:../../../../packages/volume-viewer
@@ -245,9 +245,9 @@ importers:
       '@cssearth/spice':
         specifier: workspace:*
         version: link:../spice
-      '@cssearth/telescope':
+      '@cssearth/telescope-core':
         specifier: workspace:*
-        version: link:../telescope
+        version: link:../telescope-core
       '@layoutit/polycss':
         specifier: 0.2.11
         version: 0.2.11
@@ -436,30 +436,21 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
-  packages/telescope:
-    dependencies:
-      '@cssearth/core':
-        specifier: workspace:*
-        version: link:../core
-      '@cssearth/fits':
-        specifier: workspace:*
-        version: link:../fits
-      '@cssearth/objects':
-        specifier: workspace:*
-        version: link:../objects
-    devDependencies:
-      '@types/node':
-        specifier: ^26.4.0
-        version: 26.4.0
-      tsup:
-        specifier: ^8.0.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-
   packages/telescope-cli:
     dependencies:
+      '@layoutit/polycss':
+        specifier: 0.2.11
+        version: 0.2.11
+      geotiff:
+        specifier: 3.0.5
+        version: 3.0.5
+      linkedom:
+        specifier: ^0.18.13
+        version: 0.18.13
+      sharp:
+        specifier: 0.35.3
+        version: 0.35.3(@types/node@26.4.0)
+    devDependencies:
       '@cssearth/astronomy':
         specifier: workspace:*
         version: link:../astronomy
@@ -484,16 +475,9 @@ importers:
       '@cssearth/spice':
         specifier: workspace:*
         version: link:../spice
-      '@cssearth/telescope':
+      '@cssearth/telescope-core':
         specifier: workspace:*
-        version: link:../telescope
-      linkedom:
-        specifier: ^0.18.13
-        version: 0.18.13
-      sharp:
-        specifier: 0.35.3
-        version: 0.35.3(@types/node@26.4.0)
-    devDependencies:
+        version: link:../telescope-core
       '@types/node':
         specifier: ^26.4.0
         version: 26.4.0
@@ -506,6 +490,28 @@ importers:
       pngjs:
         specifier: 7.0.0
         version: 7.0.0
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
+  packages/telescope-core:
+    dependencies:
+      '@cssearth/core':
+        specifier: workspace:*
+        version: link:../core
+      '@cssearth/fits':
+        specifier: workspace:*
+        version: link:../fits
+      '@cssearth/objects':
+        specifier: workspace:*
+        version: link:../objects
+    devDependencies:
+      '@types/node':
+        specifier: ^26.4.0
+        version: 26.4.0
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)

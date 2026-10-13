@@ -3,12 +3,13 @@
  * API's answers (OpenAlex) are cut: no work is kept for M95 and M83, and for M51 three of its 91, without their author lists; each is filed
  * under the request the survey makes now, which asks the same question with more spellings and fields than the one that was answered. M95's Cepheids come from a paper VizieR does not hold and from a reanalysis whose
  * table gives every row its galaxy's centre and the star's SIMBAD name; M83's have a table with a position per star. */
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import { parseCli } from '../cli-arguments.mts';
 import { loadTargetCatalogue } from '../observation-query/query.mts';
 import { parseSimbadTsv } from '../new-object/archives/tables/simbad-tap.mts';
@@ -18,7 +19,7 @@ import { formatStars, parseSimbadTypes, simbadQueries, STAR_WORDS, STARS_SCHEMA,
 
 interface Served { readonly url: string; readonly body: string }
 // Read once: the catalogue is every object package's descriptor.
-const catalogue = await loadTargetCatalogue(WORKSPACE);
+const catalogue = await loadTargetCatalogue(requireWorkspace());
 const served = async (galaxy: string): Promise<Served[]> => JSON.parse(await readFile(resolve(import.meta.dirname, `../fixtures/telescope-stars/served-${galaxy}.json`), 'utf8')) as Served[];
 /** Answers each recorded request once, by its URL; any other request fails the test. */
 const answering = (answers: readonly Served[], replace: (url: string, body: string) => string = (_url, body) => body) => (async (url: string | URL | Request) => {
@@ -38,7 +39,7 @@ test('SIMBAD\'s answers are read by column, and a star class is a branch of its 
 });
 
 test('a table that gives its stars a period and a SIMBAD name, and no place of their own, is a lead placed by SIMBAD', async () => {
-  const result = await surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(await served('m95')) }), cepheids = result.classes[0]!;
+  const result = await surveyStars(requireWorkspace(), { target: 'm95', catalogue, fetcher: answering(await served('m95')) }), cepheids = result.classes[0]!;
   assert.deepEqual([result.schema, result.target, result.simbad.name, result.simbad.majorAxisArcmin], [STARS_SCHEMA, { id: 'm95', name: 'M95' }, 'M 95', 5.59651]);
   assert.deepEqual([result.objects, result.stars, cepheids.id, cepheids.count], [210, 72, 'cepheid', 48]);
   assert.deepEqual(cepheids.papers.map(paper => [paper.bibcode, paper.stars, paper.catalogue?.name ?? null]),
@@ -62,7 +63,7 @@ test('a table that gives its stars a period and a SIMBAD name, and no place of t
 test('a table with a period and a position per star is a ready lead, for a class the generator drafts', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-stars-'));
   try {
-    const result = await surveyStars(WORKSPACE, { target: 'M83', catalogue, directory, fetcher: answering(await served('m83')) });
+    const result = await surveyStars(requireWorkspace(), { target: 'M83', catalogue, directory, fetcher: answering(await served('m83')) });
     assert.deepEqual(result.classes.map(starClass => [starClass.id, starClass.count]), [['cepheid', 109], ['type-ii-cepheid', 0], ['rr-lyrae', 0], ['long-period', 52], ['supergiant', 74]]);
     const table = result.classes[0]!.papers[0]!.catalogue!.tables[0]!;
     assert.deepEqual([table.name, table.rows, table.columns.period, table.ownPositions], ['J/ApJ/591/L111/table1', 112, { column: 'Per', log: false }, true]);
@@ -81,7 +82,7 @@ test('a table that lists each star by its detector pixel is a lead that still ne
   const pixels = ['#RESOURCE=yCat_15290723_1', '#Name: J/ApJ/529/723/appen', '#Title:', '#INFO\tnrows=232\tNumber of rows of the table', '#Table\t:', '#Name: J/ApJ/529/723/appen', '#Title:', column('Cluster', 'a9', 'Cluster name', 'meta.id.parent'),
     column('CNN', 'A3', 'Cepheid number in the cluster (1)', 'meta.id;meta.main'), column('Chip', 'I1', '? Chip number', 'meta.id;instr'), column('Xpos', 'F6.1', 'X pixel position', 'pos.cartesian.x;instr.det'),
     column('Ypos', 'F6.1', 'Y pixel position', 'pos.cartesian.y;instr.det'), column('Per', 'F5.2', 'TRIAL period', 'time.period')].join('\n');
-  const result = await surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(await served('m95'), (url, body) => url.includes('-meta.all') && url.includes('2003A') ? pixels : body) });
+  const result = await surveyStars(requireWorkspace(), { target: 'm95', catalogue, fetcher: answering(await served('m95'), (url, body) => url.includes('-meta.all') && url.includes('2003A') ? pixels : body) });
   const table = result.classes[0]!.papers[1]!.catalogue!.tables[0]!;
   assert.deepEqual([table.columns.pixel, table.columns.position, table.ownPositions], [{ x: 'Xpos', y: 'Ypos', chip: 'Chip' }, false, false]);
   assert.deepEqual(result.leads, [{ class: 'cepheid', bibcode: '2003A&A...411..361K', table: 'J/ApJ/529/723/appen', positions: 'pixel', command: 'telescope new-object --from-table cepheid:m95=J/ApJ/529/723/appen#exposure=mast:HST/product/FILE.fits,firstPixel=N --out SPEC.json' }]);
@@ -91,7 +92,7 @@ test('a table that lists each star by its detector pixel is a lead that still ne
 });
 
 test('a single star of no class, with no parallax or proper motion in SIMBAD, is named as a lead for a spec written by hand', async () => {
-  const result = await surveyStars(WORKSPACE, { target: 'm51', catalogue, fetcher: answering(await served('m51')) });
+  const result = await surveyStars(requireWorkspace(), { target: 'm51', catalogue, fetcher: answering(await served('m51')) });
   assert.deepEqual(result.others, [{ name: 'EQ J132952.7+471036', otype: '*', papers: 7 }, { name: 'NAME M51-DS1', otype: '*', papers: 4 }, { name: 'EQ J1329+4710', otype: '*', papers: 2 }]);
   assert.deepEqual(result.leads, [], 'its long-period variable has a table, and no class the generator drafts');
   const text = formatStars(result);
@@ -114,27 +115,27 @@ test('a single star of no class, with no parallax or proper motion in SIMBAD, is
   // When OpenAlex does not answer, arXiv is asked; when neither does, the survey still stands and says so.
   const answers = await served('m51'), failing = (async (url: string | URL | Request) => String(url).includes('api.openalex.org') ? new Response('slow down', { status: 429 })
     : String(url).includes('export.arxiv.org') ? new Response('', { status: 503 }) : answering(answers)(url)) as typeof fetch;
-  const unanswered = await surveyStars(WORKSPACE, { target: 'm51', catalogue, fetcher: failing });
+  const unanswered = await surveyStars(requireWorkspace(), { target: 'm51', catalogue, fetcher: failing });
   assert.deepEqual([unanswered.works, unanswered.worksIssue, unanswered.others.length], [[], 'OpenAlex returned HTTP 429. arXiv returned HTTP 503.', 3]);
   assert.match(formatStars(unanswered), /\nThe papers API did not answer \(OpenAlex returned HTTP 429\. arXiv returned HTTP 503\.\); run `telescope papers` for it later\.\n/u);
   const feed = '<feed xmlns="http://www.w3.org/2005/Atom"><entry><id>http://arxiv.org/abs/2110.11376v2</id><title>An Exceptional Dimming Event for a Massive, Cool Supergiant in M51</title><summary>A star of M51.</summary><published>2021-10-21T00:00:00Z</published></entry></feed>';
-  const fromArxiv = await surveyStars(WORKSPACE, { target: 'm51', catalogue, fetcher: (async (url: string | URL | Request) => String(url).includes('export.arxiv.org') ? new Response(feed) : failing(url)) as typeof fetch });
+  const fromArxiv = await surveyStars(requireWorkspace(), { target: 'm51', catalogue, fetcher: (async (url: string | URL | Request) => String(url).includes('export.arxiv.org') ? new Response(feed) : failing(url)) as typeof fetch });
   assert.deepEqual([fromArxiv.works, fromArxiv.worksIssue], [[{ year: 2021, title: 'An Exceptional Dimming Event for a Massive, Cool Supergiant in M51', doi: null }], 'OpenAlex returned HTTP 429.']);
   assert.match(formatStars(fromArxiv), /\nWorks that name it with a kind of star \(papers API, from arXiv alone\), [^\n]+\n {2}2021 {2}An Exceptional[^\n]+\n\nOpenAlex did not answer \(OpenAlex returned HTTP 429\.\); run `telescope papers` for it later\.\n/u);
   // A galaxy with no such star says nothing of them.
-  const none = await surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(await served('m95')) });
+  const none = await surveyStars(requireWorkspace(), { target: 'm95', catalogue, fetcher: answering(await served('m95')) });
   assert.deepEqual([none.others, none.works], [[], []]); assert.doesNotMatch(formatStars(none), /Other single stars|Works that name it/u);
 });
 
 test('a target SIMBAD gives no outline is refused by the field that is empty, and the command line takes one galaxy', async () => {
   const answers = await served('m95');
-  await assert.rejects(surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(answers, (url, body) => url === answers[0]!.url ? body.replace('\t5.59651', '\t') : body) }),
+  await assert.rejects(surveyStars(requireWorkspace(), { target: 'm95', catalogue, fetcher: answering(answers, (url, body) => url === answers[0]!.url ? body.replace('\t5.59651', '\t') : body) }),
     /SIMBAD gives M {2}95 no outline \(basic\.galdim_majaxis is empty\), so the survey has no region to search/u);
   // Every name the catalogue has for the galaxy is tried before giving up.
   const asked: string[] = [], unknown = (async (url: string | URL | Request) => { asked.push(new URL(String(url)).searchParams.get('QUERY')!.split('n.id = ')[1]!); return new Response('main_id\tra\tdec\tgaldim_majaxis\n'); }) as typeof fetch;
-  await assert.rejects(surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: unknown }), /SIMBAD knows no object named M95 or /u);
+  await assert.rejects(surveyStars(requireWorkspace(), { target: 'm95', catalogue, fetcher: unknown }), /SIMBAD knows no object named M95 or /u);
   assert.equal(asked[0], "'M95'"); assert.ok(asked.length > 1);
-  await assert.rejects(surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: (async () => new Response('', { status: 503 })) as typeof fetch }), /SIMBAD returned HTTP 503 for https:\/\/simbad/u);
+  await assert.rejects(surveyStars(requireWorkspace(), { target: 'm95', catalogue, fetcher: (async () => new Response('', { status: 503 })) as typeof fetch }), /SIMBAD returned HTTP 503 for https:\/\/simbad/u);
   assert.deepEqual(parseCli(['stars', 'm95', '--out', 'out', '--json']), { command: 'stars', target: 'm95', directory: resolve('out'), json: true, verbose: false });
   assert.throws(() => parseCli(['stars']), /Use telescope stars GALAXY \[--json\] \[--out DIRECTORY\]\./u);
   assert.throws(() => parseCli(['stars', 'm95', '--instrument', 'x']), /Unknown or repeated stars option --instrument\./u);

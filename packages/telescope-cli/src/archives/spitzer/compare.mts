@@ -25,12 +25,13 @@
  * 'archive-agreement')` without knowing this toolkit exists. Its `establishes` says in as many words that the re-mosaic is
  * not the observatory's own. The ledger counts a capability as checked only from a receipt that parses, names its
  * observation, and names the archive bytes its program pinned. */
+import { programStorePath } from '../../paths.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
@@ -198,7 +199,7 @@ export function parseReproduction(value: unknown): SpitzerReproduction {
 }
 
 export const receiptName = (program: string, channel: number) => `${program}.ch${channel}.remosaic.reproduction.json`;
-export const receiptPath = (program: string, channel: number) => resolve(PROGRAMS, receiptName(program, channel));
+export const receiptPath = (program: string, channel: number) => resolve(programStorePath(PROGRAMS), receiptName(program, channel));
 export const readReproduction = async (program: string, channel: number): Promise<SpitzerReproduction | null> =>
   readFile(receiptPath(program, channel), 'utf8').then(text => parseReproduction(JSON.parse(text) as unknown), () => null);
 
@@ -241,19 +242,20 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
     framesCombined: mosaicMembers(channel).map(frame => frame.dce), frameTimeSeconds: channel.mosaicFrameTimeSeconds,
     statistics: comparison.statistics, limits: LIMITS,
   });
-  await writeFile(receiptPath(program.id, channel.channel), `${JSON.stringify(reproduction, null, 2)}\n`);
+  const path = programStorePath(receiptPath(program.id, channel.channel), 'write');
+  await writeFile(path, `${JSON.stringify(reproduction, null, 2)}\n`);
 
   const run: ProductRun = { telescope: TELESCOPE, stage: COMPARE_STAGE, inputs,
     parameters: { comparedOver: 'pixels the archive covers and both products hold', maxSamples: MAX_SAMPLES },
     software: [{ name: 'cssearth-fits', version: 'repository' }] };
-  await writeProductRecord(`${receiptPath(program.id, channel.channel)}.product.json`, run,
-    [{ path: receiptName(program.id, channel.channel), file: receiptPath(program.id, channel.channel), units: 'dimensionless shares and ratios' }]);
+  await writeProductRecord(`${path}.product.json`, run,
+    [{ path: receiptName(program.id, channel.channel), file: path, units: 'dimensionless shares and ratios' }]);
 
   // The evidence belongs on the mosaic's own record, not only on the receipt's. A consumer holding the product asks
   // `evidenceFor(record, mosaic, 'archive-agreement')` through the shared API and must find this check there; evidence filed
   // only against the receipt is evidence nobody looking at the product can discover. addProductEvidence rewrites that one
   // list and refuses if the mosaic on disk is no longer the file its record made, so evidence can never drift onto other bytes.
-  await addProductEvidence(resolve(work, `${output}.product.json`), [archiveAgreement(program, channel, archive.name, output)], path => resolve(work, path), () => receiptPath(program.id, channel.channel));
+  await addProductEvidence(resolve(work, `${output}.product.json`), [archiveAgreement(program, channel, archive.name, output)], path => resolve(work, path), () => path);
   return reproduction;
 }
 

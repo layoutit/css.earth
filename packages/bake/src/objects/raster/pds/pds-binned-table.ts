@@ -3,7 +3,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 
 export function parsePdsBinnedTable(label: string, text: string, binDegrees: number, quantity: string, units: string) {
   const field = (key: string) => pds3Keyword(label, key);

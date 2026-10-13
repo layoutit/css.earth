@@ -15,7 +15,7 @@ import { hasErrorCode } from '@cssearth/core';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import { manifestSources } from '@cssearth/bake/sources';
-import { composeSkyBandPng, verifySkyBandRecipe } from '@cssearth/telescope-cli/sky/sky-band-composite';
+import { composeSkyBandPng, verifySkyBandRecipe } from '../../../../packages/telescope-cli/src/sky/sky-band-composite.mts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 

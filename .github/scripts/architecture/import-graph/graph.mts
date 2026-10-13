@@ -69,10 +69,13 @@ export function trackedStandIn(path: string, tracked: ReadonlySet<string>): stri
 const git = (root: string, ...args: string[]) =>
   execFileSync('git', args, { cwd: root, maxBuffer: 256 * 1024 * 1024, encoding: 'utf8' }).split('\0').filter(Boolean);
 
-/** Tracked files plus new files not yet added and not ignored, as `pnpm check:pr` selects local changes.
+/** Tracked files plus unignored new files, excluding pending worktree deletions.
+ * Git's deleted list excludes skip-worktree entries, so a sparse checkout still fails completeness checks.
  * Generated output is ignored, so it never becomes part of the graph. */
 export function repositoryFiles(root: string): string[] {
-  return [...new Set([...git(root, 'ls-files', '-z'), ...git(root, 'ls-files', '-z', '--others', '--exclude-standard')])].sort();
+  const deleted = new Set(git(root, 'ls-files', '-z', '--deleted'));
+  return [...new Set([...git(root, 'ls-files', '-z'), ...git(root, 'ls-files', '-z', '--others', '--exclude-standard')])]
+    .filter(path => !deleted.has(path)).sort();
 }
 
 export const CRUISED_SOURCE = /\.(?:[cm]?[jt]s|tsx)$/u;

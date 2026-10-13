@@ -1,6 +1,6 @@
 import type {GeoFrame,DiskPhotometry,PhasePhotometry} from '../contracts.ts';
 import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY, phaseGain as phaseFunctionGain } from '../../../../photometry/index.ts';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 import { dotN as dot } from '@cssearth/core';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO
 // product. No image coordinates, ray tracing or source geometry enter runtime.

@@ -1,7 +1,7 @@
 import { parseSnapshot, VO_DISCOVERY_SCHEMA, canonical, jsonValue, parseMetadata, parsePin, parseRegion, type DiscoverySnapshot, type IcrsCircle, type Json } from '@cssearth/objects';
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits } from '@cssearth/telescope/node';
+import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductKind } from '../requests/recipe-request.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { recall } from '../archives/memory.mts';
@@ -23,7 +23,8 @@ export interface ServiceProfile {
 /** The archive boundary needs only explicit discovery/subset inputs. Scientific acceptance
  * criteria remain in CapabilityRequest and are never synthesized for target exploration. */
 export interface DiscoveryRequest {
-  readonly target: string;
+  readonly target?: string;
+  readonly search?: 'position';
   /** Exact entered name for this saved request, only associated after unique catalogue resolution to `target`. */
   readonly requestedTargetName?: string;
   readonly wavelengthMicrometres?: readonly [number, number];
@@ -37,8 +38,8 @@ export interface DiscoveryRequest {
   /** A circle to search by footprint only, never a cutout (`region` is the cutout). A SIMBAD target supplies SIMBAD's
    * position and position error here. */
   readonly footprint?: import('@cssearth/objects').IcrsCircle;
-  /** A target outside the application catalogue, named and placed by SIMBAD (`@cssearth/telescope/node`). */
-  readonly skyTarget?: import('@cssearth/telescope/node').SkyTarget;
+  /** A target outside the application catalogue, named and placed by SIMBAD (`@cssearth/telescope-core/node`). */
+  readonly skyTarget?: import('@cssearth/telescope-core/node').SkyTarget;
   readonly spectralFrame?: 'barycentric';
   readonly transferLimits?: TransferLimits;
 }
@@ -58,7 +59,7 @@ export const SERVICES: readonly ServiceProfile[] = [
 export interface ArchiveTarget { readonly id: string; readonly names: readonly string[]; readonly classification?: string; readonly classificationSource?: string }
 /** `in-field` means a region query selected a record named for another target. The saved reason says whether the
  * service matched footprint intersection or only its reported center. Neither establishes target identity. */
-export interface TargetAssociation { readonly status: 'confirmed' | 'ambiguous' | 'unmatched' | 'in-field'; readonly target: string; readonly reason: string }
+export interface TargetAssociation { readonly status: 'confirmed' | 'ambiguous' | 'unmatched' | 'in-field'; readonly target?: string; readonly reason: string }
 const nameKey = (s: string) => s.trim().toLocaleLowerCase('en-US').replace(/\s+/gu, ' ');
 const compactKey = (s: string) => nameKey(s).replace(/[\s-]+/gu, '');
 const catalogueDesignation = /^[A-Za-z]{1,12}[\s-]*\d+[A-Za-z0-9\s-]*$/u;
@@ -78,14 +79,14 @@ export function associateTarget(rawName: Json | undefined, rawClass: Json | unde
 export interface DiscoveredObservation {
   readonly key: string; readonly snapshot: string; readonly service: string; readonly table: string;
   readonly facility: string | null; readonly collection: string | null; readonly telescopeName: string | null; readonly instrument: string | null;
-  readonly identities: Readonly<Record<string, Json>>; readonly target: TargetAssociation; readonly rawTarget: Json;
+  readonly identities: Readonly<Record<string, Json>>; readonly target: TargetAssociation; readonly rawTarget: string | null;
   readonly kind: string | null; readonly productType:ProductTypeMapping|null; readonly familyEvidence: ObservationFamilyEvidence; readonly calibration: { readonly scheme: string; readonly token: Json };
   readonly wavelengthsMicrometres: readonly [number | null, number | null]; readonly startIso: string | null; readonly endIso: string | null;
   readonly spatial: { readonly frame: string | null; readonly description: Json; readonly coordinates: Readonly<Record<string, Json>> };
   readonly access: { readonly url: string | null; readonly mime: string | null; readonly estimatedKilobytes: number | null };
   readonly issues: readonly string[];
 }
-export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceProfile, target: ArchiveTarget, catalogue: readonly ArchiveTarget[]): DiscoveredObservation[] {
+export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceProfile, target: ArchiveTarget | undefined, catalogue: readonly ArchiveTarget[]): DiscoveredObservation[] {
   if (snapshot.service !== profile.service || snapshot.table !== profile.table || snapshot.model !== profile.model) throw new TypeError('VO profile does not match snapshot.');
   const epn = profile.model === 'epn-tap-2.0';
   return snapshot.response.rows.map((row, index) => {
@@ -119,8 +120,8 @@ export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceP
     return { key: recordKey(snapshot, row, profile.identityColumns, index), snapshot: snapshot.response.raw.path, service: snapshot.service, table: snapshot.table,
       collection, facility, telescopeName: collection && profile.collections?.includes(collection) ? collection : facility,
       instrument: string('instrument_name'),
-      identities: Object.fromEntries(keys.map(k => [k, row[k] ?? null])), rawTarget: row.target_name ?? null,
-      target: fieldAssociation(associateTarget(row.target_name, row.target_class, target, catalogue), row.target_name, regionQueried(snapshot, profile, row), profile.spatialMatch), kind,productType,
+      identities: Object.fromEntries(keys.map(k => [k, row[k] ?? null])), rawTarget: string('target_name'),
+      target: fieldAssociation(target ? associateTarget(row.target_name, row.target_class, target, catalogue) : { status: 'unmatched', reason: 'Position search; no named target requested.' }, row.target_name, regionQueried(snapshot, profile, row), profile.spatialMatch), kind,productType,
       familyEvidence: productTypeFamilyEvidence(productType, { kind: 'archive-adapter', id: profile.authority, evidence: `${profile.service} ${profile.table}; ${profile.documentation}` }),
       calibration: { scheme: epn ? 'epn-tap:processing_level' : 'obscore:calib_level', token: row[epn ? 'processing_level' : 'calib_level'] ?? null },
       wavelengthsMicrometres: wavelengths, startIso: time(epn ? 'time_min' : 't_min'), endIso: time(epn ? 'time_max' : 't_max'),
@@ -164,8 +165,8 @@ export function fieldAssociation(association: TargetAssociation, rawName: Json |
   const selected = spatialMatch === 'mast-api-cone' ? 'MAST positional search selected this observation for' : 'its footprint intersects';
   const meaning = spatialMatch === 'mast-api-cone'
     ? 'The positional result does not establish a target identity or a detection.'
-    : 'The target is in the field; field membership is not a target identity.';
-  return { status: 'in-field', target: association.target, reason: `The archive names ${name}; ${selected} the ICRS circle (${region.raDegrees}, ${region.decDegrees}, radius ${region.radiusDegrees} deg). ${meaning}` };
+    : association.target === undefined ? 'The record is in the field; field membership is not a target identity.' : 'The target is in the field; field membership is not a target identity.';
+  return { status: 'in-field', ...(association.target === undefined ? {} : { target: association.target }), reason: `The archive names ${name}; ${selected} the ICRS circle (${region.raDegrees}, ${region.decDegrees}, radius ${region.radiusDegrees} deg). ${meaning}` };
 }
 /** The requested spatial circle: the explicit cutout if there is one, otherwise the discovery footprint. */
 export const searchCircle = (request?: DiscoveryRequest): IcrsCircle | undefined => request?.region ?? request?.footprint;
@@ -196,7 +197,7 @@ export async function mastConeSelection(profile: ServiceProfile, region: IcrsCir
 }
 export function targetQuery(profile: ServiceProfile, names: readonly string[], sampleLimit = 50, request?: DiscoveryRequest, spatialIds: readonly string[] = []): string {
   if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)?$/u.test(profile.table)) throw new TypeError('Unvalidated TAP table identifier.');
-  if (!Number.isSafeInteger(sampleLimit) || sampleLimit < 1 || sampleLimit > 1000 || !names.length) throw new TypeError('A bounded TAP target-name query is required.');
+  if (!Number.isSafeInteger(sampleLimit) || sampleLimit < 1 || sampleLimit > 1000 || !names.length && !searchCircle(request)) throw new TypeError('A bounded TAP name or position query is required.');
   const variants = profile.compactNameVariants ? names.flatMap(name => [name, name.replace(/\s+/gu, ''), name.replace(/\s+/gu, '-')]) : names;
   const literals = [...new Set(variants)].map(n => { if (!n.trim() || /[\u0000-\u001f]/u.test(n)) throw new TypeError('Invalid target name.'); return `'${n.replaceAll("'", "''")}'`; });
   const byName = `target_name IN (${literals.join(',')})`;
@@ -207,7 +208,8 @@ export function targetQuery(profile: ServiceProfile, names: readonly string[], s
   const spatial = circle && profile.model === 'obscore-1.1'
     ? profile.spatialMatch === 'mast-api-cone' ? ids.length ? `obs_id IN (${ids.join(',')})` : undefined : regionClause(circle)
     : undefined;
-  const filters = [spatial ? `(${byName} OR ${spatial})` : byName];
+  if (!names.length && profile.model !== 'obscore-1.1') throw new TypeError('This provider has no ICRS footprint; needs a name.');
+  const filters = [names.length ? spatial ? `(${byName} OR ${spatial})` : byName : spatial ?? '1=0'];
   if (profile.collections?.length) {
     const collections = profile.collections.map(name => {
       if (!/^[A-Za-z0-9_-]+$/u.test(name)) throw new TypeError('Invalid archive collection.');
@@ -247,7 +249,7 @@ export function instrumentFacetQuery(profile: ServiceProfile, names: readonly st
 export interface InstrumentFacets { readonly names: readonly string[]; readonly complete: boolean; readonly evidence: string; readonly issues: readonly string[] }
 /** Enumerate archive modes before sampling rows, so a high-volume mode cannot hide every later one. */
 export async function discoverInstrumentFacets(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits): Promise<InstrumentFacets> {
-  const directory = resolve(root, 'output/telescopes/vo/metadata'), query = instrumentFacetQuery(profile, names, request);
+  const directory = resolve(USER_ROOT, 'output/telescopes/vo/metadata'), query = instrumentFacetQuery(profile, names, request);
   // The same question asked within the last day is answered from its saved file (archives/memory.mts).
   const kept = await recall(directory, '.facets.json', value => {
     const result = isRecord(value) && value.query === query && isRecord(value.result) ? value.result : undefined;
@@ -267,7 +269,7 @@ export async function discoverInstrumentFacets(root: string, profile: ServicePro
   return result;
 }
 export async function discover(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits, sampleLimit = 50): Promise<DiscoverySnapshot> {
-  const circle = searchCircle(request), directory = resolve(root, 'output/telescopes/vo/metadata');
+  const circle = searchCircle(request), directory = resolve(USER_ROOT, 'output/telescopes/vo/metadata');
   // The same question asked within the last day is answered from its saved snapshot, while the response it was read from is
   // still on disk. A search MAST's positional service has to select first is always asked: its question is not known before.
   if (!(circle && profile.spatialMatch === 'mast-api-cone')) {
@@ -288,7 +290,7 @@ export async function discover(root: string, profile: ServiceProfile, request: D
     ? `records selected by MAST's positional service for the requested ICRS circle (${spatialSelection.ids.length} ids; ${spatialSelection.complete ? 'bounded page' : 'more pages exist'}; positional membership is not target identity)`
     : 'records whose footprint intersects the requested ICRS circle (in the field, not identified as the target)';
   const snapshot = parseSnapshot({ schema: VO_DISCOVERY_SCHEMA, service: profile.service, table: profile.table, model: profile.model,
-    request, query, sampleLimit, scope: `${circle && profile.model === 'obscore-1.1' ? `Exact target-name/alias search, plus ${spatialScope}` : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${circle && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
+    request, query, sampleLimit, scope: `${!request.target ? spatialScope : circle && profile.model === 'obscore-1.1' ? `Exact target-name/alias search, plus ${spatialScope}` : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${circle && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
     ...(spatialSelection ? { spatialSelection } : {}),
     completeness: response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' || spatialSelection?.complete === false ? 'overflow' : 'bounded-sample' });
   await writeFile(resolve(directory, `${responseName(snapshot.response.raw.path)}.discovery.json`), canonical(snapshot));

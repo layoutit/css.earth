@@ -27,13 +27,14 @@
  *
  * Beside each drizzled result the stage writes its product record: the calibrated frames at their sizes, the fit (shift,
  * scale, the residual over the fit region before and after), the star's position, and the software versions the run reported. */
+import { programStorePath } from '../../paths.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython, fileSize, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { freeMemoryPercent, toolchainPython, fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun } from '@cssearth/objects';
 import { PROGRAMS } from './archive.mts';
 import { hstSoftware, MEMORY_GUARD, readHstProgram, REFERENCE_FILES, runCalibration } from './calibrate.mts';
@@ -70,7 +71,7 @@ export function parsePsfSubtraction(value: unknown): PsfSubtraction {
         if (a.length !== 2 || !(a[0]! > 0 && a[1]! > a[0]!)) throw new TypeError('The centre annulus runs from a positive inner to a larger outer radius.');
         return { annulusArcsec: [a[0]!, a[1]!] as const, excludeHalfWidthArcsec: requireFiniteNumber(c.excludeHalfWidthArcsec) }; })() }, source: requireString(row.source) };
 }
-export const psfSubtractionPath = (id: string) => resolve(PROGRAMS, `${id}.psf-subtraction.json`);
+export const psfSubtractionPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.psf-subtraction.json`);
 
 const SUBTRACT = `
 import json, os, shutil, subprocess, sys, threading, time
@@ -225,7 +226,7 @@ export async function runPsfSubtraction(id: string, work: string, options: { sou
       const entry = program.observations.find(other => other.observation === roll.long)!;
       const drz = entry.products.find(product => product.name.endsWith('_drz.fits'));
       if (!drz) throw new Error(`${roll.long}: the archive made no drizzled product to take settings from.`);
-      const { mastFile } = await import('@cssearth/telescope/node');
+      const { mastFile } = await import('@cssearth/telescope-core/node');
       const theirs = (await readHstFileHdus(await mastFile(drz, resolve(work, 'mast'))))[0]!.header;
       const drizzle = { kernel: requireString(theirs.D001KERN, 'D001KERN'), pixfrac: requireFiniteNumber(theirs.D001PIXF, 'D001PIXF'), scale: requireFiniteNumber(theirs.D001SCAL, 'D001SCAL') };
       const name = `${record.id}-${band.band.toLowerCase()}-roll${roll.roll}`;

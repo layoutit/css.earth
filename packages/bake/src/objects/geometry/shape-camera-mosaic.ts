@@ -9,7 +9,7 @@ import {resolve} from 'node:path';
 import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.ts';
 import {loadPdsRadialTableMesh} from './pds-radial-table.ts';
 import { readFitsPrimary, readFitsImage, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 import { alignCameraBands, BAND_ALIGNMENT_CRITERIA } from './band-alignment.ts';
 
 const rad = Math.PI / 180;

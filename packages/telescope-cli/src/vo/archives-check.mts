@@ -5,16 +5,18 @@
  *   node packages/telescope-cli/src/vo/archives-check.mts ["HD 189733"]
  */
 import { spawnSync } from 'node:child_process';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { requireWorkspace, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const target = process.argv[2] ?? 'HD 189733', started = Date.now();
-const directory = await mkdtemp(resolve(WORKSPACE, 'output/archives-check-'));
+const workspace = requireWorkspace();
+await mkdir(resolve(USER_ROOT, 'output'), { recursive: true });
+const directory = await mkdtemp(resolve(USER_ROOT, 'output/archives-check-'));
 try {
   const run = spawnSync(process.execPath, ['packages/telescope-cli/run-typed-module.mjs', 'packages/telescope-cli/src/cli.mts', 'explore', target, '--json', '--out', resolve(directory, 'exploration')],
-    { cwd: WORKSPACE, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
+    { cwd: workspace, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
   if (run.status !== 0) throw new Error(`telescope explore ${target} failed (status ${run.status}): ${run.stderr.slice(-2000)}`);
   const answer = requireRecord(requireRecord(JSON.parse(run.stdout), 'exploration').answer, 'exploration answer');
   const services = requireArray(answer.services, 'services').map(raw => requireRecord(raw, 'service')).map(service => ({

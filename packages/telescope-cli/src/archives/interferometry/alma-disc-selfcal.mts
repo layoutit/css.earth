@@ -20,6 +20,7 @@
  * here, in TypeScript, and are tested. CASA reads the measurement set, grids the visibilities the fit is run on, makes the
  * model image on the imaging grid, solves and applies the gains and cleans. The fitted parameters cross the boundary as
  * numbers, and the disc profile is written into the generated script from the one statement of it in this file. */
+import { telescopePythonEnvironment, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -27,7 +28,6 @@ import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
-import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);
@@ -521,7 +521,7 @@ export async function ephemerisDistanceAu(visibilities: string, scratch: string,
   ].join('\n') + '\n';
   const path = resolve(scratch, 'ephemeris.py');
   await writeFile(path, script);
-  const result = spawnSync(casaPython, [path], { encoding: 'utf8', cwd: scratch });
+  const result = spawnSync(casaPython, [path], { env: telescopePythonEnvironment(), encoding: 'utf8', cwd: scratch });
   if (result.status !== 0) throw new Error(`Reading the ephemeris failed: ${result.stderr}`);
   const line = result.stdout.trim().split('\n').at(-1)!;
   const record = requireRecord(JSON.parse(line) as unknown, 'ephemeris distance');

@@ -1,6 +1,7 @@
 /** Reload the qualification and its pins; a serialized selection cannot authorize different bytes or facts. */
-import { resolve } from 'node:path';
-import { readProductRecord, fileSize } from '@cssearth/telescope/node';
+import { inputPath } from '../paths.mts';
+import { resolve, relative } from 'node:path';
+import { readProductRecord, fileSize } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 import { loadSourceProducts, sourceQualifiedObservations } from '../products/source-products.mts';
 import { loadQualifiedObservations, type QualifiedObservation } from '../qualification/qualified-observations.mts';
@@ -11,11 +12,11 @@ export async function selectedProductInput(root:string, selection:ObservationSel
  if(stated.program!==selection.programme||stated.telescope!==selection.telescope||stated.mode!==selection.mode||stated.target!==selection.request.target)throw new Error('Selection differs from its qualified artifact.');
  return qualifiedProductInput(root,stated);
 }
-export async function qualifiedProductInput(root:string, stated:QualifiedObservation) {
- const current=[...await loadQualifiedObservations(root,stated.target), ...sourceQualifiedObservations(await loadSourceProducts(root,stated.target))].find(p=>p.product===stated.product && p.productRecord===stated.productRecord && p.receipt===stated.receipt && p.program===stated.program && p.telescope===stated.telescope && p.mode===stated.mode && p.observation===stated.observation);
+export async function qualifiedProductInput(root:string, stated:QualifiedObservation, options: { readonly indexedSources?: boolean } = {}) {
+ const current=[...await loadQualifiedObservations(root,stated.target), ...options.indexedSources === false || stated.target === null ? [] : sourceQualifiedObservations(await loadSourceProducts(root,stated.target))].find(p=>p.product===stated.product && p.productRecord===stated.productRecord && p.receipt===stated.receipt && p.program===stated.program && p.telescope===stated.telescope && p.mode===stated.mode && p.observation===stated.observation);
  if(!current)throw new Error('The selected artifact or its qualification receipt is stale.');
- const file=resolve(root,current.product),pin=await fileSize(file),record=await readProductRecord(resolve(root,current.productRecord));
+ const file=inputPath(root, current.product),pin=await fileSize(file),record=await readProductRecord(inputPath(root, current.productRecord));
  if(!record?.outputs.some(o=>resolve(root,current.outputRoot,o.path)===file && o.bytes===pin.bytes))throw new Error('Selected artifact is not the qualified output.');
- const input:ProductInput={role:'qualified scientific product',identity:current.product,...pin};
+ const input:ProductInput={role:'qualified scientific product',identity:relative(root, file),...pin};
  return {file,input,facts:current.facts,qualification:current};
 }
