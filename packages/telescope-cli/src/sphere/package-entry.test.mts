@@ -10,7 +10,7 @@ test('sphere runs a built package entry without runtime compilation or solar loo
   const source = readFileSync(new URL('./sphere.mts', import.meta.url), 'utf8');
   assert.match(source, /from '@cssearth\/telescope\/sphere\/lane'/u);
   assert.doesNotMatch(source, /esbuild|followedWorkspaceSources|SPHERE_LANE|solar-geometry\.mts/u);
-  assert.match(source, /solarGeometry:SolarGeometry/u);
+  assert.match(source, /solarGeometry\?:SolarGeometry/u);
   const declaration = readFileSync(new URL('../../dist/sphere-lane.d.ts', import.meta.url), 'utf8');
   assert.match(declaration, /measurementSphere/u);
   assert.match(declaration, /SolarGeometry/u);

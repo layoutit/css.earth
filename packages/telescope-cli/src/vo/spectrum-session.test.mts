@@ -45,11 +45,15 @@ test('ESO FITS spectra reach native F03 export through saved exploration, get an
     assert.equal(saved.choices.length, 1);
     const result = await getSession(root, saved.directory, 1, () => {}, api);
     const outputs = await listArtifactOutputs(result.resultPath);
-    assert.ok(outputs.familyOperations?.some(operation => operation.id === 'spectrum-export'));
-    assert.equal(outputs.outputs.length, 0);
+    assert.equal(outputs.familyOperations?.find(operation => operation.id === 'spectrum-export')?.available, true);
+    assert.deepEqual(outputs.outputs, [], 'F03 deliveries use family operations; HTML does not read their native spectrum format.');
     const exported = await executeFamilyOperation(String(outputs.source), { operationId: 'spectrum-export' }, resolve(root, 'export'));
     const rows = (await readFile(exported.product, 'utf8')).trim().split('\n');
     assert.equal(rows.length, 15); assert.match(rows[1]!, /^2,1,/u);
+    const exportedOutputs = await listArtifactOutputs(exported.record);
+    assert.equal(exportedOutputs.artifact, 'telescope-family-operation');
+    assert.deepEqual(exportedOutputs.outputs, [], 'The F03 CSV export has no standalone HTML route.');
+    assert.equal(exportedOutputs.terminal, true);
     const [qualified] = await loadQualifiedObservations(root, target.id);
     assert.deepEqual(qualified!.facts, { target: target.id, verified: true, kind: 'spectrum', result: 'telescope-product' });
     await assert.rejects(qualifyVoProduct(root, { ...plan.products[0]!, observation: { ...observation, rawTarget: 'Wrong target' } }, policy), /OBJECT/u);

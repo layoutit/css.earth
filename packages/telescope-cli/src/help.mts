@@ -135,6 +135,8 @@ Physical object handoff (existing measured/modelled depth):
 
 Surface outputs:
   telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP_DIRECTORY
+  telescope export OUTPUT_DIRECTORY/output.product.json --output html --out HTML_DIRECTORY
+  telescope export OBJECT_JSON --output html --out HTML_DIRECTORY
   telescope export MAP_DIRECTORY/map.fits.product.json --output sphere --out SPHERE_DIRECTORY
   telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP_DIRECTORY  (compatibility alias)
   Navigation pins SPICE kernels and explicitly chooses WCS or disc registration.

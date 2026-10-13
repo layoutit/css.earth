@@ -3,16 +3,11 @@ import { OBJECT_SCHEMA, VOLUME_DATASET_RECORD_FILE, type PreparedCssPointField, 
 import { readFile,writeFile,mkdir,mkdtemp,rm,rmdir,rename,realpath } from 'node:fs/promises';
 import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { pathToFileURL } from 'node:url';
-import { createRequire } from 'node:module';
+import { loadPreparedCssPointField, loadPreparedCssVolume, loadPreparedVolumeDatasets, preparedTransportReader } from '@cssearth/telescope/viewer/lane';
 import { requireRecord,requireString } from '@cssearth/core';
 import { VERSION } from '../help.mts';
-import { writeProductRecord, requireWorkspace, telescopeScratch } from '@cssearth/telescope-core/node';
+import { writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
-
-type SpatialLoader = Partial<Pick<typeof import('@cssearth/renderer/stars/loader.ts'), 'loadPreparedCssPointField'>
-  & Pick<typeof import('@cssearth/renderer/volume/loader.ts'), 'loadPreparedCssVolume'>
-  & Pick<typeof import('@cssearth/renderer/volume/prepared-volume-datasets.ts'), 'loadPreparedVolumeDatasets' | 'preparedTransportReader'>>;
 
 export type SpatialKind='points'|'volume'|'volume-dataset-bank';
 type SpatialPayload =
@@ -22,7 +17,7 @@ type SpatialPayload =
   | {kind:'volume-dataset-bank';payload:PreparedVolumeDatasetIndex&{readonly provenance:unknown}};
 
 
-async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
+export async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
   const source=resolve(objectPath),root=dirname(source),bytes=await readFile(source),descriptor=requireRecord(JSON.parse(bytes.toString()));
   if(descriptor.schema!==OBJECT_SCHEMA||!['point-field','density-volume','volume-dataset-bank'].includes(String(descriptor.type)))throw new Error('Physical handoff requires an existing point-field, density-volume or volume-dataset-bank object.json; a spectral cube does not establish depth');
   const kind:SpatialKind=descriptor.type==='point-field'?'points':descriptor.type==='density-volume'?'volume':'volume-dataset-bank';
@@ -47,34 +42,23 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
   if(kind==='volume-dataset-bank')for(const path of ['README.md','source/manifest.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}
   }
-  const entry=pathToFileURL(resolve(requireWorkspace(), kind==='points'?'packages/renderer/src/stars/loader.ts':kind==='volume'?'packages/renderer/src/volume/loader.ts':'packages/renderer/src/volume/prepared-volume-datasets.ts'));
-  // Compilation belongs to the admitted checkout, which owns this development dependency.
-  const compiler = createRequire(pathToFileURL(resolve(requireWorkspace(), 'package.json'))).resolve('esbuild');
-  const { build }: typeof import('esbuild') = await import(pathToFileURL(compiler).href);
-  // Use the application's exact loader, including physical-frame and binary-bank validation.
-  const compiled=await build({entryPoints:[entry.pathname],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true,plugins:[{name:'absolute-package-imports',setup(build){build.onResolve({filter:/^[^./]/},args=>args.path.startsWith('node:')?undefined:{path:import.meta.resolve(args.path),external:true});}}]});
-  const scratch=await telescopeScratch('telescope-spatial-loader-');
-  const moduleFile=resolve(scratch,'loader.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
-  try{
-    const loader: SpatialLoader=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
     const transport={read:async(path:string)=>Uint8Array.from(await read(path)).buffer};
     const manifestPath=requireString(prepared.url);
     // Every dataset's volume and stars are read through the same checked transport, so the handoff holds the whole bank.
     const bank=async()=>{
-      const loaded=await loader.loadPreparedVolumeDatasets!(descriptor,transport,{resolve:path=>path,read:loader.preparedTransportReader!(transport)});
+      const loaded=await loadPreparedVolumeDatasets(descriptor,transport,{resolve:path=>path,read:preparedTransportReader(transport)});
       for(const dataset of loaded.index.datasets)await loaded.load(dataset.id);
       const record=requireRecord(JSON.parse((await read(relative(root,resolve(root,dirname(manifestPath),VOLUME_DATASET_RECORD_FILE)))).toString()),'volume dataset record');
       return {...loaded.index,provenance:record.provenance};
     };
-    const value:SpatialPayload=kind==='points'?{kind,payload:await loader.loadPreparedCssPointField!(descriptor,transport)}
-      :kind==='volume'?{kind,payload:await loader.loadPreparedCssVolume!(descriptor,transport)}
+    const value:SpatialPayload=kind==='points'?{kind,payload:await loadPreparedCssPointField(descriptor,transport)}
+      :kind==='volume'?{kind,payload:await loadPreparedCssVolume(descriptor,transport)}
       :{kind,payload:await bank()};
     const resources=value.kind==='volume-dataset-bank'?value.payload.datasets.flatMap(dataset=>dataset.resources):value.payload.resources;
     for(const resource of resources){const path=relative(root,resolve(root,dirname(manifestPath),resource.path)),content=await read(path);if(content.length!==resource.bytes)throw new Error(`Spatial resource ${resource.path} is ${content.length} bytes; ${manifestPath} lists ${resource.bytes}.`);}
     // A point field publishes its baked provenance beside its manifest (prepared/stars-provenance.json); the others carry it.
     const provenance:unknown=value.kind==='points'?requireRecord(JSON.parse((await read(relative(root,resolve(root,dirname(manifestPath),'stars-provenance.json')))).toString())).provenance:value.payload.provenance;
-    return {source,root,bytes,descriptor,checked,compiled,provenance,...value};
-  }finally{await rm(scratch,{recursive:true,force:true});}
+    return {source,root,bytes,descriptor,checked,provenance,...value};
 }
 
 export async function inspectSpatialObject(objectPath:string){

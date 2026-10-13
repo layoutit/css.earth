@@ -75,7 +75,7 @@ test('physical inspection and export share the existing loader, frame and credit
     const inspected=await inspectSpatialObject(object),ready=await listArtifactOutputs(object);assert.ok(ready.outputs.some(output=>output.kind==='points'&&output.available));
     const handoff=await exportSpatialObject(object,'points',resolve(root,'handoff')),receipt=JSON.parse(await readFile(handoff.receipt,'utf8'));
     assert.deepEqual(receipt.parameters.frame,inspected.frame);assert.deepEqual(receipt.parameters.provenance,inspected.provenance);
-    const terminal=await listArtifactOutputs(handoff.receipt);assert.equal(terminal.terminal,true);assert.deepEqual(terminal.outputs,[]);
+    const terminal=await listArtifactOutputs(handoff.receipt);assert.equal(terminal.terminal,false);assert.equal(terminal.outputs[0].kind,'html');assert.equal(terminal.outputs[0].available,true);
     await writeFile(handoff.object,'changed');await assert.rejects(listArtifactOutputs(handoff.receipt),/no longer its recorded size/);
     await writeFile(resolve(copy,'prepared/stars.bin'),'changed');
     const blocked=await listArtifactOutputs(object),choice=blocked.outputs.find(output=>output.kind==='points');assert.equal(choice?.available,false);assert.match(choice?.reason??'',/stars\.bin/);

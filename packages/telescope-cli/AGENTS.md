@@ -24,9 +24,8 @@ toolchains and scratch; `requireWorkspace()` gates site work. Read-only inputs u
   where `src/archives/programs.mts` puts them. No archive module names a body.
   The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
-- the entry scripts it runs by path as processes and the built sphere package entry (`src/workspace-commands/`, the sphere
-  lane exported as `@cssearth/telescope/sphere/lane` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
-  application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
+- the entry scripts it runs by path as processes and the built viewer package entries (`src/workspace-commands/`, the sphere
+  lane exported as `@cssearth/telescope/sphere/lane` and `src/sphere/sphere-html.mts`), because workspace commands read the checkout. Sphere export uses a compressed pack-time sphere bank containing shared geometry, selected raster layouts, CSS, physical frames and the two navigation directions when no workspace is admitted; `./viewer/lane` bundles the site's spatial loaders, SVG point layer and slab renderer without runtime compilation. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
   this package's `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in
   `labs/experiments/` also imports); they followed the lane out of `tools/experiments/` (now `labs/experiments/`);
 - the installer of the pinned Python astronomy toolchains (`src/toolchains/astronomy-toolchains.mts`, run as

@@ -55,8 +55,8 @@ test('confirmed direct FITS table reaches F08 export through saved exploration a
     assert.equal(data.record.schema, 'cssearth-telescope-delivery@3');
     assert.deepEqual(data.record.facts, { target: target.id, verified: true, kind: 'table', result: 'telescope-product' });
     const outputs = await listArtifactOutputs(result.resultPath);
-    assert.ok(outputs.familyOperations?.some(operation => operation.id === 'table-export'));
-    assert.equal(outputs.outputs.length, 0);
+    assert.equal(outputs.familyOperations?.find(operation => operation.id === 'table-export')?.available, true);
+    assert.deepEqual(outputs.outputs, [], 'Table deliveries offer family operations, with no HTML viewer.');
     const descriptor = outputs.source;
     assert.equal(typeof descriptor, 'string');
     const described = JSON.parse(await readFile(descriptor as string, 'utf8'));
@@ -65,6 +65,10 @@ test('confirmed direct FITS table reaches F08 export through saved exploration a
     assert.deepEqual(described.members, [{ id: 'science', path: 'science.fits', role: 'science', mediaType: 'application/fits' }]);
     const exported = await executeFamilyOperation(descriptor as string, { operationId: 'table-export' }, resolve(root, 'table-export'));
     assert.match(await readFile(exported.product, 'utf8'), /FLUX\n1\.5\n2\.5\n/u);
+    const exportedOutputs = await listArtifactOutputs(exported.record);
+    assert.equal(exportedOutputs.artifact, 'telescope-family-operation');
+    assert.deepEqual(exportedOutputs.outputs, [], 'Exported tables have no HTML viewer.');
+    assert.equal(exportedOutputs.terminal, true);
     const qualified = await loadQualifiedObservations(root, target.id);
     assert.equal(qualified.length, 1);
     assert.equal(qualified[0]!.facts.angularResolutionArcsec, undefined);

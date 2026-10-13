@@ -140,8 +140,11 @@ no Gaia source: the one Cepheid of that table within an arcsecond of its place, 
 | --- | --- | --- |
 | Qualified native delivery | image, spectrum, band image, aperture spectrum or feature map when `outputs` offers it | Explicit selectors reported by `outputs` |
 | Exported 2D measurement | projected body map | Pinned navigation geometry |
-| Projected body map | standalone interactive sphere | Complete embeddable standard body package |
+| Exported image or spectrum | standalone HTML with its receipt | None |
+| Projected body map | standalone fixed sphere | Complete embeddable standard body package |
 | Existing prepared point field, density volume or volume dataset bank | portable renderer handoff | None |
+| Existing prepared point field | standalone HTML using the site SVG point layer | None |
+| Prepared density volume without sky or impostor banks | standalone HTML using the site slab renderer | None |
 
 These are supported transitions, not claims that every product supports every row. Run `telescope outputs ARTIFACT` to see what an artifact actually supports. Export never turns an unresolved or refused request into a fulfilled one.
 
@@ -174,9 +177,13 @@ In a terminal, `outputs` also asks which available operation to run. Family oper
 - `aperture-spectrum` is the mean over a rectangle `X0,Y0,X1,Y1` (exclusive upper bounds), minus a disjoint `--background` box or `--background none`. It is not total source flux.
 - `feature-map` integrates the residual above a linear continuum from two `--continuum` bands, in the source unit × µm. It makes no chemical-identification or detection claim.
 
+HTML embeds its images, styles and receipt and opens offline without scripts. Spectrum charts retain masked gaps and supplied uncertainties. Sphere HTML shows the prepared fixed view; the native CSS camera is omitted because it requires drawing variables. Point HTML uses the site SVG point layer in a prepared fixed view. Limits: composite volumes with sky banks, impostor banks or dataset banks are refused; these HTML viewers are planned for v2.
+
 Every contributing sample must be valid. Aggregate uncertainties are omitted unless you pass `--uncertainty independent`. Select ambiguous PDS arrays with `--structure NAME` and `--hdu 0`. [Real Eris examples](../../docs/virtual-telescopes.md#example-exports-eris-jwst-nirspec-ifu).
 
 ```sh
+telescope export MEASUREMENT/output.product.json --output html --out VIEWER
+telescope export OBJECT_JSON --output html --out VOLUME_VIEWER
 telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP
 telescope export MAP/map.fits.product.json --output sphere --out SPHERE
 telescope export src/objects/stellar-neighbourhood/object.json --output points --out stars

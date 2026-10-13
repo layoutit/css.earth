@@ -14,7 +14,7 @@ import { openFitsSource } from '../archive-adapters/fits-source.mts';
 import { openPdsSource, preparePdsSource } from '../archive-adapters/pds-source.mts';
 import { parseSourceQuestion, sourceQuestionFromRequest } from '../products/source-relevance.mts';
 export interface OutputChoice {
-  readonly kind:OutputRequest['kind']|'body-map'|'sphere'|'points'|'volume'|'volume-dataset-bank';readonly available:boolean;readonly reason:string;
+  readonly kind:OutputRequest['kind']|'html'|'body-map'|'sphere'|'points'|'volume'|'volume-dataset-bank';readonly available:boolean;readonly reason:string;
   readonly hdu?:number;readonly structure?:string;readonly shape?:readonly number[];readonly parameters?:readonly string[];
   readonly unit?:NativeMetadata['units'];readonly spectral?:NativeMetadata['spectral'];readonly limitations?:readonly string[];
 }

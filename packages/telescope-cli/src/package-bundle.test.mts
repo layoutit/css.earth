@@ -25,8 +25,8 @@ test('published dependencies exactly match runtime external imports across shipp
       const result = await build({
         entryPoints: format === 'esm' ? {
           telescope: resolve(packageRoot, 'src/bin.mts'), cli: resolve(packageRoot, 'src/cli.mts'),
-          'sphere-lane': resolve(packageRoot, 'src/sphere/sphere-lane.mts'),
-        } : { 'sphere-lane': resolve(packageRoot, 'src/sphere/sphere-lane.mts') },
+          'sphere-lane': resolve(packageRoot, 'src/sphere/sphere-lane.mts'), 'viewer-lane': resolve(packageRoot, 'src/delivery/viewer-lane.mts'),
+        } : { 'sphere-lane': resolve(packageRoot, 'src/sphere/sphere-lane.mts'), 'viewer-lane': resolve(packageRoot, 'src/delivery/viewer-lane.mts') },
         outdir: resolve(directory, 'dist'), outExtension: { '.js': format === 'esm' ? '.mjs' : '.cjs' },
         bundle: true, platform: 'node', target: 'node22', format, packages: 'external', metafile: true,
         plugins: packageBundlePlugins(root), logLevel: 'silent',
@@ -93,8 +93,8 @@ test('runtime data copying excludes implementation, tests, fixtures and authorin
   const directory = await mkdtemp(resolve(tmpdir(), 'telescope-data-'));
   try {
     const source = resolve(directory, 'source'), destination = resolve(directory, 'data');
-    await mkdir(resolve(source, 'fixtures'), { recursive: true }); await mkdir(resolve(source, 'authoring'));
-    for (const name of ['toolchain.json', 'requirements.lock', 'tools.py', 'test_tools.py', 'code.mts', 'code.test.mts', 'code.js.map', 'fixtures/input.json', 'authoring/pin.json'])
+    await mkdir(resolve(source, 'fixtures'), { recursive: true }); await mkdir(resolve(source, 'authoring'));await mkdir(resolve(source,'examples/evidence'),{recursive:true});await mkdir(resolve(source,'new-object'));
+    for (const name of ['toolchain.json', 'requirements.lock', 'tools.py', 'test_tools.py', 'code.mts', 'code.test.mts', 'code.js.map', 'fixtures/input.json', 'authoring/pin.json','examples/evidence/proof.png','new-object/workspace.json'])
       await writeFile(resolve(source, name), name);
     await copyPackageData(source, destination);
     assert.deepEqual((await readdir(destination)).sort(), ['requirements.lock', 'toolchain.json', 'tools.py']);
@@ -121,4 +121,29 @@ test('CommonJS bundles read the executable from the ESM dependency namespace', a
     `], { encoding: 'utf8', timeout: 30_000 });
     assert.equal(result.status, 0, result.stderr); assert.match(result.stdout, /CJS_ESM_DEPENDENCY_OK/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+function assertPackedClosure(files: readonly string[]) {
+  for(const path of files) {
+    // Forbidden contents are rejected everywhere, including otherwise allowed archive descendants.
+    assert.doesNotMatch(path, /(?:^|\/)(?:pnpm-lock\.yaml|package-lock\.json|npm-shrinkwrap\.json|yarn\.lock|bun\.lockb?|composer\.lock|Cargo\.lock|Pipfile\.lock|poetry\.lock|uv\.lock|evidence|tests?|__tests__|fixtures?)(?:\/|$)|(?:^|\/)src\/objects(?:\/|$)|(?:^|\/)(?:test_[^/]*|[^/]*\.(?:test|spec)\.[^/]+)$/u, path);
+    assert.match(path, /^package\/(?:package\.json|README\.md|LICENSE|dist\/(?:(?:cli|telescope)\.mjs|(?:sphere|viewer)-lane\.(?:js|cjs|d\.ts|d\.cts))|data\/.+)$/u, path);
+    if(!path.startsWith('package/data/'))continue;
+    // Generated viewer inputs have explicit readers; archive programs/ledgers/toolchains are selected dynamically.
+    assert.match(path,/^package\/data\/(?:spheres\/sphere-bank\.json\.gz|renderer\/volume\.css|target-catalogue\.json|telescope-core\/package\.json|telescope-core\/toolchains\/.+|cli\/src\/(?:archives\/.+|examples\.json|modes\.json)|src\/sources\/(?:wwt\/(?:core-imagesets\.jsonl|fits-associations\.json|phat-fits\.json|WWT-CORE-CATALOGS-LICENSE\.txt)|[^/]+\/(?:ledger\.json|discovery\.json|target-associations\.json)))$/u,path);
+  }
+}
+test('actual tarball stays within the standalone budget and contains only runtime data owners',async()=>{
+  const directory=await mkdtemp(resolve(tmpdir(),'telescope-packed-'));
+  try{
+    const packed=spawnSync('npm',['pack','--offline','--ignore-scripts','--json','--cache',resolve(directory,'cache'),'--pack-destination',directory],
+      {cwd:resolve(root,'packages/telescope-cli/.package'),encoding:'utf8',timeout:30_000});
+    assert.equal(packed.status,0,packed.stderr);
+    const record=requireRecord(JSON.parse(packed.stdout)[0]);
+    assert.ok(typeof record.size==='number'&&record.size<15_000_000,`Packed size ${record.size} exceeds 15 MB`);
+    const files=Array.isArray(record.files)?record.files.map(value=>'package/'+String(requireRecord(value).path)):[];
+    assert.ok(files.length>0,'npm pack must report its file list');assertPackedClosure(files);
+    for(const forbidden of ['package/pnpm-lock.yaml','package/data/spheres/src/objects/body/prepared/runtime.json.gz','package/data/cli/src/examples/sample/evidence/image.png','package/data/bake/src/unused.json','package/src/objects/body/source/measurements.json','package/data/cli/src/archives/example/evidence/proof.png','package/data/cli/src/archives/example/fixtures/input.json','package/data/cli/src/archives/example/source.test.mts','package/data/cli/src/archives/example/yarn.lock','package/dist/extra/unknown.mjs','package/unknown.json'])
+      assert.throws(()=>assertPackedClosure([...files,forbidden]),`Packaging guard must reject ${forbidden}`);
+  }finally{await rm(directory,{recursive:true,force:true});}
 });

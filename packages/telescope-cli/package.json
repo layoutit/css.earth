@@ -114,6 +114,11 @@
       "types": "./dist/sphere-lane.d.ts",
       "import": "./dist/sphere-lane.js",
       "require": "./dist/sphere-lane.cjs"
+    },
+    "./viewer/lane": {
+      "types": "./dist/viewer-lane.d.ts",
+      "import": "./dist/viewer-lane.js",
+      "require": "./dist/viewer-lane.cjs"
     }
   },
   "bin": {
@@ -135,6 +140,11 @@
         "types": "./dist/sphere-lane.d.ts",
         "import": "./dist/sphere-lane.js",
         "require": "./dist/sphere-lane.cjs"
+      },
+      "./viewer/lane": {
+        "types": "./dist/viewer-lane.d.ts",
+        "import": "./dist/viewer-lane.js",
+        "require": "./dist/viewer-lane.cjs"
       }
     },
     "directory": ".package",

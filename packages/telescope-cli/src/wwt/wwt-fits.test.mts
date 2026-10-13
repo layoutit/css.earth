@@ -6,6 +6,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { acquireWwtFits } from './wwt-fits.mts';
 import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
 import { exportOutput } from '../delivery/outputs.mts';
+import { exportHtml } from '../delivery/html-outputs.mts';
 
 const test = sourceTest();
 const card = (key: string, value: string): string => `${key.padEnd(8)}= ${value}`.padEnd(80);
@@ -47,7 +48,16 @@ test('WWT FITS keeps original numeric bytes and reports missing scientific metad
     const produced=JSON.parse(await readFile(exported.receipt,'utf8')) as {stage:string;inputs:{role:string;bytes:number}[]};
     assert.equal(produced.stage,'telescope-source-output');
     assert.equal(produced.inputs.find(input=>input.role==='FITS source')?.bytes,bytes.length);
-    assert.equal((await listArtifactOutputs(exported.receipt)).terminal,true);
+    const exportedOutputs=await listArtifactOutputs(exported.receipt);
+    assert.equal(exportedOutputs.artifact,'telescope-source-output');
+    assert.deepEqual(exportedOutputs.outputs,[{kind:'html',available:true,reason:'Offline image viewer with its source receipt.'}]);
+    assert.equal(exportedOutputs.terminal,false);
+    const viewer=await exportHtml(exported.receipt,resolve(root,'viewer'));
+    assert.match(await readFile(viewer.html,'utf8'),/data:image\/png;base64,/u);
+    const viewerOutputs=await listArtifactOutputs(viewer.receipt);
+    assert.equal(viewerOutputs.artifact,'telescope-html');
+    assert.deepEqual(viewerOutputs.outputs,[]);
+    assert.equal(viewerOutputs.terminal,true);
     // Saved WWT receipts from before the shared FITS handoff retain the same route.
     const old=JSON.parse(await readFile(result.receipt,'utf8')) as {parameters:{fitsSource?:unknown}};
     delete old.parameters.fitsSource;await writeFile(result.receipt,JSON.stringify(old));

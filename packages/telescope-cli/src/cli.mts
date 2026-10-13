@@ -8,6 +8,7 @@ import { formatAnswer } from './observation-query/query.mts';
 import type { RequestSatisfaction } from './requests/request-satisfaction.mts';
 import { getSession, saveExploration, saveSession, saveFamilyRequestSession, type ExplorationSession, type Session } from './session.mts';
 import { exportSpatialObject } from './delivery/spatial-handoff.mts';
+import { exportHtml } from './delivery/html-outputs.mts';
 import { exportOutput } from './delivery/outputs.mts';
 import { listArtifactOutputs } from './delivery/artifact-outputs.mts';
 import { projectOutput } from './delivery/projection.mts';
@@ -57,13 +58,14 @@ export interface CliServices {
   readonly saveExploration:typeof saveExploration;
   readonly getSession:(root:string,directory:string,pick:number,progress:(text:string)=>void,api?:undefined,options?:{readonly offline?:boolean})=>Promise<RetrievedResult>;
   readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
+  readonly exportHtml?:typeof exportHtml;
   readonly exportOutput:typeof exportOutput;
   readonly projectOutput:typeof projectOutput;
   readonly exportSphere:(recordPath:string,outputDirectory:string)=>ReturnType<typeof exportSphere>;
   readonly exportSpatialObject:typeof exportSpatialObject;
   readonly executeFamilyOperation:typeof executeFamilyOperation;
 }
-const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere:async(recordPath,outputDirectory)=>exportSphere(recordPath,outputDirectory,await import(pathToFileURL(resolve(requireWorkspace(),'src/platform/solar-geometry.mts')).href)),exportSpatialObject,executeFamilyOperation};
+const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportHtml,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
   let terminal:ReturnType<typeof createInterface>|undefined;
@@ -96,8 +98,9 @@ function startProgress(io:CliIo,initial:string){
       if(terminal)io.error(`\r${line}${' '.repeat(Math.max(0,width-line.length))}\n`);else io.error(`${line}\n`);}
   };
 }
-type ExecutableOutput=Extract<CliOptions,{readonly command:'export'|'project'|'sphere'|'spatial'}>;
+type ExecutableOutput=Extract<CliOptions,{readonly command:'export'|'project'|'sphere'|'spatial'|'html'}>;
 async function executeOutput(options:ExecutableOutput,api:CliServices):Promise<string>{
+  if(options.command==='html'){const result=await (api.exportHtml??exportHtml)(options.result,options.directory);return `HTML: ${result.html}\nEvidence: ${result.receipt}\n`;}
   if(options.command==='project'){
     const result=await api.projectOutput(options.result,options.geometry,options.directory);
     return `Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;
@@ -180,7 +183,7 @@ async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices
       io.error(`${error.message}. Enter the required values again, or press Enter to cancel.\n`);
       continue;
     }
-    if(options.command!=='export'&&options.command!=='project'&&options.command!=='sphere'&&options.command!=='spatial')throw new TypeError('Selected output has no executable owner');
+    if(options.command!=='export'&&options.command!=='project'&&options.command!=='sphere'&&options.command!=='spatial'&&options.command!=='html')throw new TypeError('Selected output has no executable owner');
     io.write(await executeOutput(options,api));return 0;
   }
 }
@@ -297,6 +300,8 @@ export async function main(args: readonly string[], root: string | undefined = u
         const result=await api.projectOutput(options.result,options.geometry,options.directory);text=options.json?JSON.stringify(result)+'\n':`Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='spatial'){
         const result=await api.exportSpatialObject(options.result,options.kind,options.directory);text=options.json?JSON.stringify(result)+'\n':`Object: ${result.object}\nEvidence: ${result.receipt}\n`;code=0;
+      }else if(options.command==='html'){
+        const result=await (api.exportHtml??exportHtml)(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`HTML: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='sphere'){
         const result=await api.exportSphere(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`Sphere: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='outputs'){

@@ -2,7 +2,7 @@ import { parseMeasuredSpectrumDocument, type Measurement, parseMeasuredSpectrum,
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber } from '@cssearth/core';
-import { CHART, chartAxes, chartDocument, chartNotes, coordinate, escapeXml, linearScale, ticks } from './chart-style.ts';
+import { CHART, chartAxes, chartDocument, chartLine, chartNotes, coordinate, escapeXml, linearScale, ticks, type ChartIdentity } from './chart-style.ts';
 
 export { parseMeasuredSpectrum, type MeasuredSpectrumRecipe, type MeasurementSource } from '@cssearth/objects';
 function numericRows(text: string): number[][] {
@@ -51,8 +51,63 @@ export async function readMeasuredSpectrum(root: string, input: unknown) {
   return { recipe, points, model };
 }
 
+/** Sampled observations retain masked gaps and distinguish absent errors from measured zero errors. */
+export interface SampledSpectrumChart extends ChartIdentity {
+  samples: readonly { x: number; y: number | null; sigma: number | null }[];
+  xLabel: string;
+  yLabel: string;
+}
+
+/** Both sampled observations and published bins use the site's prepared chart owner. */
+export function renderMeasuredSpectrum(input: Awaited<ReturnType<typeof readMeasuredSpectrum>> | SampledSpectrumChart): string {
+  if ('samples' in input) return renderSampledSpectrum(input);
+  return renderMeasuredBins(input);
+}
+
+function renderSampledSpectrum(input: SampledSpectrumChart): string {
+  const rows = input.samples;
+  if (!rows.length || rows.some(p => !Number.isFinite(p.x) || p.y !== null && !Number.isFinite(p.y) ||
+      p.sigma !== null && (!Number.isFinite(p.sigma) || p.sigma < 0 || p.y === null))) throw new TypeError('Invalid spectrum coordinates or uncertainty.');
+  const differences = rows.slice(1).map((p, i) => p.x - rows[i]!.x);
+  if (differences.length && !differences.every(d => d > 0) && !differences.every(d => d < 0)) throw new TypeError('Spectrum wavelengths must be strictly monotonic.');
+  const usable = rows.filter((p): p is typeof p & { y: number } => p.y !== null);
+  if (!usable.length) throw new TypeError('Spectrum has no usable samples.');
+  let xmin = Infinity, xmax = -Infinity, ymin = Infinity, ymax = -Infinity;
+  for (const p of rows) { xmin = Math.min(xmin, p.x); xmax = Math.max(xmax, p.x); }
+  for (const p of usable) { ymin = Math.min(ymin, p.y - (p.sigma ?? 0)); ymax = Math.max(ymax, p.y + (p.sigma ?? 0)); }
+  if (xmin === xmax) { xmin -= .5; xmax += .5; }
+  if (ymin === ymax) { const margin = Math.abs(ymin) * .05 || 1; ymin -= margin; ymax += margin; }
+  const x = linearScale(xmin, xmax, CHART.left, CHART.right), y = linearScale(ymin, ymax, CHART.bottom, CHART.top);
+  const values = (min: number, max: number) => Array.from({ length: 5 }, (_, i) => min + (max - min) * i / 4);
+  const axes = chartAxes({ x, y, xTicks: ticks(values(xmin, xmax)), yTicks: ticks(values(ymin, ymax)), xLabel: input.xLabel, yLabel: input.yLabel });
+  const groups = (uncertainty: boolean) => {
+    const result: (typeof usable)[] = []; let group: typeof usable = [];
+    for (const p of rows) {
+      if (p.y === null || uncertainty && p.sigma === null) { if (group.length) result.push(group); group = []; }
+      else group.push({ ...p, y: p.y });
+    }
+    if (group.length) result.push(group);
+    return result;
+  };
+  const bands = groups(true).map(group => {
+    if (group.length === 1) {
+      const p = group[0]!;
+      // As for measured bins, a vertical stroked error bar paints an isolated uncertainty.
+      return `<path class="uncertainty" data-x="${p.x}" d="M${coordinate(x(p.x))} ${coordinate(y(p.y + p.sigma!))}V${coordinate(y(p.y - p.sigma!))}" fill="none" stroke="${CHART.neutral}" stroke-width=".7"/>`;
+    }
+    const points = [...group.map(p => `${coordinate(x(p.x))},${coordinate(y(p.y + p.sigma!))}`),
+      ...group.toReversed().map(p => `${coordinate(x(p.x))},${coordinate(y(p.y - p.sigma!))}`)].join(' ');
+    return `<polygon class="uncertainty" points="${points}" fill="${CHART.neutral}" fill-opacity="${CHART.bandOpacity}"/>`;
+  }).join('');
+  const curves = groups(false).map(group => group.length === 1
+    ? `<circle cx="${coordinate(x(group[0]!.x))}" cy="${coordinate(y(group[0]!.y))}" r="1.7" fill="${CHART.neutral}"/>`
+    : chartLine(group.map(p => ({ x: x(p.x), y: y(p.y) })))).join('');
+  return chartDocument({ ...input, metadata: { ...input.metadata, samplesShown: usable.length } },
+    axes + bands + curves + chartNotes(bands ? ['Recorded ±1 standard deviation'] : []), { height: bands ? 279 : 260 });
+}
+
 /** Prepared SVG in the existing chart panel. Horizontal bars are wavelength coverage, vertical bars are published errors. */
-export function renderMeasuredSpectrum({ recipe: r, points, model }: Awaited<ReturnType<typeof readMeasuredSpectrum>>) {
+function renderMeasuredBins({ recipe: r, points, model }: Awaited<ReturnType<typeof readMeasuredSpectrum>>) {
   const height = 260 + (r.model ? 17 : 0) + r.notes.length * 15;
   const x = linearScale(r.x.minimum, r.x.maximum, CHART.left, CHART.right);
   const y = linearScale(r.y.minimum, r.y.maximum, CHART.bottom, CHART.top);

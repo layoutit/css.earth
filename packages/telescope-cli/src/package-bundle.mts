@@ -13,6 +13,7 @@ export function packageBundlePlugins(root: string): Plugin[] {
         '@cssearth/core/schema': 'core/src/schema.ts', '@cssearth/core/oracle': 'core/src/node/oracle/fixture.mts',
         '@cssearth/objects/archived-camera': 'objects/src/prepared-data/camera/archived-camera.ts', '@cssearth/astronomy': 'astronomy/src/index.ts',
         '@cssearth/engine': 'engine/src/index.ts',
+        '@cssearth/telescope/viewer/lane': 'telescope-cli/src/delivery/viewer-lane.mts',
         '@cssearth/telescope/sphere/lane': 'telescope-cli/src/sphere/sphere-lane.mts',
       };
       builder.onResolve({ filter: /^@cssearth\// }, args => {

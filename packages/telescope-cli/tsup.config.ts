@@ -4,7 +4,7 @@ import { packageBundlePlugins } from './src/package-bundle.mts';
 
 /** The public sphere owner bundles the same workspace sources as the standalone CLI. */
 export default defineConfig({
-  entry: { 'sphere-lane': 'src/sphere/sphere-lane.mts' },
+  entry: { 'sphere-lane': 'src/sphere/sphere-lane.mts', 'viewer-lane': 'src/delivery/viewer-lane.mts' },
   format: ['esm', 'cjs'],
   external: ['sharp', 'linkedom'],
   esbuildOptions(options) { options.packages = 'external'; },
