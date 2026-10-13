@@ -95,3 +95,12 @@ test('explore accepts a circle without a name, refuses neither, and validates al
   assert.equal(named.command, 'explore');
   if (named.command === 'explore') assert.deepEqual(named.request, { target: 'eris', region: parsed.request.footprint });
 });
+
+
+test('toolchain commands admit only shipped installer names and modes', () => {
+  assert.deepEqual(parseCli(['toolchain', 'install', 'astroquery', '--json']), { command: 'toolchain', mode: 'install', name: 'astroquery', json: true, verbose: false });
+  assert.equal(parseCli(['toolchain', 'verify', 'pds']).command, 'toolchain');
+  assert.equal(parseCli(['toolchain', 'install', 'casa']).command, 'toolchain');
+  for (const args of [['toolchain', 'install', 'constructor'], ['toolchain', 'remove', 'astroquery'], ['toolchain', 'install', 'astroquery', '--bad']])
+    assert.throws(() => parseCli(args), TypeError);
+});

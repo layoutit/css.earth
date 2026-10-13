@@ -1,3 +1,5 @@
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../archives/site-targets.mts';
 /** Leads for the telescope API: what has been published about an object that could be drawn on it, from every DOI
  * repository at once.
  *
@@ -188,6 +190,7 @@ export function formatLeads(result: LeadSearch, directory?: string): string {
 /** What an object's page opens on: the science kind of its default dataset ("neutral-shape", "dayside-thermal-color"), with the
  * format of a scientific map ("terrestrial-scientific:published-phase-curve-map"), or "image" for a photographed surface. */
 export async function opensOn(root: string, id: string): Promise<string | undefined> {
+  if (root === USER_ROOT) return (await loadSiteTargets()).opensOn[id];
   const read = async (path: string) => JSON.parse(await readFile(resolve(root, 'src/objects', id, path), 'utf8')) as unknown;
   try {
     const content = requireRecord(await read('source/content/object.json'), `${id} content`), raster = requireRecord(await read('source/preparation/raster.json'), `${id} raster recipe`);

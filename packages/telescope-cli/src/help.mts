@@ -18,6 +18,13 @@ Agent skill (explicit host or skills directory):
   Default: symlink to this package; --copy writes an owned independent copy.
   Repeats do nothing; unrelated or modified content is refused. No host config is edited.
 
+Managed toolchains:
+  telescope toolchain install NAME [--json]
+  telescope toolchain verify astroquery|pds|starry|spiderman|picaso [--json]
+  Install names also include archive toolchains: chandra, spitzer, hst, keck, gemini, naco, tess,
+  mearth, espadons, eureka, klip, squeeze, rotir, pionier, amber, gravity, matisse, casa.
+  Source builds need a C compiler and standard-library headers (macOS also needs its SDK).
+
 Human entry points:
   telescope explore [TARGET] [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY] [--fresh]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
@@ -63,13 +70,13 @@ star the picture shows at the page's place, and leaves the sentences and what ea
 picture's bank and its page's dataset, may be run again, and bakes with SPEC.json --bake. --from-magnetic drafts a star's corona, derived from the magnetic maps its
 page already shows and its ROSAT X-ray flux (docs/stellar-corona-from-magnetic-maps.md); a spec of coronae writes each star's volume bank and its "Derived corona"
 dataset, and bakes with SPEC.json --bake. --from-spectra drafts a star's magnetic maps from the programs of archived polarised spectra this repository has
-reduced (packages/telescope-cli/src/archives/espadons); a spec of magneticMaps writes each map as a "Radial field" dataset of the star's page, and bakes with
+reduced; a spec of magneticMaps writes each map as a "Radial field" dataset of the star's page, and bakes with
 SPEC.json --bake. --from-pixels drafts the brightness map of each star this repository has reduced from the TESS, K2 and Kepler missions' light curves of it
-(packages/telescope-cli/src/archives/tess; all is every reduced star); a spec of brightnessMaps writes each map as a "Brightness map" dataset of the star's
+(all is every reduced star); a spec of brightnessMaps writes each map as a "Brightness map" dataset of the star's
 page and the measured period into its measurements record, and bakes with SPEC.json --bake. --from-pulsation drafts a pulsating star's light through one cycle
 from the published light-curve model its package keeps (a Cepheid's row of Gaia DR3 vari_cepheid; all is every such star; gaia:HOST first looks a star placed by
 its paper's table up in that table at its place, and installs its row); a spec of pulsations writes the cycle as the ten steps of a "Pulsation" dataset of
-the star's page, and bakes with SPEC.json --bake (docs/pulsating-stars-light-through-a-cycle.md). The spec format is in packages/telescope-cli/src/new-object/spec.mts.
+the star's page, and bakes with SPEC.json --bake (docs/pulsating-stars-light-through-a-cycle.md). See the command guide for the spec format.
 Papers lists up to 20 OpenAlex works that name the target, by any spelling of its catalogue names, in their title or
 abstract, with the instrument and any one of the --about phrases (singular or plural); --fulltext asks for the works whose
 indexed full text names them. It uses arXiv's Atom API when OpenAlex is unavailable or its daily budget is spent, and the
@@ -81,7 +88,7 @@ Several targets are a sweep: one search each, the works named, nothing fetched. 
 credits for a network without a key; OPENALEX_API_KEY in the environment has ten times that. Nothing is saved without --out.
 Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
 license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
-an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts), fetching
+an entry written after reading its paper, fetching
 by byte range only the header and the one grid it draws.
 Leads asks DataCite, which registers the DOIs of every data repository and of arXiv, for the records that name the target
 and speak of a measured phase curve or map, a measured eclipse, or a model: data releases at Zenodo, Dryad, Dataverse,

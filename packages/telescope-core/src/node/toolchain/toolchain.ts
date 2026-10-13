@@ -1,3 +1,4 @@
+import { SourceBuildPrerequisiteError } from './source-build.js';
 import { installManagedToolchain } from './environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
 /** Install one pinned astronomy environment per user; keep every installed copy beneath the user root. */
@@ -67,7 +68,7 @@ export function toolchainRootIssue(root: string): string | null {
   catch (error) {
     if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
     const target = resolve(dirname(root), readlinkSync(root));
-    return `The astronomy package link ${root} points to missing ${target}. Run the pinned astronomy toolchain install to restore a shared copy.`;
+    return `The astronomy package link ${root} points to missing ${target}. Run telescope toolchain install astroquery to restore a shared copy.`;
   }
 }
 
@@ -76,7 +77,7 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
   const root = findInstalledRoot(ASTROQUERY_ROOT, sharedRoot(entry), pins);
   if (!root) {
     const rootIssue = toolchainRootIssue(ASTROQUERY_ROOT);
-    throw new MissingSourceInputError(rootIssue ?? 'The astronomy packages are not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install');
+    throw new MissingSourceInputError(rootIssue ?? 'The astronomy packages are not installed: telescope toolchain install astroquery');
   }
   const bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
   return { python, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), scipyVersion: requireString(entry.scipy),
@@ -84,11 +85,16 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
 }
 
 /** Async consumers provision missing pins on first use; synchronous preparation keeps its explicit install boundary. */
+let firstInstall: Promise<string> | undefined;
 export async function astroqueryToolchain(): Promise<AstroqueryToolchain> {
   try { return astroqueryToolchainSync(); }
   catch (error) {
     if (!(error instanceof MissingSourceInputError)) throw error;
-    await installAstroquery();
+    firstInstall ??= installAstroquery().catch(error => {
+      if (!(error instanceof SourceBuildPrerequisiteError)) firstInstall = undefined;
+      throw error;
+    });
+    await firstInstall;
     return astroqueryToolchainSync();
   }
 }

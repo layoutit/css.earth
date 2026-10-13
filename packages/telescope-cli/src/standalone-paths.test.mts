@@ -56,6 +56,26 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     const leads = await import(${url('packages/telescope-cli/src/archive-adapters/archive-leads.mts')});
     const pin = await leads.saveArchiveLeadEvidence(${JSON.stringify(checkout)}, 'https://example.org/TAP', 'test', []);
     assert.ok((await readdir(resolve(core.USER_ROOT, 'output/telescopes/archive-leads'))).includes(pin + '.json'));
+    assert.throws(() => core.astroqueryToolchainSync(), /telescope toolchain install astroquery/);
+    const cliArguments = await import(${url('packages/telescope-cli/src/cli-arguments.mts')});
+    for (const name of ['chandra', 'spitzer', 'hst', 'gemini', 'keck', 'naco', 'tess', 'mearth', 'espadons']) {
+      assert.throws(() => core.assertInstalledMarker('/missing', { ...pins, id: name }, name,
+        'node packages/telescope-cli/src/archives/' + name + '/toolchain.mts install'), error => {
+        assert.doesNotMatch(error.message, /packages\\/|\\.mts|pnpm /);
+        const command = error.message.slice(error.message.indexOf('telescope toolchain'));
+        assert.equal(cliArguments.parseCli(command.split(' ').slice(1)).name, name); return true;
+      });
+    }
+
+    const other = await import(${url('packages/telescope-cli/src/archive-adapters/other-leads.mts')});
+    for (const [search, id] of [[other.searchChandraLeads, 'jupiter'], [other.searchSpitzerLeads, 'eris']]) {
+      let network = false;
+      const answer = await search(core.USER_ROOT, { id, name: id, aliases: [] }, undefined, async () => { network = true; return []; });
+      assert.equal(network, true, answer.reason); assert.equal(answer.state, 'empty-in-scope', answer.reason);
+    }
+    const targets = await import(${url('packages/telescope-cli/src/archives/targets.mts')});
+    const polaris = await targets.namedShippedObject('polaris', undefined, core.USER_ROOT);
+    assert.ok(polaris.position, 'Standalone targets retain their shipped sky positions');
     const { main } = await import(${url('packages/telescope-cli/src/cli.mts')}); let output = '';
     assert.equal(await main(['new-object', 'missing.json', '--json'], undefined, text => { output += text; }), 2);
     assert.match(JSON.parse(output).error, /this command needs a css\\.earth checkout: pass --workspace/);
@@ -87,11 +107,23 @@ test('explore paths, archive answers and every toolchain stay outside the checko
       await assert.rejects(executeFamilyOperation('missing.json', { operationId }, 'volume'), error => error instanceof TypeError
         && /telescope export RESULT --output html --out DIRECTORY/u.test(error.message));
     }
+    const compilerPath = process.env.PATH; process.env.PATH = ${JSON.stringify(directory)};
+    try {
+      const failures = await Promise.allSettled([core.astroqueryToolchain(), core.astroqueryToolchain()]);
+      for (const failure of failures) {
+        assert.equal(failure.status, 'rejected');
+        assert.match(failure.reason.message, /source builds need a working/);
+        assert.match(failure.reason.message, process.platform === 'darwin' ? /xcode-select --install/ : /build-essential/);
+        assert.doesNotMatch(failure.reason.message, /pip install/);
+      }
+      assert.equal(failures[0].reason, failures[1].reason, 'one failed prerequisite is shared across archive clients');
+      assert.ok(!(await readdir(resolve(core.USER_ROOT, 'astroquery'), { recursive: true })).some(name => name.endsWith('env/bin/python')));
+    } finally { process.env.PATH = compilerPath; }
     console.log('STANDALONE_PATHS_OK');
   `;
   try {
-    const env: NodeJS.ProcessEnv = { ...process.env, CSSEARTH_TELESCOPE_HOME: home };
-    delete env.CSSEARTH_WORKSPACE; delete env.CSS_EARTH_ASTROQUERY_CACHE;
+    const env: NodeJS.ProcessEnv = { ...process.env, HOME: home, CSSEARTH_TELESCOPE_HOME: home };
+    delete env.CSSEARTH_WORKSPACE; delete env.CSS_EARTH_ASTROQUERY_CACHE; delete env.CSSEARTH_TELESCOPE_TOOLCHAIN_HOME;
     const child = spawnSync(process.execPath, ['--import', resolve(checkout, 'packages/core/src/node/register-vite-suffix.mts'), '--input-type=module', '-e', script], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
     assert.equal(child.status, 0, child.stderr); assert.match(child.stdout, /STANDALONE_PATHS_OK/u);
     assert.deepEqual((await readdir(directory)).sort(), ['user']);

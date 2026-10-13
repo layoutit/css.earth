@@ -1,5 +1,5 @@
 /** Human discovery starts from a name or an ICRS field and preserves omitted scientific filters. */
-import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget, parseLimits, type TransferLimits } from '@cssearth/telescope-core/node';
+import { SOURCE_BUILD_PREREQUISITE_PREFIX, parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget, parseLimits, type TransferLimits } from '@cssearth/telescope-core/node';
 import { flagValue } from '@cssearth/core';
 import { PRODUCT_KINDS, type ProductKind } from './requests/recipe-request.mts';
 import { assessSearchCoverage, type QueryInputs, type SearchCoverage, type TargetCoverage } from './observation-query/query-contract.mts';
@@ -211,8 +211,13 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     }
   }
   choices.sort((a, b) => (a.state === 'ready' ? 0 : 1) - (b.state === 'ready' ? 0 : 1) || a.key.localeCompare(b.key));
-  const services = [...inputs.vo?.services ?? [], ...inputs.opus ? [inputs.opus] : [], ...inputs.archiveLeads ?? []], issues: ExplorationIssue[] = [];
+  const queriedServices = [...inputs.vo?.services ?? [], ...inputs.opus ? [inputs.opus] : [], ...inputs.archiveLeads ?? []], issues: ExplorationIssue[] = [];
+  const prerequisites = queriedServices.filter(s => s.state === 'unavailable' && s.reason.includes(SOURCE_BUILD_PREREQUISITE_PREFIX));
+  const services = queriedServices.map(s => prerequisites.includes(s) ? { ...s, reason: 'Search could not use the managed toolchain; see the shared source-build prerequisite issue.' } : s);
+  if (prerequisites.length) issues.push({ scope: 'provider', code: 'provider-unavailable', identity: 'managed source-build prerequisite',
+    reason: `${prerequisites[0]!.reason} Affected archives: ${prerequisites.map(s => s.service).join(', ')}.` });
   for (const service of services) {
+    if (service.state === 'unavailable' && service.reason === 'Search could not use the managed toolchain; see the shared source-build prerequisite issue.') continue;
     if (service.state === 'unavailable') issues.push({ scope: 'provider', code: 'provider-unavailable', identity: service.service, reason: `${service.scope}. ${service.reason}` });
     else if (service.state === 'overflow') issues.push({ scope: 'provider', code: 'provider-overflow', identity: service.service, reason: `${service.scope}. ${service.reason}` });
     else if (service.state === 'unknown-target') issues.push({ scope: 'provider', code: 'provider-target-unknown', identity: service.service, reason: service.reason });

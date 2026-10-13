@@ -84,7 +84,7 @@ export function pipelineSoftware(lock: string): readonly ProductSoftware[] {
  * built from other pins by the time a stage gets here. */
 export async function eurekaPins(): Promise<{ software: readonly ProductSoftware[] }> {
   await stat(resolve(EUREKA_ROOT, 'installed.json'))
-    .catch(() => { throw new MissingSourceInputError('Eureka! is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install'); });
+    .catch(() => { throw new MissingSourceInputError('Eureka! is not installed: telescope toolchain install eureka'); });
   return { software: pipelineSoftware(await readFile(packagePath('packages/telescope-cli/src/archives/jwst/requirements.lock'), 'utf8')) };
 }
 

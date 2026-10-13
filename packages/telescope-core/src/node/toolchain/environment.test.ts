@@ -228,3 +228,17 @@ test('the lifecycle requires both a pins reader and an explicit verifier before 
     assert.deepEqual(await readdir(f.root), []);
   } finally { await f.cleanup(); }
 });
+
+
+test('a source-build environment fails before installation when the compiler is missing', async () => {
+  const f = await fixture(), oldPath = process.env.PATH;
+  let created = false;
+  process.env.PATH = f.userRoot;
+  try {
+    await assert.rejects(installManagedToolchain(f.root, () => ({ ...pins, entry: { ...pins.entry, orbitize: 'source-only' } }), f.prefix,
+      async () => { created = true; throw new Error('environment creation must not start'); }, () => {}),
+    process.platform === 'darwin' ? /macOS SDK.*xcode-select --install/u : /C compiler.*build-essential/u);
+    assert.equal(created, false);
+    assert.deepEqual(await readdir(f.root), []);
+  } finally { process.env.PATH = oldPath; await f.cleanup(); }
+});

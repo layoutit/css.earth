@@ -1,3 +1,5 @@
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from './archives/site-targets.mts';
 /** Paper search for the telescope API: which published works name a target, what they say of it, and what was printed after them.
  *
  * The indexes are asked through `papers/works.mts` (OpenAlex, with arXiv as a bounded fallback) for works that name the target
@@ -220,6 +222,7 @@ async function readCopy(work: OpenAlexWork, session: Session, progress: (line: s
  * name such as "S2" is searched as the star orbiting Sgr A* rather than the cell line. Moons and planets keep a plain search.
  */
 export async function hostNames(root: string, id: string, catalogue: Awaited<ReturnType<typeof loadTargetCatalogue>>): Promise<readonly string[]> {
+  if (root === USER_ROOT) return (await loadSiteTargets()).hosts[id] ?? [];
   const path = resolve(root, 'packages/astronomy/data/bodies', `${id}.json`);
   const text = await readFile(path, 'utf8').catch((error: unknown) => {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;

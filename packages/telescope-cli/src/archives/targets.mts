@@ -3,6 +3,8 @@
  * kept apart from the name, and a numbered body is never taken for the unnumbered one that shares its name (52 Europa is
  * not Jupiter's moon). Archive-specific matchers (Chandra's names and boxes, Keck's time stamps, JunoCam's slugs,
  * Spitzer's NAIF ids) stay with their archive. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from './site-targets.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireFiniteNumber } from '@cssearth/core';
@@ -41,11 +43,13 @@ export interface NamedShippedObject { readonly id: string; readonly names: reado
  * record or nebula recipe that may be absent (Hubble treats only a missing file as absent; JWST treats any unreadable one
  * so). */
 export async function namedShippedObjects(read: (path: string) => Promise<unknown>, repository = REPOSITORY): Promise<NamedShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).named;
   const ids = await shippedObjectIds(repository);
   return Promise.all(ids.map(id => namedShippedObject(id, read, repository)));
 }
 /** One object package, read the same way: what a search of a single target needs without reading every body. */
 export async function namedShippedObject(id: string, read: (path: string) => Promise<unknown> = readJsonOrNull, repository = REPOSITORY): Promise<NamedShippedObject> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).named.find(o => o.id === id) ?? { id, names: [id] };
   const body = await read(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`));
   const names = [id], physical = isRecord(body) && isRecord(body.physical) ? body.physical : undefined;
   if (physical && typeof physical.name === 'string') names.push(physical.name);

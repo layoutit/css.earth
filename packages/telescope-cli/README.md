@@ -20,7 +20,7 @@ Use Node 22.18+ (22.x) or Node 24+. No system Python or micromamba is required: 
 
 Managed Python toolchains need macOS or Linux; on Windows use WSL. Commands that need no Python remain available on Windows. Some instrument locks target a specific Unix platform; consult their descriptors before installing.
 
-Archive clients and PDS decoding install their pinned Python environments on demand. Some reduction routes need instrument toolchains described in their own guides; native compilers, Julia, IDL or Rosetta requirements still follow those descriptors.
+Archive clients and PDS decoding install their pinned Python environments on demand. The astronomy environment builds orbitize and batman from source: a working C compiler and C standard-library headers are prerequisites. On macOS, install the Command Line Tools and SDK with `xcode-select --install`; on Debian/Ubuntu use `sudo apt install build-essential`; on Fedora use `sudo dnf install gcc`. The installer checks these before creating the environment. Python-free archives remain searchable if this prerequisite is missing. Install explicitly with `telescope toolchain install astroquery`, and check it with `telescope toolchain verify astroquery`. Some reduction routes need instrument toolchains described in their own guides; native compilers, Julia, IDL or Rosetta requirements still follow those descriptors.
 
 Install the command without a checkout:
 

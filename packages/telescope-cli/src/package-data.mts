@@ -2,6 +2,13 @@
 import { copyFile, mkdir, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { prepareSpherePackage } from './sphere/sphere-package.mts';
+import { shippedObjectIds } from './archives/ledger.mts';
+import { namedShippedObjects, readJsonOrNull } from './archives/targets.mts';
+import { chandraShippedObjects, shippedSkyObjects } from './archives/chandra/archive-ledger.mts';
+import { spitzerShippedObjects } from './archives/spitzer/archive-ledger.mts';
+import { readMarks } from './simulations/read.mts';
+import { opensOn } from './simulations/leads.mts';
+import { hostNames } from './papers.mts';
 import { loadTargetCatalogue } from './observation-query/query.mts';
 
 const omitted = new Set(['fixtures', 'authoring', '__pycache__', 'node_modules', 'prepared', 'oracle', 'source-authoring', 'examples', 'evidence', 'new-object']);
@@ -44,7 +51,15 @@ export async function preparePackageData(root: string, packageRoot: string, outp
     }
   }
   await mkdir(data, { recursive: true });
-  await writeFile(resolve(data, 'target-catalogue.json'), JSON.stringify(await loadTargetCatalogue(root)) + '\n');
+  const catalogue = await loadTargetCatalogue(root);
+  await writeFile(resolve(data, 'target-catalogue.json'), JSON.stringify(catalogue) + '\n');
+  const ids = await shippedObjectIds(root);
+  await writeFile(resolve(data, 'site-targets.json'), JSON.stringify({ ids,
+    named: await namedShippedObjects(readJsonOrNull, root), sky: await shippedSkyObjects(root), chandra: await chandraShippedObjects(root),
+    spitzer: await spitzerShippedObjects(root),
+    marks: Object.fromEntries(await Promise.all(ids.map(async id => [id, [...await readMarks(root, id)]]))),
+    opensOn: Object.fromEntries((await Promise.all(ids.map(async id => [id, await opensOn(root, id)] as const))).filter((entry): entry is readonly [string, string] => entry[1] !== undefined)),
+    hosts: Object.fromEntries(await Promise.all(catalogue.map(async o => [o.id, await hostNames(root, o.id, catalogue)]))) }) + '\n');
 }
 
 /** The package root is the publishable layout; checkout source aliases are private imports. */

@@ -38,8 +38,19 @@ fs.appendFileSync(process.env.TELESCOPE_TEST_PROCESS_LOG, JSON.stringify(process
 process.stderr.write('reached selected micromamba\\n'); process.exit(19);
 `);
     await chmod(command, 0o755);
+    // This test owns the conda boundary; the compiler and SDK are explicit fixture executables.
+    await writeFile(resolve(root, 'xcrun'), `#!${process.execPath}
+process.stdout.write('/fixture-sdk');
+`, { mode: 0o755 });
+    await writeFile(resolve(root, 'cc'), `#!${process.execPath}
+const fs = require('node:fs'), args = process.argv.slice(2);
+const source = fs.readFileSync(0, 'utf8');
+if (!source.includes('#include <stdlib.h>') || !args.includes('-x')) process.exit(31);
+fs.writeFileSync(args[args.indexOf('-o') + 1], ${JSON.stringify('#!'+process.execPath+'\nprocess.stdout.write("TELESCOPE_COMPILER_READY");\n')}, { mode: 0o755 });
+`, { mode: 0o755 });
+
     const result = spawnSync(process.execPath, ['--input-type=module', '-e', installerScript], { cwd: resolve('.'), encoding: 'utf8',
-      env: { ...process.env, PATH: '', CSSEARTH_TELESCOPE_HOME: resolve(root, 'user'),
+      env: { ...process.env, PATH: root, CSSEARTH_TELESCOPE_HOME: resolve(root, 'user'),
         CSSEARTH_TELESCOPE_MICROMAMBA: command, TELESCOPE_TEST_PROCESS_LOG: log, CSSEARTH_WORKSPACE: undefined },
       timeout: 30_000 });
     assert.equal(result.status, 0, result.stderr);

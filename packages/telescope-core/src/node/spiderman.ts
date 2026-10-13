@@ -4,7 +4,7 @@ import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** SPIDERMAN owns spherical-harmonic brightness maps and the phase curves they make (Louden & Kreidberg 2018). css.earth passes a
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
- * (spiderman-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install */
+ * (spiderman-toolchain.json says why). Install: telescope toolchain install spiderman */
 import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
@@ -15,7 +15,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 
 export const SPIDERMAN_ROOT = resolve(USER_ROOT, 'output/toolchains/spiderman');
 
-const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install';
+const INSTALL = 'telescope toolchain install spiderman';
 const descriptor = () => readToolchainPins('spiderman', 'spiderman-toolchain.json');
 
 export async function installSpiderman() {

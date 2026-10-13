@@ -24,6 +24,9 @@ test('the first async astronomy query installs missing pins and later queries re
     mock.module(new URL('./process.ts', import.meta.url).href, { namedExports: {
       runToolchainProcess: (command: string, args: readonly string[]) => {
         calls.push({ command, args });
+        if (command === 'xcrun') return '/fixture-sdk';
+        if (command === 'cc' || command === 'gcc') { assert.ok(args.includes('-x')); return ''; }
+        if (command.endsWith('/probe')) return 'TELESCOPE_COMPILER_READY';
         if (command === '/test/selected-micromamba') {
           const prefix = args[args.indexOf('-p') + 1]; assert.ok(prefix);
           mkdirSync(resolve(prefix, 'bin'), { recursive: true });
@@ -39,6 +42,8 @@ test('the first async astronomy query installs missing pins and later queries re
     assert.equal(first.python, second.python);
     assert.ok(first.python.startsWith(userRoot));
     assert.equal(resolutions, 1);
+    assert.ok(calls.findIndex(call => call.command === 'cc') < calls.findIndex(call => call.command === '/test/selected-micromamba'));
+    assert.ok(calls.some(call => call.command.endsWith('/probe')), 'a compiler must produce a working probe before provisioning');
     assert.equal(calls.filter(call => call.command === '/test/selected-micromamba').length, 1);
     assert.ok(calls.some(call => call.args.includes(resolve(paths.TOOLCHAINS, 'requirements.lock'))));
     assert.equal(installedMarkerIssue(resolve(first.python, '../../..'), pins), null);

@@ -1,5 +1,6 @@
 /** The marker an installed toolchain keeps: the descriptor and lock texts it was built from. A checkout whose texts differ is
  * asked to reinstall; the texts are compared whole, so no fingerprint of them is kept. */
+import { WORKSPACE } from '../paths.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
@@ -29,7 +30,11 @@ export function installedMarkerIssue(root: string, pins: ToolchainPins): 'missin
 
 /** Refuse a toolchain that is not installed from the current pins, naming the command that installs it. */
 export function assertInstalledMarker(root: string, pins: ToolchainPins, name: string, install: string): void {
+  if (WORKSPACE === undefined) {
+    const archive = /^node packages\/telescope-cli\/src\/archives\/([^/]+)\/toolchain\.mts install(?: (\S+))?$/u.exec(install);
+    if (archive) install = `telescope toolchain install ${archive[2] ?? archive[1]}`;
+  }
   const issue = installedMarkerIssue(root, pins);
   if (issue === 'missing') throw new MissingSourceInputError(`The ${name} toolchain is not installed at ${root}: ${install}`);
-  if (issue === 'other-pins') throw new Error(`The ${name} toolchain at ${root} was installed from other pins than ${pins.file}; reinstall it: ${install}`);
+  if (issue === 'other-pins') throw new Error(`The ${name} toolchain at ${root} was installed from other pins than ${WORKSPACE === undefined ? pins.id : pins.file}; reinstall it: ${install}`);
 }

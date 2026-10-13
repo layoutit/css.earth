@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../site-targets.mts';
 import { programStorePath } from '../../paths.mts';
 import { inputPath } from '../../paths.mts';
 /** What the Chandra Data Archive holds, what it holds for this project's objects, and how far this toolkit has been proved.
@@ -27,8 +29,6 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { countRecord, isCommand, ledgerFiles, receiptProblem, receiptProblemsParagraph, REPOSITORY, runArchiveLedger, shippedObjectIds, type ArchiveLedger } from '../ledger.mts';
 import { cxcQuery, observationMode, parseChandraProgram, PROGRAMS, REFUSED_MODES, type ChandraObservation } from './archive.mts';
 
-const OBJECTS = resolve(REPOSITORY, 'src/objects');
-const BODIES = resolve(REPOSITORY, 'packages/astronomy/data/bodies');
 
 /** A pointing named like this is a background, blank-sky, offset or dark field: never an observation of the object nearest it. */
 export const NOT_AN_OBJECT = /BLANKSKY|BLANK_SKY|BACKGROUND|BKG|OFFSET|DARK|STOWED|FIELD\b|CALIBRATION/u;
@@ -56,8 +56,10 @@ export const movingTargets = () => movingTargetList ??= chandraMovingTargets();
 /** Every shipped object that states a sky position, from the files that own it: a nebula catalogue beside the object, the
  * prepared Local Group catalogue, or the body record's own star position. Nothing is listed here that the repository does not
  * state. */
-export async function shippedSkyObjects(): Promise<ShippedObject[]> {
-  const ids = new Set(await shippedObjectIds());
+export async function shippedSkyObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).sky;
+  const ids = new Set(await shippedObjectIds(repository));
+  const OBJECTS = resolve(repository, 'src/objects'), BODIES = resolve(repository, 'packages/astronomy/data/bodies');
   const found = new Map<string, ShippedObject>();
   const add = (id: string, raDeg: unknown, decDeg: unknown, source: string) => {
     if (!ids.has(id) || found.has(id)) return;
@@ -102,12 +104,13 @@ export function objectBox(object: ShippedObject, radiusDegrees = OBJECT_RADIUS_D
 }
 
 /** Every shipped object the ledger searches for: the moving targets this module names, then everything with a stated position. */
-export async function chandraShippedObjects(): Promise<ShippedObject[]> {
-  const ids = new Set(await shippedObjectIds());
+export async function chandraShippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).chandra;
+  const ids = new Set(await shippedObjectIds(repository));
   const targets = movingTargets();
   const moving = Object.keys(targets).filter(id => ids.has(id))
     .map(id => ({ id, source: CHANDRA_MOVING_TARGETS }));
-  const fixed = (await shippedSkyObjects()).filter(object => !targets[object.id]);
+  const fixed = (await shippedSkyObjects(repository)).filter(object => !targets[object.id]);
   return [...moving, ...fixed].sort((a, b) => a.id.localeCompare(b.id));
 }
 

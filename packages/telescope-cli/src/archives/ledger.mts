@@ -10,6 +10,7 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { loadSiteTargets } from './site-targets.mts';
 import { WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
 
 export const REPOSITORY = WORKSPACE ?? USER_ROOT;
@@ -114,6 +115,7 @@ export const receiptProblemsParagraph = (problems: readonly string[]) => problem
 
 /** The shipped object ids: the directories of src/objects, in the order the file system lists them. */
 export async function shippedObjectIds(repository = REPOSITORY): Promise<string[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).ids;
   return (await readdir(resolve(repository, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name);
 }
 

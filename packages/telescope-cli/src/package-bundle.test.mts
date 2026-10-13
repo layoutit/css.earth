@@ -135,7 +135,7 @@ function assertPackedClosure(files: readonly string[]) {
     assert.match(path, /^package\/(?:package\.json|README\.md|LICENSE|skills\/telescope\/SKILL\.md|\.(?:claude|codex|factory)-plugin\/plugin\.json|dist\/(?:(?:cli|telescope)\.mjs|(?:sphere|viewer)-lane\.(?:js|cjs|d\.ts|d\.cts))|data\/.+)$/u, path);
     if(!path.startsWith('package/data/'))continue;
     // Generated viewer inputs have explicit readers; archive programs/ledgers/toolchains are selected dynamically.
-    assert.match(path,/^package\/data\/(?:spheres\/sphere-bank\.json\.gz|renderer\/volume\.css|target-catalogue\.json|telescope-core\/package\.json|telescope-core\/toolchains\/.+|cli\/src\/(?:archives\/.+|examples\.json|modes\.json)|src\/sources\/(?:wwt\/(?:core-imagesets\.jsonl|fits-associations\.json|phat-fits\.json|WWT-CORE-CATALOGS-LICENSE\.txt)|[^/]+\/(?:ledger\.json|discovery\.json|target-associations\.json)))$/u,path);
+    assert.match(path,/^package\/data\/(?:spheres\/sphere-bank\.json\.gz|renderer\/volume\.css|(?:target-catalogue|site-targets)\.json|telescope-core\/package\.json|telescope-core\/toolchains\/.+|cli\/src\/(?:archives\/.+|examples\.json|modes\.json)|src\/sources\/(?:wwt\/(?:core-imagesets\.jsonl|fits-associations\.json|phat-fits\.json|WWT-CORE-CATALOGS-LICENSE\.txt)|[^/]+\/(?:ledger\.json|discovery\.json|target-associations\.json)))$/u,path);
   }
 }
 function assertPackedExports(manifest: Readonly<Record<string, unknown>>, files: readonly string[]): void {

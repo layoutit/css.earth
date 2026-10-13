@@ -33,6 +33,7 @@ export async function sourceHeader(root: string, file: SourceFile, options: { re
   await writeFile(cache,JSON.stringify({version:4,origin:file.origin,queriedAt:new Date().toISOString(),bytes:bytes.length,base64:bytes.toString('base64')}));return bytes;
 }
 export async function intakeSources(root:string,target:string,existing:readonly SourceProduct[], issues:SourceIntakeIssue[]=[], options: { readonly fetchRemote?: boolean } = {}):Promise<SourceProduct[]> {
+ if(root===USER_ROOT)return [];
  const source=`src/objects/${target}/source`,manifest=await readFile(resolve(root,source,'manifest.json'),'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
  if(!manifest)return [];
  const entries=[...requireArray(manifest.inputs),...requireArray(manifest.documents??[]),...requireArray(manifest.generatedIntermediates??[])];

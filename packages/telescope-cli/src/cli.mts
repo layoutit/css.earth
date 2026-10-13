@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { manageToolchain } from './toolchains/astronomy-toolchains.mts';
 import { resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
@@ -222,7 +223,10 @@ export async function main(args: readonly string[], root: string | undefined = u
     let text: string, code: number;
     process.stdout.write = process.stderr.write.bind(process.stderr);
     try {
-      if(options.command==='wwt-fits'){
+      if(options.command==='toolchain'){
+        const message = await manageToolchain(options.name, options.mode);
+        text = options.json ? `${JSON.stringify({ toolchain: options.name, mode: options.mode, message })}\n` : `${message}\n`; code = 0;
+      }else if(options.command==='wwt-fits'){
         const selected=options.pick?await resolveWwtFitsLead(root,options.exploration!,options.pick):{catalog:options.catalog!,imageset:options.setName!};
         const result=await acquireWwtFits(selected.catalog,selected.imageset,options.level,options.x,options.y,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Original FITS: ${result.source}\nNumeric image: ${result.data}\nValues: ${result.values}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\n${result.limitations.map(line=>`  ${line}\n`).join('')}`;code=0;

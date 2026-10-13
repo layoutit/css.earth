@@ -1,4 +1,5 @@
 /** One owner for complete, pinned environments and their installation lifecycle. */
+import { assertSourceBuildPrerequisites } from './source-build.js';
 import { access, mkdir, mkdtemp, readdir, readFile, rename, rm, rmdir, stat, writeFile } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import { randomUUID } from 'node:crypto';
@@ -86,6 +87,7 @@ export async function installManagedToolchain<T extends ToolchainPins>(root: str
       try { if (prefix) verifyToolchainPython(prefix, pins); await verify(pins); return root; }
       catch { /* A marked but broken prefix must be rebuilt under the same lock. */ }
     }
+    assertSourceBuildPrerequisites(pins);
     await rm(resolve(root, 'installed.json'), { force: true });
     if (prefix) await rm(prefix, { recursive: true, force: true });
     await mkdir(root, { recursive: true });

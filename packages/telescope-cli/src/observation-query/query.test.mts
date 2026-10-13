@@ -438,7 +438,7 @@ test('a capability entry states its intervals, a kind this repository knows and 
   assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, wavelengths: [[0.6, 2.3, 5]] }] }), /each interval as two wavelengths/u);
   assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, citation: undefined }] }), /citation must be a string/u);
   assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, instrumentResolutionArcsec: 0.5 }] }), /where it was read/u);
-  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, mode: 'NIRCAM/GRISM', wavelengths: 'bands' }] }), /no bands in bands.mts/u);
+  assert.throws(() => parseModeCapabilities({ schema: MODES_SCHEMA, modes: [{ ...entry, mode: 'NIRCAM/GRISM', wavelengths: 'bands' }] }), /no cited wavelength bands in the shipped band catalogue/u);
 });
 
 test('a qualified narrow product cannot hide another band or satisfy its request', () => {

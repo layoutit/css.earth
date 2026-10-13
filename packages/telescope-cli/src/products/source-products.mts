@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { VERSION } from '../help.mts';
 import { hasErrorCode, requireRecord } from '@cssearth/core';
-import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope-core/node';
+import { fileSize, readProductRecord, sameRun, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
 import { sourcePds3Observations } from '../archives/pds/source-observations.mts';
 import { parseProductFacts, type QualifiedObservation } from '../qualification/qualified-observations.mts';
@@ -21,6 +21,7 @@ export async function sourceRun(root: string, product: SourceProduct, dependenci
 }
 export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = [], options: { readonly fetchRemote?: boolean } = {}): Promise<LoadedSourceProduct[]> {
   safeId(target, 'target');
+  if (root === USER_ROOT) return [];
   const source = resolve(root, 'src/objects', target, 'source');
   const value = await readFile(resolve(source, 'observations.json'), 'utf8').then(text => JSON.parse(text) as unknown).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
   const declared = value === undefined ? [] : parseSourceProducts(value, JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')) as unknown, target);

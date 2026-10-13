@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../site-targets.mts';
 import { programStorePath } from '../../paths.mts';
 import { packagePath } from '../../paths.mts';
 /** The Spitzer ledger: what the Heritage Archive holds for the objects this repository ships, by observing mode, which of
@@ -85,6 +87,7 @@ export function naifIdFromHorizonsCode(code: unknown): { naifId: number } | { re
 
 /** Every object package, with the one question the archive can be asked about it. */
 export async function spitzerShippedObjects(repository = REPOSITORY): Promise<ShippedObject[]> {
+  if (repository === USER_ROOT) return (await loadSiteTargets()).spitzer;
   const ids = (await shippedObjectIds(repository)).sort();
   const bodies = new Map<string, Record<string, unknown>>();
   for (const id of ids) { const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`)); if (isRecord(body)) bodies.set(id, body); }

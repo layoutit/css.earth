@@ -4,7 +4,7 @@ import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** PICASO owns the radiative transfer of a substellar atmosphere (Batalha et al. 2019). css.earth passes a published Sonora Bobcat
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
- * (picaso-toolchain.json says what each is). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install */
+ * (picaso-toolchain.json says what each is). Install: telescope toolchain install picaso */
 import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
@@ -22,7 +22,7 @@ const paths = (root: string) => ( { env: resolve(root, 'env'), reference: resolv
 const PATHS = paths(PICASO_ROOT);
 const installedPaths = () => paths(resolveInstalledToolchain(PICASO_ROOT, descriptor()) ?? PICASO_ROOT);
 
-const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install';
+const INSTALL = 'telescope toolchain install picaso';
 const descriptor = () => readToolchainPins('picaso', 'picaso-toolchain.json');
 const exists = (path: string) => stat(path).then(() => true, () => false);
 const dataUrl = (entry: Record<string, unknown>, key: string) => requireString(requireRecord(requireRecord(entry.data, 'data')[key], `data.${key}`).url, `data.${key}.url`);
@@ -88,7 +88,7 @@ export function picasoToolchainSync(): PicasoToolchain {
   const pins = descriptor(), { entry } = pins, bin = resolve(installedPaths().env, 'bin'), python = resolve(bin, 'python');
   const root = resolveInstalledToolchain(PICASO_ROOT, pins) ?? PICASO_ROOT;
   assertInstalledMarker(root, pins, 'PICASO', INSTALL);
-  try { accessSync(python); accessSync(installedPaths().passband); } catch { throw new Error(`The PICASO toolchain at ${PICASO_ROOT} is incomplete; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install`); }
+  try { accessSync(python); accessSync(installedPaths().passband); } catch { throw new Error(`The PICASO toolchain at ${PICASO_ROOT} is incomplete; reinstall it: telescope toolchain install picaso`); }
   const opacities = resolve(installedPaths().opacities, opacityName(entry));
   try { accessSync(opacities); } catch { throw new Error(`The PICASO toolchain has no correlated-k table ${opacities}; reinstall it.`); }
   // PICASO reads PYSYN_CDBS at import; its stellar spectra are for planets around stars, and an absent path only warns.

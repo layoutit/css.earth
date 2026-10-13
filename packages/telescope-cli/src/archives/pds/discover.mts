@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { loadTargetCatalogue } from '../../observation-query/query.mts';
 /** Complete, scoped Peppi target search -> verified labels -> product-level candidates for the shared query. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -148,8 +149,9 @@ export function pdsTargetNameCandidates(values: readonly string[]) {
 
 /** Resolve a PDS context target through Peppi. Archive identity is package-owned data, not a css.earth target table. */
 export async function pdsTarget(root: string, id: string) {
-  const descriptor = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')) as unknown, `${id} object`);
-  const catalog = requireRecord(requireRecord(descriptor.properties, `${id} properties`).catalog, `${id} catalog`);
+  const catalog = root === USER_ROOT ? (await loadTargetCatalogue(root)).find(entry => entry.id === id)
+    : requireRecord(requireRecord(requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')) as unknown, `${id} object`).properties, `${id} properties`).catalog, `${id} catalog`);
+  if (!catalog) throw new TypeError(`No shipped target catalogue entry exists for ${id}.`);
   const sourceNames = (await sourcePds3Observations(root, id)).map(observation => observation.targetName);
   const names = pdsTargetNameCandidates([requireString(catalog.name, `${id} name`), ...sourceNames]);
   const targets = (await pdsPackages({ operation: 'resolve-target', names })).targets ?? [];

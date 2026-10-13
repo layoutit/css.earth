@@ -1,3 +1,4 @@
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Source-pinned PDS3 observations already owned by an object package.
  *
  * This is the legacy half of the PDS adapter. Peppi owns PDS4 Registry discovery; this reader exposes exact PDS3 products
@@ -36,6 +37,7 @@ export interface SourcePds3Observation {
  * enter through native intake; a map or incomplete label must not hide unrelated observations. */
 export async function sourcePds3Observations(root: string, targetId: string,
   reportIssue: (path: string, reason: string) => void = () => {}): Promise<SourcePds3Observation[]> {
+  if (root === USER_ROOT) return [];
   const sourceRoot = resolve(root, 'src/objects', targetId, 'source');
   const manifestValue = await readFile(resolve(sourceRoot, 'manifest.json'), 'utf8').then(text => JSON.parse(text) as unknown).catch((error: unknown) => {
     if (hasErrorCode(error, 'ENOENT', 'ENOTDIR')) return undefined;

@@ -11,7 +11,7 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export const PDS_TOOLCHAIN_ROOT = resolve(USER_ROOT, 'output/toolchains/pds');
 
-const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts pds install';
+const INSTALL = 'telescope toolchain install pds';
 const descriptor = () => readToolchainPins('pds-packages', 'pds-toolchain.json');
 
 export async function installPdsToolchain() {

@@ -140,3 +140,15 @@ test('an archive-owned physical-grid profile makes a cube selectable as F16',()=
   const answer=explorationAnswer({target:'sun',family:'F16'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'sun',name:'Sun',aliases:[]}],targetAssociations:[],bodyMaps:[],sourceProducts:[source],qualifiedProducts:[]});
   assert.equal(answer.choices.length,1);assert.deepEqual(answer.choices[0]!.familyEvidence.families,['F16']);assert.equal(answer.unresolved.length,0);
 });
+
+
+test('one shared source-build prerequisite leaves Python-free archive results visible', () => {
+  const reason = 'Managed source-build prerequisite: The astroquery source builds need a working C compiler. xcode-select --install.';
+  const answer = explorationAnswer({ target: 'eris' }, { ledgers: [], capabilities: [], targetCatalogue: [{ id: 'eris', name: 'Eris', aliases: [] }], targetAssociations: [], bodyMaps: [],
+    vo: { records: [], services: ['ESO', 'ALMA', 'MAST'].map(service => ({ service, state: 'unavailable' as const, scope: 'Target query', reason })) },
+    archiveLeads: [{ service: 'Chandra', state: 'sampled', scope: 'Target query', reason: 'one record', instruments: [{ telescope: 'Chandra', instrument: 'ACIS', records: 1, sample: '123' }] }] });
+  assert.equal(answer.issues.filter(issue => issue.reason.includes('xcode-select --install')).length, 1);
+  assert.equal(answer.services.find(service => service.service === 'Chandra')?.state, 'sampled');
+  assert.equal(answer.services.filter(service => service.state === 'unavailable').length, 3);
+  assert.equal(answer.outcome.coverage, 'incomplete');
+});

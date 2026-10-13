@@ -94,9 +94,9 @@ export function parseModeCapabilities(value: unknown): ModeCapability[] {
 /** The intervals `bands.mts` already states for a JWST cube mode, one per band, merged where they overlap. */
 function bandIntervals(mode: string): (readonly [number, number])[] {
   const prefix = mode === 'NIRSPEC/IFU' ? 'NIRSPEC-' : mode === 'MIRI/IFU' ? 'MIRI-MRS-' : null;
-  if (!prefix) throw new TypeError(`${mode} has no bands in bands.mts to take its coverage from; state it here with its citation.`);
+  if (!prefix) throw new TypeError(`${mode} has no cited wavelength bands in the shipped band catalogue.`);
   const ranges = Object.entries(JWST_CUBE_COVERAGE).filter(([id]) => id.startsWith(prefix)).map(([, range]) => range);
-  if (!ranges.length) throw new TypeError(`bands.mts holds no ${mode} bands.`);
+  if (!ranges.length) throw new TypeError(`The shipped band catalogue holds no ${mode} bands.`);
   return mergeIntervals(ranges);
 }
 

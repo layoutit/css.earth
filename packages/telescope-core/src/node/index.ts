@@ -27,3 +27,5 @@ export * from './toolchain/marker.js';
 export * from './toolchain/resolver.js';
 export * from './toolchain/micromamba.js';
 export * from './toolchain/environment.js';
+
+export * from './toolchain/source-build.js';

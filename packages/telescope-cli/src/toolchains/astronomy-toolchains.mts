@@ -5,6 +5,9 @@
  *
  * The pins, their hash-locked requirements and the licences of what they install are in packages/telescope-core/toolchains/;
  * the installers and the checks are `@cssearth/telescope-core/node`. */
+import { archiveInstallers } from './archive-installers.mts';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { installAstroquery, installPdsToolchain, installPicaso, installSpiderman, installStarry, verifyAstroqueryToolchain, verifyPdsToolchain, verifyPicaso, verifySpiderman, verifyStarry } from '@cssearth/telescope-core/node';
 
 const TOOLCHAINS: Readonly<Record<string, { readonly install: () => Promise<string>; readonly verify: () => Promise<string> }>> = {
@@ -15,6 +18,16 @@ const TOOLCHAINS: Readonly<Record<string, { readonly install: () => Promise<stri
   picaso: { install: async () => `PICASO is installed at ${await installPicaso()}`, verify: async () => `PICASO ${verifyPicaso()} ready` },
 };
 
-const [name, mode] = process.argv.slice(2), toolchain = name === undefined ? undefined : TOOLCHAINS[name];
-if (!toolchain || (mode !== 'install' && mode !== 'verify')) throw new TypeError(`Usage: astronomy-toolchains <${Object.keys(TOOLCHAINS).join('|')}> <install|verify>`);
-console.log(await toolchain[mode]());
+export const verificationToolchainNames = Object.keys(TOOLCHAINS);
+export const toolchainNames = [...verificationToolchainNames, ...Object.keys(archiveInstallers)];
+export async function manageToolchain(name: string, mode: 'install' | 'verify'): Promise<string> {
+  if (mode === 'install' && Object.hasOwn(archiveInstallers, name)) return `${name} is installed at ${await archiveInstallers[name]!()}`;
+  const toolchain = Object.hasOwn(TOOLCHAINS, name) ? TOOLCHAINS[name] : undefined;
+  if (!toolchain) throw new TypeError(`Unknown toolchain ${name}; choose ${toolchainNames.join(', ')}.`);
+  return toolchain[mode]();
+}
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const [name, mode] = process.argv.slice(2);
+  if (!name || (mode !== 'install' && mode !== 'verify')) throw new TypeError(`Usage: astronomy-toolchains <${toolchainNames.join('|')}> <install|verify>`);
+  console.log(await manageToolchain(name, mode));
+}
