@@ -119,3 +119,30 @@ test('a measured-rows map with an ellipsoid ratio is resampled from planetograph
   assert.throws(()=>parseObservedPolarRecipe({...config,datasets:[{...dataset,planetographicAxisRatio:.9}]}),/at least 1/);
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('a single-band map with an ellipsoid ratio is resampled from planetographic rows to the mesh latitude',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'observed-scalar-rows-'));
+ try{
+  // One degree per row: rows 10 to 169 are measured, and row 44 (45.5 degrees north, planetographic) is a bright belt.
+  const height=180,values=new Array<number>(2*height).fill(NaN);
+  for(let row=10;row<170;row++)values[row*2]=values[row*2+1]=row===44?5:1;
+  await writeFile(join(root,'map.fits'),imageFixture(-32,values));
+  const config=structuredClone(recipe), signed=config.datasets.find((entry:{operation:string;scalar?:{coverage:string}})=>entry.operation==='scalar-observed-gaps'&&entry.scalar?.coverage==='finite');
+  const dataset={...signed,source:'map.fits',palette:[[0,0,0],[255,255,255]],scalar:{...signed.scalar,width:2,height,range:[0,5],gamma:1,lossless:false}};
+  delete dataset.planetographicAxisRatio;
+  config.dimensions={width:32,height:180,polarTileSize:16};config.packing={latitudeBoundsDegrees:[-80,-40,0,40,80],gutter:2};
+  const belt=async(entry:Record<string,unknown>)=>{
+   const result=await prepareObservedPolarSurfaces({sourceDirectory:root,publicDirectory:root,config:{...config,datasets:[entry]}});
+   const map=result.maps.get(dataset.id)!;let brightest=0;
+   for(let row=0;row<map.height;row++)if(map.data[row*map.width*map.channels]!>map.data[brightest*map.width*map.channels]!)brightest=row;
+   return {degreesNorth:90-(brightest+.5)*180/map.height,coverage:result.coverage[dataset.id]};
+  };
+  const onMeshAlready=await belt(dataset), fromPlanetographic=await belt({...dataset,planetographicAxisRatio:1.0693750560923805});
+  // tan(mesh latitude) = tan(planetographic latitude) / (a / b): 45.5 degrees becomes 43.58.
+  assert.ok(Math.abs(onMeshAlready.degreesNorth-45.5)<=.5,`without a ratio the belt is at ${onMeshAlready.degreesNorth}`);
+  assert.ok(Math.abs(fromPlanetographic.degreesNorth-43.58)<=.5,`with a ratio the belt is at ${fromPlanetographic.degreesNorth}`);
+  assert.deepEqual([onMeshAlready.coverage.firstMeasuredRow,onMeshAlready.coverage.lastMeasuredRow],[10,169]);
+  assert.ok(Number(fromPlanetographic.coverage.firstMeasuredRow)>10&&Number(fromPlanetographic.coverage.lastMeasuredRow)<169);
+  assert.throws(()=>parseObservedPolarRecipe({...config,datasets:[{...dataset,planetographicAxisRatio:.9}]}),/at least 1/);
+ }finally{await rm(root,{recursive:true,force:true});}
+});

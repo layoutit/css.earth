@@ -19,11 +19,13 @@ const dataset = union(
   object({id: string, operation: literal('rgb-measured-rows'), source: string, files, control, polarDetails: forbiddenPolarDetailOverride,
     coverage: object({columnStride: number, minimumMean: number, firstMeasuredRow: number, lastMeasuredRow: number}),
     planetographicAxisRatio: optional(number), projection}),
+  // A single-band map through a palette. With an ellipsoid ratio its rows are planetographic and are resampled to the mesh's
+  // latitude, as the RGB maps' are; without one its rows are already the mesh's.
   object({id: string, operation: literal('scalar-observed-gaps'), source: string, files, control: forbiddenPolarDetailOverride, polarDetails: forbiddenPolarDetailOverride,
     label: string, shortLabel: string, filter: string, wavelength: string, measurement: string, qualification: string, structuralAuthority: optional(string),
     palette: array(tuple(number, number, number)), scalar: object({bitpix: number, width: number, height: number, percentiles: tuple(number, number), minimumCoverageFraction: number,
       noData: literal(0), coverage: literal('polar-connected-zero','finite'), range:optional(tuple(number,number)), gamma:optional(number), lossless:optional(boolean)}),
-    projection}));
+    planetographicAxisRatio: optional(number), projection}));
 const encoding = object({quality: optional(number), alphaQuality: optional(number), effort: optional(number), smartSubsample: optional(boolean)});
 const recipe = object({schema: literal('cssearth-observed-polar-surfaces@2'), namespace: string, publicPrefix: string,
   datasets: array(dataset),
