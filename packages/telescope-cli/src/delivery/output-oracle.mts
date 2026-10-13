@@ -1,4 +1,4 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Test-only, independently implemented references. Never calls the production cube reducer. */
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
@@ -19,6 +19,7 @@ from photutils.aperture import RectangularAperture, aperture_photometry
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin); directory=Path(r['directory']); out=Path(r['out'])
 record=json.loads((directory/'output.product.json').read_text()); selection=record['parameters']['selection']; kind=selection['kind']
 def sized(file,bytes,label):
@@ -31,7 +32,7 @@ sized(source,pin['bytes'],'Source')
 with fits.open(source) as hdus:
     h=hdus[selection['hdu']]; data=np.array(h.data,dtype=float); header=h.header
     if data.ndim!=3: raise ValueError('This oracle currently checks three-dimensional FITS cubes')
-    unit=u.Unit(header['BUNIT']); mask=~np.isfinite(data)
+    unit=required_archive_unit(header.get('BUNIT'), 'Oracle science'); mask=~np.isfinite(data)
     if 'DQ' in hdus: mask|=hdus['DQ'].data!=0
     if 'ERR' in hdus: mask|=~np.isfinite(hdus['ERR'].data)|(hdus['ERR'].data<0)
     w=WCS(header,hdus,fix=False); sw=w.wcs.spec
@@ -39,7 +40,7 @@ with fits.open(source) as hdus:
     n=data.shape[0]
     def wave(p):
         coordinates=np.tile(w.wcs.crpix-1,(len(p),1)); coordinates[:,2]=p
-        return (w.all_pix2world(coordinates,0)[:,sw]*u.Unit(w.world_axis_units[sw])).to_value(u.um)
+        return (w.all_pix2world(coordinates,0)[:,sw]*required_archive_unit(w.world_axis_units[sw], 'Oracle spectral WCS')).to_value(u.um)
     centers=wave(np.arange(n)); edges=wave(np.arange(n+1)-.5)
 descending=edges[0]>edges[-1]
 if descending: data=data[::-1];mask=mask[::-1];centers=centers[::-1];edges=edges[::-1]
@@ -91,7 +92,7 @@ mask_equal=bool(np.array_equal(np.isfinite(actual),np.isfinite(reference)))
 valid=np.isfinite(actual)&np.isfinite(reference)
 if not valid.any(): raise ValueError('No comparable valid samples')
 delta=actual-reference; maximum=float(np.max(np.abs(delta[valid])));scale=max(float(np.max(np.abs(reference[valid]))),1e-30)
-units_equal=u.Unit(record['parameters'].get('measurement',{}).get('unit',record['parameters']['metadata']['units']['value']))==expected_unit
+units_equal=archive_unit(record['parameters'].get('measurement',{}).get('unit',record['parameters']['metadata']['units']['value']))==expected_unit
 passed=mask_equal and units_equal and maximum<=1e-10*scale
 report={'passed':passed,'kind':kind,'reference':owner,'source':{'path':d['product'],'bytes':pin['bytes']},'comparedSamples':int(valid.sum()),'maskEqual':mask_equal,'unitsEqual':bool(units_equal),'maxAbsoluteError':maximum,'maxErrorOverPeak':maximum/scale,'toleranceOverPeak':1e-10,'versions':{'specutils':specutils.__version__,'photutils':photutils.__version__,'astropy':astropy.__version__},'limits':['Independent extraction arithmetic; FITS/WCS decoding still shares Astropy.','This compares values, units and masks, not calibration accuracy or feature significance.','Uncertainty propagation is separately checked against analytic fixtures; this comparison does not validate unknown covariance.']}
 plt.rcParams.update({'font.size':10})

@@ -8,7 +8,8 @@ import { dirname, resolve } from 'node:path';
 import test from 'node:test';
 import { build } from 'esbuild';
 import { requireRecord } from '@cssearth/core';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
+import { fileSize, requireWorkspace, writeProductRecord } from '@cssearth/telescope-core/node';
+import { encodeFits } from '@cssearth/fits/node';
 import { packageBundlePlugins } from './package-bundle.mts';
 import { copyPackageData, validatePublishPackage } from './package-data.mts';
 
@@ -43,8 +44,10 @@ test('published dependencies cover runtime external imports and the public Node 
     await validatePublishPackage(root, directory);
     const manifest = requireRecord(JSON.parse(await readFile(resolve(directory, 'package.json'), 'utf8')));
     const dependencies = requireRecord(manifest.dependencies);
-    assert.deepEqual(Object.keys(dependencies).sort(), [...externalPackages, '@types/node'].sort(),
-      'public sphere declarations require Node types; every other dependency must have a runtime external import');
+    assert.deepEqual(Object.keys(dependencies).sort(), [...externalPackages].sort(),
+      'every runtime dependency must have a runtime external import');
+    assert.equal(requireRecord(manifest.peerDependencies)['@types/node'], '^26.4.0');
+    assert.equal(requireRecord(requireRecord(manifest.peerDependenciesMeta)['@types/node']).optional, true);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
@@ -217,9 +220,29 @@ test('actual tarball stays within the standalone budget and contains only runtim
     await writeFile(declarations, original + "\nexport { loadPreparedCssVolume as broken } from '@cssearth/renderer/volume/loader.ts';\n");
     compiled = compile(); assert.notEqual(compiled.status, 0); assert.match(compiled.stdout, /TS2307/u);
     await writeFile(declarations, original);
+    // The declarations need Node types; launching the JavaScript CLI does not.
+    await rm(resolve(consumer, 'node_modules/@types/node'), { recursive: true, force: true });
+    await rm(resolve(consumer, 'node_modules/undici-types'), { recursive: true, force: true });
     const help = spawnSync(process.execPath, [resolve(consumer, 'node_modules/@cssearth/telescope/dist/telescope.mjs'), '--help'],
       { cwd: consumer, encoding: 'utf8', timeout: 30_000 });
     assert.equal(help.status, 0, help.stderr); assert.match(help.stdout, /telescope explore/u);
+    const image = resolve(consumer, 'adu.fits'), inputRecord = resolve(consumer, 'input.product.json'), delivery = resolve(consumer, 'result.json');
+    await writeFile(image, encodeFits(new Float32Array([1, 2, 3, 4]), 2, 2, { BUNIT: 'ADU' }));
+    await writeProductRecord(inputRecord, { telescope: 'Fixture', stage: 'fixture', inputs: [], parameters: {}, software: [] }, [{ path: 'adu.fits', file: image }]);
+    await writeFile(delivery, JSON.stringify({ schema: 'cssearth-telescope-delivery@3', product: 'adu.fits', record: 'input.product.json', receipt: 'input.product.json', facts: { target: 'fixture', verified: true }, context: { kind: 'exploration', target: 'fixture', discovery: { schema: 'cssearth-telescope-exploration@1', observation: 'ADU image' }, assessment: { status: 'not-requested' } }, files: [{ path: 'adu.fits', ...await fileSize(image) }, { path: 'input.product.json', ...await fileSize(inputRecord) }] }));
+    const env: NodeJS.ProcessEnv = { ...process.env, CSSEARTH_TELESCOPE_HOME: resolve(consumer, 'user') };
+    delete env.CSSEARTH_WORKSPACE;
+    for (const kind of ['image', 'html']) {
+      const directory = resolve(consumer, kind);
+      const exported = spawnSync(process.execPath, [resolve(consumer, 'node_modules/@cssearth/telescope/dist/telescope.mjs'),
+        'export', delivery, '--output', kind, ...(kind === 'image' ? ['--hdu', '0'] : []), '--out', directory, '--json'],
+        { cwd: consumer, env, encoding: 'utf8', timeout: 30_000 });
+      assert.equal(exported.status, 0, exported.stdout + exported.stderr);
+      assert.ok((await readFile(resolve(directory, 'figure.png'))).length > 1000);
+      const evidence = requireRecord(JSON.parse(await readFile(resolve(directory, 'output.product.json'), 'utf8')));
+      assert.equal(requireRecord(requireRecord(requireRecord(evidence.parameters).metadata).units).value, 'ADU');
+      if (kind === 'html') assert.match(await readFile(resolve(directory, 'viewer.html'), 'utf8'), /data:image\/png;base64,/u);
+    }
     for(const forbidden of ['package/pnpm-lock.yaml','package/data/spheres/src/objects/body/prepared/runtime.json.gz','package/data/cli/src/examples/sample/evidence/image.png','package/data/bake/src/unused.json','package/src/objects/body/source/measurements.json','package/data/cli/src/archives/example/evidence/proof.png','package/data/cli/src/archives/example/fixtures/input.json','package/data/cli/src/archives/example/source.test.mts','package/data/cli/src/archives/example/yarn.lock','package/dist/extra/unknown.mjs','package/unknown.json'])
       assert.throws(()=>assertPackedClosure([...files,forbidden]),`Packaging guard must reject ${forbidden}`);
   }finally{await rm(directory,{recursive:true,force:true});}

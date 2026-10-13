@@ -1,4 +1,4 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Source-qualified planetary coordinate grids. This adapter validates and exports bytes; it owns no inversion physics. */
 import {spawn} from 'node:child_process';
 import {copyFile} from 'node:fs/promises';
@@ -72,6 +72,7 @@ const python=String.raw`import json,sys,numpy as np,astropy
 from astropy.io import fits
 from astropy import units as u
 from astropy.wcs import WCS
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin);c=r['context']
 with fits.open(r['path'],memmap=True) as h:
  d=np.asarray(h[0].data);hdr=h[0].header
@@ -92,7 +93,7 @@ with fits.open(r['path'],memmap=True) as h:
  for i,expected in enumerate(c['axes'],start=1):
   unit=str(w.world_axis_units[i-1]).strip()
   try:
-   native_unit=u.Unit(unit);qualified_unit=u.Unit(expected['unit']);physical_unit={'length':u.m,'time':u.s,'pressure':u.Pa,'angle':u.rad}[expected['physicalType']]
+   native_unit=required_archive_unit(unit, 'FITS axis');qualified_unit=required_archive_unit(expected['unit'], 'Qualified axis');physical_unit={'length':u.m,'time':u.s,'pressure':u.Pa,'angle':u.rad}[expected['physicalType']]
   except Exception as error:raise ValueError('Planetary grid axis has an invalid physical unit at axis '+str(i)) from error
   if not qualified_unit.is_equivalent(physical_unit):raise ValueError('Qualified planetary axis unit has a different physical dimension from its role at axis '+str(i))
   if not native_unit.is_equivalent(physical_unit):raise ValueError('FITS axis unit has a different physical dimension from its role at axis '+str(i))

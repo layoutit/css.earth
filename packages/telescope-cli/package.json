@@ -49,8 +49,7 @@
     "sharp": "0.35.3",
     "linkedom": "^0.18.13",
     "@layoutit/polycss": "0.2.11",
-    "geotiff": "3.0.5",
-    "@types/node": "^26.4.0"
+    "geotiff": "3.0.5"
   },
   "devDependencies": {
     "esbuild": "0.27.7",
@@ -66,7 +65,8 @@
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
-    "@cssearth/telescope-core": "workspace:*"
+    "@cssearth/telescope-core": "workspace:*",
+    "@types/node": "^26.4.0"
   },
   "oracleManifest": "oracle-manifest.json",
   "pi": {
@@ -101,5 +101,13 @@
     "#telescope/sphere/native-scroll/carry-values": "./src/sphere/native-scroll/carry-values.mts",
     "#telescope/sphere/native-scroll/native-camera": "./src/sphere/native-scroll/native-camera.mts",
     "#telescope/sphere/native-scroll/resize-input": "./src/sphere/native-scroll/resize-input.mts"
+  },
+  "peerDependencies": {
+    "@types/node": "^26.4.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    }
   }
 }

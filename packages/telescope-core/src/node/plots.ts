@@ -3,6 +3,7 @@ import { telescopePythonEnvironment } from './paths.js';
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { SCIENCE_UNIT_PYTHON } from './science.js';
 export const PLOT_PYTHON = String.raw`
 import csv,json,sys,warnings
 from pathlib import Path
@@ -17,20 +18,24 @@ from astropy.visualization import ImageNormalize,LinearStretch,quantity_support
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin); data=r['data']; out=Path(r['directory']); kind=data['kind']
 if 'arrays' in data:
  values=np.load(out/'arrays'/data['arrays']['values'],mmap_mode='r');sigma=np.load(out/'arrays'/data['arrays']['sigma'],mmap_mode='r')
 else:values=np.asarray(data['values'],dtype=float);sigma=np.asarray(data['sigma'],dtype=float)
 if not np.isfinite(values).any(): raise ValueError('The requested output contains no usable samples')
 if sigma.shape!=values.shape: raise ValueError('Uncertainty shape mismatch')
-unit=u.Unit(data['unit']) if data['unit'] else None
-unit_label=('dimensionless' if unit==u.dimensionless_unscaled else unit.to_string('latex_inline')) if unit is not None else 'unit not stated'
+unit=archive_unit(data['unit'])
+unit_label=('dimensionless' if unit==u.dimensionless_unscaled else unit.to_string('latex_inline')) if unit is not None else 'unknown unit: '+str(data['unit']) if data['unit'] else 'unit not stated'
 metadata={'kind':kind,'definition':data.get('definition','Native sampled values'),
  'selection':r['selection'],'uncertainty':data.get('uncertaintyPolicy','recorded'),
  'mask':'Non-finite values are missing; no interpolation',
  'source_file':Path(r['source']).name,'source_hdu':r['selection']['hdu'],
  'provenance':'output.product.json'}
 presentation={'coordinates':{'kind':'pixel','reason':'No celestial WCS supplied'},'warnings':[]}
+fits_unit,fits_unit_notice=archive_fits_unit(data['unit'])
+if unit is None: presentation['warnings'].append('Missing or unsupported science unit: '+str(data['unit']))
+if fits_unit_notice is not None: presentation['warnings'].append(fits_unit_notice)
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'figure.facecolor':'#181b1f','axes.facecolor':'#181b1f','text.color':'#d5d7dc','axes.labelcolor':'#d5d7dc','xtick.color':'#b8bbc4','ytick.color':'#b8bbc4','axes.edgecolor':'#626770','svg.hashsalt':'cssearth-telescope-output'})
 files=['figure.png','figure.svg','values.csv']
 with (out/'values.csv').open('w',newline='') as file:
@@ -53,10 +58,10 @@ with (out/'values.csv').open('w',newline='') as file:
        'physicalTypes':spatial.world_axis_physical_types,'grid':'native; no reprojection'}
      else:presentation['coordinates']['reason']='Celestial coordinates depend on axes beyond the exported image; no 2D WCS asserted'
     product=spatial.to_fits(relax=True) if spatial is not None else fits.HDUList([fits.PrimaryHDU()])
-   presentation['warnings']=[str(n.message) for n in notices]
+   presentation['warnings'] += [str(n.message) for n in notices]
   product[0].data=values
   header=product[0].header
-  if unit is not None:header['BUNIT']=unit.to_string('fits') or '1'
+  if fits_unit:header['BUNIT']=str(fits_unit)
   header['HIERARCH CSSEARTH KIND']=kind
   header['HIERARCH CSSEARTH UNCERTAINTY']=metadata['uncertainty']
   header['HISTORY']=metadata['definition']
@@ -66,7 +71,7 @@ with (out/'values.csv').open('w',newline='') as file:
   product.append(mask)
   if np.isfinite(sigma).any():
    err=fits.ImageHDU(sigma,name='ERR')
-   if unit is not None:err.header['BUNIT']=unit.to_string('fits') or '1'
+   if fits_unit:err.header['BUNIT']=str(fits_unit)
    err.header['HISTORY']='Standard deviation; NaN means unavailable. See uncertainty policy in primary header.'
    product.append(err)
   product.writeto(out/'image.fits');product.close();files.append('image.fits')

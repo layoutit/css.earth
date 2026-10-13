@@ -250,6 +250,8 @@ telescope export src/objects/lmc-volume/object.json --output volume-dataset-bank
 
 The navigation file pins SPICE kernels. The sphere is a standalone HTML file with no JavaScript. See the [navigation contract](../../docs/virtual-telescopes.md#projection-and-sphere). Physical handoffs copy prepared renderer files and credits; restore missing inputs with `setup:prepared --object=ID`.
 
+The published declarations reference Node types. TypeScript consumers install `@types/node` (an optional peer); the JavaScript CLI does not require it at runtime.
+
 ## Independent output checks
 
 These optional checks run from a development checkout with its dependencies installed; they are not installed CLI commands. The [output oracle](src/delivery/output-oracle.mts) reads the pinned FITS data independently of the production reducer, using Specutils 2.4.0 and Photutils 3.0.0 as optional test dependencies:

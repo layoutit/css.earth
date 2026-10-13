@@ -3,6 +3,7 @@ import { telescopePythonEnvironment } from './paths.js';
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { requireRecord } from '@cssearth/core';
+import { SCIENCE_UNIT_PYTHON } from './science.js';
 
 export const PROJECTION_PYTHON = String.raw`
 import json,sys,warnings
@@ -16,6 +17,7 @@ from astropy.visualization import ImageNormalize,LinearStretch
 from PIL import Image
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin); out=Path(r['directory']); g=r['geometry']
 spiceypy.kclear()
 for kernel in g['kernels']:spiceypy.furnsh(kernel['file'])
@@ -26,7 +28,7 @@ with fits.open(r['image']) as f:
  sigma=np.asarray(f['ERR'].data,dtype=float)
  if sigma.shape!=values.shape:raise ValueError('Uncertainty grid differs from the measurement')
  if 'MASK' in f:values[np.asarray(f['MASK'].data)!=0]=np.nan
- unit=u.Unit(header['BUNIT'])
+ unit=required_archive_unit(header.get('BUNIT'), 'Surface projection requires qualified intensive values')
  if unit!=u.dimensionless_unscaled and not any(base==u.sr and power<0 for base,power in zip(unit.bases,unit.powers)):
   raise ValueError('Surface projection accepts intensive values (dimensionless or per steradian), not flux per pixel')
 with fits.open(r['source'],memmap=True) as f:

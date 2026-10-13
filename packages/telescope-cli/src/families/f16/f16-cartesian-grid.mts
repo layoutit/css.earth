@@ -1,4 +1,4 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Bounded physical Cartesian FITS grids. Astropy owns FITS/WCS interpretation. */
 import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, parsePreparedDensityVolumeText } from '@cssearth/objects';
 import {spawn} from 'node:child_process';
@@ -27,6 +27,7 @@ function validateContext(context:PhysicalGridContext):PhysicalGridContext{for(co
 const python=String.raw`import json,sys,numpy as np
 from astropy.io import fits
 import astropy.units as u, astropy
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin); ctx=r['context']
 def hdu(hdus,key,label):
  try:return hdus[key]
@@ -43,7 +44,7 @@ def grid(path):
  if any(not x for x in cunit):raise ValueError('Physical Cartesian profile requires explicit CUNIT pc on every axis')
  if any(x.strip().lower()!='pc' for x in cunit):raise ValueError('Physical Cartesian profile currently requires exact pc CUNIT on every axis')
  try:
-  declared=u.Unit(ctx['unit']); mean_unit=u.Unit(str(hdr.get('BUNIT',ctx['unit']))); std_unit=u.Unit(str(std.header.get('BUNIT',hdr.get('BUNIT',ctx['unit']))))
+  declared=required_archive_unit(ctx['unit'], 'Declared physical quantity'); mean_unit=required_archive_unit(hdr.get('BUNIT',ctx['unit']), 'Mean physical quantity'); std_unit=required_archive_unit(std.header.get('BUNIT',hdr.get('BUNIT',ctx['unit'])), 'Uncertainty physical quantity')
  except Exception as exc:raise ValueError('Physical quantity units must be understood by Astropy') from exc
  if not mean_unit.is_equivalent(declared) or not std_unit.is_equivalent(declared):raise ValueError('Mean, uncertainty and declared physical quantity units are incompatible')
  if not np.isclose((1*mean_unit).to_value(declared),1) or not np.isclose((1*std_unit).to_value(declared),1):raise ValueError('Mean and uncertainty values must already use the declared physical quantity unit')

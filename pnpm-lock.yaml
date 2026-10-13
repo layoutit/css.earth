@@ -438,9 +438,6 @@ importers:
 
   packages/telescope-cli:
     dependencies:
-      '@types/node':
-        specifier: ^26.4.0
-        version: 26.4.0
       '@layoutit/polycss':
         specifier: 0.2.11
         version: 0.2.11
@@ -481,6 +478,9 @@ importers:
       '@cssearth/telescope-core':
         specifier: workspace:*
         version: link:../telescope-core
+      '@types/node':
+        specifier: ^26.4.0
+        version: 26.4.0
       '@types/pngjs':
         specifier: 6.0.5
         version: 6.0.5

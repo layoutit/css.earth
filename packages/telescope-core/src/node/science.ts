@@ -4,6 +4,36 @@ import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { requireRecord, requireString } from '@cssearth/core';
 import { CUBE_OUTPUT_PYTHON } from './cube-outputs.js';
+/** One parser for archive-supplied units, shared by every inline Python consumer. */
+export const SCIENCE_UNIT_PYTHON = String.raw`
+import re, warnings
+from astropy import units as u
+def archive_unit(text):
+    if text is None: return None
+    text = str(text).strip()
+    aliases = {'I/F':'1', 'DIMENSIONLESS':'1', 'METER':'m', 'METERS':'m', 'W/M**2/SR/NM':'W m-2 sr-1 nm-1'}
+    text = aliases.get(text, text)
+    # Normalize only known detector tokens; arbitrary SI unit case carries meaning.
+    tokens = {'adu':'adu', 'dn':'adu', 'count':'count', 'counts':'count', 'electron':'electron', 'electrons':'electron'}
+    text = re.sub(r'\b(?:adu|dn|counts?|electrons?)\b', lambda match: tokens[match.group().lower()], text, flags=re.IGNORECASE)
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter('error')
+            return u.Unit(text, parse_strict='raise')
+    except (ValueError, TypeError, Warning): return None
+
+def required_archive_unit(text, label):
+    parsed = archive_unit(text)
+    if parsed is None: raise ValueError(label + ': missing or unsupported unit: ' + str(text))
+    return parsed
+
+def archive_fits_unit(text):
+    parsed = archive_unit(text)
+    if parsed is None: return text, None
+    try: return parsed.to_string('fits') or '1', None
+    except (ValueError, Warning):
+        return str(parsed), 'Science unit is not representable in standard FITS syntax; retained as '+str(parsed)+': '+str(text)
+`;
 export const SCIENCE_PYTHON = String.raw`
 import json, sys, warnings
 from contextlib import ExitStack
@@ -17,11 +47,7 @@ from astropy.utils.exceptions import AstropyWarning
 warnings.simplefilter('error')
 request = json.load(sys.stdin)
 ${CUBE_OUTPUT_PYTHON}
-def unit(text):
-    if text is None: return None
-    aliases = {'I/F':'1', 'DIMENSIONLESS':'1', 'DN':'adu', 'counts':'count', 'electrons':'electron'}
-    try: return u.Unit(aliases.get(text, text), parse_strict='raise')
-    except (ValueError, Warning): return None
+${SCIENCE_UNIT_PYTHON}
 
 def merged(ranges):
     out=[]
@@ -72,7 +98,7 @@ def read_science(path):
             seen.add(identity)
             limits=[str(w.message) for w in format_warnings]; name=f'HDU {index} ({hdu.name}, EXTVER={version})'
             row={'structure':name,'fitsHdu':index,'shape':list(shape),'calibration':[], 'limitations':limits}
-            rawunit=h.get('BUNIT'); dataunit=unit(rawunit)
+            rawunit=h.get('BUNIT'); dataunit=archive_unit(rawunit)
             if dataunit is not None: row['units']={'value':rawunit,'source':name+':BUNIT','canonical':str(dataunit)}
             else: limits.append('Missing or unsupported science unit: '+str(rawunit))
             def linked(keyword, role):
@@ -108,7 +134,7 @@ def read_science(path):
                 error=external_error; error_kind='standard-deviation'
             if error is not None:
                 if error_kind is None: error_kind='variance' if error.name.upper() in ('VAR','VARIANCE') else 'inverse-variance' if error.name.upper()=='IVAR' else 'standard-deviation'
-                eu=unit(error.header.get('BUNIT')); wanted=None if dataunit is None else dataunit**(2 if error_kind=='variance' else -2 if error_kind=='inverse-variance' else 1)
+                eu=archive_unit(error.header.get('BUNIT')); wanted=None if dataunit is None else dataunit**(2 if error_kind=='variance' else -2 if error_kind=='inverse-variance' else 1)
                 if eu is not None and wanted is not None:
                     if not eu.is_equivalent(wanted): raise ValueError('Uncertainty units disagree with science: '+name)
                     error_unit_valid=True
@@ -130,7 +156,8 @@ def read_science(path):
                     if n>1000000: raise ValueError('Spectral coordinate array exceeds budget')
                     def wavelength(pixels):
                         coords=np.tile(np.asarray(w.wcs.crpix)-1,(len(pixels),1)); coords[:,pixelaxis]=pixels
-                        values=w.all_pix2world(coords,0)[:,sw]; su=u.Unit(w.world_axis_units[sw]); ct=str(w.wcs.ctype[sw])
+                        values=w.all_pix2world(coords,0)[:,sw]; su=archive_unit(w.world_axis_units[sw]); ct=str(w.wcs.ctype[sw])
+                        if su is None: raise NotImplementedError('Unsupported spectral WCS unit: '+str(w.world_axis_units[sw]))
                         if ct.startswith('AWAV'): raise NotImplementedError('Air-wavelength conversion requires a stated convention')
                         if su.is_equivalent(u.m/u.s):
                             rest=h.get('RESTFRQ',h.get('RESTFREQ'))
@@ -208,7 +235,7 @@ def read_science(path):
                         if bad.any(): raise ValueError('Negative unmasked uncertainty')
                         valid=np.isfinite(e)&(e>0 if error_kind=='inverse-variance' else e>=0)
                         baderror+=int(np.count_nonzero(good&~valid)); good &= valid
-                        if not error_unit_valid: good[:]=False
+                        # Unknown uncertainty units cannot establish sigma, but do not erase native science values.
                     if extract:
                         sigma=np.full(a.shape,np.nan)
                         if error_unit_valid:
@@ -276,12 +303,16 @@ def read_science(path):
                     # Only a single Stokes component is admitted here; do not discard polarization-dependent beams.
                     if set(np.asarray(table.data['POL']).tolist())!={0}: limits.append('Multiple polarization beams require explicit selection.')
                     else:
-                        majors=(table.data['BMAJ']*u.Unit(table.columns['BMAJ'].unit)).to_value(u.arcsec)
-                        minors=(table.data['BMIN']*u.Unit(table.columns['BMIN'].unit)).to_value(u.arcsec)
-                        channels=np.asarray(table.data['CHAN']); n=shape[specaxis]
-                        if len(channels)!=n or set(channels.tolist())!=set(range(n)) or not np.all(np.isfinite(majors)&np.isfinite(minors)&(majors>=minors)&(minors>0)): raise ValueError('Beam table does not cover every channel with valid axes')
-                        if goodcount: beam=float(max(majors[i] for i,c in enumerate(channels) if usable[c]))
-                        row['calibration'].append({'field':'BEAMS','value':'Complete channel-indexed restoring beams; maximum usable major-axis FWHM.'})
+                        major_unit=archive_unit(table.columns['BMAJ'].unit); minor_unit=archive_unit(table.columns['BMIN'].unit)
+                        if major_unit is None or minor_unit is None or not major_unit.is_equivalent(u.arcsec) or not minor_unit.is_equivalent(u.arcsec):
+                            limits.append('Missing or unsupported angular beam table units: '+str(table.columns['BMAJ'].unit)+', '+str(table.columns['BMIN'].unit))
+                        else:
+                            majors=(table.data['BMAJ']*major_unit).to_value(u.arcsec)
+                            minors=(table.data['BMIN']*minor_unit).to_value(u.arcsec)
+                            channels=np.asarray(table.data['CHAN']); n=shape[specaxis]
+                            if len(channels)!=n or set(channels.tolist())!=set(range(n)) or not np.all(np.isfinite(majors)&np.isfinite(minors)&(majors>=minors)&(minors>0)): raise ValueError('Beam table does not cover every channel with valid axes')
+                            if goodcount: beam=float(max(majors[i] for i,c in enumerate(channels) if usable[c]))
+                            row['calibration'].append({'field':'BEAMS','value':'Complete channel-indexed restoring beams; maximum usable major-axis FWHM.'})
             elif 'BMAJ' in h or 'BMIN' in h:
                 major=h.get('BMAJ'); minor=h.get('BMIN')
                 if major is None or minor is None or not np.isfinite(major) or not np.isfinite(minor) or not major>=minor>0: raise ValueError('Invalid restoring beam axes')
@@ -308,9 +339,9 @@ def read_science(path):
 
 if request['operation'] in ('fits','extract'): answer=read_science(request['path'])
 elif request['operation']=='units':
-    answer={'units':[None if unit(text) is None else str(unit(text)) for text in request['units']], 'astropy':astropy.__version__}
+    answer={'units':[None if archive_unit(text) is None else str(archive_unit(text)) for text in request['units']], 'astropy':astropy.__version__}
 elif request['operation']=='spectral-convert':
-    source=unit(request['unit'])
+    source=archive_unit(request['unit'])
     if source is None: raise ValueError('Unsupported spectral coordinate unit')
     values=np.asarray(request['values'],dtype=float)
     if values.ndim != 1 or not np.all(np.isfinite(values)): raise ValueError('Spectral coordinates must be finite')

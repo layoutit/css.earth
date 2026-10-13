@@ -1,4 +1,4 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Decode through the existing format owners, then hand arrays to Astropy/Matplotlib. */
 import { mkdir,readFile,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -19,13 +19,12 @@ from pathlib import Path
 import numpy as np
 from astropy.io import fits
 from astropy import units as u
+${SCIENCE_UNIT_PYTHON}
 r=json.load(sys.stdin);meta=r['metadata'];path=Path(r['directory'])
 a=np.load(path/r['array'],mmap_mode='r') if r['encoding']=='npy' else np.memmap(path/r['array'],mode='r',dtype='<f4',shape=tuple(r['shape']))
 h=fits.PrimaryHDU(a);hdus=[h]
 def fits_unit(text):
- aliases={'I/F':'1','DIMENSIONLESS':'1','DN':'adu','METER':'m','METERS':'m','W/M**2/SR/NM':'W m-2 sr-1 nm-1'}
- try:return u.Unit(aliases.get(text,text)).to_string('fits') or '1'
- except (ValueError,TypeError):return None
+ return archive_fits_unit(text)[0]
 if meta.get('units'):
  unit=fits_unit(meta['units']['value'])
  if unit:h.header['BUNIT']=unit
