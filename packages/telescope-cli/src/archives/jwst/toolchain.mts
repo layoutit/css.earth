@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { verifyToolchainPython, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
 import { CLI_PACKAGE_ROOT, packagePath } from '../../paths.mts';
 /** Install and locate the pinned Python environments the JWST tools run on, under output/toolchains/<id> (ignored by git).
  *
@@ -10,9 +11,8 @@ import { CLI_PACKAGE_ROOT, packagePath } from '../../paths.mts';
  * micromamba creates Python from conda-forge; pip installs the descriptor's lock, every package at its pinned version or commit,
  * without resolving further dependencies; the descriptor's patches are applied to the installed sources and each must match
  * exactly once, and its data archives are fetched and checked by size. The install keeps the descriptor and lock texts it was
- * built from, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
- * `micromamba`). */
-import { resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+ * built from, and the toolchain refuses an environment built from other pins. micromamba itself is resolved by the shared telescope owner. */
+import { resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -56,25 +56,27 @@ async function installData(root: string, record: unknown) {
 }
 
 export async function installToolchain(id: ToolchainId) {
-  const pins = await descriptor(id), { entry, lockPath } = pins, root = toolchainRoot(id), prefix = resolve(root, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  await rm(root, { recursive: true, force: true });
-  await mkdir(root, { recursive: true });
-  const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
-  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', lockPath]);
-  const sitePackages = runToolchainProcess(resolve(prefix, 'bin/python'), ['-c', 'import sysconfig; print(sysconfig.get_paths()["purelib"])']).trim();
-  for (const record of requireArray(entry.patches ?? [])) {
-    const patch = requireRecord(record, 'patch'), path = resolve(sitePackages, requireString(patch.file));
-    const source = await readFile(path, 'utf8'), find = requireString(patch.find);
-    if (source.split(find).length !== 2) throw new Error(`${patch.file}: the patch target occurs ${source.split(find).length - 1} times, not once.`);
-    await writeFile(path, source.replace(find, requireString(patch.replace)));
-  }
-  for (const record of requireArray(entry.data ?? [])) await installData(root, record);
-  for (const record of requireArray(entry.caches ?? [])) await mkdir(resolve(root, requireString(requireRecord(record, 'cache').directory)), { recursive: true });
-  await rm(resolve(root, 'mamba/pkgs'), { recursive: true, force: true });
-  writeInstalledMarker(root, pins);
-  return root;
+  assertManagedPythonPlatform();
+  const root = toolchainRoot(id), prefix = resolve(root, 'env');
+  return installManagedToolchain(root, () => descriptor(id), prefix, async pins => {
+    const { entry, lockPath } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+
+    const micromamba = await resolveMicromamba();
+    await mkdir(root, { recursive: true });
+    const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', lockPath]);
+    const sitePackages = runToolchainProcess(resolve(prefix, 'bin/python'), ['-c', 'import sysconfig; print(sysconfig.get_paths()["purelib"])']).trim();
+    for (const record of requireArray(entry.patches ?? [])) {
+      const patch = requireRecord(record, 'patch'), path = resolve(sitePackages, requireString(patch.file));
+      const source = await readFile(path, 'utf8'), find = requireString(patch.find);
+      if (source.split(find).length !== 2) throw new Error(`${patch.file}: the patch target occurs ${source.split(find).length - 1} times, not once.`);
+      await writeFile(path, source.replace(find, requireString(patch.replace)));
+    }
+    for (const record of requireArray(entry.data ?? [])) await installData(root, record);
+    for (const record of requireArray(entry.caches ?? [])) await mkdir(resolve(root, requireString(requireRecord(record, 'cache').directory)), { recursive: true });
+    await rm(resolve(root, 'mamba/pkgs'), { recursive: true, force: true });
+  }, pins => verifyToolchainPython(prefix, pins));
 }
 
 export const installEureka = () => installToolchain('eureka');

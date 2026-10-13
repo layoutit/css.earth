@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned codes of toolchain.json under output/toolchains/zdi (ignored by git).
  *
@@ -16,7 +16,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { resolveInstalledToolchain, assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const FILE = 'packages/telescope-cli/src/archives/espadons/toolchain.json';
 export const ZDI_ROOT = resolve(USER_ROOT, 'output/toolchains/zdi');
@@ -35,22 +35,21 @@ const paths = (entry: Record<string, unknown>, root = ZDI_ROOT) => { const julia
   return { root, python: resolve(root, 'venv/bin/python'), zdipy: resolve(root, 'ZDIpy'), julia: resolve(root, requireString(julia.executable, 'julia executable')), juliaEnvironment: resolve(root, 'environment'), juliaDepot: resolve(ZDI_ROOT, 'depot') }; };
 
 export async function installToolchain() {
-  const pins = await toolchainPins(), { entry } = pins, { python, zdipy, julia, juliaEnvironment, juliaDepot } = paths(entry), source = requireRecord(entry.zdipy, 'zdipy');
-  await mkdir(ZDI_ROOT, { recursive: true });
-  if (!await exists(python)) run(requireString(entry.python, 'python'), ['-m', 'venv', resolve(ZDI_ROOT, 'venv')], ZDI_ROOT);
-  run(resolve(ZDI_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(entry.requirements).map(value => requireString(value))], ZDI_ROOT);
-  if (!await exists(zdipy)) run('git', ['clone', '--quiet', requireString(source.url, 'zdipy url'), zdipy], ZDI_ROOT);
-  run('git', ['checkout', '--quiet', '--detach', requireString(source.commit, 'zdipy commit')], zdipy);
-  if (!await exists(julia)) { const download = requireRecord(requireRecord(entry.julia, 'julia').download, 'julia download'), archive = resolve(ZDI_ROOT, requireString(download.path, 'julia archive')), bytes = requireFiniteNumber(download.bytes, 'julia bytes');
-    const response = await fetch(requireString(download.url, 'julia url')); if (!response.ok || !response.body) throw new Error(`${String(download.url)} answered ${response.status}.`);
-    await pipeline(Readable.fromWeb(response.body as never), createWriteStream(archive));
-    if ((await stat(archive)).size !== bytes) throw new Error(`${archive} is not its pinned ${bytes} bytes.`);
-    run('tar', ['-xzf', archive], ZDI_ROOT); await rm(archive, { force: true }); }
-  await cp(packagePath(requireString(requireRecord(entry.julia, 'julia').environment, 'julia environment')), juliaEnvironment, { recursive: true });
-  const instantiated = spawnSync(julia, [`--project=${juliaEnvironment}`, '-e', 'using Pkg; Pkg.instantiate(); using Korg'], { cwd: ZDI_ROOT, stdio: 'inherit', env: telescopePythonEnvironment({ JULIA_DEPOT_PATH: juliaDepot }) });
-  if (instantiated.status !== 0) throw new Error(`Julia could not instantiate ${juliaEnvironment} (status ${instantiated.status}).`);
-  writeInstalledMarker(ZDI_ROOT, pins);
-  return ZDI_ROOT;
+  assertManagedPythonPlatform();
+  return ensureToolchainPython(resolve(ZDI_ROOT, 'venv'), toolchainPins, async ({ entry }) => {
+    const { zdipy, julia, juliaEnvironment, juliaDepot } = paths(entry), source = requireRecord(entry.zdipy, 'zdipy');
+    run(resolve(ZDI_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(entry.requirements).map(value => requireString(value))], ZDI_ROOT);
+    if (!await exists(zdipy)) run('git', ['clone', '--quiet', requireString(source.url, 'zdipy url'), zdipy], ZDI_ROOT);
+    run('git', ['checkout', '--quiet', '--detach', requireString(source.commit, 'zdipy commit')], zdipy);
+    if (!await exists(julia)) { const download = requireRecord(requireRecord(entry.julia, 'julia').download, 'julia download'), archive = resolve(ZDI_ROOT, requireString(download.path, 'julia archive')), bytes = requireFiniteNumber(download.bytes, 'julia bytes');
+      const response = await fetch(requireString(download.url, 'julia url')); if (!response.ok || !response.body) throw new Error(`${String(download.url)} answered ${response.status}.`);
+      await pipeline(Readable.fromWeb(response.body as never), createWriteStream(archive));
+      if ((await stat(archive)).size !== bytes) throw new Error(`${archive} is not its pinned ${bytes} bytes.`);
+      run('tar', ['-xzf', archive], ZDI_ROOT); await rm(archive, { force: true }); }
+    await cp(packagePath(requireString(requireRecord(entry.julia, 'julia').environment, 'julia environment')), juliaEnvironment, { recursive: true });
+    const instantiated = spawnSync(julia, [`--project=${juliaEnvironment}`, '-e', 'using Pkg; Pkg.instantiate(); using Korg'], { cwd: ZDI_ROOT, stdio: 'inherit', env: telescopePythonEnvironment({ JULIA_DEPOT_PATH: juliaDepot }) });
+    if (instantiated.status !== 0) throw new Error(`Julia could not instantiate ${juliaEnvironment} (status ${instantiated.status}).`);
+  }, ({ entry }) => verifyToolchainExecutables([paths(entry).python, paths(entry).julia]));
 }
 
 /** The installed interpreter and ZDIpy's directory, refusing a missing install or one built from other pins. */

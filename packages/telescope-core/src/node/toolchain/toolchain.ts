@@ -1,12 +1,14 @@
+import { installManagedToolchain } from './environment.js';
+import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
 /** Install one pinned astronomy environment per user; keep every installed copy beneath the user root. */
 import { resolveInstalledToolchain } from './resolver.js';
 import { telescopePythonEnvironment } from '../paths.js';
 import { runToolchainProcess } from './process.js';
-import { accessSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
-import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { accessSync, lstatSync, readlinkSync, realpathSync } from 'node:fs';
+import { mkdir, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { TOOLCHAINS, USER_ROOT } from '../paths.js';
-import { installedMarkerIssue, readToolchainPins, writeInstalledMarker, type ToolchainPins } from './marker.js';
+import { installedMarkerIssue, readToolchainPins, type ToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
 
 export const ASTROQUERY_ROOT = resolve(USER_ROOT, 'output/toolchains/astroquery');
@@ -22,33 +24,6 @@ export function installedToolchain(root: string, pins: ToolchainPins): boolean {
   try { accessSync(resolve(root, 'env/bin/python')); return true; } catch { return false; }
 }
 
-/** One installer owns a pin at a time. The final marker is written only after package verification. */
-async function withInstallLock<T>(root: string, work: () => Promise<T>): Promise<T> {
-  const lock = `${root}.installing`;
-  await mkdir(dirname(root), { recursive: true });
-  for (let attempt = 0; ; attempt++) {
-    try { await mkdir(lock); break; }
-    catch (error) {
-      if (!(error instanceof Error && 'code' in error && error.code === 'EEXIST')) throw error;
-      if (attempt >= 900) throw new Error(`Astronomy toolchain install is still locked at ${lock}.`);
-      const details = await stat(lock).catch(() => null);
-      if (!details) continue;
-      const age = Date.now() - details.mtimeMs;
-      const owner = await readFile(resolve(lock, 'owner'), 'utf8').catch(() => '');
-      const pid = Number(owner);
-      let alive = false;
-      if (Number.isSafeInteger(pid) && pid > 0) {
-        try { process.kill(pid, 0); alive = true; }
-        catch (failure) { alive = !(failure instanceof Error && 'code' in failure && failure.code === 'ESRCH'); }
-      }
-      if (age > (owner ? 60_000 : 30_000) && !alive) { await rm(lock, { recursive: true, force: true }); continue; }
-      await new Promise(done => setTimeout(done, 2_000));
-    }
-  }
-  try { await writeFile(resolve(lock, 'owner'), String(process.pid)); return await work(); }
-  finally { await rm(lock, { recursive: true, force: true }); }
-}
-
 function expectedVersions(entry: Record<string, unknown>): string {
   return `${entry.astroquery} ${entry.pyvo} ${entry.scipy} ${entry.batman} ${entry.orbitize} ${entry.whereistheplanet} ${entry.cdflib} ${entry.pyuvdata} ${entry.astropyHealpix}`;
 }
@@ -59,17 +34,15 @@ function verifyPackages(root: string, entry: Record<string, unknown>): void {
 }
 
 export async function installAstroquery() {
-  const pins = descriptor(), { entry } = pins, root = sharedRoot(entry), prefix = resolve(root, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  return withInstallLock(root, async () => {
-    if (installedToolchain(root, pins)) {
-      try { verifyPackages(root, entry); return root; }
-      catch { /* A marked but broken environment is rebuilt under the install lock. */ }
-    }
-    await rm(root, { recursive: true, force: true });
+  assertManagedPythonPlatform();
+  const root = sharedRoot(descriptor().entry), prefix = resolve(root, 'env');
+  return installManagedToolchain(root, descriptor, prefix, async pins => {
+    const { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+
+    const micromamba = await resolveMicromamba();
     await mkdir(root, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
-    runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
     runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements))]);
     for (const value of requireArray(entry.sourcePackages, 'sourcePackages')) {
       const source = requireRecord(value, 'source package');
@@ -77,11 +50,9 @@ export async function installAstroquery() {
       const requirement = `${requireString(source.name)} @ ${requireString(source.url)}`;
       runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-build-isolation', '--no-deps', '-q', requirement]);
     }
-    verifyPackages(root, entry);
     await rm(resolve(root, 'mamba/pkgs'), { recursive: true, force: true });
-    writeInstalledMarker(root, pins);
     return root;
-  });
+  }, ({ entry }) => verifyPackages(root, entry));
 }
 
 export interface AstroqueryToolchain {
@@ -112,7 +83,15 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
     batmanVersion: requireString(entry.batman), cdflibVersion: requireString(entry.cdflib), pyuvdataVersion: requireString(entry.pyuvdata), orbitizeVersion: requireString(entry.orbitize), whereIsThePlanetVersion: requireString(entry.whereistheplanet), astropyHealpixVersion:requireString(entry.astropyHealpix), env: telescopePythonEnvironment({ PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', XDG_CACHE_HOME: resolve(USER_ROOT, 'python-cache'), MPLCONFIGDIR: resolve(USER_ROOT, 'python-cache/matplotlib') }) };
 }
 
-export async function astroqueryToolchain(): Promise<AstroqueryToolchain> { return astroqueryToolchainSync(); }
+/** Async consumers provision missing pins on first use; synchronous preparation keeps its explicit install boundary. */
+export async function astroqueryToolchain(): Promise<AstroqueryToolchain> {
+  try { return astroqueryToolchainSync(); }
+  catch (error) {
+    if (!(error instanceof MissingSourceInputError)) throw error;
+    await installAstroquery();
+    return astroqueryToolchainSync();
+  }
+}
 
 export function findInstalledRoot(local: string, shared: string, pins: ToolchainPins): string | null {
   return resolveInstalledToolchain(local, pins, [shared], {}, 'env/bin/python');

@@ -2,7 +2,7 @@
 
 The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. `package.json` exposes a `telescope` binary, not an HTTP API. The implementation is this package's `src/`; the library it builds on is [`@cssearth/telescope-core`](../telescope-core/README.md#library).
 
-The source CLI can run without a css.earth checkout. Python environments are installed separately; npm installation does not install Python or run pipelines. Bundling the source implementation and its data for npm is the next delivery step.
+The source CLI can run without a css.earth checkout. Async astronomy queries install their pinned Python environment on first use; npm installation itself does not run pipelines. Bundling the source implementation and its data for npm is the next delivery step.
 
 Paths are owned by the library:
 
@@ -14,7 +14,11 @@ With a workspace, target names and site records still come from `src/objects` an
 
 ## Setup
 
-Use Node 22.18+ (22.x) or Node 24+. Run `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install` once for the pinned archive client (it includes pinned Matplotlib), then `verify` in place of `install` to check it. PDS decoding uses the same script with `pds install`. Some reduction routes need instrument toolchains described in their own guides.
+Use Node 22.18+ (22.x) or Node 24+. No system Python or micromamba is required: installers obtain Python from conda-forge. The telescope uses `CSSEARTH_TELESCOPE_MICROMAMBA` first, then a micromamba on `PATH`, otherwise downloads official micromamba release 2.9.0-0 into the user root and checks its published checksum in memory. Download progress goes to stderr; interrupted transfers restart cleanly when the same command is retried with network access.
+
+Managed Python toolchains need macOS or Linux; on Windows use WSL. Commands that need no Python remain available on Windows. Some instrument locks target a specific Unix platform; consult their descriptors before installing.
+
+Run `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install` to install the pinned archive client explicitly (it includes pinned Matplotlib), then `verify` in place of `install` to check it. PDS decoding uses the same script with `pds install`. Some reduction routes need instrument toolchains described in their own guides; native compilers, Julia, IDL or Rosetta requirements still follow those descriptors.
 
 Inside the repository, use `pnpm telescope --help`. To test the distributable:
 

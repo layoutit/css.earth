@@ -1,3 +1,5 @@
+import { installManagedToolchain } from './toolchain/environment.js';
+import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
 import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** starry owns spherical-harmonic brightness maps, their intensities and the star-planet light curves they make (Luger et al. 2019).
  * css.earth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
@@ -8,7 +10,7 @@ import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, USER_ROOT } from './paths.js';
-import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
+import { assertInstalledMarker, readToolchainPins } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const STARRY_ROOT = resolve(USER_ROOT, 'output/toolchains/starry');
@@ -17,23 +19,24 @@ const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains
 const descriptor = () => readToolchainPins('starry', 'starry-toolchain.json');
 
 export async function installStarry() {
-  const pins = descriptor(), { entry } = pins, prefix = resolve(STARRY_ROOT, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  await rm(STARRY_ROOT, { recursive: true, force: true });
-  await mkdir(STARRY_ROOT, { recursive: true });
-  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
-    ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
-  // The lock is version-pinned and complete; Theano-PyMC builds against the environment's NumPy. The packages built from their
-  // source releases go in a second pass: their build needs (setuptools-scm) are in the lock too, and pip prepares every package
-  // of one pass before it installs any.
-  const sourceBuilds = new Set(requireArray(entry.sourceBuilds, 'sourceBuilds').map(value => requireString(value, 'source build')));
-  const locked = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8').split('\n').filter(line => line.trim() && !line.startsWith('#'));
-  for (const pass of [locked.filter(line => !sourceBuilds.has(line.split('==')[0]!)), locked.filter(line => sourceBuilds.has(line.split('==')[0]!))])
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', ...pass], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
-  await rm(resolve(STARRY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  writeInstalledMarker(STARRY_ROOT, pins);
-  verifyStarry();
-  return STARRY_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(STARRY_ROOT, 'env');
+  return installManagedToolchain(STARRY_ROOT, descriptor, prefix, async pins => {
+    const { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+
+    const micromamba = await resolveMicromamba();
+    await mkdir(STARRY_ROOT, { recursive: true });
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
+      ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
+    // The lock is version-pinned and complete; Theano-PyMC builds against the environment's NumPy. The packages built from their
+    // source releases go in a second pass: their build needs (setuptools-scm) are in the lock too, and pip prepares every package
+    // of one pass before it installs any.
+    const sourceBuilds = new Set(requireArray(entry.sourceBuilds, 'sourceBuilds').map(value => requireString(value, 'source build')));
+    const locked = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8').split('\n').filter(line => line.trim() && !line.startsWith('#'));
+    for (const pass of [locked.filter(line => !sourceBuilds.has(line.split('==')[0]!)), locked.filter(line => sourceBuilds.has(line.split('==')[0]!))])
+      runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', ...pass], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
+    await rm(resolve(STARRY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+  }, ({ entry }) => { verifyStarry({ python: resolve(prefix, 'bin/python'), version: requireString(entry.starry), env: { PYTHONNOUSERSITE: '1' } }); });
 }
 
 export interface StarryToolchain { readonly python: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
@@ -123,8 +126,7 @@ export function starrySystemFlux(map: StarryMap, system: StarrySystem, times: re
   return flux;
 }
 
-export function verifyStarry() {
-  const toolchain = starryToolchainSync();
+export function verifyStarry(toolchain = starryToolchainSync()) {
   const found = runToolchainProcess(toolchain.python, ['-c', "import importlib.metadata as m; print(m.version('starry'))"], { env: toolchain.env, maxBuffer: 256 * 1024 * 1024 }).trim();
   const { entry } = descriptor();
   if (found !== requireString(entry.starry)) throw new Error(`Expected starry ${String(entry.starry)}, found ${found}.`);

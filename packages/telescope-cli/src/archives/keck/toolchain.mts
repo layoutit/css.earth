@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
+import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
 import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned Keck reduction environment of toolchain.json under output/toolchains/keck (ignored by git).
@@ -10,13 +11,13 @@ import { packagePath } from '../../paths.mts';
  * micromamba creates Python from conda-forge; pip then installs requirements.lock, every package at the version the KCWI DRP's
  * own pip-compile output pins, without resolving further dependencies, so this environment is that file and nothing else. The
  * install keeps the descriptor and lock texts it was built from, and `keckToolchain` refuses an environment built from other pins.
- * micromamba itself is taken from PATH.
+ * micromamba itself is resolved by the shared telescope owner.
  *
  * Only the KCWI pipeline is installed. The OSIRIS DRP is IDL and does not run here; toolchain.json says so, and archive.mts
  * pins KOA's own OSIRIS products instead of re-running them. */
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, writeInstalledMarker, USER_ROOT } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -28,16 +29,17 @@ const PINS = packagePath('packages/telescope-cli/src/archives/keck');
 export const KECK_ROOT = resolve(repository, 'output/toolchains/keck');
 
 export async function installKeck() {
-  const pins = await readToolchainDescriptor(PINS, 'keck'), { entry } = pins, prefix = resolve(KECK_ROOT, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  await rm(KECK_ROOT, { recursive: true, force: true });
-  await mkdir(KECK_ROOT, { recursive: true });
-  const env = { MAMBA_ROOT_PREFIX: resolve(KECK_ROOT, 'mamba') };
-  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
-  await rm(resolve(KECK_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  writeInstalledMarker(KECK_ROOT, pins);
-  return KECK_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(KECK_ROOT, 'env');
+  return installManagedToolchain(KECK_ROOT, () => readToolchainDescriptor(PINS, 'keck'), prefix, async pins => {
+    const { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+    const micromamba = await resolveMicromamba();
+    await mkdir(KECK_ROOT, { recursive: true });
+    const env = { MAMBA_ROOT_PREFIX: resolve(KECK_ROOT, 'mamba') };
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
+    await rm(resolve(KECK_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+  }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }
 
 export interface KeckToolchain { readonly python: string; readonly sitePackages: string; readonly binaries: Readonly<Record<string, string>>; readonly env: NodeJS.ProcessEnv }

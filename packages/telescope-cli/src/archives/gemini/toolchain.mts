@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
+import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
 import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned DRAGONS environment of toolchain.json under output/toolchains/gemini (ignored by git).
@@ -20,7 +21,7 @@ import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
@@ -45,29 +46,30 @@ function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = 
 
 /** The explicit list micromamba resolved: one package URL per line. That is the lock, and it is what a later install uses, so
  * the second machine gets these builds and not whatever the channels hold that day. */
-const explicitList = (prefix: string, env: NodeJS.ProcessEnv) =>
-  run('micromamba', ['list', '--explicit', '-p', prefix], env);
+const explicitList = (micromamba: string, prefix: string, env: NodeJS.ProcessEnv) =>
+  run(micromamba, ['list', '--explicit', '-p', prefix], env);
 
 export async function installGemini() {
-  const { entry, lock, lockPath } = await descriptor(), prefix = resolve(GEMINI_ROOT, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  const platform = requireString(mamba.platform, 'platform');
-  const channels = requireArray(mamba.channels, 'channels').flatMap(value => ['-c', requireString(value, 'channel')]);
-  await rm(GEMINI_ROOT, { recursive: true, force: true });
-  await mkdir(GEMINI_ROOT, { recursive: true });
-  const env = { MAMBA_ROOT_PREFIX: resolve(GEMINI_ROOT, 'mamba'), CONDA_SUBDIR: platform };
-  if (lock) {
-    await writeFile(resolve(GEMINI_ROOT, 'packages.lock'), lock);
-    run('micromamba', ['create', '-y', '-q', '-p', prefix, '--platform', platform, '-f', resolve(GEMINI_ROOT, 'packages.lock')], env);
-  } else {
-    run('micromamba', ['create', '-y', '-q', '-p', prefix, '--platform', platform, ...channels,
-      ...requireArray(mamba.packages, 'packages').map(value => requireString(value, 'package'))], env);
-    await writeFile(lockPath, explicitList(prefix, env));
-  }
-  await rm(resolve(GEMINI_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  // A first install wrote the lock it resolved; the marker holds the pins as they are now, lock included.
-  writeInstalledMarker(GEMINI_ROOT, await descriptor());
-  return GEMINI_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(GEMINI_ROOT, 'env');
+  return installManagedToolchain(GEMINI_ROOT, descriptor, prefix, async pins => {
+    const { entry, lock, lockPath } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+    const platform = requireString(mamba.platform, 'platform');
+    const channels = requireArray(mamba.channels, 'channels').flatMap(value => ['-c', requireString(value, 'channel')]);
+    const micromamba = await resolveMicromamba();
+    await mkdir(GEMINI_ROOT, { recursive: true });
+    const env = { MAMBA_ROOT_PREFIX: resolve(GEMINI_ROOT, 'mamba'), CONDA_SUBDIR: platform };
+    if (lock) {
+      await writeFile(resolve(GEMINI_ROOT, 'packages.lock'), lock);
+      run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, '-f', resolve(GEMINI_ROOT, 'packages.lock')], env);
+    } else {
+      run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, ...channels,
+        ...requireArray(mamba.packages, 'packages').map(value => requireString(value, 'package'))], env);
+      await writeFile(lockPath, explicitList(micromamba, prefix, env));
+    }
+    await rm(resolve(GEMINI_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+    // A first install wrote the lock it resolved; the marker holds the pins as they are now, lock included.
+  }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }
 
 export interface GeminiToolchain {

@@ -1,3 +1,5 @@
+import { installManagedToolchain } from './toolchain/environment.js';
+import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
 import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** PICASO owns the radiative transfer of a substellar atmosphere (Batalha et al. 2019). css.earth passes a published Sonora Bobcat
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
@@ -8,7 +10,7 @@ import { accessSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, w
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, USER_ROOT } from './paths.js';
-import { assertInstalledMarker, installedMarkerIssue, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
+import { assertInstalledMarker, installedMarkerIssue, readToolchainPins } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PICASO_ROOT = resolve(USER_ROOT, 'output/toolchains/picaso');
@@ -27,48 +29,50 @@ const dataUrl = (entry: Record<string, unknown>, key: string) => requireString(r
 
 /** The environment is rebuilt from the pins; the data (a 1.2 GB archive, of which one table is kept) are downloaded only while missing. */
 export async function installPicaso() {
-  const pins = descriptor(), { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba'), python = resolve(PATHS.env, 'bin/python');
-  await rm(PATHS.env, { recursive: true, force: true });
-  await mkdir(PICASO_ROOT, { recursive: true });
-  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', PATHS.env, '-c', requireString(mamba.channel, 'micromamba channel'),
-    ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(PICASO_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
-  runToolchainProcess(python, ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))],
-    { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
-  await rm(resolve(PICASO_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  if (!await exists(resolve(PATHS.reference, 'config.json'))) {
-    await mkdir(PATHS.reference, { recursive: true });
-    runToolchainProcess(python, ['-c', 'import os, picaso.data as d; d.get_reference(os.environ["picaso_refdata"])'], { env: { PYTHONNOUSERSITE: '1', picaso_refdata: PATHS.reference }, maxBuffer: 256 * 1024 * 1024 });
-  }
-  if (!bobcatNodes().length) {
-    await mkdir(PATHS.profiles, { recursive: true });
-    const tar = resolve(PATHS.profiles, 'structures.tar.gz');
-    runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', tar, dataUrl(entry, 'profiles')]);
-    runToolchainProcess('tar', ['-xzf', tar, '-C', PATHS.profiles]);
-    await rm(tar);
-  }
-  const tables = [opacityName(entry), ...Object.values(metalRichTables(entry))];
-  if (!(await Promise.all(tables.map(table => exists(resolve(PATHS.opacities, table))))).every(Boolean)) {
-    await mkdir(PATHS.opacities, { recursive: true });
-    const zip = resolve(PATHS.opacities, 'opacities.zip');
-    runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', zip, dataUrl(entry, 'opacities')]);
-    runToolchainProcess('unzip', ['-q', '-o', zip, ...tables, '-d', PATHS.opacities]);
-    await rm(zip);
-  }
-  if (!readdirOrEmpty(PATHS.cloudyProfiles).length) {
-    await mkdir(resolve(PATHS.cloudyProfiles, '..'), { recursive: true });
-    const zip = resolve(PATHS.cloudyProfiles, '../profiles.zip');
-    runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', zip, dataUrl(entry, 'cloudyProfiles')]);
-    runToolchainProcess('unzip', ['-q', '-o', zip, 'pressure-temperature_profiles/*', '-d', resolve(PATHS.cloudyProfiles, '..')]);
-    await rm(zip);
-  }
-  if (!await exists(PATHS.cloudArchive)) runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.cloudArchive, dataUrl(entry, 'cloudProperties')]);
-  if (!await exists(PATHS.passband)) {
-    await mkdir(resolve(PATHS.passband, '..'), { recursive: true });
-    runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.passband, dataUrl(entry, 'passband')]);
-  }
-  writeInstalledMarker(PICASO_ROOT, pins);
-  verifyPicaso();
-  return PICASO_ROOT;
+  assertManagedPythonPlatform();
+  const python = resolve(PATHS.env, 'bin/python');
+  return installManagedToolchain(PICASO_ROOT, descriptor, PATHS.env, async pins => {
+    const { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+
+    const micromamba = await resolveMicromamba();
+    await mkdir(PICASO_ROOT, { recursive: true });
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', PATHS.env, '-c', requireString(mamba.channel, 'micromamba channel'),
+      ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(PICASO_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
+    runToolchainProcess(python, ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))],
+      { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
+    await rm(resolve(PICASO_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+    if (!await exists(resolve(PATHS.reference, 'config.json'))) {
+      await mkdir(PATHS.reference, { recursive: true });
+      runToolchainProcess(python, ['-c', 'import os, picaso.data as d; d.get_reference(os.environ["picaso_refdata"])'], { env: { PYTHONNOUSERSITE: '1', picaso_refdata: PATHS.reference }, maxBuffer: 256 * 1024 * 1024 });
+    }
+    if (!bobcatNodes().length) {
+      await mkdir(PATHS.profiles, { recursive: true });
+      const tar = resolve(PATHS.profiles, 'structures.tar.gz');
+      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', tar, dataUrl(entry, 'profiles')]);
+      runToolchainProcess('tar', ['-xzf', tar, '-C', PATHS.profiles]);
+      await rm(tar);
+    }
+    const tables = [opacityName(entry), ...Object.values(metalRichTables(entry))];
+    if (!(await Promise.all(tables.map(table => exists(resolve(PATHS.opacities, table))))).every(Boolean)) {
+      await mkdir(PATHS.opacities, { recursive: true });
+      const zip = resolve(PATHS.opacities, 'opacities.zip');
+      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', zip, dataUrl(entry, 'opacities')]);
+      runToolchainProcess('unzip', ['-q', '-o', zip, ...tables, '-d', PATHS.opacities]);
+      await rm(zip);
+    }
+    if (!readdirOrEmpty(PATHS.cloudyProfiles).length) {
+      await mkdir(resolve(PATHS.cloudyProfiles, '..'), { recursive: true });
+      const zip = resolve(PATHS.cloudyProfiles, '../profiles.zip');
+      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', zip, dataUrl(entry, 'cloudyProfiles')]);
+      runToolchainProcess('unzip', ['-q', '-o', zip, 'pressure-temperature_profiles/*', '-d', resolve(PATHS.cloudyProfiles, '..')]);
+      await rm(zip);
+    }
+    if (!await exists(PATHS.cloudArchive)) runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.cloudArchive, dataUrl(entry, 'cloudProperties')]);
+    if (!await exists(PATHS.passband)) {
+      await mkdir(resolve(PATHS.passband, '..'), { recursive: true });
+      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.passband, dataUrl(entry, 'passband')]);
+    }
+  }, ({ entry }) => { verifyPicaso({ python: resolve(PATHS.env, 'bin/python'), version: requireString(entry.picaso), env: { PYTHONNOUSERSITE: '1' }, opacities: resolve(PATHS.opacities, opacityName(entry)) }); });
 }
 
 function readdirOrEmpty(path: string): string[] { try { return readdirSync(path); } catch { return []; } }
@@ -379,8 +383,7 @@ export function picasoPassband(svo: string): string {
 /** Whether the toolchain is installed from the current pins: a check that needs it skips where it is not. */
 export const picasoInstalled = () => installedMarkerIssue(PICASO_ROOT, descriptor()) === null;
 
-export function verifyPicaso() {
-  const toolchain = picasoToolchainSync();
+export function verifyPicaso(toolchain = picasoToolchainSync()) {
   const found = runToolchainProcess(toolchain.python, ['-c', "import importlib.metadata as m; print(m.version('picaso'))"], { env: toolchain.env }).trim();
   if (found !== toolchain.version) throw new Error(`Expected PICASO ${toolchain.version}, found ${found}.`);
   if (!bobcatNodes().length) throw new Error('The PICASO toolchain holds no Sonora Bobcat profiles.');

@@ -1,10 +1,12 @@
+import { installManagedToolchain } from './environment.js';
+import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
 import { resolveInstalledToolchain } from './resolver.js';
 /** Install and locate the one Peppi+pdr environment under output/toolchains/pds (ignored by git). */
 import { runToolchainProcess } from './process.js';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { USER_ROOT } from '../paths.js';
-import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './marker.js';
+import { assertInstalledMarker, readToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export const PDS_TOOLCHAIN_ROOT = resolve(USER_ROOT, 'output/toolchains/pds');
@@ -13,16 +15,18 @@ const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains
 const descriptor = () => readToolchainPins('pds-packages', 'pds-toolchain.json');
 
 export async function installPdsToolchain() {
-  const pins = descriptor(), { entry } = pins, prefix = resolve(PDS_TOOLCHAIN_ROOT, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  await rm(PDS_TOOLCHAIN_ROOT, { recursive: true, force: true });
-  await mkdir(PDS_TOOLCHAIN_ROOT, { recursive: true });
-  const env = { MAMBA_ROOT_PREFIX: resolve(PDS_TOOLCHAIN_ROOT, 'mamba') };
-  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel),
-    ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env });
-  await rm(resolve(PDS_TOOLCHAIN_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  writeInstalledMarker(PDS_TOOLCHAIN_ROOT, pins);
-  return PDS_TOOLCHAIN_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(PDS_TOOLCHAIN_ROOT, 'env');
+  return installManagedToolchain(PDS_TOOLCHAIN_ROOT, descriptor, prefix, async pins => {
+    const { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+
+    const micromamba = await resolveMicromamba();
+    await mkdir(PDS_TOOLCHAIN_ROOT, { recursive: true });
+    const env = { MAMBA_ROOT_PREFIX: resolve(PDS_TOOLCHAIN_ROOT, 'mamba') };
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel),
+      ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env });
+    await rm(resolve(PDS_TOOLCHAIN_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+  }, () => { runToolchainProcess(resolve(prefix, 'bin/python'), ['-I', '-c', 'import pdr, pds.peppi']); });
 }
 
 export interface PdsToolchain { readonly python: string; readonly peppiVersion: string; readonly pdrVersion: string; readonly env: NodeJS.ProcessEnv }

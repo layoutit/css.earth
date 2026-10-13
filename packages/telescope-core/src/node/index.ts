@@ -25,3 +25,5 @@ export * from './spiderman.js';
 export * from './picaso.js';
 export * from './toolchain/marker.js';
 export * from './toolchain/resolver.js';
+export * from './toolchain/micromamba.js';
+export * from './toolchain/environment.js';

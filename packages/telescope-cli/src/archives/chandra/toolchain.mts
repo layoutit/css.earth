@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
+import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
 import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned CIAO environment of toolchain.json under output/toolchains/chandra (ignored by git).
@@ -11,8 +12,8 @@ import { packagePath } from '../../paths.mts';
  * micromamba creates the environment from packages.lock, an @EXPLICIT list of package URLs, so every install gets
  * the same 217 packages: the CXC channel's ciao, ciao-contrib and caldb_main, and their conda-forge dependencies. `solve`
  * re-resolves toolchain.json's package requests and rewrites the lock; nothing else resolves. The install keeps the descriptor
- * and lock texts it was built from, and `chandraToolchain` refuses an environment built from other pins. micromamba itself is taken
- * from PATH (Homebrew's `micromamba`).
+ * and lock texts it was built from, and `chandraToolchain` refuses an environment built from other pins. micromamba itself is resolved
+ * by the shared telescope owner.
  *
  * CALDB is part of the environment, not fetched at run time: caldb_main unpacks under the prefix and the CALDB variable of the
  * returned toolchain points the CIAO tools at it. */
@@ -22,7 +23,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { findTable, tableColumn, text } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and solved lock) sit beside this code and the programs they reduce. */
@@ -51,10 +52,11 @@ function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = 
 
 /** Re-resolve the descriptor's package requests and rewrite packages.lock as an @EXPLICIT list. Nothing downloads. */
 export async function solveChandra() {
+  assertManagedPythonPlatform();
   const { entry } = await descriptor(), { channels, packages } = requests(entry);
   const root = { MAMBA_ROOT_PREFIX: resolve(CHANDRA_ROOT, 'mamba') };
   // A prefix that does not exist, so the solve is the one `install` performs and not an update of whatever is installed.
-  const stdout = run('micromamba', ['create', '-y', '--dry-run', '--json', '-p', resolve(CHANDRA_ROOT, 'solve'), ...channels, ...packages], root);
+  const stdout = run(await resolveMicromamba(), ['create', '-y', '--dry-run', '--json', '-p', resolve(CHANDRA_ROOT, 'solve'), ...channels, ...packages], root);
   const links = requireArray(requireRecord(requireRecord(JSON.parse(stdout) as unknown, 'solution').actions, 'actions').LINK, 'LINK')
     .map(value => requireRecord(value, 'package'))
     .map(entry => ({ name: requireString(entry.name, 'name'), version: requireString(entry.version, 'version'), url: requireString(entry.url, 'url') }))
@@ -65,13 +67,14 @@ export async function solveChandra() {
 }
 
 export async function installChandra() {
-  const pins = await descriptor(), prefix = resolve(CHANDRA_ROOT, 'env');
-  await rm(CHANDRA_ROOT, { recursive: true, force: true });
-  await mkdir(CHANDRA_ROOT, { recursive: true });
-  run('micromamba', ['create', '-y', '-q', '-p', prefix, '-f', LOCK], { MAMBA_ROOT_PREFIX: resolve(CHANDRA_ROOT, 'mamba') });
-  await rm(resolve(CHANDRA_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  writeInstalledMarker(CHANDRA_ROOT, pins);
-  return CHANDRA_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(CHANDRA_ROOT, 'env');
+  return installManagedToolchain(CHANDRA_ROOT, descriptor, prefix, async () => {
+    const micromamba = await resolveMicromamba();
+    await mkdir(CHANDRA_ROOT, { recursive: true });
+    run(micromamba, ['create', '-y', '-q', '-p', prefix, '-f', LOCK], { MAMBA_ROOT_PREFIX: resolve(CHANDRA_ROOT, 'mamba') });
+    await rm(resolve(CHANDRA_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+  }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }
 
 export interface ChandraToolchain { readonly python: string; readonly binaries: Readonly<Record<string, string>>; readonly env: NodeJS.ProcessEnv }

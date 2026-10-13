@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned photometry codes of toolchain.json under output/toolchains/tess (ignored by git).
  *
@@ -9,11 +9,11 @@ import { packagePath } from '../../paths.mts';
  * A Python environment with the pinned packages. An installed toolchain keeps the text of its descriptor; `verify` and
  * `toolchainPaths` refuse one built from other pins. */
 import { spawnSync } from 'node:child_process';
-import { access, mkdir, readFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const FILE = 'packages/telescope-cli/src/archives/tess/toolchain.json';
 export const TESS_ROOT = resolve(USER_ROOT, 'output/toolchains/tess');
@@ -29,12 +29,10 @@ function run(command: string, args: readonly string[], cwd: string) {
 }
 
 export async function installToolchain() {
-  const pins = await toolchainPins(), python = resolve(TESS_ROOT, 'venv/bin/python');
-  await mkdir(TESS_ROOT, { recursive: true });
-  if (!await access(python).then(() => true, () => false)) run(requireString(pins.entry.python, 'python'), ['-m', 'venv', resolve(TESS_ROOT, 'venv')], TESS_ROOT);
-  run(resolve(TESS_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(pins.entry.requirements).map(value => requireString(value))], TESS_ROOT);
-  writeInstalledMarker(TESS_ROOT, pins);
-  return TESS_ROOT;
+  assertManagedPythonPlatform();
+  return ensureToolchainPython(resolve(TESS_ROOT, 'venv'), toolchainPins, async pins => {
+    run(resolve(TESS_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(pins.entry.requirements).map(value => requireString(value))], TESS_ROOT);
+  });
 }
 
 /** The installed interpreter, refusing a missing install or one built from other pins. */

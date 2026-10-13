@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
+import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
 import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned Spitzer re-mosaic environment of toolchain.json under output/toolchains/spitzer (ignored by
@@ -15,9 +16,9 @@ import { packagePath } from '../../paths.mts';
  *
  * micromamba creates Python from conda-forge; pip then installs requirements.lock, every package at its pinned version, with
  * `--no-deps`, so the resolver never chooses anything. The install keeps the descriptor and lock texts it was built from,
- * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is taken from PATH. */
+ * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is resolved by the shared telescope owner. */
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, writeInstalledMarker, USER_ROOT } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -34,16 +35,17 @@ export const REQUIRED_MODULES = ['numpy', 'astropy', 'reproject', 'scipy'] as co
 export const spitzerDescriptor = () => readToolchainDescriptor(PINS, 'spitzer');
 
 export async function installSpitzer() {
-  const pins = await spitzerDescriptor(), { entry } = pins, prefix = resolve(SPITZER_ROOT, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  await rm(SPITZER_ROOT, { recursive: true, force: true });
-  await mkdir(SPITZER_ROOT, { recursive: true });
-  const env = { MAMBA_ROOT_PREFIX: resolve(SPITZER_ROOT, 'mamba') };
-  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(PINS, requireString(entry.requirements))]);
-  await rm(resolve(SPITZER_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  writeInstalledMarker(SPITZER_ROOT, pins);
-  return SPITZER_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(SPITZER_ROOT, 'env');
+  return installManagedToolchain(SPITZER_ROOT, spitzerDescriptor, prefix, async pins => {
+    const { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+    const micromamba = await resolveMicromamba();
+    await mkdir(SPITZER_ROOT, { recursive: true });
+    const env = { MAMBA_ROOT_PREFIX: resolve(SPITZER_ROOT, 'mamba') };
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(PINS, requireString(entry.requirements))]);
+    await rm(resolve(SPITZER_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+  }, () => { runToolchainProcess(resolve(prefix, 'bin/python'), ['-I', '-c', REQUIRED_MODULES.map(name => `import ${name}`).join('; ')]); });
 }
 
 export interface SpitzerToolchain {

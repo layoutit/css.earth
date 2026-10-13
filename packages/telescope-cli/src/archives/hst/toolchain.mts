@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
+import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned HST calibration environment of toolchain.json under output/toolchains/hst (ignored by git).
  *
@@ -9,13 +10,13 @@ import { packagePath } from '../../paths.mts';
  * micromamba creates Python and hstcal from conda-forge; hstcal carries the instrument pipelines as the executables STScI ships
  * them (cs0.e is calstis, calwf3.e, calacs.e). pip then installs requirements.lock, every package at its pinned version, without
  * resolving further dependencies. The install keeps the descriptor and lock texts it was built from, and `hstToolchain` refuses an
- * environment built from other pins. micromamba itself is taken from PATH (Homebrew's `micromamba`).
+ * environment built from other pins. micromamba itself is resolved by the shared telescope owner.
  *
  * Reference files are not part of the environment: CRDS fetches the ones a pinned context selects into the cache under this
  * root the first time a calibration runs (calibrate.mts). */
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, writeInstalledMarker, USER_ROOT } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -27,16 +28,17 @@ const PINS = packagePath('packages/telescope-cli/src/archives/hst');
 export const HST_ROOT = resolve(repository, 'output/toolchains/hst');
 
 export async function installHst() {
-  const pins = await readToolchainDescriptor(PINS, 'hst'), { entry } = pins, prefix = resolve(HST_ROOT, 'env');
-  const mamba = requireRecord(entry.micromamba, 'micromamba');
-  await rm(HST_ROOT, { recursive: true, force: true });
-  await mkdir(HST_ROOT, { recursive: true });
-  const env = { MAMBA_ROOT_PREFIX: resolve(HST_ROOT, 'mamba') };
-  runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
-  await rm(resolve(HST_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  writeInstalledMarker(HST_ROOT, pins);
-  return HST_ROOT;
+  assertManagedPythonPlatform();
+  const prefix = resolve(HST_ROOT, 'env');
+  return installManagedToolchain(HST_ROOT, () => readToolchainDescriptor(PINS, 'hst'), prefix, async pins => {
+    const { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba');
+    const micromamba = await resolveMicromamba();
+    await mkdir(HST_ROOT, { recursive: true });
+    const env = { MAMBA_ROOT_PREFIX: resolve(HST_ROOT, 'mamba') };
+    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
+    await rm(resolve(HST_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
+  }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }
 
 export interface HstToolchain { readonly python: string; readonly binaries: Readonly<Record<string, string>>; readonly env: NodeJS.ProcessEnv }

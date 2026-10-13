@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
 import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
 import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
@@ -26,7 +27,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { installedMarkerIssue, assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const repository = USER_ROOT;
 /** The toolchain pin sits beside this code and the programs it reduces. */
@@ -77,30 +78,30 @@ async function fetchKit(record: Record<string, unknown>, directory: string, cach
 }
 
 export async function installNacoToolchain(caches: readonly string[] = []) {
-  const pins = await nacoToolchainDescriptor(), { entry } = pins, root = TOOLCHAIN_ROOT, downloads = resolve(root, 'downloads');
-  if (installedMarkerIssue(root, pins) === null) return root;
-  await mkdir(downloads, { recursive: true });
-  const kitArchive = requireString(entry.kit, 'kit');
-  const archives = await Promise.all(requireArray(entry.downloads, 'downloads').map(record => fetchKit(requireRecord(record, 'download'), downloads, caches)));
-  const build = resolve(root, 'build');
-  await mkdir(build, { recursive: true });
-  run('tar', ['-xzf', archives.find(path => path.endsWith(kitArchive))!], { cwd: build });
-  const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
-  // ESO's installer asks for confirmation when a target directory is missing and refuses to ask without a terminal: both
-  // exist before it runs, and it reads an empty answer. It writes its own configuration into HOME, which is the kit's own.
-  const home = resolve(root, 'home');
-  for (const directory of [home, resolve(root, 'pipeline'), resolve(root, 'calib')]) await mkdir(directory, { recursive: true });
-  run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', env: { HOME: home } });
-  const esorex = resolve(root, 'pipeline/bin/esorex');
-  if (!await exists(esorex)) throw new Error(`install_pipeline wrote no esorex at ${esorex}.`);
-  const plugins = resolve(root, 'pipeline/lib/esopipes-plugins');
-  const installed = (await readdir(plugins).catch(() => [])).filter(name => name.startsWith('naco-'));
-  if (installed.length !== 1) throw new Error(`${installed.length} naco plugin directories in ${plugins}.`);
-  // The build tree is not needed at run time, and neither is the downloaded archive; the disk is kept for data.
-  await rm(kit, { recursive: true, force: true });
-  await rm(downloads, { recursive: true, force: true });
-  writeInstalledMarker(root, pins);
-  return root;
+  assertManagedPythonPlatform();
+  const root = TOOLCHAIN_ROOT, downloads = resolve(root, 'downloads');
+  return installManagedToolchain(root, nacoToolchainDescriptor, null, async ({ entry }) => {
+    await mkdir(downloads, { recursive: true });
+    const kitArchive = requireString(entry.kit, 'kit');
+    const archives = await Promise.all(requireArray(entry.downloads, 'downloads').map(record => fetchKit(requireRecord(record, 'download'), downloads, caches)));
+    const build = resolve(root, 'build');
+    await mkdir(build, { recursive: true });
+    run('tar', ['-xzf', archives.find(path => path.endsWith(kitArchive))!], { cwd: build });
+    const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
+    // ESO's installer asks for confirmation when a target directory is missing and refuses to ask without a terminal: both
+    // exist before it runs, and it reads an empty answer. It writes its own configuration into HOME, which is the kit's own.
+    const home = resolve(root, 'home');
+    for (const directory of [home, resolve(root, 'pipeline'), resolve(root, 'calib')]) await mkdir(directory, { recursive: true });
+    run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', env: { HOME: home } });
+    // The build tree is not needed at run time, and neither is the downloaded archive; the disk is kept for data.
+    await rm(kit, { recursive: true, force: true });
+    await rm(downloads, { recursive: true, force: true });
+  }, async () => {
+    await verifyToolchainExecutables([resolve(root, 'pipeline/bin/esorex')]);
+    const plugins = resolve(root, 'pipeline/lib/esopipes-plugins');
+    const installed = (await readdir(plugins).catch(() => [])).filter(name => name.startsWith('naco-'));
+    if (installed.length !== 1) throw new Error(`${installed.length} naco plugin directories in ${plugins}.`);
+  });
 }
 
 /** The installed toolchain's root, refusing a missing install or one built from a different pin. */

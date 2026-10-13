@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
+import { ensureToolchainPython, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned interferometry toolchains of toolchains.json under output/toolchains/<id> (ignored by git).
  *
@@ -20,7 +21,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { installedMarkerIssue, resolveInstalledToolchain, assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const DESCRIPTOR = packagePath('src/archives/interferometry/toolchains.json');
 export const TOOLCHAIN_ROOT = resolve(USER_ROOT, 'output/toolchains');
@@ -63,65 +64,66 @@ async function fetchDownload(record: Record<string, unknown>, directory: string,
 }
 
 export async function installToolchain(id: string, caches: readonly string[] = []) {
-  const pins = await toolchainDescriptor(id), { entry } = pins, root = resolve(TOOLCHAIN_ROOT, id), downloads = resolve(root, 'downloads');
-  if (installedMarkerIssue(root, pins) === null) return root;
-  await mkdir(downloads, { recursive: true });
-  const files = await Promise.all(requireArray(entry.downloads ?? []).map(record => fetchDownload(requireRecord(record), downloads, caches)));
-  if (id === 'squeeze') {
-    const source = requireRecord(entry.source), directory = resolve(root, 'source');
-    if (!await exists(directory)) run('git', ['clone', requireString(source.url), directory], { cwd: root });
-    run('git', ['checkout', '--detach', requireString(source.commit)], { cwd: directory });
-    run('git', ['submodule', 'update', '--init', '--recursive'], { cwd: directory });
-    run('cmake', ['-S', 'source', '-B', 'build', '-DCMAKE_BUILD_TYPE=Release'], { cwd: root });
-    run('cmake', ['--build', 'build', '--parallel'], { cwd: root });
-  } else if (id === 'rotir') {
-    if (!await exists(resolve(root, 'julia-1.12.7'))) run('tar', ['-xzf', files[0]!], { cwd: root });
-    const registries = requireArray(entry.registries).map(value => requireString(value));
-    await cp(packagePath(requireString(entry.environment, 'environment')), toolchainEnvironment(entry), { recursive: true });
-    const script = `using Pkg; for r in ${JSON.stringify(registries)}; startswith(r, "http") ? Pkg.Registry.add(url=r) : Pkg.Registry.add(r); end; Pkg.instantiate(); using ROTIR`;
-    run(resolve(root, requireString(entry.executable)), [`--project=${toolchainEnvironment(entry)}`, '-e', script], { cwd: root, env: { JULIA_DEPOT_PATH: resolve(root, 'depot') } });
-  } else if (entry.build === 'eso-kit') {
-    // An ESO instrument kit (PIONIER, GRAVITY, MATISSE, AMBER): its own install_pipeline builds CPL, esorex and the recipes.
-    const build = resolve(root, 'build'), kitArchive = requireString(entry.kit);
-    await mkdir(build, { recursive: true });
-    const path = entry.yorick === true ? `${await buildYorick(entry, files, build)}:${process.env.PATH}` : process.env.PATH;
-    run('tar', ['-xzf', files.find(file => file.endsWith(kitArchive))!], { cwd: build });
-    const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
-    await mkdir(resolve(root, 'home'), { recursive: true });
-    // ESO's installer asks for confirmation only when a target directory is missing, and it refuses to ask without a terminal:
-    // both directories exist before it runs.
-    await mkdir(resolve(root, 'pipeline'), { recursive: true }); await mkdir(resolve(root, 'calib'), { recursive: true });
-    const repair = entry.repair === undefined ? null : requireRecord(entry.repair, `${id} repair`);
-    const install = spawnSync('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', stdio: ['pipe', 'inherit', 'inherit'], env: telescopePythonEnvironment({ HOME: resolve(root, 'home'), PATH: path }) });
-    if (install.status !== 0 && !repair) throw new Error(`install_pipeline failed for ${id} (status ${install.status}).`);
-    if (repair) {
-      // Rebuild the one package the kit's installer could not compile, against the dependencies it did install, then unpack
-      // the calibration files the installer never reached.
-      const prefix = resolve(root, 'pipeline'), source = resolve(kit, requireString(repair.package));
-      if (!await exists(source)) run('tar', ['-xzf', `${requireString(repair.package)}.tar.gz`], { cwd: kit });
-      const env = { FFTWDIR: prefix, ERFADIR: prefix, GSLDIR: prefix, CFITSIODIR: prefix, CPLDIR: prefix, WCSDIR: prefix, CPPFLAGS: requireString(repair.cppflags).replaceAll('{prefix}', prefix) };
-      run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
-      run('make', ['-j8'], { cwd: source, env });
-      run('make', ['install'], { cwd: source, env });
-      const calibration = resolve(root, 'calib', requireString(repair.calibrationDirectory));
-      await mkdir(calibration, { recursive: true });
-      const archive = requireString(repair.calibration), top = archive.replace(/\.tar\.gz$/u, '');
-      run('tar', ['-xzf', resolve(kit, archive), '--strip-components=2', '-C', calibration, `${top}/cal`], { cwd: kit });
-    }
-    if (entry.openmp !== undefined && process.platform === 'darwin') await threadMatisse(requireRecord(entry.openmp, `${id} openmp`), files, kit, resolve(root, 'pipeline'), build);
-    // The kit's build tree is not needed at run time; Yorick's relocatable install is.
-    await rm(kit, { recursive: true, force: true });
-  } else if (entry.build === 'python-venv') {
-    // A Python package set in its own interpreter: nothing is built, and the wheels stay out of the repository.
-    const python = requireString(entry.python), venv = resolve(root, 'venv');
-    if (!await exists(venv)) run(python, ['-m', 'venv', venv], { cwd: root });
-    const requirements = requireArray(entry.requirements).map(value => requireString(value));
-    run(resolve(venv, 'bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requirements], { cwd: root });
-  } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit" or "python-venv".`);
-  // The archives were verified and unpacked; the disk is kept for data. A reinstall fetches or links them again.
-  await rm(downloads, { recursive: true, force: true });
-  writeInstalledMarker(root, pins);
-  return root;
+  assertManagedPythonPlatform();
+  const { entry } = await toolchainDescriptor(id), root = resolve(TOOLCHAIN_ROOT, id), downloads = resolve(root, 'downloads');
+  if (entry.build === 'python-venv') {
+    const venv = resolve(root, 'venv');
+    return ensureToolchainPython(venv, () => toolchainDescriptor(id), async ({ entry }) => {
+      const requirements = requireArray(entry.requirements).map(value => requireString(value));
+      run(resolve(venv, 'bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requirements], { cwd: root });
+    });
+  }
+  return installManagedToolchain(root, () => toolchainDescriptor(id), null, async ({ entry }) => {
+    await mkdir(downloads, { recursive: true });
+    const files = await Promise.all(requireArray(entry.downloads ?? []).map(record => fetchDownload(requireRecord(record), downloads, caches)));
+    if (id === 'squeeze') {
+      const source = requireRecord(entry.source), directory = resolve(root, 'source');
+      if (!await exists(directory)) run('git', ['clone', requireString(source.url), directory], { cwd: root });
+      run('git', ['checkout', '--detach', requireString(source.commit)], { cwd: directory });
+      run('git', ['submodule', 'update', '--init', '--recursive'], { cwd: directory });
+      run('cmake', ['-S', 'source', '-B', 'build', '-DCMAKE_BUILD_TYPE=Release'], { cwd: root });
+      run('cmake', ['--build', 'build', '--parallel'], { cwd: root });
+    } else if (id === 'rotir') {
+      if (!await exists(resolve(root, 'julia-1.12.7'))) run('tar', ['-xzf', files[0]!], { cwd: root });
+      const registries = requireArray(entry.registries).map(value => requireString(value));
+      await cp(packagePath(requireString(entry.environment, 'environment')), toolchainEnvironment(entry), { recursive: true });
+      const script = `using Pkg; for r in ${JSON.stringify(registries)}; startswith(r, "http") ? Pkg.Registry.add(url=r) : Pkg.Registry.add(r); end; Pkg.instantiate(); using ROTIR`;
+      run(resolve(root, requireString(entry.executable)), [`--project=${toolchainEnvironment(entry)}`, '-e', script], { cwd: root, env: { JULIA_DEPOT_PATH: resolve(root, 'depot') } });
+    } else if (entry.build === 'eso-kit') {
+      // An ESO instrument kit (PIONIER, GRAVITY, MATISSE, AMBER): its own install_pipeline builds CPL, esorex and the recipes.
+      const build = resolve(root, 'build'), kitArchive = requireString(entry.kit);
+      await mkdir(build, { recursive: true });
+      const path = entry.yorick === true ? `${await buildYorick(entry, files, build)}:${process.env.PATH}` : process.env.PATH;
+      run('tar', ['-xzf', files.find(file => file.endsWith(kitArchive))!], { cwd: build });
+      const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
+      await mkdir(resolve(root, 'home'), { recursive: true });
+      // ESO's installer asks for confirmation only when a target directory is missing, and it refuses to ask without a terminal:
+      // both directories exist before it runs.
+      await mkdir(resolve(root, 'pipeline'), { recursive: true }); await mkdir(resolve(root, 'calib'), { recursive: true });
+      const repair = entry.repair === undefined ? null : requireRecord(entry.repair, `${id} repair`);
+      const install = spawnSync('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', stdio: ['pipe', 'inherit', 'inherit'], env: telescopePythonEnvironment({ HOME: resolve(root, 'home'), PATH: path }) });
+      if (install.status !== 0 && !repair) throw new Error(`install_pipeline failed for ${id} (status ${install.status}).`);
+      if (repair) {
+        // Rebuild the one package the kit's installer could not compile, against the dependencies it did install, then unpack
+        // the calibration files the installer never reached.
+        const prefix = resolve(root, 'pipeline'), source = resolve(kit, requireString(repair.package));
+        if (!await exists(source)) run('tar', ['-xzf', `${requireString(repair.package)}.tar.gz`], { cwd: kit });
+        const env = { FFTWDIR: prefix, ERFADIR: prefix, GSLDIR: prefix, CFITSIODIR: prefix, CPLDIR: prefix, WCSDIR: prefix, CPPFLAGS: requireString(repair.cppflags).replaceAll('{prefix}', prefix) };
+        run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
+        run('make', ['-j8'], { cwd: source, env });
+        run('make', ['install'], { cwd: source, env });
+        const calibration = resolve(root, 'calib', requireString(repair.calibrationDirectory));
+        await mkdir(calibration, { recursive: true });
+        const archive = requireString(repair.calibration), top = archive.replace(/\.tar\.gz$/u, '');
+        run('tar', ['-xzf', resolve(kit, archive), '--strip-components=2', '-C', calibration, `${top}/cal`], { cwd: kit });
+      }
+      if (entry.openmp !== undefined && process.platform === 'darwin') await threadMatisse(requireRecord(entry.openmp, `${id} openmp`), files, kit, resolve(root, 'pipeline'), build);
+      // The kit's build tree is not needed at run time; Yorick's relocatable install is.
+      await rm(kit, { recursive: true, force: true });
+    } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit" or "python-venv".`);
+    // The archives were verified and unpacked; the disk is kept for data. A reinstall fetches or links them again.
+    await rm(downloads, { recursive: true, force: true });
+  }, ({ entry }) => verifyToolchainExecutables([resolve(root, requireString(entry.executable, 'executable'))]));
 }
 
 /** LLVM's OpenMP runtime built into the pipeline prefix, and one kit package rebuilt against it with the named files' macOS
