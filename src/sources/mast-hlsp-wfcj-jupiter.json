@@ -1,0 +1,48 @@
+{
+  "id": "mast-hlsp-wfcj-jupiter",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Wide Field Coverage for Juno (WFCJ): Hubble WFC3 and Gemini North NIRI maps of Jupiter, 2016–2019",
+  "identifiers": [
+    {
+      "value": "10.17909/T94T1H",
+      "type": "doi"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/hlsp/wfcj",
+      "label": "MAST collection"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archive.stsci.edu/hlsp/wfcj",
+      "checkedOn": "2026-10-13",
+      "locator": "Data file types: _mosaic.fits, map (cylindrical projection) of Gemini NIRI data, a mosaic of many exposures, corrected for limb darkening; longitudinal domain may be global or sub-global. Citations: cite Wong et al. (2020) and the DOI; these products are licensed under CC BY 4.0."
+    }
+  ],
+  "creators": [
+    "Michael H. Wong",
+    "Andrew I. Hsu",
+    "Megan N. Barnett",
+    "Joshua W. Tollefson",
+    "Charles Goullaud",
+    "Amy A. Simon",
+    "Andrew W. Stephens",
+    "Glenn S. Orton",
+    "Troy K. Tsubota"
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (MAST)",
+  "publicationDate": "2017",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Wong et al. (2020), ApJS 247, 58 and doi:10.17909/T94T1H. Licensed under CC BY 4.0.",
+      "scope": "Jupiter's thermal infrared maps",
+      "evidence": "https://archive.stsci.edu/hlsp/wfcj"
+    }
+  ]
+}

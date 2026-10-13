@@ -20,6 +20,10 @@ Source selections, recorded trials and open questions are in the [investigation 
   (his 2025 version) and [Voyager 2, 28 June 1979](https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html), each with his
   bad-data mask. Free to use with credit ([his terms](https://bjj.mmedia.is/data/planetary_maps.html)); he asks sites to
   link to his maps, not host a copy, so the files are downloaded from his address and never mirrored.
+- Thermal infrared: four maps from Gemini North NIRI at 4.7 µm in the MAST collection
+  [Wide Field Coverage for Juno](https://archive.stsci.edu/hlsp/wfcj) ([doi:10.17909/T94T1H](https://doi.org/10.17909/T94T1H))
+  of [Wong et al. (2020)](https://doi.org/10.3847/1538-4365/ab775f), CC BY 4.0: 14 December 2016, 23 January 2017,
+  16 July 2018 and 6 April 2019.
 - Magnetic field: [JRM33](https://doi.org/10.1029/2021JE007055), evaluated with the unchanged
   [PSH community implementation](https://github.com/rjwilson-LASP/PSH).
 - Rings: Galileo [PIA00701](https://pds-rings.seti.org/jupiter/galileo/PIA00701.html) and
@@ -59,7 +63,23 @@ and are resampled to the mesh's latitude as the OPAL maps are. Nothing is recolo
 
 **Ultraviolet and methane.** The 11 December 2025 OPAL maps `F275W` (275 nm) and `FQ889N` (889 nm) keep their measured
 values, including dark and negative samples. Only exact-zero regions connected to a polar edge, and non-finite
-samples, are gaps. A percentile stretch and false-color palette give relative contrast.
+samples, are gaps. A percentile stretch and false-color palette give relative contrast. Their rows are planetographic
+and are resampled to the mesh's latitude as the color maps' are; until 2026-10-13 they were read row for row.
+
+**Thermal infrared.** Each published map is a mosaic of one night's sharpest short exposures in the M′ filter: Jupiter's
+own thermal emission, on planetographic latitude from −80° to +80° and System III longitude, every 0.1°. Its authors
+removed limb darkening (the header says each sample was divided by the cosine of its emission angle to the power 0.35).
+The values are instrument counts with no unit. A map covers the longitudes that turned into view that night: 51.2%,
+71.0%, 61.6% and 59.0% of the whole-planet grid's samples. [gemini-thermal-map.mts](../../../packages/bake/authoring/jupiter/gemini-thermal-map.mts)
+lays each map on the grid of the OPAL maps, values unchanged; everything else is a gap, under the gray grid. The rows
+are resampled to the mesh's latitude as every other map's are. The colors and stretch are those of the archive's own
+picture of each map, which [gemini-thermal-colors.mts](../../../packages/bake/authoring/jupiter/gemini-thermal-colors.mts)
+measures against the map's values: a square-root stretch on a ramp from black through red and yellow to white, from 92
+to 11,061 counts (2016), −15 to 8,133 (2017), 63 to 6,690 (2018) and 71 to 10,571 (2019). The collection holds 20 such
+maps; these are the widest of each year. They are not joined into one map: the four maps of
+26 and 27 May 2018 cover every longitude between them, but the same clouds read up to 7 times higher in one than in
+another taken two hours earlier, and after a straight-line fit in the overlaps the seams still stepped by 18% to 128%
+of the median brightness, against 1.7% between neighbours inside one map.
 
 **Magnetic field.** JRM33 through degree/order 13 is evaluated at the 1-bar ellipsoid (71,492 × 66,854 km) as the
 radial field on a 720 × 360 grid. The range is −13.94 to 21.68 gauss on a fixed linear −25 to 25 scale, blue inward
@@ -100,6 +120,10 @@ Jupiter is prepared only from inputs declared in `source/manifest.json`; ignored
 Headless captures of the default views: the Juno pole graft and the boosted rings on the left, the measured map
 with its gray polar cap and the rings at true opacity on the right.
 
+![Jupiter's page on the thermal infrared night of 16 July 2018](evidence/2026-10-13/thermal-infrared.jpg)
+
+The app on the thermal infrared dataset, fully loaded, captured on 13 October 2026 in Chrome at 1280 × 800.
+
 - Every added dataset was selected and visually inspected in the browser on 26 September 2026.
 - Polar ring leaves place every texel within 0.33 of a 2x polar-atlas texel of its latitude, and the cap within 0.39.
   The cap's rim stands 0.15% of the radius outside the body.
@@ -112,9 +136,21 @@ with its gray polar cap and the rings at true opacity on the right.
   15° and 60° in both hemispheres (zonal brightness profiles of the two prepared maps, r 0.93 to 1.00), the offset of
   planetographic rows on this ellipsoid. With the rows resampled the two agree to 0.00° in six of seven bands and 0.09°,
   one row, in the seventh.
+- Thermal infrared colors: drawn with the measured ramp and limits, each map matches the archive's picture of it to a
+  median of 2.4 to 3.8 of 255 levels in the worst channel (95% of samples within 15.5 to 24.3), over 320,000 to 427,000
+  samples a map. `gemini-thermal-colors.mts --check` fails when the recipe holds other values.
+- Thermal infrared rows against Hubble's: a belt is dark in visible light and bright at 4.7 µm. The 6 April 2019 map's
+  brightness by latitude matches the 2019 color map's darkness best at slides of −0.6°, +0.5°, +0.8° and −0.1° in the
+  bands 60° to 25° N, 25° to 5° N, 5° to 25° S and 25° to 60° S (r 0.96, 0.95, 0.70 and 0.60, both prepared maps). With
+  the row resampling undone the same bands read −2.5°, −0.2°, +2.0° and +1.9°.
+- Ultraviolet and methane rows: each prepared map's brightness by latitude was slid over its own source file's in six
+  bands from 60° N to 60° S. Read row for row, as before 2026-10-13, the prepared maps matched their files at 0.00° in
+  every band (r 0.97 to 1.00) and sat 0.9° to 1.9° poleward of the mesh's latitude, the offset of planetographic rows on
+  this ellipsoid. Resampled, they match the files at the mesh's latitude at 0.00° in eleven of twelve bands and 0.09°,
+  one row, in the twelfth (r 0.97 to 1.00).
 - [Observed-map checks](../../../packages/bake/src/objects/layers/observed-surfaces/observed-polar.test.mts) cover the
-  RGB intersection, the published mask, the planetographic rows of a measured-rows map, the date control, the valid zero
-  field and the palette midpoint.
+  RGB intersection, the published mask, the planetographic rows of a measured-rows map and of a single-band map, the
+  date control, the valid zero field and the palette midpoint.
 
 ## Known problems
 
@@ -127,6 +163,13 @@ with its gray polar cap and the rings at true opacity on the right.
   apart meet. He estimates positions good to 0.25° to 0.5°, worse near the poles. His page does not say which way
   longitude grows; the maps are taken with east to the right, as the Hubble maps are. Compare cloud shapes with the
   Hubble dates, not color. He replaces his maps with improved versions; a refresh downloads the current file.
+- The thermal infrared maps are uncalibrated counts, and each night has its own scale and its own stretch limits:
+  brightness cannot be compared between nights. Each covers half to two thirds of the globe, and the 23 January 2017
+  map has a strip of no data inside its coverage, as published. The 2017 and 2019 headers do not name their latitude
+  type or longitude system; they are read as the 2016 and 2018 headers state theirs. The ramp is read from JPEG
+  pictures, so its nine stops are good to a few levels. The maps are drawn under the body's visible-light limb law,
+  although their authors removed the infrared limb darkening and no law for 4.7 µm is put back. The camera does not
+  turn to a night's data, so a night can open with part of its unobserved side in view.
 - The magnetic map is an inferred internal field. It excludes external currents, and its grid follows the mesh's
   parametric latitude, not planetographic latitude.
 - The rings are invisible at their true opacity. An empty ring layer is still mounted.

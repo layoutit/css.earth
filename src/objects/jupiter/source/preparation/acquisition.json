@@ -545,6 +545,70 @@
       ],
       "path": "spacecraft/jupiter_vgr2_bad_data_mask.png",
       "url": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/jupiter_vgr2_bad_data_mask.png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2016-pj03_mprime_v1_1214ut1520-mosaic.fits",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj03/hlsp_wfcj_gemini_niri_jupiter-2016-pj03_mprime_v1_1214ut1520-mosaic.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2017-pj03b_mprime_v1_0123ut1421-mosaic.fits",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj03b/hlsp_wfcj_gemini_niri_jupiter-2017-pj03b_mprime_v1_0123ut1421-mosaic.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2018-pj14_mprime_v1_0716ut0722-mosaic.fits",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj14/hlsp_wfcj_gemini_niri_jupiter-2018-pj14_mprime_v1_0716ut0722-mosaic.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2019-pj19_mprime_v1_0406ut1336-mosaic.fits",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj19/hlsp_wfcj_gemini_niri_jupiter-2019-pj19_mprime_v1_0406ut1336-mosaic.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2016-pj03_mprime_v1_1214ut1520-mosaic.jpg",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj03/hlsp_wfcj_gemini_niri_jupiter-2016-pj03_mprime_v1_1214ut1520-mosaic.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2017-pj03b_mprime_v1_0123ut1421-mosaic.jpg",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj03b/hlsp_wfcj_gemini_niri_jupiter-2017-pj03b_mprime_v1_0123ut1421-mosaic.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2018-pj14_mprime_v1_0716ut0722-mosaic.jpg",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj14/hlsp_wfcj_gemini_niri_jupiter-2018-pj14_mprime_v1_0716ut0722-mosaic.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2019-pj19_mprime_v1_0406ut1336-mosaic.jpg",
+      "url": "https://archive.stsci.edu/hlsps/wfcj/pj19/hlsp_wfcj_gemini_niri_jupiter-2019-pj19_mprime_v1_0406ut1336-mosaic.jpg"
     }
   ]
 }

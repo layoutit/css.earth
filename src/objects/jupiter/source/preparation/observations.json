@@ -218,6 +218,370 @@
       "planetographicAxisRatio": 1.0693750560923803
     },
     {
+      "id": "infrared-2016-12-14",
+      "label": "Thermal infrared",
+      "shortLabel": "4.7 µm",
+      "filter": "M′",
+      "wavelength": "4.7 µm",
+      "source": "lenses/gemini-niri-jupiter-2016-12-14-mprime-map.fits",
+      "publishedMap": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2016-pj03_mprime_v1_1214ut1520-mosaic.fits",
+      "publishedPicture": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2016-pj03_mprime_v1_1214ut1520-mosaic.jpg",
+      "measurement": "Gemini North NIRI M′ thermal emission, in instrument counts",
+      "palette": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          0,
+          0
+        ],
+        [
+          99,
+          0,
+          0
+        ],
+        [
+          151,
+          0,
+          0
+        ],
+        [
+          194,
+          0,
+          0
+        ],
+        [
+          238,
+          68,
+          1
+        ],
+        [
+          255,
+          147,
+          2
+        ],
+        [
+          254,
+          203,
+          121
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "qualification": "Gemini North NIRI at 4.7 µm, 14 December 2016, 14:21 to 16:18 UT; declared false color in the ramp and square-root stretch of the archive's own picture of this map, 92 to 11,061 counts. The counts are uncalibrated and on this night's own scale. Gray grid marks what was not observed: longitudes that did not turn into view and latitudes beyond 80°.",
+      "operation": "scalar-observed-gaps",
+      "files": {
+        "surface": "jupiter-infrared-2016-12-14.webp",
+        "surface2x": "jupiter-infrared-2016-12-14@2x.webp",
+        "poles": "jupiter-infrared-2016-12-14-poles.webp",
+        "poles2x": "jupiter-infrared-2016-12-14-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-infrared-2016-12-14.webp"
+      },
+      "scalar": {
+        "bitpix": -32,
+        "width": 3600,
+        "height": 1800,
+        "percentiles": [
+          0,
+          1
+        ],
+        "minimumCoverageFraction": 0.5,
+        "noData": 0,
+        "coverage": "finite",
+        "range": [
+          92,
+          11061
+        ],
+        "gamma": 0.5
+      },
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "planetographicAxisRatio": 1.0693750560923803
+    },
+    {
+      "id": "infrared-2017-01-23",
+      "label": "Thermal infrared",
+      "shortLabel": "4.7 µm",
+      "filter": "M′",
+      "wavelength": "4.7 µm",
+      "source": "lenses/gemini-niri-jupiter-2017-01-23-mprime-map.fits",
+      "publishedMap": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2017-pj03b_mprime_v1_0123ut1421-mosaic.fits",
+      "publishedPicture": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2017-pj03b_mprime_v1_0123ut1421-mosaic.jpg",
+      "measurement": "Gemini North NIRI M′ thermal emission, in instrument counts",
+      "palette": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          0,
+          0
+        ],
+        [
+          99,
+          0,
+          0
+        ],
+        [
+          151,
+          0,
+          0
+        ],
+        [
+          194,
+          0,
+          0
+        ],
+        [
+          238,
+          68,
+          1
+        ],
+        [
+          255,
+          147,
+          2
+        ],
+        [
+          254,
+          203,
+          121
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "qualification": "Gemini North NIRI at 4.7 µm, 23 January 2017, 12:25 to 16:17 UT; declared false color in the ramp and square-root stretch of the archive's own picture of this map, −15 to 8,133 counts. The counts are uncalibrated and on this night's own scale. Gray grid marks what was not observed: longitudes that did not turn into view and latitudes beyond 80°.",
+      "operation": "scalar-observed-gaps",
+      "files": {
+        "surface": "jupiter-infrared-2017-01-23.webp",
+        "surface2x": "jupiter-infrared-2017-01-23@2x.webp",
+        "poles": "jupiter-infrared-2017-01-23-poles.webp",
+        "poles2x": "jupiter-infrared-2017-01-23-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-infrared-2017-01-23.webp"
+      },
+      "scalar": {
+        "bitpix": -32,
+        "width": 3600,
+        "height": 1800,
+        "percentiles": [
+          0,
+          1
+        ],
+        "minimumCoverageFraction": 0.5,
+        "noData": 0,
+        "coverage": "finite",
+        "range": [
+          -15,
+          8133
+        ],
+        "gamma": 0.5
+      },
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "planetographicAxisRatio": 1.0693750560923803
+    },
+    {
+      "id": "infrared-2018-07-16",
+      "label": "Thermal infrared",
+      "shortLabel": "4.7 µm",
+      "filter": "M′",
+      "wavelength": "4.7 µm",
+      "source": "lenses/gemini-niri-jupiter-2018-07-16-mprime-map.fits",
+      "publishedMap": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2018-pj14_mprime_v1_0716ut0722-mosaic.fits",
+      "publishedPicture": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2018-pj14_mprime_v1_0716ut0722-mosaic.jpg",
+      "measurement": "Gemini North NIRI M′ thermal emission, in instrument counts",
+      "palette": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          0,
+          0
+        ],
+        [
+          99,
+          0,
+          0
+        ],
+        [
+          151,
+          0,
+          0
+        ],
+        [
+          194,
+          0,
+          0
+        ],
+        [
+          238,
+          68,
+          1
+        ],
+        [
+          255,
+          147,
+          2
+        ],
+        [
+          254,
+          203,
+          121
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "qualification": "Gemini North NIRI at 4.7 µm, 16 July 2018, 06:01 to 08:44 UT; declared false color in the ramp and square-root stretch of the archive's own picture of this map, 63 to 6,690 counts. The counts are uncalibrated and on this night's own scale. Gray grid marks what was not observed: longitudes that did not turn into view and latitudes beyond 80°.",
+      "operation": "scalar-observed-gaps",
+      "files": {
+        "surface": "jupiter-infrared-2018-07-16.webp",
+        "surface2x": "jupiter-infrared-2018-07-16@2x.webp",
+        "poles": "jupiter-infrared-2018-07-16-poles.webp",
+        "poles2x": "jupiter-infrared-2018-07-16-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-infrared-2018-07-16.webp"
+      },
+      "scalar": {
+        "bitpix": -32,
+        "width": 3600,
+        "height": 1800,
+        "percentiles": [
+          0,
+          1
+        ],
+        "minimumCoverageFraction": 0.5,
+        "noData": 0,
+        "coverage": "finite",
+        "range": [
+          63,
+          6690
+        ],
+        "gamma": 0.5
+      },
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "planetographicAxisRatio": 1.0693750560923803
+    },
+    {
+      "id": "infrared-2019-04-06",
+      "label": "Thermal infrared",
+      "shortLabel": "4.7 µm",
+      "filter": "M′",
+      "wavelength": "4.7 µm",
+      "source": "lenses/gemini-niri-jupiter-2019-04-06-mprime-map.fits",
+      "publishedMap": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2019-pj19_mprime_v1_0406ut1336-mosaic.fits",
+      "publishedPicture": "telescopes/gemini-niri/hlsp_wfcj_gemini_niri_jupiter-2019-pj19_mprime_v1_0406ut1336-mosaic.jpg",
+      "measurement": "Gemini North NIRI M′ thermal emission, in instrument counts",
+      "palette": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          0,
+          0
+        ],
+        [
+          99,
+          0,
+          0
+        ],
+        [
+          151,
+          0,
+          0
+        ],
+        [
+          194,
+          0,
+          0
+        ],
+        [
+          238,
+          68,
+          1
+        ],
+        [
+          255,
+          147,
+          2
+        ],
+        [
+          254,
+          203,
+          121
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "qualification": "Gemini North NIRI at 4.7 µm, 6 April 2019, 12:23 to 14:50 UT; declared false color in the ramp and square-root stretch of the archive's own picture of this map, 71 to 10,571 counts. The counts are uncalibrated and on this night's own scale. Gray grid marks what was not observed: longitudes that did not turn into view and latitudes beyond 80°.",
+      "operation": "scalar-observed-gaps",
+      "files": {
+        "surface": "jupiter-infrared-2019-04-06.webp",
+        "surface2x": "jupiter-infrared-2019-04-06@2x.webp",
+        "poles": "jupiter-infrared-2019-04-06-poles.webp",
+        "poles2x": "jupiter-infrared-2019-04-06-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-infrared-2019-04-06.webp"
+      },
+      "scalar": {
+        "bitpix": -32,
+        "width": 3600,
+        "height": 1800,
+        "percentiles": [
+          0,
+          1
+        ],
+        "minimumCoverageFraction": 0.5,
+        "noData": 0,
+        "coverage": "finite",
+        "range": [
+          71,
+          10571
+        ],
+        "gamma": 0.5
+      },
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "planetographicAxisRatio": 1.0693750560923803
+    },
+    {
       "id": "visible-2015a",
       "operation": "rgb-observed-gaps",
       "source": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif",

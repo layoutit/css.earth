@@ -16,7 +16,7 @@
       "id": "opal-cycle32-single-band-datasets",
       "subject": "Hubble OPAL Cycle 32 F275W and FQ889N maps",
       "status": "included",
-      "finding": "The ultraviolet and methane-band datasets use the single-band FITS products observed 11 December 2025, preserving measured values including dark and finite negative samples, with a measured-pixel percentile stretch and false-color palette for relative display contrast.",
+      "finding": "The ultraviolet and methane-band datasets use the single-band FITS products observed 11 December 2025, preserving measured values including dark and finite negative samples, with a measured-pixel percentile stretch and false-color palette for relative display contrast. Their rows are planetographic: until 2026-10-13 they were drawn row for row, 0.9 to 1.9 degrees poleward of the mesh's latitude between 5 and 60 degrees in both hemispheres; they are now resampled to it like the color maps, and match their source files there at 0.00 degrees in eleven of twelve bands (r 0.97 to 1.00).",
       "evidence": [
         "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
       ]
@@ -252,6 +252,18 @@
         "https://bjj.mmedia.is/data/jupiter_css/index.html",
         "https://www.planetary.org/articles/0514-juno-meets-cassini-a-new",
         "https://doi.org/10.17189/rkkb-6y30"
+      ]
+    },
+    {
+      "id": "gemini-wfcj-thermal-maps",
+      "subject": "Gemini North NIRI 4.7 µm maps in the Wide Field Coverage for Juno collection",
+      "status": "included",
+      "finding": "The MAST collection of Wong et al. (2020) holds 20 maps of Jupiter's thermal emission at 4.7 µm from Gemini North NIRI, 2016 to 2019, each a mosaic of one night on planetographic latitude and System III longitude every 0.1 degree, in uncalibrated counts, under CC BY 4.0. Four are shown as dated steps, the widest of each year (14 December 2016, 23 January 2017, 16 July 2018, 6 April 2019), each alone and in the colors and square-root stretch measured from the archive's own picture of it. A whole-globe join of the four maps of 26 and 27 May 2018 was tried and dropped: their scales and zeros differ, and after a straight-line fit in the overlaps the seams stepped by 18% to 128% of the median brightness, against 1.7% inside one map.",
+      "evidence": [
+        "https://archive.stsci.edu/hlsp/wfcj",
+        "https://doi.org/10.17909/T94T1H",
+        "https://doi.org/10.3847/1538-4365/ab775f",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md"
       ]
     }
   ]

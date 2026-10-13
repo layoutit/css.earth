@@ -554,6 +554,40 @@
       }
     },
     {
+      "id": "gemini-north",
+      "path": "images/gemini-north.webp",
+      "url": "/shell/facility-renders/gemini-north.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 29308,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-gemini-north",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/51"
+          }
+        ]
+      },
+      "source": {
+        "id": "gemini-north",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Dome_of_the_Gemini_North_Telescope_on_Maunakea_%28noirlab-20160318-pv-shots-176%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Dome_of_the_Gemini_North_Telescope_on_Maunakea_(noirlab-20160318-pv-shots-176).jpg",
+        "credit": "International Gemini Observatory/NOIRLab/NSF/AURA/J. Pollard",
+        "license": "CC BY 4.0",
+        "bytes": 4328359,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "goldstone-dss14",
       "path": "images/goldstone-dss14.webp",
       "url": "/shell/facility-renders/goldstone-dss14.webp",

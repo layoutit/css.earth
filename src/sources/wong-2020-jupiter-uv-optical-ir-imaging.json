@@ -1,0 +1,59 @@
+{
+  "id": "wong-2020-jupiter-uv-optical-ir-imaging",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "High-resolution UV/Optical/IR Imaging of Jupiter in 2016–2019",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2020ApJS..247...58W"
+    },
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4365/ab775f"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJS..247...58W",
+      "label": "2020ApJS..247...58W"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-4365/ab775f",
+      "checkedOn": "2026-10-13",
+      "locator": "Abstract: the Near-Infrared Imager (NIRI) at Gemini North imaged Jovian thermal emission using a lucky-imaging approach (co-adding the sharpest frames taken from a sequence of short exposures), using the M′ filter at 4.7 μm; the processed data are in the archive collection doi:10.17909/T94T1H."
+    }
+  ],
+  "creators": [
+    "Michael H. Wong",
+    "Amy A. Simon",
+    "Joshua W. Tollefson",
+    "Imke de Pater",
+    "Megan N. Barnett",
+    "Andrew I. Hsu",
+    "Andrew W. Stephens",
+    "Glenn S. Orton",
+    "Scott W. Fleming",
+    "Charles Goullaud",
+    "William Januszewski",
+    "Anthony Roman",
+    "Gordon L. Bjoraker",
+    "Sushil K. Atreya",
+    "Alberto Adriani",
+    "Leigh N. Fletcher"
+  ],
+  "publisher": "ApJS 247, 58",
+  "publicationDate": "2020",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Wong et al. (2020), ApJS 247, 58.",
+      "scope": "Jupiter's thermal infrared maps",
+      "evidence": "https://doi.org/10.3847/1538-4365/ab775f"
+    }
+  ]
+}

@@ -15,6 +15,30 @@
     },
     {
       "location": "public",
+      "filename": "jupiter-dataset-infrared-2016-12-14.webp",
+      "bytes": 1366,
+      "sha256": "dff6f2307cb92f9c0ad0731c67d778e8b29faee4804998311ad67a8fd5dab5f5"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-dataset-infrared-2017-01-23.webp",
+      "bytes": 2278,
+      "sha256": "e3f86d0076c5f55f942fbc2708a923611c533ce191bc666bbeb6e1c8c036a51b"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-dataset-infrared-2018-07-16.webp",
+      "bytes": 1912,
+      "sha256": "d72bbfb6c4c6e6783d1bebb0480fa0a9234d7f250bd82454f7a01965ce3bac66"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-dataset-infrared-2019-04-06.webp",
+      "bytes": 1408,
+      "sha256": "6df849fc054517e0c51019637586bb5f6012447694eff12c6707b2479d52af62"
+    },
+    {
+      "location": "public",
       "filename": "jupiter-dataset-magnetic.webp",
       "bytes": 5230,
       "sha256": "2441b16643e136eacce8a1cb2ebcdc2f01351b727e876d3bcaac1c4fe6cf9d93"
@@ -22,32 +46,32 @@
     {
       "location": "public",
       "filename": "jupiter-dataset-methane-poles.webp",
-      "bytes": 21708,
-      "sha256": "aa1604ef70e1ebed1e471ebd291389d85abd52d77bd51f9ed16d2625c057224d"
+      "bytes": 23144,
+      "sha256": "e99276603c9eee2091c2042c7ef9fe2994c77f3b443dce9ac5a8ffaaa1d2cd59"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-methane-poles@2x.webp",
-      "bytes": 31962,
-      "sha256": "5a95f8e8c86eee8f43b8ec9a1ed849b432ba264bf858ffd5d9f1440aa0e02e97"
+      "bytes": 32556,
+      "sha256": "a8c7c3456121948f032653a551fcaec8ac13253986ba1289c17167749dc831d7"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-methane-thumbnail.webp",
-      "bytes": 476,
-      "sha256": "2abe616ea57697eaff060be6ace6694e491be681f7040d932c40182c08a44303"
+      "bytes": 524,
+      "sha256": "aed0e8b69ed2aaec2d6fdb80b86186dd940f30c18e89e0639e8d97bc5fa8d04a"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-methane.webp",
-      "bytes": 91442,
-      "sha256": "c6e7fc291f99f8529aa5d82392f26429bdd370dbe908a3e4a6af4a5e7fe77410"
+      "bytes": 94044,
+      "sha256": "b943076b10fa0dfb691bd5bff72ca1396b00b7c43217c8044daa801604d75934"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-methane@2x.webp",
-      "bytes": 244446,
-      "sha256": "b8dbfc5d001792a7935ef92c12b47939153e27536bd15ddc6700d54e8e3e04a7"
+      "bytes": 250756,
+      "sha256": "2568ff96e540b509e7cb4d6cc3ffd76e35a6b35aeec87bf2cabc4e8018b30e3a"
     },
     {
       "location": "public",
@@ -58,32 +82,32 @@
     {
       "location": "public",
       "filename": "jupiter-dataset-ultraviolet-poles.webp",
-      "bytes": 20540,
-      "sha256": "7de569a6409d4f29e335650a0863b9bd31dbb6ac439ebf418ca83e0cbc7b9971"
+      "bytes": 20598,
+      "sha256": "8b305a8a94b2a56fa5a8c8adb56e29379aa54ed61c80ca61d63e0f07a5648fd1"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-ultraviolet-poles@2x.webp",
-      "bytes": 22602,
-      "sha256": "66906e9fc693cc71fd7011e4c224d3520d23defa3de77763b184a4638128f08e"
+      "bytes": 23090,
+      "sha256": "f79bffc651add2d4eb4a4f72b7c2b5b0190eb583f1b62d9cc6a48b5e748ab193"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-ultraviolet-thumbnail.webp",
-      "bytes": 782,
-      "sha256": "ff1a82f4a8954274bfe07db4c4342dccc08248d978b7222e770ee81b86f79324"
+      "bytes": 736,
+      "sha256": "282886184d6642ba4f57e51d5a429ec43aabc8e1eac15f19091f000c4eb5418d"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-ultraviolet.webp",
-      "bytes": 93902,
-      "sha256": "77a33880acb356302201f175ea382246c502b18ccba7bdea1d9ce5614e5291f0"
+      "bytes": 94540,
+      "sha256": "51d53f140ae411443c1fd05dfd32840c17f149a487d2ffc686ede028390e86d5"
     },
     {
       "location": "public",
       "filename": "jupiter-dataset-ultraviolet@2x.webp",
-      "bytes": 293402,
-      "sha256": "f9b021ee7a16afd578a320b651be65e18cca2af7830a8a0051752216edaf854d"
+      "bytes": 290630,
+      "sha256": "7f6ac5bbb62375276b3843aeb83e14e4667eb97e46f804a94421cb4643753d9b"
     },
     {
       "location": "public",
@@ -162,6 +186,102 @@
       "filename": "jupiter-dataset-voyager2-1979.webp",
       "bytes": 1174,
       "sha256": "64dd688060159aec56c57b95f8608e274b85f2f2d456ceea9d8b72363125ba2b"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2016-12-14-poles.webp",
+      "bytes": 21300,
+      "sha256": "c76654537197a1f97b9ca4ac6f1e8fd643f7d314c5a210afcb41390a57df6d2e"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2016-12-14-poles@2x.webp",
+      "bytes": 27936,
+      "sha256": "13584f9bd4534b3e69f07601951ed77fafb59db1c149e0b6cf79d439c7560179"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2016-12-14.webp",
+      "bytes": 115614,
+      "sha256": "0c157e54d4623f36a154a7e3f3260f3530ac9fc99f95a2901aca67bebc01a6f0"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2016-12-14@2x.webp",
+      "bytes": 271552,
+      "sha256": "dc35aac729367cbd4a5f74754038bd2d3391d060e3809baa0fa5521502b63f4f"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2017-01-23-poles.webp",
+      "bytes": 25920,
+      "sha256": "1baebfab6cdda36aaf8ee8cfbf455f2a88e275fbfc0786da385bead799419673"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2017-01-23-poles@2x.webp",
+      "bytes": 35256,
+      "sha256": "d9857e2847affc9eebe5a4e6d31ddf404e127e56b542fab94803bd44ec462528"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2017-01-23.webp",
+      "bytes": 221118,
+      "sha256": "e18480f8cb2cde26d84b6f1266d596abb14daefe4e47d7d64f5dc3630f220e9c"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2017-01-23@2x.webp",
+      "bytes": 499456,
+      "sha256": "d9233623ff5f42e57d95394fd49bfe7336c10565a6c0e5dc4352436b20d6e241"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2018-07-16-poles.webp",
+      "bytes": 25174,
+      "sha256": "060ca078a56b194310f698af3f42e78321835602fe33e2c93181981afb8d5f1c"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2018-07-16-poles@2x.webp",
+      "bytes": 33024,
+      "sha256": "1a3e1e785404aadca5c316ef031f27fa42923095fedd0d774b946c91ab1602f3"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2018-07-16.webp",
+      "bytes": 207632,
+      "sha256": "96d83c87f4b0587070e68e716d8c8a7def8fd60266c06266e9ac7f4bee23a3d5"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2018-07-16@2x.webp",
+      "bytes": 459062,
+      "sha256": "776243bc02c10aa93d54403924a603c9278c7535fc289f4cae882aaf3f85ec84"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2019-04-06-poles.webp",
+      "bytes": 23786,
+      "sha256": "970b06832002e3026c3a5c97fcbbe20100791e348110a2115ada48a5c5dbe51b"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2019-04-06-poles@2x.webp",
+      "bytes": 30814,
+      "sha256": "82938720346900682b2e7f6a6365b671a957fe71014bee6838a469f3ef812601"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2019-04-06.webp",
+      "bytes": 158984,
+      "sha256": "a4a523dd7fafa695fdfca175fa586244fbd9080c6bf9291f2249197e635ed6ec"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-infrared-2019-04-06@2x.webp",
+      "bytes": 379938,
+      "sha256": "7f66462fe805382a55c6eb54ecee5697b59247977ff9194a414e5863060fb715"
     },
     {
       "location": "public",
@@ -844,8 +964,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 20155,
-      "sha256": "fab0192009a32227b46415f550d8cc5b200407d8dfed4ee70e5e24bed77bf9b9"
+      "bytes": 23263,
+      "sha256": "4ddd75cc88db0440af9a1d3dccf9fa0dd8c1adac66d0944da10d74c8982bccc3"
     },
     {
       "location": "prepared",
@@ -862,8 +982,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 15775,
-      "sha256": "3107f47e70e87a06223c890715ff47d0440ab31ff37ea3fbc9fadbb13bc31a6f"
+      "bytes": 23904,
+      "sha256": "e1b7376f41b0343b3826fa5876af5fef2c43feed3d4ec2074b5068a5ce5d5888"
     },
     {
       "location": "prepared",
@@ -874,8 +994,32 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1753,
-      "sha256": "7491e4bf6413f68322c6baddce3b189d9a271ab1ad240dbaf5b124bae4414893"
+      "bytes": 2281,
+      "sha256": "c46c4edfb2503e0a94e38d9bcfff68a9493aff0d25e06f232fd870b19b789755"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/infrared-2016-12-14.webp",
+      "bytes": 5818,
+      "sha256": "0e16d58b93ae3ae9b22fbc853a7cfb2bbaf71eac8d96e3fe2d8960d05048cc01"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/infrared-2017-01-23.webp",
+      "bytes": 11138,
+      "sha256": "f9632a418b9f0159fcd5268633036c344da76c188a350783f9186f40504a6180"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/infrared-2018-07-16.webp",
+      "bytes": 10196,
+      "sha256": "ef91f99abc365f033ac6d9a93e93f9124c0d5b72c6e286ccbc1446599a9da45f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/infrared-2019-04-06.webp",
+      "bytes": 7594,
+      "sha256": "e7a78001392066cf9a8a463e738c453595bb0e6fc16a62d8cba21a032d8dd34c"
     },
     {
       "location": "prepared",
@@ -886,8 +1030,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/methane.webp",
-      "bytes": 3020,
-      "sha256": "ac97421f93eab161644715b7b4cec37e775e73fee5a44799002fa87dc5683f36"
+      "bytes": 3356,
+      "sha256": "a9cf9710348bc40f751b848ff246908f2f95cac9c5a7496fccc50df1b43db506"
     },
     {
       "location": "prepared",
@@ -898,8 +1042,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/ultraviolet.webp",
-      "bytes": 2994,
-      "sha256": "7864c433e26229a71e1bab7d3a203a07427ea47b3d40f1b8c70b095e57803403"
+      "bytes": 3114,
+      "sha256": "cab1087b2e644fbaf8c885b3eb96074c32cb0adc214cd542edc067af4896da6d"
     },
     {
       "location": "prepared",
@@ -982,14 +1126,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 228618,
-      "sha256": "14f11e6df26dbdaa5c85e78aaf1a021c372339662305e261b443e9ab02cb8f3d"
+      "bytes": 250398,
+      "sha256": "0a0ad8e5ca372e92e56168a6c0ccd4347ccfb4c0f6cda2ae4c84fbc45f1e9686"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3550,
-      "sha256": "155048a41e304bc688ea22987f042a0d1146040e9fd4d1efce65bfa562fef482"
+      "bytes": 4246,
+      "sha256": "6fd932002ff2f90d04dc510fb9aa232b10552509aea000945137adb6df24a8d1"
     }
   ]
 }
