@@ -4,7 +4,23 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { test } from 'node:test';
 import { parse } from 'yaml';
-import { cacheProof, cacheTransferSeconds, command, distIdentity, requireBuildOutput, requireCacheMatch, requireOptIn, requireParity, requireSafeRecipe, shareCounts, timingJobs } from './build-benchmark.mts';
+import { buildProof, cacheProof, cacheTransferSeconds, command, distIdentity, requireBuildOutput, requireCacheMatch, requireOptIn, requireParity, requireSafeRecipe, shareCounts, timingJobs, validationProof, workerProof } from './build-benchmark.mts';
+
+// Exact raw output from CI job 115440930260 (candidate 83d46d1f), excluding heartbeats.
+const capturedBuild = '2026-10-13T17:43:51.3521599Z \u001b[2m17:43:51\u001b[22m \u001b[34m[build]\u001b[39m \u001b[1mComplete!\u001b[22m\n2026-10-13T17:46:04.3178400Z Wrote 4340 share images to dist/social (30.6 MB; 4204 rendered, 136 reused).';
+test('captured actual CI colored completion retains the full build and share proof', () => {
+  assert.deepEqual(buildProof(capturedBuild, 'seed'), { written: 4340, rendered: 4204, reused: 136 });
+  assert.throws(() => buildProof(capturedBuild.split('\n')[1]!, 'seed'), /lacks Astro completion/u);
+  assert.throws(() => buildProof(capturedBuild.split('\n')[0]!, 'seed'), /complete share-image footer/u);
+});
+test('proof parsers accept styled share validation and Worker text without accepting absent or zero coverage', () => {
+  const styledShare = capturedBuild.replace('Wrote 4340', 'Wrote \u001b[32m4340\u001b[39m');
+  assert.deepEqual(buildProof(styledShare, 'seed'), { written: 4340, rendered: 4204, reused: 136 });
+  validationProof('Verified \u001b[32m42\u001b[39m emitted runtime asset URL');
+  workerProof('a search for "europa" answers \u001b[32m2\u001b[39m objects and \u001b[32m3\u001b[39m features; /earth/?q=europa renders');
+  for (const invalid of ['', 'Verified 0 emitted runtime asset URL']) assert.throws(() => validationProof(invalid), /positive coverage/u);
+  for (const invalid of ['', 'a search for "europa" answers 0 objects and 3 features; /earth/?q=europa renders']) assert.throws(() => workerProof(invalid), /completed search\/page proof/u);
+});
 
 test('actual command drains inherited stdout and stderr after its direct child exits', { timeout: 10000 }, async t => {
   const name = `drain-regression-${process.pid}`, output = resolve(import.meta.dirname, '../../../output/build-benchmark');

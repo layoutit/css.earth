@@ -7,6 +7,7 @@ import { cpus } from 'node:os';
 import { join, resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { finished } from 'node:stream/promises';
+import { stripVTControlCharacters } from 'node:util';
 import sharp from 'sharp';
 
 const root = resolve(import.meta.dirname, '../../..'), output = resolve(root, 'output/build-benchmark');
@@ -49,6 +50,18 @@ export function shareCounts(log: string, role: Role): { written: number; rendere
   if (!Number.isSafeInteger(rendered) || !Number.isSafeInteger(reused) || rendered < 0 || reused < 0 || rendered + reused !== written ||
     (role === 'warm' && (rendered !== 0 || reused !== written)) || (role === 'seed' && rendered === 0)) throw new Error('Share-image cold/warm proof failed.');
   return { written, rendered, reused };
+}
+
+export function buildProof(log: string, role: Role): ReturnType<typeof shareCounts> {
+  const readable = stripVTControlCharacters(log);
+  if (!readable.includes('[build] Complete!')) throw new Error('Production build lacks Astro completion.');
+  return shareCounts(readable, role);
+}
+export function validationProof(log: string): void {
+  if (!/Verified [1-9]\d* emitted runtime asset URL/u.test(stripVTControlCharacters(log))) throw new Error('Deploy asset validation lacks positive coverage.');
+}
+export function workerProof(log: string): void {
+  if (!/a search for "europa" answers [1-9]\d* objects and [1-9]\d* features; \/earth\/\?q=europa renders/u.test(stripVTControlCharacters(log))) throw new Error('Local Worker lacks completed search/page proof.');
 }
 
 export async function distIdentity(directory: string): Promise<{ files: number; bytes: number; htmlPages: number; gitBlob: string }> {
@@ -188,10 +201,9 @@ async function run(role: Role): Promise<void> {
   try { build = await command('build', 'pnpm', ['build:deploy']); }
   finally { if (role === 'baseline') await writeFile(resolve(root, writer), original); }
   if (!(await readFile(resolve(root, writer))).equals(original) || git('rev-parse', 'HEAD') !== result.candidate) throw new Error('Benchmark source/head was not preserved.');
-  if (!build.log.includes('[build] Complete!')) throw new Error('Production build lacks Astro completion.');
-  result.share = shareCounts(build.log, role); result.buildSeconds = build.seconds;
+  result.share = buildProof(build.log, role); result.buildSeconds = build.seconds;
   const validation = await command('validation', 'pnpm', ['check:deploy-assets']);
-  if (!/Verified [1-9]\d* emitted runtime asset URL/u.test(validation.log)) throw new Error('Deploy asset validation lacks positive coverage.');
+  validationProof(validation.log);
   git('diff', '--exit-code', '--quiet', '--', 'src/objects');
   positive((await readFile(resolve(root, 'dist/index.html'))).length);
   result.validationSeconds = validation.seconds;
@@ -200,7 +212,7 @@ async function run(role: Role): Promise<void> {
     sharp: sharp.versions, packageBlob: blob(await readFile(resolve(root, 'package.json'))), lockBlob: blob(await readFile(resolve(root, 'pnpm-lock.yaml'))) };
   requireBuildOutput(role, result);
   const worker = await command('worker', process.execPath, ['deploy/cloudflare/bundle-worker.mts']);
-  if (!/a search for "europa" answers [1-9]\d* objects and [1-9]\d* features; \/earth\/\?q=europa renders/u.test(worker.log)) throw new Error('Local Worker lacks completed search/page proof.');
+  workerProof(worker.log);
   result.workerSeconds = worker.seconds;
   await save(result);
 }
