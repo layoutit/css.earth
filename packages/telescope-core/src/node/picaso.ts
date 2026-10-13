@@ -8,7 +8,7 @@ import { resolveInstalledToolchain } from './toolchain/resolver.js';
 import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { TOOLCHAINS, USER_ROOT } from './paths/index.js';
 import { assertInstalledMarker, installedMarkerIssue, readToolchainPins } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -45,7 +45,7 @@ export async function installPicaso() {
       await mkdir(PATHS.reference, { recursive: true });
       runToolchainProcess(python, ['-c', 'import os, picaso.data as d; d.get_reference(os.environ["picaso_refdata"])'], { env: { PYTHONNOUSERSITE: '1', picaso_refdata: PATHS.reference }, maxBuffer: 256 * 1024 * 1024 });
     }
-    if (!bobcatNodes().length) {
+    if (!bobcatNodesAt(PATHS.profiles).length) {
       await mkdir(PATHS.profiles, { recursive: true });
       const tar = resolve(PATHS.profiles, 'structures.tar.gz');
       runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', tar, dataUrl(entry, 'profiles')]);
@@ -99,7 +99,10 @@ export function picasoToolchainSync(): PicasoToolchain {
 /** The Sonora Bobcat nodes the solar-metallicity structures hold: temperature (K), gravity (m/s^2) and file, from the file names
  * (the release writes the metallicity as m0.0, and as m+0.0 for a few files). */
 export function bobcatNodes(): { readonly teffK: number; readonly gravityMps2: number; readonly file: string }[] {
-  return readdirOrEmpty(installedPaths().profiles).flatMap(file => {
+  return bobcatNodesAt(installedPaths().profiles);
+}
+function bobcatNodesAt(profiles: string): ReturnType<typeof bobcatNodes> {
+  return readdirOrEmpty(profiles).flatMap(file => {
     const match = /^t(\d+)g(\d+)nc_m\+?0\.0\.dat$/u.exec(file);
     return match ? [{ teffK: Number(match[1]), gravityMps2: Number(match[2]), file }] : [];
   });
@@ -386,6 +389,7 @@ export const picasoInstalled = () => installedMarkerIssue(PICASO_ROOT, descripto
 export function verifyPicaso(toolchain = picasoToolchainSync()) {
   const found = runToolchainProcess(toolchain.python, ['-c', "import importlib.metadata as m; print(m.version('picaso'))"], { env: toolchain.env }).trim();
   if (found !== toolchain.version) throw new Error(`Expected PICASO ${toolchain.version}, found ${found}.`);
-  if (!bobcatNodes().length) throw new Error('The PICASO toolchain holds no Sonora Bobcat profiles.');
+  const root = dirname(dirname(dirname(toolchain.python)));
+  if (!bobcatNodesAt(paths(root).profiles).length) throw new Error('The PICASO toolchain holds no Sonora Bobcat profiles.');
   return found;
 }

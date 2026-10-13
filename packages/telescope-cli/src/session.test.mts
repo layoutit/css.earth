@@ -249,6 +249,7 @@ test('a checkout session delivers a qualified artifact from the separate user ro
     assert.equal(qualificationDirectory('test-body'), resolve(USER_ROOT, 'output/telescopes/test-body/qualifications'));
     assert.equal((await readdir(qualificationDirectory('test-body'), { recursive: true })).filter(name => name.endsWith('.json')).length, 1);
     await assert.rejects(readdir(resolve(f.root, 'output/telescopes/test-body/qualifications')), { code: 'ENOENT' });
+    await mkdir(resolve(f.root, 'other-checkout'));
     for (const otherRoot of [resolve(f.root, 'other-checkout'), USER_ROOT]) {
       const loaded = await loadQualifiedObservations(otherRoot, 'test-body');
       assert.equal(loaded.length, 1);
@@ -282,7 +283,41 @@ test('a checkout session delivers a qualified artifact from the separate user ro
     const unrelated = await mkdtemp(resolve(tmpdir(), 'telescope-unrelated-'));
     try {
       await writeFile(resolve(unrelated, 'same-size.bin'), Buffer.alloc(8)); await rm(cachedSource); await symlink(resolve(unrelated, 'same-size.bin'), cachedSource);
-      await assert.rejects(getSession(f.root, second, 1, () => {}, api), /Artifact is outside/u);
+      assert.deepEqual(await loadQualifiedObservations(f.root, 'test-body'), [], 'discovery refuses the escaped symlink before delivery');
+      // Delivery reloads qualifications, so a stale discovery snapshot is refused before export.
+      const stale: SessionServices = { ...api, explore: async (_root, request) => explorationAnswer(request, {
+        ...await f.load(), sourceProducts: [{ ...product, qualified: false }], qualifiedProducts: remembered }) };
+      await assert.rejects(getSession(f.root, second, 1, () => {}, stale), /qualification receipt is stale/u);
     } finally { await rm(unrelated, { recursive: true, force: true }); }
   } finally { await f.cleanup(); await rm(cached, { recursive: true, force: true }); }
+});
+
+test('a checkout-local qualification is ready and deliverable only from its owning checkout', async () => {
+  const a = await fixture(), b = await fixture();
+  try {
+    await a.api.qualify(a.root, { target: 'test-body', telescope: 'Test telescope', mode: 'test cube', observation: 'cube-1', configuration: { kind: 'source-product', id: 'cube-1' } });
+    const product = (await loadSourceProducts(a.root, 'test-body'))[0]!;
+    assert.ok(product.facts);
+    await rememberQualification(a.root, { target: product.target, telescope: product.telescope, mode: product.mode, observation: product.id, program: product.id,
+      product: resolve(a.root, product.files.find(file => file.role === 'science')!.path), receipt: resolve(a.root, product.receipt),
+      productRecord: resolve(a.root, product.receipt), outputRoot: a.root, facts: product.facts });
+    const api: SessionServices = { load: a.load, qualify: a.api.qualify, explore: async (root, request) => explorationAnswer(request, {
+      ledgers: [], capabilities: [], targetCatalogue: [{ id: 'test-body', name: 'Test Body', aliases: [] }], targetAssociations: [], bodyMaps: [],
+      sourceProducts: await loadSourceProducts(root, 'test-body'), qualifiedProducts: await loadQualifiedObservations(root, 'test-body') }) };
+    assert.equal((await loadQualifiedObservations(a.root, 'test-body')).length, 1);
+    const owned = await saveExploration(a.root, ['test-body'], resolve(a.root, 'owned-delivery'), api);
+    assert.equal(owned.choices[0]!.state, 'ready');
+    assert.equal((await readFile((await getSession(a.root, resolve(a.root, 'owned-delivery'), 1, () => {}, api)).product)).length, 8);
+    assert.deepEqual(await loadQualifiedObservations(b.root, 'test-body'), [], 'checkout A is outside both checkout B and USER_ROOT');
+    const foreign = await saveExploration(b.root, ['test-body'], resolve(b.root, 'foreign-exploration'), api);
+    assert.equal(foreign.choices.length, 1);
+    assert.equal(foreign.choices[0]!.state, 'qualify', 'B must qualify its own input instead of offering A as ready');
+    assert.equal(foreign.choices[0]!.product, undefined);
+    const report = resolve(a.root, 'output/telescopes/test-body/cube-1/decoded.json'), external = resolve(b.root, 'decoded.json');
+    await cp(report, external); await rm(report); await symlink(external, report);
+    assert.deepEqual(await loadQualifiedObservations(a.root, 'test-body'), [], 'an unpinned output cannot escape the delivery roots either');
+  } finally {
+    await rm(qualificationDirectory('test-body'), { recursive: true, force: true });
+    await a.cleanup(); await b.cleanup();
+  }
 });

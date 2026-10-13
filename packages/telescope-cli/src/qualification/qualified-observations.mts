@@ -9,6 +9,7 @@ import { fileSize, plainName, readProductRecord, sameRun, USER_ROOT } from '@css
 import { assessInput, assessRequest, type ProductFacts } from '../requests/request-satisfaction.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
 import { parseResolutionEvidence, parseRegion } from '@cssearth/objects';
+import { admittedArtifactFile, artifactFile } from '../delivery/artifact-paths.mts';
 
 export interface QualifiedObservation {
   readonly target: string | null; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
@@ -88,7 +89,7 @@ export async function loadQualifiedObservations(root: string, target: string | n
     for (const raw of requireArray(value.pins, 'qualified pins')) {
       const pin = requireRecord(raw), path = requireString(pin.path);
       if (!isAbsolute(path)) { current = false; continue; }
-      const found = await fileSize(path).catch(() => null);
+      const found = await admittedArtifactFile(root, path).then(() => fileSize(path)).catch(() => null);
       if (!found || found.bytes !== pin.bytes || pin.sha256 !== undefined) current = false;
     }
     if (!current) continue;
@@ -98,6 +99,16 @@ export async function loadQualifiedObservations(root: string, target: string | n
     if (!record || !await sameRun(record, record, name => resolve(root, fields.outputRoot!, name))) continue;
     if (!record.outputs.some(output => resolve(root, fields.outputRoot!, output.path) === inputPath(root, fields.product!))) continue;
     const facts = parseProductFacts(value.facts);
+    // Delivery carries every output and evidence receipt, even those outside the qualification's explicit pins.
+    const files = [fields.product!, fields.receipt!, fields.productRecord!,
+      ...record.outputs.map(output => resolve(fields.outputRoot!, output.path)), ...record.evidence.map(evidence => resolve(fields.outputRoot!, evidence.receipt)),
+      ...(facts.calibrationDependencies ?? []).flatMap(dependency => dependency.file ? [resolve(root, dependency.file)] : []),
+      ...(facts.angularResolutionBound ? [resolve(root, facts.angularResolutionBound.receipt)] : []),
+      ...(facts.resolutionEvidence ?? []).flatMap(evidence => evidence.receipt ? [resolve(root, evidence.receipt.file)] : [])];
+    try {
+      if (resolve(root) !== resolve(fields.outputRoot!)) artifactFile(root, fields.outputRoot!);
+      for (const file of files) await admittedArtifactFile(root, file);
+    } catch { continue; }
     if(!await verifyCalibrationDependencies(root,facts.calibrationDependencies ?? []))continue;
     if (facts.angularResolutionBound && !requireArray(value.pins).some(raw => requireRecord(raw).path === facts.angularResolutionBound!.receipt)) continue;
     if (facts.resolutionEvidence?.some(evidence => evidence.receipt && !requireArray(value.pins).some(raw => {

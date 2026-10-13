@@ -2,7 +2,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchainSync, plainName, USER_ROOT } from '@cssearth/telescope-core/node';
+import { astroqueryToolchain, plainName, USER_ROOT } from '@cssearth/telescope-core/node';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../archives/keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from '../archives/gemini/cadc.mts';
 import { recall } from '../archives/memory.mts';
@@ -97,7 +97,7 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
   const date = time ? ` AND date_obs BETWEEN '${time.fromIso.slice(0, 10)}' AND '${time.toIso.slice(0, 10)}'` : '';
   const scope = `${target ? 'Exact target-name variants' : 'ICRS field search'}${position ? `, and frames within ${arcsec(position)} arcsec of ${target ? "the target's position" : 'the requested position'},` : ''} across ${tables.length} matching public KOA TAP instrument tables${time ? `; UTC observation dates ${time.fromIso.slice(0, 10)} to ${time.toIso.slice(0, 10)}` : ''}; object-frame counts and up to ${KECK_SOURCE_SAMPLE_LIMIT} exact public FITS files per instrument`;
   if (!tables.length) return { service: TAP_SYNC, state: 'empty-in-scope', scope, reason: `KOA has no public instrument table named ${filter!.instrument}.`, instruments: [] };
-  try { if (query === koaQuery) astroqueryToolchainSync(); }
+  try { if (query === koaQuery) await astroqueryToolchain(); }
   catch (error) { return { service: TAP_SYNC, state: 'unavailable', scope, reason: message(error), instruments: [] }; }
   const names = namesOf(target), literals = names.map(name => `'${name.replaceAll("'", "''")}'`).join(',');
   const named = `targname IN (${literals})`, known = (name: string) => names.some(candidate => key(candidate) === key(name));

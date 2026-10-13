@@ -1,7 +1,7 @@
 /** Saved requests connect the public query and qualifier. They never authorize stale archive actions. */
 import { inputPath } from './paths.mts';
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
-import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { fileSize, readProductRecord, USER_ROOT } from '@cssearth/telescope-core/node';
@@ -19,6 +19,7 @@ import { SERVICES } from './vo/discovery.mts';
 import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery/delivery-context.mts';
 import { canonical } from '@cssearth/objects';
 import { sourceQuestionFromRequest } from './products/source-relevance.mts';
+import { admittedArtifactFile, artifactFile, relativeFile } from './delivery/artifact-paths.mts';
 
 export const SESSION_SCHEMA = 'cssearth-telescope-session@1';
 export interface Choice {
@@ -165,19 +166,6 @@ interface Artifact {
   readonly file: string; readonly receipt: string; readonly record: string; readonly outputRoot: string;
   readonly facts: ProductFacts; readonly extraEvidence: readonly string[];
 }
-function relativeFile(root: string, file: string): string {
-  const path = relative(root, inputPath(root, file));
-  if (!path || path === '..' || path.startsWith('../') || isAbsolute(path)) throw new Error(`Artifact is outside the repository: ${file}`);
-  return path;
-}
-/** Cached artifacts may belong to the user root while discovery reads the checkout. Preserve each output tree. */
-function artifactFile(root: string, file: string, userRoot = USER_ROOT): string {
-  try { return relativeFile(root, file); }
-  catch (error) {
-    try { return `user/${relativeFile(userRoot, file)}`; }
-    catch { throw error; }
-  }
-}
 async function resolveArtifact(root: string, answer: CapabilityAnswer, choice: Choice): Promise<Artifact> {
   if (!choice.product) throw new Error('The route did not produce a current, selectable artifact.');
   // Bind this observation even when a program contains several qualified observations.
@@ -200,12 +188,12 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
     expected.set(path, await fileSize(path));
   }
   for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await fileSize(path));
-  const files: ExportFile[] = [], realRoot = await realpath(root), realUserRoot = await realpath(USER_ROOT).catch(() => USER_ROOT);
+  const files: ExportFile[] = [];
   for (const [file, pin] of expected) {
-    artifactFile(realRoot, await realpath(file), realUserRoot);
+    const original = await admittedArtifactFile(root, file);
     const source = await fileSize(file).catch(() => null);
     if (source?.bytes !== pin.bytes) throw new Error(`Artifact ${file} is ${source ? `${source.bytes} bytes` : 'missing'}; its qualification records ${pin.bytes} bytes.`);
-    const original = artifactFile(root, file), path = `files/${original}`, target = resolve(destination, path);
+    const path = `files/${original}`, target = resolve(destination, path);
     await mkdir(dirname(target), { recursive: true });
     progress(`${reuse ? 'Verifying' : 'Copying'} ${basename(file)} (${(pin.bytes / 1e6).toFixed(1)} MB)`);
     if (!reuse) await copyFile(file, target);
