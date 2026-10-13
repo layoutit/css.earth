@@ -124,6 +124,25 @@ new day, the `--add-datasets` bake, then `publish-runtime-assets.mts --object=ea
 `publish-source-cache.mts --object=earth` mirrors Earth's downloaded inputs but not the tile archives, which the
 manifest lists as generated intermediates.
 
+## Opt-in share-image build measurement
+
+The [build benchmark](../.github/workflows/build-benchmark.yml) runs for a same-repository PR carrying `compare-build`.
+Adding unrelated labels does not start another measurement. To retry, choose **Re-run all jobs**: cache keys include the
+run attempt, so a partial failed-job rerun cannot consume a seed from the previous attempt.
+It checks out the exact PR head on three fresh Ubuntu/Node 24 runners, with no dependency, prepared or compiled caches.
+The seed builds and saves generated share cards; the baseline changes only the canonical share writer to its merge-base
+version; the warm run restores the exact seed and saves a new key. All runs use the real production build, asset validation
+and a local Worker smoke check. This workflow has read-only permissions, receives no publication credentials and uploads no site or artifact.
+
+The result appears as `BUILD_BENCHMARK_RESULT` in the job log and in its summary. It requires equal pre-Worker output
+identities, real complete warm reuse and an exact nonempty cache entry proved by the read-only API. Command timings exclude
+output-fingerprint work; GitHub job/step timestamps record cache transfers separately from runner waiting. The three builds
+run sequentially so the warm job can compare both prior results without another dependency installation. This optional
+measurement is outside the required PR feedback path; local timings are not a hosted speed claim.
+The benchmark normalizes all steps to a 6 GB Node heap, production asset origin, strict asset completeness, skipped
+declarations, UTC and the C locale; production scopes some of these settings to its build step. Each measurement is one
+baseline/warm pair on separate runners. Recorded CPU/image/codec facts expose runner variance; one pair is not a statistical speed guarantee.
+
 ## Keep the PR path lean without dropping proof
 
 - Put a check with the code it protects. Use the shared
