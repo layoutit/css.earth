@@ -45,8 +45,36 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     const pin = await leads.saveArchiveLeadEvidence(${JSON.stringify(checkout)}, 'https://example.org/TAP', 'test', []);
     assert.ok((await readdir(resolve(core.USER_ROOT, 'output/telescopes/archive-leads'))).includes(pin + '.json'));
     const { main } = await import(${url('packages/telescope-cli/src/cli.mts')}); let output = '';
-    assert.equal(await main(['new-object', 'missing.json', '--json'], undefined, text => { output += text; }), 1);
+    assert.equal(await main(['new-object', 'missing.json', '--json'], undefined, text => { output += text; }), 2);
     assert.match(JSON.parse(output).error, /this command needs a css\\.earth checkout: pass --workspace/);
+    assert.match(JSON.parse(output).error, /new-object.*site records/u);
+    assert.match(JSON.parse(output).error, /telescope export RESULT --output html/u);
+    assert.equal(JSON.parse(output).exitCode, 2);
+    const { DRAFT_ROUTES } = await import(${url('packages/telescope-cli/src/new-object/drafts.mts')});
+    for (const args of [
+      ['new-object', 'missing.json', '--check'], ['new-object', 'missing.json', '--bake'],
+      ['new-object', 'missing.json', '--skip-existing'], ['new-object', '--bake', 'eris'],
+      ['new-object', '--refresh', 'eris'],
+      ...Object.keys(DRAFT_ROUTES).map(route => ['new-object', '--from-' + route, 'missing', '--out', 'draft.json']),
+    ]) {
+      output = '';
+      assert.equal(await main([...args, '--json'], undefined, text => { output += text; }), 2, args.join(' '));
+      assert.match(JSON.parse(output).error, /telescope export RESULT --output html/u);
+    }
+    for (const [file, name] of [
+      ['f16-cartesian-grid.mts', 'preparePhysicalCartesianVolume'],
+      ['f16-spherical-grid.mts', 'preparePhysicalSphericalVolume'],
+    ]) {
+      const module = await import(${url('packages/telescope-cli/src/families/f16/')} + '/' + file);
+      await assert.rejects(module[name]({}), error => error instanceof TypeError
+        && /site records|prepared assets/u.test(error.message)
+        && /telescope export RESULT --output html/u.test(error.message));
+    }
+    const { executeFamilyOperation } = await import(${url('packages/telescope-cli/src/family-operation.mts')});
+    for (const operationId of ['physical-grid-prepare-volume', 'spherical-grid-prepare-volume']) {
+      await assert.rejects(executeFamilyOperation('missing.json', { operationId }, 'volume'), error => error instanceof TypeError
+        && /telescope export RESULT --output html/u.test(error.message));
+    }
     console.log('STANDALONE_PATHS_OK');
   `;
   try {
@@ -55,6 +83,15 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     const child = spawnSync(process.execPath, ['--import', resolve(checkout, 'packages/core/src/node/register-vite-suffix.mts'), '--input-type=module', '-e', script], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
     assert.equal(child.status, 0, child.stderr); assert.match(child.stdout, /STANDALONE_PATHS_OK/u);
     assert.deepEqual((await readdir(directory)).sort(), ['user']);
+    for (const json of [false, true]) {
+      const refused = spawnSync(process.execPath, [resolve(checkout, 'packages/telescope-cli/src/bin.mts'),
+        'new-object', 'missing.json', ...(json ? ['--json'] : [])], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
+      assert.equal(refused.status, 2, refused.stderr);
+      assert.match(refused.stderr, /new-object.*site records/u);
+      assert.match(refused.stderr, /telescope export RESULT --output html/u);
+      if (json) assert.equal(JSON.parse(refused.stdout).exitCode, 2);
+      else assert.equal(refused.stdout, '');
+    }
     const invalid = spawnSync(process.execPath, [resolve(checkout, 'packages/telescope-cli/run-typed-module.mjs'), resolve(checkout, 'packages/telescope-cli/src/cli.mts'),
       'explore', 'eris', '--workspace', '--json'], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
     assert.equal(invalid.status, 2, invalid.stderr); assert.match(JSON.parse(invalid.stdout).error, /--workspace requires a path/u);

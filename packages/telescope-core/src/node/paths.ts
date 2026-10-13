@@ -69,8 +69,8 @@ export function configureWorkspace(args: readonly string[]): string[] {
   const selected = workspaceArguments(args); WORKSPACE = selected.workspace;
   return selected.args;
 }
-export function requireWorkspace(root = WORKSPACE): string {
-  if (root === undefined) throw new Error(WORKSPACE_REQUIRED);
+export function requireWorkspace(root = WORKSPACE, operation = 'This command writes css.earth site records or bakes prepared assets.'): string {
+  if (root === undefined) throw new TypeError(`${operation} ${WORKSPACE_REQUIRED} PATH, set CSSEARTH_WORKSPACE, or run the checkout's own sources. For standalone HTML, use telescope export RESULT --output html.`);
   return root;
 }
 

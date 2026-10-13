@@ -223,6 +223,8 @@ fulfilled, unresolved or refused verdict.
 Exit codes: 0 exploration/retrieval completed or request fulfilled, 1 operation failed, 2 invalid arguments,
 3 no retrievable choice or unresolved request, 4 refused request.
 The npm command accepts --workspace PATH (or CSSEARTH_WORKSPACE) for a css.earth science checkout.
+new-object (including every drafter, --check and --bake) and volume preparation require that checkout.
+Standalone alternative: telescope export RESULT --output html.
 Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/README.md
 Issues: https://github.com/layoutit/css.earth/issues
 `;

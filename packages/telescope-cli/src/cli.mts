@@ -250,7 +250,7 @@ export async function main(args: readonly string[], root: string | undefined = u
         const result=options.product?await matchProductSoftware(options.product):await searchAscl(options.query!);
         text=options.json?`${JSON.stringify(result)}\n`:formatAscl(result);code=result.mode==='query'&&!result.entries?.length?3:0;
       }else if(options.command==='new-object'){
-        ({text,code}=await runWorkspaceCommand(requireWorkspace(WORKSPACE ?? (root === USER_ROOT ? undefined : root)),NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
+        ({text,code}=await runWorkspaceCommand(requireWorkspace(WORKSPACE ?? (root === USER_ROOT ? undefined : root),'new-object drafts specs, writes css.earth site records, and optionally bakes them.'),NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
       }else if(options.command==='papers'){
         const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.targets.length>1){

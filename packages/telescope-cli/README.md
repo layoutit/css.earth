@@ -12,6 +12,8 @@ Paths are owned by the library:
 
 With a workspace, target names and site records still come from `src/objects` and `src/sources`. Existing toolchains and caches in the checkout are not migrated automatically; install the pins into the selected user root.
 
+Without a workspace, `new-object` (every drafter, `SPEC.json`, `--check`, `--bake` and `--skip-existing`) and physical volume preparation exit 2 before writing site records. The standalone alternative is `telescope export RESULT --output html`.
+
 ## Setup
 
 Use Node 22.18+ (22.x) or Node 24+. No system Python or micromamba is required: installers obtain Python from conda-forge. The telescope uses `CSSEARTH_TELESCOPE_MICROMAMBA` first, then a micromamba on `PATH`, otherwise downloads official micromamba release 2.9.0-0 into the user root and checks its published checksum in memory. Download progress goes to stderr; interrupted transfers restart cleanly when the same command is retried with network access.
