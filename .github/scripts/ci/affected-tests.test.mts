@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { existsSync, globSync, readdirSync, readFileSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, globSync, readFileSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { parse } from 'yaml';
 import { resolve, dirname, matchesGlob } from 'node:path';
+import { workspacePackageDirectories } from './workspace-packages.mts';
 import { affectedTests, pinnedSourceOwners, importsChangedObjects, TOOL_OBJECT_TEST_LIMIT, testLaneFiles, testOwners } from './affected-tests.mts';
 
 const packages = [
@@ -84,9 +85,9 @@ test('foreign package tests follow imports without a handwritten owner map', () 
 
 test('real-tree discovery keeps offline tools bounded for objects and runs them for bake changes', () => {
   const root = resolve(import.meta.dirname, '../../..');
-  const workspaces = readdirSync(resolve(root, 'packages'), { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => {
-    const manifest = JSON.parse(readFileSync(resolve(root, 'packages', entry.name, 'package.json'), 'utf8'));
-    return { directory: entry.name, name: String(manifest.name), dependencies: ['dependencies', 'devDependencies', 'peerDependencies']
+  const workspaces = workspacePackageDirectories(root).map(directory => {
+    const manifest = JSON.parse(readFileSync(resolve(root, 'packages', directory, 'package.json'), 'utf8'));
+    return { directory, name: String(manifest.name), dependencies: ['dependencies', 'devDependencies', 'peerDependencies']
       .flatMap(field => Object.keys(manifest[field] ?? {})).filter(name => name.startsWith('@cssearth/')) };
   });
   const discovered = testOwners(root);

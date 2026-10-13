@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { statSync, readFileSync } from 'node:fs';
 import { resolve, matchesGlob } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
@@ -113,7 +113,7 @@ export function checkStaleReferences(root: string): string[] {
     { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).split('\0').filter(Boolean);
   const tracked = new Set(execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).split('\0'));
   return [...new Set(paths)].flatMap(path => {
-    if (!existsSync(resolve(root, path))) return [];
+    if (!statSync(resolve(root, path), { throwIfNoEntry: false })?.isFile()) return [];
     const bytes = readFileSync(resolve(root, path));
     const workflow = /^\.github\/workflows\/.*\.ya?ml$/u.test(path)
       ? workflowCommandPaths(bytes.toString()).filter(target => !workflowPathTracked(target, tracked)).map(target => `${path}: workflow command path is not tracked: ${target}`) : [];

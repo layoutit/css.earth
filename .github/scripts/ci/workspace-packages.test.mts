@@ -17,6 +17,7 @@ test('workspace discovery and the build plan ignore restored outputs without a m
     dependencies: { '@cssearth/core': 'workspace:*' },
   }));
   writeFileSync(resolve(root, 'packages/not-a-directory'), 'ignored');
+  mkdirSync(resolve(root, 'packages/directory-manifest/package.json'), { recursive: true });
 
   assert.deepEqual(workspacePackageDirectories(root), ['current']);
   assert.deepEqual(readWorkspaces(root), [{ directory: 'current', name: '@cssearth/current', dependencies: ['@cssearth/core'] }]);

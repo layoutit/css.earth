@@ -44,6 +44,7 @@
   "scripts": {
     "build": "node build.mts",
     "prepack": "npm run build && node prepack.mts",
+    "verify:pack": "node verify-pack.mts",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
   "dependencies": {

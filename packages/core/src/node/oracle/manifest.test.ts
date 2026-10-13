@@ -11,6 +11,8 @@ test('owner setup manifests register generators and refuse escaped paths or dupl
   const metadata = resolve(owner, 'package.json'), manifest = resolve(owner, 'oracle.json');
   try {
     await mkdir(owner, { recursive: true });
+    await mkdir(resolve(root, 'packages/removed/dist'), { recursive: true });
+    await mkdir(resolve(root, 'packages/directory-manifest/package.json'), { recursive: true });
     await writeFile(metadata, JSON.stringify({ oracleManifest: 'oracle.json' }));
     await writeFile(manifest, JSON.stringify({ oracles: { example: 'packages/owner/generator.py' }, setup: { install: 'packages/owner/setup.mts' } }));
     assert.deepEqual(readOracleSetupManifest(root), { oracles: { example: 'packages/owner/generator.py' }, setup: { install: 'packages/owner/setup.mts' } });

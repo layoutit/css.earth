@@ -1,13 +1,14 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve, relative, isAbsolute } from 'node:path';
+import { workspacePackageDirectories } from '../workspace-packages.mts';
 import { requireRecord, requireString } from '../../validate.ts';
 
 /** Workspace owners declare oracle generators and optional setup commands in package metadata. */
 export function readOracleSetupManifest(root: string) {
   const oracles: Record<string, string> = {}, setup: Record<string, string> = {};
   const packages = resolve(root, 'packages');
-  for (const owner of readdirSync(packages, { withFileTypes: true }).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
-    const directory = resolve(packages, owner.name);
+  for (const owner of workspacePackageDirectories(root)) {
+    const directory = resolve(packages, owner);
     const metadata = requireRecord(JSON.parse(readFileSync(resolve(directory, 'package.json'), 'utf8')));
     if (metadata.oracleManifest === undefined) continue;
     const file = resolve(directory, requireString(metadata.oracleManifest));

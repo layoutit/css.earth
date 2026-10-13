@@ -274,3 +274,16 @@ Renderer runtime exceptions are file-scoped in [the architecture rule](../../.gi
 The published JavaScript and declarations bundle these renderer consumers; the renderer is a checkout development dependency. F16 validation uses objects contracts.
 
 Sphere export imports the built `@cssearth/telescope/sphere/lane` entry from `dist`. Without a workspace, it reads the compressed sphere bank shipped at build time, including shared geometry, raster layouts, styles and physical frames. With a workspace, it loads that checkout's generated solar geometry. The lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope build` before exporting again.
+
+## Maintainer packaging verification
+
+The unit lane checks bundled dependency namespaces, runtime dependency declarations, data exclusions and public export structure offline. The real consumer install is a separate integration gate, `verify:pack`; it runs `npm pack` with the normal build/prepack lifecycle, checks the 15 MB tarball budget and contents, installs the tarball, compiles public imports, and runs help plus FITS image/HTML exports outside the checkout. Dependency installation may need registry access. It does not run during unit tests or recursively from `prepack`.
+
+From a clean checkout, prepare the inputs and run the gate:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm setup:prepared
+pnpm prepare:inputs
+pnpm --filter @cssearth/telescope verify:pack
+```

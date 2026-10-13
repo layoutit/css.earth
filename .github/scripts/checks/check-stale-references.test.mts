@@ -49,6 +49,21 @@ test('repository mutation: an untracked stale manifest is red and removing it is
     assert.deepEqual(checkStaleReferences(root), []);
   } finally { rmSync(root, {recursive: true, force: true}); }
 });
+test('indexed files replaced by restored directories are skipped without hiding live stale files', () => {
+  const root = mkdtempSync(join(tmpdir(), 'stale-directory-'));
+  try {
+    execFileSync('git', ['init', '-q', root]);
+    const old = join(root, 'packages/removed');
+    mkdirSync(join(root, 'packages'), { recursive: true });
+    writeFileSync(old, 'old package entry');
+    execFileSync('git', ['add', '.'], { cwd: root });
+    rmSync(old);
+    mkdirSync(join(old, 'dist'), { recursive: true });
+    assert.deepEqual(checkStaleReferences(root), []);
+    writeFileSync(join(root, 'live.json'), '{"generator":"tools/retired.mts"}');
+    assert.equal(checkStaleReferences(root).length, 1);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
 test('every-PR contract lane executes the guard and its mutation tests', () => {
   const workflow = readFileSync(new URL('../../workflows/universe.yml', import.meta.url), 'utf8');
   const lint = workflow.split('\n  lint:')[1]?.split('\n  typecheck:')[0];

@@ -6,7 +6,8 @@
   "include": [
     "src/**/*.mts",
     "build.mts",
-    "prepack.mts"
+    "prepack.mts",
+    "verify-pack.mts"
   ],
   "exclude": []
 }
