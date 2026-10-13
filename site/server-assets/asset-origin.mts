@@ -6,6 +6,7 @@ import { readPreparedRuntimeText, requireInventory } from '@cssearth/objects/nod
 import { preparedAssetGroup, preparedAssetGroupFile, resolvePreparedAssetUrl } from '@cssearth/renderer';
 
 import { isRecord } from '@cssearth/core';
+import { worldBillboardInputs } from './world-billboard-inputs.mts';
 
 
 /** Build-time-only asset origin: unset in local dev and CI, so `pnpm build` reproduces
@@ -180,13 +181,22 @@ export async function resolveSceneAddressesDeep<T>(value: T, root = process.cwd(
 // does this for several rows), so whitespace is allowed around the address but excluded from it.
 const CSS_SCENE_URL = /url\(\s*(["']?)(\/scenes\/[a-z][a-z0-9-]*\/[^\s"')]+)\1\s*\)/gu;
 
+/** The literal addresses the CSS resolver actually consumes, shared with the incremental input collector. */
+export function sceneCssInputs(css: string): readonly { address: string; owner: string }[] {
+  return [...css.matchAll(CSS_SCENE_URL)].map(match => {
+    const address = match[2]!, owner = /^\/scenes\/([a-z][a-z0-9-]*)\//u.exec(address)?.[1];
+    if (!owner) throw new TypeError('Invalid scene CSS address.');
+    return { address, owner };
+  });
+}
+
 /** Rewrites literal `url(/scenes/<id>/<file>)` references in authored CSS text (loaded
  * `?inline` and inlined verbatim into the page) into their published origin form. */
 export async function rewriteSceneCss(css: string, root = process.cwd()): Promise<string> {
   if (!assetOrigin()) return css;
-  const matches = [...css.matchAll(CSS_SCENE_URL)];
-  if (!matches.length) return css;
-  const resolved = await Promise.all(matches.map(match => resolveBuildSceneAddress(match[2]!, root)));
+  const inputs = sceneCssInputs(css);
+  if (!inputs.length) return css;
+  const resolved = await Promise.all(inputs.map(input => resolveBuildSceneAddress(input.address, root)));
   let index = 0;
   return css.replace(CSS_SCENE_URL, (_match, quote: string) => `url(${quote}${resolved[index++]}${quote})`);
 }
@@ -196,21 +206,11 @@ export async function rewriteSceneCss(css: string, root = process.cwd()): Promis
  * no `/scenes`: the build writes the bucket's address for each. No-op when unset. */
 export async function resolveWorldBillboards(text: string, root = process.cwd()): Promise<string> {
   if (!assetOrigin()) return text;
-  const file = JSON.parse(text) as { bodies?: { id?: unknown; billboard?: unknown; plainDot?: unknown } };
-  const ids = file.bodies?.id, billboards = file.bodies?.billboard;
-  // A plain dot never draws its photograph (application-world-visibility.mts), so it carries no address: each one is a
-  // content hash that does not compress (134 KB of the startup summary for 2,392 dots, 2026-10-01).
-  const plain = Array.isArray(file.bodies?.plainDot) ? file.bodies.plainDot : [];
-  // A system none of whose bodies has a photograph writes no billboard column.
-  if (billboards === undefined) return text;
-  if (!Array.isArray(ids) || !Array.isArray(billboards) || ids.length !== billboards.length) {
-    throw new TypeError('A world file names its bodies and their billboards column by column, of equal length.');
-  }
-  file.bodies!.billboard = await Promise.all(billboards.map(async (billboard: unknown, index) => {
-    if (billboard === null || plain[index] === true) return billboard;
-    const drawn = billboard as { url?: unknown }, id = String(ids[index]);
-    const address = typeof drawn.url === 'string' ? drawn.url : `/scenes/${id}/${id}-billboard.webp`;
-    return { ...drawn, url: await resolveBuildSceneAddress(address, root) };
+  const file: unknown = JSON.parse(text);
+  const plan = worldBillboardInputs(file);
+  if (!plan) return text;
+  await Promise.all(plan.inputs.map(async ({ index, billboard, address }) => {
+    plan.billboards[index] = { ...billboard, url: await resolveBuildSceneAddress(address, root) };
   }));
   return JSON.stringify(file);
 }

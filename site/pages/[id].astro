@@ -1,12 +1,13 @@
 ---
+import { incrementalPaths } from '../server/incremental-paths.mts';
 import ObjectPage from '../components/ObjectPage.astro';
 import { PAGES } from '../directory/objects.mts';
 import { builtObjectPages } from '../server/built-pages.mts';
-export function getStaticPaths() {
+export async function getStaticPaths() {
   // Every object has its page, `/<id>/`, which mounts its scene. An object seen from inside has a page too: the world
   // host's scene at that zoom, with that object selected.
   // A system is an object with a page of its own, which mounts its host's scene out to its members.
-  return builtObjectPages(PAGES.map(page => ({ params: { id: page.id }, props: { sceneId: page.sceneId ?? page.id } })), PAGES);
+  return incrementalPaths(builtObjectPages(PAGES.map(page => ({ params: { id: page.id }, props: { sceneId: page.sceneId ?? page.id } })), PAGES));
 }
 ---
 <ObjectPage objectId={Astro.props.sceneId} pageId={Astro.params.id!} />
