@@ -48,17 +48,17 @@ test('public VO requests keep valid snapshot pins when one raw response has diff
     const files = () => readdir(directory);
     const firstFiles = await files(), before = await stat(first.metadata[1]!.path);
     const repeated = await explore(snapshots[0]!);
-    assert.equal(repeated.metadata[1]!.path, first.metadata[1]!.path);
-    assert.deepEqual(await files(), firstFiles);
+    assert.notEqual(repeated.metadata[1]!.path, first.metadata[1]!.path);
+    assert.equal((await files()).length, firstFiles.length + 1);
     assert.equal((await stat(first.metadata[1]!.path)).mtimeMs, before.mtimeMs);
     const second = await explore(snapshots[1]!);
     assert.equal(await readFile(first.metadata[1]!.path, 'utf8'), canonical(snapshots[0]!));
     // Equal-size URL changes must preserve bytes too; size-only checks cannot detect them.
     assert.equal(Buffer.byteLength(canonical(snapshots[0]!)), Buffer.byteLength(canonical(snapshots[2]!)));
     const concurrent = await Promise.all([explore(snapshots[2]!), explore(snapshots[0]!)]);
-    const products = [first, second, ...concurrent];
-    const expected = [snapshots[0]!, snapshots[1]!, snapshots[2]!, snapshots[0]!];
-    assert.equal(new Set(products.map(product => product.metadata[1]!.path)).size, 3);
+    const products = [first, repeated, second, ...concurrent];
+    const expected = [snapshots[0]!, snapshots[0]!, snapshots[1]!, snapshots[2]!, snapshots[0]!];
+    assert.equal(new Set(products.map(product => product.metadata[1]!.path)).size, 5);
     const many = { ...snapshots[0]!, query: 'many observations', response: { ...response, effectiveUrl: 'https://example.org/a',
       rows: Array.from({ length: 5 }, (_, i) => ({ ...response.rows[0]!, obs_id: `image-${i}` })), times: Array.from({ length: 5 }, () => ({})) } };
     const beforeMany = await files();
@@ -69,7 +69,8 @@ test('public VO requests keep valid snapshot pins when one raw response has diff
     assert.equal((await files()).length, beforeMany.length + 1);
     const afterMany = await files();
     await loadVoInputs(root, request, catalogue, undefined, async () => many, {}, undefined, undefined, profile.service);
-    assert.deepEqual(await files(), afterMany);
+    assert.equal((await files()).length, afterMany.length + 1);
+    const afterRepeatedMany = await files();
     // Refusal both before and after URL/decoder selection leaves no discovery evidence.
     const observation = inputs.records[0]!.observation;
     for (const refused of [
@@ -78,7 +79,7 @@ test('public VO requests keep valid snapshot pins when one raw response has diff
     ]) {
       const plan = await planAccess(root, refused, { ...many, query: 'refused snapshot' }, request);
       assert.equal(plan.products.length, 0);
-      assert.deepEqual(await files(), afterMany);
+      assert.deepEqual(await files(), afterRepeatedMany);
     }
     for (const [index, product] of products.entries()) {
       for (const pin of product.metadata) assert.equal((await stat(pin.path)).size, pin.bytes);

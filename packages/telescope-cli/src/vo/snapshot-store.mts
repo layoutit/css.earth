@@ -1,7 +1,7 @@
 /** Publish complete immutable discovery evidence only when a plan retains products. */
-import { createHash, randomUUID } from 'node:crypto';
-import { link, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { randomBytes, randomUUID } from 'node:crypto';
+import { link, mkdir, rm, writeFile } from 'node:fs/promises';
+import { basename, resolve } from 'node:path';
 import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { canonical, type DiscoverySnapshot, type Pin } from '@cssearth/objects';
 
@@ -15,28 +15,24 @@ export function snapshotPublisher(snapshot: DiscoverySnapshot): SnapshotPublishe
 async function publish(snapshot: DiscoverySnapshot): Promise<Pin> {
   const text = canonical(snapshot), bytes = Buffer.byteLength(text);
   const directory = resolve(USER_ROOT, 'output/telescopes/vo/metadata');
-  const path = resolve(directory, `${createHash('sha512').update(text).digest('hex')}.snapshot.json`);
-  const identical = async () => {
-    const existing = await readFile(path, 'utf8').catch(error => {
-      if (error.code === 'ENOENT') return null;
-      throw error;
-    });
-    if (existing === null) return false;
-    if (existing !== text) throw new Error('Stored discovery snapshot differs from its content address.');
-    return true;
-  };
-  if (await identical()) return { path, bytes };
+  const response = basename(snapshot.response.raw.path).replace(/\.xml$/iu, '')
+    .replace(/[^a-z0-9_-]+/giu, '-').replace(/^-+|-+$/gu, '').slice(0, 120) || 'response';
+  const timestamp = new Date().toISOString().replace(/[-:]/gu, '').replace(/\.\d{3}Z$/u, 'Z');
   await mkdir(directory, { recursive: true });
   const temporary = resolve(directory, `${randomUUID()}.pending`);
   try {
     await writeFile(temporary, text, { flag: 'wx' });
-    // Exclusive linking exposes complete bytes atomically, including between processes.
-    await link(temporary, path).catch(async error => {
-      if (error.code !== 'EEXIST') throw error;
-      if (!await identical()) throw new Error('Discovery snapshot disappeared during publication.');
-    });
+    for (;;) {
+      const path = resolve(directory, `${response}-${timestamp}-${randomBytes(6).toString('hex')}.snapshot.json`);
+      try {
+        // Exclusive linking exposes complete bytes atomically, including between processes.
+        await link(temporary, path);
+        return { path, bytes };
+      } catch (error) {
+        if (!(error instanceof Error && 'code' in error && error.code === 'EEXIST')) throw error;
+      }
+    }
   } finally {
     await rm(temporary, { force: true });
   }
-  return { path, bytes };
 }
