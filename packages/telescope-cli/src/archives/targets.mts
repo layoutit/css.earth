@@ -36,7 +36,8 @@ export function matchNumberedTarget(target: string, shipped: ReadonlySet<string>
 }
 
 /** A shipped object with the names a proposer might have used and, for what does not move, where it is on the sky. */
-export interface NamedShippedObject { readonly id: string; readonly names: readonly string[]; readonly position?: { readonly raDeg: number; readonly decDeg: number; readonly radiusDeg: number } }
+export type { NamedShippedObject } from './site-target-contracts.mts';
+import type { NamedShippedObject } from './site-target-contracts.mts';
 
 /** Every object package with its id and display name, and a position for what does not move: a star within half an
  * arcminute, a nebula within a sixth of a degree of the centre its recipe records. `read` is how the archive reads a body

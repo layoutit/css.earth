@@ -23,7 +23,7 @@ test('MAST copies a size-validated legacy checkout cache into user-owned state w
   const { mkdtemp, mkdir, writeFile, readFile, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
   const { resolve } = await import('node:path');
-  const { configureWorkspace, WORKSPACE } = await import('./paths.js');
+  const { configureWorkspace, WORKSPACE } = await import('./paths/index.js');
   const { MAST_CACHE, mastFile } = await import('./mast.js');
   const root = await mkdtemp(resolve(tmpdir(), 'legacy-mast-')), previous = WORKSPACE, name = `legacy-mast-${process.pid}`;
   const directory = resolve(MAST_CACHE, name);

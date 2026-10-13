@@ -38,7 +38,8 @@ export const OBJECT_RADIUS_DEGREES = 0.25;
 
 /** A shipped object the ledger searches for. A moving target has no fixed position and is found by the names the archive gives
  * it; everything else is found by a box about the position this repository states. */
-export interface ShippedObject { readonly id: string; readonly raDeg?: number; readonly decDeg?: number; readonly source: string }
+export type { ChandraObject as ShippedObject } from '../site-target-contracts.mts';
+import type { ChandraObject as ShippedObject } from '../site-target-contracts.mts';
 /** The archive's own names for a shipped Solar System body, which is caught by name and never by position. They are data beside the
  * programs, because this package names no body. */
 export const CHANDRA_MOVING_TARGETS = 'packages/telescope-cli/src/archives/chandra/moving-targets.json';

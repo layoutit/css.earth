@@ -5,10 +5,10 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { requireRecord } from '@cssearth/core';
-import { CLI_PACKAGE_ROOT } from './paths.mts';
-import { parseCli } from './cli-arguments.mts';
-import { writeDrafts } from './new-object/drafts.mts';
-import { GAIA_TAP, type Archive } from './new-object/archives/archives.mts';
+import { CLI_PACKAGE_ROOT } from '../paths.mts';
+import { parseCli } from '../cli-arguments.mts';
+import { writeDrafts } from '../new-object/drafts.mts';
+import { GAIA_TAP, type Archive } from '../new-object/archives/archives.mts';
 
 const root = resolve(CLI_PACKAGE_ROOT, '../..');
 const read = (path: string) => requireRecord(JSON.parse(readFileSync(path, 'utf8')), path);

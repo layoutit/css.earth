@@ -8,7 +8,7 @@ import { loadSolarGeometry } from '@cssearth/bake/objects/scene';
 import { inspectMeasurementSphere } from './sphere-inputs.mts';
 import { sphereDictionary, SPHERE_ID_TOKEN } from './sphere-bank-codec.mts';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
-import { requirePackageInput } from '../package-inputs.mts';
+import { requirePackageInput } from '../package/package-inputs.mts';
 
 export async function prepareSpherePackage(root: string, destination: string): Promise<void> {
   await requirePackageInput(resolve(root, 'src/platform/solar-geometry.mts'), 'pnpm prepare:inputs');

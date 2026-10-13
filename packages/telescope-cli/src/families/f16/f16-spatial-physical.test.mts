@@ -1,4 +1,4 @@
-import '../../test-user-root.mts';
+import '../../test-support/index.mts';
 import assert from'node:assert/strict';import{sourceTest}from'@cssearth/objects/node/source-test';const test=sourceTest();import{resolve}from'node:path';import{describeSpatialPhysicalObject,F16_SPATIAL_PHYSICAL_HANDLER,selectSpatialComponents}from'./f16-spatial-physical.mts';
 import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 const root=requireWorkspace();

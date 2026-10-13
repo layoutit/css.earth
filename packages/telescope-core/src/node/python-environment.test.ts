@@ -4,7 +4,7 @@ import { spawn as realSpawn, type SpawnOptions } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test, { mock } from 'node:test';
-import { USER_ROOT, telescopePythonEnvironment } from './paths.js';
+import { USER_ROOT, telescopePythonEnvironment } from './paths/index.js';
 
 // Execute a real child in place of Python, so its environment and filesystem side effects are observable.
 const probe = `const fs = require('node:fs'); process.stdin.resume(); process.stdin.on('end', () => {

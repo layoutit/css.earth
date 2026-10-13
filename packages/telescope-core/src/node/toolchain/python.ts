@@ -1,6 +1,6 @@
 /** Inline Python under a pinned toolchain: the archive reducers' process boundary. The run keeps its whole log, and a
  * resident-memory ceiling kills the run, not the machine. */
-import { telescopePythonEnvironment } from '../paths.js';
+import { telescopePythonEnvironment } from '../paths/index.js';
 import { spawn, spawnSync } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
 

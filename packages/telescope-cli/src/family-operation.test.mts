@@ -1,4 +1,4 @@
-import './test-user-root.mts';
+import './test-support/index.mts';
 import assert from'node:assert/strict';
 import { test as nodeTest } from 'node:test';
 import{sourceTest}from'@cssearth/objects/node/source-test';const test=sourceTest();

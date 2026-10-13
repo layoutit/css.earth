@@ -1,4 +1,4 @@
-import './test-user-root.mts';
+import './test-support/index.mts';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { mkdtemp, rm } from 'node:fs/promises';
@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { prepareStandaloneData } from './standalone-data.test-support.mts';
+import { prepareStandaloneData } from './test-support/standalone-data.test-support.mts';
 
 const checkout = requireWorkspace();
 test('offline shipped discovery disables workspace reductions and qualification refuses them before IO', async t => {

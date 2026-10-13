@@ -5,7 +5,7 @@ import { resolveInstalledToolchain } from './resolver.js';
 import { runToolchainProcess } from './process.js';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { USER_ROOT } from '../paths.js';
+import { USER_ROOT } from '../paths/index.js';
 import { assertInstalledMarker, readToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 

@@ -2,7 +2,7 @@
 import { mkdtempSync, rmSync } from 'node:fs';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { resolve } from 'node:path';
-import { SCRATCH_ROOT, telescopePythonEnvironment } from '../paths.js';
+import { SCRATCH_ROOT, telescopePythonEnvironment } from '../paths/index.js';
 import { runToolchainProcess } from './process.js';
 import type { ToolchainPins } from './marker.js';
 

@@ -9,7 +9,7 @@ import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { TOOLCHAINS, USER_ROOT } from './paths.js';
+import { TOOLCHAINS, USER_ROOT } from './paths/index.js';
 import { assertInstalledMarker, installedMarkerIssue, readToolchainPins } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 

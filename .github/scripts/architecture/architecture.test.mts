@@ -368,7 +368,7 @@ test('retired root tests and dependent integration owners fail without a baselin
     assert.equal(broken(), true, 'a tracked root tests file is red');
     assert.equal(isBroken(repositoryFindings(root, repositoryFiles(root), rules.filter(rule => rule.id !== 'retired-folders'))), false, 'disabling retirement makes the mutation green');
     rmSync(join(root, 'tests'), { recursive: true });
-    assert.equal(broken(), true, 'a tracked tests file missing from disk is still red');
+    assert.equal(broken(), false, 'a pending worktree deletion is no longer a checkout owner');
     execFileSync('git', ['rm', '-f', 'tests/new.mts'], { cwd: root });
     mkdirSync(join(root, 'tests'));
     assert.equal(broken(), true, 'an empty root tests directory is red too');

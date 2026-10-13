@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup';
 import { fileURLToPath } from 'node:url';
-import { packageBundlePlugins } from './src/package-bundle.mts';
+import { packageBundlePlugins } from './src/package/package-bundle.mts';
 
 /** The public sphere owner bundles the same workspace sources as the standalone CLI. */
 export default defineConfig({

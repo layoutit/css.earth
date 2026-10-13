@@ -2,7 +2,7 @@
 import { constants, copyFileSync, lstatSync, mkdirSync, readFileSync, readdirSync, readlinkSync, realpathSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs';
 import { homedir, tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
-import { CLI_PACKAGE_ROOT } from './paths.mts';
+import { CLI_PACKAGE_ROOT } from '../paths.mts';
 
 export const RECEIPT = '.telescope-install.json';
 const OWNER = '@cssearth/telescope';

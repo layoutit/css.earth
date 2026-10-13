@@ -1,5 +1,5 @@
 /** The pinned pyuvdata boundary for UVFITS visibilities, run in the astroquery toolchain's Python. */
-import { telescopePythonEnvironment } from './paths.js';
+import { telescopePythonEnvironment } from './paths/index.js';
 import { spawn } from 'node:child_process';
 import { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsAnswer, parsePyuvdataUvfitsRequest, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from '@cssearth/objects';
 import { astroqueryToolchain } from './toolchain/toolchain.js';

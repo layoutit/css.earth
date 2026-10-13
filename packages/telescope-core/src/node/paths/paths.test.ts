@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { telescopeUserRoot, telescopeWorkspace, workspaceArguments, requireWorkspace, PACKAGE_ROOT } from './paths.js';
+import { telescopeUserRoot, telescopeWorkspace, workspaceArguments, requireWorkspace, PACKAGE_ROOT } from './index.js';
 
 test('user state defaults to the platform cache and an explicit home wins', () => {
   assert.equal(telescopeUserRoot({}, 'darwin', '/home/test'), '/home/test/Library/Caches/cssearth-telescope');

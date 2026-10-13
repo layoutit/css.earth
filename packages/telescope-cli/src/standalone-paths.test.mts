@@ -1,4 +1,4 @@
-import './test-user-root.mts';
+import './test-support/index.mts';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
@@ -8,7 +8,7 @@ import test from 'node:test';
 import { pathToFileURL } from 'node:url';
 import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { loadTargetCatalogueSnapshot } from './observation-query/query.mts';
-import { prepareStandaloneData } from './standalone-data.test-support.mts';
+import { prepareStandaloneData } from './test-support/standalone-data.test-support.mts';
 
 const checkout = requireWorkspace();
 test('explore paths, archive answers and every toolchain stay outside the checkout without a workspace', async t => {

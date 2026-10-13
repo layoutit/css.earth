@@ -1,5 +1,5 @@
 /** The only process boundary into Peppi and pdr. Exact discovery cannot truncate; decoding loads every advertised data object. */
-import { telescopePythonEnvironment } from './paths.js';
+import { telescopePythonEnvironment } from './paths/index.js';
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { pdsToolchain } from './toolchain/pds.js';

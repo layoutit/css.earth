@@ -1,7 +1,7 @@
 /** The telescope command line: every command's arguments, parsed and checked before anything runs. */
 import { toolchainNames, verificationToolchainNames } from './toolchains/astronomy-toolchains.mts';
 import { resolve } from 'node:path';
-import { parseSkillArguments, type SkillOptions } from './skill-install.mts';
+import { parseSkillArguments, type SkillOptions } from './skill/index.mts';
 import { parseExplorationArguments, type ExplorationRequest } from './exploration.mts';
 import { validateOutputRequest, type OutputRequest } from './delivery/outputs.mts';
 import { WWT_IMAGE_MAX_LEVEL } from './wwt/wwt-image.mts';

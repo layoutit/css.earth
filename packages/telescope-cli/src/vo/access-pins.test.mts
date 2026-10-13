@@ -1,4 +1,4 @@
-import '../test-user-root.mts';
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, stat, writeFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

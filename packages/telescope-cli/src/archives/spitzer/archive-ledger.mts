@@ -61,15 +61,8 @@ export const SPITZER_MODES: readonly { readonly mode: string; readonly records: 
   { mode: 'MIPS IER', records: 'MIPS data taken on an engineering request', tool: null },
 ];
 
-export interface ShippedObject {
-  readonly id: string;
-  readonly name: string;
-  readonly classification: string;
-  /** How this object is asked for, and why, when it cannot be. */
-  readonly query: { readonly kind: 'naif'; readonly naifId: number }
-    | { readonly kind: 'position'; readonly raDeg: number; readonly decDeg: number; readonly radiusDeg: number }
-    | { readonly kind: 'none'; readonly reason: string };
-}
+export type { SpitzerObject as ShippedObject } from '../site-target-contracts.mts';
+import type { SpitzerObject as ShippedObject } from '../site-target-contracts.mts';
 
 const readJson = async (path: string): Promise<unknown> => readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, () => null);
 /** The NAIF id of a body from the Horizons code its package carries, or null with the reason it has none. A bare integer is

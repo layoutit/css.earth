@@ -1,4 +1,4 @@
-import './test-user-root.mts';
+import './test-support/index.mts';
 import { loadQualifiedObservations, rememberQualification, qualificationDirectory } from './qualification/qualified-observations.mts';
 import { USER_ROOT } from '@cssearth/telescope-core/node';
 import assert from 'node:assert/strict';

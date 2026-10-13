@@ -3,7 +3,7 @@ import { mkdtempSync, mkdirSync, lstatSync, readFileSync, readlinkSync, readdirS
 import { tmpdir } from 'node:os';
 import { join, relative } from 'node:path';
 import { test, type TestContext } from 'node:test';
-import { manageSkill, parseSkillArguments, RECEIPT, skillDestinations } from './skill-install.mts';
+import { manageSkill, parseSkillArguments, RECEIPT, skillDestinations } from './index.mts';
 
 function sandbox(t: TestContext) {
   const home = mkdtempSync(join(tmpdir(), 'telescope-skill-'));

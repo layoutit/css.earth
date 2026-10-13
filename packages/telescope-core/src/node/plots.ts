@@ -1,5 +1,5 @@
 /** Astropy owns scientific serialization and axes; Matplotlib owns static rendering. */
-import { telescopePythonEnvironment } from './paths.js';
+import { telescopePythonEnvironment } from './paths/index.js';
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import test from 'node:test';
 import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { prepareSpherePackage } from './sphere/sphere-package.mts';
+import { prepareSpherePackage } from '../sphere/sphere-package.mts';
 
 test('pack-data preparation names the missing solar input and its preparation command', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'telescope-unprepared-'));

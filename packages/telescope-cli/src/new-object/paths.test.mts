@@ -1,4 +1,4 @@
-import '../test-user-root.mts';
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { mkdtemp, rm, symlink } from 'node:fs/promises';

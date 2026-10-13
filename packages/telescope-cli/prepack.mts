@@ -1,8 +1,8 @@
+import { publishDirectory } from './src/package/index.mts';
+import { preparePackageData, validatePublishPackage } from './src/package/package-data.mts';
 import { mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { preparePackageData, validatePublishPackage } from './src/package-data.mts';
-import { publishDirectory } from './src/package-publish.mts';
 
 const packageRoot = fileURLToPath(new URL('.', import.meta.url));
 const root = fileURLToPath(new URL('../..', import.meta.url));

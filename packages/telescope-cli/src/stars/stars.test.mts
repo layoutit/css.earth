@@ -3,7 +3,7 @@
  * API's answers (OpenAlex) are cut: no work is kept for M95 and M83, and for M51 three of its 91, without their author lists; each is filed
  * under the request the survey makes now, which asks the same question with more spellings and fields than the one that was answered. M95's Cepheids come from a paper VizieR does not hold and from a reanalysis whose
  * table gives every row its galaxy's centre and the star's SIMBAD name; M83's have a table with a position per star. */
-import '../test-user-root.mts';
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

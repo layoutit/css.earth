@@ -2,7 +2,7 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { relative, resolve } from 'node:path';
-import { isTelescopeWorkspace, USER_ROOT, WORKSPACE } from '../paths.js';
+import { isTelescopeWorkspace, USER_ROOT, WORKSPACE } from '../paths/index.js';
 import { installedMarkerIssue, type ToolchainPins } from './marker.js';
 
 /** Read legacy checkout installs only inside the admitted workspace. */

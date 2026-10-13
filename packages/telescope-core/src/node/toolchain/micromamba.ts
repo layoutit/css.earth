@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { constants } from 'node:fs';
 import { access, chmod, mkdir, mkdtemp, open, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { delimiter, isAbsolute, resolve } from 'node:path';
-import { USER_ROOT } from '../paths.js';
+import { USER_ROOT } from '../paths/index.js';
 
 export const MICROMAMBA_RELEASE = '2.9.0-0';
 const VERSION = '2.9.0';

@@ -1,4 +1,4 @@
-import './test-user-root.mts';
+import '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { cp, copyFile, mkdir, mkdtemp, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
@@ -56,7 +56,7 @@ test('bundled data owners resolve outside the checkout and preserve pin bytes', 
   try {
     await mkdir(resolve(directory, 'dist'));
     await writeFile(resolve(directory, 'package.json'), JSON.stringify({ name: '@cssearth/telescope', type: 'module', exports: { './package.json': './package.json' } }));
-    await build({ entryPoints: { core: resolve(root, 'packages/telescope-core/src/node/paths.ts'), paths: resolve(root, 'packages/telescope-cli/src/paths.mts') },
+    await build({ entryPoints: { core: resolve(root, 'packages/telescope-core/src/node/paths/index.ts'), paths: resolve(root, 'packages/telescope-cli/src/paths.mts') },
       outdir: resolve(directory, 'dist'), outExtension: { '.js': '.mjs' }, bundle: true, platform: 'node', format: 'esm', packages: 'external', plugins: packageBundlePlugins(root) });
     await mkdir(resolve(directory, 'data/telescope-core'), { recursive: true });
     await writeFile(resolve(directory, 'data/telescope-core/package.json'), '{}');
@@ -152,7 +152,7 @@ test('packed closure and public exports reject undeclared or missing files witho
   assertPackedExports(manifest, files);
   for (const missing of ['package/dist/viewer-lane.d.ts', 'package/dist/sphere-lane.cjs', 'package/run-typed-module.mjs'])
     assert.throws(() => assertPackedExports(manifest, files.filter(file => file !== missing)), /Missing packed export/u);
-  assert.throws(() => assertPackedExports({ ...manifest, exports: { './broken': './src/absent.mts' } }, files));
+  assert.throws(() => assertPackedExports({ ...manifest, exports: { './broken': '../src/absent.mts' } }, files));
   for (const forbidden of ['package/pnpm-lock.yaml', 'package/data/spheres/src/objects/body/prepared/runtime.json.gz',
     'package/data/cli/src/examples/sample/evidence/image.png', 'package/data/bake/src/unused.json',
     'package/src/objects/body/source/measurements.json', 'package/data/cli/src/archives/example/evidence/proof.png',

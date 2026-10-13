@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { test } from 'node:test';
 import { preInstallFindings, preInstallScripts, sparseKeeps } from './pre-install-imports.mts';
 import { REPOSITORY_RULES } from '../repository-rules.mts';
@@ -107,4 +108,24 @@ test('the rule is registered and reads the workflows and scripts of a checkout',
       '.github/workflows/x.yml changes: ci/affected.mts imports @cssearth/core; before install a script may import only node: built-ins and repository files',
     ]);
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('real workflows have bootstrap-safe imports; restoring the CI-to-core re-export is refused', () => {
+  const root = resolve(import.meta.dirname, '../../../..');
+  const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 })
+    .split('\0').filter(Boolean);
+  const rule = REPOSITORY_RULES.find(item => item.id === 'pre-install-imports');
+  assert.ok(rule);
+  assert.deepEqual(rule.check(root, files), [], 'check the real checkout, not only synthetic workflows');
+
+  const workflow = '.github/workflows/universe.yml', helper = '.github/scripts/ci/workspace-packages.mts';
+  const read = (path: string) => readFileSync(resolve(root, path), 'utf8');
+  const scripts = preInstallScripts(workflow, read(workflow), files).filter(item => item.job === 'changes');
+  assert.ok(scripts.some(item => item.script === '.github/scripts/ci/affected-tests.mts'));
+  const findings = preInstallFindings(scripts, new Set(files), path => path === helper
+    ? "export { workspacePackageDirectories } from '../../../packages/core/src/node/workspace-packages.mts';"
+    : read(path));
+  assert.deepEqual(findings, [
+    `${workflow} changes: .github/scripts/ci/affected-tests.mts (via ${helper}) imports packages/core/src/node/workspace-packages.mts, which the job's sparse checkout leaves out`,
+  ], 'the real sparse list and transitive re-export must reject the original failure');
 });

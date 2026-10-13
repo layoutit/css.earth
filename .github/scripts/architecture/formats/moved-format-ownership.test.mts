@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { repositoryFiles } from '../import-graph/graph.mts';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
@@ -83,7 +83,7 @@ function violations(path: string, text: string): string[] {
 
 test('git-tracked source cannot return a moved parser under another name', () => {
   assert.ok(diagnostics.length > 10, 'The diagnostic scan must inspect the parser owners.');
-  const paths = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 128 * 1024 * 1024 }).split('\0')
+  const paths = repositoryFiles(root)
     .filter(path => /\.(?:[cm]?[jt]sx?)$/u.test(path) && !path.startsWith('packages/objects/') &&
       !/(?:\.test\.|\.spec\.|\/dist\/|\/generated\/|\/vendor\/)/u.test(path));
   const findings = paths.flatMap(path => violations(path, readFileSync(new URL(path, new URL('../../../../', import.meta.url)), 'utf8')));

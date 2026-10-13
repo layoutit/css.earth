@@ -1,9 +1,8 @@
+import { packageBundlePlugins, publishDirectory } from './src/package/index.mts';
 import { build } from 'esbuild';
 import { chmod, mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { packageBundlePlugins } from './src/package-bundle.mts';
-import { publishDirectory } from './src/package-publish.mts';
 
 const packageRoot = fileURLToPath(new URL('.', import.meta.url));
 const root = fileURLToPath(new URL('../..', import.meta.url));

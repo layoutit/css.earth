@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { telescopePythonEnvironment } from '../paths.js';
+import { telescopePythonEnvironment } from '../paths/index.js';
 
 /** Run a pinned toolchain command, retaining only the tail of a failed command's diagnostics. */
 export function runToolchainProcess(command: string, args: readonly string[], {

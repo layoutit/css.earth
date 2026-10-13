@@ -5,7 +5,7 @@
  * then uses SIMBAD's identifiers and its position. The resolution travels in the request and is saved with the
  * exploration, so a later `get` reuses the same identity. The pinned SIMBAD answers are evidence beside the request, not
  * part of it: SIMBAD names each result table after the request time, so its bytes differ on every call. */
-import { USER_ROOT } from './paths.js';
+import { USER_ROOT } from './paths/index.js';
 import { resolve } from 'node:path';
 import { astroquery } from './astroquery.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

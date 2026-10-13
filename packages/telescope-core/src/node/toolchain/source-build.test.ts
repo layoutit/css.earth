@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdtempSync, rmSync, symlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { SCRATCH_ROOT, telescopePythonEnvironment } from '../paths.js';
+import { SCRATCH_ROOT, telescopePythonEnvironment } from '../paths/index.js';
 import { runToolchainProcess } from './process.js';
 import { assertSourceBuildPrerequisites, needsSourceBuild, SourceBuildPrerequisiteError, withSourceBuildPreflight } from './source-build.js';
 import { readToolchainPins, type ToolchainPins } from './marker.js';

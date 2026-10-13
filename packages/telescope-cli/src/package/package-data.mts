@@ -1,15 +1,15 @@
 /** Copy preserved runtime inputs without parsing or changing their bytes. */
 import { copyFile, mkdir, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { prepareSpherePackage } from './sphere/sphere-package.mts';
-import { shippedObjectIds } from './archives/ledger.mts';
-import { namedShippedObjects, readJsonOrNull } from './archives/targets.mts';
-import { chandraShippedObjects, shippedSkyObjects } from './archives/chandra/archive-ledger.mts';
-import { spitzerShippedObjects } from './archives/spitzer/archive-ledger.mts';
-import { readMarks } from './simulations/read.mts';
-import { opensOn } from './simulations/leads.mts';
-import { hostNames } from './papers.mts';
-import { loadTargetCatalogue } from './observation-query/query.mts';
+import { prepareSpherePackage } from '../sphere/sphere-package.mts';
+import { shippedObjectIds } from '../archives/ledger.mts';
+import { namedShippedObjects, readJsonOrNull } from '../archives/targets.mts';
+import { chandraShippedObjects, shippedSkyObjects } from '../archives/chandra/archive-ledger.mts';
+import { spitzerShippedObjects } from '../archives/spitzer/archive-ledger.mts';
+import { readMarks } from '../simulations/read.mts';
+import { opensOn } from '../simulations/leads.mts';
+import { hostNames } from '../papers.mts';
+import { loadTargetCatalogue } from '../observation-query/query.mts';
 
 const omitted = new Set(['fixtures', 'authoring', '__pycache__', 'node_modules', 'prepared', 'oracle', 'source-authoring', 'examples', 'evidence', 'new-object']);
 export async function copyPackageData(source: string, destination: string): Promise<void> {

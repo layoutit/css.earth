@@ -1,13 +1,10 @@
 /** Pack-time search facts, read without treating writable user state as a checkout. */
 import { INVESTIGATION_STATUSES } from '@cssearth/objects';
-import type { ReadMark } from '../simulations/read.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { SITE_DATA_ROOT } from '../paths.mts';
-import type { NamedShippedObject } from './targets.mts';
-import type { ShippedObject as ChandraObject } from './chandra/archive-ledger.mts';
-import type { ShippedObject as SpitzerObject } from './spitzer/archive-ledger.mts';
+import type { ChandraObject, SpitzerObject, NamedShippedObject, ReadMark } from './site-target-contracts.mts';
 
 const strings = (value: unknown): string[] => requireArray(value).map(v => requireString(v));
 const position = (value: unknown) => {

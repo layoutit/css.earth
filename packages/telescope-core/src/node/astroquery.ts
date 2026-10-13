@@ -1,6 +1,6 @@
 /** The only css.earth process boundary into the pinned astronomy packages. Operations are explicit rather than extensible:
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
-import { telescopePythonEnvironment } from './paths.js';
+import { telescopePythonEnvironment } from './paths/index.js';
 import { VO_METADATA_SCHEMA, parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '@cssearth/objects';
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

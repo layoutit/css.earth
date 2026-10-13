@@ -10,9 +10,10 @@ import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { loadSiteTargets } from '../archives/site-targets.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseInvestigationLedger, type InvestigationStatus } from '@cssearth/objects';
+import { parseInvestigationLedger } from '@cssearth/objects';
 
-export interface ReadMark { readonly status: InvestigationStatus; /** The ledger entry that settles the lead. */ readonly entry: string }
+export type { ReadMark } from '../archives/site-target-contracts.mts';
+import type { ReadMark } from '../archives/site-target-contracts.mts';
 
 const DOI = /10\.\d{4,9}\/[^\s"<>]+/giu, ARXIV = /arxiv(?:\.org\/(?:abs|pdf)\/|[.:]\s?)(\d{4}\.\d{4,5})/giu;
 /** The DOIs and arXiv numbers a text names, as keys: a DOI in lower case without closing punctuation, `arxiv:2503.12521`. */

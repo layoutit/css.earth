@@ -8,7 +8,7 @@ import { dirname, resolve } from 'node:path';
 import { requireRecord } from '@cssearth/core';
 import { fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
 import { encodeFits } from '@cssearth/fits/node';
-import { assertPackedClosure, assertPackedExports } from './src/pack-structure.mts';
+import { assertPackedClosure, assertPackedExports } from './src/package/pack-structure.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 async function packRoot(directory: string): Promise<string> {

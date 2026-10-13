@@ -1,6 +1,6 @@
 /** The marker an installed toolchain keeps: the descriptor and lock texts it was built from. A checkout whose texts differ is
  * asked to reinstall; the texts are compared whole, so no fingerprint of them is kept. */
-import { WORKSPACE, TOOLCHAINS } from '../paths.js';
+import { WORKSPACE, TOOLCHAINS } from '../paths/index.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';

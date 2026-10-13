@@ -3,7 +3,7 @@ import { SourceBuildPrerequisiteError } from './source-build.js';
 import { installManagedToolchain } from './environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
 import { resolveInstalledToolchain } from './resolver.js';
-import { telescopePythonEnvironment, TOOLCHAINS, USER_ROOT } from '../paths.js';
+import { telescopePythonEnvironment, TOOLCHAINS, USER_ROOT } from '../paths/index.js';
 import { runToolchainProcess } from './process.js';
 import { accessSync, lstatSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, rm } from 'node:fs/promises';

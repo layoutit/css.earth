@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { packagePath } from './paths.mts';
+import { packagePath } from '../paths.mts';
 import { writeInstalledMarker, readToolchainPins } from '@cssearth/telescope-core/node';
 
 test('isolated test caches preserve an explicitly provisioned astronomy toolchain home', async () => {
@@ -13,7 +13,7 @@ test('isolated test caches preserve an explicitly provisioned astronomy toolchai
     const install = resolve(root, 'astroquery/packages-test'); await mkdir(resolve(install, 'env/bin'), { recursive: true });
     const { writeFile } = await import('node:fs/promises'); await writeFile(resolve(install, 'env/bin/python'), '');
     writeInstalledMarker(install, readToolchainPins('astroquery', 'toolchain.json'));
-    const code = `await import(${JSON.stringify(packagePath('src/test-user-root.mts'))}); const { USER_ROOT, astroqueryToolchainSync } = await import('@cssearth/telescope-core/node'); console.log(JSON.stringify({ root: USER_ROOT, python: astroqueryToolchainSync().python }));`;
+    const code = `await import(${JSON.stringify(packagePath('src/test-support/index.mts'))}); const { USER_ROOT, astroqueryToolchainSync } = await import('@cssearth/telescope-core/node'); console.log(JSON.stringify({ root: USER_ROOT, python: astroqueryToolchainSync().python }));`;
     const result = JSON.parse(execFileSync(process.execPath, ['--import', './packages/core/src/node/register-vite-suffix.mts', '--input-type=module', '-e', code], { encoding: 'utf8', env: { ...process.env, CSSEARTH_TELESCOPE_HOME: root, CSSEARTH_TELESCOPE_TOOLCHAIN_HOME: '', CSS_EARTH_ASTROQUERY_CACHE: resolve(root, 'absent') } }).trim().split("\n")[0]!);
     assert.notEqual(result.root, root);
     assert.equal(result.python, resolve(install, 'env/bin/python'));

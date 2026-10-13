@@ -2,7 +2,7 @@
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { prepareDiscoveryPackageData } from './package-data.mts';
+import { prepareDiscoveryPackageData } from '../package/package-data.mts';
 
 export async function prepareStandaloneData(checkout: string): Promise<{ script: string; cleanup: () => Promise<void> }> {
   const directory = await mkdtemp(resolve(tmpdir(), 'telescope-standalone-data-'));

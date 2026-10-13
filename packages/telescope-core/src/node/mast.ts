@@ -2,7 +2,7 @@
 import { legacyWorkspaceRoots } from './toolchain/resolver.js';
 import { access, copyFile, mkdir, rm, stat, readFile, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
-import { USER_ROOT } from './paths.js';
+import { USER_ROOT } from './paths/index.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroquery } from './astroquery.js';
 

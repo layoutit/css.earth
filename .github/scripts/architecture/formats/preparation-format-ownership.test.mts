@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { repositoryFiles } from '../import-graph/graph.mts';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -205,7 +205,7 @@ const readerContracts = [
 ] as const;
 
 const parserNames = ['parseSolarSceneSource', 'parseGeometryProfile', 'parseDepthRecipe', 'parsePagedRecipe', 'parseChartAssetRecipe', 'parseMeasuredSpectrum', 'parseRetrievedProfile', 'parseSystemOrbits', 'parseSpectrumRecipe', 'parsePagedDatasetBindings'];
-const paths = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z', '--', '*.ts', '*.mts', '*.js', '*.mjs', '*.astro'], { cwd: root, encoding: 'utf8' }).split('\0');
+const paths = repositoryFiles(root);
 const sources = new Map([...new Set(paths)].filter(path => /\.(?:ts|mts|js|mjs|astro)$/u.test(path) && !path.includes('.test.')
   && !path.startsWith('output/') && !path.startsWith('untangle/')).map(path => [path, readFileSync(resolve(root, path), 'utf8')]));
 

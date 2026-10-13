@@ -4,7 +4,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test, { mock } from 'node:test';
-import * as paths from '../paths.js';
+import * as paths from '../paths/index.js';
 import { installedMarkerIssue, readToolchainPins, type ToolchainPins } from './marker.js';
 
 test('the first async astronomy query installs missing pins and later queries reuse their exact marker', async () => {
@@ -15,7 +15,7 @@ test('the first async astronomy query installs missing pins and later queries re
   const scratch = resolve(userRoot, 'scratch'); mkdirSync(scratch, { recursive: true });
   let resolutions = 0;
   const mocks = [
-    mock.module(new URL('../paths.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot, SCRATCH_ROOT: scratch,
+    mock.module(new URL('../paths/index.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot, SCRATCH_ROOT: scratch,
       telescopePythonEnvironment: (overrides: NodeJS.ProcessEnv = {}) => ({ ...process.env, TMPDIR: scratch, TMP: scratch, TEMP: scratch, ...overrides }) } }),
     mock.module(new URL('./micromamba.ts', import.meta.url).href, { namedExports: {
       assertManagedPythonPlatform: () => {}, resolveMicromamba: async () => { resolutions++; return '/test/selected-micromamba'; } } }),

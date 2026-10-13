@@ -17,7 +17,7 @@ import { projectOutput } from './delivery/projection.mts';
 import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
 import { HELP, SHORT_HELP, VERSION } from './help.mts';
-import { manageSkill } from './skill-install.mts';
+import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
