@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** What the Canadian archive holds of ESPaDOnS polarised spectra for this project's stars, and how far each star has come.
  *
  *   node packages/telescope-cli/src/archives/espadons/archive-ledger.mts [--local]     writes src/sources/espadons/ledger.json and docs/espadons-ledger.md
@@ -65,7 +66,7 @@ export function recordedResults(ledger: unknown): Map<string, NonNullable<Local[
 
 /** The programs beside this code, each with its receipt when this machine has reduced it and else with what the ledger records. */
 async function localPrograms(): Promise<Local[]> { const out: Local[] = [], recorded = recordedResults(await readJsonOrNull(resolve(REPOSITORY, LEDGER_JSON)));
-  for (const file of (await readdir(PROGRAMS)).filter(name => name.endsWith('.json')).sort()) { const program = await readJsonOrNull(resolve(PROGRAMS, file));
+  for (const file of (await readdir(programStorePath(PROGRAMS))).filter(name => name.endsWith('.json')).sort()) { const program = await readJsonOrNull(resolve(programStorePath(PROGRAMS), file));
     if (!isRecord(program) || program.schema !== PROGRAM_SCHEMA || !isRecord(program.target)) continue; const id = requireString(program.id, `${file} id`), receipt = await readJsonOrNull(receiptPath(id));
     const map = isRecord(receipt) && receipt.schema === MAP_SCHEMA && isRecord(receipt.map) ? receipt.map : undefined, verdict = map && isRecord(map.verdict) ? map.verdict : undefined, chosen = map && isRecord(map.chosen) ? map.chosen : undefined;
     out.push({ program: id, raDegrees: requireFiniteNumber(program.target.raDegrees, `${id} raDegrees`), decDegrees: requireFiniteNumber(program.target.decDegrees, `${id} decDegrees`),

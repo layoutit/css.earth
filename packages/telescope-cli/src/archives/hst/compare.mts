@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Compare the re-run products of an observation with the archive's own, sample by sample: the oracle for calibrate.mts.
  *
  *   node packages/telescope-cli/src/archives/hst/compare.mts <program id> <observation> <run directory> [--raw <dir>]...
@@ -23,14 +25,14 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '@cssearth/bake/objects/raster';
-import { mastFile, WORKSPACE, addProductEvidence } from '@cssearth/telescope-core/node';
+import { mastFile, addProductEvidence, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductRecord } from '@cssearth/objects';
 import { PROGRAMS, suffixOf } from './archive.mts';
 import { readHstProgram } from './calibrate.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
 
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 
 /** A product's own account of how it was made; a reproduction that differs starts here. */
 const RUN_CARDS = ['CAL_VER', 'OPUS_VER', 'PROCTIME', 'FILENAME', 'DATE'];
@@ -126,6 +128,7 @@ export async function addArchiveAgreement(directory: string, product: string, re
 }
 
 export async function compareWithMast(id: string, observation: string, run: string, sources: readonly string[] = []) {
+  requireWorkspace();
   const { program } = await readHstProgram(id), entry = program.observations.find(other => other.observation === observation);
   if (!entry) throw new Error(`${id} has no observation ${observation}.`);
   const receipts: { path: string; receipt: Record<string, unknown>; record: ProductRecord }[] = [];
@@ -156,7 +159,7 @@ export async function compareWithMast(id: string, observation: string, run: stri
       differentSettings: differentSettings(ourPrimary, theirPrimary), differentGrid,
       repeatedCards: [...new Set([...ourHdus, ...theirHdus].flatMap(hdu => hdu.repeatedCards))].sort(), extensions,
     };
-    const path = resolve(PROGRAMS, `${id}.${receipt.product}.reproduction.json`);
+    const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${receipt.product}.reproduction.json`), 'write');
     await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
     const record = await addArchiveAgreement(run, pinned.name, path);
     receipts.push({ path, receipt, record });

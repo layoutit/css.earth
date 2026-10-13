@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { packagePath } from '../../paths.mts';
 /** The JWST ledger: what the public archive holds in each observing mode, which of it this repository can already turn into
  * something drawn, and which of the objects it ships JWST has observed.
  *
@@ -146,7 +148,7 @@ export function parseReproductionReceipt(value: unknown, label: string): Reprodu
 export async function repositoryState(repository = REPOSITORY) {
   const state = new Map<string, { bands: number; programs: string[]; checked: string[] }>(JWST_MODES.map(({ mode }) => [mode, { bands: 0, programs: [], checked: [] }]));
   for (const band of Object.values(JWST_BANDS)) state.get(bandMode(band))!.bands++;
-  const imaging = resolve(repository, JWST_IMAGING_PROGRAMS.path), files = await readdir(imaging);
+  const imaging = repository === REPOSITORY ? programStorePath(JWST_IMAGING_PROGRAMS.path) : resolve(repository, JWST_IMAGING_PROGRAMS.path), files = await readdir(imaging);
   const receiptProblems: string[] = [], receipts = new Map<string, ReproductionReceipt>();
   for (const file of files.filter(name => name.endsWith('.reproduction.json')).sort()) {
     try {
@@ -180,7 +182,7 @@ export async function repositoryState(repository = REPOSITORY) {
   for (const [key] of [...receipts].sort(([a], [b]) => a.localeCompare(b, 'en')))
     receiptProblems.push(`${key.replace('|', '.')}.reproduction.json: no pinned program holds that band.`);
   const timeSeries = new Map<string, { programs: string[]; checked: string[] }>();
-  const series = resolve(repository, JWST_PROGRAMS.path);
+  const series = repository === REPOSITORY ? programStorePath(JWST_PROGRAMS.path) : resolve(repository, JWST_PROGRAMS.path);
   for (const entry of (await readdir(series, { withFileTypes: true })).filter(item => item.isDirectory())) {
     // A directory without a program.json is a joint fit of several visits, not an observation.
     const program = await readJson(resolve(series, entry.name, 'program.json')).catch(error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });

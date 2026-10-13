@@ -5,10 +5,10 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { calibratorDatabase, planAmberNight } from './calibrate-amber.mts';
 import { coOvertoneLines, measureCoShift } from './co-wavelength.mts';
-import { parseRawTable, WORKSPACE } from '@cssearth/telescope-core/node';
+import {  parseRawTable, requireWorkspace  } from '@cssearth/telescope-core/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, text } from '@cssearth/bake/objects/raster';
 
-const repository = WORKSPACE;
+const repository = requireWorkspace();
 const fixture = resolve(import.meta.dirname, 'fixtures/amber-2013-12-07-raw-frames.csv');
 
 test('an AMBER night plan finds the P2VM set, each block\'s dark and sky, and the nearest calibrator', async () => {

@@ -2,7 +2,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchainSync, plainName } from '@cssearth/telescope-core/node';
+import { astroqueryToolchainSync, plainName, USER_ROOT } from '@cssearth/telescope-core/node';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../archives/keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from '../archives/gemini/cadc.mts';
 import { recall } from '../archives/memory.mts';
@@ -58,7 +58,7 @@ const column = (row: Readonly<Record<string, string>>, name: string): string | u
 /** Save one archive answer and return its name. Each answer keeps its own file, named by the archive host and the moment it
  * was saved; none is overwritten. */
 export async function saveArchiveLeadEvidence(root: string, source: string, request: unknown, rows: unknown, now = new Date()): Promise<string> {
-  const directory = resolve(root, 'output/telescopes/archive-leads'), text = `${JSON.stringify({ source, request, rows }, null, 2)}\n`;
+  const directory = resolve(USER_ROOT, 'output/telescopes/archive-leads'), text = `${JSON.stringify({ source, request, rows }, null, 2)}\n`;
   const host = URL.canParse(source) ? new URL(source).hostname : source, stem = plainName(host, now.toISOString().replace(/[^0-9]/gu, ''));
   await mkdir(directory, { recursive: true });
   for (let attempt = 0; ; attempt++) {
@@ -69,7 +69,7 @@ export async function saveArchiveLeadEvidence(root: string, source: string, requ
 }
 const save = saveArchiveLeadEvidence;
 /** The rows of a saved answer to the same question of the same archive, and the saved file's name (archives/memory.mts). */
-const recalled = (root: string, source: string, request: string, same: (text: string) => string) => recall(resolve(root, 'output/telescopes/archive-leads'), '.json', (value, name) => {
+const recalled = (root: string, source: string, request: string, same: (text: string) => string) => recall(resolve(USER_ROOT, 'output/telescopes/archive-leads'), '.json', (value, name) => {
   if (!isRecord(value) || value.source !== source || typeof value.request !== 'string' || same(value.request) !== same(request) || !Array.isArray(value.rows)) return undefined;
   const rows = value.rows.filter((row): row is Record<string, string> => isRecord(row) && Object.values(row).every(cell => typeof cell === 'string'));
   return rows.length === value.rows.length ? { rows, pin: name.slice(0, -'.json'.length) } : undefined;

@@ -5,9 +5,9 @@ import { resolve } from 'node:path';
 import { PNG } from 'pngjs';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { plotNumericPreview, WORKSPACE } from '@cssearth/telescope-core/node';
+import {  plotNumericPreview, requireWorkspace  } from '@cssearth/telescope-core/node';
 
-const root=WORKSPACE;
+const root=requireWorkspace();
 
 test('Astropy and Matplotlib render bounded previews from pinned family data',async()=>{
   const directory=await mkdtemp(resolve(tmpdir(),'family-preview-'));

@@ -2,7 +2,15 @@
 
 The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. `package.json` exposes a `telescope` binary, not an HTTP API. The implementation is this package's `src/`; the library it builds on is [`@cssearth/telescope-core`](../telescope-core/README.md#library).
 
-The package supplies the command, not the observatory pipelines or catalogue. It needs a **css.earth science checkout** with the telescope API, source manifests and any required Python environments. Pass `--workspace PATH` or set `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically and runs the checkout's `packages/telescope-cli/src/cli.mts` with the same arguments, TTY state and exit code. Caches stay in the checkout; deliveries go to your `--out` directory. npm installation does not download a checkout, install Python or run pipelines. Updating the npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
+The source CLI can run without a css.earth checkout. Python environments are installed separately; npm installation does not install Python or run pipelines. Bundling the source implementation and its data for npm is the next delivery step.
+
+Paths are owned by the library:
+
+- **User root:** `CSSEARTH_TELESCOPE_HOME`, otherwise `~/Library/Caches/cssearth-telescope` on macOS, `$XDG_CACHE_HOME/cssearth-telescope` or `~/.cache/cssearth-telescope` on Linux, and `%LOCALAPPDATA%\cssearth-telescope` on Windows. Archive answers, MAST and Astroquery caches, toolchains, installed markers and scratch use this root, including in checkout mode. Exploration sessions default to its `telescope-runs/`; `--out` selects a delivery directory.
+- **Optional workspace:** `--workspace PATH` takes precedence over `CSSEARTH_WORKSPACE`. Source entries launched from inside their own css.earth checkout also admit it, as `pnpm telescope` does. Merely importing checkout sources from another directory does not. Site authoring, `new-object`, bake and developer reductions require it and fail with `this command needs a css.earth checkout: pass --workspace` when absent.
+- **Package data:** requirements locks, descriptors, notices, examples and modes resolve from the owning package. Programs and their preserved receipts use the selected workspace's archive program folders for both reading and authoring. Without a workspace, shipped programs are read-only and authoring is refused. Outside a workspace, the target loader reads `data/target-catalogue.json` in this package; step 3 generates that array of target catalogue entries. If it is missing, unknown targets still go to SIMBAD. Malformed snapshots are errors. Read-only archive ledgers and WWT catalogues use `data/src/sources/` outside a workspace.
+
+With a workspace, target names and site records still come from `src/objects` and `src/sources`. Existing toolchains and caches in the checkout are not migrated automatically; install the pins into the selected user root.
 
 ## Setup
 

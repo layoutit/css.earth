@@ -1,7 +1,7 @@
 import { parseSnapshot, VO_DISCOVERY_SCHEMA, canonical, jsonValue, parseMetadata, parsePin, parseRegion, type DiscoverySnapshot, type IcrsCircle, type Json } from '@cssearth/objects';
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits } from '@cssearth/telescope-core/node';
+import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductKind } from '../requests/recipe-request.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { recall } from '../archives/memory.mts';
@@ -247,7 +247,7 @@ export function instrumentFacetQuery(profile: ServiceProfile, names: readonly st
 export interface InstrumentFacets { readonly names: readonly string[]; readonly complete: boolean; readonly evidence: string; readonly issues: readonly string[] }
 /** Enumerate archive modes before sampling rows, so a high-volume mode cannot hide every later one. */
 export async function discoverInstrumentFacets(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits): Promise<InstrumentFacets> {
-  const directory = resolve(root, 'output/telescopes/vo/metadata'), query = instrumentFacetQuery(profile, names, request);
+  const directory = resolve(USER_ROOT, 'output/telescopes/vo/metadata'), query = instrumentFacetQuery(profile, names, request);
   // The same question asked within the last day is answered from its saved file (archives/memory.mts).
   const kept = await recall(directory, '.facets.json', value => {
     const result = isRecord(value) && value.query === query && isRecord(value.result) ? value.result : undefined;
@@ -267,7 +267,7 @@ export async function discoverInstrumentFacets(root: string, profile: ServicePro
   return result;
 }
 export async function discover(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits, sampleLimit = 50): Promise<DiscoverySnapshot> {
-  const circle = searchCircle(request), directory = resolve(root, 'output/telescopes/vo/metadata');
+  const circle = searchCircle(request), directory = resolve(USER_ROOT, 'output/telescopes/vo/metadata');
   // The same question asked within the last day is answered from its saved snapshot, while the response it was read from is
   // still on disk. A search MAST's positional service has to select first is always asked: its question is not known before.
   if (!(circle && profile.spatialMatch === 'mast-api-cone')) {

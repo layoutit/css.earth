@@ -1,15 +1,16 @@
-/** Install one pinned astronomy environment per user; read legacy checkout-local environments when valid. */
+/** Install one pinned astronomy environment per user; keep every installed copy beneath the user root. */
+import { resolveInstalledToolchain } from './resolver.js';
+import { telescopePythonEnvironment } from '../paths.js';
 import { runToolchainProcess } from './process.js';
 import { accessSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { homedir } from 'node:os';
 import { dirname, resolve } from 'node:path';
-import { TOOLCHAINS, WORKSPACE } from '../paths.js';
+import { TOOLCHAINS, USER_ROOT } from '../paths.js';
 import { installedMarkerIssue, readToolchainPins, writeInstalledMarker, type ToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
 
-export const ASTROQUERY_ROOT = resolve(WORKSPACE, 'output/toolchains/astroquery');
-export const ASTROQUERY_CACHE = resolve(process.env.CSS_EARTH_ASTROQUERY_CACHE ?? resolve(homedir(), '.cache/css-earth/astroquery'));
+export const ASTROQUERY_ROOT = resolve(USER_ROOT, 'output/toolchains/astroquery');
+export const ASTROQUERY_CACHE = resolve(USER_ROOT, 'astroquery');
 
 const descriptor = (): ToolchainPins => readToolchainPins('astroquery', 'toolchain.json');
 
@@ -53,7 +54,7 @@ function expectedVersions(entry: Record<string, unknown>): string {
 }
 const versionProbe = "import astroquery, astropy_healpix, importlib.metadata, pyvo, scipy, cdflib, pyuvdata, orbitize, whereistheplanet; from astroquery import alma, mast, vizier; print(astroquery.__version__, pyvo.__version__, scipy.__version__, importlib.metadata.version('batman-package'), importlib.metadata.version('orbitize'), importlib.metadata.version('whereistheplanet'), cdflib.__version__, pyuvdata.__version__, astropy_healpix.__version__)";
 function verifyPackages(root: string, entry: Record<string, unknown>): void {
-  const found = runToolchainProcess(resolve(root, 'env/bin/python'), ['-c', versionProbe], { env: { PATH: `${resolve(root, 'env/bin')}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } }).trim();
+  const found = runToolchainProcess(resolve(root, 'env/bin/python'), ['-c', versionProbe], { env: telescopePythonEnvironment({ PATH: `${resolve(root, 'env/bin')}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', XDG_CACHE_HOME: resolve(USER_ROOT, 'python-cache'), MPLCONFIGDIR: resolve(USER_ROOT, 'python-cache/matplotlib') }) }).trim();
   if (found !== expectedVersions(entry)) throw new Error(`Expected ${expectedVersions(entry)}, found ${found}.`);
 }
 
@@ -108,13 +109,13 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
   }
   const bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
   return { python, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), scipyVersion: requireString(entry.scipy),
-    batmanVersion: requireString(entry.batman), cdflibVersion: requireString(entry.cdflib), pyuvdataVersion: requireString(entry.pyuvdata), orbitizeVersion: requireString(entry.orbitize), whereIsThePlanetVersion: requireString(entry.whereistheplanet), astropyHealpixVersion:requireString(entry.astropyHealpix), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } };
+    batmanVersion: requireString(entry.batman), cdflibVersion: requireString(entry.cdflib), pyuvdataVersion: requireString(entry.pyuvdata), orbitizeVersion: requireString(entry.orbitize), whereIsThePlanetVersion: requireString(entry.whereistheplanet), astropyHealpixVersion:requireString(entry.astropyHealpix), env: telescopePythonEnvironment({ PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', XDG_CACHE_HOME: resolve(USER_ROOT, 'python-cache'), MPLCONFIGDIR: resolve(USER_ROOT, 'python-cache/matplotlib') }) };
 }
 
 export async function astroqueryToolchain(): Promise<AstroqueryToolchain> { return astroqueryToolchainSync(); }
 
 export function findInstalledRoot(local: string, shared: string, pins: ToolchainPins): string | null {
-  return installedToolchain(shared, pins) ? shared : installedToolchain(local, pins) ? local : null;
+  return resolveInstalledToolchain(local, pins, [shared], {}, 'env/bin/python');
 }
 
 /** Check the installed environment's imports and versions against the pins; the line `verify` prints. */

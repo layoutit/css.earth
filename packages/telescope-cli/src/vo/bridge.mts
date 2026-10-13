@@ -1,6 +1,6 @@
 /** VO observations enter the public query directly, without a synthetic instrument ledger. */
 import { resolve } from 'node:path';
-import { astroquery, parseLimits } from '@cssearth/telescope-core/node';
+import { astroquery, parseLimits, USER_ROOT } from '@cssearth/telescope-core/node';
 import { assessRequest, type RequestSatisfaction, type ProductFacts } from '../requests/request-satisfaction.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
 import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
@@ -13,6 +13,7 @@ type DiscoveredObservation, type DiscoveryRequest
 } from './discovery.mts';
 import { nativeQualificationRoute, planAccess, type AcquisitionSpec, type MetadataLoader } from './access.mts';
 import type { VoNetworkPolicy } from './network-policy.mts';
+import { snapshotPublisher } from './snapshot-store.mts';
 
 export interface VoInputs {
   readonly records: readonly { readonly observation: DiscoveredObservation; readonly snapshot: DiscoverySnapshot; readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }[];
@@ -58,25 +59,28 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
         ...snapshots.flatMap(snapshot => snapshot.response.issues), ...facet?.issues ?? [], ...discoveryFailures,
         `${rows} sampled rows; this is not a complete archive inventory.`].join('; ') });
     let accessLimitReached = false;
-    for (const snapshot of snapshots) for (const observation of snapshot.completeness === 'failed' ? [] : normalizeSnapshot(snapshot, profile, target, identities)) {
-      if (selectedObservation !== undefined && observation.key !== selectedObservation) { records.push({ observation, snapshot, products: [], issues: ['Access descriptions were not refreshed because get selected a different observation.'] }); continue; }
-      const plan = await planAccess(root, observation, snapshot, request, async (url, parameters) => {
-        const key = JSON.stringify([url, parameters ?? {}]);
-        let pending = metadata.get(key);
-        if (!pending) {
-          if (metadataRequests >= limits.metadataRequests) {
-            accessLimitReached = true;
-            throw new Error('The query-wide access-description request limit was reached.');
+    for (const snapshot of snapshots) {
+      const publishSnapshot = snapshotPublisher(snapshot);
+      for (const observation of snapshot.completeness === 'failed' ? [] : normalizeSnapshot(snapshot, profile, target, identities)) {
+        if (selectedObservation !== undefined && observation.key !== selectedObservation) { records.push({ observation, snapshot, products: [], issues: ['Access descriptions were not refreshed because get selected a different observation.'] }); continue; }
+        const plan = await planAccess(root, observation, snapshot, request, async (url, parameters) => {
+          const key = JSON.stringify([url, parameters ?? {}]);
+          let pending = metadata.get(key);
+          if (!pending) {
+            if (metadataRequests >= limits.metadataRequests) {
+              accessLimitReached = true;
+              throw new Error('The query-wide access-description request limit was reached.');
+            }
+            metadataRequests++;
+            pending = metadataLoader ? metadataLoader(url, parameters) : astroquery({ operation: 'vo-links', url, parameters,
+              directory: resolve(USER_ROOT, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
+              allowedPrivateHosts: policy.allowedPrivateHosts }).then(answer => answer.vo!);
+            metadata.set(key, pending);
           }
-          metadataRequests++;
-          pending = metadataLoader ? metadataLoader(url, parameters) : astroquery({ operation: 'vo-links', url, parameters,
-            directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
-            allowedPrivateHosts: policy.allowedPrivateHosts }).then(answer => answer.vo!);
-          metadata.set(key, pending);
-        }
-        return pending;
-      }, policy).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
-      records.push({ observation, snapshot, ...plan });
+          return pending;
+        }, policy, publishSnapshot).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
+        records.push({ observation, snapshot, ...plan });
+      }
     }
     if (accessLimitReached) {
       const previous = services.at(-1)!;

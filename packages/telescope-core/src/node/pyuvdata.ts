@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from './paths.js';
 /** The pinned pyuvdata boundary for UVFITS visibilities, run in the astroquery toolchain's Python. */
 import { spawn } from 'node:child_process';
 import { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsAnswer, parsePyuvdataUvfitsRequest, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from '@cssearth/objects';
@@ -59,7 +60,7 @@ print(json.dumps(answer, separators=(',', ':')))
 `;
 export type PyuvdataUvfitsRunner = (python: string, env: NodeJS.ProcessEnv, request: PyuvdataUvfitsRequest) => Promise<unknown>;
 export const runPyuvdataUvfitsProcess: PyuvdataUvfitsRunner = (python, env, request) => new Promise((done, fail) => {
-  const child = spawn(python, ['-c', PYUVDATA_UVFITS], { env: { ...process.env, ...env }, stdio: ['pipe', 'pipe', 'pipe'] }); let stdout = '', stderr = '';
+  const child = spawn(python, ['-c', PYUVDATA_UVFITS], { env: telescopePythonEnvironment(env), stdio: ['pipe', 'pipe', 'pipe'] }); let stdout = '', stderr = '';
   child.stdout.setEncoding('utf8').on('data', chunk => { stdout += chunk; }); child.stderr.setEncoding('utf8').on('data', chunk => { stderr += chunk; }); child.on('error', fail);
   child.on('close', code => { if (code !== 0) fail(new Error(`pyuvdata ${request.operation} failed (status ${code}): ${stderr.slice(-4000)}`)); else try { done(JSON.parse(stdout)); } catch (error) { fail(new Error(`pyuvdata ${request.operation} returned invalid JSON: ${String(error)}`)); } }); child.stdin.end(JSON.stringify(request));
 });

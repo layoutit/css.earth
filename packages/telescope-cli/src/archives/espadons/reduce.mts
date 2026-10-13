@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Reduce a pinned ESPaDOnS program to a magnetic map: line mask, mean lines, longitudinal fields, and the map.
  *
  *   node packages/telescope-cli/src/archives/espadons/reduce.mts <program id> [--half-width <km/s>]
@@ -20,7 +21,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { flagValue, positionalArguments } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+
 import { productFiles } from './cadc.mts';
 import { meanLines, type MeanLine } from './lsd.mts';
 import { lineMask, MINIMUM_DEPTH } from './mask.mts';
@@ -84,7 +85,7 @@ export async function fitLadder(run: MapRun, log: (line: string) => void = () =>
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const args = process.argv.slice(2), [id] = positionalArguments(args, ['--half-width']);
   if (!id) throw new TypeError('Usage: reduce.mts <program id> [--half-width <km/s>]');
-  const program = await readProgram(id), directory = resolve(DOWNLOADS, id), run = resolve(WORKSPACE, 'output/espadons', id), round = (value: number, digits = 3) => Number(value.toFixed(digits));
+  const program = await readProgram(id), directory = resolve(DOWNLOADS, id), run = resolve(USER_ROOT, 'output/espadons', id), round = (value: number, digits = 3) => Number(value.toFixed(digits));
   // Six products at a time from the archive; a product already in the directory at its size is read from there.
   // A product that is not a sequence of four sub-exposures (an interrupted one), or whose file in the archive is not the
   // image its catalogue describes, is named and left out.

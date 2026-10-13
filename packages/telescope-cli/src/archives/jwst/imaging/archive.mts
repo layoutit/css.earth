@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../../paths.mts';
 /** Find a JWST imaging observation's products on MAST and pin them as an imaging program.
  *
  *   node packages/telescope-cli/src/archives/jwst/imaging/archive.mts <program id> <crds context> <level-3 obs_id> [<level-3 obs_id> ...]
@@ -19,13 +22,13 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope-core/node';
+import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../../programs.mts';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
 /** The pinned programs and their receipts share the JWST programs root, found through the checkout. */
 export const JWST_IMAGING_PROGRAMS = archivePrograms('jwst');
-export const PROGRAMS = resolve(WORKSPACE, JWST_IMAGING_PROGRAMS.path);
+export const PROGRAMS = packagePath(JWST_IMAGING_PROGRAMS.path);
 export const DEFAULT_CRDS_CONTEXT = 'jwst_1535.pmap';
 const NAME = /^[A-Za-z0-9._-]+$/u;
 
@@ -167,7 +170,7 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
 export async function pinImagingProgram(id: string, crdsContext: string, observations: readonly string[]): Promise<{ readonly path: string; readonly program: ImagingProgram }> {
   if (!id || !NAME.test(id) || !crdsContext || !/^jwst_\d+\.pmap$/u.test(crdsContext) || !observations.length)
     throw new TypeError('Usage: archive <program id> <crds context> <level-3 obs_id> [...]');
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`);
   const existing = await readFile(path, 'utf8').then(text => parseImagingProgram(JSON.parse(text)), () => null);
   const bands = [...existing?.bands ?? []];
   let programme = existing?.programme, target = existing?.target;
@@ -181,10 +184,16 @@ export async function pinImagingProgram(id: string, crdsContext: string, observa
     console.error(`${observation}: ${entry.band}, ${entry.members.length} members${entry.references ? `, ${entry.references.length} PSF references` : ''}`);
   }
   const program = parseImagingProgram({ schema: 'cssearth-jwst-imaging-program@1', id, programme, target, crdsContext, ...(existing?.image3 ? { image3: existing.image3 } : {}), bands });
-  await mkdir(PROGRAMS, { recursive: true });
+  const written = await writeImagingProgram(program);
+  console.error(`IMAGING_PROGRAM ${written}`);
+  return { path: written, program };
+}
+
+export async function writeImagingProgram(program: ImagingProgram): Promise<string> {
+  const directory = programStorePath(PROGRAMS, 'write'), path = resolve(directory, `${program.id}.json`);
+  await mkdir(directory, { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
-  console.error(`IMAGING_PROGRAM ${path}`);
-  return { path, program };
+  return path;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

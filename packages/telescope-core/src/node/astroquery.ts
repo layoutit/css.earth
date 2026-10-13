@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from './paths.js';
 /** The only css.earth process boundary into the pinned astronomy packages. Operations are explicit rather than extensible:
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
 import { VO_METADATA_SCHEMA, parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '@cssearth/objects';
@@ -453,7 +454,7 @@ function mastProgress(write: (line: string) => void) {
 }
 
 export const runAstroqueryProcess: AstroqueryRunner = (python, env, request) => new Promise((done, fail) => {
-  const child = spawn(python, ['-c', PYTHON], { env: { ...process.env, ...env }, stdio: ['pipe', 'pipe', 'pipe'] });
+  const child = spawn(python, ['-c', PYTHON], { env: telescopePythonEnvironment(env), stdio: ['pipe', 'pipe', 'pipe'] });
   let stdout = '', stderr = '';
   const forwardProgress = mastProgress(line => process.stderr.write(`${line}\n`));
   child.stdout.setEncoding('utf8').on('data', chunk => { stdout += chunk; });

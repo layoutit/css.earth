@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /**
  * Which body does a measured sky position belong to?
  *
@@ -196,7 +197,7 @@ interface BridgeResult {
 async function bridge(request: unknown): Promise<BridgeResult> {
   const toolchain = await astroqueryToolchain();
   const text = await new Promise<string>((accept, reject) => {
-    const child = spawn(toolchain.python, ['-c', BRIDGE], { env: { ...process.env, ...toolchain.env }, stdio: ['pipe', 'pipe', 'pipe'] });
+    const child = spawn(toolchain.python, ['-c', BRIDGE], { env: telescopePythonEnvironment(toolchain.env), stdio: ['pipe', 'pipe', 'pipe'] });
     let out = '', error = ''; child.stdout.setEncoding('utf8').on('data', chunk => { out += chunk; }); child.stderr.setEncoding('utf8').on('data', chunk => { error += chunk; });
     child.on('error', reject); child.on('close', code => code === 0 ? accept(out) : reject(new Error(`whereistheplanet bridge failed: ${error.slice(-1500)}`)));
     child.stdin.end(JSON.stringify(request));

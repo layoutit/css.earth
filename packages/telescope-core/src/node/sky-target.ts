@@ -5,6 +5,7 @@
  * then uses SIMBAD's identifiers and its position. The resolution travels in the request and is saved with the
  * exploration, so a later `get` reuses the same identity. The pinned SIMBAD answers are evidence beside the request, not
  * part of it: SIMBAD names each result table after the request time, so its bytes differ on every call. */
+import { USER_ROOT } from './paths.js';
 import { resolve } from 'node:path';
 import { astroquery } from './astroquery.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -75,7 +76,7 @@ export function readSkyTarget(object: MetadataResponse, identifiers: MetadataRes
 }
 
 export async function resolveSkyTarget(root: string, name: string, run: typeof astroquery = astroquery): Promise<SkyResolution | undefined> {
-  const directory = resolve(root, 'output/telescopes/simbad');
+  const directory = resolve(USER_ROOT, 'output/telescopes/simbad');
   const tap = async (query: string) => {
     const response = (await run({ operation: 'vo-tap', service: SIMBAD_TAP, query, maxrec: 1000, directory, byteLimit: SIMBAD_BYTES })).vo;
     if (!response) throw new Error('SIMBAD returned no VO response.');

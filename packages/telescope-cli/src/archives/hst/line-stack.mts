@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Stack STIS long-slit line images of a moving Solar System target in the target's own frame.
  *
  *   node packages/telescope-cli/src/archives/hst/line-stack.mts <stack id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
@@ -68,7 +69,7 @@ export async function prepareFrames(definition: LineStackDefinition, directory: 
     }
     headers.push(header);
   }
-  const responsesPath = resolve(PROGRAMS, definition.horizons.responses), responses = await readHorizonsResponses(responsesPath);
+  const responsesPath = resolve(programStorePath(PROGRAMS), definition.horizons.responses), responses = await readHorizonsResponses(responsesPath);
   const before = Object.keys(responses).length;
   const ephemerides = await stackEphemerides(definition.horizons, responses, headers.map(header => (header.startMjd + header.endMjd) / 2 + MJD_TO_JD), mayAsk);
   if (Object.keys(responses).length !== before) await writeHorizonsResponses(responsesPath, responses);
@@ -247,7 +248,7 @@ export async function stackRun(definition: LineStackDefinition, line: StackLine,
   const pinned = new Map(definition.frames.map(frame => [frame.name, frame]));
   const inputs: ProductInput[] = [
     { role: 'stack definition', identity: `${HST_PROGRAMS.path}/${definition.id}.stack.json`, ...await fileSize(stackPath(definition.id)) },
-    { role: 'Horizons responses', identity: `${HST_PROGRAMS.path}/${definition.horizons.responses}`, ...await fileSize(resolve(PROGRAMS, definition.horizons.responses)) },
+    { role: 'Horizons responses', identity: `${HST_PROGRAMS.path}/${definition.horizons.responses}`, ...await fileSize(resolve(programStorePath(PROGRAMS), definition.horizons.responses)) },
     ...[...frames].sort().map(name => {
       const frame = pinned.get(name);
       if (!frame) throw new Error(`${name} went into the stack but is not a frame the definition pins.`);
@@ -296,7 +297,7 @@ export async function writeProducts(definition: LineStackDefinition, run: LineSt
 }
 
 // ---- the stage --------------------------------------------------------------------------------------------------------
-export const stackPath = (id: string) => resolve(PROGRAMS, `${id}.stack.json`);
+export const stackPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.stack.json`);
 export const readLineStack = async (id: string) => parseLineStack(JSON.parse(await readFile(stackPath(id), 'utf8')));
 
 export interface LineStackOptions {
@@ -417,7 +418,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     `disc ${entry.discMeanRayleigh.toFixed(1).padStart(6)} R  dusk/dawn ${entry.duskDawnRatio.toFixed(2)}  e-folding ${entry.eFoldingKm.toFixed(0)} km`);
   console.log(`wrote ${written.length} products to ${output}`);
   if (flags.includes('--receipt')) {
-    const path = resolve(PROGRAMS, `${definition.id}.stack.reproduction.json`), receipt = stackReceipt(run);
+    const path = programStorePath(resolve(programStorePath(PROGRAMS), `${definition.id}.stack.reproduction.json`), 'write'), receipt = stackReceipt(run);
     await writeFile(path, `${JSON.stringify(receipt, null, 1)}\n`);
     const records = await addStackEvidence(output, path, receipt);
     console.log(`wrote ${path}, and its evidence into ${records.length} product records`);

@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Prepare a pinned WWT core-imageset index with WWT's own WTML reader.
  * Usage: CSSEARTH_WWT_PYTHON=python-with-wwt-data-formats node packages/telescope-cli/src/wwt/wwt-catalog-build.mts IMAGESETS_DIR REVISION OUTPUT.jsonl
  */
@@ -49,7 +50,7 @@ const source = resolve(sourceArgument), output = resolve(outputArgument);
 const paths = (await readdir(source)).filter(name => name.endsWith('.xml')).sort();
 if (!paths.length) throw new Error(`No WWT imageset XML files in ${source}.`);
 const inputs = paths.map(path => ({ path: `imagesets/${path}` }));
-const result = spawnSync(process.env.CSSEARTH_WWT_PYTHON ?? 'python3', ['-c', parser, source], { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+const result = spawnSync(process.env.CSSEARTH_WWT_PYTHON ?? 'python3', ['-c', parser, source], { env: telescopePythonEnvironment(), encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
 if (result.status !== 0) throw new Error(`WWT catalog parse failed: ${result.error?.message ?? result.stderr}`);
 const imagesets: unknown = JSON.parse(result.stdout);
 if (!Array.isArray(imagesets) || imagesets.length < paths.length || imagesets.some(row => !row || typeof row !== 'object' ||

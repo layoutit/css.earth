@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { astroqueryToolchain, WORKSPACE, astroquery, VoAccessError, parseLimits, recordKey } from '@cssearth/telescope-core/node';
+import {  astroqueryToolchain, requireWorkspace, astroquery, VoAccessError, parseLimits, recordKey  } from '@cssearth/telescope-core/node';
 test.before(async () => { await astroqueryToolchain(); });
 import { mkdtemp, readFile, writeFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -14,7 +14,7 @@ import { voUrl } from './network-policy.mts';
 import { voCandidates } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
 
-const root = WORKSPACE, fixtures = resolve(root, 'packages/telescope-cli/src/vo/fixtures/telescope-vo');
+const root = requireWorkspace(), fixtures = resolve(root, 'packages/telescope-cli/src/vo/fixtures/telescope-vo');
 const profile = SERVICES[1]!;
 const target = { id: 'betelgeuse', names: ['Betelgeuse'], classification: 'star', classificationSource: 'fixture catalogue' };
 const request = { target: target.id, wavelengthMicrometres: [0.78, 0.85] as const, kind: 'image' as const, result: 'telescope-product' as const };

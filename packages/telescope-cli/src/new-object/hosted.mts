@@ -1,3 +1,5 @@
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../paths.mts';
 /** Planets and companion stars of a generated system: bodies on hosted orbits around a placed star.
  *
  * Phase one writes each body's astronomy record, with its orbit from the spec's route (orbit.mts); the astronomy package is then
@@ -77,7 +79,7 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     const pick = { whereistheplanetKey: o.whereistheplanet, ...(o.body ? { body: o.body } : {}), measurements: csvName, measurementsSource: o.measurementsSource };
     await writeFile(resolve(work, csvName), measurements); await writeFile(resolve(work, 'pick.json'), json(pick));
     const { astroqueryToolchainSync } = await import('@cssearth/telescope-core/node'), toolchain = astroqueryToolchainSync();
-    execFileSync(toolchain.python, [resolve(import.meta.dirname, 'hosted-orbits/posterior-pick.py'), resolve(work, 'pick.json'), resolve(work, 'orbit.json')], { env: { ...process.env, ...toolchain.env }, stdio: ['ignore', 'ignore', 'inherit'] });
+    execFileSync(toolchain.python, [packagePath('src/new-object/hosted-orbits/posterior-pick.py'), resolve(work, 'pick.json'), resolve(work, 'orbit.json')], { env: telescopePythonEnvironment(toolchain.env), stdio: ['ignore', 'ignore', 'inherit'] });
     const orbitText = await readFile(resolve(work, 'orbit.json'), 'utf8');
     orbit = orbitizeHostedOrbit(JSON.parse(orbitText), hostRadiusKm, distance, `${o.source} (${o.url})`, `src/objects/${spec.id}/source/orbits/pick.json`);
     for (const [name, text] of [[csvName, measurements], ['pick.json', json(pick)], ['orbit.json', orbitText]] as const) documents.set(`orbits/${name}`, text);

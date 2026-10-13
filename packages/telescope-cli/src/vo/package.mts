@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { spawn } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { astroqueryToolchain } from '@cssearth/telescope-core/node';
@@ -199,7 +200,7 @@ export async function extractVoPackage(archivePath: string, destination: string,
   await access(destination);
   const toolchain = await astroqueryToolchain();
   return await new Promise<VoPackage>((resolve, reject) => {
-    const child = spawn(toolchain.python, ['-c', PYTHON], { env: { ...process.env, ...toolchain.env }, stdio: ['pipe', 'pipe', 'pipe'] });
+    const child = spawn(toolchain.python, ['-c', PYTHON], { env: telescopePythonEnvironment(toolchain.env), stdio: ['pipe', 'pipe', 'pipe'] });
     let stdout = '', stderr = '';
     child.stdout.setEncoding('utf8').on('data', chunk => { stdout += chunk; });
     child.stderr.setEncoding('utf8').on('data', chunk => { stderr += chunk; });

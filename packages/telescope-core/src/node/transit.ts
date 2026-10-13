@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from './paths.js';
 /** batman owns transit light curves and SciPy owns their nonlinear fit. css.earth owns the time scale, fixed orbit, masks,
  * parameter policy and interpretation of the result. This synchronous boundary keeps existing preparation consumers synchronous. */
 import { spawnSync } from 'node:child_process';
@@ -133,7 +134,7 @@ export function fitTransit(request: TransitFitRequest): TransitFitResult {
   if (request.exposureSeconds !== undefined && !(request.exposureSeconds > 0)) throw new RangeError('Transit exposure must be positive.');
   if (request.fixedShiftSeconds !== undefined && Math.abs(request.fixedShiftSeconds) > request.rangeSeconds) throw new RangeError('A profiled transit shift must be inside the search range.');
   const toolchain = astroqueryToolchainSync();
-  const child = spawnSync(toolchain.python, ['-c', TRANSIT_PYTHON], { env: { ...process.env, ...toolchain.env }, input: JSON.stringify(request), encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  const child = spawnSync(toolchain.python, ['-c', TRANSIT_PYTHON], { env: telescopePythonEnvironment(toolchain.env), input: JSON.stringify(request), encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
   if (child.status !== 0) throw new Error(`Transit fit failed (status ${child.status}): ${(child.stderr ?? '').slice(-4000)}`);
   let value: unknown;
   try { value = JSON.parse(child.stdout); } catch (error) { throw new TypeError(`Transit fit returned invalid JSON: ${String(error)}`); }

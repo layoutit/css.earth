@@ -1,3 +1,4 @@
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Limb darkening for a directly imaged planet. Its disc is unresolved, so its dataset is one measured infrared color; without
  * a limb law that color fills a flat disc. A star takes its law from a model-atmosphere grid at its own temperature and gravity
  * (limb.mts), and so does the planet, from the grid computed for objects this cool in the bands its color is drawn from:
@@ -27,7 +28,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readLimbGrid } from '@cssearth/bake/objects/stellar';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+
 import { authorContextMarkers, MARKER_PATH } from '../../source-authoring/context-markers.mts';
 import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, type PackageFiles } from '../dataset.mts';
@@ -252,7 +253,7 @@ export async function addImagedLimbs(root: string, ids: readonly string[], archi
       : `Its temperature is the ${teffK.toLocaleString('en-US')} K of its measurements record; log g ${logg} follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/${id}.json)` }, outside);
     for (const [path, value] of files) await writeFile(resolve(root, path), value);
     // The marker author draws in the checkout it runs in; a package written to a scratch root keeps the marker it has.
-    if (limb && resolve(root) === resolve(WORKSPACE)) await authorContextMarkers([id]);
+    if (limb && resolve(root) === resolve(requireWorkspace())) await authorContextMarkers([id]);
     say(limb ? `${id}: limb law ${limb.fit ? `from the model ${fit!.source.citation} fit (${fit!.teffK} K, log g ${fit!.logg})` : `at ${teffK} K, log g ${logg}`}: u1 ${limb.u1.toFixed(3)}, u2 ${limb.u2.toFixed(3)}` : `${id}: no limb law: ${outside}; documents brought in line with its ${gray ? 'shape' : 'color'}`);
   }
   return lines;

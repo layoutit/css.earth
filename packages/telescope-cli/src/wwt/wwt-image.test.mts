@@ -6,10 +6,10 @@ import sharp from 'sharp';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseWwtCatalogLines } from './wwt-catalog.mts';
 import { exportWwtImage } from './wwt-image.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
 const test = sourceTest();
-const root = WORKSPACE;
+const root = requireWorkspace();
 
 test('a saved WWT TAN entry becomes one pinned static PNG without network access in the test', async () => {
   const catalog = parseWwtCatalogLines(await readFile(resolve(root, 'src/sources/wwt/core-imagesets.jsonl'), 'utf8'));

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Rebuild one STIS TIME-TAG exposure in a moving target's own rest frame.
  *
  *   node packages/telescope-cli/src/archives/hst/timetag-frame.mts <definition id> <files directory> <output directory> [--fetch] [--receipt]
@@ -133,7 +134,7 @@ export interface TargetPlace { readonly julianDate: number; readonly rightAscens
 
 /** The target's place and apparent size at one instant, from the pinned Horizons response. */
 export async function targetPlace(definition: TimeTagDefinition, julianDate: number, mayAsk: boolean): Promise<TargetPlace> {
-  const path = resolve(PROGRAMS, definition.horizons.responses);
+  const path = resolve(programStorePath(PROGRAMS), definition.horizons.responses);
   const responses = await readHorizonsResponses(path).catch(() => ({}));
   const text = await horizonsResponse(responses, definition.horizons.observer, definition.horizons.target, definition.horizons.quantities, [julianDate], mayAsk);
   if (mayAsk) await writeHorizonsResponses(path, responses);
@@ -442,7 +443,7 @@ export async function writeRecord(run: TimeTagRun, outputDirectory: string, writ
     evidence.map(entry => ({ ...entry })));
 }
 
-export const definitionPath = (id: string) => resolve(PROGRAMS, `${id}.timetag.json`);
+export const definitionPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.timetag.json`);
 export const readTimeTagDefinition = async (id: string) => parseTimeTagDefinition(JSON.parse(await readFile(definitionPath(id), 'utf8')));
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -460,7 +461,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const record = await writeRecord(run, output, written);
   console.log(`wrote ${written.join(', ')} and ${written[0]}.product.json to ${output} (${record.outputs.length} outputs pinned)`);
   if (flags.includes('--receipt')) {
-    const path = resolve(PROGRAMS, `${definition.id}.timetag.reproduction.json`);
+    const path = programStorePath(resolve(programStorePath(PROGRAMS), `${definition.id}.timetag.reproduction.json`), 'write');
     await writeFile(path, `${JSON.stringify(timeTagReceipt(run), null, 1)}\n`);
     console.log(`wrote ${path}`);
   }

@@ -1,3 +1,4 @@
+import { inputPath } from '../paths.mts';
 /** Inventory native products already pinned by a body package. Header reads are discovery only; qualification verifies whole-file pins. */
 import { isisGeometryBands } from './native-metadata.mts';
 import { sourceHeaders } from './source-transfer.mts';
@@ -5,7 +6,7 @@ import { isis3CoreHeader } from '@cssearth/bake/objects/raster';
 import { open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { resolve, dirname, basename } from 'node:path';
-import { plainName } from '@cssearth/telescope-core/node';
+import { plainName, USER_ROOT } from '@cssearth/telescope-core/node';
 import { requireArray, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
 import { readFitsHeader } from '@cssearth/fits';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope-core';
@@ -14,9 +15,9 @@ export interface SourceIntakeIssue { readonly path: string; readonly state: 'una
 const LIMIT = 128 * 1024;
 /** Public search can restrict intake to local bytes or an existing header cache. */
 export async function sourceHeader(root: string, file: SourceFile, options: { readonly fetchRemote?: boolean } = {}): Promise<Buffer> {
-  const local = await open(resolve(root,file.path),'r').catch(error => { if(hasErrorCode(error,'ENOENT')) return undefined; throw error; });
+  const local = await open(inputPath(root, file.path),'r').catch(error => { if(hasErrorCode(error,'ENOENT')) return undefined; throw error; });
   if(local) { try { const bytes=Buffer.alloc(LIMIT); const read=await local.read(bytes,0,bytes.length,0); return bytes.subarray(0,read.bytesRead); } finally {await local.close();} }
-  const cache=resolve(root,'output/telescopes/source-headers',`${encodeURIComponent(file.path)}.json`);
+  const cache=resolve(USER_ROOT, 'output/telescopes/source-headers',`${encodeURIComponent(file.path)}.json`);
   const cached=await readFile(cache,'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
   if(cached && cached.version === 4) { const bytes=Buffer.from(requireString(cached.base64),'base64'); if(cached.origin!==file.origin || cached.bytes!==bytes.length)throw new Error(`Header cache ${cache} holds ${String(cached.bytes)} bytes from ${String(cached.origin)}, not the ${bytes.length} bytes of ${file.origin} it should.`);return bytes; }
   if (options.fetchRemote === false) throw new Error('Header retrieval requires a local source file or a previously cached header.');
@@ -80,7 +81,7 @@ export async function intakeSources(root:string,target:string,existing:readonly 
       const pointer=pds3Values(label,key),name=pointer?.[0];if(!name)throw new Error(`Unreadable ${key} pointer.`);
       if(/^\d+(?:\s*<BYTES>)?$/u.test(name)){
         const recordBytes=Number(pds3Keyword(label,'RECORD_BYTES',[])??1),offset=(Number(name.split(/\s/u)[0])-1)*(name.includes('<BYTES>')?1:recordBytes);
-        const size=await stat(resolve(root,file.path)).then(s=>s.size,()=>undefined);
+        const size=await stat(inputPath(root, file.path)).then(s=>s.size,()=>undefined);
         if(!Number.isSafeInteger(offset)||offset<0||(size!==undefined&&offset>=size))throw new Error(`Attached ${key} pointer lies outside the local file; an extracted label is not the complete observation.`);
         if(!/HISTORY|HEADER|STRUCTURE/u.test(key))science=file;continue;
       }

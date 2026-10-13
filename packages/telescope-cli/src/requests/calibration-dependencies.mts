@@ -1,7 +1,7 @@
 /** Exact recorded dependencies. Retrieval does not establish calibration accuracy. */
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
-import { resolve, relative, basename } from 'node:path';
-import { fileSize, plainName } from '@cssearth/telescope-core/node';
+import { resolve, basename } from 'node:path';
+import { fileSize, plainName, USER_ROOT } from '@cssearth/telescope-core/node';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 export interface CalibrationDependency {
@@ -17,7 +17,7 @@ export function parseCalibrationDependencies(raw: unknown): CalibrationDependenc
     const row={field:requireString(r.field),reference:requireString(r.reference),status:status as CalibrationDependency['status'],reason:requireString(r.reason),applicability:applicability as CalibrationDependency['applicability']};
     if(status==='unresolved')return row;
     const bytes=requireFiniteNumber(r.bytes),file=requireString(r.file);
-    if(!Number.isSafeInteger(bytes)||bytes<1||file.startsWith('/')||file.split('/').includes('..'))throw new Error('Invalid calibration pin');
+    if(!Number.isSafeInteger(bytes)||bytes<1||file.split('/').includes('..'))throw new Error('Invalid calibration pin');
     return {...row,bytes,file,origin:requireString(r.origin)};
   });
 }
@@ -44,7 +44,7 @@ export async function calibrationDependencies(root:string, references:readonly {
     const origin=calibrationOrigin(ref.value);
     if(!origin){rows.push({field:ref.field,reference:ref.value,status:'unresolved',applicability:'unknown',reason:'No exact archive resolver for this reference.'});continue;}
     // Cached under the archive host and path it came from, so the cache reads as the archive does.
-    const url=new URL(origin), dir=resolve(root,'output/telescopes/calibration',plainName(url.hostname),...url.pathname.split('/').slice(1,-1).map(part=>plainName(part)||'_'),...(url.search?[plainName(url.search)]:[])), file=resolve(dir,basename(url.pathname)), manifest=resolve(dir,'pin.json');
+    const url=new URL(origin), dir=resolve(USER_ROOT, 'output/telescopes/calibration',plainName(url.hostname),...url.pathname.split('/').slice(1,-1).map(part=>plainName(part)||'_'),...(url.search?[plainName(url.search)]:[])), file=resolve(dir,basename(url.pathname)), manifest=resolve(dir,'pin.json');
     try{
       const saved=await readFile(manifest,'utf8').then(t=>requireRecord(JSON.parse(t)),()=>undefined);
       if(saved){const current=await fileSize(file);if(current.bytes!==saved.bytes||saved.origin!==origin)throw new Error(`Calibration cache integrity mismatch: ${file} is ${current.bytes} bytes from ${String(saved.origin)}; ${manifest} records ${String(saved.bytes)} bytes from ${origin}.`);}
@@ -70,7 +70,7 @@ export async function calibrationDependencies(root:string, references:readonly {
         if(conflict){applicability='contradicted';reason='Calibration selectors contradict the product headers; this dependency cannot support scientific facts.';}
         else if(checked){applicability='matched';reason=`Exact recorded file and ${checked} instrument/configuration selectors agree; calibration accuracy is not independently verified.`;}
       }
-      rows.push({field:ref.field,reference:ref.value,status:'pinned',applicability,reason,file:relative(root,file),origin,...pin});
+      rows.push({field:ref.field,reference:ref.value,status:'pinned',applicability,reason,file,origin,...pin});
     }catch(error){
       if(String(error).includes('integrity mismatch'))throw error;
       rows.push({field:ref.field,reference:ref.value,status:'unresolved',applicability:'unknown',origin,reason:String(error)});

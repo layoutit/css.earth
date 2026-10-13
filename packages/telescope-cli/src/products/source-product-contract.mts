@@ -1,3 +1,4 @@
+import { inputPath } from '../paths.mts';
 /** Validated source declarations and receipt metadata; no intake, downloads or qualification. */
 import { resolve, relative, isAbsolute } from 'node:path';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
@@ -138,7 +139,7 @@ export function assertPinnedLabel(product: Pick<SourceProduct, 'decoder' | 'labe
 }
 
 export function inside(root: string, path: string): string {
-  const file = resolve(root, path), rel = relative(root, file);
+  const file = inputPath(root, path), rel = relative(root, file);
   if (!rel || isAbsolute(path) || rel === '..' || rel.startsWith('../')) throw new TypeError(`Source path escapes its package: ${path}`);
   return file;
 }

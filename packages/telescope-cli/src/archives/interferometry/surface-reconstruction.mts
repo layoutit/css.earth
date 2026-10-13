@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { packagePath } from '../../paths.mts';
 /** Reconstruct a star's surface on a sphere with the pinned ROTIR toolchain, and write the star as ROTIR projects it on the sky
  * so the result can be checked with the same tools as a sky-plane image (spotless-disc.mts).
  *
@@ -72,8 +73,8 @@ export function parseSurfaceSummary(text: string) {
 export async function reconstructSurface(oifits: string | readonly string[], directory: string, options: SurfaceOptions) {
   const root = await toolchainPath('rotir'), { entry } = await toolchainDescriptor('rotir');
   await mkdir(directory, { recursive: true });
-  const script = resolve(import.meta.dirname, 'rotir/surface.jl');
-  const run = spawnSync(resolve(root, requireString(entry.executable)), [`--threads=${options.threads ?? 8}`, `--project=${toolchainEnvironment(entry)}`, script, ...surfaceArguments(oifits, directory, options)],
+  const script = packagePath('src/archives/interferometry/rotir/surface.jl');
+  const run = spawnSync(resolve(root, requireString(entry.executable)), [`--threads=${options.threads ?? 8}`, `--project=${toolchainEnvironment(entry, root)}`, script, ...surfaceArguments(oifits, directory, options)],
     { env: { ...process.env, JULIA_DEPOT_PATH: resolve(root, 'depot') }, stdio: ['ignore', 'inherit', 'pipe'], encoding: 'utf8' });
   // ROTIR prints five warnings about OITOOLS bindings at load; they are known and harmless on the pinned commits.
   const errors = String(run.stderr).split('\n').filter(line => line.trim() && !/Imported binding OITOOLS\.visibility_|^\s*[└│┌]\s*$/u.test(line));

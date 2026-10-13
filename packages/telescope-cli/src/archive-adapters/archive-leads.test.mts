@@ -1,8 +1,11 @@
+import '../test-user-root.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import test, { beforeEach } from 'node:test';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+beforeEach(() => rm(resolve(USER_ROOT, 'output/telescopes/archive-leads'), { recursive: true, force: true }));
 import { searchGeminiLeads, searchKeckLeads } from './archive-leads.mts';
 import { FRESH_VARIABLE } from '../archives/memory.mts';
 

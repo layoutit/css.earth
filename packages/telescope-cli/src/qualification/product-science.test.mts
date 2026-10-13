@@ -1,3 +1,4 @@
+import '../test-user-root.mts';
 import assert from 'node:assert/strict';
 import { after } from 'node:test';
 import { sourceTest } from '@cssearth/objects/node/source-test';

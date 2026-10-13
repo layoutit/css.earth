@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { packagePath } from '../../paths.mts';
 /** The Spitzer ledger: what the Heritage Archive holds for the objects this repository ships, by observing mode, which of
  * those modes this toolkit can re-make, and how far that is proved.
  *
@@ -150,7 +152,7 @@ export interface RepositoryState {
 
 /** What this repository holds: the programs pinned, and the products a reproduction receipt names and validates. A receipt
  * that does not parse, or that names a product no pinned program holds, counts for nothing. */
-export async function repositoryState(programs = PROGRAMS) {
+export async function repositoryState(programs = programStorePath(PROGRAMS)) {
   const files = await readdir(programs).catch(() => [] as string[]);
   const pinned = new Map<string, number>(), checked = new Map<string, number>();
   const programIds = new Map<string, string[]>(), checkedProgramIds = new Map<string, string[]>(), receiptPaths = new Map<string, string[]>();
@@ -292,7 +294,7 @@ const table = (header: readonly string[], rows: readonly (readonly string[])[]) 
 /** The group of objects the guide answers for by name, and what it says of them: data beside the programs, because this package
  * names no body. */
 export interface LedgerFocus { readonly heading: string; readonly objects: readonly string[]; readonly noneObserved: string; readonly allObserved: string }
-export const SPITZER_LEDGER_FOCUS = resolve(REPOSITORY, 'packages/telescope-cli/src/archives/spitzer/ledger-focus.json');
+export const SPITZER_LEDGER_FOCUS = packagePath('packages/telescope-cli/src/archives/spitzer/ledger-focus.json');
 export function spitzerLedgerFocus(path = SPITZER_LEDGER_FOCUS): LedgerFocus {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Spitzer ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Compare the re-run level-2 event list of an observation with the archive's own, event by event: the oracle for reprocess.mts.
  *
  *   node packages/telescope-cli/src/archives/chandra/compare.mts <program id> <obsid> <run directory> [--raw <dir>]...
@@ -24,7 +25,7 @@ import { access, readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { FitsHeader } from '@cssearth/fits';
-import { addProductEvidence, readProductRecord, WORKSPACE } from '@cssearth/telescope-core/node';
+import { addProductEvidence, readProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductEvidence, type ProductRecord } from '@cssearth/objects';
 import { chandraFile, observationMode, PROGRAMS, type ChandraFile } from './archive.mts';
@@ -45,7 +46,7 @@ const KEYS: Readonly<Record<string, readonly string[]>> = {
 const IMAGE_BLOCKS = 1024;
 /** One ACIS or HRC sky pixel, in arcseconds; the level-2 sky grid is stated in them (TCDLT of the sky columns). */
 const SKY_PIXEL_ARCSEC = 0.492;
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 
 /** The CIAO and CALDB that made this event list, from the record the run wrote beside it. The machine running the comparison has
  * its own installed CIAO and CALDB, which may be years from the ones that made the event list and are never what a receipt
@@ -244,7 +245,7 @@ export async function compareWithArchive(id: string, obsid: number, run: string,
       binnedImage: compareBinnedImage(ourX, ourY, theirX, theirY),
       columns, columnsOnOneSide: onlyOneSide,
     };
-    const path = resolve(PROGRAMS, `${id}.${receipt.product}.reproduction.json`);
+    const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${receipt.product}.reproduction.json`), 'write');
     await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
     // What this comparison established goes on the record of the run that made the event list, naming the exact product checked
     // and the receipt holding the numbers. The record refuses it unless the products it pins are still the files on disk.

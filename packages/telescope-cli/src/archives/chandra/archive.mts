@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** Find a Chandra observation's files in the Chandra Data Archive and pin them as a Chandra program.
  *
  *   node packages/telescope-cli/src/archives/chandra/archive.mts <program id> <obsid> [<obsid> ...]
@@ -27,10 +30,10 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { tapRows, WORKSPACE } from '@cssearth/telescope-core/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
-export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/chandra/programs');
+export const PROGRAMS = packagePath('packages/telescope-cli/src/archives/chandra/programs');
 export const TAP = 'https://cda.harvard.edu/cxctap';
 export const ARCHIVE = 'https://cxc.cfa.harvard.edu/cdaftp/byobsid';
 const NAME = /^[A-Za-z0-9._-]+$/u;
@@ -284,7 +287,7 @@ export async function chandraObservation(obsid: number): Promise<ChandraObservat
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [id, ...obsids] = process.argv.slice(2);
   if (!id || !NAME.test(id) || !obsids.length || !obsids.every(value => /^\d+$/u.test(value))) throw new TypeError('Usage: archive <program id> <obsid> [...]');
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.json`), 'write');
   const existing = await readFile(path, 'utf8').then(text => parseChandraProgram(JSON.parse(text)), () => null);
   const entries = [...existing?.observations ?? []];
   let target = existing?.target;
@@ -296,7 +299,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     console.log(`${entry.obsid}: ${entry.instrument}/${entry.detector} ${entry.grating} ${[entry.readMode, entry.dataMode].filter(Boolean).join('/')} ${entry.targetName}, ${(entry.livetimeSeconds / 1000).toFixed(1)} ks, ${entry.inputs.length} inputs, ${entry.products.length} products, ASCDSVER ${entry.ascdsVersion}`);
   }
   const program = parseChandraProgram({ schema: 'cssearth-chandra-program@1', id, target, observations: entries });
-  await mkdir(PROGRAMS, { recursive: true });
+  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`CHANDRA_PROGRAM ${path}`);
 }

@@ -1,9 +1,10 @@
+import { packagePath } from '../paths.mts';
+import { checkoutProjectRoot, inputPath } from '../paths.mts';
 /** Generate a complete placed-star package from a star spec (spec.mts): the astronomy record from Gaia DR3 and SIMBAD, the color
  * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue color and navigation
  * marker from that dataset, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
  * packages/telescope-cli/src/new-object/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -495,7 +496,7 @@ export async function runNewObject(specPath: string, { root = checkoutProjectRoo
   }
   if (hosted.length) {
     await mkdir(resolve(root, dirname(HANDOFF)), { recursive: true }); await writeFile(resolve(root, HANDOFF), json({ refresh, records: hosted }));
-    const out = execFileSync(process.execPath, [resolve(import.meta.dirname, 'new-object-cli.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
+    const out = execFileSync(process.execPath, [packagePath('src/new-object/new-object-cli.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
     for (const result of JSON.parse(out) as NewObjectResult[]) { results.push(result); if (result.failed) progress(`  ${result.id}: FAILED, not written: ${result.failed}`); }
   }
   await ensureHostSystems(root, [...(hosted as { spec: { id: string; kind: string }; hostId: string }[]).map(record => ({ id: record.spec.id, host: record.hostId, planet: record.spec.kind === 'planet' })), ...specs.flatMap(spec => spec.boundTo ? [{ id: spec.id, host: spec.boundTo.host, planet: false }] : [])].filter(body => results.some(result => result.id === body.id && !result.failed)), progress);

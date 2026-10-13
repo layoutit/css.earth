@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from './paths.js';
 /** The only process boundary into Peppi and pdr. Exact discovery cannot truncate; decoding loads every advertised data object. */
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -203,7 +204,7 @@ json.dump(answer, sys.stdout, allow_nan=False, separators=(',',':'))
 
 export type PdsPackageRunner = (python: string, env: NodeJS.ProcessEnv, request: PdsPackageRequest) => Promise<unknown>;
 export const runPdsPackageProcess: PdsPackageRunner = (python, env, request) => new Promise((done, fail) => {
-  const child = spawn(python, ['-c', PYTHON], { env: { ...process.env, ...env }, stdio: ['pipe', 'pipe', 'pipe'] });
+  const child = spawn(python, ['-c', PYTHON], { env: telescopePythonEnvironment(env), stdio: ['pipe', 'pipe', 'pipe'] });
   let stdout = '', stderr = '';
   child.stdout.setEncoding('utf8').on('data', chunk => { stdout += chunk; });
   child.stderr.setEncoding('utf8').on('data', chunk => { stderr += chunk; });

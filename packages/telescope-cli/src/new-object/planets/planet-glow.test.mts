@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import type { Archive } from '../archives/archives.mts';
 import { EMISSION_COLUMNS, EQUILIBRIUM_QUERY, EQUILIBRIUM_TEST, SPITZER_ECLIPSES, equilibriumFromArchive, installThermalDataset, parseEquilibriumRows, parseSpitzerEclipses, thermalColorLine, thermalFromArchive, type EquilibriumSpec } from './planet-datasets.mts';
 
@@ -63,7 +63,7 @@ test('the equilibrium temperature is the default parameter set\'s, else the late
 
 test('an expected glow says it is an estimate everywhere, and a measured day side replaces it', async () => {
   const id = 'trappist-1f', o = `src/objects/${id}`, paths = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'];
-  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
   const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
   const estimate: EquilibriumSpec = { temperatureK: 1624, source: 'Southworth 2012, equilibrium temperature (NASA Exoplanet Archive planetary systems table)', url: 'https://ui.adsabs.harvard.edu/abs/2012MNRAS.426.1291S/abstract', chosen: "2 papers in the archive print one; the archive's default parameter set" };
   const installed = await installThermalDataset(files, id, 'TRAPPIST-1f', estimate, undefined);
@@ -95,7 +95,7 @@ test('a measured day side too cool to glow, or on an eccentric orbit, is its own
   const cool = (await thermalFromArchive(archive(), 'WASP-29 b')).cool!;
   assert.deepEqual([cool.temperatureK, cool.uncertaintyK, cool.wavelengthMicrometres], [913, 60, 4.5], 'the lookup hands back a measurement it cannot show as a glow');
   const id = 'trappist-1f', o = `src/objects/${id}`, paths = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'];
-  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
   const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
   assert.deepEqual(installDaysideDataset(files, id, 'TRAPPIST-1f', cool, false), { promoted: true });
   assert.deepEqual(after('source/photometry/dayside-temperature.json').temperatureK, { value: 913, lower: 853, upper: 973 });
@@ -128,7 +128,7 @@ test('a small planet of a red dwarf takes the bare-rock maximum, and only when i
   assert.match(rockEstimate(8489.3, star, { ...orbit, aOverRstar: 3 }).why ?? '', /its irradiation temperature, 2078 K, is outside the 480 to 1,930 K the estimate was tested on/u);
   // Installed, every text says it is a bare-rock estimate and states the test with its outlier.
   const id = 'trappist-1f', o = `src/objects/${id}`, paths = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'];
-  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
   const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
   const installed = await installThermalDataset(files, id, 'TRAPPIST-1f', rock!, undefined), control = after('source/content/object.json').datasets.controls[0];
   assert.equal(control.qualification, 'An estimate, not a measurement: black-body color at 1,204 K, the bare-rock maximum for its orbit.');

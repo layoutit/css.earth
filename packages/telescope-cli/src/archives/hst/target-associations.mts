@@ -1,12 +1,13 @@
 #!/usr/bin/env node
+import { inputPath } from '../../paths.mts';
 /** Resolve the HST target-in-field claims from current MAST observation rows through the pinned Astroquery client. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociationSource, WORKSPACE } from '@cssearth/telescope-core/node';
+import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociationSource, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 
-const ROOT = WORKSPACE;
-export const TARGET_ASSOCIATIONS = resolve(ROOT, 'src/sources/telescopes/target-associations.json');
+const ROOT = WORKSPACE ?? USER_ROOT;
+export const TARGET_ASSOCIATIONS = inputPath(ROOT, 'src/sources/telescopes/target-associations.json');
 
 export async function verifyHstTargetAssociations(sources: readonly TargetAssociationSource[]) {
   const hst = sources.filter(entry => entry.collection === 'HST');

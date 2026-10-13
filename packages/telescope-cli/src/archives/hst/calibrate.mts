@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Re-run an HST instrument's own pipeline from the raw exposure of a pinned observation.
  *
  *   node packages/telescope-cli/src/archives/hst/calibrate.mts <program id> <observation> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
@@ -120,7 +121,7 @@ print(json.dumps({'seconds': round(time.time() - start, 1), 'peakRssBytes': peak
 `;
 
 export async function readHstProgram(id: string) {
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`);
   return { path, program: parseHstProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 

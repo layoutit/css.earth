@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Subtract a reference star's coronagraphic PSF from a Hubble coronagraph observation: reference-star differential imaging for
  * ACS/HRC, the stage the archive does not run. A coronagraph blocks the star's core, but its diffracted and scattered light is
  * still far brighter than a debris disc; a star of similar color observed behind the same occulter in the same orbit sequence
@@ -70,7 +71,7 @@ export function parsePsfSubtraction(value: unknown): PsfSubtraction {
         if (a.length !== 2 || !(a[0]! > 0 && a[1]! > a[0]!)) throw new TypeError('The centre annulus runs from a positive inner to a larger outer radius.');
         return { annulusArcsec: [a[0]!, a[1]!] as const, excludeHalfWidthArcsec: requireFiniteNumber(c.excludeHalfWidthArcsec) }; })() }, source: requireString(row.source) };
 }
-export const psfSubtractionPath = (id: string) => resolve(PROGRAMS, `${id}.psf-subtraction.json`);
+export const psfSubtractionPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.psf-subtraction.json`);
 
 const SUBTRACT = `
 import json, os, shutil, subprocess, sys, threading, time

@@ -1,3 +1,4 @@
+import { inputPath } from '../paths.mts';
 /** Acquire and qualify one exact package observation. Decoding establishes readability, never calibration or map registration. */
 import { readProductScience } from './product-science.mts';
 import { parseProductFacts } from './qualified-observations.mts';
@@ -67,7 +68,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   for (const file of product.files) await acquireSourceFile(root, file);
   let run = await sourceRun(root,product); const receipt = sourceReceipt(product);
   await assertInputs(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
-  const previous = await readProductRecord(resolve(root, receipt));
+  const previous = await readProductRecord(inputPath(root, receipt));
   const oldFacts = await readFile(resolve(root, `${dirname(receipt)}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined);
   if(oldFacts && !await verifyCalibrationDependencies(root,oldFacts.calibrationDependencies??[]))throw new Error('Calibration dependency pin mismatch');
   if(oldFacts)run=await sourceRun(root,product,oldFacts.calibrationDependencies);
@@ -120,7 +121,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
     const value = describePhysicalSphericalGrid({ id: product.id, target: product.target, member: member('electron-density-fits', relative(dirname(resolve(root, descriptorPath)), sciencePath), 'science', bytes, 'application/fits'), context, inspection, producingRecord: receipt });
     await writeFile(resolve(root, descriptorPath), `${JSON.stringify(value, null, 2)}\n`); descriptorOutput.push({ path: descriptorPath, file: resolve(root, descriptorPath) });
   }
-  await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }, ...descriptorOutput, ...(metadata.calibrationDependencies??[]).flatMap(d=>d.file?[{path:d.file,file:resolve(root,d.file)}]:[])],
+  await writeProductRecord(inputPath(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }, ...descriptorOutput, ...(metadata.calibrationDependencies??[]).flatMap(d=>d.file?[{path:d.file,file:resolve(root,d.file)}]:[])],
     [{ kind: 'archive-origin', receipt, product: science.path, establishes: 'Manifest-pinned archive bytes, matching header identity and complete supported numeric structure decoding. No local recalibration, archive comparison or surface registration is claimed.' }]);
   return { product: science.path, receipt, reused: false };
 }

@@ -13,8 +13,10 @@ the bake. Nothing here names a body.
 Keep the main entry (`src/index.ts`) host-neutral: no Node built-ins, DOM globals or file I/O. `src/node/` is
 `@cssearth/telescope-core/node`; it may import `node:*`, and nothing outside `src/node/` may import it. Code finds the
 package's own files (`toolchains/`) and the workspace only through `src/node/paths.ts`, which locates the package by its
-name, so the same code works from its sources, its build and a bundle. The library imports only packages and Node
-built-ins; it never reaches `packages/bake`, `packages/telescope-cli`, `src/`, `site/` or `labs/`.
+name, so the same code works from its sources, its build and a bundle. `USER_ROOT` owns writable state; optional
+`WORKSPACE` is admitted by an explicit flag/environment or a source entry launched inside its checkout. Admission may check
+checkout sentinels. The library imports only packages and Node built-ins; it never loads implementation or body data from
+`packages/bake`, `packages/telescope-cli`, `src/`, `site/` or `labs/`.
 
 ## Behaviour is part of the contract
 

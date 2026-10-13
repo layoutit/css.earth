@@ -1,3 +1,4 @@
+import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** SPIDERMAN owns spherical-harmonic brightness maps and the phase curves they make (Louden & Kreidberg 2018). css.earth passes a
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
@@ -6,11 +7,11 @@ import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { TOOLCHAINS, USER_ROOT } from './paths.js';
 import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-export const SPIDERMAN_ROOT = resolve(WORKSPACE, 'output/toolchains/spiderman');
+export const SPIDERMAN_ROOT = resolve(USER_ROOT, 'output/toolchains/spiderman');
 
 const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install';
 const descriptor = () => readToolchainPins('spiderman', 'spiderman-toolchain.json');
@@ -34,8 +35,8 @@ export async function installSpiderman() {
 export interface SpidermanToolchain { readonly python: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
 
 export function spidermanToolchainSync(): SpidermanToolchain {
-  const pins = descriptor(), { entry } = pins, bin = resolve(SPIDERMAN_ROOT, 'env/bin'), python = resolve(bin, 'python');
-  assertInstalledMarker(SPIDERMAN_ROOT, pins, 'SPIDERMAN', INSTALL);
+  const pins = descriptor(), { entry } = pins, root = resolveInstalledToolchain(SPIDERMAN_ROOT, pins) ?? SPIDERMAN_ROOT, bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(root, pins, 'SPIDERMAN', INSTALL);
   try { accessSync(python); } catch { throw new Error(`The SPIDERMAN toolchain has no python at ${python}.`); }
   // SPIDERMAN reads ~/.spidermanrc when present; an empty home keeps a user's file out of the result.
   const home = resolve(SPIDERMAN_ROOT, 'home'); mkdirSync(home, { recursive: true });

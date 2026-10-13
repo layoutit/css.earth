@@ -9,13 +9,13 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import type { Archive } from '../archives/archives.mts';
 import { rebuildExistingDatasets } from '../planets/planet-datasets.mts';
 import { fileNamesObject, installSimulationDataset, memberFormat, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
-const fixture = resolve(WORKSPACE, 'packages/bake/src/objects/raster/netcdf/fixtures/field-cdf2.nc');
+const fixture = resolve(requireWorkspace(), 'packages/bake/src/objects/raster/netcdf/fixtures/field-cdf2.nc');
 const served = async () => JSON.parse(await readFile(resolve(import.meta.dirname, '../../fixtures/telescope-simulations/zenodo-trappist-1e.json'), 'utf8')) as { hits: { hits: Record<string, unknown>[] } };
 /** The ExoCAM record with the fixture standing in for its file: the same record, one file of the fixture's name and size. */
 const record = async (change: (record: Record<string, any>) => void = () => {}) => {
@@ -93,7 +93,7 @@ test('the release is checked on Zenodo: a license that allows reuse, a record th
 });
 
 test('the dataset is labelled as a model with its scenario, its range is the file\'s, and it takes the default from a neutral shape only', async () => {
-  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
   const before = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>, defaultDataset = before('source/content/object.json').datasets.defaultDataset;
   const entry = entryOf(), release = await simulationRelease(archive(await record()), id, ['TRAPPIST-1f'], entry);
   const { field: _kept, ...whole } = simulationRecipe(entry), field = await loadNetcdfLonLatField(resolve(fixture, '..'), { ...whole, path: 'field-cdf2.nc' });
@@ -161,7 +161,7 @@ test('the dataset is labelled as a model with its scenario, its range is the fil
   installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ range: [180, 340] }), release, field.report, RANGES);
   // A planet that opens on a measured map keeps it: the simulation is added beside it.
   const measured = 'hd-189733b', m = `src/objects/${measured}`;
-  const mapped = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${m}/${path}`, await readFile(resolve(WORKSPACE, m, path), 'utf8')] as const)));
+  const mapped = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${m}/${path}`, await readFile(resolve(requireWorkspace(), m, path), 'utf8')] as const)));
   const opensOn = () => (JSON.parse(String(mapped.get(`${m}/source/content/object.json`))) as { datasets: { defaultDataset: string } }).datasets.defaultDataset;
   const measuredDefault = opensOn();
   assert.equal(installSimulationDataset(mapped, measured, 'HD 189733 b', entry, release, field.report, RANGES).promoted, false);
@@ -212,7 +212,7 @@ test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field ca
     execFileSync('zip', ['-q', 'release.zip', 'run/field-nc4.nc'], { cwd: scratch });
     const zip = await readFile(resolve(scratch, 'release.zip')), asked: string[] = [];
     const release = await simulationRelease(archive(await record(exocam => { exocam.files = [{ key: 'release.zip', size: zip.length }, ...exocam.files]; })), id, ['TRAPPIST-1f'], entry);
-    const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+    const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
     const zenodo = (async (url: unknown) => { asked.push(String(url)); return new Response(new Uint8Array(zip)); }) as typeof fetch;
     // The archive is fetched once and the member taken out of it by the step the package then declares.
     assert.equal(await restoreSimulationMember(files, id, sourceRoot, entry, release, zenodo), zip.length);
@@ -257,8 +257,8 @@ test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field ca
 test('new-object --simulation writes the package of a body already in the tree, and refuses what the file does not hold', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'simulation-tree-'));
   try {
-    for (const path of PACKAGE) await cp(resolve(WORKSPACE, o, path), resolve(root, o, path), { recursive: true });
-    await cp(resolve(WORKSPACE, 'packages/astronomy/data/bodies', `${id}.json`), resolve(root, 'packages/astronomy/data/bodies', `${id}.json`));
+    for (const path of PACKAGE) await cp(resolve(requireWorkspace(), o, path), resolve(root, o, path), { recursive: true });
+    await cp(resolve(requireWorkspace(), 'packages/astronomy/data/bodies', `${id}.json`), resolve(root, 'packages/astronomy/data/bodies', `${id}.json`));
     const zenodo = serving(await readFile(fixture)), progress: string[] = [];
     const lines = await rebuildExistingDatasets(root, [id], 'simulation', archive(await record()), line => { progress.push(line); }, new Map(), new Map(), parseSimulationEntries([written]), zenodo);
     assert.equal(progress[0], 'trappist-1f: 1,340 bytes of field-cdf2.nc fetched from Zenodo record 10.5281/zenodo.5532765');

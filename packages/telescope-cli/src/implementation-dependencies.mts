@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Plugin } from 'esbuild';
 import { pathToFileURL } from 'node:url';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+
 
 /** Workspace entries a bundled lane compiles from their TypeScript sources, so the lane runs the checkout's code rather than
  * a build. Other packages stay external. */
@@ -79,15 +79,22 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
  * tsup configuration names (`@cssearth/renderer/navigation` → `src/navigation/index.ts`); its source subpaths name the file. */
 /** Declared renderer build metadata input, checked by the preparation architecture rule. */
 export const RENDERER_BUILD_CONFIG_PATH = 'packages/renderer/tsup.config.ts';
-let rendererEntries: Promise<Readonly<Record<string, string>>> | undefined;
+const rendererEntries = new Map<string, Promise<Readonly<Record<string, string>>>>();
 /** Read once, when a bundle first reaches the renderer, so a change to the renderer's entry list touches only those. */
-const loadRendererEntries = () => rendererEntries ??= import(pathToFileURL(resolve(WORKSPACE, RENDERER_BUILD_CONFIG_PATH)).href)
-  .then((config: { default: { entry: Record<string, string> } }) => Object.fromEntries(Object.entries(config.default.entry)
-    .map(([name, source]) => [name, `src/${source.slice(source.lastIndexOf('/src/') + '/src/'.length)}`])));
-async function rendererSource(specifier: string): Promise<string | undefined> {
+function loadRendererEntries(root: string): Promise<Readonly<Record<string, string>>> {
+  let entries = rendererEntries.get(root);
+  if (!entries) {
+    entries = import(pathToFileURL(resolve(root, RENDERER_BUILD_CONFIG_PATH)).href)
+      .then((config: { default: { entry: Record<string, string> } }) => Object.fromEntries(Object.entries(config.default.entry)
+        .map(([name, source]) => [name, `src/${source.slice(source.lastIndexOf('/src/') + '/src/'.length)}`])));
+    rendererEntries.set(root, entries);
+  }
+  return entries;
+}
+async function rendererSource(root: string, specifier: string): Promise<string | undefined> {
   if (specifier !== '@cssearth/renderer' && !specifier.startsWith('@cssearth/renderer/')) return undefined;
   const subpath = specifier.slice('@cssearth/renderer/'.length);
-  const built = (await loadRendererEntries())[subpath || 'index'];
+  const built = (await loadRendererEntries(root))[subpath || 'index'];
   if (built) return `packages/renderer/${built}`;
   return /^[a-z-]+\/[\w./-]+\.ts$/u.test(subpath) && !subpath.split('/').includes('..') ? `packages/renderer/src/${subpath}` : undefined;
 }
@@ -115,7 +122,7 @@ export function followedWorkspaceSources(root: string): Plugin {
   return { name: 'followed-workspace-sources', setup(builder) {
     let telescopeCli: Promise<ReadonlyMap<string, string>> | undefined;
     builder.onResolve({ filter: /^@cssearth\// }, async args => {
-      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(args.path)
+      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(root, args.path)
         ?? (args.path.startsWith('@cssearth/telescope/') ? (await (telescopeCli ??= telescopeCliExports(root))).get(args.path) : undefined);
       return source ? { path: resolve(root, source) } : undefined;
     });

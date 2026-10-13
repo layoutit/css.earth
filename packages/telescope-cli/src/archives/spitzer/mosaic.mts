@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Re-make a pinned observation's level-2 mosaics from its level-1 frames.
  *
  *   node packages/telescope-cli/src/archives/spitzer/mosaic.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
@@ -65,7 +68,7 @@ export const BACKGROUND_MATCH_PASSES = 3;
  * correlation 0.9842 to 0.9943, median ratio 0.999856 to 0.999860. */
 export const FATAL_IMASK_BITS = [3, 8, 9, 10, 11, 12, 13, 14] as const;
 export const fatalImaskMask = FATAL_IMASK_BITS.reduce((mask, bit) => mask | (1 << bit), 0);
-export const defaultWorkRoot = resolve(REPOSITORY, 'output/spitzer');
+export const defaultWorkRoot = resolve(USER_ROOT, 'output/spitzer');
 
 export interface MosaicSummary {
   readonly frames: number;
@@ -124,7 +127,7 @@ export async function channelInputs(program: SpitzerProgram, channel: SpitzerCha
 }
 
 const runPython = (python: string, env: NodeJS.ProcessEnv, args: readonly string[]) => new Promise<string>((done, fail) => {
-  const child = spawn(python, args, { env: { ...process.env, ...env }, stdio: ['ignore', 'pipe', 'pipe'] });
+  const child = spawn(python, args, { env: telescopePythonEnvironment(env), stdio: ['ignore', 'pipe', 'pipe'] });
   let out = '', err = '';
   child.stdout.setEncoding('utf8').on('data', chunk => { out += chunk; });
   child.stderr.setEncoding('utf8').on('data', chunk => { err += chunk; });
@@ -168,7 +171,7 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
   };
   const jobPath = resolve(work, `${output}.job.json`);
   await writeFile(jobPath, `${JSON.stringify(job, null, 2)}\n`);
-  const summary = parseMosaicSummary(JSON.parse(await runPython(toolchain.python, toolchain.env, [resolve(import.meta.dirname, 'mosaic.py'), jobPath])) as unknown);
+  const summary = parseMosaicSummary(JSON.parse(await runPython(toolchain.python, toolchain.env, [packagePath('src/archives/spitzer/mosaic.py'), jobPath])) as unknown);
   if (summary.frames !== members.length) throw new Error(`The run combined ${summary.frames} frames; the observation names ${members.length}.`);
   // No evidence here: this stage made the product, it did not check it. compare.mts adds the `archive-agreement` entry to
   // this same record once it has compared the pinned bytes.

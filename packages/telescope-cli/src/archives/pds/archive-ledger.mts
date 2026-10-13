@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { inputPath } from '../../paths.mts';
 /** Build the shared-query ledger from committed Peppi+pdr archive-final programs and their exact records. */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -6,13 +8,13 @@ import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '@cssearth/objects';
 import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS, PDS_PROGRAMS_LOCATION, pdsReceiptName } from './archive-final.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import { WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
 
-const ROOT = WORKSPACE;
+const ROOT = WORKSPACE ?? USER_ROOT;
 export const PDS_LEDGER_SCHEMA = 'cssearth-pds-ledger@1';
 
 export async function buildPdsLedger() {
-  const names = (await readdir(PDS_PROGRAMS).catch(() => [])).filter(name => name.endsWith('.archive-final.json')).sort();
+  const names = (await readdir(programStorePath(PDS_PROGRAMS)).catch(() => [])).filter(name => name.endsWith('.archive-final.json')).sort();
   const modes = new Map<string, { telescope: string; mode: string; programs: string[]; qualified: string[]; receipts: string[] }>();
   const objects = new Map<string, { id: string; observations: Record<string, unknown>[] }>();
   const searched = new Set<string>();
@@ -47,14 +49,14 @@ export async function buildPdsLedger() {
     }
   }
   for (const name of names) {
-    const program = requireRecord(JSON.parse(await readFile(resolve(PDS_PROGRAMS, name), 'utf8')) as unknown, name);
+    const program = requireRecord(JSON.parse(await readFile(resolve(programStorePath(PDS_PROGRAMS), name), 'utf8')) as unknown, name);
     if (program.schema !== PDS_ARCHIVE_FINAL_SCHEMA) throw new TypeError(`${name} has the wrong PDS program schema.`);
     const id = requireString(program.id, 'program id'), target = requireString(program.target, 'program target'), telescope = requireString(program.telescope, 'program telescope'),
       mode = requireString(program.mode, 'program mode'), files = requireArray(program.files, 'program files').map(entry => requireRecord(entry, 'program file')),
       observation = requireRecord(program.observation, 'program observation'), discovery = requireRecord(program.discovery, 'program discovery');
     harvestDates.push(requireString(discovery.harvestIso, 'registry harvest').slice(0, 10));
     const receipt = PDS_PROGRAMS_LOCATION.file(pdsReceiptName(id));
-    const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
+    const record = parseProductRecord(JSON.parse(await readFile(inputPath(ROOT, receipt), 'utf8')) as unknown);
     const selection = requireRecord(record.parameters.selection, 'PDS selection'), science = files.find(file => file.role === 'science');
     const qualified = record.telescope === telescope && record.stage === 'archive-final' && selection.program === id && selection.target === target && selection.lidvid === program.lidvid
       && files.every(file => record.inputs.some(input => input.identity === file.uri && input.bytes === file.bytes)
@@ -82,6 +84,7 @@ export async function buildPdsLedger() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  requireWorkspace();
   const ledger = await buildPdsLedger(), json = `${JSON.stringify(ledger, null, 2)}\n`;
   if (process.argv.includes('--write')) { await writeFile(resolve(ROOT, 'src/sources/pds/ledger.json'), json); }
   else process.stdout.write(json);

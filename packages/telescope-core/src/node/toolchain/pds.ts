@@ -1,12 +1,13 @@
+import { resolveInstalledToolchain } from './resolver.js';
 /** Install and locate the one Peppi+pdr environment under output/toolchains/pds (ignored by git). */
 import { runToolchainProcess } from './process.js';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { WORKSPACE } from '../paths.js';
+import { USER_ROOT } from '../paths.js';
 import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './marker.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-export const PDS_TOOLCHAIN_ROOT = resolve(WORKSPACE, 'output/toolchains/pds');
+export const PDS_TOOLCHAIN_ROOT = resolve(USER_ROOT, 'output/toolchains/pds');
 
 const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts pds install';
 const descriptor = () => readToolchainPins('pds-packages', 'pds-toolchain.json');
@@ -27,8 +28,8 @@ export async function installPdsToolchain() {
 export interface PdsToolchain { readonly python: string; readonly peppiVersion: string; readonly pdrVersion: string; readonly env: NodeJS.ProcessEnv }
 
 export async function pdsToolchain(): Promise<PdsToolchain> {
-  const pins = descriptor(), { entry } = pins, bin = resolve(PDS_TOOLCHAIN_ROOT, 'env/bin'), python = resolve(bin, 'python');
-  assertInstalledMarker(PDS_TOOLCHAIN_ROOT, pins, 'PDS package', INSTALL);
+  const pins = descriptor(), { entry } = pins, root = resolveInstalledToolchain(PDS_TOOLCHAIN_ROOT, pins) ?? PDS_TOOLCHAIN_ROOT, bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(root, pins, 'PDS package', INSTALL);
   if (!await access(python).then(() => true, () => false)) throw new Error(`The PDS package toolchain has no python at ${python}.`);
   return { python, peppiVersion: requireString(entry.peppi), pdrVersion: requireString(entry.pdr),
     env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } };

@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** JunoCam in the PDS: read a volume's index, and pin the calibrated color images of one target as a program.
  *
  *   node packages/telescope-cli/src/archives/juno/archive.mts <program id> <volume> <target> <naif id> <body frame> [--orbit <n>]
@@ -11,12 +14,11 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 
 export const VOLUMES = 'https://planetarydata.jpl.nasa.gov/img/data/juno/';
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
-export const PROGRAMS = resolve(WORKSPACE, archivePrograms('juno').path);
+export const PROGRAMS = packagePath(archivePrograms('juno').path);
 export const PROGRAM_SCHEMA = 'cssearth-junocam-program@1';
 /** The kernel bank and the kernels a JunoCam camera reads, in load order. The trajectory and attitude kernels cover one perijove each, so a program names its own. */
 export const KERNEL_SET = 'juno';
@@ -70,8 +72,8 @@ export function parseProgram(value: unknown): JunocamProgram {
   return { schema: PROGRAM_SCHEMA, id, volume: requireString(record.volume), target: { name: requireString(target.name), naifId: requireFiniteNumber(target.naifId), bodyFrame: requireString(target.bodyFrame) },
     kernelSet: requireString(record.kernelSet), kernels: requireArray(record.kernels, 'program kernels').map(kernel => requireString(kernel)), images };
 }
-export const readProgram = async (id: string) => parseProgram(JSON.parse(await readFile(resolve(PROGRAMS, `${id}.json`), 'utf8')));
-export const writeProgram = async (program: JunocamProgram) => { await mkdir(PROGRAMS, { recursive: true }); await writeFile(resolve(PROGRAMS, `${program.id}.json`), JSON.stringify(program, null, 2) + '\n'); };
+export const readProgram = async (id: string) => parseProgram(JSON.parse(await readFile(resolve(programStorePath(PROGRAMS), `${id}.json`), 'utf8')));
+export const writeProgram = async (program: JunocamProgram) => { requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true }); await writeFile(programStorePath(resolve(programStorePath(PROGRAMS), `${program.id}.json`), 'write'), JSON.stringify(program, null, 2) + '\n'); };
 
 export async function fetchText(url: string, fetcher: typeof fetch = fetch) {
   const response = await fetcher(url);

@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { parseGeometry } from './projection.mts';
 import { verifiedProduct, localOutput } from '../products/verified-product.mts';
 import { parseCli } from '../cli-arguments.mts';
-import { writeProductRecord, WORKSPACE, fileSize } from '@cssearth/telescope-core/node';
+import {  writeProductRecord, requireWorkspace, fileSize  } from '@cssearth/telescope-core/node';
 import { exportSphere } from '../sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { inspectMeasurementSphere } from '@cssearth/telescope/sphere/lane';
@@ -62,7 +62,7 @@ test('CLI separates measurement, navigation and sphere; selectors cannot leak be
 test('sphere inspection validates the map contract, navigation and existing sphere owner',async()=>{
   // The sphere owner reads Mercury's restored prepared runtime; reading it first lets an unrestored checkout skip through sourceTest
   // instead of reporting the missing file as an unavailable sphere.
-  await inspectMeasurementSphere(WORKSPACE,'mercury');
+  await inspectMeasurementSphere(requireWorkspace(),'mercury');
   const root=await mkdtemp(resolve(tmpdir(),'sphere-outputs-'));
   try{
     const {files,outputs}=await mapFixture(root),ready=await listArtifactOutputs(files.record);

@@ -37,7 +37,7 @@ import { runWorkspaceCommand } from './workspace-commands.mts';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import { WORKSPACE, USER_ROOT, requireWorkspace, configureWorkspace } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
@@ -63,7 +63,7 @@ export interface CliServices {
   readonly exportSpatialObject:typeof exportSpatialObject;
   readonly executeFamilyOperation:typeof executeFamilyOperation;
 }
-const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere:async(recordPath,outputDirectory)=>exportSphere(recordPath,outputDirectory,await import(pathToFileURL(resolve(WORKSPACE,'src/platform/solar-geometry.mts')).href)),exportSpatialObject,executeFamilyOperation};
+const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere:async(recordPath,outputDirectory)=>exportSphere(recordPath,outputDirectory,await import(pathToFileURL(resolve(requireWorkspace(),'src/platform/solar-geometry.mts')).href)),exportSpatialObject,executeFamilyOperation};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
   let terminal:ReturnType<typeof createInterface>|undefined;
@@ -200,9 +200,11 @@ async function guidedExploration(root:string,session:ExplorationSession&{readonl
   return guidedArtifact(artifactScreen(await api.listArtifactOutputs(result.resultPath),result.resultPath),io,api,verbose);
 }
 
-export async function main(args: readonly string[], root = WORKSPACE, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices): Promise<number> {
+export async function main(args: readonly string[], root: string | undefined = undefined, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices): Promise<number> {
   const io=injectedIo??processIo(output);
   try {
+    args = configureWorkspace(args);
+    root ??= WORKSPACE ?? USER_ROOT;
     const options = parseCli(args);
     if (options.command === 'help') { io.write(options.short ? SHORT_HELP : HELP); return 0; }
     if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
@@ -245,7 +247,7 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
         const result=options.product?await matchProductSoftware(options.product):await searchAscl(options.query!);
         text=options.json?`${JSON.stringify(result)}\n`:formatAscl(result);code=result.mode==='query'&&!result.entries?.length?3:0;
       }else if(options.command==='new-object'){
-        ({text,code}=await runWorkspaceCommand(root,NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
+        ({text,code}=await runWorkspaceCommand(requireWorkspace(WORKSPACE ?? (root === USER_ROOT ? undefined : root)),NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
       }else if(options.command==='papers'){
         const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.targets.length>1){

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** What the NACO archive holds, for this project's bodies, derived rather than declared.
  *
  *   node packages/telescope-cli/src/archives/naco/archive-ledger.mts            writes src/sources/naco/ledger.json and docs/naco-ledger.md
@@ -190,7 +191,7 @@ export function checkReceipt(value: unknown, file: string, program: Record<strin
 
 /** Each mode's state, read from the pinned programs and the receipts beside them, with every receipt that could not be
  * accepted reported rather than counted or dropped. */
-export async function modeStates(byMode: Readonly<Record<string, number>>, directory = PROGRAMS): Promise<{ modes: ModeState[]; problems: string[] }> {
+export async function modeStates(byMode: Readonly<Record<string, number>>, directory = programStorePath(PROGRAMS)): Promise<{ modes: ModeState[]; problems: string[] }> {
   const files = (await readdir(directory).catch(() => [] as string[])).sort();
   const pinned = new Map<string, string[]>(), programs = new Map<string, Record<string, unknown>>();
   for (const name of files.filter(name => name.endsWith('.json') && !name.includes('.reproduction.'))) {

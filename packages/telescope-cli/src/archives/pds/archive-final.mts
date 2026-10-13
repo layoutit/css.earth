@@ -1,16 +1,19 @@
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** Exact PDS Registry product -> complete byte set -> pdr decode -> archive-final qualification. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pdsPackages, WORKSPACE, pdsToolchain, writeProductRecord } from '@cssearth/telescope-core/node';
+import { pdsPackages, pdsToolchain, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 import { archivePrograms } from '../programs.mts';
 
-const ROOT = WORKSPACE;
+const ROOT = WORKSPACE ?? USER_ROOT;
 export const PDS_ARCHIVE_FINAL_SCHEMA = 'cssearth-pds-archive-final@1';
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const PDS_PROGRAMS_LOCATION = archivePrograms('pds');
-export const PDS_PROGRAMS = resolve(WORKSPACE, PDS_PROGRAMS_LOCATION.path);
+export const PDS_PROGRAMS = packagePath(PDS_PROGRAMS_LOCATION.path);
 /** The file a program's archive-final receipt is, among the programs. */
 export const pdsReceiptName = (id: string): string => `${id}.archive-final.product.json`;
 const SAFE_NAME = /^[A-Za-z0-9._-]+$/u, MAX_FILE_BYTES = 256 * 1024 * 1024;
@@ -99,7 +102,7 @@ function decodedBands(metadata: Record<string, unknown>): DecodedBand[] {
   return [{ filter: textField(metadata, 'filter'), interval: [(center - width / 2) / 10_000, (center + width / 2) / 10_000] as const }];
 }
 
-export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work = resolve(ROOT, 'output/pds', spec.id)) {
+export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work = resolve(USER_ROOT, 'output/pds', spec.id)) {
   if (!SAFE_NAME.test(spec.id) || !spec.use.trim()) throw new TypeError('A PDS qualification needs a safe id and a stated use.');
   const discovered = await pdsPackages({ operation: 'discover-product', targetLid: spec.targetLid, lidvid: spec.lidvid });
   if (discovered.products?.length !== 1) throw new Error(`Peppi did not find the exact PDS product ${spec.lidvid} for ${spec.targetLid}.`);
@@ -149,8 +152,8 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
       { role: 'uncertainty', supplied: false, reason: 'This PDS product supplies no uncertainty array.' },
       { role: 'quality', supplied: false, reason: 'This PDS product supplies no per-pixel quality array.' }],
     note: 'Archive-final image product: one array, one multiband array or separate filter images. Decoding establishes readable values and label conventions; it does not establish calibration accuracy beyond the archive product.' } as const;
-  await mkdir(PDS_PROGRAMS, { recursive: true });
-  const programPath = resolve(PDS_PROGRAMS, `${spec.id}.archive-final.json`), recordPath = resolve(PDS_PROGRAMS, `${spec.id}.archive-final.product.json`);
+  requireWorkspace(); await mkdir(programStorePath(PDS_PROGRAMS, 'write'), { recursive: true });
+  const programPath = programStorePath(resolve(programStorePath(PDS_PROGRAMS), `${spec.id}.archive-final.json`), 'write'), recordPath = programStorePath(resolve(programStorePath(PDS_PROGRAMS), `${spec.id}.archive-final.product.json`), 'write');
   await writeFile(programPath, `${JSON.stringify(program, null, 2)}\n`);
   const inputs: ProductInput[] = files.map(file => ({ role: file.role, identity: file.uri, bytes: file.bytes }));
   await pdsToolchain();

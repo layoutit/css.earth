@@ -1,6 +1,6 @@
+import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** A small final stage: verified delivery -> explicit output selection -> pinned figure and numeric values. */
 import { readFile, mkdir, mkdtemp, rename, rm, rmdir, realpath, stat } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
 import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -111,7 +111,7 @@ export async function listOutputs(resultPath:string,structure?:string,position?:
   }
   const pds=await openPdsSource(resultPath);
   if(pds){
-    const scratch=await mkdtemp(resolve(tmpdir(),'telescope-pds-source-'));
+    const scratch=await telescopeScratch('telescope-pds-source-');
     try{
       const staged=await preparePdsSource(pds,resolve(scratch,'source'));
       const input=await nativeFigureInput(staged,resolve(scratch,'converted'),structure);
@@ -121,7 +121,7 @@ export async function listOutputs(resultPath:string,structure?:string,position?:
     }finally{await rm(scratch,{recursive:true,force:true});}
   }
   const d=await delivery(resultPath);
-  const scratch=await mkdtemp(resolve(tmpdir(),'telescope-native-'));
+  const scratch=await telescopeScratch('telescope-native-');
   try{
     const input=await nativeFigureInput(d,scratch,structure);
     const metadata=await sciencePackage({operation:'fits',path:input.file,...(position?{position}:{})});

@@ -1,5 +1,6 @@
 /** Inline Python under a pinned toolchain: the archive reducers' process boundary. The run keeps its whole log, and a
  * resident-memory ceiling kills the run, not the machine. */
+import { telescopePythonEnvironment } from '../paths.js';
 import { spawn, spawnSync } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
 
@@ -25,7 +26,7 @@ export function freeMemoryPercent() {
  * reported, so a run that would exhaust the machine fails instead. */
 export async function toolchainPython(toolchain: PythonToolchain, cwd: string, script: string, args: readonly string[], log: string,
   options: { maxRssBytes?: number; progressLabel?: string } = {}): Promise<{ lastLine: string; peakRssBytes: number }> {
-  const child = spawn(toolchain.python, ['-c', script, ...args], { cwd, env: { ...process.env, ...toolchain.env } });
+  const child = spawn(toolchain.python, ['-c', script, ...args], { cwd, env: telescopePythonEnvironment(toolchain.env) });
   let output = '', stdout = '', peak = 0, killed = false, stderrLine = '', lastRssReport = 0, monitorFailed = false;
   if (options.progressLabel) process.stderr.write(`${options.progressLabel}: started\n`);
   child.stdout.on('data', chunk => { output += String(chunk); stdout += String(chunk); });

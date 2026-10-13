@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned interferometry toolchains of toolchains.json under output/toolchains/<id> (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/interferometry/toolchain.mts install <squeeze|rotir|pionier|amber|gravity|matisse> [--cache <dir> ...]
@@ -11,17 +13,17 @@
  * An installed toolchain keeps the text of its descriptor entry; `verify` and `toolchainPath` refuse one built from another.
  * Verified archives are deleted after the build: toolchains are large and the data they reduce are larger. */
 import { spawnSync } from 'node:child_process';
-import { access, copyFile, link, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { access, cp, copyFile, link, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
+import { installedMarkerIssue, resolveInstalledToolchain, assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
-const DESCRIPTOR = resolve(import.meta.dirname, 'toolchains.json');
-export const TOOLCHAIN_ROOT = resolve(WORKSPACE, 'output/toolchains');
+const DESCRIPTOR = packagePath('src/archives/interferometry/toolchains.json');
+export const TOOLCHAIN_ROOT = resolve(USER_ROOT, 'output/toolchains');
 
 const exists = (path: string) => access(path).then(() => true, () => false);
 
@@ -35,13 +37,13 @@ export async function toolchainDescriptor(id: string): Promise<ToolchainPins> {
 }
 
 /** The Julia environment a toolchain entry names by its repository path. */
-export function toolchainEnvironment(entry: Readonly<Record<string, unknown>>) {
-  return resolve(WORKSPACE, requireString(entry.environment, 'environment'));
+export function toolchainEnvironment(entry: Readonly<Record<string, unknown>>, root = resolve(TOOLCHAIN_ROOT, requireString(entry.id ?? 'rotir', 'environment id'))) {
+  return resolve(root, 'environment');
 }
 
 function run(command: string, args: readonly string[], options: { cwd: string; env?: NodeJS.ProcessEnv; answers?: string }) {
   // An installer that asks questions gets its answers on stdin; the rest inherit the terminal.
-  const result = spawnSync(command, args, { cwd: options.cwd, env: { ...process.env, ...options.env }, ...(options.answers === undefined ? { stdio: 'inherit' } : { input: options.answers, stdio: ['pipe', 'inherit', 'inherit'] }) });
+  const result = spawnSync(command, args, { cwd: options.cwd, env: telescopePythonEnvironment({ ...options.env }), ...(options.answers === undefined ? { stdio: 'inherit' } : { input: options.answers, stdio: ['pipe', 'inherit', 'inherit'] }) });
   if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${options.cwd} (status ${result.status}).`);
 }
 
@@ -62,7 +64,7 @@ async function fetchDownload(record: Record<string, unknown>, directory: string,
 
 export async function installToolchain(id: string, caches: readonly string[] = []) {
   const pins = await toolchainDescriptor(id), { entry } = pins, root = resolve(TOOLCHAIN_ROOT, id), downloads = resolve(root, 'downloads');
-  if (await toolchainPath(id).then(() => true, () => false)) return root;
+  if (installedMarkerIssue(root, pins) === null) return root;
   await mkdir(downloads, { recursive: true });
   const files = await Promise.all(requireArray(entry.downloads ?? []).map(record => fetchDownload(requireRecord(record), downloads, caches)));
   if (id === 'squeeze') {
@@ -75,6 +77,7 @@ export async function installToolchain(id: string, caches: readonly string[] = [
   } else if (id === 'rotir') {
     if (!await exists(resolve(root, 'julia-1.12.7'))) run('tar', ['-xzf', files[0]!], { cwd: root });
     const registries = requireArray(entry.registries).map(value => requireString(value));
+    await cp(packagePath(requireString(entry.environment, 'environment')), toolchainEnvironment(entry), { recursive: true });
     const script = `using Pkg; for r in ${JSON.stringify(registries)}; startswith(r, "http") ? Pkg.Registry.add(url=r) : Pkg.Registry.add(r); end; Pkg.instantiate(); using ROTIR`;
     run(resolve(root, requireString(entry.executable)), [`--project=${toolchainEnvironment(entry)}`, '-e', script], { cwd: root, env: { JULIA_DEPOT_PATH: resolve(root, 'depot') } });
   } else if (entry.build === 'eso-kit') {
@@ -89,7 +92,7 @@ export async function installToolchain(id: string, caches: readonly string[] = [
     // both directories exist before it runs.
     await mkdir(resolve(root, 'pipeline'), { recursive: true }); await mkdir(resolve(root, 'calib'), { recursive: true });
     const repair = entry.repair === undefined ? null : requireRecord(entry.repair, `${id} repair`);
-    const install = spawnSync('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', stdio: ['pipe', 'inherit', 'inherit'], env: { ...process.env, HOME: resolve(root, 'home'), PATH: path } });
+    const install = spawnSync('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', stdio: ['pipe', 'inherit', 'inherit'], env: telescopePythonEnvironment({ HOME: resolve(root, 'home'), PATH: path }) });
     if (install.status !== 0 && !repair) throw new Error(`install_pipeline failed for ${id} (status ${install.status}).`);
     if (repair) {
       // Rebuild the one package the kit's installer could not compile, against the dependencies it did install, then unpack
@@ -165,7 +168,7 @@ async function buildYorick(entry: Record<string, unknown>, files: readonly strin
 
 /** The installed toolchain's root, refusing a missing install or one built from a different descriptor. */
 export async function toolchainPath(id: string) {
-  const pins = await toolchainDescriptor(id), root = resolve(TOOLCHAIN_ROOT, id);
+  const pins = await toolchainDescriptor(id), root = resolveInstalledToolchain(resolve(TOOLCHAIN_ROOT, id), pins) ?? resolve(TOOLCHAIN_ROOT, id);
   assertInstalledMarker(root, pins, id, `node packages/telescope-cli/src/archives/interferometry/toolchain.mts install ${id}`);
   return root;
 }

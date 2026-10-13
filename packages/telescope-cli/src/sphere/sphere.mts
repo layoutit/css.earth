@@ -8,13 +8,13 @@ import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { assertBodyMapPlanes } from '../delivery/body-map-publication.mts';
-import { writeProductRecord, WORKSPACE } from '@cssearth/telescope-core/node';
+import { writeProductRecord, requireWorkspace } from '@cssearth/telescope-core/node';
 import { verifiedProduct, localOutput } from '../products/verified-product.mts';
 import { contextTarget, sourceContext } from '../delivery/delivery-context.mts';
 import { VERSION } from '../help.mts';
 import * as sphereOwner from '@cssearth/telescope/sphere/lane';
 
-const root=WORKSPACE;
+const workspace = () => requireWorkspace();
 /** Prepared package entry: callers supply solar geometry; the owner never discovers it globally. */
 export type SphereOwner = Pick<typeof sphereOwner, 'inspectMeasurementSphere' | 'measurementSphere' | 'sphereHtml'>;
 export async function validateSphereBundle(source:Awaited<ReturnType<typeof verifiedProduct>>){
@@ -32,16 +32,16 @@ export async function validateSphereBundle(source:Awaited<ReturnType<typeof veri
   if(contextTarget(context)!==map.frame.body)throw new Error('Source context target disagrees with the body map');
   return {source,map,nav,radii,norm,context,plane};
 }
-export async function validateSphereSource(source:Awaited<ReturnType<typeof verifiedProduct>>,workspaceRoot=root,heldOwner?:SphereOwner){
+export async function validateSphereSource(source:Awaited<ReturnType<typeof verifiedProduct>>,workspaceRoot=workspace(),heldOwner?:SphereOwner){
   const bundle=await validateSphereBundle(source);
   if(heldOwner)await heldOwner.inspectMeasurementSphere(workspaceRoot,bundle.map.frame.body);
   else await sphereOwner.inspectMeasurementSphere(workspaceRoot,bundle.map.frame.body);
   return bundle;
 }
-export async function sphereSource(recordPath:string,workspaceRoot=root){return validateSphereSource(await verifiedProduct(recordPath),workspaceRoot);}
+export async function sphereSource(recordPath:string,workspaceRoot=workspace()){return validateSphereSource(await verifiedProduct(recordPath),workspaceRoot);}
 
 export async function exportSphere(recordPath:string,outputDirectory:string,solarGeometry:SolarGeometry){
-  const source=await verifiedProduct(recordPath),bundle=await validateSphereBundle(source);
+  const root=workspace(),source=await verifiedProduct(recordPath),bundle=await validateSphereBundle(source);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
   const owner=sphereOwner;await owner.inspectMeasurementSphere(root,bundle.map.frame.body);const {map,nav,radii,norm,context}=bundle;

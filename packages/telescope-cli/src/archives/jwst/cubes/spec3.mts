@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../../paths.mts';
 /** Re-run the JWST pipeline's level-3 spectroscopy stage (calwebb_spec3) for one cube band of a pinned imaging program, and
  * check the cube against MAST's.
  *
@@ -209,7 +210,7 @@ export async function compareCubeWithMast(id: string, band: string, local: strin
     mast: { ...entry.level3, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX }, local: { name: basename(local), bytes: (await stat(local)).size, calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance,
     comparison,
     grid: { width: ours.width, height: ours.height, planes: ours.planes, arcsecPerPixel: ours.arcsecPerPixel, micrometres: [ours.wavelength(0), ours.wavelength(ours.planes - 1)] }, samples };
-  const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${band}.reproduction.json`), 'write');
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
   if (!acceptance.accepted) throw new Error(`Cube comparison did not meet ${acceptance.policy}; measurements retained at ${path}. No archive agreement was established.`);
   // Added to the record of the run that built this cube; a cube with no record beside it is refused, because nothing states

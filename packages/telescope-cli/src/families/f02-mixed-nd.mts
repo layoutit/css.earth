@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** F02 mixed FITS arrays: Astropy owns FITS/WCS axis inspection and extraction. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from '@cssearth/telescope-core/node';
@@ -72,7 +73,7 @@ kept=[a for a in axes if a['role'] in want]
 json.dump({'operation':r['operation'],'shape':[int(x) for x in out.shape],'axes':kept,'selection':sl,'coordinateContext':context(kept,sl),'values':np.asarray(out,dtype=float).tolist(),'astropy':astropy.__version__},sys.stdout,allow_nan=False)`;
 
 async function run(pin:PinnedFile, selection:NdSelection):Promise<any>{
- const toolchain=await astroqueryToolchain(); return await new Promise((resolve,reject)=>{const child=spawn(toolchain.python,['-c',python],{env:{...process.env,...toolchain.env},stdio:['pipe','pipe','pipe']});let out='',err='';child.stdout.setEncoding('utf8').on('data',x=>out+=x);child.stderr.setEncoding('utf8').on('data',x=>err+=x);child.on('error',reject);child.on('close',code=>{if(code!==0)return reject(new Error(`Astropy mixed-array owner failed: ${err.slice(-1000)}`));try{resolve(JSON.parse(out));}catch(error){reject(error);}});child.stdin.end(JSON.stringify({path:pin.path,...selection}));});
+ const toolchain=await astroqueryToolchain(); return await new Promise((resolve,reject)=>{const child=spawn(toolchain.python,['-c',python],{env: telescopePythonEnvironment(toolchain.env),stdio:['pipe','pipe','pipe']});let out='',err='';child.stdout.setEncoding('utf8').on('data',x=>out+=x);child.stderr.setEncoding('utf8').on('data',x=>err+=x);child.on('error',reject);child.on('close',code=>{if(code!==0)return reject(new Error(`Astropy mixed-array owner failed: ${err.slice(-1000)}`));try{resolve(JSON.parse(out));}catch(error){reject(error);}});child.stdin.end(JSON.stringify({path:pin.path,...selection}));});
 }
 export async function inspectMixedNd(pin:PinnedFile):Promise<NdInspection>{return run(pin,{operation:'nd-inspect'});}
 export async function extractMixedNd(pin:PinnedFile,selection:NdSelection):Promise<any>{if(selection.operation==='nd-inspect')throw new TypeError('Use inspectMixedNd for inspection.');return run(pin,selection);}

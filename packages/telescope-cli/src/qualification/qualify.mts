@@ -6,7 +6,7 @@ import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
 import { readProductScience } from './product-science.mts';
-import { pdsPackages, WORKSPACE, readProductRecord, sameRun } from '@cssearth/telescope-core/node';
+import { pdsPackages, readProductRecord, sameRun, requireWorkspace } from '@cssearth/telescope-core/node';
 import { measureCubeResolution } from '../archives/jwst/cubes/resolution.mts';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
@@ -231,6 +231,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const target = flagValue(args, '--target'), telescope = flagValue(args, '--telescope'), mode = flagValue(args, '--mode'), observation = flagValue(args, '--observation');
     if (!target || !telescope || !mode || !observation) throw new TypeError(QUALIFY_HELP);
     const configuration = qualificationConfigurationFromArguments(telescope, mode, args);
-    process.stdout.write(`${JSON.stringify(await qualifyObservation(WORKSPACE, { target, telescope, mode, observation, configuration }), null, 2)}\n`);
+    process.stdout.write(`${JSON.stringify(await qualifyObservation(requireWorkspace(), { target, telescope, mode, observation, configuration }), null, 2)}\n`);
   }
 }

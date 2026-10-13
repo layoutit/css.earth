@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned Spitzer re-mosaic environment of toolchain.json under output/toolchains/spitzer (ignored by
  * git).
  *
@@ -14,16 +17,16 @@
  * `--no-deps`, so the resolver never chooses anything. The install keeps the descriptor and lock texts it was built from,
  * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is taken from PATH. */
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, runToolchainProcess, writeInstalledMarker, USER_ROOT } from '@cssearth/telescope-core/node';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-const repository = WORKSPACE;
+const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/spitzer');
+const PINS = packagePath('packages/telescope-cli/src/archives/spitzer');
 export const SPITZER_ROOT = resolve(repository, 'output/toolchains/spitzer');
 /** The packages a run imports; a verify that cannot import one of these is a broken environment, not a warning. */
 export const REQUIRED_MODULES = ['numpy', 'astropy', 'reproject', 'scipy'] as const;
@@ -52,8 +55,9 @@ export interface SpitzerToolchain {
  * numerical library to one thread: a mosaic must not open a window, and a coadd must give the same bytes on every machine.
  * Refuses a missing install or one built from other pins. */
 export async function spitzerToolchain(): Promise<SpitzerToolchain> {
-  const bin = resolve(SPITZER_ROOT, 'env/bin'), python = resolve(bin, 'python');
-  assertInstalledMarker(SPITZER_ROOT, await spitzerDescriptor(), 'Spitzer', 'node packages/telescope-cli/src/archives/spitzer/toolchain.mts install');
+  const pins = await spitzerDescriptor(), root = resolveInstalledToolchain(SPITZER_ROOT, pins) ?? SPITZER_ROOT;
+  const bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(root, await spitzerDescriptor(), 'Spitzer', 'node packages/telescope-cli/src/archives/spitzer/toolchain.mts install');
   if (!await access(python).then(() => true, () => false)) throw new Error(`The Spitzer toolchain has no python at ${python}.`);
   return {
     python,
@@ -66,7 +70,7 @@ export async function spitzerToolchain(): Promise<SpitzerToolchain> {
  * says what should be installed and this says what is. */
 export async function spitzerSoftware(toolchain: SpitzerToolchain): Promise<{ name: string; version: string }[]> {
   const script = `import importlib\nfor name in ${JSON.stringify(REQUIRED_MODULES)}:\n    print(name, importlib.import_module(name).__version__)\n`;
-  const result = spawnSync(toolchain.python, ['-c', script], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8' });
+  const result = spawnSync(toolchain.python, ['-c', script], { env: telescopePythonEnvironment({ ...toolchain.env }), encoding: 'utf8' });
   if (result.status !== 0) throw new Error(`The Spitzer toolchain cannot import its packages: ${(result.stderr ?? '').slice(-2000)}`);
   return result.stdout.trim().split('\n').map(line => {
     const [name, version] = line.trim().split(/\s+/u);

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Check a DRAGONS re-run against something that is not itself, and write the receipt.
  *
  *   node packages/telescope-cli/src/archives/gemini/compare.mts <program id> <work directory> archive <bias|flat-bias|flat>
@@ -349,9 +351,10 @@ export async function compareHalves(firstPath: string, secondPath: string): Prom
 export const RECEIPT_SCHEMA = 'cssearth-gemini-reproduction@1';
 
 /** Where a receipt for one product lives: beside the program it is about, named for that product. */
-export const receiptPath = (id: string, product: string) => resolve(PROGRAMS, `${id}.${product.replace(/\.fits$/u, '')}.reproduction.json`);
+export const receiptPath = (id: string, product: string) => resolve(programStorePath(PROGRAMS), `${id}.${product.replace(/\.fits$/u, '')}.reproduction.json`);
 
 async function writeReceipt(path: string, body: Record<string, unknown>) {
+  path = programStorePath(path, 'write');
   await writeFile(path, `${JSON.stringify({ schema: RECEIPT_SCHEMA, ...body }, null, 2)}\n`);
   return path;
 }

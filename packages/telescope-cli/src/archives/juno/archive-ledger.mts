@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** What the JunoCam archive holds, and which of this project's objects it photographed, derived rather than declared.
  *
  *   node packages/telescope-cli/src/archives/juno/archive-ledger.mts            writes src/sources/juno/ledger.json and docs/junocam-ledger.md
@@ -91,7 +92,7 @@ export function checkRegistration(value: unknown, file: string, program: ReturnT
 
 /** Programs with their receipts (which images of which target were measured within the budget), and every receipt that could
  * not be accepted. A program with no receipt measures nothing; a program whose receipt cannot be accepted is a problem. */
-export async function junoReceipts(directory = PROGRAMS) {
+export async function junoReceipts(directory = programStorePath(PROGRAMS)) {
   const files = (await readdir(directory).catch(() => [] as string[])).sort();
   const measured: { program: string; target: string; images: number }[] = [], problems: string[] = [];
   for (const file of files.filter(name => name.endsWith('.json') && !name.endsWith('.registration.json'))) {
@@ -107,7 +108,7 @@ export async function junoReceipts(directory = PROGRAMS) {
 }
 
 /** The measured programs alone, for everything that asks what was registered rather than what went wrong. */
-export async function measuredPrograms(directory = PROGRAMS) {
+export async function measuredPrograms(directory = programStorePath(PROGRAMS)) {
   return (await junoReceipts(directory)).measured;
 }
 

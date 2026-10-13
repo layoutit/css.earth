@@ -1,3 +1,4 @@
+import { packagePath } from '../../paths.mts';
 /** A run's mean line profiles and longitudinal fields, by the published codes toolchain.json pins.
  *
  * LSDpy (Folsom, after Donati et al. 1997, MNRAS 291, 658) averages the lines of a mask into one intensity, Stokes V and
@@ -47,7 +48,7 @@ export async function meanLines(input: { readonly spectra: readonly PolarisedSpe
   const job = resolve(directory, 'job.json');
   await writeFile(job, JSON.stringify({ mask, cleanMask, hydrogenKmS: HYDROGEN_KMS, spectra, velocity: input.radialVelocityKmS ?? null, searchKmS: SEARCH_KMS, blindSearchKmS: BLIND_SEARCH_KMS, searchProfile: resolve(directory, 'search.lsd'), halfWidth: input.halfWidthKmS, lineHalfWidth: input.lineHalfWidthKmS, velPixel: input.stepKmS ?? 1.8 }));
   try {
-    const result = JSON.parse(runPython(python, [resolve(import.meta.dirname, 'tools.py'), 'lsd', job])) as { mask: MaskMeans; searchCentreKmS: number; searchDepth: number; spectra: Omit<MeanLine, 'mjd' | 'profile'>[] };
+    const result = JSON.parse(runPython(python, [packagePath('src/archives/espadons/tools.py'), 'lsd', job])) as { mask: MaskMeans; searchCentreKmS: number; searchDepth: number; spectra: Omit<MeanLine, 'mjd' | 'profile'>[] };
     const lines = result.spectra.map((line, i): MeanLine => ({ ...line, mjd: input.spectra[i]!.mjd, profile: spectra[i]!.profile })), centres = lines.map(line => line.centreKmS).sort((a, b) => a - b);
     return { means: result.mask, lines, velocityKmS: centres[Math.floor(centres.length / 2)]!, searchCentreKmS: result.searchCentreKmS, searchDepth: result.searchDepth };
   } finally { await Promise.all(spectra.map(entry => rm(entry.file, { force: true }))); }   // the text spectra are 15 MB each and only LSDpy's input

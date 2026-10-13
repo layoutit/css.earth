@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { inputPath } from '../../paths.mts';
 /** What the Gemini archive holds for this project's bodies, and what this toolkit has actually proven, derived rather than
  * declared.
  *
@@ -90,7 +92,7 @@ export interface LedgerFocus {
   readonly member: string; readonly rows: string;
 }
 export const GEMINI_LEDGER_FOCUS = 'packages/telescope-cli/src/archives/gemini/ledger-focus.json';
-export function geminiLedgerFocus(path = resolve(REPOSITORY, GEMINI_LEDGER_FOCUS)): LedgerFocus {
+export function geminiLedgerFocus(path = inputPath(REPOSITORY, GEMINI_LEDGER_FOCUS)): LedgerFocus {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Gemini ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);
   const text = (key: string) => requireString(record[key], `focus ${key}`);
@@ -277,7 +279,7 @@ export async function productRecords(work: string | null): Promise<Map<string, u
 
 /** Each instrument's state, read from the pinned programs and the receipts beside them. */
 export async function capabilityStates(instruments: readonly InstrumentCount[], work: string | null,
-  directory = PROGRAMS): Promise<{ capabilities: CapabilityState[]; problems: string[] }> {
+  directory = programStorePath(PROGRAMS)): Promise<{ capabilities: CapabilityState[]; problems: string[] }> {
   const files = (await readdir(directory).catch(() => [] as string[])).sort();
   const programs = new Map<string, GeminiProgram>();
   const problems: string[] = [];

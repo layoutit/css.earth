@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned CIAO environment of toolchain.json under output/toolchains/chandra (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/chandra/toolchain.mts solve     # re-resolve toolchain.json into packages.lock
@@ -19,11 +22,11 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { findTable, tableColumn, text } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
-const repository = WORKSPACE;
+const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and solved lock) sit beside this code and the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/chandra');
+const PINS = packagePath('packages/telescope-cli/src/archives/chandra');
 export const CHANDRA_ROOT = resolve(repository, 'output/toolchains/chandra');
 const LOCK = resolve(PINS, 'packages.lock');
 
@@ -41,7 +44,7 @@ function requests(entry: Readonly<Record<string, unknown>>) {
 }
 
 function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
+  const result = spawnSync(command, args, { env: telescopePythonEnvironment({ ...env }), encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
   if (result.status !== 0) throw new Error(`${command} ${args.slice(0, 6).join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-2000)}`);
   return result.stdout;
 }
@@ -91,8 +94,8 @@ export async function chandraVersions(): Promise<{ ciao: string; caldb: string }
  * and CALDB point at this prefix, `bin` is on PATH because chandra_repro spawns the other tools by name, and the parameter files
  * go to a directory of this root so concurrent runs do not share one. Refuses a missing install or one built from other pins. */
 export async function chandraToolchain(): Promise<ChandraToolchain> {
-  const pins = await descriptor(), { entry } = pins, prefix = resolve(CHANDRA_ROOT, 'env'), bin = resolve(prefix, 'bin');
-  assertInstalledMarker(CHANDRA_ROOT, pins, 'Chandra', 'node packages/telescope-cli/src/archives/chandra/toolchain.mts install');
+  const pins = await descriptor(), { entry } = pins, root = resolveInstalledToolchain(CHANDRA_ROOT, pins) ?? CHANDRA_ROOT, prefix = resolve(root, 'env'), bin = resolve(prefix, 'bin');
+  assertInstalledMarker(root, pins, 'Chandra', 'node packages/telescope-cli/src/archives/chandra/toolchain.mts install');
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {
     binaries[name] = resolve(bin, requireString(file, name));
@@ -125,7 +128,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const toolchain = await chandraToolchain(), versions = await chandraVersions();
     for (const directory of ['param', 'work', 'ipython']) await mkdir(resolve(CHANDRA_ROOT, directory), { recursive: true });
     const probe = spawnSync(toolchain.python, ['-c', 'import pycrates, ciao_contrib.runtool; from ciao_contrib.caldb import check_caldb_version; print("caldb", check_caldb_version() or "current")'],
-      { env: { ...process.env, ...toolchain.env }, encoding: 'utf8' });
+      { env: telescopePythonEnvironment({ ...toolchain.env }), encoding: 'utf8' });
     if (probe.status !== 0) throw new Error(`The Chandra toolchain does not import: ${(probe.stderr ?? '').slice(-500)}`);
     console.log(`Chandra ready: ${versions.ciao}, CALDB ${versions.caldb}; ${probe.stdout.trim()}; ${Object.keys(toolchain.binaries).length} tools`);
   } else throw new TypeError('Usage: toolchain <solve|install|verify>');

@@ -1,11 +1,12 @@
+import { legacyWorkspaceRoots } from './toolchain/resolver.js';
 /** Shared MAST boundary. Astroquery owns the service protocol and downloads; css.earth validates returned identities and bytes. */
-import { access, mkdir, rm, stat, symlink, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
-import { WORKSPACE } from './paths.js';
+import { access, copyFile, mkdir, rm, stat, readFile, writeFile } from 'node:fs/promises';
+import { isAbsolute, relative, resolve, sep } from 'node:path';
+import { USER_ROOT } from './paths.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroquery } from './astroquery.js';
 
-export const MAST_CACHE = resolve(WORKSPACE, 'output/archive-cache/mast');
+export const MAST_CACHE = resolve(USER_ROOT, 'output/archive-cache/mast');
 export const mastDownloadUrl = (uri: string) => `https://mast.stsci.edu/api/v0.1/Download/file?uri=${uri}`;
 export interface MastFile { readonly name: string; readonly uri: string; readonly bytes: number }
 
@@ -17,9 +18,12 @@ export async function mastFile(file: MastFile, directory: string, sources: reado
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name)) throw new TypeError(`Invalid MAST file name: ${file.name}`);
   await mkdir(directory, { recursive: true });
   const target = resolve(directory, file.name);
-  if (await sizeOf(target) !== file.bytes) for (const source of sources) {
+  const part = relative(MAST_CACHE, directory);
+  const legacy = part !== '..' && !part.startsWith(`..${sep}`) && !isAbsolute(part)
+    ? legacyWorkspaceRoots().map(root => resolve(root, 'output/archive-cache/mast', part)) : [];
+  if (await sizeOf(target) !== file.bytes) for (const source of [...sources, ...legacy]) {
     const candidate = resolve(source, file.name);
-    if (await sizeOf(candidate) === file.bytes) { await rm(target, { force: true }); await symlink(candidate, target); break; }
+    if (await sizeOf(candidate) === file.bytes) { await rm(target, { force: true }); await copyFile(candidate, target); break; }
   }
   if (await sizeOf(target) !== file.bytes) {
     await rm(target, { force: true });

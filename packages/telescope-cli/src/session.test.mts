@@ -1,6 +1,9 @@
+import './test-user-root.mts';
+import { loadQualifiedObservations, rememberQualification, qualificationDirectory } from './qualification/qualified-observations.mts';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
+import { cp, mkdtemp, mkdir, readFile, readdir, symlink, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { loadSourceProducts, sourceRun } from './products/source-products.mts';
@@ -176,7 +179,7 @@ test('exploration is immutable, revalidates its exact choice, and delivers with 
 test('saved exploration carries its pinned Keck source evidence into the run directory', async () => {
   const f = await fixture(); try {
     const body = `${JSON.stringify({source:'https://koa.ipac.caltech.edu/TAP',request:'SELECT TOP 1 ...',rows:[]})}\n`, pin = 'koa.ipac.caltech.edu-20260929000000000';
-    const archive = resolve(f.root, 'output/telescopes/archive-leads');
+    const archive = resolve(USER_ROOT, 'output/telescopes/archive-leads');
     await mkdir(archive, {recursive:true}); await writeFile(resolve(archive, `${pin}.json`), body);
     const lead = {service:'https://koa.ipac.caltech.edu/TAP',state:'sampled' as const,scope:'public object frames',reason:'sampled',
       instruments:[],sources:[{table:'koa_nirc2',instrument:'NIRC2',koaid:'N2.20090805.31896.fits',targetName:'test-body',
@@ -228,4 +231,58 @@ test('get scopes archive revalidation to the registered service in its saved cho
     await writeFile(resolve(out, 'explore.json'), JSON.stringify({ ...saved, choices: [{ ...saved.choices[0], archiveService: 'https://example.org/unregistered' }] }));
     await assert.rejects(getSession(f.root, out, 1, () => {}, api), /not registered/u);
   } finally { await f.cleanup(); }
+});
+
+// This follows a real cached qualification through get, without a localhost service or installed Python.
+test('a checkout session delivers a qualified artifact from the separate user root and refuses a changed copy', async () => {
+  const f = await fixture(), cached = resolve(USER_ROOT, 'cached-session');
+  try {
+    await f.api.qualify(f.root, { target: 'test-body', telescope: 'Test telescope', mode: 'test cube', observation: 'cube-1', configuration: { kind: 'source-product', id: 'cube-1' } });
+    const product = (await loadSourceProducts(f.root, 'test-body'))[0]!;
+    assert.ok(product.qualified && product.facts);
+    await cp(f.root, cached, { recursive: true });
+    const receipt = resolve(cached, product.receipt);
+    await rememberQualification(f.root, { target: product.target, telescope: product.telescope, mode: product.mode, observation: product.id, program: product.id,
+      product: resolve(cached, product.files.find(file => file.role === 'science')!.path), receipt, productRecord: receipt, outputRoot: cached, facts: product.facts });
+    const remembered = await loadQualifiedObservations(f.root, 'test-body');
+    assert.equal(remembered.length, 1);
+    assert.equal(qualificationDirectory('test-body'), resolve(USER_ROOT, 'output/telescopes/test-body/qualifications'));
+    assert.equal((await readdir(qualificationDirectory('test-body'), { recursive: true })).filter(name => name.endsWith('.json')).length, 1);
+    await assert.rejects(readdir(resolve(f.root, 'output/telescopes/test-body/qualifications')), { code: 'ENOENT' });
+    for (const otherRoot of [resolve(f.root, 'other-checkout'), USER_ROOT]) {
+      const loaded = await loadQualifiedObservations(otherRoot, 'test-body');
+      assert.equal(loaded.length, 1);
+      assert.equal(loaded[0]!.product, remembered[0]!.product);
+      assert.equal(loaded[0]!.productRecord, receipt);
+    }
+    const secondCache = resolve(USER_ROOT, 'cached-session-second');
+    try {
+      await cp(cached, secondCache, { recursive: true });
+      const secondReceipt = resolve(secondCache, product.receipt);
+      await rememberQualification(resolve(f.root, 'other-checkout'), { target: product.target, telescope: product.telescope, mode: product.mode, observation: product.id, program: product.id,
+        product: resolve(secondCache, product.files.find(file => file.role === 'science')!.path), receipt: secondReceipt, productRecord: secondReceipt, outputRoot: secondCache, facts: product.facts });
+      const both = await loadQualifiedObservations(USER_ROOT, 'test-body');
+      assert.equal(both.length, 2, 'separate workspace products must not overwrite one another');
+      assert.equal((await readdir(qualificationDirectory('test-body'), { recursive: true })).filter(name => name.endsWith('.json')).length, 2);
+      assert.deepEqual(new Set(both.map(entry => entry.outputRoot)), new Set([cached, secondCache]));
+    } finally { await rm(secondCache, { recursive: true, force: true }); }
+    const api: SessionServices = { load: f.load, explore: async (_root, request) => explorationAnswer(request, { ...await f.load(), sourceProducts: [{ ...product, qualified: false }], qualifiedProducts: await loadQualifiedObservations(f.root, 'test-body') }),
+      qualify: async () => { throw new Error('A cached qualification must not reduce again.'); } };
+    const out = resolve(f.root, 'cached-delivery');
+    const saved = await saveExploration(f.root, ['test-body'], out, api); assert.equal(saved.choices[0]!.state, 'ready');
+    const result = await getSession(f.root, out, 1, () => {}, api);
+    assert.equal((await readFile(result.product)).length, 8);
+    const delivery = JSON.parse(await readFile(result.resultPath, 'utf8'));
+    assert.ok(delivery.files.every((entry: { path: string }) => entry.path.startsWith('files/user/')));
+    await writeFile(result.product, Buffer.alloc(9));
+    await assert.rejects(getSession(f.root, out, 1, () => {}, api, { offline: true }), /records 8/u);
+    const cachedSource = resolve(cached, product.files.find(file => file.role === 'science')!.path);
+    // A fresh delivery must inspect the source rather than route around it through replay.
+    const second = resolve(f.root, 'symlink-delivery'); await saveExploration(f.root, ['test-body'], second, api);
+    const unrelated = await mkdtemp(resolve(tmpdir(), 'telescope-unrelated-'));
+    try {
+      await writeFile(resolve(unrelated, 'same-size.bin'), Buffer.alloc(8)); await rm(cachedSource); await symlink(resolve(unrelated, 'same-size.bin'), cachedSource);
+      await assert.rejects(getSession(f.root, second, 1, () => {}, api), /Artifact is outside/u);
+    } finally { await rm(unrelated, { recursive: true, force: true }); }
+  } finally { await f.cleanup(); await rm(cached, { recursive: true, force: true }); }
 });

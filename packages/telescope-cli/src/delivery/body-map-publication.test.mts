@@ -1,3 +1,4 @@
+import '../test-user-root.mts';
 import { bodyMapFits, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';

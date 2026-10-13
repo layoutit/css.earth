@@ -1,3 +1,4 @@
+import { packagePath } from '../../paths.mts';
 /** A run's magnetic map, by ZDIpy (Folsom et al. 2018, MNRAS 474, 4956, after Donati et al. 2006, MNRAS 370, 629), which
  * toolchain.json pins.
  *
@@ -88,7 +89,7 @@ export interface FieldGrid { readonly longitudes: readonly number[]; readonly la
 /** A fit's field on a grid of longitude and latitude, evaluated by ZDIpy's own harmonics. Longitude grows the way the star
  * turns, and 0 faces the observer at the map's time (ZDIpy's geometryStellar.py). */
 export async function fieldGrid(coefficients: string, stepDegrees = 5): Promise<FieldGrid> { const { python, zdipy } = await toolchainPaths();
-  return JSON.parse(runPython(python, [resolve(import.meta.dirname, 'tools.py'), 'map', zdipy, coefficients, String(stepDegrees)])) as FieldGrid; }
+  return JSON.parse(runPython(python, [packagePath('src/archives/espadons/tools.py'), 'map', zdipy, coefficients, String(stepDegrees)])) as FieldGrid; }
 
 /** The grid as the table layout the star packages read (`tecplot-lonlat-map`): longitude and latitude in degrees, then the
  * radial, azimuthal (east) and meridional (north) field in gauss. */

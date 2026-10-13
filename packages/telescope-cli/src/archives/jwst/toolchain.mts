@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { CLI_PACKAGE_ROOT, packagePath } from '../../paths.mts';
 /** Install and locate the pinned Python environments the JWST tools run on, under output/toolchains/<id> (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/jwst/toolchain.mts install [eureka|klip]
@@ -11,16 +12,16 @@
  * exactly once, and its data archives are fetched and checked by size. The install keeps the descriptor and lock texts it was
  * built from, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
  * `micromamba`). */
-import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
+import { resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-const repository = WORKSPACE;
+const repository = USER_ROOT;
 export type ToolchainId = 'eureka' | 'klip';
 /** The toolchains' pins (descriptors and locks) sit beside this code and the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst');
+const PINS = packagePath('packages/telescope-cli/src/archives/jwst');
 const DESCRIPTORS: Record<ToolchainId, string> = { eureka: resolve(PINS, 'toolchain.json'), klip: resolve(PINS, 'klip/toolchain.json') };
 const NAMES: Record<ToolchainId, string> = { eureka: 'Eureka!', klip: 'spaceKLIP' };
 export const toolchainRoot = (id: ToolchainId) => resolve(repository, 'output/toolchains', id);
@@ -33,7 +34,7 @@ function requireToolchainId(value: string | undefined): ToolchainId {
 }
 
 async function descriptor(id: ToolchainId): Promise<ToolchainPins & { readonly lock: string; readonly lockPath: string }> {
-  const path = DESCRIPTORS[id], text = await readFile(path, 'utf8'), file = relative(WORKSPACE, path);
+  const path = DESCRIPTORS[id], text = await readFile(path, 'utf8'), file = `packages/telescope-cli/${relative(CLI_PACKAGE_ROOT, path)}`;
   const entry = requireRecord(JSON.parse(text) as unknown, file);
   const lockPath = resolve(path, '..', requireString(entry.requirements, `${file} requirements`));
   const lock = await readFile(lockPath, 'utf8');
@@ -85,7 +86,7 @@ export type EurekaToolchain = JwstToolchain;
  * so reference files are the ones the recorded run used, plus each data archive's variable. Refuses a missing install or one
  * built from other pins. */
 export async function jwstToolchain(id: ToolchainId, crdsContext: string): Promise<JwstToolchain> {
-  const pins = await descriptor(id), { entry } = pins, root = toolchainRoot(id);
+  const pins = await descriptor(id), { entry } = pins, root = resolveInstalledToolchain(toolchainRoot(id), pins) ?? toolchainRoot(id);
   assertInstalledMarker(root, pins, NAMES[id], `node packages/telescope-cli/src/archives/jwst/toolchain.mts install ${id}`);
   const dataEnv = Object.fromEntries([
     ...requireArray(entry.data ?? []).map(record => {
@@ -94,12 +95,12 @@ export async function jwstToolchain(id: ToolchainId, crdsContext: string): Promi
     }),
     ...requireArray(entry.caches ?? []).map(record => {
       const cache = requireRecord(record, 'cache');
-      return [requireString(cache.variable), resolve(root, requireString(cache.directory))];
+      return [requireString(cache.variable), resolve(toolchainRoot(id), requireString(cache.directory))];
     }),
   ]);
   return {
     python: resolve(root, 'env/bin/python'),
-    env: { CRDS_PATH: resolve(root, 'crds'), CRDS_SERVER_URL: requireString(entry.crdsServer), CRDS_CONTEXT: crdsContext, MPLBACKEND: 'Agg', ...dataEnv },
+    env: { CRDS_PATH: resolve(toolchainRoot(id), 'crds'), CRDS_SERVER_URL: requireString(entry.crdsServer), CRDS_CONTEXT: crdsContext, MPLBACKEND: 'Agg', ...dataEnv },
   };
 }
 

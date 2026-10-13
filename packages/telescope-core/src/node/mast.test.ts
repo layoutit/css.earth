@@ -18,3 +18,29 @@ test('exact MAST observation lookup refuses incomplete or ambiguous answers', ()
   assert.throws(() => parseMastObservations('HST', ['j96o01010'], result([{ ...row(), obs_id: 'other' }])), /unrequested observation/u);
   assert.throws(() => parseMastObservations('HST', ['j96o01010'], result([{ ...row(), obs_collection: 'JWST' }])), /requested HST/u);
 });
+
+test('MAST copies a size-validated legacy checkout cache into user-owned state without downloading', async () => {
+  const { mkdtemp, mkdir, writeFile, readFile, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { resolve } = await import('node:path');
+  const { configureWorkspace, WORKSPACE } = await import('./paths.js');
+  const { MAST_CACHE, mastFile } = await import('./mast.js');
+  const root = await mkdtemp(resolve(tmpdir(), 'legacy-mast-')), previous = WORKSPACE, name = `legacy-mast-${process.pid}`;
+  const directory = resolve(MAST_CACHE, name);
+  try {
+    await mkdir(resolve(root, 'packages/telescope-cli/src'), { recursive: true });
+    await mkdir(resolve(root, 'src/objects'), { recursive: true });
+    await writeFile(resolve(root, 'package.json'), JSON.stringify({ scripts: { telescope: 'node source' } }));
+    await writeFile(resolve(root, 'packages/telescope-cli/src/cli.mts'), '');
+    const old = resolve(root, 'output/archive-cache/mast', name); await mkdir(old, { recursive: true });
+    await writeFile(resolve(old, 'cached.fits'), 'legacy bytes');
+    configureWorkspace(['--workspace', root]);
+    const path = await mastFile({ name: 'cached.fits', uri: 'mast:test', bytes: 12 }, directory);
+    assert.equal(await readFile(path, 'utf8'), 'legacy bytes');
+    await rm(root, { recursive: true, force: true });
+    assert.equal(await readFile(path, 'utf8'), 'legacy bytes', 'the writable cache owns its copied bytes');
+  } finally {
+    configureWorkspace(previous ? ['--workspace', previous] : []);
+    await rm(root, { recursive: true, force: true }); await rm(directory, { recursive: true, force: true });
+  }
+});

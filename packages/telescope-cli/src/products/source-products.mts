@@ -1,3 +1,4 @@
+import { inputPath } from '../paths.mts';
 /** Package-owned observations enter the same query as archive holdings. Pins stay in the existing source manifest. */
 import { inside, safeId, parseSourceProducts, sourceReceipt, sourceRecordComplete, assertPinnedLabel, type SourceProduct } from './source-product-contract.mts';
 import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
@@ -42,7 +43,7 @@ export async function loadSourceProducts(root: string, target: string, issues: S
   for (const product of declared) {
     const receipt = sourceReceipt(product);
     let record;
-    try { record = await readProductRecord(resolve(root, receipt)); } catch { loaded.push({ ...product, qualified: false, receipt, receiptProblem: 'Qualification receipt is malformed.' }); continue; }
+    try { record = await readProductRecord(inputPath(root, receipt)); } catch { loaded.push({ ...product, qualified: false, receipt, receiptProblem: 'Qualification receipt is malformed.' }); continue; }
     let qualified = false, receiptProblem: string | undefined;
     const savedFacts = record ? await readFile(resolve(root, `output/telescopes/${target}/${product.id}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined):undefined;
     if (record) {

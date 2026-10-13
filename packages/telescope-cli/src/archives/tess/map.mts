@@ -1,10 +1,10 @@
+import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** The brightness map of a star's surface that reproduces its rotational light curve.
  *
  * starry does the inversion (Luger et al. 2019, AJ 157, 64; tools.py holds the call, the telescope's starry toolchain is the
  * interpreter). A light curve is one number a moment, so it fixes how bright each longitude is and almost nothing about
  * latitude: starry's prior fills what the data leave open, and every dataset made from a map says so. */
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { starryToolchainSync } from '@cssearth/telescope-core/node';
@@ -41,7 +41,7 @@ export async function brightnessMaps(curves: readonly { readonly time: readonly 
   if (!(periodDays > 0) || !(inclinationDegrees > 0 && inclinationDegrees <= 90)) throw new RangeError('A map needs a rotation period and a tilt between 0 and 90 degrees.');
   if (!Number.isInteger(degree) || degree < 1 || degree > MAP_DEGREE) throw new RangeError(`A map is fitted to a degree from 1 to ${MAP_DEGREE}.`);
   if (!curves.length) return [];
-  const longitudes = range(-180, 180, GRID_STEP_DEGREES), latitudes = range(-90, 90, GRID_STEP_DEGREES), directory = await mkdtemp(join(tmpdir(), 'tess-map-')), job = join(directory, 'job.json');
+  const longitudes = range(-180, 180, GRID_STEP_DEGREES), latitudes = range(-90, 90, GRID_STEP_DEGREES), directory = await telescopeScratch('tess-map-'), job = join(directory, 'job.json');
   try { await writeFile(job, JSON.stringify({ curves: curves.map(curve => ({ time: curve.time, flux: curve.flux })), periodDays, inclinationDegrees, degree, priorWidth: PRIOR_WIDTH, longitudesDegrees: longitudes, latitudesDegrees: latitudes }));
     const answer = requireRecord(runTool(starryToolchainSync().python, ['maps', job]), 'starry answer'), starry = requireString(answer.starry, 'starry version'), made = requireArray(answer.maps, 'maps');
     if (made.length !== curves.length) throw new Error('starry returned another number of maps.');

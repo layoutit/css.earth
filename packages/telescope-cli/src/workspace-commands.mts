@@ -5,6 +5,7 @@
  * print goes to the telescope's stderr, so stdout carries only the telescope's own result. */
 import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { parseProcessAnswer, raisedProcessFailure, type ProcessAnswer, type ProcessResult } from '@cssearth/core/node';
 
 /** A workspace entry: the script the telescope runs, and the source that script is built from. Each is declared in its own
@@ -12,10 +13,11 @@ import { parseProcessAnswer, raisedProcessFailure, type ProcessAnswer, type Proc
 export interface WorkspaceCommand { readonly script: string; readonly source: string }
 
 /** Run a workspace entry with the telescope's own Node and return its answer's result. */
-export async function runWorkspaceCommand(root: string, command: WorkspaceCommand, args: readonly string[]): Promise<ProcessResult> {
+export async function runWorkspaceCommand(root: string | undefined, command: WorkspaceCommand, args: readonly string[]): Promise<ProcessResult> {
+  root = requireWorkspace(root);
   // Its own process group, so a signal reaches every process the command starts (a bake's steps) as well as the command.
   // The commands read no input; a process outside the terminal's session could not read it anyway.
-  const child = spawn(process.execPath, [resolve(root, command.script), ...args], { cwd: root, detached: true, stdio: ['ignore', 2, 2, 'ipc'] });
+  const child = spawn(process.execPath, [resolve(root, command.script), ...args], { cwd: root, env: { ...process.env, CSSEARTH_WORKSPACE: root }, detached: true, stdio: ['ignore', 2, 2, 'ipc'] });
   const signalGroup = (signal: NodeJS.Signals) => { try { process.kill(-child.pid!, signal); } catch { /* The group has already ended. */ } };
   let answer: ProcessAnswer | undefined;
   child.on('message', message => { answer ??= parseProcessAnswer(message); });
@@ -37,7 +39,7 @@ export async function runWorkspaceCommand(root: string, command: WorkspaceComman
 }
 
 /** Run a workspace entry whose result is the files it writes; a non-zero exit is an error. */
-export async function runWorkspaceScript(root: string, command: WorkspaceCommand, args: readonly string[]): Promise<void> {
+export async function runWorkspaceScript(root: string | undefined, command: WorkspaceCommand, args: readonly string[]): Promise<void> {
   const { code } = await runWorkspaceCommand(root, command, args);
   if (code !== 0) throw new Error(`${command.script} ${args.join(' ')} exited with ${code}.`);
 }

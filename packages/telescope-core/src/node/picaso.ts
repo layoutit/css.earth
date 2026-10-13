@@ -1,3 +1,4 @@
+import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** PICASO owns the radiative transfer of a substellar atmosphere (Batalha et al. 2019). css.earth passes a published Sonora Bobcat
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
@@ -6,16 +7,18 @@ import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { TOOLCHAINS, USER_ROOT } from './paths.js';
 import { assertInstalledMarker, installedMarkerIssue, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-export const PICASO_ROOT = resolve(WORKSPACE, 'output/toolchains/picaso');
-const PATHS = { env: resolve(PICASO_ROOT, 'env'), reference: resolve(PICASO_ROOT, 'reference'), profiles: resolve(PICASO_ROOT, 'bobcat-2021/structures'),
-  opacities: resolve(PICASO_ROOT, 'opacities'), passband: resolve(PICASO_ROOT, 'passband/Generic_Bessell.V.dat'),
-  cloudyProfiles: resolve(PICASO_ROOT, 'diamondback-2024/pressure-temperature_profiles'), cloudProperties: resolve(PICASO_ROOT, 'diamondback-2024/cloud_optical_properties'),
-  cloudArchive: resolve(PICASO_ROOT, 'diamondback-2024/cloud_optical_properties.zip'),
-  database: resolve(PICASO_ROOT, 'opacities/opacities.db'), elfOwl: resolve(PICASO_ROOT, 'elf-owl-2024'), exoRem: resolve(PICASO_ROOT, 'exo-rem-2021') };
+export const PICASO_ROOT = resolve(USER_ROOT, 'output/toolchains/picaso');
+const paths = (root: string) => ( { env: resolve(root, 'env'), reference: resolve(root, 'reference'), profiles: resolve(root, 'bobcat-2021/structures'),
+  opacities: resolve(root, 'opacities'), passband: resolve(root, 'passband/Generic_Bessell.V.dat'),
+  cloudyProfiles: resolve(root, 'diamondback-2024/pressure-temperature_profiles'), cloudProperties: resolve(root, 'diamondback-2024/cloud_optical_properties'),
+  cloudArchive: resolve(root, 'diamondback-2024/cloud_optical_properties.zip'),
+  database: resolve(root, 'opacities/opacities.db'), elfOwl: resolve(root, 'elf-owl-2024'), exoRem: resolve(root, 'exo-rem-2021') });
+const PATHS = paths(PICASO_ROOT);
+const installedPaths = () => paths(resolveInstalledToolchain(PICASO_ROOT, descriptor()) ?? PICASO_ROOT);
 
 const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install';
 const descriptor = () => readToolchainPins('picaso', 'picaso-toolchain.json');
@@ -78,20 +81,21 @@ const metalRichTables = (entry: Record<string, unknown>) => Object.fromEntries(O
 export interface PicasoToolchain { readonly python: string; readonly version: string; readonly env: NodeJS.ProcessEnv; readonly opacities: string }
 
 export function picasoToolchainSync(): PicasoToolchain {
-  const pins = descriptor(), { entry } = pins, bin = resolve(PATHS.env, 'bin'), python = resolve(bin, 'python');
-  assertInstalledMarker(PICASO_ROOT, pins, 'PICASO', INSTALL);
-  try { accessSync(python); accessSync(PATHS.passband); } catch { throw new Error(`The PICASO toolchain at ${PICASO_ROOT} is incomplete; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install`); }
-  const opacities = resolve(PATHS.opacities, opacityName(entry));
+  const pins = descriptor(), { entry } = pins, bin = resolve(installedPaths().env, 'bin'), python = resolve(bin, 'python');
+  const root = resolveInstalledToolchain(PICASO_ROOT, pins) ?? PICASO_ROOT;
+  assertInstalledMarker(root, pins, 'PICASO', INSTALL);
+  try { accessSync(python); accessSync(installedPaths().passband); } catch { throw new Error(`The PICASO toolchain at ${PICASO_ROOT} is incomplete; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install`); }
+  const opacities = resolve(installedPaths().opacities, opacityName(entry));
   try { accessSync(opacities); } catch { throw new Error(`The PICASO toolchain has no correlated-k table ${opacities}; reinstall it.`); }
   // PICASO reads PYSYN_CDBS at import; its stellar spectra are for planets around stars, and an absent path only warns.
   return { python, opacities, version: requireString(entry.picaso, 'picaso'),
-    env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', picaso_refdata: PATHS.reference, PYSYN_CDBS: resolve(PICASO_ROOT, 'no-stellar-data'), MPLBACKEND: 'Agg', HOME: PICASO_ROOT } };
+    env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', picaso_refdata: installedPaths().reference, PYSYN_CDBS: resolve(root, 'no-stellar-data'), MPLBACKEND: 'Agg', HOME: PICASO_ROOT } };
 }
 
 /** The Sonora Bobcat nodes the solar-metallicity structures hold: temperature (K), gravity (m/s^2) and file, from the file names
  * (the release writes the metallicity as m0.0, and as m+0.0 for a few files). */
 export function bobcatNodes(): { readonly teffK: number; readonly gravityMps2: number; readonly file: string }[] {
-  return readdirOrEmpty(PATHS.profiles).flatMap(file => {
+  return readdirOrEmpty(installedPaths().profiles).flatMap(file => {
     const match = /^t(\d+)g(\d+)nc_m\+?0\.0\.dat$/u.exec(file);
     return match ? [{ teffK: Number(match[1]), gravityMps2: Number(match[2]), file }] : [];
   });
@@ -116,7 +120,7 @@ const EXO_REM_FILES = ['temperature_profile', 'vmr', 'spectra'] as const, EXO_RE
 /** The models of Exo-REM's public grid at one metallicity (times solar) and C/O, as the release names them. The 660 MB archive
  * is fetched once and kept; its member list is read once. */
 export function exoRemNodes(metallicity: number, co: number): (PicasoNode & { readonly logg: number })[] {
-  const { entry } = descriptor(), archive = resolve(PATHS.exoRem, 'cloud_R500.tar.gz'), listing = resolve(PATHS.exoRem, 'members.txt');
+  const { entry } = descriptor(), archive = resolve(installedPaths().exoRem, 'cloud_R500.tar.gz'), listing = resolve(installedPaths().exoRem, 'members.txt');
   if (!existsSync(archive)) fetchInto(archive, dataUrl(entry, 'exoRem'));
   if (!existsSync(listing)) writeFileSync(listing, runToolchainProcess('tar', ['-tzf', archive], { maxBuffer: 256 * 1024 * 1024 }));
   const tag = `_met${metallicity.toFixed(2)}_CO${co.toFixed(2)}.dat`;
@@ -130,23 +134,23 @@ export function exoRemNodes(metallicity: number, co: number): (PicasoNode & { re
 
 /** The models named, unpacked from the archive, with Exo-REM's two optical-constant tables and the resampled opacity database. */
 export function exoRemGrid(nodes: readonly PicasoNode[]): { grid: PicasoGrid; nodes: PicasoNode[] } {
-  const { entry } = descriptor(), release = requireRecord(requireRecord(entry.data, 'data').exoRem, 'data.exoRem'), archive = resolve(PATHS.exoRem, 'cloud_R500.tar.gz');
-  const folder = resolve(PATHS.exoRem, 'cloud_R500_updated'), members = nodes.flatMap(node => EXO_REM_FILES.map(kind => `${kind}_${node.file}`)).filter(member => !existsSync(resolve(folder, member)));
-  if (members.length) runToolchainProcess('tar', ['-xzf', archive, '-C', PATHS.exoRem, ...members.map(member => `cloud_R500_updated/${member}`)], { maxBuffer: 256 * 1024 * 1024 });
-  const constants = resolve(PATHS.exoRem, 'cloud_optical_constants');
+  const { entry } = descriptor(), release = requireRecord(requireRecord(entry.data, 'data').exoRem, 'data.exoRem'), archive = resolve(installedPaths().exoRem, 'cloud_R500.tar.gz');
+  const folder = resolve(installedPaths().exoRem, 'cloud_R500_updated'), members = nodes.flatMap(node => EXO_REM_FILES.map(kind => `${kind}_${node.file}`)).filter(member => !existsSync(resolve(folder, member)));
+  if (members.length) runToolchainProcess('tar', ['-xzf', archive, '-C', installedPaths().exoRem, ...members.map(member => `cloud_R500_updated/${member}`)], { maxBuffer: 256 * 1024 * 1024 });
+  const constants = resolve(installedPaths().exoRem, 'cloud_optical_constants');
   if (!EXO_REM_CLOUDS.every(cloud => existsSync(resolve(constants, `${cloud}.ocst.txt`)))) {
-    const code = resolve(PATHS.exoRem, 'exorem.tar.gz'), inside = 'dist/exorem/data/cloud_optical_constants';
+    const code = resolve(installedPaths().exoRem, 'exorem.tar.gz'), inside = 'dist/exorem/data/cloud_optical_constants';
     fetchInto(code, requireString(release.code, 'data.exoRem.code'));
-    runToolchainProcess('tar', ['-xzf', code, '-C', PATHS.exoRem, './dist/exorem/CHANGELOG.md', ...EXO_REM_CLOUDS.map(cloud => `./${inside}/${cloud}.ocst.txt`)]);
+    runToolchainProcess('tar', ['-xzf', code, '-C', installedPaths().exoRem, './dist/exorem/CHANGELOG.md', ...EXO_REM_CLOUDS.map(cloud => `./${inside}/${cloud}.ocst.txt`)]);
     // The tables are those of the release this toolchain names: its change log's first version heading says which it is.
-    const version = /^#{2,3} \[([\d.]+)\]/mu.exec(readFileSync(resolve(PATHS.exoRem, 'dist/exorem/CHANGELOG.md'), 'utf8'))?.[1];
+    const version = /^#{2,3} \[([\d.]+)\]/mu.exec(readFileSync(resolve(installedPaths().exoRem, 'dist/exorem/CHANGELOG.md'), 'utf8'))?.[1];
     if (version !== requireString(release.version, 'data.exoRem.version')) throw new Error(`The Exo-REM distribution is version ${version}, not the ${String(release.version)} that ${descriptor().file} names.`);
     mkdirSync(constants, { recursive: true });
-    for (const cloud of EXO_REM_CLOUDS) writeFileSync(resolve(constants, `${cloud}.ocst.txt`), readFileSync(resolve(PATHS.exoRem, inside, `${cloud}.ocst.txt`)));
-    rmSync(code, { force: true }); rmSync(resolve(PATHS.exoRem, 'dist'), { recursive: true, force: true });
+    for (const cloud of EXO_REM_CLOUDS) writeFileSync(resolve(constants, `${cloud}.ocst.txt`), readFileSync(resolve(installedPaths().exoRem, inside, `${cloud}.ocst.txt`)));
+    rmSync(code, { force: true }); rmSync(resolve(installedPaths().exoRem, 'dist'), { recursive: true, force: true });
   }
-  if (!existsSync(PATHS.database)) fetchInto(PATHS.database, dataUrl(entry, 'resampledOpacities'));
-  return { grid: { profiles: folder, opacities: '', headerLines: 1, database: PATHS.database, opticalConstants: constants }, nodes: nodes.map(node => ({ ...node, exoRem: folder })) };
+  if (!existsSync(installedPaths().database)) fetchInto(installedPaths().database, dataUrl(entry, 'resampledOpacities'));
+  return { grid: { profiles: folder, opacities: '', headerLines: 1, database: installedPaths().database, opticalConstants: constants }, nodes: nodes.map(node => ({ ...node, exoRem: folder })) };
 }
 
 /** The Sonora Elf Owl Y-type models of one metallicity, C/O (times solar) and log Kzz, as the release names them: every
@@ -161,28 +165,28 @@ export function elfOwlNodes(metallicity: number, co: number, logKzz: number): (P
  * the resampled opacity database (6 GB, fetched once). */
 export function elfOwlGrid(nodes: readonly PicasoNode[]): { grid: PicasoGrid; nodes: PicasoNode[] } {
   const { entry } = descriptor(), release = requireRecord(requireRecord(entry.data, 'data').elfOwl, 'data.elfOwl'), archives = requireRecord(release.archives, 'data.elfOwl.archives');
-  mkdirSync(PATHS.elfOwl, { recursive: true });
-  const missing = nodes.filter(node => !existsSync(resolve(PATHS.elfOwl, node.file)));
+  mkdirSync(installedPaths().elfOwl, { recursive: true });
+  const missing = nodes.filter(node => !existsSync(resolve(installedPaths().elfOwl, node.file)));
   // An archive spans three temperatures and is named by the first.
   const starts = Object.keys(archives).map(Number).sort((a, b) => a - b), archiveOf = (teffK: number) => requireString(archives[String(starts.filter(start => start <= teffK).at(-1))], `data.elfOwl.archives for ${teffK} K`);
   for (const archive of new Set(missing.map(node => archiveOf(node.teffK)))) {
-    const path = resolve(PATHS.elfOwl, archive);
+    const path = resolve(installedPaths().elfOwl, archive);
     runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', path, `${requireString(release.url, 'data.elfOwl.url')}${archive}`]);
-    runToolchainProcess('tar', ['-xzf', path, '-C', PATHS.elfOwl, ...missing.filter(node => archiveOf(node.teffK) === archive).map(node => `./${node.file}`)]);
+    runToolchainProcess('tar', ['-xzf', path, '-C', installedPaths().elfOwl, ...missing.filter(node => archiveOf(node.teffK) === archive).map(node => `./${node.file}`)]);
     rmSync(path, { force: true });
   }
-  if (!existsSync(PATHS.database)) runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.database, dataUrl(entry, 'resampledOpacities')]);
-  return { grid: { profiles: PATHS.elfOwl, opacities: '', headerLines: 1, database: PATHS.database }, nodes: nodes.map(node => ({ ...node, model: resolve(PATHS.elfOwl, node.file) })) };
+  if (!existsSync(installedPaths().database)) runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', installedPaths().database, dataUrl(entry, 'resampledOpacities')]);
+  return { grid: { profiles: installedPaths().elfOwl, opacities: '', headerLines: 1, database: installedPaths().database }, nodes: nodes.map(node => ({ ...node, model: resolve(installedPaths().elfOwl, node.file) })) };
 }
 
 /** The Sonora Diamondback nodes of one metallicity and sedimentation efficiency: temperature (K), the gravity its file states
  * (m/s^2) with the grid's log g (steps of 0.5), the structure file and the cloud file beside it in the archive. */
 export function diamondbackNodes(metallicity: number, fsed: number): (PicasoNode & { readonly logg: number })[] {
   const tag = `f${fsed}_m${metallicity > 0 ? '+' : ''}${metallicity.toFixed(1)}_co1.0.pt`;
-  return readdirOrEmpty(PATHS.cloudyProfiles).flatMap(file => {
+  return readdirOrEmpty(installedPaths().cloudyProfiles).flatMap(file => {
     const match = /^t(\d+)g(\d+)f/u.exec(file);
     if (!match || !file.endsWith(tag) || file !== `t${match[1]}g${match[2]}${tag}`) return [];
-    const gravityMps2 = requireFiniteNumber(Number(readFileSync(resolve(PATHS.cloudyProfiles, file), 'utf8').split('\n')[1]), `${file} gravity`);
+    const gravityMps2 = requireFiniteNumber(Number(readFileSync(resolve(installedPaths().cloudyProfiles, file), 'utf8').split('\n')[1]), `${file} gravity`);
     return [{ teffK: Number(match[1]), gravityMps2, logg: Math.round(Math.log10(gravityMps2 * 100) * 2) / 2, file, clouds: file.replace(/\.pt$/u, '.cld') }];
   });
 }
@@ -191,11 +195,11 @@ export function diamondbackNodes(metallicity: number, fsed: number): (PicasoNode
 export function diamondbackGrid(metallicity: number, nodes: readonly PicasoNode[], toolchain = picasoToolchainSync()): { grid: PicasoGrid; nodes: PicasoNode[] } {
   const table = metallicity === 0 ? toolchain.opacities.split('/').at(-1)! : metalRichTables(descriptor().entry)[metallicity.toFixed(1)];
   if (!table) throw new Error(`The PICASO toolchain pins no correlated-k table for [M/H] ${metallicity} (${descriptor().file}).`);
-  const opacities = resolve(PATHS.opacities, table);
-  if (!existsSync(opacities) || !existsSync(PATHS.cloudArchive)) throw new Error(`The PICASO toolchain lacks the Diamondback data (${table}, the cloud archive); reinstall it: ${INSTALL}`);
-  const missing = nodes.filter(node => !existsSync(resolve(PATHS.cloudProperties, node.clouds!)));
-  if (missing.length) runToolchainProcess('unzip', ['-q', '-o', PATHS.cloudArchive, ...missing.map(node => `cloud_optical_properties/${node.clouds!}`), '-d', resolve(PATHS.cloudProperties, '..')]);
-  return { grid: { profiles: PATHS.cloudyProfiles, opacities, headerLines: 2 }, nodes: nodes.map(node => ({ ...node, clouds: resolve(PATHS.cloudProperties, node.clouds!) })) };
+  const opacities = resolve(installedPaths().opacities, table);
+  if (!existsSync(opacities) || !existsSync(installedPaths().cloudArchive)) throw new Error(`The PICASO toolchain lacks the Diamondback data (${table}, the cloud archive); reinstall it: ${INSTALL}`);
+  const missing = nodes.filter(node => !existsSync(resolve(installedPaths().cloudProperties, node.clouds!)));
+  if (missing.length) runToolchainProcess('unzip', ['-q', '-o', installedPaths().cloudArchive, ...missing.map(node => `cloud_optical_properties/${node.clouds!}`), '-d', resolve(installedPaths().cloudProperties, '..')]);
+  return { grid: { profiles: installedPaths().cloudyProfiles, opacities, headerLines: 2 }, nodes: nodes.map(node => ({ ...node, clouds: resolve(installedPaths().cloudProperties, node.clouds!) })) };
 }
 
 const PYTHON = String.raw`
@@ -344,7 +348,7 @@ export interface PicasoLimbNode { readonly teffK: number; readonly gravityMps2: 
 
 /** The passband intensity each Bobcat node emits toward the observer at the emission cosines of PICASO's Gauss points (8, mu 0.19 to 1) (relative to the fitted disc centre), and the quadratic
  * law I(mu) = I0 [1 - u1 (1 - mu) - u2 (1 - mu)^2] fitted to it by least squares with I0 free. */
-export function picasoLimbNodes(nodes: readonly PicasoNode[], angles = 8, toolchain = picasoToolchainSync(), passband = PATHS.passband, grid: PicasoGrid = { profiles: PATHS.profiles, opacities: toolchain.opacities, headerLines: 1 }) {
+export function picasoLimbNodes(nodes: readonly PicasoNode[], angles = 8, toolchain = picasoToolchainSync(), passband = installedPaths().passband, grid: PicasoGrid = { profiles: installedPaths().profiles, opacities: toolchain.opacities, headerLines: 1 }) {
   const answer = requireRecord(JSON.parse(runToolchainProcess(toolchain.python, ['-c', PYTHON], { env: toolchain.env, maxBuffer: 256 * 1024 * 1024,
     input: JSON.stringify({ nodes, angles, opacities: grid.opacities, profiles: grid.profiles, headerLines: grid.headerLines, passband, ...(grid.database ? { database: grid.database } : {}), ...(grid.opticalConstants ? { opticalConstants: grid.opticalConstants } : {}) }) })) as unknown, 'PICASO answer');
   if (answer.schema !== 'cssearth-picaso@1' || answer.picaso !== toolchain.version) throw new Error(`PICASO answered as ${String(answer.picaso)}, expected ${toolchain.version}.`);

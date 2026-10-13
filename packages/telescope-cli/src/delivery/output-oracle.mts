@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Test-only, independently implemented references. Never calls the production cube reducer. */
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
@@ -111,7 +112,7 @@ if not passed: sys.exit(1)
 `;
 export async function compareOutput(directory:string,python:string,out:string):Promise<Record<string,unknown>>{
   await mkdir(out,{recursive:true});
-  return requireRecord(JSON.parse(execFileSync(python,['-c',ORACLE_PYTHON],{input:JSON.stringify({directory:resolve(directory),out:resolve(out)}),encoding:'utf8',maxBuffer:4*1024*1024})));
+  return requireRecord(JSON.parse(execFileSync(python,['-c',ORACLE_PYTHON],{env:telescopePythonEnvironment(),input:JSON.stringify({directory:resolve(directory),out:resolve(out)}),encoding:'utf8',maxBuffer:4*1024*1024})));
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const [directory,python,out]=process.argv.slice(2);if(!directory||!python||!out)throw new Error('Usage: output-oracle.mts OUTPUT_DIRECTORY ORACLE_PYTHON REPORT_DIRECTORY');

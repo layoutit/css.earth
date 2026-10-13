@@ -40,7 +40,7 @@ import { calibrateFromAssociations } from './eso-associations.mts';
 import { selectOifits } from './oifits-select.mts';
 import { readReconstructionPlane, reconstructionVerdict, reproducibility, simulateSpotlessDisc, spotMap, compareSpotMaps } from './spotless-disc.mts';
 import { runSqueeze, type SqueezeFit, type SqueezeRecipe } from './squeeze.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import { WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 
 type Window = { readonly from: string; readonly to: string };
 type Exposure = { readonly science: string; readonly calibrators: readonly string[] };
@@ -124,7 +124,7 @@ const exists = (path: string) => access(path).then(() => true, () => false);
  * chains nor half-size pixels made a spotty twin clean. So the season's spots are compared with twins across ±2 percent, about
  * the uncertainty of a diameter fitted to a star that is not a disc, and the spottiest decides. */
 export const TWIN_SCALES: readonly number[] = [0.98, 0.99, 1, 1.01, 1.02];
-const repository = WORKSPACE;
+const repository = WORKSPACE ?? USER_ROOT;
 
 interface Progress { calibrated: Record<string, string[]>; runs: Record<string, SqueezeFit & { seconds: number; recipe: string }> }
 

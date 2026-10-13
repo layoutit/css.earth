@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../../paths.mts';
+import { packagePath } from '../../../paths.mts';
 /** Subtract a star's light from pinned JWST NIRCam coronagraph exposures with spaceKLIP, the way a paper's authors did.
  *
  *   node packages/telescope-cli/src/archives/jwst/klip/reduce.mts <program id> <band> <work directory> --raw <dir> [--max-rss-gib <n>]
@@ -16,19 +18,19 @@ import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython, WORKSPACE } from '@cssearth/telescope-core/node';
+import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../../programs.mts';
 import { jwstToolchain } from '../toolchain.mts';
 
 /** The pinned programs share the JWST programs root, found through the checkout. */
 export const JWST_KLIP_PROGRAMS = archivePrograms('jwst');
-const PROGRAMS = resolve(WORKSPACE, JWST_KLIP_PROGRAMS.path);
+const PROGRAMS = packagePath(JWST_KLIP_PROGRAMS.path);
 
 export interface KlipBand { readonly band: string; readonly science: readonly string[]; readonly references: readonly string[] }
 export interface KlipProgram { readonly id: string; readonly crdsContext: string; readonly settings: Record<string, unknown>; readonly bands: readonly KlipBand[]; readonly files: ReadonlyMap<string, { readonly uri: string; readonly bytes: number }> }
 
 export async function readKlipProgram(id: string): Promise<KlipProgram> {
-  const path = resolve(PROGRAMS, `${id}.json`), entry = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, path);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`), entry = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, path);
   if (entry.schema !== 'cssearth-jwst-klip-program@1') throw new Error(`${path}: schema is ${String(entry.schema)}, not cssearth-jwst-klip-program@1.`);
   const files = new Map(requireArray(entry.files, `${path} files`).map(record => {
     const file = requireRecord(record, `${path} file`);

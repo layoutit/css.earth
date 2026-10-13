@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** The published imaging of a resolved, bright Solar System body: fit a limb-darkened disc to its visibilities, self-calibrate
  * against that disc, and image the result.
  *
@@ -521,7 +522,7 @@ export async function ephemerisDistanceAu(visibilities: string, scratch: string,
   ].join('\n') + '\n';
   const path = resolve(scratch, 'ephemeris.py');
   await writeFile(path, script);
-  const result = spawnSync(casaPython, [path], { encoding: 'utf8', cwd: scratch });
+  const result = spawnSync(casaPython, [path], { env: telescopePythonEnvironment(), encoding: 'utf8', cwd: scratch });
   if (result.status !== 0) throw new Error(`Reading the ephemeris failed: ${result.stderr}`);
   const line = result.stdout.trim().split('\n').at(-1)!;
   const record = requireRecord(JSON.parse(line) as unknown, 'ephemeris distance');

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Re-run standard data processing on a pinned Chandra observation, from its level-1 products.
  *
  *   node packages/telescope-cli/src/archives/chandra/reprocess.mts <program id> <obsid> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
@@ -70,7 +71,7 @@ print(json.dumps({'seconds': round(time.time() - start, 1), 'peakRssBytes': peak
 `;
 
 export async function readChandraProgram(id: string) {
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`);
   return { path, program: parseChandraProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 
@@ -92,7 +93,7 @@ export async function chandraFiles(id: string, obsid: number, directory: string,
   if (inputs.changed || products.changed) {
     const updated: ChandraProgram = { ...program, observations: program.observations.map(other =>
       other.obsid === obsid ? { ...other, inputs: inputs.measured, products: products.measured } : other) };
-    await writeFile(path, `${JSON.stringify(updated, null, 2)}\n`);
+    await writeFile(programStorePath(path, 'write'), `${JSON.stringify(updated, null, 2)}\n`);
   }
   return { program, entry: { ...entry, inputs: inputs.measured, products: products.measured }, inputs: inputs.files, products: products.files };
 }

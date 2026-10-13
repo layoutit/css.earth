@@ -4,9 +4,9 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { agentFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
-const root = WORKSPACE;
+const root = requireWorkspace();
 const read = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');
 const vis = 'uid___A002_X10ed869_X1ec34.ms';
 

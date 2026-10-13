@@ -1,3 +1,5 @@
+import { programStorePath } from '../../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Compare a local image3 mosaic with MAST's level-3 product of the same observation: the oracle for image3.mts.
  *
  *   node packages/telescope-cli/src/archives/jwst/imaging/compare.mts <program id> <band> <local i2d> [--raw <dir>]...
@@ -55,6 +57,7 @@ function starAnnuli(theirs: Awaited<ReturnType<typeof science>>, projection: Ret
 const quantile = (sorted: Float32Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))]!;
 
 export async function compareWithMast(id: string, band: string, local: string, sources: readonly string[] = []) {
+  requireWorkspace();
   const { program } = await readImagingProgram(id), entry = program.bands.find(other => other.band === band);
   if (!entry) throw new Error(`${id} has no ${band} band.`);
   const mastPath = await mastFile(entry.level3, resolve(local, '..', '..', 'mast'), sources);
@@ -118,7 +121,7 @@ export async function compareWithMast(id: string, band: string, local: string, s
       aboveMedian: { pixels: n, rmsDifferenceOverRms: Math.sqrt(sdd / n) / Math.sqrt(sbb / n),
         correlation: (n * sab - sa * sb) / Math.sqrt((n * saa - sa * sa) * (n * sbb - sb * sb)) }, ratioBins, ...(annuli ? { annuli } : {}) },
   };
-  const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${band}.reproduction.json`), 'write');
   await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
   if (!acceptance.accepted) throw new Error(`Image comparison did not meet ${acceptance.policy}; measurements retained at ${path}. No archive agreement was established.`);
   // What this comparison establishes, added to the record of the run that made the mosaic. A mosaic with no record beside it is

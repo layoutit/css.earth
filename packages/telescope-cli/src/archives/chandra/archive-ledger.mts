@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { inputPath } from '../../paths.mts';
 /** What the Chandra Data Archive holds, what it holds for this project's objects, and how far this toolkit has been proved.
  *
  *   node packages/telescope-cli/src/archives/chandra/archive-ledger.mts        # rewrite src/sources/chandra/ledger.json and docs/chandra-ledger.md
@@ -41,7 +43,7 @@ export interface ShippedObject { readonly id: string; readonly raDeg?: number; r
 /** The archive's own names for a shipped Solar System body, which is caught by name and never by position. They are data beside the
  * programs, because this package names no body. */
 export const CHANDRA_MOVING_TARGETS = 'packages/telescope-cli/src/archives/chandra/moving-targets.json';
-export function chandraMovingTargets(path = resolve(REPOSITORY, CHANDRA_MOVING_TARGETS)): Readonly<Record<string, readonly string[]>> {
+export function chandraMovingTargets(path = inputPath(REPOSITORY, CHANDRA_MOVING_TARGETS)): Readonly<Record<string, readonly string[]>> {
   const record = requireRecord(JSON.parse(readFileSync(path, 'utf8')) as unknown, 'Chandra moving targets');
   if (record.schema !== 'cssearth-archive-moving-targets@1') throw new TypeError(`${path} is not an archive moving-target list.`);
   return Object.fromEntries(Object.entries(requireRecord(record.targets, 'moving targets'))
@@ -174,7 +176,7 @@ export function parseSolarSystemReceipt(value: unknown, label: string): { progra
 
 /** Every pinned program, every observation a receipt proved, and every receipt that could not be accepted. A receipt proves the
  * one observation it names, and only when the product, mode and archive file it compared are the ones that program pins. */
-export async function pinnedState(directory = PROGRAMS) {
+export async function pinnedState(directory = programStorePath(PROGRAMS)) {
   const files = (await readdir(directory)).sort();
   const programs: { id: string; observations: readonly ChandraObservation[] }[] = [];
   for (const file of files.filter(name => name.endsWith('.json') && !name.includes('.'.concat('reproduction')) && !name.includes('.solar-system') && name.split('.').length === 2)) {

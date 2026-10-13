@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned DRAGONS environment of toolchain.json under output/toolchains/gemini (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/gemini/toolchain.mts install
@@ -17,11 +20,11 @@ import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, writeInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
-const repository = WORKSPACE;
+const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/gemini');
+const PINS = packagePath('packages/telescope-cli/src/archives/gemini');
 export const GEMINI_ROOT = resolve(repository, 'output/toolchains/gemini');
 const DESCRIPTOR = resolve(PINS, 'toolchain.json');
 
@@ -35,7 +38,7 @@ async function descriptor(): Promise<ToolchainPins & { readonly lock: string; re
 }
 
 function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
+  const result = spawnSync(command, args, { env: telescopePythonEnvironment({ ...env }), encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
   if (result.status !== 0) throw new Error(`${command} ${args.slice(0, 4).join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-4000)}`);
   return result.stdout;
 }
@@ -76,8 +79,8 @@ export interface GeminiToolchain {
 }
 
 export async function geminiToolchain(): Promise<GeminiToolchain> {
-  const pins = await descriptor(), { entry } = pins, bin = resolve(GEMINI_ROOT, 'env/bin');
-  assertInstalledMarker(GEMINI_ROOT, pins, 'Gemini', INSTALL);
+  const pins = await descriptor(), { entry } = pins, root = resolveInstalledToolchain(GEMINI_ROOT, pins) ?? GEMINI_ROOT, bin = resolve(root, 'env/bin');
+  assertInstalledMarker(root, pins, 'Gemini', INSTALL);
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {
     binaries[name] = resolve(bin, requireString(file, name));
@@ -97,7 +100,7 @@ export const SOFTWARE_PROBE = 'import astrodata, numpy, astropy, sys\n' +
   'print(astrodata.version()); print(numpy.__version__); print(astropy.__version__); print("%d.%d.%d" % sys.version_info[:3])';
 
 export function dragonsToolchainVersions(toolchain: GeminiToolchain): { name: string; version: string }[] {
-  const result = spawnSync(toolchain.python, ['-c', SOFTWARE_PROBE], { encoding: 'utf8', env: { ...process.env, ...toolchain.env } });
+  const result = spawnSync(toolchain.python, ['-c', SOFTWARE_PROBE], { encoding: 'utf8', env: telescopePythonEnvironment({ ...toolchain.env }) });
   if (result.status !== 0) throw new Error(`DRAGONS did not import: ${(result.stderr ?? '').slice(-2000)}`);
   const lines = result.stdout.trim().split('\n').map(line => line.trim());
   if (lines.length !== 4 || lines.some(line => !line)) throw new Error(`The environment did not state its versions: ${result.stdout}`);
@@ -113,9 +116,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   else if (mode === 'verify') {
     const toolchain = await geminiToolchain();
     const version = spawnSync(toolchain.python, ['-c', 'import astrodata, geminidr, gemini_instruments; print(astrodata.version())'],
-      { encoding: 'utf8', env: { ...process.env, ...toolchain.env } });
+      { encoding: 'utf8', env: telescopePythonEnvironment({ ...toolchain.env }) });
     if (version.status !== 0) throw new Error(`DRAGONS did not import: ${(version.stderr ?? '').slice(-2000)}`);
-    const reduce = spawnSync(toolchain.binaries.reduce!, ['--version'], { encoding: 'utf8', env: { ...process.env, ...toolchain.env } });
+    const reduce = spawnSync(toolchain.binaries.reduce!, ['--version'], { encoding: 'utf8', env: telescopePythonEnvironment({ ...toolchain.env }) });
     console.log(`Gemini ready: DRAGONS ${version.stdout.trim()}; ${(reduce.stdout || reduce.stderr).trim()}`);
   } else throw new TypeError('Usage: toolchain <install|verify>');
 }

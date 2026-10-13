@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Pin a Keck observation in the Keck Observatory Archive as a Keck program.
  *
  *   node packages/telescope-cli/src/archives/keck/archive.mts <program id> <instrument> <koaid> [<koaid> ...] [--nights <n>]
@@ -23,13 +27,13 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readFitsFileHdus } from '@cssearth/fits/node';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+
 import { INSTRUMENT_TABLES, instrumentTable, koaCalibrations, koaDownload, koaProducts, koaQuery, lev0Url, lev1Url,
   type InstrumentTable } from './koa.mts';
 
 /** The pinned programs stay with the bodies' records in the checkout, not in this package. */
-export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/keck/programs');
-export const DOWNLOADS = resolve(WORKSPACE, '.local/keck');
+export const PROGRAMS = packagePath('packages/telescope-cli/src/archives/keck/programs');
+export const DOWNLOADS = resolve(USER_ROOT, '.local/keck');
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** A KOA file name: the instrument's two characters, the UT date, the second of the night, and for some instruments a
  * sequence. The second character can be a digit: NIRC2 writes `N2.`, KCWI `KB.` and `KR.`, OSIRIS `OS.`. */
@@ -189,7 +193,7 @@ export function parseKeckProgram(value: unknown): KeckProgram {
 }
 
 export async function readKeckProgram(id: string): Promise<KeckProgram> {
-  return parseKeckProgram(JSON.parse(await readFile(resolve(PROGRAMS, `${id}.json`), 'utf8')) as unknown);
+  return parseKeckProgram(JSON.parse(await readFile(resolve(programStorePath(PROGRAMS), `${id}.json`), 'utf8')) as unknown);
 }
 
 const nameOf = (filehand: string) => filehand.slice(filehand.lastIndexOf('/') + 1);
@@ -296,7 +300,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const [id, instrument, ...frames] = positionalArguments(args, ['--nights']);
   if (!id || !NAME.test(id) || !instrument || !frames.length || !Number.isInteger(nights) || nights < 0)
     throw new TypeError('Usage: archive <program id> <instrument> <koaid> [...] [--nights <n>]');
-  const path = resolve(PROGRAMS, `${id}.json`), directory = resolve(DOWNLOADS, id);
+  const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.json`), 'write'), directory = resolve(DOWNLOADS, id);
   const existing = await readKeckProgram(id).catch(() => null);
   const entries = [...existing?.observations ?? []];
   let programme = existing?.programme, semester = existing?.semester, pi = existing?.principalInvestigator, title = existing?.title, target = existing?.target;
@@ -311,7 +315,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   }
   const program = parseKeckProgram({ schema: 'cssearth-keck-program@1', id, instrument: instrument.toUpperCase(),
     table: instrumentTable(instrument), target, programme, semester, principalInvestigator: pi, title, observations: entries });
-  await mkdir(PROGRAMS, { recursive: true });
+  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`KECK_PROGRAM ${path}`);
 }

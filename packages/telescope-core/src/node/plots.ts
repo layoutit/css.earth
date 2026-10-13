@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from './paths.js';
 /** Astropy owns scientific serialization and axes; Matplotlib owns static rendering. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
@@ -130,7 +131,7 @@ json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'fi
 export async function plotProduct(directory:string,target:string,data:Record<string,unknown>,source:string,selection:Readonly<Record<string,unknown>>):Promise<Record<string,unknown>> {
   const tc=await astroqueryToolchain();
   return new Promise((accept,reject)=>{
-    const child=spawn(tc.python,['-c',PLOT_PYTHON],{env:{...process.env,...tc.env,MPLBACKEND:'Agg'},stdio:['pipe','pipe','pipe']});
+    const child=spawn(tc.python,['-c',PLOT_PYTHON],{env:telescopePythonEnvironment({...tc.env,MPLBACKEND:'Agg'}),stdio:['pipe','pipe','pipe']});
     let out='',err='';child.stdout.setEncoding('utf8').on('data',text=>{out+=text;});child.stderr.setEncoding('utf8').on('data',text=>{err+=text;});
     child.on('error',reject);child.on('close',code=>{
       if(code!==0)return reject(new Error(`Plot failed: ${err.slice(-2000)}`));
@@ -368,7 +369,7 @@ export async function plotNumericPreview(directory:string,preview:NumericPreview
   const background=figureBackground(options.figureBackground??'transparent');
   const tc=await astroqueryToolchain();
   return new Promise((accept,reject)=>{
-    const child=spawn(tc.python,['-c',NUMERIC_PREVIEW_PYTHON],{env:{...process.env,...tc.env,MPLBACKEND:'Agg'},stdio:['pipe','pipe','pipe']});
+    const child=spawn(tc.python,['-c',NUMERIC_PREVIEW_PYTHON],{env:telescopePythonEnvironment({...tc.env,MPLBACKEND:'Agg'}),stdio:['pipe','pipe','pipe']});
     let out='',err='';child.stdout.setEncoding('utf8').on('data',text=>{out+=text;});child.stderr.setEncoding('utf8').on('data',text=>{err+=text;});
     child.on('error',reject);child.on('close',code=>{
       if(code!==0)return reject(new Error(`Numeric preview failed: ${err.slice(-2000)}`));

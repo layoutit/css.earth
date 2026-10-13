@@ -1,8 +1,9 @@
 /** Select one exact product/operation. Never turn a failed cutout into a whole-product download. */
 import { basename, dirname, resolve } from 'node:path';
 import { mkdir, readFile, stat, writeFile, copyFile, rename, rm } from 'node:fs/promises';
+import { snapshotPublisher, type SnapshotPublisher } from './snapshot-store.mts';
 import { randomUUID } from 'node:crypto';
-import { fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits } from '@cssearth/telescope-core/node';
+import { fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
 import { requireRecord } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
@@ -115,21 +116,15 @@ export function sodaParameters(descriptor: Resource, request: DiscoveryRequest, 
 /** `parameters` are PyVO's descriptor-bound DataLink request parameters, never URL text. */
 export type MetadataLoader = (url: string, parameters?: Readonly<Record<string, Json>>) => Promise<MetadataResponse>;
 export async function planAccess(root: string, observation: DiscoveredObservation, snapshot: DiscoverySnapshot, request: DiscoveryRequest,
-  load?: MetadataLoader, policy: VoNetworkPolicy = {}): Promise<AccessPlan> {
+  load?: MetadataLoader, policy: VoNetworkPolicy = {}, publishSnapshot: SnapshotPublisher = snapshotPublisher(snapshot)): Promise<AccessPlan> {
   const limits = parseLimits(request.transferLimits), products: AcquisitionSpec[] = [], issues: string[] = [], visited = new Set<string>();
-  const evidenceDirectory = resolve(root, 'output/telescopes/vo/metadata');
-  await mkdir(evidenceDirectory, { recursive: true });
-  // The snapshot is saved beside the response it was read from, under that response's name.
-  const snapshotFile = resolve(evidenceDirectory, `${basename(snapshot.response.raw.path).replace(/\.xml$/u, '')}.snapshot.json`), snapshotText = canonical(snapshot);
-  await writeFile(snapshotFile, snapshotText);
-  const snapshotPin = { path: snapshotFile, bytes: Buffer.byteLength(snapshotText) };
   if (observation.target.status !== 'confirmed' && observation.target.status !== 'in-field')
     return { products, issues: ['The archive record has no confirmed target association and is not in the requested field.'] };
   if (!supportedKind(observation.kind))
     return { products, issues: [`No native profile route for advertised product kind ${observation.kind}.`] };
   const kind = observation.kind;
   const loader = load ?? (async (address: string, parameters?: Readonly<Record<string, Json>>) => (await astroquery({ operation: 'vo-links', url: address,
-    ...(parameters === undefined ? {} : { parameters }), directory: resolve(root, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
+    ...(parameters === undefined ? {} : { parameters }), directory: resolve(USER_ROOT, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
     allowedPrivateHosts: policy.allowedPrivateHosts })).vo!);
   let calls = 0;
   function add(operation: AcquisitionSpec['operation'], binding: Json, metadata: readonly Pin[], descriptor: Resource | null = null, serviceRow: number | null = null, serviceMetadata: string | null = null, format: AcquisitionSpec['format'] = 'fits') {
@@ -191,7 +186,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   let address: string;
   try { address = voUrl(observation.access.url, snapshot.response.effectiveUrl, policy); }
   catch (error) { return { products, issues: [String(error)] }; }
-  const pins = [snapshot.response.raw, snapshotPin];
+  const pins = [snapshot.response.raw];
   const advertised = observation.access.mime;
   if (datalink(advertised)) await links(address, {}, 0, pins);
   else if (advertised !== null && mediaType(advertised) === null) {
@@ -201,7 +196,9 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
     await links(address, {}, 0, pins);
   } else direct(address, observation.access.mime, observation.access.estimatedKilobytes === null ? null : observation.access.estimatedKilobytes * 1000,
     jsonValue({ url: address, identities: observation.identities }), pins);
-  return { products, issues };
+  if (!products.length) return { products, issues };
+  const pin = await publishSnapshot();
+  return { products: products.map(product => ({ ...product, metadata: [product.metadata[0]!, pin, ...product.metadata.slice(1)] })), issues };
 }
 
 /** Acquisition records origin/integrity only. Scientific metadata qualification is a later stage. */
@@ -219,7 +216,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     const parameters = sodaParameters(spec.descriptor, spec.request, spec.operation.parameters);
     if (canonical(parameters) !== canonical(spec.operation.parameters)) throw new Error('Subset parameters disagree with request.');
   } else if (spec.request.region || spec.request.spectralFrame) throw new Error('Subset requests cannot acquire a direct product.');
-  const destination = resolve(root, 'output/telescopes/vo/acquired', spec.key), recordPath = resolve(destination, 'acquisition.json');
+  const destination = resolve(USER_ROOT, 'output/telescopes/vo/acquired', spec.key), recordPath = resolve(destination, 'acquisition.json');
   const run: ProductRun = { telescope: spec.observation.service, stage: 'archive-acquisition',
     inputs: spec.metadata.map(pin => ({ identity: basename(pin.path), role: 'archive metadata response', bytes: pin.bytes })),
     parameters: { acquisition: spec.identity, parent: spec.observation.identities, operation: spec.operation, format: spec.format, limits: spec.limits },

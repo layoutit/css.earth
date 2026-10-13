@@ -14,12 +14,12 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
-import { resolveSkyTarget, WORKSPACE } from '@cssearth/telescope-core/node';
+import { resolveSkyTarget, requireWorkspace } from '@cssearth/telescope-core/node';
 import { hostName, RIESS_2016_HOSTS } from '../../src/new-object/archives/sh0es.mts';
 
 /** A galaxy's catalogue position and SIMBAD's agree to a few arcseconds; the nearest other galaxy in these tables is arcminutes away. */
 const MATCH_ARCSEC = 30;
-const source = resolve(WORKSPACE, 'src/objects/nearby-universe/source');
+const source = resolve(requireWorkspace(), 'src/objects/nearby-universe/source');
 const TABLES = [{ bank: 'galaxies', path: 'cf4-hyperleda.csv.gz' }, { bank: 'galaxies-2mrs', path: 'twomrs-sample.csv.gz' }] as const;
 
 const radians = (degrees: number) => degrees * Math.PI / 180;
@@ -31,7 +31,7 @@ const rows = await Promise.all(TABLES.map(async table => gunzipSync(await readFi
 
 const listed: string[][] = TABLES.map(() => []);
 for (const [host, [modulus]] of Object.entries(RIESS_2016_HOSTS)) {
-  const galaxy = hostName(host), resolved = await resolveSkyTarget(WORKSPACE, galaxy);
+  const galaxy = hostName(host), resolved = await resolveSkyTarget(requireWorkspace(), galaxy);
   if (!resolved) throw new Error(`SIMBAD does not know ${galaxy}.`);
   const { raDegrees, decDegrees } = resolved.target;
   const found = rows.map(table => table.map(row => ({ row, arcsec: separationArcsec(row.ra, row.dec, raDegrees, decDegrees) })).reduce((nearest, next) => next.arcsec < nearest.arcsec ? next : nearest));

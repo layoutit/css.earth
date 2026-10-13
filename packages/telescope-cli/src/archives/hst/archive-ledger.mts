@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { packagePath } from '../../paths.mts';
 /** The Hubble ledger: what the public archive holds in each instrument configuration, which of it this repository can already
  * re-calibrate, and which of the objects it ships Hubble has observed.
  *
@@ -230,7 +232,7 @@ export function archiveFinalQualification(program: ArchiveFinalProgram, record: 
 
 /** Every archive-final program in this repository, by the configuration it pins, with the ones a record qualifies. */
 export async function repositoryArchiveFinal(repository = REPOSITORY) {
-  const directory = resolve(repository, HST_PROGRAMS.path), files = (await readdir(directory).catch(() => [])).sort();
+  const directory = programStorePath(HST_PROGRAMS.path), files = (await readdir(directory).catch(() => [])).sort();
   const state = new Map<string, { programs: Set<string>; qualified: Set<string> }>(), problems: string[] = [];
   for (const file of files.filter(name => name.endsWith('.archive-final.json'))) {
     const id = file.slice(0, -'.archive-final.json'.length);
@@ -254,7 +256,7 @@ export async function repositoryArchiveFinal(repository = REPOSITORY) {
  * could not be accepted. A program counts as re-calibrated in a configuration only when a receipt names one of its observations
  * in that configuration and the MAST product the program pins for it, at the size it compared. */
 export async function repositoryReceipts(repository = REPOSITORY) {
-  const directory = resolve(repository, HST_PROGRAMS.path), files = (await readdir(directory)).sort();
+  const directory = programStorePath(HST_PROGRAMS.path), files = (await readdir(directory)).sort();
   const state = new Map<string, { programs: Set<string>; checked: Set<string> }>(), problems: string[] = [];
   // A pinned program is `<id>.json`. Everything else here carries a second name segment (a reproduction receipt, a line
   // stack, the Horizons responses a line stack pins) and is not a program.

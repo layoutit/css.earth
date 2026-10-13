@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned HST calibration environment of toolchain.json under output/toolchains/hst (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/hst/toolchain.mts install
@@ -13,15 +15,15 @@
  * root the first time a calibration runs (calibrate.mts). */
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope-core/node';
+import { assertInstalledMarker, runToolchainProcess, writeInstalledMarker, USER_ROOT } from '@cssearth/telescope-core/node';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-const repository = WORKSPACE;
+const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
-const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/hst');
+const PINS = packagePath('packages/telescope-cli/src/archives/hst');
 export const HST_ROOT = resolve(repository, 'output/toolchains/hst');
 
 export async function installHst() {
@@ -43,8 +45,8 @@ export interface HstToolchain { readonly python: string; readonly binaries: Read
  * cache of its own and the pinned context, so reference files are the ones that context selects. `bin` is on PATH because
  * stistools, wfc3tools and acstools spawn the executables by name. Refuses a missing install or one built from other pins. */
 export async function hstToolchain(crdsContext: string): Promise<HstToolchain> {
-  const pins = await readToolchainDescriptor(PINS, 'hst'), { entry } = pins, bin = resolve(HST_ROOT, 'env/bin');
-  assertInstalledMarker(HST_ROOT, pins, 'HST', 'node packages/telescope-cli/src/archives/hst/toolchain.mts install');
+  const pins = await readToolchainDescriptor(PINS, 'hst'), { entry } = pins, root = resolveInstalledToolchain(HST_ROOT, pins) ?? HST_ROOT, bin = resolve(root, 'env/bin');
+  assertInstalledMarker(root, pins, 'HST', 'node packages/telescope-cli/src/archives/hst/toolchain.mts install');
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {
     binaries[name] = resolve(bin, requireString(file, name));

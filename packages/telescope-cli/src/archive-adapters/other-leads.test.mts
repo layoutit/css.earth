@@ -1,8 +1,11 @@
+import '../test-user-root.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import test, { beforeEach } from 'node:test';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+beforeEach(() => rm(resolve(USER_ROOT, 'output/telescopes/archive-leads'), { recursive: true, force: true }));
 import { searchChandraLeads, searchSpitzerLeads } from './other-leads.mts';
 
 const jupiter = { id: 'jupiter', name: 'Jupiter', aliases: [] };
@@ -60,7 +63,7 @@ test('Spitzer filters all returned AORs before taking the first hundred', async 
     assert.equal(result.state, 'sampled');
     const source = result.sources?.[0]; assert.ok(source && 'aorKey' in source);
     assert.equal(source.aorKey, 21415424);
-    const evidence = JSON.parse(await readFile(resolve(root, 'output/telescopes/archive-leads', `${source.evidence}.json`), 'utf8'));
+    const evidence = JSON.parse(await readFile(resolve(USER_ROOT, 'output/telescopes/archive-leads', `${source.evidence}.json`), 'utf8'));
     assert.deepEqual(evidence.rows, [wanted]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

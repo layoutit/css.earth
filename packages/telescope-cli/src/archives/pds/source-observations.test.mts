@@ -3,9 +3,9 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { sourcePds3Observations } from './source-observations.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
-const ROOT = WORKSPACE;
+const ROOT = requireWorkspace();
 
 test('source-pinned Wild 2 PDS3 images enter the PDS adapter without inventing a filter width', async () => {
   const observations = await sourcePds3Observations(ROOT, 'comet-81p');

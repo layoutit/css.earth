@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** The archive's own final product of an observation a retired instrument took, pinned and read here.
  *
  *   node packages/telescope-cli/src/archives/hst/archive-final.mts <program id> <work directory> [--raw <dir>]...
@@ -47,13 +48,13 @@ import { pathToFileURL } from 'node:url';
 import { positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { mastFile, mastRequest, type MastFile, WORKSPACE, assertInputs, writeProductRecord } from '@cssearth/telescope-core/node';
+import { mastFile, mastRequest, type MastFile, assertInputs, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/objects';
 import { PROGRAMS } from './archive.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
 
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 export const ARCHIVE_FINAL_SCHEMA = 'cssearth-hst-archive-final@1';
 /** The stage a product record carries for a file this repository did not make. */
 export const ARCHIVE_FINAL_STAGE = 'archive-final';
@@ -184,8 +185,8 @@ export function parseArchiveFinalProgram(value: unknown, label = 'archive-final 
     identity, components, files, ...(row.note === undefined ? {} : { note: requireString(row.note, `${label}: note`) }) };
 }
 
-export const archiveFinalPath = (id: string) => resolve(PROGRAMS, `${id}.archive-final.json`);
-export const archiveFinalRecordPath = (id: string) => resolve(PROGRAMS, `${id}.archive-final.product.json`);
+export const archiveFinalPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.archive-final.json`);
+export const archiveFinalRecordPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.archive-final.product.json`);
 export const readArchiveFinalProgram = async (id: string): Promise<ArchiveFinalProgram> =>
   parseArchiveFinalProgram(JSON.parse(await readFile(archiveFinalPath(id), 'utf8')) as unknown, `${id}.archive-final.json`);
 

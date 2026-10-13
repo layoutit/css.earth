@@ -1,3 +1,4 @@
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** `telescope new-object` for magnetic maps this repository reduced from archived spectra: draft a spec from the reduced
  * programs of a star, and the route (maps/route.mts) that writes each map as a dataset of the star's page and bakes the
  * star. map-datasets.mts holds the records; `archives/espadons/` reduces a program. */
@@ -20,7 +21,7 @@ const reduce = (program: string) => `node packages/telescope-cli/src/archives/es
 async function reduced(root: string, _host: string, choice: SurfaceMapChoice): Promise<ReducedMap> {
   const receipt = requireRecord(await readJson(receiptPath(choice.program), `${choice.program} is not reduced (${reduce(choice.program)})`), `${choice.program} receipt`);
   if (receipt.schema !== MAP_SCHEMA) throw new Error(`${choice.program}: its receipt is of an earlier reduction; reduce it again (${reduce(choice.program)}).`);
-  const table = await readFile(resolve(root, 'output/espadons', choice.program, `${choice.program}.dat`), 'utf8').catch(() => { throw new Error(`${choice.program}: its map table is not in output/espadons (${reduce(choice.program)}).`); });
+  const table = await readFile(resolve(USER_ROOT, 'output/espadons', choice.program, `${choice.program}.dat`), 'utf8').catch(() => { throw new Error(`${choice.program}: its map table is not in output/espadons (${reduce(choice.program)}).`); });
   return reducedMap(choice, receipt, await readJson(resolve(PROGRAMS, `${choice.program}.json`), `${choice.program}: no such program`), table);
 }
 

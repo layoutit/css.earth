@@ -24,3 +24,4 @@ export * from './starry.js';
 export * from './spiderman.js';
 export * from './picaso.js';
 export * from './toolchain/marker.js';
+export * from './toolchain/resolver.js';

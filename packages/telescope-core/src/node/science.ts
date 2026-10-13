@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from './paths.js';
 /** Astropy owns FITS units/WCS; css.earth owns association, conservative masks and claims. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
@@ -322,7 +323,7 @@ json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('@cssearth/objects').IcrsCircle; position?: { readonly raDegrees:number;readonly decDegrees:number }; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent'; companions?: { readonly uncertainty: string; readonly coverage: string } } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
-    const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });
+    const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: telescopePythonEnvironment(tc.env), stdio: ['pipe', 'pipe', 'pipe'] });
     let out = '', err = '';
     child.stdout.setEncoding('utf8').on('data', s => { out += s; }); child.stderr.setEncoding('utf8').on('data', s => { err += s; });
     child.on('error', fail); child.on('close', code => { if (code !== 0) return fail(new Error(`Astropy metadata failed: ${err.slice(-2500)}`));

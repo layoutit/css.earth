@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../src/paths.mts';
+import { workspacePath } from '../../src/paths.mts';
 /** Map one absorption band over a body's surface from STIS long-slit spectra scanned across its disc.
  *
  *   node packages/telescope-cli/authoring/hst/slit-scan-map.mts <scan id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
@@ -416,7 +418,7 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
   await writeFile(resolve(outputDirectory, name), fits);
   await writeFile(resolve(outputDirectory, `${name}.body-map.json`), metadata);
   await writeFile(resolve(outputDirectory, 'registration.json'), registration);
-  const definitionBytes = await readFile(scanPath(definition.id)), responsesBytes = await readFile(resolve(PROGRAMS, definition.horizons.responses));
+  const definitionBytes = await readFile(scanPath(definition.id)), responsesBytes = await readFile(resolve(programStorePath(PROGRAMS), definition.horizons.responses));
   const inputs: ProductInput[] = [{ role: 'slit-scan definition', identity: `${HST_PROGRAMS.path}/${definition.id}.scan.json`, bytes: definitionBytes.byteLength },
     ...definition.frames.map(frame => ({ role: frame.rejected ? 'rejected archive frame' : 'archive rectified frame', identity: frame.uri, bytes: frame.bytes })),
     { role: 'solar reference', identity: definition.reference.url, bytes: definition.reference.bytes },
@@ -429,7 +431,7 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
 }
 
 // ---- the stage --------------------------------------------------------------------------------------------------------
-export const scanPath = (id: string) => resolve(PROGRAMS, `${id}.scan.json`);
+export const scanPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.scan.json`);
 export const readSlitScan = async (id: string) => parseSlitScan(JSON.parse(await readFile(scanPath(id), 'utf8')));
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -451,7 +453,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     `${receipt.map.strongest.westLongitude}°W ${receipt.map.strongest.latitude}°`);
   console.log(`wrote ${written.join(', ')} to ${output}`);
   if (flags.includes('--receipt')) {
-    const path = resolve(PROGRAMS, `${definition.id}.scan.reproduction.json`);
+    const path = workspacePath(resolve(programStorePath(PROGRAMS), `${definition.id}.scan.reproduction.json`));
     await writeFile(path, `${JSON.stringify(receipt, null, 1)}\n`);
     console.log(`wrote ${path}`);
   }

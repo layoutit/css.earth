@@ -1,3 +1,4 @@
+import { packagePath } from '../../paths.mts';
 /** The Kepler mission's quarters, and a light curve of the whole mission split into them.
  *
  * Kepler watched one field from May 2009 to May 2013 and turned by a quarter of a circle about every 90 days to keep
@@ -27,7 +28,7 @@ export function parseQuarters(value: unknown): Quarter[] {
   if (!quarters.length || !quarters.every((one, index) => one.quarter === index && one.firstCadenceMjd < one.lastCadenceMjd && (index === 0 || quarters[index - 1]!.lastCadenceMjd < one.firstCadenceMjd))) throw new TypeError('quarters.json does not list the quarters in order, each after the one before.');
   return quarters;
 }
-export const KEPLER_QUARTERS: readonly Quarter[] = parseQuarters(JSON.parse(readFileSync(resolve(import.meta.dirname, 'quarters.json'), 'utf8')) as unknown);
+export const KEPLER_QUARTERS: readonly Quarter[] = parseQuarters(JSON.parse(readFileSync(packagePath('src/archives/kepler/quarters.json'), 'utf8')) as unknown);
 
 /** A time on the Kepler mission's clock (a barycentric Julian date less 2454833) as a modified Julian date. */
 export const mjdOf = (keplerTime: number) => keplerTime + KEPLER_TIME_ZERO - 2400000.5;

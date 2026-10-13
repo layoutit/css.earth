@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /**
  * One planet's emission light curve from a joint Eureka! Stage 5 fit of several reduced visits.
  *
@@ -57,7 +58,7 @@ export async function fitJoint(jointDirectory: string, outputRoot: string) {
   await writeFile(resolve(work, `S5_${eventName}.ecf`), control);
   await writeFile(resolve(work, requireString(joint.parameters)), await readFile(resolve(jointDirectory, requireString(joint.parameters))));
   const fit = spawnSync(toolchain.python, ['-c', `from eureka.S5_lightcurve_fitting import s5_fit\ns5_fit.fitlc('${eventName}', ecf_path='${work}')`],
-    { cwd: outputRoot, env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 1 << 28 });
+    { cwd: outputRoot, env: telescopePythonEnvironment(toolchain.env), encoding: 'utf8', maxBuffer: 1 << 28 });
   await writeFile(resolve(work, 'S5.log'), `${fit.stdout}${fit.stderr}`);
   if (fit.status !== 0) throw new Error(`Eureka! Stage 5 failed; see ${resolve(work, 'S5.log')}.`);
 }
@@ -71,7 +72,7 @@ export async function writeEmission(jointDirectory: string, outputRoot: string, 
   const control = await readFile(resolve(work, `S5_${requireString(joint.eventName)}.ecf`), 'utf8');
   const table = await findOne(stage5, /_Table_Save_shared\.txt$/u), parameters = await findOne(stage5, /^S5_lsq_fitparams_shared\.csv$/u);
   const detrended = resolve(work, 'detrended.csv');
-  const exported = spawnSync(toolchain.python, ['-c', EXPORT, table, detrended], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8' });
+  const exported = spawnSync(toolchain.python, ['-c', EXPORT, table, detrended], { env: telescopePythonEnvironment(toolchain.env), encoding: 'utf8' });
   if (exported.status !== 0) throw new Error(`Exporting the fitted table failed: ${exported.stderr}`);
 
   // Free parameters come from the fit; fixed ones (the other planet's eclipse time in each eclipse visit, for one) only from the

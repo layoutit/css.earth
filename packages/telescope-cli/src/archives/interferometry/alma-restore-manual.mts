@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { packagePath } from '../../paths.mts';
 /** Restore one MANUALLY reduced ALMA execution from its raw visibilities and image it, then check the result against the
  * archive's own image.
  *
@@ -376,7 +377,7 @@ export async function recordArchiveComparison(image: string, archive: string, co
 /** The field imaged when no --target is given. Which body that is sits in data beside this code (`manual-restore-focus.json`),
  * because the archive code names no body. */
 export async function manualRestoreTarget() {
-  const record = requireRecord(JSON.parse(await readFile(resolve(import.meta.dirname, 'manual-restore-focus.json'), 'utf8')) as unknown, 'manual-restore-focus.json');
+  const record = requireRecord(JSON.parse(await readFile(packagePath('src/archives/interferometry/manual-restore-focus.json'), 'utf8')) as unknown, 'manual-restore-focus.json');
   if (record.schema !== 'cssearth-alma-manual-restore-focus@1') throw new TypeError('manual-restore-focus.json is not an ALMA manual restore focus.');
   return requireString(record.target, 'target');
 }

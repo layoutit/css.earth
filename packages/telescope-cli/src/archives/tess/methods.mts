@@ -1,3 +1,4 @@
+import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** The published methods that decide whether a star's light shows it turning, by the kind of star and of data each was
  * made for.
  *
@@ -12,7 +13,6 @@
  * its paper says, and do not add a threshold no paper prints. A paper whose code cannot be run here has its own verdict
  * on a star read from its published table instead (published.mts). */
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { Mission, RotationVerdict } from './verdict.mts';
@@ -145,7 +145,7 @@ export const HOLCOMB_2022: PeriodMethod = { id: 'holcomb-2022', citation: 'Holco
     const least = temperature >= 6000 ? 3.5 : temperature <= 4250 ? 4.0 : 5.2 - 2.8e-4 * temperature;
     return gravity >= least ? undefined : `With log g ${gravity} at ${Math.round(temperature)} K the star is not a dwarf by the cuts Holcomb et al. (2022) apply (log g at least ${Number(least.toFixed(2))} at that temperature).`; },
   covers: () => undefined, catalogue: { name: 'TESS Input Catalog', read: inputCatalogue },
-  async judge(files, star) { const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'spin-')), job = join(directory, 'job.json'), transits = star.transits ?? [];
+  async judge(files, star) { const { python } = await toolchainPaths(), directory = await telescopeScratch('spin-'), job = join(directory, 'job.json'), transits = star.transits ?? [];
     try { await writeFile(job, JSON.stringify({ files, binSeconds: HOLCOMB.binSeconds, timeZero: HOLCOMB.timeZero, ...(transits.length ? { transit: [transits.map(one => one.periodDays), transits.map(one => one.epochBjd), transits.map(one => one.durationDays)] } : {}) }));
       const printed = requireRecord(runTool(python, ['spinspotter', job]), 'SpinSpotter\'s answer'), numbers = (value: unknown, key: string) => requireArray(value, key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`));
       const sectors = requireArray(printed.sectors, 'sectors').map((entry, index) => { const record = requireRecord(entry, `sector ${index}`), window = requireFiniteNumber(record.sector, 'sector'), spin = parseSpin(record, `sector ${window}`);
@@ -174,7 +174,7 @@ export function parseInputCatalogue(value: unknown): InputCatalogue {
 }
 /** The TESS Input Catalog's values for the target of a 2-minute light curve, from the file's primary header. */
 export async function inputCatalogue(file: string): Promise<InputCatalogue> {
-  const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'catalogue-')), job = join(directory, 'job.json');
+  const { python } = await toolchainPaths(), directory = await telescopeScratch('catalogue-'), job = join(directory, 'job.json');
   try { await writeFile(job, JSON.stringify({ file })); return parseInputCatalogue(runTool(python, ['input-catalogue', job])); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }
@@ -200,7 +200,7 @@ export function parseMissionLightCurve(value: unknown): MissionLightCurve {
 }
 /** A mission's light curve file, read as the mission publishes it. */
 export async function missionLightCurve(file: string): Promise<MissionLightCurve> {
-  const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'mission-')), job = join(directory, 'job.json');
+  const { python } = await toolchainPaths(), directory = await telescopeScratch('mission-'), job = join(directory, 'job.json');
   try { await writeFile(job, JSON.stringify({ file })); return parseMissionLightCurve(runTool(python, ['mission-light-curve', job])); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }
@@ -218,7 +218,7 @@ export function parseAnalysis(value: unknown): RotationAnalysis {
 export const ANALYSIS_FREQUENCIES = 20000;
 /** A light curve's periods by the three methods of Reinhold & Hekker (2020), prepared as `preparation` says. */
 export async function rotationAnalysis(preparation: { readonly trendDegree: number; readonly outlierDeviations: number; readonly binDays: number }, time: readonly number[], flux: readonly number[]): Promise<RotationAnalysis> {
-  const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'rotation-')), job = join(directory, 'job.json');
+  const { python } = await toolchainPaths(), directory = await telescopeScratch('rotation-'), job = join(directory, 'job.json');
   try { await writeFile(job, JSON.stringify({ time, flux, ...preparation, frequencies: ANALYSIS_FREQUENCIES })); return parseAnalysis(runTool(python, ['rotation', job])); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }

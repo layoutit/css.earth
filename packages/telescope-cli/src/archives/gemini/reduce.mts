@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Re-run DRAGONS, Gemini Observatory's own reduction platform, on a pinned programme's raw frames.
  *
  *   node packages/telescope-cli/src/archives/gemini/reduce.mts <program id> <work directory> <stage> [--raw <dir>] [--half a|b]
@@ -36,7 +37,7 @@ import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '@cssearth/core';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/objects';
-import { readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE } from '@cssearth/telescope-core/node';
+import { readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { dragonsToolchainVersions, geminiToolchain, type GeminiToolchain } from './toolchain.mts';
@@ -51,7 +52,7 @@ export type Half = (typeof HALVES)[number];
 
 /** A path inside the repository, as the repository sees it: a record is committed, so it never carries a local absolute
  * path. A path outside the repository is recorded as it is, because nothing here can shorten it honestly. */
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 export const repositoryPath = (path: string) => path.startsWith(`${REPOSITORY}/`) ? path.slice(REPOSITORY.length + 1) : path;
 
 /** What DRAGONS calls the product of each stage. `reduce` names its output for the first frame that went in and for what it
@@ -192,7 +193,7 @@ function runReduce(toolchain: GeminiToolchain, directory: string, files: readonl
     ...(userCal.length ? ['--user_cal', ...userCal] : [])];
   const started = process.hrtime.bigint();
   const result = spawnSync(toolchain.binaries.reduce!, args,
-    { cwd: directory, encoding: 'utf8', env: { ...process.env, ...toolchain.env }, maxBuffer: 64 * 1024 * 1024 });
+    { cwd: directory, encoding: 'utf8', env: telescopePythonEnvironment(toolchain.env), maxBuffer: 64 * 1024 * 1024 });
   const seconds = Number(process.hrtime.bigint() - started) / 1e9;
   if (result.status !== 0)
     throw new Error(`reduce failed (status ${result.status}): ${(result.stderr || result.stdout || '').slice(-4000)}`);

@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Decode through the existing format owners, then hand arrays to Astropy/Matplotlib. */
 import { mkdir,readFile,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -84,6 +85,6 @@ export async function nativeFigureInput(d:NativeFigureInput,directory:string,str
     encoding='npy';metadata=pdsMetadata({...decoded,structures:selected}).nativeMetadata!;
   }else throw new Error(`No native figure reader for ${decoder}`);
   const tc=await astroqueryToolchain();
-  execFileSync(tc.python,['-c',CONVERT],{input:JSON.stringify({directory,array,encoding,shape,metadata,companions}),env:{...process.env,...tc.env},maxBuffer:1024*1024});
+  execFileSync(tc.python,['-c',CONVERT],{input:JSON.stringify({directory,array,encoding,shape,metadata,companions}),env:telescopePythonEnvironment(tc.env),maxBuffer:1024*1024});
   return {file:resolve(directory,'native.fits'),native:{decoder,structure:metadata.structure,metadata,packages,companions,qualityPolicy:'IMAGE associates SIGMA_MAP_IMAGE as standard deviation and QUALITY_MAP_IMAGE as flags; finite zero flags only. Other structures require explicit selection.',coordinates:'Pixel coordinates; native planetary projection is not converted to celestial WCS.',conversion:'Decoded values and masked special constants; no recalibration. Spectral centers preserved as WAVE-TAB; edges are not inferred.'}};
 }

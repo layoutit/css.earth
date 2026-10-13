@@ -12,7 +12,7 @@
  * `output/` included: in a checkout without them Keck's ledger fell to "0 of 14 instruments reduced" (2026-10-06, where its
  * local pass took 235 s). */
 import { spawnSync } from 'node:child_process';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { ARCHIVES } from './archives.mts';
 
 const args = process.argv.slice(2), flags = args.filter(arg => arg.startsWith('--')), named = args.filter(arg => !arg.startsWith('--'));
@@ -24,7 +24,7 @@ for (const archive of withLedger.filter(archive => !named.length || named.includ
   if (!archive.sharedLedgerCommand) { console.log(`${archive.id}: run by hand, node ${archive.ledgerCommand}`); continue; }
   const started = Date.now();
   console.log(`${archive.id}: node ${archive.ledgerCommand} ${flags.join(' ')}`);
-  const run = spawnSync(process.execPath, [archive.ledgerCommand!, ...flags], { cwd: WORKSPACE, stdio: 'inherit' });
+  const run = spawnSync(process.execPath, [archive.ledgerCommand!, ...flags], { cwd: requireWorkspace(), stdio: 'inherit' });
   console.log(`${archive.id}: ${run.status === 0 ? 'done' : `failed (status ${run.status})`} in ${Math.round((Date.now() - started) / 1000)} s`);
   if (run.status !== 0) failed.push(archive.id);
 }

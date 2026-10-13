@@ -11,7 +11,7 @@ type SharadByteSource, type SharadPds4Label,
 } from './f16-sharad-pds4.mts';
 import { parseSourceProducts } from '../../products/source-product-contract.mts';
 import { familyProfile } from '../../family-handlers.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 const test = sourceTest();
 
 /** The fixture mirrors the published label element for element, including both `description` elements and the cartography block. */
@@ -195,7 +195,7 @@ test('a pinned slice is read as the window of the volume it claims to be, and ne
 });
 
 test('the Mars source observations name real slices of the pinned label and publish the F16 qualification', async () => {
-  const root = WORKSPACE, source = resolve(root, 'src/objects/mars/source');
+  const root = requireWorkspace(), source = resolve(root, 'src/objects/mars/source');
   const parsed = parseSharadPds4Label(await readFile(resolve(source, 'telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_time.xml'), 'utf8'));
   assert.equal(parsed.lidvid, 'urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::1.0');
   assert.deepEqual(parsed.shape, [1280, 1420, 3600]);

@@ -23,3 +23,7 @@ is asked to reinstall.
 What stays outside the package: the telescope command (`@cssearth/telescope`) with each archive's clients, reducers and
 ledger builders and the ledger machinery they share, the archives' pinned programs and toolchain pins
 (beside the archive's code in `packages/telescope-cli/src/archives/<archive>/`), and every object-specific use of a product.
+
+## Path ownership
+
+`src/node/paths.ts` owns `USER_ROOT`, optional `WORKSPACE`, `requireWorkspace()` and package-relative `TOOLCHAINS`. The [command guide](../telescope-cli/README.md) documents platform defaults and workspace admission. Library imports never infer a checkout from the library package's location. Python environments, markers, archive answers and caches are user-owned; shipped pins remain read-only.

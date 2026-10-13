@@ -1,3 +1,4 @@
+import { telescopePythonEnvironment } from './paths.js';
 /** PlanetMapper owns navigation and resampling; no interactive viewer is started. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
@@ -93,7 +94,7 @@ result={'units':header['BUNIT'],'bodyCode':int(obs.target_body_id),'radiusKm':fl
 export async function projectWithPlanetMapper(request:Record<string,unknown>):Promise<Record<string,unknown>> {
   const tc=await astroqueryToolchain();
   return new Promise((accept,reject)=>{
-    const child=spawn(tc.python,['-c',PROJECTION_PYTHON],{env:{...process.env,...tc.env},stdio:['pipe','pipe','pipe']});
+    const child=spawn(tc.python,['-c',PROJECTION_PYTHON],{env:telescopePythonEnvironment(tc.env),stdio:['pipe','pipe','pipe']});
     let stdout='',stderr='';child.stdout.setEncoding('utf8');child.stderr.setEncoding('utf8');
     child.stdout.on('data',chunk=>{stdout+=chunk;});child.stderr.on('data',chunk=>{stderr+=chunk;});
     child.on('error',reject);child.on('close',code=>{if(code!==0)reject(new Error(stderr.slice(-5000)||`PlanetMapper exited ${code}`));else{try{accept(requireRecord(JSON.parse(stdout)));}catch(error){reject(error);}}});

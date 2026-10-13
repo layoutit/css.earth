@@ -1,3 +1,4 @@
+import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** starry owns spherical-harmonic brightness maps, their intensities and the star-planet light curves they make (Luger et al. 2019).
  * css.earth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
@@ -6,11 +7,11 @@ import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { TOOLCHAINS, USER_ROOT } from './paths.js';
 import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-export const STARRY_ROOT = resolve(WORKSPACE, 'output/toolchains/starry');
+export const STARRY_ROOT = resolve(USER_ROOT, 'output/toolchains/starry');
 
 const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install';
 const descriptor = () => readToolchainPins('starry', 'starry-toolchain.json');
@@ -38,8 +39,8 @@ export async function installStarry() {
 export interface StarryToolchain { readonly python: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
 
 export function starryToolchainSync(): StarryToolchain {
-  const pins = descriptor(), { entry } = pins, bin = resolve(STARRY_ROOT, 'env/bin'), python = resolve(bin, 'python');
-  assertInstalledMarker(STARRY_ROOT, pins, 'starry', INSTALL);
+  const pins = descriptor(), { entry } = pins, root = resolveInstalledToolchain(STARRY_ROOT, pins) ?? STARRY_ROOT, bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(root, pins, 'starry', INSTALL);
   try { accessSync(python); } catch { throw new Error(`The starry toolchain has no python at ${python}.`); }
   // Theano writes its compiled operators under the toolchain, and an empty home keeps a user's ~/.theanorc out of the result.
   const home = resolve(STARRY_ROOT, 'home'); mkdirSync(home, { recursive: true });

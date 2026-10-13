@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Pin one star's polarimetric ESPaDOnS spectra of one observing run as a program.
  *
  *   node packages/telescope-cli/src/archives/espadons/archive.mts <program id> --name <star> --ra <degrees> --dec <degrees> --from <MJD> --to <MJD> [--object <object id>] [--radius 0.02]
@@ -27,7 +28,7 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, isRecord, positionalArguments } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { polarimetricProducts, type ArchivedProduct } from './cadc.mts';
 import { starParameters } from './catalogue.mts';
 import { parseProgram, programPath, PROGRAM_SCHEMA, PROGRAMS, type EspadonsProgram, type MappedStar } from './program.mts';
@@ -45,7 +46,7 @@ export function recordedStar(record: unknown, path: string): MappedStar | undefi
   const period = cited('rotationPeriodDays', 'rotationPeriodSource'), speed = cited('projectedRotationSpeedKmS', 'projectedRotationSpeedSource'), tilt = cited('spinInclinationDegrees', 'spinInclinationSource');
   return period && speed && tilt ? { vsiniKmS: speed, inclinationDegrees: tilt, periodDays: period, maximumDegree: EXAMPLE_DEGREE } : undefined;
 }
-const recordOf = async (object: string) => { const path = `src/objects/${object}/source/measurements.json`; return recordedStar(JSON.parse(await readFile(resolve(WORKSPACE, path), 'utf8').catch(() => 'null')) as unknown, path); };
+const recordOf = async (object: string) => { const path = `src/objects/${object}/source/measurements.json`; return recordedStar(JSON.parse(await readFile(resolve(requireWorkspace(), path), 'utf8').catch(() => 'null')) as unknown, path); };
 
 const DAY0 = Date.UTC(1858, 10, 17), day = (mjd: number) => new Date(DAY0 + mjd * 86400000).toISOString().slice(0, 10);
 /** A star's products as runs: a new run starts after `gapDays` without a spectrum. */
@@ -62,15 +63,15 @@ async function pin(id: string, name: string, ra: number, dec: number, radius: nu
   const looked: Pick<Awaited<ReturnType<typeof starParameters>>, 'atmosphere' | 'radialVelocity' | 'notes'> = (kept.atmosphere ?? given?.atmosphere) && (kept.radialVelocity ?? given?.radialVelocity) ? { notes: [] } : await starParameters(name, ra, dec), atmosphere = kept.atmosphere ?? given?.atmosphere ?? looked.atmosphere, radialVelocity = kept.radialVelocity ?? given?.radialVelocity ?? looked.radialVelocity;
   const star = kept.star ?? given?.star ?? (object ? await recordOf(object) : undefined);
   const program = parseProgram({ schema: PROGRAM_SCHEMA, id, target: { name, ...(object ? { object } : {}), raDegrees: ra, decDegrees: dec, radiusDegrees: radius }, span, observations, ...(atmosphere ? { atmosphere } : {}), ...(radialVelocity ? { radialVelocity } : {}), ...(star ? { star } : {}), ...(kept.published ? { published: kept.published } : {}) });
-  await mkdir(PROGRAMS, { recursive: true }); await writeFile(programPath(id), `${JSON.stringify(program, null, 2)}\n`);
+  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true }); await writeFile(programStorePath(programPath(id), 'write'), `${JSON.stringify(program, null, 2)}\n`);
   console.log(`${id}: ${observations.length} polarimetric spectra of ${name}, ${day(observations[0]!.mjdStart)} to ${day(observations.at(-1)!.mjdStart)}; typed names ${[...new Set(observations.map(observation => observation.targetName))].join(', ')}.${program.atmosphere ? ` Mask atmosphere ${program.atmosphere.effectiveTemperatureK.value} K, log g ${program.atmosphere.logGravity.value}.` : ''}${program.radialVelocity ? ` Radial velocity ${program.radialVelocity.value} km/s.` : ''}${looked.notes.length ? ` ${looked.notes.join(' ')}` : ''}${program.star ? '' : ' Add the star block (v sin i, tilt, period, maximum degree, each with its source) before mapping.'}`);
   return program;
 }
 
 /** `--ledger`: every run worth mapping of every ledger star whose rotation is known, pinned once. */
 async function pinLedger() {
-  const ledger = JSON.parse(await readFile(resolve(WORKSPACE, 'src/sources/espadons/ledger.json'), 'utf8')) as { stars: { id: string; typedNames: string[]; maps: { program: string }[] }[]; targets: { name: string; raDegrees: number; decDegrees: number; spectra: number }[] };
-  const programs = await Promise.all((await readdir(PROGRAMS)).filter(file => file.endsWith('.json')).map(async file => parseProgram(JSON.parse(await readFile(resolve(PROGRAMS, file), 'utf8')))));
+  const ledger = JSON.parse(await readFile(resolve(requireWorkspace(), 'src/sources/espadons/ledger.json'), 'utf8')) as { stars: { id: string; typedNames: string[]; maps: { program: string }[] }[]; targets: { name: string; raDegrees: number; decDegrees: number; spectra: number }[] };
+  const programs = await Promise.all((await readdir(programStorePath(PROGRAMS))).filter(file => file.endsWith('.json')).map(async file => parseProgram(JSON.parse(await readFile(resolve(programStorePath(PROGRAMS), file), 'utf8')))));
   const used = new Set(programs.map(program => program.id)); let pinned = 0;
   for (const star of ledger.stars) {
     // A star with a map on its page is mapped again as that map was; any other star, from its own record.

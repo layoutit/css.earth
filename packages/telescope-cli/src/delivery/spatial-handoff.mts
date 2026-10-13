@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
 import { VERSION } from '../help.mts';
-import { writeProductRecord, WORKSPACE } from '@cssearth/telescope-core/node';
+import { writeProductRecord, requireWorkspace, telescopeScratch } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 
 type SpatialLoader = Partial<Pick<typeof import('@cssearth/renderer/stars/loader.ts'), 'loadPreparedCssPointField'>
@@ -20,7 +20,7 @@ type SpatialPayload =
   | {kind:'volume';payload:PreparedCssVolume}
   // A bank is stored as its index and the files the index names; its provenance is in its record, which no page reads.
   | {kind:'volume-dataset-bank';payload:PreparedVolumeDatasetIndex&{readonly provenance:unknown}};
-const workspaceRoot=WORKSPACE;
+
 
 async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
   const source=resolve(objectPath),root=dirname(source),bytes=await readFile(source),descriptor=requireRecord(JSON.parse(bytes.toString()));
@@ -47,10 +47,10 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
   if(kind==='volume-dataset-bank')for(const path of ['README.md','source/manifest.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}
   }
-  const entry=new URL(kind==='points'?'../../../../packages/renderer/src/stars/loader.ts':kind==='volume'?'../../../../packages/renderer/src/volume/loader.ts':'../../../../packages/renderer/src/volume/prepared-volume-datasets.ts',import.meta.url);
+  const entry=pathToFileURL(resolve(requireWorkspace(), kind==='points'?'packages/renderer/src/stars/loader.ts':kind==='volume'?'packages/renderer/src/volume/loader.ts':'packages/renderer/src/volume/prepared-volume-datasets.ts'));
   // Use the application's exact loader, including physical-frame and binary-bank validation.
-  const compiled=await build({entryPoints:[entry.pathname],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true});
-  await mkdir(resolve(workspaceRoot,'work'),{recursive:true});const scratch=await mkdtemp(resolve(workspaceRoot,'work/telescope-spatial-loader-'));
+  const compiled=await build({entryPoints:[entry.pathname],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true,plugins:[{name:'absolute-package-imports',setup(build){build.onResolve({filter:/^[^./]/},args=>args.path.startsWith('node:')?undefined:{path:import.meta.resolve(args.path),external:true});}}]});
+  const scratch=await telescopeScratch('telescope-spatial-loader-');
   const moduleFile=resolve(scratch,'loader.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   try{
     const loader: SpatialLoader=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);

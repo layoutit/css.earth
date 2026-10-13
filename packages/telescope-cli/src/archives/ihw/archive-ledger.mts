@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { inputPath, packagePath } from '../../paths.mts';
 /** Build the IHW/PDS near-nucleus Halley ledger from its fixed-width PDS file table.
  *
  *   node packages/telescope-cli/src/archives/ihw/archive-ledger.mts FILELIST.TAB --write
@@ -10,14 +12,14 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '@cssearth/objects';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import { WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 
 export const IHW_LEDGER_SCHEMA = 'cssearth-ihw-ledger@1';
 export const IHW_DATASET = 'IHW-C-NNSN-3-EDR-HALLEY-V2.0';
 export const IHW_DATASET_URL = 'https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/dataset.shtml';
 export const IHW_FILELIST_URL = 'https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/index/filelist.tab';
-const ROOT = WORKSPACE;
+const ROOT = WORKSPACE ?? USER_ROOT;
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const IHW_PROGRAMS = archivePrograms('ihw');
 
@@ -29,7 +31,7 @@ export interface IhwLedgerFocus {
   readonly archiveFinal: { readonly program: string; readonly observation: string; readonly product: string };
 }
 export const IHW_LEDGER_FOCUS = 'packages/telescope-cli/src/archives/ihw/ledger-focus.json';
-export async function ihwLedgerFocus(path = resolve(ROOT, IHW_LEDGER_FOCUS)): Promise<IhwLedgerFocus> {
+export async function ihwLedgerFocus(path = inputPath(ROOT, IHW_LEDGER_FOCUS)): Promise<IhwLedgerFocus> {
   const record = requireRecord(JSON.parse(await readFile(path, 'utf8')) as unknown, 'IHW ledger focus');
   if (record.schema !== 'cssearth-archive-ledger-focus@1') throw new TypeError(`${path} is not an archive ledger focus.`);
   const objects = requireArray(record.objects, 'focus objects').map(id => requireString(id, 'focus object'));
@@ -66,9 +68,9 @@ export function parseFileList(text: string): IhwObservation[] {
 
 export async function archiveFinalQualified(focus: IhwLedgerFocus): Promise<boolean> {
   const { program: id, observation, product } = focus.archiveFinal, receipt = IHW_PROGRAMS.file(receiptName(id));
-  const programPath = resolve(ROOT, IHW_PROGRAMS.file(`${id}.archive-final.json`));
+  const programPath = programStorePath(IHW_PROGRAMS.file(`${id}.archive-final.json`));
   const program = requireRecord(JSON.parse(await readFile(programPath, 'utf8')) as unknown, 'IHW archive-final program');
-  const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
+  const record = parseProductRecord(JSON.parse(await readFile(inputPath(ROOT, receipt), 'utf8')) as unknown);
   if (program.schema !== 'cssearth-ihw-archive-final@1' || program.id !== id || program.target !== focus.object || program.observation !== observation) return false;
   const files = requireArray(program.files, 'IHW archive-final files').map(raw => requireRecord(raw, 'IHW archive-final file'));
   const selection = requireRecord(record.parameters.selection, 'IHW archive-final selection');
@@ -97,7 +99,7 @@ async function main(args: readonly string[]) {
   if (!source) throw new TypeError('Usage: archive-ledger FILELIST.TAB [--write]');
   const ledger = await buildIhwLedger(await readFile(resolve(source), 'utf8'));
   const json = `${JSON.stringify(ledger, null, 2)}\n`;
-  if (args.includes('--write')) await writeFile(resolve(ROOT, 'src/sources/ihw/ledger.json'), json); else process.stdout.write(json);
+  if (args.includes('--write')) { requireWorkspace(); await writeFile(resolve(ROOT, 'src/sources/ihw/ledger.json'), json); } else process.stdout.write(json);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main(process.argv.slice(2));

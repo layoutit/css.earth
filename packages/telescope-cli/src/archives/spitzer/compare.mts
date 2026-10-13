@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
 /** Compare a re-made mosaic with the archive's own, sample by sample, and write the receipt.
  *
  *   node packages/telescope-cli/src/archives/spitzer/compare.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
@@ -198,7 +199,7 @@ export function parseReproduction(value: unknown): SpitzerReproduction {
 }
 
 export const receiptName = (program: string, channel: number) => `${program}.ch${channel}.remosaic.reproduction.json`;
-export const receiptPath = (program: string, channel: number) => resolve(PROGRAMS, receiptName(program, channel));
+export const receiptPath = (program: string, channel: number) => resolve(programStorePath(PROGRAMS), receiptName(program, channel));
 export const readReproduction = async (program: string, channel: number): Promise<SpitzerReproduction | null> =>
   readFile(receiptPath(program, channel), 'utf8').then(text => parseReproduction(JSON.parse(text) as unknown), () => null);
 
@@ -241,19 +242,20 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
     framesCombined: mosaicMembers(channel).map(frame => frame.dce), frameTimeSeconds: channel.mosaicFrameTimeSeconds,
     statistics: comparison.statistics, limits: LIMITS,
   });
-  await writeFile(receiptPath(program.id, channel.channel), `${JSON.stringify(reproduction, null, 2)}\n`);
+  const path = programStorePath(receiptPath(program.id, channel.channel), 'write');
+  await writeFile(path, `${JSON.stringify(reproduction, null, 2)}\n`);
 
   const run: ProductRun = { telescope: TELESCOPE, stage: COMPARE_STAGE, inputs,
     parameters: { comparedOver: 'pixels the archive covers and both products hold', maxSamples: MAX_SAMPLES },
     software: [{ name: 'cssearth-fits', version: 'repository' }] };
-  await writeProductRecord(`${receiptPath(program.id, channel.channel)}.product.json`, run,
-    [{ path: receiptName(program.id, channel.channel), file: receiptPath(program.id, channel.channel), units: 'dimensionless shares and ratios' }]);
+  await writeProductRecord(`${path}.product.json`, run,
+    [{ path: receiptName(program.id, channel.channel), file: path, units: 'dimensionless shares and ratios' }]);
 
   // The evidence belongs on the mosaic's own record, not only on the receipt's. A consumer holding the product asks
   // `evidenceFor(record, mosaic, 'archive-agreement')` through the shared API and must find this check there; evidence filed
   // only against the receipt is evidence nobody looking at the product can discover. addProductEvidence rewrites that one
   // list and refuses if the mosaic on disk is no longer the file its record made, so evidence can never drift onto other bytes.
-  await addProductEvidence(resolve(work, `${output}.product.json`), [archiveAgreement(program, channel, archive.name, output)], path => resolve(work, path), () => receiptPath(program.id, channel.channel));
+  await addProductEvidence(resolve(work, `${output}.product.json`), [archiveAgreement(program, channel, archive.name, output)], path => resolve(work, path), () => path);
   return reproduction;
 }
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** The receipt for a reduced NACO long-slit night: what the two independent halves of the nod set agree on, how wide the
  * target's trace is across the slit against the telluric standard's, and the geometry another stage would need to place a
  * spectral strip on the body.
@@ -22,7 +24,7 @@
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { archiveHeader, type EsoHeader, WORKSPACE } from '@cssearth/telescope-core/node';
+import { archiveHeader, type EsoHeader, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { PROGRAMS, readProgram, type NacoProgram } from './archive.mts';
 import { readReduction, type ReductionResult } from './reduce.mts';
 import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
@@ -133,6 +135,7 @@ const NOTE = 'Internal and physical checks only. The ESO archive publishes no Ph
   + ' against. The two halves share no exposure and measure repeatability, not accuracy.';
 
 export async function writeSpectrumReceipt(programId: string, work: string): Promise<SpectrumReproduction> {
+  requireWorkspace();
   const program = await readProgram(programId);
   if (program.mode !== 'spectroscopy') throw new Error(`${programId} is an ${program.mode} program.`);
   const load = async (half: string): Promise<ReductionResult> => {
@@ -173,11 +176,11 @@ export async function writeSpectrumReceipt(programId: string, work: string): Pro
     halves, slitAxis: { axis: axis.axis, runAlongX: axis.runAlongX, runAlongY: axis.runAlongY },
     geometry, resolution: resolutionOf(target, standard), spectrum, arcs: program.arcs,
   };
-  await writeFile(resolve(PROGRAMS, `${program.program}.spectrum.reproduction.json`), `${JSON.stringify(value, null, 2)}\n`);
+  await writeFile(programStorePath(resolve(programStorePath(PROGRAMS), `${program.program}.spectrum.reproduction.json`), 'write'), `${JSON.stringify(value, null, 2)}\n`);
   return value;
 }
 
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 const repositoryPath = (path: string) => path.startsWith(`${REPOSITORY}/`) ? path.slice(REPOSITORY.length + 1) : path;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

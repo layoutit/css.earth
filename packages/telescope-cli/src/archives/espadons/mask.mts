@@ -1,3 +1,5 @@
+import { packagePath } from '../../paths.mts';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** A line mask for one star: which atomic lines its spectrum shows, how deep each is, and how strongly each answers to a
  * magnetic field.
  *
@@ -12,7 +14,7 @@
  * several runs, or two stars of the same parameters, are computed once. A new atmosphere takes about two minutes. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+
 import type { AtomicLine } from './kurucz.mts';
 import { lineDataPin, loadAtomicLines } from './line-data.mts';
 import type { Atmosphere } from './program.mts';
@@ -23,7 +25,7 @@ export const C_KMS = 299792.458, EV_PER_CM = 1.239841984e-4;
 export const SPAN_NM = [370, 1050] as const;
 /** The shallowest line a mask keeps: SpecpolFlow's own tutorials cut at a tenth of the continuum. */
 export const MINIMUM_DEPTH = 0.1;
-const KEPT = resolve(WORKSPACE, 'output/espadons/depths');
+const KEPT = resolve(USER_ROOT, 'output/espadons/depths');
 export interface MaskLine { /** Wavelength in air at rest, nm. */ readonly restNm: number; /** The line's own central depth, before rotation and the instrument spread it. */ readonly depth: number; readonly lande: number; readonly element: number; readonly charge: number }
 export type Candidate = Pick<AtomicLine, 'nm' | 'logGf' | 'element' | 'charge' | 'lowerCm' | 'lande' | 'damping'>;
 
@@ -53,7 +55,7 @@ export async function lineMask(atmosphere: Atmosphere, minimumDepth = MINIMUM_DE
   const { table, lines, pin } = await keptCandidates(), tools = await toolchainPaths(), teff = atmosphere.effectiveTemperatureK.value, logg = atmosphere.logGravity.value, metallicity = atmosphere.metallicity?.value ?? 0;
   const name = `${teff}-${logg}-${metallicity}`, file = resolve(KEPT, `${name}.tsv`), stamp = resolve(KEPT, `${name}.json`), key = JSON.stringify([pin.name, pin.bytes, lines.length, tools.pins.descriptor]);
   let made = await readFile(stamp, 'utf8').then(text => JSON.parse(text) as { key: string; korg: string; synthesised: number }, () => undefined);
-  if (made?.key !== key) { let printed: string; try { printed = runJulia(tools, [resolve(import.meta.dirname, 'korg/depths.jl'), table, String(teff), String(logg), String(metallicity), file]); }
+  if (made?.key !== key) { let printed: string; try { printed = runJulia(tools, [packagePath('src/archives/espadons/korg/depths.jl'), table, String(teff), String(logg), String(metallicity), file]); }
     catch (error) { if (error instanceof Error && error.message.includes('interpolate_marcs')) throw new RangeError(`Korg has no model atmosphere for ${teff} K, log g ${logg}, [M/H] ${metallicity}: its MARCS grid does not reach these values (it starts at 2,800 K), so no line mask can be made for this star.`); throw error; }
     const summary = JSON.parse(printed.trim().split('\n').at(-1)!) as { korg: string; synthesised: number };
     made = { key, korg: summary.korg, synthesised: summary.synthesised }; await writeFile(stamp, JSON.stringify(made)); }

@@ -1,3 +1,4 @@
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Color for a planet nobody has imaged, from what is measured about it.
  *
  * - **Dayside thermal color.** The NASA Exoplanet Archive's emission-spectroscopy table holds secondary-eclipse depths and the
@@ -24,7 +25,7 @@ import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { HOSTED_PLANET_STYLESHEET } from '../new-hosted-planet.mts';
 import { installPhaseCurveDataset } from './phase-curve-dataset.mts';
 import { daysideLine, installDaysideDataset } from '../thermal/dayside-dataset.mts';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+
 import { installSimulationDataset, memberFormat, restoreSimulationField, restoreSimulationMember, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from '../simulation/simulation-dataset.mts';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 
@@ -460,7 +461,7 @@ export async function writeWithMarker(root: string, files: PackageFiles, id: str
   if (defaultChanged) datasetMarkerEntry(files, id);
   for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
   // The marker author draws in the checkout it runs in; a package written to a scratch root keeps the marker it has.
-  if (defaultChanged && resolve(root) === resolve(WORKSPACE)) { const { authorContextMarkers } = await import('../../source-authoring/context-markers.mts'); await authorContextMarkers([id]); }
+  if (defaultChanged && resolve(root) === resolve(requireWorkspace())) { const { authorContextMarkers } = await import('../../source-authoring/context-markers.mts'); await authorContextMarkers([id]); }
 }
 
 /** A planet's context marker as the marker author draws it from its default dataset (packages/telescope-cli/src/source-authoring/context-markers.mts): the

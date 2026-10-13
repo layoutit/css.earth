@@ -6,7 +6,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope-core/node';
+import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 import type { Archive } from '../archives/archives.mts';
 import { installPublishedMapDataset, mapRelease, parsePublishedMapEntries, publishedMapRecipe, publishedMapReport, restorePublishedMap } from './published-map-dataset.mts';
 
@@ -68,7 +68,7 @@ test('the paper\'s printed hot spot is the check: a map read mirrored or shifted
 });
 
 test('the dataset says whose map it is, where the hot spot sits and what is blank, and takes the default from a neutral shape', async () => {
-  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
   const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
   const entry = entryOf({ file: 'ThERESA.zip', member: 'ThERESA/tmap.pkl', path: 'science/valentine-2024/tmap.pkl', container: 'pickle', values: [] });
   const release = await mapRelease(zenodo(record()), id, ['TRAPPIST-1f'], entry), report = { minimum: 548.95, maximum: 2165.49, hotspotDegreesEast: 18.75, blankColumns: 92 };

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../../paths.mts';
+import { packagePath } from '../../../paths.mts';
 /** Re-run the JWST pipeline's level-3 imaging stage (calwebb_image3) for one band of a pinned imaging program.
  *
  *   node packages/telescope-cli/src/archives/jwst/imaging/image3.mts <program id> <band> <work directory> [--grid <sky band recipe.json>] [--raw <dir>]...
@@ -23,7 +25,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireRecord, MissingSourceInputError } from '@cssearth/core';
-import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, WORKSPACE, mastFile, type MastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope-core/node';
+import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, mastFile, type MastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';
@@ -54,7 +56,7 @@ export function gridResample(grid: SkyGrid) {
 }
 
 export async function readImagingProgram(id: string) {
-  const path = resolve(PROGRAMS, `${id}.json`);
+  const path = resolve(programStorePath(PROGRAMS), `${id}.json`);
   return { path, program: parseImagingProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 
@@ -83,7 +85,7 @@ export function pipelineSoftware(lock: string): readonly ProductSoftware[] {
 export async function eurekaPins(): Promise<{ software: readonly ProductSoftware[] }> {
   await stat(resolve(EUREKA_ROOT, 'installed.json'))
     .catch(() => { throw new MissingSourceInputError('Eureka! is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install'); });
-  return { software: pipelineSoftware(await readFile(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst/requirements.lock'), 'utf8')) };
+  return { software: pipelineSoftware(await readFile(packagePath('packages/telescope-cli/src/archives/jwst/requirements.lock'), 'utf8')) };
 }
 
 /** What identifies one level-3 run of a pinned program band: the exposures it was given at their pinned sizes, the settings

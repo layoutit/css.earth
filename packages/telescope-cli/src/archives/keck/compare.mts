@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Compare a re-run's products with the archive's own, sample by sample: the oracle for reduce.mts.
  *
  *   node packages/telescope-cli/src/archives/keck/compare.mts <program id> <koaid> <run directory>
@@ -21,12 +23,12 @@ import { pathToFileURL } from 'node:url';
 import { positionalArguments, requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { assertInputs, addProductEvidence, fileSize, readProductRecord, WORKSPACE } from '@cssearth/telescope-core/node';
+import { assertInputs, addProductEvidence, fileSize, readProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductEvidence, type ProductInput } from '@cssearth/objects';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
-const REPOSITORY = WORKSPACE;
+const REPOSITORY = WORKSPACE ?? USER_ROOT;
 
 /** What comparing our cube with the archive's own establishes, for the record of the run that made ours.
  *
@@ -241,6 +243,7 @@ export async function comparisonPins(id: string, observation: KeckObservation, p
 }
 
 export async function compareWithArchive(id: string, koaid: string, run: string) {
+  requireWorkspace();
   const program = await readKeckProgram(id);
   const observation = program.observations.find(entry => entry.koaid === koaid);
   if (!observation) throw new Error(`${id} pins no observation ${koaid}.`);
@@ -289,7 +292,7 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
         ...theirPipeline.steps.filter(step => !ourPipeline.steps.includes(step)).map(step => `archive: ${step}`)],
       differentSettings: differentSettings(ourPrimary, theirPrimary), differentGrid, extensions,
     };
-    const path = resolve(PROGRAMS, `${id}.${product.level ?? 'lev1'}-${receipt.product}.reproduction.json`);
+    const path = programStorePath(resolve(programStorePath(PROGRAMS), `${id}.${product.level ?? 'lev1'}-${receipt.product}.reproduction.json`), 'write');
     await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
     // What this comparison established goes on the record of the run that made the cube, naming the exact product checked and
     // the receipt holding the numbers. The record refuses it unless the product it pins is still the file on disk.
