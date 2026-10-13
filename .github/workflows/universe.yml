@@ -647,7 +647,7 @@ jobs:
         # install cannot change under the lane.
         run: |
           mkdir -p "$HOME/.local/bin"
-          curl -fsSL "https://github.com/mamba-org/micromamba-releases/releases/download/2.0.5-0/micromamba-linux-64" -o "$HOME/.local/bin/micromamba"
+          curl -fsSL "https://github.com/mamba-org/micromamba-releases/releases/download/2.9.0-0/micromamba-linux-64" -o "$HOME/.local/bin/micromamba"
           chmod +x "$HOME/.local/bin/micromamba"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           "$HOME/.local/bin/micromamba" --version

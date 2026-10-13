@@ -56,8 +56,11 @@ test('an override wins over PATH and the managed cache; PATH wins over a downloa
     await assert.rejects(resolveMicromamba({ ...f.options, env: { PATH: directory, CSSEARTH_TELESCOPE_MICROMAMBA: '' } }), /not an executable/u);
   } finally { await f.cleanup(); }
 });
-test('PATH versions below stable major 1 or without a successful version probe use the managed release', async () => {
-  for (const [version, status] of [['0.27.0', 0], ['not a version', 0], ['', 0], ['2.0.5', 1]] as const) {
+for (const [version, status] of [
+  ['0.27.0', 0], ['1.5.3', 0], ['1.99.99', 0], ['2.0.5', 0], ['2.0.6', 0],
+  ['not a version', 0], ['', 0], ['2.0', 0], ['2.0.7.rc1', 0], ['2.0.5', 1], ['2.9.0', 1],
+] as const) {
+  test(`PATH version ${JSON.stringify(version)} (status ${status}) falls back to the managed release`, async () => {
     const f = await fixture();
     try {
       const directory = resolve(f.userRoot, 'bin'), path = resolve(directory, 'micromamba');
@@ -66,14 +69,14 @@ test('PATH versions below stable major 1 or without a successful version probe u
       assert.equal(await resolveMicromamba({ ...f.options, env: { PATH: directory } }), resolve(f.directory, 'micromamba'));
       assert.equal(f.urls.length, 2, 'an incompatible PATH binary triggers the managed download');
     } finally { await f.cleanup(); }
-  }
-});
-test('stable major 1 and CI micromamba 2.0.5 on PATH work without a download', async () => {
+  });
+}
+test('stable micromamba 2.0.7 and later on PATH work without a download', async () => {
   const f = await fixture();
   try {
     const directory = resolve(f.userRoot, 'bin'), path = resolve(directory, 'micromamba');
     await mkdir(directory);
-    for (const version of ['1.0.0', '2.0.5']) {
+    for (const version of ['2.0.7', '2.0.10', '2.1.0', '2.9.0', '3.0.0']) {
       await writeFile(path, `#!${process.execPath}\nprocess.stdout.write(${JSON.stringify(version)});\n`, { mode: 0o755 });
       assert.equal(await resolveMicromamba({ ...f.options, env: { PATH: directory }, fetcher: async () => { throw new Error('network forbidden'); } }), path);
     }

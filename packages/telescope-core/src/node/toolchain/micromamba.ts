@@ -51,11 +51,13 @@ function managedReady(path: string): boolean {
   const result = spawnSync(path, ['--version'], { encoding: 'utf8', timeout: 10_000 });
   return !result.error && result.status === 0 && result.stdout.trim() === VERSION;
 }
-/** The stable 1.x CLI already supports create --platform, --dry-run/--json and list --explicit. */
+/** Admit stable 2.0.7+ for Gemini's list --explicit lock export and create --platform/--dry-run/--json. */
 function compatibleOnPath(path: string): boolean {
   const result = spawnSync(path, ['--version'], { encoding: 'utf8', timeout: 10_000 });
-  const version = /^(\d+)\.\d+\.\d+$/u.exec(result.stdout?.trim() ?? '');
-  return !result.error && result.status === 0 && version !== null && Number(version[1]) >= 1;
+  const version = /^(\d+)\.(\d+)\.(\d+)$/u.exec(result.stdout?.trim() ?? '');
+  if (result.error || result.status !== 0 || version === null) return false;
+  const major = Number(version[1]), minor = Number(version[2]), patch = Number(version[3]);
+  return major > 2 || (major === 2 && (minor > 0 || (minor === 0 && patch >= 7)));
 }
 
 const pending = new Map<string, Promise<string>>();
