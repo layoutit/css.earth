@@ -1,3 +1,4 @@
+import { incrementalPaths } from '../../../server/incremental-paths.mts';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../../../server/object-entry.mts';
 import { resolveSceneAddressesDeep } from '../../../server-assets/asset-origin.mts';
@@ -12,7 +13,7 @@ import { resolve } from 'node:path';
 
 // One navigable object's prepared entry, read by the page's object directory (site/directory/object-directory.mts) the first time
 // it needs that object.
-export const getStaticPaths: GetStaticPaths = async () => OBJECT_ENTRY_IDS.map(id => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = async () => incrementalPaths(OBJECT_ENTRY_IDS.map(id => ({ params: { id } })));
 
 // The body each world body orbits, read once: the build reads the whole world (world-context-plan.mts).
 let centres: ReadonlyMap<string, string> | null = null;

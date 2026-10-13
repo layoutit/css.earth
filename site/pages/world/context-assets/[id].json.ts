@@ -1,10 +1,11 @@
+import { incrementalPaths } from '../../../server/incremental-paths.mts';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import bankAssets from '../../../prepared/prepared-context-bank-assets.json';
 
 // One bank's prepared files by path (prepare-catalog.mts `splitContextObjectAssets`): the world reads a bank's list when a
 // body's dataset first shows it (application-world-resources.mts), so no page carries the lists of banks it does not show.
 const banks: Record<string, Record<string, string>> = bankAssets;
-export const getStaticPaths: GetStaticPaths = () => Object.keys(banks).map(id => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = () => incrementalPaths(Object.keys(banks).map(id => ({ params: { id } })));
 
 export const GET: APIRoute = ({ params }) => {
   const files = typeof params.id === 'string' ? banks[params.id] : undefined;

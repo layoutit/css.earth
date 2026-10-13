@@ -1,3 +1,4 @@
+import { incrementalPaths } from '../../../server/incremental-paths.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
@@ -7,7 +8,8 @@ import { APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_FILE_OF } from '../../../d
 // (`src/objects/<object>/prepared/orbits/<body>.bin`): the planner worker reads a bank when a frame first draws its orbit
 // (packages/renderer/src/universe/world-context/world-context-planner-worker.ts).
 const banks = Object.keys(APPLICATION_WORLD_CONTEXT.orbitBanks ?? {});
-export const getStaticPaths: GetStaticPaths = async () => banks.map(id => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = async () => incrementalPaths(banks.map(id => ({ params: { id } })),
+  ({ params: { id } }) => { const owner = APPLICATION_WORLD_FILE_OF.get(id); return owner === undefined ? [] : [owner]; });
 
 export const GET: APIRoute = async ({ params }) => {
   const holder = typeof params.id === 'string' && banks.includes(params.id) ? APPLICATION_WORLD_FILE_OF.get(params.id) : undefined;

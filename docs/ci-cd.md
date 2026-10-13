@@ -495,3 +495,29 @@ Telemetry is separate from verdict reports. The supplied hosted old-lane run
 37296091119 took about 30 minutes. Warm target: roughly 10–12 minutes, pending
 hosted archive-size, transfer, memory and identical-report proofs. Detailed
 payload, bounds and proof commands are in [build comparison](build-comparison.md#commit-addressed-base-reuse).
+
+### Opt-in static incremental experiment
+
+The same-repository PR label `compare-incremental` runs a separate, non-required
+benchmark at the exact PR head with full Git history. A seed production build
+saves only Astro's static HTML/manifest cache and generated share images. Three
+parallel jobs compare unchanged input, a temporary Saturn stylesheet edit, and a
+temporary shared HTML attribute edit. Each runs the full production recipe warm
+and then with page caching disabled, on the same runner and identical source
+bytes. Both start with absent prepared banks (each recipe downloads and verifies R2 inputs)
+and the same seed share-image cache; generated-input and share snapshot/reset time is
+reported separately. Fixtures are restored before the job can succeed.
+
+Every pair must match the complete deployed output, including current version
+and source links, clear the 900 HTML-page gate, validate runtime asset URLs, and
+pass the local bundled Worker smoke. Native Astro logs supply actual rendered
+and reused page counts. Changed cases must emit their marker and differ from
+the seed; broad invalidation is a measured outcome. Unchanged input must reuse
+pages and match the seed. Cache API bytes and completed Actions save/restore
+step times are included with build, asset-check and Worker timings in the job
+summary and `INCREMENTAL_BENCHMARK_RESULT` log record. Transfer totals include
+snapshot overhead; the fresh total includes reset overhead. Seven full builds
+run across four jobs; hosted runtime remains to be measured. Runner image/CPU
+and tool versions identify relevant timing differences. No secrets, deployment,
+artifact upload, server rendering, or site publication participates, and the
+production deployment workflow is unchanged.
