@@ -1,7 +1,7 @@
 import { parseSnapshot, VO_DISCOVERY_SCHEMA, canonical, jsonValue, parseMetadata, parsePin, parseRegion, type DiscoverySnapshot, type IcrsCircle, type Json } from '@cssearth/objects';
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits } from '@cssearth/telescope/node';
+import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits } from '@cssearth/telescope-core/node';
 import type { ProductKind } from '../requests/recipe-request.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { recall } from '../archives/memory.mts';
@@ -37,8 +37,8 @@ export interface DiscoveryRequest {
   /** A circle to search by footprint only, never a cutout (`region` is the cutout). A SIMBAD target supplies SIMBAD's
    * position and position error here. */
   readonly footprint?: import('@cssearth/objects').IcrsCircle;
-  /** A target outside the application catalogue, named and placed by SIMBAD (`@cssearth/telescope/node`). */
-  readonly skyTarget?: import('@cssearth/telescope/node').SkyTarget;
+  /** A target outside the application catalogue, named and placed by SIMBAD (`@cssearth/telescope-core/node`). */
+  readonly skyTarget?: import('@cssearth/telescope-core/node').SkyTarget;
   readonly spectralFrame?: 'barycentric';
   readonly transferLimits?: TransferLimits;
 }

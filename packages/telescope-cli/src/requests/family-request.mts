@@ -3,7 +3,7 @@ import type { CapabilityRequest } from './recipe-request.mts';
 import type { ConstraintAnswer, ConstraintVerdict } from './request-satisfaction.mts';
 import type { AxisDescriptor, DepthDescriptor, FamilyId, InferenceDescriptor, ObservabilityDescriptor, ProductComponent, ProductDescriptor, ResolutionDescriptor, SupportClass } from '../products/product-descriptor.mts';
 import { parseProductDescriptor } from '../products/product-descriptor.mts';
-import { sciencePackage } from '@cssearth/telescope/node';
+import { sciencePackage } from '@cssearth/telescope-core/node';
 import { requireArray, requireFiniteNumber } from '@cssearth/core';
 
 export type FamilyCriterionName='target'|'family'|'quantity'|'time'|'spectral'|'spatial'|'table'|'polarization'|'visibility'|'support'|'depth'|'observability'|'resolution'|'inference';

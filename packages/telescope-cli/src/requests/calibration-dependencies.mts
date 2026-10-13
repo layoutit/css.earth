@@ -1,7 +1,7 @@
 /** Exact recorded dependencies. Retrieval does not establish calibration accuracy. */
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { resolve, relative, basename } from 'node:path';
-import { fileSize, plainName } from '@cssearth/telescope/node';
+import { fileSize, plainName } from '@cssearth/telescope-core/node';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 export interface CalibrationDependency {

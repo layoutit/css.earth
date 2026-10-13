@@ -45,9 +45,9 @@ test('VO parsers retain rejection diagnostics and precedence', () => {
   for (const [parse, message] of cases) assert.throws(parse, { name: 'TypeError', message });
 });
 test('VO consumers have one metadata and snapshot reader in objects', () => {
-  const owner = readFileSync(new URL('../../../../telescope/src/node/vo-contracts.ts', import.meta.url), 'utf8');
+  const owner = readFileSync(new URL('../../../../telescope-core/src/node/vo-contracts.ts', import.meta.url), 'utf8');
   const discovery = readFileSync(new URL('../../../../telescope-cli/src/vo/discovery.mts', import.meta.url), 'utf8');
-  const transport = readFileSync(new URL('../../../../telescope/src/node/astroquery.ts', import.meta.url), 'utf8');
+  const transport = readFileSync(new URL('../../../../telescope-core/src/node/astroquery.ts', import.meta.url), 'utf8');
   assert.doesNotMatch(owner + discovery, /(?:function|const)\s+(?:parseMetadata|parsePin|parseRegion|parseSnapshot|jsonValue)\b/u);
   assert.match(transport, /const vo = isVo \? parseMetadata\(raw\.vo\)/u);
   assert.match(discovery, /const snapshot = parseSnapshot\(/u);

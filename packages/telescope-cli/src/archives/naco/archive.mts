@@ -24,7 +24,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { archiveHeader, column, type RawRow, associationTree, type Association, tapRows, WORKSPACE } from '@cssearth/telescope/node';
+import { archiveHeader, column, type RawRow, associationTree, type Association, tapRows, WORKSPACE } from '@cssearth/telescope-core/node';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/programs');

@@ -17,7 +17,7 @@ import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
 
 const repository = WORKSPACE;
 /** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */

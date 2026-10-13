@@ -7,7 +7,7 @@
  */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 import { ARCHIVES } from '../archives/archives.mts';
 import { INSTRUMENT_TABLES } from '../archives/keck/koa.mts';
 

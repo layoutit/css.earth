@@ -11,7 +11,7 @@
     "allowJs": false,
     "types": [],
     "incremental": true,
-    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-telescope.tsbuildinfo"
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-telescope-core.tsbuildinfo"
   },
   "include": [
     "src/**/*.ts"

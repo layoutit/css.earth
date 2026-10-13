@@ -26,7 +26,7 @@
  * reproduction receipt beside the definition.
  *
  * Beside every stacked product it also writes that product's own record (`<product>.product.json`,
- * packages/telescope/src/product-record.ts): the frames that went into that set at their pinned sizes, the definition and Horizons
+ * packages/telescope-core/src/product-record.ts): the frames that went into that set at their pinned sizes, the definition and Horizons
  * responses that placed them, and the settings of the line and subset. With `--receipt` the receipt's two checks are added to
  * those records as what they are: agreement with a published value, and the consistency of our own two handednesses. */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
@@ -34,8 +34,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { VERSION } from '../../help.mts';
-import { addProductEvidence, fileSize, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
 import { accumulatedImage, addSample, discMetrics, gridPoint, inSubset, limbFallOff, median, newAccumulator, parseLineStack, radialProfile, rayleighPerSample, rejectionReason, quadraticFit, sampleFor, type Handedness, type LineStackDefinition, type StackAccumulator, type StackLine } from './line-stack-reduction.mts';

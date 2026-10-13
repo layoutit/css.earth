@@ -12,7 +12,7 @@ const packages = [
   { directory: 'core', name: '@cssearth/core', dependencies: [] },
   { directory: 'renderer', name: '@cssearth/renderer', dependencies: ['@cssearth/core'] },
   { directory: 'bake', name: '@cssearth/bake', dependencies: ['@cssearth/renderer', '@cssearth/core'] },
-  { directory: 'telescope-cli', name: '@cssearth/telescope-cli', dependencies: ['@cssearth/bake'] },
+  { directory: 'telescope-cli', name: '@cssearth/telescope', dependencies: ['@cssearth/bake'] },
 ];
 const site = ['@cssearth/core', '@cssearth/renderer'];
 const mount = 'integration/prepared-object-mount/navigable-object-mount.test.mts';
@@ -206,7 +206,7 @@ function applySparse(scenario: ReturnType<typeof sparseScenario>) {
 const scenarioWorkspaces = [
   { directory: 'objects', name: '@cssearth/objects', dependencies: [] },
   { directory: 'bake', name: '@cssearth/bake', dependencies: ['@cssearth/objects'] },
-  { directory: 'telescope-cli', name: '@cssearth/telescope-cli', dependencies: ['@cssearth/bake'] },
+  { directory: 'telescope-cli', name: '@cssearth/telescope', dependencies: ['@cssearth/bake'] },
 ];
 test('sparse checkout of the real workflow patterns preserves objects-only foreign test selection', () => {
   const patterns = changesSparsePatterns(readFileSync(resolve(import.meta.dirname, '../../workflows/universe.yml'), 'utf8'));

@@ -18,7 +18,7 @@ test('toolchain lane rejects skipped, empty, truncated, failed and short TAP run
 });
 test('astroquery classification and workflow preserve the protected lane', async () => {
   const config = await loadCiAreasConfig();
-  for (const path of ['packages/telescope/src/node/toolchain/python.ts', 'packages/telescope/toolchains/toolchain.json', 'packages/telescope/toolchains/requirements.lock', 'packages/telescope-cli/src/toolchains/astronomy-toolchains.mts', 'packages/telescope-cli/src/archives/jwst/toolchain.json', 'packages/telescope-cli/src/archives/toolchain-descriptor.mts', 'packages/telescope-cli/src/vo/package.mts', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.mts', '.github/ci-areas.json', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts', 'packages/telescope-cli/src/vo/package.test.mts', '.github/workflows/universe.yml'])
+  for (const path of ['packages/telescope-core/src/node/toolchain/python.ts', 'packages/telescope-core/toolchains/toolchain.json', 'packages/telescope-core/toolchains/requirements.lock', 'packages/telescope-cli/src/toolchains/astronomy-toolchains.mts', 'packages/telescope-cli/src/archives/jwst/toolchain.json', 'packages/telescope-cli/src/archives/toolchain-descriptor.mts', 'packages/telescope-cli/src/vo/package.mts', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.mts', '.github/ci-areas.json', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts', 'packages/telescope-cli/src/vo/package.test.mts', '.github/workflows/universe.yml'])
     assert.ok(classifyAffectedPaths([path], config).jobs.has('astroquery'), path);
   for (const path of ['README.md', 'site/browser/runtime-policy.mts'])
     assert.equal(classifyAffectedPaths([path], config).jobs.has('astroquery'), false, path);
@@ -62,7 +62,7 @@ test('every TAP summary must be present exactly once', () => {
 test('filtered astroquery classification survives projection into the runnable job list', async () => {
   const { affectedJobNames } = await import('./ci-affected.mts');
   const config = await loadCiAreasConfig();
-  const selected = classifyAffectedPaths(['packages/telescope/src/node/toolchain/python.ts'], config);
+  const selected = classifyAffectedPaths(['packages/telescope-core/src/node/toolchain/python.ts'], config);
   assert.ok(affectedJobNames(selected).includes('astroquery'), 'the selected filtered lane must remain runnable');
   const ordinary = classifyAffectedPaths(['README.md'], config);
   assert.ok(!affectedJobNames(ordinary).includes('astroquery'), 'ordinary documentation does not run the filtered lane');
@@ -79,7 +79,7 @@ test('all toolchain-importing files are discovered; only named source exclusions
   assert.equal(files.length, all.length - Object.keys(ASTROQUERY_EXCLUSIONS).length);
   assert.deepEqual(all.filter(file => !files.includes(file)), Object.keys(ASTROQUERY_EXCLUSIONS).sort());
   const triggers = astroqueryTriggerPaths(root);
-  for (const name of ['telescope-cli', 'telescope', 'core', 'objects', 'fits', 'bake', 'renderer', 'astronomy', 'engine', 'spice']) assert.ok(triggers.includes(`packages/${name}/**`));
+  for (const name of ['telescope-cli', 'telescope-core', 'core', 'objects', 'fits', 'bake', 'renderer', 'astronomy', 'engine', 'spice']) assert.ok(triggers.includes(`packages/${name}/**`));
 });
 
 

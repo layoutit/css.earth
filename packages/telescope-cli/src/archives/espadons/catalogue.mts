@@ -13,7 +13,7 @@
  * dwarf AD Leo, 5,466 K for the M6.5 dwarf DX Cnc). Each value comes back with where it is printed; a person may replace any. */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 import { DOWNLOADS, type Atmosphere, type Cited } from './program.mts';
 
 export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap', VIZIER_TAP = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap';

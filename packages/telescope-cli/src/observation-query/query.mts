@@ -21,7 +21,7 @@
  * Mode capabilities are the one authored input, in `modes.json`, each with the citation it was read from. A mode with no entry
  * is reported as "capabilities not recorded" rather than guessed. */
 import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest, inputWavelengths } from '../requests/recipe-request.mts';
-import { skyCatalogueEntry, WORKSPACE, parseLimits, loadTargetAssociations, parseTargetAssociationSources } from '@cssearth/telescope/node';
+import { skyCatalogueEntry, WORKSPACE, parseLimits, loadTargetAssociations, parseTargetAssociationSources } from '@cssearth/telescope-core/node';
 import { parseRegion, parseAcceptedAssumptions } from '@cssearth/objects';
 import { loadVoInputs, voCandidates } from '../vo/bridge.mts';
 import type { DiscoveryRequest } from '../vo/discovery.mts';
@@ -35,7 +35,7 @@ import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm }
 
 import type { SourceIntakeIssue } from '../products/source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations } from '../products/source-products.mts';
-import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry } from '@cssearth/telescope';
+import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry } from '@cssearth/telescope-core';
 import { ARCSEC_PER_RADIAN, type Candidate, type CapabilityAnswer, type ModeCapability, OBSERVATION_SELECTION_SCHEMA, type ObservationSelection, ObservationSelectionError, type QueryInputs, type ReportedResolution, type SelectionAssessment, type SelectionBlocker, TARGET_ASSOCIATIONS_PATH, type TargetCoverage, type ToolkitLevel, type ToolkitSupport, type UnassignedEvidence, assessSearchCoverage } from './query-contract.mts';
 import { ADAPTERS, EVIDENCE_TELESCOPE_NAMES, type TargetMode, forTarget, intersectIntervals, intervalWords, mergeIntervals, missingRequestFields, parseModeCapabilities, sourceModes, stringList, targetCoverage, workflowAssessment } from './query-modes.mts';
 

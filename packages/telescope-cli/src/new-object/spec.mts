@@ -41,7 +41,7 @@
  * measured to be bound to another with no measured orbit (a wide companion, companions.mts): the astronomy record carries the bond
  * and the star is inside its host's system, whatever `parent` says.
  *
- * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope/src/node/sky-target.ts); `gaia` is a Gaia
+ * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope-core/src/node/sky-target.ts); `gaia` is a Gaia
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
  * `position` anchors a star Gaia cannot see (a Cepheid in another galaxy, 25th magnitude) on one row of a published VizieR table
  * instead: { "catalogue": "J/ApJ/830/10/table5", "row": { "Gal": "N4536", "ID": "12345" }, "credit", "url" }, where `row` holds the

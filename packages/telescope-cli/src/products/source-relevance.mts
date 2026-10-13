@@ -5,7 +5,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import type { NativeMetadata } from './native-metadata.mts';
 import type { ProductDescriptor } from './product-descriptor.mts';
 import { PRODUCT_KINDS } from '../requests/recipe-request.mts';
-import { parseSkyTarget } from '@cssearth/telescope/node';
+import { parseSkyTarget } from '@cssearth/telescope-core/node';
 import { parseRegion } from '@cssearth/objects';
 
 type Verdict = { readonly status:'supported'|'unsupported'|'unknown'|'not-requested';readonly reason:string };

@@ -7,9 +7,9 @@ ancestors), then runs that checkout's copy of this package's sources, `src/cli.m
 from source (`pnpm telescope` in the checkout). Keep the arguments, help text, `--version`, workspace lookup, TTY forwarding
 and exit codes unchanged unless that is the change. The command guide is [README.md](README.md), which the help text links to.
 
-This package is the layer above the libraries: it imports `@cssearth/telescope`, `@cssearth/bake` and the other packages, and
-`@cssearth/telescope` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
-`@cssearth/telescope/node`, never by counting `../` from its own location. Two kinds of workspace code remain outside it:
+This package is the layer above the libraries: it imports `@cssearth/telescope-core`, `@cssearth/bake` and the other packages, and
+`@cssearth/telescope-core` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
+`@cssearth/telescope-core/node`, never by counting `../` from its own location. Two kinds of workspace code remain outside it:
 - the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
   ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer, Juno, HST, JWST and IHW keep
   their programs, receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`,
@@ -24,13 +24,13 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
 - the entry scripts it runs by path as processes and the built sphere package entry (`src/workspace-commands/`, the sphere
-  lane exported as `@cssearth/telescope-cli/sphere/lane` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
+  lane exported as `@cssearth/telescope/sphere/lane` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
   application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
   this package's `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in
   `labs/experiments/` also imports); they followed the lane out of `tools/experiments/` (now `labs/experiments/`);
 - the installer of the pinned Python astronomy toolchains (`src/toolchains/astronomy-toolchains.mts`, run as
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
-  `@cssearth/telescope/node` errors name when a toolchain is missing.
+  `@cssearth/telescope-core/node` errors name when a toolchain is missing.
 
 `src/archives/archives.mts` describes every archive once (registry identifier and pinned address, the search `explore` runs, the ledger command); `explore`, the registry check and `src/archives/ledgers.mts`, which runs every ledger command, read that list, and a new archive is added there, not in each of them. `src/archives/memory.mts` is the memory between explorations: a question asked in the last day is answered from the evidence file it saved, never from anything else, and `--fresh` turns it off.
 
@@ -244,7 +244,7 @@ See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE
 `src/implementation-dependencies.mts` declares `RENDERER_BUILD_CONFIG_PATH` for its entry-source closure.
 The architecture rule names this metadata reader separately from runtime consumers; its guard rejects an unlisted reader.
 
-Sphere export runs the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.
+Sphere export runs the built `@cssearth/telescope/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope build` before exporting again.
 
 The library/command split is accepted: bake imports the light telescope library, while telescope-cli depends on bake for preparation; merging them would create a cycle. Reconsider only when the command no longer needs bake.
 

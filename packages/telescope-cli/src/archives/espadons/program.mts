@@ -9,7 +9,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 import { PRODUCT, type ArchivedProduct } from './cadc.mts';
 

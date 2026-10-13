@@ -8,7 +8,7 @@ import { JWST_CUBE_COVERAGE } from '../archives/jwst/imaging/bands.mts';
 import { assessObservationSelection, formatAnswer, QUERY_HELP, queryCapabilities, selectObservation } from './query.mts';
 import { mergeIntervals, parseModeCapabilities } from './query-modes.mts';
 import { MODES_SCHEMA, type Candidate, type CapabilityAnswer, type QueryInputs } from './query-contract.mts';
-import { hydrateTargetAssociation, parseTargetAssociationSources, TARGET_ASSOCIATIONS_SCHEMA } from '@cssearth/telescope/node';
+import { hydrateTargetAssociation, parseTargetAssociationSources, TARGET_ASSOCIATIONS_SCHEMA } from '@cssearth/telescope-core/node';
 
 const citation = 'https://jwst-docs.stsci.edu/jwst-near-infrared-spectrograph';
 const psf = 'https://cxc.harvard.edu/proposer/POG/html/chap4.html';

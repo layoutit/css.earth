@@ -18,7 +18,7 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { skyProjection } from '@cssearth/fits';
-import { mastFile } from '@cssearth/telescope/node';
+import { mastFile } from '@cssearth/telescope-core/node';
 import { PROGRAMS } from './archive.mts';
 import { bandOfHeader } from './bands.mts';
 import { readImagingProgram, recordProductEvidence } from './image3.mts';

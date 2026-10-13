@@ -12,7 +12,7 @@
  * several runs, or two stars of the same parameters, are computed once. A new atmosphere takes about two minutes. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import type { AtomicLine } from './kurucz.mts';
 import { lineDataPin, loadAtomicLines } from './line-data.mts';
 import type { Atmosphere } from './program.mts';

@@ -10,7 +10,7 @@ import { parseCli } from './cli-arguments.mts';
 import type { ExplorationSession, Session } from './session.mts';
 import { loadWwtImagery } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads } from './wwt/wwt-fits-leads.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
   reference:{kind:'indexed-observation' as const,telescope:'Fixture telescope',mode:'camera',observation:'obs-1',programme:'eris-obs-1'},

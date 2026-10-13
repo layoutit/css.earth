@@ -11,7 +11,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { validPublishedPhotometryShape } from '../../records/published-photometry.ts';
 import { bandColorDisplay, type BandColorDisplay } from '../../../../color/index.ts';
-import { pds3Keyword, pds3Values } from '@cssearth/telescope';
+import { pds3Keyword, pds3Values } from '@cssearth/telescope-core';
 import { readFitsPrimary } from '@cssearth/fits';
 import { pds3LabelHasReflectance } from './pds3-reflectance.ts';
 import { castSourceRays } from '../geometry.ts';

@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery, recordKey } from '@cssearth/telescope/node';
+import { astroquery, recordKey } from '@cssearth/telescope-core/node';
 import { choiceKey } from '../session.mts';
 import { planAccess } from './access.mts';
 import { type DiscoverySnapshot, type MetadataResponse } from '@cssearth/objects';

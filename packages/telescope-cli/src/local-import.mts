@@ -3,7 +3,7 @@ import { constants } from 'node:fs';
 import { copyFile, lstat, mkdir, mkdtemp, open, readdir, rename, rm, rmdir, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 import { VERSION } from './help.mts';
 import { proposedFamilyProfiles } from './family-handlers.mts';

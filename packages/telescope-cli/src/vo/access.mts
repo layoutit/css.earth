@@ -2,7 +2,7 @@
 import { basename, dirname, resolve } from 'node:path';
 import { mkdir, readFile, stat, writeFile, copyFile, rename, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
-import { fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
 import { requireRecord } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';

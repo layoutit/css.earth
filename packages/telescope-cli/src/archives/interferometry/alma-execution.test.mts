@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { arrayTimeToDate, parseExecution, readTarHead } from './alma-execution.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const root = WORKSPACE;
 const read = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');

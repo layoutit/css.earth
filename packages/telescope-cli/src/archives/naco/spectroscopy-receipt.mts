@@ -22,7 +22,7 @@
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { archiveHeader, type EsoHeader, WORKSPACE } from '@cssearth/telescope/node';
+import { archiveHeader, type EsoHeader, WORKSPACE } from '@cssearth/telescope-core/node';
 import { PROGRAMS, readProgram, type NacoProgram } from './archive.mts';
 import { readReduction, type ReductionResult } from './reduce.mts';
 import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';

@@ -62,7 +62,7 @@ const definite = lines.filter(line => line[26] === '1').map(line => {
   return { id: line.slice(0, 4).trim(), type: line.slice(28, 53).trim(), bt: line.slice(54, 58).trim(),
     ra1950: 15 * (number(6, 7) + number(9, 10) / 60 + number(12, 15) / 3600), dec1950: sign * (number(18, 19) + number(21, 22) / 60 + number(24, 25) / 3600) };
 });
-const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
+const { astroqueryToolchainSync } = await import('@cssearth/telescope-core/node');
 const toolchain = astroqueryToolchainSync();
 const python = String.raw`import json, sys
 import astropy.units as u

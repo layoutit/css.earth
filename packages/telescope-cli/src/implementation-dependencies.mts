@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Plugin } from 'esbuild';
 import { pathToFileURL } from 'node:url';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 /** Workspace entries a bundled lane compiles from their TypeScript sources, so the lane runs the checkout's code rather than
  * a build. Other packages stay external. */
@@ -17,8 +17,8 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/objects/node': 'packages/objects/src/node/index.ts',
   '@cssearth/spice': 'packages/spice/src/index.ts',
   '@cssearth/spice/node': 'packages/spice/src/node/index.ts',
-  '@cssearth/telescope': 'packages/telescope/src/index.ts',
-  '@cssearth/telescope/node': 'packages/telescope/src/node/index.ts',
+  '@cssearth/telescope-core': 'packages/telescope-core/src/index.ts',
+  '@cssearth/telescope-core/node': 'packages/telescope-core/src/node/index.ts',
   '@cssearth/bake/photometry': 'packages/bake/src/photometry/index.ts',
   '@cssearth/bake/raster': 'packages/bake/src/raster/index.ts',
   '@cssearth/bake/scene': 'packages/bake/src/scene/index.ts',
@@ -91,8 +91,8 @@ async function rendererSource(specifier: string): Promise<string | undefined> {
   if (built) return `packages/renderer/${built}`;
   return /^[a-z-]+\/[\w./-]+\.ts$/u.test(subpath) && !subpath.split('/').includes('..') ? `packages/renderer/src/${subpath}` : undefined;
 }
-/** A `@cssearth/telescope-cli` subpath is followed to the source its package.json `exports` entry declares, as Node resolves it
- * (`@cssearth/telescope-cli/archives/jwst/imaging/image3` → `src/archives/jwst/imaging/image3.mts`); a subpath the package does
+/** A `@cssearth/telescope` subpath is followed to the source its package.json `exports` entry declares, as Node resolves it
+ * (`@cssearth/telescope/archives/jwst/imaging/image3` → `src/archives/jwst/imaging/image3.mts`); a subpath the package does
  * not export stays external, as Node would refuse it. The map is read from the bundled checkout, once per bundle. */
 async function telescopeCliExports(root: string): Promise<ReadonlyMap<string, string>> {
   let text: string;
@@ -106,7 +106,7 @@ async function telescopeCliExports(root: string): Promise<ReadonlyMap<string, st
     const conditions: Readonly<Record<string, unknown>> = typeof target === 'object' && target !== null ? { ...target } : { default: target };
     const source = conditions.types ?? conditions.default;
     if (subpath.startsWith('./') && typeof source === 'string' && /^\.\/src\/[\w./-]+\.m?ts$/u.test(source) && !source.split('/').includes('..'))
-      sources.set(`@cssearth/telescope-cli/${subpath.slice(2)}`, `packages/telescope-cli/${source.slice(2)}`);
+      sources.set(`@cssearth/telescope/${subpath.slice(2)}`, `packages/telescope-cli/${source.slice(2)}`);
   }
   return sources;
 }
@@ -116,7 +116,7 @@ export function followedWorkspaceSources(root: string): Plugin {
     let telescopeCli: Promise<ReadonlyMap<string, string>> | undefined;
     builder.onResolve({ filter: /^@cssearth\// }, async args => {
       const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(args.path)
-        ?? (args.path.startsWith('@cssearth/telescope-cli/') ? (await (telescopeCli ??= telescopeCliExports(root))).get(args.path) : undefined);
+        ?? (args.path.startsWith('@cssearth/telescope/') ? (await (telescopeCli ??= telescopeCliExports(root))).get(args.path) : undefined);
       return source ? { path: resolve(root, source) } : undefined;
     });
   } };

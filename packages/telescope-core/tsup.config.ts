@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  // `index` is host-neutral; `node/index` is the Node-only entry (`@cssearth/telescope/node`), written to dist/node/.
+  // `index` is host-neutral; `node/index` is the Node-only entry (`@cssearth/telescope-core/node`), written to dist/node/.
   entry: { index: 'src/index.ts', 'node/index': 'src/node/index.ts' },
   tsconfig: 'tsconfig.lib.json',
   format: ['esm'],

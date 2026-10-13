@@ -6,7 +6,7 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   external: ['sharp', 'linkedom'],
   // Source-only renderer/native-scroll subpaths must be bundled; package builds stay external.
-  noExternal: [/^@cssearth\/renderer\//, /^@cssearth\/telescope-cli\/sphere\/native-scroll\//],
+  noExternal: [/^@cssearth\/renderer\//, /^@cssearth\/telescope\/sphere\/native-scroll\//],
   dts: process.env.CSSEARTH_SKIP_DECLARATIONS !== '1' && { compilerOptions: { types: ['node'], typeRoots: ['./node_modules/@types'] } },
   clean: false,
   target: 'node22',

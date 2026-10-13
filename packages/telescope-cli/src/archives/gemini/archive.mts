@@ -34,7 +34,7 @@ import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';
 import { artifactName, isRawName, primaryHeaderBytes, query, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 /** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
 export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/gemini/programs');

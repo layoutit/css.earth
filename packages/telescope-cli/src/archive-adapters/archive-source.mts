@@ -4,7 +4,7 @@ import { get } from 'node:https';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writeProductRecord, parseLimits } from '@cssearth/telescope/node';
+import { writeProductRecord, parseLimits } from '@cssearth/telescope-core/node';
 import { VERSION } from '../help.mts';
 import type { ProductInput } from '@cssearth/objects';
 import { EXPLORATION_SCHEMA } from '../exploration.mts';

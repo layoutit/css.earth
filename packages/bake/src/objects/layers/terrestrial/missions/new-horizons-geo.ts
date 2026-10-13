@@ -1,6 +1,6 @@
 import { archivedCameraFields, ARCHIVED_CAMERA_SCHEMA } from '@cssearth/objects';
 import { cross3 as cross, array, number, shape, text, dotN as dot } from '@cssearth/core';
-import { pds4Blocks, pds4Elements } from '@cssearth/telescope';
+import { pds4Blocks, pds4Elements } from '@cssearth/telescope-core';
 import { readFitsHdu, fitsImageAccessor, readFitsHeader, readFitsPrimary } from '@cssearth/fits';
 import { dimensions, sipCameraFields } from '../../../raster/index.ts';
 import { bindSipCamera, sipPixel } from './llorri-geo.ts';

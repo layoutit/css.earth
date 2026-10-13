@@ -4,7 +4,7 @@ import { readFile, writeFile, mkdir, rm, rmdir, rename } from 'node:fs/promises'
 import { resolve, dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import { fileSize, projectWithPlanetMapper } from '@cssearth/telescope/node';
+import { fileSize, projectWithPlanetMapper } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 

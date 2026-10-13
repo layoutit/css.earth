@@ -24,7 +24,7 @@ import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { HOSTED_PLANET_STYLESHEET } from '../new-hosted-planet.mts';
 import { installPhaseCurveDataset } from './phase-curve-dataset.mts';
 import { daysideLine, installDaysideDataset } from '../thermal/dayside-dataset.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { installSimulationDataset, memberFormat, restoreSimulationField, restoreSimulationMember, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from '../simulation/simulation-dataset.mts';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 

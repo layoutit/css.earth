@@ -1,4 +1,4 @@
-import { pds3Keyword, pds3Values } from '@cssearth/telescope';
+import { pds3Keyword, pds3Values } from '@cssearth/telescope-core';
 
 /** Archive-specific evidence for the calibrated VICAR band-color lane. */
 export function pds3LabelHasReflectance(label: string): boolean {

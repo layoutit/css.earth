@@ -7,7 +7,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { starryToolchainSync } from '@cssearth/telescope/node';
+import { starryToolchainSync } from '@cssearth/telescope-core/node';
 
 import { runTool } from './toolchain.mts';
 

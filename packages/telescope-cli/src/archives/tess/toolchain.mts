@@ -10,7 +10,7 @@ import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
 
 const FILE = 'packages/telescope-cli/src/archives/tess/toolchain.json', ROOT = resolve(WORKSPACE, 'output/toolchains/tess'), INSTALL = 'node packages/telescope-cli/src/archives/tess/toolchain.mts install';
 

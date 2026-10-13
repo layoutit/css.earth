@@ -1,5 +1,5 @@
 {
-  "name": "@cssearth/telescope-cli",
+  "name": "@cssearth/telescope",
   "version": "0.2.0",
   "description": "The telescope command: explore, retrieve and qualify telescope products, and turn them into outputs.",
   "type": "module",
@@ -156,7 +156,7 @@
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
-    "@cssearth/telescope": "workspace:*",
+    "@cssearth/telescope-core": "workspace:*",
     "sharp": "0.35.3",
     "linkedom": "^0.18.13"
   },

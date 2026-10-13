@@ -67,7 +67,7 @@ const windowList = (mission: Mission, windows: readonly number[]) => {
 /** MAST through the telescope's Astroquery boundary: single-sector SPOC observations at 120 s, then each one's LC product; and a
  * Kepler star's long-cadence observation, with the light curve of each of its quarters. */
 export async function liveTessArchive(): Promise<TessArchive> {
-  const { MAST_CACHE, mastFile, mastService } = await import('@cssearth/telescope/node'), { readFile } = await import('node:fs/promises');
+  const { MAST_CACHE, mastFile, mastService } = await import('@cssearth/telescope-core/node'), { readFile } = await import('node:fs/promises');
   // A star's planets are drafted at once and ask for the same files: each is downloaded once, and every asker waits for it.
   const held = new Map<string, Promise<Buffer>>();
   return {

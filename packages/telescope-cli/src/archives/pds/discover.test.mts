@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { inspectPdsProduct, mergePdsDiscovery, pdsTargetNameCandidates } from './discover.mts';

@@ -9,7 +9,7 @@ import { discStartImage, fitPowerLawDisc, fitUniformDisc } from './disc-fit.mts'
 import { parseSeason, TWIN_SCALES } from './image-star.mts';
 import { selectOifits } from './oifits-select.mts';
 import { parseSqueezeFit, squeezeArguments } from './squeeze.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const repository = WORKSPACE;
 const seasonPath = resolve(import.meta.dirname, 'seasons/pi1-gruis-pionier-2014-09/season.json');

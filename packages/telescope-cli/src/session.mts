@@ -3,7 +3,7 @@ import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { fileSize, readProductRecord } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductRecord } from '@cssearth/objects';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection } from './observation-query/query.mts';
 import { type CapabilityAnswer, type QueryInputs } from './observation-query/query-contract.mts';

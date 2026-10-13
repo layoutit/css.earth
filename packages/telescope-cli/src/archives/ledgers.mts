@@ -12,7 +12,7 @@
  * `output/` included: in a checkout without them Keck's ledger fell to "0 of 14 instruments reduced" (2026-10-06, where its
  * local pass took 235 s). */
 import { spawnSync } from 'node:child_process';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { ARCHIVES } from './archives.mts';
 
 const args = process.argv.slice(2), flags = args.filter(arg => arg.startsWith('--')), named = args.filter(arg => !arg.startsWith('--'));

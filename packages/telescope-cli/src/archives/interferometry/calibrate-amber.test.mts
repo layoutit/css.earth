@@ -5,7 +5,7 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { calibratorDatabase, planAmberNight } from './calibrate-amber.mts';
 import { coOvertoneLines, measureCoShift } from './co-wavelength.mts';
-import { parseRawTable, WORKSPACE } from '@cssearth/telescope/node';
+import { parseRawTable, WORKSPACE } from '@cssearth/telescope-core/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, text } from '@cssearth/bake/objects/raster';
 
 const repository = WORKSPACE;

@@ -3,7 +3,7 @@
  * `ledgerCommand`; and an archive with a ledger has a coverage reader under the same id (observation-query/query-modes.mts `ADAPTERS`, which
  * archives.test.mts holds to this list). An archive's own code stays in its folder; this is the list, not the code. */
 import type { IcrsCircle } from '@cssearth/objects';
-import type { TargetCatalogueEntry } from '@cssearth/telescope';
+import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService, type LeadPosition } from '../archive-adapters/archive-leads.mts';
 import { searchChandraLeads, searchSpitzerLeads } from '../archive-adapters/other-leads.mts';
 import { SERVICES } from '../vo/discovery.mts';

@@ -15,7 +15,7 @@
  * calibration recipe interpolates between them. */
 import { access, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { archiveHeader, associationTree, esoEnvironment, esoHeader, frameTime, rawFrame, runRecipe, type Association, type AssociationFile, type EsoHeader, type EsoPipeline } from '@cssearth/telescope/node';
+import { archiveHeader, associationTree, esoEnvironment, esoHeader, frameTime, rawFrame, runRecipe, type Association, type AssociationFile, type EsoHeader, type EsoPipeline } from '@cssearth/telescope-core/node';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 

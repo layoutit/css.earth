@@ -27,7 +27,7 @@ import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, isRecord, positionalArguments } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { polarimetricProducts, type ArchivedProduct } from './cadc.mts';
 import { starParameters } from './catalogue.mts';
 import { parseProgram, programPath, PROGRAM_SCHEMA, PROGRAMS, type EspadonsProgram, type MappedStar } from './program.mts';

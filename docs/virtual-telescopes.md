@@ -17,7 +17,7 @@ and the difference is kept visible everywhere: see [two capabilities, never one]
 ## Saved questions with the Telescope CLI
 
 `pnpm telescope` provides a saved query and retrieval workflow over this API. The
-`@cssearth/telescope-cli` npm package exposes the same command as `telescope`; it uses an
+`@cssearth/telescope` npm package exposes the same command as `telescope`; it uses an
 existing css.earth science workspace for the catalogue, archive clients and instrument
 pipelines. See [package setup](../packages/telescope-cli/README.md). It does not bundle
 Python environments or download the repository during installation.
@@ -506,12 +506,12 @@ non-overlapping exceptions rather than fallbacks for the same operation.
 
 Astroquery stays an external dependency: no upstream source is copied into css.earth. Its BSD 3-Clause license, attribution,
 citation and the separate status of archive-data rights are recorded in
-[`packages/telescope/toolchains/NOTICE.md`](../packages/telescope/toolchains/NOTICE.md). Acquisition alone supplies no scientific evidence.
+[`packages/telescope-core/toolchains/NOTICE.md`](../packages/telescope-core/toolchains/NOTICE.md). Acquisition alone supplies no scientific evidence.
 
 ## The product record
 
 Every producing stage writes one `cssearth-telescope-product@1` record beside its output, named `<product>.product.json`
-([`packages/telescope/src/product-record.ts`](../packages/telescope/src/product-record.ts)). It holds:
+([`packages/telescope-core/src/product-record.ts`](../packages/telescope-core/src/product-record.ts)). It holds:
 
 | Field | What it states |
 | --- | --- |

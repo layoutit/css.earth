@@ -17,7 +17,7 @@ import { resolve } from 'node:path';
 import { createInterface } from 'node:readline';
 import { writeArrayBuffer } from 'geotiff';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 
 const COLUMNS = ['clon', 'clat', 'ltim', 't3', 't4', 't5', 't6', 't7', 't8', 't9', 'tbol'] as const;
 const WIDTH = 720, HEIGHT = 360, BINS = 96, CELL = 0.5, HOURS = 0.25, MISSING = -9999, RADIUS = 1737400;

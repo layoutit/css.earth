@@ -14,7 +14,7 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 import { VIZIER_TAP } from '../espadons/catalogue.mts';
 import { CATALOGUE_AGREEMENT, type Mission, type RotationVerdict } from './verdict.mts';
 

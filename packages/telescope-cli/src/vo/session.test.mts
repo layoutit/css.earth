@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, readFile, rm, appendFile, readdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '@cssearth/telescope/node';
+import { astroquery } from '@cssearth/telescope-core/node';
 import { saveSession, getSession, type SessionServices, saveExploration, sessionRequest } from '../session.mts';
 import { loadQualifiedObservations } from '../qualification/qualified-observations.mts';
 import { delivery, listOutputs, exportOutput } from '../delivery/outputs.mts';

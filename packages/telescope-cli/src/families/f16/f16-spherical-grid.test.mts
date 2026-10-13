@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroqueryToolchain, fileSize, readProductRecord } from '@cssearth/telescope/node';
+import { astroqueryToolchain, fileSize, readProductRecord } from '@cssearth/telescope-core/node';
 import { executeFamilyOperation, executableFamilyOperations } from '../../family-operation.mts';
 import { member } from '../common.mts';
 import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './f16-spherical-grid.mts';

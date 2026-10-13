@@ -20,7 +20,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';
-import { readProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord } from '@cssearth/telescope-core/node';
 import { PROGRAMS, parseKeckProgram, type KeckProgram } from './archive.mts';
 import { INSTRUMENT_TABLES, koaQuery, type InstrumentTable } from './koa.mts';
 import { REDUCIBLE } from './reduce.mts';

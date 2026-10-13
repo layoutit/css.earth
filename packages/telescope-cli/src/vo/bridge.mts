@@ -1,9 +1,9 @@
 /** VO observations enter the public query directly, without a synthetic instrument ledger. */
 import { resolve } from 'node:path';
-import { astroquery, parseLimits } from '@cssearth/telescope/node';
+import { astroquery, parseLimits } from '@cssearth/telescope-core/node';
 import { assessRequest, type RequestSatisfaction, type ProductFacts } from '../requests/request-satisfaction.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
-import type { TargetCatalogueEntry } from '@cssearth/telescope';
+import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 import type { QualifiedObservation } from '../qualification/qualified-observations.mts';
 import type { QualificationAction } from '../qualification/qualification-routes.mts';
 import { type DiscoverySnapshot, type MetadataResponse } from '@cssearth/objects';

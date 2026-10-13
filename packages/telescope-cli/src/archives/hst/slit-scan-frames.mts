@@ -7,7 +7,7 @@ import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@csseart
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses, type HorizonsResponses } from './line-stack-ephemeris.mts';
 import { acrossSlitCentre, discChord, type Chord, type SlitScanDefinition } from './slit-scan-reduction.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 export const MJD_TO_JD = 2400000.5, ARCSEC_PER_RADIAN = 206264.806247, DEGREE = Math.PI / 180;
 /** Characters 1-6 of a rootname are the HST visit: one scan of the disc, at one pointing and one roll. */

@@ -33,7 +33,7 @@ import { pipeline } from 'node:stream/promises';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */

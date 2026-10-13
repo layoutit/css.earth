@@ -6,8 +6,8 @@ import { tmpdir } from 'node:os';
 import { basename, join, dirname, resolve } from 'node:path';
 import { parseImagingProgram } from '../imaging/archive.mts';
 import { imagingProductRun, pipelineSoftware, recordProductEvidence } from '../imaging/image3.mts';
-import { sameRun, runKey, writeProductRecord } from '@cssearth/telescope/node';
-import { evidenceFor, productRecordPath } from '@cssearth/telescope';
+import { sameRun, runKey, writeProductRecord } from '@cssearth/telescope-core/node';
+import { evidenceFor, productRecordPath } from '@cssearth/telescope-core';
 import { compareSamples, cubeComparisonScope, archivePlaneOffset, requestedSpectralGrid } from './spec3.mts';
 import type { SpectralCube } from '@cssearth/bake/objects/layers/observation';
 

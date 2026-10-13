@@ -11,7 +11,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 import { TRANSFER_TIMEOUT_MS, USER_AGENT } from '../archives/archives.mts';
 import type { CataloguedPeriod } from './star-metadata.mts';
 

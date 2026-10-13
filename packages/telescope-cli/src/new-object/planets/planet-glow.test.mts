@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import type { Archive } from '../archives/archives.mts';
 import { EMISSION_COLUMNS, EQUILIBRIUM_QUERY, EQUILIBRIUM_TEST, SPITZER_ECLIPSES, equilibriumFromArchive, installThermalDataset, parseEquilibriumRows, parseSpitzerEclipses, thermalColorLine, thermalFromArchive, type EquilibriumSpec } from './planet-datasets.mts';
 

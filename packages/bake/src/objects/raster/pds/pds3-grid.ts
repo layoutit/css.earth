@@ -13,7 +13,7 @@
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 
 const SAMPLE_TYPES = {
   IEEE_REAL: { real: true, little: false }, PC_REAL: { real: true, little: true },

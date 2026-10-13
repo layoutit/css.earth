@@ -20,7 +20,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { flagValue, positionalArguments } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { productFiles } from './cadc.mts';
 import { meanLines, type MeanLine } from './lsd.mts';
 import { lineMask, MINIMUM_DEPTH } from './mask.mts';

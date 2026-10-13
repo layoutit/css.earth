@@ -40,7 +40,7 @@ import { calibrateFromAssociations } from './eso-associations.mts';
 import { selectOifits } from './oifits-select.mts';
 import { readReconstructionPlane, reconstructionVerdict, reproducibility, simulateSpotlessDisc, spotMap, compareSpotMaps } from './spotless-disc.mts';
 import { runSqueeze, type SqueezeFit, type SqueezeRecipe } from './squeeze.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 type Window = { readonly from: string; readonly to: string };
 type Exposure = { readonly science: string; readonly calibrators: readonly string[] };

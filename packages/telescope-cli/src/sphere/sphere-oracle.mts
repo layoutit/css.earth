@@ -8,7 +8,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { LEAF_BOXES_FILE, joinPreparedRuntimeText } from '@cssearth/objects/node';
 import { pathToFileURL } from 'node:url';
-import { astroqueryToolchain } from '@cssearth/telescope/node';
+import { astroqueryToolchain } from '@cssearth/telescope-core/node';
 import { verifiedProduct } from '../products/verified-product.mts';
 import { parseHTML } from 'linkedom';
 import { createWorldContextObjectRuntime } from '@cssearth/renderer';

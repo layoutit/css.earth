@@ -11,7 +11,7 @@
  *
  * The interferometry toolchains install the same way, but that installer reads its own descriptor and its own list of ids
  * (packages/telescope-cli/src/archives/interferometry/toolchain.mts), and NACO is not an interferometer. What is shared is what runs the result:
- * `esoEnvironment` and `runRecipe` from `@cssearth/telescope/node` (`eso-pipeline.ts`), which this module does not repeat.
+ * `esoEnvironment` and `runRecipe` from `@cssearth/telescope-core/node` (`eso-pipeline.ts`), which this module does not repeat.
  *
  * An installed toolchain keeps the text of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another
  * pin. The downloaded archive is deleted after the build. */
@@ -23,7 +23,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
 
 const repository = WORKSPACE;
 /** The toolchain pin sits beside this code and the programs it reduces. */

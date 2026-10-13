@@ -2,7 +2,7 @@
 import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { sciencePackage, plotProduct, writeProductRecord } from '@cssearth/telescope/node';
+import { sciencePackage, plotProduct, writeProductRecord } from '@cssearth/telescope-core/node';
 import { FITS_SOURCE_SCHEMA } from '../archive-adapters/fits-source.mts';
 import { VERSION } from '../help.mts';
 

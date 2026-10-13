@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pipelineImaging, precisePhaseCentre, tcleanCalls } from './alma-imaging.mts';
 import { parseContinuumRanges } from './alma-calibration.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const root = WORKSPACE;
 const read = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');

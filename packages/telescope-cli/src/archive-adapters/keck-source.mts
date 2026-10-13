@@ -2,7 +2,7 @@
 import { lstat, mkdir, mkdtemp, open, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writeProductRecord, parseLimits } from '@cssearth/telescope/node';
+import { writeProductRecord, parseLimits } from '@cssearth/telescope-core/node';
 import { VERSION } from '../help.mts';
 import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from '../archives/keck/koa.mts';
 import { EXPLORATION_SCHEMA } from '../exploration.mts';

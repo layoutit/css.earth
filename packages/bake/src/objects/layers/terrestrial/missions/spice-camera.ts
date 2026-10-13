@@ -1,5 +1,5 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 import { readFitsPlane } from '@cssearth/fits';
 import type { KernelSet } from '@cssearth/spice/node';
 import { encodeClock, clockToEt, etToUtc, utcToEt, spiceCamera, type Aberration, type PixelModelKeys } from '@cssearth/spice';

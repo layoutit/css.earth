@@ -18,7 +18,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
 
 const DESCRIPTOR = resolve(import.meta.dirname, 'toolchains.json');
 export const TOOLCHAIN_ROOT = resolve(WORKSPACE, 'output/toolchains');

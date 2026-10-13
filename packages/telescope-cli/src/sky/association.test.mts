@@ -5,7 +5,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { associate, candidatesAtEpoch, epochMjd, hostedPlanetsOf, readRelativeAstrometryCsv, runAssociation } from './association.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const root = WORKSPACE;
 const fixture = resolve(root, 'packages/telescope-cli/src/families/fixtures/telescope-families/sky-association-beta-pictoris/gravity-2026.csv');

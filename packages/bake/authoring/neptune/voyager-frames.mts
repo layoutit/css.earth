@@ -7,7 +7,7 @@
  * (`../voyager-iss/limb.mts`). Neptune is 1.7 % flattened, which is several pixels on these discs, so the edge points are
  * fitted to the spheroid's own limb as the camera projects it, not to a circle. Only the frame's translation is solved.
  */
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 import { spiceCamera, utcToEt } from '@cssearth/spice';
 import type { KernelSet } from '@cssearth/spice/node';
 import { decodeGeomed } from '../voyager-iss/place.mts';

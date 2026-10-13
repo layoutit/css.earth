@@ -9,15 +9,15 @@
  * start, which checks the trajectory reader against a source that shares none of its code. Nothing external runs here:
  * the reader, the cameras and the fit are this repository's TypeScript.
  *
- * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, packages/telescope/src/product-record.ts):
+ * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, packages/telescope-core/src/product-record.ts):
  * the images and kernels it read at their pinned sizes, the policy the fit was held to, and the software that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
  * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
 import { VERSION } from '../../help.mts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, writeProductRecord, WORKSPACE, astroqueryRows } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, writeProductRecord, WORKSPACE, astroqueryRows } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';

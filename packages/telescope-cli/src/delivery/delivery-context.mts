@@ -3,7 +3,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { parseAcceptedAssumptions, jsonValue, parseRegion, type Json } from '@cssearth/objects';
 import { inputWavelengths, PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from '../requests/recipe-request.mts';
 import type { ConstraintVerdict, RequestSatisfaction } from '../requests/request-satisfaction.mts';
-import { parseLimits } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope-core/node';
 
 export interface ExplorationReference {
   readonly schema: 'cssearth-telescope-exploration@1';

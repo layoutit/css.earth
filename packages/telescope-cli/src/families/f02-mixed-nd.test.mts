@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { astroqueryToolchain, WORKSPACE, readProductRecord } from '@cssearth/telescope/node';
+import { astroqueryToolchain, WORKSPACE, readProductRecord } from '@cssearth/telescope-core/node';
 import {describeMixedNd,extractMixedNd,inspectMixedNd} from './f02-mixed-nd.mts';import{member}from'./common.mts';import{executeFamilyOperation}from'../family-operation.mts';
 const root=WORKSPACE;
 const make=async()=>{const dir=await mkdtemp(resolve(tmpdir(),'f02-mixed-')),path=resolve(dir,'mixed.fits'),tc=await astroqueryToolchain(),code=`import numpy as np; from astropy.io import fits; h=fits.PrimaryHDU(np.arange(2*3*4*5*6,dtype='f4').reshape(2,3,4,5,6)); q=h.header; q['BUNIT']='K'; q['CTYPE1']='RA---TAN';q['CUNIT1']='deg';q['CRPIX1']=3.5;q['CRVAL1']=123.25;q['CDELT1']=-0.125; q['CTYPE2']='DEC--TAN';q['CUNIT2']='deg';q['CRPIX2']=2.5;q['CRVAL2']=-44.5;q['CDELT2']=0.25; q['CTYPE3']='FREQ';q['CUNIT3']='Hz';q['CRPIX3']=1.25;q['CRVAL3']=1400000000.;q['CDELT3']=250000.; q['CTYPE4']='TIME';q['CUNIT4']='d';q['CRPIX4']=2.;q['CRVAL4']=12.5;q['CDELT4']=0.125; q['CTYPE5']='STOKES';q['CRPIX5']=1.;q['CRVAL5']=1.;q['CDELT5']=1.; q['TIMESYS']='TDB';q['TIMEUNIT']='d';q['TREFPOS']='BARYCENTER';q['MJDREFI']=50000;q['MJDREFF']=0.125; q['PC1_2']=0.125; h.writeto(${JSON.stringify(path)})`;await new Promise<void>((done,fail)=>{const p=spawn(tc.python,['-c',code],{env:{...process.env,...tc.env}});p.on('error',fail);p.on('close',c=>c===0?done():fail(new Error('fixture write failed')));});const bytes=await readFile(path);return{dir,pin:{path,bytes:bytes.length}};};

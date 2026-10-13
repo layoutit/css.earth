@@ -19,7 +19,7 @@
  * `*CORR` calibration switches are recorded too. They are how the archive's own run was configured, and a re-run that differs
  * from MAST's product differs first in one of them (compare.mts).
  *
- * MAST catalogue access and complete-file downloads use the shared pinned Astroquery boundary (`@cssearth/telescope/node`).
+ * MAST catalogue access and complete-file downloads use the shared pinned Astroquery boundary (`@cssearth/telescope-core/node`).
  * The program is written to packages/telescope-cli/src/archives/hst/programs/<program id>.json. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -28,7 +28,7 @@ import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { binaryTable, numbers, tableColumn, text as cell } from '@cssearth/bake/objects/raster';
 import { readRepeatingHeader } from './product-file.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
+import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */

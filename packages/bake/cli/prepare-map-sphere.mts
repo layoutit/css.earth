@@ -210,7 +210,7 @@ const view = preview ? { sizePx: preview.sizePx as number, elevationDeg: preview
 const rays = view ? mapSpherePreviewRays(view) : null;
 const previewPaths = { previewNear: resolve(prepared, `${id}.near.tmp`), previewFar: resolve(prepared, `${id}.far.tmp`) };
 if (rays) { await writeFile(previewPaths.previewNear, new Uint8Array(rays.near.buffer)); await writeFile(previewPaths.previewFar, new Uint8Array(rays.far.buffer)); }
-const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
+const { astroqueryToolchainSync } = await import('@cssearth/telescope-core/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   input: JSON.stringify({ map: resolve(sourceDirectory, map!.path as string), column: map!.column, table: resolve(sourceDirectory, colorTable!.path as string),

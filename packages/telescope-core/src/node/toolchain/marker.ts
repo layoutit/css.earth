@@ -12,7 +12,7 @@ export function readToolchainPins(id: string, file: string): ToolchainPins {
   const descriptor = readFileSync(resolve(TOOLCHAINS, file), 'utf8');
   const entry = requireRecord(JSON.parse(descriptor) as unknown, file);
   const lock = entry.requirements === undefined ? null : readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, `${file} requirements`)), 'utf8');
-  return { id, file: `packages/telescope/toolchains/${file}`, descriptor, lock, entry };
+  return { id, file: `packages/telescope-core/toolchains/${file}`, descriptor, lock, entry };
 }
 
 export function writeInstalledMarker(root: string, pins: ToolchainPins): void {

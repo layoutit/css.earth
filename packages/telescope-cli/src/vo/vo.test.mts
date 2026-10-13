@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { astroqueryToolchain, WORKSPACE, astroquery, VoAccessError, parseLimits, recordKey } from '@cssearth/telescope/node';
+import { astroqueryToolchain, WORKSPACE, astroquery, VoAccessError, parseLimits, recordKey } from '@cssearth/telescope-core/node';
 test.before(async () => { await astroqueryToolchain(); });
 import { mkdtemp, readFile, writeFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

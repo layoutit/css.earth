@@ -17,7 +17,7 @@
  * star. */
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId, hostedOrbitPhaseBmjdTdb, STAR_IDS, starAstrometry, type HostedPlanetId, type StarAstrometry, type StarId } from '@cssearth/astronomy';
-import { mastRequest } from '@cssearth/telescope/node';
+import { mastRequest } from '@cssearth/telescope-core/node';
 
 /** How far from its star's place a time series may point and still be the star's. JWST points a time series at its target, and
  * the place is moved to the visit's year; this allows for a catalogue place and motion a little off. */

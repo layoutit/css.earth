@@ -23,7 +23,7 @@ import { fitsImageAccessor, imageExtent, readFitsHdus, type FitsHeader, skyDispl
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { column, eventTable } from './archives/chandra/events.mts';
 import { decodeJunocam } from '@cssearth/bake/objects/layers/terrestrial';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 /** An enlarged picture stays small enough to read in a document and to commit beside it. */
 const MAX_OUTPUT_EDGE = 1024;

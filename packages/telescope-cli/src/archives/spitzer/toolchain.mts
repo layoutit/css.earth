@@ -14,7 +14,7 @@
  * `--no-deps`, so the resolver never chooses anything. The install keeps the descriptor and lock texts it was built from,
  * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is taken from PATH. */
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope/node';
+import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope-core/node';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';

@@ -64,7 +64,7 @@ samples, are gaps. A percentile stretch and false-color palette give relative co
 **Magnetic field.** JRM33 through degree/order 13 is evaluated at the 1-bar ellipsoid (71,492 × 66,854 km) as the
 radial field on a 720 × 360 grid. The range is −13.94 to 21.68 gauss on a fixed linear −25 to 25 scale, blue inward
 and red outward. The [model recipe](source/preparation/magnetic.json) and
-[pinned upstream tool](../../../packages/telescope/toolchains/magnetic-toolchain.json) reproduce it. Textures are
+[pinned upstream tool](../../../packages/telescope-core/toolchains/magnetic-toolchain.json) reproduce it. Textures are
 lossless.
 
 **Lighting.** The OPAL paper publishes the Minnaert coefficients used to remove limb darkening: F631N red `k=0.999`,

@@ -5,7 +5,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { hostedOrbit, starAstrometry, type HostedPlanetId, type StarId } from '@cssearth/astronomy';
 import { dataciteQuery, formatLeads, formatSurvey, leadFor, opensOn, parseDatacite, rankLeads, searchLeads, surveyLeads, type Lead } from './leads.mts';
 

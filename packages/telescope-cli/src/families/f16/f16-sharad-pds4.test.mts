@@ -11,7 +11,7 @@ type SharadByteSource, type SharadPds4Label,
 } from './f16-sharad-pds4.mts';
 import { parseSourceProducts } from '../../products/source-product-contract.mts';
 import { familyProfile } from '../../family-handlers.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 const test = sourceTest();
 
 /** The fixture mirrors the published label element for element, including both `description` elements and the cartography block. */

@@ -1,7 +1,7 @@
 import { isArray } from '@cssearth/core';
 import {parseScalarGridProfile} from '../source-records.ts';
 import { spawn } from 'node:child_process';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 
 /** Stream a pinned PDS3 scalar image from a ZIP, retaining a bounded sampling grid.
  * Pixel coordinates use PDS's projection offsets (zero-based after subtracting

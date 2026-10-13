@@ -4,7 +4,7 @@ import{binaryTable,numbers,readFitsHdus,tableColumn}from'@cssearth/bake/objects/
 import{eventTable,requireEventColumn,scalar}from'../archives/chandra/events.mts';
 import type{FamilyHandler,FamilyOperation}from'../family-handler.mts';
 import type{DescriptorMember,ProductDescriptor}from'../products/product-descriptor.mts';
-import { plotNumericPreview, type FigureOptions } from '@cssearth/telescope/node';
+import { plotNumericPreview, type FigureOptions } from '@cssearth/telescope-core/node';
 import{csv,descriptor,stable}from'./common.mts';
 import{requireFiniteNumber as finite}from'@cssearth/core';
 

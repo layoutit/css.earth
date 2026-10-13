@@ -18,7 +18,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { DISPLAY_ORIENTATION_SCHEMA } from '@cssearth/objects';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapRows } from '@cssearth/telescope-core/node';
 import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../ledger.mts';
 import { namedShippedObjects, readJsonOrNull, type NamedShippedObject } from '../targets.mts';
 import { CADC_TAP } from './cadc.mts';

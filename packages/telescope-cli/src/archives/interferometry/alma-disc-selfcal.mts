@@ -27,7 +27,7 @@ import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
-import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);

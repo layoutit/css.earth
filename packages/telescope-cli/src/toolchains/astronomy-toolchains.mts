@@ -3,9 +3,9 @@
  *
  *   node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery|pds|starry|spiderman|picaso install|verify
  *
- * The pins, their hash-locked requirements and the licences of what they install are in packages/telescope/toolchains/;
- * the installers and the checks are `@cssearth/telescope/node`. */
-import { installAstroquery, installPdsToolchain, installPicaso, installSpiderman, installStarry, verifyAstroqueryToolchain, verifyPdsToolchain, verifyPicaso, verifySpiderman, verifyStarry } from '@cssearth/telescope/node';
+ * The pins, their hash-locked requirements and the licences of what they install are in packages/telescope-core/toolchains/;
+ * the installers and the checks are `@cssearth/telescope-core/node`. */
+import { installAstroquery, installPdsToolchain, installPicaso, installSpiderman, installStarry, verifyAstroqueryToolchain, verifyPdsToolchain, verifyPicaso, verifySpiderman, verifyStarry } from '@cssearth/telescope-core/node';
 
 const TOOLCHAINS: Readonly<Record<string, { readonly install: () => Promise<string>; readonly verify: () => Promise<string> }>> = {
   astroquery: { install: async () => `Astronomy packages are installed at ${await installAstroquery()}`, verify: verifyAstroqueryToolchain },

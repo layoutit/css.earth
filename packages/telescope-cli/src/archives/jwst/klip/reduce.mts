@@ -16,7 +16,7 @@ import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython, WORKSPACE } from '@cssearth/telescope/node';
+import { freeMemoryPercent, toolchainPython, WORKSPACE } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../../programs.mts';
 import { jwstToolchain } from '../toolchain.mts';
 

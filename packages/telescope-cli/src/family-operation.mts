@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { constants } from 'node:fs';
 import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, resolve } from 'node:path';
-import { fileSize, writeProductRecord, pyuvdataUvfits, figureBackground, type FigureBackground, type FigureOptions } from '@cssearth/telescope/node';
+import { fileSize, writeProductRecord, pyuvdataUvfits, figureBackground, type FigureBackground, type FigureOptions } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 import { VERSION } from './help.mts';
 import { operationsForDescriptor } from './family-handlers.mts';

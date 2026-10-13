@@ -2,7 +2,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pdsPackages, WORKSPACE, pdsToolchain, writeProductRecord } from '@cssearth/telescope/node';
+import { pdsPackages, WORKSPACE, pdsToolchain, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 import { archivePrograms } from '../programs.mts';
 

@@ -1,5 +1,5 @@
 import {parseDimensions} from '../../../raster/index.ts';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 /** Decode the explicitly selected legacy ISIS2 PC_REAL raster layout. These
  * rescued mission products are not relabelled as reviewed PDS image products.
  * Their original labels, history, special pixels and record padding stay intact. */

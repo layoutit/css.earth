@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

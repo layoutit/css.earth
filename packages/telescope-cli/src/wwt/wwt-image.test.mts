@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseWwtCatalogLines } from './wwt-catalog.mts';
 import { exportWwtImage } from './wwt-image.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const test = sourceTest();
 const root = WORKSPACE;

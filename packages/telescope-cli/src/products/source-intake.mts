@@ -5,10 +5,10 @@ import { isis3CoreHeader } from '@cssearth/bake/objects/raster';
 import { open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { resolve, dirname, basename } from 'node:path';
-import { plainName } from '@cssearth/telescope/node';
+import { plainName } from '@cssearth/telescope-core/node';
 import { requireArray, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
 import { readFitsHeader } from '@cssearth/fits';
-import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope';
+import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope-core';
 import { inside, sourceCacheAddress, parseSourceProcessing, type SourceFile, type SourceProduct } from './source-product-contract.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }
 const LIMIT = 128 * 1024;

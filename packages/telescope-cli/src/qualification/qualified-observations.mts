@@ -4,7 +4,7 @@ import { parseNativeMetadata } from '../products/native-metadata.mts';
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '@cssearth/core';
-import { fileSize, plainName, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { fileSize, plainName, readProductRecord, sameRun } from '@cssearth/telescope-core/node';
 import { assessInput, assessRequest, type ProductFacts } from '../requests/request-satisfaction.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
 import { parseResolutionEvidence, parseRegion } from '@cssearth/objects';

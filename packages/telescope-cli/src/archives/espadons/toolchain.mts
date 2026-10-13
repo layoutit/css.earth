@@ -14,7 +14,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
 
 const FILE = 'packages/telescope-cli/src/archives/espadons/toolchain.json', ROOT = resolve(WORKSPACE, 'output/toolchains/zdi'), INSTALL = 'node packages/telescope-cli/src/archives/espadons/toolchain.mts install';
 const exists = (path: string) => access(path).then(() => true, () => false);

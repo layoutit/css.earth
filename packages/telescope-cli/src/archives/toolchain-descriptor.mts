@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE, type ToolchainPins } from '@cssearth/telescope/node';
+import { WORKSPACE, type ToolchainPins } from '@cssearth/telescope-core/node';
 
 /** An archive toolchain's pins: the toolchain.json beside its code and the requirements lock it names. The installed
  * environment keeps both texts in its marker, so a changed pin asks for a reinstall. */

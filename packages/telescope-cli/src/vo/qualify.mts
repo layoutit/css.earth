@@ -6,7 +6,7 @@ import { readFitsHdus } from '@cssearth/bake/objects/raster';
 import { describeFitsTable } from '../families/f08-table.mts';
 import { readProductScience } from '../qualification/product-science.mts';
 import { rememberQualification, type QualifiedObservation } from '../qualification/qualified-observations.mts';
-import { readProductRecord, fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord, fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
 import { VERSION } from '../help.mts';
 import { acquireVoProduct, nativeQualificationRoute, type AcquisitionSpec } from './access.mts';

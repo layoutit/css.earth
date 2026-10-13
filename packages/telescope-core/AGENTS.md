@@ -1,7 +1,7 @@
 # Telescope package instructions
 
 Own the telescope library the workspace's archive and preparation tools and the `telescope` command share. The command
-itself is [`@cssearth/telescope-cli`](../telescope-cli/AGENTS.md), a layer above this one: this package never imports it or
+itself is [`@cssearth/telescope`](../telescope-cli/AGENTS.md), a layer above this one: this package never imports it or
 `@cssearth/bake` (which imports this package's PDS label readers).
 
 The library holds archive-neutral telescope plumbing: product records, PDS3 and PDS4 label reading, target-name
@@ -11,7 +11,7 @@ how an archive's ledger is written) stays with the telescope command (`packages/
 the bake. Nothing here names a body.
 
 Keep the main entry (`src/index.ts`) host-neutral: no Node built-ins, DOM globals or file I/O. `src/node/` is
-`@cssearth/telescope/node`; it may import `node:*`, and nothing outside `src/node/` may import it. Code finds the
+`@cssearth/telescope-core/node`; it may import `node:*`, and nothing outside `src/node/` may import it. Code finds the
 package's own files (`toolchains/`) and the workspace only through `src/node/paths.ts`, which locates the package by its
 name, so the same code works from its sources, its build and a bundle. The library imports only packages and Node
 built-ins; it never reaches `packages/bake`, `packages/telescope-cli`, `src/`, `site/` or `labs/`.

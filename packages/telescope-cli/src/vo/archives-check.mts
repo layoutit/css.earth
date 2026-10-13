@@ -8,7 +8,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const target = process.argv[2] ?? 'HD 189733', started = Date.now();
 const directory = await mkdtemp(resolve(WORKSPACE, 'output/archives-check-'));

@@ -16,5 +16,5 @@ export function jwstAcquisition(program: string, uri: string, manifest: unknown)
     && record.acquisition.includes(`by its URI ${uri} `) && record.acquisition.includes(`${historicalPath}.`));
   if (existing) return requireString(existing.acquisition);
   const path = historical ? historicalPath : `${JWST_PROGRAM_ROOT}${program}.json`;
-  return `Downloaded unchanged from MAST by its URI ${requireString(uri)} (@cssearth/telescope/node mastFile), the pipeline's own calwebb_coron3 product of the association pinned in ${path}.`;
+  return `Downloaded unchanged from MAST by its URI ${requireString(uri)} (@cssearth/telescope-core/node mastFile), the pipeline's own calwebb_coron3 product of the association pinned in ${path}.`;
 }

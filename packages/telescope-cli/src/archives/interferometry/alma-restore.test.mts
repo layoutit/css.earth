@@ -8,7 +8,7 @@ import { parseCalibrationRecord } from './alma-calibration.mts';
 import { pipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration } from './alma-selfcal.mts';
 import { applycalStatement, pipelineTcleanArguments, restoreScript, type ReplayedFlags } from './alma-restore.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const root = WORKSPACE;
 const record = () => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt'), 'utf8');

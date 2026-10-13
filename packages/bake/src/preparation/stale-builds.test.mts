@@ -83,7 +83,7 @@ test('with the engine and the bake both stale, --run rebuilds the engine first',
     const ran: string[] = [];
     await rebuildStale(root, BUILD_RULES, async command => { ran.push(command); });
     // Viewer stays fresh: it does not read bake sources. The dependent telescope CLI follows bake.
-    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm --filter @cssearth/bake build', 'pnpm --filter @cssearth/telescope-cli build']);
+    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm --filter @cssearth/bake build', 'pnpm --filter @cssearth/telescope build']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -176,7 +176,7 @@ test('the bootstrap root is the real checkout whatever the working directory or 
 
 
 test('the built sphere lane source explicitly invalidates the telescope CLI build', async () => {
-  const rule = BUILD_RULES.find(candidate => candidate.name === '@cssearth/telescope-cli');
+  const rule = BUILD_RULES.find(candidate => candidate.name === '@cssearth/telescope');
   assert.ok(rule);
   const source = 'packages/telescope-cli/src/sphere';
   assert.ok(rule.sources.includes(source));
@@ -196,7 +196,7 @@ test('the built sphere lane source explicitly invalidates the telescope CLI buil
     assert.equal((await staleBuilds(root, [rule]))[0]!.reason, `${sphereOutput} is missing`);
     await writeFile(join(root, sphereOutput), ''); await utimes(join(root, sphereOutput), 2000, 2000);
     await utimes(join(root, source, 'sphere-lane.mts'), 3000, 3000);
-    assert.deepEqual((await staleBuilds(root, [rule])).map(build => build.command), ['pnpm --filter @cssearth/telescope-cli build']);
+    assert.deepEqual((await staleBuilds(root, [rule])).map(build => build.command), ['pnpm --filter @cssearth/telescope build']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

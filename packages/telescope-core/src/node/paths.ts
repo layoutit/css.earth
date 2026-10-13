@@ -4,8 +4,8 @@
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 
-export const PACKAGE_ROOT = dirname(createRequire(import.meta.url).resolve('@cssearth/telescope/package.json'));
+export const PACKAGE_ROOT = dirname(createRequire(import.meta.url).resolve('@cssearth/telescope-core/package.json'));
 /** The pinned Python toolchains: descriptors, hash-locked requirements, and the licences and notices of what they install. */
 export const TOOLCHAINS = resolve(PACKAGE_ROOT, 'toolchains');
-/** The css.earth checkout the package lives in (`packages/telescope`), where installed toolchains and archive caches go. */
+/** The css.earth checkout the package lives in (`packages/telescope-core`), where installed toolchains and archive caches go. */
 export const WORKSPACE = resolve(PACKAGE_ROOT, '../..');

@@ -5,7 +5,7 @@ import { createServer } from 'node:http';
 import { mkdtemp, readFile, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '@cssearth/telescope/node';
+import { astroquery } from '@cssearth/telescope-core/node';
 import { loadVoInputs } from './bridge.mts';
 import { SERVICES } from './discovery.mts';
 import { jsonValue, type DiscoverySnapshot } from '@cssearth/objects';

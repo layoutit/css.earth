@@ -40,8 +40,8 @@ import {
 } from './alma-manual-calibration.mts';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 
 /** The imaging a manual delivery performed, read from the two scripts it ships instead of a command log. Both set their

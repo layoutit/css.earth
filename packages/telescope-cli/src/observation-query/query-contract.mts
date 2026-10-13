@@ -6,8 +6,8 @@ import type { ConstraintVerdict, RequestSatisfaction } from '../requests/request
 import type { SourceIntakeIssue } from '../products/source-intake.mts';
 import type { LoadedSourceProduct } from '../products/source-products.mts';
 import type { QualificationAction } from '../qualification/qualification-routes.mts';
-import type { TargetAssociation } from '@cssearth/telescope/node';
-import type { TargetCatalogueEntry, TargetResolution } from '@cssearth/telescope';
+import type { TargetAssociation } from '@cssearth/telescope-core/node';
+import type { TargetCatalogueEntry, TargetResolution } from '@cssearth/telescope-core';
 
 export const ARCSEC_PER_RADIAN = 206_264.806_247;
 export const TARGET_ASSOCIATIONS_PATH = 'src/sources/telescopes/target-associations.json';

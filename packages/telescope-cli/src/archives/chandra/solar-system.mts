@@ -28,8 +28,8 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, readProductRecord, writeProductRecord, WORKSPACE, astroqueryRows, toolchainPython } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { addProductEvidence, readProductRecord, writeProductRecord, WORKSPACE, astroqueryRows, toolchainPython } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductEvidence, type ProductInput, type ProductRun } from '@cssearth/objects';
 import type { FitsHeader } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

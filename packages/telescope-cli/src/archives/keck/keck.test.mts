@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { runKey, assertInputs } from '@cssearth/telescope/node';
+import { runKey, assertInputs } from '@cssearth/telescope-core/node';
 import { instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from './koa.mts';
 import { CALIBRATION_TYPES, KOAID, nightsAround, parseKeckProgram, PROGRAMS } from './archive.mts';
 import { checkReceipt, keckTargetObject, nameCandidates, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';

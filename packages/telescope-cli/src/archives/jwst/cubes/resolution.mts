@@ -5,7 +5,7 @@ import { basename, dirname } from 'node:path';
 import { VERSION } from '../../../help.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain } from '../toolchain.mts';
-import { toolchainPython } from '@cssearth/telescope/node';
+import { toolchainPython } from '@cssearth/telescope-core/node';
 import { openSpectralCube } from '@cssearth/bake/objects/layers/observation';
 import type { ProductFacts } from '../../../requests/request-satisfaction.mts';
 

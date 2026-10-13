@@ -2,12 +2,12 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchainSync, plainName } from '@cssearth/telescope/node';
+import { astroqueryToolchainSync, plainName } from '@cssearth/telescope-core/node';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from '../archives/keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from '../archives/gemini/cadc.mts';
 import { recall } from '../archives/memory.mts';
 import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from '../archives/gemini/archive.mts';
-import type { TargetCatalogueEntry } from '@cssearth/telescope';
+import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 
 export interface ArchiveLeadService {
   readonly service: string; readonly state: 'sampled' | 'overflow' | 'empty-in-scope' | 'unavailable';

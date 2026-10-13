@@ -10,7 +10,7 @@
  */
 import { globals, writeArrayBuffer } from 'geotiff';
 import { decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 import { spiceCamera, utcToEt } from '@cssearth/spice';
 import type { KernelSet } from '@cssearth/spice/node';
 import { fitLimb, limbAccepted, type LimbFit } from './limb.mts';

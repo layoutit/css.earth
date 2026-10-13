@@ -21,8 +21,8 @@ test('product refusal diagnostics and admission order are unchanged', () => {
   for (const [value, message] of cases) assert.throws(() => parseProductRecord(value), { name: 'TypeError', message });
 });
 test('product transport calls the shared reader and retains no second parser', () => {
-  const owner = readFileSync(new URL('../../../../telescope/src/product-record.ts', import.meta.url), 'utf8');
-  const transport = readFileSync(new URL('../../../../telescope/src/node/product-record.ts', import.meta.url), 'utf8');
+  const owner = readFileSync(new URL('../../../../telescope-core/src/product-record.ts', import.meta.url), 'utf8');
+  const transport = readFileSync(new URL('../../../../telescope-core/src/node/product-record.ts', import.meta.url), 'utf8');
   assert.doesNotMatch(owner, /(?:function|const)\s+parseProductRecord\b|Unsupported product record schema/u);
   assert.match(transport, /import \{[^;]*parseProductRecord[^;]*from '@cssearth\/objects'/u);
   assert.match(transport, /text => parseProductRecord\(JSON\.parse\(text\) as unknown\)/u);

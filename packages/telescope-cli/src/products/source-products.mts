@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { VERSION } from '../help.mts';
 import { hasErrorCode, requireRecord } from '@cssearth/core';
-import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
 import { sourcePds3Observations } from '../archives/pds/source-observations.mts';
 import { parseProductFacts, type QualifiedObservation } from '../qualification/qualified-observations.mts';

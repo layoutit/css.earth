@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-astronomy-package-ownership@1",
-  "pythonBoundary": "packages/telescope/src/node/astroquery.ts",
+  "pythonBoundary": "packages/telescope-core/src/node/astroquery.ts",
   "catalogPreparationPythonBoundary": "packages/telescope-cli/src/wwt/wwt-catalog-build.mts",
   "owners": [
     {

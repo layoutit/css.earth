@@ -16,7 +16,7 @@
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pds3Keyword } from '@cssearth/telescope';
+import { pds3Keyword } from '@cssearth/telescope-core';
 
 interface Column { number: number; name: string; start: number; bytes: number; description: string | undefined }
 interface Band { south: number; north: number; west: number; edges: Float64Array; first: number }

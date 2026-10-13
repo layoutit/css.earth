@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { planckRadiance, mapPhaseCurve, mirrorGrid, type EmissionGrid, phaseCurveBrightnessTemperature as brightnessTemperature, depositedChannelWeights, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, parseStarryPhaseCurve, sinusoidMap } from '@cssearth/bake/objects/raster';
 import { hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { starryMapGrid, starrySystemFlux } from '@cssearth/telescope/node';
+import { starryMapGrid, starrySystemFlux } from '@cssearth/telescope-core/node';
 
 const test = sourceTest();
 const objects = new URL('../../../../../../src/objects/', import.meta.url);

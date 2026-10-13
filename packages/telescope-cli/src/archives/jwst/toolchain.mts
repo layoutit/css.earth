@@ -11,7 +11,7 @@
  * exactly once, and its data archives are fetched and checked by size. The install keeps the descriptor and lock texts it was
  * built from, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
  * `micromamba`). */
-import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
+import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import type { Archive } from '../archives/archives.mts';
 import { rebuildExistingDatasets } from '../planets/planet-datasets.mts';
 import { fileNamesObject, installSimulationDataset, memberFormat, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';

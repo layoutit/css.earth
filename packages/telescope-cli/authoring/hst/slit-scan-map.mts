@@ -26,14 +26,14 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHdus } from '@cssearth/fits';
 import { requireFiniteNumber } from '@cssearth/core';
-import { HST_PROGRAMS, PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
+import { HST_PROGRAMS, PROGRAMS } from '@cssearth/telescope/archives/hst/archive';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
 import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap, combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
+import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
-import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '@cssearth/telescope-cli/archives/hst/slit-scan-reduction';
-import { ARCSEC_PER_RADIAN, DEGREE, type PreparedFrame, REPOSITORY, type VisitRegistration, prepareFrames, readFrameRegion, registerVisits } from '@cssearth/telescope-cli/archives/hst/slit-scan-frames';
+import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '@cssearth/telescope/archives/hst/slit-scan-reduction';
+import { ARCSEC_PER_RADIAN, DEGREE, type PreparedFrame, REPOSITORY, type VisitRegistration, prepareFrames, readFrameRegion, registerVisits } from '@cssearth/telescope/archives/hst/slit-scan-frames';
 
 /** The pinned reference spectrum, read from the binary table it is distributed as. Only two single-precision columns are
  * taken, named in the definition, and the wavelengths must rise; nothing else about the file is assumed. */

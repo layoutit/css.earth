@@ -19,7 +19,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { assertInputs, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRecord, ProductRun } from '@cssearth/objects';
 import { defaultDataRoot, readSpitzerProgram, REPOSITORY, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { spitzerSoftware, spitzerToolchain } from './toolchain.mts';

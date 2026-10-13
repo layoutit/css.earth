@@ -6,7 +6,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import type { Archive } from '../archives/archives.mts';
 import { checkDayside, depthRecord, hostAtmosphere, installRockEclipseDataset, parseRockEclipseEntries, restoreRockInputs, rockInputs, rockRecipe, throughputRelease } from './rock-eclipse-dataset.mts';
 

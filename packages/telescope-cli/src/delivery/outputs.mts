@@ -5,7 +5,7 @@ import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { writeProductRecord, sciencePackage, plotProduct } from '@cssearth/telescope/node';
+import { writeProductRecord, sciencePackage, plotProduct } from '@cssearth/telescope-core/node';
 import { parseProductRecord } from '@cssearth/objects';
 import { VERSION } from '../help.mts';
 import { parseNativeMetadata, type NativeMetadata } from '../products/native-metadata.mts';

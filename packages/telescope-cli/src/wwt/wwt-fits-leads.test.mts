@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { loadWwtFitsLeads, resolveWwtFitsLead } from './wwt-fits-leads.mts';
 import { parseCli } from '../cli-arguments.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 test('M31 exploration links the pinned PHAT FITS collection without treating tiles as observations',async()=>{
   const root=WORKSPACE,m31=await loadWwtFitsLeads(root,{id:'m31',name:'Andromeda Galaxy',aliases:['M31']});

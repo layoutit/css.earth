@@ -6,7 +6,7 @@ import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { astroqueryToolchain, fileSize, sciencePackage, writeProductRecord } from '@cssearth/telescope/node';
+import { astroqueryToolchain, fileSize, sciencePackage, writeProductRecord } from '@cssearth/telescope-core/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from '../cli-arguments.mts';
@@ -121,7 +121,7 @@ test('CLI accepts new selectors and refuses incomplete or silently ignored selec
 });
 
 test('Astropy output retains the source sky grid and records when celestial projection is inapplicable',async()=>{
- const {plotProduct}=await import('@cssearth/telescope/node');
+ const {plotProduct}=await import('@cssearth/telescope-core/node');
  const {mkdir}=await import('node:fs/promises');
  const tc=await astroqueryToolchain();
  const data=await extract({...band,uncertainty:'omit'});

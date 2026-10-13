@@ -6,7 +6,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { JWST_CUBE_COVERAGE } from '../archives/jwst/imaging/bands.mts';
 import { sourceQualifiedObservations, type LoadedSourceProduct } from '../products/source-products.mts';
 import { qualificationActionsFor } from '../qualification/qualification-routes.mts';
-import type { TargetAssociation } from '@cssearth/telescope/node';
+import type { TargetAssociation } from '@cssearth/telescope-core/node';
 import { productKindFamilyEvidence, type ObservationFamilyEvidence } from '../products/observation-families.mts';
 import { type Candidate, type CandidateEvidence, type CandidateSelectionAssessment, MODES_SCHEMA, type ModeCapability, type QueryInputs, TARGET_ASSOCIATIONS_PATH, type TargetCoverage, type WorkflowBlocker } from './query-contract.mts';
 

@@ -5,7 +5,7 @@ import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { compareLightCurves, parseLightCurve, type LightCurve } from './compare-light-curves.mts';
 import { renderSettings } from './reduce-tso.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { eurekaToolchain } from './toolchain.mts';
 
 const repository = WORKSPACE;

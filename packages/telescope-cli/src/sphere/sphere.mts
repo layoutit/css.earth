@@ -8,11 +8,11 @@ import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { assertBodyMapPlanes } from '../delivery/body-map-publication.mts';
-import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { writeProductRecord, WORKSPACE } from '@cssearth/telescope-core/node';
 import { verifiedProduct, localOutput } from '../products/verified-product.mts';
 import { contextTarget, sourceContext } from '../delivery/delivery-context.mts';
 import { VERSION } from '../help.mts';
-import * as sphereOwner from '@cssearth/telescope-cli/sphere/lane';
+import * as sphereOwner from '@cssearth/telescope/sphere/lane';
 
 const root=WORKSPACE;
 /** Prepared package entry: callers supply solar geometry; the owner never discovers it globally. */

@@ -4,8 +4,8 @@ css.earth uses upstream packages where they can own a complete mechanical bounda
 product records and evidence remain css.earth contracts.
 
 The machine-readable contract is
-[`packages/telescope/toolchains/ownership.json`](../packages/telescope/toolchains/ownership.json). Telescope's runtime
-Python process boundary is `@cssearth/telescope/node` ([`astroquery.ts`](../packages/telescope/src/node/astroquery.ts)); callers choose a named operation rather than importing Python packages or reproducing a protocol.
+[`packages/telescope-core/toolchains/ownership.json`](../packages/telescope-core/toolchains/ownership.json). Telescope's runtime
+Python process boundary is `@cssearth/telescope-core/node` ([`astroquery.ts`](../packages/telescope-core/src/node/astroquery.ts)); callers choose a named operation rather than importing Python packages or reproducing a protocol.
 The WWT catalog has a separate preparation-only Python boundary and ships as checked-in metadata, with no Python needed for an `explore` lookup.
 
 ## Owned upstream

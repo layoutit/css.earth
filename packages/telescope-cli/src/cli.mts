@@ -37,7 +37,7 @@ import { runWorkspaceCommand } from './workspace-commands.mts';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };

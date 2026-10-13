@@ -28,8 +28,8 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastRequest, runKey } from '@cssearth/telescope/node';
-import { evidenceFor } from '@cssearth/telescope';
+import { mastRequest, runKey } from '@cssearth/telescope-core/node';
+import { evidenceFor } from '@cssearth/telescope-core';
 import { parseProductRecord, type ProductRecord } from '@cssearth/objects';
 import { HST_PROGRAMS, parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';

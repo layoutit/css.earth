@@ -7,7 +7,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { parseCli } from '../cli-arguments.mts';
 import { formatSimulations, nameForms, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, searchSimulations, sizeText, speaksOfSimulation, zenodoQuery } from './simulations.mts';
 

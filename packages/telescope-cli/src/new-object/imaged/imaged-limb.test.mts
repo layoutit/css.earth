@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync, WORKSPACE } from '@cssearth/telescope/node';
+import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync, WORKSPACE } from '@cssearth/telescope-core/node';
 import type { PackageFiles } from '../dataset.mts';
 import { exoRem } from '../darkening/picaso-limb.mts';
 import { ATMOSPHERE_FIT, CLARET_2012, claret2012Grid, claretBand, documentImagedColor, fittedImagedLimb, imagedLimb, installImagedLimb, parseAtmosphereFit, type ImagedLimb } from './imaged-limb.mts';

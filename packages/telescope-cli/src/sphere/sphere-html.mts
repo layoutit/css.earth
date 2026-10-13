@@ -6,9 +6,9 @@ import { publishPreparedNativeView } from '@cssearth/renderer/rendering/view/pre
 import { preparedSceneMatrix, distanceForSilhouetteRadius } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { CAMERA_POSE_SCHEMA, parsePreparedWorldCameraFrame, type ObjectRuntimeDefinition } from '@cssearth/objects';
-import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
-import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
-import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
+import { addNativeCamera } from '@cssearth/telescope/sphere/native-scroll/native-camera';
+import { addNativeResizeInput } from '@cssearth/telescope/sphere/native-scroll/resize-input';
+import { carryViewportValues } from '@cssearth/telescope/sphere/native-scroll/carry-values';
 import type { SharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 
 const escape=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');

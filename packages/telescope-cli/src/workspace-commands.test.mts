@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

@@ -84,8 +84,8 @@ Two other things are worth knowing before reading the code.
    owns pinning, the two independent template reductions, their comparison and the receipt.
 
 What is shared rather than repeated: the archive's raw table, the header service, the anonymous data-portal download and the
-esorex runner are `@cssearth/telescope/node` ([`eso-pipeline.ts`](../packages/telescope/src/node/eso-pipeline.ts)), the calibration association tree is
-[`eso-associations.ts`](../packages/telescope/src/node/eso-associations.ts), and resolved-image placement is `resolved-disc-map.ts` in `@cssearth/bake/objects/layers/observation`. NACO supplies only the facts peculiar to its
+esorex runner are `@cssearth/telescope-core/node` ([`eso-pipeline.ts`](../packages/telescope-core/src/node/eso-pipeline.ts)), the calibration association tree is
+[`eso-associations.ts`](../packages/telescope-core/src/node/eso-associations.ts), and resolved-image placement is `resolved-disc-map.ts` in `@cssearth/bake/objects/layers/observation`. NACO supplies only the facts peculiar to its
 product: how the recipe retained the detector axes, how relative intensity and its noise are measured, and which bytes prove it.
 
 ## Measured

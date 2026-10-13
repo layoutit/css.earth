@@ -13,7 +13,7 @@
  * pins KOA's own OSIRIS products instead of re-running them. */
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope/node';
+import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope-core/node';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

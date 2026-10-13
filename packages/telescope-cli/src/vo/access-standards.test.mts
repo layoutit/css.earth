@@ -3,7 +3,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery, parseLimits } from '@cssearth/telescope/node';
+import { astroquery, parseLimits } from '@cssearth/telescope-core/node';
 import { planAccess, sodaParameters, type MetadataLoader } from './access.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
 import { jsonValue, type DiscoverySnapshot, type Json, type MetadataResponse, type Resource } from '@cssearth/objects';

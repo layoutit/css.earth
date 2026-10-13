@@ -27,7 +27,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readLimbGrid } from '@cssearth/bake/objects/stellar';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { authorContextMarkers, MARKER_PATH } from '../../source-authoring/context-markers.mts';
 import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, type PackageFiles } from '../dataset.mts';

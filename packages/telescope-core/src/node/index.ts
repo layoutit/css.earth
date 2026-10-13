@@ -1,4 +1,4 @@
-// The Node-only entry (`@cssearth/telescope/node`): product records on disk, and the clients of the pinned Python astronomy
+// The Node-only entry (`@cssearth/telescope-core/node`): product records on disk, and the clients of the pinned Python astronomy
 // packages with their toolchains. Everything here may read files, spawn processes and import `node:*` built-ins.
 export * from './product-record.js';
 export * from './paths.js';

@@ -9,7 +9,7 @@ import { naifIdFromHorizonsCode, observationRecords, spitzerShippedObjects } fro
 import { namedShippedObjects, readJsonOrNull } from '../targets.mts';
 import { shippedSkyObjects } from '../chandra/archive-ledger.mts';
 import { compareMosaics, LIMITS } from './compare.mts';
-import { fileSize } from '@cssearth/telescope/node';
+import { fileSize } from '@cssearth/telescope-core/node';
 import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
 const url = (name: string) => `${DATA}/sha/archive/proc/IRAC003600/r4416768/ch1/${name.includes('maic') || name.includes('munc') || name.includes('mcov') ? 'pbcd' : 'bcd'}/${name}`;

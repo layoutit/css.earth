@@ -10,7 +10,7 @@ import { forms, spellings } from './papers/names.mts';
 import { evidenceSentences, mentions } from './papers/text.mts';
 import { abstractText, arxivIdOf, arxivQuery, citingQuery, openAlexQuery, parseArxivResponse, parseOpenAlexResponse, rankWorks } from './papers/works.mts';
 import { parseCli } from './cli-arguments.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-papers');
 const openAlex = async (): Promise<unknown> => JSON.parse(await readFile(resolve(fixtures, 'openalex-works.json'), 'utf8'));

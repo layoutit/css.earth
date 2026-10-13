@@ -4,7 +4,7 @@ import{sourceTest}from'@cssearth/objects/node/source-test';const test=sourceTest
 import{copyFile,mkdtemp,readFile,readdir,rm,stat,writeFile}from'node:fs/promises';
 import{tmpdir}from'node:os';
 import{dirname,relative,resolve}from'node:path';
-import { readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { readProductRecord, WORKSPACE } from '@cssearth/telescope-core/node';
 import{member}from'./families/common.mts';
 import{describeFitsTable}from'./families/f08-table.mts';
 import{describeStandaloneSpectrum}from'./families/f03-spectrum.mts';

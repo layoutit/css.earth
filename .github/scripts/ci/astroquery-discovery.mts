@@ -9,7 +9,7 @@ export const ASTROQUERY_EXCLUSIONS: Readonly<Record<string, string>> = {
 export function astroqueryTestFiles(root: string): string[] {
   return globSync('packages/**/*.test.{ts,mts}', { cwd: root }).filter(path => {
     const text = readFileSync(resolve(root, path), 'utf8');
-    return /import\s*(?:\{[^}]*\bastroqueryToolchain\b[^}]*\})\s*from\s*['"]@cssearth\/telescope\/node['"]/su.test(text);
+    return /import\s*(?:\{[^}]*\bastroqueryToolchain\b[^}]*\})\s*from\s*['"]@cssearth\/telescope-core\/node['"]/su.test(text);
   }).sort();
 }
 export function astroqueryLaneFiles(root: string): string[] {
@@ -24,7 +24,7 @@ export function astroqueryTriggerPaths(root: string): string[] {
     if (!manifest || typeof manifest !== 'object') throw new TypeError(`Invalid ${name} package manifest`);
     const dependencies = Reflect.get(manifest, 'dependencies');
     if (dependencies && typeof dependencies === 'object') for (const dependency of Object.keys(dependencies)) {
-      if (dependency.startsWith('@cssearth/')) visit(dependency.slice('@cssearth/'.length));
+      if (dependency.startsWith('@cssearth/')) visit(dependency === '@cssearth/telescope' ? 'telescope-cli' : dependency.slice('@cssearth/'.length));
     }
   };
   for (const file of astroqueryLaneFiles(root)) {

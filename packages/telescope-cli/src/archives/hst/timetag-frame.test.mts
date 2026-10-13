@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { readFitsHdus, skyImageAxes, skyProjection } from '@cssearth/fits';
 import { centredCrop, readEventsFile, streamEvents, timeTagPicture, timeTagProduct, type TimeTagRun } from './timetag-frame.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import {
   azimuthalRatio, backgroundSurface, boxSums, findDisc, goodTimeIntervals, gridLatitudeDegrees, gridRadii, inGoodTime,
   limbStatistics, liveSeconds, parseTimeTagDefinition, quadraticFit, restFramePixel, significanceBins, sliceLiveSeconds,

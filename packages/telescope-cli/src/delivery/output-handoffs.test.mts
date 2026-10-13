@@ -5,7 +5,7 @@ import { cp,mkdtemp,writeFile,readFile,rm,stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { astroqueryToolchain, fileSize, pdsPackages, writeProductRecord } from '@cssearth/telescope/node';
+import { astroqueryToolchain, fileSize, pdsPackages, writeProductRecord } from '@cssearth/telescope-core/node';
 import { exportOutput,listOutputs } from './outputs.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
 import { parseCli } from '../cli-arguments.mts';
@@ -48,7 +48,7 @@ from astropy.io import fits
 h=fits.PrimaryHDU(np.ones((2,1,1000003),dtype='float32'));h.data[1]*=3
 for k,v in {'BUNIT':'Jy','CTYPE3':'WAVE','CUNIT3':'um','CRVAL3':1.,'CRPIX3':1.,'CDELT3':1.}.items():h.header[k]=v
 h.writeto(sys.argv[1])`,file],{env:{...process.env,...tc.env}});
-    const {sciencePackage}=await import('@cssearth/telescope/node');
+    const {sciencePackage}=await import('@cssearth/telescope-core/node');
     const answer=await sciencePackage({operation:'extract',path:file,hdu:0,kind:'band-image',band:[.5,2.5],arrayDirectory:resolve(root,'arrays')});
     assert.ok(!JSON.stringify(answer).includes('"values":['));
     execFileSync(tc.python,['-c',`import sys,numpy as np

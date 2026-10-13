@@ -1,7 +1,7 @@
 /** One readback owner for native source files and reducer products. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sciencePackage, fileSize } from '@cssearth/telescope/node';
+import { sciencePackage, fileSize } from '@cssearth/telescope-core/node';
 import { isisMetadata, pdsMetadata, parseNativeMetadata, type NativeMetadata } from '../products/native-metadata.mts';
 import { calibrationDependencies, verifyCalibrationDependencies } from '../requests/calibration-dependencies.mts';
 import { parseProductFacts } from './qualified-observations.mts';

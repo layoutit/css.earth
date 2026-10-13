@@ -1,6 +1,6 @@
-# @cssearth/telescope-cli
+# @cssearth/telescope
 
-The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. `package.json` exposes a `telescope` binary, not an HTTP API. The implementation is this package's `src/`; the library it builds on is [`@cssearth/telescope`](../telescope/README.md#library).
+The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. `package.json` exposes a `telescope` binary, not an HTTP API. The implementation is this package's `src/`; the library it builds on is [`@cssearth/telescope-core`](../telescope-core/README.md#library).
 
 The package supplies the command, not the observatory pipelines or catalogue. It needs a **css.earth science checkout** with the telescope API, source manifests and any required Python environments. Pass `--workspace PATH` or set `CSSEARTH_WORKSPACE`; inside the checkout it finds the workspace automatically and runs the checkout's `packages/telescope-cli/src/cli.mts` with the same arguments, TTY state and exit code. Caches stay in the checkout; deliveries go to your `--out` directory. npm installation does not download a checkout, install Python or run pipelines. Updating the npm package does not update the checkout's science code. `telescope --version` reports the wrapper version; each product receipt records the scientific software and inputs used.
 
@@ -11,8 +11,8 @@ Use Node 22.18+ (22.x) or Node 24+. Run `node packages/telescope-cli/src/toolcha
 Inside the repository, use `pnpm telescope --help`. To test the distributable:
 
 ```sh
-pnpm --filter @cssearth/telescope-cli pack --pack-destination .
-npm install -g ./cssearth-telescope-cli-0.2.0.tgz
+pnpm --filter @cssearth/telescope pack --pack-destination .
+npm install -g ./cssearth-telescope-0.2.0.tgz
 export CSSEARTH_WORKSPACE=/path/to/css.earth
 ```
 
@@ -179,7 +179,7 @@ The [output oracle](src/delivery/output-oracle.mts) reads the pinned FITS data i
 
 ```sh
 output/toolchains/astroquery/env/bin/python -m venv --system-site-packages work/telescope-oracles/env
-work/telescope-oracles/env/bin/python -m pip install -c packages/telescope/toolchains/requirements.lock -r packages/telescope/toolchains/oracle-requirements.txt
+work/telescope-oracles/env/bin/python -m pip install -c packages/telescope-core/toolchains/requirements.lock -r packages/telescope-core/toolchains/oracle-requirements.txt
 node packages/telescope-cli/src/delivery/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
 CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test packages/telescope-cli/src/delivery/cube-outputs.test.mts
 ```
@@ -193,4 +193,4 @@ Renderer runtime exceptions are file-scoped in [the architecture rule](../../.gi
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
 
-Sphere export imports the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.
+Sphere export imports the built `@cssearth/telescope/sphere/lane` entry from `dist`. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope build` before exporting again.

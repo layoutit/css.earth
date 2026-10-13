@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseProductRecord } from '@cssearth/objects';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 
 export const IHW_LEDGER_SCHEMA = 'cssearth-ihw-ledger@1';

@@ -28,7 +28,7 @@ import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isRecord } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 import { ASSUMED_TILT_DEGREES, brightnessMaps, brightnessTable } from './map.mts';
 import { HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId } from '@cssearth/astronomy';
 import { kepseismicAt, readKepseismic } from '../kepler/kepseismic.mts';

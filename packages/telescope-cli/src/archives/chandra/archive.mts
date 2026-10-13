@@ -27,7 +27,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { tapRows, WORKSPACE } from '@cssearth/telescope/node';
+import { tapRows, WORKSPACE } from '@cssearth/telescope-core/node';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/chandra/programs');

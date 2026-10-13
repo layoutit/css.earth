@@ -17,7 +17,7 @@
  * estimate the sky for itself measures something else and shifts every pixel by it. Only a product whose exposure records no
  * subtracted sky is attempted, and it is drizzled with the sky step off.
  *
- * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope/src/product-record.ts):
+ * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope-core/src/product-record.ts):
  * what went in (this run's calibrated exposure, and the archive files whose headers stated the settings and the sky), the
  * settings themselves, and the drizzlepac and CRDS versions the run reported. Its evidence list is empty; compare.mts adds the agreement with the archive's own drizzled product. */
 import { mkdir, readdir } from 'node:fs/promises';
@@ -25,8 +25,8 @@ import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastFile, freeMemoryPercent, toolchainPython, fileSize, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath } from '@cssearth/telescope';
+import { mastFile, freeMemoryPercent, toolchainPython, fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
+import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { suffixOf, type HstObservation, type HstProgram } from './archive.mts';
 import { hstSoftware, MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';

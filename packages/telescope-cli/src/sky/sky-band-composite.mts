@@ -4,7 +4,7 @@
  * Each band is divided by its own measured range, the usual survey false-color practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
 import { parseTilePins, type WiseBand } from '@cssearth/objects';
-import { plainName } from '@cssearth/telescope/node';
+import { plainName } from '@cssearth/telescope-core/node';
 import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rename, rm, writeFile, stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';

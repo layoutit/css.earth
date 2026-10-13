@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { PNG } from 'pngjs';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { plotNumericPreview, WORKSPACE } from '@cssearth/telescope/node';
+import { plotNumericPreview, WORKSPACE } from '@cssearth/telescope-core/node';
 
 const root=WORKSPACE;
 

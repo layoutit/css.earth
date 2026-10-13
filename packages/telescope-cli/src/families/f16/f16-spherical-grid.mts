@@ -3,7 +3,7 @@ import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { astroqueryToolchain, WORKSPACE } from '@cssearth/telescope/node';
+import { astroqueryToolchain, WORKSPACE } from '@cssearth/telescope-core/node';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
 import type { FamilyHandler, FamilyOperation } from '../../family-handler.mts';
 import type { DescriptorMember, ProductDescriptor } from '../../products/product-descriptor.mts';

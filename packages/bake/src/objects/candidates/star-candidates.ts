@@ -14,7 +14,7 @@
  * survey of 87 stars also publishes level-3 visibilities with closure phases, but not enough resolution elements on any one
  * disc for an image. */
 import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations, measuredDiameters } from './archive-search.ts';
-import { astroqueryRows } from '@cssearth/telescope/node';
+import { astroqueryRows } from '@cssearth/telescope-core/node';
 
 
 const SIMBAD = 'https://simbad.cds.unistra.fr/simbad/sim-tap', OIDB = 'https://tap.jmmc.fr/vollt/tap', VIZIER = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap';

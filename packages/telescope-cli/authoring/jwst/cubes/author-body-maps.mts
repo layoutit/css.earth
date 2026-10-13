@@ -19,17 +19,17 @@
  * --check writes nothing and fails if any file would change. */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { BODY_MAP_SCHEMA, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
-import { selectedProductInput } from '@cssearth/telescope-cli/selected-product';
-import type { ObservationSelection } from '@cssearth/telescope-cli/query-contract';
+import { selectedProductInput } from '@cssearth/telescope/selected-product';
+import type { ObservationSelection } from '@cssearth/telescope/query-contract';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { horizonsTables, horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { placeResolvedDisc, bandDepth, openSpectralCube, type Window, combineUnderPolicy, renderBodyMapProduct, bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { mastFile } from '@cssearth/telescope/node';
-import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
+import { mastFile } from '@cssearth/telescope-core/node';
+import { readImagingProgram } from '@cssearth/telescope/archives/jwst/imaging/image3';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
 const REPOSITORY = checkoutProjectRoot(import.meta.url);

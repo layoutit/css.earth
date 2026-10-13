@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { parseRawFrames, planPionierNight } from './calibrate-pionier.mts';
 import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { matchVis2 } from './author-comparison.mts';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { WORKSPACE } from '@cssearth/telescope-core/node';
 
 const repository = WORKSPACE;
 const fixture = resolve(import.meta.dirname, 'fixtures/pionier-2014-09-25-raw-frames.csv');

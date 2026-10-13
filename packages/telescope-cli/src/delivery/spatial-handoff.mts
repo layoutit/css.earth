@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
 import { VERSION } from '../help.mts';
-import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { writeProductRecord, WORKSPACE } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 
 type SpatialLoader = Partial<Pick<typeof import('@cssearth/renderer/stars/loader.ts'), 'loadPreparedCssPointField'>

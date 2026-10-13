@@ -30,7 +30,7 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { archivePrograms } from '../programs.mts';
 import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
-import { mastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
+import { mastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope-core/node';
 
 /** The pinned time-series programs, one directory each, and the joint fits of several visits, sit beside this code. */
 export const JWST_PROGRAMS = archivePrograms('jwst');

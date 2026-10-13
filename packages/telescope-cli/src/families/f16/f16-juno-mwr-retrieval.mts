@@ -8,8 +8,8 @@
  */
 import { copyFile, mkdir, stat } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { pds3Values } from '@cssearth/telescope';
-import { fileSize } from '@cssearth/telescope/node';
+import { pds3Values } from '@cssearth/telescope-core';
+import { fileSize } from '@cssearth/telescope-core/node';
 import type { FamilyHandler, FamilyOperation } from '../../family-handler.mts';
 import type { AxisDescriptor, DescriptorIssue, DescriptorMember, ProductComponent, ProductDescriptor, UncertaintyDescriptor } from '../../products/product-descriptor.mts';
 import { assertPlanetaryProductSemantics, planetaryOutputPolicy } from '../../planetary-depth-policy.mts';

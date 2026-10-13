@@ -17,7 +17,7 @@ import { sampleAgreement } from './sample-agreement.mts';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { mastRequest } from '@cssearth/telescope/node';
+import { mastRequest } from '@cssearth/telescope-core/node';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
 import { JWST_IMAGING_PROGRAMS } from './imaging/archive.mts';
 import { JWST_PROGRAMS } from './reduce-tso.mts';
