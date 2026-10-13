@@ -19,25 +19,27 @@ The [recipe](source/circumstellar.json) fixes these inputs and the display choic
 - **Native image:** peak 6.483 mJy per beam, against the paper’s 6.48 ± 0.03. Noise measured here is 11.03 µJy per beam, against its 11. The propagated star is at native pixel `(802.454, 839.061)`; the brightest native pixel is `(802, 839)`.
 - **Spatial prior:** the measured-profile disc projects to the image with an RMS residual of 49.3 µJy per beam. A single Gaussian belt leaves 311, a spherical shell 223, and constant depth 349. These comparisons use the same image samples and 128 line-of-sight samples; they select a spatial approximation, not a measured third axis.
 - **Brightness colors:** the underlying vector bar in Figure 2(b) supplies 256 colors. Its nine printed flux ticks calibrate a power display of about 0.55. Seven ticks fit the curve; the withheld 0.6 and 3.0 mJy-per-beam ticks differ by 0.012 and 0.004 µJy per beam. The worst error over all nine is 0.026 µJy per beam. Tick strokes are excluded from the colors, avoiding false black bands.
-- **Prepared field:** 512 cells sample the sky image across 360 au, at 0.703 au per cell, close to the native 0.7 au pixel spacing. The unencoded observation columns are placed directly in a 1024 × 1024 × 35 grid aligned with the published disc plane, at 0.352 au planar spacing, retaining six Gaussian scale heights on either side. Its 60 X, 60 Y and 35 Z slabs use 1024-pixel textures. There is no encoded cubic field to rotate and resample between the observation and this grid. Every color channel shares one normalized depth profile. Runtime receives the baked textures, not FITS data or a geometry recipe.
+- **Prepared field:** 512 cells sample the sky image across 360 au, at 0.703 au per cell, close to the native 0.7 au pixel spacing. The unencoded observation columns are placed directly in a 1024 × 1024 × 35 grid aligned with the published disc plane, at 0.352 au planar spacing, retaining six Gaussian scale heights on either side. The disc is drawn as sheets parallel to that plane: the grid’s 12 au of height is cut into nine, and the five that hold light are drawn, at 0, ±1.33 and ±2.67 au, from 1024-pixel textures. Nothing is cut across the plane. There is no encoded cubic field to rotate and resample between the observation and this grid. Every color channel shares one normalized depth profile. Runtime receives the baked textures, not FITS data or a geometry recipe.
 
 The [source preview](source/previews/dust.png) shows the sampled observation in the calibrated brightness colors, north up and east left:
 
 ![ALMA Band 6 observation sampled in the calibrated brightness display](source/previews/dust.png)
 
-The browser renders the disc as retained 3D slabs. These full-page Chrome captures show the observed inclination and an almost edge-on view, at the same camera distance:
+- **Opacity:** a column keeps the scale’s hue, and its opacity follows its brightness across the scale’s range, not the brightness of its color. Taken from the color, the gap near 64 au, 4% of the top of the scale, was 62% opaque and the median drawn line of sight 0.64; now that gap is 11% opaque, the median line of sight is 0.11, nine in ten are under 0.34, and the brightest still reaches 0.95.
+
+The browser renders the disc as five retained sheets. These full-page Chrome captures show the observed inclination and a steeply turned view, at the same camera distance:
 
 ![HL Tauri disc in the shared 3D scene](evidence/disc-inclined.png)
 
-![The modeled thin disc viewed almost edge-on](evidence/disc-edge-on.png)
+![The modeled thin disc turned steeply toward edge-on](evidence/disc-edge-on.png)
 
-The native-detail bake passes its pixel-contrast and physical-orientation checks. A cache-free replay reproduces all 34 prepared files byte for byte. The browser keeps the same 450 resident bank nodes during the three inspected camera poses, below the 500-element budget. These checks establish preparation and retained rendering, not a frame-rate measurement.
+The native-detail bake passes its pixel-contrast and physical-orientation checks. The bank is 34 files and 457,344 bytes, and the browser keeps the same 59 nodes inside the bank’s element during sixteen inspected camera poses. Drawn as 60, 60 and 35 slabs across its three axes it was 36 files, 862,094 bytes and 419 nodes. The earlier bake’s cache-free replay was not repeated for this one. These checks establish preparation and retained rendering, not a frame-rate measurement.
 
 ## Known problems
 
 The observation has two spatial axes. Depth is a thin-disc prior on the published plane, and a constant 1 au height simplifies Pinte et al.’s grain-dependent settling model. Southwest is drawn nearer as a stated tilt-sign convention; this continuum image alone cannot determine the nearer side.
 
-The colors represent millimeter brightness. Volume opacity and the browser’s eight-bit compositing are display approximations, so the scene is not a quantitative dust-mass or radiative-transfer model. Nothing finer than the restoring beam or prepared sampling is claimed. Dark gaps retain the emission the image measures, rather than becoming invented empty holes.
+The colors represent millimeter brightness. Opacity follows that brightness as a display choice, so the disc is fainter here than in the paper’s figure. It and the browser’s eight-bit compositing are display approximations, so the scene is not a quantitative dust-mass or radiative-transfer model. A sheet has no area seen exactly edge-on, so the disc, about 1 au deep and 280 au across, is not drawn there; the second capture is a steep view short of it. Nothing finer than the restoring beam or prepared sampling is claimed. Dark gaps retain the emission the image measures, rather than becoming invented empty holes.
 
 The published color-bar caption says −2 rms at its low end, but the actual vector bar and printed tick positions reproduce +2 rms. The calibration follows those nine ticks, giving 0.022 to 5.832 mJy per beam; its measurements and fitted curve are preserved in the [color-map record](source/alma-2015-figure-2-colormap.json).
 
@@ -50,7 +52,7 @@ The published color-bar caption says −2 rms at its low end, but the actual vec
 
 The eight-ring fit fixes the common plane; B5’s radius scales the height convention, not the full disc extent. The native image’s deprojected radial profile weights each line of sight on that plane, while the image itself supplies each displayed column. This preserves the observed offsets and asymmetries in the reference view. A single Gaussian belt is only a diagnostic baseline and may reach its search boundary; the accepted profile still has to beat that baseline, a spherical shell and constant depth.
 
-The aligned grid carries its rotation in the existing prepared physical frame. Its 1 au height is preserved; no thickness is added to hide sampling defects. Its column integrals set the intended opacity before eight-bit encoding and slab compositing, which remain display approximations. The offline arrival photograph includes the selected hosted bank and frames its extent, so the disc is visible on arrival as well as after opening its dataset.
+The aligned grid carries its rotation in the existing prepared physical frame. Its 1 au height is preserved; no thickness is added to hide sampling defects. Its column integrals set the intended opacity before eight-bit encoding and sheet compositing, which remain display approximations. The offline arrival photograph includes the selected hosted bank and frames its extent, so the disc is visible on arrival as well as after opening its dataset.
 
 The display fades all channels together from one to two times the measured noise and tapers from where the radial median reaches that noise, 140 au. The top of the brightness display reaches alpha 0.95, an explicit display choice. No planets, jets or surrounding cloud are inferred from this image.
 

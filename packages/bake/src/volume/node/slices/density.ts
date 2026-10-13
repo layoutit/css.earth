@@ -149,6 +149,8 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
     const uLower = grid.bounds.min[horizontal], uUpper = grid.bounds.max[horizontal];
     const vLower = grid.bounds.min[vertical], vUpper = grid.bounds.max[vertical];
     const width = bake.imageWidth, height = Math.max(1, Math.round(width * (vUpper - vLower) / (uUpper - uLower)));
+    // An axis without slabs has no stack (recipe bake.sliceCounts).
+    if (counts[axis] === 0) continue;
     const slabWidth = (upper - lower) / counts[axis];
     pitches[axis] = slabWidth * scale;
     await mkdir(resolve(options.outputDirectory, 'slices', axis), { recursive: true });
@@ -183,7 +185,7 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
     }
     console.log(`Prepared ${counts[axis]} ${axis.toUpperCase()} scalar-field slabs.`);
   }
-  for (const axis of axes) if (!quads.some(q => q.axis === axis && q.alphaCoverage > 0)) throw new TypeError(`Empty ${axis} volume stack.`);
+  for (const axis of axes) if (counts[axis] > 0 && !quads.some(q => q.axis === axis && q.alphaCoverage > 0)) throw new TypeError(`Empty ${axis} volume stack.`);
   const boundsUnits: Bounds3 = { min: [grid.bounds.min[0] * scale, grid.bounds.min[1] * scale, grid.bounds.min[2] * scale],
     max: [grid.bounds.max[0] * scale, grid.bounds.max[1] * scale, grid.bounds.max[2] * scale] };
   const result: VolumeSlices = { quads, boundsUnits, provenance: source.provenance, approximation: {

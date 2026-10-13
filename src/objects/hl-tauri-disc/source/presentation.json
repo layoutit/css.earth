@@ -31,7 +31,7 @@
         {
           "id": "color",
           "label": "Color",
-          "value": "Brightness in mJy/beam, from 0.02200699970963679 to 5.832045807837766, in the publisher's color map"
+          "value": "Brightness in mJy/beam, from 0.02200699970963679 to 5.832045807837766, in the publisher's color map; opacity follows the brightness"
         },
         {
           "id": "ring",

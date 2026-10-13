@@ -13,6 +13,7 @@ import { mountGalaxyBacking } from './galaxy-backing.js';
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { afterStartup } from '../rendering/loading/startup-gate.js';
 import { catalogueDotsOpacity, galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
+import { starFieldAroundPicture } from './context-presentation-policy.js';
 
 const PARSEC_M = 3.085677581491367e16;
 /** From among the local stars the flat face-on image is seen edge-on, a line across the view: it fades in as the camera
@@ -109,7 +110,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       if (typeof target?.fetch === 'function') void prefetchPreparedResources(prefetchUrls, target.fetch.bind(target), prefetchAbort.signal);
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, distanceM: number,
-      selectedPositionM: readonly number[], detailContextOpacity: number, withoutM: readonly (readonly number[])[] | null = null): number {
+      selectedPositionM: readonly number[], detailContextOpacity: number, withoutM: readonly (readonly number[])[] | null = null, attachedReachM = 0): number {
       if (lifetime.disposed) return 0;
       // Every placed body starts inside the galaxy, so its own distance gates the volume.
       const volumeDistanceM = eyeDistanceM(world.pose, selectedPositionM);
@@ -139,7 +140,8 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // The catalogue dots are the stars around the Solar System (starFieldFade), whole before the host stars give way to
       // them past the system (world-context-planner.ts); measured like them from the selected body. A detailed focus (a
       // nebula's or a galaxy's picture) keeps them, as it keeps the stars' markers: they are the sky around it.
-      const starField = starFieldFade(volumeDistanceM, plan.system);
+      // Around a body a picture is attached to (a star's disc) they stay faint while the picture fills the view, as the markers do.
+      const starField = starFieldAroundPicture(starFieldFade(volumeDistanceM, plan.system), volumeDistanceM, attachedReachM);
       const shownDots = catalogueDotsOpacity(starField);
       // A star the world draws as a body is its marker's to draw: its own dot in the galaxy's bank is left out.
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots, withoutM);

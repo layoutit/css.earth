@@ -11,6 +11,8 @@ export interface VolumeSliceQuad {
   uvs: [[number, number], [number, number], [number, number], [number, number]];
   center: Vector3; normal: Vector3; bytes: number; alphaCoverage: number;
   slab?: VolumeSlabInterval;
+  /** A sheet on a plane of its own, drawn with its stack: it is not parallel to the stack's slabs. */
+  tilted?: true;
 }
 export interface VolumeSlices {
   quads: VolumeSliceQuad[]; boundsUnits: Bounds3; provenance: unknown;

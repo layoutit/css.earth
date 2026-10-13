@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gw-orionis-disc",
+  "entries": [
+    {
+      "id": "dataset-dust",
+      "status": "included",
+      "subject": "Authors’ deposited 1.3 mm continuum image",
+      "finding": "The FITS image Kraus et al. deposited is obtainable and is read unchanged, with its own world coordinates, units and restoring beam. Its reference pixel is 80 mas north of the star, so the star is placed from its Gaia position and proper motion; the ring centres measured on the image then lie within 13 mas of it.",
+      "evidence": [
+        "README.md",
+        "source/circumstellar.json"
+      ]
+    },
+    {
+      "id": "outer-plane",
+      "status": "included",
+      "finding": "The plane the paper fits to the middle ring carries both outer rings and the faint dust between them. The paper’s plane for the outer ring differs by one degree, inside both fits’ errors. The full measured radial profile supplies the rings; depth remains a published plane.",
+      "evidence": [
+        "README.md",
+        "source/provenance.json"
+      ]
+    },
+    {
+      "id": "inner-ring-plane",
+      "status": "included",
+      "finding": "The inner ring is drawn in the plane the paper derives for it from the shadows it casts in scattered light, 49 degrees from the outer plane. Its light is what the image holds above the level of the gap beyond it. The plane’s published errors are 16 degrees in tilt and 30 degrees in direction, and the near sides follow the paper’s Figure S10.",
+      "evidence": [
+        "README.md",
+        "source/provenance.json"
+      ]
+    },
+    {
+      "id": "node-convention",
+      "status": "included",
+      "finding": "Table S6 calls the southern node ascending while its caption says the northern part recedes, so the near sides are taken from Figure S10 and the main text, which agree: the outer rings’ eastern side and the inner ring’s southern side are nearer. The angle between the planes does not depend on that choice.",
+      "evidence": [
+        "README.md"
+      ]
+    },
+    {
+      "id": "opacity-follows-brightness",
+      "status": "included",
+      "finding": "The paper’s color scale is a 0.285 power. Opacity taken from the displayed color made the dust between the rings, 3.3% of the top of the scale, 82% opaque, with a median line of sight at 0.84. Opacity now follows the measured brightness and the column keeps the scale’s hue; the median line of sight is 0.125.",
+      "evidence": [
+        "source/circumstellar.json",
+        "source/provenance.json"
+      ]
+    },
+    {
+      "id": "single-gaussian-belt",
+      "status": "excluded",
+      "finding": "A one-belt fit, a spherical shell and constant depth are kept as baselines. The two-plane measured-profile model has to beat all three, and does.",
+      "evidence": [
+        "source/provenance.json"
+      ],
+      "revisitWhen": "A distinct single-belt dataset is selected."
+    },
+    {
+      "id": "deposit-license",
+      "status": "deferred",
+      "finding": "The authors’ deposit states no license. The image is credited to ALMA and the paper, and the underlying observations are public in the ALMA Science Archive.",
+      "evidence": [
+        "NOTICE.md",
+        "https://sourceforge.net/projects/aba4633/"
+      ],
+      "revisitWhen": "The authors state terms, or the image is re-made here from the archive’s public visibilities."
+    },
+    {
+      "id": "triple-star-orbits",
+      "status": "deferred",
+      "finding": "The paper gives the orbits of the three stars (Table S5). They are drawn as one sphere here. The paper’s printed angle between the outer orbit and the disc was later corrected (Young 2025), so the orbits need their node convention settled against the rings before they are drawn.",
+      "evidence": [
+        "https://doi.org/10.1126/science.aba4633"
+      ],
+      "revisitWhen": "The stars are drawn as three bodies."
+    },
+    {
+      "id": "warped-surface",
+      "status": "deferred",
+      "finding": "The paper models a warped surface between the middle and inner rings from scattered light. It is a scattered-light model, not millimeter emission, and the faint millimeter dust there is kept in the outer plane, as the paper’s own fit to this image places it.",
+      "evidence": [
+        "https://doi.org/10.1126/science.aba4633"
+      ],
+      "revisitWhen": "A scattered-light dataset is added."
+    },
+    {
+      "id": "deposited-3d-model",
+      "status": "deferred",
+      "finding": "The deposit also holds the paper’s interactive model (3dmodel/kraus.gwori.3dmodel.u3d) and its simulation outputs. Neither was opened.",
+      "evidence": [
+        "https://sourceforge.net/projects/aba4633/"
+      ],
+      "revisitWhen": "The model’s surfaces or the simulation are wanted as a dataset of their own."
+    }
+  ]
+}

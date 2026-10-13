@@ -21,6 +21,7 @@ export interface VolumeRecipe {
     /** Shared opacity preserves constant RGB ratios through ordinary source-over; no extinction. */
     emissionTransfer?: 'independent-channels' | 'shared-opacity';
     displayColorMatrix?: DisplayColorMatrix; stepMetric?: 'source' | 'texture'; cylinderSupport?: { axis: Axis; radiusSquared: number }; };
+  /** `sliceCounts`: an axis with 0 has no stack. A thin disc drawn as sheets has slabs across its thickness only. */
   bake: { sliceCounts: Record<Axis, number>; unitsPerSourceUnit: number; imageWidth: number;
     samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
   hybrid?: { coreRadiusUnits: number; fadeStartUnits: number };
@@ -80,7 +81,8 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   const dimensions = triple(g.dimensions, 'dimensions');
   if (dimensions.some(n => !Number.isInteger(n) || n < 1)) throw new TypeError('Dimensions must be positive integers.');
   if (g.encoding !== 'sqrt-density-unorm8' && g.encoding !== 'linear-density-unorm8') throw new TypeError('Unsupported density encoding.');
-  const counts = record(b.sliceCounts, 'sliceCounts');
+  const counts = record(b.sliceCounts, 'sliceCounts'), count = (value: unknown, at: string) => value === 0 ? 0 : positive(value, at, true);
+  if (counts.x === 0 && counts.y === 0 && counts.z === 0) throw new TypeError('sliceCounts must give one axis slabs; drawSlices: false draws none.');
   if (typeof b.cropTransparent !== 'boolean') throw new TypeError('cropTransparent must be boolean.');
   const p = record(r.provenance, 'provenance');
   const sky = r.sky === undefined ? undefined : record(r.sky, 'sky recipe');
@@ -133,7 +135,7 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
       ...(m.emissionTransfer === undefined ? {} : { emissionTransfer: m.emissionTransfer }),
       ...(m.stepMetric ? { stepMetric: m.stepMetric } : {}), intensityScale: positive(m.intensityScale, 'intensityScale'),
       stepScale: positive(m.stepScale, 'stepScale'), exposureGain: positive(m.exposureGain, 'exposureGain') },
-    bake: { sliceCounts: { x: positive(counts.x, 'x count', true), y: positive(counts.y, 'y count', true), z: positive(counts.z, 'z count', true) },
+    bake: { sliceCounts: { x: count(counts.x, 'x count'), y: count(counts.y, 'y count'), z: count(counts.z, 'z count') },
       unitsPerSourceUnit: positive(b.unitsPerSourceUnit, 'unitsPerSourceUnit'), imageWidth: positive(b.imageWidth, 'imageWidth', true),
       samplesPerSlab: positive(b.samplesPerSlab, 'samplesPerSlab', true), cropTransparent: b.cropTransparent,
       opticalWeight: positive(b.opticalWeight, 'opticalWeight'), ...(imageEncoding ? { imageEncoding } : {}) }, anchors,

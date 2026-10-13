@@ -80,6 +80,8 @@ The compiler uses west/north/away angular coordinates. Delivery reflects physica
 
 The seven dataset-bank objects pack each dataset's X/Y/Z slices into three WebP atlases at color quality 80, alpha quality 80, effort 4, with two-pixel clamped gutters. Three requests replace hundreds of slice requests per dataset. Atlas compression does not reduce decoded memory or the number of rendered planes, and it is lossy, including alpha.
 
+A disc around a star is far thinner than it is wide: HL Tauri's millimeter dust is about 1 au deep and 280 au across. Its recipe gives slabs across its thickness only (`bake.sliceCounts` of 0 on the other two axes), so its bank holds one stack of five sheets in one atlas, where three stacks of slabs held 125. A stack without leaves takes no part in the choice of view, so the sheets draw at every angle; seen exactly edge-on a sheet has no area. A delivery grid's `tilted` recipes add sheets on another plane through the same origin, as the inner ring of GW Orionis is tilted from its outer rings; they are drawn with the grid's stack.
+
 Each slab is cropped to its emission, so decoded atlas size follows how much of its bounds a cloud fills. Compiler slabs are 512 pixels wide unless a scene's saved sampling names a smaller `imageWidth` (128 to 512). The Crab saves 256: its diffuse emission fills every slab, and its sampled grid has 256 cells along the longest axis, so a wider slab only interpolates between cells. At 512 its three atlases per dataset were 30 to 34 megapixels each, about 390 MB decoded, and failed to decode in a memory-limited browser; at 256 they are 7.6 to 8.6.
 
 ![The Crab zoomed in, 512-pixel slabs on the left and 256 on the right](../images/nebulae/crab-slab-width.jpg)

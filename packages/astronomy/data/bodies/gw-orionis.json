@@ -1,0 +1,30 @@
+{
+ "id": "gw-orionis",
+ "classification": "star",
+ "order": 5849,
+ "physical": {
+  "name": "GW Orionis",
+  "horizonsCode": null,
+  "meanRadiusKm": 5308544.4,
+  "gravitationalParameterKm3PerS2": 698067434620.6011,
+  "parent": null,
+  "effectiveTemperatureK": 5500
+ },
+ "physicalNotes": "Radius 7.630508 solar radii from Model radius derived from Kraus et al. (2020), Table S3: L = 48 solar luminosities and T = 5500 K; R/Rsun = sqrt(48) (5772/5500)^2, using the IAU nominal solar temperature. The luminosity is the unresolved light of three stars, so this is the sphere that would give that light, not a measured stellar radius (https://doi.org/10.1126/science.aba4633): 5,308,544 km at 695,700 km per solar radius. Mass 5.26 solar masses from Kraus et al. (2020), Table S5: total dynamical mass of the three stars, 5.26 +/- 0.22 solar masses, from their astrometric and radial-velocity orbits (https://doi.org/10.1126/science.aba4633); GM is that mass times the JPL solar GM. Temperature 5500 K from Kraus et al. (2020), Table S3: adopted effective temperature (https://doi.org/10.1126/science.aba4633). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 82.28495961818513,
+  "declinationDegrees": 11.870183369136457,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 388,
+  "properMotionRaMasPerYear": -2.3511565796838805,
+  "properMotionDecMasPerYear": -0.3955120982187666,
+  "radialVelocityKmPerS": 27.96,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3340856533286969600 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gw-orionis/source/photometry/gaia-dr3-source.csv; cross-identification HD 244138, HIP 25689: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3340856533286969600",
+   "distance": "Kraus et al. (2020), Table S3: adopted distance, 388 +/- 5 pc, the one the paper's ring radii in astronomical units assume (https://doi.org/10.1126/science.aba4633): 388 pc; Gaia DR3 parallax 2.4510 +/- 0.0623 mas (same row, RUWE 4.23), 39.3 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -2.351, -0.396 mas/yr",
+   "radialVelocity": "Kraus et al. (2020), Table S5: velocity of the system's centre of mass, +27.96 +/- 0.12 km/s (https://doi.org/10.1126/science.aba4633)"
+  }
+ }
+}

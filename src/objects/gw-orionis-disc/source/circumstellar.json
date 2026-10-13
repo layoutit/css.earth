@@ -1,0 +1,120 @@
+{
+  "schema": "cssearth-circumstellar-volume@2",
+  "id": "gw-orionis-disc",
+  "host": "gw-orionis",
+  "name": "GW Orionis broken disc",
+  "description": "The three dust rings around the triple star GW Orionis, in their own emission at 1.3 millimeters, observed by ALMA. The image supplies the rings; two published planes supply their depth: the outer rings share one, and the inner ring lies in another, tilted 49 degrees from it.",
+  "sourceUrl": "https://sourceforge.net/projects/aba4633/",
+  "credit": "ALMA (ESO/NAOJ/NRAO), projects 2018.1.00813.S and 2012.1.00496.S; Kraus et al. (2020), Science 369, 1233",
+  "license": {
+    "spdx": "LicenseRef-No-License-Stated",
+    "url": "https://sourceforge.net/projects/aba4633/",
+    "note": "The authors' deposit of their reduced image states no license. It is their reduction of public ALMA observations, credited with the ALMA acknowledgement and the paper."
+  },
+  "grid": {
+    "size": 512,
+    "halfUnits": 700,
+    "slabs": 120,
+    "alignedDiscHalfHeightUnits": 16,
+    "sheets": 1
+  },
+  "defaultDataset": "dust",
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · broken disc, 1.3 mm",
+      "title": "GW Orionis’s three dust rings in ALMA’s 1.3 millimeter emission",
+      "summary": "Three dust rings around a triple star, the inner one in a plane of its own.",
+      "description": "ALMA resolves three rings of dust around the three stars of GW Orionis. The authors’ FITS continuum image supplies their brightness and structure. The two outer rings are drawn in the plane Kraus et al. fit to the middle ring, tilted 37 degrees with its eastern side nearer. The inner ring is drawn in the plane the same paper derives for it from the shadows it casts in scattered light, tilted 25 degrees with its southern side nearer, 49 degrees from the outer plane; that plane carries the paper’s uncertainties of 16 degrees in tilt and 30 degrees in direction. Thickness is a stated thin layer for the outer rings and the paper’s model value for the inner ring, not a measured third axis. The rings are thermal emission at 1.3 millimeters, shown in the paper’s brightness color scale. The three stars, 1.2 and 8.9 astronomical units apart, are one sphere, and the warped surface the paper models between the middle and inner rings is not drawn.",
+      "program": "",
+      "archive": {
+        "band": "ALMA-B6-CONT",
+        "path": ".local/gw-orionis-disc/observations/kraus.gwori.ALMA.fits",
+        "url": "https://sourceforge.net/projects/aba4633/files/ALMA/kraus.gwori.ALMA.fits/download",
+        "landing": "https://sourceforge.net/projects/aba4633/",
+        "bytes": 67118400,
+        "unit": "Jy/beam",
+        "filter": "Band 6 continuum, 225 GHz (1.3 mm)",
+        "instrument": "ALMA 12-m array",
+        "observed": "5 July 2019 (project 2018.1.00813.S), combined with shorter baselines of project 2012.1.00496.S; FITS DATE-OBS 2015-05-14T20:43:00.335999",
+        "title": "Kraus et al. (2020) deposit · ALMA/kraus.gwori.ALMA.fits (self-calibrated 1.3 mm continuum image, 24.9 by 19.9 mas beam)",
+        "credit": "ALMA (ESO/NAOJ/NRAO), projects 2018.1.00813.S and 2012.1.00496.S; Kraus et al. (2020), Science 369, 1233",
+        "displayCredit": "ALMA (ESO/NAOJ/NRAO), Kraus et al.",
+        "license": "The authors’ deposit (SourceForge project aba4633, named in the paper’s data statement) states no license. The image is their reduction of public ALMA observations.",
+        "acquisition": "The unchanged FITS file ALMA/kraus.gwori.ALMA.fits of the authors’ deposit, https://sourceforge.net/projects/aba4633/, downloaded from its file page.",
+        "limitation": "This is the paper’s own self-calibrated image, with a 24.9 by 19.9 mas restoring beam and 4.9 mas pixels. Its header names the first of the combined observations, in 2015; the star is placed where its Gaia position and proper motion put it on that day, and the ring centres measured on the image then lie within 13 mas of it. Each displayed sky column keeps the image’s brightness; depth is two published planes and does not recover a three-dimensional dust distribution.",
+        "facility": {
+          "facilityId": "alma"
+        }
+      },
+      "geometry": "ring",
+      "colorMap": {
+        "path": "kraus-2020-figure-1-colormap.json",
+        "range": [
+          0,
+          0.8388602264623205
+        ],
+        "unitScale": 1000,
+        "unit": "mJy/beam",
+        "source": "Kraus et al. (2020), Science 369, 1233, Figure 1A, as printed in the accepted manuscript (ESO science paper eso2014a.pdf, page 20). Colors read up the figure’s color bar; its nine printed flux ticks calibrate a power transfer through zero. 1024 entries sample equal flux intervals. This is a false-color brightness display for millimeter emission, not visible color.",
+        "opacityFollowsBrightness": "The figure’s scale is a 0.285 power: it draws the dust between the rings, 3.3% of the top of the scale, at 56% red, and opacity taken from that color would make it 82% opaque. Opacity proportional to brightness keeps faint dust faint, so the rings are seen through it; the disc is therefore fainter here than in the paper’s figure."
+      },
+      "channels": {
+        "red": [
+          "ALMA-B6-CONT"
+        ],
+        "green": [
+          "ALMA-B6-CONT"
+        ],
+        "blue": [
+          "ALMA-B6-CONT"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: these are the dust’s own thermal-emission intensities in Jy per beam.",
+      "innerMaskArcsec": 0,
+      "innerMaskSource": "No coronagraph and no artificial central hole. The emission observed beside the stars remains in the image.",
+      "outerUnits": 470,
+      "backgroundAnnulusArcsec": [
+        2.5,
+        3.5
+      ],
+      "nearSidePositionAngleDeg": 90,
+      "nearSideSource": "Kraus et al. (2020): the eastern side of the disc is the brighter one in scattered light, which the paper reads as that side facing Earth, and its Figure S10(D) draws the outer rings’ eastern side nearer.",
+      "heightOfRadius": 0.01,
+      "adoptPublishedRing": "The plane Kraus et al. fit to the middle ring, R2, of this image supplies the outer disc’s plane, centred on the stars as their fit is. Their plane for the outer ring, R1, differs by one degree, inside both fits’ errors, and their extended component shares it. R2’s 182 au radius is a reference for the height only; every observed ring is kept through the measured radial profile.",
+      "noiseFade": {
+        "fromNoise": 1,
+        "toNoise": 2,
+        "source": "A stated display fade from one to two times the noise measured in the 2.5 to 3.5 arcsecond annulus. Every channel fades together."
+      },
+      "topAlpha": 0.95,
+      "published": {
+        "citation": "Kraus et al. (2020), Science 369, 1233, Table S6 (ring R2: radius 182 ± 12 au, inclination 143 ± 1°, that is 37° from face-on, node at position angle 180 ± 4°)",
+        "url": "https://doi.org/10.1126/science.aba4633",
+        "radiusUnits": 182,
+        "inclinationDeg": 37,
+        "positionAngleDeg": 180,
+        "toleranceDeg": 1,
+        "radiusTolerance": 0.05
+      },
+      "publishedProfileDisc": "The plane Kraus et al. fit to ring R2 fixes the outer disc’s plane. The full measured radial profile supplies both outer rings and the faint dust between them; a one-belt Gaussian is a diagnostic baseline, not the accepted spatial shape.",
+      "tiltedRing": {
+        "citation": "Kraus et al. (2020), Science 369, 1233, Table S6 (ring R3 with the scattered-light constraints: inclination 155 ± 16°, that is 25° from face-on, node at position angle 285 ± 30°, eccentricity 0.3 ± 0.1)",
+        "url": "https://doi.org/10.1126/science.aba4633",
+        "inclinationDeg": 25,
+        "positionAngleDeg": 105,
+        "nearSidePositionAngleDeg": 195,
+        "nearSideSource": "Kraus et al. (2020), Figure S10(F), which draws the ring’s southern side nearer; the main text says its eastern side is tilted away from us",
+        "skyCentreArcsec": [
+          0.0262,
+          -0.0054
+        ],
+        "skyCentreSource": "Kraus et al. (2020), Table S6: ring R3 offset 26.2 ± 0.25 mas east and 5.4 ± 0.15 mas south of the stars",
+        "heightUnits": 4.7,
+        "heightSource": "the ring of Kraus et al.’s scattered-light model, vertically extended by 10% of its radius, at its 47 au semi-major axis"
+      },
+      "envelopeDepthSamples": 384
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gw-orionis",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GW Orionis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5308544.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gw-orionis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GW Orionis",
+      "classification": "star",
+      "color": "#ffddc3",
+      "distanceAu": 80030807.8,
+      "description": "A triple star whose planet-forming disc is broken into rings that lie in different planes.",
+      "systemName": "GW Orionis system",
+      "aliases": [
+        "GW Ori",
+        "V* GW Ori"
+      ],
+      "order": 5849,
+      "context": {
+        "order": 5846
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1572887928262145300,
+        11610364465127762000,
+        2462669801100698000
+      ],
+      "presentationToReference": [
+        0.1313757369052611,
+        0.0276137887370157,
+        0.9909479776578523,
+        0.9697577048799081,
+        0.20383299107416564,
+        -0.13424643598923697,
+        0.2056949430069996,
+        -0.9786161609238561,
+        -2.5019325020314955e-8
+      ],
+      "orbitUpReference": [
+        -0.0276137887370157,
+        -0.20383299107416564,
+        0.9786161609238561
+      ],
+      "metersPerUnit": 17124336.774193548,
+      "bodyRadiusM": 5308544400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

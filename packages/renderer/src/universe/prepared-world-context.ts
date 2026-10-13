@@ -283,7 +283,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let selectedEntry = bodies[0]!;
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
   let anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
-  let systemRetired = false, systemRetiredByScope = false, galaxyRetiredByScope = false, orbitsOpacity = 1;
+  let systemRetired = false, systemRetiredByScope = false, galaxyRetiredByScope = false, orbitsOpacity = 1, selectionReachM = 0;
   // Whether the retired system's members may still be on the page: set by whatever attaches or paints one, cleared by
   // the pass that takes them off, so a retired system costs no walk of every body on every frame.
   let retirePending = true;
@@ -413,7 +413,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         contextCommittedId: contextFrames.committedId,
         selectedId: selectedEntry.body.id, overview, overviewSelection, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
         preserveCommittedAnnotations: rotationPhase === 'released',
-        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly, systemRetired: systemRetiredByScope, galaxyRetired: galaxyRetiredByScope, orbitsOpacity,
+        labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly, systemRetired: systemRetiredByScope, galaxyRetired: galaxyRetiredByScope, orbitsOpacity, selectionReachM,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         // Each body's presentation as it stands, copied for the planner's worker (the copy is transferred).
         bodyColumns: bodyColumns.slice() };
@@ -465,6 +465,20 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const next = quantizeAlpha(Math.min(1, Math.max(0, opacity)));
       if (next === orbitsOpacity || destroyed) return;
       orbitsOpacity = next;
+      invalidatePolicy();
+      refresh();
+    },
+    /** The selected body is a star with nothing in orbit: a system of one (loneStarOtherSystems). */
+    loneStarSelected(): boolean {
+      const body = selectedEntry.body;
+      return 'classification' in body && body.classification === 'star' && !('orbit' in body && body.orbit) && !systemFade.isSystemStar(body.id);
+    },
+    /** The radius of the picture attached to the selected body, a star's disc while its dataset shows; 0 for none. The other
+     * stars' bodies stay dimmed around a star with nothing in orbit while that picture fills the view (loneStarOtherSystems). */
+    setSelectionReach(reachM: number) {
+      const next = reachM > 0 ? reachM : 0;
+      if (next === selectionReachM || destroyed) return;
+      selectionReachM = next;
       invalidatePolicy();
       refresh();
     },
