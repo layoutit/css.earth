@@ -51,6 +51,12 @@ function managedReady(path: string): boolean {
   const result = spawnSync(path, ['--version'], { encoding: 'utf8', timeout: 10_000 });
   return !result.error && result.status === 0 && result.stdout.trim() === VERSION;
 }
+/** The stable 1.x CLI already supports create --platform, --dry-run/--json and list --explicit. */
+function compatibleOnPath(path: string): boolean {
+  const result = spawnSync(path, ['--version'], { encoding: 'utf8', timeout: 10_000 });
+  const version = /^(\d+)\.\d+\.\d+$/u.exec(result.stdout?.trim() ?? '');
+  return !result.error && result.status === 0 && version !== null && Number(version[1]) >= 1;
+}
 
 const pending = new Map<string, Promise<string>>();
 function alive(pid: number): boolean {
@@ -127,7 +133,7 @@ export async function resolveMicromamba(options: MicromambaOptions = {}): Promis
     return path;
   }
   const existing = await onPath('micromamba', env, platform);
-  if (existing) return existing;
+  if (existing && compatibleOnPath(existing)) return existing;
   const asset = micromambaAsset(platform, arch), directory = resolve(options.userRoot ?? USER_ROOT, 'micromamba', MICROMAMBA_RELEASE, asset);
   const path = resolve(directory, platform === 'win32' ? 'micromamba.exe' : 'micromamba');
   if (managedReady(path)) return path;

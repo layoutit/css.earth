@@ -617,7 +617,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
-      CSS_EARTH_ASTROQUERY_CACHE: /home/runner/.cache/css-earth/astroquery
+      CSSEARTH_TELESCOPE_HOME: /home/runner/.cache/cssearth-telescope
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -636,7 +636,7 @@ jobs:
           python-version: '3.12'
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
-          path: ~/.cache/css-earth/astroquery
+          path: ${{ env.CSSEARTH_TELESCOPE_HOME }}/astroquery
           key: astroquery-${{ runner.os }}-${{ hashFiles('packages/telescope-core/toolchains/toolchain.json', 'packages/telescope-core/toolchains/requirements.lock') }}
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts

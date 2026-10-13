@@ -56,6 +56,30 @@ test('an override wins over PATH and the managed cache; PATH wins over a downloa
     await assert.rejects(resolveMicromamba({ ...f.options, env: { PATH: directory, CSSEARTH_TELESCOPE_MICROMAMBA: '' } }), /not an executable/u);
   } finally { await f.cleanup(); }
 });
+test('PATH versions below stable major 1 or without a successful version probe use the managed release', async () => {
+  for (const [version, status] of [['0.27.0', 0], ['not a version', 0], ['', 0], ['2.0.5', 1]] as const) {
+    const f = await fixture();
+    try {
+      const directory = resolve(f.userRoot, 'bin'), path = resolve(directory, 'micromamba');
+      await mkdir(directory);
+      await writeFile(path, `#!${process.execPath}\nprocess.stdout.write(${JSON.stringify(version)}); process.exit(${status});\n`, { mode: 0o755 });
+      assert.equal(await resolveMicromamba({ ...f.options, env: { PATH: directory } }), resolve(f.directory, 'micromamba'));
+      assert.equal(f.urls.length, 2, 'an incompatible PATH binary triggers the managed download');
+    } finally { await f.cleanup(); }
+  }
+});
+test('stable major 1 and CI micromamba 2.0.5 on PATH work without a download', async () => {
+  const f = await fixture();
+  try {
+    const directory = resolve(f.userRoot, 'bin'), path = resolve(directory, 'micromamba');
+    await mkdir(directory);
+    for (const version of ['1.0.0', '2.0.5']) {
+      await writeFile(path, `#!${process.execPath}\nprocess.stdout.write(${JSON.stringify(version)});\n`, { mode: 0o755 });
+      assert.equal(await resolveMicromamba({ ...f.options, env: { PATH: directory }, fetcher: async () => { throw new Error('network forbidden'); } }), path);
+    }
+    assert.deepEqual(f.urls, []);
+  } finally { await f.cleanup(); }
+});
 test('a corrupted download is refused even when it runs and reports the pinned version', async () => {
   const f = await fixture();
   try {

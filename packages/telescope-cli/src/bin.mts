@@ -28,6 +28,7 @@ try {
   else if (args.length === 1 && args[0] === '--version') process.stdout.write(`${VERSION}\n`);
   else {
     const node = typedNode();
+    if (root) process.stderr.write(`telescope: using checkout sources at ${root}\n`);
     const child = spawn(node, [root ? resolve(root, IMPLEMENTATION) : resolve(CLI_PACKAGE_ROOT, existsSync(resolve(CLI_PACKAGE_ROOT, 'src/cli.mts')) ? 'src/cli.mts' : 'dist/cli.mjs'), ...args], { stdio: 'inherit', env: {
       ...process.env, ...(root ? { CSSEARTH_WORKSPACE: root } : {}), ...(node === process.execPath ? {} : { PATH: `${dirname(node)}${delimiter}${process.env.PATH ?? ''}` }),
       CSSEARTH_TELESCOPE_STDIN_TTY: process.stdin.isTTY ? '1' : '0',

@@ -2,6 +2,7 @@ import './test-support/index.mts';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { parseCli } from './cli-arguments.mts';
@@ -30,11 +31,23 @@ test('workspace admission runs the selected checkout source with unchanged argum
       [bin, ['--workspace', root, ...args], directory, env],
       [bin, args, directory, { ...env, CSSEARTH_WORKSPACE: root }],
       [sourceBin, args, root, env],
+      [bin, args, resolve(source, '..'), env],
     ] as const) {
       const result = spawnSync(process.execPath, [entry, ...input], { cwd, env: environment, encoding: 'utf8', timeout: 30_000 });
       assert.equal(result.status, 0, result.stderr);
       assert.deepEqual(JSON.parse(result.stdout), { args, workspace: root, source });
+      assert.equal(result.stderr, `telescope: using checkout sources at ${root}\n`);
     }
+
+    await writeFile(source, 'process.exitCode = 19;');
+    const failed = spawnSync(process.execPath, [bin, ...args], { cwd: root, env, encoding: 'utf8', timeout: 30_000 });
+    assert.equal(failed.status, 19, failed.stderr);
+    assert.equal(failed.stdout, '');
+    assert.equal(failed.stderr, `telescope: using checkout sources at ${root}\n`);
+    const help = spawnSync(process.execPath, [bin, '--help'], { cwd: root, env, encoding: 'utf8', timeout: 30_000 });
+    assert.equal(help.status, 0, help.stderr);
+    assert.ok(help.stdout.length > 0);
+    assert.equal(help.stderr, '');
 
     // The CLI's process boundary also sends the complete parsed options to B's own generator.
     const generator = resolve(root, NEW_OBJECT_COMMAND.script);
@@ -47,5 +60,17 @@ process.exitCode = await main(process.argv.slice(2));`);
     const dispatched = spawnSync(process.execPath, [runner, ...args, '--workspace', root], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
     assert.equal(dispatched.status, 0, dispatched.stderr);
     assert.deepEqual(JSON.parse(dispatched.stdout), { options: parseCli(args.map(arg => arg === 'relative spec.json' ? resolve(directory, arg) : arg)), cwd: root, workspace: root, source: generator });
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('without a checkout, the bin runs its own implementation without a checkout notice', async () => {
+  const directory = await mkdtemp(resolve(tmpdir(), 'standalone-dispatch-'));
+  const env: NodeJS.ProcessEnv = { ...process.env, CSSEARTH_TELESCOPE_HOME: resolve(directory, 'user') };
+  delete env.CSSEARTH_WORKSPACE;
+  try {
+    const result = spawnSync(process.execPath, [bin, 'families', '--json'], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
+    assert.equal(result.status, 0, result.stderr);
+    assert.ok(JSON.parse(result.stdout));
+    assert.equal(result.stderr, '');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
