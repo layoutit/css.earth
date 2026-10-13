@@ -121,6 +121,7 @@
   },
   "files": [
     "dist",
+    "data",
     "README.md"
   ],
   "engines": {
@@ -135,7 +136,9 @@
         "import": "./dist/sphere-lane.js",
         "require": "./dist/sphere-lane.cjs"
       }
-    }
+    },
+    "directory": ".package",
+    "linkDirectory": false
   },
   "repository": {
     "type": "git",
@@ -148,6 +151,18 @@
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
   "dependencies": {
+    "sharp": "0.35.3",
+    "linkedom": "^0.18.13",
+    "@layoutit/polycss": "0.2.11",
+    "geotiff": "3.0.5"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.7",
+    "@types/node": "^26.4.0",
+    "@types/pngjs": "6.0.5",
+    "pngjs": "7.0.0",
+    "typescript": "5.9.3",
+    "tsup": "^8.0.1",
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/bake": "workspace:*",
     "@cssearth/core": "workspace:*",
@@ -156,18 +171,7 @@
     "@cssearth/objects": "workspace:*",
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
-    "@cssearth/telescope-core": "workspace:*",
-    "sharp": "0.35.3",
-    "linkedom": "^0.18.13"
-  },
-  "devDependencies": {
-    "@types/node": "^26.4.0",
-    "@types/pngjs": "6.0.5",
-    "esbuild": "0.27.7",
-    "pngjs": "7.0.0",
-    "sharp": "0.35.3",
-    "typescript": "5.9.3",
-    "tsup": "^8.0.1"
+    "@cssearth/telescope-core": "workspace:*"
   },
   "oracleManifest": "oracle-manifest.json"
 }

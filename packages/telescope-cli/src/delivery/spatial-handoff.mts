@@ -4,7 +4,7 @@ import { readFile,writeFile,mkdir,mkdtemp,rm,rmdir,rename,realpath } from 'node:
 import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
-import { build } from 'esbuild';
+import { createRequire } from 'node:module';
 import { requireRecord,requireString } from '@cssearth/core';
 import { VERSION } from '../help.mts';
 import { writeProductRecord, requireWorkspace, telescopeScratch } from '@cssearth/telescope-core/node';
@@ -48,6 +48,9 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}
   }
   const entry=pathToFileURL(resolve(requireWorkspace(), kind==='points'?'packages/renderer/src/stars/loader.ts':kind==='volume'?'packages/renderer/src/volume/loader.ts':'packages/renderer/src/volume/prepared-volume-datasets.ts'));
+  // Compilation belongs to the admitted checkout, which owns this development dependency.
+  const compiler = createRequire(pathToFileURL(resolve(requireWorkspace(), 'package.json'))).resolve('esbuild');
+  const { build }: typeof import('esbuild') = await import(pathToFileURL(compiler).href);
   // Use the application's exact loader, including physical-frame and binary-bank validation.
   const compiled=await build({entryPoints:[entry.pathname],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true,plugins:[{name:'absolute-package-imports',setup(build){build.onResolve({filter:/^[^./]/},args=>args.path.startsWith('node:')?undefined:{path:import.meta.resolve(args.path),external:true});}}]});
   const scratch=await telescopeScratch('telescope-spatial-loader-');

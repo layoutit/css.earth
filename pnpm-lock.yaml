@@ -438,6 +438,19 @@ importers:
 
   packages/telescope-cli:
     dependencies:
+      '@layoutit/polycss':
+        specifier: 0.2.11
+        version: 0.2.11
+      geotiff:
+        specifier: 3.0.5
+        version: 3.0.5
+      linkedom:
+        specifier: ^0.18.13
+        version: 0.18.13
+      sharp:
+        specifier: 0.35.3
+        version: 0.35.3(@types/node@26.4.0)
+    devDependencies:
       '@cssearth/astronomy':
         specifier: workspace:*
         version: link:../astronomy
@@ -465,13 +478,6 @@ importers:
       '@cssearth/telescope-core':
         specifier: workspace:*
         version: link:../telescope-core
-      linkedom:
-        specifier: ^0.18.13
-        version: 0.18.13
-      sharp:
-        specifier: 0.35.3
-        version: 0.35.3(@types/node@26.4.0)
-    devDependencies:
       '@types/node':
         specifier: ^26.4.0
         version: 26.4.0
@@ -490,6 +496,7 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+    publishDirectory: .package
 
   packages/telescope-core:
     dependencies:

@@ -34,11 +34,11 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     const catalogue = await query.loadTargetCatalogue(core.USER_ROOT);
     const paths = await import(${url('packages/telescope-cli/src/paths.mts')});
     assert.ok(paths.TARGET_CATALOGUE_SNAPSHOT.startsWith(paths.CLI_PACKAGE_ROOT + '/data/'));
-    // Step 2 has no generated snapshot. A real checkout is present at the source location and must not be read.
-    assert.deepEqual(catalogue, []);
+    // Only the generated snapshot may supply catalogue entries outside a workspace.
+    assert.deepEqual(catalogue, await query.loadTargetCatalogueSnapshot());
     const explore = await import(${url('packages/telescope-cli/src/exploration.mts')}); let asked = false;
-    const request = await explore.skyTargetRequest(core.USER_ROOT, { target: 'eris' }, async (root, name) => {
-      assert.equal(root, core.USER_ROOT); assert.equal(name, 'eris'); asked = true; return undefined;
+    const request = await explore.skyTargetRequest(core.USER_ROOT, { target: 'not-in-the-catalogue' }, async (root, name) => {
+      assert.equal(root, core.USER_ROOT); assert.equal(name, 'not-in-the-catalogue'); asked = true; return undefined;
     });
     assert.equal(asked, true); assert.equal(request.simbadMiss, true);
     const leads = await import(${url('packages/telescope-cli/src/archive-adapters/archive-leads.mts')});

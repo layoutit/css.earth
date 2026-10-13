@@ -28,7 +28,7 @@ try {
   else if (args.length === 1 && args[0] === '--version') process.stdout.write(`${VERSION}\n`);
   else {
     const node = typedNode();
-    const child = spawn(node, [root ? resolve(root, IMPLEMENTATION) : resolve(CLI_PACKAGE_ROOT, 'src/cli.mts'), ...args], { stdio: 'inherit', env: {
+    const child = spawn(node, [root ? resolve(root, IMPLEMENTATION) : resolve(CLI_PACKAGE_ROOT, existsSync(resolve(CLI_PACKAGE_ROOT, 'src/cli.mts')) ? 'src/cli.mts' : 'dist/cli.mjs'), ...args], { stdio: 'inherit', env: {
       ...process.env, ...(root ? { CSSEARTH_WORKSPACE: root } : {}), ...(node === process.execPath ? {} : { PATH: `${dirname(node)}${delimiter}${process.env.PATH ?? ''}` }),
       CSSEARTH_TELESCOPE_STDIN_TTY: process.stdin.isTTY ? '1' : '0',
       CSSEARTH_TELESCOPE_STDOUT_TTY: process.stdout.isTTY ? '1' : '0',

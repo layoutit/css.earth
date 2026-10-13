@@ -2,14 +2,14 @@
 
 Own the `telescope` command. `src/bin.mts` is the installed binary (bundled by `build.mts` into `dist/telescope.mjs`): it
 handles `--help`, `--version` and optional workspace admission (`--workspace PATH`, `CSSEARTH_WORKSPACE`, or a source entry
-launched inside its own checkout), then runs that checkout's copy of this package's sources, `src/cli.mts`, with the same arguments, TTY state
+launched inside its own checkout), then runs the bundled `dist/cli.mjs` without a workspace or that checkout's `src/cli.mts`, with the same arguments, TTY state
 (`CSSEARTH_TELESCOPE_*_TTY`) and exit code. `src/cli.mts` and the modules beside it are the command's implementation, run
 from source (`pnpm telescope` in the checkout). Keep the arguments, help text, `--version`, workspace lookup, TTY forwarding
 and exit codes unchanged unless that is the change. The command guide is [README.md](README.md), which the help text links to.
 
 This package is the layer above the libraries: it imports `@cssearth/telescope-core`, `@cssearth/bake` and the other packages, and
 `@cssearth/telescope-core` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
-`@cssearth/telescope-core/node`, never by counting `../` from its own location. Without a workspace the source entry is package-relative (standalone bundling follows separately). `USER_ROOT` owns caches,
+`@cssearth/telescope-core/node`, never by counting `../` from its own location. Without a workspace the implementation and its shipped data are package-relative. `USER_ROOT` owns caches,
 toolchains and scratch; `requireWorkspace()` gates site work. Read-only inputs use `src/paths.mts` package ownership. The owners are:
 - the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
   ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer, Juno, HST, JWST and IHW keep

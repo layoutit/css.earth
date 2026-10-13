@@ -2,12 +2,9 @@ import { execFile } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { rename, stat, unlink } from "node:fs/promises";
 import { promisify } from "node:util";
-import cwebpExecutable from "cwebp-bin";
 import sharp from "sharp";
 
 const execFileAsync = promisify(execFile);
-if (typeof cwebpExecutable !== "string") throw new TypeError("cwebp-bin must expose its executable path.");
-const cwebpPath: string = cwebpExecutable;
 type DecodedRgba = Awaited<ReturnType<typeof decodeRgba>>;
 export const PREPARED_Q75_WEBP_ENCODING = "webp-q75-alpha-q100";
 
@@ -32,6 +29,8 @@ async function optimizeCandidate(inputPath: string, argumentsBeforeInput: readon
   const candidatePath = `${inputPath}.${randomUUID()}.candidate.webp`;
   const originalSize = (await stat(inputPath)).size;
   try {
+    const { default: cwebpPath } = await import("cwebp-bin");
+    if (typeof cwebpPath !== "string") throw new TypeError("cwebp-bin must expose its executable path.");
     await execFileAsync(cwebpPath, [
       "-quiet",
       ...argumentsBeforeInput,

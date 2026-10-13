@@ -2,13 +2,13 @@
 
 The `telescope` command lets a person start with a target or an existing artifact. It saves bounded discovery evidence, retrieves an exact chosen product with its qualification evidence, and distinguishes exploration from a fulfilled scientific request. `package.json` exposes a `telescope` binary, not an HTTP API. The implementation is this package's `src/`; the library it builds on is [`@cssearth/telescope-core`](../telescope-core/README.md#library).
 
-The source CLI can run without a css.earth checkout. Async astronomy queries install their pinned Python environment on first use; npm installation itself does not run pipelines. Bundling the source implementation and its data for npm is the next delivery step.
+The installed CLI runs without a css.earth checkout. Async astronomy queries install their pinned Python environment on first use; npm installation itself does not run pipelines. The npm package includes the implementation, target catalogue and archive inputs.
 
 Paths are owned by the library:
 
 - **User root:** `CSSEARTH_TELESCOPE_HOME`, otherwise `~/Library/Caches/cssearth-telescope` on macOS, `$XDG_CACHE_HOME/cssearth-telescope` or `~/.cache/cssearth-telescope` on Linux, and `%LOCALAPPDATA%\cssearth-telescope` on Windows. Archive answers, MAST and Astroquery caches, toolchains, installed markers and scratch use this root, including in checkout mode. Exploration sessions default to its `telescope-runs/`; `--out` selects a delivery directory.
 - **Optional workspace:** `--workspace PATH` takes precedence over `CSSEARTH_WORKSPACE`. Source entries launched from inside their own css.earth checkout also admit it, as `pnpm telescope` does. Merely importing checkout sources from another directory does not. Site authoring, `new-object`, bake and developer reductions require it and fail with `this command needs a css.earth checkout: pass --workspace` when absent.
-- **Package data:** requirements locks, descriptors, notices, examples and modes resolve from the owning package. Programs and their preserved receipts use the selected workspace's archive program folders for both reading and authoring. Without a workspace, shipped programs are read-only and authoring is refused. Outside a workspace, the target loader reads `data/target-catalogue.json` in this package; step 3 generates that array of target catalogue entries. If it is missing, unknown targets still go to SIMBAD. Malformed snapshots are errors. Read-only archive ledgers and WWT catalogues use `data/src/sources/` outside a workspace.
+- **Package data:** requirements locks, descriptors, notices, examples and modes resolve from the owning package. Programs and their preserved receipts use the selected workspace's archive program folders for both reading and authoring. Without a workspace, shipped programs are read-only and authoring is refused. Outside a workspace, the target loader reads `data/target-catalogue.json` in this package; the build generates that array of target catalogue entries. If it is missing, unknown targets still go to SIMBAD. Malformed snapshots are errors. Read-only archive ledgers and WWT catalogues use `data/src/sources/` outside a workspace.
 
 With a workspace, target names and site records still come from `src/objects` and `src/sources`. Existing toolchains and caches in the checkout are not migrated automatically; install the pins into the selected user root.
 
@@ -18,15 +18,16 @@ Use Node 22.18+ (22.x) or Node 24+. No system Python or micromamba is required: 
 
 Managed Python toolchains need macOS or Linux; on Windows use WSL. Commands that need no Python remain available on Windows. Some instrument locks target a specific Unix platform; consult their descriptors before installing.
 
-Run `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install` to install the pinned archive client explicitly (it includes pinned Matplotlib), then `verify` in place of `install` to check it. PDS decoding uses the same script with `pds install`. Some reduction routes need instrument toolchains described in their own guides; native compilers, Julia, IDL or Rosetta requirements still follow those descriptors.
+Archive clients and PDS decoding install their pinned Python environments on demand. Some reduction routes need instrument toolchains described in their own guides; native compilers, Julia, IDL or Rosetta requirements still follow those descriptors.
 
-Inside the repository, use `pnpm telescope --help`. To test the distributable:
+Install the command without a checkout:
 
 ```sh
-pnpm --filter @cssearth/telescope pack --pack-destination .
-npm install -g ./cssearth-telescope-0.2.0.tgz
-export CSSEARTH_WORKSPACE=/path/to/css.earth
+npm i -g @cssearth/telescope
+telescope --help
 ```
+
+For site development, use `telescope --workspace /path/to/css.earth …` with the checkout's installed dependencies. This uses that checkout's data and scripts for `new-object` and bake. Inside the checkout, `pnpm telescope …` runs the source implementation directly.
 
 ## Use
 
