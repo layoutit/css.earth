@@ -39,6 +39,27 @@
           "locator": "The Southern Pinwheel"
         }
       ]
+    },
+    "molecular-gas": {
+      "title": "The Southern Pinwheel's molecular gas",
+      "detail": "2903 × 2879 px",
+      "summary": "ALMA's picture of the galaxy's cold molecular gas, flat on its disc; nothing in it has depth.",
+      "sources": [
+        {
+          "catalogueId": "eso-potw2640a",
+          "url": "https://www.eso.org/public/images/potw2640a/",
+          "label": "A swirling galaxy; ALMA(ESO/NAOJ/NRAO)/J. Koda et al.",
+          "checked": "2026-10-12",
+          "locator": "A swirling galaxy"
+        },
+        {
+          "catalogueId": "koda-2025-m83-co-line-ratio",
+          "url": "https://arxiv.org/abs/2505.08876",
+          "label": "Koda et al. (2025), ApJ 986, 29: the CO line ratio across M83",
+          "checked": "2026-10-12",
+          "locator": "Abstract: ALMA data at 46 pc resolution"
+        }
+      ]
     }
   }
 }

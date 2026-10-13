@@ -1,0 +1,41 @@
+{
+  "id": "eso-potw2640a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A swirling galaxy",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "potw2640a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/potw2640a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/potw2640a.jpg",
+      "label": "Large JPEG"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/potw2640a/",
+      "checkedOn": "2026-10-12",
+      "locator": "ESO Picture of the Week, released 5 October 2026: 2903 x 2879 px; M83 in the light of cold gas molecules, taken with ALMA; linked to Koda et al. (2025), ApJ 986, 29. The page and the file give no sky coordinates. Placed on the sky by the 102 Gaia DR3 stars matched in the visible-light picture released with it (potw2640b), which miss the fit by 0.23 arcsec rms: 0.2498 arcsec per pixel, north 0.015 deg right of vertical, centre 204.247881, -29.868878 (the recipe's observation). The gas picture lies within 0.7 arcsec of that picture's dust lanes."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA(ESO/NAOJ/NRAO)/J. Koda et al.",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/potw2640a/"
+    }
+  ]
+}

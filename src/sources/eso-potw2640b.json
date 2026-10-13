@@ -1,0 +1,41 @@
+{
+  "id": "eso-potw2640b",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The M83 galaxy in visible light (crop)",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "potw2640b"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/potw2640b/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/potw2640b.jpg",
+      "label": "Large JPEG"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/potw2640b/",
+      "checkedOn": "2026-10-12",
+      "locator": "Released 5 October 2026 with potw2640a for a comparison of M83 in visible and submillimetre light: 2903 x 2879 px, from the Wide Field Imager at La Silla, a crop of eso0825a. Not drawn: its stars place the gas picture's frame on the sky."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/potw2640b/"
+    }
+  ]
+}
