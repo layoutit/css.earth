@@ -1,11 +1,10 @@
-import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** A small final stage: verified delivery -> explicit output selection -> pinned figure and numeric values. */
+import { telescopeScratch, writeProductRecord, sciencePackage, plotProduct } from '@cssearth/telescope-core/node';
 import { readFile, mkdir, mkdtemp, rename, rm, rmdir, realpath, stat } from 'node:fs/promises';
 import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { writeProductRecord, sciencePackage, plotProduct } from '@cssearth/telescope-core/node';
 import { deliveryDisplaySources } from './viewer-metadata.mts';
 import { parseProductRecord } from '@cssearth/objects';
 import { VERSION } from '../help.mts';

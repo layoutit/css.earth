@@ -1,5 +1,5 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Snapshot a WWT WTML FITS collection with WWT's own parser for runtime-free lookup. */
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { spawnSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';

@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../../paths.mts';
-import { packagePath } from '../../../paths.mts';
 /** Subtract a star's light from pinned JWST NIRCam coronagraph exposures with spaceKLIP, the way a paper's authors did.
  *
  *   node packages/telescope-cli/src/archives/jwst/klip/reduce.mts <program id> <band> <work directory> --raw <dir> [--max-rss-gib <n>]
@@ -13,6 +11,7 @@ import { packagePath } from '../../../paths.mts';
  * reference library. The run happens on the klip toolchain (toolchain.json), whose pins are the paper's pipeline version and CRDS
  * context. The result is spaceKLIP's own KLIP product, one image per KL mode count, north up. The run is stopped if its resident
  * memory passes the ceiling (default 6 GiB). */
+import { programStorePath, packagePath } from '../../../paths.mts';
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';

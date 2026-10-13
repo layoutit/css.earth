@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
-import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned CIAO environment of toolchain.json under output/toolchains/chandra (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/chandra/toolchain.mts solve     # re-resolve toolchain.json into packages.lock
@@ -17,13 +13,14 @@ import { packagePath } from '../../paths.mts';
  *
  * CALDB is part of the environment, not fetched at run time: caldb_main unpacks under the prefix and the CALDB variable of the
  * returned toolchain points the CIAO tools at it. */
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { findTable, tableColumn, text } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const repository = USER_ROOT;
 /** The toolchain's pins (descriptor and solved lock) sit beside this code and the programs they reduce. */

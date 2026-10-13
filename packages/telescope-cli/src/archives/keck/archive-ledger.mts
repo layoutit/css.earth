@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** What the Keck Observatory Archive holds, for this project's objects, derived rather than declared.
  *
  *   node packages/telescope-cli/src/archives/keck/archive-ledger.mts      writes src/sources/keck/ledger.json and docs/keck-ledger.md
@@ -18,6 +17,7 @@ import { programStorePath } from '../../paths.mts';
  * `52 Europa`. It is reduced to letters and digits, and a name carrying a minor-planet number matches only an id that carries
  * the same number, so 52 Europa is never Jupiter's moon. Only `koaimtyp='object'` rows count: a pointing, bias or flat frame
  * is not an observation of the object. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';

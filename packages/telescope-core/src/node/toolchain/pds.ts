@@ -1,7 +1,7 @@
+/** Install and locate the one Peppi+pdr environment under output/toolchains/pds (ignored by git). */
 import { installManagedToolchain } from './environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
 import { resolveInstalledToolchain } from './resolver.js';
-/** Install and locate the one Peppi+pdr environment under output/toolchains/pds (ignored by git). */
 import { runToolchainProcess } from './process.js';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';

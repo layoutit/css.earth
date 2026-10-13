@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Compare the re-run level-2 event list of an observation with the archive's own, event by event: the oracle for reprocess.mts.
  *
  *   node packages/telescope-cli/src/archives/chandra/compare.mts <program id> <obsid> <run directory> [--raw <dir>]...
@@ -21,6 +20,7 @@ import { programStorePath } from '../../paths.mts';
  * event list with no record beside it is not compared. What the comparison establishes is added to that record as evidence.
  *
  * One receipt per product: programs/<program id>.<product>.reproduction.json. */
+import { programStorePath } from '../../paths.mts';
 import { access, readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

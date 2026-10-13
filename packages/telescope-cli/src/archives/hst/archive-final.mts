@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** The archive's own final product of an observation a retired instrument took, pinned and read here.
  *
  *   node packages/telescope-cli/src/archives/hst/archive-final.mts <program id> <work directory> [--raw <dir>]...
@@ -42,6 +41,7 @@ import { programStorePath } from '../../paths.mts';
  *
  * The record of the run is written beside the downloaded products, which are not committed, and a copy is committed beside the
  * program as `<program id>.archive-final.product.json`, so the ledger can read what was pinned without holding the files. */
+import { programStorePath } from '../../paths.mts';
 import { copyFile, readFile, stat } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

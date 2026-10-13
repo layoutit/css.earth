@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
-import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned Keck reduction environment of toolchain.json under output/toolchains/keck (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/keck/toolchain.mts install
@@ -15,9 +11,10 @@ import { packagePath } from '../../paths.mts';
  *
  * Only the KCWI pipeline is installed. The OSIRIS DRP is IDL and does not run here; toolchain.json says so, and archive.mts
  * pins KOA's own OSIRIS products instead of re-running them. */
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

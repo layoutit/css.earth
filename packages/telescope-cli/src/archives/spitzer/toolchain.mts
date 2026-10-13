@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import { installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
-import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned Spitzer re-mosaic environment of toolchain.json under output/toolchains/spitzer (ignored by
  * git).
  *
@@ -17,8 +13,9 @@ import { packagePath } from '../../paths.mts';
  * micromamba creates Python from conda-forge; pip then installs requirements.lock, every package at its pinned version, with
  * `--no-deps`, so the resolver never chooses anything. The install keeps the descriptor and lock texts it was built from,
  * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is resolved by the shared telescope owner. */
+import { installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';

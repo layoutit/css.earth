@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Re-run standard data processing on a pinned Chandra observation, from its level-1 products.
  *
  *   node packages/telescope-cli/src/archives/chandra/reprocess.mts <program id> <obsid> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
@@ -22,6 +21,7 @@ import { programStorePath } from '../../paths.mts';
  *
  * Memory: chandra_repro spawns the CIAO tools as separate executables, so the ceiling is applied to the whole process group, not
  * to Python alone. The group is sampled every second and the run is stopped if it passes the ceiling (2 GiB by default). */
+import { programStorePath } from '../../paths.mts';
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';

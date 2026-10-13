@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Find an HST observation's files on MAST and pin them as an HST program.
  *
  *   node packages/telescope-cli/src/archives/hst/archive.mts <program id> <crds context> <obs_id> [<obs_id> ...]
@@ -24,6 +21,8 @@ import { packagePath } from '../../paths.mts';
  *
  * MAST catalogue access and complete-file downloads use the shared pinned Astroquery boundary (`@cssearth/telescope-core/node`).
  * The program is written to packages/telescope-cli/src/archives/hst/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile } from '@cssearth/telescope-core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -31,7 +30,6 @@ import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { binaryTable, numbers, tableColumn, text as cell } from '@cssearth/bake/objects/raster';
 import { readRepeatingHeader } from './product-file.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */

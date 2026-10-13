@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** What the JunoCam archive holds, and which of this project's objects it photographed, derived rather than declared.
  *
  *   node packages/telescope-cli/src/archives/juno/archive-ledger.mts            writes src/sources/juno/ledger.json and docs/junocam-ledger.md
@@ -12,6 +11,7 @@ import { programStorePath } from '../../paths.mts';
  * receipt that says anything else is reported as a problem and proves nothing. The pixel scale is the label altitude times
  * the camera's pixel angle, which the instrument kernel in the kernel bank states; it is the scale straight below the
  * spacecraft, not across the whole image. --local leaves the dated index counts alone. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

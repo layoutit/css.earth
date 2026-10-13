@@ -1,4 +1,3 @@
-import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Color for a planet nobody has imaged, from what is measured about it.
  *
  * - **Dayside thermal color.** The NASA Exoplanet Archive's emission-spectroscopy table holds secondary-eclipse depths and the
@@ -10,6 +9,7 @@ import { requireWorkspace } from '@cssearth/telescope-core/node';
  *   lamp: the gray's brightness with the chromaticity of the host's color dataset (interpret.mts, `hostLitGray`).
  *
  * Nothing here decides a value: the temperature is the archive's, the host color is the host package's. */
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { PLANCK_FLOOR_KELVIN } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Score the recipe against every published run: each reduced program that has a `published` block, beside what its paper
  * prints.
  *
@@ -10,6 +9,7 @@ import { programStorePath } from '../../paths.mts';
  * against the published share. Runs reduce.mts gave no map to show (field not detected, or a fit that does not describe the
  * spectra) are listed with the reason and not scored. Over the scored runs: the median ratio of mean fields, its spread (the rms of log ratios, as a
  * factor), and the mean and rms difference of toroidal shares. This is how `KNEE` is settled: on the papers, not on taste. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

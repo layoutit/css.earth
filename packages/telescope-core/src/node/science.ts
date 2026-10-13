@@ -1,5 +1,5 @@
-import { telescopePythonEnvironment } from './paths.js';
 /** Astropy owns FITS units/WCS; css.earth owns association, conservative masks and claims. */
+import { telescopePythonEnvironment } from './paths.js';
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { requireRecord, requireString } from '@cssearth/core';

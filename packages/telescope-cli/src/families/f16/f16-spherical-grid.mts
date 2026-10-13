@@ -1,11 +1,10 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { inputPath } from '../../paths.mts';
 /** Archive spherical physical grids -> the existing css.earth density-volume package. */
+import { telescopePythonEnvironment, astroqueryToolchain, requireWorkspace } from '@cssearth/telescope-core/node';
+import { inputPath } from '../../paths.mts';
 import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { astroqueryToolchain, requireWorkspace } from '@cssearth/telescope-core/node';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
 import type { FamilyHandler, FamilyOperation } from '../../family-handler.mts';
 import type { DescriptorMember, ProductDescriptor } from '../../products/product-descriptor.mts';

@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
-import { ensureToolchainPython, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned interferometry toolchains of toolchains.json under output/toolchains/<id> (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/interferometry/toolchain.mts install <squeeze|rotir|pionier|amber|gravity|matisse> [--cache <dir> ...]
@@ -13,6 +10,8 @@ import { packagePath } from '../../paths.mts';
  * macOS the MATISSE pipeline is rebuilt with LLVM's OpenMP runtime.
  * An installed toolchain keeps the text of its descriptor entry; `verify` and `toolchainPath` refuse one built from another.
  * Verified archives are deleted after the build: toolchains are large and the data they reduce are larger. */
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, ensureToolchainPython, telescopePythonEnvironment, resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, cp, copyFile, link, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -21,7 +20,6 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const DESCRIPTOR = packagePath('src/archives/interferometry/toolchains.json');
 export const TOOLCHAIN_ROOT = resolve(USER_ROOT, 'output/toolchains');

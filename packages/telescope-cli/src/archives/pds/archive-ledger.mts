@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { inputPath } from '../../paths.mts';
 /** Build the shared-query ledger from committed Peppi+pdr archive-final programs and their exact records. */
+import { programStorePath, inputPath } from '../../paths.mts';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** Acquire and qualify one exact package observation. Decoding establishes readability, never calibration or map registration. */
+import { inputPath } from '../paths.mts';
 import { readProductScience } from './product-science.mts';
 import { parseProductFacts } from './qualified-observations.mts';
 import { verifyCalibrationDependencies } from '../requests/calibration-dependencies.mts';

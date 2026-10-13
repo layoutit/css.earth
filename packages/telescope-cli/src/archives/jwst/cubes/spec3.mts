@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../../paths.mts';
 /** Re-run the JWST pipeline's level-3 spectroscopy stage (calwebb_spec3) for one cube band of a pinned imaging program, and
  * check the cube against MAST's.
  *
@@ -29,6 +28,7 @@ import { programStorePath } from '../../../paths.mts';
  *
  * --arcsec-per-pixel builds the cube on a finer sky grid than the pipeline's 0.1 arcsecond instead. That cube has no MAST twin, so
  * it is not compared; run the default first, so the receipt shows these exposures and this toolchain reproduce MAST's cube. */
+import { programStorePath } from '../../../paths.mts';
 import { mkdir, readdir, rm, stat, writeFile, open } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';

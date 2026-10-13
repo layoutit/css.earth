@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** Curated target associations for WWT-hosted numeric FITS collections. They are leads, not field or detection checks. */
+import { inputPath } from '../paths.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

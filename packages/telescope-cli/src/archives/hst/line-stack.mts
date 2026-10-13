@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Stack STIS long-slit line images of a moving Solar System target in the target's own frame.
  *
  *   node packages/telescope-cli/src/archives/hst/line-stack.mts <stack id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
@@ -30,6 +29,7 @@ import { programStorePath } from '../../paths.mts';
  * packages/telescope-core/src/product-record.ts): the frames that went into that set at their pinned sizes, the definition and Horizons
  * responses that placed them, and the settings of the line and subset. With `--receipt` the receipt's two checks are added to
  * those records as what they are: agreement with a published value, and the consistency of our own two handednesses. */
+import { programStorePath } from '../../paths.mts';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

@@ -1,9 +1,9 @@
-import '../test-user-root.mts';
 /** The star survey (stars.mts), offline. The fixtures are every answer SIMBAD and VizieR served the survey for M95, M83 and M51 on
  * 2026-10-04, whole. M51 holds a supergiant SIMBAD types as a plain star (M51-DS1), which no class of the survey names. The papers
  * API's answers (OpenAlex) are cut: no work is kept for M95 and M83, and for M51 three of its 91, without their author lists; each is filed
  * under the request the survey makes now, which asks the same question with more spellings and fields than the one that was answered. M95's Cepheids come from a paper VizieR does not hold and from a reanalysis whose
  * table gives every row its galaxy's centre and the star's SIMBAD name; M83's have a table with a position per star. */
+import '../test-user-root.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

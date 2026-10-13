@@ -1,10 +1,9 @@
-import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Bounded physical Cartesian FITS grids. Astropy owns FITS/WCS interpretation. */
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment, astroqueryToolchain, requireWorkspace } from '@cssearth/telescope-core/node';
 import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, parsePreparedDensityVolumeText } from '@cssearth/objects';
 import {spawn} from 'node:child_process';
 import {copyFile,mkdir,readFile,readdir,stat,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import { astroqueryToolchain, requireWorkspace } from '@cssearth/telescope-core/node';
 import {encodeDensityKtx2} from '@cssearth/bake/density';
 import type {FamilyHandler,FamilyOperation} from '../../family-handler.mts';
 import type {DescriptorMember,ProductDescriptor} from '../../products/product-descriptor.mts';

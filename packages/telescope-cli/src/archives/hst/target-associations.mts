@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { inputPath } from '../../paths.mts';
 /** Resolve the HST target-in-field claims from current MAST observation rows through the pinned Astroquery client. */
+import { inputPath } from '../../paths.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

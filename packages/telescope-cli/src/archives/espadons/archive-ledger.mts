@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** What the Canadian archive holds of ESPaDOnS polarised spectra for this project's stars, and how far each star has come.
  *
  *   node packages/telescope-cli/src/archives/espadons/archive-ledger.mts [--local]     writes src/sources/espadons/ledger.json and docs/espadons-ledger.md
@@ -15,6 +14,7 @@ import { programStorePath } from '../../paths.mts';
  *   `held`: spectra, and no program yet.
  *
  * `--local` asks the archive nothing: it retakes the states from the programs and receipts. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

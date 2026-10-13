@@ -1,4 +1,3 @@
-import { packagePath } from '../../paths.mts';
 /** The Kepler mission's quarters, and a light curve of the whole mission split into them.
  *
  * Kepler watched one field from May 2009 to May 2013 and turned by a quarter of a circle about every 90 days to keep
@@ -13,6 +12,7 @@ import { packagePath } from '../../paths.mts';
  * across Kepler's orbit and the clocks' offset come to under 6 minutes for its field, the grid's rounding to at most 15),
  * and no two quarters are closer than 0.7 days, so a point is given to the quarter whose limits hold its time within one
  * step of the grid. */
+import { packagePath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';

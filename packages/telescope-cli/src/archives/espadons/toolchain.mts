@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { verifyToolchainExecutables, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned codes of toolchain.json under output/toolchains/zdi (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/espadons/toolchain.mts install|verify
@@ -8,6 +6,8 @@ import { packagePath } from '../../paths.mts';
  * A Python environment with the pinned packages, ZDIpy checked out at its pinned commit beside it, and Julia from its
  * pinned archive (verified by size) with the environment of korg/ instantiated into the toolchain's own depot. An
  * installed toolchain keeps the text of its descriptor; `verify` and `toolchainPaths` refuse one built from another. */
+import { verifyToolchainExecutables, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { createWriteStream } from 'node:fs';
 import { access, cp, mkdir, readFile, rm, stat } from 'node:fs/promises';
@@ -16,7 +16,6 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const FILE = 'packages/telescope-cli/src/archives/espadons/toolchain.json';
 export const ZDI_ROOT = resolve(USER_ROOT, 'output/toolchains/zdi');

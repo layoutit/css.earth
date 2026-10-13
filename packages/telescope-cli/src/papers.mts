@@ -1,5 +1,3 @@
-import { USER_ROOT } from '@cssearth/telescope-core/node';
-import { loadSiteTargets } from './archives/site-targets.mts';
 /** Paper search for the telescope API: which published works name a target, what they say of it, and what was printed after them.
  *
  * The indexes are asked through `papers/works.mts` (OpenAlex, with arXiv as a bounded fallback) for works that name the target
@@ -12,6 +10,8 @@ import { loadSiteTargets } from './archives/site-targets.mts';
  * Before a paper's numbers are used, what followed it is read (`papers/follow-ups.mts`): each reported work is given the other
  * works published under its title (an erratum is printed that way), whether the index marks it retracted, and the later works
  * that cite it and name the target. Several targets at once are a sweep: one search each, no copies fetched. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from './archives/site-targets.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';

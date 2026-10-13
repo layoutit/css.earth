@@ -1,4 +1,3 @@
-import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** A star's MEarth light curve, found in the MEarth Project's public data release and read as it is published.
  *
  * MEarth watched nearby mid-to-late M dwarfs from the ground, one star a field, with eight 0.4 m telescopes at each of
@@ -20,6 +19,7 @@ import { telescopeScratch } from '@cssearth/telescope-core/node';
  *
  * What is this module's and is printed in neither paper is said where it is done: which of a star's light curves is read
  * (`longest`), a night's light as one point (`nightly`) and where a season begins (`seasonsOf`). */
+import { telescopeScratch } from '@cssearth/telescope-core/node';
 import { mkdir, mkdtemp, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { medianAveraged, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

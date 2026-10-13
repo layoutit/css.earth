@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** WWT's curated display imagery is a separate lane from qualified telescope observations. */
+import { inputPath } from '../paths.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode } from '@cssearth/core';

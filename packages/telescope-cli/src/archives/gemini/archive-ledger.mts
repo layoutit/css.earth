@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { inputPath } from '../../paths.mts';
 /** What the Gemini archive holds for this project's bodies, and what this toolkit has actually proven, derived rather than
  * declared.
  *
@@ -23,6 +21,7 @@ import { inputPath } from '../../paths.mts';
  * The Galilean moons get a census of their own, because Europa is this project's showcase body and the answer for it is a
  * negative one that a summary line would hide. Its three neighbours are asked for beside it so that "is there anything here
  * for the Galilean moons" is answered from the archive rather than from one moon and a guess. */
+import { programStorePath, inputPath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

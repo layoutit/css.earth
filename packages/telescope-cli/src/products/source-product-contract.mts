@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** Validated source declarations and receipt metadata; no intake, downloads or qualification. */
+import { inputPath } from '../paths.mts';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { ProductRecord } from '@cssearth/objects';

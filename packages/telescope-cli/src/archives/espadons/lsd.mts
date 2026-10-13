@@ -1,10 +1,10 @@
-import { packagePath } from '../../paths.mts';
 /** A run's mean line profiles and longitudinal fields, by the published codes toolchain.json pins.
  *
  * LSDpy (Folsom, after Donati et al. 1997, MNRAS 291, 658) averages the lines of a mask into one intensity, Stokes V and
  * null profile, rescales their error bars by the fit's chi-square and removes the constant offset of V and of the null.
  * SpecpolFlow measures the longitudinal field of each profile by the first moment of Stokes V. This module writes their
  * inputs (the mask and each spectrum as text) and reads their results; it computes nothing of its own. */
+import { packagePath } from '../../paths.mts';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { MaskLine } from './mask.mts';

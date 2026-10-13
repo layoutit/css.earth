@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import { USER_ROOT } from '@cssearth/telescope-core/node';
-import { loadSiteTargets } from '../site-targets.mts';
-import { programStorePath } from '../../paths.mts';
-import { packagePath } from '../../paths.mts';
 /** The Spitzer ledger: what the Heritage Archive holds for the objects this repository ships, by observing mode, which of
  * those modes this toolkit can re-make, and how far that is proved.
  *
@@ -28,6 +24,9 @@ import { packagePath } from '../../paths.mts';
  * checked only then. --write replaces src/sources/spitzer/ledger.json and docs/spitzer-ledger.md; --local rewrites only the
  * repository's own state from the ledger already on disk, for when a program is pinned or a receipt written and nothing the
  * archive said has changed. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../site-targets.mts';
+import { programStorePath, packagePath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

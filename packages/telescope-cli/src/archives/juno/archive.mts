@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** JunoCam in the PDS: read a volume's index, and pin the calibrated color images of one target as a program.
  *
  *   node packages/telescope-cli/src/archives/juno/archive.mts <program id> <volume> <target> <naif id> <body frame> [--orbit <n>]
@@ -10,6 +7,8 @@ import { packagePath } from '../../paths.mts';
  * The PDS Cartography and Imaging Sciences Node serves JunoCam as numbered volumes, each with a fixed-format index of its
  * products. A program names the images of one target by URL and size. Only calibrated products (RDR) whose filter combination includes red, green and blue are pinned,
  * because those are what the `junocam-camera` format reads. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

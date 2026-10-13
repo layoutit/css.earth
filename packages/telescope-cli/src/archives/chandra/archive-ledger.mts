@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import { USER_ROOT } from '@cssearth/telescope-core/node';
-import { loadSiteTargets } from '../site-targets.mts';
-import { programStorePath } from '../../paths.mts';
-import { inputPath } from '../../paths.mts';
 /** What the Chandra Data Archive holds, what it holds for this project's objects, and how far this toolkit has been proved.
  *
  *   node packages/telescope-cli/src/archives/chandra/archive-ledger.mts        # rewrite src/sources/chandra/ledger.json and docs/chandra-ledger.md
@@ -22,6 +18,9 @@ import { inputPath } from '../../paths.mts';
  *
  * A pointing whose target name marks it as background, blank sky, an offset or a calibration field is never counted as an
  * observation of an object, however close to one it lands. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../site-targets.mts';
+import { programStorePath, inputPath } from '../../paths.mts';
 import { readFileSync } from 'node:fs';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

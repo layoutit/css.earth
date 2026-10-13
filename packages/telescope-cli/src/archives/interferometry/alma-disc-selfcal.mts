@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** The published imaging of a resolved, bright Solar System body: fit a limb-darkened disc to its visibilities, self-calibrate
  * against that disc, and image the result.
  *
@@ -21,6 +20,7 @@ import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
  * here, in TypeScript, and are tested. CASA reads the measurement set, grids the visibilities the fit is run on, makes the
  * model image on the imaging grid, solves and applies the gains and cleans. The fitted parameters cross the boundary as
  * numbers, and the disc profile is written into the generated script from the one statement of it in this file. */
+import { telescopePythonEnvironment, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -28,7 +28,6 @@ import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
-import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);

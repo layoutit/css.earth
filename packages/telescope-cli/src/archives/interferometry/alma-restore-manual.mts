@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { packagePath } from '../../paths.mts';
 /** Restore one MANUALLY reduced ALMA execution from its raw visibilities and image it, then check the result against the
  * archive's own image.
  *
@@ -30,6 +29,7 @@ import { packagePath } from '../../paths.mts';
  * Europa is an ephemeris field: it moves several arcseconds across one execution, far more than the 0.77 arcsecond disc, so
  * the image must follow the ephemeris importasdm attached. The run checks for that ephemeris and images with
  * `phasecenter='TRACKFIELD'`; a field that turns out not to carry one stops the route rather than being imaged smeared. */
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';

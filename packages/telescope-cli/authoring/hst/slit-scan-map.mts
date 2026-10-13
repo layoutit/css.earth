@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../src/paths.mts';
-import { workspacePath } from '../../src/paths.mts';
 /** Map one absorption band over a body's surface from STIS long-slit spectra scanned across its disc.
  *
  *   node packages/telescope-cli/authoring/hst/slit-scan-map.mts <scan id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
@@ -22,6 +20,7 @@ import { workspacePath } from '../../src/paths.mts';
  *
  * Which way the aperture's first axis lies on the sky is **not assumed**: `--mirror` runs the opposite choice as well and the
  * receipt reports what each one does to the agreement between visits that saw the same ground. */
+import { programStorePath, workspacePath } from '../../src/paths.mts';
 import { BODY_MAP_SCHEMA, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

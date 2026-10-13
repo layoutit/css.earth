@@ -1,6 +1,6 @@
-import { telescopePythonEnvironment } from './paths.js';
 /** batman owns transit light curves and SciPy owns their nonlinear fit. css.earth owns the time scale, fixed orbit, masks,
  * parameter policy and interpretation of the result. This synchronous boundary keeps existing preparation consumers synchronous. */
+import { telescopePythonEnvironment } from './paths.js';
 import { spawnSync } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync } from './toolchain/toolchain.js';

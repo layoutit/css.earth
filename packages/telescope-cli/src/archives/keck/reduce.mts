@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Re-run the archive's own pipeline over a pinned Keck observation.
  *
  *   node packages/telescope-cli/src/archives/keck/reduce.mts <program id> <koaid> [<run directory>]
@@ -26,13 +25,13 @@ import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
  *
  * Only KCWI is re-run. toolchain.json says why: the OSIRIS DRP is IDL, and no other Keck pipeline is installed here. A program
  * of another instrument is refused rather than reduced by something that is not that instrument's pipeline. */
+import { telescopePythonEnvironment, assertInputs, readProductRecord, sameRun, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { spawn, spawnSync } from 'node:child_process';
 import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
-import { assertInputs, readProductRecord, sameRun, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { DOWNLOADS, readKeckProgram, type KeckFile, type KeckObservation, type KeckProgram } from './archive.mts';

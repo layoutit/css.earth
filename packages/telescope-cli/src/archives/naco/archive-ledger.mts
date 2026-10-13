@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** What the NACO archive holds, for this project's bodies, derived rather than declared.
  *
  *   node packages/telescope-cli/src/archives/naco/archive-ledger.mts            writes src/sources/naco/ledger.json and docs/naco-ledger.md
@@ -16,6 +15,7 @@ import { programStorePath } from '../../paths.mts';
  * `EUROPA` is Jupiter's moon, `52_EUROPA` is the asteroid this project ships as `europa-52`, and `195EURYKLEIA-26T0400` is a
  * third body with an ephemeris stamp glued to its name. Acquisition, sky and offset frames are never counted as an
  * observation of the object, because they are pointing and background exposures. */
+import { programStorePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

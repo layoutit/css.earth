@@ -1,10 +1,10 @@
-import { installManagedToolchain } from './toolchain/environment.js';
-import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
-import { resolveInstalledToolchain } from './toolchain/resolver.js';
 /** SPIDERMAN owns spherical-harmonic brightness maps and the phase curves they make (Louden & Kreidberg 2018). css.earth passes a
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
  * (spiderman-toolchain.json says why). Install: telescope toolchain install spiderman */
+import { installManagedToolchain } from './toolchain/environment.js';
+import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
+import { resolveInstalledToolchain } from './toolchain/resolver.js';
 import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';

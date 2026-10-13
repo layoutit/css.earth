@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** Materialize a pinned WWT TAN imageset as one static, CSS-preparation-ready PNG. */
+import { inputPath } from '../paths.mts';
 import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';

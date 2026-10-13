@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Measure how well a program's JunoCam images register to their target, and write the receipt beside the program.
  *
  *   node packages/telescope-cli/src/archives/juno/measure.mts <program id> <work directory> [--raw <directory holding the pinned files>] [--horizons]
@@ -13,6 +12,7 @@ import { programStorePath } from '../../paths.mts';
  * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, packages/telescope-core/src/product-record.ts):
  * the images and kernels it read at their pinned sizes, the policy the fit was held to, and the software that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
  * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
+import { programStorePath } from '../../paths.mts';
 import { VERSION } from '../../help.mts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';

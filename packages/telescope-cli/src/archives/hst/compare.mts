@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Compare the re-run products of an observation with the archive's own, sample by sample: the oracle for calibrate.mts.
  *
  *   node packages/telescope-cli/src/archives/hst/compare.mts <program id> <observation> <run directory> [--raw <dir>]...
@@ -19,13 +17,14 @@ import { requireWorkspace } from '@cssearth/telescope-core/node';
  * One receipt per product, beside the program: <program id>.<product>.reproduction.json. The receipt is also added to the
  * record the stage that made the product wrote beside it, as `archive-agreement` evidence naming that receipt: a product with
  * no record is refused rather than reported as checked, because nothing then says which run made the file compared. */
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace, mastFile, addProductEvidence, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { sampleStatistics, type FitsHeader } from '@cssearth/fits';
 import { access, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '@cssearth/bake/objects/raster';
-import { mastFile, addProductEvidence, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductRecord } from '@cssearth/objects';
 import { PROGRAMS, suffixOf } from './archive.mts';

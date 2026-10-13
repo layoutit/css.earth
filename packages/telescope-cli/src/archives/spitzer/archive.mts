@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Find one Spitzer observation in the Spitzer Heritage Archive at IRSA and pin every file a re-mosaic needs.
  *
  *   node packages/telescope-cli/src/archives/spitzer/archive.mts <program id> <aorkey> [--channels 1,2,3,4] [--data <dir>]
@@ -28,6 +25,8 @@ import { packagePath } from '../../paths.mts';
  *    application backend, not a published API, and it may change without notice; everything it returns is validated here.
  *
  * The program is written to packages/telescope-cli/src/archives/spitzer/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, open, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -36,7 +35,6 @@ import { pipeline } from 'node:stream/promises';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../programs.mts';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */

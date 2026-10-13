@@ -1,6 +1,6 @@
-import '../test-user-root.mts';
 /** Leads (leads.mts), offline: DataCite's two answers for GJ 1214 b as served on 2026-10-04, five data records and four
  * arXiv papers with the fields the parser reads (fixtures/telescope-simulations/datacite-gj-1214b.json). */
+import '../test-user-root.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

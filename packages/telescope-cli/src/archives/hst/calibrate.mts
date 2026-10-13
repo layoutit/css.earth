@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Re-run an HST instrument's own pipeline from the raw exposure of a pinned observation.
  *
  *   node packages/telescope-cli/src/archives/hst/calibrate.mts <program id> <observation> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
@@ -30,6 +29,7 @@ import { programStorePath } from '../../paths.mts';
  * pipeline and CRDS versions the run reported.
  * Its evidence list is empty. What a product was checked against is added by the stage that checked it: compare.mts adds the
  * agreement with the archive's own product. */
+import { programStorePath } from '../../paths.mts';
 import { cp, mkdir, readFile, readdir, rm } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';

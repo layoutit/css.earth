@@ -1,9 +1,8 @@
-import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Decode through the existing format owners, then hand arrays to Astropy/Matplotlib. */
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment, pdsPackages, astroqueryToolchain } from '@cssearth/telescope-core/node';
 import { mkdir,readFile,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { pdsPackages, astroqueryToolchain } from '@cssearth/telescope-core/node';
 import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import { isisMetadata,pdsMetadata } from '../products/native-metadata.mts';
 import { requireRecord,requireArray,requireString } from '@cssearth/core';

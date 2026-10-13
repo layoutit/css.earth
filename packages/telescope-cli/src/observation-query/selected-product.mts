@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** Reload the qualification and its pins; a serialized selection cannot authorize different bytes or facts. */
+import { inputPath } from '../paths.mts';
 import { resolve, relative } from 'node:path';
 import { readProductRecord, fileSize } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';

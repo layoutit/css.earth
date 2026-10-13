@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Pin a Gemini programme's raw science frames and the calibrations the archive associates with them, as a
  * cssearth-gemini-program@1.
  *
@@ -31,6 +28,8 @@ import { packagePath } from '../../paths.mts';
  * disagreement stops the pin.
  *
  * The program is written to packages/telescope-cli/src/archives/gemini/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

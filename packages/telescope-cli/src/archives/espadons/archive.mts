@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Pin one star's polarimetric ESPaDOnS spectra of one observing run as a program.
  *
  *   node packages/telescope-cli/src/archives/espadons/archive.mts <program id> --name <star> --ra <degrees> --dec <degrees> --from <MJD> --to <MJD> [--object <object id>] [--radius 0.02]
@@ -24,6 +23,7 @@ import { programStorePath } from '../../paths.mts';
  * `--runs` pins nothing: it lists the star's products grouped into runs (a gap of 20 days starts a new run), to choose a span from.
  *
  * The program is written to packages/telescope-cli/src/archives/espadons/programs/<program id>.json. */
+import { programStorePath } from '../../paths.mts';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

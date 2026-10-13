@@ -1,5 +1,3 @@
-import { programStorePath } from '../../paths.mts';
-import { packagePath } from '../../paths.mts';
 /** An ESPaDOnS program: one star's polarimetric spectra of one observing run, pinned at the Canadian archive, with what a
  * map of them needs and what a paper printed about the same run.
  *
@@ -8,6 +6,7 @@ import { packagePath } from '../../paths.mts';
  * star's lines are looked for, `star` the rotation and the tilt a map cannot find by itself, and `published` the numbers
  * a re-reduction is compared with. A program without `atmosphere` can be pinned but not reduced; one without `star` can be
  * averaged but not mapped. */
+import { programStorePath, packagePath } from '../../paths.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

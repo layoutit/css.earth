@@ -1,4 +1,3 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /**
  * Which body does a measured sky position belong to?
  *
@@ -7,11 +6,11 @@ import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
  * work here is the part a catalogue can do: pick the bodies of a system out of the object registry, name the published
  * orbit each one is predicted from, hand the epochs to those tools, and record and draw what comes back.
  */
+import { telescopePythonEnvironment, astroqueryToolchain, plotNumericPreview, type FigureOptions } from '@cssearth/telescope-core/node';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { BODIES, HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitStateRelativeBmjdTdb, skyBasis, starAstrometry, STAR_IDS, type HostedPlanetId, type StarId } from '@cssearth/astronomy';
-import { astroqueryToolchain, plotNumericPreview, type FigureOptions } from '@cssearth/telescope-core/node';
 
 const KM_PER_AU = 1.495978707e8;
 const GM_SUN_KM3_S2 = 132712440041.93938;

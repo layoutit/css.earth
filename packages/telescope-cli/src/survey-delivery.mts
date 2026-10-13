@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { checkoutProjectRoot } from './paths.mts';
 /** Repeatable local-observation survey through the public saved-query/delivery API. No claim of fresh archive discovery. */
+import { checkoutProjectRoot } from './paths.mts';
 import { randomBytes } from 'node:crypto';
 import { readFile, writeFile, mkdir, access, readdir, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';

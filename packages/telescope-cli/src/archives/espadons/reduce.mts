@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Reduce a pinned ESPaDOnS program to a magnetic map: line mask, mean lines, longitudinal fields, and the map.
  *
  *   node packages/telescope-cli/src/archives/espadons/reduce.mts <program id> [--half-width <km/s>]
@@ -16,6 +15,7 @@ import { USER_ROOT } from '@cssearth/telescope-core/node';
  * receipt `<program id>.map.json`: every input by its pin, what each step measured, every step of the ladder and the chosen
  * map's coefficients as ZDIpy wrote them. It goes under ignored output/espadons/<program id> with the mean lines, ZDIpy's
  * files and the map as a table and a picture: a receipt is a result, and git holds the program, not the result. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

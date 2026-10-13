@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Pin one night of NACO jitter imaging and the calibration frames its reduction needs, as a NACO program.
  *
  *   node packages/telescope-cli/src/archives/naco/archive.mts <program id> <prog_id> <object> [--night YYYY-MM-DD]
@@ -23,11 +20,12 @@ import { packagePath } from '../../paths.mts';
  * modules, and `associationTree` for the calibration tree. Nothing here repeats them.
  *
  * The program is written to packages/telescope-cli/src/archives/naco/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, archiveHeader, column, type RawRow, associationTree, type Association, tapRows } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { archiveHeader, column, type RawRow, associationTree, type Association, tapRows } from '@cssearth/telescope-core/node';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const PROGRAMS = packagePath('packages/telescope-cli/src/archives/naco/programs');

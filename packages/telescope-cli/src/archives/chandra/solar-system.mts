@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Put a moving target's events in the object-centred frame, and check where the body lands.
  *
  *   node packages/telescope-cli/src/archives/chandra/solar-system.mts <program id> <obsid> <work directory>
@@ -28,10 +25,11 @@ import { packagePath } from '../../paths.mts';
  * registration.
  *
  * One receipt: programs/<program id>.<obsid>.solar-system.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, addProductEvidence, readProductRecord, writeProductRecord, astroqueryRows, toolchainPython, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, readProductRecord, writeProductRecord, astroqueryRows, toolchainPython, USER_ROOT } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductEvidence, type ProductInput, type ProductRun } from '@cssearth/objects';
 import type { FitsHeader } from '@cssearth/fits';

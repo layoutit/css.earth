@@ -1,5 +1,3 @@
-import { USER_ROOT } from '@cssearth/telescope-core/node';
-import { loadSiteTargets } from '../archives/site-targets.mts';
 /** Leads for the telescope API: what has been published about an object that could be drawn on it, from every DOI
  * repository at once.
  *
@@ -20,6 +18,8 @@ import { loadSiteTargets } from '../archives/site-targets.mts';
  * settles is marked and leaves the worklist (read.mts). JWST's time series of a planet's star are set on the planet's orbit:
  * a whole orbit watched is a phase curve in the archive, with the day it is public (observed.mts). And a survey of the
  * exoplanets names the planets with no page that a paper's title says have a phase curve or a map (unpaged.mts). */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { loadSiteTargets } from '../archives/site-targets.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';

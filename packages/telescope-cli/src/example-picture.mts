@@ -1,6 +1,3 @@
-import { packagePath } from './paths.mts';
-import { inputPath } from './paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** One example picture per virtual telescope, made from a product the telescope's own toolkit produced.
  *
  * Every picture in docs/telescopes comes from this one renderer and from the checked-in recipe beside it (examples.json).
@@ -18,6 +15,8 @@ import { requireWorkspace } from '@cssearth/telescope-core/node';
  *
  * Related: ../charts/fits-gallery-image.mts, whose rules for sky images this follows (north up, east left, every source
  * pixel a square). */
+import { packagePath, inputPath } from './paths.mts';
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

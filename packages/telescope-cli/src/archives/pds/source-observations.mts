@@ -1,8 +1,8 @@
-import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Source-pinned PDS3 observations already owned by an object package.
  *
  * This is the legacy half of the PDS adapter. Peppi owns PDS4 Registry discovery; this reader exposes exact PDS3 products
  * that css.earth already pins, without asking a scientific-query caller to run a separate archive command first. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

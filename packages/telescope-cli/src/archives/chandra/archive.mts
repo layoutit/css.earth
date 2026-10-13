@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Find a Chandra observation's files in the Chandra Data Archive and pin them as a Chandra program.
  *
  *   node packages/telescope-cli/src/archives/chandra/archive.mts <program id> <obsid> [<obsid> ...]
@@ -23,6 +20,8 @@ import { packagePath } from '../../paths.mts';
  * is, and is what this route reads.
  *
  * The program is written to packages/telescope-cli/src/archives/chandra/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, tapRows } from '@cssearth/telescope-core/node';
 import { createGunzip } from 'node:zlib';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
@@ -30,7 +29,6 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { tapRows } from '@cssearth/telescope-core/node';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const PROGRAMS = packagePath('packages/telescope-cli/src/archives/chandra/programs');

@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Check a DRAGONS re-run against something that is not itself, and write the receipt.
  *
  *   node packages/telescope-cli/src/archives/gemini/compare.mts <program id> <work directory> archive <bias|flat-bias|flat>
@@ -33,12 +31,13 @@ import { requireWorkspace } from '@cssearth/telescope-core/node';
  *
  * The receipt is written to packages/telescope-cli/src/archives/gemini/programs/<program id>.<product>.reproduction.json, and the evidence it
  * establishes is added to the product record beside the product it is about. */
+import { programStorePath } from '../../paths.mts';
+import { requireWorkspace, addProductEvidence, assertInputs, readProductRecord, sameRun } from '@cssearth/telescope-core/node';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence, assertInputs, readProductRecord, sameRun } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type EvidenceKind, type ProductInput, type ProductRecord } from '@cssearth/objects';
 import { PROGRAMS, readGeminiProgram, type GeminiProgram } from './archive.mts';

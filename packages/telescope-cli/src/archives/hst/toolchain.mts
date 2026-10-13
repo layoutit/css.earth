@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
-import { resolveMicromamba, resolveInstalledToolchain } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned HST calibration environment of toolchain.json under output/toolchains/hst (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/hst/toolchain.mts install
@@ -14,9 +11,10 @@ import { packagePath } from '../../paths.mts';
  *
  * Reference files are not part of the environment: CRDS fetches the ones a pinned context selects into the cache under this
  * root the first time a calibration runs (calibrate.mts). */
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
-import { assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
 import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

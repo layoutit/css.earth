@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { loadTargetCatalogue } from '../../observation-query/query.mts';
 /** Complete, scoped Peppi target search -> verified labels -> product-level candidates for the shared query. */
+import { loadTargetCatalogue } from '../../observation-query/query.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

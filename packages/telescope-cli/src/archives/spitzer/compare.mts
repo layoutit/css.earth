@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Compare a re-made mosaic with the archive's own, sample by sample, and write the receipt.
  *
  *   node packages/telescope-cli/src/archives/spitzer/compare.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
@@ -26,6 +25,7 @@ import { programStorePath } from '../../paths.mts';
  * 'archive-agreement')` without knowing this toolkit exists. Its `establishes` says in as many words that the re-mosaic is
  * not the observatory's own. The ledger counts a capability as checked only from a receipt that parses, names its
  * observation, and names the archive bytes its program pinned. */
+import { programStorePath } from '../../paths.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

@@ -1,7 +1,6 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { telescopePythonEnvironment, astroqueryToolchain } from '@cssearth/telescope-core/node';
 import { spawn } from 'node:child_process';
 import { access } from 'node:fs/promises';
-import { astroqueryToolchain } from '@cssearth/telescope-core/node';
 
 export type VoPackageMember = { path: string; bytes: number };
 /** `science` is retained for legacy one-raster packages. `fitsMembers` is the complete non-arbitrary FITS candidate set. */

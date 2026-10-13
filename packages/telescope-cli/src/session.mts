@@ -1,5 +1,5 @@
-import { inputPath } from './paths.mts';
 /** Saved requests connect the public query and qualifier. They never authorize stale archive actions. */
+import { inputPath } from './paths.mts';
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';

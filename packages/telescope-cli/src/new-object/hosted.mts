@@ -1,11 +1,11 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../paths.mts';
 /** Planets and companion stars of a generated system: bodies on hosted orbits around a placed star.
  *
  * Phase one writes each body's astronomy record, with its orbit from the spec's route (orbit.mts); the astronomy package is then
  * rebuilt, because the hosted-planet scaffold places the body with the package's own orbit code. Phase two writes the package:
  * the scaffold's shape-only planet (lit by its star, or glowing with its own heat when a temperature is cited), or, for a
  * companion star, the same color dataset a placed star has (dataset.mts), from a Planck spectrum at its cited temperature. */
+import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
+import { packagePath } from '../paths.mts';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

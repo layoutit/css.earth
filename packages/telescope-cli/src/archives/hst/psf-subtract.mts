@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
 /** Subtract a reference star's coronagraphic PSF from a Hubble coronagraph observation: reference-star differential imaging for
  * ACS/HRC, the stage the archive does not run. A coronagraph blocks the star's core, but its diffracted and scattered light is
  * still far brighter than a debris disc; a star of similar color observed behind the same occulter in the same orbit sequence
@@ -28,6 +27,7 @@ import { programStorePath } from '../../paths.mts';
  *
  * Beside each drizzled result the stage writes its product record: the calibrated frames at their sizes, the fit (shift,
  * scale, the residual over the fit region before and after), the star's position, and the software versions the run reported. */
+import { programStorePath } from '../../paths.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';

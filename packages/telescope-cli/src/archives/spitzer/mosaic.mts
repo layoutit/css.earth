@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
-import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Re-make a pinned observation's level-2 mosaics from its level-1 frames.
  *
  *   node packages/telescope-cli/src/archives/spitzer/mosaic.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
@@ -17,12 +14,13 @@ import { USER_ROOT } from '@cssearth/telescope-core/node';
  * The record's software list names astropy and reproject, not MOPEX, and the stage is called `open-remosaic` rather than
  * anything that reads as the observatory's pipeline. compare.mts writes the evidence, and it is `archive-agreement` of an
  * unofficial re-mosaic; what that does and does not establish is in docs/spitzer.md. */
+import { telescopePythonEnvironment, USER_ROOT, assertInputs, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { assertInputs, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRecord, ProductRun } from '@cssearth/objects';
 import { defaultDataRoot, readSpitzerProgram, REPOSITORY, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { spitzerSoftware, spitzerToolchain } from './toolchain.mts';

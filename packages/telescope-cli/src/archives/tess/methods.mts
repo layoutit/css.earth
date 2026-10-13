@@ -1,4 +1,3 @@
-import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** The published methods that decide whether a star's light shows it turning, by the kind of star and of data each was
  * made for.
  *
@@ -12,6 +11,7 @@ import { telescopeScratch } from '@cssearth/telescope-core/node';
  * To add a kind of star or of data, read the paper that treats it and add its entry; do not widen an entry beyond what
  * its paper says, and do not add a threshold no paper prints. A paper whose code cannot be run here has its own verdict
  * on a star read from its published table instead (published.mts). */
+import { telescopeScratch } from '@cssearth/telescope-core/node';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

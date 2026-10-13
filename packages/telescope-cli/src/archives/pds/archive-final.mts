@@ -1,11 +1,9 @@
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Exact PDS Registry product -> complete byte set -> pdr decode -> archive-final qualification. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, pdsPackages, pdsToolchain, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { pdsPackages, pdsToolchain, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 import { archivePrograms } from '../programs.mts';
 

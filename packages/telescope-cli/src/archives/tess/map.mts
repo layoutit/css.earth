@@ -1,13 +1,12 @@
-import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** The brightness map of a star's surface that reproduces its rotational light curve.
  *
  * starry does the inversion (Luger et al. 2019, AJ 157, 64; tools.py holds the call, the telescope's starry toolchain is the
  * interpreter). A light curve is one number a moment, so it fixes how bright each longitude is and almost nothing about
  * latitude: starry's prior fills what the data leave open, and every dataset made from a map says so. */
+import { telescopeScratch, starryToolchainSync } from '@cssearth/telescope-core/node';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { starryToolchainSync } from '@cssearth/telescope-core/node';
 
 import { runTool } from './toolchain.mts';
 

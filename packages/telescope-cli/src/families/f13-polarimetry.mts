@@ -1,8 +1,7 @@
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** F13 keeps ESO's paired intensity/DOLP products distinct from Stokes products. */
+import { telescopePythonEnvironment, astroqueryToolchain, plotNumericPreview, type FigureOptions, fileSize } from '@cssearth/telescope-core/node';
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain, plotNumericPreview, type FigureOptions, fileSize } from '@cssearth/telescope-core/node';
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
 import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';

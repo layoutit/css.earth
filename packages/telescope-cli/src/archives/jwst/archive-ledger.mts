@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { packagePath } from '../../paths.mts';
 /** The JWST ledger: what the public archive holds in each observing mode, which of it this repository can already turn into
  * something drawn, and which of the objects it ships JWST has observed.
  *
@@ -15,6 +13,7 @@ import { packagePath } from '../../paths.mts';
  * src/sources/jwst/ledger.json and docs/jwst-ledger.md; --local rewrites only the repository-derived part of both, from the ledger
  * already on disk, because pinning a program or writing a receipt changes nothing the archive said; --targets writes every
  * target of every mode, which is too long to keep. */
+import { programStorePath, packagePath } from '../../paths.mts';
 import { sampleAgreement } from './sample-agreement.mts';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** Durable result of the public qualifier. A small index of exact local artifacts, not an archive ledger. */
+import { inputPath } from '../paths.mts';
 import { parseCalibrationDependencies, verifyCalibrationDependencies } from '../requests/calibration-dependencies.mts';
 import { parseNativeMetadata } from '../products/native-metadata.mts';
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';

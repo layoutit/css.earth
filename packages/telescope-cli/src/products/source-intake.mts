@@ -1,5 +1,5 @@
-import { inputPath } from '../paths.mts';
 /** Inventory native products already pinned by a body package. Header reads are discovery only; qualification verifies whole-file pins. */
+import { inputPath } from '../paths.mts';
 import { isisGeometryBands } from './native-metadata.mts';
 import { sourceHeaders } from './source-transfer.mts';
 import { isis3CoreHeader } from '@cssearth/bake/objects/raster';

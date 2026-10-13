@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../../paths.mts';
-import { packagePath } from '../../../paths.mts';
 /** Re-run the JWST pipeline's level-3 imaging stage (calwebb_image3) for one band of a pinned imaging program.
  *
  *   node packages/telescope-cli/src/archives/jwst/imaging/image3.mts <program id> <band> <work directory> [--grid <sky band recipe.json>] [--raw <dir>]...
@@ -19,6 +17,7 @@ import { packagePath } from '../../../paths.mts';
  * pinned sizes, the settings and CRDS context, the pinned pipeline, and the mosaic with the units and conventions its own
  * header states. Its evidence list starts empty; compare.mts adds the archive agreement it establishes. A mosaic whose record
  * says this same run made it is not made again. */
+import { programStorePath, packagePath } from '../../../paths.mts';
 import { readFile, writeFile, mkdir, rm, stat } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';

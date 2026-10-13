@@ -1,8 +1,8 @@
-import '../test-user-root.mts';
 /** The simulation survey (simulations.mts), offline. The fixture is six of the fourteen dataset records Zenodo returned for
  * TRAPPIST-1e on 2026-10-03, as served: descriptions cut at 700 characters and file lists at five, nothing reworded. Three
  * are climate-model outputs, one is the data of an observation, one is under a no-derivatives license and one names
  * the planet's star in passing. */
+import '../test-user-root.mts';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

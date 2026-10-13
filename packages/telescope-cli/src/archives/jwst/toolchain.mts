@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { verifyToolchainPython, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
-import { CLI_PACKAGE_ROOT, packagePath } from '../../paths.mts';
 /** Install and locate the pinned Python environments the JWST tools run on, under output/toolchains/<id> (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/jwst/toolchain.mts install [eureka|klip]
@@ -12,7 +10,8 @@ import { CLI_PACKAGE_ROOT, packagePath } from '../../paths.mts';
  * without resolving further dependencies; the descriptor's patches are applied to the installed sources and each must match
  * exactly once, and its data archives are fetched and checked by size. The install keeps the descriptor and lock texts it was
  * built from, and the toolchain refuses an environment built from other pins. micromamba itself is resolved by the shared telescope owner. */
-import { resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { verifyToolchainPython, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { CLI_PACKAGE_ROOT, packagePath } from '../../paths.mts';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

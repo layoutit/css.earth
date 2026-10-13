@@ -1,5 +1,3 @@
-import { packagePath } from '../../paths.mts';
-import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** A line mask for one star: which atomic lines its spectrum shows, how deep each is, and how strongly each answers to a
  * magnetic field.
  *
@@ -12,6 +10,8 @@ import { USER_ROOT } from '@cssearth/telescope-core/node';
  * The candidate lines (the list between the spectrograph's limits, neutral and singly ionised atoms heavier than helium
  * with a Landé factor) and each atmosphere's depths are kept under output/espadons/depths, so that a star observed in
  * several runs, or two stars of the same parameters, are computed once. A new atmosphere takes about two minutes. */
+import { packagePath } from '../../paths.mts';
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 

@@ -1,5 +1,3 @@
-import { programStorePath } from '../../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Compare a local image3 mosaic with MAST's level-3 product of the same observation: the oracle for image3.mts.
  *
  *   node packages/telescope-cli/src/archives/jwst/imaging/compare.mts <program id> <band> <local i2d> [--raw <dir>]...
@@ -14,13 +12,14 @@ import { requireWorkspace } from '@cssearth/telescope-core/node';
  * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and sizes, and the
  * agreement it establishes is added as `archive-agreement` evidence to the product record the stage wrote beside the mosaic. A
  * mosaic with no record is refused. */
+import { programStorePath } from '../../../paths.mts';
+import { requireWorkspace, mastFile } from '@cssearth/telescope-core/node';
 import { sampleAgreement } from '../sample-agreement.mts';
 import { stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { skyProjection } from '@cssearth/fits';
-import { mastFile } from '@cssearth/telescope-core/node';
 import { PROGRAMS } from './archive.mts';
 import { bandOfHeader } from './bands.mts';
 import { readImagingProgram, recordProductEvidence } from './image3.mts';

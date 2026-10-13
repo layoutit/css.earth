@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../../paths.mts';
 /** Find a JWST imaging observation's products on MAST and pin them as an imaging program.
  *
  *   node packages/telescope-cli/src/archives/jwst/imaging/archive.mts <program id> <crds context> <level-3 obs_id> [<level-3 obs_id> ...]
@@ -18,11 +15,12 @@ import { packagePath } from '../../../paths.mts';
  * The band comes from the product's filter and pupil. The association fixes the membership; the program stores it, so a re-run
  * of the mosaic step uses the same exposures MAST used. Digests are added the first time a file is downloaded (imaging.mts).
  * The program is written to packages/telescope-cli/src/archives/jwst/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../../paths.mts';
+import { requireWorkspace, MAST_CACHE, mastFile, mastRequest, type MastFile } from '@cssearth/telescope-core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAST_CACHE, mastFile, mastRequest, type MastFile } from '@cssearth/telescope-core/node';
 import { archivePrograms } from '../../programs.mts';
 import { isCubeBand, JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 

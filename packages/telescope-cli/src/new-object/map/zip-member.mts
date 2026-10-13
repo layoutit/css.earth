@@ -1,5 +1,5 @@
-import { telescopeScratch } from '@cssearth/telescope-core/node';
 /** One member of a ZIP archive held in memory, taken with `unzip` as the acquisition plan's `zip-member` step takes it. */
+import { telescopeScratch } from '@cssearth/telescope-core/node';
 import { execFile } from 'node:child_process';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';

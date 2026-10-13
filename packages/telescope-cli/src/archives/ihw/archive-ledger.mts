@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { inputPath, packagePath } from '../../paths.mts';
 /** Build the IHW/PDS near-nucleus Halley ledger from its fixed-width PDS file table.
  *
  *   node packages/telescope-cli/src/archives/ihw/archive-ledger.mts FILELIST.TAB --write
  *
  * The archive table is the index. This code preserves every observation identity and does not infer bandpasses from filter
  * names. The selected archive-final product is qualified only while its committed record agrees with the official pins. */
+import { programStorePath, inputPath, packagePath } from '../../paths.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

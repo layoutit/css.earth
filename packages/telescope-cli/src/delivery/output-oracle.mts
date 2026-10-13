@@ -1,5 +1,5 @@
-import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Test-only, independently implemented references. Never calls the production cube reducer. */
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

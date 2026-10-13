@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { packagePath } from '../../paths.mts';
 /** Reconstruct a star's surface on a sphere with the pinned ROTIR toolchain, and write the star as ROTIR projects it on the sky
  * so the result can be checked with the same tools as a sky-plane image (spotless-disc.mts).
  *
@@ -17,6 +16,7 @@ import { packagePath } from '../../paths.mts';
  *
  * Defaults are the geometry used for a star without a measured axis: inclination 90 and position angle 0 put the pole North in
  * the sky plane, as the display-orientation records do. Only squared visibilities and closure phases are fitted. */
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

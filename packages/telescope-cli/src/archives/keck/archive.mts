@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { requireWorkspace } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
-import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** Pin a Keck observation in the Keck Observatory Archive as a Keck program.
  *
  *   node packages/telescope-cli/src/archives/keck/archive.mts <program id> <instrument> <koaid> [<koaid> ...] [--nights <n>]
@@ -22,6 +18,8 @@ import { USER_ROOT } from '@cssearth/telescope-core/node';
  * card of the file's own header, and a program that names a file the archive does not list is refused when it is read.
  *
  * The program is written to packages/telescope-cli/src/archives/keck/programs/<program id>.json. */
+import { programStorePath, packagePath } from '../../paths.mts';
+import { requireWorkspace, USER_ROOT } from '@cssearth/telescope-core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

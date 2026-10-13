@@ -1,4 +1,3 @@
-import { packagePath } from '../../paths.mts';
 /** A run's magnetic map, by ZDIpy (Folsom et al. 2018, MNRAS 474, 4956, after Donati et al. 2006, MNRAS 370, 629), which
  * toolchain.json pins.
  *
@@ -12,6 +11,7 @@ import { packagePath } from '../../paths.mts';
  *
  * It computes nothing of its own. The target is the one choice ZDIpy leaves to its user: reduce.mts fits a ladder of
  * targets and keeps every step. */
+import { packagePath } from '../../paths.mts';
 import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import type { MaskMeans } from './lsd.mts';

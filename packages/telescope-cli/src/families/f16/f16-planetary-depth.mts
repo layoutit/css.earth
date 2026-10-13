@@ -1,9 +1,8 @@
-import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Source-qualified planetary coordinate grids. This adapter validates and exports bytes; it owns no inversion physics. */
+import { SCIENCE_UNIT_PYTHON, telescopePythonEnvironment, astroqueryToolchain, fileSize } from '@cssearth/telescope-core/node';
 import {spawn} from 'node:child_process';
 import {copyFile} from 'node:fs/promises';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '@cssearth/core';
-import { astroqueryToolchain, fileSize } from '@cssearth/telescope-core/node';
 import type {FamilyHandler,FamilyOperation} from '../../family-handler.mts';
 import {
   PLANETARY_AXIS_ROLES,

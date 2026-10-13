@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
 /** Re-run DRAGONS, Gemini Observatory's own reduction platform, on a pinned programme's raw frames.
  *
  *   node packages/telescope-cli/src/archives/gemini/reduce.mts <program id> <work directory> <stage> [--raw <dir>] [--half a|b]
@@ -30,6 +29,7 @@ import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
  * `cssearth-telescope-product@1` record beside its product, and is skipped when that record says this same run already made
  * the files that are there (`sameRun`). Nothing needs a display: DRAGONS' interactive tools are not used and matplotlib is
  * forced to a non-interactive backend by the toolchain. */
+import { telescopePythonEnvironment, readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -37,7 +37,6 @@ import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '@cssearth/core';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/objects';
-import { readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { dragonsToolchainVersions, geminiToolchain, type GeminiToolchain } from './toolchain.mts';

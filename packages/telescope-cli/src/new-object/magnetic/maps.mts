@@ -1,7 +1,7 @@
-import { USER_ROOT } from '@cssearth/telescope-core/node';
 /** `telescope new-object` for magnetic maps this repository reduced from archived spectra: draft a spec from the reduced
  * programs of a star, and the route (maps/route.mts) that writes each map as a dataset of the star's page and bakes the
  * star. map-datasets.mts holds the records; `archives/espadons/` reduces a program. */
+import { USER_ROOT } from '@cssearth/telescope-core/node';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

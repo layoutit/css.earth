@@ -49,4 +49,3 @@ export async function inspectMeasurementSphere(root:string,target:string){
   if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');
   return {id,object,inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame};
 }
-

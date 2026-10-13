@@ -1,10 +1,9 @@
 /** The marker an installed toolchain keeps: the descriptor and lock texts it was built from. A checkout whose texts differ is
  * asked to reinstall; the texts are compared whole, so no fingerprint of them is kept. */
-import { WORKSPACE } from '../paths.js';
+import { WORKSPACE, TOOLCHAINS } from '../paths.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
-import { TOOLCHAINS } from '../paths.js';
 
 export interface ToolchainPins { readonly id: string; readonly file: string; readonly descriptor: string; readonly lock: string | null; readonly entry: Record<string, unknown> }
 

@@ -1,5 +1,5 @@
-import { legacyWorkspaceRoots } from './toolchain/resolver.js';
 /** Shared MAST boundary. Astroquery owns the service protocol and downloads; css.earth validates returned identities and bytes. */
+import { legacyWorkspaceRoots } from './toolchain/resolver.js';
 import { access, copyFile, mkdir, rm, stat, readFile, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { USER_ROOT } from './paths.js';

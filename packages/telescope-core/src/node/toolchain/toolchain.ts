@@ -1,14 +1,13 @@
+/** Install one pinned astronomy environment per user; keep every installed copy beneath the user root. */
 import { SourceBuildPrerequisiteError } from './source-build.js';
 import { installManagedToolchain } from './environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
-/** Install one pinned astronomy environment per user; keep every installed copy beneath the user root. */
 import { resolveInstalledToolchain } from './resolver.js';
-import { telescopePythonEnvironment } from '../paths.js';
+import { telescopePythonEnvironment, TOOLCHAINS, USER_ROOT } from '../paths.js';
 import { runToolchainProcess } from './process.js';
 import { accessSync, lstatSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { TOOLCHAINS, USER_ROOT } from '../paths.js';
 import { installedMarkerIssue, readToolchainPins, type ToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
 

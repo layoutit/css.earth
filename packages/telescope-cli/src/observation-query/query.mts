@@ -1,5 +1,3 @@
-import { TARGET_CATALOGUE_SNAPSHOT } from '../paths.mts';
-import { inputPath, packagePath } from '../paths.mts';
 /** Which observations in the archives might measure a quantity on a target, and what stays unknown until one is read.
  *
  * The ledgers hold what each archive has per object and per mode: how many observations, which programmes, which programs are
@@ -22,6 +20,7 @@ import { inputPath, packagePath } from '../paths.mts';
  *
  * Mode capabilities are the one authored input, in `modes.json`, each with the citation it was read from. A mode with no entry
  * is reported as "capabilities not recorded" rather than guessed. */
+import { TARGET_CATALOGUE_SNAPSHOT, inputPath, packagePath } from '../paths.mts';
 import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest, inputWavelengths } from '../requests/recipe-request.mts';
 import { skyCatalogueEntry, parseLimits, loadTargetAssociations, parseTargetAssociationSources, requireWorkspace, USER_ROOT } from '@cssearth/telescope-core/node';
 import { parseRegion, parseAcceptedAssumptions } from '@cssearth/objects';

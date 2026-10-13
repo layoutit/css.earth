@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { programStorePath } from '../../paths.mts';
-import { packagePath } from '../../paths.mts';
 /** The Hubble ledger: what the public archive holds in each instrument configuration, which of it this repository can already
  * re-calibrate, and which of the objects it ships Hubble has observed.
  *
@@ -27,6 +25,7 @@ import { packagePath } from '../../paths.mts';
  * altogether partway through a pass. A count or a listing that will not answer stops the pass, because the ledger would be
  * wrong without it; a cone search that will not answer is recorded as unanswered and the pass goes on, because which objects
  * were asked and which were not is itself the honest result. */
+import { programStorePath, packagePath } from '../../paths.mts';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

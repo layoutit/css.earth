@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform } from '@cssearth/telescope-core/node';
-import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
-import { telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned ESO VLT/NACO pipeline under output/toolchains/naco (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/naco/toolchain.mts install [--cache <dir> ...]
@@ -19,6 +15,8 @@ import { packagePath } from '../../paths.mts';
  *
  * An installed toolchain keeps the text of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another
  * pin. The downloaded archive is deleted after the build. */
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, copyFile, link, readdir, readFile, rm, stat } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -27,7 +25,6 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const repository = USER_ROOT;
 /** The toolchain pin sits beside this code and the programs it reduces. */

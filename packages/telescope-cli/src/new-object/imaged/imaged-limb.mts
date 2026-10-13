@@ -1,4 +1,3 @@
-import { requireWorkspace } from '@cssearth/telescope-core/node';
 /** Limb darkening for a directly imaged planet. Its disc is unresolved, so its dataset is one measured infrared color; without
  * a limb law that color fills a flat disc. A star takes its law from a model-atmosphere grid at its own temperature and gravity
  * (limb.mts), and so does the planet, from the grid computed for objects this cool in the bands its color is drawn from:
@@ -24,6 +23,7 @@ import { requireWorkspace } from '@cssearth/telescope-core/node';
  *
  * A self-luminous planet with no color is a gray disc, and flat too. Where a paper's fit is recorded with the band the planet is
  * seen in (`band` in the fit record), the same law darkens the gray; its shape paragraph and credit stay as they are. */
+import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

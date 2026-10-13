@@ -1,19 +1,17 @@
 #!/usr/bin/env node
-import { resolveInstalledToolchain } from '@cssearth/telescope-core/node';
-import { ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment } from '@cssearth/telescope-core/node';
-import { packagePath } from '../../paths.mts';
 /** Install and locate the pinned MEarth photometry code of toolchain.json under output/toolchains/mearth (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/mearth/toolchain.mts install|verify
  *
  * A Python environment with sfit, the MEarth Project's own fitting code, at a pinned commit. An installed toolchain keeps
  * the text of its descriptor; `verify` and `toolchainPaths` refuse one built from other pins. */
+import { resolveInstalledToolchain, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 
 const FILE = 'packages/telescope-cli/src/archives/mearth/toolchain.json';
 export const MEARTH_ROOT = resolve(USER_ROOT, 'output/toolchains/mearth');
