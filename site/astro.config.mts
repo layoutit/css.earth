@@ -14,6 +14,8 @@ import { assetOrigin, resolveWorldBillboards } from "./server-assets/asset-origi
 import { cssEarthVersion, finalizeBuildMetadata } from './build/build-metadata.mts';
 import { incrementalBuildEnabled, incrementalRenderEnabled, VERSION_TOKEN } from './contracts/build-metadata.mts';
 import { sourceRevision } from './content/source-revision.mts';
+import { staticPageStyles } from './build/static-page-styles.mts';
+import { staticPageStylesEnabled } from './server/compiled-page-styles.mts';
 
 // Astro resolves relative directories against the working directory, not this file: name them from here, so the
 // config builds the same site from any working directory.
@@ -71,7 +73,7 @@ export default defineConfig({
   } }],
   vite: {
     css: { postcss: { plugins: [preparedMotionCss(root)] } },
-    plugins: [searchServer(), performanceSourceMaps(), packageSources(),
+    plugins: [searchServer(), performanceSourceMaps(), packageSources(), staticPageStyles(root, staticPageStylesEnabled()),
       // Safari fetches a module a second time when Vite's preload helper links one the import graph already requested
       // (163 KB of 932 on Earth's first visit, 2026-09-30). The client environment owns the browser bundle's setting.
       // The world summary ships as Vite emits it; its billboards take their published addresses (asset-origin.mts).

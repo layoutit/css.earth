@@ -521,3 +521,13 @@ run across four jobs; hosted runtime remains to be measured. Runner image/CPU
 and tool versions identify relevant timing differences. No secrets, deployment,
 artifact upload, server rendering, or site publication participates, and the
 production deployment workflow is unchanged.
+
+`CSSEARTH_STATIC_STYLES=1` additionally isolates object stylesheet dependencies
+during production builds. Vite finishes its normal CSS transforms into a private
+build transport; static page rendering reads the selected styles from that
+transport, and incremental keys include their finished bytes. Combine it with
+`CSSEARTH_INCREMENTAL_BUILD=1` to reuse pages after unrelated stylesheet edits.
+It is off by default, leaves development HMR unchanged, and adds no visitor-side
+CSS preparation or server rendering.
+The opt-in hosted incremental experiment enables this flag for both warm builds
+and their cache-off controls.
