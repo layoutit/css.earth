@@ -1,7 +1,7 @@
 import './test-user-root.mts';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { copyFile, mkdir, mkdtemp, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
+import { cp, copyFile, mkdir, mkdtemp, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { isBuiltin } from 'node:module';
 import { resolve } from 'node:path';
@@ -20,6 +20,8 @@ test('published dependencies exactly match runtime external imports across shipp
     await mkdir(resolve(directory, 'data'));
     await copyFile(resolve(packageRoot, 'package.json'), resolve(directory, 'package.json'));
     await copyFile(resolve(packageRoot, 'README.md'), resolve(directory, 'README.md'));
+    for (const name of ['skills', '.claude-plugin', '.codex-plugin', '.factory-plugin'])
+      await cp(resolve(packageRoot, name), resolve(directory, name), { recursive: true });
     const externalPackages = new Set<string>();
     for (const format of ['esm', 'cjs'] as const) {
       const result = await build({
@@ -127,7 +129,7 @@ function assertPackedClosure(files: readonly string[]) {
   for(const path of files) {
     // Forbidden contents are rejected everywhere, including otherwise allowed archive descendants.
     assert.doesNotMatch(path, /(?:^|\/)(?:pnpm-lock\.yaml|package-lock\.json|npm-shrinkwrap\.json|yarn\.lock|bun\.lockb?|composer\.lock|Cargo\.lock|Pipfile\.lock|poetry\.lock|uv\.lock|evidence|tests?|__tests__|fixtures?)(?:\/|$)|(?:^|\/)src\/objects(?:\/|$)|(?:^|\/)(?:test_[^/]*|[^/]*\.(?:test|spec)\.[^/]+)$/u, path);
-    assert.match(path, /^package\/(?:package\.json|README\.md|LICENSE|dist\/(?:(?:cli|telescope)\.mjs|(?:sphere|viewer)-lane\.(?:js|cjs|d\.ts|d\.cts))|data\/.+)$/u, path);
+    assert.match(path, /^package\/(?:package\.json|README\.md|LICENSE|skills\/telescope\/SKILL\.md|\.(?:claude|codex|factory)-plugin\/plugin\.json|dist\/(?:(?:cli|telescope)\.mjs|(?:sphere|viewer)-lane\.(?:js|cjs|d\.ts|d\.cts))|data\/.+)$/u, path);
     if(!path.startsWith('package/data/'))continue;
     // Generated viewer inputs have explicit readers; archive programs/ledgers/toolchains are selected dynamically.
     assert.match(path,/^package\/data\/(?:spheres\/sphere-bank\.json\.gz|renderer\/volume\.css|target-catalogue\.json|telescope-core\/package\.json|telescope-core\/toolchains\/.+|cli\/src\/(?:archives\/.+|examples\.json|modes\.json)|src\/sources\/(?:wwt\/(?:core-imagesets\.jsonl|fits-associations\.json|phat-fits\.json|WWT-CORE-CATALOGS-LICENSE\.txt)|[^/]+\/(?:ledger\.json|discovery\.json|target-associations\.json)))$/u,path);

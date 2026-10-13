@@ -15,6 +15,7 @@ import { projectOutput } from './delivery/projection.mts';
 import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
 import { HELP, SHORT_HELP, VERSION } from './help.mts';
+import { manageSkill } from './skill-install.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
@@ -211,6 +212,11 @@ export async function main(args: readonly string[], root: string | undefined = u
     const options = parseCli(args);
     if (options.command === 'help') { io.write(options.short ? SHORT_HELP : HELP); return 0; }
     if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
+    if (options.command === 'skill') {
+      const result = manageSkill(options);
+      io.write(options.json ? `${JSON.stringify(result)}\n` : `${result.status}: ${result.target} (${result.mode})\n`);
+      return 0;
+    }
     // Instrument tools own their logging. Keep every such message off machine-readable stdout.
     const stdout = process.stdout.write;
     let text: string, code: number;

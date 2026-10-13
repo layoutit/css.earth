@@ -31,6 +31,59 @@ telescope --help
 
 For site development, use `telescope --workspace /path/to/css.earth …` with the checkout's installed dependencies. This uses that checkout's data and scripts for `new-object` and bake. Inside the checkout, `pnpm telescope …` runs the source implementation directly.
 
+## Agent skill
+
+The npm package ships one [telescope skill](skills/telescope/SKILL.md). Choose the host you use after installing the CLI; each line below is an independent host choice.
+
+```sh
+npm install -g @cssearth/telescope
+telescope --help
+telescope skill install --provider claude
+telescope skill install --provider codex
+telescope skill install --provider agents
+telescope skill install --provider grok
+telescope skill install --provider agy
+telescope skill install --provider antigravity
+telescope skill install --provider cursor
+telescope skill install --provider opencode
+```
+
+For another host or a project, use `telescope skill install --dest /absolute/path/to/skills`. Add `--copy` for independent files, including where Windows directory symlinks are unavailable. The default link points into the installed npm package: keep that installation in place. Use a persistent install before linking, or `npx @cssearth/telescope skill install --provider codex --copy` for a copy. Add `--json` for machine-readable results.
+
+Destinations:
+
+| Host | Skills directory |
+| --- | --- |
+| Claude | `$CLAUDE_CONFIG_DIR/skills`, otherwise `~/.claude/skills` |
+| Codex | `$CODEX_HOME/skills`, otherwise `~/.codex/skills` |
+| Agents, Grok | `~/.agents/skills` |
+| Agy | `~/.gemini/antigravity-cli/skills` |
+| Antigravity | `~/.gemini/config/skills` |
+| Cursor | `~/.cursor/skills` |
+| OpenCode | `$XDG_CONFIG_HOME/opencode/skills`, otherwise `~/.config/opencode/skills` |
+
+A provider or destination is required. Repeated installation is a no-op. Unrelated files, directories and links are refused. Copies carry `.telescope-install.json`, recording ownership and exact file bytes and directory membership. To switch modes or update an unchanged copy, uninstall first. Changed copies remain intact. `telescope skill uninstall --provider NAME` (or `--dest DIRECTORY`) removes only this package's link or an unchanged owned copy; it leaves other skills and host configuration alone. Restart the host to rediscover installed skills.
+
+### Native plugin marketplaces
+
+The repository's marketplaces list `@cssearth/telescope` as an npm plugin source. These commands require a published npm release and the marketplace files on the selected repository branch. From a local checkout, replace `layoutit/css.earth` with its absolute root path.
+
+```sh
+claude plugin marketplace add layoutit/css.earth
+claude plugin install telescope@cssearth-telescope
+codex plugin marketplace add layoutit/css.earth
+codex plugin add telescope@cssearth-telescope
+droid plugin marketplace add layoutit/css.earth
+droid plugin marketplace list
+droid plugin install telescope@css.earth --scope user
+```
+
+Choose only your host's pair of commands. Factory derives the registered marketplace name from the source; use the name printed by `marketplace list` in `telescope@NAME` (a local checkout's directory name can differ). Claude and Codex use the manifest's `cssearth-telescope` name. The package keeps skills at its root and ships all three host manifests, including Codex's compatibility manifest. It needs no lifecycle script to build the skill.
+
+Schema checks were compared with current [Claude plugin](https://code.claude.com/docs/en/plugins-reference) and [marketplace](https://code.claude.com/docs/en/plugins/marketplace-reference), [OpenAI plugin](https://developers.openai.com/plugins/build/plugins), and [Factory plugin](https://docs.factory.com/harness/plugins) documentation. All document npm plugin sources. Claude and Codex accept root-relative skill paths; Factory discovers `skills/<name>/SKILL.md` by layout and does not read the manifest's component fields. Native plugin installation and standalone skill installation are separate; use one route per host.
+
+Pi reads `pi.skills` from the npm metadata: `pi install npm:@cssearth/telescope`. Other supported hosts can discover the packaged folder through `npx skills add https://github.com/layoutit/css.earth/tree/main/packages/telescope-cli/skills/telescope`; this depends on the current skills CLI and the folder being available on that branch.
+
 ## Use
 
 ```sh

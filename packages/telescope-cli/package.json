@@ -127,7 +127,11 @@
   "files": [
     "dist",
     "data",
-    "README.md"
+    "README.md",
+    "skills",
+    ".claude-plugin",
+    ".codex-plugin",
+    ".factory-plugin"
   ],
   "engines": {
     "node": "^22.18.0 || >=24.0.0"
@@ -183,5 +187,10 @@
     "@cssearth/spice": "workspace:*",
     "@cssearth/telescope-core": "workspace:*"
   },
-  "oracleManifest": "oracle-manifest.json"
+  "oracleManifest": "oracle-manifest.json",
+  "pi": {
+    "skills": [
+      "./skills/telescope"
+    ]
+  }
 }

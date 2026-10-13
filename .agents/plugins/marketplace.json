@@ -1,0 +1,13 @@
+{
+  "name": "cssearth-telescope",
+  "interface": { "displayName": "css.earth Telescope" },
+  "plugins": [
+    {
+      "name": "telescope",
+      "description": "Find real telescope observations, retrieve qualified data, and export standalone HTML.",
+      "source": { "source": "npm", "package": "@cssearth/telescope" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

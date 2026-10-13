@@ -62,7 +62,7 @@ export async function preparePublishPackage(root: string, packageRoot: string): 
   delete manifest.devDependencies; delete manifest.scripts; delete manifest.oracleManifest;
   const destination = resolve(packageRoot, '.package');
   await mkdir(destination, { recursive: true });
-  for (const name of ['dist', 'data']) await cp(resolve(packageRoot, name), resolve(destination, name), { recursive: true });
+  for (const name of ['dist', 'data', 'skills', '.claude-plugin', '.codex-plugin', '.factory-plugin']) await cp(resolve(packageRoot, name), resolve(destination, name), { recursive: true });
   for (const name of ['README.md']) await copyFile(resolve(packageRoot, name), resolve(destination, name));
   await copyFile(resolve(root, 'LICENSE'), resolve(destination, 'LICENSE'));
   await writeFile(resolve(destination, 'package.json'), JSON.stringify(manifest, null, 2) + '\n');

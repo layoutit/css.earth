@@ -1,0 +1,19 @@
+{
+  "name": "telescope",
+  "version": "0.2.0",
+  "description": "Find real telescope observations, retrieve qualified data, and export standalone HTML.",
+  "author": {
+    "name": "css.earth",
+    "url": "https://css.earth"
+  },
+  "repository": "https://github.com/layoutit/css.earth",
+  "homepage": "https://github.com/layoutit/css.earth/tree/main/packages/telescope-cli",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Telescope",
+    "shortDescription": "Real observations and offline HTML viewers",
+    "developerName": "css.earth",
+    "category": "Productivity"
+  }
+}

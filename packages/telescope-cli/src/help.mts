@@ -12,6 +12,12 @@ Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/RE
 
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
 
+Agent skill (explicit host or skills directory):
+  telescope skill install|uninstall (--provider NAME | --dest DIRECTORY) [--copy] [--json]
+  Providers: claude, codex, agents, grok, agy, antigravity, cursor, opencode.
+  Default: symlink to this package; --copy writes an owned independent copy.
+  Repeats do nothing; unrelated or modified content is refused. No host config is edited.
+
 Human entry points:
   telescope explore [TARGET] [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY] [--fresh]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
