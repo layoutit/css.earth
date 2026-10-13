@@ -20,7 +20,7 @@ Install or check one with `node packages/telescope-cli/src/toolchains/astronomy-
 An installed environment keeps a copy of the descriptor and lock it was built from: when either text changes, every checkout
 is asked to reinstall.
 
-`resolveMicromamba()` owns installer bootstrap: `CSSEARTH_TELESCOPE_MICROMAMBA`, then `PATH`, then official release 2.9.0-0 under `USER_ROOT/micromamba/`. The published checksum is fetched and verified in memory before the executable is installed atomically; no checksum file is retained. Conda-forge supplies Python. Async astronomy consumers install missing pins on first use; synchronous preparation consumers retain the explicit installer command.
+`resolveMicromamba()` owns installer bootstrap: `CSSEARTH_TELESCOPE_MICROMAMBA`, then a micromamba on `PATH` only if it is 2.0.7 or later, then official release 2.9.0-0 downloaded over HTTPS under `USER_ROOT/micromamba/`. The downloaded binary must run and report the pinned version before the executable is installed atomically. Conda-forge supplies Python. Async astronomy consumers install missing pins on first use; synchronous preparation consumers retain the explicit installer command.
 
 What stays outside the package: the telescope command (`@cssearth/telescope`) with each archive's clients, reducers and
 ledger builders and the ledger machinery they share, the archives' pinned programs and toolchain pins

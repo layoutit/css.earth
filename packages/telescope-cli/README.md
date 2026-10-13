@@ -16,7 +16,7 @@ Without a workspace, `new-object` (every drafter, `SPEC.json`, `--check`, `--bak
 
 ## Setup
 
-Use Node 22.18+ (22.x) or Node 24+. No system Python or micromamba is required: installers obtain Python from conda-forge. The telescope uses `CSSEARTH_TELESCOPE_MICROMAMBA` first, then a micromamba on `PATH`, otherwise downloads official micromamba release 2.9.0-0 into the user root and checks its published checksum in memory. Download progress goes to stderr; interrupted transfers restart cleanly when the same command is retried with network access.
+Use Node 22.18+ (22.x) or Node 24+. No system Python or micromamba is required: installers obtain Python from conda-forge. The telescope uses `CSSEARTH_TELESCOPE_MICROMAMBA` first, then a micromamba on `PATH` only if it is 2.0.7 or later, otherwise downloads official micromamba release 2.9.0-0 over HTTPS into the user root and verifies the downloaded binary runs and reports the pinned version before installing it atomically. Download progress goes to stderr; interrupted transfers restart cleanly when the same command is retried with network access.
 
 Managed Python toolchains need macOS or Linux; on Windows use WSL. Commands that need no Python remain available on Windows. Some instrument locks target a specific Unix platform; consult their descriptors before installing.
 

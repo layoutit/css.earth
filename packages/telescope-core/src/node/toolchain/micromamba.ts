@@ -1,6 +1,5 @@
 /** One executable owner: an explicit override, PATH, or a verified official release in the user root. */
 import { spawnSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { constants } from 'node:fs';
 import { access, chmod, mkdir, mkdtemp, open, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { delimiter, isAbsolute, resolve } from 'node:path';
@@ -78,24 +77,20 @@ async function discardAbandonedDownloads(directory: string): Promise<void> {
 }
 
 async function responseFor(url: string, fetcher: NonNullable<MicromambaOptions['fetcher']>): Promise<Response> {
+  if (new URL(url).protocol !== 'https:') throw new Error('Managed micromamba downloads require HTTPS.');
   const response = await fetcher(url, { signal: AbortSignal.timeout(120_000) });
   if (!response.ok || !response.body) throw new Error(`${url} answered HTTP ${response.status} without a usable download.`);
   return response;
 }
 
-/** Checksums are read and compared in memory only; no checksum/receipt is written. */
 async function download(path: string, asset: string, fetcher: NonNullable<MicromambaOptions['fetcher']>, report: (message: string) => void): Promise<void> {
   const url = `${RELEASES}/${MICROMAMBA_RELEASE}/${asset}`;
-  const checksumResponse = await responseFor(`${url}.sha256`, fetcher);
-  const checksumBytes = await readSmallResponse(checksumResponse);
-  const expected = new TextDecoder().decode(checksumBytes).trim();
-  if (!/^[a-fA-F0-9]{64}$/u.test(expected)) throw new Error(`Invalid published checksum for ${asset}.`);
   const response = await responseFor(url, fetcher), length = response.headers.get('content-length');
   const size = length === null ? undefined : Number(length);
   if (size !== undefined && (!/^\d+$/u.test(length ?? '') || !Number.isSafeInteger(size) || size < 1 || size > 64 * 1024 * 1024))
     throw new Error(`Invalid download size for ${asset}.`);
   report(`Downloading micromamba ${MICROMAMBA_RELEASE}: ${url} (${size === undefined ? 'size not supplied' : `${size} bytes`})\n`);
-  const file = await open(path, 'wx', 0o600), digest = createHash('sha256');
+  const file = await open(path, 'wx', 0o600);
   let received = 0, lastReport = Date.now();
   const reader = response.body!.getReader();
   try {
@@ -103,26 +98,13 @@ async function download(path: string, asset: string, fetcher: NonNullable<Microm
       const chunk = await reader.read(); if (chunk.done) break;
       received += chunk.value.byteLength;
       if (received > 64 * 1024 * 1024) throw new Error(`Micromamba download exceeds the size limit for ${asset}.`);
-      digest.update(chunk.value); await file.writeFile(chunk.value);
+      await file.writeFile(chunk.value);
       if (Date.now() - lastReport >= 5_000) { report(`Micromamba: received ${received} bytes${size === undefined ? '' : ` / ${size}`}\n`); lastReport = Date.now(); }
     }
     if (!received || (size !== undefined && received !== size)) throw new Error(`Incomplete micromamba download for ${asset}: received ${received} bytes.`);
-    if (digest.digest('hex') !== expected.toLowerCase()) throw new Error(`Micromamba checksum mismatch for ${asset}; the download was refused.`);
     await file.sync();
-    report(`Micromamba: verified ${received} bytes.\n`);
+    report(`Micromamba: received ${received} bytes.\n`);
   } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); await file.close(); }
-}
-async function readSmallResponse(response: Response): Promise<Uint8Array> {
-  const reader = response.body!.getReader(), chunks: Uint8Array[] = []; let size = 0;
-  try {
-    for (;;) {
-      const chunk = await reader.read(); if (chunk.done) break;
-      size += chunk.value.byteLength;
-      if (size > 4096) throw new Error('Published micromamba checksum exceeds its size limit.');
-      chunks.push(chunk.value);
-    }
-    return Buffer.concat(chunks);
-  } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
 }
 
 export async function resolveMicromamba(options: MicromambaOptions = {}): Promise<string> {

@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { chmod, mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -8,13 +7,11 @@ import test from 'node:test';
 import { MICROMAMBA_RELEASE, micromambaAsset, resolveMicromamba, type MicromambaOptions } from './micromamba.js';
 
 const binary = Buffer.from(`#!${process.execPath}\nprocess.stdout.write('2.9.0\\n');\n`);
-const checksum = () => createHash('sha256').update(binary).digest('hex');
 async function fixture() {
   const userRoot = await mkdtemp(resolve(tmpdir(), 'managed-micromamba-')), messages: string[] = [], urls: string[] = [];
   const fetcher: NonNullable<MicromambaOptions['fetcher']> = async url => {
     urls.push(url);
-    return url.endsWith('.sha256') ? new Response(checksum()) :
-      new Response(binary, { headers: { 'content-length': String(binary.length) } });
+    return new Response(binary, { headers: { 'content-length': String(binary.length) } });
   };
   const options: MicromambaOptions = { userRoot, env: { PATH: '' }, fetcher, report: message => { messages.push(message); } };
   const directory = resolve(userRoot, 'micromamba', MICROMAMBA_RELEASE, micromambaAsset(process.platform, process.arch));
@@ -29,7 +26,8 @@ test('a cold user root with no Python, uv or micromamba on PATH downloads the ma
     assert.equal(path, resolve(f.directory, 'micromamba'));
     assert.deepEqual(await readFile(path), binary);
     assert.equal((await stat(path)).mode & 0o111, 0o111);
-    assert.equal(f.urls.length, 2);
+    assert.equal(f.urls.length, 1);
+    assert.ok(f.urls.every(url => !url.endsWith('.sha256')), 'no published checksum URL is requested');
     assert.ok(f.urls.every(url => url.startsWith(`https://github.com/mamba-org/micromamba-releases/releases/download/${MICROMAMBA_RELEASE}/`)));
     assert.match(f.messages.join(''), new RegExp(`${binary.length} bytes`));
     assert.match(f.messages.join(''), /Downloading micromamba.*https:/u);
@@ -67,7 +65,7 @@ for (const [version, status] of [
       await mkdir(directory);
       await writeFile(path, `#!${process.execPath}\nprocess.stdout.write(${JSON.stringify(version)}); process.exit(${status});\n`, { mode: 0o755 });
       assert.equal(await resolveMicromamba({ ...f.options, env: { PATH: directory } }), resolve(f.directory, 'micromamba'));
-      assert.equal(f.urls.length, 2, 'an incompatible PATH binary triggers the managed download');
+      assert.equal(f.urls.length, 1, 'an incompatible PATH binary triggers the managed download');
     } finally { await f.cleanup(); }
   });
 }
@@ -83,20 +81,10 @@ test('stable micromamba 2.0.7 and later on PATH work without a download', async 
     assert.deepEqual(f.urls, []);
   } finally { await f.cleanup(); }
 });
-test('a corrupted download is refused even when it runs and reports the pinned version', async () => {
-  const f = await fixture();
-  try {
-    const corrupt = Buffer.concat([binary, Buffer.from('// changed bytes\n')]);
-    await assert.rejects(resolveMicromamba({ ...f.options, fetcher: async url => url.endsWith('.sha256') ?
-      new Response(checksum()) : new Response(corrupt) }), /checksum mismatch/u);
-    assert.deepEqual(await readdir(f.directory), []);
-    await resolveMicromamba(f.options); // A failed verification does not poison the next attempt.
-  } finally { await f.cleanup(); }
-});
 test('a failed transfer leaves no installed or partial binary and retries from the beginning', async () => {
   const f = await fixture();
   try {
-    const fetcher: NonNullable<MicromambaOptions['fetcher']> = async url => url.endsWith('.sha256') ? new Response(checksum()) :
+    const fetcher: NonNullable<MicromambaOptions['fetcher']> = async () =>
       new Response(new ReadableStream<Uint8Array>({ start(controller) { controller.enqueue(binary.subarray(0, 8)); },
         pull(controller) { controller.error(new Error('connection lost')); } }));
     await assert.rejects(resolveMicromamba({ ...f.options, fetcher }), /Missing managed micromamba.*Python cannot be installed.*connection lost.*Retry the same telescope command/u);
@@ -110,31 +98,39 @@ test('a failed transfer leaves no installed or partial binary and retries from t
     assert.deepEqual(await readdir(f.directory), ['micromamba']);
   } finally { await f.cleanup(); }
 });
-test('network and checksum failures identify the missing download and leave a clean retry', async () => {
-  for (const kind of ['offline', 'http', 'invalid-checksum', 'truncated', 'wrong-version']) {
+for (const [kind, reason] of [
+  ['offline', /network blocked/u], ['http', /HTTP 404/u],
+  ['short-transfer', /Incomplete micromamba download/u],
+  ['truncated', /does not run as 2\.9\.0/u], ['wrong-version', /does not run as 2\.9\.0/u],
+  ['missing-version', /does not run as 2\.9\.0/u],
+] as const) {
+  test(`${kind} refuses the managed download and leaves a clean retry`, async () => {
     const f = await fixture();
     try {
-      await assert.rejects(resolveMicromamba({ ...f.options, fetcher: async url => {
+      await assert.rejects(resolveMicromamba({ ...f.options, fetcher: async () => {
         if (kind === 'offline') throw new Error('network blocked');
         if (kind === 'http') return new Response('missing', { status: 404 });
-        const wrong = Buffer.from(`#!${process.execPath}\nprocess.exit(0);\n`);
-        if (url.endsWith('.sha256')) return new Response(kind === 'invalid-checksum' ? 'invalid' :
-          kind === 'wrong-version' ? createHash('sha256').update(wrong).digest('hex') : checksum());
-        if (kind === 'truncated') return new Response(binary.subarray(0, 8), { headers: { 'content-length': String(binary.length) } });
-        // Matching checksum, but the process exits without the required positive version signal.
-        return new Response(wrong);
-      } }), /Missing managed micromamba.*Retry the same telescope command/u);
+        if (kind === 'short-transfer') return new Response(binary.subarray(0, 8), { headers: { 'content-length': String(binary.length) } });
+        if (kind === 'truncated') return new Response(binary.subarray(0, 8));
+        return new Response(`#!${process.execPath}\n${kind === 'wrong-version' ? "process.stdout.write('2.8.0\\n');" : 'process.exit(0);'}\n`);
+      } }), error => {
+        assert.ok(error instanceof Error);
+        assert.match(error.message, /Missing managed micromamba.*Retry the same telescope command/u);
+        assert.match(error.message, reason);
+        return true;
+      });
       assert.deepEqual(await readdir(f.directory), []);
+      assert.deepEqual(await readFile(await resolveMicromamba(f.options)), binary);
     } finally { await f.cleanup(); }
-  }
-});
+  });
+}
 test('simultaneous callers share one download, and dead staging directories are reclaimed', async () => {
   const f = await fixture();
   try {
     await mkdir(resolve(f.directory, 'download-abandoned'), { recursive: true });
     await writeFile(resolve(f.directory, 'download-abandoned/owner'), '2147483647');
     const paths = await Promise.all([resolveMicromamba(f.options), resolveMicromamba(f.options)]);
-    assert.equal(paths[0], paths[1]); assert.equal(f.urls.length, 2);
+    assert.equal(paths[0], paths[1]); assert.equal(f.urls.length, 1);
     assert.deepEqual(await readdir(f.directory), ['micromamba']);
   } finally { await f.cleanup(); }
 });
@@ -143,13 +139,12 @@ test('separate processes publish complete verified binaries without sharing part
   try {
     const source = `
 import { resolveMicromamba } from ${JSON.stringify(new URL('./micromamba.ts', import.meta.url).href)};
-import { createHash } from 'node:crypto';
 const binary = Buffer.from(${JSON.stringify(binary.toString())});
 const path = await resolveMicromamba({
   userRoot: ${JSON.stringify(f.userRoot)}, env: { PATH: '' }, report: () => {},
-  fetcher: async url => {
+  fetcher: async () => {
     await new Promise(done => setTimeout(done, 100));
-    return url.endsWith('.sha256') ? new Response(createHash('sha256').update(binary).digest('hex')) : new Response(binary);
+    return new Response(binary);
   }
 });
 process.stdout.write(path);
