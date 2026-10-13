@@ -16,7 +16,7 @@ async function publish(snapshot: DiscoverySnapshot): Promise<Pin> {
   const text = canonical(snapshot), bytes = Buffer.byteLength(text);
   const directory = resolve(USER_ROOT, 'output/telescopes/vo/metadata');
   const response = basename(snapshot.response.raw.path).replace(/\.xml$/iu, '')
-    .replace(/[^a-z0-9_-]+/giu, '-').replace(/^-+|-+$/gu, '').slice(0, 120) || 'response';
+    .replace(/[^A-Za-z0-9_-]+/gu, '-').replace(/^-+|-+$/gu, '').slice(0, 120) || 'response';
   const timestamp = new Date().toISOString().replace(/[-:]/gu, '').replace(/\.\d{3}Z$/u, 'Z');
   await mkdir(directory, { recursive: true });
   const temporary = resolve(directory, `${randomUUID()}.pending`);

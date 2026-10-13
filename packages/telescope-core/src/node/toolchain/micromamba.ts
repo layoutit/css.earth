@@ -77,10 +77,21 @@ async function discardAbandonedDownloads(directory: string): Promise<void> {
 }
 
 async function responseFor(url: string, fetcher: NonNullable<MicromambaOptions['fetcher']>): Promise<Response> {
-  if (new URL(url).protocol !== 'https:') throw new Error('Managed micromamba downloads require HTTPS.');
-  const response = await fetcher(url, { signal: AbortSignal.timeout(120_000) });
-  if (!response.ok || !response.body) throw new Error(`${url} answered HTTP ${response.status} without a usable download.`);
-  return response;
+  const signal = AbortSignal.timeout(120_000);
+  for (let redirects = 0; ; redirects++) {
+    if (new URL(url).protocol !== 'https:') throw new Error(`Managed micromamba downloads require HTTPS at every redirect hop: ${url}`);
+    const response = await fetcher(url, { signal, redirect: 'manual' });
+    if ([301, 302, 303, 307, 308].includes(response.status)) {
+      await response.body?.cancel().catch(() => {});
+      if (redirects >= 10) throw new Error('Managed micromamba download exceeded 10 redirects.');
+      const location = response.headers.get('location');
+      if (!location) throw new Error(`${url} answered HTTP ${response.status} without a redirect Location.`);
+      url = new URL(location, url).href;
+      continue;
+    }
+    if (!response.ok || !response.body) throw new Error(`${url} answered HTTP ${response.status} without a usable download.`);
+    return response;
+  }
 }
 
 async function download(path: string, asset: string, fetcher: NonNullable<MicromambaOptions['fetcher']>, report: (message: string) => void): Promise<void> {

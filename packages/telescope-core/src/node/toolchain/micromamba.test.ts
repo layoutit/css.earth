@@ -39,6 +39,69 @@ test('a cold user root with no Python, uv or micromamba on PATH downloads the ma
     await f.cleanup();
   }
 });
+test('HTTPS redirects resolve relative locations and reach the release objects host', async () => {
+  const f = await fixture(), urls: string[] = [], signals: (AbortSignal | null | undefined)[] = [];
+  try {
+    const path = await resolveMicromamba({ ...f.options, fetcher: async (url, options) => {
+      assert.equal(options.redirect, 'manual');
+      urls.push(url); signals.push(options.signal);
+      if (urls.length === 1) return new Response(null, { status: 302, headers: { location: './redirected' } });
+      if (urls.length === 2) return new Response(null, { status: 307, headers: { location: 'https://release-assets.githubusercontent.com/objects/micromamba' } });
+      return new Response(binary, { headers: { 'content-length': String(binary.length) } });
+    } });
+    assert.deepEqual(urls, [
+      `https://github.com/mamba-org/micromamba-releases/releases/download/${MICROMAMBA_RELEASE}/${micromambaAsset(process.platform, process.arch)}`,
+      `https://github.com/mamba-org/micromamba-releases/releases/download/${MICROMAMBA_RELEASE}/redirected`,
+      'https://release-assets.githubusercontent.com/objects/micromamba',
+    ]);
+    assert.ok(signals[0] instanceof AbortSignal);
+    assert.ok(signals.every(signal => signal === signals[0]), 'all hops retain the same timeout');
+    assert.deepEqual(await readFile(path), binary);
+    assert.deepEqual(await readdir(f.directory), ['micromamba']);
+  } finally { await f.cleanup(); }
+});
+test('an HTTPS to HTTP redirect is refused before fetching or reading the insecure binary', async () => {
+  const f = await fixture(), urls: string[] = [];
+  let bodyReads = 0, cancelled = false;
+  try {
+    await assert.rejects(resolveMicromamba({ ...f.options, fetcher: async (url, options) => {
+      urls.push(url);
+      // Model native auto-follow: a valid executable arrives unless manual redirects are requested.
+      if (options.redirect !== 'manual' || new URL(url).protocol === 'http:') {
+        bodyReads++;
+        return new Response(binary);
+      }
+      return new Response(new ReadableStream<Uint8Array>({
+        pull(controller) { bodyReads++; controller.enqueue(binary); },
+        cancel() { cancelled = true; },
+      }, { highWaterMark: 0 }), { status: 302, headers: { location: 'http://objects.example/micromamba' } });
+    } }), /require HTTPS at every redirect hop: http:\/\/objects\.example\/micromamba/u);
+    assert.equal(urls.length, 1, 'the HTTP hop is never fetched');
+    assert.equal(bodyReads, 0, 'no redirect or executable body is read');
+    assert.equal(cancelled, true);
+    assert.deepEqual(await readdir(f.directory), []);
+  } finally { await f.cleanup(); }
+});
+test('more than 10 redirects are refused without publishing a binary', async () => {
+  const f = await fixture();
+  let calls = 0;
+  try {
+    await assert.rejects(resolveMicromamba({ ...f.options, fetcher: async () => {
+      calls++;
+      return new Response(null, { status: 308, headers: { location: `./hop-${calls}` } });
+    } }), /exceeded 10 redirects/u);
+    assert.equal(calls, 11);
+    assert.deepEqual(await readdir(f.directory), []);
+  } finally { await f.cleanup(); }
+});
+test('a redirect without Location is refused without publishing a binary', async () => {
+  const f = await fixture();
+  try {
+    await assert.rejects(resolveMicromamba({ ...f.options, fetcher: async () => new Response(null, { status: 301 }) }),
+      /HTTP 301 without a redirect Location/u);
+    assert.deepEqual(await readdir(f.directory), []);
+  } finally { await f.cleanup(); }
+});
 test('an override wins over PATH and the managed cache; PATH wins over a download', async () => {
   const f = await fixture();
   try {

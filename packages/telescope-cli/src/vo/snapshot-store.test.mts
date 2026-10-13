@@ -120,12 +120,13 @@ test('exclusive publication retries an occupied name without modifying its bytes
 test('response bases are filesystem-safe, bounded, and use a short random suffix', async () => {
   for (const [raw, stem] of [
     ['/archive/a target?<>:*\\.XML', 'a-target'], ['/archive/???.xml', 'response'],
+    ['/archive/ASCII-\u212a\u017f.xml', 'ASCII'],
     [`/archive/${'long-response-'.repeat(30)}.xml`, 'long-response-'.repeat(30).slice(0, 120)],
   ]) {
     const value = { ...snapshot, response: { ...snapshot.response, raw: { ...snapshot.response.raw, path: raw! } } };
     const pin = await snapshotPublisher(value)(), name = basename(pin.path);
     assert.ok(name.startsWith(`${stem}-`));
-    assert.match(name, /^[a-z0-9_-]+-\d{8}T\d{6}Z-[a-f0-9]{12}\.snapshot\.json$/iu);
+    assert.match(name, /^[A-Za-z0-9_-]+-\d{8}T\d{6}Z-[a-f0-9]{12}\.snapshot\.json$/u);
     assert.doesNotMatch(name, /[a-f0-9]{32,}/iu);
     assert.ok(Buffer.byteLength(name) <= 255);
     assert.equal(resolve(pin.path, '..'), directory);
