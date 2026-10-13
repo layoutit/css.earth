@@ -1,4 +1,4 @@
-/** Human discovery starts from a target and preserves omitted scientific filters as omitted. */
+/** Human discovery starts from a name or an ICRS field and preserves omitted scientific filters. */
 import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget, parseLimits, type TransferLimits } from '@cssearth/telescope-core/node';
 import { flagValue } from '@cssearth/core';
 import { PRODUCT_KINDS, type ProductKind } from './requests/recipe-request.mts';
@@ -8,8 +8,8 @@ import { loadQueryInputs, loadTargetCatalogue, type ArchiveSelection } from './o
 import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetResolution } from '@cssearth/telescope-core';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification/qualification-routes.mts';
 import type { QualifiedObservation } from './qualification/qualified-observations.mts';
-import { parseRegion } from '@cssearth/objects';
-import type { DiscoveryRequest } from './vo/discovery.mts';
+import { parseRegion, type IcrsCircle } from '@cssearth/objects';
+import { SERVICES, type DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';
 import { nativeQualificationRoute } from './vo/access.mts';
 import { FAMILY_IDS, type FamilyId } from './products/product-descriptor.mts';
@@ -36,7 +36,7 @@ export interface ExplorationDisplay {
 }
 export interface ExplorationChoice {
   readonly pick: number; readonly key: string; readonly state: 'ready' | 'qualify';
-  readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
+  readonly target?: string; readonly archiveTargetName?: string | null; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
   /** The VO endpoint used for qualification; `telescope` is the archive's human-readable facility or mission. */
   readonly archiveService?: string;
   readonly reference: ExplorationReference; readonly display: ExplorationDisplay;
@@ -58,7 +58,7 @@ export interface ExplorationOutcome {
 }
 export interface ExplorationAnswer {
   readonly schema: typeof EXPLORATION_SCHEMA; readonly request: ExplorationRequest;
-  readonly target: string; readonly targetResolution: TargetResolution;
+  readonly target?: string; readonly targetResolution: TargetResolution | { readonly status: 'position'; readonly region: IcrsCircle };
   readonly outcome: ExplorationOutcome;
   readonly choices: readonly ExplorationChoice[]; readonly unresolved: readonly ExplorationIssue[]; readonly unsupported: readonly ExplorationIssue[];
   readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService | ArchiveLeadService)[]; readonly coverage: readonly TargetCoverage[];
@@ -76,6 +76,15 @@ export function explorationOutcome(answer: Omit<ExplorationAnswer, 'outcome'>): 
       sourceIncomplete:answer.issues.some(issue=>issue.code==='source-unavailable'),unresolved:answer.unresolved.length>0}) };
 }
 
+export function positionSearchLimits(): TargetCoverage[] {
+  const nameOnly = ARCHIVES.filter(archive => !archive.search && (archive.ledgerCommand || archive.registry) &&
+    !SERVICES.some(profile => profile.model === 'obscore-1.1' && profile.authority === archive.registry?.ivoid && profile.service === archive.registry.address));
+  return [...nameOnly, { id: 'opus', name: 'OPUS' }].map(archive => ({
+    telescope: archive.name, ledger: archive.id, state: 'not-searched', reason: 'not searched: needs a name',
+  }));
+}
+export const fieldLabel = (region: IcrsCircle): string => `Field RA ${region.raDegrees}°, Dec ${String(region.decDegrees).replace('-', '−')}°, radius ${region.radiusDegrees}°`;
+
 const numberFlag = (args: readonly string[], flag: string): number | undefined => {
   const value = flagValue(args, flag); return value === undefined ? undefined : Number(value);
 };
@@ -90,7 +99,8 @@ export function parseExplorationArguments(args: readonly string[]): ExplorationR
     const value = args[++index]; if (!value || value.startsWith('--')) throw new TypeError(`Missing value for ${arg}.`); values.set(arg, value);
   }
   if (positional.length > 1 || positional.length && values.has('--target')) throw new TypeError('Give one exploration target, either positional or --target.');
-  const target = positional[0] ?? values.get('--target'); if (!target?.trim()) throw new TypeError('Explore requires a target.');
+  const target = positional[0] ?? values.get('--target');
+  if (target !== undefined && !target.trim() || target === undefined && !values.has('--icrs-circle')) throw new TypeError('Use telescope explore TARGET or telescope explore --icrs-circle RA,DEC,RADIUS (degrees).');
   const wavelength = values.get('--wavelength')?.split(',').map(Number);
   if (wavelength && (wavelength.length !== 2 || !wavelength.every(Number.isFinite) || !(wavelength[0]! > 0 && wavelength[1]! >= wavelength[0]!))) throw new TypeError('--wavelength takes two positive micrometre values, shortest first.');
   const kind = values.get('--kind'); if (kind && !(PRODUCT_KINDS as readonly string[]).includes(kind)) throw new TypeError(`--kind takes one of ${PRODUCT_KINDS.join(', ')}.`);
@@ -100,15 +110,15 @@ export function parseExplorationArguments(args: readonly string[]): ExplorationR
   if (Boolean(from) !== Boolean(to)) throw new TypeError('--from and --to are given together.');
   if (anyTime && from) throw new TypeError('--any-time cannot be combined with --from and --to.');
   if (from && to && (!Number.isFinite(Date.parse(from)) || !Number.isFinite(Date.parse(to)) || Date.parse(from) > Date.parse(to))) throw new TypeError('Exploration time bounds must be valid and ordered.');
-  const circle = values.get('--icrs-circle')?.split(',').map(Number); if (circle && circle.length !== 3) throw new TypeError('--icrs-circle requires RA,DEC,RADIUS in degrees.');
+  const circle = values.get('--icrs-circle')?.split(',').map(part => part.trim() ? Number(part) : NaN); if (circle && circle.length !== 3) throw new TypeError('--icrs-circle requires RA,DEC,RADIUS in degrees.');
   const spectralFrame = values.get('--spectral-frame'); if (spectralFrame && spectralFrame !== 'barycentric') throw new TypeError('--spectral-frame requires barycentric.');
   if (spectralFrame && !wavelength) throw new TypeError('--spectral-frame requires an explicit --wavelength subset.');
   const limitFlags = { scienceBytes: '--max-science-bytes', metadataBytes: '--max-metadata-bytes', nestedEdges: '--max-link-depth', metadataRequests: '--max-link-requests', expandedBytes: '--max-expanded-bytes', packageMembers: '--max-package-members' } as const;
   const rawLimits = Object.fromEntries(Object.entries(limitFlags).flatMap(([key, flag]) => values.has(flag) ? [[key, numberFlag(args, flag)]] : []));
   const transferLimits: TransferLimits | undefined = Object.keys(rawLimits).length ? parseLimits(rawLimits) : undefined;
-  return { target, ...(wavelength ? { wavelengthMicrometres: [wavelength[0]!, wavelength[1]!] } : {}), ...(kind ? { kind: kind as ProductKind } : {}),...(family?{family:family as FamilyId}:{}), ...(instrument ? { instrument } : {}),
+  return { ...(target === undefined ? { search: 'position' as const } : { target }), ...(wavelength ? { wavelengthMicrometres: [wavelength[0]!, wavelength[1]!] } : {}), ...(kind ? { kind: kind as ProductKind } : {}),...(family?{family:family as FamilyId}:{}), ...(instrument ? { instrument } : {}),
     ...(anyTime ? { time: { any: true as const } } : from && to ? { time: { fromIso: new Date(from).toISOString(), toIso: new Date(to).toISOString() } } : {}),
-    ...(circle ? { region: parseRegion({ frame: 'icrs', shape: 'circle', raDegrees: circle[0], decDegrees: circle[1], radiusDegrees: circle[2] }) } : {}),
+    ...(circle ? { [target === undefined ? 'footprint' : 'region']: parseRegion({ frame: 'icrs', shape: 'circle', raDegrees: circle[0], decDegrees: circle[1], radiusDegrees: circle[2] }) } : {}),
     ...(spectralFrame ? { spectralFrame: spectralFrame as 'barycentric' } : {}), ...(transferLimits ? { transferLimits } : {}) };
 }
 
@@ -141,8 +151,9 @@ const filterReasons=(assessment:FilterAssessment)=>Object.values(assessment).fil
 const referenceKey = (reference: ExplorationReference) => JSON.stringify(reference);
 
 export function explorationAnswer(request: ExplorationRequest, inputs: ExplorationInputs): ExplorationAnswer {
-  const targetResolution = resolveTarget(request.target, inputs.targetCatalogue);
-  if (targetResolution.status !== 'resolved') {
+  const targetResolution = request.target === undefined
+    ? { status: 'position' as const, region: parseRegion(request.region ?? request.footprint) } : resolveTarget(request.target, inputs.targetCatalogue);
+  if (targetResolution.status !== 'resolved' && targetResolution.status !== 'position') {
     const code = targetResolution.status === 'ambiguous' ? 'ambiguous-target' : 'unknown-target';
     const answer: Omit<ExplorationAnswer, 'outcome'> = { schema: EXPLORATION_SCHEMA, request, target: request.target, targetResolution, choices: [], unresolved: [], unsupported: [], services: [], coverage: [],
       issues: [{ scope: 'target', code, reason: targetResolution.status === 'ambiguous'
@@ -150,9 +161,10 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
         : `Target is unknown.${targetResolution.suggestions.length ? ` Suggestions: ${targetResolution.suggestions.map(suggestion => suggestion.id).join(', ')}.` : ''}` }] };
     return { ...answer, outcome: explorationOutcome(answer) };
   }
-  const target = targetResolution.canonical.id, canonicalRequest = canonicalTargetRequest(request, target), choices: Omit<ExplorationChoice, 'pick'>[] = [], unresolved: ExplorationIssue[] = [], unsupported: ExplorationIssue[] = [];
-  const indexed = indexedTargetObservations(inputs, target);
+  const target = targetResolution.status === 'resolved' ? targetResolution.canonical.id : undefined, canonicalRequest = target ? canonicalTargetRequest({ ...request, target: request.target ?? target }, target) : request, choices: Omit<ExplorationChoice, 'pick'>[] = [], unresolved: ExplorationIssue[] = [], unsupported: ExplorationIssue[] = [];
+  const indexed = target ? indexedTargetObservations(inputs, target) : { observations: [], coverage: positionSearchLimits() };
   for (const row of indexed.observations) {
+    if (!target) throw new Error('Indexed observations require a named target.');
     const assessment = filterAssessment(canonicalRequest, { kind: row.kind, instrumentNames: [row.instrument, row.telescope, row.mode], familyEvidence: row.familyEvidence, startIso: row.startIso, endIso: row.endIso, wavelengths: row.wavelengthIntervalsMicrometres }),filters=filterReasons(assessment);
     const identity = `${row.telescope} / ${row.mode} / ${row.observation}`;
     if(filterState(assessment)==='mismatch'){unsupported.push({scope:'indexed-source',code:'unsupported-observation',identity,reason:filters.join(' ')});continue;}
@@ -172,24 +184,24 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
   for (const entry of inputs.vo?.records ?? []) {
     // Parse warnings about the whole response are reported once with its service, not repeated in every row's reason.
     const responseIssues = new Set(entry.snapshot.response.issues), rowIssues = entry.observation.issues.filter(issue => !responseIssues.has(issue));
-    const observation = entry.observation, ranges = observation.wavelengthsMicrometres[0] === null || observation.wavelengthsMicrometres[1] === null ? [] : [observation.wavelengthsMicrometres as readonly [number, number]];
+    const observation = entry.observation, productTarget = target ?? observation.rawTarget, ranges = observation.wavelengthsMicrometres[0] === null || observation.wavelengthsMicrometres[1] === null ? [] : [observation.wavelengthsMicrometres as readonly [number, number]];
     const assessment=filterAssessment(canonicalRequest,{kind:observation.kind,familyEvidence:observation.familyEvidence,startIso:observation.startIso,endIso:observation.endIso,wavelengths:ranges}),filters=filterReasons(assessment);
     const identity = `${observation.service} / ${observation.key}`, inField = observation.target.status === 'in-field';
-    const located = observation.target.status === 'confirmed' || inField;
+    const located = target === undefined ? inField : observation.target.status === 'confirmed' || inField;
     if(located&&filterState(assessment)==='unresolved'){unresolved.push({scope:'observation',code:'filter-unresolved',identity,reason:filters.join(' ')});continue;}
     if (!located || filterState(assessment)==='mismatch' || !entry.products.length) {
       unsupported.push({ scope: 'observation', code: 'unsupported-observation', identity, reason: [observation.target.status === 'confirmed' ? '' : observation.target.reason, ...filters, ...rowIssues, ...entry.issues].filter(Boolean).join(' ') || 'No supported exact access operation.' });
       continue;
     }
     for (const spec of entry.products) {
-      const ready = (inputs.qualifiedProducts ?? []).find(product => product.target === target && product.program === spec.key && product.observation === observation.key);
+      const ready = (inputs.qualifiedProducts ?? []).find(product => product.target === productTarget && product.program === spec.key && product.observation === observation.key);
       if (!nativeQualificationRoute(spec) && !ready) {
         unsupported.push({ scope: 'observation', code: 'unsupported-observation', identity: `${identity} / ${spec.key}`,
           reason: `Archive ${spec.kind} is discoverable, but no native qualification route is available for this product.` });
         continue;
       }
       const reference: ExplorationReference = { kind: 'vo-acquisition', acquisitionKey: spec.key, observation: observation.key, snapshot: observation.snapshot };
-      choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: observation.telescopeName ?? observation.service, archiveService: observation.service, mode: ready?.mode ?? `native-${spec.kind}`, observation: observation.key, program: spec.key, reference, familyEvidence: observation.familyEvidence,
+      choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', ...(target === undefined ? { archiveTargetName: productTarget } : { target }), telescope: observation.telescopeName ?? observation.service, archiveService: observation.service, mode: ready?.mode ?? `native-${spec.kind}`, observation: observation.key, program: spec.key, reference, familyEvidence: observation.familyEvidence,
         display: { instrument: observation.instrument ?? 'instrument unknown',
           observationTime: { startIso: observation.startIso, endIso: observation.endIso }, productKind: observation.kind,
           wavelengthsMicrometres: observation.wavelengthsMicrometres, advertisedKilobytes: observation.access.estimatedKilobytes, metadataBasis: ready ? 'qualified' : 'advertised' },
@@ -228,6 +240,7 @@ export async function skyTargetRequest(root: string, request: ExplorationRequest
     const footprint = skyRegion(sky);
     return { ...request, target: sky.id, skyTarget: sky, ...footprint ? { footprint } : {} };
   };
+  if (request.target === undefined) { parseRegion(request.region ?? request.footprint); return { request, simbadMiss: false }; }
   if (request.skyTarget) {
     const sky = parseSkyTarget(request.skyTarget);
     if (sky.id !== request.target) throw new TypeError('The saved sky target does not match the requested target.');
@@ -240,6 +253,13 @@ export async function skyTargetRequest(root: string, request: ExplorationRequest
 
 export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
   archiveSelection?: ArchiveSelection): Promise<ExplorationInputs> {
+  if (request.target === undefined) {
+    const region = parseRegion(request.region ?? request.footprint), filter: ArchiveLeadFilter = { ...(request.instrument ? { instrument: request.instrument } : {}), ...(request.time && 'fromIso' in request.time ? { time: request.time } : {}) };
+    const position: LeadPosition = { raDeg: region.raDegrees, decDeg: region.decDegrees, radiusDeg: region.radiusDegrees };
+    const [inputs, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress, archiveSelection),
+      selectedObservation ? [] : Promise.all(ARCHIVES.flatMap(archive => archive.search ? [archive.search(root, undefined, { region, position, filter })] : []))]);
+    return { ...inputs, archiveLeads };
+  }
   const sky = request.skyTarget ? [skyCatalogueEntry(request.skyTarget)] : [];
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
@@ -263,7 +283,7 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
 
 export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
   archiveSelection?: ArchiveSelection): Promise<ExplorationAnswer> {
-  progress?.('Resolving target');
+  progress?.(request.target === undefined ? 'Searching ICRS field' : 'Resolving target');
   const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation, progress, archiveSelection));
   if (sky.evidence) return { ...answer, skyResolution: sky.evidence };
   if (!sky.simbadMiss) return answer;

@@ -9,7 +9,7 @@ import { requireRecord } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
 import { canonical, jsonValue, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource } from '@cssearth/objects';
-import type { DiscoveredObservation, DiscoveryRequest } from './discovery.mts';
+import { searchCircle, type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
 import { voUrl, type VoNetworkPolicy } from './network-policy.mts';
 
 export interface AcquisitionSpec {
@@ -27,9 +27,9 @@ export interface AccessPlan { readonly products: readonly AcquisitionSpec[]; rea
 export function nativeQualificationRoute(spec: AcquisitionSpec): 'raster' | 'f08-table' | 'f03-spectrum' | null {
   if (spec.decoder === 'fits-raster' && (spec.kind === 'image' || spec.kind === 'cube')) return 'raster';
   if (spec.decoder === 'family-pending' && spec.kind === 'table' && spec.format === 'fits' &&
-    spec.operation.kind === 'direct' && spec.observation.target.status === 'confirmed') return 'f08-table';
+    spec.operation.kind === 'direct' && (spec.observation.target.status === 'confirmed' || spec.request.target === undefined && spec.observation.target.status === 'in-field')) return 'f08-table';
   if (spec.decoder === 'family-pending' && spec.kind === 'spectrum' && spec.format === 'fits' &&
-    spec.operation.kind === 'direct' && spec.observation.target.status === 'confirmed') return 'f03-spectrum';
+    spec.operation.kind === 'direct' && (spec.observation.target.status === 'confirmed' || spec.request.target === undefined && spec.observation.target.status === 'in-field')) return 'f03-spectrum';
   return null;
 }
 const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
@@ -40,11 +40,13 @@ export const acquisitionIdentity = (product: string, operation: AcquisitionSpec[
   canonical({ product, operation: jsonValue({ operation, request }), descriptor: jsonValue(descriptor), limits: jsonValue(limits) });
 /** The acquisition directory name: the archive host, the record's first identity value, the operation, the address it reads
  * and any subset. It is readable, not an identity; the record inside holds the exact acquisition and refuses another one. */
-export function acquisitionName(observation: DiscoveredObservation, operation: AcquisitionSpec['operation']): string {
+export function acquisitionName(observation: DiscoveredObservation, operation: AcquisitionSpec['operation'], request?: DiscoveryRequest): string {
   const url = new URL(operation.url), identity = Object.values(observation.identities).find((value): value is string => typeof value === 'string' && value !== '');
   const leaf = `${url.pathname.split('/').filter(Boolean).pop() ?? ''}${url.search}`;
   const subset = Object.entries(operation.parameters).filter(([key]) => key === 'BAND' || key === 'CIRCLE').map(([key, value]) => `${key}-${canonical(value)}`);
-  return plainName(url.hostname, identity ?? observation.table, operation.kind, leaf, ...subset);
+  const field = request?.target === undefined ? searchCircle(request) : undefined;
+  return plainName(url.hostname, identity ?? observation.table, operation.kind, leaf, ...subset,
+    ...field ? [`field-${field.raDegrees}_${field.decDegrees}_${field.radiusDegrees}`] : []);
 }
 async function sizeOf(path: string, label: string): Promise<number> {
   return (await stat(path).catch(() => { throw new Error(`${label} ${path} is missing; query again.`); })).size;
@@ -130,7 +132,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   function add(operation: AcquisitionSpec['operation'], binding: Json, metadata: readonly Pin[], descriptor: Resource | null = null, serviceRow: number | null = null, serviceMetadata: string | null = null, format: AcquisitionSpec['format'] = 'fits') {
     const { snapshot: _snapshot, issues: _issues, ...observationFacts } = observation;
     const product = productKey(observation.key, jsonValue({ binding, observation: observationFacts }));
-    const identity = acquisitionIdentity(product, operation, request, descriptor, limits), key = acquisitionName(observation, operation);
+    const identity = acquisitionIdentity(product, operation, request, descriptor, limits), key = acquisitionName(observation, operation, request);
     if (products.some(p => p.identity === identity)) return;
     if (products.some(p => p.key === key)) { issues.push(`Two products of ${observation.key} share the acquisition name ${key}; the second is not planned.`); return; }
     products.push({ schema: 'cssearth-vo-acquisition@1', key, identity, productKey: product, observation, request, operation,
@@ -205,7 +207,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
 export async function acquireVoProduct(root: string, spec: AcquisitionSpec, policy: VoNetworkPolicy = {}) {
   voUrl(spec.operation.url, spec.operation.url, policy);
   if (spec.schema !== 'cssearth-vo-acquisition@1') throw new Error(`VO acquisition ${spec.key}: schema is ${String(spec.schema)}, expected cssearth-vo-acquisition@1; query again.`);
-  if (spec.identity !== acquisitionIdentity(spec.productKey, spec.operation, spec.request, spec.descriptor, spec.limits) || spec.key !== acquisitionName(spec.observation, spec.operation))
+  if (spec.identity !== acquisitionIdentity(spec.productKey, spec.operation, spec.request, spec.descriptor, spec.limits) || spec.key !== acquisitionName(spec.observation, spec.operation, spec.request))
     throw new Error(`VO acquisition ${spec.key}: its identity or name no longer follows from its product and operation; query again.`);
   for (const pin of spec.metadata) {
     const bytes = await sizeOf(pin.path, `VO acquisition ${spec.key} metadata`);

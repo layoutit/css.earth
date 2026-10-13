@@ -7,6 +7,7 @@ import { VERSION } from '../help.mts';
 import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from '../archives/keck/koa.mts';
 import { EXPLORATION_SCHEMA } from '../exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
+import { parseRegion } from '@cssearth/objects';
 import type { KeckSourceLead } from './archive-leads.mts';
 
 const limitations = [
@@ -34,14 +35,15 @@ export async function fetchKeckSource(explorationPath: string, pick: number, out
   const explorationBytes = await readFile(explorationPath), session = requireRecord(JSON.parse(explorationBytes.toString('utf8')), 'saved exploration');
   if (session.schema !== EXPLORATION_SCHEMA) throw new TypeError('Expected a saved Telescope exploration.');
   const answer = requireRecord(session.answer, 'saved exploration answer'), request = requireRecord(answer.request, 'saved request');
-  const target = requireString(session.target, 'saved target');
-  if (target !== answer.target || request.target !== target) throw new TypeError('Saved exploration target identity disagrees.');
+  const requestedTarget = session.target === undefined ? undefined : requireString(session.target, 'saved target');
+  if (requestedTarget === undefined) parseRegion(request.region ?? request.footprint);
+  if (requestedTarget !== answer.target || request.target !== requestedTarget) throw new TypeError('Saved exploration target identity disagrees.');
   const services = requireArray(answer.services, 'saved services');
   const keck = services.map(service => requireRecord(service, 'saved service')).filter(service => service.service === TAP_SYNC);
   if (keck.length !== 1) throw new TypeError('Saved exploration has no unique KOA service.');
   const sources = requireArray(keck[0]!.sources, 'saved Keck sources').map(savedLead);
   if (pick > sources.length) throw new TypeError(`--pick must be between 1 and ${sources.length}.`);
-  const selected = sources[pick - 1]!;
+  const selected = sources[pick - 1]!, target = requestedTarget ?? selected.targetName;
   const evidenceFile = resolve(dirname(explorationPath), 'archive-source-evidence', `${selected.evidence}.json`);
   const evidenceBytes = await readFile(evidenceFile).catch(() => readFile(resolve(dirname(explorationPath), 'keck-source-evidence', `${selected.evidence}.json`)));
   const evidence = requireRecord(JSON.parse(evidenceBytes.toString('utf8')), 'saved KOA response');

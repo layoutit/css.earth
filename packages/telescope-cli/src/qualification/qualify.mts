@@ -34,16 +34,17 @@ import { qualificationConfigurationFromArguments, supportsQualificationRoute, ty
 
 export const QUALIFICATION_SCHEMA = 'cssearth-telescope-qualification@2';
 export interface QualificationRequest {
-  readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly configuration: QualificationConfiguration;
+  readonly target: string | null; readonly telescope: string; readonly mode: string; readonly observation: string; readonly configuration: QualificationConfiguration;
 }
 export interface QualificationResult {
-  readonly schema: typeof QUALIFICATION_SCHEMA; readonly target: string; readonly telescope: string; readonly mode: string;
+  readonly schema: typeof QUALIFICATION_SCHEMA; readonly target: string | null; readonly telescope: string; readonly mode: string;
   readonly observation: string; readonly program: string; readonly configuration: QualificationConfiguration; readonly product: string; readonly receipt: string;
   readonly archiveProgramme?: string;
 }
 
 const indexedObservation = async (root: string, request: QualificationRequest, wavelengthMicrometres: readonly [number, number]) => {
   if (!supportsQualificationRoute(request.telescope, request.mode, request.configuration)) throw new TypeError(`No qualification route handles ${request.telescope} ${request.mode} ${request.configuration.kind}.`);
+  if (request.target === null) throw new TypeError('Indexed qualification requires a named target.');
   const answer = queryCapabilities({ target: request.target, wavelengthMicrometres }, await loadQueryInputs(root, request.target));
   if (answer.targetResolution.status === 'unknown') throw new TypeError(`Unknown target ${request.target}.`);
   const candidate = answer.candidates.find(entry => entry.telescope === request.telescope && entry.mode === request.mode);
@@ -144,7 +145,7 @@ const QUALIFIERS: Readonly<Record<string, (root: string, request: QualificationR
 export async function qualifyObservation(root: string, request: QualificationRequest): Promise<QualificationResult> {
   if (request.configuration.kind === 'archive-acquisition') {
     const configuration = request.configuration;
-    if (configuration.request.target !== request.target) throw new Error('Acquisition target differs from qualification target.');
+    if (configuration.request.target !== undefined && configuration.request.target !== request.target) throw new Error('Acquisition target differs from qualification target.');
     const inputs = await loadQueryInputs(root, configuration.request, request.observation, undefined, { archiveService: request.telescope });
     const spec = inputs.vo?.records.flatMap(r => r.products).find(p => p.key === configuration.key && p.observation.key === request.observation && p.observation.service === request.telescope && `native-${p.kind}` === request.mode);
     if (!spec) throw new Error('The saved archive acquisition is no longer available. Query again.');

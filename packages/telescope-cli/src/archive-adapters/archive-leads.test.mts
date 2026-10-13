@@ -153,3 +153,23 @@ test('a second search within a day is answered from the saved answers, says so, 
     assert.equal(asked, 30);
   } finally { delete process.env[FRESH_VARIABLE]; await rm(root, { recursive: true, force: true }); }
 });
+
+test('unnamed Keck and Gemini fields use only position clauses and preserve unrelated archive labels', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'position-leads-')), position = { raDeg: 83.82, decDeg: -5.39, radiusDeg: 0.1 };
+  try {
+    const keck = await searchKeckLeads(root, undefined, async adql => {
+      assert.match(adql, /CONTAINS\(POINT\('ICRS', ra, dec\), CIRCLE\('ICRS', 83\.82, -5\.39, 0\.1\)\)/u);
+      assert.doesNotMatch(adql, /targname IN/u);
+      return adql.includes('COUNT(*)') ? [{ targname: 'Another field', frames: '1' }]
+        : [{ koaid: 'N2.20090805.31896.fits', targname: 'Another field', koaimtyp: 'object', filehand: '/koadata9/NIRC2/20090805/lev0/N2.20090805.31896.fits', date_obs: '2009-08-05' }];
+    }, { instrument: 'NIRC2' }, position);
+    assert.equal(keck.state, 'sampled'); assert.equal(keck.sources?.length, 1);
+    const gemini = await searchGeminiLeads(root, undefined, async adql => {
+      assert.match(adql, /INTERSECTS\(CIRCLE\('ICRS', 83\.82, -5\.39, 0\.1\), p.position_bounds\)/u);
+      assert.doesNotMatch(adql, /target_name IN/u);
+      return [{ observationID: 'GN-1-001', type: 'OBJECT', intent: 'science', instrument_name: 'NIRI', target_name: 'Another field', uri: 'gemini:GEMINI/N20200101S0001.fits', contentLength: '2880', energy_bandpassName: 'K', time_exposure: '30', time_bounds_lower: '58849', dataRelease: '2021-01-01T00:00:00.000' }];
+    }, undefined, position);
+    assert.equal(gemini.state, 'sampled'); assert.equal(gemini.sources?.length, 1);
+    assert.match(keck.scope, /ICRS field/u); assert.match(gemini.scope, /ICRS field/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

@@ -50,8 +50,8 @@ export interface LeadPosition { readonly raDeg: number; readonly decDeg: number;
 const arcsec = (position: LeadPosition) => Math.round(position.radiusDeg * 3600);
 export const KECK_SOURCE_SAMPLE_LIMIT = 3;
 const key = (name: string) => name.toLocaleLowerCase('en-US').replace(/[^a-z0-9]+/gu, '');
-const namesOf = (target: TargetCatalogueEntry) => [...new Set([target.name, ...target.aliases].flatMap(name =>
-  [name, name.replace(/\s+/gu, ''), name.replace(/\s+/gu, '-')]))].filter(Boolean);
+const namesOf = (target: TargetCatalogueEntry | undefined) => target ? [...new Set([target.name, ...target.aliases].flatMap(name =>
+  [name, name.replace(/\s+/gu, ''), name.replace(/\s+/gu, '-')]))].filter(Boolean) : [];
 const message = (error: unknown) => error instanceof Error ? error.message : String(error);
 const column = (row: Readonly<Record<string, string>>, name: string): string | undefined =>
   Object.entries(row).find(([key]) => key.toLowerCase() === name)?.[1];
@@ -91,11 +91,11 @@ const KECK_TABLES_AT_ONCE = 4;
 /** With a `position`, each table is asked twice, by name and by place, and the answers are joined: archives file one star under
  * several spellings (KOA holds HD 189733 as "HD189733", "HD 189733", "189733" and "GJ4130"), and a frame named for the star can
  * be pointed away from it. One query with both conditions never answered (10 minutes, 2026-10-06); each alone takes 4 to 5 s. */
-export async function searchKeckLeads(root: string, target: TargetCatalogueEntry, query: typeof koaQuery = koaQuery,
+export async function searchKeckLeads(root: string, target: TargetCatalogueEntry | undefined, query: typeof koaQuery = koaQuery,
   filter?: ArchiveLeadFilter, position?: LeadPosition): Promise<ArchiveLeadService> {
   const time = leadTime(filter), tables = filter?.instrument ? INSTRUMENT_TABLES.filter(table => table.slice(4).toLowerCase() === filter.instrument!.toLowerCase()) : INSTRUMENT_TABLES;
   const date = time ? ` AND date_obs BETWEEN '${time.fromIso.slice(0, 10)}' AND '${time.toIso.slice(0, 10)}'` : '';
-  const scope = `Exact target-name variants${position ? `, and frames within ${arcsec(position)} arcsec of the target's position,` : ''} across ${tables.length} matching public KOA TAP instrument tables${time ? `; UTC observation dates ${time.fromIso.slice(0, 10)} to ${time.toIso.slice(0, 10)}` : ''}; object-frame counts and up to ${KECK_SOURCE_SAMPLE_LIMIT} exact public FITS files per instrument`;
+  const scope = `${target ? 'Exact target-name variants' : 'ICRS field search'}${position ? `, and frames within ${arcsec(position)} arcsec of ${target ? "the target's position" : 'the requested position'},` : ''} across ${tables.length} matching public KOA TAP instrument tables${time ? `; UTC observation dates ${time.fromIso.slice(0, 10)} to ${time.toIso.slice(0, 10)}` : ''}; object-frame counts and up to ${KECK_SOURCE_SAMPLE_LIMIT} exact public FITS files per instrument`;
   if (!tables.length) return { service: TAP_SYNC, state: 'empty-in-scope', scope, reason: `KOA has no public instrument table named ${filter!.instrument}.`, instruments: [] };
   try { if (query === koaQuery) astroqueryToolchainSync(); }
   catch (error) { return { service: TAP_SYNC, state: 'unavailable', scope, reason: message(error), instruments: [] }; }
@@ -137,7 +137,7 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
     let byName: { name: string; count: number }[], byPlace: { name: string; count: number }[];
     try {
       // A name the first query counted already holds every frame of that exact name, so the place adds only the other names it finds.
-      [byName, byPlace] = await Promise.all([counted(named), placed ? counted(placed) : []]);
+      [byName, byPlace] = await Promise.all([target ? counted(named) : [], placed ? counted(placed) : []]);
       byPlace = byPlace.filter(row => !byName.some(other => other.name === row.name));
     } catch (error) {
       failures.push(`${table}: ${message(error)}`);
@@ -160,12 +160,12 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
 }
 
 /** CADC mirrors Gemini's public raw files and supplies a stable artifact URI and size. */
-export async function searchGeminiLeads(root: string, target: TargetCatalogueEntry, query: typeof cadcQuery = cadcQuery,
+export async function searchGeminiLeads(root: string, target: TargetCatalogueEntry | undefined, query: typeof cadcQuery = cadcQuery,
   filter?: ArchiveLeadFilter, position?: LeadPosition): Promise<ArchiveLeadService> {
   const names = namesOf(target), searched = names.slice(0, 12), limit = 500;
   const time = leadTime(filter), instrument = filter?.instrument?.trim(), quoted = instrument?.replaceAll("'", "''");
-  const scope = `CADC GEMINI public OBJECT science artifacts for ${searched.length} exact archive-name variants${position ? `, and for frames within ${arcsec(position)} arcsec of the target's position` : ''}${instrument ? `, instrument ${instrument}` : ''}${time ? `, UTC ${time.fromIso} to ${time.toIso}` : ''}; first ${limit} matching rows, up to 3 FITS files per instrument`;
-  if (!searched.length) return { service: CADC_TAP, state: 'empty-in-scope', scope, reason: 'No target name was available.', instruments: [] };
+  const scope = `CADC GEMINI public OBJECT science artifacts ${target ? `for ${searched.length} exact archive-name variants` : 'in the ICRS field'}${position ? `, and for frames within ${arcsec(position)} arcsec of ${target ? "the target's position" : 'the requested position'}` : ''}${instrument ? `, instrument ${instrument}` : ''}${time ? `, UTC ${time.fromIso} to ${time.toIso}` : ''}; first ${limit} matching rows, up to 3 FITS files per instrument`;
+  if (!searched.length && !position) return { service: CADC_TAP, state: 'empty-in-scope', scope, reason: 'No target name was available.', instruments: [] };
   const named = `o.target_name IN (${searched.map(name => `'${name.replaceAll("'", "''")}'`).join(',')})`;
   const placed = position ? `INTERSECTS(CIRCLE('ICRS', ${position.raDeg}, ${position.decDeg}, ${position.radiusDeg}), p.position_bounds) = 1` : undefined;
   const asked = (where: string) => `SELECT TOP ${limit} ${FRAME_COLUMNS} FROM ${FRAME_JOIN} WHERE o.collection='GEMINI' AND o.type='OBJECT' AND o.intent='science' ` +
@@ -176,7 +176,7 @@ export async function searchGeminiLeads(root: string, target: TargetCatalogueEnt
   try {
     // By name, then by place, each bounded on its own; a frame both find is counted once.
     // The release-date bound is the moment of asking; two askings a minute apart are the same question.
-    const answers = await Promise.all([named, ...placed ? [placed] : []].map(async where => ({ where, ...await answered(root, CADC_TAP, asked(where), query, text => text.replace(/p\.dataRelease < '[^']*'/u, '')) })));
+    const answers = await Promise.all([...target ? [named] : [], ...placed ? [placed] : []].map(async where => ({ where, ...await answered(root, CADC_TAP, asked(where), query, text => text.replace(/p\.dataRelease < '[^']*'/u, '')) })));
     const groups = new Map<string, { telescope: string; instrument: string; records: number; sample: string }>();
     const sources: GeminiSourceLead[] = [], seen = new Set<string>();
     for (const { where, rows, pin } of answers) for (const row of rows) {

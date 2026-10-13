@@ -11,7 +11,7 @@ export interface ProductFacts extends MetadataFacts {
   readonly regionCoverage?: { readonly region: import('@cssearth/objects').IcrsCircle; readonly answer: 'partial' | 'unknown'; readonly reason: string; readonly usablePixelCenters: number; readonly invalidPixelCenters: number };
   readonly calibrationDependencies?: readonly CalibrationDependency[];
   readonly verified: boolean;
-  readonly target: string;
+  readonly target: string | null;
   readonly kind?: ProductKind;
   readonly result?: RequestedResult;
   readonly startIso?: string; readonly endIso?: string;

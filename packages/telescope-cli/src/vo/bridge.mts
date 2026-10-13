@@ -29,26 +29,28 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
   if (selectedService && !SERVICES.some(profile => profile.service === selectedService)) throw new TypeError(`The selected archive service is not registered: ${selectedService}`);
   const identities = catalogue.map(t => ({ id: t.id, names: [t.name, ...t.aliases], classification: t.archiveClass, classificationSource: t.classificationSource }));
   const target = identities.find(t => t.id === request.target);
-  if (!target) return { records: [], services: [] };
+  if (!target && request.target) return { records: [], services: [] };
+  if (!target && !searchCircle(request)) throw new TypeError('Position discovery requires an ICRS circle.');
   const limits = parseLimits(request.transferLimits), records: VoInputs['records'][number][] = [], services: VoInputs['services'][number][] = [];
   let metadataRequests = 0;
   const metadata = new Map<string, Promise<MetadataResponse>>();
   // Run archive clients one at a time; a faceted MAST search must not start many Python processes together.
   for (const profile of SERVICES) {
     if (selectedService && profile.service !== selectedService) continue;
+    if (!target && profile.model !== 'obscore-1.1') continue;
     let snapshots: DiscoverySnapshot[] = [], facet: Awaited<ReturnType<typeof faceter>> | undefined;
     const discoveryFailures: string[] = [];
     try {
       if (profile.facetByInstrument && !request.instrument && !(profile.spatialMatch === 'mast-api-cone' && searchCircle(request))) {
-        facet = await faceter(root, profile, request, target.names, limits);
+        facet = await faceter(root, profile, request, target?.names ?? [], limits);
         for (const instrument of facet.names) {
-          try { snapshots.push(await discoverer(root, profile, { ...request, instrument }, target.names, limits, INSTRUMENT_SAMPLE_LIMIT)); }
+          try { snapshots.push(await discoverer(root, profile, { ...request, instrument }, target?.names ?? [], limits, INSTRUMENT_SAMPLE_LIMIT)); }
           catch (error) { discoveryFailures.push(`${instrument}: ${error instanceof Error ? error.message : String(error)}`); }
         }
-      } else snapshots = [await discoverer(root, profile, request, target.names, limits)];
+      } else snapshots = [await discoverer(root, profile, request, target?.names ?? [], limits)];
     } catch (error) { discoveryFailures.push(error instanceof Error ? error.message : String(error)); }
     if (!snapshots.length && discoveryFailures.length) {
-      services.push({ service: profile.label ?? profile.service, state: 'unavailable', scope: 'Target-name query', reason: discoveryFailures.join('; ') });
+      services.push({ service: profile.label ?? profile.service, state: 'unavailable', scope: request.target ? 'Target-name query' : 'ICRS field query', reason: discoveryFailures.join('; ') });
       continue;
     }
     const rows = snapshots.reduce((count, snapshot) => count + snapshot.response.rows.length, 0);
@@ -95,7 +97,7 @@ export function voCandidates(request: CapabilityRequest, inputs: VoInputs | unde
   return (inputs?.records ?? []).flatMap(entry => entry.products.map(spec => {
     const observation = entry.observation, product = qualified.find(p => p.program === spec.key && p.target === request.target && p.observation === observation.key);
     const [lo, hi] = observation.wavelengthsMicrometres;
-    const advertised: ProductFacts = { target: observation.target.target, verified: false, kind: spec.kind, result: 'telescope-product',
+    const advertised: ProductFacts = { target: observation.target.target ?? '', verified: false, kind: spec.kind, result: 'telescope-product',
       ...(lo !== null && hi !== null ? { wavelengthIntervalsMicrometres: [[lo, hi]] } : {}),
       ...(observation.startIso ? { startIso: observation.startIso } : {}), ...(observation.endIso ? { endIso: observation.endIso } : {}) };
     const satisfaction = assessRequest(request, product?.facts ?? advertised);

@@ -6,6 +6,7 @@ import { Readable } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writeProductRecord, parseLimits } from '@cssearth/telescope-core/node';
 import { VERSION } from '../help.mts';
+import { parseRegion } from '@cssearth/objects';
 import type { ProductInput } from '@cssearth/objects';
 import { EXPLORATION_SCHEMA } from '../exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
@@ -71,8 +72,9 @@ export async function readSavedSource(explorationPath: string, serviceName: stri
   const bytes = await readFile(explorationPath), session = requireRecord(JSON.parse(bytes.toString('utf8')), 'saved exploration');
   if (session.schema !== EXPLORATION_SCHEMA) throw new TypeError('Expected a saved Telescope exploration.');
   const answer = requireRecord(session.answer, 'saved exploration answer'), request = requireRecord(answer.request, 'saved request');
-  const target = requireString(session.target, 'saved target');
-  if (target !== answer.target || request.target !== target) throw new TypeError('Saved exploration target identity disagrees.');
+  const requestedTarget = session.target === undefined ? undefined : requireString(session.target, 'saved target');
+  if (requestedTarget === undefined) parseRegion(request.region ?? request.footprint);
+  if (requestedTarget !== answer.target || request.target !== requestedTarget) throw new TypeError('Saved exploration target identity disagrees.');
   const matches = requireArray(answer.services, 'saved services').map(value => requireRecord(value, 'saved service')).filter(value => value.service === serviceName);
   if (matches.length !== 1) throw new TypeError(`Saved exploration has no unique ${serviceName} service.`);
   const sources = requireArray(matches[0]!.sources, 'saved source choices');
@@ -81,6 +83,7 @@ export async function readSavedSource(explorationPath: string, serviceName: stri
   if (!/^[A-Za-z0-9._-]+$/u.test(name)) throw new TypeError(`Saved ${serviceName} source ${pick} names no valid discovery response (${name}).`);
   const file = resolve(dirname(explorationPath), 'archive-source-evidence', `${name}.json`);
   const evidence = await readFile(file).catch((error: unknown) => { throw new Error(`The saved discovery response ${file} is missing. Explore again.`, { cause: error }); });
+  const target = requestedTarget ?? requireString(selected.targetName, 'archive field name');
   return { bytes, target, selected, evidence, maximum: parseLimits(request.transferLimits).scienceBytes };
 }
 

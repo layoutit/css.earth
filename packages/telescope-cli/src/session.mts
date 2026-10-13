@@ -111,7 +111,7 @@ export async function saveSession(root: string, args: readonly string[], directo
 
 export interface ExplorationSession {
   readonly schema: typeof EXPLORATION_SCHEMA; readonly createdAt: string; readonly arguments: readonly string[];
-  readonly target: string; readonly choices: readonly ExplorationChoice[]; readonly answer: ExplorationAnswer;
+  readonly target?: string; readonly choices: readonly ExplorationChoice[]; readonly answer: ExplorationAnswer;
 }
 const runDirectory = (target: string) => {
   const stamp = new Date().toISOString().replace(/[-:.TZ]/gu, '');
@@ -122,7 +122,7 @@ const runDirectory = (target: string) => {
 export async function saveExploration(root: string, args: readonly string[], directory?: string, api: SessionServices = services, progress?: (stage:string)=>void): Promise<ExplorationSession & { readonly directory: string }> {
   const request = parseExplorationArguments(args), initial = await exploreForRequest(api, root, request, undefined, progress);
   progress?.('Saving exploration');
-  const destination = directory ?? runDirectory(initial.target);
+  const destination = directory ?? runDirectory(initial.target ?? 'field');
   return locked(destination, async () => {
     const path = resolve(destination, 'explore.json');
     try { await readFile(path); throw new Error(`${path} already exists. Use a new --out directory to preserve its numbered choices.`); }
@@ -287,20 +287,20 @@ function readExplorationChoice(value: unknown, pick: number) {
   const reference = requireRecord(choice.reference, 'saved exploration reference');
   const archiveService = reference.kind === 'vo-acquisition' && choice.archiveService !== undefined ? requireString(choice.archiveService, 'saved archive service') : undefined;
   if (archiveService && !SERVICES.some(profile => profile.service === archiveService)) throw new TypeError('Saved archive service is not registered.');
-  return { args, target: requireString(session.target, 'saved exploration target'), key: requireString(choice.key, 'saved exploration key'), observation: requireString(choice.observation, 'saved exploration observation'), reference,
+  return { args, target: session.target === undefined ? undefined : requireString(session.target, 'saved exploration target'), key: requireString(choice.key, 'saved exploration key'), observation: requireString(choice.observation, 'saved exploration observation'), reference,
     ...(archiveService ? { archiveService } : {}) };
 }
 
 async function resolveExplorationArtifact(root: string, choice: ExplorationChoice): Promise<Artifact> {
   if (!choice.product) throw new Error('The route did not produce a current, selectable artifact.');
-  const selected = await qualifiedProductInput(root, choice.product), q = selected.qualification;
+  const selected = await qualifiedProductInput(root, choice.product, { indexedSources: choice.target !== undefined }), q = selected.qualification;
   return { file: selected.file, receipt: inputPath(root, q.receipt), record: inputPath(root, q.productRecord), outputRoot: resolve(root, q.outputRoot), facts: selected.facts,
     extraEvidence: [...(q.facts.calibrationDependencies ?? []).flatMap(entry => entry.file ? [resolve(root, entry.file)] : []), ...(q.facts.angularResolutionBound ? [resolve(root, q.facts.angularResolutionBound.receipt)] : []),
       ...(q.facts.resolutionEvidence ?? []).flatMap(entry => entry.receipt ? [resolve(root, entry.receipt.file)] : [])] };
 }
 
-const explorationContext = (target: string, reference: Record<string, unknown>): DeliveryContext => ({
-  kind: 'exploration', target,
+const explorationContext = (target: string | null, reference: Record<string, unknown>, region?: import('@cssearth/objects').IcrsCircle): DeliveryContext => ({
+  kind: 'exploration', target, ...(region ? { region } : {}),
   discovery: { schema: EXPLORATION_SCHEMA, choice: reference } as unknown as DeliveryExplorationReference,
   assessment: { status: 'not-requested' },
 });
@@ -323,7 +323,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
     const resultPath = resolve(directory, `pick-${pick}`, 'result.json');
     if (options.offline) {
       const { delivery } = await import('./delivery/outputs.mts'), local = await delivery(resultPath);
-      if (local.context.kind !== 'exploration' || local.context.target !== saved.target || local.record.choice !== saved.key || canonical(local.context.discovery) !== canonical({ schema: EXPLORATION_SCHEMA, choice: saved.reference }))
+      if (local.context.kind !== 'exploration' || canonical(local.context.region ?? null) !== canonical(saved.target === undefined ? request.region ?? request.footprint : null) || saved.target !== undefined && local.context.target !== saved.target || local.record.choice !== saved.key || canonical(local.context.discovery) !== canonical({ schema: EXPLORATION_SCHEMA, choice: saved.reference }))
         throw new Error('Offline delivery differs from its saved exploration or choice.');
       progress('Replaying the pinned local delivery; no remote archive was refreshed.');
       return { resultPath, product: local.file, context: local.context, assessment: local.context.assessment, reused: true, replay: 'pinned-local-artifact' as const };
@@ -338,16 +338,16 @@ async function getExplorationSession(root: string, directory: string, pick: numb
       if (!choice.configuration) throw new Error('No current qualification action.');
       const qualifying = choice;
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
-      await locked(resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, { target: answer.target, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
+      await locked(resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, { target: answer.target ?? qualifying.archiveTargetName ?? null, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
       answer = await exploreForRequest(api, root, { ...request, ...answer.request.skyTarget ? { skyTarget: answer.request.skyTarget } : {} }, saved.observation, undefined, archiveSelection);
       choice = savedChoice(answer.choices, saved);
       if (!choice || choice.state !== 'ready') throw new Error('Qualification did not produce a selectable artifact for the original exploration. Explore again for the current result.');
     }
-    const artifact = await resolveExplorationArtifact(root, choice), context = explorationContext(answer.target, saved.reference);
+    const artifact = await resolveExplorationArtifact(root, choice), context = explorationContext(answer.target ?? choice.archiveTargetName ?? null, saved.reference, answer.target === undefined ? answer.request.region ?? answer.request.footprint : undefined);
     const previous = await readFile(resultPath, 'utf8').catch((error: unknown) => hasErrorCode(error, 'ENOENT') ? undefined : Promise.reject(error));
     const write = async (destination: string, reuse: boolean) => {
       const { files, record } = await exportArtifact(root, destination, artifact, progress, reuse), product = `files/${artifactFile(root, artifact.file)}`;
-      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest(answer.request), observation: choice.observation, product,
+      const result = { schema: 'cssearth-telescope-delivery@3', choice: saved.key, context, sourceQuestion:sourceQuestionFromRequest({ ...answer.request, target: answer.target ?? choice!.archiveTargetName ?? null, archiveTargetName: choice!.archiveTargetName }), observation: choice.observation, product,
         outputRoot: resolve(root) === resolve(artifact.outputRoot) ? 'files' : `files/${artifactFile(root, artifact.outputRoot)}`,
         receipt: `files/${artifactFile(root, artifact.receipt)}`, record: `files/${artifactFile(root, artifact.record)}`, facts: artifact.facts, evidence: record.evidence, files, reused: reuse };
       return { result, product };

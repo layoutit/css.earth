@@ -393,8 +393,16 @@ export async function loadTargetCatalogueSnapshot(path = TARGET_CATALOGUE_SNAPSH
 export interface ArchiveSelection { readonly archiveService: string }
 export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string, progress?: (stage:string)=>void,
   archiveSelection?: ArchiveSelection): Promise<QueryInputs> {
+  if (typeof targetOrRequest !== 'string' && targetOrRequest.target === undefined) {
+    parseRegion(targetOrRequest.region ?? ('footprint' in targetOrRequest ? targetOrRequest.footprint : undefined));
+    const vo = await loadVoInputs(root, targetOrRequest, [], selectedObservation, undefined, {}, undefined, undefined, archiveSelection?.archiveService);
+    const targets = [...new Set(vo.records.map(entry => entry.observation.rawTarget))];
+    const qualifiedProducts = (await Promise.all(targets.map(target => loadQualifiedObservations(root, target)))).flat();
+    return { vo, ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [], qualifiedProducts };
+  }
   progress?.('Reading local evidence');
   const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
+  if (target === undefined) throw new TypeError('A name or an ICRS circle is required.');
   const sky = typeof targetOrRequest !== 'string' && 'skyTarget' in targetOrRequest ? targetOrRequest.skyTarget : undefined;
   const objectRoot = resolve(root, 'src/objects'), catalogue = [...await loadTargetCatalogue(root), ...sky ? [skyCatalogueEntry(sky)] : []];
   const resolution = resolveTarget(target, catalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
@@ -404,7 +412,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
     : withRequestedTargetName(enteredName, canonicalTarget, catalogue);
   if (archiveSelection && typeof targetOrRequest !== 'string' && resolution.status === 'resolved') {
     progress?.('Revalidating the selected archive observation');
-    const vo = await loadVoInputs(root, canonicalTargetRequest(targetOrRequest, canonicalTarget), targetCatalogue,
+    const vo = await loadVoInputs(root, canonicalTargetRequest({ ...targetOrRequest, target }, canonicalTarget), targetCatalogue,
       selectedObservation, undefined, {}, undefined, undefined, archiveSelection.archiveService);
     return { vo, ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], sourceProducts: [],
       qualifiedProducts: await loadQualifiedObservations(root, canonicalTarget) };
@@ -433,7 +441,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues, { fetchRemote: false }) : [];
   if(typeof targetOrRequest !== 'string' && resolution.status === 'resolved')progress?.('Searching VO archives and access descriptions');
   const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root,
-    canonicalTargetRequest(targetOrRequest, canonicalTarget), targetCatalogue, selectedObservation) : undefined;
+    canonicalTargetRequest({ ...targetOrRequest, target }, canonicalTarget), targetCatalogue, selectedObservation) : undefined;
   return { ...(vo ? { vo } : {}), sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 

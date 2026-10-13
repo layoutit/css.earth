@@ -77,7 +77,7 @@ export async function delivery(resultPath:string){
   });
   if(!outputPins.some(f=>f.path===product.path))throw new Error('Product is not bound by its producing record');
   const facts=requireRecord(record.facts);if(facts.verified!==true)throw new Error('The delivery is not verified');
-  const target=requireString(facts.target);if(target!==contextTarget(context))throw new Error('Delivery facts disagree with source context target');
+  const target=facts.target===null?null:requireString(facts.target);if(target!==contextTarget(context))throw new Error('Delivery facts disagree with source context target');
   return {path,directory,record,context,sourceQuestion,files,product,producing,telescope:producing.telescope,file:beneath(directory,productPath),target,recordBytes:bytes,pin:{bytes:bytes.length}};
 }
 function choices(structures:readonly NativeMetadata[],sourceOnly=false):OutputChoice[]{
@@ -148,7 +148,7 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     const rows=requireArray(answer.structures).map(v=>requireRecord(v)),found=rows.filter(s=>s.fitsHdu===request.hdu);
     if(found.length!==1||found[0].extraction===undefined)throw new Error('Selected HDU is not an unambiguous science array');
     const data=requireRecord(found[0].extraction);
-    const plotted=await plotProduct(staging,d.target,data,input.file,{...request});
+    const plotted=await plotProduct(staging,d.target ?? 'ICRS field',data,input.file,{...request});
     const fresh=await delivery(resultPath);if(!fresh.recordBytes.equals(d.recordBytes))throw new Error(`${resultPath} changed while producing output`);
     const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,bytes:d.pin.bytes},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:VERSION},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
     const names=requireArray(plotted.files).map(v=>requireString(v));

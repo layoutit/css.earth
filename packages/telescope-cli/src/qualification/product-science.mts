@@ -8,7 +8,7 @@ import { parseProductFacts } from './qualified-observations.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import type { ProductFacts } from '../requests/request-satisfaction.mts';
-export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string; readonly label?:string; readonly decoded?:unknown; readonly region?: import('@cssearth/objects').IcrsCircle }
+export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string | null; readonly label?:string; readonly decoded?:unknown; readonly region?: import('@cssearth/objects').IcrsCircle }
 function intersection(left:readonly (readonly [number,number])[],right:readonly (readonly [number,number])[]): [number,number][] {
   return left.flatMap(([a,b])=>right.flatMap(([c,d])=>Math.max(a,c)<=Math.min(b,d)?[[Math.max(a,c),Math.min(b,d)] as [number,number]]:[]));
 }

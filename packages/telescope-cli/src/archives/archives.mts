@@ -24,7 +24,7 @@ export interface ArchiveDescription {
   /** Its TAP service as the registry of Virtual Observatory services names it, and the address pinned for it here. */
   readonly registry?: { readonly ivoid: string; readonly address: string };
   /** The live search `explore` runs for a target, beside the observation search of the VO profiles (vo/discovery.mts). */
-  readonly search?: (root: string, target: TargetCatalogueEntry, context: ArchiveSearchContext) => Promise<ArchiveLeadService>;
+  readonly search?: (root: string, target: TargetCatalogueEntry | undefined, context: ArchiveSearchContext) => Promise<ArchiveLeadService>;
   /** The command that builds its ledger, `src/sources/<id>/ledger.json`. */
   readonly ledgerCommand?: string;
   /** True when that command takes `--write` and `--local` (archives/ledger.mts `runArchiveLedger`). */

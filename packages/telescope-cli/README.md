@@ -36,7 +36,7 @@ telescope explore eris --kind cube --wavelength 2.2,2.4 --out runs/eris
 telescope explore "Sgr A*" --kind cube --instrument ERIS
 ```
 
-A name the catalogue does not ship is resolved by SIMBAD, and records are selected by SIMBAD's identifiers and position error circle. `--icrs-circle` is a cutout: it cuts the product and replaces that search circle. Use `--instrument NAME` and `--from ISO --to ISO` to narrow live Keck, Gemini and Chandra queries.
+A name the catalogue does not ship is resolved by SIMBAD, and records are selected by SIMBAD's identifiers and position error circle. With a TARGET, `--icrs-circle` is a cutout: it cuts the product and replaces that search circle. `telescope explore --icrs-circle 83.82,-5.39,0.1` searches a field without a target name; name-only archives are reported as not searched, with incomplete coverage. Use `--instrument NAME` and `--from ISO --to ISO` to narrow live Keck, Gemini and Chandra queries.
 
 In a terminal, `explore` shows the observations, unknown metadata, unsupported records and provider limits, then asks which observation to retrieve. Press Enter to keep the exploration without retrieving. With `--json` or redirected input or output it never prompts. Without `--out` it creates a run under `./telescope-runs/`. The saved `outcome` has a `selection` (`available` or `none`) and a `coverage` (`target-unresolved`, `incomplete` or `bounded`). Even `bounded` describes only the configured searches, not every observatory. An empty search is not proof that no observations exist.
 

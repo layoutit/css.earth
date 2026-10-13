@@ -67,3 +67,21 @@ test('Spitzer filters all returned AORs before taking the first hundred', async 
     assert.deepEqual(evidence.rows, [wanted]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('unnamed Chandra and Spitzer fields search the supplied circle and keep field records', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'other-field-leads-'));
+  const region = { frame: 'icrs' as const, shape: 'circle' as const, raDegrees: 83.82, decDegrees: -5.39, radiusDegrees: 0.1 };
+  try {
+    const chandra = await searchChandraLeads(root, undefined, region, async adql => {
+      assert.match(adql, /1=CONTAINS\(POINT\('ICRS',ra,dec\),CIRCLE\('ICRS',83\.82,-5\.39,0\.1\)\)/u);
+      assert.doesNotMatch(adql, /target_name=/u);
+      return [{ obsid: '18676', target_name: 'BLANK_SKY_FIELD', instrument: 'HRC-I', grating: 'NONE', exposure_time: '12', start_date: '2017-01-01' }];
+    });
+    assert.equal(chandra.state, 'sampled'); assert.equal(chandra.sources?.length, 1);
+    const spitzer = await searchSpitzerLeads(root, undefined, region, async request => {
+      assert.deepEqual(request, { id: 'aorByPosition', position: '83.82;-5.39;EQ_J2000', radius: '0.1' });
+      return [{ reqkey: '21415424', targetname: 'Orion field', progid: '123', modedisplayname: 'IRAC Map', reqtitle: 'Field', reqbegintime: '2005-01-01 00:00:00', reqendtime: '2005-01-01 01:00:00' }];
+    });
+    assert.equal(spitzer.state, 'sampled'); assert.equal(spitzer.sources?.length, 1);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

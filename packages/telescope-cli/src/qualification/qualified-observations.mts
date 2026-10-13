@@ -11,14 +11,14 @@ import type { CapabilityRequest } from '../requests/recipe-request.mts';
 import { parseResolutionEvidence, parseRegion } from '@cssearth/objects';
 
 export interface QualifiedObservation {
-  readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
+  readonly target: string | null; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
   readonly product: string; readonly receipt: string; readonly productRecord: string; readonly outputRoot: string;
   readonly facts: ProductFacts;
 }
 export function parseProductFacts(raw: unknown): ProductFacts {
   const value = requireRecord(raw, 'product facts');
   if (typeof value.verified !== 'boolean') throw new TypeError('Product verification must be explicit.');
-  const facts: { -readonly [K in keyof ProductFacts]: ProductFacts[K] } = { target: requireString(value.target, 'product target'), verified: value.verified };
+  const facts: { -readonly [K in keyof ProductFacts]: ProductFacts[K] } = { target: value.target === null ? null : requireString(value.target, 'product target'), verified: value.verified };
   if (value.regionCoverage !== undefined) {
     const r = requireRecord(value.regionCoverage), usablePixelCenters = requireFiniteNumber(r.usablePixelCenters), invalidPixelCenters = requireFiniteNumber(r.invalidPixelCenters);
     if (r.answer !== 'partial' && r.answer !== 'unknown' || ![usablePixelCenters,invalidPixelCenters].every(n => Number.isSafeInteger(n) && n >= 0)) throw new TypeError('Invalid region assessment.');
@@ -57,7 +57,7 @@ export function parseProductFacts(raw: unknown): ProductFacts {
 const qualificationName = (result: Pick<QualifiedObservation, 'telescope' | 'mode' | 'program' | 'observation'>): string =>
   `${plainName(result.telescope, result.mode, result.program, result.observation)}.json`;
 /** Qualifications share the user-owned store regardless of the caller's workspace. */
-export const qualificationDirectory = (target: string): string => resolve(USER_ROOT, 'output/telescopes', target, 'qualifications');
+export const qualificationDirectory = (target: string | null): string => target === null ? resolve(USER_ROOT, 'output/telescopes/vo/field-qualifications') : resolve(USER_ROOT, 'output/telescopes', target === '.' || target === '..' ? target.replaceAll('.', '%2E') : encodeURIComponent(target), 'qualifications');
 export async function rememberQualification(root: string, result: QualifiedObservation): Promise<void> {
   const locations = Object.fromEntries((['product', 'receipt', 'productRecord', 'outputRoot'] as const).map(key => [key, inputPath(root, result[key])]));
   const facts = parseProductFacts(result.facts), bound = facts.angularResolutionBound;
@@ -76,7 +76,7 @@ export async function rememberQualification(root: string, result: QualifiedObser
   const text = `${JSON.stringify(value, null, 2)}\n`, directory = resolve(qualificationDirectory(result.target), 'locations', ...resolve(root, result.outputRoot).split(/[/\\]/u).filter(Boolean).map(encodeURIComponent));
   await mkdir(directory, { recursive: true }); await writeFile(resolve(directory, qualificationName(result)), text);
 }
-export async function loadQualifiedObservations(root: string, target: string): Promise<QualifiedObservation[]> {
+export async function loadQualifiedObservations(root: string, target: string | null): Promise<QualifiedObservation[]> {
   const directory = qualificationDirectory(target);
   const names = await readdir(directory, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
   const products: QualifiedObservation[] = [];
@@ -92,7 +92,7 @@ export async function loadQualifiedObservations(root: string, target: string): P
       if (!found || found.bytes !== pin.bytes || pin.sha256 !== undefined) current = false;
     }
     if (!current) continue;
-    const fields = Object.fromEntries(['target', 'telescope', 'mode', 'observation', 'program', 'product', 'receipt', 'productRecord', 'outputRoot'].map(key => [key, requireString(value[key], key)]));
+    const fields = Object.fromEntries(['telescope', 'mode', 'observation', 'program', 'product', 'receipt', 'productRecord', 'outputRoot'].map(key => [key, requireString(value[key], key)]));
     if (['product', 'receipt', 'productRecord', 'outputRoot'].some(key => !isAbsolute(fields[key]!))) continue;
     const record = await readProductRecord(inputPath(root, fields.productRecord!));
     if (!record || !await sameRun(record, record, name => resolve(root, fields.outputRoot!, name))) continue;

@@ -12,8 +12,8 @@ export async function selectedProductInput(root:string, selection:ObservationSel
  if(stated.program!==selection.programme||stated.telescope!==selection.telescope||stated.mode!==selection.mode||stated.target!==selection.request.target)throw new Error('Selection differs from its qualified artifact.');
  return qualifiedProductInput(root,stated);
 }
-export async function qualifiedProductInput(root:string, stated:QualifiedObservation) {
- const current=[...await loadQualifiedObservations(root,stated.target), ...sourceQualifiedObservations(await loadSourceProducts(root,stated.target))].find(p=>p.product===stated.product && p.productRecord===stated.productRecord && p.receipt===stated.receipt && p.program===stated.program && p.telescope===stated.telescope && p.mode===stated.mode && p.observation===stated.observation);
+export async function qualifiedProductInput(root:string, stated:QualifiedObservation, options: { readonly indexedSources?: boolean } = {}) {
+ const current=[...await loadQualifiedObservations(root,stated.target), ...options.indexedSources === false || stated.target === null ? [] : sourceQualifiedObservations(await loadSourceProducts(root,stated.target))].find(p=>p.product===stated.product && p.productRecord===stated.productRecord && p.receipt===stated.receipt && p.program===stated.program && p.telescope===stated.telescope && p.mode===stated.mode && p.observation===stated.observation);
  if(!current)throw new Error('The selected artifact or its qualification receipt is stale.');
  const file=inputPath(root, current.product),pin=await fileSize(file),record=await readProductRecord(inputPath(root, current.productRecord));
  if(!record?.outputs.some(o=>resolve(root,current.outputRoot,o.path)===file && o.bytes===pin.bytes))throw new Error('Selected artifact is not the qualified output.');

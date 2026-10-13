@@ -66,3 +66,19 @@ test('Keck source refuses changed archive identity, tampered discovery evidence 
     await assert.rejects(fetchKeckSource(exploration, 1, resolve(root, 'tampered'), async () => [row]), /is not in its discovery response/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('a position exploration fetches an exact Keck source and retains the field question', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'keck-field-source-'));
+  try {
+    const path = await setup(root), session = JSON.parse(await readFile(path, 'utf8'));
+    delete session.target; delete session.answer.target; delete session.answer.request.target;
+    session.answer.request.search = 'position';
+    session.answer.request.footprint = { frame: 'icrs', shape: 'circle', raDegrees: 83.82, decDegrees: -5.39, radiusDegrees: 0.1 };
+    await writeFile(path, JSON.stringify(session));
+    const output = resolve(root, 'source');
+    const result = await fetchKeckSource(path, 1, output, async () => [row], async (_url, file) => { await writeFile(file, fits); return { bytes: fits.length }; });
+    assert.deepEqual(await readFile(result.file), fits);
+    const question = await readSourceQuestion(output);
+    assert.deepEqual(question.region, session.answer.request.footprint); assert.equal(question.archiveTargetName, row.targname);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
