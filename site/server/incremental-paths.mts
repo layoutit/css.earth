@@ -7,6 +7,7 @@ import { incrementalBuildEnabled } from '../contracts/build-metadata.mts';
 import { worldBillboardInputs } from '../server-assets/world-billboard-inputs.mts';
 import { sceneCssInputs } from '../server-assets/asset-origin.mts';
 import { objectPageStyles, SHELL_STYLE_FILE } from '../contracts/object-page-contract.mts';
+import { readCompiledPageStyles, staticPageStylesEnabled } from './compiled-page-styles.mts';
 
 interface StaticPath {
   readonly params: Readonly<Record<string, string | number | undefined>>;
@@ -45,9 +46,12 @@ export class IncrementalPathInputs {
   readonly #environment: string;
   readonly #owners = new Map<string, Promise<OwnerInputs>>();
   #global: Promise<string> | undefined;
+  readonly #compiledStylesEnabled: boolean;
+  #compiledStyles: ReturnType<typeof readCompiledPageStyles> | undefined;
 
   constructor(root: string, env: NodeJS.ProcessEnv = process.env) {
     this.#root = resolve(root);
+    this.#compiledStylesEnabled = staticPageStylesEnabled(env);
     this.#environment = JSON.stringify([env.ASSET_ORIGIN?.trim() ?? '', env.CSSEARTH_ALLOW_MISSING_ASSETS ?? '']);
   }
 
@@ -113,7 +117,9 @@ export class IncrementalPathInputs {
     if (page?.stylesheets === undefined) return [];
     const inputs: Input[] = [], inventories = new Set<string>();
     for (const path of objectPageStyles(descriptor)) {
-      const bytes = await readFile(join(this.#root, path));
+      const compiled = this.#compiledStylesEnabled ? (await (this.#compiledStyles ??= readCompiledPageStyles(this.#root)))[path] : undefined;
+      if (this.#compiledStylesEnabled && compiled === undefined) throw new Error(`Missing compiled page stylesheet: ${path}`);
+      const bytes = compiled === undefined ? await readFile(join(this.#root, path)) : Buffer.from(compiled);
       inputs.push({ path, object: gitBlobIdentity(bytes) });
       const css = path === SHELL_STYLE_FILE ? bytes.toString('utf8') : objectPageCss(bytes.toString('utf8'), id);
       for (const { owner } of sceneCssInputs(css)) inventories.add(owner);

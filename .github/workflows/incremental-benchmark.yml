@@ -17,6 +17,7 @@ env:
   BENCHMARK_HEAD: ${{ github.event.pull_request.head.sha }}
   NODE_OPTIONS: --max-old-space-size=6144
   CSSEARTH_SKIP_DECLARATIONS: '1'
+  CSSEARTH_STATIC_STYLES: '1'
   CSSEARTH_ALLOW_MISSING_ASSETS: '0'
   ASSET_ORIGIN: https://earth-assets.lowpoly.cc
   TZ: UTC
