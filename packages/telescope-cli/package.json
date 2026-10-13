@@ -1,6 +1,6 @@
 {
   "name": "@cssearth/telescope",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The telescope command: explore, retrieve and qualify telescope products, and turn them into outputs.",
   "type": "module",
   "license": "MIT",
@@ -48,17 +48,12 @@
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
   "dependencies": {
-    "sharp": "0.35.3",
-    "linkedom": "^0.18.13",
     "@layoutit/polycss": "0.2.11",
-    "geotiff": "3.0.5"
+    "geotiff": "3.0.5",
+    "linkedom": "^0.18.13",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
-    "esbuild": "0.27.7",
-    "@types/pngjs": "6.0.5",
-    "pngjs": "7.0.0",
-    "typescript": "5.9.3",
-    "tsup": "^8.0.1",
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/bake": "workspace:*",
     "@cssearth/core": "workspace:*",
@@ -68,7 +63,12 @@
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
     "@cssearth/telescope-core": "workspace:*",
-    "@types/node": "^26.4.0"
+    "@types/node": "^26.4.0",
+    "@types/pngjs": "6.0.5",
+    "esbuild": "0.27.7",
+    "pngjs": "7.0.0",
+    "tsup": "^8.0.1",
+    "typescript": "5.9.3"
   },
   "oracleManifest": "oracle-manifest.json",
   "pi": {
