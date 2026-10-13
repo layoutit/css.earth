@@ -57,7 +57,7 @@ function starAnnuli(theirs: Awaited<ReturnType<typeof science>>, projection: Ret
 const quantile = (sorted: Float32Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))]!;
 
 export async function compareWithMast(id: string, band: string, local: string, sources: readonly string[] = []) {
-  requireWorkspace();
+  requireWorkspace(undefined, 'This command writes archive records.');
   const { program } = await readImagingProgram(id), entry = program.bands.find(other => other.band === band);
   if (!entry) throw new Error(`${id} has no ${band} band.`);
   const mastPath = await mastFile(entry.level3, resolve(local, '..', '..', 'mast'), sources);

@@ -1,19 +1,19 @@
 import './test-user-root.mts';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { cp, copyFile, mkdir, mkdtemp, readFile, readdir, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { isBuiltin } from 'node:module';
-import { resolve } from 'node:path';
+import { isBuiltin, createRequire } from 'node:module';
+import { dirname, resolve } from 'node:path';
 import test from 'node:test';
 import { build } from 'esbuild';
 import { requireRecord } from '@cssearth/core';
 import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { packageBundlePlugins } from './package-bundle.mts';
-import { copyPackageData, preparePublishPackage } from './package-data.mts';
+import { copyPackageData, validatePublishPackage } from './package-data.mts';
 
 const root = requireWorkspace();
-test('published dependencies exactly match runtime external imports across shipped bundles', async () => {
+test('published dependencies cover runtime external imports and the public Node declarations', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'telescope-dependencies-'));
   try {
     const packageRoot = resolve(root, 'packages/telescope-cli');
@@ -40,11 +40,11 @@ test('published dependencies exactly match runtime external imports across shipp
         externalPackages.add(imported.path.split('/').slice(0, imported.path.startsWith('@') ? 2 : 1).join('/'));
       }
     }
-    await preparePublishPackage(root, directory);
-    const manifest = requireRecord(JSON.parse(await readFile(resolve(directory, '.package/package.json'), 'utf8')));
+    await validatePublishPackage(root, directory);
+    const manifest = requireRecord(JSON.parse(await readFile(resolve(directory, 'package.json'), 'utf8')));
     const dependencies = requireRecord(manifest.dependencies);
-    assert.deepEqual(Object.keys(dependencies).sort(), [...externalPackages].sort(),
-      'published dependencies must have a runtime external import, and every runtime package import must be declared');
+    assert.deepEqual(Object.keys(dependencies).sort(), [...externalPackages, '@types/node'].sort(),
+      'public sphere declarations require Node types; every other dependency must have a runtime external import');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
@@ -135,16 +135,91 @@ function assertPackedClosure(files: readonly string[]) {
     assert.match(path,/^package\/data\/(?:spheres\/sphere-bank\.json\.gz|renderer\/volume\.css|target-catalogue\.json|telescope-core\/package\.json|telescope-core\/toolchains\/.+|cli\/src\/(?:archives\/.+|examples\.json|modes\.json)|src\/sources\/(?:wwt\/(?:core-imagesets\.jsonl|fits-associations\.json|phat-fits\.json|WWT-CORE-CATALOGS-LICENSE\.txt)|[^/]+\/(?:ledger\.json|discovery\.json|target-associations\.json)))$/u,path);
   }
 }
+function assertPackedExports(manifest: Readonly<Record<string, unknown>>, files: readonly string[]): void {
+  const visit = (value: unknown): void => {
+    if (typeof value === 'string') { assert.ok(files.includes('package/' + value.replace(/^\.\//u, '')), `Missing packed export: ${value}`); return; }
+    for (const child of Object.values(requireRecord(value))) visit(child);
+  };
+  visit(manifest.exports);
+  for (const value of Object.values(requireRecord(manifest.bin))) visit(value);
+}
+async function packRoot(directory: string): Promise<string> {
+  const packageRoot = resolve(root, 'packages/telescope-cli');
+  const watched = ['dist/viewer-lane.js', 'data/target-catalogue.json'].map(file => resolve(packageRoot, file));
+  // Other source tests consume the last completed build while npm runs prepack.
+  for (const file of watched) assert.ok((await readFile(file)).length > 0);
+  const child = spawn('npm', ['pack', '--offline', '--json', '--cache', resolve(directory, 'cache'), '--pack-destination', directory], { cwd: packageRoot });
+  let stdout = '', stderr = '', pending = Promise.resolve();
+  const failures: string[] = [];
+  child.stdout.on('data', data => { stdout += String(data); });
+  child.stderr.on('data', data => { stderr += String(data); });
+  const interval = setInterval(() => {
+    pending = pending.then(async () => {
+      try {
+        const contents = await Promise.all(watched.map(file => readFile(file, 'utf8')));
+        assert.ok(contents[0]!.length > 0); JSON.parse(contents[1]!);
+      } catch (error) { failures.push(String(error)); }
+    });
+  }, 10);
+  const timeout = setTimeout(() => child.kill('SIGTERM'), 180_000);
+  try {
+    const status = await new Promise<number | null>((accept, reject) => { child.once('error', reject); child.once('exit', accept); });
+    assert.equal(status, 0, stderr);
+  } finally { clearInterval(interval); clearTimeout(timeout); await pending; }
+  assert.deepEqual(failures, [], 'prepack must retain complete bundles and data for source consumers');
+  return stdout;
+}
 test('actual tarball stays within the standalone budget and contains only runtime data owners',async()=>{
   const directory=await mkdtemp(resolve(tmpdir(),'telescope-packed-'));
   try{
-    const packed=spawnSync('npm',['pack','--offline','--ignore-scripts','--json','--cache',resolve(directory,'cache'),'--pack-destination',directory],
-      {cwd:resolve(root,'packages/telescope-cli/.package'),encoding:'utf8',timeout:30_000});
-    assert.equal(packed.status,0,packed.stderr);
-    const record=requireRecord(JSON.parse(packed.stdout)[0]);
+    const stdout = await packRoot(directory);
+    // Lifecycle build output precedes npm's final JSON array.
+    const record=requireRecord(JSON.parse(stdout.slice(stdout.lastIndexOf('\n[') + 1))[0]);
     assert.ok(typeof record.size==='number'&&record.size<15_000_000,`Packed size ${record.size} exceeds 15 MB`);
     const files=Array.isArray(record.files)?record.files.map(value=>'package/'+String(requireRecord(value).path)):[];
     assert.ok(files.length>0,'npm pack must report its file list');assertPackedClosure(files);
+    assert.equal(typeof record.filename, 'string');
+    const tarball = resolve(directory, String(record.filename)), unpacked = resolve(directory, 'unpacked');
+    await mkdir(unpacked);
+    const extraction = spawnSync('tar', ['-xzf', tarball, '-C', unpacked], { encoding: 'utf8', timeout: 30_000 });
+    assert.equal(extraction.status, 0, extraction.stderr);
+    const manifest = requireRecord(JSON.parse(await readFile(resolve(unpacked, 'package/package.json'), 'utf8')));
+    assertPackedExports(manifest, files);
+    assert.throws(() => assertPackedExports({ ...manifest, exports: { './broken': './src/absent.mts' } }, files));
+    const consumer = resolve(directory, 'consumer'); await mkdir(consumer);
+    await writeFile(resolve(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module' }));
+    // Package the compiler's installed Node type dependencies as local tarballs, so this gate also runs offline.
+    const typeRequire = createRequire(resolve(root, 'packages/telescope-cli/package.json'));
+    const nodeTypes = typeRequire.resolve('@types/node/package.json');
+    const typeTarballs: string[] = [];
+    for (const manifestPath of [nodeTypes, createRequire(nodeTypes).resolve('undici-types/package.json')]) {
+      const packedTypes = spawnSync('npm', ['pack', '--ignore-scripts', '--offline', '--json', '--cache', resolve(directory, 'cache'), '--pack-destination', directory],
+        { cwd: dirname(manifestPath), encoding: 'utf8', timeout: 30_000 });
+      assert.equal(packedTypes.status, 0, packedTypes.stderr);
+      typeTarballs.push(resolve(directory, String(requireRecord(JSON.parse(packedTypes.stdout)[0]).filename)));
+    }
+    const install = spawnSync('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', '--cache', process.env.npm_config_cache ?? resolve(directory, 'install-cache'), tarball, ...typeTarballs],
+      { cwd: consumer, encoding: 'utf8', timeout: 120_000 });
+    assert.equal(install.status, 0, install.stderr);
+    await writeFile(resolve(consumer, 'consumer.ts'), `
+      import * as sphere from '@cssearth/telescope/sphere/lane';
+      import * as viewer from '@cssearth/telescope/viewer/lane';
+      import { loadPreparedCssVolume, loadPreparedCssPointField } from '@cssearth/telescope/viewer/lane';
+      const volume: typeof loadPreparedCssVolume = viewer.loadPreparedCssVolume;
+      const points: typeof loadPreparedCssPointField = viewer.loadPreparedCssPointField;
+      void [volume, points, sphere];
+    `);
+    const compile = () => spawnSync(process.execPath, [resolve(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '--strict', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--target', 'ES2022', 'consumer.ts'],
+      { cwd: consumer, encoding: 'utf8', timeout: 30_000 });
+    let compiled = compile(); assert.equal(compiled.status, 0, compiled.stdout + compiled.stderr);
+    const declarations = resolve(consumer, 'node_modules/@cssearth/telescope/dist/viewer-lane.d.ts');
+    const original = await readFile(declarations, 'utf8');
+    await writeFile(declarations, original + "\nexport { loadPreparedCssVolume as broken } from '@cssearth/renderer/volume/loader.ts';\n");
+    compiled = compile(); assert.notEqual(compiled.status, 0); assert.match(compiled.stdout, /TS2307/u);
+    await writeFile(declarations, original);
+    const help = spawnSync(process.execPath, [resolve(consumer, 'node_modules/@cssearth/telescope/dist/telescope.mjs'), '--help'],
+      { cwd: consumer, encoding: 'utf8', timeout: 30_000 });
+    assert.equal(help.status, 0, help.stderr); assert.match(help.stdout, /telescope explore/u);
     for(const forbidden of ['package/pnpm-lock.yaml','package/data/spheres/src/objects/body/prepared/runtime.json.gz','package/data/cli/src/examples/sample/evidence/image.png','package/data/bake/src/unused.json','package/src/objects/body/source/measurements.json','package/data/cli/src/archives/example/evidence/proof.png','package/data/cli/src/archives/example/fixtures/input.json','package/data/cli/src/archives/example/source.test.mts','package/data/cli/src/archives/example/yarn.lock','package/dist/extra/unknown.mjs','package/unknown.json'])
       assert.throws(()=>assertPackedClosure([...files,forbidden]),`Packaging guard must reject ${forbidden}`);
   }finally{await rm(directory,{recursive:true,force:true});}

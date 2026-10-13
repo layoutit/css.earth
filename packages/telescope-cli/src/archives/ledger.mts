@@ -54,7 +54,7 @@ export interface ArchiveLedger<L> {
 export const ledgerJson = <L,>(archive: ArchiveLedger<L>, ledger: L) => `${JSON.stringify(ledger, null, archive.indent)}\n`;
 
 export async function writeLedger<L>(archive: ArchiveLedger<L>, ledger: L): Promise<void> {
-  requireWorkspace();
+  requireWorkspace(undefined, 'This command writes archive ledger records.');
   await mkdir(dirname(archive.files.ledger), { recursive: true });
   await writeFile(archive.files.ledger, ledgerJson(archive, ledger));
   await writeFile(archive.files.guide, archive.guide(ledger));

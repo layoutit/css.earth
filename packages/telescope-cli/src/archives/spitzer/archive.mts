@@ -350,7 +350,7 @@ export function parseSpitzerProgram(value: unknown): SpitzerProgram {
 export const programPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.json`);
 export const readSpitzerProgram = async (id: string): Promise<SpitzerProgram> => parseSpitzerProgram(JSON.parse(await readFile(programPath(id), 'utf8')) as unknown);
 export async function writeSpitzerProgram(program: SpitzerProgram): Promise<void> {
-  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(programStorePath(programPath(program.id), 'write'), `${JSON.stringify(program, null, 2)}\n`);
 }
 /** Where a program's pinned bytes live by default: outside the repository, because they are megabytes of archive data. */

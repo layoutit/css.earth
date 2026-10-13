@@ -21,6 +21,18 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     const built = await import(${url('packages/telescope-core/dist/node/index.js')});
     assert.equal(core.WORKSPACE, undefined); assert.equal(built.WORKSPACE, undefined);
     assert.equal(core.USER_ROOT, ${JSON.stringify(home)});
+    const resolver = await import(${url('packages/telescope-core/src/node/toolchain/resolver.ts')});
+    assert.deepEqual(resolver.legacyWorkspaceRoots(), []);
+    const pins = { id: 'pds', file: 'pins.json', descriptor: '{}', lock: null, entry: {} };
+    const candidates = resolver.installedToolchainCandidates(resolve(core.USER_ROOT, 'output/toolchains/pds'), pins);
+    assert.ok(candidates.every(path => !path.startsWith(${JSON.stringify(checkout)} + '/')), 'Unadmitted checkout must never be a toolchain candidate');
+    assert.equal(resolver.resolveInstalledToolchain(resolve(core.USER_ROOT, 'output/toolchains/pds'), pins), null);
+    assert.throws(() => core.requireWorkspace(), error => {
+      assert.doesNotMatch(error.message, /writes|bakes/);
+      const command = /telescope export RESULT --output html --out DIRECTORY/.exec(error.message);
+      assert.ok(command, 'Recovery command must include its output directory');
+      return true;
+    });
     for (const name of ['SCRATCH_ROOT','ASTROQUERY_ROOT','ASTROQUERY_CACHE','MAST_CACHE','PDS_TOOLCHAIN_ROOT','STARRY_ROOT','SPIDERMAN_ROOT','PICASO_ROOT']) {
       assert.ok(!relative(core.USER_ROOT, core[name]).startsWith('..'), name);
       assert.equal(core[name], built[name], name + ' source/build roots');
@@ -48,7 +60,7 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     assert.equal(await main(['new-object', 'missing.json', '--json'], undefined, text => { output += text; }), 2);
     assert.match(JSON.parse(output).error, /this command needs a css\\.earth checkout: pass --workspace/);
     assert.match(JSON.parse(output).error, /new-object.*site records/u);
-    assert.match(JSON.parse(output).error, /telescope export RESULT --output html/u);
+    assert.match(JSON.parse(output).error, /telescope export RESULT --output html --out DIRECTORY/u);
     assert.equal(JSON.parse(output).exitCode, 2);
     const { DRAFT_ROUTES } = await import(${url('packages/telescope-cli/src/new-object/drafts.mts')});
     for (const args of [
@@ -59,7 +71,7 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     ]) {
       output = '';
       assert.equal(await main([...args, '--json'], undefined, text => { output += text; }), 2, args.join(' '));
-      assert.match(JSON.parse(output).error, /telescope export RESULT --output html/u);
+      assert.match(JSON.parse(output).error, /telescope export RESULT --output html --out DIRECTORY/u);
     }
     for (const [file, name] of [
       ['f16-cartesian-grid.mts', 'preparePhysicalCartesianVolume'],
@@ -68,12 +80,12 @@ test('explore paths, archive answers and every toolchain stay outside the checko
       const module = await import(${url('packages/telescope-cli/src/families/f16/')} + '/' + file);
       await assert.rejects(module[name]({}), error => error instanceof TypeError
         && /site records|prepared assets/u.test(error.message)
-        && /telescope export RESULT --output html/u.test(error.message));
+        && /telescope export RESULT --output html --out DIRECTORY/u.test(error.message));
     }
     const { executeFamilyOperation } = await import(${url('packages/telescope-cli/src/family-operation.mts')});
     for (const operationId of ['physical-grid-prepare-volume', 'spherical-grid-prepare-volume']) {
       await assert.rejects(executeFamilyOperation('missing.json', { operationId }, 'volume'), error => error instanceof TypeError
-        && /telescope export RESULT --output html/u.test(error.message));
+        && /telescope export RESULT --output html --out DIRECTORY/u.test(error.message));
     }
     console.log('STANDALONE_PATHS_OK');
   `;
@@ -88,7 +100,7 @@ test('explore paths, archive answers and every toolchain stay outside the checko
         'new-object', 'missing.json', ...(json ? ['--json'] : [])], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
       assert.equal(refused.status, 2, refused.stderr);
       assert.match(refused.stderr, /new-object.*site records/u);
-      assert.match(refused.stderr, /telescope export RESULT --output html/u);
+      assert.match(refused.stderr, /telescope export RESULT --output html --out DIRECTORY/u);
       if (json) assert.equal(JSON.parse(refused.stdout).exitCode, 2);
       else assert.equal(refused.stdout, '');
     }

@@ -29,7 +29,7 @@ export const checkoutProjectRoot = (_url?: string): string => requireWorkspace()
 /** Convert a package-owned authoring identity to the selected workspace destination. */
 export function workspacePath(path: string): string {
   if (isProgramIdentity(path)) return programStorePath(path, 'write');
-  const destination = resolve(requireWorkspace(), PREFIX);
+  const destination = resolve(requireWorkspace(undefined, 'This command writes checkout records.'), PREFIX);
   const selectedPart = relative(destination, path);
   if (isAbsolute(path) && !isAbsolute(selectedPart) && selectedPart !== '..' && !selectedPart.startsWith(`..${sep}`)) return path;
   const part = isAbsolute(path) ? relative(CLI_DATA_ROOT, path) : path.startsWith(PREFIX) ? path.slice(PREFIX.length) : path;
@@ -44,7 +44,7 @@ function isProgramIdentity(path: string): boolean {
 
 /** One program store for readers and authors. A selected workspace never falls back to shipped programs. */
 export function programStorePath(path: string, access: 'read' | 'write' = 'read'): string {
-  const workspace = access === 'write' ? requireWorkspace() : WORKSPACE;
+  const workspace = access === 'write' ? requireWorkspace(undefined, 'This command writes archive program records.') : WORKSPACE;
   const destination = workspace === undefined ? CLI_DATA_ROOT : resolve(workspace, PREFIX);
   const selectedPart = relative(destination, path);
   const part = isAbsolute(path)

@@ -73,7 +73,7 @@ export function parseProgram(value: unknown): JunocamProgram {
     kernelSet: requireString(record.kernelSet), kernels: requireArray(record.kernels, 'program kernels').map(kernel => requireString(kernel)), images };
 }
 export const readProgram = async (id: string) => parseProgram(JSON.parse(await readFile(resolve(programStorePath(PROGRAMS), `${id}.json`), 'utf8')));
-export const writeProgram = async (program: JunocamProgram) => { requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true }); await writeFile(programStorePath(resolve(programStorePath(PROGRAMS), `${program.id}.json`), 'write'), JSON.stringify(program, null, 2) + '\n'); };
+export const writeProgram = async (program: JunocamProgram) => { requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true }); await writeFile(programStorePath(resolve(programStorePath(PROGRAMS), `${program.id}.json`), 'write'), JSON.stringify(program, null, 2) + '\n'); };
 
 export async function fetchText(url: string, fetcher: typeof fetch = fetch) {
   const response = await fetcher(url);

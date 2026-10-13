@@ -164,7 +164,7 @@ export const discRegistration = (product: string, receipt: string, diameterArcse
 export const FREEZE_PARAMETERS: Readonly<Record<string, string | number>> = { clobber: 'yes', verbose: 1 };
 
 export async function freezeSolarSystem(id: string, obsid: number, work: string, options: { sources?: readonly string[] } = {}) {
-  requireWorkspace();
+  requireWorkspace(undefined, 'This command writes archive records.');
   const { program, entry } = await chandraFiles(id, obsid, resolve(work, 'archive'), options.sources, 'inputs');
   const target = entry.targetName.trim().toUpperCase();
   const bodies = await chandraHorizonsBodies(), horizonsBody = bodies[target];

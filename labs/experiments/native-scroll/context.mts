@@ -12,7 +12,7 @@ import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { SharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import type { OrbitSegment } from '@cssearth/engine';
-import type { NativeCameraRotation } from '@cssearth/telescope/sphere/native-scroll/native-camera';
+import type { NativeCameraRotation } from '../../../packages/telescope-cli/src/sphere/native-scroll/native-camera.mts';
 import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling.mts';
 import { BODY_INDICATOR_DIAMETER } from '@cssearth/renderer/universe/world-context/context-scale.ts';
 

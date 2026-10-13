@@ -1,5 +1,4 @@
 /** The workspace packages a bundled lane compiles from their TypeScript sources rather than their builds. */
-import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Plugin } from 'esbuild';
 import { pathToFileURL } from 'node:url';
@@ -98,32 +97,11 @@ async function rendererSource(root: string, specifier: string): Promise<string |
   if (built) return `packages/renderer/${built}`;
   return /^[a-z-]+\/[\w./-]+\.ts$/u.test(subpath) && !subpath.split('/').includes('..') ? `packages/renderer/src/${subpath}` : undefined;
 }
-/** A `@cssearth/telescope` subpath is followed to the source its package.json `exports` entry declares, as Node resolves it
- * (`@cssearth/telescope/archives/jwst/imaging/image3` → `src/archives/jwst/imaging/image3.mts`); a subpath the package does
- * not export stays external, as Node would refuse it. The map is read from the bundled checkout, once per bundle. */
-async function telescopeCliExports(root: string): Promise<ReadonlyMap<string, string>> {
-  let text: string;
-  try { text = await readFile(resolve(root, 'packages/telescope-cli/package.json'), 'utf8'); }
-  catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return new Map(); throw error; }
-  const manifest: unknown = JSON.parse(text);
-  const exports = typeof manifest === 'object' && manifest !== null && 'exports' in manifest ? manifest.exports : undefined;
-  if (typeof exports !== 'object' || exports === null) return new Map();
-  const sources = new Map<string, string>();
-  for (const [subpath, target] of Object.entries(exports)) {
-    const conditions: Readonly<Record<string, unknown>> = typeof target === 'object' && target !== null ? { ...target } : { default: target };
-    const source = conditions.types ?? conditions.default;
-    if (subpath.startsWith('./') && typeof source === 'string' && /^\.\/src\/[\w./-]+\.m?ts$/u.test(source) && !source.split('/').includes('..'))
-      sources.set(`@cssearth/telescope/${subpath.slice(2)}`, `packages/telescope-cli/${source.slice(2)}`);
-  }
-  return sources;
-}
 /** An esbuild plugin that bundles the followed workspace entries from their sources under `root`. */
 export function followedWorkspaceSources(root: string): Plugin {
   return { name: 'followed-workspace-sources', setup(builder) {
-    let telescopeCli: Promise<ReadonlyMap<string, string>> | undefined;
     builder.onResolve({ filter: /^@cssearth\// }, async args => {
-      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(root, args.path)
-        ?? (args.path.startsWith('@cssearth/telescope/') ? (await (telescopeCli ??= telescopeCliExports(root))).get(args.path) : undefined);
+      const source = FOLLOWED_WORKSPACE_ENTRIES[args.path] ?? await rendererSource(root, args.path);
       return source ? { path: resolve(root, source) } : undefined;
     });
   } };

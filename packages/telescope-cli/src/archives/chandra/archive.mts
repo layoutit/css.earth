@@ -299,7 +299,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     console.log(`${entry.obsid}: ${entry.instrument}/${entry.detector} ${entry.grating} ${[entry.readMode, entry.dataMode].filter(Boolean).join('/')} ${entry.targetName}, ${(entry.livetimeSeconds / 1000).toFixed(1)} ks, ${entry.inputs.length} inputs, ${entry.products.length} products, ASCDSVER ${entry.ascdsVersion}`);
   }
   const program = parseChandraProgram({ schema: 'cssearth-chandra-program@1', id, target, observations: entries });
-  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`CHANDRA_PROGRAM ${path}`);
 }

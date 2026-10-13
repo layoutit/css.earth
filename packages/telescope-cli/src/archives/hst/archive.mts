@@ -254,7 +254,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       entry.association ? `, ${entry.association.members.length} association members` : ''}, ${[...new Set(entry.products.map(p => suffixOf(p.name)))].join(' ')}`);
   }
   const program = parseHstProgram({ schema: 'cssearth-hst-program@1', id, programme, target, crdsContext, observations: entries });
-  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`HST_PROGRAM ${path}`);
 }

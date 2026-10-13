@@ -144,7 +144,7 @@ export async function addComparisonEvidence(value: Pick<Reproduction, 'kind' | '
 
 /** Compare two templates' combined images and write the receipt. */
 export async function compareTemplates(programId: string, work: string, templates: readonly [string, string]): Promise<Reproduction> {
-  requireWorkspace();
+  requireWorkspace(undefined, 'This command writes archive records.');
   const program = await readProgram(programId);
   // For imaging the two labels are object templates of the night; for spectroscopy they are the two halves of its nod set,
   // which is one template. Either way they must be two, and each must have been reduced.

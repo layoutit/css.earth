@@ -85,7 +85,9 @@ test('HTML routes image, spectrum and volume through offline exports with litera
         assert.ok(document.querySelector('img.measurement-image'));
       }
       if(kind==='spectrum'){
-        assert.equal(document.querySelectorAll('svg').length,1);const svg=document.querySelector('svg')!;
+        assert.equal(document.querySelectorAll('svg').length,1);const svg=document.querySelector('main>svg')!;
+        assert.match(svg.getAttribute('viewBox')!, /^0 0 306 [0-9]+$/u);
+        assert.match(document.querySelector('style')!.textContent!, /main>svg\{width:100%;height:auto\}/u);
         assert.equal(svg.querySelectorAll('polygon.uncertainty').length,1);
         assert.equal(svg.querySelectorAll('.object-chart-line').length,2);assertFinalSampleError(svg);
         for(const mutate of [(bar:Element)=>bar.remove(),(bar:Element)=>bar.setAttribute('d','M294 203V203'),(bar:Element)=>bar.setAttribute('stroke-width','0')]){

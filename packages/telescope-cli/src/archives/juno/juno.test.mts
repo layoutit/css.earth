@@ -4,8 +4,8 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { FILTER_COMBINATIONS, INDEX_COLUMNS, colorImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from '@cssearth/telescope/archives/juno/archive';
-import { ellipsoidMesh } from '@cssearth/telescope/archives/juno/measure';
+import { FILTER_COMBINATIONS, INDEX_COLUMNS, colorImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from '#telescope/archives/juno/archive';
+import { ellipsoidMesh } from '#telescope/archives/juno/measure';
 
 // Two lines of JNOJNC_0024/INDEX/INDEX.TAB as the PDS serves them, and a methane image made from the second.
 const EUROPA = '"JNOJNC_0024","JUNOCAM-RDR","JUNO-J-JUNOCAM-3-RDR-L1A-V1.0","JNCR_2022272_45C00001_V01",2022-09-29T09:38:05.691,2022-09-29T09:38:16.079,"3                  ","Europa                                                                                                         ",7.4133e+08 <km> ,1515.1 <km>          ,11.7571                  ,0.3597                    ,"EUROPA     ","DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01.LBL",2023-02-02T20:23:40,"5a1c0c3d0e0f4a8a9b0c1d2e3f405162"';

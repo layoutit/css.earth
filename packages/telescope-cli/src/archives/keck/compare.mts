@@ -243,7 +243,7 @@ export async function comparisonPins(id: string, observation: KeckObservation, p
 }
 
 export async function compareWithArchive(id: string, koaid: string, run: string) {
-  requireWorkspace();
+  requireWorkspace(undefined, 'This command writes archive records.');
   const program = await readKeckProgram(id);
   const observation = program.observations.find(entry => entry.koaid === koaid);
   if (!observation) throw new Error(`${id} pins no observation ${koaid}.`);

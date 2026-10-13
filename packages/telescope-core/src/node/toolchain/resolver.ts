@@ -2,13 +2,12 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { relative, resolve } from 'node:path';
-import { isTelescopeWorkspace, PACKAGE_ROOT, USER_ROOT, WORKSPACE } from '../paths.js';
+import { isTelescopeWorkspace, USER_ROOT, WORKSPACE } from '../paths.js';
 import { installedMarkerIssue, type ToolchainPins } from './marker.js';
 
-/** Legacy source checkouts are read-only candidates, not workspace admission. */
+/** Read legacy checkout installs only inside the admitted workspace. */
 export function legacyWorkspaceRoots(): string[] {
-  const source = resolve(PACKAGE_ROOT, '../..');
-  return [...new Set([WORKSPACE, source].filter((root): root is string => root !== undefined && isTelescopeWorkspace(root)))];
+  return WORKSPACE !== undefined && isTelescopeWorkspace(WORKSPACE) ? [WORKSPACE] : [];
 }
 export interface ToolchainSearch {
   readonly userRoot?: string; readonly home?: string; readonly env?: NodeJS.ProcessEnv; readonly workspaces?: readonly string[];

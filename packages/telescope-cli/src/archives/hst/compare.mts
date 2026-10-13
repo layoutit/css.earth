@@ -128,7 +128,7 @@ export async function addArchiveAgreement(directory: string, product: string, re
 }
 
 export async function compareWithMast(id: string, observation: string, run: string, sources: readonly string[] = []) {
-  requireWorkspace();
+  requireWorkspace(undefined, 'This command writes archive records.');
   const { program } = await readHstProgram(id), entry = program.observations.find(other => other.observation === observation);
   if (!entry) throw new Error(`${id} has no observation ${observation}.`);
   const receipts: { path: string; receipt: Record<string, unknown>; record: ProductRecord }[] = [];

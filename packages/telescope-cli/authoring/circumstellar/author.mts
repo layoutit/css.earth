@@ -35,8 +35,8 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { meanChannelNoise } from './channel-noise.mts';
 import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
 import { mastDownloadUrl, mastFile } from '@cssearth/telescope-core/node';
-import { readImagingProgram } from '@cssearth/telescope/archives/jwst/imaging/image3';
-import { JWST_BANDS } from '@cssearth/telescope/archives/jwst/imaging/bands';
+import { readImagingProgram } from '#telescope/archives/jwst/imaging/image3';
+import { JWST_BANDS } from '#telescope/archives/jwst/imaging/bands';
 import { DEFAULT_SEARCH, centreDepthThroughStar, discDensity, fitDiscEnvelope, profileDiscDensity, readArrayPlane, scoreEnvelope, readSkyPlane, ringGeometry, type RingGeometry, type SkyPlane } from './disc-envelope.mts';
 import { midplaneGeometry, registerStarByPlanet, type MidplaneGeometry, type PlanetRegistration } from './edge-on-disc.mts';
 import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from '@cssearth/astronomy';

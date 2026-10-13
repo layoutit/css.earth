@@ -30,7 +30,7 @@ import { SPITZER_LEDGER } from '../archives/spitzer/archive-ledger.mts';
 import { refreshLocalLedger } from '../archives/ledger.mts';
 import { defaultWorkRoot, remosaicChannel } from '../archives/spitzer/mosaic.mts';
 import { loadQueryInputs, queryCapabilities } from '../observation-query/query.mts';
-import { qualificationConfigurationFromArguments, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';
+import { qualificationConfigurationFromArguments, qualificationPrerequisite, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';
 
 export const QUALIFICATION_SCHEMA = 'cssearth-telescope-qualification@2';
 export interface QualificationRequest {
@@ -143,6 +143,8 @@ const QUALIFIERS: Readonly<Record<string, (root: string, request: QualificationR
 });
 
 export async function qualifyObservation(root: string, request: QualificationRequest): Promise<QualificationResult> {
+  const prerequisite = qualificationPrerequisite(request.configuration);
+  if (prerequisite) throw new TypeError(prerequisite);
   if (request.configuration.kind === 'archive-acquisition') {
     const configuration = request.configuration;
     if (configuration.request.target !== undefined && configuration.request.target !== request.target) throw new Error('Acquisition target differs from qualification target.');

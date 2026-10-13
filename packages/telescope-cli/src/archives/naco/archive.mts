@@ -331,7 +331,7 @@ async function calibrationRow(dpId: string) {
 export const programPath = (program: string) => resolve(programStorePath(PROGRAMS), `${program}.json`);
 
 export async function writeProgram(value: NacoProgram) {
-  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(programStorePath(programPath(value.program), 'write'), `${JSON.stringify(value, null, 2)}\n`);
   return programStorePath(programPath(value.program), 'write');
 }

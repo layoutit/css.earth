@@ -10,9 +10,9 @@ Paths are owned by the library:
 - **Optional workspace:** `--workspace PATH` takes precedence over `CSSEARTH_WORKSPACE`. Source entries launched from inside their own css.earth checkout also admit it, as `pnpm telescope` does. Merely importing checkout sources from another directory does not. Site authoring, `new-object`, bake and developer reductions require it and fail with `this command needs a css.earth checkout: pass --workspace` when absent.
 - **Package data:** requirements locks, descriptors, notices, examples and modes resolve from the owning package. Programs and their preserved receipts use the selected workspace's archive program folders for both reading and authoring. Without a workspace, shipped programs are read-only and authoring is refused. Outside a workspace, the target loader reads `data/target-catalogue.json` in this package; the build generates that array of target catalogue entries. If it is missing, unknown targets still go to SIMBAD. Malformed snapshots are errors. Read-only archive ledgers and WWT catalogues use `data/src/sources/` outside a workspace.
 
-With a workspace, target names and site records still come from `src/objects` and `src/sources`. Existing toolchains and caches in the checkout are not migrated automatically; install the pins into the selected user root.
+With a workspace, target names and site records still come from `src/objects` and `src/sources`. Compatible toolchains in an admitted checkout or the legacy home Astroquery cache can be read after exact pin validation. New installs and writable caches use the selected user root.
 
-Without a workspace, `new-object` (every drafter, `SPEC.json`, `--check`, `--bake` and `--skip-existing`) and physical volume preparation exit 2 before writing site records. The standalone alternative is `telescope export RESULT --output html`.
+Without a workspace, `new-object` (every drafter, `SPEC.json`, `--check`, `--bake` and `--skip-existing`) and physical volume preparation exit 2 before writing site records. The standalone alternative is `telescope export RESULT --output html --out DIRECTORY`.
 
 ## Setup
 
@@ -94,7 +94,7 @@ telescope explore "Sgr A*" --kind cube --instrument ERIS
 
 A name the catalogue does not ship is resolved by SIMBAD, and records are selected by SIMBAD's identifiers and position error circle. With a TARGET, `--icrs-circle` is a cutout: it cuts the product and replaces that search circle. `telescope explore --icrs-circle 83.82,-5.39,0.1` searches a field without a target name; name-only archives are reported as not searched, with incomplete coverage. Use `--instrument NAME` and `--from ISO --to ISO` to narrow live Keck, Gemini and Chandra queries.
 
-In a terminal, `explore` shows the observations, unknown metadata, unsupported records and provider limits, then asks which observation to retrieve. Press Enter to keep the exploration without retrieving. With `--json` or redirected input or output it never prompts. Without `--out` it creates a run under `./telescope-runs/`. The saved `outcome` has a `selection` (`available` or `none`) and a `coverage` (`target-unresolved`, `incomplete` or `bounded`). Even `bounded` describes only the configured searches, not every observatory. An empty search is not proof that no observations exist.
+In a terminal, `explore` shows the observations, unknown metadata, unsupported records and provider limits, then asks which observation to retrieve. Reductions that write workspace programs or ledgers are listed as unsupported without an admitted workspace, with the reason `needs a css.earth checkout: pass --workspace`; they remain selectable with a workspace. Press Enter to keep the exploration without retrieving. With `--json` or redirected input or output it never prompts. Without `--out` it creates a run under the user root's `telescope-runs/`. The saved `outcome` has a `selection` (`available` or `none`) and a `coverage` (`target-unresolved`, `incomplete` or `bounded`). Even `bounded` describes only the configured searches, not every observatory. An empty search is not proof that no observations exist.
 
 `explore` asks every archive at once and reports the ledgers that index the target, the ESPaDOnS polarised spectra at CADC among them; an archive that drops the connection is asked again, twice. Keck and Gemini are asked by the target's place on the sky as well as by name. A question asked in the last day is answered from its saved answer; `--fresh` asks every archive again.
 
@@ -128,6 +128,8 @@ The number binds to the recorded observation identity in that snapshot. `get` re
 
 ### Magnetic maps of stars from archived spectra
 
+The following source scripts and authoring examples require a development checkout. Toolchain installations and reduction outputs use the user root; programs are written to the admitted workspace.
+
 A star's magnetic field can be mapped from a series of polarised spectra taken through one rotation. The tools of
 `src/archives/espadons/` do that for the spectra of CFHT's ESPaDOnS spectropolarimeter in the Canadian Astronomy Data Centre,
 with the codes the method's authors publish (Korg, LSDpy, SpecpolFlow and ZDIpy), which `toolchain.mts install` installs once.
@@ -144,7 +146,7 @@ node packages/telescope-cli/src/archives/espadons/reduce.mts hd-189733-2007-06
 `archive.mts` writes a program beside the code, with each spectrum pinned by its size. Before `reduce.mts` can run, the
 program needs three blocks a person fills from catalogues and papers, each value with where it is printed: `atmosphere`
 (temperature, gravity), `radialVelocity`, and `star` (rotation period, tilt, projected rotation speed, the highest harmonic
-degree). `reduce.mts` writes a receipt, the map as a table and a picture under ignored `output/espadons/`; git holds the program, not the result.
+degree). `reduce.mts` writes a receipt, the map as a table and a picture under `output/espadons/` in the user root; git holds the program, not the result.
 `telescope new-object --from-spectra STAR --out SPEC.json` then drafts the star's reduced maps as datasets of its page.
 
 ### A star's rotation and brightness map from the TESS, K2 and Kepler missions' light curves
@@ -164,7 +166,7 @@ node packages/telescope-cli/src/archives/tess/reduce.mts au-mic      # or --all:
 ```
 
 `reduce.mts` asks MAST for the star's light curves, has the method judge them, and writes a receipt, each light curve and,
-when the rotation is accepted, one map a sector, campaign or quarter as a table under ignored `output/tess/`. A TESS
+when the rotation is accepted, one map a sector, campaign or quarter as a table under `output/tess/` in the user root. A TESS
 target whose pixels the TESS Input Catalog gives too much of other stars' light (a contamination ratio of 0.2 or more) is
 not read.
 `telescope new-object --from-pixels all --out SPEC.json` then drafts every reduced star's maps as datasets of its page.
@@ -250,13 +252,14 @@ The navigation file pins SPICE kernels. The sphere is a standalone HTML file wit
 
 ## Independent output checks
 
-The [output oracle](src/delivery/output-oracle.mts) reads the pinned FITS data independently of the production reducer, using Specutils 2.4.0 and Photutils 3.0.0 as optional test dependencies:
+These optional checks run from a development checkout with its dependencies installed; they are not installed CLI commands. The [output oracle](src/delivery/output-oracle.mts) reads the pinned FITS data independently of the production reducer, using Specutils 2.4.0 and Photutils 3.0.0 as optional test dependencies:
 
 ```sh
-output/toolchains/astroquery/env/bin/python -m venv --system-site-packages work/telescope-oracles/env
-work/telescope-oracles/env/bin/python -m pip install -c packages/telescope-core/toolchains/requirements.lock -r packages/telescope-core/toolchains/oracle-requirements.txt
-node packages/telescope-cli/src/delivery/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
-CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test packages/telescope-cli/src/delivery/cube-outputs.test.mts
+export CSSEARTH_TELESCOPE_HOME="$PWD/output/telescope-oracle-user"
+node --input-type=module -e 'import { astroqueryToolchain } from "@cssearth/telescope-core/node"; const { execFileSync } = await import("node:child_process"); const { python } = await astroqueryToolchain(); execFileSync(python, ["-m", "venv", "--system-site-packages", "output/telescope-oracles/env"], { stdio: "inherit" });'
+output/telescope-oracles/env/bin/python -m pip install -c packages/telescope-core/toolchains/requirements.lock -r packages/telescope-core/toolchains/oracle-requirements.txt
+node packages/telescope-cli/src/delivery/output-oracle.mts figures/eris-band output/telescope-oracles/env/bin/python output/oracles/eris-band
+CSSEARTH_ORACLE_PYTHON="$PWD/output/telescope-oracles/env/bin/python" node --import ./packages/core/src/node/register-vite-suffix.mts --test packages/telescope-cli/src/delivery/cube-outputs.test.mts
 ```
 
 It fails above 1e-10 of the reference peak. It verifies numerical extraction only, not archive calibration, covariance, aperture corrections or detection significance.
@@ -266,6 +269,6 @@ Sphere silhouette framing uses `@cssearth/engine`; prepared loader and retained 
 Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/dependencies/preparation-without-renderer.mts):
 `src/delivery/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
-The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
+The published JavaScript and declarations bundle these renderer consumers; the renderer is a checkout development dependency. F16 validation uses objects contracts.
 
-Sphere export imports the built `@cssearth/telescope/sphere/lane` entry from `dist`. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope build` before exporting again.
+Sphere export imports the built `@cssearth/telescope/sphere/lane` entry from `dist`. Without a workspace, it reads the compressed sphere bank shipped at build time, including shared geometry, raster layouts, styles and physical frames. With a workspace, it loads that checkout's generated solar geometry. The lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope build` before exporting again.

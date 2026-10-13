@@ -13,8 +13,8 @@ export async function copyPackageData(source: string, destination: string): Prom
     else if (entry.isFile()) { await mkdir(dirname(to), { recursive: true }); await copyFile(from, to); }
   }
 }
-export async function preparePackageData(root: string, packageRoot: string): Promise<void> {
-  const data = resolve(packageRoot, 'data');
+export async function preparePackageData(root: string, packageRoot: string, outputRoot = packageRoot): Promise<void> {
+  const data = resolve(outputRoot, 'data');
   await prepareSpherePackage(root, resolve(data, 'spheres'));
   const cssTarget = resolve(data, 'renderer/volume.css');
   await mkdir(dirname(cssTarget), { recursive: true });
@@ -47,23 +47,15 @@ export async function preparePackageData(root: string, packageRoot: string): Pro
   await writeFile(resolve(data, 'target-catalogue.json'), JSON.stringify(await loadTargetCatalogue(root)) + '\n');
 }
 
-/** The published manifest declares runtime npm dependencies only; source exports stay checkout-only. */
-export async function preparePublishPackage(root: string, packageRoot: string): Promise<void> {
-  const { cp, readFile } = await import('node:fs/promises');
+/** The package root is the publishable layout; checkout source aliases are private imports. */
+export async function validatePublishPackage(root: string, packageRoot: string): Promise<void> {
+  const { readFile } = await import('node:fs/promises');
   const { requireRecord, requireString } = await import('@cssearth/core');
   const source = requireRecord(JSON.parse(await readFile(resolve(packageRoot, 'package.json'), 'utf8')), 'package manifest');
-  const configuration = requireRecord(source.publishConfig, 'publish configuration');
   const dependencies = requireRecord(source.dependencies, 'runtime dependencies');
   for (const [name, version] of Object.entries(dependencies)) {
     if (name.startsWith('@cssearth/') || requireString(version, `${name} version`).startsWith('workspace:'))
       throw new Error(`Unpublished runtime dependency: ${name}`);
   }
-  const manifest: Record<string, unknown> = { ...source, exports: requireRecord(configuration.exports, 'published exports'), publishConfig: { access: 'public' } };
-  delete manifest.devDependencies; delete manifest.scripts; delete manifest.oracleManifest;
-  const destination = resolve(packageRoot, '.package');
-  await mkdir(destination, { recursive: true });
-  for (const name of ['dist', 'data', 'skills', '.claude-plugin', '.codex-plugin', '.factory-plugin']) await cp(resolve(packageRoot, name), resolve(destination, name), { recursive: true });
-  for (const name of ['README.md']) await copyFile(resolve(packageRoot, name), resolve(destination, name));
-  await copyFile(resolve(root, 'LICENSE'), resolve(destination, 'LICENSE'));
-  await writeFile(resolve(destination, 'package.json'), JSON.stringify(manifest, null, 2) + '\n');
+  await copyFile(resolve(root, 'LICENSE'), resolve(packageRoot, 'LICENSE'));
 }

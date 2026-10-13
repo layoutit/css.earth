@@ -135,7 +135,7 @@ const NOTE = 'Internal and physical checks only. The ESO archive publishes no Ph
   + ' against. The two halves share no exposure and measure repeatability, not accuracy.';
 
 export async function writeSpectrumReceipt(programId: string, work: string): Promise<SpectrumReproduction> {
-  requireWorkspace();
+  requireWorkspace(undefined, 'This command writes archive records.');
   const program = await readProgram(programId);
   if (program.mode !== 'spectroscopy') throw new Error(`${programId} is an ${program.mode} program.`);
   const load = async (half: string): Promise<ReductionResult> => {

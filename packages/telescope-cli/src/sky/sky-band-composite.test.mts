@@ -8,7 +8,7 @@ import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '@cssearth/core/node';
 import { card } from '@cssearth/fits/test-support';
 import { encodeAsinhBands } from '@cssearth/bake/objects/color';
-import { composeSkyBandPlanes, composeSkyBands, hips2fitsCachePath, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from '@cssearth/telescope/sky/sky-band-composite';
+import { composeSkyBandPlanes, composeSkyBands, hips2fitsCachePath, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from '#telescope/sky/sky-band-composite';
 import { gridWcs } from '@cssearth/bake/objects/raster';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };

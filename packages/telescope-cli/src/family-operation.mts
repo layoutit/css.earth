@@ -315,7 +315,7 @@ async function polarimetryOutput(loaded:Awaited<ReturnType<typeof loadDescriptor
 
 /** Execute only a compile-time allowlisted owner. The descriptor and every member are re-pinned before dispatch. */
 export async function executeFamilyOperation(descriptorPath:string,rawParameters:FamilyOperationParameters,outputDirectory:string):Promise<FamilyOperationResult>{
-  if(rawParameters.operationId==='physical-grid-prepare-volume'||rawParameters.operationId==='spherical-grid-prepare-volume')requireWorkspace();
+  if(rawParameters.operationId==='physical-grid-prepare-volume'||rawParameters.operationId==='spherical-grid-prepare-volume')requireWorkspace(undefined, 'This command writes volume records and bakes prepared assets.');
   const params=parameters(rawParameters),loaded=await loadDescriptor(descriptorPath),operation=executableOperation(loaded.descriptor,params.operationId,rawParameters.componentId);
   if(PREVIEW_OPERATIONS.has(params.operationId))return previewOutput(loaded,operation,params,outputDirectory);
   if(params.operationId==='export-bundle')return calibrationBundleOutput(loaded,operation,outputDirectory);

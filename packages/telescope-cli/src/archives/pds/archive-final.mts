@@ -152,7 +152,7 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
       { role: 'uncertainty', supplied: false, reason: 'This PDS product supplies no uncertainty array.' },
       { role: 'quality', supplied: false, reason: 'This PDS product supplies no per-pixel quality array.' }],
     note: 'Archive-final image product: one array, one multiband array or separate filter images. Decoding establishes readable values and label conventions; it does not establish calibration accuracy beyond the archive product.' } as const;
-  requireWorkspace(); await mkdir(programStorePath(PDS_PROGRAMS, 'write'), { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PDS_PROGRAMS, 'write'), { recursive: true });
   const programPath = programStorePath(resolve(programStorePath(PDS_PROGRAMS), `${spec.id}.archive-final.json`), 'write'), recordPath = programStorePath(resolve(programStorePath(PDS_PROGRAMS), `${spec.id}.archive-final.product.json`), 'write');
   await writeFile(programPath, `${JSON.stringify(program, null, 2)}\n`);
   const inputs: ProductInput[] = files.map(file => ({ role: file.role, identity: file.uri, bytes: file.bytes }));

@@ -195,7 +195,7 @@ export const programFiles = (program: GeminiProgram): GeminiFrame[] => [...progr
 
 export async function writeGeminiProgram(program: GeminiProgram): Promise<GeminiProgram> {
   const checked = parseGeminiProgram(program);
-  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(programStorePath(resolve(programStorePath(PROGRAMS), `${checked.id}.json`), 'write'), `${JSON.stringify(checked, null, 2)}\n`);
   return checked;
 }

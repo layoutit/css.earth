@@ -15,11 +15,11 @@ import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { bodyMapFits, topRowFirst, renderBodyMapProduct, placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
-import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope/body-map-publication';
+import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '#telescope/body-map-publication';
 import { fileSize, readProductRecord, sameRun, esoHeader, type EsoHeader } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';
 import { horizonsTables, horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { readProgram } from '@cssearth/telescope/archives/naco/archive';
+import { readProgram } from '#telescope/archives/naco/archive';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 
 const REPOSITORY = checkoutProjectRoot(import.meta.url);

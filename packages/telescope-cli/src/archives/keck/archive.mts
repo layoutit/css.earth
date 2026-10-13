@@ -315,7 +315,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   }
   const program = parseKeckProgram({ schema: 'cssearth-keck-program@1', id, instrument: instrument.toUpperCase(),
     table: instrumentTable(instrument), target, programme, semester, principalInvestigator: pi, title, observations: entries });
-  requireWorkspace(); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
+  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
   await writeFile(path, `${JSON.stringify(program, null, 2)}\n`);
   console.log(`KECK_PROGRAM ${path}`);
 }
