@@ -23,7 +23,9 @@ function packageOutputs(root: string): CompiledDirectory[] {
     const path = `packages/${directory}`, manifest: unknown = JSON.parse(readFileSync(resolve(root, path, 'package.json'), 'utf8'));
     if (!record(manifest) || !record(manifest.scripts)) throw new TypeError(`Invalid package manifest: ${path}`);
     if (typeof manifest.scripts.build !== 'string') return [];
-    const entries = [manifest.main, manifest.module, manifest.types, ...Object.values(record(manifest.bin) ? manifest.bin : {})].filter(value => value !== undefined);
+    // Tracked launchers exist before compilation; cache only generated dist entries.
+    const binaries = Object.values(record(manifest.bin) ? manifest.bin : {}).filter(value => typeof value === 'string' && value.replace(/^\.\//u, '').startsWith('dist/'));
+    const entries = [manifest.main, manifest.module, manifest.types, ...binaries].filter(value => value !== undefined);
     // A package with only subpath entries (`@cssearth/bake/volume`) declares its compiled outputs in `exports`.
     const exported = (value: unknown): unknown[] => typeof value === 'string' ? [value] : record(value) ? Object.values(value).flatMap(exported) : [];
     const declared = entries.length ? entries : exported(manifest.exports).filter(value => typeof value === 'string' && value.startsWith('./dist/'));

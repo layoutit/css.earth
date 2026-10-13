@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { telescopeUserRoot, telescopeWorkspace, workspaceArguments, requireWorkspace } from './paths.js';
+import { telescopeUserRoot, telescopeWorkspace, workspaceArguments, requireWorkspace, PACKAGE_ROOT } from './paths.js';
 
 test('user state defaults to the platform cache and an explicit home wins', () => {
   assert.equal(telescopeUserRoot({}, 'darwin', '/home/test'), '/home/test/Library/Caches/cssearth-telescope');
@@ -14,7 +14,7 @@ test('user state defaults to the platform cache and an explicit home wins', () =
   assert.throws(() => telescopeUserRoot({ CSSEARTH_TELESCOPE_HOME: '' }), /requires a path/u);
 });
 
-test('a workspace is optional; importing sources or merely standing in a checkout does not admit it', async () => {
+test('CLI start directories discover workspaces; library defaults require a source entry', async () => {
   const temporary = await mkdtemp(resolve(tmpdir(), 'telescope-roots-')), root = resolve(temporary, 'checkout');
   try {
     await mkdir(resolve(root, 'packages/telescope-cli/src'), { recursive: true });
@@ -22,9 +22,13 @@ test('a workspace is optional; importing sources or merely standing in a checkou
     await writeFile(resolve(root, 'package.json'), JSON.stringify({ scripts: { telescope: 'node source' } }));
     const source = resolve(root, 'packages/telescope-cli/src/cli.mts'); await writeFile(source, '');
     assert.equal(telescopeWorkspace({}, temporary, source), undefined);
-    assert.equal(telescopeWorkspace({}, root, '/installed/telescope.mjs'), undefined);
+    assert.equal(telescopeWorkspace({}, root, '/installed/telescope.mjs'), root);
     assert.equal(telescopeWorkspace({}, root, source), root);
     assert.equal(telescopeWorkspace({ CSSEARTH_WORKSPACE: root }, temporary, '/installed/telescope.mjs'), root);
+    assert.deepEqual(workspaceArguments(['explore'], {}, resolve(root, 'src/objects')), { args: ['explore'], workspace: root });
+    assert.equal(telescopeWorkspace({ CSSEARTH_WORKSPACE: 'checkout' }, temporary), root);
+    assert.deepEqual(workspaceArguments(['--workspace', 'checkout'], {}, temporary), { args: [], workspace: root });
+    assert.deepEqual(workspaceArguments(['explore'], {}, temporary), { args: ['explore'], workspace: undefined });
     const selected = workspaceArguments(['explore', 'eris', '--workspace', root, '--json'], { CSSEARTH_WORKSPACE: '/invalid' });
     assert.deepEqual(selected, { args: ['explore', 'eris', '--json'], workspace: root });
     assert.throws(() => workspaceArguments(['--workspace']), /requires a path/u);
@@ -32,6 +36,12 @@ test('a workspace is optional; importing sources or merely standing in a checkou
     assert.throws(() => telescopeWorkspace({ CSSEARTH_WORKSPACE: temporary }), /this command needs a css\.earth checkout: pass --workspace/u);
     assert.equal(requireWorkspace(root), root);
   } finally { await rm(temporary, { recursive: true, force: true }); }
+});
+
+test('library workspace defaults use module location without reading the invoking cwd', t => {
+  t.mock.method(process, 'cwd', () => { throw new Error('Library must not read cwd'); });
+  assert.equal(telescopeWorkspace({}, undefined, '/installed/telescope.mjs'), undefined);
+  assert.equal(telescopeWorkspace({}, undefined, resolve(PACKAGE_ROOT, 'src/node/paths.test.ts')), requireWorkspace());
 });
 
 test('relative platform cache values are ignored, independently of cwd', () => {

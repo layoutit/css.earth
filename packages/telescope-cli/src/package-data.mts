@@ -23,6 +23,12 @@ export async function copyPackageData(source: string, destination: string): Prom
 export async function preparePackageData(root: string, packageRoot: string, outputRoot = packageRoot): Promise<void> {
   const data = resolve(outputRoot, 'data');
   await prepareSpherePackage(root, resolve(data, 'spheres'));
+  await prepareDiscoveryPackageData(root, packageRoot, outputRoot);
+}
+
+/** Read-only discovery inputs can be prepared independently of the restored sphere bank. */
+export async function prepareDiscoveryPackageData(root: string, packageRoot: string, outputRoot: string): Promise<void> {
+  const data = resolve(outputRoot, 'data');
   const cssTarget = resolve(data, 'renderer/volume.css');
   await mkdir(dirname(cssTarget), { recursive: true });
   await copyFile(resolve(root, 'packages/renderer/src/styles/volume.css'), cssTarget);

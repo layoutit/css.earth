@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireWorkspace, writeProductRecord } from '@cssearth/telescope-core/node';
 import { bodyMapFits, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { validatePreparedCssVolume, type BodyMapProduct } from '@cssearth/objects';
+import { BODY_MAP_SCHEMA, DENSITY_VOLUME_FORMAT, OBJECT_SCHEMA, PREPARED_CSS_VOLUME_SCHEMA, PREPARED_OBJECT_SCHEMA, validatePreparedCssVolume, type BodyMapProduct } from '@cssearth/objects';
 import { validateSpatialObject } from './spatial-handoff.mts';
 import { encodeFits } from '@cssearth/fits/node';
 
@@ -22,14 +22,14 @@ export async function writeHtmlFixtures(directory: string, withPoints = false): 
   await writeFile(resolve(root,'source/recipe.json'),JSON.stringify({credit:'Fixture Observatory <science>'}));
   const frame={referenceFrame:'fixture',epochJdTt:123,originM:[0,0,0],localToReferenceXyzw:[0,0,0,1],metersPerUnit:1,boundsUnits:{min:[-1,-1,-1],max:[1,1,1]}};
   const axes=['x','y','z'] as const;
-  const payload=validatePreparedCssVolume({schema:'cssearth-css-volume@1',id:'fixture-volume',frame,anchors:[],
+  const payload=validatePreparedCssVolume({schema:PREPARED_CSS_VOLUME_SCHEMA,id:'fixture-volume',frame,anchors:[],
     stacks:axes.map((axis,index)=>({axis,leaves:[{id:axis,centerUnits:[0,0,0],texturePath:`${axis}.png`,widthPx:16,heightPx:16,style:{width:'100px',height:'100px',transform:index===0?'matrix3d(0,0,1,0,0,1,0,0,-1,0,0,0,0,-50,-50,1)':index===1?'matrix3d(1,0,0,0,0,0,1,0,0,-1,0,0,-50,0,-50,1)':'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,-50,-50,0,1)',backgroundSize:'100px 100px',backgroundPosition:'0px 0px'}}]})),
     resources:axes.map(axis=>({path:`${axis}.png`,bytes:png.length,width:16,height:16})),provenance:{credit:'Fixture Observatory <science>'},approximation:{method:'Fixture geometry; no scientific claim'}});
   for(const axis of axes)await writeFile(resolve(root,'prepared',`${axis}.png`),png);
-  await writeFile(resolve(root,'prepared/volume.json'),JSON.stringify({schema:'cssearth-prepared-object@1',id:payload.id,type:'density-volume',format:'cssearth-density-volume@1',data:payload}));
-  await writeFile(resolve(root,'object.json'),JSON.stringify({schema:'cssearth-object@2',id:payload.id,type:'density-volume',prepared:{format:'cssearth-density-volume@1',url:'prepared/volume.json'},properties:{volume:frame,preparation:{source:'source/recipe.json'}}}));
+  await writeFile(resolve(root,'prepared/volume.json'),JSON.stringify({schema:PREPARED_OBJECT_SCHEMA,id:payload.id,type:'density-volume',format:DENSITY_VOLUME_FORMAT,data:payload}));
+  await writeFile(resolve(root,'object.json'),JSON.stringify({schema:OBJECT_SCHEMA,id:payload.id,type:'density-volume',prepared:{format:DENSITY_VOLUME_FORMAT,url:'prepared/volume.json'},properties:{volume:frame,preparation:{source:'source/recipe.json'}}}));
   const mapRoot=resolve(directory,'sphere');await mkdir(mapRoot,{recursive:true});
-  const map:BodyMapProduct={schema:'cssearth-body-map@1',definition:{quantity:'Fixture temperature',units:'K',timeDependence:'instantaneous-state',method:{owner:'fixture'},source:'Fixture Observatory <science>'},frame:{body:'mercury',radiusKm:2439.7,rotation:{model:'fixture',bodyCode:199}},grid:{width:4,height:2,longitude:'east-positive-from-0',rows:'north-to-south'},planes:{file:'map.fits',value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:65,missing:'NaN'},observations:[{id:'fixture',telescope:'Fixture',instrument:'Camera',midTimeJd:2460000,rangeKm:1e8,subObserver:{latitudeDegrees:0,westLongitudeDegrees:0},angularResolution:{majorArcsec:1,minorArcsec:1,basis:'fixture'}}]};
+  const map:BodyMapProduct={schema:BODY_MAP_SCHEMA,definition:{quantity:'Fixture temperature',units:'K',timeDependence:'instantaneous-state',method:{owner:'fixture'},source:'Fixture Observatory <science>'},frame:{body:'mercury',radiusKm:2439.7,rotation:{model:'fixture',bodyCode:199}},grid:{width:4,height:2,longitude:'east-positive-from-0',rows:'north-to-south'},planes:{file:'map.fits',value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:65,missing:'NaN'},observations:[{id:'fixture',telescope:'Fixture',instrument:'Camera',midTimeJd:2460000,rangeKm:1e8,subObserver:{latitudeDegrees:0,westLongitudeDegrees:0},angularResolution:{majorArcsec:1,minorArcsec:1,basis:'fixture'}}]};
   const values=new Float32Array(8).fill(3),errors=new Float32Array(8).fill(.1);
   const files={'map.fits':bodyMapFits({width:4,height:2},{},[{name:'VALUE',units:'K',values},{name:'SIGMA',units:'K',values:errors},{name:'EMISSION',units:'deg',values:new Float32Array(8)}]),'map.fits.body-map.json':renderBodyMapProduct(map),'texture.png':png,'poles.png':png,'navigation.json':JSON.stringify({radiiKm:[2439.7,2439.7,2439.7],shape:'reference sphere',registration:{method:'disc'},uncertainty:'source uncertainty',normalization:{minimum:1,maximum:4,colormap:'viridis',missing:'#333941'},sourceContext:context})};
   for(const [name,bytes]of Object.entries(files))await writeFile(resolve(mapRoot,name),bytes);

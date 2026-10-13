@@ -8,9 +8,10 @@ import test from 'node:test';
 import { pathToFileURL } from 'node:url';
 import { requireWorkspace } from '@cssearth/telescope-core/node';
 import { loadTargetCatalogueSnapshot } from './observation-query/query.mts';
+import { prepareStandaloneData } from './standalone-data.test-support.mts';
 
 const checkout = requireWorkspace();
-test('explore paths, archive answers and every toolchain stay outside the checkout without a workspace', async () => {
+test('explore paths, archive answers and every toolchain stay outside the checkout without a workspace', async t => {
   const directory = await mkdtemp(resolve(tmpdir(), 'telescope-outside-')), home = resolve(directory, 'user');
   const url = (file: string) => JSON.stringify(pathToFileURL(resolve(checkout, file)).href);
   const script = `
@@ -122,9 +123,11 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     console.log('STANDALONE_PATHS_OK');
   `;
   try {
+    const data = await prepareStandaloneData(checkout);
+    t.after(data.cleanup);
     const env: NodeJS.ProcessEnv = { ...process.env, HOME: home, CSSEARTH_TELESCOPE_HOME: home };
     delete env.CSSEARTH_WORKSPACE; delete env.CSS_EARTH_ASTROQUERY_CACHE; delete env.CSSEARTH_TELESCOPE_TOOLCHAIN_HOME;
-    const child = spawnSync(process.execPath, ['--import', resolve(checkout, 'packages/core/src/node/register-vite-suffix.mts'), '--input-type=module', '-e', script], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
+    const child = spawnSync(process.execPath, ['--experimental-test-module-mocks', '--import', resolve(checkout, 'packages/core/src/node/register-vite-suffix.mts'), '--input-type=module', '-e', data.script + script], { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
     assert.equal(child.status, 0, child.stderr); assert.match(child.stdout, /STANDALONE_PATHS_OK/u);
     assert.deepEqual((await readdir(directory)).sort(), ['user']);
     for (const json of [false, true]) {

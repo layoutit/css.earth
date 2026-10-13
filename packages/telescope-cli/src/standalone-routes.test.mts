@@ -7,9 +7,10 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 import { requireWorkspace } from '@cssearth/telescope-core/node';
+import { prepareStandaloneData } from './standalone-data.test-support.mts';
 
 const checkout = requireWorkspace();
-test('offline shipped discovery disables workspace reductions and qualification refuses them before IO', async () => {
+test('offline shipped discovery disables workspace reductions and qualification refuses them before IO', async t => {
   const directory = await mkdtemp(resolve(tmpdir(), 'telescope-route-prerequisites-'));
   const url = (file: string) => JSON.stringify(pathToFileURL(resolve(checkout, file)).href);
   const script = `
@@ -53,11 +54,13 @@ test('offline shipped discovery disables workspace reductions and qualification 
     console.log('SHIPPED_ROUTE_PREREQUISITES_OK');
   `;
   try {
+    const data = await prepareStandaloneData(checkout);
+    t.after(data.cleanup);
     for (const workspace of [undefined, checkout]) {
       const env: NodeJS.ProcessEnv = { ...process.env, CSSEARTH_TELESCOPE_HOME: resolve(directory, 'user') };
       delete env.CSSEARTH_WORKSPACE;
       if (workspace) env.CSSEARTH_WORKSPACE = workspace;
-      const result = spawnSync(process.execPath, ['--import', resolve(checkout, 'packages/core/src/node/register-vite-suffix.mts'), '--input-type=module', '-e', script],
+      const result = spawnSync(process.execPath, ['--experimental-test-module-mocks', '--import', resolve(checkout, 'packages/core/src/node/register-vite-suffix.mts'), '--input-type=module', '-e', data.script + script],
         { cwd: directory, env, encoding: 'utf8', timeout: 30_000 });
       assert.equal(result.status, 0, result.stderr);
       assert.match(result.stdout, /SHIPPED_ROUTE_PREREQUISITES_OK/u);

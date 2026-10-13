@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { resolve } from 'node:path';
 import { parse } from 'yaml';
 import { requireRecord, requireArray } from '@cssearth/core';
 import { astroqueryTestFiles, astroqueryLaneFiles, astroqueryTriggerPaths, ASTROQUERY_EXCLUSIONS } from './astroquery-discovery.mts';
@@ -90,4 +92,28 @@ test('runner executes exactly the derived files and a skip makes the run red', (
   const ran = runAstroqueryFiles(root, file => { visited.push(file); return { status: 0, stdout: stub(1), stderr: '' }; });
   assert.equal(ran, files.length);
   assert.deepEqual(visited, files);
+});
+
+test('the protected runner loads source siblings and enables provisioning module mocks', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'astroquery-runner-'));
+  try {
+    const loader = resolve(root, 'packages/core/src/node'), owner = resolve(root, 'packages/telescope-core/src/node/toolchain');
+    await mkdir(loader, { recursive: true }); await mkdir(owner, { recursive: true });
+    for (const name of ['register-vite-suffix.mts', 'vite-suffix-loader.mts'])
+      await copyFile(new URL(`../../../packages/core/src/node/${name}`, import.meta.url), resolve(loader, name));
+    await writeFile(resolve(owner, 'toolchain.ts'), 'export const astroqueryToolchain = () => "original";\n');
+    await writeFile(resolve(owner, 'provisioning.test.mts'), `
+      import assert from 'node:assert/strict';
+      import test, { mock } from 'node:test';
+      import { astroqueryToolchain } from './toolchain.js';
+      test('source loader and provisioning mock both run', async () => {
+        assert.equal(astroqueryToolchain(), 'original');
+        const replacement = mock.module(new URL('./toolchain.ts', import.meta.url).href,
+          { namedExports: { astroqueryToolchain: () => 'mocked' } });
+        try { assert.equal((await import('./toolchain.js')).astroqueryToolchain(), 'mocked'); }
+        finally { replacement.restore(); }
+      });
+    `);
+    assert.equal(runAstroqueryFiles(root), 1);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

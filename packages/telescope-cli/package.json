@@ -18,11 +18,12 @@
     }
   },
   "bin": {
-    "telescope": "dist/telescope.mjs"
+    "telescope": "run-typed-module.mjs"
   },
   "files": [
     "dist",
     "data",
+    "run-typed-module.mjs",
     "README.md",
     "skills",
     ".claude-plugin",
@@ -42,7 +43,7 @@
   },
   "scripts": {
     "build": "node build.mts",
-    "prepack": "npm run build",
+    "prepack": "npm run build && node prepack.mts",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
   "dependencies": {

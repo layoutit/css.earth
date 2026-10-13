@@ -33,31 +33,33 @@ export function isTelescopeWorkspace(root: string): boolean {
   } catch { return false; }
 }
 
-/** Automatic admission is restricted to a source entry launched from inside its own checkout. */
-export function telescopeWorkspace(env: NodeJS.ProcessEnv = process.env, cwd = process.cwd(), entry = process.argv[1]): string | undefined {
+/** CLI callers supply their start directory; library defaults admit only a source entry in this module's checkout. */
+export function telescopeWorkspace(env: NodeJS.ProcessEnv = process.env, startDirectory?: string, entry = process.argv[1]): string | undefined {
+  const start = startDirectory ?? import.meta.dirname;
   if (env.CSSEARTH_WORKSPACE !== undefined) {
-    const root = resolve(env.CSSEARTH_WORKSPACE);
+    const root = resolve(start, env.CSSEARTH_WORKSPACE);
     if (!env.CSSEARTH_WORKSPACE.trim() || !isTelescopeWorkspace(root)) throw new TypeError(`${WORKSPACE_REQUIRED} PATH (invalid CSSEARTH_WORKSPACE).`);
     return root;
   }
-  if (!entry) return undefined;
-  const source = resolve(cwd, entry);
-  for (let root = resolve(cwd);;) {
-    if (isTelescopeWorkspace(root) && inside(resolve(root, 'packages'), source) && /[/\\](?:src|authoring|cli)[/\\]/u.test(relative(root, source))) return root;
+  if (!entry && startDirectory === undefined) return undefined;
+  const source = entry ? resolve(start, entry) : undefined;
+  for (let root = resolve(start);;) {
+    if (isTelescopeWorkspace(root) && (startDirectory !== undefined || source !== undefined
+      && inside(resolve(root, 'packages'), source) && /[/\\](?:src|authoring|cli)[/\\]/u.test(relative(root, source)))) return root;
     const parent = dirname(root); if (parent === root) return undefined; root = parent;
   }
 }
 
 /** Consume the global option before command parsing. A flag takes precedence over the environment. */
-export function workspaceArguments(args: readonly string[], env: NodeJS.ProcessEnv = process.env): { args: string[]; workspace: string | undefined } {
+export function workspaceArguments(args: readonly string[], env: NodeJS.ProcessEnv = process.env, startDirectory?: string): { args: string[]; workspace: string | undefined } {
   const remaining = [...args], locations = remaining.flatMap((arg, index) => arg === '--workspace' ? [index] : []);
   if (locations.length > 1) throw new TypeError('Give --workspace only once.');
   const at = locations[0];
-  if (at === undefined) return { args: remaining, workspace: telescopeWorkspace(env) };
+  if (at === undefined) return { args: remaining, workspace: telescopeWorkspace(env, startDirectory) };
   const value = remaining[at + 1];
   if (!value || value.startsWith('-')) throw new TypeError('--workspace requires a path.');
   remaining.splice(at, 2);
-  return { args: remaining, workspace: telescopeWorkspace({ ...env, CSSEARTH_WORKSPACE: value }) };
+  return { args: remaining, workspace: telescopeWorkspace({ ...env, CSSEARTH_WORKSPACE: value }, startDirectory) };
 }
 /** Optional site-data root. Consumers must call requireWorkspace before checkout-only work. */
 function initialWorkspace(): string | undefined {
@@ -65,8 +67,8 @@ function initialWorkspace(): string | undefined {
   catch { return undefined; } // The command parser reports invalid global options inside its normal error boundary.
 }
 export let WORKSPACE = initialWorkspace();
-export function configureWorkspace(args: readonly string[]): string[] {
-  const selected = workspaceArguments(args); WORKSPACE = selected.workspace;
+export function configureWorkspace(args: readonly string[], startDirectory?: string): string[] {
+  const selected = workspaceArguments(args, process.env, startDirectory); WORKSPACE = selected.workspace;
   return selected.args;
 }
 export function requireWorkspace(root = WORKSPACE, operation = 'This command uses checkout resources.'): string {

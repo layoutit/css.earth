@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-/** Run a repository .mts entry point only on a Node version that loads TypeScript without a custom loader. */
+/** Launch the source command in a checkout or the compiled command in an installed package. */
 import { existsSync, readdirSync } from 'node:fs';
 import { delimiter, dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const supported = version => { const [major, minor] = version.split('.').map(Number); return major === 22 ? minor >= 18 : major >= 24; };
 
@@ -24,11 +24,9 @@ if (!supported(process.versions.node)) {
   process.exit(result.status ?? 1);
 }
 
-const entry = process.argv[2];
-if (!entry) {
-  console.error('Usage: run-typed-module.mjs <entry.mts> [arguments]');
-  process.exit(2);
-}
-const path = resolve(entry);
-process.argv.splice(1, 2, path);
+// The root script may still supply an explicit source entry. The package bin needs no build at install time.
+const source = new URL('./src/bin.mts', import.meta.url);
+const entry = existsSync(source) && process.argv[2]?.endsWith('.mts') ? process.argv[2] : undefined;
+const path = entry ? resolve(entry) : fileURLToPath(existsSync(source) ? source : new URL('./dist/telescope.mjs', import.meta.url));
+process.argv.splice(1, entry ? 2 : 1, path);
 await import(pathToFileURL(path).href);

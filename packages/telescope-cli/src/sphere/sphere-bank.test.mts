@@ -1,8 +1,20 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import test, { before, after } from 'node:test';
+import { mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { resolve } from 'node:path';
+import { prepareSpherePackage } from './sphere-package.mts';
 import { sphereDictionary,decodeSphereDictionary } from './sphere-bank-codec.mts';
 import { sphereDirection } from './sphere-bank.mts';
 import { requireRecord, requireFiniteNumber } from '@cssearth/core';
+
+let bankRoot: string;
+before(async () => {
+  const { requireWorkspace } = await import('@cssearth/telescope-core/node');
+  bankRoot = await mkdtemp(resolve(tmpdir(), 'telescope-sphere-bank-'));
+  await prepareSpherePackage(requireWorkspace(), bankRoot);
+});
+after(async () => { if (bankRoot) await rm(bankRoot, { recursive: true, force: true }); });
 
 test('sphere dictionary shares prepared geometry and decodes it exactly',()=>{
   const dictionary=sphereDictionary(),geometry={nodes:[{style:'transform:scale(2)',parent:-1}],boxes:[1,2,3]};
@@ -20,7 +32,7 @@ test('pack-time bank retains the exact source sphere geometry, camera, styles an
   const {inspectMeasurementSphere}=await import('./sphere-inputs.mts');
   const root=requireWorkspace();
   for(const id of ['mercury','eris']) {
-    const source=await inspectMeasurementSphere(root,id),packed=await inspectMeasurementSphere(resolve(root,'packages/telescope-cli/data/spheres'),id);
+    const source=await inspectMeasurementSphere(root,id),packed=await inspectMeasurementSphere(bankRoot,id);
     assert.deepEqual(packed.original.tree.nodes,source.original.tree.nodes);
     assert.deepEqual(packed.original.viewBindings,source.original.viewBindings);
     assert.deepEqual(packed.original.camera,source.original.camera);
@@ -43,7 +55,7 @@ test('oracle validates a fresh bank-backed fixture sphere and rejects scene and 
   const root=requireWorkspace(),directory=await mkdtemp(resolve(tmpdir(),'bank-oracle-'));
   try{
     await writeHtmlFixtures(directory);
-    const prepared=await measurementSphere(resolve(root,'packages/telescope-cli/data/spheres'),'mercury',resolve(directory,'sphere/texture.png'),resolve(directory,'bake'),
+    const prepared=await measurementSphere(bankRoot,'mercury',resolve(directory,'sphere/texture.png'),resolve(directory,'bake'),
       {longitudeDegrees:0,latitudeDegrees:0,zoom:1.1},await loadSolarGeometry(root));
     const html=sphereHtml(prepared,{renderer:prepared.owner},'Fixture sphere','Fixture');
     const result=await assertSphereScene(html,prepared.inputs);

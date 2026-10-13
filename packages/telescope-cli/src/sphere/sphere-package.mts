@@ -8,8 +8,10 @@ import { loadSolarGeometry } from '@cssearth/bake/objects/scene';
 import { inspectMeasurementSphere } from './sphere-inputs.mts';
 import { sphereDictionary, SPHERE_ID_TOKEN } from './sphere-bank-codec.mts';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
+import { requirePackageInput } from '../package-inputs.mts';
 
 export async function prepareSpherePackage(root: string, destination: string): Promise<void> {
+  await requirePackageInput(resolve(root, 'src/platform/solar-geometry.mts'), 'pnpm prepare:inputs');
   const solar=await loadSolarGeometry(root),bodies:Record<string,unknown>={},profiles:string[]=[],styles:string[]=[];
   const dictionary=sphereDictionary();
   const profileIds=new Map<string,number>(),styleIds=new Map<string,number>();
@@ -20,13 +22,22 @@ export async function prepareSpherePackage(root: string, destination: string): P
     if(!entry.isDirectory())continue;
     const base=resolve(root,'src/objects',entry.name,'source/preparation');
     if(!existsSync(resolve(base,'raster.json'))||!existsSync(resolve(base,'geometry.json')))continue;
+    const prepared = resolve(root, 'src/objects', entry.name, 'prepared');
+    await requirePackageInput(resolve(prepared, 'runtime.json'), 'pnpm setup:prepared');
     // Destinations are application scene owners, not standard sphere candidates.
     const {requireRecord,requireArray}=await import('@cssearth/core');
-    const head=await readPreparedRuntimeHead(resolve(root,'src/objects',entry.name,'prepared'),['controls']);
+    const head=await readPreparedRuntimeHead(prepared,['controls']);
     const controls=requireRecord(head.controls),datasets=controls.datasets===undefined?undefined:requireRecord(controls.datasets);
     const recipeInput=requireRecord(JSON.parse(await readFile(resolve(base,'raster.json'),'utf8')));
     if(!datasets||!requireArray(recipeInput.surfaces).some(surface=>requireRecord(surface).id===datasets.defaultDataset))continue;
-    if(requireRecord(JSON.parse(await readPreparedRuntimeText(resolve(root,'src/objects',entry.name,'prepared')))).destinations)continue;
+    let runtimeTextInput: string;
+    try { runtimeTextInput = await readPreparedRuntimeText(prepared); }
+    catch (error) {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT' && 'path' in error && typeof error.path === 'string')
+        await requirePackageInput(error.path, 'pnpm setup:prepared');
+      throw error;
+    }
+    if(requireRecord(JSON.parse(runtimeTextInput)).destinations)continue;
     const input=await inspectMeasurementSphere(root,entry.name);
     const {features:_features,textureLevels:_levels,...runtime}=input.original;
     const excluded=runtime.assets.entries.filter(asset=>!input.required.includes(asset.key));

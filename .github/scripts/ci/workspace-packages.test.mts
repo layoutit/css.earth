@@ -25,6 +25,14 @@ test('workspace discovery and the build plan ignore restored outputs without a m
     assert.deepEqual(ciBuildPlan(root, mode).find(task => task.id === 'packages')?.outputs, outputs);
   assert.ok(!ciBuildPlan(root, 'generators').some(task => task.id === 'packages'));
 
+  // A tracked CLI launcher is available at install time; the cache still requires every compiled lane export.
+  writeFileSync(resolve(root, 'packages/current/package.json'), JSON.stringify({
+    name: '@cssearth/current', scripts: { build: 'node build.mts' }, bin: { current: 'run.mjs' },
+    exports: { './lane': { import: './dist/lane.js', types: './dist/lane.d.ts' } },
+  }));
+  assert.deepEqual(ciBuildPlan(root, 'packages')[0]?.outputs,
+    [{ path: 'packages/current/dist', required: ['lane.js', 'lane.d.ts'] }]);
+
   writeFileSync(resolve(root, 'packages/current/package.json'), '{broken');
   assert.throws(() => ciBuildPlan(root, 'packages'), SyntaxError, 'invalid current manifests must still fail');
 });

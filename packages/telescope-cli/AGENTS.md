@@ -1,6 +1,8 @@
 # Telescope command package instructions
 
-Own the `telescope` command. `src/bin.mts` is the installed binary (bundled by `build.mts` into `dist/telescope.mjs`): it
+Own the `telescope` command. The tracked `run-typed-module.mjs` bin launches `src/bin.mts` in a checkout or its compiled
+`dist/telescope.mjs` in an installed package. `build.mts` compiles code only; `prepack.mts` prepares shipped data from a
+prepared checkout when `npm pack` or `npm publish` runs. The binary
 handles `--help`, `--version` and optional workspace admission (`--workspace PATH`, `CSSEARTH_WORKSPACE`, or a source entry
 launched inside its own checkout), then runs the bundled `dist/cli.mjs` without a workspace or that checkout's `src/cli.mts`, with the same arguments, TTY state
 (`CSSEARTH_TELESCOPE_*_TTY`) and exit code. `src/cli.mts` and the modules beside it are the command's implementation, run

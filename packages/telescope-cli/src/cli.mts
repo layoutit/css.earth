@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { configureCliWorkspace } from './cli-workspace.mts';
 import { manageToolchain } from './toolchains/astronomy-toolchains.mts';
 import { resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -40,7 +41,7 @@ import { runWorkspaceCommand } from './workspace-commands.mts';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
-import { WORKSPACE, USER_ROOT, requireWorkspace, configureWorkspace } from '@cssearth/telescope-core/node';
+import { WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
@@ -208,7 +209,7 @@ async function guidedExploration(root:string,session:ExplorationSession&{readonl
 export async function main(args: readonly string[], root: string | undefined = undefined, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices): Promise<number> {
   const io=injectedIo??processIo(output);
   try {
-    args = configureWorkspace(args);
+    args = configureCliWorkspace(args);
     root ??= WORKSPACE ?? USER_ROOT;
     const options = parseCli(args);
     if (options.command === 'help') { io.write(options.short ? SHORT_HELP : HELP); return 0; }
@@ -260,7 +261,7 @@ export async function main(args: readonly string[], root: string | undefined = u
         const result=options.product?await matchProductSoftware(options.product):await searchAscl(options.query!);
         text=options.json?`${JSON.stringify(result)}\n`:formatAscl(result);code=result.mode==='query'&&!result.entries?.length?3:0;
       }else if(options.command==='new-object'){
-        ({text,code}=await runWorkspaceCommand(requireWorkspace(WORKSPACE ?? (root === USER_ROOT ? undefined : root),'new-object drafts specs, writes css.earth site records, and optionally bakes them.'),NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
+        ({text,code}=await runWorkspaceCommand(requireWorkspace(root === USER_ROOT ? WORKSPACE : root,'new-object drafts specs, writes css.earth site records, and optionally bakes them.'),NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
       }else if(options.command==='papers'){
         const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.targets.length>1){
