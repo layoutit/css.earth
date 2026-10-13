@@ -7,7 +7,10 @@ export default defineConfig({
   entry: { 'sphere-lane': 'src/sphere/sphere-lane.mts', 'viewer-lane': 'src/delivery/viewer-lane.mts' },
   format: ['esm', 'cjs'],
   external: ['sharp', 'linkedom'],
-  esbuildOptions(options) { options.packages = 'external'; },
+  esbuildOptions(options) {
+    options.packages = 'external';
+    options.absWorkingDir = fileURLToPath(new URL('.', import.meta.url));
+  },
   shims: true,
   splitting: false,
   noExternal: [/^@cssearth\//],

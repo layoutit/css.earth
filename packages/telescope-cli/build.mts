@@ -1,4 +1,5 @@
 import { packageBundlePlugins, publishDirectory } from './src/package/index.mts';
+import { preparePackageBuildInputs } from './src/package/build-inputs.mts';
 import { build } from 'esbuild';
 import { chmod, mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -6,6 +7,9 @@ import { fileURLToPath } from 'node:url';
 
 const packageRoot = fileURLToPath(new URL('.', import.meta.url));
 const root = fileURLToPath(new URL('../..', import.meta.url));
+await preparePackageBuildInputs(root);
+// tsup resolves its entries, declaration paths and package metadata from the working directory.
+process.chdir(packageRoot);
 await rm(new URL('./.package', import.meta.url), { recursive: true, force: true });
 await mkdir(resolve(root, 'output'), { recursive: true });
 const staging = await mkdtemp(resolve(root, 'output/telescope-package-build-'));
