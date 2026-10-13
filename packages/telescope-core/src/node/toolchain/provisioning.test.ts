@@ -12,10 +12,11 @@ test('the first async astronomy query installs missing pins and later queries re
   const pins = readToolchainPins('astroquery', 'toolchain.json'), entry = pins.entry;
   const versions = [entry.astroquery, entry.pyvo, entry.scipy, entry.batman, entry.orbitize, entry.whereistheplanet,
     entry.cdflib, entry.pyuvdata, entry.astropyHealpix].join(' ');
+  const scratch = resolve(userRoot, 'scratch'); mkdirSync(scratch, { recursive: true });
   let resolutions = 0;
   const mocks = [
-    mock.module(new URL('../paths.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot,
-      telescopePythonEnvironment: (overrides: NodeJS.ProcessEnv = {}) => ({ ...process.env, ...overrides }) } }),
+    mock.module(new URL('../paths.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot, SCRATCH_ROOT: scratch,
+      telescopePythonEnvironment: (overrides: NodeJS.ProcessEnv = {}) => ({ ...process.env, TMPDIR: scratch, TMP: scratch, TEMP: scratch, ...overrides }) } }),
     mock.module(new URL('./micromamba.ts', import.meta.url).href, { namedExports: {
       assertManagedPythonPlatform: () => {}, resolveMicromamba: async () => { resolutions++; return '/test/selected-micromamba'; } } }),
     mock.module(new URL('./resolver.ts', import.meta.url).href, { namedExports: {
@@ -24,8 +25,8 @@ test('the first async astronomy query installs missing pins and later queries re
     mock.module(new URL('./process.ts', import.meta.url).href, { namedExports: {
       runToolchainProcess: (command: string, args: readonly string[]) => {
         calls.push({ command, args });
-        if (command === 'xcrun') return '/fixture-sdk';
-        if (command === 'cc' || command === 'gcc') { assert.ok(args.includes('-x')); return ''; }
+        if (command === 'xcrun') return args[0] === '--find' ? 'cc' : '/fixture-sdk';
+        if (command === 'cc' || command === 'gcc') { assert.ok(args.includes('-x') || args.some(arg => arg.endsWith('/probe.o'))); return ''; }
         if (command.endsWith('/probe')) return 'TELESCOPE_COMPILER_READY';
         if (command === '/test/selected-micromamba') {
           const prefix = args[args.indexOf('-p') + 1]; assert.ok(prefix);
