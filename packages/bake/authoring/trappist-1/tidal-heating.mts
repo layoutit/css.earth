@@ -18,7 +18,7 @@ import sharp from 'sharp';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import { bodyData, hostedOrbit, type BodyId, type HostedPlanetId } from '@cssearth/astronomy';
-import { AU_M, systemOrbitPlane, writePlaneBank } from './system-plane.mts';
+import { AU_M, systemOrbitPlane, writePlaneBank } from '../system-planes/system-plane.mts';
 
 const root = findProjectRoot(import.meta.url), id = 'trappist-1-tidal-heating';
 const objectDirectory = resolve(root, 'src/objects', id);

@@ -655,6 +655,18 @@
       "bytes": 4344
     },
     {
+      "path": "src/objects/hd-75732-habitable-zone/object.json",
+      "bytes": 889
+    },
+    {
+      "path": "src/objects/hd-75732-habitable-zone/prepared/plane.json",
+      "bytes": 1168
+    },
+    {
+      "path": "src/objects/hd-75732-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17976
+    },
+    {
       "path": "src/objects/milky-way-volume/object.json",
       "bytes": 889
     },
@@ -2178,6 +2190,16 @@
       ],
       "credit": "CFHT ESPaDOnS · mapped here",
       "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+    },
+    "hd-75732/habitable-zone": {
+      "url2x": "/navigation/focus-hd-75732-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/hd-75732-habitable-zone/object.json",
+        "src/objects/hd-75732-habitable-zone/prepared/plane.json",
+        "src/objects/hd-75732-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of 55 Cnc",
+      "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
     },
     "milky-way-volume/volume": {
       "url2x": "/navigation/focus-milky-way-volume-volume@2x.webp",

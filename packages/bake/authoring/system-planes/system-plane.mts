@@ -1,5 +1,5 @@
 /**
- * One prepared picture on the plane of a hosted system's orbits: what the system datasets of TRAPPIST-1 share. The plane
+ * One prepared picture on the plane of a hosted system's orbits: what the system datasets of TRAPPIST-1 and 55 Cnc share. The plane
  * is the mean of the planets' orbit planes as the world draws them, through the star's world position, so the world step
  * runs first.
  */

@@ -32,6 +32,11 @@
       "locator": "JSON product, 5,441 planets, each with its star's four habitable zone distances in au (hz_r0_au to hz_r3_au: optimistic inner, conservative inner, conservative outer, optimistic outer; the same four as the CSV table's OHZIN, CHZIN, CHZOUT, OHZOUT) and the stellar temperature and luminosity they were calculated from. The seven rows of TRAPPIST-1 agree: 0.0194, 0.0246, 0.0499 and 0.0527 au, from 2,566 K and 0.000553 solar luminosities."
     },
     {
+      "url": "https://hzgallery.org/data/hzgallery.json",
+      "checkedOn": "2026-10-14",
+      "locator": "The five rows of 55 Cnc do not agree: planet e's row gives 0.5870, 0.7435, 1.3367 and 1.4098 au from 5,172 K, 0.943 solar radii and 0.571 solar luminosities (Bourrier et al. 2018's star); the rows of b, c, d and f give 0.6153, 0.7794, 1.3999 and 1.4765 au from 5,198 K, 0.98 solar radii and 0.629 solar luminosities."
+    },
+    {
       "url": "https://hzgallery.org/about.html",
       "checkedOn": "2026-10-10",
       "locator": "Frequently asked questions: the boundaries follow Kopparapu et al. (2013, 2014); the conservative model uses the runaway greenhouse and maximum greenhouse limits, the optimistic model the recent Venus and early Mars limits; stellar and planetary parameters are taken from the NASA Exoplanet Archive."
@@ -48,7 +53,7 @@
     {
       "kind": "credit",
       "text": "This research has made use of the Habitable Zone Gallery at hzgallery.org. Cite Kane & Gelino (2012), PASP 124, 323.",
-      "scope": "TRAPPIST-1's habitable zone",
+      "scope": "The habitable zones of TRAPPIST-1 and 55 Cnc",
       "evidence": "https://hzgallery.org/about.html"
     }
   ]

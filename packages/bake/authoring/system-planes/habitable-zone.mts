@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 /**
- * TRAPPIST-1's habitable zone as one picture on a plane in its system: the package `trappist-1-habitable-zone`, a plane
- * bank the world draws while the star or one of its planets is selected.
+ * A star's habitable zone as one picture on the plane of its planets' orbits: a package such as `trappist-1-habitable-zone`,
+ * a plane bank the world draws while the star's dataset "Habitable zone" is selected.
  *
- *   node packages/bake/authoring/trappist-1/habitable-zone.mts [--fetch]
+ *   node packages/bake/authoring/system-planes/habitable-zone.mts <package id> [--fetch]
  *
  * The four distances are the Habitable Zone Gallery's (Kane & Gelino 2012, https://hzgallery.org), which calculates them
  * by Kopparapu et al. (2013, 2014) from the star's temperature and luminosity in the NASA Exoplanet Archive. `--fetch`
  * downloads the Gallery's JSON product again and rewrites the kept rows of this system (`source/hzgallery/`); without it
- * the kept rows are read. The plane is the mean of the planets' orbit planes as the world draws them, through the star's
- * world position, so the world step runs first. Writes the descriptor, the prepared plane and picture, and the inventory.
+ * the kept rows are read. The Gallery calculates the distances for each planet's row from the star's parameters in that
+ * planet's reference, so a system's rows can disagree: then the recipe names the row (`edges.row`) whose star is the one
+ * the star's page shows, and the others are kept and not read. The plane is the mean of the planets' orbit planes as the
+ * world draws them, through the star's world position, so the world step runs first. Writes the descriptor, the prepared
+ * plane and picture, and the inventory.
  */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -19,7 +22,8 @@ import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import { AU_M, systemOrbitPlane, writePlaneBank } from './system-plane.mts';
 
 const GALLERY = 'https://hzgallery.org/data/hzgallery.json';
-const root = findProjectRoot(import.meta.url), id = 'trappist-1-habitable-zone';
+const root = findProjectRoot(import.meta.url), id = process.argv.slice(2).find(arg => !arg.startsWith('--'));
+if (!id || !/^[a-z0-9][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: habitable-zone.mts <package id> [--fetch]');
 const objectDirectory = resolve(root, 'src/objects', id);
 const recipe = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'source/zone.json'), 'utf8')));
 if (recipe.schema !== 'cssearth-habitable-zone-source@1' || recipe.id !== id) throw new TypeError(`source/zone.json: expected a cssearth-habitable-zone-source@1 record of ${id}.`);
@@ -27,7 +31,7 @@ const host = requireString(recipe.host), edges = requireRecord(recipe.edges), sy
 const rowsPath = resolve(objectDirectory, requireString(edges.source));
 
 if (process.argv.includes('--fetch')) {
-  const cache = resolve(root, 'output/trappist-1/hzgallery/hzgallery.json');
+  const cache = resolve(root, 'output/hzgallery/hzgallery.json');
   if (!(await stat(cache).then(() => true, () => false))) {
     const response = await fetch(GALLERY, { headers: { 'user-agent': 'css.earth preparation (https://css.earth)' } });
     if (!response.ok) throw new Error(`${GALLERY}: HTTP ${response.status}`);
@@ -38,8 +42,11 @@ if (process.argv.includes('--fetch')) {
   await mkdir(resolve(rowsPath, '..'), { recursive: true }); await writeFile(rowsPath, `${JSON.stringify(rows, null, 2)}\n`);
 }
 
-// Every planet's row carries its star's four distances: they must agree, and rise from the inside out.
-const rows = requireArray(JSON.parse(await readFile(rowsPath, 'utf8'))).map(row => requireRecord(row)), fields = requireRecord(edges.fields);
+// Every planet's row carries its star's four distances: they must agree, or the recipe names the one row read, and rise from
+// the inside out.
+const kept = requireArray(JSON.parse(await readFile(rowsPath, 'utf8'))).map(row => requireRecord(row)), fields = requireRecord(edges.fields);
+const named = edges.row === undefined ? undefined : requireString(edges.row), rows = named === undefined ? kept : kept.filter(row => row.name === named);
+if (named !== undefined && rows.length !== 1) throw new TypeError(`${requireString(edges.source)}: edges.row names ${named}, which is ${rows.length ? 'more than one row' : 'no row'} of ${system}.`);
 const edge = (name: string) => {
   const field = requireString(fields[name]), values = new Set(rows.map(row => requireFiniteNumber(row[field])));
   if (rows.length === 0 || values.size !== 1 || rows.some(row => row.system !== system)) throw new TypeError(`${requireString(edges.source)}: the rows of ${system} must agree on ${field}.`);

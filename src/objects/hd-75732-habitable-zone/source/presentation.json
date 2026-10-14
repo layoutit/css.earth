@@ -1,0 +1,31 @@
+{
+  "provenance": {
+    "name": "55 Cnc's habitable zone",
+    "products": [
+      {
+        "id": "zone",
+        "label": "Habitable Zone Gallery distances (Kane & Gelino 2012), after Kopparapu et al. (2013, 2014)",
+        "process": "Draw the four distances as three flat rings around the star, the conservative zone and the optimistic zone's two extensions of it, on the mean plane of the orbits of planets b, c, d and f as the world draws them.",
+        "recipe": "source/zone.json",
+        "selector": "",
+        "inputs": [
+          "zone-distances"
+        ],
+        "outputs": [
+          "prepared/plane.json",
+          "prepared/zone/zone.webp"
+        ],
+        "interpretation": {
+          "kind": "calculated-zone",
+          "sourceKind": "published-calculation"
+        },
+        "limitations": [
+          "A calculation from the star's temperature and luminosity, not an observation; a planet inside it is not known to be habitable.",
+          "The Gallery's rows for 55 Cnc's planets use two sets of star parameters; the zone is planet e's row, whose star is the one the star's page shows. The other rows put each edge about 5% farther out.",
+          "Only planet d's orbital tilt is measured; b, c and f are drawn in d's plane, and so is the zone. Planet e's orbit is drawn at its own measured tilt to the sky, 10.3 degrees from d's; how the two orbits are turned about the line of sight is not measured.",
+          "The orbits' position angle on the sky is not measured, so the plane's turn about the line of sight is the convention the orbits are drawn with."
+        ]
+      }
+    ]
+  }
+}

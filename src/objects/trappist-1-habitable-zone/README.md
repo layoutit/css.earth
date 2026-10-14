@@ -28,7 +28,7 @@ on its surface, by one published model. A planet inside it is not known to be ha
 
 ## Processing
 
-[`habitable-zone.mts`](../../../packages/bake/authoring/trappist-1/habitable-zone.mts) reads the recipe,
+[`habitable-zone.mts`](../../../packages/bake/authoring/system-planes/habitable-zone.mts) (`trappist-1-habitable-zone`) reads the recipe,
 [`zone.json`](source/zone.json), and writes the descriptor, the prepared plane and its picture.
 
 - **Picture.** Three flat rings of one green on a 1,024-pixel square: the conservative zone at 16% opacity, and the two

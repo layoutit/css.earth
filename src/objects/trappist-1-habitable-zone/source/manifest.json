@@ -9,8 +9,8 @@
       "sourceUrl": "https://hzgallery.org/table.html",
       "title": "Habitable Zone Gallery, the rows of TRAPPIST-1's seven planets",
       "credit": "S. R. Kane, D. M. Gelino; the Habitable Zone Gallery, hzgallery.org; PASP 124, 323",
-      "acquisition": "Written 2026-10-10 by packages/bake/authoring/trappist-1/habitable-zone.mts --fetch: the seven rows whose system is TRAPPIST-1, unchanged, from the Gallery's JSON product (3,938,737 bytes that day, 5,441 planets, last updated 2026-10-08).",
-      "generator": "packages/bake/authoring/trappist-1/habitable-zone.mts",
+      "acquisition": "Written 2026-10-10 by packages/bake/authoring/system-planes/habitable-zone.mts trappist-1-habitable-zone --fetch (then at packages/bake/authoring/trappist-1/): the seven rows whose system is TRAPPIST-1, unchanged, from the Gallery's JSON product (3,938,737 bytes that day, 5,441 planets, last updated 2026-10-08).",
+      "generator": "packages/bake/authoring/system-planes/habitable-zone.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
