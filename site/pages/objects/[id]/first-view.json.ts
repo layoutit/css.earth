@@ -1,3 +1,4 @@
+import { incrementalPaths } from '../../../server/incremental-paths.mts';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { OBJECTS, SCENE_OBJECTS, PAGES } from '../../../directory/objects.mts';
 import { ROOT_OBJECT_ID } from '../../../model/root-object.mts';
@@ -5,7 +6,7 @@ import { builtScenePaths } from '../../../server/built-pages.mts';
 import { firstViewTransport } from '../../../server/first-view-transport.mts';
 
 // The transport a page's first mount reads; see `first-view-transport.mts`.
-export const getStaticPaths: GetStaticPaths = async () => builtScenePaths(SCENE_OBJECTS.map(({ id }) => ({ params: { id } })), PAGES, ROOT_OBJECT_ID);
+export const getStaticPaths: GetStaticPaths = async () => incrementalPaths(builtScenePaths(SCENE_OBJECTS.map(({ id }) => ({ params: { id } })), PAGES, ROOT_OBJECT_ID));
 
 export const GET: APIRoute = async ({ params }) => {
   if (typeof params.id !== 'string' || !SCENE_OBJECTS.some(object => object.id === params.id)) {

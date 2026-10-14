@@ -1,0 +1,114 @@
+name: Static incremental build benchmark
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+
+permissions:
+  contents: read
+  actions: read
+
+# Unrelated labels neither start nor cancel measurements. This experiment never publishes.
+concurrency:
+  group: static-build-benchmark-${{ github.run_id }}
+  cancel-in-progress: false
+
+env:
+  BENCHMARK_HEAD: ${{ github.event.pull_request.head.sha }}
+  NODE_OPTIONS: --max-old-space-size=6144
+  CSSEARTH_SKIP_DECLARATIONS: '1'
+  CSSEARTH_STATIC_STYLES: '1'
+  CSSEARTH_ALLOW_MISSING_ASSETS: '0'
+  ASSET_ORIGIN: https://earth-assets.lowpoly.cc
+  TZ: UTC
+  LC_ALL: C
+
+jobs:
+  seed:
+    name: Incremental seed
+    if: github.event.pull_request.head.repo.full_name == github.repository && contains(github.event.pull_request.labels.*.name, 'compare-incremental') && (github.event.action != 'labeled' || github.event.label.name == 'compare-incremental')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    outputs:
+      result: ${{ steps.finish.outputs.result }}
+      cache_key: ${{ steps.plan.outputs.seed_key }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Install fresh dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Bind exact candidate and cache keys
+        id: plan
+        run: node .github/scripts/ci/incremental-benchmark.mts plan seed
+      - name: Build and qualify the seed
+        run: node .github/scripts/ci/incremental-benchmark.mts run seed
+      - name: Save seed static cache
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            output/incremental-build/astro-cache
+            output/share-image-cache
+          key: ${{ steps.plan.outputs.seed_key }}
+      - name: Prove seed transfer and result
+        id: finish
+        env:
+          BENCHMARK_TOKEN: ${{ github.token }}
+        run: node .github/scripts/ci/incremental-benchmark.mts finish seed
+
+  compare:
+    name: Incremental ${{ matrix.scenario }}
+    needs: seed
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: [unchanged, owner, shared]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Install fresh dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Bind exact candidate and cache keys
+        id: plan
+        run: node .github/scripts/ci/incremental-benchmark.mts plan ${{ matrix.scenario }}
+      - name: Restore exact seed static cache
+        id: restored
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            output/incremental-build/astro-cache
+            output/share-image-cache
+          key: ${{ steps.plan.outputs.measured_key }}
+          restore-keys: ${{ needs.seed.outputs.cache_key }}
+          fail-on-cache-miss: true
+      - name: Compare production warm and fresh builds
+        env:
+          BENCHMARK_MATCHED_KEY: ${{ steps.restored.outputs.cache-matched-key }}
+          BENCHMARK_SEED_RESULT: ${{ needs.seed.outputs.result }}
+        run: node .github/scripts/ci/incremental-benchmark.mts run ${{ matrix.scenario }}
+      - name: Save measured static cache
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            output/incremental-build/astro-cache
+            output/share-image-cache
+          key: ${{ steps.plan.outputs.measured_key }}
+      - name: Prove transfers and complete output parity
+        env:
+          BENCHMARK_TOKEN: ${{ github.token }}
+        run: node .github/scripts/ci/incremental-benchmark.mts finish ${{ matrix.scenario }}

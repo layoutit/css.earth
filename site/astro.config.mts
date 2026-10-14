@@ -1,4 +1,3 @@
-import { execSync } from "node:child_process";
 import { rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,23 +11,17 @@ import { searchServer } from './server/search/search-server.mts';
 import { prepareContextAvailability } from "./build/prepare/catalog/prepare-context-availability.mts";
 import { preparedMotionCss } from "./build/prepared-motion-css.mts";
 import { assetOrigin, resolveWorldBillboards } from "./server-assets/asset-origin.mts";
+import { cssEarthVersion, finalizeBuildMetadata } from './build/build-metadata.mts';
+import { incrementalBuildEnabled, incrementalRenderEnabled, VERSION_TOKEN } from './contracts/build-metadata.mts';
+import { sourceRevision } from './content/source-revision.mts';
+import { staticPageStyles } from './build/static-page-styles.mts';
+import { staticPageStylesEnabled } from './server/compiled-page-styles.mts';
 
 // Astro resolves relative directories against the working directory, not this file: name them from here, so the
 // config builds the same site from any working directory.
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
-function cssEarthVersion() {
-  try {
-    const commitCount = Number(execSync("git rev-list --count HEAD", {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    }).trim());
-    // Every 10,000 commits start a major version: commit 9,999 is 0.9999, 10,000 is 1.0 and 10,001 is 1.1.
-    return `${Math.floor(commitCount / 10000)}.${commitCount % 10000}`;
-  } catch {
-    return "0.0";
-  }
-}
+const incremental = incrementalBuildEnabled();
 
 export default defineConfig({
   site: SITE_ORIGIN,
@@ -38,18 +31,23 @@ export default defineConfig({
   publicDir: resolve(root, "site/public"),
   outDir: resolve(root, "dist"),
   output: "static",
+  ...(incremental ? { cacheDir: resolve(root, 'output/incremental-build/astro-cache'),
+    experimental: { incrementalBuild: true }, build: { concurrency: 1 } } : {}),
   devToolbar: { enabled: false },
   integrations: [{ name: 'prepared-context-availability', hooks: {
     'astro:config:setup': async ({ command, logger, updateConfig }) => {
-      // Deploy builds only (CSSEARTH_ALLOW_MISSING_ASSETS=1, set by .github/workflows/deploy.yml): tolerate a
-      // context package that setup:assets deliberately left missing after a 404 from R2, instead of failing the
-      // whole build over one object. CI and local builds never set this flag and stay strict.
+      // An explicit CSSEARTH_ALLOW_MISSING_ASSETS=1 tolerates a context package absent after an R2 404.
+      // Deploy explicitly sets 0; default CI and local builds also stay strict.
       const allowMissing = process.env.CSSEARTH_ALLOW_MISSING_ASSETS === '1';
       // An asset-origin build deliberately leaves site/public/scenes absent. Its tracked manifest is the local,
       // content-addressed contract for previews already published to R2; all prepared package bytes stay strict.
       const { availability, failures } = await prepareContextAvailability({ strict: command === 'build' && !allowMissing,
         publicAssets: assetOrigin() ? 'manifest' : 'local' });
-      updateConfig({ vite: { define: { __CSSEARTH_CONTEXT_AVAILABILITY__: JSON.stringify(availability) } } });
+      const renderIncrementally = incrementalRenderEnabled(command);
+      updateConfig({ vite: { define: { __CSSEARTH_CONTEXT_AVAILABILITY__: JSON.stringify(availability),
+        __CSSEARTH_INCREMENTAL_RENDER__: JSON.stringify(renderIncrementally),
+        __CSSEARTH_VERSION__: JSON.stringify(renderIncrementally ? VERSION_TOKEN : cssEarthVersion(root)),
+      } } });
       if (failures.length) logger.warn(`Some 3D views are unavailable in this installation:\n${failures.join('\n')}\nPrepare their packages and restart the server to enable them.`);
     },
   } }, { name: 'asset-origin-scenes', hooks: {
@@ -65,10 +63,16 @@ export default defineConfig({
     'astro:build:done': async ({ dir, logger }) => {
       logger.info(`Inlined the stylesheet of ${await inlinePageStylesheets(fileURLToPath(dir))} pages.`);
     },
+  } }, { name: 'incremental-build-metadata', hooks: {
+    'astro:build:done': async ({ dir, logger }) => {
+      if (!incremental) return;
+      const responses = await finalizeBuildMetadata(fileURLToPath(dir), { version: cssEarthVersion(root), revision: sourceRevision(root) });
+      logger.info(`Stamped current build metadata into ${responses} HTML/JSON responses.`);
+    },
   } }],
   vite: {
     css: { postcss: { plugins: [preparedMotionCss(root)] } },
-    plugins: [searchServer(), performanceSourceMaps(), packageSources(),
+    plugins: [searchServer(), performanceSourceMaps(), packageSources(), staticPageStyles(root, staticPageStylesEnabled()),
       // Safari fetches a module a second time when Vite's preload helper links one the import graph already requested
       // (163 KB of 932 on Earth's first visit, 2026-09-30). The client environment owns the browser bundle's setting.
       // The world summary ships as Vite emits it; its billboards take their published addresses (asset-origin.mts).
@@ -86,7 +90,8 @@ export default defineConfig({
     // reload of every module, longer than the module runner's 60 s limit, and froze a bake photographing the site (2026-09-30).
     server: { watch: { ignored: ['**/.claude/**', '**/output/**'] } },
     define: {
-      __CSSEARTH_VERSION__: JSON.stringify(cssEarthVersion()),
+      __CSSEARTH_VERSION__: JSON.stringify(cssEarthVersion(root)),
+      __CSSEARTH_INCREMENTAL_RENDER__: 'false',
     },
   },
 });

@@ -60,6 +60,19 @@ the `_headers` file into `dist`, answers one search and one page from the bundle
 asks search engines not to index it. [The wrangler configuration](../deploy/cloudflare/wrangler.jsonc), passed to wrangler
 with `--config`, names both targets; the site's own address is the `production` environment, which attaches `css.earth` and `www.css.earth` to the Worker.
 
+In **Actions → Deploy → Run workflow**, **Use incremental build** is unchecked by default. Checking it sets
+`CSSEARTH_INCREMENTAL_BUILD=1` and `CSSEARTH_STATIC_STYLES=1` for the build step, enabling Astro's experimental static
+page reuse and isolated stylesheet dependencies. Unchecked manual runs and automatic ENSO deployments explicitly set
+both flags to `0` and skip the static page cache. Pages are still built ahead of deployment; this adds no server rendering.
+
+The first checked run, or a cache miss, builds normally and seeds the next run. Later checked runs can reuse unchanged
+HTML and JSON responses; current version and source links are stamped after reuse. The Deploy-only cache contains only
+`output/incremental-build/astro-cache`, separate from PR benchmark caches, and is scoped to the exact branch, runner OS
+and architecture, Node 24, lockfile Git identity and cache format version. Each run attempt saves a new key after the
+existing asset, page-count and unchanged-source checks pass. Prepared banks, source data, `dist` and credentials are not
+cached there; R2 setup and validation still run. Changed input keys or an incompatible Astro manifest rebuild affected
+pages. Cache transfers and invalidation can outweigh page reuse, so this remains opt-in; no hosted speedup is promised.
+
 Tested on 2026-10-04 from Buenos Aires, against the Netlify site (then the standby host) the same day:
 
 | Request | Cloudflare preview | Netlify |
@@ -123,6 +136,25 @@ from NASA twice. To move the steps by hand, run the commands the job runs: the r
 new day, the `--add-datasets` bake, then `publish-runtime-assets.mts --object=earth --since=origin/main`.
 `publish-source-cache.mts --object=earth` mirrors Earth's downloaded inputs but not the tile archives, which the
 manifest lists as generated intermediates.
+
+## Opt-in share-image build measurement
+
+The [build benchmark](../.github/workflows/build-benchmark.yml) runs for a same-repository PR carrying `compare-build`.
+Adding unrelated labels does not start another measurement. To retry, choose **Re-run all jobs**: cache keys include the
+run attempt, so a partial failed-job rerun cannot consume a seed from the previous attempt.
+It checks out the exact PR head on three fresh Ubuntu/Node 24 runners, with no dependency, prepared or compiled caches.
+The seed builds and saves generated share cards; the baseline changes only the canonical share writer to its merge-base
+version; the warm run restores the exact seed and saves a new key. All runs use the real production build, asset validation
+and a local Worker smoke check. This workflow has read-only permissions, receives no publication credentials and uploads no site or artifact.
+
+The result appears as `BUILD_BENCHMARK_RESULT` in the job log and in its summary. It requires equal pre-Worker output
+identities, real complete warm reuse and an exact nonempty cache entry proved by the read-only API. Command timings exclude
+output-fingerprint work; GitHub job/step timestamps record cache transfers separately from runner waiting. The three builds
+run sequentially so the warm job can compare both prior results without another dependency installation. This optional
+measurement is outside the required PR feedback path; local timings are not a hosted speed claim.
+The benchmark normalizes all steps to a 6 GB Node heap, production asset origin, strict asset completeness, skipped
+declarations, UTC and the C locale; production scopes some of these settings to its build step. Each measurement is one
+baseline/warm pair on separate runners. Recorded CPU/image/codec facts expose runner variance; one pair is not a statistical speed guarantee.
 
 ## Keep the PR path lean without dropping proof
 
@@ -476,3 +508,46 @@ Telemetry is separate from verdict reports. The supplied hosted old-lane run
 37296091119 took about 30 minutes. Warm target: roughly 10–12 minutes, pending
 hosted archive-size, transfer, memory and identical-report proofs. Detailed
 payload, bounds and proof commands are in [build comparison](build-comparison.md#commit-addressed-base-reuse).
+
+### Opt-in static incremental experiment
+
+The same-repository PR label `compare-incremental` runs a separate, non-required
+benchmark at the exact PR head with full Git history. A seed production build
+saves only Astro's static HTML/manifest cache and generated share images. Three
+parallel jobs compare unchanged input, a temporary Saturn stylesheet edit, and a
+temporary shared HTML attribute edit. Each runs the full production recipe warm
+and then with page caching disabled, on the same runner and identical source
+bytes. Both start with absent prepared banks (each recipe downloads and verifies R2 inputs)
+and the same seed share-image cache; generated-input and share snapshot/reset time is
+reported separately. Fixtures are restored before the job can succeed.
+
+Every pair must match the complete deployed output, including current version
+and source links, clear the 900 HTML-page gate, validate runtime asset URLs, and
+pass the local bundled Worker smoke. Native Astro logs supply actual rendered
+and reused page counts. Changed cases must emit their marker and differ from
+the seed; broad invalidation is a measured outcome. Unchanged input must reuse
+pages and match the seed. Cache API bytes and completed Actions save/restore
+step times are included with build, asset-check and Worker timings in the job
+summary and `INCREMENTAL_BENCHMARK_RESULT` log record. Each `coreSeconds` sums
+build, asset-check and Worker time; `totalSeconds` also includes generated-input
+reset and output-proof time. The reported warm transfer total adds share-cache
+snapshot time and the actual warm restore/save steps; the fresh total adds
+share-cache reset time. A production-path timing comparison uses warm core time
+plus those restore/save steps against fresh core time, excluding benchmark-only
+reset, proof and snapshot work. Seven full builds run across four jobs.
+[Hosted run 38485352668](https://github.com/layoutit/css.earth/actions/runs/38485352668)
+completed on the earlier benchmark head; its timings do not qualify this branch's
+integration with newer main changes. Runner image/CPU and tool versions identify
+relevant timing differences. No secrets, deployment,
+artifact upload, server rendering, or site publication participates. Production
+Deploy has its own default-off manual checkbox and separate static page cache, described above.
+
+`CSSEARTH_STATIC_STYLES=1` additionally isolates object stylesheet dependencies
+during production builds. Vite finishes its normal CSS transforms into a private
+build transport; static page rendering reads the selected styles from that
+transport, and incremental keys include their finished bytes. Combine it with
+`CSSEARTH_INCREMENTAL_BUILD=1` to reuse pages after unrelated stylesheet edits.
+It is off by default, leaves development HMR unchanged, and adds no visitor-side
+CSS preparation or server rendering.
+The opt-in hosted incremental experiment enables this flag for both warm builds
+and their cache-off controls.

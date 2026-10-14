@@ -6,6 +6,12 @@ name: Deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      incremental_build:
+        description: Use incremental build
+        type: boolean
+        required: false
+        default: false
   push:
     branches: [main]
     paths:
@@ -48,6 +54,30 @@ jobs:
           [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || missing CLOUDFLARE_ACCOUNT_ID "the Cloudflare account id"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Restore generated share images
+        id: share-images-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/share-image-cache
+          key: share-images-v1-${{ runner.os }}-${{ runner.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: share-images-v1-${{ runner.os }}-${{ runner.arch }}-
+      - name: Plan incremental static cache
+        if: github.event_name == 'workflow_dispatch' && inputs.incremental_build == true
+        id: incremental-cache-key
+        run: |
+          set -euo pipefail
+          lockfile=$(git rev-parse HEAD:pnpm-lock.yaml)
+          echo "lockfile=$lockfile" >> "$GITHUB_OUTPUT"
+      - name: Restore incremental static pages
+        if: github.event_name == 'workflow_dispatch' && inputs.incremental_build == true
+        id: incremental-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/incremental-build/astro-cache
+          # Git refs cannot contain ':', so the restore prefix cannot match a longer sibling branch name.
+          # The Deploy-only namespace also excludes PR benchmark caches.
+          key: deploy-static-v1-${{ runner.os }}-${{ runner.arch }}-node24-${{ steps.incremental-cache-key.outputs.lockfile }}-${{ github.ref }}:${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: "deploy-static-v1-${{ runner.os }}-${{ runner.arch }}-node24-${{ steps.incremental-cache-key.outputs.lockfile }}-${{ github.ref }}:"
       - name: Build the site
         # The deploy build regenerates its ignored source/facility catalogues from committed inputs and the restored
         # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;
@@ -63,6 +93,10 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=6144
           # The deploy imports the packages' JavaScript only; their type declarations were most of build:packages.
           CSSEARTH_SKIP_DECLARATIONS: '1'
+          CSSEARTH_ALLOW_MISSING_ASSETS: '0'
+          # Only an explicitly checked manual dispatch enables either build experiment.
+          CSSEARTH_INCREMENTAL_BUILD: ${{ github.event_name == 'workflow_dispatch' && inputs.incremental_build == true && '1' || '0' }}
+          CSSEARTH_STATIC_STYLES: ${{ github.event_name == 'workflow_dispatch' && inputs.incremental_build == true && '1' || '0' }}
         run: |
           # Textures and scene JSON resolve to R2: a Worker's static assets cannot hold site/public/scenes.
           ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm build:deploy
@@ -89,6 +123,17 @@ jobs:
             git diff --name-only -- src/objects
             exit 1
           fi
+      - name: Save validated share images
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/share-image-cache
+          key: ${{ steps.share-images-cache.outputs.cache-primary-key }}
+      - name: Save validated incremental static pages
+        if: github.event_name == 'workflow_dispatch' && inputs.incremental_build == true
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: output/incremental-build/astro-cache
+          key: ${{ steps.incremental-cache.outputs.cache-primary-key }}
       - name: Publish the prebuilt site to Cloudflare
         # Bundles the Worker, answers one search and one page from the bundle, and uploads it with the built pages as its
         # static assets (deploy/cloudflare/wrangler.jsonc, the `production` environment). docs/ci-cd.md, "Serving the site from Cloudflare".

@@ -1,10 +1,13 @@
-import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import credits from '../prepared/prepared-source-credits.json' with { type: 'json' };
 import { parseSourceCredits } from '@cssearth/objects/provenance';
 import { projectRoot } from '@cssearth/core/node';
 import { parseSourceIcons } from './source-icons.mts';
+import { REVISION_TOKEN } from '../contracts/build-metadata.mts';
+import { sourceRevision } from './source-revision.mts';
+
+declare const __CSSEARTH_INCREMENTAL_RENDER__: boolean;
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
 // reconstructs a document from scientific citations.
@@ -13,10 +16,8 @@ import { parseSourceIcons } from './source-icons.mts';
 // bundles this module into `dist/.prerender/chunks`, its own URL no longer
 // sits beside the project root).
 const root = projectRoot(import.meta.url);
-const revision = process.env.COMMIT_REF || execFileSync('git', ['rev-parse', 'HEAD'], {
-  cwd: root, encoding: 'utf8',
-}).trim();
-if (!/^[a-f0-9]{40}$/u.test(revision)) throw new Error('Source documentation needs the build commit.');
+const revision = typeof __CSSEARTH_INCREMENTAL_RENDER__ !== 'undefined' && __CSSEARTH_INCREMENTAL_RENDER__
+  ? REVISION_TOKEN : sourceRevision(root);
 const checked = new Set<string>();
 // Each object's provider index, computed when the source catalogue was written (@cssearth/objects/provenance source-credits.ts).
 const CREDITS = parseSourceCredits(credits), PROVIDERS = CREDITS.providers;

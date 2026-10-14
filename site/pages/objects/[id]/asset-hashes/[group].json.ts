@@ -1,3 +1,4 @@
+import { incrementalPaths } from '../../../../server/incremental-paths.mts';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { SCENE_OBJECTS } from '../../../../directory/objects.mts';
 import { assetHashSplit, assetOrigin } from '../../../../server-assets/asset-origin.mts';
@@ -10,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [];
   for (const { id } of SCENE_OBJECTS) for (const [group, hashes] of (await assetHashSplit(id)).groups)
     paths.push({ params: { id, group: preparedAssetGroupFile(group).replace(/\.json$/u, '') }, props: { hashes } });
-  return paths;
+  return incrementalPaths(paths);
 };
 
 export const GET: APIRoute = ({ props }) => new Response(JSON.stringify(props.hashes), { headers: {

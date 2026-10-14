@@ -1,3 +1,4 @@
+import { incrementalPaths } from '../../../../server/incremental-paths.mts';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { OBJECTS, SCENE_OBJECTS, PAGES } from '../../../../directory/objects.mts';
 import { ROOT_OBJECT_ID } from '../../../../model/root-object.mts';
@@ -8,8 +9,8 @@ import { preparedDatasetIds, readPreparedDatasetBytes } from '../../../../server
 // (dataset-tables.ts in @cssearth/objects). Only the scenes a build prerenders read their datasets.
 export const getStaticPaths: GetStaticPaths = async () => {
   const scenes = builtScenePaths(SCENE_OBJECTS.map(({ id }) => ({ params: { id } })), PAGES, ROOT_OBJECT_ID);
-  return (await Promise.all(scenes.map(async ({ params: { id } }) =>
-    (await preparedDatasetIds(id)).map(dataset => ({ params: { id, dataset } }))))).flat();
+  return incrementalPaths((await Promise.all(scenes.map(async ({ params: { id } }) =>
+    (await preparedDatasetIds(id)).map(dataset => ({ params: { id, dataset } }))))).flat());
 };
 
 export const GET: APIRoute = async ({ params }) => {

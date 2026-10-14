@@ -1,3 +1,4 @@
+import { incrementalPaths } from '../../../server/incremental-paths.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
@@ -6,7 +7,7 @@ import { WORLD_DOT_BANKS } from '../../../directory/world-context-plan.mts';
 // The dots of the plain stars inside one object (the bake's `plain-stars` bank: the catalogued stars of another galaxy
 // that the map does not label or open by click), copied at build from that object's package. The world draws them while
 // that object or a body inside it is selected.
-export const getStaticPaths: GetStaticPaths = async () => WORLD_DOT_BANKS.map(id => ({ params: { id } }));
+export const getStaticPaths: GetStaticPaths = async () => incrementalPaths(WORLD_DOT_BANKS.map(id => ({ params: { id } })));
 
 export const GET: APIRoute = async ({ params }) => {
   if (typeof params.id !== 'string' || !WORLD_DOT_BANKS.includes(params.id)) return new Response('Not found', { status: 404 });
