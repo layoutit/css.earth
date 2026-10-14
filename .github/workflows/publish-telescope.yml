@@ -35,7 +35,7 @@ jobs:
         working-directory: packages/telescope-cli
         run: |
           set -euo pipefail
-          version=$(node -p "require('./package.json').version")
+          version=$(npm pkg get version | tr -d '"')
           if npm view "@cssearth/telescope@$version" version >/dev/null 2>&1; then
             echo "::error::@cssearth/telescope@$version is already on npm. Bump the version in package.json and the plugin manifests first."
             exit 1
