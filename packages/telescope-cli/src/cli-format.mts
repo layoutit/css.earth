@@ -214,7 +214,7 @@ export function contextText(context:DeliveryContext|undefined):string|undefined 
   return context.kind==='exploration'?'No scientific acceptance criteria requested.':`Scientific request: ${context.assessment.status}.`;
 }
 export function outputCommand(source:string,choice:OutputChoice):string {
-  const args=['telescope','export',source,'--output',choice.kind];
+  const args=['telescope','export',displayPath(source),'--output',choice.kind];
   if(choice.hdu!==undefined)args.push('--hdu',String(choice.hdu));
   if(choice.structure)args.push('--structure',choice.structure);
   for(const parameter of choice.parameters??[]){

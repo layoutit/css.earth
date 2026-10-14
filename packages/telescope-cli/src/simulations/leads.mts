@@ -6,9 +6,9 @@
  * the papers that name an object. A record is kept when it really names the object and speaks of one of three things, in
  * the order a page prefers them (.agents/skills/celestial-skill/references/scientific-faithfulness.md):
  *
- * - `map`: a measured phase curve, eclipse map or longitude map, which `new-object --phase-curve` draws from a paper's fit;
+ * - `map`: a measured phase curve, eclipse map or longitude map, which `node packages/telescope-cli/src/new-object/new-object-cli.mts --phase-curve` draws from a paper's fit;
  * - `eclipse`: a measured secondary eclipse or dayside emission, which gives a dayside temperature;
- * - `simulation`: a published model of the object, which `new-object --simulation` draws from a released field.
+ * - `simulation`: a published model of the object, which `node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation` draws from a released field.
  *
  * `searchLeads` asks for one object. `surveyLeads` asks for every object of a class, ten a request, and ranks them with
  * what each page opens on today, so the gray ones with a measured map come first. Nothing is downloaded and no lead
@@ -181,7 +181,7 @@ export function formatLeads(result: LeadSearch, directory?: string): string {
     lines.push(`${HEADINGS[leadClass]} (${found.length})`, ...found.map(lead => `${lead.inTitle ? '' : '   (from its description, not its title)\n'}${line(lead)}`), '');
   }
   if (!result.leads.length) lines.push('No record names this object and speaks of a phase curve, an eclipse or a model.', '');
-  else lines.push('A lead is read before anything is shown: new-object --phase-curve takes a paper\'s fitted table, new-object --simulation a released field.', '');
+  else lines.push('A lead is read before anything is shown. In a checkout, run node packages/telescope-cli/src/new-object/new-object-cli.mts --phase-curve entries.json for a paper\'s fitted table, or node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json for a released field.', '');
   if (result.watched?.length) lines.push(...watchedLines(result.watched));
   if (directory) lines.push(`Saved: ${resolve(directory, 'leads.json')}`, '');
   return lines.join('\n');

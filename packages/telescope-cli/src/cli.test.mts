@@ -16,7 +16,7 @@ import { familyCoverageLedger } from './family-handlers.mts';
 import { loadWwtImagery } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads } from './wwt/wwt-fits-leads.mts';
 import { requestTransferConsent } from '@cssearth/telescope-core/node';
-const originalCwd=process.cwd(),testCwd=await mkdtemp(resolve(tmpdir(),'cli-cwd-'));
+const originalCwd=process.cwd(),testCwd=await realpath(await mkdtemp(resolve(tmpdir(),'cli-cwd-')));
 process.chdir(testCwd);
 after(async()=>{process.chdir(originalCwd);await rm(testCwd,{recursive:true,force:true});});
 

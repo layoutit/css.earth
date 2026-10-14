@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { ReadableStream } from 'node:stream/web';
 import test from 'node:test';
 import { setTimeout as delay } from 'node:timers/promises';
 import { DownloadInterruptedError, downloadHttpFile } from './http-download.js';

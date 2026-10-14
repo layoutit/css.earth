@@ -12,7 +12,7 @@ const runPython = promisify(execFile);
 test('the actual Astroquery inline program includes and compiles the tested transfer loop', async () => {
   const source = await readFile(new URL('./astroquery.ts', import.meta.url), 'utf8');
   const template = /const PYTHON = String\.raw`([\s\S]*?)`;/u.exec(source)?.[1];
-  assert.ok(template?.includes('${VO_DOWNLOAD_PYTHON}'), 'Astroquery must install the tested transfer loop');
+  assert.ok(template !== undefined && template.includes('${VO_DOWNLOAD_PYTHON}'), 'Astroquery must install the tested transfer loop');
   await runPython('python3', ['-c', 'import ast,sys;ast.parse(sys.argv[1]);print("compiled")', template.replace('${VO_DOWNLOAD_PYTHON}', VO_DOWNLOAD_PYTHON)]);
 });
 const imports = String.raw`

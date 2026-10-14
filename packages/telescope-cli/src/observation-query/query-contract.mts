@@ -87,7 +87,7 @@ export function assessSearchCoverage(input:{readonly resolution:TargetResolution
     ||input.providers.some(service=>service.state==='unavailable'||service.state==='overflow')?'incomplete':'bounded';
 }
 export interface WorkflowBlocker { readonly code: WorkflowBlockerCode; readonly reason: string; readonly constraint?: string }
-export interface SelectionAction { readonly kind: 'select-observation'; readonly programme: string; readonly command: 'pnpm'; readonly arguments: readonly string[] }
+export interface SelectionAction { readonly kind: 'select-observation'; readonly programme: string }
 export interface CandidateSelectionAssessment {
   readonly selectable: boolean;
   readonly blockers: readonly WorkflowBlocker[];

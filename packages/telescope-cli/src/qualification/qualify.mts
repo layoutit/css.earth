@@ -246,7 +246,7 @@ export async function recordQualification(root: string, result: QualificationRes
 
 export const QUALIFY_HELP = `Usage: node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/qualification/qualify.mts --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
-Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID --wavelength FROM,TO,
+Registered routes currently accept --channel N, --band ID --wavelength FROM,TO,
 --archive-programme ID --archive-target NAME --night YYYY-MM-DD, --source-product ID, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

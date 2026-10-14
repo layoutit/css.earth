@@ -89,14 +89,14 @@ title (an erratum is printed that way), whether it is retracted, and the later w
 Several targets are a sweep: one search each, the works named, nothing fetched. A search costs 10 of OpenAlex's 1,000 daily
 credits for a network without a key; OPENALEX_API_KEY in the environment has ten times that. Nothing is saved without --out.
 Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
-license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
-an entry written after reading its paper, fetching
-by byte range only the header and the one grid it draws.
+license, size and files. It downloads nothing. A listed record is a lead: in a checkout,
+packages/telescope-cli/src/new-object/new-object-cli.mts adds one as a dataset from an entry written after reading its
+paper, fetching by byte range only the header and the one grid it draws (docs/telescope-commands.md gives the command).
 Leads asks DataCite, which registers the DOIs of every data repository and of arXiv, for the records that name the target
 and speak of a measured phase curve or map, a measured eclipse, or a model: data releases at Zenodo, Dryad, Dataverse,
 universities, the CDS and MAST, and the papers themselves. --class exoplanet asks for every object of that class, ten a
 request, and ranks them with what each page opens on, the pages without a map first. A lead is read before anything is
-shown: new-object --phase-curve draws a paper's fitted table and new-object --simulation a released field.
+shown: in a checkout, new-object-cli.mts draws a paper's fitted phase-curve table or a released model field.
 Stars counts the stars SIMBAD lists inside a galaxy's outline by class, names the papers they come from, and says which of
 VizieR's tables of those papers give each star a period and a place. It downloads nothing. A table it calls ready is a lead
 for new-object --from-table, and so is one that lists detector pixels, once its paper has said which exposure they are of.

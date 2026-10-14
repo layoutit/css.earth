@@ -3,7 +3,7 @@
  * the rule on published simulations requires (.agents/skills/celestial-skill/references/scientific-faithfulness.md): its own
  * dataset, named as a model with its paper and the scenario it assumes. The body opens on it only where it had no map.
  *
- *   new-object --simulation entries.json      a list of { id, dataset, label, quantity, record, file, path, variable, coordinates,
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json      a list of { id, dataset, label, quantity, record, file, path, variable, coordinates,
  *                                             select, units, displayUnits?, longitudeZeroAt, model, credit, url, scenario, time,
  *                                             detected, undetected?, observed?, others?, range? }
  *

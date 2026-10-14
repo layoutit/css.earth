@@ -48,8 +48,6 @@ export interface QualificationAction {
   readonly archiveProgramme?: string;
   readonly program: string;
   readonly configuration: QualificationConfiguration;
-  readonly command: 'pnpm';
-  readonly arguments: readonly string[];
 }
 
 interface QualificationRoute {
@@ -94,11 +92,9 @@ const wavelength = (args: readonly string[]): readonly [number, number] => {
   return [values[0]!, values[1]!];
 };
 
-function makeAction(target: string, telescope: string, mode: string, observation: QualificationObservation, configuration: QualificationConfiguration,
-  option: readonly string[]): QualificationAction {
+function makeAction(target: string, observation: QualificationObservation, configuration: QualificationConfiguration): QualificationAction {
   const program = `${target}-${observation.id}`;
-  return { kind: 'qualify-observation', observation: observation.id, ...(observation.programme ? { archiveProgramme: observation.programme } : {}), program, configuration,
-    command: 'pnpm', arguments: ['--silent', 'telescope:qualify', '--target', target, '--telescope', telescope, '--mode', mode, '--observation', observation.id, ...option] };
+  return { kind: 'qualify-observation', observation: observation.id, ...(observation.programme ? { archiveProgramme: observation.programme } : {}), program, configuration };
 }
 
 /** Telescope-owned routes. The dispatcher only looks up this registry; adding a route does not add another branch to it. */
@@ -110,8 +106,8 @@ const ROUTES: readonly QualificationRoute[] = [
       const channels = IRAC_CHANNELS.filter(entry => covers(entry.wavelengthMicrometres, wavelengthMicrometres));
       if (channels.length !== 1) return [];
       const channel = channels[0]!.channel;
-      return observations.filter(observation => overlapsTime(observation, time)).map(observation => makeAction(target, 'Spitzer', 'IRAC Map', observation,
-        { kind: 'spitzer-irac-channel', channel }, ['--channel', String(channel)]));
+      return observations.filter(observation => overlapsTime(observation, time)).map(observation => makeAction(target, observation,
+        { kind: 'spitzer-irac-channel', channel }));
     },
     accepts: configuration => configuration.kind === 'spitzer-irac-channel' && IRAC_CHANNELS.some(entry => entry.channel === configuration.channel),
     configurationFromArguments: args => {
@@ -125,8 +121,7 @@ const ROUTES: readonly QualificationRoute[] = [
     actions: ({ target, wavelengthMicrometres, time, observations }) => wavelengthMicrometres ? observations.filter(observation => overlapsTime(observation, time) && observation.filter).flatMap(observation => {
       const band = bandOfFilters('NIRSPEC', observation.filter!, observation.id), coverage = JWST_CUBE_COVERAGE[band.id];
       return coverage && covers(coverage, wavelengthMicrometres)
-        ? [makeAction(target, 'JWST', 'NIRSPEC/IFU', observation, { kind: 'jwst-band', band: band.id, wavelengthMicrometres },
-          ['--band', band.id, '--wavelength', wavelengthMicrometres.join(',')])] : [];
+        ? [makeAction(target, observation, { kind: 'jwst-band', band: band.id, wavelengthMicrometres })] : [];
     }) : [],
     accepts: configuration => configuration.kind === 'jwst-band' && configuration.band.startsWith('NIRSPEC-')
       && JWST_CUBE_COVERAGE[configuration.band] !== undefined
@@ -138,8 +133,7 @@ const ROUTES: readonly QualificationRoute[] = [
     actions: ({ target, time, observations }) => observations.filter(observation => overlapsTime(observation, time)
       && observation.programme && observation.archiveTarget && observation.night).map(observation => {
       const configuration = { kind: 'naco-program-night', programme: observation.programme!, archiveTarget: observation.archiveTarget!, night: observation.night! } as const;
-      return makeAction(target, 'VLT/NACO', 'imaging', observation, configuration,
-        ['--archive-programme', configuration.programme, '--archive-target', configuration.archiveTarget, '--night', configuration.night]);
+      return makeAction(target, observation, configuration);
     }),
     accepts: configuration => configuration.kind === 'naco-program-night' && Boolean(configuration.programme && configuration.archiveTarget && /^\d{4}-\d{2}-\d{2}$/u.test(configuration.night)),
     configurationFromArguments: args => ({ kind: 'naco-program-night', programme: required(args, '--archive-programme'),
@@ -149,21 +143,20 @@ const ROUTES: readonly QualificationRoute[] = [
 
 const routeFor = (telescope: string, mode: string) => ROUTES.find(route => route.telescope === telescope && route.mode === mode);
 
-/** Concrete commands for indexed observations which a registered route can retrieve and qualify. */
+/** Internal actions for indexed observations which a registered route can retrieve and qualify. */
 export function qualificationActionsFor(telescope: string, mode: string, target: string, wavelengthMicrometres: readonly [number, number],
   time: { readonly any: true } | { readonly fromIso: string; readonly toIso: string } | undefined,
   observations: readonly QualificationObservation[]): QualificationAction[] {
   const sourceActions = observations.filter(observation => observation.sourceProductId && overlapsTime(observation, time)).map(observation => {
-    const action = makeAction(target, telescope, mode, observation, { kind: 'source-product', id: observation.sourceProductId! }, ['--source-product', observation.sourceProductId!]);
+    const action = makeAction(target, observation, { kind: 'source-product', id: observation.sourceProductId! });
     return { ...action, program: observation.sourceProductId! };
   });
   const archiveObservations = observations.filter(observation => !observation.sourceProductId);
   const route = routeFor(telescope, mode);
   if (route) return [...sourceActions, ...route.actions({ target, wavelengthMicrometres, time, observations: archiveObservations })];
   return [...sourceActions, ...archiveObservations.filter(observation => observation.kind === 'image' && overlapsTime(observation, time) && observation.targetLid && observation.archiveTarget && observation.productLidvid
-    && observation.observatory && observation.instrument && productCovers(observation, wavelengthMicrometres)).map(observation => makeAction(target, telescope, mode, observation,
-      { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! },
-      ['--pds-target-lid', observation.targetLid!, '--pds-target-name', observation.archiveTarget!, '--pds-lidvid', observation.productLidvid!]))];
+    && observation.observatory && observation.instrument && productCovers(observation, wavelengthMicrometres)).map(observation => makeAction(target, observation,
+      { kind: 'pds-product', targetLid: observation.targetLid!, targetName: observation.archiveTarget!, lidvid: observation.productLidvid! }))];
 }
 
 export interface ExplorationQualificationAvailability {

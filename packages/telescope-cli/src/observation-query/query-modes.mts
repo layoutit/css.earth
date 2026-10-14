@@ -34,19 +34,6 @@ export const missingRequestFields = (request: CapabilityRequest): string[] => [.
   ...(request.angularResolutionArcsec !== undefined || request.surfaceResolutionKm !== undefined || request.resolutionElements !== undefined ? [] : ['a required resolution (--min-arcsec, --min-km or --min-elements)']),
   ...(request.kind ? [] : ['product kind (--kind)']), ...(request.result ? [] : ['requested result (--result telescope-product|body-map)'])];
 
-const requestArguments = (request: CapabilityRequest): string[] => ['--target', request.target, '--wavelength', request.wavelengthMicrometres.join(','),
-  ...(request.region ? ['--icrs-circle', [request.region.raDegrees, request.region.decDegrees, request.region.radiusDegrees].join(',')] : []),
-  ...(request.spectralFrame ? ['--spectral-frame', request.spectralFrame] : []),
-  ...(request.transferLimits ? ['--max-science-bytes', String(request.transferLimits.scienceBytes), '--max-metadata-bytes', String(request.transferLimits.metadataBytes), '--max-link-depth', String(request.transferLimits.nestedEdges), '--max-link-requests', String(request.transferLimits.metadataRequests), '--max-expanded-bytes', String(request.transferLimits.expandedBytes), '--max-package-members', String(request.transferLimits.packageMembers)] : []),
-  ...(request.continuumMicrometres ? ['--continuum', request.continuumMicrometres.flat().join(',')] : []),
-  ...(request.acceptedAssumptions?.length ? ['--accept-assumptions', request.acceptedAssumptions.join(',')] : []),
-  ...(!request.time ? [] : 'any' in request.time ? ['--any-time'] : ['--from', request.time.fromIso, '--to', request.time.toIso]),
-  ...(request.angularResolutionArcsec === undefined ? [] : ['--min-arcsec', String(request.angularResolutionArcsec)]),
-  ...(request.surfaceResolutionKm === undefined ? [] : ['--min-km', String(request.surfaceResolutionKm)]),
-  ...(request.resolutionElements === undefined ? [] : ['--min-elements', String(request.resolutionElements)]),
-  ...(request.rangeKm === undefined ? [] : ['--range-km', String(request.rangeKm)]), ...(request.bodyRadiusKm === undefined ? [] : ['--radius-km', String(request.bodyRadiusKm)]),
-  ...(request.kind ? ['--kind', request.kind] : []), ...(request.result ? ['--result', request.result] : [])];
-
 export function workflowAssessment(request: CapabilityRequest, target: string, candidate: Omit<Candidate, 'selectionAssessment'>): CandidateSelectionAssessment {
   const blockers: WorkflowBlocker[] = missingRequestFields(request).map(reason => ({ code: 'request-incomplete', reason: `The request is missing ${reason}.` }));
   for (const [constraint, verdict_] of Object.entries(candidate.meetsConstraints)) if (verdict_.answer === 'no')
@@ -55,8 +42,8 @@ export function workflowAssessment(request: CapabilityRequest, target: string, c
   if (request.result === 'body-map' && candidate.bodyMapSupport.answer === 'no') blockers.push({ code: 'body-map-author-missing', reason: candidate.bodyMapSupport.reason });
   const programmes = [...new Set([...candidate.toolkitSupport.targetPrograms, ...candidate.toolkitSupport.targetArchiveFinalQualifiedPrograms])].filter(programme => candidate.observations?.records?.find(record => record.programme === programme)?.requestSatisfaction?.status !== 'refused' && (!(candidate.qualifiedProducts ?? []).some(product => product.program === programme) || matchingProduct(candidate.qualifiedProducts ?? [], request, programme))).sort();
   if (!programmes.length) blockers.push({ code: 'target-program-unqualified', reason: `No pinned or qualified program of ${target} is available for this mode.` });
-  const nextActions = blockers.length ? [] : programmes.map(programme => ({ kind: 'select-observation' as const, programme, command: 'pnpm' as const,
-    arguments: ['--silent', 'telescope:query', ...requestArguments(request), '--select-telescope', candidate.telescope, '--select-mode', candidate.mode, '--program', programme, '--json'] }));
+  // Selection metadata is internal; the public CLI selects saved picks with get.
+  const nextActions = blockers.length ? [] : programmes.map(programme => ({ kind: 'select-observation' as const, programme }));
   const qualificationActions = !blockers.some(blocker => ['request-incomplete', 'constraint-refused', 'toolkit-unavailable'].includes(blocker.code))
     ? qualificationActionsFor(candidate.telescope, candidate.mode, target, inputWavelengths(request), request.time, (candidate.observations?.records ?? []).filter(record => record.sourceProductId ? !record.qualification?.verified && !Object.entries(record.requestSatisfaction?.constraints ?? {}).some(([key, verdict]) => key !== 'result' && verdict.answer === 'no') : !(candidate.qualifiedProducts ?? []).some(product => product.observation === record.id && matchingProduct([product], request, product.program) && assessRequest(request, product.facts).constraints.wavelength?.answer === 'yes'))) : [];
   return { selectable: blockers.length === 0, blockers, nextActions, qualificationActions };

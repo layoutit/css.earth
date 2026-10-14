@@ -3,7 +3,7 @@
  * refitting. The entry holds the record and the words only a person can check (who fitted what, observed when); the range, the
  * hottest longitude and the reader text come from the map itself.
  *
- *   new-object --phase-curve entries.json      a list of { id, dataset, label, path, url, credit, observed, record }
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --phase-curve entries.json      a list of { id, dataset, label, path, url, credit, observed, record }
  *
  * or `phaseCurves` on a planet in a spec (spec.mts), the same entries without `id`. Two more fields are for what a paper says of
  * its own fit: `fixedOffset: true` when the model held the brightest longitude at noon and fitted no shift, so the page does not
