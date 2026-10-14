@@ -1,4 +1,4 @@
-import './test-support/index.mts';
+import { userRootEntries } from './test-support/index.mts';
 import assert from 'node:assert/strict';
 import { chmod, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -28,7 +28,7 @@ test('explore, get, outputs and every export default to cwd; one verified MAST s
   await mkdir(cwd);
   const science = await readFile(new URL('./vo/fixtures/telescope-vo/eso-circle.fits', import.meta.url));
   const fetcher = mock.method(globalThis, 'fetch', async () => new Response(science, { headers: { 'Content-Length': String(science.length) } }));
-  const initialUser = await readdir(USER_ROOT, { recursive: true });
+  const initialUser = await userRootEntries();
   let downloads = 0;
   const api: SessionServices = {
     load: async () => { throw new Error('No scientific query'); },
@@ -112,7 +112,7 @@ test('explore, get, outputs and every export default to cwd; one verified MAST s
     const field = await saveExploration(cwd, ['--icrs-circle', '12.5,-4.25,0.1'], undefined, api);
     assert.match(field.directory, /\/telescope-runs\/field-12\.5--4\.25-[0-9]+-/u);
     assert.equal(displayPath(result.product), `./telescope-runs/${saved.directory.split('/').at(-1)}/pick-1/science.fits`);
-    assert.deepEqual(await readdir(USER_ROOT, { recursive: true }), initialUser, 'No central science, records or run folders');
+    assert.deepEqual(await userRootEntries(), initialUser, 'No central science, records or run folders');
     const overridden = resolve(work, 'chosen');
     const outResult = await getSession(cwd, saved.directory, 1, () => {}, api, { out: overridden });
     assert.ok(outResult.product.startsWith((await realpath(overridden)) + '/pick-1/'));

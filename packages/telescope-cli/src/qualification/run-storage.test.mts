@@ -1,4 +1,4 @@
-import '../test-support/index.mts';
+import { userRootEntries } from '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import test, { mock } from 'node:test';
 import * as child from 'node:child_process';
@@ -45,7 +45,7 @@ const bytes = imageFixture(-32, [1, 2, 3, 4], header);
 
 test('real Spitzer qualifier routes fixture transport, reducer, comparison and qualification entirely into the run', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'spitzer-run-wiring-')), run = resolve(root, 'run');
-  const before = await readdir(USER_ROOT, { recursive: true });
+  const before = await userRootEntries();
   let downloads = 0;
   const fetcher = mock.method(globalThis, 'fetch', async (url: string | URL | Request) => {
     const address = new URL(typeof url === 'string' ? url : url instanceof URL ? url.href : url.url);
@@ -73,7 +73,7 @@ test('real Spitzer qualifier routes fixture transport, reducer, comparison and q
     const files = await readdir(run, { recursive: true });
     assert.ok(files.includes(`programs/spitzer/${id}.json`));
     assert.ok(files.some(path => path.endsWith('remosaic.reproduction.json')));
-    assert.deepEqual(await readdir(USER_ROOT, { recursive: true }), before, 'No science files or generated records in the user root');
+    assert.deepEqual(await userRootEntries(), before, 'No science files or generated records in the user root');
     assert.deepEqual(await readdir(root), ['run'], 'No workspace output or ledger writes');
     assert.ok((await realpath(result.product)).startsWith(await realpath(run)));
   } finally { fetcher.mock.restore(); await rm(root, { recursive: true, force: true }); }
@@ -82,7 +82,7 @@ test('real Spitzer qualifier routes fixture transport, reducer, comparison and q
 test('CLI source qualification copies local inputs and generated records to its run without changing library defaults', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'source-run-wiring-')), run = resolve(root, 'run'), source = resolve(root, 'src/objects/fixture/source');
   await mkdir(source, { recursive: true });
-  const initialUser = await readdir(USER_ROOT, { recursive: true });
+  const initialUser = await userRootEntries();
   try {
     await writeFile(resolve(source, 'image.fits'), bytes);
     await writeFile(resolve(source, 'manifest.json'), JSON.stringify({ inputs: [{ id: 'science', path: 'image.fits', origin: 'https://example.org/image.fits' }] }));
@@ -94,6 +94,6 @@ test('CLI source qualification copies local inputs and generated records to its 
     assert.ok(qualified); assert.equal(qualified.facts.verified, true);
     assert.deepEqual(await readdir(root), ['run', 'src']);
     assert.deepEqual((await readdir(source)).sort(), ['image.fits', 'manifest.json', 'observations.json']);
-    assert.deepEqual(await readdir(USER_ROOT, { recursive: true }), initialUser);
+    assert.deepEqual(await userRootEntries(), initialUser);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

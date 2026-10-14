@@ -8,6 +8,10 @@ import { USER_ROOT, withInstallLock, writeInstalledMarker } from '@cssearth/tele
 import { listManagedEnvironments, removeManagedEnvironment } from './managed-environments.mts';
 import { main, type CliIo } from '../cli.mts';
 
+// These cases install and remove fixture environments, so they replace the shared toolchain home with a private one.
+await rm(resolve(USER_ROOT, 'toolchains'), { force: true });
+await mkdir(resolve(USER_ROOT, 'toolchains'));
+
 async function installed(user: string, name = 'astroquery/packages-fixture') {
   const folder = resolve(user, 'toolchains', name);
   await mkdir(resolve(folder, 'env/bin'), { recursive: true });

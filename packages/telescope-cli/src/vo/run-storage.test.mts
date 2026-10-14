@@ -1,4 +1,4 @@
-import '../test-support/index.mts';
+import { userRootEntries } from '../test-support/index.mts';
 import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -21,7 +21,7 @@ mock.module('@cssearth/telescope-core/node', { namedExports: { ...core, astroque
 const { acquireVoProduct, acquisitionIdentity, acquisitionName } = await import('./access.mts');
 test('the VO owner acquires and reuses exactly one science file inside a run; user root stays empty', async () => {
   const cwd = await mkdtemp(resolve(tmpdir(), 'vo-run-storage-')), directory = resolve(cwd, 'telescope-runs/betelgeuse-fixture/pick-1');
-  const initial = await readdir(core.USER_ROOT, { recursive: true });
+  const initial = await userRootEntries();
   try {
     const metadata = resolve(cwd, 'metadata.xml'); await writeFile(metadata, '<VOTABLE/>');
     const observation: DiscoveredObservation = { key: 'fixture', snapshot: 'fixture', service: 'https://archive.example/tap', table: 'ivoa.obscore',
@@ -41,7 +41,7 @@ test('the VO owner acquires and reuses exactly one science file inside a run; us
     assert.equal(transfers, 1);
     const names = await readdir(directory, { recursive: true });
     assert.equal((await Promise.all(names.filter(name => name.endsWith('.fits')).map(async name => (await stat(resolve(directory,name))).isFile()))).filter(Boolean).length, 1);
-    assert.deepEqual(await readdir(core.USER_ROOT, { recursive: true }), initial);
+    assert.deepEqual(await userRootEntries(), initial);
     await writeFile(first.file!, fits.subarray(0, 40));
     await assert.rejects(core.withAcquisitionDirectory(directory, () => acquireVoProduct(cwd, spec)), /files changed/u);
     assert.equal(transfers, 1, 'A completed record with altered bytes is refused before transport');
