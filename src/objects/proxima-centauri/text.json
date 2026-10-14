@@ -57,6 +57,20 @@
       "title": "Color + brightness, Dec 2016 to Oct 2017",
       "detail": "MEarth season 2017",
       "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
+    },
+    "habitable-zone": {
+      "title": "Conservative and optimistic zones",
+      "detail": "Calculated, not observed",
+      "summary": "Where a planet with enough air could keep liquid water, as calculated. Darker: conservative limits; lighter: optimistic.",
+      "sources": [
+        {
+          "catalogueId": "kane-2012-habitable-zone-gallery",
+          "url": "https://hzgallery.org/table.html",
+          "label": "Habitable Zone Gallery",
+          "checked": "2026-10-14",
+          "locator": "Rows of Proxima Cen: the star's four habitable zone distances in au"
+        }
+      ]
     }
   }
 }

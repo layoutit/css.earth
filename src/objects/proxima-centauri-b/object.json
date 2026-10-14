@@ -38,6 +38,26 @@
               "id": "climate-model",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "static-ocean-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "early-earth-air-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "earth-land-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "model-wind",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

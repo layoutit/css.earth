@@ -87,7 +87,7 @@
         "surface": "proxima-centauri-b-surface-climate-model@2x.webp",
         "poles": "proxima-centauri-b-poles-climate-model@2x.webp",
         "falseColor": true,
-        "notes": "Surface air temperature from Del Genio et al. (2019), ROCKE-3D control run: a model, not an observation. Assumes a 0.984-bar nitrogen atmosphere with 376 ppm carbon dioxide, a 900 m deep global ocean of salinity 35.4 psu, and synchronous rotation (11.2 days). No atmosphere, ocean or surface map has been detected on Proxima b. This is the released mean ANN3900-3999; the file reports an averaging interval of 100 model days. Orbital orientation is unknown; the displayed 47° tilt is assumed. False color spans -70 to 10 °C. Shadows darken the night half visually.",
+        "notes": "Surface air temperature from Del Genio et al. (2019), ROCKE-3D control run: a model, not an observation. Assumes a 0.984-bar nitrogen atmosphere with 376 ppm carbon dioxide, a 900 m deep global ocean of salinity 35.4 psu, and synchronous rotation (11.2 days). No atmosphere, ocean or surface map has been detected on Proxima b. This is the released mean ANN3900-3999; the file reports an averaging interval of 100 model days. Orbital orientation is unknown; the displayed 47° tilt is assumed. False color spans -100 to 40 °C, the scale the other temperature models share. Shadows darken the night half visually.",
         "source": {
           "id": "proxima-centauri-b-climate-model-simulation",
           "path": "../manifest.json",
@@ -97,9 +97,9 @@
           "kind": "scale",
           "title": "Surface air temperature",
           "labels": [
-            "-70",
+            "-100",
             "-30",
-            "10"
+            "40"
           ],
           "meta": "°C",
           "sourceUrl": "https://doi.org/10.1089/ast.2017.1760",
@@ -132,9 +132,249 @@
               ]
             ],
             "labels": [
-              "-70",
+              "-100",
               "-30",
-              "10"
+              "40"
+            ]
+          }
+        }
+      },
+      {
+        "id": "static-ocean-model",
+        "label": "Static ocean model",
+        "qualification": "Model · ROCKE-3D · Del Genio et al. (2019) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-static-ocean-model.webp",
+        "surface": "proxima-centauri-b-surface-static-ocean-model@2x.webp",
+        "poles": "proxima-centauri-b-poles-static-ocean-model@2x.webp",
+        "falseColor": true,
+        "notes": "Surface air temperature from Del Genio et al. (2019), ROCKE-3D experiment Thermo: a model, not an observation. Like the control run, a 0.984-bar nitrogen atmosphere with 376 ppm carbon dioxide and synchronous rotation, but over a 100 m ocean that carries no heat. The paper notes that this \"eyeball\" of warm water under the star comes from leaving out ocean heat transport, a process that operates in nature. This is the released mean ANN3900-3999; the file reports an averaging interval of 100 model days. No atmosphere, ocean or surface map has been detected on Proxima b. Orbital orientation is unknown; the displayed 47° tilt is assumed. False color spans -100 to 40 °C. Shadows darken the night half visually.",
+        "source": {
+          "id": "proxima-centauri-b-static-ocean-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1089/ast.2017.1760"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface air temperature",
+          "labels": [
+            "-100",
+            "-30",
+            "40"
+          ],
+          "meta": "°C",
+          "sourceUrl": "https://doi.org/10.1089/ast.2017.1760",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "-100",
+              "-30",
+              "40"
+            ]
+          }
+        }
+      },
+      {
+        "id": "early-earth-air-model",
+        "label": "Early-Earth air model",
+        "qualification": "Model · ROCKE-3D · Del Genio et al. (2019) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-early-earth-air-model.webp",
+        "surface": "proxima-centauri-b-surface-early-earth-air-model@2x.webp",
+        "poles": "proxima-centauri-b-poles-early-earth-air-model@2x.webp",
+        "falseColor": true,
+        "notes": "Surface air temperature from Del Genio et al. (2019), ROCKE-3D experiment Archean High: a model, not an observation. Like the control run, but with 10,000 ppm carbon dioxide and 2,000 ppm methane, the gases Charnay et al. (2013) give early Earth in their Case B. This is the released mean ANN5500-5999; the file reports an averaging interval of 500 model days. No atmosphere, ocean or surface map has been detected on Proxima b. Orbital orientation is unknown; the displayed 47° tilt is assumed. False color spans -100 to 40 °C. Shadows darken the night half visually.",
+        "source": {
+          "id": "proxima-centauri-b-early-earth-air-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1089/ast.2017.1760"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface air temperature",
+          "labels": [
+            "-100",
+            "-30",
+            "40"
+          ],
+          "meta": "°C",
+          "sourceUrl": "https://doi.org/10.1089/ast.2017.1760",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "-100",
+              "-30",
+              "40"
+            ]
+          }
+        }
+      },
+      {
+        "id": "earth-land-model",
+        "label": "Earth-land model",
+        "qualification": "Model · ROCKE-3D · Del Genio et al. (2019) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-earth-land-model.webp",
+        "surface": "proxima-centauri-b-surface-earth-land-model@2x.webp",
+        "poles": "proxima-centauri-b-poles-earth-land-model@2x.webp",
+        "falseColor": true,
+        "notes": "Surface air temperature from Del Genio et al. (2019), ROCKE-3D experiment Day-Land: a model, not an observation. Like the control run, but with Earth's land and oceans, the point under the star at 30° E over Africa and Eurasia, and the land as bright as desert. Proxima b's surface is unknown; Earth's continents are a test of what land does, not a map of the planet. The map's longitudes are Earth's turned so that the point under the star is at 0. This is the released mean ANN14900-14999; the file reports an averaging interval of 100 model days. No atmosphere, ocean or surface map has been detected on Proxima b. Orbital orientation is unknown; the displayed 47° tilt is assumed. False color spans -100 to 40 °C. Shadows darken the night half visually.",
+        "source": {
+          "id": "proxima-centauri-b-earth-land-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1089/ast.2017.1760"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface air temperature",
+          "labels": [
+            "-100",
+            "-30",
+            "40"
+          ],
+          "meta": "°C",
+          "sourceUrl": "https://doi.org/10.1089/ast.2017.1760",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "-100",
+              "-30",
+              "40"
+            ]
+          }
+        }
+      },
+      {
+        "id": "model-wind",
+        "label": "Model wind",
+        "qualification": "Model · ROCKE-3D · Del Genio et al. (2019) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-model-wind.webp",
+        "surface": "proxima-centauri-b-surface-model-wind@2x.webp",
+        "poles": "proxima-centauri-b-poles-model-wind@2x.webp",
+        "falseColor": true,
+        "notes": "Surface wind speed from Del Genio et al. (2019), ROCKE-3D control run: a model, not an observation. Same run as the Climate model dataset: a 0.984-bar nitrogen atmosphere with 376 ppm carbon dioxide, a 900 m deep global ocean and synchronous rotation. The paper describes surface winds converging toward the point under the star. This is the released mean ANN3900-3999; the file reports an averaging interval of 100 model days. No atmosphere, ocean or surface map has been detected on Proxima b. Orbital orientation is unknown; the displayed 47° tilt is assumed. False color spans 0 to 15 m/s. Shadows darken the night half visually.",
+        "source": {
+          "id": "proxima-centauri-b-climate-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1089/ast.2017.1760"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface wind speed",
+          "labels": [
+            "0",
+            "7.5",
+            "15"
+          ],
+          "meta": "m/s",
+          "sourceUrl": "https://doi.org/10.1089/ast.2017.1760",
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "7.5",
+              "15"
             ]
           }
         }

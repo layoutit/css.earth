@@ -50,6 +50,26 @@
       "title": "ROCKE-3D control",
       "detail": "ROCKE-3D control · °C",
       "summary": "Simulated surface air temperature with an assumed ocean and atmosphere. Neither is detected; orbital orientation is unknown."
+    },
+    "static-ocean-model": {
+      "title": "ROCKE-3D, no ocean currents",
+      "detail": "ROCKE-3D Thermo · °C",
+      "summary": "Like the control run but the ocean carries no heat. Warm water stays under the star, the night side freezes."
+    },
+    "early-earth-air-model": {
+      "title": "ROCKE-3D, Archean High",
+      "detail": "ROCKE-3D Archean · °C",
+      "summary": "Like the control run with early Earth's greenhouse gases: 1% carbon dioxide, 0.2% methane. Warmer, with less ice."
+    },
+    "earth-land-model": {
+      "title": "ROCKE-3D, Earth's continents",
+      "detail": "ROCKE-3D Day-Land · °C",
+      "summary": "Like the control run but with Earth's continents, Africa under the star. Land, not Proxima b's, is assumed."
+    },
+    "model-wind": {
+      "title": "ROCKE-3D control, wind",
+      "detail": "ROCKE-3D control · m/s",
+      "summary": "Surface wind speed in the control run, in false color. Winds blow in toward the point under the star."
     }
   }
 }
