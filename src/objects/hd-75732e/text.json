@@ -51,6 +51,16 @@
       "title": "NASA artist's texture",
       "detail": "Illustration, not observed",
       "summary": "NASA's illustrated surface from its 3D model. None of it was observed, and its longitudes are arbitrary."
+    },
+    "climate-model": {
+      "title": "Isca simulation",
+      "detail": "Published simulation",
+      "summary": "Air temperature at 5 bar in a published model, in false color. One scenario, not a measurement; gray caps lack samples."
+    },
+    "steam-model": {
+      "title": "Isca simulation",
+      "detail": "Published simulation",
+      "summary": "Air temperature at 0.05 bar in a published model, in false color. One scenario, not a measurement; gray caps lack samples."
     }
   }
 }

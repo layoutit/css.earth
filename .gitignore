@@ -431,6 +431,8 @@ src/objects/wasp-94-a-b/source/science/mukherjee-2025/WASP-94Ab_GCM.nc
 src/objects/trappist-1d/source/science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc
 # The same release's run 21, of TRAPPIST-1 e (6.7 MB); restored from Zenodo (src/objects/trappist-1e/source/manifest.json).
 src/objects/trappist-1e/source/science/way-2025/21_ANN4500-4999.aijTrappist1e_04.nc
+# 55 Cnc e's two Isca runs (4.0 and 1.0 MB): members of Zhan & Koll (2026)'s 48.6 GB ZIP release, restored from Zenodo by byte range (src/objects/hd-75732e/source/manifest.json).
+src/objects/hd-75732e/source/science/zhan-2026/*.npy
 src/objects/hd-189733b/source/illustration/HD_189733_b.jpg
 src/objects/hd-29615/source/science/willamo-2022/*.dat
 src/objects/hd-35296/source/science/willamo-2022/*.dat

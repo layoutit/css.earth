@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "thermal",
+    "defaultDataset": "climate-model",
     "controls": [
       {
         "id": "thermal",
@@ -80,6 +80,128 @@
         },
         "falseColor": false,
         "notes": "NASA's illustration of 55 Cnc e, from its 3D model. Nobody has resolved this planet's disc, so none of the color or features in it was observed. Its longitudes are arbitrary."
+      },
+      {
+        "id": "climate-model",
+        "label": "Climate model",
+        "qualification": "Simulation · Isca · Zhan & Koll (2026) · False color",
+        "thumbnail": "hd-75732e-dataset-climate-model.webp",
+        "surface": "hd-75732e-surface-climate-model@2x.webp",
+        "poles": "hd-75732e-poles-climate-model@2x.webp",
+        "source": {
+          "id": "hd-75732e-climate-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2606.12116"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Air temperature at 5 bar",
+          "labels": [
+            "500",
+            "2000",
+            "3500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "500",
+              "2000",
+              "3500"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2606.12116"
+        },
+        "notes": "Air temperature at 5 bar of 55 Cnc e in the Isca simulation of Zhan & Koll (2026): a model, not a measurement. The run assumes a cloud-free atmosphere of pure carbon dioxide, 10 bar at the surface, on a planet that keeps one face to its star. The map is the run's long-term mean at half the surface pressure, the level the paper's Figure 1 draws. Nobody has detected a 10-bar carbon dioxide atmosphere on 55 Cnc e. Webb's eclipse spectra show an atmosphere of carbon monoxide or carbon dioxide (Hu et al. 2024); this paper finds they fit thick, carbon-dioxide-rich ones like this best. Gray caps: no released grid samples beyond 87.9° north or south. The false color runs from 500 to 3,500 K; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "steam-model",
+        "label": "Steam model",
+        "qualification": "Simulation · Isca · Zhan & Koll (2026) · False color",
+        "thumbnail": "hd-75732e-dataset-steam-model.webp",
+        "surface": "hd-75732e-surface-steam-model@2x.webp",
+        "poles": "hd-75732e-poles-steam-model@2x.webp",
+        "source": {
+          "id": "hd-75732e-steam-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2606.12116"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Air temperature at 0.05 bar",
+          "labels": [
+            "500",
+            "2000",
+            "3500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "500",
+              "2000",
+              "3500"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2606.12116"
+        },
+        "notes": "Air temperature at 0.05 bar of 55 Cnc e in the Isca simulation of Zhan & Koll (2026): a model, not a measurement. The run assumes a cloud-free atmosphere of pure water vapor, 10 bar at the surface, on a planet that keeps one face to its star. The map is the run's long-term mean at 0.005 of the surface pressure, the level the paper's Figure 1 draws, since the deep air is all one temperature. Nobody has detected a water vapor atmosphere on 55 Cnc e. The paper finds this case fits Webb's eclipse spectra only at the edge of its cutoff, worse than carbon-dioxide-rich ones. Gray caps: no released grid samples beyond 85.8° north or south. The false color runs from 500 to 3,500 K; it is not what an eye would see. With shadows on, the star's light darkens the night half."
       }
     ]
   },

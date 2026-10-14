@@ -36,6 +36,7 @@ import { loadPdsBinnedTable } from './pds/pds-binned-table.ts';
 import { loadPdsEqualAreaTable } from './pds/pds-equal-area-table.ts';
 import { loadLonLatSliceTable } from './lonlat-slice-table.ts';
 import { loadNetcdfLonLatField } from './netcdf/netcdf-lonlat-field.ts';
+import { loadNpyLonLatField } from './numpy/npy-lonlat-field.ts';
 
 /** A GeoTIFF that declares NaN as its no-data value matches a grid recorded without one: NaN cells are non-finite and
  * are already skipped as missing. */
@@ -179,6 +180,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (dataset.format === 'latitude-belt-map') return loadLatitudeBeltMap(root, value);
   if (dataset.format === 'lonlat-slice-table') return loadLonLatSliceTable(root, value);
   if (dataset.format === 'netcdf-lonlat-field') return loadNetcdfLonLatField(root, value);
+  if (dataset.format === 'npy-lonlat-field') return loadNpyLonLatField(root, value);
   if (dataset.format === 'pds-binned-table') return loadPdsBinnedTable(root, value);
   if (dataset.format === 'pds-equal-area-table') return loadPdsEqualAreaTable(root, value);
   if (dataset.format === 'bare-rock-fit') return loadBareRockFit(root, value);

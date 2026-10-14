@@ -39,6 +39,100 @@
         "kind": "glb-base-color",
         "model": "illustration/55_Cancri_e_1_24364.glb"
       }
+    },
+    {
+      "id": "climate-model",
+      "output": "hd-75732e-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-75732e-dataset-{id}.webp",
+      "source": "science/zhan-2026/55cnce_1e6pa_1e0co2.npy",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "climate-model",
+        "label": "Climate model",
+        "format": "npy-lonlat-field",
+        "path": "science/zhan-2026/55cnce_1e6pa_1e0co2.npy",
+        "variable": "t",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "pfull": 29
+        },
+        "sourceUnits": "K",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "climate-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 500,
+        "maximum": 3500,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "500",
+          "2000",
+          "3500"
+        ],
+        "description": "Simulated air temperature at 5 bar from the Isca model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 87.9° north or south.",
+        "title": "Climate model · Isca simulation",
+        "sourceUrl": "https://arxiv.org/abs/2606.12116"
+      }
+    },
+    {
+      "id": "steam-model",
+      "output": "hd-75732e-surface-{id}{suffix}.webp",
+      "thumbnail": "hd-75732e-dataset-{id}.webp",
+      "source": "science/zhan-2026/55cnce_1e6pa_1e0h2o.npy",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "steam-model",
+        "label": "Steam model",
+        "format": "npy-lonlat-field",
+        "path": "science/zhan-2026/55cnce_1e6pa_1e0h2o.npy",
+        "variable": "t",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "pfull": 13
+        },
+        "sourceUnits": "K",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "steam-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 500,
+        "maximum": 3500,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "500",
+          "2000",
+          "3500"
+        ],
+        "description": "Simulated air temperature at 0.05 bar from the Isca model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 85.8° north or south.",
+        "title": "Steam model · Isca simulation",
+        "sourceUrl": "https://arxiv.org/abs/2606.12116"
+      }
     }
   ],
   "lighting": {

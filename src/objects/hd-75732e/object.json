@@ -38,6 +38,16 @@
               "id": "illustration",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "climate-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "steam-model",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
