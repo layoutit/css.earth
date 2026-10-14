@@ -36,9 +36,8 @@ export default defineConfig({
   devToolbar: { enabled: false },
   integrations: [{ name: 'prepared-context-availability', hooks: {
     'astro:config:setup': async ({ command, logger, updateConfig }) => {
-      // Deploy builds only (CSSEARTH_ALLOW_MISSING_ASSETS=1, set by .github/workflows/deploy.yml): tolerate a
-      // context package that setup:assets deliberately left missing after a 404 from R2, instead of failing the
-      // whole build over one object. CI and local builds never set this flag and stay strict.
+      // An explicit CSSEARTH_ALLOW_MISSING_ASSETS=1 tolerates a context package absent after an R2 404.
+      // Deploy explicitly sets 0; default CI and local builds also stay strict.
       const allowMissing = process.env.CSSEARTH_ALLOW_MISSING_ASSETS === '1';
       // An asset-origin build deliberately leaves site/public/scenes absent. Its tracked manifest is the local,
       // content-addressed contract for previews already published to R2; all prepared package bytes stay strict.

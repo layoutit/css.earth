@@ -60,6 +60,19 @@ the `_headers` file into `dist`, answers one search and one page from the bundle
 asks search engines not to index it. [The wrangler configuration](../deploy/cloudflare/wrangler.jsonc), passed to wrangler
 with `--config`, names both targets; the site's own address is the `production` environment, which attaches `css.earth` and `www.css.earth` to the Worker.
 
+In **Actions → Deploy → Run workflow**, **Use incremental build** is unchecked by default. Checking it sets
+`CSSEARTH_INCREMENTAL_BUILD=1` and `CSSEARTH_STATIC_STYLES=1` for the build step, enabling Astro's experimental static
+page reuse and isolated stylesheet dependencies. Unchecked manual runs and automatic ENSO deployments explicitly set
+both flags to `0` and skip the static page cache. Pages are still built ahead of deployment; this adds no server rendering.
+
+The first checked run, or a cache miss, builds normally and seeds the next run. Later checked runs can reuse unchanged
+HTML and JSON responses; current version and source links are stamped after reuse. The Deploy-only cache contains only
+`output/incremental-build/astro-cache`, separate from PR benchmark caches, and is scoped to the exact branch, runner OS
+and architecture, Node 24, lockfile Git identity and cache format version. Each run attempt saves a new key after the
+existing asset, page-count and unchanged-source checks pass. Prepared banks, source data, `dist` and credentials are not
+cached there; R2 setup and validation still run. Changed input keys or an incompatible Astro manifest rebuild affected
+pages. Cache transfers and invalidation can outweigh page reuse, so this remains opt-in; no hosted speedup is promised.
+
 Tested on 2026-10-04 from Buenos Aires, against the Netlify site (then the standby host) the same day:
 
 | Request | Cloudflare preview | Netlify |
@@ -515,12 +528,19 @@ and reused page counts. Changed cases must emit their marker and differ from
 the seed; broad invalidation is a measured outcome. Unchanged input must reuse
 pages and match the seed. Cache API bytes and completed Actions save/restore
 step times are included with build, asset-check and Worker timings in the job
-summary and `INCREMENTAL_BENCHMARK_RESULT` log record. Transfer totals include
-snapshot overhead; the fresh total includes reset overhead. Seven full builds
-run across four jobs; hosted runtime remains to be measured. Runner image/CPU
-and tool versions identify relevant timing differences. No secrets, deployment,
-artifact upload, server rendering, or site publication participates, and the
-production deployment workflow is unchanged.
+summary and `INCREMENTAL_BENCHMARK_RESULT` log record. Each `coreSeconds` sums
+build, asset-check and Worker time; `totalSeconds` also includes generated-input
+reset and output-proof time. The reported warm transfer total adds share-cache
+snapshot time and the actual warm restore/save steps; the fresh total adds
+share-cache reset time. A production-path timing comparison uses warm core time
+plus those restore/save steps against fresh core time, excluding benchmark-only
+reset, proof and snapshot work. Seven full builds run across four jobs.
+[Hosted run 38485352668](https://github.com/layoutit/css.earth/actions/runs/38485352668)
+completed on the earlier benchmark head; its timings do not qualify this branch's
+integration with newer main changes. Runner image/CPU and tool versions identify
+relevant timing differences. No secrets, deployment,
+artifact upload, server rendering, or site publication participates. Production
+Deploy has its own default-off manual checkbox and separate static page cache, described above.
 
 `CSSEARTH_STATIC_STYLES=1` additionally isolates object stylesheet dependencies
 during production builds. Vite finishes its normal CSS transforms into a private
