@@ -11,7 +11,7 @@ import { loadTargetCatalogueSnapshot } from './observation-query/query.mts';
 import { prepareStandaloneData } from './test-support/standalone-data.test-support.mts';
 
 const checkout = requireWorkspace();
-test('explore paths, archive answers and every toolchain stay outside the checkout without a workspace', async t => {
+test('runs stay in cwd; archive answers and every toolchain stay central without a workspace', async t => {
   const directory = await mkdtemp(resolve(tmpdir(), 'telescope-outside-')), home = resolve(directory, 'user');
   const url = (file: string) => JSON.stringify(pathToFileURL(resolve(checkout, file)).href);
   const script = `
@@ -58,6 +58,11 @@ test('explore paths, archive answers and every toolchain stay outside the checko
     const pin = await leads.saveArchiveLeadEvidence(${JSON.stringify(checkout)}, 'https://example.org/TAP', 'test', []);
     assert.ok((await readdir(resolve(core.USER_ROOT, 'output/telescopes/archive-leads'))).includes(pin + '.json'));
     assert.throws(() => core.astroqueryToolchainSync(), /telescope toolchain install astroquery/);
+    const runs = await import(${url('packages/telescope-cli/src/run-directory.mts')});
+    const run = runs.runDirectory('Betelgeuse');
+    assert.equal(run.startsWith(resolve(process.cwd(), 'telescope-runs') + '/'), true);
+    assert.equal(run.startsWith(core.USER_ROOT + '/'), false);
+    assert.equal(run.startsWith(${JSON.stringify(checkout)} + '/'), false);
     const cliArguments = await import(${url('packages/telescope-cli/src/cli-arguments.mts')});
     for (const name of ['chandra', 'spitzer', 'hst', 'gemini', 'keck', 'naco', 'tess', 'mearth', 'espadons']) {
       assert.throws(() => core.assertInstalledMarker('/missing', { ...pins, id: name }, name,
@@ -118,7 +123,7 @@ test('explore paths, archive answers and every toolchain stay outside the checko
         assert.doesNotMatch(failure.reason.message, /pip install/);
       }
       assert.equal(failures[0].reason, failures[1].reason, 'one failed prerequisite is shared across archive clients');
-      assert.ok(!(await readdir(resolve(core.USER_ROOT, 'astroquery'), { recursive: true })).some(name => name.endsWith('env/bin/python')));
+      assert.ok(!(await readdir(resolve(core.USER_ROOT, 'astroquery'), { recursive: true }).catch(error => { if (error.code === 'ENOENT') return []; throw error; })).some(name => name.endsWith('env/bin/python')));
     } finally { process.env.PATH = compilerPath; }
     console.log('STANDALONE_PATHS_OK');
   `;

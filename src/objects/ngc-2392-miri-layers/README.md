@@ -1,6 +1,6 @@
 # NGC 2392, mid infrared
 
-ESA/Webb's mid-infrared picture of the planetary nebula NGC 2392, on the walls its spectra give. It is the NGC 2392 page's third dataset, beside [Hubble's photograph](../ngc-2392-layers/README.md) and [Webb's infrared picture](../ngc-2392-webb-layers/README.md), and it was written and baked by `telescope new-object` from one spec entry ([guide](../../../packages/telescope-cli/README.md)). **The walls are the Hubble dataset's: two shells from published expansion speeds, and 536 measured structures that say which side a feature is on. No speed is measured in the dust's light this picture shows, so every color takes the speeds measured in [N II].**
+ESA/Webb's mid-infrared picture of the planetary nebula NGC 2392, on the walls its spectra give. It is the NGC 2392 page's third dataset, beside [Hubble's photograph](../ngc-2392-layers/README.md) and [Webb's infrared picture](../ngc-2392-webb-layers/README.md), and it was written and baked by `telescope new-object` from one spec entry ([guide](../../../docs/telescope-commands.md)). **The walls are the Hubble dataset's: two shells from published expansion speeds, and 536 measured structures that say which side a feature is on. No speed is measured in the dust's light this picture shows, so every color takes the speeds measured in [N II].**
 
 ## Sources
 

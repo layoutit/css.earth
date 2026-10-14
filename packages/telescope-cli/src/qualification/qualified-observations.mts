@@ -5,7 +5,7 @@ import { parseNativeMetadata } from '../products/native-metadata.mts';
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve, isAbsolute } from 'node:path';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '@cssearth/core';
-import { fileSize, plainName, readProductRecord, sameRun, USER_ROOT } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, fileSize, plainName, readProductRecord, sameRun, USER_ROOT } from '@cssearth/telescope-core/node';
 import { assessInput, assessRequest, type ProductFacts } from '../requests/request-satisfaction.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
 import { parseResolutionEvidence, parseRegion } from '@cssearth/objects';
@@ -58,7 +58,8 @@ export function parseProductFacts(raw: unknown): ProductFacts {
 const qualificationName = (result: Pick<QualifiedObservation, 'telescope' | 'mode' | 'program' | 'observation'>): string =>
   `${plainName(result.telescope, result.mode, result.program, result.observation)}.json`;
 /** Qualifications share the user-owned store regardless of the caller's workspace. */
-export const qualificationDirectory = (target: string | null): string => target === null ? resolve(USER_ROOT, 'output/telescopes/vo/field-qualifications') : resolve(USER_ROOT, 'output/telescopes', target === '.' || target === '..' ? target.replaceAll('.', '%2E') : encodeURIComponent(target), 'qualifications');
+const centralQualificationDirectory = (target: string | null): string => target === null ? resolve(USER_ROOT, 'output/telescopes/vo/field-qualifications') : resolve(USER_ROOT, 'output/telescopes', target === '.' || target === '..' ? target.replaceAll('.', '%2E') : encodeURIComponent(target), 'qualifications');
+export const qualificationDirectory = (target: string | null): string => acquisitionDirectory() ? resolve(acquisitionDirectory()!, 'qualifications') : centralQualificationDirectory(target);
 export async function rememberQualification(root: string, result: QualifiedObservation): Promise<void> {
   const locations = Object.fromEntries((['product', 'receipt', 'productRecord', 'outputRoot'] as const).map(key => [key, inputPath(root, result[key])]));
   const facts = parseProductFacts(result.facts), bound = facts.angularResolutionBound;
@@ -78,11 +79,11 @@ export async function rememberQualification(root: string, result: QualifiedObser
   await mkdir(directory, { recursive: true }); await writeFile(resolve(directory, qualificationName(result)), text);
 }
 export async function loadQualifiedObservations(root: string, target: string | null): Promise<QualifiedObservation[]> {
-  const directory = qualificationDirectory(target);
-  const names = await readdir(directory, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
+  const directories = [...new Set([qualificationDirectory(target), centralQualificationDirectory(target)])];
+  const names = (await Promise.all(directories.map(async directory => (await readdir(directory, { recursive: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; })).filter(name => name.endsWith('.json')).map(name => resolve(directory,name))))).flat();
   const products: QualifiedObservation[] = [];
-  for (const name of names.filter(name => name.endsWith('.json')).sort()) {
-    const text = await readFile(resolve(directory, name), 'utf8');
+  for (const name of names.sort()) {
+    const text = await readFile(name, 'utf8');
     const value = requireRecord(JSON.parse(text), 'qualified observation');
     if (value.schema !== 'cssearth-qualified-observation@2' || value.target !== target) continue;
     let current = true;
@@ -106,7 +107,7 @@ export async function loadQualifiedObservations(root: string, target: string | n
       ...(facts.angularResolutionBound ? [resolve(root, facts.angularResolutionBound.receipt)] : []),
       ...(facts.resolutionEvidence ?? []).flatMap(evidence => evidence.receipt ? [resolve(root, evidence.receipt.file)] : [])];
     try {
-      if (resolve(root) !== resolve(fields.outputRoot!)) artifactFile(root, fields.outputRoot!);
+      if (resolve(root) !== resolve(fields.outputRoot!)) await admittedArtifactFile(root, fields.outputRoot!);
       for (const file of files) await admittedArtifactFile(root, file);
     } catch { continue; }
     if(!await verifyCalibrationDependencies(root,facts.calibrationDependencies ?? []))continue;

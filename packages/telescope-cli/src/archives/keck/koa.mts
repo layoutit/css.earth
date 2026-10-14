@@ -14,15 +14,13 @@
  *
  * and two downloads: getKOA/nph-getKOA?filehand= for a raw (level 0) file and KoaAPI/nph-dnloadL1data for a level 1 one.
  * Neither needs a cookie of ours; the service issues an anonymous one itself. */
-import { createWriteStream } from 'node:fs';
-import { mkdir, rename, rm, stat } from 'node:fs/promises';
+import { mkdir, stat } from 'node:fs/promises';
 import type { IncomingMessage } from 'node:http';
 import { request } from 'node:https';
 import { dirname, resolve } from 'node:path';
-import { pipeline } from 'node:stream/promises';
-import { Transform } from 'node:stream';
+import { Readable } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { tapAnswer } from '@cssearth/telescope-core/node';
+import { downloadHttpFile, tapAnswer } from '@cssearth/telescope-core/node';
 
 export const KOA = 'https://koa.ipac.caltech.edu';
 export const TAP_SYNC = `${KOA}/TAP`;
@@ -46,12 +44,13 @@ const TIMEOUT = 900_000;
  * bare newline instead of CRLF, which undici (and so `fetch`) refuses outright with "Missing expected CR after header value";
  * `insecureHTTPParser` accepts the line and is the only way to read these endpoints from Node. It relaxes nothing else: the
  * request is still HTTPS to koa.ipac.caltech.edu, and every response is checked below before it is used. */
-function koaRequest(url: string, body?: string): Promise<IncomingMessage> {
+function koaRequest(url: string, body?: string, headers?: HeadersInit): Promise<IncomingMessage> {
   const target = new URL(url);
   if (target.origin !== KOA) throw new Error(`${url} is not a KOA URL.`);
   return new Promise((ok, fail) => {
     const call = request(target, { method: body === undefined ? 'GET' : 'POST', insecureHTTPParser: true, timeout: TIMEOUT,
-      ...(body === undefined ? {} : { headers: { 'content-type': 'application/x-www-form-urlencoded', 'content-length': Buffer.byteLength(body) } }) },
+      headers: body === undefined ? Object.fromEntries(new Headers(headers)) :
+        { 'content-type': 'application/x-www-form-urlencoded', 'content-length': Buffer.byteLength(body) } },
       response => ok(response));
     call.on('error', fail);
     call.on('timeout', () => call.destroy(new Error(`KOA did not answer ${target.pathname} within ${TIMEOUT} ms.`)));
@@ -147,38 +146,33 @@ export async function koaProducts(instrument: string, koaid: string, filehand: s
 
 /** Fetch one archive file to `path` unless it is already there with the pinned size, streaming so a cube is never held whole.
  * KOA answers an unknown path with an HTML message and a 200, so the body is refused unless the service says it is a file. */
-export async function koaDownload(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ bytes: number }> {
+export async function koaDownload(url: string, path: string, bytes?: number, maxBytes?: number,
+  fetcher: (url: string, init: RequestInit) => Promise<Response> = koaFileFetch): Promise<{ bytes: number }> {
   const already = await stat(path).then(entry => entry.size, () => -1);
   if (maxBytes !== undefined && (!Number.isSafeInteger(maxBytes) || maxBytes < 1 || already > maxBytes)) throw new RangeError('KOA file exceeds the transfer bound.');
   if (already > 0 && (bytes === undefined || already === bytes)) return { bytes: already };
-  // A partial body is left in the `.part` file and overwritten on the next attempt, never renamed into place.
-  return koaRetry(() => fetchOnce(url, path, bytes, maxBytes));
+  if (already >= 0) throw new Error(`${path} already exists but is not the pinned ${String(bytes)} bytes. Choose a new destination.`);
+  await mkdir(dirname(path), { recursive: true });
+  const result = await downloadHttpFile(url, path, { byteLimit: maxBytes ?? Number.MAX_SAFE_INTEGER,
+    expectedBytes: bytes, fetcher, idleTimeoutMs: TIMEOUT, allowRawEncoding: true, validateResponse: response => {
+      if (/html|json/u.test(response.headers.get('content-type') ?? ''))
+        throw new Error(`KOA returned a message, not a file, for ${url}.`);
+    } }).catch((error: unknown) => {
+      if (error instanceof Error && error.message === 'Download byte limit exceeded.')
+        throw new RangeError('KOA file exceeds the transfer bound.', { cause: error });
+      throw error;
+    });
+  return { bytes: result.bytes };
 }
 
-async function fetchOnce(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ bytes: number }> {
-  await mkdir(dirname(path), { recursive: true });
-  const response = await koaRequest(url);
-  if (response.statusCode !== 200) { response.destroy(); throw new Error(`KOA refused ${url}: ${response.statusCode}`); }
-  // An unknown path is answered with an HTML message and a 200, so the type decides whether this is a file at all.
-  if (/html|json/u.test(response.headers['content-type'] ?? '')) {
-    const chunks: Buffer[] = [];
-    for await (const chunk of response) chunks.push(chunk as Buffer);
-    throw new Error(`KOA returned a message, not a file, for ${url}: ${Buffer.concat(chunks).toString('utf8').slice(0, 200)}`);
-  }
-  const partial = `${path}.part`;
-  const declared = Number(response.headers['content-length']);
-  if (maxBytes !== undefined && Number.isFinite(declared) && declared > maxBytes) { response.destroy(); throw new RangeError('KOA file exceeds the transfer bound.'); }
-  let received = 0;
-  const limit = new Transform({ transform(chunk: Buffer, _encoding, callback) {
-    received += chunk.length;
-    callback(maxBytes !== undefined && received > maxBytes ? new RangeError('KOA file exceeds the transfer bound.') : null, chunk);
-  } });
-  try { await pipeline(response, limit, createWriteStream(partial)); }
-  catch (error) { await rm(partial, { force: true }); throw error; }
-  await rename(partial, path);
-  const written = { bytes: (await stat(path)).size };
-  if (bytes !== undefined && written.bytes !== bytes) throw new Error(`${path} (${url}) is ${written.bytes} bytes, not the pinned ${bytes}.`);
-  return written;
+/** Preserve KOA's permissive header parser and encoded archive bytes for ranged retries. */
+async function koaFileFetch(url: string, init: RequestInit): Promise<Response> {
+  const response = await koaRequest(url, undefined, init.headers), headers = new Headers();
+  for (const [name, value] of Object.entries(response.headers)) if (value !== undefined)
+    headers.set(name, Array.isArray(value) ? value.join(', ') : value);
+  const status = response.statusCode ?? 500;
+  return new Response([204, 205, 304].includes(status) ? null :
+    Readable.toWeb(response) as ReadableStream<Uint8Array>, { status, headers });
 }
 
 export const koaCacheDir = (root: string, ...parts: readonly string[]) => resolve(root, ...parts);

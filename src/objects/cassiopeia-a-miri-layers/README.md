@@ -1,6 +1,6 @@
 # Cassiopeia A, mid infrared
 
-ESA/Webb's mid-infrared picture of the supernova remnant Cassiopeia A, as a shell. It is the Cassiopeia A page's second dataset, beside [Webb's near-infrared picture](../cassiopeia-a-layers/README.md), and it was written and baked by `telescope new-object` from one spec entry ([guide](../../../packages/telescope-cli/README.md)). **The depths are the near-infrared dataset's method, set for this picture's date: the forward shock's measured rim for the smooth light, and the ejecta where Spitzer's [Ar II] spectra measured them, with the outer knots and jets beyond the shock. The Green Monster, which two papers place in front of the remnant, is not laid there: no paper gives its outline as numbers.**
+ESA/Webb's mid-infrared picture of the supernova remnant Cassiopeia A, as a shell. It is the Cassiopeia A page's second dataset, beside [Webb's near-infrared picture](../cassiopeia-a-layers/README.md), and it was written and baked by `telescope new-object` from one spec entry ([guide](../../../docs/telescope-commands.md)). **The depths are the near-infrared dataset's method, set for this picture's date: the forward shock's measured rim for the smooth light, and the ejecta where Spitzer's [Ar II] spectra measured them, with the outer knots and jets beyond the shock. The Green Monster, which two papers place in front of the remnant, is not laid there: no paper gives its outline as numbers.**
 
 ## Sources
 

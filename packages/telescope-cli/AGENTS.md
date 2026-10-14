@@ -11,8 +11,7 @@ and exit codes unchanged unless that is the change. The command guide is [README
 
 This package is the layer above the libraries: it imports `@cssearth/telescope-core`, `@cssearth/bake` and the other packages, and
 `@cssearth/telescope-core` never imports it or `@cssearth/bake`. Code finds the checkout through `WORKSPACE` from
-`@cssearth/telescope-core/node`, never by counting `../` from its own location. Without a workspace the implementation and its shipped data are package-relative. `USER_ROOT` owns caches,
-toolchains and scratch; `requireWorkspace()` gates site work. Read-only inputs use `src/paths.mts` package ownership. The owners are:
+`@cssearth/telescope-core/node`, never by counting `../` from its own location. Without a workspace the implementation and its shipped data are package-relative. `USER_ROOT` owns reusable search and Python caches and managed toolchains. Requested runs, science files, JSON records and scratch belong to the current folder’s `telescope-runs/` or `--out`; `requireWorkspace()` gates site work. Read-only inputs use `src/paths.mts` package ownership. The owners are:
 - the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
   ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer, Juno, HST, JWST and IHW keep
   their programs, receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`,

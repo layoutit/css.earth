@@ -34,7 +34,13 @@ for (const id of ['naco', 'squeeze', 'rotir', 'pionier', 'amber', 'gravity', 'ma
   const install = () => id === 'naco' ? naco.installNacoToolchain() : interferometry.installToolchain(id);
   assert.equal(await install(), root, id + ': healthy marker reuses executable');
   await rm(executable);
-  await assert.rejects(install(), /repair reached (native build|download)/u, id + ': missing executable must enter repair');
+  await assert.rejects(install(), error => {
+    if (error instanceof core.DownloadInterruptedError) {
+      assert.match(error.message, /^Download interrupted at 0\.0 MB after 3 attempts\. Run the same command again to retry\.$/u);
+      assert.equal(error.rawMessage, 'repair reached download');
+    } else assert.equal(error.message, 'repair reached native build');
+    return true;
+  }, id + ': missing executable must enter repair');
   assert.equal(core.installedMarkerIssue(root, pins), 'missing', id + ': failed repair must invalidate marker');
   completed.push(id);
 }

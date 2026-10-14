@@ -1,9 +1,10 @@
 /** Standalone HTML is a view of verified exported values, never a new science reduction. */
+import { randomUUID } from 'node:crypto';
 import { readFile, mkdir, writeFile, rm } from 'node:fs/promises';
 import { resolve, dirname, relative } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
 import { OBJECT_SCHEMA, type ProductRecord } from '@cssearth/objects';
-import { writeProductRecord, WORKSPACE, sciencePackage } from '@cssearth/telescope-core/node';
+import { withAcquisitionDirectory, writeProductRecord, WORKSPACE, sciencePackage } from '@cssearth/telescope-core/node';
 import sharp from 'sharp';
 import { VERSION } from '../help.mts';
 import { CLI_PACKAGE_ROOT } from '../paths.mts';
@@ -20,6 +21,9 @@ import { COMPOSITE_VOLUME_PLANNED } from './html-limits.mts';
 import { deliveryDisplaySources, viewerMetadata } from './viewer-metadata.mts';
 
 export async function exportHtml(path: string, outputDirectory: string): Promise<{directory:string;html:string;receipt:string}> {
+  return withAcquisitionDirectory(outputDirectory,()=>exportHtmlInRun(path,outputDirectory));
+}
+async function exportHtmlInRun(path: string, outputDirectory: string): Promise<{directory:string;html:string;receipt:string}> {
   const raw=requireRecord(JSON.parse(await readFile(path,'utf8')));
   if(raw.schema===OBJECT_SCHEMA) {
     if(raw.type!=='density-volume'&&raw.type!=='point-field')throw new TypeError(COMPOSITE_VOLUME_PLANNED);
@@ -28,7 +32,11 @@ export async function exportHtml(path: string, outputDirectory: string): Promise
     catch(error){await rm(resolve(outputDirectory),{recursive:true,force:true});throw error;}
   }
   if(raw.schema==='cssearth-telescope-delivery@3') {
-    const choices=await listOutputs(path), images=choices.outputs.filter(choice=>choice.kind==='image'&&choice.available&&choice.shape?.length===2);
+    const inspection=`${resolve(outputDirectory)}.${randomUUID()}.inspection`;
+    let choices:Awaited<ReturnType<typeof listOutputs>>;
+    try{choices=await withAcquisitionDirectory(inspection,()=>listOutputs(path));}
+    finally{await rm(inspection,{recursive:true,force:true});}
+    const images=choices.outputs.filter(choice=>choice.kind==='image'&&choice.available&&choice.shape?.length===2);
     if(images.length!==1)throw new TypeError('HTML needs an unambiguous 2D image. Export an explicit image or spectrum selection first, then export its output.product.json with --output html.');
     const choice=images[0];
     const exported=await exportOutput(path,{kind:'image',hdu:choice.hdu!,...('structure' in choice&&choice.structure?{structure:choice.structure}:{})},outputDirectory);

@@ -1,6 +1,6 @@
 /** VO observations enter the public query directly, without a synthetic instrument ledger. */
 import { resolve } from 'node:path';
-import { astroquery, parseLimits, USER_ROOT } from '@cssearth/telescope-core/node';
+import { astroquery, parseLimits, USER_ROOT, DownloadCancelledError } from '@cssearth/telescope-core/node';
 import { assessRequest, type RequestSatisfaction, type ProductFacts } from '../requests/request-satisfaction.mts';
 import type { CapabilityRequest } from '../requests/recipe-request.mts';
 import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
@@ -45,10 +45,10 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
         facet = await faceter(root, profile, request, target?.names ?? [], limits);
         for (const instrument of facet.names) {
           try { snapshots.push(await discoverer(root, profile, { ...request, instrument }, target?.names ?? [], limits, INSTRUMENT_SAMPLE_LIMIT)); }
-          catch (error) { discoveryFailures.push(`${instrument}: ${error instanceof Error ? error.message : String(error)}`); }
+          catch (error) { if (error instanceof DownloadCancelledError) throw error; discoveryFailures.push(`${instrument}: ${error instanceof Error ? error.message : String(error)}`); }
         }
       } else snapshots = [await discoverer(root, profile, request, target?.names ?? [], limits)];
-    } catch (error) { discoveryFailures.push(error instanceof Error ? error.message : String(error)); }
+    } catch (error) { if (error instanceof DownloadCancelledError) throw error; discoveryFailures.push(error instanceof Error ? error.message : String(error)); }
     if (!snapshots.length && discoveryFailures.length) {
       services.push({ service: profile.label ?? profile.service, state: 'unavailable', scope: request.target ? 'Target-name query' : 'ICRS field query', reason: discoveryFailures.join('; ') });
       continue;
@@ -80,7 +80,7 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
             metadata.set(key, pending);
           }
           return pending;
-        }, policy, publishSnapshot).catch((error: unknown) => ({ products: [], issues: [String(error)] }));
+        }, policy, publishSnapshot).catch((error: unknown) => { if (error instanceof DownloadCancelledError) throw error; return { products: [], issues: [String(error)] }; });
         records.push({ observation, snapshot, ...plan });
       }
     }

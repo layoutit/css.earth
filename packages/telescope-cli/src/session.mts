@@ -1,10 +1,12 @@
 /** Saved requests connect the public query and qualifier. They never authorize stale archive actions. */
+import { assertWritableDirectory, runDirectory } from './run-directory.mts';
 import { inputPath } from './paths.mts';
+import { constants } from 'node:fs';
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { fileSize, readProductRecord, USER_ROOT } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, acquisitionWorkingDirectory, withAcquisitionDirectory, assertTransferNotCancelled, fileSize, readProductRecord, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRecord } from '@cssearth/objects';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection } from './observation-query/query.mts';
 import { type CapabilityAnswer, type QueryInputs } from './observation-query/query-contract.mts';
@@ -92,6 +94,14 @@ async function locked<T>(directory: string, run: () => Promise<T>): Promise<T> {
   try { await file.writeFile(JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() })); return await run(); }
   finally { await file.close(); await rm(path, { force: true }); }
 }
+/** Keep failed work for recovery; remove successful work before releasing the run's lock. */
+async function retrieved<T>(directory: string, run: () => Promise<T>): Promise<T> {
+  return locked(directory, async () => {
+    const result = await run(), working = acquisitionWorkingDirectory();
+    if (working) await rm(working, { recursive: true, force: true });
+    return result;
+  });
+}
 export async function saveSession(root: string, args: readonly string[], directory: string, api: SessionServices = services, progress?: (stage:string)=>void): Promise<Session> {
   const request = sessionRequest(args);
   return locked(directory, async () => {
@@ -99,6 +109,7 @@ export async function saveSession(root: string, args: readonly string[], directo
     try { await readFile(path); throw new Error(`${path} already exists. Use a new --out directory to preserve its numbered choices.`); }
     catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
     const inputs=await loadForRequest(api, root, request, undefined, progress);
+    assertTransferNotCancelled();
     progress?.('Evaluating candidates');
     const answer = queryCapabilities(request, inputs);
     progress?.('Saving query');
@@ -114,16 +125,14 @@ export interface ExplorationSession {
   readonly schema: typeof EXPLORATION_SCHEMA; readonly createdAt: string; readonly arguments: readonly string[];
   readonly target?: string; readonly choices: readonly ExplorationChoice[]; readonly answer: ExplorationAnswer;
 }
-const runDirectory = (target: string) => {
-  const stamp = new Date().toISOString().replace(/[-:.TZ]/gu, '');
-  const canonical = target.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '') || 'unknown-target';
-  return resolve(USER_ROOT, 'telescope-runs', `${canonical}-${stamp}-${randomUUID().slice(0, 8)}`);
-};
 /** Save the unfiltered archive exploration separately from a scientific query. */
 export async function saveExploration(root: string, args: readonly string[], directory?: string, api: SessionServices = services, progress?: (stage:string)=>void): Promise<ExplorationSession & { readonly directory: string }> {
-  const request = parseExplorationArguments(args), initial = await exploreForRequest(api, root, request, undefined, progress);
+  await assertWritableDirectory(directory);
+  const request = parseExplorationArguments(args);
+  const destination = directory ?? runDirectory(request.target ?? `field-${request.region?.raDegrees ?? request.footprint?.raDegrees}-${request.region?.decDegrees ?? request.footprint?.decDegrees}`);
+  const initial = await withAcquisitionDirectory(destination,()=>exploreForRequest(api, root, request, undefined, progress));
+  assertTransferNotCancelled();
   progress?.('Saving exploration');
-  const destination = directory ?? runDirectory(initial.target ?? 'field');
   return locked(destination, async () => {
     const path = resolve(destination, 'explore.json');
     try { await readFile(path); throw new Error(`${path} already exists. Use a new --out directory to preserve its numbered choices.`); }
@@ -177,7 +186,7 @@ async function resolveArtifact(root: string, answer: CapabilityAnswer, choice: C
 }
 
 /** Copy the complete native output set and its evidence, keeping relative paths in receipts resolvable. */
-async function exportArtifact(root: string, destination: string, artifact: Artifact, progress: (text: string) => void, reuse = false): Promise<{ files: ExportFile[]; record: ProductRecord }> {
+async function exportArtifact(root: string, destination: string, artifact: Artifact, progress: (text: string) => void, reuse = false, resident = false): Promise<{ files: ExportFile[]; record: ProductRecord }> {
   const record = await readProductRecord(artifact.record);
   if (!record) throw new Error('Qualification product record is missing.');
   const expected = new Map<string, FilePin>();
@@ -190,13 +199,13 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
   for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await fileSize(path));
   const files: ExportFile[] = [];
   for (const [file, pin] of expected) {
-    const original = await admittedArtifactFile(root, file);
+    const original = resident ? relativeFile(destination, await realpath(file)) : await admittedArtifactFile(root, file);
     const source = await fileSize(file).catch(() => null);
     if (source?.bytes !== pin.bytes) throw new Error(`Artifact ${file} is ${source ? `${source.bytes} bytes` : 'missing'}; its qualification records ${pin.bytes} bytes.`);
-    const path = `files/${original}`, target = resolve(destination, path);
+    const path = resident ? original : `files/${original}`, target = resolve(destination, path);
     await mkdir(dirname(target), { recursive: true });
     progress(`${reuse ? 'Verifying' : 'Copying'} ${basename(file)} (${(pin.bytes / 1e6).toFixed(1)} MB)`);
-    if (!reuse) await copyFile(file, target);
+    if (!reuse && !resident) await copyFile(file, target);
     relativeFile(await realpath(destination), await realpath(target));
     const copied = await fileSize(target).catch(() => null);
     if (copied?.bytes !== pin.bytes) throw new Error(`Delivered ${target} is ${copied ? `${copied.bytes} bytes` : 'missing'}; its qualification records ${pin.bytes} bytes for ${original}.`);
@@ -205,8 +214,31 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
   return { files, record };
 }
 
+async function residentDelivery(artifact: Artifact, resultPath: string, choice: string, context: DeliveryContext, observation: string, sourceQuestion: unknown, progress: (text: string) => void) {
+  const destination = await realpath(dirname(resultPath)), previous = await readFile(resultPath, 'utf8').catch(error => hasErrorCode(error, 'ENOENT') ? undefined : Promise.reject(error));
+  if (previous !== undefined) {
+    const old = requireRecord(JSON.parse(previous));
+    if (old.schema !== 'cssearth-telescope-delivery@3' || old.choice !== choice || canonical(old.context) !== canonical(context))
+      throw new Error('Saved result identity differs. Preserve it and use a new run directory.');
+  }
+  const { files, record } = await exportArtifact(destination, destination, artifact, progress, previous !== undefined, true);
+  const result = { schema: 'cssearth-telescope-delivery@3', choice, context, sourceQuestion, observation,
+    product: relativeFile(destination, artifact.file), outputRoot: resolve(destination) === resolve(artifact.outputRoot) ? '.' : relativeFile(destination, artifact.outputRoot),
+    receipt: relativeFile(destination, artifact.receipt), record: relativeFile(destination, artifact.record), facts: artifact.facts,
+    evidence: record.evidence, files, reused: previous !== undefined };
+  const temporary = `${resultPath}.${randomUUID()}.partial`;
+  try { await writeFile(temporary, `${JSON.stringify(result, null, 2)}\n`); await rename(temporary, resultPath); }
+  finally { await rm(temporary, { force: true }); }
+  return { resultPath, product: artifact.file, context, reused: previous !== undefined };
+}
+const residentArtifact = (artifact: Artifact): boolean => {
+  const directory = acquisitionDirectory();
+  if (!directory) return false;
+  try { relativeFile(directory, artifact.file); return true; } catch { return false; }
+};
+
 async function getScientificSession(root: string, directory: string, pick: number, progress: (text: string) => void = () => {}, api: SessionServices = services, options: { readonly offline?: boolean } = {}) {
-  return locked(directory, async () => {
+  return retrieved(directory, async () => {
     const saved = readSavedChoice(JSON.parse(await readFile(resolve(directory, 'query.json'), 'utf8')), pick), request = sessionRequest(saved.args);
     if (options.offline) {
       const resultPath = resolve(directory, `pick-${pick}`, 'result.json'), { delivery } = await import('./delivery/outputs.mts');
@@ -224,7 +256,7 @@ async function getScientificSession(root: string, directory: string, pick: numbe
       if (!choice.configuration) throw new Error('No current qualification action.');
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
       const qualification = { target: answer.target, telescope: choice.telescope, mode: choice.mode, observation: choice.observation, configuration: choice.configuration };
-      await locked(resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, qualification));
+      await locked(acquisitionDirectory() ?? resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, qualification));
       inputs = choice.acquisitionKey ? { ...inputs, qualifiedProducts: await loadQualifiedObservations(root, answer.target) } : await loadForRequest(api, root, { ...request, target: answer.target });
       answer = queryCapabilities(request, inputs);
       choice = observationChoices(answer).find(entry => choiceKey(entry) === saved.key);
@@ -232,6 +264,10 @@ async function getScientificSession(root: string, directory: string, pick: numbe
     }
     const artifact = await resolveArtifact(root, answer, choice), satisfaction = assessRequest(answer.request, artifact.facts);
     const resultPath = resolve(directory, `pick-${pick}`, 'result.json');
+    if (residentArtifact(artifact)) {
+      const context: DeliveryContext = { kind: 'scientific-request', request: answer.request, assessment: satisfaction };
+      return { ...await residentDelivery(artifact, resultPath, saved.key, context, choice.observation, sourceQuestionFromRequest(answer.request), progress), satisfaction };
+    }
     const previous = await readFile(resultPath, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
     if (previous !== undefined) {
       const old = requireRecord(JSON.parse(previous), 'previous result');
@@ -306,7 +342,7 @@ export function savedChoice(choices: readonly ExplorationChoice[], saved: { read
   return matches.length === 1 ? matches[0] : undefined;
 }
 async function getExplorationSession(root: string, directory: string, pick: number, progress: (text: string) => void = () => {}, api: SessionServices = services, options: { readonly offline?: boolean } = {}) {
-  return locked(directory, async () => {
+  return retrieved(directory, async () => {
     const saved = readExplorationChoice(JSON.parse(await readFile(resolve(directory, 'explore.json'), 'utf8')), pick), request = parseExplorationArguments(saved.args);
     const resultPath = resolve(directory, `pick-${pick}`, 'result.json');
     if (options.offline) {
@@ -326,12 +362,13 @@ async function getExplorationSession(root: string, directory: string, pick: numb
       if (!choice.configuration) throw new Error('No current qualification action.');
       const qualifying = choice;
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
-      await locked(resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, { target: answer.target ?? qualifying.archiveTargetName ?? null, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
+      await locked(acquisitionDirectory() ?? resolve(USER_ROOT, 'output/telescopes'), () => api.qualify(root, { target: answer.target ?? qualifying.archiveTargetName ?? null, telescope: qualifying.archiveService ?? qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
       answer = await exploreForRequest(api, root, { ...request, ...answer.request.skyTarget ? { skyTarget: answer.request.skyTarget } : {} }, saved.observation, undefined, archiveSelection);
       choice = savedChoice(answer.choices, saved);
       if (!choice || choice.state !== 'ready') throw new Error('Qualification did not produce a selectable artifact for the original exploration. Explore again for the current result.');
     }
     const artifact = await resolveExplorationArtifact(root, choice), context = explorationContext(answer.target ?? choice.archiveTargetName ?? null, saved.reference, answer.target === undefined ? answer.request.region ?? answer.request.footprint : undefined);
+    if (residentArtifact(artifact)) return { ...await residentDelivery(artifact, resultPath, saved.key, context, choice.observation, sourceQuestionFromRequest({ ...answer.request, target: answer.target ?? choice.archiveTargetName ?? null, archiveTargetName: choice.archiveTargetName }), progress), assessment: context.assessment };
     const previous = await readFile(resultPath, 'utf8').catch((error: unknown) => hasErrorCode(error, 'ENOENT') ? undefined : Promise.reject(error));
     const write = async (destination: string, reuse: boolean) => {
       const { files, record } = await exportArtifact(root, destination, artifact, progress, reuse), product = `files/${artifactFile(root, artifact.file)}`;
@@ -359,10 +396,20 @@ async function getExplorationSession(root: string, directory: string, pick: numb
 }
 
 /** Read exactly one saved entrance. A directory cannot mix a scientific query and an exploration. */
-export async function getSession(root: string, directory: string, pick: number, progress: (text: string) => void = () => {}, api: SessionServices = services, options: { readonly offline?: boolean } = {}) {
+export async function getSession(root: string, directory: string, pick: number, progress: (text: string) => void = () => {}, api: SessionServices = services, options: { readonly offline?: boolean; readonly out?: string } = {}) {
+  await assertWritableDirectory(options.out ?? directory);
   const [query, explore] = await Promise.all([readFile(resolve(directory, 'query.json')).then(() => true).catch(error => hasErrorCode(error, 'ENOENT') ? false : Promise.reject(error)), readFile(resolve(directory, 'explore.json')).then(() => true).catch(error => hasErrorCode(error, 'ENOENT') ? false : Promise.reject(error))]);
   if (query === explore) throw new Error(query ? 'A saved directory cannot contain both query.json and explore.json.' : 'Expected query.json or explore.json.');
-  return query ? getScientificSession(root, directory, pick, progress, api, options) : getExplorationSession(root, directory, pick, progress, api, options);
+  if (options.out && resolve(options.out) !== resolve(directory)) {
+    const name = query ? 'query.json' : 'explore.json', source = resolve(directory, name), destination = resolve(options.out, name);
+    if (await readFile(resolve(options.out, query ? 'explore.json' : 'query.json')).then(() => true).catch(error => hasErrorCode(error, 'ENOENT') ? false : Promise.reject(error))) throw new Error('A saved directory cannot contain both query.json and explore.json.');
+    await mkdir(options.out, { recursive: true });
+    try { await copyFile(source, destination, constants.COPYFILE_EXCL); }
+    catch (error) { if (!hasErrorCode(error, 'EEXIST') || !Buffer.from(await readFile(source)).equals(await readFile(destination))) throw error; }
+    directory = options.out;
+  }
+  const run = await realpath(directory);
+  return withAcquisitionDirectory(resolve(run, `pick-${pick}`), () => query ? getScientificSession(root, directory, pick, progress, api, options) : getExplorationSession(root, directory, pick, progress, api, options), resolve(run, '.work', `pick-${pick}`));
 }
 
 /** Additive saved assessment for a selected family descriptor. It deliberately does not run the strict archive query. */

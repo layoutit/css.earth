@@ -14,12 +14,10 @@ import { verifyToolchainExecutables, installManagedToolchain, assertManagedPytho
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, cp, copyFile, link, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
-import { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { downloadToolchainArchive } from '../../toolchains/download.mts';
 
 const DESCRIPTOR = packagePath('src/archives/interferometry/toolchains.json');
 export const TOOLCHAIN_ROOT = resolve(USER_ROOT, 'output/toolchains');
@@ -54,11 +52,7 @@ async function fetchDownload(record: Record<string, unknown>, directory: string,
     const candidate = resolve(cache, name);
     if (await good(candidate)) { await rm(target, { force: true }); await link(candidate, target).catch(() => copyFile(candidate, target)); return target; }
   }
-  const response = await fetch(requireString(record.url));
-  if (!response.ok || !response.body) throw new Error(`${record.url} answered ${response.status}.`);
-  await pipeline(Readable.fromWeb(response.body as never), createWriteStream(target));
-  if (!await good(target)) throw new Error(`${name} (${String(record.url)}) is not its pinned ${bytes} bytes.`);
-  return target;
+  return downloadToolchainArchive(requireString(record.url), target, bytes);
 }
 
 export async function installToolchain(id: string, caches: readonly string[] = []) {

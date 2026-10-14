@@ -23,6 +23,8 @@ test('PICASO migration installs and verifies the destination rather than a compa
   const calls: { command: string; args: readonly string[] }[] = [];
   let extractProfiles = true;
   const mocks = [
+    mock.module(new URL('./http-download.ts', import.meta.url).href, { namedExports: {
+      downloadHttpFile: async (url: string, path: string) => { calls.push({ command: 'download', args: [url, path] }); put(path); } } }),
     mock.module(new URL('./paths/index.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot, WORKSPACE: undefined } }),
     mock.module(new URL('./toolchain/micromamba.ts', import.meta.url).href, { namedExports: {
       assertManagedPythonPlatform: () => {}, resolveMicromamba: async () => '/fixture/micromamba' } }),
@@ -47,7 +49,7 @@ test('PICASO migration installs and verifies the destination rather than a compa
     assert.equal(bobcatNodes().length, 1, 'the real reader resolves the compatible legacy installation');
     await t.test('fresh destination downloads and extracts profiles even when legacy profiles exist', async () => {
       assert.equal(await installPicaso(), destination);
-      assert.ok(calls.some(call => call.command === 'curl' && call.args.includes(resolve(destination, 'bobcat-2021/structures/structures.tar.gz'))));
+      assert.ok(calls.some(call => call.command === 'download' && call.args.includes(resolve(destination, 'bobcat-2021/structures/structures.tar.gz'))));
       assert.ok(calls.some(call => call.command === 'tar' && call.args.includes(resolve(destination, 'bobcat-2021/structures'))));
       assert.ok(existsSync(resolve(destination, 'bobcat-2021/structures', profile)));
       assert.ok(existsSync(resolve(destination, 'reference/config.json')));

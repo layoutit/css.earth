@@ -5,10 +5,10 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createServer } from 'node:http';
 import { execFileSync } from 'node:child_process';
-import { mkdtemp, readFile, rm, appendFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, appendFile, stat, readdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery, USER_ROOT } from '@cssearth/telescope-core/node';
+import { withAcquisitionDirectory, astroquery, USER_ROOT } from '@cssearth/telescope-core/node';
 import { saveSession, getSession, type SessionServices, saveExploration, sessionRequest } from '../session.mts';
 import { loadQualifiedObservations, qualificationDirectory } from '../qualification/qualified-observations.mts';
 import { delivery, listOutputs, exportOutput } from '../delivery/outputs.mts';
@@ -69,7 +69,8 @@ test('confirmed direct FITS table reaches F08 export through saved exploration a
     assert.equal(exportedOutputs.artifact, 'telescope-family-operation');
     assert.deepEqual(exportedOutputs.outputs, [], 'Exported tables have no HTML viewer.');
     assert.equal(exportedOutputs.terminal, true);
-    const qualified = await loadQualifiedObservations(root, target.id);
+    const qualified = await withAcquisitionDirectory(resolve(saved.directory,'pick-1'),()=>loadQualifiedObservations(root, target.id));
+    await assert.rejects(readdir(resolve(USER_ROOT,'output/telescopes/vo/acquired')),{code:'ENOENT'});
     assert.equal(qualified.length, 1);
     assert.equal(qualified[0]!.facts.angularResolutionArcsec, undefined);
     const wrongTarget = { ...plan.products[0]!, observation: { ...observation, rawTarget: 'Wrong target' } };
@@ -110,7 +111,9 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     assert.equal(data.record.schema, 'cssearth-telescope-delivery@3'); assert.equal(data.context.kind, 'scientific-request'); assert.equal(data.record.observation, observation.key);
     assert.equal(data.producing.evidence[0]!.kind, 'archive-retrieval-origin');
     assert.ok(data.files.some(f => f.path.endsWith('/acquisition.json'))); assert.ok(data.files.some(f => f.path.endsWith('.xml')));
-    assert.ok(data.files.some(f => f.path.endsWith('/archive.zip'))); assert.ok(data.files.some(f => f.path.endsWith('/members/labels/product.lbl')));
+    assert.ok(data.files.some(f => f.path.endsWith('/archive.zip')));
+    const acquired=resolve(directory,'pick-1',plan.products[0]!.key);
+    assert.equal((await stat(resolve(acquired,'science.fits'))).ino,(await stat(resolve(acquired,'members/science.fits'))).ino,'The decompressed member and raster alias share one copy of the science bytes'); assert.ok(data.files.some(f => f.path.endsWith('/members/labels/product.lbl')));
     assert.equal(typeof data.record.outputRoot, 'string');
     const originalDelivery = await readFile(result.resultPath, 'utf8');
     await writeFile(result.resultPath, JSON.stringify({ ...data.record, outputRoot: `${String(data.record.outputRoot)}/members` }));
@@ -122,8 +125,8 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     const replay = await getSession(root, directory, 1, () => {}, api, { offline: true });
     assert.equal(replay.replay, 'pinned-local-artifact');
     await assert.rejects(getSession(root, directory, 1, () => {}, api), /no longer available/u);
-    await appendFile(resolve(USER_ROOT, 'output/telescopes/vo/acquired', plan.products[0]!.key, 'science.fits'), 'changed');
-    await assert.rejects(qualifyVoProduct(root, plan.products[0]!, { allowedPrivateHosts: ['127.0.0.1'] }), /stale|changed/u);
+    await appendFile(resolve(directory,'pick-1',plan.products[0]!.key,'science.fits'), 'changed');
+    await assert.rejects(withAcquisitionDirectory(resolve(directory,'pick-1'),()=>qualifyVoProduct(root, plan.products[0]!, { allowedPrivateHosts: ['127.0.0.1'] })), /stale|changed/u);
     const metadata = data.files.find(f => f.path.endsWith('.xml'))!;
     await appendFile(resolve(data.directory, metadata.path), '\nchanged');
     await assert.rejects(delivery(result.resultPath), / is \d+ bytes; .* records \d+/u);
@@ -184,7 +187,7 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     assert.notEqual(firstScience.path, secondScience.path);
     // Deliveries name files by path and size (PR #531); the two copies are compared byte for byte.
     assert.ok((await readFile(resolve(firstDelivery.directory, firstScience.path))).equals(await readFile(resolve(secondDelivery.directory, secondScience.path))));
-    const qualifications = await readdir(qualificationDirectory(target.id), { recursive: true });
+    const qualifications = (await Promise.all([firstDirectory,secondDirectory].map(directory=>withAcquisitionDirectory(resolve(directory,'pick-1'),()=>readdir(qualificationDirectory(target.id),{recursive:true}))))).flat();
     assert.equal(qualifications.filter(name => name.endsWith('.json')).length, 2);
     assert.ok(requests.some(url => url.includes('CIRCLE=88.792938'))); assert.equal(requests.length, 2);
     const replay = await getSession(root, firstDirectory, 1, () => {}, api);

@@ -11,7 +11,7 @@ Read [AGENTS.md](../../AGENTS.md), the
 The skill explains source selection and preparation. The shared
 [image and surface guide](../../docs/surface-preparation.md) explains the tools,
 UV mapping and texture atlases. The contract explains source notes, credits,
-test reports and where to save them. For a telescope-derived view, start with the [telescope command guide](../../packages/telescope-cli/README.md#using-a-result-in-a-body-scene). Its qualified delivery and standalone sphere export do not automatically create a normal scene dataset.
+test reports and where to save them. For a telescope-derived view, start with the [telescope command guide](../../docs/telescope-commands.md#using-a-result-in-a-body-scene). Its qualified delivery and standalone sphere export do not automatically create a normal scene dataset.
 
 ## Package layout
 

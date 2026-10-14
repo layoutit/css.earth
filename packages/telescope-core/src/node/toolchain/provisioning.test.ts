@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { access, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test, { mock } from 'node:test';
 import * as paths from '../paths/index.js';
-import { installedMarkerIssue, readToolchainPins, type ToolchainPins } from './marker.js';
+import { installedMarkerIssue, readToolchainPins, writeInstalledMarker, type ToolchainPins } from './marker.js';
+import { DownloadCancelledError, withTransferConsent, type TransferConsent } from '../consent.js';
 
 test('the first async astronomy query installs missing pins and later queries reuse their exact marker', async () => {
   const userRoot = await mkdtemp(resolve(tmpdir(), 'astronomy-provisioning-')), calls: { command: string; args: readonly string[] }[] = [];
@@ -37,9 +38,21 @@ test('the first async astronomy query installs missing pins and later queries re
       } } }),
   ];
   try {
-    const { astroqueryToolchain, astroqueryToolchainSync } = await import('./toolchain.js');
+    const { astroqueryToolchain, astroqueryToolchainSync, findInstalledRoot, installAstroquery } = await import('./toolchain.js');
     assert.throws(() => astroqueryToolchainSync(), /not installed/u);
-    const first = await astroqueryToolchain(), second = await astroqueryToolchain();
+    await assert.rejects(withTransferConsent(async () => { throw new DownloadCancelledError(); }, () => astroqueryToolchain()), DownloadCancelledError);
+    assert.equal(resolutions, 0, 'refusal must precede micromamba resolution and installation');
+    assert.equal(calls.length, 0, 'refusal must precede even compiler and Python processes');
+    await assert.rejects(access(resolve(userRoot, 'toolchains')), { code: 'ENOENT' });
+    const legacy = resolve(userRoot, 'astroquery/packages-legacy');
+    mkdirSync(resolve(legacy, 'env/bin'), { recursive: true });
+    writeFileSync(resolve(legacy, 'env/bin/python'), '');
+    writeInstalledMarker(legacy, pins);
+    assert.equal(findInstalledRoot(resolve(userRoot, 'absent'), resolve(userRoot, 'toolchains/astroquery/packages-legacy'), pins), legacy,
+      'moving new installs into toolchains must keep the previous user-cache install readable');
+    await rm(legacy, { recursive: true });
+    const requests: TransferConsent[] = [];
+    const [first, second] = await withTransferConsent(async info => { requests.push(info); }, () => Promise.all([astroqueryToolchain(), astroqueryToolchain()]));
     assert.equal(first.python, second.python);
     assert.ok(first.python.startsWith(userRoot));
     assert.equal(resolutions, 1);
@@ -48,5 +61,17 @@ test('the first async astronomy query installs missing pins and later queries re
     assert.equal(calls.filter(call => call.command === '/test/selected-micromamba').length, 1);
     assert.ok(calls.some(call => call.args.includes(resolve(paths.TOOLCHAINS, 'requirements.lock'))));
     assert.equal(installedMarkerIssue(resolve(first.python, '../../..'), pins), null);
+    assert.equal(requests.length, 1, 'concurrent consumers request consent once for the shared install');
+    assert.equal(requests[0]?.kind, 'toolchain');
+    assert.equal(requests[0]?.bytes, 1_000_000_000);
+    assert.equal(requests[0]?.destination, resolve(first.python, '../../..'));
+    assert.ok(requests[0]?.kind === 'toolchain' && requests[0].packages.includes('Python'));
+    assert.ok(first.python.startsWith(resolve(userRoot, 'toolchains/astroquery') + '/'));
+    await withTransferConsent(async () => { throw new Error('installed or explicit setup must not ask'); }, async () => {
+      await astroqueryToolchain();
+      await rm(resolve(first.python, '../../..'), { recursive: true });
+      await installAstroquery();
+    });
+    assert.equal(resolutions, 2, 'explicit setup of missing pins performs a fresh install without consent');
   } finally { for (const replacement of mocks.reverse()) replacement.restore(); await rm(userRoot, { recursive: true, force: true }); }
 });

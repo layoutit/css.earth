@@ -1,5 +1,6 @@
 /** Install one pinned astronomy environment per user; keep every installed copy beneath the user root. */
 import { SourceBuildPrerequisiteError } from './source-build.js';
+import { requestTransferConsent } from '../consent.js';
 import { installManagedToolchain } from './environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
 import { resolveInstalledToolchain } from './resolver.js';
@@ -7,12 +8,12 @@ import { telescopePythonEnvironment, TOOLCHAINS, USER_ROOT } from '../paths/inde
 import { runToolchainProcess } from './process.js';
 import { accessSync, lstatSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, rm } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { installedMarkerIssue, readToolchainPins, type ToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
 
 export const ASTROQUERY_ROOT = resolve(USER_ROOT, 'output/toolchains/astroquery');
-export const ASTROQUERY_CACHE = resolve(USER_ROOT, 'astroquery');
+export const ASTROQUERY_CACHE = resolve(USER_ROOT, 'toolchains/astroquery');
 
 const descriptor = (): ToolchainPins => readToolchainPins('astroquery', 'toolchain.json');
 
@@ -85,11 +86,18 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
 
 /** Async consumers provision missing pins on first use; synchronous preparation keeps its explicit install boundary. */
 let firstInstall: Promise<string> | undefined;
+async function installImplicitAstroquery(): Promise<string> {
+  // A conservative estimate for Python plus the complete pinned scientific stack, not a measured transfer total.
+  await requestTransferConsent({ kind: 'toolchain', name: 'astronomy Python toolchain', bytes: 1_000_000_000,
+    destination: sharedRoot(descriptor().entry),
+    packages: ['micromamba', 'Python', 'Astroquery', 'Astropy', 'PyVO', 'SciPy', 'pinned astronomy dependencies'] });
+  return installAstroquery();
+}
 export async function astroqueryToolchain(): Promise<AstroqueryToolchain> {
   try { return astroqueryToolchainSync(); }
   catch (error) {
     if (!(error instanceof MissingSourceInputError)) throw error;
-    firstInstall ??= installAstroquery().catch(error => {
+    firstInstall ??= installImplicitAstroquery().catch(error => {
       if (!(error instanceof SourceBuildPrerequisiteError)) firstInstall = undefined;
       throw error;
     });
@@ -99,7 +107,7 @@ export async function astroqueryToolchain(): Promise<AstroqueryToolchain> {
 }
 
 export function findInstalledRoot(local: string, shared: string, pins: ToolchainPins): string | null {
-  return resolveInstalledToolchain(local, pins, [shared], {}, 'env/bin/python');
+  return resolveInstalledToolchain(local, pins, [shared, resolve(USER_ROOT, 'astroquery', basename(shared))], {}, 'env/bin/python');
 }
 
 /** Check the installed environment's imports and versions against the pins; the line `verify` prints. */

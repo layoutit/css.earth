@@ -22,7 +22,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Interferometric data to star surfaces | [Interferometric imaging](interferometric-imaging.md) |
 | What the open archives hold for our catalogued bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume | [A body inside a volume](mesh-in-volume.md) |
-| Telescope CLI setup, saved queries and outputs | [Telescope command guide](../packages/telescope-cli/README.md) |
+| Telescope CLI setup, saved queries and outputs | [Telescope command guide](telescope-commands.md) |
 | Pinning an observation and re-running the observatory's own software | [Virtual telescopes](virtual-telescopes.md) |
 | Querying VO archives and selecting science products | [VO observation access](vo-observation-access.md) |
 | Which upstream packages own a mechanical boundary here | [Astronomy package ownership](astronomy-package-ownership.md) |

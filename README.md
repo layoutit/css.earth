@@ -53,7 +53,7 @@ pnpm telescope explore eris
 pnpm telescope explore eris --kind cube --wavelength 2.2,2.4 --out runs/eris
 ```
 
-A retrieved file can be exported as an image, a spectrum, a map projected onto its body, or a standalone 3D sphere in HTML. For some instruments, the observatory's own software is run again on the same inputs and the result is checked against the published product. See the [command guide](packages/telescope-cli/README.md) for more information.
+A retrieved file can be exported as an image, a spectrum, a map projected onto its body, or a standalone 3D sphere in HTML. For some instruments, the observatory's own software is run again on the same inputs and the result is checked against the published product. See the [command guide](docs/telescope-commands.md) for more information.
 
 ## How to Run
 

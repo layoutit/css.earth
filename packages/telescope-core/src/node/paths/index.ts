@@ -1,4 +1,5 @@
 /** Package data, user-owned state and the optional css.earth checkout are separate roots. */
+import { acquisitionWorkingDirectory } from '../acquisition-directory.js';
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, mkdtemp } from 'node:fs/promises';
 import { createRequire } from 'node:module';
@@ -17,8 +18,9 @@ export const SCRATCH_ROOT = resolve(USER_ROOT, 'scratch');
 /** Anonymous scratch has one user-owned parent; delivery staging stays beside the explicit output for atomic renames. */
 export async function telescopeScratch(prefix: string): Promise<string> {
   if (!/^[a-z0-9-]+$/u.test(prefix)) throw new TypeError('Invalid telescope scratch prefix.');
-  await mkdir(SCRATCH_ROOT, { recursive: true });
-  return mkdtemp(resolve(SCRATCH_ROOT, prefix));
+  const directory = acquisitionWorkingDirectory(), scratch = directory ? resolve(directory, '.scratch') : SCRATCH_ROOT;
+  await mkdir(scratch, { recursive: true });
+  return mkdtemp(resolve(scratch, prefix));
 }
 export const WORKSPACE_REQUIRED = 'this command needs a css.earth checkout: pass --workspace';
 const inside = (root: string, path: string) => { const part = relative(root, path); return part === '' || (!isAbsolute(part) && part !== '..' && !part.startsWith(`..${sep}`)); };
@@ -78,8 +80,10 @@ export function requireWorkspace(root = WORKSPACE, operation = 'This command use
 
 /** Python and installer caches/temp files use the same user root; a lane may add its own user-root HOME. */
 export function telescopePythonEnvironment(overrides: NodeJS.ProcessEnv = {}): NodeJS.ProcessEnv {
-  const home = resolve(USER_ROOT, 'python-home'), cache = resolve(USER_ROOT, 'python-cache'), config = resolve(USER_ROOT, 'python-config');
-  for (const path of [home, cache, config, SCRATCH_ROOT]) mkdirSync(path, { recursive: true });
+  const run = acquisitionWorkingDirectory(), root = run ? resolve(run, '.python') : USER_ROOT;
+  const home = resolve(root, 'python-home'), cache = resolve(root, 'python-cache'), config = resolve(root, 'python-config'), scratch = run ? resolve(run, '.scratch') : SCRATCH_ROOT;
+  for (const path of [home, cache, config, scratch]) mkdirSync(path, { recursive: true });
   return { ...process.env, HOME: home, USERPROFILE: home, XDG_CACHE_HOME: cache, XDG_CONFIG_HOME: config,
-    MPLCONFIGDIR: resolve(cache, 'matplotlib'), TMPDIR: SCRATCH_ROOT, TMP: SCRATCH_ROOT, TEMP: SCRATCH_ROOT, ...overrides };
+    MPLCONFIGDIR: resolve(cache, 'matplotlib'), TMPDIR: scratch, TMP: scratch, TEMP: scratch, ...overrides,
+    ...(run ? { MPLCONFIGDIR: resolve(cache, 'matplotlib'), TMPDIR: scratch, TMP: scratch, TEMP: scratch } : {}) };
 }

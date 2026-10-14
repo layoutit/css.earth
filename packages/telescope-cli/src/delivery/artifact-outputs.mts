@@ -70,7 +70,7 @@ async function inspectArtifactOutputs(path:string,structure?:string):Promise<Art
     const provenance={productReceipt:artifact,software:delivered.producing.software,sourceProcessing:recordedSourceProcessing(delivered.producing)};
     if(!descriptorOutputs.length)return{...screen,artifact:'delivery',...provenance,relevance:assessSourceRelevance(delivered.sourceQuestion,sourceMetadata,screen.outputs)};
     if(descriptorOutputs.length!==1)throw new TypeError('Delivery has an ambiguous family descriptor.');
-    const output=descriptorOutputs[0]!,matches=delivered.files.filter(file=>file.bytes===output.bytes&&file.path.endsWith('/descriptor.json'));
+    const output=descriptorOutputs[0]!,matches=delivered.files.filter(file=>file.bytes===output.bytes&&(file.path==='descriptor.json'||file.path.endsWith('/descriptor.json')));
     if(matches.length!==1)throw new TypeError('Delivery family descriptor is absent or ambiguous.');
     const descriptorPath=resolve(delivered.directory,matches[0]!.path);
     const descriptor=parseProductDescriptor(JSON.parse(await readFile(descriptorPath,'utf8')));

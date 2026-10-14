@@ -1,10 +1,10 @@
 /** Shared byte and receipt boundary for an exact, still scientifically unresolved archive source. */
-import { lstat, mkdir, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
-import { get } from 'node:https';
+import { lstat, mkdir, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
+import { request } from 'node:https';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writeProductRecord, parseLimits } from '@cssearth/telescope-core/node';
+import { DownloadInterruptedError, downloadHttpFile, writeProductRecord, parseLimits, hasTransferConsent, requestTransferConsent } from '@cssearth/telescope-core/node';
 import { VERSION } from '../help.mts';
 import { parseRegion } from '@cssearth/objects';
 import type { ProductInput } from '@cssearth/objects';
@@ -28,6 +28,8 @@ export interface SavedSource {
 interface TransferEntry { readonly path: string; readonly url: string; readonly bytes: number }
 interface TransferProgress { readonly schema: 'cssearth-archive-transfer@1'; readonly selection: string; readonly files: readonly TransferEntry[] }
 const progressFile = 'transfer-progress.json';
+const failureFile = 'transfer-failure.json';
+const diagnosticFiles = [failureFile, 'failure.json', `${progressFile}.tmp`];
 const progressBytes = (progress: TransferProgress) => `${JSON.stringify(progress, null, 2)}\n`;
 async function saveProgress(staging: string, progress: TransferProgress) {
   const temporary = resolve(staging, `${progressFile}.tmp`);
@@ -44,6 +46,14 @@ async function checkedParent(staging: string, relative: string) {
       throw error;
     });
     if (stat && !stat.isDirectory()) throw new Error(`Partial transfer has a non-directory parent for ${relative}.`);
+  }
+}
+/** Private transport directories can survive Ctrl-C; none belong in a delivered source. Never follow symlinks. */
+async function removeTransferDirectories(directory: string): Promise<void> {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name);
+    if (entry.name.startsWith('.transfer-')) await rm(path, { recursive: true, force: true });
+    else if (entry.isDirectory()) await removeTransferDirectories(path);
   }
 }
 async function checkedProgress(staging: string, selection: string, sources: readonly SourceFile[]): Promise<TransferProgress> {
@@ -93,7 +103,7 @@ export async function rawHttpsFetch(input: string | URL | Request, init?: Reques
   const read = (url: URL, redirects: number): Promise<Response> => {
     if (url.protocol !== 'https:' || url.username || url.password || redirects > 5) throw new TypeError('Archive raw transfer requires a bounded HTTPS URL.');
     return new Promise((accept, reject) => {
-      const request = get(url, { headers: init?.headers as Record<string, string> | undefined, signal: init?.signal ?? undefined }, response => {
+      const transfer = request(url, { method: init?.method ?? 'GET', headers: Object.fromEntries(new Headers(init?.headers)), signal: init?.signal ?? undefined }, response => {
         if ([301, 302, 303, 307, 308].includes(response.statusCode ?? 0) && response.headers.location) {
           response.resume(); read(new URL(response.headers.location, url), redirects + 1).then(accept, reject); return;
         }
@@ -101,9 +111,10 @@ export async function rawHttpsFetch(input: string | URL | Request, init?: Reques
         for (const [name, value] of Object.entries(response.headers)) if (value !== undefined)
           headers.set(name, Array.isArray(value) ? value.join(', ') : value);
         const status = response.statusCode ?? 500;
-        accept(new Response([204, 205, 304].includes(status) ? null : Readable.toWeb(response) as ReadableStream<Uint8Array>, { status, headers }));
+        accept(new Response(init?.method === 'HEAD' || [204, 205, 304].includes(status) ? null : Readable.toWeb(response) as ReadableStream<Uint8Array>, { status, headers }));
       });
-      request.on('error', reject);
+      transfer.on('error', reject);
+      transfer.end();
     });
   };
   return read(source, 0);
@@ -114,31 +125,17 @@ export async function downloadSource(file: SourceFile, path: string, maximum: nu
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name) || basename(path) !== file.name || !Number.isSafeInteger(maximum) || maximum < 1)
     throw new TypeError('Invalid archive file or transfer bound.');
   if (file.bytes !== undefined && (!Number.isSafeInteger(file.bytes) || file.bytes < 1 || file.bytes > maximum)) throw new RangeError(`${file.name} exceeds the transfer bound.`);
-  const response = await fetcher(file.url, { signal: AbortSignal.timeout(180_000), headers: { 'accept-encoding': 'identity' } });
-  if (!response.ok || !response.body) {
-    await response.body?.cancel(); throw new Error(`Archive source ${file.url} returned HTTP ${response.status}.`);
-  }
-  const encoding = response.headers.get('content-encoding');
-  if (/text\/html|application\/json/iu.test(response.headers.get('content-type') ?? '') ||
-      encoding && (file.archiveEncoding !== 'gzip' || !/^(?:x-)?gzip$/iu.test(encoding))) {
-    await response.body.cancel(); throw new TypeError(`Archive source ${file.url} did not provide original file bytes.`);
-  }
-  const declared = Number(response.headers.get('content-length'));
-  if (declared > maximum) { await response.body.cancel(); throw new RangeError(`${file.name} exceeds the transfer bound.`); }
-  const reader = response.body.getReader();
-  const handle = await open(path, 'wx'); let bytes = 0;
-  try {
-    for (;;) {
-      const chunk = await reader.read(); if (chunk.done) break;
-      bytes += chunk.value.byteLength;
-      if (bytes > maximum) { await reader.cancel(); throw new RangeError(`${file.name} exceeds the transfer bound.`); }
-      await handle.writeFile(chunk.value);
-    }
-  } catch (error) { await handle.close(); await rm(path, { force: true }); throw error; }
-  await handle.close();
-  if (file.bytes !== undefined && bytes !== file.bytes) {
-    await rm(path, { force: true }); throw new Error(`${file.name} (${file.url}) is ${bytes} bytes; the archive lists ${file.bytes}.`);
-  }
+  const { bytes } = await downloadHttpFile(file.url, path, { byteLimit: maximum, expectedBytes: file.bytes, fetcher, timeoutMs: 180_000,
+    allowRawEncoding: file.archiveEncoding === 'gzip', validateResponse: response => {
+      const encoding = response.headers.get('content-encoding');
+      if (/text\/html|application\/json/iu.test(response.headers.get('content-type') ?? '') ||
+          encoding && (file.archiveEncoding !== 'gzip' || !/^(?:x-)?gzip$/iu.test(encoding)))
+        throw new TypeError(`Archive source ${file.url} did not provide original file bytes.`);
+    } }).catch((error: unknown) => {
+      if (error instanceof Error && error.message === 'Download byte limit exceeded.')
+        throw new RangeError(`${file.name} exceeds the transfer bound.`, { cause: error });
+      throw error;
+    });
   if (/\.fits?$/iu.test(file.name) || /\.fits?\.gz$/iu.test(file.name)) {
     const handle = await open(path, 'r'); const prefix = Buffer.alloc(9);
     try { await handle.read(prefix, 0, prefix.length, 0); } finally { await handle.close(); }
@@ -156,14 +153,27 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
   catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
   await mkdir(dirname(destination), { recursive: true });
   const paths = new Set<string>();
-  const reserved = new Set([progressFile, `${progressFile}.tmp`, 'descriptor.json', 'explore.json',
+  const reserved = new Set([progressFile, ...diagnosticFiles, 'descriptor.json', 'explore.json',
     'discovery.json', 'current-metadata.json', 'source.json', 'output.product.json']);
   for (const file of selection.files) {
     const path = file.path ?? file.name;
-    if (!path.split('/').every(part => /^[A-Za-z0-9._-]+$/u.test(part) && part !== '.' && part !== '..') ||
+    if (!path.split('/').every(part => /^[A-Za-z0-9._-]+$/u.test(part) && part !== '.' && part !== '..' && !part.startsWith('.transfer-')) ||
         basename(path) !== file.name || paths.has(path) || reserved.has(path))
       throw new TypeError(`Invalid or repeated archive source path ${path}.`);
     paths.add(path);
+  }
+  if (hasTransferConsent()) {
+    const sizes = await Promise.all(selection.files.map(async file => {
+      if (file.bytes !== undefined) return file.bytes;
+      try {
+        const response = await fetcher(file.url, { method: 'HEAD', signal: AbortSignal.timeout(10_000) });
+        const length = response.headers.get('content-length'), bytes = Number(length);
+        await response.body?.cancel();
+        return response.ok && length !== null && /^\d+$/u.test(length) && Number.isSafeInteger(bytes) && bytes > 0 ? bytes : null;
+      } catch { return null; }
+    }));
+    const bytes = sizes.every(size => size !== null) ? sizes.reduce((total, size) => total + size!, 0) : null;
+    await requestTransferConsent({ kind: 'download', bytes, archive: selection.archive, destination });
   }
   // The transfer is resumable only for this exact saved selection, compared as canonical text.
   const key = JSON.stringify({ exploration: resolve(explorationPath), evidence: saved.selected.evidence, maximum: saved.maximum,
@@ -243,12 +253,18 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
     }, [...files.map(file => ({ path: file.path, file: resolve(staging, file.path) })),
       ...(descriptor === undefined ? [] : [{ path: 'descriptor.json', file: resolve(staging, 'descriptor.json') }]),
       ...['explore.json', 'discovery.json', 'current-metadata.json', 'source.json'].map(path => ({ path, file: resolve(staging, path) }))]);
+    await removeTransferDirectories(staging);
     await rm(resolve(staging, progressFile));
+    for (const diagnostic of diagnosticFiles) await rm(resolve(staging, diagnostic), { force: true });
     await rename(staging, destination);
     return { files: files.map(file => resolve(destination, file.path)), receipt: resolve(destination, 'output.product.json'),
       source: resolve(destination, 'source.json'), ...(descriptor === undefined ? {} : { descriptor: resolve(destination, 'descriptor.json') }),
       status: 'unresolved' as const };
   } catch (error) {
+    await writeFile(resolve(staging, failureFile), `${JSON.stringify({ schema: 'cssearth-archive-transfer-failure@1',
+      error: error instanceof Error ? error.message : String(error),
+      rawError: error instanceof DownloadInterruptedError ? error.rawMessage : error instanceof Error ? error.message : String(error),
+    }, null, 2)}\n`);
     throw new Error(`${error instanceof Error ? error.message : String(error)} Partial files remain at ${staging}; repeat the same fetch with --resume.`, { cause: error });
   }
 }

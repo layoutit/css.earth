@@ -1,6 +1,6 @@
 import './test-support/index.mts';
 import { loadQualifiedObservations, rememberQualification, qualificationDirectory } from './qualification/qualified-observations.mts';
-import { USER_ROOT } from '@cssearth/telescope-core/node';
+import { telescopePythonEnvironment, telescopeScratch, acquisitionDirectory, USER_ROOT } from '@cssearth/telescope-core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { cp, mkdtemp, mkdir, readFile, readdir, symlink, writeFile, rm } from 'node:fs/promises';
@@ -320,4 +320,42 @@ test('a checkout-local qualification is ready and deliverable only from its owni
     await rm(qualificationDirectory('test-body'), { recursive: true, force: true });
     await a.cleanup(); await b.cleanup();
   }
+});
+
+for (const entrance of ['query', 'explore'] as const) test(`external indexed product publishes atomically and cleans successful Python scratch (${entrance})`, async () => {
+  const f = await fixture();
+  try {
+    await qualifySourceProduct(f.root, parseSourceProducts(f.declaration, f.manifest, 'test-body')[0]!);
+    const directory = resolve(f.root, entrance), working = resolve(directory, '.work/pick-1');
+    let fail = true, scratchCreated = false, retrieving = false;
+    const load = async () => {
+      // Exercise the actual library scratch owners during online revalidation.
+      if (acquisitionDirectory() && retrieving) {
+        telescopePythonEnvironment(); await telescopeScratch('revalidate-');
+        assert.ok((await readdir(working)).includes('.python'));
+        assert.ok((await readdir(resolve(working, '.scratch'))).length > 0);
+        scratchCreated = true;
+        if (fail) throw new Error('Revalidation interrupted');
+      }
+      return f.load();
+    };
+    const api: SessionServices = { ...f.api, load, explore: async (_root, request) => explorationAnswer(request, await load()) };
+    if (entrance === 'query') await saveSession(f.root, args, directory, api);
+    else await saveExploration(f.root, ['test-body'], directory, api);
+    retrieving = true;
+    await assert.rejects(getSession(f.root, directory, 1, () => {}, api), /Revalidation interrupted/u);
+    assert.ok((await readdir(working)).includes('.python'), 'Failure keeps working files for recovery');
+    fail = false;
+    await mkdir(resolve(directory, '.work/pick-2'), { recursive: true });
+    await writeFile(resolve(directory, '.work/pick-2/keep'), 'another pick');
+    const result = await getSession(f.root, directory, 1, () => {}, api);
+    const published = JSON.parse(await readFile(result.resultPath, 'utf8'));
+    assert.equal(published.reused, false);
+    assert.deepEqual(await readFile(result.product), await readFile(resolve(f.source, 'core.bin')));
+    assert.ok(scratchCreated, 'Actual library scratch owners must run before cleanup');
+    await assert.rejects(readdir(working), { code: 'ENOENT' });
+    assert.equal(await readFile(resolve(directory, '.work/pick-2/keep'), 'utf8'), 'another pick');
+    assert.ok(!(await readdir(resolve(directory, 'pick-1'))).includes('.python'));
+    assert.ok(!(await readdir(directory)).some(name => name.endsWith('.partial')));
+  } finally { await f.cleanup(); }
 });

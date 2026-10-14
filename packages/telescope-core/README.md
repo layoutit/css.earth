@@ -1,8 +1,8 @@
 # @cssearth/telescope-core
 
 The telescope library: product records, PDS label reading, target resolution, and the clients of the archives and pinned
-Python astronomy packages that the telescope command ([`@cssearth/telescope`](../telescope-cli/README.md), whose README
-is the command guide) and the workspace's archive and preparation tools share. It is a workspace interface, not a supported
+Python astronomy packages that the telescope command ([`@cssearth/telescope`](../telescope-cli/README.md), whose [command guide](../../docs/telescope-commands.md)
+is the full reference) and the workspace's archive and preparation tools share. It is a workspace interface, not a supported
 npm one.
 
 ## Library
@@ -22,10 +22,17 @@ is asked to reinstall.
 
 `resolveMicromamba()` owns installer bootstrap: `CSSEARTH_TELESCOPE_MICROMAMBA`, then a micromamba on `PATH` only if it is 2.0.7 or later, then official release 2.9.0-0 downloaded over HTTPS under `USER_ROOT/micromamba/`. The downloaded binary must run and report the pinned version before the executable is installed atomically. Conda-forge supplies Python. Async astronomy consumers install missing pins on first use; synchronous preparation consumers retain the explicit installer command.
 
+`downloadHttpFile()` bounds large HTTP transfers to three attempts. An archive advertising byte ranges may resume a partial
+transfer only after returning a matching `206 Content-Range`; other replies restart from zero. Byte limits, supplied lengths
+and optional recorded byte counts are checked before a temporary file is linked into its destination without overwriting it.
+VO science transfers use the same policy inside the pinned Python process, retaining their FITS validation. Interrupted
+transfers expose a concise message and `rawMessage` for saved failure details. Public MAST files, ESO raw frames and asynchronous
+PICASO archive installation use the shared HTTP transport; synchronous PICASO model downloads retain their existing curl path.
+
 What stays outside the package: the telescope command (`@cssearth/telescope`) with each archive's clients, reducers and
 ledger builders and the ledger machinery they share, the archives' pinned programs and toolchain pins
 (beside the archive's code in `packages/telescope-cli/src/archives/<archive>/`), and every object-specific use of a product.
 
 ## Path ownership
 
-`src/node/paths/index.ts` owns `USER_ROOT`, optional `WORKSPACE`, `requireWorkspace()` and package-relative `TOOLCHAINS`. The [command guide](../telescope-cli/README.md) documents platform defaults and workspace admission. Library imports never infer a checkout from the library package's location. Python environments, markers, archive answers and caches are user-owned; shipped pins remain read-only.
+`src/node/paths/index.ts` owns `USER_ROOT`, optional `WORKSPACE`, `requireWorkspace()` and package-relative `TOOLCHAINS`. The [command guide](../../docs/telescope-commands.md) documents platform defaults and workspace admission. Library imports never infer a checkout from the library package's location. Python environments, markers, archive answers and caches are user-owned; shipped pins remain read-only.

@@ -11,7 +11,7 @@ import { installedMarkerIssue, writeInstalledMarker, type ToolchainPins } from '
 
 /** One installer owns a prefix at a time. Publish a nonempty lock directory atomically so there is no ownerless gap.
  * Owner filenames are unique: stale recovery removes only the dead generation it inspected, never a successor's lock. */
-export async function withInstallLock<T>(root: string, work: () => Promise<T>): Promise<T> {
+export async function withInstallLock<T>(root: string, work: () => Promise<T>, options: { readonly wait?: boolean } = {}): Promise<T> {
   const lock = `${root}.installing`;
   await mkdir(dirname(root), { recursive: true });
   const staging = await mkdtemp(`${lock}-`), owner = `owner-${process.pid}-${randomUUID()}`;
@@ -31,6 +31,7 @@ export async function withInstallLock<T>(root: string, work: () => Promise<T>): 
       try { await rename(staging, lock); break; }
       catch (error) {
         if (!(error instanceof Error && 'code' in error && ['EEXIST', 'ENOTEMPTY'].includes(String(error.code)))) throw error;
+        if (options.wait === false) throw new Error(`Managed toolchain is locked at ${lock}; wait for its owner to finish.`);
         if (attempt >= 18_000) throw new Error(`Managed toolchain install is still locked at ${lock}.`);
         const names = await readdir(lock).catch(() => []);
         for (const name of names.filter(name => name === 'owner' || /^owner-\d+-[\w-]+$/u.test(name))) {

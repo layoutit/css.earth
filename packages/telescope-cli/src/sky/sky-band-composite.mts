@@ -4,11 +4,8 @@
  * Each band is divided by its own measured range, the usual survey false-color practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
 import { parseTilePins, type WiseBand } from '@cssearth/objects';
-import { plainName } from '@cssearth/telescope-core/node';
-import { createWriteStream } from 'node:fs';
-import { mkdir, readFile, rename, rm, writeFile, stat } from 'node:fs/promises';
-import { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
+import { downloadHttpFile, plainName } from '@cssearth/telescope-core/node';
+import { mkdir, readFile, rename, writeFile, stat } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsImage, skyDisplayRaster, skyImageAxes, skyProjection } from '@cssearth/fits';
@@ -205,16 +202,12 @@ function checkHips2fits(header: Record<string, unknown>, cards: readonly string[
 
 /** Download a MAST product into the cache by streaming, never holding it whole, and return its size; the file is stored under
  * its product name. `expected` refuses a response of another size. */
-export async function acquireMastProduct(product: string, cache: string, expected?: { bytes: number }) {
-  const url = `${MAST_PRODUCT_URL}${product}`, response = await fetch(url, { signal: AbortSignal.timeout(3_600_000) });
-  if (!response.ok || !response.body) throw new Error(`MAST download failed: ${response.status} ${url}`);
-  const part = resolve(cache, 'mast', `${product}.part`);
-  await mkdir(dirname(part), { recursive: true });
-  await pipeline(Readable.fromWeb(response.body as import('node:stream/web').ReadableStream), createWriteStream(part));
-  const pin = { bytes: (await stat(part)).size };
-  if (expected && pin.bytes !== expected.bytes) { await rm(part, { force: true }); throw new Error(`MAST product ${url} is ${pin.bytes} bytes; the recipe records ${expected.bytes}.`); }
-  await rename(part, resolve(cache, 'mast', product));
-  return pin;
+export async function acquireMastProduct(product: string, cache: string, expected?: { bytes: number }, fetcher: typeof fetch = fetch) {
+  const url = `${MAST_PRODUCT_URL}${product}`, path = resolve(cache, 'mast', product);
+  await mkdir(dirname(path), { recursive: true });
+  const result = await downloadHttpFile(url, path, { byteLimit: expected?.bytes ?? Number.MAX_SAFE_INTEGER,
+    expectedBytes: expected?.bytes, timeoutMs: 3_600_000, fetcher });
+  return { bytes: result.bytes };
 }
 
 /** A named MAST product in the cache, downloaded when missing. */

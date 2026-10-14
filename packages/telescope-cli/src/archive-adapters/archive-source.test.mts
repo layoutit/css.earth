@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
@@ -20,6 +20,7 @@ import { main } from '../cli.mts';
 import { parseCli } from '../cli-arguments.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
 import { readSourceQuestion } from '../products/source-relevance.mts';
+import { withTransferConsent } from '@cssearth/telescope-core/node';
 
 const fits = Buffer.from(`${'SIMPLE  =                    T'.padEnd(80)}${'END'.padEnd(80)}`.padEnd(2880));
 const fileResponse = (bytes: Buffer, type = 'application/fits') => new Response(new Uint8Array(bytes), { headers: { 'content-type': type } });
@@ -63,8 +64,18 @@ test('a multi-file fetch resumes only completed, unchanged bytes for the same sa
       return String(input).endsWith('b.fits') ? new Response('unavailable', { status: 503 }) : fileResponse(first);
     };
     await assert.rejects(deliverSource(exploration, destination, snapshot, selection, failSecond), /repeat the same fetch with --resume/u);
-    assert.deepEqual(calls, selection.files.map(file => file.url));
+    // The transport retries a transient failure in process; only the incomplete file is retried.
+    assert.deepEqual(calls, [selection.files[0]!.url, ...Array<string>(3).fill(selection.files[1]!.url)]);
     assert.deepEqual(await readFile(`${destination}.partial/a.fits`), first);
+    const failure = JSON.parse(await readFile(`${destination}.partial/transfer-failure.json`, 'utf8'));
+    assert.equal(failure.schema, 'cssearth-archive-transfer-failure@1');
+    assert.match(failure.rawError, /HTTP 503/u);
+    await writeFile(`${destination}.partial/failure.json`, '{"rawMessage":"CLI interruption"}');
+    await writeFile(`${destination}.partial/transfer-progress.json.tmp`, 'abandoned progress write');
+    for (const path of ['.transfer-abandoned', 'nested/.transfer-abandoned']) {
+      await mkdir(resolve(`${destination}.partial`, path), { recursive: true });
+      await writeFile(resolve(`${destination}.partial`, path, 'body.part'), 'unpublished partial science');
+    }
     await assert.rejects(deliverSource(exploration, destination, snapshot, selection,
       async () => { throw new Error('Should not download.'); }), /Partial transfer exists/u);
     const resumed: typeof fetch = async input => {
@@ -73,11 +84,17 @@ test('a multi-file fetch resumes only completed, unchanged bytes for the same sa
       return fileResponse(second);
     };
     const result = await deliverSource(exploration, destination, snapshot, selection, resumed, true);
-    assert.equal(calls.length, 3);
+    assert.deepEqual(calls, [selection.files[0]!.url, ...Array<string>(4).fill(selection.files[1]!.url)]);
+    assert.equal(calls.filter(url => url === selection.files[0]!.url).length, 1, 'Completed, unchanged bytes must never be refetched');
     assert.equal(result.status, 'unresolved');
     assert.deepEqual(await readFile(result.files[1]!), second);
     assert.equal(await openFitsSource(result.receipt), null); // Two files have no implicit primary science image.
     await assert.rejects(readFile(`${destination}.partial/transfer-progress.json`), { code: 'ENOENT' });
+    await assert.rejects(readFile(resolve(destination, 'transfer-failure.json')), { code: 'ENOENT' });
+    await assert.rejects(readFile(resolve(destination, 'failure.json')), { code: 'ENOENT' });
+    await assert.rejects(readFile(resolve(destination, 'transfer-progress.json.tmp')), { code: 'ENOENT' });
+    assert.equal((await readdir(destination)).some(name => name.startsWith('.transfer-')), false);
+    assert.deepEqual(await readdir(resolve(destination, 'nested')), []);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -98,6 +115,30 @@ test('resume refuses changed archive metadata or altered completed bytes', async
     await writeFile(`${destination}.partial/a.fits`, Buffer.concat([fits, Buffer.from([1])]));
     await assert.rejects(deliverSource(exploration, destination, snapshot, selection,
       async () => { throw new Error('Should not download.'); }, true), /Completed partial file a\.fits is \d+ bytes/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('source consent probes missing sizes by HEAD and cancellation creates no partial or published source', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'archive-consent-'));
+  try {
+    const service = 'https://example.org/archive', exploration = await saved(root, service, { id: 'one' }, [{ id: 'one' }]);
+    const snapshot = await readSavedSource(exploration, service, 1), destination = resolve(root, 'source');
+    const selection = { archive: service, telescope: 'Fixture', identity: 'one', target: snapshot.target,
+      discovery: snapshot.selected, current: { id: 'one' }, limitations: [],
+      files: [{ url: 'https://example.org/a.fits', name: 'a.fits' }] };
+    const methods: (string | undefined)[] = [];
+    for (const header of [String(fits.length), null]) {
+      await assert.rejects(withTransferConsent(async transfer => {
+        assert.deepEqual(transfer, { kind: 'download', bytes: header === null ? null : fits.length, archive: service, destination });
+        throw new Error('cancelled');
+      }, () => deliverSource(exploration, destination, snapshot, selection, async (_url, options) => {
+        methods.push(options?.method);
+        return new Response(null, { headers: header === null ? {} : { 'content-length': header } });
+      })), /cancelled/u);
+      await assert.rejects(readdir(destination), { code: 'ENOENT' });
+      await assert.rejects(readdir(`${destination}.partial`), { code: 'ENOENT' });
+    }
+    assert.deepEqual(methods, ['HEAD', 'HEAD'], 'consent precedes every science GET');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

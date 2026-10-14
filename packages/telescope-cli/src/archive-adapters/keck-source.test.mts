@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import test, { mock } from 'node:test';
+import { DownloadCancelledError, withTransferConsent } from '@cssearth/telescope-core/node';
 import { TAP_SYNC } from '../archives/keck/koa.mts';
 import { fetchKeckSource } from './keck-source.mts';
 import { openFitsSource } from './fits-source.mts';
@@ -80,5 +81,30 @@ test('a position exploration fetches an exact Keck source and retains the field 
     assert.deepEqual(await readFile(result.file), fits);
     const question = await readSourceQuestion(output);
     assert.deepEqual(question.region, session.answer.request.footprint); assert.equal(question.archiveTargetName, row.targname);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('Keck uses HEAD size before consent and cancellation never starts science transfer or staging', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'keck-consent-'));
+  try {
+    const exploration = await setup(root), destination = resolve(root, 'source');
+    for (const bytes of [401_000_000, null]) {
+      const head = mock.method(globalThis, 'fetch', async (_url: string | URL | Request, options?: RequestInit) => {
+        assert.equal(options?.method, 'HEAD');
+        return new Response(null, { headers: bytes === null ? {} : { 'content-length': String(bytes) } });
+      });
+      let transfers = 0, requests = 0;
+      try {
+        await assert.rejects(withTransferConsent(async info => {
+          requests++;
+          assert.deepEqual(info, { kind: 'download', bytes, archive: 'Keck', destination });
+          throw new DownloadCancelledError();
+        }, () => fetchKeckSource(exploration, 1, destination, async () => [row], async (_url, file) => {
+          transfers++; await writeFile(file, fits); return { bytes: fits.length };
+        })), DownloadCancelledError);
+        assert.equal(transfers, 0); assert.equal(requests, 1);
+        assert.deepEqual((await readdir(root)).sort(), ['explore.json', 'keck-source-evidence']);
+      } finally { head.mock.restore(); }
+    }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
