@@ -35,7 +35,7 @@ for (const { args, option, expected } of cases) {
     const at = args.indexOf(option);
     const prefix = args.slice(0,at+1);
     for (const tail of [[], [''], ['--json']]) assert.throws(() => parseCli([...prefix,...tail]), { name:'TypeError', message:`Missing value for ${option}${period}` });
-    assert.deepEqual(parseCli([...args,'--help']), { command:'help' });
+    assert.deepEqual(parseCli([...args,'--help']), { command:'help',short:false,topic:command });
   });
 }
 
@@ -54,7 +54,7 @@ test('selectors deliberately preserve lexical versus Number coercion policies', 
     const exported = () => parseCli(['export','input','--output','image','--hdu',raw,'--out','out']);
     if (raw === '1' || raw === '01') { fetch(); fits(); exported(); }
     else {
-      assert.throws(fetch, { message:'Use telescope fetch EXPLORE.json --pick N --out DIRECTORY.' });
+      assert.throws(fetch, { message:'Use telescope fetch EXPLORE.json --pick N [--out DIRECTORY].' });
       assert.throws(fits, { message:'--pick must be a nonnegative whole number.' });
       assert.throws(exported, { message:'Selectors must be nonnegative whole numbers' });
     }
@@ -101,6 +101,6 @@ test('toolchain commands admit only shipped installer names and modes', () => {
   assert.deepEqual(parseCli(['toolchain', 'install', 'astroquery', '--json']), { command: 'toolchain', mode: 'install', name: 'astroquery', json: true, verbose: false });
   assert.equal(parseCli(['toolchain', 'verify', 'pds']).command, 'toolchain');
   assert.equal(parseCli(['toolchain', 'install', 'casa']).command, 'toolchain');
-  for (const args of [['toolchain', 'install', 'constructor'], ['toolchain', 'remove', 'astroquery'], ['toolchain', 'install', 'astroquery', '--bad']])
+  for (const args of [['toolchain', 'install', 'constructor'], ['toolchain', 'list', 'astroquery'], ['toolchain', 'install', 'astroquery', '--bad']])
     assert.throws(() => parseCli(args), TypeError);
 });

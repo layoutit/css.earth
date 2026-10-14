@@ -5,7 +5,7 @@ import { createServer } from 'node:http';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { astroquery } from '@cssearth/telescope-core/node';
+import { withAcquisitionDirectory, astroquery } from '@cssearth/telescope-core/node';
 import { saveExploration, getSession, type SessionServices } from '../session.mts';
 import { loadQualifiedObservations } from '../qualification/qualified-observations.mts';
 import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
@@ -54,7 +54,7 @@ test('ESO FITS spectra reach native F03 export through saved exploration, get an
     assert.equal(exportedOutputs.artifact, 'telescope-family-operation');
     assert.deepEqual(exportedOutputs.outputs, [], 'The F03 CSV export has no standalone HTML route.');
     assert.equal(exportedOutputs.terminal, true);
-    const [qualified] = await loadQualifiedObservations(root, target.id);
+    const [qualified] = await withAcquisitionDirectory(resolve(saved.directory,'pick-1'),()=>loadQualifiedObservations(root, target.id));
     assert.deepEqual(qualified!.facts, { target: target.id, verified: true, kind: 'spectrum', result: 'telescope-product' });
     await assert.rejects(qualifyVoProduct(root, { ...plan.products[0]!, observation: { ...observation, rawTarget: 'Wrong target' } }, policy), /OBJECT/u);
     for (const unsupported of [

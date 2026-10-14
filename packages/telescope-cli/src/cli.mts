@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 import { configureCliWorkspace } from './cli-workspace.mts';
+import { assertWritableDirectory, artifactRunName, inspectionDirectory, runDirectory, UnwritableDirectoryError } from './run-directory.mts';
+import { listManagedEnvironments, removeManagedEnvironment } from './toolchains/managed-environments.mts';
 import { manageToolchain } from './toolchains/astronomy-toolchains.mts';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { consentHandler, savedDownload, choiceDownload, type DownloadInfo, type ConsentState } from './cli-consent.mts';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
-import { readFile } from 'node:fs/promises';
+import { readFile, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { formatAnswer } from './observation-query/query.mts';
 import type { RequestSatisfaction } from './requests/request-satisfaction.mts';
 import { getSession, saveExploration, saveSession, saveFamilyRequestSession, type ExplorationSession, type Session } from './session.mts';
@@ -16,7 +20,9 @@ import { listArtifactOutputs } from './delivery/artifact-outputs.mts';
 import { projectOutput } from './delivery/projection.mts';
 import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
-import { HELP, SHORT_HELP, VERSION } from './help.mts';
+import { interruptedDownload } from './cli-errors.mts';
+import { explorationSummary, lookupJson, outputSummary, saveStdoutRecord, saveInspection } from './cli-summary.mts';
+import { HELP, SHORT_HELP, VERSION, helpText } from './help.mts';
 import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
@@ -40,26 +46,25 @@ import { fetchSpitzerSource } from './archive-adapters/spitzer-source.mts';
 import { runWorkspaceCommand } from './workspace-commands.mts';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
-import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
-import { WORKSPACE, USER_ROOT, requireWorkspace } from '@cssearth/telescope-core/node';
+import { type ArtifactInspection, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
+import type { InspectedArtifact } from './cli-artifact-types.mts';
+import { WORKSPACE, USER_ROOT, withAcquisitionDirectory, requireWorkspace, withTransferConsent, requestTransferConsent, DownloadCancelledError } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
 
-export interface CliIo {
-  readonly stdinIsTTY:boolean;readonly stdoutIsTTY:boolean;readonly stderrIsTTY?:boolean;
-  readonly write:(text:string)=>void;readonly error:(text:string)=>void;
-  readonly question:(prompt:string)=>Promise<string|undefined>;readonly flush?:()=>Promise<void>;readonly close:()=>void;
-}
+export type { CliIo } from './cli-io.mts';
+import type { CliIo } from './cli-io.mts';
 export interface RetrievedResult {
   readonly resultPath:string;readonly product:string;readonly reused:boolean;
   readonly context?:DeliveryContext;readonly satisfaction?:RequestSatisfaction;
 }
 export interface CliServices {
+  readonly getDownloadPlan?:(directory:string,pick:number)=>Promise<DownloadInfo>;
   readonly importLocalArtifact:typeof importLocalArtifact;
   readonly familyCoverageLedger:typeof familyCoverageLedger;
   readonly saveExploration:typeof saveExploration;
-  readonly getSession:(root:string,directory:string,pick:number,progress:(text:string)=>void,api?:undefined,options?:{readonly offline?:boolean})=>Promise<RetrievedResult>;
+  readonly getSession:(root:string,directory:string,pick:number,progress:(text:string)=>void,api?:undefined,options?:{readonly offline?:boolean;readonly out?:string})=>Promise<RetrievedResult>;
   readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
   readonly exportHtml?:typeof exportHtml;
   readonly exportOutput:typeof exportOutput;
@@ -68,7 +73,7 @@ export interface CliServices {
   readonly exportSpatialObject:typeof exportSpatialObject;
   readonly executeFamilyOperation:typeof executeFamilyOperation;
 }
-const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportHtml,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation};
+const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportHtml,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation,getDownloadPlan:savedDownload};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
   let terminal:ReturnType<typeof createInterface>|undefined;
@@ -190,8 +195,8 @@ async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices
     io.write(await executeOutput(options,api));return 0;
   }
 }
-async function guidedExploration(root:string,session:ExplorationSession&{readonly directory:string},io:CliIo,api:CliServices,verbose=false):Promise<number>{
-  io.write(formatExploration(session,verbose));
+async function guidedExploration(root:string,session:ExplorationSession&{readonly directory:string},io:CliIo,api:CliServices,verbose=false,all=false,consent:ConsentState={}):Promise<number>{
+  io.write(formatExploration(session,verbose,all));
   await io.flush?.();
   if(!session.choices.length)return 3;
   let pick:number|undefined;
@@ -201,23 +206,43 @@ async function guidedExploration(root:string,session:ExplorationSession&{readonl
     if(/^\d+$/u.test(answer)&&session.choices.some(choice=>choice.pick===Number(answer))){pick=Number(answer);break;}
     io.error(`Choose a number from 1 to ${session.choices.length}, or press Enter to exit.\n`);
   }
+  await requestTransferConsent(api.getDownloadPlan?await api.getDownloadPlan(session.directory,pick):choiceDownload(session.choices.find(choice=>choice.pick===pick)! as unknown as Record<string,unknown>,session.directory,pick));
   const result=await api.getSession(root,session.directory,pick,line=>io.error(`${line}\n`));
-  io.write([`Product: ${result.product}`,`Evidence: ${result.resultPath}`,contextText(result.context)??(result.satisfaction?`Scientific request: ${result.satisfaction.status}.`:''),...(result.reused?['Reused: verified existing delivery']:[])].filter(Boolean).join('\n')+'\n\n');
+  if(consent.cancelled)throw new DownloadCancelledError();
+  io.write([`Files: ${displayPath(dirname(result.product))}/`,`Product: ${displayPath(result.product)}`,`Evidence: ${displayPath(result.resultPath)}`,contextText(result.context)??(result.satisfaction?`Scientific request: ${result.satisfaction.status}.`:''),...(result.reused?['Reused: verified existing delivery']:[])].filter(Boolean).join('\n')+'\n\n');
   return guidedArtifact(artifactScreen(await api.listArtifactOutputs(result.resultPath),result.resultPath),io,api,verbose);
 }
 
-export async function main(args: readonly string[], root: string | undefined = undefined, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices): Promise<number> {
+async function runCli(args: readonly string[], root: string | undefined = undefined, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices,consent:ConsentState={}): Promise<number> {
   const io=injectedIo??processIo(output);
+  let recordDirectory:string|undefined;
+  let resumeCommand:string|undefined;
   try {
     args = configureCliWorkspace(args);
     root ??= WORKSPACE ?? USER_ROOT;
-    const options = parseCli(args);
-    if (options.command === 'help') { io.write(options.short ? SHORT_HELP : HELP); return 0; }
+    let options = parseCli(args);
+    // Fetch owns a staging directory and must keep its final destination absent until publication.
+    if(args.includes('--out')&&options.command!=='fetch')recordDirectory='directory' in options?options.directory:'out' in options?options.out:undefined;
+    if (options.command === 'help') { io.write(helpText(options.topic,io.stdoutIsTTY)); return 0; }
     if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
     if (options.command === 'skill') {
       const result = manageSkill(options);
       io.write(options.json ? `${JSON.stringify(result)}\n` : `${result.status}: ${result.target} (${result.mode})\n`);
       return 0;
+    }
+    if (['explore','get','fetch','outputs','export','html','sphere','spatial','project'].includes(options.command)) {
+      const explicit = args.includes('--out') ? ('out' in options ? options.out : 'directory' in options ? options.directory : undefined) : undefined;
+      await assertWritableDirectory(explicit);
+      if (options.command === 'outputs') options = { ...options, directory: await inspectionDirectory(options.result, options.directory) };
+      if (options.command === 'explore' && !options.directory) {
+        const circle = options.request.region ?? options.request.footprint;
+        options = { ...options, directory: runDirectory(options.request.target ?? `field-${circle?.raDegrees}-${circle?.decDegrees}`) };
+      } else if (['fetch','export','html','sphere','spatial','project'].includes(options.command) && !args.includes('--out')) {
+        const source = 'result' in options ? options.result : 'exploration' in options ? options.exploration : undefined;
+        if (source && 'directory' in options) options = { ...options, directory: runDirectory(await artifactRunName(source, options.command)) };
+      }
+      if ('directory' in options) recordDirectory = options.command === 'get' ? resolve(options.out ?? options.directory!, `pick-${options.pick}`) : options.command === 'fetch' ? `${options.directory}.partial` : options.directory;
+      if (options.command === 'fetch') resumeCommand = `telescope fetch ${shellWord(displayPath(options.exploration))} --archive ${options.archive} --pick ${options.pick}${options.fileName ? ` --file ${shellWord(options.fileName)}` : ''} --out ${shellWord(displayPath(options.directory))} --resume${options.json ? ' --json' : ''}${options.yes ? ' --yes' : ''}`;
     }
     // Instrument tools own their logging. Keep every such message off machine-readable stdout.
     const stdout = process.stdout.write;
@@ -225,20 +250,30 @@ export async function main(args: readonly string[], root: string | undefined = u
     process.stdout.write = process.stderr.write.bind(process.stderr);
     try {
       if(options.command==='toolchain'){
-        const message = await manageToolchain(options.name, options.mode);
-        text = options.json ? `${JSON.stringify({ toolchain: options.name, mode: options.mode, message })}\n` : `${message}\n`; code = 0;
+        if (options.mode === 'list') {
+          const environments = await listManagedEnvironments();
+          text = options.json ? `${JSON.stringify({ toolchains: environments })}\n` : environments.length ? environments.map(item => `${item.name}: ${(item.bytes / 1e6).toFixed(1)} MB on disk · ${displayPath(item.folder)}${item.removable ? '' : ' (legacy; removal refused)'}`).join('\n') + '\n' : 'No managed toolchains installed.\n';
+        } else if (options.mode === 'remove') {
+          const result = await removeManagedEnvironment(options.name!);
+          text = options.json ? `${JSON.stringify(result)}\n` : `Removed ${result.name}: ${displayPath(result.folder)}\n`;
+        } else {
+          const message = await manageToolchain(options.name!, options.mode);
+          text = options.json ? `${JSON.stringify({ toolchain: options.name, mode: options.mode, message })}\n` : `${message}\n`;
+        }
+        code = 0;
       }else if(options.command==='wwt-fits'){
         const selected=options.pick?await resolveWwtFitsLead(root,options.exploration!,options.pick):{catalog:options.catalog!,imageset:options.setName!};
         const result=await acquireWwtFits(selected.catalog,selected.imageset,options.level,options.x,options.y,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Original FITS: ${result.source}\nNumeric image: ${result.data}\nValues: ${result.values}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\n${result.limitations.map(line=>`  ${line}\n`).join('')}`;code=0;
       }else if(options.command==='fetch'){
+        consent.archive=options.archive==='opus'?'OPUS':options.archive[0]!.toUpperCase()+options.archive.slice(1);
         const result=options.archive==='keck'?await fetchKeckSource(options.exploration,options.pick,options.directory)
           :options.archive==='gemini'?await fetchGeminiSource(options.exploration,options.pick,options.directory,undefined,undefined,options.resume)
           :options.archive==='opus'?await fetchOpusSource(options.exploration,options.pick,options.directory,undefined,undefined,options.resume)
           :options.archive==='chandra'?await fetchChandraSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName,options.resume)
           :await fetchSpitzerSource(options.exploration,options.pick,options.directory,undefined,undefined,undefined,options.fileName,options.resume);
         const files='files' in result?result.files:[result.file];
-        text=options.json?`${JSON.stringify(result)}\n`:`Original archive file(s): ${files.join(', ')}\nEvidence: ${result.receipt}\nScientific status: ${result.status}\nNext: telescope outputs ${shellWord(displayPath(result.receipt))}\n`;code=0;
+        text=options.json?`${JSON.stringify({...result,...(consent.download?{download:{bytes:consent.download.bytes,archive:consent.download.archive,destination:consent.download.destination}}:{})})}\n`:`Files: ${displayPath(options.directory)}/\nOriginal archive file(s): ${files.map(displayPath).join(', ')}\nEvidence: ${displayPath(result.receipt)}\nScientific status: ${result.status}\nNext: telescope outputs ${shellWord(displayPath(result.receipt))}\n`;code=0;
       }else if(options.command==='wwt-image'){
         const result=await exportWwtImage(root,options.exploration,options.pick,options.level,options.directory);
         text=options.json?`${JSON.stringify(result)}\n`:`Image: ${result.image}\nSource: ${result.receipt}\nCredit: ${result.value.imageset.credits}\n`;code=0;
@@ -266,25 +301,25 @@ export async function main(args: readonly string[], root: string | undefined = u
         const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.targets.length>1){
           const result=await sweepPapers(root,{targets:options.targets,...asked});
-          text=options.json?`${JSON.stringify(result)}\n`:formatSweep(result,options.directory);code=result.targets.some(entry=>entry.works.length)?0:3;
+          text=options.json?await lookupJson('papers',result,options.directory?{savedPath:resolve(options.directory,'papers.json')}:undefined):formatSweep(result,options.directory);code=result.targets.some(entry=>entry.works.length)?0:3;
         }else{
           const result=await searchPapers(root,{target:options.targets[0]!,...(options.host?{host:options.host}:{}),...asked});
-          text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;
+          text=options.json?await lookupJson('papers',result,options.directory?{savedPath:resolve(options.directory,'papers.json')}:undefined):formatPapers(result,options.directory);code=result.works.length?0:3;
         }
       }else if(options.command==='simulations'){
         const result=await searchSimulations(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
-        text=options.json?`${JSON.stringify(result)}\n`:formatSimulations(result,options.directory);code=result.records.length?0:3;
+        text=options.json?await lookupJson('simulations',result,options.directory?{savedPath:resolve(options.directory,'simulations.json')}:undefined):formatSimulations(result,options.directory);code=result.records.length?0:3;
       }else if(options.command==='stars'){
         const result=await surveyStars(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
-        text=options.json?`${JSON.stringify(result)}\n`:formatStars(result,options.directory);code=result.leads.length?0:3;
+        text=options.json?await lookupJson('stars',result,options.directory?{savedPath:resolve(options.directory,'stars.json')}:undefined):formatStars(result,options.directory);code=result.leads.length?0:3;
       }else if(options.command==='gaia-cone'){
         const {command:_command,json:_json,verbose:_verbose,out,...request}=options;
         const result=await gaiaCone(request,{...(out?{out}:{}),progress:line=>io.error(`${line}\n`)});
-        text=options.json?`${JSON.stringify(result)}\n`:formatGaiaCone(result,out);code=result.stars.length?0:3;
+        text=options.json?await lookupJson('gaia-cone',result,out?{savedPath:out}:undefined):formatGaiaCone(result,out);code=result.stars.length?0:3;
       }else if(options.command==='leads'){
         const shared={...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`),timeSeries:()=>jwstTimeSeries()};
-        if(options.archiveClass){const result=await surveyLeads(root,{archiveClass:options.archiveClass,...shared,...(options.archiveClass==='exoplanet'?{unpaged:(paged:readonly string[])=>searchUnpaged(paged)}:{})});text=options.json?`${JSON.stringify(result)}\n`:formatSurvey(result,options.directory);code=result.rows.length?0:3;}
-        else{const result=await searchLeads(root,{target:options.target!,...shared});text=options.json?`${JSON.stringify(result)}\n`:formatLeads(result,options.directory);code=result.leads.length||result.watched?.length?0:3;}
+        if(options.archiveClass){const result=await surveyLeads(root,{archiveClass:options.archiveClass,...shared,...(options.archiveClass==='exoplanet'?{unpaged:(paged:readonly string[])=>searchUnpaged(paged)}:{})});text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatSurvey(result,options.directory);code=result.rows.length?0:3;}
+        else{const result=await searchLeads(root,{target:options.target!,...shared});text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatLeads(result,options.directory);code=result.leads.length||result.watched?.length?0:3;}
       }else if(options.command==='candidates'){
         const {runCandidates,epochMjd}=await import('./sky/association.mts'),result=await runCandidates(options.system,epochMjd(options.epoch),options.directory,{...(options.figureBackground?{figureBackground:options.figureBackground}:{}),...(options.orbitDraws?{orbitDraws:options.orbitDraws}:{})});
         text=options.json?`${JSON.stringify(result.set)}\n`:`${result.set.candidates.map(candidate=>`${candidate.id}  east ${candidate.eastMas.toFixed(2)} mas  north ${candidate.northMas.toFixed(2)} mas  ${candidate.sigmaEastMas===undefined?'reference':`± ${candidate.sigmaEastMas.toFixed(2)}, ${candidate.sigmaNorthMas!.toFixed(2)} mas (${candidate.predictedFrom!.tool} ${candidate.predictedFrom!.planet})`}`).join('\n')}\nSaved: ${options.directory}\n`;code=0;
@@ -292,7 +327,7 @@ export async function main(args: readonly string[], root: string | undefined = u
         const {runAssociation}=await import('./sky/association.mts'),result=await runAssociation(options.measurements,options.system,options.directory,{...(options.figureBackground?{figureBackground:options.figureBackground}:{}),...(options.orbitDraws?{orbitDraws:options.orbitDraws}:{}),fitAstrometry:options.fitAstrometry,fitOrbits:options.fitOrbits});
         text=options.json?`${JSON.stringify(result.rows)}\n`:`${result.rows.map(({association,chart})=>`${association.measurement.id}: closest ${association.closest}\n${association.tests.map(test=>`  ${test.id}  R ${test.mahalanobis.toFixed(2)}  ${test.sigma===null?test.log10P===null?'beyond double precision':`log10 p ${test.log10P.toFixed(0)}`:`${test.sigma.toFixed(1)}σ`}`).join('\n')}\n  chart ${chart}`).join('\n')}\nSaved: ${options.directory}\n`;code=0;
       }else       if(options.command==='families'){
-        const rows=api.familyCoverageLedger();text=options.json?`${JSON.stringify(rows)}\n`:`${rows.map(row=>`${row.family}  ${row.status}  ${row.profiles.length?row.profiles.map(profile=>profile.profileId).join(', '):'no registered profile'}`).join('\n')}\n`;code=rows.every(row=>row.status==='complete')?0:3;
+        const rows=api.familyCoverageLedger();text=options.json?await lookupJson('families',rows):`${rows.map(row=>`${row.family}  ${row.status}  ${row.profiles.length?row.profiles.map(profile=>profile.profileId).join(', '):'no registered profile'}`).join('\n')}\n`;code=rows.every(row=>row.status==='complete')?0:3;
       }else if(options.command==='import'){
         const spec=JSON.parse(await readFile(options.specification,'utf8'));
         const result=await api.importLocalArtifact(spec,options.directory);
@@ -303,10 +338,10 @@ export async function main(args: readonly string[], root: string | undefined = u
         if(options.fresh)process.env[FRESH_VARIABLE]='1';
         const progress=startProgress(io,'Resolving target');
         let session:ExplorationSession&{readonly directory:string};
-        try{session=await api.saveExploration(root,options.requestArgs,options.directory,undefined,progress.update);progress.stop('done');}
+        try{session=await api.saveExploration(root,options.requestArgs,options.directory,undefined,progress.update);if(consent.cancelled)throw new DownloadCancelledError();progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
-        if(guided(options,io)){process.stdout.write=stdout;return await guidedExploration(root,session,io,api,options.verbose);}
-        text=`${JSON.stringify(session)}\n`;code=session.choices.length?0:3;
+        if(guided(options,io)){process.stdout.write=stdout;return await guidedExploration(root,session,io,api,options.verbose,options.all,consent);}
+        text=`${JSON.stringify(explorationSummary(session))}\n`;code=session.choices.length?0:3;
       }else if(options.command==='project'){
         const result=await api.projectOutput(options.result,options.geometry,options.directory);text=options.json?JSON.stringify(result)+'\n':`Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='spatial'){
@@ -316,25 +351,31 @@ export async function main(args: readonly string[], root: string | undefined = u
       }else if(options.command==='sphere'){
         const result=await api.exportSphere(options.result,options.directory);text=options.json?JSON.stringify(result)+'\n':`Sphere: ${result.html}\nEvidence: ${result.receipt}\n`;code=0;
       }else if(options.command==='outputs'){
-        const result=await api.listArtifactOutputs(options.result,options.structure);
-        if(guided(options,io)){process.stdout.write=stdout;return await guidedArtifact(artifactScreen(result,options.result),io,api,options.verbose);}
-        text=options.json?`${JSON.stringify(result)}\n`:formatArtifact(artifactScreen(result,options.result),options.verbose);code=0;
+        const selected=options,result=await withAcquisitionDirectory(selected.directory!,()=>api.listArtifactOutputs(selected.result,selected.structure));
+        const savedPath = await saveInspection(result, options.result, options.directory);
+        if(guided(options,io)){process.stdout.write=stdout;io.write(`Inspection: ${displayPath(savedPath)}\n`);return await guidedArtifact(artifactScreen(result,options.result),io,api,options.verbose);}
+        text=options.json?`${JSON.stringify(outputSummary(result,savedPath))}\n`:`Inspection: ${displayPath(savedPath)}\n${formatArtifact(artifactScreen(result,options.result),options.verbose)}`;code=0;
       }else if(options.command==='export'){
         const result=await api.exportOutput(options.result,options.selection,options.directory);
-        text=options.json?`${JSON.stringify(result)}\n`:`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
+        text=options.json?await lookupJson('export',result,{savedPath:result.receipt}):`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
       }else if (options.command === 'query') {
         const progress=startProgress(io,'Reading local evidence');
         let session:Session;
-        try{session=await saveSession(root, options.requestArgs, options.directory, undefined, progress.update);progress.stop('done');}
+        try{session=await saveSession(root, options.requestArgs, options.directory, undefined, progress.update);if(consent.cancelled)throw new DownloadCancelledError();progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
         text = options.json ? `${JSON.stringify(session)}\n` : formatSession(session, options.directory, options.verbose) + (options.verbose ? `\n${formatAnswer(session.answer)}` : '');
         code = session.choices.length ? 0 : 3;
       } else {
-        const result = await api.getSession(root, options.directory, options.pick, line => io.error(`${line}\n`), undefined, { offline: options.offline });
+        if(!options.offline){
+          const plan=api.getDownloadPlan?await api.getDownloadPlan(options.directory,options.pick):{kind:'download' as const,bytes:null,archive:'archive',destination:resolve(options.directory,`pick-${options.pick}`)};
+          await requestTransferConsent(options.out ? { ...plan, destination: resolve(options.out, `pick-${options.pick}`) } : plan);
+        }
+        const result = await api.getSession(root, options.directory, options.pick, line => io.error(`${line}\n`), undefined, { offline: options.offline, out: options.out });
+        if(consent.cancelled)throw new DownloadCancelledError();
         const status=result.satisfaction?.status??(result.context?.kind==='exploration'?'not requested':'unknown');
-        text = options.json ? `${JSON.stringify(result)}\n` : [`Product: ${result.product}`, `Evidence: ${result.resultPath}`, `Request: ${status}`,
+        text = options.json ? `${JSON.stringify({schema:'cssearth-telescope-get-summary@1',resultPath:result.resultPath,product:result.product,reused:result.reused,request:status,...(consent.download?{download:{bytes:consent.download.bytes,archive:consent.download.archive,destination:consent.download.destination}}:{})})}\n` : [`Files: ${displayPath(dirname(result.product))}/`, `Product: ${displayPath(result.product)}`, `Evidence: ${displayPath(result.resultPath)}`, `Request: ${status}`,
           ...(result.reused ? ['Reused: verified existing delivery'] : []),
-          ...Object.entries(result.satisfaction?.constraints??{}).filter(([, v]) => v.answer !== 'yes').map(([name, v]) => `Remaining ${name}: ${v.answer}. ${v.reason}`),
+          ...(options.verbose?Object.entries(result.satisfaction?.constraints??{}).filter(([, v]) => v.answer !== 'yes').map(([name, v]) => `Remaining ${name}: ${v.answer}. ${v.reason}`):[`Details: --verbose or ${displayPath(result.resultPath)}`]),
           `Next: telescope outputs ${shellWord(displayPath(result.resultPath))}`].join('\n') + '\n';
         code = result.context?.kind==='exploration'?0:status === 'fulfilled' ? 0 : status === 'refused' ? 4 : 3;
       }
@@ -345,11 +386,20 @@ export async function main(args: readonly string[], root: string | undefined = u
     const summary = error instanceof Error ? error.message : String(error);
     const cause = error instanceof Error ? error.cause : undefined;
     const detail = cause instanceof Error ? cause.message : undefined;
-    const message = detail && detail !== summary ? `${summary}: ${detail}` : summary;
-    if (args.includes('--json')) io.write(`${JSON.stringify({ error: message, exitCode: code })}\n`);
-    io.error(`${args.includes('--verbose') && error instanceof Error ? error.stack : message}\n`);
+    const interrupted=interruptedDownload(error,resumeCommand),message=interrupted?.message??(detail&&detail!==summary?`${summary}: ${detail}`:summary);
+    if (error instanceof UnwritableDirectoryError) { io.error(`${error.message}\n`); return 1; }
+    const savedPath=interrupted&&recordDirectory?await saveStdoutRecord('failure',{command:args,message:interrupted.message,rawMessage:interrupted.rawMessage},recordDirectory).catch(()=>undefined):undefined;
+    if (args.includes('--json')) io.write(`${JSON.stringify({ error: message, exitCode: code,...(savedPath?{savedPath}:{}) })}\n`);
+    io.error(`${args.includes('--verbose') && error instanceof Error ? `${error.stack}${interrupted?`\n${interrupted.rawMessage}`:''}` : message}\n`);
+    if(savedPath)io.error(`Details: ${displayPath(savedPath)}\n`);
     return code;
   }finally{io.close();}
+}
+export async function main(args: readonly string[], root?: string, output: (text:string)=>void = text=>{process.stdout.write(text);}, injectedIo?:CliIo, api:CliServices=defaultServices):Promise<number>{
+  const io=injectedIo??processIo(output), state:ConsentState={};
+  const temporary=await mkdtemp(resolve(tmpdir(),'telescope-command-'));
+  try{return await withAcquisitionDirectory(temporary,()=>withTransferConsent(consentHandler(io,{json:args.includes('--json'),yes:args.includes('--yes')||args.includes('-y')},state),()=>runCli(args,root,output,io,api,state)));}
+  finally{await rm(temporary,{recursive:true,force:true});}
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   if (process.send) process.exitCode = await main(process.argv.slice(2), undefined, text => { process.send!({ text }); });

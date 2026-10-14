@@ -1,5 +1,6 @@
 /** The only css.earth process boundary into the pinned astronomy packages. Operations are explicit rather than extensible:
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
+import { VO_DOWNLOAD_PYTHON } from './vo-download-python.js';
 import { telescopePythonEnvironment } from './paths/index.js';
 import { VO_METADATA_SCHEMA, parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '@cssearth/objects';
 import { spawn } from 'node:child_process';
@@ -10,7 +11,8 @@ export type VoFailureCode = 'authentication' | 'no-content' | 'byte-limit' | 'pr
 export class VoAccessError extends Error {
   readonly code: VoFailureCode;
   readonly httpStatus: number | null;
-  constructor(code: VoFailureCode, message: string, httpStatus: number | null) { super(message); this.name = 'VoAccessError'; this.code = code; this.httpStatus = httpStatus; }
+  readonly rawMessage: string;
+  constructor(code: VoFailureCode, message: string, httpStatus: number | null, rawMessage = message) { super(message); this.name = 'VoAccessError'; this.code = code; this.httpStatus = httpStatus; this.rawMessage = rawMessage; }
 }
 
 export type HorizonsEpochs = readonly number[] | { readonly start: string; readonly stop: string; readonly step: string };
@@ -21,7 +23,6 @@ export type AstroqueryRequest =
   | { readonly operation: 'vo-links'; readonly url: string; readonly parameters?: Readonly<Record<string, Json>>; readonly directory: string; readonly byteLimit: number; readonly allowedPrivateHosts?: readonly string[] }
   | { readonly operation: 'vo-parse'; readonly file: string; readonly url: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
   | { readonly operation: 'mast-service'; readonly service: string; readonly parameters: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
-  | { readonly operation: 'mast-download'; readonly uri: string; readonly destination: string }
   | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number; readonly mode?: 'async'; readonly allowedPrivateHosts?: readonly string[] }
   | { readonly operation: 'alma-data-info'; readonly ids: readonly string[]; readonly expandTarfiles?: boolean }
   | { readonly operation: 'vizier-region'; readonly catalog: string; readonly ra: number; readonly dec: number; readonly radiusDegrees: number; readonly columns: readonly string[] }
@@ -90,11 +91,11 @@ class SafeVoSession:
         try:
             # An archive that drops the connection is asked again, twice: KOA closed one of four small queries on 2026-10-06.
             # A timeout or an HTTP error is the archive's answer and is not asked again.
-            for attempt in range(3):
+            for attempt in range(getattr(self, 'connection_attempts', 3)):
                 try:
                     return super().send(prepared_request, **kwargs)
                 except requests.exceptions.ConnectionError as error:
-                    if attempt == 2 or isinstance(error, requests.exceptions.Timeout): raise
+                    if attempt == getattr(self, 'connection_attempts', 3) - 1 or isinstance(error, requests.exceptions.Timeout): raise
                     time.sleep(2 * (attempt + 1))
         finally:
             socket.getaddrinfo = original
@@ -128,6 +129,8 @@ def rows(table):
         return []
     return [{str(name): value(row[name]) for name in table.colnames} for row in table]
 
+${VO_DOWNLOAD_PYTHON}
+
 operation = request['operation']
 answer = {'schema': 'cssearth-astroquery-answer@2', 'astroquery': astroquery.__version__, 'operation': operation}
 if operation == 'vo-download':
@@ -137,10 +140,12 @@ if operation == 'vo-download':
     from pyvo.dal.adhoc import DatalinkResults, SodaQuery
     from pyvo.dal.query import DALQuery
     class TransferSession(SafeVoSession, requests.Session):
+        connection_attempts = 1  # The bounded body-transfer loop owns all three attempts.
         def request(self, method, url, **kwargs):
             kwargs.setdefault('timeout', (15, 45))
             return super().request(method, url, **kwargs)
     session = TransferSession()
+    session.headers['Accept-Encoding'] = 'identity'
     class TransferFailure(Exception):
         def __init__(self, code, message):
             self.code = code
@@ -169,25 +174,11 @@ if operation == 'vo-download':
             query = DALQuery(request['url'], session=session)
         limit = request['byteLimit']
         if type(limit) is not int or limit < 1: raise ValueError('Invalid science byte limit')
-        response = query.submit()
         os.makedirs(os.path.dirname(request['destination']), exist_ok=True)
         fd, temporary = tempfile.mkstemp(dir=os.path.dirname(request['destination']), suffix='.partial')
+        os.close(fd)
         try:
-            with os.fdopen(fd, 'wb') as f:
-                if response.status_code == 204: raise TransferFailure('no-content', 'No science content (HTTP 204)')
-                if response.status_code in (401,403): raise TransferFailure('authentication', 'Archive authorization failed (HTTP ' + str(response.status_code) + ')')
-                response.raise_for_status()
-                size, mark = 0, 10000000
-                for chunk in response.iter_content(chunk_size=1024 * 1024):
-                    size += len(chunk)
-                    if size > limit: raise TransferFailure('byte-limit', 'Science transfer byte limit exceeded')
-                    f.write(chunk)
-                    if size >= mark:
-                        print(f'VO product: {size / 1e6:.1f} MB', file=sys.stderr, flush=True)
-                        mark = (size // 10000000 + 1) * 10000000
-            if not size: raise TransferFailure('no-content', 'Empty science response')
-            length = response.headers.get('Content-Length')
-            if length and not response.headers.get('Content-Encoding') and int(length) != size: raise TransferFailure('interrupted', 'Incomplete science response')
+            size, response = stream_vo_download(query, session, temporary, limit, TransferFailure)
             if request.get('format', 'fits') == 'fits':
                 try:
                     profile = request.get('fitsProfile', 'raster')
@@ -202,16 +193,16 @@ if operation == 'vo-download':
             answer['transfer'] = {'file': {'path': request['destination'], 'bytes': size},
                 'effectiveUrl': response.url, 'contentType': response.headers.get('Content-Type'), 'etag': response.headers.get('ETag'), 'lastModified': response.headers.get('Last-Modified')}
         finally:
-            response.close()
+            if response is not None: response.close()
             if os.path.exists(temporary): os.unlink(temporary)
     except Exception as error:
-        status = response.status_code if response is not None else None
+        status = getattr(error, 'http_status', response.status_code if response is not None else None)
         code = (error.code if isinstance(error, TransferFailure) else
                 'interrupted' if isinstance(error, (requests.exceptions.ChunkedEncodingError, requests.exceptions.ContentDecodingError)) else
                 'transport' if isinstance(error, (requests.exceptions.ConnectionError, requests.exceptions.Timeout)) else
                 'protocol' if isinstance(error, requests.exceptions.HTTPError) else
                 'local-io' if isinstance(error, OSError) else 'protocol')
-        answer['failure'] = {'code': code, 'httpStatus': status, 'message': str(error)}
+        answer['failure'] = {'code': code, 'httpStatus': status, 'message': str(error), 'rawMessage': getattr(error, 'raw_message', str(error))}
 elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
     import io, os, warnings, tempfile
     from datetime import datetime, timezone
@@ -371,23 +362,6 @@ elif operation == 'mast-service':
         answer['rows'] = rows(table)
     except (ConnectionError, Timeout, HTTPError) as error:
         answer['transportError'] = str(error)
-elif operation == 'mast-download':
-    from astroquery.mast import Observations
-    class ProgressToStderr:
-        def __init__(self, stream): self.stream = stream
-        def write(self, value): return self.stream.write(value)
-        def flush(self): return self.stream.flush()
-        def isatty(self): return True
-        def __getattr__(self, name): return getattr(self.stream, name)
-    answer_stream = sys.stdout
-    sys.stdout = ProgressToStderr(sys.stderr)
-    try:
-        status, message, url = Observations.download_file(request['uri'], local_path=request['destination'], cache=False, verbose=True)
-    finally:
-        sys.stdout = answer_stream
-    if status not in ('COMPLETE', 'SKIPPED'):
-        raise RuntimeError(f'MAST download {status}: {message}')
-    answer['files'] = [request['destination']]
 elif operation == 'tap-query':
     import requests
     class TapSession(SafeVoSession, requests.Session):
@@ -431,41 +405,16 @@ json.dump(answer, sys.stdout, allow_nan=False, separators=(',', ':'))
 
 export type AstroqueryRunner = (python: string, env: NodeJS.ProcessEnv, request: AstroqueryRequest) => Promise<unknown>;
 
-const ANSI = /\u001b\[[0-9;]*m/gu;
-function mastProgress(write: (line: string) => void) {
-  let buffered = '', announced = false, lastStep = -1;
-  return (chunk: string, flush = false) => {
-    buffered += chunk;
-    const parts = buffered.split(/[\r\n]+/u);
-    buffered = flush ? '' : parts.pop() ?? '';
-    for (const raw of parts) {
-      const line = raw.replace(ANSI, '').trim();
-      if (!line) continue;
-      if (line.startsWith('Downloading URL ')) {
-        if (!announced) { announced = true; write(line); }
-        continue;
-      }
-      const percent = /\(\s*([0-9]+(?:\.[0-9]+)?)%\)/u.exec(line);
-      if (!percent) continue;
-      const step = Math.min(20, Math.floor(Number(percent[1]) / 5));
-      if (step > lastStep) { lastStep = step; write(line); }
-    }
-  };
-}
-
 export const runAstroqueryProcess: AstroqueryRunner = (python, env, request) => new Promise((done, fail) => {
   const child = spawn(python, ['-c', PYTHON], { env: telescopePythonEnvironment(env), stdio: ['pipe', 'pipe', 'pipe'] });
   let stdout = '', stderr = '';
-  const forwardProgress = mastProgress(line => process.stderr.write(`${line}\n`));
   child.stdout.setEncoding('utf8').on('data', chunk => { stdout += chunk; });
   child.stderr.setEncoding('utf8').on('data', chunk => {
     stderr += chunk;
-    if (request.operation === 'mast-download') forwardProgress(chunk);
     if (request.operation === 'vo-download') for (const line of chunk.split('\n')) if (line.startsWith('VO product:')) process.stderr.write(`${line}\n`);
   });
   child.on('error', fail);
   child.on('close', code => {
-    if (request.operation === 'mast-download') forwardProgress('', true);
     if (code !== 0) fail(new Error(`Astroquery ${request.operation} failed (status ${code}): ${stderr.slice(-4000)}`));
     else { try { done(JSON.parse(stdout)); } catch (error) { fail(new Error(`Astroquery ${request.operation} returned invalid JSON: ${String(error)}`)); } }
   });
@@ -484,12 +433,12 @@ export function parseAstroqueryAnswer(value: unknown, request: AstroqueryRequest
     const failure = requireRecord(raw.failure), code = requireString(failure.code), status = failure.httpStatus;
     if (!['authentication','no-content','byte-limit','protocol','transport','interrupted','identity','local-io'].includes(code) ||
       status !== null && (typeof status !== 'number' || !Number.isInteger(status) || status < 100 || status > 599)) throw new TypeError('Invalid VO failure state.');
-    throw new VoAccessError(code as VoFailureCode, requireString(failure.message), status as number | null);
+    throw new VoAccessError(code as VoFailureCode, requireString(failure.message), status as number | null, failure.rawMessage === undefined ? requireString(failure.message) : requireString(failure.rawMessage));
   }
   const t = request.operation === 'vo-download' ? requireRecord(raw.transfer, 'VO transfer') : undefined;
   const nullable = (v: unknown) => v === null ? null : requireString(v);
   const transfer = t ? { file: parsePin(t.file), effectiveUrl: requireString(t.effectiveUrl), contentType: nullable(t.contentType), etag: nullable(t.etag), lastModified: nullable(t.lastModified) } : undefined;
-  const expectsRows = !isVo && request.operation !== 'vo-download' && request.operation !== 'mast-download' && !((request.operation === 'horizons-ephemerides' || request.operation === 'horizons-vectors') && request.raw);
+  const expectsRows = !isVo && request.operation !== 'vo-download' && !((request.operation === 'horizons-ephemerides' || request.operation === 'horizons-vectors') && request.raw);
   if (expectsRows && raw.rows === undefined) throw new TypeError(`Astroquery ${request.operation} returned no rows field.`);
   const rows = raw.rows === undefined ? undefined : requireArray(raw.rows, 'Astroquery rows').map((row, index) => requireRecord(row, `Astroquery row ${index}`));
   const files = raw.files === undefined ? undefined : requireArray(raw.files, 'Astroquery files').map((file, index) => requireString(file, `Astroquery file ${index}`));

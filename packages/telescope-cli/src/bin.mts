@@ -2,7 +2,7 @@ import { cliWorkspaceArguments } from './cli-workspace.mts';
 import { existsSync, readdirSync } from 'node:fs';
 import { delimiter, dirname, resolve } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
-import { HELP, SHORT_HELP, VERSION } from './help.mts';
+import { helpCommand, helpText, VERSION } from './help.mts';
 import { CLI_PACKAGE_ROOT } from './paths.mts';
 
 /** The command's implementation in the checkout: this package's own sources, run with the checkout's installed packages. */
@@ -23,8 +23,8 @@ function typedNode(): string {
 
 try {
   const { args, workspace: root } = cliWorkspaceArguments(process.argv.slice(2));
-  if (!args.length) process.stdout.write(SHORT_HELP);
-  else if (args[0] === 'help' || args.includes('--help') || args.includes('-h')) process.stdout.write(HELP);
+  const help = helpCommand(args);
+  if (help !== undefined) process.stdout.write(helpText(help, process.stdout.isTTY));
   else if (args.length === 1 && args[0] === '--version') process.stdout.write(`${VERSION}\n`);
   else {
     const node = typedNode();

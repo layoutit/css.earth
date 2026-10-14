@@ -1,9 +1,9 @@
 /** Select one exact product/operation. Never turn a failed cutout into a whole-product download. */
 import { basename, dirname, resolve } from 'node:path';
-import { mkdir, readFile, stat, writeFile, copyFile, rename, rm } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile, copyFile, link, rename, rm } from 'node:fs/promises';
 import { snapshotPublisher, type SnapshotPublisher } from './snapshot-store.mts';
 import { randomUUID } from 'node:crypto';
-import { fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits, USER_ROOT } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
 import { requireRecord } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
@@ -218,7 +218,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     const parameters = sodaParameters(spec.descriptor, spec.request, spec.operation.parameters);
     if (canonical(parameters) !== canonical(spec.operation.parameters)) throw new Error('Subset parameters disagree with request.');
   } else if (spec.request.region || spec.request.spectralFrame) throw new Error('Subset requests cannot acquire a direct product.');
-  const destination = resolve(USER_ROOT, 'output/telescopes/vo/acquired', spec.key), recordPath = resolve(destination, 'acquisition.json');
+  const destination = resolve(acquisitionDirectory() ?? resolve(USER_ROOT, 'output/telescopes/vo/acquired'), spec.key), recordPath = resolve(destination, 'acquisition.json');
   const run: ProductRun = { telescope: spec.observation.service, stage: 'archive-acquisition',
     inputs: spec.metadata.map(pin => ({ identity: basename(pin.path), role: 'archive metadata response', bytes: pin.bytes })),
     parameters: { acquisition: spec.identity, parent: spec.observation.identities, operation: spec.operation, format: spec.format, limits: spec.limits },
@@ -253,7 +253,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     if (unpacked) {
       if (unpacked.format !== spec.format) throw new Error('Archive format disagrees with advertised MIME.');
       // A package may contain several FITS science members or a table/event product. Never select one by order.
-      if (unpacked.science !== null) await copyFile(resolve(staging, 'members', unpacked.science), resolve(staging, 'science.fits'));
+      if (unpacked.science !== null) await link(resolve(staging, 'members', unpacked.science), resolve(staging, 'science.fits')); // One inode; retained package members and the raster alias share bytes.
       metadata.push({ path: receivedName, file: resolve(staging, receivedName) }, ...unpacked.members.map(member => ({ path: `members/${member.path}`, file: resolve(staging, 'members', member.path) })));
     }
     const content: VoContentProfile[] = [];

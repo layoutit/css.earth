@@ -465,8 +465,8 @@ export function formatAnswer(answer: CapabilityAnswer): string {
     lines.push(`  body map: ${candidate.bodyMapSupport.answer}. ${candidate.bodyMapSupport.reason}`);
     lines.push(`  selection: ${candidate.selectionAssessment.selectable ? 'selectable' : 'blocked'}`);
     for (const blocker of candidate.selectionAssessment.blockers) lines.push(`    blocker ${blocker.code}${blocker.constraint ? ` (${blocker.constraint})` : ''}: ${blocker.reason}`);
-    for (const action of candidate.selectionAssessment.nextActions) lines.push(`    next: ${action.command} ${action.arguments.map(shellWord).join(' ')}`);
-    for (const action of candidate.selectionAssessment.qualificationActions.slice(0, 1)) lines.push(`    qualify observation ${action.observation}: ${action.command} ${action.arguments.map(shellWord).join(' ')}`);
+    for (const action of candidate.selectionAssessment.nextActions) lines.push(`    selectable program: ${action.programme}`);
+    for (const action of candidate.selectionAssessment.qualificationActions.slice(0, 1)) lines.push(`    qualification available for observation ${action.observation}`);
     if (candidate.selectionAssessment.qualificationActions.length > 1) lines.push(`    ${candidate.selectionAssessment.qualificationActions.length - 1} more qualification action(s) are present in the JSON answer.`);
     lines.push(`  archive programmes recorded for ${answer.target}: ${candidate.programmes.join(', ') || 'none'}`);
     const records = candidate.observations?.records ?? [];
@@ -499,8 +499,6 @@ const numberFlag = (args: readonly string[], flag: string): number | undefined =
   return value;
 };
 
-const shellWord = (value: string): string => /^[A-Za-z0-9_./,:@+-]+$/u.test(value) ? value : `'${value.replaceAll("'", "'\\''")}'`;
-
 export const QUERY_HELP = `Usage: node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/observation-query/query.mts --target TARGET --wavelength MIN,MAX [options]
 
 Required for an explicit workflow verdict:
@@ -514,8 +512,8 @@ Resolution limits are the largest acceptable angular or surface scale: smaller v
 Use --range-km with --min-km, and --range-km plus --radius-km with --min-elements.
 Conditional profile bounds require --accept-assumptions jwst.archive-point-source,jwst.profile-margin-bound.
 Use --select-telescope NAME --select-mode MODE --program ID to emit a typed observation selection.
-When qualification is the only blocker, the answer may provide a telescope:qualify action for an indexed observation.
-Use --json for JSON. With the package script, use pnpm --silent telescope:query ... --json for JSON-only stdout.`;
+When qualification is the only blocker, the answer may describe an internal qualification action for an indexed observation.
+Use telescope query TARGET --wavelength MIN,MAX --out DIRECTORY --json for JSON-only stdout.`;
 
 export function requestFromArguments(args: readonly string[]): CapabilityRequest {
   const circle = flagValue(args, '--icrs-circle')?.split(',').map(Number), spectralFrame = flagValue(args, '--spectral-frame');

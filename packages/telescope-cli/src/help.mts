@@ -1,12 +1,35 @@
+import { BANNER } from './banner.mts';
+
 export const VERSION = '0.2.0';
+
+const coreHelp = [
+  ['explore TARGET', 'Find observations and choose one'],
+  ['get RUN --pick N', 'Retrieve a saved choice'],
+  ['outputs ARTIFACT.json', 'List available outputs'],
+  ['export RESULT --output TYPE [--out DIRECTORY]', 'Export a selected output'],
+] as const;
+const usefulHelp = [
+  ['papers TARGET', 'Find related research'],
+  ['leads TARGET', 'Find published data and models'],
+  ['stars GALAXY', "Find a galaxy's stellar catalogues"],
+  ['skill install --provider NAME', 'Install the agent skill'],
+  ['toolchain list|remove|install|verify [NAME]', 'Manage installed toolchains'],
+] as const;
+const usageWidth = Math.max(...[...coreHelp, ...usefulHelp].map(([usage]) => usage.length));
+const helpRows = (entries: readonly (readonly [string, string])[]) => entries.map(([usage, description]) =>
+  `  telescope ${usage.padEnd(usageWidth)}  ${description}`).join('\n');
 
 export const SHORT_HELP = `Telescope — explore observations and turn qualified data into outputs.
 
-Start here:
-  telescope explore TARGET                 Find observations and choose one in a terminal
-  telescope outputs ARTIFACT.json          Inspect a delivery and choose an output
+Core flow:
+${helpRows(coreHelp)}
 
-Use telescope --help for all commands, filters, and exit codes.
+Also useful:
+${helpRows(usefulHelp)}
+
+css.earth development: new-object and bake routes (workspace required).
+Use --json for scripts and agents; progress goes to stderr, no prompts.
+Details: telescope help COMMAND · Full reference: telescope help all
 Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/README.md
 `;
 
@@ -19,6 +42,11 @@ Agent skill (explicit host or skills directory):
   Repeats do nothing; unrelated or modified content is refused. No host config is edited.
 
 Managed toolchains:
+  telescope toolchain list [--json]
+  telescope toolchain remove NAME [--json]
+  List installed environments, size on disk and folder. Removal deletes one environment only inside
+  the user root’s toolchains/; linked paths and active install locks are refused. Legacy installs are listed
+  but cannot be removed here. Python environments and micromamba remain central, installed once.
   telescope toolchain install NAME [--json]
   telescope toolchain verify astroquery|pds|starry|spiderman|picaso [--json]
   Install names also include archive toolchains: chandra, spitzer, hst, keck, gemini, naco, tess,
@@ -26,8 +54,8 @@ Managed toolchains:
   Source builds need a C compiler and standard-library headers (macOS also needs its SDK).
 
 Human entry points:
-  telescope explore [TARGET] [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY] [--fresh]
-  telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
+  telescope explore [TARGET] [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY] [--fresh] [--yes|-y]
+  telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] [--out DIRECTORY] [--resume] [--yes|-y] [--json]
   telescope papers TARGET... [--about PHRASE,PHRASE] [--fulltext] [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope simulations TARGET [--json] [--out DIRECTORY]
   telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
@@ -44,16 +72,25 @@ Human entry points:
   telescope families [--json]
   telescope family-assess REQUEST.json ARTIFACT.json --out DIRECTORY [--json]
   telescope family-run DESCRIPTOR.json OPERATION [--component ID] [--params PARAMS.json] --out DIRECTORY [--json]
-  telescope outputs ARTIFACT.json [--structure NAME]
+  telescope outputs ARTIFACT.json [--structure NAME] [--out DIRECTORY]
   telescope candidates STAR --epoch MJD|DATE --out DIRECTORY [--figure-background transparent|opaque]
   telescope associate MEASUREMENTS.csv --system STAR --out DIRECTORY [--orbit-draws N] [--fit-astrometry] [--fit-orbits]
 
+Explore may first install managed Python: it names the packages, approximate size and toolchains/ folder,
+then asks in a terminal. --yes (-y) skips this question; scripts proceed without prompting.
 Explore needs only a target. A name outside the catalogue is resolved by SIMBAD, and the search uses its identifiers and
 position, with SIMBAD's position error as a footprint circle that selects records without cutting them. In a terminal it saves the bounded discovery snapshot, shows actual
 observations and limitations, and asks which exact identity to retrieve. With --json, redirected
-stdin, or redirected stdout it never prompts and writes the saved exploration as JSON. If --out is
-omitted, a unique directory is created under ./telescope-runs/. Get accepts that directory's
-explore.json as well as a strict query.json. Exploration does not state scientific acceptance criteria.
+stdin, or redirected stdout it never prompts and writes a compact summary as JSON; the complete record stays on disk. If --out is
+omitted, a unique directory is created under ./telescope-runs/ in the current working directory. Get accepts that directory's
+explore.json as well as a strict query.json. Downloads exist once in RUN/pick-N/ and are reused on retry.
+Fetch and export without --out save under ./telescope-runs/<target>-<timestamp>/ too.
+Outputs saves the complete inspection as outputs.json inside the existing run and prints a summary naming savedPath; it never creates a new run.
+--out for outputs may select an existing subfolder inside that run. Standalone artifacts use their containing folder.
+Field searches use field-<ra>-<dec>-<timestamp>. Run-owned JSON follows the run; lookups without --out
+write nothing. Reusable search-answer caches (--fresh bypasses), Astroquery caches, micromamba and
+toolchains stay in the user root. A read-only cwd fails before network work: choose a writable folder
+or pass --out DIR. Exploration does not state scientific acceptance criteria.
 In a terminal, outputs asks which available operation to run, then asks only for that operation's
 reported inputs and a new output directory. Press Enter at any prompt to cancel before an export
 starts. With --json or redirected input/output it never prompts; the listed command templates remain.
@@ -87,14 +124,14 @@ title (an erratum is printed that way), whether it is retracted, and the later w
 Several targets are a sweep: one search each, the works named, nothing fetched. A search costs 10 of OpenAlex's 1,000 daily
 credits for a network without a key; OPENALEX_API_KEY in the environment has ten times that. Nothing is saved without --out.
 Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
-license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
-an entry written after reading its paper, fetching
-by byte range only the header and the one grid it draws.
+license, size and files. It downloads nothing. A listed record is a lead: in a checkout,
+packages/telescope-cli/src/new-object/new-object-cli.mts adds one as a dataset from an entry written after reading its
+paper, fetching by byte range only the header and the one grid it draws (docs/telescope-commands.md gives the command).
 Leads asks DataCite, which registers the DOIs of every data repository and of arXiv, for the records that name the target
 and speak of a measured phase curve or map, a measured eclipse, or a model: data releases at Zenodo, Dryad, Dataverse,
 universities, the CDS and MAST, and the papers themselves. --class exoplanet asks for every object of that class, ten a
 request, and ranks them with what each page opens on, the pages without a map first. A lead is read before anything is
-shown: new-object --phase-curve draws a paper's fitted table and new-object --simulation a released field.
+shown: in a checkout, new-object-cli.mts draws a paper's fitted phase-curve table or a released model field.
 Stars counts the stars SIMBAD lists inside a galaxy's outline by class, names the papers they come from, and says which of
 VizieR's tables of those papers give each star a period and a place. It downloads nothing. A table it calls ready is a lead
 for new-object --from-table, and so is one that lists detector pixels, once its paper has said which exposure they are of.
@@ -110,13 +147,16 @@ downloads at most 8 MiB; ordinary outputs inspection stays offline.
 WWT image export selects a separately numbered curated TAN sky image from a saved exploration,
 downloads at most 64 pinned-catalog tiles, and assembles one static PNG plus a source receipt.
 It is a display-image input for offline preparation, not a scientific observation or a runtime tile service.
+Get and fetch print download size and destination before transferring science bytes. In a terminal,
+100 MB or more and unknown sizes ask Continue? [Y/n]; Enter proceeds, n cancels with exit code 1.
+--yes (-y) skips the question. --json or redirected stdin/stdout never prompt and include download metadata.
 Fetch selects a separately numbered source within one archive from a saved exploration. Keck is
 the default for older saved runs. Exact archive identities are rechecked; original bytes, discovery
 and current metadata are pinned within the saved transfer limit. FITS files enter shared outputs;
 OPUS preserves its native image, label and support files. Acquisition does not establish calibration,
 target detection or scientific fitness.
 For Gemini, OPUS, Chandra and Spitzer, a failed fetch retains completed files in DIRECTORY.partial.
-Repeat the same command with --resume to recheck the selected archive metadata and local hashes,
+Use the printed resume command, including --out with the actual run directory, to recheck the selected archive metadata and local files,
 then download only unfinished files. Choose a new directory if the archive selection changed.
 Explore pushes an instrument and observation interval into Keck, Gemini and Chandra live source
 queries before their bounded samples. Spitzer filters all returned AORs before sampling. Keck and
@@ -134,23 +174,23 @@ must be new; reusable data and a pinned product record are reopened before succe
 
 Explicit scientific request:
   telescope query TARGET --wavelength MIN,MAX --kind cube --any-time --min-arcsec N --out DIRECTORY
-  telescope get DIRECTORY --pick N
-  telescope get DIRECTORY --pick N --offline
-  telescope export DIRECTORY/pick-N/result.json --output image --hdu N [--structure NAME] --plane N --out DIRECTORY
-  telescope export DIRECTORY/pick-N/result.json --output spectrum --hdu N --pixel X,Y --out DIRECTORY
-  telescope export RESULT_JSON --output band-image --hdu N --band LO,HI --out DIRECTORY
-  telescope export RESULT_JSON --output aperture-spectrum --hdu N --aperture X0,Y0,X1,Y1 --background none --out DIRECTORY
-  telescope export RESULT_JSON --output feature-map --hdu N --band LO,HI --continuum L0,L1,R0,R1 --out DIRECTORY
+  telescope get RUN --pick N
+  telescope get RUN --pick N --offline [--yes|-y]
+  telescope export RUN/pick-N/result.json --output image --hdu N [--structure NAME] --plane N [--out DIRECTORY]
+  telescope export RUN/pick-N/result.json --output spectrum --hdu N --pixel X,Y [--out DIRECTORY]
+  telescope export RESULT_JSON --output band-image --hdu N --band LO,HI [--out DIRECTORY]
+  telescope export RESULT_JSON --output aperture-spectrum --hdu N --aperture X0,Y0,X1,Y1 --background none [--out DIRECTORY]
+  telescope export RESULT_JSON --output feature-map --hdu N --band LO,HI --continuum L0,L1,R0,R1 [--out DIRECTORY]
 
 Physical object handoff (existing measured/modelled depth):
-  telescope export OBJECT_JSON --output points|volume|volume-dataset-bank --out DIRECTORY
+  telescope export OBJECT_JSON --output points|volume|volume-dataset-bank [--out DIRECTORY]
   Reuses the existing physical-object loaders; copies pinned renderer resources and credits.
 
 Surface outputs:
-  telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json --out MAP_DIRECTORY
-  telescope export OUTPUT_DIRECTORY/output.product.json --output html --out HTML_DIRECTORY
-  telescope export OBJECT_JSON --output html --out HTML_DIRECTORY
-  telescope export MAP_DIRECTORY/map.fits.product.json --output sphere --out SPHERE_DIRECTORY
+  telescope export MEASUREMENT/output.product.json --output body-map --geometry navigation.json [--out MAP_DIRECTORY]
+  telescope export OUTPUT_DIRECTORY/output.product.json --output html [--out HTML_DIRECTORY]
+  telescope export OBJECT_JSON --output html [--out HTML_DIRECTORY]
+  telescope export MAP_DIRECTORY/map.fits.product.json --output sphere [--out SPHERE_DIRECTORY]
   telescope project MEASUREMENT/output.product.json --geometry navigation.json --out MAP_DIRECTORY  (compatibility alias)
   Navigation pins SPICE kernels and explicitly chooses WCS or disc registration.
   Projection preserves unknown beam resolution and request satisfaction. See docs/virtual-telescopes.md.
@@ -203,7 +243,11 @@ Explore filters and query options use micrometres, arcseconds and kilometres:
 
 Explorations and queries save immutable numbered choices in explore.json and query.json. Get
 revalidates the exact saved identity, qualifies it if needed, and exports pinned data and evidence
-to DIRECTORY/pick-N/. If both snapshot files are present, get refuses the ambiguous directory.
+to RUN/pick-N/. If both snapshot files are present, get refuses the ambiguous directory.
+Get prints the download size and destination first; 100 MB or more and unknown sizes ask Continue? [Y/n]
+in a terminal. Enter proceeds; n cancels with exit code 1. --yes (-y) skips; --json and redirected
+stdin/stdout proceed without a question and include download metadata. First implicit managed Python
+installation also names its packages, approximate size and toolchains/ folder before terminal consent.
 Outputs inspects deliveries, derived product records and physical object packages, and reports
 the artifact stage and source context, then reports available operations, blockers, required inputs
 and concrete commands after checking the prerequisites shared with export. Supported inputs are
@@ -241,3 +285,85 @@ Standalone alternative: telescope export RESULT --output html --out DIRECTORY.
 Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/README.md
 Issues: https://github.com/layoutit/css.earth/issues
 `;
+
+/** Preserve the published reference above while carving command pages from its actual text. */
+function between(start: string, end?: string): string {
+  const first = HELP.indexOf(start);
+  const last = end === undefined ? HELP.length : HELP.indexOf(end, first + start.length);
+  if (first < 0 || last < first) throw new Error(`Missing help reference section: ${start}`);
+  return HELP.slice(first, last).trimEnd();
+}
+
+const usage = (command: string): string => HELP.split('\n').filter(line => line.startsWith(`  telescope ${command} `)).join('\n');
+const globalOptions = between('  --json ', '\nExplorations and queries');
+const footer = between('Exit codes:');
+const filters = between('Explore filters and query options', '\n  --json ');
+const delivery = between('Explorations and queries save', '\nOutputs inspects');
+const outputInspection = between('Outputs inspects', '\nConfigured, bounded');
+const coverage = between('Configured, bounded archive searches', '\nExport writes');
+const portable = between('Scientific surface publication remains', '\nExit codes:');
+const exportKinds = between('Physical object handoff', '\nSky association:');
+const figures = between('Figures:', '\nExplore filters');
+
+const explanations: Readonly<Record<string, readonly string[]>> = {
+  skill: [between('Agent skill', '\nManaged toolchains:')],
+  toolchain: [between('Managed toolchains:', '\nHuman entry points:')],
+  explore: [between('Explore may first install managed Python:', '\nIn a terminal, outputs'),
+    between('Explore pushes an instrument', '\nFamily-assess'), filters, delivery, coverage,
+    '  --all                              Show every saved choice (default: first 10)'],
+  get: [delivery, coverage, filters],
+  query: [filters, delivery, coverage],
+  outputs: [between('In a terminal, outputs', '\nNew-object'), outputInspection, portable],
+  export: [exportKinds, figures, coverage, between('Export writes', '\nLocal import'), portable],
+  project: [between('Surface outputs:', '\nAggregate outputs:'), portable],
+  'new-object': [between('New-object turns a star spec', '\nPapers lists')],
+  papers: [between('Papers lists', '\nSimulations lists')],
+  simulations: [between('Simulations lists', '\nLeads asks')],
+  leads: [between('Leads asks', '\nStars counts')],
+  stars: [between('Stars counts', '\nGaia-cone asks')],
+  'gaia-cone': [between('Gaia-cone asks', '\nASCL searches')],
+  ascl: [between('ASCL searches', '\nWWT image export')],
+  'wwt-image': [between('WWT image export', '\nFetch selects')],
+  fetch: [between('Get and fetch print download size', '\nFamily-assess')],
+  'family-assess': [between('Family-assess accepts', '\nWWT FITS reads')],
+  'wwt-fits': [between('WWT FITS reads', '\nFamily-run executes')],
+  'family-run': [between('Family-run executes', '\nExplicit scientific request:'), figures],
+  candidates: [between('Sky association:', '\nFigures:'), figures],
+  associate: [between('Sky association:', '\nFigures:'), figures],
+  import: [between('Local import copies', '\nScientific surface publication')],
+  families: ['Lists the registered observation families and their available profiles.'],
+};
+
+export const HELP_COMMANDS = Object.keys(explanations);
+
+const currentOutputHelp = `Current human and agent output:
+  telescope explore TARGET [--all] [--verbose] [--json]
+  telescope get RUN --pick N [--out DIRECTORY] [--offline] [--yes|-y] [--verbose] [--json]
+  telescope outputs ARTIFACT.json [--structure NAME] [--out DIRECTORY] [--verbose] [--json]
+  telescope export RESULT --output TYPE [--out DIRECTORY] [--verbose] [--json]
+Explore shows the first 10 saved choices; --all shows every choice in the same pick order.
+--verbose retains full limitations and diagnostics on human screens.
+Explore --json emits cssearth-telescope-explore-summary@1, with outcome, resolution, counts,
+savedPath and compact choices. The complete record stays in explore.json; use jq for details.
+Outputs saves the complete inspection as outputs.json inside the existing run and prints a summary naming savedPath; it never creates a new run.
+--out for outputs may select an existing subfolder inside that run. Standalone artifacts use their containing folder.
+JSON commands never prompt, and progress and notices go to stderr.
+`;
+
+/** An empty command means the short screen; only that screen carries the terminal banner. */
+export function helpText(command = '', tty = false): string {
+  if (!command || command === 'help') return `${tty ? `${BANNER}\n` : ''}${SHORT_HELP}`;
+  if (command === 'all') return `${HELP}\n${currentOutputHelp}`;
+  const sections = explanations[command];
+  if (!sections) throw new TypeError(`Unknown help command ${command}. Use telescope help all for the full reference.`);
+  const current = ['explore', 'get', 'outputs', 'export'].includes(command) ? currentOutputHelp : '';
+  return [`Telescope ${command}`, usage(command), ...sections, current, globalOptions, footer].filter(Boolean).join('\n\n') + '\n';
+}
+
+/** Resolve help before validating command arguments, so incomplete invocations can request usage. */
+export function helpCommand(args: readonly string[]): string | undefined {
+  if (!args.length) return '';
+  if (args[0] === 'help') return args[1] ?? '';
+  if (args.includes('--help') || args.includes('-h')) return args[0]?.startsWith('-') ? '' : args[0];
+  return undefined;
+}

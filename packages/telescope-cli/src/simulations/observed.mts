@@ -8,7 +8,7 @@
  * orbit has it, and where the recorded eccentricity and periastron put it (`eclipsePhase`). A recorded eccentricity can be a
  * weak measurement, so a visit that holds either place is listed, with the phase it starts at for a person to judge.
  *
- * - a visit of a whole orbit or more is a phase curve: what `new-object --phase-curve` draws once a paper prints its fit;
+ * - a visit of a whole orbit or more is a phase curve: what `node packages/telescope-cli/src/new-object/new-object-cli.mts --phase-curve` draws once a paper prints its fit;
  * - one that holds an eclipse place and no transit is an eclipse: a dayside temperature;
  * - one that holds only the transit gives a transmission spectrum, which no page draws.
  *

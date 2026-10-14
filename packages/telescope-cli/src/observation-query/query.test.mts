@@ -174,8 +174,7 @@ test('an indexed observation exposes a telescope-owned qualification action when
   const irac = candidate(answer, 'IRAC Map');
   assert.deepEqual(irac.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
   assert.deepEqual(irac.selectionAssessment.qualificationActions, [{ kind: 'qualify-observation', observation: '21415424', archiveProgramme: '289',
-    program: 'bennu-21415424', configuration: { kind: 'spitzer-irac-channel', channel: 1 }, command: 'pnpm', arguments: ['--silent', 'telescope:qualify', '--target', 'bennu', '--telescope', 'Spitzer',
-      '--mode', 'IRAC Map', '--observation', '21415424', '--channel', '1'] }]);
+    program: 'bennu-21415424', configuration: { kind: 'spitzer-irac-channel', channel: 1 } }]);
   const qualified = queryCapabilities(request, inputs([{ telescope: 'spitzer', value: { ...ledger, modes: [{ ...ledger.modes[0], programs: ['bennu-21415424'], checked: ['bennu-21415424'] }] } }]));
   assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.selectable, true);
   assert.equal(candidate(qualified, 'IRAC Map').selectionAssessment.qualificationActions.length, 1, 'a ledger claim alone cannot suppress qualification of an exact output');
@@ -226,8 +225,8 @@ test('an explicit selection keeps unknowns and refuses a hard no or another targ
   assert.ok(selected.unresolved.some(entry => entry.constraint === 'angularResolution' && entry.answer === 'partial'));
   assert.equal(answer.endpoint.status, 'selectable-candidates');
   assert.equal(candidate(answer, 'NIRSPEC/IFU').selectionAssessment.selectable, true);
-  assert.deepEqual(candidate(answer, 'NIRSPEC/IFU').selectionAssessment.nextActions[0]?.arguments.slice(-7),
-    ['--select-telescope', 'JWST', '--select-mode', 'NIRSPEC/IFU', '--program', 'europa-1250', '--json']);
+  assert.deepEqual(candidate(answer, 'NIRSPEC/IFU').selectionAssessment.nextActions[0],
+    { kind: 'select-observation', programme: 'europa-1250' });
   assert.throws(() => selectObservation(answer, 'JWST', 'NIRSPEC/IFU', 'sn-1987a-1232'), /not a pinned or archive-final program of europa/u);
   const impossible = queryCapabilities({ ...complete, wavelengthMicrometres: [8, 9] }, inputs([{ telescope: 'jwst', value: JWST_LEDGER }]));
   assert.throws(() => selectObservation(impossible, 'JWST', 'NIRSPEC/IFU', 'europa-1250'), /cannot answer this request: wavelength/u);
@@ -249,7 +248,7 @@ test('selection requires a complete scientific request and exposes the shared NA
 
 test('help states the complete request and the direction of a resolution limit', () => {
   assert.match(QUERY_HELP, /largest acceptable angular or surface scale/u);
-  assert.match(QUERY_HELP, /pnpm --silent telescope:query/u);
+  assert.match(QUERY_HELP, /telescope query TARGET/u);
 });
 
 test('a Vesta selection reports every blocker and human output separates archive from toolkit programs', () => {

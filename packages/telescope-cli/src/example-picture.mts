@@ -1,6 +1,6 @@
 /** One example picture per virtual telescope, made from a product the telescope's own toolkit produced.
  *
- * Every picture in docs/telescopes comes from this one renderer and from the checked-in recipe beside it (examples.json).
+ * Every picture in docs/images/telescopes comes from this one renderer and from the checked-in recipe beside it (examples.json).
  * A recipe states, and this module enforces, everything that turns stored numbers into a picture: which file and which
  * extension or plane, the pixel window, the unit those numbers are in, the two values drawn as black and white, the
  * stretch between them, which way up the picture is, the whole-number enlargement, and the colors. Nothing is smoothed,
@@ -411,7 +411,7 @@ if (process.argv[1] && import.meta.filename === resolve(process.argv[1])) {
   const repository = requireWorkspace();
   const only = process.argv.slice(2).filter(argument => !argument.startsWith('--'));
   const recipes = parseExampleRecipes(JSON.parse(await readFile(packagePath('src/examples.json'), 'utf8')));
-  const directory = resolve(repository, 'docs/telescopes');
+  const directory = resolve(repository, 'docs/images/telescopes');
   await mkdir(directory, { recursive: true });
   for (const recipe of recipes.filter(recipe => !only.length || only.includes(recipe.id))) {
     const picture = await makeExamplePicture(recipe, repository);

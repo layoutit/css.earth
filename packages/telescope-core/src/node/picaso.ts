@@ -3,6 +3,7 @@
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
  * (picaso-toolchain.json says what each is). Install: telescope toolchain install picaso */
 import { installManagedToolchain } from './toolchain/environment.js';
+import { downloadHttpFile } from './http-download.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
 import { resolveInstalledToolchain } from './toolchain/resolver.js';
 import { runToolchainProcess } from './toolchain/process.js';
@@ -48,7 +49,8 @@ export async function installPicaso() {
     if (!bobcatNodesAt(PATHS.profiles).length) {
       await mkdir(PATHS.profiles, { recursive: true });
       const tar = resolve(PATHS.profiles, 'structures.tar.gz');
-      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', tar, dataUrl(entry, 'profiles')]);
+      await rm(tar, { force: true });
+      await downloadHttpFile(dataUrl(entry, 'profiles'), tar, { byteLimit: 20 * 1024 ** 3 });
       runToolchainProcess('tar', ['-xzf', tar, '-C', PATHS.profiles]);
       await rm(tar);
     }
@@ -56,18 +58,20 @@ export async function installPicaso() {
     if (!(await Promise.all(tables.map(table => exists(resolve(PATHS.opacities, table))))).every(Boolean)) {
       await mkdir(PATHS.opacities, { recursive: true });
       const zip = resolve(PATHS.opacities, 'opacities.zip');
-      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', zip, dataUrl(entry, 'opacities')]);
+      await rm(zip, { force: true });
+      await downloadHttpFile(dataUrl(entry, 'opacities'), zip, { byteLimit: 20 * 1024 ** 3 });
       runToolchainProcess('unzip', ['-q', '-o', zip, ...tables, '-d', PATHS.opacities]);
       await rm(zip);
     }
     if (!readdirOrEmpty(PATHS.cloudyProfiles).length) {
       await mkdir(resolve(PATHS.cloudyProfiles, '..'), { recursive: true });
       const zip = resolve(PATHS.cloudyProfiles, '../profiles.zip');
-      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', zip, dataUrl(entry, 'cloudyProfiles')]);
+      await rm(zip, { force: true });
+      await downloadHttpFile(dataUrl(entry, 'cloudyProfiles'), zip, { byteLimit: 20 * 1024 ** 3 });
       runToolchainProcess('unzip', ['-q', '-o', zip, 'pressure-temperature_profiles/*', '-d', resolve(PATHS.cloudyProfiles, '..')]);
       await rm(zip);
     }
-    if (!await exists(PATHS.cloudArchive)) runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.cloudArchive, dataUrl(entry, 'cloudProperties')]);
+    if (!await exists(PATHS.cloudArchive)) await downloadHttpFile(dataUrl(entry, 'cloudProperties'), PATHS.cloudArchive, { byteLimit: 20 * 1024 ** 3 });
     if (!await exists(PATHS.passband)) {
       await mkdir(resolve(PATHS.passband, '..'), { recursive: true });
       runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.passband, dataUrl(entry, 'passband')]);

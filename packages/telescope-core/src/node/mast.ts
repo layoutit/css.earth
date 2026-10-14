@@ -1,10 +1,13 @@
-/** Shared MAST boundary. Astroquery owns the service protocol and downloads; css.earth validates returned identities and bytes. */
+/** Shared MAST boundary. Astroquery owns service queries; exact public product transfers retain interrupted bytes. */
+import { acquisitionDirectory } from './acquisition-directory.js';
 import { legacyWorkspaceRoots } from './toolchain/resolver.js';
+import { constants } from 'node:fs';
 import { access, copyFile, mkdir, rm, stat, readFile, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { USER_ROOT } from './paths/index.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroquery } from './astroquery.js';
+import { downloadHttpFile } from './http-download.js';
 
 export const MAST_CACHE = resolve(USER_ROOT, 'output/archive-cache/mast');
 export const mastDownloadUrl = (uri: string) => `https://mast.stsci.edu/api/v0.1/Download/file?uri=${uri}`;
@@ -13,21 +16,33 @@ export interface MastFile { readonly name: string; readonly uri: string; readonl
 const sizeOf = (path: string) => stat(path).then(info => info.size, () => -1);
 export const exists = (path: string) => access(path).then(() => true, () => false);
 
-/** Download one MAST URI through Astroquery, then enforce the recorded byte count. */
+/** Transfer one exact public MAST URI, enforcing the recorded byte count before publication. */
 export async function mastFile(file: MastFile, directory: string, sources: readonly string[] = []): Promise<string> {
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name)) throw new TypeError(`Invalid MAST file name: ${file.name}`);
+  const requested = relative(MAST_CACHE, directory), run = acquisitionDirectory();
+  if (run && requested !== '..' && !requested.startsWith(`..${sep}`) && !isAbsolute(requested)) directory = run;
   await mkdir(directory, { recursive: true });
   const target = resolve(directory, file.name);
   const part = relative(MAST_CACHE, directory);
-  const legacy = part !== '..' && !part.startsWith(`..${sep}`) && !isAbsolute(part)
+  const cached = part !== '..' && !part.startsWith(`..${sep}`) && !isAbsolute(part);
+  const acquiredBytes = await sizeOf(target);
+  if (acquiredBytes >= 0 && acquiredBytes !== file.bytes) {
+    const inRun = run !== undefined && (resolve(directory) === run || relative(run, directory) && !relative(run, directory).startsWith('..') && !isAbsolute(relative(run, directory)));
+    if (!cached && !inRun) throw new Error(`${file.name} already exists with ${acquiredBytes} bytes; the record says ${file.bytes}. The acquired artifact was left unchanged.`);
+    await rm(target); // Interrupted older clients published partial cache entries; caller-owned acquisitions and disposable cache files self-heal.
+  }
+  const legacy = cached
     ? legacyWorkspaceRoots().map(root => resolve(root, 'output/archive-cache/mast', part)) : [];
   if (await sizeOf(target) !== file.bytes) for (const source of [...sources, ...legacy]) {
     const candidate = resolve(source, file.name);
-    if (await sizeOf(candidate) === file.bytes) { await rm(target, { force: true }); await copyFile(candidate, target); break; }
+    if (await sizeOf(candidate) === file.bytes) { await copyFile(candidate, target, constants.COPYFILE_EXCL); break; }
   }
   if (await sizeOf(target) !== file.bytes) {
-    await rm(target, { force: true });
-    await astroquery({ operation: 'mast-download', uri: file.uri, destination: target });
+    let mark = 10_000_000;
+    const transferUrl = new URL(mastDownloadUrl(''));
+    transferUrl.searchParams.set('uri', file.uri);
+    await downloadHttpFile(transferUrl.href, target, { byteLimit: file.bytes, expectedBytes: file.bytes,
+      report: bytes => { if (bytes >= mark) { process.stderr.write(`MAST product: ${(bytes / 1e6).toFixed(1)} MB\n`); mark = (Math.floor(bytes / 10_000_000) + 1) * 10_000_000; } } });
   }
   if (await sizeOf(target) !== file.bytes) throw new Error(`${file.name} (${file.uri}) did not download to its recorded ${file.bytes} bytes.`);
   return target;

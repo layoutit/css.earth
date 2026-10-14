@@ -2,17 +2,17 @@
 /** Qualify one indexed archive observation with the telescope-specific reducer that owns its physics. */
 import { loadSourceProducts } from '../products/source-products.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
-import { writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { rememberQualification } from './qualified-observations.mts';
 import { readProductScience } from './product-science.mts';
-import { pdsPackages, readProductRecord, sameRun, requireWorkspace } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, pdsPackages, readProductRecord, sameRun, requireWorkspace } from '@cssearth/telescope-core/node';
 import { measureCubeResolution } from '../archives/jwst/cubes/resolution.mts';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import type { ProductFacts } from '../requests/request-satisfaction.mts';
 import { pathToFileURL } from 'node:url';
-import { flagValue } from '@cssearth/core';
+import { flagValue, hasErrorCode, requireRecord } from '@cssearth/core';
 import { compareCubeWithMast, runSpec3 } from '../archives/jwst/cubes/spec3.mts';
 import { DEFAULT_CRDS_CONTEXT, pinImagingProgram } from '../archives/jwst/imaging/archive.mts';
 import { JWST_CUBE_COVERAGE } from '../archives/jwst/imaging/bands.mts';
@@ -24,13 +24,18 @@ import { reduceProgram as reduceNacoProgram } from '../archives/naco/reduce.mts'
 import { qualifyPdsArchiveProduct } from '../archives/pds/archive-final.mts';
 import { buildPdsLedger } from '../archives/pds/archive-ledger.mts';
 import { productRecordPath } from '@cssearth/telescope-core';
-import { compareChannel, receiptPath } from '../archives/spitzer/compare.mts';
+import { compareChannel, receiptPath, receiptName } from '../archives/spitzer/compare.mts';
 import { defaultDataRoot, pinProgram, writeSpitzerProgram } from '../archives/spitzer/archive.mts';
 import { SPITZER_LEDGER } from '../archives/spitzer/archive-ledger.mts';
 import { refreshLocalLedger } from '../archives/ledger.mts';
 import { defaultWorkRoot, remosaicChannel } from '../archives/spitzer/mosaic.mts';
 import { loadQueryInputs, queryCapabilities } from '../observation-query/query.mts';
 import { qualificationConfigurationFromArguments, qualificationPrerequisite, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';
+import { inputPath } from '../paths.mts';
+import { sourceReceipt } from '../products/source-product-contract.mts';
+import { parseProductFacts } from './qualified-observations.mts';
+
+const qualificationWork = (root: string, archive: string, id: string) => acquisitionDirectory() ? resolve(acquisitionDirectory()!, archive, id) : resolve(root, 'output', archive, id);
 
 export const QUALIFICATION_SCHEMA = 'cssearth-telescope-qualification@2';
 export interface QualificationRequest {
@@ -60,16 +65,18 @@ async function qualifySpitzerIrac(root: string, request: QualificationRequest): 
   const aorKey = Number(request.observation);
   if (!Number.isSafeInteger(aorKey) || aorKey <= 0) throw new TypeError(`Spitzer observation ${request.observation} is not an AORKEY.`);
   const programId = `${answer.target}-${request.observation}`, channelNumber = request.configuration.channel;
-  const program = await pinProgram(programId, aorKey, [channelNumber], defaultDataRoot);
+  const dataRoot = acquisitionDirectory() ? resolve(acquisitionDirectory()!, 'spitzer') : defaultDataRoot;
+  const workRoot = acquisitionDirectory() ? resolve(acquisitionDirectory()!, 'spitzer') : defaultWorkRoot;
+  const program = await pinProgram(programId, aorKey, [channelNumber], dataRoot);
   if (program.mode !== request.mode) throw new Error(`AOR ${request.observation} is ${program.mode}, not ${request.mode}.`);
   await writeSpitzerProgram(program);
   const channel = program.channels.find(entry => entry.channel === channelNumber);
   if (!channel) throw new Error(`AOR ${request.observation} returned no channel ${channelNumber}.`);
-  const { record } = await remosaicChannel(program, channel, defaultDataRoot, defaultWorkRoot);
-  await compareChannel(program, channel, defaultDataRoot, defaultWorkRoot);
-  await refreshLocalLedger(SPITZER_LEDGER);
+  const { record } = await remosaicChannel(program, channel, dataRoot, workRoot);
+  await compareChannel(program, channel, dataRoot, workRoot);
+  if (!acquisitionDirectory()) await refreshLocalLedger(SPITZER_LEDGER);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
-    program: programId, configuration: request.configuration, product: resolve(defaultWorkRoot, programId, record.outputs[0]!.path), receipt: receiptPath(programId, channelNumber),
+    program: programId, configuration: request.configuration, product: resolve(workRoot, programId, record.outputs[0]!.path), receipt: acquisitionDirectory() ? resolve(workRoot, programId, receiptName(programId, channelNumber)) : receiptPath(programId, channelNumber),
     ...(observation.programme ? { archiveProgramme: observation.programme } : {}) };
 }
 
@@ -84,9 +91,9 @@ async function qualifyJwstNirspec(root: string, request: QualificationRequest): 
   const entry = program.bands.find(band => band.observation === request.observation);
   if (!entry || entry.band !== request.configuration.band) throw new Error(`${request.observation} is ${entry?.band ?? 'not a cube'}, not ${request.configuration.band}.`);
   if (observation.programme && program.programme !== observation.programme) throw new Error(`${request.observation} is programme ${program.programme}, not indexed programme ${observation.programme}.`);
-  const work = resolve(root, 'output/jwst', programId), run = await runSpec3(programId, request.configuration.band, work, { wavelengthMicrometres: wavelength });
+  const work = qualificationWork(root, 'jwst', programId), run = await runSpec3(programId, request.configuration.band, work, { wavelengthMicrometres: wavelength });
   const compared = await compareCubeWithMast(programId, request.configuration.band, run.cube, work, [], wavelength);
-  await refreshLocalLedger(JWST_LEDGER);
+  if (!acquisitionDirectory()) await refreshLocalLedger(JWST_LEDGER);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration: request.configuration, product: run.cube, receipt: compared.path,
     ...(observation.programme ? { archiveProgramme: observation.programme } : {}) };
@@ -98,7 +105,7 @@ async function qualifyNacoImaging(root: string, request: QualificationRequest): 
   const configuration = request.configuration;
   if (observation.programme !== configuration.programme || observation.archiveTarget !== configuration.archiveTarget || observation.night !== configuration.night)
     throw new Error(`${request.observation} does not match the indexed NACO programme, target and night.`);
-  const programId = `${answer.target}-${request.observation}`, work = resolve(root, 'output/naco', programId), raw = resolve(work, 'raw');
+  const programId = `${answer.target}-${request.observation}`, work = qualificationWork(root, 'naco', programId), raw = resolve(work, 'raw');
   const program = await pinNacoProgram(programId, configuration.programme, configuration.archiveTarget, work, configuration.night);
   if (program.mode !== 'imaging' || program.mode !== request.mode) throw new Error(`${request.observation} is ${program.mode}, not ${request.mode}.`);
   const first = program.objectTemplates[0], second = program.objectTemplates[1];
@@ -114,10 +121,10 @@ async function qualifyNacoImaging(root: string, request: QualificationRequest): 
       return record;
     }));
   await compareTemplates(programId, work, templates);
-  await refreshLocalLedger(NACO_LEDGER);
+  if (!acquisitionDirectory()) await refreshLocalLedger(NACO_LEDGER);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration, product: reductions[0]!.combined,
-    receipt: resolve(NACO_PROGRAMS, `${programId}.COADDED_IMG.reproduction.json`), archiveProgramme: configuration.programme };
+    receipt: inputPath(root, resolve(NACO_PROGRAMS, `${programId}.COADDED_IMG.reproduction.json`)), archiveProgramme: configuration.programme };
 }
 
 async function qualifyPdsProduct(root: string, request: QualificationRequest): Promise<QualificationResult> {
@@ -130,8 +137,8 @@ async function qualifyPdsProduct(root: string, request: QualificationRequest): P
   const programId = `${answer.target}-pds-${request.observation}`;
   const result = await qualifyPdsArchiveProduct({ id: programId, target: answer.target, targetLid: configuration.targetLid, targetName: configuration.targetName,
     lidvid: configuration.lidvid, telescope: request.telescope, archiveTelescope: observation.observatory, mode: request.mode, instrument: observation.instrument, kind: 'image',
-    use: observation.use, ...(observation.units ? { units: observation.units } : {}) }, resolve(root, 'output/pds', programId));
-  await writeFile(resolve(root, 'src/sources/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
+    use: observation.use, ...(observation.units ? { units: observation.units } : {}) }, qualificationWork(root, 'pds', programId));
+  if (!acquisitionDirectory()) await writeFile(resolve(root, 'src/sources/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration, product: result.productPath, receipt: result.recordPath, archiveProgramme: configuration.lidvid };
 }
@@ -161,6 +168,21 @@ export async function qualifyObservation(root: string, request: QualificationReq
     const source = (await loadSourceProducts(root, answer.target)).find(product => product.id === id && product.id === request.observation && product.telescope === request.telescope && product.mode === request.mode);
     if (!source) throw new TypeError('Source qualification does not match the indexed observation.');
     const { qualified: _qualified, receipt: _receipt, receiptProblem: _problem, facts: _facts, ...product } = source;
+    const run = acquisitionDirectory();
+    if (run) {
+      for (const file of product.files) {
+        const destination = resolve(run, file.path);
+        await mkdir(dirname(destination), { recursive: true });
+        await copyFile(inputPath(root, file.path), destination).catch(error => { if (!hasErrorCode(error, 'ENOENT')) throw error; });
+      }
+      const result = await qualifySourceProduct(run, product);
+      const receipt = resolve(run, result.receipt), file = resolve(run, result.product);
+      const decoded = requireRecord(JSON.parse(await readFile(resolve(run, dirname(sourceReceipt(product)), 'decoded.json'), 'utf8')), 'decoded source');
+      const facts = parseProductFacts(decoded.facts);
+      await rememberQualification(root, { target: answer.target, telescope: request.telescope, mode: request.mode, observation: id, program: id,
+        product: file, receipt, productRecord: receipt, outputRoot: run, facts });
+      return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: id, program: id, configuration: request.configuration, product: file, receipt };
+    }
     const result = await qualifySourceProduct(root, product);
     return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: id, program: id, configuration: request.configuration, ...result, product: resolve(root, result.product), receipt: resolve(root, result.receipt) };
   }
@@ -224,7 +246,7 @@ export async function recordQualification(root: string, result: QualificationRes
 
 export const QUALIFY_HELP = `Usage: node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/qualification/qualify.mts --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
-Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID --wavelength FROM,TO,
+Registered routes currently accept --channel N, --band ID --wavelength FROM,TO,
 --archive-programme ID --archive-target NAME --night YYYY-MM-DD, --source-product ID, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

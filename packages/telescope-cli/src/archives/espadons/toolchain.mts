@@ -9,13 +9,11 @@
 import { verifyToolchainExecutables, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
-import { createWriteStream } from 'node:fs';
-import { access, cp, mkdir, readFile, rm, stat } from 'node:fs/promises';
+import { access, cp, mkdir, readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { downloadToolchainArchive } from '../../toolchains/download.mts';
 
 const FILE = 'packages/telescope-cli/src/archives/espadons/toolchain.json';
 export const ZDI_ROOT = resolve(USER_ROOT, 'output/toolchains/zdi');
@@ -41,9 +39,7 @@ export async function installToolchain() {
     if (!await exists(zdipy)) run('git', ['clone', '--quiet', requireString(source.url, 'zdipy url'), zdipy], ZDI_ROOT);
     run('git', ['checkout', '--quiet', '--detach', requireString(source.commit, 'zdipy commit')], zdipy);
     if (!await exists(julia)) { const download = requireRecord(requireRecord(entry.julia, 'julia').download, 'julia download'), archive = resolve(ZDI_ROOT, requireString(download.path, 'julia archive')), bytes = requireFiniteNumber(download.bytes, 'julia bytes');
-      const response = await fetch(requireString(download.url, 'julia url')); if (!response.ok || !response.body) throw new Error(`${String(download.url)} answered ${response.status}.`);
-      await pipeline(Readable.fromWeb(response.body as never), createWriteStream(archive));
-      if ((await stat(archive)).size !== bytes) throw new Error(`${archive} is not its pinned ${bytes} bytes.`);
+      await downloadToolchainArchive(requireString(download.url, 'julia url'), archive, bytes);
       run('tar', ['-xzf', archive], ZDI_ROOT); await rm(archive, { force: true }); }
     await cp(packagePath(requireString(requireRecord(entry.julia, 'julia').environment, 'julia environment')), juliaEnvironment, { recursive: true });
     const instantiated = spawnSync(julia, [`--project=${juliaEnvironment}`, '-e', 'using Pkg; Pkg.instantiate(); using Korg'], { cwd: ZDI_ROOT, stdio: 'inherit', env: telescopePythonEnvironment({ JULIA_DEPOT_PATH: juliaDepot }) });

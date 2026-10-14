@@ -11,7 +11,7 @@ const request:CapabilityRequest={target:'test',kind:'cube',wavelengthMicrometres
 test('continuum windows expand qualification and prevent selection of a band-only artifact',()=>{
  assert.deepEqual(inputWavelengths(request),[2.1,2.4]);
  const action=qualificationActionsFor('JWST','NIRSPEC/IFU','test',inputWavelengths(request),{any:true},[{id:'obs',startIso:'2023-01-01T00:00:00Z',filter:'G235M;F170LP'}])[0]!;
- assert.ok(action);assert.equal(action.configuration.kind,'jwst-band');assert.ok(action.arguments.includes('2.1,2.4'));
+ assert.ok(action);assert.equal(action.configuration.kind,'jwst-band');assert.deepEqual(action.configuration.wavelengthMicrometres,[2.1,2.4]);
  const product={target:'test',telescope:'JWST',mode:'NIRSPEC/IFU',observation:'obs',program:'test-obs',product:'cube',receipt:'receipt',productRecord:'record',outputRoot:'.',facts:{target:'test',verified:true,kind:'cube',result:'telescope-product',wavelengthIntervalsMicrometres:[[2.2,2.4]]}} as const satisfies QualifiedObservation;
  assert.equal(assessInput(request,product.facts).constraints.wavelength?.answer,'partial');
  assert.equal(matchingProduct([product],request,product.program),undefined);

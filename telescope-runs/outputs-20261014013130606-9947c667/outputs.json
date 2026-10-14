@@ -1,0 +1,162 @@
+{
+  "artifact": "local-import",
+  "source": "/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/telescope-import-family-rvZm6s/imported/descriptor.json",
+  "outputs": [],
+  "profiles": [
+    {
+      "handlerId": "raster-f01-f02",
+      "profileId": "fits-image-array@1"
+    },
+    {
+      "handlerId": "f02-mixed-nd",
+      "profileId": "astropy-mixed-nd-fits@1"
+    },
+    {
+      "handlerId": "f13-polarimetry",
+      "profileId": "astropy-stokes-fits@1"
+    }
+  ],
+  "issues": [
+    "No archive origin was declared; local byte integrity does not establish origin.",
+    "Target, family, units, frame and calibration metadata in declarations are user-supplied assertions until a handler qualifies each applicable fact."
+  ],
+  "familyOperations": [
+    {
+      "id": "nd-inspect",
+      "label": "Inspect all native axes",
+      "handlerId": "f02-mixed-nd",
+      "componentId": "mixed-array",
+      "owner": {
+        "module": "packages/telescope-cli/src/families/f02-mixed-nd.mts",
+        "export": "inspectMixedNd"
+      },
+      "available": true,
+      "reason": "Astropy inspects all FITS/WCS axes; remaining axes must be explicitly sliced.",
+      "fixedArguments": {},
+      "parameters": [
+        {
+          "id": "out",
+          "option": "--out",
+          "kind": "output-directory",
+          "required": true,
+          "description": "New output directory."
+        }
+      ],
+      "limitations": [
+        "Only the declared mixed time/spectral/polarization FITS profile is covered."
+      ]
+    },
+    {
+      "id": "nd-image",
+      "label": "Extract native image axes",
+      "handlerId": "f02-mixed-nd",
+      "componentId": "mixed-array",
+      "owner": {
+        "module": "packages/telescope-cli/src/families/f02-mixed-nd.mts",
+        "export": "extractMixedNd"
+      },
+      "available": true,
+      "reason": "Astropy inspects all FITS/WCS axes; remaining axes must be explicitly sliced.",
+      "fixedArguments": {},
+      "parameters": [
+        {
+          "id": "slice",
+          "option": "--slice",
+          "kind": "input-path",
+          "required": true,
+          "description": "JSON object with every non-image axis index."
+        },
+        {
+          "id": "out",
+          "option": "--out",
+          "kind": "output-directory",
+          "required": true,
+          "description": "New output directory."
+        }
+      ],
+      "limitations": [
+        "Only the declared mixed time/spectral/polarization FITS profile is covered."
+      ]
+    },
+    {
+      "id": "nd-spectrum",
+      "label": "Extract native spectrum",
+      "handlerId": "f02-mixed-nd",
+      "componentId": "mixed-array",
+      "owner": {
+        "module": "packages/telescope-cli/src/families/f02-mixed-nd.mts",
+        "export": "extractMixedNd"
+      },
+      "available": true,
+      "reason": "Astropy inspects all FITS/WCS axes; remaining axes must be explicitly sliced.",
+      "fixedArguments": {},
+      "parameters": [
+        {
+          "id": "x",
+          "option": "--x",
+          "kind": "integer",
+          "required": true,
+          "minimum": 0,
+          "description": "Native X index."
+        },
+        {
+          "id": "y",
+          "option": "--y",
+          "kind": "integer",
+          "required": true,
+          "minimum": 0,
+          "description": "Native Y index."
+        },
+        {
+          "id": "slice",
+          "option": "--slice",
+          "kind": "input-path",
+          "required": true,
+          "description": "JSON object with every remaining non-spectrum axis index."
+        },
+        {
+          "id": "out",
+          "option": "--out",
+          "kind": "output-directory",
+          "required": true,
+          "description": "New output directory."
+        }
+      ],
+      "limitations": [
+        "Only the declared mixed time/spectral/polarization FITS profile is covered."
+      ]
+    },
+    {
+      "id": "nd-time-series",
+      "label": "Extract native time series",
+      "handlerId": "f02-mixed-nd",
+      "componentId": "mixed-array",
+      "owner": {
+        "module": "packages/telescope-cli/src/families/f02-mixed-nd.mts",
+        "export": "extractMixedNd"
+      },
+      "available": true,
+      "reason": "Astropy inspects all FITS/WCS axes; remaining axes must be explicitly sliced.",
+      "fixedArguments": {},
+      "parameters": [
+        {
+          "id": "slice",
+          "option": "--slice",
+          "kind": "input-path",
+          "required": true,
+          "description": "JSON object with every non-time axis index."
+        },
+        {
+          "id": "out",
+          "option": "--out",
+          "kind": "output-directory",
+          "required": true,
+          "description": "New output directory."
+        }
+      ],
+      "limitations": [
+        "Only the declared mixed time/spectral/polarization FITS profile is covered."
+      ]
+    }
+  ]
+}

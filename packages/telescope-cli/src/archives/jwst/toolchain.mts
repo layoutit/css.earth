@@ -16,6 +16,7 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { downloadToolchainArchive } from '../../toolchains/download.mts';
 
 const repository = USER_ROOT;
 export type ToolchainId = 'eureka' | 'klip';
@@ -43,13 +44,9 @@ async function descriptor(id: ToolchainId): Promise<ToolchainPins & { readonly l
 /** Fetch one pinned data archive into the toolchain and unpack it where the descriptor says; the bytes must be its pinned size. */
 async function installData(root: string, record: unknown) {
   const data = requireRecord(record, 'data'), url = requireString(data.url, 'data url'), size = requireFiniteNumber(data.bytes, `${url} bytes`);
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`${url} answered HTTP ${response.status}.`);
-  const bytes = Buffer.from(await response.arrayBuffer());
-  if (bytes.length !== size) throw new Error(`${url} is ${bytes.length} bytes, not the pinned ${size}.`);
   const archive = resolve(root, 'data.tar.gz'), target = resolve(root, requireString(data.directory));
   await mkdir(target, { recursive: true });
-  await writeFile(archive, bytes);
+  await downloadToolchainArchive(url, archive, size);
   runToolchainProcess('tar', ['-xzf', archive, '-C', target]);
   await rm(archive);
 }

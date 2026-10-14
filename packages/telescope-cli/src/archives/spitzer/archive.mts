@@ -26,12 +26,10 @@
  *
  * The program is written to packages/telescope-cli/src/archives/spitzer/programs/<program id>.json. */
 import { programStorePath, packagePath } from '../../paths.mts';
-import { requireWorkspace, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
-import { mkdir, open, readFile, rename, stat, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { downloadHttpFile, requireWorkspace, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -188,20 +186,13 @@ export async function mosaicCompanions(mosaicUrl: string, aorKey: number, channe
   });
 }
 
-/** Download `url` to `path` unless the bytes are already there, and return its size. Written to a neighbouring `.part`
- * file and renamed only once it is whole, so an interrupted run never leaves a short file that looks finished. */
-export async function download(url: string, path: string): Promise<{ bytes: number }> {
+/** Download `url` to `path` unless the bytes are already there. Retries retain validated ranges and publish only complete files. */
+export async function download(url: string, path: string, fetcher: typeof fetch = fetch): Promise<{ bytes: number }> {
   const existing = await stat(path).then(entry => entry.size, error => { if (hasErrorCode(error, 'ENOENT')) return -1; throw error; });
   if (existing >= 0) return { bytes: existing };
   await mkdir(resolve(path, '..'), { recursive: true });
-  const part = `${path}.part`;
-  const response = await fetch(url, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
-  if (!response.ok || !response.body) throw new Error(`The archive answered ${response.status} for ${url}.`);
-  const handle = await open(part, 'w');
-  try { await pipeline(Readable.fromWeb(response.body as Parameters<typeof Readable.fromWeb>[0]), handle.createWriteStream()); }
-  finally { await handle.close(); }
-  await rename(part, path);
-  return { bytes: (await stat(path)).size };
+  const result = await downloadHttpFile(url, path, { byteLimit: Number.MAX_SAFE_INTEGER, timeoutMs: REQUEST_TIMEOUT_MS, fetcher });
+  return { bytes: result.bytes };
 }
 
 /** Fetch one file and pin it by URL and size. */
@@ -348,8 +339,10 @@ export function parseSpitzerProgram(value: unknown): SpitzerProgram {
 export const programPath = (id: string) => resolve(programStorePath(PROGRAMS), `${id}.json`);
 export const readSpitzerProgram = async (id: string): Promise<SpitzerProgram> => parseSpitzerProgram(JSON.parse(await readFile(programPath(id), 'utf8')) as unknown);
 export async function writeSpitzerProgram(program: SpitzerProgram): Promise<void> {
-  requireWorkspace(undefined, 'This command writes archive records.'); await mkdir(programStorePath(PROGRAMS, 'write'), { recursive: true });
-  await writeFile(programStorePath(programPath(program.id), 'write'), `${JSON.stringify(program, null, 2)}\n`);
+  requireWorkspace(undefined, 'This command writes archive records.');
+  const destination = programStorePath(programPath(program.id), 'write');
+  await mkdir(dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(program, null, 2)}\n`);
 }
 /** Where a program's pinned bytes live by default: outside the repository, because they are megabytes of archive data. */
 export const defaultDataRoot = resolve(USER_ROOT, 'output/spitzer');

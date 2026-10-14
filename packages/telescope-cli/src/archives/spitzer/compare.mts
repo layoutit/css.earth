@@ -31,7 +31,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, addProductEvidence, assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope-core/node';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
@@ -242,7 +242,7 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
     framesCombined: mosaicMembers(channel).map(frame => frame.dce), frameTimeSeconds: channel.mosaicFrameTimeSeconds,
     statistics: comparison.statistics, limits: LIMITS,
   });
-  const path = programStorePath(receiptPath(program.id, channel.channel), 'write');
+  const path = acquisitionDirectory() ? resolve(work, receiptName(program.id, channel.channel)) : programStorePath(receiptPath(program.id, channel.channel), 'write');
   await writeFile(path, `${JSON.stringify(reproduction, null, 2)}\n`);
 
   const run: ProductRun = { telescope: TELESCOPE, stage: COMPARE_STAGE, inputs,

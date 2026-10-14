@@ -19,12 +19,10 @@ import { verifyToolchainExecutables, installManagedToolchain, assertManagedPytho
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, copyFile, link, readdir, readFile, rm, stat } from 'node:fs/promises';
-import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
-import { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { downloadToolchainArchive } from '../../toolchains/download.mts';
 
 const repository = USER_ROOT;
 /** The toolchain pin sits beside this code and the programs it reduces. */
@@ -65,9 +63,7 @@ async function fetchKit(record: Record<string, unknown>, directory: string, cach
     }
     if (!linked) {
       const url = requireString(record.url, 'download url');
-      const response = await fetch(url);
-      if (!response.ok || !response.body) throw new Error(`${url} answered ${response.status}.`);
-      await pipeline(Readable.fromWeb(response.body as never), createWriteStream(target));
+      await downloadToolchainArchive(url, target, size);
     }
     if (!await good(target)) throw new Error(`${name} (${String(record.url)}) is not its pinned ${size} bytes.`);
   }

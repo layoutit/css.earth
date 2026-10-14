@@ -5,7 +5,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { jsonValue, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/objects';
-import { USER_ROOT, writeProductRecord } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, withAcquisitionDirectory, USER_ROOT, writeProductRecord } from '@cssearth/telescope-core/node';
 import { explorationAnswer, parseExplorationArguments, skyTargetRequest } from './exploration.mts';
 import { normalizeSnapshot, SERVICES, targetQuery } from './vo/discovery.mts';
 import { loadVoInputs } from './vo/bridge.mts';
@@ -33,7 +33,7 @@ async function fieldFixture(root: string, options: { archiveTargetName: string |
 }
 
 async function seedAcquisition(spec: AcquisitionSpec, bytes: Buffer) {
-  const outputRoot = resolve(USER_ROOT, 'output/telescopes/vo/acquired', spec.key);
+  const outputRoot = acquisitionDirectory() ? resolve(acquisitionDirectory()!, spec.key) : resolve(USER_ROOT, 'output/telescopes/vo/acquired', spec.key);
   await mkdir(outputRoot, { recursive: true });
   await writeFile(resolve(outputRoot, 'science.fits'), bytes);
   await writeFile(resolve(outputRoot, 'content.json'), JSON.stringify({ schema: 'cssearth-vo-content@2',
@@ -170,7 +170,7 @@ for (const kind of ['table', 'spectrum'] as const) for (const archiveTargetName 
       assert.ok(outputs.familyOperations?.some(operation => operation.id === `${kind}-export`));
       const exported = await executeFamilyOperation(String(outputs.source), { operationId: `${kind}-export` }, resolve(root, 'export'));
       assert.ok((await readFile(exported.product)).length > 0);
-      const receipt = JSON.parse(await readFile((await loadQualifiedObservations(root, null)).find(product => product.program === spec.key)!.receipt, 'utf8'));
+      const receipt = JSON.parse(await readFile((await withAcquisitionDirectory(resolve(saved.directory, 'pick-1'), () => loadQualifiedObservations(root, null))).find(product => product.program === spec.key)!.receipt, 'utf8'));
       assert.equal(receipt.identity.archiveTargetName, null); assert.doesNotMatch(receipt.acceptance, /name matches FITS OBJECT/u);
       assert.equal((await getSession(root, saved.directory, 1, () => {}, api, { offline: true })).reused, true);
     } finally { await rm(root, { recursive: true, force: true }); }

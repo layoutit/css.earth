@@ -4,7 +4,7 @@
  * it and speaks of a simulation or a model, and it is listed with its license, size and files. Nothing is downloaded,
  * and no record becomes a dataset here: the scientific-faithfulness rule on published simulations
  * (.agents/skills/celestial-skill/references/scientific-faithfulness.md) says when one may be shown, and
- * `new-object --simulation` adds one from an entry a person wrote after reading the paper. */
+ * `node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation` adds one from an entry a person wrote after reading the paper. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -138,7 +138,7 @@ export function formatSimulations(result: SimulationSearch, directory?: string):
       `   ${record.files.length} file${record.files.length === 1 ? '' : 's'}, ${sizeText(record.bytes)}: ${listed}${more > 0 ? ` and ${more} more` : ''}`, `   ${record.url}`);
   }
   if (!result.records.length) lines.push('No Zenodo dataset names this object and speaks of a simulation or a model.');
-  else lines.push('', 'A listed record is a lead, not a dataset: read its paper, then write a new-object --simulation entry.');
+  else lines.push('', 'A listed record is a lead, not a dataset: read its paper, then write entries.json for the standalone generator: node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json.');
   if (directory) lines.push('', `Saved: ${resolve(directory, 'simulations.json')}`);
   return `${lines.join('\n')}\n`;
 }

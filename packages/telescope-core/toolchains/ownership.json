@@ -22,10 +22,10 @@
       ]
     },
     {
-      "mechanic": "MAST service queries and downloads",
+      "mechanic": "MAST service queries",
       "package": "astroquery",
       "version": "0.4.11",
-      "operation": "mast-service, mast-download",
+      "operation": "mast-service",
       "consumers": [
         "Hubble",
         "JWST"

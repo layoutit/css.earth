@@ -9,13 +9,16 @@ Use `@cssearth/telescope` for archive discovery, qualified retrieval and local o
 
 ## Find, retrieve, inspect, export
 
-Use `--json` for agent calls: stdout contains JSON, progress goes to stderr, and there are no interactive prompts. Run `telescope --help` for the current command list.
+Use `--json` for agent calls: stdout contains JSON, progress goes to stderr, and there are no interactive prompts. Run `telescope --help` for the core flow and `telescope help COMMAND` for flags. Explore returns `cssearth-telescope-explore-summary@1`: counts, immutable picks and `savedPath`; the complete record stays on disk. Write stdout to a summary file or parse it directly. Query saved evidence with `jq` only for the fields you need. Lookups print complete JSON unless --out saves their record. Outputs saves the complete inspection as `outputs.json` inside the existing run and prints a summary naming `savedPath`; it never creates a new run. `--out` may select an existing subfolder inside that run. Get names `resultPath` and includes `download: { bytes, archive, destination }`.
 
 ```sh
 npm install -g @cssearth/telescope
 telescope --help
-telescope explore eris --out ./eris-observations --json
-telescope get ./eris-observations --pick 1 --json
+telescope explore eris --out ./eris-observations --json > ./eris-summary.json
+jq '{outcome, choices, savedPath}' ./eris-summary.json
+jq '.choices[] | select(.pick == 1) | {pick, reason, limitations}' ./eris-observations/explore.json
+telescope get ./eris-observations --pick 1 --json > ./eris-get-summary.json
+jq '{context, facts}' ./eris-observations/pick-1/result.json
 telescope outputs ./eris-observations/pick-1/result.json --json
 telescope export ./eris-observations/pick-1/result.json --output image --hdu 0 --out ./eris-image --json
 telescope export ./eris-image/output.product.json --output html --out ./eris-viewer --json
@@ -38,7 +41,9 @@ Exit codes: **0** completed exploration/retrieval or fulfilled request; **1** op
 
 `telescope papers eris --about imaging --json` finds related literature; `telescope simulations eris --json` lists model dataset leads without downloading them. Read a simulation's paper, license and assumptions before treating it as evidence; a lead is not an observation.
 
-No separate Python install is needed. The first operation needing a managed toolchain downloads pinned micromamba, Python and conda-forge packages into the user cache; this can cost hundreds of MB and needs network access. Explore also searches Python-free archives, which remain available when the managed Python environment cannot be installed. The astronomy environment builds orbitize and batman from source and needs a working C compiler and C standard-library headers; macOS also needs its SDK. Install these with `xcode-select --install` on macOS, `sudo apt install build-essential` on Debian/Ubuntu, or `sudo dnf install gcc` on Fedora. The installer checks them before creating an environment. Use `telescope toolchain install astroquery` for explicit setup and `telescope toolchain verify astroquery` to verify it. `CSSEARTH_TELESCOPE_HOME` selects the cache root; an existing micromamba on PATH or `CSSEARTH_TELESCOPE_MICROMAMBA` is used when supplied. Offline setup fails if the toolchain is missing. Some reduction routes also require native tools; follow the CLI's named prerequisite errors.
+Get and fetch print size and destination before transferring science bytes. In a terminal, downloads of at least 100 MB or unknown size ask `Continue? [Y/n]`; Enter proceeds and `n` cancels. `--yes` (`-y`) skips this question and the first implicit Python setup consent. `--json` and redirected stdin/stdout proceed without prompts. Downloads and run-owned JSON stay in `./telescope-runs/<target>-<timestamp>/` where the command runs, or in `--out DIR`. Field runs use `field-<ra>-<dec>-<timestamp>`. `get RUN --pick N` downloads once into `RUN/pick-N/` and reuses it on retry; `--out DIR` chooses another run folder. Plain lookups without `--out` write nothing. A read-only working folder fails before network work.
+
+No separate Python install is needed. The first operation needing a managed toolchain downloads pinned micromamba, Python and conda-forge packages into the user root’s `toolchains/` folder; the CLI names the packages, approximate size and folder and asks first in a terminal (explicit `toolchain install` does not ask). This can cost hundreds of MB and needs network access. Explore also searches Python-free archives, which remain available when the managed Python environment cannot be installed. The astronomy environment builds orbitize and batman from source and needs a working C compiler and C standard-library headers; macOS also needs its SDK. Install these with `xcode-select --install` on macOS, `sudo apt install build-essential` on Debian/Ubuntu, or `sudo dnf install gcc` on Fedora. The installer checks them before creating an environment. Use `telescope toolchain list [--json]` for installed environments, size on disk and folders; `telescope toolchain remove NAME [--json]` deletes one managed environment inside `toolchains/`, refusing links, outside paths and active install locks. Legacy installs are listed but removal is refused. Use `telescope toolchain install astroquery` for explicit setup and `telescope toolchain verify astroquery` to verify it. `CSSEARTH_TELESCOPE_HOME` selects the cache root; an existing micromamba on PATH or `CSSEARTH_TELESCOPE_MICROMAMBA` is used when supplied. Offline setup fails if the toolchain is missing. Some reduction routes also require native tools; follow the CLI's named prerequisite errors.
 
 Windows managed toolchains are unsupported in this release: use WSL. Skill installation can use `--copy` where directory symlinks are unavailable.
 

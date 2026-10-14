@@ -1,5 +1,5 @@
 /** A small final stage: verified delivery -> explicit output selection -> pinned figure and numeric values. */
-import { telescopeScratch, writeProductRecord, sciencePackage, plotProduct } from '@cssearth/telescope-core/node';
+import { withAcquisitionDirectory, telescopeScratch, writeProductRecord, sciencePackage, plotProduct } from '@cssearth/telescope-core/node';
 import { readFile, mkdir, mkdtemp, rename, rm, rmdir, realpath, stat } from 'node:fs/promises';
 import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
@@ -41,9 +41,9 @@ export function validateOutputRequest(request:OutputRequest):void {
   if(request.kind==='aperture-spectrum'&&(!tuple(request.aperture,4,true)||request.background!=='none'&&!tuple(request.background,4,true)))throw new TypeError('Choose --aperture X0,Y0,X1,Y1 and --background X0,Y0,X1,Y1 or none');
   if(request.uncertainty!==undefined&&!['omit','independent'].includes(request.uncertainty))throw new TypeError('Uncertainty takes omit or independent');
 }
-function beneath(root:string,path:string):string {
+function beneath(root:string,path:string,allowRoot=false):string {
   const file=resolve(root,path),rel=relative(root,file);
-  if(isAbsolute(path)||!rel||rel==='..'||rel.startsWith('../'))throw new Error('Delivery path escapes its directory');
+  if(isAbsolute(path)||(!rel&&!allowRoot)||rel==='..'||rel.startsWith('../'))throw new Error('Delivery path escapes its directory');
   return file;
 }
 export async function delivery(resultPath:string){
@@ -69,7 +69,7 @@ export async function delivery(resultPath:string){
   for(const key of ['record','receipt'])if(!files.some(f=>f.path===requireString(record[key])))throw new Error('Delivery evidence is not pinned');
   const producing=parseProductRecord(JSON.parse(await readFile(beneath(directory,requireString(record.record)),'utf8')));
   // Producer paths are resolved within its recorded output root when one is supplied.
-  const outputRoot=record.outputRoot===undefined?undefined:beneath(directory,requireString(record.outputRoot));
+  const outputRoot=record.outputRoot===undefined?undefined:beneath(directory,requireString(record.outputRoot),true);
   const outputPins=producing.outputs.map(output=>{
     const exact=outputRoot===undefined?undefined:relative(directory,beneath(outputRoot,output.path));
     const matches=files.filter(f=>f.bytes===output.bytes&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
@@ -141,7 +141,7 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   // A fresh output directory preserves earlier selections and their evidence.
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
-  try{
+  try{return await withAcquisitionDirectory(staging,async()=>{
     const input=await nativeFigureInput(d,resolve(staging,'native'),request.structure);
     if(input.native&&request.hdu!==0)throw new Error('Decoded native arrays use --hdu 0');
     const answer=await sciencePackage({...request,operation:'extract',path:input.file,arrayDirectory:resolve(staging,'arrays'),x:request.pixel?.[0],y:request.pixel?.[1]});
@@ -155,9 +155,10 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),run,names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});
+    await rm(resolve(staging,'.python'),{recursive:true,force:true});await rm(resolve(staging,'.scratch'),{recursive:true,force:true});
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,figure:resolve(destination,'figure.png'),values:resolve(destination,'values.csv'),data:resolve(destination,names.includes('image.fits')?'image.fits':'spectrum.ecsv'),receipt:resolve(destination,'output.product.json'),sourceContext:d.context};
-  }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
+  });}catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }
 
 /** The same extraction and plotting backend, with a pinned source record rather than a qualified delivery. */
@@ -166,7 +167,7 @@ async function exportSourceOutput(source:NonNullable<Awaited<ReturnType<typeof o
   if(!pds&&request.structure!==undefined)throw new TypeError('--structure applies only to native outputs');
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
-  try{
+  try{return await withAcquisitionDirectory(staging,async()=>{
     const prepared=pds?await nativeFigureInput(await preparePdsSource(source,resolve(staging,'source')),resolve(staging,'native'),request.structure):undefined;
     const file=prepared?.file??(pds?undefined:source.file);
     if(!file)throw new Error('Source has no science array.');
@@ -198,8 +199,9 @@ async function exportSourceOutput(source:NonNullable<Awaited<ReturnType<typeof o
     },names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});
     if(pds){await rm(resolve(staging,'source'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});}
+    await rm(resolve(staging,'.python'),{recursive:true,force:true});await rm(resolve(staging,'.scratch'),{recursive:true,force:true});
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,figure:resolve(destination,'figure.png'),values:resolve(destination,'values.csv'),
       data:resolve(destination,names.includes('image.fits')?'image.fits':'spectrum.ecsv'),receipt:resolve(destination,'output.product.json'),sourceContext:undefined};
-  }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
+  });}catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

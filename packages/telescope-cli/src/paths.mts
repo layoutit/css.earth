@@ -1,8 +1,8 @@
 /** CLI-owned inputs retain their repository identities but resolve from this package when installed. */
-import { existsSync } from 'node:fs';
+import { existsSync, realpathSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
-import { requireWorkspace, USER_ROOT, WORKSPACE } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, requireWorkspace, USER_ROOT, WORKSPACE } from '@cssearth/telescope-core/node';
 export const CLI_PACKAGE_ROOT = dirname(createRequire(import.meta.url).resolve('@cssearth/telescope/package.json'));
 export const TARGET_CATALOGUE_SNAPSHOT = resolve(CLI_PACKAGE_ROOT, 'data/target-catalogue.json');
 /** Step 3 copies read-only site archive catalogues and ledgers here with their original relative paths. */
@@ -37,20 +37,47 @@ export function workspacePath(path: string): string {
   return resolve(requireWorkspace(), PREFIX, part);
 }
 
+/** Resolve existing ancestors too: an authoring destination need not exist yet. */
+function realPath(path: string): string {
+  try { return realpathSync(path); }
+  catch (error) {
+    if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
+    const parent = dirname(path);
+    if (parent === path) throw error;
+    return resolve(realPath(parent), relative(parent, path));
+  }
+}
+function programIdentity(path: string): string {
+  if (!isAbsolute(path)) return path.startsWith(PREFIX) ? path.slice(PREFIX.length) : path;
+  const actual = realPath(path);
+  for (const root of [WORKSPACE ? resolve(WORKSPACE, PREFIX) : CLI_DATA_ROOT, CLI_DATA_ROOT]) {
+    const part = relative(realPath(root), actual);
+    if (!isAbsolute(part) && part !== '..' && !part.startsWith(`..${sep}`)) return part;
+  }
+  return relative(realPath(CLI_DATA_ROOT), actual);
+}
 function isProgramIdentity(path: string): boolean {
-  const part = isAbsolute(path) ? relative(CLI_DATA_ROOT, path) : path.startsWith(PREFIX) ? path.slice(PREFIX.length) : path;
-  return /^src[/\\]archives[/\\][^/\\]+[/\\]programs(?:[/\\]|$)/u.test(part);
+  return /^src[/\\]archives[/\\][^/\\]+[/\\]programs(?:[/\\]|$)/u.test(programIdentity(path));
 }
 
 /** One program store for readers and authors. A selected workspace never falls back to shipped programs. */
 export function programStorePath(path: string, access: 'read' | 'write' = 'read'): string {
+  const run = acquisitionDirectory();
+  if (run) {
+    const runPrograms = resolve(run, 'programs'), local = isAbsolute(path) ? relative(realPath(runPrograms), realPath(path)) : path;
+    if (isAbsolute(path) && local !== '..' && !local.startsWith(`..${sep}`) && !isAbsolute(local)) return path;
+    const logical = programIdentity(path);
+    const match = /^src[/\\]archives[/\\]([^/\\]+)[/\\]programs(?:[/\\](.*))?$/u.exec(logical);
+    if (match) {
+      const scoped = resolve(runPrograms, match[1]!, match[2] ?? '');
+      const part = relative(runPrograms, scoped);
+      if (part === '..' || part.startsWith(`..${sep}`) || isAbsolute(part)) throw new TypeError('Program store path leaves the run.');
+      if (access === 'write' || existsSync(scoped)) return scoped;
+    }
+  }
   const workspace = access === 'write' ? requireWorkspace(undefined, 'This command writes archive program records.') : WORKSPACE;
   const destination = workspace === undefined ? CLI_DATA_ROOT : resolve(workspace, PREFIX);
-  const selectedPart = relative(destination, path);
-  const part = isAbsolute(path)
-    ? workspace !== undefined && !isAbsolute(selectedPart) && selectedPart !== '..' && !selectedPart.startsWith(`..${sep}`)
-      ? selectedPart : relative(CLI_DATA_ROOT, path)
-    : path.startsWith(PREFIX) ? path.slice(PREFIX.length) : path;
+  const part = programIdentity(path);
   if (isAbsolute(part) || part === '..' || part.startsWith(`..${sep}`) || !isProgramIdentity(part))
     throw new TypeError('Program store path must stay inside an archive programs folder.');
   return resolve(destination, part);

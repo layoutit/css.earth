@@ -1,6 +1,6 @@
 /** Exact PDS Registry product -> complete byte set -> pdr decode -> archive-final qualification. */
 import { programStorePath, packagePath } from '../../paths.mts';
-import { requireWorkspace, pdsPackages, pdsToolchain, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, requireWorkspace, pdsPackages, pdsToolchain, writeProductRecord, WORKSPACE, USER_ROOT } from '@cssearth/telescope-core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -164,7 +164,7 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
         ...(structures.length === 1 ? { decodedStructure: structures[0] } : { decodedStructures: structures }),
         uncertaintySupplied: false, worldCoordinateSystemSupplied: false, surfaceRegistrationSupplied: surfaceResolutionKm !== undefined,
         ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm, mapProjection: optionalTextField(metadata, 'mapProjection'), longitudeDirection: optionalTextField(metadata, 'longitudeDirection') }) } } };
-  const receipt = PDS_PROGRAMS_LOCATION.file(pdsReceiptName(spec.id));
+  const receipt = acquisitionDirectory() ? recordPath : PDS_PROGRAMS_LOCATION.file(pdsReceiptName(spec.id));
   const record = await writeProductRecord(recordPath, run, files.map(file => ({ path: file.name, file: resolve(work, file.name),
     ...(file.name === science.name ? { units: dataUnits, conventions: { filters: bands.map(band => `${band.filter}: ${band.interval[0]} to ${band.interval[1]} micrometres`).join('; '),
       registration: surfaceResolutionKm === undefined ? 'detector image only; no body-surface registration' : `${optionalTextField(metadata, 'mapProjection')} map at ${surfaceResolutionKm} km/pixel`, qualification: spec.use } } : {}) })),

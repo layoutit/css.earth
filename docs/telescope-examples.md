@@ -20,7 +20,7 @@ examples, rerun the chain with:
 
 ```
 <the toolkit command listed below>                  # re-makes the product
-node packages/telescope-cli/src/example-picture.mts   # re-makes every picture in docs/telescopes
+node packages/telescope-cli/src/example-picture.mts   # re-makes every picture in docs/images/telescopes
 ```
 
 Products live in the git-ignored `output/` and `.local/` directories of the worktree the toolkit ran in, so the recipe

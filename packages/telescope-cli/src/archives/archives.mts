@@ -21,6 +21,8 @@ export interface ArchiveSearchContext {
 export interface ArchiveDescription {
   readonly id: string;
   readonly name: string;
+  /** Short human-screen name; never a replacement for the service address in evidence. */
+  readonly displayName?: string;
   /** Its TAP service as the registry of Virtual Observatory services names it, and the address pinned for it here. */
   readonly registry?: { readonly ivoid: string; readonly address: string };
   /** The live search `explore` runs for a target, beside the observation search of the VO profiles (vo/discovery.mts). */
@@ -37,11 +39,11 @@ const ledger = (id: string) => ({ ledgerCommand: `packages/telescope-cli/src/arc
 const CADC = { ivoid: 'ivo://cadc.nrc.ca/argus', address: CADC_TAP }, ESO = profile('ivo://eso.org/tap_obs'), MAST = profile('ivo://archive.stsci.edu/caomtap');
 
 export const ARCHIVES: readonly ArchiveDescription[] = [
-  { id: 'eso', name: 'ESO Science Archive', registry: ESO },
-  { id: 'alma', name: 'ALMA Science Archive', registry: profile('ivo://jao.alma/tap_eu') },
-  { id: 'psa', name: 'ESA Planetary Science Archive', registry: profile('ivo://esavo/psa/epntap') },
-  { id: 'jwst', name: 'JWST at MAST', registry: MAST, ...ledger('jwst') },
-  { id: 'hst', name: 'Hubble at MAST', registry: MAST, ...ledger('hst') },
+  { id: 'eso', name: 'ESO Science Archive', displayName: 'ESO', registry: ESO },
+  { id: 'alma', name: 'ALMA Science Archive', displayName: 'ALMA', registry: profile('ivo://jao.alma/tap_eu') },
+  { id: 'psa', name: 'ESA Planetary Science Archive', displayName: 'ESA PSA', registry: profile('ivo://esavo/psa/epntap') },
+  { id: 'jwst', name: 'JWST at MAST', displayName: 'JWST', registry: MAST, ...ledger('jwst') },
+  { id: 'hst', name: 'Hubble at MAST', displayName: 'MAST/HST', registry: MAST, ...ledger('hst') },
   { id: 'naco', name: 'VLT/NACO at ESO', registry: ESO, ...ledger('naco') },
   { id: 'keck', name: 'Keck Observatory Archive', registry: { ivoid: 'ivo://koa.ipac/tap', address: KOA_TAP }, ...ledger('keck'),
     search: (root, target, { position, filter }) => searchKeckLeads(root, target, undefined, filter, position) },

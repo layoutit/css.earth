@@ -2,7 +2,7 @@
 import { lstat, mkdir, mkdtemp, open, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writeProductRecord, parseLimits } from '@cssearth/telescope-core/node';
+import { writeProductRecord, parseLimits, requestTransferConsent, hasTransferConsent } from '@cssearth/telescope-core/node';
 import { VERSION } from '../help.mts';
 import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from '../archives/keck/koa.mts';
 import { EXPLORATION_SCHEMA } from '../exploration.mts';
@@ -63,6 +63,14 @@ export async function fetchKeckSource(explorationPath: string, pick: number, out
   const maximum = parseLimits(request.transferLimits).scienceBytes, destination = resolve(outputDirectory);
   try { await lstat(destination); throw new TypeError('Output directory already exists; choose a new --out directory.'); }
   catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
+  if (hasTransferConsent()) {
+    const bytes = await fetch(lev0Url(selected.filehand), { method: 'HEAD', signal: AbortSignal.timeout(10_000) }).then(async response => {
+      await response.body?.cancel();
+      const length = response.headers.get('content-length');
+      return response.ok && length && /^\d+$/u.test(length) && Number.isSafeInteger(Number(length)) && Number(length) > 0 ? Number(length) : null;
+    }).catch(() => null);
+    await requestTransferConsent({ kind: 'download', bytes, archive: 'Keck', destination });
+  }
   await mkdir(dirname(destination), { recursive: true });
   const staging = await mkdtemp(resolve(dirname(destination), '.keck-source-'));
   try {

@@ -1,0 +1,194 @@
+{
+  "source": "/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/source-relevance-8yPa5y/source/output.product.json",
+  "outputs": [
+    {
+      "hdu": 0,
+      "shape": [
+        166,
+        166
+      ],
+      "unit": {
+        "value": "W.m**(-2).um**(-1).sr**(-1)",
+        "source": "HDU 0 (PRIMARY, EXTVER=1):BUNIT"
+      },
+      "limitations": [
+        "No associated uncertainty array.",
+        "No applicable measured PSF or restoring beam; pixel sampling is not achieved resolution."
+      ],
+      "kind": "image",
+      "available": true,
+      "parameters": [],
+      "reason": "Native image coordinates; masks retained. A cube requires an explicit zero-based plane."
+    },
+    {
+      "hdu": 0,
+      "shape": [
+        166,
+        166
+      ],
+      "unit": {
+        "value": "W.m**(-2).um**(-1).sr**(-1)",
+        "source": "HDU 0 (PRIMARY, EXTVER=1):BUNIT"
+      },
+      "limitations": [
+        "No associated uncertainty array.",
+        "No applicable measured PSF or restoring beam; pixel sampling is not achieved resolution."
+      ],
+      "kind": "spectrum",
+      "available": false,
+      "parameters": [
+        "pixel"
+      ],
+      "reason": "No qualified leading wavelength axis."
+    },
+    {
+      "hdu": 0,
+      "shape": [
+        166,
+        166
+      ],
+      "unit": {
+        "value": "W.m**(-2).um**(-1).sr**(-1)",
+        "source": "HDU 0 (PRIMARY, EXTVER=1):BUNIT"
+      },
+      "limitations": [
+        "No associated uncertainty array.",
+        "No applicable measured PSF or restoring beam; pixel sampling is not achieved resolution."
+      ],
+      "kind": "band-image",
+      "available": false,
+      "parameters": [
+        "band",
+        "uncertainty"
+      ],
+      "reason": "Requires a usable cube with qualified units and leading wavelength axis."
+    },
+    {
+      "hdu": 0,
+      "shape": [
+        166,
+        166
+      ],
+      "unit": {
+        "value": "W.m**(-2).um**(-1).sr**(-1)",
+        "source": "HDU 0 (PRIMARY, EXTVER=1):BUNIT"
+      },
+      "limitations": [
+        "No associated uncertainty array.",
+        "No applicable measured PSF or restoring beam; pixel sampling is not achieved resolution."
+      ],
+      "kind": "aperture-spectrum",
+      "available": false,
+      "parameters": [
+        "aperture",
+        "background",
+        "uncertainty"
+      ],
+      "reason": "Requires a usable cube with qualified units and leading wavelength axis."
+    },
+    {
+      "hdu": 0,
+      "shape": [
+        166,
+        166
+      ],
+      "unit": {
+        "value": "W.m**(-2).um**(-1).sr**(-1)",
+        "source": "HDU 0 (PRIMARY, EXTVER=1):BUNIT"
+      },
+      "limitations": [
+        "No associated uncertainty array.",
+        "No applicable measured PSF or restoring beam; pixel sampling is not achieved resolution."
+      ],
+      "kind": "feature-map",
+      "available": false,
+      "parameters": [
+        "band",
+        "continuum",
+        "uncertainty"
+      ],
+      "reason": "Requires a usable cube with qualified units and leading wavelength axis."
+    },
+    {
+      "kind": "body-map",
+      "available": false,
+      "reason": "A pinned archive source has no verified delivery and navigation context for body-map projection."
+    },
+    {
+      "kind": "sphere",
+      "available": false,
+      "reason": "Use telescope export MAP/map.fits.product.json --output sphere after projection; native pixels are insufficient."
+    },
+    {
+      "kind": "points",
+      "available": false,
+      "reason": "Export an existing physical object.json with --output points, volume or volume-dataset-bank. A spectral cube requires a scientific reconstruction first; wavelength or radial velocity is not distance."
+    }
+  ],
+  "artifact": "telescope-archive-source",
+  "target": "betelgeuse",
+  "issues": [
+    "No calibration claim."
+  ],
+  "relevance": {
+    "target": "betelgeuse",
+    "archiveTarget": {
+      "status": "named",
+      "name": "Betelgeuse",
+      "reason": "The archive supplied this name; naming does not establish field coverage or detection."
+    },
+    "field": {
+      "status": "in-field",
+      "basis": "SIMBAD position",
+      "reason": "Astropy projected the saved position inside a two-dimensional science image grid; this does not prove a usable sample or detection."
+    },
+    "detection": {
+      "status": "unassessed",
+      "reason": "Source inspection does not measure or identify the requested target in the data."
+    },
+    "requested": {
+      "kind": "image",
+      "wavelengthMicrometres": [
+        1,
+        2
+      ]
+    },
+    "fit": {
+      "kind": {
+        "status": "supported",
+        "reason": "A verified native structure or available operation supports the requested kind."
+      },
+      "wavelength": {
+        "status": "unknown",
+        "reason": "Native wavelength coordinates do not establish complete coverage in one usable science structure."
+      },
+      "family": {
+        "status": "not-requested",
+        "reason": "No family was requested."
+      }
+    },
+    "contents": [
+      {
+        "structure": "HDU 0 (PRIMARY, EXTVER=1)",
+        "shape": [
+          166,
+          166
+        ],
+        "usableSamples": 27556,
+        "unit": "W.m**(-2).um**(-1).sr**(-1)",
+        "mask": "none identified",
+        "uncertainty": "not validated",
+        "calibration": [],
+        "field": {
+          "status": "in-field",
+          "reason": "The requested ICRS position projects inside the science pixel grid.",
+          "pixel": [
+            82.35115522812923,
+            83.52780898449839
+          ]
+        }
+      }
+    ],
+    "next": "Inspect the available image operation(s) below and choose explicit selectors; source fitness remains unassessed."
+  }
+}

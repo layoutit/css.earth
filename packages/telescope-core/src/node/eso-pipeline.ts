@@ -6,12 +6,10 @@
  * the archive returns. */
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, open, readdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
-import { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
 import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { tapRows } from './astroquery.js';
+import { downloadHttpFile } from './http-download.js';
 
 export type RawRow = Readonly<Record<string, string>>;
 
@@ -51,21 +49,23 @@ export async function rawFrame(dpId: string, directory: string) {
   await mkdir(directory, { recursive: true });
   // Private temporary names, so two calls for the same frame (a prefetch and a step) never write one file.
   const partial = `${target}.${process.pid}-${++downloads}`, download = `${partial}.download`;
-  // The portal drops connections now and then, before or during a transfer, and for minutes at a time it answers 401 to public
-  // frames it serves before and after (on 17 September 2026, a Betelgeuse exposure public since 2021 and a PIONIER frame it had
-  // served that morning). The whole request is repeated up to five times, waiting 5, 10, 20 and 40 seconds in between. Other
-  // refusals (a missing frame) are not repeated.
-  for (let attempt = 1; ; attempt++) {
-    const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`).catch((error: unknown) => error as Error);
-    if (!(response instanceof Error) && response.status !== 401 && response.status < 500 && (!response.ok || !response.body)) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
-    const failure = response instanceof Error ? response
-      : response.status === 401 ? new Error(`${dpId}: the ESO data portal refused it (401) five times; a frame still in its proprietary period is refused so too.`)
-      : !response.ok || !response.body ? new Error(`${dpId}: the ESO data portal answered ${response.status}.`)
-      : await pipeline(Readable.fromWeb(response.body as never), createWriteStream(download)).then(() => undefined, (error: unknown) => error as Error);
-    if (!failure) break;
-    if (attempt === 5) throw failure;
-    await new Promise(done => setTimeout(done, 5000 * 2 ** (attempt - 1)));
-  }
+  let authorizationRefused = false;
+  await downloadHttpFile(`https://dataportal.eso.org/dataPortal/file/${dpId}`, download, {
+    byteLimit: 20 * 1024 ** 3,
+    // Preserve the portal's existing transient authorization/server retry policy separately from dropped-body attempts.
+    fetcher: async (url, options, waitForBackoff) => {
+      for (let attempt = 1; ; attempt++) {
+        const response = await fetch(url, options);
+        if (response.status === 401 && attempt === 5) authorizationRefused = true;
+        if (response.status !== 401 && response.status < 500 || attempt === 5) return response;
+        await response.body?.cancel();
+        await waitForBackoff(5000 * 2 ** (attempt - 1));
+      }
+    },
+  }).catch((error: unknown) => {
+    if (authorizationRefused) throw new Error(`${dpId}: the ESO data portal refused it (401) five times; a frame still in its proprietary period is refused so too.`, { cause: error });
+    throw error;
+  });
   // Raw frames arrive Unix-compressed (magic 1f 9d); processed calibration files (M.*) arrive as plain FITS.
   const magic = Buffer.alloc(2), handle = await open(download, 'r');
   await handle.read(magic, 0, 2, 0); await handle.close();

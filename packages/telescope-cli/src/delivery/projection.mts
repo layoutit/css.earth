@@ -4,7 +4,7 @@ import { readFile, writeFile, mkdir, rm, rmdir, rename } from 'node:fs/promises'
 import { resolve, dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import { fileSize, projectWithPlanetMapper } from '@cssearth/telescope-core/node';
+import { withAcquisitionDirectory, fileSize, projectWithPlanetMapper } from '@cssearth/telescope-core/node';
 import type { ProductInput } from '@cssearth/objects';
 import { readBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 
@@ -61,7 +61,7 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
   await checkPins(inputs);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
-  try{
+  try{return await withAcquisitionDirectory(staging,async()=>{
     const nav=await projectWithPlanetMapper({directory:staging,geometry,image:localOutput(source.root,'image.fits'),source:d.file,target:d.target,quantity:definition});
     const rotation=geometry.kernels.find(k=>k.role==='rotation')!,plane=await readFile(resolve(staging,'map.fits'));
     const facts=requireRecord(d.record.facts);
@@ -82,7 +82,8 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
     const software=[{name:'cssEarth projection',version:VERSION},...Object.entries(requireRecord(nav.software)).map(([name,v])=>({name,version:requireString(v)}))];
     const record=bodyMapProductRecord(product,plane,bytes,inputs,software,extras);
     await checkPins(inputs);await writeFile(resolve(staging,'map.fits.product.json'),formatProductRecord(record));
+    await rm(resolve(staging,'.python'),{recursive:true,force:true});await rm(resolve(staging,'.scratch'),{recursive:true,force:true});
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,map:resolve(destination,'map.fits'),figure:resolve(destination,'figure.png'),receipt:resolve(destination,'map.fits.product.json'),sourceContext:context,registration:geometry.registration,publication:'not-evaluated' as const};
-  }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
+  });}catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

@@ -1,9 +1,13 @@
 /** The telescope's human screens: a saved session, an exploration and an artifact's outputs, with the commands they suggest. */
+import { currentDirectory } from './run-directory.mts';
+import { explorationTable, queryTable, row, wavelengthText } from './cli-table.mts';
 import { fieldLabel } from './exploration.mts';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
+import { homedir } from 'node:os';
 import { formatAnswer } from './observation-query/query.mts';
 import { assessRequest } from './requests/request-satisfaction.mts';
 import type { ExplorationSession, Session } from './session.mts';
+import type { InspectedArtifact } from './cli-artifact-types.mts';
 import type { OutputChoice } from './delivery/outputs.mts';
 import type { SourceRelevance } from './products/source-relevance.mts';
 import type { ProductSoftware } from '@cssearth/objects';
@@ -12,8 +16,30 @@ import type { DeliveryContext } from './delivery/delivery-context.mts';
 import type { FamilyOperation } from './family-handler.mts';
 import { requireString } from '@cssearth/core';
 
+/** Keep incomplete coverage's cause visible instead of attributing every gap to an outage. */
+function coverageNotice(causes:{readonly unavailable:boolean;readonly overflow:boolean;readonly unreadable:boolean;readonly unresolved:boolean;readonly unsearched:boolean}):string {
+  const notes=[...(causes.unavailable?['Some archives did not answer']:[]),...(causes.overflow?['Too many results to list']:[]),
+    ...(causes.unreadable?['Some records unreadable']:[]),...(causes.unresolved?['Some records could not be resolved']:[]),
+    ...(causes.unsearched?['Some sources were not searched']:[])];
+  return notes.length?`${notes.join('; ')}; results may be incomplete.`:'Search coverage is incomplete; results may be incomplete.';
+}
 const briefDiagnostic=(value:string)=>value.length<=280?value:`${value.slice(0,279).trimEnd()}… (full reason in saved result)`;
 export function formatSession(session: Session, directory: string,verbose=false): string {
+  if(!verbose){
+    const answer=session.answer,notes=(answer.archiveAccess?.services.filter(service=>service.state==='unavailable'||service.state==='overflow').length??0)+(answer.sourceIntakeIssues?.length??0);
+    const lines=[`${session.target} · ${answer.request.kind} · ${wavelengthText(answer.request.wavelengthMicrometres)}`,'', ...queryTable(session),''];
+    if(answer.endpoint.coverage==='incomplete')lines.push(coverageNotice({
+      unavailable:answer.archiveAccess?.services.some(service=>service.state==='unavailable')??false,
+      overflow:answer.archiveAccess?.services.some(service=>service.state==='overflow')??false,
+      unreadable:answer.sourceIntakeIssues?.some(issue=>issue.state==='unavailable'||issue.state==='incomplete')??false,
+      unresolved:false,
+      unsearched:answer.targetCoverage.some(coverage=>coverage.state==='not-searched'||coverage.state==='unanswered')}));
+    if(session.choices.length>10)lines.push(`${session.choices.length-10} more · details: --verbose`);
+    if(!session.choices.length)lines.push(`No retrievable observation. Workflow: ${answer.endpoint.status}.`);
+    lines.push(`${notes} provider/source notes · details: --verbose`,`Saved: ${displayPath(resolve(directory,'query.json'))}`);
+    if(session.choices.length)lines.push(`Next: telescope get ${shellWord(displayPath(directory))} --pick N`);
+    return `${lines.join('\n')}\n`;
+  }
   const answer=session.answer,lines = [`${session.target} · ${answer.request.kind} · ${answer.request.wavelengthMicrometres.join('–')} µm`, ''];
   const append=(heading:string,rows:readonly string[],total=rows.length)=>{
     if(!rows.length)return;
@@ -49,10 +75,14 @@ export function formatSession(session: Session, directory: string,verbose=false)
   return `${lines.join('\n')}\n`;
 }
 
-export const shellWord = (value:string):string => /^[A-Za-z0-9_./,:@+%=-]+$/u.test(value) ? value : `'${value.replaceAll("'", "'\\''")}'`;
+export const shellWord = (value:string):string => value.startsWith('~/')?`~/${shellWord(value.slice(2))}`:/^[A-Za-z0-9_./,:@+%=-]+$/u.test(value) ? value : `'${value.replaceAll("'", "'\\''")}'`;
 export const displayPath = (path:string):string => {
-  const local=relative(process.cwd(),resolve(path));
-  return local&&!isAbsolute(local)&&local!=='..'&&!local.startsWith(`..${sep}`)?local:path;
+  const home=homedir(),absolute=resolve(path),local=relative(currentDirectory(),absolute);
+  if(!local)return '.';
+  if(!isAbsolute(local)&&local!=='..'&&!local.startsWith(`..${sep}`))return `./${local}`;
+  if(absolute===home)return '~';
+  if(absolute.startsWith(`${home}${sep}`))return `~/${relative(home,absolute)}`;
+  return path;
 };
 const displayTime = (start:string|null,end:string|null):string => start === null ? 'date unknown' : end && end !== start ? `${start} to ${end}` : start;
 function displayWavelengths(value:readonly (number|null)[]|readonly (readonly [number,number])[]):string {
@@ -60,7 +90,23 @@ function displayWavelengths(value:readonly (number|null)[]|readonly (readonly [n
   const ranges = Array.isArray(value[0]) ? value as readonly (readonly [number,number])[] : [value as readonly [number|null,number|null]];
   return ranges.map(range=>range[0]===null||range[1]===null?'unknown':`${range[0]}–${range[1]} µm`).join(', ');
 }
-export function formatExploration(session:ExplorationSession & {readonly directory:string},verbose=false):string {
+export function formatExploration(session:ExplorationSession & {readonly directory:string},verbose=false,all=false):string {
+  if(!verbose){
+    const answer=session.answer,lines=explorationTable(session,all),path=displayPath(resolve(session.directory,'explore.json'));
+    lines.push('');
+    if(answer.outcome.coverage==='incomplete')lines.push(coverageNotice({
+      unavailable:answer.issues.some(issue=>issue.code==='provider-unavailable')||answer.services.some(service=>service.state==='unavailable'),
+      overflow:answer.issues.some(issue=>issue.code==='provider-overflow')||answer.services.some(service=>service.state==='overflow'),
+      unreadable:answer.issues.some(issue=>issue.code==='source-unavailable')||answer.unresolved.some(issue=>issue.scope==='indexed-source'&&issue.code==='coverage'),
+      unresolved:answer.unresolved.some(issue=>issue.scope!=='indexed-source'||issue.code!=='coverage')||answer.issues.some(issue=>issue.code==='provider-target-unknown'),
+      unsearched:answer.coverage.some(coverage=>coverage.state==='not-searched'||coverage.state==='unanswered')}));
+    if(!session.choices.length)lines.push(answer.outcome.coverage==='target-unresolved'?'Target unresolved; no archive search was run.':answer.outcome.coverage==='incomplete'?'Search incomplete; no retrievable observation was confirmed.':'No retrievable observation in this bounded search. This does not establish that no observation exists.');
+    if(!all&&session.choices.length>10)lines.push(`${session.choices.length-10} more · ${['telescope','explore',...session.arguments,'--all'].map(shellWord).join(' ')}`);
+    const limitations=new Set(session.choices.flatMap(choice=>choice.limitations));
+    lines.push(`${answer.unsupported.length} unsupported · ${answer.issues.length+answer.unresolved.length} notes · ${limitations.size} limitations · details: --verbose`,`Saved: ${path}`);
+    if(session.choices.length)lines.push(`Next: telescope get ${shellWord(displayPath(session.directory))} --pick N`);
+    return `${lines.join('\n')}\n`;
+  }
   const answer=session.answer,resolution=answer.targetResolution;
   const title=resolution.status==='position'?fieldLabel(resolution.region):resolution.status==='resolved'?resolution.canonical.name:answer.target!;
   const lines=[title,''];
@@ -162,17 +208,13 @@ export interface ArtifactInspection {
   readonly artifact:string;readonly target?:string | null;readonly source:string;readonly productReceipt?:string;readonly sourceContext?:DeliveryContext;
   readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];
 }
-export interface InspectedArtifact {
-  readonly artifact:string;readonly target?:unknown;readonly source:unknown;readonly productReceipt?:string;readonly sourceContext?:DeliveryContext;
-  readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly relevance?:SourceRelevance;readonly software?:readonly ProductSoftware[];readonly sourceProcessing?:readonly SourceProcessingSoftware[];
-}
 export const artifactScreen=(result:InspectedArtifact,path:string):ArtifactInspection=>({artifact:result.artifact,...(result.productReceipt||/\.product\.json$/u.test(path)?{productReceipt:resolve(result.productReceipt??path)}:{}),...(result.sourceContext?.kind === 'exploration' && result.sourceContext.region ? { target: fieldLabel(result.sourceContext.region) } : result.relevance?.region ? { target: fieldLabel(result.relevance.region) } : typeof result.target==='string'?{target:result.target}:{}),source:resolve(requireString(result.source,'artifact source')),...(result.sourceContext?{sourceContext:result.sourceContext}:{}),outputs:result.outputs,...(result.terminal?{terminal:true}:{}),...(result.profiles?{profiles:result.profiles}:{}),...(result.issues?{issues:result.issues}:{}),...(result.familyOperations?{familyOperations:result.familyOperations}:{}),...(result.relevance?{relevance:result.relevance}:{}),...(result.software?{software:result.software}:{}),...(result.sourceProcessing?{sourceProcessing:result.sourceProcessing}:{})});
 export function contextText(context:DeliveryContext|undefined):string|undefined {
   if(!context)return undefined;
   return context.kind==='exploration'?'No scientific acceptance criteria requested.':`Scientific request: ${context.assessment.status}.`;
 }
 export function outputCommand(source:string,choice:OutputChoice):string {
-  const args=['telescope','export',source,'--output',choice.kind];
+  const args=['telescope','export',displayPath(source),'--output',choice.kind];
   if(choice.hdu!==undefined)args.push('--hdu',String(choice.hdu));
   if(choice.structure)args.push('--structure',choice.structure);
   for(const parameter of choice.parameters??[]){
@@ -183,6 +225,20 @@ export function outputCommand(source:string,choice:OutputChoice):string {
   return args.map(shellWord).join(' ');
 }
 export function formatArtifact(result:ArtifactInspection,verbose=false):string {
+  if(!verbose){
+    const lines=[`${result.target??'Artifact'} · ${result.artifact}`,`Source: ${displayPath(result.source)}`],context=contextText(result.sourceContext);if(context)lines.push(context);
+    if(result.outputs.length)lines.push('','Supported next operations:');
+    result.outputs.slice(0,10).forEach((choice,index)=>{lines.push(row([`${index+1}. ${choice.kind}`,choice.hdu===undefined?choice.structure??'':`HDU ${choice.hdu}${choice.structure?` / ${choice.structure}`:''}`,choice.available?'available':'unavailable'],[26,24,12]));
+      if(choice.available)lines.push(`   Next: ${outputCommand(displayPath(result.source),choice)}`);});
+    if(result.familyOperations?.length)lines.push('','Family operations:');
+    result.familyOperations?.slice(0,Math.max(0,10-result.outputs.length)).forEach((operation,index)=>{lines.push(row([`${result.outputs.length+index+1}. ${operation.id}`,operation.componentId,operation.available?'available':'unavailable'],[26,24,12]));
+      if(operation.available)lines.push(`   Next: ${['telescope','family-run',displayPath(result.source),operation.id,'--component',operation.componentId,...(operation.parameters.some(parameter=>parameter.id!=='out'&&parameter.required)?['--params','PARAMS.json']:[]),'--out','DIRECTORY'].map(shellWord).join(' ')}`);});
+    if(!result.outputs.length&&!result.familyOperations?.length)lines.push('No further supported outputs. This artifact is terminal.');
+    const total=result.outputs.length+(result.familyOperations?.length??0);
+    if(total>10)lines.push(`${total-10} more · telescope outputs ${shellWord(displayPath(result.source))} --verbose`);
+    lines.push(`${result.issues?.length??0} notes · details: --verbose`);
+    return `${lines.join('\n')}\n`;
+  }
   const lines=[`${result.target??'Artifact'} · ${result.artifact}`,`Source: ${displayPath(result.source)}`];
   const context=contextText(result.sourceContext);if(context)lines.push(context);
   if(result.relevance){
