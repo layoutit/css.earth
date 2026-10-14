@@ -1,0 +1,57 @@
+name: Publish telescope
+
+# Publishes @cssearth/telescope to npm at the version package.json declares. npm trusts this workflow file through
+# trusted publishing (OIDC), so no npm token is stored in the repository; the package's npm settings name
+# layoutit/css.earth and this file. See docs/ci-cd.md, "Publishing the telescope package".
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-telescope
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      # npm exchanges this job's OIDC token for a one-time publish credential and signs provenance with it.
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          # Node 24 ships npm 11, which trusted publishing requires.
+          node-version: '24'
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - name: Refuse a version npm already has
+        working-directory: packages/telescope-cli
+        run: |
+          set -euo pipefail
+          version=$(node -p "require('./package.json').version")
+          if npm view "@cssearth/telescope@$version" version >/dev/null 2>&1; then
+            echo "::error::@cssearth/telescope@$version is already on npm. Bump the version in package.json and the plugin manifests first."
+            exit 1
+          fi
+          echo "Publishing @cssearth/telescope@$version."
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build the packages and the checkout data the package carries
+        # prepack reads the target catalogue and sphere bank from a prepared checkout (docs/telescope-commands.md).
+        run: |
+          pnpm build:packages
+          pnpm prepare:inputs
+          pnpm setup:prepared
+      - name: Check the packed package installs and runs
+        working-directory: packages/telescope-cli
+        run: pnpm verify:pack
+      - name: Publish to npm
+        working-directory: packages/telescope-cli
+        run: npm publish --access public

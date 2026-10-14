@@ -23,6 +23,7 @@ The planned browser lane and its current implementation limits are documented in
 | [Site safety net](../.github/workflows/site-safety-net.yml) | PR declaration gate for refactor labels and renames or moves under `site/`; require this gate in branch protection. Application inputs (tests excluded), `tool-change` or dispatch select the full comparison. Docs/tools-only changes run universe tests without builds. Main pushes produce one commit-addressed base archive. Semantic outputs require declared globs within the computed closure. [Modes, settings and cost](build-comparison.md). |
 | [ENSO daily refresh](../.github/workflows/enso-daily.yml) | Scheduled once a day and manual dispatch: moves Earth's ENSO steps to NASA's newest day, publishes that day's files and opens a pull request that merges itself. See [ENSO daily refresh](#enso-daily-refresh). |
 | [Deploy](../.github/workflows/deploy.yml) | Manual dispatch, and the push of a merge that moves Earth's ENSO days. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare. Merging validates the gate; it does not deploy. |
+| [Publish telescope](../.github/workflows/publish-telescope.yml) | Manual dispatch only: builds `@cssearth/telescope` from the dispatched commit, checks the packed package installs and runs, and publishes the version `package.json` declares. See [Publishing the telescope package](#publishing-the-telescope-package). |
 
 The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
 
@@ -37,6 +38,12 @@ hits through one converter. The [coverage contract](coverage.md) defines the raw
 format, targets, measured costs and exact job steps for integration. No separate
 coverage workflow is introduced; the shared lane will run both the measured-floor
 check and the base-ref check.
+
+## Publishing the telescope package
+
+Bump the version in `packages/telescope-cli/package.json` and its three plugin manifests, merge, then run the [Publish telescope](../.github/workflows/publish-telescope.yml) workflow on `main` (`gh workflow run publish-telescope.yml`). It refuses a version npm already has.
+
+npm accepts the upload through trusted publishing: the package's settings on npmjs.com name the `layoutit` organization, the `css.earth` repository and the `publish-telescope.yml` workflow, and npm exchanges the job's OIDC token for a one-time credential. No npm token is stored in GitHub, and npm attaches provenance to each version.
 
 ## Serving the site from Cloudflare
 
