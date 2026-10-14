@@ -1,8 +1,9 @@
 /** A restricted reader for NumPy `.npy` files that hold a pickled object: `np.save` of a dictionary of arrays, as published data
  * products often are, and for a bare pickle of such a value (`pickle.dump` of an array, protocol 4 and below). Pickle is a
  * program for a stack machine; this reader interprets only the opcodes such files use, resolves
- * only the three NumPy globals that rebuild an array (`_reconstruct`, `ndarray`, `dtype`) and decodes array bytes itself. It
- * never imports or calls anything a file names, so an unexpected opcode or global is an error, not code. */
+ * only the NumPy globals that rebuild an array (`_reconstruct`, `ndarray`, `dtype`, and a masked array's `_mareconstruct` and
+ * `MaskedArray`) and decodes array bytes itself. It never imports or calls anything a file names, so an unexpected opcode
+ * or global is an error, not code. A masked cell becomes NaN, a cell without a value. */
 
 export interface NpyArray { readonly kind: 'ndarray'; readonly shape: readonly number[]; readonly dtype: string; readonly fortranOrder: boolean; readonly data: Float64Array | readonly NpyValue[] }
 export type NpyValue = null | boolean | number | string | Uint8Array | NpyArray | readonly NpyValue[] | { readonly [key: string]: NpyValue };
@@ -11,11 +12,12 @@ const MAGIC = Buffer.from([0x93, 0x4e, 0x55, 0x4d, 0x50, 0x59]);
 const ALLOWED_GLOBALS = new Map([
   ['numpy.core.multiarray\n_reconstruct', 'reconstruct'], ['numpy._core.multiarray\n_reconstruct', 'reconstruct'],
   ['numpy\nndarray', 'ndarray'], ['numpy\ndtype', 'dtype'],
+  ['numpy.ma.core\n_mareconstruct', 'mareconstruct'], ['numpy.ma.core\nMaskedArray', 'masked-array'],
 ]);
 
 type Global = { readonly global: string };
 type Dtype = { kind: 'dtype'; name: string; byteOrder: string | null };
-type Pending = { kind: 'pending-array' };
+type Pending = { kind: 'pending-array'; masked?: true };
 type Mark = { readonly mark: true };
 type Item = NpyValue | Global | Dtype | Pending | Mark | Item[] | Map<string, Item>;
 
@@ -123,6 +125,14 @@ function reduce(callable: Item, args: Item): Item {
     }
     return { kind: 'pending-array' };
   }
+  if (name === 'mareconstruct') {
+    // _mareconstruct(MaskedArray, ndarray, (0,), 'b'): an empty masked array whose BUILD state adds the mask to an array's.
+    const [subtype, baseclass, shape, typeCode] = args, global = (item: Item | undefined, value: string) => typeof item === 'object' && item !== null && 'global' in item && item.global === value;
+    if (!global(subtype, 'masked-array') || !global(baseclass, 'ndarray') || !Array.isArray(shape) || !(typeof typeCode === 'string' || typeCode instanceof Uint8Array)) {
+      throw new TypeError('Unexpected numpy.ma _mareconstruct arguments.');
+    }
+    return { kind: 'pending-array', masked: true };
+  }
   if (name === 'dtype') {
     const [code, align, copy] = args;
     if (typeof code !== 'string' || align !== false || copy !== true) throw new TypeError('Unexpected numpy dtype arguments.');
@@ -141,24 +151,27 @@ function build(target: Item | undefined, state: Item) {
     return;
   }
   if (typeof target === 'object' && target !== null && (target as Pending).kind === 'pending-array') {
-    // ndarray state: (version, shape, dtype, is_fortran, raw bytes or object list)
-    const [version, shape, dtypeItem, fortran, raw] = state;
+    // ndarray state: (version, shape, dtype, is_fortran, raw bytes or object list); a masked array's adds (mask bytes, fill value).
+    const masked = (target as Pending).masked === true, [version, shape, dtypeItem, fortran, raw, mask] = state;
     const dtype = dtypeItem as Dtype;
     if (version !== 1 || !Array.isArray(shape) || !shape.every(n => typeof n === 'number' && Number.isSafeInteger(n) && n >= 0) ||
-        dtype?.kind !== 'dtype' || typeof fortran !== 'boolean') throw new TypeError('Unexpected numpy array state.');
+        dtype?.kind !== 'dtype' || typeof fortran !== 'boolean' || state.length !== (masked ? 7 : 5)) throw new TypeError('Unexpected numpy array state.');
     const dims = shape as number[], count = dims.reduce((product, n) => product * n, 1);
+    if (masked && !(mask instanceof Uint8Array && mask.byteLength === count)) throw new TypeError('A masked array needs one mask byte for each value.');
     const array = target as unknown as { kind: string; shape: number[]; dtype: string; fortranOrder: boolean; data: Float64Array | NpyValue[] };
     array.kind = 'ndarray'; array.shape = dims; array.fortranOrder = fortran;
     if (dtype.name === 'O8') {
-      if (!Array.isArray(raw) || raw.length !== count) throw new TypeError('Object array contents do not match its shape.');
+      if (masked || !Array.isArray(raw) || raw.length !== count) throw new TypeError('Object array contents do not match its shape.');
       array.dtype = 'object'; array.data = raw.map(plain);
       return;
     }
-    if (dtype.name !== 'f8' || !['<', '='].includes(dtype.byteOrder ?? '') || !(raw instanceof Uint8Array) || raw.byteLength !== count * 8) {
-      throw new TypeError(`Only little-endian float64 arrays are supported (got ${dtype.name}, ${dtype.byteOrder}).`);
+    // float32 values are widened to float64 exactly.
+    const width = dtype.name === 'f8' ? 8 : dtype.name === 'f4' ? 4 : 0;
+    if (!width || !['<', '='].includes(dtype.byteOrder ?? '') || !(raw instanceof Uint8Array) || raw.byteLength !== count * width) {
+      throw new TypeError(`Only little-endian float64 and float32 arrays are supported (got ${dtype.name}, ${dtype.byteOrder}).`);
     }
     const view = new DataView(raw.buffer, raw.byteOffset, raw.byteLength), data = new Float64Array(count);
-    for (let i = 0; i < count; i++) data[i] = view.getFloat64(i * 8, true);
+    for (let i = 0; i < count; i++) data[i] = masked && (mask as Uint8Array)[i] ? NaN : width === 8 ? view.getFloat64(i * 8, true) : view.getFloat32(i * 4, true);
     array.dtype = 'float64'; array.data = data;
     return;
   }

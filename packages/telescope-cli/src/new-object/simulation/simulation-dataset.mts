@@ -1,5 +1,6 @@
 /** A published simulation as a dataset beside a body's default dataset: one field of a model run a paper released on Zenodo,
- * read by the `netcdf-lonlat-field` format (packages/bake/src/objects/raster/netcdf/netcdf-lonlat-field.ts) and labelled as
+ * read by the `netcdf-lonlat-field` format (packages/bake/src/objects/raster/netcdf/netcdf-lonlat-field.ts), or by
+ * `npy-lonlat-field` (packages/bake/src/objects/raster/numpy/npy-lonlat-field.ts) for a NumPy dictionary, and labelled as
  * the rule on published simulations requires (.agents/skills/celestial-skill/references/scientific-faithfulness.md): its own
  * dataset, named as a model with its paper and the scenario it assumes. The body opens on it only where it had no map.
  *
@@ -21,7 +22,11 @@
  * spreads its structure through the file, and a member of any format is taken out of its archive whole, so that file is
  * kept whole, outside git, and restored by the package's own acquisition step. It is one source record however many
  * datasets read it. Such an entry may add `isobar` ({ along, pressure, pressureUnits, at }) to read the field at one
- * pressure, as a paper draws a model whose levels are heights (netcdf-isobar.ts). */
+ * pressure, as a paper draws a model whose levels are heights (netcdf-isobar.ts).
+ *
+ * A member may instead be a NumPy `.npy` file holding a dictionary of arrays (its `path` then ends in `.npy`). A dictionary
+ * names no dimensions and no units: `units` is what the release's own description states for the variable, and each level
+ * the field is read on is chosen in `select` by the name of the array that holds the levels. */
 import { open, stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -62,7 +67,7 @@ export interface SimulationEntry {
   readonly others?: { readonly text: string; readonly url: string };
   /** The legend's limits, when the paper's own color scale is used; the released range rounded outward otherwise. */
   readonly range?: readonly [number, number];
-  /** When `file` is a ZIP archive: the path inside it of the NetCDF-4 model file, which is kept whole at `path`. */
+  /** When `file` is a ZIP archive: the path inside it of the model file (NetCDF or a NumPy dictionary), which is kept whole at `path`. */
   readonly member?: string;
   /** The pressure the field is read at, for a model whose levels are not pressures; only with `member`. */
   readonly isobar?: Isobar;
@@ -85,7 +90,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
   if (!/^[a-z][a-z0-9-]*$/u.test(dataset)) throw new TypeError(`${label}.dataset ${dataset}: a dataset id is lowercase letters, digits and hyphens.`);
   if (!ZENODO_DOI.test(record)) throw new TypeError(`${label}.record ${record}: a release is named by its Zenodo DOI, 10.5281/zenodo.<number>.`);
   if (file.includes('/')) throw new TypeError(`${label}.file ${file}: the name of one file of the record.`);
-  if (!/^science\/[a-z0-9-]+\/[A-Za-z0-9._-]+\.nc$/u.test(path)) throw new TypeError(`${label}.path ${path}: a released field lives at science/<paper>/<name>.nc.`);
+  if (!/^science\/[a-z0-9-]+\/[A-Za-z0-9._-]+\.(?:nc|npy)$/u.test(path)) throw new TypeError(`${label}.path ${path}: a released field lives at science/<paper>/<name>.nc, or <name>.npy for a NumPy file out of a ZIP release.`);
   if (!/^https:\/\//u.test(url)) throw new TypeError(`${label}.url ${url}: the paper's https address.`);
   const coordinates = requireRecord(input.coordinates, `${label}.coordinates`), select = input.select === undefined ? {} : requireRecord(input.select, `${label}.select`);
   for (const [dimension, index] of Object.entries(select)) if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0) throw new TypeError(`${label}.select.${dimension} must be a whole index counted from 0.`);
@@ -97,6 +102,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
   if (member !== undefined && !(/\.zip$/u.test(file) && /^[A-Za-z0-9_][A-Za-z0-9._-]*(?:\/[A-Za-z0-9_][A-Za-z0-9._-]*)*$/u.test(member)))
     throw new TypeError(`${label}.member ${member}: the path of the model file inside ${file}, which must then be a ZIP archive.`);
   if (isobar && member === undefined) throw new TypeError(`${label}.isobar reads every level of the model, which the two kept parts of a classic release do not hold; it needs a NetCDF-4 file named by member.`);
+  if (path.endsWith('.npy') && (member === undefined || !member.endsWith('.npy') || isobar)) throw new TypeError(`${label}.path ${path}: a NumPy file is a member of a ZIP release, named by a member ending in .npy, and is read on a level select names, not at an isobar.`);
   const scenario = text('scenario'), time = text('time');
   if (/[.!?]$/u.test(scenario)) throw new TypeError(`${label}.scenario is the rest of the sentence "The run assumes ..."; leave out its final period.`);
   if (/[.!?]$/u.test(time)) throw new TypeError(`${label}.time is the rest of the sentence "The map is ..."; leave out its final period.`);
@@ -232,7 +238,8 @@ export async function restoreSimulationField(sourceRoot: string, id: string, ent
 const memberStep = (entry: SimulationEntry, release: SimulationRelease) => ({ kind: 'zip-member', groups: ['restore', 'refresh'], path: entry.path, url: release.fileUrl, member: entry.member });
 
 /** The model file of a ZIP release in the package's source directory, taken by the acquisition step the package will declare
- * for it, read with the plan and manifest already in `files`. A file already there is kept. Returns the bytes fetched. */
+ * for it, read with the plan and manifest already in `files`. A file already there is kept. Returns the bytes of the model
+ * file restored, 0 when it was there: the step takes it by byte range, or out of the whole archive where it must. */
 export async function restoreSimulationMember(files: PackageFiles, id: string, sourceRoot: string, entry: SimulationEntry, release: SimulationRelease, fetcher: typeof fetch = fetch): Promise<number> {
   const here = await stat(containedPath(sourceRoot, entry.path)).then(info => info.size > 0, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return false; throw error; });
   if (here) return 0;
@@ -241,19 +248,25 @@ export async function restoreSimulationMember(files: PackageFiles, id: string, s
     manifest: { schema: requireString(read('manifest.json').schema, 'manifest schema'), inputs: [{ path: entry.path, origin: release.fileUrl }], generatedIntermediates: [], documents: [] },
     // The acquisition's own transport names this project to Zenodo; a test passes its own.
     ...(fetcher === fetch ? {} : { transport: { fetch: (url: string, init?: RequestInit) => fetcher(url, init) } }) });
-  return release.bytes;
+  return (await stat(containedPath(sourceRoot, entry.path))).size;
 }
 
-/** Which NetCDF a restored model file is, from its first bytes: a classic file opens with "CDF". Three bytes are read, never the file. */
-export async function memberFormat(path: string): Promise<'classic' | 'netcdf-4'> {
+export type MemberFormat = 'classic' | 'netcdf-4' | 'npy';
+
+/** Which format a restored model file is, from its first bytes: a classic NetCDF file opens with "CDF", a NumPy file with
+ * "\x93NUMPY". Six bytes are read, never the file. */
+export async function memberFormat(path: string): Promise<MemberFormat> {
   const file = await open(path, 'r');
-  try { return (await file.read(Buffer.alloc(3), 0, 3, 0)).buffer.toString('latin1') === 'CDF' ? 'classic' : 'netcdf-4'; } finally { await file.close(); }
+  try {
+    const first = (await file.read(Buffer.alloc(6), 0, 6, 0)).buffer;
+    return first.toString('latin1', 0, 3) === 'CDF' ? 'classic' : first.equals(Buffer.from([0x93, 0x4e, 0x55, 0x4d, 0x50, 0x59])) ? 'npy' : 'netcdf-4';
+  } finally { await file.close(); }
 }
 
 /** What the field reader is asked for: the entry's statements about the file, its two kept parts or its whole model file, and the tolerance WASP-103 b's table uses. */
 export function simulationRecipe(entry: SimulationEntry) {
   const paths = simulationPaths(entry), kept = entry.member === undefined ? { path: paths.head, field: paths.field } : { path: entry.path };
-  return { format: 'netcdf-lonlat-field', ...kept, variable: entry.variable, coordinates: entry.coordinates, select: entry.select, ...(entry.isobar ? { isobar: entry.isobar } : {}),
+  return { format: entry.path.endsWith('.npy') ? 'npy-lonlat-field' : 'netcdf-lonlat-field', ...kept, variable: entry.variable, coordinates: entry.coordinates, select: entry.select, ...(entry.isobar ? { isobar: entry.isobar } : {}),
     sourceUnits: entry.units, longitudeZeroAt: entry.longitudeZeroAt, coordinateToleranceDegrees: 0.005 };
 }
 
@@ -267,9 +280,9 @@ export function roundedRange(minimum: number, maximum: number): readonly [number
 export interface FieldReport { readonly minimum: number; readonly maximum: number; readonly latitudeRange: readonly (number | undefined)[]; readonly missing: number }
 
 /** Add the dataset to the package in `files`. It becomes the default where the default was one color or the neutral shape; a
- * default that is a measured map stays. `member` says which NetCDF a ZIP member is. Returns the range drawn and whether the
+ * default that is a measured map stays. `member` says which format a ZIP member is. Returns the range drawn and whether the
  * default changed. */
-export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport, ranges?: SimulationRanges, member: 'netcdf-4' | 'classic' = 'netcdf-4') {
+export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport, ranges?: SimulationRanges, member: MemberFormat = 'netcdf-4') {
   if ((ranges === undefined) !== (entry.member !== undefined)) throw new TypeError(`${id}, dataset ${entry.dataset}: a classic release is installed with the ranges of its two kept parts, a ZIP member without.`);
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => requireRecord(JSON.parse(String(files.get(path))), path);
   const others = (list: unknown, where: string, key: string, value: string) => requireArray(list, where).filter(item => requireRecord(item, where)[key] !== value);
@@ -280,7 +293,7 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const labels = [minimum, (minimum + maximum) / 2, maximum].map(number);
   // Rows the release does not hold, and cells it marks missing, stay without a value: they are drawn gray and said so.
   const north = field.latitudeRange[1]!, south = field.latitudeRange[0]!, short = north < 90 || south > -90;
-  const caps = short ? ` Gray caps: no released grid samples beyond ${number(Math.min(north, -south))}° north or south.` : '', gaps = field.missing ? ' Gray cells have no value in the release.' : '';
+  const caps = short ? ` Gray caps: no released grid samples beyond ${Number(Math.min(north, -south).toFixed(1))}° north or south.` : '', gaps = field.missing ? ' Gray cells have no value in the release.' : '';
   const quantity = `${entry.quantity[0]!.toLowerCase()}${entry.quantity.slice(1)}`, consumer = `${entry.dataset}-simulation`, input = `${id}-${entry.dataset}-simulation`;
 
   const raster = read(`${s}/preparation/raster.json`), lit = raster.emission === undefined;
@@ -341,7 +354,7 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
       acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...kept, consumers: readers }]
     // A model file out of a ZIP release: one input, the whole member, which git does not hold. Read by several datasets, it is titled as the file.
     : [{ id: cited, path: entry.path, ...shared, productId: entry.member, title: readers.length > 1 ? `${entry.model} simulation of ${name}, ${entry.member}: ${release.title}` : title,
-      acquisition: `Restored through source/preparation/acquisition.json from Zenodo record ${release.doi}: the member ${entry.member} of ${entry.file} (${sizeText(release.bytes)}), unchanged and whole, because ${member === 'classic' ? 'a member is taken out of a ZIP archive whole' : 'a NetCDF-4 file spreads its structure through itself'}. A model output, not an observation.`,
+      acquisition: `Restored through source/preparation/acquisition.json from Zenodo record ${release.doi}: the member ${entry.member} of ${entry.file} (${sizeText(release.bytes)}), unchanged and whole, because ${member === 'netcdf-4' ? 'a NetCDF-4 file spreads its structure through itself' : 'a member is taken out of a ZIP archive whole'}. A model output, not an observation.`,
       redistribution: `Not redistributed in git; restored from Zenodo. ${release.license.name} with attribution.`, consumers: readers }])];
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`), targets = ranges ? [paths.field, paths.head] : [entry.path], gone = new Set([...targets, ...[...dropped].map(item => String(item.path))]);

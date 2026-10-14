@@ -272,6 +272,68 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-75732e-climate-model-simulation",
+      "path": "science/zhan-2026/55cnce_1e6pa_1e0co2.npy",
+      "origin": "https://zenodo.org/records/19388488/files/Supplementary_Data.zip?download=1",
+      "productId": "Supplementary_Data/Figure1/55cnce_1e6pa_1e0co2.npy",
+      "version": "10.5281/zenodo.19388488",
+      "sourceUrl": "https://zenodo.org/records/19388488",
+      "credit": "Zhan & Koll (2026); Isca simulation",
+      "displayCredit": "Zhan & Koll (2026) · Isca",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/19388488",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Air temperature at 5 bar (t) of 55 Cnc e in the Isca simulation: Reinterpreting the JWST Observations of 55 Cancri e with a Non-Grey General Circulation Model",
+      "acquisition": "Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.19388488: the member Supplementary_Data/Figure1/55cnce_1e6pa_1e0co2.npy of Supplementary_Data.zip (48.6 GB), unchanged and whole, because a member is taken out of a ZIP archive whole. A model output, not an observation.",
+      "redistribution": "Not redistributed in git; restored from Zenodo. CC BY 4.0 with attribution.",
+      "consumers": [
+        "climate-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-75732e-climate-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-75732e-steam-model-simulation",
+      "path": "science/zhan-2026/55cnce_1e6pa_1e0h2o.npy",
+      "origin": "https://zenodo.org/records/19388488/files/Supplementary_Data.zip?download=1",
+      "productId": "Supplementary_Data/Figure1/55cnce_1e6pa_1e0h2o.npy",
+      "version": "10.5281/zenodo.19388488",
+      "sourceUrl": "https://zenodo.org/records/19388488",
+      "credit": "Zhan & Koll (2026); Isca simulation",
+      "displayCredit": "Zhan & Koll (2026) · Isca",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/19388488",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Air temperature at 0.05 bar (t) of 55 Cnc e in the Isca simulation: Reinterpreting the JWST Observations of 55 Cancri e with a Non-Grey General Circulation Model",
+      "acquisition": "Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.19388488: the member Supplementary_Data/Figure1/55cnce_1e6pa_1e0h2o.npy of Supplementary_Data.zip (48.6 GB), unchanged and whole, because a member is taken out of a ZIP archive whole. A model output, not an observation.",
+      "redistribution": "Not redistributed in git; restored from Zenodo. CC BY 4.0 with attribution.",
+      "consumers": [
+        "steam-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-75732e-steam-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -289,7 +351,8 @@
         "inputs": [
           "hd-75732e-observational-measurements",
           "hd-75732e-preparation-raster",
-          "hd-75732e-thermal-color"
+          "hd-75732e-thermal-color",
+          "hd-75732e-climate-model-simulation"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

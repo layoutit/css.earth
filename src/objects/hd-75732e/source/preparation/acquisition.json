@@ -54,6 +54,26 @@
       ],
       "path": "photometry/tess/tess2023315124025-s0072-0000000332064670-0267-s_lc.fits",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023315124025-s0072-0000000332064670-0267-s_lc.fits"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/zhan-2026/55cnce_1e6pa_1e0co2.npy",
+      "url": "https://zenodo.org/records/19388488/files/Supplementary_Data.zip?download=1",
+      "member": "Supplementary_Data/Figure1/55cnce_1e6pa_1e0co2.npy"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/zhan-2026/55cnce_1e6pa_1e0h2o.npy",
+      "url": "https://zenodo.org/records/19388488/files/Supplementary_Data.zip?download=1",
+      "member": "Supplementary_Data/Figure1/55cnce_1e6pa_1e0h2o.npy"
     }
   ]
 }

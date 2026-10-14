@@ -24,6 +24,7 @@ export * from './netcdf/hdf5-netcdf.ts';
 export * from './netcdf/netcdf-isobar.ts';
 export * from './netcdf/netcdf-lonlat-field.ts';
 export * from './numpy/npy-dictionary-map.ts';
+export { npyDictionarySource, loadNpyLonLatField } from './numpy/npy-lonlat-field.ts';
 export { readNpy, type SpinFrameTransfer, spinFrameTransfer, loadSpinFrameTransfer, decodeNpyLonLatGrid, loadNpyLonLatGrid, npyLonLatGridDependencies } from './numpy/npy-lonlat-grid.ts';
 export * from './numpy/npy-pickle.ts';
 export * from './numpy/npz.ts';

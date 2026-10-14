@@ -1,0 +1,45 @@
+{
+  "id": "source-hd-75732e-climate-model-simulation",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "55 Cnc e · hd 75732e climate model simulation",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "Supplementary_Data/Figure1/55cnce_1e6pa_1e0co2.npy"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/19388488",
+      "label": "Source page"
+    },
+    {
+      "role": "original",
+      "url": "https://zenodo.org/records/19388488/files/Supplementary_Data.zip?download=1",
+      "label": "Source file"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-75732e/source/manifest.json",
+      "locator": "/inputs/13"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zhan & Koll (2026); Isca simulation",
+      "scope": "The hd 75732e climate model simulation input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

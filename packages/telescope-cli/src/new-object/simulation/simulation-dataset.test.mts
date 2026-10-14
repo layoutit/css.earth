@@ -215,7 +215,7 @@ test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field ca
     const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
     const zenodo = (async (url: unknown) => { asked.push(String(url)); return new Response(new Uint8Array(zip)); }) as typeof fetch;
     // The archive is fetched once and the member taken out of it by the step the package then declares.
-    assert.equal(await restoreSimulationMember(files, id, sourceRoot, entry, release, zenodo), zip.length);
+    assert.equal(await restoreSimulationMember(files, id, sourceRoot, entry, release, zenodo), (await stat(netcdf4)).size);
     assert.deepEqual(asked, [release.fileUrl]);
     assert.deepEqual(await readFile(resolve(sourceRoot, entry.path)), await readFile(netcdf4));
     assert.equal(await restoreSimulationMember(files, id, sourceRoot, entry, release, (async () => { throw new Error('a file already there is kept'); }) as typeof fetch), 0);
@@ -304,4 +304,20 @@ test('a draft run asks Zenodo once for all its planets, paces its requests and s
   const failed = await simulationSurvey(failing, ['TRAPPIST-1 e']);
   assert.equal(failed.failure, 'Zenodo could not be asked for published simulations of every planet (HTTP 429 from https://zenodo.org/api/records); ask with telescope simulations OBJECT.');
   assert.equal(failed.note(['TRAPPIST-1 e']), '');
+});
+
+test('a NumPy dictionary inside a ZIP release is read by the npy format, on the level select names', async () => {
+  const numpy = { file: 'release.zip', member: 'Figure1/run.npy', path: 'science/zhan-2026/run.npy', variable: 't', select: { pfull: 29 } };
+  assert.deepEqual(simulationRecipe(entryOf(numpy)), { format: 'npy-lonlat-field', path: 'science/zhan-2026/run.npy', variable: 't', coordinates: { longitude: 'lon', latitude: 'lat' }, select: { pfull: 29 },
+    sourceUnits: 'K', longitudeZeroAt: 180, coordinateToleranceDegrees: 0.005 });
+  // A NumPy file is only ever a member, and is read on a level, not at an isobar.
+  assert.throws(() => entryOf({ path: 'science/zhan-2026/run.npy' }), /a NumPy file is a member of a ZIP release, named by a member ending in \.npy/u);
+  assert.throws(() => entryOf({ ...numpy, member: 'Figure1/run.nc' }), /a NumPy file is a member of a ZIP release/u);
+  assert.throws(() => entryOf({ ...numpy, isobar: { along: 'pfull', pressure: 'p', pressureUnits: 'Pa', at: 5e5 } }), /read on a level select names, not at an isobar/u);
+  const scratch = await mkdtemp(resolve(tmpdir(), 'simulation-npy-'));
+  try {
+    await writeFile(resolve(scratch, 'run.npy'), Buffer.concat([Buffer.from([0x93, 0x4e, 0x55, 0x4d, 0x50, 0x59, 1, 0]), Buffer.alloc(8)]));
+    assert.equal(await memberFormat(resolve(scratch, 'run.npy')), 'npy');
+    assert.equal(await memberFormat(fixture), 'classic');
+  } finally { await rm(scratch, { recursive: true, force: true }); }
 });
