@@ -1,6 +1,8 @@
 name: Publish telescope
 
-# Publishes @cssearth/telescope to npm at the version package.json declares. npm trusts this workflow file through
+# Publishes @cssearth/telescope to npm at the version package.json declares. The packed-consumer check (verify:pack)
+# stays a maintainer step before the version bump: its exports install a Python toolchain, minutes on a fresh runner.
+# npm trusts this workflow file through
 # trusted publishing (OIDC), so no npm token is stored in the repository; the package's npm settings name
 # layoutit/css.earth and this file. See docs/ci-cd.md, "Publishing the telescope package".
 
@@ -49,9 +51,6 @@ jobs:
           pnpm build:packages
           pnpm prepare:inputs
           pnpm setup:prepared
-      - name: Check the packed package installs and runs
-        working-directory: packages/telescope-cli
-        run: pnpm verify:pack
       - name: Publish to npm
         working-directory: packages/telescope-cli
         run: npm publish --access public
