@@ -28,6 +28,42 @@
         "kind": "dayside-thermal-color",
         "qualification": "Color of a black body at the dayside brightness temperature 2,049 K measured in secondary eclipse at 4.5 µm (Zieba et al. 2022, dayside temperature of the joint fit to the Spitzer 4.5 µm and K2 phase curves, 2049 +362 -359 K), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
       }
+    },
+    {
+      "id": "temperature",
+      "output": "k2-141b-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-141b-dataset-{id}.webp",
+      "source": "science/zieba-2022/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Spitzer",
+        "format": "published-phase-curve-map",
+        "path": "science/zieba-2022/phase-curve.json",
+        "consumer": "temperature-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 700,
+        "maximum": 2400,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "700",
+          "1550",
+          "2400"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "Spitzer · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2203.00370"
+      }
     }
   ],
   "lighting": {

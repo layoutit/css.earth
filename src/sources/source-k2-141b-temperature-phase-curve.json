@@ -1,0 +1,35 @@
+{
+  "id": "source-k2-141b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "K2-141 b · k2 141b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2203.00370",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/k2-141b/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zieba et al. (2022); a Spitzer IRAC 4.5 µm phase curve (program 14135)",
+      "scope": "The k2 141b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

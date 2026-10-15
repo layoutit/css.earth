@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Zieba et al. (2022), Astronomy & Astrophysics 664, A79, 'K2 and Spitzer phase curves of the rocky ultra-short-period planet K2-141 b hint at a tenuous rock vapor atmosphere' (doi:10.1051/0004-6361/202142912; arXiv:2203.00370). Spitzer IRAC channel 2 (4.5 um), 65 hours over 10 orbits between UT 2018 October 9 and 11, program 14135. Values read from the authors' LaTeX source, their table of models fitted to the Spitzer data alone, column 'Sinusoidal (phi = 0)', the model the BIC prefers for those data (Delta BIC 8.8 over a free offset). The text calls A the peak-to-trough amplitude. The paper prints no temperature for this model; the dayside temperature below is the same table's two-temperature fit to the same Spitzer data, the paper's only Spitzer-only dayside brightness temperature, and is used to fix the star's band temperature.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.02038,
+    "cell": "0.02038 +0.00041 -0.00042",
+    "where": "table of models fitted to the Spitzer data alone, Sinusoidal (phi = 0), R_p/R_*"
+  },
+  "eclipseDepth": {
+    "value": 0.0001429,
+    "cell": "142.9 +38.5 -39.0 ppm",
+    "where": "table of models fitted to the Spitzer data alone, Sinusoidal (phi = 0), f_p/f_*"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "A sinusoid of peak-to-trough amplitude A times an eclipse model of depth f_p/f_*, with the hot spot offset fixed at 0 (section 3.1, model 2).",
+    "semiAmplitude": {
+      "value": 0.0000603,
+      "cell": "A = 120.6 +42.3 -43.0 ppm peak to trough: half of it is the semi-amplitude, 60.3 ppm",
+      "where": "table of models fitted to the Spitzer data alone, Sinusoidal (phi = 0), A; abstract, 'a peak to trough amplitude variation'"
+    },
+    "offsetDegreesEast": {
+      "value": 0,
+      "cell": "fixed at 0; with the offset free, -34.5 +15.3 -14.6 degrees (west), which the BIC does not prefer",
+      "where": "table of models fitted to the Spitzer data alone, Sinusoidal (phi = 0) and (phi free)"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 2233,
+      "cell": "2233 +330 -335 K",
+      "where": "table of models fitted to the Spitzer data alone, Two Temp., T_p,d"
+    },
+    "nightsideK": {
+      "value": 909,
+      "cell": "909 +497 -560 K",
+      "where": "table of models fitted to the Spitzer data alone, Two Temp., T_p,n"
+    },
+    "offsetDegrees": {
+      "value": 0,
+      "cell": "fixed at 0",
+      "where": "table of models fitted to the Spitzer data alone, Sinusoidal (phi = 0)"
+    }
+  }
+}
