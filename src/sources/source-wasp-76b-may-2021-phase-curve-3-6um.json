@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-76b-may-2021-phase-curve-3-6um",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-76b · wasp 76b may 2021 phase curve 3 6um",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2107.03349",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-76b/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "May et al. (2021), AJ 162, 158; Spitzer program 13038",
+      "scope": "The wasp 76b may 2021 phase curve 3 6um input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

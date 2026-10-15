@@ -16,20 +16,26 @@
     {
       "location": "public",
       "filename": "trappist-1c-arrival.webp",
-      "bytes": 33914,
-      "sha256": "c0947d3fe3de872ac39da4995839435ce238a04e1cc67238123053fa6ed67eee"
+      "bytes": 33308,
+      "sha256": "55149f7115fb54c7b2a174e20cb8246bba96690447192940b31a3820ea3ccf71"
     },
     {
       "location": "public",
       "filename": "trappist-1c-billboard.webp",
-      "bytes": 5596,
-      "sha256": "f7151136114cc87aa5e3656efa5f71e1165bce1d2e64c75fdb441c11278080d3"
+      "bytes": 5528,
+      "sha256": "5085aa8328cc9f9fde70e622c716e7969e40cc3585fe465c9046d3b9c64e8f9a"
     },
     {
       "location": "public",
       "filename": "trappist-1c-dataset-illustration.webp",
       "bytes": 398,
       "sha256": "c0f415a3bae7db7b498cd2bfdb857e5e01d2c179365e0ab876fdb8d282a2d37a"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1c-dataset-phase-curve.webp",
+      "bytes": 104,
+      "sha256": "7fd268c4ce11bf73846a62360b68c8b918d39793734035713bcd80f36d526b04"
     },
     {
       "location": "public",
@@ -45,6 +51,12 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1c-poles-phase-curve@2x.webp",
+      "bytes": 30910,
+      "sha256": "b5d711211fc72d6ff085e4f541cdb761d416689a0bab89772cb2580a4edfae2c"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1c-poles-temperature@2x.webp",
       "bytes": 27468,
       "sha256": "612c1ccdb10590ba13592277606709f5734cb8c084b25a57d12812237e2410de"
@@ -57,6 +69,12 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1c-surface-phase-curve@2x.webp",
+      "bytes": 12054,
+      "sha256": "957ec8ddff8278432d6061deb5c278848117d7ec64b688b8b0d6aabda0ee7bdf"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1c-surface-temperature@2x.webp",
       "bytes": 18756,
       "sha256": "effe544edf5e784efbd3387c18ce185d8532ecf25f4dc99e22a8863a9ba21963"
@@ -65,13 +83,13 @@
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 318,
-      "sha256": "0c7c23c0145641410178e956d763223b86803a9a527cd7b54a4e6af6bc933287"
+      "sha256": "b54df9ddbc66f6c777b84cad75a2bff85eb569aa1cf193fa25f4ff3f80a042e9"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18110,
-      "sha256": "9bb279b312e775f16d4c61cec8d75f369084dc6683b8f33325b6f0a6f35ac6b3"
+      "bytes": 18301,
+      "sha256": "bdd47287502e36c0816ac0d53eaf0d025031b24a262a84b0911e82e4f9b42b04"
     },
     {
       "location": "prepared",
@@ -88,8 +106,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2949,
-      "sha256": "7549d527c42e16bb046a91eb64d90353748229a198deaa4aed09aa5cd5c345dd"
+      "bytes": 4927,
+      "sha256": "42b2cf940da17c4f188f9fced5b44b325cdfd71ec0c2d68341d681ce47ac865d"
     },
     {
       "location": "prepared",
@@ -100,14 +118,20 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 215,
-      "sha256": "1486eae926f989af9950f8ed0d9bccd149aed534419736432ce59847a2bc423c"
+      "bytes": 315,
+      "sha256": "454d78bd8d16ea3d42b79d16f46523d9b11c6562e662973c31df3c4df669d464"
     },
     {
       "location": "prepared",
       "filename": "minimaps/illustration.webp",
       "bytes": 3720,
       "sha256": "1479f63681a74aeb805511d48f158a6099cb6c84f373c314867ccde58dd496ff"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/phase-curve.webp",
+      "bytes": 1076,
+      "sha256": "bd8caa8c4a2c6bf219e3cebce682300bbb384335e531d5d2777e1a1483e361b0"
     },
     {
       "location": "prepared",
@@ -118,14 +142,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 94332,
-      "sha256": "979d3b871785d97d68145d81044263a70d98ec8ca4dc1efb9a332e03845ded24"
+      "bytes": 98191,
+      "sha256": "a3a4b3cf07d449548ca6038e9e9c573ed4c62065567290b2f3b12ecb78177f7c"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1369,
-      "sha256": "44bbaab42d10a20211de5b9442ae540795af727b9ba14c794aff58049e6b46d7"
+      "bytes": 1572,
+      "sha256": "a5447cb3a70376589a6fa9e913c9287edd7b95087b0c33684a7267ca3d659071"
     }
   ]
 }

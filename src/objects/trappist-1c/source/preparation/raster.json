@@ -19,6 +19,42 @@
   },
   "surfaces": [
     {
+      "id": "phase-curve",
+      "output": "trappist-1c-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1c-dataset-{id}.webp",
+      "source": "science/gillon-2025/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "phase-curve",
+        "label": "MIRI phase curve",
+        "format": "published-phase-curve-map",
+        "path": "science/gillon-2025/phase-curve.json",
+        "consumer": "phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 50,
+        "maximum": 600,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "50",
+          "325",
+          "600"
+        ],
+        "description": "Brightness temperature at 15 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "JWST MIRI · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2509.02128"
+      }
+    },
+    {
       "id": "temperature",
       "output": "trappist-1c-surface-{id}{suffix}.webp",
       "thumbnail": "trappist-1c-dataset-{id}.webp",

@@ -33,6 +33,11 @@
               "id": "temperature",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "spitzer-3-6um",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

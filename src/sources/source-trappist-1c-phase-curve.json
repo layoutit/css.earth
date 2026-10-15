@@ -1,0 +1,35 @@
+{
+  "id": "source-trappist-1c-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TRAPPIST-1c · trappist 1c phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2509.02128",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1c/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gillon, Ducrot et al. (2025); a JWST MIRI 15 µm phase curve (program 3077)",
+      "scope": "The trappist 1c phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
