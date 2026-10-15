@@ -107,7 +107,7 @@ test('exact aliases skip the picker, a narrow window skips previews, disk refusa
   await terminal.press({ name: 'escape' }, { name: 'return' }, { name: 'return' }); await until(() => current(terminal).includes('What do you want to make?'));
   await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('✓ figure.png'));
   assert.deepEqual(f.opened, []); assert.doesNotMatch(current(terminal), /· opened/u);
-  await terminal.press({ name: 'escape' }, { name: 'escape' }); assert.deepEqual(await running, { code: 0, line: 'Saved /run' });
+  await terminal.press({ name: 'escape' }, { name: 'escape' }); assert.deepEqual(await running, { code: 0, line: 'Saved /run · reopen it with: telescope open' });
   assert.deepEqual(f.previews, []);
 });
 

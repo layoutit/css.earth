@@ -1,6 +1,5 @@
 import { basename } from 'node:path';
-import type { ExplorationChoice } from '../exploration.mts';
-import type { ExplorationSession } from '../session.mts';
+import type { ExploreChoice, SavedExploration } from './explore.mts';
 import type { PreviewState } from '../previews/index.mts';
 import { renderPreview } from '../previews/index.mts';
 import type { ProviderProgress } from '../vo/bridge.mts';
@@ -21,10 +20,10 @@ export interface ExploreState {
   readonly target: string;
   readonly requested: string;
   readonly candidates: readonly { readonly id: string; readonly name: string; readonly archiveClass?: string }[];
-  readonly session?: ExplorationSession & { readonly directory: string };
+  readonly session?: SavedExploration;
   readonly query: string;
   readonly active: number;
-  readonly selected?: ExplorationChoice;
+  readonly selected?: ExploreChoice;
   readonly statuses: ReadonlyMap<number, PickStatus>;
   readonly providers: readonly ProviderProgress[];
   readonly tick: number;
@@ -48,8 +47,8 @@ export function byteSize(bytes: number | null | undefined): string {
   return kb >= 1024 ** 2 ? `${(kb / 1024 ** 2).toFixed(1)} GB` : kb >= 1024
     ? `${kb < 10240 ? (kb / 1024).toFixed(1) : Math.round(kb / 1024)} MB` : `${kb} KB`;
 }
-export const observationStart = (choice: ExplorationChoice): string => choice.display.observationTime.startIso?.slice(0, 16).replace('T', ' ') ?? 'date ?';
-export function exploreLabel(choice: ExplorationChoice): string {
+export const observationStart = (choice: ExploreChoice): string => choice.display.observationTime.startIso?.slice(0, 16).replace('T', ' ') ?? 'date ?';
+export function exploreLabel(choice: ExploreChoice): string {
   return [String(choice.pick).padStart(2), cut(oneLine(archiveLabel(choice)), 8), cut(oneLine(choice.display.instrument), 13),
     observationStart(choice).padEnd(16), cut(oneLine(choice.display.productKind ?? '—'), 8), wavelengthText(choice.display.wavelengthsMicrometres)].join('  ');
 }
@@ -60,7 +59,7 @@ export function exploreSelection(state: ExploreState) {
   const start = Math.max(0, Math.min(active - Math.floor(EXPLORE_PAGE / 2), shown.length - EXPLORE_PAGE));
   return { shown, active, start, current: shown[active], rows: shown.slice(start, start + EXPLORE_PAGE) };
 }
-function panel(choice: ExplorationChoice, state: ExploreState): string[] {
+function panel(choice: ExploreChoice, state: ExploreState): string[] {
   return [dim(`preview · #${choice.pick} ${oneLine(choice.display.instrument)}`), ...renderPreview(state.preview).map(dim)];
 }
 function beside(left: readonly string[], right: readonly string[], columns: number): string[] {

@@ -52,7 +52,7 @@ export async function explorationFreeBytes(directory: string): Promise<number> {
 }
 
 /** Size of the same whole delivery used by get, never the much smaller preview cutout. */
-export async function explorationDownloadSize(choice: ExplorationChoice, signal: AbortSignal, fetcher: typeof fetch = fetch): Promise<number | null> {
+export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 'display' | 'observation'>, signal: AbortSignal, fetcher: typeof fetch = fetch): Promise<number | null> {
   if (choice.display.advertisedKilobytes !== null) return choice.display.advertisedKilobytes * 1000;
   let identity: string = choice.observation;
   if (identity.startsWith('{')) {

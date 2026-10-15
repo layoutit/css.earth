@@ -45,7 +45,7 @@ test('every published reference line survives in help all, independently of the 
 test('every published command gets its own usage page, flags and associated explanation', () => {
   const usages = published.split('\n').filter(line => /^  telescope [a-z-]+ /u.test(line));
   const commands = [...new Set(usages.map(line => line.split(' ')[3]!))];
-  assert.deepEqual([...HELP_COMMANDS].sort(), commands.sort());
+  assert.deepEqual([...HELP_COMMANDS].sort(), [...commands, 'open'].sort());
   for (const command of commands) {
     const text = helpText(command);
     for (const line of usages.filter(line => line.startsWith(`  telescope ${command} `))) assert.ok(text.includes(line), line);

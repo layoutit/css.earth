@@ -31,6 +31,8 @@ import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.m
 import { papersList, leadsList, starsList } from './tui/lookups.mts';
 import { exploreScreen, type ExploreServices } from './tui/explore.mts';
 import { explorationServices } from './tui/explore-services.mts';
+import { listSavedRuns, readSavedExploration } from './tui/saved-runs.mts';
+import { runsScreen } from './tui/runs.mts';
 import { processTerminal } from './tui/terminal.mts';
 import { writeList } from './tui/list.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
@@ -217,6 +219,19 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
     if(args.includes('--out')&&options.command!=='fetch')recordDirectory='directory' in options?options.directory:'out' in options?options.out:undefined;
     if (options.command === 'help') return await writeHelp(options.topic,io,args.includes('--json'));
     if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
+    if (options.command === 'open') {
+      const runs = await listSavedRuns(options.directory);
+      if (!guided(options, io)) {
+        io.write(options.json ? `${JSON.stringify(runs)}\n` : runs.map(run => `${run.run}  ${run.target}  ${run.observations} observations  ${run.downloaded} downloaded`).join('\n') + (runs.length ? '\n' : ''));
+        return 0;
+      }
+      const terminal = io.terminal ?? processTerminal(), selected = await runsScreen(runs, terminal);
+      if (!selected.run) return selected.code;
+      const session = await readSavedExploration(selected.run.run);
+      const exit = await exploreScreen(session.target, api.exploration ?? explorationServices(root, session.arguments, session.directory, api, io, consent), terminal, false, session);
+      if (exit.line) io.write(`${exit.line}\n`);
+      return exit.code;
+    }
     if (options.command === 'skill') {
       const result = manageSkill(options);
       io.write(options.json ? `${JSON.stringify(result)}\n` : `${result.status}: ${result.target} (${result.mode})\n`);

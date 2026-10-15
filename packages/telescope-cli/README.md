@@ -34,6 +34,7 @@ That's it. telescope lists what the archives hold for Eris, and every step ends 
 3. `outputs` asks what to make of it: an image, a spectrum, a map on the body, or a standalone 3D sphere in HTML.
 
 - `--yes` (`-y`) skips terminal consent for large or unknown downloads and first-time Python setup.
+- `telescope open [DIRECTORY]` lists saved runs under `./telescope-runs/` (or DIRECTORY), newest first, with observation, downloaded, partial and made counts. Use ↑↓ and Enter to reopen the saved explore table without searching; Escape quits. Pipes print plain rows; `--json` prints the run list.
 
 ## What You Can Search
 

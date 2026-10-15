@@ -1,7 +1,7 @@
 import { basename } from 'node:path';
 import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 import { resolveTarget } from '@cssearth/telescope-core';
-import type { ExplorationChoice } from '../exploration.mts';
+import type { ExplorationChoice, ExplorationRequest, ExplorationOutcome } from '../exploration.mts';
 import type { ExplorationSession } from '../session.mts';
 import type { ProviderProgress, ProviderReporter } from '../vo/bridge.mts';
 import type { DownloadProgress } from '@cssearth/telescope-core/node';
@@ -11,25 +11,36 @@ import { EXPLORE_PAGE, PREVIEW_MINIMUM_COLUMNS, exploreSelection, renderExplore,
 import type { ScreenKey, Terminal } from './terminal.mts';
 import { plain } from './style.mts';
 
-export type SavedExploration = ExplorationSession & { readonly directory: string };
+export type ExploreChoice = Pick<ExplorationChoice, 'pick' | 'telescope' | 'archiveService' | 'observation' | 'reference' | 'display'>;
+/** Saved screens read display and preview facts; get revalidates the original record before retrieval. */
+export type SavedExploration = Pick<ExplorationSession, 'schema' | 'createdAt' | 'arguments' | 'target'> & {
+  readonly directory: string;
+  readonly choices: readonly ExploreChoice[];
+  readonly answer: {
+    readonly request: ExplorationRequest;
+    readonly targetResolution: { readonly status: string; readonly canonical?: { readonly name: string } };
+    readonly outcome: ExplorationOutcome;
+    readonly services: readonly { readonly service: string; readonly state: string; readonly reason: string }[];
+  };
+};
 export interface ExploreOutput extends MakeChoice { readonly run: (parameters: ReadonlyMap<string, string>) => Promise<string> }
 export interface ExploreServices {
   readonly catalogue: () => Promise<readonly TargetCatalogueEntry[]>;
   readonly search: (target: string | undefined, report: ProviderReporter, signal: AbortSignal) => Promise<SavedExploration>;
   readonly statuses: (session: SavedExploration) => Promise<ReadonlyMap<number, PickStatus>>;
-  readonly size: (choice: ExplorationChoice, session: SavedExploration, signal: AbortSignal) => Promise<number | null>;
+  readonly size: (choice: ExploreChoice, session: SavedExploration, signal: AbortSignal) => Promise<number | null>;
   readonly free: (directory: string) => Promise<number>;
-  readonly get: (choice: ExplorationChoice, session: SavedExploration, report: (event: DownloadProgress) => void, signal: AbortSignal) => Promise<string>;
+  readonly get: (choice: ExploreChoice, session: SavedExploration, report: (event: DownloadProgress) => void, signal: AbortSignal) => Promise<string>;
   readonly outputs: (resultPath: string, pick: number) => Promise<readonly ExploreOutput[]>;
-  readonly preview: (choice: ExplorationChoice, session: SavedExploration, signal: AbortSignal) => Promise<PreviewState>;
+  readonly preview: (choice: ExploreChoice, session: SavedExploration, signal: AbortSignal) => Promise<PreviewState>;
   readonly open: (file: string) => void | Promise<void>;
   readonly screen?: (control: { pause(): void; resume(): void } | undefined) => void;
 }
 export interface ExploreExit { readonly code: number; readonly line: string }
 
 /** One listener and one retained block cover the whole transaction; services own all IO. */
-export async function exploreScreen(requested: string | undefined, services: ExploreServices, terminal: Terminal, noOpen = false): Promise<ExploreExit> {
-  const catalogue = await services.catalogue();
+export async function exploreScreen(requested: string | undefined, services: ExploreServices, terminal: Terminal, noOpen = false, saved?: SavedExploration): Promise<ExploreExit> {
+  const catalogue = saved ? [] : await services.catalogue();
   let state: ExploreState = { view: 'search', requested: requested ?? 'Field', target: requested ?? 'Field', candidates: [], query: '', active: 0,
     statuses: new Map(), providers: [], tick: 0, preview: { kind: 'loading' }, size: null, received: 0, checking: false, outputs: [], made: new Map(), making: false };
   const lifetime = new AbortController();
@@ -92,11 +103,11 @@ export async function exploreScreen(requested: string | undefined, services: Exp
       }, lifetime.signal);
       if (closed) return;
       const resolution = session.answer.targetResolution;
-      state = { ...state, session, target: resolution.status === 'resolved' ? resolution.canonical.name : session.target ?? state.target };
+      state = { ...state, session, target: resolution.canonical?.name ?? session.target ?? state.target };
     });
     if (!closed) await browse();
   };
-  const confirm = async (choice: ExplorationChoice) => {
+  const confirm = async (choice: ExploreChoice) => {
     tableActive = exploreSelection(state).active; confirmation?.abort(); confirmation = new AbortController();
     const signal = AbortSignal.any([confirmation.signal, lifetime.signal]);
     state = { ...state, view: 'confirm', selected: choice, free: undefined, size: choice.display.advertisedKilobytes === null ? null : choice.display.advertisedKilobytes * 1000, notice: undefined };
@@ -166,7 +177,7 @@ export async function exploreScreen(requested: string | undefined, services: Exp
       if (key.name === 'up') state = { ...state, active: Math.max(0, state.active - 1) };
       if (key.name === 'down') state = { ...state, active: Math.min(state.candidates.length - 1, state.active + 1) };
     } else if (state.view === 'table') {
-      if (key.name === 'escape') { finish({ code: state.session!.choices.length ? 0 : 3, line: `Saved ${state.session!.directory}` }); return; }
+      if (key.name === 'escape') { finish({ code: state.session!.choices.length ? 0 : 3, line: `Saved ${state.session!.directory} · reopen it with: telescope open` }); return; }
       const { shown, active, current } = exploreSelection(state);
       if (key.name === 'return') { if (current) await confirm(current); return; }
       if (key.name === 'up' || key.name === 'pageup') state = { ...state, active: Math.max(0, active - (key.name === 'up' ? 1 : EXPLORE_PAGE)) };
@@ -207,6 +218,12 @@ export async function exploreScreen(requested: string | undefined, services: Exp
   services.screen?.({ pause() { if (closed || paused) return; paused = true; preview?.abort(); block.done(); close(); },
     resume() { if (closed || !paused) return; paused = false; block = liveBlock(terminal); close = listen(); draw(); } });
   try {
+    if (saved) {
+      busy = true;
+      state = { ...state, session: saved, target: saved.answer.targetResolution.canonical?.name ?? saved.target ?? state.target };
+      await browse();
+      return await done;
+    }
     const resolution = requested === undefined ? undefined : resolveTarget(requested, catalogue, { suggestionLimit: 6, nearest: true });
     if (resolution?.status === 'unknown' || resolution?.status === 'ambiguous') {
       const candidates = resolution.status === 'unknown' ? resolution.suggestions : resolution.candidates;

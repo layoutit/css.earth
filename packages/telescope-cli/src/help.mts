@@ -302,6 +302,7 @@ const exportKinds = between('Physical object handoff', '\nSky association:');
 const figures = between('Figures:', '\nExplore filters');
 
 const explanations: Readonly<Record<string, readonly string[]>> = {
+  open: ['  telescope open [DIRECTORY] [--json]', 'List saved explorations under ./telescope-runs/ (or DIRECTORY), newest first, with observation, downloaded, partial and made counts. In a terminal, use ↑↓ to choose, Enter to reopen the saved explore table without searching, and Escape to quit. Pipes print plain rows; --json prints the run list.'],
   skill: [between('Agent skill', '\nManaged toolchains:')],
   toolchain: [between('Managed toolchains:', '\nHuman entry points:')],
   explore: [between('Explore may first install managed Python:', '\nIn a terminal, outputs'),
@@ -333,6 +334,7 @@ const explanations: Readonly<Record<string, readonly string[]>> = {
 export const HELP_COMMANDS = Object.keys(explanations);
 
 const currentOutputHelp = `Current human and agent output:
+  telescope open [DIRECTORY] [--json]
   telescope explore TARGET [--all] [--verbose] [--json]
   telescope get RUN --pick N [--out DIRECTORY] [--offline] [--yes|-y] [--verbose] [--json]
   telescope outputs ARTIFACT.json [--structure NAME] [--out DIRECTORY] [--verbose] [--json]
