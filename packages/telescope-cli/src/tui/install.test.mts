@@ -79,6 +79,18 @@ test('Escape declines, Ctrl-C aborts consent and a running install, with cleanup
   }
 });
 
+test('EOF declines consent or aborts a running install and restores the terminal', async () => {
+  for (const running of [false, true]) {
+    const terminal = new InstallTerminal(), controller = new AbortController(), screen = createInstallScreen(terminal, controller);
+    const consent = screen.consent('42');
+    if (running) { await terminal.press({ name: 'return' }); assert.equal(await consent, true); }
+    await terminal.press({ name: 'eof' });
+    if (!running) assert.equal(await consent, false);
+    assert.equal(controller.signal.aborted, true); assert.equal(terminal.listening, false); assert.equal(screen.active, false);
+    const before = terminal.writes.length; await terminal.advance(); assert.equal(terminal.writes.length, before);
+  }
+});
+
 test('short windows show consent before keys and only the final progress state', async () => {
   const terminal = new InstallTerminal(140, 10), screen = createInstallScreen(terminal, new AbortController());
   const consent = screen.consent('42');

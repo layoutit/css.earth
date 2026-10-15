@@ -79,7 +79,7 @@ export async function listScreen<Row>(spec: ListSpec<Row>, terminal: Terminal): 
         if (!stopped) draw();
       };
       close = terminal.listen(key => {
-        if (key.name === 'escape' || key.ctrl && key.name === 'c') {
+        if (key.name === 'eof' || key.name === 'escape' || key.ctrl && key.name === 'c') {
           stopped = true; resolve(key.ctrl ? 130 : 0); return;
         }
         pending = pending.then(() => keypress(key)).catch(error => { stopped = true; reject(error); });

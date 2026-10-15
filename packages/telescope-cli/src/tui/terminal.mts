@@ -14,6 +14,7 @@ export interface Terminal {
   delay(milliseconds: number, signal: AbortSignal): Promise<void>;
 }
 interface TerminalInput extends NodeJS.ReadableStream {
+  readonly readableEnded?: boolean;
   readonly isRaw?: boolean;
   readonly readableFlowing?: boolean | null;
   isPaused(): boolean;
@@ -33,11 +34,15 @@ export function processTerminal(input: TerminalInput = process.stdin, output: Te
       emitKeypressEvents(input);
       const press = (text: string | undefined, event: Key) => key({ name: event.name, ctrl: event.ctrl, meta: event.meta, text });
       const interrupt = () => key({ name: 'c', ctrl: true });
+      const end = () => {
+        if (closed) return;
+        try { key({ name: 'eof' }); } finally { close(); }
+      };
       let closed = false;
       const close = () => {
         if (closed) return;
         closed = true;
-        input.off('keypress', press); output.off('resize', resize);
+        input.off('keypress', press); input.off('end', end); input.off('close', end); output.off('resize', resize);
         lifecycle.off('exit', close); lifecycle.off('SIGINT', interrupt); lifecycle.off('SIGTERM', interrupt);
         try { input.setRawMode?.(wasRaw === true); }
         finally {
@@ -46,10 +51,11 @@ export function processTerminal(input: TerminalInput = process.stdin, output: Te
         }
       };
       lifecycle.once('exit', close); lifecycle.on('SIGINT', interrupt); lifecycle.on('SIGTERM', interrupt);
-      input.on('keypress', press); output.on('resize', resize);
+      input.on('keypress', press); input.once('end', end); input.once('close', end); output.on('resize', resize);
       try {
         if (options?.alternateScreen) output.write(ENTER_SCREEN);
         input.setRawMode?.(true); input.resume();
+        if (input.readableEnded) queueMicrotask(end);
       }
       catch (error) { close(); throw error; }
       return close;

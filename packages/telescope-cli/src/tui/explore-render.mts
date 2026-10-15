@@ -73,6 +73,12 @@ function providerName(name: string): string {
   return oneLine(archiveLabel({ telescope: name, archiveService: name })).replace('MAST HST', 'MAST/HST')
     .replace('Keck Observatory Archive', 'Keck').replace('Gemini at CADC', 'Gemini').replace('Chandra Data Archive', 'Chandra').replace('Spitzer Heritage Archive', 'Spitzer');
 }
+function providerReason(reason: string): string {
+  if (/timed?\s*out|timeout/iu.test(reason)) return 'timed out';
+  if (/refused|forbidden|unauthori[sz]ed|\b40[13]\b/iu.test(reason)) return 'refused';
+  if (/no answer|did not answer|not answer|no response|unreachable|ENOTFOUND|EAI_AGAIN/iu.test(reason)) return 'no answer';
+  return 'error';
+}
 function table(state: ExploreState, columns: number): string[] {
   const { shown, current, start, rows } = exploreSelection(state), session = state.session!;
   const got = [...state.statuses.values()].filter(status => status.state === 'done').length;
@@ -124,7 +130,7 @@ export function renderExplore(state: ExploreState, columns: number): string[] {
       (index === state.active ? bold(`> ${oneLine(candidate.name).padEnd(28)}`) : `  ${oneLine(candidate.name).padEnd(28)}`) + dim(oneLine(candidate.archiveClass ?? ''))), '', dim('↑↓ choose · enter explore it · esc quit')];
   if (state.view === 'search') return [...header([state.target, 'searching'], `${bold(oneLine(state.target))} · searching archives…`),
     ...state.providers.map(provider => `  ${providerName(provider.archive).padEnd(10)}${provider.state === 'searching' ? dim(`${spinner[state.tick % spinner.length]} searching`)
-      : provider.reason ? yellow(oneLine(provider.reason)) : provider.count ? green(`${provider.count} found`) : dim('none')}`)];
+      : provider.reason ? yellow(providerReason(provider.reason)) : provider.count ? green(`${provider.count} found`) : dim('none')}`)];
   if (state.view === 'table') return table(state, columns);
   if (state.view === 'confirm') return confirm(state, columns);
   if (state.view === 'download') return download(state);

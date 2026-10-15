@@ -261,6 +261,11 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     const transferred = transferredAnswer.transfer!;
     if (transferred.file.path !== resolve(staging, receivedName) || await sizeOf(transferred.file.path, 'Received product') !== transferred.file.bytes) throw new Error('Retained transfer no longer matches its file.');
     if (retained) await writeFile(resolve(staging, 'transfer.json'), JSON.stringify(transferredAnswer));
+    if (retained && spec.format !== 'fits') {
+      // Retry processing from the retained archive, including failures after extraction or alias creation.
+      await rm(resolve(staging, 'science.fits'), { force: true });
+      await rm(resolve(staging, 'members'), { recursive: true, force: true });
+    }
     const unpacked = spec.format === 'fits' ? undefined : await extractVoPackage(resolve(staging, receivedName), staging, { expandedBytes: spec.limits.expandedBytes, members: spec.limits.packageMembers });
     if (unpacked) {
       if (unpacked.format !== spec.format) throw new Error('Archive format disagrees with advertised MIME.');

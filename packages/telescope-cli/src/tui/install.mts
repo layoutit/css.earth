@@ -89,7 +89,7 @@ export function createInstallScreen(terminal: Terminal, controller: AbortControl
     async consent(freeGb: string, yes = false): Promise<boolean> {
       let consentLines = renderInstallConsent(freeGb, terminal.columns);
       close = terminal.listen(key => {
-        if (key.ctrl && key.name === 'c') { controller.abort(); answer?.(false); finish(); }
+        if (key.name === 'eof' || key.ctrl && key.name === 'c') { controller.abort(); answer?.(false); finish(); }
         else if (!running && key.name === 'return') answer?.(true);
         else if (!running && key.name === 'escape') answer?.(false);
       }, () => { if (running) draw(); else { consentLines = renderInstallConsent(freeGb, terminal.columns); block.draw(consentLines); } });

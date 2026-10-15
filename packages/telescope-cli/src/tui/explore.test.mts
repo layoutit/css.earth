@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { exploreScreen, type ExploreServices } from './explore.mts';
 import { FakeTerminal } from './fake-terminal.mts';
 import { plain } from './style.mts';
-import type { PickStatus } from './explore-render.mts';
+import { renderExplore, type ExploreState, type PickStatus } from './explore-render.mts';
 import { exploreSession } from './fixtures/explore.mts';
 
 class ExploreTerminal extends FakeTerminal {
@@ -152,4 +152,54 @@ test('output inspection failure belongs to make, never reports an interrupted do
   await terminal.press({ name: 'return' }, { name: 'return' }); await until(() => current(terminal).includes('unsupported output metadata'));
   assert.match(current(terminal), /› make/u); assert.doesNotMatch(current(terminal), /Resume from there|stopped at/u);
   assert.equal(f.transfers(), 0); await terminal.press({ name: 'escape' }, { name: 'escape' }); assert.equal((await running).code, 0);
+});
+
+test('archive search renders only short reasons without altering saved evidence', () => {
+  const cases = [
+    ['The Heritage Archive did not answer aorByPosition in 1 attempts: Error: socket hang up', 'no answer'],
+    ['Error: request timeout after 15000 ms', 'timed out'],
+    ['Error: connect ECONNREFUSED archive.example', 'refused'],
+    ['HTTP 403 Forbidden: private archive', 'refused'],
+    ['Error: invalid archive response with a very long diagnostic', 'error'],
+  ];
+  const session = exploreSession();
+  const state: ExploreState = { view: 'search', target: 'Star', requested: 'star', candidates: [], session, query: '', active: 0,
+    statuses: new Map(), providers: [], tick: 0, preview: { kind: 'loading' }, size: null, received: 0, checking: false, outputs: [], made: new Map(), making: false };
+  for (const [reason, short] of cases) {
+    const provider = { archive: 'Spitzer', state: 'done' as const, reason: reason! };
+    const lines = renderExplore({ ...state, providers: [provider] }, 150).map(plain);
+    assert.equal(lines.at(-1), `  Spitzer   ${short}`);
+    assert.equal(provider.reason, reason);
+    assert.equal(state.session, session);
+  }
+});
+
+test('EOF exits picker, search, table, confirmation, download and make, retaining saved work', async () => {
+  for (const phase of ['picker', 'search', 'table', 'confirm', 'download', 'make'] as const) {
+    const terminal = new ExploreTerminal(), f = fixture(); let aborted = false;
+    const wait = (signal: AbortSignal) => new Promise<never>((_resolve, reject) => {
+      signal.addEventListener('abort', () => { aborted = true; reject(signal.reason); }, { once: true });
+    });
+    const services: ExploreServices = { ...f.services,
+      search: phase === 'search' ? async (_target, _report, signal) => wait(signal) : f.services.search,
+      get: async (_choice, _session, _report, signal) => wait(signal) };
+    if (phase === 'make') f.statuses.set(1, { state: 'done', bytes: 100, resultPath: '/run/pick-1/result.json' });
+    const running = exploreScreen(phase === 'picker' ? 'missing' : 'star', services, terminal);
+    if (phase === 'picker') await until(() => current(terminal).includes('Did you mean:'));
+    else if (phase === 'search') await until(() => current(terminal).includes('searching archives'));
+    else {
+      await until(() => current(terminal).includes('Start (UTC)'));
+      if (phase !== 'table') {
+        await terminal.press({ name: 'return' }); await until(() => current(terminal).includes(phase === 'make' ? 'Already downloaded' : 'Download it?'));
+        if (phase === 'download' || phase === 'make') {
+          await terminal.press({ name: 'return' }); await until(() => current(terminal).includes(phase === 'make' ? 'What do you want to make?' : 'Check headers'));
+        }
+      }
+    }
+    await terminal.press({ name: 'eof' });
+    assert.deepEqual(await running, { code: 0, line: phase === 'picker' || phase === 'search' ? 'Nothing searched.' : 'Saved /run' });
+    assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), '\x1b[?25h');
+    if (phase === 'download' || phase === 'search') assert.equal(aborted, true);
+    if (phase === 'make') assert.equal(f.statuses.get(1)?.state, 'done');
+  }
 });

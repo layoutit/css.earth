@@ -68,6 +68,29 @@ test('default explore adapter suspends for installation, restores search after c
   }
 });
 
+test('default explore adapter preserves filters before positional and explicit targets, including suggestions', async () => {
+  for (const target of ['star', 'starr']) for (const explicit of [false, true]) {
+    const screen = capture(), searched: string[][] = [];
+    const args = ['--kind', 'image', '--instrument', 'star', '--any-time', ...(explicit ? ['--target', target] : [target]), '--wavelength', '1,2'];
+    const running = main(['explore', ...args], undefined, screen.io.write, screen.io, { ...api(), saveExploration: async (_root, request) => {
+      searched.push([...request]);
+      const parsed = parseCli(['explore', ...request]);
+      assert.equal(parsed.command, 'explore');
+      if (parsed.command !== 'explore') assert.fail('expected explore');
+      assert.equal(parsed.request.target, 'star'); assert.equal(parsed.request.kind, 'image');
+      return exploreSession();
+    } });
+    if (target === 'starr') {
+      await until(() => screen.terminal.screen.join('\n').includes('Did you mean:'));
+      assert.deepEqual(searched, []); await screen.terminal.press({ name: 'return' });
+    }
+    await until(() => screen.terminal.screen.join('\n').includes('Start (UTC)'));
+    assert.deepEqual(searched, [['--kind', 'image', '--instrument', 'star', '--any-time', ...(explicit ? ['--target', 'star'] : ['star']), '--wavelength', '1,2']]);
+    await screen.terminal.press({ name: 'escape' }); assert.equal(await running, 0);
+    assert.deepEqual(screen.stderr, []);
+  }
+});
+
 
 test('declined installation during get exits the suspended screen even if retrieval caught the refusal', async () => {
   const screen = capture();

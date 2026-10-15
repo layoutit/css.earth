@@ -40,7 +40,7 @@ export async function helpScreen(terminal: Terminal): Promise<number> {
   try {
     close = terminal.listen(key => {
       if (key.ctrl && key.name === 'c') { exitCode = 130; controller.abort(); }
-      else if (key.name === 'escape') controller.abort();
+      else if (key.name === 'escape' || key.name === 'eof') controller.abort();
     }, draw);
     if (renderHelp(0, terminal.columns).length >= terminal.rows || terminal.columns < HEADER_WIDTH) {
       draw(); return exitCode;

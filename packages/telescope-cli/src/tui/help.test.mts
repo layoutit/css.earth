@@ -88,6 +88,14 @@ test('Ctrl-C aborts the animation, restores the terminal and returns 130', async
   assert.equal(terminal.writes.at(-1), '\x1b[?25h');
 });
 
+test('EOF stops the help animation and restores the terminal with a quit exit code', async () => {
+  const terminal = new FakeTerminal();
+  terminal.onDelay = () => { void terminal.press({ name: 'eof' }); };
+  assert.equal(await helpScreen(terminal), 0);
+  assert.equal(terminal.delays.length, 1); assert.equal(terminal.listening, false);
+  assert.equal(terminal.writes.at(-1), '\x1b[?25h');
+});
+
 test('resize redraws the current frame and stops animation when the header no longer fits', async () => {
   const terminal = new FakeTerminal();
   terminal.onDelay = () => terminal.resize(60, 40);

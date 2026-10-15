@@ -53,6 +53,15 @@ test('empty matches clamp navigation and Enter has no action', async () => {
   assert.equal(terminal.listening, false);
 });
 
+test('EOF quits even while an Enter action is pending and restores the terminal', async () => {
+  let finish: (value: string) => void = () => {};
+  const terminal = new FakeTerminal(), running = listScreen(fixture(() => new Promise(resolve => { finish = resolve; })), terminal);
+  await terminal.press({ name: 'return' }, { name: 'eof' });
+  assert.equal(await running, 0); assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
+  const before = terminal.writes.length; finish('opened'); await new Promise<void>(resolve => setImmediate(resolve));
+  assert.equal(terminal.writes.length, before);
+});
+
 test('a failed Enter action restores the terminal and propagates its error', async () => {
   const terminal = new FakeTerminal();
   const running = listScreen(fixture(async () => { throw new Error('browser failed'); }), terminal);

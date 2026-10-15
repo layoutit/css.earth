@@ -157,6 +157,7 @@ export async function exploreScreen(requested: string | undefined, services: Exp
   };
   const handle = async (key: ScreenKey) => {
     if (closed || paused) return;
+    if (key.name === 'eof') { finish({ code: 0, line: state.session ? `Saved ${state.session.directory}` : 'Nothing searched.' }); return; }
     if (key.ctrl && key.name === 'c') { finish({ code: 130, line: '' }); return; }
     if (busy) return;
     if (state.view === 'picker') {

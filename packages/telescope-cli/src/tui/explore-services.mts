@@ -89,7 +89,10 @@ export function explorationServices(root: string, requestArgs: readonly string[]
       if (target !== undefined) {
         const existing = args.indexOf('--target');
         if (existing >= 0) args[existing + 1] = target;
-        else args[0] = target;
+        else for (let index = 0; index < args.length; index++) {
+          if (!args[index]!.startsWith('-')) { args[index] = target; break; }
+          if (args[index] !== '--any-time') index++;
+        }
       }
       const session = await withDownloadProgress({ report: () => {}, signal, retainPartial: false }, () => api.saveExploration(root, args, directory, undefined, undefined, report));
       if (consent.cancelled) throw new Error('The astronomy packages are not installed.');

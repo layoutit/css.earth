@@ -84,6 +84,22 @@ test('closing a newly opened stdin stops the resumed stream from keeping the pro
   input.destroy(); output.destroy();
 });
 
+test('stdin EOF and close notify the screen once and restore the terminal', async () => {
+  for (const event of ['end', 'close', 'ended'] as const) {
+    const input = new Input(), output = new Output(), lifecycle = new EventEmitter(), keys: string[] = [];
+    if (event === 'ended') { input.resume(); input.end(); await new Promise<void>(resolve => input.once('end', resolve)); }
+    const close = processTerminal(input, output, lifecycle).listen(key => keys.push(key.name ?? ''), () => {});
+    if (event === 'ended') await new Promise<void>(resolve => queueMicrotask(resolve));
+    else input.emit(event);
+    input.emit('end'); input.emit('close'); close();
+    assert.deepEqual(keys, ['eof']); assert.equal(input.isRaw, false);
+    assert.equal(input.listenerCount('keypress'), 0); assert.equal(input.listenerCount('end'), 0); assert.equal(input.listenerCount('close'), 0);
+    assert.equal(output.read().toString(), '\x1b[?25h');
+    assert.equal(lifecycle.listenerCount('SIGINT'), 0); assert.equal(lifecycle.listenerCount('exit'), 0);
+    input.destroy(); output.destroy();
+  }
+});
+
 test('alternate sessions restore the normal buffer, cursor, input mode and listeners on close and process exit', () => {
   for (const exit of [false, true]) {
     const input = new Input(), output = new Output(), lifecycle = new EventEmitter();
