@@ -1,0 +1,132 @@
+<VOTABLE xmlns="http://www.ivoa.net/xml/VOTable/v1.3" version="1.4">
+  <RESOURCE type="results">
+    <INFO name="standardID" value="ivo://ivoa.net/std/DataLink#links-1.1" />
+    <TABLE>
+      <FIELD name="ID" datatype="char" arraysize="*" ucd="meta.id;meta.main" />
+      <FIELD name="access_url" datatype="char" arraysize="*" ucd="meta.ref.url" />
+      <FIELD name="service_def" datatype="char" arraysize="*" ucd="meta.ref" />
+      <FIELD name="error_message" datatype="char" arraysize="*" ucd="meta.code.error" />
+      <FIELD name="semantics" datatype="char" arraysize="*" ucd="meta.code" />
+      <FIELD name="local_semantics" datatype="char" arraysize="*" ucd="meta.code">
+        <DESCRIPTION>local tag indicating equivalent meaning or role of this link (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="description" datatype="char" arraysize="*" ucd="meta.note" />
+      <FIELD name="content_type" datatype="char" arraysize="*" ucd="meta.code.mime" />
+      <FIELD name="content_length" datatype="long" ucd="phys.size;meta.file" unit="byte" />
+      <FIELD name="content_qualifier" datatype="char" arraysize="*">
+        <DESCRIPTION>the nature of the thing the link will deliver (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="link_auth" datatype="char" arraysize="*" ucd="meta.code">
+        <DESCRIPTION>link supports authentication (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="link_authorized" datatype="boolean" ucd="meta.code">
+        <DESCRIPTION>the current authenticated identity is authorized (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <DATA>
+        <TABLEDATA>
+          <TR>
+            <TD>2019.1.01098.S_uid___A001_X1465_X1a15_001_of_001.tar</TD>
+            <TD />
+            <TD>SODA.member.uid___A001_X1465_X1a15.Betelgeuse_sci.spw23_25_27_29.mfs.I.manual.image.pbcor.fits</TD>
+            <TD />
+            <TD>#cutout</TD>
+            <TD />
+            <TD>Synchronous SODA sub-image of member.uid___A001_X1465_X1a15.Betelgeuse_sci.spw23_25_27_29.mfs.I.manual.image.pbcor.fits.</TD>
+            <TD>image/fits</TD>
+            <TD />
+            <TD />
+            <TD />
+            <TD />
+          </TR>
+          <TR>
+            <TD>2019.1.01098.S_uid___A001_X1465_X1a15_001_of_001.tar</TD>
+            <TD />
+            <TD>SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw23.mfs.I.pbcor.fits</TD>
+            <TD />
+            <TD>#cutout</TD>
+            <TD />
+            <TD>Synchronous SODA sub-image of member.uid___A001_X1465_X1a15.J0510p1800_bp.spw23.mfs.I.pbcor.fits.</TD>
+            <TD>image/fits</TD>
+            <TD />
+            <TD />
+            <TD />
+            <TD />
+          </TR>
+          <TR>
+            <TD>2019.1.01098.S_uid___A001_X1465_X1a15_001_of_001.tar</TD>
+            <TD />
+            <TD>SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw25.mfs.I.pbcor.fits</TD>
+            <TD />
+            <TD>#cutout</TD>
+            <TD />
+            <TD>Synchronous SODA sub-image of member.uid___A001_X1465_X1a15.J0510p1800_bp.spw25.mfs.I.pbcor.fits.</TD>
+            <TD>image/fits</TD>
+            <TD />
+            <TD />
+            <TD />
+            <TD />
+          </TR>
+          <TR>
+            <TD>2019.1.01098.S_uid___A001_X1465_X1a15_001_of_001.tar</TD>
+            <TD />
+            <TD>SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw27.mfs.I.pbcor.fits</TD>
+            <TD />
+            <TD>#cutout</TD>
+            <TD />
+            <TD>Synchronous SODA sub-image of member.uid___A001_X1465_X1a15.J0510p1800_bp.spw27.mfs.I.pbcor.fits.</TD>
+            <TD>image/fits</TD>
+            <TD />
+            <TD />
+            <TD />
+            <TD />
+          </TR>
+          <TR>
+            <TD>2019.1.01098.S_uid___A001_X1465_X1a15_001_of_001.tar</TD>
+            <TD />
+            <TD>SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw29.mfs.I.pbcor.fits</TD>
+            <TD />
+            <TD>#cutout</TD>
+            <TD />
+            <TD>Synchronous SODA sub-image of member.uid___A001_X1465_X1a15.J0510p1800_bp.spw29.mfs.I.pbcor.fits.</TD>
+            <TD>image/fits</TD>
+            <TD />
+            <TD />
+            <TD />
+            <TD />
+          </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+    <INFO name="placeholder" value="ignore" />
+  </RESOURCE>
+  <RESOURCE type="meta" ID="SODA.member.uid___A001_X1465_X1a15.Betelgeuse_sci.spw23_25_27_29.mfs.I.manual.image.pbcor.fits" utype="adhoc:service">
+    <PARAM name="resourceIdentifier" datatype="char" arraysize="18" value="ivo://alma.eu/soda" />
+    <PARAM name="standardID" datatype="char" arraysize="32" value="ivo://ivoa.net/std/SODA#sync-1.0" />
+    <PARAM name="accessURL" datatype="char" arraysize="130" value="https://almascience.eso.org/soda/sync?ID=member.uid___A001_X1465_X1a15.Betelgeuse_sci.spw23_25_27_29.mfs.I.manual.image.pbcor.fits" />
+    <GROUP name="inputParams" />
+  </RESOURCE>
+  <RESOURCE type="meta" ID="SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw23.mfs.I.pbcor.fits" utype="adhoc:service">
+    <PARAM name="resourceIdentifier" datatype="char" arraysize="18" value="ivo://alma.eu/soda" />
+    <PARAM name="standardID" datatype="char" arraysize="32" value="ivo://ivoa.net/std/SODA#sync-1.0" />
+    <PARAM name="accessURL" datatype="char" arraysize="107" value="https://almascience.eso.org/soda/sync?ID=member.uid___A001_X1465_X1a15.J0510p1800_bp.spw23.mfs.I.pbcor.fits" />
+    <GROUP name="inputParams" />
+  </RESOURCE>
+  <RESOURCE type="meta" ID="SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw25.mfs.I.pbcor.fits" utype="adhoc:service">
+    <PARAM name="resourceIdentifier" datatype="char" arraysize="18" value="ivo://alma.eu/soda" />
+    <PARAM name="standardID" datatype="char" arraysize="32" value="ivo://ivoa.net/std/SODA#sync-1.0" />
+    <PARAM name="accessURL" datatype="char" arraysize="107" value="https://almascience.eso.org/soda/sync?ID=member.uid___A001_X1465_X1a15.J0510p1800_bp.spw25.mfs.I.pbcor.fits" />
+    <GROUP name="inputParams" />
+  </RESOURCE>
+  <RESOURCE type="meta" ID="SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw27.mfs.I.pbcor.fits" utype="adhoc:service">
+    <PARAM name="resourceIdentifier" datatype="char" arraysize="18" value="ivo://alma.eu/soda" />
+    <PARAM name="standardID" datatype="char" arraysize="32" value="ivo://ivoa.net/std/SODA#sync-1.0" />
+    <PARAM name="accessURL" datatype="char" arraysize="107" value="https://almascience.eso.org/soda/sync?ID=member.uid___A001_X1465_X1a15.J0510p1800_bp.spw27.mfs.I.pbcor.fits" />
+    <GROUP name="inputParams" />
+  </RESOURCE>
+  <RESOURCE type="meta" ID="SODA.member.uid___A001_X1465_X1a15.J0510p1800_bp.spw29.mfs.I.pbcor.fits" utype="adhoc:service">
+    <PARAM name="resourceIdentifier" datatype="char" arraysize="18" value="ivo://alma.eu/soda" />
+    <PARAM name="standardID" datatype="char" arraysize="32" value="ivo://ivoa.net/std/SODA#sync-1.0" />
+    <PARAM name="accessURL" datatype="char" arraysize="107" value="https://almascience.eso.org/soda/sync?ID=member.uid___A001_X1465_X1a15.J0510p1800_bp.spw29.mfs.I.pbcor.fits" />
+    <GROUP name="inputParams" />
+  </RESOURCE>
+</VOTABLE>
