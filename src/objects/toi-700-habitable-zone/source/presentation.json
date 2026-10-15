@@ -1,0 +1,31 @@
+{
+  "provenance": {
+    "name": "TOI-700's habitable zone",
+    "products": [
+      {
+        "id": "zone",
+        "label": "Habitable zone distances calculated by Kopparapu et al. (2014) from the star's temperature and luminosity",
+        "process": "Calculate the four distances by Kopparapu et al. (2014)'s Equations 1 and 2 from the star's recorded temperature and luminosity, and draw them as three flat rings around the star, the conservative zone and the optimistic zone's two extensions of it, on the mean plane of the four planets' orbits.",
+        "recipe": "source/zone.json",
+        "selector": "",
+        "inputs": [
+          "zone-coefficients",
+          "star-measurements"
+        ],
+        "outputs": [
+          "prepared/plane.json",
+          "prepared/zone/zone.webp"
+        ],
+        "interpretation": {
+          "kind": "calculated-zone",
+          "sourceKind": "published-method"
+        },
+        "limitations": [
+          "A calculation from the star's temperature and luminosity, not an observation; a planet inside it is not known to be habitable.",
+          "The Habitable Zone Gallery does not list TOI-700, so the distances are calculated here with the method it uses; the same calculation gives its numbers for 55 Cnc and Proxima Centauri to the fourth decimal.",
+          "The orbits' position angle on the sky is not measured, so the plane's turn about the line of sight is the convention the orbits are drawn with."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "zone-coefficients",
+      "path": "src/objects/toi-700-habitable-zone/source/kopparapu-2014/table-1.json",
+      "origin": "https://arxiv.org/abs/1404.5292",
+      "sourceUrl": "https://doi.org/10.1088/2041-8205/787/2/L29",
+      "title": "Kopparapu et al. (2014), Table 1: habitable zone coefficients for 1 Earth mass",
+      "credit": "R. K. Kopparapu, R. M. Ramirez, J. SchottelKotte, J. F. Kasting, S. Domagal-Goldman, V. Eymet; ApJ 787, L29 (2014)",
+      "acquisition": "Transcribed 2026-10-14 from Table 1 of the preprint (arXiv:1404.5292): the 1 Earth mass coefficients of the recent Venus, runaway greenhouse, maximum greenhouse and early Mars limits, unchanged.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kopparapu-2014-habitable-zones-planetary-mass",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1404.5292"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Twenty published coefficients, kept with their citation."
+    },
+    {
+      "id": "star-measurements",
+      "path": "src/objects/toi-700/source/measurements.json",
+      "origin": "https://exoplanetarchive.ipac.caltech.edu/",
+      "title": "TOI-700's measurements record: effective temperature and luminosity",
+      "credit": "Gilbert et al. 2023 (temperature); Kokori et al. 2023 via the NASA Exoplanet Archive (luminosity)",
+      "acquisition": "The star's own record in this repository, read for effectiveTemperatureK (3,459 K) and luminosityLogSolar (-1.633), each with its source there.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The star's measurements record, which cites each value's source."
+      },
+      "dependencies": [],
+      "license": "Published values with their citations."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/toi-700-habitable-zone/source/zone.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/toi-700-habitable-zone/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}
