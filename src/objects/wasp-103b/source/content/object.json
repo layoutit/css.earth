@@ -49,8 +49,128 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "temperature-p3",
+    "defaultDataset": "hubble-map",
     "controls": [
+      {
+        "id": "hubble-map",
+        "label": "Hubble",
+        "qualification": "Published map · Kreidberg et al. (2018) · Hubble WFC3 1.1–1.7 µm phase curve",
+        "thumbnail": "wasp-103b-dataset-hubble-map.webp",
+        "surface": "wasp-103b-surface-hubble-map@2x.webp",
+        "poles": "wasp-103b-poles-hubble-map@2x.webp",
+        "source": {
+          "id": "wasp-103b-hubble-map",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Temperature of WASP-103 b from Kreidberg et al. (2018)'s map fitted to Hubble's 1.1 to 1.7 µm phase curve: the authors' own spherical-harmonic temperature map, as SPIDERMAN draws it from their released fit. It runs from 3,238 K at noon to 1,227 K at midnight, the extremes the paper prints. A phase curve sees longitudes, so the north-south shape comes from the harmonics, not the data. The false color runs from 0 to 3,900 K, the scale of the climate simulation, so the two can be compared. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
+      },
+      {
+        "id": "spitzer-map",
+        "label": "Spitzer 3.6 µm",
+        "qualification": "Published map · Kreidberg et al. (2018) · Spitzer IRAC 3.6 µm phase curve",
+        "thumbnail": "wasp-103b-dataset-spitzer-map.webp",
+        "surface": "wasp-103b-surface-spitzer-map@2x.webp",
+        "poles": "wasp-103b-poles-spitzer-map@2x.webp",
+        "source": {
+          "id": "wasp-103b-spitzer-map",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1805.00029"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature",
+          "labels": [
+            "0",
+            "1950",
+            "3900"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "1950",
+              "3900"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1805.00029"
+        },
+        "notes": "Temperature of WASP-103 b from Kreidberg et al. (2018)'s map fitted to Spitzer's 3.6 µm phase curve: the authors' own spherical-harmonic temperature map, as SPIDERMAN draws it from their released fit. It runs from 3,391 K, 15° east of noon, to 1,269 K, the extremes the paper prints; the paper's sine-curve fit to the same data puts the peak 2.0 ± 0.7° east. A phase curve sees longitudes, so the north-south shape comes from the harmonics, not the data. The false color runs from 0 to 3,900 K, the scale of the climate simulation. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
+      },
       {
         "id": "temperature-p0",
         "label": "Temperature",

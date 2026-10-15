@@ -15,8 +15,8 @@
     {
       "id": "spherical-harmonic-fits",
       "subject": "HST and Spitzer observation-fitted thermal maps",
-      "status": "deferred",
-      "finding": "Author repository releases SPIDERMAN fit parameters and saved fits. The selected dataset explores the GCM pressure field; observation-derived fits would be a distinct quantity and view.",
+      "status": "included",
+      "finding": "Included on 2026-10-15 as the Hubble (default) and Spitzer 3.6 um datasets. The paper's table of model comparisons ranks the degree-2 spherical-harmonic temperature map best for the WFC3 white light curve and Spitzer 3.6 um (Delta BIC 0); at 4.5 um the two-temperature map is preferred by 2, so 4.5 um is not drawn. The coefficients come from the runs the paper's figure scripts load (Figures/WFC3_best_fits/bestfit_spherical.pic, Figures/Ch1_best_fits/2018-02-07_14:28-spherical); evaluated by SPIDERMAN with thermal=True they give back the table's T_min and T_max within 1 K (1227 and 3238 K; 1269 and 3391 K). Their area means are about 100 K from the table's day and night means, whose averaging the paper does not state. A measured map ranks above the simulation, which stays as the Temperature datasets.",
       "revisitWhen": "A comparison between simulated and observation-inferred temperature is requested.",
       "evidence": [
         "https://github.com/lkreidberg/2017_wasp103/tree/425f2e8fe694760266398257a71eaa991ab322fd/Figures"

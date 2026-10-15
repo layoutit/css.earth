@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-103b-hubble-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-103 b · wasp 103b hubble map",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/lkreidberg/2017_wasp103/tree/425f2e8fe694760266398257a71eaa991ab322fd/Figures",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-103b/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kreidberg et al. (2018); their released SPIDERMAN fit to the Hubble WFC3 1.1–1.7 µm phase curve",
+      "scope": "The wasp 103b hubble map input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -300,6 +300,18 @@ test('a published phase curve gives one wavelength or one band', () => {
   assert.deepEqual(first.model, { kind: 'eclipse-fourier', c1: 1e-4, d1: 0, c2: 0, d2: 0 }, 'a first-order fit has zero second-order terms');
 });
 
+test('WASP-103b: SPIDERMAN draws Kreidberg et al. (2018)\'s released temperature maps to the extremes their table prints', async () => {
+  const source = new URL('wasp-103b/source', objects).pathname;
+  // Table of model comparisons, Sph. Harmonics: WFC3 T_min 1227 K and T_max 3237 K; Ch 1 1269 K and 3391 K.
+  for (const [path, minimum, maximum] of [['science/kreidberg-2018/hubble-map.json', 1227, 3237], ['science/kreidberg-2018/spitzer-3-6um-map.json', 1269, 3391]] as const) {
+    const map = await loadPublishedPhaseCurveMap(source, { path });
+    const { derived } = map.report as unknown as { derived: Record<string, number> };
+    assert.ok(Math.abs(derived.minimumK! - minimum) <= 1.5 && Math.abs(derived.maximumK! - maximum) <= 1.5, `${path}: ${derived.minimumK} to ${derived.maximumK}`);
+    // The map is drawn in kelvin as SPIDERMAN evaluates it: hottest near noon, coldest near midnight, alike north and south.
+    assert.ok(map.sample(0, 0)! > 3000 && map.sample(180, 0)! < 1400 && Math.abs(map.sample(30, 40)! - map.sample(30, -40)!) < 1e-6);
+  }
+});
+
 test('TRAPPIST-1 c: Gillon et al. (2025)\'s day and night maxima give back their night side, and the curve runs from one to the other', async () => {
   const source = new URL('trappist-1c/source/', objects), path = 'science/gillon-2025/phase-curve.json';
   const gillon = await record('trappist-1c/source/science/gillon-2025/phase-curve.json');

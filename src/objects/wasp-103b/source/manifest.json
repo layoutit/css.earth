@@ -110,6 +110,50 @@
           }
         ]
       }
+    },
+    {
+      "id": "wasp-103b-hubble-map",
+      "path": "science/kreidberg-2018/hubble-map.json",
+      "origin": "https://github.com/lkreidberg/2017_wasp103/tree/425f2e8fe694760266398257a71eaa991ab322fd/Figures",
+      "credit": "Kreidberg et al. (2018); their released SPIDERMAN fit to the Hubble WFC3 1.1–1.7 µm phase curve",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the authors' released fit files and the paper's tables, value by value, with each value's location",
+      "redistribution": "Factual parameter transcription only; no paper figures or repository files",
+      "consumers": [
+        "hubble-temperature-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-103b-hubble-map",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-103b-spitzer-map",
+      "path": "science/kreidberg-2018/spitzer-3-6um-map.json",
+      "origin": "https://github.com/lkreidberg/2017_wasp103/tree/425f2e8fe694760266398257a71eaa991ab322fd/Figures",
+      "credit": "Kreidberg et al. (2018); their released SPIDERMAN fit to the Spitzer IRAC 3.6 µm phase curve",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the authors' released fit files and the paper's tables, value by value, with each value's location",
+      "redistribution": "Factual parameter transcription only; no paper figures or repository files",
+      "consumers": [
+        "spitzer-temperature-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-103b-spitzer-map",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -125,8 +169,8 @@
       "recipe": {
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
-          "wasp-103b-kreidberg-2018-gcm",
-          "wasp-103b-preparation-raster"
+          "wasp-103b-preparation-raster",
+          "wasp-103b-hubble-map"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

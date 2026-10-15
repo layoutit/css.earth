@@ -26,6 +26,16 @@
     ]
   },
   "datasets": {
+    "hubble-map": {
+      "title": "Hubble heat map",
+      "detail": "Published map, 2018",
+      "summary": "Temperature from the paper's map fitted to Hubble's 1.1–1.7 µm phase curve. Longitudes are measured; latitudes are the fit's."
+    },
+    "spitzer-map": {
+      "title": "Spitzer heat map",
+      "detail": "Published map, 2018",
+      "summary": "Temperature from the paper's map fitted to Spitzer's 3.6 µm phase curve. Longitudes are measured; latitudes are the fit's."
+    },
     "temperature-p0": {
       "title": "SPARC/MITgcm atmosphere",
       "detail": "Climate simulation",
