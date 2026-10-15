@@ -310,6 +310,8 @@ test('WASP-103b: SPIDERMAN draws Kreidberg et al. (2018)\'s released temperature
     // The map is drawn in kelvin as SPIDERMAN evaluates it: hottest near noon, coldest near midnight, alike north and south.
     assert.ok(map.sample(0, 0)! > 3000 && map.sample(180, 0)! < 1400 && Math.abs(map.sample(30, 40)! - map.sample(30, -40)!) < 1e-6);
   }
+});
+
 test('TRAPPIST-1 c: Gillon et al. (2025)\'s day and night maxima give back their night side, and the curve runs from one to the other', async () => {
   const source = new URL('trappist-1c/source/', objects), path = 'science/gillon-2025/phase-curve.json';
   const gillon = await record('trappist-1c/source/science/gillon-2025/phase-curve.json');
