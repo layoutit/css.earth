@@ -126,12 +126,13 @@ function table(state: ExploreState, columns: number, height: number): string[] {
 }
 function confirm(state: ExploreState, columns: number): string[] {
   const choice = state.selected!, status = state.statuses.get(choice.pick), remaining = state.size === null ? null : Math.max(0, state.size - (status?.bytes ?? 0));
-  const what = state.singleCube ? 'the cube for this spectral window' : archiveLabel(choice) === 'ALMA' ? 'the whole ALMA delivery for this observation (all its spectral windows)' : 'one data file';
+  // Retrieval's own plan decides the scope: whole-delivery wording only when it really falls back to the delivery.
+  const what = state.singleCube === true ? 'the cube for this spectral window' : state.singleCube === false ? 'the whole ALMA delivery for this observation (all its spectral windows)' : 'one data file';
   const facts = [bold(`#${choice.pick}  ${oneLine(archiveLabel(choice))} · ${oneLine(choice.display.instrument)}`), '',
     `  Start       ${choice.display.observationTime.startIso ? `${observationStart(choice)} UTC` : 'unknown'}`,
     `  Kind        ${oneLine(choice.display.productKind ?? '—')}`, `  Wavelength  ${wavelengthText(choice.display.wavelengthsMicrometres)}`, ''];
   const free = byteSize(state.free);
-  const ask = status?.state === 'done' ? [`  ${green('✓ Already downloaded')} ${dim(`${byteSize(state.size)} · ${state.session!.directory}/pick-${choice.pick}/`)}`, '',
+  const ask = status?.state === 'done' ? [`  ${green('✓ Already downloaded')} ${dim(`${byteSize(status.bytes || state.size)} · ${state.session!.directory}/pick-${choice.pick}/`)}`, '',
     `  ${bold('Make something from it?')}  ${dim('enter yes · esc back to the list')}`]
     : state.free === undefined ? [dim('  Checking size and free space…'), dim('  esc back to the list')]
       : remaining !== null && remaining > state.free ? [`  Download    ${bold(byteSize(state.size))}`, `  ${dim(what)}`, '',

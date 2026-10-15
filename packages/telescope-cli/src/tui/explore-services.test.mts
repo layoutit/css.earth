@@ -89,7 +89,7 @@ test('make → quit → open → same output reopens verified native and family 
       saveExploration: unused, getSession: unused, importLocalArtifact: unused, projectOutput: unused, exportSphere: unused, exportSpatialObject: unused,
       familyCoverageLedger: () => [],
       listArtifactOutputs: async () => ({ artifact: 'delivery', source: resultPath,
-        outputs: family ? [] : [{ kind: 'image', available: true, reason: 'Fixture', hdu: 0, parameters: ['plane'] }],
+        outputs: family ? [] : [{ kind: 'image', available: true, reason: 'Fixture', hdu: 0, parameters: [] }],
         familyOperations: family ? [operation] : [],
       }),
       exportOutput: async (_source, _selection, destination) => {
@@ -114,7 +114,6 @@ test('make → quit → open → same output reopens verified native and family 
       const first = exploreScreen(undefined, services, terminal, false, saved);
       await until('Start (UTC)'); await terminal.press({ name: 'return' }, { name: 'return' }); await until('What do you want to make?');
       await until(family ? 'CSV of wavelength' : 'PNG with a scale bar'); await terminal.press({ name: 'return' });
-      if (!family) { await until('plane:'); await terminal.press({ text: '0' }, { name: 'return' }); }
       await until('· opened'); await terminal.press({ text: 'q' }); assert.equal((await first).code, 0);
       assert.equal(exports, 1);
       const reopened = main(['open', root], root, io.write, io, { ...api, exploration: services });

@@ -223,6 +223,20 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   return { products: selected.map(product => ({ ...product, metadata: [product.metadata[0]!, pin, ...product.metadata.slice(1)] })), issues };
 }
 
+/** Report exactly the products selected above, using their retained DataLink bindings. */
+export function plannedDownload(plan: AccessPlan): { readonly bytes: number | null; readonly singleCube: boolean } | null {
+  if (!plan.products.length) return null;
+  const sizes = plan.products.map(product => {
+    const binding = requireRecord(requireRecord(JSON.parse(product.productKey)).binding);
+    const selected = requireRecord(binding.binding);
+    const row = selected.row === undefined ? undefined : requireRecord(selected.row);
+    const size = row ? row.content_length : (product.observation.access.estimatedKilobytes === null ? null : product.observation.access.estimatedKilobytes * 1000);
+    return typeof size === 'number' && Number.isSafeInteger(size) && size > 0 ? size : null;
+  });
+  return { bytes: sizes.every(size => size !== null) ? sizes.reduce<number>((sum, size) => sum + (size ?? 0), 0) : null,
+    singleCube: plan.products.length === 1 && plan.products[0]!.kind === 'cube' && plan.products[0]!.format === 'fits' };
+}
+
 /** Acquisition records origin/integrity only. Scientific metadata qualification is a later stage. */
 export async function acquireVoProduct(root: string, spec: AcquisitionSpec, policy: VoNetworkPolicy = {}) {
   voUrl(spec.operation.url, spec.operation.url, policy);

@@ -1,7 +1,7 @@
 import { readdir, stat, statfs } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord } from '@cssearth/core';
-import { withDownloadProgress, withTransferConsent } from '@cssearth/telescope-core/node';
+import { astroquery, parseLimits, withDownloadProgress, withTransferConsent } from '@cssearth/telescope-core/node';
 import type { CliServices } from '../cli-services.mts';
 import type { CliIo } from '../cli-io.mts';
 import { consentHandler, type ConsentState } from '../cli-consent.mts';
@@ -10,8 +10,11 @@ import type { ExplorationChoice } from '../exploration.mts';
 import { skyTargetRequest } from '../exploration.mts';
 import { loadTargetCatalogue } from '../observation-query/query.mts';
 import { fetchPreview, previewSource } from '../previews/index.mts';
+import { readPreviewFile } from '../previews/source.mts';
 import { previewVotable } from '../previews/votable.mts';
-import { almaCubeUrl, matchesAlmaCube } from '../vo/alma-cube.mts';
+import { planAccess, plannedDownload, type MetadataLoader } from '../vo/access.mts';
+import { normalizeSnapshot, SERVICES, type DiscoveryRequest } from '../vo/discovery.mts';
+import { jsonValue, parseSnapshot, type DiscoverySnapshot } from '@cssearth/objects';
 import { voUrl } from '../vo/network-policy.mts';
 import { exportHtml } from '../delivery/html-outputs.mts';
 import { delivery } from '../delivery/outputs.mts';
@@ -57,55 +60,63 @@ export async function explorationFreeBytes(directory: string): Promise<number> {
 }
 
 /** Size and scope of the full file selected by access planning, never a preview cutout. */
-export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 'display' | 'observation' | 'reference'>, signal: AbortSignal, fetcher: typeof fetch = fetch): Promise<number | null | { readonly bytes: number | null; readonly singleCube: true }> {
-  const cube = choice.reference.kind === 'vo-acquisition' && choice.display.productKind === 'cube';
-  if (!cube && choice.display.advertisedKilobytes !== null) return choice.display.advertisedKilobytes * 1000;
+export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 'target' | 'archiveService' | 'display' | 'observation' | 'reference'>, signal: AbortSignal, fetcher: typeof fetch = fetch, load?: MetadataLoader, request: DiscoveryRequest = { target: choice.target }): Promise<number | null | { readonly bytes: number | null; readonly singleCube: boolean }> {
+  if (choice.reference.kind === 'vo-acquisition' && choice.display.productKind === 'cube' && choice.archiveService === 'https://almascience.eso.org/tap') {
+    const file = choice.reference.snapshot;
+    return withDownloadProgress({ report: () => {}, signal, retainPartial: false }, async () => {
+      try {
+        const profile = SERVICES.find(profile => profile.service === choice.archiveService);
+        if (!profile) return null;
+        const text = await readPreviewFile(file, parseLimits(request.transferLimits).metadataBytes);
+        let snapshot: DiscoverySnapshot;
+        if (text.trimStart().startsWith('{')) snapshot = parseSnapshot(JSON.parse(text));
+        else {
+          const response = (await astroquery({ operation: 'vo-parse', file, url: profile.service, byteLimit: parseLimits(request.transferLimits).metadataBytes,
+            timeFormat: 'mjd', timeScale: profile.timeScale ?? 'utc' })).vo;
+          if (!response) return null;
+          snapshot = { schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
+            request: jsonValue(request), query: '', scope: 'saved observation', sampleLimit: response.rows.length, response, completeness: 'bounded-sample' };
+        }
+        const target = choice.target ? { id: choice.target, names: [choice.target, ...request.skyTarget ? [request.skyTarget.mainId, ...request.skyTarget.identifiers] : []] } : undefined;
+        const observation = normalizeSnapshot(snapshot, profile, target, target ? [target] : []).find(row => row.key === choice.observation);
+        if (!observation) return null;
+        const plan = await planAccess('', observation, snapshot, request, load, {}, async () => snapshot.response.raw);
+        signal.throwIfAborted();
+        const planned = plannedDownload(plan);
+        if (planned?.singleCube && planned.bytes === null) {
+          try {
+            const selected = plan.products[0]!;
+            const response = await fetcher(voUrl(selected.operation.url, selected.operation.url),
+              { method: 'HEAD', signal: AbortSignal.any([signal, AbortSignal.timeout(15_000)]), redirect: 'error' });
+            await response.body?.cancel();
+            const bytes = Number(response.headers.get('content-length'));
+            if (response.ok && Number.isSafeInteger(bytes) && bytes > 0) return { ...planned, bytes };
+          } catch { signal.throwIfAborted(); }
+        }
+        return planned;
+      } catch { signal.throwIfAborted(); return null; }
+    });
+  }
+  if (choice.display.advertisedKilobytes !== null) return choice.display.advertisedKilobytes * 1000;
   let identity: string = choice.observation;
   if (identity.startsWith('{')) {
     const record = requireRecord(JSON.parse(identity)), columns = requireArray(record.identityColumns), values = requireArray(record.identity);
     const index = columns.indexOf('obs_id'); identity = typeof values[index] === 'string' ? values[index] : '';
   }
   const member = /^(uid:\/\/[^/]+\/[^/]+\/[^.]+)(?:\.source\.|$)/u.exec(identity)?.[1];
-  if (!member) return choice.display.advertisedKilobytes === null ? null : choice.display.advertisedKilobytes * 1000;
-  const deadline = AbortSignal.any([signal, AbortSignal.timeout(15_000)]);
-  let metadataBytes = 0;
-  const load = async (url: string) => {
-    const response = await fetcher(voUrl(url, url), { signal: deadline, redirect: 'error' });
-    if (!response.ok || !response.body) { await response.body?.cancel(); throw new Error('ALMA metadata unavailable.'); }
-    const reader = response.body.getReader(), chunks: Uint8Array[] = [];
-    try {
-      for (;;) {
-        const chunk = await reader.read(); if (chunk.done) break;
-        metadataBytes += chunk.value.length; if (metadataBytes > 2 * 1024 * 1024) throw new Error('ALMA size metadata exceeds its byte limit.');
-        chunks.push(chunk.value);
-      }
-    } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
-    return previewVotable(Buffer.concat(chunks).toString('utf8'));
-  };
+  if (!member) return null;
   try {
-    const root = await load(`https://almascience.org/datalink/sync?ID=${encodeURIComponent(member)}`);
-    const ownCube = (links: ReturnType<typeof previewVotable>) => links.rows.find(row => {
-      if (row.error_message || !['#this', '#cutout', '#proc'].some(semantics => row.semantics?.endsWith(semantics)) || !['image/fits', 'application/fits'].includes(row.content_type ?? '')) return false;
-      const service = links.services.find(service => service.id === row.service_def && service.standard === 'ivo://ivoa.net/std/SODA#sync-1.0');
-      const id = service ? almaCubeUrl(service.url) : row.access_url ? matchesAlmaCube(identity, row.ID ?? '') ? row.ID : decodeURIComponent(new URL(row.access_url).pathname.split('/').at(-1) ?? '') : undefined;
-      return id && matchesAlmaCube(identity, id);
-    });
-    if (cube) {
-      const documents = [root];
-      const nested = [...new Set(root.rows.flatMap(row => {
-        const service = root.services.find(service => service.id === row.service_def && service.standard.startsWith('ivo://ivoa.net/std/DataLink#links-'));
-        return row.error_message || !row.semantics?.endsWith('#this') ? [] : service ? [service.url]
-          : row.access_url && row.content_type?.includes('content=datalink') ? [row.access_url] : [];
-      }))];
-      if (nested.length > 16) throw new Error('ALMA size metadata request limit reached.');
-      for (const url of nested) documents.push(await load(url));
-      const selected = documents.map(ownCube).find(row => row !== undefined);
-      if (selected) { const bytes = Number(selected.content_length); return { bytes: Number.isSafeInteger(bytes) && bytes > 0 ? bytes : null, singleCube: true }; }
-    }
-    const rows = root.rows.filter(row => !row.error_message && row.semantics?.endsWith('#this') && row.access_url && /\.tar(?:$|[?#])/u.test(row.access_url));
-    if (!rows.length) return null;
+    const response = await fetcher(voUrl(`https://almascience.org/datalink/sync?ID=${encodeURIComponent(member)}`, 'https://almascience.org'),
+      { signal: AbortSignal.any([signal, AbortSignal.timeout(15_000)]), redirect: 'error' });
+    if (!response.ok || !response.body) { await response.body?.cancel(); return null; }
+    const reader = response.body.getReader(), chunks: Uint8Array[] = []; let bytes = 0;
+    try {
+      for (;;) { const chunk = await reader.read(); if (chunk.done) break; bytes += chunk.value.length;
+        if (bytes > 2 * 1024 * 1024) throw new Error('ALMA size metadata exceeds its byte limit.'); chunks.push(chunk.value); }
+    } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
+    const rows = previewVotable(Buffer.concat(chunks).toString('utf8')).rows.filter(row => !row.error_message && row.semantics?.endsWith('#this') && row.access_url && /\.tar(?:$|[?#])/u.test(row.access_url));
     const sizes = rows.map(row => Number(row.content_length));
-    return sizes.every(size => Number.isSafeInteger(size) && size > 0) ? sizes.reduce((sum, size) => sum + size, 0) : null;
+    return rows.length && sizes.every(size => Number.isSafeInteger(size) && size > 0) ? sizes.reduce((sum, size) => sum + size, 0) : null;
   } catch { signal.throwIfAborted(); return null; }
 }
 
@@ -142,7 +153,7 @@ export function explorationServices(root: string, requestArgs: readonly string[]
       return session;
     },
     statuses: explorationPickStatuses,
-    size: (choice, _session, signal) => explorationDownloadSize(choice, signal),
+    size: (choice, session, signal) => explorationDownloadSize({ ...choice, target: session.target }, signal, fetch, undefined, session.answer.request),
     free: explorationFreeBytes,
     get: (choice, session, report, signal) => {
       let received = 0;
@@ -166,20 +177,28 @@ export function explorationServices(root: string, requestArgs: readonly string[]
       for (const [index, output] of inspected.outputs.entries()) {
         const cube = output.shape !== undefined && output.shape.length >= 3 && (output.spectral?.axis !== undefined || output.shape.at(-3)! > 1);
         const moment = cube && output.kind === 'band-image', peak = cube && output.kind === 'aperture-spectrum';
-        if (!output.available) {
-          if (moment || peak) options.push({ name: moment ? 'Moment map' : 'Spectrum at peak', description: output.reason, available: false, run: async () => { throw new Error(output.reason); } });
-          continue;
-        }
-        const name = moment ? 'Moment map' : peak ? 'Spectrum at peak' : output.kind === 'html' ? 'Viewer' : output.kind === 'image' ? 'Image' : output.kind === 'spectrum' ? 'Plot' : output.kind;
-        const destination = resolve(dirname(resultPath), 'made', `${index + 1}-${moment ? 'moment-map' : peak ? 'spectrum-at-peak' : output.kind}`);
+        const channel = cube && output.kind === 'image', pixel = cube && output.kind === 'spectrum';
+        if (!output.available || output.kind === 'feature-map' || channel) continue;
+        // Peak selection needs the same qualified band image as the moment map.
+        if ((peak || pixel) && !output.spectral?.binEdgesMicrometres?.length) continue;
+        if (pixel && inspected.outputs.some(candidate => candidate.kind === 'aperture-spectrum' && candidate.available && candidate.hdu === output.hdu && candidate.structure === output.structure)) continue;
+        if (!moment && !peak && !pixel && output.parameters?.length) continue;
+        const label = moment ? ['Moment map', 'PNG of the summed emission'] : peak || pixel ? ['Spectrum at peak', 'PNG and CSV through the brightest pixel']
+          : output.kind === 'html' ? ['Viewer', 'HTML page you can pan and zoom']
+          : output.kind === 'image' ? ['Image', 'PNG with a scale bar'] : output.kind === 'spectrum' ? ['Plot', 'PNG of flux against wavelength']
+          : output.kind === 'sphere' ? ['Globe', 'HTML page of the mapped surface'] : output.kind === 'points' ? ['Points', '3D points with their source data']
+          : output.kind === 'volume' || output.kind === 'volume-dataset-bank' ? ['Volume', '3D view of the prepared data'] : undefined;
+        if (!label) continue;
+        const [name = '', description = ''] = label;
+        const destination = resolve(dirname(resultPath), 'made', `${index + 1}-${moment ? 'moment-map' : peak ? 'spectrum-at-brightest-pixel' : pixel ? 'brightest-pixel' : output.kind}`);
         const file = await madeOutput(destination, output.kind === 'html' ? 'viewer.html' : output.kind === 'sphere' ? 'sphere.html'
           : ['points', 'volume', 'volume-dataset-bank'].includes(output.kind) ? 'object.json' : 'figure.png');
-        options.push({ name, file, description: moment ? 'PNG of the summed emission' : peak ? 'PNG and CSV through the brightest pixel' : output.kind === 'html' ? 'HTML page you can pan and zoom' : output.kind === 'image' ? 'PNG with a scale bar' : output.kind === 'spectrum' ? 'PNG of flux against wavelength' : output.reason,
-          parameters: moment || peak ? [] : output.parameters, run: async parameters => {
+        options.push({ name, file, description, parameters: [], run: async parameters => {
             if (file) return file;
             const args = ['export', source, '--output', output.kind, '--out', destination];
             if (output.hdu !== undefined) args.push('--hdu', String(output.hdu));
             if (output.structure) args.push('--structure', output.structure);
+            if (pixel) args.push('--pixel', (await cubePeakAperture(retained, output)).slice(0, 2).join(','));
             if (moment) args.push('--band', cubeBand(output).join(','), '--uncertainty', 'omit');
             if (peak) args.push('--aperture', (await cubePeakAperture(retained, output)).join(','), '--background', 'none', '--uncertainty', 'omit');
             for (const [key, value] of parameters) args.push(`--${key}`, value);

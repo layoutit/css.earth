@@ -211,7 +211,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
       const terminal = io.terminal ?? processTerminal(), selected = await runsScreen(runs, terminal);
       if (!selected.run) return selected.code;
       const session = await readSavedExploration(selected.run.run);
-      const exit = await exploreScreen(session.target, api.exploration ?? explorationServices(root, session.arguments, session.directory, api, io, consent), terminal, false, session);
+      const exit = await exploreScreen(session.target, api.exploration ?? explorationServices(root, session.arguments, session.directory, api, io, consent), terminal, options.noOpen, session);
       if (exit.line) io.write(`${exit.line}\n`);
       return exit.code;
     }

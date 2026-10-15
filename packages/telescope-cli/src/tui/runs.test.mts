@@ -58,8 +58,9 @@ test('arrow keys clamp, Enter selects, Escape and Ctrl-C restore the cursor in t
 test('open parses only its directory and flags and has a discoverable help topic', () => {
   assert.deepEqual(parseCli(['open']), { command: 'open', directory: resolve('telescope-runs'), json: false, verbose: false });
   assert.deepEqual(parseCli(['open', 'saved', '--json']), { command: 'open', directory: resolve('saved'), json: true, verbose: false });
-  for (const args of [['open', 'a', 'b'], ['open', '--out', 'saved'], ['open', '--json', '--json']]) assert.throws(() => parseCli(args));
-  for (const topic of ['open', 'all']) assert.match(helpText(topic), /telescope open \[DIRECTORY\] \[--json\]/u);
+  assert.deepEqual(parseCli(['open', '--no-open']), { command: 'open', directory: resolve('telescope-runs'), noOpen: true, json: false, verbose: false });
+  for (const args of [['open', 'a', 'b'], ['open', '--out', 'saved'], ['open', '--json', '--json'], ['open', '--no-open', '--no-open']]) assert.throws(() => parseCli(args));
+  for (const topic of ['open', 'all']) assert.match(helpText(topic), /telescope open \[DIRECTORY\] \[--no-open\] \[--json\]/u);
   assert.match(helpText('open'), /newest first.*without searching/u);
 });
 

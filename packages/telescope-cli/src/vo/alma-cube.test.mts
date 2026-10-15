@@ -53,14 +53,26 @@ test('recorded nested DataLink selects only the row cube, qualifies it, and keep
     const profile = SERVICES.find(service => service.service === 'https://almascience.eso.org/tap')!;
     const response = (await core.astroquery({ operation: 'vo-parse', file: resolve(import.meta.dirname, 'fixtures/telescope-vo/alma-obscore.xml'), url: profile.service, byteLimit: 1e6 })).vo!;
     const snapshot: DiscoverySnapshot = { schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
-      request: { target: 'betelgeuse' }, query: 'fixture', scope: 'fixture', sampleLimit: 2, response, completeness: 'bounded-sample' };
+      request: { target: 'betelgeuse' }, query: 'fixture', scope: 'fixture', sampleLimit: 2, response: { ...response, rows: response.rows.map((row, index) => index === 0 ? { ...row, obs_id: observationId, access_url: `https://almascience.org/datalink/sync?ID=${member}` } : row) }, completeness: 'bounded-sample' };
     const target = { id: 'betelgeuse', names: ['Betelgeuse'] };
     const normalized = normalizeSnapshot(snapshot, profile, target, [target])[0]!;
     const observation = { ...normalized, identities: { ...normalized.identities, obs_id: observationId },
       access: { url: `https://almascience.org/datalink/sync?ID=${member}`, mime: 'application/x-votable+xml;content=datalink', estimatedKilobytes: null } };
     const links = await parse('member.xml', recordedMember, observation.access.url);
     const products = await parse('products.xml', cubeProducts, 'https://almascience.eso.org/datalink/sync?ID=products.tar');
-    const plan = await planAccess(root, observation, snapshot, { target: target.id }, async url => new URL(url).searchParams.get('ID') === member ? links : products);
+    const loader = async (url: string) => new URL(url).searchParams.get('ID') === member ? links : products;
+    const plan = await planAccess(root, observation, snapshot, { target: target.id }, loader);
+    const savedSnapshot = resolve(root, 'snapshot.json'); await writeFile(savedSnapshot, JSON.stringify(snapshot));
+    const choice = { ...exploreChoice, target: target.id, archiveService: profile.service, observation: observation.key,
+      configuration: { kind: 'archive-acquisition' as const, key: 'cube', request: { target: target.id } },
+      reference: { kind: 'vo-acquisition' as const, acquisitionKey: 'cube', observation: observation.key, snapshot: savedSnapshot } };
+    assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, undefined, loader), { bytes: 5760, singleCube: true });
+    const savedXml = resolve(root, 'observation.xml');
+    await writeFile(savedXml, (await readFile(resolve(import.meta.dirname, 'fixtures/telescope-vo/alma-obscore.xml'), 'utf8'))
+      .replace('uid://A001/X360d/Xae.source.Betelgeuse.spw.25', observationId)
+      .replace('https://almascience.org/datalink/sync?ID=uid://A001/X360d/Xae', observation.access.url));
+    assert.deepEqual(await explorationDownloadSize({ ...choice, reference: { ...choice.reference, snapshot: savedXml } }, new AbortController().signal, undefined, loader),
+      { bytes: 5760, singleCube: true }, 'saved raw XML and parsed snapshots select the same cube');
     assert.equal(plan.products.length, 1, plan.issues.join('\n'));
     const selected = plan.products[0]!;
     assert.equal(selected.format, 'fits'); assert.equal(selected.kind, 'cube');
@@ -79,24 +91,31 @@ test('recorded nested DataLink selects only the row cube, qualifies it, and keep
     assert.equal(downloaded.descriptor?.file.path, products.raw.path);
     const direct = await parse('direct.xml', directProducts, products.effectiveUrl);
     const directPlan = await planAccess(root, observation, snapshot, { target: target.id }, async url => new URL(url).searchParams.get('ID') === member ? links : direct);
+    assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, undefined, async url => new URL(url).searchParams.get('ID') === member ? links : direct), { bytes: 5760, singleCube: true });
     assert.equal(directPlan.products.length, 1); assert.equal(directPlan.products[0]?.format, 'fits');
     assert.equal(directPlan.products[0]?.operation.url, 'https://almascience.eso.org/dataPortal/opaque-file');
+    const directRow = direct.rows.find(row => row.access_url === 'https://almascience.eso.org/dataPortal/opaque-file');
+    assert.ok(directRow);
+    const combined = { ...products, rows: [...products.rows, { ...directRow, content_length: 11520 }] };
+    assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, undefined,
+      async url => new URL(url).searchParams.get('ID') === member ? links : combined), { bytes: 11520, singleCube: true }, 'confirmation shares the planner preference for direct FITS over SODA');
+    const genericMime = { ...products, rows: products.rows.map(row => ({ ...row, content_type: 'application/octet-stream' })) };
+    assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, undefined,
+      async url => new URL(url).searchParams.get('ID') === member ? links : genericMime), { bytes: 5760, singleCube: true }, 'a bound ALMA SODA descriptor selects the cube even without a FITS MIME label');
+    const noSize = { ...products, rows: products.rows.map(row => ({ ...row, content_length: null })) };
+    const noSizeLoader = async (url: string) => new URL(url).searchParams.get('ID') === member ? links : noSize;
+    const head: typeof fetch = async (input, init) => {
+      assert.equal(String(input), selected.operation.url); assert.equal(init?.method, 'HEAD');
+      return new Response(null, { headers: { 'content-length': '12345' } });
+    };
+    assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, head, noSizeLoader), { bytes: 12345, singleCube: true });
+    assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, async () => { throw new Error('No HEAD'); }, noSizeLoader),
+      { bytes: null, singleCube: true }, 'missing size must not change the selected scope');
     for (const changed of [recordedProducts, cubeProducts.replaceAll('spw23.cube', 'spw25.cube')]) {
       const other = await parse('other.xml', changed, products.effectiveUrl);
       const fallback = await planAccess(root, observation, snapshot, { target: target.id }, async url => new URL(url).searchParams.get('ID') === member ? links : other);
+      assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, undefined, async url => new URL(url).searchParams.get('ID') === member ? links : other), { bytes: 401419264, singleCube: false });
       assert.equal(fallback.products.length, 1); assert.equal(fallback.products[0]?.format, 'tar');
     }
   } finally { await rm(root, { recursive: true, force: true }); }
-});
-
-test('confirmation size follows the nested spectral-window cube instead of the member tar', async () => {
-  const choice = { ...exploreChoice, observation: observationId,
-    reference: { kind: 'vo-acquisition' as const, acquisitionKey: 'cube', observation: observationId, snapshot: 'fixture' } };
-  const seen: URL[] = [];
-  const fetcher: typeof fetch = async input => { const url = new URL(String(input)); seen.push(url); return new Response(url.searchParams.get('ID') === member ? recordedMember : cubeProducts); };
-  assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, fetcher), { bytes: 5760, singleCube: true });
-  assert.equal(seen.length, 2); assert.ok(seen.every(url => url.pathname.endsWith('/datalink/sync')));
-  const direct: typeof fetch = async input => new Response(new URL(String(input)).searchParams.get('ID') === member ? recordedMember : directProducts);
-  assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, direct), { bytes: 5760, singleCube: true });
-  assert.equal(await explorationDownloadSize({ ...choice, observation: observationId.replace('spw.23', 'spw.25') }, new AbortController().signal, fetcher), 401419264);
 });

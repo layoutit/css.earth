@@ -79,7 +79,7 @@ test('whole explore flow selects a suggestion, confirms, fails, resumes, makes t
   await terminal.press({ name: 'down' }); assert.equal(f.previewSignals[0]!.aborted, true);
   await terminal.press({ name: 'up' }, { text: 'ALMA' }); await terminal.advance(250);
   await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('Download it?'));
-  assert.match(current(terminal), /the whole ALMA delivery.*all its spectral windows/u); assert.match(current(terminal), /2\.0 MB/u);
+  assert.match(current(terminal), /one data file/u); assert.match(current(terminal), /2\.0 MB/u);
   assert.equal(f.transfers(), 0);
   await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('Resume from there?'));
   assert.match(current(terminal), /stopped at 1\.0 MB of 2\.0 MB/u);
@@ -319,4 +319,13 @@ test('short tables show the complete spectrum with units and exponent or hide th
     if (height >= 20) { assert.match(text, /preview ·/u); assert.match(text, /y ×10⁻¹⁵ Jy · x nm/u); }
     else assert.doesNotMatch(text, /preview ·|×10|Jy|nm/u);
   }
+});
+
+test('a completed pick shows the bytes it holds even when the archive never published a size', () => {
+  const session = exploreSession(), choice = session.choices[0]!;
+  const state: ExploreState = { view: 'confirm', target: 'Star', requested: 'star', candidates: [], session, query: '', active: 0, selected: choice,
+    statuses: new Map([[choice.pick, { state: 'done', bytes: 24 * 1024 ** 2, resultPath: '/run/pick-1/result.json' }]]), providers: [], tick: 0,
+    preview: { kind: 'loading' }, size: null, received: 0, checking: false, outputs: [], made: new Map(), making: false };
+  const line = renderExplore(state, 150).map(plain).find(text => text.includes('Already downloaded'))!;
+  assert.match(line, /24(\.0)? MB/u); assert.doesNotMatch(line, /size unknown/u);
 });

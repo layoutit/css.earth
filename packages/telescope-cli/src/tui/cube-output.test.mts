@@ -1,10 +1,11 @@
 import '../test-support/index.mts';
 import assert from 'node:assert/strict';
+import { test } from 'node:test';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
+import { fileSize, sciencePackage, writeProductRecord } from '@cssearth/telescope-core/node';
 import { exportOutput, listOutputs, type OutputRequest } from '../delivery/outputs.mts';
 import { image, header } from '../previews/test-support.mts';
 import { explorationServices } from './explore-services.mts';
@@ -15,8 +16,16 @@ import { exploreChoice, exploreSession } from './fixtures/explore.mts';
 import type { CliServices } from '../cli-services.mts';
 import type { CliIo } from '../cli-io.mts';
 
-const test = sourceTest();
-test('a qualified synthetic cube makes both approved outputs with no parameter entry', async () => {
+test('peak selection without qualified bin edges performs no extraction', async t => {
+  const extract = t.mock.fn(sciencePackage);
+  const input = { file: 'cube.fits', directory: '.', files: [], producing: { parameters: {} } };
+  await assert.rejects(cubePeakAperture(input, { kind: 'spectrum', available: true, reason: 'Fixture', shape: [3, 5, 5],
+    spectral: { axis: 0, centersMicrometres: [3, 2, 1], source: 'synthetic tabulated centers' } }, extract), /The cube has no qualified wavelength bin edges/u);
+  assert.equal(extract.mock.callCount(), 0);
+});
+
+const scienceTest = sourceTest();
+scienceTest('a qualified synthetic cube makes the approved outputs with no parameter entry', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'tui-cube-')), file = resolve(root, 'cube.fits'), result = resolve(root, 'result.json');
   const values = Array.from({ length: 75 }, (_, i) => i % 25 === 13 ? 10 + Math.floor(i / 25) : i % 25 === 6 ? 1000 : 1);
   const flags = Array.from({ length: 75 }, (_, i) => i % 25 === 6 ? 1 : 0);
@@ -33,9 +42,12 @@ test('a qualified synthetic cube makes both approved outputs with no parameter e
     assert.ok(band); assert.ok(Math.abs(cubeBand(band)[0] - .5) < 1e-12); assert.equal(cubeBand(band)[1], 3.5);
     const { delivery } = await import('../delivery/outputs.mts');
     const retained = await delivery(result);
-    assert.deepEqual(await cubePeakAperture(retained, band), [2, 1, 5, 4], 'flagged brighter pixel cannot own the aperture');
-    const withoutEdges = { ...band, spectral: { axis: 0, centersMicrometres: [3, 2, 1], source: 'synthetic tabulated centers' } };
-    assert.deepEqual(await cubePeakAperture(retained, withoutEdges), [2, 1, 5, 4], 'tabulated centers use summed qualified planes');
+    const extract = t.mock.fn(sciencePackage);
+    assert.deepEqual(await cubePeakAperture(retained, band, extract), [3, 2, 4, 3], 'flagged brighter pixel cannot own the aperture');
+    assert.equal(extract.mock.callCount(), 1, 'peak selection extracts the full band once');
+    const request = extract.mock.calls[0]!.arguments[0];
+    assert.ok(request.operation === 'extract'); assert.equal(request.kind, 'band-image');
+    assert.deepEqual(request.band, cubeBand(band));
     const selections: OutputRequest[] = [], made: Awaited<ReturnType<typeof exportOutput>>[] = [], terminal = new FakeTerminal(120, 40);
     const unused = async (): Promise<never> => { throw new Error('Unexpected service'); };
     const api: CliServices = { saveExploration: unused, getSession: unused, importLocalArtifact: unused, projectOutput: unused, exportSphere: unused, exportSpatialObject: unused,
@@ -51,7 +63,10 @@ test('a qualified synthetic cube makes both approved outputs with no parameter e
     assert.deepEqual(menu.find(output => output.name === 'Moment map')?.parameters, []);
     assert.deepEqual(menu.find(output => output.name === 'Spectrum at peak')?.parameters, []);
     assert.equal(menu.find(output => output.name === 'Moment map')?.file, undefined, 'an old custom band is not the default moment map');
-    assert.ok(menu.some(output => output.name === 'Image')); assert.ok(menu.some(output => output.name === 'feature-map'));
+    assert.deepEqual(menu.map(output => output.name), ['Moment map', 'Spectrum at peak', 'Data']);
+    assert.ok(menu.every(output => !output.parameters?.length));
+    assert.equal(menu.filter(output => output.name === 'Spectrum at peak').length, 1);
+    assert.ok(!menu.some(output => output.name === 'Plot' || output.name === 'feature-map'));
     const saved = { ...exploreSession(), directory: root, choices: [exploreChoice] };
     const screen = exploreScreen(undefined, { ...services, statuses: async () => new Map([[1, { state: 'done' as const, bytes: 5760, resultPath: result }]]),
       size: async () => 5760, free: async () => 1e9 }, terminal, true, saved);
@@ -62,16 +77,16 @@ test('a qualified synthetic cube makes both approved outputs with no parameter e
     await until('Start (UTC)'); await terminal.press({ name: 'return' }, { name: 'return' }); await until('Moment map');
     const momentIndex = menu.findIndex(output => output.name === 'Moment map'), peakIndex = menu.findIndex(output => output.name === 'Spectrum at peak');
     for (let i = 0; i < momentIndex; i++) await terminal.press({ name: 'down' });
-    await terminal.press({ name: 'return' }); await until('✓ figure.png');
+    await terminal.press({ name: 'return' }); await until('Moment map        PNG of the summed emission  ✓ figure.png');
     for (let i = momentIndex; i < peakIndex; i++) await terminal.press({ name: 'down' });
     await terminal.press({ name: 'return' });
     const deadline = Date.now() + 15_000;
     while (made.length < 2) { if (Date.now() > deadline) assert.fail(terminal.screen.join('\n')); await new Promise<void>(done => setImmediate(done)); }
     await until('What do you want to make?');
-    assert.doesNotMatch(terminal.screen.join('\n'), /aperture:|band:|background:|uncertainty:/u);
+    assert.doesNotMatch(terminal.screen.join('\n'), /plane:|pixel:|aperture:|band:|background:|uncertainty:/u);
     await terminal.press({ text: 'q' }); assert.equal((await screen).code, 0);
     assert.deepEqual(selections, [{ kind: 'band-image', hdu: 0, band: cubeBand(band), uncertainty: 'omit' },
-      { kind: 'aperture-spectrum', hdu: 0, aperture: [2, 1, 5, 4], background: 'none', uncertainty: 'omit' }]);
+      { kind: 'aperture-spectrum', hdu: 0, aperture: [3, 2, 4, 3], background: 'none', uncertainty: 'omit' }]);
     for (const output of made) {
       assert.equal((await readFile(output.figure)).subarray(1, 4).toString(), 'PNG');
       assert.match(await readFile(output.values, 'utf8'), /value/u);
@@ -85,13 +100,17 @@ test('a qualified synthetic cube makes both approved outputs with no parameter e
     const unavailable = { ...api, listArtifactOutputs: async () => ({ artifact: 'delivery', ...inspected, outputs: inspected.outputs.map(output =>
       ['band-image', 'aperture-spectrum'].includes(output.kind) ? { ...output, available: false, reason: 'Recorded unavailable reason.' } : output) }) };
     const disabled = await explorationServices(root, ['star'], root, unavailable, io, {}).outputs(result, 1);
-    for (const name of ['Moment map', 'Spectrum at peak']) {
-      const output = disabled.find(output => output.name === name)!;
-      assert.equal(output.available, false); assert.equal(output.description, 'Recorded unavailable reason.');
-      await assert.rejects(output.run(new Map()), /Recorded unavailable/u);
-    }
-    // A centered 3×3 box cannot be silently shifted when the real peak is on an edge.
+    assert.ok(!disabled.some(output => output.name === 'Moment map'));
+    assert.equal(disabled.filter(output => output.name === 'Spectrum at peak').length, 1);
+    const withoutEdges = { ...api, listArtifactOutputs: async () => ({ artifact: 'delivery', ...inspected, outputs: inspected.outputs.map(output => {
+      if (!output.spectral) return output;
+      const { binEdgesMicrometres: _edges, ...spectral } = output.spectral;
+      return { ...output, spectral, ...(['band-image', 'feature-map'].includes(output.kind) ? { available: false,
+        reason: 'Qualified bin edges are required; tabulated centers alone cannot establish band integration.' } : {}) };
+    }) }) };
+    assert.deepEqual((await explorationServices(root, ['star'], root, withoutEdges, io, {}).outputs(result, 1)).map(output => output.name), ['Data']);
+    // A single-pixel spectrum also works when the peak is on an edge.
     await writeFile(file, image([5, 5, 3], Array.from({ length: 75 }, (_, i) => i % 25 === 0 ? 100 : 1), [['CTYPE3', 'WAVE'], ['CUNIT3', 'um'], ['CRVAL3', 3], ['CDELT3', -1], ['CRPIX3', 1], ['BUNIT', 'K']]));
-    await assert.rejects(cubePeakAperture(retained, band), /centered 3×3 aperture does not fit/u);
+    assert.deepEqual(await cubePeakAperture(retained, band), [0, 0, 1, 1]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
