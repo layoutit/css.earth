@@ -66,7 +66,7 @@
     "controls": [
       {
         "id": "temperature",
-        "label": "Spitzer",
+        "label": "Spitzer 4.5 µm",
         "qualification": "Published fit · May et al. 2021 · Spitzer 4.5 µm, 2017",
         "thumbnail": "wasp-76b-dataset-temperature.webp",
         "surface": "wasp-76b-surface-temperature@2x.webp",
@@ -123,6 +123,66 @@
           "sourceUrl": "https://arxiv.org/abs/2107.03349"
         },
         "notes": "Brightness temperature at 4.5 µm from May et al. (2021)'s published SPIDERMAN fit to a Spitzer phase curve of April 2017, evaluated by SPIDERMAN itself. The fit is a dipole, the simplest map: hottest at noon, coldest at midnight. Around the midnight point the fitted dipole dips below zero, which no temperature can match; that patch shows no data. The false color runs from 600 to 3,000 K. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
+      },
+      {
+        "id": "spitzer-3-6um",
+        "label": "Spitzer 3.6 µm",
+        "qualification": "Published fit · May et al. 2021 · Spitzer 3.6 µm, 2017–2018",
+        "thumbnail": "wasp-76b-dataset-spitzer-3-6um.webp",
+        "surface": "wasp-76b-surface-spitzer-3-6um@2x.webp",
+        "poles": "wasp-76b-poles-spitzer-3-6um@2x.webp",
+        "source": {
+          "id": "wasp-76b-may-2021-phase-curve-3-6um",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2107.03349"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "600",
+            "1800",
+            "3000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "600",
+              "1800",
+              "3000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2107.03349"
+        },
+        "notes": "Brightness temperature at 3.6 µm from May et al. (2021)'s published SPIDERMAN fit to two Spitzer phase curves of May 2017 and April 2018, fitted together, evaluated by SPIDERMAN itself. The fit is a dipole, the simplest map: hottest at noon, 2,670 K, coldest at midnight, 1,160 K. It gives back the paper's day and night sides, 2,471 and 1,518 K, within their errors. The false color runs from 600 to 3,000 K, the scale of the 4.5 µm map. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       }
     ]
   },

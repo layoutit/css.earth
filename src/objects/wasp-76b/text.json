@@ -32,6 +32,11 @@
       "title": "Spitzer heat map",
       "detail": "Published fit, 2017",
       "summary": "Heat at 4.5 µm from the paper's own map fit: a simple day-night pattern. A spot at midnight shows no data."
+    },
+    "spitzer-3-6um": {
+      "title": "Spitzer 3.6 µm heat map",
+      "detail": "Published fit, 2017–2018",
+      "summary": "Heat at 3.6 µm from the paper's own map fit to two phase curves: a simple day-night pattern."
     }
   }
 }

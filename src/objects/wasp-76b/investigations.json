@@ -25,8 +25,8 @@
     {
       "id": "spitzer-3-6um",
       "subject": "May et al. (2021) joint fit of the two 3.6 um phase curves",
-      "status": "deferred",
-      "finding": "Same model (sph0 0.00048, sph3 0.00022, lo0 0.68) in another band. One dataset is shown so that both planets of this route share 4.5 um.",
+      "status": "included",
+      "finding": "Included on 2026-10-15 as the Spitzer 3.6 µm dataset, beside 4.5 µm (WASP-103 b now shows two bands as well). Table 4's joint fit of the two 3.6 um phase curves: sph0 0.00048, sph3 0.00022, lo0 0.68, Rp/Rs 0.10048, dilution 0.0936. Evaluated by SPIDERMAN it gives a day side of 2524 ppm and 2464 K and a night side of 1504 K, within the paper's 2539 +/- 30 ppm, 2471 +/- 27 K and 1518 +/- 61 K; no part of the map falls below zero.",
       "revisitWhen": "A second dataset per planet is wanted.",
       "evidence": [
         "https://arxiv.org/abs/2107.03349"
