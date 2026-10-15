@@ -29,6 +29,17 @@
         "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
         "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "May et al. (2022)'s Spitzer 4.5 um phase curve (wa140bo21) as a map of longitude",
+      "status": "excluded",
+      "finding": "Read on 2026-10-15. The preferred fit is the asymmetric (second-order) phase function (Delta BIC 6.2 below the symmetric one), printed only as an amplitude of 624 +/- 80 ppm and an offset of -55.7 +/- 28.3 degrees, which do not determine a second-order curve. Its night side (1201 +/- 29 K) reads warmer than its day side (1169 +/- 25 K); the paper finds a phase curve only with its fixed sensitivity map, a free BLISS map preferring a flat one, and notes the orbit is eccentric (e = 0.047) and may not be synchronous.",
+      "revisitWhen": "A new phase curve of WASP-140 b, or a paper printing the asymmetric fit's terms.",
+      "evidence": [
+        "https://arxiv.org/abs/2203.15059",
+        "https://doi.org/10.3847/1538-3881/ac6261"
+      ]
     }
   ]
 }
