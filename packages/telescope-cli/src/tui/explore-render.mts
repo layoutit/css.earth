@@ -4,6 +4,9 @@ import type { PreviewState } from '../previews/index.mts';
 import { renderPreview } from '../previews/index.mts';
 import type { ProviderProgress } from '../vo/bridge.mts';
 import { archiveLabel } from '../cli-archive.mts';
+import { ARCHIVES } from '../archives/archives.mts';
+import { SEARCH as SPITZER_SEARCH } from '../archives/spitzer/archive.mts';
+import { OPUS_SERVICE } from '../archive-adapters/opus.mts';
 import { wavelengthText } from '../cli-table.mts';
 import { oneLine } from '../cli-summary.mts';
 import { bold, breadcrumb, clipLine, cut, dim, green, inverse, pad, red, yellow } from './style.mts';
@@ -49,7 +52,11 @@ export function byteSize(bytes: number | null | undefined): string {
 }
 export const observationStart = (choice: ExploreChoice): string => choice.display.observationTime.startIso?.slice(0, 16).replace('T', ' ') ?? 'date ?';
 export function exploreLabel(choice: ExploreChoice): string {
-  return [String(choice.pick).padStart(2), cut(oneLine(archiveLabel(choice)), 8), cut(oneLine(choice.display.instrument), 13),
+  const local = choice.telescope === 'Source archive';
+  const kind = oneLine(choice.display.productKind ?? '');
+  const family = oneLine(choice.reference.kind === 'indexed-observation' ? choice.reference.mode.split('/')[0] ?? '' : '');
+  const instrument = local ? [kind, family].find(label => label && label.length <= 13) ?? '—' : choice.display.instrument;
+  return [String(choice.pick).padStart(2), cut(oneLine(local ? 'Local' : archiveLabel(choice)), 8), cut(oneLine(instrument), 13),
     observationStart(choice).padEnd(16), cut(oneLine(choice.display.productKind ?? '—'), 8), wavelengthText(choice.display.wavelengthsMicrometres)].join('  ');
 }
 export function exploreSelection(state: ExploreState) {
@@ -69,7 +76,10 @@ function beside(left: readonly string[], right: readonly string[], columns: numb
 const header = (trail: readonly string[], sub: string) => [breadcrumb(['telescope', ...trail.map(oneLine)]), '', sub, ''];
 const mark = (status: PickStatus | undefined) => status?.state === 'done' ? green('✓') : status?.state === 'partial' ? yellow('◐') : ' ';
 function providerName(name: string): string {
-  return oneLine(archiveLabel({ telescope: name, archiveService: name })).replace('MAST HST', 'MAST/HST')
+  const archive = ARCHIVES.find(entry => entry.id === name.toLowerCase() || entry.name === name || entry.displayName === name || entry.registry?.address === name);
+  const label = name === SPITZER_SEARCH ? 'Spitzer' : name === OPUS_SERVICE ? 'OPUS'
+    : archive?.displayName ?? archive?.name ?? (name.includes('://') ? 'Archive' : name);
+  return oneLine(label).replace('MAST HST', 'MAST/HST')
     .replace('Keck Observatory Archive', 'Keck').replace('Gemini at CADC', 'Gemini').replace('Chandra Data Archive', 'Chandra').replace('Spitzer Heritage Archive', 'Spitzer');
 }
 function providerReason(reason: string): string {
@@ -82,15 +92,20 @@ function table(state: ExploreState, columns: number): string[] {
   const { shown, current, start, rows } = exploreSelection(state), session = state.session!;
   const got = [...state.statuses.values()].filter(status => status.state === 'done').length;
   const issues = session.answer.services.filter(service => service.state === 'unavailable' || service.state === 'overflow');
-  const failures = issues.map(service => `${providerName(service.service)} ${service.reason.length <= 32 ? oneLine(service.reason) : /timed? ?out|timeout/iu.test(service.reason) ? 'timed out' : service.state === 'overflow' ? 'search limit reached' : 'no answer'}`);
+  const failures = new Map<string, Set<string>>();
+  for (const service of issues) {
+    const reason = service.state === 'overflow' ? 'hit their result limit' : providerReason(service.reason);
+    const archives = failures.get(reason) ?? new Set<string>();
+    archives.add(providerName(service.service)); failures.set(reason, archives);
+  }
   const title = `${bold(state.target)} · ${session.choices.length} observations${got ? ` · ${green(`${got} downloaded`)}` : ''}` +
-    (session.answer.outcome.coverage === 'incomplete' ? ` · ${yellow('incomplete')}${failures.length ? ` ${dim(`(${failures.join(', ')})`)}` : ''}` : '');
+    (session.answer.outcome.coverage === 'incomplete' ? ` · ${yellow('incomplete')}${[...failures].map(([reason, archives]) => ` · ${dim(`${[...archives].join(', ')} ${reason}`)}`).join('')}` : '');
   const left = [dim('    #  Archive   Instrument     Start (UTC)       Kind      Wavelength'),
     ...(rows.length ? rows.map(choice => `${mark(state.statuses.get(choice.pick))}${choice === current ? bold(`> ${exploreLabel(choice)}`) : `  ${exploreLabel(choice)}`}`) : [dim('   no match')])];
   while (left.length < EXPLORE_PAGE + 1) left.push('');
   const count = shown.length < session.choices.length ? `${shown.length} match · ` : '';
   const range = shown.length ? `${start + 1}–${start + rows.length} of ${shown.length}` : '0';
-  return [...header([state.target], title), ...beside(left, current ? panel(current, state) : [], columns), '',
+  return [...header([state.target], clipLine(title, columns)), ...beside(left, current ? panel(current, state) : [], columns), '',
     `/ ${state.query}${inverse(' ')}   ${dim(`${count}${range} · ↑↓ scroll · enter choose · esc quit`)}`];
 }
 function confirm(state: ExploreState, columns: number): string[] {

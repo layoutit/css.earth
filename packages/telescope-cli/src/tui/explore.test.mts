@@ -2,9 +2,12 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { exploreScreen, type ExploreServices } from './explore.mts';
 import { FakeTerminal } from './fake-terminal.mts';
-import { plain } from './style.mts';
-import { renderExplore, type ExploreState, type PickStatus } from './explore-render.mts';
+import { plain, visibleWidth } from './style.mts';
+import { exploreLabel, renderExplore, type ExploreState, type PickStatus } from './explore-render.mts';
 import { exploreSession } from './fixtures/explore.mts';
+import { ARCHIVES } from '../archives/archives.mts';
+import { SEARCH as SPITZER_SEARCH } from '../archives/spitzer/archive.mts';
+import { OPUS_SERVICE } from '../archive-adapters/opus.mts';
 
 class ExploreTerminal extends FakeTerminal {
   private waits: { milliseconds: number; resolve: () => void; signal: AbortSignal }[] = [];
@@ -172,6 +175,52 @@ test('archive search renders only short reasons without altering saved evidence'
     assert.equal(provider.reason, reason);
     assert.equal(state.session, session);
   }
+});
+
+test('table title groups short archive names by reason, clips only when needed and preserves evidence', () => {
+  const session = exploreSession();
+  const services = [
+    { service: SPITZER_SEARCH, state: 'unavailable' as const, scope: 'fixture', reason: 'The Heritage Archive did not answer aorByPosition: https://private.example/diagnostic' },
+    { service: 'https://almascience.eso.org/tap', state: 'overflow' as const, scope: 'fixture', reason: 'Raw access-description limit details' },
+    { service: 'MAST HST', state: 'overflow' as const, scope: 'fixture', reason: 'Full instrument facet diagnostics' },
+    { service: 'MAST HST', state: 'overflow' as const, scope: 'another search', reason: 'Another instrument reached its limit' },
+  ];
+  const state: ExploreState = { view: 'table', target: 'Star', requested: 'star', candidates: [], session: { ...session, answer: { ...session.answer, services } },
+    query: '', active: 0, statuses: new Map(), providers: [], tick: 0, preview: { kind: 'loading' }, size: null, received: 0, checking: false, outputs: [], made: new Map(), making: false };
+  const saved = structuredClone(state.session);
+  const title = 'Star · 2 observations · incomplete · Spitzer no answer · ALMA, MAST/HST hit their result limit';
+  assert.equal(plain(renderExplore(state, 150)[2]!), title);
+  assert.equal(plain(renderExplore(state, visibleWidth(title))[2]!), title);
+  const clipped = renderExplore(state, 80)[2]!;
+  assert.equal(visibleWidth(clipped), 80); assert.equal(plain(clipped), title.slice(0, 79) + '…');
+  const providerNames = [['eso', 'ESO'], ['keck', 'Keck'], ['gemini', 'Gemini'], ['chandra', 'Chandra']].map(([id, label]) => {
+    const address = ARCHIVES.find(archive => archive.id === id)?.registry?.address;
+    assert.ok(address); assert.ok(label); return [address, label] as const;
+  });
+  for (const [service, label] of [...providerNames, [OPUS_SERVICE, 'OPUS'] as const, ['https://unknown.example/service', 'Archive'] as const]) {
+    const issue = { service, state: 'unavailable' as const, scope: 'fixture', reason: 'timeout at https://private.example/error' };
+    const answer = { ...session.answer, services: [issue] };
+    assert.equal(plain(renderExplore({ ...state, session: { ...session, answer } }, 150)[2]!), `Star · 2 observations · incomplete · ${label} timed out`);
+    assert.equal(plain(renderExplore({ ...state, view: 'search', providers: [{ archive: service, state: 'done', reason: issue.reason }] }, 150).at(-1)!), `  ${label.padEnd(10)}timed out`);
+  }
+  assert.deepEqual(state.session, saved);
+  assert.equal(plain(renderExplore({ ...state, session: { ...session, answer: { ...session.answer, outcome: { selection: 'available', coverage: 'bounded' } } } }, 150)[2]!), 'Star · 2 observations');
+});
+
+test('package-owned source rows show Local and a fitting product kind or family without changing choices', () => {
+  const session = exploreSession(), base = session.choices[0]!;
+  for (const productKind of ['image', 'spectrum', 'time-series', 'long product kind that cannot fit', null]) {
+    const choice = { ...base, telescope: 'Source archive', mode: 'FITS/image',
+      reference: { kind: 'indexed-observation' as const, telescope: 'Source archive', mode: 'FITS/image', observation: base.observation, programme: base.program },
+      display: { ...base.display, instrument: 'Source archive / FITS/image', productKind } };
+    const saved = structuredClone(choice), label = exploreLabel(choice);
+    assert.equal(label.slice(4, 12).trim(), 'Local');
+    assert.equal(label.slice(14, 27).trim(), productKind && productKind.length <= 13 ? productKind : 'FITS');
+    assert.doesNotMatch(label.slice(0, 27), /Source|…/u);
+    assert.deepEqual(choice, saved);
+  }
+  assert.equal(exploreLabel(base).slice(4, 12).trim(), 'ALMA');
+  assert.equal(exploreLabel(base).slice(14, 27).trim(), 'ALMA');
 });
 
 test('EOF exits picker, search, table, confirmation, download and make, retaining saved work', async () => {
