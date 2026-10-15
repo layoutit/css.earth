@@ -11,10 +11,13 @@ import { skyTargetRequest } from '../exploration.mts';
 import { loadTargetCatalogue } from '../observation-query/query.mts';
 import { fetchPreview, previewSource } from '../previews/index.mts';
 import { previewVotable } from '../previews/votable.mts';
+import { almaCubeUrl, matchesAlmaCube } from '../vo/alma-cube.mts';
+import { voUrl } from '../vo/network-policy.mts';
 import { exportHtml } from '../delivery/html-outputs.mts';
 import { delivery } from '../delivery/outputs.mts';
 import { localOutput, verifiedProduct } from '../products/verified-product.mts';
 import { openExternal } from './open.mts';
+import { cubeBand, cubePeakAperture } from './cube-output.mts';
 import type { PickStatus } from './explore-render.mts';
 import type { ExploreOutput, ExploreServices, SavedExploration } from './explore.mts';
 
@@ -53,29 +56,53 @@ export async function explorationFreeBytes(directory: string): Promise<number> {
   }
 }
 
-/** Size of the same whole delivery used by get, never the much smaller preview cutout. */
-export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 'display' | 'observation'>, signal: AbortSignal, fetcher: typeof fetch = fetch): Promise<number | null> {
-  if (choice.display.advertisedKilobytes !== null) return choice.display.advertisedKilobytes * 1000;
+/** Size and scope of the full file selected by access planning, never a preview cutout. */
+export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 'display' | 'observation' | 'reference'>, signal: AbortSignal, fetcher: typeof fetch = fetch): Promise<number | null | { readonly bytes: number | null; readonly singleCube: true }> {
+  const cube = choice.reference.kind === 'vo-acquisition' && choice.display.productKind === 'cube';
+  if (!cube && choice.display.advertisedKilobytes !== null) return choice.display.advertisedKilobytes * 1000;
   let identity: string = choice.observation;
   if (identity.startsWith('{')) {
     const record = requireRecord(JSON.parse(identity)), columns = requireArray(record.identityColumns), values = requireArray(record.identity);
     const index = columns.indexOf('obs_id'); identity = typeof values[index] === 'string' ? values[index] : '';
   }
   const member = /^(uid:\/\/[^/]+\/[^/]+\/[^.]+)(?:\.source\.|$)/u.exec(identity)?.[1];
-  if (!member) return null;
+  if (!member) return choice.display.advertisedKilobytes === null ? null : choice.display.advertisedKilobytes * 1000;
   const deadline = AbortSignal.any([signal, AbortSignal.timeout(15_000)]);
-  try {
-    const response = await fetcher(`https://almascience.org/datalink/sync?ID=${encodeURIComponent(member)}`, { signal: deadline, redirect: 'error' });
-    if (!response.ok || !response.body) { await response.body?.cancel(); return null; }
-    const reader = response.body.getReader(), chunks: Uint8Array[] = []; let bytes = 0;
+  let metadataBytes = 0;
+  const load = async (url: string) => {
+    const response = await fetcher(voUrl(url, url), { signal: deadline, redirect: 'error' });
+    if (!response.ok || !response.body) { await response.body?.cancel(); throw new Error('ALMA metadata unavailable.'); }
+    const reader = response.body.getReader(), chunks: Uint8Array[] = [];
     try {
       for (;;) {
         const chunk = await reader.read(); if (chunk.done) break;
-        bytes += chunk.value.length; if (bytes > 2 * 1024 * 1024) throw new Error('ALMA size metadata exceeds its byte limit.');
+        metadataBytes += chunk.value.length; if (metadataBytes > 2 * 1024 * 1024) throw new Error('ALMA size metadata exceeds its byte limit.');
         chunks.push(chunk.value);
       }
     } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
-    const rows = previewVotable(Buffer.concat(chunks).toString('utf8')).rows.filter(row => row.semantics?.endsWith('#this') && row.access_url && /\.tar(?:$|[?#])/u.test(row.access_url));
+    return previewVotable(Buffer.concat(chunks).toString('utf8'));
+  };
+  try {
+    const root = await load(`https://almascience.org/datalink/sync?ID=${encodeURIComponent(member)}`);
+    const ownCube = (links: ReturnType<typeof previewVotable>) => links.rows.find(row => {
+      if (row.error_message || !['#this', '#cutout', '#proc'].some(semantics => row.semantics?.endsWith(semantics)) || !['image/fits', 'application/fits'].includes(row.content_type ?? '')) return false;
+      const service = links.services.find(service => service.id === row.service_def && service.standard === 'ivo://ivoa.net/std/SODA#sync-1.0');
+      const id = service ? almaCubeUrl(service.url) : row.access_url ? matchesAlmaCube(identity, row.ID ?? '') ? row.ID : decodeURIComponent(new URL(row.access_url).pathname.split('/').at(-1) ?? '') : undefined;
+      return id && matchesAlmaCube(identity, id);
+    });
+    if (cube) {
+      const documents = [root];
+      const nested = [...new Set(root.rows.flatMap(row => {
+        const service = root.services.find(service => service.id === row.service_def && service.standard.startsWith('ivo://ivoa.net/std/DataLink#links-'));
+        return row.error_message || !row.semantics?.endsWith('#this') ? [] : service ? [service.url]
+          : row.access_url && row.content_type?.includes('content=datalink') ? [row.access_url] : [];
+      }))];
+      if (nested.length > 16) throw new Error('ALMA size metadata request limit reached.');
+      for (const url of nested) documents.push(await load(url));
+      const selected = documents.map(ownCube).find(row => row !== undefined);
+      if (selected) { const bytes = Number(selected.content_length); return { bytes: Number.isSafeInteger(bytes) && bytes > 0 ? bytes : null, singleCube: true }; }
+    }
+    const rows = root.rows.filter(row => !row.error_message && row.semantics?.endsWith('#this') && row.access_url && /\.tar(?:$|[?#])/u.test(row.access_url));
     if (!rows.length) return null;
     const sizes = rows.map(row => Number(row.content_length));
     return sizes.every(size => Number.isSafeInteger(size) && size > 0) ? sizes.reduce((sum, size) => sum + size, 0) : null;
@@ -134,19 +161,27 @@ export function explorationServices(root: string, requestArgs: readonly string[]
     },
     outputs: async (resultPath, pick) => {
       const inspected = await api.listArtifactOutputs(resultPath), source = typeof inspected.source === 'string' ? inspected.source : resultPath;
+      const retained = await delivery(resultPath);
       const options: ExploreOutput[] = [];
       for (const [index, output] of inspected.outputs.entries()) {
-        if (!output.available) continue;
-        const name = output.kind === 'html' ? 'Viewer' : output.kind === 'image' ? 'Image' : output.kind === 'spectrum' ? 'Plot' : output.kind;
-        const destination = resolve(dirname(resultPath), 'made', `${index + 1}-${output.kind}`);
+        const cube = output.shape !== undefined && output.shape.length >= 3 && (output.spectral?.axis !== undefined || output.shape.at(-3)! > 1);
+        const moment = cube && output.kind === 'band-image', peak = cube && output.kind === 'aperture-spectrum';
+        if (!output.available) {
+          if (moment || peak) options.push({ name: moment ? 'Moment map' : 'Spectrum at peak', description: output.reason, available: false, run: async () => { throw new Error(output.reason); } });
+          continue;
+        }
+        const name = moment ? 'Moment map' : peak ? 'Spectrum at peak' : output.kind === 'html' ? 'Viewer' : output.kind === 'image' ? 'Image' : output.kind === 'spectrum' ? 'Plot' : output.kind;
+        const destination = resolve(dirname(resultPath), 'made', `${index + 1}-${moment ? 'moment-map' : peak ? 'spectrum-at-peak' : output.kind}`);
         const file = await madeOutput(destination, output.kind === 'html' ? 'viewer.html' : output.kind === 'sphere' ? 'sphere.html'
           : ['points', 'volume', 'volume-dataset-bank'].includes(output.kind) ? 'object.json' : 'figure.png');
-        options.push({ name, file, description: output.kind === 'html' ? 'HTML page you can pan and zoom' : output.kind === 'image' ? 'PNG with a scale bar' : output.kind === 'spectrum' ? 'PNG of flux against wavelength' : output.reason,
-          parameters: output.parameters, run: async parameters => {
+        options.push({ name, file, description: moment ? 'PNG of the summed emission' : peak ? 'PNG and CSV through the brightest pixel' : output.kind === 'html' ? 'HTML page you can pan and zoom' : output.kind === 'image' ? 'PNG with a scale bar' : output.kind === 'spectrum' ? 'PNG of flux against wavelength' : output.reason,
+          parameters: moment || peak ? [] : output.parameters, run: async parameters => {
             if (file) return file;
             const args = ['export', source, '--output', output.kind, '--out', destination];
             if (output.hdu !== undefined) args.push('--hdu', String(output.hdu));
             if (output.structure) args.push('--structure', output.structure);
+            if (moment) args.push('--band', cubeBand(output).join(','), '--uncertainty', 'omit');
+            if (peak) args.push('--aperture', (await cubePeakAperture(retained, output)).join(','), '--background', 'none', '--uncertainty', 'omit');
             for (const [key, value] of parameters) args.push(`--${key}`, value);
             const selected = parseCli(args);
             if (selected.command === 'html') return (await (api.exportHtml ?? exportHtml)(selected.result, selected.directory)).html;
@@ -169,7 +204,6 @@ export function explorationServices(root: string, requestArgs: readonly string[]
         } });
       }
       // The native data is already exported by get; choosing it opens that exact retained file.
-      const retained = await delivery(resultPath);
       options.push({ name: 'Data', description: 'the FITS file as retrieved', run: async () => retained.file });
       return options;
     },

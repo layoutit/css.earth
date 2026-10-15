@@ -30,7 +30,7 @@ export const EXPLORE_PAGE = 12, TABLE_COLUMNS = 78, PANEL_COLUMNS = 40;
 export const PREVIEW_MINIMUM_COLUMNS = TABLE_COLUMNS + 4 + PANEL_COLUMNS;
 const gap = '    ', spinner = '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏';
 export interface PickStatus { readonly state: 'done' | 'partial'; readonly bytes: number; readonly resultPath?: string }
-export interface MakeChoice { readonly name: string; readonly description: string; readonly parameters?: readonly string[] }
+export interface MakeChoice { readonly name: string; readonly description: string; readonly parameters?: readonly string[]; readonly available?: boolean }
 export interface MadeFile { readonly file: string; readonly opened: boolean }
 export type ExploreView = 'picker' | 'search' | 'table' | 'confirm' | 'download' | 'make';
 export interface ExploreState {
@@ -47,6 +47,7 @@ export interface ExploreState {
   readonly tick: number;
   readonly preview: PreviewState;
   readonly size: number | null;
+  readonly singleCube?: boolean;
   readonly free?: number;
   readonly received: number;
   readonly total?: number;
@@ -125,7 +126,7 @@ function table(state: ExploreState, columns: number, height: number): string[] {
 }
 function confirm(state: ExploreState, columns: number): string[] {
   const choice = state.selected!, status = state.statuses.get(choice.pick), remaining = state.size === null ? null : Math.max(0, state.size - (status?.bytes ?? 0));
-  const what = archiveLabel(choice) === 'ALMA' ? 'the whole ALMA delivery for this observation (all its spectral windows)' : 'one data file';
+  const what = state.singleCube ? 'the cube for this spectral window' : archiveLabel(choice) === 'ALMA' ? 'the whole ALMA delivery for this observation (all its spectral windows)' : 'one data file';
   const facts = [bold(`#${choice.pick}  ${oneLine(archiveLabel(choice))} · ${oneLine(choice.display.instrument)}`), '',
     `  Start       ${choice.display.observationTime.startIso ? `${observationStart(choice)} UTC` : 'unknown'}`,
     `  Kind        ${oneLine(choice.display.productKind ?? '—')}`, `  Wavelength  ${wavelengthText(choice.display.wavelengthsMicrometres)}`, ''];
@@ -175,7 +176,7 @@ function exploreLines(state: ExploreState, columns: number, height: number): str
     'What do you want to make?', '', ...state.outputs.slice(start(state.outputs.length), start(state.outputs.length) + page).map((output, offset) => {
       const index = offset + start(state.outputs.length);
       const made = state.made.get(index);
-      return (index === state.active ? bold(`> ${output.name.padEnd(18)}${output.description}`) : `  ${output.name.padEnd(18)}${dim(output.description)}`) +
+      return (output.available === false ? dim(`  ${output.name.padEnd(18)}${output.description}`) : index === state.active ? bold(`> ${output.name.padEnd(18)}${output.description}`) : `  ${output.name.padEnd(18)}${dim(output.description)}`) +
         (made ? green(`  ✓ ${basename(made.file)}${made.opened ? ' · opened' : ''}`) : '');
     }), ...(state.parameter ? ['', `${state.parameter.name}: ${state.parameter.value}${inverse(' ')}  ${dim('enter accept · esc cancel')}`] : []),
     ...(state.notice ? ['', red(oneLine(state.notice))] : []), ...(state.making ? ['', dim('Making…')] : []),

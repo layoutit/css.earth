@@ -116,6 +116,18 @@ test('exact aliases skip the picker, a narrow window skips previews, disk refusa
   assert.deepEqual(f.previews, []);
 });
 
+test('confirmation shows the selected ALMA cube size and scope, then resets for the next row', async () => {
+  const terminal = new ExploreTerminal(120), f = fixture();
+  const running = exploreScreen(undefined, { ...f.services, size: async choice => choice.pick === 1 ? { bytes: 5760, singleCube: true } : 2 * 1024 ** 2 }, terminal, true, exploreSession());
+  await until(() => current(terminal).includes('Start (UTC)'));
+  await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('Download it?'));
+  assert.match(current(terminal), /the cube for this spectral window/u); assert.match(current(terminal), /6 KB/u);
+  assert.doesNotMatch(current(terminal), /whole ALMA delivery/u); assert.equal(f.transfers(), 0);
+  await terminal.press({ name: 'escape' }, { name: 'down' }, { name: 'return' }); await until(() => current(terminal).includes('Download it?'));
+  assert.match(current(terminal), /one data file/u); assert.doesNotMatch(current(terminal), /spectral window/u);
+  await terminal.press({ name: 'escape' }, { name: 'escape' }); assert.equal((await running).code, 0);
+});
+
 test('Escape on suggestions searches nothing; Ctrl-C aborts downloads and restores the terminal', async () => {
   for (const phase of ['picker', 'download'] as const) {
     const terminal = new ExploreTerminal(), f = fixture(); let aborted = false;

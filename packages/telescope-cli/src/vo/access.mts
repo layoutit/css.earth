@@ -11,6 +11,7 @@ import { inspectVoFits, type VoContentProfile } from './content.mts';
 import { canonical, jsonValue, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource } from '@cssearth/objects';
 import { searchCircle, type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
 import { voUrl, type VoNetworkPolicy } from './network-policy.mts';
+import { almaCubeUrl, matchesAlmaCube } from './alma-cube.mts';
 
 export interface AcquisitionSpec {
   /** `key` names the acquisition directory; `identity` is the exact acquisition as canonical text. */
@@ -75,6 +76,9 @@ export function sodaParameters(descriptor: Resource, request: DiscoveryRequest, 
   const inputs = descriptor.groups.filter(g => g.name === 'inputParams');
   if (inputs.length !== 1) throw new TypeError('SODA input parameter declarations are missing or ambiguous.');
   const parameters = inputs[0]!.parameters;
+  const address = descriptor.parameters.find(p => p.name === 'accessURL')?.value;
+  if (!request.region && request.spectralFrame === undefined && parameters.length === 0 && Object.keys(fixed).length === 0 &&
+    typeof address === 'string' && almaCubeUrl(address)) return {};
   if (new Set(parameters.map(p => p.name)).size !== parameters.length) throw new TypeError('Duplicate SODA input parameter.');
   const id = parameters.find(p => p.name === 'ID');
   if (!id || fixed.ID === undefined || fixed.ID === null || fixed.ID === '') throw new TypeError('No exact SODA dataset ID binding.');
@@ -125,6 +129,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   if (!supportedKind(observation.kind))
     return { products, issues: [`No native profile route for advertised product kind ${observation.kind}.`] };
   const kind = observation.kind;
+  const cubeProducts: AcquisitionSpec[] = [];
   const loader = load ?? (async (address: string, parameters?: Readonly<Record<string, Json>>) => (await astroquery({ operation: 'vo-links', url: address,
     ...(parameters === undefined ? {} : { parameters }), directory: resolve(USER_ROOT, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
     allowedPrivateHosts: policy.allowedPrivateHosts })).vo!);
@@ -167,10 +172,15 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
           if (standard === DATALINK_LINKS) {
             await links(address, binding.parameters, depth + 1, closure);
           } else if (standard === SODA_SYNC) {
+            const id = almaCubeUrl(address);
+            const wholeCube = kind === 'cube' && !request.region && request.spectralFrame === undefined && id && matchesAlmaCube(observation.identities.obs_id, id);
             // A SODA descriptor advertises a possible subset, not an error for a whole-product search.
-            if (!request.region && request.spectralFrame === undefined) continue;
+            if (!request.region && request.spectralFrame === undefined && !wholeCube) continue;
+            if (wholeCube && typeof row.content_length === 'number' && row.content_length > limits.scienceBytes) { issues.push('Advertised cube exceeds the transfer bound.'); continue; }
             const parameters = sodaParameters(descriptor, request, binding.parameters);
+            const before = products.length;
             add({ kind: 'soda-sync', url: address, parameters }, jsonValue({ row, url: address, dataset: binding.parameters }), closure, descriptor, i, response.raw.path);
+            if (wholeCube) cubeProducts.push(...products.slice(before));
           } else if (typeof standard === 'string' && standard.startsWith('ivo://ivoa.net/std/SODA#')) throw new TypeError('No advertised synchronous SODA operation.');
           else throw new TypeError(`Unsupported DataLink service standard ${standard ?? 'missing'}.`);
         } catch (error) { issues.push(String(error)); }
@@ -180,7 +190,15 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
       try {
         const next = voUrl(row.access_url, response.effectiveUrl, policy), mime = typeof row.content_type === 'string' ? row.content_type : null;
         if (datalink(mime)) await links(next, {}, depth + 1, closure);
-        else direct(next, mime, row.content_length, jsonValue({ row, url: next }), closure);
+        else {
+          const before = products.length;
+          const id = typeof row.ID === 'string' && matchesAlmaCube(observation.identities.obs_id, row.ID) ? row.ID : decodeURIComponent(new URL(next).pathname.split('/').at(-1) ?? '');
+          const ownCube = kind === 'cube' && fits(mime) && matchesAlmaCube(observation.identities.obs_id, id);
+          // Nested product lists can contain other targets and windows; only this row's cube is an alternative to its tar.
+          if (kind === 'cube' && fits(mime) && String(observation.identities.obs_id).startsWith('uid://') && !ownCube) continue;
+          direct(next, mime, row.content_length, jsonValue({ row, url: next }), closure);
+          if (ownCube) cubeProducts.push(...products.slice(before));
+        }
       } catch (error) { issues.push(String(error)); }
     }
   }
@@ -200,7 +218,9 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
     jsonValue({ url: address, identities: observation.identities }), pins);
   if (!products.length) return { products, issues };
   const pin = await publishSnapshot();
-  return { products: products.map(product => ({ ...product, metadata: [product.metadata[0]!, pin, ...product.metadata.slice(1)] })), issues };
+  const cube = cubeProducts.find(product => product.operation.kind === 'direct') ?? cubeProducts[0];
+  const selected = cube ? [cube] : products;
+  return { products: selected.map(product => ({ ...product, metadata: [product.metadata[0]!, pin, ...product.metadata.slice(1)] })), issues };
 }
 
 /** Acquisition records origin/integrity only. Scientific metadata qualification is a later stage. */

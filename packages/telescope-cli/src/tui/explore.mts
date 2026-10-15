@@ -16,7 +16,7 @@ export interface ExploreServices {
   readonly resolve: (target: string, signal: AbortSignal) => Promise<boolean>;
   readonly search: (target: string | undefined, report: ProviderReporter, signal: AbortSignal) => Promise<SavedExploration>;
   readonly statuses: (session: SavedExploration) => Promise<ReadonlyMap<number, PickStatus>>;
-  readonly size: (choice: ExploreChoice, session: SavedExploration, signal: AbortSignal) => Promise<number | null>;
+  readonly size: (choice: ExploreChoice, session: SavedExploration, signal: AbortSignal) => Promise<number | null | { readonly bytes: number | null; readonly singleCube: true }>;
   readonly free: (directory: string) => Promise<number>;
   readonly get: (choice: ExploreChoice, session: SavedExploration, report: (event: DownloadProgress) => void, signal: AbortSignal) => Promise<string>;
   readonly outputs: (resultPath: string, pick: number) => Promise<readonly ExploreOutput[]>;
@@ -97,11 +97,11 @@ export async function exploreScreen(requested: string | undefined, services: Exp
   const confirm = async (choice: ExploreChoice) => {
     tableActive = exploreSelection(state).active; confirmation?.abort(); confirmation = new AbortController();
     const signal = AbortSignal.any([confirmation.signal, lifetime.signal]);
-    state = { ...state, view: 'confirm', selected: choice, free: undefined, size: choice.display.advertisedKilobytes === null ? null : choice.display.advertisedKilobytes * 1000, notice: undefined };
+    state = { ...state, view: 'confirm', selected: choice, singleCube: false, free: undefined, size: choice.display.advertisedKilobytes === null ? null : choice.display.advertisedKilobytes * 1000, notice: undefined };
     updatePreview(); draw();
     try {
       const [size, free] = await Promise.all([services.size(choice, state.session!, signal), services.free(state.session!.directory)]);
-      if (!signal.aborted) { state = { ...state, size, free }; draw(); }
+      if (!signal.aborted) { state = { ...state, size: typeof size === 'object' && size !== null ? size.bytes : size, singleCube: typeof size === 'object' && size !== null, free }; draw(); }
     } catch (error) { if (!signal.aborted) { state = { ...state, notice: error instanceof Error ? error.message : String(error) }; draw(); } }
   };
   const make = async (resultPath: string) => {
@@ -142,6 +142,7 @@ export async function exploreScreen(requested: string | undefined, services: Exp
   };
   const exportSelected = async () => {
     const output = outputs[state.active]; if (!output) return;
+    if (output.available === false) { state = { ...state, notice: output.description }; draw(); return; }
     const missing = state.made.has(state.active) ? undefined : output.parameters?.find(name => !parameters.has(name));
     if (missing) { state = { ...state, parameter: { name: missing, value: '' }, notice: undefined }; draw(); return; }
     busy = true; state = { ...state, making: true, notice: undefined }; draw();

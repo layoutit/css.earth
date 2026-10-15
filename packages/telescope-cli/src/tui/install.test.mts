@@ -60,8 +60,9 @@ test('Enter accepts, scripted progress turns the globe and completion restores t
   screen.progress({ type: 'installed' });
   assert.match(terminal.screen.join('\n'), /Installed\./u); assert.equal(terminal.listening, false);
   assert.equal(screen.active, false); assert.equal(controller.signal.aborted, false);
-  assert.equal(terminal.writes.at(-1), '\x1b[?25h');
-  assert.doesNotMatch(terminal.writes.join(''), /\x1b\[2J|\x1b\[\?1049h/u);
+  assert.equal(terminal.alternateScreen, false);
+  assert.ok(terminal.writes.indexOf('\x1b[?1049l\x1b[?25h') < terminal.writes.findLastIndex(text => text.includes('Installed.')));
+  assert.doesNotMatch(terminal.writes.join(''), /\x1b\[2J/u);
 });
 
 test('Escape declines, Ctrl-C aborts consent and a running install, with cleanup on every exit', async () => {
@@ -100,6 +101,25 @@ test('short windows show consent before keys and only the final progress state',
   screen.progress({ type: 'installed' });
   assert.equal(terminal.writes.filter(text => text.includes('Installed.')).length, 1);
   assert.equal(terminal.listening, false);
+});
+
+test('install consent and progress leave no stale rows after shrink then grow', async () => {
+  const terminal = new InstallTerminal(140, 40);
+  terminal.write('previous command\n');
+  const screen = createInstallScreen(terminal, new AbortController()), consent = screen.consent('42');
+  assert.equal(terminal.alternateScreen, true);
+  terminal.resize(70, 8); terminal.resize(140, 40);
+  assert.equal(terminal.scrollback.length, 0);
+  await terminal.press({ name: 'return' }); assert.equal(await consent, true);
+  screen.progress({ type: 'step', step: 'micromamba', status: 'started' });
+  terminal.resize(50, 6); await terminal.advance(); terminal.resize(140, 40);
+  assert.match(terminal.screen.join('\n'), /Installing astronomy/u);
+  screen.progress({ type: 'installed' });
+  const retained = [...terminal.scrollback, ...terminal.screen].join('\n');
+  assert.match(retained, /^previous command\n/u);
+  assert.equal((retained.match(/Installed\./gu) ?? []).length, 1);
+  assert.doesNotMatch(retained, /Installing astronomy|Install them now|waiting/u);
+  assert.equal(terminal.alternateScreen, false); assert.equal(terminal.listening, false);
 });
 
 test('consent dispatch uses injected stderr terminal and gates install progress before work', async () => {

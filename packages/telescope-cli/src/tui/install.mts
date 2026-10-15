@@ -2,7 +2,8 @@ import { statfs } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import type { ToolchainProgress, ToolchainStep } from '@cssearth/telescope-core/node';
 import { header } from './help.mts';
-import { liveBlock } from './live-block.mts';
+import { screenFrame } from './screen.mts';
+import { clipLine } from './style.mts';
 import { bold, breadcrumb, dim, green } from './style.mts';
 import type { Terminal } from './terminal.mts';
 
@@ -64,16 +65,18 @@ export async function installFreeGb(userRoot: string): Promise<string> {
   }
 }
 
-/** Short-lived install blocks stay inline; the raw-key listener belongs to the whole transaction. */
+/** Consent and progress share an alternate buffer; only the outcome remains inline. */
 export function createInstallScreen(terminal: Terminal, controller: AbortController, toolchain = 'astroquery') {
   terminal.write('\r\x1b[K');
-  let state = initialInstallState(), block = liveBlock(terminal), close = () => {}, running = false, stopped = false;
+  let state = initialInstallState(), close = () => {}, running = false, stopped = false;
   let answer: ((accepted: boolean) => void) | undefined;
   const animation = new AbortController();
-  const draw = () => block.draw(renderInstall(state, terminal.columns));
+  const drawLines = (lines: readonly string[]) => terminal.write(screenFrame(lines, terminal.columns, terminal.rows));
+  const draw = () => { const lines = renderInstall(state, terminal.columns); drawLines(lines.length < terminal.rows ? lines : []); };
   const finish = () => {
     if (stopped) return;
-    stopped = true; animation.abort(); block.done(running ? renderInstall(state, terminal.columns) : undefined); close();
+    stopped = true; animation.abort(); close();
+    if (state.installed) terminal.write(renderInstall(state, terminal.columns).map(line => clipLine(line, terminal.columns)).join('\n') + '\n');
   };
   const animate = async () => {
     try {
@@ -92,10 +95,8 @@ export function createInstallScreen(terminal: Terminal, controller: AbortControl
         if (key.name === 'eof' || key.ctrl && key.name === 'c') { controller.abort(); answer?.(false); finish(); }
         else if (!running && key.name === 'return') answer?.(true);
         else if (!running && key.name === 'escape') answer?.(false);
-      }, () => { if (running) draw(); else { consentLines = renderInstallConsent(freeGb, terminal.columns); block.draw(consentLines); } });
-      block.draw(consentLines);
-      // Consent must remain readable in a short window before waiting for a key.
-      if (consentLines.length >= terminal.rows) { block.done(consentLines); block = liveBlock(terminal); }
+      }, () => { if (running) draw(); else { consentLines = renderInstallConsent(freeGb, terminal.columns); drawLines(consentLines.slice(-terminal.rows)); } }, { alternateScreen: true });
+      drawLines(consentLines.slice(-terminal.rows));
       const accepted = yes || await new Promise<boolean>(resolve => { answer = resolve; });
       answer = undefined;
       if (!accepted) { finish(); terminal.write(`${dim(`${NOT_INSTALLED} ${toolchain}`)}\n`); return false; }
