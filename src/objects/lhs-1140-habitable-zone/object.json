@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lhs-1140-habitable-zone",
+  "type": "plane-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/zone.json"
+    },
+    "host": "lhs-1140",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        436852919755623550,
+        86892717843824340,
+        -121649768549792350
+      ],
+      "localToReferenceXyzw": [
+        0.5696692450002278,
+        -0.41843294914445744,
+        -0.5232911398797817,
+        -0.4759802530509655
+      ],
+      "metersPerUnit": 2004378052.0719376,
+      "boundsUnits": {
+        "min": [
+          -10.24,
+          -10.24,
+          -0.1024
+        ],
+        "max": [
+          10.24,
+          10.24,
+          0.1024
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-galaxy-backing@1",
+    "url": "prepared/plane.json"
+  }
+}

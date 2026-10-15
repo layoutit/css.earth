@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "plane.json",
+      "bytes": 1156,
+      "sha256": "47f0e69d328a1096ff990ceb350f1a09ccd4ed1a0061218150ec8b0815a82b79"
+    },
+    {
+      "location": "prepared",
+      "filename": "zone/zone.webp",
+      "bytes": 17486,
+      "sha256": "5809ffcaa35da79f8899758f8b62972740f0639220d9871e467acc63bd9efb9a"
+    }
+  ]
+}

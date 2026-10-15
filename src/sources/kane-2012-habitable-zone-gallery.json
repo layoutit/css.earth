@@ -45,6 +45,26 @@
       "url": "https://hzgallery.org/about.html",
       "checkedOn": "2026-10-10",
       "locator": "Frequently asked questions: the boundaries follow Kopparapu et al. (2013, 2014); the conservative model uses the runaway greenhouse and maximum greenhouse limits, the optimistic model the recent Venus and early Mars limits; stellar and planetary parameters are taken from the NASA Exoplanet Archive."
+    },
+    {
+      "url": "https://hzgallery.org/data/hzgallery.json",
+      "checkedOn": "2026-10-15",
+      "locator": "The 2 rows of LHS 1140 agree: 0.0506, 0.0641, 0.1270 and 0.1340 au, from 3096 K and 0.0038 solar luminosities."
+    },
+    {
+      "url": "https://hzgallery.org/data/hzgallery.json",
+      "checkedOn": "2026-10-15",
+      "locator": "The 2 rows of K2-18 agree: 0.1204, 0.1526, 0.2969 and 0.3132 au, from 3457 K and 0.02166 solar luminosities."
+    },
+    {
+      "url": "https://hzgallery.org/data/hzgallery.json",
+      "checkedOn": "2026-10-15",
+      "locator": "The 5 rows of Kepler-186 disagree; Kepler-186 f's row: 0.1910, 0.2420, 0.4641 and 0.4895 au, from 3755 K and 0.05495 solar luminosities."
+    },
+    {
+      "url": "https://hzgallery.org/data/hzgallery.json",
+      "checkedOn": "2026-10-15",
+      "locator": "The 1 row of Kepler-452 agree: 0.8283, 1.0492, 1.8512 and 1.9526 au, from 5757 K and 1.215 solar luminosities."
     }
   ],
   "creators": [
@@ -58,7 +78,7 @@
     {
       "kind": "credit",
       "text": "This research has made use of the Habitable Zone Gallery at hzgallery.org. Cite Kane & Gelino (2012), PASP 124, 323.",
-      "scope": "The habitable zones of TRAPPIST-1, 55 Cnc and Proxima Centauri",
+      "scope": "The habitable zones of the systems that show one",
       "evidence": "https://hzgallery.org/about.html"
     }
   ]

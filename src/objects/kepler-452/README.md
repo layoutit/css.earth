@@ -15,6 +15,8 @@ Rotation: no spin axis or rotation period is adopted The display axis is celesti
 Color dataset: The color of Gaia DR3's measured spectrum of Kepler-452. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffece1**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic V-band law that Claret & Bloemen (2011, A&A 529, A75) compute from ATLAS model atmospheres, read at 5757 K and log g 4.36: the edge is 28% as bright as the centre. That law is a model, not a measurement of this star. Gravity: log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs. The catalogue swatch, the minimap and the navigation marker use the same color. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colors from these inputs, and `--check` recomputes them. Cross-check: LAMOST DR11 spectrum 247708059 (2014-09-13, relative calibration) gives #fff4eb, 10 levels from the dataset color in its most different channel (the threshold for agreement is 12).
 
 
+**Habitable zone dataset.** A dataset of the whole system: the star with its habitable zone as a green band in the plane of its planet' orbit. The band is its own package, a drawing of four distances the Habitable Zone Gallery calculates; its sources, processing and limits are in [its README](../kepler-452-habitable-zone/README.md). It is a calculation, not an observation.
+
 ## Evidence
 
 Run of 2026-09-21 (this version):

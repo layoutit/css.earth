@@ -1,0 +1,30 @@
+{
+  "provenance": {
+    "name": "Kepler-186's habitable zone",
+    "products": [
+      {
+        "id": "zone",
+        "label": "Habitable Zone Gallery distances (Kane & Gelino 2012), after Kopparapu et al. (2013, 2014)",
+        "process": "Draw the four distances as three flat rings around the star, the conservative zone and the optimistic zone's two extensions of it, on the plane of the planet' orbit as the world draws it.",
+        "recipe": "source/zone.json",
+        "selector": "",
+        "inputs": [
+          "zone-distances"
+        ],
+        "outputs": [
+          "prepared/plane.json",
+          "prepared/zone/zone.webp"
+        ],
+        "interpretation": {
+          "kind": "calculated-zone",
+          "sourceKind": "published-calculation"
+        },
+        "limitations": [
+          "A calculation from the star's temperature and luminosity, not an observation; a planet inside it is not known to be habitable.",
+          "The Gallery's rows for Kepler-186 use two sets of star parameters; the zone is Kepler-186 f's row, whose temperature is the one the star's page shows.",
+          "The orbits' position angle on the sky is not measured, so the plane's turn about the line of sight is the convention the orbits are drawn with."
+        ]
+      }
+    ]
+  }
+}

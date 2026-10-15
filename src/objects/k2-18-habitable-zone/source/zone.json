@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-habitable-zone-source@1",
+  "id": "k2-18-habitable-zone",
+  "host": "k2-18",
+  "edges": {
+    "source": "source/hzgallery/k2-18.json",
+    "system": "K2-18",
+    "fields": {
+      "optimisticInnerAu": "hz_r0_au",
+      "conservativeInnerAu": "hz_r1_au",
+      "conservativeOuterAu": "hz_r2_au",
+      "optimisticOuterAu": "hz_r3_au"
+    }
+  },
+  "plane": {
+    "orbits": [
+      "k2-18b"
+    ]
+  },
+  "picture": {
+    "sizePx": 1024,
+    "outerRadiusPx": 500,
+    "color": "#7bd88f",
+    "conservativeOpacity": 0.16,
+    "optimisticOpacity": 0.075
+  },
+  "centreFadeOuterRadii": [
+    2,
+    1.25
+  ],
+  "meaning": "The habitable zone of K2-18 as the Habitable Zone Gallery calculates it: the conservative zone between the runaway greenhouse and maximum greenhouse limits, and the optimistic zone that extends it to the recent Venus and early Mars limits (Kopparapu et al. 2013, 2014). A drawing of four calculated distances in the plane of the planet' orbit, not an observation."
+}

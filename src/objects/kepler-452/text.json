@@ -32,6 +32,20 @@
       "title": "Photosphere color",
       "detail": "From its spectrum",
       "summary": "The color of Gaia's spectrum of the star. The darker edge is a model, not a measurement."
+    },
+    "habitable-zone": {
+      "title": "Conservative and optimistic zones",
+      "detail": "Calculated, not observed",
+      "summary": "Where a planet with enough air could keep liquid water, as calculated. Darker: conservative limits; lighter: optimistic.",
+      "sources": [
+        {
+          "catalogueId": "kane-2012-habitable-zone-gallery",
+          "url": "https://hzgallery.org/table.html",
+          "label": "Habitable Zone Gallery",
+          "checked": "2026-10-15",
+          "locator": "Rows of Kepler-452: the star's four habitable zone distances in au"
+        }
+      ]
     }
   }
 }

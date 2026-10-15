@@ -667,6 +667,54 @@
       "bytes": 17976
     },
     {
+      "path": "src/objects/k2-18-habitable-zone/object.json",
+      "bytes": 884
+    },
+    {
+      "path": "src/objects/k2-18-habitable-zone/prepared/plane.json",
+      "bytes": 1156
+    },
+    {
+      "path": "src/objects/k2-18-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17486
+    },
+    {
+      "path": "src/objects/kepler-186-habitable-zone/object.json",
+      "bytes": 896
+    },
+    {
+      "path": "src/objects/kepler-186-habitable-zone/prepared/plane.json",
+      "bytes": 1173
+    },
+    {
+      "path": "src/objects/kepler-186-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17660
+    },
+    {
+      "path": "src/objects/kepler-452-habitable-zone/object.json",
+      "bytes": 897
+    },
+    {
+      "path": "src/objects/kepler-452-habitable-zone/prepared/plane.json",
+      "bytes": 1175
+    },
+    {
+      "path": "src/objects/kepler-452-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 18002
+    },
+    {
+      "path": "src/objects/lhs-1140-habitable-zone/object.json",
+      "bytes": 890
+    },
+    {
+      "path": "src/objects/lhs-1140-habitable-zone/prepared/plane.json",
+      "bytes": 1168
+    },
+    {
+      "path": "src/objects/lhs-1140-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17450
+    },
+    {
       "path": "src/objects/milky-way-volume/object.json",
       "bytes": 889
     },
@@ -683,18 +731,6 @@
       "bytes": 183564
     },
     {
-      "path": "src/objects/toi-700-habitable-zone/object.json",
-      "bytes": 886
-    },
-    {
-      "path": "src/objects/toi-700-habitable-zone/prepared/plane.json",
-      "bytes": 1236
-    },
-    {
-      "path": "src/objects/toi-700-habitable-zone/prepared/zone/zone.webp",
-      "bytes": 17284
-    },
-    {
       "path": "src/objects/proxima-centauri-habitable-zone/object.json",
       "bytes": 902
     },
@@ -705,6 +741,18 @@
     {
       "path": "src/objects/proxima-centauri-habitable-zone/prepared/zone/zone.webp",
       "bytes": 17378
+    },
+    {
+      "path": "src/objects/toi-700-habitable-zone/object.json",
+      "bytes": 886
+    },
+    {
+      "path": "src/objects/toi-700-habitable-zone/prepared/plane.json",
+      "bytes": 1236
+    },
+    {
+      "path": "src/objects/toi-700-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17284
     },
     {
       "path": "src/objects/trappist-1-habitable-zone/object.json",
@@ -2225,6 +2273,46 @@
       "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of 55 Cnc",
       "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
     },
+    "k2-18/habitable-zone": {
+      "url2x": "/navigation/focus-k2-18-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/k2-18-habitable-zone/object.json",
+        "src/objects/k2-18-habitable-zone/prepared/plane.json",
+        "src/objects/k2-18-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of K2-18",
+      "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
+    },
+    "kepler-186/habitable-zone": {
+      "url2x": "/navigation/focus-kepler-186-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/kepler-186-habitable-zone/object.json",
+        "src/objects/kepler-186-habitable-zone/prepared/plane.json",
+        "src/objects/kepler-186-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of Kepler-186",
+      "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
+    },
+    "kepler-452/habitable-zone": {
+      "url2x": "/navigation/focus-kepler-452-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/kepler-452-habitable-zone/object.json",
+        "src/objects/kepler-452-habitable-zone/prepared/plane.json",
+        "src/objects/kepler-452-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of Kepler-452",
+      "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
+    },
+    "lhs-1140/habitable-zone": {
+      "url2x": "/navigation/focus-lhs-1140-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/lhs-1140-habitable-zone/object.json",
+        "src/objects/lhs-1140-habitable-zone/prepared/plane.json",
+        "src/objects/lhs-1140-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of LHS 1140",
+      "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
+    },
     "milky-way-volume/volume": {
       "url2x": "/navigation/focus-milky-way-volume-volume@2x.webp",
       "inputs": [
@@ -2247,16 +2335,6 @@
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
     },
-    "toi-700/habitable-zone": {
-      "url2x": "/navigation/focus-toi-700-habitable-zone@2x.webp",
-      "inputs": [
-        "src/objects/toi-700-habitable-zone/object.json",
-        "src/objects/toi-700-habitable-zone/prepared/plane.json",
-        "src/objects/toi-700-habitable-zone/prepared/zone/zone.webp"
-      ],
-      "credit": "Kopparapu et al. (2014), ApJ 787, L29, Table 1, coefficients for 1 Earth mass, used in Equations 1 and 2, from toi-700's 3459 K and log L -1.633",
-      "sourceUrl": ""
-    },
     "proxima-centauri/habitable-zone": {
       "url2x": "/navigation/focus-proxima-centauri-habitable-zone@2x.webp",
       "inputs": [
@@ -2266,6 +2344,16 @@
       ],
       "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of Proxima Cen",
       "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
+    },
+    "toi-700/habitable-zone": {
+      "url2x": "/navigation/focus-toi-700-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/toi-700-habitable-zone/object.json",
+        "src/objects/toi-700-habitable-zone/prepared/plane.json",
+        "src/objects/toi-700-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Kopparapu et al. (2014), ApJ 787, L29, Table 1, coefficients for 1 Earth mass, used in Equations 1 and 2, from toi-700's 3459 K and log L -1.633",
+      "sourceUrl": ""
     },
     "trappist-1/habitable-zone": {
       "url2x": "/navigation/focus-trappist-1-habitable-zone@2x.webp",

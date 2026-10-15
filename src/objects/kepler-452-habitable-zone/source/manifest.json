@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "zone-distances",
+      "path": "src/objects/kepler-452-habitable-zone/source/hzgallery/kepler-452.json",
+      "origin": "https://hzgallery.org/data/hzgallery.json",
+      "sourceUrl": "https://hzgallery.org/table.html",
+      "title": "Habitable Zone Gallery, the rows of Kepler-452's planet",
+      "credit": "S. R. Kane, D. M. Gelino; the Habitable Zone Gallery, hzgallery.org; PASP 124, 323",
+      "acquisition": "Written 2026-10-15 by packages/bake/authoring/system-planes/habitable-zone.mts kepler-452-habitable-zone --fetch: the 1 row whose system is Kepler-452, unchanged, from the Gallery's JSON product (3,938,737 bytes, 5,441 planets, last updated 2026-10-08). The rows give the same four distances, from 5757 K and 1.215 solar luminosities.",
+      "generator": "packages/bake/authoring/system-planes/habitable-zone.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kane-2012-habitable-zone-gallery",
+            "role": "material",
+            "evidence": "https://hzgallery.org/data/hzgallery.json"
+          },
+          {
+            "catalogueId": "kopparapu-2013-habitable-zones",
+            "role": "method",
+            "evidence": "https://hzgallery.org/about.html"
+          },
+          {
+            "catalogueId": "kopparapu-2014-habitable-zones-planetary-mass",
+            "role": "method",
+            "evidence": "https://hzgallery.org/about.html"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "The Gallery states no licence; it asks for its acknowledgement and a citation of Kane & Gelino (2012). 1 row of calculated values is kept."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/kepler-452-habitable-zone/source/zone.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/kepler-452-habitable-zone/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}
