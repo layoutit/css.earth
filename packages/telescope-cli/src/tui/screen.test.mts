@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { PassThrough } from 'node:stream';
 import { EventEmitter } from 'node:events';
-import { bold, breadcrumb, cut, dim, green, inverse, pad, plain, red, visibleWidth, wrap, yellow } from './style.mts';
+import { bold, breadcrumb, clipLine, cut, dim, green, inverse, pad, plain, red, visibleWidth, wrap, yellow } from './style.mts';
 import { liveBlock } from './live-block.mts';
 import { FakeTerminal } from './fake-terminal.mts';
 import { processTerminal } from './terminal.mts';
@@ -81,4 +81,50 @@ test('closing a newly opened stdin stops the resumed stream from keeping the pro
   close();
   assert.equal(input.readableFlowing, false); assert.equal(input.isRaw, false);
   input.destroy(); output.destroy();
+});
+
+test('line clipping counts terminal cells, preserves ANSI, and never splits a grapheme', () => {
+  assert.equal(clipLine(bold('abcdefgh'), 4), '\x1b[1mabc…\x1b[0m');
+  assert.equal(clipLine(dim('fits'), 4), dim('fits'));
+  assert.equal(visibleWidth('界e\u0301🪐'), 5);
+  assert.equal(plain(clipLine(bold('界e\u0301🪐tail'), 4)), '界e\u0301…');
+  assert.equal(plain(clipLine('界界', 2)), '…');
+  assert.equal(clipLine('anything', 0), '');
+  assert.equal(plain(clipLine('ab\ncd\tEF', 5)), 'ab c…');
+});
+
+test('the fake terminal models physical wrapping rather than just recording writes', () => {
+  const terminal = new FakeTerminal(4, 10);
+  terminal.write('abcdefghij\nnext');
+  assert.deepEqual(terminal.screen, ['abcd', 'efgh', 'ij', 'next']);
+  assert.equal(terminal.wraps, 2);
+  terminal.resize(8, 10);
+  assert.deepEqual(terminal.screen, ['abcdefgh', 'ij', 'next']);
+});
+
+test('all live and final lines are clipped centrally so the retained block cannot wrap', () => {
+  const terminal = new FakeTerminal(8, 10), block = liveBlock(terminal);
+  block.draw([bold('abcdefghijk'), 'second line']);
+  assert.deepEqual(terminal.screen, ['abcdefg…', 'second …', '']);
+  block.draw(['short']);
+  assert.equal(terminal.screen.filter(Boolean).join('\n'), 'short');
+  assert.equal(terminal.wraps, 0); block.done();
+  const small = new FakeTerminal(8, 2), final = liveBlock(small);
+  final.draw(['abcdefghijk', 'second line']); final.done(['abcdefghijk', 'second line']);
+  assert.equal(small.wraps, 0);
+  assert.match(small.writes.join(''), /abcdefg…/u);
+});
+
+test('resize rewinds reflowed physical rows, erases from the block start, and preserves preceding output', () => {
+  const terminal = new FakeTerminal(20, 20);
+  terminal.write('prior command\n');
+  const block = liveBlock(terminal);
+  block.draw(['abcdefghijklmnop', 'old panel tail', 'last old row']);
+  terminal.resize(8, 20); block.draw(['new first', 'new last']);
+  assert.equal(terminal.writes.at(-1), '\x1b[6F\x1b[Jnew fir…\x1b[0m\x1b[K\nnew last\x1b[K\n');
+  assert.equal(terminal.screen.join('\n').trimEnd(), 'prior co\nmmand\nnew fir…\nnew last');
+  terminal.resize(20, 20); block.draw(['expanded']);
+  assert.equal(terminal.screen.join('\n').trimEnd(), 'prior command\nexpanded');
+  assert.equal(terminal.wraps, 0); block.done();
+  assert.ok(!terminal.writes.join('').includes('\x1b[2J'));
 });

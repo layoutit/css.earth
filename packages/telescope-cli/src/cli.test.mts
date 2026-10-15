@@ -8,6 +8,7 @@ import{mkdtemp,mkdir,rm,writeFile,readFile,readdir,realpath}from'node:fs/promise
 import { formatArtifact, formatExploration, formatSession, outputCommand, displayPath, shellWord, type ArtifactInspection } from './cli-format.mts';
 import { savedDownload } from './cli-consent.mts';
 import { main, type CliIo, type CliServices } from './cli.mts';
+import { VERSION } from './version.mts';
 import { parseCli } from './cli-arguments.mts';
 import { saveExploration, type ExplorationSession, type Session } from './session.mts';
 import { explorationSummary } from './cli-summary.mts';
@@ -41,7 +42,7 @@ await writeFile(resolve(testCwd,'run/explore.json'),'{}');
 
 function mockIo(stdinIsTTY:boolean,stdoutIsTTY:boolean,answers:readonly (string|undefined)[]=[]){
   const stdout:string[]=[],stderr:string[]=[],prompts:string[]=[];let at=0,closed=false;
-  const io:CliIo={stdinIsTTY,stdoutIsTTY,write:text=>stdout.push(text),error:text=>stderr.push(text),question:async prompt=>{prompts.push(prompt);return answers[at++];},close:()=>{closed=true;}};
+  const io:CliIo={stdinIsTTY,stdoutIsTTY,stderrIsTTY:stdoutIsTTY,write:text=>stdout.push(text),error:text=>stderr.push(text),question:async prompt=>{prompts.push(prompt);return answers[at++];},close:()=>{closed=true;}};
   return {io,stdout,stderr,prompts,closed:()=>closed};
 }
 function mockServices(directory:string,inspected:ArtifactInspection=inspection){
@@ -75,7 +76,7 @@ test('default help is concise; help all keeps the full command reference',async(
   assert.match(full.stdout.join(''),/--max-science-bytes/u);
   const version=mockIo(false,false);
   assert.equal(await main(['--version'],'/workspace',text=>version.io.write(text),version.io,mockServices('/tmp').services),0);
-  assert.equal(version.stdout.join(''),'0.2.0\n');
+  assert.equal(version.stdout.join(''),`${VERSION}\n`);
 });
 
 test('packaged entrypoint recognizes the current science workspace script',()=>{

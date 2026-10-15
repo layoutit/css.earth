@@ -11,6 +11,7 @@ import { WORDMARK } from '../banner.mts';
 import { VERSION } from '../version.mts';
 import { SHORT_HELP, helpText } from '../help.mts';
 import { writeHelp } from '../help-output.mts';
+import { guided } from '../cli.mts';
 import type { CliIo } from '../cli-io.mts';
 
 test('the committed globe has 60 fixed ten-row frames and preserves approved frame zero', () => {
@@ -96,12 +97,12 @@ test('resize redraws the current frame and stops animation when the header no lo
 });
 
 test('the common help dispatcher draws only for interactive input and output without JSON', async () => {
-  for (const [stdinIsTTY, stdoutIsTTY, json] of [[false, true, false], [true, false, false], [true, true, true], [true, true, false]] as const) {
+  for (const [stdinIsTTY, stdoutIsTTY, stderrIsTTY, json] of [[false, true, true, false], [true, false, true, false], [true, true, false, false], [true, true, true, true], [true, true, true, false]] as const) {
     const terminal = new FakeTerminal(), output: string[] = [];
-    const io: CliIo = { stdinIsTTY, stdoutIsTTY, terminal, write: text => output.push(text), error: () => assert.fail('error'),
+    const io: CliIo = { stdinIsTTY, stdoutIsTTY, stderrIsTTY, terminal, write: text => output.push(text), error: () => assert.fail('error'),
       question: async () => assert.fail('prompt'), close: () => {} };
     assert.equal(await writeHelp('', io, json), 0);
-    if (stdinIsTTY && stdoutIsTTY && !json) { assert.deepEqual(output, []); assert.ok(terminal.writes.length > 60); }
+    if (stdinIsTTY && stdoutIsTTY && stderrIsTTY && !json) { assert.deepEqual(output, []); assert.ok(terminal.writes.length > 60); }
     else { assert.equal(output.join(''), SHORT_HELP); assert.deepEqual(terminal.writes, []); }
     output.length = 0; terminal.writes.length = 0;
     assert.equal(await writeHelp('explore', io, json), 0);
@@ -112,7 +113,7 @@ test('the common help dispatcher draws only for interactive input and output wit
 test('the worker TTY help keeps screen bytes off its IPC stdout', async () => {
   const child = fork(new URL('../cli.mts', import.meta.url), ['help'], {
     stdio: ['pipe', 'pipe', 'pipe', 'ipc'], timeout: 20_000,
-    env: { ...process.env, CSSEARTH_TELESCOPE_STDIN_TTY: '1', CSSEARTH_TELESCOPE_STDOUT_TTY: '1' },
+    env: { ...process.env, CSSEARTH_TELESCOPE_STDIN_TTY: '1', CSSEARTH_TELESCOPE_STDOUT_TTY: '1', CSSEARTH_TELESCOPE_STDERR_TTY: '1' },
   });
   let stdout = '', stderr = '';
   const messages: unknown[] = [];
@@ -124,4 +125,29 @@ test('the worker TTY help keeps screen bytes off its IPC stdout', async () => {
   assert.equal(code, 0, stderr);
   assert.equal(stdout, ''); assert.deepEqual(messages, []);
   assert.match(stderr, /Find observations and pick one/u); assert.match(stderr, /\x1b\[\?25h/u);
+});
+
+test('redirected worker stderr gets plain help over IPC even when stdin and stdout are TTYs', async () => {
+  const child = fork(new URL('../cli.mts', import.meta.url), ['help'], {
+    stdio: ['pipe', 'pipe', 'pipe', 'ipc'], timeout: 20_000,
+    env: { ...process.env, NODE_NO_WARNINGS: '1', CSSEARTH_TELESCOPE_STDIN_TTY: '1', CSSEARTH_TELESCOPE_STDOUT_TTY: '1', CSSEARTH_TELESCOPE_STDERR_TTY: '0' },
+  });
+  let stdout = '', stderr = '';
+  const messages: unknown[] = [];
+  child.stdout?.setEncoding('utf8').on('data', text => { stdout += text; });
+  child.stderr?.setEncoding('utf8').on('data', text => { stderr += text; });
+  child.on('message', message => messages.push(message)); child.stdin?.end();
+  const [code] = await once(child, 'close');
+  assert.equal(code, 0, stderr); assert.equal(stdout, ''); assert.equal(stderr, '');
+  assert.deepEqual(messages, [{ text: SHORT_HELP }]);
+});
+
+test('guided dispatch requires stdin, stdout and the stderr drawing surface to be terminals', () => {
+  const tty = { stdinIsTTY: true, stdoutIsTTY: true, stderrIsTTY: true };
+  assert.equal(guided({ json: false }, tty), true);
+  for (const io of [{ ...tty, stdinIsTTY: false }, { ...tty, stdoutIsTTY: false },
+    { ...tty, stderrIsTTY: false }, { stdinIsTTY: true, stdoutIsTTY: true }]) {
+    assert.equal(guided({ json: false }, io), false);
+  }
+  assert.equal(guided({ json: true }, tty), false);
 });

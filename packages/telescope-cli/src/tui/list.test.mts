@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { FakeTerminal } from './fake-terminal.mts';
-import { listScreen, renderList, writeList, type ListSpec } from './list.mts';
+import { listScreen, renderList, writeList, LIST_MINIMUM_ROWS, type ListSpec } from './list.mts';
 import { bold, dim, plain } from './style.mts';
 import type { CliIo } from '../cli-io.mts';
 
@@ -60,12 +60,58 @@ test('a failed Enter action restores the terminal and propagates its error', asy
 });
 
 test('list fallback never acquires a terminal for pipes, non-TTY input or JSON', async () => {
-  for (const [stdinIsTTY, stdoutIsTTY, json] of [[false, true, false], [true, false, false], [true, true, true]]) {
+  for (const [stdinIsTTY, stdoutIsTTY, stderrIsTTY, json] of [[false, true, true, false], [true, false, true, false], [true, true, false, false], [true, true, true, true]] as const) {
     const terminal = new FakeTerminal(), output: string[] = [];
-    const io: CliIo = { stdinIsTTY: stdinIsTTY!, stdoutIsTTY: stdoutIsTTY!, terminal, write: text => output.push(text),
+    const io: CliIo = { stdinIsTTY: stdinIsTTY!, stdoutIsTTY: stdoutIsTTY!, stderrIsTTY, terminal, write: text => output.push(text),
       error: () => assert.fail('stderr'), question: async () => assert.fail('prompt'), close: () => {} };
     assert.equal(await writeList(fixture(), io, json!), 0);
     assert.equal(output.join(''), ['Papers', ...rows].join('\n') + '\n');
     assert.deepEqual(terminal.writes, []);
   }
+});
+
+test('short lists are visible before a keypress and their panel and paging fit the window', async () => {
+  for (const columns of [63, 120]) for (const height of [9, 10, 12, 19, 20]) {
+    const terminal = new FakeTerminal(columns, height);
+    const running = listScreen(fixture(), terminal);
+    assert.match(terminal.screen.join('\n'), / > item 01/u);
+    assert.ok(renderList(fixture(), { query: '', active: 0, opened: new Map() }, columns, height).length < height);
+    const page = Math.min(12, height - 8);
+    await terminal.press({ name: 'pagedown' });
+    assert.match(terminal.screen.join('\n'), new RegExp(` > item ${String(page + 1).padStart(2, '0')}`, 'u'));
+    assert.equal(terminal.wraps, 0);
+    await terminal.press({ name: 'escape' }); assert.equal(await running, 0);
+  }
+});
+
+test('unusable heights show a static message, ignore actions, and recover on resize', async () => {
+  for (const height of [1, 2, 5, LIST_MINIMUM_ROWS - 1]) {
+    const terminal = new FakeTerminal(80, height), opened: string[] = [];
+    const running = listScreen(fixture(row => { opened.push(row); return 'opened'; }), terminal);
+    assert.equal(terminal.screen[0], `make the window taller: needs ${LIST_MINIMUM_ROWS} rows`);
+    await terminal.press({ name: 'return' }, { name: 'down' }, { text: 'missing' });
+    assert.deepEqual(opened, []);
+    terminal.resize(120, 40);
+    assert.match(terminal.screen.join('\n'), / > item 01/u);
+    assert.match(terminal.screen.join('\n'), /DETAIL/u);
+    assert.doesNotMatch(terminal.screen.join('\n'), /make the window taller/u);
+    terminal.resize(80, 5);
+    assert.equal(terminal.screen.filter(Boolean).join('\n'), `make the window taller: needs ${LIST_MINIMUM_ROWS} rows`);
+    terminal.resize(63, 10);
+    assert.match(terminal.screen.join('\n'), / > item 01/u);
+    assert.doesNotMatch(terminal.screen.join('\n'), /DETAIL|make the window taller/u);
+    await terminal.press({ name: 'c', ctrl: true }); assert.equal(await running, 130);
+  }
+});
+
+test('interactive list dispatch draws on the injected stderr surface and writes no stdout', async () => {
+  const terminal = new FakeTerminal(), output: string[] = [];
+  const running = writeList(fixture(), {
+    stdinIsTTY: true, stdoutIsTTY: true, stderrIsTTY: true, terminal,
+    write: text => output.push(text), error: () => assert.fail('stderr'),
+    question: async () => assert.fail('prompt'), close: () => {},
+  }, false);
+  assert.match(terminal.screen.join('\n'), / > item 01/u);
+  await terminal.press({ name: 'escape' }); assert.equal(await running, 0);
+  assert.deepEqual(output, []);
 });

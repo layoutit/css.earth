@@ -2,7 +2,8 @@ import { cliWorkspaceArguments } from './cli-workspace.mts';
 import { existsSync, readdirSync } from 'node:fs';
 import { delimiter, dirname, resolve } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
-import { helpCommand, VERSION } from './help.mts';
+import { helpCommand } from './help.mts';
+import { VERSION } from './version.mts';
 import { writeHelp } from './help-output.mts';
 import { CLI_PACKAGE_ROOT } from './paths.mts';
 
@@ -26,7 +27,7 @@ try {
   const { args, workspace: root } = cliWorkspaceArguments(process.argv.slice(2));
   const help = helpCommand(args);
   if (help !== undefined) process.exitCode = await writeHelp(help, {
-    stdinIsTTY: process.stdin.isTTY === true, stdoutIsTTY: process.stdout.isTTY === true,
+    stdinIsTTY: process.stdin.isTTY === true, stdoutIsTTY: process.stdout.isTTY === true, stderrIsTTY: process.stderr.isTTY === true,
     write: text => { process.stdout.write(text); }, error: text => { process.stderr.write(text); },
     question: async () => undefined, close: () => {},
   }, args.includes('--json'));
@@ -38,6 +39,7 @@ try {
       ...process.env, ...(root ? { CSSEARTH_WORKSPACE: root } : {}), ...(node === process.execPath ? {} : { PATH: `${dirname(node)}${delimiter}${process.env.PATH ?? ''}` }),
       CSSEARTH_TELESCOPE_STDIN_TTY: process.stdin.isTTY ? '1' : '0',
       CSSEARTH_TELESCOPE_STDOUT_TTY: process.stdout.isTTY ? '1' : '0',
+      CSSEARTH_TELESCOPE_STDERR_TTY: process.stderr.isTTY ? '1' : '0',
     } });
     const forward = (signal: NodeJS.Signals) => child.kill(signal);
     process.on('SIGINT', forward); process.on('SIGTERM', forward);

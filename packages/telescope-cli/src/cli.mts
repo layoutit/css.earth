@@ -22,7 +22,8 @@ import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
 import { interruptedDownload } from './cli-errors.mts';
 import { explorationSummary, lookupJson, outputSummary, saveStdoutRecord, saveInspection } from './cli-summary.mts';
-import { HELP, SHORT_HELP, VERSION } from './help.mts';
+import { HELP, SHORT_HELP } from './help.mts';
+import { VERSION } from './version.mts';
 import { writeHelp } from './help-output.mts';
 import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
@@ -88,12 +89,12 @@ function processIo(output:(text:string)=>void):CliIo {
       process.on('message',acknowledged);process.once('disconnect',disconnected);process.send!({flush:id});
     });
   };
-  return {stdinIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY),stdoutIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY),stderrIsTTY:process.stderr.isTTY===true,write:output,error:text=>process.stderr.write(text),flush,
+  return {stdinIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY),stdoutIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY),stderrIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDERR_TTY',process.stderr.isTTY),write:output,error:text=>process.stderr.write(text),flush,
     question:async prompt=>{terminal??=createInterface({input:process.stdin,output:process.stderr,terminal:true});try{return await terminal.question(prompt);}catch{return undefined;}},close:()=>terminal?.close()};
 }
-export const guided = (options:{readonly json:boolean},io:Pick<CliIo,'stdinIsTTY'|'stdoutIsTTY'>):boolean => !options.json&&io.stdinIsTTY&&io.stdoutIsTTY;
-function startProgress(io:CliIo,initial:string){
-  const terminal=io.stderrIsTTY===true,started=Date.now(),frames=['|','/','-','\\'];
+export const guided = (options:{readonly json:boolean},io:Pick<CliIo,'stdinIsTTY'|'stdoutIsTTY'|'stderrIsTTY'>):boolean => !options.json&&io.stdinIsTTY&&io.stdoutIsTTY&&io.stderrIsTTY===true;
+function startProgress(io:CliIo,initial:string,json:boolean){
+  const terminal=guided({json},io),started=Date.now(),frames=['|','/','-','\\'];
   let stage=initial,frame=0,width=0,stopped=false;
   const draw=()=>{
     const elapsed=Math.floor((Date.now()-started)/1000),line=`${frames[frame++%frames.length]} ${stage} (${elapsed}s)`;
@@ -337,7 +338,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
       }else if(options.command==='explore'){
         // --fresh: every archive is asked again; without it an answer saved in the last day stands (archives/memory.mts).
         if(options.fresh)process.env[FRESH_VARIABLE]='1';
-        const progress=startProgress(io,'Resolving target');
+        const progress=startProgress(io,'Resolving target',options.json);
         let session:ExplorationSession&{readonly directory:string};
         try{session=await api.saveExploration(root,options.requestArgs,options.directory,undefined,progress.update);if(consent.cancelled)throw new DownloadCancelledError();progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
@@ -360,7 +361,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
         const result=await api.exportOutput(options.result,options.selection,options.directory);
         text=options.json?await lookupJson('export',result,{savedPath:result.receipt}):`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
       }else if (options.command === 'query') {
-        const progress=startProgress(io,'Reading local evidence');
+        const progress=startProgress(io,'Reading local evidence',options.json);
         let session:Session;
         try{session=await saveSession(root, options.requestArgs, options.directory, undefined, progress.update);if(consent.cancelled)throw new DownloadCancelledError();progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
@@ -408,8 +409,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // Give reducers and every inherited Python/native subprocess stderr at the descriptor level.
     // The single final response crosses IPC, so stdout remains parseable even for noisy tools.
     const worker = fork(fileURLToPath(import.meta.url), process.argv.slice(2), { stdio: ['inherit', 2, 2, 'ipc'],env:{...process.env,
-      CSSEARTH_TELESCOPE_STDIN_TTY:process.stdin.isTTY?'1':'0',
-      CSSEARTH_TELESCOPE_STDOUT_TTY:process.stdout.isTTY?'1':'0'} });
+      CSSEARTH_TELESCOPE_STDIN_TTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY)?'1':'0',
+      CSSEARTH_TELESCOPE_STDOUT_TTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY)?'1':'0',
+      CSSEARTH_TELESCOPE_STDERR_TTY:inheritedTty('CSSEARTH_TELESCOPE_STDERR_TTY',process.stderr.isTTY)?'1':'0'} });
     let pendingOutput:Promise<void>=Promise.resolve();
     worker.on('message', (message: unknown) => {
       if (message && typeof message === 'object' && 'text' in message && typeof message.text === 'string') {

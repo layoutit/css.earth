@@ -1,5 +1,5 @@
 import { renderHelp, HELP_FINE_PRINT } from './tui/help.mts';
-export const VERSION = '0.2.0';
+export { VERSION } from './version.mts';
 
 const coreHelp = [
   ['explore TARGET', 'Find observations and choose one'],

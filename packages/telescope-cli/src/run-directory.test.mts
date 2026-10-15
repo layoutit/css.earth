@@ -148,7 +148,7 @@ for (const catchesCancellation of [false, true]) test(`implicit setup refusal pu
   const work = await mkdtemp(resolve(tmpdir(), 'explore-refusal-')), before = process.cwd();
   const stdout: string[] = [], stderr: string[] = [];
   let prompts = 0;
-  const io: CliIo = { stdinIsTTY: true, stdoutIsTTY: true, write: text => stdout.push(text), error: text => stderr.push(text),
+  const io: CliIo = { stdinIsTTY: true, stdoutIsTTY: true, stderrIsTTY: true, write: text => stdout.push(text), error: text => stderr.push(text),
     question: async prompt => { assert.equal(prompt, 'Continue? [Y/n] '); prompts++; return 'n'; }, close: () => {} };
   const api: SessionServices = { load: async () => { throw new Error('unused'); }, qualify: async () => { throw new Error('unused'); },
     explore: async (root, request) => {

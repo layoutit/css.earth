@@ -20,16 +20,22 @@ export interface ListState<Row> {
   readonly active: number;
   readonly opened: ReadonlyMap<Row, string>;
 }
-const page = 12, panelWidth = 44, panelHeight = 14, gap = '    ';
-function selection<Row>(spec: ListSpec<Row>, state: ListState<Row>) {
+const maximumPage = 12, panelWidth = 44, maximumPanelHeight = 14, gap = '    ';
+// Six chrome rows, a column heading, one item, and the cursor row below the block.
+export const LIST_MINIMUM_ROWS = 9;
+const pageSize = (rows: number) => Math.max(1, Math.min(maximumPage, rows - 8));
+function selection<Row>(spec: ListSpec<Row>, state: ListState<Row>, page: number) {
   const terms = state.query.trim().toLowerCase().split(/\s+/u);
   const shown = spec.rows.filter(row => terms.every(term => spec.text(row).toLowerCase().includes(term)));
   const active = Math.max(0, Math.min(state.active, shown.length - 1));
   const start = Math.max(0, Math.min(active - Math.floor(page / 2), shown.length - page));
   return { shown, active, start, current: shown[active], rows: shown.slice(start, start + page) };
 }
-export function renderList<Row>(spec: ListSpec<Row>, state: ListState<Row>, columns: number): string[] {
-  const { shown, start, current, rows } = selection(spec, state);
+export function renderList<Row>(spec: ListSpec<Row>, state: ListState<Row>, columns: number, height = 24): string[] {
+  if (height < LIST_MINIMUM_ROWS) return [`make the window taller: needs ${LIST_MINIMUM_ROWS} rows`];
+  const page = pageSize(height);
+  const { shown, start, current, rows } = selection(spec, state, page);
+  const panelHeight = Math.min(maximumPanelHeight, height - 7);
   const tableWidth = 2 + spec.columns.reduce((sum, column) => sum + column.width + 2, 0);
   const wide = columns >= tableWidth + gap.length + panelWidth;
   const cells = (row: Row) => spec.columns.map(column => cut(column.get(row), column.width)).join('  ');
@@ -54,14 +60,16 @@ export async function listScreen<Row>(spec: ListSpec<Row>, terminal: Terminal): 
   const opened = new Map<Row, string>();
   let state: ListState<Row> = { query: '', active: 0, opened };
   const block = liveBlock(terminal);
-  const draw = () => block.draw(renderList(spec, state, terminal.columns));
+  const draw = () => block.draw(renderList(spec, state, terminal.columns, terminal.rows));
   let close = () => {};
   try {
     return await new Promise<number>((resolve, reject) => {
       let stopped = false, pending = Promise.resolve();
       const keypress = async (key: ScreenKey) => {
         if (stopped) return;
-        const { shown, active, current } = selection(spec, state);
+        if (terminal.rows < LIST_MINIMUM_ROWS) return;
+        const page = pageSize(terminal.rows);
+        const { shown, active, current } = selection(spec, state, page);
         if (key.name === 'return' && current !== undefined) opened.set(current, await spec.enter.run(current));
         else if (key.name === 'up') state = { ...state, active: Math.max(0, active - 1) };
         else if (key.name === 'down') state = { ...state, active: Math.min(shown.length - 1, active + 1) };
@@ -80,13 +88,13 @@ export async function listScreen<Row>(spec: ListSpec<Row>, terminal: Terminal): 
       draw();
     });
   } finally {
-    close(); block.done(renderList(spec, state, terminal.columns));
+    close(); block.done(renderList(spec, state, terminal.columns, terminal.rows));
     if (spec.footer) terminal.write(`${dim(spec.footer)}\n`);
   }
 }
 
 export async function writeList<Row>(spec: ListSpec<Row>, io: CliIo, json: boolean): Promise<number> {
-  if (io.stdinIsTTY && io.stdoutIsTTY && !json) return listScreen(spec, io.terminal ?? processTerminal());
+  if (io.stdinIsTTY && io.stdoutIsTTY && io.stderrIsTTY === true && !json) return listScreen(spec, io.terminal ?? processTerminal());
   io.write([plain(spec.title), ...spec.rows.map(spec.plain)].join('\n') + '\n');
   return 0;
 }

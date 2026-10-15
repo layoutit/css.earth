@@ -4,6 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 import { BANNER } from './banner.mts';
 import { HELP_COMMANDS, SHORT_HELP, helpCommand, helpText } from './help.mts';
+import { VERSION } from './version.mts';
 import { renderHelp } from './tui/help.mts';
 
 const published = readFileSync(new URL('./fixtures/help-reference.txt', import.meta.url), 'utf8');
@@ -151,4 +152,24 @@ test('outputs documentation promises the persisted inspection and existing-run s
     assert.match(plain,/--out.*existing subfolder inside that run/u);
     assert.doesNotMatch(plain,/outputs prints complete JSON without saving|outputs.*without --out save under/u);
   }
+});
+
+test('binary help stays plain when its stderr drawing surface is redirected', () => {
+  const entry = new URL('./bin.mts', import.meta.url);
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', `
+    Object.defineProperty(process.stdin, 'isTTY', { value: true });
+    Object.defineProperty(process.stdout, 'isTTY', { value: true });
+    Object.defineProperty(process.stderr, 'isTTY', { value: false });
+    process.argv = [process.execPath, ${JSON.stringify(entry.pathname)}, '--help'];
+    await import(${JSON.stringify(entry.href)});
+  `], { encoding: 'utf8', timeout: 30_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(result.stdout, SHORT_HELP); assert.equal(result.stderr, '');
+});
+
+test('the binary version uses the same package metadata as the screens and worker', () => {
+  const result = spawnSync(process.execPath, [new URL('./bin.mts', import.meta.url).pathname, '--version'],
+    { encoding: 'utf8', timeout: 30_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(result.stdout, `${VERSION}\n`); assert.equal(result.stderr, '');
 });

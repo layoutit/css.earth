@@ -5,7 +5,7 @@ import { processTerminal } from './tui/terminal.mts';
 
 /** Both the early binary help and worker help use the same terminal screen. */
 export async function writeHelp(topic: string | undefined, io: CliIo, json: boolean): Promise<number> {
-  if ((!topic || topic === 'help') && io.stdinIsTTY && io.stdoutIsTTY && !json) {
+  if ((!topic || topic === 'help') && io.stdinIsTTY && io.stdoutIsTTY && io.stderrIsTTY === true && !json) {
     return helpScreen(io.terminal ?? processTerminal());
   }
   io.write(helpText(topic));
