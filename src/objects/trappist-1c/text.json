@@ -36,6 +36,11 @@
     ]
   },
   "datasets": {
+    "phase-curve": {
+      "title": "JWST phase curve",
+      "detail": "Published fit, 2025",
+      "summary": "Heat at 15 µm from the paper's phase-curve fit. It varies only with longitude: the data hold no north-south detail."
+    },
     "temperature": {
       "title": "Bare rock from JWST depth",
       "detail": "From our eclipse depth",

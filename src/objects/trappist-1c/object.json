@@ -30,6 +30,11 @@
           "projection": "equirectangular",
           "datasets": [
             {
+              "id": "phase-curve",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "temperature",
               "source": "content",
               "material": "lighting"
