@@ -13,13 +13,20 @@ const text = rows.join('\n');
 
 test('the climate simulation is never advertised as observed imagery', async () => {
   const read = async (path: string) => requireRecord(JSON.parse(await readFile(new URL(`../../../src/objects/wasp-103b/${path}`, import.meta.url), 'utf8')));
-  const descriptor = await read('object.json'), content = await read('source/content/object.json');
-  const discovery = deriveObjectDiscovery(requireRecord(descriptor.properties).catalog, content, [await read('source/preparation/raster.json')]);
+  const descriptor = await read('object.json'), content = await read('source/content/object.json'), raster = await read('source/preparation/raster.json');
+  const catalog = requireRecord(descriptor.properties).catalog;
+  // The page also holds measured maps fitted to Hubble and Spitzer phase curves; the simulation's slices alone stay a model.
+  const simulated = (id: unknown) => typeof id === 'string' && id.startsWith('temperature-p');
+  const datasets = requireRecord(content.datasets), controls = (datasets.controls as { id: unknown }[]).filter(control => simulated(control.id));
+  const surfaces = (raster.surfaces as { id: unknown }[]).filter(surface => simulated(surface.id));
+  const discovery = deriveObjectDiscovery(catalog, { ...content, datasets: { ...datasets, defaultDataset: 'temperature-p3', controls } }, [{ ...raster, surfaces }]);
   assert.equal(discovery.imagery, false);
   assert.equal(discovery.illustration, true);
   assert.equal(discovery.simulation, true);
   assert.equal(discoveryDescription(parseObjectDiscovery(discovery)), 'Simulation');
   assert.throws(() => parseObjectDiscovery({ ...discovery, illustration: false }), /qualified model/);
+  // With the measured maps the page is discovered as imagery, as the other planets with a published phase-curve map are.
+  assert.equal(deriveObjectDiscovery(catalog, content, [raster]).imagery, true);
 });
 
 test('numeric slices keep native values, interpolate in geographic coordinates and wrap only longitude', () => {
