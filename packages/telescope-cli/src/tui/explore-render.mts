@@ -1,5 +1,6 @@
 import { basename } from 'node:path';
-import type { ExploreChoice, SavedExploration } from './explore.mts';
+import type { ExplorationChoice, ExplorationRequest, ExplorationOutcome } from '../exploration.mts';
+import type { ExplorationSession } from '../session.mts';
 import type { PreviewState } from '../previews/index.mts';
 import { PREVIEW_ROWS, renderPreview } from '../previews/index.mts';
 import type { ProviderProgress } from '../vo/bridge.mts';
@@ -11,6 +12,19 @@ import { wavelengthText } from '../cli-table.mts';
 import { oneLine } from '../cli-summary.mts';
 import { LIST_MINIMUM_ROWS, listPageSize } from './list.mts';
 import { bold, breadcrumb, clipLine, cut, dim, green, inverse, pad, red, yellow } from './style.mts';
+
+export type ExploreChoice = Pick<ExplorationChoice, 'pick' | 'telescope' | 'archiveService' | 'observation' | 'reference' | 'display'>;
+/** Saved screens read display and preview facts; get revalidates the original record before retrieval. */
+export type SavedExploration = Pick<ExplorationSession, 'schema' | 'createdAt' | 'arguments' | 'target'> & {
+  readonly directory: string;
+  readonly choices: readonly ExploreChoice[];
+  readonly answer: {
+    readonly request: ExplorationRequest;
+    readonly targetResolution: { readonly status: string; readonly canonical?: { readonly name: string } };
+    readonly outcome: ExplorationOutcome;
+    readonly services: readonly { readonly service: string; readonly state: string; readonly reason: string }[];
+  };
+};
 
 export const EXPLORE_PAGE = 12, TABLE_COLUMNS = 78, PANEL_COLUMNS = 40;
 export const PREVIEW_MINIMUM_COLUMNS = TABLE_COLUMNS + 4 + PANEL_COLUMNS;

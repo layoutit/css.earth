@@ -1,28 +1,15 @@
 import { basename } from 'node:path';
 import type { TargetCatalogueEntry } from '@cssearth/telescope-core';
 import { resolveTarget } from '@cssearth/telescope-core';
-import type { ExplorationChoice, ExplorationRequest, ExplorationOutcome } from '../exploration.mts';
-import type { ExplorationSession } from '../session.mts';
 import type { ProviderProgress, ProviderReporter } from '../vo/bridge.mts';
 import type { DownloadProgress } from '@cssearth/telescope-core/node';
 import type { PreviewState } from '../previews/index.mts';
 import { screenFrame } from './screen.mts';
 import { listPageSize } from './list.mts';
-import { PREVIEW_MINIMUM_COLUMNS, exploreSelection, renderExplore, type ExploreState, type MakeChoice, type MadeFile, type PickStatus } from './explore-render.mts';
+import { PREVIEW_MINIMUM_COLUMNS, exploreSelection, renderExplore, type ExploreChoice, type ExploreState, type MakeChoice, type MadeFile, type PickStatus, type SavedExploration } from './explore-render.mts';
 import type { ScreenKey, Terminal } from './terminal.mts';
 
-export type ExploreChoice = Pick<ExplorationChoice, 'pick' | 'telescope' | 'archiveService' | 'observation' | 'reference' | 'display'>;
-/** Saved screens read display and preview facts; get revalidates the original record before retrieval. */
-export type SavedExploration = Pick<ExplorationSession, 'schema' | 'createdAt' | 'arguments' | 'target'> & {
-  readonly directory: string;
-  readonly choices: readonly ExploreChoice[];
-  readonly answer: {
-    readonly request: ExplorationRequest;
-    readonly targetResolution: { readonly status: string; readonly canonical?: { readonly name: string } };
-    readonly outcome: ExplorationOutcome;
-    readonly services: readonly { readonly service: string; readonly state: string; readonly reason: string }[];
-  };
-};
+export type { ExploreChoice, SavedExploration } from './explore-render.mts';
 export interface ExploreOutput extends MakeChoice { readonly file?: string; readonly run: (parameters: ReadonlyMap<string, string>) => Promise<string> }
 export interface ExploreServices {
   readonly catalogue: () => Promise<readonly TargetCatalogueEntry[]>;

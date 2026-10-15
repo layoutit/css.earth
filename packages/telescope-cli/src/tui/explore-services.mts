@@ -2,7 +2,7 @@ import { readdir, stat, statfs } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireRecord } from '@cssearth/core';
 import { withDownloadProgress, withTransferConsent } from '@cssearth/telescope-core/node';
-import type { CliServices } from '../cli.mts';
+import type { CliServices } from '../cli-services.mts';
 import type { CliIo } from '../cli-io.mts';
 import { consentHandler, type ConsentState } from '../cli-consent.mts';
 import { parseCli } from '../cli-arguments.mts';

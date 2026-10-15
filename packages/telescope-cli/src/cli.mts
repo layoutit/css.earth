@@ -64,25 +64,8 @@ export { HELP, SHORT_HELP };
 
 export type { CliIo } from './cli-io.mts';
 import type { CliIo } from './cli-io.mts';
-export interface RetrievedResult {
-  readonly resultPath:string;readonly product:string;readonly reused:boolean;
-  readonly context?:DeliveryContext;readonly satisfaction?:RequestSatisfaction;
-}
-export interface CliServices {
-  readonly exploration?: ExploreServices;
-  readonly getDownloadPlan?:(directory:string,pick:number)=>Promise<DownloadInfo>;
-  readonly importLocalArtifact:typeof importLocalArtifact;
-  readonly familyCoverageLedger:typeof familyCoverageLedger;
-  readonly saveExploration:typeof saveExploration;
-  readonly getSession:(root:string,directory:string,pick:number,progress:(text:string)=>void,api?:undefined,options?:{readonly offline?:boolean;readonly out?:string})=>Promise<RetrievedResult>;
-  readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
-  readonly exportHtml?:typeof exportHtml;
-  readonly exportOutput:typeof exportOutput;
-  readonly projectOutput:typeof projectOutput;
-  readonly exportSphere:(recordPath:string,outputDirectory:string)=>ReturnType<typeof exportSphere>;
-  readonly exportSpatialObject:typeof exportSpatialObject;
-  readonly executeFamilyOperation:typeof executeFamilyOperation;
-}
+import type { CliServices } from './cli-services.mts';
+export type { CliServices, RetrievedResult } from './cli-services.mts';
 const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportHtml,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation,getDownloadPlan:savedDownload};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
