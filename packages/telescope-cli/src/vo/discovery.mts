@@ -296,6 +296,14 @@ export async function discover(root: string, profile: ServiceProfile, request: D
   await writeFile(resolve(directory, `${responseName(snapshot.response.raw.path)}.discovery.json`), canonical(snapshot));
   return snapshot;
 }
+/** Rebuilds the snapshot of one saved VO response file, so a screen can plan access for a row it already holds. */
+export async function savedResponseSnapshot(file: string, profile: ServiceProfile, request: DiscoveryRequest, metadataBytes: number): Promise<DiscoverySnapshot | undefined> {
+  const response = (await astroquery({ operation: 'vo-parse', file, url: profile.service, byteLimit: metadataBytes,
+    timeFormat: 'mjd', timeScale: profile.timeScale ?? 'utc' })).vo;
+  if (!response) return undefined;
+  return parseSnapshot({ schema: VO_DISCOVERY_SCHEMA, service: profile.service, table: profile.table, model: profile.model,
+    request: jsonValue(request), query: '', scope: 'saved observation', sampleLimit: response.rows.length, response, completeness: 'bounded-sample' });
+}
 /** A saved file of a snapshot is present at its recorded size. */
 const presentAtSize = async (file: { readonly path: string; readonly bytes: number }): Promise<boolean> => (await stat(file.path).catch(() => null))?.size === file.bytes;
 /** A snapshot is usable while the response it was read from, and any positional response that selected its ids, are on disk. */

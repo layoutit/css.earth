@@ -13,8 +13,8 @@ import { fetchPreview, previewSource } from '../previews/index.mts';
 import { readPreviewFile } from '../previews/source.mts';
 import { previewVotable } from '../previews/votable.mts';
 import { planAccess, plannedDownload, type MetadataLoader } from '../vo/access.mts';
-import { normalizeSnapshot, SERVICES, type DiscoveryRequest } from '../vo/discovery.mts';
-import { jsonValue, parseSnapshot, VO_DISCOVERY_SCHEMA, type DiscoverySnapshot } from '@cssearth/objects';
+import { normalizeSnapshot, savedResponseSnapshot, SERVICES, type DiscoveryRequest } from '../vo/discovery.mts';
+import { jsonValue, parseSnapshot, type DiscoverySnapshot } from '@cssearth/objects';
 import { voUrl } from '../vo/network-policy.mts';
 import { exportHtml } from '../delivery/html-outputs.mts';
 import { delivery } from '../delivery/outputs.mts';
@@ -73,11 +73,9 @@ export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 't
         let snapshot: DiscoverySnapshot;
         if (text.trimStart().startsWith('{')) snapshot = parseSnapshot(JSON.parse(text));
         else {
-          const response = (await astroquery({ operation: 'vo-parse', file, url: profile.service, byteLimit: parseLimits(request.transferLimits).metadataBytes,
-            timeFormat: 'mjd', timeScale: profile.timeScale ?? 'utc' })).vo;
-          if (!response) return wholeDelivery(null);
-          snapshot = { schema: VO_DISCOVERY_SCHEMA, service: profile.service, table: profile.table, model: profile.model,
-            request: jsonValue(request), query: '', scope: 'saved observation', sampleLimit: response.rows.length, response, completeness: 'bounded-sample' };
+          const saved = await savedResponseSnapshot(file, profile, request, parseLimits(request.transferLimits).metadataBytes);
+          if (!saved) return wholeDelivery(null);
+          snapshot = saved;
         }
         const target = choice.target ? { id: choice.target, names: [choice.target, ...request.skyTarget ? [request.skyTarget.mainId, ...request.skyTarget.identifiers] : []] } : undefined;
         const observation = normalizeSnapshot(snapshot, profile, target, target ? [target] : []).find(row => row.key === choice.observation);
