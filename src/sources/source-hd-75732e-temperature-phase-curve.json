@@ -1,0 +1,35 @@
+{
+  "id": "source-hd-75732e-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "55 Cnc e · hd 75732e temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2209.02090",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-75732e/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mercier et al. (2022); a Spitzer IRAC 4.5 µm phase curve (program 90208)",
+      "scope": "The hd 75732e temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

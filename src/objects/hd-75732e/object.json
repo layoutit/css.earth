@@ -35,6 +35,11 @@
               "material": "lighting"
             },
             {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "illustration",
               "source": "content",
               "material": "lighting"
