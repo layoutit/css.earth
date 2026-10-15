@@ -58,12 +58,12 @@ scienceTest('a qualified synthetic cube makes the approved outputs with no param
     await mkdir(legacy, { recursive: true }); await writeFile(resolve(legacy, 'figure.png'), 'old custom band');
     await writeProductRecord(resolve(legacy, 'output.product.json'), { telescope: 'Fixture', stage: 'fixture', inputs: [], parameters: { band: [1, 2] }, software: [] }, [{ path: 'figure.png', file: resolve(legacy, 'figure.png') }]);
     const services = explorationServices(root, ['star'], root, api, io, {}), menu = await services.outputs(result, 1);
-    assert.equal(menu.find(output => output.name === 'Moment map')?.description, 'PNG of the summed emission');
+    assert.equal(menu.find(output => output.name === 'Band image')?.description, "PNG of the emission averaged over the cube's band");
     assert.equal(menu.find(output => output.name === 'Spectrum at peak')?.description, 'PNG and CSV through the brightest pixel');
-    assert.deepEqual(menu.find(output => output.name === 'Moment map')?.parameters, []);
+    assert.deepEqual(menu.find(output => output.name === 'Band image')?.parameters, []);
     assert.deepEqual(menu.find(output => output.name === 'Spectrum at peak')?.parameters, []);
-    assert.equal(menu.find(output => output.name === 'Moment map')?.file, undefined, 'an old custom band is not the default moment map');
-    assert.deepEqual(menu.map(output => output.name), ['Moment map', 'Spectrum at peak', 'Data']);
+    assert.equal(menu.find(output => output.name === 'Band image')?.file, undefined, 'an old custom band is not the default band image');
+    assert.deepEqual(menu.map(output => output.name), ['Band image', 'Spectrum at peak', 'Data']);
     assert.ok(menu.every(output => !output.parameters?.length));
     assert.equal(menu.filter(output => output.name === 'Spectrum at peak').length, 1);
     assert.ok(!menu.some(output => output.name === 'Plot' || output.name === 'feature-map'));
@@ -74,10 +74,10 @@ scienceTest('a qualified synthetic cube makes the approved outputs with no param
       const deadline = Date.now() + 15_000;
       while (!terminal.screen.join('\n').includes(text)) { if (Date.now() > deadline) assert.fail(`Missing screen: ${text}\n${terminal.screen.join('\n')}`); await new Promise<void>(done => setImmediate(done)); }
     };
-    await until('Start (UTC)'); await terminal.press({ name: 'return' }, { name: 'return' }); await until('Moment map');
-    const momentIndex = menu.findIndex(output => output.name === 'Moment map'), peakIndex = menu.findIndex(output => output.name === 'Spectrum at peak');
+    await until('Start (UTC)'); await terminal.press({ name: 'return' }, { name: 'return' }); await until('Band image');
+    const momentIndex = menu.findIndex(output => output.name === 'Band image'), peakIndex = menu.findIndex(output => output.name === 'Spectrum at peak');
     for (let i = 0; i < momentIndex; i++) await terminal.press({ name: 'down' });
-    await terminal.press({ name: 'return' }); await until('Moment map        PNG of the summed emission  ✓ figure.png');
+    await terminal.press({ name: 'return' }); await until("Band image        PNG of the emission averaged over the cube's band  ✓ figure.png");
     for (let i = momentIndex; i < peakIndex; i++) await terminal.press({ name: 'down' });
     await terminal.press({ name: 'return' });
     const deadline = Date.now() + 15_000;
@@ -92,15 +92,20 @@ scienceTest('a qualified synthetic cube makes the approved outputs with no param
       assert.match(await readFile(output.values, 'utf8'), /value/u);
       assert.equal(JSON.parse(await readFile(output.receipt, 'utf8')).parameters.measurement.uncertaintyPolicy, 'omit');
     }
+    const bandRows = (await readFile(made[0]!.values, 'utf8')).trim().split('\n').map(row => row.split(','));
+    assert.equal(Number(bandRows.find(row => row[0] === '3' && row[1] === '2')?.[2]), 11, 'equal-width channels 10, 11, 12 are averaged');
+    const bandRecord = JSON.parse(await readFile(made[0]!.receipt, 'utf8'));
+    assert.equal(bandRecord.parameters.measurement.unit, 'K', 'the band image retains the original units');
+    assert.equal(bandRecord.parameters.definition, 'Wavelength-bin-weighted mean image');
     const reopened = await services.outputs(result, 1);
-    for (const [index, name] of ['Moment map', 'Spectrum at peak'].entries()) {
+    for (const [index, name] of ['Band image', 'Spectrum at peak'].entries()) {
       assert.equal(await reopened.find(output => output.name === name)!.run(new Map()), made[index]!.figure);
     }
     assert.equal(selections.length, 2, 'reopening defaults reuses their verified outputs');
     const unavailable = { ...api, listArtifactOutputs: async () => ({ artifact: 'delivery', ...inspected, outputs: inspected.outputs.map(output =>
       ['band-image', 'aperture-spectrum'].includes(output.kind) ? { ...output, available: false, reason: 'Recorded unavailable reason.' } : output) }) };
     const disabled = await explorationServices(root, ['star'], root, unavailable, io, {}).outputs(result, 1);
-    assert.ok(!disabled.some(output => output.name === 'Moment map'));
+    assert.ok(!disabled.some(output => output.name === 'Band image'));
     assert.equal(disabled.filter(output => output.name === 'Spectrum at peak').length, 1);
     const withoutEdges = { ...api, listArtifactOutputs: async () => ({ artifact: 'delivery', ...inspected, outputs: inspected.outputs.map(output => {
       if (!output.spectral) return output;

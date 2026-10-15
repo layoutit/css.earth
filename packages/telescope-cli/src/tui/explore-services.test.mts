@@ -11,8 +11,8 @@ import { FakeTerminal } from './fake-terminal.mts';
 import type { FamilyOperation } from '../family-handler.mts';
 import { exploreChoice, exploreSession } from './fixtures/explore.mts';
 
-test('ALMA size reads only whole-delivery #this tar entries and unknown remains unknown', async () => {
-  const choice = { ...exploreChoice, display: { ...exploreChoice.display, advertisedKilobytes: null } };
+test('ALMA image size preserves whole-delivery scope through confirmation, including unknown size', async () => {
+  const choice = { ...exploreChoice, display: { ...exploreChoice.display, productKind: 'image', advertisedKilobytes: null } };
   const xml = `<VOTABLE><RESOURCE><TABLE>${['access_url', 'semantics', 'content_length'].map(name => `<FIELD name="${name}"/>`).join('')}<DATA><TABLEDATA>
     <TR><TD>https://almascience.org/a.tar</TD><TD>#this</TD><TD>1024</TD></TR>
     <TR><TD>https://almascience.org/b.tar</TD><TD>#this</TD><TD>2048</TD></TR>
@@ -23,10 +23,30 @@ test('ALMA size reads only whole-delivery #this tar entries and unknown remains 
     calls++; assert.equal(String(input), 'https://almascience.org/datalink/sync?ID=uid%3A%2F%2FA%2FB%2FC');
     assert.ok(init?.signal); return new Response(xml);
   };
-  assert.equal(await explorationDownloadSize(choice, new AbortController().signal, fetcher), 3072);
-  assert.equal(await explorationDownloadSize(exploreChoice, new AbortController().signal, fetcher), 1024000); assert.equal(calls, 1);
-  assert.equal(await explorationDownloadSize(choice, new AbortController().signal, async () => { throw new Error('archive down'); }), null);
-  assert.equal(await explorationDownloadSize(choice, new AbortController().signal, async () => new Response(xml.replace('<TD>1024</TD>', '<TD></TD>'))), null);
+  const size = await explorationDownloadSize(choice, new AbortController().signal, fetcher);
+  assert.deepEqual(size, { bytes: 3072, singleCube: false });
+  assert.deepEqual(await explorationDownloadSize(exploreChoice, new AbortController().signal, fetcher), { bytes: 1024000, singleCube: false }); assert.equal(calls, 1);
+  assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, async () => { throw new Error('archive down'); }), { bytes: null, singleCube: false });
+  assert.deepEqual(await explorationDownloadSize(choice, new AbortController().signal, async () => new Response(xml.replace('<TD>1024</TD>', '<TD></TD>'))), { bytes: null, singleCube: false });
+  assert.deepEqual(await explorationDownloadSize({ ...choice, observation: 'unknown' }, new AbortController().signal, fetcher), { bytes: null, singleCube: false });
+  const terminal = new FakeTerminal(100, 40), saved = { ...exploreSession(), choices: [choice] };
+  const running = exploreScreen(undefined, {
+    catalogue: async () => [], resolve: async () => true, search: async () => saved, statuses: async () => new Map(),
+    size: async () => size, free: async () => 1e9, preview: async () => ({ kind: 'none', reason: 'No preview' }),
+    get: async () => assert.fail('Unexpected download'), outputs: async () => [], open: () => {},
+  }, terminal, true, saved);
+  const until = async (text: string) => {
+    const deadline = Date.now() + 3000;
+    while (!terminal.screen.join('\n').includes(text)) {
+      if (Date.now() > deadline) assert.fail(`Screen did not show ${text}`);
+      await new Promise<void>(resolve => setImmediate(resolve));
+    }
+  };
+  try {
+    await until('Start (UTC)'); await terminal.press({ name: 'return' }); await until('Download it?');
+    assert.match(terminal.screen.join('\n'), /the whole ALMA delivery for this observation \(all its spectral windows\)/u);
+    assert.doesNotMatch(terminal.screen.join('\n'), /one data file/u);
+  } finally { await terminal.press({ name: 'c', ctrl: true }); await running; }
 });
 
 test('free space uses the target volume before a child folder exists', async () => {

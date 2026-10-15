@@ -54,6 +54,14 @@ export function renderInstall(state: InstallState, columns: number): string[] {
       '  telescope explore "Crab Nebula"   any star, galaxy, nebula or planet', '  telescope help                    every command'] : [])];
 }
 
+export function renderInstallStatus(state: InstallState): string {
+  const step = steps.find(step => state.steps[step] === 'started');
+  const names = { micromamba: 'micromamba', python: state.python, packages: 'Astronomy packages', check: 'Check the install' };
+  const percent = step === 'micromamba' && state.received !== undefined && state.total !== undefined && state.total > 0
+    ? ` ${Math.round(Math.max(0, Math.min(1, state.received / state.total)) * 100)}%` : '';
+  return `Installing astronomy tools…${step ? ` ${names[step]}${percent}` : ''}`;
+}
+
 /** Find the user's volume even before the toolchain root itself exists. */
 export async function installFreeGb(userRoot: string): Promise<string> {
   for (let directory = userRoot; ;) {
@@ -71,8 +79,16 @@ export function createInstallScreen(terminal: Terminal, controller: AbortControl
   let state = initialInstallState(), close = () => {}, running = false, stopped = false;
   let answer: ((accepted: boolean) => void) | undefined;
   const animation = new AbortController();
+  let compact = false, status = '';
   const drawLines = (lines: readonly string[]) => terminal.write(screenFrame(lines, terminal.columns, terminal.rows));
-  const draw = () => { const lines = renderInstall(state, terminal.columns); drawLines(lines.length < terminal.rows ? lines : []); };
+  const draw = () => {
+    const lines = renderInstall(state, terminal.columns);
+    if (lines.length < terminal.rows) { compact = false; drawLines(lines); return; }
+    const next = clipLine(renderInstallStatus(state), terminal.columns);
+    if (!compact) drawLines([next]);
+    else if (next !== status) terminal.write(`\r${next}\x1b[K`);
+    compact = true; status = next;
+  };
   const finish = () => {
     if (stopped) return;
     stopped = true; animation.abort(); close();
@@ -104,8 +120,8 @@ export function createInstallScreen(terminal: Terminal, controller: AbortControl
     },
     progress(event: ToolchainProgress): void {
       if (stopped) return;
-      state = installProgress(state, event); draw();
-      if (state.installed) finish();
+      state = installProgress(state, event);
+      if (state.installed) finish(); else draw();
     },
     close: finish,
   };

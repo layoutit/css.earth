@@ -48,7 +48,7 @@ function fixture() {
       report({ archive: 'Keck', state: 'done', reason: 'timed out' }); await tick(); return exploreSession();
     },
     statuses: async () => statuses,
-    size: async () => 2 * 1024 ** 2,
+    size: async choice => choice.telescope === 'ALMA' ? { bytes: 2 * 1024 ** 2, singleCube: false } : 2 * 1024 ** 2,
     free: async () => free,
     get: async (choice, _session, report) => {
       transfers++; report({ received: 1024 ** 2, total: 2 * 1024 ** 2 }); await tick();
@@ -79,7 +79,7 @@ test('whole explore flow selects a suggestion, confirms, fails, resumes, makes t
   await terminal.press({ name: 'down' }); assert.equal(f.previewSignals[0]!.aborted, true);
   await terminal.press({ name: 'up' }, { text: 'ALMA' }); await terminal.advance(250);
   await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('Download it?'));
-  assert.match(current(terminal), /one data file/u); assert.match(current(terminal), /2\.0 MB/u);
+  assert.match(current(terminal), /whole ALMA delivery/u); assert.match(current(terminal), /2\.0 MB/u);
   assert.equal(f.transfers(), 0);
   await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('Resume from there?'));
   assert.match(current(terminal), /stopped at 1\.0 MB of 2\.0 MB/u);

@@ -92,15 +92,29 @@ test('EOF declines consent or aborts a running install and restores the terminal
   }
 });
 
-test('short windows show consent before keys and only the final progress state', async () => {
+test('short windows retain a static status, update it in place, and print the final result once', async () => {
   const terminal = new InstallTerminal(140, 10), screen = createInstallScreen(terminal, new AbortController());
   const consent = screen.consent('42');
   assert.match(terminal.writes.join(''), /Install them now/u);
   await terminal.press({ name: 'return' }); assert.equal(await consent, true);
-  await terminal.advance(); assert.doesNotMatch(terminal.writes.join(''), /Installing astronomy/u);
+  assert.match(terminal.screen.join('\n'), /Installing astronomy tools…/u);
+  screen.progress({ type: 'step', step: 'micromamba', status: 'started' });
+  screen.progress({ type: 'download', received: 45, total: 100 });
+  assert.match(terminal.screen.join('\n'), /Installing astronomy tools… micromamba 45%/u);
+  const before = terminal.writes.length;
+  for (let i = 0; i < 3; i++) await terminal.advance();
+  assert.equal(terminal.writes.length, before, 'animation does not repaint the static status');
+  screen.progress({ type: 'step', step: 'micromamba', status: 'finished' });
+  screen.progress({ type: 'step', step: 'packages', status: 'started' });
+  assert.match(terminal.screen.join('\n'), /Installing astronomy tools… Astronomy packages/u);
+  assert.doesNotMatch(terminal.screen.join('\n'), /micromamba|45%|Install them now/u);
+  assert.doesNotMatch(terminal.writes.slice(before).join(''), /\x1b\[H|\x1b\[J/u);
   screen.progress({ type: 'installed' });
   assert.equal(terminal.writes.filter(text => text.includes('Installed.')).length, 1);
   assert.equal(terminal.listening, false);
+  const retained = [...terminal.scrollback, ...terminal.screen].join('\n');
+  assert.equal((retained.match(/Installed\./gu) ?? []).length, 1);
+  assert.doesNotMatch(retained, /Installing astronomy tools/u);
 });
 
 test('install consent and progress leave no stale rows after shrink then grow', async () => {
