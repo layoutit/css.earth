@@ -28,6 +28,8 @@ import { writeHelp } from './help-output.mts';
 import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
+import { papersList, leadsList, starsList } from './tui/lookups.mts';
+import { writeList } from './tui/list.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
 import { formatStars, surveyStars } from './stars/stars.mts';
 import { formatGaiaCone, gaiaCone } from './stars/gaia-cone.mts';
@@ -306,9 +308,11 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
         const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.targets.length>1){
           const result=await sweepPapers(root,{targets:options.targets,...asked});
+          if(guided(options,io))return await writeList(papersList(result,options),io,false)||(result.targets.some(entry=>entry.works.length)?0:3);
           text=options.json?await lookupJson('papers',result,options.directory?{savedPath:resolve(options.directory,'papers.json')}:undefined):formatSweep(result,options.directory);code=result.targets.some(entry=>entry.works.length)?0:3;
         }else{
           const result=await searchPapers(root,{target:options.targets[0]!,...(options.host?{host:options.host}:{}),...asked});
+          if(guided(options,io))return await writeList(papersList(result,options),io,false)||(result.works.length?0:3);
           text=options.json?await lookupJson('papers',result,options.directory?{savedPath:resolve(options.directory,'papers.json')}:undefined):formatPapers(result,options.directory);code=result.works.length?0:3;
         }
       }else if(options.command==='simulations'){
@@ -316,6 +320,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
         text=options.json?await lookupJson('simulations',result,options.directory?{savedPath:resolve(options.directory,'simulations.json')}:undefined):formatSimulations(result,options.directory);code=result.records.length?0:3;
       }else if(options.command==='stars'){
         const result=await surveyStars(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
+        if(guided(options,io))return await writeList(starsList(result,options),io,false)||(result.leads.length?0:3);
         text=options.json?await lookupJson('stars',result,options.directory?{savedPath:resolve(options.directory,'stars.json')}:undefined):formatStars(result,options.directory);code=result.leads.length?0:3;
       }else if(options.command==='gaia-cone'){
         const {command:_command,json:_json,verbose:_verbose,out,...request}=options;
@@ -324,7 +329,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
       }else if(options.command==='leads'){
         const shared={...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`),timeSeries:()=>jwstTimeSeries()};
         if(options.archiveClass){const result=await surveyLeads(root,{archiveClass:options.archiveClass,...shared,...(options.archiveClass==='exoplanet'?{unpaged:(paged:readonly string[])=>searchUnpaged(paged)}:{})});text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatSurvey(result,options.directory);code=result.rows.length?0:3;}
-        else{const result=await searchLeads(root,{target:options.target!,...shared});text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatLeads(result,options.directory);code=result.leads.length||result.watched?.length?0:3;}
+        else{const result=await searchLeads(root,{target:options.target!,...shared});if(guided(options,io))return await writeList(leadsList(result,options),io,false)||(result.leads.length||result.watched?.length?0:3);text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatLeads(result,options.directory);code=result.leads.length||result.watched?.length?0:3;}
       }else if(options.command==='candidates'){
         const {runCandidates,epochMjd}=await import('./sky/association.mts'),result=await runCandidates(options.system,epochMjd(options.epoch),options.directory,{...(options.figureBackground?{figureBackground:options.figureBackground}:{}),...(options.orbitDraws?{orbitDraws:options.orbitDraws}:{})});
         text=options.json?`${JSON.stringify(result.set)}\n`:`${result.set.candidates.map(candidate=>`${candidate.id}  east ${candidate.eastMas.toFixed(2)} mas  north ${candidate.northMas.toFixed(2)} mas  ${candidate.sigmaEastMas===undefined?'reference':`± ${candidate.sigmaEastMas.toFixed(2)}, ${candidate.sigmaNorthMas!.toFixed(2)} mas (${candidate.predictedFrom!.tool} ${candidate.predictedFrom!.planet})`}`).join('\n')}\nSaved: ${options.directory}\n`;code=0;
