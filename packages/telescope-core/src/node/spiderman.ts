@@ -60,12 +60,16 @@ import numpy as np
 import spiderman as sp
 r = json.load(sys.stdin)
 m = r['map']
-p = sp.ModelParams(brightness_model='spherical')
+# A thermal map's harmonics are temperatures (SPIDERMAN's thermal=True); call_map_model then returns brightness and temperature.
+th = m.get('thermal')
+p = sp.ModelParams(brightness_model='spherical', thermal=bool(th))
 p.degree = int(m['degree']); p.la0 = float(m['la0']); p.lo0 = float(m['lo0']); p.sph = [float(v) for v in m['sph']]
+if th: p.T_s = float(th['starK']); p.l1 = float(th['bandMeters'][0]); p.l2 = float(th['bandMeters'][1])
 answer = {'schema': 'cssearth-spiderman@1', 'spiderman': importlib.metadata.version('spiderman-package'), 'numpy': np.__version__}
 if r['operation'] == 'map':
     la = np.radians(np.asarray(r['latitudesDegrees'], dtype=float)); lo = np.radians(np.asarray(r['longitudesDegrees'], dtype=float))
-    answer['values'] = [[float(sp.call_map_model(p, float(a), float(o))[0]) for o in lo] for a in la]
+    column = 1 if th else 0
+    answer['values'] = [[float(sp.call_map_model(p, float(a), float(o))[column]) for o in lo] for a in la]
 elif r['operation'] == 'phase-curve':
     o = r['orbit']
     p.n_layers = int(r['layers']); p.t0 = 0.; p.per = float(o['periodDays']); p.a_abs = float(o['semiMajorAxisAu'])
@@ -80,8 +84,10 @@ json.dump(answer, out)
 /** SPIDERMAN's spherical brightness model with its own parameter names. In spiderman-package 1.0.3 the Python layer packs
  * [degree, la0, lo0, sph...] and the C model (brightness_maps.c, spherical) adds the second slot, la0, to longitude and the
  * third, lo0, to latitude, both in radians; the map is evaluated as SPIDERMAN evaluates it, and the caller records which way
- * each parameter moved. */
-export interface SpidermanSphericalMap { readonly degree: number; readonly la0: number; readonly lo0: number; readonly sph: readonly number[] }
+ * each parameter moved. With `thermal` the harmonics are a temperature map in kelvin (SPIDERMAN's thermal=True, which needs
+ * the star's temperature and the band in metres), and the grid holds those temperatures. */
+export interface SpidermanThermal { readonly starK: number; readonly bandMeters: readonly [number, number] }
+export interface SpidermanSphericalMap { readonly degree: number; readonly la0: number; readonly lo0: number; readonly sph: readonly number[]; readonly thermal?: SpidermanThermal }
 export interface SpidermanOrbit { readonly periodDays: number; readonly semiMajorAxisAu: number; readonly semiMajorAxisStellarRadii: number; readonly inclinationDegrees: number; readonly radiusRatio: number }
 
 function call(request: Record<string, unknown>, toolchain = spidermanToolchainSync()) {
@@ -94,7 +100,9 @@ function checkMap(map: SpidermanSphericalMap) {
   if (!Number.isSafeInteger(map.degree) || map.degree < 1) throw new TypeError('A SPIDERMAN spherical map has a positive integer degree.');
   if (map.sph.length !== map.degree ** 2) throw new TypeError(`A degree-${map.degree} SPIDERMAN map has ${map.degree ** 2} coefficients, not ${map.sph.length}.`);
   for (const value of [map.la0, map.lo0, ...map.sph]) requireFiniteNumber(value, 'SPIDERMAN map parameter');
-  return { degree: map.degree, la0: map.la0, lo0: map.lo0, sph: [...map.sph] };
+  const thermal = map.thermal;
+  if (thermal && !(thermal.starK > 0 && thermal.bandMeters[0] > 0 && thermal.bandMeters[1] > thermal.bandMeters[0])) throw new RangeError('A thermal SPIDERMAN map has a positive star temperature and a band from a lower to a higher wavelength.');
+  return { degree: map.degree, la0: map.la0, lo0: map.lo0, sph: [...map.sph], ...(thermal ? { thermal: { starK: thermal.starK, bandMeters: [thermal.bandMeters[0], thermal.bandMeters[1]] } } : {}) };
 }
 
 /** SPIDERMAN's call_map_model on a latitude-longitude grid in degrees (longitude 0 at the substellar point, east positive). */

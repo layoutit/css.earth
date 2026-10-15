@@ -19,6 +19,78 @@
   },
   "surfaces": [
     {
+      "id": "hubble-map",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
+      "source": "science/kreidberg-2018/hubble-map.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "hubble-map",
+        "label": "Hubble",
+        "format": "published-phase-curve-map",
+        "path": "science/kreidberg-2018/hubble-map.json",
+        "consumer": "hubble-temperature-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Temperature from the paper's spherical-harmonic map fitted to the Hubble WFC3 1.1–1.7 µm phase curve. Longitudes are measured; the north-south shape is the fit's.",
+        "title": "Hubble · published map",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      }
+    },
+    {
+      "id": "spitzer-map",
+      "output": "wasp-103b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-103b-dataset-{id}.webp",
+      "source": "science/kreidberg-2018/spitzer-3-6um-map.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "spitzer-map",
+        "label": "Spitzer 3.6 µm",
+        "format": "published-phase-curve-map",
+        "path": "science/kreidberg-2018/spitzer-3-6um-map.json",
+        "consumer": "spitzer-temperature-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 0,
+        "maximum": 3900,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "1950",
+          "3900"
+        ],
+        "description": "Temperature from the paper's spherical-harmonic map fitted to the Spitzer IRAC 3.6 µm phase curve. Longitudes are measured; the north-south shape is the fit's.",
+        "title": "Spitzer 3.6 µm · published map",
+        "sourceUrl": "https://arxiv.org/abs/1805.00029"
+      }
+    },
+    {
       "id": "temperature-p0",
       "output": "wasp-103b-surface-{id}{suffix}.webp",
       "thumbnail": "wasp-103b-dataset-{id}.webp",

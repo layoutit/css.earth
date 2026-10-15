@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Kreidberg et al. (2018), AJ 156, 17, 'Global climate and atmospheric composition of the ultra-hot Jupiter WASP-103b from HST and Spitzer phase curve observations' (arXiv:1805.00029). Spitzer IRAC channel 1 (3.6 um; SPIDERMAN band 3.15 to 3.95 um) phase curve. The map is the paper's degree-2 spherical-harmonic temperature map fitted with SPIDERMAN (section 3.2; thermal=True, la0 = lo0 = 0, the fourth coefficient held at 0), the model its table of model comparisons ranks best for these data. Its coefficients are read from the authors' repository at commit 425f2e8fe694760266398257a71eaa991ab322fd (github.com/lkreidberg/2017_wasp103), Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt (Best Parameters, named by WA103bo11-initvals.txt), the run the paper's figure scripts load (Figures/fig5_phase_curves.py, fig15_gcm_comparison.py); the paper prints no coefficients. Evaluated by SPIDERMAN, the map's coldest and hottest points give back the table's T_min and T_max; its hemisphere means come out about 100 K from the table's day and night means, whose averaging the paper does not state.",
+  "bandMicrons": [
+    3.15,
+    3.95
+  ],
+  "radiusRatio": {
+    "value": 0.1146,
+    "cell": "rp = 0.1146, held fixed",
+    "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt, rp"
+  },
+  "eclipseDepth": {
+    "value": 0.00446,
+    "cell": "0.446 +/- 0.038 %",
+    "where": "section 4, dayside planet-to-star flux, Spitzer 3.6 um"
+  },
+  "model": {
+    "kind": "spiderman-spherical",
+    "equation": "SPIDERMAN brightness_model 'spherical' with thermal=True: a degree-2 spherical-harmonic map of temperature in kelvin.",
+    "spiderman": {
+      "degree": 2,
+      "la0": 0,
+      "lo0": 0,
+      "sph": [
+        {
+          "value": 2329.96923,
+          "cell": "sph0 = 2329.969 K",
+          "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt"
+        },
+        {
+          "value": 161.955101,
+          "cell": "sph1 = 161.955 K",
+          "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt"
+        },
+        {
+          "value": 0.0,
+          "cell": "sph2 = 0, held fixed",
+          "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt"
+        },
+        {
+          "value": 590.872619,
+          "cell": "sph3 = 590.873 K",
+          "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt"
+        }
+      ]
+    },
+    "dilution": {
+      "value": 0.1712,
+      "cell": "dilution = 0.1712, held fixed",
+      "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt"
+    },
+    "thermal": {
+      "starK": {
+        "value": 6110,
+        "cell": "T_s = 6110 K, held fixed",
+        "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt"
+      },
+      "bandMicrons": [
+        3.15,
+        3.95
+      ]
+    },
+    "orbit": {
+      "periodDays": {
+        "value": 0.925545613,
+        "cell": "P = 0.925545613 day",
+        "where": "section 3.1"
+      },
+      "semiMajorAxisAu": {
+        "value": 0.01326,
+        "cell": "a_abs = 0.01326 au, held fixed",
+        "where": "Figures/Ch1_best_fits/2018-02-07_14:28-spherical/results.txt"
+      },
+      "semiMajorAxisStellarRadii": {
+        "value": 2.999,
+        "cell": "a/R_s = 2.999",
+        "where": "section 3.1"
+      },
+      "inclinationDegrees": {
+        "value": 87.3,
+        "cell": "i = 87.3 degrees",
+        "where": "section 3.1"
+      }
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 2741,
+      "cell": "2741 K",
+      "where": "table of model comparisons, Ch 1, Sph. Harmonics, mean day"
+    },
+    "nightsideK": {
+      "value": 1912,
+      "cell": "1912 K",
+      "where": "table of model comparisons, Ch 1, Sph. Harmonics, mean night"
+    },
+    "minimumK": {
+      "value": 1269,
+      "cell": "1269 K",
+      "where": "table of model comparisons, Ch 1, Sph. Harmonics, T_min"
+    },
+    "maximumK": {
+      "value": 3391,
+      "cell": "3391 K",
+      "where": "table of model comparisons, Ch 1, Sph. Harmonics, T_max"
+    },
+    "offsetDegrees": {
+      "value": 2.0,
+      "cell": "2.0 +/- 0.7 degrees, from the sine-curve fit",
+      "where": "table of phase curve properties, Spitzer 3.6 um"
+    }
+  }
+}

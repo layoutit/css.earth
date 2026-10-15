@@ -1,6 +1,15 @@
 # WASP-103 b
 
-The Temperature dataset explores a published **climate simulation**, with seven pressure levels on one 0–3,900 K color scale. Lower pressure means higher atmosphere. This is the model's gas temperature, not an observed brightness-temperature map or a photograph.
+The page opens on the **Hubble** dataset, a temperature map fitted to a measured phase curve; a **Spitzer 3.6 µm** map fitted the same way follows. The Temperature dataset explores a published **climate simulation**, with seven pressure levels on the same 0–3,900 K color scale. Lower pressure means higher atmosphere. That is the model's gas temperature, not an observed map or a photograph.
+
+## Measured maps
+
+Kreidberg et al. (2018, AJ 156, 17, [arXiv:1805.00029](https://arxiv.org/abs/1805.00029)) fitted the Hubble WFC3 (1.1–1.7 µm, white light) and Spitzer phase curves with SPIDERMAN maps (section 3.2). For Hubble and Spitzer 3.6 µm their table of model comparisons ranks a degree-2 spherical-harmonic map of temperature best (ΔBIC 0); at 4.5 µm a uniform-day, uniform-night map is preferred by ΔBIC 2, so 4.5 µm is not drawn. The paper prints no coefficients. [The records](source/science/kreidberg-2018/) read them from the authors' repository at commit [425f2e8](https://github.com/lkreidberg/2017_wasp103/tree/425f2e8fe694760266398257a71eaa991ab322fd/Figures), from the runs the paper's figure scripts load: `WFC3_best_fits/bestfit_spherical.pic` and `Ch1_best_fits/2018-02-07_14:28-spherical`. The [published phase-curve route](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) has SPIDERMAN itself evaluate each map with `thermal=True`, so the drawn values are the fit's temperatures in kelvin, with no conversion.
+
+- **Hubble** runs from 3,238 K, 2° east of noon, to 1,227 K at midnight; the table prints 3,237 and 1,227 K.
+- **Spitzer 3.6 µm** runs from 3,391 K, 15° east of noon, to 1,269 K; the table prints 3,391 and 1,269 K. The paper's sine-curve fit to the same data puts the peak 2.0 ± 0.7° east.
+
+Both maps' day and night hemispheres average about 100 K hotter by day and 90 K colder by night than the table's day and night means (Hubble 2,738 and 1,733 K against 2,636 and 1,822 K); the paper does not say how it averaged. A phase curve measures longitudes only: the north-south shape is the harmonics', not the data's.
 
 ## Source and processing
 
@@ -21,6 +30,13 @@ The paper's nominal assumptions include solar composition, cloud-free gas and Ti
 **Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
+
+In headless Chrome against the dev server on 2026-10-15 the page opens on Hubble, the Spitzer 3.6 µm map and the simulation switch on click, and the console shows no error; the system view's marker was redrawn from the Hubble map by [`context-markers.mts`](../../../packages/telescope-cli/src/source-authoring/context-markers.mts).
+
+![WASP-103 b in the app on the Hubble map: as the page opens (left), and turned to its night side (right)](evidence/2026-10-15/measured-maps.webp)
+
+The measured maps' coldest and hottest points are checked against the paper's table in [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts), with SPIDERMAN 1.0.3 evaluating the released coefficients.
+
 
 The [reader tests](../../../site/build/prepare/lonlat-slice-table.test.mts) check all 1,920 native nodes of the reference slice, the paper's independent temperature anchors, coordinate interpolation, the longitude seam, missing polar coverage and rejection of malformed grids.
 
