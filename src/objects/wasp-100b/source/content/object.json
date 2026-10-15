@@ -1,0 +1,184 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-100b",
+  "displayName": "WASP-100 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-15",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.85 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-15",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.3 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-15",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
+    "controls": [
+      {
+        "id": "temperature",
+        "label": "TESS",
+        "qualification": "Published model fit · Jansen & Kipping (2020) · TESS phase curve",
+        "thumbnail": "wasp-100b-dataset-temperature.webp",
+        "surface": "wasp-100b-surface-temperature@2x.webp",
+        "poles": "wasp-100b-poles-temperature@2x.webp",
+        "source": {
+          "id": "wasp-100b-energy-balance-map",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2001.10580"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature",
+          "labels": [
+            "1000",
+            "2000",
+            "3000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "1000",
+              "2000",
+              "3000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2001.10580"
+        },
+        "notes": "Temperature of WASP-100 b from the heat-transport model Jansen & Kipping (2020) fitted to its TESS phase curve: Cowan & Agol's (2011) model with a Bond albedo of 0.24, winds that carry heat about eleven times faster than it radiates away, and a heating factor of 1.22. The fit sets those three numbers; the map's shape across the planet, cooler toward the poles, is the model's. Along the equator it runs from 2,710 K, 66° east of noon, to 2,370 K, the extremes the paper prints. The paper separates reflected starlight from heat with the same model. The false color runs from 1,000 to 3,000 K. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
+      },
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,350 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-100b-dataset-thermal.webp",
+        "surface": "wasp-100b-surface-thermal@2x.webp",
+        "poles": "wasp-100b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-100b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-100 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-100b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-100b/wasp-100b-system-orbits.svg",
+      "alt": "The orbits of WASP-100's planets in this map from above, to scale, with WASP-100 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-100b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S"
+      }
+    },
+    {
+      "id": "wasp-100b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-100b/wasp-100b-transit.svg",
+      "alt": "WASP-100 b crossing its star, as TESS recorded it: 3 sectors (96, 97, 98) of the SPOC pipeline's 2-minute light curves of TIC 38846515, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-100b-tess-sector-96",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025232030459-s0096-0000000038846515-0293-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stassun et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "Stassun et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-100b.json",
+      "credit": "Radius from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive; mass from Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive; orbit from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive"
+    }
+  }
+}

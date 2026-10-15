@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-published-energy-balance-map@1",
+  "source": "Jansen & Kipping (2020), MNRAS 494, 4077, 'Detection of the phase curve and occultation of WASP-100b with TESS' (doi:10.1093/mnras/staa814; arXiv:2001.10580). TESS phase curve of WASP-100 b (about 600 to 1000 nm) from the sectors the paper analyses. Values read from the authors' LaTeX source: their parameter table (stellar and system parameters used in the regression) and their results table (measured and derived values). Their forward model (section 4) splits the phase curve into reflected light, the star's own beaming and ellipsoidal terms, and the thermal emission of a temperature map following Cowan & Agol (2011) in the notation of Hu et al. (2015); this record holds that map's fitted parameters, the posterior medians.",
+  "model": {
+    "kind": "cowan-agol-2011",
+    "equation": "T = f T_star (R_star/a)^(1/2) (1 - A_B)^(1/4) cos(latitude)^(1/4) P(longitude), dP/dxi = (max(cos xi, 0) - P^4)/epsilon (section 4).",
+    "starTemperatureK": {
+      "value": 6940,
+      "cell": "T_eff = 6940 +/- 120 K, from their isochrones fit",
+      "where": "parameter table, stellar parameters"
+    },
+    "semiMajorAxisStellarRadii": {
+      "value": 5.4636,
+      "cell": "a/R_star = (G rho_star P^2 / 3 pi)^(1/3) from rho_star = 380 +14/-13 kg/m^3 and P = 2.849382 days; with T_eff it gives their T_eq of 2099 K",
+      "where": "parameter table, system parameters from transit fits"
+    },
+    "bondAlbedo": {
+      "value": 0.24,
+      "cell": "A_B = 0.24 +0.06/-0.05",
+      "where": "results table"
+    },
+    "redistribution": {
+      "value": 10.9,
+      "cell": "epsilon = 10.9 +5.3/-3.8",
+      "where": "results table"
+    },
+    "intrinsicFactor": {
+      "value": 1.22,
+      "cell": "f = 1.22 +0.06/-0.07",
+      "where": "results table"
+    }
+  },
+  "reported": {
+    "maximumK": {
+      "value": 2710,
+      "cell": "T_max = 2710 +/- 100 K",
+      "where": "results table"
+    },
+    "minimumK": {
+      "value": 2380,
+      "cell": "T_min = 2380 +170/-200 K",
+      "where": "results table"
+    },
+    "hotspotDegreesEast": {
+      "value": 71,
+      "cell": "thermal hotspot offset 71 +2/-4 degrees east",
+      "where": "results table"
+    },
+    "equilibriumK": {
+      "value": 2099,
+      "cell": "T_eq = 2099 +/- 38 K, for A_B = 0",
+      "where": "parameter table, derived system parameters"
+    }
+  }
+}

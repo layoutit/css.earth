@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/wasp-100b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "wasp-100b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswasp-100b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature",
+      "output": "wasp-100b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-100b-dataset-{id}.webp",
+      "source": "science/jansen-kipping-2020/energy-balance-map.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "TESS",
+        "format": "published-energy-balance-map",
+        "path": "science/jansen-kipping-2020/energy-balance-map.json",
+        "consumer": "temperature-energy-balance-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1000,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "1000",
+          "2000",
+          "3000"
+        ],
+        "description": "Temperature from the paper's heat-transport model fitted to the TESS phase curve. The fit sets three numbers; the shape is the model's.",
+        "title": "TESS · published model fit",
+        "sourceUrl": "https://arxiv.org/abs/2001.10580"
+      }
+    },
+    {
+      "id": "thermal",
+      "output": "wasp-100b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-100b-dataset-{id}.webp",
+      "source": "photometry/thermal-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 2,350 K measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "metadata": {
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred."
+    }
+  }
+}
