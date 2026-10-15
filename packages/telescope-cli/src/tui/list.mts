@@ -1,5 +1,5 @@
 import { bold, breadcrumb, cut, dim, green, inverse, pad, plain } from './style.mts';
-import { liveBlock } from './live-block.mts';
+import { screenFrame } from './screen.mts';
 import type { ScreenKey, Terminal } from './terminal.mts';
 import { processTerminal } from './terminal.mts';
 import type { CliIo } from '../cli-io.mts';
@@ -59,8 +59,7 @@ export function renderList<Row>(spec: ListSpec<Row>, state: ListState<Row>, colu
 export async function listScreen<Row>(spec: ListSpec<Row>, terminal: Terminal): Promise<number> {
   const opened = new Map<Row, string>();
   let state: ListState<Row> = { query: '', active: 0, opened };
-  const block = liveBlock(terminal);
-  const draw = () => block.draw(renderList(spec, state, terminal.columns, terminal.rows));
+  const draw = () => terminal.write(screenFrame(renderList(spec, state, terminal.columns, terminal.rows), terminal.columns, terminal.rows));
   let close = () => {};
   try {
     return await new Promise<number>((resolve, reject) => {
@@ -84,11 +83,14 @@ export async function listScreen<Row>(spec: ListSpec<Row>, terminal: Terminal): 
           stopped = true; resolve(key.ctrl ? 130 : 0); return;
         }
         pending = pending.then(() => keypress(key)).catch(error => { stopped = true; reject(error); });
-      }, draw);
+      }, () => {
+        try { draw(); }
+        catch (error) { stopped = true; reject(error); }
+      }, { alternateScreen: true });
       draw();
     });
   } finally {
-    close(); block.done(renderList(spec, state, terminal.columns, terminal.rows));
+    close();
     if (spec.footer) terminal.write(`${dim(spec.footer)}\n`);
   }
 }

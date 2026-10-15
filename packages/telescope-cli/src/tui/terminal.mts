@@ -3,11 +3,14 @@ import { setTimeout } from 'node:timers/promises';
 import { EventEmitter } from 'node:events';
 
 export interface ScreenKey { readonly name?: string; readonly text?: string; readonly ctrl?: boolean; readonly meta?: boolean }
+export interface TerminalOptions { readonly alternateScreen?: boolean }
+export const ENTER_SCREEN = '\x1b[?1049h\x1b[?25l';
+export const LEAVE_SCREEN = '\x1b[?1049l\x1b[?25h';
 export interface Terminal {
   readonly columns: number;
   readonly rows: number;
   write(text: string): void;
-  listen(key: (key: ScreenKey) => void, resize: () => void): () => void;
+  listen(key: (key: ScreenKey) => void, resize: () => void, options?: TerminalOptions): () => void;
   delay(milliseconds: number, signal: AbortSignal): Promise<void>;
 }
 interface TerminalInput extends NodeJS.ReadableStream {
@@ -25,7 +28,7 @@ export function processTerminal(input: TerminalInput = process.stdin, output: Te
     get rows() { return output.rows ?? 24; },
     write: text => { output.write(text); },
     delay: async (milliseconds, signal) => { await setTimeout(milliseconds, undefined, { signal }); },
-    listen(key, resize) {
+    listen(key, resize, options) {
       const wasRaw = input.isRaw, wasFlowing = input.readableFlowing === true;
       emitKeypressEvents(input);
       const press = (text: string | undefined, event: Key) => key({ name: event.name, ctrl: event.ctrl, meta: event.meta, text });
@@ -36,13 +39,18 @@ export function processTerminal(input: TerminalInput = process.stdin, output: Te
         closed = true;
         input.off('keypress', press); output.off('resize', resize);
         lifecycle.off('exit', close); lifecycle.off('SIGINT', interrupt); lifecycle.off('SIGTERM', interrupt);
-        input.setRawMode?.(wasRaw === true);
-        if (!wasFlowing) input.pause();
-        output.write('\x1b[?25h');
+        try { input.setRawMode?.(wasRaw === true); }
+        finally {
+          if (!wasFlowing) input.pause();
+          output.write(options?.alternateScreen ? LEAVE_SCREEN : '\x1b[?25h');
+        }
       };
       lifecycle.once('exit', close); lifecycle.on('SIGINT', interrupt); lifecycle.on('SIGTERM', interrupt);
       input.on('keypress', press); output.on('resize', resize);
-      try { input.setRawMode?.(true); input.resume(); }
+      try {
+        if (options?.alternateScreen) output.write(ENTER_SCREEN);
+        input.setRawMode?.(true); input.resume();
+      }
       catch (error) { close(); throw error; }
       return close;
     },

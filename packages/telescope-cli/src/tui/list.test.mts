@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { FakeTerminal } from './fake-terminal.mts';
 import { listScreen, renderList, writeList, LIST_MINIMUM_ROWS, type ListSpec } from './list.mts';
-import { bold, dim, plain } from './style.mts';
+import { bold, clipLine, plain } from './style.mts';
+import { LEAVE_SCREEN } from './terminal.mts';
 import type { CliIo } from '../cli-io.mts';
 
 const rows = Array.from({ length: 30 }, (_, index) => `item ${String(index + 1).padStart(2, '0')}`);
@@ -38,7 +39,8 @@ test('scripted arrows, pages, search, Enter and Escape leave an opened row in th
   await terminal.press({ name: 'backspace' }); assert.match(latest(terminal), /12 match/u);
   terminal.resize(63, 40); assert.doesNotMatch(latest(terminal), /DETAIL/u);
   await terminal.press({ name: 'escape' }); assert.equal(await running, 0);
-  assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), '\x1b[?25h');
+  assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
+  assert.equal(terminal.alternateScreen, false);
 });
 
 test('empty matches clamp navigation and Enter has no action', async () => {
@@ -56,7 +58,8 @@ test('a failed Enter action restores the terminal and propagates its error', asy
   const running = listScreen(fixture(async () => { throw new Error('browser failed'); }), terminal);
   const rejected = assert.rejects(running, /browser failed/u);
   await terminal.press({ name: 'return' }); await rejected;
-  assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), '\x1b[?25h');
+  assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
+  assert.equal(terminal.alternateScreen, false);
 });
 
 test('list fallback never acquires a terminal for pipes, non-TTY input or JSON', async () => {
@@ -114,4 +117,42 @@ test('interactive list dispatch draws on the injected stderr surface and writes 
   assert.match(terminal.screen.join('\n'), / > item 01/u);
   await terminal.press({ name: 'escape' }); assert.equal(await running, 0);
   assert.deepEqual(output, []);
+});
+
+test('shrinking 120×40 to 63×10 and expanding replaces the entire alternate screen without reviving old rows', async () => {
+  const terminal = new FakeTerminal();
+  terminal.write(Array.from({ length: 45 }, (_, index) => `prior ${index}\n`).join(''));
+  const normal = terminal.screen, history = terminal.scrollback;
+  const spec = { ...fixture(), footer: 'Saved RUN · 30 items' };
+  const running = listScreen(spec, terminal);
+  const expected = (columns: number, height: number, active = 0) => {
+    const lines = renderList(spec, { query: '', active, opened: new Map() }, columns, height)
+      .map(line => plain(clipLine(line, columns)));
+    return [...lines, ...Array.from({ length: height - lines.length }, () => '')];
+  };
+  assert.equal(terminal.alternateScreen, true);
+  assert.deepEqual(terminal.screen, expected(120, 40));
+  terminal.resize(63, 10);
+  assert.deepEqual(terminal.screen, expected(63, 10));
+  assert.deepEqual(terminal.scrollback, []);
+  await terminal.press({ name: 'down' });
+  assert.deepEqual(terminal.screen, expected(63, 10, 1));
+  terminal.resize(120, 40);
+  assert.deepEqual(terminal.screen, expected(120, 40, 1));
+  assert.deepEqual(terminal.scrollback, []);
+  await terminal.press({ name: 'escape' }); assert.equal(await running, 0);
+  assert.equal(terminal.alternateScreen, false);
+  assert.deepEqual(terminal.screen, [...normal.slice(1, -1), spec.footer, '']);
+  assert.deepEqual(terminal.scrollback, [...history, normal[0]]);
+  assert.equal(terminal.writes.at(-2), LEAVE_SCREEN);
+  assert.equal(terminal.wraps, 0);
+});
+
+test('resize rendering failures leave the alternate buffer before propagating', async () => {
+  const terminal = new FakeTerminal(63, 40);
+  const running = listScreen({ ...fixture(), panel: () => { throw new Error('panel failed'); } }, terminal);
+  const rejected = assert.rejects(running, /panel failed/u);
+  terminal.resize(120, 40); await rejected;
+  assert.equal(terminal.alternateScreen, false); assert.equal(terminal.listening, false);
+  assert.deepEqual(terminal.screen, ['']);
 });

@@ -5,7 +5,8 @@ import { EventEmitter } from 'node:events';
 import { bold, breadcrumb, clipLine, cut, dim, green, inverse, pad, plain, red, visibleWidth, wrap, yellow } from './style.mts';
 import { liveBlock } from './live-block.mts';
 import { FakeTerminal } from './fake-terminal.mts';
-import { processTerminal } from './terminal.mts';
+import { ENTER_SCREEN, LEAVE_SCREEN, processTerminal } from './terminal.mts';
+import { screenFrame } from './screen.mts';
 import { VERSION } from '../version.mts';
 
 test('styles, visible widths and breadcrumbs retain the mock punctuation and ANSI boundaries', () => {
@@ -83,6 +84,50 @@ test('closing a newly opened stdin stops the resumed stream from keeping the pro
   input.destroy(); output.destroy();
 });
 
+test('alternate sessions restore the normal buffer, cursor, input mode and listeners on close and process exit', () => {
+  for (const exit of [false, true]) {
+    const input = new Input(), output = new Output(), lifecycle = new EventEmitter();
+    input.pause();
+    const close = processTerminal(input, output, lifecycle).listen(() => {}, () => {}, { alternateScreen: true });
+    assert.equal(input.isRaw, true);
+    if (exit) lifecycle.emit('exit');
+    else close();
+    close();
+    assert.equal(output.read().toString(), ENTER_SCREEN + LEAVE_SCREEN);
+    assert.equal(input.isRaw, false); assert.equal(input.isPaused(), true);
+    assert.equal(input.listenerCount('keypress'), 0); assert.equal(output.listenerCount('resize'), 0);
+    assert.equal(lifecycle.listenerCount('exit'), 0); assert.equal(lifecycle.listenerCount('SIGINT'), 0);
+    assert.equal(lifecycle.listenerCount('SIGTERM'), 0);
+    input.destroy(); output.destroy();
+  }
+});
+
+test('a raw-mode startup error restores the alternate buffer and listeners', () => {
+  class RefusedInput extends Input {
+    override setRawMode(enabled: boolean): this {
+      if (enabled) throw new Error('raw refused');
+      return super.setRawMode(enabled);
+    }
+  }
+  const input = new RefusedInput(), output = new Output(), lifecycle = new EventEmitter();
+  assert.throws(() => processTerminal(input, output, lifecycle).listen(() => {}, () => {}, { alternateScreen: true }), /raw refused/u);
+  assert.equal(output.read().toString(), ENTER_SCREEN + LEAVE_SCREEN);
+  assert.equal(input.listenerCount('keypress'), 0); assert.equal(lifecycle.listenerCount('exit'), 0);
+  input.destroy(); output.destroy();
+});
+
+test('alternate frames home the cursor, erase tails and below, and never scroll at one row', () => {
+  const terminal = new FakeTerminal(8, 1);
+  terminal.write('prior');
+  const close = terminal.listen(() => {}, () => {}, { alternateScreen: true });
+  terminal.write(screenFrame(['long line here', 'outside window'], 8, 1));
+  assert.deepEqual(terminal.screen, ['long li…']);
+  terminal.write(screenFrame(['short'], 8, 1));
+  assert.deepEqual(terminal.screen, ['short']);
+  assert.deepEqual(terminal.scrollback, []);
+  close(); assert.deepEqual(terminal.screen, ['prior']);
+});
+
 test('line clipping counts terminal cells, preserves ANSI, and never splits a grapheme', () => {
   assert.equal(clipLine(bold('abcdefgh'), 4), '\x1b[1mabc…\x1b[0m');
   assert.equal(clipLine(dim('fits'), 4), dim('fits'));
@@ -100,6 +145,18 @@ test('the fake terminal models physical wrapping rather than just recording writ
   assert.equal(terminal.wraps, 2);
   terminal.resize(8, 10);
   assert.deepEqual(terminal.screen, ['abcdefgh', 'ij', 'next']);
+});
+
+test('normal-buffer scrollback survives viewport erasure and returns on expansion', () => {
+  const terminal = new FakeTerminal(120, 40);
+  const old = Array.from({ length: 20 }, (_, index) => `old row ${index}`);
+  terminal.write(old.join('\n') + '\n');
+  terminal.resize(63, 10);
+  assert.deepEqual(terminal.scrollback, old.slice(0, 11));
+  terminal.write('\x1b[H\x1b[Jfinal\n');
+  assert.deepEqual(terminal.screen, ['final', '', '', '', '', '', '', '', '', '']);
+  terminal.resize(120, 40);
+  assert.deepEqual(terminal.screen, [...old.slice(0, 11), 'final', '', '', '', '', '', '', '', '', '']);
 });
 
 test('all live and final lines are clipped centrally so the retained block cannot wrap', () => {

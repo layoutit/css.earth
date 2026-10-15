@@ -1,7 +1,8 @@
-import type { ScreenKey, Terminal } from './terminal.mts';
+import { ENTER_SCREEN, LEAVE_SCREEN, type ScreenKey, type Terminal, type TerminalOptions } from './terminal.mts';
 import { visibleWidth } from './style.mts';
 
 interface PhysicalRow { cells: string[]; wrapped: boolean }
+interface SavedBuffer { physical: PhysicalRow[]; cursorRow: number; cursorColumn: number }
 
 /** Scripted terminal for offline screen tests; no process streams or wall-clock timers. */
 export class FakeTerminal implements Terminal {
@@ -14,11 +15,27 @@ export class FakeTerminal implements Terminal {
   private physical: PhysicalRow[] = [{ cells: [], wrapped: false }];
   private cursorRow = 0;
   private cursorColumn = 0;
+  private normal?: SavedBuffer;
   private readonly graphemes = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
   get screen(): string[] {
-    return this.physical.slice(Math.max(0, this.physical.length - this.rows)).map(row => row.cells.join(''));
+    const lines = this.physical.slice(Math.max(0, this.physical.length - this.rows)).map(row => row.cells.join(''));
+    if (this.normal) while (lines.length < this.rows) lines.push('');
+    return lines;
+  }
+  get alternateScreen(): boolean { return this.normal !== undefined; }
+  get scrollback(): string[] {
+    return this.normal ? [] : this.physical.slice(0, Math.max(0, this.physical.length - this.rows)).map(row => row.cells.join(''));
+  }
+  private save(): SavedBuffer {
+    return { physical: this.physical, cursorRow: this.cursorRow, cursorColumn: this.cursorColumn };
+  }
+  private restore(buffer: SavedBuffer): void {
+    this.physical = buffer.physical; this.cursorRow = buffer.cursorRow; this.cursorColumn = buffer.cursorColumn;
   }
   private row(): PhysicalRow {
+    if (this.normal && this.cursorRow >= this.rows) {
+      this.physical.shift(); this.cursorRow = this.rows - 1;
+    }
     while (this.physical.length <= this.cursorRow) this.physical.push({ cells: [], wrapped: false });
     return this.physical[this.cursorRow]!;
   }
@@ -31,7 +48,14 @@ export class FakeTerminal implements Terminal {
     this.writes.push(text);
     for (const token of text.split(/(\x1b\[[?0-9;]*[A-Za-z]|\n|\r)/u).filter(Boolean)) {
       if (token.startsWith('\x1b[')) {
-        if (token.endsWith('F')) {
+        if (token === '\x1b[?1049h' && !this.normal) {
+          this.normal = this.save(); this.physical = [{ cells: [], wrapped: false }];
+          this.cursorRow = 0; this.cursorColumn = 0;
+        } else if (token === '\x1b[?1049l' && this.normal) {
+          this.restore(this.normal); this.normal = undefined;
+        } else if (token === '\x1b[H') {
+          this.cursorRow = Math.max(0, this.physical.length - this.rows); this.cursorColumn = 0;
+        } else if (token.endsWith('F')) {
           const count = Number(token.slice(2, -1)) || 1;
           this.cursorRow = Math.max(Math.max(0, this.physical.length - this.rows), this.cursorRow - count);
           this.cursorColumn = 0;
@@ -64,9 +88,14 @@ export class FakeTerminal implements Terminal {
     }
     this.frames.push(this.screen);
   }
-  listen(key: (key: ScreenKey) => void, resize: () => void): () => void {
+  listen(key: (key: ScreenKey) => void, resize: () => void, options?: TerminalOptions): () => void {
     this.listening = true; this.key = key; this.resized = resize;
-    return () => { this.listening = false; this.key = () => {}; this.resized = () => {}; };
+    if (options?.alternateScreen) this.write(ENTER_SCREEN);
+    return () => {
+      if (!this.listening) return;
+      this.listening = false; this.key = () => {}; this.resized = () => {};
+      this.write(options?.alternateScreen ? LEAVE_SCREEN : '\x1b[?25h');
+    };
   }
   async delay(milliseconds: number, signal: AbortSignal): Promise<void> {
     this.delays.push(milliseconds); this.onDelay?.(this.delays.length - 1);
@@ -76,6 +105,16 @@ export class FakeTerminal implements Terminal {
     for (const key of keys) { this.key(key); await new Promise<void>(resolve => setImmediate(resolve)); }
   }
   resize(columns: number, rows: number): void {
+    if (this.normal) {
+      const alternate = this.save();
+      this.restore(this.normal); this.reflow(columns); this.normal = this.save();
+      this.restore(alternate); this.physical = this.physical.slice(0, rows);
+      for (const row of this.physical) { row.cells = row.cells.slice(0, columns); row.wrapped = false; }
+      this.cursorRow = Math.min(this.cursorRow, rows - 1); this.cursorColumn = Math.min(this.cursorColumn, columns - 1);
+    } else this.reflow(columns);
+    this.columns = columns; this.rows = rows; this.resized();
+  }
+  private reflow(columns: number): void {
     // Reflow soft-wrapped rows together; hard newlines keep their boundaries.
     const reflowed: PhysicalRow[] = [];
     let cells: string[] = [], cursorOffset: number | undefined;
@@ -95,6 +134,6 @@ export class FakeTerminal implements Terminal {
       }
       cells = [];
     }
-    this.physical = reflowed; this.columns = columns; this.rows = rows; this.resized();
+    this.physical = reflowed;
   }
 }
