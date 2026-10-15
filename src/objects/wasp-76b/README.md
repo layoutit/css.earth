@@ -15,6 +15,15 @@ WASP-76b is an ultra-hot giant planet that orbits the F star [WASP-76](../wasp-7
 | Peak before eclipse | 0.0° | 0.67 ± 0.2° |
 | Surface with negative fitted brightness | 3.4 % | — |
 
+**The 3.6 µm map.** The same paper also fitted two Spitzer phase curves at 3.6 µm (3–5 May 2017 and 21–23 April 2018) jointly, with one set of phase parameters ([record](source/science/may-2021/phase-curve-3-6um.json); Table 4, columns wa076bo11 and wa076bo12): sph0 0.00048, sph3 0.00022, lo0 0.68 and rp 0.10048, with a dilution factor of 0.0936. It is the Spitzer 3.6 µm dataset, drawn the same way and on the same 600–3,000 K scale.
+
+| Quantity | This map | May et al. (2021) |
+| --- | --- | --- |
+| Day side, flux | 2,524 ppm | 2,539 ± 30 ppm |
+| Day side | 2,464 K | 2,471 ± 27 K |
+| Night side | 1,504 K | 1,518 ± 61 K |
+| Surface with negative fitted brightness | 0 % | — |
+
 **Temperature.** WASP-76 has a fainter companion 0.44″ away inside Spitzer's pixel. The paper corrects for its light with a dilution factor of 0.0901 at 4.5 µm. The planet's intensity relative to the star's is π·value·(1 + 0.0901)/rp² with SPIDERMAN's map value and rp = 0.106. It becomes a brightness temperature at 4.5 µm against the star's 4.5 µm brightness temperature. The paper used an interpolated Kurucz model and prints no number. The value its own eclipse depth, radius ratio and day side imply is 5,695 K. Weighting by Spitzer's 4.5 µm filter curve instead of one wavelength moves the night side by 5 K.
 
 **Orbit and rotation.** Ehrenreich et al. (2020, Extended Data Table 1) give the period, 1.80988198 days, a/R* 4.08, the 89.623° inclination and the transit time. That is 58080.626165 in BJD − 2,400,000, which lands 122 orbits after May et al.'s Spitzer transit to within 76 s. The radius ratio is 0.10852, which is 1.854 Jupiter radii; the mass is 0.894 Jupiter masses. The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked.
@@ -39,6 +48,12 @@ Run of 2026-10-04, when the planet moved to the lit lane. The map did not change
 ![HD 189733 b, WASP-43 b, WASP-18 b, WASP-76 b, WASP-121 b, WASP-103 b, KELT-9 b, TRAPPIST-1 b and TRAPPIST-1 c, each a flat disc before and a shaded sphere after](evidence/2026-10-04/lit.jpg)
 
 - [`star-lit.test.mts`](../../../packages/telescope-cli/src/new-object/map/star-lit.test.mts) checks what the move changes in a package and what it leaves self-luminous.
+
+Run of 2026-10-15, when the 3.6 µm map was added. The 4.5 µm map did not change, so the tests above still apply to it.
+
+- The 3.6 µm record's day side, night side and day-side flux, evaluated by SPIDERMAN 1.0.3, are those in the table under *The 3.6 µm map*. In headless Chrome against the dev server the page opens on Spitzer 4.5 µm, both maps switch on click, and the console shows no error:
+
+![WASP-76 b in the app: the Spitzer 4.5 µm map it opens on (left) and the Spitzer 3.6 µm map (right)](evidence/2026-10-15/two-bands.webp)
 
 ## Known problems
 

@@ -16,14 +16,20 @@
     {
       "location": "public",
       "filename": "wasp-76b-arrival.webp",
-      "bytes": 38150,
-      "sha256": "dedaad25fa37b8b87ca926cdfa8be62b74119f6a4dd463f2634db63527c1bba9"
+      "bytes": 39340,
+      "sha256": "42018d8bd30ac2a7c4f7ae29f3e1b20187683b068c6c621f07fb15ac78c9f5d6"
     },
     {
       "location": "public",
       "filename": "wasp-76b-billboard.webp",
-      "bytes": 6374,
-      "sha256": "656a857957bf8ef477d3db2aaeacce7f909b08736546245a57faf7d2cc95696d"
+      "bytes": 6450,
+      "sha256": "b0412345c4254e05dec0f34e91a0f96650213a91d0661ea901b8ce46a573343d"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-76b-dataset-spitzer-3-6um.webp",
+      "bytes": 168,
+      "sha256": "d2e4592b4b0118abeeae7e9978508bec1724406a2a3fd68414077f6a23ff5c23"
     },
     {
       "location": "public",
@@ -33,9 +39,21 @@
     },
     {
       "location": "public",
+      "filename": "wasp-76b-poles-spitzer-3-6um@2x.webp",
+      "bytes": 12780,
+      "sha256": "a19db37d763f6433a8e3e004f03464ffbfed294779c5c01418c69b293646099e"
+    },
+    {
+      "location": "public",
       "filename": "wasp-76b-poles-temperature@2x.webp",
       "bytes": 43252,
       "sha256": "e986d1ce21e622fcdb1c88b17fed28a1602f8ff8960d4020a8c8334a9c989c49"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-76b-surface-spitzer-3-6um@2x.webp",
+      "bytes": 23942,
+      "sha256": "65393e1c5100fd77cb63fe2a66f9153ec54331a0495ae3450c257d3c966bfac2"
     },
     {
       "location": "public",
@@ -52,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 17893,
-      "sha256": "c42257dc47bd54618812a26e1a3e603276ce6e5c09a33f0893ab5bac6522b7ed"
+      "bytes": 18080,
+      "sha256": "3dea61bad9dd326a0fe688e5a32ac2964bb16a23089938e748367f982707b16a"
     },
     {
       "location": "prepared",
@@ -70,8 +88,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2107,
-      "sha256": "970bdca56bff05128eb7332e41d008ede6bbd5549785541fae5fe4656a1e3a7e"
+      "bytes": 4043,
+      "sha256": "20e5ab7673c922a3f2e7eff2b6d8ad1a87ff9d41cc9a2967ce1d4daf7f63b05e"
     },
     {
       "location": "prepared",
@@ -82,8 +100,14 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 123,
-      "sha256": "27b1e50be5ead09413a78533fcb366aca36e5cbb59d77a7751132f02071b0285"
+      "bytes": 227,
+      "sha256": "d73840b87a31785225b9a5a424d4af1865d5fec90d5fe636ac461267c4f4ab72"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/spitzer-3-6um.webp",
+      "bytes": 1752,
+      "sha256": "38ee70db9d384261476cbfbc2b16ae72dd095bb23965d6f470f0e4ec6f8dd5e9"
     },
     {
       "location": "prepared",
@@ -94,14 +118,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 91656,
-      "sha256": "c6819282fad5b41fb7f93d3cded9cc4a9ba0383c7a7b9bf79ef86fabc75ca6eb"
+      "bytes": 95527,
+      "sha256": "75c451bb633a37514c220ddc1f35ab02537875128958685fc3e037f72b301761"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1067,
-      "sha256": "cc55f84a157f44e5042f5c43fccf7bedcd966931dbe395e0411d012bf915b88f"
+      "bytes": 1264,
+      "sha256": "6d3fc46033901ff11137f8d50328f84b224564e2911d376de198e79330125af5"
     }
   ]
 }

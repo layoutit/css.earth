@@ -53,6 +53,42 @@
         "title": "Spitzer 4.5 µm · published phase-curve map",
         "sourceUrl": "https://arxiv.org/abs/2107.03349"
       }
+    },
+    {
+      "id": "spitzer-3-6um",
+      "output": "wasp-76b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-76b-dataset-{id}.webp",
+      "source": "science/may-2021/phase-curve-3-6um.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "spitzer-3-6um",
+        "label": "Temperature",
+        "format": "published-phase-curve-map",
+        "path": "science/may-2021/phase-curve-3-6um.json",
+        "consumer": "may-2021-phase-curve-map-3-6um",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 600,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "600",
+          "1800",
+          "3000"
+        ],
+        "description": "Brightness temperature at 3.6 µm from the paper's own SPIDERMAN map fit, evaluated by SPIDERMAN: a dipole centred on the substellar point.",
+        "title": "Spitzer 3.6 µm · published phase-curve map",
+        "sourceUrl": "https://arxiv.org/abs/2107.03349"
+      }
     }
   ],
   "lighting": {

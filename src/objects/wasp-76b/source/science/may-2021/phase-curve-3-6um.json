@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "May et al. (2021), AJ 162, 158, 'Spitzer Phase-curve Observations and Circulation Models of the Inflated Ultrahot Jupiter WASP-76b' (doi:10.3847/1538-3881/ac0e30; arXiv:2107.03349). Spitzer IRAC 3.6 um phase curves wa076bo11 (3-5 May 2017) and wa076bo12 (21-23 April 2018), program 13038, fitted jointly with one set of phase parameters. Values read from the authors' LaTeX source: section 3.2 and appendix Table 4 (table:all_params), columns wa076bo11 and wa076bo12, which print the same map.",
+  "wavelengthMicrons": 3.6,
+  "radiusRatio": {
+    "value": 0.10048,
+    "cell": "0.10048",
+    "where": "Table 4, Rp/Rs, wa076bo11 and wa076bo12"
+  },
+  "eclipseDepth": {
+    "value": 0.002539,
+    "cell": "2539 +/- 30 ppm, contamination corrected",
+    "where": "section 3.2 (3.6 um phase curves)"
+  },
+  "model": {
+    "kind": "spiderman-spherical",
+    "description": "SPIDERMAN spherical harmonics, second order: 'we only consider the two terms that create a dipole centered at a latitude and longitude of zero degrees, and use SPIDERMAN's longitude offset parameter' (section 2.2). Table 4 lists, for the joint 3.6 um fit, sph0 (Y00) and sph3 (Y11); the two other second-order terms are zero. Its note: 'We use the lon0/lat0 options in spiderman'.",
+    "spiderman": {
+      "degree": 2,
+      "la0": 0,
+      "lo0": 0.011868238913561443,
+      "sph": [
+        {
+          "value": 0.00048,
+          "cell": "0.00048",
+          "where": "Table 4, sph0 (Y00), wa076bo11 and wa076bo12"
+        },
+        {
+          "value": 0,
+          "cell": "not fitted",
+          "where": "section 2.2"
+        },
+        {
+          "value": 0,
+          "cell": "not fitted",
+          "where": "section 2.2"
+        },
+        {
+          "value": 0.00022,
+          "cell": "0.00022",
+          "where": "Table 4, sph3 (Y11), wa076bo11 and wa076bo12"
+        }
+      ],
+      "lo0Reading": "Table 4 prints lo0 = 0.68 [deg]; SPIDERMAN takes radians, so the fit passed 0.68 degrees = 0.011868 rad, read the same way as the 4.5 um record (phase-curve.json). In spiderman-package 1.0.3 the lo0 slot moves the dipole in latitude, not longitude (see the WASP-76b README)."
+    },
+    "dilution": {
+      "value": 0.0936,
+      "cell": "0.0936 +/- 0.002",
+      "where": "section 2.3, dilution factor at 3.6 um for the companion WASP-76 B"
+    },
+    "orbit": {
+      "periodDays": {
+        "value": 1.8099,
+        "cell": "1.8099",
+        "where": "Table 4, 3.6 um columns, Per."
+      },
+      "semiMajorAxisAu": {
+        "value": 0.033,
+        "cell": "0.033",
+        "where": "Table 4, 3.6 um columns, a [au]"
+      },
+      "semiMajorAxisStellarRadii": {
+        "value": 4.0476,
+        "cell": "4.0476",
+        "where": "Table 4, a/Rs, wa076bo11 and wa076bo12"
+      },
+      "inclinationDegrees": {
+        "value": 87.99997114559989,
+        "cell": "cos(i) = 0.0349",
+        "where": "Table 4, 3.6 um columns; inclination = arccos(0.0349)"
+      }
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 2471,
+      "cell": "2471 +/- 27 K",
+      "where": "section 3.2, disk-integrated day side brightness temperature (Kurucz stellar model)"
+    },
+    "nightsideK": {
+      "value": 1518,
+      "cell": "1518 +/- 61 K",
+      "where": "section 3.2, disk-integrated night side brightness temperature"
+    },
+    "offsetDegrees": {
+      "value": 0.68,
+      "cell": "0.68 +/- 0.48 degrees",
+      "where": "section 3.2, hot spot offset"
+    },
+    "semiAmplitude": {
+      "value": 0.000804,
+      "cell": "804.0 +/- 42.5 ppm, 'phase amplitude'",
+      "where": "section 3.2; the paper does not say whether this is half the peak-to-peak or whether it is dilution corrected"
+    }
+  }
+}
