@@ -86,18 +86,18 @@
     {
       "id": "sirius-b-stellar-color",
       "path": "photometry/stellar-color.json",
-      "origin": "https://doi.org/10.3847/1538-4357/aa6af8",
-      "credit": "Bond et al. (2017), ApJ 840, 70, section 8: Teff 25,369 +/- 46 K from model-atmosphere fits to STIS spectra (internal error); CIE 1931 2° observer",
-      "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Authored method record: names the published temperature and the color computation applied",
-      "redistribution": "Method record only",
+      "origin": "https://arxiv.org/abs/2610.18966",
+      "credit": "Hollands, Gänsicke, Tremblay & Koester (2026), RASTI (accepted), arXiv:2610.18966, Table 6, row WD J064509.30−164300.72 Sirius B: hexcode #A4C1FF, (x, y) (0.252, 0.256), from the Tremblay 3D non-LTE pure-hydrogen model atmosphere at Teff 25 970 K, log g 8.570; CIE 1931 2° observer",
+      "license": "Factual published values; source attribution retained",
+      "acquisition": "Table 6 row transcribed from the paper's LaTeX source (arXiv e-print, appendix_tabs.tex) into the color record",
+      "redistribution": "Two published values and their citation only",
       "consumers": [
         "assets",
         "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored color recipe naming the cited temperature; repinned when edited."
+        "reason": "Project-authored record of the color the paper publishes for this star; repinned when edited."
       }
     },
     {
@@ -131,7 +131,7 @@
     {
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://doi.org/10.3847/1538-4357/aa6af8",
+      "origin": "https://arxiv.org/abs/2610.18966",
       "credit": "The color dataset as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [

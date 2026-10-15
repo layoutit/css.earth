@@ -28,6 +28,16 @@ test("WASP-43's Gaia DR3 photometric temperature gives a pale warm sRGB color, s
   for (const bound of range) for (let channel = 0; channel < 3; channel++) assert.ok(Math.abs(bound.srgb[channel]! - color.srgb[channel]!) <= 1);
 });
 
+test("Sirius B's color is the one its paper publishes, byte for byte, with its brightest channel full", async () => {
+  const sirius = new URL('src/objects/sirius-b/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/'));
+  const { temperature, published, color, range } = await loadStellarPhotometricColor(async path => readFile(new URL(path, sirius)), {}, 'photometry/stellar-color.json');
+  assert.deepEqual(color.srgb, [0xa4, 0xc1, 0xff]);
+  assert.equal(color.linear[2], 1);
+  assert.deepEqual(published?.chromaticity, { x: 0.252, y: 0.256 });
+  assert.equal(temperature, null);
+  assert.equal(range, null);
+});
+
 test('records and catalogue rows fail closed', () => {
   const parsed = parseStellarColorRecord(record);
   assert.ok(parsed.spectrum === 'planck' && 'temperaturePath' in parsed);

@@ -22,6 +22,17 @@ test('stellar color retains branch admission, bounds and diagnostics', () => {
   assert.deepEqual(parseStellarColorRecord({ schema: STELLAR_PHOTOMETRIC_COLOR_SCHEMA, spectrum: 'measured', measuredSpectrum: spectrum }),
     { spectrum: 'measured', measured: parseMeasuredSpectrumRecord(spectrum) });
 });
+test('a published color is a full-brightness hex with its chromaticity and paper', () => {
+  const record = (hex: string, x = 0.252, citation = 'https://arxiv.org/abs/2610.18966') => ({ schema: STELLAR_PHOTOMETRIC_COLOR_SCHEMA, spectrum: 'published-color',
+    publishedColor: { hex, chromaticity: { x, y: 0.256 }, citation } });
+  assert.deepEqual(parseStellarColorRecord(record('#A4C1FF')),
+    { spectrum: 'published-color', published: { hex: '#a4c1ff', chromaticity: { x: 0.252, y: 0.256 }, citation: 'https://arxiv.org/abs/2610.18966' } });
+  assert.throws(() => parseStellarColorRecord(record('#A4C1F')), /six-digit sRGB hex/);
+  assert.throws(() => parseStellarColorRecord(record('#A4C1EE')), /brightest channel at FF/);
+  assert.throws(() => parseStellarColorRecord(record('#A4C1FF', 0.9)), /is not a color/);
+  assert.throws(() => parseStellarColorRecord(record('#A4C1FF', 0.252, 'Hollands 2026')), /by URL/);
+  assert.throws(() => parseStellarColorRecord({ ...record('#A4C1FF'), temperature: {} }), /takes no temperature/);
+});
 test('measured stellar spectrum retains format, units, gap and error-column checks', () => {
   assert.deepEqual(parseMeasuredSpectrumRecord(spectrum).gaps, []);
   assert.throws(() => parseMeasuredSpectrumRecord({ ...spectrum, format: 'other' }), /Unknown measured spectrum format other/);
