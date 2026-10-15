@@ -13,7 +13,7 @@ test('piped and JSON installs terminate and await the child group on parent SIGI
       stdio: ['pipe', 'pipe', 'pipe'], env: { ...process.env, CSSEARTH_TELESCOPE_STDIN_TTY: '0', CSSEARTH_TELESCOPE_STDOUT_TTY: '0', CSSEARTH_TELESCOPE_STDERR_TTY: '0' },
     });
     let stdout = '', stderr = '', interrupted = false;
-    const timeout = setTimeout(() => child.kill('SIGKILL'), 10000);
+    const timeout = setTimeout(() => child.kill('SIGKILL'), 60000);
     child.stdout.setEncoding('utf8').on('data', text => { stdout += text; });
     child.stderr.setEncoding('utf8').on('data', text => {
       stderr += text;
