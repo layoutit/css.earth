@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Mercier et al. (2022), The Astronomical Journal 164, 204, 'Revisiting the Iconic Spitzer Phase Curve of 55 Cancri e: Hotter Dayside, Cooler Nightside and Smaller Phase Offset' (doi:10.3847/1538-3881/ac8f22; arXiv:2209.02090). The Spitzer IRAC channel 2 (4.5 um) phase curve of Demory et al. (2016), eight observations between UT 2013 June 15 and July 15 (program 90208), reduced again with SPCA and BLISS mapping. Values read from the authors' LaTeX source, their table of fitted parameters, column 'This work': the fiducial fit, constrained to a phase curve that is never negative. Its phase variation is the first-order sinusoid of Bell et al. (2021, section 4.1), whose free parameters A and B are this route's C1 and D1.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.01708,
+    "cell": "0.01708 +0.0016 -0.0017",
+    "where": "table of fitted parameters, R_P/R_*"
+  },
+  "eclipseDepth": {
+    "value": 0.000209,
+    "cell": "0.000209 +0.000050 -0.000047",
+    "where": "table of fitted parameters, F_P/F_*"
+  },
+  "model": {
+    "kind": "eclipse-normalized-fourier",
+    "equation": "F_p = F_day [1 + A (cos psi - 1) + B sin psi], psi the orbital angle from mid-eclipse (Bell et al. 2021, section 4.1; the paper's first-order sinusoidal phase variation).",
+    "c1": {
+      "value": 0.493,
+      "cell": "A = 0.493 +0.04 -0.07",
+      "where": "table of fitted parameters, A"
+    },
+    "d1": {
+      "value": 0.108,
+      "cell": "B = 0.108 +/- 0.18",
+      "where": "table of fitted parameters, B"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 3771,
+      "cell": "3771 +669 -520 K",
+      "where": "table of fitted parameters, average dayside temperature"
+    },
+    "nightsideK": {
+      "value": 1045,
+      "cell": "1045 +302 -243 K; the text reports only the conservative limit below 1649 K (2 sigma)",
+      "where": "table of fitted parameters, average nightside temperature"
+    },
+    "offsetDegrees": {
+      "value": -12.43,
+      "cell": "-12.43 +21 -18 degrees east",
+      "where": "table of fitted parameters, phase offset (degrees east)"
+    },
+    "semiAmplitude": {
+      "value": 0.0001109,
+      "cell": "110.9 +17 -16 ppm",
+      "where": "table of fitted parameters, phase semi-amplitude"
+    }
+  }
+}

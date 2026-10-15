@@ -101,6 +101,28 @@
       }
     },
     {
+      "id": "hd-75732e-temperature-phase-curve",
+      "path": "science/mercier-2022/phase-curve.json",
+      "origin": "https://arxiv.org/abs/2209.02090",
+      "credit": "Mercier et al. (2022); a Spitzer IRAC 4.5 µm phase curve (program 90208)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-75732e-temperature-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
       "id": "hd-75732e-emission-spectroscopy",
       "path": "photometry/emission-spectroscopy.csv",
       "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+plntname%2Ccentralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cespbritemp%2Cespbritemperr1%2Cespbritemperr2%2Cespbritemplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%2755+Cnc+e%27+order+by+centralwavelng&format=csv",
@@ -352,7 +374,7 @@
           "hd-75732e-observational-measurements",
           "hd-75732e-preparation-raster",
           "hd-75732e-thermal-color",
-          "hd-75732e-climate-model-simulation"
+          "hd-75732e-temperature-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
