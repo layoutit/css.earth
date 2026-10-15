@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "proxima-centauri-habitable-zone",
+  "type": "plane-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/zone.json"
+    },
+    "host": "proxima-centauri",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -14651209142921296,
+        -11188687658327098,
+        -35676840399400656
+      ],
+      "localToReferenceXyzw": [
+        0.4402189038753654,
+        0.05696993592822386,
+        0.7177617438489925,
+        0.5364511367663966
+      ],
+      "metersPerUnit": 1277447294.746955,
+      "boundsUnits": {
+        "min": [
+          -10.24,
+          -10.24,
+          -0.1024
+        ],
+        "max": [
+          10.24,
+          10.24,
+          0.1024
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-galaxy-backing@1",
+    "url": "prepared/plane.json"
+  }
+}

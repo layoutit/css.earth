@@ -59,8 +59,8 @@
         "displaySampling": "nearest",
         "outputLongitudeOrigin": 0,
         "units": "°C",
-        "minimum": -70,
-        "maximum": 10,
+        "minimum": -100,
+        "maximum": 40,
         "colors": [
           "#000004",
           "#57106e",
@@ -69,12 +69,188 @@
           "#fcffa4"
         ],
         "labels": [
-          "-70",
+          "-100",
           "-30",
-          "10"
+          "40"
         ],
         "description": "Simulated surface air temperature from the ROCKE-3D control scenario of Del Genio et al. (2019), not a measurement.",
         "title": "Climate model · ROCKE-3D control",
+        "sourceUrl": "https://doi.org/10.1089/ast.2017.1760"
+      }
+    },
+    {
+      "id": "static-ocean-model",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/del-genio-2019/02_Thermo_ANN3900-3999.aijProxCenb04eTL.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "static-ocean-model",
+        "label": "Static ocean model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/del-genio-2019/02_Thermo_ANN3900-3999.aijProxCenb04eTL.nc",
+        "variable": "tsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "sourceUnits": "C",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "static-ocean-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "°C",
+        "minimum": -100,
+        "maximum": 40,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "-100",
+          "-30",
+          "40"
+        ],
+        "description": "Simulated surface air temperature from the ROCKE-3D Thermo scenario of Del Genio et al. (2019), not a measurement.",
+        "title": "Static ocean model · ROCKE-3D Thermo",
+        "sourceUrl": "https://doi.org/10.1089/ast.2017.1760"
+      }
+    },
+    {
+      "id": "early-earth-air-model",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/del-genio-2019/09_Archean-High_ANN5500-5999.aijProxCenb04arcb_TL_DSA.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "early-earth-air-model",
+        "label": "Early-Earth air model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/del-genio-2019/09_Archean-High_ANN5500-5999.aijProxCenb04arcb_TL_DSA.nc",
+        "variable": "tsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "sourceUnits": "C",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "early-earth-air-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "°C",
+        "minimum": -100,
+        "maximum": 40,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "-100",
+          "-30",
+          "40"
+        ],
+        "description": "Simulated surface air temperature from the ROCKE-3D Archean High scenario of Del Genio et al. (2019), not a measurement.",
+        "title": "Early-Earth air model · ROCKE-3D Archean High",
+        "sourceUrl": "https://doi.org/10.1089/ast.2017.1760"
+      }
+    },
+    {
+      "id": "earth-land-model",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/del-genio-2019/18_Day-Land_ANN14900-14999.aijProxCenb07b2TL.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "earth-land-model",
+        "label": "Earth-land model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/del-genio-2019/18_Day-Land_ANN14900-14999.aijProxCenb07b2TL.nc",
+        "variable": "tsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "sourceUnits": "C",
+        "longitudeZeroAt": 30,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "earth-land-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "°C",
+        "minimum": -100,
+        "maximum": 40,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "-100",
+          "-30",
+          "40"
+        ],
+        "description": "Simulated surface air temperature from the ROCKE-3D Day-Land scenario of Del Genio et al. (2019), not a measurement.",
+        "title": "Earth-land model · ROCKE-3D Day-Land",
+        "sourceUrl": "https://doi.org/10.1089/ast.2017.1760"
+      }
+    },
+    {
+      "id": "model-wind",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/del-genio-2019/01_Control_ANN3900-3999.aijProxCenb04bTL.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "model-wind",
+        "label": "Model wind",
+        "format": "netcdf-lonlat-field",
+        "path": "science/del-genio-2019/01_Control_ANN3900-3999.aijProxCenb04bTL.nc",
+        "variable": "wsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "sourceUnits": "m/s",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "model-wind-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "m/s",
+        "minimum": 0,
+        "maximum": 15,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "7.5",
+          "15"
+        ],
+        "description": "Simulated surface wind speed from the ROCKE-3D control scenario of Del Genio et al. (2019), not a measurement.",
+        "title": "Model wind · ROCKE-3D control",
         "sourceUrl": "https://doi.org/10.1089/ast.2017.1760"
       }
     }

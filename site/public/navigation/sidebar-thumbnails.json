@@ -683,6 +683,18 @@
       "bytes": 183564
     },
     {
+      "path": "src/objects/proxima-centauri-habitable-zone/object.json",
+      "bytes": 902
+    },
+    {
+      "path": "src/objects/proxima-centauri-habitable-zone/prepared/plane.json",
+      "bytes": 1192
+    },
+    {
+      "path": "src/objects/proxima-centauri-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17378
+    },
+    {
       "path": "src/objects/trappist-1-habitable-zone/object.json",
       "bytes": 892
     },
@@ -2222,6 +2234,16 @@
       ],
       "credit": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
       "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg"
+    },
+    "proxima-centauri/habitable-zone": {
+      "url2x": "/navigation/focus-proxima-centauri-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/proxima-centauri-habitable-zone/object.json",
+        "src/objects/proxima-centauri-habitable-zone/prepared/plane.json",
+        "src/objects/proxima-centauri-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of Proxima Cen",
+      "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
     },
     "trappist-1/habitable-zone": {
       "url2x": "/navigation/focus-trappist-1-habitable-zone@2x.webp",

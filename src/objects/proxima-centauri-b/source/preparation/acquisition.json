@@ -9,6 +9,33 @@
       ],
       "path": "science/del-genio-2019/01_Control_ANN3900-3999.aijProxCenb04bTL.nc",
       "url": "https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/01_Control_ANN3900-3999.aijProxCenb04bTL.nc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/del-genio-2019/02_Thermo_ANN3900-3999.aijProxCenb04eTL.nc",
+      "url": "https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/02_Thermo_ANN3900-3999.aijProxCenb04eTL.nc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/del-genio-2019/09_Archean-High_ANN5500-5999.aijProxCenb04arcb_TL_DSA.nc",
+      "url": "https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/09_Archean-High_ANN5500-5999.aijProxCenb04arcb_TL_DSA.nc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/del-genio-2019/18_Day-Land_ANN14900-14999.aijProxCenb07b2TL.nc",
+      "url": "https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/18_Day-Land_ANN14900-14999.aijProxCenb07b2TL.nc"
     }
   ]
 }
