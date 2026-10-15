@@ -18,3 +18,5 @@ export const BANNER = `             .####.#..##..#
 | (__\\__ \\__ \\|  __/ (_| | |  | |_| | | |
  \\___|___/___(_)___|\\__,_|_|   \\__|_| |_|
 `;
+
+export const WORDMARK: readonly string[] = BANNER.trimEnd().split('\n').slice(13);

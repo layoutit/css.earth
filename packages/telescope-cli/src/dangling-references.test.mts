@@ -50,6 +50,7 @@ test('telescope source, guides and skills name existing package scripts', () => 
 
 // Valid, read-only parser inputs. No command implementation runs and no output directory is created.
 const invocations: readonly (readonly string[])[] = [
+  ['open'], ['open', 'telescope-runs', '--json'],
   ['help', 'all'], ['explore', 'eris', '--from', '2024-01-01', '--to', '2024-01-02'],
   ['query', 'eris', '--wavelength', '2,3', '--out', 'result'], ['get', 'run', '--pick', '1'],
   ['outputs', 'result.json'], ['export', 'result.json', '--output', 'image', '--hdu', '0'],

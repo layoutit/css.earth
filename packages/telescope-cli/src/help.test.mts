@@ -4,6 +4,8 @@ import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 import { BANNER } from './banner.mts';
 import { HELP_COMMANDS, SHORT_HELP, helpCommand, helpText } from './help.mts';
+import { VERSION } from './version.mts';
+import { renderHelp } from './tui/help.mts';
 
 const published = readFileSync(new URL('./fixtures/help-reference.txt', import.meta.url), 'utf8');
 
@@ -20,16 +22,17 @@ test('all core and useful usages have descriptions in one column, including long
   assert.match(SHORT_HELP, /skill install --provider NAME {2,}Install/u);
 });
 
-test('short help stays within one screen after a TTY-only ASCII banner', () => {
+test('short help keeps the approved fine print and leaves development commands in help all', () => {
   assert.ok(SHORT_HELP.trimEnd().split('\n').length <= 25);
   for (const command of ['explore', 'get', 'outputs', 'export', 'papers', 'leads', 'stars', 'skill', 'toolchain']) {
     assert.ok(SHORT_HELP.includes(`telescope ${command} `), command);
   }
-  assert.match(SHORT_HELP, /css\.earth development:.*new-object.*bake/u);
+  assert.doesNotMatch(SHORT_HELP, /css\.earth development:|new-object|bake routes/u);
   assert.match(SHORT_HELP, /--json.*scripts and agents/u);
   assert.match(SHORT_HELP, /telescope help COMMAND/u);
   assert.equal(helpText('', false), SHORT_HELP);
-  assert.equal(helpText('', true), `${BANNER}\n${SHORT_HELP}`);
+  assert.equal(helpText('', true), renderHelp(0, 80).join('\n') + '\n');
+  assert.equal(SHORT_HELP.trimEnd().split('\n').at(-1), 'Details: telescope help COMMAND · --json for scripts and agents');
   assert.ok([...BANNER].every(character => character.charCodeAt(0) < 128));
   for (const command of [...HELP_COMMANDS, 'all']) assert.equal(helpText(command, true), helpText(command, false));
 });
@@ -42,7 +45,7 @@ test('every published reference line survives in help all, independently of the 
 test('every published command gets its own usage page, flags and associated explanation', () => {
   const usages = published.split('\n').filter(line => /^  telescope [a-z-]+ /u.test(line));
   const commands = [...new Set(usages.map(line => line.split(' ')[3]!))];
-  assert.deepEqual([...HELP_COMMANDS].sort(), commands.sort());
+  assert.deepEqual([...HELP_COMMANDS].sort(), [...commands, 'open'].sort());
   for (const command of commands) {
     const text = helpText(command);
     for (const line of usages.filter(line => line.startsWith(`  telescope ${command} `))) assert.ok(text.includes(line), line);
@@ -149,4 +152,24 @@ test('outputs documentation promises the persisted inspection and existing-run s
     assert.match(plain,/--out.*existing subfolder inside that run/u);
     assert.doesNotMatch(plain,/outputs prints complete JSON without saving|outputs.*without --out save under/u);
   }
+});
+
+test('binary help stays plain when its stderr drawing surface is redirected', () => {
+  const entry = new URL('./bin.mts', import.meta.url);
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', `
+    Object.defineProperty(process.stdin, 'isTTY', { value: true });
+    Object.defineProperty(process.stdout, 'isTTY', { value: true });
+    Object.defineProperty(process.stderr, 'isTTY', { value: false });
+    process.argv = [process.execPath, ${JSON.stringify(entry.pathname)}, '--help'];
+    await import(${JSON.stringify(entry.href)});
+  `], { encoding: 'utf8', timeout: 30_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(result.stdout, SHORT_HELP); assert.equal(result.stderr, '');
+});
+
+test('the binary version uses the same package metadata as the screens and worker', () => {
+  const result = spawnSync(process.execPath, [new URL('./bin.mts', import.meta.url).pathname, '--version'],
+    { encoding: 'utf8', timeout: 30_000 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(result.stdout, `${VERSION}\n`); assert.equal(result.stderr, '');
 });

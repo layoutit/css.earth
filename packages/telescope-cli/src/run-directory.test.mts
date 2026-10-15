@@ -16,6 +16,7 @@ import { loadVoInputs } from './vo/bridge.mts';
 import { SERVICES } from './vo/discovery.mts';
 import { explorationAnswer } from './exploration.mts';
 import { displayPath } from './cli-format.mts';
+import { FakeTerminal } from './tui/fake-terminal.mts';
 import type { ExplorationAnswer, ExplorationChoice } from './exploration.mts';
 
 function capture() {
@@ -144,11 +145,12 @@ test('unwritable cwd fails with one line before explore or fetch can perform net
   } finally { await chmod(work, 0o755); process.chdir(before); fetcher.mock.restore(); await rm(work, { recursive: true, force: true }); }
 });
 
-for (const catchesCancellation of [false, true]) test(`implicit setup refusal publishes no exploration or run (provider catches: ${catchesCancellation})`, async () => {
+for (const screen of [false, true]) for (const catchesCancellation of [false, true]) test(`implicit setup refusal publishes no exploration or run (screen: ${screen}, provider catches: ${catchesCancellation})`, async () => {
   const work = await mkdtemp(resolve(tmpdir(), 'explore-refusal-')), before = process.cwd();
   const stdout: string[] = [], stderr: string[] = [];
   let prompts = 0;
-  const io: CliIo = { stdinIsTTY: true, stdoutIsTTY: true, write: text => stdout.push(text), error: text => stderr.push(text),
+  const terminal = new FakeTerminal(150);
+  const io: CliIo = { stdinIsTTY: true, stdoutIsTTY: true, stderrIsTTY: screen, terminal, write: text => stdout.push(text), error: text => stderr.push(text),
     question: async prompt => { assert.equal(prompt, 'Continue? [Y/n] '); prompts++; return 'n'; }, close: () => {} };
   const api: SessionServices = { load: async () => { throw new Error('unused'); }, qualify: async () => { throw new Error('unused'); },
     explore: async (root, request) => {
@@ -167,8 +169,24 @@ for (const catchesCancellation of [false, true]) test(`implicit setup refusal pu
     exportSphere: unavailable, exportSpatialObject: unavailable, executeFamilyOperation: unavailable, familyCoverageLedger: () => [] };
   try {
     process.chdir(work);
-    assert.equal(await main(['explore', 'eris'], work, io.write, io, services), 1);
-    assert.equal(prompts, 1); assert.deepEqual(stdout, []); assert.match(stderr.join(''), /Download cancelled/u);
-    assert.deepEqual(await readdir(work), [], 'Refusal must not create telescope-runs or explore.json');
+    if (screen) {
+      const object = resolve(work, 'src/objects/eris'); await mkdir(object, { recursive: true });
+      await writeFile(resolve(object, 'object.json'), JSON.stringify({ id: 'eris', properties: { catalog: { name: 'Eris', aliases: [] } } }));
+    }
+    const beforeEntries = await readdir(work);
+    const running = main(['explore', 'eris'], work, io.write, io, services);
+    if (screen) {
+      const deadline = Date.now() + 3000;
+      while (!terminal.screen.join('\n').includes('Install them now?')) {
+        if (Date.now() > deadline) assert.fail('install consent did not become visible');
+        await new Promise<void>(resolve => setImmediate(resolve));
+      }
+      await terminal.press({ name: 'escape' });
+    }
+    assert.equal(await running, 1);
+    assert.equal(prompts, screen ? 0 : 1); assert.deepEqual(stdout, []);
+    assert.match(stderr.join(''), screen ? /telescope toolchain install astroquery/u : /Download cancelled/u);
+    assert.equal(terminal.listening, false);
+    assert.deepEqual(await readdir(work), beforeEntries, 'Refusal must not create telescope-runs or explore.json');
   } finally { process.chdir(before); await rm(work, { recursive: true, force: true }); }
 });

@@ -15,6 +15,18 @@ test('the first async astronomy query installs missing pins and later queries re
     entry.cdflib, entry.pyuvdata, entry.astropyHealpix].join(' ');
   const scratch = resolve(userRoot, 'scratch'); mkdirSync(scratch, { recursive: true });
   let resolutions = 0;
+  const run = (command: string, args: readonly string[]) => {
+    calls.push({ command, args });
+    if (command === 'xcrun') return args[0] === '--find' ? 'cc' : '/fixture-sdk';
+    if (command === 'cc' || command === 'gcc') { assert.ok(args.includes('-x') || args.some(arg => arg.endsWith('/probe.o'))); return ''; }
+    if (command.endsWith('/probe')) return 'TELESCOPE_COMPILER_READY';
+    if (command === '/test/selected-micromamba') {
+      const prefix = args[args.indexOf('-p') + 1]; assert.ok(prefix);
+      mkdirSync(resolve(prefix, 'bin'), { recursive: true });
+      writeFileSync(resolve(prefix, 'bin/python'), '');
+    }
+    return args.includes('-I') && args.includes('-c') ? '3.12.1' : args[0] === '-c' ? versions : '';
+  };
   const mocks = [
     mock.module(new URL('../paths/index.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot, SCRATCH_ROOT: scratch,
       telescopePythonEnvironment: (overrides: NodeJS.ProcessEnv = {}) => ({ ...process.env, TMPDIR: scratch, TMP: scratch, TEMP: scratch, ...overrides }) } }),
@@ -24,18 +36,8 @@ test('the first async astronomy query installs missing pins and later queries re
       resolveInstalledToolchain: (root: string, expected: ToolchainPins, additional: readonly string[] = []) =>
         [root, ...additional].find(candidate => installedMarkerIssue(candidate, expected) === null) ?? null } }),
     mock.module(new URL('./process.ts', import.meta.url).href, { namedExports: {
-      runToolchainProcess: (command: string, args: readonly string[]) => {
-        calls.push({ command, args });
-        if (command === 'xcrun') return args[0] === '--find' ? 'cc' : '/fixture-sdk';
-        if (command === 'cc' || command === 'gcc') { assert.ok(args.includes('-x') || args.some(arg => arg.endsWith('/probe.o'))); return ''; }
-        if (command.endsWith('/probe')) return 'TELESCOPE_COMPILER_READY';
-        if (command === '/test/selected-micromamba') {
-          const prefix = args[args.indexOf('-p') + 1]; assert.ok(prefix);
-          mkdirSync(resolve(prefix, 'bin'), { recursive: true });
-          writeFileSync(resolve(prefix, 'bin/python'), '');
-        }
-        return args.includes('-I') && args.includes('-c') ? '3.12.1' : args[0] === '-c' ? versions : '';
-      } } }),
+      runToolchainProcess: run, runToolchainProcessAsync: async (command: string, args: readonly string[]) => run(command, args),
+    } }),
   ];
   try {
     const { astroqueryToolchain, astroqueryToolchainSync, findInstalledRoot, installAstroquery } = await import('./toolchain.js');

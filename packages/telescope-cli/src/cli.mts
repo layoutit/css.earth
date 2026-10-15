@@ -4,7 +4,7 @@ import { assertWritableDirectory, artifactRunName, inspectionDirectory, runDirec
 import { listManagedEnvironments, removeManagedEnvironment } from './toolchains/managed-environments.mts';
 import { manageToolchain } from './toolchains/astronomy-toolchains.mts';
 import { dirname, resolve } from 'node:path';
-import { consentHandler, savedDownload, choiceDownload, type DownloadInfo, type ConsentState } from './cli-consent.mts';
+import { consentHandler, savedDownload, type DownloadInfo, type ConsentState } from './cli-consent.mts';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
@@ -22,10 +22,19 @@ import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
 import { interruptedDownload } from './cli-errors.mts';
 import { explorationSummary, lookupJson, outputSummary, saveStdoutRecord, saveInspection } from './cli-summary.mts';
-import { HELP, SHORT_HELP, VERSION, helpText } from './help.mts';
+import { HELP, SHORT_HELP } from './help.mts';
+import { VERSION } from './version.mts';
+import { writeHelp } from './help-output.mts';
 import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
+import { papersList, leadsList, starsList } from './tui/lookups.mts';
+import { exploreScreen, type ExploreServices } from './tui/explore.mts';
+import { explorationServices } from './tui/explore-services.mts';
+import { listSavedRuns, readSavedExploration } from './tui/saved-runs.mts';
+import { runsScreen } from './tui/runs.mts';
+import { processTerminal } from './tui/terminal.mts';
+import { writeList } from './tui/list.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
 import { formatStars, surveyStars } from './stars/stars.mts';
 import { formatGaiaCone, gaiaCone } from './stars/gaia-cone.mts';
@@ -48,31 +57,15 @@ import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
 import type { InspectedArtifact } from './cli-artifact-types.mts';
-import { WORKSPACE, USER_ROOT, withAcquisitionDirectory, requireWorkspace, withTransferConsent, requestTransferConsent, DownloadCancelledError } from '@cssearth/telescope-core/node';
+import { WORKSPACE, USER_ROOT, withAcquisitionDirectory, requireWorkspace, withTransferConsent, withToolchainProgress, requestTransferConsent, DownloadCancelledError, type ToolchainProgress } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
 
 export type { CliIo } from './cli-io.mts';
 import type { CliIo } from './cli-io.mts';
-export interface RetrievedResult {
-  readonly resultPath:string;readonly product:string;readonly reused:boolean;
-  readonly context?:DeliveryContext;readonly satisfaction?:RequestSatisfaction;
-}
-export interface CliServices {
-  readonly getDownloadPlan?:(directory:string,pick:number)=>Promise<DownloadInfo>;
-  readonly importLocalArtifact:typeof importLocalArtifact;
-  readonly familyCoverageLedger:typeof familyCoverageLedger;
-  readonly saveExploration:typeof saveExploration;
-  readonly getSession:(root:string,directory:string,pick:number,progress:(text:string)=>void,api?:undefined,options?:{readonly offline?:boolean;readonly out?:string})=>Promise<RetrievedResult>;
-  readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
-  readonly exportHtml?:typeof exportHtml;
-  readonly exportOutput:typeof exportOutput;
-  readonly projectOutput:typeof projectOutput;
-  readonly exportSphere:(recordPath:string,outputDirectory:string)=>ReturnType<typeof exportSphere>;
-  readonly exportSpatialObject:typeof exportSpatialObject;
-  readonly executeFamilyOperation:typeof executeFamilyOperation;
-}
+import type { CliServices } from './cli-services.mts';
+export type { CliServices, RetrievedResult } from './cli-services.mts';
 const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportHtml,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation,getDownloadPlan:savedDownload};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
@@ -87,14 +80,15 @@ function processIo(output:(text:string)=>void):CliIo {
       process.on('message',acknowledged);process.once('disconnect',disconnected);process.send!({flush:id});
     });
   };
-  return {stdinIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY),stdoutIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY),stderrIsTTY:process.stderr.isTTY===true,write:output,error:text=>process.stderr.write(text),flush,
+  return {stdinIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY),stdoutIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY),stderrIsTTY:inheritedTty('CSSEARTH_TELESCOPE_STDERR_TTY',process.stderr.isTTY),write:output,error:text=>process.stderr.write(text),flush,
     question:async prompt=>{terminal??=createInterface({input:process.stdin,output:process.stderr,terminal:true});try{return await terminal.question(prompt);}catch{return undefined;}},close:()=>terminal?.close()};
 }
-export const guided = (options:{readonly json:boolean},io:Pick<CliIo,'stdinIsTTY'|'stdoutIsTTY'>):boolean => !options.json&&io.stdinIsTTY&&io.stdoutIsTTY;
-function startProgress(io:CliIo,initial:string){
-  const terminal=io.stderrIsTTY===true,started=Date.now(),frames=['|','/','-','\\'];
+export const guided = (options:{readonly json:boolean},io:Pick<CliIo,'stdinIsTTY'|'stdoutIsTTY'|'stderrIsTTY'>):boolean => !options.json&&io.stdinIsTTY&&io.stdoutIsTTY&&io.stderrIsTTY===true;
+function startProgress(io:CliIo,initial:string,json:boolean,consent:ConsentState){
+  const terminal=guided({json},io),started=Date.now(),frames=['|','/','-','\\'];
   let stage=initial,frame=0,width=0,stopped=false;
   const draw=()=>{
+    if(consent.install?.active)return;
     const elapsed=Math.floor((Date.now()-started)/1000),line=`${frames[frame++%frames.length]} ${stage} (${elapsed}s)`;
     io.error(`\r${line}${' '.repeat(Math.max(0,width-line.length))}`);width=line.length;
   };
@@ -102,7 +96,7 @@ function startProgress(io:CliIo,initial:string){
   const timer=terminal?setInterval(draw,120):undefined;timer?.unref();
   return {
     update:(next:string)=>{if(stopped||next===stage)return;stage=next;if(terminal)draw();else io.error(`${stage}\n`);},
-    stop:(status:'done'|'failed')=>{if(stopped)return;stopped=true;if(timer)clearInterval(timer);const elapsed=Math.floor((Date.now()-started)/1000),line=`${status==='done'?'Done':'Failed'} (${elapsed}s)`;
+    stop:(status:'done'|'failed')=>{if(stopped)return;stopped=true;if(timer)clearInterval(timer);if(terminal&&(consent.install?.active||consent.toolchainDeclined||consent.installController?.signal.aborted))return;const elapsed=Math.floor((Date.now()-started)/1000),line=`${status==='done'?'Done':'Failed'} (${elapsed}s)`;
       if(terminal)io.error(`\r${line}${' '.repeat(Math.max(0,width-line.length))}\n`);else io.error(`${line}\n`);}
   };
 }
@@ -195,23 +189,6 @@ async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices
     io.write(await executeOutput(options,api));return 0;
   }
 }
-async function guidedExploration(root:string,session:ExplorationSession&{readonly directory:string},io:CliIo,api:CliServices,verbose=false,all=false,consent:ConsentState={}):Promise<number>{
-  io.write(formatExploration(session,verbose,all));
-  await io.flush?.();
-  if(!session.choices.length)return 3;
-  let pick:number|undefined;
-  for(;;){
-    const answer=(await io.question('Choose an observation number, or press Enter to exit: '))?.trim();
-    if(!answer||/^q(?:uit)?$/iu.test(answer)){io.write('Exploration saved; no observation was selected.\n');return 0;}
-    if(/^\d+$/u.test(answer)&&session.choices.some(choice=>choice.pick===Number(answer))){pick=Number(answer);break;}
-    io.error(`Choose a number from 1 to ${session.choices.length}, or press Enter to exit.\n`);
-  }
-  await requestTransferConsent(api.getDownloadPlan?await api.getDownloadPlan(session.directory,pick):choiceDownload(session.choices.find(choice=>choice.pick===pick)! as unknown as Record<string,unknown>,session.directory,pick));
-  const result=await api.getSession(root,session.directory,pick,line=>io.error(`${line}\n`));
-  if(consent.cancelled)throw new DownloadCancelledError();
-  io.write([`Files: ${displayPath(dirname(result.product))}/`,`Product: ${displayPath(result.product)}`,`Evidence: ${displayPath(result.resultPath)}`,contextText(result.context)??(result.satisfaction?`Scientific request: ${result.satisfaction.status}.`:''),...(result.reused?['Reused: verified existing delivery']:[])].filter(Boolean).join('\n')+'\n\n');
-  return guidedArtifact(artifactScreen(await api.listArtifactOutputs(result.resultPath),result.resultPath),io,api,verbose);
-}
 
 async function runCli(args: readonly string[], root: string | undefined = undefined, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices,consent:ConsentState={}): Promise<number> {
   const io=injectedIo??processIo(output);
@@ -223,8 +200,21 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
     let options = parseCli(args);
     // Fetch owns a staging directory and must keep its final destination absent until publication.
     if(args.includes('--out')&&options.command!=='fetch')recordDirectory='directory' in options?options.directory:'out' in options?options.out:undefined;
-    if (options.command === 'help') { io.write(helpText(options.topic,io.stdoutIsTTY)); return 0; }
+    if (options.command === 'help') return await writeHelp(options.topic,io,args.includes('--json'));
     if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
+    if (options.command === 'open') {
+      const runs = await listSavedRuns(options.directory);
+      if (!guided(options, io)) {
+        io.write(options.json ? `${JSON.stringify(runs)}\n` : runs.map(run => `${run.run}  ${run.target}  ${run.observations} observations  ${run.downloaded} downloaded`).join('\n') + (runs.length ? '\n' : ''));
+        return 0;
+      }
+      const terminal = io.terminal ?? processTerminal(), selected = await runsScreen(runs, terminal);
+      if (!selected.run) return selected.code;
+      const session = await readSavedExploration(selected.run.run);
+      const exit = await exploreScreen(session.target, api.exploration ?? explorationServices(root, session.arguments, session.directory, api, io, consent), terminal, options.noOpen, session);
+      if (exit.line) io.write(`${exit.line}\n`);
+      return exit.code;
+    }
     if (options.command === 'skill') {
       const result = manageSkill(options);
       io.write(options.json ? `${JSON.stringify(result)}\n` : `${result.status}: ${result.target} (${result.mode})\n`);
@@ -257,8 +247,10 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
           const result = await removeManagedEnvironment(options.name!);
           text = options.json ? `${JSON.stringify(result)}\n` : `Removed ${result.name}: ${displayPath(result.folder)}\n`;
         } else {
+          if (options.mode === 'install' && guided(options, io)) await requestTransferConsent({ kind: 'toolchain', name: options.name!, bytes: 1_000_000_000,
+            destination: USER_ROOT, packages: ['micromamba', 'Python', 'astronomy packages'] });
           const message = await manageToolchain(options.name!, options.mode);
-          text = options.json ? `${JSON.stringify({ toolchain: options.name, mode: options.mode, message })}\n` : `${message}\n`;
+          text = options.json ? `${JSON.stringify({ toolchain: options.name, mode: options.mode, message })}\n` : options.mode === 'install' && guided(options, io) ? '' : `${message}\n`;
         }
         code = 0;
       }else if(options.command==='wwt-fits'){
@@ -301,9 +293,11 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
         const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.targets.length>1){
           const result=await sweepPapers(root,{targets:options.targets,...asked});
+          if(guided(options,io))return await writeList(papersList(result,options),io,false)||(result.targets.some(entry=>entry.works.length)?0:3);
           text=options.json?await lookupJson('papers',result,options.directory?{savedPath:resolve(options.directory,'papers.json')}:undefined):formatSweep(result,options.directory);code=result.targets.some(entry=>entry.works.length)?0:3;
         }else{
           const result=await searchPapers(root,{target:options.targets[0]!,...(options.host?{host:options.host}:{}),...asked});
+          if(guided(options,io))return await writeList(papersList(result,options),io,false)||(result.works.length?0:3);
           text=options.json?await lookupJson('papers',result,options.directory?{savedPath:resolve(options.directory,'papers.json')}:undefined):formatPapers(result,options.directory);code=result.works.length?0:3;
         }
       }else if(options.command==='simulations'){
@@ -311,6 +305,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
         text=options.json?await lookupJson('simulations',result,options.directory?{savedPath:resolve(options.directory,'simulations.json')}:undefined):formatSimulations(result,options.directory);code=result.records.length?0:3;
       }else if(options.command==='stars'){
         const result=await surveyStars(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
+        if(guided(options,io))return await writeList(starsList(result,options),io,false)||(result.leads.length?0:3);
         text=options.json?await lookupJson('stars',result,options.directory?{savedPath:resolve(options.directory,'stars.json')}:undefined):formatStars(result,options.directory);code=result.leads.length?0:3;
       }else if(options.command==='gaia-cone'){
         const {command:_command,json:_json,verbose:_verbose,out,...request}=options;
@@ -319,7 +314,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
       }else if(options.command==='leads'){
         const shared={...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`),timeSeries:()=>jwstTimeSeries()};
         if(options.archiveClass){const result=await surveyLeads(root,{archiveClass:options.archiveClass,...shared,...(options.archiveClass==='exoplanet'?{unpaged:(paged:readonly string[])=>searchUnpaged(paged)}:{})});text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatSurvey(result,options.directory);code=result.rows.length?0:3;}
-        else{const result=await searchLeads(root,{target:options.target!,...shared});text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatLeads(result,options.directory);code=result.leads.length||result.watched?.length?0:3;}
+        else{const result=await searchLeads(root,{target:options.target!,...shared});if(guided(options,io))return await writeList(leadsList(result,options),io,false)||(result.leads.length||result.watched?.length?0:3);text=options.json?await lookupJson('leads',result,options.directory?{savedPath:resolve(options.directory,'leads.json')}:undefined):formatLeads(result,options.directory);code=result.leads.length||result.watched?.length?0:3;}
       }else if(options.command==='candidates'){
         const {runCandidates,epochMjd}=await import('./sky/association.mts'),result=await runCandidates(options.system,epochMjd(options.epoch),options.directory,{...(options.figureBackground?{figureBackground:options.figureBackground}:{}),...(options.orbitDraws?{orbitDraws:options.orbitDraws}:{})});
         text=options.json?`${JSON.stringify(result.set)}\n`:`${result.set.candidates.map(candidate=>`${candidate.id}  east ${candidate.eastMas.toFixed(2)} mas  north ${candidate.northMas.toFixed(2)} mas  ${candidate.sigmaEastMas===undefined?'reference':`± ${candidate.sigmaEastMas.toFixed(2)}, ${candidate.sigmaNorthMas!.toFixed(2)} mas (${candidate.predictedFrom!.tool} ${candidate.predictedFrom!.planet})`}`).join('\n')}\nSaved: ${options.directory}\n`;code=0;
@@ -336,11 +331,15 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
       }else if(options.command==='explore'){
         // --fresh: every archive is asked again; without it an answer saved in the last day stands (archives/memory.mts).
         if(options.fresh)process.env[FRESH_VARIABLE]='1';
-        const progress=startProgress(io,'Resolving target');
+        if(guided(options,io)){
+          const exit=await exploreScreen(options.request.target,api.exploration??explorationServices(root,options.requestArgs,options.directory,api,io,consent),io.terminal??processTerminal(),options.noOpen);
+          process.stdout.write=stdout;
+          if(exit.line)io.write(`${exit.line}\n`);return exit.code;
+        }
+        const progress=startProgress(io,'Resolving target',options.json,consent);
         let session:ExplorationSession&{readonly directory:string};
         try{session=await api.saveExploration(root,options.requestArgs,options.directory,undefined,progress.update);if(consent.cancelled)throw new DownloadCancelledError();progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
-        if(guided(options,io)){process.stdout.write=stdout;return await guidedExploration(root,session,io,api,options.verbose,options.all,consent);}
         text=`${JSON.stringify(explorationSummary(session))}\n`;code=session.choices.length?0:3;
       }else if(options.command==='project'){
         const result=await api.projectOutput(options.result,options.geometry,options.directory);text=options.json?JSON.stringify(result)+'\n':`Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;code=0;
@@ -359,7 +358,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
         const result=await api.exportOutput(options.result,options.selection,options.directory);
         text=options.json?await lookupJson('export',result,{savedPath:result.receipt}):`Data: ${result.data}\nFigure: ${result.figure}\nValues: ${result.values}\nEvidence: ${result.receipt}\n`;code=0;
       }else if (options.command === 'query') {
-        const progress=startProgress(io,'Reading local evidence');
+        const progress=startProgress(io,'Reading local evidence',options.json,consent);
         let session:Session;
         try{session=await saveSession(root, options.requestArgs, options.directory, undefined, progress.update);if(consent.cancelled)throw new DownloadCancelledError();progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
@@ -382,6 +381,12 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
     } finally { process.stdout.write = stdout; }
     io.write(text); return code;
   } catch (error) {
+    consent.install?.close();
+    if (consent.installController?.signal.aborted) return 130;
+    if (consent.toolchainDeclined) {
+      if (args[0] === 'toolchain') return 0;
+      io.error(`The astronomy packages are not installed: telescope toolchain install ${consent.declinedToolchain??'astroquery'}\n`); return 1;
+    }
     const code = error instanceof TypeError || error instanceof RangeError ? 2 : 1;
     const summary = error instanceof Error ? error.message : String(error);
     const cause = error instanceof Error ? error.cause : undefined;
@@ -396,10 +401,13 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
   }finally{io.close();}
 }
 export async function main(args: readonly string[], root?: string, output: (text:string)=>void = text=>{process.stdout.write(text);}, injectedIo?:CliIo, api:CliServices=defaultServices):Promise<number>{
-  const io=injectedIo??processIo(output), state:ConsentState={};
+  const io=injectedIo??processIo(output), state:ConsentState={installController:new AbortController()};
   const temporary=await mkdtemp(resolve(tmpdir(),'telescope-command-'));
-  try{return await withAcquisitionDirectory(temporary,()=>withTransferConsent(consentHandler(io,{json:args.includes('--json'),yes:args.includes('--yes')||args.includes('-y')},state),()=>runCli(args,root,output,io,api,state)));}
-  finally{await rm(temporary,{recursive:true,force:true});}
+  try{return await withAcquisitionDirectory(temporary,()=>withTransferConsent(consentHandler(io,{json:args.includes('--json'),yes:args.includes('--yes')||args.includes('-y')},state),()=>withToolchainProgress({
+    signal:state.installController!.signal,cancel:()=>state.installController!.abort(),
+    ...(guided({json:args.includes('--json')},io)?{report:(event:ToolchainProgress)=>{state.install?.progress(event);if(event.type==='installed')state.screen?.resume();}}:{}),
+  },()=>runCli(args,root,output,io,api,state))));}
+  finally{state.install?.close();await rm(temporary,{recursive:true,force:true});}
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   if (process.send) process.exitCode = await main(process.argv.slice(2), undefined, text => { process.send!({ text }); });
@@ -407,8 +415,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // Give reducers and every inherited Python/native subprocess stderr at the descriptor level.
     // The single final response crosses IPC, so stdout remains parseable even for noisy tools.
     const worker = fork(fileURLToPath(import.meta.url), process.argv.slice(2), { stdio: ['inherit', 2, 2, 'ipc'],env:{...process.env,
-      CSSEARTH_TELESCOPE_STDIN_TTY:process.stdin.isTTY?'1':'0',
-      CSSEARTH_TELESCOPE_STDOUT_TTY:process.stdout.isTTY?'1':'0'} });
+      CSSEARTH_TELESCOPE_STDIN_TTY:inheritedTty('CSSEARTH_TELESCOPE_STDIN_TTY',process.stdin.isTTY)?'1':'0',
+      CSSEARTH_TELESCOPE_STDOUT_TTY:inheritedTty('CSSEARTH_TELESCOPE_STDOUT_TTY',process.stdout.isTTY)?'1':'0',
+      CSSEARTH_TELESCOPE_STDERR_TTY:inheritedTty('CSSEARTH_TELESCOPE_STDERR_TTY',process.stderr.isTTY)?'1':'0'} });
     let pendingOutput:Promise<void>=Promise.resolve();
     worker.on('message', (message: unknown) => {
       if (message && typeof message === 'object' && 'text' in message && typeof message.text === 'string') {

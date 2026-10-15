@@ -1,5 +1,6 @@
 /** One executable owner: an explicit override, PATH, or a verified official release in the user root. */
-import { spawnSync } from 'node:child_process';
+import { runToolchainProcessAsync } from './process.js';
+import { hasToolchainProgress, reportToolchainProgress, toolchainInstallSignal } from './progress.js';
 import { constants } from 'node:fs';
 import { access, chmod, mkdir, mkdtemp, open, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { delimiter, isAbsolute, resolve } from 'node:path';
@@ -35,7 +36,7 @@ export function micromambaAsset(platform: string, arch: string): string {
 
 async function executable(path: string): Promise<boolean> {
   try { return (await stat(path)).isFile() && await access(path, constants.X_OK).then(() => true, () => false); }
-  catch { return false; }
+  catch { toolchainInstallSignal()?.throwIfAborted(); return false; }
 }
 async function onPath(name: string, env: NodeJS.ProcessEnv, platform: string): Promise<string | undefined> {
   for (const directory of (env.PATH ?? '').split(delimiter).filter(Boolean)) {
@@ -46,15 +47,21 @@ async function onPath(name: string, env: NodeJS.ProcessEnv, platform: string): P
   }
   return undefined;
 }
-function managedReady(path: string): boolean {
-  const result = spawnSync(path, ['--version'], { encoding: 'utf8', timeout: 10_000 });
-  return !result.error && result.status === 0 && result.stdout.trim() === VERSION;
+function probeSignal(): AbortSignal {
+  const install = toolchainInstallSignal(), timeout = AbortSignal.timeout(10_000);
+  return install ? AbortSignal.any([install, timeout]) : timeout;
+}
+async function managedReady(path: string): Promise<boolean> {
+  try { return (await runToolchainProcessAsync(path, ['--version'], { signal: probeSignal(), inheritEnvironment: true })).trim() === VERSION; }
+  catch { toolchainInstallSignal()?.throwIfAborted(); return false; }
 }
 /** Admit stable 2.0.7+ for Gemini's list --explicit lock export and create --platform/--dry-run/--json. */
-function compatibleOnPath(path: string): boolean {
-  const result = spawnSync(path, ['--version'], { encoding: 'utf8', timeout: 10_000 });
-  const version = /^(\d+)\.(\d+)\.(\d+)$/u.exec(result.stdout?.trim() ?? '');
-  if (result.error || result.status !== 0 || version === null) return false;
+async function compatibleOnPath(path: string): Promise<boolean> {
+  let output: string;
+  try { output = await runToolchainProcessAsync(path, ['--version'], { signal: probeSignal(), inheritEnvironment: true }); }
+  catch { toolchainInstallSignal()?.throwIfAborted(); return false; }
+  const version = /^(\d+)\.(\d+)\.(\d+)$/u.exec(output.trim());
+  if (!version) return false;
   const major = Number(version[1]), minor = Number(version[2]), patch = Number(version[3]);
   return major > 2 || (major === 2 && (minor > 0 || (minor === 0 && patch >= 7)));
 }
@@ -77,7 +84,8 @@ async function discardAbandonedDownloads(directory: string): Promise<void> {
 }
 
 async function responseFor(url: string, fetcher: NonNullable<MicromambaOptions['fetcher']>): Promise<Response> {
-  const signal = AbortSignal.timeout(120_000);
+  const installSignal = toolchainInstallSignal();
+  const signal = installSignal ? AbortSignal.any([installSignal, AbortSignal.timeout(120_000)]) : AbortSignal.timeout(120_000);
   for (let redirects = 0; ; redirects++) {
     if (new URL(url).protocol !== 'https:') throw new Error(`Managed micromamba downloads require HTTPS at every redirect hop: ${url}`);
     const response = await fetcher(url, { signal, redirect: 'manual' });
@@ -107,7 +115,9 @@ async function download(path: string, asset: string, fetcher: NonNullable<Microm
   try {
     for (;;) {
       const chunk = await reader.read(); if (chunk.done) break;
+      toolchainInstallSignal()?.throwIfAborted();
       received += chunk.value.byteLength;
+      reportToolchainProgress({ type: 'download', received, total: size });
       if (received > 64 * 1024 * 1024) throw new Error(`Micromamba download exceeds the size limit for ${asset}.`);
       await file.writeFile(chunk.value);
       if (Date.now() - lastReport >= 5_000) { report(`Micromamba: received ${received} bytes${size === undefined ? '' : ` / ${size}`}\n`); lastReport = Date.now(); }
@@ -119,40 +129,42 @@ async function download(path: string, asset: string, fetcher: NonNullable<Microm
 }
 
 export async function resolveMicromamba(options: MicromambaOptions = {}): Promise<string> {
+  reportToolchainProgress({ type: 'step', step: 'micromamba', status: 'started' });
+  const finished = (path: string) => { reportToolchainProgress({ type: 'step', step: 'micromamba', status: 'finished' }); return path; };
   const env = options.env ?? process.env, platform = options.platform ?? process.platform, arch = options.arch ?? process.arch;
   assertManagedPythonPlatform(platform);
   const override = env.CSSEARTH_TELESCOPE_MICROMAMBA;
   if (override !== undefined) {
     const path = isAbsolute(override) || /[/\\]/u.test(override) ? resolve(override) : await onPath(override, env, platform);
     if (!override.trim() || !path || !await executable(path)) throw new Error(`CSSEARTH_TELESCOPE_MICROMAMBA=${override} is not an executable. Set it to an existing micromamba path and retry.`);
-    return path;
+    return finished(path);
   }
   const existing = await onPath('micromamba', env, platform);
-  if (existing && compatibleOnPath(existing)) return existing;
+  if (existing && await compatibleOnPath(existing)) return finished(existing);
   const asset = micromambaAsset(platform, arch), directory = resolve(options.userRoot ?? USER_ROOT, 'micromamba', MICROMAMBA_RELEASE, asset);
   const path = resolve(directory, platform === 'win32' ? 'micromamba.exe' : 'micromamba');
-  if (managedReady(path)) return path;
-  const active = pending.get(path); if (active) return active;
-  const report = options.report ?? (message => { process.stderr.write(message); });
+  if (await managedReady(path)) return finished(path);
+  const active = pending.get(path); if (active) return finished(await active);
+  const report = options.report ?? (message => { if (!hasToolchainProgress()) process.stderr.write(message); });
   const work = (async () => {
     await mkdir(directory, { recursive: true });
     await discardAbandonedDownloads(directory);
-    if (managedReady(path)) return path;
+    if (await managedReady(path)) return finished(path);
     const staging = await mkdtemp(resolve(directory, 'download-')), partial = resolve(staging, 'binary.partial');
     try {
       await writeFile(resolve(staging, 'owner'), String(process.pid));
       await download(partial, asset, options.fetcher ?? fetch, report);
       await chmod(partial, 0o755);
-      if (!managedReady(partial)) throw new Error(`Downloaded micromamba does not run as ${VERSION} on ${platform}/${arch}.`);
+      if (!await managedReady(partial)) throw new Error(`Downloaded micromamba does not run as ${VERSION} on ${platform}/${arch}.`);
       // Across processes, both contenders have verified the same pinned asset. One may publish first.
       try { await rename(partial, path); }
-      catch (error) { if (!managedReady(path)) throw error; }
+      catch (error) { if (!await managedReady(path)) throw error; }
       return path;
     } catch (error) {
       throw new Error(`Missing managed micromamba ${MICROMAMBA_RELEASE} (${asset}) at ${path}; Python cannot be installed. ${error instanceof Error ? error.message : String(error)} Retry the same telescope command with network access, or set CSSEARTH_TELESCOPE_MICROMAMBA to an existing executable.`, { cause: error });
     } finally { await rm(staging, { recursive: true, force: true }); }
   })();
   pending.set(path, work);
-  try { return await work; }
+  try { return finished(await work); }
   finally { if (pending.get(path) === work) pending.delete(path); }
 }

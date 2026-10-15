@@ -10,7 +10,7 @@
  * without resolving further dependencies; the descriptor's patches are applied to the installed sources and each must match
  * exactly once, and its data archives are fetched and checked by size. The install keeps the descriptor and lock texts it was
  * built from, and the toolchain refuses an environment built from other pins. micromamba itself is resolved by the shared telescope owner. */
-import { verifyToolchainPython, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { verifyToolchainPython, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcessAsync, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { CLI_PACKAGE_ROOT, packagePath } from '../../paths.mts';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -47,7 +47,7 @@ async function installData(root: string, record: unknown) {
   const archive = resolve(root, 'data.tar.gz'), target = resolve(root, requireString(data.directory));
   await mkdir(target, { recursive: true });
   await downloadToolchainArchive(url, archive, size);
-  runToolchainProcess('tar', ['-xzf', archive, '-C', target]);
+  await runToolchainProcessAsync('tar', ['-xzf', archive, '-C', target]);
   await rm(archive);
 }
 
@@ -60,9 +60,9 @@ export async function installToolchain(id: ToolchainId) {
     const micromamba = await resolveMicromamba();
     await mkdir(root, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', lockPath]);
-    const sitePackages = runToolchainProcess(resolve(prefix, 'bin/python'), ['-c', 'import sysconfig; print(sysconfig.get_paths()["purelib"])']).trim();
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', lockPath]);
+    const sitePackages = (await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-c', 'import sysconfig; print(sysconfig.get_paths()["purelib"])'])).trim();
     for (const record of requireArray(entry.patches ?? [])) {
       const patch = requireRecord(record, 'patch'), path = resolve(sitePackages, requireString(patch.file));
       const source = await readFile(path, 'utf8'), find = requireString(patch.find);

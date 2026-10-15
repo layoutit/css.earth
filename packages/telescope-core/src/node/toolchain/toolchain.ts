@@ -5,7 +5,7 @@ import { installManagedToolchain } from './environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
 import { resolveInstalledToolchain } from './resolver.js';
 import { telescopePythonEnvironment, TOOLCHAINS, USER_ROOT } from '../paths/index.js';
-import { runToolchainProcess } from './process.js';
+import { runToolchainProcessAsync } from './process.js';
 import { accessSync, lstatSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, rm } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
@@ -29,8 +29,8 @@ function expectedVersions(entry: Record<string, unknown>): string {
   return `${entry.astroquery} ${entry.pyvo} ${entry.scipy} ${entry.batman} ${entry.orbitize} ${entry.whereistheplanet} ${entry.cdflib} ${entry.pyuvdata} ${entry.astropyHealpix}`;
 }
 const versionProbe = "import astroquery, astropy_healpix, importlib.metadata, pyvo, scipy, cdflib, pyuvdata, orbitize, whereistheplanet; from astroquery import alma, mast, vizier; print(astroquery.__version__, pyvo.__version__, scipy.__version__, importlib.metadata.version('batman-package'), importlib.metadata.version('orbitize'), importlib.metadata.version('whereistheplanet'), cdflib.__version__, pyuvdata.__version__, astropy_healpix.__version__)";
-function verifyPackages(root: string, entry: Record<string, unknown>): void {
-  const found = runToolchainProcess(resolve(root, 'env/bin/python'), ['-c', versionProbe], { env: telescopePythonEnvironment({ PATH: `${resolve(root, 'env/bin')}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', XDG_CACHE_HOME: resolve(USER_ROOT, 'python-cache'), MPLCONFIGDIR: resolve(USER_ROOT, 'python-cache/matplotlib') }) }).trim();
+async function verifyPackages(root: string, entry: Record<string, unknown>): Promise<void> {
+  const found = (await runToolchainProcessAsync(resolve(root, 'env/bin/python'), ['-c', versionProbe], { env: telescopePythonEnvironment({ PATH: `${resolve(root, 'env/bin')}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', XDG_CACHE_HOME: resolve(USER_ROOT, 'python-cache'), MPLCONFIGDIR: resolve(USER_ROOT, 'python-cache/matplotlib') }) })).trim();
   if (found !== expectedVersions(entry)) throw new Error(`Expected ${expectedVersions(entry)}, found ${found}.`);
 }
 
@@ -43,13 +43,13 @@ export async function installAstroquery() {
     const micromamba = await resolveMicromamba();
     await mkdir(root, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements))]);
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements))]);
     for (const value of requireArray(entry.sourcePackages, 'sourcePackages')) {
       const source = requireRecord(value, 'source package');
       if (source.build !== 'installed-numpy') throw new TypeError('A source package must state the installed-numpy build policy.');
       const requirement = `${requireString(source.name)} @ ${requireString(source.url)}`;
-      runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-build-isolation', '--no-deps', '-q', requirement]);
+      await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-build-isolation', '--no-deps', '-q', requirement]);
     }
     await rm(resolve(root, 'mamba/pkgs'), { recursive: true, force: true });
     return root;
@@ -88,7 +88,7 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
 let firstInstall: Promise<string> | undefined;
 async function installImplicitAstroquery(): Promise<string> {
   // A conservative estimate for Python plus the complete pinned scientific stack, not a measured transfer total.
-  await requestTransferConsent({ kind: 'toolchain', name: 'astronomy Python toolchain', bytes: 1_000_000_000,
+  await requestTransferConsent({ kind: 'toolchain', name: 'astroquery', bytes: 1_000_000_000,
     destination: sharedRoot(descriptor().entry),
     packages: ['micromamba', 'Python', 'Astroquery', 'Astropy', 'PyVO', 'SciPy', 'pinned astronomy dependencies'] });
   return installAstroquery();
@@ -113,6 +113,6 @@ export function findInstalledRoot(local: string, shared: string, pins: Toolchain
 /** Check the installed environment's imports and versions against the pins; the line `verify` prints. */
 export async function verifyAstroqueryToolchain(): Promise<string> {
   const toolchain = await astroqueryToolchain();
-  verifyPackages(dirname(dirname(dirname(toolchain.python))), descriptor().entry);
+  await verifyPackages(dirname(dirname(dirname(toolchain.python))), descriptor().entry);
   return `Astronomy packages ready: Astroquery ${toolchain.version}, PyVO ${toolchain.pyvoVersion}, SciPy ${toolchain.scipyVersion}, batman ${toolchain.batmanVersion}, orbitize ${toolchain.orbitizeVersion}, whereistheplanet ${toolchain.whereIsThePlanetVersion}, cdflib ${toolchain.cdflibVersion}, pyuvdata ${toolchain.pyuvdataVersion}, astropy-healpix ${toolchain.astropyHealpixVersion}`;
 }

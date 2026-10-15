@@ -13,7 +13,7 @@
  * micromamba creates Python from conda-forge; pip then installs requirements.lock, every package at its pinned version, with
  * `--no-deps`, so the resolver never chooses anything. The install keeps the descriptor and lock texts it was built from,
  * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is resolved by the shared telescope owner. */
-import { installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
+import { installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, runToolchainProcessAsync, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
@@ -39,10 +39,10 @@ export async function installSpitzer() {
     const micromamba = await resolveMicromamba();
     await mkdir(SPITZER_ROOT, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(SPITZER_ROOT, 'mamba') };
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(PINS, requireString(entry.requirements))]);
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(PINS, requireString(entry.requirements))]);
     await rm(resolve(SPITZER_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  }, () => { runToolchainProcess(resolve(prefix, 'bin/python'), ['-I', '-c', REQUIRED_MODULES.map(name => `import ${name}`).join('; ')]); });
+  }, async () => { await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-I', '-c', REQUIRED_MODULES.map(name => `import ${name}`).join('; ')]); });
 }
 
 export interface SpitzerToolchain {

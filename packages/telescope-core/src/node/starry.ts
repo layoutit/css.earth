@@ -5,7 +5,7 @@
 import { installManagedToolchain } from './toolchain/environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
 import { resolveInstalledToolchain } from './toolchain/resolver.js';
-import { runToolchainProcess } from './toolchain/process.js';
+import { runToolchainProcess, runToolchainProcessAsync } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -26,7 +26,7 @@ export async function installStarry() {
 
     const micromamba = await resolveMicromamba();
     await mkdir(STARRY_ROOT, { recursive: true });
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
       ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
     // The lock is version-pinned and complete; Theano-PyMC builds against the environment's NumPy. The packages built from their
     // source releases go in a second pass: their build needs (setuptools-scm) are in the lock too, and pip prepares every package
@@ -34,7 +34,7 @@ export async function installStarry() {
     const sourceBuilds = new Set(requireArray(entry.sourceBuilds, 'sourceBuilds').map(value => requireString(value, 'source build')));
     const locked = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8').split('\n').filter(line => line.trim() && !line.startsWith('#'));
     for (const pass of [locked.filter(line => !sourceBuilds.has(line.split('==')[0]!)), locked.filter(line => sourceBuilds.has(line.split('==')[0]!))])
-      runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', ...pass], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
+      await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', ...pass], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
     await rm(resolve(STARRY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   }, ({ entry }) => { verifyStarry({ python: resolve(prefix, 'bin/python'), version: requireString(entry.starry), env: { PYTHONNOUSERSITE: '1' } }); });
 }

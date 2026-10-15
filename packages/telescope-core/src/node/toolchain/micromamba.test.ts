@@ -245,3 +245,15 @@ test('Windows refuses before overrides, PATH lookup or downloads', async () => {
     assert.deepEqual(await readdir(f.userRoot), []);
   } finally { await f.cleanup(); }
 });
+
+test('install progress reports measured download bytes and surrounds resolution with step boundaries', async () => {
+  const { withToolchainProgress } = await import('./progress.js');
+  const f = await fixture();
+  const events: import('./progress.js').ToolchainProgress[] = [];
+  try {
+    await withToolchainProgress({ report: event => events.push(event), signal: new AbortController().signal }, () => resolveMicromamba(f.options));
+    assert.deepEqual(events[0], { type: 'step', step: 'micromamba', status: 'started' });
+    assert.deepEqual(events.at(-1), { type: 'step', step: 'micromamba', status: 'finished' });
+    assert.ok(events.some(event => event.type === 'download' && event.received === binary.length && event.total === binary.length));
+  } finally { await f.cleanup(); }
+});

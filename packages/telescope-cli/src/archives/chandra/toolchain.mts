@@ -13,7 +13,7 @@
  *
  * CALDB is part of the environment, not fetched at run time: caldb_main unpacks under the prefix and the CALDB variable of the
  * returned toolchain points the CIAO tools at it. */
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { runToolchainProcessAsync, verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -41,10 +41,9 @@ function requests(entry: Readonly<Record<string, unknown>>) {
   return { channels, packages: requireArray(mamba.packages, 'packages').map(value => requireString(value, 'package')) };
 }
 
-function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: telescopePythonEnvironment({ ...env }), encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(`${command} ${args.slice(0, 6).join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-2000)}`);
-  return result.stdout;
+async function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
+  return runToolchainProcessAsync(command, args, { env, maxBuffer: 256 * 1024 * 1024,
+    failureMessage: (status, stderr) => new Error(`${command} ${args.slice(0, 6).join(' ')} failed (status ${status}): ${stderr.slice(-2000)}`) });
 }
 
 /** Re-resolve the descriptor's package requests and rewrite packages.lock as an @EXPLICIT list. Nothing downloads. */
@@ -53,7 +52,7 @@ export async function solveChandra() {
   const { entry } = await descriptor(), { channels, packages } = requests(entry);
   const root = { MAMBA_ROOT_PREFIX: resolve(CHANDRA_ROOT, 'mamba') };
   // A prefix that does not exist, so the solve is the one `install` performs and not an update of whatever is installed.
-  const stdout = run(await resolveMicromamba(), ['create', '-y', '--dry-run', '--json', '-p', resolve(CHANDRA_ROOT, 'solve'), ...channels, ...packages], root);
+  const stdout = await run(await resolveMicromamba(), ['create', '-y', '--dry-run', '--json', '-p', resolve(CHANDRA_ROOT, 'solve'), ...channels, ...packages], root);
   const links = requireArray(requireRecord(requireRecord(JSON.parse(stdout) as unknown, 'solution').actions, 'actions').LINK, 'LINK')
     .map(value => requireRecord(value, 'package'))
     .map(entry => ({ name: requireString(entry.name, 'name'), version: requireString(entry.version, 'version'), url: requireString(entry.url, 'url') }))
@@ -69,7 +68,7 @@ export async function installChandra() {
   return installManagedToolchain(CHANDRA_ROOT, descriptor, prefix, async () => {
     const micromamba = await resolveMicromamba();
     await mkdir(CHANDRA_ROOT, { recursive: true });
-    run(micromamba, ['create', '-y', '-q', '-p', prefix, '-f', LOCK], { MAMBA_ROOT_PREFIX: resolve(CHANDRA_ROOT, 'mamba') });
+    await run(micromamba, ['create', '-y', '-q', '-p', prefix, '-f', LOCK], { MAMBA_ROOT_PREFIX: resolve(CHANDRA_ROOT, 'mamba') });
     await rm(resolve(CHANDRA_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }

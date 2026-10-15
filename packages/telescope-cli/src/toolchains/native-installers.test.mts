@@ -17,6 +17,7 @@ import { mock } from 'node:test';
 import { chmod, mkdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 mock.module('node:child_process', { namedExports: { ...childProcess,
+  spawn: () => { throw new Error('repair reached native build'); },
   spawnSync: () => { throw new Error('repair reached native build'); } } });
 globalThis.fetch = async () => { throw new Error('repair reached download'); };
 const core = await import('@cssearth/telescope-core/node');

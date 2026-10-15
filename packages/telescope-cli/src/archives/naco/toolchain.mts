@@ -15,7 +15,7 @@
  *
  * An installed toolchain keeps the text of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another
  * pin. The downloaded archive is deleted after the build. */
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { runToolchainProcessAsync, hasToolchainProgress, verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, copyFile, link, readdir, readFile, rm, stat } from 'node:fs/promises';
@@ -44,10 +44,10 @@ export async function nacoRecipes(): Promise<readonly string[]> {
   return requireArray(entry.recipes, 'recipes').map(value => requireString(value, 'recipe'));
 }
 
-function run(command: string, args: readonly string[], options: { cwd: string; env?: NodeJS.ProcessEnv; input?: string }) {
-  const result = spawnSync(command, args, { cwd: options.cwd, env: telescopePythonEnvironment({ ...options.env }),
-    ...(options.input === undefined ? { stdio: 'inherit' } : { input: options.input, stdio: ['pipe', 'inherit', 'inherit'] }) });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${options.cwd} (status ${String(result.status)}).`);
+async function run(command: string, args: readonly string[], options: { cwd: string; env?: NodeJS.ProcessEnv; input?: string }) {
+  await runToolchainProcessAsync(command, args, { cwd: options.cwd, env: options.env, input: options.input,
+    failureMessage: status => new Error(`${command} ${args.join(' ')} failed in ${options.cwd} (status ${String(status)}).`),
+    captureOutput: false, output: (text, stream) => { if (!hasToolchainProgress()) (stream === 'stdout' ? process.stdout : process.stderr).write(text); } });
 }
 
 /** The pinned kit, from a cache directory that already holds it or from ESO, checked by the size the pin records. */
@@ -79,13 +79,13 @@ export async function installNacoToolchain(caches: readonly string[] = []) {
     const archives = await Promise.all(requireArray(entry.downloads, 'downloads').map(record => fetchKit(requireRecord(record, 'download'), downloads, caches)));
     const build = resolve(root, 'build');
     await mkdir(build, { recursive: true });
-    run('tar', ['-xzf', archives.find(path => path.endsWith(kitArchive))!], { cwd: build });
+    await run('tar', ['-xzf', archives.find(path => path.endsWith(kitArchive))!], { cwd: build });
     const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
     // ESO's installer asks for confirmation when a target directory is missing and refuses to ask without a terminal: both
     // exist before it runs, and it reads an empty answer. It writes its own configuration into HOME, which is the kit's own.
     const home = resolve(root, 'home');
     for (const directory of [home, resolve(root, 'pipeline'), resolve(root, 'calib')]) await mkdir(directory, { recursive: true });
-    run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', env: { HOME: home } });
+    await run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', env: { HOME: home } });
     // The build tree is not needed at run time, and neither is the downloaded archive; the disk is kept for data.
     await rm(kit, { recursive: true, force: true });
     await rm(downloads, { recursive: true, force: true });

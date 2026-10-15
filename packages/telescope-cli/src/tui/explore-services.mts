@@ -1,0 +1,233 @@
+import { readdir, stat, statfs } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+import { hasErrorCode, requireArray, requireRecord } from '@cssearth/core';
+import { astroquery, parseLimits, withDownloadProgress, withTransferConsent } from '@cssearth/telescope-core/node';
+import type { CliServices } from '../cli-services.mts';
+import type { CliIo } from '../cli-io.mts';
+import { consentHandler, type ConsentState } from '../cli-consent.mts';
+import { parseCli } from '../cli-arguments.mts';
+import type { ExplorationChoice } from '../exploration.mts';
+import { skyTargetRequest } from '../exploration.mts';
+import { loadTargetCatalogue } from '../observation-query/query.mts';
+import { fetchPreview, previewSource } from '../previews/index.mts';
+import { readPreviewFile } from '../previews/source.mts';
+import { previewVotable } from '../previews/votable.mts';
+import { planAccess, plannedDownload, type MetadataLoader } from '../vo/access.mts';
+import { normalizeSnapshot, savedResponseSnapshot, SERVICES, type DiscoveryRequest } from '../vo/discovery.mts';
+import { jsonValue, parseSnapshot, type DiscoverySnapshot } from '@cssearth/objects';
+import { voUrl } from '../vo/network-policy.mts';
+import { exportHtml } from '../delivery/html-outputs.mts';
+import { delivery } from '../delivery/outputs.mts';
+import { localOutput, verifiedProduct } from '../products/verified-product.mts';
+import { openExternal } from './open.mts';
+import { cubeBand, cubePeakAperture } from './cube-output.mts';
+import type { PickStatus } from './explore-render.mts';
+import type { ExploreOutput, ExploreServices, SavedExploration } from './explore.mts';
+
+/** The delivery record and its pinned files, not a UI receipt, establish completion. */
+export async function explorationPickStatuses(session: SavedExploration): Promise<ReadonlyMap<number, PickStatus>> {
+  const statuses = new Map<number, PickStatus>();
+  for (const choice of session.choices) {
+    const resultPath = resolve(session.directory, `pick-${choice.pick}`, 'result.json');
+    const exists = await stat(resultPath).then(() => true).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
+    if (exists) {
+      const result = await delivery(resultPath);
+      statuses.set(choice.pick, { state: 'done', resultPath, bytes: result.product.bytes }); continue;
+    }
+    const bytes = await partialDownloadBytes(resolve(session.directory, '.work', `pick-${choice.pick}`)) + await partialDownloadBytes(resolve(session.directory, `pick-${choice.pick}`));
+    if (bytes > 0) statuses.set(choice.pick, { state: 'partial', bytes });
+  }
+  return statuses;
+}
+async function partialDownloadBytes(directory: string): Promise<number> {
+  const entries = await readdir(directory, { withFileTypes: true }).catch((error: unknown) => {
+    if (hasErrorCode(error, 'ENOENT')) return []; throw error;
+  });
+  let bytes = 0;
+  const packagePresent = entries.some(entry => entry.isFile() && /^archive\.(?:tar|zip)(?:\.download\.partial)?$/u.test(entry.name));
+  for (const entry of entries) {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) bytes += await partialDownloadBytes(path);
+    else if (!(packagePresent && entry.name.startsWith('science.fits')) && entry.isFile() && (entry.name.endsWith('.download.partial') || /^(?:science\.fits|archive\.(?:tar|zip))$/u.test(entry.name))) bytes += (await stat(path)).size;
+  }
+  return bytes;
+}
+export async function explorationFreeBytes(directory: string): Promise<number> {
+  for (let path = resolve(directory); ;) {
+    try { const { bavail, bsize } = await statfs(path); return bavail * bsize; }
+    catch (error) { if (!hasErrorCode(error, 'ENOENT') || dirname(path) === path) throw error; path = dirname(path); }
+  }
+}
+
+/** Size and scope of the full file selected by access planning, never a preview cutout. */
+export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 'target' | 'archiveService' | 'display' | 'observation' | 'reference'>, signal: AbortSignal, fetcher: typeof fetch = fetch, load?: MetadataLoader, request: DiscoveryRequest = { target: choice.target }): Promise<number | null | { readonly bytes: number | null; readonly singleCube: boolean }> {
+  const alma = choice.archiveService === 'https://almascience.eso.org/tap' || choice.reference.kind === 'indexed-observation' && choice.reference.telescope === 'ALMA';
+  const wholeDelivery = (bytes: number | null) => alma ? { bytes, singleCube: false } : bytes;
+  if (choice.reference.kind === 'vo-acquisition' && choice.display.productKind === 'cube' && choice.archiveService === 'https://almascience.eso.org/tap') {
+    const file = choice.reference.snapshot;
+    return withDownloadProgress({ report: () => {}, signal, retainPartial: false }, async () => {
+      try {
+        const profile = SERVICES.find(profile => profile.service === choice.archiveService);
+        if (!profile) return wholeDelivery(null);
+        const text = await readPreviewFile(file, parseLimits(request.transferLimits).metadataBytes);
+        let snapshot: DiscoverySnapshot;
+        if (text.trimStart().startsWith('{')) snapshot = parseSnapshot(JSON.parse(text));
+        else {
+          const saved = await savedResponseSnapshot(file, profile, request, parseLimits(request.transferLimits).metadataBytes);
+          if (!saved) return wholeDelivery(null);
+          snapshot = saved;
+        }
+        const target = choice.target ? { id: choice.target, names: [choice.target, ...request.skyTarget ? [request.skyTarget.mainId, ...request.skyTarget.identifiers] : []] } : undefined;
+        const observation = normalizeSnapshot(snapshot, profile, target, target ? [target] : []).find(row => row.key === choice.observation);
+        if (!observation) return wholeDelivery(null);
+        const plan = await planAccess('', observation, snapshot, request, load, {}, async () => snapshot.response.raw);
+        signal.throwIfAborted();
+        const planned = plannedDownload(plan);
+        if (planned?.singleCube && planned.bytes === null) {
+          try {
+            const selected = plan.products[0]!;
+            const response = await fetcher(voUrl(selected.operation.url, selected.operation.url),
+              { method: 'HEAD', signal: AbortSignal.any([signal, AbortSignal.timeout(15_000)]), redirect: 'error' });
+            await response.body?.cancel();
+            const bytes = Number(response.headers.get('content-length'));
+            if (response.ok && Number.isSafeInteger(bytes) && bytes > 0) return { ...planned, bytes };
+          } catch { signal.throwIfAborted(); }
+        }
+        return planned ?? wholeDelivery(null);
+      } catch { signal.throwIfAborted(); return wholeDelivery(null); }
+    });
+  }
+  if (choice.display.advertisedKilobytes !== null) return wholeDelivery(choice.display.advertisedKilobytes * 1000);
+  let identity: string = choice.observation;
+  if (identity.startsWith('{')) {
+    const record = requireRecord(JSON.parse(identity)), columns = requireArray(record.identityColumns), values = requireArray(record.identity);
+    const index = columns.indexOf('obs_id'); identity = typeof values[index] === 'string' ? values[index] : '';
+  }
+  const member = /^(uid:\/\/[^/]+\/[^/]+\/[^.]+)(?:\.source\.|$)/u.exec(identity)?.[1];
+  if (!member) return wholeDelivery(null);
+  try {
+    const response = await fetcher(voUrl(`https://almascience.org/datalink/sync?ID=${encodeURIComponent(member)}`, 'https://almascience.org'),
+      { signal: AbortSignal.any([signal, AbortSignal.timeout(15_000)]), redirect: 'error' });
+    if (!response.ok || !response.body) { await response.body?.cancel(); return wholeDelivery(null); }
+    const reader = response.body.getReader(), chunks: Uint8Array[] = []; let bytes = 0;
+    try {
+      for (;;) { const chunk = await reader.read(); if (chunk.done) break; bytes += chunk.value.length;
+        if (bytes > 2 * 1024 * 1024) throw new Error('ALMA size metadata exceeds its byte limit.'); chunks.push(chunk.value); }
+    } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
+    const rows = previewVotable(Buffer.concat(chunks).toString('utf8')).rows.filter(row => !row.error_message && row.semantics?.endsWith('#this') && row.access_url && /\.tar(?:$|[?#])/u.test(row.access_url));
+    const sizes = rows.map(row => Number(row.content_length));
+    return wholeDelivery(rows.length && sizes.every(size => Number.isSafeInteger(size) && size > 0) ? sizes.reduce((sum, size) => sum + size, 0) : null);
+  } catch { signal.throwIfAborted(); return wholeDelivery(null); }
+}
+
+/** A published product record, with its files verified, owns the reopened output. */
+async function madeOutput(directory: string, name?: string): Promise<string | undefined> {
+  const entries = await readdir(directory, { withFileTypes: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
+  for (const entry of entries) {
+    if (!entry.isFile() || !entry.name.endsWith('.product.json')) continue;
+    const product = await verifiedProduct(resolve(directory, entry.name));
+    const output = name ? product.record.outputs.find(output => output.path === name) : product.record.outputs[0];
+    if (output) return localOutput(product.root, output.path);
+  }
+  return undefined;
+}
+
+export function explorationServices(root: string, requestArgs: readonly string[], directory: string | undefined, api: CliServices, io: CliIo, consent: ConsentState): ExploreServices {
+  const toolchainConsent = consentHandler(io, { json: false }, consent);
+  return {
+    catalogue: () => loadTargetCatalogue(root),
+    resolve: (target, signal) => withDownloadProgress({ report: () => {}, signal, retainPartial: false },
+      async () => !(await skyTargetRequest(root, { target })).simbadMiss),
+    search: async (target, report, signal) => {
+      const args = [...requestArgs];
+      if (target !== undefined) {
+        const existing = args.indexOf('--target');
+        if (existing >= 0) args[existing + 1] = target;
+        else for (let index = 0; index < args.length; index++) {
+          if (!args[index]!.startsWith('-')) { args[index] = target; break; }
+          if (args[index] !== '--any-time') index++;
+        }
+      }
+      const session = await withDownloadProgress({ report: () => {}, signal, retainPartial: false }, () => api.saveExploration(root, args, directory, undefined, undefined, report));
+      if (consent.cancelled) throw new Error('The astronomy packages are not installed.');
+      return session;
+    },
+    statuses: explorationPickStatuses,
+    size: (choice, session, signal) => explorationDownloadSize({ ...choice, target: session.target }, signal, fetch, undefined, session.answer.request),
+    free: explorationFreeBytes,
+    get: (choice, session, report, signal) => {
+      let received = 0;
+      return withDownloadProgress({ report: event => { received = event.received; report(event); }, signal, retainPartial: true }, () => withTransferConsent(async info => {
+        if (info.kind === 'toolchain') return toolchainConsent(info);
+        if (signal.aborted) signal.throwIfAborted();
+        const have = (await explorationPickStatuses(session)).get(choice.pick)?.bytes ?? 0;
+        if (info.bytes !== null && info.bytes - have > await explorationFreeBytes(session.directory)) throw new Error('Not enough space for this download.');
+      }, async () => {
+        const result = await api.getSession(root, session.directory, choice.pick, text => {
+          if (/^Copying |^Verifying /u.test(text)) report({ received, checking: true });
+        });
+        if (consent.cancelled) throw new Error('The astronomy packages are not installed.');
+        signal.throwIfAborted(); return result.resultPath;
+      }));
+    },
+    outputs: async (resultPath, pick) => {
+      const inspected = await api.listArtifactOutputs(resultPath), source = typeof inspected.source === 'string' ? inspected.source : resultPath;
+      const retained = await delivery(resultPath);
+      const options: ExploreOutput[] = [];
+      for (const [index, output] of inspected.outputs.entries()) {
+        const cube = output.shape !== undefined && output.shape.length >= 3 && (output.spectral?.axis !== undefined || output.shape.at(-3)! > 1);
+        const moment = cube && output.kind === 'band-image', peak = cube && output.kind === 'aperture-spectrum';
+        const channel = cube && output.kind === 'image', pixel = cube && output.kind === 'spectrum';
+        if (!output.available || output.kind === 'feature-map' || channel) continue;
+        // Peak selection needs the same qualified band image.
+        if ((peak || pixel) && !output.spectral?.binEdgesMicrometres?.length) continue;
+        if (pixel && inspected.outputs.some(candidate => candidate.kind === 'aperture-spectrum' && candidate.available && candidate.hdu === output.hdu && candidate.structure === output.structure)) continue;
+        if (!moment && !peak && !pixel && output.parameters?.length) continue;
+        const label = moment ? ['Band image', "PNG of the emission averaged over the cube's band"] : peak || pixel ? ['Spectrum at peak', 'PNG and CSV through the brightest pixel']
+          : output.kind === 'html' ? ['Viewer', 'HTML page you can pan and zoom']
+          : output.kind === 'image' ? ['Image', 'PNG with a scale bar'] : output.kind === 'spectrum' ? ['Plot', 'PNG of flux against wavelength']
+          : output.kind === 'sphere' ? ['Globe', 'HTML page of the mapped surface'] : output.kind === 'points' ? ['Points', '3D points with their source data']
+          : output.kind === 'volume' || output.kind === 'volume-dataset-bank' ? ['Volume', '3D view of the prepared data'] : undefined;
+        if (!label) continue;
+        const [name = '', description = ''] = label;
+        const destination = resolve(dirname(resultPath), 'made', `${index + 1}-${moment ? 'moment-map' : peak ? 'spectrum-at-brightest-pixel' : pixel ? 'brightest-pixel' : output.kind}`);
+        const file = await madeOutput(destination, output.kind === 'html' ? 'viewer.html' : output.kind === 'sphere' ? 'sphere.html'
+          : ['points', 'volume', 'volume-dataset-bank'].includes(output.kind) ? 'object.json' : 'figure.png');
+        options.push({ name, file, description, parameters: [], run: async parameters => {
+            if (file) return file;
+            const args = ['export', source, '--output', output.kind, '--out', destination];
+            if (output.hdu !== undefined) args.push('--hdu', String(output.hdu));
+            if (output.structure) args.push('--structure', output.structure);
+            if (pixel) args.push('--pixel', (await cubePeakAperture(retained, output)).slice(0, 2).join(','));
+            if (moment) args.push('--band', cubeBand(output).join(','), '--uncertainty', 'omit');
+            if (peak) args.push('--aperture', (await cubePeakAperture(retained, output)).join(','), '--background', 'none', '--uncertainty', 'omit');
+            for (const [key, value] of parameters) args.push(`--${key}`, value);
+            const selected = parseCli(args);
+            if (selected.command === 'html') return (await (api.exportHtml ?? exportHtml)(selected.result, selected.directory)).html;
+            if (selected.command === 'sphere') return (await api.exportSphere(selected.result, selected.directory)).html;
+            if (selected.command === 'spatial') return (await api.exportSpatialObject(selected.result, selected.kind, selected.directory)).object;
+            if (selected.command === 'project') return (await api.projectOutput(selected.result, selected.geometry, selected.directory)).figure;
+            if (selected.command !== 'export') throw new Error(`Pick ${pick}: unsupported output ${output.kind}.`);
+            return (await api.exportOutput(selected.result, selected.selection, selected.directory)).figure;
+          } });
+      }
+      for (const operation of inspected.familyOperations ?? []) {
+        if (!operation.available || !['spectrum-export', 'spectrum-preview', 'table-export'].includes(operation.id)) continue;
+        const plot = operation.id === 'spectrum-preview';
+        const destination = resolve(dirname(resultPath), 'made', `${operation.componentId}-${operation.id}`), file = await madeOutput(destination);
+        options.push({ name: plot ? 'Plot' : 'Table', file, description: plot ? 'PNG of flux against wavelength' : 'CSV of wavelength and flux', run: async () => {
+          if (file) return file;
+          const operationId = operation.id;
+          if (operationId !== 'spectrum-export' && operationId !== 'spectrum-preview' && operationId !== 'table-export') throw new Error('Unsupported family output.');
+          return (await api.executeFamilyOperation(source, { operationId, componentId: operation.componentId }, destination)).product;
+        } });
+      }
+      // The native data is already exported by get; choosing it opens that exact retained file.
+      options.push({ name: 'Data', description: 'the FITS file as retrieved', run: async () => retained.file });
+      return options;
+    },
+    preview: async (choice, session, signal) => fetchPreview(await previewSource(choice, session), { runDir: session.directory, signal }),
+    open: openExternal,
+    screen: control => { consent.screen = control; },
+  };
+}

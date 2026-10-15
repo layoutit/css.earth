@@ -3,14 +3,15 @@ import { basename, dirname, resolve } from 'node:path';
 import { mkdir, readFile, stat, writeFile, copyFile, link, rename, rm } from 'node:fs/promises';
 import { snapshotPublisher, type SnapshotPublisher } from './snapshot-store.mts';
 import { randomUUID } from 'node:crypto';
-import { acquisitionDirectory, fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits, USER_ROOT } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, acquisitionWorkingDirectory, downloadContext, parseAstroqueryAnswer, fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits, type AstroqueryRequest, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
-import { requireRecord } from '@cssearth/core';
+import { requireRecord, hasErrorCode } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
 import { canonical, jsonValue, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource } from '@cssearth/objects';
 import { searchCircle, type DiscoveredObservation, type DiscoveryRequest } from './discovery.mts';
 import { voUrl, type VoNetworkPolicy } from './network-policy.mts';
+import { almaCubeUrl, matchesAlmaCube } from './alma-cube.mts';
 
 export interface AcquisitionSpec {
   /** `key` names the acquisition directory; `identity` is the exact acquisition as canonical text. */
@@ -75,6 +76,9 @@ export function sodaParameters(descriptor: Resource, request: DiscoveryRequest, 
   const inputs = descriptor.groups.filter(g => g.name === 'inputParams');
   if (inputs.length !== 1) throw new TypeError('SODA input parameter declarations are missing or ambiguous.');
   const parameters = inputs[0]!.parameters;
+  const address = descriptor.parameters.find(p => p.name === 'accessURL')?.value;
+  if (!request.region && request.spectralFrame === undefined && parameters.length === 0 && Object.keys(fixed).length === 0 &&
+    typeof address === 'string' && almaCubeUrl(address)) return {};
   if (new Set(parameters.map(p => p.name)).size !== parameters.length) throw new TypeError('Duplicate SODA input parameter.');
   const id = parameters.find(p => p.name === 'ID');
   if (!id || fixed.ID === undefined || fixed.ID === null || fixed.ID === '') throw new TypeError('No exact SODA dataset ID binding.');
@@ -125,6 +129,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   if (!supportedKind(observation.kind))
     return { products, issues: [`No native profile route for advertised product kind ${observation.kind}.`] };
   const kind = observation.kind;
+  const cubeProducts: AcquisitionSpec[] = [];
   const loader = load ?? (async (address: string, parameters?: Readonly<Record<string, Json>>) => (await astroquery({ operation: 'vo-links', url: address,
     ...(parameters === undefined ? {} : { parameters }), directory: resolve(USER_ROOT, 'output/telescopes/vo/metadata'), byteLimit: limits.metadataBytes,
     allowedPrivateHosts: policy.allowedPrivateHosts })).vo!);
@@ -167,10 +172,15 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
           if (standard === DATALINK_LINKS) {
             await links(address, binding.parameters, depth + 1, closure);
           } else if (standard === SODA_SYNC) {
+            const id = almaCubeUrl(address);
+            const wholeCube = kind === 'cube' && !request.region && request.spectralFrame === undefined && id && matchesAlmaCube(observation.identities.obs_id, id);
             // A SODA descriptor advertises a possible subset, not an error for a whole-product search.
-            if (!request.region && request.spectralFrame === undefined) continue;
+            if (!request.region && request.spectralFrame === undefined && !wholeCube) continue;
+            if (wholeCube && typeof row.content_length === 'number' && row.content_length > limits.scienceBytes) { issues.push('Advertised cube exceeds the transfer bound.'); continue; }
             const parameters = sodaParameters(descriptor, request, binding.parameters);
+            const before = products.length;
             add({ kind: 'soda-sync', url: address, parameters }, jsonValue({ row, url: address, dataset: binding.parameters }), closure, descriptor, i, response.raw.path);
+            if (wholeCube) cubeProducts.push(...products.slice(before));
           } else if (typeof standard === 'string' && standard.startsWith('ivo://ivoa.net/std/SODA#')) throw new TypeError('No advertised synchronous SODA operation.');
           else throw new TypeError(`Unsupported DataLink service standard ${standard ?? 'missing'}.`);
         } catch (error) { issues.push(String(error)); }
@@ -180,7 +190,15 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
       try {
         const next = voUrl(row.access_url, response.effectiveUrl, policy), mime = typeof row.content_type === 'string' ? row.content_type : null;
         if (datalink(mime)) await links(next, {}, depth + 1, closure);
-        else direct(next, mime, row.content_length, jsonValue({ row, url: next }), closure);
+        else {
+          const before = products.length;
+          const id = typeof row.ID === 'string' && matchesAlmaCube(observation.identities.obs_id, row.ID) ? row.ID : decodeURIComponent(new URL(next).pathname.split('/').at(-1) ?? '');
+          const ownCube = kind === 'cube' && fits(mime) && matchesAlmaCube(observation.identities.obs_id, id);
+          // Nested product lists can contain other targets and windows; only this row's cube is an alternative to its tar.
+          if (kind === 'cube' && fits(mime) && String(observation.identities.obs_id).startsWith('uid://') && !ownCube) continue;
+          direct(next, mime, row.content_length, jsonValue({ row, url: next }), closure);
+          if (ownCube) cubeProducts.push(...products.slice(before));
+        }
       } catch (error) { issues.push(String(error)); }
     }
   }
@@ -200,7 +218,23 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
     jsonValue({ url: address, identities: observation.identities }), pins);
   if (!products.length) return { products, issues };
   const pin = await publishSnapshot();
-  return { products: products.map(product => ({ ...product, metadata: [product.metadata[0]!, pin, ...product.metadata.slice(1)] })), issues };
+  const cube = cubeProducts.find(product => product.operation.kind === 'direct') ?? cubeProducts[0];
+  const selected = cube ? [cube] : products;
+  return { products: selected.map(product => ({ ...product, metadata: [product.metadata[0]!, pin, ...product.metadata.slice(1)] })), issues };
+}
+
+/** Report exactly the products selected above, using their retained DataLink bindings. */
+export function plannedDownload(plan: AccessPlan): { readonly bytes: number | null; readonly singleCube: boolean } | null {
+  if (!plan.products.length) return null;
+  const sizes = plan.products.map(product => {
+    const binding = requireRecord(requireRecord(JSON.parse(product.productKey)).binding);
+    const selected = requireRecord(binding.binding);
+    const row = selected.row === undefined ? undefined : requireRecord(selected.row);
+    const size = row ? row.content_length : (product.observation.access.estimatedKilobytes === null ? null : product.observation.access.estimatedKilobytes * 1000);
+    return typeof size === 'number' && Number.isSafeInteger(size) && size > 0 ? size : null;
+  });
+  return { bytes: sizes.every(size => size !== null) ? sizes.reduce<number>((sum, size) => sum + (size ?? 0), 0) : null,
+    singleCube: plan.products.length === 1 && plan.products[0]!.kind === 'cube' && plan.products[0]!.format === 'fits' };
 }
 
 /** Acquisition records origin/integrity only. Scientific metadata qualification is a later stage. */
@@ -230,8 +264,15 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     return { file: previous.outputs.some(output => output.path === 'science.fits') ? resolve(destination, 'science.fits') : null, record: recordPath, reused: true, replay: 'pinned-local-artifact' as const };
   }
   await mkdir(dirname(destination), { recursive: true });
-  const staging = `${destination}.${randomUUID()}.partial`;
-  await mkdir(staging);
+  const retained = downloadContext()?.retainPartial === true;
+  const staging = retained ? resolve(acquisitionWorkingDirectory() ?? dirname(destination), `${spec.key}.partial`) : `${destination}.${randomUUID()}.partial`;
+  await mkdir(staging, { recursive: retained });
+  const identityPath = resolve(staging, 'request.json');
+  if (retained) {
+    const saved = await readFile(identityPath, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
+    if (saved !== undefined && saved !== spec.identity) throw new Error('Partial download belongs to another acquisition.');
+    await writeFile(identityPath, spec.identity);
+  }
   try {
     const metadata: { path: string; file: string }[] = [];
     for (const pin of spec.metadata) {
@@ -245,10 +286,20 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     const descriptorPin = spec.metadata.find(p => p.path === spec.serviceMetadata);
     if (spec.operation.kind === 'soda-sync' && !descriptorPin) throw new Error('Subset descriptor is outside the metadata evidence closure.');
     const receivedName = spec.format === 'fits' ? 'science.fits' : `archive.${spec.format}`;
-    const transferred = (await astroquery({ operation: 'vo-download', url: spec.operation.url, destination: resolve(staging, receivedName), format: spec.format,
+    const downloadRequest: AstroqueryRequest = { operation: 'vo-download', url: spec.operation.url, destination: resolve(staging, receivedName), format: spec.format,
       ...(['f08-table', 'f03-spectrum'].includes(nativeQualificationRoute(spec) ?? '') ? { fitsProfile: 'bintable' as const } : {}),
       byteLimit: spec.limits.scienceBytes, parameters: spec.operation.parameters, allowedPrivateHosts: policy.allowedPrivateHosts,
-      ...(spec.operation.kind === 'soda-sync' ? { descriptor: { file: descriptorPin!, row: spec.serviceRow!, serviceId: spec.descriptor!.id! } } : {}) })).transfer!;
+      ...(spec.operation.kind === 'soda-sync' ? { descriptor: { file: descriptorPin!, row: spec.serviceRow!, serviceId: spec.descriptor!.id! } } : {}) };
+    const savedTransfer = retained ? await readFile(resolve(staging, 'transfer.json'), 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; }) : undefined;
+    const transferredAnswer = savedTransfer === undefined ? await astroquery(downloadRequest) : parseAstroqueryAnswer(JSON.parse(savedTransfer), downloadRequest);
+    const transferred = transferredAnswer.transfer!;
+    if (transferred.file.path !== resolve(staging, receivedName) || await sizeOf(transferred.file.path, 'Received product') !== transferred.file.bytes) throw new Error('Retained transfer no longer matches its file.');
+    if (retained) await writeFile(resolve(staging, 'transfer.json'), JSON.stringify(transferredAnswer));
+    if (retained && spec.format !== 'fits') {
+      // Retry processing from the retained archive, including failures after extraction or alias creation.
+      await rm(resolve(staging, 'science.fits'), { force: true });
+      await rm(resolve(staging, 'members'), { recursive: true, force: true });
+    }
     const unpacked = spec.format === 'fits' ? undefined : await extractVoPackage(resolve(staging, receivedName), staging, { expandedBytes: spec.limits.expandedBytes, members: spec.limits.packageMembers });
     if (unpacked) {
       if (unpacked.format !== spec.format) throw new Error('Archive format disagrees with advertised MIME.');
@@ -276,5 +327,5 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
       { path: 'origin.json', file: resolve(staging, 'origin.json') }, ...metadata], []);
     await rename(staging, destination);
     return { file: legacy === 'science.fits' || spec.format === 'fits' ? resolve(destination, 'science.fits') : null, record: recordPath, reused: false };
-  } finally { await rm(staging, { recursive: true, force: true }); }
+  } finally { if (!retained) await rm(staging, { recursive: true, force: true }); }
 }

@@ -27,7 +27,7 @@ function editDistance(left: string, right: string): number {
 
 /** Resolve a user-facing name through the same catalogue the application ships. Near matches are suggestions only: a
  * telescope query never silently changes its scientific target. */
-export function resolveTarget(requested: string, catalogue: readonly TargetCatalogueEntry[]): TargetResolution {
+export function resolveTarget(requested: string, catalogue: readonly TargetCatalogueEntry[], options: { readonly suggestionLimit?: number; readonly nearest?: boolean } = {}): TargetResolution {
   const query = normalized(requested);
   const idMatches = catalogue.filter(entry => entry.id === requested);
   if (idMatches.length === 1) {
@@ -48,8 +48,8 @@ export function resolveTarget(requested: string, catalogue: readonly TargetCatal
   if (matches.length > 1) return { status: 'ambiguous', requested, candidates: matches.sort((a, b) => a.id.localeCompare(b.id)) };
   const suggestions = catalogue.map(entry => ({ id: entry.id, name: entry.name,
     distance: Math.min(...[entry.id, entry.name, ...entry.aliases].map(value => editDistance(query, normalized(value)))) }))
-    .filter(entry => entry.distance <= Math.max(2, Math.floor(query.length / 3)))
-    .sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id)).slice(0, 3);
+    .filter(entry => options.nearest || entry.distance <= Math.max(2, Math.floor(query.length / 3)))
+    .sort((a, b) => a.distance - b.distance || a.id.localeCompare(b.id)).slice(0, options.suggestionLimit ?? 3);
   return { status: 'unknown', requested, suggestions };
 }
 

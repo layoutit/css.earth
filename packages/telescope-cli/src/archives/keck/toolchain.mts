@@ -11,7 +11,7 @@
  *
  * Only the KCWI pipeline is installed. The OSIRIS DRP is IDL and does not run here; toolchain.json says so, and archive.mts
  * pins KOA's own OSIRIS products instead of re-running them. */
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, runToolchainProcessAsync, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
@@ -33,8 +33,8 @@ export async function installKeck() {
     const micromamba = await resolveMicromamba();
     await mkdir(KECK_ROOT, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(KECK_ROOT, 'mamba') };
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
     await rm(resolve(KECK_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }

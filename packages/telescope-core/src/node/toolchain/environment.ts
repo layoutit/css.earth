@@ -6,7 +6,8 @@ import { randomUUID } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { resolveMicromamba, assertManagedPythonPlatform } from './micromamba.js';
-import { runToolchainProcess } from './process.js';
+import { assertToolchainInstallActive, reportToolchainProgress } from './progress.js';
+import { runToolchainProcess, runToolchainProcessAsync } from './process.js';
 import { installedMarkerIssue, writeInstalledMarker, type ToolchainPins } from './marker.js';
 
 /** One installer owns a prefix at a time. Publish a nonempty lock directory atomically so there is no ownerless gap.
@@ -28,6 +29,7 @@ export async function withInstallLock<T>(root: string, work: () => Promise<T>, o
   try {
     await writeFile(resolve(staging, owner), String(process.pid));
     for (let attempt = 0; ; attempt++) {
+      assertToolchainInstallActive();
       try { await rename(staging, lock); break; }
       catch (error) {
         if (!(error instanceof Error && 'code' in error && ['EEXIST', 'ENOTEMPTY'].includes(String(error.code)))) throw error;
@@ -65,6 +67,14 @@ export function verifyToolchainPython(prefix: string, pins: ToolchainPins): void
   if (pins.entry.requirements !== undefined) runToolchainProcess(python, ['-I', '-m', 'pip', '--version']);
 }
 
+/** Installation awaits the same version and pip probes without blocking the screen clock. */
+async function verifyInstalledPython(prefix: string, pins: ToolchainPins): Promise<void> {
+  const expected = pythonVersion(pins), python = resolve(prefix, 'bin/python');
+  const found = (await runToolchainProcessAsync(python, ['-I', '-c', 'import sys; print(".".join(map(str, sys.version_info[:3])))'])).trim();
+  if (!/^3\.\d+\.\d+$/u.test(found) || found.split('.').slice(0, expected.split('.').length).join('.') !== expected) throw new Error(`Expected Python ${expected}, found ${found}.`);
+  if (pins.entry.requirements !== undefined) await runToolchainProcessAsync(python, ['-I', '-m', 'pip', '--version']);
+}
+
 /** Check the actual executable files, including execute permission, before accepting or publishing an install. */
 export async function verifyToolchainExecutables(paths: readonly string[]): Promise<void> {
   if (paths.length === 0) throw new TypeError('Toolchain verification requires at least one executable.');
@@ -83,20 +93,29 @@ export async function installManagedToolchain<T extends ToolchainPins>(root: str
   assertManagedPythonPlatform();
   if (typeof readPins !== 'function' || typeof verify !== 'function') throw new TypeError('Toolchain installation requires a pins reader and a verifier.');
   return withInstallLock(prefix ?? root, async () => {
+    assertToolchainInstallActive();
     const pins = await readPins();
+    if (prefix) reportToolchainProgress({ type: 'step', step: 'python', status: 'waiting', label: `Python ${pythonVersion(pins)}` });
     if (installedMarkerIssue(root, pins) === null) {
-      try { if (prefix) verifyToolchainPython(prefix, pins); await verify(pins); return root; }
+      try { if (prefix) await verifyInstalledPython(prefix, pins); await verify(pins); reportToolchainProgress({ type: 'installed' }); return root; }
       catch { /* A marked but broken prefix must be rebuilt under the same lock. */ }
     }
+    assertToolchainInstallActive();
     assertSourceBuildPrerequisites(pins);
     await rm(resolve(root, 'installed.json'), { force: true });
     if (prefix) await rm(prefix, { recursive: true, force: true });
     await mkdir(root, { recursive: true });
     await install(pins);
+    assertToolchainInstallActive();
+    reportToolchainProgress({ type: 'step', step: 'packages', status: 'finished' });
+    reportToolchainProgress({ type: 'step', step: 'check', status: 'started' });
     const completedPins = await readPins();
-    if (prefix) verifyToolchainPython(prefix, completedPins);
+    if (prefix) await verifyInstalledPython(prefix, completedPins);
     await verify(completedPins);
+    assertToolchainInstallActive();
     writeInstalledMarker(root, completedPins);
+    reportToolchainProgress({ type: 'step', step: 'check', status: 'finished' });
+    reportToolchainProgress({ type: 'installed' });
     return root;
   });
 }
@@ -110,7 +129,7 @@ export async function ensureToolchainPython<T extends ToolchainPins>(prefix: str
     const request = requireString(pins.entry.python, 'python'), version = /^python(3\.\d+)$/u.exec(request)?.[1];
     if (!version || version !== pythonVersion(pins)) throw new TypeError(`Unsupported pinned Python executable ${request}; expected the descriptor's python3.MINOR.`);
     const micromamba = await resolveMicromamba();
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', 'conda-forge', `python=${version}`, 'pip'],
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', 'conda-forge', `python=${version}`, 'pip'],
       { env: { MAMBA_ROOT_PREFIX: resolve(dirname(prefix), 'mamba') } });
     await install(pins);
   }, verify);

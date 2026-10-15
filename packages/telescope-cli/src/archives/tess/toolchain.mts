@@ -5,7 +5,7 @@
  *
  * A Python environment with the pinned packages. An installed toolchain keeps the text of its descriptor; `verify` and
  * `toolchainPaths` refuse one built from other pins. */
-import { resolveInstalledToolchain, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { runToolchainProcessAsync, hasToolchainProgress, resolveInstalledToolchain, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
@@ -21,15 +21,16 @@ export async function toolchainPins(): Promise<ToolchainPins> {
   const descriptor = await readFile(packagePath(FILE), 'utf8'), entry = requireRecord(JSON.parse(descriptor) as unknown, FILE);
   return { id: requireString(entry.id, 'id'), file: FILE, descriptor, lock: null, entry };
 }
-function run(command: string, args: readonly string[], cwd: string) {
-  const result = spawnSync(command, args, { cwd, stdio: 'inherit', env: telescopePythonEnvironment() });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${cwd} (status ${result.status}).`);
+async function run(command: string, args: readonly string[], cwd: string) {
+  await runToolchainProcessAsync(command, args, { cwd,
+    failureMessage: status => new Error(`${command} ${args.join(' ')} failed in ${cwd} (status ${status}).`),
+    captureOutput: false, output: (text, stream) => { if (!hasToolchainProgress()) (stream === 'stdout' ? process.stdout : process.stderr).write(text); } });
 }
 
 export async function installToolchain() {
   assertManagedPythonPlatform();
   return ensureToolchainPython(resolve(TESS_ROOT, 'venv'), toolchainPins, async pins => {
-    run(resolve(TESS_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(pins.entry.requirements).map(value => requireString(value))], TESS_ROOT);
+    await run(resolve(TESS_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(pins.entry.requirements).map(value => requireString(value))], TESS_ROOT);
   });
 }
 

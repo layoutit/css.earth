@@ -2,11 +2,12 @@
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
  * (picaso-toolchain.json says what each is). Install: telescope toolchain install picaso */
+import { toolchainInstallSignal } from './toolchain/progress.js';
 import { installManagedToolchain } from './toolchain/environment.js';
 import { downloadHttpFile } from './http-download.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
 import { resolveInstalledToolchain } from './toolchain/resolver.js';
-import { runToolchainProcess } from './toolchain/process.js';
+import { runToolchainProcess, runToolchainProcessAsync } from './toolchain/process.js';
 import { accessSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -37,21 +38,21 @@ export async function installPicaso() {
 
     const micromamba = await resolveMicromamba();
     await mkdir(PICASO_ROOT, { recursive: true });
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', PATHS.env, '-c', requireString(mamba.channel, 'micromamba channel'),
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', PATHS.env, '-c', requireString(mamba.channel, 'micromamba channel'),
       ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(PICASO_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
-    runToolchainProcess(python, ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))],
+    await runToolchainProcessAsync(python, ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))],
       { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
     await rm(resolve(PICASO_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
     if (!await exists(resolve(PATHS.reference, 'config.json'))) {
       await mkdir(PATHS.reference, { recursive: true });
-      runToolchainProcess(python, ['-c', 'import os, picaso.data as d; d.get_reference(os.environ["picaso_refdata"])'], { env: { PYTHONNOUSERSITE: '1', picaso_refdata: PATHS.reference }, maxBuffer: 256 * 1024 * 1024 });
+      await runToolchainProcessAsync(python, ['-c', 'import os, picaso.data as d; d.get_reference(os.environ["picaso_refdata"])'], { env: { PYTHONNOUSERSITE: '1', picaso_refdata: PATHS.reference }, maxBuffer: 256 * 1024 * 1024 });
     }
     if (!bobcatNodesAt(PATHS.profiles).length) {
       await mkdir(PATHS.profiles, { recursive: true });
       const tar = resolve(PATHS.profiles, 'structures.tar.gz');
       await rm(tar, { force: true });
-      await downloadHttpFile(dataUrl(entry, 'profiles'), tar, { byteLimit: 20 * 1024 ** 3 });
-      runToolchainProcess('tar', ['-xzf', tar, '-C', PATHS.profiles]);
+      await downloadHttpFile(dataUrl(entry, 'profiles'), tar, { byteLimit: 20 * 1024 ** 3, signal: toolchainInstallSignal() });
+      await runToolchainProcessAsync('tar', ['-xzf', tar, '-C', PATHS.profiles]);
       await rm(tar);
     }
     const tables = [opacityName(entry), ...Object.values(metalRichTables(entry))];
@@ -59,22 +60,22 @@ export async function installPicaso() {
       await mkdir(PATHS.opacities, { recursive: true });
       const zip = resolve(PATHS.opacities, 'opacities.zip');
       await rm(zip, { force: true });
-      await downloadHttpFile(dataUrl(entry, 'opacities'), zip, { byteLimit: 20 * 1024 ** 3 });
-      runToolchainProcess('unzip', ['-q', '-o', zip, ...tables, '-d', PATHS.opacities]);
+      await downloadHttpFile(dataUrl(entry, 'opacities'), zip, { byteLimit: 20 * 1024 ** 3, signal: toolchainInstallSignal() });
+      await runToolchainProcessAsync('unzip', ['-q', '-o', zip, ...tables, '-d', PATHS.opacities]);
       await rm(zip);
     }
     if (!readdirOrEmpty(PATHS.cloudyProfiles).length) {
       await mkdir(resolve(PATHS.cloudyProfiles, '..'), { recursive: true });
       const zip = resolve(PATHS.cloudyProfiles, '../profiles.zip');
       await rm(zip, { force: true });
-      await downloadHttpFile(dataUrl(entry, 'cloudyProfiles'), zip, { byteLimit: 20 * 1024 ** 3 });
-      runToolchainProcess('unzip', ['-q', '-o', zip, 'pressure-temperature_profiles/*', '-d', resolve(PATHS.cloudyProfiles, '..')]);
+      await downloadHttpFile(dataUrl(entry, 'cloudyProfiles'), zip, { byteLimit: 20 * 1024 ** 3, signal: toolchainInstallSignal() });
+      await runToolchainProcessAsync('unzip', ['-q', '-o', zip, 'pressure-temperature_profiles/*', '-d', resolve(PATHS.cloudyProfiles, '..')]);
       await rm(zip);
     }
-    if (!await exists(PATHS.cloudArchive)) await downloadHttpFile(dataUrl(entry, 'cloudProperties'), PATHS.cloudArchive, { byteLimit: 20 * 1024 ** 3 });
+    if (!await exists(PATHS.cloudArchive)) await downloadHttpFile(dataUrl(entry, 'cloudProperties'), PATHS.cloudArchive, { byteLimit: 20 * 1024 ** 3, signal: toolchainInstallSignal() });
     if (!await exists(PATHS.passband)) {
       await mkdir(resolve(PATHS.passband, '..'), { recursive: true });
-      runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.passband, dataUrl(entry, 'passband')]);
+      await runToolchainProcessAsync('curl', ['-sSL', '--retry', '5', '-o', PATHS.passband, dataUrl(entry, 'passband')]);
     }
   }, ({ entry }) => { verifyPicaso({ python: resolve(PATHS.env, 'bin/python'), version: requireString(entry.picaso), env: { PYTHONNOUSERSITE: '1' }, opacities: resolve(PATHS.opacities, opacityName(entry)) }); });
 }

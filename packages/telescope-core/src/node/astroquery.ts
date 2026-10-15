@@ -1,5 +1,6 @@
 /** The only css.earth process boundary into the pinned astronomy packages. Operations are explicit rather than extensible:
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
+import { downloadContext } from './download-progress.js';
 import { VO_DOWNLOAD_PYTHON } from './vo-download-python.js';
 import { telescopePythonEnvironment } from './paths/index.js';
 import { VO_METADATA_SCHEMA, parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '@cssearth/objects';
@@ -175,10 +176,16 @@ if operation == 'vo-download':
         limit = request['byteLimit']
         if type(limit) is not int or limit < 1: raise ValueError('Invalid science byte limit')
         os.makedirs(os.path.dirname(request['destination']), exist_ok=True)
-        fd, temporary = tempfile.mkstemp(dir=os.path.dirname(request['destination']), suffix='.partial')
-        os.close(fd)
+        retain = request.get('retainPartial') is True
+        if retain: temporary = request['destination'] + '.download.partial'
+        else:
+            fd, temporary = tempfile.mkstemp(dir=os.path.dirname(request['destination']), suffix='.partial')
+            os.close(fd)
+        keep_partial = retain
         try:
-            size, response = stream_vo_download(query, session, temporary, limit, TransferFailure)
+            identity = json.dumps({k:request.get(k) for k in ('url','parameters','byteLimit','format','fitsProfile','descriptor')}, sort_keys=True) if retain else None
+            size, response = stream_vo_download(query, session, temporary, limit, TransferFailure, identity, request.get('progress') is True)
+            if request.get('progress'): print('VO progress: ' + json.dumps({'received':size, 'total':size, 'checking':True}), file=sys.stderr, flush=True)
             if request.get('format', 'fits') == 'fits':
                 try:
                     profile = request.get('fitsProfile', 'raster')
@@ -190,11 +197,17 @@ if operation == 'vo-download':
                 except Exception as error: raise TransferFailure('protocol', 'Invalid science FITS response: ' + str(error)) from error
             # Never overwrite a previously acquired artifact at this destination.
             os.link(temporary, request['destination'])
+            keep_partial = False
             answer['transfer'] = {'file': {'path': request['destination'], 'bytes': size},
                 'effectiveUrl': response.url, 'contentType': response.headers.get('Content-Type'), 'etag': response.headers.get('ETag'), 'lastModified': response.headers.get('Last-Modified')}
+        except TransferFailure as error:
+            if error.code not in ('interrupted', 'transport'): keep_partial = False
+            raise
         finally:
             if response is not None: response.close()
-            if os.path.exists(temporary): os.unlink(temporary)
+            if not keep_partial:
+                if os.path.exists(temporary): os.unlink(temporary)
+                if os.path.exists(temporary + '.json'): os.unlink(temporary + '.json')
     except Exception as error:
         status = getattr(error, 'http_status', response.status_code if response is not None else None)
         code = (error.code if isinstance(error, TransferFailure) else
@@ -406,19 +419,36 @@ json.dump(answer, sys.stdout, allow_nan=False, separators=(',', ':'))
 export type AstroqueryRunner = (python: string, env: NodeJS.ProcessEnv, request: AstroqueryRequest) => Promise<unknown>;
 
 export const runAstroqueryProcess: AstroqueryRunner = (python, env, request) => new Promise((done, fail) => {
+  const context = downloadContext();
+  context?.signal.throwIfAborted();
   const child = spawn(python, ['-c', PYTHON], { env: telescopePythonEnvironment(env), stdio: ['pipe', 'pipe', 'pipe'] });
-  let stdout = '', stderr = '';
+  let stdout = '', stderr = '', pending = '';
+  const abort = () => { child.kill('SIGTERM'); };
+  context?.signal.addEventListener('abort', abort, { once: true });
   child.stdout.setEncoding('utf8').on('data', chunk => { stdout += chunk; });
   child.stderr.setEncoding('utf8').on('data', chunk => {
     stderr += chunk;
-    if (request.operation === 'vo-download') for (const line of chunk.split('\n')) if (line.startsWith('VO product:')) process.stderr.write(`${line}\n`);
+    pending += chunk;
+    const lines = pending.split('\n'); pending = lines.pop() ?? '';
+    if (request.operation === 'vo-download') for (const line of lines) {
+      if (context && line.startsWith('VO progress: ')) {
+        try {
+          const event = requireRecord(JSON.parse(line.slice(13)));
+          const received = requireFiniteNumber(event.received);
+          const total = event.total === null || event.total === undefined ? undefined : requireFiniteNumber(event.total);
+          if (received >= 0 && (total === undefined || total >= received)) context.report({ received, total, checking: event.checking === true });
+        } catch { /* Diagnostics from a child must not crash its stream callback. */ }
+      } else if (!context && line.startsWith('VO product:')) process.stderr.write(`${line}\n`);
+    }
   });
   child.on('error', fail);
   child.on('close', code => {
+    context?.signal.removeEventListener('abort', abort);
+    if (context?.signal.aborted) { fail(context.signal.reason); return; }
     if (code !== 0) fail(new Error(`Astroquery ${request.operation} failed (status ${code}): ${stderr.slice(-4000)}`));
     else { try { done(JSON.parse(stdout)); } catch (error) { fail(new Error(`Astroquery ${request.operation} returned invalid JSON: ${String(error)}`)); } }
   });
-  child.stdin.end(JSON.stringify(request));
+  child.stdin.end(JSON.stringify({ ...request, ...(context && request.operation === 'vo-download' ? { progress: true, retainPartial: context.retainPartial } : {}) }));
 });
 
 export function parseAstroqueryAnswer(value: unknown, request: AstroqueryRequest, version = '0.4.11', pyvoVersion = '1.9.1'): AstroqueryAnswer {

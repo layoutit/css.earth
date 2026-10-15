@@ -11,7 +11,7 @@
  *
  * Reference files are not part of the environment: CRDS fetches the ones a pinned context selects into the cache under this
  * root the first time a calibration runs (calibrate.mts). */
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcess, USER_ROOT } from '@cssearth/telescope-core/node';
+import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, assertInstalledMarker, runToolchainProcessAsync, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
@@ -33,8 +33,8 @@ export async function installHst() {
     const micromamba = await resolveMicromamba();
     await mkdir(HST_ROOT, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(HST_ROOT, 'mamba') };
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
+    await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
     await rm(resolve(HST_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   }, async ({ entry }) => verifyToolchainExecutables(Object.values(requireRecord(entry.binaries, 'binaries')).map(file => resolve(prefix, 'bin', requireString(file)))));
 }
