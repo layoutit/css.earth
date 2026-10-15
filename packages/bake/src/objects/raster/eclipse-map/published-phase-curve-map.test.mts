@@ -310,4 +310,19 @@ test('WASP-103b: SPIDERMAN draws Kreidberg et al. (2018)\'s released temperature
     // The map is drawn in kelvin as SPIDERMAN evaluates it: hottest near noon, coldest near midnight, alike north and south.
     assert.ok(map.sample(0, 0)! > 3000 && map.sample(180, 0)! < 1400 && Math.abs(map.sample(30, 40)! - map.sample(30, -40)!) < 1e-6);
   }
+test('TRAPPIST-1 c: Gillon et al. (2025)\'s day and night maxima give back their night side, and the curve runs from one to the other', async () => {
+  const source = new URL('trappist-1c/source/', objects), path = 'science/gillon-2025/phase-curve.json';
+  const gillon = await record('trappist-1c/source/science/gillon-2025/phase-curve.json');
+  if (gillon.model.kind !== 'day-night-cosine') throw new TypeError('TRAPPIST-1 c is a day-night cosine.');
+  const { flux } = sinusoidMap(gillon.model, gillon.eclipseDepth), phi = gillon.model.offsetDegreesEast * Math.PI / 180;
+  // Their equation 1: the day side's maximum D at the peak, phi before eclipse, and the night side's N half an orbit later.
+  assert.ok(Math.abs(flux(-phi) - gillon.model.dayMax) < 1e-15 && Math.abs(flux(Math.PI - phi) - gillon.model.nightMax) < 1e-15);
+  const map = await loadPublishedPhaseCurveMap(source.pathname, { path });
+  const { derived } = map.report as unknown as { derived: Record<string, number> };
+  // The table: day side 369 +/- 23 K from D, night side 220 +38/-47 K. The night side is not an input.
+  assert.ok(Math.abs(derived.daysideK! - 369) < 1e-6, `day side ${derived.daysideK}`);
+  assert.ok(Math.abs(derived.nightsideK! - 220) <= 5, `night side ${derived.nightsideK}`);
+  assert.ok(map.sample(10, 0)! > map.sample(-10, 0)!, 'the hottest longitude is the offset east of noon');
+  const raw = JSON.parse(await readFile(new URL(path, source), 'utf8')) as { model: Record<string, unknown> };
+  assert.throws(() => parsePublishedPhaseCurve({ ...raw, model: { ...raw.model, nightMax: tableCell(-1e-5, 'N') } }), /not negative/u);
 });

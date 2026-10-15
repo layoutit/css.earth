@@ -28,6 +28,18 @@
       "evidence": [
         "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "Zhang et al. (2024)'s JWST MIRI LRS phase curve (GO 2508) as a map of longitude",
+      "status": "excluded",
+      "finding": "Read on 2026-10-15. The phase curve is not drawn: its fit is second order and printed only as derived numbers (a night side of 4 +/- 8 ppm and a hot spot 11 +/- 5 degrees east), which do not determine the curve, so it cannot be redrawn as a map. Its eclipse depth, 79 +/- 4 ppm, sets the Rock model dataset instead (source/science/zhang-2024/dayside-5-12um.json). Lee et al. (2026) revise the mass and radius only and report no phase curve.",
+      "revisitWhen": "A paper prints a first-order fit of the phase curve, or its full Fourier terms.",
+      "evidence": [
+        "https://arxiv.org/abs/2401.01400",
+        "https://doi.org/10.3847/2041-8213/ad1a07",
+        "https://doi.org/10.17909/zrda-a787"
+      ]
     }
   ]
 }

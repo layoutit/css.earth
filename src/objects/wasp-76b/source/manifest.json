@@ -110,6 +110,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "wasp-76b-may-2021-phase-curve-3-6um",
+      "path": "science/may-2021/phase-curve-3-6um.json",
+      "origin": "https://arxiv.org/abs/2107.03349",
+      "credit": "May et al. (2021), AJ 162, 158; Spitzer program 13038",
+      "displayCredit": "May et al. · Spitzer 4.5 µm",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the authors' LaTeX source, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "may-2021-phase-curve-map-3-6um"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-76b-may-2021-phase-curve-3-6um",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2107.03349"
+          },
+          {
+            "catalogueId": "source-wasp-76b-may-2021-phase-curve-3-6um",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2107.03349#section-2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

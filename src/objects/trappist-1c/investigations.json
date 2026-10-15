@@ -8,6 +8,15 @@
       "status": "excluded"
     },
     {
+      "id": "published-phase-curve-fit",
+      "subject": "Gillon, Ducrot et al. (2025)'s fit to the 15 um phase curve as a map of longitude",
+      "status": "included",
+      "finding": "The default dataset since 2026-10-15. Their nominal analysis #1 (table of results) prints c's day-side and night-side maxima, 392 +75/-63 and 62 +60/-43 ppm, and a peak offset of 10 +25/-22 degrees in the model of Placek et al. (2014); the paper rejects full heat redistribution (probability under 0.0006%) and finds the night side and the offset consistent with zero. Drawn through the Cowan & Agol (2008) inversion it runs from 384 to 169 K and gives back their night side, 220 K. The offset's direction is not stated; east is taken. This is the 'published map of c' the entry below waited for; the rock model stays as a second dataset.",
+      "evidence": [
+        "https://arxiv.org/abs/2509.02128"
+      ]
+    },
+    {
       "id": "jwst-miri-15um-dayside",
       "subject": "Temperature at 15 um from the same ten JWST MIRI visits",
       "status": "included",

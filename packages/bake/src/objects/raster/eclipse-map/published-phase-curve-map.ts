@@ -18,6 +18,10 @@
  *   before eclipse. Bell et al. (2021, section 4.1) print A = F_day sqrt(C1^2 + D1^2) and phi = -atan2(D1, C1) for their
  *   first-order fits; May et al. (2022, their fit results table) print (max - min)/2 and the offset, positive east. A fit with
  *   a second-order term is not this form: its printed amplitude and offset do not determine it.
+ * - `day-night-cosine`: the day and night sides' maximum fluxes D and N and the peak offset, as Gillon et al. (2025, eq. 1) print
+ *   them after Placek et al. (2014): F_p = (D/2)(1 + cos(psi + phi)) + (N/2)(1 - cos(psi + phi)), with psi counted from mid-eclipse
+ *   and phi east of noon, so F_p is (D + N)/2 + (D - N)/2 cos(psi + phi). The eclipse depth of the record is then D, the flux the
+ *   paper turns into its dayside brightness temperature; the curve's own value at mid-eclipse sets the map.
  *   The last four are the same Fourier series as the first, written from another phase origin or scale, and take the same Cowan &
  *   Agol map.
  * - `spiderman-spherical`: the fit's SPIDERMAN spherical-harmonic coefficients, evaluated by SPIDERMAN itself
@@ -60,7 +64,9 @@ export interface EclipseNormalizedFourier { readonly kind: 'eclipse-normalized-f
 export interface EclipseFourier { readonly kind: 'eclipse-fourier'; readonly c1: number; readonly d1: number; readonly c2: number; readonly d2: number }
 /** A first-order sinusoid by its printed semi-amplitude (a fraction of the star's flux) and the offset east of its maximum, in degrees. */
 export interface AmplitudeOffset { readonly kind: 'amplitude-offset'; readonly semiAmplitude: number; readonly offsetDegreesEast: number }
-export type FourierPhaseCurve = TwoTermSinusoid | FourierFromTransit | EclipseNormalizedFourier | EclipseFourier | AmplitudeOffset;
+/** The day and night sides' maximum fluxes (fractions of the star's flux) and the offset east of the peak, in degrees. */
+export interface DayNightCosine { readonly kind: 'day-night-cosine'; readonly dayMax: number; readonly nightMax: number; readonly offsetDegreesEast: number }
+export type FourierPhaseCurve = TwoTermSinusoid | FourierFromTransit | EclipseNormalizedFourier | EclipseFourier | AmplitudeOffset | DayNightCosine;
 export interface SpidermanModel { readonly kind: 'spiderman-spherical'; readonly map: SpidermanSphericalMap; readonly dilution: number;
   readonly orbit: { readonly periodDays: number; readonly semiMajorAxisAu: number; readonly semiMajorAxisStellarRadii: number; readonly inclinationDegrees: number } }
 export interface PublishedPhaseCurve {
@@ -133,6 +139,10 @@ export function parsePublishedPhaseCurve(value: unknown): PublishedPhaseCurve {
   } else if (model.kind === 'amplitude-offset') {
     parsed = { kind: 'amplitude-offset', semiAmplitude: cell(model.semiAmplitude, 'model.semiAmplitude'), offsetDegreesEast: cell(model.offsetDegreesEast, 'model.offsetDegreesEast') };
     if (!(parsed.semiAmplitude > 0)) throw new RangeError('model.semiAmplitude is a positive fraction of the star\'s flux.');
+    if (Math.abs(parsed.offsetDegreesEast) > 90) throw new RangeError('model.offsetDegreesEast lies between -90 and 90 degrees.');
+  } else if (model.kind === 'day-night-cosine') {
+    parsed = { kind: 'day-night-cosine', dayMax: cell(model.dayMax, 'model.dayMax'), nightMax: cell(model.nightMax, 'model.nightMax'), offsetDegreesEast: cell(model.offsetDegreesEast, 'model.offsetDegreesEast') };
+    if (!(parsed.dayMax > 0 && parsed.nightMax >= 0)) throw new RangeError('model.dayMax is positive and model.nightMax is not negative.');
     if (Math.abs(parsed.offsetDegreesEast) > 90) throw new RangeError('model.offsetDegreesEast lies between -90 and 90 degrees.');
   } else if (model.kind === 'spiderman-spherical') {
     const map = requireRecord(model.spiderman, 'model.spiderman'), orbit = requireRecord(model.orbit, 'model.orbit');
@@ -207,6 +217,7 @@ function eclipseFourierTerms(model: FourierPhaseCurve, eclipseDepth: number) {
   if (model.kind === 'eclipse-fourier') return { c1: model.c1, d1: model.d1, c2: model.c2, d2: model.d2 };
   // A cos(xi + phi) = A cos phi cos xi - A sin phi sin xi: the maximum lies phi before eclipse, the hot spot phi east of noon.
   if (model.kind === 'amplitude-offset') { const phi = model.offsetDegreesEast * Math.PI / 180; return { c1: model.semiAmplitude * Math.cos(phi), d1: -model.semiAmplitude * Math.sin(phi), c2: 0, d2: 0 }; }
+  if (model.kind === 'day-night-cosine') { const phi = model.offsetDegreesEast * Math.PI / 180, half = (model.dayMax - model.nightMax) / 2; return { c1: half * Math.cos(phi), d1: -half * Math.sin(phi), c2: 0, d2: 0 }; }
   return { c1: eclipseDepth * model.c1, d1: eclipseDepth * model.d1, c2: eclipseDepth * model.c2, d2: eclipseDepth * model.d2 };
 }
 
@@ -214,7 +225,8 @@ function eclipseFourierTerms(model: FourierPhaseCurve, eclipseDepth: number) {
  * observer faces longitude -xi, with longitude 0 at the substellar point and increasing eastward (the direction of rotation). */
 export function sinusoidMap(model: FourierPhaseCurve, eclipseDepth: number) {
   const { c1, d1, c2, d2 } = eclipseFourierTerms(model, eclipseDepth);
-  const f0 = eclipseDepth - c1 - c2;
+  // The day-night form's constant term is (D + N)/2; its record's eclipse depth is D, the day side's maximum, not the curve at eclipse.
+  const f0 = model.kind === 'day-night-cosine' ? (model.dayMax + model.nightMax) / 2 : eclipseDepth - c1 - c2;
   const map = { a0: f0 / 2, a1: c1 / (Math.PI / 2), b1: -d1 / (Math.PI / 2), a2: c2 / (2 / 3), b2: -d2 / (2 / 3) };
   const flux = (xi: number) => f0 + c1 * Math.cos(xi) + d1 * Math.sin(xi) + c2 * Math.cos(2 * xi) + d2 * Math.sin(2 * xi);
   const slice = (longitudeDegrees: number) => { const phi = longitudeDegrees * Math.PI / 180;

@@ -102,8 +102,68 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "temperature",
+    "defaultDataset": "phase-curve",
     "controls": [
+      {
+        "id": "phase-curve",
+        "label": "MIRI phase curve",
+        "qualification": "Published fit · Gillon, Ducrot et al. (2025) · JWST MIRI 15 µm phase curve (program 3077) · longitude only",
+        "thumbnail": "trappist-1c-dataset-phase-curve.webp",
+        "surface": "trappist-1c-surface-phase-curve@2x.webp",
+        "poles": "trappist-1c-poles-phase-curve@2x.webp",
+        "source": {
+          "id": "trappist-1c-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2509.02128"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "50",
+            "325",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "50",
+              "325",
+              "600"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2509.02128"
+        },
+        "notes": "Brightness temperature at 15 µm of TRAPPIST-1c from Gillon, Ducrot et al. (2025)'s fit to JWST's 59-hour MIRI phase curve (program 3077, November 2023) and earlier eclipses. Their day and night curve becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. It runs from 384 K, 10° east of noon, to 169 K, 10° east of midnight. The paper finds the shift and the night side both consistent with zero: a bare rock fits as well, and heat spread evenly round the planet is ruled out. It does not say which way the shift runs; east is taken. The false color runs from 50 to 600 K, the scale of the rock model. With shadows on, the star's light darkens the night half."
+      },
       {
         "id": "temperature",
         "label": "Rock model",
