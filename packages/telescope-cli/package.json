@@ -48,6 +48,7 @@
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
   "dependencies": {
+    "@glyphcss/charts": "0.3.0",
     "@layoutit/polycss": "0.2.11",
     "geotiff": "3.0.5",
     "linkedom": "^0.18.13",
@@ -63,6 +64,7 @@
     "@cssearth/renderer": "workspace:*",
     "@cssearth/spice": "workspace:*",
     "@cssearth/telescope-core": "workspace:*",
+    "@glyphcss/compile": "0.3.0",
     "@types/node": "^26.4.0",
     "@types/pngjs": "6.0.5",
     "esbuild": "0.27.7",
