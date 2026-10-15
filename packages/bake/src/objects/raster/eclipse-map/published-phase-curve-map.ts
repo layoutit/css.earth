@@ -21,6 +21,8 @@
  *   The last four are the same Fourier series as the first, written from another phase origin or scale, and take the same Cowan &
  *   Agol map.
  * - `spiderman-spherical`: the fit's SPIDERMAN spherical-harmonic coefficients, evaluated by SPIDERMAN itself
+ *   A fit whose harmonics are temperatures (SPIDERMAN's thermal=True, `model.thermal` with the star's temperature and the band)
+ *   is drawn as SPIDERMAN evaluates it, in kelvin, with no conversion; its report gives the map's extremes and hemisphere means.
  *   (`@cssearth/telescope-core/node`, spiderman.ts).
  * - `starry`: the fit's starry map (amplitude, spherical-harmonic coefficients and phase offset), evaluated by starry itself
  *   (`@cssearth/telescope-core/node`, starry.ts). The offset turns the map east: starry's own frame puts the brightest point of a Y(1,0)
@@ -67,7 +69,7 @@ export interface PublishedPhaseCurve {
   readonly wavelengthMicrons?: number; readonly bandMicrons?: readonly [number, number];
   readonly model: FourierPhaseCurve | SpidermanModel;
   readonly reported: { readonly daysideK: number; readonly nightsideK?: number; readonly hottestHemisphereK?: number; readonly coldestHemisphereK?: number;
-    readonly offsetDegrees: number; readonly amplitude?: number; readonly semiAmplitude?: number };
+    readonly offsetDegrees: number; readonly amplitude?: number; readonly semiAmplitude?: number; readonly minimumK?: number; readonly maximumK?: number };
 }
 /** The authors' deposited spectra that convert a white-light starry map to brightness temperature (see the header). */
 export interface DepositedChannels {
@@ -134,9 +136,12 @@ export function parsePublishedPhaseCurve(value: unknown): PublishedPhaseCurve {
     if (Math.abs(parsed.offsetDegreesEast) > 90) throw new RangeError('model.offsetDegreesEast lies between -90 and 90 degrees.');
   } else if (model.kind === 'spiderman-spherical') {
     const map = requireRecord(model.spiderman, 'model.spiderman'), orbit = requireRecord(model.orbit, 'model.orbit');
+    const thermal = model.thermal === undefined ? undefined : requireRecord(model.thermal, 'model.thermal');
+    const thermalBand = thermal && requireArray(thermal.bandMicrons, 'model.thermal.bandMicrons').map((edge, i) => requireFiniteNumber(edge, `model.thermal.bandMicrons[${i}]`) * 1e-6);
     parsed = { kind: 'spiderman-spherical', dilution: cell(model.dilution, 'model.dilution'),
       map: { degree: requireFiniteNumber(map.degree, 'model.spiderman.degree'), la0: requireFiniteNumber(map.la0, 'model.spiderman.la0'), lo0: requireFiniteNumber(map.lo0, 'model.spiderman.lo0'),
-        sph: requireArray(map.sph, 'model.spiderman.sph').map((entry, i) => cell(entry, `model.spiderman.sph[${i}]`)) },
+        sph: requireArray(map.sph, 'model.spiderman.sph').map((entry, i) => cell(entry, `model.spiderman.sph[${i}]`)),
+        ...(thermal && thermalBand ? { thermal: { starK: cell(thermal.starK, 'model.thermal.starK'), bandMeters: [thermalBand[0]!, thermalBand[1]!] as const } } : {}) },
       orbit: { periodDays: cell(orbit.periodDays, 'model.orbit.periodDays'), semiMajorAxisAu: cell(orbit.semiMajorAxisAu, 'model.orbit.semiMajorAxisAu'),
         semiMajorAxisStellarRadii: cell(orbit.semiMajorAxisStellarRadii, 'model.orbit.semiMajorAxisStellarRadii'), inclinationDegrees: cell(orbit.inclinationDegrees, 'model.orbit.inclinationDegrees') } };
   } else throw new TypeError(`Unknown published phase-curve model ${String(model.kind)}.`);
@@ -145,7 +150,7 @@ export function parsePublishedPhaseCurve(value: unknown): PublishedPhaseCurve {
     eclipseDepth: cell(input.eclipseDepth, 'eclipseDepth'), radiusRatio: cell(input.radiusRatio, 'radiusRatio'), model: parsed,
     reported: { daysideK: cell(reported.daysideK, 'reported.daysideK'), nightsideK: optional('nightsideK'), hottestHemisphereK: optional('hottestHemisphereK'),
       coldestHemisphereK: optional('coldestHemisphereK'), offsetDegrees: cell(reported.offsetDegrees, 'reported.offsetDegrees'), amplitude: optional('amplitude'),
-      semiAmplitude: optional('semiAmplitude') } };
+      semiAmplitude: optional('semiAmplitude'), minimumK: optional('minimumK'), maximumK: optional('maximumK') } };
 }
 
 /** Temperature whose Planck radiance at `wavelengthMicrons` is `ratio` times that of `referenceK`; null when the ratio is not positive. */
@@ -234,6 +239,7 @@ export async function loadPublishedPhaseCurveMap(root: string, value: unknown) {
 
 /** The map of a parsed Fourier or SPIDERMAN record, as `loadPublishedPhaseCurveMap` reads it from a file. */
 export async function publishedPhaseCurveMap(record: PublishedPhaseCurve) {
+  if (record.model.kind === 'spiderman-spherical' && record.model.map.thermal) return thermalSpidermanMap(record, record.model);
   const { wavelengthMicrons: wavelength, bandMicrons: band, radiusRatio: k, eclipseDepth } = record;
   const broad = band && bandTemperatures(band[0], band[1], eclipseDepth, k, record.reported.daysideK);
   const starK = broad ? broad.starK : impliedStellarTemperature(eclipseDepth, k, record.reported.daysideK, wavelength!);
@@ -285,6 +291,34 @@ export async function publishedPhaseCurveMap(record: PublishedPhaseCurve) {
     report: { ...common, model: 'spiderman-spherical', spiderman: grid.spiderman, numpy: grid.numpy, spidermanMap: model.map, dilution: model.dilution,
       derived: { daysideFlux: c + semi, nightsideFlux: c - semi, semiAmplitude: semi, peakDegreesAfterEclipse: Math.atan2(b, a) * 180 / Math.PI,
         daysideK: toK((c + semi) / k ** 2), nightsideK: toK((c - semi) / k ** 2), nonPositiveAreaFraction: negative / cells },
+      reported: record.reported },
+  };
+}
+
+/** A SPIDERMAN temperature map, drawn as SPIDERMAN evaluates it on a 1 degree grid: its extremes and the area-weighted means of the
+ * day and night hemispheres are reported beside the paper's. */
+function thermalSpidermanMap(record: PublishedPhaseCurve, model: SpidermanModel) {
+  const step = 1, latitudes: number[] = [], longitudes: number[] = [];
+  for (let lat = -90; lat <= 90; lat += step) latitudes.push(lat);
+  for (let lon = -180; lon <= 180; lon += step) longitudes.push(lon);
+  const grid = spidermanMapGrid(model.map, latitudes, longitudes);
+  let minimum = Infinity, maximum = -Infinity, hottest = [0, 0], day = 0, dayWeight = 0, night = 0, nightWeight = 0;
+  for (let row = 0; row < latitudes.length; row++) for (let column = 0; column < longitudes.length - 1; column++) {
+    const value = grid.values[row]![column]!, weight = Math.cos(latitudes[row]! * Math.PI / 180);
+    if (value < minimum) minimum = value;
+    if (value > maximum) { maximum = value; hottest = [longitudes[column]!, latitudes[row]!]; }
+    if (Math.abs(longitudes[column]!) < 90) { day += value * weight; dayWeight += weight; } else { night += value * weight; nightWeight += weight; }
+  }
+  return {
+    sample(longitude: number, latitude: number) {
+      if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
+      const x = (((longitude + 180) % 360 + 360) % 360) / step, yy = (latitude + 90) / step;
+      const x0 = Math.min(longitudes.length - 2, Math.floor(x)), y0 = Math.min(latitudes.length - 2, Math.floor(yy)), dx = x - x0, dy = yy - y0;
+      return grid.values[y0]![x0]! * (1 - dx) * (1 - dy) + grid.values[y0]![x0 + 1]! * dx * (1 - dy) + grid.values[y0 + 1]![x0]! * (1 - dx) * dy + grid.values[y0 + 1]![x0 + 1]! * dx * dy;
+    },
+    report: { format: 'published-phase-curve-map', units: 'K', source: record.source, model: 'spiderman-spherical, thermal', spiderman: grid.spiderman, numpy: grid.numpy,
+      spidermanMap: model.map, dilution: model.dilution,
+      derived: { minimumK: minimum, maximumK: maximum, hottestLongitudeDegrees: hottest[0], hottestLatitudeDegrees: hottest[1], daysideMeanK: day / dayWeight, nightsideMeanK: night / nightWeight },
       reported: record.reported },
   };
 }

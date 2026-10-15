@@ -30,6 +30,16 @@
           "projection": "equirectangular",
           "datasets": [
             {
+              "id": "hubble-map",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "spitzer-map",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "temperature-p0",
               "source": "content",
               "material": "lighting"
