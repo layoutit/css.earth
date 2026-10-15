@@ -7,11 +7,13 @@ import type { CliIo } from '../cli-io.mts';
 import { consentHandler, type ConsentState } from '../cli-consent.mts';
 import { parseCli } from '../cli-arguments.mts';
 import type { ExplorationChoice } from '../exploration.mts';
+import { skyTargetRequest } from '../exploration.mts';
 import { loadTargetCatalogue } from '../observation-query/query.mts';
 import { fetchPreview, previewSource } from '../previews/index.mts';
 import { previewVotable } from '../previews/votable.mts';
 import { exportHtml } from '../delivery/html-outputs.mts';
 import { delivery } from '../delivery/outputs.mts';
+import { localOutput, verifiedProduct } from '../products/verified-product.mts';
 import { openExternal } from './open.mts';
 import type { PickStatus } from './explore-render.mts';
 import type { ExploreOutput, ExploreServices, SavedExploration } from './explore.mts';
@@ -80,10 +82,23 @@ export async function explorationDownloadSize(choice: Pick<ExplorationChoice, 'd
   } catch { signal.throwIfAborted(); return null; }
 }
 
+/** A published product record, with its files verified, owns the reopened output. */
+async function madeOutput(directory: string, name?: string): Promise<string | undefined> {
+  const entries = await readdir(directory, { withFileTypes: true }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
+  for (const entry of entries) {
+    if (!entry.isFile() || !entry.name.endsWith('.product.json')) continue;
+    const product = await verifiedProduct(resolve(directory, entry.name));
+    const output = name ? product.record.outputs.find(output => output.path === name) : product.record.outputs[0];
+    if (output) return localOutput(product.root, output.path);
+  }
+  return undefined;
+}
+
 export function explorationServices(root: string, requestArgs: readonly string[], directory: string | undefined, api: CliServices, io: CliIo, consent: ConsentState): ExploreServices {
   const toolchainConsent = consentHandler(io, { json: false }, consent);
   return {
     catalogue: () => loadTargetCatalogue(root),
+    resolve: async target => !(await skyTargetRequest(root, { target })).simbadMiss,
     search: async (target, report, signal) => {
       const args = [...requestArgs];
       if (target !== undefined) {
@@ -122,9 +137,13 @@ export function explorationServices(root: string, requestArgs: readonly string[]
       for (const [index, output] of inspected.outputs.entries()) {
         if (!output.available) continue;
         const name = output.kind === 'html' ? 'Viewer' : output.kind === 'image' ? 'Image' : output.kind === 'spectrum' ? 'Plot' : output.kind;
-        options.push({ name, description: output.kind === 'html' ? 'HTML page you can pan and zoom' : output.kind === 'image' ? 'PNG with a scale bar' : output.kind === 'spectrum' ? 'PNG of flux against wavelength' : output.reason,
+        const destination = resolve(dirname(resultPath), 'made', `${index + 1}-${output.kind}`);
+        const file = await madeOutput(destination, output.kind === 'html' ? 'viewer.html' : output.kind === 'sphere' ? 'sphere.html'
+          : ['points', 'volume', 'volume-dataset-bank'].includes(output.kind) ? 'object.json' : 'figure.png');
+        options.push({ name, file, description: output.kind === 'html' ? 'HTML page you can pan and zoom' : output.kind === 'image' ? 'PNG with a scale bar' : output.kind === 'spectrum' ? 'PNG of flux against wavelength' : output.reason,
           parameters: output.parameters, run: async parameters => {
-            const args = ['export', source, '--output', output.kind, '--out', resolve(dirname(resultPath), 'made', `${index + 1}-${output.kind}`)];
+            if (file) return file;
+            const args = ['export', source, '--output', output.kind, '--out', destination];
             if (output.hdu !== undefined) args.push('--hdu', String(output.hdu));
             if (output.structure) args.push('--structure', output.structure);
             for (const [key, value] of parameters) args.push(`--${key}`, value);
@@ -140,10 +159,12 @@ export function explorationServices(root: string, requestArgs: readonly string[]
       for (const operation of inspected.familyOperations ?? []) {
         if (!operation.available || !['spectrum-export', 'spectrum-preview', 'table-export'].includes(operation.id)) continue;
         const plot = operation.id === 'spectrum-preview';
-        options.push({ name: plot ? 'Plot' : 'Table', description: plot ? 'PNG of flux against wavelength' : 'CSV of wavelength and flux', run: async () => {
+        const destination = resolve(dirname(resultPath), 'made', `${operation.componentId}-${operation.id}`), file = await madeOutput(destination);
+        options.push({ name: plot ? 'Plot' : 'Table', file, description: plot ? 'PNG of flux against wavelength' : 'CSV of wavelength and flux', run: async () => {
+          if (file) return file;
           const operationId = operation.id;
           if (operationId !== 'spectrum-export' && operationId !== 'spectrum-preview' && operationId !== 'table-export') throw new Error('Unsupported family output.');
-          return (await api.executeFamilyOperation(source, { operationId, componentId: operation.componentId }, resolve(dirname(resultPath), 'made', `${operation.componentId}-${operationId}`))).product;
+          return (await api.executeFamilyOperation(source, { operationId, componentId: operation.componentId }, destination)).product;
         } });
       }
       // The native data is already exported by get; choosing it opens that exact retained file.

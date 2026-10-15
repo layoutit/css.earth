@@ -6,10 +6,10 @@ import type { ExplorationSession } from '../session.mts';
 import type { ProviderProgress, ProviderReporter } from '../vo/bridge.mts';
 import type { DownloadProgress } from '@cssearth/telescope-core/node';
 import type { PreviewState } from '../previews/index.mts';
-import { liveBlock } from './live-block.mts';
-import { EXPLORE_PAGE, PREVIEW_MINIMUM_COLUMNS, exploreSelection, renderExplore, type ExploreState, type MakeChoice, type MadeFile, type PickStatus } from './explore-render.mts';
+import { screenFrame } from './screen.mts';
+import { listPageSize } from './list.mts';
+import { PREVIEW_MINIMUM_COLUMNS, exploreSelection, renderExplore, type ExploreState, type MakeChoice, type MadeFile, type PickStatus } from './explore-render.mts';
 import type { ScreenKey, Terminal } from './terminal.mts';
-import { plain } from './style.mts';
 
 export type ExploreChoice = Pick<ExplorationChoice, 'pick' | 'telescope' | 'archiveService' | 'observation' | 'reference' | 'display'>;
 /** Saved screens read display and preview facts; get revalidates the original record before retrieval. */
@@ -23,9 +23,10 @@ export type SavedExploration = Pick<ExplorationSession, 'schema' | 'createdAt' |
     readonly services: readonly { readonly service: string; readonly state: string; readonly reason: string }[];
   };
 };
-export interface ExploreOutput extends MakeChoice { readonly run: (parameters: ReadonlyMap<string, string>) => Promise<string> }
+export interface ExploreOutput extends MakeChoice { readonly file?: string; readonly run: (parameters: ReadonlyMap<string, string>) => Promise<string> }
 export interface ExploreServices {
   readonly catalogue: () => Promise<readonly TargetCatalogueEntry[]>;
+  readonly resolve: (target: string) => Promise<boolean>;
   readonly search: (target: string | undefined, report: ProviderReporter, signal: AbortSignal) => Promise<SavedExploration>;
   readonly statuses: (session: SavedExploration) => Promise<ReadonlyMap<number, PickStatus>>;
   readonly size: (choice: ExploreChoice, session: SavedExploration, signal: AbortSignal) => Promise<number | null>;
@@ -44,19 +45,18 @@ export async function exploreScreen(requested: string | undefined, services: Exp
   let state: ExploreState = { view: 'search', requested: requested ?? 'Field', target: requested ?? 'Field', candidates: [], query: '', active: 0,
     statuses: new Map(), providers: [], tick: 0, preview: { kind: 'loading' }, size: null, received: 0, checking: false, outputs: [], made: new Map(), making: false };
   const lifetime = new AbortController();
-  let block = liveBlock(terminal), close = () => {}, closed = false, paused = false, busy = false;
+  let close = () => {}, closed = false, paused = false, busy = false;
   let preview: AbortController | undefined, previewPick: number | undefined, confirmation: AbortController | undefined;
   let outputs: readonly ExploreOutput[] = [], parameters = new Map<string, string>();
   const madeByPick = new Map<number, Map<number, MadeFile>>();
   let accept: (value: ExploreExit) => void = () => {}, reject: (error: unknown) => void = () => {};
   const done = new Promise<ExploreExit>((resolve, fail) => { accept = resolve; reject = fail; });
-  const draw = () => { if (!closed && !paused) block.draw(renderExplore(state, terminal.columns)); };
+  const draw = () => { if (!closed && !paused) terminal.write(screenFrame(renderExplore(state, terminal.columns, terminal.rows), terminal.columns, terminal.rows)); };
   const finish = (exit?: ExploreExit, error?: unknown) => {
     if (closed) return;
     closed = true; lifetime.abort(); preview?.abort(); confirmation?.abort();
     services.screen?.(undefined);
-    try { block.done(renderExplore(state, terminal.columns).map(plain)); }
-    finally { close(); }
+    close();
     if (error !== undefined) reject(error); else accept(exit ?? { code: 0, line: '' });
   };
   const animate = async (work: () => Promise<void>) => {
@@ -124,6 +124,7 @@ export async function exploreScreen(requested: string | undefined, services: Exp
     state = { ...state, view: 'make', active: 0, outputs: [], made, making: true, notice: undefined }; draw();
     try {
       outputs = await services.outputs(resultPath, state.selected!.pick);
+      for (const [index, output] of outputs.entries()) if (output.file && !made.has(index)) made.set(index, { file: output.file, opened: false });
       if (!closed) state = { ...state, outputs, notice: outputs.length ? undefined : 'No supported outputs for this pick.' };
     } catch (error) { if (paused) finish(undefined, error); else { outputs = []; state = { ...state, notice: error instanceof Error ? error.message : String(error) }; } }
     finally { busy = false; state = { ...state, making: false }; draw(); }
@@ -170,6 +171,10 @@ export async function exploreScreen(requested: string | undefined, services: Exp
     if (closed || paused) return;
     if (key.name === 'eof') { finish({ code: 0, line: state.session ? `Saved ${state.session.directory}` : 'Nothing searched.' }); return; }
     if (key.ctrl && key.name === 'c') { finish({ code: 130, line: '' }); return; }
+    if (renderExplore(state, terminal.columns, terminal.rows)[0]?.startsWith('make the window taller:')) {
+      if (key.name === 'escape') finish({ code: 0, line: state.session ? `Saved ${state.session.directory}` : 'Nothing searched.' });
+      return;
+    }
     if (busy) return;
     if (state.view === 'picker') {
       if (key.name === 'escape') { finish({ code: 0, line: 'Nothing searched.' }); return; }
@@ -180,8 +185,8 @@ export async function exploreScreen(requested: string | undefined, services: Exp
       if (key.name === 'escape') { finish({ code: state.session!.choices.length ? 0 : 3, line: `Saved ${state.session!.directory} · reopen it with: telescope open` }); return; }
       const { shown, active, current } = exploreSelection(state);
       if (key.name === 'return') { if (current) await confirm(current); return; }
-      if (key.name === 'up' || key.name === 'pageup') state = { ...state, active: Math.max(0, active - (key.name === 'up' ? 1 : EXPLORE_PAGE)) };
-      else if (key.name === 'down' || key.name === 'pagedown') state = { ...state, active: Math.max(0, Math.min(shown.length - 1, active + (key.name === 'down' ? 1 : EXPLORE_PAGE))) };
+      if (key.name === 'up' || key.name === 'pageup') state = { ...state, active: Math.max(0, active - (key.name === 'up' ? 1 : listPageSize(terminal.rows))) };
+      else if (key.name === 'down' || key.name === 'pagedown') state = { ...state, active: Math.max(0, Math.min(shown.length - 1, active + (key.name === 'down' ? 1 : listPageSize(terminal.rows)))) };
       else if (key.name === 'backspace') state = { ...state, query: state.query.slice(0, -1), active: 0 };
       else if (key.text && !key.ctrl && !key.meta && !/[\p{Control}]/u.test(key.text)) state = { ...state, query: state.query + key.text, active: 0 };
       tableActive = state.active; updatePreview();
@@ -213,10 +218,10 @@ export async function exploreScreen(requested: string | undefined, services: Exp
     }
     draw();
   };
-  const listen = () => terminal.listen(key => { void handle(key).catch(error => finish(undefined, error)); }, () => { updatePreview(); draw(); });
+  const listen = () => terminal.listen(key => { void handle(key).catch(error => finish(undefined, error)); }, () => { updatePreview(); draw(); }, { alternateScreen: true });
   close = listen();
-  services.screen?.({ pause() { if (closed || paused) return; paused = true; preview?.abort(); block.done(); close(); },
-    resume() { if (closed || !paused) return; paused = false; block = liveBlock(terminal); close = listen(); draw(); } });
+  services.screen?.({ pause() { if (closed || paused) return; paused = true; preview?.abort(); close(); },
+    resume() { if (closed || !paused) return; paused = false; close = listen(); draw(); } });
   try {
     if (saved) {
       busy = true;
@@ -225,8 +230,14 @@ export async function exploreScreen(requested: string | undefined, services: Exp
       return await done;
     }
     const resolution = requested === undefined ? undefined : resolveTarget(requested, catalogue, { suggestionLimit: 6, nearest: true });
-    if (resolution?.status === 'unknown' || resolution?.status === 'ambiguous') {
+    if (resolution?.status === 'unknown') { busy = true; draw(); }
+    const unknown = resolution?.status === 'unknown' && !await services.resolve(requested!);
+    if (closed) return await done;
+    busy = false;
+    if (unknown || resolution?.status === 'ambiguous') {
+      if (resolution?.status !== 'unknown' && resolution?.status !== 'ambiguous') throw new Error('Expected unresolved target.');
       const candidates = resolution.status === 'unknown' ? resolution.suggestions : resolution.candidates;
+      if (!candidates.length) { finish({ code: 3, line: `No object named “${requested}”` }); return await done; }
       state = { ...state, view: 'picker', candidates: candidates.map(candidate => ({ ...candidate, archiveClass: catalogue.find(entry => entry.id === candidate.id)?.archiveClass })) }; draw();
     } else void search(requested).catch(error => finish(undefined, error));
     return await done;

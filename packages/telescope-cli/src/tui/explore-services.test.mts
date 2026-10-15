@@ -4,7 +4,11 @@ import { mkdtemp, mkdir, writeFile, rm, statfs } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileSize, writeProductRecord } from '@cssearth/telescope-core/node';
-import { explorationDownloadSize, explorationFreeBytes, explorationPickStatuses } from './explore-services.mts';
+import { explorationDownloadSize, explorationFreeBytes, explorationPickStatuses, explorationServices } from './explore-services.mts';
+import { main, type CliIo, type CliServices } from '../cli.mts';
+import { exploreScreen } from './explore.mts';
+import { FakeTerminal } from './fake-terminal.mts';
+import type { FamilyOperation } from '../family-handler.mts';
 import { exploreChoice, exploreSession } from './fixtures/explore.mts';
 
 test('ALMA size reads only whole-delivery #this tar entries and unknown remains unknown', async () => {
@@ -56,4 +60,72 @@ test('markers require a verified delivery or real retained bytes, and never coun
     await writeFile(science, 'changed bytes');
     await assert.rejects(explorationPickStatuses(session), /records 7/u);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('make → quit → open → same output reopens verified native and family outputs without exporting again', async () => {
+  for (const family of [false, true]) {
+    const root = await mkdtemp(resolve(tmpdir(), 'explore-made-'));
+    const directory = resolve(root, 'run'), pick = resolve(directory, 'pick-1'), resultPath = resolve(pick, 'result.json');
+    let exports = 0;
+    const opened: string[] = [], terminal = new FakeTerminal(100, 24);
+    const until = async (text: string) => {
+      const deadline = Date.now() + 3000;
+      while (!terminal.screen.join('\n').includes(text)) {
+        if (Date.now() > deadline) assert.fail(`Screen did not show ${text}`);
+        await new Promise<void>(resolve => setImmediate(resolve));
+      }
+    };
+    const unused = async (): Promise<never> => { throw new Error('Unexpected service'); };
+    const operation: FamilyOperation = { id: 'spectrum-export', handlerId: 'fixture', componentId: 'spectrum', label: 'Table', available: true, reason: 'Fixture',
+      owner: { module: 'fixture', export: 'fixture' }, fixedArguments: {}, parameters: [], limitations: [] };
+    const publish = async (destination: string, name: string) => {
+      exports++; await mkdir(destination, { recursive: true });
+      const file = resolve(destination, name); await writeFile(file, 'made output');
+      const receipt = resolve(destination, 'output.product.json');
+      await writeProductRecord(receipt, { telescope: 'Fixture', stage: 'fixture', inputs: [], parameters: {}, software: [] }, [{ path: name, file }]);
+      return { file, receipt };
+    };
+    const api: CliServices = {
+      saveExploration: unused, getSession: unused, importLocalArtifact: unused, projectOutput: unused, exportSphere: unused, exportSpatialObject: unused,
+      familyCoverageLedger: () => [],
+      listArtifactOutputs: async () => ({ artifact: 'delivery', source: resultPath,
+        outputs: family ? [] : [{ kind: 'image', available: true, reason: 'Fixture', hdu: 0, parameters: ['plane'] }],
+        familyOperations: family ? [operation] : [],
+      }),
+      exportOutput: async (_source, _selection, destination) => {
+        const { file, receipt } = await publish(destination, 'figure.png');
+        return { directory: destination, figure: file, values: file, data: file, receipt, sourceContext: undefined };
+      },
+      executeFamilyOperation: async (_source, _selection, destination) => {
+        const { file, receipt } = await publish(destination, 'spectrum.csv');
+        return { directory: destination, product: file, record: receipt, operation };
+      },
+    };
+    const stdout: string[] = [], stderr: string[] = [];
+    const io: CliIo = { stdinIsTTY: true, stdoutIsTTY: true, stderrIsTTY: true, terminal, write: text => stdout.push(text), error: text => stderr.push(text), question: unused, close: () => {} };
+    try {
+      await mkdir(pick, { recursive: true }); const science = resolve(pick, 'science.fits'); await writeFile(science, 'science');
+      await writeProductRecord(resolve(pick, 'product.json'), { telescope: 'Fixture', stage: 'fixture', inputs: [], parameters: {}, software: [] }, [{ path: 'science.fits', file: science }]);
+      await writeFile(resultPath, JSON.stringify({ schema: 'cssearth-telescope-delivery@3', product: 'science.fits', record: 'product.json', receipt: 'product.json', facts: { target: 'star', verified: true },
+        context: { kind: 'exploration', target: 'star', discovery: { schema: 'cssearth-telescope-exploration@1', reference: { kind: 'indexed-observation', observation: 'one' } }, assessment: { status: 'not-requested' } },
+        files: await Promise.all(['science.fits', 'product.json'].map(async path => ({ path, ...await fileSize(resolve(pick, path)) }))) }));
+      const saved = { ...exploreSession(), directory }; await writeFile(resolve(directory, 'explore.json'), JSON.stringify(saved));
+      const services = { ...explorationServices(root, ['star'], directory, api, io, {}), open: (file: string) => { opened.push(file); } };
+      const first = exploreScreen(undefined, services, terminal, false, saved);
+      await until('Start (UTC)'); await terminal.press({ name: 'return' }, { name: 'return' }); await until('What do you want to make?');
+      await until(family ? 'CSV of wavelength' : 'PNG with a scale bar'); await terminal.press({ name: 'return' });
+      if (!family) { await until('plane:'); await terminal.press({ text: '0' }, { name: 'return' }); }
+      await until('· opened'); await terminal.press({ text: 'q' }); assert.equal((await first).code, 0);
+      assert.equal(exports, 1);
+      const reopened = main(['open', root], root, io.write, io, { ...api, exploration: services });
+      await until('Your runs'); await terminal.press({ name: 'return' }); await until('Start (UTC)');
+      await terminal.press({ name: 'return' }, { name: 'return' }); await until('What do you want to make?');
+      await until(family ? '✓ spectrum.csv' : '✓ figure.png');
+      await terminal.press({ name: 'return' }); await until('· opened');
+      assert.equal(exports, 1); assert.equal(opened.length, 2); assert.equal(opened[0], opened[1]);
+      assert.doesNotMatch(terminal.screen.join('\n'), /plane:/u);
+      await terminal.press({ text: 'q' }); assert.equal(await reopened, 0, stderr.join(''));
+      await writeFile(opened[0]!, 'tampered'); await assert.rejects(services.outputs(resultPath, 1), /recorded size/u);
+    } finally { await rm(root, { recursive: true, force: true }); }
+  }
 });

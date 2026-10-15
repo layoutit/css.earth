@@ -7,14 +7,16 @@ export type ToolchainProgress =
   | { readonly type: 'download'; readonly received: number; readonly total?: number }
   | { readonly type: 'installed' };
 interface ProgressContext {
-  readonly report: (event: ToolchainProgress) => void;
+  readonly report?: (event: ToolchainProgress) => void;
   readonly signal: AbortSignal;
+  readonly cancel?: () => void;
 }
 const progress = new AsyncLocalStorage<ProgressContext>();
 export function withToolchainProgress<T>(context: ProgressContext, work: () => Promise<T>): Promise<T> {
   return progress.run(context, work);
 }
 export const toolchainInstallSignal = (): AbortSignal | undefined => progress.getStore()?.signal;
-export const hasToolchainProgress = (): boolean => progress.getStore() !== undefined;
-export function reportToolchainProgress(event: ToolchainProgress): void { progress.getStore()?.report(event); }
+export const toolchainInstallCancel = (): (() => void) | undefined => progress.getStore()?.cancel;
+export const hasToolchainProgress = (): boolean => progress.getStore()?.report !== undefined;
+export function reportToolchainProgress(event: ToolchainProgress): void { progress.getStore()?.report?.(event); }
 export function assertToolchainInstallActive(): void { toolchainInstallSignal()?.throwIfAborted(); }

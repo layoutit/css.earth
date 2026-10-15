@@ -9,6 +9,7 @@ import { SEARCH as SPITZER_SEARCH } from '../archives/spitzer/archive.mts';
 import { OPUS_SERVICE } from '../archive-adapters/opus.mts';
 import { wavelengthText } from '../cli-table.mts';
 import { oneLine } from '../cli-summary.mts';
+import { LIST_MINIMUM_ROWS, listPageSize } from './list.mts';
 import { bold, breadcrumb, clipLine, cut, dim, green, inverse, pad, red, yellow } from './style.mts';
 
 export const EXPLORE_PAGE = 12, TABLE_COLUMNS = 78, PANEL_COLUMNS = 40;
@@ -59,12 +60,12 @@ export function exploreLabel(choice: ExploreChoice): string {
   return [String(choice.pick).padStart(2), cut(oneLine(local ? 'Local' : archiveLabel(choice)), 8), cut(oneLine(instrument), 13),
     observationStart(choice).padEnd(16), cut(oneLine(choice.display.productKind ?? '—'), 8), wavelengthText(choice.display.wavelengthsMicrometres)].join('  ');
 }
-export function exploreSelection(state: ExploreState) {
+export function exploreSelection(state: ExploreState, page = EXPLORE_PAGE) {
   const terms = state.query.trim().toLowerCase().split(/\s+/u);
   const shown = (state.session?.choices ?? []).filter(choice => terms.every(term => `${exploreLabel(choice)} ${choice.telescope}`.toLowerCase().includes(term)));
   const active = Math.max(0, Math.min(state.active, shown.length - 1));
-  const start = Math.max(0, Math.min(active - Math.floor(EXPLORE_PAGE / 2), shown.length - EXPLORE_PAGE));
-  return { shown, active, start, current: shown[active], rows: shown.slice(start, start + EXPLORE_PAGE) };
+  const start = Math.max(0, Math.min(active - Math.floor(page / 2), shown.length - page));
+  return { shown, active, start, current: shown[active], rows: shown.slice(start, start + page) };
 }
 function panel(choice: ExploreChoice, state: ExploreState): string[] {
   return [dim(`preview · #${choice.pick} ${oneLine(choice.display.instrument)}`), ...renderPreview(state.preview).map(dim)];
@@ -88,8 +89,8 @@ function providerReason(reason: string): string {
   if (/no answer|did not answer|not answer|no response|unreachable|ENOTFOUND|EAI_AGAIN/iu.test(reason)) return 'no answer';
   return 'error';
 }
-function table(state: ExploreState, columns: number): string[] {
-  const { shown, current, start, rows } = exploreSelection(state), session = state.session!;
+function table(state: ExploreState, columns: number, height: number): string[] {
+  const page = listPageSize(height), { shown, current, start, rows } = exploreSelection(state, page), session = state.session!;
   const got = [...state.statuses.values()].filter(status => status.state === 'done').length;
   const issues = session.answer.services.filter(service => service.state === 'unavailable' || service.state === 'overflow');
   const failures = new Map<string, Set<string>>();
@@ -102,10 +103,10 @@ function table(state: ExploreState, columns: number): string[] {
     (session.answer.outcome.coverage === 'incomplete' ? ` · ${yellow('incomplete')}${[...failures].map(([reason, archives]) => ` · ${dim(`${[...archives].join(', ')} ${reason}`)}`).join('')}` : '');
   const left = [dim('    #  Archive   Instrument     Start (UTC)       Kind      Wavelength'),
     ...(rows.length ? rows.map(choice => `${mark(state.statuses.get(choice.pick))}${choice === current ? bold(`> ${exploreLabel(choice)}`) : `  ${exploreLabel(choice)}`}`) : [dim('   no match')])];
-  while (left.length < EXPLORE_PAGE + 1) left.push('');
+  while (left.length < page + 1) left.push('');
   const count = shown.length < session.choices.length ? `${shown.length} match · ` : '';
   const range = shown.length ? `${start + 1}–${start + rows.length} of ${shown.length}` : '0';
-  return [...header([state.target], clipLine(title, columns)), ...beside(left, current ? panel(current, state) : [], columns), '',
+  return [...header([state.target], clipLine(title, columns)), ...beside(left, current ? panel(current, state).slice(0, height - 7) : [], columns), '',
     `/ ${state.query}${inverse(' ')}   ${dim(`${count}${range} · ↑↓ scroll · enter choose · esc quit`)}`];
 }
 function confirm(state: ExploreState, columns: number): string[] {
@@ -138,19 +139,27 @@ function download(state: ExploreState): string[] {
     : [...lines, `  ${'Download'.padEnd(26)}${state.checking ? green('done') : progress}`,
       `  ${'Check headers and units'.padEnd(26)}${state.checked ? green('done') : dim(state.checking ? `${spinner[state.tick % spinner.length]} checking` : 'waiting')}`];
 }
-export function renderExplore(state: ExploreState, columns: number): string[] {
+export function renderExplore(state: ExploreState, columns: number, height = 40): string[] {
+  if (height < LIST_MINIMUM_ROWS) return [`make the window taller: needs ${LIST_MINIMUM_ROWS} rows`];
+  const lines = exploreLines(state, columns, height);
+  return lines.length >= height ? [`make the window taller: needs ${lines.length + 1} rows`] : lines;
+}
+function exploreLines(state: ExploreState, columns: number, height: number): string[] {
+  const page = Math.max(1, Math.min(EXPLORE_PAGE, height - 9 - (state.parameter ? 2 : 0) - (state.notice ? 2 : 0) - (state.making ? 2 : 0)));
+  const start = (length: number) => Math.max(0, Math.min(state.active - Math.floor(page / 2), length - page));
   if (state.view === 'picker') return [...header([`explore “${state.requested}”`, 'did you mean'], `${yellow('No object named')} ${bold(`“${oneLine(state.requested)}”`)}`),
-    'Did you mean:', '', ...state.candidates.map((candidate, index) =>
-      (index === state.active ? bold(`> ${oneLine(candidate.name).padEnd(28)}`) : `  ${oneLine(candidate.name).padEnd(28)}`) + dim(oneLine(candidate.archiveClass ?? ''))), '', dim('↑↓ choose · enter explore it · esc quit')];
+    'Did you mean:', '', ...state.candidates.slice(start(state.candidates.length), start(state.candidates.length) + page).map((candidate, index) =>
+      (index + start(state.candidates.length) === state.active ? bold(`> ${oneLine(candidate.name).padEnd(28)}`) : `  ${oneLine(candidate.name).padEnd(28)}`) + dim(oneLine(candidate.archiveClass ?? ''))), '', dim('↑↓ choose · enter explore it · esc quit')];
   if (state.view === 'search') return [...header([state.target, 'searching'], `${bold(oneLine(state.target))} · searching archives…`),
     ...state.providers.map(provider => `  ${providerName(provider.archive).padEnd(10)}${provider.state === 'searching' ? dim(`${spinner[state.tick % spinner.length]} searching`)
       : provider.reason ? yellow(providerReason(provider.reason)) : provider.count ? green(`${provider.count} found`) : dim('none')}`)];
-  if (state.view === 'table') return table(state, columns);
+  if (state.view === 'table') return table(state, columns, height);
   if (state.view === 'confirm') return confirm(state, columns);
   if (state.view === 'download') return download(state);
   const choice = state.selected!, dir = `${state.session!.directory}/pick-${choice.pick}`;
   return [...header([state.target, `#${choice.pick} ${choice.display.instrument}`, 'make'], `${green('✓')} ${bold(`#${choice.pick} ${oneLine(archiveLabel(choice))} ${oneLine(choice.display.instrument)}`)} ${dim(`${dir}/`)}`),
-    'What do you want to make?', '', ...state.outputs.map((output, index) => {
+    'What do you want to make?', '', ...state.outputs.slice(start(state.outputs.length), start(state.outputs.length) + page).map((output, offset) => {
+      const index = offset + start(state.outputs.length);
       const made = state.made.get(index);
       return (index === state.active ? bold(`> ${output.name.padEnd(18)}${output.description}`) : `  ${output.name.padEnd(18)}${dim(output.description)}`) +
         (made ? green(`  ✓ ${basename(made.file)}${made.opened ? ' · opened' : ''}`) : '');

@@ -34,7 +34,7 @@ That's it. telescope lists what the archives hold for Eris, and every step ends 
 3. `outputs` asks what to make of it: an image, a spectrum, a map on the body, or a standalone 3D sphere in HTML.
 
 - `--yes` (`-y`) skips terminal consent for large or unknown downloads and first-time Python setup.
-- `telescope open [DIRECTORY]` lists saved runs under `./telescope-runs/` (or DIRECTORY), newest first, with observation, downloaded, partial and made counts. Use ↑↓ and Enter to reopen the saved explore table without searching; Escape quits. Pipes print plain rows; `--json` prints the run list.
+- `telescope open [DIRECTORY]` lists saved runs under `./telescope-runs/` (or DIRECTORY), newest first, with observation, downloaded, partial and made counts. Use ↑↓ or Page Up/Down and Enter to reopen the saved explore table without searching; Escape quits. Pipes print plain rows; `--json` prints the run list.
 
 ## What You Can Search
 
@@ -54,7 +54,11 @@ Downloads and results land in `./telescope-runs/` where you run the command; `--
 For some instruments, the observatory's own software is run again on the same inputs and the result is checked against the published product.
 
 In an interactive terminal, the main help screen shows a spinning globe and the four core commands. Narrow windows omit
-the globe; short windows show one still. Screens use stderr; pipes and `--json` keep plain stdout without animation or
+the globe; short windows show one still. Explore shows up to twelve rows per page, reduced to fit the window: ↑↓ scrolls, Page Up/Down pages,
+typing searches and Backspace edits. Enter chooses an observation and confirms a download; in make it creates and opens
+an output, or opens it again if already made. Escape returns to the list; Escape from the list saves and quits.
+Use `q` to quit from make and `--no-open` to disable opening files. `--all` applies to plain output; the interactive
+table always scrolls through every saved pick. Screens use stderr; pipes and `--json` keep plain stdout without animation or
 prompts. Use `telescope help COMMAND` for details and `telescope help all` for the full reference, including development
 commands.
 

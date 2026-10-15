@@ -1,5 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process';
-import { toolchainInstallSignal, reportToolchainProgress } from './progress.js';
+import { toolchainInstallSignal, toolchainInstallCancel, reportToolchainProgress } from './progress.js';
 import { telescopePythonEnvironment } from '../paths/index.js';
 
 /** Run a pinned toolchain command, retaining only the tail of a failed command's diagnostics. */
@@ -23,6 +23,7 @@ export async function runToolchainProcessAsync(command: string, args: readonly s
 }: { env?: NodeJS.ProcessEnv; input?: string; maxBuffer?: number; signal?: AbortSignal; cwd?: string; inheritEnvironment?: boolean; captureOutput?: boolean;
   output?: (text: string, stream: 'stdout' | 'stderr') => void; failureMessage?: (status: number | null, stderr: string) => Error } = {}): Promise<string> {
   signal?.throwIfAborted();
+  const cancel = toolchainInstallCancel();
   if (args[0] === 'create' && args.includes('-p')) reportToolchainProgress({ type: 'step', step: 'python', status: 'started' });
   return new Promise((accept, reject) => {
     const child = spawn(command, args, { env: inheritEnvironment ? { ...process.env, ...env } : telescopePythonEnvironment(env), cwd, stdio: ['pipe', 'pipe', 'pipe'], detached: process.platform !== 'win32' });
@@ -37,6 +38,8 @@ export async function runToolchainProcessAsync(command: string, args: readonly s
       killTimer ??= setTimeout(() => kill('SIGKILL'), 1000);
     };
     const abort = () => stop(new Error('Toolchain installation aborted.', { cause: signal?.reason }));
+    const interrupt = () => { cancel?.(); abort(); };
+    process.on('SIGINT', interrupt); process.on('SIGTERM', interrupt);
     signal?.addEventListener('abort', abort, { once: true });
     if (signal?.aborted) abort();
     const receive = (text: string, stream: 'stdout' | 'stderr') => {
@@ -51,6 +54,7 @@ export async function runToolchainProcessAsync(command: string, args: readonly s
     child.on('error', error => { failure ??= failureMessage?.(null, stderr) ?? new Error(`${command} ${args.join(' ')} could not run: ${error.message}`, { cause: error }); });
     child.stdin.on('error', error => { if (!('code' in error && error.code === 'EPIPE')) stop(error); });
     child.on('close', (code, killedBy) => {
+      process.off('SIGINT', interrupt); process.off('SIGTERM', interrupt);
       signal?.removeEventListener('abort', abort); if (killTimer) { clearTimeout(killTimer); kill('SIGKILL'); }
       if (failure) reject(failure);
       else if ((killedBy || code !== 0) && failureMessage) reject(failureMessage(code, stderr));

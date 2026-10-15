@@ -57,7 +57,7 @@ import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
 import type { InspectedArtifact } from './cli-artifact-types.mts';
-import { WORKSPACE, USER_ROOT, withAcquisitionDirectory, requireWorkspace, withTransferConsent, withToolchainProgress, requestTransferConsent, DownloadCancelledError } from '@cssearth/telescope-core/node';
+import { WORKSPACE, USER_ROOT, withAcquisitionDirectory, requireWorkspace, withTransferConsent, withToolchainProgress, requestTransferConsent, DownloadCancelledError, type ToolchainProgress } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
@@ -420,7 +420,10 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
 export async function main(args: readonly string[], root?: string, output: (text:string)=>void = text=>{process.stdout.write(text);}, injectedIo?:CliIo, api:CliServices=defaultServices):Promise<number>{
   const io=injectedIo??processIo(output), state:ConsentState={installController:new AbortController()};
   const temporary=await mkdtemp(resolve(tmpdir(),'telescope-command-'));
-  try{return await withAcquisitionDirectory(temporary,()=>withTransferConsent(consentHandler(io,{json:args.includes('--json'),yes:args.includes('--yes')||args.includes('-y')},state),()=>guided({json:args.includes('--json')},io)?withToolchainProgress({report:event=>{state.install?.progress(event);if(event.type==='installed')state.screen?.resume();},signal:state.installController!.signal},()=>runCli(args,root,output,io,api,state)):runCli(args,root,output,io,api,state)));}
+  try{return await withAcquisitionDirectory(temporary,()=>withTransferConsent(consentHandler(io,{json:args.includes('--json'),yes:args.includes('--yes')||args.includes('-y')},state),()=>withToolchainProgress({
+    signal:state.installController!.signal,cancel:()=>state.installController!.abort(),
+    ...(guided({json:args.includes('--json')},io)?{report:(event:ToolchainProgress)=>{state.install?.progress(event);if(event.type==='installed')state.screen?.resume();}}:{}),
+  },()=>runCli(args,root,output,io,api,state))));}
   finally{state.install?.close();await rm(temporary,{recursive:true,force:true});}
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { it as test } from 'node:test';
 import { runToolchainProcess } from './process.js';
+import { withToolchainProgress, hasToolchainProgress } from './progress.js';
 
 test('a command that never ran says why instead of reporting a null status', () => {
   assert.throws(() => runToolchainProcess('cssearth-no-such-binary', ['--version']),
@@ -55,4 +56,36 @@ test('streaming native installers keep their output without acquiring a capture 
     maxBuffer: 2, captureOutput: false, output: text => { output += text; },
   }), '');
   assert.equal(output, 'native build log');
+});
+
+test('default process cancellation inherits its signal without enabling progress output', async () => {
+  const { runToolchainProcessAsync } = await import('./process.js');
+  const controller = new AbortController();
+  let stopped = false;
+  await assert.rejects(withToolchainProgress({ signal: controller.signal }, async () => {
+    assert.equal(hasToolchainProgress(), false);
+    return runToolchainProcessAsync(process.execPath, ['-e', `
+process.on('SIGTERM', () => setTimeout(() => { process.stdout.write('stopped'); process.exit(0); }, 75));
+process.stdout.write('ready'); setInterval(() => {}, 1000);
+`], { output: text => {
+      if (text.includes('ready')) controller.abort();
+      if (text.includes('stopped')) stopped = true;
+    } });
+  }), /installation aborted/u);
+  assert.equal(stopped, true);
+});
+
+test('a default process owns signal cancellation and removes its handlers after closing', async () => {
+  const { runToolchainProcessAsync } = await import('./process.js');
+  const before = ['SIGINT', 'SIGTERM'].map(signal => process.listenerCount(signal));
+  let stopped = false;
+  await assert.rejects(runToolchainProcessAsync(process.execPath, ['-e', `
+process.on('SIGTERM', () => setTimeout(() => { process.stdout.write('stopped'); process.exit(0); }, 75));
+process.stdout.write('ready'); setInterval(() => {}, 1000);
+`], { output: text => {
+    if (text.includes('ready')) process.emit('SIGINT');
+    if (text.includes('stopped')) stopped = true;
+  } }), /installation aborted/u);
+  assert.equal(stopped, true);
+  assert.deepEqual(['SIGINT', 'SIGTERM'].map(signal => process.listenerCount(signal)), before);
 });

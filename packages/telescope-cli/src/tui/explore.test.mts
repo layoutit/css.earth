@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { exploreScreen, type ExploreServices } from './explore.mts';
 import { FakeTerminal } from './fake-terminal.mts';
+import { LEAVE_SCREEN } from './terminal.mts';
 import { plain, visibleWidth } from './style.mts';
 import { exploreLabel, renderExplore, type ExploreState, type PickStatus } from './explore-render.mts';
 import { exploreSession } from './fixtures/explore.mts';
@@ -40,6 +41,7 @@ function fixture() {
   const statuses = new Map<number, PickStatus>(), previews: number[] = [], previewSignals: AbortSignal[] = [], opened: string[] = [], targets: (string | undefined)[] = [];
   const services: ExploreServices = {
     catalogue: async () => [{ id: 'star', name: 'Star', aliases: ['HD 1'], archiveClass: 'star' }],
+    resolve: async () => false,
     search: async (target, report) => {
       targets.push(target); report({ archive: 'ALMA', state: 'searching' }); await tick();
       report({ archive: 'ALMA', state: 'done', count: 2 }); report({ archive: 'Gemini', state: 'done', count: 0 });
@@ -93,7 +95,7 @@ test('whole explore flow selects a suggestion, confirms, fails, resumes, makes t
   await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('What do you want to make?'));
   assert.equal(f.transfers(), 2); await terminal.press({ text: 'q' });
   assert.deepEqual(await running, { code: 0, line: 'Kept /run/pick-1/ · made figure.png, viewer.html' });
-  assert.equal(terminal.listening, false); assert.doesNotMatch(terminal.writes.join(''), /\x1b\[2J|\x1b\[\?1049h/u);
+  assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN); assert.doesNotMatch(terminal.writes.join(''), /\x1b\[2J/u);
 });
 
 test('exact aliases skip the picker, a narrow window skips previews, disk refusal blocks Enter and no-open stays in make', async () => {
@@ -127,7 +129,7 @@ test('Escape on suggestions searches nothing; Ctrl-C aborts downloads and restor
       await terminal.press({ name: 'return' }); await until(() => current(terminal).includes('Check headers'));
       await terminal.press({ name: 'c', ctrl: true }); assert.equal((await running).code, 130); assert.equal(aborted, true);
     }
-    assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), '\x1b[?25h');
+    assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
   }
 });
 
@@ -247,8 +249,48 @@ test('EOF exits picker, search, table, confirmation, download and make, retainin
     }
     await terminal.press({ name: 'eof' });
     assert.deepEqual(await running, { code: 0, line: phase === 'picker' || phase === 'search' ? 'Nothing searched.' : 'Saved /run' });
-    assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), '\x1b[?25h');
+    assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
     if (phase === 'download' || phase === 'search') assert.equal(aborted, true);
     if (phase === 'make') assert.equal(f.statuses.get(1)?.state, 'done');
   }
+});
+
+test('a valid star absent from the catalogue resolves before searching, including an empty catalogue', async () => {
+  for (const empty of [false, true]) {
+    const terminal = new ExploreTerminal(100, 18), f = fixture(), resolved: string[] = [];
+    const running = exploreScreen('Sgr A*', { ...f.services,
+      catalogue: empty ? async () => [] : f.services.catalogue,
+      resolve: async name => { resolved.push(name); return true; },
+    }, terminal);
+    await until(() => current(terminal).includes('Start (UTC)'));
+    assert.deepEqual(resolved, ['Sgr A*']); assert.deepEqual(f.targets, ['Sgr A*']);
+    assert.doesNotMatch(history(terminal), /Did you mean:/u);
+    assert.match(current(terminal), /enter choose · esc quit/u);
+    await terminal.press({ name: 'escape' }); assert.equal((await running).code, 0);
+  }
+});
+
+test('a failed resolution without suggestions reports the name and exits without an empty picker', async () => {
+  const terminal = new ExploreTerminal(), f = fixture();
+  assert.deepEqual(await exploreScreen('missing', { ...f.services, catalogue: async () => [] }, terminal),
+    { code: 3, line: 'No object named “missing”' });
+  assert.deepEqual(f.targets, []); assert.doesNotMatch(history(terminal), /Did you mean:/u);
+  assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
+});
+
+test('explore stays visible at 100×18, pages by height and recovers after shrinking below minimum', async () => {
+  const terminal = new ExploreTerminal(100, 18), f = fixture(), session = exploreSession();
+  const choices = Array.from({ length: 30 }, (_, index) => ({ ...session.choices[0]!, pick: index + 1 }));
+  const saved = { ...session, choices };
+  const running = exploreScreen(undefined, f.services, terminal, false, saved);
+  await until(() => current(terminal).includes('Start (UTC)'));
+  assert.equal(terminal.alternateScreen, true); assert.match(current(terminal), /1–10 of 30/u);
+  assert.match(current(terminal), />\s+1\s+ALMA/u);
+  await terminal.press({ name: 'pagedown' }); assert.match(current(terminal), />\s+11\s+ALMA/u);
+  terminal.resize(100, 5); assert.equal(terminal.screen[0], 'make the window taller: needs 9 rows');
+  await terminal.press({ name: 'return' }, { name: 'down' }); assert.equal(f.transfers(), 0);
+  terminal.resize(150, 18); assert.match(current(terminal), />\s+11\s+ALMA/u);
+  assert.match(current(terminal), /enter choose · esc quit/u); assert.equal(terminal.wraps, 0);
+  await terminal.press({ name: 'escape' }); assert.equal((await running).code, 0);
+  assert.equal(terminal.alternateScreen, false);
 });

@@ -9,6 +9,9 @@ import { parseCli } from '../cli-arguments.mts';
 import { helpText } from '../help.mts';
 import { VERSION } from '../version.mts';
 import { FakeTerminal } from './fake-terminal.mts';
+import { LEAVE_SCREEN, processTerminal } from './terminal.mts';
+import { PassThrough } from 'node:stream';
+import { EventEmitter } from 'node:events';
 import { exploreSession } from './fixtures/explore.mts';
 import type { ExploreServices } from './explore.mts';
 import type { SavedRun } from './saved-runs.mts';
@@ -36,7 +39,7 @@ test('runs render the approved breadcrumb, spacing, wording, colors, ages and ac
   assert.match(plain(renderRuns(runs, 1, now() + 2 * 3600000)[4]!), /2 h ago/u);
 });
 
-test('arrow keys clamp, Enter selects, Escape and Ctrl-C restore the cursor; tall blocks draw final state only', async () => {
+test('arrow keys clamp, Enter selects, Escape and Ctrl-C restore the cursor in the alternate buffer', async () => {
   for (const ending of ['return', 'escape', 'c'] as const) {
     const terminal = new FakeTerminal(160), running = runsScreen(runs, terminal, now);
     await terminal.press({ name: 'up' }, { name: 'down' }, { name: 'down' });
@@ -44,14 +47,9 @@ test('arrow keys clamp, Enter selects, Escape and Ctrl-C restore the cursor; tal
     assert.match(terminal.screen.join('\n'), /esc quit   \.\/telescope-runs\/old/u);
     await terminal.press({ name: ending, ctrl: ending === 'c' });
     assert.deepEqual(await running, ending === 'return' ? { code: 0, run: runs[1] } : { code: ending === 'c' ? 130 : 0 });
-    assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), '\x1b[?25h');
-    assert.doesNotMatch(terminal.writes.join(''), /\x1b\[2J|\x1b\[\?1049h/u);
+    assert.equal(terminal.listening, false); assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
+    assert.doesNotMatch(terminal.writes.join(''), /\x1b\[2J/u);
   }
-  const short = new FakeTerminal(160, 5), running = runsScreen(runs, short, now);
-  assert.doesNotMatch(short.writes.join(''), /Your runs/u);
-  await short.press({ name: 'down' }, { name: 'escape' }); await running;
-  assert.equal(short.writes.filter(text => text.includes('Your runs')).length, 1);
-  assert.match(short.writes.join(''), /> Eris/u);
   const empty = new FakeTerminal();
   assert.deepEqual(await runsScreen([], empty), { code: 0 });
   assert.deepEqual(empty.writes, [`${NO_SAVED_RUNS}\n`]); assert.equal(empty.listening, false);
@@ -63,6 +61,32 @@ test('open parses only its directory and flags and has a discoverable help topic
   for (const args of [['open', 'a', 'b'], ['open', '--out', 'saved'], ['open', '--json', '--json']]) assert.throws(() => parseCli(args));
   for (const topic of ['open', 'all']) assert.match(helpText(topic), /telescope open \[DIRECTORY\] \[--json\]/u);
   assert.match(helpText('open'), /newest first.*without searching/u);
+});
+
+test('18 runs are visible at 100×24 before keys, page by height and recover from minimum height', async () => {
+  const saved = Array.from({ length: 18 }, (_, index) => ({ ...runs[0]!, target: `Run ${index + 1}`, run: `/run-${index + 1}` }));
+  const terminal = new FakeTerminal(100, 24), running = runsScreen(saved, terminal, now);
+  assert.match(terminal.screen.join('\n'), /Your runs/u); assert.match(terminal.screen.join('\n'), /> Run 1\s/u);
+  assert.match(terminal.screen.join('\n'), /enter reopen · esc quit/u); assert.equal(terminal.alternateScreen, true);
+  await terminal.press({ name: 'pagedown' }); assert.match(terminal.screen.join('\n'), /> Run 13\s/u);
+  await terminal.press({ name: 'down' }, { name: 'down' }, { name: 'down' }, { name: 'down' }, { name: 'down' });
+  assert.match(terminal.screen.join('\n'), /> Run 18\s/u);
+  terminal.resize(100, 5); assert.equal(terminal.screen[0], 'make the window taller: needs 9 rows');
+  await terminal.press({ name: 'return' }, { name: 'up' }); assert.equal(terminal.listening, true);
+  terminal.resize(100, 9); assert.match(terminal.screen.join('\n'), /> Run 18\s/u);
+  assert.equal(terminal.wraps, 0);
+  await terminal.press({ name: 'return' }); assert.deepEqual(await running, { code: 0, run: saved[17] });
+  assert.equal(terminal.writes.at(-1), LEAVE_SCREEN);
+});
+
+test('real stdin stream end quits open through its normal cleanup path', async () => {
+  const input = new PassThrough(), output = new PassThrough(), lifecycle = new EventEmitter();
+  let bytes = ''; output.on('data', chunk => { bytes += chunk.toString(); });
+  const running = runsScreen(runs, processTerminal(input, output, lifecycle), now);
+  assert.match(plain(bytes), /Your runs/u);
+  input.end();
+  assert.deepEqual(await running, { code: 0 }); assert.ok(bytes.endsWith(LEAVE_SCREEN));
+  assert.equal(input.listenerCount('keypress'), 0); assert.equal(lifecycle.listenerCount('SIGINT'), 0);
 });
 
 function capture(stdinIsTTY: boolean, stdoutIsTTY: boolean, stderrIsTTY: boolean, terminal = new FakeTerminal(100)) {
@@ -99,7 +123,7 @@ test('CLI Enter reopens saved explore directly, preserving its file and never ca
   try {
     const directory = resolve(root, 'saved'); await mkdir(directory);
     const path = resolve(directory, 'explore.json'), bytes = JSON.stringify(exploreSession()); await writeFile(path, bytes);
-    const services: ExploreServices = { catalogue: unused, search: unused, statuses: async session => {
+    const services: ExploreServices = { catalogue: unused, resolve: unused, search: unused, statuses: async session => {
       assert.equal(session.directory, directory); assert.equal(session.choices[1]!.display.instrument, 'UVES');
       return new Map([[2, { state: 'partial', bytes: 3 }]]);
     }, size: unused, free: unused, get: unused, outputs: unused, preview: unused, open: unused };

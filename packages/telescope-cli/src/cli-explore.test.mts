@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test, mock } from 'node:test';
 import { requestTransferConsent, reportToolchainProgress } from '@cssearth/telescope-core/node';
 import * as query from './observation-query/query.mts';
+import * as exploration from './exploration.mts';
 import type { CliServices } from './cli.mts';
 import type { CliIo } from './cli-io.mts';
 import type { ExploreServices } from './tui/explore.mts';
@@ -10,6 +11,7 @@ import { exploreSession } from './tui/fixtures/explore.mts';
 import { parseCli } from './cli-arguments.mts';
 
 mock.module('./observation-query/query.mts', { namedExports: { ...query, loadTargetCatalogue: async () => [{ id: 'star', name: 'Star', aliases: [] }] } });
+mock.module('./exploration.mts', { namedExports: { ...exploration, skyTargetRequest: async (_root: string, request: exploration.ExplorationRequest) => ({ request, simbadMiss: request.target === 'starr' }) } });
 const { main } = await import('./cli.mts');
 const unused = async (): Promise<never> => { throw new Error('unexpected service'); };
 function api(exploration?: ExploreServices): CliServices {
@@ -26,7 +28,7 @@ async function until(condition: () => boolean) {
   while (!condition()) { if (Date.now() > deadline) assert.fail('CLI screen did not reach expected state'); await new Promise<void>(resolve => setImmediate(resolve)); }
 }
 function services(opened: string[]): ExploreServices {
-  return { catalogue: async () => [{ id: 'star', name: 'Star', aliases: [] }], search: async () => exploreSession(), statuses: async () => new Map(),
+  return { resolve: async () => false, catalogue: async () => [{ id: 'star', name: 'Star', aliases: [] }], search: async () => exploreSession(), statuses: async () => new Map(),
     size: async () => 10, free: async () => 100, get: async () => '/run/pick-1/result.json',
     outputs: async () => [{ name: 'Image', description: 'PNG with a scale bar', run: async () => 'figure.png' }],
     preview: async () => ({ kind: 'none', reason: 'the archive has no preview for this one' }), open: file => { opened.push(file); } };

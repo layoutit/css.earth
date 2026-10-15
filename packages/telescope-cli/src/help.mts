@@ -302,12 +302,12 @@ const exportKinds = between('Physical object handoff', '\nSky association:');
 const figures = between('Figures:', '\nExplore filters');
 
 const explanations: Readonly<Record<string, readonly string[]>> = {
-  open: ['  telescope open [DIRECTORY] [--json]', 'List saved explorations under ./telescope-runs/ (or DIRECTORY), newest first, with observation, downloaded, partial and made counts. In a terminal, use ↑↓ to choose, Enter to reopen the saved explore table without searching, and Escape to quit. Pipes print plain rows; --json prints the run list.'],
+  open: ['  telescope open [DIRECTORY] [--json]', 'List saved explorations under ./telescope-runs/ (or DIRECTORY), newest first, with observation, downloaded, partial and made counts. In a terminal, use ↑↓ or Page Up/Down to choose, Enter to reopen the saved explore table without searching, and Escape to quit. Pipes print plain rows; --json prints the run list.'],
   skill: [between('Agent skill', '\nManaged toolchains:')],
   toolchain: [between('Managed toolchains:', '\nHuman entry points:')],
   explore: [between('Explore may first install managed Python:', '\nIn a terminal, outputs'),
     between('Explore pushes an instrument', '\nFamily-assess'), filters, delivery, coverage,
-    '  --all                              Show every saved choice (default: first 10)'],
+    '  --all                              Show every saved choice in plain output (default: first 10)'],
   get: [delivery, coverage, filters],
   query: [filters, delivery, coverage],
   outputs: [between('In a terminal, outputs', '\nNew-object'), outputInspection, portable],
@@ -339,8 +339,13 @@ const currentOutputHelp = `Current human and agent output:
   telescope get RUN --pick N [--out DIRECTORY] [--offline] [--yes|-y] [--verbose] [--json]
   telescope outputs ARTIFACT.json [--structure NAME] [--out DIRECTORY] [--verbose] [--json]
   telescope export RESULT --output TYPE [--out DIRECTORY] [--verbose] [--json]
-Explore shows the first 10 saved choices; --all shows every choice in the same pick order.
---verbose retains full limitations and diagnostics on human screens.
+In a terminal, Explore shows up to 12 rows per page, reduced to fit the window.
+Use ↑↓ to scroll, Page Up/Down to page, type to search, and Backspace to edit.
+Enter chooses and confirms a download; in make it creates and opens an output.
+A made output opens again without exporting. Escape goes back; at the list it saves and quits.
+Use q to quit from make; --no-open disables opening files.
+Plain output shows the first 10 choices; --all shows every choice in the same pick order.
+--verbose retains full limitations and diagnostics in plain output and saved evidence.
 Explore --json emits cssearth-telescope-explore-summary@1, with outcome, resolution, counts,
 savedPath and compact choices. The complete record stays in explore.json; use jq for details.
 Outputs saves the complete inspection as outputs.json inside the existing run and prints a summary naming savedPath; it never creates a new run.

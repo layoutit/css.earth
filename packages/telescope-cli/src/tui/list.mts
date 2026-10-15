@@ -23,7 +23,7 @@ export interface ListState<Row> {
 const maximumPage = 12, panelWidth = 44, maximumPanelHeight = 14, gap = '    ';
 // Six chrome rows, a column heading, one item, and the cursor row below the block.
 export const LIST_MINIMUM_ROWS = 9;
-const pageSize = (rows: number) => Math.max(1, Math.min(maximumPage, rows - 8));
+export const listPageSize = (rows: number) => Math.max(1, Math.min(maximumPage, rows - 8));
 function selection<Row>(spec: ListSpec<Row>, state: ListState<Row>, page: number) {
   const terms = state.query.trim().toLowerCase().split(/\s+/u);
   const shown = spec.rows.filter(row => terms.every(term => spec.text(row).toLowerCase().includes(term)));
@@ -33,7 +33,7 @@ function selection<Row>(spec: ListSpec<Row>, state: ListState<Row>, page: number
 }
 export function renderList<Row>(spec: ListSpec<Row>, state: ListState<Row>, columns: number, height = 24): string[] {
   if (height < LIST_MINIMUM_ROWS) return [`make the window taller: needs ${LIST_MINIMUM_ROWS} rows`];
-  const page = pageSize(height);
+  const page = listPageSize(height);
   const { shown, start, current, rows } = selection(spec, state, page);
   const panelHeight = Math.min(maximumPanelHeight, height - 7);
   const tableWidth = 2 + spec.columns.reduce((sum, column) => sum + column.width + 2, 0);
@@ -67,7 +67,7 @@ export async function listScreen<Row>(spec: ListSpec<Row>, terminal: Terminal): 
       const keypress = async (key: ScreenKey) => {
         if (stopped) return;
         if (terminal.rows < LIST_MINIMUM_ROWS) return;
-        const page = pageSize(terminal.rows);
+        const page = listPageSize(terminal.rows);
         const { shown, active, current } = selection(spec, state, page);
         if (key.name === 'return' && current !== undefined) opened.set(current, await spec.enter.run(current));
         else if (key.name === 'up') state = { ...state, active: Math.max(0, active - 1) };
