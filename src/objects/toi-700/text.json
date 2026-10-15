@@ -46,6 +46,20 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "habitable-zone": {
+      "title": "Conservative and optimistic zones",
+      "detail": "Calculated, not observed",
+      "summary": "Where a planet with enough air could keep liquid water, as calculated. Darker: conservative limits; lighter: optimistic.",
+      "sources": [
+        {
+          "catalogueId": "kopparapu-2014-habitable-zones-planetary-mass",
+          "url": "https://doi.org/10.1088/2041-8205/787/2/L29",
+          "label": "Kopparapu et al. (2014)",
+          "checked": "2026-10-14",
+          "locator": "Table 1 and Equations 1 and 2, with the star's recorded temperature and luminosity"
+        }
+      ]
     }
   }
 }

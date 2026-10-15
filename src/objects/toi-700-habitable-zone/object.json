@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-700-habitable-zone",
+  "type": "plane-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/zone.json"
+    },
+    "host": "toi-700",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -49039098979754750,
+        393992734963858300,
+        -874366140989245700
+      ],
+      "localToReferenceXyzw": [
+        -0.2281088403080855,
+        -0.6667634690911656,
+        0.31279067758175666,
+        0.636831865783081
+      ],
+      "metersPerUnit": 4856906306.605711,
+      "boundsUnits": {
+        "min": [
+          -10.24,
+          -10.24,
+          -0.1024
+        ],
+        "max": [
+          10.24,
+          10.24,
+          0.1024
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-galaxy-backing@1",
+    "url": "prepared/plane.json"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-habitable-zone-source@1",
+  "id": "toi-700-habitable-zone",
+  "host": "toi-700",
+  "edges": {
+    "method": "kopparapu-2014",
+    "coefficients": "source/kopparapu-2014/table-1.json"
+  },
+  "plane": {
+    "orbits": [
+      "toi-700b",
+      "toi-700c",
+      "toi-700d",
+      "toi-700e"
+    ]
+  },
+  "picture": {
+    "sizePx": 1024,
+    "outerRadiusPx": 500,
+    "color": "#7bd88f",
+    "conservativeOpacity": 0.16,
+    "optimisticOpacity": 0.075
+  },
+  "centreFadeOuterRadii": [
+    2,
+    1.25
+  ],
+  "meaning": "The habitable zone of TOI-700, calculated here by Kopparapu et al. (2014) from the star's temperature and luminosity: the conservative zone between the runaway greenhouse and maximum greenhouse limits, and the optimistic zone that extends it to the recent Venus and early Mars limits. A drawing of four calculated distances in the plane of the planets' orbits, not an observation."
+}

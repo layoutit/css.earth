@@ -130,6 +130,24 @@
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,459 K and log g 4.83 (u1 0.169, u2 0.434): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "habitable-zone",
+        "label": "Habitable zone",
+        "scope": "system",
+        "thumbnail": "toi-700-dataset-color.webp",
+        "volume": {
+          "objectId": "toi-700-habitable-zone",
+          "datasetId": "plane",
+          "surface": "color"
+        },
+        "source": {
+          "id": "toi-700-habitable-zone",
+          "path": "../../toi-700-habitable-zone/source/manifest.json",
+          "url": "https://doi.org/10.1088/2041-8205/787/2/L29"
+        },
+        "falseColor": false,
+        "notes": "The star in its color, with its habitable zone drawn as a green band in the plane of its planets' orbits. The band is a calculation, not an observation: the distances at which a planet of Earth's mass with a carbon dioxide, water and nitrogen atmosphere could keep liquid water on its surface, by the model of Kopparapu et al. (2014), calculated here from the star's temperature (3,459 K) and luminosity. The darker band is the conservative zone, 0.158 to 0.308 au, between the runaway greenhouse and maximum greenhouse limits; the lighter strips extend it to the optimistic zone, 0.125 to 0.325 au, between the recent Venus and early Mars limits. Planet d, at 0.164 au, orbits in the conservative zone and e, at 0.134 au, in the optimistic strip inside it, as Gilbert et al. (2020, 2023) found; b and c orbit closer in. A planet in the zone is not known to be habitable."
       }
     ]
   },

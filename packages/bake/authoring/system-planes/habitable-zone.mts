@@ -13,6 +13,11 @@
  * the star's page shows, and the others are kept and not read. The plane is the mean of the planets' orbit planes as the
  * world draws them, through the star's world position, so the world step runs first. Writes the descriptor, the prepared
  * plane and picture, and the inventory.
+ *
+ * A system the Gallery does not list (TOI-700, 2026-10-14) names the method instead (`edges.method: "kopparapu-2014"`): the
+ * four distances are calculated here by Kopparapu et al. (2014)'s Equations 1 and 2 and their Table 1 coefficients for one
+ * Earth mass, kept in the package, from the temperature and luminosity in the star's own measurements record. The same
+ * calculation gives the Gallery's numbers for 55 Cnc and Proxima Centauri to the fourth decimal.
  */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -27,10 +32,11 @@ if (!id || !/^[a-z0-9][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: habita
 const objectDirectory = resolve(root, 'src/objects', id);
 const recipe = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'source/zone.json'), 'utf8')));
 if (recipe.schema !== 'cssearth-habitable-zone-source@1' || recipe.id !== id) throw new TypeError(`source/zone.json: expected a cssearth-habitable-zone-source@1 record of ${id}.`);
-const host = requireString(recipe.host), edges = requireRecord(recipe.edges), system = requireString(edges.system);
-const rowsPath = resolve(objectDirectory, requireString(edges.source));
+const host = requireString(recipe.host), edges = requireRecord(recipe.edges), calculated = edges.method !== undefined;
+if (calculated && edges.method !== 'kopparapu-2014') throw new TypeError(`source/zone.json edges.method: only kopparapu-2014 is known, not ${String(edges.method)}.`);
+const system = calculated ? host : requireString(edges.system), rowsPath = calculated ? '' : resolve(objectDirectory, requireString(edges.source));
 
-if (process.argv.includes('--fetch')) {
+if (process.argv.includes('--fetch') && !calculated) {
   const cache = resolve(root, 'output/hzgallery/hzgallery.json');
   if (!(await stat(cache).then(() => true, () => false))) {
     const response = await fetch(GALLERY, { headers: { 'user-agent': 'css.earth preparation (https://css.earth)' } });
@@ -42,17 +48,37 @@ if (process.argv.includes('--fetch')) {
   await mkdir(resolve(rowsPath, '..'), { recursive: true }); await writeFile(rowsPath, `${JSON.stringify(rows, null, 2)}\n`);
 }
 
-// Every planet's row carries its star's four distances: they must agree, or the recipe names the one row read, and rise from
-// the inside out.
-const kept = requireArray(JSON.parse(await readFile(rowsPath, 'utf8'))).map(row => requireRecord(row)), fields = requireRecord(edges.fields);
-const named = edges.row === undefined ? undefined : requireString(edges.row), rows = named === undefined ? kept : kept.filter(row => row.name === named);
-if (named !== undefined && rows.length !== 1) throw new TypeError(`${requireString(edges.source)}: edges.row names ${named}, which is ${rows.length ? 'more than one row' : 'no row'} of ${system}.`);
-const edge = (name: string) => {
-  const field = requireString(fields[name]), values = new Set(rows.map(row => requireFiniteNumber(row[field])));
-  if (rows.length === 0 || values.size !== 1 || rows.some(row => row.system !== system)) throw new TypeError(`${requireString(edges.source)}: the rows of ${system} must agree on ${field}.`);
-  return [...values][0]!;
-};
-const au = [edge('optimisticInnerAu'), edge('conservativeInnerAu'), edge('conservativeOuterAu'), edge('optimisticOuterAu')] as const;
+/** The four distances from the Gallery's kept rows: every planet's row carries its star's four, and they must agree, or the
+ * recipe names the one row read. */
+async function galleryDistances() {
+  const kept = requireArray(JSON.parse(await readFile(rowsPath, 'utf8'))).map(row => requireRecord(row)), fields = requireRecord(edges.fields);
+  const named = edges.row === undefined ? undefined : requireString(edges.row), rows = named === undefined ? kept : kept.filter(row => row.name === named);
+  if (named !== undefined && rows.length !== 1) throw new TypeError(`${requireString(edges.source)}: edges.row names ${named}, which is ${rows.length ? 'more than one row' : 'no row'} of ${system}.`);
+  const edge = (name: string) => {
+    const field = requireString(fields[name]), values = new Set(rows.map(row => requireFiniteNumber(row[field])));
+    if (rows.length === 0 || values.size !== 1 || rows.some(row => row.system !== system)) throw new TypeError(`${requireString(edges.source)}: the rows of ${system} must agree on ${field}.`);
+    return [...values][0]!;
+  };
+  return { au: [edge('optimisticInnerAu'), edge('conservativeInnerAu'), edge('conservativeOuterAu'), edge('optimisticOuterAu')] as const, source: `Habitable Zone Gallery (${GALLERY}), rows of ${system}` };
+}
+
+/** The four distances calculated by Kopparapu et al. (2014): S = S_sun + aT + bT^2 + cT^3 + dT^4 with T = Teff - 5780 K, and
+ * d = sqrt(L / S) au, from the kept Table 1 and the star's measurements record. Their fit covers 2,600 to 7,200 K. */
+async function calculatedDistances() {
+  const table = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, requireString(edges.coefficients)), 'utf8')));
+  const record = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', host, 'source/measurements.json'), 'utf8')));
+  const teff = requireFiniteNumber(record.effectiveTemperatureK), luminosity = 10 ** requireFiniteNumber(record.luminosityLogSolar), [low, high] = requireArray(table.validTeffK).map(value => requireFiniteNumber(value));
+  if (!(teff >= low! && teff <= high!)) throw new RangeError(`${host}: ${teff} K lies outside the ${low} to ${high} K that ${requireString(table.paper)} fitted.`);
+  const limits = requireRecord(table.limits), t = teff - 5780;
+  const distance = (name: string) => {
+    const c = requireRecord(limits[name]), flux = requireFiniteNumber(c.seffSun) + requireFiniteNumber(c.a) * t + requireFiniteNumber(c.b) * t ** 2 + requireFiniteNumber(c.c) * t ** 3 + requireFiniteNumber(c.d) * t ** 4;
+    return Math.sqrt(luminosity / flux);
+  };
+  return { au: [distance('recentVenus'), distance('runawayGreenhouse'), distance('maximumGreenhouse'), distance('earlyMars')] as const,
+    source: `${requireString(table.paper)}, ${requireString(table.locator)}, from ${host}'s ${teff} K and log L ${record.luminosityLogSolar}`, teff, luminosity };
+}
+
+const distances = calculated ? await calculatedDistances() : await galleryDistances(), au = distances.au;
 if (!(au[0] > 0 && au[0] < au[1] && au[1] < au[2] && au[2] < au[3])) throw new TypeError(`The zone's distances must rise from the inside out, not ${au.join(', ')} au.`);
 
 const planets = requireArray(requireRecord(recipe.plane).orbits).map(value => requireString(value));
@@ -71,7 +97,7 @@ const webp = await sharp(Buffer.from(svg)).webp({ lossless: true, effort: 6 }).t
 
 await writePlaneBank({ id, objectDirectory, host, recipe: 'source/zone.json', plane, texturePath: 'zone/zone.webp', webp, sizePx: size,
   alphaCoverage: Math.PI * (px[3]! ** 2 - px[0]! ** 2) / size ** 2, outerRadiusPx: outerPx, outerRadiusM: au[3] * AU_M,
-  source: `Habitable Zone Gallery (${GALLERY}), rows of ${system}`, meaning: requireString(recipe.meaning),
+  source: distances.source, meaning: requireString(recipe.meaning),
   centreFadeM: requireArray(recipe.centreFadeOuterRadii).map(value => requireFiniteNumber(value) * au[3] * AU_M) });
 console.log(`${id}: optimistic ${au[0].toFixed(4)} to ${au[3].toFixed(4)} au, conservative ${au[1].toFixed(4)} to ${au[2].toFixed(4)} au; ` +
   `the planets' orbit normals lie within ${plane.spreadDegrees.toFixed(3)} degrees of the plane's, and no planet stands more than ${plane.offPlaneDegrees.toFixed(3)} degrees off it; picture ${webp.length} bytes.`);

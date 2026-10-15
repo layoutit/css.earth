@@ -10,6 +10,8 @@ Its radius follows Pass et al. 2026, and its temperature Gilbert et al. 2023. Th
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,459 K and log g 4.83 (u1 0.169, u2 0.434): a model, because no fit of this star's limb is used.
 
+**Habitable zone dataset.** A dataset of the whole system: the star with its habitable zone as a green band in the plane of its planets' orbits, where planets d and e orbit. The band is its own package, four distances calculated by Kopparapu et al. (2014) from the star's temperature and luminosity; its sources, processing and limits are in [its README](../toi-700-habitable-zone/README.md). It is a calculation, not an observation.
+
 ## Evidence
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.

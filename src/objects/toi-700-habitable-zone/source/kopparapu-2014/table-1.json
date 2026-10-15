@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-habitable-zone-coefficients@1",
+  "paper": "Kopparapu et al. (2014), ApJ 787, L29",
+  "locator": "Table 1, coefficients for 1 Earth mass, used in Equations 1 and 2",
+  "validTeffK": [
+    2600,
+    7200
+  ],
+  "limits": {
+    "recentVenus": {
+      "seffSun": 1.776,
+      "a": 0.0002136,
+      "b": 2.533e-08,
+      "c": -1.332e-11,
+      "d": -3.097e-15
+    },
+    "runawayGreenhouse": {
+      "seffSun": 1.107,
+      "a": 0.0001332,
+      "b": 1.58e-08,
+      "c": -8.308e-12,
+      "d": -1.931e-15
+    },
+    "maximumGreenhouse": {
+      "seffSun": 0.356,
+      "a": 6.171e-05,
+      "b": 1.698e-09,
+      "c": -3.198e-12,
+      "d": -5.575e-16
+    },
+    "earlyMars": {
+      "seffSun": 0.32,
+      "a": 5.547e-05,
+      "b": 1.526e-09,
+      "c": -2.874e-12,
+      "d": -5.011e-16
+    }
+  }
+}
