@@ -101,6 +101,22 @@ test('the provisional image cache is replaced by the approved 30 by 60 grid and 
   assert.deepEqual(await fetchPreview(source, { runDir, fetch: async () => { throw new Error('offline'); } }), data);
 }));
 
+test('old extraction caches are refreshed even when their spectrum or image dimensions are valid', async () => withRun(async runDir => {
+  const sources: PreviewSource[] = [eso, { ...eso, pick: 43, kind: 'eso', product: 'image', instrument: 'SPHERE' }];
+  for (const source of sources) {
+    const bytes = source.kind === 'eso' && source.product === 'image'
+      ? image([2, 2], [0, 1, 2, 3], [['PRODCATG', 'SCIENCE.IMAGE']]) : esoSpectrum();
+    const current = await fetchPreview(source, { runDir, fetch: async () => bytesResponse(bytes) });
+    const path = resolve(runDir, `previews/${source.pick}.json`), saved = requireRecord(JSON.parse(await readFile(path, 'utf8')));
+    saved.schema = 'cssearth-telescope-preview@1';
+    await writeFile(path, JSON.stringify(saved));
+    let calls = 0;
+    assert.deepEqual(await fetchPreview(source, { runDir, fetch: async () => { calls++; return bytesResponse(bytes); } }), current);
+    assert.equal(calls, 1); assert.equal(requireRecord(JSON.parse(await readFile(path, 'utf8'))).schema, 'cssearth-telescope-preview@2');
+    assert.deepEqual(await fetchPreview(source, { runDir, fetch: async () => { throw new Error('Must reuse corrected cache.'); } }), current);
+  }
+}));
+
 async function almaFetch(seen: URL[], nestedTransform = (text: string) => text): Promise<typeof fetch> {
   const member = await readFile(new URL('./fixtures/alma-member.xml', import.meta.url), 'utf8');
   const products = nestedTransform(await readFile(new URL('./fixtures/alma-products.xml', import.meta.url), 'utf8'));

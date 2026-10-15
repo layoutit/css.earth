@@ -214,14 +214,14 @@ export async function fetchPreview(source: PreviewSource, options: PreviewFetchO
   const directory = resolve(options.runDir, 'previews'), path = resolve(directory, `${source.pick}.json`), identity = JSON.stringify(source);
   try {
     signal.throwIfAborted();
-    const cached = await readCache(path, identity, 'cssearth-telescope-preview@1', cachedData, signal);
+    const cached = await readCache(path, identity, 'cssearth-telescope-preview@2', cachedData, signal);
     if (cached) return cached;
     const api = transport(options, signal);
     const data = source.kind === 'none' ? { kind: 'none' as const, reason: source.reason }
       : source.kind === 'hst' ? await hstPreview(source, api, directory, signal) : source.kind === 'alma' ? await almaPreview(source, api)
         : extractPreview(await api.request(source.url, ESO_BYTES), 'eso', source.product, source.instrument);
     signal.throwIfAborted();
-    await writeCache(path, identity, 'cssearth-telescope-preview@1', data, signal);
+    await writeCache(path, identity, 'cssearth-telescope-preview@2', data, signal);
     return data;
   } finally { clearTimeout(timer); }
 }

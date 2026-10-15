@@ -7,27 +7,33 @@ function median(values: readonly number[]): number {
   return sorted.length % 2 ? sorted[middle]! : sorted[middle - 1]! / 2 + sorted[middle]! / 2;
 }
 
-/** Equal-count bins retain the median of finite paired samples, including negative flux. */
+/** Ninety equal-width bins use edge midpoints and finite paired medians, as in NumPy digitize. */
 export function binSpectrum(x: readonly number[], y: readonly number[], xunit: string, yunit: string): SpectrumPreview {
   if (x.length !== y.length) throw new Error('Preview spectrum columns differ in length.');
   const pairs = x.flatMap((value, i) => Number.isFinite(value) && Number.isFinite(y[i]) ? [{ x: value, y: y[i]! }] : []).sort((a, b) => a.x - b.x);
   if (pairs.length < 2) throw new Error('Preview spectrum has fewer than two finite samples.');
-  const count = Math.min(90, pairs.length), bx: number[] = [], by: number[] = [];
+  const count = 90, start = pairs[0]!.x, end = pairs.at(-1)!.x, step = (end - start) / count;
+  const edges = Array.from({ length: count + 1 }, (_, i) => i === count ? end : start + i * step);
+  const bins = Array.from({ length: count }, (): number[] => []), bx: number[] = [], by: number[] = [];
+  for (const pair of pairs) {
+    let low = 0, high = edges.length;
+    while (low < high) { const middle = Math.floor((low + high) / 2); if (pair.x < edges[middle]!) high = middle; else low = middle + 1; }
+    bins[Math.max(0, Math.min(count - 1, low - 1))]!.push(pair.y);
+  }
   for (let i = 0; i < count; i++) {
-    const bin = pairs.slice(Math.floor(i * pairs.length / count), Math.floor((i + 1) * pairs.length / count));
-    bx.push(median(bin.map(pair => pair.x))); by.push(median(bin.map(pair => pair.y)));
+    if (!bins[i]!.length) continue;
+    bx.push((edges[i]! + edges[i + 1]!) / 2); by.push(median(bins[i]!));
   }
   return { kind: 'spectrum', x: bx, y: by, xunit, yunit };
 }
 
-function wavelengthUnit(unit: string): { factor: number; unit: string } {
-  if (/^(angstroms?|Å)$/iu.test(unit)) return { factor: 0.1, unit: 'nm' };
-  if (/^nm$/iu.test(unit)) return { factor: 1, unit: 'nm' };
-  if (/^(um|µm|microns?)$/iu.test(unit)) return { factor: 1000, unit: 'nm' };
-  if (unit === 'm') return { factor: 1e9, unit: 'nm' };
+function wavelengthUnit(unit: string): { divisor: number; unit: string } {
+  if (/^(angstroms?|Å)$/iu.test(unit)) return { divisor: 10, unit: 'nm' };
+  if (/^nm$/iu.test(unit)) return { divisor: 1, unit: 'nm' };
+  if (/^(um|µm|microns?)$/iu.test(unit)) return { divisor: 0.001, unit: 'nm' };
+  if (unit === 'm') return { divisor: 1e-9, unit: 'nm' };
   throw new Error('Unsupported preview wavelength unit.');
 }
-const fluxUnit = (unit: string) => unit.replace(/cm\*\*2/gu, 'cm²').replace(/Angstroms?/giu, 'Å');
 
 function tableSpectrum(bytes: Uint8Array, origin: 'eso' | 'hst'): SpectrumPreview {
   const hdus = readFitsHdus(bytes);
@@ -38,13 +44,12 @@ function tableSpectrum(bytes: Uint8Array, origin: 'eso' | 'hst'): SpectrumPrevie
     if (!names.includes(wave) || !names.includes(flux)) continue;
     const x: number[] = [], y: number[] = [];
     let xunit = '', yunit = '';
-    for (let row = 0; row < table.rows; row++) {
+    // The preview recipe takes ESO's first vector and flattens every HST row, including elements beyond NELEM.
+    for (let row = 0; row < (origin === 'eso' ? Math.min(1, table.rows) : table.rows); row++) {
       const wavelengths = numericColumn(bytes, table, wave, row), fluxes = numericColumn(bytes, table, flux, row);
       if (wavelengths.values.length !== fluxes.values.length) throw new Error('Preview spectrum array columns differ in length.');
-      const count = names.includes('NELEM') ? numericColumn(bytes, table, 'NELEM', row).values[0]! : wavelengths.values.length;
-      if (!Number.isSafeInteger(count) || count < 0 || count > wavelengths.values.length) throw new Error('Invalid preview spectrum NELEM.');
-      const unit = wavelengthUnit(wavelengths.unit); xunit = unit.unit; yunit = fluxUnit(fluxes.unit);
-      for (let i = 0; i < count; i++) { x.push(wavelengths.values[i]! * unit.factor); y.push(fluxes.values[i]!); }
+      const unit = wavelengthUnit(wavelengths.unit); xunit = unit.unit; yunit = origin === 'hst' ? 'erg/s/cm²/Å' : fluxes.unit || 'adu';
+      for (let i = 0; i < wavelengths.values.length; i++) { x.push(wavelengths.values[i]! / unit.divisor); y.push(fluxes.values[i]!); }
     }
     return binSpectrum(x, y, xunit, yunit);
   }
@@ -76,18 +81,24 @@ function imageGrid(width: number, height: number, sample: (i: number) => number,
     for (let i = 0; i < pixels.length; i++) pixels[i] = range > 0 ? Math.asinh(clip((pixels[i]! - lo) / range) * 10) / Math.asinh(10) : 0;
     side = Math.min(width, height); left = Math.floor((width - side) / 2); top = Math.floor((height - side) / 2);
   }
-  // ESO: block means only when the crop divides evenly into 30 × 60, otherwise the nearest pixel (the approved recipe).
-  const nearest = !centreOnPeak && (side % 30 !== 0 || side % 60 !== 0);
   const grid = Array.from({ length: 30 }, (_, row) => Array.from({ length: 60 }, (_, column) => {
-    if (nearest) return pixels[(top + Math.floor(row * side / 30)) * width + left + Math.floor(column * side / 60)]!;
+    if (!centreOnPeak) {
+      const x0 = column * side / 60, x1 = (column + 1) * side / 60, y0 = row * side / 30, y1 = (row + 1) * side / 30;
+      let sum = 0;
+      for (let y = Math.floor(y0); y < Math.ceil(y1); y++) for (let x = Math.floor(x0); x < Math.ceil(x1); x++) {
+        const area = (Math.min(x + 1, x1) - Math.max(x, x0)) * (Math.min(y + 1, y1) - Math.max(y, y0));
+        sum += pixels[(top + y) * width + left + x]! * area;
+      }
+      return sum / ((x1 - x0) * (y1 - y0));
+    }
     const x0 = Math.floor(column * side / 60), x1 = Math.max(x0 + 1, Math.floor((column + 1) * side / 60));
     const y0 = Math.floor(row * side / 30), y1 = Math.max(y0 + 1, Math.floor((row + 1) * side / 30));
-    let value = centreOnPeak ? -Infinity : 0;
+    let value = -Infinity;
     for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) {
       const pixel = pixels[(top + y) * width + left + x]!;
-      value = centreOnPeak ? Math.max(value, pixel) : value + pixel;
+      value = Math.max(value, pixel);
     }
-    return centreOnPeak ? value : value / ((x1 - x0) * (y1 - y0));
+    return value;
   }));
   if (centreOnPeak) {
     const sorted = grid.flat().sort((a, b) => a - b), lo = percentile(sorted, 20), range = percentile(sorted, 100) - lo;
@@ -111,14 +122,14 @@ export function extractPreview(bytes: Uint8Array, origin: 'hst' | 'eso' | 'alma'
     const reference = hdu.header.CRVAL3, step = hdu.header.CDELT3, pixel = hdu.header.CRPIX3;
     if (typeof reference !== 'number' || typeof step !== 'number' || typeof pixel !== 'number' || !Number.isFinite(reference + step + pixel) || step === 0)
       throw new Error('Invalid preview cube frequency coordinates.');
-    const factor = hdu.header.CUNIT3 === 'Hz' ? 1e-9 : hdu.header.CUNIT3 === 'kHz' ? 1e-6 : hdu.header.CUNIT3 === 'MHz' ? 1e-3 : 1;
-    const x: number[] = [], y: number[] = [], unit = typeof hdu.header.BUNIT === 'string' ? hdu.header.BUNIT : '';
+    const divisor = hdu.header.CUNIT3 === 'Hz' ? 1e9 : hdu.header.CUNIT3 === 'kHz' ? 1e6 : hdu.header.CUNIT3 === 'MHz' ? 1e3 : 1;
+    const x: number[] = [], y: number[] = [];
     for (let channel = 0; channel < planes; channel++) {
-      let sum = 0, finite = 0;
-      for (let i = 0; i < width * height; i++) { const value = sample(channel * width * height + i); if (Number.isFinite(value)) { sum += value; finite++; } }
-      x.push((reference + (channel + 1 - pixel) * step) * factor); y.push(finite ? sum * (unit === 'Jy/beam' ? 1000 : 1) : NaN);
+      let sum = 0;
+      for (let i = 0; i < width * height; i++) { const value = sample(channel * width * height + i); if (!Number.isNaN(value)) sum += value; }
+      x.push((reference + (channel + 1 - pixel) * step) / divisor); y.push(sum * 1000);
     }
-    return binSpectrum(x, y, 'GHz', unit === 'Jy/beam' ? 'mJy/beam' : unit);
+    return binSpectrum(x, y, 'GHz', 'mJy/beam');
   }
   if (planes !== 1) throw new Error('A multi-plane image is not a continuum preview.');
   return imageGrid(width, height, sample, origin === 'alma', origin === 'alma' ? 'continuum image · ALMA data' : `${instrument || 'archive'} image · ESO data`);

@@ -15,12 +15,14 @@ const cases: readonly { file: string; origin: 'eso' | 'hst' | 'alma'; product: '
   { file: 'alma-cube-cutout.fits', origin: 'alma', product: 'cube', pick: '9', unit: 'y mJy/beam · x GHz' },
   { file: 'alma-continuum-cutout.fits', origin: 'alma', product: 'image', pick: '1', unit: 'continuum image · ALMA data' },
 ];
-for (const entry of cases) test(`optional real ${entry.file} produces the approved panel frame and units`, async t => {
+for (const entry of cases) test(`optional real ${entry.file} exactly matches its pinned panel`, async t => {
   let bytes: Buffer, expected: Record<string, unknown>;
   try { bytes = await readFile(resolve(mocks, 'real-sources', entry.file)); expected = requireRecord(JSON.parse(await readFile(resolve(mocks, 'real-previews.json'), 'utf8'))); }
   catch (error) { if (hasErrorCode(error, 'ENOENT')) { t.skip('Optional ignored real sources are absent.'); return; } throw error; }
   const data = extractPreview(bytes, entry.origin, entry.product, 'SPHERE'), lines = renderPreview(data);
-  const reference = requireArray(expected[entry.pick]).map(line => requireString(line));
+  // SPHERE intentionally replaces the nearest-pixel mock with the corrected area-mean panel.
+  const reference = requireArray(entry.pick === '43' ? JSON.parse(await readFile(new URL('./fixtures/sphere-area-panel.json', import.meta.url), 'utf8')) : expected[entry.pick])
+    .map(line => requireString(line));
   assert.equal(lines.length, reference.length); assert.ok(lines.every(line => Array.from(line).length === 40));
   assert.equal(lines[11]!.trim(), entry.unit); assert.equal(lines[11]!.trim(), reference[11]!.trim());
   if (data.kind === 'spectrum') {
@@ -29,8 +31,8 @@ for (const entry of cases) test(`optional real ${entry.file} produces the approv
     assert.match(lines[10]!, /\d/u); assert.doesNotMatch(lines[10]!, /[─│┤]/u);
   } else {
     assert.equal(data.kind, 'image'); assert.ok(lines.slice(0, 11).some(line => /[.:%@*#]/u.test(line)));
-    assert.deepEqual(lines, reference);
   }
+  assert.deepEqual(lines, reference);
 });
 
 test('optional saved exploration resolves all 72 choices without network IO', async t => {
