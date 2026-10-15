@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "zone-distances",
+      "path": "src/objects/hd-75732-habitable-zone/source/hzgallery/hd-75732.json",
+      "origin": "https://hzgallery.org/data/hzgallery.json",
+      "sourceUrl": "https://hzgallery.org/table.html",
+      "title": "Habitable Zone Gallery, the rows of 55 Cnc's five planets",
+      "credit": "S. R. Kane, D. M. Gelino; the Habitable Zone Gallery, hzgallery.org; PASP 124, 323",
+      "acquisition": "Written 2026-10-14 by packages/bake/authoring/system-planes/habitable-zone.mts hd-75732-habitable-zone --fetch: the five rows whose system is 55 Cnc, unchanged, from the Gallery's JSON product (3,938,737 bytes, 5,441 planets, last updated 2026-10-08). The Gallery calculates planet e's row from Bourrier et al. 2018's star (5,172 K, 0.943 solar radii), the star this page shows, and the other four from another reference's (5,198 K, 0.98 solar radii); the recipe reads e's row.",
+      "generator": "packages/bake/authoring/system-planes/habitable-zone.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kane-2012-habitable-zone-gallery",
+            "role": "material",
+            "evidence": "https://hzgallery.org/data/hzgallery.json"
+          },
+          {
+            "catalogueId": "kopparapu-2013-habitable-zones",
+            "role": "method",
+            "evidence": "https://hzgallery.org/about.html"
+          },
+          {
+            "catalogueId": "kopparapu-2014-habitable-zones-planetary-mass",
+            "role": "method",
+            "evidence": "https://hzgallery.org/about.html"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "The Gallery states no licence; it asks for its acknowledgement and a citation of Kane & Gelino (2012). Five rows of calculated values are kept."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/hd-75732-habitable-zone/source/zone.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/hd-75732-habitable-zone/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

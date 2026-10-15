@@ -130,6 +130,24 @@
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,172 K and log g 4.45 (u1 0.607, u2 0.158): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "habitable-zone",
+        "label": "Habitable zone",
+        "scope": "system",
+        "thumbnail": "hd-75732-dataset-color.webp",
+        "volume": {
+          "objectId": "hd-75732-habitable-zone",
+          "datasetId": "plane",
+          "surface": "color"
+        },
+        "source": {
+          "id": "hd-75732-habitable-zone",
+          "path": "../../hd-75732-habitable-zone/source/manifest.json",
+          "url": "https://hzgallery.org/table.html"
+        },
+        "falseColor": false,
+        "notes": "The star in the color of its spectrum, with its habitable zone drawn as a green band in the plane of its outer planets' orbits. The band is a calculation, not an observation: the distances at which a planet of Earth's mass with a carbon dioxide, water and nitrogen atmosphere could keep liquid water on its surface, by the model of Kopparapu et al. (2013, 2014), as the Habitable Zone Gallery (Kane & Gelino 2012) calculates them from the star's temperature and luminosity. The darker band is the conservative zone, 0.744 to 1.337 au, between the runaway greenhouse and maximum greenhouse limits; the lighter strips extend it to the optimistic zone, 0.587 to 1.410 au, between the recent Venus and early Mars limits. Planet f, at 0.80 au, orbits in the conservative zone. A planet in the zone is not known to be habitable. Only planet d's orbital tilt is measured, so b, c, f and the zone are drawn in d's plane."
       }
     ]
   },

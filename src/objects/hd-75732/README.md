@@ -10,12 +10,17 @@ Its radius and temperature follow Bourrier et al. 2018. It is also HD 75732, HR 
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,172 K and log g 4.45 (u1 0.607, u2 0.158): a model, because no fit of this star's limb is used.
 
+**Habitable zone dataset.** A dataset of the whole system: the star in its color, with its habitable zone as a green band in the plane of its outer planets' orbits, where planet f orbits. The band is its own package, a drawing of four distances the Habitable Zone Gallery calculates; its sources, processing and limits are in [its README](../hd-75732-habitable-zone/README.md). It is a calculation, not an observation.
+
+![The 55 Cnc system on a local build, 2026-10-14: the Habitable zone dataset as the system opens](evidence/2026-10-14/habitable-zone.webp)
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
+- **No stellar wind or tidal heating dataset.** Folsom et al. (2020, [doi:10.1051/0004-6361/201937186](https://doi.org/10.1051/0004-6361/201937186)) model the star's wind, but their figure of it is a perspective view behind a translucent surface that cannot be read back onto the plane, and their Table 1 gives one averaged value per orbit, three of five extrapolated beyond the simulation: too little to draw the wind from. Only planet e has a published tidal heat flux (Ferraz-Mello & Beaugé 2025, [arXiv:2504.17585](https://arxiv.org/abs/2504.17585)), and it depends on whether its slightly oval orbit is real: none if it is circular, 70 kW/m² to about 0.5 MW/m² in the cases the paper runs if it is.
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** 55 Cnc b: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
