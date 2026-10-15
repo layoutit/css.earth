@@ -1,7 +1,7 @@
 import { basename } from 'node:path';
 import type { ExploreChoice, SavedExploration } from './explore.mts';
 import type { PreviewState } from '../previews/index.mts';
-import { renderPreview } from '../previews/index.mts';
+import { PREVIEW_ROWS, renderPreview } from '../previews/index.mts';
 import type { ProviderProgress } from '../vo/bridge.mts';
 import { archiveLabel } from '../cli-archive.mts';
 import { ARCHIVES } from '../archives/archives.mts';
@@ -106,7 +106,7 @@ function table(state: ExploreState, columns: number, height: number): string[] {
   while (left.length < page + 1) left.push('');
   const count = shown.length < session.choices.length ? `${shown.length} match · ` : '';
   const range = shown.length ? `${start + 1}–${start + rows.length} of ${shown.length}` : '0';
-  return [...header([state.target], clipLine(title, columns)), ...beside(left, current ? panel(current, state).slice(0, height - 7) : [], columns), '',
+  return [...header([state.target], clipLine(title, columns)), ...beside(left, current && height >= PREVIEW_ROWS + 8 ? panel(current, state) : [], columns), '',
     `/ ${state.query}${inverse(' ')}   ${dim(`${count}${range} · ↑↓ scroll · enter choose · esc quit`)}`];
 }
 function confirm(state: ExploreState, columns: number): string[] {

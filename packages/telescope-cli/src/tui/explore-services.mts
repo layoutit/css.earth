@@ -98,7 +98,8 @@ export function explorationServices(root: string, requestArgs: readonly string[]
   const toolchainConsent = consentHandler(io, { json: false }, consent);
   return {
     catalogue: () => loadTargetCatalogue(root),
-    resolve: async target => !(await skyTargetRequest(root, { target })).simbadMiss,
+    resolve: (target, signal) => withDownloadProgress({ report: () => {}, signal, retainPartial: false },
+      async () => !(await skyTargetRequest(root, { target })).simbadMiss),
     search: async (target, report, signal) => {
       const args = [...requestArgs];
       if (target !== undefined) {

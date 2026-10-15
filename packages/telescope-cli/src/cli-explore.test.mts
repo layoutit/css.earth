@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test, mock } from 'node:test';
-import { requestTransferConsent, reportToolchainProgress } from '@cssearth/telescope-core/node';
+import { downloadContext, requestTransferConsent, reportToolchainProgress } from '@cssearth/telescope-core/node';
 import * as query from './observation-query/query.mts';
 import * as exploration from './exploration.mts';
 import type { CliServices } from './cli.mts';
@@ -11,7 +11,11 @@ import { exploreSession } from './tui/fixtures/explore.mts';
 import { parseCli } from './cli-arguments.mts';
 
 mock.module('./observation-query/query.mts', { namedExports: { ...query, loadTargetCatalogue: async () => [{ id: 'star', name: 'Star', aliases: [] }] } });
-mock.module('./exploration.mts', { namedExports: { ...exploration, skyTargetRequest: async (_root: string, request: exploration.ExplorationRequest) => ({ request, simbadMiss: request.target === 'starr' }) } });
+let resolvePending: (() => Promise<void>) | undefined;
+mock.module('./exploration.mts', { namedExports: { ...exploration, skyTargetRequest: async (_root: string, request: exploration.ExplorationRequest) => {
+  if (request.target === 'pending') await resolvePending?.();
+  return { request, simbadMiss: request.target === 'starr' };
+} } });
 const { main } = await import('./cli.mts');
 const unused = async (): Promise<never> => { throw new Error('unexpected service'); };
 function api(exploration?: ExploreServices): CliServices {
@@ -47,6 +51,28 @@ test('TTY explore enters the persistent flow, writes screen bytes only to stderr
     assert.deepEqual(screen.stdout, ['Kept /run/pick-1/ · made figure.png\n']); assert.equal(screen.terminal.listening, false);
   }
   assert.throws(() => parseCli(['explore', 'star', '--no-open', '--no-open']), /Repeated/u);
+});
+
+test('Ctrl-C and EOF cancel pending SIMBAD resolution and await its cleanup before returning', async () => {
+  for (const key of [{ name: 'c', ctrl: true }, { name: 'eof' }]) {
+    const screen = capture();
+    let started = false, aborted = false, settled = false, release = () => {};
+    const cleanup = new Promise<void>(resolve => { release = resolve; });
+    resolvePending = async () => {
+      const context = downloadContext(); started = true;
+      context?.signal.addEventListener('abort', () => { aborted = true; }, { once: true });
+      await cleanup;
+      context?.signal.throwIfAborted();
+    };
+    const running = main(['explore', 'pending'], undefined, screen.io.write, screen.io, api()).then(code => { settled = true; return code; });
+    try {
+      await until(() => started); await screen.terminal.press(key);
+      assert.equal(aborted, true); assert.equal(settled, false);
+      assert.equal(screen.terminal.listening, false);
+      release(); assert.equal(await running, key.ctrl ? 130 : 0);
+      assert.deepEqual(screen.stderr, []); assert.doesNotMatch(screen.stdout.join(''), /\x1b/u);
+    } finally { release(); await running; resolvePending = undefined; }
+  }
 });
 
 test('default explore adapter suspends for installation, restores search after completion, and never hides a caught refusal', async () => {

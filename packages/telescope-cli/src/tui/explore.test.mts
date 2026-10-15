@@ -294,3 +294,17 @@ test('explore stays visible at 100×18, pages by height and recovers after shrin
   await terminal.press({ name: 'escape' }); assert.equal((await running).code, 0);
   assert.equal(terminal.alternateScreen, false);
 });
+
+test('short tables show the complete spectrum with units and exponent or hide the preview', () => {
+  const state: ExploreState = { view: 'table', target: 'Star', requested: 'star', candidates: [], session: exploreSession(),
+    query: '', active: 0, statuses: new Map(), providers: [], tick: 0,
+    preview: { kind: 'spectrum', x: [400, 500, 600], y: [1e-15, 2e-15, 1e-15], xunit: 'nm', yunit: 'Jy' },
+    size: null, received: 0, checking: false, outputs: [], made: new Map(), making: false };
+  for (const height of [18, 19, 20, 21]) {
+    const lines = renderExplore(state, 150, height).map(plain), text = lines.join('\n');
+    assert.match(text, /Start \(UTC\)/u); assert.match(text, /enter choose · esc quit/u);
+    assert.ok(lines.length < height);
+    if (height >= 20) { assert.match(text, /preview ·/u); assert.match(text, /y ×10⁻¹⁵ Jy · x nm/u); }
+    else assert.doesNotMatch(text, /preview ·|×10|Jy|nm/u);
+  }
+});

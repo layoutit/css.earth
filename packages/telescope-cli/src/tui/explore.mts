@@ -26,7 +26,7 @@ export type SavedExploration = Pick<ExplorationSession, 'schema' | 'createdAt' |
 export interface ExploreOutput extends MakeChoice { readonly file?: string; readonly run: (parameters: ReadonlyMap<string, string>) => Promise<string> }
 export interface ExploreServices {
   readonly catalogue: () => Promise<readonly TargetCatalogueEntry[]>;
-  readonly resolve: (target: string) => Promise<boolean>;
+  readonly resolve: (target: string, signal: AbortSignal) => Promise<boolean>;
   readonly search: (target: string | undefined, report: ProviderReporter, signal: AbortSignal) => Promise<SavedExploration>;
   readonly statuses: (session: SavedExploration) => Promise<ReadonlyMap<number, PickStatus>>;
   readonly size: (choice: ExploreChoice, session: SavedExploration, signal: AbortSignal) => Promise<number | null>;
@@ -231,7 +231,7 @@ export async function exploreScreen(requested: string | undefined, services: Exp
     }
     const resolution = requested === undefined ? undefined : resolveTarget(requested, catalogue, { suggestionLimit: 6, nearest: true });
     if (resolution?.status === 'unknown') { busy = true; draw(); }
-    const unknown = resolution?.status === 'unknown' && !await services.resolve(requested!);
+    const unknown = resolution?.status === 'unknown' && !await services.resolve(requested!, lifetime.signal);
     if (closed) return await done;
     busy = false;
     if (unknown || resolution?.status === 'ambiguous') {
