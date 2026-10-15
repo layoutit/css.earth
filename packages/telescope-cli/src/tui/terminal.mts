@@ -1,0 +1,50 @@
+import { emitKeypressEvents, type Key } from 'node:readline';
+import { setTimeout } from 'node:timers/promises';
+import { EventEmitter } from 'node:events';
+
+export interface ScreenKey { readonly name?: string; readonly text?: string; readonly ctrl?: boolean; readonly meta?: boolean }
+export interface Terminal {
+  readonly columns: number;
+  readonly rows: number;
+  write(text: string): void;
+  listen(key: (key: ScreenKey) => void, resize: () => void): () => void;
+  delay(milliseconds: number, signal: AbortSignal): Promise<void>;
+}
+interface TerminalInput extends NodeJS.ReadableStream {
+  readonly isRaw?: boolean;
+  readonly readableFlowing?: boolean | null;
+  isPaused(): boolean;
+  setRawMode?(enabled: boolean): unknown;
+}
+interface TerminalOutput extends NodeJS.WritableStream { readonly columns?: number; readonly rows?: number }
+
+/** The worker's stdout is IPC; only stdin and stderr belong to the terminal. */
+export function processTerminal(input: TerminalInput = process.stdin, output: TerminalOutput = process.stderr, lifecycle: EventEmitter = process): Terminal {
+  return {
+    get columns() { return output.columns ?? 80; },
+    get rows() { return output.rows ?? 24; },
+    write: text => { output.write(text); },
+    delay: async (milliseconds, signal) => { await setTimeout(milliseconds, undefined, { signal }); },
+    listen(key, resize) {
+      const wasRaw = input.isRaw, wasFlowing = input.readableFlowing === true;
+      emitKeypressEvents(input);
+      const press = (text: string | undefined, event: Key) => key({ name: event.name, ctrl: event.ctrl, meta: event.meta, text });
+      const interrupt = () => key({ name: 'c', ctrl: true });
+      let closed = false;
+      const close = () => {
+        if (closed) return;
+        closed = true;
+        input.off('keypress', press); output.off('resize', resize);
+        lifecycle.off('exit', close); lifecycle.off('SIGINT', interrupt); lifecycle.off('SIGTERM', interrupt);
+        input.setRawMode?.(wasRaw === true);
+        if (!wasFlowing) input.pause();
+        output.write('\x1b[?25h');
+      };
+      lifecycle.once('exit', close); lifecycle.on('SIGINT', interrupt); lifecycle.on('SIGTERM', interrupt);
+      input.on('keypress', press); output.on('resize', resize);
+      try { input.setRawMode?.(true); input.resume(); }
+      catch (error) { close(); throw error; }
+      return close;
+    },
+  };
+}

@@ -52,6 +52,11 @@ Downloads and results land in `./telescope-runs/` where you run the command; `--
 
 For some instruments, the observatory's own software is run again on the same inputs and the result is checked against the published product.
 
+In an interactive terminal, the main help screen shows a spinning globe and the four core commands. Narrow windows omit
+the globe; short windows show one still. Screens use stderr; pipes and `--json` keep plain stdout without animation or
+prompts. Use `telescope help COMMAND` for details and `telescope help all` for the full reference, including development
+commands.
+
 ## Agent Skill
 
 The package ships a telescope skill for coding agents. Install it for the host you use:

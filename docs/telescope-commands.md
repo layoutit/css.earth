@@ -4,6 +4,11 @@ The `telescope` command lets a person start with a target or an existing artifac
 
 The installed CLI runs without a css.earth checkout. Async astronomy queries install their pinned Python environment on first use; npm installation itself does not run pipelines. The npm package includes the implementation, target catalogue and archive inputs.
 
+The main help (`telescope`, `telescope help`, or `telescope --help`) animates a baked globe once on stderr in an interactive
+terminal. Narrow windows omit the globe; short windows show a still. Pipes, non-terminal input and `--json` get plain
+help without animation. The four core commands and the other everyday commands are on the main screen; development
+commands stay in `telescope help all`. Its fine print is: “Details: telescope help COMMAND · --json for scripts and agents”.
+
 ## Paths
 
 Files requested by a command stay with its run:

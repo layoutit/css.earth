@@ -1,5 +1,4 @@
-import { BANNER } from './banner.mts';
-
+import { renderHelp, HELP_FINE_PRINT } from './tui/help.mts';
 export const VERSION = '0.2.0';
 
 const coreHelp = [
@@ -27,10 +26,7 @@ ${helpRows(coreHelp)}
 Also useful:
 ${helpRows(usefulHelp)}
 
-css.earth development: new-object and bake routes (workspace required).
-Use --json for scripts and agents; progress goes to stderr, no prompts.
-Details: telescope help COMMAND · Full reference: telescope help all
-Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/README.md
+${HELP_FINE_PRINT}
 `;
 
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
@@ -350,9 +346,9 @@ Outputs saves the complete inspection as outputs.json inside the existing run an
 JSON commands never prompt, and progress and notices go to stderr.
 `;
 
-/** An empty command means the short screen; only that screen carries the terminal banner. */
+/** An empty command means the short screen; topic help keeps its plain reference. */
 export function helpText(command = '', tty = false): string {
-  if (!command || command === 'help') return `${tty ? `${BANNER}\n` : ''}${SHORT_HELP}`;
+  if (!command || command === 'help') return tty ? renderHelp(0, 80).join('\n') + '\n' : SHORT_HELP;
   if (command === 'all') return `${HELP}\n${currentOutputHelp}`;
   const sections = explanations[command];
   if (!sections) throw new TypeError(`Unknown help command ${command}. Use telescope help all for the full reference.`);

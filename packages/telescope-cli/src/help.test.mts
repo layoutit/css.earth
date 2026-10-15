@@ -4,6 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 import { BANNER } from './banner.mts';
 import { HELP_COMMANDS, SHORT_HELP, helpCommand, helpText } from './help.mts';
+import { renderHelp } from './tui/help.mts';
 
 const published = readFileSync(new URL('./fixtures/help-reference.txt', import.meta.url), 'utf8');
 
@@ -20,16 +21,17 @@ test('all core and useful usages have descriptions in one column, including long
   assert.match(SHORT_HELP, /skill install --provider NAME {2,}Install/u);
 });
 
-test('short help stays within one screen after a TTY-only ASCII banner', () => {
+test('short help keeps the approved fine print and leaves development commands in help all', () => {
   assert.ok(SHORT_HELP.trimEnd().split('\n').length <= 25);
   for (const command of ['explore', 'get', 'outputs', 'export', 'papers', 'leads', 'stars', 'skill', 'toolchain']) {
     assert.ok(SHORT_HELP.includes(`telescope ${command} `), command);
   }
-  assert.match(SHORT_HELP, /css\.earth development:.*new-object.*bake/u);
+  assert.doesNotMatch(SHORT_HELP, /css\.earth development:|new-object|bake routes/u);
   assert.match(SHORT_HELP, /--json.*scripts and agents/u);
   assert.match(SHORT_HELP, /telescope help COMMAND/u);
   assert.equal(helpText('', false), SHORT_HELP);
-  assert.equal(helpText('', true), `${BANNER}\n${SHORT_HELP}`);
+  assert.equal(helpText('', true), renderHelp(0, 80).join('\n') + '\n');
+  assert.equal(SHORT_HELP.trimEnd().split('\n').at(-1), 'Details: telescope help COMMAND · --json for scripts and agents');
   assert.ok([...BANNER].every(character => character.charCodeAt(0) < 128));
   for (const command of [...HELP_COMMANDS, 'all']) assert.equal(helpText(command, true), helpText(command, false));
 });

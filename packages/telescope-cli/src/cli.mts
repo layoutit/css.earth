@@ -22,7 +22,8 @@ import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
 import { interruptedDownload } from './cli-errors.mts';
 import { explorationSummary, lookupJson, outputSummary, saveStdoutRecord, saveInspection } from './cli-summary.mts';
-import { HELP, SHORT_HELP, VERSION, helpText } from './help.mts';
+import { HELP, SHORT_HELP, VERSION } from './help.mts';
+import { writeHelp } from './help-output.mts';
 import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
@@ -223,7 +224,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
     let options = parseCli(args);
     // Fetch owns a staging directory and must keep its final destination absent until publication.
     if(args.includes('--out')&&options.command!=='fetch')recordDirectory='directory' in options?options.directory:'out' in options?options.out:undefined;
-    if (options.command === 'help') { io.write(helpText(options.topic,io.stdoutIsTTY)); return 0; }
+    if (options.command === 'help') return await writeHelp(options.topic,io,args.includes('--json'));
     if (options.command === 'version') { io.write(`${VERSION}\n`); return 0; }
     if (options.command === 'skill') {
       const result = manageSkill(options);
