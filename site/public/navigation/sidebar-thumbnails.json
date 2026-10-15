@@ -695,6 +695,18 @@
       "bytes": 17284
     },
     {
+      "path": "src/objects/proxima-centauri-habitable-zone/object.json",
+      "bytes": 902
+    },
+    {
+      "path": "src/objects/proxima-centauri-habitable-zone/prepared/plane.json",
+      "bytes": 1192
+    },
+    {
+      "path": "src/objects/proxima-centauri-habitable-zone/prepared/zone/zone.webp",
+      "bytes": 17378
+    },
+    {
       "path": "src/objects/trappist-1-habitable-zone/object.json",
       "bytes": 892
     },
@@ -2244,6 +2256,16 @@
       ],
       "credit": "Kopparapu et al. (2014), ApJ 787, L29, Table 1, coefficients for 1 Earth mass, used in Equations 1 and 2, from toi-700's 3459 K and log L -1.633",
       "sourceUrl": ""
+    },
+    "proxima-centauri/habitable-zone": {
+      "url2x": "/navigation/focus-proxima-centauri-habitable-zone@2x.webp",
+      "inputs": [
+        "src/objects/proxima-centauri-habitable-zone/object.json",
+        "src/objects/proxima-centauri-habitable-zone/prepared/plane.json",
+        "src/objects/proxima-centauri-habitable-zone/prepared/zone/zone.webp"
+      ],
+      "credit": "Habitable Zone Gallery (https://hzgallery.org/data/hzgallery.json), rows of Proxima Cen",
+      "sourceUrl": "https://hzgallery.org/data/hzgallery.json"
     },
     "trappist-1/habitable-zone": {
       "url2x": "/navigation/focus-trappist-1-habitable-zone@2x.webp",

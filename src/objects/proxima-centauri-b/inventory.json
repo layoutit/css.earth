@@ -16,20 +16,38 @@
     {
       "location": "public",
       "filename": "proxima-centauri-b-arrival.webp",
-      "bytes": 35364,
-      "sha256": "db5608f4abc9aee7b01d048a4a2d164d5102cd0811317a7697e19a524bb3afd7"
+      "bytes": 38032,
+      "sha256": "f80cdc6897557a649f63365db3b6a9753e8baee5140602fefba054e3dcaf5936"
     },
     {
       "location": "public",
       "filename": "proxima-centauri-b-billboard.webp",
-      "bytes": 6082,
-      "sha256": "014aa028002f421abd900313bf315b6c9f9c64c5521e0c27783f0957da1f648d"
+      "bytes": 6198,
+      "sha256": "96d6f457554a2a51d87b292cd9c7720ede77b592c1ddf6030e5d91b5299fa30a"
     },
     {
       "location": "public",
       "filename": "proxima-centauri-b-dataset-climate-model.webp",
-      "bytes": 818,
-      "sha256": "59c5e5246e4737ee06fb47d906c441e8ae095c912a35982027e972671261ecb7"
+      "bytes": 570,
+      "sha256": "9804ffb247673337e221ddbab8ff5dd0f6d8a4a929f22ec2bec12f87a915dc98"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-dataset-early-earth-air-model.webp",
+      "bytes": 628,
+      "sha256": "16bb25146070d59e42ef19df513136a20233f4caa9bd1d1f7a5d0e37bbdfd801"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-dataset-earth-land-model.webp",
+      "bytes": 1878,
+      "sha256": "795efafc64a0d9b7ca4928a29cae291a4d443ebfcaf8ba226a70efa689054050"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-dataset-model-wind.webp",
+      "bytes": 2340,
+      "sha256": "bfdd9d391139b2ce60f450a58991a46c139cf80aead69afbbcd8876c7c4cad7e"
     },
     {
       "location": "public",
@@ -39,9 +57,33 @@
     },
     {
       "location": "public",
+      "filename": "proxima-centauri-b-dataset-static-ocean-model.webp",
+      "bytes": 1232,
+      "sha256": "c388a1cee826fcc09a235554e0a0949e2a8c3165d2a15b843257fdbce2c97938"
+    },
+    {
+      "location": "public",
       "filename": "proxima-centauri-b-poles-climate-model@2x.webp",
-      "bytes": 32812,
-      "sha256": "ed0e7e8b914fe2e7492e7019a50c5a3ba2ace5d8c53e636c0624599bf6cbf290"
+      "bytes": 21500,
+      "sha256": "506b81bb26758232d186bdb6133142ef90f94d0c53a670bc1cec59349ec1e78e"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-poles-early-earth-air-model@2x.webp",
+      "bytes": 15322,
+      "sha256": "c2029b06e81e51405dc797e6457cf9bf33601ac4163ee046d7b22dc8c4d408a8"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-poles-earth-land-model@2x.webp",
+      "bytes": 54408,
+      "sha256": "d96a3f2d730587a63bedbbfe3f1d7218e84858f9d86bbdcda07147577f87f6e1"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-poles-model-wind@2x.webp",
+      "bytes": 20912,
+      "sha256": "5f5e83d9cab2864c722fabadc00ef02678426e8e41b422da7709d304cfdb976d"
     },
     {
       "location": "public",
@@ -51,15 +93,45 @@
     },
     {
       "location": "public",
+      "filename": "proxima-centauri-b-poles-static-ocean-model@2x.webp",
+      "bytes": 32332,
+      "sha256": "2b23f137bd21b02e6a5e06e174390979a89f76aefad804ca2872fd594a2a283b"
+    },
+    {
+      "location": "public",
       "filename": "proxima-centauri-b-surface-climate-model@2x.webp",
-      "bytes": 136922,
-      "sha256": "e93fe5389677b5c735e692209de494c522f1fd74b9b2332376784983a79946b2"
+      "bytes": 95720,
+      "sha256": "0a4a451b780d00fc810ff07a0c18f137ac24a763efc1be0c7efbbc8466388b3f"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-surface-early-earth-air-model@2x.webp",
+      "bytes": 64970,
+      "sha256": "99b2fa75ed709c0b2aa5b2cf433bbaad783651deb71193e3139600bca322df8a"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-surface-earth-land-model@2x.webp",
+      "bytes": 192704,
+      "sha256": "7dad50eaded3e7367d02580a63f430a1376b8c1964b1e3ecc4b3a375edabb2c7"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-surface-model-wind@2x.webp",
+      "bytes": 299416,
+      "sha256": "555c555be98c7b80f92fa4a64917b95c8ebb6fb4c748219c23d16c335dfdbb61"
     },
     {
       "location": "public",
       "filename": "proxima-centauri-b-surface-shape@2x.webp",
       "bytes": 38,
       "sha256": "df5782764d3138d6f2d430141267903667f51e800a71f326efb6ed9eb35b5bd0"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-b-surface-static-ocean-model@2x.webp",
+      "bytes": 100816,
+      "sha256": "75df75fc631f213d7ad8a9077db06802f4425392a45156d3a98be081ee7d7475"
     },
     {
       "location": "public",
@@ -76,8 +148,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18249,
-      "sha256": "e7632322da7ecdd63b894d94ea0a3691c4cc66b4482a62052bbb0068353b46f3"
+      "bytes": 19209,
+      "sha256": "7c9a02c7d7b1d9c28d59e7ac2362e8b8f28067106aae24cfd86df97171bbf3c8"
     },
     {
       "location": "prepared",
@@ -94,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2950,
-      "sha256": "c7dc8b5620f7d97c5ba413867dbf4970831e5f7f56224b193d404b3ecf720485"
+      "bytes": 11110,
+      "sha256": "849a4ec203c67669c2a616a6e906b8f2707c2adb39b38ad8609ee427b2677d5b"
     },
     {
       "location": "prepared",
@@ -106,14 +178,32 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 205,
-      "sha256": "1cb5b611cd59ec5b9d9c3125351508bc03d443185ac23bfd23232609102275e1"
+      "bytes": 647,
+      "sha256": "49968a8ba1a9562b406721223c35cb54038652c7b211bf908c6972fddb88beb4"
     },
     {
       "location": "prepared",
       "filename": "minimaps/climate-model.webp",
-      "bytes": 3418,
-      "sha256": "b3374e1199374b550b97b77abeba919a343913b8c0e92c88654822474d63389f"
+      "bytes": 2410,
+      "sha256": "edaa13ff1d12d1710bf3360f9c3a28d0b443fcf4447fcd8b0b7c88a8f9058e37"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/early-earth-air-model.webp",
+      "bytes": 1732,
+      "sha256": "de9cd45c6618ee72c03f0d6be09890b507608019ed028c1aff9e431a9a56c67e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/earth-land-model.webp",
+      "bytes": 3730,
+      "sha256": "68fc24efe09497507754905890c48063e34986607a62e7add056d2a2b10c11d7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/model-wind.webp",
+      "bytes": 3854,
+      "sha256": "a5f76fa5c6bd7e6d58543ae21d9779f2df1cfb51f24071e254fffa55657a3e69"
     },
     {
       "location": "prepared",
@@ -123,15 +213,21 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/static-ocean-model.webp",
+      "bytes": 2362,
+      "sha256": "a535d72bfbe68974c3c600ff234093683d41946340dfc80e91d34ffc532f64b9"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 94393,
-      "sha256": "7b8c1d33653a9f873516324f4e5e15c4f7632a1bf7ed6f75a52db31cb874c9d2"
+      "bytes": 110465,
+      "sha256": "43c80990f0261121cbaad3f943066ba4a1570ac22fc95be5608cbb31c79b971c"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2691,
-      "sha256": "4e059ad80388b7be9176009d3473e6a57c6ae659e3aa6f6e240f8eb6702b3c03"
+      "bytes": 3540,
+      "sha256": "ab24da65bc7f32b735399b9c33a52e7d1e7d67fff0acb68f9066b22351e2bc42"
     }
   ]
 }

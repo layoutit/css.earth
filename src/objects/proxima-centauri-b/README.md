@@ -16,6 +16,21 @@ Proxima Centauri b is the first planet found around the nearest star to the Sun.
 
 The [NASA NCCS native release](https://portal.nccs.nasa.gov/GISS_modelE/ROCKE-3D/publication-supplements/DelGenio2019Astrobio19-Habitable_Climate_Scenarios_for_Proxima_Centauri_B/AIJ/) supplies `01_Control_ANN3900-3999.aijProxCenb04bTL.nc`. The shared NetCDF reader reads `tsurf`, which the file calls SURFACE AIR TEMPERATURE, in degrees Celsius, on 72 longitude samples by 46 latitude samples (5° × 4°), including both poles. The star is overhead at source longitude 180°: the incoming-radiation field peaks at its two nearest grid nodes, ±177.5°, so that meridian becomes body longitude zero. The prepared map uses bilinear sampling and keeps the native field unchanged; its false-color legend spans -70 to 10 °C.
 
+**Four more datasets from the same release.** The NASA NCCS release of Del Genio et al. (2019) holds 18 runs; the paper's Table 2 describes 12 of them. Three of those 12, and one more field of the control run, are shown, each read by the same NetCDF reader from its own released file:
+
+| Dataset | Run | Field | Released range | Star overhead |
+| --- | --- | --- | --- | --- |
+| Static ocean model | 02 Thermo: a 100 m ocean that carries no heat | `tsurf` | -88.5 to 19.0 °C | grid 180° |
+| Early-Earth air model | 09 Archean High: 10,000 ppm CO₂, 2,000 ppm CH₄ | `tsurf` | -43.7 to 6.1 °C | grid 180° |
+| Earth-land model | 18 Day-Land: Earth's continents, Africa under the star | `tsurf` | -92.5 to 30.6 °C | grid 30° E |
+| Model wind | 01 Control | `wsurf` | 0.8 to 12.9 m/s | grid 180° |
+
+The four temperature maps, the Climate model's included, share one false-color scale from -100 to 40 °C, so the runs can be compared; the Climate model's was -70 to 10 °C before. The wind runs from 0 to 15 m/s. The point under the star is the incoming-radiation field's peak, found at the two grid nodes either side of it (±177.5° for the synchronous runs, 27.5° and 32.5° E for Day-Land, which the paper places at 30° E).
+
+**Which runs.** Chosen by measurement (the area-weighted correlation of each run's surface temperature with every other's, scratch, not committed). Archean High and High Salinity are alike at 0.88: Archean High stands for both. Day-Ocean is alike with Thermo at 0.84. The two 3:2 spin-orbit runs are left out, since this page draws the planet keeping one face to its star. The six runs the release holds beyond the paper's table (Control-Thin, Control-Thick, Archean-Med without methane, Pure-CO2, Control-Shallow and Control-Deep) are left out, since no text says what they assume. The control run's sea ice (80% of the globe at its scale's ends), clouds (59%) and outgoing heat (correlation -0.92 with its temperature) would add nothing to the Climate model map.
+
+![Proxima b in the app on a local build, 2026-10-14 (headless Chrome), turned so the night side shows: Climate model, Static ocean model, Early-Earth air model, Earth-land model and Model wind](evidence/2026-10-14/climate-models.webp)
+
 **Averaging and limits.** The file is a released mean with the filename interval `ANN3900-3999`; its `fromto` attribute reports 100.00 model days. These labels are preserved without turning them into Earth calendar dates or a number of orbital periods. The field ranges from -63.2461 to 3.2427 °C with no missing cells. Table 5 rounds the paper’s control summary to -59 to 3 °C: its minimum differs from this released surface-air field, so this view does not claim to reproduce that table exactly. Other published atmosphere, salinity and rotation scenarios have different climates; they are not averaged into this one. With Shadows on, lighting darkens the night half visually.
 
 **Charts.** The orbits of Proxima Centauri's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
