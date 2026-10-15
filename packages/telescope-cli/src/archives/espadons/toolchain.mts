@@ -6,7 +6,7 @@
  * A Python environment with the pinned packages, ZDIpy checked out at its pinned commit beside it, and Julia from its
  * pinned archive (verified by size) with the environment of korg/ instantiated into the toolchain's own depot. An
  * installed toolchain keeps the text of its descriptor; `verify` and `toolchainPaths` refuse one built from another. */
-import { verifyToolchainExecutables, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { runToolchainProcessAsync, hasToolchainProgress, verifyToolchainExecutables, ensureToolchainPython, assertManagedPythonPlatform, telescopePythonEnvironment, resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, cp, mkdir, readFile, rm } from 'node:fs/promises';
@@ -24,9 +24,10 @@ export async function toolchainPins(): Promise<ToolchainPins> {
   const descriptor = await readFile(packagePath(FILE), 'utf8'), entry = requireRecord(JSON.parse(descriptor) as unknown, FILE);
   return { id: requireString(entry.id, 'id'), file: FILE, descriptor, lock: null, entry };
 }
-function run(command: string, args: readonly string[], cwd: string) {
-  const result = spawnSync(command, args, { cwd, stdio: 'inherit', env: telescopePythonEnvironment() });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${cwd} (status ${result.status}).`);
+async function run(command: string, args: readonly string[], cwd: string) {
+  await runToolchainProcessAsync(command, args, { cwd,
+    failureMessage: status => new Error(`${command} ${args.join(' ')} failed in ${cwd} (status ${status}).`),
+    captureOutput: false, output: (text, stream) => { if (!hasToolchainProgress()) (stream === 'stdout' ? process.stdout : process.stderr).write(text); } });
 }
 const paths = (entry: Record<string, unknown>, root = ZDI_ROOT) => { const julia = requireRecord(entry.julia, 'julia');
   return { root, python: resolve(root, 'venv/bin/python'), zdipy: resolve(root, 'ZDIpy'), julia: resolve(root, requireString(julia.executable, 'julia executable')), juliaEnvironment: resolve(root, 'environment'), juliaDepot: resolve(ZDI_ROOT, 'depot') }; };
@@ -35,15 +36,17 @@ export async function installToolchain() {
   assertManagedPythonPlatform();
   return ensureToolchainPython(resolve(ZDI_ROOT, 'venv'), toolchainPins, async ({ entry }) => {
     const { zdipy, julia, juliaEnvironment, juliaDepot } = paths(entry), source = requireRecord(entry.zdipy, 'zdipy');
-    run(resolve(ZDI_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(entry.requirements).map(value => requireString(value))], ZDI_ROOT);
-    if (!await exists(zdipy)) run('git', ['clone', '--quiet', requireString(source.url, 'zdipy url'), zdipy], ZDI_ROOT);
-    run('git', ['checkout', '--quiet', '--detach', requireString(source.commit, 'zdipy commit')], zdipy);
+    await run(resolve(ZDI_ROOT, 'venv/bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requireArray(entry.requirements).map(value => requireString(value))], ZDI_ROOT);
+    if (!await exists(zdipy)) await run('git', ['clone', '--quiet', requireString(source.url, 'zdipy url'), zdipy], ZDI_ROOT);
+    await run('git', ['checkout', '--quiet', '--detach', requireString(source.commit, 'zdipy commit')], zdipy);
     if (!await exists(julia)) { const download = requireRecord(requireRecord(entry.julia, 'julia').download, 'julia download'), archive = resolve(ZDI_ROOT, requireString(download.path, 'julia archive')), bytes = requireFiniteNumber(download.bytes, 'julia bytes');
       await downloadToolchainArchive(requireString(download.url, 'julia url'), archive, bytes);
-      run('tar', ['-xzf', archive], ZDI_ROOT); await rm(archive, { force: true }); }
+      await run('tar', ['-xzf', archive], ZDI_ROOT); await rm(archive, { force: true }); }
     await cp(packagePath(requireString(requireRecord(entry.julia, 'julia').environment, 'julia environment')), juliaEnvironment, { recursive: true });
-    const instantiated = spawnSync(julia, [`--project=${juliaEnvironment}`, '-e', 'using Pkg; Pkg.instantiate(); using Korg'], { cwd: ZDI_ROOT, stdio: 'inherit', env: telescopePythonEnvironment({ JULIA_DEPOT_PATH: juliaDepot }) });
-    if (instantiated.status !== 0) throw new Error(`Julia could not instantiate ${juliaEnvironment} (status ${instantiated.status}).`);
+    await runToolchainProcessAsync(julia, [`--project=${juliaEnvironment}`, '-e', 'using Pkg; Pkg.instantiate(); using Korg'],
+      { cwd: ZDI_ROOT, env: { JULIA_DEPOT_PATH: juliaDepot },
+        failureMessage: status => new Error(`Julia could not instantiate ${juliaEnvironment} (status ${status}).`),
+        captureOutput: false, output: (text, stream) => { if (!hasToolchainProgress()) (stream === 'stdout' ? process.stdout : process.stderr).write(text); } });
   }, ({ entry }) => verifyToolchainExecutables([paths(entry).python, paths(entry).julia]));
 }
 

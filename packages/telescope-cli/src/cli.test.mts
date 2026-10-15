@@ -9,6 +9,7 @@ import { formatArtifact, formatExploration, formatSession, outputCommand, displa
 import { savedDownload } from './cli-consent.mts';
 import { main, type CliIo, type CliServices } from './cli.mts';
 import { VERSION } from './version.mts';
+import { FakeTerminal } from './tui/fake-terminal.mts';
 import { parseCli } from './cli-arguments.mts';
 import { saveExploration, type ExplorationSession, type Session } from './session.mts';
 import { explorationSummary } from './cli-summary.mts';
@@ -569,15 +570,20 @@ test('get consent guards the saved size before retrieval, cancellation publishes
   }finally{await rm(work,{recursive:true,force:true});}
 });
 
+function refusingToolchainIo(io:CliIo):CliIo {
+  const terminal=new FakeTerminal(),listen=terminal.listen.bind(terminal);
+  terminal.listen=(key,resize,options)=>{const close=listen(key,resize,options);queueMicrotask(()=>{void terminal.press({name:'escape'});});return close;};
+  return {...io,terminal};
+}
 test('implicit toolchain refusal cannot become successful incomplete exploration when a provider catches it',async()=>{
   const io=mockIo(true,true,['n']),services=mockServices('/tmp/run').services;
   const api:CliServices={...services,saveExploration:async()=>{
     try{await requestTransferConsent({kind:'toolchain',name:'astroquery',bytes:1_000_000_000,packages:['Python','Astroquery'],destination:'/tmp/user/toolchains/astroquery'});}catch{/* archive discovery records provider failures */}
     return exploration('/tmp/run');
   }};
-  assert.equal(await main(['explore','eris'],'/workspace',io.io.write,io.io,api),1);
-  assert.deepEqual(io.prompts,['Continue? [Y/n] ']);
-  assert.match(io.stderr.join(''),/Download cancelled/u);
+  assert.equal(await main(['explore','eris'],'/workspace',io.io.write,refusingToolchainIo(io.io),api),1);
+  assert.deepEqual(io.prompts,[]);
+  assert.match(io.stderr.join(''),/astronomy packages are not installed/u);
   assert.equal(io.stdout.length,0);
 });
 
@@ -587,8 +593,8 @@ test('guided get also propagates an implicit toolchain refusal caught by its ret
     try{await requestTransferConsent({kind:'toolchain',name:'astroquery',bytes:1_000_000_000,packages:['Python'],destination:'/tmp/user/toolchains/astroquery'});}catch{/* a provider may preserve the issue */}
     return services.getSession(...args);
   }};
-  assert.equal(await main(['explore','eris'],'/workspace',io.io.write,io.io,api),1);
-  assert.deepEqual(io.prompts,['Choose an observation number, or press Enter to exit: ','Continue? [Y/n] ']);
-  assert.match(io.stderr.join(''),/Download cancelled/u);
+  assert.equal(await main(['explore','eris'],'/workspace',io.io.write,refusingToolchainIo(io.io),api),1);
+  assert.deepEqual(io.prompts,['Choose an observation number, or press Enter to exit: ']);
+  assert.match(io.stderr.join(''),/astronomy packages are not installed/u);
   assert.doesNotMatch(io.stdout.join(''),/Product:/u);
 });

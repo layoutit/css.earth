@@ -12,7 +12,7 @@
  * from other pins, and refuses one whose `reduce` or `caldb` is missing.
  *
  * Nothing here needs a display: DRAGONS' interactive tools are not used and MPLBACKEND is forced to Agg. */
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { runToolchainProcessAsync, verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, resolveMicromamba, resolveInstalledToolchain, telescopePythonEnvironment, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -35,16 +35,15 @@ async function descriptor(): Promise<ToolchainPins & { readonly lock: string; re
   return { id: 'gemini', file: 'packages/telescope-cli/src/archives/gemini/toolchain.json', descriptor: text, lock, lockPath, entry };
 }
 
-function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
-  const result = spawnSync(command, args, { env: telescopePythonEnvironment({ ...env }), encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
-  if (result.status !== 0) throw new Error(`${command} ${args.slice(0, 4).join(' ')} failed (status ${result.status}): ${(result.stderr ?? '').slice(-4000)}`);
-  return result.stdout;
+async function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
+  return runToolchainProcessAsync(command, args, { env, maxBuffer: 256 * 1024 * 1024,
+    failureMessage: (status, stderr) => new Error(`${command} ${args.slice(0, 4).join(' ')} failed (status ${status}): ${stderr.slice(-4000)}`) });
 }
 
 /** The explicit list micromamba resolved: one package URL per line. That is the lock, and it is what a later install uses, so
  * the second machine gets these builds and not whatever the channels hold that day. */
-const explicitList = (micromamba: string, prefix: string, env: NodeJS.ProcessEnv) =>
-  run(micromamba, ['list', '--explicit', '-p', prefix], env);
+const explicitList = async (micromamba: string, prefix: string, env: NodeJS.ProcessEnv) =>
+  await run(micromamba, ['list', '--explicit', '-p', prefix], env);
 
 export async function installGemini() {
   assertManagedPythonPlatform();
@@ -58,11 +57,11 @@ export async function installGemini() {
     const env = { MAMBA_ROOT_PREFIX: resolve(GEMINI_ROOT, 'mamba'), CONDA_SUBDIR: platform };
     if (lock) {
       await writeFile(resolve(GEMINI_ROOT, 'packages.lock'), lock);
-      run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, '-f', resolve(GEMINI_ROOT, 'packages.lock')], env);
+      await run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, '-f', resolve(GEMINI_ROOT, 'packages.lock')], env);
     } else {
-      run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, ...channels,
+      await run(micromamba, ['create', '-y', '-q', '-p', prefix, '--platform', platform, ...channels,
         ...requireArray(mamba.packages, 'packages').map(value => requireString(value, 'package'))], env);
-      await writeFile(lockPath, explicitList(micromamba, prefix, env));
+      await writeFile(lockPath, await explicitList(micromamba, prefix, env));
     }
     await rm(resolve(GEMINI_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
     // A first install wrote the lock it resolved; the marker holds the pins as they are now, lock included.

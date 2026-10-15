@@ -22,6 +22,20 @@ test('PICASO migration installs and verifies the destination rather than a compa
   process.env.CSSEARTH_TELESCOPE_TOOLCHAIN_HOME = legacyHome;
   const calls: { command: string; args: readonly string[] }[] = [];
   let extractProfiles = true;
+  const run = (command: string, args: readonly string[], options?: { env?: NodeJS.ProcessEnv }) => {
+    calls.push({ command, args });
+    if (command === '/fixture/micromamba') put(resolve(destination, 'env/bin/python'));
+    if (command === 'curl') put(args[args.indexOf('-o') + 1]!);
+    if (command === 'tar' && extractProfiles) put(resolve(args[args.indexOf('-C') + 1]!, profile));
+    if (command === 'unzip') {
+      const folder = args[args.indexOf('-d') + 1]!;
+      if (args.includes('pressure-temperature_profiles/*')) put(resolve(folder, 'pressure-temperature_profiles/t1000.pt'));
+      else for (const table of tables) put(resolve(folder, table));
+    }
+    if (args.some(arg => arg.includes('d.get_reference'))) put(resolve(options?.env?.picaso_refdata ?? '', 'config.json'));
+    if (args.includes('-I') && args.includes('-c')) return '3.11.16';
+    return args[0] === '-c' ? '4.1' : '';
+  };
   const mocks = [
     mock.module(new URL('./http-download.ts', import.meta.url).href, { namedExports: {
       downloadHttpFile: async (url: string, path: string) => { calls.push({ command: 'download', args: [url, path] }); put(path); } } }),
@@ -29,20 +43,8 @@ test('PICASO migration installs and verifies the destination rather than a compa
     mock.module(new URL('./toolchain/micromamba.ts', import.meta.url).href, { namedExports: {
       assertManagedPythonPlatform: () => {}, resolveMicromamba: async () => '/fixture/micromamba' } }),
     mock.module(new URL('./toolchain/process.ts', import.meta.url).href, { namedExports: {
-      runToolchainProcess: (command: string, args: readonly string[], options?: { env?: NodeJS.ProcessEnv }) => {
-        calls.push({ command, args });
-        if (command === '/fixture/micromamba') put(resolve(destination, 'env/bin/python'));
-        if (command === 'curl') put(args[args.indexOf('-o') + 1]!);
-        if (command === 'tar' && extractProfiles) put(resolve(args[args.indexOf('-C') + 1]!, profile));
-        if (command === 'unzip') {
-          const folder = args[args.indexOf('-d') + 1]!;
-          if (args.includes('pressure-temperature_profiles/*')) put(resolve(folder, 'pressure-temperature_profiles/t1000.pt'));
-          else for (const table of tables) put(resolve(folder, table));
-        }
-        if (args.some(arg => arg.includes('d.get_reference'))) put(resolve(options?.env?.picaso_refdata ?? '', 'config.json'));
-        if (args.includes('-I') && args.includes('-c')) return '3.11.16';
-        return args[0] === '-c' ? '4.1' : '';
-      } } }),
+      runToolchainProcess: run, runToolchainProcessAsync: async (command: string, args: readonly string[], options?: { env?: NodeJS.ProcessEnv }) => run(command, args, options),
+    } }),
   ];
   try {
     const { installPicaso, bobcatNodes, picasoToolchainSync } = await import('./picaso.js');

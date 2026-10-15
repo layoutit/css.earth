@@ -5,7 +5,7 @@
 import { installManagedToolchain } from './toolchain/environment.js';
 import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
 import { resolveInstalledToolchain } from './toolchain/resolver.js';
-import { runToolchainProcess } from './toolchain/process.js';
+import { runToolchainProcess, runToolchainProcessAsync } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -26,10 +26,10 @@ export async function installSpiderman() {
 
     const micromamba = await resolveMicromamba();
     await mkdir(SPIDERMAN_ROOT, { recursive: true });
-    runToolchainProcess(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
+    await runToolchainProcessAsync(micromamba, ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
       ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(SPIDERMAN_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
     // The lock is version-pinned; both packages build or install against the environment's NumPy.
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', '-r',
+    await runToolchainProcessAsync(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', '-r',
       resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
     await rm(resolve(SPIDERMAN_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   }, ({ entry }) => { verifySpiderman({ python: resolve(prefix, 'bin/python'), version: requireString(entry.spiderman), env: { PYTHONNOUSERSITE: '1' } }); });

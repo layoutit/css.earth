@@ -2,19 +2,32 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { DownloadCancelledError, type TransferConsent } from '@cssearth/telescope-core/node';
+import { DownloadCancelledError, USER_ROOT, type TransferConsent } from '@cssearth/telescope-core/node';
 import { archiveLabel } from './cli-archive.mts';
 import { displayPath } from './cli-format.mts';
+import { createInstallScreen, installFreeGb } from './tui/install.mts';
+import { processTerminal } from './tui/terminal.mts';
 import type { CliIo } from './cli-io.mts';
 
 export type DownloadInfo = Extract<TransferConsent, { kind: 'download' }>;
-export interface ConsentState { download?: DownloadInfo; archive?: string; cancelled?: boolean }
+export interface ConsentState { download?: DownloadInfo; archive?: string; cancelled?: boolean; install?: ReturnType<typeof createInstallScreen>; installController?: AbortController; toolchainDeclined?: boolean }
 const sizeText = (bytes: number | null) => bytes === null ? 'size unknown' : `${Math.ceil(bytes / 1e6)} MB`;
 const folder = (path: string) => `${displayPath(path).replace(/\/$/u, '')}/`;
 
 export function consentHandler(io: CliIo, options: { readonly json: boolean; readonly yes?: boolean }, state: ConsentState) {
   return async (info: TransferConsent): Promise<void> => {
     if (state.cancelled) throw new DownloadCancelledError();
+    if (info.kind === 'toolchain' && !options.json && io.stdinIsTTY && io.stdoutIsTTY && io.stderrIsTTY === true) {
+      await io.flush?.();
+      const free = await installFreeGb(USER_ROOT);
+      state.installController ??= new AbortController();
+      state.install = createInstallScreen(io.terminal ?? processTerminal(), state.installController);
+      if (!await state.install.consent(free, options.yes)) {
+        state.cancelled = true; state.toolchainDeclined = true;
+        throw new DownloadCancelledError();
+      }
+      return;
+    }
     if (info.kind === 'download') {
       info = { ...info, archive: state.archive ?? info.archive };
       state.download = info;

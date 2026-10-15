@@ -10,9 +10,8 @@
  * macOS the MATISSE pipeline is rebuilt with LLVM's OpenMP runtime.
  * An installed toolchain keeps the text of its descriptor entry; `verify` and `toolchainPath` refuse one built from another.
  * Verified archives are deleted after the build: toolchains are large and the data they reduce are larger. */
-import { verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, ensureToolchainPython, telescopePythonEnvironment, resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
+import { runToolchainProcessAsync, hasToolchainProgress, toolchainInstallSignal, verifyToolchainExecutables, installManagedToolchain, assertManagedPythonPlatform, ensureToolchainPython, telescopePythonEnvironment, resolveInstalledToolchain, assertInstalledMarker, type ToolchainPins, USER_ROOT } from '@cssearth/telescope-core/node';
 import { packagePath } from '../../paths.mts';
-import { spawnSync } from 'node:child_process';
 import { access, cp, copyFile, link, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -38,10 +37,10 @@ export function toolchainEnvironment(entry: Readonly<Record<string, unknown>>, r
   return resolve(root, 'environment');
 }
 
-function run(command: string, args: readonly string[], options: { cwd: string; env?: NodeJS.ProcessEnv; answers?: string }) {
-  // An installer that asks questions gets its answers on stdin; the rest inherit the terminal.
-  const result = spawnSync(command, args, { cwd: options.cwd, env: telescopePythonEnvironment({ ...options.env }), ...(options.answers === undefined ? { stdio: 'inherit' } : { input: options.answers, stdio: ['pipe', 'inherit', 'inherit'] }) });
-  if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${options.cwd} (status ${result.status}).`);
+async function run(command: string, args: readonly string[], options: { cwd: string; env?: NodeJS.ProcessEnv; answers?: string }) {
+  await runToolchainProcessAsync(command, args, { cwd: options.cwd, env: options.env, input: options.answers,
+    failureMessage: status => new Error(`${command} ${args.join(' ')} failed in ${options.cwd} (status ${status}).`),
+    captureOutput: false, output: (text, stream) => { if (!hasToolchainProgress()) (stream === 'stdout' ? process.stdout : process.stderr).write(text); } });
 }
 
 async function fetchDownload(record: Record<string, unknown>, directory: string, caches: readonly string[]) {
@@ -62,7 +61,7 @@ export async function installToolchain(id: string, caches: readonly string[] = [
     const venv = resolve(root, 'venv');
     return ensureToolchainPython(venv, () => toolchainDescriptor(id), async ({ entry }) => {
       const requirements = requireArray(entry.requirements).map(value => requireString(value));
-      run(resolve(venv, 'bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requirements], { cwd: root });
+      await run(resolve(venv, 'bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requirements], { cwd: root });
     });
   }
   return installManagedToolchain(root, () => toolchainDescriptor(id), null, async ({ entry }) => {
@@ -70,44 +69,46 @@ export async function installToolchain(id: string, caches: readonly string[] = [
     const files = await Promise.all(requireArray(entry.downloads ?? []).map(record => fetchDownload(requireRecord(record), downloads, caches)));
     if (id === 'squeeze') {
       const source = requireRecord(entry.source), directory = resolve(root, 'source');
-      if (!await exists(directory)) run('git', ['clone', requireString(source.url), directory], { cwd: root });
-      run('git', ['checkout', '--detach', requireString(source.commit)], { cwd: directory });
-      run('git', ['submodule', 'update', '--init', '--recursive'], { cwd: directory });
-      run('cmake', ['-S', 'source', '-B', 'build', '-DCMAKE_BUILD_TYPE=Release'], { cwd: root });
-      run('cmake', ['--build', 'build', '--parallel'], { cwd: root });
+      if (!await exists(directory)) await run('git', ['clone', requireString(source.url), directory], { cwd: root });
+      await run('git', ['checkout', '--detach', requireString(source.commit)], { cwd: directory });
+      await run('git', ['submodule', 'update', '--init', '--recursive'], { cwd: directory });
+      await run('cmake', ['-S', 'source', '-B', 'build', '-DCMAKE_BUILD_TYPE=Release'], { cwd: root });
+      await run('cmake', ['--build', 'build', '--parallel'], { cwd: root });
     } else if (id === 'rotir') {
-      if (!await exists(resolve(root, 'julia-1.12.7'))) run('tar', ['-xzf', files[0]!], { cwd: root });
+      if (!await exists(resolve(root, 'julia-1.12.7'))) await run('tar', ['-xzf', files[0]!], { cwd: root });
       const registries = requireArray(entry.registries).map(value => requireString(value));
       await cp(packagePath(requireString(entry.environment, 'environment')), toolchainEnvironment(entry), { recursive: true });
       const script = `using Pkg; for r in ${JSON.stringify(registries)}; startswith(r, "http") ? Pkg.Registry.add(url=r) : Pkg.Registry.add(r); end; Pkg.instantiate(); using ROTIR`;
-      run(resolve(root, requireString(entry.executable)), [`--project=${toolchainEnvironment(entry)}`, '-e', script], { cwd: root, env: { JULIA_DEPOT_PATH: resolve(root, 'depot') } });
+      await run(resolve(root, requireString(entry.executable)), [`--project=${toolchainEnvironment(entry)}`, '-e', script], { cwd: root, env: { JULIA_DEPOT_PATH: resolve(root, 'depot') } });
     } else if (entry.build === 'eso-kit') {
       // An ESO instrument kit (PIONIER, GRAVITY, MATISSE, AMBER): its own install_pipeline builds CPL, esorex and the recipes.
       const build = resolve(root, 'build'), kitArchive = requireString(entry.kit);
       await mkdir(build, { recursive: true });
       const path = entry.yorick === true ? `${await buildYorick(entry, files, build)}:${process.env.PATH}` : process.env.PATH;
-      run('tar', ['-xzf', files.find(file => file.endsWith(kitArchive))!], { cwd: build });
+      await run('tar', ['-xzf', files.find(file => file.endsWith(kitArchive))!], { cwd: build });
       const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
       await mkdir(resolve(root, 'home'), { recursive: true });
       // ESO's installer asks for confirmation only when a target directory is missing, and it refuses to ask without a terminal:
       // both directories exist before it runs.
       await mkdir(resolve(root, 'pipeline'), { recursive: true }); await mkdir(resolve(root, 'calib'), { recursive: true });
       const repair = entry.repair === undefined ? null : requireRecord(entry.repair, `${id} repair`);
-      const install = spawnSync('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', stdio: ['pipe', 'inherit', 'inherit'], env: telescopePythonEnvironment({ HOME: resolve(root, 'home'), PATH: path }) });
-      if (install.status !== 0 && !repair) throw new Error(`install_pipeline failed for ${id} (status ${install.status}).`);
+      try { await runToolchainProcessAsync('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, input: '', env: { HOME: resolve(root, 'home'), PATH: path },
+        failureMessage: status => new Error(`install_pipeline failed for ${id} (status ${status}).`),
+        captureOutput: false, output: (text, stream) => { if (!hasToolchainProgress()) (stream === 'stdout' ? process.stdout : process.stderr).write(text); } }); }
+      catch (error) { if (!repair || toolchainInstallSignal()?.aborted) throw error; }
       if (repair) {
         // Rebuild the one package the kit's installer could not compile, against the dependencies it did install, then unpack
         // the calibration files the installer never reached.
         const prefix = resolve(root, 'pipeline'), source = resolve(kit, requireString(repair.package));
-        if (!await exists(source)) run('tar', ['-xzf', `${requireString(repair.package)}.tar.gz`], { cwd: kit });
+        if (!await exists(source)) await run('tar', ['-xzf', `${requireString(repair.package)}.tar.gz`], { cwd: kit });
         const env = { FFTWDIR: prefix, ERFADIR: prefix, GSLDIR: prefix, CFITSIODIR: prefix, CPLDIR: prefix, WCSDIR: prefix, CPPFLAGS: requireString(repair.cppflags).replaceAll('{prefix}', prefix) };
-        run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
-        run('make', ['-j8'], { cwd: source, env });
-        run('make', ['install'], { cwd: source, env });
+        await run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
+        await run('make', ['-j8'], { cwd: source, env });
+        await run('make', ['install'], { cwd: source, env });
         const calibration = resolve(root, 'calib', requireString(repair.calibrationDirectory));
         await mkdir(calibration, { recursive: true });
         const archive = requireString(repair.calibration), top = archive.replace(/\.tar\.gz$/u, '');
-        run('tar', ['-xzf', resolve(kit, archive), '--strip-components=2', '-C', calibration, `${top}/cal`], { cwd: kit });
+        await run('tar', ['-xzf', resolve(kit, archive), '--strip-components=2', '-C', calibration, `${top}/cal`], { cwd: kit });
       }
       if (entry.openmp !== undefined && process.platform === 'darwin') await threadMatisse(requireRecord(entry.openmp, `${id} openmp`), files, kit, resolve(root, 'pipeline'), build);
       // The kit's build tree is not needed at run time; Yorick's relocatable install is.
@@ -125,15 +126,15 @@ async function threadMatisse(openmp: Record<string, unknown>, files: readonly st
   await rm(runtime, { recursive: true, force: true }); await rm(cmake, { recursive: true, force: true });
   for (const [name, target] of [[requireString(openmp.runtime), runtime], [requireString(openmp.runtimeCmake), cmake]] as const) {
     await mkdir(target, { recursive: true });
-    run('tar', ['-xJf', files.find(file => file.endsWith(name))!, '--strip-components=1', '-C', target], { cwd: build });
+    await run('tar', ['-xJf', files.find(file => file.endsWith(name))!, '--strip-components=1', '-C', target], { cwd: build });
   }
   // LLVM's standalone runtime build finds its shared CMake modules in a sibling directory named cmake.
-  run('cmake', ['-S', runtime, '-B', resolve(build, 'openmp-build'), '-DCMAKE_BUILD_TYPE=Release', `-DCMAKE_INSTALL_PREFIX=${prefix}`, '-DOPENMP_STANDALONE_BUILD=ON',
+  await run('cmake', ['-S', runtime, '-B', resolve(build, 'openmp-build'), '-DCMAKE_BUILD_TYPE=Release', `-DCMAKE_INSTALL_PREFIX=${prefix}`, '-DOPENMP_STANDALONE_BUILD=ON',
     '-DLIBOMP_OMPD_SUPPORT=OFF', '-DOPENMP_ENABLE_LIBOMPTARGET=OFF', '-DLIBOMP_INSTALL_ALIASES=OFF'], { cwd: build });
-  run('cmake', ['--build', resolve(build, 'openmp-build'), '--parallel', '4'], { cwd: build });
-  run('cmake', ['--install', resolve(build, 'openmp-build')], { cwd: build });
+  await run('cmake', ['--build', resolve(build, 'openmp-build'), '--parallel', '4'], { cwd: build });
+  await run('cmake', ['--install', resolve(build, 'openmp-build')], { cwd: build });
   const packageName = requireString(openmp.package), source = resolve(kit, packageName), guard = requireString(openmp.guard);
-  if (!await exists(source)) run('tar', ['-xzf', `${packageName}.tar.gz`], { cwd: kit });
+  if (!await exists(source)) await run('tar', ['-xzf', `${packageName}.tar.gz`], { cwd: kit });
   for (const file of requireArray(openmp.files).map(value => requireString(value))) {
     const path = resolve(source, file), text = await readFile(path, 'utf8');
     if (!text.includes(guard)) throw new Error(`${file} no longer has the macOS OpenMP guard; review the kit before threading it.`);
@@ -142,21 +143,21 @@ async function threadMatisse(openmp: Record<string, unknown>, files: readonly st
   const env = { FFTWDIR: prefix, ERFADIR: prefix, GSLDIR: prefix, CFITSIODIR: prefix, CPLDIR: prefix, WCSDIR: prefix,
     // LLVM installs libomp as @rpath/libomp.dylib; the rpath lets configure's test programs and the recipes find it.
     CPPFLAGS: `-Xpreprocessor -fopenmp -I${resolve(prefix, 'include')}`, LIBS: `-L${resolve(prefix, 'lib')} -lomp`, LDFLAGS: `-Wl,-rpath,${resolve(prefix, 'lib')}` };
-  run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
-  run('make', ['-j4'], { cwd: source, env });
-  run('make', ['install'], { cwd: source, env });
+  await run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
+  await run('make', ['-j4'], { cwd: source, env });
+  await run('make', ['install'], { cwd: source, env });
 }
 
 /** Yorick from ESO's source package with its two patches, built without X11; the PIONIER pipeline (pndrs) runs on it. Returns
  * the directory holding the yorick executable. */
 async function buildYorick(entry: Record<string, unknown>, files: readonly string[], build: string) {
-  run('bsdtar', ['-xf', files.find(file => file.endsWith('.src.rpm'))!], { cwd: build });
-  run('tar', ['-xzf', 'yorick-y_2_2_04.tar.gz'], { cwd: build });
+  await run('bsdtar', ['-xf', files.find(file => file.endsWith('.src.rpm'))!], { cwd: build });
+  await run('tar', ['-xzf', 'yorick-y_2_2_04.tar.gz'], { cwd: build });
   const yorick = resolve(build, 'yorick-y_2_2_04');
-  for (const patch of requireArray(entry.yorickPatches).map(value => requireString(value))) run('patch', ['-p0', '-N', '-i', resolve(build, patch)], { cwd: yorick });
-  run('make', ['NO_XLIB=yes', 'Y_HOME=relocate', 'config'], { cwd: yorick });
-  run('make', ['NO_XLIB=yes'], { cwd: yorick });
-  run('make', ['NO_XLIB=yes', 'install'], { cwd: yorick });
+  for (const patch of requireArray(entry.yorickPatches).map(value => requireString(value))) await run('patch', ['-p0', '-N', '-i', resolve(build, patch)], { cwd: yorick });
+  await run('make', ['NO_XLIB=yes', 'Y_HOME=relocate', 'config'], { cwd: yorick });
+  await run('make', ['NO_XLIB=yes'], { cwd: yorick });
+  await run('make', ['NO_XLIB=yes', 'install'], { cwd: yorick });
   return resolve(yorick, 'relocate/bin');
 }
 

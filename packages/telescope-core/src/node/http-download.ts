@@ -13,6 +13,7 @@ export class DownloadInterruptedError extends Error {
 }
 export interface HttpDownloadOptions {
   readonly byteLimit: number;
+  readonly signal?: AbortSignal;
   readonly expectedBytes?: number;
   /** Retry orchestration must use waitForBackoff so idle time measures active requests only. */
   readonly fetcher?: (url: string, options: RequestInit, waitForBackoff: (milliseconds: number) => Promise<void>) => Promise<Response>;
@@ -37,6 +38,9 @@ function transferClock(options: HttpDownloadOptions) {
   // A timeout can occur while bytes are being written, between awaited reads.
   void timeout.catch(() => {});
   const expire = (message: string) => { const error = new Error(message); controller.abort(error); rejectTimeout(error); };
+  const abort = () => expire('Download aborted.');
+  options.signal?.addEventListener('abort', abort, { once: true });
+  if (options.signal?.aborted) abort();
   const idleTimeoutMs = options.idleTimeoutMs ?? (options.timeoutMs === undefined ? 60_000 : undefined);
   let idle: ReturnType<typeof setTimeout> | undefined;
   const received = () => {
@@ -55,7 +59,7 @@ function transferClock(options: HttpDownloadOptions) {
     received();
   };
   return { signal: controller.signal, received, wait, waitForBackoff,
-    stop: () => { clearTimeout(idle); clearTimeout(absolute); } };
+    stop: () => { clearTimeout(idle); clearTimeout(absolute); options.signal?.removeEventListener('abort', abort); } };
 }
 function contentLength(response: Response, raw: boolean): number | undefined {
   if (response.headers.has('content-encoding') && !raw) return undefined;
@@ -68,6 +72,7 @@ function contentLength(response: Response, raw: boolean): number | undefined {
 
 /** Publish with a link so an acquired artifact is never replaced, even by concurrent callers. */
 export async function downloadHttpFile(url: string, destination: string, options: HttpDownloadOptions): Promise<{ bytes: number; response: Response }> {
+  options.signal?.throwIfAborted();
   const attempts = options.attempts ?? 3;
   if (!Number.isSafeInteger(options.byteLimit) || options.byteLimit < 1 || !Number.isSafeInteger(attempts) || attempts < 1 || attempts > 3)
     throw new TypeError('Downloads require a positive byte limit and one to three attempts.');
@@ -81,7 +86,8 @@ export async function downloadHttpFile(url: string, destination: string, options
     let bytes = 0, total: number | undefined, canResume = false, validator: string | null = null;
     try {
     for (let attempt = 1; attempt <= attempts; attempt++) {
-      if (attempt > 1) await delay((options.backoffMs ?? 1000) * 2 ** (attempt - 2));
+      if (attempt > 1) await delay((options.backoffMs ?? 1000) * 2 ** (attempt - 2), undefined, { signal: options.signal });
+      options.signal?.throwIfAborted();
       const offset = canResume ? bytes : 0, headers = new Headers(options.headers);
       headers.set('accept-encoding', 'identity');
       if (offset) { headers.set('range', `bytes=${offset}-`); if (validator) headers.set('if-range', validator); }
@@ -133,9 +139,11 @@ export async function downloadHttpFile(url: string, destination: string, options
         } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
         if (!bytes || total !== undefined && total !== bytes) throw new DownloadInterruptedError(bytes, total, attempt, 'Incomplete download Content-Length.');
         if (options.expectedBytes !== undefined && options.expectedBytes !== bytes) throw new TransferContractError(`Download is ${bytes} bytes; expected ${options.expectedBytes}.`);
+        options.signal?.throwIfAborted();
         await file.sync(); await link(partial, destination);
         return { bytes, response };
       } catch (error) {
+        options.signal?.throwIfAborted();
         if (!(error instanceof DownloadInterruptedError) || attempt === attempts) throw error;
       } finally { clock.stop(); await response?.body?.cancel().catch(() => {}); }
     }

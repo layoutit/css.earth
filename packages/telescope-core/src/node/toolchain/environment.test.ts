@@ -242,3 +242,27 @@ test('a source-build environment fails before installation when the compiler is 
     assert.deepEqual(await readdir(f.root), []);
   } finally { process.env.PATH = oldPath; await f.cleanup(); }
 });
+
+test('an aborted verifier preserves a healthy prefix and never republishes an aborted install', async () => {
+  const { withToolchainProgress } = await import('./progress.js');
+  const f = await fixture(), controller = new AbortController();
+  try {
+    await interpreter(f.prefix); writeInstalledMarker(f.root, pins);
+    await assert.rejects(withToolchainProgress({ report: () => {}, signal: controller.signal }, () =>
+      installManagedToolchain(f.root, () => pins, f.prefix, async () => { assert.fail('must preserve healthy prefix'); }, () => {
+        controller.abort(); throw new Error('aborted verification');
+      })), { name: 'AbortError' });
+    assert.equal(installedMarkerIssue(f.root, pins), null);
+    assert.equal(await readFile(resolve(f.prefix, 'version'), 'utf8'), '3.12.2');
+    assert.ok(!(await readdir(f.root)).includes('venv.installing'));
+    await rm(resolve(f.root, 'installed.json'));
+    const stop = new AbortController();
+    await assert.rejects(withToolchainProgress({ report: () => {}, signal: stop.signal }, () =>
+      installManagedToolchain(f.root, () => pins, f.prefix, async () => { await interpreter(f.prefix); stop.abort(); }, () => {})), { name: 'AbortError' });
+    assert.equal(installedMarkerIssue(f.root, pins), 'missing');
+    const duringCheck = new AbortController();
+    await assert.rejects(withToolchainProgress({ report: () => {}, signal: duringCheck.signal }, () =>
+      installManagedToolchain(f.root, () => pins, f.prefix, async () => { await interpreter(f.prefix); }, () => { duringCheck.abort(); })), { name: 'AbortError' });
+    assert.equal(installedMarkerIssue(f.root, pins), 'missing', 'aborting the final check cannot publish a marker');
+  } finally { await f.cleanup(); }
+});

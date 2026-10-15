@@ -33,3 +33,4 @@ export * from './toolchain/environment.js';
 export * from './toolchain/source-build.js';
 
 export * from './acquisition-directory.js';
+export * from './toolchain/progress.js';
