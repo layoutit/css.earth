@@ -10,7 +10,7 @@ import { explorationQualificationFor, type QualificationConfiguration } from './
 import type { QualifiedObservation } from './qualification/qualified-observations.mts';
 import { parseRegion, type IcrsCircle } from '@cssearth/objects';
 import { SERVICES, type DiscoveryRequest } from './vo/discovery.mts';
-import type { VoInputs } from './vo/bridge.mts';
+import type { VoInputs, ProviderReporter } from './vo/bridge.mts';
 import { nativeQualificationRoute } from './vo/access.mts';
 import { FAMILY_IDS, type FamilyId } from './products/product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './products/observation-families.mts';
@@ -256,19 +256,37 @@ export async function skyTargetRequest(root: string, request: ExplorationRequest
   return resolution ? { request: withRegion(resolution.target), simbadMiss: false, evidence: resolution.evidence } : { request, simbadMiss: true };
 }
 
+async function reportedSearch<T extends OpusService | ArchiveLeadService>(archive: string, search: () => Promise<T>, report?: ProviderReporter): Promise<T> {
+  report?.({ archive, state: 'searching' });
+  try {
+    const result = await search();
+    const count = 'instruments' in result ? result.instruments.reduce((sum, item) => sum + item.records, 0) : result.images ?? 0;
+    report?.({ archive, state: 'done', count, ...(['sampled', 'empty-in-scope'].includes(result.state) ? {} : { reason: result.reason }) });
+    return result;
+  } catch (error) { report?.({ archive, state: 'done', reason: error instanceof Error ? error.message : String(error) }); throw error; }
+}
+
+function reportSearchStart(report: ProviderReporter | undefined, position: boolean): void {
+  for (const profile of SERVICES) if (!position || profile.model === 'obscore-1.1') report?.({ archive: profile.label ?? profile.service, state: 'searching' });
+  for (const archive of ARCHIVES) if (archive.search) report?.({ archive: archive.displayName ?? archive.name, state: 'searching' });
+  if (!position) report?.({ archive: 'OPUS', state: 'searching' });
+}
+
 export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
-  archiveSelection?: ArchiveSelection): Promise<ExplorationInputs> {
+  archiveSelection?: ArchiveSelection, report?: ProviderReporter): Promise<ExplorationInputs> {
   if (request.target === undefined) {
+    if (!selectedObservation) reportSearchStart(report, true);
     const region = parseRegion(request.region ?? request.footprint), filter: ArchiveLeadFilter = { ...(request.instrument ? { instrument: request.instrument } : {}), ...(request.time && 'fromIso' in request.time ? { time: request.time } : {}) };
     const position: LeadPosition = { raDeg: region.raDegrees, decDeg: region.decDegrees, radiusDeg: region.radiusDegrees };
-    const [inputs, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress, archiveSelection),
-      selectedObservation ? [] : Promise.all(ARCHIVES.flatMap(archive => archive.search ? [archive.search(root, undefined, { region, position, filter })] : []))]);
+    const [inputs, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress, archiveSelection, report),
+      selectedObservation ? [] : Promise.all(ARCHIVES.flatMap(archive => archive.search ? [reportedSearch(archive.displayName ?? archive.name, () => archive.search!(root, undefined, { region, position, filter }), report)] : []))]);
     return { ...inputs, archiveLeads };
   }
   const sky = request.skyTarget ? [skyCatalogueEntry(request.skyTarget)] : [];
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
-  if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection);
+  if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection, report);
+  if (!selectedObservation) reportSearchStart(report, false);
   // A spelling the reader entered that resolved to this target joins these searches for this request, as it joins the VO search:
   // KOA files HD 189733 A under "HD 189733" and "HD189733".
   const named = withRequestedTargetName(request.requestedTargetName ?? request.target, resolution.canonical.id, targetCatalogue);
@@ -280,16 +298,16 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
     : request.skyTarget ? { raDeg: request.skyTarget.raDegrees, decDeg: request.skyTarget.decDegrees, radiusDeg: 0.5 / 60 }
     : selectedObservation ? undefined : (await namedShippedObject(resolution.canonical.id, readJsonOrNull, root)).position;
   // Every archive is asked at once: each search talks to its own service, and the leads used to wait for the others to finish.
-  const [inputs, opus, curatedImagery, wwtFits, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target),loadWwtFitsLeads(root,target),
+  const [inputs, opus, curatedImagery, wwtFits, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress, undefined, report), reportedSearch('OPUS', () => searchOpus(target), report), loadWwtImagery(root, target),loadWwtFitsLeads(root,target),
     selectedObservation ? [] : Promise.all(ARCHIVES.flatMap(archive => archive.search
-      ? [archive.search(root, target, { ...(request.region ? { region: request.region } : {}), ...(position ? { position } : {}), filter })] : []))]);
+      ? [reportedSearch(archive.displayName ?? archive.name, () => archive.search!(root, target, { ...(request.region ? { region: request.region } : {}), ...(position ? { position } : {}), filter }), report)] : []))]);
   return { ...inputs, opus, archiveLeads, curatedImagery, wwtFits };
 }
 
 export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
-  archiveSelection?: ArchiveSelection): Promise<ExplorationAnswer> {
+  archiveSelection?: ArchiveSelection, report?: ProviderReporter): Promise<ExplorationAnswer> {
   progress?.(request.target === undefined ? 'Searching ICRS field' : 'Resolving target');
-  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation, progress, archiveSelection));
+  const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation, progress, archiveSelection, report));
   if (sky.evidence) return { ...answer, skyResolution: sky.evidence };
   if (!sky.simbadMiss) return answer;
   return { ...answer, issues: answer.issues.map(issue => issue.scope === 'target' ? { ...issue, reason: `${issue.reason} SIMBAD resolves no object by that name either.` } : issue) };

@@ -65,7 +65,7 @@ export async function installFreeGb(userRoot: string): Promise<string> {
 }
 
 /** Short-lived install blocks stay inline; the raw-key listener belongs to the whole transaction. */
-export function createInstallScreen(terminal: Terminal, controller: AbortController) {
+export function createInstallScreen(terminal: Terminal, controller: AbortController, toolchain = 'astroquery') {
   terminal.write('\r\x1b[K');
   let state = initialInstallState(), block = liveBlock(terminal), close = () => {}, running = false, stopped = false;
   let answer: ((accepted: boolean) => void) | undefined;
@@ -98,7 +98,7 @@ export function createInstallScreen(terminal: Terminal, controller: AbortControl
       if (consentLines.length >= terminal.rows) { block.done(consentLines); block = liveBlock(terminal); }
       const accepted = yes || await new Promise<boolean>(resolve => { answer = resolve; });
       answer = undefined;
-      if (!accepted) { finish(); terminal.write(`${dim(NOT_INSTALLED)}\n`); return false; }
+      if (!accepted) { finish(); terminal.write(`${dim(`${NOT_INSTALLED} ${toolchain}`)}\n`); return false; }
       running = true; draw(); void animate(); return true;
     },
     progress(event: ToolchainProgress): void {

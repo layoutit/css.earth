@@ -12,6 +12,7 @@ export * from './sky-target.js';
 export * from './toolchain/toolchain.js';
 export * from './astroquery.js';
 export * from './http-download.js';
+export * from './download-progress.js';
 export * from './pyuvdata.js';
 export * from './mast.js';
 export * from './target-associations.js';

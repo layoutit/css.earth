@@ -1,4 +1,5 @@
 /** The command supplies terminal policy; archive and toolchain owners request consent before writing bytes. */
+import { downloadContext } from './download-progress.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
 
 export interface DownloadConsent {
@@ -47,5 +48,6 @@ export async function requestTransferConsent(info: TransferConsent): Promise<voi
 
 /** Publication owners must refuse even when a provider caught the cancellation. */
 export function assertTransferNotCancelled(): void {
+  downloadContext()?.signal.throwIfAborted();
   if (consent.getStore()?.cancelled) throw new DownloadCancelledError();
 }

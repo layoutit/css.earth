@@ -17,6 +17,7 @@ import { selectedProductInput, qualifiedProductInput } from './observation-query
 import { assessRequest, type ProductFacts } from './requests/request-satisfaction.mts';
 import type { QualificationConfiguration } from './qualification/qualification-routes.mts';
 import { EXPLORATION_SCHEMA, exploreTarget, parseExplorationArguments, type ExplorationAnswer, type ExplorationChoice, type ExplorationRequest } from './exploration.mts';
+import type { ProviderReporter } from './vo/bridge.mts';
 import { SERVICES } from './vo/discovery.mts';
 import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery/delivery-context.mts';
 import { canonical } from '@cssearth/objects';
@@ -67,13 +68,13 @@ export interface SessionServices {
   readonly loadRequest?: (root: string, request: CapabilityRequest, selectedObservation?: string, progress?: (stage:string)=>void) => Promise<QueryInputs>;
   readonly load: (root: string, target: string) => Promise<QueryInputs>;
   readonly qualify: (root: string, request: QualificationRequest) => Promise<unknown>;
-  readonly explore?: (root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void, archiveSelection?: ArchiveSelection) => Promise<ExplorationAnswer>;
+  readonly explore?: (root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void, archiveSelection?: ArchiveSelection, report?: ProviderReporter) => Promise<ExplorationAnswer>;
 }
 const services: SessionServices = { load: loadQueryInputs, loadRequest: loadQueryInputs, qualify: qualifyObservation, explore: exploreTarget };
 const loadForRequest = (api: SessionServices, root: string, request: CapabilityRequest, selectedObservation?: string, progress?: (stage:string)=>void) => api.loadRequest ? api.loadRequest(root, request, selectedObservation, progress) : api.load(root, request.target);
 const emptyInputs: QueryInputs = { ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [] };
 const exploreForRequest = (api: SessionServices, root: string, request: ExplorationRequest, selectedObservation?: string, progress?: (stage:string)=>void,
-  archiveSelection?: ArchiveSelection) => (api.explore ?? exploreTarget)(root, request, selectedObservation, progress, archiveSelection);
+  archiveSelection?: ArchiveSelection, report?: ProviderReporter) => (api.explore ?? exploreTarget)(root, request, selectedObservation, progress, archiveSelection, report);
 export function sessionRequest(args: readonly string[]): CapabilityRequest {
   const request = requestFromArguments(args);
   queryCapabilities(request, emptyInputs); // Public validation, before archive IO.
@@ -126,11 +127,11 @@ export interface ExplorationSession {
   readonly target?: string; readonly choices: readonly ExplorationChoice[]; readonly answer: ExplorationAnswer;
 }
 /** Save the unfiltered archive exploration separately from a scientific query. */
-export async function saveExploration(root: string, args: readonly string[], directory?: string, api: SessionServices = services, progress?: (stage:string)=>void): Promise<ExplorationSession & { readonly directory: string }> {
+export async function saveExploration(root: string, args: readonly string[], directory?: string, api: SessionServices = services, progress?: (stage:string)=>void, report?: ProviderReporter): Promise<ExplorationSession & { readonly directory: string }> {
   await assertWritableDirectory(directory);
   const request = parseExplorationArguments(args);
   const destination = directory ?? runDirectory(request.target ?? `field-${request.region?.raDegrees ?? request.footprint?.raDegrees}-${request.region?.decDegrees ?? request.footprint?.decDegrees}`);
-  const initial = await withAcquisitionDirectory(destination,()=>exploreForRequest(api, root, request, undefined, progress));
+  const initial = await withAcquisitionDirectory(destination,()=>exploreForRequest(api, root, request, undefined, progress, undefined, report));
   assertTransferNotCancelled();
   progress?.('Saving exploration');
   return locked(destination, async () => {

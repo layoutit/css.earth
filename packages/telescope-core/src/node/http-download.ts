@@ -1,5 +1,7 @@
 /** Bounded retries retain bytes only when the archive proves a matching byte range. */
-import { link, mkdtemp, open, rm } from 'node:fs/promises';
+import { link, mkdtemp, open, rm, readFile, writeFile, stat } from 'node:fs/promises';
+import { downloadContext, reportDownloadProgress } from './download-progress.js';
+import { requireRecord, hasErrorCode } from '@cssearth/core';
 import { dirname, join } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 
@@ -72,6 +74,8 @@ function contentLength(response: Response, raw: boolean): number | undefined {
 
 /** Publish with a link so an acquired artifact is never replaced, even by concurrent callers. */
 export async function downloadHttpFile(url: string, destination: string, options: HttpDownloadOptions): Promise<{ bytes: number; response: Response }> {
+  const context = downloadContext(), retained = context?.retainPartial === true;
+  if (context) options = { ...options, signal: options.signal ? AbortSignal.any([options.signal, context.signal]) : context.signal };
   options.signal?.throwIfAborted();
   const attempts = options.attempts ?? 3;
   if (!Number.isSafeInteger(options.byteLimit) || options.byteLimit < 1 || !Number.isSafeInteger(attempts) || attempts < 1 || attempts > 3)
@@ -80,11 +84,25 @@ export async function downloadHttpFile(url: string, destination: string, options
     throw new TypeError('Expected download bytes must fit the byte limit.');
   for (const timeout of [options.timeoutMs, options.idleTimeoutMs]) if (timeout !== undefined && (!Number.isSafeInteger(timeout) || timeout < 1))
     throw new TypeError('Download timeouts must be positive milliseconds.');
-  const directory = await mkdtemp(join(dirname(destination), '.transfer-')), partial = join(directory, 'download.partial');
+  const directory = retained ? undefined : await mkdtemp(join(dirname(destination), '.transfer-'));
+  const partial = retained ? `${destination}.download.partial` : join(directory!, 'download.partial'), checkpoint = `${partial}.json`;
+  const identity = JSON.stringify({ url, byteLimit: options.byteLimit, expectedBytes: options.expectedBytes });
+  let published = false;
   try {
-    const file = await open(partial, 'wx', 0o600);
+    const file = await (retained ? open(partial, 'r+').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return open(partial, 'wx', 0o600); throw error; }) : open(partial, 'wx', 0o600));
     let bytes = 0, total: number | undefined, canResume = false, validator: string | null = null;
     try {
+    if (retained) {
+      const saved = await readFile(checkpoint, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
+      if (saved !== undefined) {
+        const record = requireRecord(JSON.parse(saved));
+        if (record.identity !== identity) throw new Error('Partial download belongs to another acquisition.');
+        bytes = (await stat(partial)).size;
+        if (typeof record.total === 'number' && Number.isSafeInteger(record.total) && record.total > bytes && record.total <= options.byteLimit) total = record.total;
+        canResume = record.canResume === true && total !== undefined && bytes > 0;
+        validator = typeof record.validator === 'string' ? record.validator : null;
+      }
+    }
     for (let attempt = 1; attempt <= attempts; attempt++) {
       if (attempt > 1) await delay((options.backoffMs ?? 1000) * 2 ** (attempt - 2), undefined, { signal: options.signal });
       options.signal?.throwIfAborted();
@@ -121,6 +139,8 @@ export async function downloadHttpFile(url: string, destination: string, options
           validator ??= response.headers.get('last-modified');
         }
         if (total !== undefined && total > options.byteLimit) throw new TransferContractError('Download byte limit exceeded.');
+        if (retained) await writeFile(checkpoint, JSON.stringify({ identity, total, canResume, validator }));
+        if (context) reportDownloadProgress({ received: bytes, total });
         const reader = response.body.getReader();
         try {
           for (;;) {
@@ -135,12 +155,14 @@ export async function downloadHttpFile(url: string, destination: string, options
               written += result.bytesWritten;
             }
             bytes += written; options.report?.(bytes);
+            if (context) reportDownloadProgress({ received: bytes, total });
           }
         } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
         if (!bytes || total !== undefined && total !== bytes) throw new DownloadInterruptedError(bytes, total, attempt, 'Incomplete download Content-Length.');
         if (options.expectedBytes !== undefined && options.expectedBytes !== bytes) throw new TransferContractError(`Download is ${bytes} bytes; expected ${options.expectedBytes}.`);
         options.signal?.throwIfAborted();
-        await file.sync(); await link(partial, destination);
+        await file.sync(); await link(partial, destination); published = true;
+        if (context) reportDownloadProgress({ received: bytes, total, checking: true });
         return { bytes, response };
       } catch (error) {
         options.signal?.throwIfAborted();
@@ -149,5 +171,8 @@ export async function downloadHttpFile(url: string, destination: string, options
     }
     throw new Error('Download attempts ended without a result.');
     } finally { await file.close(); }
-  } finally { await rm(directory, { recursive: true, force: true }); }
+  } finally {
+    if (directory) await rm(directory, { recursive: true, force: true });
+    else if (published) { await rm(partial, { force: true }); await rm(checkpoint, { force: true }); }
+  }
 }

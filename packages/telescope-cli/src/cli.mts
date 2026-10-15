@@ -4,7 +4,7 @@ import { assertWritableDirectory, artifactRunName, inspectionDirectory, runDirec
 import { listManagedEnvironments, removeManagedEnvironment } from './toolchains/managed-environments.mts';
 import { manageToolchain } from './toolchains/astronomy-toolchains.mts';
 import { dirname, resolve } from 'node:path';
-import { consentHandler, savedDownload, choiceDownload, type DownloadInfo, type ConsentState } from './cli-consent.mts';
+import { consentHandler, savedDownload, type DownloadInfo, type ConsentState } from './cli-consent.mts';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
@@ -29,6 +29,9 @@ import { manageSkill } from './skill/index.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
 import { papersList, leadsList, starsList } from './tui/lookups.mts';
+import { exploreScreen, type ExploreServices } from './tui/explore.mts';
+import { explorationServices } from './tui/explore-services.mts';
+import { processTerminal } from './tui/terminal.mts';
 import { writeList } from './tui/list.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
 import { formatStars, surveyStars } from './stars/stars.mts';
@@ -64,6 +67,7 @@ export interface RetrievedResult {
   readonly context?:DeliveryContext;readonly satisfaction?:RequestSatisfaction;
 }
 export interface CliServices {
+  readonly exploration?: ExploreServices;
   readonly getDownloadPlan?:(directory:string,pick:number)=>Promise<DownloadInfo>;
   readonly importLocalArtifact:typeof importLocalArtifact;
   readonly familyCoverageLedger:typeof familyCoverageLedger;
@@ -200,23 +204,6 @@ async function guidedArtifact(result:ArtifactInspection,io:CliIo,api:CliServices
     io.write(await executeOutput(options,api));return 0;
   }
 }
-async function guidedExploration(root:string,session:ExplorationSession&{readonly directory:string},io:CliIo,api:CliServices,verbose=false,all=false,consent:ConsentState={}):Promise<number>{
-  io.write(formatExploration(session,verbose,all));
-  await io.flush?.();
-  if(!session.choices.length)return 3;
-  let pick:number|undefined;
-  for(;;){
-    const answer=(await io.question('Choose an observation number, or press Enter to exit: '))?.trim();
-    if(!answer||/^q(?:uit)?$/iu.test(answer)){io.write('Exploration saved; no observation was selected.\n');return 0;}
-    if(/^\d+$/u.test(answer)&&session.choices.some(choice=>choice.pick===Number(answer))){pick=Number(answer);break;}
-    io.error(`Choose a number from 1 to ${session.choices.length}, or press Enter to exit.\n`);
-  }
-  await requestTransferConsent(api.getDownloadPlan?await api.getDownloadPlan(session.directory,pick):choiceDownload(session.choices.find(choice=>choice.pick===pick)! as unknown as Record<string,unknown>,session.directory,pick));
-  const result=await api.getSession(root,session.directory,pick,line=>io.error(`${line}\n`));
-  if(consent.cancelled)throw new DownloadCancelledError();
-  io.write([`Files: ${displayPath(dirname(result.product))}/`,`Product: ${displayPath(result.product)}`,`Evidence: ${displayPath(result.resultPath)}`,contextText(result.context)??(result.satisfaction?`Scientific request: ${result.satisfaction.status}.`:''),...(result.reused?['Reused: verified existing delivery']:[])].filter(Boolean).join('\n')+'\n\n');
-  return guidedArtifact(artifactScreen(await api.listArtifactOutputs(result.resultPath),result.resultPath),io,api,verbose);
-}
 
 async function runCli(args: readonly string[], root: string | undefined = undefined, output: (text: string) => void = text => { process.stdout.write(text); }, injectedIo?:CliIo,api:CliServices=defaultServices,consent:ConsentState={}): Promise<number> {
   const io=injectedIo??processIo(output);
@@ -346,11 +333,15 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
       }else if(options.command==='explore'){
         // --fresh: every archive is asked again; without it an answer saved in the last day stands (archives/memory.mts).
         if(options.fresh)process.env[FRESH_VARIABLE]='1';
+        if(guided(options,io)){
+          const exit=await exploreScreen(options.request.target,api.exploration??explorationServices(root,options.requestArgs,options.directory,api,io,consent),io.terminal??processTerminal(),options.noOpen);
+          process.stdout.write=stdout;
+          if(exit.line)io.write(`${exit.line}\n`);return exit.code;
+        }
         const progress=startProgress(io,'Resolving target',options.json,consent);
         let session:ExplorationSession&{readonly directory:string};
         try{session=await api.saveExploration(root,options.requestArgs,options.directory,undefined,progress.update);if(consent.cancelled)throw new DownloadCancelledError();progress.stop('done');}
         catch(error){progress.stop('failed');throw error;}
-        if(guided(options,io)){process.stdout.write=stdout;return await guidedExploration(root,session,io,api,options.verbose,options.all,consent);}
         text=`${JSON.stringify(explorationSummary(session))}\n`;code=session.choices.length?0:3;
       }else if(options.command==='project'){
         const result=await api.projectOutput(options.result,options.geometry,options.directory);text=options.json?JSON.stringify(result)+'\n':`Map: ${result.map}\nFigure: ${result.figure}\nEvidence: ${result.receipt}\n`;code=0;
@@ -396,7 +387,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
     if (consent.installController?.signal.aborted) return 130;
     if (consent.toolchainDeclined) {
       if (args[0] === 'toolchain') return 0;
-      io.error('The astronomy packages are not installed: telescope toolchain install astroquery\n'); return 1;
+      io.error(`The astronomy packages are not installed: telescope toolchain install ${consent.declinedToolchain??'astroquery'}\n`); return 1;
     }
     const code = error instanceof TypeError || error instanceof RangeError ? 2 : 1;
     const summary = error instanceof Error ? error.message : String(error);
@@ -414,7 +405,7 @@ async function runCli(args: readonly string[], root: string | undefined = undefi
 export async function main(args: readonly string[], root?: string, output: (text:string)=>void = text=>{process.stdout.write(text);}, injectedIo?:CliIo, api:CliServices=defaultServices):Promise<number>{
   const io=injectedIo??processIo(output), state:ConsentState={installController:new AbortController()};
   const temporary=await mkdtemp(resolve(tmpdir(),'telescope-command-'));
-  try{return await withAcquisitionDirectory(temporary,()=>withTransferConsent(consentHandler(io,{json:args.includes('--json'),yes:args.includes('--yes')||args.includes('-y')},state),()=>guided({json:args.includes('--json')},io)?withToolchainProgress({report:event=>state.install?.progress(event),signal:state.installController!.signal},()=>runCli(args,root,output,io,api,state)):runCli(args,root,output,io,api,state)));}
+  try{return await withAcquisitionDirectory(temporary,()=>withTransferConsent(consentHandler(io,{json:args.includes('--json'),yes:args.includes('--yes')||args.includes('-y')},state),()=>guided({json:args.includes('--json')},io)?withToolchainProgress({report:event=>{state.install?.progress(event);if(event.type==='installed')state.screen?.resume();},signal:state.installController!.signal},()=>runCli(args,root,output,io,api,state)):runCli(args,root,output,io,api,state)));}
   finally{state.install?.close();await rm(temporary,{recursive:true,force:true});}
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

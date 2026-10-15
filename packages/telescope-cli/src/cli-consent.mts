@@ -10,7 +10,7 @@ import { processTerminal } from './tui/terminal.mts';
 import type { CliIo } from './cli-io.mts';
 
 export type DownloadInfo = Extract<TransferConsent, { kind: 'download' }>;
-export interface ConsentState { download?: DownloadInfo; archive?: string; cancelled?: boolean; install?: ReturnType<typeof createInstallScreen>; installController?: AbortController; toolchainDeclined?: boolean }
+export interface ConsentState { download?: DownloadInfo; archive?: string; cancelled?: boolean; install?: ReturnType<typeof createInstallScreen>; installController?: AbortController; toolchainDeclined?: boolean; declinedToolchain?: string; screen?: { pause(): void; resume(): void } }
 const sizeText = (bytes: number | null) => bytes === null ? 'size unknown' : `${Math.ceil(bytes / 1e6)} MB`;
 const folder = (path: string) => `${displayPath(path).replace(/\/$/u, '')}/`;
 
@@ -21,9 +21,10 @@ export function consentHandler(io: CliIo, options: { readonly json: boolean; rea
       await io.flush?.();
       const free = await installFreeGb(USER_ROOT);
       state.installController ??= new AbortController();
-      state.install = createInstallScreen(io.terminal ?? processTerminal(), state.installController);
+      state.screen?.pause();
+      state.install = createInstallScreen(io.terminal ?? processTerminal(), state.installController, info.name);
       if (!await state.install.consent(free, options.yes)) {
-        state.cancelled = true; state.toolchainDeclined = true;
+        state.cancelled = true; state.toolchainDeclined = true; state.declinedToolchain = info.name;
         throw new DownloadCancelledError();
       }
       return;

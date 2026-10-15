@@ -24,7 +24,7 @@ import { TARGET_CATALOGUE_SNAPSHOT, inputPath, packagePath } from '../paths.mts'
 import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest, inputWavelengths } from '../requests/recipe-request.mts';
 import { skyCatalogueEntry, parseLimits, loadTargetAssociations, parseTargetAssociationSources, requireWorkspace, USER_ROOT } from '@cssearth/telescope-core/node';
 import { parseRegion, parseAcceptedAssumptions } from '@cssearth/objects';
-import { loadVoInputs, voCandidates } from '../vo/bridge.mts';
+import { loadVoInputs, voCandidates, type ProviderReporter } from '../vo/bridge.mts';
 import type { DiscoveryRequest } from '../vo/discovery.mts';
 import { loadQualifiedObservations, matchingProduct } from '../qualification/qualified-observations.mts';
 import { assessInput, assessRequest, type ConstraintAnswer, type ConstraintVerdict } from '../requests/request-satisfaction.mts';
@@ -391,10 +391,10 @@ export async function loadTargetCatalogueSnapshot(path = TARGET_CATALOGUE_SNAPSH
 /** The string overload retains legacy archive loading; an explicit request also searches bounded VO services. */
 export interface ArchiveSelection { readonly archiveService: string }
 export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string, progress?: (stage:string)=>void,
-  archiveSelection?: ArchiveSelection): Promise<QueryInputs> {
+  archiveSelection?: ArchiveSelection, report?: ProviderReporter): Promise<QueryInputs> {
   if (typeof targetOrRequest !== 'string' && targetOrRequest.target === undefined) {
     parseRegion(targetOrRequest.region ?? ('footprint' in targetOrRequest ? targetOrRequest.footprint : undefined));
-    const vo = await loadVoInputs(root, targetOrRequest, [], selectedObservation, undefined, {}, undefined, undefined, archiveSelection?.archiveService);
+    const vo = await loadVoInputs(root, targetOrRequest, [], selectedObservation, undefined, {}, undefined, undefined, archiveSelection?.archiveService, report);
     const targets = [...new Set(vo.records.map(entry => entry.observation.rawTarget))];
     const qualifiedProducts = (await Promise.all(targets.map(target => loadQualifiedObservations(root, target)))).flat();
     return { vo, ledgers: [], capabilities: [], targetCatalogue: [], targetAssociations: [], bodyMaps: [], qualifiedProducts };
@@ -412,7 +412,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   if (archiveSelection && typeof targetOrRequest !== 'string' && resolution.status === 'resolved') {
     progress?.('Revalidating the selected archive observation');
     const vo = await loadVoInputs(root, canonicalTargetRequest({ ...targetOrRequest, target }, canonicalTarget), targetCatalogue,
-      selectedObservation, undefined, {}, undefined, undefined, archiveSelection.archiveService);
+      selectedObservation, undefined, {}, undefined, undefined, archiveSelection.archiveService, report);
     return { vo, ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], sourceProducts: [],
       qualifiedProducts: await loadQualifiedObservations(root, canonicalTarget) };
   }
@@ -440,7 +440,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   const sourceProducts = resolution.status === 'resolved' ? await loadSourceProducts(root, canonicalTarget, sourceIntakeIssues, { fetchRemote: false }) : [];
   if(typeof targetOrRequest !== 'string' && resolution.status === 'resolved')progress?.('Searching VO archives and access descriptions');
   const vo = typeof targetOrRequest !== 'string' && resolution.status === 'resolved' ? await loadVoInputs(root,
-    canonicalTargetRequest({ ...targetOrRequest, target }, canonicalTarget), targetCatalogue, selectedObservation) : undefined;
+    canonicalTargetRequest({ ...targetOrRequest, target }, canonicalTarget), targetCatalogue, selectedObservation, undefined, {}, undefined, undefined, undefined, report) : undefined;
   return { ...(vo ? { vo } : {}), sourceIntakeIssues, ledgers, capabilities, targetCatalogue, targetAssociations, associationFailures, bodyMaps, qualifiedProducts: resolution.status === 'resolved' ? await loadQualifiedObservations(root, canonicalTarget) : [], sourceProducts, ...(investigations === undefined ? {} : { investigations: { path: investigationPath, value: investigations } }) };
 }
 

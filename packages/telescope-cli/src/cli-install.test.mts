@@ -15,7 +15,7 @@ async function install(): Promise<string> {
 }
 mock.module('./toolchains/astronomy-toolchains.mts', { namedExports: { ...toolchains, manageToolchain: install } });
 mock.module('./session.mts', { namedExports: { ...sessions, saveSession: async () => {
-  await requestTransferConsent({ kind: 'toolchain', name: 'astronomy Python toolchain', bytes: 1e9, destination: '/tmp/fixture', packages: ['Python'] });
+  await requestTransferConsent({ kind: 'toolchain', name: 'astroquery', bytes: 1e9, destination: '/tmp/fixture', packages: ['Python'] });
   await install();
   throw new Error('fixture query finished');
 } } });

@@ -3,9 +3,9 @@ import { basename, dirname, resolve } from 'node:path';
 import { mkdir, readFile, stat, writeFile, copyFile, link, rename, rm } from 'node:fs/promises';
 import { snapshotPublisher, type SnapshotPublisher } from './snapshot-store.mts';
 import { randomUUID } from 'node:crypto';
-import { acquisitionDirectory, fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits, USER_ROOT } from '@cssearth/telescope-core/node';
+import { acquisitionDirectory, acquisitionWorkingDirectory, downloadContext, parseAstroqueryAnswer, fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits, type AstroqueryRequest, USER_ROOT } from '@cssearth/telescope-core/node';
 import type { ProductRun } from '@cssearth/objects';
-import { requireRecord } from '@cssearth/core';
+import { requireRecord, hasErrorCode } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
 import { canonical, jsonValue, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource } from '@cssearth/objects';
@@ -230,8 +230,15 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     return { file: previous.outputs.some(output => output.path === 'science.fits') ? resolve(destination, 'science.fits') : null, record: recordPath, reused: true, replay: 'pinned-local-artifact' as const };
   }
   await mkdir(dirname(destination), { recursive: true });
-  const staging = `${destination}.${randomUUID()}.partial`;
-  await mkdir(staging);
+  const retained = downloadContext()?.retainPartial === true;
+  const staging = retained ? resolve(acquisitionWorkingDirectory() ?? dirname(destination), `${spec.key}.partial`) : `${destination}.${randomUUID()}.partial`;
+  await mkdir(staging, { recursive: retained });
+  const identityPath = resolve(staging, 'request.json');
+  if (retained) {
+    const saved = await readFile(identityPath, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
+    if (saved !== undefined && saved !== spec.identity) throw new Error('Partial download belongs to another acquisition.');
+    await writeFile(identityPath, spec.identity);
+  }
   try {
     const metadata: { path: string; file: string }[] = [];
     for (const pin of spec.metadata) {
@@ -245,10 +252,15 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
     const descriptorPin = spec.metadata.find(p => p.path === spec.serviceMetadata);
     if (spec.operation.kind === 'soda-sync' && !descriptorPin) throw new Error('Subset descriptor is outside the metadata evidence closure.');
     const receivedName = spec.format === 'fits' ? 'science.fits' : `archive.${spec.format}`;
-    const transferred = (await astroquery({ operation: 'vo-download', url: spec.operation.url, destination: resolve(staging, receivedName), format: spec.format,
+    const downloadRequest: AstroqueryRequest = { operation: 'vo-download', url: spec.operation.url, destination: resolve(staging, receivedName), format: spec.format,
       ...(['f08-table', 'f03-spectrum'].includes(nativeQualificationRoute(spec) ?? '') ? { fitsProfile: 'bintable' as const } : {}),
       byteLimit: spec.limits.scienceBytes, parameters: spec.operation.parameters, allowedPrivateHosts: policy.allowedPrivateHosts,
-      ...(spec.operation.kind === 'soda-sync' ? { descriptor: { file: descriptorPin!, row: spec.serviceRow!, serviceId: spec.descriptor!.id! } } : {}) })).transfer!;
+      ...(spec.operation.kind === 'soda-sync' ? { descriptor: { file: descriptorPin!, row: spec.serviceRow!, serviceId: spec.descriptor!.id! } } : {}) };
+    const savedTransfer = retained ? await readFile(resolve(staging, 'transfer.json'), 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; }) : undefined;
+    const transferredAnswer = savedTransfer === undefined ? await astroquery(downloadRequest) : parseAstroqueryAnswer(JSON.parse(savedTransfer), downloadRequest);
+    const transferred = transferredAnswer.transfer!;
+    if (transferred.file.path !== resolve(staging, receivedName) || await sizeOf(transferred.file.path, 'Received product') !== transferred.file.bytes) throw new Error('Retained transfer no longer matches its file.');
+    if (retained) await writeFile(resolve(staging, 'transfer.json'), JSON.stringify(transferredAnswer));
     const unpacked = spec.format === 'fits' ? undefined : await extractVoPackage(resolve(staging, receivedName), staging, { expandedBytes: spec.limits.expandedBytes, members: spec.limits.packageMembers });
     if (unpacked) {
       if (unpacked.format !== spec.format) throw new Error('Archive format disagrees with advertised MIME.');
@@ -276,5 +288,5 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
       { path: 'origin.json', file: resolve(staging, 'origin.json') }, ...metadata], []);
     await rename(staging, destination);
     return { file: legacy === 'science.fits' || spec.format === 'fits' ? resolve(destination, 'science.fits') : null, record: recordPath, reused: false };
-  } finally { await rm(staging, { recursive: true, force: true }); }
+  } finally { if (!retained) await rm(staging, { recursive: true, force: true }); }
 }

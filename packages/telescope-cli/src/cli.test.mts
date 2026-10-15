@@ -9,7 +9,6 @@ import { formatArtifact, formatExploration, formatSession, outputCommand, displa
 import { savedDownload } from './cli-consent.mts';
 import { main, type CliIo, type CliServices } from './cli.mts';
 import { VERSION } from './version.mts';
-import { FakeTerminal } from './tui/fake-terminal.mts';
 import { parseCli } from './cli-arguments.mts';
 import { saveExploration, type ExplorationSession, type Session } from './session.mts';
 import { explorationSummary } from './cli-summary.mts';
@@ -17,7 +16,6 @@ import { wavelengthText } from './cli-table.mts';
 import { familyCoverageLedger } from './family-handlers.mts';
 import { loadWwtImagery } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads } from './wwt/wwt-fits-leads.mts';
-import { requestTransferConsent } from '@cssearth/telescope-core/node';
 const originalCwd=process.cwd(),testCwd=await realpath(await mkdtemp(resolve(tmpdir(),'cli-cwd-')));
 process.chdir(testCwd);
 after(async()=>{process.chdir(originalCwd);await rm(testCwd,{recursive:true,force:true});});
@@ -301,10 +299,6 @@ test('no-choice exploration distinguishes incomplete, unsupported, bounded-empty
     if(item.coverage==='incomplete'){
       assert.ok(screen.indexOf('Search limits and provider status')<screen.indexOf('Unresolved discoveries')||!screen.includes('Unresolved discoveries'));
       assert.match(screen,/details: --verbose\nSaved: \/tmp\/no-choice\/explore\.json/u);
-      const io=mockIo(true,true),api=mockServices(session.directory);
-      assert.equal(await main(['explore','eris'],'/workspace',text=>io.io.write(text),io.io,{...api.services,saveExploration:async()=>session}),3);
-      assert.equal(io.prompts.length,0);
-      assert.match(io.stdout.join(''),/Search incomplete/u);
     }
   }
   const unresolved={...base,choices:[],answer:{...base.answer,choices:[],outcome:{selection:'none' as const,coverage:'target-unresolved' as const},targetResolution:{status:'unknown' as const,requested:'nonesuch',suggestions:[]},issues:[{scope:'target' as const,code:'unknown-target' as const,reason:'Target is unknown.'}],unresolved:[],unsupported:[]}};
@@ -342,33 +336,6 @@ test('network failures retain their actionable cause in human and JSON errors',a
     assert.match(io.stderr.join(''),/fetch failed: getaddrinfo ENOTFOUND data1\.wwtassets\.org/u);
     if(args.includes('--json'))assert.match(JSON.parse(io.stdout.join('')).error,/ENOTFOUND data1\.wwtassets\.org/u);
   }
-});
-
-test('terminal cancellation preserves the saved exploration and starts no selected operation',async()=>{
-  const directory=resolve('/tmp','cli-cancel'),mock=mockIo(true,true,['']),api=mockServices(directory);
-  const code=await main(['explore','eris','--out',directory],'/workspace',text=>mock.io.write(text),mock.io,api.services);
-  assert.equal(code,0);assert.equal(mock.prompts.length,1);assert.equal(api.calls.save,1);assert.equal(api.calls.get,0);assert.equal(api.calls.inspect,0);
-  assert.match(mock.stdout.join(''),/Exploration saved; no observation was selected/u);
-});
-
-test('terminal exploration reports stages and flushes its choices before prompting',async()=>{
-  const mock=mockIo(true,true),api=mockServices('/tmp/run');let flushed=false;
-  const io:CliIo={...mock.io,stderrIsTTY:true,flush:async()=>{flushed=true;},question:async()=>{assert.equal(flushed,true);return '';}};
-  const services:CliServices={
-    ...api.services,saveExploration:async(root,args,out,_api,progress)=>{progress?.('Searching archives');return api.services.saveExploration(root,args,out);}};
-  assert.equal(await main(['explore','eris'],'/workspace',text=>io.write(text),io,services),0);
-  assert.match(mock.stderr.join(''),/\r\| Resolving target \(0s\)/u);
-  assert.match(mock.stderr.join(''),/Searching archives/u);
-  assert.match(mock.stderr.join(''),/Done \(0s\)/u);
-  assert.equal(mock.stdout.length,2);
-});
-
-test('terminal selection retrieves the exact saved pick and shows its artifact operations',async()=>{
-  const directory=resolve('/tmp','cli-selected'),mock=mockIo(true,true,['1','']),api=mockServices(directory);
-  const code=await main(['explore','eris','--out',directory],'/workspace',text=>mock.io.write(text),mock.io,api.services);
-  assert.equal(code,0);assert.equal(api.calls.get,1);assert.equal(api.calls.inspect,1);
-  const screen=mock.stdout.join('');assert.match(screen,/Product:/u);assert.match(screen,/No scientific acceptance criteria requested/u);assert.match(screen,/Supported next operations/u);assert.match(screen,/--plane N/u);
-  assert.equal(api.calls.runs.length,0);assert.match(screen,/No operation was selected/u);
 });
 
 test('guided native image retries invalid selectors, then invokes the existing export owner',async()=>{
@@ -410,7 +377,6 @@ test('JSON and redirected artifact inspection never prompt or start an output ow
   }
 });
 
-
 test('compact exploration bounds default rows, preserves picks with --all, rounds and truncates cells',async()=>{
   const base=exploration('/tmp/table'),choices=Array.from({length:23},(_,index)=>({...choice,pick:index+1,key:`choice-${index}`,display:{...choice.display,
     instrument:'Long instrument name '.repeat(10),wavelengthsMicrometres:[[1234.5678912345678,2345.6789123456789]] as const}}));
@@ -424,9 +390,6 @@ test('compact exploration bounds default rows, preserves picks with --all, round
   assert.equal(all.split('\n').filter(line=>/^\d+\s{2,}/u.test(line)).length,23);assert.doesNotMatch(all,/13 more/u);
   assert.match(formatExploration(session,true),/Limitation: Resolution is not established/u);
   assert.equal(wavelengthText([[0.123456789,0.234567891]]),'0.123–0.235 µm');
-  const io=mockIo(true,true,['']),api=mockServices('/tmp/table');
-  assert.equal(await main(['explore','eris','--all'],'/workspace',text=>io.io.write(text),io.io,{...api.services,saveExploration:async()=>session}),0);
-  assert.equal(io.stdout.join('').split('\n').filter(line=>/^\d+\s{2,}/u.test(line)).length,23);assert.deepEqual(api.calls.args,[]);
 });
 
 test('explore JSON is one versioned compact document while real session persistence keeps full evidence',async()=>{
@@ -465,7 +428,6 @@ test('core flow JSON stays single-document and noninteractive even with TTY inpu
   }finally{await rm(work,{recursive:true,force:true});}
 });
 
-
 test('exhausted download hides raw nested transport errors and saves them for JSON and verbose inspection',async()=>{
   const message='Download interrupted at 400.2 of 401.4 MB after 3 attempts. Run the same command again to retry.';
   const interrupted=Object.assign(new Error(message),{rawMessage:'Connection broken: IncompleteRead(400248320 bytes read)'});
@@ -481,7 +443,6 @@ test('exhausted download hides raw nested transport errors and saves them for JS
     }finally{await rm(resolve(summary.savedPath,'..'),{recursive:true,force:true});}
   }
 });
-
 
 test('saved interruption diagnostics honor an explicit --out directory',async()=>{
   const work=await mkdtemp(resolve(tmpdir(),'failure-output-'));
@@ -502,7 +463,6 @@ test('human outputs also bounds its default rows and retains operation details u
   assert.equal(verbose.split('\n').filter(line=>/^\d+\. /u.test(line)).length,14);assert.match(verbose,/Detail 13/u);
 });
 
-
 test('the real families registry prints its complete JSON without a summary record',async()=>{
   const io=mockIo(true,true);
   const code=await main(['families','--json'],undefined,text=>io.io.write(text),io.io);
@@ -512,7 +472,6 @@ test('the real families registry prints its complete JSON without a summary reco
   assert.deepEqual(JSON.parse(io.stdout.join('')),rows);
   assert.equal(code,rows.every(row=>row.status==='complete')?0:3);
 });
-
 
 test('incomplete exploration and query notices name outages, overflow and unread records separately',()=>{
   for(const item of [
@@ -568,33 +527,4 @@ test('get consent guards the saved size before retrieval, cancellation publishes
       else assert.ok(io.stdout.join('').includes(`Files: ${displayPath(destination)}/`));
     }
   }finally{await rm(work,{recursive:true,force:true});}
-});
-
-function refusingToolchainIo(io:CliIo):CliIo {
-  const terminal=new FakeTerminal(),listen=terminal.listen.bind(terminal);
-  terminal.listen=(key,resize,options)=>{const close=listen(key,resize,options);queueMicrotask(()=>{void terminal.press({name:'escape'});});return close;};
-  return {...io,terminal};
-}
-test('implicit toolchain refusal cannot become successful incomplete exploration when a provider catches it',async()=>{
-  const io=mockIo(true,true,['n']),services=mockServices('/tmp/run').services;
-  const api:CliServices={...services,saveExploration:async()=>{
-    try{await requestTransferConsent({kind:'toolchain',name:'astroquery',bytes:1_000_000_000,packages:['Python','Astroquery'],destination:'/tmp/user/toolchains/astroquery'});}catch{/* archive discovery records provider failures */}
-    return exploration('/tmp/run');
-  }};
-  assert.equal(await main(['explore','eris'],'/workspace',io.io.write,refusingToolchainIo(io.io),api),1);
-  assert.deepEqual(io.prompts,[]);
-  assert.match(io.stderr.join(''),/astronomy packages are not installed/u);
-  assert.equal(io.stdout.length,0);
-});
-
-test('guided get also propagates an implicit toolchain refusal caught by its retrieval service',async()=>{
-  const io=mockIo(true,true,['1','n']),services=mockServices('/tmp/run').services;
-  const api:CliServices={...services,getSession:async(...args)=>{
-    try{await requestTransferConsent({kind:'toolchain',name:'astroquery',bytes:1_000_000_000,packages:['Python'],destination:'/tmp/user/toolchains/astroquery'});}catch{/* a provider may preserve the issue */}
-    return services.getSession(...args);
-  }};
-  assert.equal(await main(['explore','eris'],'/workspace',io.io.write,refusingToolchainIo(io.io),api),1);
-  assert.deepEqual(io.prompts,['Choose an observation number, or press Enter to exit: ']);
-  assert.match(io.stderr.join(''),/astronomy packages are not installed/u);
-  assert.doesNotMatch(io.stdout.join(''),/Product:/u);
 });

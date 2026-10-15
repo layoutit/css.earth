@@ -88,7 +88,7 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
 let firstInstall: Promise<string> | undefined;
 async function installImplicitAstroquery(): Promise<string> {
   // A conservative estimate for Python plus the complete pinned scientific stack, not a measured transfer total.
-  await requestTransferConsent({ kind: 'toolchain', name: 'astronomy Python toolchain', bytes: 1_000_000_000,
+  await requestTransferConsent({ kind: 'toolchain', name: 'astroquery', bytes: 1_000_000_000,
     destination: sharedRoot(descriptor().entry),
     packages: ['micromamba', 'Python', 'Astroquery', 'Astropy', 'PyVO', 'SciPy', 'pinned astronomy dependencies'] });
   return installAstroquery();

@@ -1,12 +1,19 @@
 /** Inline Python remains source-owned TypeScript and is exercised against a local HTTP archive. */
 export const VO_DOWNLOAD_PYTHON = String.raw`
-def stream_vo_download(query, session, temporary, limit, failure):
-    import http.client, re, requests, time
+def stream_vo_download(query, session, temporary, limit, failure, identity=None, progress=False):
+    import http.client, re, requests, time, json, os
     size, total, mark = 0, None, 10000000
     resumable, validator, response = False, None, None
     interrupted = (requests.exceptions.ChunkedEncodingError, requests.exceptions.ConnectionError,
                    http.client.IncompleteRead, ConnectionResetError)
-    with open(temporary, 'wb') as output:
+    checkpoint = temporary + '.json'
+    if identity is not None and os.path.exists(temporary) and os.path.exists(checkpoint):
+        with open(checkpoint) as saved: state = json.load(saved)
+        if state.get('identity') != identity: raise failure('identity', 'Partial download belongs to another acquisition')
+        size, total = os.path.getsize(temporary), state.get('total')
+        resumable = state.get('resumable') is True and type(total) is int and 0 < size < total <= limit
+        validator = state.get('validator')
+    with open(temporary, 'r+b' if os.path.exists(temporary) else 'w+b') as output:
         for attempt in range(1, 4):
             if attempt > 1: time.sleep(2 ** (attempt - 2))
             offset = size if resumable else 0
@@ -39,10 +46,18 @@ def stream_vo_download(query, session, temporary, limit, failure):
                     if validator and validator.startswith('W/'): validator = None
                     validator = validator or response.headers.get('Last-Modified')
                 if total is not None and total > limit: raise failure('byte-limit', 'Science transfer byte limit exceeded')
+                if identity is not None:
+                    with open(checkpoint + '.tmp', 'w') as saved:
+                        json.dump({'identity':identity, 'total':total, 'resumable':resumable, 'validator':validator}, saved)
+                    os.replace(checkpoint + '.tmp', checkpoint)
+                output.seek(size)
+                if progress: print('VO progress: ' + json.dumps({'received':size, 'total':total}), file=sys.stderr, flush=True)
                 for chunk in response.iter_content(chunk_size=65536):
                     if size + len(chunk) > limit: raise failure('byte-limit', 'Science transfer byte limit exceeded')
                     output.write(chunk); size += len(chunk)
-                    if size >= mark:
+                    if identity is not None: output.flush()
+                    if progress: print('VO progress: ' + json.dumps({'received':size, 'total':total}), file=sys.stderr, flush=True)
+                    if not progress and size >= mark:
                         print(f'VO product: {size / 1e6:.1f} MB', file=sys.stderr, flush=True)
                         mark = (size // 10000000 + 1) * 10000000
                 if not size: raise failure('no-content', 'Empty science response')

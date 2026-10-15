@@ -18,3 +18,11 @@ test('does not choose a catalogue-order winner for colliding designations', () =
     { id: 'emilylakdawalla', name: 'Emilylakdawalla', matchedBy: 'alias' },
   ] });
 });
+
+
+test('interactive pickers can request six nearest suggestions without changing default resolution', () => {
+  const targets = Array.from({ length: 8 }, (_, index) => ({ id: `star-${index}`, name: `Star ${index}`, aliases: [] }));
+  const legacy = resolveTarget('unknown', targets), picker = resolveTarget('unknown', targets, { nearest: true, suggestionLimit: 6 });
+  assert.deepEqual(legacy, { status: 'unknown', requested: 'unknown', suggestions: [] });
+  assert.ok(picker.status === 'unknown'); assert.equal(picker.suggestions.length, 6);
+});

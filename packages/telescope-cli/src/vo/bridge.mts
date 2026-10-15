@@ -15,6 +15,14 @@ import { nativeQualificationRoute, planAccess, type AcquisitionSpec, type Metada
 import type { VoNetworkPolicy } from './network-policy.mts';
 import { snapshotPublisher } from './snapshot-store.mts';
 
+export interface ProviderProgress {
+  readonly archive: string;
+  readonly state: 'searching' | 'done';
+  readonly count?: number;
+  readonly reason?: string;
+}
+export type ProviderReporter = (event: ProviderProgress) => void;
+
 export interface VoInputs {
   readonly records: readonly { readonly observation: DiscoveredObservation; readonly snapshot: DiscoverySnapshot; readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }[];
   readonly services: readonly { readonly service: string; readonly state: 'sampled' | 'overflow' | 'empty-in-scope' | 'unavailable'; readonly scope: string; readonly reason: string }[];
@@ -25,7 +33,7 @@ export interface VoProductCandidate {
 }
 export async function loadVoInputs(root: string, request: DiscoveryRequest, catalogue: readonly TargetCatalogueEntry[], selectedObservation?: string,
   discoverer: typeof discover = discover, policy: VoNetworkPolicy = {}, metadataLoader?: MetadataLoader,
-  faceter: typeof discoverInstrumentFacets = discoverInstrumentFacets, selectedService?: string): Promise<VoInputs> {
+  faceter: typeof discoverInstrumentFacets = discoverInstrumentFacets, selectedService?: string, report?: ProviderReporter): Promise<VoInputs> {
   if (selectedService && !SERVICES.some(profile => profile.service === selectedService)) throw new TypeError(`The selected archive service is not registered: ${selectedService}`);
   const identities = catalogue.map(t => ({ id: t.id, names: [t.name, ...t.aliases], classification: t.archiveClass, classificationSource: t.classificationSource }));
   const target = identities.find(t => t.id === request.target);
@@ -38,6 +46,8 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
   for (const profile of SERVICES) {
     if (selectedService && profile.service !== selectedService) continue;
     if (!target && profile.model !== 'obscore-1.1') continue;
+    const archive = profile.label ?? profile.service;
+    report?.({ archive, state: 'searching' });
     let snapshots: DiscoverySnapshot[] = [], facet: Awaited<ReturnType<typeof faceter>> | undefined;
     const discoveryFailures: string[] = [];
     try {
@@ -51,6 +61,7 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
     } catch (error) { if (error instanceof DownloadCancelledError) throw error; discoveryFailures.push(error instanceof Error ? error.message : String(error)); }
     if (!snapshots.length && discoveryFailures.length) {
       services.push({ service: profile.label ?? profile.service, state: 'unavailable', scope: request.target ? 'Target-name query' : 'ICRS field query', reason: discoveryFailures.join('; ') });
+      report?.({ archive, state: 'done', reason: discoveryFailures.join('; ') });
       continue;
     }
     const rows = snapshots.reduce((count, snapshot) => count + snapshot.response.rows.length, 0);
@@ -89,6 +100,7 @@ export async function loadVoInputs(root: string, request: DiscoveryRequest, cata
       services[services.length - 1] = { ...previous, state: 'overflow',
         reason: `${previous.reason} Access descriptions exceeded the query-wide limit of ${limits.metadataRequests}; later records remain unresolved.` };
     }
+    report?.({ archive, state: 'done', count: rows, ...(services.at(-1)?.state === 'overflow' ? { reason: services.at(-1)!.reason } : {}) });
     if (selectedObservation && records.some(record => record.observation.key === selectedObservation)) break;
   }
   return { records, services };
