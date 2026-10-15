@@ -33,9 +33,9 @@
       "id": "color",
       "subject": "Color",
       "status": "included",
-      "finding": "A Planck spectrum at 25369 K from Bond et al. (2017), ApJ 840, 70, section 8: Teff 25,369 +/- 46 K from model-atmosphere fits to STIS spectra (internal error): #a5bdff, because the archives do not resolve this companion from its star.",
+      "finding": "#a4c1ff, the color Hollands, Gänsicke, Tremblay & Koester (2026), RASTI (accepted), arXiv:2610.18966, Table 6 publish for Sirius B: the Tremblay 3D non-LTE pure-hydrogen model atmosphere at 25,970 K and log g 8.570 (Tremblay et al. 2017), through the CIE 1931 2° observer into sRGB, brightest channel full; it replaces a Planck spectrum at 25,369 K (#a5bdff), because the archives do not resolve this companion from its star.",
       "evidence": [
-        "https://doi.org/10.3847/1538-4357/aa6af8"
+        "https://arxiv.org/abs/2610.18966"
       ]
     },
     {

@@ -512,9 +512,9 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           meaning: 'Color of a black body at the dayside brightness temperature measured in secondary eclipse at the cited wavelength, uniform over the disc; the planet is unresolved, and reflected starlight is not included.' } } };
       }
       case 'stellar-photometric-color': {
-        // A self-luminous photosphere with no image: one color from its measured spectrum or catalogued photometric temperature, no map.
+        // A self-luminous photosphere with no image: one color from its measured spectrum, its paper's color or its photometric temperature, no map.
         const source = await manifest;
-        const { temperature, spectrum, color, range, limbDarkening, crossCheck } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
+        const { temperature, spectrum, published, color, range, limbDarkening, crossCheck } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
           surface.science, surface.source);
         const data = Buffer.alloc(width * height * 4);
         // A published Roche-von Zeipel fit darkens the surface by latitude (gravity-darkening.mts); otherwise the color is uniform.
@@ -579,7 +579,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const modeledLimb = limbDarkening !== null && (limbDarkening.recipe.source === 'grid' ||
           ('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior'));
         return { data, channels: 4, nearest: true, plates,
-          report: { stellarPhotometricColor: { ...(temperature ? { temperature } : { spectrum }), srgb: color.srgb, linearSrgb: color.linear, ...(range ? { srgbAtBounds: range.map(bound => bound.srgb) } : {}),
+          report: { stellarPhotometricColor: { ...(published ? { published } : temperature ? { temperature } : { spectrum }), srgb: color.srgb, linearSrgb: color.linear, ...(range ? { srgbAtBounds: range.map(bound => bound.srgb) } : {}),
             ...(crossCheck ? { crossCheck } : {}),
             ...(gravity ? { gravityDarkening: { poleTemperatureK: gravity.record.poleTemperatureK, equatorTemperatureK: gravity.record.equatorTemperatureK ?? null,
               modelEquatorTemperatureK: Math.round(gravity.equatorK),
@@ -591,7 +591,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
               ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
             ...(spot ? { spotOccultation: spot } : {}),
             ...(spotFigure ? { spotFigure } : {}),
-            meaning: `${temperature ? 'Planck color at the catalogued photometric temperature' : range ? 'Color of the measured Gaia XP spectrum' : 'Color of the measured spectrum'}${limbDarkening
+            meaning: `${published ? 'The display color its paper publishes from the star\'s spectrum' : temperature ? 'Planck color at the catalogued photometric temperature' : range ? 'Color of the measured Gaia XP spectrum' : 'Color of the measured spectrum'}${limbDarkening
               ? `, dimmed${limbChannels ? ' and reddened' : ''} toward the limb by a ${modeledLimb ? `theoretical atmosphere model${limbChannels ? ', one band per color channel' : ''}` : 'law fitted to transits'}; not a resolved photosphere.` : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);

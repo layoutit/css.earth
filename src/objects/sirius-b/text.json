@@ -28,7 +28,7 @@
   "datasets": {
     "color": {
       "title": "Photosphere color",
-      "detail": "From its temperature",
+      "detail": "From a model atmosphere",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
     }
   }

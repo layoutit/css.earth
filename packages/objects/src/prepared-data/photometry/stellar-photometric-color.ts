@@ -9,12 +9,29 @@ export type StellarColorRecord = {
   /** A star with no catalogue row of its own (the unresolved second star of a close pair): the temperature its paper publishes. */
   readonly spectrum: 'planck'; readonly published: StellarTemperature & { readonly citation: string }; readonly gamut?: 'desaturate';
 } | { readonly spectrum: 'gaia-xp-sampled'; readonly spectrumPath: string; readonly sourceId: string }
-  | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord; readonly gamut?: 'desaturate' };
+  | { readonly spectrum: 'measured'; readonly measured: MeasuredSpectrumRecord; readonly gamut?: 'desaturate' }
+  | {
+    /** The display color a paper publishes for this star, computed from its spectrum the way the others here are (CIE 1931 2°
+     * observer, sRGB D65, brightest linear channel 1, 8-bit), with the CIE 1931 chromaticity the paper gives beside it. */
+    readonly spectrum: 'published-color'; readonly published: PublishedStellarColor };
+export interface PublishedStellarColor { readonly hex: string; readonly chromaticity: { readonly x: number; readonly y: number }; readonly citation: string }
 export interface StellarTemperature { readonly kelvin: number; readonly lowerKelvin: number; readonly upperKelvin: number }
 export function parseStellarColorRecord(value: unknown): StellarColorRecord {
   const input = requireRecord(value, 'stellar color record');
   if (input.schema !== STELLAR_PHOTOMETRIC_COLOR_SCHEMA) throw new TypeError(`The stellar color record must use ${STELLAR_PHOTOMETRIC_COLOR_SCHEMA}.`);
   const integer = (id: string) => { if (!/^\d+$/u.test(id)) throw new TypeError('The catalogue source id must be an integer string.'); return id; };
+  if (input.spectrum === 'published-color') {
+    if (input.temperature !== undefined) throw new TypeError('A published color takes no temperature.');
+    const published = requireRecord(input.publishedColor, 'publishedColor'), chromaticity = requireRecord(published.chromaticity, 'publishedColor.chromaticity');
+    const hex = requireString(published.hex, 'publishedColor.hex'), citation = requireString(published.citation, 'publishedColor.citation');
+    if (!/^#[0-9a-f]{6}$/iu.test(hex)) throw new TypeError(`A published color is a six-digit sRGB hex, not ${hex}.`);
+    // The colors here are scaled so the brightest channel is full; a color scaled otherwise would be a different brightness, not this one.
+    if (Math.max(...[1, 3, 5].map(at => parseInt(hex.slice(at, at + 2), 16))) !== 255) throw new TypeError(`The published color ${hex} must have its brightest channel at FF.`);
+    const x = requireFiniteNumber(chromaticity.x, 'publishedColor.chromaticity.x'), y = requireFiniteNumber(chromaticity.y, 'publishedColor.chromaticity.y');
+    if (!(x > 0 && y > 0 && x + y < 1)) throw new TypeError(`The chromaticity (${x}, ${y}) is not a color.`);
+    if (!/https?:\/\//u.test(citation)) throw new TypeError(`The published color ${hex} names its paper by URL, not "${citation}".`);
+    return { spectrum: 'published-color', published: { hex: hex.toLowerCase(), chromaticity: { x, y }, citation } };
+  }
   if (input.spectrum === 'measured') {
     if (input.temperature !== undefined) throw new TypeError('A color from a measured spectrum takes no temperature.');
     if (input.gamut !== undefined && input.gamut !== 'desaturate') throw new TypeError(`A color record's gamut mapping is 'desaturate', not ${String(input.gamut)}.`);
@@ -26,7 +43,7 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
     return { spectrum: 'gaia-xp-sampled', spectrumPath: requireString(spectrum.path, 'sampledSpectrum.path'), sourceId: integer(requireString(spectrum.sourceId, 'sampledSpectrum.sourceId')) };
   }
   const temperature = requireRecord(input.temperature, 'temperature');
-  if (input.spectrum !== 'planck') throw new TypeError('The stellar color record must name the Planck spectrum or the Gaia XP sampled spectrum it applies.');
+  if (input.spectrum !== 'planck') throw new TypeError('The stellar color record must name the Planck spectrum, a measured spectrum or a published color.');
   if (temperature.published !== undefined) {
     const published = requireRecord(temperature.published, 'temperature.published');
     const bounds = { kelvin: requireFiniteNumber(published.kelvin, 'temperature.published.kelvin'), lowerKelvin: requireFiniteNumber(published.lowerKelvin, 'temperature.published.lowerKelvin'),

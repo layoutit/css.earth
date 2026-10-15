@@ -26,7 +26,7 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere color from a blackbody at the star's published temperature. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret et al. (2020), A&A 634, A93 compute from pure-hydrogen (DA) white-dwarf model atmospheres for the Johnson V band at 25,369 K and log g 8.63 (u1 0.087, u2 0.267): a model, because no fit of this star's limb is used; its atmosphere is DA: Bond et al. (2017), ApJ 840, 70, section 8: the STIS spectra show only the Balmer lines, confirming a DA2 white dwarf with a pure hydrogen atmosphere (https://doi.org/10.3847/1538-4357/aa6af8).",
+        "qualification": "Photosphere color published by Hollands et al. (2026), arXiv:2610.18966, Table 6, from a pure-hydrogen model atmosphere at the star's temperature. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret et al. (2020), A&A 634, A93 compute from pure-hydrogen (DA) white-dwarf model atmospheres for the Johnson V band at 25,369 K and log g 8.63 (u1 0.087, u2 0.267): a model, because no fit of this star's limb is used; its atmosphere is DA: Bond et al. (2017), ApJ 840, 70, section 8: the STIS spectra show only the Balmer lines, confirming a DA2 white dwarf with a pure hydrogen atmosphere (https://doi.org/10.3847/1538-4357/aa6af8).",
         "limbDarkening": {
           "law": "quadratic",
           "path": "photometry/claret-2020-v-quadratic.tsv",

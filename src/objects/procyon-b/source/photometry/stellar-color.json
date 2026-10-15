@@ -1,16 +1,16 @@
 {
   "schema": "cssearth-stellar-photometric-color@1",
   "objectId": "procyon-b",
-  "spectrum": "planck",
-  "temperature": {
-    "published": {
-      "kelvin": 7740,
-      "lowerKelvin": 7690,
-      "upperKelvin": 7790,
-      "citation": "Provencal et al. (2002), ApJ 568, 324, as quoted by Bond et al. (2015), section 8: Teff 7740 +/- 50 K from STIS spectra: 7740 +/- 50 K, https://doi.org/10.1088/0004-637X/813/2/106"
+  "spectrum": "published-color",
+  "publishedColor": {
+    "hex": "#D9E0FF",
+    "chromaticity": {
+      "x": 0.289,
+      "y": 0.296
     },
-    "note": "The archives do not resolve this companion from its star, so the color is a Planck spectrum at its published temperature."
+    "citation": "Hollands, Gänsicke, Tremblay & Koester (2026), RASTI (accepted), arXiv:2610.18966, Table 6 (white dwarfs within 20 pc), row WD J073917.88+051326.80 Procyon B: SpT DQZ, Teff 7585 K, log g 7.960, (x, y) (0.289, 0.296), CCT 8799 K, hexcode #D9E0FF, parameters from reference 2, Giammichele et al. (2012), note c (absent from Gaia DR3); the 20 pc DQs' colors are computed from optical spectra hosted by the Montreal White Dwarf Database, not models (Section 3.5), https://arxiv.org/abs/2610.18966"
   },
+  "note": "The archives do not resolve this companion from its star, so its color is the one Hollands et al. compute from its observed spectrum rather than a Planck spectrum at its temperature.",
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1"
 }
