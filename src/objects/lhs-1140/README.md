@@ -12,6 +12,8 @@ Its radius and temperature follow Cadieux et al. 2024. The introduction is gener
 
 **Brightness from MEarth.** The Color + brightness and Brightness map datasets are made in this project from the star's MEarth light curve of its 2014, 2015, 2016 and 2017 seasons (the newest of May 2017 to February 2018), from the MEarth Project's [Data Release 11](https://lweb.cfa.harvard.edu/MEarth/DataDR11.html): one point a night, after the segment baselines and the common mode of the paper's model are taken off it by that model's own code ([source record](../../sources/mearth-light-curves.json)). It is the light curve [Newton et al. (2018, AJ 156, 217)](https://arxiv.org/abs/1807.09365) judge, and the star's row in their table (VizieR J/AJ/156/217/table1) is their verdict that it shows the star turning: the period is theirs and nothing is judged here, and starry (Luger et al. 2019) makes the map that reproduces each ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
 
+**Habitable zone dataset.** A dataset of the whole system: the star with its habitable zone as a green band in the plane of its planets' orbits. The band is its own package, a drawing of four distances the Habitable Zone Gallery calculates; its sources, processing and limits are in [its README](../lhs-1140-habitable-zone/README.md). It is a calculation, not an observation.
+
 ## Evidence
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.

@@ -104,6 +104,24 @@
         },
         "falseColor": false,
         "notes": "The color of K2-18's LAMOST spectrum. The LAMOST survey telescope observed it on 21 March 2014, with a relative flux calibration and a fibre warning in the file. No resolved image of the surface is cast here."
+      },
+      {
+        "id": "habitable-zone",
+        "label": "Habitable zone",
+        "scope": "system",
+        "thumbnail": "k2-18-dataset-color.webp",
+        "volume": {
+          "objectId": "k2-18-habitable-zone",
+          "datasetId": "plane",
+          "surface": "color"
+        },
+        "source": {
+          "id": "k2-18-habitable-zone",
+          "path": "../../k2-18-habitable-zone/source/manifest.json",
+          "url": "https://hzgallery.org/table.html"
+        },
+        "falseColor": false,
+        "notes": "The star with its habitable zone drawn as a green band in the plane of its planet' orbit. The band is a calculation, not an observation: the distances at which a planet of Earth's mass with a carbon dioxide, water and nitrogen atmosphere could keep liquid water on its surface, by the model of Kopparapu et al. (2013, 2014), as the Habitable Zone Gallery (Kane & Gelino 2012) calculates them from the star's temperature and luminosity. The darker band is the conservative zone, 0.153 to 0.297 au, between the runaway greenhouse and maximum greenhouse limits; the lighter strips extend it to the optimistic zone, 0.120 to 0.313 au, between the recent Venus and early Mars limits. Planet b (0.159 au) lies in the conservative zone. A planet in the zone is not known to be habitable."
       }
     ]
   },

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-186-habitable-zone",
+  "type": "plane-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/zone.json"
+    },
+    "host": "kepler-186",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1890655298376854300,
+        -3460124330612159500,
+        3801701436103602700
+      ],
+      "localToReferenceXyzw": [
+        0.6312788739939194,
+        0.3189502586451839,
+        0.7065563010463726,
+        -0.023149712974619707
+      ],
+      "metersPerUnit": 7322465474.817406,
+      "boundsUnits": {
+        "min": [
+          -10.24,
+          -10.24,
+          -0.1024
+        ],
+        "max": [
+          10.24,
+          10.24,
+          0.1024
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-galaxy-backing@1",
+    "url": "prepared/plane.json"
+  }
+}

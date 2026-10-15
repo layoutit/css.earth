@@ -16,6 +16,8 @@ Color dataset: The color of Gaia DR3's measured spectrum of Kepler-186. Its samp
 
 **Brightness from Kepler.** The Color + brightness and Brightness map datasets are made in this project from quarters 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15 and 16 of the star's KEPSEISMIC light curve (the newest of January to April 2013), which its authors make from the Kepler mission's pixels and keep at [MAST](https://archive.stsci.edu/hlsp/kepseismic) ([source record](../../sources/mast-kepseismic-light-curves.json)). It is the light curve [Santos et al. (2019, ApJS 244, 21)](https://arxiv.org/abs/1908.05222) judge, and the star's row in their table (VizieR J/ApJS/244/21, table 3) is their verdict that it shows the star turning: the period is theirs and nothing is judged here, and starry (Luger et al. 2019) makes the map that reproduces each ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
 
+**Habitable zone dataset.** A dataset of the whole system: the star with its habitable zone as a green band in the plane of its planet' orbit. The band is its own package, a drawing of four distances the Habitable Zone Gallery calculates; its sources, processing and limits are in [its README](../kepler-186-habitable-zone/README.md). It is a calculation, not an observation.
+
 ## Evidence
 
 Run of 2026-09-21 (this version):
