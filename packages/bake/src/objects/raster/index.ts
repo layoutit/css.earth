@@ -46,6 +46,7 @@ export { type TwoTermSinusoid, type FourierFromTransit, type EclipseNormalizedFo
   type DepositedChannels, type StarryPhaseCurve, parseStarryPhaseCurve, parsePublishedPhaseCurve, brightnessTemperature as phaseCurveBrightnessTemperature, impliedStellarTemperature, sinusoidMap, loadPublishedPhaseCurveMap,
   depositedChannelWeights, bandRadiance, bandTemperatures, publishedPhaseCurveMap } from './eclipse-map/published-phase-curve-map.ts';
 export * from './hot-region-map.ts';
+export * from './eclipse-map/energy-balance-map.ts';
 export * from './record-keys.ts';
 export * from './sbmt-symbols.ts';
 export * from './scientific-raster.ts';

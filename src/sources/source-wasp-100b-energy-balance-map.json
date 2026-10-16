@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-100b-energy-balance-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-100 b · wasp 100b energy balance map",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2001.10580",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-100b/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jansen & Kipping (2020); their heat-transport model fitted to the TESS phase curve",
+      "scope": "The wasp 100b energy balance map input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

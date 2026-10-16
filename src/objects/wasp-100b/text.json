@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-100b",
+  "card": {
+    "text": "WASP-100 b was found in 2014 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-15",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.84938272598, pl_radj 1.33, pl_bmassj 1.26"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-100. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-15",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.84938272598, pl_radj 1.33, pl_bmassj 1.26"
+      }
+    ]
+  },
+  "datasets": {
+    "temperature": {
+      "title": "TESS heat map",
+      "detail": "Published model fit, 2020",
+      "summary": "Temperature from the paper's heat-transport model fitted to the TESS phase curve: hottest 66° east of noon."
+    },
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,350 K day side measured in eclipse."
+    }
+  }
+}
