@@ -4,14 +4,15 @@
   "spectrum": "planck",
   "temperature": {
     "published": {
-      "kelvin": 3353,
-      "lowerKelvin": 3319,
-      "upperKelvin": 3387,
-      "citation": "Lendl et al. 2020, equilibrium temperature (NASA Exoplanet Archive planetary systems table): 3353 +/- 34 K, https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract"
+      "kelvin": 3121,
+      "lowerKelvin": 2940,
+      "upperKelvin": 3302,
+      "citation": "Patel et al. 2026, dayside brightness temperature fitted with the geometric albedo to the TESS and CHEOPS occultation depths: 3121 +/- 181 K, https://ui.adsabs.harvard.edu/abs/2026A&A...706A..75P/abstract"
     },
-    "note": "Nobody has measured its heat or imaged it; this is the equilibrium temperature its paper computes from its star's light, an estimate, so the color is a Planck spectrum at its published temperature.",
-    "chosen": "1 paper in the archive prints one; the archive's default parameter set",
-    "estimate": true
+    "note": "Its day side's brightness temperature is measured in secondary eclipse in the TESS and CHEOPS bands together (TESS and CHEOPS) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the paper's own value (+145, -181 K; the larger is kept), with reflected light fitted (geometric albedo 0.24 ± 0.07) under a flat albedo spectrum the paper says may not be correct; Lendl et al. 2020 (3,348 K) and Deline et al. 2022 (3,542 K) assume the planet reflects no light",
+    "band": "the TESS and CHEOPS bands together",
+    "facility": "TESS and CHEOPS"
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1",

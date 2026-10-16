@@ -115,8 +115,8 @@
     {
       "id": "wasp-189b-thermal-color",
       "path": "photometry/thermal-color.json",
-      "origin": "https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract",
-      "credit": "Lendl et al. 2020, equilibrium temperature (NASA Exoplanet Archive planetary systems table); CIE 1931 2° observer",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A..75P/abstract",
+      "credit": "Patel et al. 2026, dayside brightness temperature fitted with the geometric albedo to the TESS and CHEOPS occultation depths; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Authored method record: names the archive row chosen and the color computation applied",
       "redistribution": "Method record only",
@@ -126,7 +126,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored color recipe naming the cited equilibrium temperature; repinned when edited."
+        "reason": "Project-authored color recipe naming the cited brightness temperature; repinned when edited."
       }
     }
   ],
