@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hat-p-30",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 911,367 km at 208.17 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 208.17331897926607,
+  "distanceSource": "Gaia DR3 parallax 4.8037 +/- 0.0148 mas (same row, RUWE 0.72): 208.17 pc, no zero-point correction",
+  "radiusKm": 911367,
+  "radiusSource": "Radius 1.31 +/- 0.13 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-30 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 911,367 km at 695,700 km per solar radius. Mass 1.55 +/- 0.51 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-30 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 6304 +/- 88 K from Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-30 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6304,
+  "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-30 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "surfaceGravityLogg": 4.39,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-30.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.394, rounded to two decimals",
+  "spectralType": "F7",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-30 (pscomppars): spectral type F7, from Luo et al. 2018 (http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=V/153/stellar4)",
+  "objectType": "Emission-line Star",
+  "objectTypePath": "* > Em*",
+  "objectTypeSource": "SIMBAD, BD+06 1909: main object type Em*, Emission-line Star",
+  "metallicityDex": 0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-30 (pscomppars): [Fe/H] 0.13 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.312,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-30 (pscomppars): log10 of the luminosity in solar units 0.312, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-30 (pscomppars): age 1 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 2.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-30 (pscomppars): projected rotation speed 2.2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

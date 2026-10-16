@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-78",
+  "parent": "wasp-78-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-78",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1711422
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-78-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-78",
+      "classification": "star",
+      "color": "#faf4ff",
+      "distanceAu": 148916118.9,
+      "description": "WASP-78 b crosses WASP-78 as seen from Earth, which is how it was found.",
+      "systemName": "WASP-78 system",
+      "order": 5930,
+      "context": {
+        "order": 5927
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9126097085022658000,
+        18510996519652487000,
+        -8387245949056943000
+      ],
+      "presentationToReference": [
+        0.40965466521340105,
+        -0.1664800195644541,
+        0.8969210992917466,
+        0.8309265189025534,
+        -0.3376811788347104,
+        -0.44219061686707545,
+        -0.37648927667781,
+        -0.9264209758779317,
+        7.140879037157001e-9
+      ],
+      "orbitUpReference": [
+        0.1664800195644541,
+        0.3376811788347104,
+        0.9264209758779317
+      ],
+      "metersPerUnit": 5520716.129032258,
+      "bodyRadiusM": 1711422000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

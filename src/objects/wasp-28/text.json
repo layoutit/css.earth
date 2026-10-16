@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-28",
+  "card": {
+    "text": "WASP-28 b crosses WASP-28 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-ab5598",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+        "label": "Močnik et al. (2020), Publications of the Astronomical Society of the Pacific 132 014401",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017, MO__X10D_NIK_ET_AL__2020): st_teff 6150, st_rad 1.083, st_mass 0.993"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-28",
+        "url": "https://en.wikipedia.org/wiki/WASP-28",
+        "label": "Wikipedia, \"WASP-28\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374435559",
+        "quote": "WASP-28 is a F8V-type main sequence star located 1116 light-years from Earth in the constellation of Pisces."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius follows Mo&#x10D;nik et al. 2020, and its temperature Bonomo et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-ab5598",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+        "label": "Močnik et al. (2020), Publications of the Astronomical Society of the Pacific 132 014401",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017, MO__X10D_NIK_ET_AL__2020): st_teff 6150, st_rad 1.083, st_mass 0.993"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-28",
+        "url": "https://en.wikipedia.org/wiki/WASP-28",
+        "label": "Wikipedia, \"WASP-28\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374435559",
+        "quote": "It has a mass of 0.9 solar masses and a radius of 1.08 solar radii."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

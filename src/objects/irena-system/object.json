@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "irena-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "irena"
+    },
+    "catalog": {
+      "name": "Irena system",
+      "systemName": "Irena system",
+      "classification": "planetary-system",
+      "color": "#fff4f2",
+      "distanceAu": 28111808.4,
+      "description": "A star about 140 parsecs away, 1.5 times the Sun's width, measured by Gaia."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1817989440186925600,
+        -3720773247350435300,
+        732605475645002100
+      ],
+      "presentationToReference": [
+        -0.43229180717850524,
+        -0.07647657196964332,
+        -0.8984849065989444,
+        -0.884746498324425,
+        -0.1565208008184884,
+        0.4390044106997187,
+        0.17420512951405942,
+        -0.9847093849714803,
+        -2.805928534222933e-7
+      ],
+      "orbitUpReference": [
+        0.07647657196964332,
+        0.1565208008184884,
+        0.9847093849714803
+      ],
+      "metersPerUnit": 3409959.0322580645,
+      "bodyRadiusM": 1057087300
+    }
+  }
+}

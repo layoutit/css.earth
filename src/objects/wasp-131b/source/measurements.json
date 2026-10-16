@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-131b",
+  "radiusKm": 87649.2,
+  "radiusSource": "Radius 1.226 Jupiter radii from Doyle et al. 2023 (2023MNRAS.522.4499D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract): 87,649.2 km at 71,492 km per Jupiter radius. GM from the mass 0.273 Jupiter masses (Doyle et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023MNRAS.522.4499D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.3220125,
+  "orbitalPeriodSource": "Doyle et al. 2023 (2023MNRAS.522.4499D), via the NASA Exoplanet Archive ps table (pl_refname DOYLE_ET_AL__2023): P 5.3220125 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of WASP-131 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.273 Jupiter masses: Doyle et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023MNRAS.522.4499D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract)."
+}

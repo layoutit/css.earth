@@ -1,0 +1,47 @@
+{
+  "id": "hat-p-16",
+  "name": "HAT-P-16",
+  "system": "HAT-P-16 system",
+  "description": "Star of 6,158 K, 227 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "HAT-P-16",
+  "gaia": "381592313648387200",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+    "credit": "Alexoudi 2022"
+  },
+  "radius": {
+    "value": 1.237,
+    "source": "Bonomo et al. 2017, the stellar radius of HAT-P-16 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+    "uncertainty": 0.054
+  },
+  "mass": {
+    "value": 1.218,
+    "source": "Bonomo et al. 2017, the stellar mass of HAT-P-16 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+    "uncertainty": 0.039
+  },
+  "temperature": {
+    "value": 6158,
+    "source": "Yalçınkaya et al. 2024, the stellar temperature of HAT-P-16 b's parameter set from Yalçınkaya et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-16 b crosses HAT-P-16 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Bonomo et al. 2017, and its temperature Yalçınkaya et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname YALCINKAYA_ET_AL_2024, BONOMO_ET_AL__2017): st_teff 6158, st_rad 1.237, st_mass 1.218",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-16",
+      "title": "HAT-P-16",
+      "revision": "1370776712",
+      "card": "HAT-P-16 is a F-type main-sequence star about 725 light-years away.",
+      "introduction": "The star has a concentration of heavy elements slightly higher than solar abundance, and low starspot activity."
+    }
+  },
+  "notes": [],
+  "order": 5904
+}

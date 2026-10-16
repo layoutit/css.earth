@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-131-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-131"
+    },
+    "catalog": {
+      "name": "WASP-131 system",
+      "systemName": "WASP-131 system",
+      "classification": "planetary-system",
+      "color": "#fff3f0",
+      "distanceAu": 39846656.8,
+      "description": "WASP-131 b crosses WASP-131 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4435511218711653000,
+        -2580866792104060400,
+        -3032917717167151600
+      ],
+      "presentationToReference": [
+        -0.7440917737410333,
+        0.4397675479801055,
+        -0.5029233897866439,
+        -0.4329606339453876,
+        0.2558847894036871,
+        0.8643309921583506,
+        -0.5087951667464334,
+        -0.8608876107224429,
+        -2.6954133481624154e-7
+      ],
+      "orbitUpReference": [
+        -0.4397675479801055,
+        -0.2558847894036871,
+        0.8608876107224429
+      ],
+      "metersPerUnit": 3503186.129032258,
+      "bodyRadiusM": 1085987700
+    }
+  }
+}

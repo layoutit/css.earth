@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hat-p-16b",
+  "displayName": "HAT-P-16 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1002-asna-20224012",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A",
+          "label": "Alexoudi 2022",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.78 days",
+        "source": {
+          "catalogueId": "doi-10-1002-asna-20224012",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A",
+          "label": "Alexoudi 2022",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.2 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201629882",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B",
+          "label": "Bonomo et al. 2017",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,855 K. The disc itself is unresolved.",
+        "thumbnail": "hat-p-16b-dataset-thermal.webp",
+        "surface": "hat-p-16b-surface-thermal@2x.webp",
+        "poles": "hat-p-16b-poles-thermal@2x.webp",
+        "source": {
+          "id": "hat-p-16b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of HAT-P-16 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hat-p-16b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-16b/hat-p-16b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-16's planets in this map from above, to scale, with HAT-P-16 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-16b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A"
+      }
+    },
+    {
+      "id": "hat-p-16b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-16b/hat-p-16b-transit.svg",
+      "alt": "HAT-P-16 b crossing its star, as TESS recorded it: 3 sectors (17, 57, 84) of the SPOC pipeline's 2-minute light curves of TIC 191284318, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-16b-tess-sector-17",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019279210107-s0017-0000000191284318-0161-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Alexoudi 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+      "credit": "Alexoudi 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-16b.json",
+      "credit": "Radius from Alexoudi 2022 (2022AN....34324012A), via the NASA Exoplanet Archive; mass from Bonomo et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017A&A...602A.107B), via the NASA Exoplanet Archive; orbit from Alexoudi 2022 (2022AN....34324012A), via the NASA Exoplanet Archive"
+    }
+  }
+}

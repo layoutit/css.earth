@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "kelt-14",
+  "displayName": "KELT-14",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-128-964-064401",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T",
+          "label": "Turner et al. (2016), Publications of the Astronomical Society of the Pacific 128 064401",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "247 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-kelt-14",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "kelt-14-dataset-color.webp",
+        "surface": "kelt-14-surface-color@2x.webp",
+        "poles": "kelt-14-poles-color@2x.webp",
+        "source": {
+          "id": "kelt-14-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gaia.ari.uni-heidelberg.de/tap/sync"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,720 K and log g 4.17 (u1 0.467, u2 0.255): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Turner et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+      "credit": "Turner et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kelt-14.json",
+      "credit": "Turner et al. 2016, the stellar radius of the default parameter set of KELT-14 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

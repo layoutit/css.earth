@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kelt-3-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kelt-3"
+    },
+    "catalog": {
+      "name": "KELT-3 system",
+      "systemName": "KELT-3 system",
+      "classification": "planetary-system",
+      "color": "#f1efff",
+      "distanceAu": 43097875.2,
+      "description": "KELT-3 b crosses KELT-3 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4193526926139785700,
+        2555421471968611000,
+        4177616514884235000
+      ],
+      "presentationToReference": [
+        -0.6504257170782626,
+        -0.5533203192860003,
+        0.5203681493216766,
+        0.3963517756353048,
+        0.3371769280067992,
+        0.8539420291627756,
+        0.6479596102489483,
+        -0.7616746966291689,
+        -9.458630319819863e-7
+      ],
+      "orbitUpReference": [
+        0.5533203192860003,
+        -0.3371769280067992,
+        0.7616746966291689
+      ],
+      "metersPerUnit": 3815129.0322580645,
+      "bodyRadiusM": 1182690000
+    }
+  }
+}

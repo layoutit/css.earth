@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-16",
+  "card": {
+    "text": "HAT-P-16 b crosses HAT-P-16 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1002-asna-20224012",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "label": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname YALCINKAYA_ET_AL_2024, BONOMO_ET_AL__2017): st_teff 6158, st_rad 1.237, st_mass 1.218"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-16",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-16",
+        "label": "Wikipedia, \"HAT-P-16\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370776712",
+        "quote": "HAT-P-16 is a F-type main-sequence star about 725 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius follows Bonomo et al. 2017, and its temperature Yalçınkaya et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1002-asna-20224012",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "label": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname YALCINKAYA_ET_AL_2024, BONOMO_ET_AL__2017): st_teff 6158, st_rad 1.237, st_mass 1.218"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-16",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-16",
+        "label": "Wikipedia, \"HAT-P-16\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370776712",
+        "quote": "The star has a concentration of heavy elements slightly higher than solar abundance, and low starspot activity."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-96b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.2 Jupiter radii from Hellier et al. 2014 (2014MNRAS.440.1982H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.48 Jupiter masses: Hellier et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014MNRAS.440.1982H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Nikolov et al. 2022 (2022MNRAS.515.3037N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2022): P 3.4252565 d; Hellier et al. 2014 (2014MNRAS.440.1982H), via the NASA Exoplanet Archive ps table (pl_refname HELLIER_ET_AL__2014): a/R* derived from its semi-major axis 0.0453 au and stellar radius 1.05 solar radii; Hellier et al. 2014 (2014MNRAS.440.1982H), via the NASA Exoplanet Archive ps table (pl_refname HELLIER_ET_AL__2014): inclination 85.6 degrees; Hellier et al. 2014 (2014MNRAS.440.1982H), via the NASA Exoplanet Archive ps table (pl_refname HELLIER_ET_AL__2014): e 0; Nikolov et al. 2022 (2022MNRAS.515.3037N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2022): transit mid-time 2457963.84067 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.3037N/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 1,569 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ff7100. Chosen from the archive's emission rows by rule: 1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+      ]
+    }
+  ]
+}

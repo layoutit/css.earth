@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-87b",
+  "displayName": "WASP-87 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.4 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-823-1-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A",
+          "label": "Addison et al. 2016",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "40 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-823-1-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A",
+          "label": "Addison et al. 2016",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.2 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-823-1-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A",
+          "label": "Addison et al. 2016",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,956 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-87b-dataset-thermal.webp",
+        "surface": "wasp-87b-surface-thermal@2x.webp",
+        "poles": "wasp-87b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-87b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-87 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-87b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-87b/wasp-87b-system-orbits.svg",
+      "alt": "The orbits of WASP-87's planets in this map from above, to scale, with WASP-87 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-87b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A"
+      }
+    },
+    {
+      "id": "wasp-87b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-87b/wasp-87b-transit.svg",
+      "alt": "WASP-87 b crossing its star, as TESS recorded it: 3 sectors (99, 100, 101) of the SPOC pipeline's 2-minute light curves of TIC 15445551, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-87b-tess-sector-99",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026005125623-s0099-0000000015445551-0300-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Addison et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract",
+      "credit": "Addison et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-87b.json",
+      "credit": "Radius from Addison et al. 2016 (2016ApJ...823...29A), via the NASA Exoplanet Archive; mass from Addison et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016ApJ...823...29A), via the NASA Exoplanet Archive; orbit from Addison et al. 2016 (2016ApJ...823...29A), via the NASA Exoplanet Archive"
+    }
+  }
+}

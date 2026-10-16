@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-35b",
+  "parent": "wasp-35-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-35 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 92939.6
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-35 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 41744929.3,
+      "description": "WASP-35 b was found in 2011 by SuperWASP as it crossed its star.",
+      "systemName": "WASP-35 system",
+      "order": 5920,
+      "context": {
+        "order": 5920
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1493251370311341300,
+        6025810362961740000,
+        -677673960583540100
+      ],
+      "presentationToReference": [
+        0.2044107425881984,
+        0.9785371460450907,
+        0.026101764776931824,
+        0.972859477411055,
+        -0.2060342982929021,
+        0.10532950744421166,
+        -0.10844669439881549,
+        -0.0038628664072716994,
+        0.9940947604414228
+      ],
+      "orbitUpReference": [
+        -0.9785371460450907,
+        0.2060342982929021,
+        0.0038628664072716994
+      ],
+      "metersPerUnit": 299805.1612903226,
+      "bodyRadiusM": 92939600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

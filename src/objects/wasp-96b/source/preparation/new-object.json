@@ -1,0 +1,33 @@
+{
+  "host": "wasp-96",
+  "planets": [
+    {
+      "id": "wasp-96b",
+      "name": "WASP-96 b",
+      "description": "Transiting planet of WASP-96 with a 3.43-day year, found in 2014.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract",
+        "credit": "Hellier et al. 2014"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HELLIER_ET_AL__2014"
+      },
+      "text": {
+        "card": "WASP-96 b was found in 2014 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-96. Its orbit and size follow Hellier et al. 2014's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HELLIER_ET_AL__2014): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.4252565, pl_radj 1.2, pl_bmassj 0.48"
+      },
+      "thermal": {
+        "temperatureK": 1569,
+        "uncertaintyK": 142,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5936
+    }
+  ]
+}

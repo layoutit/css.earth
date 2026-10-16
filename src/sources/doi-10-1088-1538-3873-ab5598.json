@@ -1,0 +1,46 @@
+{
+  "id": "doi-10-1088-1538-3873-ab5598",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Močnik et al. (2020): <i>K2</i> Looks Toward WASP-28 and WASP-151",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/1538-3873/ab5598"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020PASP..132a4401M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M",
+      "checkedOn": "2026-10-16",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Močnik et al. (2020), Publications of the Astronomical Society of the Pacific 132 014401",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of the Pacific 132 014401",
+  "creators": [
+    "T. Močnik",
+    "C. Hellier",
+    "D. R. Anderson"
+  ],
+  "publicationDate": "2020"
+}

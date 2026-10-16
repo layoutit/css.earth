@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-87",
+  "displayName": "WASP-87",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.6 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-823-1-29",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A",
+          "label": "Addison et al. (2016), The Astrophysical Journal 823 29",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "301 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-wasp-87",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "wasp-87-dataset-color.webp",
+        "surface": "wasp-87-surface-color@2x.webp",
+        "poles": "wasp-87-poles-color@2x.webp",
+        "source": {
+          "id": "wasp-87-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,450 K and log g 4.1 (u1 0.355, u2 0.312): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Addison et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract",
+      "credit": "Addison et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-87.json",
+      "credit": "Addison et al. 2016, the stellar radius of the default parameter set of WASP-87 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

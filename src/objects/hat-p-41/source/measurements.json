@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hat-p-41",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,426,185 km at 351.16 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 351.1617387263864,
+  "distanceSource": "Gaia DR3 parallax 2.8477 +/- 0.0176 mas (same row, RUWE 0.98): 351.16 pc, no zero-point correction",
+  "radiusKm": 1426185,
+  "radiusSource": "Radius 2.05 +/- 0.5 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-41 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 1,426,185 km at 695,700 km per solar radius. Mass 2.56 +/- 1.9 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-41 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 6390 +/- 100 K from Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-41 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6390,
+  "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-41 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "surfaceGravityLogg": 4.22,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-41.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.223, rounded to two decimals",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, HAT-P-41: main object type *, Star",
+  "metallicityDex": 0.21,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-41 (pscomppars): [Fe/H] 0.21 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.628,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-41 (pscomppars): log10 of the luminosity in solar units 0.628, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 2.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-41 (pscomppars): age 2.2 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 19.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-41 (pscomppars): projected rotation speed 19.6 km/s, from Johnson et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..137J/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

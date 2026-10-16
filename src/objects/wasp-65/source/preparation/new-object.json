@@ -1,0 +1,40 @@
+{
+  "id": "wasp-65",
+  "name": "WASP-65",
+  "system": "WASP-65 system",
+  "description": "Star of 5,600 K, 274 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-65",
+  "gaia": "596931979481073152",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "credit": "Gomez et al. 2013"
+  },
+  "radius": {
+    "value": 1.01,
+    "source": "Gomez et al. 2013, the stellar radius of the default parameter set of WASP-65 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "uncertainty": 0.05
+  },
+  "mass": {
+    "value": 0.93,
+    "source": "Gomez et al. 2013, the stellar mass of the default parameter set of WASP-65 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "uncertainty": 0.14
+  },
+  "temperature": {
+    "value": 5600,
+    "source": "Gomez et al. 2013, the stellar temperature of the default parameter set of WASP-65 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-65 b crosses WASP-65 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gomez et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_ET_AL__2013): st_teff 5600, st_rad 1.01, st_mass 0.93"
+  },
+  "notes": [],
+  "order": 5925
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-16-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-16"
+    },
+    "catalog": {
+      "name": "HAT-P-16 system",
+      "systemName": "HAT-P-16 system",
+      "classification": "planetary-system",
+      "color": "#fff7fe",
+      "distanceAu": 45879110.5,
+      "description": "HAT-P-16 b crosses HAT-P-16 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4992721577560585000,
+        842030725320867700,
+        4633595978915288000
+      ],
+      "presentationToReference": [
+        0.7274394548786137,
+        0.665713816831492,
+        0.16630379901118292,
+        0.12268386336025348,
+        0.11227476669813345,
+        -0.9860745643377494,
+        0.6751151821407276,
+        -0.737712336105698,
+        -7.521423261489486e-7
+      ],
+      "orbitUpReference": [
+        -0.665713816831492,
+        -0.11227476669813345,
+        0.737712336105698
+      ],
+      "metersPerUnit": 2776067.419354839,
+      "bodyRadiusM": 860580900
+    }
+  }
+}

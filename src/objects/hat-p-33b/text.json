@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-33b",
+  "card": {
+    "text": "HAT-P-33 b was found in 2011 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 3.47447703, pl_radj 1.85, pl_bmassj 0.92"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-33b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-33b",
+        "label": "Wikipedia, \"HAT-P-33b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374169146",
+        "quote": "HAT-P-33b is a planet in the orbit of HAT-P-33, which lies 1,310 light-years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HAT-P-33. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 3.47447703, pl_radj 1.85, pl_bmassj 0.92"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-33b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-33b",
+        "label": "Wikipedia, \"HAT-P-33b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374169146",
+        "quote": "Its discovery was reported in June 2011, although it was suspected to be a planet as early as 2004."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,067 K day side measured in eclipse."
+    }
+  }
+}

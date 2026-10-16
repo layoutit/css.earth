@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-87",
+  "card": {
+    "text": "WASP-87 b crosses WASP-87 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-823-1-29",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract",
+        "label": "Addison et al. (2016), The Astrophysical Journal 823 29",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2016): st_teff 6450, st_rad 1.627, st_mass 1.204"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Addison et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-823-1-29",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract",
+        "label": "Addison et al. (2016), The Astrophysical Journal 823 29",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2016): st_teff 6450, st_rad 1.627, st_mass 1.204"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

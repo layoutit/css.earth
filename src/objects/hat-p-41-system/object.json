@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-41-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-41"
+    },
+    "catalog": {
+      "name": "HAT-P-41 system",
+      "systemName": "HAT-P-41 system",
+      "classification": "planetary-system",
+      "color": "#fff6fc",
+      "distanceAu": 72432381.2,
+      "description": "HAT-P-41 b crosses HAT-P-41 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4957078987588739000,
+        -9594859265183883000,
+        882659790056203400
+      ],
+      "presentationToReference": [
+        0.4574753014518736,
+        0.03738956800414178,
+        -0.8884359114567472,
+        -0.885483395709109,
+        -0.07237074470700618,
+        -0.4590006876182418,
+        0.08145860596022267,
+        -0.9966767256814102,
+        -1.338926988026331e-8
+      ],
+      "orbitUpReference": [
+        -0.03738956800414178,
+        0.07237074470700618,
+        0.9966767256814102
+      ],
+      "metersPerUnit": 4600596.774193549,
+      "bodyRadiusM": 1426185000
+    }
+  }
+}

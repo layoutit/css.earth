@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-87b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.385 Jupiter radii from Addison et al. 2016 (2016ApJ...823...29A), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "2.18 Jupiter masses: Addison et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016ApJ...823...29A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 1.68279422 d; Addison et al. 2016 (2016ApJ...823...29A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2016): a/R* derived from its semi-major axis 0.02946 au and stellar radius 1.627 solar radii; Addison et al. 2016 (2016ApJ...823...29A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2016): inclination 81.07 degrees; Addison et al. 2016 (2016ApJ...823...29A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2016): e 0; Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458276.86087 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 2,956 K dayside brightness temperature measured in secondary eclipse at 4.5 µm (Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ffb66a. Chosen from the archive's emission rows by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+      ]
+    }
+  ]
+}

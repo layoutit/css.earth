@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-28b",
+  "card": {
+    "text": "WASP-28 b was found in 2014 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-ab5598",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+        "label": "Močnik et al. 2020",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MO__X10D_NIK_ET_AL__2020): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.40883495, pl_radj 1.219, pl_bmassj 0.889"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-28b",
+        "url": "https://en.wikipedia.org/wiki/WASP-28b",
+        "label": "Wikipedia, \"WASP-28b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374243345",
+        "quote": "WASP-28b or K2-1b is an extrasolar planet discovered in 2010 by the Wide Angle Search for Planets (WASP) project orbiting WASP-28, a magnitude 12 star also known as 1SWASP J233427.87-013448.1, 2MASS J23342787-0134482 and K2-1."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-28. Its orbit and size follow Mo&#x10D;nik et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-ab5598",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+        "label": "Močnik et al. 2020",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MO__X10D_NIK_ET_AL__2020): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.40883495, pl_radj 1.219, pl_bmassj 0.889"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-28b",
+        "url": "https://en.wikipedia.org/wiki/WASP-28b",
+        "label": "Wikipedia, \"WASP-28b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374243345",
+        "quote": "Since it orbits its star very closely, the planet is a strongly irradiated hot Jupiter."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,548 K day side measured in eclipse."
+    }
+  }
+}

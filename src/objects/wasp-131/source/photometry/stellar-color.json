@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wasp-131",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5990,
+      "lowerKelvin": 5940,
+      "upperKelvin": 6040,
+      "citation": "Doyle et al. 2023, the stellar temperature of the default parameter set of WASP-131 b in the NASA Exoplanet Archive: 5990 +/- 50 K, https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 122173 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-65",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 702,657 km at 275.01 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 275.0091069060827,
+  "distanceSource": "Gaia DR3 parallax 3.6362 +/- 0.0202 mas (same row, RUWE 1.15): 275.01 pc, no zero-point correction",
+  "radiusKm": 702657,
+  "radiusSource": "Radius 1.01 +/- 0.05 solar radii from Gomez et al. 2013, the stellar radius of the default parameter set of WASP-65 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract): 702,657 km at 695,700 km per solar radius. Mass 0.93 +/- 0.14 solar masses from Gomez et al. 2013, the stellar mass of the default parameter set of WASP-65 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract); GM is that mass times the JPL solar GM. Temperature 5600 +/- 100 K from Gomez et al. 2013, the stellar temperature of the default parameter set of WASP-65 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5600,
+  "effectiveTemperatureSource": "Gomez et al. 2013, the stellar temperature of the default parameter set of WASP-65 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract)",
+  "surfaceGravityLogg": 4.4,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-65.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.398, rounded to two decimals",
+  "spectralType": "G6",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-65 (pscomppars): spectral type G6, from Gomez et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract)",
+  "objectType": "Emission-line Star",
+  "objectTypePath": "* > Em*",
+  "objectTypeSource": "SIMBAD, WASP-65: main object type Em*, Emission-line Star",
+  "metallicityDex": -0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-65 (pscomppars): [Fe/H] -0.07 dex, from Gomez et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract)",
+  "luminosityLogSolar": 0.055,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-65 (pscomppars): log10 of the luminosity in solar units 0.05497, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-65 (pscomppars): age 8 Gyr, from Gomez et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract)",
+  "projectedRotationSpeedKmS": 3.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-65 (pscomppars): projected rotation speed 3.6 km/s, from Gomez et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

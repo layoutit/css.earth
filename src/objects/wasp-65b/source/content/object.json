@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-65b",
+  "displayName": "WASP-65 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201322314",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G",
+          "label": "Chew et al. 2013",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.31 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201322314",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G",
+          "label": "Chew et al. 2013",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.6 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201322314",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G",
+          "label": "Chew et al. 2013",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,879 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-65b-dataset-thermal.webp",
+        "surface": "wasp-65b-surface-thermal@2x.webp",
+        "poles": "wasp-65b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-65b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-65 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-65b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-65b/wasp-65b-system-orbits.svg",
+      "alt": "The orbits of WASP-65's planets in this map from above, to scale, with WASP-65 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-65b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G"
+      }
+    },
+    {
+      "id": "wasp-65b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-65b/wasp-65b-transit.svg",
+      "alt": "WASP-65 b crossing its star, as TESS recorded it: 3 sectors (61, 72, 88) of the SPOC pipeline's 2-minute light curves of TIC 444013020, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-65b-tess-sector-61",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023018032328-s0061-0000000444013020-0250-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gomez et al. 2013",
+      "href": "https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract",
+      "credit": "Gomez et al. 2013"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-65b.json",
+      "credit": "Radius from Gomez et al. 2013 (2013A&A...559A..36G), via the NASA Exoplanet Archive; mass from Gomez et al. 2013, the mass the NASA Exoplanet Archive's composite table adopts (2013A&A...559A..36G), via the NASA Exoplanet Archive; orbit from Gomez et al. 2013 (2013A&A...559A..36G), via the NASA Exoplanet Archive"
+    }
+  }
+}

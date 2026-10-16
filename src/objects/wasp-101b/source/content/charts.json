@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-101b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-101b-orbits",
+      "title": "WASP-101 b: orbits around WASP-101",
+      "output": "wasp-101b-system-orbits.svg",
+      "system": "wasp-101",
+      "highlight": "wasp-101b",
+      "description": "The orbits of WASP-101's planets in this map from above, to scale, with WASP-101 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.585707 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "wasp-101b-transmission",
+      "title": "WASP-101 b: transmission spectrum",
+      "description": "WASP-101 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 15 measured bins from Wakeford et al. 2017 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "wasp-101b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2017ApJ...835L..12W/abstract",
+        "table": "transitspec",
+        "bins": 15
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 15
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 1.75,
+        "ticks": [
+          1,
+          1.25,
+          1.5,
+          1.75
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 1.125,
+        "maximum": 1.225,
+        "ticks": [
+          1.125,
+          1.15,
+          1.175,
+          1.2,
+          1.225
+        ]
+      },
+      "notes": [
+        "Wakeford et al. 2017",
+        "Hubble Space Telescope satellite, Wide Field Camera…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-101b-transit",
+      "title": "WASP-101 b: its transit",
+      "description": "WASP-101 b crossing its star, as TESS recorded it: 3 sectors (6, 33, 107) of the SPOC pipeline's 2-minute light curves of TIC 47911178, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-101b-transit.svg",
+      "metadata": {
+        "tic": "TIC 47911178",
+        "sectors": [
+          6,
+          33,
+          107
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-101b",
+      "sources": [
+        "photometry/tess/tess2018349182500-s0006-0000000047911178-0126-s_lc.fits",
+        "photometry/tess/tess2020351194500-s0033-0000000047911178-0203-s_lc.fits",
+        "photometry/tess/tess2026221103959-s0107-0000000047911178-0309-s_lc.fits"
+      ],
+      "durationHours": 2.7072065,
+      "binMinutes": 11,
+      "notes": [
+        "TESS 2-min SPOC · sectors 6, 33, 107",
+        "Folded on the app's orbit; 11-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

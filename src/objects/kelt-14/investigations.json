@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kelt-14",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5560886336446650240: position at J2016.0. Distance: Gaia DR3 parallax 4.0549 +/- 0.0099 mas (same row, RUWE 0.91): 246.62 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -11.149, -1.765 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.52 +/- 0.03 solar radii from Turner et al. 2016, the stellar radius of the default parameter set of KELT-14 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract). Mass 1.239 +/- 0.039 solar masses from Turner et al. 2016, the stellar mass of the default parameter set of KELT-14 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract). Temperature 5720 +/- 130 K from Turner et al. 2016, the stellar temperature of the default parameter set of KELT-14 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,720 K and log g 4.17 (u1 0.467, u2 0.255): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

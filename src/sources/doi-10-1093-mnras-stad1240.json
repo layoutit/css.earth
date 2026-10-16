@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad1240",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Doyle et al. (2023): WASP-131 b with ESPRESSO – I. A bloated sub-Saturn on a polar orbit around a differentially rotating solar-type star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2304.12163"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad1240"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.522.4499D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad1240",
+      "label": "Monthly Notices of the Royal Astronomical Society 522 4499-4514"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Doyle et al. (2023), Monthly Notices of the Royal Astronomical Society 522 4499-4514",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 522 4499-4514",
+  "creators": [
+    "L Doyle",
+    "H M Cegla",
+    "D R Anderson",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

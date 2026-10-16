@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wasp-87",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 6450,
+      "lowerKelvin": 6330,
+      "upperKelvin": 6570,
+      "citation": "Addison et al. 2016, the stellar temperature of the default parameter set of WASP-87 b in the NASA Exoplanet Archive: 6450 +/- 120 K, https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract"
+    },
+    "note": "a companion 8.1 arcsec away gives 12% of the light (WDS 12213-5250, Mason et al. 2001) and blends into its measured spectra and catalogue colors, so the color is taken from its own temperature, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

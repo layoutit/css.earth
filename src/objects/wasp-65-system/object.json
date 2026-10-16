@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-65-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-65"
+    },
+    "catalog": {
+      "name": "WASP-65 system",
+      "systemName": "WASP-65 system",
+      "classification": "planetary-system",
+      "color": "#fff0eb",
+      "distanceAu": 56724693.4,
+      "description": "WASP-65 b crosses WASP-65 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5758100418147123000,
+        6105156592752848000,
+        1257667900030044200
+      ],
+      "presentationToReference": [
+        -0.678549721348383,
+        -0.10168862239787371,
+        0.7274817521648599,
+        0.7194477351844736,
+        0.1078176983189058,
+        0.6861270292497922,
+        0.1482067204817768,
+        -0.9889564034900811,
+        2.0072538184637385e-8
+      ],
+      "orbitUpReference": [
+        0.10168862239787371,
+        -0.1078176983189058,
+        0.9889564034900811
+      ],
+      "metersPerUnit": 2266635.4838709678,
+      "bodyRadiusM": 702657000
+    }
+  }
+}

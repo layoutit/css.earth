@@ -1,0 +1,47 @@
+{
+  "id": "wasp-28",
+  "name": "WASP-28",
+  "system": "WASP-28 system",
+  "description": "Star of 6,150 K, 348 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-28",
+  "gaia": "2641087471777046016",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+    "credit": "Mo&#x10D;nik et al. 2020"
+  },
+  "radius": {
+    "value": 1.083,
+    "source": "Mo&#x10D;nik et al. 2020, the stellar radius of the default parameter set of WASP-28 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+    "uncertainty": 0.025
+  },
+  "mass": {
+    "value": 0.993,
+    "source": "Mo&#x10D;nik et al. 2020, the stellar mass of the default parameter set of WASP-28 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+    "uncertainty": 0.067
+  },
+  "temperature": {
+    "value": 6150,
+    "source": "Bonomo et al. 2017, the stellar temperature of WASP-28 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+    "uncertainty": 140
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-28 b crosses WASP-28 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Mo&#x10D;nik et al. 2020, and its temperature Bonomo et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017, MO__X10D_NIK_ET_AL__2020): st_teff 6150, st_rad 1.083, st_mass 0.993",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-28",
+      "title": "WASP-28",
+      "revision": "1374435559",
+      "card": "WASP-28 is a F8V-type main sequence star located 1116 light-years from Earth in the constellation of Pisces.",
+      "introduction": "It has a mass of 0.9 solar masses and a radius of 1.08 solar radii."
+    }
+  },
+  "notes": [],
+  "order": 5917
+}

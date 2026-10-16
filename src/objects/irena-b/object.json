@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "irena-b",
+  "parent": "irena-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-38 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 87935.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-38 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 28111808.3,
+      "description": "WASP-38 b was found in 2010 by SuperWASP as it crossed its star.",
+      "systemName": "Irena system",
+      "order": 5943,
+      "context": {
+        "order": 5943
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1817989435689546800,
+        -3720773237916136400,
+        732605468379280800
+      ],
+      "presentationToReference": [
+        -0.42443338824557614,
+        -0.9022237884851777,
+        0.0764757113980198,
+        -0.8885448094610884,
+        0.43126549185087865,
+        0.15651899922494336,
+        0.17419649974134988,
+        0.001520207246705264,
+        0.9847097381704869
+      ],
+      "orbitUpReference": [
+        0.9022237884851777,
+        -0.43126549185087865,
+        -0.001520207246705264
+      ],
+      "metersPerUnit": 283661.93548387097,
+      "bodyRadiusM": 87935200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

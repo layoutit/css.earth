@@ -1,0 +1,46 @@
+{
+  "id": "wasp-96",
+  "name": "WASP-96",
+  "system": "WASP-96 system",
+  "description": "Star of 5,540 K, 352 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-96",
+  "gaia": "4990044668377961984",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract",
+    "credit": "Hellier et al. 2014"
+  },
+  "radius": {
+    "value": 1.05,
+    "source": "Hellier et al. 2014, the stellar radius of the default parameter set of WASP-96 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract",
+    "uncertainty": 0.05
+  },
+  "mass": {
+    "value": 1.06,
+    "source": "Hellier et al. 2014, the stellar mass of the default parameter set of WASP-96 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract",
+    "uncertainty": 0.09
+  },
+  "temperature": {
+    "value": 5540,
+    "source": "Hellier et al. 2014, the stellar temperature of the default parameter set of WASP-96 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.1982H/abstract",
+    "uncertainty": 140
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-96 b crosses WASP-96 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hellier et al. 2014.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HELLIER_ET_AL__2014): st_teff 5540, st_rad 1.05, st_mass 1.06",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-96",
+      "title": "WASP-96",
+      "revision": "1329658058",
+      "card": "WASP-96 is a G8-type star, located approximately 1140 light-years from Earth in the constellation of Phoenix."
+    }
+  },
+  "notes": [],
+  "order": 5935
+}

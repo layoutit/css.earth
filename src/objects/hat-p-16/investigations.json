@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hat-p-16",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 381592313648387200: position at J2016.0. Distance: Gaia DR3 parallax 4.4958 +/- 0.0155 mas (same row, RUWE 0.83): 222.43 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -21.535, -4.582 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.237 +/- 0.054 solar radii from Bonomo et al. 2017, the stellar radius of HAT-P-16 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract). Mass 1.218 +/- 0.039 solar masses from Bonomo et al. 2017, the stellar mass of HAT-P-16 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract). Temperature 6158 +/- 80 K from Yalçınkaya et al. 2024, the stellar temperature of HAT-P-16 b's parameter set from Yalçınkaya et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,158 K and log g 4.34 (u1 0.390, u2 0.298): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

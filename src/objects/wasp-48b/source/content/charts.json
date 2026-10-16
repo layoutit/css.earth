@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-48b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-48b-orbits",
+      "title": "WASP-48 b: orbits around WASP-48",
+      "output": "wasp-48b-system-orbits.svg",
+      "system": "wasp-48",
+      "highlight": "wasp-48b",
+      "description": "The orbits of WASP-48's planets in this map from above, to scale, with WASP-48 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.14363679 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-48b-transit",
+      "title": "WASP-48 b: its transit",
+      "description": "WASP-48 b crossing its star, as TESS recorded it: 3 sectors (81, 82, 83) of the SPOC pipeline's 2-minute light curves of TIC 284475976, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-48b-transit.svg",
+      "metadata": {
+        "tic": "TIC 284475976",
+        "sectors": [
+          81,
+          82,
+          83
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-48b",
+      "sources": [
+        "photometry/tess/tess2024196212429-s0081-0000000284475976-0276-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000284475976-0278-s_lc.fits",
+        "photometry/tess/tess2024249191853-s0083-0000000284475976-0280-s_lc.fits"
+      ],
+      "durationHours": 3.1539349,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 81, 82, 83",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

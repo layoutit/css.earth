@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-48-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-48"
+    },
+    "catalog": {
+      "name": "WASP-48 system",
+      "systemName": "WASP-48 system",
+      "classification": "planetary-system",
+      "color": "#fdf7ff",
+      "distanceAu": 95321969.9,
+      "description": "WASP-48 b crosses WASP-48 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2917880934830688000,
+        -7537405512061876000,
+        11748193662006200000
+      ],
+      "presentationToReference": [
+        0.2046200710392649,
+        0.2974235191479925,
+        -0.9325609239001547,
+        -0.528570043045253,
+        -0.7682991516204606,
+        -0.3610126358099119,
+        0.8238594152663583,
+        -0.566794198873722,
+        2.6466526060839905e-7
+      ],
+      "orbitUpReference": [
+        -0.2974235191479925,
+        0.7682991516204606,
+        0.566794198873722
+      ],
+      "metersPerUnit": 3545825.806451613,
+      "bodyRadiusM": 1099206000
+    }
+  }
+}

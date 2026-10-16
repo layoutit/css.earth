@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "hat-p-16b-arrival.webp",
+      "bytes": 35580,
+      "sha256": "4bca1789b564d624b6a138e7542158f7796d5f003acd8bdcb371544aa85a6931"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-16b-billboard.webp",
+      "bytes": 6128,
+      "sha256": "f0cc5bc9f367cb2e5a9a3107b18cff30a02d30228124d514fdac8d52d3a93b75"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-16b-dataset-thermal.webp",
+      "bytes": 42,
+      "sha256": "46a87e0d0eba9863d13fbcfcd32971d4822638cec02ac2eaeb6a169688cdc329"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-16b-poles-thermal@2x.webp",
+      "bytes": 1340,
+      "sha256": "534f0c8cde2988526439b54519bd5c2bfcbb4ce87fdb64d141d9ae6b2f04f2b0"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-16b-surface-thermal@2x.webp",
+      "bytes": 36,
+      "sha256": "7f81c6bc76ba0af80669bb3eecc8048c980865d68589b22ecc931d046b543279"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-16b-system-orbits.svg",
+      "bytes": 4614,
+      "sha256": "5d857fb64a74bad9d1077dd271568529a7b97251ffc9543463779f2a3726a670"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-16b-transit.svg",
+      "bytes": 12479,
+      "sha256": "e0492511d11ef9a729a889baaa9ce2f308aee4282d4b5cb0ef7cc6d60e7fe5ea"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-sheet.webp",
+      "bytes": 573858,
+      "sha256": "f245cafd3cef183c26bb6b249125aeb163bcdf61e91b12dd109ea85190db3c52"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 311,
+      "sha256": "4c3a03c8a8ebdd78a7dd0a39fccd2adbb5176916030dcf7afa7cf9335227ed2a"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 18543,
+      "sha256": "960d75327c374accd61781acddfef2e335fd69ea8acb5dcdf95f21a83cb6487b"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 662,
+      "sha256": "2423571d2079d17609f85d8642315fbc06ba33938f60aa3eb9d126681dd5e9eb"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 2978,
+      "sha256": "1083d368ea1268aa0448ce9431c14ed333cd5ae9de8d76b9ee6af2d29f2a5099"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 876,
+      "sha256": "b5b3c391270e1a54e72e54d8ab64c0c4c48c10bc65b96b2440576a51e178c553"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 182576,
+      "sha256": "92a94c90f107f4fce4688235a7d605fef8c79fe0cdf228cb74966ca4bf5c1021"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 105,
+      "sha256": "0329ce05b6c076dedc8654dde581417112c5b6e48b98dd4c45917eab12308ad6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/thermal.webp",
+      "bytes": 464,
+      "sha256": "812dacf2f95a971d27a178f2e0388bcdb26cf50c6526443e2923a465f69968e6"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 90286,
+      "sha256": "bb550548180db022f486dbaee12c97175d307f461ca8f4d7eda364825338718d"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1194,
+      "sha256": "b9a6dce6dd69836ce18adf58b5217a1caa128bc4d3a0cb700070895ea455cb74"
+    }
+  ]
+}

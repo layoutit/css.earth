@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-28b",
+  "displayName": "WASP-28 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.2 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-ab5598",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M",
+          "label": "Močnik et al. 2020",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.41 days",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-ab5598",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M",
+          "label": "Močnik et al. 2020",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.89 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-ab5598",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M",
+          "label": "Močnik et al. 2020",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,548 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-28b-dataset-thermal.webp",
+        "surface": "wasp-28b-surface-thermal@2x.webp",
+        "poles": "wasp-28b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-28b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-28 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-28b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-28b/wasp-28b-system-orbits.svg",
+      "alt": "The orbits of WASP-28's planets in this map from above, to scale, with WASP-28 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-28b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M"
+      }
+    },
+    {
+      "id": "wasp-28b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-28b/wasp-28b-transit.svg",
+      "alt": "WASP-28 b crossing its star, as TESS recorded it: 3 sectors (42, 70, 92) of the SPOC pipeline's 2-minute light curves of TIC 398572544, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-28b-tess-sector-42",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021232031932-s0042-0000000398572544-0213-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mo&#x10D;nik et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+      "credit": "Mo&#x10D;nik et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-28b.json",
+      "credit": "Radius from Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive; mass from Mo&#x10D;nik et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020PASP..132a4401M), via the NASA Exoplanet Archive; orbit from Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive"
+    }
+  }
+}
