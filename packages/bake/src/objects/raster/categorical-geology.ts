@@ -5,7 +5,37 @@ import {resolve} from 'node:path';
 
 const localPath = (path: unknown): path is string => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split('/').includes('..');
 
-/** The recipe binds archival symbols, not an ordinal or interpolated scale. */
+/** A category's `range` is a publisher's legend band over a numeric field: [low, high), with null an open end, and
+ * [v, v] the one value v (a legend's "none" for a zero), which takes precedence over a band holding it. Bands never
+ * overlap. */
+export function validateCategoryRanges(categories: readonly {value?: string; range?: (number|null)[]}[]) {
+  const ranged = categories.filter(category => category.range !== undefined);
+  if (!ranged.length) return false;
+  const bounds = ranged.map(category => category.range!);
+  if (ranged.length !== categories.length || bounds.some(([low, high, ...rest]) => rest.length || low === undefined || high === undefined ||
+      low !== null && !Number.isFinite(low) || high !== null && !Number.isFinite(high) || low !== null && high !== null && low > high))
+    throw new TypeError('Every category of a numeric field needs a range [low, high) with null an open end.');
+  const inside = (value: number, [low, high]: (number|null)[]) => low === high ? value === low : (low === null || value >= low) && (high === null || value < high);
+  const bands = bounds.filter(([low, high]) => low !== high), exact = bounds.filter(([low, high]) => low === high).map(([low]) => low);
+  const edges = bands.flatMap(range => range.filter(value => value !== null)).flatMap(value => [value - 1e-9, value, value + 1e-9]);
+  if (new Set(exact).size !== exact.length || edges.some(value => bands.filter(range => inside(value, range)).length > 1)) throw new TypeError('Category ranges overlap.');
+  return true;
+}
+
+/** The category index a record's attribute takes: its symbol, or the band its number falls in; null for a declared
+ * unknown value. Throws for a value no category or unknown value names. */
+export function categoryForAttribute(value: string, categories: readonly {value: string; range?: (number|null)[]}[], unknownValues: readonly string[]) {
+  if (unknownValues.includes(value)) return null;
+  const number = value === '' ? NaN : Number(value), exact = categories.findIndex(category => category.range !== undefined &&
+    category.range[0] === category.range[1] && number === category.range[0]);
+  const index = exact >= 0 ? exact : categories.findIndex(category => category.range === undefined ? category.value === value :
+    Number.isFinite(number) && category.range[0] !== category.range[1] &&
+      (category.range[0] === null || number >= category.range[0]) && (category.range[1] === null || number < category.range[1]));
+  if (index < 0) throw new Error(`Unmapped geology symbol: ${value}`);
+  return index;
+}
+
+/** The recipe binds archival symbols, or a publisher's legend bands over a numeric field, not an interpolated scale. */
 export function validateGeologyProfile(value: unknown) {
   const dataset=parseGeologyDataset(value);
   const grid = dataset.grid;
@@ -29,6 +59,7 @@ export function validateGeologyProfile(value: unknown) {
       new Set([...dataset.categories.map(entry => entry.value), ...grid.unknownValues]).size !== dataset.categories.length + grid.unknownValues.length) {
     throw new TypeError('Invalid categorical geology profile.');
   }
+  validateCategoryRanges(dataset.categories);
   return dataset;
 }
 
@@ -156,13 +187,15 @@ export async function loadGeologySurface(root: string, value: unknown) {
   if (projectionName !== grid.coordinateSystem || Number(sphere?.[1]) !== grid.referenceRadiusMeters ||
       Number(sphere?.[2]) !== 0 || !projection.includes('PRIMEM["Reference_Meridian",0.0]') || !projection.includes('UNIT["Degree",0.0174532925199433]')) throw new Error('Geology projection differs.');
   const {rows, fields} = decodeGeologyAttributes(dbf), polygons = decodeGeologyPolygons(shape, grid);
-  if (rows.length !== polygons.length || fields.find(field => field.name === grid.field)?.type !== 'C') throw new Error('Geology attribute join differs.');
-  const values = new Map(dataset.categories.map((category, index) => [category.value, index])), counts: Record<string,number> = {};
+  const numeric = validateCategoryRanges(dataset.categories), type = fields.find(field => field.name === grid.field)?.type;
+  if (rows.length !== polygons.length || (numeric ? !['F', 'N'].includes(type ?? '') : type !== 'C')) throw new Error('Geology attribute join differs.');
+  const counts: Record<string,number> = {};
   rows.forEach((row, i) => {
     if (!row || !polygons[i]) {polygons[i] = null; return;}
-    const value = row[grid.field];
-    if (!values.has(value) && !grid.unknownValues.includes(value)) throw new Error(`Unmapped geology symbol: ${value}`);
-    polygons[i]!.category = values.get(value) ?? null; counts[value] = (counts[value] ?? 0) + 1;
+    const value = row[grid.field], category = categoryForAttribute(value, dataset.categories, grid.unknownValues);
+    polygons[i]!.category = category;
+    const key = category === null ? value : dataset.categories[category].value;
+    counts[key] = (counts[key] ?? 0) + 1;
   });
   return {...createGeologySampler(polygons), report: {kind: 'geologic-categories', records: rows.length, field: grid.field,
     counts, withheldDegenerateRings: grid.withheldDegenerateRings, longitudeDirection: grid.longitudeDirection, missingPolicy: 'No polygon, declared unknown unit, or conflicting overlapping categories are withheld. Declared zero-area rings are excluded.',

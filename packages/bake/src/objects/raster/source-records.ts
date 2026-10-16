@@ -70,7 +70,7 @@ export const parseAmbiguitySampling = shape({method:text,maximumDistanceMeters:n
 export const parseScalarMapDataset = shape({path:text,labelPath:text,datasetId:text,productId:text,grid:parseScalarMapGrid,sampling:text,
   sourceValidRange:optional(array(number)),surfaceSampling:parseAmbiguitySampling,valueTransform:optional(parseTransform),minimum:number,maximum:number,
   sourceUnits:optional(text),displayUnits:optional(text)});
-export const parseCategory = shape({value:text,label:text,color:text});
+export const parseCategory = shape({value:text,label:text,color:text,range:optional(array(nullable(number)))});
 export const parseSymbols = shape({paths:text,locations:text,shapeModel:text,expectedPaths:number,expectedLocations:number,
   lineWidthMeters:number,locationDiameterMeters:number,maximumSegmentMeters:number,maximumRegistrationDistanceMeters:number,colorCategories:dictionary(number)});
 export const parseVtkGrid = shape({...meshDimensions,field:text});

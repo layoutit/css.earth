@@ -799,6 +799,113 @@
       }
     },
     {
+      "id": "mare-ages",
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-dataset-{id}.webp",
+      "source": "mare-ages/mare-basalt-units.shp",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "mare-ages",
+        "label": "Mare ages",
+        "format": "geologic-shapefile",
+        "path": "mare-ages/mare-basalt-units.shp",
+        "consumer": "mare-ages",
+        "sampling": "nearest",
+        "overlapPolicy": "withhold-conflicts",
+        "sourceUrl": "https://doi.org/10.6084/m9.figshare.28246907.v2",
+        "description": "Chen et al. (2026) mare basalt units with Jin et al. (2025) refined absolute model ages",
+        "title": "Model ages of mare basalt units in the authors\u2019 six published age bands; colors are age bands, not surface color.",
+        "grid": {
+          "attributePath": "mare-ages/mare-basalt-units.dbf",
+          "projectionPath": "mare-ages/mare-basalt-units.prj",
+          "coordinateSystem": "GCS_Moon_2000",
+          "referenceRadiusMeters": 1737400,
+          "longitudeDirection": "east-positive",
+          "latitudeType": "planetocentric",
+          "longitudeDomain": [
+            -180,
+            180
+          ],
+          "field": "ModelAge6",
+          "expectedRecords": 1105,
+          "expectedBounds": [
+            -179.99998351099995,
+            -74.20242474670464,
+            179.9999835110002,
+            64.76531250306961
+          ],
+          "unknownValues": [],
+          "withheldDegenerateRings": []
+        },
+        "categories": [
+          {
+            "value": "under-2",
+            "label": "<2.00 Ga",
+            "color": "#fe0000",
+            "range": [
+              null,
+              2
+            ]
+          },
+          {
+            "value": "2-2.5",
+            "label": "2.00\u20132.50 Ga",
+            "color": "#ffc801",
+            "range": [
+              2,
+              2.5
+            ]
+          },
+          {
+            "value": "2.5-3",
+            "label": "2.50\u20133.00 Ga",
+            "color": "#ffff00",
+            "range": [
+              2.5,
+              3
+            ]
+          },
+          {
+            "value": "3-3.5",
+            "label": "3.00\u20133.50 Ga",
+            "color": "#b6fe8e",
+            "range": [
+              3,
+              3.5
+            ]
+          },
+          {
+            "value": "3.5-4",
+            "label": "3.50\u20134.00 Ga",
+            "color": "#01c5ff",
+            "range": [
+              3.5,
+              4
+            ]
+          },
+          {
+            "value": "over-4",
+            "label": ">4.00 Ga",
+            "color": "#0000fe",
+            "range": [
+              4,
+              null
+            ]
+          },
+          {
+            "value": "none",
+            "label": "None",
+            "color": "#000000",
+            "range": [
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "submicroscopic-iron",
       "source": "science/usgs/submicroscopic-iron.tif",
       "falseColor": true,

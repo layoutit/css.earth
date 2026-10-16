@@ -1,0 +1,40 @@
+{
+  "id": "source-moon-chen-2026-mare-basalt-units-prj",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Moon · chen 2026 mare basalt units prj",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://figshare.com/articles/dataset/Temporal_and_spatial_distribution_of_mare_basalts/28246907",
+      "label": "Source page"
+    },
+    {
+      "role": "original",
+      "url": "https://ndownloader.figshare.com/files/64139398",
+      "label": "Source file"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/67"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Chen, Jin, Zhao, Wang, Lu, C. Zhang, H. Zhang and J. Zhang (2026), figshare",
+      "scope": "The chen 2026 mare basalt units prj input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import { requireArray, requireString } from '@cssearth/core';
-import { parseGeologyDataset, loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile, decodeGeologyAttributes, decodeGeologyPolygons } from '@cssearth/bake/objects/raster';
+import { parseGeologyDataset, loadGeologySurface, createGeologySampler, categoryColorForValue, categoryForAttribute, validateCategoryRanges, validateGeologyProfile, decodeGeologyAttributes, decodeGeologyPolygons } from '@cssearth/bake/objects/raster';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -43,6 +43,25 @@ test('discrete colors reject fractional and unknown category indices', () => {
   assert.deepEqual(categoryColorForValue(0, dataset), [18, 52, 86]);
   assert.throws(() => categoryColorForValue(0.5, dataset), /Invalid/);
   assert.throws(() => categoryColorForValue(2, dataset), /Invalid/);
+});
+
+test('a numeric field takes the legend band its value falls in, an exact value first', () => {
+  const categories = [
+    {value: 'young', range: [null, 2]}, {value: 'middle', range: [2, 3.5]}, {value: 'old', range: [3.5, null]}, {value: 'none', range: [0, 0]},
+  ];
+  assert.equal(validateCategoryRanges(categories), true);
+  assert.equal(validateCategoryRanges([{value: 'Cc'}, {value: 'Ec'}]), false);
+  assert.equal(categoryForAttribute('1.62039058500e+00', categories, []), 0);
+  assert.equal(categoryForAttribute('2', categories, []), 1, 'A band holds its low edge');
+  assert.equal(categoryForAttribute('3.5', categories, []), 2, 'and not its high edge');
+  assert.equal(categoryForAttribute('0.00000000000e+00', categories, []), 3, 'An exact value takes precedence over the band holding it');
+  assert.equal(categoryForAttribute('-1', categories, ['-1']), null, 'A declared unknown value is withheld');
+  assert.throws(() => categoryForAttribute('', categories, []), /Unmapped/);
+  assert.throws(() => categoryForAttribute('Cc', [{value: 'Cc', range: [0, 1]}], []), /Unmapped/, 'A ranged category never matches by symbol');
+  assert.throws(() => validateCategoryRanges([{value: 'a', range: [0, 2]}, {value: 'b', range: [1, 3]}]), /overlap/);
+  assert.throws(() => validateCategoryRanges([{value: 'a', range: [0, 0]}, {value: 'b', range: [0, 0]}]), /overlap/);
+  assert.throws(() => validateCategoryRanges([{value: 'a', range: [0, 2]}, {value: 'b'}]), /range/);
+  assert.throws(() => validateCategoryRanges([{value: 'a', range: [3, 2]}]), /range/);
 });
 
 for (const id of ['io']) test(`${id} archived geography, attribute identity and source pins remain intact`, async () => {

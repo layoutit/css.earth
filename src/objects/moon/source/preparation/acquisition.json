@@ -439,6 +439,22 @@
       ],
       "path": "science/diviner-gcp/global_cumul_avg_cyl_80n90n_002.tab",
       "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80n90n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "mare-ages/mare-basalt-units.shp",
+      "url": "https://ndownloader.figshare.com/files/64139413"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "mare-ages/mare-basalt-units.dbf",
+      "url": "https://ndownloader.figshare.com/files/64139392"
     }
   ]
 }

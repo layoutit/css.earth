@@ -86,6 +86,11 @@
       "detail": "USGS",
       "summary": "Geologic units and their relative ages from the 2020 USGS map. Colors are map units, not surface color."
     },
+    "mare-ages": {
+      "title": "Ages of the mare basalts (2026)",
+      "detail": "Chen et al., figshare",
+      "summary": "When each of 1,105 mare lava units erupted, dated by its craters. Colors are the authors’ age bands, not surface color."
+    },
     "submicroscopic-iron": {
       "title": "Iron particles from space weathering",
       "detail": "Kaguya MI",

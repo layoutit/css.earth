@@ -247,6 +247,27 @@
         "https://moon.bao.ac.cn",
         "Measured 2026-09-28 against the current ldem_16.img with the Elevation dataset palette."
       ]
+    },
+    {
+      "id": "chen-2026-mare-basalt-ages",
+      "subject": "Chen et al. (2026), \"Temporal and spatial distribution of mare basalts\" (figshare 28246907 v2, CC BY 4.0): 1,105 mare basalt units with absolute model ages",
+      "status": "included",
+      "finding": "Shown as Mare ages. The view reads ModelAge6, Jin et al. (2025)'s crater-count age corrected for the cratering rate, in the six bands and colors of the release's own figure (Ages of mare basalts.jpg, 5316 x 3778). Rasterized on that figure's pixel grid (plate carree, 11.153 px a degree from its frame and its 0 and 60 S ticks), panel B colors 744 of 841 drawn units in the band of ModelAge6 and panel A 747 of 844 in that of ModelAge5; the next best field is the other panel's (615 and 612), and none of ModelAge1 to ModelAge4 or ModelAge7 passes 447. The 97 others in each panel are Marius Hills units with no age in the release, which the figure colors (3.00-3.50 Ga in A, 2.50-3.00 Ga in B) and the view draws black as \"None\". 588 units (3.2% of the mapped area) have no age. No age sits on a band edge; the nearest are 2.000705 and 3.999994. Legend colors are swatch means from the JPEG.",
+      "evidence": [
+        "https://doi.org/10.6084/m9.figshare.28246907.v2",
+        "https://ndownloader.figshare.com/files/64139389",
+        "https://doi.org/10.1029/2025JE008965"
+      ]
+    },
+    {
+      "id": "zhang-2026-automated-mare-stratigraphy",
+      "subject": "Zhang, Jin, Wang and Chen, \"Automated Stratigraphy and Chronology Map of Lunar Mare Basalts\" (figshare 33924433 v2, CC BY 4.0, published 2026-10-15): 1,545 automatically delineated units with ages before and after the cratering-rate correction, and 340,045 classified craters",
+      "status": "deferred",
+      "finding": "Same group, newer delineation. The release has no figure of its ages, so no published colors to draw them in; its paper is not public.",
+      "revisitWhen": "Its paper or a figure of its ages is published.",
+      "evidence": [
+        "https://doi.org/10.6084/m9.figshare.33924433.v2"
+      ]
     }
   ]
 }
