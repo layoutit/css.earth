@@ -216,6 +216,15 @@ blank, because an eclipse says nothing of it. Every planet drawn this way shares
 compare. An eccentric planet's texts say "at secondary eclipse"; past an eccentricity of 0.6 (HD 80606 b) nothing is drawn.
 `--thermal-entries entries.json` takes a day side read from its own paper, for a planet neither table holds.
 
+Some papers print a day side for a whole band rather than one wavelength: a Kepler- or TESS-band eclipse, or a black body
+fitted to eclipses in several bands. Such an entry names the band as the paper does (`band: "the TESS band"`) in place of
+`wavelengthMicrometres`, and every text says "in the TESS band", never a wavelength the paper did not print. An optical
+band's temperature assumes the planet reflects no light, and its source says so. The `measured-dayside` dataset needs one
+wavelength and refuses a band. A paper that calls its own optical value unreliable, or prints a model or effective
+temperature instead of a brightness temperature, is not used.
+
+![The 22 hot Jupiters added on 2026-10-16, each its page's billboard in the thermal glow of its measured day side, from 1,090 K to 3,237 K](images/measured-daysides.png)
+
 ### The expected glow of a hot giant
 
 A hot giant nobody has measured still gets a color, said to be an estimate wherever it is shown: the "Expected glow"
