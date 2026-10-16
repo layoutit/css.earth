@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "toi-1518-arrival.webp",
+      "bytes": 27602,
+      "sha256": "447c6d179c287db7d80aafe1250fcea45bfaca7e1f7e4ce463e660212f41d6c8"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1518-billboard.webp",
+      "bytes": 4946,
+      "sha256": "27e38b1842337b50e2d38400a382f857991b3c6f682bda79de8231911b74bf1d"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1518-dataset-color.webp",
+      "bytes": 44,
+      "sha256": "5098a6ec4ab9c04115203f63aa52f73f79893f95ec174f4831bb13d93fc60648"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1518-limb-color@2x.webp",
+      "bytes": 95268,
+      "sha256": "eb2205952218adf78fb6fefd4170ce86a1d5873c634986401ab73bc10614f218"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1518-poles-color@2x.webp",
+      "bytes": 1340,
+      "sha256": "cb1b88521968365288776e59747c4230d6cb5d1a78b82a376d5778a183d9dbc1"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1518-surface-color@2x.webp",
+      "bytes": 38,
+      "sha256": "c04b097bc8cb49d7da44dff7a598a5214d7257087b3730da4fe44af4bf94079f"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 375,
+      "sha256": "f344c1e6261b56c32ce7dbfe08dc1c4333b2f2fc9eb9b02ba5e531d268716c16"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 1669,
+      "sha256": "b736712f310e55ecc1b89f4c703b62f4c1ebac5c3554d0fd4407875ca6c352ae"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 661,
+      "sha256": "ee12cd5153c47002d63d6b356ca15552048b487d3a34da50ea6002f68bf4afac"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1346,
+      "sha256": "ee52e3d76d359b077d4cfdfce968c978f65403699be489329d66a4fbefda3916"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 968,
+      "sha256": "51f882fd8d3885a06209822a1294a351897d284401dc571db0bbccba3696e226"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 182576,
+      "sha256": "92a94c90f107f4fce4688235a7d605fef8c79fe0cdf228cb74966ca4bf5c1021"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 101,
+      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 442,
+      "sha256": "08d7dab0a0d9d9d167a5b6105b7c4474bbdd27440159c01387b51e8f262ca5fd"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 66926,
+      "sha256": "1fab72d229aad39fc2a95d3ad97f2c0ee92699406a9c6c0d964df509613aba1a"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1408,
+      "sha256": "598436840af6300d87cf7600c5890096c69fea722e5be46738cd14b9410818c4"
+    }
+  ]
+}

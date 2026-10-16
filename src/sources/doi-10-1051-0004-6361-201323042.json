@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201323042",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bonomo et al. (2015): Improved parameters of seven<i>Kepler</i>giant companions characterized with SOPHIE and HARPS-N",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1501.02653"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201323042"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015A&A...575A..85B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201323042",
+      "label": "Astronomy & Astrophysics 575 A85"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bonomo et al. (2015), Astronomy & Astrophysics 575 A85",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 575 A85",
+  "creators": [
+    "A. S. Bonomo",
+    "A. Sozzetti",
+    "A. Santerne",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "toi-1518",
+  "name": "TOI-1518",
+  "system": "TOI-1518 system",
+  "description": "Star of 7,299 K, 226 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "TOI-1518",
+  "gaia": "2210596444367488384",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract",
+    "credit": "Simonnin et al. 2025"
+  },
+  "radius": {
+    "value": 1.942,
+    "source": "Simonnin et al. 2025, the stellar radius of the default parameter set of TOI-1518 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract",
+    "uncertainty": 0.043
+  },
+  "mass": {
+    "value": 1.88,
+    "source": "Simonnin et al. 2025, the stellar mass of the default parameter set of TOI-1518 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract",
+    "uncertainty": 0.13
+  },
+  "temperature": {
+    "value": 7299,
+    "source": "Simonnin et al. 2025, the stellar temperature of the default parameter set of TOI-1518 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract",
+    "uncertainty": 98
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1518 b crosses TOI-1518 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Simonnin et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SIMONNIN_ET_AL_2025): st_teff 7299, st_rad 1.942, st_mass 1.88",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-1518",
+      "title": "TOI-1518",
+      "revision": "1329937924",
+      "card": "TOI-1518 is a F0-type main sequence star located in the Constellation of Cepheus around 747 light-years from Earth."
+    }
+  },
+  "notes": [],
+  "order": 5900
+}

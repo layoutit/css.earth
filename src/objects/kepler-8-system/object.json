@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-8-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-8"
+    },
+    "catalog": {
+      "name": "Kepler-8 system",
+      "systemName": "Kepler-8 system",
+      "classification": "planetary-system",
+      "color": "#fff7fd",
+      "distanceAu": 209570846,
+      "description": "Kepler-8 b crosses Kepler-8 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4528070076575959000,
+        -22685208760870330000,
+        21160935169361060000
+      ],
+      "presentationToReference": [
+        0.1444298432618961,
+        0.1321188671121854,
+        -0.9806552020605086,
+        -0.7235800440999218,
+        -0.6619037279761293,
+        -0.19574313441767865,
+        0.674960695267287,
+        -0.737853684577298,
+        7.599459025089518e-8
+      ],
+      "orbitUpReference": [
+        -0.1321188671121854,
+        0.6619037279761293,
+        0.737853684577298
+      ],
+      "metersPerUnit": 3334871.6129032257,
+      "bodyRadiusM": 1033810200
+    }
+  }
+}

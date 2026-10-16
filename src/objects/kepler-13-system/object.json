@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-13-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-13"
+    },
+    "catalog": {
+      "name": "Kepler-13 system",
+      "systemName": "Kepler-13 system",
+      "classification": "planetary-system",
+      "color": "#e8ebff",
+      "distanceAu": 101512112.2,
+      "description": "Kepler-13 b crosses Kepler-13 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3030541998939368000,
+        -9930201991891587000,
+        11082480449070367000
+      ],
+      "presentationToReference": [
+        0.19956145688928617,
+        0.21301948299119305,
+        -0.9564506912488434,
+        -0.653904673620204,
+        -0.6980018643299404,
+        -0.291893945140323,
+        0.7297834629134042,
+        -0.6836783580442577,
+        -1.6654297990932305e-7
+      ],
+      "orbitUpReference": [
+        -0.21301948299119305,
+        0.6980018643299404,
+        0.6836783580442577
+      ],
+      "metersPerUnit": 3904896.7741935486,
+      "bodyRadiusM": 1210518000
+    }
+  }
+}

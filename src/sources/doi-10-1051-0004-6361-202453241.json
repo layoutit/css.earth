@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202453241",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Simonnin et al. (2025): Time-resolved absorption of six chemical species with MAROON-X points to a strong drag in the ultra-hot Jupiter TOI-1518 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2412.01472"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202453241"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...698A.314S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202453241",
+      "label": "Astronomy & Astrophysics 698 A314"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Simonnin et al. (2025), Astronomy & Astrophysics 698 A314",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 698 A314",
+  "creators": [
+    "A. Simonnin",
+    "V. Parmentier",
+    "J. P. Wardenier",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

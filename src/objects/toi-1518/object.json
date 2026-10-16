@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1518",
+  "parent": "toi-1518-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-1518",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1351049.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/toi-1518-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-1518",
+      "classification": "star",
+      "color": "#d2dcff",
+      "distanceAu": 47230383.3,
+      "description": "TOI-1518 b crosses TOI-1518 as seen from Earth, which is how it was found.",
+      "systemName": "TOI-1518 system",
+      "order": 5900,
+      "context": {
+        "order": 5897
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2731718737981916700,
+        -370922772459120900,
+        6505561826007990000
+      ],
+      "presentationToReference": [
+        0.3866240242107682,
+        0.9123698079774438,
+        -0.1345481229682284,
+        -0.05249722563537481,
+        -0.12388397271234997,
+        -0.9909070605286826,
+        0.9207420405323414,
+        -0.3901718785307418,
+        -3.636070297190312e-7
+      ],
+      "orbitUpReference": [
+        -0.9123698079774438,
+        0.12388397271234997,
+        0.3901718785307418
+      ],
+      "metersPerUnit": 4358223.870967742,
+      "bodyRadiusM": 1351049400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

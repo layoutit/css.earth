@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-41b",
+  "card": {
+    "text": "Kepler-41 b was found in 2011 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201323042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+        "label": "Bonomo et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL__2015): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 1.85555757, pl_radj 1.29, pl_bmassj 0.56"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-41",
+        "url": "https://en.wikipedia.org/wiki/Kepler-41",
+        "label": "Wikipedia, \"Kepler-41\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370781211",
+        "quote": "It is fairly similar to the Sun, with 115% of its mass, a radius of 129% times that of the Sun, and a surface temperature of 5,750 K. Search for stellar companions to Kepler-41 in 2013-2014 has yielded inconclusive results, compatible with Kepler-41 being the single star."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Kepler-41. Its orbit and size follow Bonomo et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201323042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+        "label": "Bonomo et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL__2015): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 1.85555757, pl_radj 1.29, pl_bmassj 0.56"
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,400 K day side measured in eclipse."
+    }
+  }
+}

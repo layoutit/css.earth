@@ -1,0 +1,47 @@
+{
+  "id": "kepler-41",
+  "name": "Kepler-41",
+  "system": "Kepler-41 system",
+  "description": "Star of 5,750 K, 1090 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "Kepler-41",
+  "gaia": "2080061942886335744",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+    "credit": "Bonomo et al. 2015"
+  },
+  "radius": {
+    "value": 1.29,
+    "source": "Bonomo et al. 2015, the stellar radius of the default parameter set of Kepler-41 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 1.15,
+    "source": "Bonomo et al. 2015, the stellar mass of the default parameter set of Kepler-41 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5750,
+    "source": "Bonomo et al. 2015, the stellar temperature of the default parameter set of Kepler-41 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-41 b crosses Kepler-41 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Bonomo et al. 2015.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2015): st_teff 5750, st_rad 1.29, st_mass 1.15",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-41",
+      "title": "Kepler-41",
+      "revision": "1370781211",
+      "card": "Kepler-41 or KOI-196 is a star in the constellation Cygnus.",
+      "introduction": "It is a G-type main-sequence star, like the Sun, and it is located about 3,510 light-years away."
+    }
+  },
+  "notes": [],
+  "order": 5894
+}

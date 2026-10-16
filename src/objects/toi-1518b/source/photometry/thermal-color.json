@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-1518b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3237,
+      "lowerKelvin": 3178,
+      "upperKelvin": 3296,
+      "citation": "Cabot et al. 2021, dayside brightness temperature in the TESS band, assuming zero geometric albedo: 3237 +/- 59 K, https://ui.adsabs.harvard.edu/abs/2021AJ....162..218C/abstract"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse in the TESS band (TESS) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the paper's own value, from a TESS eclipse 364 ± 28 ppm deep; no infrared eclipse is published",
+    "band": "the TESS band",
+    "facility": "TESS",
+    "rows": "photometry/emission-spectroscopy.csv"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

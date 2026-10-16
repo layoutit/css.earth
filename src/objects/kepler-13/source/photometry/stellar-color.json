@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "kepler-13",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 7650,
+      "lowerKelvin": 7400,
+      "upperKelvin": 7900,
+      "citation": "Esteves et al. 2015, the stellar temperature of the default parameter set of KOI-13 b in the NASA Exoplanet Archive: 7650 +/- 250 K, https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+    },
+    "note": "Kepler-13 B lies 1.2 arcsec away and gives 47% of the light (WDS 19079+4652, Mason et al. 2001): every spectrum and catalogue color of the star blends the two, so the color is taken from its own temperature, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

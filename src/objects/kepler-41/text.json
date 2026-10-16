@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-41",
+  "card": {
+    "text": "Kepler-41 b crosses Kepler-41 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201323042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+        "label": "Bonomo et al. (2015), Astronomy & Astrophysics 575 A85",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2015): st_teff 5750, st_rad 1.29, st_mass 1.15"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-41",
+        "url": "https://en.wikipedia.org/wiki/Kepler-41",
+        "label": "Wikipedia, \"Kepler-41\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370781211",
+        "quote": "Kepler-41 or KOI-196 is a star in the constellation Cygnus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bonomo et al. 2015.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201323042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...575A..85B/abstract",
+        "label": "Bonomo et al. (2015), Astronomy & Astrophysics 575 A85",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2015): st_teff 5750, st_rad 1.29, st_mass 1.15"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-41",
+        "url": "https://en.wikipedia.org/wiki/Kepler-41",
+        "label": "Wikipedia, \"Kepler-41\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370781211",
+        "quote": "It is a G-type main-sequence star, like the Sun, and it is located about 3,510 light-years away."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

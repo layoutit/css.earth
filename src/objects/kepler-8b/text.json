@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-8b",
+  "card": {
+    "text": "Kepler-8 b was found in 2010 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2010, disc_facility Kepler, sy_pnum 1; pl_orbper 3.52249865, pl_radj 1.416, pl_bmassj 0.59"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-8b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-8b",
+        "label": "Wikipedia, \"Kepler-8b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374220578",
+        "quote": "Kepler-8b is the fifth of the first five exoplanets discovered by NASA's Kepler spacecraft, which aims to discover planets in a region of the sky between the constellations Lyra and Cygnus that transit their host stars."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Kepler-8. Its orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2010, disc_facility Kepler, sy_pnum 1; pl_orbper 3.52249865, pl_radj 1.416, pl_bmassj 0.59"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-8b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-8b",
+        "label": "Wikipedia, \"Kepler-8b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374220578",
+        "quote": "The planet is the hottest of the five."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,400 K day side measured in eclipse."
+    }
+  }
+}

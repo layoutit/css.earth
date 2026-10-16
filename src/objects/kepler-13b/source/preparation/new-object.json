@@ -1,0 +1,41 @@
+{
+  "host": "kepler-13",
+  "planets": [
+    {
+      "id": "kepler-13b",
+      "name": "Kepler-13 b",
+      "description": "Transiting planet of Kepler-13 with a 1.76-day year, found in 2011.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "credit": "Esteves et al. 2015"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ESTEVES_ET_AL__2015",
+        "planetName": "KOI-13 b"
+      },
+      "text": {
+        "card": "Kepler-13 b was found in 2011 by Kepler as it crossed its star.",
+        "introduction": "It is the only planet known around Kepler-13. Its orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 1.7635874737, pl_radj 1.512, pl_bmassj 9.28",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-13",
+          "title": "Kepler-13",
+          "revision": "1368288051",
+          "card": "Kepler-13 or KOI-13 is a triple star system consisting of Kepler-13A, around which an orbiting hot Jupiter exoplanet was discovered with the Kepler space telescope in 2011, and Kepler-13B a common proper motion companion star which has an additional star orbiting it."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2750,
+        "uncertaintyK": 160,
+        "band": "the Kepler, Ks, 3.6 µm and 4.5 µm bands together",
+        "facility": "Kepler, Palomar WIRC and Spitzer IRAC",
+        "source": "Shporer et al. 2014, the temperature of a black body showing the same occultation depths in all four bands",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...788...92S/abstract",
+        "chosen": "the paper's own value; Esteves et al. 2015's Kepler-band 3,490 K assumes no reflected light and is not used",
+        "where": "abstract"
+      },
+      "order": 5903
+    }
+  ]
+}
