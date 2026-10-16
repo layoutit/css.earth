@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 
 const OTHER = new RegExp('colo' + 'ur', 'iu');
 /** A URL, the Giotto camera, ESA's page section and the cited CIE title keep their own spelling. */
-const KEPT = new RegExp(`https?://[^\\s"'<>)\\]]+|Colo${'u'}rs & filters|Colo${'u'}r-matching functions of CIE 1931|Multicolo${'u'}r Camera`, 'gu');
+const KEPT = new RegExp(`https?://[^\\s"'<>)\\]]+|Colo${'u'}rs & filters|Colo${'u'}r-matching functions of CIE 1931|Multicolo${'u'}r Camera|Simultaneous multicolo${'u'}r transit photometry`, 'gu');
 /** Files this check does not own: the lockfile, WorldWide Telescope's imageset list, a publisher's page, a recorded answer of the
  * papers API with a paper's abstract in it, two pinned scripts, and the root README, which its author edits by hand. */
 const THIRD_PARTY = new Set([
