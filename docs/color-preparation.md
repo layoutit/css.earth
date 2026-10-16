@@ -223,7 +223,7 @@ band's temperature assumes the planet reflects no light, and its source says so.
 wavelength and refuses a band. A paper that calls its own optical value unreliable, or prints a model or effective
 temperature instead of a brightness temperature, is not used.
 
-![The 22 hot Jupiters added on 2026-10-16, each its page's billboard in the thermal glow of its measured day side, from 1,090 K to 3,237 K](images/measured-daysides.png)
+![The 39 hot Jupiters added on 2026-10-16, each its page's billboard in the thermal glow of its measured day side, from 1,090 K to 3,237 K](images/measured-daysides.png)
 
 ### The expected glow of a hot giant
 
