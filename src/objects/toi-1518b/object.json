@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "toi-1518b",
+  "parent": "toi-1518-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-1518 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 134262
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-1518 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 47230383.3,
+      "description": "TOI-1518 b was found in 2021 as it crossed its star.",
+      "systemName": "TOI-1518 system",
+      "order": 5901,
+      "context": {
+        "order": 5901
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2731718743512363000,
+        -370922772801921800,
+        6505561825668292000
+      ],
+      "presentationToReference": [
+        0.40647546130205975,
+        -0.0485718825462149,
+        -0.9123697011547427,
+        0.16106621900287058,
+        -0.9791375919213062,
+        0.12388401504094408,
+        0.8993527519585387,
+        0.19730775025949243,
+        0.3901721148828305
+      ],
+      "orbitUpReference": [
+        0.0485718825462149,
+        0.9791375919213062,
+        -0.19730775025949243
+      ],
+      "metersPerUnit": 433103.22580645164,
+      "bodyRadiusM": 134262000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

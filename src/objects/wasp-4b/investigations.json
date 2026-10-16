@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-4b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.349 Jupiter radii from Baştürk et al. 2025 (2025MNRAS.541..714B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "1.2 Jupiter masses: Baştürk et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025MNRAS.541..714B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.33823136361 d; Baştürk et al. 2025 (2025MNRAS.541..714B), via the NASA Exoplanet Archive ps table (pl_refname BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025): a/R* 5.411; Baştürk et al. 2025 (2025MNRAS.541..714B), via the NASA Exoplanet Archive ps table (pl_refname BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025): inclination 88.05 degrees; Baluev et al. 2020 (2020MNRAS.496L..11B), via the NASA Exoplanet Archive ps table (pl_refname BALUEV_ET_AL__2020): e 0.0053; Baluev et al. 2020 (2020MNRAS.496L..11B), via the NASA Exoplanet Archive ps table (pl_refname BALUEV_ET_AL__2020): omega 247 degrees; Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): transit mid-time 2455804.51567913 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...993...78S/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.496L..11B/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 1,995 K dayside brightness temperature measured in secondary eclipse at 2.2 µm (Cáceres et al. 2011, dayside brightness temperature at 2.2 µm (NASA Exoplanet Archive emission table)): #ff8a15. Chosen from the archive's emission rows by rule: 3 measured of 4 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2011A&A...530A...5C/abstract"
+      ]
+    }
+  ]
+}

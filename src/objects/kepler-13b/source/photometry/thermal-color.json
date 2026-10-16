@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "kepler-13b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 2750,
+      "lowerKelvin": 2590,
+      "upperKelvin": 2910,
+      "citation": "Shporer et al. 2014, the temperature of a black body showing the same occultation depths in all four bands: 2750 +/- 160 K, https://ui.adsabs.harvard.edu/abs/2014ApJ...788...92S/abstract"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse in the Kepler, Ks, 3.6 µm and 4.5 µm bands together (Kepler, Palomar WIRC and Spitzer IRAC) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the paper's own value; Esteves et al. 2015's Kepler-band 3,490 K assumes no reflected light and is not used",
+    "band": "the Kepler, Ks, 3.6 µm and 4.5 µm bands together",
+    "facility": "Kepler, Palomar WIRC and Spitzer IRAC",
+    "rows": "photometry/emission-spectroscopy.csv"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-13b",
+  "card": {
+    "text": "HAT-P-13 b was found in 2009 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-718-1-575",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract",
+        "label": "Winn et al. 2010",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WINN_ET_AL__2010): disc_year 2009, disc_facility HATNet, sy_pnum 2; pl_orbper 2.91624121, pl_radj 1.272, pl_bmassj 0.851"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-13b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-13b",
+        "label": "Wikipedia, \"HAT-P-13b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1154745236",
+        "quote": "HAT-P-13b is an extrasolar planet approximately 700 light-years away in the constellation Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HAT-P-13. Its orbit and size follow Winn et al. 2010's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-718-1-575",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract",
+        "label": "Winn et al. 2010",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WINN_ET_AL__2010): disc_year 2009, disc_facility HATNet, sy_pnum 2; pl_orbper 2.91624121, pl_radj 1.272, pl_bmassj 0.851"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-13b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-13b",
+        "label": "Wikipedia, \"HAT-P-13b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1154745236",
+        "quote": "The planet was discovered when it transited across its sun, HAT-P-13."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,732 K day side measured in eclipse."
+    }
+  }
+}

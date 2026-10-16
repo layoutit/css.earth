@@ -1,0 +1,33 @@
+{
+  "host": "kepler-17",
+  "planets": [
+    {
+      "id": "kepler-17b",
+      "name": "Kepler-17 b",
+      "description": "Transiting planet of Kepler-17 with a 1.49-day year, found in 2011.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract",
+        "credit": "Désert et al. 2011"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DESERT_ET_AL__2011"
+      },
+      "text": {
+        "card": "Kepler-17 b was found in 2011 by Kepler as it crossed its star.",
+        "introduction": "It is the only planet known around Kepler-17. Its orbit and size follow TICv8's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DESERT_ET_AL__2011): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 1.4857109944, pl_radj 1.31, pl_bmassj 2.45"
+      },
+      "thermal": {
+        "temperatureK": 2032,
+        "uncertaintyK": 208,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5868
+    }
+  ]
+}

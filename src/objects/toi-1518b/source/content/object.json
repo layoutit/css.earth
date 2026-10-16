@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "toi-1518b",
+  "displayName": "TOI-1518 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.9 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453241",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S",
+          "label": "Simonnin et al. 2025",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "46 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453241",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S",
+          "label": "Simonnin et al. 2025",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.8 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453241",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S",
+          "label": "Simonnin et al. 2025",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 3,237 K. The disc itself is unresolved.",
+        "thumbnail": "toi-1518b-dataset-thermal.webp",
+        "surface": "toi-1518b-surface-thermal@2x.webp",
+        "poles": "toi-1518b-poles-thermal@2x.webp",
+        "source": {
+          "id": "toi-1518b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..218C/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of TOI-1518 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse in the TESS band (TESS). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-1518b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-1518b/toi-1518b-system-orbits.svg",
+      "alt": "The orbits of TOI-1518's planets in this map from above, to scale, with TOI-1518 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-1518b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S"
+      }
+    },
+    {
+      "id": "toi-1518b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-1518b/toi-1518b-transit.svg",
+      "alt": "TOI-1518 b crossing its star, as TESS recorded it: 3 sectors (77, 84, 85) of the SPOC pipeline's 2-minute light curves of TIC 427761355, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-1518b-tess-sector-77",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024085201119-s0077-0000000427761355-0272-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Simonnin et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract",
+      "credit": "Simonnin et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-1518b.json",
+      "credit": "Radius from Simonnin et al. 2025 (2025A&A...698A.314S), via the NASA Exoplanet Archive; mass from Simonnin et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...698A.314S), via the NASA Exoplanet Archive; orbit from Simonnin et al. 2025 (2025A&A...698A.314S), via the NASA Exoplanet Archive"
+    }
+  }
+}

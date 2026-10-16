@@ -1,0 +1,33 @@
+{
+  "host": "hat-p-19",
+  "planets": [
+    {
+      "id": "hat-p-19b",
+      "name": "HAT-P-19 b",
+      "description": "Transiting planet of HAT-P-19 with a 4.01-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+        "credit": "Kang et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KANG_ET_AL_2024"
+      },
+      "text": {
+        "card": "HAT-P-19 b was found in 2010 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around HAT-P-19. Its orbit and size follow Kang et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANG_ET_AL_2024): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 4.00878322, pl_radj 1.008, pl_bmassj 0.277"
+      },
+      "thermal": {
+        "temperatureK": 1090,
+        "uncertaintyK": 69,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Kammer et al. 2015, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5861
+    }
+  ]
+}

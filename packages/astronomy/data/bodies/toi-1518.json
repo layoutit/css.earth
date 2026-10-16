@@ -1,0 +1,30 @@
+{
+ "id": "toi-1518",
+ "classification": "star",
+ "order": 5900,
+ "physical": {
+  "name": "TOI-1518",
+  "horizonsCode": null,
+  "meanRadiusKm": 1351049.4,
+  "gravitationalParameterKm3PerS2": 249499387278.846,
+  "parent": null,
+  "effectiveTemperatureK": 7299
+ },
+ "physicalNotes": "Radius 1.942 +/- 0.043 solar radii from Simonnin et al. 2025, the stellar radius of the default parameter set of TOI-1518 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract): 1,351,049 km at 695,700 km per solar radius. Mass 1.88 +/- 0.13 solar masses from Simonnin et al. 2025, the stellar mass of the default parameter set of TOI-1518 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract); GM is that mass times the JPL solar GM. Temperature 7299 +/- 98 K from Simonnin et al. 2025, the stellar temperature of the default parameter set of TOI-1518 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 352.2675179787014,
+  "declinationDegrees": 67.03480539349293,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 228.97947154571418,
+  "properMotionRaMasPerYear": -7.633493161762137,
+  "properMotionDecMasPerYear": -4.947645213814823,
+  "radialVelocityKmPerS": -10.219177,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2210596444367488384 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1518/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 4.3672 +/- 0.0141 mas (same row, RUWE 0.97): 228.98 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -7.633, -4.948 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -10.22 +/- 0.35 km/s"
+  }
+ }
+}

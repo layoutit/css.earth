@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tres-4",
+  "parent": "tres-4-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TrES-4",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1154862
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tres-4-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TrES-4",
+      "classification": "star",
+      "color": "#fbf5ff",
+      "distanceAu": 104776767.3,
+      "description": "TrES-4 b crosses TrES-4 as seen from Earth, which is how it was found.",
+      "systemName": "TrES-4 system",
+      "order": 5875,
+      "context": {
+        "order": 5872
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -369390237451072640,
+        -12477715852755515000,
+        9479260870038335000
+      ],
+      "presentationToReference": [
+        -0.02356647624992442,
+        -0.0178952884278844,
+        -0.9995620940438091,
+        -0.796057297894438,
+        -0.6044974427723334,
+        0.02959087951912809,
+        0.6047622670654709,
+        -0.7964060524216225,
+        -1.9967729098211823e-7
+      ],
+      "orbitUpReference": [
+        0.0178952884278844,
+        0.6044974427723334,
+        0.7964060524216225
+      ],
+      "metersPerUnit": 3725361.290322581,
+      "bodyRadiusM": 1154862000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "arxiv-0812-1998",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gillon et al. (2009): Improved parameters for the transiting hot Jupiters WASP-4b and WASP-5b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0812.1998"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:200810929"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009A&A...496..259G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:200810929",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gillon et al. (2009)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G"
+    }
+  ],
+  "creators": [
+    "M. Gillon",
+    "B. Smalley",
+    "L. Hebb",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}

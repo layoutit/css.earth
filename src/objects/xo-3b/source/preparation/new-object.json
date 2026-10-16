@@ -1,0 +1,40 @@
+{
+  "host": "xo-3",
+  "planets": [
+    {
+      "id": "xo-3b",
+      "name": "XO-3 b",
+      "description": "Transiting planet of XO-3 with a 3.19-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract",
+        "credit": "Rusznak et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "RUSZNAK_ET_AL_2025"
+      },
+      "text": {
+        "card": "XO-3 b was found in 2007 by XO as it crossed its star.",
+        "introduction": "It is the only planet known around XO-3. Its orbit and size follow Rusznak et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RUSZNAK_ET_AL_2025): disc_year 2007, disc_facility XO, sy_pnum 1; pl_orbper 3.19152255771, pl_radj 1.32, pl_bmassj 13.27",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/XO-3b",
+          "title": "XO-3b",
+          "revision": "1374244998",
+          "card": "XO-3b is an exoplanet with about 11.79 times the mass of Jupiter, and it orbits its parent star XO-3 in about 3.2 days.",
+          "introduction": "The radius of this object is 1.217 times that of Jupiter."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2107,
+        "uncertaintyK": 86,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5857
+    }
+  ]
+}

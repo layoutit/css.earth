@@ -1,0 +1,47 @@
+{
+  "id": "wasp-5",
+  "name": "WASP-5",
+  "system": "WASP-5 system",
+  "description": "Star of 5,700 K, 309 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-5",
+  "gaia": "6533307957785865856",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+    "credit": "Gillon et al. 2009"
+  },
+  "radius": {
+    "value": 1.029,
+    "source": "Gillon et al. 2009, the stellar radius of the default parameter set of WASP-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+    "uncertainty": 0.056
+  },
+  "mass": {
+    "value": 0.96,
+    "source": "Gillon et al. 2009, the stellar mass of the default parameter set of WASP-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+    "uncertainty": 0.13
+  },
+  "temperature": {
+    "value": 5700,
+    "source": "Gillon et al. 2009, the stellar temperature of the default parameter set of WASP-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-5 b crosses WASP-5 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gillon et al. 2009.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2009): st_teff 5700, st_rad 1.029, st_mass 0.96",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-5",
+      "title": "WASP-5",
+      "revision": "1374405504",
+      "card": "WASP-5 is a magnitude 12 G-type main-sequence star located about 1,020 light-years away in the Phoenix constellation.",
+      "introduction": "The star is likely older than the Sun, slightly enriched in heavy elements and is rotating rapidly, being spun up by the tides raised by the giant planet on a close orbit."
+    }
+  },
+  "notes": [],
+  "order": 5892
+}

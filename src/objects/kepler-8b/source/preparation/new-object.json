@@ -1,0 +1,41 @@
+{
+  "host": "kepler-8",
+  "planets": [
+    {
+      "id": "kepler-8b",
+      "name": "Kepler-8 b",
+      "description": "Transiting planet of Kepler-8 with a 3.52-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "credit": "Esteves et al. 2015"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ESTEVES_ET_AL__2015"
+      },
+      "text": {
+        "card": "Kepler-8 b was found in 2010 by Kepler as it crossed its star.",
+        "introduction": "It is the only planet known around Kepler-8. Its orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2010, disc_facility Kepler, sy_pnum 1; pl_orbper 3.52249865, pl_radj 1.416, pl_bmassj 0.59",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-8b",
+          "title": "Kepler-8b",
+          "revision": "1374220578",
+          "card": "Kepler-8b is the fifth of the first five exoplanets discovered by NASA's Kepler spacecraft, which aims to discover planets in a region of the sky between the constellations Lyra and Cygnus that transit their host stars.",
+          "introduction": "The planet is the hottest of the five."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2400,
+        "uncertaintyK": 200,
+        "band": "the Kepler band",
+        "facility": "Kepler",
+        "source": "Esteves et al. 2015, dayside brightness temperature in the Kepler band, assuming no reflected light",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "chosen": "the paper's value (+100, -200 K; the larger is kept) from an eclipse 26 ± 10 ppm deep; no infrared eclipse is published",
+        "where": "Table 5"
+      },
+      "order": 5897
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-17b",
+  "card": {
+    "text": "Kepler-17 b was found in 2011 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0067-0049-197-1-14",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract",
+        "label": "Désert et al. 2011",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DESERT_ET_AL__2011): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 1.4857109944, pl_radj 1.31, pl_bmassj 2.45"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Kepler-17. Its orbit and size follow TICv8's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0067-0049-197-1-14",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract",
+        "label": "Désert et al. 2011",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DESERT_ET_AL__2011): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 1.4857109944, pl_radj 1.31, pl_bmassj 2.45"
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,032 K day side measured in eclipse."
+    }
+  }
+}

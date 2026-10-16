@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-17b",
+  "radiusKm": 93654.5,
+  "radiusSource": "Radius 1.31 Jupiter radii from Désert et al. 2011 (2011ApJS..197...14D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract): 93,654.5 km at 71,492 km per Jupiter radius. GM from the mass 2.45 Jupiter masses (Désert et al. 2011, the mass the NASA Exoplanet Archive's composite table adopts (2011ApJS..197...14D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.4857109944,
+  "orbitalPeriodSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 1.4857109944 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of Kepler-17 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "2.45 Jupiter masses: Désert et al. 2011, the mass the NASA Exoplanet Archive's composite table adopts (2011ApJS..197...14D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract)."
+}

@@ -1,0 +1,47 @@
+{
+  "id": "hat-p-4",
+  "name": "HAT-P-4",
+  "system": "HAT-P-4 system",
+  "description": "Star of 5,860 K, 320 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "HAT-P-4",
+  "gaia": "1291120362349158016",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+    "credit": "Torres et al. 2008"
+  },
+  "radius": {
+    "value": 1.596,
+    "source": "Torres et al. 2008, the stellar radius of the default parameter set of HAT-P-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 1.248,
+    "source": "Torres et al. 2008, the stellar mass of the default parameter set of HAT-P-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+    "uncertainty": 0.07
+  },
+  "temperature": {
+    "value": 5860,
+    "source": "Torres et al. 2008, the stellar temperature of the default parameter set of HAT-P-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-4 b crosses HAT-P-4 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Torres et al. 2008.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname TORRES_ET_AL__2008): st_teff 5860, st_rad 1.596, st_mass 1.248",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-4",
+      "title": "HAT-P-4",
+      "revision": "1370776753",
+      "card": "HAT-P-4 is a wide binary star consisting of a pair of G-type main-sequence stars in the constellation of Boötes.",
+      "introduction": "It also has the BD designation BD+36°2593."
+    }
+  },
+  "notes": [],
+  "order": 5862
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-19",
+  "card": {
+    "text": "HAT-P-19 b crosses HAT-P-19 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae072",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+        "label": "Kang et al. (2024), Monthly Notices of the Royal Astronomical Society 528 1930-1944",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KANG_ET_AL_2024): st_teff 4962, st_rad 0.773, st_mass 0.807"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-19",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-19",
+        "label": "Wikipedia, \"HAT-P-19\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1353845700",
+        "quote": "HAT-P-19 is a K-type main-sequence star about 658 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Kang et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae072",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+        "label": "Kang et al. (2024), Monthly Notices of the Royal Astronomical Society 528 1930-1944",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KANG_ET_AL_2024): st_teff 4962, st_rad 0.773, st_mass 0.807"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-19",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-19",
+        "label": "Wikipedia, \"HAT-P-19\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1353845700",
+        "quote": "The star is old yet metal-enriched, having amount of heavy elements 250% of solar abundance."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

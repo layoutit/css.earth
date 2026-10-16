@@ -1,0 +1,39 @@
+{
+  "host": "wasp-4",
+  "planets": [
+    {
+      "id": "wasp-4b",
+      "name": "WASP-4 b",
+      "description": "Transiting planet of WASP-4 with a 1.34-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract",
+        "credit": "Baştürk et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025"
+      },
+      "text": {
+        "card": "WASP-4 b was found in 2007 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-4. Its orbit and size follow Baştürk et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025): disc_year 2007, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.33823136361, pl_radj 1.349, pl_bmassj 1.2",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-4b",
+          "title": "WASP-4b",
+          "revision": "1374393052",
+          "card": "WASP-4b is an exoplanet, specifically a hot Jupiter, approximately 891 light-years away in the constellation of Phoenix."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1995,
+        "uncertaintyK": 40,
+        "wavelengthMicrometres": 2.2,
+        "facility": "European Southern Observatory (ESO) 8.2m Very Large Telescope (VLT) Melipal (UT3) at Paranal Observatory ISAAC",
+        "source": "Cáceres et al. 2011, dayside brightness temperature at 2.2 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...530A...5C/abstract",
+        "chosen": "3 measured of 4 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5889
+    }
+  ]
+}

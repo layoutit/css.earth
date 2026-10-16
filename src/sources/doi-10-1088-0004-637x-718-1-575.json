@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-718-1-575",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Winn et al. (2010): THE HAT-P-13 EXOPLANETARY SYSTEM: EVIDENCE FOR SPIN-ORBIT ALIGNMENT AND A THIRD COMPANION",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1003.4512"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/718/1/575"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010ApJ...718..575W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/718/1/575",
+      "label": "The Astrophysical Journal 718 575-582"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Winn et al. (2010), The Astrophysical Journal 718 575-582",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 718 575-582",
+  "creators": [
+    "Joshua N. Winn",
+    "John Asher Johnson",
+    "Andrew W. Howard",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

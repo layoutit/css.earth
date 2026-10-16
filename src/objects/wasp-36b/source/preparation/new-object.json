@@ -1,0 +1,33 @@
+{
+  "host": "wasp-36",
+  "planets": [
+    {
+      "id": "wasp-36b",
+      "name": "WASP-36 b",
+      "description": "Transiting planet of WASP-36 with a 1.54-day year, found in 2011.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract",
+        "credit": "Mancini et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANCINI_ET_AL__2016"
+      },
+      "text": {
+        "card": "WASP-36 b was found in 2011 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-36. Its orbit and size follow Mancini et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANCINI_ET_AL__2016): disc_year 2011, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.537365606, pl_radj 1.327, pl_bmassj 2.361"
+      },
+      "thermal": {
+        "temperatureK": 1900,
+        "uncertaintyK": 200,
+        "wavelengthMicrometres": 2.159,
+        "facility": "Anglo Australian Telescope IRIS2",
+        "source": "Zhou et al. 2015, dayside brightness temperature at 2.159 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.454.3002Z/abstract",
+        "chosen": "1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5886
+    }
+  ]
+}

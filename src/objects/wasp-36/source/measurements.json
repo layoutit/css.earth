@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-36",
+  "angularDiameterMas": 0.02,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 685,265 km at 377.45 pc = 0.02 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 377.4514385207864,
+  "distanceSource": "Gaia DR3 parallax 2.6493 +/- 0.0129 mas (same row, RUWE 0.88): 377.45 pc, no zero-point correction",
+  "radiusKm": 685264.5,
+  "radiusSource": "Radius 0.985 +/- 0.014 solar radii from Mancini et al. 2016, the stellar radius of the default parameter set of WASP-36 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract): 685,265 km at 695,700 km per solar radius. Mass 1.081 +/- 0.034 solar masses from Mancini et al. 2016, the stellar mass of the default parameter set of WASP-36 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract); GM is that mass times the JPL solar GM. Temperature 5959 +/- 134 K from Mancini et al. 2016, the stellar temperature of the default parameter set of WASP-36 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5959,
+  "effectiveTemperatureSource": "Mancini et al. 2016, the stellar temperature of the default parameter set of WASP-36 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract)",
+  "surfaceGravityLogg": 4.49,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-36.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.485, rounded to two decimals",
+  "spectralType": "G2",
+  "spectralTypeSource": "SIMBAD, WASP-36: spectral type G2 (2012AJ....143...81S)",
+  "objectType": "Emission-line Star",
+  "objectTypePath": "* > Em*",
+  "objectTypeSource": "SIMBAD, WASP-36: main object type Em*, Emission-line Star",
+  "metallicityDex": -0.26,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-36 (pscomppars): [Fe/H] -0.26 dex, from Mancini et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract)",
+  "luminosityLogSolar": 0.001,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-36 (pscomppars): log10 of the luminosity in solar units 0.00087, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 1.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-36 (pscomppars): age 1.4 Gyr, from Mancini et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract)",
+  "projectedRotationSpeedKmS": 3.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-36 (pscomppars): projected rotation speed 3.3 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

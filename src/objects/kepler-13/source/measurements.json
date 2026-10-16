@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-13",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,210,518 km at 492.14 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 492.1446077141886,
+  "distanceSource": "Gaia DR3 parallax 2.0319 +/- 0.0344 mas (same row, RUWE 1.26): 492.14 pc, no zero-point correction",
+  "radiusKm": 1210518,
+  "radiusSource": "Radius 1.74 +/- 0.04 solar radii from Esteves et al. 2015, the stellar radius of the default parameter set of KOI-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract): 1,210,518 km at 695,700 km per solar radius. Mass 1.72 +/- 0.1 solar masses from Esteves et al. 2015, the stellar mass of the default parameter set of KOI-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract); GM is that mass times the JPL solar GM. Temperature 7650 +/- 250 K from Esteves et al. 2015, the stellar temperature of the default parameter set of KOI-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 7650,
+  "effectiveTemperatureSource": "Esteves et al. 2015, the stellar temperature of the default parameter set of KOI-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract)",
+  "surfaceGravityLogg": 4.19,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-13.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.192, rounded to two decimals",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, BD+46 2629A: main object type *, Star",
+  "metallicityDex": 0.2,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of KOI-13 (pscomppars): [Fe/H] 0.2 dex, from Esteves et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract)",
+  "luminosityLogSolar": 0.971,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of KOI-13 (pscomppars): log10 of the luminosity in solar units 0.971, from Calculated Value (/docs/pscp_calc.html)",
+  "ageGyr": 1.12,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of KOI-13 (pscomppars): age 1.12 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "projectedRotationSpeedKmS": 65,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KOI-13 (pscomppars): projected rotation speed 65 km/s, from Barnes et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...10B/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

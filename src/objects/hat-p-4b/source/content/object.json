@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hat-p-4b",
+  "displayName": "HAT-P-4 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-0801-1841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T",
+          "label": "Torres et al. 2008",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.06 days",
+        "source": {
+          "catalogueId": "arxiv-0801-1841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T",
+          "label": "Torres et al. 2008",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.67 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-0801-1841",
+          "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T",
+          "label": "Torres et al. 2008",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,194 K. The disc itself is unresolved.",
+        "thumbnail": "hat-p-4b-dataset-thermal.webp",
+        "surface": "hat-p-4b-surface-thermal@2x.webp",
+        "poles": "hat-p-4b-poles-thermal@2x.webp",
+        "source": {
+          "id": "hat-p-4b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..102T/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of HAT-P-4 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hat-p-4b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-4b/hat-p-4b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-4's planets in this map from above, to scale, with HAT-P-4 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-4b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T"
+      }
+    },
+    {
+      "id": "hat-p-4b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-4b/hat-p-4b-transit.svg",
+      "alt": "HAT-P-4 b crossing its star, as TESS recorded it: 3 sectors (51, 77, 78) of the SPOC pipeline's 2-minute light curves of TIC 138294130, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 17-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-4b-tess-sector-51",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022112184951-s0051-0000000138294130-0223-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Torres et al. 2008",
+      "href": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+      "credit": "Torres et al. 2008"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-4b.json",
+      "credit": "Radius from Torres et al. 2008 (2008ApJ...677.1324T), via the NASA Exoplanet Archive; mass from Torres et al. 2008, the mass the NASA Exoplanet Archive's composite table adopts (2008ApJ...677.1324T), via the NASA Exoplanet Archive; orbit from Torres et al. 2008 (2008ApJ...677.1324T), via the NASA Exoplanet Archive"
+    }
+  }
+}

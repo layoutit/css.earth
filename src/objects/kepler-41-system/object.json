@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-41-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-41"
+    },
+    "catalog": {
+      "name": "Kepler-41 system",
+      "systemName": "Kepler-41 system",
+      "classification": "planetary-system",
+      "color": "#ffece0",
+      "distanceAu": 222191709.1,
+      "description": "Kepler-41 b crosses Kepler-41 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9583318492559323000,
+        -21015783047105160000,
+        23903033668543050000
+      ],
+      "presentationToReference": [
+        0.2883120068444032,
+        0.29836434302280074,
+        -0.9098653227384399,
+        -0.6322551619694631,
+        -0.6542998667926703,
+        -0.41490371711767327,
+        0.7191172344425637,
+        -0.6948887703277888,
+        1.1164922715568035e-7
+      ],
+      "orbitUpReference": [
+        -0.29836434302280074,
+        0.6542998667926703,
+        0.6948887703277888
+      ],
+      "metersPerUnit": 2895009.6774193547,
+      "bodyRadiusM": 897453000
+    }
+  }
+}

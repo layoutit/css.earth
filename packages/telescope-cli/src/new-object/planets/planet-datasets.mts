@@ -140,9 +140,14 @@ export function rockEstimate(planetRadiusKm: number, star: { readonly id: string
     chosen: `the bare-rock maximum, no light reflected and no heat carried to the night side; the star's temperature is ${star.source.split(' (')[0]}, a/R* is ${orbit.source.split(' (')[0]}` } };
 }
 
+/** Where a measured day side was measured: at one wavelength, or over the band a paper prints its temperature for. */
+export const measuredWhere = (thermal: ThermalSpec) => thermal.band !== undefined ? `in ${thermal.band}` : `at ${thermal.wavelengthMicrometres} µm`;
+/** A measured day side, not an estimate: only a measurement names its facility. */
+export const isMeasured = (thermal: ThermalSpec | EquilibriumSpec): thermal is ThermalSpec => 'facility' in thermal;
+
 /** The body README's color paragraph for either dataset. */
-export const thermalColorLine = (thermal: ThermalSpec | EquilibriumSpec, hex: string) => 'wavelengthMicrometres' in thermal
-  ? `**Color.** A black body at the ${thermal.temperatureK.toLocaleString('en-US')} K dayside brightness temperature measured in secondary eclipse at ${thermal.wavelengthMicrometres} µm (${thermal.source}): ${hex}. ${thermal.where ? `Read from the paper (${thermal.where}): ` : "Chosen from the archive's emission rows by rule: "}${thermal.chosen}. Reflected starlight is not included.`
+export const thermalColorLine = (thermal: ThermalSpec | EquilibriumSpec, hex: string) => isMeasured(thermal)
+  ? `**Color.** A black body at the ${thermal.temperatureK.toLocaleString('en-US')} K dayside brightness temperature measured in secondary eclipse ${measuredWhere(thermal)} (${thermal.source}): ${hex}. ${thermal.where ? `Read from the paper (${thermal.where}): ` : "Chosen from the archive's emission rows by rule: "}${thermal.chosen}. Reflected starlight is not included.`
   : thermal.rock ? `**Color.** An estimate, not a measurement: a black body at ${thermal.temperatureK.toLocaleString('en-US')} K, the hottest day side a dark, airless rock can have on its orbit, ${thermal.source}: ${hex}. Chosen by rule: ${thermal.chosen}. ${ROCK_TEST}; see [the expected glow](../../../docs/color-preparation.md#the-expected-glow-of-a-hot-giant). Reflected starlight is not included.`
   : `**Color.** An estimate, not a measurement: a black body at the ${thermal.temperatureK.toLocaleString('en-US')} K equilibrium temperature of ${thermal.source}: ${hex}. Chosen by rule: ${thermal.chosen}. ${EQUILIBRIUM_TEST}; see [the expected glow](../../../docs/color-preparation.md#the-expected-glow-of-a-hot-giant). Reflected starlight is not included.`;
 
@@ -183,20 +188,20 @@ export async function equilibriumFromArchive(archive: Archive, planet: string): 
  * `EquilibriumSpec` makes the "Expected glow" dataset instead: the same color at the temperature its paper computes, said
  * to be an estimate in every text. A measured temperature replaces an estimate; nothing else is replaced. */
 export async function installThermalDataset(files: PackageFiles, id: string, name: string, thermal: ThermalSpec | EquilibriumSpec, csv: string | undefined) {
-  const measured = 'wavelengthMicrometres' in thermal ? thermal : undefined, kelvin = thermal.temperatureK.toLocaleString('en-US'), rock = !measured && (thermal as EquilibriumSpec).rock === true;
+  const measured = isMeasured(thermal) ? thermal : undefined, kelvin = thermal.temperatureK.toLocaleString('en-US'), rock = !measured && (thermal as EquilibriumSpec).rock === true;
   // What the estimated temperature is, and the published sample that tests it.
   const basis = rock ? 'the hottest day side a dark, airless rock can have on its orbit' : "the equilibrium temperature its paper computes from its star's light", tested = rock ? ROCK_TEST : EQUILIBRIUM_TEST;
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const cited: Cited = { value: thermal.temperatureK, ...(thermal.uncertaintyK === undefined ? {} : { uncertainty: thermal.uncertaintyK }), source: thermal.source, url: thermal.url };
-  const color = planckChoice(id, cited, measured ? `Its day side's brightness temperature is measured in secondary eclipse at ${measured.wavelengthMicrometres} µm (${measured.facility}) and nobody has imaged it`
+  const color = planckChoice(id, cited, measured ? `Its day side's brightness temperature is measured in secondary eclipse ${measuredWhere(measured)} (${measured.facility}) and nobody has imaged it`
     : `Nobody has measured its heat or imaged it; this is ${basis}, an estimate`, [], cmf, 'desaturate');
-  const record = { ...color.record, temperature: { ...(color.record.temperature as Record<string, unknown>), chosen: thermal.chosen, ...(measured ? { wavelengthMicrometres: measured.wavelengthMicrometres, facility: measured.facility } : { estimate: true }), ...(csv ? { rows: 'photometry/emission-spectroscopy.csv' } : {}) } };
+  const record = { ...color.record, temperature: { ...(color.record.temperature as Record<string, unknown>), chosen: thermal.chosen, ...(measured ? { ...(measured.band !== undefined ? { band: measured.band } : { wavelengthMicrometres: measured.wavelengthMicrometres }), facility: measured.facility } : { estimate: true }), ...(csv ? { rows: 'photometry/emission-spectroscopy.csv' } : {}) } };
   files.set(`${s}/photometry/thermal-color.json`, json(record));
   if (csv) files.set(`${s}/photometry/emission-spectroscopy.csv`, csv);
   const science: { kind: string; qualification: string } = !measured ? { kind: 'equilibrium-thermal-color', qualification: rock ? `An estimate, not a measurement: the color of a black body at ${kelvin} K, ${basis} (${thermal.source}), uniform over the disc. ${tested}.`
       : `An estimate, not a measurement: the color of a black body at the equilibrium temperature ${kelvin} K (${thermal.source}), uniform over the disc. ${EQUILIBRIUM_TEST}.` }
-    : { kind: 'dayside-thermal-color', qualification: `Color of a black body at the dayside brightness temperature ${thermal.temperatureK.toLocaleString('en-US')} K measured in secondary eclipse at ${measured.wavelengthMicrometres} µm (${thermal.source}), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included.` };
+    : { kind: 'dayside-thermal-color', qualification: `Color of a black body at the dayside brightness temperature ${thermal.temperatureK.toLocaleString('en-US')} K measured in secondary eclipse ${measuredWhere(measured)} (${thermal.source}), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included.` };
   const loaded = await loadStellarPhotometricColor(async path => { const value = files.get(`${s}/${path}`); if (value === undefined) throw new Error(`${id}: ${path} is not in the generated package.`); return Buffer.from(value); }, science, 'photometry/thermal-color.json');
   const colorHex = `#${loaded.color.srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`;
   // Below about 1,800 K a black body's color lies outside sRGB; it is shown mixed with the least white that brings it inside, hue kept.
@@ -222,7 +227,7 @@ export async function installThermalDataset(files: PackageFiles, id: string, nam
     qualification: measured ? `Black-body color at its measured dayside temperature, ${kelvin} K. The disc itself is unresolved.` : rock ? `An estimate, not a measurement: black-body color at ${kelvin} K, the bare-rock maximum for its orbit.` : `An estimate, not a measurement: black-body color at its published equilibrium temperature, ${kelvin} K.`,
     thumbnail: `${id}-dataset-thermal.webp`, surface: `${id}-surface-thermal@2x.webp`, poles: `${id}-poles-thermal@2x.webp`,
     source: { id: `${id}-thermal-color`, path: '../manifest.json', url: thermal.url }, falseColor: false,
-    notes: measured ? `The color of ${name}'s heat: a black body at the dayside brightness temperature measured in secondary eclipse at ${measured.wavelengthMicrometres} µm (${measured.facility}). Its star lights the day side; the night side is not measured. Reflected starlight is not included.`
+    notes: measured ? `The color of ${name}'s heat: a black body at the dayside brightness temperature measured in secondary eclipse ${measuredWhere(measured)} (${measured.facility}). Its star lights the day side; the night side is not measured. Reflected starlight is not included.`
       : `Nobody has measured ${name}'s heat. This is the color of a black body at ${kelvin} K, ${basis} (${thermal.source}). ${tested}. Its star lights the day side. Reflected starlight is not included.` }, ...others] };
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
@@ -410,7 +415,7 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
         const readme = resolve(o, 'README.md'), text = await readFile(readme, 'utf8'), line = daysideLine(lens, atEclipse), old = text.split('\n').find(row => row.startsWith('**Measured day side.**'));
         await writeFile(readme, old !== undefined ? text.replace(old, () => line) : text.replace('\n**Charts.**', () => `\n${line}\n\n**Charts.**`));
         await writeWithMarker(root, files, id, true);
-        say(`${id}: measured day side ${lens.temperatureK} K (${lens.wavelengthMicrometres} µm, ${lens.facility})${atEclipse ? ', at secondary eclipse' : ''}, drawn in false color`);
+        say(`${id}: measured day side ${lens.temperatureK} K (${measuredWhere(lens)}, ${lens.facility})${atEclipse ? ', at secondary eclipse' : ''}, drawn in false color`);
         continue;
       }
       if (atEclipse) { say(`${id}: its orbit is eccentric (e ${eccentricity}) and no day side is measured; an estimate would hold for no moment of it`); continue; }
@@ -435,10 +440,10 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       }
       if (!chosen) { say(`${id}: ${why}`); continue; }
       // The archive's emission rows are kept beside a measured color only: an estimate has none to keep.
-      const { hex } = await installThermalDataset(files, id, descriptor.displayName, chosen, 'wavelengthMicrometres' in chosen ? csv : undefined);
+      const { hex } = await installThermalDataset(files, id, descriptor.displayName, chosen, isMeasured(chosen) ? csv : undefined);
       const readme = resolve(o, 'README.md'), text = await readFile(readme, 'utf8'), color = text.split('\n').find(line => line.startsWith('**Color.**'));
       if (color !== undefined) await writeFile(readme, text.replace(color, () => thermalColorLine(chosen, hex)));
-      say('wavelengthMicrometres' in chosen ? `${id}: thermal glow ${hex} at ${chosen.temperatureK} K (${chosen.wavelengthMicrometres} µm, ${chosen.facility})` : `${id}: expected glow ${hex} at ${chosen.temperatureK} K, an estimate${chosen.rock ? ' for a bare rock' : ''} (${chosen.source})`);
+      say(isMeasured(chosen) ? `${id}: thermal glow ${hex} at ${chosen.temperatureK} K (${measuredWhere(chosen)}, ${chosen.facility})` : `${id}: expected glow ${hex} at ${chosen.temperatureK} K, an estimate${chosen.rock ? ' for a bare rock' : ''} (${chosen.source})`);
     } else {
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} dataset`); continue; }
       if (raster.surfaces[0]!.science.hostLight !== undefined) { lines.push(`${id}: already lit by its host`); if ([...files].some(([path, value]) => before.get(path) !== value)) for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } continue; }

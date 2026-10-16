@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-36",
+  "displayName": "WASP-36",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.98 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw659",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M",
+          "label": "Mancini et al. (2016), Monthly Notices of the Royal Astronomical Society 459 1393-1402",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "377 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-wasp-36",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "wasp-36-dataset-color.webp",
+        "surface": "wasp-36-surface-color@2x.webp",
+        "poles": "wasp-36-poles-color@2x.webp",
+        "source": {
+          "id": "wasp-36-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gaia.ari.uni-heidelberg.de/tap/sync"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,959 K and log g 4.49 (u1 0.423, u2 0.281): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mancini et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract",
+      "credit": "Mancini et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-36.json",
+      "credit": "Mancini et al. 2016, the stellar radius of the default parameter set of WASP-36 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

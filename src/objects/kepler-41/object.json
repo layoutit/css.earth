@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-41",
+  "parent": "kepler-41-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-41",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 897453
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-41-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-41",
+      "classification": "star",
+      "color": "#ffece0",
+      "distanceAu": 222191709.1,
+      "description": "Kepler-41 b crosses Kepler-41 as seen from Earth, which is how it was found.",
+      "systemName": "Kepler-41 system",
+      "order": 5894,
+      "context": {
+        "order": 5891
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9583318492559323000,
+        -21015783047105160000,
+        23903033668543050000
+      ],
+      "presentationToReference": [
+        0.2883120068444032,
+        0.29836434302280074,
+        -0.9098653227384399,
+        -0.6322551619694631,
+        -0.6542998667926703,
+        -0.41490371711767327,
+        0.7191172344425637,
+        -0.6948887703277888,
+        1.1164922715568035e-7
+      ],
+      "orbitUpReference": [
+        -0.29836434302280074,
+        0.6542998667926703,
+        0.6948887703277888
+      ],
+      "metersPerUnit": 2895009.6774193547,
+      "bodyRadiusM": 897453000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

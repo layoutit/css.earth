@@ -1,0 +1,40 @@
+{
+  "host": "wasp-3",
+  "planets": [
+    {
+      "id": "wasp-3b",
+      "name": "WASP-3 b",
+      "description": "Transiting planet of WASP-3 with a 1.85-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "WASP-3 b was found in 2007 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-3. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.846835096, pl_radj 1.42, pl_bmassj 2.43",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-3b",
+          "title": "WASP-3b",
+          "revision": "1374238985",
+          "card": "WASP-3b is an extrasolar planet orbiting the star WASP-3 located approximately 800 light-years away in the constellation Lyra.",
+          "introduction": "It was discovered via the transit method by SuperWASP, and follow up radial velocity observations confirmed that WASP-3b is a planet."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2400,
+        "uncertaintyK": 80,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Rostron et al. 2014, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.441.3666R/abstract",
+        "chosen": "3 measured of 6 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5884
+    }
+  ]
+}

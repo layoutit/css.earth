@@ -1,0 +1,62 @@
+{
+  "id": "kepler-13",
+  "name": "Kepler-13",
+  "system": "Kepler-13 system",
+  "description": "Star of 7,650 K, 519 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "KOI-13",
+  "gaia": "2130632159136095104",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "credit": "Esteves et al. 2015"
+  },
+  "radius": {
+    "value": 1.74,
+    "source": "Esteves et al. 2015, the stellar radius of the default parameter set of KOI-13 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 1.72,
+    "source": "Esteves et al. 2015, the stellar mass of the default parameter set of KOI-13 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 0.1
+  },
+  "temperature": {
+    "value": 7650,
+    "source": "Esteves et al. 2015, the stellar temperature of the default parameter set of KOI-13 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 250
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Kepler-13 B lies 1.2 arcsec away and gives 47% of the light (WDS 19079+4652, Mason et al. 2001): every spectrum and catalogue color of the star blends the two, so the color is taken from its own temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-13 b crosses Kepler-13 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Esteves et al. 2015.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 7650, st_rad 1.74, st_mass 1.72",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-13",
+      "title": "Kepler-13",
+      "revision": "1368288051",
+      "card": "Kepler-13 or KOI-13 is a triple star system consisting of Kepler-13A, around which an orbiting hot Jupiter exoplanet was discovered with the Kepler space telescope in 2011, and Kepler-13B a common proper motion companion star which has an additional star orbiting it."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 2130632159136095104 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 200,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202130632159136095104"
+  },
+  "order": 5902
+}

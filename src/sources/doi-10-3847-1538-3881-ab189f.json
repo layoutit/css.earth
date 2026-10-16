@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ab189f",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bouma et al. (2019): WASP-4b Arrived Early for the TESS Mission",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1903.02573"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab189f"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019AJ....157..217B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..217B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab189f",
+      "label": "The Astronomical Journal 157 217"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..217B",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bouma et al. (2019), The Astronomical Journal 157 217",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..217B"
+    }
+  ],
+  "publisher": "The Astronomical Journal 157 217",
+  "creators": [
+    "L. G. Bouma",
+    "J. N. Winn",
+    "C. Baxter",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

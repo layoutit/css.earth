@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/hat-p-13b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "hat-p-13b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csshat-p-13b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "thermal",
+      "output": "hat-p-13b-surface-{id}{suffix}.webp",
+      "thumbnail": "hat-p-13b-dataset-{id}.webp",
+      "source": "photometry/thermal-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 1,732 K measured in secondary eclipse at 3.6 µm (Hardy et al. 2017, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body color lies outside the sRGB gamut and is shown mixed with 1% white, the least that brings it inside, hue kept."
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "metadata": {
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred."
+    }
+  }
+}

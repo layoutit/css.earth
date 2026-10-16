@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-5b",
+  "displayName": "WASP-5 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-0812-1998",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G",
+          "label": "Gillon et al. 2009",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "39 hours",
+        "source": {
+          "catalogueId": "arxiv-0812-1998",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G",
+          "label": "Gillon et al. 2009",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.6 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-0812-1998",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G",
+          "label": "Gillon et al. 2009",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,996 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-5b-dataset-thermal.webp",
+        "surface": "wasp-5b-surface-thermal@2x.webp",
+        "poles": "wasp-5b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-5b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014A%26A...563A..40C/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-5 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 1.22 µm (European Southern Observatory (ESO)/Max Planck Gesellschaft (MPG) 2.2m Telescope at La Silla Observatory GROND). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-5b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-5b/wasp-5b-system-orbits.svg",
+      "alt": "The orbits of WASP-5's planets in this map from above, to scale, with WASP-5 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-5b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G"
+      }
+    },
+    {
+      "id": "wasp-5b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-5b/wasp-5b-transit.svg",
+      "alt": "WASP-5 b crossing its star, as TESS recorded it: 3 sectors (103, 105, 106) of the SPOC pipeline's 2-minute light curves of TIC 184240683, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-5b-tess-sector-103",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026111101500-s0103-0000000184240683-0305-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gillon et al. 2009",
+      "href": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+      "credit": "Gillon et al. 2009"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-5b.json",
+      "credit": "Radius from Gillon et al. 2009 (2009A&A...496..259G), via the NASA Exoplanet Archive; mass from Gillon et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009A&A...496..259G), via the NASA Exoplanet Archive; orbit from Gillon et al. 2009 (2009A&A...496..259G), via the NASA Exoplanet Archive"
+    }
+  }
+}

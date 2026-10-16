@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/kepler-13b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "kepler-13b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csskepler-13b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "thermal",
+      "output": "kepler-13b-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-13b-dataset-{id}.webp",
+      "source": "photometry/thermal-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 2,750 K measured in secondary eclipse in the Kepler, Ks, 3.6 µm and 4.5 µm bands together (Shporer et al. 2014, the temperature of a black body showing the same occultation depths in all four bands), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "metadata": {
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred."
+    }
+  }
+}

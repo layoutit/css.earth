@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1518",
+  "card": {
+    "text": "TOI-1518 b crosses TOI-1518 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202453241",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract",
+        "label": "Simonnin et al. (2025), Astronomy & Astrophysics 698 A314",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SIMONNIN_ET_AL_2025): st_teff 7299, st_rad 1.942, st_mass 1.88"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1518",
+        "url": "https://en.wikipedia.org/wiki/TOI-1518",
+        "label": "Wikipedia, \"TOI-1518\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1329937924",
+        "quote": "TOI-1518 is a F0-type main sequence star located in the Constellation of Cepheus around 747 light-years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Simonnin et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202453241",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract",
+        "label": "Simonnin et al. (2025), Astronomy & Astrophysics 698 A314",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SIMONNIN_ET_AL_2025): st_teff 7299, st_rad 1.942, st_mass 1.88"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

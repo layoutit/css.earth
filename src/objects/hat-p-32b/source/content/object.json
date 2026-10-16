@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hat-p-32b",
+  "displayName": "HAT-P-32 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.0 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W",
+          "label": "Wang et al. 2019",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.15 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W",
+          "label": "Wang et al. 2019",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.68 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W",
+          "label": "Wang et al. 2019",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,063 K. The disc itself is unresolved.",
+        "thumbnail": "hat-p-32b-dataset-thermal.webp",
+        "surface": "hat-p-32b-surface-thermal@2x.webp",
+        "poles": "hat-p-32b-poles-thermal@2x.webp",
+        "source": {
+          "id": "hat-p-32b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...796..115Z/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of HAT-P-32 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hat-p-32b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-32b/hat-p-32b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-32's planets in this map from above, to scale, with HAT-P-32 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-32b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W"
+      }
+    },
+    {
+      "id": "hat-p-32b-emission",
+      "titleKey": "emissionSpectrum",
+      "src": "/scenes/hat-p-32b/hat-p-32b-emission.svg",
+      "alt": "HAT-P-32 b's dayside emission: the light lost as the planet passes behind its star: its day side's own glow and reflected light. 14 measured bins from Nikolov et al. 2018 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "hat-p-32b-archive-emission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.474.1705N/abstract"
+      }
+    },
+    {
+      "id": "hat-p-32b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-32b/hat-p-32b-transit.svg",
+      "alt": "HAT-P-32 b crossing its star, as TESS recorded it: 1 sector (58) of the SPOC pipeline's 2-minute light curves of TIC 292152376, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-32b-tess-sector-58",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022302161335-s0058-0000000292152376-0247-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Wang et al. 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+      "credit": "Wang et al. 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-32b.json",
+      "credit": "Radius from Wang et al. 2019 (2019AJ....157...82W), via the NASA Exoplanet Archive; mass from Wang et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....157...82W), via the NASA Exoplanet Archive; orbit from Wang et al. 2019 (2019AJ....157...82W), via the NASA Exoplanet Archive"
+    }
+  }
+}

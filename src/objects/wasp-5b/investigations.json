@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-5b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.087 Jupiter radii from Gillon et al. 2009 (2009A&A...496..259G), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "1.58 Jupiter masses: Gillon et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009A&A...496..259G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.62842992377 d; Gillon et al. 2009 (2009A&A...496..259G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2009): a/R* derived from its semi-major axis 0.0267 au and stellar radius 1.029 solar radii; Gillon et al. 2009 (2009A&A...496..259G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2009): inclination 86.9 degrees; Gillon et al. 2009 (2009A&A...496..259G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2009): e 0.038; Gillon et al. 2009 (2009A&A...496..259G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2009): omega 34.38 degrees; Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): transit mid-time 2454373.99703619 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...993...78S/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 2,996 K dayside brightness temperature measured in secondary eclipse at 1.22 µm (Chen et al. 2014, dayside brightness temperature at 1.22 µm (NASA Exoplanet Archive emission table)): #ffb76d. Chosen from the archive's emission rows by rule: 2 measured of 5 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014A%26A...563A..40C/abstract"
+      ]
+    }
+  ]
+}

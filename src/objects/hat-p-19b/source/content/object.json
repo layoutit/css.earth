@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hat-p-19b",
+  "displayName": "HAT-P-19 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.0 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae072",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K",
+          "label": "Kang et al. 2024",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.01 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae072",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K",
+          "label": "Kang et al. 2024",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.28 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae072",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K",
+          "label": "Kang et al. 2024",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,090 K. The disc itself is unresolved.",
+        "thumbnail": "hat-p-19b-dataset-thermal.webp",
+        "surface": "hat-p-19b-surface-thermal@2x.webp",
+        "poles": "hat-p-19b-poles-thermal@2x.webp",
+        "source": {
+          "id": "hat-p-19b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of HAT-P-19 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hat-p-19b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-19b/hat-p-19b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-19's planets in this map from above, to scale, with HAT-P-19 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-19b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K"
+      }
+    },
+    {
+      "id": "hat-p-19b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-19b/hat-p-19b-transit.svg",
+      "alt": "HAT-P-19 b crossing its star, as TESS recorded it: 2 sectors (57, 84) of the SPOC pipeline's 2-minute light curves of TIC 267650535, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-19b-tess-sector-57",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022273165103-s0057-0000000267650535-0245-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kang et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+      "credit": "Kang et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-19b.json",
+      "credit": "Radius from Kang et al. 2024 (2024MNRAS.528.1930K), via the NASA Exoplanet Archive; mass from Kang et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.528.1930K), via the NASA Exoplanet Archive; orbit from Kang et al. 2024 (2024MNRAS.528.1930K), via the NASA Exoplanet Archive"
+    }
+  }
+}

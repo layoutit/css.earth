@@ -1,0 +1,40 @@
+{
+  "host": "hat-p-4",
+  "planets": [
+    {
+      "id": "hat-p-4b",
+      "name": "HAT-P-4 b",
+      "description": "Transiting planet of HAT-P-4 with a 3.06-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+        "credit": "Torres et al. 2008"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "TORRES_ET_AL__2008"
+      },
+      "text": {
+        "card": "HAT-P-4 b was found in 2007 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around HAT-P-4. Its orbit and size follow Torres et al. 2008's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TORRES_ET_AL__2008): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 3.05652301, pl_radj 1.274, pl_bmassj 0.671",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-4b",
+          "title": "HAT-P-4b",
+          "revision": "1374168706",
+          "card": "HAT-P-4b is a confirmed extrasolar planet orbiting the star HAT-P-4 over 1000 light years away in Boötes constellation.",
+          "introduction": "It was discovered by transit on October 2, 2007, which looks for slight dimming of stars caused by planets that passed in front of them."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2194,
+        "uncertaintyK": 116,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Todorov et al. 2013, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..102T/abstract",
+        "chosen": "2 measured of 3 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5863
+    }
+  ]
+}

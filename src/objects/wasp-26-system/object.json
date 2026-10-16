@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-26-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-26"
+    },
+    "catalog": {
+      "name": "WASP-26 system",
+      "systemName": "WASP-26 system",
+      "classification": "planetary-system",
+      "color": "#fff4f1",
+      "distanceAu": 52121205.3,
+      "description": "WASP-26 b crosses WASP-26 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        7497771870722523000,
+        603668723624384400,
+        -2053207607211583700
+      ],
+      "presentationToReference": [
+        0.961595695724915,
+        -0.2624750048247167,
+        0.08025328532578373,
+        0.07742103337979103,
+        -0.021132283268175824,
+        -0.9967745031822789,
+        -0.2633243276906294,
+        -0.9647073641504653,
+        -3.734783776879556e-7
+      ],
+      "orbitUpReference": [
+        0.2624750048247167,
+        0.021132283268175824,
+        0.9647073641504653
+      ],
+      "metersPerUnit": 2737916.129032258,
+      "bodyRadiusM": 848754000
+    }
+  }
+}

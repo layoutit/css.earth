@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tres-4b",
+  "card": {
+    "text": "TrES-4 b was found in 2007 by TrES as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility TrES, sy_pnum 1; pl_orbper 3.55392921, pl_radj 1.61, pl_bmassj 0.78"
+      },
+      {
+        "catalogueId": "wikipedia-tres-4b",
+        "url": "https://en.wikipedia.org/wiki/TrES-4b",
+        "label": "Wikipedia, \"TrES-4b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1378334065",
+        "quote": "TrES-4b is an exoplanet."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TrES-4. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility TrES, sy_pnum 1; pl_orbper 3.55392921, pl_radj 1.61, pl_bmassj 0.78"
+      },
+      {
+        "catalogueId": "wikipedia-tres-4b",
+        "url": "https://en.wikipedia.org/wiki/TrES-4b",
+        "label": "Wikipedia, \"TrES-4b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1378334065",
+        "quote": "It was discovered in 2006, and announced in 2007, by the Trans-Atlantic Exoplanet Survey, using the transit method."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,960 K day side measured in eclipse."
+    }
+  }
+}

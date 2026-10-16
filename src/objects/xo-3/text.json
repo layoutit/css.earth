@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-3",
+  "card": {
+    "text": "XO-3 b crosses XO-3 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-adc129",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract",
+        "label": "Rusznak et al. (2025), The Astrophysical Journal Letters 983 L42",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RUSZNAK_ET_AL_2025): st_teff 6970, st_rad 1.523, st_mass 1.449"
+      },
+      {
+        "catalogueId": "wikipedia-xo-3",
+        "url": "https://en.wikipedia.org/wiki/XO-3",
+        "label": "Wikipedia, \"XO-3\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374434201",
+        "quote": "XO-3 is a star 670 light-years away in the constellation Camelopardalis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Rusznak et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-adc129",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract",
+        "label": "Rusznak et al. (2025), The Astrophysical Journal Letters 983 L42",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RUSZNAK_ET_AL_2025): st_teff 6970, st_rad 1.523, st_mass 1.449"
+      },
+      {
+        "catalogueId": "wikipedia-xo-3",
+        "url": "https://en.wikipedia.org/wiki/XO-3",
+        "label": "Wikipedia, \"XO-3\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374434201",
+        "quote": "The star has a magnitude of 10 and is not visible to the naked eye but is visible through a small telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

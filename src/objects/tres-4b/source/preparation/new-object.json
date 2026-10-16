@@ -1,0 +1,40 @@
+{
+  "host": "tres-4",
+  "planets": [
+    {
+      "id": "tres-4b",
+      "name": "TrES-4 b",
+      "description": "Transiting planet of TrES-4 with a 3.55-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "TrES-4 b was found in 2007 by TrES as it crossed its star.",
+        "introduction": "It is the only planet known around TrES-4. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility TrES, sy_pnum 1; pl_orbper 3.55392921, pl_radj 1.61, pl_bmassj 0.78",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TrES-4b",
+          "title": "TrES-4b",
+          "revision": "1378334065",
+          "card": "TrES-4b is an exoplanet.",
+          "introduction": "It was discovered in 2006, and announced in 2007, by the Trans-Atlantic Exoplanet Survey, using the transit method."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1960,
+        "uncertaintyK": 70,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Knutson et al. 2009, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691..866K/abstract",
+        "chosen": "4 measured of 4 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5876
+    }
+  ]
+}

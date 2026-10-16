@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-32",
+  "card": {
+    "text": "HAT-P-32 b crosses HAT-P-32 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "label": "Wang et al. (2019), The Astronomical Journal 157 82",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WANG_ET_AL__2019): st_teff 6001, st_rad 1.367, st_mass 1.132"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-32b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-32b",
+        "label": "Wikipedia, \"HAT-P-32b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370776745",
+        "quote": "HAT-P-32b is a planet orbiting the G-type or F-type star HAT-P-32, which is approximately 950 light years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Wang et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf6b6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "label": "Wang et al. (2019), The Astronomical Journal 157 82",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WANG_ET_AL__2019): st_teff 6001, st_rad 1.367, st_mass 1.132"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-32b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-32b",
+        "label": "Wikipedia, \"HAT-P-32b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370776745",
+        "quote": "HAT-P-32b was first recognized as a possible planet by the planet-searching HATNet Project in 2004, although difficulties in measuring its radial velocity prevented astronomers from verifying the planet until after three years of observation."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

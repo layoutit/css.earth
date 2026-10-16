@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-3b",
+  "card": {
+    "text": "XO-3 b was found in 2007 by XO as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-adc129",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract",
+        "label": "Rusznak et al. 2025",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RUSZNAK_ET_AL_2025): disc_year 2007, disc_facility XO, sy_pnum 1; pl_orbper 3.19152255771, pl_radj 1.32, pl_bmassj 13.27"
+      },
+      {
+        "catalogueId": "wikipedia-xo-3b",
+        "url": "https://en.wikipedia.org/wiki/XO-3b",
+        "label": "Wikipedia, \"XO-3b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374244998",
+        "quote": "XO-3b is an exoplanet with about 11.79 times the mass of Jupiter, and it orbits its parent star XO-3 in about 3.2 days."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around XO-3. Its orbit and size follow Rusznak et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-adc129",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract",
+        "label": "Rusznak et al. 2025",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RUSZNAK_ET_AL_2025): disc_year 2007, disc_facility XO, sy_pnum 1; pl_orbper 3.19152255771, pl_radj 1.32, pl_bmassj 13.27"
+      },
+      {
+        "catalogueId": "wikipedia-xo-3b",
+        "url": "https://en.wikipedia.org/wiki/XO-3b",
+        "label": "Wikipedia, \"XO-3b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374244998",
+        "quote": "The radius of this object is 1.217 times that of Jupiter."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,107 K day side measured in eclipse."
+    }
+  }
+}

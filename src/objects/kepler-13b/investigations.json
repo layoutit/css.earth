@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-13b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.512 Jupiter radii from Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "9.28 Jupiter masses: Esteves et al. 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015ApJ...804..150E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 1.7635874737 d; Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): a/R* 4.5007; Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): inclination 86.77 degrees; Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): e 0.00064; Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive ps table (pl_refname ESTEVES_ET_AL__2015): omega 5 degrees; Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): transit mid-time 2454953.56598 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 2,750 K dayside brightness temperature measured in secondary eclipse in the Kepler, Ks, 3.6 µm and 4.5 µm bands together (Shporer et al. 2014, the temperature of a black body showing the same occultation depths in all four bands): #ffae5c. Read from the paper (abstract): the paper's own value; Esteves et al. 2015's Kepler-band 3,490 K assumes no reflected light and is not used. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014ApJ...788...92S/abstract"
+      ]
+    }
+  ]
+}

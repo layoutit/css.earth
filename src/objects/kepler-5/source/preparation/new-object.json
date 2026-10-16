@@ -1,0 +1,47 @@
+{
+  "id": "kepler-5",
+  "name": "Kepler-5",
+  "system": "Kepler-5 system",
+  "description": "Star of 6,297 K, 900 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "Kepler-5",
+  "gaia": "2079018300195390464",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "credit": "Esteves et al. 2015"
+  },
+  "radius": {
+    "value": 1.793,
+    "source": "Esteves et al. 2015, the stellar radius of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 0.043
+  },
+  "mass": {
+    "value": 1.374,
+    "source": "Esteves et al. 2015, the stellar mass of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 6297,
+    "source": "Esteves et al. 2015, the stellar temperature of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+    "uncertainty": 60
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-5 b crosses Kepler-5 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Esteves et al. 2015.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 6297, st_rad 1.793, st_mass 1.374",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-5",
+      "title": "Kepler-5",
+      "revision": "1370781277",
+      "card": "Kepler-5 is a star located in the constellation Cygnus in the field of view of the Kepler Mission, a NASA project aimed at detecting planets in transit of, or passing in front of, their host stars as seen from Earth.",
+      "introduction": "One closely-orbiting, Jupiter-like planet, named Kepler-5b, has been detected around Kepler-5."
+    }
+  },
+  "notes": [],
+  "order": 5869
+}

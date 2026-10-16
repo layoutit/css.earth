@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-3b",
+  "card": {
+    "text": "WASP-3 b was found in 2007 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.846835096, pl_radj 1.42, pl_bmassj 2.43"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-3b",
+        "url": "https://en.wikipedia.org/wiki/WASP-3b",
+        "label": "Wikipedia, \"WASP-3b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374238985",
+        "quote": "WASP-3b is an extrasolar planet orbiting the star WASP-3 located approximately 800 light-years away in the constellation Lyra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-3. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.846835096, pl_radj 1.42, pl_bmassj 2.43"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-3b",
+        "url": "https://en.wikipedia.org/wiki/WASP-3b",
+        "label": "Wikipedia, \"WASP-3b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374238985",
+        "quote": "It was discovered via the transit method by SuperWASP, and follow up radial velocity observations confirmed that WASP-3b is a planet."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,400 K day side measured in eclipse."
+    }
+  }
+}

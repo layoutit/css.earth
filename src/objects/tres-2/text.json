@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tres-2",
+  "card": {
+    "text": "TrES-2 b crosses TrES-2 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5850, st_rad 1.12, st_mass 1.36"
+      },
+      {
+        "catalogueId": "wikipedia-tres-2b",
+        "url": "https://en.wikipedia.org/wiki/TrES-2b",
+        "label": "Wikipedia, \"TrES-2b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1378333832",
+        "quote": "TrES-2b is an extrasolar planet orbiting the star TrES-2A located 750 light years away from the Solar System."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5850, st_rad 1.12, st_mass 1.36"
+      },
+      {
+        "catalogueId": "wikipedia-tres-2b",
+        "url": "https://en.wikipedia.org/wiki/TrES-2b",
+        "label": "Wikipedia, \"TrES-2b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1378333832",
+        "quote": "The planet was identified in 2011 as the darkest known exoplanet, reflecting less than 1% of any light that hits it."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

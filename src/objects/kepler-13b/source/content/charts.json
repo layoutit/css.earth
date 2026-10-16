@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-13b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-13b-orbits",
+      "title": "Kepler-13 b: orbits around Kepler-13",
+      "output": "kepler-13b-system-orbits.svg",
+      "system": "kepler-13",
+      "highlight": "kepler-13b",
+      "description": "The orbits of Kepler-13's planets in this map from above, to scale, with Kepler-13 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 1.7635874737 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kepler-13b-transit",
+      "title": "Kepler-13 b: its transit",
+      "description": "Kepler-13 b crossing its star, as TESS recorded it: 3 sectors (75, 80, 82) of the SPOC pipeline's 2-minute light curves of TIC 158324245, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "kepler-13b-transit.svg",
+      "metadata": {
+        "tic": "TIC 158324245",
+        "sectors": [
+          75,
+          80,
+          82
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "kepler-13b",
+      "sources": [
+        "photometry/tess/tess2024030031500-s0075-0000000158324245-0270-s_lc.fits",
+        "photometry/tess/tess2024170053053-s0080-0000000158324245-0275-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000158324245-0278-s_lc.fits"
+      ],
+      "durationHours": 3.16877,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 75, 80, 82",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

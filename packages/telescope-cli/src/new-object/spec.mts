@@ -103,11 +103,14 @@ function photometrySpec(value: unknown, label: string): PhotometrySpec {
   return { unit: record.unit, source: record.source, bands: record.bands, displayRange: record.displayRange, displayRangeSource: record.displayRangeSource };
 }
 function thermalSpec(value: unknown, label: string): ThermalSpec {
-  const input = requireRecord(value, label), temperatureK = requireFiniteNumber(input.temperatureK, `${label}.temperatureK`), wavelength = requireFiniteNumber(input.wavelengthMicrometres, `${label}.wavelengthMicrometres`);
+  const input = requireRecord(value, label), temperatureK = requireFiniteNumber(input.temperatureK, `${label}.temperatureK`);
+  const wavelength = input.wavelengthMicrometres === undefined ? undefined : requireFiniteNumber(input.wavelengthMicrometres, `${label}.wavelengthMicrometres`);
+  const band = input.band === undefined ? undefined : requireString(input.band, `${label}.band`);
   if (!(temperatureK >= 100 && temperatureK <= 10000)) throw new RangeError(`${label}.temperatureK ${temperatureK} is outside 100..10000 K.`);
-  if (!(wavelength > 0)) throw new RangeError(`${label}.wavelengthMicrometres must be positive.`);
+  if ((wavelength === undefined) === (band === undefined)) throw new TypeError(`${label}: give the wavelength the eclipse was measured at, or the band a paper prints the temperature for, not both or neither.`);
+  if (wavelength !== undefined && !(wavelength > 0)) throw new RangeError(`${label}.wavelengthMicrometres must be positive.`);
   const uncertainty = input.uncertaintyK === undefined ? undefined : requireFiniteNumber(input.uncertaintyK, `${label}.uncertaintyK`);
-  return { temperatureK, ...(uncertainty === undefined ? {} : { uncertaintyK: uncertainty }), wavelengthMicrometres: wavelength, facility: requireString(input.facility, `${label}.facility`),
+  return { temperatureK, ...(uncertainty === undefined ? {} : { uncertaintyK: uncertainty }), ...(wavelength === undefined ? { band: band! } : { wavelengthMicrometres: wavelength }), facility: requireString(input.facility, `${label}.facility`),
     source: requireString(input.source, `${label}.source`), url: requireString(input.url, `${label}.url`), chosen: requireString(input.chosen, `${label}.chosen`),
     ...(input.where === undefined ? {} : { where: requireString(input.where, `${label}.where`) }) };
 }

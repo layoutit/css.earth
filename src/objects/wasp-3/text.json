@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-3",
+  "card": {
+    "text": "WASP-3 b crosses WASP-3 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6400, st_rad 1.44, st_mass 1.62"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-3",
+        "url": "https://en.wikipedia.org/wiki/WASP-3",
+        "label": "Wikipedia, \"WASP-3\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374745740",
+        "quote": "WASP-3 is a triple star system located about 753 light-years away from the Sun in the constellation Lyra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6400, st_rad 1.44, st_mass 1.62"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-3",
+        "url": "https://en.wikipedia.org/wiki/WASP-3",
+        "label": "Wikipedia, \"WASP-3\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374745740",
+        "quote": "The system has an apparent magnitude of 10."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

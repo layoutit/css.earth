@@ -1,0 +1,45 @@
+{
+  "id": "kepler-17",
+  "name": "Kepler-17",
+  "system": "Kepler-17 system",
+  "description": "Star of 5,781 K, 721 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "Kepler-17",
+  "gaia": "2086449761846310784",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+    "credit": "TICv8"
+  },
+  "radius": {
+    "value": 1.01034,
+    "source": "TICv8, the stellar radius of the default parameter set of Kepler-17 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract"
+  },
+  "mass": {
+    "value": 1.04,
+    "source": "TICv8, the stellar mass of the default parameter set of Kepler-17 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract"
+  },
+  "temperature": {
+    "value": 5781,
+    "source": "TICv8, the stellar temperature of the default parameter set of Kepler-17 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+    "uncertainty": 85
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-17 b crosses Kepler-17 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow TICv8.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2019): st_teff 5781, st_rad 1.01034, st_mass 1.04",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-17",
+      "title": "Kepler-17",
+      "revision": "1378458007",
+      "card": "Kepler-17 is a main-sequence yellow dwarf star about 2,310 light-years away in the constellation Cygnus.",
+      "introduction": "It is much more active than the Sun, with starspots covering roughly 6% of its surface."
+    }
+  },
+  "notes": [],
+  "order": 5867
+}

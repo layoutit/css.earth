@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "xo-3",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,059,551 km at 205.39 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 205.39302158557305,
+  "distanceSource": "Gaia DR3 parallax 4.8687 +/- 0.0261 mas (same row, RUWE 1.25): 205.39 pc, no zero-point correction",
+  "radiusKm": 1059551.1,
+  "radiusSource": "Radius 1.523 +/- 0.027 solar radii from Rusznak et al. 2025, the stellar radius of the default parameter set of XO-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract): 1,059,551 km at 695,700 km per solar radius. Mass 1.449 +/- 0.056 solar masses from Rusznak et al. 2025, the stellar mass of the default parameter set of XO-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract); GM is that mass times the JPL solar GM. Temperature 6970 +/- 110 K from Rusznak et al. 2025, the stellar temperature of the default parameter set of XO-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6970,
+  "effectiveTemperatureSource": "Rusznak et al. 2025, the stellar temperature of the default parameter set of XO-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract)",
+  "surfaceGravityLogg": 4.23,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/xo-3.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.234, rounded to two decimals",
+  "spectralType": "F5V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of XO-3 (pscomppars): spectral type F5V, from Johns-Krull et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008ApJ...677..657J/abstract)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, BD+57 793: main object type *, Star",
+  "metallicityDex": -0.159,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of XO-3 (pscomppars): [Fe/H] -0.159 dex, from Rusznak et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract)",
+  "luminosityLogSolar": 0.692,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of XO-3 (pscomppars): log10 of the luminosity in solar units 0.69197, from Rusznak et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract)",
+  "ageGyr": 0.97,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of XO-3 (pscomppars): age 0.97 Gyr, from Rusznak et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract)",
+  "projectedRotationSpeedKmS": 18.63,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of XO-3 (pscomppars): projected rotation speed 18.63 km/s, from Rusznak et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

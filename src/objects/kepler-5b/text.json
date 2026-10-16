@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-5b",
+  "card": {
+    "text": "Kepler-5 b was found in 2009 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2009, disc_facility Kepler, sy_pnum 1; pl_orbper 3.5484655, pl_radj 1.426, pl_bmassj 2.111"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-5b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-5b",
+        "label": "Wikipedia, \"Kepler-5b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374220325",
+        "quote": "Kepler-5b is one of the first five planets discovered by NASA's Kepler spacecraft."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Kepler-5. Its orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2009, disc_facility Kepler, sy_pnum 1; pl_orbper 3.5484655, pl_radj 1.426, pl_bmassj 2.111"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-5b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-5b",
+        "label": "Wikipedia, \"Kepler-5b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374220325",
+        "quote": "It is a hot Jupiter that orbits a subgiant star that is more massive, larger, and more diffuse than the Sun is."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,770 K day side measured in eclipse."
+    }
+  }
+}

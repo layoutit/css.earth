@@ -1,0 +1,28 @@
+{
+ "id": "toi-1518b",
+ "classification": "exoplanet",
+ "order": 5901,
+ "physical": {
+  "name": "TOI-1518 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 134262,
+  "gravitationalParameterKm3PerS2": 231836353.38,
+  "parent": "toi-1518"
+ },
+ "physicalNotes": "Radius 1.878 Jupiter radii from Simonnin et al. 2025 (2025A&A...698A.314S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract): 134,262 km at 71,492 km per Jupiter radius. GM from the mass 1.83 Jupiter masses (Simonnin et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...698A.314S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...698A.314S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.90261131,
+  "semiMajorAxisStellarRadii": 4.109,
+  "inclinationDegrees": 77.626,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59983.291942,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Simonnin et al. 2025 (2025A&A...698A.314S), via the NASA Exoplanet Archive ps table (pl_refname SIMONNIN_ET_AL_2025): P 1.90261131 d",
+   "shape": "Simonnin et al. 2025 (2025A&A...698A.314S), via the NASA Exoplanet Archive ps table (pl_refname SIMONNIN_ET_AL_2025): a/R* 4.109; Simonnin et al. 2025 (2025A&A...698A.314S), via the NASA Exoplanet Archive ps table (pl_refname SIMONNIN_ET_AL_2025): inclination 77.626 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Simonnin et al. 2025 (2025A&A...698A.314S), via the NASA Exoplanet Archive ps table (pl_refname SIMONNIN_ET_AL_2025): transit mid-time 2459983.791942 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

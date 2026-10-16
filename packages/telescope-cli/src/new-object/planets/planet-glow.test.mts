@@ -90,6 +90,17 @@ test('an expected glow says it is an estimate everywhere, and a measured day sid
   assert.match(thermalColorLine(measured, '#ff7c00'), /^\*\*Color\.\*\* A black body at the 1,733 K dayside brightness temperature measured in secondary eclipse at 3\.6 µm/u);
 });
 
+test('a day side a paper prints for a whole band says that band, never a wavelength, and is no false-color dataset', async () => {
+  const { parseThermalEntries } = await import('../spec.mts'), { installDaysideDataset } = await import('../thermal/dayside-dataset.mts');
+  const entry = { temperatureK: 3237, uncertaintyK: 59, band: 'the TESS band', facility: 'TESS', source: 'Cabot et al. 2021', url: 'https://example.org/cabot', chosen: 'the paper\'s value', where: 'abstract' };
+  const banded = parseThermalEntries([{ id: 'toi-1518b', thermal: entry }]).get('toi-1518b')!;
+  assert.equal(banded.wavelengthMicrometres, undefined);
+  assert.match(thermalColorLine(banded, '#ffd2a1'), /measured in secondary eclipse in the TESS band \(Cabot et al\. 2021\)/u);
+  assert.throws(() => parseThermalEntries([{ id: 'a', thermal: { ...entry, wavelengthMicrometres: 0.8 } }]), /not both or neither/u);
+  assert.throws(() => parseThermalEntries([{ id: 'a', thermal: { ...entry, band: undefined } }]), /not both or neither/u);
+  assert.throws(() => installDaysideDataset(new Map(), 'toi-1518b', 'TOI-1518 b', banded, false), /needs the wavelength of the eclipse/u);
+});
+
 test('a measured day side too cool to glow, or on an eccentric orbit, is its own false-color dataset on one shared scale', async () => {
   const { DAYSIDE_SCALE, daysideLine, installDaysideDataset } = await import('../thermal/dayside-dataset.mts');
   const cool = (await thermalFromArchive(archive(), 'WASP-29 b')).cool!;

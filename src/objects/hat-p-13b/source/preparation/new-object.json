@@ -1,0 +1,40 @@
+{
+  "host": "hat-p-13",
+  "planets": [
+    {
+      "id": "hat-p-13b",
+      "name": "HAT-P-13 b",
+      "description": "Transiting planet of HAT-P-13 with a 2.92-day year, found in 2009.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract",
+        "credit": "Winn et al. 2010"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WINN_ET_AL__2010"
+      },
+      "text": {
+        "card": "HAT-P-13 b was found in 2009 by HATNet as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HAT-P-13. Its orbit and size follow Winn et al. 2010's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WINN_ET_AL__2010): disc_year 2009, disc_facility HATNet, sy_pnum 2; pl_orbper 2.91624121, pl_radj 1.272, pl_bmassj 0.851",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-13b",
+          "title": "HAT-P-13b",
+          "revision": "1154745236",
+          "card": "HAT-P-13b is an extrasolar planet approximately 700 light-years away in the constellation Ursa Major.",
+          "introduction": "The planet was discovered when it transited across its sun, HAT-P-13."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1732,
+        "uncertaintyK": 75,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Hardy et al. 2017, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...836..143H/abstract",
+        "chosen": "2 measured of 4 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5859
+    }
+  ]
+}

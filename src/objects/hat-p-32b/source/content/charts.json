@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hat-p-32b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hat-p-32b-orbits",
+      "title": "HAT-P-32 b: orbits around HAT-P-32",
+      "output": "hat-p-32b-system-orbits.svg",
+      "system": "hat-p-32",
+      "highlight": "hat-p-32b",
+      "description": "The orbits of HAT-P-32's planets in this map from above, to scale, with HAT-P-32 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.150008197 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "hat-p-32b-emission",
+      "title": "HAT-P-32 b: dayside emission",
+      "description": "HAT-P-32 b's dayside emission: the light lost as the planet passes behind its star: its day side's own glow and reflected light. 14 measured bins from Nikolov et al. 2018 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "hat-p-32b-emission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.474.1705N/abstract",
+        "table": "emissionspec",
+        "bins": 14
+      },
+      "source": {
+        "path": "science/archive-spectra/emission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 14
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 1.75,
+        "ticks": [
+          1,
+          1.25,
+          1.5,
+          1.75
+        ]
+      },
+      "y": {
+        "label": "Eclipse depth (%)",
+        "minimum": 0,
+        "maximum": 0.1,
+        "ticks": [
+          0,
+          0.025,
+          0.05,
+          0.075,
+          0.1
+        ]
+      },
+      "notes": [
+        "Nikolov et al. 2018",
+        "Hubble Space Telescope satellite, Wide Field Camera…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hat-p-32b-transit",
+      "title": "HAT-P-32 b: its transit",
+      "description": "HAT-P-32 b crossing its star, as TESS recorded it: 1 sector (58) of the SPOC pipeline's 2-minute light curves of TIC 292152376, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "hat-p-32b-transit.svg",
+      "metadata": {
+        "tic": "TIC 292152376",
+        "sectors": [
+          58
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hat-p-32b",
+      "sources": [
+        "photometry/tess/tess2022302161335-s0058-0000000292152376-0247-s_lc.fits"
+      ],
+      "durationHours": 3.12048,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sector 58",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

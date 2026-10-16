@@ -1,0 +1,20 @@
+# Kepler-17 b
+
+## Sources
+
+It is the only planet known around Kepler-17. Its orbit and size follow TICv8's fit, the archive's default. The introduction is generated from Désert et al. 2011's published values; the sections below are the data's own.
+
+**Size and mass.** Radius 1.31 Jupiter radii from Désert et al. 2011 (2011ApJS..197...14D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract): 93,654.5 km at 71,492 km per Jupiter radius. GM from the mass 2.45 Jupiter masses (Désert et al. 2011, the mass the NASA Exoplanet Archive's composite table adopts (2011ApJS..197...14D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
+
+**Orbit.** Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 1.4857109944 d Désert et al. 2011 (2011ApJS..197...14D), via the NASA Exoplanet Archive ps table (pl_refname DESERT_ET_AL__2011): a/R* 5.48; Désert et al. 2011 (2011ApJS..197...14D), via the NASA Exoplanet Archive ps table (pl_refname DESERT_ET_AL__2011): inclination 87.2 degrees Q1-Q8 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q8_KOI_TABLE): e 0 Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): transit mid-time 2455185.67875 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
+
+**Color.** A black body at the 2,032 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ff8d1b. Chosen from the archive's emission rows by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.
+
+**Charts.** The orbits of Kepler-17's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (81, 82, 83), folded onto its orbit. Upper limits and rows without an error are left out.
+
+## Evidence
+
+Generated 2026-10-16 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/kepler-17b.json).
+
+
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-8b",
+  "parent": "kepler-8-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-8 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 101232.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-8 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 209570846,
+      "description": "Kepler-8 b was found in 2010 by Kepler as it crossed its star.",
+      "systemName": "Kepler-8 system",
+      "order": 5897,
+      "context": {
+        "order": 5897
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4528070078042852000,
+        -22685208766947996000,
+        21160935166026703000
+      ],
+      "presentationToReference": [
+        0.24651355501510566,
+        -0.9600914847611087,
+        -0.13211891644660168,
+        -0.6990515244563006,
+        -0.27057390089521227,
+        0.6619038678763479,
+        0.6712361978835293,
+        0.07081034559693586,
+        0.7378535502437498
+      ],
+      "orbitUpReference": [
+        0.9600914847611087,
+        0.27057390089521227,
+        -0.07081034559693586
+      ],
+      "metersPerUnit": 326557.0967741936,
+      "bodyRadiusM": 101232700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

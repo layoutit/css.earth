@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-6b",
+  "card": {
+    "text": "Kepler-6 b was found in 2009 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2009, disc_facility Kepler, sy_pnum 1; pl_orbper 3.23469918, pl_radj 1.304, pl_bmassj 0.668"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-6b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-6b",
+        "label": "Wikipedia, \"Kepler-6b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374220408",
+        "quote": "Kepler-6b is an extrasolar planet in the orbit of the unusually metal-rich Kepler-6, a star in the field of view of the NASA-operated Kepler spacecraft, which searches for planets that cross directly in front of, or transit, their host stars."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Kepler-6. Its orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. 2015",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2009, disc_facility Kepler, sy_pnum 1; pl_orbper 3.23469918, pl_radj 1.304, pl_bmassj 0.668"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-6b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-6b",
+        "label": "Wikipedia, \"Kepler-6b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374220408",
+        "quote": "It was the third planet to be discovered by Kepler."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,700 K day side measured in eclipse."
+    }
+  }
+}

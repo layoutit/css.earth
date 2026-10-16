@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-4b",
+  "card": {
+    "text": "HAT-P-4 b was found in 2007 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0801-1841",
+        "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+        "label": "Torres et al. 2008",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TORRES_ET_AL__2008): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 3.05652301, pl_radj 1.274, pl_bmassj 0.671"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-4b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-4b",
+        "label": "Wikipedia, \"HAT-P-4b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374168706",
+        "quote": "HAT-P-4b is a confirmed extrasolar planet orbiting the star HAT-P-4 over 1000 light years away in Boötes constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HAT-P-4. Its orbit and size follow Torres et al. 2008's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0801-1841",
+        "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+        "label": "Torres et al. 2008",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TORRES_ET_AL__2008): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 3.05652301, pl_radj 1.274, pl_bmassj 0.671"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-4b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-4b",
+        "label": "Wikipedia, \"HAT-P-4b\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374168706",
+        "quote": "It was discovered by transit on October 2, 2007, which looks for slight dimming of stars caused by planets that passed in front of them."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,194 K day side measured in eclipse."
+    }
+  }
+}

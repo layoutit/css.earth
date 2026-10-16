@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "tres-4",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,154,862 km at 507.97 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 507.97227322556756,
+  "distanceSource": "Gaia DR3 parallax 1.9686 +/- 0.0136 mas (same row, RUWE 0.90): 507.97 pc, no zero-point correction",
+  "radiusKm": 1154862,
+  "radiusSource": "Radius 1.66 +/- 0.19 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of TrES-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 1,154,862 km at 695,700 km per solar radius. Mass 1.08 +/- 0.38 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of TrES-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 6200 +/- 75 K from Stassun et al. 2017, the stellar temperature of the default parameter set of TrES-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6200,
+  "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of TrES-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "surfaceGravityLogg": 4.03,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tres-4.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.031, rounded to two decimals",
+  "spectralType": "F8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TrES-4 (pscomppars): spectral type F8 V, from Mandushev et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...667L.195M/abstract)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, TOI-2124: main object type *, Star",
+  "metallicityDex": 0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TrES-4 (pscomppars): [Fe/H] 0.14 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.726,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TrES-4 (pscomppars): log10 of the luminosity in solar units 0.72552, from Daemgen et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A%26A...498..567D/abstract)",
+  "ageGyr": 2.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TrES-4 (pscomppars): age 2.2 Gyr, from Meech et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.539.1381M/abstract)",
+  "projectedRotationSpeedKmS": 8.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TrES-4 (pscomppars): projected rotation speed 8.5 km/s, from Meech et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.539.1381M/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

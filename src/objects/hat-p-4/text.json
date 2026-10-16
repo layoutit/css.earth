@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-4",
+  "card": {
+    "text": "HAT-P-4 b crosses HAT-P-4 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0801-1841",
+        "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+        "label": "Torres et al. (2008), The Astrophysical Journal 677 1324-1342",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TORRES_ET_AL__2008): st_teff 5860, st_rad 1.596, st_mass 1.248"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-4",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-4",
+        "label": "Wikipedia, \"HAT-P-4\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370776753",
+        "quote": "HAT-P-4 is a wide binary star consisting of a pair of G-type main-sequence stars in the constellation of Boötes."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Torres et al. 2008.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0801-1841",
+        "url": "https://ui.adsabs.harvard.edu/abs/2008ApJ...677.1324T/abstract",
+        "label": "Torres et al. (2008), The Astrophysical Journal 677 1324-1342",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TORRES_ET_AL__2008): st_teff 5860, st_rad 1.596, st_mass 1.248"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-4",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-4",
+        "label": "Wikipedia, \"HAT-P-4\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370776753",
+        "quote": "It also has the BD designation BD+36°2593."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

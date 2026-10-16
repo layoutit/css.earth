@@ -1,0 +1,30 @@
+{
+ "id": "wasp-36",
+ "classification": "star",
+ "order": 5885,
+ "physical": {
+  "name": "WASP-36",
+  "horizonsCode": null,
+  "meanRadiusKm": 685264.5,
+  "gravitationalParameterKm3PerS2": 143462147685.33646,
+  "parent": null,
+  "effectiveTemperatureK": 5959
+ },
+ "physicalNotes": "Radius 0.985 +/- 0.014 solar radii from Mancini et al. 2016, the stellar radius of the default parameter set of WASP-36 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract): 685,265 km at 695,700 km per solar radius. Mass 1.081 +/- 0.034 solar masses from Mancini et al. 2016, the stellar mass of the default parameter set of WASP-36 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract); GM is that mass times the JPL solar GM. Temperature 5959 +/- 134 K from Mancini et al. 2016, the stellar temperature of the default parameter set of WASP-36 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 131.5803891336058,
+  "declinationDegrees": -8.026986602122715,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 377.4514385207864,
+  "properMotionRaMasPerYear": -4.039925216777357,
+  "properMotionDecMasPerYear": -8.501520314883894,
+  "radialVelocityKmPerS": -12.446138,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5750936092375254016 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-36/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 2.6493 +/- 0.0129 mas (same row, RUWE 0.88): 377.45 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -4.040, -8.502 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -12.45 +/- 0.97 km/s"
+  }
+ }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "wasp-24",
+  "name": "WASP-24",
+  "system": "WASP-24 system",
+  "description": "Star of 6,075 K, 322 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-24",
+  "gaia": "1153682508388170112",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.42,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of WASP-24 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.16
+  },
+  "mass": {
+    "value": 1.43,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of WASP-24 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.5
+  },
+  "temperature": {
+    "value": 6075,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-24 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-24 b crosses WASP-24 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6075, st_rad 1.42, st_mass 1.43",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-24",
+      "title": "WASP-24",
+      "revision": "1370791517",
+      "card": "WASP-24 is an F-type star with the hot Jupiter planet WASP-24b in orbit, about 1,075 light-years away in the constellation Virgo.",
+      "introduction": "WASP-24 is slightly larger and more massive than the Sun, it also has a similar metallicity and is hotter than the Sun."
+    }
+  },
+  "notes": [],
+  "order": 5877
+}

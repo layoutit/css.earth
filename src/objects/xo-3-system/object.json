@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-3-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "xo-3"
+    },
+    "catalog": {
+      "name": "XO-3 system",
+      "systemName": "XO-3 system",
+      "classification": "planetary-system",
+      "color": "#e9e9ff",
+      "distanceAu": 42365326.7,
+      "description": "XO-3 b crosses XO-3 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1401482863065777000,
+        3070949617646245400,
+        5363986378470727000
+      ],
+      "presentationToReference": [
+        0.2211321910811734,
+        0.351385784070363,
+        0.9097409437971317,
+        0.4845480708659207,
+        0.769962175591129,
+        -0.41517636635421606,
+        0.8463531893292271,
+        -0.5326220788816698,
+        -1.1913709016712165e-7
+      ],
+      "orbitUpReference": [
+        -0.351385784070363,
+        -0.769962175591129,
+        0.5326220788816698
+      ],
+      "metersPerUnit": 3417906.7741935486,
+      "bodyRadiusM": 1059551100.0000001
+    }
+  }
+}

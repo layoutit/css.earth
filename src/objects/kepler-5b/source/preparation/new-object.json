@@ -1,0 +1,40 @@
+{
+  "host": "kepler-5",
+  "planets": [
+    {
+      "id": "kepler-5b",
+      "name": "Kepler-5 b",
+      "description": "Transiting planet of Kepler-5 with a 3.55-day year, found in 2009.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "credit": "Esteves et al. 2015"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ESTEVES_ET_AL__2015"
+      },
+      "text": {
+        "card": "Kepler-5 b was found in 2009 by Kepler as it crossed its star.",
+        "introduction": "It is the only planet known around Kepler-5. Its orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESTEVES_ET_AL__2015): disc_year 2009, disc_facility Kepler, sy_pnum 1; pl_orbper 3.5484655, pl_radj 1.426, pl_bmassj 2.111",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-5b",
+          "title": "Kepler-5b",
+          "revision": "1374220325",
+          "card": "Kepler-5b is one of the first five planets discovered by NASA's Kepler spacecraft.",
+          "introduction": "It is a hot Jupiter that orbits a subgiant star that is more massive, larger, and more diffuse than the Sun is."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1770,
+        "uncertaintyK": 100,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Désert et al. 2011, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...11D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5870
+    }
+  ]
+}

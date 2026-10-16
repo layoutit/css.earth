@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-3b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-3b-orbits",
+      "title": "WASP-3 b: orbits around WASP-3",
+      "output": "wasp-3b-system-orbits.svg",
+      "system": "wasp-3",
+      "highlight": "wasp-3b",
+      "description": "The orbits of WASP-3's planets in this map from above, to scale, with WASP-3 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 1.846835096 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-3b-transit",
+      "title": "WASP-3 b: its transit",
+      "description": "WASP-3 b crossing its star, as TESS recorded it: 3 sectors (74, 80, 81) of the SPOC pipeline's 2-minute light curves of TIC 27848472, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-3b-transit.svg",
+      "metadata": {
+        "tic": "TIC 27848472",
+        "sectors": [
+          74,
+          80,
+          81
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-3b",
+      "sources": [
+        "photometry/tess/tess2024003055635-s0074-0000000027848472-0269-s_lc.fits",
+        "photometry/tess/tess2024170053053-s0080-0000000027848472-0275-s_lc.fits",
+        "photometry/tess/tess2024196212429-s0081-0000000027848472-0276-s_lc.fits"
+      ],
+      "durationHours": 2.7883,
+      "binMinutes": 11,
+      "notes": [
+        "TESS 2-min SPOC · sectors 74, 80, 81",
+        "Folded on the app's orbit; 11-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}
