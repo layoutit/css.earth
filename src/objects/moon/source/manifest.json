@@ -2038,6 +2038,90 @@
           }
         ]
       }
+    },
+    {
+      "id": "chen-2026-mare-basalt-units-shp",
+      "path": "mare-ages/mare-basalt-units.shp",
+      "origin": "https://ndownloader.figshare.com/files/64139413",
+      "credit": "Chen, Jin, Zhao, Wang, Lu, C. Zhang, H. Zhang and J. Zhang (2026), figshare",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://figshare.com/articles/dataset/Temporal_and_spatial_distribution_of_mare_basalts/28246907"
+      ],
+      "acquisition": "Downloaded unchanged from the figshare release https://doi.org/10.6084/m9.figshare.28246907.v2 (Chen_Jin_Zhang_Zhao_20260428_Ages_Mare_Basalt_Units.shp, the shapefile\u2019s polygons).",
+      "redistribution": "Published under CC BY 4.0; credit the authors and the release.",
+      "consumers": [
+        "mare-ages"
+      ],
+      "title": "Temporal and spatial distribution of mare basalts",
+      "sourceUrl": "https://figshare.com/articles/dataset/Temporal_and_spatial_distribution_of_mare_basalts/28246907",
+      "datasetId": "mare-ages",
+      "label": "Mare ages",
+      "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-chen-2026-mare-basalt-units-shp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "chen-2026-mare-basalt-units-dbf",
+      "path": "mare-ages/mare-basalt-units.dbf",
+      "origin": "https://ndownloader.figshare.com/files/64139392",
+      "credit": "Chen, Jin, Zhao, Wang, Lu, C. Zhang, H. Zhang and J. Zhang (2026), figshare",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://figshare.com/articles/dataset/Temporal_and_spatial_distribution_of_mare_basalts/28246907"
+      ],
+      "acquisition": "Downloaded unchanged from the figshare release https://doi.org/10.6084/m9.figshare.28246907.v2 (Chen_Jin_Zhang_Zhao_20260428_Ages_Mare_Basalt_Units.dbf, the shapefile\u2019s attributes, including the model ages).",
+      "redistribution": "Published under CC BY 4.0; credit the authors and the release.",
+      "consumers": [
+        "mare-ages"
+      ],
+      "title": "Temporal and spatial distribution of mare basalts",
+      "sourceUrl": "https://figshare.com/articles/dataset/Temporal_and_spatial_distribution_of_mare_basalts/28246907",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-chen-2026-mare-basalt-units-dbf",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "chen-2026-mare-basalt-units-prj",
+      "path": "mare-ages/mare-basalt-units.prj",
+      "origin": "https://ndownloader.figshare.com/files/64139398",
+      "credit": "Chen, Jin, Zhao, Wang, Lu, C. Zhang, H. Zhang and J. Zhang (2026), figshare",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://figshare.com/articles/dataset/Temporal_and_spatial_distribution_of_mare_basalts/28246907"
+      ],
+      "acquisition": "Downloaded unchanged from the figshare release https://doi.org/10.6084/m9.figshare.28246907.v2 (Chen_Jin_Zhang_Zhao_20260428_Ages_Mare_Basalt_Units.prj, the shapefile\u2019s coordinate system).",
+      "redistribution": "Published under CC BY 4.0; credit the authors and the release.",
+      "consumers": [
+        "mare-ages"
+      ],
+      "title": "Temporal and spatial distribution of mare basalts",
+      "sourceUrl": "https://figshare.com/articles/dataset/Temporal_and_spatial_distribution_of_mare_basalts/28246907",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-chen-2026-mare-basalt-units-prj",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

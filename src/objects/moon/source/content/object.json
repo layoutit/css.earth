@@ -1453,6 +1453,96 @@
         "notes": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
       },
       {
+        "id": "mare-ages",
+        "label": "Mare ages",
+        "thumbnail": "moon-dataset-mare-ages.webp",
+        "surface": "moon-mare-ages@2x.webp",
+        "poles": "moon-poles-mare-ages@2x.webp",
+        "source": {
+          "id": "chen-2026-mare-basalt-units-shp",
+          "url": "https://doi.org/10.6084/m9.figshare.28246907.v2"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Absolute model age",
+          "meta": "Jin et al. (2025), corrected \u00b7 authors\u2019 colors",
+          "sourceUrl": "https://doi.org/10.6084/m9.figshare.28246907.v2",
+          "items": [
+            {
+              "label": "<2.00 Ga",
+              "color": "#fe0000",
+              "description": "Model age under 2.00 billion years"
+            },
+            {
+              "label": "2.00\u20132.50 Ga",
+              "color": "#ffc801",
+              "description": "Model age 2.00 to 2.50 billion years"
+            },
+            {
+              "label": "2.50\u20133.00 Ga",
+              "color": "#ffff00",
+              "description": "Model age 2.50 to 3.00 billion years"
+            },
+            {
+              "label": "3.00\u20133.50 Ga",
+              "color": "#b6fe8e",
+              "description": "Model age 3.00 to 3.50 billion years"
+            },
+            {
+              "label": "3.50\u20134.00 Ga",
+              "color": "#01c5ff",
+              "description": "Model age 3.50 to 4.00 billion years"
+            },
+            {
+              "label": ">4.00 Ga",
+              "color": "#0000fe",
+              "description": "Model age over 4.00 billion years"
+            },
+            {
+              "label": "None",
+              "color": "#000000",
+              "description": "Mare unit with no model age in the release"
+            }
+          ]
+        },
+        "falseColor": true,
+        "qualification": "Absolute model ages of 1,105 mare basalt units from crater counts, corrected for the cratering rate (Jin et al. 2025), released by Chen et al. (2026) on figshare under CC BY 4.0, in the six age bands and colors of the authors\u2019 figure. Colors are age bands, not surface color.",
+        "notes": "When the lava of each mare unit erupted, estimated from how many craters have formed on it since. Ga is a billion years. The six bands and their colors are the authors\u2019 own; black is a unit the release gives no age. Jin et al. (2025) counted craters on each unit, fitted their size distribution and corrected for the uneven cratering rate across the Moon. This is the corrected age (the release\u2019s ModelAge6). A model age rests on the cratering-rate calibration and holds for a whole unit, not a point. 588 of 1,105 units have no age. In the Marius Hills, 97 small units show black here, while the authors\u2019 figure colors them. Mare basalts only, 74\u00b0 S to 65\u00b0 N, both hemispheres. Gray grid marks the ground outside the mapped units. Colors are read from the legend of the authors\u2019 figure \u201cAges of mare basalts\u201d in the same release.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "When the lava of each mare unit erupted, estimated from how many craters have formed on it since."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Ga is a billion years. The six bands and their colors are the authors\u2019 own; black is a unit the release gives no age."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Jin et al. (2025) counted craters on each unit, fitted their size distribution and corrected for the uneven cratering rate across the Moon. This is the corrected age (the release\u2019s ModelAge6)."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "A model age rests on the cratering-rate calibration and holds for a whole unit, not a point. 588 of 1,105 units have no age. In the Marius Hills, 97 small units show black here, while the authors\u2019 figure colors them."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Mare basalts only, 74\u00b0 S to 65\u00b0 N, both hemispheres. Gray grid marks the ground outside the mapped units."
+          },
+          {
+            "id": "colors",
+            "label": "Colors",
+            "value": "Colors are read from the legend of the authors\u2019 figure \u201cAges of mare basalts\u201d in the same release."
+          }
+        ],
+        "noData": true
+      },
+      {
         "id": "submicroscopic-iron",
         "label": "Tiny iron particles",
         "thumbnail": "moon-dataset-submicroscopic-iron.webp",

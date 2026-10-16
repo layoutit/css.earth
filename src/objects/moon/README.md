@@ -13,6 +13,7 @@ The navigation marker is a stylized identifier cropped from the existing source 
 | Mineral estimates, FeO, metallic iron, optical maturity, grain size | [Kaguya MI derived maps, May 2016](source/science/usgs/), within ±50° latitude |
 | Midnight temperature, heat anomalies, rock abundance | [LRO Diviner GHRM v1.0](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/), 2009–2022, within ±70° |
 | Geology | [USGS Unified Geologic Map v2 (2020)](https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020), 49 units |
+| Mare ages | [Chen et al. (2026), figshare](https://doi.org/10.6084/m9.figshare.28246907.v2), 1,105 mare basalt units with the model ages of [Jin et al. (2025)](https://doi.org/10.1029/2025JE008965), CC BY 4.0. See [Mare ages](#mare-ages). |
 | Silicate signature | [Lucey et al. (2021)](https://zenodo.org/records/4558194), Christiansen-feature wavelength, CC-BY-4.0 |
 | Crust thickness | [NASA GRAIL visualization](https://svs.gsfc.nasa.gov/4014/), based on gravity and topography models |
 | Gravity, Bouguer gravity | [GRAIL GRGM1200A maps](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/), NASA GSFC. See [GRAIL gravity views](#grail-gravity-views). |
@@ -52,6 +53,10 @@ Diviner's cumulative products, made by J.-P. Williams and the UCLA Diviner team,
 
 Thorium, potassium, FeO and TiO₂ come from the table [LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG](https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl), 2° equal-area pixels from 1998 spectra that blurred the surface over about 150 km. Its [data set description](https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat) gives the method. Nothing is interpolated, so pixel edges show as steps.
 
+### Mare ages
+
+The release's shapefile holds 1,105 mare basalt units in Moon 2000 degrees, 74° S to 65° N on both hemispheres, each with up to seven model ages. The view reads `ModelAge6`: Jin et al.'s crater-count age, corrected for the uneven cratering rate, which panel B of the authors' figure "Ages of mare basalts" draws. The shared shapefile reader paints each unit by pixel centre and sorts its age into the figure's six bands, each band holding its lower edge; no age sits on an edge. A zero is the figure's "None", drawn black. Colors are the means of the figure's legend swatches. Ground outside the units is left empty and shows the gray grid, as on the Kaguya views.
+
 ### Roughness
 
 LDRM_16 gives the scatter of laser shots about a fitted plane over a 30 to 120 m baseline, per 1/16° pixel. Missing pixels (4.4% of the area) stay empty. The display spans 0.5 to 2 m.
@@ -69,6 +74,9 @@ The photograph replaced a 2K CGI texture; the same Copernicus camera before and 
 - Near the equator the maximum's 5th to 95th percentile is 388 to 396 K; Williams et al. (2017) report about 387 to 397 K.
 - Thorium peaks at 11.6 ppm beside Apollo 14 and titanium at 12.0% in Mare Tranquillitatis. [Lawrence et al. (2022)](https://doi.org/10.1029/2022JE007197) find more thorium at sharper resolution, as the footprint predicts.
 - Tycho, the roughest large feature, lands at its IAU position (median 3.0 m).
+- Mare ages, drawn on the pixel grid of the authors' figure (11.153 px a degree, read from its frame and its 0° and 60° S ticks): in panel B, 744 of 841 units take the band of `ModelAge6`; panel A matches `ModelAge5` the same way (747 of 844). All 97 others are unaged Marius Hills units. Read back from the baked minimap at the figure's pixels, 97.1% of panel B's colored pixels fall in the same band; the Marius Hills patch is the largest difference, the rest lie on unit edges.
+
+  ![Panel B of the authors' figure, left, beside the baked Mare ages minimap, right](evidence/mare-ages/figure-and-bake.png)
 
 ## Known problems
 
@@ -81,6 +89,7 @@ The photograph replaced a 2K CGI texture; the same Copernicus camera before and 
 - The full text of Prettyman et al. (2006) could not be read, so no value was compared with its tables.
 - Roughness is not measured at a fixed baseline. The newer LDRM_32 products showed interpolation speckle at display size.
 - One set of lighting values covers the whole globe, and the limb beyond 30° emission follows no measurement.
+- Mare ages: 588 units, 3.2% of the mapped area, have no age in the release and show black. In the Marius Hills the authors' figure colors 97 of them anyway (2.50–3.00 Ga in panel B); the file holds no value to draw that from. The uncorrected ages (`ModelAge5`) and the compiled earlier ages (`ModelAge1` to `ModelAge4`) are not shown.
 
 GRAIL views are attributed to the GRAIL mission and LRO views to LRO ([catalogue contract](../../../docs/architecture/exploration-catalog.md)).
 
