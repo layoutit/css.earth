@@ -1,0 +1,40 @@
+{
+  "host": "hat-p-32",
+  "planets": [
+    {
+      "id": "hat-p-32b",
+      "name": "HAT-P-32 b",
+      "description": "Transiting planet of HAT-P-32 with a 2.15-day year, found in 2011.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+        "credit": "Wang et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WANG_ET_AL__2019"
+      },
+      "text": {
+        "card": "HAT-P-32 b was found in 2011 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around HAT-P-32. Its orbit and size follow Wang et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WANG_ET_AL__2019): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 2.150008197, pl_radj 1.98, pl_bmassj 0.68",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-32b",
+          "title": "HAT-P-32b",
+          "revision": "1370776745",
+          "card": "HAT-P-32b is a planet orbiting the G-type or F-type star HAT-P-32, which is approximately 950 light years away from Earth.",
+          "introduction": "HAT-P-32b was first recognized as a possible planet by the planet-searching HATNet Project in 2004, although difficulties in measuring its radial velocity prevented astronomers from verifying the planet until after three years of observation."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2063,
+        "uncertaintyK": 36,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Zhao et al. 2014, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...796..115Z/abstract",
+        "chosen": "4 measured of 18 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5853
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-32",
+  "parent": "hat-p-32-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-32",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 951021.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-32-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-32",
+      "classification": "star",
+      "color": "#fff3f0",
+      "distanceAu": 59038052.9,
+      "description": "HAT-P-32 b crosses HAT-P-32 as seen from Earth, which is how it was found.",
+      "systemName": "HAT-P-32 system",
+      "order": 5852,
+      "context": {
+        "order": 5849
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5190808824204256000,
+        3124222217044154000,
+        6426381608686033000
+      ],
+      "presentationToReference": [
+        0.5877297517088165,
+        0.6234185017318976,
+        0.5156773319185641,
+        0.3537403148705978,
+        0.3752211351856853,
+        -0.856782871762278,
+        0.727627328095601,
+        -0.685972646253713,
+        -3.675197853306493e-7
+      ],
+      "orbitUpReference": [
+        -0.6234185017318976,
+        -0.3752211351856853,
+        0.685972646253713
+      ],
+      "metersPerUnit": 3067812.580645161,
+      "bodyRadiusM": 951021900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "hat-p-32",
+  "name": "HAT-P-32",
+  "system": "HAT-P-32 system",
+  "description": "Star of 6,001 K, 289 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "HAT-P-32",
+  "gaia": "356348286886230272",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+    "credit": "Wang et al. 2019"
+  },
+  "radius": {
+    "value": 1.367,
+    "source": "Wang et al. 2019, the stellar radius of the default parameter set of HAT-P-32 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+    "uncertainty": 0.031
+  },
+  "mass": {
+    "value": 1.132,
+    "source": "Wang et al. 2019, the stellar mass of the default parameter set of HAT-P-32 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+    "uncertainty": 0.051
+  },
+  "temperature": {
+    "value": 6001,
+    "source": "Wang et al. 2019, the stellar temperature of the default parameter set of HAT-P-32 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract",
+    "uncertainty": 88
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-32 b crosses HAT-P-32 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Wang et al. 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname WANG_ET_AL__2019): st_teff 6001, st_rad 1.367, st_mass 1.132",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-32b",
+      "title": "HAT-P-32b",
+      "revision": "1370776745",
+      "card": "HAT-P-32b is a planet orbiting the G-type or F-type star HAT-P-32, which is approximately 950 light years away from Earth.",
+      "introduction": "HAT-P-32b was first recognized as a possible planet by the planet-searching HATNet Project in 2004, although difficulties in measuring its radial velocity prevented astronomers from verifying the planet until after three years of observation."
+    }
+  },
+  "notes": [],
+  "order": 5852
+}

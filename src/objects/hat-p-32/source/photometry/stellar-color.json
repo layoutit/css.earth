@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hat-p-32",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 6001,
+      "lowerKelvin": 5913,
+      "upperKelvin": 6089,
+      "citation": "Wang et al. 2019, the stellar temperature of the default parameter set of HAT-P-32 b in the NASA Exoplanet Archive: 6001 +/- 88 K, https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

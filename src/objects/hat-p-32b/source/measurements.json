@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hat-p-32b",
+  "radiusKm": 141554.2,
+  "radiusSource": "Radius 1.98 Jupiter radii from Wang et al. 2019 (2019AJ....157...82W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract): 141,554.2 km at 71,492 km per Jupiter radius. GM from the mass 0.68 Jupiter masses (Wang et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....157...82W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.150008197,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.150008197 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of HAT-P-32 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.68 Jupiter masses: Wang et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....157...82W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract)."
+}
