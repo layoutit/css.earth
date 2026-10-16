@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hat-p-13b",
+  "radiusKm": 90937.8,
+  "radiusSource": "Radius 1.272 Jupiter radii from Winn et al. 2010 (2010ApJ...718..575W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract): 90,937.8 km at 71,492 km per Jupiter radius. GM from the mass 0.851 Jupiter masses (Winn et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010ApJ...718..575W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.91624121,
+  "orbitalPeriodSource": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 2.91624121 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of HAT-P-13 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.851 Jupiter masses: Winn et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010ApJ...718..575W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract)."
+}

@@ -1,0 +1,40 @@
+{
+  "host": "wasp-5",
+  "planets": [
+    {
+      "id": "wasp-5b",
+      "name": "WASP-5 b",
+      "description": "Transiting planet of WASP-5 with a 1.63-day year, found in 2008.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+        "credit": "Gillon et al. 2009"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GILLON_ET_AL__2009"
+      },
+      "text": {
+        "card": "WASP-5 b was found in 2008 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-5. Its orbit and size follow Gillon et al. 2009's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2009): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.62842992377, pl_radj 1.087, pl_bmassj 1.58",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-5b",
+          "title": "WASP-5b",
+          "revision": "1374239182",
+          "card": "WASP-5b is an exoplanet orbiting the star WASP-5 located approximately 1000 light-years away in the constellation Phoenix.",
+          "introduction": "The planet's mass and radius indicate that it is a gas giant with a similar bulk composition to Jupiter."
+        }
+      },
+      "thermal": {
+        "temperatureK": 2996,
+        "uncertaintyK": 261,
+        "wavelengthMicrometres": 1.22,
+        "facility": "European Southern Observatory (ESO)/Max Planck Gesellschaft (MPG) 2.2m Telescope at La Silla Observatory GROND",
+        "source": "Chen et al. 2014, dayside brightness temperature at 1.22 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014A%26A...563A..40C/abstract",
+        "chosen": "2 measured of 5 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5893
+    }
+  ]
+}

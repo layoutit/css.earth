@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-5",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 715,875 km at 313.65 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 313.6465074355376,
+  "distanceSource": "Gaia DR3 parallax 3.1883 +/- 0.0150 mas (same row, RUWE 1.07): 313.65 pc, no zero-point correction",
+  "radiusKm": 715875.3,
+  "radiusSource": "Radius 1.029 +/- 0.056 solar radii from Gillon et al. 2009, the stellar radius of the default parameter set of WASP-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract): 715,875 km at 695,700 km per solar radius. Mass 0.96 +/- 0.13 solar masses from Gillon et al. 2009, the stellar mass of the default parameter set of WASP-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract); GM is that mass times the JPL solar GM. Temperature 5700 +/- 100 K from Gillon et al. 2009, the stellar temperature of the default parameter set of WASP-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5700,
+  "effectiveTemperatureSource": "Gillon et al. 2009, the stellar temperature of the default parameter set of WASP-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract)",
+  "surfaceGravityLogg": 4.4,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-5.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.396, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-5 (pscomppars): spectral type G5, from Triaud et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A&A...524A..25T/abstract)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, WASP-5: main object type *, Star",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-5 (pscomppars): [Fe/H] 0.09 dex, from Gillon et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract)",
+  "luminosityLogSolar": 0.067,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-5 (pscomppars): log10 of the luminosity in solar units 0.06717, from Baluev et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.3101B/abstract)",
+  "ageGyr": 5.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-5 (pscomppars): age 5.4 Gyr, from Gillon et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract)",
+  "rotationPeriodDays": 16.2,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-5 (pscomppars): rotation period 16.2 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 3.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-5 (pscomppars): projected rotation speed 3.5 km/s, from Gillon et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

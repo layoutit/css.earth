@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "kepler-5b",
+  "displayName": "Kepler-5 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.4 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+          "label": "Esteves et al. 2015",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.55 days",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+          "label": "Esteves et al. 2015",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.1 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E",
+          "label": "Esteves et al. 2015",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,770 K. The disc itself is unresolved.",
+        "thumbnail": "kepler-5b-dataset-thermal.webp",
+        "surface": "kepler-5b-surface-thermal@2x.webp",
+        "poles": "kepler-5b-poles-thermal@2x.webp",
+        "source": {
+          "id": "kepler-5b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...11D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of Kepler-5 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-5b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-5b/kepler-5b-system-orbits.svg",
+      "alt": "The orbits of Kepler-5's planets in this map from above, to scale, with Kepler-5 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-5b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E"
+      }
+    },
+    {
+      "id": "kepler-5b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-5b/kepler-5b-transit.svg",
+      "alt": "Kepler-5 b crossing its star, as TESS recorded it: 3 sectors (75, 81, 82) of the SPOC pipeline's 2-minute light curves of TIC 268823307, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 18-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-5b-tess-sector-75",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024030031500-s0075-0000000268823307-0270-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Esteves et al. 2015",
+      "href": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+      "credit": "Esteves et al. 2015"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-5b.json",
+      "credit": "Radius from Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive; mass from Esteves et al. 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015ApJ...804..150E), via the NASA Exoplanet Archive; orbit from Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "hat-p-13",
+  "name": "HAT-P-13",
+  "system": "HAT-P-13 system",
+  "description": "Star of 5,653 K, 247 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "HAT-P-13",
+  "gaia": "1014520826353577088",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract",
+    "credit": "Winn et al. 2010"
+  },
+  "radius": {
+    "value": 1.56,
+    "source": "Bonomo et al. 2017, the stellar radius of HAT-P-13 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+    "uncertainty": 0.08
+  },
+  "mass": {
+    "value": 1.22,
+    "source": "Bonomo et al. 2017, the stellar mass of HAT-P-13 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 5653,
+    "source": "Yalçınkaya et al. 2024, the stellar temperature of HAT-P-13 b's parameter set from Yalçınkaya et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y/abstract",
+    "uncertainty": 90
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-13 b crosses HAT-P-13 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Bonomo et al. 2017, and its temperature Yalçınkaya et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname YALCINKAYA_ET_AL_2024, BONOMO_ET_AL__2017): st_teff 5653, st_rad 1.56, st_mass 1.22",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-13",
+      "title": "HAT-P-13",
+      "revision": "1370776705",
+      "card": "HAT-P-13, also known as GSC 03416-00543, is a G-type subgiant approximately 800 light-years away in the constellation Ursa Major.",
+      "introduction": "In 2009 it was discovered that this star is orbited by two massive planets, the innermost of which transits the star."
+    }
+  },
+  "notes": [
+    "HAT-P-13 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 5858
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-5",
+  "angularDiameterMas": 0.02,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,247,390 km at 897.73 pc = 0.02 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 897.7300992883222,
+  "distanceSource": "Gaia DR3 parallax 1.1139 +/- 0.0107 mas (same row, RUWE 0.93): 897.73 pc, no zero-point correction",
+  "radiusKm": 1247390.1,
+  "radiusSource": "Radius 1.793 +/- 0.043 solar radii from Esteves et al. 2015, the stellar radius of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract): 1,247,390 km at 695,700 km per solar radius. Mass 1.374 +/- 0.04 solar masses from Esteves et al. 2015, the stellar mass of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract); GM is that mass times the JPL solar GM. Temperature 6297 +/- 60 K from Esteves et al. 2015, the stellar temperature of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6297,
+  "effectiveTemperatureSource": "Esteves et al. 2015, the stellar temperature of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract)",
+  "surfaceGravityLogg": 4.07,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-5.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.069, rounded to two decimals",
+  "spectralType": "F5V",
+  "spectralTypeSource": "SIMBAD, Kepler-5: spectral type F5V (2016A&A...594A..39F)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, Kepler-5: main object type *, Star",
+  "metallicityDex": 0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-5 (pscomppars): [Fe/H] 0.04 dex, from Esteves et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract)",
+  "luminosityLogSolar": 0.652,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-5 (pscomppars): log10 of the luminosity in solar units 0.65242, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 2.88,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-5 (pscomppars): age 2.88 Gyr, from Fulton & Petigura 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..264F/abstract)",
+  "projectedRotationSpeedKmS": 4.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-5 (pscomppars): projected rotation speed 4.8 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

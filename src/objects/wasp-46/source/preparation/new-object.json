@@ -1,0 +1,46 @@
+{
+  "id": "wasp-46",
+  "name": "WASP-46",
+  "system": "WASP-46 system",
+  "description": "Star of 5,600 K, 375 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-46",
+  "gaia": "6462994429708755072",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C/abstract",
+    "credit": "Ciceri et al. 2016"
+  },
+  "radius": {
+    "value": 0.858,
+    "source": "Ciceri et al. 2016, the stellar radius of the default parameter set of WASP-46 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C/abstract",
+    "uncertainty": 0.027
+  },
+  "mass": {
+    "value": 0.828,
+    "source": "Ciceri et al. 2016, the stellar mass of the default parameter set of WASP-46 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C/abstract",
+    "uncertainty": 0.076
+  },
+  "temperature": {
+    "value": 5600,
+    "source": "Ciceri et al. 2016, the stellar temperature of the default parameter set of WASP-46 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-46 b crosses WASP-46 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Ciceri et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CICERI_ET_AL__2016): st_teff 5600, st_rad 0.858, st_mass 0.828",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-46",
+      "title": "WASP-46",
+      "revision": "1374405948",
+      "card": "WASP-46 is a G-type main-sequence star about 1,210 light-years away.",
+      "introduction": "The star is older than the Sun and is strongly depleted in heavy elements compared to the Sun, having just 45% of the solar abundance."
+    }
+  },
+  "notes": [],
+  "order": 5890
+}

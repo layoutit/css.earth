@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stae854",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Yalçınkaya et al. (2024): Looking for timing variations in the transits of 16 exoplanets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2403.17690"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stae854"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024MNRAS.530.2475Y"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stae854",
+      "label": "Monthly Notices of the Royal Astronomical Society 530 2475-2495"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Yalçınkaya et al. (2024), Monthly Notices of the Royal Astronomical Society 530 2475-2495",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 530 2475-2495",
+  "creators": [
+    "S Yalçınkaya",
+    "E M Esmer",
+    "Ö Baştürk",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

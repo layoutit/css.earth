@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-5",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2079018300195390464: position at J2016.0. Distance: Gaia DR3 parallax 1.1139 +/- 0.0107 mas (same row, RUWE 0.93): 897.73 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -0.190, -3.252 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.793 +/- 0.043 solar radii from Esteves et al. 2015, the stellar radius of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract). Mass 1.374 +/- 0.04 solar masses from Esteves et al. 2015, the stellar mass of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract). Temperature 6297 +/- 60 K from Esteves et al. 2015, the stellar temperature of the default parameter set of Kepler-5 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,297 K and log g 4.07 (u1 0.371, u2 0.306): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

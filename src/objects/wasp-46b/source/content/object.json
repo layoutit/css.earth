@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-46b",
+  "displayName": "WASP-46 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.2 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stv2698",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C",
+          "label": "Ciceri et al. 2016",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "34 hours",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stv2698",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C",
+          "label": "Ciceri et al. 2016",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.9 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stv2698",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C",
+          "label": "Ciceri et al. 2016",
+          "checked": "2026-10-16",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,200 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-46b-dataset-thermal.webp",
+        "surface": "wasp-46b-surface-thermal@2x.webp",
+        "poles": "wasp-46b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-46b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.454.3002Z/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-46 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 2.159 µm (Anglo Australian Telescope IRIS2). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-46b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-46b/wasp-46b-system-orbits.svg",
+      "alt": "The orbits of WASP-46's planets in this map from above, to scale, with WASP-46 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-46b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C"
+      }
+    },
+    {
+      "id": "wasp-46b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-46b/wasp-46b-transit.svg",
+      "alt": "WASP-46 b crossing its star, as TESS recorded it: 3 sectors (103, 104, 105) of the SPOC pipeline's 2-minute light curves of TIC 231663901, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-46b-tess-sector-103",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026111101500-s0103-0000000231663901-0305-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ciceri et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C/abstract",
+      "credit": "Ciceri et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-46b.json",
+      "credit": "Radius from Ciceri et al. 2016 (2016MNRAS.456..990C), via the NASA Exoplanet Archive; mass from Ciceri et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.456..990C), via the NASA Exoplanet Archive; orbit from Ciceri et al. 2016 (2016MNRAS.456..990C), via the NASA Exoplanet Archive"
+    }
+  }
+}

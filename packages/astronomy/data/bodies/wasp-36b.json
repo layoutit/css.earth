@@ -1,0 +1,28 @@
+{
+ "id": "wasp-36b",
+ "classification": "exoplanet",
+ "order": 5886,
+ "physical": {
+  "name": "WASP-36 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 94869.9,
+  "gravitationalParameterKm3PerS2": 299106901.82,
+  "parent": "wasp-36"
+ },
+ "physicalNotes": "Radius 1.327 Jupiter radii from Mancini et al. 2016 (2016MNRAS.459.1393M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract): 94,869.9 km at 71,492 km per Jupiter radius. GM from the mass 2.361 Jupiter masses (Mancini et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.459.1393M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.1393M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.537365606,
+  "semiMajorAxisStellarRadii": 5.848,
+  "inclinationDegrees": 83.15,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57045.208846,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 1.537365606 d",
+   "shape": "Mancini et al. 2016 (2016MNRAS.459.1393M), via the NASA Exoplanet Archive ps table (pl_refname MANCINI_ET_AL__2016): a/R* 5.848; Mancini et al. 2016 (2016MNRAS.459.1393M), via the NASA Exoplanet Archive ps table (pl_refname MANCINI_ET_AL__2016): inclination 83.15 degrees",
+   "eccentricity": "Turner et al. 2016 (2016MNRAS.459..789T), via the NASA Exoplanet Archive ps table (pl_refname TURNER_ET_AL__2016): e 0",
+   "phase": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): transit mid-time 2457045.708846 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

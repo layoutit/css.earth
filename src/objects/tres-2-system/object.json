@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tres-2-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "tres-2"
+    },
+    "catalog": {
+      "name": "TrES-2 system",
+      "systemName": "TrES-2 system",
+      "classification": "planetary-system",
+      "color": "#fff4f5",
+      "distanceAu": 44542211.1,
+      "description": "TrES-2 b crosses TrES-2 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1256104547422951200,
+        -4158175879024012300,
+        5053012950766683000
+      ],
+      "presentationToReference": [
+        0.18850750509145042,
+        0.21928697621786342,
+        -0.9572764191107095,
+        -0.6240303502559064,
+        -0.7259230431285119,
+        -0.28917444115020186,
+        0.7583212000753293,
+        -0.651881091546815,
+        2.1317275723363862e-7
+      ],
+      "orbitUpReference": [
+        -0.21928697621786342,
+        0.7259230431285119,
+        0.651881091546815
+      ],
+      "metersPerUnit": 2513496.7741935486,
+      "bodyRadiusM": 779184000
+    }
+  }
+}

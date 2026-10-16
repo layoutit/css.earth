@@ -1,0 +1,47 @@
+{
+  "id": "hat-p-19",
+  "name": "HAT-P-19",
+  "system": "HAT-P-19 system",
+  "description": "Star of 4,962 K, 202 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "HAT-P-19",
+  "gaia": "365426679516816512",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+    "credit": "Kang et al. 2024"
+  },
+  "radius": {
+    "value": 0.773,
+    "source": "Kang et al. 2024, the stellar radius of the default parameter set of HAT-P-19 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 0.807,
+    "source": "Kang et al. 2024, the stellar mass of the default parameter set of HAT-P-19 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+    "uncertainty": 0.034
+  },
+  "temperature": {
+    "value": 4962,
+    "source": "Kang et al. 2024, the stellar temperature of the default parameter set of HAT-P-19 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract",
+    "uncertainty": 39
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-19 b crosses HAT-P-19 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Kang et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KANG_ET_AL_2024): st_teff 4962, st_rad 0.773, st_mass 0.807",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-19",
+      "title": "HAT-P-19",
+      "revision": "1353845700",
+      "card": "HAT-P-19 is a K-type main-sequence star about 658 light-years away.",
+      "introduction": "The star is old yet metal-enriched, having amount of heavy elements 250% of solar abundance."
+    }
+  },
+  "notes": [],
+  "order": 5860
+}

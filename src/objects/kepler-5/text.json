@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-5",
+  "card": {
+    "text": "Kepler-5 b crosses Kepler-5 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. (2015), The Astrophysical Journal 804 150",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 6297, st_rad 1.793, st_mass 1.374"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-5",
+        "url": "https://en.wikipedia.org/wiki/Kepler-5",
+        "label": "Wikipedia, \"Kepler-5\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370781277",
+        "quote": "Kepler-5 is a star located in the constellation Cygnus in the field of view of the Kepler Mission, a NASA project aimed at detecting planets in transit of, or passing in front of, their host stars as seen from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Esteves et al. 2015.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-804-2-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract",
+        "label": "Esteves et al. (2015), The Astrophysical Journal 804 150",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 6297, st_rad 1.793, st_mass 1.374"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-5",
+        "url": "https://en.wikipedia.org/wiki/Kepler-5",
+        "label": "Wikipedia, \"Kepler-5\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1370781277",
+        "quote": "One closely-orbiting, Jupiter-like planet, named Kepler-5b, has been detected around Kepler-5."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

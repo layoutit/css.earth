@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-17b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-17b-orbits",
+      "title": "Kepler-17 b: orbits around Kepler-17",
+      "output": "kepler-17b-system-orbits.svg",
+      "system": "kepler-17",
+      "highlight": "kepler-17b",
+      "description": "The orbits of Kepler-17's planets in this map from above, to scale, with Kepler-17 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 1.4857109944 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kepler-17b-transit",
+      "title": "Kepler-17 b: its transit",
+      "description": "Kepler-17 b crossing its star, as TESS recorded it: 3 sectors (81, 82, 83) of the SPOC pipeline's 2-minute light curves of TIC 273874849, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "output": "kepler-17b-transit.svg",
+      "metadata": {
+        "tic": "TIC 273874849",
+        "sectors": [
+          81,
+          82,
+          83
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "kepler-17b",
+      "sources": [
+        "photometry/tess/tess2024196212429-s0081-0000000273874849-0276-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000273874849-0278-s_lc.fits",
+        "photometry/tess/tess2024249191853-s0083-0000000273874849-0280-s_lc.fits"
+      ],
+      "durationHours": 2.2764,
+      "binMinutes": 9,
+      "notes": [
+        "TESS 2-min SPOC · sectors 81, 82, 83",
+        "Folded on the app's orbit; 9-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-4",
+  "card": {
+    "text": "WASP-4 b crosses WASP-4 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1009",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract",
+        "label": "Baştürk et al. (2025), Monthly Notices of the Royal Astronomical Society 541 714-730",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BOUMA_ET_AL__2019, BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025): st_teff 5400, st_rad 0.912, st_mass 0.899"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-4",
+        "url": "https://en.wikipedia.org/wiki/WASP-4",
+        "label": "Wikipedia, \"WASP-4\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374406113",
+        "quote": "WASP-4 is a G-type main-sequence star approximately 891 light-years away in the constellation of Phoenix."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius follows Baştürk et al. 2025, and its temperature Bouma et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1009",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract",
+        "label": "Baştürk et al. (2025), Monthly Notices of the Royal Astronomical Society 541 714-730",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BOUMA_ET_AL__2019, BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025): st_teff 5400, st_rad 0.912, st_mass 0.899"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-4",
+        "url": "https://en.wikipedia.org/wiki/WASP-4",
+        "label": "Wikipedia, \"WASP-4\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374406113",
+        "quote": "Despite its advanced age, the star is rotating rapidly, being spun up by the tides raised by a giant planet on a close orbit."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+ "id": "wasp-4b",
+ "classification": "exoplanet",
+ "order": 5889,
+ "physical": {
+  "name": "WASP-4 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 96442.7,
+  "gravitationalParameterKm3PerS2": 152023838.28,
+  "parent": "wasp-4"
+ },
+ "physicalNotes": "Radius 1.349 Jupiter radii from Baştürk et al. 2025 (2025MNRAS.541..714B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract): 96,442.7 km at 71,492 km per Jupiter radius. GM from the mass 1.2 Jupiter masses (Baştürk et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025MNRAS.541..714B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..714B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.33823136361,
+  "semiMajorAxisStellarRadii": 5.411,
+  "inclinationDegrees": 88.05,
+  "eccentricity": 0.0053,
+  "argumentOfPeriapsisDegrees": 247,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 55804.015679,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.33823136361 d",
+   "shape": "Baştürk et al. 2025 (2025MNRAS.541..714B), via the NASA Exoplanet Archive ps table (pl_refname BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025): a/R* 5.411; Baştürk et al. 2025 (2025MNRAS.541..714B), via the NASA Exoplanet Archive ps table (pl_refname BA_AMP__351_T_AMP_UUML_RK_ET_AL__2025): inclination 88.05 degrees",
+   "eccentricity": "Baluev et al. 2020 (2020MNRAS.496L..11B), via the NASA Exoplanet Archive ps table (pl_refname BALUEV_ET_AL__2020): e 0.0053",
+   "argumentOfPeriapsis": "Baluev et al. 2020 (2020MNRAS.496L..11B), via the NASA Exoplanet Archive ps table (pl_refname BALUEV_ET_AL__2020): omega 247 degrees",
+   "phase": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): transit mid-time 2455804.51567913 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0067-0049-197-1-14",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Désert et al. (2011): THE HOT-JUPITER KEPLER-17b: DISCOVERY, OBLIQUITY FROM STROBOSCOPIC STARSPOTS, AND ATMOSPHERIC CHARACTERIZATION",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1107.5750"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0067-0049/197/1/14"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJS..197...14D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0067-0049/197/1/14",
+      "label": "The Astrophysical Journal Supplement Series 197 14"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Désert et al. (2011), The Astrophysical Journal Supplement Series 197 14",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 197 14",
+  "creators": [
+    "Jean-Michel Désert",
+    "David Charbonneau",
+    "Brice-Olivier Demory",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

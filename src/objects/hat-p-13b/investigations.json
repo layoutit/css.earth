@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hat-p-13b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.272 Jupiter radii from Winn et al. 2010 (2010ApJ...718..575W), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.851 Jupiter masses: Winn et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010ApJ...718..575W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 2.91624121 d; Winn et al. 2010 (2010ApJ...718..575W), via the NASA Exoplanet Archive ps table (pl_refname WINN_ET_AL__2010): a/R* 5.8928; Winn et al. 2010 (2010ApJ...718..575W), via the NASA Exoplanet Archive ps table (pl_refname WINN_ET_AL__2010): inclination 83.4 degrees; Winn et al. 2010 (2010ApJ...718..575W), via the NASA Exoplanet Archive ps table (pl_refname WINN_ET_AL__2010): e 0.0133; Winn et al. 2010 (2010ApJ...718..575W), via the NASA Exoplanet Archive ps table (pl_refname WINN_ET_AL__2010): omega 210 degrees; Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): transit mid-time 2456316.79044 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 1,732 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Hardy et al. 2017, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)): #ff7b00. Chosen from the archive's emission rows by rule: 2 measured of 4 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017ApJ...836..143H/abstract"
+      ]
+    }
+  ]
+}

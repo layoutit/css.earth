@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-5",
+  "card": {
+    "text": "WASP-5 b crosses WASP-5 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0812-1998",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+        "label": "Gillon et al. (2009)",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2009): st_teff 5700, st_rad 1.029, st_mass 0.96"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-5",
+        "url": "https://en.wikipedia.org/wiki/WASP-5",
+        "label": "Wikipedia, \"WASP-5\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374405504",
+        "quote": "WASP-5 is a magnitude 12 G-type main-sequence star located about 1,020 light-years away in the Phoenix constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gillon et al. 2009.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0812-1998",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...496..259G/abstract",
+        "label": "Gillon et al. (2009)",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2009): st_teff 5700, st_rad 1.029, st_mass 0.96"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-5",
+        "url": "https://en.wikipedia.org/wiki/WASP-5",
+        "label": "Wikipedia, \"WASP-5\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1374405504",
+        "quote": "The star is likely older than the Sun, slightly enriched in heavy elements and is rotating rapidly, being spun up by the tides raised by the giant planet on a close orbit."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

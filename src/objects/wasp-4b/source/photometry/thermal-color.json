@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wasp-4b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1995,
+      "lowerKelvin": 1955,
+      "upperKelvin": 2035,
+      "citation": "Cáceres et al. 2011, dayside brightness temperature at 2.2 µm (NASA Exoplanet Archive emission table): 1995 +/- 40 K, https://ui.adsabs.harvard.edu/abs/2011A&A...530A...5C/abstract"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 2.2 µm (European Southern Observatory (ESO) 8.2m Very Large Telescope (VLT) Melipal (UT3) at Paranal Observatory ISAAC) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "3 measured of 4 rows; the smallest relative uncertainty, then the longest wavelength",
+    "wavelengthMicrometres": 2.2,
+    "facility": "European Southern Observatory (ESO) 8.2m Very Large Telescope (VLT) Melipal (UT3) at Paranal Observatory ISAAC",
+    "rows": "photometry/emission-spectroscopy.csv"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

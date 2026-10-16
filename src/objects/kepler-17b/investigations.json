@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-17b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.31 Jupiter radii from Désert et al. 2011 (2011ApJS..197...14D), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "2.45 Jupiter masses: Désert et al. 2011, the mass the NASA Exoplanet Archive's composite table adopts (2011ApJS..197...14D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 1.4857109944 d; Désert et al. 2011 (2011ApJS..197...14D), via the NASA Exoplanet Archive ps table (pl_refname DESERT_ET_AL__2011): a/R* 5.48; Désert et al. 2011 (2011ApJS..197...14D), via the NASA Exoplanet Archive ps table (pl_refname DESERT_ET_AL__2011): inclination 87.2 degrees; Q1-Q8 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q8_KOI_TABLE): e 0; Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): transit mid-time 2455185.67875 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2011ApJS..197...14D/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 2,032 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ff8d1b. Chosen from the archive's emission rows by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+      ]
+    }
+  ]
+}

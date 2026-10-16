@@ -1,0 +1,33 @@
+{
+  "host": "wasp-46",
+  "planets": [
+    {
+      "id": "wasp-46b",
+      "name": "WASP-46 b",
+      "description": "Transiting planet of WASP-46 with a 1.43-day year, found in 2011.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C/abstract",
+        "credit": "Ciceri et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CICERI_ET_AL__2016"
+      },
+      "text": {
+        "card": "WASP-46 b was found in 2011 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-46. Its orbit and size follow Ciceri et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CICERI_ET_AL__2016): disc_year 2011, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.43037192, pl_radj 1.174, pl_bmassj 1.91"
+      },
+      "thermal": {
+        "temperatureK": 2200,
+        "uncertaintyK": 100,
+        "wavelengthMicrometres": 2.159,
+        "facility": "Anglo Australian Telescope IRIS2",
+        "source": "Zhou et al. 2015, dayside brightness temperature at 2.159 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.454.3002Z/abstract",
+        "chosen": "1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5891
+    }
+  ]
+}

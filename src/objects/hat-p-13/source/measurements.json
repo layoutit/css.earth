@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hat-p-13",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,085,292 km at 245.40 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 245.39935206521966,
+  "distanceSource": "Gaia DR3 parallax 4.0750 +/- 0.0186 mas (same row, RUWE 1.12): 245.40 pc, no zero-point correction",
+  "radiusKm": 1085292,
+  "radiusSource": "Radius 1.56 +/- 0.08 solar radii from Bonomo et al. 2017, the stellar radius of HAT-P-13 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract): 1,085,292 km at 695,700 km per solar radius. Mass 1.22 +/- 0.05 solar masses from Bonomo et al. 2017, the stellar mass of HAT-P-13 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract); GM is that mass times the JPL solar GM. Temperature 5653 +/- 90 K from Yalçınkaya et al. 2024, the stellar temperature of HAT-P-13 b's parameter set from Yalçınkaya et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5653,
+  "effectiveTemperatureSource": "Yalçınkaya et al. 2024, the stellar temperature of HAT-P-13 b's parameter set from Yalçınkaya et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.2475Y/abstract)",
+  "surfaceGravityLogg": 4.14,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-13.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.138, rounded to two decimals",
+  "spectralType": "G4",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-13 (pscomppars): spectral type G4, from Bakos et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...707..446B/abstract)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, HAT-P-13: main object type *, Star",
+  "metallicityDex": 0.46,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-13 (pscomppars): [Fe/H] 0.46 dex, from Knutson et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...785..126K/abstract)",
+  "luminosityLogSolar": 0.346,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-13 (pscomppars): log10 of the luminosity in solar units 0.346, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-13 (pscomppars): age 5 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 1.66,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-13 (pscomppars): projected rotation speed 1.66 km/s, from Winn et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010ApJ...718..575W/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

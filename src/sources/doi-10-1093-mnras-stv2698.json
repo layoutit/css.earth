@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stv2698",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ciceri et al. (2016): Physical properties of the planetary systems WASP-45 and WASP-46 from simultaneous multiband photometry",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1511.05171"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stv2698"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016MNRAS.456..990C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stv2698",
+      "label": "Monthly Notices of the Royal Astronomical Society 456 990-1002"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ciceri et al. (2016), Monthly Notices of the Royal Astronomical Society 456 990-1002",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.456..990C"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 456 990-1002",
+  "creators": [
+    "S. Ciceri",
+    "L. Mancini",
+    "J. Southworth",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

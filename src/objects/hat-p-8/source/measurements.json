@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hat-p-8",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,092,249 km at 214.56 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 214.56429036708633,
+  "distanceSource": "Gaia DR3 parallax 4.6606 +/- 0.0208 mas (same row, RUWE 1.02): 214.56 pc, no zero-point correction",
+  "radiusKm": 1092249,
+  "radiusSource": "Radius 1.57 +/- 0.15 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-8 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 1,092,249 km at 695,700 km per solar radius. Mass 1.27 +/- 0.41 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-8 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 6200 +/- 80 K from Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-8 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6200,
+  "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-8 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "surfaceGravityLogg": 4.15,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-8.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.150, rounded to two decimals",
+  "spectralType": "F6",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-8 (pscomppars): spectral type F6, from Luo et al. 2018 (http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=V/153/stellar4)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, BD+34 4779: main object type PM*, High Proper Motion Star",
+  "metallicityDex": 0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-8 (pscomppars): [Fe/H] 0.01 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.519,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-8 (pscomppars): log10 of the luminosity in solar units 0.519, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 3.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-8 (pscomppars): age 3.4 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 11.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-8 (pscomppars): projected rotation speed 11.5 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

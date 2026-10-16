@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-adc129",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rusznak et al. (2025): From Misaligned Sub-Saturns to Aligned Brown Dwarfs: The Highest <i>M</i> <sub> <i>p</i> </sub>/<i>M</i> <sub>*</sub> Systems Exhibit Low Obliquities, Even around Hot Stars*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2412.04438"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/adc129"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025ApJ...983L..42R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/adc129",
+      "label": "The Astrophysical Journal Letters 983 L42"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rusznak et al. (2025), The Astrophysical Journal Letters 983 L42",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..42R"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 983 L42",
+  "creators": [
+    "Jace Rusznak",
+    "Xian-Yu Wang",
+    "Malena Rice",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

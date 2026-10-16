@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-17",
+  "card": {
+    "text": "Kepler-17 b crosses Kepler-17 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+        "label": "Stassun et al. (2019), The Astronomical Journal 158 138",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2019): st_teff 5781, st_rad 1.01034, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-17",
+        "url": "https://en.wikipedia.org/wiki/Kepler-17",
+        "label": "Wikipedia, \"Kepler-17\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1378458007",
+        "quote": "Kepler-17 is a main-sequence yellow dwarf star about 2,310 light-years away in the constellation Cygnus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow TICv8.",
+    "sources": [
+      {
+        "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+        "label": "Stassun et al. (2019), The Astronomical Journal 158 138",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2019): st_teff 5781, st_rad 1.01034, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-17",
+        "url": "https://en.wikipedia.org/wiki/Kepler-17",
+        "label": "Wikipedia, \"Kepler-17\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1378458007",
+        "quote": "It is much more active than the Sun, with starspots covering roughly 6% of its surface."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

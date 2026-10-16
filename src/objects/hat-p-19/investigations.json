@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hat-p-19",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 365426679516816512: position at J2016.0. Distance: Gaia DR3 parallax 4.9567 +/- 0.0137 mas (same row, RUWE 1.00): 201.75 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -26.745, -32.568 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.773 +/- 0.011 solar radii from Kang et al. 2024, the stellar radius of the default parameter set of HAT-P-19 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract). Mass 0.807 +/- 0.034 solar masses from Kang et al. 2024, the stellar mass of the default parameter set of HAT-P-19 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract). Temperature 4962 +/- 39 K from Kang et al. 2024, the stellar temperature of the default parameter set of HAT-P-19 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024MNRAS.528.1930K/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,962 K and log g 4.57 (u1 0.668, u2 0.111): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

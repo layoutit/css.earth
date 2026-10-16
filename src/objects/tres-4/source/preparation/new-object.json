@@ -1,0 +1,47 @@
+{
+  "id": "tres-4",
+  "name": "TrES-4",
+  "system": "TrES-4 system",
+  "description": "Star of 6,200 K, 516 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "TrES-4",
+  "gaia": "4609062308806929152",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.66,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of TrES-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.19
+  },
+  "mass": {
+    "value": 1.08,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of TrES-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.38
+  },
+  "temperature": {
+    "value": 6200,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of TrES-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 75
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TrES-4 b crosses TrES-4 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6200, st_rad 1.66, st_mass 1.08",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TrES-4b",
+      "title": "TrES-4b",
+      "revision": "1378334065",
+      "card": "TrES-4b is an exoplanet.",
+      "introduction": "It was discovered in 2006, and announced in 2007, by the Trans-Atlantic Exoplanet Survey, using the transit method."
+    }
+  },
+  "notes": [],
+  "order": 5875
+}
