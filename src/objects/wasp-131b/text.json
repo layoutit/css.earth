@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-131b",
+  "card": {
+    "text": "WASP-131 b was found in 2016 by SuperWASP-South as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1240",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+        "label": "Doyle et al. 2023",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DOYLE_ET_AL__2023): disc_year 2016, disc_facility SuperWASP-South, sy_pnum 1; pl_orbper 5.3220125, pl_radj 1.226, pl_bmassj 0.273"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-131. Its orbit and size follow Doyle et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1240",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+        "label": "Doyle et al. 2023",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DOYLE_ET_AL__2023): disc_year 2016, disc_facility SuperWASP-South, sy_pnum 1; pl_orbper 5.3220125, pl_radj 1.226, pl_bmassj 0.273"
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,418 K day side measured in eclipse."
+    }
+  }
+}

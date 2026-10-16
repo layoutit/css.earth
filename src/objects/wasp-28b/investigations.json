@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-28b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.219 Jupiter radii from Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.889 Jupiter masses: Mo&#x10D;nik et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020PASP..132a4401M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2020): P 3.40883495 d; Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2020): a/R* derived from its semi-major axis 0.0442 au and stellar radius 1.083 solar radii; Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2020): inclination 88.514 degrees; Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2020): e 0; Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2020): transit mid-time 2457642.502126 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 1,548 K dayside brightness temperature measured in secondary eclipse at 4.5 µm (Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ff7000. Chosen from the archive's emission rows by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+      ]
+    }
+  ]
+}

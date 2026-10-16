@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-75",
+  "card": {
+    "text": "WASP-75 b crosses WASP-75 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201322314",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+        "label": "Chew et al. (2013), Astronomy & Astrophysics 559 A36",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_ET_AL__2013): st_teff 6100, st_rad 1.26, st_mass 1.14"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-75",
+        "url": "https://en.wikipedia.org/wiki/WASP-75",
+        "label": "Wikipedia, \"WASP-75\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1369401087",
+        "quote": "WASP-75 is an F-type main-sequence star about 980 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gomez et al. 2013.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201322314",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+        "label": "Chew et al. (2013), Astronomy & Astrophysics 559 A36",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_ET_AL__2013): st_teff 6100, st_rad 1.26, st_mass 1.14"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-75",
+        "url": "https://en.wikipedia.org/wiki/WASP-75",
+        "label": "Wikipedia, \"WASP-75\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1369401087",
+        "quote": "The star is much younger than the Sun at approximately 2.9 billion years."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

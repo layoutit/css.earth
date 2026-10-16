@@ -1,0 +1,40 @@
+{
+  "host": "wasp-28",
+  "planets": [
+    {
+      "id": "wasp-28b",
+      "name": "WASP-28 b",
+      "description": "Transiting planet of WASP-28 with a 3.41-day year, found in 2014.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract",
+        "credit": "Mo&#x10D;nik et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MO__X10D_NIK_ET_AL__2020"
+      },
+      "text": {
+        "card": "WASP-28 b was found in 2014 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-28. Its orbit and size follow Mo&#x10D;nik et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MO__X10D_NIK_ET_AL__2020): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.40883495, pl_radj 1.219, pl_bmassj 0.889",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-28b",
+          "title": "WASP-28b",
+          "revision": "1374243345",
+          "card": "WASP-28b or K2-1b is an extrasolar planet discovered in 2010 by the Wide Angle Search for Planets (WASP) project orbiting WASP-28, a magnitude 12 star also known as 1SWASP J233427.87-013448.1, 2MASS J23342787-0134482 and K2-1.",
+          "introduction": "Since it orbits its star very closely, the planet is a strongly irradiated hot Jupiter."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1548,
+        "uncertaintyK": 137,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5918
+    }
+  ]
+}

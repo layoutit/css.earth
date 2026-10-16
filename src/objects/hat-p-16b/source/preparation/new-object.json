@@ -1,0 +1,33 @@
+{
+  "host": "hat-p-16",
+  "planets": [
+    {
+      "id": "hat-p-16b",
+      "name": "HAT-P-16 b",
+      "description": "Transiting planet of HAT-P-16 with a 2.78-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "credit": "Alexoudi 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ALEXOUDI_2022"
+      },
+      "text": {
+        "card": "HAT-P-16 b was found in 2010 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around HAT-P-16. Its orbit and size follow Alexoudi 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ALEXOUDI_2022): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 2.77596727, pl_radj 1.31, pl_bmassj 4.221"
+      },
+      "thermal": {
+        "temperatureK": 1855,
+        "uncertaintyK": 130,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5905
+    }
+  ]
+}

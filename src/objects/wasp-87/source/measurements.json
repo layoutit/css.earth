@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-87",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,131,904 km at 300.92 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 300.92066722284574,
+  "distanceSource": "Gaia DR3 parallax 3.3231 +/- 0.0194 mas (same row, RUWE 1.24): 300.92 pc, no zero-point correction",
+  "radiusKm": 1131903.9,
+  "radiusSource": "Radius 1.627 +/- 0.062 solar radii from Addison et al. 2016, the stellar radius of the default parameter set of WASP-87 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract): 1,131,904 km at 695,700 km per solar radius. Mass 1.204 +/- 0.093 solar masses from Addison et al. 2016, the stellar mass of the default parameter set of WASP-87 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract); GM is that mass times the JPL solar GM. Temperature 6450 +/- 120 K from Addison et al. 2016, the stellar temperature of the default parameter set of WASP-87 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6450,
+  "effectiveTemperatureSource": "Addison et al. 2016, the stellar temperature of the default parameter set of WASP-87 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract)",
+  "surfaceGravityLogg": 4.1,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-87.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.096, rounded to two decimals",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, CD-52 4998: main object type *, Star",
+  "luminosityLogSolar": 0.537,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-87 (pscomppars): log10 of the luminosity in solar units 0.53683, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 3.115,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6077185317188247936, flags_flame 00: age_flame 3.1150513 Gyr (16th to 84th percentiles 2.6563914 to 3.5745268)",
+  "projectedRotationSpeedKmS": 9.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-87 (pscomppars): projected rotation speed 9.9 km/s, from Addison et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...823...29A/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

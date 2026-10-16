@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-87-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-87"
+    },
+    "catalog": {
+      "name": "WASP-87 system",
+      "systemName": "WASP-87 system",
+      "classification": "planetary-system",
+      "color": "#fff8fd",
+      "distanceAu": 62069309.9,
+      "description": "WASP-87 b crosses WASP-87 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5584495560612981000,
+        -520483803234893200,
+        -7400124229792680000
+      ],
+      "presentationToReference": [
+        -0.601425037029311,
+        0.7935213814187747,
+        -0.09279947233433584,
+        -0.056053763000795356,
+        0.07395753997385965,
+        0.995684818571854,
+        -0.7969604133755593,
+        -0.6040315385079278,
+        5.676726355746187e-8
+      ],
+      "orbitUpReference": [
+        -0.7935213814187747,
+        -0.07395753997385965,
+        0.6040315385079278
+      ],
+      "metersPerUnit": 3651302.9032258065,
+      "bodyRadiusM": 1131903900
+    }
+  }
+}

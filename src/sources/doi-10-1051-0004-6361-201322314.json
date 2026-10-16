@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201322314",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Chew et al. (2013): Discovery of WASP-65b and WASP-75b: Two hot Jupiters without highly inflated radii",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1307.6532"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201322314"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013A&A...559A..36G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201322314",
+      "label": "Astronomy & Astrophysics 559 A36"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G",
+      "checkedOn": "2026-10-16",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Chew et al. (2013), Astronomy & Astrophysics 559 A36",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 559 A36",
+  "creators": [
+    "Y. Gómez Maqueo Chew",
+    "F. Faedi",
+    "D. Pollacco",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

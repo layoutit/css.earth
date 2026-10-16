@@ -1,0 +1,40 @@
+{
+  "id": "kelt-14",
+  "name": "KELT-14",
+  "system": "KELT-14 system",
+  "description": "Star of 5,720 K, 250 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "KELT-14",
+  "gaia": "5560886336446650240",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+    "credit": "Turner et al. 2016"
+  },
+  "radius": {
+    "value": 1.52,
+    "source": "Turner et al. 2016, the stellar radius of the default parameter set of KELT-14 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1.239,
+    "source": "Turner et al. 2016, the stellar mass of the default parameter set of KELT-14 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+    "uncertainty": 0.039
+  },
+  "temperature": {
+    "value": 5720,
+    "source": "Turner et al. 2016, the stellar temperature of the default parameter set of KELT-14 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+    "uncertainty": 130
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-14 b crosses KELT-14 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Turner et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL__2016): st_teff 5720, st_rad 1.52, st_mass 1.239"
+  },
+  "notes": [],
+  "order": 5941
+}

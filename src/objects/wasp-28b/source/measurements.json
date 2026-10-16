@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-28b",
+  "radiusKm": 87148.7,
+  "radiusSource": "Radius 1.219 Jupiter radii from Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract): 87,148.7 km at 71,492 km per Jupiter radius. GM from the mass 0.889 Jupiter masses (Mo&#x10D;nik et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020PASP..132a4401M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.40883495,
+  "orbitalPeriodSource": "Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2020): P 3.40883495 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of WASP-28 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.889 Jupiter masses: Mo&#x10D;nik et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020PASP..132a4401M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020PASP..132a4401M/abstract)."
+}

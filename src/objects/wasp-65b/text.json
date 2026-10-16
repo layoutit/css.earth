@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-65b",
+  "card": {
+    "text": "WASP-65 b was found in 2013 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201322314",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract",
+        "label": "Chew et al. 2013",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_ET_AL__2013): disc_year 2013, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.3114205, pl_radj 1.112, pl_bmassj 1.55"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-65. Its orbit and size follow Gomez et al. 2013's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201322314",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract",
+        "label": "Chew et al. 2013",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_ET_AL__2013): disc_year 2013, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.3114205, pl_radj 1.112, pl_bmassj 1.55"
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,879 K day side measured in eclipse."
+    }
+  }
+}

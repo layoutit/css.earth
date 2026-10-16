@@ -1,0 +1,28 @@
+{
+ "id": "kelt-3b",
+ "classification": "exoplanet",
+ "order": 5914,
+ "physical": {
+  "name": "KELT-3 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 111527.5,
+  "gravitationalParameterKm3PerS2": 245771871.89,
+  "parent": "kelt-3"
+ },
+ "physicalNotes": "Radius 1.56 Jupiter radii from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 111,527.5 km at 71,492 km per Jupiter radius. GM from the mass 1.94 Jupiter masses (Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.70339023,
+  "semiMajorAxisStellarRadii": 6,
+  "inclinationDegrees": 84.14,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58872.354373,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 2.70339023 d",
+   "shape": "Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): a/R* 6; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): inclination 84.14 degrees",
+   "eccentricity": "Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): e 0",
+   "phase": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): transit mid-time 2458872.854373 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

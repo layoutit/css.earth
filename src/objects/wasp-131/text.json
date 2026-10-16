@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-131",
+  "card": {
+    "text": "WASP-131 b crosses WASP-131 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1240",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+        "label": "Doyle et al. (2023), Monthly Notices of the Royal Astronomical Society 522 4499-4514",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DOYLE_ET_AL__2023): st_teff 5990, st_rad 1.561, st_mass 1.06"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Doyle et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1240",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+        "label": "Doyle et al. (2023), Monthly Notices of the Royal Astronomical Society 522 4499-4514",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DOYLE_ET_AL__2023): st_teff 5990, st_rad 1.561, st_mass 1.06"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

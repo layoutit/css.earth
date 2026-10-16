@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-14",
+  "card": {
+    "text": "KELT-14 b crosses KELT-14 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-128-964-064401",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+        "label": "Turner et al. (2016), Publications of the Astronomical Society of the Pacific 128 064401",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL__2016): st_teff 5720, st_rad 1.52, st_mass 1.239"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Turner et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-128-964-064401",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+        "label": "Turner et al. (2016), Publications of the Astronomical Society of the Pacific 128 064401",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL__2016): st_teff 5720, st_rad 1.52, st_mass 1.239"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

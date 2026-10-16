@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-41b",
+  "card": {
+    "text": "HAT-P-41 b was found in 2012 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 2.6940497, pl_radj 2.05, pl_bmassj 1.19"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HAT-P-41. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 2.6940497, pl_radj 2.05, pl_bmassj 1.19"
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,218 K day side measured in eclipse."
+    }
+  }
+}

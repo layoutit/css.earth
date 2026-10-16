@@ -1,0 +1,40 @@
+{
+  "id": "wasp-131",
+  "name": "WASP-131",
+  "system": "WASP-131 system",
+  "description": "Star of 5,990 K, 200 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-131",
+  "gaia": "6173451477191225984",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+    "credit": "Doyle et al. 2023"
+  },
+  "radius": {
+    "value": 1.561,
+    "source": "Doyle et al. 2023, the stellar radius of the default parameter set of WASP-131 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+    "uncertainty": 0.043
+  },
+  "mass": {
+    "value": 1.06,
+    "source": "Doyle et al. 2023, the stellar mass of the default parameter set of WASP-131 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+    "uncertainty": 0.068
+  },
+  "temperature": {
+    "value": 5990,
+    "source": "Doyle et al. 2023, the stellar temperature of the default parameter set of WASP-131 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.4499D/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-131 b crosses WASP-131 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Doyle et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DOYLE_ET_AL__2023): st_teff 5990, st_rad 1.561, st_mass 1.06"
+  },
+  "notes": [],
+  "order": 5939
+}

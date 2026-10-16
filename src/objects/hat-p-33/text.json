@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-33",
+  "card": {
+    "text": "HAT-P-33 b crosses HAT-P-33 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6446, st_rad 1.79, st_mass 1.82"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-33",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-33",
+        "label": "Wikipedia, \"HAT-P-33\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1353842525",
+        "quote": "HAT-P-33 is a late-F dwarf star."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-16",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6446, st_rad 1.79, st_mass 1.82"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-33",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-33",
+        "label": "Wikipedia, \"HAT-P-33\"",
+        "checked": "2026-10-16",
+        "locator": "Lead section, revision 1353842525",
+        "quote": "It is orbited by a planet called HAT-P-33b."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

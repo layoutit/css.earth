@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kelt-3",
+  "parent": "kelt-3-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KELT-3",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1182690
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kelt-3-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KELT-3",
+      "classification": "star",
+      "color": "#f1efff",
+      "distanceAu": 43097875.2,
+      "description": "KELT-3 b crosses KELT-3 as seen from Earth, which is how it was found.",
+      "systemName": "KELT-3 system",
+      "order": 5913,
+      "context": {
+        "order": 5910
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4193526926139785700,
+        2555421471968611000,
+        4177616514884235000
+      ],
+      "presentationToReference": [
+        -0.6504257170782626,
+        -0.5533203192860003,
+        0.5203681493216766,
+        0.3963517756353048,
+        0.3371769280067992,
+        0.8539420291627756,
+        0.6479596102489483,
+        -0.7616746966291689,
+        -9.458630319819863e-7
+      ],
+      "orbitUpReference": [
+        0.5533203192860003,
+        -0.3371769280067992,
+        0.7616746966291689
+      ],
+      "metersPerUnit": 3815129.0322580645,
+      "bodyRadiusM": 1182690000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

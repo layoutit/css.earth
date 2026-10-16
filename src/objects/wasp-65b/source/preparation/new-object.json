@@ -1,0 +1,33 @@
+{
+  "host": "wasp-65",
+  "planets": [
+    {
+      "id": "wasp-65b",
+      "name": "WASP-65 b",
+      "description": "Transiting planet of WASP-65 with a 2.31-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...559A..36G/abstract",
+        "credit": "Gomez et al. 2013"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GOMEZ_ET_AL__2013"
+      },
+      "text": {
+        "card": "WASP-65 b was found in 2013 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-65. Its orbit and size follow Gomez et al. 2013's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_ET_AL__2013): disc_year 2013, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.3114205, pl_radj 1.112, pl_bmassj 1.55"
+      },
+      "thermal": {
+        "temperatureK": 1879,
+        "uncertaintyK": 114,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5926
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hat-p-41b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hat-p-41b-orbits",
+      "title": "HAT-P-41 b: orbits around HAT-P-41",
+      "output": "hat-p-41b-system-orbits.svg",
+      "system": "hat-p-41",
+      "highlight": "hat-p-41b",
+      "description": "The orbits of HAT-P-41's planets in this map from above, to scale, with HAT-P-41 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2022 (2022ApJS..258...40K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2022): P 2.6940497 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hat-p-41b-transit",
+      "title": "HAT-P-41 b: its transit",
+      "description": "HAT-P-41 b crossing its star, as TESS recorded it: 2 sectors (54, 81) of the SPOC pipeline's 2-minute light curves of TIC 398895470, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "output": "hat-p-41b-transit.svg",
+      "metadata": {
+        "tic": "TIC 398895470",
+        "sectors": [
+          54,
+          81
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hat-p-41b",
+      "sources": [
+        "photometry/tess/tess2022190063128-s0054-0000000398895470-0227-s_lc.fits",
+        "photometry/tess/tess2024196212429-s0081-0000000398895470-0276-s_lc.fits"
+      ],
+      "durationHours": 3.6552,
+      "binMinutes": 15,
+      "notes": [
+        "TESS 2-min SPOC · sectors 54, 81",
+        "Folded on the app's orbit; 15-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

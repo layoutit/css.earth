@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-75",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2605161444735454464: position at J2016.0. Distance: Gaia DR3 parallax 3.3387 +/- 0.0202 mas (same row, RUWE 0.85): 299.52 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): 45.892, 15.428 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.26 +/- 0.04 solar radii from Gomez et al. 2013, the stellar radius of the default parameter set of WASP-75 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract). Mass 1.14 +/- 0.07 solar masses from Gomez et al. 2013, the stellar mass of the default parameter set of WASP-75 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract). Temperature 6100 +/- 100 K from Gomez et al. 2013, the stellar temperature of the default parameter set of WASP-75 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,100 K and log g 4.29 (u1 0.399, u2 0.294): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": "NASA Exoplanet Archive transitspec, Wakeford et al. 2017",
+  "units": {
+    "x": "um",
+    "y": "%"
+  },
+  "uncertainty": "published 1-sigma, asymmetric (err1, err2)",
+  "observation": "Hubble Space Telescope satellite, Wide Field Camera 3",
+  "measurements": [
+    {
+      "x": 1.1425,
+      "xLow": 1.125,
+      "xHigh": 1.16,
+      "y": 1.1738,
+      "minus": 0.0082,
+      "plus": 0.0082
+    },
+    {
+      "x": 1.1775,
+      "xLow": 1.16,
+      "xHigh": 1.195,
+      "y": 1.181,
+      "minus": 0.0067,
+      "plus": 0.0067
+    },
+    {
+      "x": 1.2125,
+      "xLow": 1.195,
+      "xHigh": 1.23,
+      "y": 1.1715,
+      "minus": 0.007,
+      "plus": 0.007
+    },
+    {
+      "x": 1.2475,
+      "xLow": 1.23,
+      "xHigh": 1.265,
+      "y": 1.1871,
+      "minus": 0.0065,
+      "plus": 0.0065
+    },
+    {
+      "x": 1.2825,
+      "xLow": 1.265,
+      "xHigh": 1.3,
+      "y": 1.185,
+      "minus": 0.0063,
+      "plus": 0.0063
+    },
+    {
+      "x": 1.3175,
+      "xLow": 1.3,
+      "xHigh": 1.335,
+      "y": 1.18,
+      "minus": 0.0068,
+      "plus": 0.0068
+    },
+    {
+      "x": 1.3525,
+      "xLow": 1.335,
+      "xHigh": 1.37,
+      "y": 1.1786,
+      "minus": 0.0063,
+      "plus": 0.0063
+    },
+    {
+      "x": 1.3875,
+      "xLow": 1.37,
+      "xHigh": 1.405,
+      "y": 1.1804,
+      "minus": 0.0063,
+      "plus": 0.0063
+    },
+    {
+      "x": 1.4225,
+      "xLow": 1.405,
+      "xHigh": 1.44,
+      "y": 1.1997,
+      "minus": 0.0072,
+      "plus": 0.0072
+    },
+    {
+      "x": 1.4575,
+      "xLow": 1.44,
+      "xHigh": 1.475,
+      "y": 1.1655,
+      "minus": 0.0067,
+      "plus": 0.0067
+    },
+    {
+      "x": 1.4925,
+      "xLow": 1.475,
+      "xHigh": 1.51,
+      "y": 1.1936,
+      "minus": 0.0072,
+      "plus": 0.0072
+    },
+    {
+      "x": 1.5275,
+      "xLow": 1.51,
+      "xHigh": 1.545,
+      "y": 1.1857,
+      "minus": 0.0071,
+      "plus": 0.0071
+    },
+    {
+      "x": 1.5625,
+      "xLow": 1.545,
+      "xHigh": 1.58,
+      "y": 1.1579,
+      "minus": 0.0071,
+      "plus": 0.0071
+    },
+    {
+      "x": 1.5975,
+      "xLow": 1.58,
+      "xHigh": 1.615,
+      "y": 1.1671,
+      "minus": 0.0077,
+      "plus": 0.0077
+    },
+    {
+      "x": 1.6325,
+      "xLow": 1.615,
+      "xHigh": 1.65,
+      "y": 1.1708,
+      "minus": 0.0077,
+      "plus": 0.0077
+    }
+  ]
+}

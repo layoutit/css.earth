@@ -1,0 +1,47 @@
+{
+  "id": "kelt-3",
+  "name": "KELT-3",
+  "system": "KELT-3 system",
+  "description": "Star of 6,304 K, 210 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "KELT-3",
+  "gaia": "806492023789218688",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.7,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of KELT-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.12
+  },
+  "mass": {
+    "value": 1.96,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of KELT-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.5
+  },
+  "temperature": {
+    "value": 6304,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of KELT-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 49
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-3 b crosses KELT-3 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6304, st_rad 1.7, st_mass 1.96",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/KELT-3",
+      "title": "KELT-3",
+      "revision": "1333092718",
+      "card": "KELT-3 is a star in the zodiac constellation Leo Minor.",
+      "introduction": "With an apparent magnitude of 9.82, it is too faint to be seen with the naked eye, but can be detected using a telescope."
+    }
+  },
+  "notes": [],
+  "order": 5913
+}

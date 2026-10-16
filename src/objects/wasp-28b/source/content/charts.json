@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-28b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-28b-orbits",
+      "title": "WASP-28 b: orbits around WASP-28",
+      "output": "wasp-28b-system-orbits.svg",
+      "system": "wasp-28",
+      "highlight": "wasp-28b",
+      "description": "The orbits of WASP-28's planets in this map from above, to scale, with WASP-28 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Mo&#x10D;nik et al. 2020 (2020PASP..132a4401M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2020): P 3.40883495 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-28b-transit",
+      "title": "WASP-28 b: its transit",
+      "description": "WASP-28 b crossing its star, as TESS recorded it: 3 sectors (42, 70, 92) of the SPOC pipeline's 2-minute light curves of TIC 398572544, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-28b-transit.svg",
+      "metadata": {
+        "tic": "TIC 398572544",
+        "sectors": [
+          42,
+          70,
+          92
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-28b",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000398572544-0213-s_lc.fits",
+        "photometry/tess/tess2023263165758-s0070-0000000398572544-0265-s_lc.fits",
+        "photometry/tess/tess2025127075000-s0092-0000000398572544-0289-s_lc.fits"
+      ],
+      "durationHours": 3.2388,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 42, 70, 92",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

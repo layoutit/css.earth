@@ -1,0 +1,47 @@
+{
+  "id": "wasp-75",
+  "name": "WASP-75",
+  "system": "WASP-75 system",
+  "description": "Star of 6,100 K, 294 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "WASP-75",
+  "gaia": "2605161444735454464",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "credit": "Gomez et al. 2013"
+  },
+  "radius": {
+    "value": 1.26,
+    "source": "Gomez et al. 2013, the stellar radius of the default parameter set of WASP-75 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 1.14,
+    "source": "Gomez et al. 2013, the stellar mass of the default parameter set of WASP-75 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "uncertainty": 0.07
+  },
+  "temperature": {
+    "value": 6100,
+    "source": "Gomez et al. 2013, the stellar temperature of the default parameter set of WASP-75 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...559A..36G/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-75 b crosses WASP-75 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gomez et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_ET_AL__2013): st_teff 6100, st_rad 1.26, st_mass 1.14",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-75",
+      "title": "WASP-75",
+      "revision": "1369401087",
+      "card": "WASP-75 is an F-type main-sequence star about 980 light-years away.",
+      "introduction": "The star is much younger than the Sun at approximately 2.9 billion years."
+    }
+  },
+  "notes": [],
+  "order": 5927
+}
