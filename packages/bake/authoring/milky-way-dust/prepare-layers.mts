@@ -67,7 +67,7 @@ export async function prepareGalaxyLayers(args:readonly string[]=[]) {
    await installSlices([objectDirectory,'--field='+field,'--fit='+fit,'--frame='+resolve(recipeDirectory,'physical-frame.json'),'--in-plane-field='+resolve(decoded,'extension')]);
   }
  }
- if(!args.includes('--slabs-only'))await preparePathSkies({objectDirectory,inputDirectory:decoded,recipeDirectory,plan:recipe.skies,tuner,frame,pilot});
+ if(!args.includes('--slabs-only'))await preparePathSkies({objectDirectory,inputDirectory:decoded,plan:recipe.skies,tuner,frame,pilot});
  if(!pilot) {
   const descriptor=record(JSON.parse(readFileSync(resolve(objectDirectory,'object.json'),'utf8')));
   descriptor.properties={...record(descriptor.properties),galaxyStations:'galaxy-stations/tuner.json'};

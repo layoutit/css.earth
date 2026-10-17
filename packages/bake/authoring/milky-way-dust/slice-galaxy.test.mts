@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
-import { copyFileSync, cpSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { mock, test } from 'node:test';
+import {writeGalaxyGolden} from './galaxy-slice-golden.mts';
 
 mock.module('./galaxy-python.mts', { namedExports: { runGalaxyPython: () => {} } });
 const { main } = await import('./slice-galaxy.mts');
@@ -68,7 +69,7 @@ test('installing an unchanged completed-image opacity preserves every tuner byte
   const tuner=readFileSync(original+'/prepared/galaxy-stations/tuner.json','utf8').trimEnd();
   writeFileSync(dir+'/prepared/galaxy-stations/tuner.json',tuner);
   writeFileSync(dir+'/frame.json',JSON.stringify({frame:JSON.parse(readFileSync(original+'/source/preparation/b30/frame.json','utf8'))}));
-  cpSync(new URL('./fixtures/galaxy-slice-replay/',import.meta.url),dir+'/slabs',{recursive:true});
+  writeGalaxyGolden(dir+'/slabs');
   const prototype=JSON.parse(readFileSync(dir+'/slabs/prototype.json','utf8'));prototype.field.record='runs/b30-native-scatterFaceSide/fit-crisp.json';
   writeFileSync(dir+'/slabs/prototype.json',JSON.stringify(prototype));
   await main([dir,'--reuse='+dir+'/slabs','--frame='+dir+'/frame.json','--mode=outside-display','--counts=26,26,26','--local-only']);

@@ -17,7 +17,7 @@ The outside view is the accepted **b30-native-scatterFaceSide** fitted model, dr
 | Catalogue dots | The unchanged 33,820-row [stack](source/dots/stack.json), assembled from the per-catalogue `points.json` and merge records beside it. Six proximity files preserve position, color, radius and order. |
 | Stellar admission boundary | The [extent record](source/stellar-extent.json) uses 26 kpc as a presentation boundary. [López-Corredoira et al. (2018)](https://arxiv.org/abs/1804.03064) detect disc stars beyond 26 kpc; this boundary is not the observed end of the disc. |
 
-The [manifest](source/manifest.json) binds the preserved inputs and published references. Compressed pre-slice fields and radiance are restored from the source cache. Their generation and compression owners are retained; ordinary replay does not refit the model or require the research checkout. Source notices and catalogue-specific reuse terms remain beside their original inputs. The old OpenSpace volume, ESA backing, RR Lyrae overlay and globular-dot bank are historical source records and are not drawn by this presentation.
+The [manifest](source/manifest.json) binds the preserved inputs and published references. Compressed pre-slice fields, radiance and the accepted NASA low-frequency panorama are restored from the source cache. Their generation and compression owners are retained; ordinary replay does not refit the model or require the research checkout. Source notices and catalogue-specific reuse terms remain beside their original inputs. The old OpenSpace volume, ESA backing, RR Lyrae overlay and globular-dot bank are historical source records and are not drawn by this presentation.
 
 ## Evidence
 
@@ -29,10 +29,6 @@ The [manifest](source/manifest.json) binds the preserved inputs and published re
 These checks establish reproducibility, geometry and state behavior. They do not establish exact spectral transfer, every-angle visual continuity, calibrated photometry or current iPad performance.
 
 Inspected production-build captures: Chromium 148, 1024 × 640, DPR 1. The far scene retains exactly 247 elements. No Milky Way dot bank is requested outside; the Solar view requests all six proximity levels and its plain-star bank. Labels and navigation remain present.
-
-![Far face-on view](evidence/far-face-on.png)
-
-![Low-angle approach](evidence/low-angle-approach.png)
 
 The low-angle capture also shows the known near-sheet occlusion; the side camera can black out. These are retained limitations of the accepted bank.
 
@@ -53,7 +49,7 @@ The low-angle capture also shows the known near-sheet occlusion; the side camera
 
 The canonical field has 401 × 401 × 161 nodes at 80/80/40 pc. Each slab integrates only its own emission, scatter and dust, then applies the fitted population camera and frozen outside display scale **0.044094241663168915**, asinh stretch 6 and gamma 0.9. It never attributes a completed column back to its slabs.
 
-An explicit 601 × 601 × 361 in-plane field extends faint image support. The original field still supplies every canonical sample. Each image is cropped to its nonzero 8-bit alpha envelope plus empty cells; no feather, resampling, support clip or optimizer changes the original crop. The original affine columns and CSS raster phase survive compilation. The small independent step-one golden fixture defends the original unextended transfer; the complete replay also checks the shipped extension.
+An explicit 601 × 601 × 361 in-plane field extends faint image support. The original field still supplies every canonical sample. Each image is cropped to its nonzero 8-bit alpha envelope plus empty cells; no feather, resampling, support clip or optimizer changes the original crop. The original affine columns and CSS raster phase survive compilation. The small independent step-one golden fixture preserves exact expected PNG bytes as numeric arrays and defends the original unextended transfer; the complete replay also checks the shipped extension.
 
 ### Completed images and handover
 

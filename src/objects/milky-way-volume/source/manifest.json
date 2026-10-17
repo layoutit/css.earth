@@ -3457,6 +3457,25 @@
           }
         ]
       }
+    },
+    {
+      "id": "b30-input-285",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/nasa/low.png.gz",
+      "bytes": 193941,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+          }
+        ]
+      },
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "acquisition": "The accepted 1024 × 512 NASA panorama is compressed without changing its PNG bytes. Restore from source-cache/milky-way-volume at this manifest path; prepare-layers.mts decompresses it to .local/b30-inputs/nasa/low.png for path-skies.mts."
     }
   ],
   "documents": [
@@ -3948,15 +3967,6 @@
       }
     },
     {
-      "id": "source-record-49",
-      "path": "src/objects/milky-way-volume/source/preparation/b30/nasa-low.png",
-      "bytes": 193863,
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
-      }
-    },
-    {
       "id": "source-record-50",
       "path": "src/objects/milky-way-volume/source/preparation/b30/physical-frame.json",
       "bytes": 480,
@@ -3977,7 +3987,7 @@
     {
       "id": "source-record-52",
       "path": "src/objects/milky-way-volume/source/preparation/b30/recipe.json",
-      "bytes": 48290,
+      "bytes": 48438,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."

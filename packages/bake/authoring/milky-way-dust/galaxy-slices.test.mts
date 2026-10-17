@@ -2,14 +2,16 @@ import assert from 'node:assert/strict';
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { test } from 'node:test';
+import { after, test } from 'node:test';
 import { galaxySlices, galaxyCompletedImageOpacity, record } from './galaxy-slices.mts';
+import {writeGalaxyGolden} from './galaxy-slice-golden.mts';
 
-const root = new URL('./fixtures/galaxy-slice-replay/',import.meta.url);
-const input:unknown=JSON.parse(readFileSync(new URL('prototype.json',root),'utf8'));
+const directory=mkdtempSync(join(tmpdir(),'galaxy-slices-golden-'));
+after(()=>rmSync(directory,{recursive:true,force:true}));
+writeGalaxyGolden(directory);
+const input:unknown=JSON.parse(readFileSync(join(directory,'prototype.json'),'utf8'));
 record(record(input).field).record='runs/b30-native-scatterFaceSide/fit-crisp.json';
 const frame:unknown=JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way-volume/source/preparation/b30/frame.json',import.meta.url),'utf8'));
-const directory=root.pathname;
 
 test('accepted b30 keeps its Sun-centred Galactic frame, kpc conversion and all physical slab centres', () => {
   const prepared = galaxySlices(input, frame, directory);

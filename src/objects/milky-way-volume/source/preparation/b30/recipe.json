@@ -1189,6 +1189,12 @@
       "files": [
         "src/objects/milky-way-volume/source/b30-inputs/nasa/nz.webp.gz"
       ]
+    },
+    {
+      "destination": "nasa/low.png",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/low.png.gz"
+      ]
     }
   ]
 }

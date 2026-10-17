@@ -1,9 +1,14 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-import test from 'node:test';
+import {mkdtempSync,readFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import test,{after} from 'node:test';
 import {compileGalaxySliceVolume} from './galaxy-slice-compile.mts';
 import {record} from './galaxy-slices.mts';
-const directory=new URL('./fixtures/galaxy-slice-replay/',import.meta.url).pathname;
+import {writeGalaxyGolden} from './galaxy-slice-golden.mts';
+const directory=mkdtempSync(join(tmpdir(),'galaxy-compile-golden-'));
+after(()=>rmSync(directory,{recursive:true,force:true}));
+writeGalaxyGolden(directory);
 const input:unknown=JSON.parse(readFileSync(directory+'/prototype.json','utf8'));
 record(record(input).field).record='runs/b30-native-scatterFaceSide/fit-crisp.json';
 const frame:unknown=JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way-volume/source/preparation/b30/frame.json',import.meta.url),'utf8'));

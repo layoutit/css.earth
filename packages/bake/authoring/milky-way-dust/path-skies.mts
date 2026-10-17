@@ -17,15 +17,15 @@ function floats(b:Buffer){if(b.length!==W*H*3*4)throw Error('Radiance dimensions
 function vec(v:unknown):Vector3{if(!Array.isArray(v)||v.length!==3||v.some(n=>typeof n!=='number'||!Number.isFinite(n)))throw Error('Position');return[v[0],v[1],v[2]];}
 type Job={id:string;ly:number;positionKpc:Vector3};
 function jobs(v:unknown):Job[]{if(!Array.isArray(v))throw Error('Jobs');return v.map(v=>{if(!v||typeof v!=='object'||!('id'in v)||typeof v.id!=='string'||!/^path-[a-z0-9-]+$/.test(v.id)||!('ly'in v)||typeof v.ly!=='number'||!Number.isFinite(v.ly)||!('positionKpc'in v))throw Error('Job');return{id:v.id,ly:v.ly,positionKpc:vec(v.positionKpc)};});}
-export async function preparePathSkies({objectDirectory,inputDirectory,recipeDirectory,plan,tuner,frame,pilot=false,only}: {
- objectDirectory:string;inputDirectory:string;recipeDirectory:string;plan:unknown;tuner:unknown;frame:ReturnType<typeof parseDensityVolumeFrame>;pilot?:boolean;only?:readonly string[];
+export async function preparePathSkies({objectDirectory,inputDirectory,plan,tuner,frame,pilot=false,only}: {
+ objectDirectory:string;inputDirectory:string;plan:unknown;tuner:unknown;frame:ReturnType<typeof parseDensityVolumeFrame>;pilot?:boolean;only?:readonly string[];
 }) {
  if(!plan||typeof plan!=='object'||!('sun'in plan)||!('sgr'in plan))throw new TypeError('Invalid sky plan');
  const base=resolve(objectDirectory,'prepared/galaxy-stations');
  const all=[...jobs(plan.sun),...jobs(plan.sgr)],selected=pilot?all.slice(-1):only?all.filter(j=>only.includes(j.id)):all;
  const sun=floats(await readFile(resolve(inputDirectory,'panoramas/path-sun-0.f32')));
 const nasa=await Promise.all(SKY_BASES.map(async b=>{const {data,info}=await sharp(resolve(inputDirectory,'nasa/'+b.id+'.webp')).removeAlpha().raw().toBuffer({resolveWithObject:true});return{...b,data,width:info.width,height:info.height};}));
-const blur=await sharp(resolve(recipeDirectory,'nasa-low.png')).blur(1.75).removeAlpha().raw().toBuffer();
+const blur=await sharp(resolve(inputDirectory,'nasa/low.png')).blur(1.75).removeAlpha().raw().toBuffer();
 function nasaAt(gal:Vector3){const l=Math.atan2(gal[1],gal[0])-.088*Math.PI/180,b=Math.asin(gal[2])+.088*Math.PI/180,shift=[Math.cos(b)*Math.cos(l),Math.cos(b)*Math.sin(l),Math.sin(b)];
  const ray=[0,1,2].map(i=>shift.reduce((s,v,j)=>s+v*G[j]![i]!,0)),axis=ray.map(Math.abs).indexOf(Math.max(...ray.map(Math.abs))),f=nasa[axis*2+(ray[axis]!<0?1:0)]!,dot=(v:Vector3)=>v.reduce((s,v,i)=>s+v*ray[i]!,0),z=dot(f.forwardIcrf),x=Math.max(0,Math.min(f.width-1,(dot(f.rightIcrf)/z+1)*f.width/2-.5)),y=Math.max(0,Math.min(f.height-1,(1-dot(f.upIcrf)/z)*f.height/2-.5)),ix=Math.floor(x),iy=Math.floor(y),ax=x-ix,ay=y-iy;
  return [0,1,2].map(c=>{const p=(xx:number,yy:number)=>f.data[(Math.min(f.height-1,yy)*f.width+Math.min(f.width-1,xx))*3+c]!/255*.972;return(p(ix,iy)*(1-ax)+p(ix+1,iy)*ax)*(1-ay)+(p(ix,iy+1)*(1-ax)+p(ix+1,iy+1)*ax)*ay;});}
