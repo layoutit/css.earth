@@ -1500,8 +1500,7 @@ asyncio.run(main(sys.argv[1], sys.argv[2]))
 `;
 
 async function deviceScreen(binary: string, udid: string, file: string) {
-  const executable = binary.includes('/') ? binary : (await run('which', [binary])).stdout.trim();
-  const python = (await readFile(await realpath(executable), 'utf8')).split('\n', 1)[0]!.replace(/^#!\s*/u, '').trim();
+  const python = await bridgePython(binary);
   try {
     await run(python, ['-c', SCREEN_STILL, file, udid], { env: deviceEnv(udid), timeout: 20_000 });
   } catch (error) {
@@ -1516,8 +1515,7 @@ async function deviceScreen(binary: string, udid: string, file: string) {
 async function deviceScreens(binary: string, udid: string, out: string) {
   const dir = resolve(out, 'screens');
   await mkdir(dir, { recursive: true });
-  const executable = binary.includes('/') ? binary : (await run('which', [binary])).stdout.trim();
-  const python = (await readFile(await realpath(executable), 'utf8')).split('\n', 1)[0]!.replace(/^#!\s*/u, '').trim();
+  const python = await bridgePython(binary);
   const errors: string[] = [];
   const child = spawn(python, ['-c', SCREEN_GRABBER, dir, udid], { env: deviceEnv(udid), stdio: ['ignore', 'pipe', 'pipe'] });
   child.stderr?.on('data', chunk => errors.push(String(chunk)));

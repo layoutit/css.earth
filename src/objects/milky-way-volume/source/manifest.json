@@ -1,0 +1,4087 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "b30-input-0",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-000.f32.gz",
+      "bytes": 13236229,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-1",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-001.f32.gz",
+      "bytes": 13165637,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-2",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-002.f32.gz",
+      "bytes": 13192053,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-3",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-003.f32.gz",
+      "bytes": 13955207,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-4",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-004.f32.gz",
+      "bytes": 14432088,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-5",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-005.f32.gz",
+      "bytes": 14446545,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-6",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-006.f32.gz",
+      "bytes": 14568849,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-7",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-007.f32.gz",
+      "bytes": 14569880,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-8",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-008.f32.gz",
+      "bytes": 14649599,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-9",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-009.f32.gz",
+      "bytes": 14751933,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-10",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-010.f32.gz",
+      "bytes": 14651929,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-11",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-011.f32.gz",
+      "bytes": 14539697,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-12",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-012.f32.gz",
+      "bytes": 14484710,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-13",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-013.f32.gz",
+      "bytes": 14520940,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-14",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-014.f32.gz",
+      "bytes": 14356386,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-15",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-015.f32.gz",
+      "bytes": 13174385,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-16",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-016.f32.gz",
+      "bytes": 13254036,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-17",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-017.f32.gz",
+      "bytes": 13184605,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-18",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-018.f32.gz",
+      "bytes": 6839455,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-19",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-000.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-20",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-001.f32.gz",
+      "bytes": 10652303,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-21",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-002.f32.gz",
+      "bytes": 12410478,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-22",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-003.f32.gz",
+      "bytes": 12329362,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-23",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-004.f32.gz",
+      "bytes": 12404210,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-24",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-005.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-25",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-006.f32.gz",
+      "bytes": 2838,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-26",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-000.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-27",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-001.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-28",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-002.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-29",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-003.f32.gz",
+      "bytes": 7017962,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-30",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-004.f32.gz",
+      "bytes": 12558072,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-31",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-005.f32.gz",
+      "bytes": 12563038,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-32",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-006.f32.gz",
+      "bytes": 12759201,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-33",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-007.f32.gz",
+      "bytes": 12550158,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-34",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-008.f32.gz",
+      "bytes": 12084493,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-35",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-009.f32.gz",
+      "bytes": 12121571,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-36",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-010.f32.gz",
+      "bytes": 12445435,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-37",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-011.f32.gz",
+      "bytes": 12558409,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-38",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-012.f32.gz",
+      "bytes": 12637795,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-39",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-013.f32.gz",
+      "bytes": 12756279,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-40",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-014.f32.gz",
+      "bytes": 12002429,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-41",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-015.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-42",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-016.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-43",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-017.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-44",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-018.f32.gz",
+      "bytes": 8469,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-45",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-000.f32.gz",
+      "bytes": 12179225,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-46",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-001.f32.gz",
+      "bytes": 12156810,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-47",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-002.f32.gz",
+      "bytes": 12115199,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-48",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-003.f32.gz",
+      "bytes": 12084830,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-49",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-004.f32.gz",
+      "bytes": 12082329,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-50",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-005.f32.gz",
+      "bytes": 12127033,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-51",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-006.f32.gz",
+      "bytes": 12165611,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-52",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-007.f32.gz",
+      "bytes": 12182997,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-53",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-008.f32.gz",
+      "bytes": 12175514,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-54",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-009.f32.gz",
+      "bytes": 12147180,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-55",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-010.f32.gz",
+      "bytes": 12102480,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-56",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-011.f32.gz",
+      "bytes": 12081378,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-57",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-012.f32.gz",
+      "bytes": 12093852,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-58",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-013.f32.gz",
+      "bytes": 12137378,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-59",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-014.f32.gz",
+      "bytes": 12172450,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-60",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-015.f32.gz",
+      "bytes": 12184367,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-61",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-016.f32.gz",
+      "bytes": 12170593,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-62",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-017.f32.gz",
+      "bytes": 12135726,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-63",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-018.f32.gz",
+      "bytes": 12091804,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-64",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-019.f32.gz",
+      "bytes": 12081525,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-65",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-020.f32.gz",
+      "bytes": 12104958,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-66",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-021.f32.gz",
+      "bytes": 12148409,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-67",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-022.f32.gz",
+      "bytes": 12175597,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-68",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-023.f32.gz",
+      "bytes": 12179212,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-69",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-024.f32.gz",
+      "bytes": 12159047,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-70",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-025.f32.gz",
+      "bytes": 12117954,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-71",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-026.f32.gz",
+      "bytes": 12072320,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-72",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-027.f32.gz",
+      "bytes": 12074717,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-73",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-028.f32.gz",
+      "bytes": 12102461,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-74",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-029.f32.gz",
+      "bytes": 12136918,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-75",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-030.f32.gz",
+      "bytes": 12153186,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-76",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-031.f32.gz",
+      "bytes": 12140976,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-77",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-032.f32.gz",
+      "bytes": 12108121,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-78",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-033.f32.gz",
+      "bytes": 12410619,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-79",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-034.f32.gz",
+      "bytes": 12775783,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-80",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-035.f32.gz",
+      "bytes": 12787832,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-81",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-036.f32.gz",
+      "bytes": 12810864,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-82",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-037.f32.gz",
+      "bytes": 12889678,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-83",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-038.f32.gz",
+      "bytes": 12932369,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-84",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-039.f32.gz",
+      "bytes": 12936182,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-85",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-040.f32.gz",
+      "bytes": 12886736,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-86",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-041.f32.gz",
+      "bytes": 12835095,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-87",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-042.f32.gz",
+      "bytes": 12829982,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-88",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-043.f32.gz",
+      "bytes": 12854742,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-89",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-044.f32.gz",
+      "bytes": 12917460,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-90",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-045.f32.gz",
+      "bytes": 13034765,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-91",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-046.f32.gz",
+      "bytes": 13088294,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-92",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-047.f32.gz",
+      "bytes": 13048343,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-93",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-048.f32.gz",
+      "bytes": 12955630,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-94",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-049.f32.gz",
+      "bytes": 12881983,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-95",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-050.f32.gz",
+      "bytes": 12856587,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-96",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-051.f32.gz",
+      "bytes": 12853849,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-97",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-052.f32.gz",
+      "bytes": 12872547,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-98",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-053.f32.gz",
+      "bytes": 12930171,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-99",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-054.f32.gz",
+      "bytes": 12939404,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-100",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-055.f32.gz",
+      "bytes": 12914006,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-101",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-056.f32.gz",
+      "bytes": 12816390,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-102",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-057.f32.gz",
+      "bytes": 12778243,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-103",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-058.f32.gz",
+      "bytes": 12761795,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-104",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-059.f32.gz",
+      "bytes": 12368318,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-105",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-060.f32.gz",
+      "bytes": 12114156,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-106",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-061.f32.gz",
+      "bytes": 12144158,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-107",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-062.f32.gz",
+      "bytes": 12150230,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-108",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-063.f32.gz",
+      "bytes": 12130139,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-109",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-064.f32.gz",
+      "bytes": 12092757,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-110",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-065.f32.gz",
+      "bytes": 12070414,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-111",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-066.f32.gz",
+      "bytes": 12079776,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-112",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-067.f32.gz",
+      "bytes": 12127200,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-113",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-068.f32.gz",
+      "bytes": 12163161,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-114",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-069.f32.gz",
+      "bytes": 12181802,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-115",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-070.f32.gz",
+      "bytes": 12172611,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-116",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-071.f32.gz",
+      "bytes": 12139399,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-117",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-072.f32.gz",
+      "bytes": 12095749,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-118",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-073.f32.gz",
+      "bytes": 12081365,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-119",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-074.f32.gz",
+      "bytes": 12099401,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-120",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-075.f32.gz",
+      "bytes": 12144327,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-121",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-076.f32.gz",
+      "bytes": 12173829,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-122",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-077.f32.gz",
+      "bytes": 12184671,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-123",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-078.f32.gz",
+      "bytes": 12167916,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-124",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-079.f32.gz",
+      "bytes": 12129697,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-125",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-080.f32.gz",
+      "bytes": 12085425,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-126",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-081.f32.gz",
+      "bytes": 12083191,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-127",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-082.f32.gz",
+      "bytes": 12112141,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-128",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-083.f32.gz",
+      "bytes": 12154822,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-129",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-084.f32.gz",
+      "bytes": 12179394,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-130",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-085.f32.gz",
+      "bytes": 12180355,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-131",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-086.f32.gz",
+      "bytes": 12159752,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-132",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-087.f32.gz",
+      "bytes": 12118104,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-133",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-088.f32.gz",
+      "bytes": 12086420,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-134",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-089.f32.gz",
+      "bytes": 12079003,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-135",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-090.f32.gz",
+      "bytes": 12125626,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-136",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-091.f32.gz",
+      "bytes": 12162994,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-137",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-092.f32.gz",
+      "bytes": 12183544,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-138",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-093.f32.gz",
+      "bytes": 3203378,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-139",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-000.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-140",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-001.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-141",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-002.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-142",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-003.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-143",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-004.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-144",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-005.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-145",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-006.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-146",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-007.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-147",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-008.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-148",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-009.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-149",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-010.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-150",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-011.f32.gz",
+      "bytes": 4466227,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-151",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-012.f32.gz",
+      "bytes": 5689999,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-152",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-013.f32.gz",
+      "bytes": 5617754,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-153",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-014.f32.gz",
+      "bytes": 5452588,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-154",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-015.f32.gz",
+      "bytes": 5523737,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-155",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-016.f32.gz",
+      "bytes": 5423783,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-156",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-017.f32.gz",
+      "bytes": 5648500,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-157",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-018.f32.gz",
+      "bytes": 5686525,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-158",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-019.f32.gz",
+      "bytes": 4502855,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-159",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-020.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-160",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-021.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-161",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-022.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-162",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-023.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-163",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-024.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-164",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-025.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-165",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-026.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-166",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-027.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-167",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-028.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-168",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-029.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-169",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-030.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-170",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-031.f32.gz",
+      "bytes": 1470,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-171",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-000.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-172",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-001.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-173",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-002.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-174",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-003.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-175",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-004.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-176",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-005.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-177",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-006.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-178",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-007.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-179",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-008.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-180",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-009.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-181",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-010.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-182",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-011.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-183",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-012.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-184",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-013.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-185",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-014.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-186",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-015.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-187",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-016.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-188",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-017.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-189",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-018.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-190",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-019.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-191",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-020.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-192",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-021.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-193",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-022.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-194",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-023.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-195",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-024.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-196",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-025.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-197",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-026.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-198",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-027.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-199",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-028.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-200",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-029.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-201",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-030.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-202",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-031.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-203",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-032.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-204",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-033.f32.gz",
+      "bytes": 2464673,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-205",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-034.f32.gz",
+      "bytes": 5499898,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-206",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-035.f32.gz",
+      "bytes": 5503251,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-207",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-036.f32.gz",
+      "bytes": 5539411,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-208",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-037.f32.gz",
+      "bytes": 5782637,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-209",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-038.f32.gz",
+      "bytes": 5827663,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-210",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-039.f32.gz",
+      "bytes": 5822830,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-211",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-040.f32.gz",
+      "bytes": 5602994,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-212",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-041.f32.gz",
+      "bytes": 5493310,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-213",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-042.f32.gz",
+      "bytes": 5493304,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-214",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-043.f32.gz",
+      "bytes": 5495822,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-215",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-044.f32.gz",
+      "bytes": 5426097,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-216",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-045.f32.gz",
+      "bytes": 5534046,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-217",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-046.f32.gz",
+      "bytes": 5547623,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-218",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-047.f32.gz",
+      "bytes": 5520685,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-219",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-048.f32.gz",
+      "bytes": 5312913,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-220",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-049.f32.gz",
+      "bytes": 5505032,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-221",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-050.f32.gz",
+      "bytes": 5499305,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-222",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-051.f32.gz",
+      "bytes": 5506739,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-223",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-052.f32.gz",
+      "bytes": 5659572,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-224",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-053.f32.gz",
+      "bytes": 5836281,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-225",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-054.f32.gz",
+      "bytes": 5838451,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-226",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-055.f32.gz",
+      "bytes": 5749122,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-227",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-056.f32.gz",
+      "bytes": 5540458,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-228",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-057.f32.gz",
+      "bytes": 5524101,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-229",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-058.f32.gz",
+      "bytes": 5515537,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-230",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-059.f32.gz",
+      "bytes": 2524440,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-231",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-060.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-232",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-061.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-233",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-062.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-234",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-063.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-235",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-064.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-236",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-065.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-237",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-066.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-238",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-067.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-239",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-068.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-240",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-069.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-241",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-070.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-242",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-071.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-243",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-072.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-244",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-073.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-245",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-074.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-246",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-075.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-247",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-076.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-248",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-077.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-249",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-078.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-250",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-079.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-251",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-080.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-252",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-081.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-253",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-082.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-254",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-083.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-255",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-084.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-256",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-085.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-257",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-086.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-258",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-087.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-259",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-088.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-260",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-089.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-261",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-090.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-262",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-091.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-263",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-092.f32.gz",
+      "bytes": 16328,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-264",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-093.f32.gz",
+      "bytes": 4351,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-265",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-20000.f32.gz",
+      "bytes": 5348729,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-266",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-12000.f32.gz",
+      "bytes": 5260105,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-267",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-7000.f32.gz",
+      "bytes": 5310472,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-268",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-4000.f32.gz",
+      "bytes": 5271454,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-269",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-2000.f32.gz",
+      "bytes": 5293739,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-270",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-1000.f32.gz",
+      "bytes": 5327534,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-271",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-300.f32.gz",
+      "bytes": 5325224,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-272",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-0.f32.gz",
+      "bytes": 5287533,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-273",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-owner-20000.f32.gz",
+      "bytes": 5323642,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-274",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-owner-10000.f32.gz",
+      "bytes": 5405751,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-275",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-3000.f32.gz",
+      "bytes": 5386846,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-276",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-300.f32.gz",
+      "bytes": 5256490,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-277",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-30.f32.gz",
+      "bytes": 5231833,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-278",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-1p6.f32.gz",
+      "bytes": 5228790,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted pre-slice b30 float field or radiance. Frozen local fit; its published priors are bound by the lineage record."
+      }
+    },
+    {
+      "id": "b30-input-279",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/nasa/px.webp.gz",
+      "bytes": 52154,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b30-input-280",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/nasa/nx.webp.gz",
+      "bytes": 45795,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b30-input-281",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/nasa/py.webp.gz",
+      "bytes": 55058,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b30-input-282",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/nasa/ny.webp.gz",
+      "bytes": 48409,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b30-input-283",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/nasa/pz.webp.gz",
+      "bytes": 52250,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b30-input-284",
+      "path": "src/objects/milky-way-volume/source/b30-inputs/nasa/nz.webp.gz",
+      "bytes": 64596,
+      "dependencies": [],
+      "origin": "https://github.com/layoutit/cssEarth",
+      "generator": "packages/bake/authoring/milky-way-dust/pack-inputs.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "src/objects/milky-way-volume/source/sky/provenance.json#/sourcePage"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "source-record-0",
+      "path": "src/objects/milky-way-volume/source/acquisition.json",
+      "bytes": 494,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-1",
+      "path": "src/objects/milky-way-volume/source/backing/recipe.json",
+      "bytes": 3368,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-2",
+      "path": "src/objects/milky-way-volume/source/bulge-rr-lyrae/points.json",
+      "bytes": 1430,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-3",
+      "path": "src/objects/milky-way-volume/source/bulge-rr-lyrae/tablec1.dat.gz",
+      "bytes": 17639666,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-4",
+      "path": "src/objects/milky-way-volume/source/cepheids/Data_Table_1.dat",
+      "bytes": 575072,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-5",
+      "path": "src/objects/milky-way-volume/source/cepheids/points.json",
+      "bytes": 1750,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-6",
+      "path": "src/objects/milky-way-volume/source/color-calibration.json",
+      "bytes": 6149,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-7",
+      "path": "src/objects/milky-way-volume/source/density.ktx2",
+      "bytes": 43800096,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-8",
+      "path": "src/objects/milky-way-volume/source/dots/stack.json",
+      "bytes": 3264,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-9",
+      "path": "src/objects/milky-way-volume/source/gaia-rr-lyrae/points.json",
+      "bytes": 1702,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-10",
+      "path": "src/objects/milky-way-volume/source/gaia-rr-lyrae/sample.csv.gz",
+      "bytes": 363984,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-11",
+      "path": "src/objects/milky-way-volume/source/globular-clusters/orbits_table.txt",
+      "bytes": 43346,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-12",
+      "path": "src/objects/milky-way-volume/source/globular-clusters/points.json",
+      "bytes": 1065,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-13",
+      "path": "src/objects/milky-way-volume/source/hot-stars/points.json",
+      "bytes": 1958,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-14",
+      "path": "src/objects/milky-way-volume/source/hot-stars/zari-sample.csv.gz",
+      "bytes": 2308902,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-15",
+      "path": "src/objects/milky-way-volume/source/hou-han-gmc/points.json",
+      "bytes": 1733,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-16",
+      "path": "src/objects/milky-way-volume/source/hou-han-gmc/tablea2.dat",
+      "bytes": 255747,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-17",
+      "path": "src/objects/milky-way-volume/source/hou-han-hii/points.json",
+      "bytes": 1906,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-18",
+      "path": "src/objects/milky-way-volume/source/hou-han-hii/tablea1.dat",
+      "bytes": 933705,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-19",
+      "path": "src/objects/milky-way-volume/source/hou-han-masers/points.json",
+      "bytes": 1978,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-20",
+      "path": "src/objects/milky-way-volume/source/hou-han-masers/tablea3.dat",
+      "bytes": 122241,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-21",
+      "path": "src/objects/milky-way-volume/source/local-100pc/merge.json",
+      "bytes": 2816,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-22",
+      "path": "src/objects/milky-way-volume/source/local-20pc/merge.json",
+      "bytes": 2459,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-23",
+      "path": "src/objects/milky-way-volume/source/local-3kpc/merge.json",
+      "bytes": 2834,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-24",
+      "path": "src/objects/milky-way-volume/source/local-800pc/merge.json",
+      "bytes": 2770,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-25",
+      "path": "src/objects/milky-way-volume/source/local-sky/merge.json",
+      "bytes": 1237,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-26",
+      "path": "src/objects/milky-way-volume/source/masers/points.json",
+      "bytes": 1149,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-27",
+      "path": "src/objects/milky-way-volume/source/masers/table1.dat",
+      "bytes": 24142,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-28",
+      "path": "src/objects/milky-way-volume/source/nearby-stars-20pc/gcns-20pc.csv.gz",
+      "bytes": 43809,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-29",
+      "path": "src/objects/milky-way-volume/source/nearby-stars-20pc/points.json",
+      "bytes": 1591,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-30",
+      "path": "src/objects/milky-way-volume/source/nearby-stars-sky/gcns-sky.csv.gz",
+      "bytes": 350750,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-31",
+      "path": "src/objects/milky-way-volume/source/nearby-stars-sky/points.json",
+      "bytes": 1736,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-32",
+      "path": "src/objects/milky-way-volume/source/nearby-stars/gcns-sample.csv.gz",
+      "bytes": 89899,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-33",
+      "path": "src/objects/milky-way-volume/source/nearby-stars/points.json",
+      "bytes": 1679,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-34",
+      "path": "src/objects/milky-way-volume/source/old-star-dots/stack.json",
+      "bytes": 859,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-35",
+      "path": "src/objects/milky-way-volume/source/old-stars/merge.json",
+      "bytes": 1057,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-36",
+      "path": "src/objects/milky-way-volume/source/open-clusters/clusters.dat.gz",
+      "bytes": 2200042,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-37",
+      "path": "src/objects/milky-way-volume/source/open-clusters/points.json",
+      "bytes": 1867,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-38",
+      "path": "src/objects/milky-way-volume/source/openspace/LICENSE.md",
+      "bytes": 1148,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-39",
+      "path": "src/objects/milky-way-volume/source/openspace/galaxyraycast.glsl",
+      "bytes": 3788,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-40",
+      "path": "src/objects/milky-way-volume/source/openspace/sync-response.txt",
+      "bytes": 279,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-41",
+      "path": "src/objects/milky-way-volume/source/openspace/volume.asset",
+      "bytes": 1838,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-42",
+      "path": "src/objects/milky-way-volume/source/packaged-stars/points.json",
+      "bytes": 861,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-43",
+      "path": "src/objects/milky-way-volume/source/packaged-stars/positions.csv.gz",
+      "bytes": 37733,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-44",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/extension.json",
+      "bytes": 2045,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-45",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/field.json",
+      "bytes": 1944,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-46",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/fit.json",
+      "bytes": 1614,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-47",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/frame.json",
+      "bytes": 278,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-48",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/lineage.json",
+      "bytes": 3827,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "drimmel-2003-extinction-grids",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/7340108"
+          },
+          {
+            "catalogueId": "edenhofer-2024-dust-map",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/10658339"
+          },
+          {
+            "catalogueId": "marshall-2006-extinction",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/453/635/ReadMe"
+          },
+          {
+            "catalogueId": "vergely-2022-dust-map",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/664/A174/ReadMe"
+          },
+          {
+            "catalogueId": "bland-hawthorn-gerhard-2016",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1602.07702"
+          },
+          {
+            "catalogueId": "sormani-2022-bar",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2204.13114"
+          },
+          {
+            "catalogueId": "reid-2019-maser-parallaxes",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1910.03357"
+          },
+          {
+            "catalogueId": "sharma-2011-galaxia",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1101.3561"
+          },
+          {
+            "catalogueId": "nasa-deep-star-maps-2020",
+            "role": "material",
+            "evidence": "https://svs.gsfc.nasa.gov/4851/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "source-record-49",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/nasa-low.png",
+      "bytes": 193863,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-50",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/physical-frame.json",
+      "bytes": 480,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-51",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/provenance.json",
+      "bytes": 1930,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-52",
+      "path": "src/objects/milky-way-volume/source/preparation/b30/recipe.json",
+      "bytes": 48290,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-53",
+      "path": "src/objects/milky-way-volume/source/provenance.json",
+      "bytes": 7117,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-54",
+      "path": "src/objects/milky-way-volume/source/sky/NOTICE.md",
+      "bytes": 1015,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-55",
+      "path": "src/objects/milky-way-volume/source/sky/acquisition.json",
+      "bytes": 527,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-56",
+      "path": "src/objects/milky-way-volume/source/sky/linear-rgb16f-0.zst",
+      "bytes": 59201890,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-57",
+      "path": "src/objects/milky-way-volume/source/sky/linear-rgb16f-1.zst",
+      "bytes": 63642515,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-58",
+      "path": "src/objects/milky-way-volume/source/sky/nasa-preview.jpg",
+      "bytes": 71247,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-59",
+      "path": "src/objects/milky-way-volume/source/sky/provenance.json",
+      "bytes": 3273,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-60",
+      "path": "src/objects/milky-way-volume/source/sky/recipe.json",
+      "bytes": 918,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-61",
+      "path": "src/objects/milky-way-volume/source/stellar-extent.json",
+      "bytes": 616,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-62",
+      "path": "src/objects/milky-way-volume/source/tracers/merge.json",
+      "bytes": 4498,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    },
+    {
+      "id": "source-record-63",
+      "path": "src/objects/milky-way-volume/source/volume.json",
+      "bytes": 1873,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe, retained catalogue input, notice, or historical preparation record; the README distinguishes current and retired products."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

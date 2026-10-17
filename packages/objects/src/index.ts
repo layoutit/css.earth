@@ -300,3 +300,7 @@ export { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, re
 export { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from './prepared-data/surface/map-sphere-datasets.js';
 export { LEAF_BOX_PROPERTY, LEAF_BOX_FACTOR, SURFACE_SEAM_OUTSET_PROPERTY, LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_STEP, TEXELS_PER_CSS_PIXEL } from './prepared-data/presentation/leaf-box-properties.js';
 export { requirePresentationEnvelope } from './prepared-data/runtime-validation/presentation-envelope.js';
+
+export * from './prepared-data/catalogue/catalogue-proximity.js';
+export * from './prepared-data/cloud/galaxy-stations.js';
+export * from './prepared-data/cloud/cloud-patches.js';

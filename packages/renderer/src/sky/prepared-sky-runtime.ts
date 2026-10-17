@@ -4,16 +4,20 @@ import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../renderi
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 import { afterStartup, startupOpen } from '../rendering/loading/startup-gate.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 
 /** Transports retained celestial images through the shared physical observer pose. The cube is the diffuse Milky Way
  * only; stars are drawn as their own points. */
-export function mountPreparedCssSky({ host, before, payload: input, resources, resolveResource }: {
+export function mountPreparedCssSky({ host, before, payload: input, resources, resolveResource, opacityOnly = false }: {
   host: HTMLElement; before: Element; payload: PreparedCssSky; resources: PreparedCssVolume['resources']; resolveResource(path: string): string;
+  /** Already decoded station faces can retain membership and image styles throughout a coast. */
+  opacityOnly?: boolean;
 }) {
   const payload = validatePreparedCssSky(input, resources), document = host.ownerDocument;
   const root = document.createElement('div');
   root.className = 'prepared-celestial-sky'; root.ariaHidden = 'true';
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none', transformStyle: 'flat', background: '#000', visibility: 'hidden' });
+  if (opacityOnly) root.style.visibility = 'visible';
   // The root carries the background opacity above the retained 3D camera.
   const camera = document.createElement('div'), scene = document.createElement('div');
   camera.className = 'prepared-celestial-sky-camera';
@@ -28,9 +32,12 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
     Object.assign(node.style, { position: 'absolute', left: '0', top: '0', display: 'block', pointerEvents: 'none', transformOrigin: '0 0',
       backfaceVisibility: 'visible', backgroundRepeat: 'no-repeat', textDecoration: 'none', ...face.style, visibility: 'hidden' });
     scene.appendChild(node);
-    boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: false, image: `url("${escapeUrl(resolveResource(face.texturePath))}")` });
+    const image = `url("${escapeUrl(resolveResource(face.texturePath))}")`;
+    if (opacityOnly) { node.style.visibility = 'visible'; node.style.opacity = '0'; node.style.backgroundImage = image; }
+    boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: false, image: opacityOnly ? null : image });
   }
   camera.appendChild(scene); root.appendChild(camera);
+  if (opacityOnly) camera.style.opacity = '0';
   host.insertBefore(root, before);
   let destroyed = false, previousTransform = '', previousPerspective = '', previousOrigin = '', previousClipView = '';
   // During a body's first view the faces in view wait, and take their images once it is interactive (startup-gate.ts).
@@ -47,8 +54,10 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
       const pose = preparedSkyCameraPose(world, viewport, payload.parallax);
       const transform = skyTransformCss(pose);
       const visibility = visible ? 'visible' : 'hidden';
-      if (root.style.visibility !== visibility) root.style.visibility = visibility;
-      if (!visible) return;
+      if (opacityOnly) writeStyle(camera, 'opacity', visible ? '1' : '0');
+      else if (root.style.visibility !== visibility) root.style.visibility = visibility;
+      // Prepare the retained lens before a coast can reveal the sky through opacity alone.
+      if (!visible && !opacityOnly) return;
       const perspective = `${format(viewport.focalPixels)}px`, origin = `calc(50% + ${format(viewport.principalOffsetPixels[0])}px) calc(50% + ${format(viewport.principalOffsetPixels[1])}px)`;
       if (perspective !== previousPerspective) { camera.style.perspective = perspective; previousPerspective = perspective; }
       if (origin !== previousOrigin) { camera.style.perspectiveOrigin = origin; previousOrigin = origin; }
@@ -67,7 +76,8 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
             if (startupOpen(document.defaultView)) { face.node.style.backgroundImage = face.image; face.image = null; }
             else if (!imagesWaiting) { imagesWaiting = true; afterStartup(document.defaultView, showImages); }
           }
-          face.node.style.visibility = shown ? '' : 'hidden';
+          if (opacityOnly) face.node.style.opacity = shown ? '1' : '0';
+          else face.node.style.visibility = shown ? '' : 'hidden';
         }
       }
     },

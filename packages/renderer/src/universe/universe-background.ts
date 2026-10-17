@@ -1,36 +1,33 @@
+import { catalogueDiscOpacity, catalogueLevelOpacity } from './catalogue-proximity.js';
+import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 import { writeData } from '../rendering/dom/retained-write.js';
 import { eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
 import type { SceneLifetime } from '@cssearth/engine';
-import { parseGalaxyBacking, type PreparedCssVolume, type PreparedWorldContext, type BackingNearFade } from '@cssearth/objects';
+import type { PreparedCssVolume, PreparedWorldContext } from '@cssearth/objects';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { mountPreparedVolumeLod } from '../volume/prepared-volume-lod.js';
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/loading/prepared-prefetch.js';
 import { mountCataloguePoints } from './catalogue-points.js';
-import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-point-transport.js';
-import { mountGalaxyBacking } from './galaxy-backing.js';
-import { revealLayer } from '../rendering/dom/layer-reveal.js';
-import { afterStartup } from '../rendering/loading/startup-gate.js';
+import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import { catalogueDotsOpacity, galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
+import { mountGalaxyStations, type GalaxyStationBackgroundOptions } from './galaxy-stations.js';
 import { starFieldAroundPicture } from './context-presentation-policy.js';
-
-const PARSEC_M = 3.085677581491367e16;
-/** From among the local stars the flat face-on image is seen edge-on, a line across the view: it fades in as the camera
- * pulls out from 0.05 to 5 pc from the viewed body. A presentation choice, by eye on 2026-09-30. */
-const BACKING_FADE_IN_M = [.05 * PARSEC_M, 5 * PARSEC_M] as const;
+import { galaxyAutoExposure } from './galaxy-auto-exposure.js';
 
 /** Retained sky and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
-  prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], backingUrl }: {
+  prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], catalogueProximity, stations, requestPublication }: {
   root: HTMLElement; end: Node; lifetime: SceneLifetime; plan: PreparedWorldContext;
   payload: PreparedCssVolume; sky: boolean;
   resolveResource(path: string): string;
   prefetchUrls: readonly string[]; prefetchDistanceM: number;
   /** Published star catalogues inside the galaxy, drawn as dust with it (PreparedUniverseOptions.galaxyCataloguePoints). */
   cataloguePointUrls?: readonly string[];
-  /** A face-on image of the galaxy under its catalogue dots, shown with them (PreparedUniverseOptions.galaxyBacking). */
-  backingUrl?: string;
+  catalogueProximity?: PreparedUniverseOptions['galaxyCatalogueProximity'];
+  stations?: GalaxyStationBackgroundOptions;
+  requestPublication?: () => unknown;
 }) {
   const document = root.ownerDocument;
   const volumeHost = document.createElement('div');
@@ -41,63 +38,51 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   root.insertBefore(volumeHost, end);
   const volumeImage = document.createElement('div');
   volumeImage.className = 'prepared-volume-image';
+  // An opaque completed image allows a baked display gain to be applied once, after optical compositing.
+  if (stations?.farImageOpacity !== undefined && stations.farImageOpacity < 1) volumeImage.style.background = '#000';
   volumeHost.appendChild(volumeImage);
   const volumeEnd = document.createElement('span'); volumeEnd.hidden = true; volumeImage.appendChild(volumeEnd);
-  // The face-on image lies under the catalogue dots and shows with them, inside the galaxy or out: its rings dim where it blurs.
-  const backingHost = document.createElement('div');
-  backingHost.className = 'prepared-galaxy-backing';
-  backingHost.style.cssText = 'position:absolute;inset:0;pointer-events:none';
-  const backingEnd = document.createElement('span'); backingEnd.hidden = true; backingHost.appendChild(backingEnd);
-  // Right over the galaxy's own layer and under everything added after it: the image's black square must never hide the
-  // galaxies, clouds or dots drawn later.
-  root.insertBefore(backingHost, end);
   let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
   let volumeLayer: ReturnType<typeof mountPreparedVolumeLod> | null = null;
   const cataloguePoints: ReturnType<typeof mountCataloguePoints>[] = [];
-  // The whole image and its sections over it, each with the opacity it keeps close up.
-  let backing: { plane: ReturnType<typeof mountGalaxyBacking>; fade: BackingNearFade | undefined; opacity: number; image: string }[] | null = null;
-  let backingLoading = false;
-  // The last frame the backing was published for: a layer that loads while the camera rests is placed from it at once.
-  let backingFrame: { world: WorldCameraPose; viewport: WorldCameraViewport; distanceM: number; shown: number } | null = null;
-  // The backing's centre and the range it fades out over as the camera closes on it (galaxy-backing.ts centreFadeM).
-  let backingCentre: { originM: readonly number[]; fadeM: readonly [number, number] } | null = null;
-  const publishBacking = ({ world, viewport, distanceM, shown }: NonNullable<typeof backingFrame>) => {
-    const centre = backingCentre ? logarithmicFade(eyeDistanceM(world.pose, backingCentre.originM),
-      backingCentre.fadeM[1], backingCentre.fadeM[0]) : 1;
-    // Close up the image's pixels blow up and blur: each layer dims toward its near opacity over its own range.
-    for (const layer of backing ?? []) {
-      const fade = layer.fade, far = fade ? logarithmicFade(distanceM, fade.fadeM[1], fade.fadeM[0]) : 1;
-      const opacity = shown * centre * (fade ? fade.nearOpacity + (1 - fade.nearOpacity) * far : 1);
-      // The camera first, then the layer shows: a plane never paints before it is placed.
-      if (opacity > 0) layer.plane.publish({ world, viewport });
-      if (opacity !== layer.opacity) {
-        const display = opacity > 0 ? '' : 'none';
-        // A plane switching on waits for its decoded image and its own frame (layer-reveal.ts).
-        if (display === '' && layer.plane.root.style.display === 'none') revealLayer(layer.plane.root, layer.image);
-        layer.plane.root.style.opacity = String(opacity); layer.plane.root.style.display = display; layer.opacity = opacity;
-      }
-    }
-  };
+  const levels = catalogueProximity?.plan.levels.map((level,index) => ({url:catalogueProximity.resolve(level.file),index,mounted:null as ReturnType<typeof mountCataloguePoints>|null})) ?? [];
   let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
   let publishedVolumeOpacity = NaN;
   let publishedVolumeVisible: boolean | undefined;
+  let publishedImageShown: boolean | undefined;
   const volumeFramingUnits = volumeFramingRadiusUnits(payload.frame);
   const prefetchAbort = new AbortController();
   lifetime.onDispose(() => prefetchAbort.abort());
   let galaxyPrefetched = false;
+  let coasting = false;
+  const stationHost = document.createElement('div');
+  stationHost.className = 'prepared-galaxy-stations';
+  stationHost.style.cssText = 'position:absolute;inset:0;transform-style:flat;pointer-events:none';
+  const stationLayer = stations ? mountGalaxyStations({ host: stationHost, stations: stations.stations,
+    interpolation: stations.interpolation,
+    load: id => stations.load(id, document), hysteresisM: stations.hysteresisM, fadeMs: stations.fadeMs,
+    coasting: () => coasting, requestPublication: () => { requestPublication?.(); } }) : null;
+  lifetime.onDispose(() => stationLayer?.destroy());
+  let stationAlpha = NaN;
+  let lastView: { outside: number; layers: number; detail: number; nearestStationM: number; exposure: number } | null = null;
 
   return {
+    dotOpacity(world: WorldCameraPose) { return catalogueProximity ? catalogueDiscOpacity(catalogueProximity.plan,world) : 1; },
+    setCoasting(value: boolean) { coasting = value; },
+    stationStats() { return stationLayer?.stats() ?? null; },
+    inspect() { return lastView ? {...lastView} : null; },
     // Separate host placement from layer mounting to retain startup and DOM order.
     mount() {
       if (sky && payload.sky) {
-        skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
+        skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource, opacityOnly: !!stations?.interpolation });
         lifetime.onDispose(() => skyLayer?.destroy());
       }
-      // The galaxy is its bulge slices and one flat disc plane at every distance; it has no impostor views.
-      volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource }, () => 1);
+      // The prepared XYZ slabs carry the outside view; the host fades them out as the inside banks take over.
+      volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource, residentStacks: true }, () => 1);
+      // Completed stack images keep their opaque mattes: cumulative source-over then dissolves light linearly.
       lifetime.onDispose(() => volumeLayer?.destroy());
       // Their own layer over the galaxy's: the dots show from just past the Solar System, where the galaxy volume is still clear.
-      for (const url of cataloguePointUrls) {
+      for (const url of catalogueProximity ? [] : cataloguePointUrls) {
         const points = mountCataloguePoints({ host: root, before: end, url, loadBank: target => fetchPreparedCatalogueBank(target) });
         cataloguePoints.push(points);
         lifetime.onDispose(() => points.destroy());
@@ -110,62 +95,87 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       if (typeof target?.fetch === 'function') void prefetchPreparedResources(prefetchUrls, target.fetch.bind(target), prefetchAbort.signal);
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, distanceM: number,
-      selectedPositionM: readonly number[], detailContextOpacity: number, withoutM: readonly (readonly number[])[] | null = null, attachedReachM = 0): number {
+      selectedPositionM: readonly number[], detailContextOpacity: number, withoutM: readonly (readonly number[])[] | null = null,
+      attachedReachM = 0): number {
       if (lifetime.disposed) return 0;
       // Every placed body starts inside the galaxy, so its own distance gates the volume.
       const volumeDistanceM = eyeDistanceM(world.pose, selectedPositionM);
       // The galaxy's nebulae and catalogue images keep their own distance fade; it is what this returns.
       const volumeOpacity = preparedVolumeOpacity(volumeDistanceM, plan.volume.opacityProfile);
-      // Inside the galaxy the NASA band is the sky; outside it the galaxy is its slices and face-on image.
-      const outside = galaxyOutsideFade(volumeDistanceM, plan.volume.discHalfHeightM);
+      // Inside the galaxy the NASA band and octrees take over; outside it the galaxy is the prepared slab volume.
+      const field = stations?.insideSkyFade;
+      const outside = field ? logarithmicFade(eyeDistanceM(world.pose, field.centerM), field.startM, field.endM)
+        : galaxyOutsideFade(volumeDistanceM, plan.volume.discHalfHeightM);
+      const exposure = stations?.autoExposure ? galaxyAutoExposure(stations.autoExposure, world) : 1;
+      // Inside the galaxy its clouds draw it; its layers are its picture from outside (galaxyLayersFade).
+      let nearestStationM = Infinity;
+      for (const station of stations?.stations ?? []) nearestStationM = Math.min(nearestStationM, eyeDistanceM(world.pose, station.positionM));
+      // The shared Sun anchor owns the outside/inside transition. A nearest-station distance falls and rises
+      // during a straight approach, making the far picture disappear and return at every station.
+      // Nearest position still chooses the inside scene, independently of this one-way radial handover.
+      let layers = stations ? logarithmicFade(field ? eyeDistanceM(world.pose, field.centerM) : nearestStationM, stations.farFadeStartM, stations.farFullDistanceM)
+        : 1;
+      for (const place of stations?.interpolation?.insidePlaces ?? []) {
+        layers = Math.min(layers, logarithmicFade(eyeDistanceM(world.pose, place.positionM), place.fadeStartM, place.fullDistanceM));
+      }
+      lastView = { outside, layers, detail: detailContextOpacity, nearestStationM, exposure };
+      // The complete inside scene dissolves over the complete far scene inside their COMMON opacity host.
+      // Applying complementary opacities to separate opaque roots would darken their equal-brightness overlap.
+      stationLayer?.setExposure(exposure);
+      stationLayer?.publish({ world, viewport });
+      const stationReady = (stationLayer?.stats().resident.length ?? 0) > 0;
+      const stationShown = stationReady && layers < 1 && outside > 0;
+      if (!coasting) {
+        if (stationShown && stationHost.parentNode !== volumeHost) volumeHost.append(stationHost);
+        else if (!stationShown && stationHost.parentNode) stationHost.remove();
+      }
+      if (stationLayer && !coasting) {
+        if (stationShown && layers === 0) volumeImage.remove();
+        else if (volumeImage.parentNode !== volumeHost) volumeHost.prepend(volumeImage);
+      }
+      // A frozen coast keeps the complete scene that is actually resident until its replacement can join.
+      const stationWeight = stationHost.parentNode === volumeHost
+        ? volumeImage.parentNode === volumeHost ? 1 - layers : 1 : 0;
+      // Each station has already received this frame's common display gain, relative to its baked anchor.
+      if (stationWeight !== stationAlpha) { stationHost.style.opacity = String(stationWeight); stationAlpha = stationWeight; }
       const volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
-      const volumeVisible = outside * detailContextOpacity > 0;
-      if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
-      if (outside !== publishedVolumeOpacity) { volumeHost.dataset.volumeOpacity = String(outside); publishedVolumeOpacity = outside; }
+      const volumeVisible = outside * (stationLayer ? 1 : layers) * detailContextOpacity > 0;
+      if (!coasting && volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
+      if (!coasting && outside !== publishedVolumeOpacity) { volumeHost.dataset.volumeOpacity = String(outside); publishedVolumeOpacity = outside; }
       // A detailed focus suppresses the volume without brightening the sky behind it.
       const completedContribution = outside;
       const alpha = completedContribution * detailContextOpacity;
-      if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
-      if (skyLayer) writeData(skyLayer.root, 'skyContribution', String(1 - completedContribution));
-      const imageAlpha = volumeSize;
+      const hostAlpha = alpha * (stationLayer ? 1 : layers);
+      if (hostAlpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(hostAlpha); publishedVolumeAlpha = hostAlpha; }
+      if (skyLayer && !coasting) writeData(skyLayer.root, 'skyContribution', String(1 - completedContribution));
+      const imageAlpha = volumeSize * (stations?.farImageOpacity ?? 1) * exposure;
       if (imageAlpha !== publishedImageAlpha) {
         volumeImage.style.opacity = skyLayer && imageAlpha === 1 ? '' : String(imageAlpha);
-        volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
         publishedImageAlpha = imageAlpha;
+      }
+      const imageShown = imageAlpha > 0;
+      if (!coasting && imageShown !== publishedImageShown) {
+        volumeImage.style.display = imageShown ? '' : 'none'; publishedImageShown = imageShown;
       }
       const skyAlpha = alpha < 1 ? (1 - completedContribution) / (1 - alpha) : 0;
       if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
+      // A sky turned off leaves the layout, as a hidden volume host does; it is not published until it is back.
       skyLayer?.publish(world, viewport, completedContribution < 1);
-      if (volumeVisible && volumeSize > 0) volumeLayer!.publish({ world, viewport });
+      if (volumeVisible && volumeSize > 0) volumeLayer?.publish({ world, viewport });
       // The catalogue dots are the stars around the Solar System (starFieldFade), whole before the host stars give way to
       // them past the system (world-context-planner.ts); measured like them from the selected body. A detailed focus (a
       // nebula's or a galaxy's picture) keeps them, as it keeps the stars' markers: they are the sky around it.
-      // Around a body a picture is attached to (a star's disc) they stay faint while the picture fills the view, as the markers do.
       const starField = starFieldAroundPicture(starFieldFade(volumeDistanceM, plan.system), volumeDistanceM, attachedReachM);
       const shownDots = catalogueDotsOpacity(starField);
       // A star the world draws as a body is its marker's to draw: its own dot in the galaxy's bank is left out.
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots, withoutM);
-      // The backing shows with the dots, and gives way to a detailed focus as the galaxy's volume does.
-      const shownBacking = detailContextOpacity * starField * volumeSize * logarithmicFade(volumeDistanceM, BACKING_FADE_IN_M[0], BACKING_FADE_IN_M[1]);
-      backingFrame = { world, viewport, distanceM: volumeDistanceM, shown: shownBacking };
-      if (backing) publishBacking(backingFrame);
-      else if (shownBacking > 0 && backingUrl && !backingLoading) {
-        // Fetched the first time the dots show; each layer mounts hidden and is placed from the latest frame at once.
-        backingLoading = true;
-        afterStartup(document.defaultView, () => { if (!lifetime.disposed) void fetchPreparedJson(backingUrl).then(value => {
-          if (lifetime.disposed) return;
-          const payload = parseGalaxyBacking(value, backingUrl);
-          const layers = [{ texturePath: payload.leaf.texturePath, fade: payload.nearFade }, ...(payload.sections ?? []).map(section => ({ texturePath: section.texturePath, fade: section }))];
-          // Every layer's image must resolve before any mounts: a failure leaves no plane behind.
-          for (const layer of layers) resolveResource(layer.texturePath);
-          backing = layers.map(layer => ({
-            plane: mountGalaxyBacking({ host: backingHost, before: backingEnd, payload: { ...payload, leaf: { ...payload.leaf, texturePath: layer.texturePath } }, resolveResource }),
-            fade: layer.fade, opacity: NaN, image: resolveResource(layer.texturePath) }));
-          for (const layer of backing) layer.plane.root.style.display = 'none';
-          if (payload.centreFadeM) backingCentre = { originM: payload.frame.originM, fadeM: payload.centreFadeM };
-          lifetime.onDispose(() => { for (const layer of backing ?? []) layer.plane.destroy(); });
-          if (backingFrame) publishBacking(backingFrame);
-        }).catch(error => console.error(`Galaxy backing ${backingUrl} failed`, error)); });
+      for (const level of levels) {
+        const opacity = shownDots * catalogueLevelOpacity(catalogueProximity!.plan,level.index,world);
+        if (!level.mounted && opacity > 0 && !coasting) {
+          level.mounted = mountCataloguePoints({host:root,before:end,url:level.url,loadBank:target=>fetchPreparedCatalogueBank(target),fullDetail:true,coasting:()=>coasting});
+          lifetime.onDispose(()=>level.mounted?.destroy());
+        }
+        level.mounted?.publish({world,viewport},opacity,withoutM);
       }
       return volumeOpacity;
     },

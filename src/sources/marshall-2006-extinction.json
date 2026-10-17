@@ -1,0 +1,44 @@
+{
+  "id": "marshall-2006-extinction",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Modelling the Galactic Interstellar Extinction Distribution in Three Dimensions",
+  "identifiers": [
+    {
+      "type": "bibcode",
+      "value": "2006A&A...453..635M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/453/635",
+      "label": "CDS J/A+A/453/635"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/453/635/ReadMe",
+      "checkedOn": "2026-10-11",
+      "locator": "table1.dat: extinction A_Ks against distance on lines of sight every 0.25 deg, |l| <= 100 deg, |b| <= 10 deg"
+    }
+  ],
+  "creators": [
+    "D. J. Marshall",
+    "A. C. Robin",
+    "C. Reylé",
+    "M. Schultheis",
+    "S. Picaud"
+  ],
+  "publisher": "A&A 453, 635",
+  "publicationDate": "2006",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Marshall et al. (2006), A&A 453, 635; CDS J/A+A/453/635.",
+      "scope": "measured dust of the inner Galaxy",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/453/635/ReadMe"
+    }
+  ]
+}

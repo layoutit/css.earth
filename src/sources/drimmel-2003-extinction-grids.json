@@ -1,0 +1,46 @@
+{
+  "id": "drimmel-2003-extinction-grids",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Galactic dust extinction grids of the Drimmel and Spergel (2001) model, as distributed with mwdust",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/321556"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://zenodo.org/records/7340108",
+      "label": "Zenodo 7340108"
+    },
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0101259",
+      "label": "arXiv:astro-ph/0101259"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/records/7340108",
+      "checkedOn": "2026-10-11",
+      "locator": "avdisk.dat, avspir.dat, avori.dat: Galactocentric 151 x 151 x 51 grids of cumulative A_V"
+    }
+  ],
+  "creators": [
+    "Ronald Drimmel",
+    "David N. Spergel"
+  ],
+  "publisher": "ApJ 556, 181",
+  "publicationDate": "2001",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Drimmel and Spergel (2001), ApJ 556, 181, and Drimmel, Cabrera-Lavers and López-Corredoira (2003), A&A 409, 205.",
+      "scope": "modelled dust of the Milky Way",
+      "evidence": "https://zenodo.org/records/7340108"
+    }
+  ]
+}

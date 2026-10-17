@@ -39,11 +39,11 @@ const payload = (count = 1): PreparedCssVolume => validatePreparedCssVolume({
       style: { width: '2px', height: '2px', transform: `matrix3d(${transform})`, backgroundSize: '2px 2px', backgroundPosition: '0px 0px' } };
   }) })), resources: AXES.map(axis => ({ path: `${axis}.png`, bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {},
 });
-function mount(data = payload()) {
+function mount(data = payload(), residentStacks = false) {
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.append(before);
   const resolver = mock.fn((path: string) => `/prepared/${path}`);
-  const runtime = mountPreparedCssVolume({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload: validatePreparedCssVolume({ ...data }), resolveResource: resolver });
+  const runtime = mountPreparedCssVolume({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload: validatePreparedCssVolume({ ...data }), residentStacks, resolveResource: resolver });
   const roots = runtime.roots as unknown as FakeElement[], root = roots[0]!, camera = root.children[0]!, scene = camera.children[0]!;
   const meshes = roots.map(node => node.children[0]!.children[0]!.children[0]!);
   return { data, document, host, before, runtime, roots, root, camera, scene, meshes, resolver };
@@ -326,4 +326,55 @@ test('prepared rotated bank normals select the matching retained stack', () => {
   fixture.runtime.publish(publication([1, 0, 0]));
   assert.equal(fixture.roots[0]!.style.visibility, 'hidden'); assert.equal(fixture.roots[1]!.style.visibility, 'visible');
   assert.equal(fixture.document.count, count);
+});
+
+
+test('resident background stacks admit every coast-reachable image before motion and change only transforms/opacities', () => {
+  const { runtime, roots, meshes, document } = mount(payload(3), true);
+  runtime.publish(publication([0, 0, 1]));
+  const nodes = roots.flatMap(root => [root, root.children[0]!, root.children[0]!.children[0]!, ...root.children[0]!.children[0]!.children, ...root.children[0]!.children[0]!.children[0]!.children]);
+  assert.ok(roots.every(root => root.style.display === 'block' && root.style.visibility === 'visible'));
+  assert.ok(meshes.every(mesh => mesh.children.every(leaf => leaf.style.display === '' && leaf.style.backgroundImage)));
+  const count = document.count;
+  for (const direction of [[1, 0, 0], [1, 1, .1], [0, -1, 0], [0, 0, -1]] as const) {
+    for (const node of nodes) node.propertyWrites.length = 0;
+    runtime.publish(publication(direction, [100, 0, 10]));
+    assert.ok(nodes.flatMap(node => node.propertyWrites).every(name => ['opacity', 'transform'].includes(name)));
+    assert.equal(document.count, count);
+  }
+  runtime.destroy();
+});
+
+
+test('mounted thin-volume roots preserve equal completed light through the full edge handover', () => {
+  const source = payload(3), data = { ...source, frame: { ...source.frame, boundsUnits: { min: [-1, -1, -.125] as const, max: [1, 1, .125] as const } } };
+  const { runtime, roots } = mount(data, true);
+  for (const azimuth of [0, .3, .8, 1.5]) for (let degree = 0; degree <= 90; degree++) {
+    const angle = degree * Math.PI / 180;
+    runtime.publish(publication([Math.cos(angle) * Math.cos(azimuth), Math.cos(angle) * Math.sin(azimuth), Math.sin(angle)]));
+    if (degree >= 10) assert.deepEqual(roots.map(root => Number(root.style.opacity)), [0, 0, .999]);
+    let light = 0;
+    for (const root of roots) { const opacity = Number(root.style.opacity); light = .37 * opacity + light * (1 - opacity); }
+    assert.ok(Math.abs(light - .37 * .999) < 1e-12);
+  }
+  runtime.destroy();
+});
+
+test('mounted thin handover follows pure translation and preserves light without coast membership changes',()=>{
+ const source=payload(3),data={...source,frame:{...source.frame,boundsUnits:{min:[-1,-1,-.2] as const,max:[1,1,.2] as const}}};
+ const {runtime,roots,meshes,document}=mount(data,true),angle=12*Math.PI/180,direction=[Math.cos(angle),0,Math.sin(angle)] as const;
+ runtime.publish(publication(direction,[0,0,10]));assert.equal(Number(roots[2]!.style.opacity),.999);
+ const nodes=roots.flatMap((root,i)=>[root,...meshes[i]!.children]),count=document.count;
+ for(const distance of[1.7,1.5,1,.5,.2,.5,1,10]){
+  const previousZ=Number(roots[2]!.style.opacity);
+  for(const n of nodes)n.propertyWrites.length=0;
+  runtime.publish(publication(direction,[0,0,distance]));
+  if(distance===1.5)assert.ok(Number(roots[2]!.style.opacity)<previousZ,'pure zoom must publish its changed handover inside the active fade');
+  if(distance===.2)assert.equal(Number(roots[2]!.style.opacity),0,'pure zoom must publish its changed handover');
+  if(distance===10)assert.equal(Number(roots[2]!.style.opacity),.999);
+  let light=0;for(const root of roots){const a=Number(root.style.opacity);light=.37*a+light*(1-a);}
+  assert.ok(Math.abs(light-.37*.999)<1e-12);assert.equal(document.count,count);
+  assert.ok(nodes.flatMap(n=>n.propertyWrites).every(k=>['transform','opacity'].includes(k)));
+ }
+ runtime.destroy();
 });

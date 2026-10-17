@@ -494,6 +494,33 @@ test('a travelling camera writes the dots a slot at a time from rest, doubling e
   field.destroy(); stopped.destroy();
 });
 
+test('a frame that catches up the slots mid-motion is no rest: the next travelling frame keeps its share and writes every slot', async () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
+  const count = 10_000, side = Math.ceil(Math.sqrt(count));
+  const points = Array.from({ length: count }, (_, index) => ({ positionUnits: [(index % side) / side * 8 - 4, Math.floor(index / side) / side * 6 - 3, -10] as const }));
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  // A drag around a near field: the camera slides sideways, so every dot moves on screen each frame.
+  const at = (x: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [x, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const mount = () => { const { document } = parseHTML('<div id="host"></div>');
+    return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] }); };
+  const textsOf = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d') ?? '');
+  const field = mount();
+  field.publish(at(0));
+  let x = 0;
+  for (let frames = 0; frames < 6; frames++) {
+    field.publish(at(x += .02));
+    // 60 Hz pointer input on a 120 Hz display: every other frame publishes the camera unchanged, and the pacer catches the
+    // slots up from it (here at once, without a document pacer).
+    field.publish(at(x));
+  }
+  field.publish(at(x += .02));
+  const fresh = mount(); fresh.publish(at(x));
+  assert.deepEqual(textsOf(field), textsOf(fresh), "every dot is where this frame's camera puts it, none a frame or more behind");
+  field.destroy(); fresh.destroy();
+});
+
 test('paints with few points are one path each, dealt over the slots; a field a frame can afford is written whole', () => {
   const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
     metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };

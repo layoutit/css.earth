@@ -228,15 +228,16 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
      * inside its host (`inside`: the objects it is inside), with the look every star dot has and without the dots at the
      * places of the stars a body marker draws (`look`, asked only while such a bank shows). */
     publishPoints(world: WorldCameraPose, viewport: WorldCameraViewport, selectedObjectId?: string, systemIds: readonly string[] = [],
-      stars?: { readonly inside: readonly string[]; look(): { readonly opacity: number; readonly hiddenAtM: readonly (readonly number[])[] } }) {
+      stars?: { readonly inside: readonly string[]; admit?(host: string | undefined): number; look(): { readonly opacity: number; readonly hiddenAtM: readonly (readonly number[])[] } }) {
       if (lifetime.disposed) return;
       for (const bank of points) {
-        const selected = bank.id === selectedObjectId || bank.host !== undefined && (systemIds.includes(bank.host) || bank.stars && stars?.inside.includes(bank.host) === true);
-        if (!bank.mounted && !selected) continue;
-        bank.mounted ??= mountCataloguePoints({ host: root, before: end, url: bank.url,
+        const admission = bank.stars ? stars?.admit?.(bank.host) ?? 1 : 1;
+        const selected = admission > 0 && (bank.id === selectedObjectId || bank.host !== undefined && (systemIds.includes(bank.host) || bank.stars && stars?.inside.includes(bank.host) === true));
+        if (!bank.mounted && (!selected || coasting)) continue;
+        bank.mounted ??= mountCataloguePoints({ host: root, before: end, url: bank.url, fullDetail: bank.stars, coasting: () => coasting,
           loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) });
         const shown = selected && bank.stars ? stars?.look() : undefined;
-        if (shown) bank.mounted.publish({ world, viewport }, shown.opacity, shown.hiddenAtM);
+        if (shown) bank.mounted.publish({ world, viewport }, shown.opacity * admission, shown.hiddenAtM);
         else bank.mounted.publish({ world, viewport }, selected ? 1 : 0);
       }
     },
