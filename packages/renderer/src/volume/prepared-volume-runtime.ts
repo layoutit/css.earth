@@ -398,7 +398,7 @@ export function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume
     const distance = Math.hypot(...camera.positionUnits.map((value, index) => value - (bounds.min[index]! + bounds.max[index]!) / 2));
     const approach = Math.max(0, Math.min(1, 1 - distance / Math.max(...extents)));
     const proximity = approach * approach * (3 - 2 * approach);
-    const edge = Math.max(.02, aspect) * 1 + .4 * proximity * 1;
+    const edge = Math.max(.02, aspect) + .4 * proximity;
     const t = Math.max(0, Math.min(1, (cosines[thin]! - edge * .5) / (edge * .5)));
     const face = t * t * (3 - 2 * t);
     weights = AXES.map((_, index) => index === thin ? face : (1 - face) * sideWeights[index]! / sideTotal);
