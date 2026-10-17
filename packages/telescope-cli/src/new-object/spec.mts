@@ -109,8 +109,10 @@ function thermalSpec(value: unknown, label: string): ThermalSpec {
   if (!(temperatureK >= 100 && temperatureK <= 10000)) throw new RangeError(`${label}.temperatureK ${temperatureK} is outside 100..10000 K.`);
   if ((wavelength === undefined) === (band === undefined)) throw new TypeError(`${label}: give the wavelength the eclipse was measured at, or the band a paper prints the temperature for, not both or neither.`);
   if (wavelength !== undefined && !(wavelength > 0)) throw new RangeError(`${label}.wavelengthMicrometres must be positive.`);
+  const edges = input.bandMicrometres === undefined ? undefined : requireArray(input.bandMicrometres, `${label}.bandMicrometres`).map((edge, i) => requireFiniteNumber(edge, `${label}.bandMicrometres[${i}]`));
+  if (edges && (band === undefined || !(edges.length === 2 && edges[0]! > 0 && edges[1]! > edges[0]!))) throw new RangeError(`${label}.bandMicrometres is a band's lower and higher edge, given with its band.`);
   const uncertainty = input.uncertaintyK === undefined ? undefined : requireFiniteNumber(input.uncertaintyK, `${label}.uncertaintyK`);
-  return { temperatureK, ...(uncertainty === undefined ? {} : { uncertaintyK: uncertainty }), ...(wavelength === undefined ? { band: band! } : { wavelengthMicrometres: wavelength }), facility: requireString(input.facility, `${label}.facility`),
+  return { temperatureK, ...(uncertainty === undefined ? {} : { uncertaintyK: uncertainty }), ...(wavelength === undefined ? { band: band!, ...(edges ? { bandMicrometres: [edges[0]!, edges[1]!] as const } : {}) } : { wavelengthMicrometres: wavelength }), facility: requireString(input.facility, `${label}.facility`),
     source: requireString(input.source, `${label}.source`), url: requireString(input.url, `${label}.url`), chosen: requireString(input.chosen, `${label}.chosen`),
     ...(input.where === undefined ? {} : { where: requireString(input.where, `${label}.where`) }) };
 }

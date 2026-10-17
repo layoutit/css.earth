@@ -24,18 +24,18 @@ export function installDaysideDataset(files: PackageFiles, id: string, name: str
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => requireRecord(JSON.parse(String(files.get(path))), path);
   const without = (list: unknown, where: string, key: string, values: readonly string[]) => requireArray(list, where).filter(item => !values.includes(String(requireRecord(item, where)[key])));
   const kelvin = thermal.temperatureK, error = thermal.uncertaintyK ?? 0, shown = kelvin.toLocaleString('en-US'), when = atEclipse ? ' at secondary eclipse' : '';
-  // The measured-dayside record and its reader carry one wavelength; a temperature a paper prints for a whole band is not drawn this way.
-  const wavelength = thermal.wavelengthMicrometres;
-  if (wavelength === undefined) throw new TypeError(`${id}: the measured-dayside dataset needs the wavelength of the eclipse, and this temperature is for ${thermal.band}.`);
+  // The measured-dayside record carries one wavelength, or the edges of the band a paper prints the temperature for.
+  const wavelength = thermal.wavelengthMicrometres, edges = thermal.bandMicrometres, at = thermal.band !== undefined ? `in ${thermal.band}` : `at ${wavelength} µm`;
+  if (wavelength === undefined && edges === undefined) throw new TypeError(`${id}: the measured-dayside dataset needs the wavelength of the eclipse or the band's edges (bandMicrometres), and this temperature is for ${thermal.band}.`);
   const { minimum, maximum, colors, labels } = DAYSIDE_SCALE, consumer = `${id}-measured-dayside`, input = `${id}-dayside-temperature`;
   if (!(kelvin >= minimum && kelvin <= maximum)) throw new RangeError(`${id}: a dayside temperature of ${kelvin} K is outside the ${minimum} to ${maximum} K scale the measured day sides share.`);
-  files.set(`${s}/${RECORD_PATH}`, json({ schema: DAYSIDE_TEMPERATURE_SCHEMA, planet: id, temperatureK: { value: kelvin, lower: kelvin - error, upper: kelvin + error }, wavelengthMicrons: wavelength,
+  files.set(`${s}/${RECORD_PATH}`, json({ schema: DAYSIDE_TEMPERATURE_SCHEMA, planet: id, temperatureK: { value: kelvin, lower: kelvin - error, upper: kelvin + error }, ...(edges ? { bandMicrons: edges } : { wavelengthMicrons: wavelength }),
     source: `${thermal.source}${thermal.where ? ` (${thermal.where})` : ''}. ${thermal.chosen}. ${thermal.url}` }));
 
   const raster = read(`${s}/preparation/raster.json`), lit = raster.emission === undefined;
   const science = { kind: 'terrestrial-scientific', id: DAYSIDE_DATASET, label: 'Day side', format: 'measured-dayside', path: RECORD_PATH, sampling: 'bilinear', units: 'K', planet: id, consumer, displaySampling: 'bilinear',
     outputLongitudeOrigin: 0, minimum, maximum, colors, labels,
-    description: `Measured: the day side's brightness temperature${when}, ${shown} K at ${wavelength} µm (${thermal.facility}). One number for the whole day side; the night side is not measured and is left blank.`,
+    description: `Measured: the day side's brightness temperature${when}, ${shown} K ${at} (${thermal.facility}). One number for the whole day side; the night side is not measured and is left blank.`,
     title: `${thermal.facility} · measured day side`, sourceUrl: thermal.url };
   raster.surfaces = [...without(raster.surfaces, `${id} raster surfaces`, 'id', [DAYSIDE_DATASET]),
     { id: DAYSIDE_DATASET, output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: RECORD_PATH, falseColor: true, science }];
@@ -49,13 +49,13 @@ export function installDaysideDataset(files: PackageFiles, id: string, name: str
   const control = { id: DAYSIDE_DATASET, label: 'Day side', qualification: `Measured in eclipse${when}: ${thermal.source}`,
     thumbnail: `${id}-dataset-${DAYSIDE_DATASET}.webp`, surface: `${id}-surface-${DAYSIDE_DATASET}@2x.webp`, poles: `${id}-poles-${DAYSIDE_DATASET}@2x.webp`, source: { id: input, path: '../manifest.json', url: thermal.url }, falseColor: true,
     legend: { kind: 'scale', title: 'Brightness temperature', labels, recipe: { palette, labels }, meta: 'K', sourceUrl: thermal.url },
-    notes: `The day side of ${name} is ${shown} K${when}: its brightness temperature at ${wavelength} µm (${thermal.facility}), measured from the light lost when the planet passes behind its star. The false color shows that one number over the day side, on a scale every planet shown this way shares. The night side is not measured and is left blank.${atEclipse ? ' The orbit is eccentric, so the temperature holds for the moment of eclipse, not round the orbit.' : ''}${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
+    notes: `The day side of ${name} is ${shown} K${when}: its brightness temperature ${at} (${thermal.facility}), measured from the light lost when the planet passes behind its star. The false color shows that one number over the day side, on a scale every planet shown this way shares. The night side is not measured and is left blank.${atEclipse ? ' The orbit is eccentric, so the temperature holds for the moment of eclipse, not round the orbit.' : ''}${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
   const datasets = requireRecord(content.datasets, `${id} content datasets`);
   datasets.controls = [...without(datasets.controls, `${id} dataset controls`, 'id', [DAYSIDE_DATASET]), control];
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
   text.datasets = { ...requireRecord(text.datasets ?? {}, `${id} text datasets`), [DAYSIDE_DATASET]: { title: 'Measured day side', detail: 'Measured in eclipse',
-    summary: `The day side is ${shown} K${when}, measured at ${wavelength} µm. The night side is not measured.` } };
+    summary: `The day side is ${shown} K${when}, measured ${at}. The night side is not measured.` } };
   files.set(`${o}/text.json`, json(text));
 
   const manifest = read(`${s}/manifest.json`);

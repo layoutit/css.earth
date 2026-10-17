@@ -219,8 +219,8 @@ compare. An eccentric planet's texts say "at secondary eclipse"; past an eccentr
 Some papers print a day side for a whole band rather than one wavelength: a Kepler- or TESS-band eclipse, or a black body
 fitted to eclipses in several bands. Such an entry names the band as the paper does (`band: "the TESS band"`) in place of
 `wavelengthMicrometres`, and every text says "in the TESS band", never a wavelength the paper did not print. An optical
-band's temperature assumes the planet reflects no light, and its source says so. The `measured-dayside` dataset needs one
-wavelength and refuses a band. A paper that calls its own optical value unreliable, or prints a model or effective
+band's temperature assumes the planet reflects no light, and its source says so. The `measured-dayside` dataset keeps the
+band's edges as the paper prints them (`bandMicrometres: [5, 12]`), and refuses a band without them. A paper that calls its own optical value unreliable, or prints a model or effective
 temperature instead of a brightness temperature, is not used.
 
 ![The 39 hot Jupiters added on 2026-10-16, each its page's billboard in the thermal glow of its measured day side, from 1,090 K to 3,237 K](images/measured-daysides.png)

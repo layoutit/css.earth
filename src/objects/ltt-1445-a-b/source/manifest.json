@@ -140,6 +140,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "ltt-1445-a-b-dayside-temperature",
+      "path": "photometry/dayside-temperature.json",
+      "origin": "https://arxiv.org/abs/2410.10987",
+      "credit": "Wachiraphan et al. 2025, AJ 169, 311 (arXiv 2410.10987), dayside brightness temperature from the emission spectrum of three eclipses",
+      "license": "Factual numerical measurement; source attribution retained",
+      "acquisition": "Transcribed measurement record: the dayside brightness temperature and its one-sigma range, with the row chosen",
+      "redistribution": "A one-number measurement record",
+      "consumers": [
+        "ltt-1445-a-b-measured-dayside"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ltt-1445-a-b-dayside-temperature",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -156,7 +178,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "ltt-1445-a-b-observational-measurements",
-          "ltt-1445-a-b-preparation-raster"
+          "ltt-1445-a-b-preparation-raster",
+          "ltt-1445-a-b-dayside-temperature"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

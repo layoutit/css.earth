@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-dayside-temperature@1",
+  "planet": "gj-3470b",
+  "temperatureK": {
+    "value": 844,
+    "lower": 805,
+    "upper": 883
+  },
+  "wavelengthMicrons": 3.6,
+  "source": "Benneke et al. 2019, Nature Astronomy (arXiv 1907.00449), brightness temperature from ten eclipses fitted together, detected at 4.7 sigma (Methods, secondary eclipse analysis). the paper's 3.6 µm value (+33, -39 K; the larger is kept); at 4.5 µm the same paper gives only an upper limit, under 532 K, so the two bands disagree. https://arxiv.org/abs/1907.00449"
+}

@@ -33,6 +33,43 @@
           "source": "the color dataset of gj-486 (src/objects/gj-486/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "dayside",
+      "output": "gj-486b-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-486b-dataset-{id}.webp",
+      "source": "photometry/dayside-temperature.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "dayside",
+        "label": "Day side",
+        "format": "measured-dayside",
+        "path": "photometry/dayside-temperature.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "gj-486b",
+        "consumer": "gj-486b-measured-dayside",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 300,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "300",
+          "1650",
+          "3000"
+        ],
+        "description": "Measured: the day side's brightness temperature, 865 K in the JWST MIRI LRS band, 5 to 12 µm (JWST MIRI LRS). One number for the whole day side; the night side is not measured and is left blank.",
+        "title": "JWST MIRI LRS · measured day side",
+        "sourceUrl": "https://arxiv.org/abs/2408.15123"
+      }
     }
   ],
   "lighting": {

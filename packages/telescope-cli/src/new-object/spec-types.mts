@@ -75,7 +75,9 @@ export type OrbitSpec =
 export interface ThermalSpec { readonly where?: string; readonly temperatureK: number; readonly uncertaintyK?: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string;
   /** One of the two: the wavelength the eclipse was measured at, or, for a temperature a paper prints for a whole band or a fit to
    * several (a Kepler- or TESS-band eclipse), that band as the paper names it ("the TESS band"). */
-  readonly wavelengthMicrometres?: number; readonly band?: string }
+  readonly wavelengthMicrometres?: number; readonly band?: string;
+  /** With `band`: the band's edges as the paper prints them, which the measured-dayside record needs; the glow does not. */
+  readonly bandMicrometres?: readonly [number, number] }
 /** Published flux densities in three infrared bands for the band-color dataset of an imaged planet (planet-datasets.mts): red, green,
  * blue from the longest wavelength, on one display range shared with the bodies it names. */
 export interface PhotometrySpec {

@@ -1,0 +1,35 @@
+{
+  "id": "source-gj-3473b-dayside-temperature",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "GJ 3473 b · gj 3473b dayside temperature",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2604.02332",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gj-3473b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Holmberg et al. 2026, AJ (Hot Rocks Survey V, arXiv 2604.02332), brightness temperature from four eclipses averaging 186 ± 45 ppm",
+      "scope": "The gj 3473b dayside temperature input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

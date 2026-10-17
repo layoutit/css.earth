@@ -10,6 +10,8 @@ It is one of 2 planets known around LTT 1445 A. Its orbit and size follow Pass e
 
 **Color.** No image or measured color exists. The neutral gray is lit by ltt-1445-a's measured color (#ffc680, the color dataset of ltt-1445-a (src/objects/ltt-1445-a/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 525 K in the JWST MIRI LRS band, 5 to 12 µm (Wachiraphan et al. 2025, AJ 169, 311 (arXiv 2410.10987), dayside brightness temperature from the emission spectrum of three eclipses; [record](source/photometry/dayside-temperature.json)). Read from the paper (abstract): the paper's 16-bin value; its 1-, 4- and 8-bin fits give 513 to 515 K, and its uncertainty leaves out the star's and planet's parameter errors. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of LTT 1445 A's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (4, 31), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence

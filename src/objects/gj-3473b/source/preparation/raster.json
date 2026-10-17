@@ -33,6 +33,43 @@
           "source": "the color dataset of gj-3473 (src/objects/gj-3473/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "dayside",
+      "output": "gj-3473b-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-3473b-dataset-{id}.webp",
+      "source": "photometry/dayside-temperature.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "dayside",
+        "label": "Day side",
+        "format": "measured-dayside",
+        "path": "photometry/dayside-temperature.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "gj-3473b",
+        "consumer": "gj-3473b-measured-dayside",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 300,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "300",
+          "1650",
+          "3000"
+        ],
+        "description": "Measured: the day side's brightness temperature, 820 K at 15 µm (JWST MIRI F1500W). One number for the whole day side; the night side is not measured and is left blank.",
+        "title": "JWST MIRI F1500W · measured day side",
+        "sourceUrl": "https://arxiv.org/abs/2604.02332"
+      }
     }
   ],
   "lighting": {

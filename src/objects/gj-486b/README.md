@@ -10,6 +10,8 @@ It is the only planet known around Gar. Its orbit and size follow Weiner Mansfie
 
 **Color.** No image or measured color exists. The neutral gray is lit by gj-486's measured color (#ffcd89, the color dataset of gj-486 (src/objects/gj-486/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 865 K in the JWST MIRI LRS band, 5 to 12 µm (Weiner Mansfield et al. 2024, ApJ Letters 975, L22 (arXiv 2408.15123), dayside temperature from two eclipses 133 ppm deep; [record](source/photometry/dayside-temperature.json)). Read from the paper (abstract): the paper's value, which assumes the MIRI LRS eclipse depth stands for the planet's whole emission. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of Gar's planets from above, from their hosted-orbit records, and its transmission spectrum, 203 bins from Moran et al. 2023 in the archive's transitspec table; its transit in 2 TESS sectors (23, 50), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence

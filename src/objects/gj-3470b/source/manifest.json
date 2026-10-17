@@ -207,6 +207,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "gj-3470b-dayside-temperature",
+      "path": "photometry/dayside-temperature.json",
+      "origin": "https://arxiv.org/abs/1907.00449",
+      "credit": "Benneke et al. 2019, Nature Astronomy (arXiv 1907.00449), brightness temperature from ten eclipses fitted together, detected at 4.7 sigma",
+      "license": "Factual numerical measurement; source attribution retained",
+      "acquisition": "Transcribed measurement record: the dayside brightness temperature and its one-sigma range, with the row chosen",
+      "redistribution": "A one-number measurement record",
+      "consumers": [
+        "gj-3470b-measured-dayside"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gj-3470b-dayside-temperature",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -223,7 +245,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "gj-3470b-observational-measurements",
-          "gj-3470b-preparation-raster"
+          "gj-3470b-preparation-raster",
+          "gj-3470b-dayside-temperature"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

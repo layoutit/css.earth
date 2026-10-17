@@ -33,6 +33,43 @@
           "source": "the color dataset of gj-3470 (src/objects/gj-3470/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "dayside",
+      "output": "gj-3470b-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-3470b-dataset-{id}.webp",
+      "source": "photometry/dayside-temperature.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "dayside",
+        "label": "Day side",
+        "format": "measured-dayside",
+        "path": "photometry/dayside-temperature.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "gj-3470b",
+        "consumer": "gj-3470b-measured-dayside",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 300,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "300",
+          "1650",
+          "3000"
+        ],
+        "description": "Measured: the day side's brightness temperature, 844 K at 3.6 µm (Spitzer IRAC). One number for the whole day side; the night side is not measured and is left blank.",
+        "title": "Spitzer IRAC · measured day side",
+        "sourceUrl": "https://arxiv.org/abs/1907.00449"
+      }
     }
   ],
   "lighting": {

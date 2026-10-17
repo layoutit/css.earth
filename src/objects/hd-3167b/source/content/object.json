@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by HD 3167; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "hd-3167b-dataset-shape.webp",
-        "surface": "hd-3167b-surface-shape@2x.webp",
-        "poles": "hd-3167b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,300 K. The disc itself is unresolved.",
+        "thumbnail": "hd-3167b-dataset-thermal.webp",
+        "surface": "hd-3167b-surface-thermal@2x.webp",
+        "poles": "hd-3167b-poles-thermal@2x.webp",
         "source": {
-          "id": "hd-3167b-observational-measurements",
+          "id": "hd-3167b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract"
+          "url": "https://arxiv.org/abs/2604.11911"
         },
         "falseColor": false,
-        "notes": "No image or color of HD 3167 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of hd-3167's light, as its color dataset measures it."
+        "notes": "The color of HD 3167 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse in the JWST MIRI LRS band, 5.06 to 10.55 µm (JWST MIRI LRS). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },
