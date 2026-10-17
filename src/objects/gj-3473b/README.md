@@ -10,6 +10,8 @@ It is one of 2 planets known around GJ 3473. Its orbit and size follow Kemmer et
 
 **Color.** No image or measured color exists. The neutral gray is lit by gj-3473's measured color (#ffcf8b, the color dataset of gj-3473 (src/objects/gj-3473/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 820 K at 15 µm (Holmberg et al. 2026, AJ (Hot Rocks Survey V, arXiv 2604.02332), brightness temperature from four eclipses averaging 186 ± 45 ppm; [record](source/photometry/dayside-temperature.json)). Read from the paper (Section IV): the paper's value; it notes weak evidence that the depth varies from visit to visit. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of GJ 3473's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (34, 61, 88), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence

@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by TOI-431; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "toi-431b-dataset-shape.webp",
-        "surface": "toi-431b-surface-shape@2x.webp",
-        "poles": "toi-431b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,967 K. The disc itself is unresolved.",
+        "thumbnail": "toi-431b-dataset-thermal.webp",
+        "surface": "toi-431b-surface-thermal@2x.webp",
+        "poles": "toi-431b-poles-thermal@2x.webp",
         "source": {
-          "id": "toi-431b-observational-measurements",
+          "id": "toi-431b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract"
+          "url": "https://arxiv.org/abs/2609.03029"
         },
         "falseColor": false,
-        "notes": "No image or color of TOI-431 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of toi-431's light, as its color dataset measures it."
+        "notes": "The color of TOI-431 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse in the JWST MIRI LRS band, 5.05 to 10.55 µm (JWST MIRI LRS). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

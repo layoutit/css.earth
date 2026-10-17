@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-431b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1967,
+      "lowerKelvin": 1714,
+      "upperKelvin": 2220,
+      "citation": "Smith et al. 2026 (arXiv preprint, submitted 2026-09-02), dayside brightness temperature in the MIRI LRS bandpass from one partial eclipse 81 ± 16 ppm deep: 1967 +/- 253 K, https://arxiv.org/abs/2609.03029"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse in the JWST MIRI LRS band, 5.05 to 10.55 µm (JWST MIRI LRS) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the paper's value (+237, -253 K; the larger is kept), from one eclipse of which 86% was observed; the earlier Spitzer 4.5 µm value, 1,520 K, came from an eclipse detected at 1.5 sigma and is not used",
+    "band": "the JWST MIRI LRS band, 5.05 to 10.55 µm",
+    "facility": "JWST MIRI LRS"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

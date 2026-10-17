@@ -442,7 +442,8 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       // The archive's emission rows are kept beside a measured color only: an estimate has none to keep.
       const { hex } = await installThermalDataset(files, id, descriptor.displayName, chosen, isMeasured(chosen) ? csv : undefined);
       const readme = resolve(o, 'README.md'), text = await readFile(readme, 'utf8'), color = text.split('\n').find(line => line.startsWith('**Color.**'));
-      if (color !== undefined) await writeFile(readme, text.replace(color, () => thermalColorLine(chosen, hex)));
+      const colorLine = thermalColorLine(chosen, hex);
+      await writeFile(readme, color !== undefined ? text.replace(color, () => colorLine) : text.replace('\n**Charts.**', () => `\n${colorLine}\n\n**Charts.**`));
       say(isMeasured(chosen) ? `${id}: thermal glow ${hex} at ${chosen.temperatureK} K (${measuredWhere(chosen)}, ${chosen.facility})` : `${id}: expected glow ${hex} at ${chosen.temperatureK} K, an estimate${chosen.rock ? ' for a bare rock' : ''} (${chosen.source})`);
     } else {
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} dataset`); continue; }

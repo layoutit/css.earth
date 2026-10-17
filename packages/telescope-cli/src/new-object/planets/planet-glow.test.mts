@@ -99,6 +99,22 @@ test('a day side a paper prints for a whole band says that band, never a wavelen
   assert.throws(() => parseThermalEntries([{ id: 'a', thermal: { ...entry, wavelengthMicrometres: 0.8 } }]), /not both or neither/u);
   assert.throws(() => parseThermalEntries([{ id: 'a', thermal: { ...entry, band: undefined } }]), /not both or neither/u);
   assert.throws(() => installDaysideDataset(new Map(), 'toi-1518b', 'TOI-1518 b', banded, false), /needs the wavelength of the eclipse/u);
+  assert.throws(() => parseThermalEntries([{ id: 'a', thermal: { ...entry, bandMicrometres: [12, 5] } }]), /lower and higher edge/u);
+});
+
+test('a cool day side printed for a band with its edges is a false-color dataset that keeps the band', async () => {
+  const { parseThermalEntries } = await import('../spec.mts'), { installDaysideDataset } = await import('../thermal/dayside-dataset.mts');
+  const entry = { temperatureK: 525, uncertaintyK: 15, band: 'the MIRI LRS band, 5 to 12 µm', bandMicrometres: [5, 12], facility: 'JWST MIRI LRS', source: 'Wachiraphan et al. 2025', url: 'https://example.org/w', chosen: 'the paper\'s value', where: 'abstract' };
+  const cool = parseThermalEntries([{ id: 'trappist-1f', thermal: entry }]).get('trappist-1f')!;
+  assert.deepEqual(cool.bandMicrometres, [5, 12]);
+  const id = 'trappist-1f', o = `src/objects/${id}`, paths = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'];
+  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
+  const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
+  installDaysideDataset(files, id, 'TRAPPIST-1f', cool, false);
+  const record = after('source/photometry/dayside-temperature.json');
+  assert.deepEqual([record.bandMicrons, record.wavelengthMicrons], [[5, 12], undefined]);
+  assert.match(after('source/content/object.json').datasets.controls.at(-1).notes, /^The day side of TRAPPIST-1f is 525 K: its brightness temperature in the MIRI LRS band, 5 to 12 µm \(JWST MIRI LRS\)/u);
+  assert.equal(after('text.json').datasets.dayside.summary, 'The day side is 525 K, measured in the MIRI LRS band, 5 to 12 µm. The night side is not measured.');
 });
 
 test('a measured day side too cool to glow, or on an eccentric orbit, is its own false-color dataset on one shared scale', async () => {

@@ -1,0 +1,35 @@
+{
+  "id": "source-ltt-1445-a-b-dayside-temperature",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LTT 1445 A b · ltt 1445 a b dayside temperature",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2410.10987",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ltt-1445-a-b/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wachiraphan et al. 2025, AJ 169, 311 (arXiv 2410.10987), dayside brightness temperature from the emission spectrum of three eclipses",
+      "scope": "The ltt 1445 a b dayside temperature input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

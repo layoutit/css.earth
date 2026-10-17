@@ -33,6 +33,11 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "dayside",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

@@ -232,7 +232,8 @@ export async function loadBareRockEclipse(root: string, value: unknown) {
   };
 }
 
-const daysideRecord = shape({ schema: text, planet: text, temperatureK: shape({ value: number, lower: number, upper: number }), wavelengthMicrons: number, source: text });
+/** The record gives one wavelength, or the edges of the band a paper prints the temperature for (MIRI LRS white light), not both. */
+const daysideRecord = shape({ schema: text, planet: text, temperatureK: shape({ value: number, lower: number, upper: number }), wavelengthMicrons: optional(number), bandMicrons: optional(array(number)), source: text });
 const measuredDaysideProfile = shape({ path: text, sampling: text, units: text, planet: text });
 
 /** A measured dayside brightness temperature and nothing else. A secondary eclipse measures the day side as a whole: one
@@ -245,6 +246,9 @@ export async function loadMeasuredDayside(root: string, value: unknown) {
   if (record.schema !== DAYSIDE_TEMPERATURE_SCHEMA || record.planet !== recipe.planet) throw new TypeError(`${recipe.path} is not a dayside temperature of ${recipe.planet}.`);
   const { value: daysideK, lower, upper } = record.temperatureK;
   if (!(lower > 0 && lower <= daysideK && upper >= daysideK)) throw new TypeError('A dayside temperature needs 0 < lower <= value <= upper.');
+  const band = record.bandMicrons;
+  if ((record.wavelengthMicrons === undefined) === (band === undefined) || band && !(band.length === 2 && band[0]! > 0 && band[1]! > band[0]!))
+    throw new TypeError(`${recipe.path}: a dayside temperature gives wavelengthMicrons, or bandMicrons as a lower and a higher positive edge, not both.`);
   const radians = Math.PI / 180;
   return {
     daysideK,
@@ -252,6 +256,6 @@ export async function loadMeasuredDayside(root: string, value: unknown) {
       if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
       return Math.cos(latitude * radians) * Math.cos(longitude * radians) > 0 ? daysideK : null;
     },
-    report: { format: 'measured-dayside', units: 'K', daysideK, daysideRangeK: [lower, upper], wavelengthMicrons: record.wavelengthMicrons },
+    report: { format: 'measured-dayside', units: 'K', daysideK, daysideRangeK: [lower, upper], ...(band ? { bandMicrons: band } : { wavelengthMicrons: record.wavelengthMicrons }) },
   };
 }

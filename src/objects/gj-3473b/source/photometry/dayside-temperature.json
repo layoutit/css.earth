@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-dayside-temperature@1",
+  "planet": "gj-3473b",
+  "temperatureK": {
+    "value": 820,
+    "lower": 700,
+    "upper": 940
+  },
+  "wavelengthMicrons": 15,
+  "source": "Holmberg et al. 2026, AJ (Hot Rocks Survey V, arXiv 2604.02332), brightness temperature from four eclipses averaging 186 ± 45 ppm (Section IV). the paper's value; it notes weak evidence that the depth varies from visit to visit. https://arxiv.org/abs/2604.02332"
+}

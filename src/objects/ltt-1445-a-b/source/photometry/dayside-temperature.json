@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-dayside-temperature@1",
+  "planet": "ltt-1445-a-b",
+  "temperatureK": {
+    "value": 525,
+    "lower": 510,
+    "upper": 540
+  },
+  "bandMicrons": [
+    5,
+    12
+  ],
+  "source": "Wachiraphan et al. 2025, AJ 169, 311 (arXiv 2410.10987), dayside brightness temperature from the emission spectrum of three eclipses (abstract). the paper's 16-bin value; its 1-, 4- and 8-bin fits give 513 to 515 K, and its uncertainty leaves out the star's and planet's parameter errors. https://arxiv.org/abs/2410.10987"
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-dayside-temperature@1",
+  "planet": "gj-486b",
+  "temperatureK": {
+    "value": 865,
+    "lower": 851,
+    "upper": 879
+  },
+  "bandMicrons": [
+    5,
+    12
+  ],
+  "source": "Weiner Mansfield et al. 2024, ApJ Letters 975, L22 (arXiv 2408.15123), dayside temperature from two eclipses 133 ppm deep (abstract). the paper's value, which assumes the MIRI LRS eclipse depth stands for the planet's whole emission. https://arxiv.org/abs/2408.15123"
+}

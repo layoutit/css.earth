@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hd-3167b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1300,
+      "lowerKelvin": 1100,
+      "upperKelvin": 1500,
+      "citation": "Coy et al. 2026, ApJ Letters (arXiv 2604.11911 v2), brightness temperature from one eclipse 38 ± 11 ppm deep: 1300 +/- 200 K, https://arxiv.org/abs/2604.11911"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse in the JWST MIRI LRS band, 5.06 to 10.55 µm (JWST MIRI LRS) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the paper's value (+180, -200 K; the larger is kept), from one eclipse the paper says is detected at only about 2 to 3.5 sigma",
+    "band": "the JWST MIRI LRS band, 5.06 to 10.55 µm",
+    "facility": "JWST MIRI LRS"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

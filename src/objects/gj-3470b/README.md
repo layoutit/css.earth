@@ -10,6 +10,8 @@ It is the only planet known around Kaewkosin. Its orbit and size follow Awiphan 
 
 **Color.** No image or measured color exists. The neutral gray is lit by gj-3470's measured color (#ffc68b, the color dataset of gj-3470 (src/objects/gj-3470/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 844 K at 3.6 µm (Benneke et al. 2019, Nature Astronomy (arXiv 1907.00449), brightness temperature from ten eclipses fitted together, detected at 4.7 sigma; [record](source/photometry/dayside-temperature.json)). Read from the paper (Methods, secondary eclipse analysis): the paper's 3.6 µm value (+33, -39 K; the larger is kept); at 4.5 µm the same paper gives only an upper limit, under 532 K, so the two bands disagree. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of Kaewkosin's planets from above, from their hosted-orbit records, and its transmission spectrum, 28 bins from Benneke et al. 2019 in the archive's transitspec table; its transit in 3 TESS sectors (46, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
