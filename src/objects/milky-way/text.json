@@ -27,23 +27,23 @@
   },
   "datasets": {
     "galaxy": {
-      "title": "The galaxy as catalogues place it",
-      "detail": "Dots, bulge model, backing",
-      "summary": "Catalogued objects as dots at their published positions, a simulated bulge, and an artist's impression as backing.",
+      "title": "Fitted Milky Way model",
+      "detail": "Starlight, dust and stars",
+      "summary": "Fitted starlight and dust, catalogue stars and baked inside skies. Coarse slabs can show stripes or blackouts.",
       "sources": [
         {
-          "catalogueId": "esa-gaia-2025-milky-way-artist-impression",
-          "url": "https://www.esa.int/ESA_Multimedia/Images/2025/09/Gaia_s_star-formation_map_slider",
-          "label": "Artist's impression: ESA/Gaia/DPAC, S. Payne-Wardenaar, L. McCallum et al. (2025), CC BY-SA 3.0 IGO.",
-          "checked": "2026-10-01",
-          "locator": "Milky Way backing image"
+          "catalogueId": "drimmel-2003-extinction-grids",
+          "url": "https://zenodo.org/records/7340108",
+          "label": "Drimmel et al. 2003 extinction model",
+          "checked": "2026-10-17",
+          "locator": "Published extinction grids; b30 fit and scalar-slab approximation described in the Milky Way volume README."
         },
         {
-          "catalogueId": "openspace-milky-way-volume",
-          "url": "https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html",
-          "label": "OpenSpace Milky Way volume",
-          "checked": "2026-10-01",
-          "locator": "Bulge volume"
+          "catalogueId": "nasa-deep-star-maps-2020",
+          "url": "https://svs.gsfc.nasa.gov/4851/",
+          "label": "NASA Deep Star Maps 2020",
+          "checked": "2026-10-17",
+          "locator": "Milky Way-only interior sky"
         }
       ]
     }

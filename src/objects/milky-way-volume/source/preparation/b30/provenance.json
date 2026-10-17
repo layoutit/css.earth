@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-volume-provenance@2",
+  "title": "Milky Way b30 fitted starlight and dust",
+  "kind": "observation-constrained-model",
+  "record": "runs/b30-native-scatterFaceSide/fit-crisp.json",
+  "recipe": "source/preparation/b30/recipe.json",
+  "sourceBinding": {
+    "kind": "catalogued",
+    "references": [
+      {
+        "catalogueId": "drimmel-2003-extinction-grids",
+        "role": "material",
+        "evidence": "https://zenodo.org/records/7340108"
+      },
+      {
+        "catalogueId": "edenhofer-2024-dust-map",
+        "role": "material",
+        "evidence": "https://zenodo.org/records/10658339"
+      },
+      {
+        "catalogueId": "marshall-2006-extinction",
+        "role": "material",
+        "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/453/635/ReadMe"
+      },
+      {
+        "catalogueId": "vergely-2022-dust-map",
+        "role": "material",
+        "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/664/A174/ReadMe"
+      },
+      {
+        "catalogueId": "bland-hawthorn-gerhard-2016",
+        "role": "material",
+        "evidence": "https://arxiv.org/abs/1602.07702"
+      },
+      {
+        "catalogueId": "sormani-2022-bar",
+        "role": "material",
+        "evidence": "https://arxiv.org/abs/2204.13114"
+      },
+      {
+        "catalogueId": "reid-2019-maser-parallaxes",
+        "role": "material",
+        "evidence": "https://arxiv.org/abs/1910.03357"
+      },
+      {
+        "catalogueId": "sharma-2011-galaxia",
+        "role": "material",
+        "evidence": "https://arxiv.org/abs/1101.3561"
+      }
+    ]
+  },
+  "catalogueDisplay": {
+    "feature": "galaxy",
+    "label": "Fitted Milky Way",
+    "credit": "Fitted Milky Way: extinction maps, stellar structure and population priors; see the source-and-evidence document.",
+    "description": "Accepted b30 local fit, slab-local scalar-alpha display. Not a photograph or calibrated spectral rendering."
+  }
+}

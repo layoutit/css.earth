@@ -1,0 +1,74 @@
+{
+ "schema": "cssearth-composed-galaxy-brick@1",
+ "physics": {
+  "discHeights": "exp",
+  "dustRef": "a0",
+  "localSharpen": "off",
+  "dustField": "physical",
+  "gaiaModel": "population",
+  "scatter": "on",
+  "slabTransfer": "mixed",
+  "localSampling": "native",
+  "scatterViews": "faceSide"
+ },
+ "record": "runs/b30-native-scatterFaceSide/fit-crisp.json",
+ "dims": [
+  401,
+  401,
+  161
+ ],
+ "originKpc": [
+  -7.7230000495910645,
+  -16.0,
+  -3.200000047683716
+ ],
+ "spacingKpc": [
+  0.08,
+  0.08,
+  0.04
+ ],
+ "frame": "Sun at origin; x toward the Galactic centre (at x=8.277), y toward l=90, z toward the NGP",
+ "encoding": {
+  "log1pK": 1000000.0,
+  "emissionMax": 41.27082061767578,
+  "dustMax": 10.080995559692383,
+  "channels": "RGB intrinsic z,r,g emission per kpc; A dust A_r per kpc; preview approximation only"
+ },
+ "extinctionPerChannel": [
+  0.5732592739253378,
+  0.9208103130755064,
+  1.163428902461984
+ ],
+ "physicalFields": {
+  "emission": "emission.f32",
+  "dust": "dust.f32",
+  "scatter": "scatter.f32",
+  "order": "z,y,x,channel; x fastest; little-endian float32"
+ },
+ "camera": {
+  "camRG": -0.4981813430786133,
+  "camRB": -0.42431727051734924,
+  "camGR": 0.49983978271484375,
+  "camGB": -0.37467262148857117,
+  "camBR": -0.09502798318862915,
+  "camBG": 0.3403240442276001,
+  "wbSkyR": 1.8394098281860352,
+  "wbSkyB": 1.858591079711914,
+  "camSaturation": 0.5493887066841125
+ },
+ "scatterPolicy": "Add the source only in observables allowed by physics.scatterViews; total extinction always remains",
+ "skyPicture": {
+  "nearLight": 0.09018879383802414,
+  "nearCutKpc": 0.4422999620437622,
+  "why": "NASA catalog selection nuisance, not applied to the object"
+ },
+ "box": [
+  -7.723000000000001,
+  24.277,
+  -16.0,
+  16.0,
+  -3.2,
+  3.2
+ ],
+ "notes": "Integrate intrinsic bands with saved slabTransfer, then apply the camera once. Native local dust unsharpened. Discs analytic throughout; gridded fields zero outside support."
+}

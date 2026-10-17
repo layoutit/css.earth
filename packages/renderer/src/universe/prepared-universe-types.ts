@@ -51,8 +51,9 @@ export interface PreparedUniverseOptions {
   /** Prepared catalogue-point banks of stars inside the galaxy, by URL: drawn as dust with the galaxy
    * volume, fetched the first time it shows. */
   galaxyCataloguePoints?: readonly string[];
-  /** A prepared `GALAXY_BACKING_SCHEMA` face-on image drawn under the galaxy's catalogue dots, by URL. */
-  galaxyBacking?: string;
+  /** Individual prepared stellar levels admitted by physical proximity. */
+  galaxyCatalogueProximity?: { readonly host: string; readonly plan: import('@cssearth/objects').PreparedCatalogueProximity; resolve(file: string): string };
+  galaxyStations?: import('./galaxy-stations.js').GalaxyStationBackgroundOptions;
   imageLayers?: readonly PreparedImageLayerMount[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus.
    * `surrounds`: the bank's light lies on walls around its middle, so it also draws around a body that stands inside it. */

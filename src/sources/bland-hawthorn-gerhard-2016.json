@@ -1,0 +1,36 @@
+{
+  "id": "bland-hawthorn-gerhard-2016",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Galaxy in Context: Structural, Kinematic, and Integrated Properties",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://arxiv.org/abs/1602.07702",
+      "label": "The Galaxy in Context: Structural, Kinematic, and Integrated Properties"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1602.07702",
+      "checkedOn": "2026-10-17",
+      "locator": "Analytic thin/thick-disc priors; fitted gains are local model choices."
+    }
+  ],
+  "creators": [
+    "J. Bland-Hawthorn",
+    "O. Gerhard"
+  ],
+  "publisher": "arXiv",
+  "publicationDate": "2016",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite J. Bland-Hawthorn et al. (2016).",
+      "scope": "Stellar disc priors",
+      "evidence": "https://arxiv.org/abs/1602.07702"
+    }
+  ]
+}

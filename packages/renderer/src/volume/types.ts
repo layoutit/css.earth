@@ -20,6 +20,8 @@ export interface PreparedVolumeMountOptions {
   /** Build the full slice renderer on the first publication that needs it instead of at mount. Only for a mount that
    * adopts no server-rendered DOM: adoption requires the same nodes, created in the same order, as the server's render. */
   readonly lazyDetail?: boolean;
+  /** A background can coast to every stack: retain its full decoded bank, changing only transform/opacity. */
+  readonly residentStacks?: boolean;
 }
 
 export interface PreparedVolumeRuntime {

@@ -1,0 +1,114 @@
+{
+  "record": "runs/b30-native-scatterFaceSide/fit-crisp.json",
+  "meaning": "Accepted local fit to published measurement and model priors, not a published exterior photograph or unique reconstruction.",
+  "sources": [
+    {
+      "id": "drimmel-2003-extinction-grids",
+      "component": "Far extinction grids",
+      "title": "A three-dimensional Galactic extinction model",
+      "creators": [
+        "R. Drimmel",
+        "A. Cabrera-Lavers",
+        "M. López-Corredoira"
+      ],
+      "year": "2003",
+      "url": "https://zenodo.org/records/7340108",
+      "meaning": "Modeled extinction; published grids, release v1."
+    },
+    {
+      "id": "edenhofer-2024-dust-map",
+      "component": "Local extinction",
+      "title": "A parsec-scale Galactic 3D dust map out to 1.25 kpc from the Sun",
+      "creators": [
+        "G. Edenhofer",
+        "C. Zucker",
+        "P. Frank",
+        "et al."
+      ],
+      "year": "2024",
+      "url": "https://zenodo.org/records/10658339",
+      "meaning": "Inferred 3D extinction; v1.0.2 mean_and_std_xyz.fits."
+    },
+    {
+      "id": "marshall-2006-extinction",
+      "component": "Inner extinction",
+      "title": "Modelling the Galactic interstellar extinction distribution in three dimensions",
+      "creators": [
+        "D. J. Marshall",
+        "A. C. Robin",
+        "C. Reylé",
+        "M. Schultheis",
+        "S. Picaud"
+      ],
+      "year": "2006",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/453/635/ReadMe",
+      "meaning": "Measured reddening constraints."
+    },
+    {
+      "id": "vergely-2022-dust-map",
+      "component": "Regional extinction",
+      "title": "Three-dimensional extinction maps: Inverting inter-calibrated extinction catalogs",
+      "creators": [
+        "J.-L. Vergely",
+        "R. Lallement",
+        "N. L. J. Cox"
+      ],
+      "year": "2022",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/664/A174/ReadMe",
+      "meaning": "Inferred 3D extinction; CDS J/A+A/664/A174."
+    },
+    {
+      "id": "bland-hawthorn-gerhard-2016",
+      "component": "Stellar disc priors",
+      "title": "The Galaxy in Context: Structural, Kinematic, and Integrated Properties",
+      "creators": [
+        "J. Bland-Hawthorn",
+        "O. Gerhard"
+      ],
+      "year": "2016",
+      "url": "https://arxiv.org/abs/1602.07702",
+      "meaning": "Analytic thin/thick-disc priors; fitted gains are local model choices."
+    },
+    {
+      "id": "sormani-2022-bar",
+      "component": "Bar/bulge prior",
+      "title": "The stellar mass distribution of the Milky Way’s bar: an analytic model",
+      "creators": [
+        "M. C. Sormani",
+        "O. Gerhard",
+        "M. Portail",
+        "E. Vasiliev",
+        "J. Clarke"
+      ],
+      "year": "2022",
+      "url": "https://arxiv.org/abs/2204.13114",
+      "meaning": "Analytic model fitted to the Portail N-body bar; local display gains differ."
+    },
+    {
+      "id": "reid-2019-maser-parallaxes",
+      "component": "Arm geometry",
+      "title": "Trigonometric Parallaxes of High-mass Star-forming Regions: Our View of the Milky Way",
+      "creators": [
+        "M. J. Reid",
+        "et al."
+      ],
+      "year": "2019",
+      "url": "https://arxiv.org/abs/1910.03357",
+      "meaning": "Measured maser positions constrain the arm geometry; extrapolated arm light is modeled."
+    },
+    {
+      "id": "sharma-2011-galaxia",
+      "component": "Stellar population prior",
+      "title": "Galaxia: a code to generate a synthetic survey of the Milky Way",
+      "creators": [
+        "S. Sharma",
+        "J. Bland-Hawthorn",
+        "K. V. Johnston",
+        "J. Binney"
+      ],
+      "year": "2011",
+      "url": "https://arxiv.org/abs/1101.3561",
+      "meaning": "Synthetic stellar populations; the fitted camera and color constants belong to b30."
+    }
+  ]
+}

@@ -37,7 +37,7 @@ export interface PreparedVolumeDatasetSource {
   volume(id: string): PreparedCssVolume | undefined;
   stars(id: string): PreparedCataloguePoints | undefined;
   /** Read a dataset's files. Every caller waiting for one dataset shares one read; a failed read is tried again. */
-  load(id: string): Promise<void>;
+  load(id: string, includeStars?: boolean): Promise<void>;
 }
 
 /** A whole bank in memory as a source with every dataset read: what a preparation or a test holds. */
@@ -79,21 +79,21 @@ export async function loadPreparedVolumeDatasets(input: unknown, transport: Prep
     }
     return reading;
   };
-  const load = (id: string): Promise<void> => {
+  const load = (id: string, includeStars = true): Promise<void> => {
     const entry = entries.get(id);
     if (!entry) return Promise.reject(new TypeError(`Volume dataset bank ${index.id} has no dataset ${id}.`));
     let loading = loads.get(id);
     if (!loading) {
-      const reading = loading = Promise.all([read<PreparedCssVolume>(cssVolumeReader.kind, resolve(directory + entry.volume)), readStars(entry.stars)]).then(([volume, points]) => {
+      const reading = loading = read<PreparedCssVolume>(cssVolumeReader.kind, resolve(directory + entry.volume)).then(volume => {
         if (JSON.stringify(volume.frame) !== JSON.stringify(frame)) throw new TypeError(`Volume dataset bank ${index.id}: dataset ${id} is not in its descriptor's frame.`);
-        volumes.set(id, trustPreparedCssVolume(volume)); stars.set(id, points);
+        volumes.set(id, trustPreparedCssVolume(volume));
       });
       loads.set(id, reading);
       reading.catch(() => { if (loads.get(id) === reading) loads.delete(id); });
     }
-    return loading;
+    return includeStars ? Promise.all([loading,readStars(entry.stars).then(points=>{stars.set(id,points);})]).then(()=>{}) : loading;
   };
-  await load(dataset !== undefined && entries.has(dataset) ? dataset : index.defaultDataset);
+  await load(dataset !== undefined && entries.has(dataset) ? dataset : index.defaultDataset, index.starsEnabled !== false);
   return Object.freeze({ index, frame, volume: (id: string) => volumes.get(id), stars: (id: string) => stars.get(id), load });
 }
 
@@ -179,7 +179,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       let selected = selectedNative !== undefined && source.volume(selectedNative) ? selectedNative : data.defaultDataset, destroyed = false, latest: VolumeCameraPublication | null = null;
       // The dataset asked for last: a selection whose files are still being read is shown when they arrive, unless another was asked for since.
       // `staged`: the caller shows it instead, once its images are decoded (`stagedDataset`).
-      let wanted = selected, staged = false;
+      let wanted = selected, staged = false, membershipHeld = false;
       let starsVisible = data.starsEnabled ?? true;
       const listeners = new Set<(state: PreparedVolumeDatasetState) => void>();
       const datasetContent = Object.freeze(data.datasets.map(({ id, label, title, description, sourceUrl }) =>
@@ -187,8 +187,9 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       const datasetById = new Map(datasets.map(dataset => [dataset.id, dataset] as const));
       const families: { datasets: readonly MountedDataset[]; active: { dataset: MountedDataset }; surface: HTMLElement;
         runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
-      let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null;
+      let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null, starsFor: string | null = null;
       const mountStars = () => {
+        starsFor = selected;
         stars = mountPreparedCataloguePoints({ host: root, before: end, payload: datasetById.get(selected)!.stars, createElement: create, nativeFocalCss });
         // Written directly while the points are built: the first publication's write through writeStyle always lands.
         stars.root.style.display = starsVisible ? 'block' : 'none';
@@ -233,6 +234,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         // A hidden bank must forget its last near camera; otherwise selecting a
         // dataset while zoomed out could load detail using that stale publication.
         latest = visible ? publication : null;
+        membershipHeld = holdMembership;
         if (!visible) return;
         const bank = ensureFamily(datasetById.get(selected)!);
         const dataset = bank.active.dataset;
@@ -261,14 +263,15 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         writeStyle(bank.surface, 'opacity', dataset.volume.impostors ? '1' : String(opacity));
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, dataset.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);
-        const showPoints = starsVisible && (nativeFocalCss !== undefined || pointOpacity > 0);
+        const showPoints = starsVisible && source.stars(selected) !== undefined && (nativeFocalCss !== undefined || pointOpacity > 0);
         // Points are built the first time they show: a distant or disabled cluster keeps no hidden star nodes.
-        if (showPoints && !stars) { mountStars(); updateResidencyMetadata(); }
+        if (showPoints && !stars && !holdMembership) { mountStars(); updateResidencyMetadata(); }
+        if (showPoints && stars && starsFor !== selected && !holdMembership) { stars.setPresentation(datasetById.get(selected)!.stars); starsFor=selected; }
         if (stars) {
           writeStyle(stars.root, 'opacity', nativeFocalCss === undefined ? String(pointOpacity)
             : nativeProjectedFade(projectedVolumeRadiusPixels(publication.world, publication.viewport, dataset.volume.frame, data.framingRadiusUnits),
               publication.viewport.focalPixels, nativeFocalCss, data.pointVisibility!.hiddenBelowRadiusPixels, data.pointVisibility!.fullAboveRadiusPixels));
-          writeStyle(stars.root, 'display', showPoints ? 'block' : 'none');
+          if (!holdMembership) writeStyle(stars.root, 'display', showPoints && starsFor === selected ? 'block' : 'none');
           // Hidden points leave layout; projecting them only wrote styles nobody draws.
           if (showPoints) stars.publish(publication);
         }
@@ -316,14 +319,17 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
             if (typeof visible !== 'boolean') throw new TypeError('Catalogue point visibility must be a boolean.');
             if (visible === starsVisible) return;
             starsVisible = visible;
-            if (stars) writeStyle(stars.root, 'display', visible ? 'block' : 'none');
-            if (latest) publish(latest);
+            if (stars && !membershipHeld) writeStyle(stars.root, 'display', visible && source.stars(selected) ? 'block' : 'none');
+            if (visible && !source.stars(selected)) {
+              const id=selected;
+              void source.load(id,true).then(()=>{if(!destroyed && starsVisible && selected===id && latest && !membershipHeld)publish(latest);},(error:unknown)=>console.error('Volume stars could not be read.',error));
+            } else if (latest) publish(latest,true,membershipHeld);
             notify();
           },
           /** Read dataset `id`'s files ahead of showing it. */
-          read: (id: string) => source.load(id),
+          read: (id: string) => source.load(id,starsVisible),
           /** The dataset staged and not yet shown, once its files are read. */
-          stagedDataset: (): string | null => !destroyed && staged && wanted !== selected && source.volume(wanted) && source.stars(wanted) ? wanted : null,
+          stagedDataset: (): string | null => !destroyed && staged && wanted !== selected && source.volume(wanted) && (!starsVisible || source.stars(wanted)) ? wanted : null,
           /** Show dataset `id`. One whose files are not read yet is read first and shown on arrival; the bank keeps the
            * dataset it shows until then. `stage` only asks for it: the bank is on screen, and the caller decodes the
            * dataset's images before it selects it again without `stage` (`stagedDataset` names it meanwhile). */
@@ -333,13 +339,13 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
             if (!next) throw new TypeError(`Unknown prepared volume dataset: ${id}.`);
             wanted = id; staged = stage;
             if (id === selected) return;
-            if (!source.volume(id) || !source.stars(id)) {
-              source.load(id).then(() => { if (!destroyed && wanted === id && !staged) this.selectDataset(id); },
+            if (!source.volume(id) || starsVisible && !source.stars(id)) {
+              source.load(id,starsVisible).then(() => { if (!destroyed && wanted === id && !staged) this.selectDataset(id); },
                 (error: unknown) => { if (wanted === id) wanted = selected; console.error(`Volume dataset bank ${data.id}: dataset ${id} could not be read.`, error); });
               return;
             }
             if (stage) return;
-            stars?.setPresentation(next.stars);
+            if (stars && source.stars(id)) { stars.setPresentation(next.stars); starsFor=id; }
             const family = ensureFamily(next);
             family.active.dataset = next;
             family.runtime.setPresentation(next.volume);

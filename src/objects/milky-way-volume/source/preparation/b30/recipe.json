@@ -1,0 +1,1200 @@
+{
+  "schema": "cssearth-milky-way-layers@1",
+  "record": "runs/b30-native-scatterFaceSide/fit-crisp.json",
+  "canonical": {
+    "meta": "field.json",
+    "directory": "field"
+  },
+  "extension": {
+    "meta": "extension.json",
+    "directory": "extension"
+  },
+  "fit": "fit.json",
+  "frame": "frame.json",
+  "counts": [
+    26,
+    26,
+    26
+  ],
+  "numpy": "2.5.4",
+  "pillow": "13.0.0",
+  "skies": {
+    "sun": [
+      {
+        "id": "path-sun-20000",
+        "ly": 20000,
+        "positionKpc": [
+          -6.129444074137391,
+          -0.17779698090528043,
+          -0.008333312660445952
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              7891208230480118000,
+              167688789959920060000,
+              87294713381558980000
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                7891208230480118000,
+                167688789959920060000,
+                87294713381558980000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sun-12000",
+        "ly": 12000,
+        "positionKpc": [
+          -3.6776664444824343,
+          -0.10667818854316825,
+          -0.004999987596267572
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              4734724938288071000,
+              100613273975952050000,
+              52376828028935380000
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                4734724938288071000,
+                100613273975952050000,
+                52376828028935380000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sun-7000",
+        "ly": 7000,
+        "positionKpc": [
+          -2.145305425948087,
+          -0.06222894331684814,
+          -0.002916659431156083
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              2761922880668033000,
+              58691076485972025000,
+              30553149683545645000
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                2761922880668033000,
+                58691076485972025000,
+                30553149683545645000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sun-4000",
+        "ly": 4000,
+        "positionKpc": [
+          -1.2258888148274782,
+          -0.03555939618105608,
+          -0.0016666625320891904
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              1578241646096019500,
+              33537757991984013000,
+              17458942676311794000
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                1578241646096019500,
+                33537757991984013000,
+                17458942676311794000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sun-2000",
+        "ly": 2000,
+        "positionKpc": [
+          -0.6129444074137391,
+          -0.01777969809052804,
+          -0.0008333312660445952
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              789120823048009700,
+              16768878995992007000,
+              8729471338155897000
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                789120823048009700,
+                16768878995992007000,
+                8729471338155897000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sun-1000",
+        "ly": 1000,
+        "positionKpc": [
+          -0.30647220370686956,
+          -0.00888984904526402,
+          -0.0004166656330222976
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              394560411524004860,
+              8384439497996003000,
+              4364735669077948400
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                394560411524004860,
+                8384439497996003000,
+                4364735669077948400
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sun-300",
+        "ly": 300,
+        "positionKpc": [
+          -0.09194166111206087,
+          -0.0026669547135792057,
+          -0.00012499968990668927
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              118368123457201660,
+              2515331849398801000,
+              1309420700723384300
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                118368123457201660,
+                2515331849398801000,
+                1309420700723384300
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sun-0",
+        "ly": 0,
+        "positionKpc": [
+          0,
+          0,
+          0
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              0,
+              0,
+              0
+            ],
+            "orientationXyzw": [
+              -0.23352525245981526,
+              0.4634538750922518,
+              0.7444397614970746,
+              0.42010225377606875
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "sgr": [
+      {
+        "id": "path-owner-20000",
+        "ly": 20000,
+        "positionKpc": [
+          2.2166776644244752,
+          -0.6455416317795079,
+          0.06005442330536899
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -15203659448600515000,
+              -51249021056858030000,
+              -47128499584018480000
+            ],
+            "orientationXyzw": [
+              -0.32621326781273835,
+              0.4354124324018036,
+              0.6751207418512313,
+              0.49820969634795625
+            ],
+            "focusOffset": {
+              "originM": [
+                -13959605677914395000,
+                -222925654182113670000,
+                -123851626513751750000
+              ],
+              "offsetM": [
+                -1244053770686120000,
+                171676633125255640000,
+                76723126929733270000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-owner-10000",
+        "ly": 10000,
+        "positionKpc": [
+          4.697951208245337,
+          -0.3845359515301862,
+          0.03273614825030247
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -14694306826357477000,
+              -121538541751752150000,
+              -78541230134074490000
+            ],
+            "orientationXyzw": [
+              -0.32621326781273835,
+              0.4354124324018036,
+              0.6751207418512313,
+              0.49820969634795625
+            ],
+            "focusOffset": {
+              "originM": [
+                -13959605677914395000,
+                -222925654182113670000,
+                -123851626513751750000
+              ],
+              "offsetM": [
+                -734701148443082800,
+                101387112430361530000,
+                45310396379677260000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sgr-3000",
+        "ly": 3000,
+        "positionKpc": [
+          8.940378824196426,
+          -0.505030034248613,
+          0.3920497190263224
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -33335116128492945000,
+              -236420343451269460000,
+              -139600650165451390000
+            ],
+            "orientationXyzw": [
+              -0.857695277059265,
+              0.2044610736200705,
+              0.3140440417527288,
+              -0.352038095841867
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                -33335116128492945000,
+                -236420343451269460000,
+                -139600650165451390000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sgr-300",
+        "ly": 300,
+        "positionKpc": [
+          8.343331936691163,
+          -0.057753186981552046,
+          0.033203485978695685
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -15897156722972033000,
+              -224275123109028860000,
+              -125426528878921710000
+            ],
+            "orientationXyzw": [
+              -0.857695277059265,
+              0.2044610736200705,
+              0.3140440417527288,
+              -0.352038095841867
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                -15897156722972033000,
+                -224275123109028860000,
+                -125426528878921710000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sgr-30",
+        "ly": 30,
+        "positionKpc": [
+          8.283627247940636,
+          -0.01302550225484594,
+          -0.002681137326066987
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -14153360782419919000,
+              -223060601074804800000,
+              -124009116750268730000
+            ],
+            "orientationXyzw": [
+              -0.857695277059265,
+              0.2044610736200705,
+              0.3140440417527288,
+              -0.352038095841867
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                -14153360782419919000,
+                -223060601074804800000,
+                -124009116750268730000
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "path-sgr-1p6",
+        "ly": 1.6,
+        "positionKpc": [
+          8.277347199197989,
+          -0.008320812453962781,
+          -0.00645566807367906
+        ],
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -13969939283487752000,
+              -222932851349723400000,
+              -123860025993032650000
+            ],
+            "orientationXyzw": [
+              -0.857695277059265,
+              0.2044610736200705,
+              0.3140440417527288,
+              -0.352038095841867
+            ],
+            "focusOffset": {
+              "originM": [
+                0,
+                0,
+                0
+              ],
+              "offsetM": [
+                -13969939283487752000,
+                -222932851349723400000,
+                -123860025993032650000
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "tuner": {
+    "schema": "cssearth-galaxy-stations@1",
+    "stations": [
+      {
+        "id": "path-sun-20000",
+        "positionM": [
+          7891208230480118000,
+          167688789959920060000,
+          87294713381558980000
+        ],
+        "sky": "path-sun-20000/sky.json",
+        "clouds": "path-sun-20000/clouds.bin"
+      },
+      {
+        "id": "path-sun-12000",
+        "positionM": [
+          4734724938288071000,
+          100613273975952050000,
+          52376828028935380000
+        ],
+        "sky": "path-sun-12000/sky.json",
+        "clouds": "path-sun-12000/clouds.bin"
+      },
+      {
+        "id": "path-sun-7000",
+        "positionM": [
+          2761922880668033000,
+          58691076485972025000,
+          30553149683545645000
+        ],
+        "sky": "path-sun-7000/sky.json",
+        "clouds": "path-sun-7000/clouds.bin"
+      },
+      {
+        "id": "path-sun-4000",
+        "positionM": [
+          1578241646096019500,
+          33537757991984013000,
+          17458942676311794000
+        ],
+        "sky": "path-sun-4000/sky.json",
+        "clouds": "path-sun-4000/clouds.bin"
+      },
+      {
+        "id": "path-sun-2000",
+        "positionM": [
+          789120823048009700,
+          16768878995992007000,
+          8729471338155897000
+        ],
+        "sky": "path-sun-2000/sky.json",
+        "clouds": "path-sun-2000/clouds.bin"
+      },
+      {
+        "id": "path-sun-1000",
+        "positionM": [
+          394560411524004860,
+          8384439497996003000,
+          4364735669077948400
+        ],
+        "sky": "path-sun-1000/sky.json",
+        "clouds": "path-sun-1000/clouds.bin"
+      },
+      {
+        "id": "path-owner-20000",
+        "positionM": [
+          -15203659448600429000,
+          -51249021056857930000,
+          -47128499584018460000
+        ],
+        "sky": "path-owner-20000/sky.json",
+        "clouds": "path-owner-20000/clouds.bin"
+      },
+      {
+        "id": "path-owner-10000",
+        "positionM": [
+          -14694306826357326000,
+          -121538541751751880000,
+          -78541230134074490000
+        ],
+        "sky": "path-owner-10000/sky.json",
+        "clouds": "path-owner-10000/clouds.bin"
+      },
+      {
+        "id": "path-sgr-3000",
+        "positionM": [
+          -33335116128492945000,
+          -236420343451269460000,
+          -139600650165451390000
+        ],
+        "sky": "path-sgr-3000/sky.json",
+        "clouds": "path-sgr-3000/clouds.bin"
+      },
+      {
+        "id": "path-sgr-300",
+        "positionM": [
+          -15897156722972033000,
+          -224275123109028860000,
+          -125426528878921710000
+        ],
+        "sky": "path-sgr-300/sky.json",
+        "clouds": "path-sgr-300/clouds.bin"
+      },
+      {
+        "id": "path-sgr-30",
+        "positionM": [
+          -14153360782419919000,
+          -223060601074804800000,
+          -124009116750268730000
+        ],
+        "sky": "path-sgr-30/sky.json",
+        "clouds": "path-sgr-30/clouds.bin"
+      },
+      {
+        "id": "path-sgr-1p6",
+        "positionM": [
+          -13969939283487752000,
+          -222932851349723400000,
+          -123860025993032650000
+        ],
+        "sky": "path-sgr-1p6/sky.json",
+        "clouds": "path-sgr-1p6/clouds.bin"
+      },
+      {
+        "id": "path-sun-300",
+        "positionM": [
+          118368123457201660,
+          2515331849398801000,
+          1309420700723384300
+        ],
+        "sky": "path-sun-300/sky.json",
+        "clouds": "path-sun-300/clouds.bin"
+      },
+      {
+        "id": "path-sun-0",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "sky": "path-sun-0/sky.json",
+        "clouds": "path-sun-0/clouds.bin"
+      }
+    ],
+    "hysteresisM": 1542838790745683700,
+    "fadeMs": 500,
+    "replacesBanks": [],
+    "farFadeStartM": 46285163722370510000,
+    "farFullDistanceM": 277710982334223060000,
+    "farImageOpacity": 1,
+    "insideSkyFade": {
+      "centerM": [
+        0,
+        0,
+        0
+      ],
+      "startM": 1542838790745683700,
+      "endM": 30856775814913670000
+    },
+    "autoExposure": {
+      "places": [
+        {
+          "positionM": [
+            0,
+            0,
+            0
+          ],
+          "insideOpacity": 0.16,
+          "innerDistanceM": 9460730472580800000,
+          "outerDistanceM": 662251133080656000000
+        },
+        {
+          "positionM": [
+            -13969939283487752000,
+            -222932851349723400000,
+            -123860025993032650000
+          ],
+          "insideOpacity": 0.05813369184463594,
+          "innerDistanceM": 28382191417742400000,
+          "outerDistanceM": 662251133080656000000
+        }
+      ]
+    },
+    "interpolation": {
+      "paths": [
+        [
+          "path-sun-20000",
+          "path-sun-12000",
+          "path-sun-7000",
+          "path-sun-4000",
+          "path-sun-2000",
+          "path-sun-1000",
+          "path-sun-300",
+          "path-sun-0"
+        ],
+        [
+          "path-sun-0",
+          "path-owner-20000",
+          "path-owner-10000",
+          "path-sgr-3000",
+          "path-sgr-300",
+          "path-sgr-30",
+          "path-sgr-1p6"
+        ]
+      ],
+      "insidePlaces": [
+        {
+          "positionM": [
+            -13969939283487752000,
+            -222932851349723400000,
+            -123860025993032650000
+          ],
+          "fadeStartM": 46285163722370510000,
+          "fullDistanceM": 277710982334223060000
+        }
+      ]
+    }
+  },
+  "inputs": [
+    {
+      "destination": "field/emission.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-000.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-001.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-002.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-003.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-004.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-005.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-006.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-007.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-008.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-009.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-010.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-011.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-012.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-013.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-014.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-015.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-016.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-017.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/emission-part16m-018.f32.gz"
+      ]
+    },
+    {
+      "destination": "field/dust.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-000.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-001.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-002.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-003.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-004.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-005.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/dust-part16m-006.f32.gz"
+      ]
+    },
+    {
+      "destination": "field/scatter.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-000.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-001.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-002.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-003.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-004.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-005.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-006.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-007.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-008.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-009.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-010.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-011.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-012.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-013.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-014.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-015.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-016.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-017.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/field/scatter-part16m-018.f32.gz"
+      ]
+    },
+    {
+      "destination": "extension/emission.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-000.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-001.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-002.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-003.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-004.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-005.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-006.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-007.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-008.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-009.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-010.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-011.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-012.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-013.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-014.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-015.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-016.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-017.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-018.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-019.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-020.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-021.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-022.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-023.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-024.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-025.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-026.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-027.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-028.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-029.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-030.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-031.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-032.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-033.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-034.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-035.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-036.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-037.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-038.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-039.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-040.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-041.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-042.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-043.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-044.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-045.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-046.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-047.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-048.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-049.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-050.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-051.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-052.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-053.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-054.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-055.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-056.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-057.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-058.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-059.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-060.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-061.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-062.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-063.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-064.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-065.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-066.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-067.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-068.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-069.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-070.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-071.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-072.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-073.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-074.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-075.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-076.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-077.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-078.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-079.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-080.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-081.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-082.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-083.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-084.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-085.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-086.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-087.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-088.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-089.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-090.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-091.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-092.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/emission-part16m-093.f32.gz"
+      ]
+    },
+    {
+      "destination": "extension/dust.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-000.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-001.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-002.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-003.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-004.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-005.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-006.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-007.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-008.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-009.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-010.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-011.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-012.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-013.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-014.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-015.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-016.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-017.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-018.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-019.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-020.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-021.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-022.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-023.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-024.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-025.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-026.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-027.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-028.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-029.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-030.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/dust-part16m-031.f32.gz"
+      ]
+    },
+    {
+      "destination": "extension/scatter.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-000.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-001.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-002.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-003.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-004.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-005.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-006.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-007.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-008.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-009.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-010.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-011.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-012.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-013.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-014.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-015.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-016.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-017.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-018.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-019.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-020.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-021.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-022.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-023.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-024.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-025.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-026.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-027.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-028.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-029.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-030.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-031.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-032.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-033.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-034.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-035.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-036.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-037.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-038.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-039.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-040.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-041.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-042.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-043.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-044.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-045.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-046.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-047.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-048.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-049.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-050.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-051.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-052.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-053.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-054.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-055.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-056.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-057.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-058.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-059.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-060.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-061.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-062.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-063.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-064.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-065.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-066.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-067.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-068.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-069.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-070.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-071.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-072.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-073.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-074.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-075.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-076.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-077.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-078.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-079.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-080.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-081.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-082.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-083.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-084.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-085.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-086.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-087.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-088.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-089.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-090.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-091.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-092.f32.gz",
+        "src/objects/milky-way-volume/source/b30-inputs/extension/scatter-part16m-093.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-20000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-20000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-12000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-12000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-7000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-7000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-4000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-4000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-2000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-2000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-1000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-1000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-300.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-300.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sun-0.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sun-0.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-owner-20000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-owner-20000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-owner-10000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-owner-10000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sgr-3000.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-3000.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sgr-300.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-300.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sgr-30.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-30.f32.gz"
+      ]
+    },
+    {
+      "destination": "panoramas/path-sgr-1p6.f32",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/panoramas/path-sgr-1p6.f32.gz"
+      ]
+    },
+    {
+      "destination": "nasa/px.webp",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/px.webp.gz"
+      ]
+    },
+    {
+      "destination": "nasa/nx.webp",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/nx.webp.gz"
+      ]
+    },
+    {
+      "destination": "nasa/py.webp",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/py.webp.gz"
+      ]
+    },
+    {
+      "destination": "nasa/ny.webp",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/ny.webp.gz"
+      ]
+    },
+    {
+      "destination": "nasa/pz.webp",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/pz.webp.gz"
+      ]
+    },
+    {
+      "destination": "nasa/nz.webp",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/nz.webp.gz"
+      ]
+    },
+    {
+      "destination": "nasa/low.png",
+      "files": [
+        "src/objects/milky-way-volume/source/b30-inputs/nasa/low.png.gz"
+      ]
+    }
+  ]
+}

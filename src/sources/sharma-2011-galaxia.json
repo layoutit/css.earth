@@ -1,0 +1,38 @@
+{
+  "id": "sharma-2011-galaxia",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Galaxia: a code to generate a synthetic survey of the Milky Way",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://arxiv.org/abs/1101.3561",
+      "label": "Galaxia: a code to generate a synthetic survey of the Milky Way"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1101.3561",
+      "checkedOn": "2026-10-17",
+      "locator": "Synthetic stellar populations; the fitted camera and color constants belong to b30."
+    }
+  ],
+  "creators": [
+    "S. Sharma",
+    "J. Bland-Hawthorn",
+    "K. V. Johnston",
+    "J. Binney"
+  ],
+  "publisher": "arXiv",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite S. Sharma et al. (2011).",
+      "scope": "Stellar population prior",
+      "evidence": "https://arxiv.org/abs/1101.3561"
+    }
+  ]
+}

@@ -1,10 +1,8 @@
 /** Actual PolyCSS compiler regression for prepared density-image orientation and crop bounds. */
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry } from '@layoutit/polycss';
 import type { Polygon } from '@layoutit/polycss';
-import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
-import type { VolumeSliceQuad, VolumeSlices, Vector3 } from '@cssearth/objects';
+import type { DensityVolumeFrame, VolumeSliceQuad, VolumeSlices, Vector3 } from '@cssearth/objects';
 import { test } from 'node:test';
 
 type Quad = Pick<VolumeSliceQuad, 'id' | 'axis' | 'texturePath' | 'widthPx' | 'heightPx' | 'vertices' | 'uvs'>;
@@ -52,12 +50,13 @@ function imageWorld(g: Pick<ReturnType<typeof compile>, 'matrix' | 'leafWidth' |
 test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the plane PolyCSS gave them', async () => {
   const { compileCssVolume } = await import('./volume.ts');
   const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');
-  const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { parseVolumeRecipe } = await import('@cssearth/objects');
-  const slices = JSON.parse(await readFile('src/objects/milky-way-volume/prepared/volume-slices.json', 'utf8')) as VolumeSlices;
-  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way-volume/object.json', 'utf8')));
-  const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way-volume/source/volume.json', 'utf8')));
-  const volume = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, recipe, slices });
+  const frame:DensityVolumeFrame={referenceFrame:'sun-icrf',epochJdTt:1,originM:[0,0,0],localToReferenceXyzw:[0,0,0,1],metersPerUnit:1,boundsUnits:{min:[-2,-3,-1],max:[2,3,1]}};
+  const slices:VolumeSlices={boundsUnits:{min:[...frame.boundsUnits.min],max:[...frame.boundsUnits.max]},provenance:{},approximation:{method:'geometry fixture',radialEmission:'none',limitations:[],samplesPerSlab:1,opticalWeight:1,exposureGain:1,sliceCounts:{x:1,y:1,z:1},slabPitchUnits:{x:4,y:6,z:2}},quads:(['x','y','z'] as const).map<VolumeSliceQuad>((axis,index)=>{
+    const vertices:readonly Vector3[]=axis==='x'?[[0,-3,1],[0,3,1],[0,3,-1],[0,-3,-1]]:axis==='y'?[[-2,0,1],[2,0,1],[2,0,-1],[-2,0,-1]]:[[-2,3,0],[2,3,0],[2,-3,0],[-2,-3,0]];
+    return{id:axis,axis,sliceIndex:0,texturePath:axis+'.png',widthPx:193+index*2,heightPx:257-index*2,
+      vertices:[vertices[0]!,vertices[1]!,vertices[2]!,vertices[3]!],uvs:[[0,0],[1,0],[1,1],[0,1]],center:[0,0,0],normal:axis==='x'?[1,0,0]:axis==='y'?[0,1,0]:[0,0,1],bytes:1,alphaCoverage:1};
+  })};
+  const volume=compileCssVolume({id:'texture-density-fixture',frame,recipe:{anchors:[]},slices});
   const quads = new Map(slices.quads.map(quad => [quad.id, quad]));
   let leaves = 0, maximumError = 0;
   for (const leaf of volume.stacks.flatMap(stack => stack.leaves)) {
