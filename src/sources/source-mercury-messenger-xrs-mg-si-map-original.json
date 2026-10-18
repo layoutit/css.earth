@@ -1,0 +1,45 @@
+{
+  "id": "source-mercury-messenger-xrs-mg-si-map-original",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MESSENGER XRS Mg/Si map (MESS-H-XRS-3-RDR-MAPS-V1.0, XRS_MAP_MG_SI_20150424)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17189/1518582"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/missions/messenger/xrs.htm",
+      "label": "Source page"
+    },
+    {
+      "role": "original",
+      "url": "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/xrs_map_mg_si_20150424.img",
+      "label": "Source file"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/inputs/33"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "S. Z. Weider, L. R. Nittler et al., MESSENGER X-Ray Spectrometer team; NASA/JHUAPL/Carnegie Institution of Washington; NASA PDS Geosciences Node",
+      "scope": "The messenger xrs mg si map original input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; cite Weider et al. (2015) and the PDS data set",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "source-mercury-nasa-pia19417-chemistry-picture",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PIA19417: Showing Some Chemistry (NASA Photojournal, 2015-04-16)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/photojournal/showing-some-chemistry/",
+      "label": "Source page"
+    },
+    {
+      "role": "original",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia19/pia19417/PIA19417.tif",
+      "label": "Source file"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/inputs/34"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington",
+      "scope": "The nasa pia19417 chemistry picture input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA image; credit NASA/JHUAPL/Carnegie Institution of Washington",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

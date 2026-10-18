@@ -199,6 +199,27 @@
       ]
     },
     {
+      "id": "messenger-xrs-mg-si",
+      "subject": "MESSENGER XRS Mg/Si map of Weider et al. (2015), PDS MESS-H-XRS-3-RDR-MAPS-V1.0 product XRS_MAP_MG_SI_20150424",
+      "status": "included",
+      "finding": "Adopted as the Magnesium dataset (proposal P30): 1440 x 720 unsigned bytes at 4 pixels per degree, DN x 0.0030668824 = Mg/Si, DN 0 missing (2,236 cells), values 0.095 to 0.782. The PDS3 label swaps LINES and LINE_SAMPLES and calls the bytes signed; the PDS4 label agrees with the file and is the one read. Colors are read from NASA's PIA19417 by xrs-colors.mts (orthographic view from 30 N, 230 E; hue against map value r = 0.960): fully blue at 0.236, fully red at 0.718. The release's footprint map gives median footprints of 169 km north of 60 N and 1,612 km south of 60 S.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/xrs_map_mg_si_20150424.xml",
+        "https://doi.org/10.1016/j.epsl.2015.01.023",
+        "https://science.nasa.gov/photojournal/showing-some-chemistry/"
+      ]
+    },
+    {
+      "id": "messenger-xrs-other-ratios",
+      "subject": "The same PDS release's Al/Si, Ca/Si, Fe/Si and S/Si maps and the footprint maps",
+      "status": "deferred",
+      "finding": "Released beside the Mg/Si map in the same format. Not shown: NASA's PIA19417 colors only Mg/Si and Al/Si, so the other ratios have no publisher color found yet.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/"
+      ],
+      "revisitWhen": "A publisher's picture of another ratio is found, or Al/Si is added from PIA19417's right globe."
+    },
+    {
       "id": "hgm008-gravity-disturbance",
       "subject": "MESSENGER HgM008 gravity disturbance grid, degree 90 (NASA Mercury Trek, Disturbance_Map_HgM008_Lmax90_16ppd)",
       "status": "excluded",

@@ -16,14 +16,14 @@
     {
       "location": "public",
       "filename": "mercury-arrival.webp",
-      "bytes": 127912,
-      "sha256": "89eb9b2a49c47fa5fb46d9295142454d3688fc0bff964ef427b0f9ef416d960a"
+      "bytes": 127864,
+      "sha256": "ea77a4bf8f2a6f642785305fc07d7a4717c64b91754aabbcb446cac8610ef35e"
     },
     {
       "location": "public",
       "filename": "mercury-billboard.webp",
-      "bytes": 9602,
-      "sha256": "664ec2881b7b12a3a99550f837f95dc6f180957770fce32ffac58301939219d7"
+      "bytes": 9938,
+      "sha256": "031e5de6bdef922e130d588bd2f386836b370b657bf1e36c1f1a4b14d494583a"
     },
     {
       "location": "public",
@@ -54,6 +54,12 @@
       "filename": "mercury-dataset-loi.webp",
       "bytes": 298,
       "sha256": "385d642345c804e08e17ae7d78095eb527bc15667cfbd9b56fc9fb6e29b04f46"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-dataset-magnesium.webp",
+      "bytes": 684,
+      "sha256": "72304d94572854dec48336d980381ec4e69ecd9701b0b64ed5018626a7ee9764"
     },
     {
       "location": "public",
@@ -108,6 +114,12 @@
       "filename": "mercury-poles-loi@2x.webp",
       "bytes": 173946,
       "sha256": "4160883cc39f41f854c80e4957064acd6c8af8db248fb84dcd55010d3d886b99"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-poles-magnesium@2x.webp",
+      "bytes": 19660,
+      "sha256": "b75fc54dc8c6ca8142878bea3807e416a0b45cde376c8a60149c79377639c471"
     },
     {
       "location": "public",
@@ -279,6 +291,36 @@
     },
     {
       "location": "public",
+      "filename": "mercury-surface-magnesium-page-0-level-1040.webp",
+      "bytes": 259880,
+      "sha256": "bfb81aadf88c3ae744a32b944e59b15c516024e023ff8499ad1b71e3c3b6257c"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-magnesium-page-0-level-2080.webp",
+      "bytes": 560308,
+      "sha256": "6118fa649696ee2831b17be4be322ebebe3e31acd00c9ffb690ce6cf219d50fe"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-magnesium-page-0-level-520.webp",
+      "bytes": 107992,
+      "sha256": "6d48d9377c3ccbdb2b9f790cb892f34ac36e0f9e55d7f3bcc0791d82ea8af8b9"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-magnesium-page-0.webp",
+      "bytes": 328852,
+      "sha256": "9609118f248aaf52858c40bdc8674f1239a82cc02610f35ec407881f6acf5d4a"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-magnesium@2x.webp",
+      "bytes": 328852,
+      "sha256": "9609118f248aaf52858c40bdc8674f1239a82cc02610f35ec407881f6acf5d4a"
+    },
+    {
+      "location": "public",
       "filename": "mercury-surface-normal-page-0-level-1040.webp",
       "bytes": 118928,
       "sha256": "cce4952218a96f3e1ffbf9ff26493e6648f8c6b4925ce8956b4ca47fa1ee371f"
@@ -346,8 +388,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 19343,
-      "sha256": "93959e6339cae68229195a0cfe7070fc0894cbbc722f18b0bf7f60c83ff2e277"
+      "bytes": 19510,
+      "sha256": "46b977fc825f561158ab7776f55762e0066caffa57ee12ae451902eaa17ba8b5"
     },
     {
       "location": "prepared",
@@ -364,8 +406,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 11818,
-      "sha256": "8484d19ec3c3cf12c88a0fbc4eafd5cb831320999f06635e413af2b4820cee92"
+      "bytes": 15005,
+      "sha256": "06aef56127640fc67b1c2c6b0e80d38c0b93008ba67fb69879c263d00cc53917"
     },
     {
       "location": "prepared",
@@ -382,8 +424,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 694,
-      "sha256": "24fa3de237cce159db6917f8426bdfa0a072f9e52c10f3214201a7c2262715bf"
+      "bytes": 790,
+      "sha256": "0722d323776bacbe236f58fdd137cdf3c52cdce5ad8eb000d40378383e16d525"
     },
     {
       "location": "prepared",
@@ -417,6 +459,12 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/magnesium.webp",
+      "bytes": 4718,
+      "sha256": "47224c255e264e46ace940e304615c9ade74efb8958dc28c04d6a171e7c455c7"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/normal.webp",
       "bytes": 11930,
       "sha256": "ed03c41139f2bf3feb7388b6d41e84a28f3f932d2dde20d30bf258f70ea55274"
@@ -430,14 +478,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 118290,
-      "sha256": "2d4d9d4d561ab9bede4e927be3121f877475e8af74772fb09d8905f53a432f81"
+      "bytes": 123959,
+      "sha256": "6e287f9c2a683fa6ba152db00c71e52af186cb7316f006af6931b7ee1008715f"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1911,
-      "sha256": "91bf8d76dac85446426854ec98aa9a4d927b4a7bb29dce2f173510f9c10a4430"
+      "bytes": 2089,
+      "sha256": "8f23f9ed29ac1e49ef94666107777986b6723e734563cdee1c70c5ce4aa68c23"
     }
   ]
 }

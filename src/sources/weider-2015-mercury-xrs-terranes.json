@@ -1,0 +1,34 @@
+{
+  "id": "weider-2015-mercury-xrs-terranes",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Evidence for geochemical terranes on Mercury: Global mapping of major elements with MESSENGER's X-Ray Spectrometer (Weider et al. 2015)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.epsl.2015.01.023"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.epsl.2015.01.023",
+      "label": "Weider et al. (2015), Earth and Planetary Science Letters 416, 109-120"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/inputs/32"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Shoshana Z. Weider, Larry R. Nittler, Richard D. Starr, Ellen J. Crapster-Pregont, Patrick N. Peplowski, Brett W. Denevi, James W. Head, Paul K. Byrne, Steven A. Hauck II, Denton S. Ebel, Sean C. Solomon",
+      "scope": "citation",
+      "evidence": "https://api.crossref.org/works/10.1016/j.epsl.2015.01.023"
+    }
+  ]
+}

@@ -186,6 +186,54 @@
           }
         }
       }
+    },
+    {
+      "id": "magnesium",
+      "source": "science/xrs/xrs-mg-si-georeferenced.tif",
+      "falseColor": true,
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-dataset-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "xrs-mg-si-georeferenced.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.236,
+          "maximum": 0.718,
+          "colors": [
+            "#3438cc",
+            "#2e81c8",
+            "#2bc1c2",
+            "#68c385",
+            "#b8c437",
+            "#c38829",
+            "#bc2926"
+          ],
+          "units": "Mg/Si ratio",
+          "valueTransform": {
+            "scale": 0.0030668824,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 1440,
+            "height": 720,
+            "origin": [
+              -7663594.646,
+              3831797.323
+            ],
+            "resolution": [
+              10643.881452,
+              -10643.881452
+            ],
+            "referenceRadiusMeters": 2439400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": 0
+          }
+        }
+      }
     }
   ],
   "lighting": {
