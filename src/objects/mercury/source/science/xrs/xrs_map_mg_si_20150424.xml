@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A10.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/mission/mess/v1/PDS4_MESS_1B00_1020.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1900.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1700.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" 
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1" 
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" 
+    xmlns:mess="http://pds.nasa.gov/pds4/mission/mess/v1" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="   http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A10.xsd   http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1700.xsd   http://pds.nasa.gov/pds4/cart/v1 https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1900.xsd   http://pds.nasa.gov/pds4/mission/mess/v1 https://pds.nasa.gov/pds4/mission/mess/v1/PDS4_MESS_1B00_1020.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:mess_xrs_derived:data_maps:xrs_map_mg_si_20150424</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>MESSENGER XRS RDR Map product: xrs_map_mg_si_20150424</title>
+    <information_model_version>1.10.1.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2018-07-27</modification_date>
+        <version_id>1.0</version_id>
+        <description>PDS4 migrated product.</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2011-04-07T03:19:53.691Z</start_date_time>
+      <stop_date_time>2015-04-24T21:05:34.295Z</stop_date_time>
+    </Time_Coordinates>
+    <Investigation_Area>
+      <name>MESSENGER</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.messenger</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>MESSENGER</name>
+        <type>Spacecraft</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.mess</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>X-Ray Spectrometer</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:xrs.mess</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Mercury</name>
+      <type>Planet</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:planet.mercury</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Mission_Area>
+      <mess:MESSENGER>
+        <mess:spacecraft_clock_start_count>1/210633861</mess:spacecraft_clock_start_count>
+        <mess:spacecraft_clock_stop_count>2/072233522</mess:spacecraft_clock_stop_count>
+        <mess:standard_data_product_id>xrsrdr</mess:standard_data_product_id>
+        <mess:software_name>ua_lpl_edr2cdr</mess:software_name>
+        <mess:software_version_id>1.0</mess:software_version_id>
+      </mess:MESSENGER>
+    </Mission_Area>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>RATIO_OF_MG_TO_SI</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>RATIO_OF_MG_TO_SI</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">-180</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">180</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">90</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">-90</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                <cart:Equirectangular>
+                  <cart:standard_parallel_1 unit="deg">0</cart:standard_parallel_1>
+                  <cart:longitude_of_central_meridian unit="deg">0</cart:longitude_of_central_meridian>
+                  <cart:latitude_of_projection_origin unit="deg">0</cart:latitude_of_projection_origin>
+                </cart:Equirectangular>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">10643.881452</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">10643.881452</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">4</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">4</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">-7663594.646</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">3831797.323</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>planetocentric</cart:latitude_type>
+              <cart:spheroid_name>mercury</cart:spheroid_name>
+              <cart:semi_major_radius unit="km">2439.4</cart:semi_major_radius>
+              <cart:semi_minor_radius unit="km">2439.4</cart:semi_minor_radius>
+              <cart:polar_radius unit="km">2439.4</cart:polar_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <File_Area_Observational>
+    <File>
+      <file_name>xrs_map_mg_si_20150424.img</file_name>
+      <creation_date_time>2018-04-17T20:56:06Z</creation_date_time>
+    </File>
+    <Array_2D_Image>
+      <local_identifier>RATIO_OF_MG_TO_SI</local_identifier>
+      <offset unit="byte">0</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Map of the ratio of Mg to Si, linearly 
+                                    scaled such that the maximum pixel 
+                                    value corresponds to a Mg/Si value 
+                                    of 0.782055.</description>
+      <Element_Array>
+        <data_type>UnsignedByte</data_type>
+        <scaling_factor>0.0030668824</scaling_factor>
+        <value_offset>0</value_offset>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>720</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1440</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>0</missing_constant>
+      </Special_Constants>
+      <Object_Statistics>
+        <maximum_scaled_value>0.782055</maximum_scaled_value>
+        <minimum_scaled_value>0</minimum_scaled_value>
+      </Object_Statistics>
+    </Array_2D_Image>
+  </File_Area_Observational>
+  <File_Area_Observational_Supplemental>
+    <File>
+      <file_name>xrs_map_mg_si_20150424.lbl</file_name>
+    </File>
+    <Stream_Text>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS3</parsing_standard_id>
+      <description>Original PDS3 label</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+    </Stream_Text>
+  </File_Area_Observational_Supplemental>
+  <File_Area_Observational_Supplemental>
+    <File>
+      <file_name>xrs_map_mg_si_20150424.jp2</file_name>
+      <creation_date_time>2015-11-25T16:23:01Z</creation_date_time>
+    </File>
+    <Encoded_Image>
+      <offset unit="byte">0</offset>
+      <encoding_standard_id>J2C</encoding_standard_id>
+      <description>Original JPEG-2000 image in PDS3 archive</description>
+    </Encoded_Image>
+  </File_Area_Observational_Supplemental>
+</Product_Observational>

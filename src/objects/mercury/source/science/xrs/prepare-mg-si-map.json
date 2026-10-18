@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-pds4-byte-geotiff-intake@1",
+  "label": "xrs_map_mg_si_20150424.xml",
+  "input": "xrs_map_mg_si_20150424.img",
+  "lidvid": "urn:nasa:pds:mess_xrs_derived:data_maps:xrs_map_mg_si_20150424::1.0",
+  "shape": [
+    720,
+    1440
+  ],
+  "scale": 0.0030668824,
+  "fields": {
+    "data_type": "UnsignedByte",
+    "axis_index_order": "Last Index Fastest",
+    "axes": "2",
+    "missing_constant": "0",
+    "map_projection_name": "Equirectangular",
+    "latitude_type": "planetocentric",
+    "longitude_direction": "Positive East",
+    "latitude_of_projection_origin": {
+      "value": 0,
+      "unit": "deg"
+    },
+    "standard_parallel_1": {
+      "value": 0,
+      "unit": "deg"
+    },
+    "longitude_of_central_meridian": {
+      "value": 0,
+      "unit": "deg"
+    },
+    "horizontal_display_axis": "Sample",
+    "horizontal_display_direction": "Left to Right",
+    "vertical_display_axis": "Line",
+    "vertical_display_direction": "Top to Bottom",
+    "semi_major_radius": {
+      "value": 2439.4,
+      "unit": "km"
+    },
+    "polar_radius": {
+      "value": 2439.4,
+      "unit": "km"
+    },
+    "pixel_resolution_x": {
+      "value": 10643.881452,
+      "unit": "m/pixel"
+    },
+    "pixel_resolution_y": {
+      "value": 10643.881452,
+      "unit": "m/pixel"
+    },
+    "upperleft_corner_x": {
+      "value": -7663594.646,
+      "unit": "m"
+    },
+    "upperleft_corner_y": {
+      "value": 3831797.323,
+      "unit": "m"
+    }
+  },
+  "output": "xrs-mg-si-georeferenced.tif",
+  "receipt": "xrs-mg-si-georeferenced.json"
+}

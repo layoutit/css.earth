@@ -119,4 +119,36 @@ class NimsTests(unittest.TestCase):
         self.assertTrue((b>a).all())
         with self.assertRaises(ValueError):nims.display(v,[[1,1]]*3)
 
+LABEL='''<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:cart="http://pds.nasa.gov/pds4/cart/v1">
+<Identification_Area><logical_identifier>urn:test:map</logical_identifier><version_id>1.0</version_id></Identification_Area>
+<cart:Cartography><cart:map_projection_name>Equirectangular</cart:map_projection_name>
+<cart:pixel_resolution_x unit="m/pixel">1000</cart:pixel_resolution_x>
+<cart:upperleft_corner_x unit="m">-2000</cart:upperleft_corner_x><cart:upperleft_corner_y unit="m">1000</cart:upperleft_corner_y>
+<cart:semi_major_radius unit="km">2439.4</cart:semi_major_radius></cart:Cartography>
+<File_Area_Observational><Array_2D_Image><axis_index_order>Last Index Fastest</axis_index_order>
+<Element_Array><data_type>UnsignedByte</data_type><scaling_factor>0.5</scaling_factor></Element_Array>
+<Axis_Array><axis_name>Line</axis_name><elements>2</elements><sequence_number>1</sequence_number></Axis_Array>
+<Axis_Array><axis_name>Sample</axis_name><elements>4</elements><sequence_number>2</sequence_number></Axis_Array>
+<Special_Constants><missing_constant>0</missing_constant></Special_Constants></Array_2D_Image></File_Area_Observational>
+</Product_Observational>'''
+
+class Pds4ByteTests(unittest.TestCase):
+    def test_migrated_image_array_and_kilometre_radius(self):
+        # A PDS3 map migrated to PDS4 (MESSENGER XRS) is an Array_2D_Image with semi_major_radius in km.
+        import rasterio
+        byte=module('pds4-byte-geotiff')
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);(root/'map.xml').write_text(LABEL)
+            np.array([[0,1,2,3],[4,5,6,255]],dtype='uint8').tofile(root/'map.img')
+            plan=dict(label='map.xml',input='map.img',lidvid='urn:test:map::1.0',shape=[2,4],scale=0.5,
+                      fields={'data_type':'UnsignedByte','semi_major_radius':{'value':2439.4,'unit':'km'}},
+                      output='map.tif',receipt='map.json')
+            (root/'plan.json').write_text(json.dumps(plan));byte.prepare(root/'plan.json')
+            receipt=json.loads((root/'map.json').read_text())
+            self.assertEqual(receipt['referenceRadiusMeters'],2439400)
+            self.assertEqual((receipt['missingPixels'],receipt['maximum']),(1,127.5))
+            with rasterio.open(root/'map.tif') as tif:
+                np.testing.assert_array_equal(tif.read(1),[[0,1,2,3],[4,5,6,255]])
+                self.assertEqual((tif.transform.c,tif.transform.f,tif.nodata),(-2000,1000,0))
+
 if __name__=='__main__':unittest.main()

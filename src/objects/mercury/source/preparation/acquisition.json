@@ -183,6 +183,30 @@
       "groups": [
         "refresh-gravity"
       ]
+    },
+    {
+      "kind": "download",
+      "path": "science/xrs/xrs_map_mg_si_20150424.img",
+      "url": "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/xrs_map_mg_si_20150424.img",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "science/xrs/xrs-mg-si-georeferenced.tif",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mercury/science/xrs/xrs-mg-si-georeferenced.tif",
+      "groups": [
+        "refresh-xrs"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "science/xrs/PIA19417.tif",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia19/pia19417/PIA19417.tif",
+      "groups": [
+        "refresh-xrs"
+      ]
     }
   ]
 }

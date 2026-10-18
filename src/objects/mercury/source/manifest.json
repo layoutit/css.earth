@@ -823,6 +823,104 @@
         "kind": "local",
         "reason": "Declares native byte-image encoding, cartographic frame and compact display dimensions."
       }
+    },
+    {
+      "id": "messenger-xrs-mg-si-map",
+      "path": "science/xrs/xrs-mg-si-georeferenced.tif",
+      "origin": "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/xrs_map_mg_si_20150424.xml",
+      "credit": "S. Z. Weider, L. R. Nittler et al., MESSENGER X-Ray Spectrometer team; NASA/JHUAPL/Carnegie Institution of Washington; NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; cite Weider et al. (2015) and the PDS data set",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://doi.org/10.17189/1518582"
+      ],
+      "acquisition": "Lossless GeoTIFF wrapper of xrs_map_mg_si_20150424.img (PDS4 label xrs_map_mg_si_20150424.xml): 1440 x 720 unsigned bytes, equirectangular on a 2,439.4 km sphere from 180 W, 90 N at 4 pixels per degree, DN x 0.0030668824 = Mg/Si, DN 0 missing; no resampling. Reproduce with packages/bake/src/objects/acquisition/pds4-byte-geotiff.py and science/xrs/prepare-mg-si-map.json, or restore the mirror using preparation/acquisition.json. The PDS3 label of the same file swaps its line and sample counts and calls the bytes signed; the PDS4 label is read instead.",
+      "redistribution": "Our lossless wrapper of public NASA data, mirrored on the project's asset host; excluded from Git.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "datasetId": "magnesium",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/xrs_map_mg_si_20150424.xml — MESSENGER X-Ray Spectrometer"
+          }
+        ]
+      },
+      "sourceUrl": "https://pds-geosciences.wustl.edu/missions/messenger/xrs.htm",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-messenger-xrs-mg-si-map",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          },
+          {
+            "catalogueId": "weider-2015-mercury-xrs-terranes",
+            "role": "method",
+            "evidence": "https://doi.org/10.1016/j.epsl.2015.01.023"
+          }
+        ]
+      }
+    },
+    {
+      "id": "messenger-xrs-mg-si-map-original",
+      "path": "science/xrs/xrs_map_mg_si_20150424.img",
+      "origin": "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/xrs_map_mg_si_20150424.img",
+      "credit": "S. Z. Weider, L. R. Nittler et al., MESSENGER X-Ray Spectrometer team; NASA/JHUAPL/Carnegie Institution of Washington; NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; cite Weider et al. (2015) and the PDS data set",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://doi.org/10.17189/1518582"
+      ],
+      "acquisition": "PDS data set MESS-H-XRS-3-RDR-MAPS-V1.0, product XRS_MAP_MG_SI_20150424 (version 1.0, created 2015-11-25), downloaded unchanged.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ],
+      "sourceUrl": "https://pds-geosciences.wustl.edu/missions/messenger/xrs.htm",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-messenger-xrs-mg-si-map-original",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-pia19417-chemistry-picture",
+      "path": "science/xrs/PIA19417.tif",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia19/pia19417/PIA19417.tif",
+      "credit": "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington",
+      "license": "NASA image; credit NASA/JHUAPL/Carnegie Institution of Washington",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://science.nasa.gov/photojournal/showing-some-chemistry/"
+      ],
+      "acquisition": "NASA Photojournal PIA19417 'Showing Some Chemistry' (2015-04-16), full-resolution TIFF, 1920 x 1440, downloaded unchanged. Read by packages/bake/authoring/mercury/xrs-colors.mts for the Mg/Si map's colors; not shown on the page.",
+      "redistribution": "Kept as an input of the color fit; not redistributed.",
+      "consumers": [
+        "datasets"
+      ],
+      "sourceUrl": "https://science.nasa.gov/photojournal/showing-some-chemistry/",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-nasa-pia19417-chemistry-picture",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1130,6 +1228,15 @@
           }
         ]
       }
+    },
+    {
+      "path": "science/xrs/xrs_map_mg_si_20150424.xml",
+      "origin": "https://pds-geosciences.wustl.edu/messenger/mess-h-xrs-3-rdr-maps-v1/messxrs_3001/data/maps/xrs_map_mg_si_20150424.xml",
+      "purpose": "PDS4 label of the Mg/Si map: array layout, scale, missing value and cartography the GeoTIFF wrapper checks."
+    },
+    {
+      "path": "science/xrs/prepare-mg-si-map.json",
+      "purpose": "Intake plan for packages/bake/src/objects/acquisition/pds4-byte-geotiff.py: the label fields, shape and scale the wrapper requires."
     }
   ]
 }

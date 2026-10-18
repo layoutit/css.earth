@@ -382,6 +382,70 @@
             "value": "Other densities or another average thickness give a different map. Detail follows the gravity model: finer in the north, coarse in the south. Under Rachmaninoff basin the model falls slightly below zero, to −3 km, which is not physical."
           }
         ]
+      },
+      {
+        "id": "magnesium",
+        "label": "Magnesium",
+        "thumbnail": "mercury-dataset-magnesium.webp",
+        "surface": "mercury-surface-magnesium@2x.webp",
+        "poles": "mercury-poles-magnesium@2x.webp",
+        "source": {
+          "id": "source-mercury-messenger-xrs-mg-si-map",
+          "url": "https://doi.org/10.1016/j.epsl.2015.01.023"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Magnesium/silicon",
+          "meta": "ratio",
+          "labels": [
+            "≤0.24",
+            "0.48",
+            "≥0.72"
+          ],
+          "recipe": {
+            "palette": [
+              "#3438cc",
+              "#2e81c8",
+              "#2bc1c2",
+              "#68c385",
+              "#b8c437",
+              "#c38829",
+              "#bc2926"
+            ],
+            "labels": [
+              "≤0.24",
+              "0.48",
+              "≥0.72"
+            ]
+          },
+          "sourceUrl": "https://doi.org/10.1016/j.epsl.2015.01.023"
+        },
+        "falseColor": true,
+        "qualification": "MESSENGER X-Ray Spectrometer Mg/Si map of Weider et al. (2015), PDS release MESS-H-XRS-3-RDR-MAPS-V1.0 (xrs_map_mg_si_20150424, observations 2011-04-07 to 2015-04-24), 4 pixels per degree. Colors read from NASA’s picture of the same map, PIA19417.",
+        "notes": "How much magnesium the top few hundredths of a millimeter of rock hold for each unit of silicon, measured from the X-rays the surface gives off when the Sun shines on it. A ratio with no unit. Blue is magnesium-poor and red magnesium-rich; ratios below 0.24 or above 0.72 use endpoint colors. The colors are NASA’s own for this map (PIA19417). Weider et al. (2015) built the map from MESSENGER X-Ray Spectrometer measurements made from April 2011 to April 2015, spreading each one over the patch of ground its detector saw. The map is the PDS release of that work. Each measurement saw a large patch of ground, so the map is smooth. The median patch is about 170 km across north of 60° N, 300 km at 30–60° N, 840 km near the equator and 1,100–1,600 km in the south, where MESSENGER flew higher. Southern patterns are broad because they are not resolved.",
+        "view": "exterior",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How much magnesium the top few hundredths of a millimeter of rock hold for each unit of silicon, measured from the X-rays the surface gives off when the Sun shines on it."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "A ratio with no unit. Blue is magnesium-poor and red magnesium-rich; ratios below 0.24 or above 0.72 use endpoint colors. The colors are NASA’s own for this map (PIA19417)."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Weider et al. (2015) built the map from MESSENGER X-Ray Spectrometer measurements made from April 2011 to April 2015, spreading each one over the patch of ground its detector saw. The map is the PDS release of that work."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each measurement saw a large patch of ground, so the map is smooth. The median patch is about 170 km across north of 60° N, 300 km at 30–60° N, 840 km near the equator and 1,100–1,600 km in the south, where MESSENGER flew higher. Southern patterns are broad because they are not resolved."
+          }
+        ]
       }
     ],
     "labels": {
@@ -391,7 +455,8 @@
       "topography": "Elevation",
       "loi": "Monochrome",
       "gravity": "Gravity",
-      "crust": "Crust"
+      "crust": "Crust",
+      "magnesium": "Magnesium"
     }
   },
   "settings": {

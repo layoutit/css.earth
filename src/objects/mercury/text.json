@@ -60,6 +60,11 @@
       "title": "Crustal-thickness model",
       "detail": "MESSENGER",
       "summary": "Thickness inferred from gravity and topography. It depends on assumed rock densities."
+    },
+    "magnesium": {
+      "title": "Magnesium/silicon map",
+      "detail": "MESSENGER",
+      "summary": "Magnesium for each unit of silicon in the surface rock, from the X-rays the Sun makes it give off."
     }
   }
 }

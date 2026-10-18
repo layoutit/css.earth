@@ -40,7 +40,11 @@ def prepare(path):
                 raise ValueError('PDS quantity changed: ' + name)
         elif actual != expected:
             raise ValueError('PDS field changed: ' + name)
-    array = field(tree, 'Array_2D_Map')
+    # A migrated PDS3 map is an Array_2D_Image; its cartography still sits in the label's Cartography area.
+    arrays = tree.findall('.//{*}Array_2D_Map') + tree.findall('.//{*}Array_2D_Image')
+    if len(arrays) != 1:
+        raise ValueError('Missing or ambiguous PDS field: Array_2D_Map or Array_2D_Image')
+    array = arrays[0]
     identity = field(tree, 'Identification_Area')
     lidvid = field(identity, 'logical_identifier').text.strip() + '::' + identity.find('{*}version_id').text.strip()
     if lidvid != plan['lidvid']:
@@ -60,7 +64,11 @@ def prepare(path):
     scale = float(field(array, 'scaling_factor').text)
     if scale != plan['scale']:
         raise ValueError('PDS physical scale changed')
-    radius = float(field(tree, 'a_axis_radius').text)
+    # Older cartography labels name the sphere's radius a_axis_radius, newer ones semi_major_radius; either carries its unit.
+    named = tree.findall('.//{*}a_axis_radius') or tree.findall('.//{*}semi_major_radius')
+    if len(named) != 1 or named[0].attrib.get('unit') not in ('m', 'km'):
+        raise ValueError('Missing or ambiguous PDS field: a_axis_radius or semi_major_radius')
+    radius = float(named[0].text) * (1000 if named[0].attrib['unit'] == 'km' else 1)
     dx = float(field(tree, 'pixel_resolution_x').text)
     x = float(field(tree, 'upperleft_corner_x').text)
     y = float(field(tree, 'upperleft_corner_y').text)

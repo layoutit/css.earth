@@ -1,6 +1,6 @@
 # Mercury
 
-Mercury offers two monochrome maps taken under different sunlight, a three-filter color map, an enhanced-color map, numeric elevation, a gravity map, and a crustal-thickness model. The illustrated cross section is parked: its
+Mercury offers two monochrome maps taken under different sunlight, a three-filter color map, an enhanced-color map, numeric elevation, a gravity map, a crustal-thickness model, and a magnesium/silicon map from MESSENGER's X-Ray Spectrometer. The illustrated cross section is parked: its
 sources stay, but the page no longer offers it.
 
 ## Sources
@@ -15,6 +15,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | Topography | [USGS MESSENGER 665 m DEM v2](https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m), numeric heights above a 2,439.4 km sphere with a matching color scale. |
 | Gravity | Free-air gravity anomaly of the MESSENGER gravity model HgM008 ([Genova et al. 2019](https://doi.org/10.1029/2018GL081135)), degree 90, in mGal on a 2,440 km sphere; numeric grid from NASA Mercury Trek. |
 | Crust | Crustal-thickness model of Genova et al. (2019) from HgM008 and laser-altimeter topography, in km; a model under assumed densities, not a measurement. |
+| Magnesium | Mg/Si map of [Weider et al. 2015](https://doi.org/10.1016/j.epsl.2015.01.023) from the MESSENGER X-Ray Spectrometer, PDS data set [MESS-H-XRS-3-RDR-MAPS-V1.0](https://doi.org/10.17189/1518582), product XRS_MAP_MG_SI_20150424, 4 pixels per degree. Colors read from NASA's picture of the same map, PIA19417. |
 | Interior | [NASA facts](https://science.nasa.gov/mercury/facts/), retrieved 2026-08-30. A 0.85-radius metallic core and combined mantle/crust shell; colors and fine texture are illustrative. |
 | Spectrum | DLR/Zenodo MASCS one-degree cube, [10.5281/zenodo.7433033](https://doi.org/10.5281/zenodo.7433033). The 326-point spectrum is a global area-weighted mean over 350–1000 nm. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MERCURY/target) Mercury centre-point export, snapshot 2026-09-11, public domain. 573 IAU-adopted names. |
@@ -106,6 +107,37 @@ examined for this dataset.
 105–125 km across are resolved near the north pole but only about 500–700 km
 across in the south.
 
+## Surface chemistry
+
+**Magnesium** is the ratio of magnesium to silicon in the top few tens of
+microns of rock, measured from the X-rays the surface gives off in sunlight.
+The PDS keeps the map as 1440 × 720 unsigned bytes, 4 pixels per degree from
+180° W; each byte times 0.0030668824 is the ratio, 0 is missing (2,236 cells),
+and the values run from 0.095 to 0.782. The PDS3 label of the same file swaps its
+line and sample counts and calls the bytes signed; the PDS4 label
+(`xrs_map_mg_si_20150424.xml`) gives 720 lines of 1440 unsigned bytes, which
+the file's size and the map agree with. The map is wrapped unchanged as a
+GeoTIFF by [pds4-byte-geotiff.py](../../../packages/bake/src/objects/acquisition/pds4-byte-geotiff.py)
+with [its intake plan](source/science/xrs/prepare-mg-si-map.json). Its highest
+10° box averages 0.728, at 48° N, 280° E.
+
+**Colors.** The release has no colors. NASA drew the map as PIA19417 (left
+globe), blue for low and red for high, with no numbers on the scale.
+[xrs-colors.mts](../../../packages/bake/authoring/mercury/xrs-colors.mts) lines
+the picture up with the map: an orthographic view from 30° N, 230° E matches
+the picture's hue to the map at r = 0.960 over 32,165 pixels. The picture is
+fully blue where the map reads 0.236 and fully red where it reads 0.718; the
+seven colors between are the picture's own, read at equal steps, and they keep
+the dimming of the MDIS shading NASA laid them over. `--check` confirms the
+recipe and the legend hold them.
+
+**Footprints.** Each measurement saw a large patch of ground. The release's
+footprint map (`xrs_res_mg_si_20150424`) gives a median patch of 169 km north of
+60° N, 307 km at 30–60° N, 836 km at 0–30° N, 1,097 km at 0–30° S, 1,404 km at
+30–60° S and 1,612 km south of 60° S, so the south is smooth because it is not
+resolved. The footprint map and the release's other ratios (Al/Si, Ca/Si, Fe/Si,
+S/Si) are not shown.
+
 ## Evidence
 
 For the Color map, 25 of 25 sampled footprints match the original bytes.
@@ -115,6 +147,7 @@ of the gravity and crust maps has been inspected yet.
 
 ## Known problems
 
+- The Magnesium colors carry the dimming of the MDIS mosaic NASA laid them over in PIA19417; a clean palette is not published.
 - Feature outlines are not published nomenclature boundaries. Of the 75 rupes, dorsa and fossae, 9 have no mapped structure inside their extent (Adventure, Astrolabe, Fram, Gjöa, Zarya, Resolution, Vostok, Acadia and Protea Rupes) and keep the extent box. The 32 telescopic albedo features carry no diameter and are not labelled. The view readout counts longitude from the map's left edge, 180° from the Gazetteer's positive-east origin.
 - Color and Enhanced color have the same missing polar coverage, beyond about 84° N and 80° S, shown as gray grid.
 - The interior's shape shading is illustrative. NASA separately describes the outer shell as "about 400 km", against the rendered 366 km.
