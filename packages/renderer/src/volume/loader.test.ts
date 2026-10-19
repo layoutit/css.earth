@@ -27,7 +27,7 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u,''),base);
   const usedResources=new Set(payload.resources.map(r=>r.path));
   const images=inventory.assets.filter(asset=>asset.location==='prepared'&&usedResources.has(asset.filename));
-  assert.deepEqual(payload.stacks.map(stack=>stack.leaves.length),[26,26,26]);
+  assert.deepEqual(payload.stacks.map(stack=>stack.leaves.length),[52,52,26]);
   assert.ok(slices.every(leaf=>leaf.texturePath.startsWith('b30-slices/')));
   assert.equal(payload.impostors, undefined);
   assert.equal(payload.resources.length, slices.length + sky.length);

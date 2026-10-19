@@ -57,14 +57,16 @@ export async function prepareGalaxyLayers(args:readonly string[]=[]) {
  const frame=parseDensityVolumeFrame({...frameInput,metersPerUnit:Number(frameInput.metersPerUnit)*1000,boundsUnits:{min:[-7.723,-16,-3.2],max:[24.277,16,3.2]}});
  const tuner=parsePreparedGalaxyStations(recipe.tuner);
  if(!args.includes('--skies-only')) {
-  const controls=parseGalaxySliceControls({'in-plane-field':resolve(decoded,'extension')});
+  // Twice the X/Y sheets of the step-19 bank: X/Y pitch 0.615 kpc against a measured light thickness of 1.33 kpc lets
+  // a side stack carry views to 65 degrees from edge-on (was 50). The Z set and the recipe are unchanged.
+  const counts='52,52,26',controls=parseGalaxySliceControls({counts,'in-plane-field':resolve(decoded,'extension')});
   const field=resolve(decoded,'field'),fit=resolve(recipeDirectory,'fit.json');
   if(pilot) {
    const out=resolve('output/milky-way-pr/pilot-bank');mkdirSync(out,{recursive:true});
    runGalaxyPython('slices.py',[field,out,fit,JSON.stringify({...controls,axes:[2]})],{}, {'slices.py':GALAXY_SLICES});
   } else {
    // Keep the independent NASA runtime binding while replacing the far bank.
-   await installSlices([objectDirectory,'--field='+field,'--fit='+fit,'--frame='+resolve(recipeDirectory,'physical-frame.json'),'--in-plane-field='+resolve(decoded,'extension')]);
+   await installSlices([objectDirectory,'--field='+field,'--fit='+fit,'--frame='+resolve(recipeDirectory,'physical-frame.json'),'--counts='+counts,'--in-plane-field='+resolve(decoded,'extension')]);
   }
  }
  if(!args.includes('--slabs-only'))await preparePathSkies({objectDirectory,inputDirectory:decoded,plan:recipe.skies,tuner,frame,pilot});
@@ -83,6 +85,6 @@ export async function prepareGalaxyLayers(args:readonly string[]=[]) {
   }
   await inventoryPreparedAssets({objectId,objectDirectory,filenames});
  }
- console.log('MILKY WAY SETTLED BAKE VERIFIED',pilot?'PILOT':'78 SLABS + 14 SKIES + 6 DOT LEVELS');
+ console.log('MILKY WAY SETTLED BAKE VERIFIED',pilot?'PILOT':'130 SLABS + 14 SKIES + 6 DOT LEVELS');
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)await prepareGalaxyLayers(process.argv.slice(2));
