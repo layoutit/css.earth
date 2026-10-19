@@ -27,8 +27,10 @@ test('default outside recipe replays the step-one accepted producer pixel for pi
   // same image), so only the decoded image is the producer's output.
   const pixels=async(input:Buffer)=>{const {data,info}=await sharp(input).raw().toBuffer({resolveWithObject:true});return {data,width:info.width,height:info.height,channels:info.channels};};
   for(const [file,bytes]of golden)assert.deepEqual(await pixels(readFileSync(dir+'/out/'+file)),await pixels(Buffer.from(bytes)),file);
-  // Ordering of os.walk is filesystem-owned, and a file's byte count is its platform's zlib; every other value is pinned.
-  const normalize=(text:string)=>{const data:unknown=JSON.parse(text);assert.ok(data&&typeof data==='object'&&'files' in data&&Array.isArray(data.files));for(const file of data.files){assert.ok(file&&typeof file==='object'&&'bytes' in file);delete file.bytes;}data.files.sort((a:unknown,b:unknown)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));return data;};
+  // Ordering of os.walk is filesystem-owned, a file's byte count is its platform's zlib, and the diagnostics' last float
+  // digits are its platform's NumPy summation (Linux CI and macOS differ by 1e-16); every other value is pinned, and the
+  // diagnostics to 12 significant digits.
+  const normalize=(text:string)=>{const data:unknown=JSON.parse(text,(_key,value:unknown)=>typeof value==='number'&&!Number.isInteger(value)?Number(value.toPrecision(12)):value);assert.ok(data&&typeof data==='object'&&'files' in data&&Array.isArray(data.files));for(const file of data.files){assert.ok(file&&typeof file==='object'&&'bytes' in file);delete file.bytes;}data.files.sort((a:unknown,b:unknown)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));return data;};
   assert.deepEqual(normalize(readFileSync(dir+'/out/prototype.json','utf8')),normalize(readFileSync(new URL('prototype.json',expected),'utf8')));
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
