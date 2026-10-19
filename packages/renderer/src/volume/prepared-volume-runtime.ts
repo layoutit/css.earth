@@ -254,8 +254,14 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
       // Integer gains are exact; the fractional step linearly approximates alpha.
       const copies = opticalCopies[index]!;
+      // A shown copy keeps an 8-bit step of alpha inside [0.001, 0.999] and stays joined while its stack is visible, so a
+      // turn never crosses opacity 0 or 1 and never changes the layer tree; each frame stays within 1/510 alpha of exact.
+      // Copies crossing 0/1 and leaving or joining mid-turn made WebKit recomposite for 25-37 ms. iPad drag at the stripe
+      // view, 390 frames, interleaved (2026-10-19): frames over 20 ms 7/5/6 against 12/13/27, over 33 ms 1/1/1 against
+      // 5/6/13. A hidden stack's copies follow the exact value and retire as before.
       for (let copy = 1; copy < 3; copy++) {
-        const alpha = Math.min(1, Math.max(0, opticalGain - copy));
+        const exact = Math.min(1, Math.max(0, opticalGain - copy));
+        const alpha = visible ? Math.min(0.999, Math.max(0.001, Math.round(exact * 255) / 255)) : exact;
         const previous = copies.alpha[copy - 1]!;
         if (alpha === previous) continue;
         copies.alpha[copy - 1] = alpha;

@@ -80,7 +80,8 @@ test('optical copies reuse canonical textures and transforms inside isolated unf
       assert.partialDeepStrictEqual(original.style, data.stacks[axis]!.leaves[index]!.style);
       assert.equal(original.style.opacity, undefined);
       for (let copy = 1; copy < 3; copy++) {
-        assert.ok(Math.abs(Number(copies[copy]!.style.opacity) - (copy === 1 ? Math.sqrt(3) - 1 : 0)) < 10 ** -12 / 2, `${Number(copies[copy]!.style.opacity)} is not close to ${copy === 1 ? Math.sqrt(3) - 1 : 0}`);
+        // A shown copy keeps the 8-bit step nearest its exact alpha, held inside [0.001, 0.999].
+        assert.equal(Number(copies[copy]!.style.opacity), copy === 1 ? Math.round((Math.sqrt(3) - 1) * 255) / 255 : .001);
         assert.equal(copies[copy]!.style.transform, original.style.transform);
         assert.equal(copies[copy]!.style.backgroundImage, original.style.backgroundImage);
       }
@@ -114,18 +115,18 @@ test('translation updates retained cameras without republishing direction-owned 
 
 test('rotation only publishes changed optical copies and translation leaves their opacity untouched', () => {
   const { runtime, meshes } = mount(payload(3));
-  runtime.publish(publication([1, .001, 0]));
+  runtime.publish(publication([1, .3, 0]));
   const leaves = meshes.flatMap(mesh => mesh.children);
   for (const leaf of leaves) leaf.propertyWrites.length = 0;
-  runtime.publish(publication([1, .002, 0]));
-  // Only X's fractional first copy changes. Its base and saturated second
-  // copy, and both inactive axes, keep their existing presentation.
+  runtime.publish(publication([1, .35, 0]));
+  // Only X's fractional first copy steps (11/255 to 15/255). Its base and its
+  // second copy held at 0.001, and both inactive axes, keep their presentation.
   assert.deepEqual(meshes.map(mesh => mesh.children.map(leaf => leaf.propertyWrites)), [
     [[], ['opacity'], [], [], ['opacity'], [], [], ['opacity'], []],
     Array.from({ length: 9 }, () => []), Array.from({ length: 9 }, () => []),
   ]);
   for (const leaf of leaves) leaf.propertyWrites.length = 0;
-  runtime.publish(publication([1, .002, 0], [4, 5, 12]));
+  runtime.publish(publication([1, .35, 0], [4, 5, 12]));
   assert.equal(leaves.every(leaf => leaf.propertyWrites.length === 0), true);
 });
 
@@ -162,11 +163,12 @@ test('prepared homogeneous emission keeps physical optical density through a ful
 
 test('coincident copies preserve opaque dust and exactly multiply integer optical lengths', () => {
   const { runtime, roots, meshes } = mount();
-  // X remains inside the active band while its optical length is exactly doubled.
+  // X remains inside the active band while its optical length is doubled; steady copies hold 0.999 and 0.001, each
+  // within 1/510 of exact, so the doubled length is kept to that step and opaque dust stays opaque.
   runtime.publish(publication([.5, Math.sqrt(.375), Math.sqrt(.375)]));
   const root = roots[0]!, copies = meshes[0]!.children;
-  assert.ok(Math.abs(opticalGain(root) - (2)) < 10 ** -12 / 2, `${opticalGain(root)} is not close to ${2}`);
-  for (const alpha of [0, 1 / 255, .25, .5, .8, 1]) assert.ok(Math.abs(sliceTransmission(copies, alpha) - ((1 - alpha) ** 2)) < 10 ** -12 / 2, `${sliceTransmission(copies, alpha)} is not close to ${(1 - alpha) ** 2}`);
+  assert.ok(Math.abs(opticalGain(root) - 2) < 1e-12, `${opticalGain(root)} is not close to 2`);
+  for (const alpha of [0, 1 / 255, .25, .5, .8, 1]) assert.ok(Math.abs(sliceTransmission(copies, alpha) - ((1 - alpha) ** 2)) < 2 / 510, `${sliceTransmission(copies, alpha)} is not close to ${(1 - alpha) ** 2}`);
   runtime.publish(publication([1, 1, 1]));
   for (let axis = 0; axis < 3; axis++) assert.equal(sliceTransmission(meshes[axis]!.children, 1), 0);
   runtime.publish(publication([.47, Math.sqrt((1 - .47 ** 2) / 2), Math.sqrt((1 - .47 ** 2) / 2)]));
@@ -261,7 +263,62 @@ test('a stack the camera turns to joins eight slices a frame, every eighth slice
     frame();
     assert.equal(shown(), 0); assert.equal(roots[2]!.style.display, 'none');
     runtime.destroy();
-  } finally { mock.timers.reset(); }
+  } finally {
+    // The document's frame clock is shared: leave it idle, or the next test's frames never arrive.
+    for (let left = 0; frames.length && left < 100; left++) frame();
+    mock.timers.reset();
+  }
+});
+
+test('a turning camera never takes a shown optical copy to opacity 0 or 1, nor retires one while its stack is visible', () => {
+  const frames: ((time: number) => void)[] = [];
+  let now = 0;
+  const frame = () => { now += 16; frames.shift()?.(now); };
+  stubGlobal('requestAnimationFrame', (callback: (time: number) => void) => frames.push(callback));
+  stubGlobal('cancelAnimationFrame', () => {});
+  stubGlobal('performance', { now: () => now });
+  mock.timers.enable({ apis: ['setTimeout'] });
+  try {
+    const { runtime, roots, meshes } = mount(payload(3));
+    // X's optical gain runs from 1 through 2 and back as the camera turns from +X towards (1,1,1)-like views: its
+    // first copy crosses exact alpha 0 and 1, its second copy exact alpha 0. Stacks join, and the turn rests twice.
+    const path: VolumeVector[] = [];
+    for (let step = 0; step <= 120; step++) {
+      const x = 1 - .53 * Math.sin(step / 120 * Math.PI), side = Math.sqrt((1 - x * x) / 2);
+      path.push([x, side, side]);
+    }
+    // Copies of a visible stack join eight slices a frame; once joined, a copy stays until its stack is hidden.
+    const joined = new Set<FakeElement>();
+    const check = (where: string, settled: boolean) => {
+      for (const [axis, root] of roots.entries()) {
+        const nodes = meshes[axis]!.children.filter((_, index) => index % 3 !== 0);
+        if (!(Number(root.style.opacity) > 0)) { for (const node of nodes) joined.delete(node); continue; }
+        for (const node of nodes) {
+          const opacity = Number(node.style.opacity);
+          assert.ok(opacity > 0 && opacity < 1, `${where}: axis ${axis} copy opacity ${node.style.opacity}`);
+          const shown = root.style.display === 'block' && node.style.display !== 'none';
+          if (joined.has(node)) assert.ok(shown, `${where}: axis ${axis} copy retired while its stack is visible`);
+          else if (settled) assert.ok(shown, `${where}: axis ${axis} copy not joined at rest while its stack is visible`);
+          if (shown) joined.add(node);
+        }
+      }
+    };
+    for (const [step, direction] of path.entries()) {
+      runtime.publish(publication(direction));
+      frame(); check(`step ${step}`, false);
+      if (step === 30 || step === 60 || step === 90) {
+        // The camera rests: anything the turn no longer wants retires now.
+        now += 1000; mock.timers.tick(1000);
+        for (let rest = 0; rest < 8; rest++) { frame(); if (!frames.length) break; }
+        check(`rest at step ${step}`, true);
+      }
+    }
+    runtime.destroy();
+  } finally {
+    // The document's frame clock is shared: leave it idle, or the next test's frames never arrive.
+    for (let left = 0; frames.length && left < 100; left++) frame();
+    mock.timers.reset();
+  }
 });
 
 test('a stack alone in the mix stays just under opaque, so its root never crosses opacity 1', () => {
