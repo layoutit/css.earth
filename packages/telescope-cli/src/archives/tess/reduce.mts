@@ -41,6 +41,7 @@ import { apart, contaminationRatio, sectorLightCurvesAt } from './light-curves.m
 import { GAIA_EPOCH_YEAR, pixelLight, PIXELS, type PixelLight } from './neighbours.mts';
 import { catalogueSays, filled, methodFor, METHODS, missionLightCurve, SAME_STAR_ARCSEC, type PeriodMethod, type StarKind, type StarResult, type Transit } from './methods.mts';
 import { PUBLISHED } from './papers.mts';
+import { REINHOLD_HEKKER_2020_TABLE, rowAtPlace, windowOfCampaign } from './reinhold-hekker-table.mts';
 import { lightSwing, oneStarFor, oneStarSays, oneStarVerdict, readOneStar, type OneStarPaper } from './one-star.mts';
 import { keptAsPublished, publishedApart, publishedRows, ticOf, type Catalogued, type PublishedFinding, type PublishedPaper } from './published.mts';
 import { besideCatalogued, blended, notTurning, withinBreakup, type Mission, type RotationVerdict } from './verdict.mts';
@@ -219,6 +220,21 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
         for (const window of accepted) { const entry = tried.find(one => one.mission === last!.mission && one.window === window.window && one.method === last!.method.id);
           tried.push({ mission: last.mission, window: window.window, method: paper.id, lightCurveFile: entry?.lightCurveFile, frames: entry?.frames, lightCurve: entry?.lightCurve, analysis: measures, says, verdict: said.verdict }); } }
       if (!rotation.detected) rotation = { detected: false, reason: reasons.join(' ') }; } }
+  // A star no method and no TESS paper gives a rotation, whose K2 target Reinhold & Hekker (2020) list in their own
+  // catalogue (reinhold-hekker-table.mts): their verdict, on the K2 light they judged. The light is the method's
+  // prepared light where the method was run on it here, and otherwise the mission's file as published.
+  if (!claimed && !rotation.detected && !star.otherLight && await isStar(id)) { const paper = REINHOLD_HEKKER_2020_TABLE, row = rowAtPlace((await publishedRows(paper, keptTable(paper.id))).values(), targetPlaces(star, 'K2'));
+    if (row) { const k2 = campaigns.length ? campaigns : (await lightCurvesAt(targetPlaces(star, 'K2'))).map(one => ({ window: one.campaign, filename: one.filename, uri: one.uri })), judgement = paper.judge(row, k2.map(one => one.window)), said = judgement.verdict;
+      const kept = said.detected ? keptAsPublished(paper, said, checked(said), star.cataloguedPeriodDays, await cataloguedOf(id)) : said; claimed ||= said.detected;
+      published = { id: paper.id, citation: paper.citation, url: paper.url, table: paper.table, epic: row.epic, row, verdict: said };
+      if (!kept.detected) { reasons.push(kept.reason!); rotation = { detected: false, reason: reasons.join(' ') }; }
+      else { const ran = [...refused, ...(last ? [last] : [])].find(one => one.mission === 'K2'), read: { window: number; time: readonly number[]; flux: readonly number[] }[] = [], named: Listed[] = [];
+        for (const one of k2.filter(file => judgement.windows.includes(file.window))) { const judged = ran?.judged.windows.find(window => window.window === windowOfCampaign(one.window)), name = `${stem('K2', windowOfCampaign(one.window))}.curve.json`;
+          const [file] = await fetchLightCurves([one], files), curve = judged ?? await missionLightCurve(file!.file);
+          if (!judged) await writeFile(resolve(run, name), `${JSON.stringify({ mission: 'K2', window: curve.window, product: 'pdcsap', time: curve.time, flux: curve.flux })}\n`);
+          tried.push({ mission: 'K2', window: curve.window, method: paper.id, lightCurveFile: { url: file!.url, bytes: file!.bytes, pipeline: curve.pipeline, ...curve.aperture }, frames: curve.frames, lightCurve: name, analysis: paper.measures(row), says: paper.says(row), verdict: said });
+          read.push({ window: curve.window, time: curve.time, flux: curve.flux }); named.push({ ...one, window: curve.window }); }
+        rotation = kept; by = paper; mission = 'K2'; listed = named; accepted = read; } } }
   // A star no method and no paper above gives a rotation: Kepler's light of it, on the verdict of Santos et al. Their
   // samples are main-sequence stars and subgiants, cut at log g 3.5; a star its record puts below is not asked for.
   if (!claimed && !star.otherLight && !((kind.surfaceGravityLogg ?? SANTOS_GRAVITY) < SANTOS_GRAVITY) && await isStar(id)) { const targets = await kepseismicAt(targetPlaces(star, 'Kepler')), kic = targets[0]?.kic; let there = false;
