@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): effective temperature 2566 +/- 26 K, from Agol et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021PSJ.....2....1A/abstract)",
   "surfaceGravityLogg": 5.2396,
   "surfaceGravitySource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): log10 of the surface gravity in cm/s^2 5.2396 +0.0056 -0.0073, from Agol et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021PSJ.....2....1A/abstract)",
+  "massSolar": 0.0898,
+  "massSource": "Mass 0.0898 +/- 0.0023 solar masses from Agol et al. (2021, PSJ 2, 1; https://doi.org/10.3847/PSJ/abd022), who take it from Mann et al. (2019). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "spectralType": "M8.0 V",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): spectral type M8.0 V, from Piaulet-Ghorayeb et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract)",
   "objectType": "Low-mass Star",
@@ -22,8 +24,7 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): log10 of the luminosity in solar units -3.25727, from Agol et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021PSJ.....2....1A/abstract)",
   "ageGyr": 7.6,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): age 7.6 Gyr, from Piaulet-Ghorayeb et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract)",
-  "rotationPeriodDays": 1.4,
-  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): rotation period 1.4 d, from Gillon et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016Natur.533..221G/abstract)",
+  "rotationPeriodWithheld": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): rotation period 1.4 d, from Gillon et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016Natur.533..221G/abstract); 6 of the 6 catalogued periods agree on 3.3 d instead, so no period is adopted",
   "rotationPeriodsCatalogued": [
     {
       "days": 3.3,
@@ -52,8 +53,6 @@
   ],
   "projectedRotationSpeedKmS": 2.04,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): projected rotation speed 2.04 km/s, from Hirano et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...890L..27H/abstract)",
-  "massSolar": 0.0898,
-  "massSource": "Mass 0.0898 +/- 0.0023 solar masses from Agol et al. (2021, PSJ 2, 1; https://doi.org/10.3847/PSJ/abd022), who take it from Mann et al. (2019). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the catalogue radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."

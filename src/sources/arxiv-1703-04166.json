@@ -1,0 +1,53 @@
+{
+  "id": "arxiv-1703-04166",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Luger et al. (2017): A seven-planet resonant chain in TRAPPIST-1",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1703.04166"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41550-017-0129"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1703.04166",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41550-017-0129",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1703.04166",
+      "checkedOn": "2026-10-19",
+      "locator": "arXiv listing: title, authors, DOI (Nature Astronomy 1, 0129). Methods: the long-cadence EVEREST light curve of K2 campaign 12, cleaned of outliers, transits and flares, gives the rotation period 3.30 ± 0.14 d from its Discrete Fourier Transform."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Luger et al. (2017)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1703.04166"
+    }
+  ],
+  "creators": [
+    "R. Luger",
+    "M. Sestovic",
+    "E. Kruse",
+    "S. L. Grimm",
+    "B.-O. Demory",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

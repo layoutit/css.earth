@@ -1,0 +1,41 @@
+{
+  "id": "mast-everest-light-curves",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "EVEREST: K2 light curves corrected for the spacecraft's pointing, at MAST",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17909/T9501J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://archive.stsci.edu/hlsp/everest",
+      "label": "K2 at MAST"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17909/T9501J",
+      "label": "EVEREST: K2 light curves corrected for the spacecraft's pointing, at MAST"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://api.datacite.org/dois/10.17909/t9501j",
+      "checkedOn": "2026-10-19",
+      "locator": "DataCite record of the DOI: EPIC Variability Extraction and Removal for Exoplanet Science Targets (\"EVEREST\"), R. Luger, STScI/MAST, 2016. An open-source pipeline that removes instrumental systematics from K2 light curves by pixel-level decorrelation of the spacecraft's pointing error, with Gaussian processes for the star's own variability (Luger et al. 2016, AJ 152, 100; version 2, Luger et al. 2018, AJ 156, 99). A file holds one target's light curve of a campaign."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work includes data collected by the K2 mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/missions-and-data/k2"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}
