@@ -52,6 +52,10 @@
 }
 .prepared-universe { z-index: 1; }
 .prepared-volume-context { background: #000; }
+/* A galaxy stack mixed by root opacity is flattened into one surface. With the eye inside the stack, the sheet next to
+   it projects ~250,000 px wide and Chromium drops the whole surface: the galaxy went black at 14.3 kpc edge-on and came
+   back at 13.8 kpc (2026-10-18). Clipping the surface to the viewport keeps it paintable. */
+.prepared-volume-image > .css-volume-projection { overflow: hidden; }
 
 /* Image-layer banks and image meshes are transparent projections whose camera-driven scene composites once, so slice
    and patch rasters keep their scale through rotation. */

@@ -262,6 +262,17 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   // The galaxy is its bulge slices, mounted directly: it has no impostor views to hand off to.
   assert.equal(volumeImage.children.some(node => node.className === 'css-volume-impostors'), false);
   assert.equal(volumeImage.children.filter(node => node.className === 'css-volume-projection').length, 3);
+  // Each stack's projection, a direct child of the image layer, is clipped to the viewport. Unclipped, a stack seen from
+  // inside its span projects its nearest sheet ~250,000 px wide and Chromium drops the flattened surface: the galaxy
+  // went black at 14.3 kpc edge-on (volume.css).
+  const volumeRules = [...readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\//gu, '')
+    .matchAll(/([^{}]+)\{([^}]*)\}/gu)].map(([, selector, body]) => ({ selector: selector!.trim().replace(/\s+/gu, ' '), body: body! }));
+  assert.ok(volumeRules.some(rule => rule.selector === '.prepared-volume-image > .css-volume-projection' && /(^|;)\s*overflow:\s*hidden\s*(;|$)/u.test(rule.body)),
+    'the image layer clips each stack projection');
+  for (const projection of volumeImage.children.filter(node => node.className === 'css-volume-projection')) {
+    assert.equal(projection.parentNode?.className, 'prepared-volume-image');
+    assert.equal(projection.style.overflow, undefined, 'no inline overflow overrides the clip');
+  }
   const count = document.count, originalNodes = [...root.children];
   if (withSky) assert.ok(root.children.indexOf(skyRoot) < root.children.indexOf(volumeRoot));
   else assert.equal(skyRoot, undefined);
