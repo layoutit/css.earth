@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Mallorquín et al. 2023, the stellar temperature of the default parameter set of TOI-1801 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1801.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.707, rounded to two decimals",
+  "massSolar": 0.556,
+  "massSource": "Mass 0.556 +/- 0.042 solar masses from Mallorquín et al. 2023, the stellar mass of the default parameter set of TOI-1801 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "spectralType": "M0.5+/-0.5 V",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): spectral type M0.5+/-0.5 V, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
   "objectType": "Main Sequence Star",
@@ -22,8 +24,7 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): log10 of the luminosity in solar units -1.23003, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
   "ageGyr": 0.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): age 0.7 Gyr, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
-  "rotationPeriodDays": 15.98,
-  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): rotation period 15.98 d, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
+  "rotationPeriodWithheld": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): rotation period 15.98 d, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract); 2 of the 3 catalogued periods agree on 13.2903 d instead, so no period is adopted",
   "rotationPeriodsCatalogued": [
     {
       "days": 15.2579,
@@ -40,8 +41,6 @@
   ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): projected rotation speed 3 km/s, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
-  "massSolar": 0.556,
-  "massSource": "Mass 0.556 +/- 0.042 solar masses from Mallorquín et al. 2023, the stellar mass of the default parameter set of TOI-1801 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract). The mass this star's body record takes its GM from (packages/astronomy/data/bodies).",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
