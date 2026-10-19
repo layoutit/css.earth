@@ -1,6 +1,6 @@
 # Milky Way: fitted starlight, dust and catalogue stars
 
-The outside view is the accepted **b30-native-scatterFaceSide** fitted model, drawn as 26 local slabs on each of three axes. It is a model, not a photograph of our galaxy from outside. Inside, prepared skies follow the Sun and Sagittarius A* approaches; NASA's measured Milky Way map supplies the Solar System sky. Catalogue dots appear only inside the prepared stellar disc. Navigation labels remain available outside it.
+The outside view is the accepted **b30-native-scatterFaceSide** fitted model, drawn as local slabs on three axes: 52 across each in-plane axis (X, Y) and 26 across the thin axis (Z). It is a model, not a photograph of our galaxy from outside. Inside, prepared skies follow the Sun and Sagittarius A* approaches; NASA's measured Milky Way map supplies the Solar System sky. Catalogue dots appear only inside the prepared stellar disc. Navigation labels remain available outside it.
 
 ## Sources
 
@@ -21,26 +21,30 @@ The [manifest](source/manifest.json) binds the preserved inputs and published re
 
 ## Evidence
 
-- Full production replay: **78/78 slab PNGs** match the accepted step-19 bank byte for byte; **84/84 sky faces** match the accepted path skies. Every slab has at least **three zero-alpha border cells** on every side.
-- Far images: **2,391,776 compressed bytes; 37,316,344 decoded RGBA bytes**. Three optical copies share each image. The retained far scene has **247 elements**, below 500; texture allocation and compositor copies are additional costs.
+- Full production replay: **130/130 slab PNGs** (52/52/26) match the accepted bank byte for byte; **84/84 sky faces** match the accepted path skies. The 26 Z slabs are byte-identical to the earlier 26/26/26 bank: only the X/Y counts changed. Every slab has at least **three zero-alpha border cells** on every side.
+- Far images: **3,418,890 compressed bytes (3.4 MB to download); 52,027,304 decoded RGBA bytes (52 MB)**, against 2,391,776 and 37,316,344 for the 26/26/26 bank. Three optical copies share each image. The retained far scene has **403 elements**, below 500; texture allocation and compositor copies are additional costs.
+- Banding: at the owner's low-angle stripe view, X alone, the stripe amplitude fell from **5.8% to 3.3% of brightness** with the doubled X/Y sets. It is visibly smoother and the arms show; the stripes are not gone.
+- Side reach: X/Y pitch **0.615 kpc** against a measured light thickness of **1.33 kpc** lets a side set carry views up to **θmax 65°** from edge-on (50° at 26 slabs).
+- iPad (iPad12,1, iPadOS 26.5), drag at the stripe view, 390 frames, three interleaved runs (2026-10-19): with steady optical copies, frames over 20 ms **7, 5, 6** against **12, 13, 27** before; over 33 ms **1, 1, 1** against **5, 6, 13**. Late frames remain only at load and release. The cause was optical copies crossing opacity 0 or 1 and leaving or joining the layer tree mid-turn, which made WebKit recomposite for 25–37 ms.
 - Focused integration checks: **79 passed**, covering local transfer, golden replay, image extension, axis handover, equal-image light, proximity admission, sky selection, exposure and coast writes. Fresh-fixture bake/loader checks: **15 passed**. Broader commit-boundary results are recorded on the draft PR.
-- The step-19 extension preserves all original stacking centers and affine image calibration. X/Y pitch is **32/26 kpc**; Z pitch is **6.4/26 kpc**. Larger image rectangles do not widen the slab spacing or change the frame used by handover.
+- The step-19 extension preserves all original stacking centers and affine image calibration. X/Y pitch is **32/52 kpc**; Z pitch is **6.4/26 kpc**. Larger image rectangles do not widen the slab spacing or change the frame used by handover.
 
-These checks establish reproducibility, geometry and state behavior. They do not establish exact spectral transfer, every-angle visual continuity, calibrated photometry or current iPad performance.
+These checks establish reproducibility, geometry and state behavior. They do not establish exact spectral transfer, every-angle visual continuity, calibrated photometry, or iPad performance beyond the drag measured above.
 
-Inspected production-build captures: Chromium 148, 1024 × 640, DPR 1. The far scene retains exactly 247 elements. No Milky Way dot bank is requested outside; the Solar view requests all six proximity levels and its plain-star bank. Labels and navigation remain present.
+Inspected production-build captures: Chromium 148, 1024 × 640, DPR 1. The far scene retains exactly 403 elements. No Milky Way dot bank is requested outside; the Solar view requests all six proximity levels and its plain-star bank. Labels and navigation remain present.
 
 The low-angle capture also shows the known near-sheet occlusion; the side camera can black out. These are retained limitations of the accepted bank.
 
 ## Known problems
 
-- **Stripes remain close up at low angles.** Continuous handover reduces abrupt set changes; it does not make the finite slabs continuous material.
+- **Stripes remain close up at low angles.** Doubling the X/Y sets reduced them (5.8% → 3.3% of brightness at the stripe view) and continuous handover reduces abrupt set changes; neither makes the finite slabs continuous material.
+- **The far bank's decoded size grew to 52 MB** (from 37 MB), slightly above the ~50 MB budget the bank was held to; the iPad drag above did not crash, but other devices are unmeasured.
 - **X/Y criss-cross remains near 45° azimuth.** The later experimental finalist was rejected and is excluded.
 - **Some far-only camera views black out.** Smooth coefficients and exposure do not prove smooth rendered pixels; the compositor/near-sheet cause remains unresolved.
 - **Scalar alpha limits color fidelity.** A single source-over alpha cannot carry three spectral transmittances or reproduce a nonlinear display transform applied after whole-ray integration. The fitted display is not calibrated visible photometry.
 - **Edge-on size differs from the uncut model.** Stacking bounds remain the accepted 32 × 32 × 6.4 kpc box; growing image-plane support does not restore all depth outside that box.
 - The inherited sky cube has unresolved corner coverage. Sgr A* uses its own exposure, but 80 pc central cells do not resolve its nuclear cluster.
-- At most three route skies, including pending decodes, are retained alongside NASA's sky. Decoded textures can reach roughly **182 MB** with the far bank; this excludes caches, compositor copies and other application assets.
+- At most three route skies, including pending decodes, are retained alongside NASA's sky. Decoded textures can reach roughly **197 MB** with the far bank; this excludes caches, compositor copies and other application assets.
 
 <details>
 <summary>Method and complete replay</summary>
@@ -53,7 +57,7 @@ An explicit 601 × 601 × 361 in-plane field extends faint image support. The or
 
 ### Completed images and handover
 
-Z owns most directions. X and Y join near edge-on and mix continuously around their azimuth bisector. The Z/side window rises with approach distance, normalized by the original physical frame. Completed stack images keep black mattes; source-over coefficients maintain constant total weight, capped at 0.999 for Safari. All three stacks and optical copies stay resident. Coast publication changes only transforms and opacity.
+Z owns most directions. X and Y join near edge-on and mix continuously around their azimuth bisector. The Z/side window rises with approach distance, normalized by the original physical frame. Completed stack images keep black mattes; source-over coefficients maintain constant total weight, capped at 0.999 for Safari. All three stacks and optical copies stay resident. A shown optical copy keeps the 8-bit alpha step nearest its exact value, held inside [0.001, 0.999] (within 1/510 of exact), and stays joined while its stack is visible, so turning never crosses opacity 0 or 1 or changes the layer tree. Coast publication changes only transforms and opacity.
 
 ### Inside skies, exposure and stars
 
@@ -76,7 +80,7 @@ CSSEARTH_TORCH_PYTHON="$PWD/.local/milky-way-python/bin/python" node packages/ba
 CSSEARTH_GALAXY_FULL_REPLAY=1 CSSEARTH_TORCH_PYTHON="$PWD/.local/milky-way-python/bin/python" pnpm test:run 'packages/bake/authoring/milky-way-dust/*.test.mts'
 ```
 
-`--pilot` runs the exact producer on the Z set and one Sgr sky. `--restore-only` restores source inputs without baking. The lower-level slice command retains the explicit in-plane-field option; its original default transfer is independently golden-tested. The shipped top-level command always selects the accepted extended field and 26/26/26 recipe. Set `CSSEARTH_GALAXY_FULL_REPLAY=1` to run the complete production-bank replay; ordinary focused tests skip that expensive check.
+`--pilot` runs the exact producer on the Z set and one Sgr sky. `--restore-only` restores source inputs without baking. The lower-level slice command retains the explicit in-plane-field option; its original default transfer is independently golden-tested. The shipped top-level command always selects the accepted extended field and the 52/52/26 counts; the lower-level command's default counts stay 26/26/26. Set `CSSEARTH_GALAXY_FULL_REPLAY=1` to run the complete production-bank replay; ordinary focused tests skip that expensive check.
 
 Rejected two-layer, texel calibration/fitter, directional atlas, support-clipping and nonuniform-placement paths are removed. The browser-free blending lab is excluded because it depends on research outputs and retains an unresolved qualification gate. No later finalist or unrelated nebula work is included.
 
