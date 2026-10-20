@@ -357,8 +357,12 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const quantity = `${entry.quantity[0]!.toLowerCase()}${entry.quantity.slice(1)}`, consumer = `${entry.dataset}-simulation`, input = `${id}-${entry.dataset}-simulation`;
 
   const raster = read(`${s}/preparation/raster.json`), lit = raster.emission === undefined;
+  // The map's left edge is the body's own: the longitude another surface states there (Venus's Akatsuki map puts 180° E at
+  // it, as its other maps do), or 0, where a generated planet's maps all start.
+  const origin = requireArray(raster.surfaces, `${id} raster surfaces`).map(surface => requireRecord(surface, `${id} raster surface`).science)
+    .map(science => science === undefined ? undefined : requireRecord(science, `${id} raster science`).outputLongitudeOrigin).find(value => typeof value === 'number') ?? 0;
   const science = { kind: 'terrestrial-scientific', id: entry.dataset, label: entry.label, ...simulationRecipe(entry, parts?.slice(1).map(part => part.path)), consumer, sampling: 'bilinear', displaySampling: 'nearest',
-    outputLongitudeOrigin: 0, units, minimum, maximum, colors: INFERNO, labels,
+    outputLongitudeOrigin: origin, units, minimum, maximum, colors: INFERNO, labels,
     description: `Simulated ${quantity} from the ${entry.model} model, a published simulation and not a measurement.${caps}${gaps}`, title: `${entry.label} · ${entry.model} simulation`, sourceUrl: entry.url };
   raster.surfaces = [...others(raster.surfaces, `${id} raster surfaces`, 'id', entry.dataset),
     { id: entry.dataset, output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: readFrom, falseColor: true, science }];
