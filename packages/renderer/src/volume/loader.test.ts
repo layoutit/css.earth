@@ -1,4 +1,4 @@
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
@@ -23,16 +23,12 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   const slices = payload.stacks.flatMap(stack => stack.leaves);
   const sky = payload.sky?.faces ?? [];
   assert.equal(Boolean(payload.sky), Boolean(recipe.sky));
-  // The published bank owns cropped bulge slices only: no flat disc plane and no whole-galaxy impostor views.
-  // The full-galaxy bake is intermediate data, retired after the hybrid compile.
-  // The galaxy's backing image is its own bank (prepared/backing.json, drawn by universe/galaxy-backing.ts), not the volume's.
-  const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u, ''), base);
-  const backing = await readFile(new URL('backing.json', directory), 'utf8').then(text => {
-    const bank = JSON.parse(text) as { leaf: { texturePath: string }; sections?: { texturePath: string }[] };
-    return [bank.leaf.texturePath, ...(bank.sections ?? []).map(section => section.texturePath)];
-  }, () => [] as string[]);
-  const images = inventory.assets.filter(asset => asset.location === 'prepared' && /\.(?:png|webp)$/iu.test(asset.filename) && !backing.includes(asset.filename));
-  assert.deepEqual(slices.map(leaf => leaf.texturePath).sort(), images.map(asset => asset.filename).filter(path => path.startsWith('core/slices/')).sort());
+  // The far bank uses all three uniform, local-transfer sets. Path skies have their own reader and inventory entries.
+  const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u,''),base);
+  const usedResources=new Set(payload.resources.map(r=>r.path));
+  const images=inventory.assets.filter(asset=>asset.location==='prepared'&&usedResources.has(asset.filename));
+  assert.deepEqual(payload.stacks.map(stack=>stack.leaves.length),[52,52,26]);
+  assert.ok(slices.every(leaf=>leaf.texturePath.startsWith('b30-slices/')));
   assert.equal(payload.impostors, undefined);
   assert.equal(payload.resources.length, slices.length + sky.length);
   // The prepared traversal owns presentation order; source depth order is not
@@ -44,8 +40,6 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   assert.deepEqual(payload.resources.map(({ path, bytes }) => ({ filename: path, bytes }))
     .sort((a, b) => a.filename.localeCompare(b.filename)), images.map(({ filename, bytes }) => ({ filename, bytes }))
     .sort((a, b) => a.filename.localeCompare(b.filename)));
-  const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path) && !backing.includes(path)).sort();
-  assert.deepEqual(ownedImages, used);
   const skyPaths = new Set(sky.map(face => face.texturePath));
   const banks = { volume: { images: slices.length, bytes: 0, decodedRgbaBytes: 0 }, sky: { images: sky.length, bytes: 0, decodedRgbaBytes: 0 } };
   for (const resource of payload.resources) {

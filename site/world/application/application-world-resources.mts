@@ -1,4 +1,5 @@
-import { IMAGE_MESH_SCHEMA, bankCataloguePoints, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor, parsePlaneBankDescriptor } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, parseCatalogueProximity, bankCataloguePoints, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor, parsePlaneBankDescriptor } from '@cssearth/objects';
+import { loadGalaxyStationBackground } from '@cssearth/renderer/universe/galaxy-station-loader.ts';
 import { DATASET_VISIBILITY } from '../../browser/runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
@@ -100,6 +101,15 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
       loadPreparedPointAppearance(starSet.descriptor, starSet.transport),
     ]);
+    const volumeDescriptor = parseObjectDescriptor(volumeSet.descriptor);
+    const stationFile = volumeDescriptor.properties.galaxyStations;
+    const proximityFile = volumeDescriptor.properties.catalogueProximity;
+    const galaxyStations = typeof stationFile === 'string' ? await loadGalaxyStationBackground(volumeSet.resolve('prepared/' + stationFile)) : undefined;
+    const galaxyCatalogueProximity = typeof proximityFile === 'string' ? {
+      host: typeof volumeDescriptor.properties.host === 'string' ? volumeDescriptor.properties.host : volumeDescriptor.id,
+      plan: parseCatalogueProximity(JSON.parse(new TextDecoder().decode(await volumeSet.transport.read('prepared/' + proximityFile)))),
+      resolve: (file: string) => volumeSet.resolve('prepared/' + file),
+    } : undefined;
     // Surface shells (the heliosphere) are optional and off by default. Their
     // payload, validation and atlas load the first time one is enabled.
     const shellLoaders = parsedDescriptors.filter(descriptor => descriptor.type === 'surface-shell')
@@ -200,8 +210,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
       // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
-      galaxyCataloguePoints: ['globular-clusters', 'old-star-dots', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
-      galaxyBacking: volumeSet.resolve('prepared/backing.json'),
+      galaxyCatalogueProximity, galaxyStations,
+      galaxyCataloguePoints: [],
       context: plan, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, pointBanks, planeBanks, volumeDatasetBanks, loadVolumeDataset, loadBacking,
       backgroundCataloguePoints,

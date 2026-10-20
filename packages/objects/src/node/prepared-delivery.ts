@@ -57,6 +57,7 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   { name: 'world-index.json', reader: 'page', read: 'site/server/world-places.mts; site/directory/world-context-plan.mts' },
   { name: 'presentation.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-context-availability.mts' },
   { name: 'delivery.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-volume-presentation.mts' },
+  { name: 'catalogue-proximity.json', reader: 'page', read: 'site/world/application/application-world-resources.mts' },
   { name: 'backing.json', reader: 'page', read: 'site/world/application/application-world-resources.mts' },
   { name: 'plane.json', reader: 'page', read: 'site/world/application/application-world-resources.mts reads a plane bank\'s one plane' },
   { name: 'catalogue.json', reader: 'page', read: 'site/server/dot-catalogue-data.mts' },

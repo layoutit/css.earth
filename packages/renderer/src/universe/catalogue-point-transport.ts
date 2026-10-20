@@ -1,4 +1,4 @@
-import type { PreparedCataloguePointColumns } from '@cssearth/objects';
+import type { PreparedCatalogueProximity, PreparedCataloguePointColumns } from '@cssearth/objects';
 import { readPrepared } from '../prepared-data-worker-client.js';
 import { readPreparedHere } from '../prepared-data/readers.js';
 import { cataloguePointsReader } from './catalogue-point-reader.js';
@@ -16,3 +16,5 @@ export function fetchPreparedCatalogueBank(target: string, fetcher: typeof fetch
   if (typeof Worker === 'undefined') return readPreparedHere(cataloguePointsReader.kind, target, fetcher).then(reading => reading.value as PreparedCataloguePointColumns);
   return readPrepared<PreparedCataloguePointColumns>(cataloguePointsReader.kind, target);
 }
+
+export function loadCatalogueProximity(url: string): Promise<PreparedCatalogueProximity> { return readPrepared<PreparedCatalogueProximity>('catalogue-proximity',url); }

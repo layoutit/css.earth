@@ -1,0 +1,37 @@
+{
+  "id": "vergely-2022-dust-map",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Three-dimensional extinction maps: Inverting inter-calibrated extinction catalogs",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/664/A174/ReadMe",
+      "label": "Three-dimensional extinction maps: Inverting inter-calibrated extinction catalogs"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/664/A174/ReadMe",
+      "checkedOn": "2026-10-17",
+      "locator": "Inferred 3D extinction; CDS J/A+A/664/A174."
+    }
+  ],
+  "creators": [
+    "J.-L. Vergely",
+    "R. Lallement",
+    "N. L. J. Cox"
+  ],
+  "publisher": "CDS",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite J.-L. Vergely et al. (2022).",
+      "scope": "Regional extinction",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/664/A174/ReadMe"
+    }
+  ]
+}

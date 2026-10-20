@@ -1,0 +1,39 @@
+{
+  "id": "sormani-2022-bar",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The stellar mass distribution of the Milky Way’s bar: an analytic model",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://arxiv.org/abs/2204.13114",
+      "label": "The stellar mass distribution of the Milky Way’s bar: an analytic model"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2204.13114",
+      "checkedOn": "2026-10-17",
+      "locator": "Analytic model fitted to the Portail N-body bar; local display gains differ."
+    }
+  ],
+  "creators": [
+    "M. C. Sormani",
+    "O. Gerhard",
+    "M. Portail",
+    "E. Vasiliev",
+    "J. Clarke"
+  ],
+  "publisher": "arXiv",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite M. C. Sormani et al. (2022).",
+      "scope": "Bar/bulge prior",
+      "evidence": "https://arxiv.org/abs/2204.13114"
+    }
+  ]
+}

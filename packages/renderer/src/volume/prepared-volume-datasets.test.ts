@@ -536,3 +536,30 @@ test('detail demands a stable selected-dataset rotation bank and no hidden datas
   assert.deepEqual(mounted.textureUrls(publication(), true), ['/prepared/second/x.webp', '/prepared/second/y.webp', '/prepared/second/z.webp']);
   mounted.destroy();
 });
+
+test('disabled volume stars download only when enabled, including after a dataset switch', async () => {
+  const f = transportFixture({...payload(),starsEnabled:false});
+  const source = await loadPreparedVolumeDatasets(f.descriptor,f.transport,f.options);
+  assert.ok(!f.asked().some(path=>path.endsWith('stars.bin')),'outside disabled stars do not load or decode');
+  const d=dom(),runtime=createPreparedVolumeDatasets({payload:source,resolveResource:path=>path}).mount(d.options);
+  runtime.publish(publication());
+  runtime.selectDataset('second');await source.load('second',false);await Promise.resolve();
+  assert.equal(runtime.state().selectedDataset,'second');
+  assert.ok(!f.asked().some(path=>path.endsWith('stars.bin')));
+  runtime.setStarsVisible(true);await source.load('second',true);await Promise.resolve();
+  assert.equal(f.asked().filter(path=>path.endsWith('stars.bin')).length,1);
+  assert.equal(source.stars('second')!.points.length,3);
+  runtime.setStarsVisible(false);runtime.setStarsVisible(true);
+  assert.equal(f.asked().filter(path=>path.endsWith('stars.bin')).length,1);
+  runtime.destroy();
+});
+
+test('a hidden star presentation can switch datasets before its next stellar file is read',async()=>{
+ const f=transportFixture({...payload(),starsEnabled:false}),source=await loadPreparedVolumeDatasets(f.descriptor,f.transport,f.options),d=dom();
+ const runtime=createPreparedVolumeDatasets({payload:source,resolveResource:p=>p}).mount(d.options);
+ runtime.publish(publication());runtime.setStarsVisible(true);await source.load('first',true);await Promise.resolve();
+ runtime.setStarsVisible(false);runtime.selectDataset('second');await source.load('second',false);await Promise.resolve();
+ assert.equal(runtime.state().selectedDataset,'second');assert.equal(source.stars('second'),undefined);
+ runtime.setStarsVisible(true);await source.load('second',true);await Promise.resolve();runtime.publish(publication());
+ assert.equal(runtime.state().starsVisible,true);assert.ok(source.stars('second'));runtime.destroy();
+});

@@ -69,8 +69,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     // A stack that has never been published, or one whose axis carries no weight, stays out of the layer tree. Hidden
     // is not free: on an iPhone each unpublished stack kept its slices composited, and the compositor re-committed
     // them on every camera change.
-    root.style.display = 'none';
-    root.style.visibility = 'hidden';
+    root.style.display = options.residentStacks ? 'block' : 'none';
+    root.style.visibility = options.residentStacks ? 'visible' : 'hidden';
     // Where each slice stands in its stack's joining order; the document keeps the prepared order.
     const joining = stack.leaves.map((_, order) => order).sort((a, b) => a % JOIN_STRIDE - b % JOIN_STRIDE || a - b);
     const place = new Map(joining.map((order, position) => [stack.leaves[order]!, position]));
@@ -87,10 +87,12 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // increase optical length without intersecting another axis's planes.
       for (let copy = 0; copy < 3; copy++) {
         const node = createLeaf(create, leaf, copy);
+        if (options.residentStacks) { node.style.display = ''; node.style.visibility = ''; }
         mesh.append(node);
         bounded.nodes.push(node);
         copies.nodes[copy]![place.get(leaf)!] = node;
       }
+
     }
     scene.append(mesh);
     camera.append(scene);
@@ -101,6 +103,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   let destroyed = false;
   let previousPerspective = '', previousOrigin = '', previousTransform = '';
   let previousClipView = '';
+  let previousStrengths: ReturnType<typeof axisWeights> | null = null;
   let previousOrientation: readonly number[] | null = null;
   const rootVisible: (boolean | null)[] = roots.map(() => null), rootOpacity = roots.map(() => '');
   // What the turning camera no longer needs leaves once it has stopped (docs/performance/motion-freezes-membership.md):
@@ -110,9 +113,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // A stack leaves whole, in one frame: a frame that removes any of a stack's layers costs by the layers still there.
   // On the iPad M42's 628 displayed slices left in one frame of 42 to 50 ms; 16 a frame, eight frames of 34 to 93 ms;
   // 64 a frame, 91 and 37 ms (2026-10-04, the camera still).
-  const rootDisplayed = roots.map(() => false), leavingLeaves = new Set<typeof boundedLeaves[number]>();
+  const rootDisplayed = roots.map(() => Boolean(options.residentStacks)), leavingLeaves = new Set<typeof boundedLeaves[number]>();
   const retire = createSettlePacer((budget, moving) => {
-    if (destroyed || moving) return 0;
+    if (destroyed || moving || options.residentStacks) return 0;
     let written = 0;
     for (const leaf of leavingLeaves) {
       if (written >= budget) return written;
@@ -157,7 +160,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // slices and joined at the same pace, it drew (2026-10-06). A reader who turned a nebula a quarter of the way round
   // lost it: in a recorded visit to M42 it was gone from the third turn to the end, 7 s, and the Crab for 11 s.
   const join = createSettlePacer(() => {
-    if (destroyed) return 0;
+    if (destroyed || options.residentStacks) return 0;
     const allowed = JOIN_SLICES * JOIN_UNITS;
     let written = 0;
     for (const [index, copies] of opticalCopies.entries()) for (let copy = 0; copy < 3; copy++) {
@@ -202,7 +205,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       previousTransform = cssTransform;
     }
     const clipView = `${cssTransform}|${perspective}|${perspectiveOrigin}|${viewport.widthPixels}|${viewport.heightPixels}`;
-    if (clipView !== previousClipView) {
+    if (!options.residentStacks && clipView !== previousClipView) {
       previousClipView = clipView;
       const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, viewport);
       for (const leaf of boundedLeaves) {
@@ -218,29 +221,32 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         leaf.hidden = false;
       }
     }
-    const strengths = axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
+    const localCamera = presentPhysicalPoseInVolume(world.pose, payload.frame);
+    const strengths = axisWeights(localCamera, payload.stacks, payload.frame.boundsUnits);
     for (const [axis, pending] of pendingTextures.entries()) {
-      if (strengths[axis]!.weight <= 0) continue;
+      if (!options.residentStacks && strengths[axis]!.weight <= 0) continue;
       for (const [leaf, url] of pending) {
-        if (!leaf.shown) continue;
+        if (!options.residentStacks && !leaf.shown) continue;
         const image = `url("${escapeUrl(url)}")`;
         for (const node of leaf.nodes) node.style.backgroundImage = image;
         pending.delete(leaf);
       }
     }
-    // Optical length and stack mixing depend on direction, not observer
-    // translation. Publish changed coefficients directly to their retained
-    // optical copies; base slices and ancestors do not inherit animated state.
-    if (previousOrientation && previousOrientation.every((value, axis) => value === world.pose.orientationXyzw[axis])) return;
+    // Optical length depends on direction; thin-volume mixing also follows
+    // distance. Compare their values so pure zoom can update the handover while
+    // unchanged coefficients still leave retained optical copies untouched.
+    if (previousOrientation?.every((value, index) => value === world.pose.orientationXyzw[index]) &&
+      previousStrengths && previousStrengths.every((value, index) =>
+      value.weight === strengths[index]!.weight && value.opticalGain === strengths[index]!.opticalGain)) return;
+    previousStrengths = strengths;
     previousOrientation = [...world.pose.orientationXyzw];
     retire.published();
 
-    let total = 0;
+    const opacities = completedStackOpacities(strengths.map(value => value.weight));
     for (let index = 0; index < roots.length; index++) {
       const root = roots[index]!;
       const { weight, opticalGain } = strengths[index]!;
-      total += weight;
-      const visible = weight > 0, opacity = total > 0 ? String(Math.min(STACK_OPACITY_CEILING, weight / total)) : '0';
+      const visible = weight > 0, opacity = String(opacities[index]);
       // A stack turned to is displayed by the join, with its first slices.
       if (rootVisible[index] !== visible) rootVisible[index] = visible;
       if (rootOpacity[index] !== opacity) { root.style.opacity = opacity; rootOpacity[index] = opacity; }
@@ -248,8 +254,14 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
       // Integer gains are exact; the fractional step linearly approximates alpha.
       const copies = opticalCopies[index]!;
+      // A shown copy keeps an 8-bit step of alpha inside [0.001, 0.999] and stays joined while its stack is visible, so a
+      // turn never crosses opacity 0 or 1 and never changes the layer tree; each frame stays within 1/510 alpha of exact.
+      // Copies crossing 0/1 and leaving or joining mid-turn made WebKit recomposite for 25-37 ms. iPad drag at the stripe
+      // view, 390 frames, interleaved (2026-10-19): frames over 20 ms 7/5/6 against 12/13/27, over 33 ms 1/1/1 against
+      // 5/6/13. A hidden stack's copies follow the exact value and retire as before.
       for (let copy = 1; copy < 3; copy++) {
-        const alpha = Math.min(1, Math.max(0, opticalGain - copy));
+        const exact = Math.min(1, Math.max(0, opticalGain - copy));
+        const alpha = visible ? Math.min(0.999, Math.max(0.001, Math.round(exact * 255) / 255)) : exact;
         const previous = copies.alpha[copy - 1]!;
         if (alpha === previous) continue;
         copies.alpha[copy - 1] = alpha;
@@ -364,7 +376,7 @@ export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publicati
   return [...paths];
 }
 
-function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks'],
+export function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks'],
   bounds: PreparedCssVolume['frame']['boundsUnits']): readonly { weight: number; opticalGain: number }[] {
   const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
   const back: VolumeVector = [matrix[2]!, matrix[5]!, matrix[8]!];
@@ -373,24 +385,52 @@ function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stack
     const normal = stacks.find(stack => stack.axis === axis)?.normalUnits;
     return Math.abs(normal ? normal.reduce((sum, value, i) => sum + value * back[i]!, 0) : back[index]!) / length;
   });
-  // A slab is a cut across the volume's other two axes. Through a flat volume (the Milky Way is 20 × 20 × 2.5 units)
-  // a slab standing across the thin axis holds only a strip, and at an oblique view successive strips part into stripes.
-  // Each axis is scaled by √(thinnest extent / its extent), so a thin axis keeps its slabs until √(2.5/20) ≈ 0.35 of the
-  // view lies along it (20° from edge-on), where three optical copies still carry its gain. Equal extents are unscaled.
   const extents = AXES.map((_, index) => bounds.max[index]! - bounds.min[index]!), thinnest = Math.min(...extents);
-  // A stack without leaves draws nothing and takes no part in the choice of view: a thin disc prepared as sheets has one
-  // stack, which keeps the whole weight at every angle.
+  const thin = extents.indexOf(thinnest), aspect = thinnest / Math.max(...extents);
+  let weights: number[];
   const drawn = AXES.map(axis => (stacks.find(stack => stack.axis === axis)?.leaves.length ?? 0) > 0);
-  const strengths = cosines.map((cosine, index) => drawn[index] ? cosine * Math.sqrt(thinnest / extents[index]!) : 0);
-  const maximum = Math.max(...strengths);
-  return strengths.map((value, index) => {
-    if (!drawn[index]) return { weight: 0, opticalGain: 1 };
-    const t = Math.max(0, Math.min(1, (value - maximum + 0.16) / 0.16));
-    const weight = t * t * (3 - 2 * t);
-    // Crossing count is |d_i|*L/pitch_i, but each texture integrates pitch_i.
-    // Restore the missing central-ray length before the normalized image mix; copies cap the gain at 3.
-    return { weight, opticalGain: weight > 0 ? Math.max(1, 1 / cosines[index]!) : 1 };
-  });
+  if (aspect < .5 && drawn.every(Boolean)) {
+    // The thin stack owns oblique views. At shallow angles, dissolve side banks
+    // across their azimuth bisector too: an argmax there swaps whole images at 45 degrees.
+    const sideMaximum = Math.max(...cosines.filter((_, index) => index !== thin));
+    const sideWeights = cosines.map((cosine, index) => {
+      const t = index === thin ? 0 : Math.max(0, Math.min(1, (cosine - sideMaximum + .16) / .16));
+      return t * t * (3 - 2 * t);
+    });
+    const sideTotal = sideWeights.reduce((sum, weight) => sum + weight, 0);
+    // Perspective spreads local sight angles across a nearby thin volume. Keep
+    // the side bank longer there; outside one long frame extent the accepted
+    // far-view window is unchanged. Smoothstep gives zero slope at both ends.
+    const distance = Math.hypot(...camera.positionUnits.map((value, index) => value - (bounds.min[index]! + bounds.max[index]!) / 2));
+    const approach = Math.max(0, Math.min(1, 1 - distance / Math.max(...extents)));
+    const proximity = approach * approach * (3 - 2 * approach);
+    const edge = Math.max(.02, aspect) + .4 * proximity;
+    const t = Math.max(0, Math.min(1, (cosines[thin]! - edge * .5) / (edge * .5)));
+    const face = t * t * (3 - 2 * t);
+    weights = AXES.map((_, index) => index === thin ? face : (1 - face) * sideWeights[index]! / sideTotal);
+  } else {
+    const strengths = cosines.map((value, index) => drawn[index] ? value * Math.sqrt(thinnest / extents[index]!) : 0);
+    const maximum = Math.max(...strengths);
+    weights = strengths.map((value, index) => {
+      if (!drawn[index]) return 0;
+      const t = Math.max(0, Math.min(1, (value - maximum + .16) / .16));
+      return t * t * (3 - 2 * t);
+    });
+  }
+  return weights.map((weight, index) => ({ weight, opticalGain: weight > 0 ? Math.max(1, 1 / cosines[index]!) : 1 }));
+}
+
+/** Opaque completed images, in DOM back-to-front order. Their total contribution is always the ceiling. */
+export function completedStackOpacities(weights: readonly number[]): readonly number[] {
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  let front = 0;
+  const result = weights.map(() => 0);
+  for (let index = weights.length - 1; index >= 0; index--) {
+    const share = total > 0 ? STACK_OPACITY_CEILING * weights[index]! / total : 0;
+    result[index] = share / (1 - front);
+    front += share;
+  }
+  return result;
 }
 
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }

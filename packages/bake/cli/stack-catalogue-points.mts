@@ -13,7 +13,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { CATALOGUE_POINTS_SCHEMA, parseDensityVolumeFrame } from '@cssearth/objects';
-import { readCatalogueBank, recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
+import { readCatalogueBank, recipePublished, writeCatalogueBank, prepareCatalogueProximity } from '@cssearth/bake/volume/node';
 
 const [objectArgument, id] = process.argv.slice(2);
 if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: stack-catalogue-points.mts <object-directory> <id>');
@@ -24,6 +24,10 @@ const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { schema?: unkn
 const fail = (message: string): never => { throw new TypeError(`${recipePath}: ${message}`); };
 if (recipe.schema !== 'cssearth-catalogue-points-stack@1' || recipe.id !== id || typeof recipe.meaning !== 'string' || typeof recipe.basis !== 'string') {
   fail(`needs schema cssearth-catalogue-points-stack@1, id ${id}, its meaning and the basis of its windows.`);
+}
+if (process.argv.includes('--split-proximity')) {
+  await prepareCatalogueProximity(objectDirectory,id,recipe,process.argv.includes('--local-only'));
+  process.exit(0);
 }
 const levels = recipe.levels;
 if (!Array.isArray(levels) || levels.length < 1) fail('stacks one or more levels.');
@@ -110,3 +114,5 @@ const output = { schema: CATALOGUE_POINTS_SCHEMA, id, source: 'stack', meaning: 
   basis: recipe.basis, counts: { points: points.length }, points };
 await writeCatalogueBank({ objectDirectory, id, bank: output, published: recipePublished(recipe, recipePath) });
 console.log(`Stacked ${points.length} dots in ${levels!.length} levels: ${counts.join(', ')}.`);
+
+if ('proximity' in recipe) await prepareCatalogueProximity(objectDirectory,id,recipe,process.argv.includes('--local-only'));

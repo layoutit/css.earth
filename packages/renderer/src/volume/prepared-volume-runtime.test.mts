@@ -39,11 +39,11 @@ const payload = (count = 1): PreparedCssVolume => validatePreparedCssVolume({
       style: { width: '2px', height: '2px', transform: `matrix3d(${transform})`, backgroundSize: '2px 2px', backgroundPosition: '0px 0px' } };
   }) })), resources: AXES.map(axis => ({ path: `${axis}.png`, bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {},
 });
-function mount(data = payload()) {
+function mount(data = payload(), residentStacks = false) {
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.append(before);
   const resolver = mock.fn((path: string) => `/prepared/${path}`);
-  const runtime = mountPreparedCssVolume({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload: validatePreparedCssVolume({ ...data }), resolveResource: resolver });
+  const runtime = mountPreparedCssVolume({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload: validatePreparedCssVolume({ ...data }), residentStacks, resolveResource: resolver });
   const roots = runtime.roots as unknown as FakeElement[], root = roots[0]!, camera = root.children[0]!, scene = camera.children[0]!;
   const meshes = roots.map(node => node.children[0]!.children[0]!.children[0]!);
   return { data, document, host, before, runtime, roots, root, camera, scene, meshes, resolver };
@@ -80,7 +80,8 @@ test('optical copies reuse canonical textures and transforms inside isolated unf
       assert.partialDeepStrictEqual(original.style, data.stacks[axis]!.leaves[index]!.style);
       assert.equal(original.style.opacity, undefined);
       for (let copy = 1; copy < 3; copy++) {
-        assert.ok(Math.abs(Number(copies[copy]!.style.opacity) - (copy === 1 ? Math.sqrt(3) - 1 : 0)) < 10 ** -12 / 2, `${Number(copies[copy]!.style.opacity)} is not close to ${copy === 1 ? Math.sqrt(3) - 1 : 0}`);
+        // A shown copy keeps the 8-bit step nearest its exact alpha, held inside [0.001, 0.999].
+        assert.equal(Number(copies[copy]!.style.opacity), copy === 1 ? Math.round((Math.sqrt(3) - 1) * 255) / 255 : .001);
         assert.equal(copies[copy]!.style.transform, original.style.transform);
         assert.equal(copies[copy]!.style.backgroundImage, original.style.backgroundImage);
       }
@@ -114,18 +115,18 @@ test('translation updates retained cameras without republishing direction-owned 
 
 test('rotation only publishes changed optical copies and translation leaves their opacity untouched', () => {
   const { runtime, meshes } = mount(payload(3));
-  runtime.publish(publication([1, .001, 0]));
+  runtime.publish(publication([1, .3, 0]));
   const leaves = meshes.flatMap(mesh => mesh.children);
   for (const leaf of leaves) leaf.propertyWrites.length = 0;
-  runtime.publish(publication([1, .002, 0]));
-  // Only X's fractional first copy changes. Its base and saturated second
-  // copy, and both inactive axes, keep their existing presentation.
+  runtime.publish(publication([1, .35, 0]));
+  // Only X's fractional first copy steps (11/255 to 15/255). Its base and its
+  // second copy held at 0.001, and both inactive axes, keep their presentation.
   assert.deepEqual(meshes.map(mesh => mesh.children.map(leaf => leaf.propertyWrites)), [
     [[], ['opacity'], [], [], ['opacity'], [], [], ['opacity'], []],
     Array.from({ length: 9 }, () => []), Array.from({ length: 9 }, () => []),
   ]);
   for (const leaf of leaves) leaf.propertyWrites.length = 0;
-  runtime.publish(publication([1, .002, 0], [4, 5, 12]));
+  runtime.publish(publication([1, .35, 0], [4, 5, 12]));
   assert.equal(leaves.every(leaf => leaf.propertyWrites.length === 0), true);
 });
 
@@ -162,11 +163,12 @@ test('prepared homogeneous emission keeps physical optical density through a ful
 
 test('coincident copies preserve opaque dust and exactly multiply integer optical lengths', () => {
   const { runtime, roots, meshes } = mount();
-  // X remains inside the active band while its optical length is exactly doubled.
+  // X remains inside the active band while its optical length is doubled; steady copies hold 0.999 and 0.001, each
+  // within 1/510 of exact, so the doubled length is kept to that step and opaque dust stays opaque.
   runtime.publish(publication([.5, Math.sqrt(.375), Math.sqrt(.375)]));
   const root = roots[0]!, copies = meshes[0]!.children;
-  assert.ok(Math.abs(opticalGain(root) - (2)) < 10 ** -12 / 2, `${opticalGain(root)} is not close to ${2}`);
-  for (const alpha of [0, 1 / 255, .25, .5, .8, 1]) assert.ok(Math.abs(sliceTransmission(copies, alpha) - ((1 - alpha) ** 2)) < 10 ** -12 / 2, `${sliceTransmission(copies, alpha)} is not close to ${(1 - alpha) ** 2}`);
+  assert.ok(Math.abs(opticalGain(root) - 2) < 1e-12, `${opticalGain(root)} is not close to 2`);
+  for (const alpha of [0, 1 / 255, .25, .5, .8, 1]) assert.ok(Math.abs(sliceTransmission(copies, alpha) - ((1 - alpha) ** 2)) < 2 / 510, `${sliceTransmission(copies, alpha)} is not close to ${(1 - alpha) ** 2}`);
   runtime.publish(publication([1, 1, 1]));
   for (let axis = 0; axis < 3; axis++) assert.equal(sliceTransmission(meshes[axis]!.children, 1), 0);
   runtime.publish(publication([.47, Math.sqrt((1 - .47 ** 2) / 2), Math.sqrt((1 - .47 ** 2) / 2)]));
@@ -261,7 +263,62 @@ test('a stack the camera turns to joins eight slices a frame, every eighth slice
     frame();
     assert.equal(shown(), 0); assert.equal(roots[2]!.style.display, 'none');
     runtime.destroy();
-  } finally { mock.timers.reset(); }
+  } finally {
+    // The document's frame clock is shared: leave it idle, or the next test's frames never arrive.
+    for (let left = 0; frames.length && left < 100; left++) frame();
+    mock.timers.reset();
+  }
+});
+
+test('a turning camera never takes a shown optical copy to opacity 0 or 1, nor retires one while its stack is visible', () => {
+  const frames: ((time: number) => void)[] = [];
+  let now = 0;
+  const frame = () => { now += 16; frames.shift()?.(now); };
+  stubGlobal('requestAnimationFrame', (callback: (time: number) => void) => frames.push(callback));
+  stubGlobal('cancelAnimationFrame', () => {});
+  stubGlobal('performance', { now: () => now });
+  mock.timers.enable({ apis: ['setTimeout'] });
+  try {
+    const { runtime, roots, meshes } = mount(payload(3));
+    // X's optical gain runs from 1 through 2 and back as the camera turns from +X towards (1,1,1)-like views: its
+    // first copy crosses exact alpha 0 and 1, its second copy exact alpha 0. Stacks join, and the turn rests twice.
+    const path: VolumeVector[] = [];
+    for (let step = 0; step <= 120; step++) {
+      const x = 1 - .53 * Math.sin(step / 120 * Math.PI), side = Math.sqrt((1 - x * x) / 2);
+      path.push([x, side, side]);
+    }
+    // Copies of a visible stack join eight slices a frame; once joined, a copy stays until its stack is hidden.
+    const joined = new Set<FakeElement>();
+    const check = (where: string, settled: boolean) => {
+      for (const [axis, root] of roots.entries()) {
+        const nodes = meshes[axis]!.children.filter((_, index) => index % 3 !== 0);
+        if (!(Number(root.style.opacity) > 0)) { for (const node of nodes) joined.delete(node); continue; }
+        for (const node of nodes) {
+          const opacity = Number(node.style.opacity);
+          assert.ok(opacity > 0 && opacity < 1, `${where}: axis ${axis} copy opacity ${node.style.opacity}`);
+          const shown = root.style.display === 'block' && node.style.display !== 'none';
+          if (joined.has(node)) assert.ok(shown, `${where}: axis ${axis} copy retired while its stack is visible`);
+          else if (settled) assert.ok(shown, `${where}: axis ${axis} copy not joined at rest while its stack is visible`);
+          if (shown) joined.add(node);
+        }
+      }
+    };
+    for (const [step, direction] of path.entries()) {
+      runtime.publish(publication(direction));
+      frame(); check(`step ${step}`, false);
+      if (step === 30 || step === 60 || step === 90) {
+        // The camera rests: anything the turn no longer wants retires now.
+        now += 1000; mock.timers.tick(1000);
+        for (let rest = 0; rest < 8; rest++) { frame(); if (!frames.length) break; }
+        check(`rest at step ${step}`, true);
+      }
+    }
+    runtime.destroy();
+  } finally {
+    // The document's frame clock is shared: leave it idle, or the next test's frames never arrive.
+    for (let left = 0; frames.length && left < 100; left++) frame();
+    mock.timers.reset();
+  }
 });
 
 test('a stack alone in the mix stays just under opaque, so its root never crosses opacity 1', () => {
@@ -326,4 +383,55 @@ test('prepared rotated bank normals select the matching retained stack', () => {
   fixture.runtime.publish(publication([1, 0, 0]));
   assert.equal(fixture.roots[0]!.style.visibility, 'hidden'); assert.equal(fixture.roots[1]!.style.visibility, 'visible');
   assert.equal(fixture.document.count, count);
+});
+
+
+test('resident background stacks admit every coast-reachable image before motion and change only transforms/opacities', () => {
+  const { runtime, roots, meshes, document } = mount(payload(3), true);
+  runtime.publish(publication([0, 0, 1]));
+  const nodes = roots.flatMap(root => [root, root.children[0]!, root.children[0]!.children[0]!, ...root.children[0]!.children[0]!.children, ...root.children[0]!.children[0]!.children[0]!.children]);
+  assert.ok(roots.every(root => root.style.display === 'block' && root.style.visibility === 'visible'));
+  assert.ok(meshes.every(mesh => mesh.children.every(leaf => leaf.style.display === '' && leaf.style.backgroundImage)));
+  const count = document.count;
+  for (const direction of [[1, 0, 0], [1, 1, .1], [0, -1, 0], [0, 0, -1]] as const) {
+    for (const node of nodes) node.propertyWrites.length = 0;
+    runtime.publish(publication(direction, [100, 0, 10]));
+    assert.ok(nodes.flatMap(node => node.propertyWrites).every(name => ['opacity', 'transform'].includes(name)));
+    assert.equal(document.count, count);
+  }
+  runtime.destroy();
+});
+
+
+test('mounted thin-volume roots preserve equal completed light through the full edge handover', () => {
+  const source = payload(3), data = { ...source, frame: { ...source.frame, boundsUnits: { min: [-1, -1, -.125] as const, max: [1, 1, .125] as const } } };
+  const { runtime, roots } = mount(data, true);
+  for (const azimuth of [0, .3, .8, 1.5]) for (let degree = 0; degree <= 90; degree++) {
+    const angle = degree * Math.PI / 180;
+    runtime.publish(publication([Math.cos(angle) * Math.cos(azimuth), Math.cos(angle) * Math.sin(azimuth), Math.sin(angle)]));
+    if (degree >= 10) assert.deepEqual(roots.map(root => Number(root.style.opacity)), [0, 0, .999]);
+    let light = 0;
+    for (const root of roots) { const opacity = Number(root.style.opacity); light = .37 * opacity + light * (1 - opacity); }
+    assert.ok(Math.abs(light - .37 * .999) < 1e-12);
+  }
+  runtime.destroy();
+});
+
+test('mounted thin handover follows pure translation and preserves light without coast membership changes',()=>{
+ const source=payload(3),data={...source,frame:{...source.frame,boundsUnits:{min:[-1,-1,-.2] as const,max:[1,1,.2] as const}}};
+ const {runtime,roots,meshes,document}=mount(data,true),angle=12*Math.PI/180,direction=[Math.cos(angle),0,Math.sin(angle)] as const;
+ runtime.publish(publication(direction,[0,0,10]));assert.equal(Number(roots[2]!.style.opacity),.999);
+ const nodes=roots.flatMap((root,i)=>[root,...meshes[i]!.children]),count=document.count;
+ for(const distance of[1.7,1.5,1,.5,.2,.5,1,10]){
+  const previousZ=Number(roots[2]!.style.opacity);
+  for(const n of nodes)n.propertyWrites.length=0;
+  runtime.publish(publication(direction,[0,0,distance]));
+  if(distance===1.5)assert.ok(Number(roots[2]!.style.opacity)<previousZ,'pure zoom must publish its changed handover inside the active fade');
+  if(distance===.2)assert.equal(Number(roots[2]!.style.opacity),0,'pure zoom must publish its changed handover');
+  if(distance===10)assert.equal(Number(roots[2]!.style.opacity),.999);
+  let light=0;for(const root of roots){const a=Number(root.style.opacity);light=.37*a+light*(1-a);}
+  assert.ok(Math.abs(light-.37*.999)<1e-12);assert.equal(document.count,count);
+  assert.ok(nodes.flatMap(n=>n.propertyWrites).every(k=>['transform','opacity'].includes(k)));
+ }
+ runtime.destroy();
 });

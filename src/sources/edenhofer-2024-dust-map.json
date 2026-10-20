@@ -1,0 +1,52 @@
+{
+  "id": "edenhofer-2024-dust-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A parsec-scale Galactic 3D dust map out to 1.25 kpc from the Sun (dataset v1.0.2)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.5281/zenodo.10658339"
+    },
+    {
+      "type": "arxiv",
+      "value": "2308.01295"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://zenodo.org/records/10658339",
+      "label": "Zenodo 10658339"
+    },
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2308.01295",
+      "label": "arXiv:2308.01295"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/records/10658339",
+      "checkedOn": "2026-10-11",
+      "locator": "mean_and_std_xyz.fits: heliocentric Galactic Cartesian, 1251^3 voxels of 2 pc, MEAN and STD. HDUs; CC-BY-4.0"
+    }
+  ],
+  "creators": [
+    "Gordian Edenhofer",
+    "Catherine Zucker",
+    "Philipp Frank",
+    "et al."
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2024",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Edenhofer et al. (2024), A&A 685, A82; dataset DOI 10.5281/zenodo.10658339 (CC-BY-4.0).",
+      "scope": "3D dust of the Orion complex",
+      "evidence": "https://zenodo.org/records/10658339"
+    }
+  ]
+}

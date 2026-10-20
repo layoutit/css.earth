@@ -20,3 +20,5 @@ export * from './body-points.ts';
 export * from './catalogue-groups.ts';
 export * from './catalogue-spheroid.ts';
 export * from './catalogue-tones.ts';
+
+export * from './catalogue-proximity.ts';

@@ -46,7 +46,7 @@ const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 /** Hidden, unsubscribed dataset banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], planeBanks = [], volumeDatasetBanks = [], loadVolumeDataset, loadBacking, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, environmentNames, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities: initialPriorities = {}, annotationLandmarks, annotationOpacities: initialOpacities = {}, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], planeBanks = [], volumeDatasetBanks = [], loadVolumeDataset, loadBacking, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, environmentNames, stellarExtents = {}, galaxyCataloguePoints = [], galaxyCatalogueProximity, galaxyStations, catalog, catalogBank, loadCatalog, annotationPriorities: initialPriorities = {}, annotationLandmarks, annotationOpacities: initialOpacities = {}, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
   let plan = parsePreparedWorldContextPlan(context);
   const payload = validatePreparedCssVolume(volume);
   // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
@@ -203,7 +203,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // The galaxy backdrop is opaque black: it mounts first, so the dataset banks' billboards, which mount at once, paint over it.
         const background = createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
           prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
-          ...(galaxyBacking ? { backingUrl: galaxyBacking } : {}) });
+          stations: galaxyStations, catalogueProximity: galaxyCatalogueProximity, requestPublication });
         // Both billboard layers draw their banks' own images. Keep one demand-driven decode lease
         // for the universe lifetime, and publish again when an image's pixels are ready.
         const billboardTextures = own(createVolumeTextureReadiness(() => { requestPublication?.(); }));
@@ -377,7 +377,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           /** Label suppression follows the selection here; callers set the other flags. */
           setBodyVisibility(next: Omit<BodyVisibility, 'labelSuppressed'>) { spatial.setBodyVisibility(next); },
           setRotationActive(active: boolean) { spatial.setRotationActive(active); },
-          setCoasting(active: boolean) { spatial.setCoasting(active); focusPoint?.setCoasting(active); datasets.setCoasting(active); catalogBanks.setCoasting(active); },
+          setCoasting(active: boolean) { spatial.setCoasting(active); focusPoint?.setCoasting(active); datasets.setCoasting(active); catalogBanks.setCoasting(active); background.setCoasting(active); },
           setLabelBlockers(rects: readonly LabelScreenRect[]) { labelBlockers = rects; spatial.setLabelBlockers(rects); },
           labelBudget() { return labelBudget; },
           inspect() {
@@ -466,7 +466,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // A bank of plain-dot stars dims like every marker outside a highlighted category and like every body outside
               // the camera's own system (the frame's `otherSystems`).
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
-                { inside: selectionHolders, look: () => ({ opacity: (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, hiddenAtM: starPlaces }) });
+                { inside: selectionHolders, admit: host => host === galaxyCatalogueProximity?.host ? background.dotOpacity(world) : 1, look: () => ({ opacity: (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, hiddenAtM: starPlaces }) });
               const orbits = catalogBanks.publishPlanes(world, viewport, companion ?? undefined);
               spatial.setOrbitsOpacity(orbits.opacity); spatial.setBodyColors(orbits.colors);
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,

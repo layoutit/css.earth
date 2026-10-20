@@ -10,7 +10,7 @@ import { pointLayerSlot } from './point-layer.js';
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { afterStartup } from '../rendering/loading/startup-gate.js';
 import { createSettlePacer, framePacerFor } from '../rendering/loading/settle-pacer.js';
-import type { OpacityWindow } from '../stars/opacity-clock.js';
+import { opacityClockFor, type OpacityWindow } from '../stars/opacity-clock.js';
 
 /** Dot layers switching on show one a frame (layer-reveal.ts). */
 const revealLayers = (layers: readonly (HTMLElement | SVGElement)[]) => { for (const layer of layers) revealLayer(layer); };
@@ -82,10 +82,12 @@ const toLocalAxes = ([x, y, z, w]: readonly number[], [vx, vy, vz]: readonly num
 const isColumns = (value: unknown): value is PreparedCataloguePointColumns =>
   typeof value === 'object' && value !== null && (value as { positions?: unknown }).positions instanceof Float64Array;
 
-export function mountCataloguePoints({ host, before, url, loadBank, occluder }: {
+export function mountCataloguePoints({ host, before, url, loadBank, occluder, fullDetail = false, coasting = () => false }: {
   host: HTMLElement; before?: Node; url: string; loadBank(url: string): Promise<unknown>;
   /** A disc in the world's reference frame (its centre, unit normal and radius, in metres) that dims the dots behind it. */
   occluder?: CataloguePointOccluder;
+  /** Position-admitted levels keep all prepared rows and fade as one continuous level. */
+  fullDetail?: boolean; coasting?(): boolean;
 }) {
   const slot = pointLayerSlot(host, before), root = slot.group;
   root.dataset.cataloguePoints = 'loading';
@@ -118,7 +120,11 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
     };
   };
   // The opacity the caller last asked for: the bank's own fades are known only once it has loaded, and are applied then.
-  let requested = 1;
+  let preparation: ReturnType<typeof createSettlePacer> | null = null;
+  let requested = 1, revealedAt: number | null = null;
+  const view = host.ownerDocument.defaultView as OpacityWindow | null;
+  const clock = fullDetail && view && typeof view.requestAnimationFrame === 'function' ? opacityClockFor(view) : null;
+  const fade = () => { if (destroyed || !latest || revealedAt === null) return false; present(latest); return clock!.now()-revealedAt < 350; };
   /** Write the bank's opacity for one view: what the caller asked for, through the loaded bank's own fades. */
   const present = (publication: VolumeCameraPublication) => {
     let alpha = Math.max(0, Math.min(1, requested));
@@ -142,10 +148,11 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
     // so the dimming now behaves the same way: where two dots of different colors overlap, both show through.
     // The property is inherited, so each change restyles the bank's paths: about 1 ms a frame for 2,000 paths on the
     // iPad while a bank fades, which is what the group's pass cost there; a bank at a steady opacity pays nothing.
-    writeStyle(root, 'strokeOpacity', String(alpha));
-    if (root.style.display !== display) {
+    if (fullDetail) { const t = revealedAt === null && clock ? 0 : clock && revealedAt !== null ? Math.min(1,(clock.now()-revealedAt)/350) : 1; writeStyle(root,'opacity',String(Number((alpha*t*t*(3-2*t)).toFixed(6)))); }
+    else writeStyle(root, 'strokeOpacity', String(alpha));
+    if ((!fullDetail || !coasting()) && root.style.display !== display) {
       root.style.display = display;
-      if (display === '' && runtime) revealLayers(runtime.layers);
+      if (!fullDetail && display === '' && runtime) revealLayers(runtime.layers);
     }
     return alpha;
   };
@@ -154,18 +161,20 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
      * until its places change. */
     publish(publication: VolumeCameraPublication, opacity = 1, withoutM: readonly (readonly number[])[] | null = null) {
       if (destroyed) return;
+      latest = publication;
       hiddenAtM = withoutM;
       requested = opacity;
       if (!(present(publication) > 0)) { runtime?.hide(); return; }
       latest = publication;
       const { widthPixels, heightPixels, focalPixels } = publication.viewport;
       if (widthPixels && heightPixels && focalPixels > 0) halfWidthPerDistance = Math.hypot(widthPixels, heightPixels) / 2 / focalPixels;
+      if (loading && !coasting()) preparation?.request(true);
       if (runtime) { runtime.publish(publication); return; }
       if (loading) return;
       loading = true;
       const fail = (error: unknown) => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); };
       // A body's first view does not draw the background dots: they wait for it to be interactive (startup-gate.ts).
-      afterStartup(host.ownerDocument.defaultView, () => { if (!destroyed) void loadBank(url).then(value => {
+      afterStartup(host.ownerDocument.defaultView, () => { if (!destroyed && latest && present(latest)>0) void loadBank(url).then(value => {
         if (destroyed) return;
         // A bank arrives as columns: the data worker read its file, checked it and handed its arrays over
         // (catalogue-point-reader.ts), so this thread reads no point and builds no object for one. A bank in its JSON
@@ -218,7 +227,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
         // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
         // bank's reach the share is also capped by how many dots its projected shape holds.
-        const drawn = (distanceUnits: number, cameraUnits: VolumeVector) => Math.min(bank.appearance.levels
+        const drawn = (distanceUnits: number, cameraUnits: VolumeVector) => fullDetail ? bank.count : Math.min(bank.appearance.levels
           ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
           : drawnPointCount(bank.count, distanceUnits * bank.frame.metersPerUnit,
             bank.appearance.fullDetailUnits === undefined ? undefined : bank.appearance.fullDetailUnits * bank.frame.metersPerUnit),
@@ -227,7 +236,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // level with its own budget moves the bank's to it as the level appears, evenly in the logarithm of the half-width.
         // The levels spend it in order, outermost first: an arriving level takes what the ones already on screen leave, so
         // zooming in never thins the dots the view is already steered by.
-        const budget = bank.appearance.screenBudget;
+        const budget = fullDetail ? undefined : bank.appearance.screenBudget;
         const budgetAt = (distanceUnits: number) => {
           let value = budget!;
           const halfWidth = distanceUnits * halfWidthPerDistance;
@@ -257,7 +266,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           paintPalette: [...used[index]!].map(pointPaint) });
         const local = occluder && { normal: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.normal), radiusUnits: occluder.radiusM / bank.frame.metersPerUnit,
           centreUnits: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.centreM.map((value, axis) => (value - bank.frame.originM[axis]!) / bank.frame.metersPerUnit)) };
-        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: slot, frame: bank.frame, parts, deferFill: true,
+        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: slot, frame: bank.frame, parts, deferFill: true, coherent: fullDetail,
           onSettle: settled, className: `catalogue-points-${bank.id}`, ...(local ? { occluder: local } : {}) });
         let fill: (limit: number) => number;
         // A level dims to its near opacity as the innermost level fills, and takes its share of the budget after the
@@ -299,18 +308,21 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // A still view publishes nothing more, so the bank takes its own fades for the view it loaded under here, and
         // paints the levels that have just become whole.
         const shown = latest === null || present(latest) > 0;
-        if (root.style.display !== 'none') revealLayers(mounted.layers);
+        if (fullDetail && clock) { revealedAt=clock.now(); clock.changed(fade); }
+        else if (root.style.display !== 'none') revealLayers(mounted.layers);
         if (latest && shown) mounted.publish(latest);
+        loading = false;
         })();
         const view = host.ownerDocument.defaultView as OpacityWindow | null;
-        createSettlePacer(budget => {
-          if (destroyed) return 0;
+        preparation = createSettlePacer(budget => {
+          if (destroyed || fullDetail && coasting()) return 0;
           // A slice takes the frame's whole budget, in points.
           allowance = Math.floor(budget * POINTS_PER_PACER_UNIT);
           try { return steps.next().done ? 0 : Math.max(1, budget); } catch (error) { fail(error); return 0; }
-        }, { frame: view && typeof view.requestAnimationFrame === 'function' && view.performance ? framePacerFor(view) : null, holdWhile: 'never' }).request(true);
-      }).catch(fail); });
+        }, { frame: view && typeof view.requestAnimationFrame === 'function' && view.performance ? framePacerFor(view) : null, holdWhile: 'never' });
+        preparation.request(true);
+      }).catch(fail); else loading=false; });
     },
-    destroy() { if (destroyed) return; destroyed = true; runtime?.destroy(); slot.release(); },
+    destroy() { if (destroyed) return; destroyed = true; clock?.remove(fade); preparation?.destroy(); runtime?.destroy(); slot.release(); },
   });
 }

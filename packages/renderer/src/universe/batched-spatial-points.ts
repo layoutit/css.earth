@@ -100,8 +100,10 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
    * until its last slice. Resolving a point (its place, its path, its cell) is a pass over every point of the bank:
    * all of them in the frame the bank arrived in were one long frame of a zoom. */
   deferFill?: boolean;
+  /** Nearby stars share one camera per paint: stale slot centers visibly jump during a translation. */
+  coherent?: boolean;
 } & ({ parts: readonly BatchedSpatialPointPart<T>[] } | BatchedSpatialPointPart<T>)) {
-  const { host, before, frame, className, onSettle, occluder, deferFill = false } = options;
+  const { host, before, frame, className, onSettle, occluder, deferFill = false, coherent = false } = options;
   const inputs = 'parts' in options ? options.parts : [options];
   if (!inputs.length) throw new TypeError(`${className}: a point field needs a part.`);
   // Mounted in an element, the field takes its own place in the dot layer there; in an owner's place, a group of its own.
@@ -236,7 +238,12 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   let latest: VolumeCameraPublication | null = null, settle: ReturnType<typeof setTimeout> | null = null, settling = false, owed = false;
   // `behind`: the slots the last paint did not write from its view. `unpainted`: no paint yet, or none since the field
   // was hidden. `started`: the paints since every slot was last painted at rest. `turn`: the slot the next share starts with.
-  let behind = 0, unpainted = true, started = 0, turn = 0;
+  // `resting`: the pacer's slices are the pause's pass, and the camera has not moved since it began: only the slots they
+  // complete are painted at rest. A slice that catches up mid-motion (a frame that published the camera unchanged, as
+  // 120 Hz frames under 60 Hz pointer input do every other frame) is not a rest: restarting the share there wrote one slot
+  // in eight of the next frame and left the rest a few frames behind, so a drag around the Milky Way, whose near stars
+  // sweep several pixels a frame, shook every star by up to 50 px (Chrome, 2026-10-11).
+  let behind = 0, unpainted = true, started = 0, turn = 0, resting = false;
   const slotsDue = new Uint8Array(DOT_SLOTS);
   // The nearest point each slot's last paint visited, squared: the nearest of them all bounds how far the camera may
   // move before a dot does (parallaxPixels).
@@ -256,7 +263,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
         settle = null;
         if (!latest) return;
         // The exact paint is a pass of the pacer's like any other: every slot, a frame's share at a time.
-        if (owed || (painted && painted.overscan < OVERSCAN)) { settlePass = owed; behind = DOT_SLOTS; arriving = true; arrivals.request(true); }
+        if (owed || (painted && painted.overscan < OVERSCAN)) { settlePass = owed; resting = true; behind = DOT_SLOTS; arriving = true; arrivals.request(true); }
       }, delay);
     };
     wait(SETTLE_MS);
@@ -311,6 +318,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
         if (behind > 0) { arriving = true; arrivals.request(true); }
         layer.unwarp(); owed = false; return;
       }
+      // The camera moved (or the paint changed) since the pause's pass began: what it completes is no longer at rest.
+      if (units === null && forced === null) resting = false;
       travelling ||= !still && !exact;
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
       // what it painted still covers the view. Dots a zoom adds (a longer prefix, a larger share) arrive at once, by a
@@ -328,7 +337,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // No warp slides a travelling camera's paint (the next frame repaints), so it paints the view alone. On the iPad's
     // slow zoom the margin was a third of the dots written; without it 690 frames had 19 to 24 over 20 ms at the nearby
     // universe against 57 to 81, and 42 to 47 at the Milky Way against 105 to 121 (interleaved runs, 2026-10-03).
-    const overscan = travelling ? 0 : OVERSCAN;
+    const overscan = travelling && !coherent ? 0 : OVERSCAN;
     owed = false; written = 0;
     if (travelling) settleAfterPause(); else if (settle !== null) { clearTimeout(settle); settle = null; }
     let nearestSquared = Infinity;
@@ -347,7 +356,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // the frames after it took 2 ms and 6 to 11 (iPad, 2026-10-04). A field within the pacer's starting budget, the
     // first paint, and a paint asked for outright are written whole.
     let due: Uint8Array | null = null;
-    if (!unpainted && (units !== null || (travelling && !exact))) {
+    if (!coherent && !unpainted && (units !== null || (travelling && !exact))) {
       const wanted = [...paints.values()].reduce((sum, paint) => sum + paint.dots(), 0) / DOTS_PER_PACER_UNIT;
       const share = !(wanted > 0) ? 1 : units !== null ? units / wanted : arrivals.take(wanted) / wanted;
       const slots = Math.max(1, Math.min(Math.floor(DOT_SLOTS * Math.min(1, share) + 1e-9), wanted > arrivals.startUnits ? 2 ** started : DOT_SLOTS));
@@ -358,7 +367,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       }
       // A slice that finds the view as the last paint left it carries that paint on; any other paint starts over.
       behind = due === null ? 0 : units !== null && unchanged ? Math.max(0, behind - slots) : DOT_SLOTS - slots;
-      started = behind === 0 && units !== null ? 0 : started + 1;
+      started = behind === 0 && units !== null && resting ? 0 : started + 1;
     } else { behind = 0; started = 0; }
     unpainted = false;
     for (const paint of paints.values()) paint.begin(viewport, due);
@@ -428,7 +437,10 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
               }
             }
           }
-          paint.add(target, sx, sy);
+          // A small stellar disc changes peak brightness by over 3x as its center crosses the raster grid
+          // (the unchanged #606060, 1 px control: 87..288 RGB sum). Nearby levels keep one grid phase;
+          // positions remain source-owned, with at most half a CSS pixel of presentation rounding per axis.
+          paint.add(target, coherent ? Math.floor(sx) + .5 : sx, coherent ? Math.floor(sy) + .5 : sy);
           written++;
           if (inView) visibleOf[slot]!++;
         }

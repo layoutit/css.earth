@@ -32,6 +32,8 @@ function shell(run: string, env: Record<string, string>) {
   const result = spawnSync('bash', ['-e', '-o', 'pipefail', '-c', `
 node() { printf 'CALL node %s\\n' "$*"; }
 pnpm() { printf 'CALL pnpm %s\\n' "$*"; }
+python3() { printf 'CALL python3 %s\\n' "$*"; }
+python() { printf 'CALL python %s\\n' "$*"; }
 git() { printf 'CALL git %s\\n' "$*" >&2; }
 ${run}`], { env: { ...process.env, CI_TEST_FILES: '', ...env }, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
@@ -44,11 +46,13 @@ function assertVolumes(run: string) {
     assert.match(output, /CALL node packages\/bake\/cli\/restore-source-inputs.mts --repository-volumes/u, packages);
     assert.match(output, /CALL git sparse-checkout add --stdin/u, packages);
     assert.match(output, /CALL git sparse-checkout add \/src\/objects\/\*\*\/\*\.shp/u, packages);
+    assert.match(output, /CALL python3 -m venv /u, packages);
+    assert.match(output, /CALL python -m pip install --disable-pip-version-check numpy==2\.5\.4 Pillow==13\.0\.0/u, packages);
     assert.match(output, /CALL node \.github\/scripts\/ci\/test-shards\.mts --run/u);
   }
   for (const [lane, packages] of [['packages', 'core renderer'], ['packages', 'baker'], ['site', 'all']]) {
     const output = shell(run, { CI_UNIVERSE_LANE: lane!, CI_TEST_PACKAGES: packages!, CI_LANE_SKIP: 'false' });
-    assert.doesNotMatch(output, /repository-volumes|CALL git/u);
+    assert.doesNotMatch(output, /repository-volumes|CALL git|CALL python/u);
     assert.match(output, /CALL node \.github\/scripts\/ci\/test-shards\.mts --run/u);
   }
 }
@@ -73,6 +77,7 @@ test('volume restore and sparse expansion follow exact selected package tokens; 
   assert.throws(() => assertVolumes(testRun.replace('*" bake "*|', '')));
   assert.throws(() => assertVolumes(testRun.replace('node packages/bake/cli/restore-source-inputs.mts --repository-volumes', ':')));
   assert.throws(() => assertVolumes(testRun.replace('case " $CI_TEST_PACKAGES " in', 'case " all " in')));
+  assert.throws(() => assertVolumes(testRun.replace(/^.*-m pip install .*\n/mu, '')));
 });
 
 function assertOrdering(text: string) {

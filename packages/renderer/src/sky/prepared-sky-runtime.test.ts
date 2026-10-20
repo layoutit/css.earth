@@ -262,6 +262,17 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   // The galaxy is its bulge slices, mounted directly: it has no impostor views to hand off to.
   assert.equal(volumeImage.children.some(node => node.className === 'css-volume-impostors'), false);
   assert.equal(volumeImage.children.filter(node => node.className === 'css-volume-projection').length, 3);
+  // Each stack's projection, a direct child of the image layer, is clipped to the viewport. Unclipped, a stack seen from
+  // inside its span projects its nearest sheet ~250,000 px wide and Chromium drops the flattened surface: the galaxy
+  // went black at 14.3 kpc edge-on (volume.css).
+  const volumeRules = [...readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\//gu, '')
+    .matchAll(/([^{}]+)\{([^}]*)\}/gu)].map(([, selector, body]) => ({ selector: selector!.trim().replace(/\s+/gu, ' '), body: body! }));
+  assert.ok(volumeRules.some(rule => rule.selector === '.prepared-volume-image > .css-volume-projection' && /(^|;)\s*overflow:\s*hidden\s*(;|$)/u.test(rule.body)),
+    'the image layer clips each stack projection');
+  for (const projection of volumeImage.children.filter(node => node.className === 'css-volume-projection')) {
+    assert.equal(projection.parentNode?.className, 'prepared-volume-image');
+    assert.equal(projection.style.overflow, undefined, 'no inline overflow overrides the clip');
+  }
   const count = document.count, originalNodes = [...root.children];
   if (withSky) assert.ok(root.children.indexOf(skyRoot) < root.children.indexOf(volumeRoot));
   else assert.equal(skyRoot, undefined);
@@ -291,52 +302,24 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   mounted.destroy(); assert.deepEqual(stage.children, [detail]); assert.equal(document.defaultView.pending.size, 0);
 });
 
-test('a galaxy backing that loads while the camera rests is placed before any layer shows', async () => {
+test('the galaxy draws no picture of itself from outside: its stars and its dust bank are its look', async () => {
   stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/observable-universe/prepared/world-context.json', base), 'utf8'));
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
-  const backing = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/backing.json', base), 'utf8'));
-  stubGlobal('fetch', async () => new Response(JSON.stringify(backing)));
-  const document = new FakeDocument(), stage = document.createElement();
-  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {}, galaxyBacking: '/backing.json',
-    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}` }).mount(stage as unknown as HTMLElement);
-  const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
-  try {
-    // One frame from 20 kpc out, then the camera rests: no further publication after the backing arrives.
-    const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
-      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 20000 * parsecM], orientationXyzw: [0, 0, 0, 1] } };
-    mounted.publish(camera, viewport, spatialFrame);
-    await waitFor(() => assert.equal(all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking).length, 1 + backing.sections.length));
-    // Right over the galaxy's own layer, under every later one: its black square never hides what is drawn after it.
-    const order = (mounted.root as unknown as FakeElement).children.map(node => node.className);
-    assert.equal(order.indexOf('prepared-galaxy-backing'), order.indexOf('prepared-volume-context') + 1);
-    for (const layer of all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking)) {
-      const scene = all(layer).find(node => node.className === 'css-volume-scene')!;
-      assert.match(scene.style.transform, /^translate3d/, 'placed from the latest frame');
-      assert.equal(layer.style.display, '');
-    }
-  } finally { mounted.destroy(); unstubAllGlobals(); }
-});
-
-test('a galaxy backing whose ring image cannot resolve mounts no layer at all', async () => {
-  stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
-  const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
-  const context = JSON.parse(readFileSync(new URL('objects/observable-universe/prepared/world-context.json', base), 'utf8'));
-  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
-  const backing = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/backing.json', base), 'utf8'));
-  stubGlobal('fetch', async () => new Response(JSON.stringify(backing)));
+  const fetched: string[] = [];
+  stubGlobal('fetch', async (input: RequestInfo | URL) => { fetched.push(String(input)); return new Response('{}', { status: 404 }); });
   const failed = mock.method(console, 'error', () => {});
   const document = new FakeDocument(), stage = document.createElement();
-  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {}, galaxyBacking: '/backing.json',
-    resolveResource: path => { if (path === 'backing/middle.webp') throw new Error(`Prepared context resource unavailable: ${path}.`); return `/volume/${path}`; },
-    resolvePointResource: path => `/stars/${path}` }).mount(stage as unknown as HTMLElement);
+  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}` }).mount(stage as unknown as HTMLElement);
   const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
   try {
     mounted.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 20000 * parsecM], orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
-    await waitFor(() => assert.ok(failed.mock.callCount() > 0));
-    assert.equal(all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking).length, 0, 'no stranded, unplaced plane');
+    await new Promise(resolve => setTimeout(resolve, 20));
+    assert.equal(all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking || node.className === 'prepared-galaxy-backing').length, 0);
+    assert.ok(!fetched.some(url => url.includes('backing')), fetched.join(', '));
   } finally { mounted.destroy(); failed.mock.restore(); unstubAllGlobals(); }
 });
 

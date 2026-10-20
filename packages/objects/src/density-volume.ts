@@ -33,7 +33,10 @@ export function parseDensityVolumeObjectDescriptor(value: unknown): DensityVolum
   const properties = record(descriptor.properties, 'object.properties');
   // `overview` is the package's registry entry (registry/overview-object.ts), read by the catalogue, not by the volume.
   // `host`: the object whose dataset names this volume (the Milky Way), where its source links lead.
-  keys(properties, ['volume', 'preparation', 'host'], 'object.properties');
+  keys(properties, ['volume', 'preparation', 'host', 'galaxyStations', 'catalogueProximity'], 'object.properties');
+  if (properties.catalogueProximity !== undefined && (typeof properties.catalogueProximity !== 'string' || !/^[a-z0-9-]+\.json$/u.test(properties.catalogueProximity))) throw new TypeError('Volume catalogueProximity must name a prepared index.');
+  if (properties.galaxyStations !== undefined && (typeof properties.galaxyStations !== 'string' ||
+    !/^[a-z0-9-]+\/[a-z0-9-]+\.json$/u.test(properties.galaxyStations))) throw new TypeError('Volume galaxyStations must name a prepared index.');
   return Object.freeze({ ...descriptor, type: 'density-volume' as const,
     volume: parseDensityVolumeFrame(properties.volume), preparation: parsePreparation(properties.preparation) });
 }
