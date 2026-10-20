@@ -70,6 +70,8 @@ republish only in a deliberate re-bake.
 
 ## Routes and commands
 
+- `/site-scene?subject=<id>` — the real site's scene in the lab. Start the site with `pnpm dev`, then the lab with `pnpm lab:nebula`; `CSSEARTH_SITE_ORIGIN` selects the site origin (default `http://127.0.0.1:4210`). Dataset, camera and layer controls drive the site's own scene through the embed bridge; lab overlays follow its published camera. Existing alignment and reconstruction workspaces remain separate. See `labs/nebula/README.md#inspect-the-sites-scene` for clean-state commands and alternate ports.
+- Share `/alignment?subject=<id>` when asked to inspect original registered sources. A compiler-result preview shows baked slabs, never source imagery; verify the rendered image IDs, labels, pixels and registration status before sharing either link.
 - `/alignment?subject=<id>` — registration and overlays. `/reconstruction?subject=<id>` — model, datasets, stars, and the diagnostic tool column (levels, difference map).
 - A result opens directly as `?subject=reconstruction-<resultId>`.
 - Subjects: `labs/nebula/packages/lab/src/state/subjects.json`. Per-object recipes: `src/objects/<object>/source/`; scratch in the ignored `src/objects/<object>/.local/`.
