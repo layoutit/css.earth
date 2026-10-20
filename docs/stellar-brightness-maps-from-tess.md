@@ -92,6 +92,7 @@ given no verdict, and is not fetched.
 | A TESS Object of Interest in the paper's table of unambiguous rotation periods; the TESS mission's 2-minute light curves of its sectors among 1 to 22 | Canto Martins et al. (2020, ApJS 250, 20): the paper's own verdict, read from its tables | Wired, for a star Holcomb et al.'s method refuses |
 | A star of the papers' samples (Kepler's main-sequence stars and subgiants); the KEPSEISMIC light curve of its four years | Santos et al. (2019, ApJS 244, 21; 2021, ApJS 255, 17): the papers' own verdict, read from their tables | Wired, for a star nothing above gives a rotation |
 | A star of the paper's sample (nearby M dwarfs MEarth-South watched); its MEarth light curve taken before 2 March 2018 | Newton et al. (2018, AJ 156, 217): the paper's own verdict, read from its table | Wired, for a star nothing above gives a rotation |
+| One star a paper measured in one K2 campaign, on a light curve MAST serves (the EVEREST one), the period printed in its text | The paper's own verdict, one entry of [`one-star.json`](../packages/telescope-cli/src/archives/tess/one-star.json): Luger et al. (2017, Nature Astronomy 1, 0129) for TRAPPIST-1 | Wired, for a star nothing above gives a rotation |
 | One Kepler quarter, the mission's PDC-MAP light curve | Reinhold, Reiners & Basri (2013, A&A 560, A4) | Read, not wired |
 | Giants and subgiants | None for rotation in one campaign or sector | Not wired |
 | A star with full-frame images only | None | Not wired |
@@ -614,6 +615,34 @@ The NASA Exoplanet Archive holds a public SuperWASP light curve (its first data 
 arcseconds of 359 of the 786 stars, and a KELT one of 129. What is missing for them is a published verdict on that
 light, star by star: the rotation of a planet's host is mostly a sentence in the planet's own paper, on seasons the
 public release does not always hold. That is a lead, not followed here.
+
+### K2: a one-star paper's own verdict
+
+Some stars' rotation was measured only in a paper about that one star, which prints the period in its text and keeps no
+table. TRAPPIST-1 is one: at 2,566 K it is outside the 3,250 to 6,250 K Reinhold & Hekker (2020) apply their method to,
+its one TESS sector is refused by Holcomb et al.'s criteria (2026-10-19: an autocorrelation peak of height 0.00), and no
+table read here lists it. Luger et al. (2017, Nature Astronomy 1, 0129, Methods) measured it on the long-cadence EVEREST
+light curve of K2 campaign 12: "The rotation period is determined to be 3.30 ± 0.14 d." Vida et al. (2017, ApJ 841,
+124) found 3.295 ± 0.003 d in their own photometry of the same campaign's pixels, which is no file the route can read,
+so their paper is not the entry.
+
+Such a paper is an entry of [`one-star.json`](../packages/telescope-cli/src/archives/tess/one-star.json), read by
+[`one-star.mts`](../packages/telescope-cli/src/archives/tess/one-star.mts): the sentence quoted, the target's number and
+place as MAST lists it, the campaign, and the file the paper measured, by its name and address at MAST. The entry is
+data; no module names the star. Five things on this path are this repository's:
+
+1. An entry is asked last, for a star nothing above gives a rotation, and found by its target's place: within 4
+   arcseconds of the star's place in one of K2's years, as K2's own light curves are matched to a star. No archive is
+   asked to find it.
+2. The verdict is drawn at the paper's period or not at all, as a table's is (`keptAsPublished`).
+3. The light read is the one the paper measured, the EVEREST file (Luger et al. 2016, AJ 152, 100; 2018, AJ 156, 99;
+   DOI 10.17909/T9501J), read by lightkurve as it reads that product: its flux and default quality mask. The paper took
+   out outliers, transits, flares and leftover low frequencies before its Fourier transform; the map is fitted to the
+   file as published, flares included.
+4. The light's swing is measured here, as the methods measure it: the 95th less the 5th percentile, over the mean.
+5. EVEREST is a light source of its own beside K2's mission light curves (`Mission` `EVEREST`, the map's `MISSIONS`
+   row): its window is a K2 campaign, its maps are credited to K2's pixels and to EVEREST, and its tables are kept
+   under `science/k2/everest`.
 
 ### A star K2's method refuses
 

@@ -101,8 +101,84 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "color",
+    "defaultDataset": "color-brightness",
     "controls": [
+      {
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "qualification": "The star's color, darker where K2 saw it dimmer (contrast drawn stronger) · December 2016 to March 2017, mapped in this project",
+        "thumbnail": "trappist-1-dataset-color-brightness.webp",
+        "surface": "trappist-1-surface-color-brightness@2x.webp",
+        "poles": "trappist-1-poles-color-brightness@2x.webp",
+        "source": {
+          "id": "trappist-1-everest-map-brightness-campaign-12",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/everest"
+        },
+        "falseColor": false,
+        "notes": "TRAPPIST-1 in its own color, darker where its light in K2's images of December 2016 to March 2017 says it was darker. As the star turned once in 3.3 days its light rose and fell by 1.5%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 4.9% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
+      },
+      {
+        "id": "brightness-campaign-12",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · EVEREST light curve of K2, campaign 12",
+        "thumbnail": "trappist-1-dataset-brightness-campaign-12.webp",
+        "surface": "trappist-1-surface-brightness-campaign-12@2x.webp",
+        "poles": "trappist-1-poles-brightness-campaign-12@2x.webp",
+        "source": {
+          "id": "trappist-1-everest-map-brightness-campaign-12",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/everest"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "97.5%",
+            "100%",
+            "102.5%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "97.5%",
+              "100%",
+              "102.5%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/everest"
+        },
+        "notes": "Where the star's surface was darker and brighter in K2 campaign 12, worked out in this project from how its light rose and fell by 1.5% as it turned once in 3.3 days. The light curve is EVEREST's; Luger et al. (2017, Nature Astronomy 1, 0129) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. The map is made at the tilt the page draws the star with, 90°.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
       {
         "id": "color",
         "label": "Color",

@@ -30,6 +30,8 @@ export const METADATA_FIELDS = { spectralType: 'spectralTypeSource', objectType:
   rotationPeriodDays: 'rotationPeriodSource', projectedRotationSpeedKmS: 'projectedRotationSpeedSource', spinInclinationDegrees: 'spinInclinationSource' } as const;
 /** The list this pass also owns: every catalogued rotation period, adopted or not. */
 export const CATALOGUED_PERIODS = 'rotationPeriodsCatalogued';
+/** Why the archive's period is not adopted, when the catalogued periods agree on another: a sentence this pass also owns. */
+export const WITHHELD_PERIOD = 'rotationPeriodWithheld';
 /** The period this project measured from a star's own light, and where: written by the route that measured it (brightness/brightness.mts), read here. */
 export const MEASURED_PERIOD = { days: 'rotationPeriodMeasuredDays', source: 'rotationPeriodMeasuredSource' } as const;
 export const measuredPeriod = (record: Readonly<Record<string, unknown>>): CataloguedPeriod | undefined => { const days = record[MEASURED_PERIOD.days], source = record[MEASURED_PERIOD.source];
@@ -112,9 +114,18 @@ export function starMetadata(star: { readonly radiusKm?: number; readonly measur
   else if (gaia?.luminositySolar && (gaia.flags === '00' || gaia.flags === '10')) { const [value, lower, upper] = gaia.luminositySolar; out.luminosityLogSolar = trim(Math.log10(value), 3); out.luminositySource = flame(gaia, `lum_flame ${value} solar luminosities (16th to 84th percentiles ${lower} to ${upper}); its log10 is recorded`); }
   if (host?.ageGyr) { out.ageGyr = trim(host.ageGyr.value, 3); out.ageSource = archive(host, `age ${host.ageGyr.value} Gyr`, host.ageGyr); }
   else if (gaia?.ageGyr && gaia.flags === '00') { const [value, lower, upper] = gaia.ageGyr; out.ageGyr = trim(value, 3); out.ageSource = flame(gaia, `age_flame ${value} Gyr (16th to 84th percentiles ${lower} to ${upper})`); }
-  if (host?.rotationPeriodDays) { out.rotationPeriodDays = trim(host.rotationPeriodDays.value, 4); out.rotationPeriodSource = archive(host, `rotation period ${host.rotationPeriodDays.value} d`, host.rotationPeriodDays); }
+  // The archive's period stands before the tables', unless at least two tables agree on another: then the published
+  // values differ and none is adopted, as when the tables disagree among themselves (TRAPPIST-1: the archive's 1.4 d
+  // against six tables' 3.3 d, 2026-10-19).
+  const tables = adoptPeriod(periods), against = host?.rotationPeriodDays && tables && agreeing(periods, tables) >= 2
+    && Math.abs(host.rotationPeriodDays.value - tables.days) > PERIOD_AGREEMENT * tables.days
+    // A period this project measured that agrees with the archive's settles it the other way (K2-3: 39.62 d against 40.71 d).
+    && !(measured && Math.abs(measured.days - host.rotationPeriodDays.value) <= PERIOD_AGREEMENT * host.rotationPeriodDays.value) ? tables : undefined;
+  if (host?.rotationPeriodDays && against) out[WITHHELD_PERIOD] = `${archive(host, `rotation period ${host.rotationPeriodDays.value} d`, host.rotationPeriodDays)}; ${agreeing(periods, against)} of the ${periods.length} catalogued periods agree on ${against.days} d instead, so no period is adopted`;
+  else if (host?.rotationPeriodDays) { out.rotationPeriodDays = trim(host.rotationPeriodDays.value, 4); out.rotationPeriodSource = archive(host, `rotation period ${host.rotationPeriodDays.value} d`, host.rotationPeriodDays); }
   // A period this project measured from the star's light stands beside the catalogued ones as one more of them.
-  else { const all = measured ? [...periods, measured] : periods, adopted = adoptPeriod(all); if (adopted) { out.rotationPeriodDays = trim(adopted.days, 4);
+  // A period this project measured that agrees with the tables settles a withheld one: it is adopted as below.
+  if (!host?.rotationPeriodDays || (against && measured && Math.abs(measured.days - against.days) <= PERIOD_AGREEMENT * against.days)) { delete out[WITHHELD_PERIOD]; const all = measured ? [...periods, measured] : periods, adopted = adoptPeriod(all); if (adopted) { out.rotationPeriodDays = trim(adopted.days, 4);
     out.rotationPeriodSource = all.length > 1 ? `${adopted.source}. The middle of ${all.length} ${measured ? 'periods, catalogued and measured here' : 'catalogued periods'}, ${agreeing(all, adopted)} of them within ${PERIOD_AGREEMENT * 100}% of it` : adopted.source; } }
   if (periods.length) out[CATALOGUED_PERIODS] = [...periods].sort((a, b) => a.source.localeCompare(b.source));
   if (host?.vsiniKmS) { out.projectedRotationSpeedKmS = trim(host.vsiniKmS.value, 2); out.projectedRotationSpeedSource = archive(host, `projected rotation speed ${host.vsiniKmS.value} km/s`, host.vsiniKmS); }
@@ -129,7 +140,7 @@ export function starMetadata(star: { readonly radiusKm?: number; readonly measur
 
 /** A measurements record with this pass's fields replaced by `fields`, placed before `shape`; other fields keep their order. */
 export function withMetadata(record: Readonly<Record<string, unknown>>, fields: Readonly<Record<string, unknown>>): Record<string, unknown> {
-  const owned = new Set<string>([...Object.entries(METADATA_FIELDS).flat(), CATALOGUED_PERIODS]), out: Record<string, unknown> = {};
+  const owned = new Set<string>([...Object.entries(METADATA_FIELDS).flat(), CATALOGUED_PERIODS, WITHHELD_PERIOD]), out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(record)) { if (key === 'shape') Object.assign(out, fields); if (!owned.has(key)) out[key] = value; }
   return 'shape' in record ? out : { ...out, ...fields };
 }

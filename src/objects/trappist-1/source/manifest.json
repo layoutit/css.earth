@@ -295,6 +295,51 @@
         "kind": "local",
         "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
+    },
+    {
+      "id": "trappist-1-everest-map-brightness-campaign-12",
+      "path": "science/k2/everest/trappist-1-e12.dat",
+      "origin": "https://archive.stsci.edu/hlsp/everest",
+      "productId": "Brightness map of TRAPPIST-1 from its light in K2 campaign 12",
+      "title": "Brightness map of TRAPPIST-1 from its light curve in K2 campaign 12, EVEREST's: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/hlsp/everest",
+      "credit": "EVEREST light curve of the NASA K2 mission's pixels (Luger et al. 2016, 2018), campaign 12, from MAST; its rotation and period as published by Luger et al. (2017, Nature Astronomy 1, 0129); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the K2 mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA K2 · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the campaign published by its authors as a high-level science product and kept at MAST. Restored from the source cache; not tracked. The receipt (the campaign's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public K2 data, reduced here.",
+      "consumers": [
+        "everest-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-everest-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/hlsp/everest"
+          },
+          {
+            "catalogueId": "arxiv-1703-04166",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1703.04166"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
     }
   ],
   "documents": [

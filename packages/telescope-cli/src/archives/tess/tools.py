@@ -2,7 +2,8 @@
 computed here.
 
   tools.py mission-light-curve <job.json>  a K2 campaign's light curve as the mission publishes it: the PDC-MAP flux
-                                           of its long-cadence file, read by lightkurve
+                                           of its long-cadence file, read by lightkurve; or, with `product` EVEREST,
+                                           the flux of an EVEREST file as its authors publish it
 
   tools.py rotation <job.json>             the periods of a K2 light curve by the three methods of Reinhold & Hekker
                                            (2020, A&A 635, A43): generalized Lomb-Scargle (astropy), wavelet and
@@ -33,9 +34,13 @@ def mission_light_curve(job):
     import numpy as np
     import lightkurve as lk
 
-    curve = lk.read(job['file'], flux_column='pdcsap_flux').remove_nans()
+    # An EVEREST file is read as lightkurve reads that product, by its own flux and default quality mask.
+    everest = job.get('product') == 'EVEREST'
+    curve = (lk.read(job['file']) if everest else lk.read(job['file'], flux_column='pdcsap_flux')).remove_nans()
     flux = np.asarray(curve.flux.value, dtype=float)
-    return {'frames': int(len(flux)), 'window': int(curve.campaign), 'pipeline': str(curve.meta.get('PROCVER', '')), **aperture_light(curve),
+    window = int(curve.meta['CAMPAIGN']) if everest else int(curve.campaign)
+    pipeline = f"EVEREST {curve.meta.get('VERSION', '')}".strip() if everest else str(curve.meta.get('PROCVER', ''))
+    return {'frames': int(len(flux)), 'window': window, 'pipeline': pipeline, **aperture_light(curve),
             'time': [round(float(value), 5) for value in np.asarray(curve.time.value, dtype=float)], 'flux': [round(float(value), 6) for value in flux / np.mean(flux)]}
 
 

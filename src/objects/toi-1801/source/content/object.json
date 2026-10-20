@@ -95,19 +95,6 @@
           "path": "source/measurements.json",
           "locator": "ageGyr; ageSource"
         }
-      },
-      {
-        "id": "rotation",
-        "label": "Day",
-        "value": "16.0 days",
-        "source": {
-          "catalogueId": "doi-10-1051-0004-6361-202347346",
-          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract",
-          "label": "Mallorquín et al. (2023), Astronomy & Astrophysics 680 A76",
-          "checked": "2026-09-29",
-          "path": "source/measurements.json",
-          "locator": "rotationPeriodDays; rotationPeriodSource"
-        }
       }
     ],
     "moreFacts": []

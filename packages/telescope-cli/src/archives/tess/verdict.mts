@@ -4,8 +4,9 @@
  * shape and four checks against what is already published of the star: its catalogued rotation period, the kind of
  * object SIMBAD files it as, the fastest its recorded radius and mass let it turn, and how much of other stars' light
  * the TESS Input Catalog puts in its pixels. Each can only withhold a map. */
-/** The missions whose light curves are read, and MEarth, a survey from the ground whose light curves are read the same way. */
-export type Mission = 'TESS' | 'K2' | 'Kepler' | 'MEarth';
+/** The missions whose light curves are read, and MEarth, a survey from the ground whose light curves are read the same way.
+ * EVEREST is K2's light as EVEREST's authors make it from the mission's pixels: read only where a paper measured it (one-star.mts). */
+export type Mission = 'TESS' | 'K2' | 'Kepler' | 'MEarth' | 'EVEREST';
 export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** The light's own strongest period, when the rotation is taken as twice it. */ readonly lightPeriodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
 
 /** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own

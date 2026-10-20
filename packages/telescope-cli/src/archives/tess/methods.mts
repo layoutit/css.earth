@@ -160,7 +160,7 @@ export const METHODS: readonly PeriodMethod[] = [REINHOLD_HEKKER_2020, HOLCOMB_2
 /** The method for a star's light from a mission, or why no published method here covers it. */
 export function methodFor(mission: Mission, star: StarKind): { readonly method: PeriodMethod } | { readonly reason: string } {
   const made = METHODS.filter(method => method.missions.includes(mission));
-  if (!made.length) return { reason: `No published method is wired here for a ${mission === 'K2' ? 'K2 campaign' : mission === 'Kepler' ? 'Kepler quarter' : mission === 'MEarth' ? 'MEarth season' : 'TESS sector'}.` };
+  if (!made.length) return { reason: `No published method is wired here for a ${mission === 'K2' ? 'K2 campaign' : mission === 'EVEREST' ? 'K2 campaign\'s EVEREST light curve' : mission === 'Kepler' ? 'Kepler quarter' : mission === 'MEarth' ? 'MEarth season' : 'TESS sector'}.` };
   const reasons: string[] = [];
   for (const method of made) { const reason = method.outside(star); if (reason === undefined) return { method }; reasons.push(reason); }
   return { reason: reasons.join(' ') };
@@ -198,10 +198,10 @@ export function parseMissionLightCurve(value: unknown): MissionLightCurve {
   if (time.length !== flux.length || time.length < 2) throw new TypeError('The mission\'s light curve has times and fluxes of different lengths, or none.');
   return { frames: requireFiniteNumber(record.frames, 'frames'), window: requireFiniteNumber(record.window, 'window'), pipeline: requireString(record.pipeline, 'pipeline'), aperture: parseApertureLight(record), time, flux };
 }
-/** A mission's light curve file, read as the mission publishes it. */
-export async function missionLightCurve(file: string): Promise<MissionLightCurve> {
+/** A mission's light curve file, read as the mission publishes it, or as `product` (EVEREST) publishes it. */
+export async function missionLightCurve(file: string, product?: string): Promise<MissionLightCurve> {
   const { python } = await toolchainPaths(), directory = await telescopeScratch('mission-'), job = join(directory, 'job.json');
-  try { await writeFile(job, JSON.stringify({ file })); return parseMissionLightCurve(runTool(python, ['mission-light-curve', job])); }
+  try { await writeFile(job, JSON.stringify({ file, ...(product ? { product } : {}) })); return parseMissionLightCurve(runTool(python, ['mission-light-curve', job])); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }
 

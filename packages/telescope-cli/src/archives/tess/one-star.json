@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-one-star-verdicts@1",
+  "about": "Papers that measured one star's rotation in one window of a mission, on a light curve MAST serves, and print the period in their text rather than in a table (one-star.mts). Each entry quotes the sentence that gives the period. An entry is asked only for a star nothing else in reduce.mts gives a rotation.",
+  "entries": [
+    {
+      "id": "luger-2017",
+      "citation": "Luger et al. (2017, Nature Astronomy 1, 0129)",
+      "url": "https://arxiv.org/abs/1703.04166",
+      "doi": "10.1038/s41550-017-0129",
+      "where": "Methods, the paragraph that establishes the rotation period and the flare rate",
+      "mission": "K2",
+      "target": 246199087,
+      "raDegrees": 346.62201,
+      "decDegrees": -5.041274,
+      "place": "where MAST lists the target's K2 light curves (s_ra, s_dec of ktwo246199087-c12_lc)",
+      "window": 12,
+      "lightCurve": {
+        "product": "EVEREST",
+        "filename": "hlsp_everest_k2_llc_246199087-c12_kepler_v2.0_lc.fits",
+        "uri": "mast:HLSP/everest/v2/c12/246100000/99087/hlsp_everest_k2_llc_246199087-c12_kepler_v2.0_lc.fits",
+        "described": "the long-cadence EVEREST light curve of K2 campaign 12, which EVEREST's authors make from the mission's pixels"
+      },
+      "periodDays": 3.3,
+      "periodErrorDays": 0.14,
+      "quote": "The rotation period is determined to be 3.30 ± 0.14 d.",
+      "asks": "the frequency of the strongest peak in the Discrete Fourier Transform of the light curve, after outliers, transits, flares and the low frequencies left by the detrending are taken out, fitted by non-linear least squares",
+      "reliability": "The paper gives the period with an uncertainty of 0.14 d and prints no rate of false periods. Vida et al. (2017, ApJ 841, 124), from their own photometry of the same campaign's pixels, find 3.295 ± 0.003 d, and see no sign of the 1.40 d Gillon et al. (2016) read from the ground."
+    }
+  ]
+}

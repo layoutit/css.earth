@@ -12,6 +12,7 @@ import { SANTOS_2019 } from '../../archives/kepler/santos.mts';
 import { NEWTON_2018 } from '../../archives/mearth/newton.mts';
 import { CANTO_MARTINS_2020 } from '../../archives/tess/canto-martins.mts';
 import { COLMAN_2024 } from '../../archives/tess/published.mts';
+import { oneStarSays, oneStarVerdict, parseOneStar } from '../../archives/tess/one-star.mts';
 import { MATCH_ARCSEC } from '../metadata/rotation-catalogues.mts';
 import { BRIGHTNESS_ROUTE, withBrightnessReadme, withMeasuredRotation, withPixelLight } from './brightness.mts';
 
@@ -355,4 +356,20 @@ test('a star MEarth watched is mapped a season, to the first degree, on the rota
   assert.match(readme, /the star's period is 88\.977 d, as published, and no criteria were applied to it here\. The light varies by 1\.3% \(twice the semi-amplitude of the sinusoid the table prints\)\. The light curve mapped is the star's longest dataset in the MEarth release, that of telescope 11: 601 nights before 2 March 2018, where the paper's table prints 600 for its longest\..*The star's 2018 season holds less than one turn of it and has no map\. The paper estimates the errors of its rotation periods at about 10%\. The star's record holds 83\.5 d from the catalogues\..*Gaia DR3 lists 2 other stars within 8 arcseconds/su);
   // What the reduction found is recorded as for any other star: the season last read.
   const looked = withPixelLight({ shape: 'sphere' }, listed); assert.deepEqual([looked.pixelLightMission, looked.pixelLightWindow], ['MEarth', 2018]); assert.match(String(looked.pixelLightSource), /^Read in this project from the MEarth light curve of season 2018/u);
+});
+
+test('a one-star paper\'s verdict on an EVEREST light curve is worded as their sentence, on their light curve', () => {
+  // A star whose K2 rotation only a one-star paper measured, on the EVEREST light curve of campaign 12 (one-star.mts).
+  const [paper] = parseOneStar({ schema: 'cssearth-one-star-verdicts@1', entries: [{ id: 'luger-2017', citation: 'Luger et al. (2017, Nature Astronomy 1, 0129)', url: 'https://arxiv.org/abs/1703.04166', doi: '10.1038/s41550-017-0129', where: 'Methods', mission: 'K2', target: 246199087, raDegrees: 346.62, decDegrees: -5.04, window: 12,
+    lightCurve: { product: 'EVEREST', filename: 'a.fits', uri: 'mast:HLSP/everest/a.fits', described: 'the EVEREST light curve of K2 campaign 12' }, periodDays: 3.3, periodErrorDays: 0.14, quote: 'The rotation period is determined to be 3.30 ± 0.14 d.', asks: 'the strongest peak of the Fourier transform', reliability: 'No rate of false periods is printed.' }] });
+  const said = oneStarVerdict(paper!), method = { id: paper!.id, citation: paper!.citation, url: paper!.url, where: paper!.where, lightCurve: paper!.lightCurve, asks: paper!.asks, reliability: paper!.reliability, published: paper!.table, swing: paper!.swing, printedIn: 'text' };
+  const listed = { ...receipt('page', 'rotation.json: the measured axis the star\'s page draws'), mission: 'EVEREST', method, rotation: { ...said, amplitude: 0.015 },
+    tried: [{ mission: 'EVEREST', window: 12, method: 'luger-2017', analysis: { periodDays: 3.3, periodErrorDays: 0.14 }, says: oneStarSays(paper!), verdict: said }], maps: [{ ...receipt('page', 'x').maps[0]!, mission: 'EVEREST', window: 12, table: 'hd-1-e12.dat', periodDays: 3.3 }] };
+  // Campaign 12: 15 December 2016 to 4 March 2017 (K2's clock starts at BJD 2454833).
+  const choice = brightnessChoice('hd-1', 'EVEREST', 12), map = reducedBrightness(choice, listed, TABLE, { time: [2905.4, 2984.3], flux: [1, 1] });
+  assert.deepEqual([choice.program, choice.label, map.mission, map.method.printedIn, map.periodDays], ['hd-1-e12', 'Campaign 12', 'EVEREST', 'text', 3.3]);
+  const readme = withBrightnessReadme('# HD 1\n\n## Sources\n\nGaia.\n\n## Evidence\n\nRun.\n\n## Known problems\n\n- None.\n', map);
+  assert.match(readme, /from the star's EVEREST light curve of K2 campaign 12 \(December 2016 to March 2017\), which its authors make from the K2 mission's pixels and keep at \[MAST\]\(https:\/\/archive\.stsci\.edu\/hlsp\/everest\) \(\[source record\]\(\.\.\/\.\.\/sources\/mast-everest-light-curves\.json\)\)\. It is the light curve \[Luger et al\. \(2017, Nature Astronomy 1, 0129\)\]\(https:\/\/arxiv\.org\/abs\/1703\.04166\) measured, and their sentence \(Methods: "The rotation period is determined to be 3\.30 ± 0\.14 d\."\) is their verdict/u);
+  assert.match(readme, /Luger et al\. \(2017, Nature Astronomy 1, 0129\) take the strongest peak of the Fourier transform\. Their text \(Methods: .*\) gives a rotation period of 3\.30 ± 0\.14 d: the star's period is 3\.3 d, as published/u);
+  assert.deepEqual(JSON.parse(brightnessSourceRecords('2026-10-19', [map]).get('src/sources/mast-everest-light-curves.json')!).identifiers, [{ type: 'DOI', value: '10.17909/T9501J' }]);
 });

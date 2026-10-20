@@ -36,6 +36,24 @@ test('a star gains each catalogued value beside its source, the archive before S
   assert.deepEqual(starMetadata({ measuredAxis: false }, undefined, undefined, { ...gaia!, flags: '02' }), {});
 });
 
+test('the archive\'s period is not adopted when at least two catalogued periods agree on another', () => {
+  const [host] = parseHostRows(HOSTS), table = (days: number, name: string) => ({ days, source: `VizieR ${name}, column Prot: ${days} d` });
+  // Two tables agree on 30 d, the archive prints 12.3 d: the published values differ and the record adopts none.
+  const apart = starMetadata({ measuredAxis: false }, host, undefined, undefined, [table(30, 'A'), table(31, 'B')]);
+  assert.equal('rotationPeriodDays' in apart, false); const listed = apart.rotationPeriodsCatalogued; assert.ok(Array.isArray(listed)); assert.equal(listed.length, 2);
+  assert.match(String(apart.rotationPeriodWithheld), /rotation period 12\.3 d, from Ge et al\. 2006 .*; 2 of the 2 catalogued periods agree on 30 d instead, so no period is adopted$/u);
+  // A period measured here that agrees with the tables settles it.
+  const settled = starMetadata({ measuredAxis: false }, host, undefined, undefined, [table(30, 'A'), table(31, 'B')], { days: 30.5, source: 'measured here' });
+  assert.equal(settled.rotationPeriodDays, 30.5); assert.equal('rotationPeriodWithheld' in settled, false);
+  // One that agrees with the archive keeps the archive's period.
+  assert.equal(starMetadata({ measuredAxis: false }, host, undefined, undefined, [table(30, 'A'), table(31, 'B')], { days: 12, source: 'measured here' }).rotationPeriodDays, 12.3);
+  // One table that differs, or tables that agree with the archive, leave the archive's period adopted.
+  assert.equal(starMetadata({ measuredAxis: false }, host, undefined, undefined, [table(30, 'A')]).rotationPeriodDays, 12.3);
+  assert.equal(starMetadata({ measuredAxis: false }, host, undefined, undefined, [table(12, 'A'), table(13, 'B')]).rotationPeriodDays, 12.3);
+  // The sentence is this pass's: a later run that adopts a period removes it.
+  assert.deepEqual(withMetadata({ schema: 's', rotationPeriodWithheld: 'old' }, { rotationPeriodDays: 1 }), { schema: 's', rotationPeriodDays: 1 });
+});
+
 test('the record keeps its own fields and order, with this pass\'s fields before the shape', () => {
   const record = { schema: 's', radiusKm: 1, ageGyr: 9, ageSource: 'old', shape: { kind: 'k' } };
   assert.deepEqual(Object.keys(withMetadata(record, { spectralType: 'K0', spectralTypeSource: 'x' })), ['schema', 'radiusKm', 'spectralType', 'spectralTypeSource', 'shape']);

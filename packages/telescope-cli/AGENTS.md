@@ -63,7 +63,10 @@ nothing. A tool that needs a star's rotation or type reads the record, not a cat
 it writes. `--periods` adds the rotation periods no archive row gives: `rotation-catalogues.mts` asks the Virtual Observatory
 registry (RegTAP at the GAVO data centre) for every VizieR table with a rotation-period column and CDS X-Match for our stars
 in each, and the record keeps them all (`rotationPeriodsCatalogued`). One is adopted only when more than half agree with the middle one (`adoptPeriod`);
-two that disagree, often a rotation and its half, are left for a person or a fit to choose between. The registry is how a new kind of value is found too:
+two that disagree, often a rotation and its half, are left for a person or a fit to choose between. The archive's own
+period stands before the tables', unless at least two tables agree on another: then none is adopted and
+`rotationPeriodWithheld` says why, until a period measured here agrees with one side (TRAPPIST-1: the archive's 1.4 d
+against six tables' 3.3 d). The registry is how a new kind of value is found too:
 ask it which tables print the column before reading any paper.
 
 What a star's page says of those values is the same folder: `--facts --all | STAR_ID... [--papers]` adds to each star's
@@ -158,6 +161,14 @@ comments: the star's longest dataset as the one light curve read, a night's medi
 star passes behind the Sun, the one-turn limit, and the light's swing, which is twice the table's semi-amplitude. The
 northern paper (Newton et al. 2016) is not wired: its one rotator among the stars with a page is flagged for a bright
 contaminant.
+
+A star whose rotation only a paper about that one star measured, and prints in its text, is the fourth kind of entry
+(`tess/one-star.mts`, its entries in `tess/one-star.json`): the quoted sentence, the K2 target's number and place, the
+campaign and the file the paper measured, which MAST serves (today the EVEREST light curve, read as lightkurve reads that
+product; `EVEREST` is a light source of its own beside K2's mission light curves). An entry is data, never a branch in a
+module; it is asked last, matched by place with no archive asked, and drawn at the paper's period or not at all. Add one
+only for a paper that measured the star on a file MAST serves, quote its sentence, and say in the note why no method or
+table covers the star.
 
 `verdict.mts` holds the verdict's shape and four checks against what is already published of the star (its catalogued
 period, SIMBAD's type, the fastest its radius and mass let it turn, and the share of other stars' light in its TESS

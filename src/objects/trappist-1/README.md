@@ -79,6 +79,8 @@ and limits are in [its README](../trappist-1-tidal-heating/README.md). It is a m
 
 **Catalogue color.** the swatch that search, the catalogue and the minimap show is this dataset's prepared color, #ffcd6a.
 
+**Brightness from K2.** The Color + brightness and Brightness map datasets are made in this project from the star's EVEREST light curve of K2 campaign 12 (December 2016 to March 2017), which its authors make from the K2 mission's pixels and keep at [MAST](https://archive.stsci.edu/hlsp/everest) ([source record](../../sources/mast-everest-light-curves.json)). It is the light curve [Luger et al. (2017, Nature Astronomy 1, 0129)](https://arxiv.org/abs/1703.04166) measured, and their sentence (Methods, the paragraph that establishes the rotation period and the flare rate: "The rotation period is determined to be 3.30 ± 0.14 d.") is their verdict that it shows the star turning: the period is theirs and nothing is judged here, and starry (Luger et al. 2019) makes the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 - [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) covers the color
@@ -92,6 +94,12 @@ and limits are in [its README](../trappist-1-tidal-heating/README.md). It is a m
   that makes these planets transit.
 - Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #ffcd6a is the color dataset's prepared color.
 
+**Brightness from K2.** Luger et al. (2017, Nature Astronomy 1, 0129) take the frequency of the strongest peak in the Discrete Fourier Transform of the light curve, after outliers, transits, flares and the low frequencies left by the detrending are taken out, fitted by non-linear least squares. Their text (Methods, the paragraph that establishes the rotation period and the flare rate: "The rotation period is determined to be 3.30 ± 0.14 d.") gives a rotation period of 3.30 ± 0.14 d: the star's period is 3.3 d, as published, and no criteria were applied to it here. The light varies by 1.5% (the range between its 5th and 95th percentiles, measured here from the light curve the paper measured). The paper gives the period with an uncertainty of 0.14 d and prints no rate of false periods. Vida et al. (2017, ApJ 841, 124), from their own photometry of the same campaign's pixels, find 3.295 ± 0.003 d, and see no sign of the 1.40 d Gillon et al. (2016) read from the ground. The criteria of Holcomb et al. (2022, ApJ 936, 138), applied here to the star's TESS light, are not met: The autocorrelation of sector 70 gives 1.82 d with peaks of height -0.00, width 1.19 and fit 0.44, outside what Holcomb et al. (2022) accept (a height over a quarter of the width, a width between 0.4 and 0.6, a fit over 0.9). The star's record holds no catalogued rotation period to set it beside. The map's light curve leaves a scatter of 2.0% about the light, whose own noise is 1.7%. Gaia DR3 lists no other star within 16 arcseconds.
+
+![TRAPPIST-1 opening on Color + brightness, beside its Brightness map of campaign 12](evidence/2026-10-19/brightness-map.webp)
+
+The star's page on 19 October 2026, in the local dev server of this change: the default view (Color + brightness, left) and the Brightness map card with its scale of 97.5% to 102.5% (right). Captured in the app's browser pane at 800 px wide.
+
 ## Known problems
 
 **The blue end of the spectrum is noise.** Below about 450 nm this star is too faint for Gaia to measure, and those samples are
@@ -104,5 +112,7 @@ spectrum is not passed through a law at each wavelength. The table is for solar 
 
 **The system is seen almost edge-on from the Sun.** The seven orbits lie nearly in the line of sight, which is why they transit; on
 arrival the overview turns up to 30° above their plane so they open into ellipses, as it does for every other star's system.
+
+- **Brightness from K2.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is made at the tilt the page draws, 90°. The map is of December 2016 to March 2017: spots come and go within weeks or months.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
