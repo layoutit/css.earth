@@ -191,5 +191,9 @@ test('a magnified dataset fits through normal optics and refuses another host', 
     assert.deepEqual(target.focusPositionM, [0, 0, 0]);
     assert.equal(presentWorldCamera(target.world, f.frames[0], f.navigation.optics()).distanceM, 3212.3893805309735);
     assert.equal(f.service.datasetVolumeTarget({ objectId: '1', volumeId: 'fixture-volume', mount: f.mount }), null);
+    f.set({ ...f.navigation.capture(), projectionScale: 1, pose: { positionM: [0, 0, 100000], orientationXyzw: [0, 0, 0, 1] } });
+    assert.equal(f.service.datasetVolumeTarget({ objectId: '0', volumeId: 'fixture-volume', mount: f.mount }), null);
+    assert.ok(f.service.datasetVolumeTarget({ objectId: '0', volumeId: 'fixture-volume', mount: f.mount, always: true }), 'the host Fit can zoom in to a volume already held');
+
   } finally { banks.delete('fixture-volume'); f.service.destroy(); }
 });

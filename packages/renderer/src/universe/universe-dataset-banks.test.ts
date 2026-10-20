@@ -34,12 +34,12 @@ const payload: PreparedVolumeDatasets = { schema: 'cssearth-volume-datasets@1', 
   framingRadiusUnits: 1, pointVisibility: visibility, datasets: [{ id: 'optical', label: 'Optical', title: 'Optical',
     stars: { frame, points: [] }, description: 'Fixture', sourceUrl: 'https://example.org', brightness: { overall: 1, x: 1, y: 1, z: 1 },
     volume: { schema: 'cssearth-css-volume@1', id: 'fixture', frame, stacks: [], resources: [], provenance: {}, approximation: {} } }] };
-async function fixture(attached = false) {
+async function fixture(attached = false, hidden: (id: string) => boolean = () => false) {
   const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
   const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!;
   const lifetime = createSceneLifetime();
   const banks = createUniverseDatasetBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
-    lifetime, declarations: [{ id: 'fixture', frame }], facts: [{ id: 'fixture', contextVisibility: 'independent', attached }],
+    hidden, lifetime, declarations: [{ id: 'fixture', frame }], facts: [{ id: 'fixture', contextVisibility: 'independent', attached }],
     frame, visibility, warmDomNodeBudget: 10000, load: async () => ({ payload, resolveResource: path => path }) });
   await banks.focusBank('fixture')!.load();
   const targets = [root.firstElementChild!, frontRoot.firstElementChild!] as HTMLElement[];
@@ -249,4 +249,18 @@ test('a bank with a backing is drawn from afar on that one fixed plane, picturin
   assert.equal(plane.style.display, 'none');
   lifetime.destroy();
   assert.equal(root.querySelector('.prepared-galaxy-backing'), null, 'the scene takes its plane with it');
+});
+
+test('a host layer switch fades the selected bank and retains coast membership, then restores it', async () => {
+  let hidden = false;
+  const f = await fixture(false, id => hidden && id === 'fixture');
+  f.publish(1, 'fixture');
+  assert.equal(f.banks.drawing('fixture'), true);
+  f.banks.setCoasting(true); hidden = true; f.publish(1, 'fixture');
+  assert.equal(f.banks.drawing('fixture'), false);
+  for (const root of f.targets) { assert.equal(root.style.opacity, '0'); assert.equal(root.style.display, 'block'); }
+  hidden = false; f.publish(1, 'fixture');
+  assert.equal(f.banks.drawing('fixture'), true);
+  for (const root of f.targets) assert.equal(root.style.opacity, '0.999');
+  f.lifetime.destroy();
 });

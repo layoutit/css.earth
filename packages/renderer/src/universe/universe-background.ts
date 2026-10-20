@@ -1,5 +1,6 @@
 import { catalogueDiscOpacity, catalogueLevelOpacity } from './catalogue-proximity.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
+import { ALL_WORLD_LAYERS_SHOWN, type WorldLayerVisibility } from './world-layers.js';
 import { writeData } from '../rendering/dom/retained-write.js';
 import { eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -96,7 +97,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, distanceM: number,
       selectedPositionM: readonly number[], detailContextOpacity: number, withoutM: readonly (readonly number[])[] | null = null,
-      attachedReachM = 0): number {
+      attachedReachM = 0, worldLayers: WorldLayerVisibility = ALL_WORLD_LAYERS_SHOWN): number {
       if (lifetime.disposed) return 0;
       // Every placed body starts inside the galaxy, so its own distance gates the volume.
       const volumeDistanceM = eyeDistanceM(world.pose, selectedPositionM);
@@ -124,7 +125,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       stationLayer?.setExposure(exposure);
       stationLayer?.publish({ world, viewport });
       const stationReady = (stationLayer?.stats().resident.length ?? 0) > 0;
-      const stationShown = stationReady && layers < 1 && outside > 0;
+      const stationShown = worldLayers.sky && stationReady && layers < 1 && outside > 0;
       if (!coasting) {
         if (stationShown && stationHost.parentNode !== volumeHost) volumeHost.append(stationHost);
         else if (!stationShown && stationHost.parentNode) stationHost.remove();
@@ -139,12 +140,12 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // Each station has already received this frame's common display gain, relative to its baked anchor.
       if (stationWeight !== stationAlpha) { stationHost.style.opacity = String(stationWeight); stationAlpha = stationWeight; }
       const volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
-      const volumeVisible = outside * (stationLayer ? 1 : layers) * detailContextOpacity > 0;
+      const volumeVisible = worldLayers.galaxies && outside * (stationLayer ? 1 : layers) * detailContextOpacity > 0;
       if (!coasting && volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
       if (!coasting && outside !== publishedVolumeOpacity) { volumeHost.dataset.volumeOpacity = String(outside); publishedVolumeOpacity = outside; }
       // A detailed focus suppresses the volume without brightening the sky behind it.
       const completedContribution = outside;
-      const alpha = completedContribution * detailContextOpacity;
+      const alpha = worldLayers.galaxies ? completedContribution * detailContextOpacity : 0;
       const hostAlpha = alpha * (stationLayer ? 1 : layers);
       if (hostAlpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(hostAlpha); publishedVolumeAlpha = hostAlpha; }
       if (skyLayer && !coasting) writeData(skyLayer.root, 'skyContribution', String(1 - completedContribution));
@@ -157,7 +158,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       if (!coasting && imageShown !== publishedImageShown) {
         volumeImage.style.display = imageShown ? '' : 'none'; publishedImageShown = imageShown;
       }
-      const skyAlpha = alpha < 1 ? (1 - completedContribution) / (1 - alpha) : 0;
+      const skyAlpha = worldLayers.sky && alpha < 1 ? (1 - completedContribution) / (1 - alpha) : 0;
       if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       // A sky turned off leaves the layout, as a hidden volume host does; it is not published until it is back.
       skyLayer?.publish(world, viewport, completedContribution < 1);
@@ -166,7 +167,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // them past the system (world-context-planner.ts); measured like them from the selected body. A detailed focus (a
       // nebula's or a galaxy's picture) keeps them, as it keeps the stars' markers: they are the sky around it.
       const starField = starFieldAroundPicture(starFieldFade(volumeDistanceM, plan.system), volumeDistanceM, attachedReachM);
-      const shownDots = catalogueDotsOpacity(starField);
+      const shownDots = worldLayers.stars ? catalogueDotsOpacity(starField) : 0;
       // A star the world draws as a body is its marker's to draw: its own dot in the galaxy's bank is left out.
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots, withoutM);
       for (const level of levels) {

@@ -51,7 +51,7 @@ interface ImageBank {
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
   initialCatalog, catalogBank, loadCatalog, loadImageLayer, loadBacking, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardImage,
-  pointBanks = [], planeBanks = [], imagesBefore = end, picturesBefore = imagesBefore }: {
+  pointBanks = [], planeBanks = [], imagesBefore = end, picturesBefore = imagesBefore, hidden = () => false }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   /** Where a galaxy's billboard and its image slices mount: under the world's dot layer, so its catalogue's dots and its
    * stars' show over its picture. Without one they mount where every other layer does. */
@@ -78,6 +78,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   pointBanks?: PreparedUniverseOptions['pointBanks'];
   /** Packages that are only a picture on a plane in their host's system (PreparedUniverseOptions.planeBanks). */
   planeBanks?: PreparedUniverseOptions['planeBanks'];
+  hidden?: (id: string) => boolean;
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
@@ -232,7 +233,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       if (lifetime.disposed) return;
       for (const bank of points) {
         const admission = bank.stars ? stars?.admit?.(bank.host) ?? 1 : 1;
-        const selected = admission > 0 && (bank.id === selectedObjectId || bank.host !== undefined && (systemIds.includes(bank.host) || bank.stars && stars?.inside.includes(bank.host) === true));
+        const selected = admission > 0 && !hidden(bank.id) && (bank.id === selectedObjectId || bank.host !== undefined && (systemIds.includes(bank.host) || bank.stars && stars?.inside.includes(bank.host) === true));
         if (!bank.mounted && (!selected || coasting)) continue;
         bank.mounted ??= mountCataloguePoints({ host: root, before: end, url: bank.url, fullDetail: bank.stars, coasting: () => coasting,
           loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) });
@@ -257,7 +258,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       let orbits = 1, colors: Readonly<Record<string, string>> | null = null;
       for (const { id, far, orbitOpacity, bodyColors } of planes) {
         const centre = far.loaded?.payload.centreFadeM;
-        const opacity = id !== selectedObjectId ? 0 : projectedVolumeOpacity(world, viewport, far.frame, far.radiusUnits) *
+        const opacity = hidden(id) || id !== selectedObjectId ? 0 : projectedVolumeOpacity(world, viewport, far.frame, far.radiusUnits) *
           (centre ? logarithmicFade(eyeDistanceM(world.pose, far.frame.originM), centre[1], centre[0]) : 1);
         farPlanes.publish(far, opacity, world, viewport, coasting);
         if (far.loaded) orbits = Math.min(orbits, 1 - (1 - orbitOpacity) * opacity);
@@ -310,10 +311,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
         // fade is measured from the selected body, which is the galaxy itself. Walls paint around a body inside them too.
-        const opacity = bank.id === detailedObjectId || bank.id === around || bank.id === standIn ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
+        const opacity = !hidden(bank.id) && (bank.id === detailedObjectId || bank.id === around || bank.id === standIn) ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
         // Its billboard, or its backing plane, shows it from everywhere else, and gives way as the loaded slices fade in.
         if ((billboards && bank.billboardIndex >= 0) || bank.far) {
-          const context = bank.independent ? 1 : volumeOpacity;
+          const context = hidden(bank.id) ? 0 : bank.independent ? 1 : volumeOpacity;
           const sibling = selected !== undefined && bank !== selected && bank.host === selected.host;
           // It gives way to slices that draw: a bank whose images are still decoding has nothing on screen to give way to,
           // unless another bank stands in for it.
@@ -327,7 +328,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         // A bank on walls is drawn from inside too (`around`), as the page of a body inside it draws it.
         const shown = opacity > 0 && bank.id === detailedObjectId && inside?.objectId === bank.id && !bank.surrounds
           ? opacity * enteredVolumeOpacity(world, bank.frame, bank.radiusUnits) : opacity;
-        const dotOpacity = Math.max(shown, inside?.objectId === bank.id ? inside.opacity : 0);
+        const dotOpacity = hidden(bank.id) ? 0 : Math.max(shown, inside?.objectId === bank.id ? inside.opacity : 0);
         if (!bank.mounted) {
           if (dotOpacity > 0) void ensureImage(bank).catch(() => {});
           continue;

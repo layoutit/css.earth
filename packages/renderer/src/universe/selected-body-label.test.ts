@@ -117,3 +117,15 @@ test('a flattened mesh caption follows its projected lower edge instead of its l
   assert.deepEqual(owner.publish(camera, viewport, flattened, { ...view, edge: () => null }), sphere);
   owner.destroy();
 });
+
+test('hidden labels contribute neither a caption nor a planner exclusion and restore without remounting', () => {
+  const label = mountSelectedBodyLabel(host, clock);
+  label.prepare(body(10)); deliverSize(label.label);
+  assert.notEqual(label.publish(camera, viewport, body(10), view), null);
+  const hidden = { ...view, hidden: true };
+  assert.equal(label.rect(camera, viewport, body(10), hidden), null);
+  assert.equal(label.publish(camera, viewport, body(10), hidden), null);
+  assert.equal(label.label.style.opacity, '0');
+  assert.notEqual(label.publish(camera, viewport, body(10), view), null);
+  label.destroy();
+});

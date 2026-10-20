@@ -45,7 +45,7 @@ interface DatasetBank {
 
 /** One stable record owns each declared bank through load, publication and eviction. */
 export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime, declarations, facts, frame, visibility,
-  billboards: preparedBillboards, load, loadBacking, warmDomNodeBudget, requestPublication, prepareBillboardImage }: {
+  billboards: preparedBillboards, load, loadBacking, warmDomNodeBudget, requestPublication, prepareBillboardImage, hidden = () => false }: {
   root: HTMLElement; end: Element; frontRoot: HTMLElement; frontEnd: Element; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   facts: readonly DatasetBankBillboard[];
@@ -57,6 +57,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   warmDomNodeBudget: number;
   requestPublication?: () => boolean;
   prepareBillboardImage: (url: string) => boolean;
+  hidden?: (id: string) => boolean;
 }) {
   let billboardCount = 0, useClock = 0, coasting = false;
   const pictured = (bankFacts: DatasetBankBillboard) => bankFacts.billboard !== undefined || (bankFacts.datasets?.size ?? 0) > 0;
@@ -316,7 +317,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
           : detailContextOpacity * (bank.facts.attached ? 1 : bodyContextOpacity);
         const contextOpacity = bank.facts.contextVisibility === 'independent' ? 1 : volumeOpacity;
         // An attached volume shows with its host's dataset, and always as the page's own focus (M87 on /m87/).
-        const whole = bank.enabled || detailed ? presentationOpacity * contextOpacity : 0;
+        const whole = !hidden(bank.id) && (bank.enabled || detailed) ? presentationOpacity * contextOpacity : 0;
         const shown = whole > 0 && detailed && flight
           ? whole * flight.closeUp * (volumeHolds(frame, radiusUnits, flight.toM) ? enteredVolumeOpacity(world, frame, radiusUnits) : 1) : whole;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);

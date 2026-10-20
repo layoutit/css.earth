@@ -19,6 +19,10 @@
         "structures": "src/objects/helix-layers/.local/observations/helix/structures/catalogue.json",
         "observations": "src/objects/helix-layers/.local/observations/helix/observations.json"
       }
+    },
+    "app": {
+      "object": "helix",
+      "dataset": "rings"
     }
   },
   {
@@ -34,7 +38,11 @@
       "group": "helix",
       "object": "src/objects/helix-wfi-layers"
     },
-    "sourceSubjectId": "helix"
+    "sourceSubjectId": "helix",
+    "app": {
+      "object": "helix",
+      "dataset": "eso-wfi"
+    }
   },
   {
     "id": "helix-helix-vista-layers",
@@ -49,7 +57,11 @@
       "group": "helix",
       "object": "src/objects/helix-vista-layers"
     },
-    "sourceSubjectId": "helix"
+    "sourceSubjectId": "helix",
+    "app": {
+      "object": "helix",
+      "dataset": "eso-vista"
+    }
   },
   {
     "id": "helix-helix-wide-layers",
@@ -64,7 +76,11 @@
       "group": "helix",
       "object": "src/objects/helix-wide-layers"
     },
-    "sourceSubjectId": "helix"
+    "sourceSubjectId": "helix",
+    "app": {
+      "object": "helix",
+      "dataset": "eso-wide"
+    }
   },
   {
     "id": "m1",
@@ -76,6 +92,10 @@
     "siteVolume": {
       "group": "m1",
       "object": "src/objects/m1-volume"
+    },
+    "app": {
+      "object": "m1",
+      "dataset": "hubble-optical"
     }
   },
   {
@@ -91,7 +111,11 @@
       "group": "m1",
       "object": "src/objects/m1-layers"
     },
-    "sourceSubjectId": "m1"
+    "sourceSubjectId": "m1",
+    "app": {
+      "object": "m1",
+      "dataset": "hubble-measured"
+    }
   },
   {
     "id": "m2-9",
@@ -106,6 +130,10 @@
     },
     "solvers": {
       "symmetry": "src/objects/m2-9-volume/source/experiment.json"
+    },
+    "app": {
+      "object": "m2-9",
+      "dataset": "hst-optical"
     }
   },
   {
@@ -118,6 +146,10 @@
     "siteVolume": {
       "group": "m8",
       "object": "src/objects/m8-volume"
+    },
+    "app": {
+      "object": "m8",
+      "dataset": "eso-optical"
     }
   },
   {
@@ -144,6 +176,10 @@
     "plates": {
       "group": "m57",
       "object": "src/objects/m57-layers"
+    },
+    "app": {
+      "object": "m57",
+      "dataset": "optical"
     }
   },
   {
@@ -159,7 +195,11 @@
       "group": "m57",
       "object": "src/objects/m57-miri-layers"
     },
-    "sourceSubjectId": "m57"
+    "sourceSubjectId": "m57",
+    "app": {
+      "object": "m57",
+      "dataset": "mid-infrared"
+    }
   },
   {
     "id": "m57-m57-nircam-layers",
@@ -174,7 +214,11 @@
       "group": "m57",
       "object": "src/objects/m57-nircam-layers"
     },
-    "sourceSubjectId": "m57"
+    "sourceSubjectId": "m57",
+    "app": {
+      "object": "m57",
+      "dataset": "near-infrared"
+    }
   },
   {
     "id": "m76",
@@ -188,6 +232,10 @@
     "plates": {
       "group": "m76",
       "object": "src/objects/m76-layers"
+    },
+    "app": {
+      "object": "m76",
+      "dataset": "optical"
     }
   },
   {
@@ -202,6 +250,10 @@
     "plates": {
       "group": "m97",
       "object": "src/objects/m97-layers"
+    },
+    "app": {
+      "object": "m97",
+      "dataset": "optical"
     }
   },
   {
@@ -216,6 +268,10 @@
     "plates": {
       "group": "m1-67",
       "object": "src/objects/m1-67-layers"
+    },
+    "app": {
+      "object": "m1-67",
+      "dataset": "optical"
     }
   },
   {
@@ -230,6 +286,10 @@
     "plates": {
       "group": "ngc-2392",
       "object": "src/objects/ngc-2392-layers"
+    },
+    "app": {
+      "object": "ngc-2392",
+      "dataset": "optical"
     }
   },
   {
@@ -245,7 +305,11 @@
       "group": "ngc-2392",
       "object": "src/objects/ngc-2392-miri-layers"
     },
-    "sourceSubjectId": "ngc-2392"
+    "sourceSubjectId": "ngc-2392",
+    "app": {
+      "object": "ngc-2392",
+      "dataset": "mid-infrared"
+    }
   },
   {
     "id": "ngc-2392-ngc-2392-webb-layers",
@@ -260,7 +324,11 @@
       "group": "ngc-2392",
       "object": "src/objects/ngc-2392-webb-layers"
     },
-    "sourceSubjectId": "ngc-2392"
+    "sourceSubjectId": "ngc-2392",
+    "app": {
+      "object": "ngc-2392",
+      "dataset": "infrared"
+    }
   },
   {
     "id": "ngc-3132",
@@ -274,6 +342,10 @@
     "plates": {
       "group": "ngc-3132",
       "object": "src/objects/ngc-3132-layers"
+    },
+    "app": {
+      "object": "ngc-3132",
+      "dataset": "optical"
     }
   },
   {
@@ -289,7 +361,11 @@
       "group": "ngc-3132",
       "object": "src/objects/ngc-3132-miri-layers"
     },
-    "sourceSubjectId": "ngc-3132"
+    "sourceSubjectId": "ngc-3132",
+    "app": {
+      "object": "ngc-3132",
+      "dataset": "mid-infrared"
+    }
   },
   {
     "id": "ngc-7662",
@@ -303,6 +379,10 @@
     "plates": {
       "group": "ngc-7662",
       "object": "src/objects/ngc-7662-layers"
+    },
+    "app": {
+      "object": "ngc-7662",
+      "dataset": "optical"
     }
   },
   {
@@ -317,6 +397,10 @@
     "plates": {
       "group": "cassiopeia-a",
       "object": "src/objects/cassiopeia-a-layers"
+    },
+    "app": {
+      "object": "cassiopeia-a",
+      "dataset": "optical"
     }
   },
   {
@@ -332,7 +416,11 @@
       "group": "cassiopeia-a",
       "object": "src/objects/cassiopeia-a-miri-layers"
     },
-    "sourceSubjectId": "cassiopeia-a"
+    "sourceSubjectId": "cassiopeia-a",
+    "app": {
+      "object": "cassiopeia-a",
+      "dataset": "mid-infrared"
+    }
   },
   {
     "id": "homunculus",
@@ -346,6 +434,10 @@
     "plates": {
       "group": "homunculus",
       "object": "src/objects/homunculus-nebula-layers"
+    },
+    "app": {
+      "object": "homunculus-nebula",
+      "dataset": "optical"
     }
   },
   {
@@ -358,6 +450,10 @@
     "siteVolume": {
       "group": "lmc",
       "object": "src/objects/lmc-volume"
+    },
+    "app": {
+      "object": "lmc",
+      "dataset": "horalek-widefield"
     }
   },
   {
@@ -370,6 +466,10 @@
     "siteVolume": {
       "group": "smc",
       "object": "src/objects/smc-volume"
+    },
+    "app": {
+      "object": "smc",
+      "dataset": "smc-horalek-wide"
     }
   }
 ]

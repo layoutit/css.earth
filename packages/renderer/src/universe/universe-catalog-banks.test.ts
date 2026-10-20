@@ -496,3 +496,22 @@ test("a dataset left mid-coast keeps its overlays until the coast ends, then the
   lifetime.destroy();
   assert.equal(again.destroyed, true, 'the scene takes an overlay still waiting for the coast to end');
 });
+
+test('a host can hide a selected image bank and restore its retained slices', async () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  let hidden = false;
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    catalogBank: undefined, loadCatalog: undefined,
+    hidden: id => hidden && id === 'galaxy', declarations: [{ id: 'galaxy', frame }], initialImages: new Map(), volumeDeclarations: [],
+    loadImageLayer: async () => ({ payload: { id: 'galaxy', frame } }) as never });
+  await banks.focusBank('galaxy')!.load();
+  const publish = () => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 'galaxy');
+  const node = root.querySelector<HTMLElement>('[data-image-layer-object="galaxy"]')!;
+  publish(); assert.equal(node.style.opacity, '0.999');
+  hidden = true; publish(); assert.equal(node.style.opacity, '0');
+  hidden = false; publish(); assert.equal(node.style.opacity, '0.999');
+  lifetime.destroy();
+});

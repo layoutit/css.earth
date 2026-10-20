@@ -1,3 +1,4 @@
+import { mountSiteLab, type SiteLab } from '../shell/site-lab';
 import { useEffect, useRef, useState, type RefObject } from 'react';
 import { mountNebulaLab } from '../shell/controller';
 import { labView } from '../features/legacy-viewer/lab-routing';
@@ -21,4 +22,20 @@ export function useLabController() {
   }, [controls]);
   const updateAlignment = (partial: Partial<AlignmentState>) => setShell(value => value.alignment ? { ...value, alignment: { ...value.alignment, ...partial } } : value);
   return { shell, controller, controls, updateAlignment };
+}
+
+export interface SiteLabControlsProps { shell: LabShellState; controller: RefObject<SiteLab | null> }
+
+/** Site-scene layers have their own lifetime; source alignment keeps its existing controller. */
+export function useSiteLabController() {
+  const [shell, setShell] = useState<LabShellState>({ objectId: '', view: 'reconstruction', busy: true, alignmentAvailable: false, pose: 'front' });
+  const controller = useRef<SiteLab | null>(null);
+  useEffect(() => {
+    const host = document.getElementById('viewer');
+    if (!host) throw new Error('The lab layer host is missing.');
+    const value = mountSiteLab({ host, onShellState: setShell });
+    controller.current = value;
+    return () => { value.destroy(); controller.current = null; };
+  }, []);
+  return { shell, controller };
 }

@@ -143,7 +143,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
     /** Fit a volume the body shows through its dataset, when the view does not already hold it. Null when the view is
      * already as far out as the fit, or the volume is unknown, or the volume is another object's extent: M87* shows its
      * galaxy's volume around it and opened 6.3 million light-years out, its own image under a pixel (2026-10-01). */
-    datasetVolumeTarget({ objectId, volumeId, mount }: { objectId: string; volumeId: string; mount?: ShellCamera | null }) {
+    datasetVolumeTarget({ objectId, volumeId, mount, always = false }: { objectId: string; volumeId: string; mount?: ShellCamera | null; always?: boolean }) {
       const bank = DATASET_VOLUMES.get(volumeId), volume = !bank || (bank.host !== undefined && bank.host !== objectId) ? undefined : bank.frame;
       const frame = frames.get(objectId), owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, current = owner?.optics() ?? lastOptics;
@@ -155,7 +155,16 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const target = volumeZoomTarget(from, volume, optics, systemFramingRect(optics, documentTarget), frame.originM);
       const distance = (camera: WorldCamera) => eyeDistanceM(camera.pose, frame.originM);
       // What the view holds is its apparent size: a magnified view stands that many times closer.
-      return distance(target.world) > distance(from) / magnification ? target : null;
+      return always || distance(target.world) > distance(from) / magnification ? target : null;
+    },
+    /** The prepared Earth-facing orientation, at the current distance (the embed host's Earth view). */
+    facingTarget({ objectId, mount }: { objectId: string; mount?: ShellCamera | null }) {
+      const owner = mount?.navigation, frame = frames.get(objectId), arrival = arrivals.get(objectId);
+      const from = owner?.capture(), current = owner?.optics();
+      if (!arrival || !frame || !from || !current) return null;
+      const optics = worldCameraViewport({ projectionScale: 1 }, current);
+      const distanceUnits = presentWorldCamera(from, frame, optics).distanceUnits;
+      return { world: worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits }, frame, optics), focusPositionM: frame.originM };
     },
     /** Turn onto a bound pair's centre of mass, keeping the distance: a binary's overview is centred on the pair, not on the
      * star the scene mounts. Null when the system has no companion, or when the camera already looks at that centre. */

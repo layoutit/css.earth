@@ -97,3 +97,18 @@ test('an object whose walls stand around the selected body is not marked', () =>
   visibility.setSurrounding([]);
   assert.ok(!latest().bodyHidden?.includes('m57'));
 });
+
+test('an embedding host’s layer switches hide bodies by their layer and every orbit, keep the page’s own body, and undo exactly', async () => {
+  const { worldLayerVisibility, ALL_WORLD_LAYERS_SHOWN } = await import('@cssearth/renderer/universe/world-layers.ts');
+  const { visibility, latest } = fixture();
+  visibility.selectObject('jupiter');
+  const shown = latest();
+  visibility.setLayers(worldLayerVisibility(['planets', 'orbits']));
+  const hidden = latest();
+  for (const id of ['earth', 'mars', 'saturn']) assert.ok(hidden.bodyHidden?.includes(id), `planet ${id} is hidden`);
+  assert.ok(!hidden.bodyHidden?.includes('jupiter'), 'the page’s own planet stays');
+  assert.ok(!hidden.bodyHidden?.includes('sun'), 'a star is in another layer');
+  assert.ok(hidden.orbitHidden?.includes('earth') && hidden.orbitHidden?.includes('jupiter'), 'every orbit is off');
+  visibility.setLayers(ALL_WORLD_LAYERS_SHOWN);
+  assert.deepEqual(latest(), shown, 'every layer back on is the website’s own visibility again');
+});

@@ -1,6 +1,8 @@
+import { embedBridgeOrigin, readHiddenWorldLayers, EMBED_HIDDEN_LAYERS_PARAMETER } from '@cssearth/renderer/embed/embed-bridge.ts';
+import { worldLayerVisibility } from '@cssearth/renderer/universe/world-layers.ts';
 import { prepareStartupBillboard } from './startup-billboard.mts';
 import { importApplicationWorld } from './world-imports.mts';
-import { importSceneRegistry, importPackagedObjectRuntime } from './scene-imports.mts';
+import { importSceneRegistry, importPackagedObjectRuntime, importEmbedBridge } from './scene-imports.mts';
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { holdStartup, releaseStartup } from '@cssearth/renderer/rendering/loading/startup-gate.ts';
@@ -93,6 +95,18 @@ export function createSceneRouter({
 }: RouterOptions) {
   // The scenes whose restored view has already centred the zoom (followSelectionCamera).
   const centredScenes = new WeakSet<Session>();
+  // An embedded page a host drives (`?embed&bridge=`, embed-bridge.mts) stays on its object: no link, zoom or watcher takes
+  // the view to another scene.
+  const pageUrl = new URL(windowTarget.location.href);
+  const embedLocked = windowTarget.parent !== windowTarget && embedBridgeOrigin(pageUrl) !== null;
+  if (embedLocked) documentTarget.documentElement.dataset.embedLock = '';
+  else delete documentTarget.documentElement.dataset.embedLock;
+  let initialHidden: ReturnType<typeof readHiddenWorldLayers> = [];
+  if (embedLocked) {
+    try { initialHidden = readHiddenWorldLayers(pageUrl.searchParams.get(EMBED_HIDDEN_LAYERS_PARAMETER)); }
+    catch (error) { reportError(error); }
+  }
+  let embedBridge: ReturnType<typeof import('./embed-bridge.mts').connectEmbedBridge> = null;
   const sharedInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
   const releaseInput = sharedInput ? retainInputSurface(sharedInput) : () => {};
   const scenes = createSceneSessions();
@@ -147,6 +161,9 @@ export function createSceneRouter({
   const world = createSceneWorld({ owner: persistentWorldContext, stage, windowTarget, isCurrent: scenes.isCurrent,
     onMount(value) {
       preferences.apply(value);
+      // URL layers reach the world before any presenter, without waiting for the bridge's asynchronous import.
+      if (!embedBridge && initialHidden.length) value.setLayerVisibility?.(worldLayerVisibility(initialHidden));
+      embedBridge?.worldMounted(value);
     },
     onCameraChange: followSelectionCamera,
     onError: report,
@@ -183,6 +200,27 @@ export function createSceneRouter({
     },
   }) : null;
   if (control) windowTarget.__cssEarthControl = control;
+  if (embedLocked) void importEmbedBridge().then(({ connectEmbedBridge }) => {
+    if (destroyed) return;
+    embedBridge = connectEmbedBridge({ windowTarget, port: {
+      objectId, settled: () => firstMount,
+      mount: () => scenes.current?.mount ?? null,
+      href: () => navigationHref(windowTarget),
+      navigate: url => navigate(objectId, { kind: 'link', url }),
+      async focus(target, signal) {
+        const ready = await ensureContext(), mount = scenes.current?.mount;
+        if (!mount) throw new Error('The scene is not mounted.');
+        const datasets = mount.datasets, volume = datasets?.volumeOf(datasets.current() ?? datasets.defaultId);
+        const aimed = target === 'fit' ? volume ? ready.navigation.datasetVolumeTarget({ objectId, volumeId: volume.objectId, mount, always: true }) : null
+          : ready.navigation.facingTarget({ objectId, mount });
+        if (!aimed) return false;
+        await ready.navigation.focus({ objectId, mount, signal, reducedMotion: true, targetWorldCamera: aimed.world, targetFocusPositionM: aimed.focusPositionM });
+        return true;
+      },
+    } });
+    if (embedBridge && world.current) embedBridge.worldMounted(world.current);
+    if (embedBridge && scenes.current?.mount) embedBridge.sceneMounted(scenes.current.mount);
+  }).catch(report);
 
   return Object.freeze({
     get settled() { return mountTask; },
@@ -196,7 +234,7 @@ export function createSceneRouter({
       releaseInput();
       documentTarget.removeEventListener("visibilitychange", syncPlayback);
       reducedMotion?.removeEventListener("change", syncReducedMotion);
-      cameraMotion.cancel(); handover.destroy();
+      cameraMotion.cancel(); handover.destroy(); embedBridge?.destroy();
       context?.navigation.destroy();
       world.destroy();
       if (control && windowTarget.__cssEarthControl === control) delete windowTarget.__cssEarthControl;
@@ -305,6 +343,7 @@ export function createSceneRouter({
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
+      embedBridge?.sceneMounted(mount);
       if ('bodyPending' in documentTarget.documentElement.dataset) delete documentTarget.documentElement.dataset.bodyPending;
       if (!ready) {
         windowTarget.performance?.mark?.('cssearth:body-ready');
@@ -437,7 +476,7 @@ export function createSceneRouter({
   }
 
   async function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
-    if (destroyed) return false;
+    if (destroyed || embedLocked && id !== objectId) return false;
     // A selection made while the first view is still mounting leaves from it once it is drawn: until then there is no
     // drawn camera to fly from. The latest selection still wins (readiness.prepare).
     if (mountTask === firstMount && scenes.state.kind !== 'ready') {
@@ -651,6 +690,7 @@ export function createSceneRouter({
     }).catch(report);
   }
   function followSelectionCamera(session: Session, frame: WorldCameraPose) {
+    if (embedLocked) return;
     // Until the arrival is ready the camera still shows the mounted object's default view, not the page's: following it
     // selected the Solar System for a moment on every overview page (and fetched its body list for nobody).
     if (requests.current || scenes.state.kind !== 'ready') return;
@@ -716,7 +756,7 @@ export function createSceneRouter({
     const { framed, step } = framing(), navigation = scenes.current?.mount?.navigation;
     navigation?.setZoomOutCentering?.(step !== null);
     // A zoom with a wider scene to hand the camera to does not stop at the mounted scene's far limit.
-    navigation?.setZoomOutOpen?.(context?.selection.zoomOutOpen(framed) ?? false);
+    navigation?.setZoomOutOpen?.(!embedLocked && (context?.selection.zoomOutOpen(framed) ?? false));
   }
   function publishWorld() {
     const { step, moons } = framing();
@@ -776,7 +816,7 @@ export function createSceneRouter({
    * inside is left by zooming (followSelectionCamera), not by this watcher. */
   function connectCameraSelection(ready: RouterContext, session: Session) {
     const owner = session.mount?.navigation;
-    if (!owner) return;
+    if (!owner || embedLocked) return;
     const { selection: current, registry } = ready;
     // The object the mounted body is inside is read now, when the page has not read it (another galaxy): it takes the view
     // as the camera backs out of the body.

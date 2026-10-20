@@ -25,3 +25,12 @@ test('query-specific views withhold static object facts until the requested cont
   new Function('document', 'location', initialShellContextBootstrap('sun'))(document, { href: 'http://localhost/local-group/' });
   assert.equal(document.documentElement.dataset.shellContext, 'pending');
 });
+
+test('the head leaves bridge locking to the router, which can validate the frame and origin', () => {
+  for (const query of ['', 'embed', 'bridge=http://lab.test', 'embed&bridge=http://lab.test', 'embed&bridge=bad']) {
+    const { document } = parseHTML('<html><body></body></html>');
+    deferInitialShellContext(document, `http://localhost/m1/?${query}`, '/m1/');
+    assert.equal('embedLock' in document.documentElement.dataset, false);
+    assert.equal('embed' in document.documentElement.dataset, new URLSearchParams(query).has('embed'));
+  }
+});

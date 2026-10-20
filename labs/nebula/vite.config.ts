@@ -43,7 +43,9 @@ export default defineConfig({
   publicDir: false,
   plugins: [workspaceSourcesPlugin(), tonePreparationPlugin(repositoryRoot), cloudDensityPreparationPlugin(repositoryRoot), starRemovalPlugin(repositoryRoot), reconstructionPlugin(repositoryRoot), shapeCloudPlugin(repositoryRoot), geometryDetectionPlugin(repositoryRoot), evidenceFusionPlugin(repositoryRoot), kinematicsPlugin(repositoryRoot), jointFitPlugin(repositoryRoot), compilerPlugin(repositoryRoot), platesPlugin(repositoryRoot), regionsPlugin(repositoryRoot), volumeOriginalPlugin(repositoryRoot), labObjectPlugin(repositoryRoot)],
   define: { __NEBULA_REPO_ROOT__: JSON.stringify(repositoryRoot),
-    __NEBULA_SOURCE_CATALOGUE_URL__: JSON.stringify(new URL('./packages/lab/sources/index.json', import.meta.url).href) },
+    __NEBULA_SOURCE_CATALOGUE_URL__: JSON.stringify(new URL('./packages/lab/sources/index.json', import.meta.url).href),
+    // The website a subject's app view embeds (features/site-scene): this checkout's `pnpm dev` unless told otherwise.
+    __CSSEARTH_SITE_ORIGIN__: JSON.stringify(new URL(process.env.CSSEARTH_SITE_ORIGIN ?? 'http://127.0.0.1:4210').origin) },
   // Objects' recipes, descriptors and prepared files are data the lab edits and bakes, and a bake rebuilds the workspace
   // packages' `dist`: a change to any of them must not reload the page.
   server: { fs: { allow: [repositoryRoot] }, watch: { ignored: ['**/src/objects/*/source/**', '**/src/objects/*/prepared/**', '**/src/objects/*/object.json', '**/src/objects/*/inventory.json', '**/site/public/scenes/**', '**/.local/**', '**/packages/*/dist/**'] } },
