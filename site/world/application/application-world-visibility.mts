@@ -10,6 +10,7 @@ import { satelliteSystemByHost, satelliteSystemOfMember } from '../systems/satel
 import { planetarySystemParents } from '../../model/planetary-system-members.mts';
 import { orbitRoot } from '../../model/orbit-root.mts';
 import type { SceneLifetime } from '@cssearth/engine';
+import { ALL_WORLD_LAYERS_SHOWN, worldLayerHidden, worldLayerOfClassification, type WorldLayerVisibility } from '@cssearth/renderer/universe/world-layers.ts';
 import type { ApplicationWorldLayer } from './application-world-types.mts';
 
 // Phones get a lighter scene: no celestial sky cube.
@@ -92,7 +93,11 @@ export function createWorldVisibilityPolicy(objects: readonly WorldObject[], pla
   // A star whose row lists its system's members is one too, while its planets are still in a holder not read.
   const systemMembers: ReadonlySet<string> = new Set([...[...orbitCenters].flat(), ...plan.bodies.filter(body => body.systemView?.memberIds.length).map(body => body.id)]);
   return Object.freeze({
-    compact: phone, objects, ...bodyAnnotations(objects, plan.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body => body.id)),
+    compact: phone, objects, bodyIds: [plan.focus.id, ...plan.bodies.map(body => body.id)] as readonly string[],
+    /** Each planned body's classification, from its row or its object: the world layer it belongs to (world-layers.ts). */
+    bodyClassifications: new Map<string, string | undefined>([...objects.map(object => [object.id, object.classification] as const),
+      ...plan.bodies.flatMap(body => body.classification === undefined ? [] : [[body.id, body.classification] as const])]),
+    ...bodyAnnotations(objects, plan.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body => body.id)),
     asteroidIds, ordinaryAsteroidIds, ordinaryAsteroids: new Set(ordinaryAsteroidIds) as ReadonlySet<string>, plainDotIds, minorMoonIds, hiddenOrbitIds, systemMembers, placedSystemOf,
   });
 }
@@ -101,7 +106,7 @@ export const worldVisibilityPolicy = createWorldVisibilityPolicy(WORLD_OBJECTS, 
 
 /** Visibility of retained world bodies, labels and highlights. */
 export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLayer, 'setBodyVisibility'>, lifetime: SceneLifetime,
-  initialPolicy = worldVisibilityPolicy) {
+  initialPolicy = createWorldVisibilityPolicy(worldObjects(applicationContext), applicationContext)) {
   let policy = initialPolicy;
   let illustrations = false;
   let highlighted: string | null = null;
@@ -112,19 +117,25 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
   // The objects whose walls stand around the selected body (a nebula around its central star): the view is among those
   // walls, so no marker stands for them (application-world-context.mts).
   let surrounding: readonly string[] = [];
+  // The world layers an embedding host turned off (world-layers.ts); the website shows them all. The page's own body stays.
+  let layers: WorldLayerVisibility = ALL_WORLD_LAYERS_SHOWN, pageId: string | null = null;
 
   function update() {
     if (lifetime.disposed) return;
+    const all = layers === ALL_WORLD_LAYERS_SHOWN ? [] : policy.bodyIds;
+    const layerHidden = layers === ALL_WORLD_LAYERS_SHOWN ? [] : [...policy.bodyClassifications].filter(([id, classification]) =>
+      worldLayerHidden(layers, id, [pageId], worldLayerOfClassification(classification))).map(([id]) => id);
     const category = highlighted === null ? undefined : prepared.categoryFrames.get(highlighted);
     const highlightedIds = category?.memberIds, hosts: ReadonlySet<string> = new Set(category?.hostIds);
     const visibility = discoveryVisibility(policy.objects, { illustrations, highlighted, ...(highlightedIds ? { highlightedIds } : {}), defaultFeatures, systemMembers: policy.systemMembers, orbitFeatures });
     layer.setBodyVisibility({
-      bodyHidden: [...visibility.hiddenBodies.filter(id => !openSystem.has(id) && id !== selectedId), ...surrounding],
+      bodyHidden: [...visibility.hiddenBodies.filter(id => !openSystem.has(id) && id !== selectedId), ...surrounding, ...layerHidden],
+      // Captions the labels layer turns off are suppressed by the world itself (prepared-universe-runtime.ts).
       labelHidden: [...visibility.hiddenLabels, ...policy.plainDotIds].filter(id => !openSystem.has(id) && !hosts.has(id)),
       highlighted: [...visibility.highlightedBodies, ...hosts],
       // Mission targets keep circles; an ordinary asteroid drawn for its highlighted category is a bare dot.
       indicatorHidden: policy.ordinaryAsteroidIds,
-      orbitHidden: policy.hiddenOrbitIds.filter(id => id !== selectedId),
+      orbitHidden: layers.orbits ? policy.hiddenOrbitIds.filter(id => id !== selectedId) : all,
     });
   }
 
@@ -136,8 +147,10 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
   }));
 
   return {
+    layerOf: (id: string) => worldLayerOfClassification(policy.bodyClassifications.get(id)),
     selectObject(id: string) {
       if (lifetime.disposed) return;
+      if (pageId !== id) { pageId = id; if (layers !== ALL_WORLD_LAYERS_SHOWN) update(); }
       // A selected host or moon reveals its satellite family even when illustration models
       // are disabled. Other stars retain their complete planetary system visibility.
       const revealed = policy.ordinaryAsteroids.has(id) || policy.hiddenOrbitIds.includes(id) && !minorMoons.has(id) ? id : null;
@@ -154,6 +167,12 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
     setSurrounding(ids: readonly string[]) {
       if (lifetime.disposed || ids.length === surrounding.length && ids.every((id, index) => id === surrounding[index])) return;
       surrounding = [...ids];
+      update();
+    },
+    /** Turn world layers off or on: bodies by their classification's layer, every label, every orbit. */
+    setLayers(next: WorldLayerVisibility) {
+      if (lifetime.disposed || next === layers) return;
+      layers = next.subject && Object.values(next).every(Boolean) ? ALL_WORLD_LAYERS_SHOWN : next;
       update();
     },
     setIllustrationModelsEnabled(enabled: boolean) {

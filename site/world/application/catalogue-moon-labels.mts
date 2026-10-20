@@ -109,17 +109,19 @@ export function mountCatalogueMoonLabels(host: HTMLElement, worldBodies: readonl
   });
   const fader = createOpacityFader(host.ownerDocument.defaultView!, clock, { hideAtZero: true });
   const last = labels.map(() => ({ shown: false, transform: '' }));
-  let selected = focus, previous: ReadonlySet<number> = new Set(), coasting = false;
+  let selected = focus, previous: ReadonlySet<number> = new Set(), coasting = false, hidden = false;
   return {
     selectObject(id: string) { selected = bodiesNow().find(body => body.id === id) ?? focus; },
     /** While the camera coasts the shown captions only move: none is admitted, retired or measured until it stops
      * (docs/performance/motion-freezes-membership.md). */
     setCoasting(active: boolean) { coasting = active; fader.holdHiding(active); },
+    /** The world's labels are turned off (an embedding host's layer switch): every caption fades out. */
+    setHidden(value: boolean) { hidden = value; },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, budget: LabelBudget) {
       const compatible = world.referenceFrame === prepared.referenceFrame && world.epochJdTt === prepared.epochJdTt;
       const points = new Map<number, { x: number; y: number }>();
       const measurements = new Set<number>();
-      const placements = compatible ? projectMoonLabels(moons, widths, parents, selected, world, viewport, [], budget, previous, points, measurements) : [];
+      const placements = compatible && !hidden ? projectMoonLabels(moons, widths, parents, selected, world, viewport, [], budget, previous, points, measurements) : [];
       if (coasting) {
         for (const [index, label] of labels.entries()) {
           const point = last[index].shown ? points.get(index) : undefined;

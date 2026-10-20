@@ -219,7 +219,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the object it bounds.
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === IMAGE_MESH_SCHEMA).map(descriptor => {
         const set = resourceSet(descriptor.id);
-        return { url: set.resolve(descriptor.prepared!.url), resolveResource: (path: string) => set.resolve(`prepared/${path}`),
+        return { id: descriptor.id, url: set.resolve(descriptor.prepared!.url), resolveResource: (path: string) => set.resolve(`prepared/${path}`),
           cutaway: () => meshView(descriptor) === 'cutaway', hidden: () => meshView(descriptor) === 'hidden', hiddenCaption: hostName(descriptor.id) };
       }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,

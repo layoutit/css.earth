@@ -34,7 +34,7 @@ test('scene and world loaders share the production queue and settle in declared 
 
 test('loader owners contain only literal import thunks through the same queue; startup exports only the router', () => {
   for (const [path, names] of [
-    ['./scene-imports.mts', ['importSceneRegistry', 'importPackagedObjectRuntime']],
+    ['./scene-imports.mts', ['importSceneRegistry', 'importPackagedObjectRuntime', 'importEmbedBridge']],
     ['./world-imports.mts', ['importApplicationWorld']],
     ['../startup/shared-imports.mts', ['importSceneRouter']],
   ] as const) {

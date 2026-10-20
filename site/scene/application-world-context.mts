@@ -16,6 +16,8 @@ import { loadApplicationUniverse } from '../world/application/application-world-
 import { ancestorIds, knownAncestors } from '../directory/object-directory.mts';
 import { CONTEXT_OBJECT_DESCRIPTORS } from '../prepared/prepared-context-objects.mts';
 import { surroundingHosts } from '../world/surrounded-body.mts';
+import { type WorldLayerVisibility } from '@cssearth/renderer/universe/world-layers.ts';
+import { isRecord } from '@cssearth/core';
 
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };
@@ -26,6 +28,12 @@ import type { ApplicationWorldLayer } from '../world/application/application-wor
 
 /** The objects whose picture lies on walls around their middle (surrounded-body.mts). */
 const WALLED = surroundingHosts(CONTEXT_OBJECT_DESCRIPTORS);
+/** Each bank package's host object (its `properties.host`): a bank is in its host's world layer (world-layers.ts). Read
+ * the first time an embedding host switches a layer; the website never does. */
+let bankHosts: ReadonlyMap<string, string> | null = null;
+const bankHost = (bank: string) => (bankHosts ??= new Map(Object.values(CONTEXT_OBJECT_DESCRIPTORS).flatMap(descriptor =>
+  isRecord(descriptor) && typeof descriptor.id === 'string' && isRecord(descriptor.properties) && typeof descriptor.properties.host === 'string'
+    ? [[descriptor.id, descriptor.properties.host] as const] : []))).get(bank) ?? bank;
 
 export function createApplicationWorldContext() {
   return {
@@ -115,6 +123,14 @@ export function createApplicationWorldContext() {
             const hold = (ids: readonly string[]) => { layer.setSelectionHolders(ids); visibility.setSurrounding(ids.filter(holder => WALLED.has(holder))); };
             hold(knownAncestors(id).map(object => object.id));
             void ancestorIds(id).then(ids => { if (!lifetime.disposed && selectedId === id) hold(ids); }, () => {});
+          },
+          /** An embedding host's layer switches (site/scene/embed-bridge.mts): never called by the website itself. */
+          setLayerVisibility(next: WorldLayerVisibility) {
+            if (lifetime.disposed) return;
+            layer.setLayerVisibility(next, bank => visibility.layerOf(bankHost(bank)));
+            visibility.setLayers(next);
+            moonLabels.setHidden(!next.labels);
+            refreshWorld();
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,
           setHighlightedClassification: visibility.setHighlightedClassification,
