@@ -21,6 +21,13 @@ test('default local window preserves light through driven travel, bounds decode 
  const frozen=[...host.children];watch.start();coast=true;for(let i=0;i<=1000;i++){mount.publish(at(i/10));await Promise.resolve();assert.ok(host.children.length===frozen.length&&[...host.children].every((n,i)=>n===frozen[i]),'coast changed retained membership');assert.deepEqual(watch.take(),[]);assert.ok(mount.stats().loaded+mount.stats().pending<=4);}
  coast=false;watch.destroy();mount.destroy();
 });
+test('driven travel never moves a retained station: a re-inserted sky re-uploads its faces and drops frames',async()=>{
+ const {document}=parseHTML('<html><body><div id="host"></div></body></html>'),host=document.getElementById('host') as unknown as HTMLElement;let moves=0;
+ const insert=host.insertBefore.bind(host);host.insertBefore=((node:Node,before:Node|null)=>{if(node.parentNode===host)moves++;return insert(node,before);}) as typeof host.insertBefore;
+ const mount=mountGalaxyStations({host,stations,interpolation,hysteresisM:1,fadeMs:500,load:async id=>{const root=document.createElement('div') as unknown as HTMLElement;root.dataset.light=String(stations.find(s=>s.id===id)!.positionM[0]);return{root,publish(){},destroy(){root.remove();}};}});
+ try{for(const direction of [1,-1])for(let i=0;i<=1000;i++){const x=direction>0?i/10:100-i/10;mount.publish(at(x));await Promise.resolve();mount.publish(at(x));await Promise.resolve();let light=0,transmit=1;for(const n of [...host.children].reverse() as HTMLElement[]){const a=Number(n.style.opacity);light+=transmit*a*Number(n.dataset.light);transmit*=1-a;}assert.ok(Math.abs(light-x)<1e-10);}
+ assert.equal(moves,0,'a resident root was re-inserted');}finally{mount.destroy();}
+});
 test('a missing bracketing decode retains a complete bounded local scene',()=>{
  const owner=createGalaxyStationSelection(stations,{hysteresisM:1,fadeMs:500,interpolation}),ready=new Set(stations.map(s=>s.id));owner.publish(at(5),0,false,ready);ready.delete('s4');const held=owner.publish(at(80),1,false,ready);assert.ok(held.residentIds.length<=4);assert.equal(Object.values(held.weights!).reduce((s,v)=>s+v,0),1);assert.ok(!held.residentIds.includes('s4'));
 });
