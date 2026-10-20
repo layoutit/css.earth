@@ -1,4 +1,5 @@
 import type { ImageLayer } from '../features/legacy-viewer/overlay-variants';
+import type { SiteSceneState } from '../features/site-scene/site-scene-controller';
 
 export interface AlignmentState {
   images: { id: string; label: string }[]; imageId: string; layer: ImageLayer; layers: ImageLayer[];
@@ -22,6 +23,8 @@ export interface LabShellState {
   originalOverlay?: { available: boolean; enabled: boolean; opacity: number; loading: boolean; picture?: 'original' | 'starless' | `candidate:${string}` };
   /** The viewer's render-minus-photograph plane, for the panels that offer it. */
   differenceOverlay?: { available: boolean; enabled: boolean; earthFacing: boolean; opacity: number; loading: boolean };
+  /** The website's page that draws the subject, as it last reported (features/site-scene). */
+  site?: SiteSceneState;
 }
 
 /** UI visibility/availability comes from workflow state, never from the current DOM. */

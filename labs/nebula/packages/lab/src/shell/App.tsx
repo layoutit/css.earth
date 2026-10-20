@@ -1,3 +1,4 @@
+import { SiteSceneApp } from './site-scene-app';
 import { useEffect, useState } from 'react';
 import { LabNavigation } from '../ui/lab-navigation';
 import { labObjects } from './controller';
@@ -20,6 +21,10 @@ import { ProgressStrip } from '../ui/progress-strip';
 /** One nebula, four steps: Research · Model · Edit · Bake & publish. The viewport and the left camera panel stay
  * mounted across steps; the right panel shows the step. */
 export function App() {
+  return location.pathname.replace(/\/+$/, '') === '/site-scene' ? <SiteSceneApp /> : <LegacyWorkspace />;
+}
+
+function LegacyWorkspace() {
   const { shell, controller, controls, updateAlignment } = useLabController();
   const [step, setStep] = useState<LabStep>(() => labStep(new URL(location.href)));
   const [preview, setPreview] = useState<Preview>('surfaces');
@@ -45,6 +50,7 @@ export function App() {
   return <>
     <LabNavigation step={step} objectId={shell.objectId} objects={labObjects} busy={shell.busy}
       method={workflow?.label} onObjectChange={id => void controller.current?.changeObject(id)} onStepChange={changeStep} />
+    {selectedSubject?.app && <a className="site-scene-link" href={`/site-scene?subject=${shell.objectId}`}>Open site scene</a>}
     <main className="lab-layout" data-lab-step={step}>
       <section className="lab-workspace" aria-label="Object inspection">
         <div className="workspace-content">

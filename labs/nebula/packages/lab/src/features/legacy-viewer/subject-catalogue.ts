@@ -1,4 +1,5 @@
 import records from '../../state/subjects.json';
+import { isAppDatasetId, isAppObjectId } from '../site-scene/site-scene-url.ts';
 import { readLabWorkflow } from '../../state/lab-workflows.ts';
 import sourceCatalog from '../../adapters/sources/nebula-catalogue.ts';
 import { catalogueSourceUrl } from '../../resources/source-catalogue-paths.ts';
@@ -37,6 +38,8 @@ export interface LabSubjectRecord {
   solvers?: { kinematics?: string; jointFit?: { recipe: string; structures: string; observations: string }; symmetry?: string };
   /** The site's prepared volume dataset bank of a nebula, shown as the site shows it. */
   siteVolume?: { group: string; object: string };
+  /** The website object and dataset that show this subject: the lab's scene is the site's own page for them (features/site-scene). */
+  app?: { object: string; dataset?: string };
   reconstructionImage?: { group: string; label: string; note: string };
   referenceProjectionScale?: number;
   /** Calibrated observer for prepared photographic-volume experiments. */
@@ -116,6 +119,8 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
   if (record.workflow === 'plates' && !record.plates) throw new TypeError(`Lab subject ${record.id} names the plates method without its image-layer object.`);
   if (record.siteVolume !== undefined && (typeof record.siteVolume.group !== 'string' || !record.siteVolume.group || !/^src\/objects\/[a-z0-9][a-z0-9-]*-volume$/.test(record.siteVolume.object) || record.directory !== record.siteVolume.object))
     throw new TypeError(`Lab subject ${record.id} has an invalid site volume.`);
+  if (record.app !== undefined && (!isAppObjectId(record.app.object) || (record.app.dataset !== undefined && !isAppDatasetId(record.app.dataset))))
+    throw new TypeError(`Lab subject ${record.id} has an invalid app object or dataset.`);
   const solvers = record.solvers;
   if (solvers && (solvers.kinematics !== undefined && !relativePath(solvers.kinematics) || solvers.symmetry !== undefined && !relativePath(solvers.symmetry) ||
       solvers.jointFit !== undefined && ![solvers.jointFit.recipe, solvers.jointFit.structures, solvers.jointFit.observations].every(relativePath)))

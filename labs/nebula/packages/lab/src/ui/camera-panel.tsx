@@ -1,3 +1,5 @@
+import '../features/workspace/workspace-controls.css';
+import type { SiteLabControlsProps } from '../state/use-lab-controller';
 import { CameraModelPanel } from './camera-model-panel';
 import type { LabControlsProps } from '../state/use-lab-controller';
 import type { LabStep } from '../features/legacy-viewer/lab-routing';
@@ -52,4 +54,18 @@ export function CameraPanel({ shell, controller, step }: LabControlsProps & { st
       <p id="status" role="status" aria-live="polite" hidden={shell.presentation?.status.hidden ?? false}
         data-error={shell.presentation?.status.error ? 'true' : undefined}>{shell.presentation?.status.message ?? 'Loading…'}</p>
     </>} />;
+}
+
+/** Camera commands use the embedded site's navigation owner. */
+export function SiteCameraPanel({ shell, controller }: SiteLabControlsProps) {
+  const ready = Boolean(shell.site?.ready), waiting = 'The site scene is still opening.';
+  const run = (action: (() => Promise<unknown>) | undefined) => { void action?.().catch(() => {}); };
+  return <CameraModelPanel id="inspection-panel" className="density-adjustment-panel" controlsId="render-controls" busy={!ready} showModel={false}
+    camera={{
+      earth: ready ? { id: 'reference-view', onActivate: () => run(controller.current?.referenceView) } : waiting,
+      orbit: 'Drag to orbit, scroll to zoom: the site’s controls.',
+      fit: ready ? { id: 'fit-cloud', onActivate: () => run(controller.current?.fitCloud) } : waiting,
+      reset: ready ? { id: 'reset', onActivate: () => run(controller.current?.resetCamera) } : waiting,
+      turn: ready ? { id: 'turn-60', onActivate: () => run(() => controller.current!.setPose('x-plus-60')) } : waiting,
+    }} cameraHint="Drag to orbit · scroll to zoom" />;
 }

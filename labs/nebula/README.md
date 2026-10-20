@@ -42,6 +42,24 @@ pnpm lab:nebula
 
 Open [the lab](http://127.0.0.1:4331/reconstruction). Choose the object and the step in the header.
 
+### Inspect the site's scene
+
+Open `/site-scene?subject=helix` (or **Open site scene** in the workspace). This embeds this checkout's real site page and scene router, with the site's renderer and shared world camera/navigation. The lab's **Dataset**, camera buttons and layer switches send validated messages to that page. Dataset changes keep the frame mounted. **Original image** adds a registered lab overlay using the exact camera the site publishes; it does not replace the site's object renderer. Labels start hidden; `hide=` retains the layer choices, `dataset=` the site dataset and `view=` a copied site view token.
+
+From a clean checkout, prepare and start the site, then start the lab in a second terminal. Both commands stay running:
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+pnpm dev --port 4217
+# In a second terminal, from the repository root:
+node labs/nebula/run.mts bake-nebula --stage=assets
+CSSEARTH_SITE_ORIGIN=http://127.0.0.1:4217 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4347 --strictPort
+```
+
+Open `http://127.0.0.1:4347/site-scene?subject=helix`. The site's default origin is `http://127.0.0.1:4210`; `CSSEARTH_SITE_ORIGIN` selects another local site. The site needs its normal prepared assets. This view never bakes or publishes assets. Existing `/alignment` and `/reconstruction` workspaces keep their controllers, draft banks and processing tools. **Original sources** opens `/alignment?subject=<id>`; a compiler-result preview shows baked slabs, not the original registered observations.
+
+
 The separate [archive catalogue](docs/archive-catalogue.md) browses MAST, IRSA and ESO candidates for all 110 Messier objects. It retains wide views and local detail fields without starting image processing or changing the cloud workspace.
 
 [Pleiades, Crab and Lagoon source candidates](docs/source-candidates.md) retain six spectral source records and five papers per object. Alignment now selects four useful Pleiades images, three star-verified Lagoon images and the Crab optical reference alone; weak or unverified comparisons are hidden. No candidate processing or new reconstruction is implied.
