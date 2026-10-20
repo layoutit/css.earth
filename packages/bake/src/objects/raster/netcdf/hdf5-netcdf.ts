@@ -2,10 +2,11 @@
  * NetCDF-4, the format newer climate models write: an HDF5 container (its structures are read in `hdf5-objects.ts`). This
  * reads the plain kind the Met Office Unified Model's files come out of the Iris library as: every variable in the root
  * group, stored whole and unfiltered (the contiguous layout) as little-endian numbers, under any of the four superblock
- * versions (libnetcdf wrote version 0 until 4.6 and writes version 2 since).
+ * versions (libnetcdf wrote version 0 until 4.6 and writes version 2 since). A variable stored in unfiltered chunks is read
+ * too, chunk by chunk (`hdf5-chunks.ts`), as ALERA-V's Venus analysis stores one time step per chunk.
  *
- * Anything else is refused by name with what was met: a chunked or compressed variable, a nested group, big-endian
- * numbers. A variable's dimensions are the dimension scales its DIMENSION_LIST attribute points at, as the NetCDF-4
+ * Anything else is refused by name with what was met: a compressed or otherwise filtered variable, a nested group,
+ * big-endian numbers. A variable's dimensions are the dimension scales its DIMENSION_LIST attribute points at, as the NetCDF-4
  * convention writes them. Structure is read from its own bytes and a variable's values from theirs, so a file of hundreds
  * of megabytes is never loaded whole. The file must be whole all the same: the library spreads its structure through the
  * file as variables are added, so no first part of it stands alone, and a file shorter than the length it states for
@@ -13,6 +14,7 @@
  */
 import { open } from 'node:fs/promises';
 import type { NetcdfAttribute, NetcdfType, NetcdfVariable } from './classic-netcdf.ts';
+import { chunkedBytes, chunkIndex, chunkLayout, type ChunkIndex, type ChunkLayout } from './hdf5-chunks.ts';
 import { address, HDF5_MESSAGE, hdf5AttributeMessages, hdf5GlobalHeapObject, hdf5GroupMembers, hdf5Messages, optionalAddress, type Hdf5Message, type Read } from './hdf5-objects.ts';
 
 const SIGNATURE = Buffer.from([0x89, 0x48, 0x44, 0x46, 0x0d, 0x0a, 0x1a, 0x0a]);
@@ -25,7 +27,11 @@ const DIMENSION_ONLY = 'This is a netCDF dimension but not a netCDF variable.';
 /** What a datatype message says of one element. `references` and `strings` are variable-length values held in a global heap. */
 interface ElementType { readonly kind: 'number' | 'text' | 'references' | 'strings' | 'other'; readonly bytes: number; readonly type?: NetcdfType; readonly littleEndian: boolean }
 interface RawAttribute { readonly name: string; readonly element: ElementType; readonly shape: readonly number[]; readonly data: Buffer }
-interface Stored { readonly variable: NetcdfVariable; readonly element: ElementType; readonly address: number | undefined; readonly inline: Buffer | undefined; readonly layout: string }
+interface Stored {
+  readonly variable: NetcdfVariable; readonly element: ElementType; readonly address: number | undefined; readonly inline: Buffer | undefined; readonly layout: string;
+  /** A chunked variable's chunk layout, its filter pipeline when it has one, and the stored bytes of its fill value. */
+  readonly chunks?: ChunkLayout; readonly filtered?: boolean; readonly fill?: Buffer;
+}
 
 const product = (shape: readonly number[]) => shape.reduce((total, length) => total * length, 1);
 
@@ -112,6 +118,14 @@ export async function openHdf5Netcdf(path: string): Promise<Hdf5Netcdf> {
       if (bytesRead !== length) throw new TypeError(`${path} ends inside the ${length} bytes at ${offset}.`);
       return bytes;
     };
+    return { ...await readHdf5Netcdf(read, size, path), close: () => file.close() };
+  } catch (error) { await file.close(); throw error; }
+}
+
+/** The same reading through any `read`: a release kept as some of its byte ranges answers only for those (`size` is the
+ * whole release's length, which its superblock states). */
+export async function readHdf5Netcdf(read: Read, size: number, path: string): Promise<Omit<Hdf5Netcdf, 'close'>> {
+  {
     const superblock = await read(0, Math.min(size, 100));
     if (!superblock.subarray(0, 8).equals(SIGNATURE)) throw new TypeError(`${path} is not an HDF5 file, and so not NetCDF-4.`);
     const version = superblock[8]!;
@@ -163,10 +177,14 @@ export async function openHdf5Netcdf(path: string): Promise<Hdf5Netcdf> {
       }
       if (layout[0] !== 3 && layout[0] !== 4) throw new TypeError(`${label}: data layout version ${layout[0]} is not read.`);
       const kind = layout[1] === 1 ? 'contiguous' : layout[1] === 0 ? 'compact' : layout[1] === 2 ? 'chunked' : `in layout class ${layout[1]}`;
+      const ownFill = raw.find(entry => entry.name === '_FillValue' && entry.element.kind === 'number')?.data;
+      const messageFill = fill && (fill[0] === 3 ? (fill[1]! & 0x20) !== 0 : fill[0] === 2 && fill[3] === 1) ? fill.subarray(fill[0] === 3 ? 6 : 8) : undefined;
       stored.set(name, { variable: { name, dimensions, shape, type: element.type!, attributes }, element, layout: kind,
         // No address is a variable no value was ever written to.
         address: kind === 'contiguous' ? optionalAddress(layout, 2, label) : undefined,
-        inline: kind === 'compact' ? layout.subarray(4, 4 + layout.readUInt16LE(2)) : undefined });
+        inline: kind === 'compact' ? layout.subarray(4, 4 + layout.readUInt16LE(2)) : undefined,
+        ...(kind === 'chunked' && layout[0] === 3 ? { chunks: chunkLayout(layout, shape.length, label), filtered: one(HDF5_MESSAGE.filterPipeline) !== undefined,
+          fill: (ownFill ?? messageFill)?.subarray(0, element.bytes) } : {}) });
     }
     if (groups.length) throw new TypeError(`${path} holds the groups ${groups.join(', ')}; variables inside groups are not read.`);
 
@@ -176,20 +194,26 @@ export async function openHdf5Netcdf(path: string): Promise<Hdf5Netcdf> {
       if (entry.element.kind !== 'number') throw new TypeError(`${path}: variable ${name} is text, not numbers.`);
       return entry;
     };
+    const indexes = new Map<string, Promise<ChunkIndex>>();
     const slice = async (name: string, start: number, count: number) => {
       const entry = entryOf(name), total = product(entry.variable.shape), bytes = entry.element.bytes;
       if (!Number.isSafeInteger(start) || !Number.isSafeInteger(count) || start < 0 || count <= 0 || start + count > total)
         throw new RangeError(`${path}: variable ${name} has ${total} values, and ${count} from value ${start} were asked for.`);
       if (entry.inline) return numbers(entry.inline.subarray(start * bytes, (start + count) * bytes), entry.element, `${path}, ${name}`);
-      if (entry.layout !== 'contiguous') throw new TypeError(`${path}: variable ${name} is stored ${entry.layout}; only a variable stored whole and unfiltered is read.`);
+      if (entry.chunks && !entry.filtered) {
+        const label = `${path}, ${name}`, chunks = entry.chunks;
+        if (!indexes.has(name)) indexes.set(name, chunkIndex(read, chunks, label));
+        return numbers(await chunkedBytes(read, chunks, await indexes.get(name)!, entry.variable.shape, start, count, entry.fill, label), entry.element, label);
+      }
+      if (entry.layout !== 'contiguous') throw new TypeError(`${path}: variable ${name} is stored ${entry.layout}${entry.filtered ? ' and filtered' : ''}; only a variable stored whole or in unfiltered chunks is read.`);
       if (entry.address === undefined) throw new TypeError(`${path}: variable ${name} was never written.`);
       return numbers(await read(entry.address + start * bytes, count * bytes), entry.element, `${path}, ${name}`);
     };
-    return { variables: new Map([...stored].map(([name, entry]) => [name, entry.variable])), slice, close: () => file.close(),
+    return { variables: new Map([...stored].map(([name, entry]) => [name, entry.variable])), slice,
       async values(name: string) {
         const total = product(entryOf(name).variable.shape);
         if (total > MAXIMUM_VALUES) throw new RangeError(`${path}: variable ${name} has ${total} values, more than the ${MAXIMUM_VALUES} read at once.`);
         return slice(name, 0, total);
       } };
-  } catch (error) { await file.close(); throw error; }
+  }
 }

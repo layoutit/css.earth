@@ -1,6 +1,6 @@
 # NetCDF fixtures
 
-Three small classic files and two NetCDF-4 files for the reader tests beside this directory. The classic three first. They were written by the reference library, libnetcdf 4.9.3
+Three small classic files and three NetCDF-4 files for the reader tests beside this directory. The classic three first. They were written by the reference library, libnetcdf 4.9.3
 (through netCDF4-python 1.7.4), from the definitions below, so the tests compare the TypeScript reader with that library and
 not with itself. `ncgen` writes the same content from each definition: `ncgen -k nc6 -o field-cdf2.nc field.cdl`, with
 `-k nc3` for the CDF-1 file and `-k cdf5` for the CDF-5 file.
@@ -126,3 +126,32 @@ in the file and every dataset, as libnetcdf tracks it, and with dimension scales
 - `TS(time, lat, lon)`, double, in `K`: `TS[r, i, j] = 200 + 100 r + 10 i + j`. It carries `units`, `note1` to `note8`
   ("attribute 1" to "attribute 8") and its dimension list: ten attributes, more than a header keeps, so they are in a heap.
 - `V1` to `V6`, int: `Vn` holds `n, 10 n, 100 n`. With them the group has ten members, whose links are in a heap too.
+
+## `field-nc4-chunked.nc` (39,775 bytes, NetCDF-4 with chunked variables)
+
+The layout of ALERA-V's analysis of the Venus atmosphere (Zenodo 10.5281/zenodo.23383461), which stores each field one time
+step per chunk under an unlimited time dimension, in miniature. Written by the same reference library as `field-nc4.nc`,
+libnetcdf 4.9.3 over HDF5 1.14.6 (through netCDF4-python 1.7.4), which indexes chunks with a version 1 B-tree as the release
+does. Every chunk is unfiltered.
+
+```
+netcdf field-nc4-chunked {
+dimensions:
+	time = UNLIMITED ; // (70 currently)
+	lat = 4 ; lon = 8 ; y = 5 ; x = 7 ;
+variables:
+	double time(time) ;  time:units = "hours since 1970-01-01 00:00:00" ;   // 0.5 to 69.5 by 1
+	float lat(lat) ;     lat:units = "degrees_north" ;   // -67.5, -22.5, 22.5, 67.5
+	float lon(lon) ;     lon:units = "degrees_east" ;    // 22.5 to 337.5 by 45
+	float T(time, lat, lon) ;  T:units = "K" ;    // chunks of 1 x 4 x 8: one per record
+	double EDGE(y, x) ;  EDGE:units = "m" ;       // chunks of 2 x 3, which reach past the grid's last row and column
+	double HOLE(y, x) ;  HOLE:units = "m" ; HOLE:_FillValue = -999. ;   // chunks of 2 x 3, only the first written
+// global attributes:
+		:title = "css.earth NetCDF-4 chunked reader fixture" ;
+}
+```
+
+- `T[r, i, j] = 1000 r + 10 i + j`. Seventy chunks are more than one node of the chunk B-tree holds, so its root (level 1)
+  points at two leaves.
+- `EDGE[i, j] = 10 i + j`
+- `HOLE[i, j] = 10 i + j` for `i < 2, j < 3`, the one chunk written; the others are never written and read as -999.

@@ -18,6 +18,10 @@
  * requests bring its first bytes (the header and the coordinate variables) and the bytes of the selected grid, and the
  * package keeps those two parts as exact bytes of the release, each declared with its range in the source manifest.
  *
+ * A NetCDF-4 release spreads its structure through itself, so it is kept as every byte range the field reader reads of it to
+ * take the selection, exact bytes all (`parts`): for ALERA-V's Venus analysis, ten ranges and 116 kB of a 9.6 GB file. Its
+ * structure is read by range requests of its own, a window at a time, and only the ranges the reader asked for are kept.
+ *
  * A release that is a ZIP archive holding the model file adds `member`, the file's path inside the archive. NetCDF-4
  * spreads its structure through the file, and a member of any format is taken out of its archive whole, so that file is
  * kept whole, outside git, and restored by the package's own acquisition step. It is one source record however many
@@ -31,7 +35,7 @@ import { open, stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { executeAcquisition, parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
-import { NetcdfHeaderIncomplete, parseClassicNetcdfHeader, parseIsobar, valueRange, type ByteRange, type Isobar, type NetcdfHeader } from '@cssearth/bake/objects/raster';
+import { decodeNetcdfLonLatField, NetcdfHeaderIncomplete, parseClassicNetcdfHeader, parseIsobar, readHdf5Netcdf, valueRange, type ByteRange, type Isobar, type NetcdfHeader } from '@cssearth/bake/objects/raster';
 import { containedPath, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
 import type { Archive } from '../archives/archives.mts';
@@ -53,6 +57,9 @@ export interface SimulationEntry {
   readonly displayUnits?: string;
   /** The grid longitude, in degrees east, of the body's zero meridian: where the model put the star overhead on a synchronous planet. */
   readonly longitudeZeroAt: number;
+  /** The grid's longitudes run the other way round the body (a model written in the geophysical convention for a planet that
+   * turns backwards, as its release's own conversion of the observations shows): body longitude = longitudeZeroAt - grid longitude. */
+  readonly mirrored?: boolean;
   /** Who made it: the model's name ("ExoCAM"), the paper ("Wolf et al. (2022)") and its URL. */
   readonly model: string; readonly credit: string; readonly url: string;
   /** What the run assumes, as the rest of a sentence: "one bar of nitrogen with 400 ppm of carbon dioxide over a global ocean". */
@@ -83,7 +90,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
     if (!words) throw new TypeError(`${label}.${key} is empty.`);
     return words;
   };
-  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'displayUnits', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'time', 'detected', 'undetected', 'observed', 'others', 'range', 'member', 'isobar']);
+  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'displayUnits', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'time', 'detected', 'undetected', 'observed', 'others', 'range', 'member', 'isobar', 'mirrored']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${label}: unknown fields ${unknown.join(', ')}.`);
   const dataset = text('dataset'), record = text('record'), file = text('file'), path = text('path'), url = text('url');
@@ -103,6 +110,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
     throw new TypeError(`${label}.member ${member}: the path of the model file inside ${file}, which must then be a ZIP archive.`);
   if (isobar && member === undefined) throw new TypeError(`${label}.isobar reads every level of the model, which the two kept parts of a classic release do not hold; it needs a NetCDF-4 file named by member.`);
   if (path.endsWith('.npy') && (member === undefined || !member.endsWith('.npy') || isobar)) throw new TypeError(`${label}.path ${path}: a NumPy file is a member of a ZIP release, named by a member ending in .npy, and is read on a level select names, not at an isobar.`);
+  if (input.mirrored !== undefined && input.mirrored !== true) throw new TypeError(`${label}.mirrored is true, or left out for a grid whose longitudes run east.`);
   const scenario = text('scenario'), time = text('time');
   if (/[.!?]$/u.test(scenario)) throw new TypeError(`${label}.scenario is the rest of the sentence "The run assumes ..."; leave out its final period.`);
   if (/[.!?]$/u.test(time)) throw new TypeError(`${label}.time is the rest of the sentence "The map is ..."; leave out its final period.`);
@@ -122,7 +130,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
   })();
   return { dataset, label: text('label'), quantity: text('quantity'), record, file, path, variable,
     coordinates: { longitude: requireString(coordinates.longitude, `${label}.coordinates.longitude`), latitude: requireString(coordinates.latitude, `${label}.coordinates.latitude`) },
-    select: select as Record<string, number>, units: text('units'), ...(input.displayUnits === undefined ? {} : { displayUnits: text('displayUnits') }), longitudeZeroAt: requireFiniteNumber(input.longitudeZeroAt, `${label}.longitudeZeroAt`), model: text('model'), credit: text('credit'), url, scenario, time,
+    select: select as Record<string, number>, units: text('units'), ...(input.displayUnits === undefined ? {} : { displayUnits: text('displayUnits') }), longitudeZeroAt: requireFiniteNumber(input.longitudeZeroAt, `${label}.longitudeZeroAt`), ...(input.mirrored ? { mirrored: true } : {}), model: text('model'), credit: text('credit'), url, scenario, time,
     detected: input.detected, ...(input.undetected === undefined ? {} : { undetected: text('undetected') }), ...(observed ? { observed } : {}), ...(others ? { others } : {}), ...(range ? { range } : {}),
     ...(member === undefined ? {} : { member }), ...(isobar ? { isobar } : {}) };
 }
@@ -169,6 +177,12 @@ export function simulationPaths(entry: SimulationEntry): { readonly head: string
 }
 
 export interface SimulationRanges { readonly head: ByteRange; readonly field: ByteRange }
+/** A NetCDF-4 release's kept ranges, in order: the first from its first byte, kept at the head's path. */
+export interface SimulationParts { readonly parts: readonly { readonly path: string; readonly range: ByteRange }[] }
+/** Reads of a NetCDF-4 release no further apart than this are kept as one range. */
+const PART_GAP = 4096;
+/** The window a NetCDF-4 release's structure is read in, one range request each. */
+const WINDOW = 1 << 18;
 /** The most kept of a release's first bytes: a history file's header names hundreds of variables, and its coordinates follow. */
 const HEAD_LIMIT = 8 * 1024 * 1024;
 
@@ -204,7 +218,7 @@ export function simulationRanges(header: NetcdfHeader, entry: SimulationEntry, w
 /** The two kept parts in the package's source directory, each brought by one range request and held to its length. The
  * header is asked for first, in growing pieces until it parses, since it says where the parts lie. A part already there at
  * its length is not asked for again. Returns the ranges and the bytes fetched for the parts. */
-export async function restoreSimulationField(sourceRoot: string, id: string, entry: SimulationEntry, release: SimulationRelease, fetcher: typeof fetch = fetch): Promise<SimulationRanges & { readonly fetched: number }> {
+export async function restoreSimulationField(sourceRoot: string, id: string, entry: SimulationEntry, release: SimulationRelease, fetcher: typeof fetch = fetch): Promise<(SimulationRanges | SimulationParts) & { readonly fetched: number }> {
   const where = `${id}, dataset ${entry.dataset}: ${entry.file}`;
   const ranged = async (range: ByteRange) => {
     const response = await fetcher(release.fileUrl, { redirect: 'follow', headers: { 'user-agent': 'cssEarth-telescope/1.0 (https://css.earth)', range: rangeRequestHeader(range) } });
@@ -212,26 +226,69 @@ export async function restoreSimulationField(sourceRoot: string, id: string, ent
     assertRangeResponse(response, range, release.fileUrl);
     return response;
   };
+  const keep = async (kept: readonly (readonly [string, ByteRange])[]) => {
+    let fetched = 0;
+    for (const [path, range] of kept) {
+      const target = containedPath(sourceRoot, path);
+      const size = await stat(target).then(info => info.size, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
+      if (size === range.length) continue;
+      if (size !== undefined) throw new Error(`${where}: ${target} has ${size} bytes and the release puts ${range.length} there; remove it to fetch the range again.`);
+      const response = await ranged(range);
+      await publishPinnedSourceStream({ sourceRoot, entry: { path, origin: release.fileUrl, range }, stream: Readable.fromWeb(response.body as never), declaredBytes: range.length });
+      fetched += range.length;
+    }
+    return fetched;
+  };
+  const first = Buffer.from(await (await ranged({ offset: 0, length: Math.min(release.bytes, WINDOW) })).arrayBuffer());
+  if (first.subarray(0, 8).equals(Buffer.from([0x89, 0x48, 0x44, 0x46, 0x0d, 0x0a, 0x1a, 0x0a]))) {
+    const parts = await netcdf4Parts(entry, release, where, first, ranged);
+    return { parts, fetched: await keep(parts.map(part => [part.path, part.range] as const)) };
+  }
   let header: NetcdfHeader | undefined;
-  for (let length = Math.min(release.bytes, 1 << 18); header === undefined; length = Math.min(release.bytes, length * 4)) {
-    try { header = parseClassicNetcdfHeader(Buffer.from(await (await ranged({ offset: 0, length })).arrayBuffer()), where); }
+  for (let length = first.length; header === undefined; length = Math.min(release.bytes, length * 4)) {
+    try { header = parseClassicNetcdfHeader(length === first.length ? first : Buffer.from(await (await ranged({ offset: 0, length })).arrayBuffer()), where); }
     catch (error) {
       if (!(error instanceof NetcdfHeaderIncomplete)) throw error;
       if (length === release.bytes || length >= HEAD_LIMIT) throw new TypeError(`${where}: its NetCDF header does not end within its first ${length} bytes (field file).`);
     }
   }
   const ranges = simulationRanges(header, entry, where), paths = simulationPaths(entry);
-  let fetched = 0;
-  for (const [path, range] of [[paths.head, ranges.head], [paths.field, ranges.field]] as const) {
-    const target = containedPath(sourceRoot, path);
-    const size = await stat(target).then(info => info.size, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
-    if (size === range.length) continue;
-    if (size !== undefined) throw new Error(`${where}: ${target} has ${size} bytes and the release puts ${range.length} there; remove it to fetch the range again.`);
-    const response = await ranged(range);
-    await publishPinnedSourceStream({ sourceRoot, entry: { path, origin: release.fileUrl, range }, stream: Readable.fromWeb(response.body as never), declaredBytes: range.length });
-    fetched += range.length;
+  return { ...ranges, fetched: await keep([[paths.head, ranges.head], [paths.field, ranges.field]]) };
+}
+
+/** The byte ranges of a NetCDF-4 release the field reader reads to take the entry's selection, found by running the reader
+ * on the release through range requests of WINDOW bytes, and merged where they lie within PART_GAP of each other. The first
+ * starts at the release's first byte and is kept at the head's path; each other at the head's stem and its offset. */
+async function netcdf4Parts(entry: SimulationEntry, release: SimulationRelease, where: string, first: Buffer, ranged: (range: ByteRange) => Promise<Response>) {
+  const windows = new Map<number, Buffer>([[0, first]]), asked: ByteRange[] = [];
+  const window = async (index: number) => {
+    let bytes = windows.get(index);
+    if (!bytes) {
+      const offset = index * WINDOW;
+      bytes = Buffer.from(await (await ranged({ offset, length: Math.min(WINDOW, release.bytes - offset) })).arrayBuffer());
+      windows.set(index, bytes);
+    }
+    return bytes;
+  };
+  const netcdf4 = await readHdf5Netcdf(async (offset, length) => {
+    asked.push({ offset, length });
+    const out = Buffer.alloc(length);
+    for (let index = Math.floor(offset / WINDOW); index * WINDOW < offset + length; index++) {
+      const bytes = await window(index), from = Math.max(offset, index * WINDOW), to = Math.min(offset + length, index * WINDOW + bytes.length);
+      bytes.copy(out, from - offset, from - index * WINDOW, to - index * WINDOW);
+    }
+    return out;
+  }, release.bytes, where);
+  await decodeNetcdfLonLatField(netcdf4, simulationRecipe(entry), where);
+  const merged: { offset: number; length: number }[] = [];
+  for (const { offset, length } of [...asked].sort((a, b) => a.offset - b.offset)) {
+    const last = merged.at(-1);
+    if (last && offset <= last.offset + last.length + PART_GAP) last.length = Math.max(last.length, offset + length - last.offset);
+    else merged.push({ offset, length });
   }
-  return { ...ranges, fetched };
+  if (merged[0]?.offset !== 0) throw new TypeError(`${where}: the reader did not start at the release's first byte.`);
+  const stem = simulationPaths(entry).head.replace(/\.head\.dat$/u, '');
+  return merged.map((range, index) => ({ path: index === 0 ? simulationPaths(entry).head : `${stem}.at${range.offset}.dat`, range }));
 }
 
 /** The step that takes a ZIP release's model file whole into the package, as the package's acquisition plan declares it. */
@@ -263,11 +320,12 @@ export async function memberFormat(path: string): Promise<MemberFormat> {
   } finally { await file.close(); }
 }
 
-/** What the field reader is asked for: the entry's statements about the file, its two kept parts or its whole model file, and the tolerance WASP-103 b's table uses. */
-export function simulationRecipe(entry: SimulationEntry) {
-  const paths = simulationPaths(entry), kept = entry.member === undefined ? { path: paths.head, field: paths.field } : { path: entry.path };
+/** What the field reader is asked for: the entry's statements about the file, its kept parts (two of a classic release, or
+ * the head and `parts` of a NetCDF-4 one) or its whole model file, and the tolerance WASP-103 b's table uses. */
+export function simulationRecipe(entry: SimulationEntry, parts?: readonly string[]) {
+  const paths = simulationPaths(entry), kept = entry.member !== undefined ? { path: entry.path } : parts ? { path: paths.head, parts } : { path: paths.head, field: paths.field };
   return { format: entry.path.endsWith('.npy') ? 'npy-lonlat-field' : 'netcdf-lonlat-field', ...kept, variable: entry.variable, coordinates: entry.coordinates, select: entry.select, ...(entry.isobar ? { isobar: entry.isobar } : {}),
-    sourceUnits: entry.units, longitudeZeroAt: entry.longitudeZeroAt, coordinateToleranceDegrees: 0.005 };
+    sourceUnits: entry.units, longitudeZeroAt: entry.longitudeZeroAt, ...(entry.mirrored ? { mirrored: true } : {}), coordinateToleranceDegrees: 0.005 };
 }
 
 /** The released range rounded outward to one step of its own size: 204.6 to 295.2 K is drawn from 200 to 300. */
@@ -282,8 +340,10 @@ export interface FieldReport { readonly minimum: number; readonly maximum: numbe
 /** Add the dataset to the package in `files`. It becomes the default where the default was one color or the neutral shape; a
  * default that is a measured map stays. `member` says which format a ZIP member is. Returns the range drawn and whether the
  * default changed. */
-export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport, ranges?: SimulationRanges, member: MemberFormat = 'netcdf-4') {
-  if ((ranges === undefined) !== (entry.member !== undefined)) throw new TypeError(`${id}, dataset ${entry.dataset}: a classic release is installed with the ranges of its two kept parts, a ZIP member without.`);
+export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport, kept?: SimulationRanges | SimulationParts, member: MemberFormat = 'netcdf-4') {
+  if ((kept === undefined) !== (entry.member !== undefined)) throw new TypeError(`${id}, dataset ${entry.dataset}: a release read by range is installed with its kept parts, a ZIP member without.`);
+  // A NetCDF-4 release's parts are the head and the ranges after it; a classic release's two are the head and the field.
+  const parts = kept && 'parts' in kept ? kept.parts : undefined, ranges = kept && !('parts' in kept) ? kept : parts ? { head: parts[0]!.range, field: parts[0]!.range } : undefined;
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => requireRecord(JSON.parse(String(files.get(path))), path);
   const others = (list: unknown, where: string, key: string, value: string) => requireArray(list, where).filter(item => requireRecord(item, where)[key] !== value);
   const [minimum, maximum] = entry.range ?? roundedRange(field.minimum, field.maximum), number = (value: number) => String(Number(value.toPrecision(12)));
@@ -297,7 +357,7 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const quantity = `${entry.quantity[0]!.toLowerCase()}${entry.quantity.slice(1)}`, consumer = `${entry.dataset}-simulation`, input = `${id}-${entry.dataset}-simulation`;
 
   const raster = read(`${s}/preparation/raster.json`), lit = raster.emission === undefined;
-  const science = { kind: 'terrestrial-scientific', id: entry.dataset, label: entry.label, ...simulationRecipe(entry), consumer, sampling: 'bilinear', displaySampling: 'nearest',
+  const science = { kind: 'terrestrial-scientific', id: entry.dataset, label: entry.label, ...simulationRecipe(entry, parts?.slice(1).map(part => part.path)), consumer, sampling: 'bilinear', displaySampling: 'nearest',
     outputLongitudeOrigin: 0, units, minimum, maximum, colors: INFERNO, labels,
     description: `Simulated ${quantity} from the ${entry.model} model, a published simulation and not a measurement.${caps}${gaps}`, title: `${entry.label} · ${entry.model} simulation`, sourceUrl: entry.url };
   raster.surfaces = [...others(raster.surfaces, `${id} raster surfaces`, 'id', entry.dataset),
@@ -313,7 +373,8 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   // names is dropped, unless another dataset still reads it; a record others read under this dataset's name cannot be left.
   const manifest = read(`${s}/manifest.json`), every = requireArray(manifest.inputs, `${id} manifest inputs`).map(item => requireRecord(item, `${id} manifest input`));
   const grid = `${input}-grid`, readersOf = (item: Record<string, unknown>) => Array.isArray(item.consumers) ? item.consumers.map(String) : [];
-  const file = every.find(item => item.path === (ranges ? paths.head : entry.path)), cited = String(ranges ? input : file?.id ?? input);
+  // A NetCDF-4 release's parts are cited by its head, the record that names the file and the model.
+  const file = every.find(item => item.path === (ranges ? paths.head : entry.path)), cited = String(parts ? file?.id ?? grid : ranges ? input : file?.id ?? input);
   const written = new Set([input, String(ranges ? file?.id ?? grid : cited)]), dropped = new Set<Record<string, unknown>>(), left = new Map<Record<string, unknown>, string[]>();
   for (const item of every) {
     if (item === file || !(item.id === input || item.id === grid || readersOf(item).includes(consumer))) continue;
@@ -322,7 +383,7 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
     else if (written.has(String(item.id))) throw new TypeError(`${id}, dataset ${entry.dataset}: ${String(item.path)} is declared under this dataset's name and ${rest.join(', ')} still read${rest.length === 1 ? 's' : ''} it, so this dataset cannot move to another file; move the others first, or give this one a new dataset id (field file).`);
     else left.set(item, rest);
   }
-  const twice = ranges ? every.find(item => item.path === paths.field && item.id !== input) : undefined;
+  const twice = ranges && !parts ? every.find(item => item.path === paths.field && item.id !== input) : undefined;
   if (twice) throw new TypeError(`${id}, dataset ${entry.dataset}: ${String(twice.id)} already draws ${paths.field}; one field is one dataset (field variable).`);
   const content = read(`${s}/content/object.json`), palette = INFERNO.map(hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)));
   const control = { id: entry.dataset, label: entry.label, qualification: `Simulation · ${entry.model} · ${entry.credit} · False color`,
@@ -343,21 +404,25 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const selection = Object.entries(entry.select).map(([dimension, index]) => ` at ${dimension} index ${index}`).join('');
   const shared = { origin: release.fileUrl, productId: entry.file, version: release.doi, sourceUrl: release.recordUrl, credit: `${entry.credit}; ${entry.model} simulation`, displayCredit: `${entry.credit} · ${entry.model}`,
     license: release.license.name, licenseEvidence: [release.recordUrl, release.license.url] };
-  const kept = { redistribution: `Exact bytes of the release; ${release.license.name} with attribution.`, consumers: [consumer] };
+  const keptBytes = { redistribution: `Exact bytes of the release; ${release.license.name} with attribution.`, consumers: [consumer] };
   const title = `${entry.quantity} (${entry.variable}) of ${name} in the ${entry.model} simulation: ${release.title}`;
   const declared = every.filter(item => item !== file && !dropped.has(item)).map(item => left.has(item) ? { ...item, consumers: left.get(item) } : item);
   const readers = [...new Set([...(file ? readersOf(file) : []), consumer])];
   manifest.inputs = [...declared,
-    ...(ranges ? [{ id: input, path: paths.field, range: ranges.field, ...shared, title,
-      acquisition: `One range request to Zenodo record ${release.doi}: the bytes of ${entry.variable}${selection} in ${entry.file}, where the file's header puts them. The ${sizeText(release.bytes)} file is never fetched whole. A model output, not an observation.`, ...kept },
+    ...(parts ? [...parts.slice(1).map((part, index) => ({ id: `${input}-part-${index + 1}`, path: part.path, range: part.range, ...shared, title: `Bytes ${part.range.offset.toLocaleString('en-US')} to ${(part.range.offset + part.range.length - 1).toLocaleString('en-US')} of ${entry.file}, read to take ${entry.variable}${selection}`,
+      acquisition: `One range request to Zenodo record ${release.doi}: ${part.range.length.toLocaleString('en-US')} bytes of ${entry.file} the field reader reads to take ${entry.variable}${selection}, its structure or its values. The ${sizeText(release.bytes)} file is never fetched whole. A model output, not an observation.`, ...keptBytes })),
+    { id: file?.id ?? grid, path: paths.head, range: parts[0]!.range, ...shared, title: `First ${parts[0]!.range.length.toLocaleString('en-US')} bytes of ${entry.file}, the ${entry.model} simulation of ${name}: its superblock, structure and coordinate variables`,
+      acquisition: `One range request to Zenodo record ${release.doi}: the first ${parts[0]!.range.length.toLocaleString('en-US')} bytes of ${entry.file}, the NetCDF-4 structure the reader starts from.`, ...keptBytes, consumers: readers }]
+    : ranges ? [{ id: input, path: paths.field, range: ranges.field, ...shared, title,
+      acquisition: `One range request to Zenodo record ${release.doi}: the bytes of ${entry.variable}${selection} in ${entry.file}, where the file's header puts them. The ${sizeText(release.bytes)} file is never fetched whole. A model output, not an observation.`, ...keptBytes },
     { id: file?.id ?? grid, path: paths.head, range: ranges.head, ...shared, title: `Header and coordinate variables of ${entry.file}, the ${entry.model} simulation of ${name}`,
-      acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...kept, consumers: readers }]
+      acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...keptBytes, consumers: readers }]
     // A model file out of a ZIP release: one input, the whole member, which git does not hold. Read by several datasets, it is titled as the file.
     : [{ id: cited, path: entry.path, ...shared, productId: entry.member, title: readers.length > 1 ? `${entry.model} simulation of ${name}, ${entry.member}: ${release.title}` : title,
       acquisition: `Restored through source/preparation/acquisition.json from Zenodo record ${release.doi}: the member ${entry.member} of ${entry.file} (${sizeText(release.bytes)}), unchanged and whole, because ${member === 'netcdf-4' ? 'a NetCDF-4 file spreads its structure through itself' : 'a member is taken out of a ZIP archive whole'}. A model output, not an observation.`,
       redistribution: `Not redistributed in git; restored from Zenodo. ${release.license.name} with attribution.`, consumers: readers }])];
   files.set(`${s}/manifest.json`, json(manifest));
-  const plan = read(`${s}/preparation/acquisition.json`), targets = ranges ? [paths.field, paths.head] : [entry.path], gone = new Set([...targets, ...[...dropped].map(item => String(item.path))]);
+  const plan = read(`${s}/preparation/acquisition.json`), targets = parts ? parts.map(part => part.path) : ranges ? [paths.field, paths.head] : [entry.path], gone = new Set([...targets, ...[...dropped].map(item => String(item.path))]);
   plan.operations = [...requireArray(plan.operations, `${id} acquisition operations`).filter(item => !gone.has(String(requireRecord(item, `${id} acquisition operation`).path))),
     ...(ranges ? targets.map(target => ({ kind: 'download', groups: ['restore', 'refresh'], path: target, url: release.fileUrl })) : [memberStep(entry, release)])];
   files.set(`${s}/preparation/acquisition.json`, json(plan));

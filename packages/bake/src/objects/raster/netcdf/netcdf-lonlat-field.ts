@@ -14,6 +14,10 @@
  * - `sourceUnits` is the variable's `units` attribute, letter for letter.
  * - `longitudeZeroAt` is the grid longitude, in degrees east, that the body's zero meridian falls on. For a planet that keeps
  *   one face to its star this is the longitude where the model put the star overhead, as its paper states it.
+ * - `mirrored`, when true, says the grid's longitudes run the other way round the body: a model of a planet that turns
+ *   backwards written in the convention of geophysical fluid dynamics, with rotation, winds and the Sun's motion all
+ *   reversed (ALERA-V's AFES-Venus, whose observation step reverses Akatsuki's longitudes and the sign of their zonal
+ *   wind). The body longitude east is then `longitudeZeroAt` minus the grid longitude.
  * - `isobar`, when given, reads the field at one pressure instead of on one level (netcdf-isobar.ts). Its level dimension
  *   is then not in `select`.
  *
@@ -25,7 +29,13 @@
  * grid. The header says where that selection lies in the release, and the manifest must declare that very range for `field`.
  * This needs the longitude and latitude to be the variable's last two dimensions, so the selection is one run of bytes.
  *
- * A NetCDF-4 file keeps its structure throughout itself, not in a header, so it is kept whole.
+ * A NetCDF-4 file keeps its structure throughout itself, not in a header, so it is kept whole, or as every byte range the
+ * reader reads of it to take the selection, exact bytes all, which the manifest declares:
+ *
+ *   { ..., "path": "science/<paper>/<file>.head.dat", "parts": ["science/<paper>/<file>.at<offset>.dat", ...] }
+ *
+ * `path` then holds the release's first bytes and each part the bytes from its offset; a read that no kept range holds is
+ * refused, so the selection can only come from the bytes the release has there.
  *
  * The grid must go all the way around in even longitude steps. A grid that ends on its first longitude again, 360 degrees
  * on, must hold the same values in both columns; the column is read once. Latitude coverage ends at the released rows: nothing is
@@ -38,7 +48,7 @@ import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { periodicLonLatGrid } from '../lonlat/lonlat-grid.ts';
 import { openClassicNetcdf, storedValues, valueRange, type NetcdfAttribute, type NetcdfVariable } from './classic-netcdf.ts';
-import { openHdf5Netcdf } from './hdf5-netcdf.ts';
+import { openHdf5Netcdf, readHdf5Netcdf } from './hdf5-netcdf.ts';
 import { isobarValue, parseIsobar } from './netcdf-isobar.ts';
 
 /** What the field reader needs of an opened file; a test passes its own. */
@@ -54,6 +64,8 @@ export async function decodeNetcdfLonLatField(source: NetcdfSource, value: unkno
   const name = requireString(dataset.variable, at('variable')), coordinates = requireRecord(dataset.coordinates, at('coordinates'));
   const select = dataset.select === undefined ? {} : requireRecord(dataset.select, at('select'));
   const sourceUnits = requireString(dataset.sourceUnits, at('sourceUnits')), zeroAt = requireFiniteNumber(dataset.longitudeZeroAt, at('longitudeZeroAt'));
+  if (dataset.mirrored !== undefined && typeof dataset.mirrored !== 'boolean') throw new TypeError(`${at('mirrored')} is true or false.`);
+  const mirrored = dataset.mirrored === true;
   const tolerance = requireFiniteNumber(dataset.coordinateToleranceDegrees, at('coordinateToleranceDegrees'));
   if (!(tolerance >= 0 && tolerance <= 0.01)) throw new RangeError(`${at('coordinateToleranceDegrees')} must be between 0 and 0.01 degrees.`);
   const variable = source.variables.get(name);
@@ -137,10 +149,10 @@ export async function decodeNetcdfLonLatField(source: NetcdfSource, value: unkno
   if (missing === grid.length) throw new TypeError(`${label}: every cell of ${name} is a missing value.`);
   const sampler = periodicLonLatGrid(longitude.nodes, latitudes, grid, tolerance);
   return {
-    sample: (bodyLongitude: number, bodyLatitude: number) => sampler.sample(bodyLongitude + zeroAt, bodyLatitude),
+    sample: (bodyLongitude: number, bodyLatitude: number) => sampler.sample(mirrored ? zeroAt - bodyLongitude : bodyLongitude + zeroAt, bodyLatitude),
     report: { format: 'netcdf-lonlat-field', variable: name, dimensions: variable.dimensions, select: Object.fromEntries(variable.dimensions.flatMap((dimension, position) =>
         position === longitude.position || position === latitude.position || position === along ? [] : [[dimension, fixed[position]!]])),
-      ...(isobar ? { isobar: { ...isobar, levels: variable.shape[along]! } } : {}), units: sourceUnits, longitudeZeroAt: zeroAt,
+      ...(isobar ? { isobar: { ...isobar, levels: variable.shape[along]! } } : {}), units: sourceUnits, longitudeZeroAt: zeroAt, ...(mirrored ? { mirrored } : {}),
       width, height, longitudeRange: [longitude.nodes[0], longitude.nodes.at(-1)], latitudeRange: [latitudes[0], latitudes.at(-1)], minimum, maximum, missing,
       polarCoverage: 'No extrapolation beyond the released latitude samples.' },
   };
@@ -174,10 +186,28 @@ async function isHdf5(path: string): Promise<boolean> {
 export async function loadNetcdfLonLatField(root: string, value: unknown, declared?: ReadonlyMap<string, ByteRange>) {
   const recipe = requireRecord(value), path = inside(requireString(recipe.path, 'path'));
   const kept = recipe.field === undefined ? undefined : inside(requireString(recipe.field, 'field'));
+  const parts = recipe.parts === undefined ? undefined : requireArray(recipe.parts, 'parts').map((part, i) => inside(requireString(part, `parts[${i}]`)));
   if (await isHdf5(resolve(root, path))) {
-    if (kept !== undefined) throw new TypeError(`${path} is NetCDF-4, which is kept whole: its structure is spread through the file, so no header and field stand apart.`);
-    const netcdf4 = await openHdf5Netcdf(resolve(root, path));
-    try { return await decodeNetcdfLonLatField(netcdf4, value, path); } finally { await netcdf4.close(); }
+    if (kept !== undefined) throw new TypeError(`${path} is NetCDF-4, which is kept whole or as the byte ranges its parts name: its structure is spread through the file, so no header and field stand apart.`);
+    if (parts === undefined) {
+      const netcdf4 = await openHdf5Netcdf(resolve(root, path));
+      try { return await decodeNetcdfLonLatField(netcdf4, value, path); } finally { await netcdf4.close(); }
+    }
+    const ranges = declared ?? await manifestRanges(root), held: { readonly range: ByteRange; readonly bytes: Buffer }[] = [];
+    for (const part of [path, ...parts]) {
+      const range = ranges.get(part), bytes = await readFile(resolve(root, part));
+      if (!range) throw new TypeError(`${part}: the manifest declares no byte range of the release for it.`);
+      if (bytes.length !== range.length) throw new TypeError(`${part} has ${bytes.length} bytes, and the manifest declares ${range.length}.`);
+      held.push({ range, bytes });
+    }
+    if (held[0]!.range.offset !== 0) throw new TypeError(`${path}: the manifest must declare it as the release's first bytes, a range from offset 0.`);
+    // Every read is answered from the one kept range that holds it whole; the release's length bounds nothing the ranges do not.
+    const netcdf4 = await readHdf5Netcdf(async (offset, length) => {
+      const part = held.find(({ range }) => offset >= range.offset && offset + length <= range.offset + range.length);
+      if (!part) throw new TypeError(`${path}: the reader needs ${length} bytes from byte ${offset} of the release, which no kept part holds.`);
+      return part.bytes.subarray(offset - part.range.offset, offset - part.range.offset + length);
+    }, Number.MAX_SAFE_INTEGER, path);
+    return decodeNetcdfLonLatField(netcdf4, value, path);
   }
   const file = await openClassicNetcdf(resolve(root, path));
   try {
