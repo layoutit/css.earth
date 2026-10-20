@@ -17,7 +17,7 @@ const FOOTER_CLEARANCE_PX = 30;
 
 /** `pictured`: a picture attached to the body (a star's disc, shell or corona) is drawn behind its name, which is then
  * written as a name over a nebula's picture is (world-context.css). */
-export interface SelectedLabelFlags { overview: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge; pictured?: boolean }
+export interface SelectedLabelFlags { overview: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge; pictured?: boolean; hidden?: boolean }
 interface SelectedLabelPlacement { left: number; top: number; rect: LabelScreenRect }
 
 /** What a caption is placed from: a body's centre and radius, and where its package asks for the caption. */
@@ -26,8 +26,8 @@ export type CaptionedBody = Pick<PreparedContextPoint, 'positionM' | 'radiusM'> 
 /** Where the caption of `body` sits for this camera, or null when it is hidden: below the body's disc or point, clear of the
  * header and footer, or over the body's middle when its package asks. */
 export function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraViewport, body: CaptionedBody,
-  { overview, preview, edge }: SelectedLabelFlags, width: number, height: number): SelectedLabelPlacement | null {
-  if (overview || preview !== undefined && preview !== body.id) return null;
+  { overview, preview, edge, hidden }: SelectedLabelFlags, width: number, height: number): SelectedLabelPlacement | null {
+  if (hidden || overview || preview !== undefined && preview !== body.id) return null;
   const widthPixels = viewport.widthPixels, heightPixels = viewport.heightPixels;
   // The caption stays below the shell header where the viewport measures one, else below a fixed clearance.
   const headerClearance = viewport.coveredTopPixels ?? HEADER_CLEARANCE_PX;
@@ -104,7 +104,7 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, body: PreparedContextPoint, flags: SelectedLabelFlags): LabelScreenRect | null {
       const hide = () => { fader.set(label, 0); return null; };
-      if (flags.overview || flags.preview !== undefined && flags.preview !== body.id) return hide();
+      if (flags.hidden || flags.overview || flags.preview !== undefined && flags.preview !== body.id) return hide();
       measure(body);
       if (measuredId !== body.id) return hide();
       const placement = placeSelectedBodyLabel(world, viewport, body, flags, width, height);

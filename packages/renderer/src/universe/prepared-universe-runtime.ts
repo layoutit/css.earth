@@ -1,3 +1,4 @@
+import { ALL_WORLD_LAYERS_SHOWN, worldLayerHidden, type WorldLayer, type WorldLayerVisibility } from './world-layers.js';
 import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT_VISIBILITY, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, type PreparedCssSurfaceShell, type DensityVolumeFrame } from '@cssearth/objects';
 import { type WorldCameraPose, createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 
@@ -52,6 +53,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
   const planners = new Set<ReturnType<typeof createWorldContextPlannerClient>>();
   const layers = new Set<ReturnType<typeof mountPreparedWorldContext>>();
+  const bodiesAdded = new Set<() => void>();
   const spriteTable: Record<string, SpriteWithUrl> = { ...sprites };
   // Every body's annotation tier and strength, the first plan's and each added system's: a planner or layer made after
   // a system was added starts with that system's too.
@@ -141,6 +143,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       plan = validated; Object.assign(spriteTable, nextSprites);
       Object.assign(annotationPriorities, annotations.annotationPriorities); Object.assign(annotationOpacities, annotations.annotationOpacities);
       for (const layer of layers) layer.addBodies(plan, nextSprites, annotations);
+      for (const listener of bodiesAdded) listener();
       for (const planner of planners) planner.extend(plan, annotations.annotationPriorities);
     },
     /** Declare banks after the universe is made, as `addSystems` adds bodies: a bank drawn only for the bodies that hold
@@ -174,6 +177,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       };
       try {
         const opacityClock = opacityClockFor(document.defaultView!);
+        let shownLayers: WorldLayerVisibility = ALL_WORLD_LAYERS_SHOWN, layerOf: (id: string) => WorldLayer | null = () => null;
+        const subjectHidden = (id: string, layer: WorldLayer | null) => worldLayerHidden(shownLayers, id, [selected.id, expected ?? companion], layer);
+        const bankHidden = (id: string) => subjectHidden(id, layerOf(id));
         const root = document.createElement('div');
         lifetime.onDispose(() => root.remove());
         root.className = 'prepared-universe';
@@ -215,7 +221,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         };
         const datasets = createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: [...declaredVolumes], facts: [...datasetFacts], frame: plan.frame, visibility: datasetVisibility,
-          billboards: datasetBillboards, load: loadVolumeDataset, loadBacking, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardImage });
+          billboards: datasetBillboards, load: loadVolumeDataset, loadBacking, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardImage, hidden: bankHidden });
         // A cut-open mesh draws the inside of its far wall here, behind the points it holds; its outer shell stays over them.
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
         // The galaxies' billboards and image slices mount here, and every dot of the world paints in one layer just after
@@ -233,14 +239,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // The places of the stars a body marker draws: a bank of plain-dot stars leaves its dot out there.
         let starPlaces: readonly (readonly number[])[] = [], starPlacesFor: unknown = null, starPlacesSelected: unknown = null;
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
-        const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
+        const meshes = imageMeshes.map(mesh => ({ id: mesh.id, cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,
             fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true,
             hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, imagesBefore: galaxyImages, picturesBefore: pictures,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: [...declaredVolumes],
           pointBanks: [...declaredPoints], planeBanks: [...declaredPlanes],
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, loadBacking, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardImage });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, loadBacking, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardImage, hidden: bankHidden });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         // A selected satellite system frames like an overview and keeps its host as the selection.
@@ -297,9 +303,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         lifetime.onDispose(() => { layers.delete(spatial); });
         // The selected body's own label is the close-up's and a selected system's host's; overviews label every body.
         const publishSuppressedLabels = () => spatial.setBodyVisibility({
-          labelSuppressed: [...(!overview || systemSelection ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],
+          labelSuppressed: !shownLayers.labels ? [plan.focus.id, ...plan.bodies.map(body => body.id)]
+            : [...(!overview || systemSelection ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],
         });
         publishSuppressedLabels();
+        bodiesAdded.add(publishSuppressedLabels);
+        lifetime.onDispose(() => { bodiesAdded.delete(publishSuppressedLabels); });
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
         const environmentLabels = own(mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, names: environmentNames, pickingHost: stage, opacityClock,
           ...(stellarExtents[payload.id] === undefined ? {} : { extentRadiusM: stellarExtents[payload.id] }) }));
@@ -346,9 +355,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (!bank) throw new TypeError(`Unknown prepared bank: ${id}.`);
             bank.selectDataset(dataset);
           },
+          setLayerVisibility(next: WorldLayerVisibility, classify: (id: string) => WorldLayer | null) {
+            if (lifetime.disposed) return;
+            const labelsChanged = shownLayers.labels !== next.labels;
+            shownLayers = next; layerOf = classify;
+            if (labelsChanged) publishSuppressedLabels();
+            requestPublication?.();
+          },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             // The context's labels keep clear of the selected body's caption, placed for the same camera.
-            const rect = selectedLabel.rect(world, viewport, caption(), captionFlags());
+            const rect = selectedLabel.rect(world, viewport, caption(), { ...captionFlags(), hidden: !shownLayers.labels });
             return spatial.captureFrame(world, viewport, rect ? [rect] : []);
           },
           previewSelection(id?: string | null, framingScale?: number, edge?: PreparedLabelEdge) {
@@ -428,7 +444,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               const outsideGalaxy = galaxyOutsideFade(
                 eyeDistanceM(world.pose, selected.positionM), plan.volume.discHalfHeightM);
-              additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
+              additionalPoints.publish({world, viewport}, distanceM, shownLayers.galaxies ? outsideGalaxy : 0);
               // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
               spatial.setOutsideGalaxy(outsideGalaxy > .5);
               // A star's disc dims nothing itself, but around a star with nothing in orbit the other stars, markers and dots
@@ -437,18 +453,18 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               spatial.setSelectionReach(reachM);
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
-              const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);
+              const meshCaptioned = shownLayers.labels && detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);
               // The cutaway and hiding are the mesh's page's dataset: a one-off change when it is chosen, a no-op on every other frame.
               for (const mesh of meshes) mesh.runtime.setCutaway(mesh.cutaway());
               for (const mesh of meshes) mesh.runtime.setHidden(mesh.hidden());
-              const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
+              const meshCover = Math.max(0, ...meshes.map(mesh => mesh.runtime.publish({ world, viewport }, subjectHidden(mesh.id, 'sky') ? 0 : logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               // The stars the world draws as bodies (the selected one, and each plain-dot star it holds): no dot bank draws them too.
               const drawnPlaces = spatial.plainStarPlaces();
               if (drawnPlaces !== starPlacesFor || selected.positionM !== starPlacesSelected) {
                 starPlacesFor = drawnPlaces; starPlacesSelected = selected.positionM; starPlaces = [selected.positionM, ...drawnPlaces];
               }
-              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity, starPlaces, reachM);
+              const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity, starPlaces, reachM, shownLayers);
               // A body inside a galaxy other than the page's own stands among that galaxy's catalogue dots once the camera has left
               // the body's own system, over the band the stellar neighbourhood takes around the Sun. A body inside an object whose
               // picture lies on walls (a nebula's central star) stands inside those walls (`selectionHolders`).
@@ -476,22 +492,22 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
                 shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
               }
               spatial.publish(world, viewport, frame);
-              const selectedRect = selectedLabel.publish(world, viewport, caption(), captionFlags());
+              const selectedRect = selectedLabel.publish(world, viewport, caption(), { ...captionFlags(), hidden: !shownLayers.labels });
               const foregroundRects = [...spatial.backgroundExclusionRects(), ...labelBlockers, ...(selectedRect ? [selectedRect] : []),
                 ...coveredTopRects(viewport)];
               labelBudget = createLabelBudget(viewport.widthPixels!, viewport.heightPixels!,
                 spatial.bodyLabelRects(), foregroundRects);
               const localAnnotations = 1 - logarithmicFade(distanceM, 12e6 * 3.085677581491367e16, 40e6 * 3.085677581491367e16);
               const environmentRects = environmentLabels.publish({ world, viewport, volumeLabelOpacity: localAnnotations,
-                shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget });
+                shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects, labelBudget, hidden: !shownLayers.labels });
               const catalogPresentation = catalogBanks.presentation;
               if (catalogPresentation) {
-                const dotOpacity = (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
+                const dotOpacity = (shownLayers.galaxies ? 1 : 0) * (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
                 if (!catalogBanks.catalog && dotOpacity > 0) void catalogBanks.ensureCatalog().catch(() => {});
                 catalogBanks.catalog?.publish(world, viewport, dotOpacity);
               }
               const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
-              focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
+              focusPoint?.publish(world, viewport, { opacity: (shownLayers.stars ? 1 - fade : 0) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
                 ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
             });
           },

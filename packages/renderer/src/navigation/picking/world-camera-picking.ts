@@ -12,6 +12,8 @@ type PickingGesture = { selected: SelectedClick | null; second: SecondPress | nu
 const gestures = new WeakMap<HTMLElement, PickingGesture>();
 const DOUBLE_CLICK_MILLISECONDS = 500;
 const CLICK_SLOP_PIXELS = 5;
+/** Whether a press released this far from where it began is a click on the scene, not a drag; an embedding host asks the same. */
+export const isSceneClick = (dx: number, dy: number): boolean => Math.hypot(dx, dy) <= CLICK_SLOP_PIXELS;
 /** A fingertip covers its target: a tap that lands on nothing takes the nearest label or marker within this reach.
  * 9 px around a marker's 13 px pick circle makes the 44 px target a name already has (WCAG 2.5.5, Apple HIG). */
 const TOUCH_REACH_PIXELS = 9;
@@ -86,7 +88,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     const selected = gesture.selected;
     return selected !== null && event.timeStamp >= selected.timestamp &&
       event.timeStamp - selected.timestamp <= DOUBLE_CLICK_MILLISECONDS &&
-      Math.hypot(event.clientX - selected.x, event.clientY - selected.y) <= CLICK_SLOP_PIXELS;
+      isSceneClick(event.clientX - selected.x, event.clientY - selected.y);
   };
   const consume = (event: Event) => { event.preventDefault(); event.stopImmediatePropagation(); };
   const down = (event: PointerEvent) => {
@@ -109,7 +111,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     } else clearHover();
     const second = gesture.second;
     if (second?.pointerId === event.pointerId) {
-      if (Math.hypot(event.clientX - second.x, event.clientY - second.y) <= CLICK_SLOP_PIXELS) {
+      if (isSceneClick(event.clientX - second.x, event.clientY - second.y)) {
         consume(event); return;
       }
       // A real drag following a selection remains an interruption. Replay
@@ -120,7 +122,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
         pointerId: second.pointerId, pointerType: second.pointerType, isPrimary: true,
         button: 0, buttons: 1, clientX: second.x, clientY: second.y }));
     }
-    if (pointer?.id === event.pointerId && Math.hypot(event.clientX - pointer.x, event.clientY - pointer.y) > CLICK_SLOP_PIXELS) pointer.dragged = true;
+    if (pointer?.id === event.pointerId && !isSceneClick(event.clientX - pointer.x, event.clientY - pointer.y)) pointer.dragged = true;
   };
   const up = (event: PointerEvent) => {
     if (gesture.second?.pointerId !== event.pointerId) return;

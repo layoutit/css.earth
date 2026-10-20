@@ -22,6 +22,8 @@ export interface EnvironmentLabelPublication {
   readonly shellStats: readonly PreparedSurfaceShellStats[];
   readonly volumeLabelOpacity?: number;
   readonly blockerRects?: readonly LabelScreenRect[];
+  /** The world's labels are turned off (world-layers.ts): every caption fades out and takes no clicks. */
+  readonly hidden?: boolean;
 }
 
 export interface EnvironmentLabelsRuntime {
@@ -81,7 +83,7 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
           !publication.viewport.principalOffsetPixels.every(Number.isFinite)) throw new TypeError('Environment label viewport is invalid.');
       const width = publication.viewport.widthPixels ?? host.clientWidth;
       const height = publication.viewport.heightPixels ?? host.clientHeight;
-      if (!(width > 0) || !(height > 0)) { accepted = hideAll(entries, fader); return accepted; }
+      if (publication.hidden || !(width > 0) || !(height > 0)) { accepted = hideAll(entries, fader); return accepted; }
       if (publication.shellStats.length !== shellList.length) throw new TypeError('Environment label shell statistics must align with prepared shells.');
       const blockers = publication.blockerRects ?? [], next: LabelScreenRect[] = [];
       for (let index = 0; index < shellList.length; index++) {

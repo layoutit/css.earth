@@ -52,6 +52,7 @@
       "import": "./dist/platform/*.js",
       "default": "./dist/platform/*.js"
     },
+    "./embed/*": "./src/embed/*",
     "./image-layers/*": "./src/image-layers/*",
     "./labels/*": "./src/labels/*",
     "./navigation/*": "./src/navigation/*",
