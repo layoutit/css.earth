@@ -471,5 +471,15 @@
       "object": "smc",
       "dataset": "smc-horalek-wide"
     }
+  },
+  {
+    "id": "milky-way",
+    "name": "Milky Way",
+    "menuLabel": "Milky Way",
+    "directory": "src/objects/milky-way",
+    "imagePath": "src/objects/milky-way/source/presentation/context.png",
+    "app": {
+      "object": "milky-way"
+    }
   }
 ]
