@@ -5,6 +5,7 @@ import { parseHTML } from 'linkedom';
 import { cameraPoseToReferenceFrame, createSceneLifetime } from '@cssearth/engine';
 import { parseDensityVolumeObjectDescriptor, parsePreparedDensityVolumeText, parsePreparedWorldContextSummary } from '@cssearth/objects';
 import { createUniverseBackground } from './universe-background.js';
+import { worldLayerVisibility } from './world-layers.js';
 
 test('the galaxy background mounts all three accepted slab stacks, with one host backdrop, and retires inside', async () => {
   const object = new URL('../../../../src/objects/milky-way-volume/', import.meta.url);
@@ -80,6 +81,14 @@ test('an inside station preserves the owner near-object NASA fade and applies fa
     assert.equal(stationHost.style.opacity, '1'); assert.equal(station.style.opacity, '1', 'the far image gain must not dim the inside scene a second time');
     assert.equal(Number(farImage.style.opacity), .12, 'the prepared far display gain is applied once on its own image');
     assert.equal(farImage.parentNode, null, 'the complete far scene is detached at the station centre');
+    // The inside skies stand in for the NASA band, so the Sky switch takes them with it; Galaxies takes the far scene.
+    background.publish(nearWorld, viewport, ownerDistance, plan.focus.positionM, 1, null, 0, worldLayerVisibility(['sky']));
+    assert.equal(stationHost.parentNode, null, 'Sky off leaves no inside sky mounted');
+    background.publish(nearWorld, viewport, ownerDistance, plan.focus.positionM, 1, null, 0, worldLayerVisibility(['galaxies']));
+    assert.equal(host.style.display, 'none', 'Galaxies off hides the far scene');
+    assert.equal(stationHost.parentNode, host, 'Galaxies off keeps the inside sky');
+    background.publish(nearWorld, viewport, ownerDistance, plan.focus.positionM, 1);
+    assert.equal(host.style.display, ''); assert.equal(stationHost.parentNode, host);
     background.publish(nearWorld, viewport, ownerDistance, plan.focus.positionM, .25);
     assert.ok(Math.abs(Number(host.style.opacity) - expectedOutside * .25) < 1e-12);
     assert.ok(Math.abs(Number(nasa.style.opacity) * (1 - Number(host.style.opacity)) - (1 - expectedOutside)) < 1e-12,
