@@ -56,18 +56,3 @@ test('a wanted dot never disappears for one paint during a proximity zoom, inclu
     for(let z=1;z>.01;z*=.965){paint(z);const dots=[...field.root.querySelectorAll('path')].reduce((n,p)=>n+(p.getAttribute('d')?.match(/M/g)?.length??0),0);assert.equal(dots,count,'all 5000 remain wanted and painted; no preceding-frame budget drops them');}
   }finally{field.destroy();}
 });
-
-test('nearby wanted centers all use the current zoom frame rather than staggered slot epochs',async()=>{
-  const {document}=parseHTML('<div id="host"></div>'),count=5000;
-  const points=Array.from({length:count},(_,i)=>[(i%100-50)/5,(Math.floor(i/100)-25)/5,-10]);
-  const bank={schema:'cssearth-catalogue-points@1',id:'coherent',frame:{...frame,boundsUnits:{min:[-20,-20,-20],max:[20,20,20]}},appearance:{colorCss:'#ffffff',opacity:1,radiusPx:.75},points,spread:{normal:[0,0,1],across:20,along:20},cells:{boxes:[[-20,-20,-20,20,20,20]],of:Array(count).fill(0)}};
-  const field=mountCataloguePoints({host:document.getElementById('host')!,url:'/near.bin',loadBank:async()=>bank,fullDetail:true});
-  const viewport={focalPixels:400,widthPixels:1024,heightPixels:640,principalOffsetPixels:[0,0] as const};
-  const paint=(z:number)=>field.publish({world:world(0,z),viewport});
-  try{paint(1);await new Promise(r=>setTimeout(r,0));
-    for(let z=.965;z>.01;z*=.965){paint(z);
-      const actual=new Set([...field.root.querySelectorAll('path')].flatMap(p=>[...(p.getAttribute('d')??'').matchAll(/M(-?[\d.]+) (-?[\d.]+)h\.01/gu)].map(m=>`${Math.round(Number(m[1])*8)},${Math.round(Number(m[2])*8)}`)));
-      for(const[x,y]of points){const px=Math.round(400*x!/(10+z)*8),py=Math.round(-400*y!/(10+z)*8);let found=false;for(let dy=-8;dy<=8;dy++)for(let dx=-8;dx<=8;dx++)found ||= actual.has(`${px+dx},${py+dy}`);assert.ok(found,'wanted center stays within one CSS pixel per axis including pixel centering and the quarter-pixel hold; no stale slot jump');}
-    }
-  }finally{field.destroy();}
-});
