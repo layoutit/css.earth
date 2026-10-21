@@ -266,7 +266,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       highlighted: false,
       baseAlpha,
       hovered: false, groupHovered: false,
-      labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
+      labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, markerDrawn: undefined as boolean | undefined, previousCount: 0 };
   };
   const bodies = [plan.focus, ...plan.bodies].map(createEntry);
   // Each body's presentation lives in its row of these columns (bindWorldBodyColumns): a frame sends a copy of them.
@@ -749,6 +749,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         entry.paint.publish({ projected, billboardShown, plannedShown, markerShown, markerDiameter, flatDot, zIndex: markerZIndex,
           selected: selection === 'true', hovered: entry.hovered, animated: animatedAnnotations.has(entry), coast,
           policyChanged }, fader);
+        if (entry.markerDrawn !== billboardShown) entry.markerDrawn = billboardShown;
         entry.interaction.updateMarker(projected, rank, entry, navigationSuppressed);
         const indicatorVisible = entry.indicatorShown;
         entry.paint.publishIndicator(indicatorVisible, navigationInFlight && body.id === emphasizedId, coast, landing);

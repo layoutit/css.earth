@@ -7,7 +7,7 @@ export type PackedWorldContextView = Omit<WorldContextView, 'bodies'> & { readon
 /** Per-body presentation crosses the worker boundary as one transferred column
  * block instead of hundreds of structured-cloned objects every frame. Optional
  * flags keep their absence (NaN), so the worker rebuilds the exact objects. */
-const FIELDS = 15;
+const FIELDS = 16;
 /** Columns per body: a block's length over this is its body count. */
 export const WORLD_BODY_FIELDS = FIELDS;
 const flag = (value: boolean | undefined) => value === undefined ? Number.NaN : value ? 1 : 0;
@@ -22,7 +22,7 @@ export function packWorldBodies(bodies: readonly WorldBodyPresentation[]): Float
     values[offset + 6] = body.labelSize.width; values[offset + 7] = body.labelSize.height; values[offset + 8] = flag(body.labelShown);
     values[offset + 9] = body.labelPlacement; values[offset + 10] = flag(body.indicatorShown); values[offset + 11] = body.indicatorRadius;
     values[offset + 12] = body.orbitAppearance.width; values[offset + 13] = body.orbitAppearance.opacity;
-    values[offset + 14] = flag(body.highlighted);
+    values[offset + 14] = flag(body.highlighted); values[offset + 15] = flag(body.markerDrawn);
   }
   return values;
 }
@@ -47,7 +47,7 @@ export function bindWorldBodyColumns<T extends WorldBodyPresentation>(entry: T, 
   bind('labelSize', value => { const size = value as WorldBodyPresentation['labelSize']; columns[offset + 6] = size.width; columns[offset + 7] = size.height; });
   bind('labelShown', flagAt(8)); bind('labelPlacement', numberAt(9)); bind('indicatorShown', flagAt(10)); bind('indicatorRadius', numberAt(11));
   bind('orbitAppearance', value => { const line = value as WorldBodyPresentation['orbitAppearance']; columns[offset + 12] = line.width; columns[offset + 13] = line.opacity; });
-  bind('highlighted', flagAt(14));
+  bind('highlighted', flagAt(14)); bind('markerDrawn', flagAt(15));
   return entry;
 }
 
@@ -68,6 +68,8 @@ export function unpackWorldBodies(values: Float64Array): WorldBodyPresentation[]
     if (indicatorHidden !== undefined) body.indicatorHidden = indicatorHidden;
     const highlighted = optional(values[offset + 14]!);
     if (highlighted !== undefined) body.highlighted = highlighted;
+    const markerDrawn = optional(values[offset + 15]!);
+    if (markerDrawn !== undefined) body.markerDrawn = markerDrawn;
     bodies.push(body);
   }
   return bodies;
