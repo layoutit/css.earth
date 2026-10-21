@@ -1,6 +1,6 @@
 # Milky Way: fitted starlight, dust and catalogue stars
 
-The outside view is the accepted **b30-native-scatterFaceSide** fitted model, drawn as local slabs on three axes: 52 across each in-plane axis (X, Y) and 26 across the thin axis (Z). It is a model, not a photograph of our galaxy from outside. Inside, prepared skies follow the Sun and Sagittarius A* approaches; NASA's measured Milky Way map supplies the Solar System sky. Catalogue dots appear only inside the prepared stellar disc. Navigation labels remain available outside it.
+The outside view is the accepted **b30-native-scatterFaceSide** fitted model, drawn as local slabs on three axes: 52 across each in-plane axis (X, Y) and 26 across the thin axis (Z). It is a model, not a photograph of our galaxy from outside. Inside, one prepared sky 20,000 light-years out on the Sun's approach takes over from the far slabs; NASA's measured Milky Way map supplies the Solar System sky. Catalogue dots appear only inside the prepared stellar disc. Navigation labels remain available outside it.
 
 ## Sources
 
@@ -21,7 +21,7 @@ The [manifest](source/manifest.json) binds the preserved inputs and published re
 
 ## Evidence
 
-- Full production replay: **130/130 slab PNGs** (52/52/26) match the accepted bank byte for byte; **84/84 sky faces** match the accepted path skies. The 26 Z slabs are byte-identical to the earlier 26/26/26 bank: only the X/Y counts changed. Every slab has at least **three zero-alpha border cells** on every side.
+- Full production replay: **130/130 slab PNGs** (52/52/26) match the accepted bank byte for byte; **6/6 sky faces** match the accepted path sky. The 26 Z slabs are byte-identical to the earlier 26/26/26 bank: only the X/Y counts changed. Every slab has at least **three zero-alpha border cells** on every side.
 - Far images: **3,418,890 compressed bytes (3.4 MB to download); 52,027,304 decoded RGBA bytes (52 MB)**, against 2,391,776 and 37,316,344 for the 26/26/26 bank. Three optical copies share each image. The retained far scene has **403 elements**, below 500; texture allocation and compositor copies are additional costs.
 - Banding: at the owner's low-angle stripe view, X alone, the stripe amplitude fell from **5.8% to 3.3% of brightness** with the doubled X/Y sets. It is visibly smoother and the arms show; the stripes are not gone.
 - Side reach: X/Y pitch **0.615 kpc** against a measured light thickness of **1.33 kpc** lets a side set carry views up to **θmax 65°** from edge-on (50° at 26 slabs).
@@ -43,8 +43,8 @@ The low-angle capture also shows the known near-sheet occlusion; the side camera
 - **Some far-only camera views black out.** Smooth coefficients and exposure do not prove smooth rendered pixels; the compositor/near-sheet cause remains unresolved.
 - **Scalar alpha limits color fidelity.** A single source-over alpha cannot carry three spectral transmittances or reproduce a nonlinear display transform applied after whole-ray integration. The fitted display is not calibrated visible photometry.
 - **Edge-on size differs from the uncut model.** Stacking bounds remain the accepted 32 × 32 × 6.4 kpc box; growing image-plane support does not restore all depth outside that box.
-- The inherited sky cube has unresolved corner coverage. Sgr A* uses its own exposure, but 80 pc central cells do not resolve its nuclear cluster.
-- At most three route skies, including pending decodes, are retained alongside NASA's sky. Decoded textures can reach roughly **197 MB** with the far bank; this excludes caches, compositor copies and other application assets.
+- The inherited sky cube has unresolved corner coverage.
+- One route sky is retained alongside NASA's sky. The other thirteen accepted skies (the rest of the Sun path, the owner approaches and the Sgr A* path) are no longer shipped: fading through them mid-zoom dropped frames on the iPad (2026-10-21). Their recipe entries can return with a transition that does not.
 
 <details>
 <summary>Method and complete replay</summary>
@@ -61,9 +61,9 @@ Z owns most directions. X and Y join near edge-on and mix continuously around th
 
 ### Inside skies, exposure and stars
 
-Fourteen fixed skies preserve the accepted Sun path, owner approaches and Sgr A* path. Sgr exposures map median linear luminance toward 0.18, capped at 4.5; the innermost exposure is 1.635010083. NASA detail is introduced near the Sun using the accepted baked registration and tone.
+One fixed sky, 20,000 light-years out on the accepted Sun path, stands between the far slabs and NASA's sky, at the fixed Sun exposure of 4.5.
 
-One smooth position-dependent log gain interpolates between the Sun and Sgr A* anchors. Far layers fade from full at **9 kpc** to zero at **1.5 kpc**, with an additional inside-place binding at the centre. The enclosing sky pair plus one neighboring station reserves NASA's fourth sky slot. Frozen coast membership and driven-flight staging use the existing shared owners.
+One smooth position-dependent log gain interpolates between the Sun and Sgr A* anchors. Far layers fade from full at **9 kpc** to zero at **1.5 kpc**; once the sky covers them they leave the page only after the camera stops, since removing 390 layers in one frame of a zoom dropped frames. Frozen coast membership and driven-flight staging use the existing shared owners.
 
 Catalogue admission uses physical proximity, not projected size. Outside the prepared disc, no catalogue-dot bank is fetched or drawn. Inside, six levels load through the accepted distance windows, preserving every input row. Plain-star admission follows the same boundary; labels and navigation use their existing owners. The rolled-back overlap experiment is excluded.
 
@@ -80,7 +80,7 @@ CSSEARTH_TORCH_PYTHON="$PWD/.local/milky-way-python/bin/python" node packages/ba
 CSSEARTH_GALAXY_FULL_REPLAY=1 CSSEARTH_TORCH_PYTHON="$PWD/.local/milky-way-python/bin/python" pnpm test:run 'packages/bake/authoring/milky-way-dust/*.test.mts'
 ```
 
-`--pilot` runs the exact producer on the Z set and one Sgr sky. `--restore-only` restores source inputs without baking. The lower-level slice command retains the explicit in-plane-field option; its original default transfer is independently golden-tested. The shipped top-level command always selects the accepted extended field and the 52/52/26 counts; the lower-level command's default counts stay 26/26/26. Set `CSSEARTH_GALAXY_FULL_REPLAY=1` to run the complete production-bank replay; ordinary focused tests skip that expensive check.
+`--pilot` runs the exact producer on the Z set and the last sky in the recipe. `--restore-only` restores source inputs without baking. The lower-level slice command retains the explicit in-plane-field option; its original default transfer is independently golden-tested. The shipped top-level command always selects the accepted extended field and the 52/52/26 counts; the lower-level command's default counts stay 26/26/26. Set `CSSEARTH_GALAXY_FULL_REPLAY=1` to run the complete production-bank replay; ordinary focused tests skip that expensive check.
 
 Rejected two-layer, texel calibration/fitter, directional atlas, support-clipping and nonuniform-placement paths are removed. The browser-free blending lab is excluded because it depends on research outputs and retains an unresolved qualification gate. No later finalist or unrelated nebula work is included.
 

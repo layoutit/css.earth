@@ -14,7 +14,7 @@ export interface CrowdMarker {
   /** A star of the field that is not featured, in a view past its system. */ quietStar?: boolean;
   /** The marker opacity it has when nothing crowds it. */ uncrowdedOpacity?: number;
   /** Nothing else is marked where its ring would stand: it keeps its marker and may be named. */ uncrowded?: boolean;
-  readonly entry: { readonly indicatorShown: boolean };
+  readonly entry: { readonly indicatorShown: boolean; readonly markerDrawn?: boolean };
 }
 
 /** `ringDiameter`: the width of a body's circle, in pixels. */
@@ -50,7 +50,9 @@ export function createUncrowdedStars(ringDiameter: number) {
       }
       for (const marker of frame) {
         if (!marker.quietStar || !marker.inFrame) continue;
-        const reach = ringDiameter / 2 + (marker.entry.indicatorShown ? 0 : UNIVERSE_LABEL_POLICY.spacingPixels);
+        // The committed frame's drawn marker keeps it; its circle alone held it before, and a quiet star drawn without one
+        // crossed the spacing back and forth as the camera moved (marker-declutter.ts).
+        const reach = ringDiameter / 2 + (marker.entry.indicatorShown || marker.entry.markerDrawn === true ? 0 : UNIVERSE_LABEL_POLICY.spacingPixels);
         marker.uncrowded = !marked(marker.x - reach, marker.y - reach, marker.x + reach, marker.y + reach, marker);
         if (marker.uncrowded) marker.markerOpacity = marker.uncrowdedOpacity!;
       }

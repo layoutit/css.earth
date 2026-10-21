@@ -5,6 +5,7 @@ import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorl
 import type { PreparedWorldContext } from '@cssearth/objects';
 import { createWorldContextPlanner, type WorldContextView } from './world-context-planner.js';
 import { createWorldContextPlannerClient, type WorldPlannerWorker } from './world-context-planner-client.js';
+import { WORLD_BODY_FIELDS } from './world-context-view-transport.js';
 
 // What every page reads: the summary (the frame and the Sun) and the files drawn from anywhere, among them the Milky Way's,
 // which has TRAPPIST-1; and one other file, the TRAPPIST-1 system's seven planets (packages/bake/src/world-context/summary.ts).
@@ -125,7 +126,7 @@ test('the planner client sends a system just before the first view that holds it
   worker.onmessage!({ data: { ready: true } } as MessageEvent);
   const extended = extendWorldContext(summary, [trappist]);
   client.extend(extended);
-  const columns = (count: number) => ({ ...view(0), bodies: undefined, bodyColumns: new Float64Array(count * 15) });
+  const columns = (count: number) => ({ ...view(0), bodies: undefined, bodyColumns: new Float64Array(count * WORLD_BODY_FIELDS) });
   // A view captured before the system arrived goes alone; the next, holding its bodies, follows the extension.
   void client.plan(columns(1 + summary.bodies.length));
   await new Promise(resolve => setTimeout(resolve, 0));
@@ -147,7 +148,7 @@ test('an extension carries the added bodies\' annotation tiers to the worker, an
   worker.onmessage!({ data: { ready: true } } as MessageEvent);
   const extended = extendWorldContext(summary, [trappist]);
   client.extend(extended, { 'trappist-1b': 3 });
-  const columns = (count: number) => ({ ...view(0), bodies: undefined, bodyColumns: new Float64Array(count * 15) });
+  const columns = (count: number) => ({ ...view(0), bodies: undefined, bodyColumns: new Float64Array(count * WORLD_BODY_FIELDS) });
   const planned = client.plan(columns(1 + extended.bodies.length)).catch(() => undefined);
   await new Promise(resolve => setTimeout(resolve, 0));
   const extension = posted.find(message => typeof message === 'object' && message !== null && 'validatedExtension' in message) as { annotationPriorities: Record<string, number> } | undefined;

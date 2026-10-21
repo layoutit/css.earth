@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createMarkerDeclutter, type DeclutterMarker } from './marker-declutter.js';
+import { createMarkerDeclutter, MARKER_ENTRY_MARGIN_PIXELS, type DeclutterMarker } from './marker-declutter.js';
 
 const marker = (id: string, x: number, priority = 0, entry: Partial<DeclutterMarker['entry']> = {}): DeclutterMarker =>
   ({ x, y: 0, diameter: 2.4, visible: true, hovered: false, priority, entry: { body: { id }, labelShown: false, indicatorShown: false, ...entry } });
@@ -28,10 +28,21 @@ test('a labelled moon never hides its planet: tier ranks before an admitted labe
   assert.deepEqual(pile.map(item => [item.entry.body.id, item.visible]), [['rhea', false], ['saturn', true], ['labelled-dust', false], ['dust', false]]);
 });
 
-test('a frame decides from its own projection alone', () => {
+test('a drawn marker holds through a near tie, and an undrawn one returns only once it clears the kept dot by the margin', () => {
   const declutter = createMarkerDeclutter({});
-  const frame = (x: number) => { const pair = [marker('kept', 0, 1), marker('moving', x)]; declutter(pair, []); return pair[1]!.visible; };
-  assert.equal(frame(2), false, 'overlapping dots: the lower priority is hidden');
-  assert.equal(frame(2.5), true, 'clear of touching (2.4 px), it draws');
-  assert.equal(frame(2), false);
+  const frame = (x: number, drawn: boolean) => { const pair = [marker('kept', 0, 1, { markerDrawn: true }), marker('moving', x, 0, { markerDrawn: drawn })]; declutter(pair, []); return pair[1]!.visible; };
+  assert.equal(frame(2, true), false, 'overlapping dots: the lower priority is hidden, drawn or not');
+  assert.equal(frame(2.5, true), true, 'a drawn dot clear of touching (2.4 px) stays');
+  assert.equal(frame(2.5, false), false, 'an undrawn one at the same place waits: a dot on the edge swapped every frame');
+  assert.equal(frame(2.4 + MARKER_ENTRY_MARGIN_PIXELS, false), true, 'clear by the margin, it returns');
+});
+
+test('a drawn marker keeps its place in a pile over an undrawn one of the same standing', () => {
+  const declutter = createMarkerDeclutter({});
+  const pile = [marker('newcomer', 0, 9), marker('incumbent', 1, 1, { markerDrawn: true })];
+  declutter(pile, []);
+  assert.deepEqual(pile.map(item => item.visible), [false, true]);
+  const fresh = [marker('newcomer', 0, 9), marker('incumbent', 1, 1)];
+  declutter(fresh, []);
+  assert.deepEqual(fresh.map(item => item.visible), [true, false], 'with nothing drawn, priority decides as before');
 });

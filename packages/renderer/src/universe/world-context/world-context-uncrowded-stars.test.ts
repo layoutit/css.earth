@@ -37,3 +37,20 @@ test('inside a system the stars behind it stay dots that name themselves on hove
   const near = planned(plan.system.hiddenDistanceM / 2);
   for (const id of ['pair-a', 'pair-b', 'alone']) assert.equal(near[id]!.labelShown, false, id);
 });
+
+test('a quiet star the last frame drew keeps its marker until a neighbour comes inside its ring', async () => {
+  const { UNIVERSE_LABEL_POLICY } = await import('../../labels/universe-label-policy.js');
+  // The neighbour stands inside the label spacing but outside the ring (BODY_INDICATOR_DIAMETER / 2 = 8 px).
+  const gap = 8 + UNIVERSE_LABEL_POLICY.spacingPixels / 2;
+  const edge = { ...plan, bodies: [star('held', 200, 100), star('neighbour', 200 + gap, 100)] };
+  const edgeBodies = [edge.focus, ...edge.bodies];
+  const opacity = (drawn: boolean) => {
+    const base = view(away);
+    const result = createWorldContextPlanner(edge, Object.fromEntries(edge.bodies.map(body => [body.id, 3])))({ ...base,
+      bodies: edgeBodies.map((body, index) => ({ ...base.bodies[Math.min(index, base.bodies.length - 1)]!, labelHidden: body !== edge.focus,
+        markerDrawn: drawn && body.id === 'held' })) });
+    return result.projectedBodies.find(body => edgeBodies[body.index]!.id === 'held')!.markerOpacity;
+  };
+  assert.equal(opacity(false), 0, 'undrawn, it needs the label spacing clear to take a marker');
+  assert.ok(opacity(true) > 0, 'drawn, it keeps the marker: the spacing alone made it blink as the camera moved');
+});

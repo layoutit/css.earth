@@ -85,6 +85,6 @@ export async function prepareGalaxyLayers(args:readonly string[]=[]) {
   }
   await inventoryPreparedAssets({objectId,objectDirectory,filenames});
  }
- console.log('MILKY WAY SETTLED BAKE VERIFIED',pilot?'PILOT':'130 SLABS + 14 SKIES + 6 DOT LEVELS');
+ console.log('MILKY WAY SETTLED BAKE VERIFIED',pilot?'PILOT':`130 SLABS + ${tuner.stations.length} SKIES + 6 DOT LEVELS`);
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)await prepareGalaxyLayers(process.argv.slice(2));

@@ -90,14 +90,16 @@ export function mountGalaxyStations({ host, before = null, stations, load, hyste
         const wanted = new Set(state.residentIds);
         for (const [id, scene] of loaded) if (!wanted.has(id) && scene.root.parentNode === host) scene.root.remove();
         for (const id of state.residentIds) { const scene = loaded.get(id)!; if (scene.root.parentNode !== host) host.insertBefore(scene.root, before); }
-        // The source-over order must match the weights even when a retained root was already resident.
-        if (state.weights && [...host.children].some((node, i) => node !== loaded.get(state.residentIds[i]!)?.root)) {
-          for (const id of state.residentIds) host.insertBefore(loaded.get(id)!.root, before);
-        }
       }
       if (!coast) request(state.requestedId);
+      // Weights normalized from the rear give the same source-over mix in any stacking order, so retained roots never
+      // move: re-inserting a resident sky re-uploads every face texture and stalls the GPU for over 100 ms.
+      const stacked = state.weights ? [...host.children].flatMap(node => {
+        const id = (node as HTMLElement).dataset.galaxyStation;
+        return id !== undefined && state.residentIds.includes(id) ? [id] : [];
+      }) : [];
       let cumulative = 0;
-      for (const id of state.residentIds) {
+      for (const id of [...stacked, ...state.residentIds.filter(id => !stacked.includes(id))]) {
         const scene = loaded.get(id)!;
         scene.publish(publication);
         const weight = state.weights?.[id];
