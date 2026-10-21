@@ -2,7 +2,7 @@ import { catalogueDiscOpacity, catalogueLevelOpacity } from './catalogue-proximi
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 import { ALL_WORLD_LAYERS_SHOWN, type WorldLayerVisibility } from './world-layers.js';
 import { writeData } from '../rendering/dom/retained-write.js';
-import { eyeAnchor, eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
+import { eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCssVolume, PreparedWorldContext } from '@cssearth/objects';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
@@ -16,11 +16,10 @@ import { catalogueDotsOpacity, galaxyOutsideFade, logarithmicFade, preparedVolum
 import { mountGalaxyStations, type GalaxyStationBackgroundOptions } from './galaxy-stations.js';
 import { starFieldAroundPicture } from './context-presentation-policy.js';
 import { galaxyAutoExposure } from './galaxy-auto-exposure.js';
-import { createSettlePacer, type SettlePacerOptions } from '../rendering/loading/settle-pacer.js';
 
 /** Retained sky and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
-  prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], catalogueProximity, stations, requestPublication, settle }: {
+  prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], catalogueProximity, stations, requestPublication }: {
   root: HTMLElement; end: Node; lifetime: SceneLifetime; plan: PreparedWorldContext;
   payload: PreparedCssVolume; sky: boolean;
   resolveResource(path: string): string;
@@ -30,8 +29,6 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   catalogueProximity?: PreparedUniverseOptions['galaxyCatalogueProximity'];
   stations?: GalaxyStationBackgroundOptions;
   requestPublication?: () => unknown;
-  /** The far picture's settle pacing: the document's by default (a test passes its own frame and clock). */
-  settle?: Pick<SettlePacerOptions, 'frame' | 'clock' | 'later'>;
 }) {
   const document = root.ownerDocument;
   const volumeHost = document.createElement('div');
@@ -69,30 +66,6 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   lifetime.onDispose(() => stationLayer?.destroy());
   let stationAlpha = NaN;
   let lastView: { outside: number; layers: number; detail: number; nearestStationM: number; exposure: number } | null = null;
-  // The far picture leaves under a complete inside scene only once the camera has stopped: its slices left in one frame
-  // of a wheel zoom from the Local Group, 390 layers and 87 MB on the iPad (2026-10-21). Until then the opaque inside
-  // scene covers it.
-  let farCovered = false;
-  const farRetire = createSettlePacer((_budget, moving) => {
-    if (lifetime.disposed || moving || coasting || !farCovered || volumeImage.parentNode !== volumeHost) return 0;
-    volumeImage.remove();
-    return 1;
-  }, settle);
-  lifetime.onDispose(() => farRetire.destroy());
-  // The view the pacer last counted as motion: a republication of an unchanged camera must not postpone it forever.
-  // The eye's place is its position and exact anchor (sameEyePlace): a slow zoom near a small body can keep `positionM`.
-  const lastCamera = new Float64Array(18).fill(NaN);
-  let cameraChanged = false;
-  const keep = (index: number, value: number) => { if (!Object.is(lastCamera[index], value)) { lastCamera[index] = value; cameraChanged = true; } };
-  const cameraMoved = ({ pose }: WorldCameraPose, viewport: WorldCameraViewport) => {
-    const { originM, offsetM } = eyeAnchor(pose), q = pose.orientationXyzw;
-    cameraChanged = false;
-    for (let axis = 0; axis < 3; axis++) { keep(axis, pose.positionM[axis]!); keep(3 + axis, originM[axis]!); keep(6 + axis, offsetM[axis]!); }
-    keep(9, q[0]!); keep(10, q[1]!); keep(11, q[2]!); keep(12, q[3]!);
-    keep(13, viewport.focalPixels); keep(14, viewport.widthPixels ?? NaN); keep(15, viewport.heightPixels ?? NaN);
-    keep(16, viewport.principalOffsetPixels[0]); keep(17, viewport.principalOffsetPixels[1]);
-    return cameraChanged;
-  };
 
   return {
     dotOpacity(world: WorldCameraPose) { return catalogueProximity ? catalogueDiscOpacity(catalogueProximity.plan,world) : 1; },
@@ -157,10 +130,8 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
         if (stationShown && stationHost.parentNode !== volumeHost) volumeHost.append(stationHost);
         else if (!stationShown && stationHost.parentNode) stationHost.remove();
       }
-      if (cameraMoved(world, viewport)) farRetire.published();
-      farCovered = Boolean(stationLayer) && stationShown && layers === 0 && stationHost.parentNode === volumeHost;
       if (stationLayer && !coasting) {
-        if (farCovered) { if (volumeImage.parentNode === volumeHost) farRetire.request(); }
+        if (stationShown && layers === 0) volumeImage.remove();
         else if (volumeImage.parentNode !== volumeHost) volumeHost.prepend(volumeImage);
       }
       // A frozen coast keeps the complete scene that is actually resident until its replacement can join.
