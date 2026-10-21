@@ -266,7 +266,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder, fu
           paintPalette: [...used[index]!].map(pointPaint) });
         const local = occluder && { normal: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.normal), radiusUnits: occluder.radiusM / bank.frame.metersPerUnit,
           centreUnits: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.centreM.map((value, axis) => (value - bank.frame.originM[axis]!) / bank.frame.metersPerUnit)) };
-        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: slot, frame: bank.frame, parts, deferFill: true, coherent: fullDetail,
+        const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: slot, frame: bank.frame, parts, deferFill: true,
           onSettle: settled, className: `catalogue-points-${bank.id}`, ...(local ? { occluder: local } : {}) });
         let fill: (limit: number) => number;
         // A level dims to its near opacity as the innermost level fills, and takes its share of the budget after the
