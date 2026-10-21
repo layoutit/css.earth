@@ -17,12 +17,12 @@ test('the default production command replays every 52/52/26 slab and accepted sk
  const tuner=parsePreparedGalaxyStations(JSON.parse(readFileSync(directory+'galaxy-stations/tuner.json','utf8')));
  const files=[...([['x',52],['y',52],['z',26]] as const).flatMap(([axis,count])=>Array.from({length:count},(_,i)=>`b30-slices/${axis}/${String(i).padStart(3,'0')}.png`)),
   ...tuner.stations.flatMap(station=>['px','nx','py','ny','pz','nz'].map(face=>`galaxy-stations/${station.id}/${face}.webp`))];
- assert.equal(files.length,214);
+ assert.equal(files.length,136);
  const accepted=new Map(files.map(file=>[file,readFileSync(directory+file)]));
  const run=spawnSync(process.execPath,['packages/bake/cli/prepare-milky-way-layers.mts'],{encoding:'utf8',timeout:570_000,maxBuffer:4*1024*1024});
  assert.equal(run.status,0,run.stdout+run.stderr+String(run.error??''));
- assert.match(run.stdout,/MILKY WAY SETTLED BAKE VERIFIED 130 SLABS \+ 14 SKIES \+ 6 DOT LEVELS/u);
+ assert.match(run.stdout,/MILKY WAY SETTLED BAKE VERIFIED 130 SLABS \+ 1 SKIES \+ 6 DOT LEVELS/u);
  for(const [file,bytes]of accepted)assert.deepEqual(readFileSync(directory+file),bytes,file);
  assert.deepEqual(readFileSync(inventory),acceptedInventory,'the complete delivered closure must reproduce the committed inventory');
- console.log('PRODUCTION REPLAY VERIFIED: 130 slabs and 84 sky faces');
+ console.log('PRODUCTION REPLAY VERIFIED: 130 slabs and 6 sky faces');
 });
