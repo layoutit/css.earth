@@ -49,4 +49,7 @@ export interface PreparedCssVolume {
   readonly approximation: unknown;
   readonly sky?: PreparedCssSky;
   readonly impostors?: PreparedVolumeImpostors;
+  /** Each slice image already holds its three coincident optical copies (alpha 1 - (1 - a)^3): the runtime draws one
+   * layer per slice at opacity gain / 3 instead of three. Absent, the runtime stacks the copies itself. */
+  readonly mergedOpticalCopies?: 3;
 }
