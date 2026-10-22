@@ -76,3 +76,25 @@ test('installing an unchanged completed-image opacity preserves every tuner byte
   assert.equal(readFileSync(dir+'/prepared/galaxy-stations/tuner.json','utf8'),tuner);
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
+
+test('a reused bank keeps the merged-copies encoding its prototype records, and a fresh flag cannot relabel one',async()=>{
+ const dir=mkdtempSync(resolve(tmpdir(),'galaxy-merged-reuse-')),original=resolve('src/objects/milky-way-volume');
+ try{
+  mkdirSync(dir+'/prepared/galaxy-stations',{recursive:true});
+  copyFileSync(original+'/object.json',dir+'/object.json');
+  copyFileSync(original+'/prepared/volume.json',dir+'/prepared/volume.json');
+  copyFileSync(original+'/prepared/galaxy-stations/tuner.json',dir+'/prepared/galaxy-stations/tuner.json');
+  writeFileSync(dir+'/frame.json',JSON.stringify({frame:JSON.parse(readFileSync(original+'/source/preparation/b30/frame.json','utf8'))}));
+  writeGalaxyGolden(dir+'/slabs');
+  const prototype=JSON.parse(readFileSync(dir+'/slabs/prototype.json','utf8'));prototype.field.record='runs/b30-native-scatterFaceSide/fit-crisp.json';
+  const install=async(merged:unknown)=>{
+   writeFileSync(dir+'/slabs/prototype.json',JSON.stringify(merged===undefined?prototype:{...prototype,mergedOpticalCopies:merged}));
+   await main([dir,'--reuse='+dir+'/slabs','--frame='+dir+'/frame.json','--mode=outside-display','--counts=26,26,26','--local-only']);
+   return JSON.parse(readFileSync(dir+'/prepared/volume.json','utf8')).data.mergedOpticalCopies;
+  };
+  assert.equal(await install(3),3,'a merged bank stays declared merged when reused');
+  assert.equal(await install(undefined),undefined,'an unmerged bank is not declared merged');
+  await assert.rejects(install(2),/exactly three optical copies/u);
+  await assert.rejects(main([dir,'--reuse='+dir+'/slabs','--merged-copies','--local-only']),/merges a fresh bake/u);
+ }finally{rmSync(dir,{recursive:true,force:true});}
+});

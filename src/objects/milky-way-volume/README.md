@@ -1,6 +1,6 @@
 # Milky Way: fitted starlight, dust and catalogue stars
 
-The outside view is the accepted **b30-native-scatterFaceSide** fitted model, drawn as local slabs on three axes: 52 across each in-plane axis (X, Y) and 26 across the thin axis (Z). It is a model, not a photograph of our galaxy from outside. Inside, one prepared sky 20,000 light-years out on the Sun's approach takes over from the far slabs; NASA's measured Milky Way map supplies the Solar System sky. Catalogue dots appear only inside the prepared stellar disc. Navigation labels remain available outside it.
+The outside view is the accepted **b30-native-scatterFaceSide** fitted model, drawn as local slabs on three axes: 13 across each in-plane axis (X, Y) and 7 across the thin axis (Z), each slab image holding its three optical copies. It is a model, not a photograph of our galaxy from outside. Inside, one prepared sky 20,000 light-years out on the Sun's approach takes over from the far slabs; NASA's measured Milky Way map supplies the Solar System sky. Catalogue dots appear only inside the prepared stellar disc. Navigation labels remain available outside it.
 
 ## Sources
 
@@ -21,13 +21,13 @@ The [manifest](source/manifest.json) binds the preserved inputs and published re
 
 ## Evidence
 
-- Full production replay: **130/130 slab PNGs** (52/52/26) match the accepted bank byte for byte; **6/6 sky faces** match the accepted path sky. The 26 Z slabs are byte-identical to the earlier 26/26/26 bank: only the X/Y counts changed. Every slab has at least **three zero-alpha border cells** on every side.
-- Far images: **3,418,890 compressed bytes (3.4 MB to download); 52,027,304 decoded RGBA bytes (52 MB)**, against 2,391,776 and 37,316,344 for the 26/26/26 bank. Three optical copies share each image. The retained far scene has **403 elements**, below 500; texture allocation and compositor copies are additional costs.
-- Banding: at the owner's low-angle stripe view, X alone, the stripe amplitude fell from **5.8% to 3.3% of brightness** with the doubled X/Y sets. It is visibly smoother and the arms show; the stripes are not gone.
-- Side reach: X/Y pitch **0.615 kpc** against a measured light thickness of **1.33 kpc** lets a side set carry views up to **θmax 65°** from edge-on (50° at 26 slabs).
-- iPad (iPad12,1, iPadOS 26.5), drag at the stripe view, 390 frames, three interleaved runs (2026-10-19): with steady optical copies, frames over 20 ms **7, 5, 6** against **12, 13, 27** before; over 33 ms **1, 1, 1** against **5, 6, 13**. Late frames remain only at load and release. The cause was optical copies crossing opacity 0 or 1 and leaving or joining the layer tree mid-turn, which made WebKit recomposite for 25–37 ms.
+- Full production replay: **33/33 slab PNGs** (13/13/7, copies merged) match the accepted bank byte for byte, and a second bake reproduces the inventory exactly; **6/6 sky faces** match the accepted path sky. Every slab has at least **three zero-alpha border cells** on every side.
+- Phone and tablet memory (2026-10-22): the earlier 52/52/26 bank drew three copies of each of its 130 slabs, **390 full-screen layers**. On a Galaxy S23 Chrome caps tile memory at 256 MB; turning the galaxy it ran short in 827 of 867 tile assignments and drew layers empty in **248 frames of an 8 s turn**, the flicker. On the iPad the bank cost **191, 185 and 214 ms** composites as it joined or left. With 13/13/7 slabs and merged copies (at most 33 layers) the same turn ran short in **0 of 541** assignments; 3 to 7 frames still drew a tile late, against 0 for the bank before the 52/52/26 one. Fitted against the same reference, the slab-local error fell from relative L1 **0.20/0.20/0.15** to **0.13/0.13/0.07**.
+- Far images: **1,279,831 compressed bytes (1.3 MB to download); 16,631,252 decoded RGBA bytes (17 MB)**, against 3,418,890 and 52,027,304 for the 52/52/26 bank. Each image holds its three optical copies: one layer a slab. Texture allocation and compositor copies are additional costs.
+- Banding: the 52/52/26 bank brought the low-angle stripe amplitude to 3.3% of brightness; the coarser 13/13/7 slabs leave wider gaps, so faint stripes at the edges can return at low angles.
+- iPad (iPad12,1, iPadOS 26.5), 52/52/26 bank, drag at the stripe view, 390 frames, three interleaved runs (2026-10-19): with steady optical copies, frames over 20 ms **7, 5, 6** against **12, 13, 27** before; over 33 ms **1, 1, 1** against **5, 6, 13**. Late frames remain only at load and release. The cause was optical copies crossing opacity 0 or 1 and leaving or joining the layer tree mid-turn, which made WebKit recomposite for 25–37 ms.
 - Focused integration checks: **79 passed**, covering local transfer, golden replay, image extension, axis handover, equal-image light, proximity admission, sky selection, exposure and coast writes. Fresh-fixture bake/loader checks: **15 passed**. Broader commit-boundary results are recorded on the draft PR.
-- The step-19 extension preserves all original stacking centers and affine image calibration. X/Y pitch is **32/52 kpc**; Z pitch is **6.4/26 kpc**. Larger image rectangles do not widen the slab spacing or change the frame used by handover.
+- The step-19 extension preserves all original stacking centers and affine image calibration. X/Y pitch is **32/13 kpc**; Z pitch is **6.4/7 kpc**. Larger image rectangles do not widen the slab spacing or change the frame used by handover.
 
 These checks establish reproducibility, geometry and state behavior. They do not establish exact spectral transfer, every-angle visual continuity, calibrated photometry, or iPad performance beyond the drag measured above.
 
@@ -37,8 +37,8 @@ The low-angle capture also shows the known near-sheet occlusion; the side camera
 
 ## Known problems
 
-- **Stripes remain close up at low angles.** Doubling the X/Y sets reduced them (5.8% → 3.3% of brightness at the stripe view) and continuous handover reduces abrupt set changes; neither makes the finite slabs continuous material.
-- **The far bank's decoded size grew to 52 MB** (from 37 MB), slightly above the ~50 MB budget the bank was held to; the iPad drag above did not crash, but other devices are unmeasured.
+- **Stripes remain close up at low angles,** more visibly with 13 X/Y slabs than with the earlier 52. Continuous handover reduces abrupt set changes; it does not make the finite slabs continuous material.
+- **Merged copies are exact only for faint material.** One layer at opacity gain / 3 scales a slab's merged alpha linearly where three copies compose it. Face-on, an opaque pixel draws at a third and a half-opaque one at 0.29 instead of 0.5: over the 13/13/7 bank that is **31% of the slabs' total alpha** face-on and **0.8%** at grazing views, almost all of it in the 7% of pixels above alpha 0.25 (dense dust). Two layers a slab would be exact but ran a phone out of tile memory again (56 to 62 frames with missing tiles), and fewer, thicker slabs showed gaps between them; the owner accepted the merged look on the phone (2026-10-22).
 - **X/Y criss-cross remains near 45° azimuth.** The later experimental finalist was rejected and is excluded.
 - **Some far-only camera views black out.** Smooth coefficients and exposure do not prove smooth rendered pixels; the compositor/near-sheet cause remains unresolved.
 - **Scalar alpha limits color fidelity.** A single source-over alpha cannot carry three spectral transmittances or reproduce a nonlinear display transform applied after whole-ray integration. The fitted display is not calibrated visible photometry.
@@ -57,13 +57,13 @@ An explicit 601 × 601 × 361 in-plane field extends faint image support. The or
 
 ### Completed images and handover
 
-Z owns most directions. X and Y join near edge-on and mix continuously around their azimuth bisector. The Z/side window rises with approach distance, normalized by the original physical frame. Completed stack images keep black mattes; source-over coefficients maintain constant total weight, capped at 0.999 for Safari. All three stacks and optical copies stay resident. A shown optical copy keeps the 8-bit alpha step nearest its exact value, held inside [0.001, 0.999] (within 1/510 of exact), and stays joined while its stack is visible, so turning never crosses opacity 0 or 1 or changes the layer tree. Coast publication changes only transforms and opacity.
+Z owns most directions. X and Y join near edge-on and mix continuously around their azimuth bisector. The Z/side window rises with approach distance, normalized by the original physical frame. Completed stack images keep black mattes; source-over coefficients maintain constant total weight, capped at 0.999 for Safari. All three stacks stay resident. Each slab image already holds three coincident optical copies (alpha 1 − (1 − a)³), drawn as one layer at opacity gain / 3: exact for faint material, slightly lighter where a slab is nearly opaque. A shown optical copy keeps the 8-bit alpha step nearest its exact value, held inside [0.001, 0.999] (within 1/510 of exact), and stays joined while its stack is visible, so turning never crosses opacity 0 or 1 or changes the layer tree. Coast publication changes only transforms and opacity.
 
 ### Inside skies, exposure and stars
 
 One fixed sky, 20,000 light-years out on the accepted Sun path, stands between the far slabs and NASA's sky, at the fixed Sun exposure of 4.5.
 
-One smooth position-dependent log gain interpolates between the Sun and Sgr A* anchors. Far layers fade from full at **9 kpc** to zero at **1.5 kpc**; once the sky covers them they leave the page only after the camera stops, since removing 390 layers in one frame of a zoom dropped frames. Frozen coast membership and driven-flight staging use the existing shared owners.
+One smooth position-dependent log gain interpolates between the Sun and Sgr A* anchors. Far layers fade from full at **9 kpc** to zero at **1.5 kpc** and leave the page once the inside sky covers them. Keeping them under the sky until the camera stopped made a phone run out of tile memory, so the layers drew empty every other frame. Frozen coast membership and driven-flight staging use the existing shared owners.
 
 Catalogue admission uses physical proximity, not projected size. Outside the prepared disc, no catalogue-dot bank is fetched or drawn. Inside, six levels load through the accepted distance windows, preserving every input row. Plain-star admission follows the same boundary; labels and navigation use their existing owners. The rolled-back overlap experiment is excluded.
 
