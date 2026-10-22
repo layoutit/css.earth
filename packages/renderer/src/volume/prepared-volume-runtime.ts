@@ -51,6 +51,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // An axis stack's nodes by optical copy (0 is the slice itself), in the order they join; the `alpha` of copies 1 and 2;
   // whether each copy is `wanted`; and `shown`, how many of a copy's nodes are displayed: its first ones.
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[]; wanted: boolean[]; shown: number[] }[] = [];
+  // A bank whose images hold their three copies (mergedOpticalCopies) draws one layer a slice, at opacity gain / 3: on a
+  // phone the 52/52/26 bank's 390 layers outran Chrome's 256 MB tile budget and drew empty in 248 frames of an 8 s turn.
+  const merged = payload.mergedOpticalCopies === 3, copiesPerLeaf = merged ? 1 : 3;
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
@@ -85,7 +88,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       pendingTextures[AXES.indexOf(axis)]!.set(bounded, textureUrl);
       // Coincident copies reuse the same prepared pixels and transform. They
       // increase optical length without intersecting another axis's planes.
-      for (let copy = 0; copy < 3; copy++) {
+      for (let copy = 0; copy < copiesPerLeaf; copy++) {
         const node = createLeaf(create, leaf, copy);
         if (options.residentStacks) { node.style.display = ''; node.style.visibility = ''; }
         mesh.append(node);
@@ -259,6 +262,13 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // Copies crossing 0/1 and leaving or joining mid-turn made WebKit recomposite for 25-37 ms. iPad drag at the stripe
       // view, 390 frames, interleaved (2026-10-19): frames over 20 ms 7/5/6 against 12/13/27, over 33 ms 1/1/1 against
       // 5/6/13. A hidden stack's copies follow the exact value and retire as before.
+      if (merged) {
+        // The image is three copies at alpha 1 - (1 - a)^3; gain / 3 of it stands for `gain` copies (exact where faint).
+        const alpha = visible ? Math.min(0.999, Math.max(0.001, Math.round(Math.min(3, opticalGain) / 3 * 255) / 255)) : 0;
+        if (alpha !== copies.alpha[0]) { copies.alpha[0] = alpha; const value = String(alpha); for (const node of copies.nodes[0]!) node.style.opacity = value; }
+        if (visible !== copies.wanted[0]) { copies.wanted[0] = visible; if (visible) join.request(); else retire.request(); }
+        continue;
+      }
       for (let copy = 1; copy < 3; copy++) {
         const exact = Math.min(1, Math.max(0, opticalGain - copy));
         const alpha = visible ? Math.min(0.999, Math.max(0.001, Math.round(exact * 255) / 255)) : exact;

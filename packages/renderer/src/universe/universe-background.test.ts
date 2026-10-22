@@ -23,7 +23,8 @@ test('the galaxy background mounts all three accepted slab stacks, with one host
     assert.equal(projections.length, 3);
     assert.ok(projections.every(projection => projection.style.background !== 'transparent'), 'completed far stack mattes must remain opaque for a linear dissolve');
     assert.equal(host.querySelectorAll('.css-volume-mesh s').length,
-      3 * payload.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0), 'all three prepared optical copies');
+      (payload.mergedOpticalCopies === 3 ? 1 : 3) * payload.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0),
+      'one layer a slice whose image holds its three optical copies, or the three copies themselves');
     assert.ok(host.querySelectorAll('*').length <= 500, 'the installed far scene respects the whole-scene cap');
     const publish = (zKpc: number) => background.publish({ referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,
       pose: cameraPoseToReferenceFrame({ positionM: [8.277 * payload.frame.metersPerUnit, 0, zKpc * payload.frame.metersPerUnit],

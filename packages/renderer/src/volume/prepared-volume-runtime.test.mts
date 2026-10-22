@@ -435,3 +435,30 @@ test('mounted thin handover follows pure translation and preserves light without
  }
  runtime.destroy();
 });
+
+test('a bank with merged optical copies draws one layer a slice, exact for faint material and lighter where dense', () => {
+  const merged = { ...payload(3), mergedOpticalCopies: 3 as const };
+  const { runtime, meshes } = mount(merged), stacked = mount(payload(3));
+  for (const [view, direction] of [['straight on', [0, 0, 1]], ['oblique', [1, 1, 1]], ['grazing', [.05, .05, 1]]] as const) {
+    runtime.publish(publication(direction)); stacked.runtime.publish(publication(direction));
+    for (let axis = 0; axis < 3; axis++) {
+      const mesh = meshes[axis]!, copies = stacked.meshes[axis]!;
+      assert.equal(mesh.children.length, 3, `${view}: one layer a slice, not three`);
+      if (stacked.roots[axis]!.style.opacity === '0') continue;
+      // Faint material: the merged image's alpha at its opacity transmits what the three stacked copies do.
+      for (const alpha of [.01, .05]) {
+        const mergedAlpha = Math.round((1 - (1 - alpha) ** 3) * 255) / 255;
+        const transmitted = 1 - mergedAlpha * copyOpacity(mesh.children[0]!);
+        assert.ok(Math.abs(transmitted - sliceTransmission(copies.children.slice(0, 3), alpha)) < .006,
+          `${view} axis ${axis} alpha ${alpha}: ${transmitted} vs ${sliceTransmission(copies.children.slice(0, 3), alpha)}`);
+      }
+      // The accepted limit (README): one scalar opacity scales a dense pixel's merged alpha linearly, so face-on an
+      // opaque pixel draws at a third and half-opaque at 0.29 where stacked copies draw 1 and 0.5.
+      if (view === 'straight on' && axis === 2) {
+        assert.ok(Math.abs(1 * copyOpacity(mesh.children[0]!) - 1 / 3) < .003);
+        assert.ok(Math.abs((1 - .5 ** 3) * copyOpacity(mesh.children[0]!) - .2917) < .003);
+        assert.equal(1 - sliceTransmission(copies.children.slice(0, 3), 1), 1);
+      }
+    }
+  }
+});
