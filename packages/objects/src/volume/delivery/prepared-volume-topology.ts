@@ -6,6 +6,8 @@ const AXES = ['x', 'y', 'z'] as const;
 export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightInput: PreparedCssVolume): boolean {
   const left = validatePreparedCssVolume(leftInput), right = validatePreparedCssVolume(rightInput);
   if (!frameEquals(left.frame, right.frame) || !anchorsEqual(left.anchors, right.anchors)) return false;
+  // Merged copies retain one node a slice where unmerged ones retain three: the encodings are different DOM.
+  if (left.mergedOpticalCopies !== right.mergedOpticalCopies) return false;
   for (const axis of AXES) {
     const a = left.stacks.find(stack => stack.axis === axis), b = right.stacks.find(stack => stack.axis === axis);
     if (!a || !b || !vectorEquals(a.normalUnits, b.normalUnits) || a.leaves.length !== b.leaves.length) return false;

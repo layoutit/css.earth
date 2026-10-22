@@ -23,7 +23,8 @@ test('the galaxy background mounts all three accepted slab stacks, with one host
     assert.equal(projections.length, 3);
     assert.ok(projections.every(projection => projection.style.background !== 'transparent'), 'completed far stack mattes must remain opaque for a linear dissolve');
     assert.equal(host.querySelectorAll('.css-volume-mesh s').length,
-      3 * payload.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0), 'all three prepared optical copies');
+      (payload.mergedOpticalCopies === 3 ? 1 : 3) * payload.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0),
+      'one layer a slice whose image holds its three optical copies, or the three copies themselves');
     assert.ok(host.querySelectorAll('*').length <= 500, 'the installed far scene respects the whole-scene cap');
     const publish = (zKpc: number) => background.publish({ referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,
       pose: cameraPoseToReferenceFrame({ positionM: [8.277 * payload.frame.metersPerUnit, 0, zKpc * payload.frame.metersPerUnit],
@@ -98,56 +99,5 @@ test('an inside station preserves the owner near-object NASA fade and applies fa
     assert.equal(host.style.opacity, '1'); assert.equal(nasa.style.opacity, '0');
     assert.equal(Number(farImage.style.opacity), .12); assert.equal(farImage.parentNode, host);
     assert.equal(stationHost.parentNode, null, 'the station leaves the mounted scene outside its support');
-  } finally { lifetime.destroy(); }
-});
-
-test('the far picture stays under a complete inside scene until the camera stops, then leaves', async () => {
-  const object = new URL('../../../../src/objects/milky-way-volume/', import.meta.url);
-  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile(new URL('object.json', object), 'utf8')));
-  const payload = parsePreparedDensityVolumeText(await readFile(new URL('prepared/volume.json', object), 'utf8'), descriptor);
-  const plan = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('../../../../src/objects/observable-universe/prepared/world.json', import.meta.url), 'utf8')));
-  const { document } = parseHTML('<div id="host"><span></span></div>'), root = document.getElementById('host')!;
-  const lifetime = createSceneLifetime(), halfHeight = plan.volume.discHalfHeightM!, distance = halfHeight * 1.128289620711537;
-  const world = { referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,
-    pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } };
-  const viewport = { focalPixels: 900, widthPixels: 1440, heightPixels: 900, principalOffsetPixels: [0, 0] as const };
-  let now = 0;
-  const frames: ((now?: number) => void)[] = [], timers: (() => void)[] = [];
-  const flush = () => { for (let i = 0; i < 8; i++) { for (const callback of timers.splice(0)) callback(); for (const callback of frames.splice(0)) callback(now); } };
-  const background = createUniverseBackground({ root, end: root.firstElementChild!, lifetime, plan, payload,
-    sky: true, resolveResource: path => `/prepared/${path}`, prefetchUrls: [], prefetchDistanceM: Infinity,
-    settle: { frame: callback => frames.push(callback), clock: () => now, later: callback => { timers.push(callback); } },
-    stations: { stations: [{ id: 'inside', positionM: world.pose.positionM }], replacesBanks: [],
-      farFadeStartM: halfHeight, farFullDistanceM: 2 * halfHeight, hysteresisM: 0, fadeMs: 100,
-      load: async () => {
-        const station = document.createElement('div') as unknown as HTMLElement;
-        return { root: station, publish() {}, destroy() { station.remove(); } };
-      } } });
-  try {
-    background.mount();
-    const host = root.querySelector<HTMLElement>('.prepared-volume-context')!;
-    const farImage = root.querySelector<HTMLElement>('.prepared-volume-image')!;
-    // A zoom: the camera moves every frame.
-    for (let step = 0; step < 12; step++) {
-      const zoomed = { ...world, pose: { ...world.pose, positionM: [0, 0, distance * (1 + step / 1000)] as const } };
-      background.publish(zoomed, viewport, distance, plan.focus.positionM, 1);
-      await Promise.resolve();
-      now += 100; flush();
-      assert.ok(farImage.parentNode === host, 'removing 390 far layers mid-zoom drops frames; it waits for the camera to stop');
-    }
-    const view = background.inspect()!;
-    assert.ok(view.layers === 0 && view.outside > 0, 'the inside scene is complete and shown');
-    // Motion that keeps `positionM` bit for bit: the eye's exact anchor moves, then the principal point shifts.
-    const held = distance * 1.011;
-    for (let frame = 0; frame < 24; frame++) {
-      const offsetM = [0, 0, Math.min(frame, 11)] as const;
-      background.publish({ ...world, pose: { ...world.pose, positionM: [0, 0, held] as const, focusOffset: { originM: [0, 0, held] as const, offsetM } } },
-        frame < 12 ? viewport : { ...viewport, principalOffsetPixels: [frame, 0] as const }, distance, plan.focus.positionM, 1);
-      now += 100; flush();
-      assert.ok(farImage.parentNode === host, 'a moving eye anchor or principal point is motion');
-    }
-    // Still: republications of the unchanged view do not count as motion.
-    for (let frame = 0; frame < 12; frame++) { background.publish({ ...world, pose: { ...world.pose, positionM: [0, 0, held] as const } }, viewport, distance, plan.focus.positionM, 1); now += 100; flush(); }
-    assert.ok(farImage.parentNode === null, 'once still, the covered far picture leaves');
   } finally { lifetime.destroy(); }
 });

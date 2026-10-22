@@ -37,3 +37,16 @@ test('rotated bank normals must remain an orthonormal basis', () => {
   Object.assign(value.stacks[1]!, { normalUnits: [0, 1, 0] }); assert.throws(() => validatePreparedCssVolume(value), /orthogonal/);
   Object.assign(value.stacks[1]!, { normalUnits: [0, 2, 0] }); assert.throws(() => validatePreparedCssVolume(value), /unit vector/);
 });
+
+test('keeps a merged-copies declaration of exactly three, and refuses any other count', () => {
+  assert.equal(validatePreparedCssVolume({ ...valid(), mergedOpticalCopies: 3 }).mergedOpticalCopies, 3);
+  assert.equal(validatePreparedCssVolume(valid()).mergedOpticalCopies, undefined);
+  for (const count of [1, 2, 4, '3', null]) assert.throws(() => validatePreparedCssVolume({ ...valid(), mergedOpticalCopies: count }), /exactly three optical copies/);
+});
+
+test('merged and unmerged copies of the same geometry are different topology', async () => {
+  const { samePreparedVolumeTopology } = await import('./prepared-volume-topology.js');
+  assert.equal(samePreparedVolumeTopology(valid(), valid()), true);
+  assert.equal(samePreparedVolumeTopology(valid(), { ...valid(), mergedOpticalCopies: 3 }), false);
+  assert.equal(samePreparedVolumeTopology({ ...valid(), mergedOpticalCopies: 3 }, { ...valid(), mergedOpticalCopies: 3 }), true);
+});

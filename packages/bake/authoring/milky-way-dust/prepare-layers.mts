@@ -57,16 +57,18 @@ export async function prepareGalaxyLayers(args:readonly string[]=[]) {
  const frame=parseDensityVolumeFrame({...frameInput,metersPerUnit:Number(frameInput.metersPerUnit)*1000,boundsUnits:{min:[-7.723,-16,-3.2],max:[24.277,16,3.2]}});
  const tuner=parsePreparedGalaxyStations(recipe.tuner);
  if(!args.includes('--skies-only')) {
-  // Twice the X/Y sheets of the step-19 bank: X/Y pitch 0.615 kpc against a measured light thickness of 1.33 kpc lets
-  // a side stack carry views to 65 degrees from edge-on (was 50). The Z set and the recipe are unchanged.
-  const counts='52,52,26',controls=parseGalaxySliceControls({counts,'in-plane-field':resolve(decoded,'extension')});
+  // A quarter of the 52/52/26 sheets, each image holding its three optical copies (galaxy-merged-copies.mts): at most 33
+  // layers where the copies of the full bank made 390, which outran a phone's tile memory (layers drew empty in 248
+  // frames of an 8 s turn on a Galaxy S23, 2026-10-22) and froze the iPad 190 to 214 ms as the bank joined or left.
+  // Fitted against the same reference, the slab-local error fell (relative L1 0.20/0.20/0.15 to 0.13/0.13/0.07).
+  const counts='13,13,7',controls=parseGalaxySliceControls({counts,'in-plane-field':resolve(decoded,'extension')});
   const field=resolve(decoded,'field'),fit=resolve(recipeDirectory,'fit.json');
   if(pilot) {
    const out=resolve('output/milky-way-pr/pilot-bank');mkdirSync(out,{recursive:true});
    runGalaxyPython('slices.py',[field,out,fit,JSON.stringify({...controls,axes:[2]})],{}, {'slices.py':GALAXY_SLICES});
   } else {
    // Keep the independent NASA runtime binding while replacing the far bank.
-   await installSlices([objectDirectory,'--field='+field,'--fit='+fit,'--frame='+resolve(recipeDirectory,'physical-frame.json'),'--counts='+counts,'--in-plane-field='+resolve(decoded,'extension')]);
+   await installSlices([objectDirectory,'--field='+field,'--fit='+fit,'--frame='+resolve(recipeDirectory,'physical-frame.json'),'--counts='+counts,'--in-plane-field='+resolve(decoded,'extension'),'--merged-copies']);
   }
  }
  if(!args.includes('--slabs-only'))await preparePathSkies({objectDirectory,inputDirectory:decoded,plan:recipe.skies,tuner,frame,pilot});
@@ -85,6 +87,6 @@ export async function prepareGalaxyLayers(args:readonly string[]=[]) {
   }
   await inventoryPreparedAssets({objectId,objectDirectory,filenames});
  }
- console.log('MILKY WAY SETTLED BAKE VERIFIED',pilot?'PILOT':`130 SLABS + ${tuner.stations.length} SKIES + 6 DOT LEVELS`);
+ console.log('MILKY WAY SETTLED BAKE VERIFIED',pilot?'PILOT':`33 SLABS + ${tuner.stations.length} SKIES + 6 DOT LEVELS`);
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)await prepareGalaxyLayers(process.argv.slice(2));

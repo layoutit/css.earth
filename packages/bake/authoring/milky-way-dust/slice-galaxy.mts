@@ -11,6 +11,7 @@ import { compileGalaxySliceVolume } from './galaxy-slice-compile.mts';
 import { GALAXY_SLICES } from './galaxy-slice-source.mts';
 import { galaxySlices, record } from './galaxy-slices.mts';
 import { runGalaxyPython } from './galaxy-python.mts';
+import { mergeOpticalCopies } from './galaxy-merged-copies.mts';
 import { GALAXY_OUTSIDE_DISPLAY_SCALE } from './galaxy-outside-display.mts';
 
 export function parseGalaxySliceControls(values: Readonly<Record<string, string | boolean | undefined>>) {
@@ -28,12 +29,13 @@ export async function main(args: readonly string[]): Promise<void> {
   const { positionals, values } = parseArgs({ args: [...args], allowPositionals: true, options: {
     'local-only': { type: 'boolean' }, mode: { type: 'string' }, counts: { type: 'string' },
     reuse: {type:'string'}, field:{type:'string'}, fit:{type:'string'}, frame:{type:'string'},
-    'in-plane-field':{type:'string'},
+    'in-plane-field':{type:'string'}, 'merged-copies':{type:'boolean'},
   } });
   if (positionals.length !== 1 || (values.reuse ? values.field || values.fit : !values.field || !values.fit)) {
     throw new TypeError('Usage: slice-galaxy.mts <object-directory> --reuse=<slabs-directory> OR --field=<composed brick> --fit=<fit-crisp.json> [--frame=<physical-frame.json>]');
   }
-  const parsedControls = parseGalaxySliceControls(values);
+  if (values['merged-copies'] && values.reuse) throw new TypeError('--merged-copies merges a fresh bake; a reused bank keeps its images.');
+  const parsedControls = parseGalaxySliceControls({ ...values, 'merged-copies': undefined });
   const controls = parsedControls;
   const objectDirectory = resolve(positionals[0]!), prepared = resolve(objectDirectory, 'prepared');
   const descriptorValue = record(JSON.parse(readFileSync(resolve(objectDirectory, 'object.json'), 'utf8')));
@@ -49,6 +51,12 @@ export async function main(args: readonly string[]): Promise<void> {
     if (staged) {
       const field = resolve(values.field!), fit = resolve(values.fit!);
       runGalaxyPython('galaxy_slices.py', [field, staged, fit, JSON.stringify(controls)], {}, { 'galaxy_slices.py': GALAXY_SLICES });
+      if (values['merged-copies']) {
+        console.log('MERGED OPTICAL COPIES', await mergeOpticalCopies(staged), 'slices');
+        // The bank records its encoding, so a later --reuse of it keeps declaring the copies merged.
+        const baked = record(JSON.parse(readFileSync(resolve(staged, 'prototype.json'), 'utf8')));
+        writeFileSync(resolve(staged, 'prototype.json'), JSON.stringify({ ...baked, mergedOpticalCopies: 3 }));
+      }
     }
     const source = values.reuse ? resolve(values.reuse) : staged!;
     const prototypeText = readFileSync(resolve(source, 'prototype.json'), 'utf8');
@@ -74,7 +82,8 @@ export async function main(args: readonly string[]): Promise<void> {
       if (parsedIndex.farImageOpacity !== completedImageOpacity) throw new TypeError('Objects build must support the completed far image opacity before installation.');
       if (stationIndex.farImageOpacity !== completedImageOpacity) stationIndexText = JSON.stringify(nextStationIndex) + '\n';
     } else if (completedImageOpacity !== 1) throw new TypeError('Deferred gain needs the prepared station index binding.');
-    const compiled = compileGalaxySliceVolume(prototype, frameInput, source, descriptor.id);
+    if (prototype.mergedOpticalCopies !== undefined && prototype.mergedOpticalCopies !== 3) throw new TypeError('A merged bank holds exactly three optical copies.');
+    const compiled = { ...compileGalaxySliceVolume(prototype, frameInput, source, descriptor.id), ...(prototype.mergedOpticalCopies === 3 ? { mergedOpticalCopies: 3 as const } : {}) };
     // Sky and catalogue files keep their existing, independent reference-frame binding.
     const skyPaths = new Set(previous.sky?.faces.map(face => face.texturePath) ?? []);
     const volume = validatePreparedCssVolume({ ...compiled, ...(previous.sky ? { sky: previous.sky } : {}),
