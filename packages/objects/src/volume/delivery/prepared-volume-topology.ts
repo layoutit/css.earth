@@ -1,5 +1,5 @@
 import { validatePreparedCssVolume } from './css-volume-validation.js';
-import type { PreparedCssVolume } from './css-volume-types.js';
+import type { PreparedCssVolume, PreparedVolumeLeaf } from './css-volume-types.js';
 const AXES = ['x', 'y', 'z'] as const;
 
 /** Geometry equality excludes resource identity and atlas sampling, which are presentation material. */
@@ -16,6 +16,23 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
       if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
           !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
           prepared.transform !== other.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
+    }
+  }
+  const far = left.farPlanes, otherFar = right.farPlanes;
+  if (far === undefined || otherFar === undefined) { if (far !== otherFar) return false; }
+  else {
+    if (far.radiusUnits !== otherFar.radiusUnits || far.belowDiameterPixels !== otherFar.belowDiameterPixels) return false;
+    if (far.side.views !== otherFar.side.views || !leafGeometryEquals(far.side.leaf, otherFar.side.leaf)) return false;
+    for (const axis of ['z'] as const) {
+      const xs = far.stacks.find(stack => stack.axis === axis)!.leaves;
+      const ys = otherFar.stacks.find(stack => stack.axis === axis)!.leaves;
+      if (xs.length !== ys.length) return false;
+      for (const [index, x] of xs.entries()) {
+        const y = ys[index]!;
+        if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx || !vectorEquals(x.centerUnits, y.centerUnits) ||
+            x.style.width !== y.style.width || x.style.height !== y.style.height || x.style.transform !== y.style.transform ||
+            !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
+      }
     }
   }
   const a = left.impostors, b = right.impostors;
@@ -46,4 +63,10 @@ function vectorEquals(left: readonly number[] | undefined, right: readonly numbe
 function boundsEqual(left: { min: readonly number[]; max: readonly number[] } | undefined,
   right: { min: readonly number[]; max: readonly number[] } | undefined): boolean {
   return left === undefined || right === undefined ? left === right : vectorEquals(left.min, right.min) && vectorEquals(left.max, right.max);
+}
+
+function leafGeometryEquals(x: PreparedVolumeLeaf, y: PreparedVolumeLeaf): boolean {
+  return x.id === y.id && x.widthPx === y.widthPx && x.heightPx === y.heightPx && vectorEquals(x.centerUnits, y.centerUnits) &&
+    x.style.width === y.style.width && x.style.height === y.style.height && x.style.transform === y.style.transform &&
+    boundsEqual(x.boundsCssPixels, y.boundsCssPixels);
 }

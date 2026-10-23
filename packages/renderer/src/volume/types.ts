@@ -22,6 +22,8 @@ export interface PreparedVolumeMountOptions {
   readonly lazyDetail?: boolean;
   /** A background can coast to every stack: retain its full decoded bank, changing only transform/opacity. */
   readonly residentStacks?: boolean;
+  /** Distant presentation membership waits until the owner's inertia coast stops. */
+  readonly coasting?: () => boolean;
 }
 
 export interface PreparedVolumeRuntime {
@@ -42,13 +44,17 @@ export interface PreparedMaterialVolumeRuntime extends PreparedVolumeRuntime {
   }[]): void;
 }
 
-export interface PreparedVolumeCameraTransform {
-  readonly rotation: readonly number[];
-  readonly translationCssPixels: readonly [number, number, number];
-  readonly focalPixels: number;
-}
+export type { PreparedVolumeCameraTransform } from '@cssearth/engine';
 
 export interface VolumeLocalCamera {
   readonly positionUnits: PositionM;
   readonly orientationXyzw: PhysicalCameraPose['orientationXyzw'];
+}
+
+export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
+  /** Replace prepared pixels and atlas sampling on one retained spatial topology. */
+  setPresentation(payload: PreparedVolumeMountOptions['payload']): void;
+  /** Whether the slice stack may present at all. Denied, the billboard views carry the cloud at every size; the
+   * universe denies its unselected galaxy, whose slices are for the observer who selected it. */
+  setDetail(allowed: boolean): void;
 }
