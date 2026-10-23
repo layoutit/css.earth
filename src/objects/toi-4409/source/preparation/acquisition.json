@@ -8,7 +8,7 @@
         "refresh"
       ],
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4769939139330057984&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4769939139330057984&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
     },
     {
       "kind": "request-download",

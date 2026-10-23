@@ -33,7 +33,7 @@
       "locator": "gaiadr3.astrophysical_parameters: radius_flame 1.5682815, mass_flame 1.6754763, radius_gspphot 1.5744, teff_gspphot 7938.053 K, logg_gspphot 4.2095"
     },
     {
-      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4792774797545800832&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4792774797545800832&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
       "checkedOn": "2026-09-22",
       "locator": "XP sampled mean spectrum: 343 fluxes from 336 to 1020 nm in 2 nm steps, W m^-2 nm^-1"
     },

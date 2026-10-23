@@ -28,7 +28,7 @@
       "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 612: HR 4660; VizieR III/202, cross-checked against Gaia DR3 XP spectrum, source 1575287046603605888 (12 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #bcd0ff. Routes tried in order: stis-ngsl: HD 106591 is not in the library; pulkovo: HR 4660 is not in the catalogue; kiehling: HR 4660 is not among its 60 stars; burnashev: BS 4660 is not in part2; kharitonov: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1575287046603605888&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1575287046603605888&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

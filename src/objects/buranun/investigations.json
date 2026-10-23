@@ -27,7 +27,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 2576836345872707712, through the CIE 1931 2-degree observer: #ffe2c2. Routes tried in order: stis-ngsl: HD 7446 is not in the library; pulkovo: HR 367 is not in the catalogue; kiehling: HR 367 is not among its 60 stars; kharitonov: HR 367 is not in the catalogue; burnashev: BS 367 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2576836345872707712&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2576836345872707712&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

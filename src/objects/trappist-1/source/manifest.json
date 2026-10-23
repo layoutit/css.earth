@@ -111,7 +111,7 @@
     {
       "id": "trappist-1-gaia-dr3-xp-continuous",
       "path": "photometry/gaia-dr3-xp-continuous.csv",
-      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2635476908753563008&format=csv&DATA_STRUCTURE=RAW",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2635476908753563008&format=csv&DATA_STRUCTURE=DATAMODEL_GAIA",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2",
       "license": "Gaia data terms: free use with acknowledgement",
       "licenseEvidence": [
@@ -161,7 +161,7 @@
           {
             "kind": "facility",
             "facilityId": "gaia",
-            "evidence": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2635476908753563008&format=csv&DATA_STRUCTURE=RAW — ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2: the Gaia DR3 continuous BP/RP spectrum the star's color is computed from"
+            "evidence": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2635476908753563008&format=csv&DATA_STRUCTURE=DATAMODEL_GAIA — ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2: the Gaia DR3 continuous BP/RP spectrum the star's color is computed from"
           }
         ]
       }

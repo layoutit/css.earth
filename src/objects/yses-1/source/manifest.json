@@ -86,7 +86,7 @@
     {
       "id": "yses-1-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5864061893213196032&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5864061893213196032&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data are released under the ESA Gaia data usage terms: free use with the Gaia mission and DPAC acknowledged.",
       "acquisition": "Gaia DataLink download in source/preparation/acquisition.json: the externally calibrated BP/RP sampled mean spectrum of source_id 5864061893213196032, 343 samples from 336 to 1020 nm.",

@@ -28,7 +28,7 @@
       "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 539: HR 3757; VizieR III/202, cross-checked against Gaia DR3 XP spectrum, source 1064092789129355136 (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #dee4ff. Routes tried in order: stis-ngsl: HD 81937 is not in the library; pulkovo: HR 3757 is not in the catalogue; kiehling: HR 3757 is not among its 60 stars; burnashev: BS 3757 is not in part2; kharitonov: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1064092789129355136&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1064092789129355136&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

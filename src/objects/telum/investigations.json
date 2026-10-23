@@ -29,7 +29,7 @@
       "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 908: HR 7635; VizieR III/202, cross-checked against Gaia DR3 XP spectrum, source 1823067317695766784 (36 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffcb8a. Routes tried in order: stis-ngsl: HD 189319 is not in the library; pulkovo: the spectrum was found but gives no color (Pulkovo flux must be finite.); kiehling: HR 7635 is not among its 60 stars; burnashev: BS 7635 is not in part2; kharitonov: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1823067317695766784&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1823067317695766784&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

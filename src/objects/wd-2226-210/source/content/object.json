@@ -61,7 +61,7 @@
         "source": {
           "id": "wd-2226-210-stellar-color",
           "path": "../manifest.json",
-          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6628874205642084224&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6628874205642084224&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law (u1 0.0593, u2 0.0996) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest (Johnson V)."

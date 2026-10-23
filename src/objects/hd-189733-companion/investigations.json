@@ -36,7 +36,7 @@
       "status": "included",
       "finding": "has_xp_sampled is true. The sampled spectrum through the CIE 1931 2-degree observer gives sRGB 255, 201, 123; below about 400 nm the samples are within their errors of zero, and one standard error at every sample (stopping at zero) moves the blue channel from 121 to 126.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816176111360&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816176111360&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {
