@@ -22,6 +22,8 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   assert.equal(read.mock.callCount(), 1); assert.deepEqual(read.mock.calls[0]!.arguments, [descriptor.prepared.url]);
   const slices = payload.stacks.flatMap(stack => stack.leaves);
   const sky = payload.sky?.faces ?? [];
+  const far = payload.farPlanes ? [...payload.farPlanes.stacks.flatMap(stack => stack.leaves), payload.farPlanes.side.leaf,
+    { texturePath: payload.farPlanes.side.highTexturePath }] : [];
   assert.equal(Boolean(payload.sky), Boolean(recipe.sky));
   // The far bank uses all three uniform, local-transfer sets. Path skies have their own reader and inventory entries.
   const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u,''),base);
@@ -31,12 +33,12 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   assert.equal(payload.mergedOpticalCopies, 3, "each slab image holds its three optical copies");
   assert.ok(slices.every(leaf=>leaf.texturePath.startsWith('b30-slices/')));
   assert.equal(payload.impostors, undefined);
-  assert.equal(payload.resources.length, slices.length + sky.length);
+  assert.equal(payload.resources.length, slices.length + sky.length + far.length);
   // The prepared traversal owns presentation order; source depth order is not
   // a loader instruction. Keep every leaf and transport the authored ordering.
   const prepared = JSON.parse(new TextDecoder().decode(bytes));
   assert.deepEqual(payload.stacks, prepared.data.stacks);
-  const used = [...slices, ...sky].map(image => image.texturePath).sort();
+  const used = [...slices, ...sky, ...far].map(image => image.texturePath).sort();
   assert.deepEqual(payload.resources.map(resource => resource.path).sort(), used);
   assert.deepEqual(payload.resources.map(({ path, bytes }) => ({ filename: path, bytes }))
     .sort((a, b) => a.filename.localeCompare(b.filename)), images.map(({ filename, bytes }) => ({ filename, bytes }))

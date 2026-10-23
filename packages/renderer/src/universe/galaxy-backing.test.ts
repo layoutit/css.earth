@@ -27,3 +27,18 @@ test('a backing mounts the shared parsed leaf and removes it when destroyed', ()
   assert.throws(() => mountGalaxyBacking({ host, before: null, payload: cropped, resolveResource: path => `/${path}` }),
     /backing: the backing leaf backing\/backing\.webp is drawn as an image filling its box; its backgroundSize must be "32px 16px" \(got "64px 16px"\)/);
 });
+
+test('a fixed picture accepts the same native focal length and unit scale as its volume', () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const frame = { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
+  const picture = mountGalaxyBacking({ host, before: null, payload: { id: 'fixture', frame, leaf: { texturePath: 'picture.png',
+    style: { width: '2px', height: '2px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', backgroundSize: '2px 2px', backgroundPosition: '0px 0px' } } },
+  resolveResource: path => path, nativeFocalCss: '400px', unitScale: 100 });
+  try {
+    picture.publish({ world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+      viewport: { focalPixels: 900, principalOffsetPixels: [0, 0] } });
+    assert.equal(picture.root.querySelector<HTMLElement>('.css-volume-camera')!.style.perspective, '400px');
+    assert.ok(picture.root.querySelector<HTMLElement>('.css-volume-scene')!.style.transform.includes('calc(400px + -1000px)'));
+  } finally { picture.destroy(); }
+});

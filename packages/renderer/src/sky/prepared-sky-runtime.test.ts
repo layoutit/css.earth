@@ -261,6 +261,11 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   assert.equal(volumeImage.style.transformStyle, undefined);
   // The galaxy is its bulge slices, mounted directly: it has no impostor views to hand off to.
   assert.equal(volumeImage.children.some(node => node.className === 'css-volume-impostors'), false);
+  // Its stack projections are prepared off document: the first publication that selects them puts them under the image layer.
+  assert.equal(volumeImage.children.filter(node => node.className === 'css-volume-projection').length, 0);
+  mounted.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt, pose: {
+    positionM: context.focus.positionM.map((n: number, index: number) => n + (index === 2 ? 4 * context.volume.discHalfHeightM : 0)) as [number, number, number],
+    orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
   assert.equal(volumeImage.children.filter(node => node.className === 'css-volume-projection').length, 3);
   // Each stack's projection, a direct child of the image layer, is clipped to the viewport. Unclipped, a stack seen from
   // inside its span projects its nearest sheet ~250,000 px wide and Chromium drops the flattened surface: the galaxy

@@ -1,5 +1,6 @@
 import { samePreparedVolumeTopology, validatePreparedCssVolume } from '@cssearth/objects';
 import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
+import { mountPreparedVolumeFarPlanes } from './prepared-volume-far-planes.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
 import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/view/native-projection.js';
@@ -19,6 +20,7 @@ export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
 /** Retain the full geometry, but publish it only when depth can occupy visible screen pixels. */
 export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, completedOpacity: (runtime: PreparedVolumeRuntime) => number): PreparedVolumeLodRuntime {
   const initial = validatePreparedCssVolume(options.payload), bank = initial.impostors;
+  if (initial.farPlanes) return mountPreparedVolumeFarPlanes(options, completedOpacity);
   const materials = (payload: PreparedVolumeMountOptions['payload']) => AXES.flatMap(axis =>
     payload.stacks.find(stack => stack.axis === axis)!.leaves.map(leaf => ({
       textureUrl: options.resolveResource(leaf.texturePath),

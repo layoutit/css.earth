@@ -22,6 +22,8 @@ export interface PreparedVolumeMountOptions {
   readonly lazyDetail?: boolean;
   /** A background can coast to every stack: retain its full decoded bank, changing only transform/opacity. */
   readonly residentStacks?: boolean;
+  /** Distant presentation membership waits until the owner's inertia coast stops. */
+  readonly coasting?: () => boolean;
 }
 
 export interface PreparedVolumeRuntime {
