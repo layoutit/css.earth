@@ -912,8 +912,10 @@ the flat **Color** the star had.
 The contrast is drawn stronger because the measured one cannot be seen. AU Microscopii is among the most spotted stars
 here: its darkest longitude gives 21% less light than its brightest, which is one tenth on a display, and most stars swing by
 1 or 2%. Two weaker stretches were tried on the page and were still faint, and a scale that ran toward black read as shadow
-on the star. So the darkest part is drawn as a darker, richer step of the star's own hue (0.4 lower in lightness and 0.12
-higher in chroma, in OKLCH), chosen by eye from sheets of options. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
+on the star. So the darkest part is drawn as a darker, richer step of the star's own hue (0.4 lower in lightness and 2.2
+times its chroma, in OKLCH), chosen by eye from sheets of options. The chroma is a multiple of the star's own, so a nearly
+white star's darker parts stay nearly neutral: a fixed step of 0.12 drew the faint violet of HD 73344's Gaia color ten
+times stronger than the color holds it. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
 values on its scale. Every star's scale is its own, so a faintly spotted star is drawn as strongly as a heavily spotted one;
 the scale's ends and the text tell them apart.
 
