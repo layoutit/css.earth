@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-mark-map-usage.mts [--ref=origin/main] [--dry-run]. Marks the
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-mark-map-usage.mts [--ref=origin/main] [--dry-run]. Marks the
 // ledger's USGS and Photojournal maps that a css.earth body already downloads; the work is in @cssearth/bake/sources/astronomy-data.
 /**
  * A dataset is `this product` for a body when one of its map files has the same file name as an `origin` or `url` in

@@ -1,6 +1,6 @@
 // Read the targets a record's own archive label states, for ledger rows collected without one.
 //
-//   TARGETS_WORK_DIR=output/ledger-targets node packages/bake/cli/astronomy-data-collect-targets.mts
+//   TARGETS_WORK_DIR=output/ledger-targets node packages/bake/cli/astronomy-data/astronomy-data-collect-targets.mts
 //
 // PDS4 bundles and collections name their targets in <Target_Identification><name>; PDS3 data sets name theirs as
 // TARGET_NAME in catalog/dataset.cat, including non-body values such as CHECKOUT or CALIBRATION, which are kept as stated.

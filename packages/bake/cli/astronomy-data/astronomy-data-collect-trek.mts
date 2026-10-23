@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-collect-trek.mts [--dry-run]. Collects NASA Solar System Treks map
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-collect-trek.mts [--dry-run]. Collects NASA Solar System Treks map
 // products into the ledger; the work is in @cssearth/bake/sources/astronomy-data.
 /**
  * Each Trek portal lists its layers through TrekServices searchItems. A product with a category (Imagery, Topography,

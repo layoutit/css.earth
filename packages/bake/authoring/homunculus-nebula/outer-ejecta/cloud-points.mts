@@ -28,12 +28,12 @@ import { readFitsFileRegion } from '@cssearth/fits/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { stlTriangles } from '@cssearth/bake/image-layers';
-import { distanceTransformEdt, gaussianFilter, gradient, mapCoordinates, medianFilter } from './ndimage.mts';
-import { median, nanmedian, pairwiseSum, percentile } from './numpy-statistics.mts';
+import { distanceTransformEdt, gaussianFilter, gradient, mapCoordinates, medianFilter } from './python-ports/ndimage.mts';
+import { median, nanmedian, pairwiseSum, percentile } from './python-ports/numpy-statistics.mts';
 import { symmetricEigen } from './symmetric-eigen.mts';
-import { defaultRng } from './numpy-random.mts';
-import { fillPolygon } from './pil-polygon.mts';
-import { pyRound, type PyJson } from './python-json.mts';
+import { defaultRng } from './python-ports/numpy-random.mts';
+import { fillPolygon } from './python-ports/pil-polygon.mts';
+import { pyRound, type PyJson } from './python-ports/python-json.mts';
 import { channelOf, readPicture } from './heic-registration.mts';
 import { readScienceImage, STAR_DEC_DEG, STAR_RA_DEG } from './sky-grid.mts';
 

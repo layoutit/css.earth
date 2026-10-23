@@ -11,8 +11,8 @@
  *   bleed trail - the saturated plateau joined to the star: pixels above 85% of the 99.8th percentile between 12 and 40
  *                 arcsec, in a connected patch that touches the inner 6 arcsec and reaches beyond 20, grown by 20 pixels.
  */
-import { binaryDilation, gaussianFilter, label, maximumFilter, medianFilter } from './ndimage.mts';
-import { median, nanmedian, percentile } from './numpy-statistics.mts';
+import { binaryDilation, gaussianFilter, label, maximumFilter, medianFilter } from './python-ports/ndimage.mts';
+import { median, nanmedian, percentile } from './python-ports/numpy-statistics.mts';
 import { HALF, PIX, SIDE } from './sky-grid.mts';
 import type { GridImage } from './hubble-epochs.mts';
 import { roundHalfEven } from './hubble-motions.mts';

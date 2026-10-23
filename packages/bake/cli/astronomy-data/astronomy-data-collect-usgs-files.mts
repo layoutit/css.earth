@@ -1,6 +1,6 @@
 // List the files each USGS Astrogeology (Astropedia) product in the ledger actually offers, from its own product page.
 //
-//   USGS_WORK_DIR=output/usgs-files node packages/bake/cli/astronomy-data-collect-usgs-files.mts
+//   USGS_WORK_DIR=output/usgs-files node packages/bake/cli/astronomy-data/astronomy-data-collect-usgs-files.mts
 //
 // The first USGS screen recorded "No TIFF evidence found" without reading each product. An Astropedia product page links
 // every resource it serves (CKAN downloads under /ckan/dataset/<id>/resource/, and external files such as planetarynames

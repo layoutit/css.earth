@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-slice.mts --source=opus --target=Mimas --format=json|tsv. The
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-slice.mts --source=opus --target=Mimas --format=json|tsv. The
 // work is in @cssearth/bake/sources/astronomy-data.
 import { loadRows, slice, tsv } from "@cssearth/bake/sources/astronomy-data";
 const params = new URLSearchParams();

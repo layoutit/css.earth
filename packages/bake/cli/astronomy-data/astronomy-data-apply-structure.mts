@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-apply-structure.mts [--dry-run]. Gives the ledger a data structure
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-apply-structure.mts [--dry-run]. Gives the ledger a data structure
 // a query can rely on, in one transaction; the work is in @cssearth/bake/sources/astronomy-data.
 //
 // - Moves the listings that repeat datasets out of `datasets` into `inventory`, with their proposal links: OPUS volumes

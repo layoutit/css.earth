@@ -1,6 +1,6 @@
 // Apply reviewed collector output to the ledger in one transaction.
 //
-//   node packages/bake/cli/astronomy-data-apply-ledger-fixes.mts [--dry-run]
+//   node packages/bake/cli/astronomy-data/astronomy-data-apply-ledger-fixes.mts [--dry-run]
 //
 // Reads the scratch output of astronomy-data-collect-photojournal.mts, astronomy-data-collect-usgs-files.mts and
 // astronomy-data-collect-targets.mts and:

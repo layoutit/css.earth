@@ -12,7 +12,7 @@ import { GALAXY_SLICES } from './galaxy-slice-source.mts';
 import { galaxySlices, record } from './galaxy-slices.mts';
 import { runGalaxyPython } from './galaxy-python.mts';
 import { mergeOpticalCopies } from './galaxy-merged-copies.mts';
-import { prepareGalaxyFarPlanes } from './galaxy-far-planes.mts';
+import { prepareGalaxyFarPlanes } from './far-planes/galaxy-far-planes.mts';
 import { GALAXY_OUTSIDE_DISPLAY_SCALE } from './galaxy-outside-display.mts';
 
 export function parseGalaxySliceControls(values: Readonly<Record<string, string | boolean | undefined>>) {

@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-build-instruments.mts [--dry-run]. Builds missions, instruments and
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-build-instruments.mts [--dry-run]. Builds missions, instruments and
 // dataset_instruments in the ledger from each archive's own instrument fields; the work is in @cssearth/bake/sources/astronomy-data.
 import { DatabaseSync } from "node:sqlite";
 import { databasePath } from "@cssearth/bake/sources/astronomy-data";

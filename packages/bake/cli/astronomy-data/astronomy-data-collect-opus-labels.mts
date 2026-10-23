@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-collect-opus-labels.mts. OPUS pipeline stage: reads the original
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-collect-opus-labels.mts. OPUS pipeline stage: reads the original
 // scientific PDS label/XML for each product sample, into OPUS_WORK_DIR; the shared client is in @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { array, object, string, batch, workDir } from "@cssearth/bake/sources/astronomy-data";

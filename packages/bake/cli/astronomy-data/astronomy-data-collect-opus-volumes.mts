@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-collect-opus-volumes.mts. OPUS pipeline stage: one-record samples
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-collect-opus-volumes.mts. OPUS pipeline stage: one-record samples
 // per instrument/bundle volume, into OPUS_WORK_DIR; the shared client is in @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile } from "node:fs/promises";
 import { get, batch, object, array, number, workDir } from "@cssearth/bake/sources/astronomy-data";

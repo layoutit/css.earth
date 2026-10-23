@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-browse.mts. Opens the ledger in Datasette, read-only, with the
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-browse.mts. Opens the ledger in Datasette, read-only, with the
 // overview dashboard, the dark theme and the map gallery; the work is in @cssearth/bake/sources/astronomy-data.
 /**
  * The first run installs the pinned Datasette packages into output/ledger-venv (ignored); PORT changes the port

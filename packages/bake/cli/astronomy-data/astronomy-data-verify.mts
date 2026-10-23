@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-verify.mts. Checks the astronomy data ledger's integrity, snapshot
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-verify.mts. Checks the astronomy data ledger's integrity, snapshot
 // coverage, retained evidence and document links; the work is in @cssearth/bake/sources/astronomy-data.
 import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";

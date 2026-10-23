@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-collect-opus.mts. Collects OPUS catalogue, sample, volume,
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-collect-opus.mts. Collects OPUS catalogue, sample, volume,
 // product, label and review data into ignored scratch output (OPUS_WORK_DIR), running the astronomy-data-collect-opus-{
 // catalog,samples,volumes,products,labels,review}.mts stages in order; the shared client is in @cssearth/bake/sources/astronomy-data.
 import { mkdir, writeFile } from "node:fs/promises";

@@ -15,8 +15,8 @@
  */
 import { skyProjection, type FitsHeader, type SkyProjection } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
-import { medianFilter, uniformFilter } from './ndimage.mts';
-import { median, nanmedian, percentile } from './numpy-statistics.mts';
+import { medianFilter, uniformFilter } from './python-ports/ndimage.mts';
+import { median, nanmedian, percentile } from './python-ports/numpy-statistics.mts';
 import { readCubePlanes, STAR_DEC_DEG, STAR_RA_DEG } from './sky-grid.mts';
 
 /** H-beta's rest wavelength (Angstrom, air) and the speed of light (km/s). */

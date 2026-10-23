@@ -1,6 +1,6 @@
 // Collect NASA Photojournal map candidates from science.nasa.gov's public WordPress API into ignored scratch output.
 //
-//   PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node packages/bake/cli/astronomy-data-collect-photojournal.mts
+//   PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node packages/bake/cli/astronomy-data/astronomy-data-collect-photojournal.mts
 //
 // The Photojournal has no "map" category, so an entry is chosen by what it says about itself: a title that names a map,
 // mosaic, globe, hemisphere, projection or atlas (plural forms included), or a caption that states a map projection or a

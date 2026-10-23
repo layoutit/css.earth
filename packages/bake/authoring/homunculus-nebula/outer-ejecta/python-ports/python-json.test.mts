@@ -26,7 +26,7 @@ test('pythonJson writes what json.dumps writes', () => {
 });
 
 test('the tracked source records read back and rewrite to the same bytes', async t => {
-  const source = resolve(import.meta.dirname, '../../../../../src/objects/homunculus-nebula-layers/source');
+  const source = resolve(import.meta.dirname, '../../../../../../src/objects/homunculus-nebula-layers/source');
   for (const file of ['cloud-points.json', 'tube.json', 'kinematics.json']) {
     const text = await readFile(resolve(source, file), 'utf8').catch(() => undefined);
     if (text === undefined) { t.diagnostic(`${file} absent`); continue; }

@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-collect-archives.mts umd|darts. Collects University of Maryland
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-collect-archives.mts umd|darts. Collects University of Maryland
 // Small Bodies Node or JAXA DARTS metadata into ignored scratch output (ARCHIVE_WORK_DIR); the work is in
 // @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile, mkdir } from "node:fs/promises";

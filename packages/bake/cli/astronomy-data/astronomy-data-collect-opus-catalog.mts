@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-collect-opus-catalog.mts. OPUS pipeline stage: global and
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-collect-opus-catalog.mts. OPUS pipeline stage: global and
 // per-instrument/target catalogue counts, into OPUS_WORK_DIR; the shared client is in @cssearth/bake/sources/astronomy-data.
 import { writeFile } from "node:fs/promises";
 import { get, mults, object, batch, workDir } from "@cssearth/bake/sources/astronomy-data";

@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/cli/astronomy-data-collect-opus-samples.mts. OPUS pipeline stage: two-record samples
+// Entry script: node packages/bake/cli/astronomy-data/astronomy-data-collect-opus-samples.mts. OPUS pipeline stage: two-record samples
 // per instrument/target family and Cassini/Galileo/Voyager/New Horizons geometry facets, into OPUS_WORK_DIR; the shared
 // client is in @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile } from "node:fs/promises";

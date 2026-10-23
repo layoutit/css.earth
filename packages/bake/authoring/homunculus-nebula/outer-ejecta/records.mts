@@ -13,7 +13,7 @@
  */
 import { npRound } from './cloud-points.mts';
 import { DISTANCE_PC, KMS_PER_ARCSEC_YEAR_PC, tileOf } from './knots.mts';
-import { pyInt, type PyJson } from './python-json.mts';
+import { pyInt, type PyJson } from './python-ports/python-json.mts';
 import { centreline, radius, SAMPLES } from './tube.mts';
 
 /** The kinematics record (cssearth-kinematics-source@1). Each knot's tile is found among the motion rows by its place. */
