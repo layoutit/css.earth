@@ -36,7 +36,7 @@ The page in headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-0
 
 The same page as it opens, and ten wheel steps in, from the Sun's side and turned.
 
-The surface's own tests are the bake's ([surface.test.ts](../../../packages/bake/src/image-layers/surface.test.ts)); this bank adds no bake code. The check of the lobes' width against the paper's speeds is in "The picture" above.
+The surface's own tests are the bake's ([surface.test.ts](../../../packages/bake/src/image-layers/surface/surface.test.ts)); this bank adds no bake code. The check of the lobes' width against the paper's speeds is in "The picture" above.
 
 ## Known problems
 

@@ -34,7 +34,7 @@ The Helix page in headless Chromium at 1440 × 900, device pixel ratio 2, on 202
 
 The same page with the camera turned: the inner disc crossing the ring around it, each with its depth. No page errors.
 
-The bake's tests ([rings.test.ts](../../../packages/bake/src/image-layers/rings.test.ts)) composite a small picture's sheets and glow along the Sun's sight line and compare the sum with the flat bake of the same picture. The same sum over this bank differs from a bake of the picture at quality 100 by 2.2 of 255 levels per channel (root mean square); a flat bake of the picture as one sheet, at 4.9 MB, differs by 1.3. The glow holds 58% of the light.
+The bake's tests ([rings.test.ts](../../../packages/bake/src/image-layers/rings/rings.test.ts)) composite a small picture's sheets and glow along the Sun's sight line and compare the sum with the flat bake of the same picture. The same sum over this bank differs from a bake of the picture at quality 100 by 2.2 of 255 levels per channel (root mean square); a flat bake of the picture as one sheet, at 4.9 MB, differs by 1.3. The glow holds 58% of the light.
 
 The rings' directions were checked against velocities the paper did not have: [Zeigler et al. (2013)](https://doi.org/10.1088/0004-637X/778/1/16) measured 279 HCO+ velocity components over the main ring. Two sine waves in position angle fitted to them come out at 12 km/s toward position angle 280° and 22 km/s toward 160°, against the paper's 15.5 at 288° and 25.5 at 168°; of the four ways to choose each ring's near side, the one drawn fits best. The [ledger](investigations.json) has the numbers.
 
