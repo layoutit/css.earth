@@ -48,10 +48,16 @@ jobs:
           fi
 
   assets:
-    name: Every published asset
+    # About 106,000 keys took the whole 30 minutes in one job and the sweep was cancelled every night (2026-10-18 to
+    # 2026-10-23). Four disjoint shards check them in parallel, each a quarter of the keys.
+    name: Every published asset (${{ matrix.shard }}/4)
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
@@ -71,7 +77,7 @@ jobs:
         # PRs and main pushes check only the keys they add. Only this full sweep notices R2 losing an object whose
         # inventory line did not change; concurrency 8 matches the shared agent's connection cap. A real 404 fails
         # the job and is listed in its summary; unverified (network) keys only warn.
-        run: pnpm check:assets-published --concurrency=8
+        run: pnpm check:assets-published --concurrency=8 --shard=${{ matrix.shard }}/4
 
   typecheck-tests:
     # The full test program also runs on owning PRs and main; this catches ambient dependency drift.
