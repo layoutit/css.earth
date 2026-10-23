@@ -5,8 +5,7 @@ import { writeStyle } from '../rendering/dom/retained-write.js';
 import { axisWeights, completedStackOpacities, mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import { cylindricalSideSelection, cylindricalSideTransform } from './cylindrical-far-plane.js';
 import { projectVolumeDiameter } from './volume-impostor-projection.js';
-import type { PreparedVolumeLodRuntime } from './prepared-volume-lod.js';
-import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
+import type { PreparedVolumeLodRuntime, PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
 
 const AXES = ['x', 'y', 'z'] as const;
 

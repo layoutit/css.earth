@@ -2,20 +2,14 @@ import { samePreparedVolumeTopology, validatePreparedCssVolume } from '@cssearth
 import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
 import { mountPreparedVolumeFarPlanes } from './prepared-volume-far-planes.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
-import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
+import type { PreparedVolumeLodRuntime, PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
+export type { PreparedVolumeLodRuntime } from './types.js';
 import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/view/native-projection.js';
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS, mountPreparedCssVolume } from './prepared-volume-runtime.js';
 
 const AXES = ['x', 'y', 'z'] as const;
 
-export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
-  /** Replace prepared pixels and atlas sampling on one retained spatial topology. */
-  setPresentation(payload: PreparedVolumeMountOptions['payload']): void;
-  /** Whether the slice stack may present at all. Denied, the billboard views carry the cloud at every size; the
-   * universe denies its unselected galaxy, whose slices are for the observer who selected it. */
-  setDetail(allowed: boolean): void;
-}
 
 /** Retain the full geometry, but publish it only when depth can occupy visible screen pixels. */
 export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, completedOpacity: (runtime: PreparedVolumeRuntime) => number): PreparedVolumeLodRuntime {

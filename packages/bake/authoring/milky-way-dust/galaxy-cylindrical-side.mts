@@ -2,11 +2,8 @@ import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { cameraPoseToReferenceFrame, presentPhysicalPoseInVolume } from '@cssearth/engine';
+import { axisWeights, cameraPoseToReferenceFrame, cylindricalSideTransform, mergedOpticalOpacity, preparedVolumeCameraTransform, presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { PreparedCssVolume, PreparedVolumeLeaf } from '@cssearth/objects';
-import { axisWeights, preparedVolumeCameraTransform } from '../../../renderer/src/volume/prepared-volume-projection.ts';
-import { mergedOpticalOpacity } from '../../../renderer/src/volume/optical-opacity.ts';
-import { cylindricalSideTransform } from '../../../renderer/src/volume/cylindrical-far-plane.ts';
 import { decodeLightImage, integratedStackLight, projectLightImage } from './galaxy-far-projection.mts';
 
 export function galaxyFarPublication(volume: PreparedCssVolume, azimuth: number, elevation: number) {

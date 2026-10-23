@@ -1,6 +1,6 @@
 import sharp from 'sharp';
 import type { PreparedVolumeLeaf } from '@cssearth/objects';
-import type { PreparedVolumeCameraTransform } from '../../../renderer/src/volume/types.ts';
+import type { PreparedVolumeCameraTransform } from '@cssearth/engine';
 
 /** Offline calibration quadrature: decoded premultiplied bilinear image samples, perspective plane intersection,
  * depth-sorted source-over, black completed-stack matte. No browser color-management or GPU rounding claim. */

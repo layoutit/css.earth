@@ -1,9 +1,7 @@
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { cameraPoseToReferenceFrame, presentPhysicalPoseInVolume } from '@cssearth/engine';
+import { axisWeights, cameraPoseToReferenceFrame, mergedOpticalOpacity, preparedVolumeCameraTransform, presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { PreparedCssVolume } from '@cssearth/objects';
-import { axisWeights, preparedVolumeCameraTransform } from '../../../renderer/src/volume/prepared-volume-projection.ts';
-import { mergedOpticalOpacity } from '../../../renderer/src/volume/optical-opacity.ts';
 import { decodeLightImage, integratedStackLight, projectLightImage } from './galaxy-far-projection.mts';
 
 /** Fit actual projected columns, including their depth-dependent overlap. Calibration samples the positive octant

@@ -1,17 +1,6 @@
-import type { PreparedCssVolume, PreparedVolumeLeaf } from '@cssearth/objects';
+import type { PreparedCssVolume } from '@cssearth/objects';
 
-/** A rotation around the prepared vertical centre line; it never follows camera elevation. */
-export function cylindricalSideTransform(leaf: PreparedVolumeLeaf, azimuth: number): string {
-  const m = leaf.style.transform.slice(9, -1).split(',').map(Number);
-  const [x, y] = [leaf.centerUnits[1] * 50, leaf.centerUnits[0] * 50];
-  const c = Math.cos(azimuth), s = Math.sin(azimuth);
-  for (const offset of [0, 4, 8, 12]) {
-    const a = m[offset]! - (offset === 12 ? x : 0), b = m[offset + 1]! - (offset === 12 ? y : 0);
-    m[offset] = c * a + s * b + (offset === 12 ? x : 0);
-    m[offset + 1] = -s * a + c * b + (offset === 12 ? y : 0);
-  }
-  return `matrix3d(${m.join(',')})`;
-}
+export { cylindricalSideTransform } from '@cssearth/engine';
 
 /** The two views around `azimuth` and their mix. With `held`, the pair starting at that view stays: inside it the mix
  * follows the azimuth, past it the mix keeps the end the camera left it by. `offset` is the camera's position from the

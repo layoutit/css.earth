@@ -5,7 +5,7 @@ import sharp from 'sharp';
 import { validatePreparedCssVolume, type PreparedCssVolume, type PreparedVolumeLeaf, type VolumeVector } from '@cssearth/objects';
 import { prepareCylindricalSide } from './galaxy-cylindrical-side.mts';
 import { fitProjectedGalaxyGain } from './galaxy-far-gain.mts';
-import { mergedOpticalOpacity } from '../../../renderer/src/volume/optical-opacity.ts';
+import { mergedOpticalOpacity } from '@cssearth/engine';
 
 const AXES = ['x', 'y', 'z'] as const;
 interface PixelLayer { readonly pixels: Uint8Array; readonly width: number; readonly height: number; readonly x: number; readonly y: number }
