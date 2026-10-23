@@ -4,8 +4,8 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test, { mock } from 'node:test';
-import * as paths from './paths/index.js';
-import { installedMarkerIssue, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
+import * as paths from '../paths/index.js';
+import { installedMarkerIssue, readToolchainPins, writeInstalledMarker } from '../toolchain/marker.js';
 
 test('PICASO migration installs and verifies the destination rather than a compatible legacy root', async t => {
   const directory = await mkdtemp(resolve(tmpdir(), 'picaso-migration-'));
@@ -37,12 +37,12 @@ test('PICASO migration installs and verifies the destination rather than a compa
     return args[0] === '-c' ? '4.1' : '';
   };
   const mocks = [
-    mock.module(new URL('./http-download.ts', import.meta.url).href, { namedExports: {
+    mock.module(new URL('../http-download.ts', import.meta.url).href, { namedExports: {
       downloadHttpFile: async (url: string, path: string) => { calls.push({ command: 'download', args: [url, path] }); put(path); } } }),
-    mock.module(new URL('./paths/index.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot, WORKSPACE: undefined } }),
-    mock.module(new URL('./toolchain/micromamba.ts', import.meta.url).href, { namedExports: {
+    mock.module(new URL('../paths/index.ts', import.meta.url).href, { namedExports: { ...paths, USER_ROOT: userRoot, WORKSPACE: undefined } }),
+    mock.module(new URL('../toolchain/micromamba.ts', import.meta.url).href, { namedExports: {
       assertManagedPythonPlatform: () => {}, resolveMicromamba: async () => '/fixture/micromamba' } }),
-    mock.module(new URL('./toolchain/process.ts', import.meta.url).href, { namedExports: {
+    mock.module(new URL('../toolchain/process.ts', import.meta.url).href, { namedExports: {
       runToolchainProcess: run, runToolchainProcessAsync: async (command: string, args: readonly string[], options?: { env?: NodeJS.ProcessEnv }) => run(command, args, options),
     } }),
   ];

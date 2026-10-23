@@ -1,7 +1,7 @@
 /** PlanetMapper owns navigation and resampling; no interactive viewer is started. */
-import { telescopePythonEnvironment } from './paths/index.js';
+import { telescopePythonEnvironment } from '../paths/index.js';
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain } from './toolchain/toolchain.js';
+import { astroqueryToolchain } from '../toolchain/toolchain.js';
 import { requireRecord } from '@cssearth/core';
 import { SCIENCE_UNIT_PYTHON } from './science.js';
 

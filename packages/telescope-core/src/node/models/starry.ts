@@ -2,15 +2,15 @@
  * css.earth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
  * (starry-toolchain.json says why). Install: telescope toolchain install starry */
-import { installManagedToolchain } from './toolchain/environment.js';
-import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
-import { resolveInstalledToolchain } from './toolchain/resolver.js';
-import { runToolchainProcess, runToolchainProcessAsync } from './toolchain/process.js';
+import { installManagedToolchain } from '../toolchain/environment.js';
+import { resolveMicromamba, assertManagedPythonPlatform } from '../toolchain/micromamba.js';
+import { resolveInstalledToolchain } from '../toolchain/resolver.js';
+import { runToolchainProcess, runToolchainProcessAsync } from '../toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { TOOLCHAINS, USER_ROOT } from './paths/index.js';
-import { assertInstalledMarker, readToolchainPins } from './toolchain/marker.js';
+import { TOOLCHAINS, USER_ROOT } from '../paths/index.js';
+import { assertInstalledMarker, readToolchainPins } from '../toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const STARRY_ROOT = resolve(USER_ROOT, 'output/toolchains/starry');

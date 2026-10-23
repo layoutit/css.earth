@@ -2,17 +2,17 @@
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
  * (picaso-toolchain.json says what each is). Install: telescope toolchain install picaso */
-import { toolchainInstallSignal } from './toolchain/progress.js';
-import { installManagedToolchain } from './toolchain/environment.js';
-import { downloadHttpFile } from './http-download.js';
-import { resolveMicromamba, assertManagedPythonPlatform } from './toolchain/micromamba.js';
-import { resolveInstalledToolchain } from './toolchain/resolver.js';
-import { runToolchainProcess, runToolchainProcessAsync } from './toolchain/process.js';
+import { toolchainInstallSignal } from '../toolchain/progress.js';
+import { installManagedToolchain } from '../toolchain/environment.js';
+import { downloadHttpFile } from '../http-download.js';
+import { resolveMicromamba, assertManagedPythonPlatform } from '../toolchain/micromamba.js';
+import { resolveInstalledToolchain } from '../toolchain/resolver.js';
+import { runToolchainProcess, runToolchainProcessAsync } from '../toolchain/process.js';
 import { accessSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { TOOLCHAINS, USER_ROOT } from './paths/index.js';
-import { assertInstalledMarker, installedMarkerIssue, readToolchainPins } from './toolchain/marker.js';
+import { TOOLCHAINS, USER_ROOT } from '../paths/index.js';
+import { assertInstalledMarker, installedMarkerIssue, readToolchainPins } from '../toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PICASO_ROOT = resolve(USER_ROOT, 'output/toolchains/picaso');
