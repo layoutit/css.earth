@@ -631,11 +631,11 @@ rule for its method (the mean, and no verdict past 20% apart; K2-95, 23.85 and 1
 table lists must be among the star's light curves at MAST; and campaigns 10 and 11 are read as their second, longer
 parts. The swing is the table's, the mean of the campaigns' variability ranges. Of the 12, 11 have a map.
 
-![The 11 stars' Color + brightness previews, as baked](images/k2-catalogue-brightness-maps.webp)
+![The 11 stars' pages as they open on Color + brightness](images/k2-catalogue-brightness-maps.webp)
 
-The previews each page's dataset card shows, on 2026-10-23, left to right and top to bottom: HD 73344, K2-105, K2-117,
-K2-152, K2-162, K2-174, K2-18, K2-31, K2-33, K2-90 and WASP-157. Each is drawn on its own map's scale, far stronger than the
-real contrast.
+Each star's page as it opens in the dev server on 2026-10-23, at 800 px wide, cropped to the card and the star: HD 73344,
+K2-105, K2-117, K2-152 (top row), K2-162, K2-174, K2-18, K2-31, K2-33, K2-90 and WASP-157. The darker patches are drawn far
+stronger than the real contrast, on each map's own scale.
 
 ### K2: a one-star paper's own verdict
 
