@@ -1,5 +1,5 @@
 import { MeshoptSimplifier } from 'meshoptimizer';
-import type { ImageLayerRecipe } from './config.ts';
+import type { ImageLayerRecipe } from '../config.ts';
 import { imageLayerSurfaceCrossings, SURFACE_MOST_CROSSINGS, surfaceOnPicture } from './surface.ts';
 
 type Surface = NonNullable<ImageLayerRecipe['geometry']['surface']>;

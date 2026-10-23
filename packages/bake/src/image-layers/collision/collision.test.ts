@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import { parseImageLayerRecipe } from './config.ts';
+import { parseImageLayerRecipe } from '../config.ts';
 import { imageLayerCollision, imageLayerCollisionAccount, imageLayerCollisionLeaves } from './collision.ts';
 
 // A sky of one arcsecond a pixel, east to the left: a place is its arcseconds east and north of the frame's middle.

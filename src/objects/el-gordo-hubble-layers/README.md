@@ -35,7 +35,7 @@ drawn from the pictures themselves. The page's other dataset is [Webb's picture]
 
 ## The gas and the mass
 
-`geometry.collision` in the recipe; the bake is `packages/bake/src/image-layers/collision.ts`.
+`geometry.collision` in the recipe; the bake is `packages/bake/src/image-layers/collision/collision.ts`.
 
 - **Lines:** the gas's is Menanteau et al.'s axis; the mass's runs from the north-western peak to the south-eastern.
 - **Tilt:** none drawn. Ng et al. estimate 21° (+9, -11), but which end is the farther is not settled: the south-eastern

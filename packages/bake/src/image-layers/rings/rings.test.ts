@@ -4,8 +4,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import { parseImageLayerRecipe } from './config.ts';
-import { prepareImageLayers } from './prepare.ts';
+import { parseImageLayerRecipe } from '../config.ts';
+import { prepareImageLayers } from '../prepare.ts';
 import { imageLayerRingsModel, imageLayerRingsSheet, RINGS_OPACITY_REACH_PIXELS } from './rings.ts';
 
 type Leaf = { id: string; axis: string; texturePath: string; verticesUnits: number[][]; bytes: number };

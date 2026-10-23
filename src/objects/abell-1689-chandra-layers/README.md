@@ -80,7 +80,7 @@ gas and the mass each on ellipsoidal shells. What the recipe takes from the pape
 
 ## The galaxies
 
-`geometry.ellipsoid.galaxies` in the recipe; the bake is `packages/bake/src/image-layers/galaxies.ts`.
+`geometry.ellipsoid.galaxies` in the recipe; the bake is `packages/bake/src/image-layers/collision/galaxies.ts`.
 
 - **Why drawn:** a galaxy's redshift gives its speed, not how far along the sight line it lies within the cluster.
   Umetsu et al. (2015) find the mass aligned with the distribution of the cluster's galaxies, so the galaxies are placed
@@ -100,7 +100,7 @@ gas and the mass each on ellipsoidal shells. What the recipe takes from the pape
 
 ## The gas and the mass
 
-`geometry.ellipsoid` in the recipe; the bake is `packages/bake/src/image-layers/collision.ts`.
+`geometry.ellipsoid` in the recipe; the bake is `packages/bake/src/image-layers/collision/collision.ts`.
 
 - **Shells:** each body's picture is read on its ellipses, in steps of 0.59″ of the long half axis. The shells' mean
   light is taken apart from the outside in, which gives how much each shell emits. Each pixel keeps its own light; the

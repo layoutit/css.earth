@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import type { ImageLayerRecipe } from './config.ts';
+import type { ImageLayerRecipe } from '../config.ts';
 import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, RIM_JOINS_PIXELS, stlTriangles, SURFACE_MOST_CROSSINGS } from './surface.ts';
 
 type Surface = NonNullable<ImageLayerRecipe['geometry']['surface']>;

@@ -1,5 +1,5 @@
-import type { ImageLayerRecipe } from './config.ts';
-import type { ShapeLayer, ShapeWalls } from './shape-walls.ts';
+import type { ImageLayerRecipe } from '../config.ts';
+import type { ShapeLayer, ShapeWalls } from '../shape-walls.ts';
 
 type Surface = NonNullable<ImageLayerRecipe['geometry']['surface']>;
 

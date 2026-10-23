@@ -1,4 +1,4 @@
-import type { ImageLayerRecipe } from './config.ts';
+import type { ImageLayerRecipe } from '../config.ts';
 import { SURFACE_MOST_CROSSINGS, surfaceOnPicture, type SurfaceCrossings } from './surface.ts';
 import type { SurfaceTriangle } from './surface-mesh.ts';
 

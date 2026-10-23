@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
-import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.ts';
+import { parseImageLayerRecipe, type ImageLayerRecipe } from '../config.ts';
 import { closedMesh, edgeShare, imageLayerSurfaceMesh, MESH_OPACITY_FLOOR, MESH_SCENE_TRIANGLES, meshScenes, pushPull } from './surface-mesh.ts';
 import { stlTriangles } from './surface.ts';
 
@@ -50,7 +50,7 @@ test('a closed ball is drawn as its own triangles: dark dust opaque, bright gas 
 });
 
 test('a recipe draws its surface as a closed mesh with its filament and detail maps, and refuses what it cannot read', () => {
-  const recipe = JSON.parse(readFileSync(resolve(import.meta.dirname, '../../../../src/objects/homunculus-nebula-layers/source/recipe.json'), 'utf8')) as { geometry: { surface: Record<string, unknown> } };
+  const recipe = JSON.parse(readFileSync(resolve(import.meta.dirname, '../../../../../src/objects/homunculus-nebula-layers/source/recipe.json'), 'utf8')) as { geometry: { surface: Record<string, unknown> } };
   const parsed = parseImageLayerRecipe(recipe).geometry.surface!;
   assert.equal(parsed.closedMesh, true); assert.deepEqual(parsed.filaments, { path: 'filaments.png', darkness: 0.65, detailPath: 'detail.png' }); assert.deepEqual(parsed.edgeFit, { maxStretch: 0.15, smoothDeg: 6 });
   const with_ = (patch: Record<string, unknown>) => () => parseImageLayerRecipe({ ...recipe, geometry: { ...recipe.geometry, surface: { ...recipe.geometry.surface, ...patch } } });

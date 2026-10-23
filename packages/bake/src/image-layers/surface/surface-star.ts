@@ -1,4 +1,4 @@
-import type { ImageLayerRecipe } from './config.ts';
+import type { ImageLayerRecipe } from '../config.ts';
 import { surfaceOnPicture } from './surface.ts';
 import type { SurfaceTriangle } from './surface-mesh.ts';
 

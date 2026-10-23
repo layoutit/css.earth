@@ -1,5 +1,5 @@
-import type { ImageLayerRecipe, Vec3 } from './config.ts';
-import { rad } from './disc.ts';
+import type { ImageLayerRecipe, Vec3 } from '../config.ts';
+import { rad } from '../disc.ts';
 
 type Rings = NonNullable<ImageLayerRecipe['geometry']['rings']>;
 

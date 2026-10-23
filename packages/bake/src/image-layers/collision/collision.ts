@@ -1,10 +1,10 @@
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { CollisionBody, EllipsoidBody, ImageLayerRecipe, LayerAxis } from './config.ts';
-import { rad } from './disc.ts';
+import type { CollisionBody, EllipsoidBody, ImageLayerRecipe, LayerAxis } from '../config.ts';
+import { rad } from '../disc.ts';
 import { removeCompactSources } from './compact-sources.ts';
 import { imageLayerGalaxies } from './galaxies.ts';
-import { paintTexel } from './texel.ts';
+import { paintTexel } from '../texel.ts';
 
 /** A cluster merger's hot gas and mass (`geometry.collision`). The X-ray papers take the gas as round about the line
  * the subcluster moves along, and take it apart under that symmetry; the lensing papers fit the mass with two round
