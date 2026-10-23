@@ -3,6 +3,30 @@
   "assets": [
     {
       "location": "prepared",
+      "filename": "b30-far-planes/side-high.png",
+      "bytes": 627691,
+      "sha256": "71746d9a07c3b7a3ff131972d7dddacbdc9e3954173d204b865485c929301cde"
+    },
+    {
+      "location": "prepared",
+      "filename": "b30-far-planes/side.png",
+      "bytes": 501543,
+      "sha256": "5aa37780585f9a43d4c26f88ad829e00b6cc5482aed0335813e707ac93333a22"
+    },
+    {
+      "location": "prepared",
+      "filename": "b30-far-planes/z-high.png",
+      "bytes": 251729,
+      "sha256": "763e84974140e0fd73e3ca94a46a95ba98df100ea721f0583efe7be8a28850c3"
+    },
+    {
+      "location": "prepared",
+      "filename": "b30-far-planes/z.png",
+      "bytes": 252412,
+      "sha256": "31bfcc3a682286ee68a1946cd99e9db4bb92596095e8fb95f0f519fc10ff4b86"
+    },
+    {
+      "location": "prepared",
       "filename": "b30-slices/x/000.png",
       "bytes": 8234,
       "sha256": "fb6c899ac050031c221fc76e4fcd272c3c0fdc5e63aad384ac0256a5316501d5"
@@ -346,8 +370,8 @@
     {
       "location": "prepared",
       "filename": "volume.json",
-      "bytes": 25178,
-      "sha256": "f14acb7fb5347b86a61736c0bce49e2a63f07addd4e48d89359a5d6af685e61a"
+      "bytes": 34220,
+      "sha256": "f803320e981c84de6c5c0163fb031c76fceb1474afb34ea2bef0cb74a2a9de0d"
     }
   ]
 }
