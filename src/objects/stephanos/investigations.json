@@ -27,7 +27,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 1369646142775099136, through the CIE 1931 2-degree observer: #ffe0c0. Routes tried in order: stis-ngsl: HD 140716 is not in the library; pulkovo: HR 5855 is not in the catalogue; kiehling: HR 5855 is not among its 60 stars; kharitonov: HR 5855 is not in the catalogue; burnashev: BS 5855 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1369646142775099136&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1369646142775099136&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

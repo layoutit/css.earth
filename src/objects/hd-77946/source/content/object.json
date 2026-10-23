@@ -126,7 +126,7 @@
         "source": {
           "id": "hd-77946-stellar-color",
           "path": "../manifest.json",
-          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1011435012611767552&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1011435012611767552&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,007 K and log g 4.28 (u1 0.412, u2 0.287): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."

@@ -27,7 +27,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 1140693565213532416, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 435: HR 2363; VizieR III/202 (2 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffcb92. Routes tried in order: stis-ngsl: HD 45866 is not in the library; pulkovo: HR 2363 is not in the catalogue; kiehling: HR 2363 is not among its 60 stars; burnashev: BS 2363 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1140693565213532416&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1140693565213532416&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
       ]
     },

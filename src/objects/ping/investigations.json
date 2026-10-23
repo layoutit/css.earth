@@ -28,7 +28,7 @@
       "status": "included",
       "finding": "Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. * eps Lep is HR 1654., cross-checked against Gaia DR3 XP spectrum, source 2962546605447869184 (66 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffce93. Routes tried in order: stis-ngsl: HD 32887 is not in the library; pulkovo: the spectrum was found but gives no color (Pulkovo flux must be finite.); kharitonov: HR 1654 is not in the catalogue; burnashev: the spectrum was found but gives no color (The spectrum has no sample near 756 nm and no declared gap there.); kiehling: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2962546605447869184&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2962546605447869184&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {
