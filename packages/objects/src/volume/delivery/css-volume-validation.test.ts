@@ -50,3 +50,64 @@ test('merged and unmerged copies of the same geometry are different topology', a
   assert.equal(samePreparedVolumeTopology(valid(), { ...valid(), mergedOpticalCopies: 3 }), false);
   assert.equal(samePreparedVolumeTopology({ ...valid(), mergedOpticalCopies: 3 }, { ...valid(), mergedOpticalCopies: 3 }), true);
 });
+
+const withFarPlanes = (): PreparedCssVolume => {
+  const volume = valid();
+  return { ...volume, resources: [...volume.resources, ...['side.png', 'side-high.png'].map(path => ({ path, bytes: 2, width: 32, height: 2 }))],
+    farPlanes: { gainBlend: [{ axis: 'z', samples: [[1, .001], [3, .8]] }], radiusUnits: 1, belowDiameterPixels: 300,
+      stacks: volume.stacks.filter(stack => stack.axis === 'z').map(stack => ({ ...stack,
+        leaves: [0, 1].flatMap(level => stack.leaves.map(leaf => ({ ...leaf, id: `far-z-${level}` }))) })),
+      side: { views: 16, highTexturePath: 'side-high.png', coefficients: Array.from({ length: 16 }, () => [[0, 1, 0], [90, 1, 0]]),
+        leaf: { id: 'side', centerUnits: [0, 0, 0], texturePath: 'side.png', widthPx: 2, heightPx: 2,
+          style: { width: '2px', height: '2px', backgroundSize: '2px 2px', backgroundPosition: '0px 0px',
+            transform: 'matrix3d(1,0,0,0,0,0,-1,0,0,1,0,0,-1,0,1,1)' } } } } };
+};
+
+test('far planes validate their thresholds, a fixed top pair and a declared 16-view cylindrical side atlas and uncropped styles', () => {
+  assert.equal(validatePreparedCssVolume(withFarPlanes()).farPlanes!.stacks.length, 1);
+  const mutations = [
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.gainBlend[0]!, { samples: [[1, .001], [1, .8]] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.gainBlend[0]!, { samples: [[1, .001], [3, 1]] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.gainBlend[0]!, { samples: [[1, .001], [3, NaN]] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.gainBlend[0]!, { samples: [[1.1, .001], [3, .8]] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.gainBlend[0]!, { axis: 'x' }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!.leaves[1]!.style, { width: '3px' }),
+    (volume: PreparedCssVolume) => Reflect.deleteProperty(volume.farPlanes!, 'gainBlend'),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!, { gainBlend: [] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!, { belowDiameterPixels: 0 }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!, { radiusUnits: Infinity }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!, { extra: 1 }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!, { stacks: volume.farPlanes!.stacks.slice(1) }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!, { axis: 'x' }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!, { leaves: [] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!.leaves[0]!, { centerUnits: [0, 0, 1] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!.leaves[0]!, { texturePath: 'missing.png' }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!.leaves[0]!.style, { backgroundPosition: '1px 0px' }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!.leaves[0]!.style, { transform: 'matrix3d(1,0,0,0,0,0,1,0,0,1,0,0,0,50,0,1)' }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.stacks[0]!.leaves[0]!.style, { transform: 'matrix3d(0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,1)' }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.side, { views: 15 }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.side, { highTexturePath: 'missing.png' }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.side, { coefficients: [[[0, 1, 0], [90, 1, 0]]] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.side.coefficients[0]!, { 0: [0, NaN, 0] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.side.coefficients[0]!, { 1: [0, 1, 0] }),
+    (volume: PreparedCssVolume) => Object.assign(volume.farPlanes!.side.leaf.style, { transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' }),
+  ];
+  for (const mutate of mutations) { const volume = structuredClone(withFarPlanes()); mutate(volume); assert.throws(() => validatePreparedCssVolume(volume)); }
+});
+
+test('far plane topology retains geometry and thresholds but permits a replacement material', async () => {
+  const { samePreparedVolumeTopology } = await import('./prepared-volume-topology.js');
+  assert.equal(samePreparedVolumeTopology(withFarPlanes(), valid()), false);
+  assert.equal(samePreparedVolumeTopology(withFarPlanes(), withFarPlanes()), true);
+  const changed = withFarPlanes(); Object.assign(changed.farPlanes!, { belowDiameterPixels: 301 });
+  assert.equal(samePreparedVolumeTopology(withFarPlanes(), changed), false);
+  const geometry = structuredClone(withFarPlanes()); for (const leaf of geometry.farPlanes!.stacks[0]!.leaves) Object.assign(leaf.style, { width: '3px', backgroundSize: '3px 2px' });
+  assert.equal(samePreparedVolumeTopology(withFarPlanes(), geometry), false);
+  const material = structuredClone(withFarPlanes());
+  Object.assign(material.farPlanes!.stacks[0]!.leaves[0]!, { texturePath: 'slices/y/00.png' });
+  assert.equal(samePreparedVolumeTopology(withFarPlanes(), material), true);
+  const reordered = withFarPlanes(), leaf = reordered.farPlanes!.side.leaf;
+  Object.assign(reordered.farPlanes!.side, { leaf: { style: leaf.style, widthPx: leaf.widthPx, heightPx: leaf.heightPx,
+    texturePath: 'side-high.png', centerUnits: leaf.centerUnits, id: leaf.id } });
+  assert.equal(samePreparedVolumeTopology(withFarPlanes(), reordered), true, 'material JSON key order is not geometry');
+});

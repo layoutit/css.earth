@@ -49,6 +49,20 @@ export interface PreparedCssVolume {
   readonly approximation: unknown;
   readonly sky?: PreparedCssSky;
   readonly impostors?: PreparedVolumeImpostors;
+  /** Fixed top pair plus a cylindrical side atlas, all prepared from the runtime slab composite. */
+  readonly farPlanes?: {
+    readonly gainBlend: readonly { readonly axis: VolumeAxis; readonly samples: readonly (readonly [number, number])[] }[];
+    readonly radiusUnits: number;
+    readonly belowDiameterPixels: number;
+    readonly stacks: readonly PreparedVolumeStack[];
+    readonly side: {
+      readonly leaf: PreparedVolumeLeaf;
+      readonly highTexturePath: string;
+      readonly views: 16;
+      /** Per azimuth: elevation degrees, normal opacity, bright opacity. */
+      readonly coefficients: readonly (readonly (readonly [number, number, number])[])[];
+    };
+  };
   /** Each slice image already holds its three coincident optical copies (alpha 1 - (1 - a)^3): the runtime draws one
    * layer per slice at opacity gain / 3 instead of three. Absent, the runtime stacks the copies itself. */
   readonly mergedOpticalCopies?: 3;

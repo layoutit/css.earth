@@ -39,7 +39,8 @@ The low-angle capture also shows the known near-sheet occlusion; the side camera
 
 - **Stripes remain close up at low angles,** more visibly with 13 X/Y slabs than with the earlier 52. Continuous handover reduces abrupt set changes; it does not make the finite slabs continuous material.
 - **Merged copies are exact only for faint material.** One layer at opacity gain / 3 scales a slab's merged alpha linearly where three copies compose it. Face-on, an opaque pixel draws at a third and a half-opaque one at 0.29 instead of 0.5: over the 13/13/7 bank that is **31% of the slabs' total alpha** face-on and **0.8%** at grazing views, almost all of it in the 7% of pixels above alpha 0.25 (dense dust). Two layers a slab would be exact but ran a phone out of tile memory again (56 to 62 frames with missing tiles), and fewer, thicker slabs showed gaps between them; the owner accepted the merged look on the phone (2026-10-22).
-- **X/Y criss-cross remains near 45° azimuth.** The later experimental finalist was rejected and is excluded.
+- **X/Y criss-cross remains in the close-up slabs near 45° azimuth.** The far pictures use one turning side plane instead.
+- **A long coast past a far side view settles with a step.** A coast keeps the two drawn side views (only transforms and opacity change), so after a throw across more than one 22.5° view the next pair appears when the camera stops.
 - **Some far-only camera views black out.** Smooth coefficients and exposure do not prove smooth rendered pixels; the compositor/near-sheet cause remains unresolved.
 - **Scalar alpha limits color fidelity.** A single source-over alpha cannot carry three spectral transmittances or reproduce a nonlinear display transform applied after whole-ray integration. The fitted display is not calibrated visible photometry.
 - **Edge-on size differs from the uncut model.** Stacking bounds remain the accepted 32 × 32 × 6.4 kpc box; growing image-plane support does not restore all depth outside that box.
@@ -57,7 +58,39 @@ An explicit 601 × 601 × 361 in-plane field extends faint image support. The or
 
 ### Completed images and handover
 
-Z owns most directions. X and Y join near edge-on and mix continuously around their azimuth bisector. The Z/side window rises with approach distance, normalized by the original physical frame. Completed stack images keep black mattes; source-over coefficients maintain constant total weight, capped at 0.999 for Safari. All three stacks stay resident. Each slab image already holds three coincident optical copies (alpha 1 − (1 − a)³), drawn as one layer at opacity gain / 3: exact for faint material, slightly lighter where a slab is nearly opaque. A shown optical copy keeps the 8-bit alpha step nearest its exact value, held inside [0.001, 0.999] (within 1/510 of exact), and stays joined while its stack is visible, so turning never crosses opacity 0 or 1 or changes the layer tree. Coast publication changes only transforms and opacity.
+Z owns most directions. X and Y join near edge-on and mix continuously around their azimuth bisector. The Z/side window rises with approach distance, normalized by the original physical frame. Completed stack images keep black mattes; source-over coefficients maintain constant total weight, capped at 0.999 for Safari. In the slab presentation all three stacks stay resident. Each slab image already holds three coincident optical copies (alpha 1 − (1 − a)³), drawn as one layer at opacity gain / 3: exact for faint material, slightly lighter where a slab is nearly opaque. A shown optical copy keeps the 8-bit alpha step nearest its exact value, held inside [0.001, 0.999] (within 1/510 of exact), and stays joined while its stack is visible, so turning never crosses opacity 0 or 1 or changes the layer tree. Coast publication changes only transforms and opacity.
+
+### Far pictures
+
+When the galaxy's projected diameter shrinks below 270 CSS pixels six baked picture layers take over from the slab tree; the slabs return unchanged when it grows past 300 px. The gap keeps a zoom resting at the threshold from exchanging them every frame. The exchange is a 250 ms crossfade: the slabs sit under the pictures and only the pictures' opacity moves; the outgoing presentation leaves the document when the fade ends, after any coast. The pictures take over only once decoded; until then the slabs keep drawing. The bake is the opt-in `--far-planes` step.
+
+- **Top:** a normal and a bright picture (gain 1 and 3) fixed in the galaxy frame, mixed by the fitted gain table.
+- **Side:** one vertical plane turning about the galaxy's Z axis, with two slots that crossfade the nearest of 16 azimuth views 22.5° apart, wrapping at 337.5°/0°. Each slot has a normal and a bright layer; elevation sets only their opacities.
+- **Views:** each side view composites the installed X and Y slabs as the runtime draws them (axis weights, merged-copy gain, back-to-front order, black mattes) at distance 200 prepared units.
+- **Drawing:** each side layer shows one view of its atlas as the background of a box the size of one view. An image 16 views wide slid inside a clipping box was rastered whole at about 8× and flickered on every drag in Chromium (2026-10-23).
+- **Coasting:** a coast changes only transforms and opacity. It keeps the two drawn views and clamps their mix, so the picture stays continuous past a view boundary; the next pair, textures and the swap between pictures and slabs wait for rest.
+
+The atlases are `b30-far-planes/side.png` (**501,543 bytes**) and `side-high.png` (**627,691 bytes**), 16,384 × 256 each; with `z.png` (**252,412 bytes**) and `z-high.png` (**251,729 bytes**) the pictures are **1,633,375 bytes**. The 33 slab PNGs are unchanged.
+
+Evidence:
+
+- **Total light:** a numeric test over azimuths 0°–90° every 7.5° at elevations 0°, 15°, 30°, 60° and 85° (65 views) compares the mounted pictures with the decoded slab bank: every view is within the 5% limit, worst **0.313%**. Three more 45° checks at 5°, 7.5° and 10° elevation are within it too, worst **0.701%**.
+- **Per pixel:** error reaches **10.4%** on that grid and **27.8%** in the low-elevation checks; no per-pixel limit is asserted.
+- **Browser:** the light of the galaxy crop across a vertical orbit matched the slabs within about 1% (408–668 against 407–669 grey-level sums).
+- **Mutation checks:** two crossing side planes, a frozen plane rotation or view choice, a texture swap or view change during a coast, a jump in the drawn mix across a view boundary, a missing bright or normal side layer, a side view as a wide sliding image, slabs attached before they are selected, no hysteresis, or pictures shown before they decode each fail a test.
+- **Phone (Galaxy S23, Chrome, dev server):** a hand-driven zoom and drag through the exchange and back, traced with the jankmonster categories, had no tile-memory shortfall and no frame with missing content (3,325 frames). Its longest frame was 272 ms, when the slabs joined; without the crossfade the same kind of session had one of 136 ms (2026-10-23).
+- **Not yet qualified:** other distances and negative-elevation extinction.
+
+To add the pictures to a restored bank without rerunning its slab producer:
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm -r --filter @cssearth/bake... --filter @cssearth/renderer... build
+node packages/bake/authoring/milky-way-dust/slice-galaxy.mts src/objects/milky-way-volume --reuse=src/objects/milky-way-volume/prepared/b30-slices --far-planes
+pnpm --filter @cssearth/renderer build
+```
+
+This requires the installed slab bank and its prototype/frame inputs. It refreshes the local inventory and does not publish assets. Omitting the flag retains the original installation and retires any old far-picture outputs. The top-level replay command remains unchanged.
 
 ### Inside skies, exposure and stars
 

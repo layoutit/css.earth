@@ -3,6 +3,7 @@ export type { SceneLifetime, WaitResult } from './runtime/scene-lifetime.js';
 export * from './runtime/selection-flight.js';
 export * from './runtime/selection-flight-step.js';
 export * from './runtime/scaled-focus-frame.js';
+export * from './runtime/prepared-volume-projection.js';
 export * from './runtime/prepared-point-field.js';
 export * from './navigation/camera-math.js';
 export * from './navigation/sphere-drag.js';
