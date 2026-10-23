@@ -151,9 +151,12 @@ function fromOklch(L: number, C: number, H: number): [number, number, number] { 
   const l = (L + 0.3963377774 * A + 0.2158037573 * B) ** 3, m = (L - 0.1055613458 * A - 0.0638541728 * B) ** 3, s = (L - 0.0894841775 * A - 1.291485548 * B) ** 3;
   const rgb = [4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s, -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s] as const;
   if (chroma < 0.002 || rgb.every(unit => unit >= -0.0005 && unit <= 1.0005)) return rgb.map(unit => fromLinear(Math.max(0, Math.min(1, unit)))) as [number, number, number]; } }
-/** How the darkest part of Color + brightness is drawn: the star's own hue, this much lower in lightness and this much
- * richer in chroma (OKLCH), "four steps darker, richer" of a sheet of options. Nothing is mixed with black. */
-export const DARK_STEP = { lightness: 0.4, chroma: 0.12 } as const;
+/** How the darkest part of Color + brightness is drawn: the star's own hue, this much lower in lightness and this many
+ * times its chroma (OKLCH), "four steps darker, richer" of a sheet of options. Nothing is mixed with black. The chroma is
+ * a multiple of the star's own, so a nearly white star stays nearly white: a fixed 0.12 added to a chroma of 0.01 drew
+ * a hue the color barely has ten times stronger, violet on HD 73344. 2.2 is what that 0.12 gave AU Mic's orange
+ * (#ffc08b, chroma 0.0997), on which the step was chosen. */
+export const DARK_STEP = { lightness: 0.4, chroma: 2.2 } as const;
 /** How much stronger than the Color dataset's the darkening toward the edge is drawn on Color + brightness: the limb law's
  * light raised to this power, still toward black. Chosen by eye by the owner of the project from a sheet of options
  * (2026-10-06); the Color dataset keeps the published law as it is. */
@@ -163,9 +166,8 @@ export const LIMB_STRENGTH = 1.5;
  * stars here, gives 21% less light at its darkest longitude, one tenth on a display), and a scale that ran toward black
  * read as shadow, not as the star; the owner of the project chose this step by eye from sheets of options (2026-10-06).
  * The dataset's text says the contrast is drawn stronger than it is, with the star's own numbers. */
-export function tinted(colorHex: string): string[] { const color = [1, 3, 5].map(at => Number.parseInt(colorHex.slice(at, at + 2), 16)) as [number, number, number], [L, C, H] = toOklch(color), 
-  // A color with no hue of its own (a pure white or gray) is given none: its darker step stays neutral.
-  dark = fromOklch(Math.max(0, L - DARK_STEP.lightness), C < 0.002 ? 0 : C + DARK_STEP.chroma, H);
+export function tinted(colorHex: string): string[] { const color = [1, 3, 5].map(at => Number.parseInt(colorHex.slice(at, at + 2), 16)) as [number, number, number], [L, C, H] = toOklch(color),
+  dark = fromOklch(Math.max(0, L - DARK_STEP.lightness), C * DARK_STEP.chroma, H);
   return PALETTE.map((_stop, index) => `#${color.map((channel, at) => Math.round(dark[at]! + (channel - dark[at]!) * index / (PALETTE.length - 1)).toString(16).padStart(2, '0')).join('')}`); }
 /** The scale all of a star's brightness maps share: the same reach either side of the mean surface. */
 const brightnessScale = (maps: readonly BrightnessSurfaceMap[]) => { const reach = scaleEnd(Math.max(...maps.flatMap(map => [100 - map.darkestPercent, map.brightestPercent - 100]))); return { minimum: 100 - reach, maximum: 100 + reach, labels: [`${100 - reach}%`, '100%', `${100 + reach}%`] }; };
