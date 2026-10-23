@@ -1,10 +1,10 @@
-import { isRecord } from '@cssearth/core';
 /**
  * The lab's workspace on the website's own scene. The page (site-scene-view.tsx) draws the object; this owns only lab
  * layers stacked over it in `#viewer` (the registered photograph, the difference map, candidate models, field stars) and
  * publishes each with the camera the page reports, through the renderer's own projection, so they land on the page's
  * pixels. Camera actions, datasets and layers are commands to the page; nothing here draws the object.
  */
+import { isRecord } from '@cssearth/core';
 import type { PreparedCataloguePoints, PreparedCssImageLayers, PreparedCssVolume } from '@cssearth/objects';
 import { mountPreparedCataloguePoints } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
 import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
@@ -18,11 +18,10 @@ import { localFile, subjects } from '../legacy-viewer/subject-catalogue';
 /** The picture the original-image plane shows: the photograph as published, a plate dataset's star-free copy, or a lab
  * candidate (`candidate:<id>`). */
 export type OriginalPicture = 'original' | 'starless' | `candidate:${string}`;
-import type { SiteBridge } from './site-bridge.ts';
+import type { SiteBridge, SiteClick } from './site-bridge.ts';
 import { siteSubjectFor } from './site-subjects.ts';
 import { sameOrientation } from './site-camera.ts';
 import { mountSitePick, type SitePick } from './site-pick.ts';
-import type { SiteClick } from './site-bridge.ts';
 
 type Subject = (typeof subjects)[number];
 export interface SiteSceneState {

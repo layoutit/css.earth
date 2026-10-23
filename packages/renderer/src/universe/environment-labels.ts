@@ -10,7 +10,7 @@ import type { OpacityClock } from '../stars/opacity-clock.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import type { PreparedSurfaceShellStats } from '../shell/prepared-shell-runtime.js';
 
-import { projectGalaxyCaptionAnchor } from './galaxy-caption-anchor.js';
+import { projectGalaxyCaptionAnchor } from './galaxy/galaxy-caption-anchor.js';
 
 const LABEL_GAP_PX = 8;
 const LABEL_FADE_MS = 200;

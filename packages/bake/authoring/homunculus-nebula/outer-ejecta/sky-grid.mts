@@ -13,7 +13,7 @@
 import { skyProjection, type FitsHeader, type SkyProjection } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { open } from 'node:fs/promises';
-import { mapCoordinates } from './ndimage.mts';
+import { mapCoordinates } from './python-ports/ndimage.mts';
 
 /** Half the grid's side in pixels, its pixel in arcsec, and the star's place (ICRS degrees). */
 export const HALF = 1300, PIX = 0.05, STAR_RA_DEG = 161.264775, STAR_DEC_DEG = -59.684431;

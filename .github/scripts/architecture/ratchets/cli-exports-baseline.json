@@ -142,21 +142,21 @@
         "loadSceneEpochEphemeris"
       ]
     },
-    "packages/bake/cli/astronomy-data-collect-photojournal.mts": {
+    "packages/bake/cli/astronomy-data/astronomy-data-collect-photojournal.mts": {
       "reason": "Retained astronomy data collect photojournal CLI implementation exports; migration to src remains outstanding.",
       "exports": [
         "captionText",
         "captionPhrases"
       ]
     },
-    "packages/bake/cli/astronomy-data-collect-targets.mts": {
+    "packages/bake/cli/astronomy-data/astronomy-data-collect-targets.mts": {
       "reason": "Retained astronomy data collect targets CLI implementation exports; migration to src remains outstanding.",
       "exports": [
         "pds4Targets",
         "pds3Targets"
       ]
     },
-    "packages/bake/cli/astronomy-data-collect-usgs-files.mts": {
+    "packages/bake/cli/astronomy-data/astronomy-data-collect-usgs-files.mts": {
       "reason": "Retained astronomy data collect usgs files CLI implementation exports; migration to src remains outstanding.",
       "exports": [
         "productFiles",

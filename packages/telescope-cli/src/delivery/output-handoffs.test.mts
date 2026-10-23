@@ -9,7 +9,7 @@ import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain, fileSize, pdsPackages, writeProductRecord } from '@cssearth/telescope-core/node';
 import { exportOutput,listOutputs } from './outputs.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
-import { parseCli } from '../cli-arguments.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 
 test('PDS arrays retain integer flags, special constants and associated uncertainty through figure export',async()=>{

@@ -13,8 +13,8 @@ import { cubeBand, cubePeakAperture } from './cube-output.mts';
 import { FakeTerminal } from './fake-terminal.mts';
 import { exploreScreen } from './explore.mts';
 import { exploreChoice, exploreSession } from './fixtures/explore.mts';
-import type { CliServices } from '../cli-services.mts';
-import type { CliIo } from '../cli-io.mts';
+import type { CliServices } from '../cli/cli-services.mts';
+import type { CliIo } from '../cli/cli-io.mts';
 
 test('peak selection without qualified bin edges performs no extraction', async t => {
   const extract = t.mock.fn(sciencePackage);

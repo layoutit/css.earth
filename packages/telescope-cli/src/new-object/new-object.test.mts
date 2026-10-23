@@ -872,7 +872,7 @@ test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY g
 });
 
 test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one route table; what a catalogue lacks is left to cite', async () => {
-  const { parseApokascRow, draftFromApokasc } = await import('./archives/apokasc.mts'), { parseCepheidRow, draftFromCepheid } = await import('./archives/cepheids.mts'), { writeDrafts, DRAFT_ROUTES } = await import('./drafts.mts');
+  const { parseApokascRow, draftFromApokasc } = await import('./archives/apokasc.mts'), { parseCepheidRow, draftFromCepheid } = await import('./archives/cepheids/cepheids.mts'), { writeDrafts, DRAFT_ROUTES } = await import('./drafts.mts');
   // Rows as VizieR serves them, 2026-09-27: J/ApJS/276/69 table4 and J/A+A/550/A70 table10.
   const apokasc = ['KIC\tCatTab\tEvolSt\tMass\te_Mass\tRadius\te_Radius\tTeff\te_Teff\tloggSeis\te_loggSeis\tGaiaDR3', ' \t \t \tMsun\tMsun\tRsun\tRsun\tK\tK\t[cm.s-2]\t[cm.s-2]\t', '--------\t--------',
     '  893214\tGold    \tRGB    \t    1.4404\t    0.0602\t   11.0014\t    0.2055\t 4718.9233\t   44.7811\t    2.5146\t    0.0050\t2050237616959273728',

@@ -3,8 +3,7 @@ import { dirname } from 'node:path';
 import type { ToolchainProgress, ToolchainStep } from '@cssearth/telescope-core/node';
 import { header } from './help.mts';
 import { screenFrame } from './screen.mts';
-import { clipLine } from './style.mts';
-import { bold, breadcrumb, dim, green } from './style.mts';
+import { bold, breadcrumb, clipLine, dim, green } from './style.mts';
 import type { Terminal } from './terminal.mts';
 
 export const NOT_INSTALLED = 'Not installed. Commands that need Python will ask again; install any time with: telescope toolchain install';

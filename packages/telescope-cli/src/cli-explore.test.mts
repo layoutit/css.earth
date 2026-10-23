@@ -4,11 +4,11 @@ import { downloadContext, requestTransferConsent, reportToolchainProgress } from
 import * as query from './observation-query/query.mts';
 import * as exploration from './exploration.mts';
 import type { CliServices } from './cli.mts';
-import type { CliIo } from './cli-io.mts';
+import type { CliIo } from './cli/cli-io.mts';
 import type { ExploreServices } from './tui/explore.mts';
 import { FakeTerminal } from './tui/fake-terminal.mts';
 import { exploreSession } from './tui/fixtures/explore.mts';
-import { parseCli } from './cli-arguments.mts';
+import { parseCli } from './cli/cli-arguments.mts';
 
 mock.module('./observation-query/query.mts', { namedExports: { ...query, loadTargetCatalogue: async () => [{ id: 'star', name: 'Star', aliases: [] }] } });
 let resolvePending: (() => Promise<void>) | undefined;

@@ -6,7 +6,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { deliverSource } from '../archive-adapters/archive-source.mts';
 import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
-import { formatArtifact } from '../cli-format.mts';
+import { formatArtifact } from '../cli/cli-format.mts';
 import { main } from '../cli.mts';
 import { assessSourceRelevance } from './source-relevance.mts';
 import { SIMBAD_TAP } from '@cssearth/telescope-core/node';

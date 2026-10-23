@@ -4,7 +4,7 @@ import type { StarSurvey } from '../stars/stars.mts';
 import type { ListSpec } from './list.mts';
 import { openExternal } from './open.mts';
 import { bold, dim, wrap } from './style.mts';
-import { shellWord } from '../cli-format.mts';
+import { shellWord } from '../cli/cli-format.mts';
 
 interface ListOptions { readonly directory?: string; readonly noOpen?: boolean }
 type Opener = (url: string) => void;

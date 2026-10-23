@@ -4,7 +4,7 @@ import { mkdtemp, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { GAIA_CONE_SCHEMA, gaiaCone, gaiaConeQuery, parseGaiaConeRows, readGaiaConeRequest } from './gaia-cone.mts';
-import { parseCli } from '../cli-arguments.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 
 const row = (overrides: Record<string, string> = {}): Record<string, string> => ({ source_id: '4157149651519003392', ra: '256.41', dec: '-10.14',
   pmra: '1.5', pmdec: '-2.25', parallax: '1.2', parallax_error: '0.05', phot_g_mean_mag: '12.5', phot_bp_mean_mag: '13.0', phot_rp_mean_mag: '11.8',

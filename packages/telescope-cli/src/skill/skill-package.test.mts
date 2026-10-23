@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { requireRecord } from '@cssearth/core';
 import { CLI_PACKAGE_ROOT } from '../paths.mts';
-import { parseCli } from '../cli-arguments.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 import { writeDrafts } from '../new-object/drafts.mts';
 import { GAIA_TAP, type Archive } from '../new-object/archives/archives.mts';
 

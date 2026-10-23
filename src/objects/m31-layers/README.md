@@ -34,7 +34,7 @@ composite is not tracked; `restore-source-inputs.mts` restores it from `source-c
 
 The image-layer bake ([`prepare.ts`](../../../packages/bake/src/image-layers/prepare.ts)) then:
 
-- **Removes foreground stars** ([`foreground.ts`](../../../packages/bake/src/image-layers/foreground.ts)), replacing
+- **Removes foreground stars** ([`foreground.ts`](../../../packages/bake/src/image-layers/face/foreground.ts)), replacing
   30,084 of the 52,363 Gaia foreground stars in the image with the light around them.
 - **Removes M32 and NGC 205** the same way, out to 8.4 and 3 half-light radii.
 - **Ties the color** to RC3's B-V of 0.92 by scaling red and blue in linear light (gains red 0.896, blue 1.154).

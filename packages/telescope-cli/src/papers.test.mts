@@ -10,7 +10,7 @@ import { sameTitleQuery, sameTitleWorks } from './papers/follow-ups.mts';
 import { forms, spellings } from './papers/names.mts';
 import { evidenceSentences, mentions } from './papers/text.mts';
 import { abstractText, arxivIdOf, arxivQuery, citingQuery, openAlexQuery, parseArxivResponse, parseOpenAlexResponse, rankWorks } from './papers/works.mts';
-import { parseCli } from './cli-arguments.mts';
+import { parseCli } from './cli/cli-arguments.mts';
 import {  requireWorkspace  } from '@cssearth/telescope-core/node';
 
 const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-papers');

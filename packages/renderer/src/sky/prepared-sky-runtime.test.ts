@@ -34,7 +34,7 @@ const foregroundRects = [{ left: 100, top: 100, right: 150, bottom: 114 }];
 // These unrelated layers keep their normal publication contract; the test mounts
 // the actual universe, sky and volume compositor without building a star catalogue.
 mock.module('../universe/world-context/world-context-point-source.js', { namedExports: { mountWorldContextPointSource: () => null } });
-mock.module('../universe/prepared-galaxy-catalog.js', { namedExports: { mountPreparedGalaxyCatalog: catalogMount } });
+mock.module('../universe/galaxy/prepared-galaxy-catalog.js', { namedExports: { mountPreparedGalaxyCatalog: catalogMount } });
 mock.module('../universe/prepared-world-context.js', { namedExports: { ...await import('../universe/prepared-world-context.js'),
   mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, previewSelection() {}, plainStarPlaces: () => [], setOverview() {}, setSystemRetired() {}, setOrbitsOpacity() {}, setBodyColors() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, setSelectionReach() {}, loneStarSelected: () => false, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
 // The modules under test import the mocked ones, so they load after the mocks.

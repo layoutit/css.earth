@@ -52,7 +52,7 @@ from the pictures themselves.
 
 ## The gas and the mass
 
-`geometry.collision` in the recipe; the bake is `packages/bake/src/image-layers/collision.ts`.
+`geometry.collision` in the recipe; the bake is `packages/bake/src/image-layers/collision/collision.ts`.
 
 - **Lines:** the gas's runs from the main cluster's cloud to the subcluster's (position angle 274.5°, 75.8″ apart); the
   mass's from the main peak to the subcluster's (274.3°, 134″ apart). Each is tipped 10° from the plane of the sky about

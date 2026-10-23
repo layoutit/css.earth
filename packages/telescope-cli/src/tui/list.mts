@@ -2,7 +2,7 @@ import { bold, breadcrumb, cut, dim, green, inverse, pad, plain } from './style.
 import { screenFrame } from './screen.mts';
 import type { ScreenKey, Terminal } from './terminal.mts';
 import { processTerminal } from './terminal.mts';
-import type { CliIo } from '../cli-io.mts';
+import type { CliIo } from '../cli/cli-io.mts';
 
 export interface ListSpec<Row> {
   readonly crumbs: readonly string[];

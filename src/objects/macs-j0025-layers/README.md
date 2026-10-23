@@ -33,7 +33,7 @@ symmetry the paper's head-on collision implies, drawn from the pictures themselv
 
 ## The gas and the mass
 
-`geometry.collision` in the recipe; the bake is `packages/bake/src/image-layers/collision.ts`.
+`geometry.collision` in the recipe; the bake is `packages/bake/src/image-layers/collision/collision.ts`.
 
 - **Line:** one for both. The paper's offsets put the south-eastern mass peak 42″ east and 26″ south of the gas peak and
   the north-western 28″ west and 12″ north. The line through the two runs at position angle 298.5° and passes 3″ from

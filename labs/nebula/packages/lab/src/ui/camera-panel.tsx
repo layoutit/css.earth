@@ -1,7 +1,6 @@
 import '../features/workspace/workspace-controls.css';
-import type { SiteLabControlsProps } from '../state/use-lab-controller';
+import type { LabControlsProps, SiteLabControlsProps } from '../state/use-lab-controller';
 import { CameraModelPanel } from './camera-model-panel';
-import type { LabControlsProps } from '../state/use-lab-controller';
 import type { LabStep } from '../features/legacy-viewer/lab-routing';
 import { InfoTip } from './info-tip';
 import { setAnnotating, useAnnotating } from '../features/annotate/annotate-store.ts';

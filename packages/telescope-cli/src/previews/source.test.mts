@@ -1,11 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { previewSource, type PreviewChoice } from './source.mts';
 import { previewVotable } from './votable.mts';
-import { readFile } from 'node:fs/promises';
 
 const session = { answer: { request: {} } };
 function choice(identity: Record<string, string>, snapshot = '/absent-preview-snapshot.xml', telescope = 'JAO', kind = 'cube'): PreviewChoice {

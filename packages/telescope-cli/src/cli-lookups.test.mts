@@ -7,10 +7,10 @@ import * as starsApi from './stars/stars.mts';
 import { papers, leads, stars } from './tui/fixtures/lookups.mts';
 import { FakeTerminal } from './tui/fake-terminal.mts';
 import type { Terminal } from './tui/terminal.mts';
-import type { CliIo } from './cli-io.mts';
-import { lookupJson } from './cli-summary.mts';
+import type { CliIo } from './cli/cli-io.mts';
+import { lookupJson } from './cli/cli-summary.mts';
 import { plain } from './tui/style.mts';
-import { parseCli } from './cli-arguments.mts';
+import { parseCli } from './cli/cli-arguments.mts';
 import { helpText } from './help.mts';
 
 const urls: string[] = [];
