@@ -3,10 +3,10 @@ import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT
 import { type WorldCameraPose, createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-import { mountBackgroundPoints } from './background-points.js';
+import { mountBackgroundPoints } from './points/background-points.js';
 import { UNHIGHLIGHTED_OPACITY } from './context-presentation-policy.js';
-import { mountCataloguePoints } from './catalogue-points.js';
-import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-point-transport.js';
+import { mountCataloguePoints } from './points/catalogue-points.js';
+import { fetchPreparedCatalogueBank, fetchPreparedJson } from './points/catalogue-point-transport.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 
@@ -35,7 +35,7 @@ import { createUniverseDatasetBanks } from './universe-dataset-banks.js';
 import { createUniverseCatalogBanks } from './universe-catalog-banks.js';
 import { createUniverseBackground } from './universe-background.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
-import { reservePointLayer } from './point-layer.js';
+import { reservePointLayer } from './points/point-layer.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:

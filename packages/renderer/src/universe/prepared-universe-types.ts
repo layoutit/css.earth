@@ -1,7 +1,7 @@
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import { type PreparedCssVolume, type PreparedPointAppearance, type PreparedCssSurfaceShell, type PreparedCssImageLayers, type PreparedPointVisibility, type DensityVolumeFrame, type DatasetBillboards, type PreparedGalaxyBacking } from '@cssearth/objects';
 
-import type { BackgroundPointBank } from './background-points.js';
+import type { BackgroundPointBank } from './points/background-points.js';
 import type { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
@@ -53,7 +53,7 @@ export interface PreparedUniverseOptions {
   galaxyCataloguePoints?: readonly string[];
   /** Individual prepared stellar levels admitted by physical proximity. */
   galaxyCatalogueProximity?: { readonly host: string; readonly plan: import('@cssearth/objects').PreparedCatalogueProximity; resolve(file: string): string };
-  galaxyStations?: import('./galaxy-stations.js').GalaxyStationBackgroundOptions;
+  galaxyStations?: import('./galaxy-stations/galaxy-stations.js').GalaxyStationBackgroundOptions;
   imageLayers?: readonly PreparedImageLayerMount[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus.
    * `surrounds`: the bank's light lies on walls around its middle, so it also draws around a body that stands inside it. */

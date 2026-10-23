@@ -6,12 +6,12 @@ import { eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { enteredVolumeOpacity, outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits, volumeHolds } from '../volume/projected-volume-visibility.js';
-import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
+import { mountPreparedGalaxyCatalog } from './galaxy/prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
-import { mountCataloguePoints } from './catalogue-points.js';
-import { mountCloudOverlay } from './cloud-points.js';
-import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
+import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './galaxy/far-backing-planes.js';
+import { mountCataloguePoints } from './points/catalogue-points.js';
+import { mountCloudOverlay } from './clouds/cloud-points.js';
+import { fetchPreparedCatalogueBank } from './points/catalogue-point-transport.js';
 import { logarithmicFade } from './world-context/context-scale.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions, PreparedImageLayerMount } from './prepared-universe-types.js';
 

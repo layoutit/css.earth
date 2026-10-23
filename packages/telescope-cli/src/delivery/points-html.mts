@@ -2,7 +2,7 @@
 import { parseHTML } from 'linkedom';
 import { cameraPoseToReferenceFrame } from '@cssearth/engine';
 import type { PreparedCssPointField } from '@cssearth/objects';
-import { mountBatchedSpatialPoints, pointPaint } from '@cssearth/renderer/universe/batched-spatial-points.ts';
+import { mountBatchedSpatialPoints, pointPaint } from '@cssearth/renderer/universe/points/batched-spatial-points.ts';
 import { pointPhotometry, pointLuminanceVisible } from '@cssearth/renderer/stars/point-field-projection.ts';
 
 export function pointsMarkup(payload: PreparedCssPointField): string {

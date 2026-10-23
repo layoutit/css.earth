@@ -1,6 +1,6 @@
 import { samePreparedVolumeTopology, validatePreparedCssVolume } from '@cssearth/objects';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { mountGalaxyBacking } from '../universe/galaxy-backing.js';
+import { mountGalaxyBacking } from '../universe/galaxy/galaxy-backing.js';
 import { writeStyle } from '../rendering/dom/retained-write.js';
 import { axisWeights, completedStackOpacities, mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import { cylindricalSideSelection, cylindricalSideTransform } from './cylindrical-far-plane.js';

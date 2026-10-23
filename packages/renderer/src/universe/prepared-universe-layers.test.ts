@@ -27,7 +27,7 @@ mock.module('./universe-catalog-banks.js', { namedExports: {
 mock.module('./universe-background.js', { namedExports: {
   createUniverseBackground: () => ({ mount: no, prefetch: no, publish: () => 1 }),
 } });
-mock.module('./background-points.js', { namedExports: { mountBackgroundPoints: () => ({ publish: no, destroy: no }) } });
+mock.module('./points/background-points.js', { namedExports: { mountBackgroundPoints: () => ({ publish: no, destroy: no }) } });
 mock.module('./image-mesh.js', { namedExports: {
   mountImageMesh: ({ url }: { url: string }) => ({ setCutaway: no, setHidden: no, destroy: no,
     publish: (_view: unknown, opacity: number) => { meshOpacity.set(url, opacity); return 0; } }),
