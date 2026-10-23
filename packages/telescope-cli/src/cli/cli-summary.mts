@@ -2,9 +2,9 @@
 import { mkdir, writeFile, rename, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { resolve } from 'node:path';
-import { prepareRunDirectory, inspectionDirectory } from './run-directory.mts';
+import { prepareRunDirectory, inspectionDirectory } from '../run-directory.mts';
 import { archiveLabel } from './cli-archive.mts';
-import type { ExplorationSession } from './session.mts';
+import type { ExplorationSession } from '../session.mts';
 import type { InspectedArtifact } from './cli-artifact-types.mts';
 
 export const oneLine = (value:string):string => value.replace(/[\p{Cc}\p{Cf}]+/gu,' ').replace(/\s+/gu,' ').trim();

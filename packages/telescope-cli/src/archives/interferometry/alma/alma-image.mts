@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Measure a radio continuum image, and compare one against another.
  *
- *   node packages/telescope-cli/src/archives/interferometry/alma-image.mts <image.fits> [<other.fits>]
+ *   node packages/telescope-cli/src/archives/interferometry/alma/alma-image.mts <image.fits> [<other.fits>]
  *
  * A restored image is judged against the archive's own image of the same visibilities: the two should put the same source at
  * the same size with the same peak, through beams of the same shape. Where they differ, the difference is the route's, and it

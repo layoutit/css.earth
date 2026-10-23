@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import {  requireWorkspace  } from '@cssearth/telescope-core/node';
-import { parseCli } from '../cli-arguments.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 import { formatSimulations, nameForms, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, searchSimulations, sizeText, speaksOfSimulation, zenodoQuery } from './simulations.mts';
 
 const served = async (): Promise<unknown> => JSON.parse(await readFile(resolve(import.meta.dirname, '../fixtures/telescope-simulations/zenodo-trappist-1e.json'), 'utf8'));

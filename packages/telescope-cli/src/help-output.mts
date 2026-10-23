@@ -1,4 +1,4 @@
-import type { CliIo } from './cli-io.mts';
+import type { CliIo } from './cli/cli-io.mts';
 import { helpText } from './help.mts';
 import { helpScreen } from './tui/help.mts';
 import { processTerminal } from './tui/terminal.mts';

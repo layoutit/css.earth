@@ -2,7 +2,7 @@
 /** The published imaging of a resolved, bright Solar System body: fit a limb-darkened disc to its visibilities, self-calibrate
  * against that disc, and image the result.
  *
- *   node packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts <continuum.ms> --body Europa --radius-km 1560.8 \
+ *   node packages/telescope-cli/src/archives/interferometry/alma/alma-disc-selfcal.mts <continuum.ms> --body Europa --radius-km 1560.8 \
  *     --scratch <dir> --out <directory> [--flux-scale 0.907 --flux-scale-source "Trumbo et al. 2018"]
  *
  * Trumbo, Brown & Butler (2018, AJ 156, 161, doi:10.3847/1538-3881/aada87) took ALMA's own calibration of these data and went
@@ -27,7 +27,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
+import { toolchainDescriptor, toolchainPath } from '../toolchain.mts';
 import type { ProductInput, ProductRun } from '@cssearth/objects';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);

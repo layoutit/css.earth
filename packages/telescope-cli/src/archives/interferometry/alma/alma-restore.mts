@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Restore one ALMA execution from its raw visibilities and image it, then check the result against the archive's own image.
  *
- *   node packages/telescope-cli/src/archives/interferometry/alma-restore.mts <working directory> --target R_Dor [--scratch <fast local directory>]
+ *   node packages/telescope-cli/src/archives/interferometry/alma/alma-restore.mts <working directory> --target R_Dor [--scratch <fast local directory>]
  *
  * The working directory holds what the archive served for one member observing unit set: `asdm.tar` (one execution's raw
  * visibilities), `auxiliary.tar` (the pipeline's calibration tables, its flag versions and its calapply record) and
@@ -24,7 +24,7 @@ import { readFitsHeader } from '@cssearth/fits';
 import { agentFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
 import { pipelineImaging, precisePhaseCentre, type PipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration, type SelfCalibration } from './alma-selfcal.mts';
-import { toolchainPath } from './toolchain.mts';
+import { toolchainPath } from '../toolchain.mts';
 
 export interface ImagingPlan {
   /** The field to image, as the measurement set names it. */

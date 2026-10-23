@@ -1,6 +1,6 @@
 /** Archive display names come from the shared registry; evidence keeps the service URL. */
-import { ARCHIVES } from './archives/archives.mts';
-import type { ExplorationChoice } from './exploration.mts';
+import { ARCHIVES } from '../archives/archives.mts';
+import type { ExplorationChoice } from '../exploration.mts';
 
 export function archiveLabel(choice: Pick<ExplorationChoice, 'archiveService' | 'telescope'>): string {
   const matches = choice.archiveService ? ARCHIVES.filter(archive => archive.registry?.address === choice.archiveService) : [];

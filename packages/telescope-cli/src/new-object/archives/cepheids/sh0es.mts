@@ -6,10 +6,10 @@
  * No paper measures the radius, temperature or mass of any one of these stars. The draft gives the radius and temperature that
  * Groenewegen's (2020) period relations for Galactic Cepheids give at the star's measured period, and says so wherever they appear;
  * the mass stays unmeasured, as for the Galactic Cepheids (cepheids.mts). */
-import { VIZIER_ASU, type Archive } from './archives.mts';
-import { adql, csv, SIMBAD_TAP } from '../companions.mts';
+import { VIZIER_ASU, type Archive } from '../archives.mts';
+import { adql, csv, SIMBAD_TAP } from '../../companions.mts';
 import { CEPHEID_GRAVITIES } from './cepheids.mts';
-import type { CataloguePosition } from '../spec-types.mts';
+import type { CataloguePosition } from '../../spec-types.mts';
 
 export const HOFFMANN = { catalogue: 'J/ApJ/830/10/table5', credit: 'Hoffmann et al. (2016), ApJ 830, 10', paper: 'https://arxiv.org/abs/1607.08658' };
 const COLUMNS = ['Gal', 'RAJ2000', 'DEJ2000', 'ID', 'Per', 'F555W', 'F814W', 'SimbadName'] as const;

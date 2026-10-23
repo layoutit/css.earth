@@ -2,9 +2,9 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
-import type { Archive } from './archives.mts';
+import type { Archive } from '../archives.mts';
 import { BREUVAL_2023, draftsFromM33Cepheids, surveyName } from './m33-cepheids.mts';
-import { parseStarSpec } from '../spec.mts';
+import { parseStarSpec } from '../../spec.mts';
 
 // Breuval et al. (2023) table 9 as VizieR's ASU TSV serves it, comment lines dropped: the longest period is a Silver row.
 const table = ['ID\tRAJ2000\tDEJ2000\tlogP\tSet', ' \tdeg\tdeg\t[d]\t ', '---\t---\t---\t---\t---',
@@ -26,7 +26,7 @@ test('the table\'s ID is the survey name SIMBAD lists', () => {
 });
 
 test('each row is a star at the galaxy\'s Cepheid distance, named by the order of preference, the longest Gold period featured', async () => {
-  const { stars } = await draftsFromM33Cepheids(['all'], archive, resolve(import.meta.dirname, '../../../../..')), specs = stars.map(star => parseStarSpec(star));
+  const { stars } = await draftsFromM33Cepheids(['all'], archive, resolve(import.meta.dirname, '../../../../../..')), specs = stars.map(star => parseStarSpec(star));
   assert.deepEqual(specs.map(spec => [spec.name, spec.featured ?? false]), [['M33SSS J013326.10+303320.0', false], ['VHK 45', true], ['M33SSS J013405.16+303851.1', false]]);
   assert.deepEqual(specs[1]!.aliases, ['M33SSS J013343.90+303245.2']);
   assert.deepEqual(specs[1]!.position?.row, { ID: '01334390+3032452' });

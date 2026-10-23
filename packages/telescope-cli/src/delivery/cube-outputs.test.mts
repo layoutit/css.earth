@@ -9,7 +9,7 @@ import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain, fileSize, sciencePackage, writeProductRecord } from '@cssearth/telescope-core/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
-import { parseCli } from '../cli-arguments.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 let root:string;
 const sourceRequest={target:'fixture',wavelengthMicrometres:[1,6],kind:'cube',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'};
 const sourceAssessment={status:'unresolved',acceptance:'all-requested-constraints',constraints:{wavelength:{answer:'unknown',reason:'Fixture assessment.'}}};

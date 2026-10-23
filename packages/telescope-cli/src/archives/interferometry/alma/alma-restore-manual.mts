@@ -2,7 +2,7 @@
 /** Restore one MANUALLY reduced ALMA execution from its raw visibilities and image it, then check the result against the
  * archive's own image.
  *
- *   node packages/telescope-cli/src/archives/interferometry/alma-restore-manual.mts <working directory> --target Europa [--scratch <dir>] [--archive <fits>]
+ *   node packages/telescope-cli/src/archives/interferometry/alma/alma-restore-manual.mts <working directory> --target Europa [--scratch <dir>] [--archive <fits>]
  *
  * `alma-restore.mts` restores a pipeline delivery: it replays the `calapply` record and the pipeline's own tclean call. A
  * manual delivery has neither. What it ships instead is the reduction script a person wrote — numbered CASA steps — plus the
@@ -29,7 +29,7 @@
  * Europa is an ephemeris field: it moves several arcseconds across one execution, far more than the 0.77 arcsecond disc, so
  * the image must follow the ephemeris importasdm attached. The run checks for that ephemeris and images with
  * `phasecenter='TRACKFIELD'`; a field that turns out not to carry one stops the route rather than being imaged smeared. */
-import { packagePath } from '../../paths.mts';
+import { packagePath } from '../../../paths.mts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
@@ -39,7 +39,7 @@ import {
   manualTables, parseManualCalibration, parseScriptAssignments, parseScriptCalls, resolveNamedMaps, resolveValue,
   type ManualApplication, type ManualCalibration, type ManualFlag, type PythonValue,
 } from './alma-manual-calibration.mts';
-import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
+import { toolchainDescriptor, toolchainPath } from '../toolchain.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { addProductEvidence, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope-core/node';
 import { productRecordPath } from '@cssearth/telescope-core';

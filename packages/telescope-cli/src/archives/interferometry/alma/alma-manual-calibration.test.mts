@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { expandCall, isName, loggedSpectralWindowMap, manualTables, parseManualCalibration, parseScriptCalls, readValue, resolveNamedMaps } from './alma-manual-calibration.mts';
 
-const here = fileURLToPath(new URL('.', import.meta.url));
+const here = fileURLToPath(new URL('..', import.meta.url));
 const SCRIPT = resolve(here, 'fixtures/alma-manual-scriptForCalibration-excerpt.py');
 const LOG = resolve(here, 'fixtures/alma-manual-applycal-log-excerpt.txt');
 

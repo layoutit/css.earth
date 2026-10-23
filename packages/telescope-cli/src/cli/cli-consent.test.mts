@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { DownloadCancelledError } from '@cssearth/telescope-core/node';
 import { consentHandler, savedDownload, type ConsentState, type DownloadInfo } from './cli-consent.mts';
-import type { CliIo } from './cli.mts';
+import type { CliIo } from '../cli.mts';
 
 function terminal(answer: string | undefined = '', stdinIsTTY = true, stdoutIsTTY = true) {
   const prompts: string[] = [], notices: string[] = [];

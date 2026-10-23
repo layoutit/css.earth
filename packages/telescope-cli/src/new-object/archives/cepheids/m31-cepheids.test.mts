@@ -2,9 +2,9 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
-import type { Archive } from './archives.mts';
+import type { Archive } from '../archives.mts';
 import { draftsFromM31Cepheids, HUBBLE_V1, KODRIC_2018, LI_2021, vizierRows } from './m31-cepheids.mts';
-import { parseStarSpec } from '../spec.mts';
+import { parseStarSpec } from '../../spec.mts';
 
 // The two tables as VizieR's ASU TSV serves them, comment lines dropped: one GRP pointing with two Cepheids, one star listed in
 // both samples, and one Cepheid of its own pointing.
@@ -13,7 +13,7 @@ const li = ['ID\tRAJ2000\tDEJ2000\tPer\tSample\tSimbadName', ' \tdeg\tdeg\td\t \
   'GRP-11.09581+41.35417 \t011.100\t+41.353\t35.903\tGold  \tDIRECT V9029 M31C', 'GRP-11.09581+41.35417 \t011.100\t+41.353\t36.130\tSilver\tDIRECT V9029 M31C',
   'CEPH-11.05340+41.30685\t011.053\t+41.307\t10.631\tGold  \tPSO J011.0534+41.3068'].join('\n');
 const kodric = ['ID\tRAJ2000\tDEJ2000\tPr\tPSO', ' \tdeg\tdeg\td\t ', '---\t---\t---\t---\t---', ' 579568\t010.36375\t+41.16965\t 31.376577\tPSO J010.3637+41.1696'].join('\n');
-const root = resolve(import.meta.dirname, '../../../../..');
+const root = resolve(import.meta.dirname, '../../../../../..');
 const archive: Archive = {
   async text(url, form) {
     if (form?.['-source'] === LI_2021.catalogue) return li;

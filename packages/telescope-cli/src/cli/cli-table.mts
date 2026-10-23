@@ -1,8 +1,8 @@
 /** Content-sized terminal cells, with no control sequences from archive metadata. */
 import { oneLine, archiveCounts } from './cli-summary.mts';
 import { archiveLabel } from './cli-archive.mts';
-import type { ExplorationSession, Session } from './session.mts';
-import { fieldLabel } from './exploration.mts';
+import type { ExplorationSession, Session } from '../session.mts';
+import { fieldLabel } from '../exploration.mts';
 export function cell(value:string,width:number):string {
   const text=Array.from(oneLine(value));return (text.length>width?`${text.slice(0,width-1).join('')}…`:text.join('')).padEnd(width);
 }

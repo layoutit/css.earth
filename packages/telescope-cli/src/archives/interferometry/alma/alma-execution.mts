@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** What one ALMA execution contains, read without downloading it.
  *
- *   node packages/telescope-cli/src/archives/interferometry/alma-execution.mts <raw tarball url>
+ *   node packages/telescope-cli/src/archives/interferometry/alma/alma-execution.mts <raw tarball url>
  *
  * The raw visibilities of one execution are a tarball of tens of gigabytes, and the archive refuses byte ranges, so there is no
  * way to ask for part of it. But a tar is read in order, and this one begins with the two tables that describe the whole

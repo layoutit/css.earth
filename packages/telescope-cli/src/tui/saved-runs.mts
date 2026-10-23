@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSkyTarget } from '@cssearth/telescope-core/node';
 import { EXPLORATION_SCHEMA, parseExplorationArguments, type ExplorationDisplay, type ExplorationReference } from '../exploration.mts';
-import { displayPath } from '../cli-format.mts';
+import { displayPath } from '../cli/cli-format.mts';
 import { verifiedProduct } from '../products/verified-product.mts';
 import { explorationPickStatuses } from './explore-services.mts';
 import type { ExploreChoice, SavedExploration } from './explore.mts';

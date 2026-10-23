@@ -6,8 +6,8 @@ import test from 'node:test';
 import { displayPath, formatExploration, shellWord } from './cli-format.mts';
 import { explorationSummary } from './cli-summary.mts';
 import { archiveLabel } from './cli-archive.mts';
-import type { ExplorationChoice } from './exploration.mts';
-import type { ExplorationSession } from './session.mts';
+import type { ExplorationChoice } from '../exploration.mts';
+import type { ExplorationSession } from '../session.mts';
 
 const source: ExplorationChoice = {
   pick: 1, key: 'source', state: 'qualify', telescope: 'Source archive', mode: 'FITS/image', observation: 'matisse-2018-continuum', program: 'source',

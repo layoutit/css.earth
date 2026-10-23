@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** The calibration a MANUAL ALMA delivery applied, read from the reduction script it ships beside the data.
  *
- *   node packages/telescope-cli/src/archives/interferometry/alma-manual-calibration.mts <uid___....ms.scriptForCalibration.py> [<casapy log>]
+ *   node packages/telescope-cli/src/archives/interferometry/alma/alma-manual-calibration.mts <uid___....ms.scriptForCalibration.py> [<casapy log>]
  *
  * A pipeline delivery ships `<execution>.ms.calapply.txt`, one applycal line per intent, and `alma-calibration.mts` reads it. A
  * manual delivery ships no such record: the calibration is the reduction script an ALMA data reducer wrote by hand, numbered

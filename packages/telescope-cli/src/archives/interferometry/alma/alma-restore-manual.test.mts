@@ -9,7 +9,7 @@ import { evidenceFor, productRecordPath } from '@cssearth/telescope-core';
 import { readProductRecord, runKey, writeProductRecord } from '@cssearth/telescope-core/node';
 import { loggedSpectralWindowMap, parseManualCalibration, resolveNamedMaps } from './alma-manual-calibration.mts';
 
-const here = fileURLToPath(new URL('.', import.meta.url));
+const here = fileURLToPath(new URL('..', import.meta.url));
 const read = (name: string) => readFile(resolve(here, 'fixtures', name), 'utf8');
 
 const imagingScript = await read('alma-manual-scriptForImaging-excerpt.py');

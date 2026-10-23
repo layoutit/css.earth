@@ -1,4 +1,4 @@
-import type { Terminal } from './tui/terminal.mts';
+import type { Terminal } from '../tui/terminal.mts';
 /** Shared CLI streams and terminal interaction contract. */
 export interface CliIo {
   readonly stdinIsTTY:boolean;readonly stdoutIsTTY:boolean;

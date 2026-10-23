@@ -2,13 +2,13 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { parseCatalogueRow, type Archive } from './archives.mts';
+import { parseCatalogueRow, type Archive } from '../archives.mts';
 import { cepheidRelations, draftFromHoffmann, GROENEWEGEN_2020, hostName, parseHoffmannRows } from './sh0es.mts';
-import { parseStarSpec } from '../spec.mts';
-import { citedRow, duplicateStar } from '../names/identity.mts';
-import { loadSolarEpoch } from '../solar-epoch.mts';
+import { parseStarSpec } from '../../spec.mts';
+import { citedRow, duplicateStar } from '../../names/identity.mts';
+import { loadSolarEpoch } from '../../solar-epoch.mts';
 
-const test = sourceTest(), root = resolve(import.meta.dirname, '../../../../..');
+const test = sourceTest(), root = resolve(import.meta.dirname, '../../../../../..');
 // Hoffmann et al. (2016) table 5 as VizieR's ASU TSV serves it, with the dated comment lines already dropped.
 const table = ['Gal\tRAJ2000\tDEJ2000\tID\tPer\tF555W\tF814W\tSimbadName', ' \tdeg\tdeg\t \td\tmag\tmag\t', '-----\t---------\t---------\t--------\t------\t------\t------\t-----------------------'];
 const row = (host: string, id: string, period: number) => `${host}\t188.59811\t+02.17822\t   ${id}\t${period}\t26.625\t25.953\t[HMR2016] ${host}  ${id}`;
@@ -67,7 +67,7 @@ test('a star too bright for Gaia is placed by its Hipparcos row, at that row\'s 
 });
 
 test('a whole package for a star Gaia cannot see: the archived row placed and declared, no Gaia file, cited distance and velocity', async () => {
-  const { generateStar, CATALOGUE_ROW_PATH } = await import('../generate.mts');
+  const { generateStar, CATALOGUE_ROW_PATH } = await import('../../generate.mts');
   const [parsed] = parseHoffmannRows([...table, row('N4536', '38676', 11.854)].join('\n'));
   const spec = parseStarSpec({ ...draftFromHoffmann(parsed!, velocity), limb: { none: 'a test fixture' } });
   const arxiv = '<feed><entry><title>A paper</title><published>2016-01-01T00:00:00Z</published><author><name>S Hoffmann</name></author></entry></feed>';

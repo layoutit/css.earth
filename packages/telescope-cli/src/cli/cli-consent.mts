@@ -5,8 +5,8 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { DownloadCancelledError, USER_ROOT, type TransferConsent } from '@cssearth/telescope-core/node';
 import { archiveLabel } from './cli-archive.mts';
 import { displayPath } from './cli-format.mts';
-import { createInstallScreen, installFreeGb } from './tui/install.mts';
-import { processTerminal } from './tui/terminal.mts';
+import { createInstallScreen, installFreeGb } from '../tui/install.mts';
+import { processTerminal } from '../tui/terminal.mts';
 import type { CliIo } from './cli-io.mts';
 
 export type DownloadInfo = Extract<TransferConsent, { kind: 'download' }>;

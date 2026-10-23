@@ -1,18 +1,18 @@
 /** The services the command runs through; tests and the interactive screens inject their own. */
 import type { DownloadInfo } from './cli-consent.mts';
 import type { InspectedArtifact } from './cli-artifact-types.mts';
-import type { exportSpatialObject } from './delivery/spatial-handoff.mts';
-import type { exportHtml } from './delivery/html-outputs.mts';
-import type { exportOutput } from './delivery/outputs.mts';
-import type { projectOutput } from './delivery/projection.mts';
-import type { exportSphere } from './sphere/sphere.mts';
-import type { familyCoverageLedger } from './family-handlers.mts';
-import type { executeFamilyOperation } from './family-operation.mts';
-import type { importLocalArtifact } from './local-import.mts';
-import type { saveExploration } from './session.mts';
-import type { DeliveryContext } from './delivery/delivery-context.mts';
-import type { RequestSatisfaction } from './requests/request-satisfaction.mts';
-import type { ExploreServices } from './tui/explore.mts';
+import type { exportSpatialObject } from '../delivery/spatial-handoff.mts';
+import type { exportHtml } from '../delivery/html-outputs.mts';
+import type { exportOutput } from '../delivery/outputs.mts';
+import type { projectOutput } from '../delivery/projection.mts';
+import type { exportSphere } from '../sphere/sphere.mts';
+import type { familyCoverageLedger } from '../family-handlers.mts';
+import type { executeFamilyOperation } from '../family-operation.mts';
+import type { importLocalArtifact } from '../local-import.mts';
+import type { saveExploration } from '../session.mts';
+import type { DeliveryContext } from '../delivery/delivery-context.mts';
+import type { RequestSatisfaction } from '../requests/request-satisfaction.mts';
+import type { ExploreServices } from '../tui/explore.mts';
 
 export interface RetrievedResult {
   readonly resultPath:string;readonly product:string;readonly reused:boolean;

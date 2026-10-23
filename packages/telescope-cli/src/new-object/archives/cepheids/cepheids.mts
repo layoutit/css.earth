@@ -5,7 +5,7 @@
  * The paper gives no temperature or mass: the draft leaves them out and names them, and the spec parser refuses it until a person
  * cites them. Its color is the Planck spectrum at that temperature, because the paper's E(B-V) reddens every spectrum of the star
  * and its light changes through the pulsation. */
-import { VIZIER_ASU, type Archive } from './archives.mts';
+import { VIZIER_ASU, type Archive } from '../archives.mts';
 
 /** The published gravities of classical Cepheids, which have no measured masses: the generator reads a Gaia DCEP's limb inside them when
  * its own gravity is unpublished (generate.mts). Luck (2018), AJ 156, 171, table 3: its 1,128 spectra of 435 Cepheids give log g -1.33

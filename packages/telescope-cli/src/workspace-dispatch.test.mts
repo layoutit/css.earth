@@ -5,7 +5,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { parseCli } from './cli-arguments.mts';
+import { parseCli } from './cli/cli-arguments.mts';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 
 const checkout = resolve(import.meta.dirname, '../../..');

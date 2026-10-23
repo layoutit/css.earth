@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** What the ALMA Science Archive holds for one member observing unit set, and how to take one file out of it.
  *
- *   node packages/telescope-cli/src/archives/interferometry/alma-archive.mts <member OUS uid>
+ *   node packages/telescope-cli/src/archives/interferometry/alma/alma-archive.mts <member OUS uid>
  *
  * The archive's delivery unit is a tar: the products of one member OUS are one tarball of tens of gigabytes, and the raw
  * visibilities of one execution are another. Astroquery reads ALMA's IVOA DataLink service, which lists and serves any single

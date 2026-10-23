@@ -1,19 +1,19 @@
 /** The telescope's human screens: a saved session, an exploration and an artifact's outputs, with the commands they suggest. */
-import { currentDirectory } from './run-directory.mts';
+import { currentDirectory } from '../run-directory.mts';
 import { explorationTable, queryTable, row, wavelengthText } from './cli-table.mts';
-import { fieldLabel } from './exploration.mts';
+import { fieldLabel } from '../exploration.mts';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { homedir } from 'node:os';
-import { formatAnswer } from './observation-query/query.mts';
-import { assessRequest } from './requests/request-satisfaction.mts';
-import type { ExplorationSession, Session } from './session.mts';
+import { formatAnswer } from '../observation-query/query.mts';
+import { assessRequest } from '../requests/request-satisfaction.mts';
+import type { ExplorationSession, Session } from '../session.mts';
 import type { InspectedArtifact } from './cli-artifact-types.mts';
-import type { OutputChoice } from './delivery/outputs.mts';
-import type { SourceRelevance } from './products/source-relevance.mts';
+import type { OutputChoice } from '../delivery/outputs.mts';
+import type { SourceRelevance } from '../products/source-relevance.mts';
 import type { ProductSoftware } from '@cssearth/objects';
-import type { SourceProcessingSoftware } from './products/source-product-contract.mts';
-import type { DeliveryContext } from './delivery/delivery-context.mts';
-import type { FamilyOperation } from './family-handler.mts';
+import type { SourceProcessingSoftware } from '../products/source-product-contract.mts';
+import type { DeliveryContext } from '../delivery/delivery-context.mts';
+import type { FamilyOperation } from '../family-handler.mts';
 import { requireString } from '@cssearth/core';
 
 /** Keep incomplete coverage's cause visible instead of attributing every gap to an outage. */

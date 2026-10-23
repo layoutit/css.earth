@@ -8,8 +8,8 @@ import { parseHTML } from 'linkedom';
 import { writeHtmlFixtures } from './html-fixture.mts';
 import { exportHtml } from './html-outputs.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
-import { formatArtifact, artifactScreen } from '../cli-format.mts';
-import { parseCli } from '../cli-arguments.mts';
+import { formatArtifact, artifactScreen } from '../cli/cli-format.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 import { assertStandaloneHtml } from '../sphere/sphere-oracle.mts';
 import { spectrumChart } from './spectrum-html.mts';
 
