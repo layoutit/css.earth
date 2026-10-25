@@ -390,8 +390,11 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const twice = ranges && !parts ? every.find(item => item.path === paths.field && item.id !== input) : undefined;
   if (twice) throw new TypeError(`${id}, dataset ${entry.dataset}: ${String(twice.id)} already draws ${paths.field}; one field is one dataset (field variable).`);
   const content = read(`${s}/content/object.json`), palette = INFERNO.map(hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)));
+  // A body with an atmosphere draws its limb and halo over a false-color dataset from their observation atlas (Venus's radar and gravity do).
+  const atmosphere = raster.atmosphere === undefined ? undefined : requireRecord(raster.atmosphere, `${id} raster atmosphere`);
+  const observation = typeof atmosphere?.observationOutput === 'string' ? atmosphere.observationOutput.replace('{suffix}', '@2x') : undefined;
   const control = { id: entry.dataset, label: entry.label, qualification: `Simulation · ${entry.model} · ${entry.credit} · False color`,
-    thumbnail: `${id}-dataset-${entry.dataset}.webp`, surface: `${id}-surface-${entry.dataset}@2x.webp`, poles: `${id}-poles-${entry.dataset}@2x.webp`,
+    thumbnail: `${id}-dataset-${entry.dataset}.webp`, surface: `${id}-surface-${entry.dataset}@2x.webp`, poles: `${id}-poles-${entry.dataset}@2x.webp`, ...(observation ? { material: observation } : {}),
     source: { id: cited, path: '../manifest.json', url: entry.url }, falseColor: true, ...(short || field.missing ? { noData: true } : {}),
     legend: { kind: 'scale', title: entry.quantity, labels, recipe: { palette, labels }, meta: units, sourceUrl: entry.url },
     notes: `${entry.quantity} of ${name} in the ${entry.model} simulation of ${entry.credit}: a model, not a measurement. The run assumes ${entry.scenario}. The map is ${entry.time}.${entry.detected ? '' : ` Nobody has detected ${entry.undetected} on ${name}.`}${entry.observed ? ` ${entry.observed.text}` : ''}${entry.others ? ` ${entry.others.text}` : ''}${caps}${gaps} The false color runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} ${units}; it is not what an eye would see.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };

@@ -942,6 +942,68 @@
             "value": "Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre."
           }
         ]
+      },
+      {
+        "id": "cloud-top-temperature",
+        "label": "Cloud-top temperature",
+        "qualification": "Simulation · ALERA-V · Fujisawa et al. (2026) · False color",
+        "thumbnail": "venus-dataset-cloud-top-temperature.webp",
+        "surface": "venus-surface-cloud-top-temperature@2x.webp",
+        "poles": "venus-poles-cloud-top-temperature@2x.webp",
+        "material": "venus-observation-material@2x.webp",
+        "source": {
+          "id": "venus-cloud-top-temperature-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1002/gdj3.70080"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Air temperature at the cloud tops",
+          "labels": [
+            "180",
+            "200",
+            "220"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "180",
+              "200",
+              "220"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://doi.org/10.1002/gdj3.70080"
+        },
+        "notes": "Air temperature at the cloud tops of Venus in the ALERA-V simulation of Fujisawa et al. (2026): a model, not a measurement. The run assumes the AFES-Venus circulation model steered by the cloud-top winds Akatsuki's ultraviolet camera measured from September to December 2018, assimilated at 70 km by the ALEDAS-V ensemble, whose mean the release holds. The map is one instant, 1 November 2018 at 00:00 UT, on the 1,840 Pa level, about 70 km up, where the winds were assimilated. Fujisawa et al. (2022) confirmed the thermal tides of the analysis against Akatsuki's temperature observations. Gray caps: no released grid samples beyond 87.9° north or south. The false color runs from 180 to 220 K; it is not what an eye would see. The model turns the planet the other way round, as models of the atmosphere write Venus; the map stands on Venus's own longitudes, 360° less the model's, as the release's own step that read Akatsuki's winds into the model converts them. With shadows on, the Sun's light darkens the night half."
       }
     ],
     "labels": {

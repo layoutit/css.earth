@@ -883,6 +883,391 @@
           }
         ]
       }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-1",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at29158.dat",
+      "range": {
+        "offset": 29158,
+        "length": 576
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 29,158 to 29,733 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 576 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-2",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at1274343966.dat",
+      "range": {
+        "offset": 1274343966,
+        "length": 6920
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 1,274,343,966 to 1,274,350,885 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 6,920 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-2",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-3",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at2398780638.dat",
+      "range": {
+        "offset": 2398780638,
+        "length": 3264
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 2,398,780,638 to 2,398,783,901 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 3,264 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-3",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-4",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at3523203206.dat",
+      "range": {
+        "offset": 3523203206,
+        "length": 3264
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 3,523,203,206 to 3,523,206,469 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 3,264 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-4",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-5",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at4647625774.dat",
+      "range": {
+        "offset": 4647625774,
+        "length": 3264
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,647,625,774 to 4,647,629,037 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 3,264 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-5",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-6",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at4803812166.dat",
+      "range": {
+        "offset": 4803812166,
+        "length": 65536
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,803,812,166 to 4,803,877,701 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 65,536 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-6",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-7",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at5772048342.dat",
+      "range": {
+        "offset": 5772048342,
+        "length": 3264
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 5,772,048,342 to 5,772,051,605 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 3,264 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-7",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-8",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at6896470910.dat",
+      "range": {
+        "offset": 6896470910,
+        "length": 3264
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,896,470,910 to 6,896,474,173 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 3,264 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-8",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-9",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at8020893478.dat",
+      "range": {
+        "offset": 8020893478,
+        "length": 3264
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 8,020,893,478 to 8,020,896,741 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 3,264 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-9",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-part-10",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at9145316046.dat",
+      "range": {
+        "offset": 9145316046,
+        "length": 1808
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 9,145,316,046 to 9,145,317,853 of alerav_v1.0.1_anal_mean_201809-201812.nc, read to take temp at time index 243 at plev index 35",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: 1,808 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc the field reader reads to take temp at time index 243 at plev index 35, its structure or its values. The 9.6 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-part-10",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "venus-cloud-top-temperature-simulation-grid",
+      "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.head.dat",
+      "range": {
+        "offset": 0,
+        "length": 19238
+      },
+      "origin": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "productId": "alerav_v1.0.1_anal_mean_201809-201812.nc",
+      "version": "10.5281/zenodo.23383461",
+      "sourceUrl": "https://zenodo.org/records/23383461",
+      "credit": "Fujisawa et al. (2026); ALERA-V simulation",
+      "displayCredit": "Fujisawa et al. (2026) · ALERA-V",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/23383461",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "First 19,238 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc, the ALERA-V simulation of Venus: its superblock, structure and coordinate variables",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.23383461: the first 19,238 bytes of alerav_v1.0.1_anal_mean_201809-201812.nc, the NetCDF-4 structure the reader starts from.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "cloud-top-temperature-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-cloud-top-temperature-simulation-grid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

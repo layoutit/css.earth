@@ -105,6 +105,11 @@
       "title": "Shape of Venus’s gravity",
       "detail": "Magellan",
       "summary": "The height of the surface of equal gravity potential, the level a global ocean would settle to."
+    },
+    "cloud-top-temperature": {
+      "title": "Cloud-top temperature, 2018",
+      "detail": "ALERA-V · Akatsuki winds",
+      "summary": "The air at the cloud tops, 70 km up, on 1 November 2018, from a model steered by winds Akatsuki measured. The color is added."
     }
   }
 }
