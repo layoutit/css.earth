@@ -1,0 +1,163 @@
+{
+  "version": 28,
+  "parent": 25,
+  "configuration": {
+    "version": 28,
+    "parent": 25,
+    "densityVersion": 21,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 25,
+    "dustStrength": 1.0919999999999999,
+    "oldPopulationVersion": 21,
+    "change": "Calibrate one global dust strength and one global selective-reddening grade at the owner H5 and F4 pins.",
+    "details": {
+      "freeParameters": 2,
+      "material": {
+        "strengthFactor": 0.9099999999999999,
+        "effectiveStrength": 1.0919999999999999,
+        "reddeningGrade": 3,
+        "extinctionRgb": [
+          0.25,
+          1,
+          1.879765395894428
+        ]
+      },
+      "bounds": {
+        "strength": [
+          0.2,
+          1
+        ],
+        "reddening": [
+          0.5,
+          3
+        ]
+      },
+      "tolerances": {
+        "localColorRelative": 0.03,
+        "localContrastAbsolute": 0.05
+      },
+      "ownerPins": [
+        {
+          "id": "H5",
+          "x": 331,
+          "y": 229,
+          "calibrate": true
+        },
+        {
+          "id": "G5",
+          "x": 280,
+          "y": 214,
+          "calibrate": false
+        },
+        {
+          "id": "F4",
+          "x": 226,
+          "y": 184,
+          "calibrate": true
+        }
+      ],
+      "window": {
+        "half": 7,
+        "laneHalf": 2,
+        "barInner": 5
+      },
+      "excludedCore": {
+        "x": 280,
+        "y": 214,
+        "rx": 32,
+        "ry": 24
+      },
+      "ownerAnnotations": "# Annotations · LMC · Earth view (owner, 2026-10-25)\nImage 512×384 px (versions/lN/earth.png and horalek.png), grid 12 columns (A–L) × 8 rows, origin top-left.\n\n1. H5 (x 331, y 229) — comparing l24 vs Photo (Horálek): this dust is right, its just too dark\n2. G5 (x 280, y 214) — comparing l24 vs Photo (Horálek): this dust doesn't show as dark in the horalek image, but maybe its there and the bulge is just too exposed in horalek, we should show it but not has dark, and do not calibrate here\n3. F4 (x 226, y 184) — comparing l24 vs Photo (Horálek): this dust seems correct in position but too dark, calibrate it to the right brown\n",
+      "nativeDustBank": 25,
+      "geometry": "The l25 finite clouds and diffuse field remain byte-for-byte equivalent in memory. No centre, shape, width, weight, depth or relative column changes.",
+      "appearance": "The Gordon optical direction is graded as kappa_lambda = 1 + q (kappa_Gordon,lambda - 1), with kappa_V=1. This is a global dust appearance grade for processed photo colors, not a newly measured extinction curve or R_V.",
+      "frozen": "All stellar densities, catalogue objects, points, source amplitudes, population colors, RGB coefficients, stretch and saturation.",
+      "calibrationScope": "Only H5 and F4 local color and contrast. G5, the core, global lane dimming and whole-image RMS have zero calibration weight.",
+      "maximumCorrectionRounds": 3
+    },
+    "dustExtinctionRgb": [
+      0.25,
+      1,
+      1.879765395894428
+    ]
+  },
+  "method": {
+    "nativeGrid": [
+      512,
+      384
+    ],
+    "ownerPins": [
+      {
+        "id": "H5",
+        "x": 331,
+        "y": 229,
+        "calibrate": true
+      },
+      {
+        "id": "G5",
+        "x": 280,
+        "y": 214,
+        "calibrate": false
+      },
+      {
+        "id": "F4",
+        "x": 226,
+        "y": 184,
+        "calibrate": true
+      }
+    ],
+    "window": {
+      "half": 7,
+      "laneHalf": 2,
+      "barInner": 5
+    },
+    "excludedCore": {
+      "x": 280,
+      "y": 214,
+      "rx": 32,
+      "ry": 24
+    },
+    "definition": "Only H5 and F4 central 5 by 5 pixel color medians and local contrast against their 5–7 pixel square annuli enter the fit. G5 and the core ellipse have zero weight. R/G, B/G and median linear-luminance contrast are compared with the corresponding photo pixels.",
+    "material": "kappa_lambda = 1 + q (kappa_Gordon,lambda - 1), kappa_G=1; one global strength multiplies optical depth. q is a global RGB dust appearance grade for the processed Horálek photo, not a newly measured extinction law or R_V.",
+    "geometry": "All native clouds, diffuse fallback columns, foreground depths and adopted thicknesses are inherited exactly from l25. No clumping, smoothing, spatial optical-depth remapping or pixel transfer is introduced.",
+    "optimization": "One bounded global strength and one bounded global selective-reddening grade; finite initial grid and two decreasing coordinate steps. No parameters per pin, pixel or region. Global lane dimming, whole-image RMS, G5 and the core do not enter the objective."
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "version": 28,
+  "parent": 25,
+  "rung": "small",
+  "size": 512,
+  "seconds": 523.6387097920001,
+  "grade": {
+    "coefficients": [
+      [
+        0.2991848749939381,
+        0.11285894755502275,
+        0.0010000000000000002
+      ],
+      [
+        1.1830188815175458,
+        1.8424050846208464,
+        1.589518939094475
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1.0919999999999999,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.25860111272814457
+  },
+  "dustStrength": 1.0919999999999999,
+  "material": {
+    "strengthFactor": 0.9099999999999999,
+    "effectiveStrength": 1.0919999999999999,
+    "reddeningGrade": 3,
+    "extinctionRgb": [
+      0.25,
+      1,
+      1.879765395894428
+    ]
+  },
+  "residuals": {
+    "trainRelativeRms": 0.25860111272814457,
+    "heldoutRelativeRms": 0.3192808639466501,
+    "totalLightDifferencePercent": 2.2012081273062645,
+    "annularDifferencePercent": [
+      -10.135618911177547,
+      -5.8286588965872355,
+      20.32049090574384,
+      9.233892399389344
+    ],
+    "channelShareDifferencePercentagePoints": [
+      [
+        0.4821308678550851,
+        -0.3978585817910274,
+        -0.08427228606404658
+      ],
+      [
+        1.8757185908848062,
+        0.4247618657583274,
+        -2.300480456643145
+      ],
+      [
+        18.584232810428926,
+        -6.524202468970408,
+        -12.06003034145852
+      ]
+    ]
+  },
+  "sceneControls": {
+    "youngTint": [
+      1.313986657359593,
+      1.13041657671757,
+      1.056593290852588
+    ],
+    "outskirtsGain": 2.80043441709131,
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014,
+    "oldResolvedFraction": 0.29587500000000005,
+    "youngResolvedFraction": 0.019619550949644238
+  },
+  "pilotPassed": true,
+  "calibrationPassed": false,
+  "configuration": {
+    "version": 28,
+    "parent": 25,
+    "densityVersion": 21,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 25,
+    "dustStrength": 1.0919999999999999,
+    "oldPopulationVersion": 21,
+    "change": "Calibrate one global dust strength and one global selective-reddening grade at the owner H5 and F4 pins.",
+    "details": {
+      "freeParameters": 2,
+      "material": {
+        "strengthFactor": 0.9099999999999999,
+        "effectiveStrength": 1.0919999999999999,
+        "reddeningGrade": 3,
+        "extinctionRgb": [
+          0.25,
+          1,
+          1.879765395894428
+        ]
+      },
+      "bounds": {
+        "strength": [
+          0.2,
+          1
+        ],
+        "reddening": [
+          0.5,
+          3
+        ]
+      },
+      "tolerances": {
+        "localColorRelative": 0.03,
+        "localContrastAbsolute": 0.05
+      },
+      "ownerPins": [
+        {
+          "id": "H5",
+          "x": 331,
+          "y": 229,
+          "calibrate": true
+        },
+        {
+          "id": "G5",
+          "x": 280,
+          "y": 214,
+          "calibrate": false
+        },
+        {
+          "id": "F4",
+          "x": 226,
+          "y": 184,
+          "calibrate": true
+        }
+      ],
+      "window": {
+        "half": 7,
+        "laneHalf": 2,
+        "barInner": 5
+      },
+      "excludedCore": {
+        "x": 280,
+        "y": 214,
+        "rx": 32,
+        "ry": 24
+      },
+      "ownerAnnotations": "# Annotations · LMC · Earth view (owner, 2026-10-25)\nImage 512×384 px (versions/lN/earth.png and horalek.png), grid 12 columns (A–L) × 8 rows, origin top-left.\n\n1. H5 (x 331, y 229) — comparing l24 vs Photo (Horálek): this dust is right, its just too dark\n2. G5 (x 280, y 214) — comparing l24 vs Photo (Horálek): this dust doesn't show as dark in the horalek image, but maybe its there and the bulge is just too exposed in horalek, we should show it but not has dark, and do not calibrate here\n3. F4 (x 226, y 184) — comparing l24 vs Photo (Horálek): this dust seems correct in position but too dark, calibrate it to the right brown\n",
+      "nativeDustBank": 25,
+      "geometry": "The l25 finite clouds and diffuse field remain byte-for-byte equivalent in memory. No centre, shape, width, weight, depth or relative column changes.",
+      "appearance": "The Gordon optical direction is graded as kappa_lambda = 1 + q (kappa_Gordon,lambda - 1), with kappa_V=1. This is a global dust appearance grade for processed photo colors, not a newly measured extinction curve or R_V.",
+      "frozen": "All stellar densities, catalogue objects, points, source amplitudes, population colors, RGB coefficients, stretch and saturation.",
+      "calibrationScope": "Only H5 and F4 local color and contrast. G5, the core, global lane dimming and whole-image RMS have zero calibration weight.",
+      "maximumCorrectionRounds": 3
+    },
+    "dustExtinctionRgb": [
+      0.25,
+      1,
+      1.879765395894428
+    ]
+  },
+  "acceptance": {
+    "acceptedBase": 25,
+    "promoted": false,
+    "numericalPinsPassed": false,
+    "errors": [
+      {
+        "pin": "H5",
+        "rgError": -0.02548824892419732,
+        "bgError": 0.05045672031317938,
+        "contrastError": 0.0547294802580226
+      },
+      {
+        "pin": "F4",
+        "rgError": 0.005494505494505475,
+        "bgError": -0.01538461538461533,
+        "contrastError": 0.06442463734525883
+      }
+    ],
+    "tolerances": {
+      "localColorRelative": 0.03,
+      "localContrastAbsolute": 0.05
+    },
+    "pinFitImproved": true,
+    "dustStructureExactlyRetained": true,
+    "onlyGlobalDustStrengthAndReddening": true,
+    "G5Excluded": true,
+    "coreExcluded": true,
+    "visualPinsInspected": true,
+    "barCloseUpInspected": true,
+    "sideViewsInspected": true,
+    "sideViewsCoherent": true,
+    "visualAssessment": "H5 knots retain their shape and are brown rather than nearly black. F4 lanes are warmer and stay visible. G5 is an excluded diagnostic, with its dust retained and lighter. H5 remains cooler and darker than the photo; the central median samples do not meet every declared numerical tolerance.",
+    "status": "The local fit improves, with visible dust retained, but does not meet every pin tolerance. The result awaits owner review; l25 remains the accepted base.",
+    "rmsIsGate": false,
+    "reddeningAtUpperBound": true
+  },
+  "viewSeconds": 259.27047775,
+  "barSeconds": 264.36823204200005
+}

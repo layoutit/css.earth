@@ -1,0 +1,17 @@
+{
+  "parent": "src/objects/lmc-volume/source/preparation/l25/",
+  "acceptedParent": true,
+  "ownerAnnotations": "# Annotations · LMC · Earth view (owner, 2026-10-25)\nImage 512×384 px (versions/lN/earth.png and horalek.png), grid 12 columns (A–L) × 8 rows, origin top-left.\n\n1. H5 (x 331, y 229) — comparing l24 vs Photo (Horálek): this dust is right, its just too dark\n2. G5 (x 280, y 214) — comparing l24 vs Photo (Horálek): this dust doesn't show as dark in the horalek image, but maybe its there and the bulge is just too exposed in horalek, we should show it but not has dark, and do not calibrate here\n3. F4 (x 226, y 184) — comparing l24 vs Photo (Horálek): this dust seems correct in position but too dark, calibrate it to the right brown\n",
+  "baselineExtinction": {
+    "paper": "Gordon et al. 2003",
+    "url": "https://doi.org/10.1086/376774",
+    "coefficients": [
+      0.75,
+      1,
+      1.2932551319648093
+    ]
+  },
+  "rawDustSources": "HERITAGE native structure and the original Bell normalization, with the exact l25 OGLE ordering. Original acquisition records and citations remain with the parent.",
+  "appearanceCalibration": "kappa_lambda = 1 + q (kappa_Gordon,lambda - 1), kappa_G=1; one global strength multiplies optical depth. q is a global RGB dust appearance grade for the processed Horálek photo, not a newly measured extinction law or R_V.",
+  "unchanged": "All Gaia stellar fields and points, catalogue objects, source amplitudes, component RGB coefficients and display curve are retained."
+}
