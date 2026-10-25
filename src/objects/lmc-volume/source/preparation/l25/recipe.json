@@ -1,0 +1,222 @@
+{
+  "generator": "packages/bake/authoring/lmc-volume/dust-geometry/run.mts",
+  "preparation": "packages/bake/authoring/lmc-volume/dust-geometry/prepare.mts",
+  "configuration": {
+    "version": 25,
+    "parent": 24,
+    "densityVersion": 21,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 25,
+    "dustStrength": 1.2,
+    "oldPopulationVersion": 21,
+    "change": "Dust only: regional OGLE stellar reddening orders a continuous HERITAGE filament layer around the warped plane. Random clump depths are removed.",
+    "details": {
+      "dust": {
+        "version": 25,
+        "parent": 24,
+        "stellarBase": 21,
+        "n": 2048,
+        "halfKpc": 10,
+        "finiteClouds": true,
+        "retainMolecular": false,
+        "layerSigmaKpc": 0.25,
+        "clouds": 433450,
+        "depthQuadrature": [
+          {
+            "z": -2.8569700138728056,
+            "weight": 0.0112574113277207
+          },
+          {
+            "z": -1.355626179974266,
+            "weight": 0.2220759220056126
+          },
+          {
+            "z": 0,
+            "weight": 0.5333333333333333
+          },
+          {
+            "z": 1.355626179974266,
+            "weight": 0.2220759220056126
+          },
+          {
+            "z": 2.8569700138728056,
+            "weight": 0.0112574113277207
+          }
+        ],
+        "heightN": 1024,
+        "heightHalfKpc": 10,
+        "strengthBounds": [
+          0.8,
+          1.2
+        ],
+        "input": {
+          "path": "src/objects/lmc-volume/.local/versions/l19/inputs/lmc_bembb_19apr14_dust_param_exp.final.fits",
+          "product": "Gordon 2014 HERITAGE BEMBB expectation, unconstrained beta, 19 April 2014 author release",
+          "url": "https://www.stsci.edu/~kgordon/heritage/heritage_lmc_rebin_dust_fit_maps_bembb_19apr14.tar.gz",
+          "paper": "https://doi.org/10.1088/0004-637X/797/2/85",
+          "release": "https://karllark.github.io/data_magclouds_dustmaps.html",
+          "erratum": "https://doi.org/10.3847/1538-4357/aa6042",
+          "erratumEffect": "The 2017 erratum corrects quoted emissivities by pi and states that the released surface-density maps and conclusions are unaffected. The released map is used directly; no emissivity refit is done."
+        },
+        "source": {
+          "width": 596,
+          "height": 583,
+          "finite": 86690,
+          "minimum": -3.4448957443237305,
+          "median": -1.8607748746871948,
+          "maximum": 0.5364064574241638,
+          "pixelArcsec": 56.00000000016,
+          "meaning": "log10 dust mass surface density in solar masses per square parsec, Gordon 2014 BEMBB expectation estimator. The FITS extension lacks BUNIT; units are established by the paper and author product description."
+        },
+        "normalization": {
+          "factor": 0.8858091574899958,
+          "area": 0.006281504476511465,
+          "measuredIntegral": 0.0010171415650259308,
+          "beforeIntegral": 0.0011482626437370267,
+          "afterIntegral": 0.0010171415650259308,
+          "samples": 85397
+        },
+        "ogle": {
+          "paper": "https://doi.org/10.3847/1538-4365/abcb81",
+          "release": "https://ogle.astrouw.edu.pl/cgi-ogle/get_ms_ext.py",
+          "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/",
+          "files": [
+            {
+              "name": "skowron2020_03.4_arcmin.txt",
+              "bytes": 3388496,
+              "rows": 32895,
+              "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_03.4_arcmin.txt"
+            },
+            {
+              "name": "skowron2020_06.9_arcmin.txt",
+              "bytes": 3206289,
+              "rows": 31126,
+              "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_06.9_arcmin.txt"
+            },
+            {
+              "name": "skowron2020_13.8_arcmin.txt",
+              "bytes": 1349611,
+              "rows": 13100,
+              "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_13.8_arcmin.txt"
+            },
+            {
+              "name": "skowron2020_27.5_arcmin.txt",
+              "bytes": 470300,
+              "rows": 4563,
+              "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_27.5_arcmin.txt"
+            }
+          ],
+          "quantity": "Median E(V-I) to red-clump stars, including Milky Way foreground.",
+          "resolution": "Released text cells are 3.4, 6.9, 13.8 and 27.5 arcminutes wide, with overlapping shifted grids. The paper quotes effective central resolution down to 1.7 arcminutes. This model reports the text cell width actually used.",
+          "foregroundEbv": 0.06,
+          "chen": {
+            "paper": "https://doi.org/10.1093/mnras/stac072",
+            "regionalMaps": "Unavailable check. Published endpoints time out. The cached mcmap-nadc.fits is an NADC login HTML page, never a science input.",
+            "ownerDecision": "Use the published LMC mean Milky Way foreground E(B-V)=0.06 mag. No local Chen copy exists."
+          }
+        },
+        "regions": 35946,
+        "nativeOverlap": {
+          "total": 86690,
+          "matched": 86690
+        },
+        "clippedRegions": 22547,
+        "aboveTotalRegions": 18801,
+        "foregroundFraction": {
+          "definition": "max(0,3.41*(OGLE E(V-I)/1.318 - 0.06)) divided by the area-weighted HERITAGE A_V in each full published adaptive square. Fractions are restricted to 0.02–0.98 to keep finite depths. Conflicting columns and zero internal reddening remain explicitly counted.",
+          "eviConversionSource": "https://arxiv.org/html/2006.02448",
+          "foregroundSource": "https://doi.org/10.1093/mnras/stac072",
+          "width": "Full published square apertures, using all measured HERITAGE samples within each box. Missing dust samples stay unknown. For depth assignment, overlapping cells are resolved by the smallest containing cell, then closest centre. Native HERITAGE brightness is never divided by an OGLE cell median."
+        },
+        "geometry": {
+          "method": "Five fixed positive quadrature samples represent a Gaussian dust depth distribution of sigma 250 pc around a regional mean on the warped plane. The mean solves the dust-weighted probability that a Gaussian 367 pc old-bar tracer lies behind it. Positive height is nearer Earth. A fixed 50 pc Gaussian smooths regional mean transitions. Every patch keeps its measured sky position and compact depth equal to its transverse width. No random clump displacement is used.",
+          "assumed": "The red-clump median is treated as an effective mean foreground column for the old light. The vertical distribution and shared depths of neighbouring patches are priors, not cloud tomography. The five quadrature surfaces correlate the unmeasured far-side morphology with the observed foreground; they are a finite approximation, not five measured physical sheets. All cameras integrate the same finite 3D objects.",
+          "limitations": "The 250 pc width is represented by five weighted depths. This preserves the source column and avoids normal-direction smoothing of measured narrow filaments, at the cost of unresolved depth-correlation ambiguity. Fraction saturation exposes disagreement or optical selection bias. The same geometry is used for all stellar populations, although red clump stars constrain old light best."
+        },
+        "randomDustDepths": false,
+        "molecularExtraOpacity": false,
+        "seconds": 1.6022998749999997
+      },
+      "maximumCorrectionRounds": 3,
+      "freeParameters": "Only global dust strength, 0.8–1.2. Gordon LMC extinction, all l21 stellar RGB grades, source gains, populations, heights, catalogue objects and display settings are frozen.",
+      "success": "Lane location and lane-to-adjacent-bar color improve, dark spots do not replace photo-bright light, bar RGB ratios stay within 2 percent, and side views stay coherent. RMS is reported, not a gate.",
+      "impasse": "If the bounded dust-only geometry cannot reproduce the lanes in three trials, retain the final result as a diagnostic and identify the mismatch. Do not alter stellar light or infer photo-dependent dust pixels.",
+      "acceptance": {
+        "status": "Completed l25 dust diagnostic. The visual lane criterion fails; l21 remains the accepted base.",
+        "promoted": false,
+        "barColorPassed": true,
+        "barColorErrorsPercent": [
+          -1.235199909660567,
+          1.3891153209901752
+        ],
+        "laneColorCloserThanL24": false,
+        "laneLocationCloserThanL24": true,
+        "visualLaneMatchPassed": false,
+        "sideViewsInspected": true,
+        "barCloseUpInspected": true,
+        "sideViewsCoherent": true,
+        "visualAssessment": "The inspected close-up shows fewer black punctures than l24, but some remain beside bright gas. The bar remains predominantly beige, with neither the connected brown-orange lanes nor the blue-white intervals of the photo. Lane placement improves slightly, while lane color is effectively unchanged. Face-on, 45 degree and edge-on views remain coherent without an Earth-direction extrusion.",
+        "rmsIsGate": false,
+        "maximumCorrectionRounds": 3,
+        "completedRounds": 3,
+        "impasse": "The bounded dust-only trials do not reproduce the photo lanes. No further geometry, stellar-color or per-pixel corrections were introduced after the round cap.",
+        "rounds": [
+          "A continuous disc-normal Gaussian layer removed random depths but washed out native filaments in projection. It was rejected at tiny size.",
+          "Fixed positive Gaussian depth quadrature keeps native filament positions and the adopted 250 pc width.",
+          "After correcting the source-aperture calculation, three tiny bar evaluations at global strengths 0.8, 1.0 and 1.2 select 1.2 by lane R/G and B/G errors while retaining whole-bar color within 2 percent. This is the final bounded calibration round."
+        ],
+        "implementationCorrection": "A provisional denominator used nearest-centre assignments instead of the full published OGLE measurement squares. That render was terminated. The denominator now uses all measured native dust samples in each complete square, with a behavior test and a caught removal check. Corrected tiny calibration and the final 512 px run supersede provisional results.",
+        "globalDustStrength": 1.2,
+        "chenRegionalCheck": "Unavailable, by owner-approved exception. Only its published mean foreground E(B-V)=0.06 mag is used. The NADC login HTML is excluded."
+      }
+    }
+  },
+  "acquisition": "packages/bake/authoring/lmc-volume/dust-geometry/acquire.mts",
+  "replay": [
+    "acquire.mts",
+    "prepare.mts",
+    "calibrate.mts",
+    "run.mts --tiny-only",
+    "run.mts --small-only",
+    "qualify.mts",
+    "report.mts"
+  ]
+}

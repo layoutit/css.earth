@@ -1,0 +1,824 @@
+{
+  "rungs": [
+    {
+      "version": 25,
+      "parent": 24,
+      "stellarBase": 21,
+      "rung": "tiny",
+      "size": 64,
+      "rayStepKpc": 0.12,
+      "seconds": 45.981884292000004,
+      "dustStrength": 1.2,
+      "grade": {
+        "coefficients": [
+          [
+            0.2991848749939381,
+            0.11285894755502275,
+            0.0010000000000000002
+          ],
+          [
+            1.1830188815175458,
+            1.8424050846208464,
+            1.589518939094475
+          ],
+          [
+            0.23161638365806891,
+            0.26662389788933194,
+            0.5157804581485669
+          ],
+          [
+            2.6987170045257636,
+            0.3067875149677134,
+            0.15719187895006448
+          ]
+        ],
+        "dustStrength": 1.2,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 20,
+        "saturation": 0.5,
+        "score": 0.2576057324119254
+      },
+      "residuals": {
+        "trainRelativeRms": 0.2045228365517011,
+        "heldoutRelativeRms": 0.2500923830662826,
+        "totalLightDifferencePercent": 2.5790553245812253,
+        "annularDifferencePercent": [
+          -9.54017855229079,
+          -5.0105564190991885,
+          20.36645361384575,
+          14.221505618539787
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.3794639580805004,
+            -0.40700089610921086,
+            0.7864648541897168
+          ],
+          [
+            1.0631535211677978,
+            0.4432345866427989,
+            -1.50638810781058
+          ],
+          [
+            18.741981255363978,
+            -6.646863536354686,
+            -12.095117719009291
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.313986657359593,
+          1.13041657671757,
+          1.056593290852588
+        ],
+        "outskirtsGain": 2.80043441709131,
+        "innerDiscGain": 0.7372495191616437,
+        "barGain": 0.99129464369014,
+        "oldResolvedFraction": 0.29587500000000005,
+        "youngResolvedFraction": 0.019619550949644238
+      },
+      "photo": {
+        "rg": 1.0755954463038466,
+        "bg": 0.9404689371813797,
+        "meanG": 0.5663257242131406,
+        "pixels": 118
+      },
+      "candidate": {
+        "rg": 1.062128595746329,
+        "bg": 0.9534393621865334,
+        "meanG": 0.5691164344608954,
+        "pixels": 118
+      },
+      "colorPassed": true,
+      "rmsIsGate": false
+    },
+    {
+      "version": 25,
+      "parent": 24,
+      "stellarBase": 21,
+      "rung": "small",
+      "size": 512,
+      "rayStepKpc": 0.06,
+      "seconds": 665.4038885830157,
+      "dustStrength": 1.2,
+      "grade": {
+        "coefficients": [
+          [
+            0.2991848749939381,
+            0.11285894755502275,
+            0.0010000000000000002
+          ],
+          [
+            1.1830188815175458,
+            1.8424050846208464,
+            1.589518939094475
+          ],
+          [
+            0.23161638365806891,
+            0.26662389788933194,
+            0.5157804581485669
+          ],
+          [
+            2.6987170045257636,
+            0.3067875149677134,
+            0.15719187895006448
+          ]
+        ],
+        "dustStrength": 1.2,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 20,
+        "saturation": 0.5,
+        "score": 0.26168762839134546
+      },
+      "residuals": {
+        "trainRelativeRms": 0.26168762839134546,
+        "heldoutRelativeRms": 0.3419441068122343,
+        "totalLightDifferencePercent": 0.43837484727851095,
+        "annularDifferencePercent": [
+          -11.937618170392394,
+          -7.985950981394485,
+          19.004801091755198,
+          8.921568391089195
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.7655495518443189,
+            -0.12295190811821843,
+            0.888501459962554
+          ],
+          [
+            0.9639843744750853,
+            0.4858233805222878,
+            -1.4498077549973842
+          ],
+          [
+            18.489655861773546,
+            -6.505911896661887,
+            -11.983743965111671
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.313986657359593,
+          1.13041657671757,
+          1.056593290852588
+        ],
+        "outskirtsGain": 2.80043441709131,
+        "innerDiscGain": 0.7372495191616437,
+        "barGain": 0.99129464369014,
+        "oldResolvedFraction": 0.29587500000000005,
+        "youngResolvedFraction": 0.019619550949644238
+      },
+      "photo": {
+        "rg": 1.0751241819330248,
+        "bg": 0.9381817874787874,
+        "meanG": 0.5618371872597989,
+        "pixels": 7458
+      },
+      "candidate": {
+        "rg": 1.0603127656711315,
+        "bg": 0.952178282168494,
+        "meanG": 0.5509007275904032,
+        "pixels": 7458
+      },
+      "colorPassed": true,
+      "rmsIsGate": false,
+      "resumedCompletedViews": true,
+      "execution": {
+        "maximumHeapMiB": 8192,
+        "scope": "Source-only l25 diagnostic, never the shared package build.",
+        "recovery": "The first process completed all four reference views, then exhausted its default 4 GiB heap while constructing the enlarged bar crop. A separate bounded 8 GiB process reused the completed views, replayed their exact Earth residuals and finished the same bar render. The model and calibration were unchanged."
+      },
+      "acceptance": {
+        "status": "Completed l25 dust diagnostic. The visual lane criterion fails; l21 remains the accepted base.",
+        "promoted": false,
+        "barColorPassed": true,
+        "barColorErrorsPercent": [
+          -1.235199909660567,
+          1.3891153209901752
+        ],
+        "laneColorCloserThanL24": false,
+        "laneLocationCloserThanL24": true,
+        "visualLaneMatchPassed": false,
+        "sideViewsInspected": true,
+        "barCloseUpInspected": true,
+        "sideViewsCoherent": true,
+        "visualAssessment": "The inspected close-up shows fewer black punctures than l24, but some remain beside bright gas. The bar remains predominantly beige, with neither the connected brown-orange lanes nor the blue-white intervals of the photo. Lane placement improves slightly, while lane color is effectively unchanged. Face-on, 45 degree and edge-on views remain coherent without an Earth-direction extrusion.",
+        "rmsIsGate": false,
+        "maximumCorrectionRounds": 3,
+        "completedRounds": 3,
+        "impasse": "The bounded dust-only trials do not reproduce the photo lanes. No further geometry, stellar-color or per-pixel corrections were introduced after the round cap.",
+        "rounds": [
+          "A continuous disc-normal Gaussian layer removed random depths but washed out native filaments in projection. It was rejected at tiny size.",
+          "Fixed positive Gaussian depth quadrature keeps native filament positions and the adopted 250 pc width.",
+          "After correcting the source-aperture calculation, three tiny bar evaluations at global strengths 0.8, 1.0 and 1.2 select 1.2 by lane R/G and B/G errors while retaining whole-bar color within 2 percent. This is the final bounded calibration round."
+        ],
+        "implementationCorrection": "A provisional denominator used nearest-centre assignments instead of the full published OGLE measurement squares. That render was terminated. The denominator now uses all measured native dust samples in each complete square, with a behavior test and a caught removal check. Corrected tiny calibration and the final 512 px run supersede provisional results.",
+        "globalDustStrength": 1.2,
+        "chenRegionalCheck": "Unavailable, by owner-approved exception. Only its published mean foreground E(B-V)=0.06 mag is used. The NADC login HTML is excluded."
+      },
+      "viewSeconds": 323.594640292,
+      "barSeconds": 341.80924829101565
+    }
+  ],
+  "barColor": {
+    "photo": {
+      "rg": 1.072846696675257,
+      "bg": 0.9422829186950912,
+      "meanG": 0.5723150713340873,
+      "pixels": 55780
+    },
+    "l21": {
+      "rg": 1.061399832425298,
+      "bg": 0.9544099106389613,
+      "meanG": 0.5535390940607424,
+      "pixels": 55780
+    },
+    "l24": {
+      "rg": 1.0634273669321779,
+      "bg": 0.9525884958260018,
+      "meanG": 0.545428312805087,
+      "pixels": 55780
+    },
+    "l25": {
+      "rg": 1.059594895247128,
+      "bg": 0.9553723150857582,
+      "meanG": 0.5562852923493544,
+      "pixels": 55780
+    }
+  },
+  "slabs": false,
+  "fullFit": false,
+  "qualification": {
+    "stellarBase": 21,
+    "dustParent": 24,
+    "dustOnly": true,
+    "emitterGeometryUnchanged": true,
+    "intrinsicPointColorsAndFluxesUnchanged": true,
+    "stellarDensityUnchanged": true,
+    "catalogueAmplitudesUnchanged": true,
+    "displayAndAllRgbGradesUnchanged": true,
+    "tinyUsesFinalAcceptedL21Parameters": true,
+    "dustStrength": 1.2,
+    "randomDustDepths": false,
+    "depthKernel": "Finite isotropic native patches at five fixed positive Gaussian quadrature depths.",
+    "maxHeightErrorKpc": 1.2068124277675452e-13,
+    "maxPatchWidthErrorKpc": 0,
+    "maxSigmaErrorKpc": 2.3592239273284576e-15,
+    "nativeReplay": {
+      "samples": 2685,
+      "relativeRms": 0.00011597277451418631,
+      "oldTracerMeanFrontFraction": 0.687849769597772,
+      "definition": "Actual complete 3D patch chords against the released interpolated total column in fully supported bar samples, before global strength. The front fraction uses the adopted old-bar Gaussian tracer, not all stellar populations."
+    },
+    "replay": {
+      "trainRelativeRms": 0.26168762839134546,
+      "heldoutRelativeRms": 0.3419441068122343,
+      "totalLightDifferencePercent": 0.43837484727851095,
+      "annularDifferencePercent": [
+        -11.937618170392394,
+        -7.985950981394485,
+        19.004801091755198,
+        8.921568391089195
+      ],
+      "channelShareDifferencePercentagePoints": [
+        [
+          -0.7655495518443189,
+          -0.12295190811821843,
+          0.888501459962554
+        ],
+        [
+          0.9639843744750853,
+          0.4858233805222878,
+          -1.4498077549973842
+        ],
+        [
+          18.489655861773546,
+          -6.505911896661887,
+          -11.983743965111671
+        ]
+      ]
+    },
+    "lanes": {
+      "definition": "Photo lanes require both red-to-blue excess and a green-light deficit, relative to an 8 arcminute mask-normalized background after a 1 arcminute smoothing. Top 20 percent of their combined score are selected inside the fixed catalogue-masked bar. Adjacent bar light is within roughly 5 arcminutes of lane support, has a negative lane score, and excludes lanes. Identical photo masks measure every model; each model also supplies its own lanes for location agreement. No mask or photo intensity is read by the volume builder.",
+      "photo": {
+        "lane": {
+          "rg": 1.1384276653699943,
+          "bg": 0.8971016382098715,
+          "meanG": 0.5088781942891872,
+          "pixels": 5663
+        },
+        "adjacent": {
+          "rg": 1.0610550226770423,
+          "bg": 0.9379045797865793,
+          "meanG": 0.5700514929884295,
+          "pixels": 17044
+        },
+        "bar": {
+          "rg": 1.072846696675257,
+          "bg": 0.9422829186950912,
+          "meanG": 0.5723150713340873,
+          "pixels": 55780
+        },
+        "laneOverAdjacent": {
+          "rg": 1.0729204810677402,
+          "bg": 0.9564956367032641,
+          "green": 0.8926881177373148,
+          "brown": 1.1217202043553023
+        },
+        "location": {
+          "intersectionOverUnion": 1,
+          "precision": 1,
+          "recall": 1,
+          "photoBrightFractionOfModelLanes": 0,
+          "scoreCorrelation": 1,
+          "photoPixels": 5663,
+          "modelPixels": 5663
+        }
+      },
+      "l21": {
+        "lane": {
+          "rg": 1.0628507176622493,
+          "bg": 0.9462519517432546,
+          "meanG": 0.5325397152244818,
+          "pixels": 5663
+        },
+        "adjacent": {
+          "rg": 1.061175325711924,
+          "bg": 0.9432023812864463,
+          "meanG": 0.5527942847071146,
+          "pixels": 17044
+        },
+        "bar": {
+          "rg": 1.061399832425298,
+          "bg": 0.9544099106389613,
+          "meanG": 0.5535390940607424,
+          "pixels": 55780
+        },
+        "laneOverAdjacent": {
+          "rg": 1.0015788078649503,
+          "bg": 1.0032332090305465,
+          "green": 0.9633596619158895,
+          "brown": 0.998350930620414
+        },
+        "location": {
+          "intersectionOverUnion": 0.08378970427163199,
+          "precision": 0.27163781624500666,
+          "recall": 0.1080699276002119,
+          "photoBrightFractionOfModelLanes": 0.15934309809143365,
+          "scoreCorrelation": 0.27092995474581283,
+          "photoPixels": 5663,
+          "modelPixels": 2253
+        }
+      },
+      "l24": {
+        "lane": {
+          "rg": 1.068388148963174,
+          "bg": 0.941783662690446,
+          "meanG": 0.5122396892665155,
+          "pixels": 5663
+        },
+        "adjacent": {
+          "rg": 1.0611351971375533,
+          "bg": 0.943198930986992,
+          "meanG": 0.5509354751756105,
+          "pixels": 17044
+        },
+        "bar": {
+          "rg": 1.0634273669321779,
+          "bg": 0.9525884958260018,
+          "meanG": 0.545428312805087,
+          "pixels": 55780
+        },
+        "laneOverAdjacent": {
+          "rg": 1.0068350874093948,
+          "bg": 0.9984995018017407,
+          "green": 0.9297634883708285,
+          "brown": 1.0083481119345707
+        },
+        "location": {
+          "intersectionOverUnion": 0.19452995500828796,
+          "precision": 0.37121554450971533,
+          "recall": 0.29012890693978455,
+          "photoBrightFractionOfModelLanes": 0.16719385449615906,
+          "scoreCorrelation": 0.3504660313400196,
+          "photoPixels": 5663,
+          "modelPixels": 4426
+        }
+      },
+      "l25": {
+        "lane": {
+          "rg": 1.0663070918190731,
+          "bg": 0.9424233543127198,
+          "meanG": 0.5197276451377716,
+          "pixels": 5663
+        },
+        "adjacent": {
+          "rg": 1.0593899118410874,
+          "bg": 0.9440873453265514,
+          "meanG": 0.5564314728702653,
+          "pixels": 17044
+        },
+        "bar": {
+          "rg": 1.059594895247128,
+          "bg": 0.9553723150857582,
+          "meanG": 0.5562852923493544,
+          "pixels": 55780
+        },
+        "laneOverAdjacent": {
+          "rg": 1.0065293995163354,
+          "bg": 0.9982374607370085,
+          "green": 0.9340371105481099,
+          "brown": 1.0083065794517516
+        },
+        "location": {
+          "intersectionOverUnion": 0.20134562671318215,
+          "precision": 0.4061321940185976,
+          "recall": 0.2853611160162458,
+          "photoBrightFractionOfModelLanes": 0.14325207338527268,
+          "scoreCorrelation": 0.3746506962615665,
+          "photoPixels": 5663,
+          "modelPixels": 3979
+        }
+      },
+      "barColorPassed": true
+    },
+    "regionalMaps": {
+      "paper": "https://doi.org/10.3847/1538-4365/abcb81",
+      "release": "https://ogle.astrouw.edu.pl/cgi-ogle/get_ms_ext.py",
+      "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/",
+      "files": [
+        {
+          "name": "skowron2020_03.4_arcmin.txt",
+          "bytes": 3388496,
+          "rows": 32895,
+          "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_03.4_arcmin.txt"
+        },
+        {
+          "name": "skowron2020_06.9_arcmin.txt",
+          "bytes": 3206289,
+          "rows": 31126,
+          "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_06.9_arcmin.txt"
+        },
+        {
+          "name": "skowron2020_13.8_arcmin.txt",
+          "bytes": 1349611,
+          "rows": 13100,
+          "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_13.8_arcmin.txt"
+        },
+        {
+          "name": "skowron2020_27.5_arcmin.txt",
+          "bytes": 470300,
+          "rows": 4563,
+          "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_27.5_arcmin.txt"
+        }
+      ],
+      "quantity": "Median E(V-I) to red-clump stars, including Milky Way foreground.",
+      "resolution": "Released text cells are 3.4, 6.9, 13.8 and 27.5 arcminutes wide, with overlapping shifted grids. The paper quotes effective central resolution down to 1.7 arcminutes. This model reports the text cell width actually used.",
+      "foregroundEbv": 0.06,
+      "chen": {
+        "paper": "https://doi.org/10.1093/mnras/stac072",
+        "regionalMaps": "Unavailable check. Published endpoints time out. The cached mcmap-nadc.fits is an NADC login HTML page, never a science input.",
+        "ownerDecision": "Use the published LMC mean Milky Way foreground E(B-V)=0.06 mag. No local Chen copy exists."
+      }
+    },
+    "fieldState": {
+      "version": 25,
+      "parent": 24,
+      "stellarBase": 21,
+      "n": 2048,
+      "halfKpc": 10,
+      "finiteClouds": true,
+      "retainMolecular": false,
+      "layerSigmaKpc": 0.25,
+      "clouds": 433450,
+      "depthQuadrature": [
+        {
+          "z": -2.8569700138728056,
+          "weight": 0.0112574113277207
+        },
+        {
+          "z": -1.355626179974266,
+          "weight": 0.2220759220056126
+        },
+        {
+          "z": 0,
+          "weight": 0.5333333333333333
+        },
+        {
+          "z": 1.355626179974266,
+          "weight": 0.2220759220056126
+        },
+        {
+          "z": 2.8569700138728056,
+          "weight": 0.0112574113277207
+        }
+      ],
+      "heightN": 1024,
+      "heightHalfKpc": 10,
+      "strengthBounds": [
+        0.8,
+        1.2
+      ],
+      "input": {
+        "path": "src/objects/lmc-volume/.local/versions/l19/inputs/lmc_bembb_19apr14_dust_param_exp.final.fits",
+        "product": "Gordon 2014 HERITAGE BEMBB expectation, unconstrained beta, 19 April 2014 author release",
+        "url": "https://www.stsci.edu/~kgordon/heritage/heritage_lmc_rebin_dust_fit_maps_bembb_19apr14.tar.gz",
+        "paper": "https://doi.org/10.1088/0004-637X/797/2/85",
+        "release": "https://karllark.github.io/data_magclouds_dustmaps.html",
+        "erratum": "https://doi.org/10.3847/1538-4357/aa6042",
+        "erratumEffect": "The 2017 erratum corrects quoted emissivities by pi and states that the released surface-density maps and conclusions are unaffected. The released map is used directly; no emissivity refit is done."
+      },
+      "source": {
+        "width": 596,
+        "height": 583,
+        "finite": 86690,
+        "minimum": -3.4448957443237305,
+        "median": -1.8607748746871948,
+        "maximum": 0.5364064574241638,
+        "pixelArcsec": 56.00000000016,
+        "meaning": "log10 dust mass surface density in solar masses per square parsec, Gordon 2014 BEMBB expectation estimator. The FITS extension lacks BUNIT; units are established by the paper and author product description."
+      },
+      "normalization": {
+        "factor": 0.8858091574899958,
+        "area": 0.006281504476511465,
+        "measuredIntegral": 0.0010171415650259308,
+        "beforeIntegral": 0.0011482626437370267,
+        "afterIntegral": 0.0010171415650259308,
+        "samples": 85397
+      },
+      "ogle": {
+        "paper": "https://doi.org/10.3847/1538-4365/abcb81",
+        "release": "https://ogle.astrouw.edu.pl/cgi-ogle/get_ms_ext.py",
+        "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/",
+        "files": [
+          {
+            "name": "skowron2020_03.4_arcmin.txt",
+            "bytes": 3388496,
+            "rows": 32895,
+            "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_03.4_arcmin.txt"
+          },
+          {
+            "name": "skowron2020_06.9_arcmin.txt",
+            "bytes": 3206289,
+            "rows": 31126,
+            "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_06.9_arcmin.txt"
+          },
+          {
+            "name": "skowron2020_13.8_arcmin.txt",
+            "bytes": 1349611,
+            "rows": 13100,
+            "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_13.8_arcmin.txt"
+          },
+          {
+            "name": "skowron2020_27.5_arcmin.txt",
+            "bytes": 470300,
+            "rows": 4563,
+            "url": "https://ogle.astrouw.edu.pl/ms_ext/txt/skowron2020_27.5_arcmin.txt"
+          }
+        ],
+        "quantity": "Median E(V-I) to red-clump stars, including Milky Way foreground.",
+        "resolution": "Released text cells are 3.4, 6.9, 13.8 and 27.5 arcminutes wide, with overlapping shifted grids. The paper quotes effective central resolution down to 1.7 arcminutes. This model reports the text cell width actually used.",
+        "foregroundEbv": 0.06,
+        "chen": {
+          "paper": "https://doi.org/10.1093/mnras/stac072",
+          "regionalMaps": "Unavailable check. Published endpoints time out. The cached mcmap-nadc.fits is an NADC login HTML page, never a science input.",
+          "ownerDecision": "Use the published LMC mean Milky Way foreground E(B-V)=0.06 mag. No local Chen copy exists."
+        }
+      },
+      "regions": 35946,
+      "nativeOverlap": {
+        "total": 86690,
+        "matched": 86690
+      },
+      "clippedRegions": 22547,
+      "aboveTotalRegions": 18801,
+      "foregroundFraction": {
+        "definition": "max(0,3.41*(OGLE E(V-I)/1.318 - 0.06)) divided by the area-weighted HERITAGE A_V in each full published adaptive square. Fractions are restricted to 0.02–0.98 to keep finite depths. Conflicting columns and zero internal reddening remain explicitly counted.",
+        "eviConversionSource": "https://arxiv.org/html/2006.02448",
+        "foregroundSource": "https://doi.org/10.1093/mnras/stac072",
+        "width": "Full published square apertures, using all measured HERITAGE samples within each box. Missing dust samples stay unknown. For depth assignment, overlapping cells are resolved by the smallest containing cell, then closest centre. Native HERITAGE brightness is never divided by an OGLE cell median."
+      },
+      "geometry": {
+        "method": "Five fixed positive quadrature samples represent a Gaussian dust depth distribution of sigma 250 pc around a regional mean on the warped plane. The mean solves the dust-weighted probability that a Gaussian 367 pc old-bar tracer lies behind it. Positive height is nearer Earth. A fixed 50 pc Gaussian smooths regional mean transitions. Every patch keeps its measured sky position and compact depth equal to its transverse width. No random clump displacement is used.",
+        "assumed": "The red-clump median is treated as an effective mean foreground column for the old light. The vertical distribution and shared depths of neighbouring patches are priors, not cloud tomography. The five quadrature surfaces correlate the unmeasured far-side morphology with the observed foreground; they are a finite approximation, not five measured physical sheets. All cameras integrate the same finite 3D objects.",
+        "limitations": "The 250 pc width is represented by five weighted depths. This preserves the source column and avoids normal-direction smoothing of measured narrow filaments, at the cost of unresolved depth-correlation ambiguity. Fraction saturation exposes disagreement or optical selection bias. The same geometry is used for all stellar populations, although red clump stars constrain old light best."
+      },
+      "randomDustDepths": false,
+      "molecularExtraOpacity": false,
+      "seconds": 1.6022998749999997
+    }
+  },
+  "acceptance": {
+    "status": "Completed l25 dust diagnostic. The visual lane criterion fails; l21 remains the accepted base.",
+    "promoted": false,
+    "barColorPassed": true,
+    "barColorErrorsPercent": [
+      -1.235199909660567,
+      1.3891153209901752
+    ],
+    "laneColorCloserThanL24": false,
+    "laneLocationCloserThanL24": true,
+    "visualLaneMatchPassed": false,
+    "sideViewsInspected": true,
+    "barCloseUpInspected": true,
+    "sideViewsCoherent": true,
+    "visualAssessment": "The inspected close-up shows fewer black punctures than l24, but some remain beside bright gas. The bar remains predominantly beige, with neither the connected brown-orange lanes nor the blue-white intervals of the photo. Lane placement improves slightly, while lane color is effectively unchanged. Face-on, 45 degree and edge-on views remain coherent without an Earth-direction extrusion.",
+    "rmsIsGate": false,
+    "maximumCorrectionRounds": 3,
+    "completedRounds": 3,
+    "impasse": "The bounded dust-only trials do not reproduce the photo lanes. No further geometry, stellar-color or per-pixel corrections were introduced after the round cap.",
+    "rounds": [
+      "A continuous disc-normal Gaussian layer removed random depths but washed out native filaments in projection. It was rejected at tiny size.",
+      "Fixed positive Gaussian depth quadrature keeps native filament positions and the adopted 250 pc width.",
+      "After correcting the source-aperture calculation, three tiny bar evaluations at global strengths 0.8, 1.0 and 1.2 select 1.2 by lane R/G and B/G errors while retaining whole-bar color within 2 percent. This is the final bounded calibration round."
+    ],
+    "implementationCorrection": "A provisional denominator used nearest-centre assignments instead of the full published OGLE measurement squares. That render was terminated. The denominator now uses all measured native dust samples in each complete square, with a behavior test and a caught removal check. Corrected tiny calibration and the final 512 px run supersede provisional results.",
+    "globalDustStrength": 1.2,
+    "chenRegionalCheck": "Unavailable, by owner-approved exception. Only its published mean foreground E(B-V)=0.06 mag is used. The NADC login HTML is excluded."
+  },
+  "calibration": {
+    "freeParameters": 1,
+    "bounds": [
+      0.8,
+      1.2
+    ],
+    "method": "Three declared global strengths, measured on the same tiny bar crop after correcting the full OGLE aperture denominator. Minimize squared log errors in photo-lane versus adjacent-bar R/G and B/G; require whole-bar color within 2 percent. No per-pixel, per-region or stellar RGB fit.",
+    "photo": {
+      "lane": {
+        "rg": 1.1344564031015911,
+        "bg": 0.8979506410367379,
+        "meanG": 0.5103050282467657,
+        "pixels": 358
+      },
+      "adjacent": {
+        "rg": 1.063330556842734,
+        "bg": 0.9351079359204956,
+        "meanG": 0.5693464454321562,
+        "pixels": 981
+      },
+      "bar": {
+        "rg": 1.0733295801173308,
+        "bg": 0.9425427337558828,
+        "meanG": 0.5725818566792684,
+        "pixels": 3486
+      },
+      "laneOverAdjacent": {
+        "rg": 1.0668896852452407,
+        "bg": 0.9602641647488737,
+        "green": 0.8962996648893176,
+        "brown": 1.1110376960950652
+      },
+      "location": {
+        "intersectionOverUnion": 1,
+        "precision": 1,
+        "recall": 1,
+        "photoBrightFractionOfModelLanes": 0,
+        "scoreCorrelation": 1,
+        "photoPixels": 358,
+        "modelPixels": 358
+      }
+    },
+    "trials": [
+      {
+        "strength": 0.8,
+        "measurement": {
+          "lane": {
+            "rg": 1.0636417220094132,
+            "bg": 0.9435808242491953,
+            "meanG": 0.5330108170555008,
+            "pixels": 358
+          },
+          "adjacent": {
+            "rg": 1.0573588817606343,
+            "bg": 0.9440837270207305,
+            "meanG": 0.5684573949886275,
+            "pixels": 981
+          },
+          "bar": {
+            "rg": 1.058012123661838,
+            "bg": 0.9587781235525126,
+            "meanG": 0.5678669566886839,
+            "pixels": 3486
+          },
+          "laneOverAdjacent": {
+            "rg": 1.0059420130261896,
+            "bg": 0.9994673112594343,
+            "green": 0.9376442663150933,
+            "brown": 1.006478152605708
+          },
+          "location": {
+            "intersectionOverUnion": 0.22180451127819548,
+            "precision": 0.4041095890410959,
+            "recall": 0.329608938547486,
+            "photoBrightFractionOfModelLanes": 0.15753424657534246,
+            "scoreCorrelation": 0.3173923496498608,
+            "photoPixels": 358,
+            "modelPixels": 292
+          }
+        },
+        "barColorPassed": true,
+        "score": 0.005061285616628431,
+        "seconds": 14.686114625000002
+      },
+      {
+        "strength": 1,
+        "measurement": {
+          "lane": {
+            "rg": 1.0654546367629953,
+            "bg": 0.9420315182175136,
+            "meanG": 0.5273272115763672,
+            "pixels": 358
+          },
+          "adjacent": {
+            "rg": 1.058295448426575,
+            "bg": 0.943281684033698,
+            "meanG": 0.565502278181329,
+            "pixels": 981
+          },
+          "bar": {
+            "rg": 1.0590120791333328,
+            "bg": 0.9578969531193346,
+            "meanG": 0.5646486591868219,
+            "pixels": 3486
+          },
+          "laneOverAdjacent": {
+            "rg": 1.0067648295634875,
+            "bg": 0.9986746633191917,
+            "green": 0.9324935228771599,
+            "brown": 1.008100902667749
+          },
+          "location": {
+            "intersectionOverUnion": 0.2255083179297597,
+            "precision": 0.4,
+            "recall": 0.3407821229050279,
+            "photoBrightFractionOfModelLanes": 0.15737704918032788,
+            "scoreCorrelation": 0.3223572549227781,
+            "photoPixels": 358,
+            "modelPixels": 305
+          }
+        },
+        "barColorPassed": true,
+        "score": 0.004902900325460073,
+        "seconds": 19.467121209000002
+      },
+      {
+        "strength": 1.2,
+        "measurement": {
+          "lane": {
+            "rg": 1.0672153146240166,
+            "bg": 0.9405613777583778,
+            "meanG": 0.5217584306338106,
+            "pixels": 358
+          },
+          "adjacent": {
+            "rg": 1.059211816350663,
+            "bg": 0.9425073828131604,
+            "meanG": 0.5625816749852539,
+            "pixels": 981
+          },
+          "bar": {
+            "rg": 1.0599866262674342,
+            "bg": 0.9570499531770734,
+            "meanG": 0.5614746650943709,
+            "pixels": 3486
+          },
+          "laneOverAdjacent": {
+            "rg": 1.0075560885460364,
+            "bg": 0.9979352893247645,
+            "green": 0.9274358796835794,
+            "brown": 1.0096407044867424
+          },
+          "location": {
+            "intersectionOverUnion": 0.22752293577981653,
+            "precision": 0.3987138263665595,
+            "recall": 0.3463687150837989,
+            "photoBrightFractionOfModelLanes": 0.14469453376205788,
+            "scoreCorrelation": 0.3239773063775994,
+            "photoPixels": 358,
+            "modelPixels": 311
+          }
+        },
+        "barColorPassed": true,
+        "score": 0.0047548279751117905,
+        "seconds": 21.102411332999996
+      }
+    ],
+    "selected": 1.2
+  },
+  "correctionRounds": [
+    "A continuous disc-normal Gaussian layer removed random depths but washed out native filaments in projection. It was rejected at tiny size.",
+    "Fixed positive Gaussian depth quadrature keeps native filament positions and the adopted 250 pc width.",
+    "After correcting the source-aperture calculation, three tiny bar evaluations at global strengths 0.8, 1.0 and 1.2 select 1.2 by lane R/G and B/G errors while retaining whole-bar color within 2 percent. This is the final bounded calibration round."
+  ]
+}
