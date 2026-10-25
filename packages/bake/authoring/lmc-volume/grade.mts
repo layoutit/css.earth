@@ -10,7 +10,7 @@ export function readGrade(value:unknown):Grade {
 export const LUMA:V3=[.2126,.7152,.0722];
 export function validateGrade(g:Grade):void {
   need(g.coefficients.length===4&&g.coefficients.every(v=>v.length===3&&v.every(x=>Number.isFinite(x)&&x>=0&&x<=100)),'Invalid component RGB grade');
-  need(g.dustStrength>=.25&&g.dustStrength<=2&&g.dustTint.length===3&&g.dustTint.every(v=>v>=.6&&v<=1.5)&&g.dustTint[1]===1,'Dust must remain positive with a V-normalized tint');
+  need(g.dustStrength>=.01&&g.dustStrength<=2&&g.dustTint.length===3&&g.dustTint.every(v=>v>=.6&&v<=1.5)&&g.dustTint[1]===1,'Dust must remain positive with a V-normalized tint');
   need(g.stretch>=0&&g.stretch<=20&&g.saturation>=.5&&g.saturation<=2.5,'Invalid global display curve');
 }
 export function tone(r:number,g:number,b:number,stretch:number,saturation:number):V3 {
