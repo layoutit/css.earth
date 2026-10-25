@@ -4555,6 +4555,66 @@
         "kind": "local",
         "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
       }
+    },
+    {
+      "id": "l23-recipe-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l23/recipe.json",
+      "bytes": 12303,
+      "generator": "packages/bake/authoring/lmc-volume/mcps/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l23-fit-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l23/fit.json",
+      "bytes": 4223,
+      "generator": "packages/bake/authoring/lmc-volume/mcps/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l23-lineage-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l23/lineage.json",
+      "bytes": 33953,
+      "generator": "packages/bake/authoring/lmc-volume/mcps/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l23-provenance-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l23/provenance.json",
+      "bytes": 22061,
+      "generator": "packages/bake/authoring/lmc-volume/mcps/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l23-frame-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l23/frame.json",
+      "bytes": 474,
+      "generator": "packages/bake/authoring/lmc-volume/mcps/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l23-field-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l23/field.json",
+      "bytes": 28022,
+      "generator": "packages/bake/authoring/lmc-volume/mcps/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
     }
   ]
 }

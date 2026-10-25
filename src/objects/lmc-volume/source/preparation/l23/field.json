@@ -1,0 +1,679 @@
+{
+  "generator": "packages/bake/authoring/lmc-volume/continuous-model.mts",
+  "workingGeometry": "src/objects/lmc-volume/.local/versions/l17/structure.json",
+  "populationMap": "src/objects/lmc-volume/.local/versions/l14/young-density.f32le",
+  "catalogueCounts": {
+    "cluster": 3156,
+    "association": 2942,
+    "nebula": 390,
+    "supershell": 20,
+    "molecular": 424
+  },
+  "measuredAges": 1192,
+  "unknownAges": 4906,
+  "rejectedKimShells": [
+    9,
+    10,
+    18
+  ],
+  "molecularMassMsun": 67154176.00000003,
+  "selection": "LMC catalogue bounds: RA 65..100, declination -75.5..-62 degrees. MAGMA replaces covered NANTEN parents without adding the same mass twice.",
+  "emissionPrimitives": 199974,
+  "ownerCount": 6508,
+  "haShapes": 228,
+  "tarantula": [
+    "BicaNeb-1252"
+  ],
+  "geometrySource": "Frozen l13 catalogue objects, old disc, bar, warp, dust and heights.",
+  "heightsSigmaKpc": {
+    "old": 0.41010570629613075,
+    "young": 0.15,
+    "gas": 0.15,
+    "dust": 0.25,
+    "bar": 0.36656497062880344
+  },
+  "agePriors": {
+    "spectrum": "BC03 Z=0.008; nearest tabulated age, fixed before grading",
+    "unknownAssociationOrNebularClusterYr": 30000000,
+    "unknownOrdinaryClusterYr": 200000000,
+    "unknownIntermediateOrGlobularYr": 3000000000,
+    "R136AdoptedYr": 1500000,
+    "meaning": "Color priors only. Missing catalogue ages remain null and are never presented as measurements."
+  },
+  "depthStatus": "Unmeasured centre heights use deterministic adopted population dispersions; ellipsoid depth is the geometric mean transverse radius. Individual 3D distances are not claimed.",
+  "dustMixture": "Molecular mass from NANTEN, refined by MAGMA islands; smooth atomic-disc mass 3.8e8 Msun at 50 kpc from Staveley-Smith 2003. One Bell column normalization follows.",
+  "dustNormalization": {
+    "samples": 3171,
+    "observedMeanFaceOnTauV": 0.07598088622018014,
+    "modelMeanFaceOnTauV": 0.07598088622018014,
+    "area": 6.481745984339497,
+    "molecularFraction": 0.15229509499102373,
+    "spatialBellMapUsed": false
+  },
+  "mcelsCheck": {
+    "rows": 401,
+    "identityMatches": 356,
+    "centresWithinCatalogueFootprint": 331
+  },
+  "catalogueLuminosityParameters": 6507,
+  "populationGainParameters": 1,
+  "hybrid": {
+    "shapedCatalogueEntries": 639,
+    "shapedOwners": 638,
+    "emissionPrimitives": 199974,
+    "depthConvention": "Object luminosity-weighted line-of-sight RMS equals its mean transverse RMS. Every subelement is isotropic and finite; three depth samples per shape cell. Depths are adopted, not measured.",
+    "photoObservation": {
+      "sourcePath": "src/objects/lmc-volume/source/compact/lenses/horalek-widefield/registered.png",
+      "maskPath": "src/objects/lmc-volume/source/compact/lenses/horalek-widefield/coverage.png",
+      "registration": {
+        "distanceKpc": 49.59067275049043,
+        "recordedDistanceKpc": 49.590672750490434,
+        "tangentBoundsKpc": {
+          "min": [
+            -4.351779483333175,
+            -3.6886303332796695
+          ],
+          "max": [
+            5.121066913779062,
+            3.3480334410529595
+          ]
+        },
+        "referenceFrame": "sun-icrf",
+        "epochJdTt": 2461286.5,
+        "originM": [
+          105965308676973530000,
+          533209933280955330000,
+          -1.4303831216834226e+21
+        ],
+        "localToReferenceXyzw": [
+          0.09631989992847079,
+          0.9788280334299664,
+          0.17973685917567428,
+          0.01768669847817273
+        ],
+        "metersPerUnit": 30856775814913670000,
+        "frameBoundsIgnored": true,
+        "pixelConvention": "rayAt accepts fractional output-grid coordinates; call (col+0.5,row+0.5) at pixel centers",
+        "rayConstruction": "Normalize(originM/metersPerKpc + localToReference*[tx,ty,0]); x increases min-to-max, y decreases max-to-min, with no guessed sky flip"
+      },
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/"
+    },
+    "photoBoundary": "Only scalar component intensities inside each individual catalogue ellipse enter its compact clumps. No global photographic layer or color texture is retained. Partly observed objects retain a small catalogue prior in unknown support; wholly unobserved objects retain their original geometry.",
+    "dust": "All l11 molecular clouds, dust geometry and Bell normalization retained unchanged.",
+    "youngPopulation": {
+      "pilot": false,
+      "candidateRows": 273039,
+      "selectedStars": 262992,
+      "young1": 24144,
+      "young2": 238848,
+      "membership": {
+        "mean": [
+          1.8400610104918205,
+          0.3699688748282707
+        ],
+        "covariance": [
+          0.24295123070207736,
+          0.006888425730313976,
+          0.36144463132814914
+        ],
+        "parallaxMedian": -0.004507325664422163,
+        "calibrationRows": 48026,
+        "retainedCalibration": 46291
+      },
+      "selection": "Luri 2021 Young 1 + Young 2 CMD polygons; signed parallax/error <5; conditional orthographic proper-motion ellipse with chi-square <9.21.",
+      "adaptation": "Membership statistics use a uniform Gaia random_index <20,000,000 calibration subset within 5 degrees, G<19. DR3 photometry is used as published; no extra G correction.",
+      "paper": "https://arxiv.org/html/2012.01771",
+      "source": "Gaia DR3 Young 1 + Young 2 proper-motion members",
+      "warpPlacement": {
+        "bracketed": 81,
+        "multipleIntersections": 0,
+        "maximumResidualKpc": 4.90331737434957e-7,
+        "finiteLayerAnchors": 23,
+        "maximumFiniteLayerOffsetKpc": 0.3666988679671035,
+        "method": "Exact bilinear-cell intersections when fixed-point iteration fails. For multiple crossings, adopt the one nearest the flat midplane. At discontinuous support edges with no crossing, maximize the adopted 150 pc Gaussian height prior and report that finite-layer offset separately. The warp itself is unchanged."
+      },
+      "n": 512,
+      "halfKpc": 10,
+      "smoothingSigmaKpc": 0.2,
+      "layerSigmaKpc": 0.15,
+      "photoUsed": false,
+      "smashUsed": false,
+      "analyticContinuation": false,
+      "normalization": "Unit-integrated equal-weight member counts. One global population luminosity and the existing component grade calibrate appearance.",
+      "coverage": "Complete archive query to 20 degrees. Zero selected counts remain zero before Gaussian smoothing. No survey-gap interpolation or analytic young-disc continuation.",
+      "limitations": "All-sky coverage is not uniform completeness: crowding, extinction and astrometric/photometric selection can still suppress young members. These CMD groups are age proxies, not measured individual ages."
+    }
+  },
+  "continuousPopulation": {
+    "smoothingSigmaKpc": 0.2,
+    "youngSigmaKpc": 0.15,
+    "youngRgbFactorBounds": [
+      0.25,
+      4
+    ],
+    "discBarGainBounds": [
+      0.5,
+      1.5
+    ],
+    "outskirtsGainBounds": [
+      0.5,
+      4
+    ],
+    "outskirtsTransitionKpc": [
+      3,
+      5
+    ],
+    "smoothingStatus": "Adopted Gaussian sigma, increased from l13 150 pc to 200 pc. It averages associations into a continuous population while retaining kiloparsec arms.",
+    "outskirtsDefinition": "The existing old-disc light is partitioned with smoothstep from 3 to 5 kpc. The faint partition plus the existing halo has one global gain. At gain one, their sum is exactly the old l13 profile. This partition is adopted, not a measured edge.",
+    "calibration": "Independent global RGB factors for the diffuse Gaia population and one outskirts gain. Existing old-disc and bar gains may rebalance between 0.5 and 1.5. All l13 object luminosities, component color tints, tone curve and dust settings remain fixed."
+  },
+  "configuration": {
+    "version": 23,
+    "parent": 21,
+    "densityVersion": 21,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.1099739238016362,
+        1,
+        0.6648278501128055
+      ],
+      [
+        1.0903539685993284,
+        1,
+        0.6628339814400591
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.1099739238016362,
+      1,
+      0.6648278501128055
+    ],
+    "dustVersion": 20,
+    "dustStrength": 1.025,
+    "oldPopulationVersion": 21,
+    "change": "Old/bar and disc colors from regional MCPS integrated flux photometry, with a separate HST-based unresolved-light estimate.",
+    "details": {
+      "photometry": {
+        "version": 23,
+        "pilot": false,
+        "rows": 24107002,
+        "qualityRows": 6599348,
+        "used": 6599348,
+        "seconds": 74.34050462500001,
+        "regionalSmoothingSigmaPc": 150,
+        "gridPixelPc": 62.5,
+        "means": {
+          "old": [
+            1.1099739238016362,
+            1,
+            0.6648278501128055
+          ],
+          "bar": [
+            1.0903539685993284,
+            1,
+            0.6628339814400591
+          ]
+        },
+        "calibration": {
+          "calibrationRows": 48026,
+          "addedHighParallaxRows": 2212,
+          "uniformRandomIndexThreshold": 20000000,
+          "radiusDeg": 5,
+          "matchRadiusArcsec": 1,
+          "paper": "https://arxiv.org/html/2012.01771",
+          "membership": {
+            "mean": [
+              1.8400610104918205,
+              0.3699688748282707
+            ],
+            "covariance": [
+              0.24295123070207736,
+              0.006888425730313976,
+              0.36144463132814914
+            ],
+            "parallaxMedian": -0.004507325664422163,
+            "calibrationRows": 48026,
+            "retainedCalibration": 46291
+          }
+        },
+        "matchedStars": 35791,
+        "foregroundFluxFraction": [
+          0.18645672574809102,
+          0.18322763533938763,
+          0.16665001084548306
+        ],
+        "membershipEstimate": "Gaia random-index astrometry, matched within one arcsecond. Smoothed MCPS color–magnitude cells estimate the foreground fraction; sparse bins borrow the global CMD. Faint V>19 extrapolates the last Gaia-calibrated magnitude bin. This is statistical membership, not individual certainty.",
+        "selection": "Common BVI support, 13.5<=V<20, each uncertainty<=0.15 mag. U is retained in the native input but rejected from grading because of published scan offsets and a color-term systematic. Saturated V<13.5 is excluded.",
+        "lf": {
+          "bar": {
+            "ratioVI": [
+              1.052152821485417,
+              0.9705944532363749
+            ],
+            "referenceVI": [
+              2553.3094293100867,
+              5260.277207551393
+            ],
+            "faintVI": [
+              2686.4717201739277,
+              5105.59588013511
+            ],
+            "tailVI": [
+              184.44776132627896,
+              586.3997922518425
+            ],
+            "accepted": 16910,
+            "completeness": [
+              0,
+              0,
+              0,
+              0,
+              0.5932162030258663,
+              0.7168141592920354,
+              0.8438838648262732,
+              0.9264671769890976,
+              0.951289949942241,
+              0.9544235924932976,
+              0.9499105545617174,
+              0.940243402160536,
+              0.9233285626661214,
+              0.8659031087714306,
+              0.7659807812826405,
+              0.664892657405737,
+              0.599562192166367,
+              0.572935214354198,
+              0.564780282146911,
+              0.520458515953045,
+              0.3851186853317103,
+              0.1513494019354451,
+              0.013113480897332497,
+              0.000029879287677781763,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "disc": {
+            "ratioVI": [
+              1.3746731096393774,
+              1.419521781815399
+            ],
+            "referenceVI": [
+              177.85242972583575,
+              311.21310578348766
+            ],
+            "faintVI": [
+              244.48895262813346,
+              441.77378244608065
+            ],
+            "tailVI": [
+              6.540301380047616,
+              28.9621993126949
+            ],
+            "accepted": 3194,
+            "completeness": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0.04182879377431906,
+              0.3358353510895884,
+              0.621602116911234,
+              0.7530864197530864,
+              0.8805237315875614,
+              0.9483216614344361,
+              0.9614186436616343,
+              0.9724484906564447,
+              0.9653346172363987,
+              0.9686861810755616,
+              0.9616834170854272,
+              0.9587268993839836,
+              0.9581502006497229,
+              0.9506734619585002,
+              0.9351398601398602,
+              0.8594259621656882,
+              0.7374547742645902,
+              0.41679342865835106,
+              0.034644995722840036,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "unresolvedEstimate": "HST V/I artificial-star-corrected faint flux is normalized to local MCPS 18.5<=V<20 flux. A geometric tail beyond V=25 (bar) or 26 (disc) is explicitly extrapolated from the last two magnitude bins with a ratio bounded 0.2–0.8. Faint B is estimated from the measured MCPS B−V versus V−I locus. This is a conditional missing-light estimate, not a direct unresolved-light measurement.",
+        "depth": "Observed colors are conditionally dereddened with the retained l21 mixed dust/stars geometry, then attenuated by the same canonical renderer. The local plane approximation is used for this color correction.",
+        "changes": "Only the smooth old/disc and bar spectral ratios change. l21 density, luminosity budgets, catalogue objects, Gaia point photometry, grain fractions, heights, warp and dust are unchanged. None of l22 is retained.",
+        "sources": {
+          "mcps": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/128/1606/ReadMe",
+          "paper": "https://doi.org/10.1086/423910",
+          "hst": "http://astronomy.nmsu.edu/holtz/archival/html/lg.html",
+          "hstPaper": "https://doi.org/10.1086/507074",
+          "zeroPoints": "https://svo2.cab.inta-csic.es/theory/fps/"
+        },
+        "n": 256,
+        "halfKpc": 8,
+        "units": "Natural log of intrinsic regional R/G and B/G, divided by the population-wide mean. G and all density fields are unchanged."
+      },
+      "l22Retained": [],
+      "reason": "The owner accepted l21 structure; l22 reduced the measured bar texture. No l22 density, grain, dust or display changes are included.",
+      "controls": "Six global old/disc and bar RGB grades. All l21 component gains, catalogue amplitudes, resolved fractions, dust and display parameters stay fixed.",
+      "maximumCorrectionRounds": 3,
+      "finalCalibration": {
+        "correctionRound": 2,
+        "targets": "The same six global coefficients fit whole-bar, core and edge colors. No coefficient varies by region. Outer-annulus brightness is a weighted constraint; the final native result still misses its 10 percent check.",
+        "diagnostics": {
+          "freeParameters": 6,
+          "optimizer": "Non-negative initialization, bounded coordinate search, then joint damped Gauss–Newton over six global RGB controls.",
+          "coefficientBounds": [
+            [
+              [
+                0.001,
+                100
+              ],
+              [
+                0.001,
+                100
+              ],
+              [
+                0.001,
+                100
+              ]
+            ],
+            [
+              [
+                0.001,
+                100
+              ],
+              [
+                0.001,
+                100
+              ],
+              [
+                0.001,
+                100
+              ]
+            ]
+          ],
+          "resolvedFractionBounds": [
+            [
+              0.01,
+              0.4
+            ],
+            [
+              0.005,
+              0.25
+            ]
+          ],
+          "photo": {
+            "rg": 1.0751241819330248,
+            "bg": 0.9381817874787874,
+            "meanG": 0.5618371872597989,
+            "pixels": 7458
+          },
+          "candidate": {
+            "rg": 1.0712202842883338,
+            "bg": 0.9479572402502195,
+            "meanG": 0.5520020329894495,
+            "pixels": 7458
+          },
+          "colorPassed": true,
+          "rmsPassed": true,
+          "rmsParent": [
+            0.2576057324,
+            0.3094019981
+          ],
+          "rmsCandidate": [
+            0.22027373756685859,
+            0.27657594176965
+          ],
+          "colorToleranceRelative": 0.02,
+          "maximumRelativeRmsRegression": 0.01,
+          "aperturePixels": 7458,
+          "regionalColorWeights": {
+            "bar": 30,
+            "core": 40,
+            "edges": 40
+          },
+          "allBarPixelsIncluded": true,
+          "grainFractionsAlreadyFrozenInBasis": true,
+          "pixels": 31108
+        },
+        "projectionReuse": "The MCPS material, 3D density, dust, objects and grain did not change between calibration rounds; the completed projections are reused exactly."
+      },
+      "acceptance": {
+        "status": "Diagnostic only. l21 remains the owner-accepted base.",
+        "acceptedBase": 21,
+        "promoted": false,
+        "barColorPassed": true,
+        "barColorErrorPercent": [
+          -0.3676238309862301,
+          0.9782335046766732
+        ],
+        "coreToEdgeMeanErrorImproved": true,
+        "coreToEdgeDirectionPassed": false,
+        "outerLightPassed": false,
+        "sideGeometryCoherent": true,
+        "sideColorPassed": false,
+        "reason": "The mean color improves, but the B/G core-to-edge trend stays reversed. Old-disc green and blue grades reach their lower bounds, producing reddish outer light. The outskirts are 11.8 percent too bright. The stronger outer-color trial repaired the outskirts but worsened the bar gradient. Three calibration trials are preserved; no further fit ran."
+      },
+      "sourceQualification": {
+        "mcpsCompleteRows": 24107002,
+        "commonBviStars": 6599348,
+        "regionalSmoothingSigmaPc": 150,
+        "zeroPointsJy": {
+          "U": 1438.73,
+          "B": 4323.91,
+          "V": 3617.5,
+          "I": 2452.02
+        },
+        "filters": [
+          "Generic/Johnson.U",
+          "Generic/Johnson.B",
+          "Generic/Johnson.V",
+          "Generic/Cousins.I"
+        ],
+        "redProxy": "Log-linear F_nu interpolation between V and Cousins I at 0.65 micrometres. B and V stand in for blue and green. This is not a calibrated camera RGB reconstruction.",
+        "unresolved": "HST bar and disc V/I luminosity functions are empirical templates, normalized to local MCPS 18.5<=V<20 light. Faint B and the tail beyond HST are estimates. The two small HST fields do not measure every region.",
+        "hstWarning": "The archive flags inter-chip aperture corrections in the bar field as outliers. Faint/reference ratios cancel a common zero point, but chip-dependent residuals remain an uncertainty.",
+        "outerCoverage": "Regional detail is restricted to the MCPS footprint. Outside it, only the measured population mean is extrapolated.",
+        "photoMeaning": "Horálek is processed RGB. The 2 percent color test measures appearance, not absolute spectrophotometric accuracy."
+      }
+    },
+    "photometryVersion": 23
+  },
+  "oldPopulation": {
+    "n": 512,
+    "halfKpc": 10,
+    "oldSelection": {
+      "paper": "https://arxiv.org/html/2012.01771",
+      "densityStars": 382116,
+      "resolvedOldStars": 886581,
+      "densitySampling": "Uniform random_index <100,000,000, approximately 5.52% of Gaia DR3; the spatial sample is complete to its declared random-index threshold.",
+      "pointSampling": "All selected old members with G<18 within 20 degrees; no random-index cut.",
+      "membership": {
+        "mean": [
+          1.8400610104918205,
+          0.3699688748282707
+        ],
+        "covariance": [
+          0.24295123070207736,
+          0.006888425730313976,
+          0.36144463132814914
+        ],
+        "parallaxMedian": -0.004507325664422163,
+        "calibrationRows": 48026,
+        "retainedCalibration": 46291
+      },
+      "selection": "Published RGB and RC polygons; signed parallax/error <5 and conditional orthographic proper-motion ellipse chi-square <9.21.",
+      "limitations": "CMD phase proxies are not exact ages. Crowding, extinction and the magnitude limit affect completeness. No survey hole is filled from the photo."
+    },
+    "youngStars": 262992,
+    "points": 1091462,
+    "smoothingSigmaKpc": 0.1,
+    "barDiscPartition": "The measured old-star density is split into a radial-median disc and its positive inner excess, tapered from 3 to 4 kpc. Their sum is the measured density. No analytic ellipse defines the light.",
+    "barMass": 0.2352352267597487,
+    "discMass": 0.7647647733602743,
+    "barMeasured": {
+      "skyCenterWestNorthKpc": [
+        0.5475840304744615,
+        -0.7438714342226453
+      ],
+      "paDegrees": 122.14046381707368,
+      "sigmaMajorKpc": 1.1309038335427744,
+      "axisRatio": 0.4994142155610464
+    },
+    "publishedShapeCheck": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "vmcCheck": {
+      "regions": 756,
+      "correlation": 0.7282118366849207
+    },
+    "adoptedHeightsKpc": {
+      "oldDisc": 0.41010570629613075,
+      "bar": 0.36656497062880344,
+      "young": 0.15
+    },
+    "heightResidualMaxKpc": 0.5759992127567132,
+    "maximumPointTauV": 0.5497328198212803,
+    "color": "Gaia Vega magnitudes converted to AB using ESA DR3 zero-point differences, then RP/G/BP mean flux-density ratios serve as broad R/G/B proxies. One grade per population accounts for the photo passbands. No individual stellar colors are fitted.",
+    "depth": "Deterministic height draws from the adopted layer, preserving each measured sky direction. Individual distances remain conditional.",
+    "grain": "Each population budget is divided between unresolved light and real Gaia points. The same intrinsic G budget is conserved at every resolved fraction.",
+    "dust": "Molecular optical-depth budget is redistributed into the HERITAGE-modulated layer and globally normalized to Bell. Finite oval screens are omitted.",
+    "dustNormalization": {
+      "samples": 3171,
+      "factor": 1.164954108601027,
+      "bellMeanFaceOnTauV": 0.07598088622018014,
+      "beforeMeanFaceOnTauV": 0.06522221404191127,
+      "afterMeanFaceOnTauV": 0.07598088622018014
+    },
+    "densityWeighting": "Measured Gaia G flux. All bright members with G<18 are used; faint RGB/RC random-sample fluxes are expanded by 18.11709771 to their declared sampling probability. Gaussian sigma remains 100 pc. The count-only trial is preserved in round1.",
+    "tracers": 1219654,
+    "placement": {
+      "bracketed": 20709,
+      "multipleIntersections": 6,
+      "maximumResidualKpc": 9.999423148873698e-7,
+      "finiteLayerAnchors": 1409,
+      "maximumFiniteLayerOffsetKpc": 0.5759992127567132
+    },
+    "version": 21,
+    "parent": 20,
+    "completeness": {
+      "method": "Rathore/Olsen HST-tested crowding recovery for RC; Cantat-Gaudin parent selection for RGB. The union is corrected by individual inverse inclusion probability.",
+      "allTracers": false,
+      "parentFunction": {
+        "product": "GaiaUnlimited allsky_uniq_10.fits",
+        "url": "https://zenodo.org/records/21444145/files/allsky_uniq_10.fits",
+        "bytes": 36345600,
+        "rows": 3028182,
+        "ordering": "NESTED, ICRS, NUNIQ mixed orders, expanded exactly to order 10",
+        "minimum": 16.434900283813477,
+        "maximum": 21.78860092163086,
+        "conflictingOrder10Cells": 24626,
+        "uncoveredOrder10Cells": 464512,
+        "paper": "https://doi.org/10.1051/0004-6361/202244784",
+        "scope": "Parent Gaia catalogue with position and G, not the extra BP/RP or astrometry cuts."
+      },
+      "crowding": {
+        "summaries": [
+          {
+            "population": "Bright RGB",
+            "n": 842885,
+            "mean": 0.03154059590044672,
+            "sigma": 0.1260337813930484,
+            "outerStars": 180001,
+            "outerSigma": 0.03040181344349507,
+            "intrinsicSigma": 0.03040181344349507
+          },
+          {
+            "population": "RC",
+            "n": 1050675,
+            "mean": 0.00003648316751175445,
+            "sigma": 0.1552922624852207,
+            "outerStars": 313818,
+            "outerSigma": 0.04861859876474811,
+            "intrinsicSigma": 0.04
+          },
+          {
+            "population": "Faint RGB",
+            "n": 101638,
+            "mean": 0.0308617459256347,
+            "sigma": 0.35764586321057446,
+            "outerStars": 26740,
+            "outerSigma": 0.11325223799645612,
+            "intrinsicSigma": 0.11325223799645612
+          }
+        ],
+        "n": 512,
+        "halfKpc": 10,
+        "rcCalibrationStars": 1052852,
+        "rcSelection": "Rathore Appendix A: full Gaia DR3, G 18.6–19.3, BP–RP 1.0–1.3, astrometric_excess_noise <0.2, parallax <0.1 and parallax/error <5, raw proper-motion circle radius 1.5 mas/yr, 10-degree footprint.",
+        "method": "Gaussian local C* moments at the finest of 100, 200 or 400 pc reaching 30 effective stars. RC intrinsic sigma 0.04 is published. The other tracer intrinsic scatters are measured in 4–7 kpc outskirts. The same published recovery relation is applied as a tracer-dependent model.",
+        "paper": "https://arxiv.org/html/2410.18182",
+        "calibration": "https://arxiv.org/abs/astro-ph/0304163",
+        "limitations": "The Olsen recovery curve is based on LMC-field-like artificial stars, including HST/WFPC2 images of NGC 1835. RGB application and coarser adaptive C* moments extend Rathore's RC implementation; they are explicit modeling choices. Unknown crowding cells use the parent catalogue selection only."
+      },
+      "regions": [
+        {
+          "region": 0,
+          "stars": 291499,
+          "minimumCompleteness": 0.11772658411300373,
+          "fluxCorrection": 1.5585853415223132,
+          "unknownCrowding": 0
+        },
+        {
+          "region": 1,
+          "stars": 577571,
+          "minimumCompleteness": 0.32270680944194485,
+          "fluxCorrection": 1.1170488272408157,
+          "unknownCrowding": 0
+        },
+        {
+          "region": 2,
+          "stars": 279639,
+          "minimumCompleteness": 0.749199273121199,
+          "fluxCorrection": 1.0192970873632154,
+          "unknownCrowding": 80
+        }
+      ],
+      "combination": "The lower of parent catalogue inclusion and the crowding recovery estimate is used, avoiding an independence assumption and double multiplication. No completeness parameter is fitted to the photo.",
+      "sourceLimits": "Rathore calibrates red-clump completeness. RGB extrapolation is an explicit alternative only. The parent Gaia function alone does not qualify extra CMD, BP/RP or proper-motion selection completeness."
+    },
+    "preservation": "Point positions, component assignments, colors relative to each population, adopted thicknesses, young density, catalogue objects, dust, plane and warp stay at l20. Point RGB is globally renormalized per old component to share the corrected smooth-light budget."
+  }
+}

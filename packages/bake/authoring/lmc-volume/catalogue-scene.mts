@@ -1,15 +1,15 @@
+/** l11 geometry is built from catalogues and H-alpha shape parameters, before RGB calibration. */
 import type {BarGeometry} from './bar-geometry.mts';
 import type {DustLayer} from './heritage-layer.mts';
 import type {OldPopulation} from './gaia-old-model.mts';
-/** l11 geometry is built from catalogues and H-alpha shape parameters, before RGB calibration. */
-import {at,json,array,rec,num,need,type Sources,type Raster} from './inputs.mts';
+import type {PhotometryMaterial} from './mcps/material.mts';
+import {ARCHIVE,at,json,array,rec,num,need,type Sources,type Raster} from './inputs.mts';
 import {unit,rayInBody,add,mul,normalize,DEG,DISTANCE,type V3} from './geometry.mts';
 import {L11,catalogueRows,type CatalogueRow} from './catalogue-data.mts';
 import {readHaGeometry,skyOffset,type HaGeometry} from './catalogue-ha.mts';
 import {planarBasis,volumeObject,tube,type VolumeObject,type Component} from './catalogue-volume.mts';
-import {ARCHIVE} from './inputs.mts';
 export interface Owner {id:string;kind:string;component:Component;prior:number;maximum:number;measuredAge:boolean;logAge:number|null;aliases:string[];}
-export interface CatalogueScene {objects:VolumeObject[];dust:VolumeObject[];owners:Owner[];sources:Sources;colors:V3[];dustArea:number;molecularFraction:number;metadata:Record<string,unknown>;barGeometry?:BarGeometry;innerDiscColor?:V3;oldPopulation?:OldPopulation;dustLayer?:DustLayer;youngDensity?:Raster;youngOwner?:string;youngTint?:V3;outskirtsGain?:number;separateOutskirts?:boolean;outskirtsTransitionKpc?:readonly[number,number];innerDiscGain?:number;barGain?:number;}
+export interface CatalogueScene {objects:VolumeObject[];dust:VolumeObject[];owners:Owner[];sources:Sources;colors:V3[];dustArea:number;molecularFraction:number;metadata:Record<string,unknown>;barGeometry?:BarGeometry;innerDiscColor?:V3;oldPopulation?:OldPopulation;photometryMaterial?:PhotometryMaterial;dustLayer?:DustLayer;youngDensity?:Raster;youngOwner?:string;youngTint?:V3;outskirtsGain?:number;separateOutskirts?:boolean;outskirtsTransitionKpc?:readonly[number,number];innerDiscGain?:number;barGain?:number;}
 export function locate(ra:number,dec:number,sources:Sources,height=0):V3 {
  const r=rayInBody(unit(ra,dec));let p=add(r.origin,mul(r.direction,-r.origin[2]/r.direction[2]));
  for(let i=0;i<32;i++){const z=at(sources.warp,p[0],p[1])+height,q=add(r.origin,mul(r.direction,(z-r.origin[2])/r.direction[2]));if(Math.hypot(...add(q,mul(p,-1)))<1e-7)return q;p=q;}

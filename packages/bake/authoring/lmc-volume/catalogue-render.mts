@@ -1,5 +1,6 @@
-import {barSurfaceFor} from './bar-geometry.mts';
 /** Project canonical 3D objects and smooth published components. No image is sampled here. */
+import {barSurfaceFor} from './bar-geometry.mts';
+import {materialFactor} from './mcps/material.mts';
 import {at,need} from './inputs.mts';
 import {add,mul,dot,normalize,type V3} from './geometry.mts';
 import {discSurface,barSurface,outerSurface,gaussian,smoothstep,EXTINCTION_RGB,FOREGROUND_EBV} from './model.mts';
@@ -64,7 +65,7 @@ export function projectCatalogue(scene:CatalogueScene,camera:Camera,step=.06):Ca
    if(scene.oldPopulation){values[0]=at(scene.oldPopulation.disc,p[0],p[1])*1.2842040336717868*verticalOld;values[1]=at(scene.oldPopulation.bar,p[0],p[1])*1.2842040336717868*gaussian(z,.36656497062880344);values[2]=0;}
    const cTau=cloudTau(t);
    for(let c=0;c<3;c++){tauStep[c]=opacity*ds*EXTINCTION_RGB[c];const correction=tauStep[c]>1e-8?-Math.expm1(-tauStep[c])/tauStep[c]:1-tauStep[c]/2;transmission[c]=Math.exp(-smoothTau[c]-cTau*EXTINCTION_RGB[c])*correction;}
-   for(let component=0;component<5;component++){const color=component===0&&scene.innerDiscColor?scene.innerDiscColor:scene.colors[component<3?component===1?1:0:component-1];for(let c=0;c<3;c++)planes[component][pixel*3+c]+=values[component]*color[c]*transmission[c]*ds;}
+   for(let component=0;component<5;component++){const color=component===0&&scene.innerDiscColor?scene.innerDiscColor:scene.colors[component<3?component===1?1:0:component-1];for(let c=0;c<3;c++)planes[component][pixel*3+c]+=values[component]*color[c]*materialFactor(scene.photometryMaterial,component,c,p[0],p[1])*transmission[c]*ds;}
    while(event<list.length&&list[event].t<=t0+ds){const e=list[event++];if(e.t<bounds[0])continue;const tau=cloudTau(e.t),rgb:V3=e.pointComponent===undefined?templates[e.owner].get(pixel)??[0,0,0]:[0,0,0];for(let c=0;c<3;c++)rgb[c]+=e.weight*e.color[c]*Math.exp(-smoothTau[c]-opacity*Math.max(0,e.t-t0)*EXTINCTION_RGB[c]-tau*EXTINCTION_RGB[c]);if(e.pointComponent===undefined)templates[e.owner].set(pixel,rgb);else for(let c=0;c<3;c++)grain![e.pointComponent][pixel*3+c]+=rgb[c];}
    for(let c=0;c<3;c++)smoothTau[c]+=tauStep[c];
   }

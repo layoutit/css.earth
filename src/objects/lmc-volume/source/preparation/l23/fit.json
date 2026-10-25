@@ -1,0 +1,178 @@
+{
+  "version": 23,
+  "parent": 21,
+  "rung": "small",
+  "size": 512,
+  "rayStepKpc": 0.06,
+  "seconds": 239.39807858300003,
+  "pilot": false,
+  "grade": {
+    "coefficients": [
+      [
+        0.5470549377869898,
+        0.0010000000000000002,
+        0.0010000000000000002
+      ],
+      [
+        1.5868983918345936,
+        1.988839652766012,
+        1.6294994809852157
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1.025,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.22027373756685859
+  },
+  "residuals": {
+    "trainRelativeRms": 0.2609930045693161,
+    "heldoutRelativeRms": 0.312891604142997,
+    "totalLightDifferencePercent": 3.2044251861018003,
+    "annularDifferencePercent": [
+      -12.614462760758261,
+      -5.102089068813143,
+      24.10483671449224,
+      11.80400963794317
+    ],
+    "channelShareDifferencePercentagePoints": [
+      [
+        0.20191059395346933,
+        -0.6951400368094662,
+        0.493229442856008
+      ],
+      [
+        2.3805414744291156,
+        -0.5168369976892906,
+        -1.8637044767398303
+      ],
+      [
+        29.71273618561038,
+        -15.43885303188648,
+        -14.273883153723913
+      ]
+    ]
+  },
+  "sceneControls": {
+    "youngTint": [
+      1.313986657359593,
+      1.13041657671757,
+      1.056593290852588
+    ],
+    "outskirtsGain": 2.80043441709131,
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014,
+    "oldResolvedFraction": 0.29587500000000005,
+    "youngResolvedFraction": 0.019619550949644238
+  },
+  "fit": {
+    "freeParameters": 6,
+    "optimizer": "Non-negative initialization, bounded coordinate search, then joint damped Gauss–Newton over six global RGB controls.",
+    "coefficientBounds": [
+      [
+        [
+          0.001,
+          100
+        ],
+        [
+          0.001,
+          100
+        ],
+        [
+          0.001,
+          100
+        ]
+      ],
+      [
+        [
+          0.001,
+          100
+        ],
+        [
+          0.001,
+          100
+        ],
+        [
+          0.001,
+          100
+        ]
+      ]
+    ],
+    "resolvedFractionBounds": [
+      [
+        0.01,
+        0.4
+      ],
+      [
+        0.005,
+        0.25
+      ]
+    ],
+    "photo": {
+      "rg": 1.0751241819330248,
+      "bg": 0.9381817874787874,
+      "meanG": 0.5618371872597989,
+      "pixels": 7458
+    },
+    "candidate": {
+      "rg": 1.0712202842883338,
+      "bg": 0.9479572402502195,
+      "meanG": 0.5520020329894495,
+      "pixels": 7458
+    },
+    "colorPassed": true,
+    "rmsPassed": true,
+    "rmsParent": [
+      0.2576057324,
+      0.3094019981
+    ],
+    "rmsCandidate": [
+      0.22027373756685859,
+      0.27657594176965
+    ],
+    "colorToleranceRelative": 0.02,
+    "maximumRelativeRmsRegression": 0.01,
+    "aperturePixels": 7458,
+    "regionalColorWeights": {
+      "bar": 30,
+      "core": 40,
+      "edges": 40
+    },
+    "allBarPixelsIncluded": true,
+    "grainFractionsAlreadyFrozenInBasis": true,
+    "pixels": 31108,
+    "rmsSampling": "Optimization subsample with all bar pixels included. Native whole-image RMS is under residuals; this sampled RMS is not the acceptance result."
+  },
+  "correctionRound": 2,
+  "renderReused": true,
+  "acceptance": {
+    "status": "Diagnostic only. l21 remains the owner-accepted base.",
+    "acceptedBase": 21,
+    "promoted": false,
+    "barColorPassed": true,
+    "barColorErrorPercent": [
+      -0.3676238309862301,
+      0.9782335046766732
+    ],
+    "coreToEdgeMeanErrorImproved": true,
+    "coreToEdgeDirectionPassed": false,
+    "outerLightPassed": false,
+    "sideGeometryCoherent": true,
+    "sideColorPassed": false,
+    "reason": "The mean color improves, but the B/G core-to-edge trend stays reversed. Old-disc green and blue grades reach their lower bounds, producing reddish outer light. The outskirts are 11.8 percent too bright. The stronger outer-color trial repaired the outskirts but worsened the bar gradient. Three calibration trials are preserved; no further fit ran."
+  }
+}
