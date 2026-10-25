@@ -180,6 +180,11 @@
               "id": "geoid",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "cloud-top-temperature",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

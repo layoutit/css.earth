@@ -22,7 +22,8 @@ export function openOnMap(files: PackageFiles, id: string, dataset: string): boo
   const content = requireRecord(JSON.parse(String(files.get(path))), path), shown = requireRecord(content.datasets, `${path} datasets`);
   const raster = requireRecord(JSON.parse(String(files.get(`${s}/preparation/raster.json`))), `${id} raster recipe`);
   const current = requireArray(raster.surfaces, `${id} raster surfaces`).map(surface => requireRecord(surface, `${id} raster surface`)).find(surface => surface.id === shown.defaultDataset);
-  const kind = current === undefined ? undefined : requireRecord(current.science, `${id} default dataset`).kind;
+  // A default with no science record is a photograph: a map, which stays.
+  const kind = current?.science === undefined ? undefined : requireRecord(current.science, `${id} default dataset`).kind;
   if (typeof kind !== 'string' || !UNIFORM_DATASET_KINDS.has(kind)) return false;
   shown.defaultDataset = dataset;
   files.set(path, json(content));

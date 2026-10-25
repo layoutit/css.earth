@@ -47,7 +47,7 @@ test('a file libnetcdf wrote gives its variables, their dimensions and attribute
 test('what the reader does not read is refused by name', async () => {
   const file = await openHdf5Netcdf(fixture('field-nc4.nc'));
   try {
-    await assert.rejects(file.values('SQUEEZED'), /variable SQUEEZED is stored chunked; only a variable stored whole and unfiltered is read/u);
+    await assert.rejects(file.values('SQUEEZED'), /variable SQUEEZED is stored chunked and filtered; only a variable stored whole or in unfiltered chunks is read/u);
     await assert.rejects(file.values('UNWRITTEN'), /variable UNWRITTEN was never written/u);
     await assert.rejects(file.values('label'), /variable label is text, not numbers/u);
     await assert.rejects(file.values('TZ'), /has no variable TZ; it has /u);
@@ -77,5 +77,25 @@ test('the oldest file layout, with links and attributes kept in heaps, reads the
     const ts = await file.values('TS');
     for (let r = 0; r < 2; r++) for (let i = 0; i < 4; i++) for (let j = 0; j < 8; j++) assert.equal(ts[r * 32 + i * 8 + j], 200 + 100 * r + 10 * i + j, `TS[${r},${i},${j}]`);
     for (let n = 1; n <= 6; n++) assert.deepEqual([...await file.values(`V${n}`)], [n, 10 * n, 100 * n]);
+  } finally { await file.close(); }
+});
+
+test('a variable stored in unfiltered chunks is read chunk by chunk, an unwritten chunk as its fill value', async () => {
+  const file = await openHdf5Netcdf(fixture('field-nc4-chunked.nc'));
+  try {
+    // y and x are dimensions no variable was declared for.
+    assert.deepEqual([...file.variables.keys()].sort(), ['EDGE', 'HOLE', 'T', 'lat', 'lon', 'time']);
+    // 70 records of one chunk each: more than one node of the chunk B-tree holds, so its root points at two leaves.
+    assert.deepEqual([...await file.values('time')], Array.from({ length: 70 }, (_, r) => r + 0.5));
+    const t = await file.values('T');
+    for (let r = 0; r < 70; r++) for (let i = 0; i < 4; i++) for (let j = 0; j < 8; j++) assert.equal(t[r * 32 + i * 8 + j], 1000 * r + 10 * i + j, `T[${r},${i},${j}]`);
+    // One map of one record, from its own bytes: the last latitude of record 65.
+    assert.deepEqual([...await file.slice('T', 65 * 32 + 24, 8)], [65030, 65031, 65032, 65033, 65034, 65035, 65036, 65037]);
+    // Chunks of 2 by 3 over a 5 by 7 grid: the last row and column of chunks reach past the grid's edge.
+    const edge = await file.values('EDGE');
+    for (let i = 0; i < 5; i++) for (let j = 0; j < 7; j++) assert.equal(edge[i * 7 + j], 10 * i + j, `EDGE[${i},${j}]`);
+    // Only the first chunk was written; the rest read as the fill value, as HDF5 reads them.
+    const hole = await file.values('HOLE');
+    for (let i = 0; i < 5; i++) for (let j = 0; j < 7; j++) assert.equal(hole[i * 7 + j], i < 2 && j < 3 ? 10 * i + j : -999, `HOLE[${i},${j}]`);
   } finally { await file.close(); }
 });

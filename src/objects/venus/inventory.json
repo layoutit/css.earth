@@ -231,6 +231,12 @@
     },
     {
       "location": "public",
+      "filename": "venus-dataset-cloud-top-temperature.webp",
+      "bytes": 1414,
+      "sha256": "8f8ee20ae34f591ae5fb3e315fe6f241867f9b444ecf021576f32191f639795c"
+    },
+    {
+      "location": "public",
       "filename": "venus-dataset-clouds.webp",
       "bytes": 202,
       "sha256": "6ff10d9e79c6c8ffb5c3428d5a2941bd6ab9e5912cc310ca5af9ac23b7cc5175"
@@ -864,6 +870,12 @@
       "filename": "venus-poles-bouguer@2x.webp",
       "bytes": 31810,
       "sha256": "f1622fefd38a2b4d57fb34dad085c586b9f8ba5bc20cfb11ef294da1f288ea3e"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-cloud-top-temperature@2x.webp",
+      "bytes": 13502,
+      "sha256": "a241c806f131e17cfd515641ba7752933a8a5675f967e3085415569799536a9b"
     },
     {
       "location": "public",
@@ -1773,6 +1785,108 @@
     },
     {
       "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-0-level-1040.webp",
+      "bytes": 32838,
+      "sha256": "882ecde599b05b7c06413ff1936ce801dc5ba886314f8fbafc71ef9d4090c7fe"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-0-level-260.webp",
+      "bytes": 5492,
+      "sha256": "2118b6d3441eddf6fea78686df66c1a7637aa06046054192ee8d0bf0a10983e0"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-0-level-520.webp",
+      "bytes": 14100,
+      "sha256": "ed1b2c9f045a3b56f5c4d85f1ff13fb75f90136fbe7cb4b73ad78faeae587668"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-0.webp",
+      "bytes": 31400,
+      "sha256": "c760d8fb8a998c3e85042e11d3021ad12d79a57908269da197ab34c120992bbe"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-1-level-1040.webp",
+      "bytes": 41046,
+      "sha256": "11de75da640c3564b1f11e16883c996d7ba4ceec88d92bb1e01411d930f170ae"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-1-level-260.webp",
+      "bytes": 8058,
+      "sha256": "3a3e653b6662257b3b6a67d4f21541378e4c9a8695ff0f38f9e85703e03e1650"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-1-level-520.webp",
+      "bytes": 18686,
+      "sha256": "1ca878d6f55a6afd62acda7266386fa4efb82ef65928500e5bfa9e4316a72e11"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-1.webp",
+      "bytes": 49636,
+      "sha256": "9aab803f23caa186ae9a04545aeb97ca9dc41e4f526463a349faa0e5117e52e5"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-2-level-1040.webp",
+      "bytes": 41922,
+      "sha256": "bfc488185824b1a7ff23fed3c9135e6e550c593e26610586e4bdd426aba73ab1"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-2-level-260.webp",
+      "bytes": 7844,
+      "sha256": "61f411512a186d64bf6371b443d21b171523b9de1ef785b93d7a5fb1a2f0b2b4"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-2-level-520.webp",
+      "bytes": 18730,
+      "sha256": "3cfb285b35fcd150689f8cbb8acfa9202f104999dc1a4867dc1d6fc7965f387d"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-2.webp",
+      "bytes": 52812,
+      "sha256": "7eaf1814afdf46fe72e4e233613cda37679421578b44e3776ccc7d9e6dc2a697"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-3-level-1040.webp",
+      "bytes": 35182,
+      "sha256": "fb7b4386fbbc015ae7a7bfb5ee465d3563f717ad7f8b668c9ed338ef331e027f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-3-level-260.webp",
+      "bytes": 5862,
+      "sha256": "bb77b4741ce4f73a20593fe5e4e6bb0148cfaaca311e27ce9ed7b9b0de265bdd"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-3-level-520.webp",
+      "bytes": 14958,
+      "sha256": "a082c41c755d5fb09521159ef388847af61c42961a78da56ec12b95f26bc77d1"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature-page-3.webp",
+      "bytes": 35990,
+      "sha256": "5cf82baa53a88dd48ddd180f24120584f3bbf7be4c8865ade95e3bc6cbcfb0bc"
+    },
+    {
+      "location": "public",
+      "filename": "venus-surface-cloud-top-temperature@2x.webp",
+      "bytes": 101916,
+      "sha256": "62bb0cbc10e98b117e8c961ebff9bcae6b98a225a68d08f1ec0e28972bbf9ecd"
+    },
+    {
+      "location": "public",
       "filename": "venus-temperature-pressure-profile.svg",
       "bytes": 3524,
       "sha256": "101f6231c7d66b4971b3309652309ebbdaed08f196d55233087f9e8b99211cd7"
@@ -1888,8 +2002,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 4392,
-      "sha256": "8a117db8f37667c2cd2ccb36456b7528ac0adc1bce52f8d51e2b0e86aaa4487c"
+      "bytes": 4599,
+      "sha256": "6242c62ee57e09edee4b5e20a5ba5ff054f1bb62b4d875a0bba75a36bc77eab2"
     },
     {
       "location": "prepared",
@@ -1906,8 +2020,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 32672,
-      "sha256": "d50633e43e0b101fcb18fddf73055bbad87fb2ee68903d597213f7251e76e79d"
+      "bytes": 34764,
+      "sha256": "e2f98667769090b3b5e95170708ffcd7b3e994349e48fc02b7dbf1b85017775e"
     },
     {
       "location": "prepared",
@@ -1924,14 +2038,20 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1719,
-      "sha256": "5300940833e2587651849a9abffe1a59513e418d87784091510f082c415dbd43"
+      "bytes": 1839,
+      "sha256": "51b33b7d98391e088d549102e7e870f97cd9841da5813dbb61883de9fa367994"
     },
     {
       "location": "prepared",
       "filename": "minimaps/bouguer.webp",
       "bytes": 4898,
       "sha256": "adee0a8d3e0c0549eef9262dde91d77ebbd02b3d47a3d724a872f13e5e696555"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/cloud-top-temperature.webp",
+      "bytes": 2472,
+      "sha256": "2814a395992a5b4b7b1a5cbb350fa699eaffda2cbd886a339c242ae991e56d19"
     },
     {
       "location": "prepared",
@@ -2026,14 +2146,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 246911,
-      "sha256": "fd3aa9cb488ea4561c93ba088d570e5b5d1f352a6286058d57abdbf3ec22c391"
+      "bytes": 259155,
+      "sha256": "2a65aa7fc99de91527fe96cc05549db57f21865fc9206d873c1444e9e9a4788d"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3787,
-      "sha256": "79146497e7623b611ec327abc243a52dd739e7c8343b8480d63f4271ff25dde4"
+      "bytes": 4026,
+      "sha256": "bd0294ee8cdb731316a27cb328daeb78d3f09ffec57abb5ee242958255f9737c"
     }
   ]
 }

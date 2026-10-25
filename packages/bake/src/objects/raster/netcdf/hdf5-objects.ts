@@ -11,7 +11,7 @@
 export type Read = (offset: number, length: number) => Promise<Buffer>;
 export interface Hdf5Message { readonly type: number; readonly data: Buffer; /** Stored in another object, not here. */ readonly shared: boolean }
 
-export const HDF5_MESSAGE = { dataspace: 0x01, linkInfo: 0x02, datatype: 0x03, fillValue: 0x05, link: 0x06, layout: 0x08, attribute: 0x0c, continuation: 0x10, attributeInfo: 0x15 } as const;
+export const HDF5_MESSAGE = { dataspace: 0x01, linkInfo: 0x02, datatype: 0x03, fillValue: 0x05, link: 0x06, layout: 0x08, filterPipeline: 0x0b, attribute: 0x0c, continuation: 0x10, attributeInfo: 0x15 } as const;
 const UNDEFINED = 0xffffffffffffffffn;
 
 const signature = (bytes: Buffer) => bytes.subarray(0, 4).toString('latin1');
