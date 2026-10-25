@@ -4915,6 +4915,66 @@
         "kind": "local",
         "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
       }
+    },
+    {
+      "id": "l29-recipe-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l29/recipe.json",
+      "bytes": 22847,
+      "generator": "packages/bake/authoring/lmc-volume/owner-rounds/render.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Physical-model experiment. Tiny/small reference renders only. Individual version records state the owner and experiment decisions. No runtime delivery is implied."
+      }
+    },
+    {
+      "id": "l29-fit-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l29/fit.json",
+      "bytes": 43704,
+      "generator": "packages/bake/authoring/lmc-volume/owner-rounds/render.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Physical-model experiment. Tiny/small reference renders only. Individual version records state the owner and experiment decisions. No runtime delivery is implied."
+      }
+    },
+    {
+      "id": "l29-lineage-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l29/lineage.json",
+      "bytes": 20500,
+      "generator": "packages/bake/authoring/lmc-volume/owner-rounds/render.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Physical-model experiment. Tiny/small reference renders only. Individual version records state the owner and experiment decisions. No runtime delivery is implied."
+      }
+    },
+    {
+      "id": "l29-provenance-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l29/provenance.json",
+      "bytes": 97139,
+      "generator": "packages/bake/authoring/lmc-volume/owner-rounds/render.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Physical-model experiment. Tiny/small reference renders only. Individual version records state the owner and experiment decisions. No runtime delivery is implied."
+      }
+    },
+    {
+      "id": "l29-frame-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l29/frame.json",
+      "bytes": 474,
+      "generator": "packages/bake/authoring/lmc-volume/owner-rounds/render.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Physical-model experiment. Tiny/small reference renders only. Individual version records state the owner and experiment decisions. No runtime delivery is implied."
+      }
+    },
+    {
+      "id": "l29-field-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l29/field.json",
+      "bytes": 2355,
+      "generator": "packages/bake/authoring/lmc-volume/owner-rounds/render.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Physical-model experiment. Tiny/small reference renders only. Individual version records state the owner and experiment decisions. No runtime delivery is implied."
+      }
     }
   ]
 }

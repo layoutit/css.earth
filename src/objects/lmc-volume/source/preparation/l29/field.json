@@ -1,0 +1,78 @@
+{
+  "version": 29,
+  "parent": 28,
+  "configuration": {
+    "version": 29,
+    "parent": 28,
+    "densityVersion": 29,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 25,
+    "dustStrength": 1.0919999999999999,
+    "oldPopulationVersion": 21,
+    "change": "Finer catalogue-only young stellar structure and one global young RGB grade.",
+    "details": {
+      "source": "Gaia DR3 Young 1+2 plus MCPS U-selected faint hot stars",
+      "n": 1024,
+      "halfKpc": 10,
+      "smoothingSigmaKpc": 0.045,
+      "layerSigmaKpc": 0.15,
+      "gaiaMembers": 262992,
+      "mcpsCandidates": 120225,
+      "mcpsAfterOneArcsecDedup": 119281,
+      "mcpsShare": 0.2,
+      "photoUsed": false,
+      "normalization": "Each count field has unit integral. Adopted 80/20 Gaia/MCPS mixture, not fitted to regions. A single young RGB grade sets integrated light.",
+      "scale": "Adopted 45 pc Gaussian sigma resolves stellar associations while suppressing individual-count speckle. Native grid cells are 19.53 pc. This is spatial regularization, not a measured disc thickness.",
+      "associations": "All existing Bica finite 3D association groups and their amplitudes are retained, with no duplicate groups.",
+      "limits": "Photometric CMD/Q selection is an age proxy. MCPS U systematics and crowding remain; the U band supplies selection only. One-arcsecond matching removes duplicates of the selected Gaia population.",
+      "papers": [
+        "https://arxiv.org/html/2012.01771",
+        "https://doi.org/10.1086/423910",
+        "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/II/236"
+      ]
+    },
+    "dustExtinctionRgb": [
+      0.25,
+      1,
+      1.879765395894428
+    ]
+  }
+}
