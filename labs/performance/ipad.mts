@@ -83,7 +83,8 @@ async function startServer(port: number) {
   child.once('error', error => { console.error(`Cannot start Astro: ${error.message}`); exit = 1; });
   for (let attempt = 0; attempt < 120; attempt++) {
     if (await responds(port)) return child;
-    if (exit !== undefined) throw new Error(`Astro exited before the page responded (${exit ?? 'signal'}).`);
+    // Astro 7 detaches its dev server and exits 0 while the server keeps starting; only a failed exit is fatal.
+    if (exit !== undefined && exit !== 0) throw new Error(`Astro exited before the page responded (${exit ?? 'signal'}).`);
     await pause(500);
   }
   child.kill('SIGTERM');
@@ -105,7 +106,9 @@ async function inspectorExpression(expression: string) {
   child.stdout?.setEncoding('utf8').on('data', chunk => { output += chunk; });
   child.stderr?.setEncoding('utf8').on('data', chunk => { output += chunk; });
   child.stdin?.end(`${expression}\n`);
-  const code = await exited(child);
+  // A Web Inspector session can stall without exiting; give up instead of hanging.
+  const stalled = setTimeout(() => child.kill('SIGKILL'), 30_000);
+  const code = await exited(child).finally(() => clearTimeout(stalled));
   if (code !== 0 || /(?:ERROR|Traceback|No webviews found)/iu.test(output))
     throw new Error('Safari Web Inspector could not navigate a tab. Unlock the iPad, open Safari, and enable Settings > Apps > Safari > Advanced > Web Inspector.');
 }
@@ -116,9 +119,12 @@ async function openOnDevice(url: string) {
   if (!before.includes('<Safari(')) throw new Error('Open Safari on the unlocked iPad and leave a tab visible.');
   // Existing-tab Inspector evaluation works without Safari Remote Automation.
   await inspectorExpression(`location.assign(${JSON.stringify(url)})`);
-  for (let attempt = 0; attempt < 20; attempt++) {
+  // A dev server compiles a route on its first load, often for longer than ten seconds. The page may rewrite its query
+  // once it has read it (a saved view's `v=`), so the path is what shows it arrived.
+  const { origin, pathname } = new URL(url), page = `URL:${origin}${pathname}`;
+  for (const deadline = Date.now() + 60_000; Date.now() < deadline;) {
     const tabs = await command('pymobiledevice3', ['webinspector', 'opened-tabs', '--native']);
-    if (tabs.includes(`URL:${url}>`)) return;
+    if (tabs.split('\n').some(tab => tab.includes(`${page}>`) || tab.includes(`${page}?`) || tab.includes(`${page}#`))) return;
     await pause(500);
   }
   throw new Error(`Safari did not report ${url} after navigation.`);

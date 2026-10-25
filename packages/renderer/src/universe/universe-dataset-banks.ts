@@ -10,9 +10,9 @@ import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import { enteredVolumeOpacity, projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits, volumeHolds } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
-import { mountCataloguePoints } from './catalogue-points.js';
-import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
+import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './galaxy/far-backing-planes.js';
+import { mountCataloguePoints } from './points/catalogue-points.js';
+import { fetchPreparedCatalogueBank } from './points/catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;

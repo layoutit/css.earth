@@ -1,6 +1,6 @@
 # Excerpt of uid___A002_Xad2439_Xee6.ms.scriptForCalibration.py, the manual reduction script ALMA delivered with
 # member observing unit set uid://A001/X2d8/X73 (project 2015.1.01302.S, Europa, 2015-11-26). Only the steps
-# packages/telescope-cli/src/archives/interferometry/alma-manual-calibration.mts replays are kept; every kept line is verbatim.
+# packages/telescope-cli/src/archives/interferometry/alma/alma-manual-calibration.mts replays are kept; every kept line is verbatim.
 step_title = {0: 'Import of the ASDM',
               1: 'Fix of SYSCAL table times',
               2: 'listobs',

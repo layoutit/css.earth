@@ -18,7 +18,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell, writeComplexCell, type BinaryTable, type TableColumn } from '@cssearth/bake/objects/raster';
-import { limbDarkenedDiscVisibility } from './alma-disc-selfcal.mts';
+import { limbDarkenedDiscVisibility } from './alma/alma-disc-selfcal.mts';
 
 const MAS_RAD = Math.PI / 180 / 3.6e6;
 

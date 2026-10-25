@@ -21,7 +21,8 @@ export function trustPreparedCssVolume(volume: PreparedCssVolume): PreparedCssVo
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   if (typeof input === 'object' && input !== null && validated.has(input)) return input as PreparedCssVolume;
   const value = record(input, 'prepared CSS volume');
-  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : [])], 'prepared CSS volume');
+  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'farPlanes') ? ['farPlanes'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : [])], 'prepared CSS volume');
+  if (Object.hasOwn(value, 'mergedOpticalCopies') && value.mergedOpticalCopies !== 3) throw new TypeError('Prepared CSS volume merges exactly three optical copies.');
   if (value.schema !== PREPARED_CSS_VOLUME_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
     throw new TypeError('Prepared CSS volume identity is invalid.');
   }
@@ -59,15 +60,102 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   }
   const frame = parseDensityVolumeFrame(value.frame);
   const impostors = Object.hasOwn(value, 'impostors') ? validateVolumeImpostors(value.impostors, resources) : undefined;
+  const farPlanes = Object.hasOwn(value, 'farPlanes') ? validateFarPlanes(value.farPlanes, resources, leafIds, frame, stacks, resourcesInput as PreparedCssVolume['resources']) : undefined;
+  if (farPlanes && impostors) throw new TypeError('Volume far planes and impostors are alternative distant presentations.');
   const sky = Object.hasOwn(value, 'sky') ? validatePreparedCssSky(value.sky, resourcesInput as PreparedCssVolume['resources']) : undefined;
   if (sky && (sky.referenceFrame !== frame.referenceFrame || sky.epochJdTt !== frame.epochJdTt)) throw new TypeError('Prepared sky and volume must share their reference frame and epoch.');
   const volume = Object.freeze({ schema: value.schema, id: value.id, frame,
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}), ...(Object.hasOwn(value, 'approximation') ? { approximation: value.approximation } : {}),
-    ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}) }) as PreparedCssVolume;
+    ...(farPlanes ? { farPlanes } : {}), ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}), ...(value.mergedOpticalCopies === 3 ? { mergedOpticalCopies: 3 as const } : {}) }) as PreparedCssVolume;
   validated.add(volume);
   return volume;
+}
+
+function validateFarPlanes(input: unknown, resources: Set<string>, leafIds: Set<string>, frame: PreparedCssVolume['frame'], stacks: PreparedCssVolume['stacks'], resourceRecords: PreparedCssVolume['resources']): NonNullable<PreparedCssVolume['farPlanes']> {
+  const bank = record(input, 'volume far planes');
+  exactKeys(bank, ['gainBlend', 'radiusUnits', 'belowDiameterPixels', 'stacks', 'side'], 'volume far planes');
+  if (!Array.isArray(bank.gainBlend) || bank.gainBlend.length !== 1) throw new TypeError('Far pictures need one top gain table.');
+  const fittedAxes = new Set<string>();
+  for (const input of bank.gainBlend) {
+    const fit = record(input, 'far gain fit');
+    exactKeys(fit, ['axis', 'samples'], 'far gain fit');
+    if (fit.axis !== 'z' || fittedAxes.has(String(fit.axis)) || !Array.isArray(fit.samples) || fit.samples.length < 2 || fit.samples.length > 256)
+      throw new TypeError('Far gain tables need unique axes and 2 to 256 samples.');
+    fittedAxes.add(String(fit.axis));
+    let previous = 0;
+    for (const sample of fit.samples) {
+      if (!Array.isArray(sample) || sample.length !== 2 || !sample.every(value => typeof value === 'number' && Number.isFinite(value)) ||
+          sample[0] < 1 || sample[0] > 256 || sample[0] <= previous || sample[1] < .001 || sample[1] > .999)
+        throw new TypeError('Far gain samples must increase from 1, with gain at most 256, with bounded opacity.');
+      previous = sample[0];
+    }
+    if (fit.samples[0][0] !== 1 || fit.samples.at(-1)[0] < 3) throw new TypeError('Far gain tables must span at least 1 to 3.');
+  }
+  if (typeof bank.radiusUnits !== 'number' || !Number.isFinite(bank.radiusUnits) || bank.radiusUnits <= 0 ||
+      typeof bank.belowDiameterPixels !== 'number' || !Number.isFinite(bank.belowDiameterPixels) || bank.belowDiameterPixels <= 0 ||
+      !Array.isArray(bank.stacks) || bank.stacks.length !== 1 || new Set(bank.stacks.map(stack => record(stack, 'far stack').axis)).size !== 1)
+    throw new TypeError('Volume far planes need one top axis and positive finite screen thresholds.');
+  for (const input of bank.stacks) {
+    const stack = record(input, 'far stack');
+    if (stack.axis !== 'z') throw new TypeError('Only the fixed top pair belongs in far stacks.');
+    validateStack(stack, resources, leafIds);
+    const prepared = stack as unknown as PreparedCssVolume['stacks'][number];
+    const original = stacks.find(candidate => candidate.axis === prepared.axis)!;
+    const normal = original.normalUnits ?? AXES.map(axis => axis === prepared.axis ? 1 : 0);
+    const actual = prepared.normalUnits ?? AXES.map(axis => axis === prepared.axis ? 1 : 0);
+    const leaf = prepared.leaves[0], high = prepared.leaves[1];
+    if (prepared.leaves.length !== 2 || !leaf || !high || high.style.transform !== leaf.style.transform || high.style.width !== leaf.style.width ||
+        high.style.height !== leaf.style.height || high.widthPx !== leaf.widthPx || high.heightPx !== leaf.heightPx ||
+        high.style.backgroundSize !== leaf.style.backgroundSize || high.style.backgroundPosition !== leaf.style.backgroundPosition ||
+        !high.centerUnits.every((value, index) => value === leaf.centerUnits[index]) || !normal.every((value, index) => value === actual[index]) ||
+        Math.abs(normal.reduce((sum, value, index) => sum + value * (leaf.centerUnits[index]! - (frame.boundsUnits.min[index]! + frame.boundsUnits.max[index]!) / 2), 0)) > 1e-6 ||
+        leaf.style.backgroundSize !== `${leaf.style.width} ${leaf.style.height}` || leaf.style.backgroundPosition !== '0px 0px')
+      throw new TypeError('Each volume far axis needs two coincident central, uncropped pictures parallel to its stack.');
+    const matrix = leaf.style.transform.slice(9, -1).split(',').map(Number);
+    const u = [matrix[1]!, matrix[0]!, matrix[2]!], v = [matrix[5]!, matrix[4]!, matrix[6]!];
+    const translation = [matrix[13]!, matrix[12]!, matrix[14]!];
+    const dot = (vector: readonly number[]) => normal.reduce((sum, value, index) => sum + value * vector[index]!, 0);
+    const centre = normal.reduce((sum, value, index) => sum + value * (frame.boundsUnits.min[index]! + frame.boundsUnits.max[index]!) / 2, 0);
+    if (matrix[3] !== 0 || matrix[7] !== 0 || matrix[11] !== 0 || matrix[15] !== 1 ||
+        !(Math.hypot(...u) > 0) || !(Math.hypot(...v) > 0) || Math.abs(dot(u)) > 1e-6 || Math.abs(dot(v)) > 1e-6 ||
+        Math.abs(dot(translation) / 50 - centre) > 1e-6)
+      throw new TypeError('Volume far picture matrix must place its plane through the frame centre, perpendicular to its axis.');
+  }
+  const side = record(bank.side, 'cylindrical side');
+  exactKeys(side, ['leaf', 'highTexturePath', 'views', 'coefficients'], 'cylindrical side');
+  validateStack({ axis: 'x', leaves: [side.leaf] }, resources, leafIds);
+  const leaf = side.leaf as PreparedCssVolume['stacks'][number]['leaves'][number];
+  if (side.views !== 16 || typeof side.highTexturePath !== 'string' || !resources.has(side.highTexturePath) ||
+      leaf.style.backgroundSize !== `${leaf.style.width} ${leaf.style.height}` || leaf.style.backgroundPosition !== '0px 0px' ||
+      !Array.isArray(side.coefficients) || side.coefficients.length !== 16)
+    throw new TypeError('Cylindrical side needs 16 uncropped atlas views and declared normal/bright textures.');
+  for (const path of [leaf.texturePath, side.highTexturePath]) {
+    const resource = resourceRecords.find(resource => resource.path === path);
+    if (resource?.width !== 16 * leaf.widthPx || resource.height !== leaf.heightPx)
+      throw new TypeError('Side atlas dimensions must contain exactly 16 frames in one row.');
+  }
+  const m = leaf.style.transform.slice(9, -1).split(',').map(Number);
+  if (m[0] !== 1 || m[1] !== 0 || m[2] !== 0 || m[4] !== 0 || m[5] !== 0 || m[6] !== -1 ||
+      m[3] !== 0 || m[7] !== 0 || m[11] !== 0 || m[15] !== 1 ||
+      Math.abs((m[12]! + Number.parseFloat(leaf.style.width) / 2) / 50 - leaf.centerUnits[1]) > 1e-6 ||
+      Math.abs((m[14]! - Number.parseFloat(leaf.style.height) / 2) / 50 - leaf.centerUnits[2]) > 1e-6 ||
+      Math.abs(m[13]! / 50 - (frame.boundsUnits.min[0] + frame.boundsUnits.max[0]) / 2) > 1e-6 ||
+      !leaf.centerUnits.every((value, i) => Math.abs(value - (frame.boundsUnits.min[i]! + frame.boundsUnits.max[i]!) / 2) < 1e-6))
+    throw new TypeError('Cylindrical side must contain the central vertical axis with a horizontal first column.');
+  for (const samples of side.coefficients) {
+    if (!Array.isArray(samples) || samples.length < 2 || samples.length > 181) throw new TypeError('Missing side elevation coefficients.');
+    let previous = -1;
+    for (const sample of samples) {
+      if (!Array.isArray(sample) || sample.length !== 3 || !sample.every(value => typeof value === 'number' && Number.isFinite(value)) ||
+          sample[0] <= previous || sample[0] < 0 || sample[0] > 90 || sample.slice(1).some(value => value < 0 || value > 1))
+        throw new TypeError('Side coefficients need increasing elevations and bounded opacities.');
+      previous = sample[0];
+    }
+    if (samples[0][0] !== 0 || samples.at(-1)[0] !== 90) throw new TypeError('Side coefficients must span 0 to 90 degrees.');
+  }
+  return bank as unknown as NonNullable<PreparedCssVolume['farPlanes']>;
 }
 
 function validateStack(stack: Record<string, unknown>, resources: Set<string>, leafIds: Set<string>): void {

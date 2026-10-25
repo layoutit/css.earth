@@ -35,9 +35,9 @@ export interface WorldBodyPresentation {
   labelSize: { width: number; height: number };
   labelShown: boolean;
   labelPlacement: number;
-  indicatorShown: boolean;
-  indicatorRadius: number;
+  indicatorShown: boolean; indicatorRadius: number;
   orbitAppearance: { width: number; opacity: number };
+  markerDrawn?: boolean; // The last committed frame drew the marker (absent before any): kept in a near declutter tie.
 }
 export interface WorldContextView {
   world: WorldCameraPose;

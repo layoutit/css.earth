@@ -14,7 +14,7 @@ import { type QueryInputs } from './observation-query/query-contract.mts';
 import { selectedProductInput } from './observation-query/selected-product.mts';
 import { saveSession, saveExploration, getSession, sessionRequest, savedChoice, type SessionServices } from './session.mts';
 import { explorationAnswer } from './exploration.mts';
-import { parseCli } from './cli-arguments.mts';
+import { parseCli } from './cli/cli-arguments.mts';
 import { SERVICES } from './vo/discovery.mts';
 import { matchProductSoftware } from './delivery/ascl.mts';
 import { listArtifactOutputs } from './delivery/artifact-outputs.mts';

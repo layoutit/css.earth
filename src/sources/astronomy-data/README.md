@@ -2,16 +2,16 @@
 
 `ledger.sqlite` owns the audit data and work status. [PROPOSALS.md](PROPOSALS.md) contains the 131 proposed work scopes and their acceptance conditions. IDs are permanent. There is one database, no database service and no ORM.
 
-The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no application or prepared assets. This directory holds the data and this document; the browser, slicer, verifier and collectors are `@cssearth/bake/sources` and its `packages/bake/cli/astronomy-data-*.mts` commands.
+The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no application or prepared assets. This directory holds the data and this document; the browser, slicer, verifier and collectors are `@cssearth/bake/sources` and its `packages/bake/cli/astronomy-data/astronomy-data-*.mts` commands.
 
 ## Query the ledger
 
 From the repository root, with the project's supported Node version:
 
 ```sh
-node packages/bake/cli/astronomy-data-browse.mts
-node packages/bake/cli/astronomy-data-slice.mts --source=opus --target=Mimas --format=json
-node packages/bake/cli/astronomy-data-slice.mts --proposal=111 --format=tsv
+node packages/bake/cli/astronomy-data/astronomy-data-browse.mts
+node packages/bake/cli/astronomy-data/astronomy-data-slice.mts --source=opus --target=Mimas --format=json
+node packages/bake/cli/astronomy-data/astronomy-data-slice.mts --proposal=111 --format=tsv
 sqlite3 -header -column src/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
@@ -52,7 +52,7 @@ Git stores the database as a binary file. Review changes through a text export a
 
 ```sh
 sqlite3 src/sources/astronomy-data/ledger.sqlite .dump > /tmp/astronomy-data.sql
-node packages/bake/cli/astronomy-data-verify.mts
+node packages/bake/cli/astronomy-data/astronomy-data-verify.mts
 ```
 
 To compare revisions, extract the old database with `git show` to `/tmp`, export both with `.dump` and diff them. Do not commit a second JSON or SQL copy. Resolve concurrent edits by applying the intended row changes to one database, then run the verifier. The verifier checks integrity, foreign keys, snapshot coverage, evidence, OPUS partition reconciliation, proposal joins, filters and exports. It establishes ledger consistency, not scientific acceptance.
@@ -60,17 +60,17 @@ To compare revisions, extract the old database with `git show` to `/tmp`, export
 Public collectors write to ignored scratch output and never replace the ledger:
 
 ```sh
-OPUS_WORK_DIR=output/opus-refresh node packages/bake/cli/astronomy-data-collect-opus.mts
-ARCHIVE_WORK_DIR=output/archive-refresh node packages/bake/cli/astronomy-data-collect-archives.mts umd
-ARCHIVE_WORK_DIR=output/archive-refresh node packages/bake/cli/astronomy-data-collect-archives.mts darts
-PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node packages/bake/cli/astronomy-data-collect-photojournal.mts
-USGS_WORK_DIR=output/usgs-files node packages/bake/cli/astronomy-data-collect-usgs-files.mts
-TARGETS_WORK_DIR=output/ledger-targets node packages/bake/cli/astronomy-data-collect-targets.mts
-node packages/bake/cli/astronomy-data-apply-ledger-fixes.mts --dry-run   # then without --dry-run
-node packages/bake/cli/astronomy-data-apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
-node packages/bake/cli/astronomy-data-collect-trek.mts --dry-run        # NASA Trek map layers; TREK_CACHE keeps pages
-node packages/bake/cli/astronomy-data-build-instruments.mts --dry-run   # rebuilds missions and instruments
-node packages/bake/cli/astronomy-data-mark-map-usage.mts --dry-run      # marks maps a body's manifest downloads
+OPUS_WORK_DIR=output/opus-refresh node packages/bake/cli/astronomy-data/astronomy-data-collect-opus.mts
+ARCHIVE_WORK_DIR=output/archive-refresh node packages/bake/cli/astronomy-data/astronomy-data-collect-archives.mts umd
+ARCHIVE_WORK_DIR=output/archive-refresh node packages/bake/cli/astronomy-data/astronomy-data-collect-archives.mts darts
+PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node packages/bake/cli/astronomy-data/astronomy-data-collect-photojournal.mts
+USGS_WORK_DIR=output/usgs-files node packages/bake/cli/astronomy-data/astronomy-data-collect-usgs-files.mts
+TARGETS_WORK_DIR=output/ledger-targets node packages/bake/cli/astronomy-data/astronomy-data-collect-targets.mts
+node packages/bake/cli/astronomy-data/astronomy-data-apply-ledger-fixes.mts --dry-run   # then without --dry-run
+node packages/bake/cli/astronomy-data/astronomy-data-apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
+node packages/bake/cli/astronomy-data/astronomy-data-collect-trek.mts --dry-run        # NASA Trek map layers; TREK_CACHE keeps pages
+node packages/bake/cli/astronomy-data/astronomy-data-build-instruments.mts --dry-run   # rebuilds missions and instruments
+node packages/bake/cli/astronomy-data/astronomy-data-mark-map-usage.mts --dry-run      # marks maps a body's manifest downloads
 ```
 
 Photojournal has no map category, so an entry is chosen by a title naming a map, mosaic, globe, hemisphere, projection or atlas, or a caption stating a map projection or global map. USGS files are read from each product's Astropedia page. Rows collected without a target get the one their archive label states; rows whose source states none keep an empty target and a `targetNote`.

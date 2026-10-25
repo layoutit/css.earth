@@ -69,7 +69,7 @@ export const liveArchive: Archive = createLiveArchive();
 
 export const GAIA_TAP = 'https://gea.esac.esa.int/tap-server/tap/sync';
 export const VIZIER_ASU = 'https://vizier.cds.unistra.fr/viz-bin/asu-tsv';
-export const xpSampledUrl = (sourceId: string) => `https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=${sourceId}&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3`;
+export const xpSampledUrl = (sourceId: string) => `https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=${sourceId}&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3`;
 /** The Gaia partner data centre at ARI Heidelberg: a TAP mirror of Gaia DR3 that also serves the XP sampled spectra, used when
  * ESA's DataLink server is down. Its rows are the same product (stellar-photometric-color.mts readXpSampledSpectrum). */
 export const ARI_TAP = 'https://gaia.ari.uni-heidelberg.de/tap/sync';

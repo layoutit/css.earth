@@ -22,3 +22,18 @@ test('prune only uninventoried prepared files before restoring; preserve listed 
     assert.ok(source.indexOf('await prunePreparedExtras(root)') < source.indexOf("await setupAssets(['--location=prepared'], root)"));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('prune removes a retired object the cache still carries, and keeps a live object without an inventory', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'comparison-cache-'));
+  try {
+    const retired = join(root, 'src/objects/retired'), live = join(root, 'src/objects/live');
+    await mkdir(join(retired, 'prepared'), { recursive: true });
+    await writeFile(join(retired, 'prepared/controls.json'), '{}');
+    await mkdir(join(live, 'prepared'), { recursive: true });
+    await writeFile(join(live, 'README.md'), 'source');
+    await writeFile(join(live, 'prepared/scene.json'), '{}');
+    assert.deepEqual(await prunePreparedExtras(root), ['retired/']);
+    await assert.rejects(readFile(join(retired, 'prepared/controls.json')));
+    assert.equal(await readFile(join(live, 'prepared/scene.json'), 'utf8'), '{}');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

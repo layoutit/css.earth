@@ -34,7 +34,7 @@ const foregroundRects = [{ left: 100, top: 100, right: 150, bottom: 114 }];
 // These unrelated layers keep their normal publication contract; the test mounts
 // the actual universe, sky and volume compositor without building a star catalogue.
 mock.module('../universe/world-context/world-context-point-source.js', { namedExports: { mountWorldContextPointSource: () => null } });
-mock.module('../universe/prepared-galaxy-catalog.js', { namedExports: { mountPreparedGalaxyCatalog: catalogMount } });
+mock.module('../universe/galaxy/prepared-galaxy-catalog.js', { namedExports: { mountPreparedGalaxyCatalog: catalogMount } });
 mock.module('../universe/prepared-world-context.js', { namedExports: { ...await import('../universe/prepared-world-context.js'),
   mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, previewSelection() {}, plainStarPlaces: () => [], setOverview() {}, setSystemRetired() {}, setOrbitsOpacity() {}, setBodyColors() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, setSelectionReach() {}, loneStarSelected: () => false, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
 // The modules under test import the mocked ones, so they load after the mocks.
@@ -261,6 +261,11 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   assert.equal(volumeImage.style.transformStyle, undefined);
   // The galaxy is its bulge slices, mounted directly: it has no impostor views to hand off to.
   assert.equal(volumeImage.children.some(node => node.className === 'css-volume-impostors'), false);
+  // Its stack projections are prepared off document: the first publication that selects them puts them under the image layer.
+  assert.equal(volumeImage.children.filter(node => node.className === 'css-volume-projection').length, 0);
+  mounted.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt, pose: {
+    positionM: context.focus.positionM.map((n: number, index: number) => n + (index === 2 ? 4 * context.volume.discHalfHeightM : 0)) as [number, number, number],
+    orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
   assert.equal(volumeImage.children.filter(node => node.className === 'css-volume-projection').length, 3);
   // Each stack's projection, a direct child of the image layer, is clipped to the viewport. Unclipped, a stack seen from
   // inside its span projects its nearest sheet ~250,000 px wide and Chromium drops the flattened surface: the galaxy

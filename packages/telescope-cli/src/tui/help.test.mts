@@ -12,7 +12,7 @@ import { VERSION } from '../version.mts';
 import { SHORT_HELP, helpText } from '../help.mts';
 import { writeHelp } from '../help-output.mts';
 import { guided } from '../cli.mts';
-import type { CliIo } from '../cli-io.mts';
+import type { CliIo } from '../cli/cli-io.mts';
 
 test('the committed globe has 60 fixed ten-row frames and preserves approved frame zero', () => {
   assert.equal(GLOBE_FRAMES.length, 60);

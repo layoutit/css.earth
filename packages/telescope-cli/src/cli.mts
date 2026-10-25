@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import { configureCliWorkspace } from './cli-workspace.mts';
+import { configureCliWorkspace } from './cli/cli-workspace.mts';
 import { assertWritableDirectory, artifactRunName, inspectionDirectory, runDirectory, UnwritableDirectoryError } from './run-directory.mts';
 import { listManagedEnvironments, removeManagedEnvironment } from './toolchains/managed-environments.mts';
 import { manageToolchain } from './toolchains/astronomy-toolchains.mts';
 import { dirname, resolve } from 'node:path';
-import { consentHandler, savedDownload, type DownloadInfo, type ConsentState } from './cli-consent.mts';
+import { consentHandler, savedDownload, type DownloadInfo, type ConsentState } from './cli/cli-consent.mts';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
@@ -20,8 +20,8 @@ import { listArtifactOutputs } from './delivery/artifact-outputs.mts';
 import { projectOutput } from './delivery/projection.mts';
 import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery/delivery-context.mts';
-import { interruptedDownload } from './cli-errors.mts';
-import { explorationSummary, lookupJson, outputSummary, saveStdoutRecord, saveInspection } from './cli-summary.mts';
+import { interruptedDownload } from './cli/cli-errors.mts';
+import { explorationSummary, lookupJson, outputSummary, saveStdoutRecord, saveInspection } from './cli/cli-summary.mts';
 import { HELP, SHORT_HELP } from './help.mts';
 import { VERSION } from './version.mts';
 import { writeHelp } from './help-output.mts';
@@ -54,18 +54,18 @@ import { fetchChandraSource } from './archive-adapters/chandra-source.mts';
 import { fetchSpitzerSource } from './archive-adapters/spitzer-source.mts';
 import { runWorkspaceCommand } from './workspace-commands.mts';
 import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
-import { type CliOptions, parseCli } from './cli-arguments.mts';
-import { type ArtifactInspection, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
-import type { InspectedArtifact } from './cli-artifact-types.mts';
+import { type CliOptions, parseCli } from './cli/cli-arguments.mts';
+import { type ArtifactInspection, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli/cli-format.mts';
+import type { InspectedArtifact } from './cli/cli-artifact-types.mts';
 import { WORKSPACE, USER_ROOT, withAcquisitionDirectory, requireWorkspace, withTransferConsent, withToolchainProgress, requestTransferConsent, DownloadCancelledError, type ToolchainProgress } from '@cssearth/telescope-core/node';
 import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
 
-export type { CliIo } from './cli-io.mts';
-import type { CliIo } from './cli-io.mts';
-import type { CliServices } from './cli-services.mts';
-export type { CliServices, RetrievedResult } from './cli-services.mts';
+export type { CliIo } from './cli/cli-io.mts';
+import type { CliIo } from './cli/cli-io.mts';
+import type { CliServices } from './cli/cli-services.mts';
+export type { CliServices, RetrievedResult } from './cli/cli-services.mts';
 const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportHtml,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation,getDownloadPlan:savedDownload};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {

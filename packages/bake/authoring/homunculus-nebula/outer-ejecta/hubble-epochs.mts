@@ -10,8 +10,8 @@
  * than three times the median residual (and 0.5 pixel) off. The visit is resampled bilinearly by that affine.
  */
 import { resolve } from 'node:path';
-import { affineTransform, gaussianFilter, maximumFilter } from './ndimage.mts';
-import { median, percentile } from './numpy-statistics.mts';
+import { affineTransform, gaussianFilter, maximumFilter } from './python-ports/ndimage.mts';
+import { median, percentile } from './python-ports/numpy-statistics.mts';
 import { phaseCrossCorrelation } from './registration.mts';
 import { HALF, PIX, readScienceImage, reprojectOnGrid, SIDE } from './sky-grid.mts';
 

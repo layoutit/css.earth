@@ -232,11 +232,21 @@ export interface CheckAssetsPublishedResult {
  * re-checked under `DEFAULT_RETRY_POLICY` for its kind; a key is reported only once every attempt failed, with
  * the reason from its last attempt. `gateVerdict` decides what fails.
  */
+/** One of `count` disjoint parts of the inventoried keys: every key falls in exactly one, whatever the inventories hold. */
+export interface AssetShard { readonly index: number; readonly count: number }
+
+/** The part a key belongs to (FNV-1a of the key), stable across runs and machines. */
+export function assetShard(key: string, count: number): number {
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < key.length; index++) hash = Math.imul(hash ^ key.charCodeAt(index), 0x01000193) >>> 0;
+  return hash % count;
+}
+
 export async function checkAssetsPublished(objectIds: readonly string[], { origin = RUNTIME_ASSET_ORIGIN, fetcher,
   root = defaultRoot, concurrency = DEFAULT_RETRY_POLICY.missing.concurrency, retryPolicy = {},
   timeoutMs = REQUEST_TIMEOUT_MS, sleep = (ms: number) => new Promise<void>(accept => setTimeout(accept, ms)), addedSince,
-  findAddedKeys = (ref: string) => addedAssetKeys(ref, { root }) }:
-  { origin?: string; fetcher?: HeadFetcher; root?: string; concurrency?: number;
+  findAddedKeys = (ref: string) => addedAssetKeys(ref, { root }), shard }:
+  { origin?: string; fetcher?: HeadFetcher; root?: string; concurrency?: number; shard?: AssetShard;
     retryPolicy?: Partial<Record<MissClass, Partial<RetryPolicy>>>; timeoutMs?: number;
     sleep?: (ms: number) => Promise<void>; addedSince?: string; findAddedKeys?: (ref: string) => Promise<AddedScope> } = {})
   : Promise<CheckAssetsPublishedResult> {
@@ -250,6 +260,10 @@ export async function checkAssetsPublished(objectIds: readonly string[], { origi
       assets = inventoried.filter(asset => added.keys.has(asset.key));
       scope = `keys added since ${addedSince} (merge base ${added.base.slice(0, 12)}, ${added.objectIds.size} changed inventor${added.objectIds.size === 1 ? "y" : "ies"})`;
     }
+  }
+  if (shard) {
+    assets = assets.filter(asset => assetShard(asset.key, shard.count) === shard.index);
+    scope = `${scope}, shard ${shard.index + 1} of ${shard.count}`;
   }
   const policy = (kind: MissClass): RetryPolicy => ({ ...DEFAULT_RETRY_POLICY[kind], ...retryPolicy[kind] });
   const owned = fetcher ? null : createHeadFetcher();

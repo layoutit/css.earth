@@ -27,7 +27,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 2256800156349110528, cross-checked against Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Fafnir is HR 6945. (5 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffdab3. Routes tried in order: stis-ngsl: HD 170693 is not in the library; kiehling: HR 6945 is not among its 60 stars; kharitonov: HR 6945 is not in the catalogue; burnashev: BS 6945 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2256800156349110528&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2256800156349110528&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
         "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
       ]
     },

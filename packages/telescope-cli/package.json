@@ -83,7 +83,7 @@
     "#telescope/archives/hst/line-stack-reduction": "./src/archives/hst/line-stack-reduction.mts",
     "#telescope/archives/hst/slit-scan-frames": "./src/archives/hst/slit-scan-frames.mts",
     "#telescope/archives/hst/slit-scan-reduction": "./src/archives/hst/slit-scan-reduction.mts",
-    "#telescope/archives/interferometry/alma-disc-selfcal": "./src/archives/interferometry/alma-disc-selfcal.mts",
+    "#telescope/archives/interferometry/alma-disc-selfcal": "./src/archives/interferometry/alma/alma-disc-selfcal.mts",
     "#telescope/archives/interferometry/disc-fit": "./src/archives/interferometry/disc-fit.mts",
     "#telescope/archives/jwst/imaging/bands": "./src/archives/jwst/imaging/bands.mts",
     "#telescope/archives/jwst/imaging/image3": "./src/archives/jwst/imaging/image3.mts",

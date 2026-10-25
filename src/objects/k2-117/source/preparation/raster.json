@@ -47,6 +47,81 @@
         },
         "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,778 K and log g 4.76 (u1 0.401, u2 0.348): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-campaign-18",
+      "output": "k2-117-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-117-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-117-c18.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-campaign-18",
+        "label": "Campaign 18",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-117-c18.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 97.5,
+        "maximum": 102.5,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "97.5%",
+          "100%",
+          "102.5%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 18.8 days, fitted with starry to the K2 mission's own light curve of campaign 18 (its PDC-MAP flux) (the light varies by 1.0%; the map's curve leaves a scatter of 0.21%, the light's own noise being 0.13%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Reinhold & Hekker (2020, A&A 635, A43) list the star as a rotator in their table (VizieR J/A+A/635/A43/table2): a rotation period of 18.78 ± 1.75 d in campaign 18, with a periodogram peak of 0.38. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists no other star within 16 arcseconds of it. A reduction made in this project, not a published map.",
+        "title": "K2 · brightness map made here · Campaign 18",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "k2-117-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-117-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-117-c18.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-117-c18.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 97.5,
+        "maximum": 102.5,
+        "colors": [
+          "#7c4707",
+          "#9d6627",
+          "#be8447",
+          "#dea267",
+          "#ffc087"
+        ],
+        "labels": [
+          "97.5%",
+          "102.5%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffc087, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 18 (May to July 2018): the map's scale, 97.5% to 102.5% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 4.9% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "K2 · the star in its color over its brightness map · May to July 2018",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
     }
   ],
   "emission": {

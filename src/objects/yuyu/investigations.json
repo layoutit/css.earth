@@ -28,7 +28,7 @@
       "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 517: HR 3475; VizieR III/202, cross-checked against Gaia DR3 XP spectrum, source 705156050012755712 (11 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffe8ca. Routes tried in order: stis-ngsl: HD 74739 is not in the library; pulkovo: HR 3475 is not in the catalogue; kiehling: HR 3475 is not among its 60 stars; burnashev: BS 3475 is not in part2; kharitonov: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=705156050012755712&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=705156050012755712&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

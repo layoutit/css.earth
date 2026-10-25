@@ -100,7 +100,7 @@
         "source": {
           "id": "toi-762-a-stellar-color",
           "path": "../manifest.json",
-          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5362352744504000256&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5362352744504000256&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,266 K and log g 4.83 (u1 0.158, u2 0.463): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."

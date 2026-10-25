@@ -115,7 +115,7 @@ test('objects depth-partition changes retain the bake producer consumer contract
 });
 
 test('foreign fixtures outside test folders select their bake reader', () => {
-  const files = affectedTests(['packages/renderer/src/universe/batched-spatial-points.cells.json'], packages, site).files;
+  const files = affectedTests(['packages/renderer/src/universe/points/batched-spatial-points.cells.json'], packages, site).files;
   assert.ok(files.includes('packages/bake/src/volume/catalogue-points.test.ts'));
 });
 

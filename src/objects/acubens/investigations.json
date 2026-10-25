@@ -27,7 +27,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 604789257076233728, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 528: HR 3572; VizieR III/202 (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #c0d2ff. Routes tried in order: stis-ngsl: HD 76756 is not in the library; pulkovo: HR 3572 is not in the catalogue; kiehling: HR 3572 is not among its 60 stars; burnashev: BS 3572 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=604789257076233728&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=604789257076233728&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
       ]
     }

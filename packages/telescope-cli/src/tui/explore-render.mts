@@ -4,12 +4,12 @@ import type { ExplorationSession } from '../session.mts';
 import type { PreviewState } from '../previews/index.mts';
 import { PREVIEW_ROWS, renderPreview } from '../previews/index.mts';
 import type { ProviderProgress } from '../vo/bridge.mts';
-import { archiveLabel } from '../cli-archive.mts';
+import { archiveLabel } from '../cli/cli-archive.mts';
 import { ARCHIVES } from '../archives/archives.mts';
 import { SEARCH as SPITZER_SEARCH } from '../archives/spitzer/archive.mts';
 import { OPUS_SERVICE } from '../archive-adapters/opus.mts';
-import { wavelengthText } from '../cli-table.mts';
-import { oneLine } from '../cli-summary.mts';
+import { wavelengthText } from '../cli/cli-table.mts';
+import { oneLine } from '../cli/cli-summary.mts';
 import { LIST_MINIMUM_ROWS, listPageSize } from './list.mts';
 import { bold, breadcrumb, clipLine, cut, dim, green, inverse, pad, red, yellow } from './style.mts';
 

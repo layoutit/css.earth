@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fft2, ifft2 } from './fft.mts';
+import { fft2, ifft2 } from './python-ports/fft.mts';
 import { FLOAT32_EPSILON, matchTemplate, phaseCrossCorrelation } from './registration.mts';
 
 /**

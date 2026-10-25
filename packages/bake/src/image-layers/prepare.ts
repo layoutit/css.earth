@@ -3,29 +3,28 @@ import { PREPARED_IMAGE_LAYER_BANK_SCHEMA, type PreparedImageLayerBank, type Pre
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { catalogueColor } from '@cssearth/engine';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { ImageLayerRecipe, LayerAxis, Vec3 } from './config.ts';
 import { resizeRgbaLanczos3 } from './resize-rgba.ts';
 import { imageLayerDisc, imageLayerView, norm, rad } from './disc.ts';
-import { removeCompanionGalaxies, removeForegroundStars, type CompanionEllipse, type ForegroundRemoval } from './foreground.ts';
+import { prepareImageLayerFace } from './face/face.ts';
 import { imageLayerBulgeModel } from './bulge.ts';
 import { imageLayerShapeModel, lowerEnvelope, smoothed, broadLight, filamentGlow, measuredPixels, parseMeasuredSpeeds, ringOutlineRadius } from './shape.ts';
 import { pictureFade } from './fade-outline.ts';
 import { imageLayerShapeWalls, type ShapeWalls } from './shape-walls.ts';
 import { densityGrid, imageLayerDensityModel } from './density-grid.ts';
-import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles, surfaceEdgeStretch, SURFACE_MOST_CROSSINGS } from './surface.ts';
-import { imageLayerSurfaceMesh, meshScenes, type SurfaceTriangle } from './surface-mesh.ts';
-import { flattenProtrusions, imageLayerSurfaceSkirt, regionMask, type PictureRegions } from './surface-skirt.ts';
-import { imageLayerSurfaceStar } from './surface-star.ts';
+import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles, surfaceEdgeStretch, SURFACE_MOST_CROSSINGS } from './surface/surface.ts';
+import { imageLayerSurfaceMesh, meshScenes, type SurfaceTriangle } from './surface/surface-mesh.ts';
+import { flattenProtrusions, imageLayerSurfaceSkirt, regionMask, type PictureRegions } from './surface/surface-skirt.ts';
+import { imageLayerSurfaceStar } from './surface/surface-star.ts';
 import { imageLayerShapePatches, packShapePatches } from './shape-patches.ts';
 import { imageLayerBodyModel } from './body.ts';
 import { COLOR_PEAK, paintTexel as paint } from './texel.ts';
-import { imageLayerCollision, imageLayerCollisionAccount, imageLayerCollisionLeaves } from './collision.ts';
-import { imageLayerRingsModel, imageLayerRingsSheet } from './rings.ts';
+import { imageLayerCollision, imageLayerCollisionAccount, imageLayerCollisionLeaves } from './collision/collision.ts';
+import { imageLayerRingsModel, imageLayerRingsSheet } from './rings/rings.ts';
 import { imageLayerStreamsModel, STREAM_CLAIM_REACH, type StreamSurfaceCells } from './streams.ts';
-import { imageLayerRingsCells, imageLayerRingsCurtains, imageLayerRingsGlow, imageLayerRingsSheets, RINGS_FACE_ON_STEP, type Across } from './rings-volume.ts';
+import { imageLayerRingsCells, imageLayerRingsCurtains, imageLayerRingsGlow, imageLayerRingsSheets, RINGS_FACE_ON_STEP, type Across } from './rings/rings-volume.ts';
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 
 /** Over how many face pixels a wall's light may pass from one terrace to the next: a browser's layers do not line up closer. */
@@ -88,73 +87,6 @@ function patchStyle(quad: Quad['verticesUnits'], width: number, height: number, 
   // One CSS pixel a texel here; the shared rule then draws the box at its texel density, as every volume leaf.
   return compileVolumeLeaf({ matrix, leafWidth: width, leafHeight: height, backgroundSize: [atlas.width, atlas.height], backgroundPosition: [-at.x, -at.y] }, atlas.width).style;
 }
-/** The recipe's foreground star table (CSV with a header row) placed on the face image and removed from it in place. */
-async function removeCataloguedForeground(rgb: Buffer, width: number, height: number, recipe: ImageLayerRecipe, sourceDirectory: string): Promise<ForegroundRemoval> {
-  const table=recipe.source.foregroundStars!, lines=(await readFile(resolve(sourceDirectory,table.path),'utf8')).trim().split(/\r?\n/), header=lines[0]!.split(',');
-  const column=(name:string)=>{const index=header.indexOf(name);if(index<0)throw new TypeError(`${recipe.id}: ${table.path} has no ${JSON.stringify(name)} column (source.foregroundStars); its header is ${lines[0]}.`);return index;};
-  const ra=column(table.raDegColumn),dec=column(table.decDegColumn),g=column(table.gMagColumn),view=imageLayerView(recipe);
-  const stars=lines.slice(1).flatMap((line,row)=>{
-    const cells=line.split(','),values=[ra,dec,g].map(index=>cells[index]?.trim()?Number(cells[index]):Number.NaN);
-    if(values.some(value=>!Number.isFinite(value)))throw new TypeError(`${recipe.id}: ${table.path} row ${row+2} has no finite ${table.raDegColumn}, ${table.decDegColumn} or ${table.gMagColumn}: ${line}.`);
-    const crop=view.crop(values[0]!,values[1]!);
-    return crop?[{x:(crop[0]+1)/2*width-.5,y:(1-crop[1])/2*height-.5,gMag:values[2]!}]:[];
-  }).sort((a,b)=>a.gMag-b.gMag);
-  return removeForegroundStars(rgb,width,height,stars);
-}
-/** Scales red and blue in linear light so the photograph's light-weighted mean color over the disc (unclipped pixels
- * inside the support radius) matches the catalogue color of the recipe's integrated B-V. Returns the ratios and gains. */
-function tieColor(rgb: Buffer, width: number, height: number, recipe: ImageLayerRecipe) {
-  const tie=recipe.bake.colorTie!,disc=imageLayerDisc(recipe),view=imageLayerView(recipe),pa=rad(recipe.geometry.lineOfNodesPaDeg);
-  const nodes:Vec3=[Math.sin(pa),Math.cos(pa),0],minor=norm(cross(disc.diskNormal,nodes)),support=recipe.geometry.supportRadiusKpc;
-  const toLinear=Array.from({length:256},(_,v)=>{const s=v/255;return s<=.04045?s/12.92:((s+.055)/1.055)**2.4;});
-  const toByte=(l:number)=>{const c=Math.max(0,Math.min(1,l)),s=c<=.0031308?12.92*c:1.055*c**(1/2.4)-.055;return Math.round(255*s);};
-  const sums=[0,0,0];
-  for(let py=0;py<height;py+=2)for(let px=0;px<width;px+=2){const i=3*(py*width+px);if(Math.max(rgb[i]!,rgb[i+1]!,rgb[i+2]!)>=250)continue;
-    const ray=view.ray(2*(px+.5)/width-1,1-2*(py+.5)/height),local:Vec3=[dot(ray,disc.east),dot(ray,disc.north),dot(ray,disc.target)];
-    const t=dot(disc.diskNormal,[0,0,disc.distanceKpc])/dot(disc.diskNormal,local),point:Vec3=[t*local[0],t*local[1],t*local[2]-disc.distanceKpc];
-    if(Math.hypot(dot(point,nodes),dot(point,minor))>support)continue;
-    for(let c=0;c<3;c++)sums[c]+=toLinear[rgb[i+c]!]!;}
-  const targetRgb=catalogueColor(Number.NaN,tie.bv),target=targetRgb.map(v=>toLinear[v]!);
-  const measured=[sums[0]!/sums[1]!,1,sums[2]!/sums[1]!],wanted=[target[0]!/target[1]!,1,target[2]!/target[1]!],gains=wanted.map((w,c)=>w/measured[c]!);
-  const tables=gains.map(g=>Array.from({length:256},(_,v)=>toByte(toLinear[v]!*g)));
-  for(let i=0;i<rgb.length;i++)rgb[i]=tables[i%3]![rgb[i]!]!;
-  const round=(values:number[])=>values.map(v=>Number(v.toFixed(3)));
-  return {bv:tie.bv,source:tie.source,targetRgb:[...targetRgb],measured:round(measured),target:round(wanted),gains:round(gains)};
-}
-/** The recipe's companion galaxies, from their catalogue rows, as half-light ellipses on the face image, removed in place. */
-async function removeCatalogueCompanions(rgb: Buffer, width: number, height: number, recipe: ImageLayerRecipe, sourceDirectory: string): Promise<{ keys: string[]; extentHalfLight: number[] }> {
-  const companions=recipe.source.companions!,path=resolve(sourceDirectory,'../../../..',companions.catalogue),lines=(await readFile(path,'utf8')).trim().split(/\r?\n/);
-  // The catalogue's cells hold no quoted commas in the columns read here; a quoted cell elsewhere keeps its commas out of the split.
-  const cells=(line:string)=>line.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map(cell=>cell.replace(/,$/,'').replace(/^"|"$/g,''));
-  const header=cells(lines[0]!),column=(name:string)=>{const index=header.indexOf(name);if(index<0)throw new TypeError(`${recipe.id}: ${companions.catalogue} has no ${JSON.stringify(name)} column (source.companions).`);return index;};
-  const [key,ra,dec,rhalf,pa,ellipticity]=['key','ra','dec','rhalf','position_angle','ellipticity'].map(column) as [number,number,number,number,number,number];
-  const rows=new Map(lines.slice(1).map(line=>{const row=cells(line);return [row[key]!,row] as const;})),view=imageLayerView(recipe);
-  const pixel=(raDeg:number,decDeg:number)=>{const crop=view.crop(raDeg,decDeg);if(!crop)throw new TypeError(`${recipe.id}: ${raDeg}, ${decDeg} is behind the photograph.`);return [(crop[0]+1)/2*width-.5,(1-crop[1])/2*height-.5] as const;};
-  const ellipses=companions.keys.map(name=>{
-    const row=rows.get(name);if(!row)throw new TypeError(`${recipe.id}: ${companions.catalogue} has no row with key ${JSON.stringify(name)} (source.companions.keys).`);
-    const values=[ra,dec,rhalf,pa,ellipticity].map(index=>Number(row[index]));
-    if(values.some(value=>!Number.isFinite(value))||row[pa]===''||row[ellipticity]==='')throw new TypeError(`${recipe.id}: ${companions.catalogue} row ${name} needs ra, dec, rhalf, position_angle and ellipticity; got ${[ra,dec,rhalf,pa,ellipticity].map(index=>JSON.stringify(row[index])).join(', ')}.`);
-    const [r,d,half,angle,e]=values as [number,number,number,number,number],[x,y]=pixel(r,d),theta=rad(angle);
-    // One half-light radius along the position angle (east of north), onto the image.
-    const [ex,ey]=pixel(r+half/60*Math.sin(theta)/Math.cos(rad(d)),d+half/60*Math.cos(theta)),halfLightPx=Math.hypot(ex-x,ey-y);
-    return {x,y,halfLightPx,axisRatio:1-e,major:[(ex-x)/halfLightPx,(ey-y)/halfLightPx]} satisfies CompanionEllipse;
-  });
-  return {keys:companions.keys,...removeCompanionGalaxies(rgb,width,height,ellipses)};
-}
-/** The photograph as the layers show it, before it is split into layers: resized to the face size, cleaned of foreground
- * stars and companions, levelled and color-tied, as sRGB bytes. The catalogue dots read their look from it. */
-export async function prepareImageLayerFace(options: { sourceDirectory: string; recipe: ImageLayerRecipe }) {
-  const { recipe }=options, source=await readFile(resolve(options.sourceDirectory,recipe.source.path));
-  const metadata=await sharp(source).metadata();
-  if(metadata.width!==recipe.source.dimensions[0]||metadata.height!==recipe.source.dimensions[1]) throw new TypeError('Image source dimensions mismatch.');
-  const resized=sharp(source).rotate().resize({width:recipe.bake.maxFacePixels,height:recipe.bake.maxFacePixels,fit:'inside',withoutEnlargement:true});
-  const {data:rgb,info}=await resized.removeAlpha().toColorspace('srgb').raw().toBuffer({resolveWithObject:true});
-  const foreground=recipe.source.foregroundStars?await removeCataloguedForeground(rgb,info.width,info.height,recipe,options.sourceDirectory):null;
-  const companions=recipe.source.companions?await removeCatalogueCompanions(rgb,info.width,info.height,recipe,options.sourceDirectory):null;
-  if(recipe.bake.levels){const {black,white,gamma}=recipe.bake.levels,table=Array.from({length:256},(_,v)=>Math.round(255*Math.max(0,Math.min(1,(v/255-black)/(white-black)))**(1/gamma)));for(let i=0;i<rgb.length;i++)rgb[i]=table[rgb[i]!]!;}
-  const colorTie=recipe.bake.colorTie?tieColor(rgb,info.width,info.height,recipe):null;
-  return {rgb,info,foreground,companions,colorTie};
-}
 export async function prepareImageLayers(options: { sourceDirectory: string; outputDirectory: string; recipe: ImageLayerRecipe }): Promise<PreparedImageLayerBank> {
   // A parsec bank (`geometry.unit`) is the same bake with every length a thousand times as many units; the origin keeps the true distance.
   const unitsPerKpc=options.recipe.geometry.unit==='pc'?1000:1,{rgb,info,foreground,companions,colorTie}=await prepareImageLayerFace(options);
@@ -216,13 +148,13 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   const surface=recipe.geometry.surface,meshed=recipe.geometry.shape?.speeds?.depth==='speed'||Boolean(surface);
   let shapeWalls:ShapeWalls|null=null,meshTriangles:SurfaceTriangle[]|null=null;
   if(surface){const arcsec=distanceKpc*Math.PI/648000,sky=(px:number,py:number):[number,number]=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec];};
-    // With a skirt, the surface's equatorial protrusions are brought in and the skirt takes their light (./surface-skirt.ts).
+    // With a skirt, the surface's equatorial protrusions are brought in and the skirt takes their light (./surface/surface-skirt.ts).
     const read=stlTriangles(await readFile(resolve(options.sourceDirectory,surface.path)),`${recipe.id}: ${surface.path}`),triangles=surface.skirt?flattenProtrusions(surface,read):read;let crossings=imageLayerSurfaceCrossings(surface,triangles,info.width,info.height,sky),edgeStretch:((east:number,north:number)=>number)|undefined;
     // With `edgeFit` the surface is fitted here to the photograph's lobe edge, direction by direction about the star.
     if(surface.edgeFit){const inside=new Uint8Array(info.width*info.height);for(let p=0;p<inside.length;p++)inside[p]=Number.isNaN(crossings.depths[SURFACE_MOST_CROSSINGS*p]!)?0:1;
       crossings=imageLayerSurfaceCrossings(surface,triangles,info.width,info.height,sky,edgeStretch=surfaceEdgeStretch(base,info.width,info.height,inside,sky,surface.edgeFit,surface.starRadiusArcsec).stretch);}
     if(surface.closedMesh){
-      // The surface drawn as its own closed mesh with the picture painted on it (./surface-mesh.ts): the picture's light
+      // The surface drawn as its own closed mesh with the picture painted on it (./surface/surface-mesh.ts): the picture's light
       // is all the mesh's, so none is left on the flat picture. Its dark lanes are the filament map's, and the star's glare
       // takes the ultraviolet detail (red 128 plus 40 times the detail, green how far it counts).
       const count=info.width*info.height,filaments=surface.filaments?Float32Array.from(await sharp(resolve(options.sourceDirectory,surface.filaments.path)).greyscale().resize(info.width,info.height,{fit:'fill'}).raw().toBuffer(),value=>value/255):undefined;
@@ -231,9 +163,9 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       // The skirt's drawn regions (names starting "skirt"): the skirt takes the picture there and the lobes under it are filled.
       const cover=surface.skirt?.regionsPath?regionMask(JSON.parse(await readFile(resolve(options.sourceDirectory,surface.skirt.regionsPath),'utf8')) as PictureRegions,'skirt',info.width,info.height,3):undefined;
       meshTriangles=await imageLayerSurfaceMesh(surface,triangles,Buffer.from(base),info.width,info.height,sky,edgeStretch,filaments,detail,cover);
-      // The equatorial skirt outside the lobes, on its plane (./surface-skirt.ts), sorted with the lobes' triangles.
+      // The equatorial skirt outside the lobes, on its plane (./surface/surface-skirt.ts), sorted with the lobes' triangles.
       if(surface.skirt)meshTriangles.push(...imageLayerSurfaceSkirt(surface,surface.skirt,Buffer.from(base),info.width,info.height,sky,crossings,cover));
-      // The central star, a glow inside the shell (./surface-star.ts).
+      // The central star, a glow inside the shell (./surface/surface-star.ts).
       if(surface.star)meshTriangles.push(...imageLayerSurfaceStar(surface,surface.star,info.width,info.height,sky));
       for(let p=0;p<count;p++)base[4*p+3]=0;
     }else{
@@ -348,7 +280,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   for(const stream of recipe.geometry.streams?.streams??[]){if(!stream.surface)continue;const {data,info:cells}=await sharp(resolve(options.sourceDirectory,stream.surface.path)).ensureAlpha().toColorspace('srgb').raw().toBuffer({resolveWithObject:true}),cover=new Float32Array(cells.width*cells.height);for(let p=0;p<cover.length;p++)cover[p]=Math.max(data[4*p]!,data[4*p+1]!,data[4*p+2]!)*data[4*p+3]!/65025;streamSurfaces[stream.id]={width:cells.width,height:cells.height,cover};}
   const streamsModel=recipe.geometry.streams?imageLayerStreamsModel(recipe.geometry.streams,streamSurfaces):null,ringsOnly=recipe.geometry.rings?imageLayerRingsModel(recipe.geometry.rings):null,ringsModel=ringsOnly??streamsModel;let ringsSteps:[number,number]|null=null;
   if(ringsModel){
-    // A nebula's published rings (./rings.ts) or streams of gas (./streams.ts): the picture lies on tilted planes through the
+    // A nebula's published rings (./rings/rings.ts) or streams of gas (./streams.ts): the picture lies on tilted planes through the
     // star or centre, each sight line's light shared between them. One leaf a plane, the same from every side; from the Sun they add up to the picture.
     const arcsec=distanceKpc*Math.PI/648000,W=info.width,H=info.height,sky=(px:number,py:number)=>{const ray=rayLocal(2*(px+.5)/W-1,1-2*(py+.5)/H);return [ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec] as const;};
     // The sky is flat across the picture: a pixel's offset from the star, east and north, from three of its pixels.
@@ -357,7 +289,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const leaf=(id:string,axis:LayerAxis,path:string,w:number,h:number,v:Quad['verticesUnits'],offset:number,bytes:number)=>leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:w,heightPx:h,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,w,h,leaves.length),bytes});
     let sheets:Buffer[];
     if(ringsOnly&&ringsOnly.thickness>0){
-      // Rings with depth (./rings-volume.ts): the smooth part of each ring's light is a glow about its plane. Face-on it
+      // Rings with depth (./rings/rings-volume.ts): the smooth part of each ring's light is a glow about its plane. Face-on it
       // is drawn as layers parallel to the plane, in front of it and behind; from the sides as curtains across the
       // picture, each a strip through the glow's depth along the plane. The sheets keep the rest, every detail with it,
       // on the rings' planes. From the Sun the glow and the sheets are the photograph.
@@ -613,7 +545,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
         if(!any)continue;
         const quad=(axis==='x'?[intersect(u,bv0,reach),intersect(u,bv1,reach),intersect(u,bv1,-reach),intersect(u,bv0,-reach)]:[intersect(bu0,v,reach),intersect(bu1,v,reach),intersect(bu1,v,-reach),intersect(bu0,v,-reach)]) as Quad['verticesUnits'];
         await push(name(axis,s),axis,rgba,lengthPx,depthPx,quad,axis==='x'?(quad[0][0]+quad[1][0])/2:(quad[0][1]+quad[1][1])/2);}}}
-  // A cluster merger's hot gas (./collision.ts): its own picture's light, spread along each sight line through a body round
+  // A cluster merger's hot gas (./collision/collision.ts): its own picture's light, spread along each sight line through a body round
   // about the published collision line, as slabs and curtains. The photograph keeps its plane.
   if(gasBody){const toward=Math.sign(intersect(0,0,1)[2]-intersect(0,0,0)[2])||1;
     for(const leaf of imageLayerCollisionLeaves(gasBody,recipe.bake)){const v=leaf.corners.map(([u,w,depth])=>intersect(u,w,toward*depth*collisionArcsec)) as Quad['verticesUnits'],path=`layers/${leaf.id}.webp`,bytes=await encode(leaf.rgba,leaf.width,leaf.height,path,true);

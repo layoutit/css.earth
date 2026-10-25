@@ -94,7 +94,7 @@ highest, and the cooler edges are the poles and the limb. The disc is 768 millia
 is 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb. Be careful with the fine east-west streaks:
 they are about 2 K, which is the image noise at the beam scale, not surface features.
 
-`node packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch`
+`node packages/telescope-cli/src/archives/interferometry/alma/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch`
 
 ## VLTI, MATISSE: the surface of Betelgeuse
 

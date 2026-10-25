@@ -9,7 +9,7 @@
 import type { ChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { writeReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { limbDarkenedVisibility } from './spotless-disc.mts';
-import { limbDarkenedDiscVisibility } from './alma-disc-selfcal.mts';
+import { limbDarkenedDiscVisibility } from './alma/alma-disc-selfcal.mts';
 
 const MAS_PER_RADIAN = 206_264_806.247;
 

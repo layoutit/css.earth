@@ -10,12 +10,12 @@ import { loadQualifiedObservations, rememberQualification } from './qualificatio
 import { inspectFits } from './qualification/qualify-source.mts';
 import { listArtifactOutputs } from './delivery/artifact-outputs.mts';
 import { main, type CliServices, type CliIo } from './cli.mts';
-import { parseCli } from './cli-arguments.mts';
+import { parseCli } from './cli/cli-arguments.mts';
 import { assertWritableDirectory } from './run-directory.mts';
 import { loadVoInputs } from './vo/bridge.mts';
 import { SERVICES } from './vo/discovery.mts';
 import { explorationAnswer } from './exploration.mts';
-import { displayPath } from './cli-format.mts';
+import { displayPath } from './cli/cli-format.mts';
 import { FakeTerminal } from './tui/fake-terminal.mts';
 import type { ExplorationAnswer, ExplorationChoice } from './exploration.mts';
 

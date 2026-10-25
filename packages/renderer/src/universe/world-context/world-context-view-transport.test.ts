@@ -10,13 +10,14 @@ test('packed body presentation round-trips exactly, including absent optional fl
       labelPlacement: 3, indicatorShown: false, indicatorRadius: 8.25, orbitAppearance: { width: 1, opacity: 0.6499999999999999 } },
     { hovered: false, bodyHidden: false, orbitHidden: true, labelHidden: false, labelSuppressed: true, indicatorHidden: false, highlighted: true,
       labelSize: { width: Number.NaN, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: true,
-      indicatorRadius: 10, orbitAppearance: { width: 1.5, opacity: 1e-12 } },
+      indicatorRadius: 10, orbitAppearance: { width: 1.5, opacity: 1e-12 }, markerDrawn: true },
   ];
   const packed = packWorldBodies(bodies);
-  assert.equal(packed.length, 30);
+  assert.equal(packed.length, 32);
   assert.deepEqual(unpackWorldBodies(packed), bodies);
   assert.ok(!Object.keys(unpackWorldBodies(packed)[0]!).includes('bodyHidden'));
   assert.ok(!Object.keys(unpackWorldBodies(packed)[0]!).includes('highlighted'));
+  assert.ok(!Object.keys(unpackWorldBodies(packed)[0]!).includes('markerDrawn'));
   bodies[1]!.highlighted = false;
   assert.deepEqual(unpackWorldBodies(packWorldBodies(bodies)), bodies);
   assert.throws(() => unpackWorldBodies(new Float64Array(13)), /malformed/);

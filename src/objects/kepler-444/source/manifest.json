@@ -92,7 +92,7 @@
       "licenseEvidence": [
         "https://www.cosmos.esa.int/web/gaia-users/credits"
       ],
-      "acquisition": "Download from the ARI Heidelberg Gaia mirror (ESA DataLink failed: https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2101486923385239808&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3 answered 503 Service Unavailable.) in source/preparation/acquisition.json: the externally calibrated BP/RP sampled mean spectrum of source_id 2101486923385239808, 343 samples from 336 to 1020 nm.",
+      "acquisition": "Download from the ARI Heidelberg Gaia mirror (ESA DataLink failed: https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2101486923385239808&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3 answered 503 Service Unavailable.) in source/preparation/acquisition.json: the externally calibrated BP/RP sampled mean spectrum of source_id 2101486923385239808, 343 samples from 336 to 1020 nm.",
       "redistribution": "One archived spectrum or catalogue file, unchanged, with citation",
       "consumers": [
         "assets",

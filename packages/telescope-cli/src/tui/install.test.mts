@@ -6,9 +6,9 @@ import { FakeTerminal } from './fake-terminal.mts';
 import { createInstallScreen, initialInstallState, installFreeGb, installProgress, NOT_INSTALLED, renderInstall, renderInstallConsent } from './install.mts';
 import { plain } from './style.mts';
 import { GLOBE_FRAMES } from './globe-frames.mts';
-import { consentHandler, type ConsentState } from '../cli-consent.mts';
+import { consentHandler, type ConsentState } from '../cli/cli-consent.mts';
 import { DownloadCancelledError, withToolchainProgress, reportToolchainProgress } from '@cssearth/telescope-core/node';
-import type { CliIo } from '../cli-io.mts';
+import type { CliIo } from '../cli/cli-io.mts';
 
 class InstallTerminal extends FakeTerminal {
   private tick: (() => void) | undefined;

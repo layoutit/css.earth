@@ -4,7 +4,7 @@ import { FakeTerminal } from './fake-terminal.mts';
 import { listScreen, renderList, writeList, LIST_MINIMUM_ROWS, type ListSpec } from './list.mts';
 import { bold, clipLine, plain } from './style.mts';
 import { LEAVE_SCREEN } from './terminal.mts';
-import type { CliIo } from '../cli-io.mts';
+import type { CliIo } from '../cli/cli-io.mts';
 
 const rows = Array.from({ length: 30 }, (_, index) => `item ${String(index + 1).padStart(2, '0')}`);
 function fixture(open: (row: string) => string | Promise<string> = () => 'Opened in browser'): ListSpec<string> {

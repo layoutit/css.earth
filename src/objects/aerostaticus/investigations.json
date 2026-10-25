@@ -27,7 +27,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 6784024126773616128, through the CIE 1931 2-degree observer: #bacdff. Routes tried in order: stis-ngsl: HD 202627 is not in the library; pulkovo: HR 8135 is not in the catalogue; kiehling: HR 8135 is not among its 60 stars; kharitonov: HR 8135 is not in the catalogue; burnashev: BS 8135 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6784024126773616128&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6784024126773616128&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     }
   ]

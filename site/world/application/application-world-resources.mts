@@ -1,5 +1,5 @@
 import { IMAGE_MESH_SCHEMA, parseCatalogueProximity, bankCataloguePoints, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor, parsePlaneBankDescriptor } from '@cssearth/objects';
-import { loadGalaxyStationBackground } from '@cssearth/renderer/universe/galaxy-station-loader.ts';
+import { loadGalaxyStationBackground } from '@cssearth/renderer/universe/galaxy-stations/galaxy-station-loader.ts';
 import { DATASET_VISIBILITY } from '../../browser/runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.

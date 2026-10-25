@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, resolve } from 'node:path';
 import { test } from 'node:test';
-import { parseCli } from './cli-arguments.mts';
+import { parseCli } from './cli/cli-arguments.mts';
 import { helpText } from './help.mts';
 import { workspaceArguments } from '@cssearth/telescope-core/node';
 

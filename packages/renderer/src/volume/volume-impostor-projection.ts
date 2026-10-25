@@ -15,18 +15,7 @@ export interface VolumeImpostorProjection {
 
 /** Project a prepared bounding sphere through the same physical camera as the full volume. */
 export function projectVolumeImpostors(publication: VolumeCameraPublication, frame: PreparedCssVolume['frame'], bank: PreparedVolumeImpostors, includeFullViews = false): VolumeImpostorProjection {
-  const { world, viewport } = publication;
-  if (world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Volume impostor camera frame and epoch differ.');
-  if (!(viewport.focalPixels > 0) || !Number.isFinite(viewport.focalPixels) || !viewport.principalOffsetPixels.every(Number.isFinite)) {
-    throw new TypeError('Volume impostor camera viewport is invalid.');
-  }
-  const radius = bank.radiusUnits;
-  const { local, right, down, back, depth, distance, x, y, inside, visible } = projectVolumeSphere(world, viewport, frame, radius);
-  // In front of the sphere the projected size is unchanged; beside or behind it the tangent-cone size replaces the
-  // old infinite answer, so an off-axis cloud never switches to its full volume. Inside it the full volume draws and
-  // its physical leaf frustum does the culling.
-  const diameterPixels = inside ? Number.POSITIVE_INFINITY
-    : 2 * radius * viewport.focalPixels / (depth > radius ? depth : Math.sqrt(distance * distance - radius * radius));
+  const { local, right, down, back, distance, x, y, visible, diameterPixels } = projectVolumeDiameter(publication, frame, bank.radiusUnits);
   const volumeMix = smooth((diameterPixels - bank.fullBelowDiameterPixels) / (bank.volumeAboveDiameterPixels - bank.fullBelowDiameterPixels));
   // A baked view shows the volume from a direction, so the view follows where the camera is, not where it looks:
   // turning in place keeps the same views and only rotates their images.
@@ -37,6 +26,20 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
       const imageRight = transport(view.right, view.back, toViewer), imageDown = transport(view.down, view.back, toViewer);
       return { id: view.id, weight, matrix: [dot(imageRight, right), dot(imageRight, down), dot(imageDown, right), dot(imageDown, down)] };
     }) : [] };
+}
+
+/** Shared screen-size handover for fixed axis pictures and camera-facing views, including off-axis cameras. */
+export function projectVolumeDiameter(publication: VolumeCameraPublication, frame: PreparedCssVolume['frame'], radius: number) {
+  const { world, viewport } = publication;
+  if (world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Volume impostor camera frame and epoch differ.');
+  if (!(viewport.focalPixels > 0) || !Number.isFinite(viewport.focalPixels) || !viewport.principalOffsetPixels.every(Number.isFinite)) {
+    throw new TypeError('Volume impostor camera viewport is invalid.');
+  }
+  const sphere = projectVolumeSphere(publication.world, publication.viewport, frame, radius);
+  const { inside, depth, distance } = sphere;
+  const diameterPixels = inside ? Number.POSITIVE_INFINITY
+    : 2 * radius * publication.viewport.focalPixels / (depth > radius ? depth : Math.sqrt(distance * distance - radius * radius));
+  return { ...sphere, diameterPixels };
 }
 
 /** Compact nearest-view interpolation: the fourth neighbour has zero weight, so entering/leaving views do not pop. */

@@ -117,7 +117,7 @@
       "color": { "kind": "ramp", "stops": [[0, "#000000"], [0.35, "#7a1500"], [0.7, "#e06b1e"], [1, "#fff6c8"]] },
       "enlarge": 5,
       "product": {
-        "command": "node packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
+        "command": "node packages/telescope-cli/src/archives/interferometry/alma/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
         "definition": "output/alma-europa/selfcal/Europa.selfcal.receipt.json (this stage has no pinned program file; the run states its parameters on the command line and records them in the receipt)"
       },
       "note": "The disc is 768 milliarcseconds across and the restoring beam 48 by 21 milliarcseconds, so the soft edge is the beam, not the limb. The fine east-west streaks across the disc are about 2 K, the image noise at the beam scale, not surface features."

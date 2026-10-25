@@ -181,7 +181,7 @@ export default [
       'site/world/prepared-world-context.test.ts',
       'packages/renderer/src/universe/world-context/world-context-planner.test.ts',
       'packages/renderer/src/sky/prepared-sky-runtime.test.ts',
-      'packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts',
+      'packages/telescope-cli/src/archives/interferometry/alma/alma-disc-selfcal.mts',
       'packages/telescope-cli/src/new-object/new-object.test.mts',
       'packages/bake/authoring/betelgeuse-shell/author.mts',
       'packages/telescope-cli/authoring/circumstellar/author.mts',

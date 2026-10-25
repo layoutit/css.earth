@@ -63,7 +63,7 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   { name: 'catalogue.json', reader: 'page', read: 'site/server/dot-catalogue-data.mts' },
   { name: 'display-sample.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-catalog.mts' },
   { name: 'image-layers.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },
-  { name: 'volume.json', reader: 'page', read: 'packages/renderer/src/volume/prepared-volume-readers.ts' },
+  { name: 'volume.json', reader: 'page', read: 'packages/renderer/src/volume/prepared-volume-readers.ts; its resources include slabs and optional fixed top pictures and cylindrical side atlases' },
   { name: 'volume-slices.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },
   { name: 'cmb.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },
   { name: 'stars.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },
