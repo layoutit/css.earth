@@ -1,0 +1,185 @@
+{
+  "status": "Unaccepted l11 catalogue-structure prototype",
+  "rungs": [
+    {
+      "rung": "tiny",
+      "size": 64,
+      "stepKpc": 0.12,
+      "seconds": 1.6222370420000003,
+      "grade": {
+        "coefficients": [
+          [
+            0.07240252696888938,
+            0.052388825689014984,
+            0
+          ],
+          [
+            2.026530687548434,
+            2.759728769372276,
+            4.548372478646425
+          ],
+          [
+            1.111224386136389,
+            1.1759268913874241,
+            1.5423387135821205
+          ],
+          [
+            1.6936268659241895,
+            1.0353691175205058,
+            0.929473679607316
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 8,
+        "saturation": 1.25,
+        "score": 0.10121150072758452
+      },
+      "residuals": {
+        "trainRelativeRms": 0.11571139179153028,
+        "heldoutRelativeRms": 0.09974861787573805,
+        "totalLightDifferencePercent": -0.43220612553005466,
+        "annularDifferencePercent": [
+          0.08099336384901346,
+          -0.24590330889804335,
+          -0.18692590227088468,
+          -30.052546138238935
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.15766192328746653,
+            -0.08058674535562638,
+            0.2382486686430818
+          ],
+          [
+            -0.056847514759578166,
+            0.1791598796947902,
+            -0.12231236493520092
+          ],
+          [
+            -0.7227375459793628,
+            -3.1894601504455498,
+            3.9121976964249128
+          ]
+        ]
+      },
+      "diagnostics": {
+        "catalogueObjectParameters": 6507,
+        "activeObjects": 3823,
+        "geometryParametersFitted": 0,
+        "pixelParameters": 0,
+        "componentRgbGrades": 4,
+        "regularization": "3% diagonal ridge towards catalogue light priors, nonnegative amplitudes bounded at 25 times prior",
+        "initialAppearanceRms": 0.4635747209114251,
+        "appearanceRms": 0.10121150072758452,
+        "calibrationPixels": "All valid pixels in each catalogue-object footprint. Both checkerboards are calibration residuals.",
+        "scope": "Only catalogue-object luminosities, component RGB grades and one tone curve. No geometry or pixel-color transfer."
+      },
+      "projection": {
+        "emissionEvents": 100079,
+        "objects": 7871,
+        "owners": 6507,
+        "dustScreenPixels": 85,
+        "stepKpc": 0.12,
+        "method": "Finite 3D object chord integrals, positive depth quadrature, pixel-area normalization, canonical smooth disc/bar/warp integration and foreground attenuation by finite molecular clouds. No photograph in the renderer."
+      },
+      "meaning": "Both checkerboards are appearance-calibration residuals. They are not held-out validation or a test of unknown individual depths."
+    },
+    {
+      "rung": "small",
+      "size": 512,
+      "stepKpc": 0.06,
+      "seconds": 102.24526350000001,
+      "grade": {
+        "coefficients": [
+          [
+            0.2398211149262372,
+            0.27178394295827285,
+            0.8965435100604449
+          ],
+          [
+            1.7388474788937625,
+            2.1885953244487335,
+            2.624711821584394
+          ],
+          [
+            0.09416920312053137,
+            0.10964112824769087,
+            0.28302335097407805
+          ],
+          [
+            2.9629657705038617,
+            1.0341691177895698,
+            0.7074416767526617
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 20,
+        "saturation": 0.5,
+        "score": 0.24653720831375686
+      },
+      "residuals": {
+        "trainRelativeRms": 0.31079018287925964,
+        "heldoutRelativeRms": 0.39254565289161575,
+        "totalLightDifferencePercent": -3.2409159481725958,
+        "annularDifferencePercent": [
+          -2.563398247240356,
+          4.236727538736407,
+          -12.435325825498932,
+          -6.713843023073984
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -1.3379158737574337,
+            0.9436091541352554,
+            0.394306719622195
+          ],
+          [
+            0.2800156981249302,
+            0.4225653844752486,
+            -0.7025810826001955
+          ],
+          [
+            1.280086598214386,
+            -3.9794112903714707,
+            2.6993246921570844
+          ]
+        ]
+      },
+      "diagnostics": {
+        "catalogueObjectParameters": 6507,
+        "activeObjects": 4649,
+        "geometryParametersFitted": 0,
+        "pixelParameters": 0,
+        "componentRgbGrades": 4,
+        "regularization": "3% diagonal ridge towards catalogue light priors, nonnegative amplitudes bounded at 25 times prior",
+        "initialAppearanceRms": 0.39660590609820456,
+        "appearanceRms": 0.24653720831375686,
+        "calibrationPixels": "All valid pixels in each catalogue-object footprint. Both checkerboards are calibration residuals.",
+        "scope": "Only catalogue-object luminosities, component RGB grades and one tone curve. No geometry or pixel-color transfer."
+      },
+      "projection": {
+        "emissionEvents": 930720,
+        "objects": 7871,
+        "owners": 6507,
+        "dustScreenPixels": 5659,
+        "stepKpc": 0.06,
+        "method": "Finite 3D object chord integrals, positive depth quadrature, pixel-area normalization, canonical smooth disc/bar/warp integration and foreground attenuation by finite molecular clouds. No photograph in the renderer."
+      },
+      "meaning": "Both checkerboards are appearance-calibration residuals. They are not held-out validation or a test of unknown individual depths."
+    }
+  ],
+  "sheet": "src/objects/lmc-volume/.local/versions/l11/sheet.png",
+  "fullFit": false,
+  "slabs": false,
+  "depthCaveat": "Unmeasured centre heights use deterministic adopted population dispersions; ellipsoid depth is the geometric mean transverse radius. Individual 3D distances are not claimed."
+}

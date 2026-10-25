@@ -1,0 +1,57 @@
+{
+  "generator": "packages/bake/authoring/lmc-volume/catalogue-scene.mts",
+  "workingGeometry": "src/objects/lmc-volume/.local/versions/l11/structure.json",
+  "catalogueCounts": {
+    "cluster": 3156,
+    "association": 2942,
+    "nebula": 390,
+    "supershell": 20,
+    "molecular": 424
+  },
+  "measuredAges": 1192,
+  "unknownAges": 4906,
+  "rejectedKimShells": [
+    9,
+    10,
+    18
+  ],
+  "molecularMassMsun": 67154176.00000003,
+  "selection": "LMC catalogue bounds: RA 65..100, declination -75.5..-62 degrees. MAGMA replaces covered NANTEN parents without adding the same mass twice.",
+  "emissionPrimitives": 7871,
+  "ownerCount": 6507,
+  "haShapes": 228,
+  "tarantula": [
+    "BicaNeb-1252"
+  ],
+  "geometrySource": "Catalogue positions and sizes, DeMCELS shell/knot/filament parameters, smooth published disc/bar/warp. No Horálek pixels enter density or color structure.",
+  "heightsSigmaKpc": {
+    "old": 0.41010570629613075,
+    "young": 0.15,
+    "gas": 0.15,
+    "dust": 0.25,
+    "bar": 0.36656497062880344
+  },
+  "agePriors": {
+    "spectrum": "BC03 Z=0.008; nearest tabulated age, fixed before grading",
+    "unknownAssociationOrNebularClusterYr": 30000000,
+    "unknownOrdinaryClusterYr": 200000000,
+    "unknownIntermediateOrGlobularYr": 3000000000,
+    "R136AdoptedYr": 1500000,
+    "meaning": "Color priors only. Missing catalogue ages remain null and are never presented as measurements."
+  },
+  "depthStatus": "Unmeasured centre heights use deterministic adopted population dispersions; ellipsoid depth is the geometric mean transverse radius. Individual 3D distances are not claimed.",
+  "dustMixture": "Molecular mass from NANTEN, refined by MAGMA islands; smooth atomic-disc mass 3.8e8 Msun at 50 kpc from Staveley-Smith 2003. One Bell column normalization follows.",
+  "dustNormalization": {
+    "samples": 3171,
+    "observedMeanFaceOnTauV": 0.07598088622018014,
+    "modelMeanFaceOnTauV": 0.07598088622018014,
+    "area": 6.481745984339497,
+    "molecularFraction": 0.15229509499102373,
+    "spatialBellMapUsed": false
+  },
+  "mcelsCheck": {
+    "rows": 401,
+    "identityMatches": 356,
+    "centresWithinCatalogueFootprint": 331
+  }
+}

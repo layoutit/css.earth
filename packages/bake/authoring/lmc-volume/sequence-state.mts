@@ -1,0 +1,27 @@
+/** Frozen parents for one-change model versions. */
+import {readFile,writeFile,copyFile,mkdir} from 'node:fs/promises';
+import {LOCAL,ROOT,json,rec,num,array,numbers,need,type Raster} from './inputs.mts';
+import {loadFrozenL12} from './frozen-l12.mts';
+import {readBarGeometry,type BarGeometry} from './bar-geometry.mts';
+import type {CatalogueScene} from './catalogue-scene.mts';
+import type {V3} from './geometry.mts';
+import {loadSavedOldPopulation} from './gaia-old-model.mts';
+import {readVolumeObject} from './frozen-l12.mts';
+export const versionDir=(v:number)=>LOCAL+`versions/l${v}/`;
+export interface Configuration {version:number;parent:number;densityVersion:number;barGeometry:BarGeometry|null;colors:V3[];innerDiscColor?:V3;dustVersion?:number;dustStrength?:number;oldPopulationVersion?:number;change:string;details:Record<string,unknown>;}
+export const triple=(v:unknown):V3=>{const a=numbers(v,3);return[a[0],a[1],a[2]];};
+export async function loadParent(parent:number){
+ const scene=await loadFrozenL12(),directory=versionDir(parent),field=rec(await json(ROOT+`src/objects/lmc-volume/source/preparation/l${parent}/field.json`));let cfg:Configuration;
+ if(parent===14)cfg={version:14,parent:13,densityVersion:14,barGeometry:null,colors:scene.colors.map(v=>[...v]),change:'l14 accepted baseline',details:{}};
+ else{const c=rec(await json(directory+'configuration.json'));cfg={version:num(c.version),parent:num(c.parent),densityVersion:num(c.densityVersion),barGeometry:c.barGeometry===null?null:readBarGeometry(c.barGeometry),colors:array(c.colors).map(triple),...(c.innerDiscColor===undefined?{}:{innerDiscColor:triple(c.innerDiscColor)}),...(c.dustVersion===undefined?{}:{dustVersion:num(c.dustVersion),dustStrength:num(c.dustStrength)}),...(c.oldPopulationVersion===undefined?{}:{oldPopulationVersion:num(c.oldPopulationVersion)}),change:String(c.change),details:rec(c.details)};}
+ const metadata=rec(await json(versionDir(cfg.densityVersion)+'young-density.json')),n=num(metadata.n),half=num(metadata.halfKpc),raw=await readFile(versionDir(cfg.densityVersion)+'young-density.f32le');need(raw.length===n*n*4,'Invalid parent population map');const map:Raster={n,half,values:new Float32Array(Uint8Array.from(raw).buffer),mask:new Uint8Array(n*n).fill(1)};
+ const owner=scene.owners.find(o=>o.kind==='population');need(owner,'Parent population owner missing');owner.id='Gaia-diffuse-young';owner.aliases=['Gaia DR3 Young 1 + Young 2'];scene.youngOwner=owner.id;scene.youngDensity=map;scene.separateOutskirts=true;scene.outskirtsTransitionKpc=[3,5];scene.barGeometry=cfg.barGeometry??undefined;scene.innerDiscColor=cfg.innerDiscColor;scene.colors=cfg.colors.map(v=>[...v]);scene.metadata=field;
+ if(cfg.dustVersion!==undefined){const d=rec(await json(versionDir(cfg.dustVersion)+'dust-column.json')),n=num(d.n),half=num(d.halfKpc),bytes=await readFile(versionDir(cfg.dustVersion)+'dust-column.f32le'),strength=cfg.dustStrength;need(Number.isSafeInteger(n)&&n>1&&bytes.length===n*n*4&&strength!==undefined&&strength>=.25&&strength<=2,'Invalid saved dust layer');const values=new Float32Array(Uint8Array.from(bytes).buffer);need(values.every(v=>Number.isFinite(v)&&v>=0),'Invalid dust columns');scene.dustLayer={column:{n,half,values,mask:new Uint8Array(n*n).fill(1)},strength,retainMolecular:d.retainMolecular===true};}
+ if(cfg.dustVersion!==undefined){const d=rec(await json(versionDir(cfg.dustVersion)+'dust-column.json'));if(d.finiteClouds===true){need(scene.dustLayer,'Finite clouds lack their diffuse layer');scene.dustLayer.clouds=array(await json(versionDir(cfg.dustVersion)+'dust-clouds.json')).map(readVolumeObject);}}
+ if(cfg.oldPopulationVersion!==undefined)scene.oldPopulation=await loadSavedOldPopulation(versionDir(cfg.oldPopulationVersion),.1,.05);
+ return{scene,cfg};
+}
+export async function parentRung(parent:number,tiny:boolean,scene:CatalogueScene){const directory=versionDir(parent)+(tiny?'tiny/':''),result=rec(await json(directory+'result.json')),controls=parent===14?rec(result.diagnostics):rec(result.sceneControls);scene.youngTint=triple(parent===14?controls.youngRgbFactors:controls.youngTint);scene.outskirtsGain=num(parent===14?rec(controls.outskirts).gain:controls.outskirtsGain);scene.innerDiscGain=num(controls.innerDiscGain);scene.barGain=num(controls.barGain);if(scene.oldPopulation&&controls.oldResolvedFraction!==undefined){scene.oldPopulation.oldFraction=num(controls.oldResolvedFraction);scene.oldPopulation.youngFraction=num(controls.youngResolvedFraction);}
+ const rows=array(await json(directory+'object-brightness.json'));need(rows.length===scene.owners.length,'Parent catalogue count changed');const amplitudes=Float64Array.from(rows.map((v,i)=>{const r=rec(v);need(r.id===scene.owners[i].id,'Parent catalogue ordering changed');return num(r.amplitude);}));return{result,amplitudes};}
+export function sceneControls(scene:CatalogueScene){return{youngTint:scene.youngTint,outskirtsGain:scene.outskirtsGain,innerDiscGain:scene.innerDiscGain,barGain:scene.barGain,...(scene.oldPopulation?{oldResolvedFraction:scene.oldPopulation.oldFraction,youngResolvedFraction:scene.oldPopulation.youngFraction}:{})};}
+export async function saveConfiguration(cfg:Configuration,sourceDensityVersion:number){const dir=versionDir(cfg.version);await mkdir(dir,{recursive:true});for(const name of ['young-density.f32le','young-density.json','object-shapes.json'])await copyFile(versionDir(sourceDensityVersion)+name,dir+name);await writeFile(dir+'configuration.json',JSON.stringify(cfg,null,2)+'\n');}

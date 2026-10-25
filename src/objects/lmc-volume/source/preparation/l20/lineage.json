@@ -1,0 +1,503 @@
+{
+  "inputProducts": [
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-clusters/Bica2008-table3.dat",
+      "product": "CDS J/MNRAS/389/678",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/table3.dat",
+      "bytes": 291667,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-clusters/Bica2008-table4.dat",
+      "product": "CDS J/MNRAS/389/678",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/table4.dat",
+      "bytes": 261422,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-clusters/Bica2008-table5.dat",
+      "product": "CDS J/MNRAS/389/678",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/table5.dat",
+      "bytes": 120029,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l11/inputs/Bica2008-table6.dat",
+      "product": "CDS J/MNRAS/389/678",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/table6.dat",
+      "bytes": 59281,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-clusters/Glatt2010-lmc.dat",
+      "product": "CDS J/A+A/517/A50",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/517/A50/lmc.dat",
+      "bytes": 94804,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-clusters/Popescu2012-table1.dat",
+      "product": "CDS J/ApJ/751/122; alternate photometry check",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/751/122/table1.dat",
+      "bytes": 36000,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-clusters/Popescu2012-table2.dat",
+      "product": "CDS J/ApJ/751/122; alternate photometry check",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/751/122/table2.dat",
+      "bytes": 72048,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l11/inputs/DEM1976-j2000.tsv",
+      "product": "CDS VII/232/lmc, computed J2000 columns",
+      "url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=VII/232/lmc&-out=DEM,m_DEM,Name,_RAJ2000,_DEJ2000,Maj,Min,Int,Comm&-out.max=unlimited",
+      "bytes": 28703,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l11/inputs/NANTEN2008-table1.dat",
+      "product": "CDS J/ApJS/178/56",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/178/56/table1.dat",
+      "bytes": 16330,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l11/inputs/NANTEN2008-table3.dat",
+      "product": "CDS J/ApJS/178/56",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/178/56/table3.dat",
+      "bytes": 12977,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l11/inputs/MAGMA2011-table4.dat",
+      "product": "CDS J/ApJS/197/16, islands catalogue",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/16/table4.dat",
+      "bytes": 58764,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l11/inputs/Pellegrini2012-lmc.dat",
+      "product": "CDS J/ApJ/755/40, erratum-corrected MCELS",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/755/40/table5.dat",
+      "bytes": 25287,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-stars/source/full-grid.csv",
+      "product": "SMASH DR2 blue counts or independent occupancy; exact SQL in the adjacent request.json",
+      "url": "https://datalab.noirlab.edu/query/query",
+      "bytes": 9306261,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader.",
+      "role": "Independent morphology check only; no l13 emission or attenuation comes from this input."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/detail-stars/source/full-occupancy.csv",
+      "product": "SMASH DR2 blue counts or independent occupancy; exact SQL in the adjacent request.json",
+      "url": "https://datalab.noirlab.edu/query/query",
+      "bytes": 541161,
+      "acquisitionRoute": "Public CDS table download or VizieR TSV coordinate conversion. Preserved as published; schema validated by the LMC loader.",
+      "role": "Independent morphology check only; no l13 emission or attenuation comes from this input."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l13/inputs/calibration.rows.json",
+      "product": "Gaia DR3 gaiadr3.gaia_source",
+      "url": "https://gaia.ari.uni-heidelberg.de/tap",
+      "query": "SELECT TOP 200001 source_id,ra,dec,phot_g_mean_mag,phot_bp_mean_mag,phot_rp_mean_mag,parallax,parallax_error,pmra,pmdec,pmra_error,pmdec_error,parallax_pmra_corr,parallax_pmdec_corr FROM gaiadr3.gaia_source WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',81.28,-69.78,5)) AND parallax IS NOT NULL AND parallax_error>0 AND parallax/parallax_error<5 AND pmra IS NOT NULL AND pmdec IS NOT NULL AND phot_g_mean_mag<19 AND random_index<20000000",
+      "rows": 48026,
+      "bytes": 20253172,
+      "complete": true,
+      "acquisitionRoute": "Telescope core PyVO TAP client; archive QUERY_STATUS must be complete",
+      "role": "Learn the global LMC proper-motion membership ellipse."
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/versions/l13/inputs/young.rows.json",
+      "product": "Gaia DR3 gaiadr3.gaia_source",
+      "url": "https://gaia.ari.uni-heidelberg.de/tap",
+      "query": "SELECT TOP 800001 source_id,ra,dec,phot_g_mean_mag,phot_bp_mean_mag,phot_rp_mean_mag,parallax,parallax_error,pmra,pmdec,pmra_error,pmdec_error,parallax_pmra_corr,parallax_pmdec_corr FROM gaiadr3.gaia_source WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',81.28,-69.78,20)) AND parallax IS NOT NULL AND parallax_error>0 AND parallax/parallax_error<5 AND pmra IS NOT NULL AND pmdec IS NOT NULL AND phot_g_mean_mag>=10 AND phot_g_mean_mag<18 AND phot_bp_mean_mag-phot_rp_mean_mag>=-1 AND phot_bp_mean_mag-phot_rp_mean_mag<=0.08*phot_g_mean_mag-1.10",
+      "rows": 273039,
+      "bytes": 115747841,
+      "complete": true,
+      "acquisitionRoute": "Telescope core PyVO TAP client; archive QUERY_STATUS must be complete",
+      "role": "Selected Young 1 and Young 2 source counts supply the diffuse population density."
+    }
+  ],
+  "hybridSources": {
+    "objectShapes": "src/objects/lmc-volume/.local/versions/l12/object-shapes.json",
+    "populationMap": "src/objects/lmc-volume/.local/versions/l14/young-density.json",
+    "photoObservation": {
+      "sourcePath": "src/objects/lmc-volume/source/compact/lenses/horalek-widefield/registered.png",
+      "maskPath": "src/objects/lmc-volume/source/compact/lenses/horalek-widefield/coverage.png",
+      "registration": {
+        "distanceKpc": 49.59067275049043,
+        "recordedDistanceKpc": 49.590672750490434,
+        "tangentBoundsKpc": {
+          "min": [
+            -4.351779483333175,
+            -3.6886303332796695
+          ],
+          "max": [
+            5.121066913779062,
+            3.3480334410529595
+          ]
+        },
+        "referenceFrame": "sun-icrf",
+        "epochJdTt": 2461286.5,
+        "originM": [
+          105965308676973530000,
+          533209933280955330000,
+          -1.4303831216834226e+21
+        ],
+        "localToReferenceXyzw": [
+          0.09631989992847079,
+          0.9788280334299664,
+          0.17973685917567428,
+          0.01768669847817273
+        ],
+        "metersPerUnit": 30856775814913670000,
+        "frameBoundsIgnored": true,
+        "pixelConvention": "rayAt accepts fractional output-grid coordinates; call (col+0.5,row+0.5) at pixel centers",
+        "rayConstruction": "Normalize(originM/metersPerKpc + localToReference*[tx,ty,0]); x increases min-to-max, y decreases max-to-min, with no guessed sky flip"
+      },
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/"
+    }
+  },
+  "haAcquisition": {
+    "product": "DeMCELS DR1 continuum-subtracted H-alpha",
+    "route": "https://datalab.noirlab.edu/sia/demcels_dr1",
+    "workingRoot": "src/objects/lmc-volume/.local/versions/l11/inputs/ha/",
+    "sourceUrls": "SIA XML beside each FITS cutout; reused cutouts are recorded in versions/inputs/gas/index.json",
+    "generator": "packages/bake/authoring/lmc-volume/catalogue-ha.mts",
+    "qualifiedGeometry": "src/objects/lmc-volume/.local/versions/l11/ha-geometry.json"
+  },
+  "references": [
+    {
+      "id": "Pietrzynski2019",
+      "url": "https://arxiv.org/abs/1903.08096",
+      "role": "Absolute distance"
+    },
+    {
+      "id": "Kacharov2024",
+      "url": "https://arxiv.org/html/2410.05374",
+      "role": "Adopted Gaussian disc and triaxial bar density shapes; equilibrium is not retained"
+    },
+    {
+      "id": "Rathore2025",
+      "url": "https://arxiv.org/html/2410.18182",
+      "role": "Bar PA, scalar offset, and figure-derived direction; no claimed exact center-vector catalogue"
+    },
+    {
+      "id": "Choi2018",
+      "url": "https://arxiv.org/html/1804.07765",
+      "role": "Disc plane and independent warp check"
+    },
+    {
+      "id": "Oden2026",
+      "url": "https://doi.org/10.5281/zenodo.18330355",
+      "role": "Mean-distance surface, through the previously qualified TAN cache"
+    },
+    {
+      "id": "Nidever2019",
+      "url": "https://arxiv.org/abs/1805.02671",
+      "role": "Outer counts; 0.4% mass fraction converted to a light fraction under equal M/L assumption"
+    },
+    {
+      "id": "SMASH",
+      "url": "https://datalab.noirlab.edu/data/smash",
+      "role": "Independent morphology check only in l13; never supplies density, normalization or missing support."
+    },
+    {
+      "id": "BC03",
+      "url": "https://doi.org/10.1046/j.1365-8711.2003.06897.x",
+      "role": "Fixed Z=0.008 Chabrier spectral color proxy, not the VMC synthesis library"
+    },
+    {
+      "id": "Bell2022",
+      "url": "https://arxiv.org/html/2205.04406",
+      "role": "Global mean internal optical-depth budget. No Bell map supplies spatial appearance."
+    },
+    {
+      "id": "Bica2008",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/",
+      "role": "Cluster, association, nebula and HI-shell identities, sky positions, apparent diameters and position angles."
+    },
+    {
+      "id": "DEM1976",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/VII/232/",
+      "role": "HII-region census; CDS-computed J2000 coordinates. Henize aliases retained."
+    },
+    {
+      "id": "Glatt2010",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/517/A50/",
+      "role": "Qualified cluster ages and integrated photometry. Missing ages remain flagged."
+    },
+    {
+      "id": "DeMCELS_DR1",
+      "url": "https://datalab.noirlab.edu/data/demcels",
+      "role": "H-alpha-derived shell, knot and ridge geometry only. No raster appearance in the model."
+    },
+    {
+      "id": "Pellegrini2012",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/755/40/",
+      "role": "Independent MCELS identity and position check using the erratum-corrected CDS table."
+    },
+    {
+      "id": "Kim1999",
+      "url": "https://doi.org/10.1086/301116",
+      "role": "HI supershell candidate geometry via Bica table 6."
+    },
+    {
+      "id": "Book2008",
+      "url": "https://arxiv.org/abs/0710.5253",
+      "role": "Physical-shell checks. Reject Kim SGS9,10,18; couple SGS12 and13."
+    },
+    {
+      "id": "Fukui2008",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/178/56/",
+      "role": "NANTEN whole-LMC molecular cloud positions, sizes and mass."
+    },
+    {
+      "id": "Wong2011",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/197/16/",
+      "role": "MAGMA targeted CO islands refine NANTEN parents, with parent mass conserved."
+    },
+    {
+      "id": "Wong2013_erratum",
+      "url": "https://doi.org/10.1088/0067-0049/208/1/13",
+      "role": "Velocity-width correction, no change to spatial geometry used here."
+    },
+    {
+      "id": "ChuKennicutt1994",
+      "url": "https://doi.org/10.1086/174017",
+      "role": "30 Dor hierarchical shells; central shell diameter about 30 pc."
+    },
+    {
+      "id": "30Dor2023",
+      "url": "https://academic.oup.com/mnras/article/520/4/5600/7043465",
+      "role": "Observed 40–60 pc hemispherical bowl; adopt 50 pc. Bowl orientation and individual filament depths are assumptions."
+    },
+    {
+      "id": "StaveleySmith2003",
+      "url": "https://academic.oup.com/mnras/article/339/1/87/1048788",
+      "role": "3.8e8 Msun HI disc mass at 50 kpc sets atomic/molecular dust-mixture prior."
+    },
+    {
+      "id": "GaiaLuri2021",
+      "url": "https://arxiv.org/html/2012.01771",
+      "role": "Young 1 + Young 2 CMD polygons and conditional orthographic proper-motion membership method."
+    },
+    {
+      "id": "GaiaDR3",
+      "url": "https://www.cosmos.esa.int/web/gaia/dr3",
+      "role": "DR3 source astrometry and photometry; EDR3 astrometry retained, G corrections already included."
+    }
+  ],
+  "discovery": "src/objects/lmc-volume/.local/versions/l11/discovery.md",
+  "parentModel": "src/objects/lmc-volume/source/preparation/l18/",
+  "gaia": {
+    "product": "Gaia DR3 gaiadr3.gaia_source",
+    "selectionPaper": "https://arxiv.org/html/2012.01771",
+    "selection": "src/objects/lmc-volume/.local/versions/l13/selection.md",
+    "queryRecords": [
+      "src/objects/lmc-volume/.local/versions/l13/inputs/calibration.request.json",
+      "src/objects/lmc-volume/.local/versions/l13/inputs/young.request.json"
+    ],
+    "generator": "packages/bake/authoring/lmc-volume/gaia-young.mts"
+  },
+  "populationMap": "src/objects/lmc-volume/.local/versions/l17/young-density.json",
+  "modellingChoices": {
+    "smoothingSigmaKpc": 0.1,
+    "youngSigmaKpc": 0.15,
+    "youngRgbFactorBounds": [
+      0.25,
+      4
+    ],
+    "discBarGainBounds": [
+      0.5,
+      1.5
+    ],
+    "outskirtsGainBounds": [
+      0.5,
+      4
+    ],
+    "outskirtsTransitionKpc": [
+      3,
+      5
+    ],
+    "bluePopulationGainBounds": [
+      0.5,
+      2
+    ]
+  },
+  "geometryPreservation": "src/objects/lmc-volume/.local/versions/l17/parent-replay.json",
+  "stageChange": "Replace analytic old light with Gaia RGB/RC member density. Add finite old and young Gaia points with a conserved luminosity budget. HERITAGE/Bell layer replaces molecular oval screens.",
+  "stageEvidence": {
+    "population": {
+      "n": 512,
+      "halfKpc": 10,
+      "oldSelection": {
+        "paper": "https://arxiv.org/html/2012.01771",
+        "densityStars": 382116,
+        "resolvedOldStars": 886581,
+        "densitySampling": "Uniform random_index <100,000,000, approximately 5.52% of Gaia DR3; the spatial sample is complete to its declared random-index threshold.",
+        "pointSampling": "All selected old members with G<18 within 20 degrees; no random-index cut.",
+        "membership": {
+          "mean": [
+            1.8400610104918205,
+            0.3699688748282707
+          ],
+          "covariance": [
+            0.24295123070207736,
+            0.006888425730313976,
+            0.36144463132814914
+          ],
+          "parallaxMedian": -0.004507325664422163,
+          "calibrationRows": 48026,
+          "retainedCalibration": 46291
+        },
+        "selection": "Published RGB and RC polygons; signed parallax/error <5 and conditional orthographic proper-motion ellipse chi-square <9.21.",
+        "limitations": "CMD phase proxies are not exact ages. Crowding, extinction and the magnitude limit affect completeness. No survey hole is filled from the photo."
+      },
+      "youngStars": 262992,
+      "points": 1091462,
+      "smoothingSigmaKpc": 0.1,
+      "barDiscPartition": "The measured old-star density is split into a radial-median disc and its positive inner excess, tapered from 3 to 4 kpc. Their sum is the measured density. No analytic ellipse defines the light.",
+      "barMass": 0.15514992612424744,
+      "discMass": 0.8448500735892955,
+      "barMeasured": {
+        "skyCenterWestNorthKpc": [
+          0.6340194464934414,
+          -0.8271664265601925
+        ],
+        "paDegrees": 124.29005009838659,
+        "sigmaMajorKpc": 1.2725819880285962,
+        "axisRatio": 0.5046072959427069
+      },
+      "publishedShapeCheck": {
+        "center": [
+          0.22095285048916255,
+          0.7222364825299707,
+          0
+        ],
+        "angle": -0.5354382542875828,
+        "sigma": 1.0500080370470315,
+        "ratio": 0.38,
+        "sigmaZ": 0.36656497062880344,
+        "luminosity": 0.2842040336717868
+      },
+      "vmcCheck": {
+        "regions": 756,
+        "correlation": 0.8322354033611257
+      },
+      "adoptedHeightsKpc": {
+        "oldDisc": 0.41010570629613075,
+        "bar": 0.36656497062880344,
+        "young": 0.15
+      },
+      "heightResidualMaxKpc": 0.5759992127567132,
+      "maximumPointTauV": 0.5497328198212803,
+      "color": "Gaia Vega magnitudes converted to AB using ESA DR3 zero-point differences, then RP/G/BP mean flux-density ratios serve as broad R/G/B proxies. One grade per population accounts for the photo passbands. No individual stellar colors are fitted.",
+      "depth": "Deterministic height draws from the adopted layer, preserving each measured sky direction. Individual distances remain conditional.",
+      "grain": "Each population budget is divided between unresolved light and real Gaia points. The same intrinsic G budget is conserved at every resolved fraction.",
+      "dust": "Molecular optical-depth budget is redistributed into the HERITAGE-modulated layer and globally normalized to Bell. Finite oval screens are omitted.",
+      "dustNormalization": {
+        "samples": 3171,
+        "factor": 1.164954108601027,
+        "bellMeanFaceOnTauV": 0.07598088622018014,
+        "beforeMeanFaceOnTauV": 0.06522221404191127,
+        "afterMeanFaceOnTauV": 0.07598088622018014
+      },
+      "densityWeighting": "Measured Gaia G flux. All bright members with G<18 are used; faint RGB/RC random-sample fluxes are expanded by 18.11709771 to their declared sampling probability. Gaussian sigma remains 100 pc. The count-only trial is preserved in round1.",
+      "tracers": 1219654,
+      "placement": {
+        "bracketed": 20709,
+        "multipleIntersections": 6,
+        "maximumResidualKpc": 9.999423148873698e-7,
+        "finiteLayerAnchors": 1409,
+        "maximumFiniteLayerOffsetKpc": 0.5759992127567132
+      }
+    },
+    "acceptance": {
+      "barRatioTolerance": 0.02,
+      "wholeImageMaximumRelativeRmsRegression": 0.01,
+      "contrast": "The fixed masked 2–5 arcmin bar contrast must be closer to the photo than l18.",
+      "geometry": "Measured count field, fixed plane and warp; adopted old-disc 410 pc, bar 367 pc, young 150 pc Gaussian sigma.",
+      "controls": "Six global old/bar RGB coefficients and two global resolved fractions. Other population grades, catalogue amplitudes and the display curve remain at l18."
+    }
+  },
+  "change": "Blue structure only: Gaia smoothing from 200 to 100 pc, with global Gaia and young Bica-association gains.",
+  "details": {
+    "gaiaPaper": "https://arxiv.org/html/2012.01771",
+    "bicaPaper": "https://doi.org/10.1111/j.1365-2966.2008.13612.x",
+    "smoothingSigmaKpc": 0.1,
+    "layerSigmaKpc": 0.15,
+    "associationSelection": "Bica associations in young component, measured age below 400 Myr or the existing adopted 30 Myr spectrum when age is unknown.",
+    "associations": 2895,
+    "associationsWithoutMeasuredAge": 2600,
+    "gainBounds": [
+      0.5,
+      2
+    ],
+    "photoStructureUsed": false,
+    "gaiaMetadata": {
+      "pilot": false,
+      "candidateRows": 273039,
+      "selectedStars": 262992,
+      "young1": 24144,
+      "young2": 238848,
+      "membership": {
+        "mean": [
+          1.8400610104918205,
+          0.3699688748282707
+        ],
+        "covariance": [
+          0.24295123070207736,
+          0.006888425730313976,
+          0.36144463132814914
+        ],
+        "parallaxMedian": -0.004507325664422163,
+        "calibrationRows": 48026,
+        "retainedCalibration": 46291
+      },
+      "selection": "Luri 2021 Young 1 + Young 2 CMD polygons; signed parallax/error <5; conditional orthographic proper-motion ellipse with chi-square <9.21.",
+      "adaptation": "Membership statistics use a uniform Gaia random_index <20,000,000 calibration subset within 5 degrees, G<19. DR3 photometry is used as published; no extra G correction.",
+      "paper": "https://arxiv.org/html/2012.01771",
+      "source": "Gaia DR3 Young 1 + Young 2 proper-motion members",
+      "warpPlacement": {
+        "bracketed": 81,
+        "multipleIntersections": 0,
+        "maximumResidualKpc": 4.90331737434957e-7,
+        "finiteLayerAnchors": 23,
+        "maximumFiniteLayerOffsetKpc": 0.3666988679671035,
+        "method": "Exact bilinear-cell intersections when fixed-point iteration fails. For multiple crossings, adopt the one nearest the flat midplane. At discontinuous support edges with no crossing, maximize the adopted 150 pc Gaussian height prior and report that finite-layer offset separately. The warp itself is unchanged."
+      },
+      "n": 512,
+      "halfKpc": 10,
+      "smoothingSigmaKpc": 0.1,
+      "layerSigmaKpc": 0.15,
+      "photoUsed": false,
+      "smashUsed": false,
+      "analyticContinuation": false,
+      "normalization": "Unit-integrated equal-weight member counts. One global population luminosity and the existing component grade calibrate appearance.",
+      "coverage": "Complete archive query to 20 degrees. Zero selected counts remain zero before Gaussian smoothing. No survey-gap interpolation or analytic young-disc continuation.",
+      "limitations": "All-sky coverage is not uniform completeness: crowding, extinction and astrometric/photometric selection can still suppress young members. These CMD groups are age proxies, not measured individual ages."
+    }
+  },
+  "barPopulationInputs": [
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/stars/regions.json",
+      "product": "VMC Mazzi 2021, CDS J/MNRAS/508/245"
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/archive/dataset-model/world-field/metallicity/bc03-native-Z-optical.json",
+      "product": "Qualified BC03 native-metallicity Johnson BVR integration"
+    }
+  ],
+  "gaiaInput": {
+    "path": "src/objects/lmc-volume/.local/versions/l20/inputs/",
+    "product": "Gaia DR3 old RGB/RC and Young 1/2 members",
+    "paper": "https://arxiv.org/html/2012.01771"
+  },
+  "dustInput": "Gordon 2014 HERITAGE BEMBB density, Bell normalized; preserved l19 input"
+}

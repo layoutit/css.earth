@@ -1,0 +1,236 @@
+{
+  "generator": "packages/bake/authoring/lmc-volume/crowding-run.mts",
+  "configuration": {
+    "version": 21,
+    "parent": 20,
+    "densityVersion": 21,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 20,
+    "dustStrength": 1.025,
+    "oldPopulationVersion": 21,
+    "change": "Correct the l20 old stellar field using published Gaia completeness and calibrate one global resolved-grain scale to the bar photo.",
+    "details": {
+      "population": {
+        "n": 512,
+        "halfKpc": 10,
+        "oldSelection": {
+          "paper": "https://arxiv.org/html/2012.01771",
+          "densityStars": 382116,
+          "resolvedOldStars": 886581,
+          "densitySampling": "Uniform random_index <100,000,000, approximately 5.52% of Gaia DR3; the spatial sample is complete to its declared random-index threshold.",
+          "pointSampling": "All selected old members with G<18 within 20 degrees; no random-index cut.",
+          "membership": {
+            "mean": [
+              1.8400610104918205,
+              0.3699688748282707
+            ],
+            "covariance": [
+              0.24295123070207736,
+              0.006888425730313976,
+              0.36144463132814914
+            ],
+            "parallaxMedian": -0.004507325664422163,
+            "calibrationRows": 48026,
+            "retainedCalibration": 46291
+          },
+          "selection": "Published RGB and RC polygons; signed parallax/error <5 and conditional orthographic proper-motion ellipse chi-square <9.21.",
+          "limitations": "CMD phase proxies are not exact ages. Crowding, extinction and the magnitude limit affect completeness. No survey hole is filled from the photo."
+        },
+        "youngStars": 262992,
+        "points": 1091462,
+        "smoothingSigmaKpc": 0.1,
+        "barDiscPartition": "The measured old-star density is split into a radial-median disc and its positive inner excess, tapered from 3 to 4 kpc. Their sum is the measured density. No analytic ellipse defines the light.",
+        "barMass": 0.2352352267597487,
+        "discMass": 0.7647647733602743,
+        "barMeasured": {
+          "skyCenterWestNorthKpc": [
+            0.5475840304744615,
+            -0.7438714342226453
+          ],
+          "paDegrees": 122.14046381707368,
+          "sigmaMajorKpc": 1.1309038335427744,
+          "axisRatio": 0.4994142155610464
+        },
+        "publishedShapeCheck": {
+          "center": [
+            0.22095285048916255,
+            0.7222364825299707,
+            0
+          ],
+          "angle": -0.5354382542875828,
+          "sigma": 1.0500080370470315,
+          "ratio": 0.38,
+          "sigmaZ": 0.36656497062880344,
+          "luminosity": 0.2842040336717868
+        },
+        "vmcCheck": {
+          "regions": 756,
+          "correlation": 0.7282118366849207
+        },
+        "adoptedHeightsKpc": {
+          "oldDisc": 0.41010570629613075,
+          "bar": 0.36656497062880344,
+          "young": 0.15
+        },
+        "heightResidualMaxKpc": 0.5759992127567132,
+        "maximumPointTauV": 0.5497328198212803,
+        "color": "Gaia Vega magnitudes converted to AB using ESA DR3 zero-point differences, then RP/G/BP mean flux-density ratios serve as broad R/G/B proxies. One grade per population accounts for the photo passbands. No individual stellar colors are fitted.",
+        "depth": "Deterministic height draws from the adopted layer, preserving each measured sky direction. Individual distances remain conditional.",
+        "grain": "Each population budget is divided between unresolved light and real Gaia points. The same intrinsic G budget is conserved at every resolved fraction.",
+        "dust": "Molecular optical-depth budget is redistributed into the HERITAGE-modulated layer and globally normalized to Bell. Finite oval screens are omitted.",
+        "dustNormalization": {
+          "samples": 3171,
+          "factor": 1.164954108601027,
+          "bellMeanFaceOnTauV": 0.07598088622018014,
+          "beforeMeanFaceOnTauV": 0.06522221404191127,
+          "afterMeanFaceOnTauV": 0.07598088622018014
+        },
+        "densityWeighting": "Measured Gaia G flux. All bright members with G<18 are used; faint RGB/RC random-sample fluxes are expanded by 18.11709771 to their declared sampling probability. Gaussian sigma remains 100 pc. The count-only trial is preserved in round1.",
+        "tracers": 1219654,
+        "placement": {
+          "bracketed": 20709,
+          "multipleIntersections": 6,
+          "maximumResidualKpc": 9.999423148873698e-7,
+          "finiteLayerAnchors": 1409,
+          "maximumFiniteLayerOffsetKpc": 0.5759992127567132
+        },
+        "version": 21,
+        "parent": 20,
+        "completeness": {
+          "method": "Rathore/Olsen HST-tested crowding recovery for RC; Cantat-Gaudin parent selection for RGB. The union is corrected by individual inverse inclusion probability.",
+          "allTracers": false,
+          "parentFunction": {
+            "product": "GaiaUnlimited allsky_uniq_10.fits",
+            "url": "https://zenodo.org/records/21444145/files/allsky_uniq_10.fits",
+            "bytes": 36345600,
+            "rows": 3028182,
+            "ordering": "NESTED, ICRS, NUNIQ mixed orders, expanded exactly to order 10",
+            "minimum": 16.434900283813477,
+            "maximum": 21.78860092163086,
+            "conflictingOrder10Cells": 24626,
+            "uncoveredOrder10Cells": 464512,
+            "paper": "https://doi.org/10.1051/0004-6361/202244784",
+            "scope": "Parent Gaia catalogue with position and G, not the extra BP/RP or astrometry cuts."
+          },
+          "crowding": {
+            "summaries": [
+              {
+                "population": "Bright RGB",
+                "n": 842885,
+                "mean": 0.03154059590044672,
+                "sigma": 0.1260337813930484,
+                "outerStars": 180001,
+                "outerSigma": 0.03040181344349507,
+                "intrinsicSigma": 0.03040181344349507
+              },
+              {
+                "population": "RC",
+                "n": 1050675,
+                "mean": 0.00003648316751175445,
+                "sigma": 0.1552922624852207,
+                "outerStars": 313818,
+                "outerSigma": 0.04861859876474811,
+                "intrinsicSigma": 0.04
+              },
+              {
+                "population": "Faint RGB",
+                "n": 101638,
+                "mean": 0.0308617459256347,
+                "sigma": 0.35764586321057446,
+                "outerStars": 26740,
+                "outerSigma": 0.11325223799645612,
+                "intrinsicSigma": 0.11325223799645612
+              }
+            ],
+            "n": 512,
+            "halfKpc": 10,
+            "rcCalibrationStars": 1052852,
+            "rcSelection": "Rathore Appendix A: full Gaia DR3, G 18.6–19.3, BP–RP 1.0–1.3, astrometric_excess_noise <0.2, parallax <0.1 and parallax/error <5, raw proper-motion circle radius 1.5 mas/yr, 10-degree footprint.",
+            "method": "Gaussian local C* moments at the finest of 100, 200 or 400 pc reaching 30 effective stars. RC intrinsic sigma 0.04 is published. The other tracer intrinsic scatters are measured in 4–7 kpc outskirts. The same published recovery relation is applied as a tracer-dependent model.",
+            "paper": "https://arxiv.org/html/2410.18182",
+            "calibration": "https://arxiv.org/abs/astro-ph/0304163",
+            "limitations": "The Olsen recovery curve is based on LMC-field-like artificial stars, including HST/WFPC2 images of NGC 1835. RGB application and coarser adaptive C* moments extend Rathore's RC implementation; they are explicit modeling choices. Unknown crowding cells use the parent catalogue selection only."
+          },
+          "regions": [
+            {
+              "region": 0,
+              "stars": 291499,
+              "minimumCompleteness": 0.11772658411300373,
+              "fluxCorrection": 1.5585853415223132,
+              "unknownCrowding": 0
+            },
+            {
+              "region": 1,
+              "stars": 577571,
+              "minimumCompleteness": 0.32270680944194485,
+              "fluxCorrection": 1.1170488272408157,
+              "unknownCrowding": 0
+            },
+            {
+              "region": 2,
+              "stars": 279639,
+              "minimumCompleteness": 0.749199273121199,
+              "fluxCorrection": 1.0192970873632154,
+              "unknownCrowding": 80
+            }
+          ],
+          "combination": "The lower of parent catalogue inclusion and the crowding recovery estimate is used, avoiding an independence assumption and double multiplication. No completeness parameter is fitted to the photo.",
+          "sourceLimits": "Rathore calibrates red-clump completeness. RGB extrapolation is an explicit alternative only. The parent Gaia function alone does not qualify extra CMD, BP/RP or proper-motion selection completeness."
+        },
+        "preservation": "Point positions, component assignments, colors relative to each population, adopted thicknesses, young density, catalogue objects, dust, plane and warp stay at l20. Point RGB is globally renormalized per old component to share the corrected smooth-light budget."
+      },
+      "acceptance": {
+        "colorTolerance": 0.02,
+        "outerAnnulusTolerance": 0.1,
+        "wholeImageRmsMaximum": "No worse than l18, separately for training and held-out pixels.",
+        "grainPowerTolerance": 0.1,
+        "geometry": "Bar width and profile closer to the photo and published reference; no fitted geometry changes."
+      },
+      "maximumCorrectionRounds": 3,
+      "freeControls": "Six global old/bar RGB coefficients and one global grain multiplier. Every other l20 field stays fixed."
+    }
+  },
+  "finalization": [
+    "packages/bake/authoring/lmc-volume/crowding-polish.mts",
+    "packages/bake/authoring/lmc-volume/crowding-report.mts",
+    "packages/bake/authoring/lmc-volume/crowding-qualify.mts"
+  ]
+}

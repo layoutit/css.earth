@@ -1,0 +1,79 @@
+{
+  "references": [
+    {
+      "id": "Horálek",
+      "url": "https://noirlab.edu/public/images/iotw2547a/",
+      "role": "Cleaned registered source of on-sky detail; processed RGB, not calibrated radiance."
+    },
+    {
+      "id": "BC03",
+      "url": "https://doi.org/10.1046/j.1365-8711.2003.06897.x",
+      "role": "Fixed Z=0.008 old and young stellar color priors."
+    },
+    {
+      "id": "Gordon2003",
+      "url": "https://doi.org/10.1086/376774",
+      "role": "LMC average extinction law, Rv=3.41."
+    },
+    {
+      "id": "Bell2022",
+      "url": "https://arxiv.org/abs/2205.04406",
+      "role": "One full-column dust normalization; spatial pattern is check only."
+    },
+    {
+      "id": "Kacharov2024",
+      "url": "https://arxiv.org/html/2410.05374",
+      "role": "Old-disc and bar geometry, old-disc height and exterior profile."
+    },
+    {
+      "id": "Choi2018",
+      "url": "https://arxiv.org/abs/1804.07765",
+      "role": "Disc plane."
+    },
+    {
+      "id": "Oden",
+      "url": "https://doi.org/10.5281/zenodo.18330355",
+      "role": "Measured warp through preserved qualified cache."
+    },
+    {
+      "id": "Rathore2025",
+      "url": "https://arxiv.org/html/2410.18182",
+      "role": "Bar placement and orientation, retaining the recorded approximate offset direction."
+    },
+    {
+      "id": "Pietrzynski2019",
+      "url": "https://arxiv.org/abs/1903.08096",
+      "role": "Distance."
+    },
+    {
+      "id": "SMASH",
+      "url": "https://datalab.noirlab.edu/data/smash",
+      "role": "Blue-star check only."
+    },
+    {
+      "id": "Mazzi2021",
+      "url": "https://arxiv.org/abs/2108.07225",
+      "role": "VMC regional age check only."
+    },
+    {
+      "id": "DeMCELS",
+      "url": "https://datalab.noirlab.edu/data/demcels",
+      "role": "Qualified H-alpha cutouts, check only."
+    },
+    {
+      "id": "WISE",
+      "url": "https://irsa.ipac.caltech.edu/Missions/wise.html",
+      "role": "Infrared morphology check only."
+    },
+    {
+      "id": "Nidever2019",
+      "url": "https://arxiv.org/abs/1805.02671",
+      "role": "Recorded outer stellar continuation, with equal mass-to-light assumption."
+    },
+    {
+      "id": "StoreyHummer1995",
+      "url": "https://doi.org/10.1093/mnras/272.1.41",
+      "role": "Case-B hydrogen recombination prior; no spatial line ratio is inferred."
+    }
+  ]
+}

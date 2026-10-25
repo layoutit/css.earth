@@ -1,0 +1,175 @@
+{
+  "status": "Unaccepted l9 physical-depth pilot",
+  "rungs": [
+    {
+      "rung": "tiny",
+      "size": 64,
+      "grid": 512,
+      "stepKpc": 0.028,
+      "seconds": 4.1871719579999995,
+      "grade": {
+        "coefficients": [
+          [
+            1.7386283552366242,
+            1.238320007680501,
+            0.03
+          ],
+          [
+            1.0720687296152813,
+            1.5373043116844267,
+            2.098665353442385
+          ],
+          [
+            0.40852547179868093,
+            0.8703772598269904,
+            1.1525619824684483
+          ],
+          [
+            1.2250255713612044,
+            0.818020061095167,
+            1.0951689340273807
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 0,
+        "saturation": 1.04,
+        "score": 0.17472304579697173
+      },
+      "residuals": {
+        "trainRelativeRms": 0.20580027625674596,
+        "heldoutRelativeRms": 0.23498860934689,
+        "totalLightDifferencePercent": -1.367260339319698,
+        "annularDifferencePercent": [
+          0.4934111757202375,
+          5.155851550732193,
+          -12.426703274718431,
+          65.65962847724963
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.8610417048738439,
+            0.007116384473992987,
+            0.8539253203998565
+          ],
+          [
+            1.5456168313777885,
+            0.445820117591067,
+            -1.99143694896885
+          ],
+          [
+            -4.020216444114971,
+            -1.6137451919749302,
+            5.633961636089902
+          ]
+        ]
+      },
+      "appearanceRms": 0.17472304579697173,
+      "meaning": "Source-photo round trip with conditional physical depths. Not an independent depth validation."
+    },
+    {
+      "rung": "small",
+      "size": 512,
+      "grid": 1536,
+      "stepKpc": 0.012,
+      "seconds": 463.89574325,
+      "grade": {
+        "coefficients": [
+          [
+            1.7656275233819625,
+            1.2197409969505304,
+            0
+          ],
+          [
+            1.1941271127214863,
+            1.5573094596410983,
+            1.9744815411578571
+          ],
+          [
+            0.23680727385365014,
+            0.8707452420772245,
+            1.1930917640759666
+          ],
+          [
+            1.3066866297055906,
+            0.8135825710941836,
+            1.0178020761481397
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 0,
+        "saturation": 1.05,
+        "score": 0.1849360805612624
+      },
+      "residuals": {
+        "trainRelativeRms": 0.217765336747205,
+        "heldoutRelativeRms": 0.2411680373782762,
+        "totalLightDifferencePercent": -1.591238118234739,
+        "annularDifferencePercent": [
+          1.2696518606129858,
+          5.407627954237593,
+          -13.537024569264178,
+          49.76465170135642
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.46040915910676716,
+            -0.1910726024218823,
+            0.651481761528655
+          ],
+          [
+            1.1253551392817807,
+            0.42671654888343236,
+            -1.552071688165213
+          ],
+          [
+            -6.942225719302916,
+            -1.0804350646670513,
+            8.02266078396997
+          ]
+        ]
+      },
+      "appearanceRms": 0.1849360805612624,
+      "meaning": "Source-photo round trip with conditional physical depths. Not an independent depth validation."
+    }
+  ],
+  "sheet": "src/objects/lmc-volume/.local/versions/l9/sheet.png",
+  "fullFit": false,
+  "slabs": false,
+  "depthAssumption": "Individual nebular depths are not measured. Width equals depth is the owner-requested isotropy prior. Bar thickness adopts a published upper constraint, not a measured best value.",
+  "report": "src/objects/lmc-volume/.local/versions/l9/notes.md",
+  "geometryCheck": {
+    "regions": 993,
+    "maxMidplaneErrorKpc": 1.8845053018079483e-9,
+    "maxDepthRatioError": 5.2191628352460384e-8,
+    "cloudFractions": [
+      0.10905580639099748,
+      0.7515394526479584
+    ]
+  },
+  "integration": {
+    "region": 0,
+    "crop": [
+      313,
+      184,
+      48,
+      48
+    ],
+    "coarseStepKpc": 0.012,
+    "fineStepKpc": 0.006,
+    "totalLightDifference": 4.5845711094116837e-7,
+    "relativeRgbRms": 0.00006609663530880135,
+    "grade": "Fixed l8 grade, identical in both samples; no fit"
+  },
+  "surveyChecks": "Reused l8 split checks; unchanged input and classification, no claim about depth.",
+  "visualQualification": "Finite compact volumes and an ellipsoidal bar are present. A narrow bright band and broad blue envelope still give an unsatisfactory outside appearance. Earth fidelity has regressed; not qualified for baking."
+}

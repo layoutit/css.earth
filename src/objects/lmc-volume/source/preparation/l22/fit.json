@@ -1,0 +1,184 @@
+{
+  "version": 22,
+  "parent": 21,
+  "rung": "small",
+  "size": 512,
+  "rayStepKpc": 0.06,
+  "seconds": 201.69192091699998,
+  "grade": {
+    "coefficients": [
+      [
+        0.3111522699936956,
+        0.08624550137923044,
+        0.014499999999999999
+      ],
+      [
+        1.2233425287175452,
+        1.7510660101456834,
+        1.1243427089173967
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1.025,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.012905095481306247
+  },
+  "residuals": {
+    "trainRelativeRms": 0.25638107054877035,
+    "heldoutRelativeRms": 0.2996808313072338,
+    "totalLightDifferencePercent": -0.0027357955569073944,
+    "annularDifferencePercent": [
+      -13.633836218306927,
+      -7.770581899844675,
+      18.72321175779479,
+      7.5132400194354965
+    ],
+    "channelShareDifferencePercentagePoints": [
+      [
+        0.7474627263817091,
+        -0.45723221779070955,
+        -0.2902305085909995
+      ],
+      [
+        1.800873458272756,
+        0.08638617588761499,
+        -1.887259634160382
+      ],
+      [
+        20.11862094224955,
+        -8.362740552008852,
+        -11.7558803902407
+      ]
+    ]
+  },
+  "sceneControls": {
+    "youngTint": [
+      1.313986657359593,
+      1.13041657671757,
+      1.056593290852588
+    ],
+    "outskirtsGain": 2.80043441709131,
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014,
+    "oldResolvedFraction": 0.09862500000000002,
+    "youngResolvedFraction": 0.006539850316548079
+  },
+  "contrast": {
+    "score": 0.012905095481306247,
+    "stats": {
+      "cuts": [
+        {
+          "alongBarKpc": -1,
+          "core": 0.36020663293789446,
+          "photoCore": 0.4219471509565581,
+          "profileRelativeRms": 0.11778701947694142,
+          "gapToCore": [
+            0.09436011360036159,
+            0.3126151036090158
+          ],
+          "photoGapToCore": [
+            0.08535271725438262,
+            0.2137134278082969
+          ],
+          "gapDepthAbsoluteError": 0.05395453607334892
+        },
+        {
+          "alongBarKpc": -0.5,
+          "core": 0.47860535913271035,
+          "photoCore": 0.5010560078718148,
+          "profileRelativeRms": 0.11431586902722476,
+          "gapToCore": [
+            0.06373438128417441,
+            0.1985969418361762
+          ],
+          "photoGapToCore": [
+            0.07471285301605506,
+            0.11601897705055816
+          ],
+          "gapDepthAbsoluteError": 0.046778218258749345
+        },
+        {
+          "alongBarKpc": 0,
+          "core": 0.5365549297373494,
+          "photoCore": 0.5326985661800935,
+          "profileRelativeRms": 0.07365723985944755,
+          "gapToCore": [
+            0.06560980852459512,
+            0.1215116369830597
+          ],
+          "photoGapToCore": [
+            0.08260296583435725,
+            0.10182668691698941
+          ],
+          "gapDepthAbsoluteError": 0.018339053687916204
+        },
+        {
+          "alongBarKpc": 0.5,
+          "core": 0.5162551138895995,
+          "photoCore": 0.5149814687417944,
+          "profileRelativeRms": 0.07773798966134458,
+          "gapToCore": [
+            0.15825195574871007,
+            0.11501747988136259
+          ],
+          "photoGapToCore": [
+            0.17606122172716376,
+            0.07419658136644429
+          ],
+          "gapDepthAbsoluteError": 0.029315082246685997
+        },
+        {
+          "alongBarKpc": 1,
+          "core": 0.42754261105262037,
+          "photoCore": 0.43544657751904514,
+          "profileRelativeRms": 0.10381171007402547,
+          "gapToCore": [
+            0.15324547669804697,
+            0.1740494773474455
+          ],
+          "photoGapToCore": [
+            0.23585760068681222,
+            0.1407490560824682
+          ],
+          "gapDepthAbsoluteError": 0.057956272626871266
+        }
+      ],
+      "meanProfileRelativeRms": 0.09746196561979677,
+      "meanGapDepthError": 0.04126863257871435
+    },
+    "color": {
+      "rg": 1.0826828865685596,
+      "bg": 0.9317902585562954,
+      "meanG": 0.5437237116402459,
+      "pixels": 7458
+    },
+    "outerRatio": 1.075132400194371,
+    "freeParameters": 7,
+    "coefficientBounds": [
+      0.001,
+      100
+    ],
+    "stretchBounds": [
+      0,
+      20
+    ],
+    "saturation": 0.5,
+    "objective": "Fixed five-cut brightness profiles and gap/core depth, with masked bar color. The accepted outer light is preserved through a global-coefficient constraint. Whole-image RMS is reported separately and never gates this step.",
+    "pixels": 51376
+  }
+}

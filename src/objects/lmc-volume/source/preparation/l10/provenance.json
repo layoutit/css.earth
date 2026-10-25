@@ -1,0 +1,186 @@
+{
+  "status": "Unaccepted l10 physical-depth pilot",
+  "rungs": [
+    {
+      "rung": "tiny",
+      "size": 64,
+      "grid": 512,
+      "stepKpc": 0.028,
+      "seconds": 4.425560417000001,
+      "grade": {
+        "coefficients": [
+          [
+            1.7656275233819625,
+            1.2197409969505304,
+            0
+          ],
+          [
+            1.1941271127214863,
+            1.5573094596410983,
+            1.9744815411578571
+          ],
+          [
+            0.23680727385365014,
+            0.8707452420772245,
+            1.1930917640759666
+          ],
+          [
+            1.3066866297055906,
+            0.8135825710941836,
+            1.0178020761481397
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 0,
+        "saturation": 1.05,
+        "score": 0.1849360805612624
+      },
+      "residuals": {
+        "trainRelativeRms": 0.19407909530971668,
+        "heldoutRelativeRms": 0.22779705725931187,
+        "totalLightDifferencePercent": -1.3411515561047804,
+        "annularDifferencePercent": [
+          5.382285365807515,
+          6.466158106635955,
+          -15.657261288548641,
+          -1.3075004433482085
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -1.5047957257965927,
+            -0.09614737894859116,
+            1.6009431047451728
+          ],
+          [
+            1.5561808144024802,
+            0.42187413778533855,
+            -1.9780549521878021
+          ],
+          [
+            5.935004165046054,
+            -1.7381312000285254,
+            -4.196872965017523
+          ]
+        ]
+      },
+      "appearanceRms": 0.15577386115233358,
+      "meaning": "Source-photo round trip with conditional physical depths. Not an independent depth validation."
+    },
+    {
+      "rung": "small",
+      "size": 512,
+      "grid": 1536,
+      "stepKpc": 0.012,
+      "seconds": 502.10479620800004,
+      "grade": {
+        "coefficients": [
+          [
+            1.7656275233819625,
+            1.2197409969505304,
+            0
+          ],
+          [
+            1.1941271127214863,
+            1.5573094596410983,
+            1.9744815411578571
+          ],
+          [
+            0.23680727385365014,
+            0.8707452420772245,
+            1.1930917640759666
+          ],
+          [
+            1.3066866297055906,
+            0.8135825710941836,
+            1.0178020761481397
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 0,
+        "saturation": 1.05,
+        "score": 0.1849360805612624
+      },
+      "residuals": {
+        "trainRelativeRms": 0.20526752505506665,
+        "heldoutRelativeRms": 0.22979335867081352,
+        "totalLightDifferencePercent": -1.602706639729723,
+        "annularDifferencePercent": [
+          5.6622363738044745,
+          6.519388446411911,
+          -16.15741126153537,
+          -9.418302121994127
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -1.5014310204235048,
+            -0.13432815693819045,
+            1.6357591773617008
+          ],
+          [
+            1.6865455585067135,
+            0.39828306051533646,
+            -2.084828619022061
+          ],
+          [
+            5.545484396652611,
+            -1.6086070254777485,
+            -3.9368773711748686
+          ]
+        ]
+      },
+      "appearanceRms": 0.16805563112577282,
+      "meaning": "Source-photo round trip with conditional physical depths. Not an independent depth validation."
+    }
+  ],
+  "sheet": "src/objects/lmc-volume/.local/versions/l10/sheet.png",
+  "fullFit": false,
+  "slabs": false,
+  "adoptedLayers": {
+    "version": 10,
+    "young": "gaussian",
+    "youngSigmaKpc": 0.15,
+    "gasSigmaKpc": 0.15,
+    "dustSigmaKpc": 0.25
+  },
+  "depthAssumption": "Individual nebular depths are not measured. Width equals depth is the owner-requested isotropy prior. Bar thickness adopts a published upper constraint, not a measured best value.",
+  "report": "src/objects/lmc-volume/.local/versions/l10/notes.md",
+  "preservation": {
+    "fieldCount": 11,
+    "knotsUnchanged": true,
+    "barUnchanged": true,
+    "gradeUnchanged": true
+  },
+  "geometryCheck": {
+    "regions": 993,
+    "maxMidplaneErrorKpc": 1.8845053018079483e-9,
+    "maxDepthRatioError": 5.2191628352460384e-8,
+    "cloudFractions": [
+      0.10905580639099748,
+      0.7515394526479584
+    ]
+  },
+  "integrationCheck": {
+    "region": 0,
+    "crop": [
+      313,
+      184,
+      48,
+      48
+    ],
+    "coarseStepKpc": 0.012,
+    "fineStepKpc": 0.006,
+    "totalLightDifference": 6.090769599786938e-7,
+    "relativeRgbRms": 0.0000627552216679344,
+    "grade": "Fixed l8 grade, identical in both samples; no fit"
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "rungs": [
+    {
+      "rung": "tiny",
+      "size": 64,
+      "seconds": 10.447726999999999,
+      "grade": {
+        "coefficients": [
+          [
+            0.11241433532784491,
+            0.14296087928353232,
+            0.2709423779120667
+          ],
+          [
+            2.077208521127791,
+            2.6718185763049056,
+            3.8718763390811497
+          ],
+          [
+            1.055424281696341,
+            1.149594919957487,
+            1.3547930021826886
+          ],
+          [
+            1.5415944727745603,
+            1.466731503790015,
+            1.4339638298007407
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 8,
+        "saturation": 2.03,
+        "score": 0.0858241774530671
+      },
+      "residuals": {
+        "trainRelativeRms": 0.09820550685135827,
+        "heldoutRelativeRms": 0.09123033077633798,
+        "totalLightDifferencePercent": -0.3065417321688302,
+        "annularDifferencePercent": [
+          0.05314611741091824,
+          -1.1601777213108733,
+          0.4236998628804667,
+          0.043979866262189304
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            0.1354856909854374,
+            -0.04570870670846938,
+            -0.08977698427697356
+          ],
+          [
+            -0.7914333712195021,
+            0.058203345629181946,
+            0.7332300255903201
+          ],
+          [
+            3.7068112603862002,
+            -2.505100355986917,
+            -1.201710904399289
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.3012766558261282,
+          1.1155480125561021,
+          1.1585664456584799
+        ],
+        "outskirtsGain": 3.1706473557278514,
+        "innerDiscGain": 0.6500440905113585,
+        "barGain": 0.9994923919355493
+      },
+      "parent": 15,
+      "change": "Bar color only: VMC age/metallicity population mixture and one global RGB grade.",
+      "changeDiagnostics": {
+        "freeParameters": 3,
+        "pixelParameters": 0,
+        "component": "Bar only",
+        "coefficientBounds": [
+          [
+            0.9294727308585243,
+            3.7178909234340973
+          ],
+          [
+            1.32268246351728,
+            5.29072985406912
+          ],
+          [
+            2.305429662758929,
+            9.221718651035715
+          ]
+        ],
+        "before": [
+          1.8589454617170487,
+          2.64536492703456,
+          4.610859325517858
+        ],
+        "after": [
+          2.077208521127791,
+          2.6718185763049056,
+          3.8718763390811497
+        ],
+        "displayCurveFixed": true,
+        "geometryFixed": true,
+        "aperture": "Whole valid Earth image and total-light objective; the measured bar footprint supplies the initial color estimate only"
+      }
+    },
+    {
+      "rung": "small",
+      "size": 512,
+      "seconds": 152.802291125,
+      "grade": {
+        "coefficients": [
+          [
+            0.1498435172069419,
+            0.09811084394402225,
+            0.07
+          ],
+          [
+            1.8789772899427406,
+            2.0466148260413544,
+            1.6615177726621686
+          ],
+          [
+            0.23161638365806891,
+            0.26662389788933194,
+            0.5157804581485669
+          ],
+          [
+            2.6987170045257636,
+            0.3067875149677134,
+            0.15719187895006448
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 20,
+        "saturation": 0.5,
+        "score": 0.19808365038899994
+      },
+      "residuals": {
+        "trainRelativeRms": 0.24822115284649443,
+        "heldoutRelativeRms": 0.31203249290166984,
+        "totalLightDifferencePercent": -1.993099554005151,
+        "annularDifferencePercent": [
+          -4.021884895673022,
+          1.3888185456084612,
+          -4.587764788759396,
+          0.08376006246002543
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.7486310254503636,
+            0.6030231173137335,
+            0.14560790813665236
+          ],
+          [
+            -0.5131693103735457,
+            0.2513586021968772,
+            0.2618107081766574
+          ],
+          [
+            9.576838691992323,
+            -2.8651010039114464,
+            -6.711737688080893
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.231985689843603,
+          1.0598715278255044,
+          0.9906552757018714
+        ],
+        "outskirtsGain": 2.80043441709131,
+        "innerDiscGain": 0.7372495191616437,
+        "barGain": 0.99129464369014
+      },
+      "parent": 15,
+      "change": "Bar color only: VMC age/metallicity population mixture and one global RGB grade.",
+      "changeDiagnostics": {
+        "freeParameters": 3,
+        "pixelParameters": 0,
+        "component": "Bar only",
+        "coefficientBounds": [
+          [
+            0.8330973129575188,
+            3.332389251830075
+          ],
+          [
+            1.0031442143129863,
+            4.012576857251945
+          ],
+          [
+            0.9463162042122537,
+            3.785264816849015
+          ]
+        ],
+        "before": [
+          1.6661946259150375,
+          2.0062884286259726,
+          1.8926324084245074
+        ],
+        "after": [
+          1.8789772899427406,
+          2.0466148260413544,
+          1.6615177726621686
+        ],
+        "displayCurveFixed": true,
+        "geometryFixed": true,
+        "aperture": "Whole valid Earth image and total-light objective; the measured bar footprint supplies the initial color estimate only"
+      }
+    }
+  ],
+  "slabs": false,
+  "fullFit": false
+}

@@ -1,0 +1,151 @@
+{
+  "rung": "small",
+  "size": 512,
+  "rayStepKpc": 0.06,
+  "seconds": 334.93278375,
+  "parent": 18,
+  "diagnosticRejected": true,
+  "grade": {
+    "coefficients": [
+      [
+        0.3759207803798096,
+        0.30912907335254114,
+        0.053038672632259795
+      ],
+      [
+        1.782032096472905,
+        2.4904284642395984,
+        1.9802452507035235
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1.025,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.27902549900199486
+  },
+  "residuals": {
+    "trainRelativeRms": 0.279025499001997,
+    "heldoutRelativeRms": 0.33419002943206233,
+    "totalLightDifferencePercent": 9.409563072298276,
+    "annularDifferencePercent": [
+      -16.330637046037545,
+      -3.631549488614305,
+      40.88830702252688,
+      85.28168834621137
+    ],
+    "channelShareDifferencePercentagePoints": [
+      [
+        0.1839251280155274,
+        -0.41872467887457687,
+        0.23479955085906057
+      ],
+      [
+        1.6686598747270187,
+        1.3657915195890769,
+        -3.0344513943161178
+      ],
+      [
+        13.753215512292016,
+        -0.8287998623690285,
+        -12.924415649922993
+      ]
+    ]
+  },
+  "sceneControls": {
+    "youngTint": [
+      1.313986657359593,
+      1.13041657671757,
+      1.056593290852588
+    ],
+    "outskirtsGain": 2.80043441709131,
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014,
+    "oldResolvedFraction": 0.4,
+    "youngResolvedFraction": 0.026524107747723513
+  },
+  "fit": {
+    "freeParameters": 8,
+    "optimizer": "Non-negative initialization, bounded coordinate search, then joint damped Gauss–Newton over the same eight global controls.",
+    "coefficientBounds": [
+      [
+        [
+          0.0044953055162082565,
+          4.495305516208257
+        ],
+        [
+          0.0029433253183206677,
+          2.9433253183206673
+        ],
+        [
+          0.0021000000000000003,
+          2.1
+        ]
+      ],
+      [
+        [
+          0.05498442265519624,
+          54.98442265519624
+        ],
+        [
+          0.05416978757290126,
+          54.16978757290126
+        ],
+        [
+          0.04209093347861965,
+          42.09093347861965
+        ]
+      ]
+    ],
+    "resolvedFractionBounds": [
+      [
+        0.01,
+        0.4
+      ],
+      [
+        0.005,
+        0.25
+      ]
+    ],
+    "photo": {
+      "rg": 1.0751241819330248,
+      "bg": 0.9381817874787874,
+      "meanG": 0.5618371872597989,
+      "pixels": 7458
+    },
+    "candidate": {
+      "rg": 1.0744511525762377,
+      "bg": 0.9391874280356942,
+      "meanG": 0.5452828659793255,
+      "pixels": 7458
+    },
+    "colorPassed": true,
+    "rmsPassed": false,
+    "rmsParent": [
+      0.24238585125852544,
+      0.30465967300541763
+    ],
+    "rmsCandidate": [
+      0.27902549900199486,
+      0.33419002943206294
+    ],
+    "colorToleranceRelative": 0.02,
+    "maximumRelativeRmsRegression": 0.01,
+    "aperturePixels": 7458
+  },
+  "physicalDustStrength": 1.025
+}

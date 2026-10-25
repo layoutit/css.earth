@@ -1,0 +1,113 @@
+{
+  "rung": "small",
+  "size": 512,
+  "seconds": 152.802291125,
+  "grade": {
+    "coefficients": [
+      [
+        0.1498435172069419,
+        0.09811084394402225,
+        0.07
+      ],
+      [
+        1.8789772899427406,
+        2.0466148260413544,
+        1.6615177726621686
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.19808365038899994
+  },
+  "residuals": {
+    "trainRelativeRms": 0.24822115284649443,
+    "heldoutRelativeRms": 0.31203249290166984,
+    "totalLightDifferencePercent": -1.993099554005151,
+    "annularDifferencePercent": [
+      -4.021884895673022,
+      1.3888185456084612,
+      -4.587764788759396,
+      0.08376006246002543
+    ],
+    "channelShareDifferencePercentagePoints": [
+      [
+        -0.7486310254503636,
+        0.6030231173137335,
+        0.14560790813665236
+      ],
+      [
+        -0.5131693103735457,
+        0.2513586021968772,
+        0.2618107081766574
+      ],
+      [
+        9.576838691992323,
+        -2.8651010039114464,
+        -6.711737688080893
+      ]
+    ]
+  },
+  "sceneControls": {
+    "youngTint": [
+      1.231985689843603,
+      1.0598715278255044,
+      0.9906552757018714
+    ],
+    "outskirtsGain": 2.80043441709131,
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014
+  },
+  "parent": 15,
+  "change": "Bar color only: VMC age/metallicity population mixture and one global RGB grade.",
+  "changeDiagnostics": {
+    "freeParameters": 3,
+    "pixelParameters": 0,
+    "component": "Bar only",
+    "coefficientBounds": [
+      [
+        0.8330973129575188,
+        3.332389251830075
+      ],
+      [
+        1.0031442143129863,
+        4.012576857251945
+      ],
+      [
+        0.9463162042122537,
+        3.785264816849015
+      ]
+    ],
+    "before": [
+      1.6661946259150375,
+      2.0062884286259726,
+      1.8926324084245074
+    ],
+    "after": [
+      1.8789772899427406,
+      2.0466148260413544,
+      1.6615177726621686
+    ],
+    "displayCurveFixed": true,
+    "geometryFixed": true,
+    "aperture": "Whole valid Earth image and total-light objective; the measured bar footprint supplies the initial color estimate only"
+  },
+  "geometryParametersFitted": 0,
+  "pixelParameters": 0,
+  "calibration": "Only three global bar RGB coefficients fitted; other parent calibration frozen"
+}

@@ -1,0 +1,172 @@
+{
+  "status": "Unaccepted research pilot",
+  "tiny": {
+    "rung": "tiny",
+    "size": 64,
+    "rayStepKpc": 0.24,
+    "seconds": 0.35016491699999824,
+    "fit": {
+      "gains": [
+        0.5158861159189375,
+        0.6068674476339745,
+        0.5158861159189375,
+        1,
+        1
+      ],
+      "red": 0.8640315401803528,
+      "blue": 1.6418213408152034,
+      "dust": 0,
+      "loss": 0.396285644346908,
+      "iterations": 24
+    },
+    "residuals": {
+      "trainRelativeRms": 0.396285644346908,
+      "heldoutRelativeRms": 0.5165757873826776,
+      "totalLightDifferencePercent": 2.112639735628985,
+      "annularDifferencePercent": [
+        -7.467251305405453,
+        3.2916623452791782,
+        5.339737358473817,
+        92.21781612281386
+      ],
+      "channelShareDifferencePercentagePoints": [
+        [
+          -3.0430326978917064,
+          1.3083993124564763,
+          1.7346333854352303
+        ],
+        [
+          1.6961345114735016,
+          2.298717156455515,
+          -3.994851667929006
+        ],
+        [
+          6.66825668221685,
+          -1.1395136179089493,
+          -5.528743064307901
+        ]
+      ]
+    },
+    "kept": [
+      1,
+      2,
+      3
+    ],
+    "skippedDust": false,
+    "field": {
+      "path": "src/objects/lmc-volume/.local/versions/l3/tiny/field.f32",
+      "dimensions": [
+        49,
+        49,
+        33,
+        4
+      ],
+      "boundsKpc": {
+        "min": [
+          -20,
+          -20,
+          -12
+        ],
+        "max": [
+          20,
+          20,
+          12
+        ]
+      },
+      "spacingKpc": [
+        0.8333333333333334,
+        0.8333333333333334,
+        0.75
+      ],
+      "layout": "z,y,x,channel; float32 little endian; RGB emissivity and V-band extinction per kpc",
+      "renderOwner": "Continuous analytic densities and fixed source surfaces, rather than interpolating this coarse diagnostic field",
+      "bytes": 1267728
+    }
+  },
+  "small": {
+    "rung": "small",
+    "size": 256,
+    "rayStepKpc": 0.12,
+    "seconds": 7.956019,
+    "fit": {
+      "gains": [
+        0.5001100174084849,
+        0.5917077417527805,
+        0.5001100174084849,
+        1,
+        1
+      ],
+      "red": 0.8634920398178931,
+      "blue": 1.642164916087912,
+      "dust": 0,
+      "loss": 0.42946564778527246,
+      "iterations": 24
+    },
+    "residuals": {
+      "trainRelativeRms": 0.42946564778527246,
+      "heldoutRelativeRms": 0.5512859698326064,
+      "totalLightDifferencePercent": 2.186823594270604,
+      "annularDifferencePercent": [
+        -7.5490738407909985,
+        3.304934579910479,
+        5.3105142554765505,
+        84.6215357854507
+      ],
+      "channelShareDifferencePercentagePoints": [
+        [
+          -3.08783288021563,
+          1.3172340108090042,
+          1.770598869406631
+        ],
+        [
+          1.7143667959045483,
+          2.299539906897252,
+          -4.0139067028018065
+        ],
+        [
+          6.412916855255402,
+          -1.1067589384020082,
+          -5.306157916853382
+        ]
+      ]
+    },
+    "kept": [
+      1,
+      2,
+      3
+    ],
+    "skippedDust": false,
+    "field": {
+      "path": "src/objects/lmc-volume/.local/versions/l3/small/field.f32",
+      "dimensions": [
+        97,
+        97,
+        65,
+        4
+      ],
+      "boundsKpc": {
+        "min": [
+          -20,
+          -20,
+          -12
+        ],
+        "max": [
+          20,
+          20,
+          12
+        ]
+      },
+      "spacingKpc": [
+        0.4166666666666667,
+        0.4166666666666667,
+        0.375
+      ],
+      "layout": "z,y,x,channel; float32 little endian; RGB emissivity and V-band extinction per kpc",
+      "renderOwner": "Continuous analytic densities and fixed source surfaces, rather than interpolating this coarse diagnostic field",
+      "bytes": 9785360
+    }
+  },
+  "artifact": "src/objects/lmc-volume/.local/versions/l3/sheet.png",
+  "fullResolutionRun": false,
+  "slabBakeRun": false
+}

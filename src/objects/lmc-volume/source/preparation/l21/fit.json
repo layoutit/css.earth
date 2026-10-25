@@ -1,0 +1,121 @@
+{
+  "version": 21,
+  "parent": 20,
+  "rung": "small",
+  "size": 512,
+  "rayStepKpc": 0.06,
+  "seconds": 284.843488875,
+  "grade": {
+    "coefficients": [
+      [
+        0.2991848749939381,
+        0.11285894755502275,
+        0.0010000000000000002
+      ],
+      [
+        1.1830188815175458,
+        1.8424050846208464,
+        1.589518939094475
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1.025,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.2576057324119254
+  },
+  "residuals": {
+    "trainRelativeRms": 0.25760573241192647,
+    "heldoutRelativeRms": 0.30940199812840546,
+    "totalLightDifferencePercent": 1.7038954203602463,
+    "annularDifferencePercent": [
+      -13.550505925362987,
+      -6.4092830041178495,
+      22.00879674886589,
+      9.0931489056981
+    ],
+    "channelShareDifferencePercentagePoints": [
+      [
+        -0.3278915161461782,
+        -0.3715504677362702,
+        0.6994419838824706
+      ],
+      [
+        0.9461712796015542,
+        0.4639034225950689,
+        -1.4100747021966453
+      ],
+      [
+        18.476689250252488,
+        -6.5040574880495585,
+        -11.972631762202926
+      ]
+    ]
+  },
+  "sceneControls": {
+    "youngTint": [
+      1.313986657359593,
+      1.13041657671757,
+      1.056593290852588
+    ],
+    "outskirtsGain": 2.80043441709131,
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014,
+    "oldResolvedFraction": 0.29587500000000005,
+    "youngResolvedFraction": 0.019619550949644238
+  },
+  "grainScale": 0.7396875,
+  "barColor": {
+    "photo": {
+      "rg": 1.0751241819330248,
+      "bg": 0.9381817874787874,
+      "meanG": 0.5618371872597989,
+      "pixels": 7458
+    },
+    "candidate": {
+      "rg": 1.0619540046738825,
+      "bg": 0.9513589395629933,
+      "meanG": 0.5483652300533736,
+      "pixels": 7458
+    }
+  },
+  "passed": {
+    "color": true,
+    "rms": false,
+    "outer": true,
+    "grain": true
+  },
+  "calibration": {
+    "stride": 1,
+    "pixels": 196608,
+    "freeRgbCoefficients": 6,
+    "fractionsFixed": [
+      0.29587500000000005,
+      0.019619550949644238
+    ],
+    "outerAnnulusConstraint": true,
+    "fixedCoefficientBounds": [
+      0.001,
+      100
+    ],
+    "colorDeadzoneRelative": 0.012,
+    "outerDeadzoneRelative": 0.075,
+    "grainPower": 0.00019662403139050687,
+    "photoPower": 0.00019595335106878807
+  },
+  "finalPolish": true
+}

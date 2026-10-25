@@ -1,0 +1,466 @@
+{
+  "rungs": [
+    {
+      "version": 21,
+      "parent": 20,
+      "rung": "tiny",
+      "size": 64,
+      "rayStepKpc": 0.12,
+      "seconds": 18.759803124999998,
+      "grade": {
+        "coefficients": [
+          [
+            0.18913427581503126,
+            0.26593164021010945,
+            0.38171962177780816
+          ],
+          [
+            1.516191744193552,
+            2.5629708282936594,
+            3.743258168022684
+          ],
+          [
+            1.055424281696341,
+            1.149594919957487,
+            1.3547930021826886
+          ],
+          [
+            1.5415944727745603,
+            1.466731503790015,
+            1.4339638298007407
+          ]
+        ],
+        "dustStrength": 1.025,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 8,
+        "saturation": 2.03,
+        "score": 0.18235060269074116
+      },
+      "residuals": {
+        "trainRelativeRms": 0.18235060269074194,
+        "heldoutRelativeRms": 0.19798240896808453,
+        "totalLightDifferencePercent": 2.8766008732461046,
+        "annularDifferencePercent": [
+          -5.752574416126666,
+          -6.191070964431022,
+          20.340933266125184,
+          -4.772123359188263
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            0.7127569171033188,
+            -0.7159354752670932,
+            0.0031785581637688853
+          ],
+          [
+            0.5977430557084162,
+            0.8103013257252212,
+            -1.4080443814336374
+          ],
+          [
+            7.178156432602567,
+            -1.4119321613224323,
+            -5.766224271280141
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.4215354392509556,
+          1.218642497684487,
+          1.265636522300454
+        ],
+        "outskirtsGain": 3.1706473557278514,
+        "innerDiscGain": 0.6500440905113585,
+        "barGain": 0.9994923919355493,
+        "oldResolvedFraction": 0.34,
+        "youngResolvedFraction": 0.2125
+      },
+      "grainScale": 0.85,
+      "barColor": {
+        "photo": {
+          "rg": 1.0755954463038466,
+          "bg": 0.9404689371813797,
+          "meanG": 0.5663257242131406,
+          "pixels": 118
+        },
+        "candidate": {
+          "rg": 1.074711998304624,
+          "bg": 0.9409616285981894,
+          "meanG": 0.5434579421554758,
+          "pixels": 118
+        }
+      },
+      "passed": {
+        "color": true,
+        "rms": false,
+        "outer": true
+      },
+      "calibration": {
+        "stride": 1,
+        "pixels": 3072,
+        "freeRgbCoefficients": 6,
+        "fractionsFixed": [
+          0.34,
+          0.2125
+        ],
+        "outerAnnulusConstraint": true
+      }
+    },
+    {
+      "version": 21,
+      "parent": 20,
+      "rung": "small",
+      "size": 512,
+      "rayStepKpc": 0.06,
+      "seconds": 284.843488875,
+      "grade": {
+        "coefficients": [
+          [
+            0.2991848749939381,
+            0.11285894755502275,
+            0.0010000000000000002
+          ],
+          [
+            1.1830188815175458,
+            1.8424050846208464,
+            1.589518939094475
+          ],
+          [
+            0.23161638365806891,
+            0.26662389788933194,
+            0.5157804581485669
+          ],
+          [
+            2.6987170045257636,
+            0.3067875149677134,
+            0.15719187895006448
+          ]
+        ],
+        "dustStrength": 1.025,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 20,
+        "saturation": 0.5,
+        "score": 0.2576057324119254
+      },
+      "residuals": {
+        "trainRelativeRms": 0.25760573241192647,
+        "heldoutRelativeRms": 0.30940199812840546,
+        "totalLightDifferencePercent": 1.7038954203602463,
+        "annularDifferencePercent": [
+          -13.550505925362987,
+          -6.4092830041178495,
+          22.00879674886589,
+          9.0931489056981
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.3278915161461782,
+            -0.3715504677362702,
+            0.6994419838824706
+          ],
+          [
+            0.9461712796015542,
+            0.4639034225950689,
+            -1.4100747021966453
+          ],
+          [
+            18.476689250252488,
+            -6.5040574880495585,
+            -11.972631762202926
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.313986657359593,
+          1.13041657671757,
+          1.056593290852588
+        ],
+        "outskirtsGain": 2.80043441709131,
+        "innerDiscGain": 0.7372495191616437,
+        "barGain": 0.99129464369014,
+        "oldResolvedFraction": 0.29587500000000005,
+        "youngResolvedFraction": 0.019619550949644238
+      },
+      "grainScale": 0.7396875,
+      "barColor": {
+        "photo": {
+          "rg": 1.0751241819330248,
+          "bg": 0.9381817874787874,
+          "meanG": 0.5618371872597989,
+          "pixels": 7458
+        },
+        "candidate": {
+          "rg": 1.0619540046738825,
+          "bg": 0.9513589395629933,
+          "meanG": 0.5483652300533736,
+          "pixels": 7458
+        }
+      },
+      "passed": {
+        "color": true,
+        "rms": false,
+        "outer": true,
+        "grain": true
+      },
+      "calibration": {
+        "stride": 1,
+        "pixels": 196608,
+        "freeRgbCoefficients": 6,
+        "fractionsFixed": [
+          0.29587500000000005,
+          0.019619550949644238
+        ],
+        "outerAnnulusConstraint": true,
+        "fixedCoefficientBounds": [
+          0.001,
+          100
+        ],
+        "colorDeadzoneRelative": 0.012,
+        "outerDeadzoneRelative": 0.075,
+        "grainPower": 0.00019662403139050687,
+        "photoPower": 0.00019595335106878807
+      },
+      "finalPolish": true
+    }
+  ],
+  "finalGlobalPolish": {
+    "version": 21,
+    "parent": 20,
+    "rung": "small",
+    "size": 512,
+    "rayStepKpc": 0.06,
+    "seconds": 284.843488875,
+    "grade": {
+      "coefficients": [
+        [
+          0.2991848749939381,
+          0.11285894755502275,
+          0.0010000000000000002
+        ],
+        [
+          1.1830188815175458,
+          1.8424050846208464,
+          1.589518939094475
+        ],
+        [
+          0.23161638365806891,
+          0.26662389788933194,
+          0.5157804581485669
+        ],
+        [
+          2.6987170045257636,
+          0.3067875149677134,
+          0.15719187895006448
+        ]
+      ],
+      "dustStrength": 1.025,
+      "dustTint": [
+        1,
+        1,
+        1
+      ],
+      "stretch": 20,
+      "saturation": 0.5,
+      "score": 0.2576057324119254
+    },
+    "residuals": {
+      "trainRelativeRms": 0.25760573241192647,
+      "heldoutRelativeRms": 0.30940199812840546,
+      "totalLightDifferencePercent": 1.7038954203602463,
+      "annularDifferencePercent": [
+        -13.550505925362987,
+        -6.4092830041178495,
+        22.00879674886589,
+        9.0931489056981
+      ],
+      "channelShareDifferencePercentagePoints": [
+        [
+          -0.3278915161461782,
+          -0.3715504677362702,
+          0.6994419838824706
+        ],
+        [
+          0.9461712796015542,
+          0.4639034225950689,
+          -1.4100747021966453
+        ],
+        [
+          18.476689250252488,
+          -6.5040574880495585,
+          -11.972631762202926
+        ]
+      ]
+    },
+    "sceneControls": {
+      "youngTint": [
+        1.313986657359593,
+        1.13041657671757,
+        1.056593290852588
+      ],
+      "outskirtsGain": 2.80043441709131,
+      "innerDiscGain": 0.7372495191616437,
+      "barGain": 0.99129464369014,
+      "oldResolvedFraction": 0.29587500000000005,
+      "youngResolvedFraction": 0.019619550949644238
+    },
+    "grainScale": 0.7396875,
+    "barColor": {
+      "photo": {
+        "rg": 1.0751241819330248,
+        "bg": 0.9381817874787874,
+        "meanG": 0.5618371872597989,
+        "pixels": 7458
+      },
+      "candidate": {
+        "rg": 1.0619540046738825,
+        "bg": 0.9513589395629933,
+        "meanG": 0.5483652300533736,
+        "pixels": 7458
+      }
+    },
+    "passed": {
+      "color": true,
+      "rms": false,
+      "outer": true,
+      "grain": true
+    },
+    "calibration": {
+      "stride": 1,
+      "pixels": 196608,
+      "freeRgbCoefficients": 6,
+      "fractionsFixed": [
+        0.29587500000000005,
+        0.019619550949644238
+      ],
+      "outerAnnulusConstraint": true,
+      "fixedCoefficientBounds": [
+        0.001,
+        100
+      ],
+      "colorDeadzoneRelative": 0.012,
+      "outerDeadzoneRelative": 0.075,
+      "grainPower": 0.00019662403139050687,
+      "photoPower": 0.00019595335106878807
+    },
+    "finalPolish": true,
+    "kept": true
+  },
+  "acceptance": {
+    "color": true,
+    "grain": true,
+    "barWidthCloser": true,
+    "barProfilesCloser": true,
+    "publishedDensityCloser": true,
+    "outer": true,
+    "rms": false
+  },
+  "barContrast": {
+    "photo": {
+      "power": 0.00019609723081737043,
+      "darkPower": 0.00011123372876323368,
+      "rmsLogContrast": 0.014003472098639337,
+      "samples": 52705,
+      "meanLuminance": 0.5787921417473398,
+      "pixelArcmin": {
+        "x": 0.5285011159492444,
+        "y": 0.5292372023008536
+      }
+    },
+    "l18": {
+      "power": 0.00009920445664044684,
+      "darkPower": 0.00007556601914345803,
+      "rmsLogContrast": 0.009960143404612548,
+      "samples": 52705,
+      "meanLuminance": 0.5852514518661953,
+      "pixelArcmin": {
+        "x": 0.5285011159492444,
+        "y": 0.5292372023008536
+      }
+    },
+    "l20": {
+      "power": 0.00026606060205904095,
+      "darkPower": 0.00013374247079223412,
+      "rmsLogContrast": 0.016311364199816058,
+      "samples": 52705,
+      "meanLuminance": 0.5538411369596076,
+      "pixelArcmin": {
+        "x": 0.5285011159492444,
+        "y": 0.5292372023008536
+      }
+    },
+    "l21": {
+      "power": 0.0001968478926597556,
+      "darkPower": 0.00010074811563885037,
+      "rmsLogContrast": 0.014030249201627019,
+      "samples": 52705,
+      "meanLuminance": 0.5589460787829289,
+      "pixelArcmin": {
+        "x": 0.5285011159492444,
+        "y": 0.5292372023008536
+      }
+    }
+  },
+  "barProfiles": [
+    {
+      "version": "l18",
+      "error": [
+        0.1283716745037579,
+        0.12069264216610073
+      ]
+    },
+    {
+      "version": "l20",
+      "error": [
+        0.08680304710872096,
+        0.27291916345495115
+      ]
+    },
+    {
+      "version": "l21",
+      "error": [
+        0.08439618239652852,
+        0.2516451843603023
+      ]
+    }
+  ],
+  "shape": {
+    "reference": {
+      "paDegrees": 121.25946730640658,
+      "sigmaMajorKpc": 1.026933426279858,
+      "axisRatio": 0.38409455457870756
+    },
+    "l20": {
+      "paDegrees": 123.90841096148654,
+      "sigmaMajorKpc": 1.2691248852301276,
+      "sigmaMinorKpc": 0.6528912762851928,
+      "axisRatio": 0.5144421040698494,
+      "tangentCenterWestNorthKpc": [
+        0.16828285170655066,
+        -0.3077145833245888
+      ]
+    },
+    "l21": {
+      "paDegrees": 121.65766777080034,
+      "sigmaMajorKpc": 1.1286398669740252,
+      "sigmaMinorKpc": 0.576756883573012,
+      "axisRatio": 0.5110194141195312,
+      "tangentCenterWestNorthKpc": [
+        0.08602317575220637,
+        -0.22470706012509017
+      ]
+    }
+  },
+  "slabs": false,
+  "fullFit": false,
+  "ownerAccepted": false
+}

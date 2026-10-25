@@ -1,0 +1,192 @@
+{
+  "rungs": [
+    {
+      "rung": "tiny",
+      "size": 64,
+      "seconds": 8.078587083,
+      "grade": {
+        "coefficients": [
+          [
+            0.11241433532784491,
+            0.14296087928353232,
+            0.2709423779120667
+          ],
+          [
+            1.8589454617170487,
+            2.64536492703456,
+            4.610859325517858
+          ],
+          [
+            1.055424281696341,
+            1.149594919957487,
+            1.3547930021826886
+          ],
+          [
+            1.5415944727745603,
+            1.466731503790015,
+            1.4339638298007407
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 8,
+        "saturation": 2.03,
+        "score": 0.08943495652194226
+      },
+      "residuals": {
+        "trainRelativeRms": 0.0945458905988188,
+        "heldoutRelativeRms": 0.09056253019591193,
+        "totalLightDifferencePercent": -0.6635463851113355,
+        "annularDifferencePercent": [
+          -0.4300992913789381,
+          -1.4484582501977705,
+          0.0880220791585451,
+          -0.5782177549902623
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.03015607728567571,
+            -0.18459115596292097,
+            0.21474723324860223
+          ],
+          [
+            -1.0090224990249252,
+            -0.0605505311038812,
+            1.069573030128812
+          ],
+          [
+            3.7524548991014814,
+            -2.5076207301965194,
+            -1.2448341689049736
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.4215354392509556,
+          1.218642497684487,
+          1.265636522300454
+        ],
+        "outskirtsGain": 3.1706473557278514,
+        "innerDiscGain": 0.6500440905113585,
+        "barGain": 0.9994923919355493
+      },
+      "parent": 15,
+      "change": "Blue structure only: Gaia smoothing from 200 to 100 pc, with global Gaia and young Bica-association gains.",
+      "changeDiagnostics": {
+        "freeParameters": 2,
+        "pixelParameters": 0,
+        "bounds": [
+          0.5,
+          2
+        ],
+        "gaiaGain": 1.092416,
+        "associationGain": 0.940896,
+        "before": 0.0087567634296722,
+        "after": 0.008672332718688091,
+        "displayCurveFixed": true,
+        "colorsFixed": true,
+        "geometryFixed": true
+      }
+    },
+    {
+      "rung": "small",
+      "size": 512,
+      "seconds": 127.68368200000002,
+      "grade": {
+        "coefficients": [
+          [
+            0.1498435172069419,
+            0.09811084394402225,
+            0.07
+          ],
+          [
+            1.6661946259150375,
+            2.0062884286259726,
+            1.8926324084245074
+          ],
+          [
+            0.23161638365806891,
+            0.26662389788933194,
+            0.5157804581485669
+          ],
+          [
+            2.6987170045257636,
+            0.3067875149677134,
+            0.15719187895006448
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 20,
+        "saturation": 0.5,
+        "score": 0.19678178680470035
+      },
+      "residuals": {
+        "trainRelativeRms": 0.24237581141410056,
+        "heldoutRelativeRms": 0.30442363186781596,
+        "totalLightDifferencePercent": -2.1415044086700696,
+        "annularDifferencePercent": [
+          -4.792120098508901,
+          0.6654314727821964,
+          -3.58507521759015,
+          -0.874209922220015
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.7222905206284047,
+            0.5813749307686578,
+            0.14091558985975805
+          ],
+          [
+            -0.6988944015252962,
+            0.1993034228580215,
+            0.4995909786672692
+          ],
+          [
+            9.730550478042787,
+            -2.850390541558445,
+            -6.880159936484342
+          ]
+        ]
+      },
+      "sceneControls": {
+        "youngTint": [
+          1.313986657359593,
+          1.13041657671757,
+          1.056593290852588
+        ],
+        "outskirtsGain": 2.80043441709131,
+        "innerDiscGain": 0.7372495191616437,
+        "barGain": 0.99129464369014
+      },
+      "parent": 15,
+      "change": "Blue structure only: Gaia smoothing from 200 to 100 pc, with global Gaia and young Bica-association gains.",
+      "changeDiagnostics": {
+        "freeParameters": 2,
+        "pixelParameters": 0,
+        "bounds": [
+          0.5,
+          2
+        ],
+        "gaiaGain": 1.06656,
+        "associationGain": 0.7897500000000001,
+        "before": 0.04876306463098784,
+        "after": 0.04840746042106684,
+        "displayCurveFixed": true,
+        "colorsFixed": true,
+        "geometryFixed": true
+      }
+    }
+  ],
+  "slabs": false,
+  "fullFit": false
+}

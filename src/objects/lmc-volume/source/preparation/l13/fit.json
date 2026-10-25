@@ -1,0 +1,96 @@
+{
+  "grade": {
+    "coefficients": [
+      [
+        0.1498435172069419,
+        0.09811084394402225,
+        0.07
+      ],
+      [
+        1.6661946259150375,
+        2.0062884286259726,
+        1.8926324084245074
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.19678178680470035
+  },
+  "components": {
+    "oldDiscAndOutskirts": {
+      "gain": 0.10598478705032138,
+      "rgbTint": [
+        1.413820996175578,
+        0.9257068554323689,
+        0.660472148392053
+      ]
+    },
+    "bar": {
+      "gain": 1.8550384876551724,
+      "rgbTint": [
+        0.8981994912791057,
+        1.0815346646322066,
+        1.0202658440886878
+      ]
+    },
+    "young": {
+      "gain": 0.3380069132319892,
+      "rgbTint": [
+        0.6852415574680872,
+        0.7888119664177876,
+        1.5259464761141253
+      ]
+    },
+    "gas": {
+      "gain": 1.0542321328145137,
+      "rgbTint": [
+        2.5598887764129534,
+        0.291005657500378,
+        0.149105566086669
+      ]
+    },
+    "dust": {
+      "gain": 1,
+      "rgbTint": [
+        1,
+        1,
+        1
+      ],
+      "meaning": "Bell supplies one column normalization. NANTEN/MAGMA clouds and the smooth paper disc supply spatial attenuation."
+    }
+  },
+  "objectBrightness": "src/objects/lmc-volume/.local/versions/l13/object-brightness.json",
+  "geometryOptimized": false,
+  "pixelParameters": 0,
+  "catalogueObjectParameters": 6507,
+  "populationGainParameters": 1,
+  "diagnostics": {
+    "catalogueObjectParameters": 6507,
+    "populationGainParameters": 1,
+    "activeObjects": 4719,
+    "geometryParametersFitted": 0,
+    "pixelParameters": 0,
+    "componentRgbGrades": 4,
+    "regularization": "3% diagonal ridge towards catalogue light priors, nonnegative amplitudes bounded at 25 times prior",
+    "initialAppearanceRms": 0.35875845208461044,
+    "appearanceRms": 0.19678178680470035,
+    "calibrationPixels": "All valid pixels in each catalogue-object footprint. Both checkerboards are calibration residuals.",
+    "scope": "Only catalogue-object luminosities, global population gains, component RGB grades and one tone curve. Geometry stays fixed during calibration."
+  }
+}

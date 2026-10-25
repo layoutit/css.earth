@@ -1,0 +1,78 @@
+{
+  "grade": {
+    "coefficients": [
+      [
+        0.1498435172069419,
+        0.09811084394402225,
+        0.07
+      ],
+      [
+        1.6661946259150375,
+        2.0062884286259726,
+        1.8926324084245074
+      ],
+      [
+        0.23161638365806891,
+        0.26662389788933194,
+        0.5157804581485669
+      ],
+      [
+        2.6987170045257636,
+        0.3067875149677134,
+        0.15719187895006448
+      ]
+    ],
+    "dustStrength": 1,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.19678178680470035
+  },
+  "globalControls": {
+    "newGlobalParameters": 4,
+    "existingGlobalGainsRefitted": 2,
+    "pixelParameters": 0,
+    "geometryParametersFitted": 0,
+    "youngRgbFactors": [
+      1.231985689843603,
+      1.0598715278255044,
+      0.9906552757018714
+    ],
+    "youngGainFactor": 1.0941708311236595,
+    "youngNormalizedTint": [
+      1.1259536946149573,
+      0.9686526981687755,
+      0.9053936072162674
+    ],
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014,
+    "youngRgbFactorBounds": [
+      0.25,
+      4
+    ],
+    "discBarGainBounds": [
+      0.5,
+      1.5
+    ],
+    "outskirts": {
+      "gain": 2.80043441709131,
+      "atBound": false,
+      "errorPercent": 9.312002280381648e-8
+    },
+    "apertures": "Global population and disc/bar gains from the inner 4 kpc. One outskirts gain from the >=4 kpc annulus. Both use all valid checkerboards.",
+    "fixed": "All l13 catalogue-object luminosities, component color tints, tone curve, dust settings and geometry.",
+    "canonicalRendererMaximumDifference": 6.661338147750939e-16
+  },
+  "objectBrightness": "src/objects/lmc-volume/.local/versions/l14/object-brightness.json",
+  "geometryOptimized": false,
+  "pixelParameters": 0,
+  "catalogueObjectParameters": 0,
+  "fixedCatalogueObjects": 6507,
+  "populationRgbParameters": 3,
+  "outskirtsGainParameters": 1,
+  "existingDiscBarGainsRefitted": 2
+}

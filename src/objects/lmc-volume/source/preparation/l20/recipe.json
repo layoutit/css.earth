@@ -1,0 +1,145 @@
+{
+  "generator": "packages/bake/authoring/lmc-volume/stellar-run.mts",
+  "configuration": {
+    "version": 20,
+    "parent": 18,
+    "densityVersion": 20,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "change": "Replace analytic old light with Gaia RGB/RC member density. Add finite old and young Gaia points with a conserved luminosity budget. HERITAGE/Bell layer replaces molecular oval screens.",
+    "details": {
+      "population": {
+        "n": 512,
+        "halfKpc": 10,
+        "oldSelection": {
+          "paper": "https://arxiv.org/html/2012.01771",
+          "densityStars": 382116,
+          "resolvedOldStars": 886581,
+          "densitySampling": "Uniform random_index <100,000,000, approximately 5.52% of Gaia DR3; the spatial sample is complete to its declared random-index threshold.",
+          "pointSampling": "All selected old members with G<18 within 20 degrees; no random-index cut.",
+          "membership": {
+            "mean": [
+              1.8400610104918205,
+              0.3699688748282707
+            ],
+            "covariance": [
+              0.24295123070207736,
+              0.006888425730313976,
+              0.36144463132814914
+            ],
+            "parallaxMedian": -0.004507325664422163,
+            "calibrationRows": 48026,
+            "retainedCalibration": 46291
+          },
+          "selection": "Published RGB and RC polygons; signed parallax/error <5 and conditional orthographic proper-motion ellipse chi-square <9.21.",
+          "limitations": "CMD phase proxies are not exact ages. Crowding, extinction and the magnitude limit affect completeness. No survey hole is filled from the photo."
+        },
+        "youngStars": 262992,
+        "points": 1091462,
+        "smoothingSigmaKpc": 0.1,
+        "barDiscPartition": "The measured old-star density is split into a radial-median disc and its positive inner excess, tapered from 3 to 4 kpc. Their sum is the measured density. No analytic ellipse defines the light.",
+        "barMass": 0.15514992612424744,
+        "discMass": 0.8448500735892955,
+        "barMeasured": {
+          "skyCenterWestNorthKpc": [
+            0.6340194464934414,
+            -0.8271664265601925
+          ],
+          "paDegrees": 124.29005009838659,
+          "sigmaMajorKpc": 1.2725819880285962,
+          "axisRatio": 0.5046072959427069
+        },
+        "publishedShapeCheck": {
+          "center": [
+            0.22095285048916255,
+            0.7222364825299707,
+            0
+          ],
+          "angle": -0.5354382542875828,
+          "sigma": 1.0500080370470315,
+          "ratio": 0.38,
+          "sigmaZ": 0.36656497062880344,
+          "luminosity": 0.2842040336717868
+        },
+        "vmcCheck": {
+          "regions": 756,
+          "correlation": 0.8322354033611257
+        },
+        "adoptedHeightsKpc": {
+          "oldDisc": 0.41010570629613075,
+          "bar": 0.36656497062880344,
+          "young": 0.15
+        },
+        "heightResidualMaxKpc": 0.5759992127567132,
+        "maximumPointTauV": 0.5497328198212803,
+        "color": "Gaia Vega magnitudes converted to AB using ESA DR3 zero-point differences, then RP/G/BP mean flux-density ratios serve as broad R/G/B proxies. One grade per population accounts for the photo passbands. No individual stellar colors are fitted.",
+        "depth": "Deterministic height draws from the adopted layer, preserving each measured sky direction. Individual distances remain conditional.",
+        "grain": "Each population budget is divided between unresolved light and real Gaia points. The same intrinsic G budget is conserved at every resolved fraction.",
+        "dust": "Molecular optical-depth budget is redistributed into the HERITAGE-modulated layer and globally normalized to Bell. Finite oval screens are omitted.",
+        "dustNormalization": {
+          "samples": 3171,
+          "factor": 1.164954108601027,
+          "bellMeanFaceOnTauV": 0.07598088622018014,
+          "beforeMeanFaceOnTauV": 0.06522221404191127,
+          "afterMeanFaceOnTauV": 0.07598088622018014
+        },
+        "densityWeighting": "Measured Gaia G flux. All bright members with G<18 are used; faint RGB/RC random-sample fluxes are expanded by 18.11709771 to their declared sampling probability. Gaussian sigma remains 100 pc. The count-only trial is preserved in round1.",
+        "tracers": 1219654,
+        "placement": {
+          "bracketed": 20709,
+          "multipleIntersections": 6,
+          "maximumResidualKpc": 9.999423148873698e-7,
+          "finiteLayerAnchors": 1409,
+          "maximumFiniteLayerOffsetKpc": 0.5759992127567132
+        }
+      },
+      "acceptance": {
+        "barRatioTolerance": 0.02,
+        "wholeImageMaximumRelativeRmsRegression": 0.01,
+        "contrast": "The fixed masked 2–5 arcmin bar contrast must be closer to the photo than l18.",
+        "geometry": "Measured count field, fixed plane and warp; adopted old-disc 410 pc, bar 367 pc, young 150 pc Gaussian sigma.",
+        "controls": "Six global old/bar RGB coefficients and two global resolved fractions. Other population grades, catalogue amplitudes and the display curve remain at l18."
+      }
+    },
+    "dustVersion": 20,
+    "dustStrength": 1.025,
+    "oldPopulationVersion": 20
+  }
+}

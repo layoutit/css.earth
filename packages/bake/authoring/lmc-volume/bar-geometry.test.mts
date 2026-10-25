@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {legacyBar,measuredBar,projectedBar,barSurfaceFor,perspectiveBarMoments} from './bar-geometry.mts';
+import {BAR_SIGMA_Z} from './depth-model.mts';import {BAR_OFFSET,DISTANCE,DEG} from './geometry.mts';
+test('the actual ellipsoid, rather than only its centreline, meets Rathore PA and Kacharov angular sigma',()=>{const b=measuredBar(BAR_SIGMA_Z),p=projectedBar(b);assert.ok(Math.abs(p.paDegrees-121.26)<1e-7);assert.ok(Math.abs(p.sigmaMajorKpc-4271.76/3600*DEG*DISTANCE)<1e-9);assert.equal(b.ratio,.38);assert.equal(b.sigmaZ,BAR_SIGMA_Z);assert.deepEqual(b.center,BAR_OFFSET);assert.ok(Math.abs(projectedBar(legacyBar(BAR_SIGMA_Z)).paDegrees-p.paDegrees)>.1);});
+test('the corrected Gaussian retains luminosity and finite vertical shape',()=>{const b=measuredBar(BAR_SIGMA_Z);let sum=0;for(let y=-5;y<=5;y+=.04)for(let x=-5;x<=5;x+=.04)sum+=barSurfaceFor(b,x,y)*.04**2;assert.ok(Math.abs(sum/b.luminosity-1)<1e-5);});
+test('finite Earth distance preserves the measured bar position angle and scale',()=>{const b=measuredBar(BAR_SIGMA_Z),p=perspectiveBarMoments(b),target=projectedBar(b);assert.ok(Math.abs(p.paDegrees-target.paDegrees)<.01);assert.ok(Math.abs(p.sigmaMajorKpc/target.sigmaMajorKpc-1)<.001);});

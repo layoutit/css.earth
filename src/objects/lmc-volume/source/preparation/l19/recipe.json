@@ -1,0 +1,128 @@
+{
+  "generator": "packages/bake/authoring/lmc-volume/heritage-run.mts",
+  "configuration": {
+    "version": 19,
+    "parent": 18,
+    "densityVersion": 19,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.4213179066421169,
+        1,
+        0.5493861126823162
+      ],
+      [
+        1.284692398374512,
+        1,
+        0.6542414734176175
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.4213179066421169,
+      1,
+      0.5493861126823162
+    ],
+    "change": "Dust only: HERITAGE fine structure in the unchanged 250 pc warped-plane layer, with the parent coarse column and Bell normalization.",
+    "details": {
+      "dust": {
+        "source": {
+          "width": 596,
+          "height": 583,
+          "finite": 86690,
+          "minimum": -3.4448957443237305,
+          "median": -1.8607748746871948,
+          "maximum": 0.5364064574241638,
+          "pixelArcsec": 56.00000000016,
+          "meaning": "log10 dust mass surface density in solar masses per square parsec, Gordon 2014 BEMBB expectation estimator. The FITS extension lacks BUNIT; units are established by the paper and author product description."
+        },
+        "paper": "https://doi.org/10.1088/0004-637X/797/2/85",
+        "erratum": "https://doi.org/10.3847/1538-4357/aa6042",
+        "authorRelease": "https://karllark.github.io/data_magclouds_dustmaps.html",
+        "product": "BEMBB, unconstrained beta, expectation estimator, 19 April 2014 release",
+        "n": 2048,
+        "halfKpc": 10,
+        "cellKpc": 0.009765625,
+        "availableCells": 157206,
+        "overlapSamples": 610,
+        "rawColumnOpticalConversion": 5.882337791783863,
+        "normalization": {
+          "samples": 3171,
+          "factor": 1.0409881219072523,
+          "bellMeanFaceOnTauV": 0.07598088622018014,
+          "beforeMeanFaceOnTauV": 0.07341281075012214,
+          "retainedMolecularMeanFaceOnTauV": 0.010758672171413226,
+          "afterMeanFaceOnTauV": 0.0759808862133245
+        },
+        "layerSigmaKpc": 0.25,
+        "retainMolecular": true,
+        "rawMolecularFloorExcessFraction": 0.25878779269434227,
+        "strengthBounds": [
+          0.25,
+          2
+        ],
+        "reconciliationScaleArcmin": 5,
+        "meaning": "Controlled fine-structure reconciliation: the parent diffuse column is multiplied by HERITAGE Sigma divided by its coverage-normalized five-arcminute Gaussian mean. One global diffuse normalization restores the combined Bell mean, with molecular geometry and opacity retained. This replaces no measured cloud column and adds no independent molecular column twice. Missing HERITAGE cells receive identity modulation.",
+        "limits": "This final candidate uses HERITAGE fine structure, not its discrepant coarse column. The two full-column trials failed the fixed RMS guard and are archived. The footprint is detection limited. The unchanged 250 pc vertical layer may wash out fine extinction. No photograph enters density."
+      },
+      "diagnosticRejected": true,
+      "acceptance": {
+        "wholeImageMaximumRelativeRmsRegression": 0.01,
+        "texture": "The masked 2–5 arcmin bar contrast must move closer to the photo and fine dark structure must visibly improve.",
+        "strengthBounds": [
+          0.25,
+          2
+        ],
+        "scope": "Every emitter, luminosity, color, geometry and display control remains frozen at l18."
+      }
+    },
+    "dustVersion": 19,
+    "dustStrength": 1.025
+  },
+  "generatorArguments": [
+    "--diagnostic-rejected"
+  ],
+  "decision": {
+    "version": 19,
+    "parent": 18,
+    "retained": false,
+    "nextParent": 18,
+    "reason": "The tiny RMS guard failed; the fine dark texture does not visibly improve. The 512 px views and crop are frozen diagnostic evidence; retain l18.",
+    "nativeRmsPassed": true,
+    "contrastPowerCloser": true,
+    "visual": {
+      "coherent": true,
+      "fineTextureImproved": false,
+      "inspected": [
+        "Earth",
+        "face-on",
+        "45 degrees",
+        "edge-on",
+        "l18 and l19 comparison",
+        "photo and both bar crops"
+      ],
+      "finding": "The numerical fine-scale contrast increase is small and does not produce the photograph's visible mottled yellow-orange bar. The side views remain coherent. Retain l18."
+    },
+    "thresholdRelativeRms": 0.01
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "status": "Unaccepted l8 research pilot",
+  "rungs": [
+    {
+      "rung": "tiny",
+      "size": 64,
+      "grid": 512,
+      "stepKpc": 0.035,
+      "seconds": 1.751133333,
+      "grade": {
+        "coefficients": [
+          [
+            1.289505498613842,
+            1.0407753208128552,
+            0.05
+          ],
+          [
+            1.077459177665653,
+            1.0605336994230519,
+            0.43402546333416187
+          ],
+          [
+            0.6296718983936612,
+            0.9988033728147967,
+            1.2687267125035588
+          ],
+          [
+            1.1582495267228308,
+            0.8268684274316972,
+            0.9499623501577404
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 0,
+        "saturation": 1.18,
+        "score": 0.08301253514046576
+      },
+      "components": {
+        "oldDiscAndOutskirts": {
+          "gain": 0.793426939808899,
+          "rgbTint": [
+            1.6252353353724365,
+            1.3117468900961837,
+            0.06301777453138
+          ]
+        },
+        "bar": {
+          "gain": 0.8573394468076222,
+          "rgbTint": [
+            1.25674746645295,
+            1.2370056030572734,
+            0.5062469304897766
+          ]
+        },
+        "young": {
+          "gain": 0.9657339945706722,
+          "rgbTint": [
+            0.6520138070458924,
+            1.034242740164517,
+            1.3137434527895908
+          ]
+        },
+        "gas": {
+          "gain": 0.9783601014374228,
+          "rgbTint": [
+            1.183868317014473,
+            0.8451575511070499,
+            0.9709741318784771
+          ]
+        },
+        "dust": {
+          "gain": 1,
+          "rgbTint": [
+            1,
+            1,
+            1
+          ],
+          "meaning": "Global attenuation-response tint; Bell spatial columns are fixed."
+        }
+      },
+      "residuals": {
+        "trainRelativeRms": 0.10283889874154553,
+        "heldoutRelativeRms": 0.09557321060121354,
+        "totalLightDifferencePercent": -0.34495617787067,
+        "annularDifferencePercent": [
+          -0.41975823328519457,
+          -0.05355079787255912,
+          -1.5973323278745566,
+          33.12593170274063
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.40043005411113386,
+            -0.1606854280066572,
+            0.5611154821177966
+          ],
+          [
+            0.36299424114664136,
+            0.28670581079168755,
+            -0.6497000519383234
+          ],
+          [
+            3.8077592048264384,
+            -1.835861312223075,
+            -1.9718978926033748
+          ]
+        ]
+      },
+      "appearanceRms": 0.08301253514046576,
+      "meaning": "Photo-source round-trip. The same photo supplied the component maps; this is not independent prediction or depth validation."
+    },
+    {
+      "rung": "small",
+      "size": 512,
+      "grid": 1536,
+      "stepKpc": 0.018,
+      "seconds": 235.284795917,
+      "grade": {
+        "coefficients": [
+          [
+            1.3137289217220118,
+            1.0469576743545503,
+            0.019999999999999997
+          ],
+          [
+            1.186824094825783,
+            1.0773214632493668,
+            0.3264137918093842
+          ],
+          [
+            0.49985127710916955,
+            1.0016794787149037,
+            1.2953807224292877
+          ],
+          [
+            1.2497951787016792,
+            0.8096731856938871,
+            0.9145019250601019
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 0,
+        "saturation": 1.15,
+        "score": 0.11655440485648806
+      },
+      "components": {
+        "oldDiscAndOutskirts": {
+          "gain": 0.7935621986921874,
+          "rgbTint": [
+            1.6554832423810935,
+            1.3193139442377242,
+            0.025202813381182413
+          ]
+        },
+        "bar": {
+          "gain": 0.8635197832948447,
+          "rgbTint": [
+            1.3744029005303608,
+            1.2475932620081278,
+            0.37800383746151156
+          ]
+        },
+        "young": {
+          "gain": 0.9323038260844537,
+          "rgbTint": [
+            0.5361463324766941,
+            1.0744131373157806,
+            1.3894405302075252
+          ]
+        },
+        "gas": {
+          "gain": 0.9913234298185561,
+          "rgbTint": [
+            1.2607340259580384,
+            0.8167598599400432,
+            0.9225061141019182
+          ]
+        },
+        "dust": {
+          "gain": 1,
+          "rgbTint": [
+            1,
+            1,
+            1
+          ],
+          "meaning": "Global attenuation-response tint; Bell spatial columns are fixed."
+        }
+      },
+      "residuals": {
+        "trainRelativeRms": 0.1524163836727641,
+        "heldoutRelativeRms": 0.1634245193731343,
+        "totalLightDifferencePercent": -0.49562568348148206,
+        "annularDifferencePercent": [
+          0.35212252878358274,
+          0.6671962999398096,
+          -3.1380906987061863,
+          20.283250687008646
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.04091990907964527,
+            -0.2782051894453963,
+            0.31912509852504156
+          ],
+          [
+            0.192818615239837,
+            0.38726133336186574,
+            -0.5800799486017194
+          ],
+          [
+            2.5628810179943007,
+            -1.3802846318502315,
+            -1.1825963861440747
+          ]
+        ]
+      },
+      "appearanceRms": 0.11655440485648806,
+      "meaning": "Photo-source round-trip. The same photo supplied the component maps; this is not independent prediction or depth validation."
+    }
+  ],
+  "sheet": "src/objects/lmc-volume/.local/versions/l8/sheet.png",
+  "fullFit": false,
+  "slabs": false,
+  "surveyChecks": [
+    {
+      "name": "SMASH",
+      "samples": 24235,
+      "statistic": "Pearson correlation of log blue counts and log young-field intensity",
+      "value": 0.8406878310619045,
+      "interpretation": "Positive association supports the blue-light classification. Counts and diffuse luminosity have different completeness and mass weighting."
+    },
+    {
+      "name": "VMC",
+      "samples": 454,
+      "statistic": "Pearson correlation of regional young-light fractions",
+      "value": 0.2504539353023885,
+      "interpretation": "Regional age check. BC03 is shared, and the photo blue endmember traces hot stars rather than all 15–251 Myr luminosity."
+    },
+    {
+      "name": "VMC recent ages",
+      "samples": 454,
+      "statistic": "Pearson correlation with 4–16 Myr regional light fractions",
+      "value": 0.11496786929462748,
+      "interpretation": "Age-matched alternative for the hot blue endmember. The youngest resolved-population histories are less secure; both VMC comparisons are retained."
+    },
+    {
+      "name": "Bell mean",
+      "samples": 7990,
+      "statistic": "Mean inferred / measured full-column ratio",
+      "value": 0.9811523145501847,
+      "interpretation": "Calibration of the global dust amount, not an independent validation."
+    },
+    {
+      "name": "Bell structure",
+      "samples": 7990,
+      "statistic": "Pearson correlation of photo dust and background-galaxy full columns",
+      "value": 0.07019212473943967,
+      "interpretation": "Spatial check only. The photo proxy can confuse low emission with attenuation; a weak correlation is a limitation."
+    },
+    {
+      "name": "DeMCELS Hα",
+      "samples": 1844,
+      "statistic": "Pearson correlation of log H-alpha and log pink-gas intensity",
+      "value": 0.6057865967859868,
+      "interpretation": "Ten small qualified cutouts only. This does not establish complete gas coverage or absolute line luminosity."
+    },
+    {
+      "name": "WISE",
+      "samples": 36978,
+      "statistic": "Pearson correlation of WISE display-red morphology and photo dust",
+      "value": 0.1861354739617186,
+      "interpretation": "Processed infrared morphology only. Temperature and illumination affect IR brightness; extinction is not thermal emission."
+    }
+  ],
+  "depthStatus": "Conditional component widths; no full tomography.",
+  "report": "src/objects/lmc-volume/.local/versions/l8/notes.md",
+  "rejected": "Observer-ray texture extrusion; its image is retained locally for comparison.",
+  "visualQualification": "Earth and face-on views improve; oblique elongation remains. Not qualified for baking."
+}

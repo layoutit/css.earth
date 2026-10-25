@@ -1,0 +1,94 @@
+{
+  "grade": {
+    "coefficients": [
+      [
+        0.2398211149262372,
+        0.27178394295827285,
+        0.8965435100604449
+      ],
+      [
+        1.7388474788937625,
+        2.1885953244487335,
+        2.624711821584394
+      ],
+      [
+        0.09416920312053137,
+        0.10964112824769087,
+        0.28302335097407805
+      ],
+      [
+        2.9629657705038617,
+        1.0341691177895698,
+        0.7074416767526617
+      ]
+    ],
+    "dustStrength": 1,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.24653720831375686
+  },
+  "components": {
+    "oldDiscAndOutskirts": {
+      "gain": 0.4693828559816516,
+      "rgbTint": [
+        0.5109285775354606,
+        0.5790240088549314,
+        1.9100474136096084
+      ]
+    },
+    "bar": {
+      "gain": 2.1840515416422965,
+      "rgbTint": [
+        0.7961567965498823,
+        1.00208043753538,
+        1.201762765914738
+      ]
+    },
+    "young": {
+      "gain": 0.1622778941141001,
+      "rgbTint": [
+        0.5802959400885468,
+        0.6756381012105105,
+        1.7440659587009426
+      ]
+    },
+    "gas": {
+      "gain": 1.5681921883486976,
+      "rgbTint": [
+        1.8894149534208924,
+        0.6594658011136678,
+        0.45111924546544
+      ]
+    },
+    "dust": {
+      "gain": 1,
+      "rgbTint": [
+        1,
+        1,
+        1
+      ],
+      "meaning": "Bell supplies one column normalization. NANTEN/MAGMA clouds and the smooth paper disc supply spatial attenuation."
+    }
+  },
+  "objectBrightness": "src/objects/lmc-volume/.local/versions/l11/object-brightness.json",
+  "geometryOptimized": false,
+  "pixelParameters": 0,
+  "catalogueObjectParameters": 6507,
+  "diagnostics": {
+    "catalogueObjectParameters": 6507,
+    "activeObjects": 4649,
+    "geometryParametersFitted": 0,
+    "pixelParameters": 0,
+    "componentRgbGrades": 4,
+    "regularization": "3% diagonal ridge towards catalogue light priors, nonnegative amplitudes bounded at 25 times prior",
+    "initialAppearanceRms": 0.39660590609820456,
+    "appearanceRms": 0.24653720831375686,
+    "calibrationPixels": "All valid pixels in each catalogue-object footprint. Both checkerboards are calibration residuals.",
+    "scope": "Only catalogue-object luminosities, component RGB grades and one tone curve. No geometry or pixel-color transfer."
+  }
+}

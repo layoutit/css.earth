@@ -1,0 +1,74 @@
+{
+  "schema": "lmc-physical-model-pilot@1",
+  "version": "l3",
+  "label": "Measured outer warp",
+  "acceptedByOwner": false,
+  "scope": "Tiny and small images only; no full fit or slab bake",
+  "keptComponents": [
+    1,
+    2,
+    3
+  ],
+  "generator": "packages/bake/authoring/lmc-volume/run.mts",
+  "command": "node packages/bake/authoring/lmc-volume/run.mts --through=3",
+  "distanceKpc": 49.59,
+  "geometry": {
+    "inclinationDegrees": 25.86,
+    "lineOfNodesDegrees": 149.23,
+    "sigmaDiscKpc": 1.7830682882440467,
+    "sigmaDiscZKpc": 0.41010570629613075,
+    "barAngleInDiscRadians": -0.5331322927913074,
+    "barOffsetKpc": [
+      0.22095285048916255,
+      0.7222364825299707,
+      0
+    ],
+    "barLuminosityRelativeToDisc": 0.2842040336717868
+  },
+  "modelingChoice": "Kacharov density shapes with Rathore placement/orientation and Choi/Oden geometry; not the original equilibrium solution",
+  "optimizer": {
+    "method": "Bounded coordinate least squares on global component gains and shared red/green and blue/green ratios; discrete dust-column scale",
+    "gainBounds": [
+      0,
+      10
+    ],
+    "colorRatioBounds": [
+      0.4,
+      2.5
+    ],
+    "dustScaleBounds": [
+      0,
+      2
+    ],
+    "perPixelFreeValues": 0,
+    "freeControlsAtMost": 8,
+    "outerGain": "Tied to disc gain",
+    "outerGainReason": "The photo cannot constrain the far outskirts. Retain the count-normalized radial continuation at the same old-population exposure.",
+    "originalB30OptimizerAvailable": false
+  },
+  "sources": {
+    "n": 256,
+    "halfKpc": 20,
+    "warpAvailable": 8496,
+    "dustAvailable": 3175,
+    "youngAvailable": 3292,
+    "blueUsed": 2423,
+    "youngFraction": 0.15094200784552478,
+    "sources": [
+      "Mazzi 2021 JKs: 756 native regional SFHs",
+      "BC03 Z=0.008 Chabrier optical spectra, fixed proxy for VMC Kroupa population colors",
+      "SMASH blue observed-color count positions; strict fraction >=0.8; no photograph-derived values",
+      "Oden release: qualified Astropy TAN cache, 64 by 64, 0.25 degree pixels",
+      "Bell 2022: 222749 selected background-galaxy sightlines"
+    ],
+    "limitations": [
+      "BC03 and VMC use different IMFs/tracks; luminosity conversion is a fixed proxy with global normalization, not a claimed reproduction of VMC synthesis.",
+      "SMASH selection is not a complete, foreground-free young-star catalogue. Counts only redistribute regional age-derived luminosity.",
+      "Young-population values are interpolated over 0.25 kpc at survey gaps and blended to the analytic parent. This is an explicit continuity assumption, not measured completeness or invented observations.",
+      "Oden cache covers less than the full native Galactic CAR release. Outside support the warp is unknown; a planar continuation with one-degree coverage taper is assumed.",
+      "Bell missing cells stay unsupported; no dust column is invented in gaps.",
+      "Warp is applied only beyond 4.5 kpc with a two-kpc smooth transition, preserving the accepted inner plane.",
+      "DeMCELS still needs qualified full-field input; the empty gas raster is not a measured zero."
+    ]
+  }
+}

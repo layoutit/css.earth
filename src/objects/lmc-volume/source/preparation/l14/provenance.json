@@ -1,0 +1,230 @@
+{
+  "status": "Unaccepted l14 continuous-population prototype",
+  "rungs": [
+    {
+      "rung": "tiny",
+      "size": 64,
+      "stepKpc": 0.12,
+      "seconds": 6.783727417,
+      "grade": {
+        "coefficients": [
+          [
+            0.11241433532784491,
+            0.14296087928353232,
+            0.2709423779120667
+          ],
+          [
+            1.8589454617170487,
+            2.64536492703456,
+            4.610859325517858
+          ],
+          [
+            1.055424281696341,
+            1.149594919957487,
+            1.3547930021826886
+          ],
+          [
+            1.5415944727745603,
+            1.466731503790015,
+            1.4339638298007407
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 8,
+        "saturation": 2.03,
+        "score": 0.08943495652194226
+      },
+      "residuals": {
+        "trainRelativeRms": 0.09778715434502828,
+        "heldoutRelativeRms": 0.09186472299646015,
+        "totalLightDifferencePercent": -0.4088516608081405,
+        "annularDifferencePercent": [
+          0.028497725633491733,
+          -1.2733058598213831,
+          0.27401559928710295,
+          -3.037271545380804e-8
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            0.018699986485104514,
+            -0.14954224650486903,
+            0.1308422600197756
+          ],
+          [
+            -0.8486494726012428,
+            0.004702011716606336,
+            0.8439474608846365
+          ],
+          [
+            3.7030222175196856,
+            -2.5092059370896926,
+            -1.1938162804299934
+          ]
+        ]
+      },
+      "diagnostics": {
+        "newGlobalParameters": 4,
+        "existingGlobalGainsRefitted": 2,
+        "pixelParameters": 0,
+        "geometryParametersFitted": 0,
+        "youngRgbFactors": [
+          1.3012766558261282,
+          1.1155480125561021,
+          1.1585664456584799
+        ],
+        "youngGainFactor": 1.19179703801357,
+        "youngNormalizedTint": [
+          1.09186095813347,
+          0.9360218031884388,
+          0.9721172386780913
+        ],
+        "innerDiscGain": 0.6500440905113585,
+        "barGain": 0.9994923919355493,
+        "youngRgbFactorBounds": [
+          0.25,
+          4
+        ],
+        "discBarGainBounds": [
+          0.5,
+          1.5
+        ],
+        "outskirts": {
+          "gain": 3.1706473557278514,
+          "atBound": false,
+          "errorPercent": -3.037259332927533e-8
+        },
+        "apertures": "Global population and disc/bar gains from the inner 4 kpc. One outskirts gain from the >=4 kpc annulus. Both use all valid checkerboards.",
+        "fixed": "All l13 catalogue-object luminosities, component color tints, tone curve, dust settings and geometry.",
+        "canonicalRendererMaximumDifference": 5.551115123125783e-16
+      },
+      "projection": {
+        "emissionEvents": 2384381,
+        "objects": 199974,
+        "owners": 6508,
+        "dustScreenPixels": 85,
+        "stepKpc": 0.12,
+        "method": "Finite 3D object chord integrals, positive depth quadrature, pixel-area normalization, canonical smooth disc/bar/warp integration and foreground attenuation by finite molecular clouds. No photograph in the renderer."
+      },
+      "meaning": "Both checkerboards are appearance-calibration residuals. They are not held-out validation or a test of unknown individual depths."
+    },
+    {
+      "rung": "small",
+      "size": 512,
+      "stepKpc": 0.06,
+      "seconds": 119.237110542,
+      "grade": {
+        "coefficients": [
+          [
+            0.1498435172069419,
+            0.09811084394402225,
+            0.07
+          ],
+          [
+            1.6661946259150375,
+            2.0062884286259726,
+            1.8926324084245074
+          ],
+          [
+            0.23161638365806891,
+            0.26662389788933194,
+            0.5157804581485669
+          ],
+          [
+            2.6987170045257636,
+            0.3067875149677134,
+            0.15719187895006448
+          ]
+        ],
+        "dustStrength": 1,
+        "dustTint": [
+          1,
+          1,
+          1
+        ],
+        "stretch": 20,
+        "saturation": 0.5,
+        "score": 0.19678178680470035
+      },
+      "residuals": {
+        "trainRelativeRms": 0.24787275002356443,
+        "heldoutRelativeRms": 0.3128884324249994,
+        "totalLightDifferencePercent": -2.674032748698185,
+        "annularDifferencePercent": [
+          -4.6735190911058595,
+          0.5029857611881017,
+          -5.067167187937471,
+          9.311724724625492e-8
+        ],
+        "channelShareDifferencePercentagePoints": [
+          [
+            -0.699120086510624,
+            0.6017586275161746,
+            0.09736145899444937
+          ],
+          [
+            -0.514857276058639,
+            0.23159634442457833,
+            0.2832609316340551
+          ],
+          [
+            9.57964701929605,
+            -2.868649818733404,
+            -6.710997200562662
+          ]
+        ]
+      },
+      "diagnostics": {
+        "newGlobalParameters": 4,
+        "existingGlobalGainsRefitted": 2,
+        "pixelParameters": 0,
+        "geometryParametersFitted": 0,
+        "youngRgbFactors": [
+          1.231985689843603,
+          1.0598715278255044,
+          0.9906552757018714
+        ],
+        "youngGainFactor": 1.0941708311236595,
+        "youngNormalizedTint": [
+          1.1259536946149573,
+          0.9686526981687755,
+          0.9053936072162674
+        ],
+        "innerDiscGain": 0.7372495191616437,
+        "barGain": 0.99129464369014,
+        "youngRgbFactorBounds": [
+          0.25,
+          4
+        ],
+        "discBarGainBounds": [
+          0.5,
+          1.5
+        ],
+        "outskirts": {
+          "gain": 2.80043441709131,
+          "atBound": false,
+          "errorPercent": 9.312002280381648e-8
+        },
+        "apertures": "Global population and disc/bar gains from the inner 4 kpc. One outskirts gain from the >=4 kpc annulus. Both use all valid checkerboards.",
+        "fixed": "All l13 catalogue-object luminosities, component color tints, tone curve, dust settings and geometry.",
+        "canonicalRendererMaximumDifference": 6.661338147750939e-16
+      },
+      "projection": {
+        "emissionEvents": 10398314,
+        "objects": 199974,
+        "owners": 6508,
+        "dustScreenPixels": 5659,
+        "stepKpc": 0.06,
+        "method": "Finite 3D object chord integrals, positive depth quadrature, pixel-area normalization, canonical smooth disc/bar/warp integration and foreground attenuation by finite molecular clouds. No photograph in the renderer."
+      },
+      "meaning": "Both checkerboards are appearance-calibration residuals. They are not held-out validation or a test of unknown individual depths."
+    }
+  ],
+  "sheet": "src/objects/lmc-volume/.local/versions/l14/sheet.png",
+  "fullFit": false,
+  "slabs": false
+}
