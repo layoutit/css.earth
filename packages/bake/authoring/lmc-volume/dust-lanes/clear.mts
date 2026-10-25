@@ -1,0 +1,7 @@
+/** A dust-free reference distinguishes opacity effects from fixed stellar structure. */
+import {writeFile} from 'node:fs/promises';
+import {loadParent,parentRung} from '../sequence-state.mts';import {makeRaster} from '../inputs.mts';
+import {readGrade,gradedPrediction} from '../grade.mts';import {photoRgb,displayRgb} from '../bar-ratios.mts';
+import {earthCamera} from '../render.mts';import {projectCatalogue,catalogueBasis} from '../catalogue-render.mts';
+import {L26,laneContext,measure,match} from './measure.mts';
+const {scene}=await loadParent(25),parent=await parentRung(25,false,scene),c=await laneContext(),empty=makeRaster(2,20);empty.mask.fill(1);scene.dustLayer={column:empty,strength:1.2,retainMolecular:false,clouds:[]};const b=catalogueBasis(projectCatalogue(scene,earthCamera(c.o.width,c.o.height,c.o.rayAt,c.o.pixelOf),.03,c.bar),scene,parent.amplitudes),prediction=gradedPrediction(b,readGrade(parent.result.grade)),photo=measure(photoRgb(c.o),c),clear=measure(displayRgb(prediction,c.o.metadata.sky.rgbLinearDisplay),c),result={photo,clear,checks:match(clear,photo),meaning:'Internal dust is disabled only for this reference ceiling. Stellar emission, Milky Way foreground, grading and the fixed l25 lane mask are unchanged. This is not a candidate model.'};await writeFile(L26+'unattenuated-reference.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({sentinel:'L26_UNATTENUATED_REFERENCE_COMPLETE',...result}));

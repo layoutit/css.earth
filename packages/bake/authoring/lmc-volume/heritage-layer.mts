@@ -8,7 +8,7 @@ import {blur} from './young-density.mts';
 import {chord,column} from './catalogue-volume.mts';
 import type {CatalogueScene} from './catalogue-scene.mts';
 import type {VolumeObject} from './catalogue-volume.mts';
-export interface DustLayer {column:Raster;strength:number;retainMolecular?:boolean;clouds?:VolumeObject[];}
+export interface DustLayer {column:Raster;strength:number;retainMolecular?:boolean;clouds?:VolumeObject[];cloudExtinctionRgb?:Float32Array;}
 export function sampleDensity(values:Float64Array,width:number,height:number,x:number,y:number){const i=Math.floor(x),j=Math.floor(y),u=x-i,v=y-j;let mass=0,coverage=0;for(let b=0;b<2;b++)for(let a=0;a<2;a++){if(i+a<0||j+b<0||i+a>=width||j+b>=height)continue;const log=values[(j+b)*width+i+a],w=(a?u:1-u)*(b?v:1-v);if(Number.isFinite(log)){need(log> -10&&log<3,'Implausible HERITAGE log density');mass+=10**log*w;coverage+=w;}}return{value:coverage>0?mass/coverage:0,coverage};}
 export function normalizeToBell(map:Raster,bell:Raster){let measured=0,model=0,n=0;for(let y=0;y<bell.n;y+=2)for(let x=0;x<bell.n;x+=2){const i=y*bell.n+x;if(!bell.mask[i])continue;const px=((x+.5)/bell.n*2-1)*bell.half,py=((y+.5)/bell.n*2-1)*bell.half;if(Math.abs(px)>=map.half||Math.abs(py)>=map.half)continue;measured+=bell.values[i];model+=at(map,px,py);n++;}need(n>100&&model>0,'No Bell/HERITAGE calibration overlap');const factor=measured/model;for(let i=0;i<map.values.length;i++)map.values[i]*=factor;return{samples:n,factor,bellMeanFaceOnTauV:measured/n,beforeMeanFaceOnTauV:model/n,afterMeanFaceOnTauV:measured/n};}
 export async function makeHeritageLayer(scene:CatalogueScene){
