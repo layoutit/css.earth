@@ -4615,6 +4615,66 @@
         "kind": "local",
         "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
       }
+    },
+    {
+      "id": "l24-recipe-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l24/recipe.json",
+      "bytes": 8002,
+      "generator": "packages/bake/authoring/lmc-volume/dust-native/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l24-fit-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l24/fit.json",
+      "bytes": 3557,
+      "generator": "packages/bake/authoring/lmc-volume/dust-native/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l24-lineage-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l24/lineage.json",
+      "bytes": 30640,
+      "generator": "packages/bake/authoring/lmc-volume/dust-native/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l24-provenance-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l24/provenance.json",
+      "bytes": 19038,
+      "generator": "packages/bake/authoring/lmc-volume/dust-native/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l24-frame-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l24/frame.json",
+      "bytes": 474,
+      "generator": "packages/bake/authoring/lmc-volume/dust-native/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
+    },
+    {
+      "id": "l24-field-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l24/field.json",
+      "bytes": 23630,
+      "generator": "packages/bake/authoring/lmc-volume/dust-native/run.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Unaccepted physical-model experiment. Tiny/small calibration and reference renders only. No runtime delivery or scientific acceptance is implied."
+      }
     }
   ]
 }

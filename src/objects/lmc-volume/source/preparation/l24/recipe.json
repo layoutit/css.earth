@@ -1,0 +1,155 @@
+{
+  "generator": "packages/bake/authoring/lmc-volume/dust-native/run.mts",
+  "preparation": "packages/bake/authoring/lmc-volume/dust-native/prepare.mts",
+  "configuration": {
+    "version": 24,
+    "parent": 21,
+    "densityVersion": 21,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 24,
+    "dustStrength": 2,
+    "oldPopulationVersion": 21,
+    "change": "Dust only: full native HERITAGE columns, one galaxy-wide Bell normalization, and finite foreground lane clouds.",
+    "details": {
+      "dust": {
+        "version": 24,
+        "parent": 21,
+        "n": 2048,
+        "halfKpc": 10,
+        "finiteClouds": true,
+        "retainMolecular": false,
+        "source": {
+          "width": 596,
+          "height": 583,
+          "finite": 86690,
+          "minimum": -3.4448957443237305,
+          "median": -1.8607748746871948,
+          "maximum": 0.5364064574241638,
+          "pixelArcsec": 56.00000000016,
+          "meaning": "log10 dust mass surface density in solar masses per square parsec, Gordon 2014 BEMBB expectation estimator. The FITS extension lacks BUNIT; units are established by the paper and author product description."
+        },
+        "clouds": 86690,
+        "nativePixelArcsec": 56.00000000016,
+        "nominalNativePixelPc": 13.463469849922726,
+        "conversion": {
+          "avMagPerSolarMassPerPc2": 7.394,
+          "source": "https://doi.org/10.1093/mnras/stac1545",
+          "equation": "Bell et al. 2022 equation 1: A_V=0.7394 [Sigma_d/(10^5 solar masses per square kiloparsec)] mag, following Draine et al. 2014. This equals 7.394 Sigma_d for solar masses per square parsec.",
+          "status": "A model-dependent optical conversion, then reconciled with Bell using one common scale. No native pixel has its own scale."
+        },
+        "normalization": {
+          "factor": 0.8858091574899958,
+          "area": 0.006281504476511465,
+          "measuredIntegral": 0.0010171415650259308,
+          "beforeIntegral": 0.0011482626437370267,
+          "afterIntegral": 0.0010171415650259308,
+          "samples": 85397
+        },
+        "columns": {
+          "minimumAv": 0.002351385672496213,
+          "medianAv": 0.0902467363146441,
+          "p90Av": 0.39877163959226913,
+          "p99Av": 1.4112230519785116,
+          "maximumAv": 22.52299131514399,
+          "pixelsAvAtLeastOne": 1733,
+          "foregroundCells": 8063,
+          "foregroundMedianAv": 0.2514265021351021
+        },
+        "layerSigmaKpc": 0.25,
+        "strengthBounds": [
+          0.25,
+          2
+        ],
+        "foreground": {
+          "maximumNormalOffsetKpc": 0.3,
+          "depthCorrelationSigmaPc": 100,
+          "positiveZ": "The disc normal has a positive dot product with the Earth-facing direction, so positive height is nearer the observer.",
+          "footprint": "The published bar ellipse, with a smooth taper from 1.5 to 2.5 major-axis sigma.",
+          "columnSelection": "Foreground offset rises smoothly from A_V=0.05 to 0.2 mag; lower-column dust remains centred on the warped plane.",
+          "assumption": "The 300 pc near-side offset is adopted to put dense lanes before the thick 367 pc bar. It is not an individual cloud distance measurement. The unchanged 250 pc Gaussian is the dispersion of cloud centres. Heights are spatially correlated with an adopted 100 pc Gaussian scale so adjacent cells do not receive unrelated depths; each cloud has a finite depth equal to its native transverse FWHM."
+        },
+        "interpolation": "Compact positive 3D separable tents. Native-pixel weights are direct HERITAGE columns times projected cell area; their projected footprints implement linear interpolation. No five-arcminute high-pass division or local Bell rescaling is used.",
+        "missingHeritage": "Only missing HERITAGE support retains the full l21 diffuse column. No extra molecular attenuation is added.",
+        "missingCells": 4037098,
+        "seconds": 0.9066186670000002,
+        "limits": "HERITAGE measures modelled projected dust surface density. Three-dimensional depths, compact kernel shape and foreground placement remain adopted priors. Optical scattering into the sightline is not modelled.",
+        "input": {
+          "path": "src/objects/lmc-volume/.local/versions/l19/inputs/lmc_bembb_19apr14_dust_param_exp.final.fits",
+          "product": "Gordon 2014 HERITAGE BEMBB expectation, unconstrained beta, 19 April 2014 author release",
+          "url": "https://www.stsci.edu/~kgordon/heritage/heritage_lmc_rebin_dust_fit_maps_bembb_19apr14.tar.gz",
+          "paper": "https://doi.org/10.1088/0004-637X/797/2/85",
+          "release": "https://karllark.github.io/data_magclouds_dustmaps.html",
+          "erratum": "https://doi.org/10.3847/1538-4357/aa6042",
+          "erratumEffect": "The 2017 erratum corrects quoted emissivities by pi and states that the released surface-density maps and conclusions are unaffected. The released map is used directly; no emissivity refit is done."
+        }
+      },
+      "maximumCorrectionRounds": 3,
+      "freeParameters": "Only the bounded global dust strength. All l21 stellar colors, grades, point fluxes, source amplitudes, density, heights and camera registration remain fixed.",
+      "acceptance": {
+        "status": "Partial diagnostic. l21 remains the owner-accepted base.",
+        "promoted": false,
+        "visualLaneMatchPassed": false,
+        "ownerAcceptedBase": 21,
+        "awaitingOwnerReview": true,
+        "barColorPassed": true,
+        "barColorErrorPercent": [
+          -0.8779753689198588,
+          1.0936818365743228
+        ],
+        "laneColorCloser": true,
+        "photoLaneToClearBrownColorRatio": 1.0657539114418184,
+        "l21LaneToClearBrownColorRatio": 0.98529154222098,
+        "l24LaneToClearBrownColorRatio": 1.032157210883085,
+        "rmsIsGate": false,
+        "visualAssessment": "Native-column dust is now allowed to obscure and redden the bar. The new structure must still be judged against the connected, broad brown-orange lanes in the photo; numerical averages alone are not acceptance. The lanes are still too dark and fragmented, although their red-to-blue contrast improves. The final sheet and all three side views were inspected.",
+        "physicalAssumptions": "A 300 pc near-side offset for bar dust, a 250 pc centre-height dispersion with adopted 100 pc spatial correlation, and compact cloud depth equal to the 56 arcsecond transverse sample width. These are geometry priors, not measured individual cloud distances.",
+        "globalBudget": "The HERITAGE column is first multiplied everywhere by the single Bell overlap factor. The allowed global dust strength is then applied. At strength 2 the total covered column is twice the Bell-normalized baseline; no local column has its own scale."
+      },
+      "correctionRounds": {
+        "completed": 3,
+        "round1": "Full columns with independent cell depths and a 600 pc dense-cell offset created black punctures.",
+        "round2": "Correlated 100 pc depths and a 300 pc offset removed most punctures but the lane colors remained weak.",
+        "round3": "The last bounded trial keeps the round-2 geometry and raises only the global dust strength to 2."
+      }
+    }
+  },
+  "reportGenerator": "packages/bake/authoring/lmc-volume/dust-native/report.mts"
+}

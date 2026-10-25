@@ -1,20 +1,23 @@
 /** Canonical positive three-dimensional objects. Density has no observer or image input. */
 import {dot,add,mul,normalize,cross,type V3} from './geometry.mts';
 import {need} from './inputs.mts';
+import {tentDensity,tentChord,tentColumnTo,type TentIntegral} from './dust-native/tent.mts';
 export type Component=0|1|2|3|4;
-export interface VolumeObject {id:string;owner:string;kind:'ball'|'shell'|'filament'|'dust';component:Component;center:V3;basis:[V3,V3,V3];axes:V3;inner:number;color:V3;weight:number;source:string;halfSpace?:V3;}
-export interface Chord {center:number;half:number;q:number;a:number;normalization:number;clipLo:number;clipHi:number;}
+export interface VolumeObject {id:string;owner:string;kind:'ball'|'shell'|'filament'|'dust'|'dust-tent';component:Component;center:V3;basis:[V3,V3,V3];axes:V3;inner:number;color:V3;weight:number;source:string;halfSpace?:V3;}
+export interface Chord {center:number;half:number;q:number;a:number;normalization:number;clipLo:number;clipHi:number;tent?:TentIntegral;}
 export function volumeObject(v:VolumeObject):VolumeObject {
  need(v.axes.every(a=>Number.isFinite(a)&&a>0)&&v.center.every(Number.isFinite)&&v.weight>=0&&Number.isFinite(v.weight),'Invalid finite object');
  for(let k=0;k<3;k++){need(Math.abs(dot(v.basis[k],v.basis[k])-1)<1e-6,'Object basis is not normalized');for(let j=0;j<k;j++)need(Math.abs(dot(v.basis[k],v.basis[j]))<1e-6,'Object basis is not orthogonal');}
  need(v.kind!=='shell'||v.inner>0&&v.inner<1,'Invalid hollow-shell wall');return v;
 }
 export function density(v:VolumeObject,p:V3):number {
+ if(v.kind==='dust-tent')return tentDensity(v,p);
  const delta=add(p,mul(v.center,-1));if(v.halfSpace&&dot(delta,v.halfSpace)>0)return 0;let q=0;for(let k=0;k<3;k++)q+=(dot(delta,v.basis[k])/v.axes[k])**2;if(q>=1)return 0;
  const product=v.axes[0]*v.axes[1]*v.axes[2];
  return v.kind==='shell'?(q<v.inner*v.inner?0:(v.halfSpace?2:1)*3/(4*Math.PI*product*(1-v.inner**3))):105/(32*Math.PI*product)*(1-q)**2;
 }
 export function chord(v:VolumeObject,origin:V3,direction:V3):Chord|null {
+ if(v.kind==='dust-tent')return tentChord(v,origin,direction);
  const delta=add(origin,mul(v.center,-1));let a=0,b=0,c=0;
  for(let k=0;k<3;k++){const o=dot(delta,v.basis[k])/v.axes[k],d=dot(direction,v.basis[k])/v.axes[k];a+=d*d;b+=o*d;c+=o*o;}
  const q=c-b*b/a;if(q>=1)return null;const product=v.axes[0]*v.axes[1]*v.axes[2],center=-b/a,half=Math.sqrt(Math.max(0,1-q)/a);let clipLo=-half,clipHi=half;
@@ -23,6 +26,7 @@ export function chord(v:VolumeObject,origin:V3,direction:V3):Chord|null {
 }
 function primitive(t:number,a:number,u:number):number{return u*u*t-2*u*a*t**3/3+a*a*t**5/5;}
 export function columnTo(v:VolumeObject,c:Chord,t:number):number {
+ if(c.tent)return tentColumnTo(c,t);
  const x=Math.max(-c.half,Math.min(c.half,t-c.center));
  if(v.kind==='shell'){
   let length=0;for(const [lo,hi]of shellIntervals(v,c))length+=Math.max(0,Math.min(hi,x)-lo);return length*c.normalization;
