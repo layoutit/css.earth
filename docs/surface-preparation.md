@@ -417,7 +417,9 @@ its georeferenced sampler at true east longitudes, correlates that with the prep
 edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
 declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
 the declared edge plus (centre − 180°); the check allows for that, and so must anyone who draws Gazetteer rims on a
-minimap by hand. A redraw-only run carries the published feature anchors forward, so it runs the full preparation when
+minimap by hand. A planet locked to its star (`cssearth-synchronous-rotation@1`) with no framing record is centred on
+longitude 0, the point that faces the star, so its day side is one disc in the middle of the minimap instead of two halves
+at its edges (`readMinimapCenter`). A redraw-only run carries the published feature anchors forward, so it runs the full preparation when
 the surface map's edge differs from the one the published feature record states.
 
 On 2026-09-28 this found eight bodies drawn half a turn from their frames: Iapetus, Ganymede, Ariel, Miranda, Oberon,

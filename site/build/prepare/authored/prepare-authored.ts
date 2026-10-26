@@ -14,7 +14,7 @@ import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widest
 import { prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
 import { checkGaiaCepheidModel, parseGaiaCepheidRow, pulsationTrack } from '@cssearth/bake/photometry';
-import { assertDefaultViewFacesDataset } from '@cssearth/bake/objects/default-view';
+import { assertDefaultViewFacesDataset, readMinimapCenter } from '@cssearth/bake/objects/default-view';
 import { prepareObjectContentAssets } from '../../content/prepare.ts';
 import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/objects/host-adapters';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
@@ -110,9 +110,9 @@ export async function assertMapsStartAtSurfaceMapEdge(objectDirectory: string, o
   const surfaceMapPath = resolve(objectDirectory, 'source', surfaceMap);
   const edge = record(JSON.parse(await readFile(surfaceMapPath, 'utf8')) as unknown, 'surface map').mapLeftEdgeLongitudeDeg;
   if (typeof edge !== 'number' || !Number.isFinite(edge)) throw new TypeError(`${descriptor.id}: ${surfaceMapPath} mapLeftEdgeLongitudeDeg is ${String(edge)}, not a number.`);
-  const framing = await readFile(resolve(objectDirectory, 'source/presentation/minimap.json'), 'utf8').then(text => (JSON.parse(text) as { centerLongitudeDegrees?: unknown }).centerLongitudeDegrees, () => undefined);
+  const framing = await readMinimapCenter(objectDirectory);
   // prepare-surface-minimaps rolls a framed minimap so its left edge is map longitude (center - 180).
-  const minimapEdge = ((edge + (typeof framing === 'number' ? framing - 180 : 0)) % 360 + 360) % 360;
+  const minimapEdge = ((edge + (framing === undefined ? 0 : framing - 180)) % 360 + 360) % 360;
   const minimaps = record(JSON.parse(await readFile(resolve(outputDirectory, 'minimaps.json'), 'utf8')) as unknown, 'minimaps').images;
   for (const value of surfaces) {
     const surface = record(value, 'raster surface'), science = surface.science === undefined ? undefined : record(surface.science, `${String(surface.id)} science`);
