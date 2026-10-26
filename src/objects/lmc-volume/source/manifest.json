@@ -5405,6 +5405,16 @@
         "kind": "local",
         "reason": "Native-resolution reference of the owner-approved l36 physical model. No model refit or runtime publication."
       }
+    },
+    {
+      "id": "l36-rejected-slab-diagnostic",
+      "path": "src/objects/lmc-volume/source/preparation/l36/slab-diagnostic.json",
+      "bytes": 79021,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/record-slab-blocker.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Rejected bounded 33-layer slab-compression diagnostic of the approved model. No runtime installation or publication."
+      }
     }
   ]
 }

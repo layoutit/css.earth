@@ -1,5 +1,7 @@
 # Large Magellanic Cloud (LMC)
 
+The owner approved the replacement **l36 model** on 26 October 2026. Its [1024 px reference run](source/preparation/l36/native.json) preserves the approved parameters, with owner-pin color and brightness changes below 0.7%. The [33-layer compression pilot](source/preparation/l36/slab-diagnostic.json) failed the multi-view light, radial and color gates after three corrections. Installation and phone qualification wait for a passing bake. The sections below describe the currently installed bank.
+
 Three published images color one shared three-dimensional emission model; **Horálek optical is the default**. Each dataset carries the same 242 directional slices (97 x, 80 y, 65 z) and the same 1,042 catalogue stars, so switching datasets changes color and never geometry. Nothing here measures gas or dust depth.
 
 The shape is a hypothesis with two parts. A broad envelope carries 80.75% of the Horálek image light along the depth distribution of the **Garver et al. stellar simulation**, and 470 fitted detail components sit at the strongest simulation mode along their own sightlines. The LMC has no observational depth tracer in this repository, so, unlike the SMC's ellipsoid, the envelope shape is the simulation's own and untested. Catalogue-star depths are realizations inside that model, not distances.
