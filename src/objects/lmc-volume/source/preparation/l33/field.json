@@ -1,0 +1,65 @@
+{
+  "version": 33,
+  "parent": 32,
+  "configuration": {
+    "version": 33,
+    "parent": 32,
+    "densityVersion": 29,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 25,
+    "dustStrength": 1.0919999999999999,
+    "oldPopulationVersion": 21,
+    "change": "Match blue-population grain with measured Gaia stars and one resolved-light fraction.",
+    "details": {
+      "ownerAcceptedBase": 31,
+      "freeParameters": 1,
+      "grain": "The existing native Gaia young-member points retain their positions, adopted 150 pc heights and individual RP/G/BP flux colors. Only their share of the conserved young luminosity changes.",
+      "selection": "Gaia Collaboration, Luri et al. 2021 Young 1 and Young 2; same accepted member bank as l21 and l29.",
+      "frozen": "All densities, point coordinates and colors, dust, object amplitudes, and the l32 component and global grades.",
+      "maximumCorrectionRounds": 3
+    },
+    "dustExtinctionRgb": [
+      0.25,
+      1,
+      1.879765395894428
+    ]
+  }
+}
