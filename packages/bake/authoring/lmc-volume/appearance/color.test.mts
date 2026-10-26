@@ -1,4 +1,4 @@
-import {test} from 'node:test';import assert from 'node:assert/strict';import {youngColorRgb,gradedPrediction,readGrade,LUMA,type Grade} from '../grade.mts';import {blueSamples} from './color.mts';
+import {test} from 'node:test';import assert from 'node:assert/strict';import {youngColorRgb,gradedPrediction,readGrade,LUMA,type Grade} from '../grade.mts';import {blueSamples,fitYoungColor} from './color.mts';
 const grade=():Grade=>({coefficients:[[1,1,1],[1,1,1],[1,1,1],[1,1,1]],dustStrength:1,dustTint:[1,1,1],stretch:20,saturation:.5,score:0});
 test('component tint and saturation deepen blue while preserving photopic brightness',()=>{const rgb:[number,number,number]=[.1,.2,.3],m={tint:[.1,1,3] as [number,number,number],saturation:3},out=youngColorRgb(rgb,m),y=(a:number[])=>a.reduce((s,v,c)=>s+v*LUMA[c],0);assert.ok(out[2]/Math.max(out[1],1e-10)>rgb[2]/rgb[1]);assert.ok(Math.abs(y(out)-y(rgb))<1e-13);assert.deepEqual(rgb,[.1,.2,.3]);});
 test('the canonical grade changes young color only, preserving total luminance after its nonlinear display',()=>{const planes=Array.from({length:5},()=>Float64Array.from([.1,.15,.2,.02,.01,.005])),basis={width:2,height:1,dustGain:1,planes},g=grade(),a=gradedPrediction(basis,g);g.youngColor={tint:[.1,1,3],saturation:3};const b=gradedPrediction(basis,g);assert.notDeepEqual(a,b);for(let p=0;p<2;p++){let delta=0;for(let c=0;c<3;c++)delta+=(a[p*3+c]-b[p*3+c])*LUMA[c];assert.ok(Math.abs(delta)<1e-12);}planes[3].fill(0);assert.deepEqual(gradedPrediction(basis,g),gradedPrediction(basis,grade()));});
@@ -8,3 +8,12 @@ test('color sampling rejects mixed white/pink cores and never requires their pos
 
 import {minimizeBox} from './search.mts';
 test('bounded global search resolves coupled parameters without leaving declared bounds',()=>{const r=minimizeBox(x=>(x[0]+x[1]-1)**2+4*(x[0]-x[1]-.2)**2,[.1,.1],[[0,1],[0,1]],120);assert.ok(r.value<1e-10);assert.ok(Math.abs(r.x[0]-.6)<1e-4&&Math.abs(r.x[1]-.4)<1e-4);});
+
+import {encodeDisplay} from '../bar-ratios.mts';
+test('l36 fits one global young material to all seven pins while preserving the physical mixture',()=>{const width=512,height=384,planes=Array.from({length:5},()=>new Float64Array(width*height*3));for(let i=0;i<width*height*3;i+=3){planes[0].set([.08,.07,.05],i);planes[3].set([.02,.05,.15],i);}const basis={width,height,dustGain:1,planes},initial=grade(),truth=grade();truth.youngColor={tint:[.5,1,2],saturation:2};const display=(g:Grade)=>Float64Array.from(gradedPrediction(basis,g),v=>encodeDisplay(v)),photo=display(truth),previous=display(initial),fit=fitYoungColor(basis,initial,photo,previous,[0,0,0],36);assert.equal(fit.measurements.length,7);assert.ok(fit.targetScore<fit.previousScore*.01);for(const m of fit.measurements)assert.ok(Math.abs(m.new.bg/m.photo.bg-1)<.002);assert.deepEqual(initial,grade());assert.deepEqual(fit.grade.coefficients,initial.coefficients);assert.equal(fit.grade.saturation,initial.saturation);});
+
+import {pinsFor,RED_PINS} from '../owner-rounds/pins.mts';
+test('l36 preserves every red annotation as an earlier-pin guard',()=>{const pins=pinsFor(36);assert.equal(pins.filter(p=>p.theme===36).length,7);assert.equal(RED_PINS.length,3);for(const red of RED_PINS)assert.ok(pins.some(p=>p.x===red.x&&p.y===red.y&&p.theme!==36));});
+
+import {colorStep} from './color-step.mts';
+test('l36 defaults to l32 without an explicit parent, while historical l32 keeps l31',()=>{assert.deepEqual(colorStep('36'),{version:36,parent:32});assert.deepEqual(colorStep('32'),{version:32,parent:31});assert.deepEqual(colorStep('36','35'),{version:36,parent:35});assert.throws(()=>colorStep('bad'));assert.throws(()=>colorStep('36','36'));});
