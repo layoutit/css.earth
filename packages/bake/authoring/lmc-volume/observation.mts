@@ -28,8 +28,8 @@ function localPath(path: string): string {
 }
 
 export interface ObservationWindow {x0:number;y0:number;width:number;height:number;}
-export async function loadObservation(scale:1|2|4|8=1,window?:ObservationWindow,displayReference?:{sky:readonly number[];commonFactor:number}) {
-  if(scale!==1&&scale!==2&&scale!==4&&scale!==8)throw new Error('Only pilot and bounded reference sizes are allowed');
+export async function loadObservation(scale:1|2|4|8|16=1,window?:ObservationWindow,displayReference?:{sky:readonly number[];commonFactor:number}) {
+  if(scale!==1&&scale!==2&&scale!==4&&scale!==8&&scale!==16)throw new Error('Only pilot and native reference sizes are allowed');
   if(window)need(Object.values(window).every(Number.isFinite)&&window.x0>=0&&window.y0>=0&&window.width>0&&window.height>0&&window.x0+window.width<=1&&window.y0+window.height<=1,'Invalid observation crop');
   if(displayReference)need(displayReference.sky.length===3&&displayReference.sky.every(Number.isFinite)&&displayReference.commonFactor>0,'Invalid inherited display reference');
   const WIDTH=64*scale,HEIGHT=48*scale,holdoutBlock=8*scale;

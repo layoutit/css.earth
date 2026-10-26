@@ -5395,6 +5395,16 @@
         "kind": "local",
         "reason": "Physical-model experiment. Tiny/small reference renders only. Individual version records state the owner and experiment decisions. No runtime delivery is implied."
       }
+    },
+    {
+      "id": "l36-native-reference",
+      "path": "src/objects/lmc-volume/source/preparation/l36/native.json",
+      "bytes": 5666,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/record-native.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Native-resolution reference of the owner-approved l36 physical model. No model refit or runtime publication."
+      }
     }
   ]
 }
