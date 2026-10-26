@@ -5,7 +5,7 @@ const source='src/objects/lmc-volume/source/',path=`${ROOT}${source}manifest.jso
 const manifest=rec(JSON.parse(await readFile(path,'utf8'))),generated=array(manifest.generatedIntermediates);
 const prior=generated.filter(v=>{const p=rec(v).path;return typeof p!=='string'||!p.startsWith(`${source}preparation/l`);});
 const additions=[];
-const maximum=Number(process.argv[2]??33);need(Number.isSafeInteger(maximum)&&maximum>=28&&maximum<=34,'Invalid research-record limit');
+const maximum=Number(process.argv[2]??34);need(Number.isSafeInteger(maximum)&&maximum>=28&&maximum<=34,'Invalid research-record limit');
 for(let version=1;version<=maximum;version++)for(const name of ['recipe','fit','lineage','provenance','frame','field']){
   const recordPath=`${source}preparation/l${version}/${name}.json`,bytes=(await stat(`${ROOT}${recordPath}`)).size;
   need(bytes>0,'Empty research record');

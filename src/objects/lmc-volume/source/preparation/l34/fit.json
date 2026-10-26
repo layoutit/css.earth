@@ -1,0 +1,1604 @@
+{
+  "version": 34,
+  "parent": 32,
+  "rung": "small",
+  "size": 512,
+  "seconds": 240.62884225,
+  "complete": true,
+  "grade": {
+    "coefficients": [
+      [
+        0.2991848749939381,
+        0.11285894755502275,
+        0.0010000000000000002
+      ],
+      [
+        1.1830188815175458,
+        1.8424050846208464,
+        1.589518939094475
+      ],
+      [
+        0.11465010991074412,
+        0.250626464015972,
+        0.5157804581485669
+      ],
+      [
+        2.1026814276970143,
+        0.2627477657745751,
+        0.005000000000000002
+      ]
+    ],
+    "dustStrength": 1.0919999999999999,
+    "dustTint": [
+      1,
+      1,
+      1
+    ],
+    "stretch": 20,
+    "saturation": 0.5,
+    "score": 0.21675336066338471,
+    "youngColor": {
+      "tint": [
+        0.9749320974882039,
+        1,
+        0.873873607626636
+      ],
+      "saturation": 1.4800633606090097
+    }
+  },
+  "residuals": {
+    "trainRelativeRms": 0.29881090421723083,
+    "heldoutRelativeRms": 0.33512847696551284,
+    "totalLightDifferencePercent": 1.4664181643276208,
+    "annularDifferencePercent": [
+      -11.458281239961654,
+      -4.65225144191227,
+      17.646899133243288,
+      11.8920777367318
+    ],
+    "channelShareDifferencePercentagePoints": [
+      [
+        -0.4400785433325394,
+        -0.313815020617908,
+        0.7538935639504585
+      ],
+      [
+        -0.6036875277069531,
+        0.6810705857313026,
+        -0.07738305802436063
+      ],
+      [
+        17.37497133312502,
+        -6.68563724364421,
+        -10.689334089480823
+      ]
+    ]
+  },
+  "sceneControls": {
+    "youngTint": [
+      1.313986657359593,
+      1.13041657671757,
+      1.056593290852588
+    ],
+    "outskirtsGain": 2.80043441709131,
+    "innerDiscGain": 0.7372495191616437,
+    "barGain": 0.99129464369014,
+    "oldResolvedFraction": 0.29587500000000005,
+    "youngResolvedFraction": 0.019619550949644238
+  },
+  "configuration": {
+    "version": 34,
+    "parent": 32,
+    "densityVersion": 29,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 25,
+    "dustStrength": 1.0919999999999999,
+    "oldPopulationVersion": 21,
+    "change": "Full-field H-alpha filaments and diffuse gas from the SHASSA fallback.",
+    "details": {
+      "ownerAcceptedBase": 31,
+      "retainedBase": 32,
+      "freeParameters": 3,
+      "source": {
+        "source": "SHASSA Field013, continuum-subtracted unsmoothed, 0.8 arcminute native pixels",
+        "n": 1024,
+        "halfKpc": 10,
+        "cellPc": 19.53125,
+        "coveredCells": 358128,
+        "nonzeroCells": 122818,
+        "backgroundDeciRayleigh": 10,
+        "exteriorFluctuationDeciRayleigh": 22.238999999999997,
+        "smoothBackgroundDeciRayleigh": 8,
+        "smoothNoiseDeciRayleigh": 8.8956,
+        "faintConfidence": "The published 4 arcminute median-filtered continuum-subtracted map supplies a continuous detection weight, rising from zero at 1 noise level to unity at 3 noise levels above its exterior reference. Unsmooth morphology is retained in detected areas.",
+        "starResidualsReplaced": 2471,
+        "starResidualMethod": "Only bright continuum pixels above the 99.5th percentile with paired positive/negative stellar subtraction residuals beyond 4 local MAD (minimum 20 dR) are replaced by their 2–3 pixel annular line median. Filaments elsewhere are unchanged.",
+        "diffuseFraction": 0.3499999999500337,
+        "diffuseMorphologyHalfWidthPc": 195.3125,
+        "diffuseMethod": "A 200 pc half-width box mean supplies a broad morphology. DIG=min(total,globalFactor*mean), with the single factor fixed to 35% integrated H-alpha. Compact=total-DIG, preserving every source cell. The 30–40% prior is Kennicutt et al.1995.",
+        "paper": "https://doi.org/10.1086/117304",
+        "dustCorrection": "Conditional OGLE red-clump foreground internal A_V; H-alpha optical depth 0.75 A_V/1.085736. No Horálek pixels. This assumes ionized gas sees the tracer column; gas ordering is not measured.",
+        "support": "Observed 13 degree field. A fixed physical fade from 5.5 to 6.5 kpc suppresses unrelated foreground sky at the field boundary; it is an adopted extent, not a measured edge.",
+        "limitations": "SHASSA includes residual stars and coarse resolution. This fallback cannot claim the 3 arcsecond detail of MCELS. Exterior background subtraction does not separate structured Milky Way H-alpha from LMC emission exactly.",
+        "unassignedFraction": 0.08693258521756932,
+        "clouds": 34080,
+        "parents": 409,
+        "shapedOwners": 400,
+        "unchangedUnresolvedPrimitives": 1977,
+        "measuredShellAnchors": 3336,
+        "finiteClumpRadiusPc": 12.6953125,
+        "depth": "Each cloud is a finite isotropic kernel. Its center receives a deterministic line-of-sight depth whose FWHM is its parent nebula geometric-mean sky diameter; width is resolution-limited. Published 30 Dor shell chords are used where intersected. The surrounding diffuse gas stays on the 150 pc Gaussian warped layer. No columns are extruded along the Earth direction.",
+        "relativeLight": "The full survey supplies each catalogue region’s relative on-sky shape. Each region is normalized to its accepted parent luminosity; those amplitudes stay fixed. Regions unresolved or absent in the coarse fallback keep their prior geometry. The diffuse map has unit area, with its global luminosity fixed to35/65 of the previous compact budget before the common gas RGB grade.",
+        "fixedTotalGain": 0.11292658304275538,
+        "parentCompactGasBudget": 0.07340227898343352,
+        "globalDiffuseGain": 0.03952430405932186,
+        "photoSpatialData": false,
+        "retainedStellarGeometry": true
+      },
+      "maximumCorrectionRounds": 3,
+      "frozen": "All stars, grades except gas, bar, warp, dust and adopted stellar/diffuse layer heights."
+    },
+    "dustExtinctionRgb": [
+      0.25,
+      1,
+      1.879765395894428
+    ],
+    "ionizedVersion": 34,
+    "ionizedGain": 1,
+    "diffuseGasVersion": 34,
+    "diffuseGasGain": 0.03952430405932186
+  },
+  "calibration": {
+    "version": 34,
+    "parent": 32,
+    "freeParameters": 3,
+    "grade": {
+      "coefficients": [
+        [
+          0.2991848749939381,
+          0.11285894755502275,
+          0.0010000000000000002
+        ],
+        [
+          1.1830188815175458,
+          1.8424050846208464,
+          1.589518939094475
+        ],
+        [
+          0.11465010991074412,
+          0.250626464015972,
+          0.5157804581485669
+        ],
+        [
+          2.1026814276970143,
+          0.2627477657745751,
+          0.005000000000000002
+        ]
+      ],
+      "dustStrength": 1.0919999999999999,
+      "dustTint": [
+        1,
+        1,
+        1
+      ],
+      "stretch": 20,
+      "saturation": 0.5,
+      "score": 0.20975301181650896,
+      "youngColor": {
+        "tint": [
+          0.9749320974882039,
+          1,
+          0.873873607626636
+        ],
+        "saturation": 1.4800633606090097
+      }
+    },
+    "bounds": {
+      "gasRGB": [
+        0.005,
+        10
+      ]
+    },
+    "objective": 0.3056610695203876,
+    "targetScore": 0.1905793469362714,
+    "previousScore": 0.24832775731175993,
+    "method": "Three global gas RGB coefficients; per-pin central color/light plus 0.1 times the normalized 31 pixel crop error in positive red excess after a 3 pixel mean. No source geometry or target pixels are fitted as a field. Earlier blue guards use the accepted l32 reference samples.",
+    "blueGuards": [
+      {
+        "pin": {
+          "id": "H2",
+          "x": 319,
+          "y": 73,
+          "theme": 29
+        },
+        "regression": 0.008293028514392675
+      },
+      {
+        "pin": {
+          "id": "I2",
+          "x": 367,
+          "y": 88,
+          "theme": 29
+        },
+        "regression": 0.0327699967875027
+      },
+      {
+        "pin": {
+          "id": "I3",
+          "x": 373,
+          "y": 118,
+          "theme": 29
+        },
+        "regression": 0.008471208940479813
+      },
+      {
+        "pin": {
+          "id": "D2",
+          "x": 156,
+          "y": 82,
+          "theme": 29
+        },
+        "regression": 0.007883150683821685
+      },
+      {
+        "pin": {
+          "id": "D5",
+          "x": 152,
+          "y": 212,
+          "theme": 29
+        },
+        "regression": 0.0016642249744802592
+      },
+      {
+        "pin": {
+          "id": "E6",
+          "x": 200,
+          "y": 254,
+          "theme": 29
+        },
+        "regression": 0.014087235956823901
+      },
+      {
+        "pin": {
+          "id": "D6",
+          "x": 152,
+          "y": 274,
+          "theme": 29
+        },
+        "regression": 0.029545380304430685
+      }
+    ],
+    "measurements": [
+      {
+        "pin": {
+          "id": "D2",
+          "x": 143,
+          "y": 61,
+          "theme": 34
+        },
+        "photo": {
+          "id": "D2",
+          "rgb": [
+            0.6035342532074559,
+            0.3588477366255139,
+            0.41103848946986143
+          ],
+          "rg": 1.6818672423097705,
+          "bg": 1.1454398273070696,
+          "light": 0.457806826434277,
+          "texture": 0.07569090612248551
+        },
+        "previous": {
+          "id": "D2",
+          "rgb": [
+            0.5676107480029049,
+            0.4282256112321469,
+            0.5094166061486324
+          ],
+          "rg": 1.325494629734314,
+          "bg": 1.189598643301301,
+          "light": 0.501750988461228,
+          "texture": 0.05695972045147365
+        },
+        "new": {
+          "id": "D2",
+          "rgb": [
+            0.6159205436335945,
+            0.44201619973200373,
+            0.5116443972514574
+          ],
+          "rg": 1.393434322106361,
+          "bg": 1.1575240852296127,
+          "light": 0.5231937135390186,
+          "texture": 0.09719998099596598
+        },
+        "previousRedCropError": 0.15143463895527065,
+        "newRedCropError": 0.22290150713144724
+      },
+      {
+        "pin": {
+          "id": "G6",
+          "x": 290,
+          "y": 277,
+          "theme": 34
+        },
+        "photo": {
+          "id": "G6",
+          "rgb": [
+            0.5806826434277416,
+            0.3575405470830303,
+            0.36044541273299396
+          ],
+          "rg": 1.6241029113067051,
+          "bg": 1.008124576844956,
+          "light": 0.4328895344145886,
+          "texture": 0.04404136674705238
+        },
+        "previous": {
+          "id": "G6",
+          "rgb": [
+            0.5381263616557735,
+            0.41258775114984214,
+            0.42125393367223385
+          ],
+          "rg": 1.3042712978174156,
+          "bg": 1.021004459047172,
+          "light": 0.4573226821592831,
+          "texture": 0.05364628482750031
+        },
+        "new": {
+          "id": "G6",
+          "rgb": [
+            0.5158914615844019,
+            0.4025122541897683,
+            0.4095770643963096
+          ],
+          "rg": 1.281678896019846,
+          "bg": 1.017551789126923,
+          "light": 0.4426602600568266,
+          "texture": 0.04824162340008903
+        },
+        "previousRedCropError": 0.20595487183824304,
+        "newRedCropError": 0.1712555018454077
+      },
+      {
+        "pin": {
+          "id": "G3",
+          "x": 286,
+          "y": 120,
+          "theme": 34
+        },
+        "photo": {
+          "id": "G3",
+          "rgb": [
+            0.2517066085693535,
+            0.19641733236504447,
+            0.1935608811425802
+          ],
+          "rg": 1.281488784816368,
+          "bg": 0.9854572344096624,
+          "light": 0.21389494069232606,
+          "texture": 0.08158265925728432
+        },
+        "previous": {
+          "id": "G3",
+          "rgb": [
+            0.20532558702493314,
+            0.1845557976276928,
+            0.21665456305979144
+          ],
+          "rg": 1.112539349422875,
+          "bg": 1.1739244491080794,
+          "light": 0.20217864923747245,
+          "texture": 0.09300650300019173
+        },
+        "new": {
+          "id": "G3",
+          "rgb": [
+            0.26667777169287854,
+            0.20318466033388347,
+            0.22984976847817848
+          ],
+          "rg": 1.312489689205179,
+          "bg": 1.1312358329633623,
+          "light": 0.2332374001683135,
+          "texture": 0.09659372694449289
+        },
+        "previousRedCropError": 0.5193822201772617,
+        "newRedCropError": 0.3344728038024751
+      }
+    ],
+    "survey": {
+      "source": "SHASSA Field013, continuum-subtracted unsmoothed, 0.8 arcminute native pixels",
+      "n": 1024,
+      "halfKpc": 10,
+      "cellPc": 19.53125,
+      "coveredCells": 358128,
+      "nonzeroCells": 122818,
+      "backgroundDeciRayleigh": 10,
+      "exteriorFluctuationDeciRayleigh": 22.238999999999997,
+      "smoothBackgroundDeciRayleigh": 8,
+      "smoothNoiseDeciRayleigh": 8.8956,
+      "faintConfidence": "The published 4 arcminute median-filtered continuum-subtracted map supplies a continuous detection weight, rising from zero at 1 noise level to unity at 3 noise levels above its exterior reference. Unsmooth morphology is retained in detected areas.",
+      "starResidualsReplaced": 2471,
+      "starResidualMethod": "Only bright continuum pixels above the 99.5th percentile with paired positive/negative stellar subtraction residuals beyond 4 local MAD (minimum 20 dR) are replaced by their 2–3 pixel annular line median. Filaments elsewhere are unchanged.",
+      "diffuseFraction": 0.3499999999500337,
+      "diffuseMorphologyHalfWidthPc": 195.3125,
+      "diffuseMethod": "A 200 pc half-width box mean supplies a broad morphology. DIG=min(total,globalFactor*mean), with the single factor fixed to 35% integrated H-alpha. Compact=total-DIG, preserving every source cell. The 30–40% prior is Kennicutt et al.1995.",
+      "paper": "https://doi.org/10.1086/117304",
+      "dustCorrection": "Conditional OGLE red-clump foreground internal A_V; H-alpha optical depth 0.75 A_V/1.085736. No Horálek pixels. This assumes ionized gas sees the tracer column; gas ordering is not measured.",
+      "support": "Observed 13 degree field. A fixed physical fade from 5.5 to 6.5 kpc suppresses unrelated foreground sky at the field boundary; it is an adopted extent, not a measured edge.",
+      "limitations": "SHASSA includes residual stars and coarse resolution. This fallback cannot claim the 3 arcsecond detail of MCELS. Exterior background subtraction does not separate structured Milky Way H-alpha from LMC emission exactly.",
+      "unassignedFraction": 0.08693258521756932,
+      "clouds": 34080,
+      "parents": 409,
+      "shapedOwners": 400,
+      "unchangedUnresolvedPrimitives": 1977,
+      "measuredShellAnchors": 3336,
+      "finiteClumpRadiusPc": 12.6953125,
+      "depth": "Each cloud is a finite isotropic kernel. Its center receives a deterministic line-of-sight depth whose FWHM is its parent nebula geometric-mean sky diameter; width is resolution-limited. Published 30 Dor shell chords are used where intersected. The surrounding diffuse gas stays on the 150 pc Gaussian warped layer. No columns are extruded along the Earth direction.",
+      "relativeLight": "The full survey supplies each catalogue region’s relative on-sky shape. Each region is normalized to its accepted parent luminosity; those amplitudes stay fixed. Regions unresolved or absent in the coarse fallback keep their prior geometry. The diffuse map has unit area, with its global luminosity fixed to35/65 of the previous compact budget before the common gas RGB grade.",
+      "fixedTotalGain": 0.11292658304275538,
+      "parentCompactGasBudget": 0.07340227898343352,
+      "globalDiffuseGain": 0.03952430405932186,
+      "photoSpatialData": false,
+      "retainedStellarGeometry": true
+    },
+    "qualification": {
+      "source": "https://amundsen.swarthmore.edu/SHASSA/Images/013.fl.fits.gz",
+      "provider": "Southern H-Alpha Sky Survey Atlas, Gaustad et al. 2001",
+      "release": "Field013 continuum-subtracted, unsmoothed 013.fl.fits.gz",
+      "rawBytes": 1337968,
+      "width": 1014,
+      "height": 998,
+      "bitpix": 32,
+      "header": {
+        "SIMPLE": true,
+        "BITPIX": 32,
+        "NAXIS": 2,
+        "NAXIS1": 1014,
+        "NAXIS2": 998,
+        "BZERO": 0,
+        "BSCALE": 1,
+        "BUNIT": "dR",
+        "EXPTIME": 1252.24,
+        "DATE-OBS": "1997-12-29",
+        "TIME-OBS": "05:20:15",
+        "COORDOBS": "05.1947, -069.948",
+        "EPOCH": 1997.992,
+        "FILTER": "3.0 nm H-Alpha",
+        "OBJECT": "013",
+        "ORIGIN": "SWARTHMORE COLLEGE PHYSICS AND ASTRONOMY DEPT",
+        "AUTHOR": " J.E. GAUSTAD",
+        "REFERENC": "GAUSTAD ET AL. 2001, SUBMITTED TO PASP",
+        "OBSERVER": "El-ENANO",
+        "OBSERVAT": "CERRO TOLOLO INTERAMERICAN OBSERVATORY",
+        "TELESCOP": "0.033M",
+        "INSTRUME": "SpectraSource Instruments HPC-TI CCD Camera",
+        "PIX_SIZE": 0.000231,
+        "GAIN": 1.4,
+        "RDNOISE": 18,
+        "CAMTEMP": -35,
+        "LCO-BIAS": 662.22,
+        "LCO-WTMP": 26,
+        "LCO-FTMP": 26,
+        "LCO-WIND": 8.4,
+        "DARKTIME": 1252.34,
+        "OUT-TEMP": 15,
+        "PRESSURE": 23.1,
+        "ZENITH": 46.356,
+        "LCO-STAT": "Track  On, Err= 00000002, Status   Valid, Wx   Valid",
+        "LCO-HTDA": "001.854, 0195, 0179",
+        "LCO-FLIP": " East",
+        "LCO-OFST": "  No, Dither= 01",
+        "LCO-ILLU": "1.0",
+        "LCO-VER": "2.20 el12271",
+        "HUMIDITY": 0,
+        "SCLFCTR": 1.36,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN",
+        "CRVAL1": 77.9205,
+        "CRVAL2": -69.948,
+        "CRPIX1": 524.0686,
+        "CRPIX2": 482.6415,
+        "CD1_1": -0.013137356378,
+        "CD1_2": -0.00159272051,
+        "CD2_1": -0.00159409584,
+        "CD2_2": 0.013139193878,
+        "CDELT1": 0.0132345,
+        "CDELT2": -0.0132345,
+        "CROTA1": -173.0814972,
+        "CROTA2": -173.0814972,
+        "N_ASTROM": 171,
+        "EQUINOX": 2000,
+        "XMIN": 26,
+        "XMAX": 948,
+        "YMIN": 28,
+        "YMAX": 990,
+        "BLANK": -2147483648
+      },
+      "wcsAdapter": "The temporary LMC projection header uses the full CD1_1, CD1_2, CD2_1, CD2_2 matrix and omits redundant CDELT1, CDELT2, CROTA1, CROTA2 cards. Published bytes remain untouched; packages/fits is unchanged.",
+      "units": "dR: decirayleigh, 0.1 R per stored intensity unit.",
+      "finitePixels": 885081,
+      "p01": -182,
+      "median": 17,
+      "p99": 1289,
+      "minimum": -46655,
+      "maximum": 94918,
+      "center": [
+        78.47048619801393,
+        -69.69922356839346
+      ],
+      "pixelDegrees": [
+        0.0132345,
+        0.0132345
+      ],
+      "primaryMCELS": "The original CTIO MCELS release endpoint returned HTTP404 on 26 October 2026. No qualified full continuum-subtracted MCELS file was found in bounded release discovery. This is the owner-authorized SHASSA fallback, not a 3-arcsecond MCELS product.",
+      "references": [
+        "https://amundsen.swarthmore.edu/SHASSA/",
+        "https://amundsen.swarthmore.edu/SHASSA/ImagePages/013.html",
+        "https://doi.org/10.1086/323969"
+      ],
+      "acknowledgment": "Southern H-Alpha Sky Survey Atlas, produced with support from the National Science Foundation."
+    }
+  },
+  "acceptance": {
+    "retained": false,
+    "parent": 32,
+    "targetScorePrevious": 0.24832775731175993,
+    "targetScoreNew": 0.19034189334642612,
+    "everyTargetImproves": false,
+    "noTargetRegresses": false,
+    "allPins": [
+      {
+        "pin": {
+          "id": "F3",
+          "x": 235,
+          "y": 136,
+          "theme": 30
+        },
+        "photo": {
+          "id": "F3",
+          "rgb": [
+            0.3843137254901955,
+            0.3539578794480751,
+            0.3217622851609777
+          ],
+          "rg": 1.0857611817808777,
+          "bg": 0.9090411708384629,
+          "light": 0.35334463003308275,
+          "texture": 0.032618630917188154
+        },
+        "previous": {
+          "id": "F3",
+          "rgb": [
+            0.2480271120793994,
+            0.1984991527475185,
+            0.20692326313241313
+          ],
+          "rg": 1.2495121951219514,
+          "bg": 1.0424390243902435,
+          "light": 0.21781650931977703,
+          "texture": 0.049131315186130294
+        },
+        "new": {
+          "id": "F3",
+          "rgb": [
+            0.2601791333817477,
+            0.20246913580246886,
+            0.21002178649237438
+          ],
+          "rg": 1.2850310856049751,
+          "bg": 1.0373027259684358,
+          "light": 0.22422335189219697,
+          "texture": 0.04682218728181847
+        },
+        "previousScore": 0.09699506360710805,
+        "newScore": 0.0975248481991817
+      },
+      {
+        "pin": {
+          "id": "G4",
+          "x": 280,
+          "y": 159,
+          "theme": 30
+        },
+        "photo": {
+          "id": "G4",
+          "rgb": [
+            0.6030016945049629,
+            0.4533042846768332,
+            0.44594529169692504
+          ],
+          "rg": 1.3302360354587228,
+          "bg": 0.9837658870020289,
+          "light": 0.5007504236262404,
+          "texture": 0.03850904359159855
+        },
+        "previous": {
+          "id": "G4",
+          "rgb": [
+            0.4130718954248362,
+            0.33986928104575126,
+            0.38746066327765627
+          ],
+          "rg": 1.2153846153846155,
+          "bg": 1.1400284900284898,
+          "light": 0.38013394658274785,
+          "texture": 0.06928145932442623
+        },
+        "new": {
+          "id": "G4",
+          "rgb": [
+            0.4394093439845067,
+            0.34596949891067497,
+            0.39007504236262364
+          ],
+          "rg": 1.270081164287713,
+          "bg": 1.1274839070808846,
+          "light": 0.3918179617526018,
+          "texture": 0.05930469205427177
+        },
+        "previousScore": 0.04887281684432637,
+        "newScore": 0.035778654677784745
+      },
+      {
+        "pin": {
+          "id": "H2",
+          "x": 319,
+          "y": 73,
+          "theme": 29
+        },
+        "photo": {
+          "id": "H2",
+          "rgb": [
+            0.23403534253207442,
+            0.2911643669813602,
+            0.4638586298717019
+          ],
+          "rg": 0.8037911539740606,
+          "bg": 1.5931160625207865,
+          "light": 0.32968611312837887,
+          "texture": 0.09530836142489538
+        },
+        "previous": {
+          "id": "H2",
+          "rgb": [
+            0.30767368675865386,
+            0.3688211086903892,
+            0.47654320987654303
+          ],
+          "rg": 0.8342084536623792,
+          "bg": 1.2920714098188515,
+          "light": 0.38434600177519535,
+          "texture": 0.04466391703406625
+        },
+        "new": {
+          "id": "H2",
+          "rgb": [
+            0.3541515371580726,
+            0.37918179617525966,
+            0.4822076978939723
+          ],
+          "rg": 0.933988764044944,
+          "bg": 1.2717058222676216,
+          "light": 0.40518034374243483,
+          "texture": 0.04341733312273536
+        },
+        "previousScore": 0.06549228283109171,
+        "newScore": 0.09939610827719891
+      },
+      {
+        "pin": {
+          "id": "I2",
+          "x": 367,
+          "y": 88,
+          "theme": 29
+        },
+        "photo": {
+          "id": "I2",
+          "rgb": [
+            0.1986443960300169,
+            0.23631082062454592,
+            0.4172839506172834
+          ],
+          "rg": 0.8406064331079702,
+          "bg": 1.7658266748617077,
+          "light": 0.28407972242394874,
+          "texture": 0.08346697238353115
+        },
+        "previous": {
+          "id": "I2",
+          "rgb": [
+            0.2403776325344948,
+            0.28148148148148144,
+            0.3681917211328971
+          ],
+          "rg": 0.8539731682146526,
+          "bg": 1.3080495356037136,
+          "light": 0.29668361171629115,
+          "texture": 0.08028705567545394
+        },
+        "new": {
+          "id": "I2",
+          "rgb": [
+            0.2726216412490923,
+            0.2881626724763979,
+            0.37177438876785235
+          ],
+          "rg": 0.9460685483870972,
+          "bg": 1.290154569892472,
+          "light": 0.3108529008311142,
+          "texture": 0.07167809501106728
+        },
+        "previousScore": 0.09080684771247406,
+        "newScore": 0.11508292854778138
+      },
+      {
+        "pin": {
+          "id": "I3",
+          "x": 373,
+          "y": 118,
+          "theme": 29
+        },
+        "photo": {
+          "id": "I3",
+          "rgb": [
+            0.22677317840716515,
+            0.24715565238441028,
+            0.3558944565480509
+          ],
+          "rg": 0.9175318315377085,
+          "bg": 1.4399608227228207,
+          "light": 0.2766077624465421,
+          "texture": 0.07568100924200984
+        },
+        "previous": {
+          "id": "I3",
+          "rgb": [
+            0.23577826192205237,
+            0.2627935124667149,
+            0.3349794238683124
+          ],
+          "rg": 0.8971997052321288,
+          "bg": 1.2746868091378036,
+          "light": 0.27785039941902656,
+          "texture": 0.07507282300948587
+        },
+        "new": {
+          "id": "I3",
+          "rgb": [
+            0.2459937061244247,
+            0.26473008956669075,
+            0.3362381989832967
+          ],
+          "rg": 0.9292245793708841,
+          "bg": 1.270117044623262,
+          "light": 0.28232066489147073,
+          "texture": 0.05844533500005874
+        },
+        "previousScore": 0.015372169049681975,
+        "newScore": 0.01768652620060799
+      },
+      {
+        "pin": {
+          "id": "D2",
+          "x": 156,
+          "y": 82,
+          "theme": 29
+        },
+        "photo": {
+          "id": "D2",
+          "rgb": [
+            0.269184216896635,
+            0.3022028564512223,
+            0.3772452190752839
+          ],
+          "rg": 0.8907401473886574,
+          "bg": 1.2483178468439593,
+          "light": 0.31621076414104704,
+          "texture": 0.046484658451723816
+        },
+        "previous": {
+          "id": "D2",
+          "rgb": [
+            0.31774388767852796,
+            0.3459210844831756,
+            0.4039699830549498
+          ],
+          "rg": 0.9185444366689997,
+          "bg": 1.1678096571028689,
+          "light": 0.3558783184055511,
+          "texture": 0.05104108791153646
+        },
+        "new": {
+          "id": "D2",
+          "rgb": [
+            0.32820140401839715,
+            0.3480029048656495,
+            0.40522875816993414
+          ],
+          "rg": 0.9430996104618812,
+          "bg": 1.1644407345575962,
+          "light": 0.36047768901799354,
+          "texture": 0.045318496254666316
+        },
+        "previousScore": 0.009099506364526413,
+        "newScore": 0.01240840723418944
+      },
+      {
+        "pin": {
+          "id": "D5",
+          "x": 152,
+          "y": 212,
+          "theme": 29
+        },
+        "photo": {
+          "id": "D5",
+          "rgb": [
+            0.39147906076010597,
+            0.39554587267005514,
+            0.44100702009198695
+          ],
+          "rg": 0.989718482252142,
+          "bg": 1.114932680538556,
+          "light": 0.4093439845073827,
+          "texture": 0.043789772868919566
+        },
+        "previous": {
+          "id": "D5",
+          "rgb": [
+            0.4311788913096097,
+            0.4541757443718223,
+            0.5059307673686756
+          ],
+          "rg": 0.9493657392602066,
+          "bg": 1.113953736275451,
+          "light": 0.46376180101670245,
+          "texture": 0.04504071174641335
+        },
+        "new": {
+          "id": "D5",
+          "rgb": [
+            0.45359477124182956,
+            0.4587267005567654,
+            0.5086903897361412
+          ],
+          "rg": 0.9888126649076517,
+          "bg": 1.1089182058047502,
+          "light": 0.47367062051157877,
+          "texture": 0.04218435027771223
+        },
+        "previousScore": 0.005648074242948957,
+        "newScore": 0.005390787671926715
+      },
+      {
+        "pin": {
+          "id": "E6",
+          "x": 200,
+          "y": 254,
+          "theme": 29
+        },
+        "photo": {
+          "id": "E6",
+          "rgb": [
+            0.4748971193415639,
+            0.45543451948680647,
+            0.5474219317356573
+          ],
+          "rg": 1.042734134155418,
+          "bg": 1.2019772509833122,
+          "light": 0.49258452352134263,
+          "texture": 0.045486458465093735
+        },
+        "previous": {
+          "id": "E6",
+          "rgb": [
+            0.5603485838779962,
+            0.5209392398934884,
+            0.5948680706850643
+          ],
+          "rg": 1.0756505576208186,
+          "bg": 1.141914498141264,
+          "light": 0.5587186314855163,
+          "texture": 0.04756512757746255
+        },
+        "new": {
+          "id": "E6",
+          "rgb": [
+            0.4775114984265308,
+            0.5016218833212298,
+            0.5810699588477367
+          ],
+          "rg": 0.9519351413956174,
+          "bg": 1.1583823955216677,
+          "light": 0.5200677801984991,
+          "texture": 0.048684416960425345
+        },
+        "previousScore": 0.007611344024660629,
+        "newScore": 0.0105172083731001
+      },
+      {
+        "pin": {
+          "id": "D6",
+          "x": 152,
+          "y": 274,
+          "theme": 29
+        },
+        "photo": {
+          "id": "D6",
+          "rgb": [
+            0.17099975792786232,
+            0.1793754538852576,
+            0.2317114500121033
+          ],
+          "rg": 0.953306342780027,
+          "bg": 1.2917678812415652,
+          "light": 0.1940288872750744,
+          "texture": 0.06065099807701582
+        },
+        "previous": {
+          "id": "D6",
+          "rgb": [
+            0.20813362381989803,
+            0.20842411038489436,
+            0.24216896635197252
+          ],
+          "rg": 0.9986062717770037,
+          "bg": 1.161904761904762,
+          "light": 0.21957556685225496,
+          "texture": 0.0679862490523848
+        },
+        "new": {
+          "id": "D6",
+          "rgb": [
+            0.22028564512224608,
+            0.21147421931735627,
+            0.24425078673444653
+          ],
+          "rg": 1.0416666666666665,
+          "bg": 1.1549908424908426,
+          "light": 0.22533688372468297,
+          "texture": 0.07045055818516219
+        },
+        "previousScore": 0.01753146787305294,
+        "newScore": 0.02653822312547316
+      },
+      {
+        "pin": {
+          "id": "G3",
+          "x": 282,
+          "y": 130,
+          "theme": 31
+        },
+        "photo": {
+          "id": "G3",
+          "rgb": [
+            0.2362139917695471,
+            0.21907528443476126,
+            0.22135076252723282
+          ],
+          "rg": 1.0782320441988955,
+          "bg": 1.0103867403314917,
+          "light": 0.22554667957718041,
+          "texture": 0.06861489186678749
+        },
+        "previous": {
+          "id": "G3",
+          "rgb": [
+            0.22367465504720366,
+            0.20774630839990288,
+            0.249334301621883
+          ],
+          "rg": 1.0766721044045673,
+          "bg": 1.2001864367280355,
+          "light": 0.22691842168966317,
+          "texture": 0.09722005284094881
+        },
+        "new": {
+          "id": "G3",
+          "rgb": [
+            0.2820624546114742,
+            0.2253207455821831,
+            0.26124425078673447
+          ],
+          "rg": 1.2518263859046004,
+          "bg": 1.159432746024927,
+          "light": 0.2562091503267973,
+          "texture": 0.13026189885932365
+        },
+        "previousScore": 0.02964475463027129,
+        "newScore": 0.04527986905238936
+      },
+      {
+        "pin": {
+          "id": "H3",
+          "x": 327,
+          "y": 135,
+          "theme": 31
+        },
+        "photo": {
+          "id": "H3",
+          "rgb": [
+            0.2690389736141368,
+            0.24362139917695436,
+            0.2509319777293631
+          ],
+          "rg": 1.1043322734499215,
+          "bg": 1.0300079491255967,
+          "light": 0.25453078350681807,
+          "texture": 0.05839262192758253
+        },
+        "previous": {
+          "id": "H3",
+          "rgb": [
+            0.26298717017671236,
+            0.2463810215444198,
+            0.3040426046961993
+          ],
+          "rg": 1.0674002751031644,
+          "bg": 1.2340341913932027,
+          "light": 0.27113693213911044,
+          "texture": 0.04559939898507224
+        },
+        "new": {
+          "id": "H3",
+          "rgb": [
+            0.3387557492132652,
+            0.26778019849915274,
+            0.3173565722585328
+          ],
+          "rg": 1.2650515277526655,
+          "bg": 1.1851383113361047,
+          "light": 0.3079641733236502,
+          "texture": 0.04008029810256457
+        },
+        "previousScore": 0.034816120245352036,
+        "newScore": 0.047221748879915294
+      },
+      {
+        "pin": {
+          "id": "I4",
+          "x": 374,
+          "y": 173,
+          "theme": 31
+        },
+        "photo": {
+          "id": "I4",
+          "rgb": [
+            0.2125877511498423,
+            0.18697651900266252,
+            0.18058581457274245
+          ],
+          "rg": 1.1369756602796477,
+          "bg": 0.9658208182288971,
+          "light": 0.19338336157508243,
+          "texture": 0.04310895169396243
+        },
+        "previous": {
+          "id": "I4",
+          "rgb": [
+            0.17981118373275215,
+            0.15652384410554335,
+            0.1801984991527473
+          ],
+          "rg": 1.1487782245592324,
+          "bg": 1.1512527064645834,
+          "light": 0.1721778423303476,
+          "texture": 0.04326866119871612
+        },
+        "new": {
+          "id": "I4",
+          "rgb": [
+            0.2268700072621639,
+            0.17138707334785747,
+            0.19075284434761533
+          ],
+          "rg": 1.3237288135593221,
+          "bg": 1.1129943502824857,
+          "light": 0.19633664165254558,
+          "texture": 0.05150905787640872
+        },
+        "previousScore": 0.03432421790559391,
+        "newScore": 0.04330201632862214
+      },
+      {
+        "pin": {
+          "id": "H5",
+          "x": 331,
+          "y": 229,
+          "theme": 28
+        },
+        "photo": {
+          "id": "H5",
+          "rgb": [
+            0.6131687242798357,
+            0.5183248608085212,
+            0.4446381021544415
+          ],
+          "rg": 1.1829815056977395,
+          "bg": 0.8578367270689318,
+          "light": 0.5253772290809328,
+          "texture": 0.028076909560549777
+        },
+        "previous": {
+          "id": "H5",
+          "rgb": [
+            0.48516097797143515,
+            0.42057613168724234,
+            0.3816993464052281
+          ],
+          "rg": 1.1535627949810066,
+          "bg": 0.9075630252100835,
+          "light": 0.4291454853546352,
+          "texture": 0.07660729496012153
+        },
+        "new": {
+          "id": "H5",
+          "rgb": [
+            0.5039941902686997,
+            0.4252239167271841,
+            0.38615347373517245
+          ],
+          "rg": 1.185244221792099,
+          "bg": 0.9081179551406123,
+          "light": 0.43845719357701873,
+          "texture": 0.0693800062874121
+        },
+        "previousScore": 0.014042805523205675,
+        "newScore": 0.011425222867525925
+      },
+      {
+        "pin": {
+          "id": "G5",
+          "x": 280,
+          "y": 214,
+          "theme": 28
+        },
+        "photo": {
+          "id": "G5",
+          "rgb": [
+            0.7864439603001695,
+            0.822512708787218,
+            0.8416848220769784
+          ],
+          "rg": 0.9561480958267121,
+          "bg": 1.0233092000706339,
+          "light": 0.8168804970547887,
+          "texture": 0.013634634422619476
+        },
+        "previous": {
+          "id": "G5",
+          "rgb": [
+            0.7909949164851121,
+            0.8054224158799318,
+            0.8274509803921565
+          ],
+          "rg": 0.9820870401538832,
+          "bg": 1.027350324597259,
+          "light": 0.8079561042524,
+          "texture": 0.019907087346674106
+        },
+        "new": {
+          "id": "G5",
+          "rgb": [
+            0.7954974582425559,
+            0.8056160735899294,
+            0.8273541515371577
+          ],
+          "rg": 0.9874399038461539,
+          "bg": 1.0269831730769232,
+          "light": 0.809489227789881,
+          "texture": 0.019827233727801208
+        },
+        "previousScore": 0.0007621809282843729,
+        "newScore": 0.0010705200310442613
+      },
+      {
+        "pin": {
+          "id": "F4",
+          "x": 226,
+          "y": 184,
+          "theme": 28
+        },
+        "photo": {
+          "id": "F4",
+          "rgb": [
+            0.7844105543451948,
+            0.7156136528685545,
+            0.6946017913338174
+          ],
+          "rg": 1.0961369325485424,
+          "bg": 0.9706379811920712,
+          "light": 0.7315419995158555,
+          "texture": 0.018486749233746293
+        },
+        "previous": {
+          "id": "F4",
+          "rgb": [
+            0.7222464294359718,
+            0.6717017671266037,
+            0.6473008956669088
+          ],
+          "rg": 1.0752486665705636,
+          "bg": 0.9636730575176592,
+          "light": 0.6804163640764948,
+          "texture": 0.024858398335586156
+        },
+        "new": {
+          "id": "F4",
+          "rgb": [
+            0.7310578552408616,
+            0.6732510288065839,
+            0.648075526506899
+          ],
+          "rg": 1.0858622177477353,
+          "bg": 0.9626060693225952,
+          "light": 0.6841281368514482,
+          "texture": 0.0251370653106103
+        },
+        "previousScore": 0.0017342859740507237,
+        "newScore": 0.0012803040026792137
+      },
+      {
+        "pin": {
+          "id": "D2",
+          "x": 143,
+          "y": 61,
+          "theme": 34
+        },
+        "photo": {
+          "id": "D2",
+          "rgb": [
+            0.6035342532074559,
+            0.3588477366255139,
+            0.41103848946986143
+          ],
+          "rg": 1.6818672423097705,
+          "bg": 1.1454398273070696,
+          "light": 0.457806826434277,
+          "texture": 0.07569090612248551
+        },
+        "previous": {
+          "id": "D2",
+          "rgb": [
+            0.5676107480029049,
+            0.4282256112321469,
+            0.5094166061486324
+          ],
+          "rg": 1.325494629734314,
+          "bg": 1.189598643301301,
+          "light": 0.501750988461228,
+          "texture": 0.05695972045147365
+        },
+        "new": {
+          "id": "D2",
+          "rgb": [
+            0.616073589929799,
+            0.4419268942144755,
+            0.5117404986686032
+          ],
+          "rg": 1.394062226117442,
+          "bg": 1.1579754601227004,
+          "light": 0.5232469942709592,
+          "texture": 0.0972245993237687
+        },
+        "previousScore": 0.07537522923414655,
+        "newScore": 0.06209013035433428
+      },
+      {
+        "pin": {
+          "id": "G6",
+          "x": 290,
+          "y": 277,
+          "theme": 34
+        },
+        "photo": {
+          "id": "G6",
+          "rgb": [
+            0.5806826434277416,
+            0.3575405470830303,
+            0.36044541273299396
+          ],
+          "rg": 1.6241029113067051,
+          "bg": 1.008124576844956,
+          "light": 0.4328895344145886,
+          "texture": 0.04404136674705238
+        },
+        "previous": {
+          "id": "G6",
+          "rgb": [
+            0.5381263616557735,
+            0.41258775114984214,
+            0.42125393367223385
+          ],
+          "rg": 1.3042712978174156,
+          "bg": 1.021004459047172,
+          "light": 0.4573226821592831,
+          "texture": 0.05364628482750031
+        },
+        "new": {
+          "id": "G6",
+          "rgb": [
+            0.5158557250060518,
+            0.4024691358024685,
+            0.4096828854998784
+          ],
+          "rg": 1.2817274148923392,
+          "bg": 1.0179237339107423,
+          "light": 0.4426692487694663,
+          "texture": 0.04837296965360257
+        },
+        "previousScore": 0.06960770504644914,
+        "newScore": 0.07341240073709007
+      },
+      {
+        "pin": {
+          "id": "G3",
+          "x": 286,
+          "y": 120,
+          "theme": 34
+        },
+        "photo": {
+          "id": "G3",
+          "rgb": [
+            0.2517066085693535,
+            0.19641733236504447,
+            0.1935608811425802
+          ],
+          "rg": 1.281488784816368,
+          "bg": 0.9854572344096624,
+          "light": 0.21389494069232606,
+          "texture": 0.08158265925728432
+        },
+        "previous": {
+          "id": "G3",
+          "rgb": [
+            0.20532558702493314,
+            0.1845557976276928,
+            0.21665456305979144
+          ],
+          "rg": 1.112539349422875,
+          "bg": 1.1739244491080794,
+          "light": 0.20217864923747245,
+          "texture": 0.09300650300019173
+        },
+        "new": {
+          "id": "G3",
+          "rgb": [
+            0.2666182522391671,
+            0.20324376664245916,
+            0.22987170176712618
+          ],
+          "rg": 1.3118151500714634,
+          "bg": 1.131014768937589,
+          "light": 0.23324457354958414,
+          "texture": 0.09662710345158984
+        },
+        "previousScore": 0.10334482303116424,
+        "newScore": 0.054839362255001765
+      }
+    ],
+    "guards": [
+      {
+        "id": "F3",
+        "pin": {
+          "id": "F3",
+          "x": 235,
+          "y": 136,
+          "theme": 30
+        },
+        "regression": 0.017874177261251734,
+        "passed": true
+      },
+      {
+        "id": "G4",
+        "pin": {
+          "id": "G4",
+          "x": 280,
+          "y": 159,
+          "theme": 30
+        },
+        "regression": -0.028881884697859933,
+        "passed": true
+      },
+      {
+        "id": "H2",
+        "pin": {
+          "id": "H2",
+          "x": 319,
+          "y": 73,
+          "theme": 29
+        },
+        "regression": 0.05804916527118947,
+        "passed": false
+      },
+      {
+        "id": "I2",
+        "pin": {
+          "id": "I2",
+          "x": 367,
+          "y": 88,
+          "theme": 29
+        },
+        "regression": 0.03487725765172073,
+        "passed": true
+      },
+      {
+        "id": "I3",
+        "pin": {
+          "id": "I3",
+          "x": 373,
+          "y": 118,
+          "theme": 29
+        },
+        "regression": 0.002186336863243113,
+        "passed": true
+      },
+      {
+        "id": "D2",
+        "pin": {
+          "id": "D2",
+          "x": 156,
+          "y": 82,
+          "theme": 29
+        },
+        "regression": 0.016591773456161182,
+        "passed": true
+      },
+      {
+        "id": "D5",
+        "pin": {
+          "id": "D5",
+          "x": 152,
+          "y": 212,
+          "theme": 29
+        },
+        "regression": -0.03614966098261604,
+        "passed": true
+      },
+      {
+        "id": "E6",
+        "pin": {
+          "id": "E6",
+          "x": 200,
+          "y": 254,
+          "theme": 29
+        },
+        "regression": 0.03836265154372887,
+        "passed": false
+      },
+      {
+        "id": "D6",
+        "pin": {
+          "id": "D6",
+          "x": 152,
+          "y": 274,
+          "theme": 29
+        },
+        "regression": 0.027094025345501496,
+        "passed": true
+      },
+      {
+        "id": "G3",
+        "pin": {
+          "id": "G3",
+          "x": 282,
+          "y": 130,
+          "theme": 31
+        },
+        "regression": 0.030872122536710428,
+        "passed": true
+      },
+      {
+        "id": "H3",
+        "pin": {
+          "id": "H3",
+          "x": 327,
+          "y": 135,
+          "theme": 31
+        },
+        "regression": 0.011407800670498375,
+        "passed": true
+      },
+      {
+        "id": "I4",
+        "pin": {
+          "id": "I4",
+          "x": 374,
+          "y": 173,
+          "theme": 31
+        },
+        "regression": 0.03202235943420767,
+        "passed": true
+      },
+      {
+        "id": "H5",
+        "pin": {
+          "id": "H5",
+          "x": 331,
+          "y": 229,
+          "theme": 28
+        },
+        "regression": -0.004727839107078864,
+        "passed": true
+      },
+      {
+        "id": "G5",
+        "pin": {
+          "id": "G5",
+          "x": 280,
+          "y": 214,
+          "theme": 28
+        },
+        "regression": 0.005345898088547935,
+        "passed": true
+      },
+      {
+        "id": "F4",
+        "pin": {
+          "id": "F4",
+          "x": 226,
+          "y": 184,
+          "theme": 28
+        },
+        "regression": -0.007984320412619665,
+        "passed": true
+      }
+    ],
+    "softColorRegression": 0.03,
+    "hardColorRegression": 0.035,
+    "guardColorRegressionMaximum": 0.05804916527118947,
+    "guardScoreRegressionMaximum": 0.033903825446107205,
+    "visualPinsInspected": true,
+    "sideViewsInspected": true,
+    "sideViewsCoherent": false,
+    "visualIssues": [
+      "D2 now has survey-based shell structure, but its red-excess crop error is worse than the parent.",
+      "G6 has broader emission, but its combined color/light/structure score regresses.",
+      "Faint short gas streaks remain in face-on and45degree views. No broad blue envelope or photo-color extrusion was introduced."
+    ],
+    "explanation": "Rejected; l32 remains the base. The combined red-pin error improves by 23.4%, but G6 worsens by 5.5%. G3 gains red haze; D2’s red-structure error worsens. Faint gas streaks remain in the outside views.\n\nAfter the old MCELS endpoint returned 404, the authorized SHASSA fallback supplies the full 13 degree field at 0.8 arcminute sampling. It cannot supply 3 arcsecond MCELS detail. There are 32,103 finite survey clouds and 1,977 retained unresolved primitives. Catalogue sky widths set conditional cloud depths; known shell chords remain depth priors. Stars, dust, catalogue amplitudes and non-gas colors stay fixed. The thin diffuse layer uses an adopted 35% share, within Kennicutt et al. 1995’s measured 30–40% range.\n\nThree calibration rounds are complete. The raw gas template integral rises by 49.8% before its global color/gain recalibration; diffuse light already included in old fits may be counted again. The warp sky-area correction remains approximate. These limitations and the pin/side-view failures prevent promotion. Held-out RMS is 0.3351 versus l32’s 0.3290; RMS is not the gate.\n\nSources: https://amundsen.swarthmore.edu/SHASSA/ and https://doi.org/10.1086/117304.",
+    "maximumCorrectionRounds": 3,
+    "fullResolutionFit": false,
+    "slabs": false
+  }
+}

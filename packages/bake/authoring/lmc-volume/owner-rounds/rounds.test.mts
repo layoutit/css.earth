@@ -1,5 +1,5 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {makeRaster,type Sources} from '../inputs.mts';import {densityFromMembers} from '../gaia-density.mts';import {hot} from './hot-stars.mts';import {uniqueHot,YOUNG_SIGMA_KPC,MCPS_SHARE} from './young.mts';import {PINS,maskPins,measure,score} from './pins.mts';import {mcpsStar} from '../mcps/input.mts';
-import {guardPass} from './gates.mts';
+import {guardPass,readVisualReview} from './gates.mts';
 import {residualAv} from './reddening.mts';
 import {samePhysicalField,requireMaterialOnly} from './reuse.mts';import type {Configuration} from '../sequence-state.mts';
 import {conserveOuter} from './outer.mts';import {gradedPrediction,type Grade} from '../grade.mts';
@@ -19,3 +19,5 @@ test('the diffuse field reaches the canonical 3D renderer from face-on and edge-
 test('diffuse fitting resolves near-zero optima but rejects sub-quantization visual claims',()=>{const fit=fitGasGain(x=>(x-1e-6)**2);assert.ok(Math.abs(fit.gain-1e-6)<1e-8);assert.equal(materialGasGain(fit.gain,.1/255),0);assert.equal(materialGasGain(.001,2/255),.001);});
 
 test('the H-alpha owner correction changes one measured gas object and preserves all other amplitudes',()=>{const owners=[{id:'old',component:0},{id:'DEM268',component:4},{id:'other',component:4}],a=Float64Array.from([1,2,3]);assert.deepEqual(Array.from(applyOwnerChanges(owners,a,[{id:'DEM268',multiplier:1.5}])),[1,3,3]);assert.deepEqual(Array.from(a),[1,2,3]);assert.throws(()=>applyOwnerChanges(owners,a,[{id:'old',multiplier:1.5}]));assert.throws(()=>applyOwnerChanges(owners,a,[{id:'DEM268',multiplier:3}]));});
+
+test('a visual review preserves rejection evidence and refuses unchecked flags',()=>{const r={visualPinsInspected:true,sideViewsInspected:true,sideViewsCoherent:false,issues:['Gas streaks.']};assert.deepEqual(readVisualReview(r),r);assert.throws(()=>readVisualReview({...r,sideViewsCoherent:'true'}));assert.throws(()=>readVisualReview({...r,issues:[4]}));});
