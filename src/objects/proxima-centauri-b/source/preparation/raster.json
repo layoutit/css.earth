@@ -253,6 +253,950 @@
         "title": "Model wind · ROCKE-3D control",
         "sourceUrl": "https://doi.org/10.1089/ast.2017.1760"
       }
+    },
+    {
+      "id": "um-starlight-day-0",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-0",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6324511480-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 0
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-0-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-10",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-10",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6325548280-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 10
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-10-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-20",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-20",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6326585080-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 20
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-20-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-30",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-30",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6327621880-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 30
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-30-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-40",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-40",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6328658680-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 40
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-40-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-50",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-50",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6329695480-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 50
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-50-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-60",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-60",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6330732280-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 60
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-60-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-70",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-70",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6331769080-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 70
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-70-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-80",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-80",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6332805880-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 80
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-80-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-90",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-90",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6333842680-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 90
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-90-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-100",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-100",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6334879480-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 100
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-100-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-110",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-110",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6335916280-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 110
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-110-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-120",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-120",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6336953080-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 120
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-120-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-130",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-130",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6337989880-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 130
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-130-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-140",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-140",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6339026680-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 140
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-140-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
+    },
+    {
+      "id": "um-starlight-day-150",
+      "output": "proxima-centauri-b-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-b-dataset-{id}.webp",
+      "source": "science/cohen-2023/controlprox.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "um-starlight-day-150",
+        "label": "Starlight on the ground",
+        "format": "netcdf-lonlat-field",
+        "path": "science/cohen-2023/controlprox.head.dat",
+        "parts": [
+          "science/cohen-2023/controlprox.at1264903027-19793.dat",
+          "science/cohen-2023/controlprox.at2529818841-2897.dat",
+          "science/cohen-2023/controlprox.at5059613778-518.dat",
+          "science/cohen-2023/controlprox.at6324510312-1148.dat",
+          "science/cohen-2023/controlprox.at6345247484-6564.dat",
+          "science/cohen-2023/controlprox.at6365991667-866.dat",
+          "science/cohen-2023/controlprox.at7630888542-1439.dat",
+          "science/cohen-2023/controlprox.at8875049985-8947.dat",
+          "science/cohen-2023/controlprox.at10133044413-622.dat",
+          "science/cohen-2023/controlprox.at6340063480-103680.dat"
+        ],
+        "variable": "surface_net_downward_shortwave_flux",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "time_1": 150
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "um-starlight-day-150-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "300",
+          "600"
+        ],
+        "description": "Simulated starlight reaching the ground from the Met Office Unified Model model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 89° north or south.",
+        "title": "Starlight on the ground · Met Office Unified Model simulation",
+        "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+      }
     }
   ],
   "lighting": {
