@@ -1,7 +1,7 @@
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
 import type {ResizeOptions,Sharp} from 'sharp';
 import { DECORATIVE_WEBP, applyUnderlay, composeLimbPreview, detectMissingCoverage, readRgba, withAlpha } from '../raster/index.ts';
-import { coverageDirection } from '../objects/default-view/index.ts';
+import { coverageDirection, readMinimapCenter } from '../objects/default-view/index.ts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.ts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.ts';
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeDatasets:optional(array(text))});
@@ -110,6 +110,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     throw new TypeError('Choose existing photographic surfaces for minimap refresh.');
   const framingValue=await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const framing=framingValue && parseMinimapFraming(framingValue);
+  const center = await readMinimapCenter(objectDirectory);
   const images = [];
   const excluded = framing?.excludeDatasets ?? [];
   if (!isArray(excluded) || excluded.some(id => typeof id !== 'string' ||
@@ -162,10 +163,9 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
         if (interpreted.missing) exactMissing = { missing: interpreted.missing, width, height };
       }
     } else pipeline = sharp(input).resize(minimapResize(nearest));
-    if (framing?.centerLongitudeDegrees !== undefined) {
-      if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');
+    if (center !== undefined) {
       const { data, info } = await pipeline.raw().toBuffer({ resolveWithObject: true });
-      const offset = Math.round(((framing.centerLongitudeDegrees - 180) % 360 + 360) % 360 / 360 * info.width);
+      const offset = Math.round(((center - 180) % 360 + 360) % 360 / 360 * info.width);
       const shifted = Buffer.alloc(data.length);
       for (let y = 0; y < info.height; y++) {
         const row = y * info.width * info.channels, split = offset * info.channels;
@@ -174,7 +174,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       }
       pipeline = sharp(shifted, { raw: info });
     }
-    const framedOffset = framing?.centerLongitudeDegrees === undefined ? 0 : ((framing.centerLongitudeDegrees - 180) % 360 + 360) % 360;
+    const framedOffset = center === undefined ? 0 : ((center - 180) % 360 + 360) % 360;
     const coverage = await minimapCoverage(pipeline, framedOffset, exactMissing);
     const result = await writeMinimap(pipeline, nearest, resolve(outputDirectory, path));
     images.push({ id: surface.id, path, width: result.width, height: result.height, ...(coverage ? { coverage } : {}),

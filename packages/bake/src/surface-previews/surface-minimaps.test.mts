@@ -49,6 +49,31 @@ test('a model-only dataset can omit a misleading flat map without opening its im
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('a planet locked to its star centres its minimap on longitude 0, the side that faces the star', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'locked-minimap-test-'));
+  try {
+    await mkdir(resolve(root, 'prepared'));
+    await mkdir(resolve(root, 'source/preparation'), { recursive: true });
+    // The day side, longitudes 270° to 90° E, is white across both edges of the map; the night side is black in the middle.
+    const day = Buffer.alloc(32 * 16 * 3);
+    for (let y = 0; y < 16; y++) for (let x = 0; x < 32; x++) if (x < 8 || x >= 24) day.fill(255, (y * 32 + x) * 3, (y * 32 + x + 1) * 3);
+    await sharp(day, { raw: { width: 32, height: 16, channels: 3 } }).png().toFile(resolve(root, 'day.png'));
+    await writeFile(resolve(root, 'prepared/surfaces.json'), JSON.stringify({ surfaces: [{ id: 'day', map: { url: '/scenes/planet/day.png' } }] }));
+    await writeFile(resolve(root, 'object.json'), JSON.stringify({ properties: { recipe: { sources: [{ id: 'rotation', path: 'source/preparation/rotation.json' }] } } }));
+    const options = { objectDirectory: root, publicDirectory: root, outputDirectory: resolve(root, 'prepared'), solarGeometry };
+    const row = async () => {
+      await prepareSurfaceMinimaps(options);
+      // Read the bytes: libvips caches a decoded file by its name.
+      const { data } = await sharp(await readFile(resolve(root, 'prepared/minimaps/day.webp'))).greyscale().raw().toBuffer({ resolveWithObject: true });
+      return [2, 16, 29].map(x => data[8 * 32 + x]! > 128 ? 'day' : 'night');
+    };
+    await writeFile(resolve(root, 'source/preparation/rotation.json'), JSON.stringify({ schema: 'cssearth-synchronous-rotation@1' }));
+    assert.deepEqual(await row(), ['night', 'day', 'night']);
+    await writeFile(resolve(root, 'source/preparation/rotation.json'), JSON.stringify({ schema: 'cssearth-linear-rotation@1' }));
+    assert.deepEqual(await row(), ['day', 'night', 'day']);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 // Solid-body preparation records source metadata here; it is not a file path.
 test('a prepared photo map uses its map URL when source is a provenance record', async () => {
   const {default:sharp} = await import('sharp');
