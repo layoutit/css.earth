@@ -78,6 +78,9 @@ export interface SimulationEntry {
   readonly member?: string;
   /** The pressure the field is read at, for a model whose levels are not pressures; only with `member`. */
   readonly isobar?: Isobar;
+  /** One step of a stepper: the datasets of one group are instants of one run shown in turn, each under its own label
+   * ("Day 7"), as a release of daily snapshots shows its weather (Cohen et al. 2023's Met Office runs). */
+  readonly step?: { readonly group: string; readonly label: string };
 }
 
 /** The inferno ramp WASP-103 b's hand-made climate simulation draws. */
@@ -90,7 +93,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
     if (!words) throw new TypeError(`${label}.${key} is empty.`);
     return words;
   };
-  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'displayUnits', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'time', 'detected', 'undetected', 'observed', 'others', 'range', 'member', 'isobar', 'mirrored']);
+  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'displayUnits', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'time', 'detected', 'undetected', 'observed', 'others', 'range', 'member', 'isobar', 'mirrored', 'step']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${label}: unknown fields ${unknown.join(', ')}.`);
   const dataset = text('dataset'), record = text('record'), file = text('file'), path = text('path'), url = text('url');
@@ -111,6 +114,11 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
   if (isobar && member === undefined) throw new TypeError(`${label}.isobar reads every level of the model, which the two kept parts of a classic release do not hold; it needs a NetCDF-4 file named by member.`);
   if (path.endsWith('.npy') && (member === undefined || !member.endsWith('.npy') || isobar)) throw new TypeError(`${label}.path ${path}: a NumPy file is a member of a ZIP release, named by a member ending in .npy, and is read on a level select names, not at an isobar.`);
   if (input.mirrored !== undefined && input.mirrored !== true) throw new TypeError(`${label}.mirrored is true, or left out for a grid whose longitudes run east.`);
+  const step = input.step === undefined ? undefined : (() => {
+    const record = requireRecord(input.step, `${label}.step`), group = requireString(record.group, `${label}.step.group`), name = requireString(record.label, `${label}.step.label`).trim();
+    if (!/^[a-z][a-z0-9-]*$/u.test(group) || !name) throw new TypeError(`${label}.step is { group, label }: a group id of lowercase letters, digits and hyphens, and the step's label.`);
+    return { group, label: name };
+  })();
   const scenario = text('scenario'), time = text('time');
   if (/[.!?]$/u.test(scenario)) throw new TypeError(`${label}.scenario is the rest of the sentence "The run assumes ..."; leave out its final period.`);
   if (/[.!?]$/u.test(time)) throw new TypeError(`${label}.time is the rest of the sentence "The map is ..."; leave out its final period.`);
@@ -132,7 +140,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
     coordinates: { longitude: requireString(coordinates.longitude, `${label}.coordinates.longitude`), latitude: requireString(coordinates.latitude, `${label}.coordinates.latitude`) },
     select: select as Record<string, number>, units: text('units'), ...(input.displayUnits === undefined ? {} : { displayUnits: text('displayUnits') }), longitudeZeroAt: requireFiniteNumber(input.longitudeZeroAt, `${label}.longitudeZeroAt`), ...(input.mirrored ? { mirrored: true } : {}), model: text('model'), credit: text('credit'), url, scenario, time,
     detected: input.detected, ...(input.undetected === undefined ? {} : { undetected: text('undetected') }), ...(observed ? { observed } : {}), ...(others ? { others } : {}), ...(range ? { range } : {}),
-    ...(member === undefined ? {} : { member }), ...(isobar ? { isobar } : {}) };
+    ...(member === undefined ? {} : { member }), ...(isobar ? { isobar } : {}), ...(step ? { step } : {}) };
 }
 
 /** `--simulation entries.json`: the entries for bodies already in the tree, by body id. */
@@ -259,8 +267,15 @@ export async function restoreSimulationField(sourceRoot: string, id: string, ent
 /** The byte ranges of a NetCDF-4 release the field reader reads to take the entry's selection, found by running the reader
  * on the release through range requests of WINDOW bytes, and merged where they lie within PART_GAP of each other. The first
  * starts at the release's first byte and is kept at the head's path; each other at the head's stem and its offset. */
+/** The windows of each release read so far, by its address: the steps of one run read the same structure. */
+const RELEASE_WINDOWS = new Map<string, Map<number, Buffer>>();
+
 async function netcdf4Parts(entry: SimulationEntry, release: SimulationRelease, where: string, first: Buffer, ranged: (range: ByteRange) => Promise<Response>) {
-  const windows = new Map<number, Buffer>([[0, first]]), asked: ByteRange[] = [];
+  if (!RELEASE_WINDOWS.has(release.fileUrl)) RELEASE_WINDOWS.set(release.fileUrl, new Map([[0, first]]));
+  // The reads the selected field's own values take are kept apart from the structure's, so the structure parts come out the
+  // same for every step of one run, whatever lies next to each step's grid.
+  const windows = RELEASE_WINDOWS.get(release.fileUrl)!, asked: (ByteRange & { readonly field: boolean })[] = [];
+  let field = false;
   const window = async (index: number) => {
     let bytes = windows.get(index);
     if (!bytes) {
@@ -271,7 +286,7 @@ async function netcdf4Parts(entry: SimulationEntry, release: SimulationRelease, 
     return bytes;
   };
   const netcdf4 = await readHdf5Netcdf(async (offset, length) => {
-    asked.push({ offset, length });
+    asked.push({ offset, length, field });
     const out = Buffer.alloc(length);
     for (let index = Math.floor(offset / WINDOW); index * WINDOW < offset + length; index++) {
       const bytes = await window(index), from = Math.max(offset, index * WINDOW), to = Math.min(offset + length, index * WINDOW + bytes.length);
@@ -279,16 +294,25 @@ async function netcdf4Parts(entry: SimulationEntry, release: SimulationRelease, 
     }
     return out;
   }, release.bytes, where);
-  await decodeNetcdfLonLatField(netcdf4, simulationRecipe(entry), where);
-  const merged: { offset: number; length: number }[] = [];
-  for (const { offset, length } of [...asked].sort((a, b) => a.offset - b.offset)) {
-    const last = merged.at(-1);
-    if (last && offset <= last.offset + last.length + PART_GAP) last.length = Math.max(last.length, offset + length - last.offset);
-    else merged.push({ offset, length });
-  }
+  const values = async <T,>(read: () => Promise<T>) => { field = true; try { return await read(); } finally { field = false; } };
+  await decodeNetcdfLonLatField({ variables: netcdf4.variables,
+    values: name => name === entry.variable ? values(() => netcdf4.values(name)) : netcdf4.values(name),
+    slice: (name, start, count) => name === entry.variable ? values(() => netcdf4.slice(name, start, count)) : netcdf4.slice(name, start, count) }, simulationRecipe(entry), where);
+  const merge = (reads: readonly ByteRange[]) => {
+    const merged: { offset: number; length: number }[] = [];
+    for (const { offset, length } of [...reads].sort((a, b) => a.offset - b.offset)) {
+      const last = merged.at(-1);
+      if (last && offset <= last.offset + last.length + PART_GAP) last.length = Math.max(last.length, offset + length - last.offset);
+      else merged.push({ offset, length });
+    }
+    return merged;
+  };
+  const merged = [...merge(asked.filter(read => !read.field)), ...merge(asked.filter(read => read.field))];
   if (merged[0]?.offset !== 0) throw new TypeError(`${where}: the reader did not start at the release's first byte.`);
   const stem = simulationPaths(entry).head.replace(/\.head\.dat$/u, '');
-  return merged.map((range, index) => ({ path: index === 0 ? simulationPaths(entry).head : `${stem}.at${range.offset}.dat`, range }));
+  // A part is named by where it starts and how long it is, so two parts never share a name: a field's grid can lie inside a
+  // range of the structure, or next to one (6,400 and 6,528 bytes from one offset of the test file before the two were kept apart).
+  return merged.map((range, index) => ({ path: index === 0 ? simulationPaths(entry).head : `${stem}.at${range.offset}-${range.length}.dat`, range }));
 }
 
 /** The step that takes a ZIP release's model file whole into the package, as the package's acquisition plan declares it. */
@@ -395,6 +419,7 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const observation = typeof atmosphere?.observationOutput === 'string' ? atmosphere.observationOutput.replace('{suffix}', '@2x') : undefined;
   const control = { id: entry.dataset, label: entry.label, qualification: `Simulation · ${entry.model} · ${entry.credit} · False color`,
     thumbnail: `${id}-dataset-${entry.dataset}.webp`, surface: `${id}-surface-${entry.dataset}@2x.webp`, poles: `${id}-poles-${entry.dataset}@2x.webp`, ...(observation ? { material: observation } : {}),
+    ...(entry.step ? { step: entry.step } : {}),
     source: { id: cited, path: '../manifest.json', url: entry.url }, falseColor: true, ...(short || field.missing ? { noData: true } : {}),
     legend: { kind: 'scale', title: entry.quantity, labels, recipe: { palette, labels }, meta: units, sourceUrl: entry.url },
     notes: `${entry.quantity} of ${name} in the ${entry.model} simulation of ${entry.credit}: a model, not a measurement. The run assumes ${entry.scenario}. The map is ${entry.time}.${entry.detected ? '' : ` Nobody has detected ${entry.undetected} on ${name}.`}${entry.observed ? ` ${entry.observed.text}` : ''}${entry.others ? ` ${entry.others.text}` : ''}${caps}${gaps} The false color runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} ${units}; it is not what an eye would see.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
@@ -415,8 +440,19 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const title = `${entry.quantity} (${entry.variable}) of ${name} in the ${entry.model} simulation: ${release.title}`;
   const declared = every.filter(item => item !== file && !dropped.has(item)).map(item => left.has(item) ? { ...item, consumers: left.get(item) } : item);
   const readers = [...new Set([...(file ? readersOf(file) : []), consumer])];
+  // A part another dataset of the same file already declares (the structure every step of a run reads) gains this dataset
+  // as a reader; only the parts new to the manifest are declared.
+  const held = new Map(declared.filter(item => typeof item.path === 'string').map(item => [String(item.path), item]));
+  const fresh = parts?.slice(1).filter(part => {
+    const known = held.get(part.path);
+    if (!known) return true;
+    const range = requireRecord(known.range, `${String(known.path)} range`);
+    if (range.offset !== part.range.offset || range.length !== part.range.length) throw new TypeError(`${id}, dataset ${entry.dataset}: ${part.path} is declared as ${String(range.length)} bytes from ${String(range.offset)}, and this dataset reads ${part.range.length} from ${part.range.offset}.`);
+    known.consumers = [...new Set([...readersOf(known), consumer])];
+    return false;
+  });
   manifest.inputs = [...declared,
-    ...(parts ? [...parts.slice(1).map((part, index) => ({ id: `${input}-part-${index + 1}`, path: part.path, range: part.range, ...shared, title: `Bytes ${part.range.offset.toLocaleString('en-US')} to ${(part.range.offset + part.range.length - 1).toLocaleString('en-US')} of ${entry.file}, read to take ${entry.variable}${selection}`,
+    ...(parts ? [...fresh!.map((part, index) => ({ id: `${input}-part-${index + 1}`, path: part.path, range: part.range, ...shared, title: `Bytes ${part.range.offset.toLocaleString('en-US')} to ${(part.range.offset + part.range.length - 1).toLocaleString('en-US')} of ${entry.file}, read to take ${entry.variable}${selection}`,
       acquisition: `One range request to Zenodo record ${release.doi}: ${part.range.length.toLocaleString('en-US')} bytes of ${entry.file} the field reader reads to take ${entry.variable}${selection}, its structure or its values. The ${sizeText(release.bytes)} file is never fetched whole. A model output, not an observation.`, ...keptBytes })),
     { id: file?.id ?? grid, path: paths.head, range: parts[0]!.range, ...shared, title: `First ${parts[0]!.range.length.toLocaleString('en-US')} bytes of ${entry.file}, the ${entry.model} simulation of ${name}: its superblock, structure and coordinate variables`,
       acquisition: `One range request to Zenodo record ${release.doi}: the first ${parts[0]!.range.length.toLocaleString('en-US')} bytes of ${entry.file}, the NetCDF-4 structure the reader starts from.`, ...keptBytes, consumers: readers }]
