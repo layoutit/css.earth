@@ -207,6 +207,1066 @@
           }
         ]
       }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at1264903027-19793.dat",
+      "range": {
+        "offset": 1264903027,
+        "length": 19793
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 1,264,903,027 to 1,264,922,819 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 19,793 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-2",
+      "path": "science/cohen-2023/controlprox.at2529818841-2897.dat",
+      "range": {
+        "offset": 2529818841,
+        "length": 2897
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 2,529,818,841 to 2,529,821,737 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 2,897 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-2",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-3",
+      "path": "science/cohen-2023/controlprox.at5059613778-518.dat",
+      "range": {
+        "offset": 5059613778,
+        "length": 518
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 5,059,613,778 to 5,059,614,295 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 518 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-3",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-4",
+      "path": "science/cohen-2023/controlprox.at6324510312-1148.dat",
+      "range": {
+        "offset": 6324510312,
+        "length": 1148
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,324,510,312 to 6,324,511,459 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 1,148 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-4",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-5",
+      "path": "science/cohen-2023/controlprox.at6345247484-6564.dat",
+      "range": {
+        "offset": 6345247484,
+        "length": 6564
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,345,247,484 to 6,345,254,047 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 6,564 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-5",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-6",
+      "path": "science/cohen-2023/controlprox.at6365991667-866.dat",
+      "range": {
+        "offset": 6365991667,
+        "length": 866
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,365,991,667 to 6,365,992,532 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 866 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-6",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-7",
+      "path": "science/cohen-2023/controlprox.at7630888542-1439.dat",
+      "range": {
+        "offset": 7630888542,
+        "length": 1439
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 7,630,888,542 to 7,630,889,980 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 1,439 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-7",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-8",
+      "path": "science/cohen-2023/controlprox.at8875049985-8947.dat",
+      "range": {
+        "offset": 8875049985,
+        "length": 8947
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 8,875,049,985 to 8,875,058,931 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 8,947 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-8",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-9",
+      "path": "science/cohen-2023/controlprox.at10133044413-622.dat",
+      "range": {
+        "offset": 10133044413,
+        "length": 622
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 10,133,044,413 to 10,133,045,034 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 622 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-9",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-part-10",
+      "path": "science/cohen-2023/controlprox.at6324511480-103680.dat",
+      "range": {
+        "offset": 6324511480,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,324,511,480 to 6,324,615,159 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 0, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-part-10",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-10-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6325548280-103680.dat",
+      "range": {
+        "offset": 6325548280,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,325,548,280 to 6,325,651,959 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 10",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 10, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-10-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-10-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-20-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6326585080-103680.dat",
+      "range": {
+        "offset": 6326585080,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,326,585,080 to 6,326,688,759 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 20",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 20, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-20-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-20-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-30-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6327621880-103680.dat",
+      "range": {
+        "offset": 6327621880,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,327,621,880 to 6,327,725,559 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 30",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 30, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-30-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-30-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-40-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6328658680-103680.dat",
+      "range": {
+        "offset": 6328658680,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,328,658,680 to 6,328,762,359 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 40",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 40, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-40-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-40-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-50-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6329695480-103680.dat",
+      "range": {
+        "offset": 6329695480,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,329,695,480 to 6,329,799,159 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 50",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 50, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-50-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-50-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-60-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6330732280-103680.dat",
+      "range": {
+        "offset": 6330732280,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,330,732,280 to 6,330,835,959 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 60",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 60, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-60-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-60-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-70-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6331769080-103680.dat",
+      "range": {
+        "offset": 6331769080,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,331,769,080 to 6,331,872,759 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 70",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 70, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-70-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-70-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-80-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6332805880-103680.dat",
+      "range": {
+        "offset": 6332805880,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,332,805,880 to 6,332,909,559 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 80",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 80, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-80-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-80-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-90-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6333842680-103680.dat",
+      "range": {
+        "offset": 6333842680,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,333,842,680 to 6,333,946,359 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 90",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 90, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-90-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-90-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-100-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6334879480-103680.dat",
+      "range": {
+        "offset": 6334879480,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,334,879,480 to 6,334,983,159 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 100",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 100, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-100-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-100-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-110-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6335916280-103680.dat",
+      "range": {
+        "offset": 6335916280,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,335,916,280 to 6,336,019,959 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 110",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 110, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-110-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-110-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-120-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6336953080-103680.dat",
+      "range": {
+        "offset": 6336953080,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,336,953,080 to 6,337,056,759 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 120",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 120, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-120-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-120-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-130-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6337989880-103680.dat",
+      "range": {
+        "offset": 6337989880,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,337,989,880 to 6,338,093,559 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 130",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 130, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-130-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-130-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-140-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6339026680-103680.dat",
+      "range": {
+        "offset": 6339026680,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,339,026,680 to 6,339,130,359 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 140",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 140, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-140-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-140-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-150-simulation-part-1",
+      "path": "science/cohen-2023/controlprox.at6340063480-103680.dat",
+      "range": {
+        "offset": 6340063480,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,340,063,480 to 6,340,167,159 of controlprox.nc, read to take surface_net_downward_shortwave_flux at time_1 index 150",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controlprox.nc the field reader reads to take surface_net_downward_shortwave_flux at time_1 index 150, its structure or its values. The 10.1 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-150-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+      "path": "science/cohen-2023/controlprox.head.dat",
+      "range": {
+        "offset": 0,
+        "length": 6973
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controlprox.nc?download=1",
+      "productId": "controlprox.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "First 6,973 bytes of controlprox.nc, the Met Office Unified Model simulation of Proxima Centauri b: its superblock, structure and coordinate variables",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: the first 6,973 bytes of controlprox.nc, the NetCDF-4 structure the reader starts from.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-20-simulation",
+        "um-starlight-day-30-simulation",
+        "um-starlight-day-40-simulation",
+        "um-starlight-day-50-simulation",
+        "um-starlight-day-60-simulation",
+        "um-starlight-day-70-simulation",
+        "um-starlight-day-80-simulation",
+        "um-starlight-day-90-simulation",
+        "um-starlight-day-100-simulation",
+        "um-starlight-day-110-simulation",
+        "um-starlight-day-120-simulation",
+        "um-starlight-day-130-simulation",
+        "um-starlight-day-140-simulation",
+        "um-starlight-day-150-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-proxima-centauri-b-um-starlight-day-0-simulation-grid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

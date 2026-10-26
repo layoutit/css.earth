@@ -378,6 +378,1046 @@
             ]
           }
         }
+      },
+      {
+        "id": "um-starlight-day-0",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-0.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-0@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-0@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 0"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 0 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-10",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-10.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-10@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-10@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 10"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 10 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-20",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-20.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-20@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-20@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 20"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 20 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-30",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-30.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-30@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-30@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 30"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 30 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-40",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-40.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-40@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-40@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 40"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 40 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-50",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-50.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-50@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-50@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 50"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 50 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-60",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-60.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-60@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-60@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 60"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 60 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-70",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-70.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-70@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-70@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 70"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 70 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-80",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-80.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-80@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-80@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 80"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 80 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-90",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-90.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-90@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-90@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 90"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 90 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-100",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-100.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-100@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-100@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 100"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 100 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-110",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-110.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-110@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-110@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 110"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 110 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-120",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-120.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-120@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-120@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 120"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 120 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-130",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-130.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-130@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-130@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 130"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 130 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-140",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-140.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-140@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-140@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 140"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 140 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-150",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "proxima-centauri-b-dataset-um-starlight-day-150.webp",
+        "surface": "proxima-centauri-b-surface-um-starlight-day-150@2x.webp",
+        "poles": "proxima-centauri-b-poles-um-starlight-day-150@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 150"
+        },
+        "source": {
+          "id": "proxima-centauri-b-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of Proxima Centauri b in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep, 881.7 W/m² from its star, on a planet that keeps one face to its star. The map is a daily snapshot, day 150 of the 200 the release holds; the steps run 10 days apart through one 157.5-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on Proxima Centauri b. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
       }
     ]
   },

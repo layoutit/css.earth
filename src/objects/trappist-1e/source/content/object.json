@@ -433,6 +433,1306 @@
           "sourceUrl": "https://arxiv.org/abs/2502.00132"
         },
         "notes": "Cloud cover of TRAPPIST-1e in the ROCKE-3D simulation of Way (2025): a model, not a measurement. The run assumes one bar of nitrogen with 400 ppm of carbon dioxide over a global ocean 900 m deep that carries heat, the paper's simulation 21, on a planet that keeps one face to its star. The map is the mean of the run's orbits 4,500 to 4,999. Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first transit spectra give no strong evidence for or against one: a nitrogen-rich atmosphere fits them, and so does bare rock (Glidden et al. 2025). The paper gives this run a mean surface temperature of 252 K; ExoCAM, given the same air, averages 244 K (Wolf et al. 2022). The false color runs from 30 to 100 %; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-0",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-0.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-0@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-0@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 0"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 0 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-1",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-1.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-1@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-1@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 1"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 1 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-2",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-2.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-2@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-2@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 2"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 2 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-3",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-3.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-3@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-3@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 3"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 3 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-4",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-4.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-4@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-4@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 4"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 4 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-5",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-5.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-5@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-5@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 5"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 5 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-6",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-6.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-6@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-6@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 6"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 6 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-7",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-7.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-7@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-7@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 7"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 7 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-8",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-8.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-8@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-8@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 8"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 8 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-9",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-9.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-9@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-9@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 9"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 9 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-10",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-10.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-10@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-10@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 10"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 10 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-11",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-11.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-11@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-11@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 11"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 11 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-12",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-12.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-12@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-12@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 12"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 12 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-13",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-13.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-13@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-13@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 13"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 13 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-14",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-14.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-14@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-14@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 14"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 14 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-15",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-15.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-15@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-15@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 15"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 15 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-16",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-16.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-16@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-16@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 16"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 16 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-17",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-17.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-17@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-17@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 17"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 17 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-18",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-18.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-18@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-18@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 18"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 18 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "um-starlight-day-19",
+        "label": "Starlight on the ground",
+        "qualification": "Simulation · Met Office Unified Model · Cohen et al. (2023) · False color",
+        "thumbnail": "trappist-1e-dataset-um-starlight-day-19.webp",
+        "surface": "trappist-1e-surface-um-starlight-day-19@2x.webp",
+        "poles": "trappist-1e-poles-um-starlight-day-19@2x.webp",
+        "step": {
+          "group": "um-starlight",
+          "label": "Day 19"
+        },
+        "source": {
+          "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Starlight reaching the ground",
+          "labels": [
+            "0",
+            "300",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://doi.org/10.3847/psj/acc9c4"
+        },
+        "notes": "Starlight reaching the ground of TRAPPIST-1e in the Met Office Unified Model simulation of Cohen et al. (2023): a model, not a measurement. The run assumes the THAI setup: a moist nitrogen atmosphere with 400 ppm of carbon dioxide over a slab ocean 1 m deep, on a planet that keeps one face to its star, with the model's gravity wave drag on. The map is a daily snapshot, day 19 of the 200 the release holds; the steps run a day apart through one 19.4-day cycle of the clouds (the paper's Table 3). Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first four transit spectra give no strong evidence for or against an atmosphere (Glidden et al. 2025). Four models ran the THAI case this setup follows, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). Gray caps: no released grid samples beyond 89° north or south. The false color runs from 0 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
       }
     ]
   },
