@@ -1,0 +1,66 @@
+{
+  "version": 32,
+  "parent": 31,
+  "configuration": {
+    "version": 32,
+    "parent": 31,
+    "densityVersion": 29,
+    "barGeometry": {
+      "center": [
+        0.22095285048916255,
+        0.7222364825299707,
+        0
+      ],
+      "angle": -0.5354382542875828,
+      "sigma": 1.0500080370470315,
+      "ratio": 0.38,
+      "sigmaZ": 0.36656497062880344,
+      "luminosity": 0.2842040336717868
+    },
+    "colors": [
+      [
+        1.6301947998682782,
+        1,
+        0.6402197834147627
+      ],
+      [
+        1.7293316530795357,
+        1,
+        0.6590930564825427
+      ],
+      [
+        0.697668943523474,
+        1,
+        1.4665042485559485
+      ],
+      [
+        2.08,
+        1,
+        1.06
+      ]
+    ],
+    "innerDiscColor": [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    "dustVersion": 25,
+    "dustStrength": 1.0919999999999999,
+    "oldPopulationVersion": 21,
+    "change": "Calibrate young-star color and saturation, with brightness fixed.",
+    "details": {
+      "referenceProjectionVersion": 31,
+      "ownerAcceptedBase": 31,
+      "freeParameters": 3,
+      "appearanceOnly": true,
+      "frozen": "Every density, star point, object amplitude, depth, dust column, other component color and the global display curve.",
+      "color": "A global young R/G tint, B/G tint and saturation, normalized to preserve each pixel’s young photopic luminance. No target pixel controls spatial structure.",
+      "maximumCorrectionRounds": 3
+    },
+    "dustExtinctionRgb": [
+      0.25,
+      1,
+      1.879765395894428
+    ]
+  }
+}
