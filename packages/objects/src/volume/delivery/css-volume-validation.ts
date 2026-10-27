@@ -44,6 +44,7 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   }
   const leafIds = new Set<string>();
   for (const stackInput of stacks) validateStack(record(stackInput, 'volume stack'), resources, leafIds);
+  validateOpticalSlabs(stacks, value.mergedOpticalCopies);
   const normals = stacks.map((stack, index) => stack.normalUnits ?? AXES.map(axis => axis === stack.axis ? 1 : 0));
   for (let i = 0; i < normals.length; i++) for (let j = 0; j < i; j++)
     if (Math.abs(normals[i].reduce((sum: number, value: number, k: number) => sum + value * normals[j][k], 0)) > 1e-8)
@@ -81,13 +82,34 @@ function validateStack(stack: Record<string, unknown>, resources: Set<string>, l
     throw new TypeError('Volume stack normal must be a finite unit vector.');
   for (const leafInput of stack.leaves) {
     const leaf = record(leafInput, 'volume leaf');
-    exactKeys(leaf, ['id', 'centerUnits', 'texturePath', 'widthPx', 'heightPx', 'style', ...(Object.hasOwn(leaf, 'boundsCssPixels') ? ['boundsCssPixels'] : [])], 'volume leaf');
+    exactKeys(leaf, ['id', 'centerUnits', 'texturePath', 'widthPx', 'heightPx', 'style', ...(Object.hasOwn(leaf, 'boundsCssPixels') ? ['boundsCssPixels'] : []), ...(Object.hasOwn(leaf, 'opticalSlab') ? ['opticalSlab'] : [])], 'volume leaf');
+    if (Object.hasOwn(leaf, 'opticalSlab')) {
+      const optical = record(leaf.opticalSlab, 'optical slab'); exactKeys(optical, ['id', 'role'], 'optical slab');
+      if (typeof optical.id !== 'string' || !optical.id || typeof optical.role !== 'string' || !['merged-three', 'single', 'merged-two'].includes(optical.role)) throw new TypeError('Invalid optical slab identity or role.');
+    }
     if (leaf.boundsCssPixels !== undefined) validatePreparedLeafBounds(leaf.boundsCssPixels);
     if (typeof leaf.id !== 'string' || !leaf.id || leafIds.has(leaf.id) || typeof leaf.texturePath !== 'string' ||
         !resources.has(leaf.texturePath) || !positiveInteger(leaf.widthPx) || !positiveInteger(leaf.heightPx) ||
         !finiteVector(leaf.centerUnits)) throw new TypeError('Prepared CSS volume leaf metadata is invalid.');
     validateStyle(record(leaf.style, 'volume leaf style'));
     leafIds.add(leaf.id);
+  }
+}
+
+function validateOpticalSlabs(stacks: readonly unknown[], merged: unknown): void {
+  const leaves = stacks.flatMap(value => { const stack = record(value, 'stack'); return (stack.leaves as unknown[]).map(value => ({ axis: stack.axis, leaf: record(value, 'leaf') })); });
+  if (!leaves.some(({ leaf }) => Object.hasOwn(leaf, 'opticalSlab'))) return;
+  if (merged !== 3 || leaves.length > 33 || leaves.some(({ leaf }) => !Object.hasOwn(leaf, 'opticalSlab'))) throw new TypeError('Hybrid optical slabs require explicit roles, three-copy encoding and at most 33 layers.');
+  const groups = new Map<string, typeof leaves>();
+  for (const entry of leaves) { const optical = record(entry.leaf.opticalSlab, 'optical slab'), id = String(optical.id), group = groups.get(id) ?? []; group.push(entry); groups.set(id, group); }
+  for (const group of groups.values()) {
+    const roles = group.map(({ leaf }) => String(record(leaf.opticalSlab, 'optical slab').role)).sort();
+    if (roles.length === 1 && roles[0] === 'merged-three') continue;
+    if (roles.join(',') !== 'merged-two,single') throw new TypeError('A dense optical slab requires exactly an original and a merged pair.');
+    const [a, b] = group;
+    if (a!.axis !== b!.axis || JSON.stringify(a!.leaf.centerUnits) !== JSON.stringify(b!.leaf.centerUnits) ||
+        a!.leaf.widthPx !== b!.leaf.widthPx || a!.leaf.heightPx !== b!.leaf.heightPx ||
+        JSON.stringify(a!.leaf.style) !== JSON.stringify(b!.leaf.style) || JSON.stringify(a!.leaf.boundsCssPixels) !== JSON.stringify(b!.leaf.boundsCssPixels)) throw new TypeError('Optical slab images must be coincident with identical geometry.');
   }
 }
 

@@ -66,6 +66,16 @@ function opticalGain(root: FakeElement): number {
     .reduce((sum, copy) => sum + copyOpacity(copy), 0);
 }
 
+test('hybrid slabs publish two dense optical layers and keep the retained geometry stable',()=>{
+  const original=payload(),stacks=original.stacks.map(stack=>({...stack,leaves:stack.leaves.map(leaf=>({...leaf,opticalSlab:{id:leaf.id,role:'merged-three' as const}}))})),base=stacks[2]!.leaves[0]!;
+  const data:PreparedCssVolume={...original,mergedOpticalCopies:3,frame:{...original.frame,boundsUnits:{min:[-1,-1,-.1],max:[1,1,.1]}},stacks:[stacks[0]!,stacks[1]!,{axis:'z',leaves:[{...base,opticalSlab:{id:base.id,role:'single'}},{...base,id:'z-pair',opticalSlab:{id:base.id,role:'merged-two'}}]}]};
+  const {runtime,meshes,document}=mount(data,true),nodes=meshes.flatMap(m=>m.children),count=document.count;
+  runtime.publish(publication([0,0,1]));assert.equal(copyOpacity(meshes[2]!.children[0]!),.998);assert.equal(copyOpacity(meshes[2]!.children[1]!),.001);
+  runtime.publish(publication([0,Math.sqrt(3),1]));assert.equal(copyOpacity(meshes[2]!.children[0]!),.998);assert.equal(copyOpacity(meshes[2]!.children[1]!),127/255);
+  assert.equal(nodes.length,4);assert.equal(document.count,count);assert.deepEqual(meshes.flatMap(m=>m.children),nodes);
+  for(const node of nodes)node.propertyWrites.length=0;runtime.publish(publication([0,Math.sqrt(3),1]));assert.deepEqual(nodes.flatMap(n=>n.propertyWrites),[]);
+});
+
 test('optical copies reuse canonical textures and transforms inside isolated unflattened axis cameras', () => {
   const { data, runtime, roots, meshes, resolver } = mount(payload(3)); runtime.publish(publication([1, 1, 1]));
   assert.equal(roots.length, 3);

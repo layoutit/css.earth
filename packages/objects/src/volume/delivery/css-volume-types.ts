@@ -4,6 +4,7 @@ import type { DensityVolumeFrame, VolumeVector } from '../../density-volume.js';
 import type { PreparedCssSky } from '../../prepared-data/sky/css-sky-types.js';
 
 export type VolumeAxis = 'x' | 'y' | 'z';
+export type VolumeOpticalRole = 'merged-three' | 'single' | 'merged-two';
 
 export interface PreparedVolumeLeaf {
   readonly id: string;
@@ -13,6 +14,8 @@ export interface PreparedVolumeLeaf {
   readonly heightPx: number;
   readonly style: PreparedVolumeLeafStyle;
   readonly boundsCssPixels?: PreparedLeafBounds;
+  /** An opt-in physical slab may use one merged image or a coincident original/pair image. */
+  readonly opticalSlab?: { readonly id: string; readonly role: VolumeOpticalRole };
 }
 
 export interface PreparedVolumeStack {

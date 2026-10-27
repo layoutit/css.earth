@@ -14,6 +14,7 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
     for (let index = 0; index < a.leaves.length; index++) {
       const x = a.leaves[index]!, y = b.leaves[index]!, prepared = x.style, other = y.style;
       if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
+          x.opticalSlab?.id !== y.opticalSlab?.id || x.opticalSlab?.role !== y.opticalSlab?.role ||
           !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
           prepared.transform !== other.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
     }
