@@ -5425,6 +5425,16 @@
         "kind": "local",
         "reason": "One rejected 26-slab, 33-layer compression pilot, confirmed through the real CSS renderer. No installation or publication."
       }
+    },
+    {
+      "id": "l36-equal-scale-resolution",
+      "path": "src/objects/lmc-volume/source/preparation/l36/resolution.json",
+      "bytes": 59405,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/record-resolution.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Equal-scale native reference views and source-grid refinement of the owner-approved model. No runtime installation or publication."
+      }
     }
   ]
 }
