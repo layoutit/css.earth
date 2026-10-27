@@ -43,6 +43,8 @@ The [real-site qualification](source/preparation/l36/site-native.json) verifies 
 
 Whole-frame and tiled model projections agree byte for byte at the pilot cameras. The default Milky Way replay remains byte-identical for its 33 slab PNGs, six sky faces and inventory. Runtime images and screenshots stay in ignored local storage.
 
+The [phone availability check](source/preparation/l36/phone-qualification.json) found no connected Android device. S23 drag, coast and far/near traces were skipped. Phone performance remains unqualified.
+
 ## Known problems
 
 - Scalar RGBA slabs approximate spectral extinction, display grading after integration and emitter positions inside thick intervals. Absolute light, radial-profile and color limits are not all met. These remain known problems under the owner's accepted comparison standard.

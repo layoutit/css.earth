@@ -5499,6 +5499,16 @@
         "kind": "local",
         "reason": "Actual browser output and shared physical camera validation for the locally installed approved model."
       }
+    },
+    {
+      "id": "l36-phone-qualification",
+      "path": "src/objects/lmc-volume/source/preparation/l36/phone-qualification.json",
+      "bytes": 1007,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/phone-availability.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Live device availability check. This explicitly records a skipped performance test, not a successful trace."
+      }
     }
   ]
 }
