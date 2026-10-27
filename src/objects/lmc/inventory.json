@@ -8,18 +8,6 @@
       "sha256": "be44190a4331e8adca4916cc65b5e915fbd4da9ca57fc01600a9eaaf7ec97437"
     },
     {
-      "location": "public",
-      "filename": "lmc-dataset-vista-infrared.webp",
-      "bytes": 26292,
-      "sha256": "a8f1523029e389d604d29d0b2259a390d1da207626afba7e50ac53c3da78a687"
-    },
-    {
-      "location": "public",
-      "filename": "lmc-dataset-wise-wide-infrared.webp",
-      "bytes": 2868,
-      "sha256": "644e6040cda7ebb15e63daaa90522fef3fa9e188d48859d62f2429599c098b26"
-    },
-    {
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2678,
@@ -28,8 +16,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1354,
-      "sha256": "9f774ffbea630c645a46183a918fe1aac51d127b4a6d6d19232705efc2b35f7a"
+      "bytes": 599,
+      "sha256": "803bcb82a1cf366f8c5ebe23cdbf10813c6ef6de9cd6cd428cdd3bb665b388b8"
     },
     {
       "location": "prepared",
@@ -52,14 +40,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 5275,
-      "sha256": "f44614fe48fe24c4b8e0cbb205c6f2c4b1bea822c98656bd12b2142b23ecea01"
+      "bytes": 4703,
+      "sha256": "aab9b961dc0594f21d5b0e3b334b9ea3f12bd1c2d35e9cd921a957387ffceb6d"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2248,
-      "sha256": "47bf0f3048f90a178176e15bd9a842be3527e5d24c3ccc83d8ec8ce6ba74f6b0"
+      "bytes": 1322,
+      "sha256": "2164419b5f40d87ab1422efdcbc267aadc07ac97755f2d099ba9d9714a11547a"
     }
   ]
 }

@@ -27,9 +27,9 @@
   },
   "datasets": {
     "horalek-widefield": {
-      "title": "Petr Horálek’s visible-light LMC",
-      "detail": "6582 × 4388 px",
-      "summary": "Optical photograph colors on an image-fitted emission model; gas and dust depth are not measured.",
+      "title": "Approved LMC physical model",
+      "detail": "Native l36 optical model",
+      "summary": "Catalogue populations and dust in a warped disc, calibrated against the optical photograph.",
       "sources": [
         {
           "catalogueId": "noirlab-iotw2547a",
@@ -37,34 +37,6 @@
           "label": "Large Magellanic Cloud · NOIRLab iotw2547a; NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
           "checked": "2026-10-01",
           "locator": "Large Magellanic Cloud · NOIRLab iotw2547a"
-        }
-      ]
-    },
-    "vista-infrared": {
-      "title": "LMC in near infrared",
-      "detail": "8954 × 10000 px",
-      "summary": "Near-infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
-      "sources": [
-        {
-          "catalogueId": "eso-eso1914a",
-          "url": "https://www.eso.org/public/images/eso1914a/",
-          "label": "Large Magellanic Cloud · ESO eso1914a; ESO/VMC Survey",
-          "checked": "2026-10-01",
-          "locator": "Large Magellanic Cloud · ESO eso1914a"
-        }
-      ]
-    },
-    "wise-wide-infrared": {
-      "title": "LMC in WISE infrared",
-      "detail": "6000 × 6000 px",
-      "summary": "AllWISE infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
-      "sources": [
-        {
-          "catalogueId": "cds-allwise-color",
-          "url": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
-          "label": "Large Magellanic Cloud · AllWISE color mosaic; IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
-          "checked": "2026-10-01",
-          "locator": "Large Magellanic Cloud · AllWISE color mosaic"
         }
       ]
     }
