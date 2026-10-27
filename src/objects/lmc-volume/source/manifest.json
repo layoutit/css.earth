@@ -5435,6 +5435,16 @@
         "kind": "local",
         "reason": "Equal-scale native reference views and source-grid refinement of the owner-approved model. No runtime installation or publication."
       }
+    },
+    {
+      "id": "l36-native-near-pilot",
+      "path": "src/objects/lmc-volume/source/preparation/l36/near-diagnostic.json",
+      "bytes": 104181,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/record-near.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "128 px near compression pilot compared with matched installed Milky Way views. No installation or publication."
+      }
     }
   ]
 }

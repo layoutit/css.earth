@@ -10,7 +10,7 @@ export interface GalaxyBankBox {min:Triple;max:Triple;}
 export interface GalaxyPlane {axis:0|1|2;index:number;center:number;width:number;height:number;rgb:Float64Array;tau:Float64Array;}
 export interface GalaxyBankFit {rgb:Triple;gamma:number;dust:number;emissionOpacity?:number;}
 export interface GalaxyBankSpec {box:GalaxyBankBox;counts:Triple;size:number;record:string;texturePrefix:string;hybrid?:{densePerAxis:Triple};}
-export interface GalaxyDecodedPlane extends Omit<GalaxyPlane,'rgb'|'tau'> {rgba:Uint8Array;border?:number;opticalRole?:VolumeOpticalRole;}
+export interface GalaxyDecodedPlane extends Omit<GalaxyPlane,'rgb'|'tau'> {rgba:Uint8Array;border?:number;imageBounds?:[number,number,number,number];opticalRole?:VolumeOpticalRole;}
 export const IDENTITY_BANK_FIT:GalaxyBankFit={rgb:[1,1,1],gamma:1,dust:1};
 function requireValue(value:unknown,message:string):asserts value {if(!value)throw new TypeError(message);}
 export function bankSpec(spec:GalaxyBankSpec):GalaxyBankSpec {
@@ -65,7 +65,7 @@ export function compositeGalaxyStack(planes:readonly GalaxyDecodedPlane[],box:Ga
  for(let y=0;y<camera.height;y++)for(let x=0;x<camera.width;x++){
   const ray=camera.ray(x+.5,y+.5);
   const hits=bank.map(p=>({p,t:(p.center-ray.origin[axis])/ray.direction[axis]})).filter(h=>h.t>0).sort((a,b)=>b.t-a.t),rgb=[0,0,0];
-  for(const hit of hits){const u=(ray.origin[h]+ray.direction[h]*hit.t-box.min[h])/(box.max[h]-box.min[h]),vv=(box.max[v]-ray.origin[v]-ray.direction[v]*hit.t)/(box.max[v]-box.min[v]);if(u<0||u>1||vv<0||vv>1)continue;const border=hit.p.border??0,q=texel(hit.p,(u*(hit.p.width-2*border)+border)/hit.p.width,(vv*(hit.p.height-2*border)+border)/hit.p.height),leafOpacity=hit.p.opticalRole?hybridOpticalOpacity(hit.p.opticalRole,gain):opacity,alpha=q[3]!*leafOpacity;
+  for(const hit of hits){const bounds=hit.p.imageBounds??[box.min[h],box.max[h],box.min[v],box.max[v]],u=(ray.origin[h]+ray.direction[h]*hit.t-bounds[0]!)/(bounds[1]!-bounds[0]!),vv=(bounds[3]!-ray.origin[v]-ray.direction[v]*hit.t)/(bounds[3]!-bounds[2]!);if(u<0||u>1||vv<0||vv>1)continue;const border=hit.p.border??0,q=texel(hit.p,(u*(hit.p.width-2*border)+border)/hit.p.width,(vv*(hit.p.height-2*border)+border)/hit.p.height),leafOpacity=hit.p.opticalRole?hybridOpticalOpacity(hit.p.opticalRole,gain):opacity,alpha=q[3]!*leafOpacity;
    if(merged)for(let c=0;c<3;c++)rgb[c]=Math.round((rgb[c]!*(1-alpha)+q[c]!*leafOpacity)*255)/255;
    else for(let copy=0;copy<3;copy++){const a=Math.min(.999,Math.max(0,gain-copy));for(let c=0;c<3;c++)rgb[c]=Math.round((rgb[c]!*(1-q[3]!*a)+q[c]!*a)*255)/255;}
   }

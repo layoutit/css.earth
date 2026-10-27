@@ -42,3 +42,6 @@ test('complete Earth tiles preserve smooth light, dust, old/young grain, nonline
  for(let top=0;top<48;top+=16)for(let left=0;left<64;left+=16){const mask=new Uint8Array(64*48);for(let y=top;y<top+16;y++)mask.fill(1,y*64+left,y*64+left+16);const part=gradedPrediction(catalogueBasis(projectCatalogue(scene,camera,.015,mask,undefined,sampling),scene,amplitudes),grade,mask),tile=new Float64Array(16*16*3);for(let y=0;y<16;y++)for(let x=0;x<16;x++)for(let c=0;c<3;c++){const full=((top+y)*64+left+x)*3+c;joined[full]=part[full];tile[(y*16+x)*3+c]=part[full];}const bytes=imageBytes(normalized(tile,o),o,true);for(let y=0;y<16;y++)encoded.set(bytes.subarray(y*16*3,(y+1)*16*3),((top+y)*64+left)*3);}
  assert.deepEqual(joined,whole);assert.deepEqual(encoded,imageBytes(normalized(whole,o),o,true));
 });
+
+import {boundsInterval} from '../render.mts';
+test('near observers never integrate the field behind the eye',()=>{assert.deepEqual(boundsInterval([0,0,1],[0,0,-1]),[0,13]);assert.equal(boundsInterval([0,0,13],[0,0,1]),null);});

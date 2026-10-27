@@ -24,3 +24,8 @@ test('decoded merged-copy composite keeps the actual one-third opacity ceiling',
  assert.deepEqual([...encoded.rgba],[255,255,255,255]);const c=compositeGalaxyStack([encoded],spec.box,camera,2);assert.equal(c[0],85/255);assert.equal(c[1],c[0]);
  const exact=compositeGalaxyStack([encodeGalaxyPlane(p,IDENTITY_BANK_FIT,false)],spec.box,camera,2,false);assert.ok(exact[0]>.99,'The control must expose merged-copy dimming rather than pretend exact transfer');
 });
+test('installed extended images keep their own physical UV bounds',()=>{
+ const p={axis:2 as const,index:0,center:0,width:4,height:1,rgba:Uint8Array.from([255,0,0,255,255,0,0,255,0,0,255,255,0,0,255,255]),imageBounds:[-4,4,-1,1] as [number,number,number,number]},camera={width:1,height:1,ray:()=>({origin:[2,0,3] as [number,number,number],direction:[0,0,-1] as [number,number,number]})};
+ const extended=compositeGalaxyStack([p],spec.box,camera,2);assert.ok(extended[2]>0,'Faint extended support outside the canonical box must remain visible');assert.equal(extended[0],0);
+ const canonical=compositeGalaxyStack([{...p,imageBounds:undefined}],spec.box,camera,2);assert.deepEqual([...canonical],[0,0,0]);
+});
