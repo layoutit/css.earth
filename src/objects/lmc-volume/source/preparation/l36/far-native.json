@@ -465,9 +465,10 @@
   "encodedPngBytes": 15619262,
   "decodedRgbaBytes": 301989888,
   "handoff": {
-    "detailBelowKpc": 20,
-    "farAboveKpc": 35,
-    "screenSizeFadeAlsoApplies": true
+    "selection": "projected diameter",
+    "pictureOnlyBelowPixels": 128,
+    "slabsOnlyAbovePixels": 256,
+    "physicalDistanceOverride": false
   },
   "milkyWayReplay": "The default installed Milky Way pipeline replays its 33 PNGs, six sky faces and inventory byte for byte after the shared far-picture extension.",
   "knownProblems": [

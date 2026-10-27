@@ -12,6 +12,35 @@
   "pcPerPixel": 9.250826559679918,
   "nearObserverDistanceKpc": 15,
   "earthObserverDistanceKpc": 49.59,
+  "unresolvedContext": {
+    "url": "http://127.0.0.1:4312/lmc/?v=UUPDQ2P0xK3Rd8NXPbsREejIw7U7dZlx2bBBQsczQAAAAD_DV-l92J9mv94kqwweyFm_35NNRkHGcT_gHCUqn7VJAAA&embed",
+    "samePhysicalObserver": true,
+    "projectionScaleRatio": 0.025,
+    "state": {
+      "ready": "true",
+      "host": [
+        {
+          "display": "none",
+          "opacity": "0"
+        }
+      ],
+      "detail": [
+        {
+          "display": "none",
+          "opacity": "1",
+          "leaves": 0,
+          "stacks": []
+        }
+      ],
+      "far": [
+        {
+          "display": "none",
+          "opacity": "1",
+          "views": []
+        }
+      ]
+    }
+  },
   "views": [
     {
       "id": "earth",
@@ -19,20 +48,47 @@
       "captureUrl": "http://127.0.0.1:4312/lmc/?v=UUPDQ2P0xK3Rd8NXPbsREejIw7U7dZlx2bBBQsczQAAAAEAYLePdTsc_v94kqwweyFm_35NNRkHGcT_gHCUqn7VJAAA&embed",
       "state": {
         "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
         "detail": [
           {
-            "display": "none",
-            "opacity": "1",
-            "leaves": 0
+            "display": "block",
+            "opacity": "0.999",
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "none",
+                "opacity": "0",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
           }
         ],
         "far": [
           {
-            "display": "block",
-            "opacity": "1",
-            "views": [
-              "earth"
-            ]
+            "display": "none",
+            "opacity": "0",
+            "views": []
           }
         ]
       },
@@ -74,7 +130,7 @@
           "projectionScale": 6.044814546521422
         }
       },
-      "loadSeconds": 3.643065834
+      "loadSeconds": 4.462568375
     },
     {
       "id": "pz",
@@ -82,11 +138,40 @@
       "captureUrl": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-GGsNU73okLWqdw5kP_GOG-HNBQsczQAAAAD_9QUe8AcYrP-I9NoSTPuS_2lq5LoS3Sr_YzuGDvcAAAAA&embed",
       "state": {
         "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
         "detail": [
           {
             "display": "block",
             "opacity": "0.999",
-            "leaves": 33
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "none",
+                "opacity": "0",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
           }
         ],
         "far": [
@@ -135,7 +220,7 @@
           "projectionScale": 1.8284375518818574
         }
       },
-      "loadSeconds": 0.9801023750000004
+      "loadSeconds": 2.6051426660000008
     },
     {
       "id": "tilt45",
@@ -143,11 +228,40 @@
       "captureUrl": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-Fu8M-qM9r7cXRw5hScJB_tApBQsczQAAAAD_9QUe8AcYrP-WY-o7Dsd-_w3-lpXl4TL_B65N1w779AAA&embed",
       "state": {
         "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
         "detail": [
           {
             "display": "block",
             "opacity": "0.999",
-            "leaves": 33
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "none",
+                "opacity": "0",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
           }
         ],
         "far": [
@@ -196,7 +310,7 @@
           "projectionScale": 1.8284375518818574
         }
       },
-      "loadSeconds": 2.4044689580000003
+      "loadSeconds": 0.7732495419999995
     },
     {
       "id": "py",
@@ -204,11 +318,40 @@
       "captureUrl": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-F4UNEMQHdV5buw5hijNAu3oJBQsczQAAAAD_9QUe8AcYrP-WrAfPvSY4_wK4V7CcjAz_AgQbTai6tAAA&embed",
       "state": {
         "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
         "detail": [
           {
             "display": "block",
             "opacity": "0.999",
-            "leaves": 33
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "none",
+                "opacity": "0",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
           }
         ],
         "far": [
@@ -257,13 +400,13 @@
           "projectionScale": 1.8284375518818574
         }
       },
-      "loadSeconds": 0.7418604169999989
+      "loadSeconds": 0.6781271670000005
     }
   ],
   "checks": [
     "The published physical observer and orientation agree with each saved world-camera URL.",
     "All four actual CSS cameras show the same 9.47 kpc horizontal width.",
-    "Earth distance selects its direct source-model picture. The three near cameras select the fitted slabs.",
+    "Earth, face-on, 45 degrees and edge-on each select 33 actual X/Y/Z slab layers with the billboard hidden. The same physical Earth observer at 2.5 percent magnification retires its slab bank to the shared unresolved context.",
     "Every visible LMC image is decoded before capture. No browser page errors were reported."
   ],
   "comparison": "Horálek is reprojected using its recorded astrometric registration. The physical camera remains right-handed. The photograph includes its display sky; galaxy textures do not bake that background into the model.",

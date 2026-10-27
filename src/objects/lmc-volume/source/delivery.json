@@ -1,12 +1,5 @@
 {
   "schema": "cssearth-density-volume-dataset-bank-source@1",
-  "model": "l36",
-  "approvedCommit": "e4ebd6c94263f73dc020ad0d1443901182310329",
-  "generator": "packages/bake/authoring/lmc-volume/delivery/install-native.mts",
-  "near": "source/preparation/l36/full-native.json",
-  "far": "source/preparation/l36/far-native.json",
-  "acceptance": "source/preparation/l36/delivery-acceptance.json",
-  "restore": "Run the LMC delivery generator with the completed ignored native slab and far-picture checkpoints present. These local assets are not published to R2. The archived compact recipe describes the retired model and must not rebuild this bank.",
   "attachedTo": "lmc",
   "source": {
     "datasetId": "horalek-widefield",
@@ -14,5 +7,12 @@
     "prepared": {
       "path": "prepared/datasets.json"
     }
-  }
+  },
+  "model": "l36",
+  "approvedCommit": "e4ebd6c94263f73dc020ad0d1443901182310329",
+  "generator": "packages/bake/authoring/lmc-volume/delivery/install-native.mts",
+  "near": "source/preparation/l36/full-native.json",
+  "far": "source/preparation/l36/far-native.json",
+  "acceptance": "source/preparation/l36/delivery-acceptance.json",
+  "restore": "Run the LMC delivery generator with the completed ignored native slab and far-picture checkpoints present. These local assets are not published to R2. The archived compact recipe describes the retired model and must not rebuild this bank."
 }

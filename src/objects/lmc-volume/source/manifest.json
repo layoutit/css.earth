@@ -5481,9 +5481,19 @@
       }
     },
     {
+      "id": "l36-phone-qualification",
+      "path": "src/objects/lmc-volume/source/preparation/l36/phone-qualification.json",
+      "bytes": 1007,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/phone-availability.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Live device availability check. This explicitly records a skipped performance test, not a successful trace."
+      }
+    },
+    {
       "id": "l36-far-native",
       "path": "src/objects/lmc-volume/source/preparation/l36/far-native.json",
-      "bytes": 10708,
+      "bytes": 10766,
       "generator": "packages/bake/authoring/lmc-volume/delivery/record-far-native.mts",
       "sourceBinding": {
         "kind": "local",
@@ -5493,21 +5503,11 @@
     {
       "id": "l36-real-site",
       "path": "src/objects/lmc-volume/source/preparation/l36/site-native.json",
-      "bytes": 8270,
+      "bytes": 12039,
       "generator": "packages/bake/authoring/lmc-volume/delivery/record-site-native.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Actual browser output and shared physical camera validation for the locally installed approved model."
-      }
-    },
-    {
-      "id": "l36-phone-qualification",
-      "path": "src/objects/lmc-volume/source/preparation/l36/phone-qualification.json",
-      "bytes": 1007,
-      "generator": "packages/bake/authoring/lmc-volume/delivery/phone-availability.mts",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Live device availability check. This explicitly records a skipped performance test, not a successful trace."
       }
     }
   ]
