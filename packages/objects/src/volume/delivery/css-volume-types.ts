@@ -31,6 +31,8 @@ export interface PreparedVolumeImpostors {
   readonly radiusUnits: number;
   readonly fullBelowDiameterPixels: number;
   readonly volumeAboveDiameterPixels: number;
+  /** Optional physical distance window; distant pictures remain authoritative while zooming from afar. */
+  readonly distanceFade?: { readonly detailBelowUnits: number; readonly impostorAboveUnits: number };
   readonly views: readonly {
     readonly id: string;
     readonly back: VolumeVector;

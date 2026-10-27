@@ -1,0 +1,9 @@
+import test from'node:test';import assert from'node:assert/strict';import{modelFarViews,modelFarCamera,modelFarRgba,FAR_RADIUS,FAR_SIZE}from'./far-model.mts';import{dot,cross}from'../geometry.mts';
+test('transparent model pictures reproduce every 8-bit channel exactly on black',()=>{for(let alpha=1;alpha<256;alpha++)for(let c=0;c<=alpha;c++)assert.equal(Math.round(Math.round(c*255/alpha)*alpha/255),c);assert.deepEqual(modelFarRgba(Float64Array.from([0,0,0])),Uint8Array.from([0,0,0,0]));assert.throws(()=>modelFarRgba(Float64Array.from([NaN,0,0])));});
+test('far cameras retain the physical frame, origin and native pixel pitch',()=>{assert.ok(2*FAR_RADIUS/FAR_SIZE*1000<9.77);for(const view of modelFarViews()){assert.ok(Math.abs(dot(view.back,view.right))<1e-12);assert.deepEqual(cross(view.right,view.back),view.down);const camera=modelFarCamera(view,FAR_SIZE);assert.deepEqual(camera.pixelOf!([0,0,0]),[FAR_SIZE/2,FAR_SIZE/2]);assert.ok(Math.abs(dot(camera.ray(FAR_SIZE/2,FAR_SIZE/2).direction,view.back)+1)<1e-12);}});
+
+import{sameFarConfiguration}from'./far-run.mts';
+test('persisted camera bases retain their configuration when JSON normalizes negative zero',()=>{const config={views:modelFarViews(),size:FAR_SIZE};assert.equal(sameFarConfiguration(JSON.parse(JSON.stringify(config)),config),true);assert.equal(sameFarConfiguration({...config,size:512},config),false);});
+
+import{linearToSrgb}from'@cssearth/bake/objects/color';
+test('the actual model-picture encoder preserves nonzero source colors after source-over',()=>{const rgb=Float64Array.from([.01,.1,.6,.9,.3,.2,1.5,.0001,.04]),rgba=modelFarRgba(rgb);for(let p=0;p<rgb.length/3;p++)for(let c=0;c<3;c++)assert.equal(Math.round(rgba[p*4+c]!*rgba[p*4+3]!/255),Math.round(255*linearToSrgb(Math.max(0,Math.min(1,rgb[p*3+c]!)))));assert.ok(rgba.some(v=>v>0));});

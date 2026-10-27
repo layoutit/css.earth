@@ -9,6 +9,7 @@ export interface VolumeImpostorProjection {
   readonly y: number;
   readonly diameterPixels: number;
   readonly volumeMix: number;
+  readonly distanceMix: number;
   readonly visible: boolean;
   readonly views: readonly { readonly id: string; readonly weight: number; readonly matrix: readonly [number, number, number, number] }[];
 }
@@ -27,12 +28,12 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
   // its physical leaf frustum does the culling.
   const diameterPixels = inside ? Number.POSITIVE_INFINITY
     : 2 * radius * viewport.focalPixels / (depth > radius ? depth : Math.sqrt(distance * distance - radius * radius));
-  const volumeMix = smooth((diameterPixels - bank.fullBelowDiameterPixels) / (bank.volumeAboveDiameterPixels - bank.fullBelowDiameterPixels));
+  const distanceMix=bank.distanceFade?smooth((bank.distanceFade.impostorAboveUnits-distance)/(bank.distanceFade.impostorAboveUnits-bank.distanceFade.detailBelowUnits)):1,volumeMix = distanceMix*smooth((diameterPixels - bank.fullBelowDiameterPixels) / (bank.volumeAboveDiameterPixels - bank.fullBelowDiameterPixels));
   // A baked view shows the volume from a direction, so the view follows where the camera is, not where it looks:
   // turning in place keeps the same views and only rotates their images.
   const toViewer: VolumeVector = distance > 0
     ? [local.positionUnits[0] / distance, local.positionUnits[1] / distance, local.positionUnits[2] / distance] : back;
-  return { x, y, diameterPixels, volumeMix, visible,
+  return { x, y, diameterPixels, volumeMix, distanceMix, visible,
     views: visible && (volumeMix < 1 || includeFullViews) ? selectImpostorViews(bank.views, toViewer).map(({ view, weight }) => {
       const imageRight = transport(view.right, view.back, toViewer), imageDown = transport(view.down, view.back, toViewer);
       return { id: view.id, weight, matrix: [dot(imageRight, right), dot(imageRight, down), dot(imageDown, right), dot(imageDown, down)] };

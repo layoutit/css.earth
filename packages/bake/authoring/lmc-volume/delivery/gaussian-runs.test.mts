@@ -1,0 +1,2 @@
+import test from'node:test';import assert from'node:assert/strict';import{gaussianRunRange}from'./gaussian-runs.mts';
+test('Gaussian run ranges never omit a sample inside the supported vertical envelope',()=>{for(const origin of[-30,0,30])for(const direction of[-1,-.1,0,.1,1])for(const count of[10,100,1000]){const ds=60/count,[first,last]=gaussianRunRange(origin,direction,0,ds,count,-4.2,4.2);assert.ok(first>=0&&last<=count&&first<=last);for(let k=0;k<count;k++){const z=origin+direction*(k+.5)*ds;if(z>=-4.2&&z<=4.2)assert.ok(k>=first&&k<last);}}});

@@ -103,14 +103,14 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     if (destroyed) return;
     const projection = projectVolumeImpostors(publication, options.payload.frame, bank,
       !detailAllowed || options.nativeFocalCss !== undefined);
-    const { visible, volumeMix, diameterPixels, x, y } = projection;
+    const { visible, volumeMix, distanceMix, diameterPixels, x, y } = projection;
     const responsive = options.nativeFocalCss !== undefined && Number.isFinite(diameterPixels);
     // A presentation faded to zero still rasterises every node it keeps displayed: on an iPhone the full slice
     // volume cost hundreds of milliseconds a frame while its CSS opacity was 0. An impostor-sized cloud now leaves
     // rendering and its billboard views carry it. An unresolvable focal length keeps the earlier always-on behaviour.
     const nativeMix = responsive ? nativeProjectedMix(diameterPixels, publication.viewport.focalPixels,
       resolveFocalPixels(publication.viewport), bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : Number.NaN;
-    const mix = Number.isFinite(nativeMix) ? nativeMix : responsive ? Number.NaN : volumeMix;
+    const mix = distanceMix===0?0:Number.isFinite(nativeMix) ? nativeMix*distanceMix : responsive ? Number.NaN : volumeMix;
     // With detail denied the billboard is the whole presentation, at full weight, whatever the projected size.
     const detailVisible = detailAllowed && visible && (Number.isNaN(mix) || mix > 0);
     const impostorsVisible = visible && (!detailAllowed || Number.isNaN(mix) || mix < 1);
@@ -121,8 +121,8 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     writeStyle(full, 'display', detailVisible ? 'block' : 'none'); fullShown = detailVisible;
     writeStyle(distant, 'display', impostorsVisible ? 'block' : 'none');
     // The responsive fade is a CSS expression of the viewport; each presentation's opacity states it in full.
-    const fade = responsive ? nativeProjectedFade(diameterPixels,
-      publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : '';
+    const rawFade = responsive ? nativeProjectedFade(diameterPixels,
+      publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : '',fade=distanceMix===1?rawFade:`(${rawFade} * ${distanceMix})`;
     if (detailVisible) {
       const volume = detail();
       volume.publish(publication);

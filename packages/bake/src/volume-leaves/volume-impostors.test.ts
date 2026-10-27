@@ -278,3 +278,12 @@ test('a volume with one drawn stack keeps its whole weight at every view, and dr
   const edgeOn = await baked.image([1, 0, 0]);
   assert.ok(edgeOn.data.every(value => value === 0), 'a sheet has no area seen edge-on');
 });
+
+test('model pictures bypass slab decoding and retain their exact independent raster',async()=>{
+ const input=await fixture(AXES.map(axis=>({axis,depth:0,color:[80,100,120,100]}))),written=new Map<string,Uint8Array>();
+ const views=Array.from({length:4},(_,i)=>({id:'model-'+i,back:[0,0,1] as const,right:[1,0,0] as const,down:[0,-1,0] as const,texturePath:'model/earth-'+i+'.png'})),rgba=Uint8Array.from([130,100,70,180]);
+ const options={volume:input.volume,brightness:WHITE,prefix:'model',views,radiusUnits:10,distanceFade:{detailBelowUnits:20,impostorAboveUnits:35},readResource:async()=>{throw Error('A model picture cannot read completed slabs');},writeResource:async(path:string,bytes:Uint8Array)=>{written.set(path,bytes);},renderView:async()=>({rgba,size:1})};
+ const result=await prepareVolumeImpostors(options);assert.deepEqual(result.impostors?.distanceFade,options.distanceFade);assert.equal(result.impostors?.radiusUnits,10);assert.deepEqual(await sharp(written.get('model/earth-0.png')!).raw().toBuffer(),Buffer.from(rgba));
+ await assert.rejects(prepareVolumeImpostors({...options,renderView:async()=>({rgba,size:2})}),/dimensions/);
+ await assert.rejects(prepareVolumeImpostors({...options,views:views.map((v,i)=>i?v:{...v,texturePath:'model/../escape.png'}),writeResource:async()=>{assert.fail('Unsafe output must be refused before any write');}}),/output must stay/);
+});

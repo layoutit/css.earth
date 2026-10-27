@@ -5459,11 +5459,21 @@
     {
       "id": "l36-full-native",
       "path": "src/objects/lmc-volume/source/preparation/l36/full-native.json",
-      "bytes": 24219,
+      "bytes": 27539,
       "generator": "packages/bake/authoring/lmc-volume/delivery/record-full-native.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "2048 px native slab bank with frozen accepted pilot encoding. Local output only."
+      }
+    },
+    {
+      "id": "l36-far-native",
+      "path": "src/objects/lmc-volume/source/preparation/l36/far-native.json",
+      "bytes": 10708,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/record-far-native.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Direct source-model far pictures with unchanged approved physical parameters. Local output only."
       }
     }
   ]

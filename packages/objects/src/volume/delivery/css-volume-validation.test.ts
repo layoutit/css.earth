@@ -72,3 +72,8 @@ test('changing an optical role changes topology even when geometry is identical'
   Object.assign(b.stacks[2]!.leaves[0]!,{opticalSlab:{id:'z-0',role:'merged-two'}});Object.assign(b.stacks[2]!.leaves[1]!,{opticalSlab:{id:'z-0',role:'single'}});
   assert.equal(samePreparedVolumeTopology(a,b),false);
 });
+
+test('physical distance handoff is structural, so presentation swaps cannot silently keep stale thresholds',async()=>{
+ const{samePreparedVolumeTopology}=await import('./prepared-volume-topology.js');const base=valid(),views=Array.from({length:4},(_,i)=>({id:'view-'+i,texturePath:'far/'+i+'.png',back:[0,0,1]as const,right:[1,0,0]as const,down:[0,-1,0]as const}));const source:PreparedCssVolume={...base,resources:[...base.resources,...views.map(v=>({path:v.texturePath,width:1,height:1,bytes:1}))],impostors:{schema:'cssearth-volume-impostors@1',radiusUnits:2,fullBelowDiameterPixels:128,volumeAboveDiameterPixels:256,views}},a:PreparedCssVolume={...source,impostors:{...source.impostors!,distanceFade:{detailBelowUnits:20,impostorAboveUnits:35}}};
+ assert.equal(samePreparedVolumeTopology(source,a),false);assert.equal(samePreparedVolumeTopology(a,{...a,impostors:{...a.impostors!,distanceFade:{detailBelowUnits:20,impostorAboveUnits:35}}}),true);assert.equal(samePreparedVolumeTopology(a,{...a,impostors:{...a.impostors!,distanceFade:{detailBelowUnits:21,impostorAboveUnits:35}}}),false);
+});

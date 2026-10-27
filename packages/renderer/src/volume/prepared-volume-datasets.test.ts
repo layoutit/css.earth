@@ -563,3 +563,12 @@ test('a hidden star presentation can switch datasets before its next stellar fil
  runtime.setStarsVisible(true);await source.load('second',true);await Promise.resolve();runtime.publish(publication());
  assert.equal(runtime.state().starsVisible,true);assert.ok(source.stars('second'));runtime.destroy();
 });
+
+test('distance-based far pictures stay selected under native CSS magnification',()=>{
+ for(const responsive of[false,true]){const f=dom(),base=budgetPayload(1,0).datasets[0]!.volume,old=base.impostors!;
+ const cloud={...base,impostors:{...old,distanceFade:{detailBelowUnits:20,impostorAboveUnits:35}}};
+ const lod=mountPreparedVolumeLod({...f.options,payload:cloud,lazyDetail:true,resolveResource:path=>path,...(responsive?{nativeFocalCss:'10000px'}:{})},()=>1);
+ const detail=f.host.children.find(n=>n.className==='css-volume-detail')!,distant=f.host.children.find(n=>n.className==='css-volume-impostors')!;
+ const far=publication(49.59);far.viewport={...far.viewport,focalPixels:10000};lod.publish(far);assert.equal(detail.style.display,'none');assert.equal(distant.style.display,'block');assert.equal(lod.roots.length,0,'Far view never constructs hidden slabs');
+ const near=publication(15);near.viewport={...near.viewport,focalPixels:10000};lod.publish(near);assert.equal(detail.style.display,'block');assert.ok(lod.roots.length>0);lod.destroy();}
+});

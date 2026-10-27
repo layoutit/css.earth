@@ -1,5 +1,5 @@
 /** Bounded offline views of the accepted PolyCSS leaves; no density reconstruction. */
-import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, validatePreparedCssVolume, type PreparedCssVolume, type PreparedVolumeImpostors, type PreparedVolumeLeaf, type VolumeAxis, type VolumeVector, type PreparedVolumeDatasetBrightness } from '@cssearth/objects';
+import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, validatePreparedCssVolume, validateVolumeImpostors, type PreparedCssVolume, type PreparedVolumeImpostors, type PreparedVolumeLeaf, type VolumeAxis, type VolumeVector, type PreparedVolumeDatasetBrightness } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import sharp from 'sharp';
 
@@ -31,6 +31,11 @@ export async function prepareVolumeImpostors(options: {
   prefix: string;
   /** The ids of the leaves that are sheets on planes of their own, not parallel to their stack's slabs. */
   tilted?: ReadonlySet<string>;
+  /** An independent physical model may supply the pictures; default leaf replay is unchanged. */
+  renderView?: (view: View, radiusUnits: number) => Promise<{ rgba: Uint8Array; size: number }>;
+  views?: readonly View[];
+  radiusUnits?: number;
+  distanceFade?: PreparedVolumeImpostors['distanceFade'];
 }): Promise<PreparedCssVolume> {
   const volume = validatePreparedCssVolume(options.volume);
   const { brightness, readResource, writeResource } = options;
@@ -43,10 +48,12 @@ export async function prepareVolumeImpostors(options: {
       prefix.split('/').some(part => !part || part === '.' || part === '..')) {
     throw new TypeError('Impostor prefix must be a safe relative directory.');
   }
-  const radiusUnits = Math.hypot(...AXES.map((_, axis) =>
+  const radiusUnits = options.radiusUnits??Math.hypot(...AXES.map((_, axis) =>
     Math.max(Math.abs(volume.frame.boundsUnits.min[axis]), Math.abs(volume.frame.boundsUnits.max[axis]))));
   if (!(radiusUnits > 0) || !Number.isFinite(radiusUnits)) throw new TypeError('Impostor radius must be finite and positive.');
-  const views = directions(prefix);
+  const views = options.views?[...options.views]:directions(prefix);
+  validateVolumeImpostors({schema:PREPARED_VOLUME_IMPOSTORS_SCHEMA,radiusUnits,fullBelowDiameterPixels:128,volumeAboveDiameterPixels:256,views,...(options.distanceFade?{distanceFade:options.distanceFade}:{})},new Set(views.map(v=>v.texturePath)));
+  if (views.some(view => !view.texturePath.startsWith(prefix + '/') || view.texturePath.split('/').some(part => !part || part === '.' || part === '..') || /[\\\u0000-\u0020]/u.test(view.texturePath))) throw new TypeError('Model-picture output must stay inside its safe relative prefix.');
   const oldPaths = new Set(volume.impostors?.views.map(view => view.texturePath));
   const resources = volume.resources.filter(resource => !oldPaths.has(resource.path));
   const remainingPaths = new Set(resources.map(resource => resource.path));
@@ -65,7 +72,7 @@ export async function prepareVolumeImpostors(options: {
   // Clouds shipped without impostor views; checking one texel per CSS pixel would refuse every slice drawn at
   // TEXELS_PER_CSS_PIXEL.
   const sameDensity = (texels: number, css: number, leafTexels: number, box: number) => Math.abs(texels * box - leafTexels * css) <= 1e-9 * texels * box;
-  for (const { planes } of stacks) for (const { leaf, width, height, backgroundWidth, backgroundHeight } of planes) {
+  if(!options.renderView)for (const { planes } of stacks) for (const { leaf, width, height, backgroundWidth, backgroundHeight } of planes) {
     const resource = metadata.get(leaf.texturePath);
     if (!resource) throw new TypeError(`Impostor leaf ${leaf.id} has no declared texture resource.`);
     if (!sameDensity(resource.width, backgroundWidth, leaf.widthPx, width) || !sameDensity(resource.height, backgroundHeight, leaf.heightPx, height)) {
@@ -86,14 +93,15 @@ export async function prepareVolumeImpostors(options: {
   }
   const preparedResources: PreparedCssVolume['resources'][number][] = [];
   for (const view of views) {
-    const rgba = render(view, stacks, textures, radiusUnits, brightness);
-    const bytes = await sharp(rgba, { raw: { width: SIZE, height: SIZE, channels: 4 } }).png().toBuffer();
+    const picture=options.renderView?await options.renderView(view,radiusUnits):{rgba:render(view,stacks,textures,radiusUnits,brightness),size:SIZE};
+    if(!Number.isSafeInteger(picture.size)||picture.size<1||picture.size*picture.size>MAX_TEXTURE_PIXELS||picture.rgba.byteLength!==picture.size*picture.size*4)throw new TypeError('Invalid physical-model far picture dimensions');
+    const bytes = await sharp(picture.rgba, { raw: { width: picture.size, height: picture.size, channels: 4 } }).png().toBuffer();
     await writeResource(view.texturePath, bytes);
-    preparedResources.push({ path: view.texturePath, bytes: bytes.byteLength, width: SIZE, height: SIZE });
+    preparedResources.push({ path: view.texturePath, bytes: bytes.byteLength, width: picture.size, height: picture.size });
   }
   return { ...volume, resources: [...resources, ...preparedResources], impostors: {
     schema: PREPARED_VOLUME_IMPOSTORS_SCHEMA, radiusUnits,
-    fullBelowDiameterPixels: 128, volumeAboveDiameterPixels: 256, views,
+    fullBelowDiameterPixels: 128, volumeAboveDiameterPixels: 256, views,...(options.distanceFade?{distanceFade:options.distanceFade}:{}),
   } };
 }
 

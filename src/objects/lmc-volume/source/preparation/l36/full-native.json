@@ -957,6 +957,113 @@
       "encodedRelativeL1": 0.09133277047857338
     }
   ],
+  "nearAllCameraComparison": {
+    "count": 20,
+    "belowMilkyWay": 20,
+    "exceptions": [],
+    "rows": [
+      {
+        "name": "near-0-0",
+        "fullEncodedRelativeL1": 0.10482497069692089,
+        "milkyWayEncodedRelativeL1": 0.21672005975869438
+      },
+      {
+        "name": "near-0-90",
+        "fullEncodedRelativeL1": 0.10481951977655533,
+        "milkyWayEncodedRelativeL1": 0.21672005975869038
+      },
+      {
+        "name": "near-0-180",
+        "fullEncodedRelativeL1": 0.1048195173522498,
+        "milkyWayEncodedRelativeL1": 0.21672005975868922
+      },
+      {
+        "name": "near-0-270",
+        "fullEncodedRelativeL1": 0.1048195216257353,
+        "milkyWayEncodedRelativeL1": 0.21672005975869382
+      },
+      {
+        "name": "near-22.5-0",
+        "fullEncodedRelativeL1": 0.11416974273165664,
+        "milkyWayEncodedRelativeL1": 0.19688005159461702
+      },
+      {
+        "name": "near-22.5-90",
+        "fullEncodedRelativeL1": 0.10932277265487936,
+        "milkyWayEncodedRelativeL1": 0.19451772234714468
+      },
+      {
+        "name": "near-22.5-180",
+        "fullEncodedRelativeL1": 0.1106187740142139,
+        "milkyWayEncodedRelativeL1": 0.19515647115170623
+      },
+      {
+        "name": "near-22.5-270",
+        "fullEncodedRelativeL1": 0.1147791884477857,
+        "milkyWayEncodedRelativeL1": 0.19768394807264675
+      },
+      {
+        "name": "near-45-0",
+        "fullEncodedRelativeL1": 0.12794468549600985,
+        "milkyWayEncodedRelativeL1": 0.14126660352903328
+      },
+      {
+        "name": "near-45-90",
+        "fullEncodedRelativeL1": 0.12657859260460264,
+        "milkyWayEncodedRelativeL1": 0.13943161546470975
+      },
+      {
+        "name": "near-45-180",
+        "fullEncodedRelativeL1": 0.13286644101531728,
+        "milkyWayEncodedRelativeL1": 0.14505031127675422
+      },
+      {
+        "name": "near-45-270",
+        "fullEncodedRelativeL1": 0.13184526940716865,
+        "milkyWayEncodedRelativeL1": 0.1475435190884159
+      },
+      {
+        "name": "near-67.5-0",
+        "fullEncodedRelativeL1": 0.17345036798275498,
+        "milkyWayEncodedRelativeL1": 0.1904466026722338
+      },
+      {
+        "name": "near-67.5-90",
+        "fullEncodedRelativeL1": 0.18053502752935305,
+        "milkyWayEncodedRelativeL1": 0.19205196070395086
+      },
+      {
+        "name": "near-67.5-180",
+        "fullEncodedRelativeL1": 0.19086105673816103,
+        "milkyWayEncodedRelativeL1": 0.19785815203456064
+      },
+      {
+        "name": "near-67.5-270",
+        "fullEncodedRelativeL1": 0.17713839182263574,
+        "milkyWayEncodedRelativeL1": 0.2048910437809753
+      },
+      {
+        "name": "near-90-0",
+        "fullEncodedRelativeL1": 0.09695664426967406,
+        "milkyWayEncodedRelativeL1": 0.10909241066602597
+      },
+      {
+        "name": "near-90-90",
+        "fullEncodedRelativeL1": 0.1020959977555179,
+        "milkyWayEncodedRelativeL1": 0.1316622236687023
+      },
+      {
+        "name": "near-90-180",
+        "fullEncodedRelativeL1": 0.1152233045888934,
+        "milkyWayEncodedRelativeL1": 0.11661583210944428
+      },
+      {
+        "name": "near-90-270",
+        "fullEncodedRelativeL1": 0.09133277047857338,
+        "milkyWayEncodedRelativeL1": 0.12887490964688256
+      }
+    ]
+  },
   "knownProblems": {
     "absolutePhotometricFailures": {
       "lightRangePercent": [
@@ -971,7 +1078,8 @@
       "maximumAbsoluteColorErrorPercentagePoints": 8.48354358104395,
       "maximumAbsoluteRadialErrorPercent": 25.2894596731267
     },
-    "remainingMatchedViewErrors": "The three owner-reviewed views are below the shipped Milky Way errors. Two other sampled directions exceed their individually matched Milky Way error. This diagnostic remains recorded; the explicit owner acceptance admits delivery.",
+    "remainingMatchedViewErrors": [],
+    "pilotMatchedViewErrors": "The three owner-reviewed views are below the shipped Milky Way errors. Two other sampled directions exceed their individually matched Milky Way error. This diagnostic remains recorded; the explicit owner acceptance admits delivery.",
     "geometry": "Scalar RGBA slabs approximate spectral extinction, post-integration display and positions within thick intervals. Outside depth remains conditional on the adopted physical model."
   },
   "installation": "Not installed by this stage. The following stages prepare model far pictures and install the local site. No remote assets are published.",

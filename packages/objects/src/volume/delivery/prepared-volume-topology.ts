@@ -22,7 +22,9 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
   const a = left.impostors, b = right.impostors;
   if (!a || !b) return a === b;
   if (a.radiusUnits !== b.radiusUnits || a.fullBelowDiameterPixels !== b.fullBelowDiameterPixels ||
-      a.volumeAboveDiameterPixels !== b.volumeAboveDiameterPixels || a.views.length !== b.views.length) return false;
+      a.volumeAboveDiameterPixels !== b.volumeAboveDiameterPixels ||
+      a.distanceFade?.detailBelowUnits !== b.distanceFade?.detailBelowUnits ||
+      a.distanceFade?.impostorAboveUnits !== b.distanceFade?.impostorAboveUnits || a.views.length !== b.views.length) return false;
   return a.views.every((view, index) => {
     const other = b.views[index]!;
     return view.id === other.id && vectorEquals(view.back, other.back) && vectorEquals(view.right, other.right) && vectorEquals(view.down, other.down);
