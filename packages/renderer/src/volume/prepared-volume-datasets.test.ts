@@ -563,3 +563,16 @@ test('a hidden star presentation can switch datasets before its next stellar fil
  runtime.setStarsVisible(true);await source.load('second',true);await Promise.resolve();runtime.publish(publication());
  assert.equal(runtime.state().starsVisible,true);assert.ok(source.stars('second'));runtime.destroy();
 });
+
+test('an explicitly resident bank retains every axis through a coasting direction change',()=>{
+ const f=dom(),data={...payload(),starsEnabled:false};
+ const runtime=createPreparedVolumeDatasets({payload:data,resolveResource:path=>`/prepared/${path}`,residentStacks:true}).mount(f.options);
+ runtime.publish(publication());
+ const root=runtime.root as unknown as FakeElement,initial=descendants(root),axes=initial.filter(node=>node.className==='css-volume-projection');
+ assert.equal(axes.length,3);assert.ok(axes.every(node=>node.style.display==='block'&&node.style.visibility==='visible'));
+ const leaves=initial.filter(node=>node.parentNode?.className==='css-volume-mesh');assert.equal(leaves.length,9);
+ runtime.publish(publication(4,[1,0,0]),true,true);
+ assert.deepEqual(descendants(root),initial);assert.ok(axes.every(node=>node.style.display==='block'&&node.style.visibility==='visible'));
+ assert.ok(leaves.every(node=>node.style.display!=='none'&&node.style.visibility!=='hidden'));
+ runtime.publish(publication(4,[1,0,0]),true,false);runtime.destroy();
+});

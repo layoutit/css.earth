@@ -123,8 +123,10 @@ type MountedDataset = Omit<PreparedVolumeDatasetEntry, 'volume' | 'stars'> & { r
 
 /** Fixed declared bank; visible LODs attach their own textures on demand. `payload` is the bank's source (its index and
  * the datasets read so far), or a whole bank in memory. */
-export function createPreparedVolumeDatasets({ payload, resolveResource }: {
+export function createPreparedVolumeDatasets({ payload, resolveResource, residentStacks = false }: {
   payload: PreparedVolumeDatasetSource | PreparedVolumeDatasets; resolveResource(path: string): string;
+  /** Small prepared banks may retain every axis for transform/opacity-only motion. */
+  residentStacks?: boolean;
 }) {
   const source = 'index' in payload ? payload : preparedVolumeDatasetSource(payload);
   const data = source.index, pool = `volume-datasets:${data.id}`;
@@ -219,7 +221,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         Object.assign(surface.style, { position: 'absolute', inset: '0', pointerEvents: 'none', display: 'none' });
         const marker = create('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
         const active = { dataset };
-        const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: dataset.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss, lazyDetail: lazy },
+        const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: dataset.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss, lazyDetail: lazy, residentStacks },
           detail => volumeDatasetCompositeOpacity(stackShares(detail.roots), active.dataset.brightness));
         for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
         const family = { datasets: Object.freeze(datasets), active, surface, runtime };

@@ -7,7 +7,7 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
   const left = validatePreparedCssVolume(leftInput), right = validatePreparedCssVolume(rightInput);
   if (!frameEquals(left.frame, right.frame) || !anchorsEqual(left.anchors, right.anchors)) return false;
   // Merged copies retain one node a slice where unmerged ones retain three: the encodings are different DOM.
-  if (left.mergedOpticalCopies !== right.mergedOpticalCopies) return false;
+  if (left.mergedOpticalCopies !== right.mergedOpticalCopies || left.fixedImages !== right.fixedImages) return false;
   for (const axis of AXES) {
     const a = left.stacks.find(stack => stack.axis === axis), b = right.stacks.find(stack => stack.axis === axis);
     if (!a || !b || !vectorEquals(a.normalUnits, b.normalUnits) || a.leaves.length !== b.leaves.length) return false;
@@ -15,7 +15,7 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
       const x = a.leaves[index]!, y = b.leaves[index]!, prepared = x.style, other = y.style;
       if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
           !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
-          prepared.transform !== other.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
+          prepared.transform !== other.transform || prepared.backfaceVisibility !== other.backfaceVisibility || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
     }
   }
   const far = left.farPlanes, otherFar = right.farPlanes;
@@ -29,9 +29,7 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
       if (xs.length !== ys.length) return false;
       for (const [index, x] of xs.entries()) {
         const y = ys[index]!;
-        if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx || !vectorEquals(x.centerUnits, y.centerUnits) ||
-            x.style.width !== y.style.width || x.style.height !== y.style.height || x.style.transform !== y.style.transform ||
-            !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
+        if (!leafGeometryEquals(x, y)) return false;
       }
     }
   }
@@ -67,6 +65,6 @@ function boundsEqual(left: { min: readonly number[]; max: readonly number[] } | 
 
 function leafGeometryEquals(x: PreparedVolumeLeaf, y: PreparedVolumeLeaf): boolean {
   return x.id === y.id && x.widthPx === y.widthPx && x.heightPx === y.heightPx && vectorEquals(x.centerUnits, y.centerUnits) &&
-    x.style.width === y.style.width && x.style.height === y.style.height && x.style.transform === y.style.transform &&
+    x.style.width === y.style.width && x.style.height === y.style.height && x.style.transform === y.style.transform && x.style.backfaceVisibility === y.style.backfaceVisibility &&
     boundsEqual(x.boundsCssPixels, y.boundsCssPixels);
 }

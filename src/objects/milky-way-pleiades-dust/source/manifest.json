@@ -1,0 +1,496 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "member-reddening-gaia-placement",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/placement-constraint.json",
+      "title": "Member reddening and Gaia DR3 conditional 136 pc transition",
+      "credit": "Breger (1986); Gaia Collaboration; Lindegren et al.; Hunt and Reffert (2023)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored summary of the retained 2026-10-25 fit, with bibliography, cuts and conditional intervals. Thickness and individual bright-star depths remain unresolved; model registration is adopted."
+      },
+      "dependencies": []
+    },
+    {
+      "id": "edenhofer-grid-transport",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/edenhofer-wide-density.f32",
+      "origin": "https://zenodo.org/records/10658339",
+      "generator": "packages/bake/authoring/m45/dust/acquisition/edenhofer.mts",
+      "title": "Native Edenhofer mean sampled over 190 \u00d7 200 \u00d7 200 pc",
+      "credit": "Edenhofer et al. (2024); native interpolation and regional sampling.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "One-pc numerical sampling of the native log-density HEALPix and radial interpolation; frame, shape and coverage are in .local/wide-science-grid.json."
+      },
+      "dependencies": [],
+      "sourceUrl": "https://zenodo.org/records/10658339"
+    },
+    {
+      "id": "white-2017-b-star-illumination",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/stellar-inputs.json",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/stellar-inputs.json",
+      "sourceUrl": "https://arxiv.org/html/1708.07462",
+      "title": "White et al. 2017, Table 1",
+      "credit": "White et al. (2017)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published temperatures and radii, distance-rescaled and converted to blackbody spectral luminosities during Step 1; individual depths assumed."
+      },
+      "dependencies": [],
+      "acquisition": "Numerical transcription of White et al. (2017), Table 1: temperatures, radii and reference distances, preserved before conditional distance scaling."
+    },
+    {
+      "id": "draine-2003-grains",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/draine-rv31.txt",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/draine-rv31.txt",
+      "sourceUrl": "https://www.astro.princeton.edu/~draine/dust/dustmix.html",
+      "title": "Draine diffuse Milky Way R_V=3.1 grain model",
+      "credit": "Draine (2003)",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published extinction, albedo and asymmetry interpolated at I/V/B wavelengths; HG is an approximation to its scattering phase."
+      },
+      "dependencies": [],
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "allwise-native",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/wise-points.json",
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "title": "NASA/JPL-Caltech/UCLA AllWISE W3/W4 Atlas data",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE W3/W4 Atlas data",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "allwise-pleiades-infrared",
+            "role": "material",
+            "evidence": "src/objects/milky-way-pleiades-dust/README.md"
+          }
+        ]
+      },
+      "generator": "packages/telescope-cli/authoring/m45/wise.mts",
+      "dependencies": []
+    },
+    {
+      "id": "spitzer-native",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/spitzer-products.json",
+      "origin": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/",
+      "title": "NASA/JPL-Caltech Spitzer MIPS program 58, PI Rieke",
+      "credit": "NASA/JPL-Caltech Spitzer MIPS program 58, PI Rieke",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "spitzer-mips-pleiades-58",
+            "role": "material",
+            "evidence": "src/objects/milky-way-pleiades-dust/README.md"
+          }
+        ]
+      },
+      "generator": "packages/telescope-cli/authoring/m45/spitzer.mts",
+      "dependencies": []
+    },
+    {
+      "id": "published-galactic-field",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/isrf/isrf-mmpisrf_0.00.gz",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/isrf/isrf-mmpisrf_0.00.gz",
+      "sourceUrl": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz",
+      "title": "Draine et al. 2021 modified-MMP U1 illuminating field",
+      "credit": "Draine et al. 2021 modified-MMP U1 illuminating field",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "draine-2021-mmmp-isrf",
+            "role": "material",
+            "evidence": "src/objects/milky-way-pleiades-dust/README.md"
+          }
+        ]
+      },
+      "dependencies": [],
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "named-stars-csv",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/named-stars.csv",
+      "title": "Preserved numerical input: named-stars.csv. Scientific origin and processing are described in README.md.",
+      "credit": "ESA Hipparcos; van Leeuwen (2007): measured sky positions.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: named-stars.csv. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/named-stars.csv",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361:20078357",
+      "acquisition": "Hipparcos numerical sky-position extract for the named Pleiades stars; measured coordinates retained, normal-depth plane applied only by the physics input reader."
+    },
+    {
+      "id": "wide-science-grid-json",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/wide-science-grid.json",
+      "title": "Preserved numerical input: wide-science-grid.json. Scientific origin and processing are described in README.md.",
+      "credit": "Edenhofer et al. (2024): native HEALPix extraction and conditional normal-depth registration.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: wide-science-grid.json. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/wide-science-grid.json",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "extinction-columns-json",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/extinction/columns.json",
+      "title": "Preserved numerical input: extinction/columns.json. Scientific origin and processing are described in README.md.",
+      "credit": "Edenhofer et al. (2024) and Leike et al. (2020): registered extinction columns.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: extinction/columns.json. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/extinction/columns.json",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "extinction-edenhofer-column-f32",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/extinction/edenhofer-column.f32",
+      "title": "Preserved numerical input: extinction/edenhofer-column.f32. Scientific origin and processing are described in README.md.",
+      "credit": "Edenhofer et al. (2024) and Leike et al. (2020): registered extinction columns.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: extinction/edenhofer-column.f32. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/extinction/edenhofer-column.f32",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "extinction-leike-column-f32",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/extinction/leike-column.f32",
+      "title": "Preserved numerical input: extinction/leike-column.f32. Scientific origin and processing are described in README.md.",
+      "credit": "Edenhofer et al. (2024) and Leike et al. (2020): registered extinction columns.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: extinction/leike-column.f32. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/extinction/leike-column.f32",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "member-reddening-json",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/member-reddening.json",
+      "title": "Preserved numerical input: member-reddening.json. Scientific origin and processing are described in README.md.",
+      "credit": "Breger (1986) member reddening; Gaia DR3 astrometry; conditional sample described in placement-constraint.json.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: member-reddening.json. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/member-reddening.json",
+      "sourceUrl": "https://adsabs.harvard.edu/pdf/1986ApJ...309..311B",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "coarse-transmission-bin",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/coarse-transmission.bin",
+      "title": "Preserved numerical input: coarse-transmission.bin. Scientific origin and processing are described in README.md.",
+      "credit": "Edenhofer et al. (2024): coarse observer/target extinction integration.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: coarse-transmission.bin. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/coarse-transmission.bin",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "acquisition": "Preserved coarse Edenhofer observer/target integration, quantized at tau_V \u00d7 1000. The current transmission producer adds the registered fine-field integral and subtracts the corresponding coarse partition."
+    },
+    {
+      "id": "column-mips24-validity-u8",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/column/MIPS24-validity.u8",
+      "title": "Preserved numerical input: column/MIPS24-validity.u8. Scientific origin and processing are described in README.md.",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE; NASA/JPL-Caltech Spitzer MIPS; conditional extinction and stellar-heating processing.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: column/MIPS24-validity.u8. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/column/intake.mts",
+      "dependencies": [
+        "allwise-native",
+        "spitzer-native",
+        "white-2017-b-star-illumination",
+        "draine-2003-grains"
+      ],
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/"
+    },
+    {
+      "id": "column-nhprior-f32",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/column/NHprior.f32",
+      "title": "Preserved numerical input: column/NHprior.f32. Scientific origin and processing are described in README.md.",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE; NASA/JPL-Caltech Spitzer MIPS; conditional extinction and stellar-heating processing.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: column/NHprior.f32. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/column/intake.mts",
+      "dependencies": [
+        "allwise-native",
+        "spitzer-native",
+        "white-2017-b-star-illumination",
+        "draine-2003-grains"
+      ],
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/"
+    },
+    {
+      "id": "column-wise3-validity-u8",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/column/WISE3-validity.u8",
+      "title": "Preserved numerical input: column/WISE3-validity.u8. Scientific origin and processing are described in README.md.",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE; NASA/JPL-Caltech Spitzer MIPS; conditional extinction and stellar-heating processing.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: column/WISE3-validity.u8. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/column/intake.mts",
+      "dependencies": [
+        "allwise-native",
+        "spitzer-native",
+        "white-2017-b-star-illumination",
+        "draine-2003-grains"
+      ],
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/"
+    },
+    {
+      "id": "column-wise4-validity-u8",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/column/WISE4-validity.u8",
+      "title": "Preserved numerical input: column/WISE4-validity.u8. Scientific origin and processing are described in README.md.",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE; NASA/JPL-Caltech Spitzer MIPS; conditional extinction and stellar-heating processing.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: column/WISE4-validity.u8. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/column/intake.mts",
+      "dependencies": [
+        "allwise-native",
+        "spitzer-native",
+        "white-2017-b-star-illumination",
+        "draine-2003-grains"
+      ],
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/"
+    },
+    {
+      "id": "column-column-nh-f32",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/column/column-NH.f32",
+      "title": "Preserved numerical input: column/column-NH.f32. Scientific origin and processing are described in README.md.",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE; NASA/JPL-Caltech Spitzer MIPS; conditional extinction and stellar-heating processing.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: column/column-NH.f32. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/column/prepare.mts",
+      "dependencies": [
+        "allwise-native",
+        "spitzer-native",
+        "white-2017-b-star-illumination",
+        "draine-2003-grains"
+      ],
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/"
+    },
+    {
+      "id": "column-fcoarse-f32",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/column/fcoarse.f32",
+      "title": "Preserved numerical input: column/fcoarse.f32. Scientific origin and processing are described in README.md.",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE; NASA/JPL-Caltech Spitzer MIPS; conditional extinction and stellar-heating processing.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: column/fcoarse.f32. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/column/intake.mts",
+      "dependencies": [
+        "allwise-native",
+        "spitzer-native",
+        "white-2017-b-star-illumination",
+        "draine-2003-grains"
+      ],
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/"
+    },
+    {
+      "id": "column-ir-intake-json",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/column/ir-intake.json",
+      "title": "Preserved numerical input: column/ir-intake.json. Scientific origin and processing are described in README.md.",
+      "credit": "NASA/JPL-Caltech/UCLA AllWISE; NASA/JPL-Caltech Spitzer MIPS; conditional extinction and stellar-heating processing.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: column/ir-intake.json. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/column/intake.mts",
+      "dependencies": [
+        "allwise-native",
+        "spitzer-native",
+        "white-2017-b-star-illumination",
+        "draine-2003-grains"
+      ],
+      "origin": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/"
+    },
+    {
+      "id": "depth-edenhofer-depth-prior-f32",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/depth/edenhofer-depth-prior.f32",
+      "title": "Preserved numerical input: depth/edenhofer-depth-prior.f32. Scientific origin and processing are described in README.md.",
+      "credit": "Edenhofer et al. (2024): native HEALPix extraction and conditional normal-depth registration.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: depth/edenhofer-depth-prior.f32. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/depth/edenhofer-depth-prior.f32",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "depth-grid-json",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/depth/grid.json",
+      "title": "Preserved numerical input: depth/grid.json. Scientific origin and processing are described in README.md.",
+      "credit": "Edenhofer et al. (2024): native HEALPix extraction and conditional normal-depth registration.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: depth/grid.json. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/depth/grid.json",
+      "sourceUrl": "https://zenodo.org/records/10658339",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "iris-iris100-512-f32",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/iris/iris100-512.f32",
+      "title": "Preserved numerical input: iris/iris100-512.f32. Scientific origin and processing are described in README.md.",
+      "credit": "Miville-Desch\u00eanes and Lagache (2005), IRIS; CDS HiPS2FITS.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: iris/iris100-512.f32. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/iris/iris100-512.f32",
+      "sourceUrl": "https://doi.org/10.1086/427938",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "iris-iris100-512-json",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/iris/iris100-512.json",
+      "title": "Preserved numerical input: iris/iris100-512.json. Scientific origin and processing are described in README.md.",
+      "credit": "Miville-Desch\u00eanes and Lagache (2005), IRIS; CDS HiPS2FITS.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: iris/iris100-512.json. Scientific origin and processing are described in README.md."
+      },
+      "dependencies": [],
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/milky-way-pleiades-dust/src/objects/milky-way-pleiades-dust/source/inputs/iris/iris100-512.json",
+      "sourceUrl": "https://doi.org/10.1086/427938",
+      "acquisition": "Preserved numerical extract of the cited source, restored from the source mirror. The source URL identifies the scientific material; the mirror holds this processed file."
+    },
+    {
+      "id": "optical-galactic-field",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/inputs/isrf/optical-field.json",
+      "title": "Modified-MMP optical mean intensity and unit checks",
+      "credit": "Draine et al. (2021), modified-MMP spectrum at U = 1; optical interpolation and unit checks.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Preserved numerical input: isrf/isrf.json. Scientific origin and processing are described in README.md."
+      },
+      "generator": "packages/bake/authoring/m45/dust/physics/isrf.mts",
+      "dependencies": [
+        "published-galactic-field"
+      ],
+      "origin": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz",
+      "sourceUrl": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz"
+    },
+    {
+      "id": "model",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/model.json",
+      "title": "Regional prepared output binding",
+      "credit": "Conditional Pleiades model parameters; published measurements and assumptions described in README.md.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Regional prepared output binding"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "parameters",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/parameters.json",
+      "title": "Current physical, display and reference-projection parameters",
+      "credit": "Conditional Pleiades model parameters; published measurements and assumptions described in README.md.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Current physical, display and reference-projection parameters"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "depth-profiles",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/depth-profiles.json",
+      "title": "Registered native Edenhofer sight-line profiles; conditional depth realization",
+      "credit": "Conditional Pleiades model parameters; published measurements and assumptions described in README.md.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Registered native Edenhofer sight-line profiles; conditional depth realization"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "optical-reference",
+      "datasetId": "smooth-dust",
+      "path": "src/objects/milky-way-pleiades-dust/source/optical-reference.json",
+      "title": "Published Gibson and Nordsieck B-band surface-brightness comparison",
+      "credit": "Conditional Pleiades model parameters; published measurements and assumptions described in README.md.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published Gibson and Nordsieck B-band surface-brightness comparison"
+      },
+      "dependencies": []
+    }
+  ]
+}

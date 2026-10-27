@@ -69,17 +69,17 @@
     "controls": [
       {
         "id": "members",
-        "label": "Gaia DR3 members",
+        "label": "Stars and dust",
         "thumbnail": "m45-dataset-members.webp",
         "volume": {
-          "objectId": "m45-members",
-          "datasetId": "members",
+          "objectId": "milky-way-pleiades-dust",
+          "datasetId": "smooth-dust",
           "surface": "members"
         },
         "source": {
-          "id": "m45-members",
-          "path": "../../m45-members/source/manifest.json",
-          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+          "id": "milky-way-pleiades-dust",
+          "path": "../../milky-way-pleiades-dust/source/manifest.json",
+          "url": "https://zenodo.org/records/10658339"
         },
         "falseColor": false
       }

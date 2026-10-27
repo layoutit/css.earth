@@ -1,0 +1,36 @@
+{
+  "id": "iras-iris-100um-pleiades",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "IRIS IRAS 100 µm numeric HiPS cutout around the Pleiades",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://cade.irap.omp.eu/documents/Ancillary/4Aladin/IRIS_04/properties",
+      "label": "Primary measurement and documentation"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/427938",
+      "label": "Published method"
+    }
+  ],
+  "publisher": "IRAP/CADE; CDS HiPS2FITS; IRAS/IRIS",
+  "relations": [],
+  "evidence": [
+    {
+      "url": "https://cade.irap.omp.eu/documents/Ancillary/4Aladin/IRIS_04/properties",
+      "checkedOn": "2026-10-25",
+      "locator": "ivo://ov-gso/P/IRIS/4; 10 degree TAN field, 512 × 512 pixels, RA 56.68°, Dec 24.108°. MJy/sr from provider properties; 4.3 arcmin beam. Relative beam-scale structure only; no supplied quality or uncertainty arrays."
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Miville-Deschenes and Lagache (2005); IRAS/IRIS, IRAP/CADE. Numeric dust-emission cutout.",
+      "scope": "Pleiades dust model",
+      "evidence": "https://cade.irap.omp.eu/documents/Ancillary/4Aladin/IRIS_04/properties"
+    }
+  ]
+}

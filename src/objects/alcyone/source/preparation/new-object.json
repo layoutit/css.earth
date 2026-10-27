@@ -41,10 +41,9 @@
     "uncertainty": 1.2
   },
   "distance": {
-    "value": 134.84134308,
-    "source": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Alcyone is a member; its own parallax (McDonald, Zijlstra & Watson 2017 adopt 123.609 pc from Gaia DR1 or the Hipparcos reduction of van Leeuwen 2007) is less certain than the cluster's depth (half its members within 2.70 pc of the centre), and the Hipparcos-era parallaxes of the bright Pleiades are the ones the cluster's distance controversy showed biased",
-    "url": "https://doi.org/10.1051/0004-6361/202346285",
-    "uncertainty": 2.7
+    "value": 136.70063620969086,
+    "source": "Adopted Pleiades model geometry: normal depth 136.7 pc, 0.7 pc beyond the dust model's normal-depth reference of 136.0 pc along ICRS RA 56.67978318 deg, Dec 24.10845447 deg. Individual bright-star depths and their common plane are assumptions; measured sky positions, observed photometry and published parallax/facts remain separate.",
+    "url": "https://doi.org/10.1051/0004-6361/202346285"
   },
   "color": {
     "skip": [],

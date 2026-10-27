@@ -1,7 +1,8 @@
-import { IMAGE_MESH_SCHEMA, parseCatalogueProximity, bankCataloguePoints, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor, parsePlaneBankDescriptor } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, parseCatalogueProximity, bankCataloguePoints, bankOverlays, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor, parsePlaneBankDescriptor } from '@cssearth/objects';
 import { loadGalaxyStationBackground } from '@cssearth/renderer/universe/galaxy-stations/galaxy-station-loader.ts';
 import { DATASET_VISIBILITY } from '../../browser/runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
+import { loadPointTransmission } from '@cssearth/renderer/universe/points/point-transmission-transport.ts';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
 import datasetBillboardText from '../../prepared/prepared-dataset-billboards.json?raw';
 import { createPreparedUniverse, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
@@ -178,7 +179,17 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
       // The bank's index and its default dataset; another dataset's files are read when it is first selected.
       const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport, { resolve: path => set.resolve(path) });
+      const transmissionFile = parseObjectDescriptor(set.descriptor).properties.pointTransmission;
+      if (transmissionFile !== undefined && (typeof transmissionFile !== 'string' || !/^[a-z0-9-]+\.bin$/u.test(transmissionFile)))
+        throw new TypeError('A prepared point transmission must name a bank-local binary file.');
+      const pointTransmission = typeof transmissionFile === 'string' ? await loadPointTransmission(set.resolve(`prepared/${transmissionFile}`)) : undefined;
+      const residentStacks = parseObjectDescriptor(set.descriptor).properties.residentStacks;
+      if (residentStacks !== undefined && typeof residentStacks !== 'boolean') throw new TypeError('Prepared volume stack residency must be a boolean.');
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`),
+        ...(residentStacks === true ? { residentStacks } : {}),
+        ...(pointTransmission ? { pointTransmission } : {}),
+        overlayUrls: Object.fromEntries(Object.entries(bankOverlays(parseObjectDescriptor(set.descriptor))).map(([dataset, banks]) =>
+          [dataset, banks.map(bank => set.resolve(`prepared/${bank}.bin`))])),
         // Published catalogues drawn through the bank, with its opacity (its descriptor's `cataloguePoints`).
         cataloguePointUrls: bankCataloguePoints(parseObjectDescriptor(set.descriptor)).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });

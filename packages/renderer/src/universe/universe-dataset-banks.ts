@@ -14,9 +14,12 @@ import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './g
 import { mountCataloguePoints } from './points/catalogue-points.js';
 import { fetchPreparedCatalogueBank } from './points/catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
+import { setPointTransmission } from './points/prepared-transmission.js';
+import { createDatasetCloudOverlays } from './clouds/dataset-cloud-overlays.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;
 interface DatasetBank {
+  transmission?: import('@cssearth/objects').PreparedPointTransmission;
   readonly id: string;
   readonly facts: DatasetBankBillboard;
   readonly billboardIndex: number;
@@ -26,6 +29,7 @@ interface DatasetBank {
   failure?: string;
   /** Catalogue points drawn inside the mounted bank, with its opacity. */
   points: ReturnType<typeof mountCataloguePoints>[];
+  clouds: ReturnType<typeof createDatasetCloudOverlays> | null;
   textures: ReturnType<typeof createVolumeTextureReadiness> | null;
   loading: Promise<void> | null;
   generation: number;
@@ -65,7 +69,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   const farPlanes = createFarBackingPlanes({ root, before: end, lifetime, load: loadBacking, requestPublication });
   const record = (declared: { id: string; frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard): DatasetBank => ({
     id: declared.id, facts: bankFacts, billboardIndex: pictured(bankFacts) ? billboardCount++ : -1, far: bankFacts.backing ? farPlanes.add(declared.id, declared.frame) : null,
-    mounted: null, points: [], textures: null, loading: null, generation: 0, explicitEnabled: undefined,
+    mounted: null, points: [], clouds: null, textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     // A bank's own star points stay hidden unless a caller shows them.
     pendingSelection: undefined, pendingStarsVisible: false,
     framing: { frame: declared.frame, radiusUnits: volumeFramingRadiusUnits(declared.frame), visibility },
@@ -75,12 +79,14 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   const banks: DatasetBank[] = declarations.map((declared, index) => record(declared, facts[index]!));
   const byId = new Map(banks.map(bank => [bank.id, bank]));
   const release = (bank: DatasetBank) => lifetime.onDispose(() => {
+    setPointTransmission(root, bank, null);
     bank.generation++;
     const mounted = bank.mounted;
     bank.mounted = null;
     bank.loading = null;
     for (const points of bank.points) points.destroy();
     bank.points = [];
+    bank.clouds?.destroy(); bank.clouds = null;
     mounted?.destroy();
     bank.textures?.destroy(); bank.textures = null;
   });
@@ -115,9 +121,10 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     bank.residentNodes = bank.mounted ? Number(bank.mounted.root.dataset.volumeResidentDomNodes) || 1 : 0;
   }
   function evict(bank: DatasetBank) {
-    if (!bank.mounted || bank.visible || bank.subscribers > 0) return false;
+    if (!bank.mounted || bank.visible || bank.subscribers > 0 || coasting) return false;
     for (const points of bank.points) points.destroy();
     bank.points = [];
+    bank.clouds?.destroy(); bank.clouds = null;
     bank.mounted.destroy();
     bank.textures?.destroy(); bank.textures = null;
     bank.mounted = null;
@@ -149,6 +156,9 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       const source = options.payload, whole = 'index' in source ? null : source;
       const loadedFrame = whole ? whole.datasets[0]!.volume.frame : (source as PreparedVolumeDatasetSource).frame;
       const datasetIds = (whole ?? (source as PreparedVolumeDatasetSource).index).datasets.map(dataset => dataset.id);
+      if (Object.keys(options.overlayUrls ?? {}).some(dataset => !datasetIds.includes(dataset))) {
+        throw new TypeError('Prepared volume cloud overlays must name a dataset in their bank.');
+      }
       if (loadedFrame.referenceFrame !== frame.referenceFrame || loadedFrame.epochJdTt !== frame.epochJdTt) {
         throw new TypeError('Prepared volume datasets must share the universe reference frame and epoch.');
       }
@@ -167,8 +177,13 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       } catch (error) { mounted.destroy(); throw error; }
       if (lifetime.disposed || generation !== bank.generation) { mounted.destroy(); return; }
       bank.mounted = mounted;
+      bank.transmission = options.pointTransmission;
       const host = mounted.root;
       bank.points = (options.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url, loadBank: target => fetchPreparedCatalogueBank(target) }));
+      if (options.overlayUrls && Object.keys(options.overlayUrls).length) {
+        bank.clouds = createDatasetCloudOverlays({ host: root, before: end, urls: options.overlayUrls, resolveResource: options.resolveResource });
+        bank.clouds.setCoasting(coasting);
+      }
       bank.textures = createVolumeTextureReadiness(() => { requestPublication?.(); });
       const pointVisibility = prepared.payload.pointVisibility!;
       bank.framing = { frame: loadedFrame, radiusUnits: prepared.payload.framingRadiusUnits, visibility: {
@@ -285,6 +300,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       if (!bank?.facts.attached || bank.enabled === enabled) return;
       bank.explicitEnabled = enabled;
       bank.enabled = enabled;
+      if (!enabled) setPointTransmission(root, bank, null);
       requestPublication?.();
     },
     setStarsVisible(visible: boolean) {
@@ -296,7 +312,11 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     },
     /** While the camera coasts no bank mounts, shows or hides: a shown bank fades, the rest wait for the coast to stop
      * (motion-freezes-membership.md). */
-    setCoasting(active: boolean) { coasting = active; billboards?.setCoasting(active); },
+    setCoasting(active: boolean) {
+      coasting = active; billboards?.setCoasting(active);
+      for (const bank of banks) bank.clouds?.setCoasting(active);
+      if (!active) trimWarmResidency();
+    },
     /** Whether the bank's slices are on screen (its last publication drew them). */
     drawing(id: string): boolean { return byId.get(id)?.drawn === true; },
     /** `standIn`: the bank drawn in the detailed one's place until that one draws (detailed-focus-context.ts), of either
@@ -321,6 +341,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const shown = whole > 0 && detailed && flight
           ? whole * flight.closeUp * (volumeHolds(frame, radiusUnits, flight.toM) ? enteredVolumeOpacity(world, frame, radiusUnits) : 1) : whole;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+        setPointTransmission(root, bank, requestedOpacity > 0 ? bank.transmission ?? null : null);
         const incoming = bank.id === detailedObjectId;
         const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming, requestedOpacity > 0);
         const opacity = ready ? requestedOpacity : 0;
@@ -369,6 +390,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
           }
         }
         bank.mounted.publish({ world, viewport }, visible && Boolean(ready), coasting);
+        bank.clouds?.publish(bank.mounted.state().selectedDataset, { world, viewport }, opacity);
         if (visible && ready) for (const points of bank.points) points.publish({ world, viewport });
       }
       if (residencyChanged) trimWarmResidency();

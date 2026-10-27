@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "milky-way-pleiades-dust",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2104147913154344000,
+        3200797260382557000,
+        1714132797755189800
+      ],
+      "localToReferenceXyzw": [
+        0.15591687851693786,
+        0.5210156915859083,
+        0.8039586074055388,
+        0.24058913876843827
+      ],
+      "metersPerUnit": 30856775814913670,
+      "boundsUnits": {
+        "min": [
+          -149.04338038818852,
+          -146.68889103799495,
+          -107.0711252145712
+        ],
+        "max": [
+          188.09798138188418,
+          158.49674529871027,
+          184.97422536764634
+        ]
+      }
+    },
+    "host": "milky-way",
+    "pointTransmission": "point-transmission.bin",
+    "preparation": {
+      "source": "source/model.json"
+    },
+    "residentStacks": true,
+    "overlays": {
+      "smooth-dust": [
+        "foreground-cloud"
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

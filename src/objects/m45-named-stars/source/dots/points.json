@@ -3,9 +3,8 @@
   "id": "dots",
   "published": true,
   "table": {
-    "path": "table.csv",
-    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+HIP%2C+RArad%2C+DErad%2C+134.84134308+AS+distpc%2C+Hpmag%2C+%22B-V%22+FROM+%22I%2F311%2Fhip2%22+WHERE+HIP+IN+%2817702%2C17847%2C17499%2C17573%2C17608%2C17531%2C17851%2C17489%2C17579%29+ORDER+BY+Hpmag",
-    "bytes": 541,
+    "path": "modeled-table.csv",
+    "bytes": 577,
     "format": "csv",
     "columns": {
       "name": 1,
@@ -13,7 +12,8 @@
       "decDeg": 3,
       "distance": 4
     },
-    "distanceUnit": "pc"
+    "distanceUnit": "pc",
+    "generator": ".local/pleiades-star-placement.mts"
   },
   "sample": "The nine stars of the Pleiades the IAU names (src/references/iau-star-names/iau-star-names.tsv), by their Hipparcos numbers: Alcyone (HIP 17702), Atlas (17847), Electra (17499), Maia (17573), Merope (17608), Taygeta (17531), Pleione (17851), Celaeno (17489) and Asterope (17579). Gaia DR3's member list leaves out the brightest of them, so the cluster's light is drawn without them unless they are drawn here.",
   "filters": [],
@@ -24,7 +24,7 @@
     "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
   },
   "source": "doi-10-1051-0004-6361-20078357",
-  "meaning": "The nine named stars of the Pleiades, one dot each at its Hipparcos position, at the cluster's distance, where the four that have star objects stand; drawn when the cluster is selected.",
+  "meaning": "Nine named Pleiades stars at measured Hipparcos sky positions and observed photometry, with adopted normal depth 136.7 pc. Individual stellar depths are assumed, not measured.",
   "appearance": {
     "colorCss": "#ffffff",
     "radiusPx": 2.6,
@@ -47,5 +47,6 @@
       "steps": 8,
       "basis": "The member bank's display scale (src/objects/m45-members/source/dots/points.json): each star's Hp magnitude minus the distance modulus of the cluster's distance darkens its color from full at -2 to 15% at +12, linear in magnitude. The dot size is the member bank's brightest tier, 2.6 px."
     }
-  }
+  },
+  "generator": ".local/pleiades-star-placement.mts"
 }

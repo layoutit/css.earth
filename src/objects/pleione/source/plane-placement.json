@@ -1,0 +1,14 @@
+{
+  "generator": ".local/pleiades-star-placement.mts",
+  "kind": "adopted-plane",
+  "hip": 17851,
+  "referenceDirectionIcrsDegrees": [
+    56.67978318,
+    24.10845447
+  ],
+  "dustNormalDepthPc": 136,
+  "starNormalDepthPc": 136.7,
+  "radialDistancePc": 136.70661994364193,
+  "basis": "Adopted Pleiades model geometry: normal depth 136.7 pc, 0.7 pc beyond the dust model's normal-depth reference of 136.0 pc along ICRS RA 56.67978318 deg, Dec 24.10845447 deg. Individual bright-star depths and their common plane are assumptions; measured sky positions, observed photometry and published parallax/facts remain separate.",
+  "preservedReferenceMeasurements": "source/measurements.json"
+}

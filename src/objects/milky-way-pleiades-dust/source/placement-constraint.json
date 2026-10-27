@@ -1,0 +1,55 @@
+{
+  "title": "Conditional Pleiades excess-column distance from member reddening and Gaia DR3",
+  "analysisDate": "2026-10-25",
+  "evidenceKind": "authored-analysis-summary",
+  "sources": [
+    { "title": "Breger 1986, Table 1", "url": "https://adsabs.harvard.edu/pdf/1986ApJ...309..311B" },
+    { "title": "Gaia DR3 astrometry", "url": "https://doi.org/10.1051/0004-6361/202243940", "retrieval": "AIP Gaia TAP mirror, https://gaia.aip.de/tap/" },
+    { "title": "Lindegren et al. parallax zero point", "url": "https://doi.org/10.1051/0004-6361/202039653" },
+    { "title": "Hunt and Reffert 2023 membership", "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114" },
+    { "title": "Gibson and Nordsieck 2003 II scattering geometry", "url": "https://doi.org/10.1086/374590", "erratum": "https://doi.org/10.1086/503897" }
+  ],
+  "measurements": {
+    "transcribedReddenings": 91,
+    "matchedDr3Sources": 91,
+    "withParallax": 87,
+    "selectedMembers": 39,
+    "classifiedDistanceLabels": 37,
+    "additionalReddeningLabels": 8,
+    "formalDistanceErrorMedianPc": 0.37,
+    "formalDistanceError16To84Pc": [0.27, 0.56],
+    "selection": "Catalogue members, RUWE < 1.4, parallax S/N > 50, no duplicate or non-single-star solution, image multi-peak fraction <= 2%, valid zero-point correction; published reddening caveats excluded.",
+    "distanceMethod": "1000 / (parallax - zero point), using high-S/N geometric parallaxes rather than GSP-Phot fitted distances."
+  },
+  "fit": {
+    "quantity": "Additional-column transition, not either separately resolved scattering sheet",
+    "model": "d = d0 + a*x + b*y; three regional coverage probabilities and a Gaussian transition convolved with stellar distance errors",
+    "coordinates": "x east, y north, pc projected at 134.84134308 pc; ICRS origin RA 56.67978318 deg, Dec +24.10845447 deg",
+    "labels": "E(B-V) >= 0.07 additional reddening; <= 0.05 lightly reddened; two ambiguous retained stars omitted",
+    "maximumCenterPc": 136.08,
+    "maximumSlopesPcPerPc": [-0.46, 0.49],
+    "medianCenterPc": 136.0,
+    "central68PercentPc": [135.25, 136.50],
+    "central95PercentPc": [132.25, 137.75],
+    "priors": "Uniform 115 < d0 < 155 pc, -5 < a,b < 5 pc/pc, regional coverage in [0,1]; fixed 1% label error",
+    "uncertaintyMeaning": "Conditional on plane, labels, priors, thin transition and adopted errors; not a complete spatial astrometric covariance or photometric-systematics posterior.",
+    "systematics": "Coherent +/-0.02 mas offset shifts the fitted center by about +/-0.37 pc. Cool-star reddening systematics and label choices materially broaden or shift the fit."
+  },
+  "notMeasured": [
+    "Secure tilt, curvature, physical thickness or two sheets separated by 0.35-0.7 pc.",
+    "Precise individual B-star depths: several bright stars have poor Gaia solutions or no parallax.",
+    "A universal cloud edge or full column: low-column patches can remain lightly reddened behind the transition."
+  ],
+  "adoptedRealization": {
+    "normalDepthAnchorPc": 136.0,
+    "edenhoferGlobalShiftPc": -0.766,
+    "brightStarNormalDepthPc": 136.7,
+    "meaning": "Conditional registration and stellar plane, not new measurements. Native profile shapes remain; map widths include smoothing and posterior uncertainty."
+  },
+  "localEvidence": {
+    "report": ".local/PLACEMENT.md",
+    "matchedStars": ".local/placement/matched-members.csv",
+    "posterior": ".local/placement/posterior-grid.json",
+    "limitation": "Original tables, queries, fit drivers and plots remain local research evidence. The published prepared display can be restored without them."
+  }
+}

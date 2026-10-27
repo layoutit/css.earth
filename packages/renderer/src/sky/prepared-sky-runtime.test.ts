@@ -272,7 +272,7 @@ for (const { withSky } of [{ withSky: true }, { withSky: false }]) test(`nearer 
   // went black at 14.3 kpc edge-on (volume.css).
   const volumeRules = [...readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\//gu, '')
     .matchAll(/([^{}]+)\{([^}]*)\}/gu)].map(([, selector, body]) => ({ selector: selector!.trim().replace(/\s+/gu, ' '), body: body! }));
-  assert.ok(volumeRules.some(rule => rule.selector === '.prepared-volume-image > .css-volume-projection' && /(^|;)\s*overflow:\s*hidden\s*(;|$)/u.test(rule.body)),
+  assert.ok(volumeRules.some(rule => rule.selector.split(',').some(selector => selector.trim() === '.prepared-volume-image > .css-volume-projection') && /(^|;)\s*overflow:\s*hidden\s*(;|$)/u.test(rule.body)),
     'the image layer clips each stack projection');
   for (const projection of volumeImage.children.filter(node => node.className === 'css-volume-projection')) {
     assert.equal(projection.parentNode?.className, 'prepared-volume-image');

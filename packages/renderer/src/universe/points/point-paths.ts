@@ -50,8 +50,9 @@ export function mountPointPaths(host: SVGElement, palette: readonly string[], sl
   // offset from it. `dots` is how many dots a path held when it was last written.
   const entries: { path: SVGPathElement; text: string; published: string; width: number; first: number; split: boolean; slot: number; count: number; dots: number }[] = [];
   const indexOf = new Map<string, number>();
-  for (const color of new Set(palette)) {
-    const first = entries.length, { split, slot } = slotsOf(color);
+  const append = (color: string, { split, slot }: PointPaintSlots) => {
+    if (indexOf.has(color)) return;
+    const first = entries.length;
     indexOf.set(color, first);
     for (let band = 0; band < (split ? DOT_SLOTS : 1); band++) {
       const path = document.createElementNS(SVG_NS, 'path');
@@ -59,14 +60,17 @@ export function mountPointPaths(host: SVGElement, palette: readonly string[], sl
       path.setAttribute('fill', 'none'); path.setAttribute('stroke', color.split('@')[0]!); path.setAttribute('stroke-linecap', 'round'); group.append(path);
       entries.push({ path, text: '', published: '', width: 0, first, split, slot: split ? band : slot, count: 0, dots: 0 });
     }
-  }
+  };
+  for (const color of new Set(palette)) append(color, slotsOf(color));
   let origin = '', move: readonly string[] = [], line: readonly string[] = [];
   // The slots this paint writes: every one when null.
   let due: ArrayLike<number> | null = null;
   return {
     /** This palette's group: its opacity dims these paths alone. */
     part,
-    residentElements: entries.length + 2,
+    get residentElements() { return entries.length + 2; },
+    /** Prepared material variants join once at a settled material change, retaining their source paint's slot. */
+    prepare(color: string, source: number) { const original = entries[source]!;append(color, original); },
     /** A dot color's path, stroked as wide as its dots: resolved once for each point before any frame, so a frame only
      * adds positions. One path strokes all its dots at one width, so a paint (a color at a radius) is one size. */
     entry(color: string, radius: number) {

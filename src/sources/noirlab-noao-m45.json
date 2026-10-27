@@ -1,0 +1,52 @@
+{
+  "id": "noirlab-noao-m45",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M45 Pleiades — NOIRLab noao-m45",
+  "identifiers": [
+    {
+      "type": "NOIRLab image",
+      "value": "noao-m45"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-m45/",
+      "label": "Published observation"
+    },
+    {
+      "role": "original",
+      "url": "https://noirlab.edu/public/media/archives/images/original/noao-m45.tif",
+      "label": "Publisher original, 9700 × 7080 pixels"
+    },
+    {
+      "role": "archive",
+      "url": "https://www.astropix.org/image/noirlab/noao-m45",
+      "label": "B/V/I bands, WCS and reuse terms"
+    }
+  ],
+  "publisher": "NSF's NOIRLab",
+  "relations": [],
+  "evidence": [
+    {
+      "url": "https://www.astropix.org/image/noirlab/noao-m45",
+      "checkedOn": "2026-10-25",
+      "locator": "WIYN 0.9-m Mosaic I; B 436 nm, V 537 nm and I 805 nm; TAN WCS, native dimensions 9700 × 7080. The comparison uses the publisher JPEG decoded as 1600 × 1168 pixels, not the original TIFF. Seven stars verify the inherited WCS to 3.42 arcseconds maximum. Publisher display composite, not calibrated radiance."
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+      "scope": "Published source",
+      "evidence": "https://www.astropix.org/image/noirlab/noao-m45"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International",
+      "scope": "Published source",
+      "evidence": "https://www.astropix.org/image/noirlab/noao-m45"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {requireRecord,requireArray,requireFiniteNumber} from '@cssearth/core';
+const source='src/objects/milky-way-pleiades-dust/source/inputs/depth',destination='src/objects/milky-way-pleiades-dust/source';
+const record=requireRecord(JSON.parse(await readFile(`${source}/grid.json`,'utf8'))),g=requireRecord(record.grid),count=['nx','ny','nz'].reduce((n,key)=>n*requireFiniteNumber(g[key]),1),bytes=await readFile(`${source}/edenhofer-depth-prior.f32`);
+if(bytes.length!==count*4)throw Error('Depth-prior shape');
+const values=Array.from({length:count},(_,i)=>bytes.readFloatLE(i*4));if(values.some(v=>!Number.isFinite(v)||v<0))throw Error('Nonphysical prior');
+await mkdir(destination,{recursive:true});
+const metadata={...record};delete metadata.seconds;
+await writeFile(`${destination}/depth-profiles.json`,JSON.stringify({...metadata,schema:'pleiades-normal-depth-grid@1',primary:'values',generator:'packages/bake/authoring/m45/dust/field/prepare-depth-record.mts',valueEncoding:'Native-extracted conditional normalized Float32 samples, preserved exactly as JSON numbers; not a measured physical-thickness field.',values},null,2)+'\n');
+const replay=requireRecord(JSON.parse(await readFile(`${destination}/depth-profiles.json`,'utf8'))),read=requireArray(replay.values).map(n=>requireFiniteNumber(n));if(read.some((v,i)=>v!==values[i]))throw Error('Depth record changed samples');
+console.log('PLEIADES_DEPTH_SOURCE_PRESERVED',JSON.stringify({samples:count,bytes:Buffer.byteLength(JSON.stringify(replay)),sameFloat32Samples:true}));

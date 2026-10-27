@@ -14,22 +14,64 @@
     ]
   },
   "introduction": {
-    "text": "The Pleiades is drawn as 1,020 of its member stars, measured by Gaia and, for its nine named stars, by Hipparcos; each dot sits at its sky position, at the cluster's distance.",
+    "text": "The Pleiades is an open star cluster about 135 parsecs away, seen through the Milky Way dust cloud its brightest stars light up.",
     "sources": [
       {
         "catalogueId": "hunt-reffert-2023-open-clusters",
         "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
-        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Melotte_22: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50, the median of the maximum-likelihood distance, 134.84134308 pc (16th to 84th percentile 134.82 to 134.86)",
         "checked": "2026-10-10",
-        "locator": "Melotte_22: 1,014 members inside the tidal radius with a color"
+        "locator": "Melotte_22: dist50 134.8 pc"
+      },
+      {
+        "catalogueId": "edenhofer-2024-dust-map",
+        "url": "https://zenodo.org/records/10658339",
+        "label": "Edenhofer et al. (2024), A&A 685, A82: Galactic 3D dust map",
+        "checked": "2026-10-27",
+        "locator": "Dataset v1.0.2; native HEALPix density and radial profiles constrain broad structure and depth. Profile widths include reconstruction uncertainty."
+      },
+      {
+        "catalogueId": "draine-2021-mmmp-isrf",
+        "url": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz",
+        "label": "Modified MMP solar-neighborhood interstellar radiation field, U = 1",
+        "checked": "2026-10-25",
+        "locator": "Draine et al. (2021), ApJ 917, 3, section 2.1; unreddened U = 1 table, 2,500 wavelengths; λuλ in erg/cm³; optical I/V/B mean intensities sampled without amplitude fitting."
+      },
+      {
+        "catalogueId": "allwise-pleiades-infrared",
+        "url": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+        "label": "AllWISE Atlas W3/W4 imaging of the Pleiades",
+        "checked": "2026-10-25",
+        "locator": "Tiles 0561p242_ac51 and 0577p242_ac51; intensity, uncertainty and coverage, processed at a common 18 arcsec resolution."
+      },
+      {
+        "catalogueId": "spitzer-mips-pleiades-58",
+        "url": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/",
+        "label": "Spitzer MIPS Pleiades program 58, AORs 8798976 and 8798720",
+        "checked": "2026-10-25",
+        "locator": "MIPS 24/70 µm PBCD intensity, uncertainty and coverage; 70 µm scan stripes excluded from fine column inference."
+      },
+      {
+        "catalogueId": "gibson-nordsieck-2003-pleiades-photometry",
+        "url": "https://doi.org/10.1086/374589",
+        "label": "Gibson & Nordsieck (2003), Pleiades wide-field optical photometry",
+        "checked": "2026-10-25",
+        "locator": "Section 3.4, Figures 7–9; 5 × 1.7 degree BJ mosaic, centered at 4,400 Å. General nebula: 22.1–22.9 B mag/arcsec²; surrounding structures: 24.2–25.4; near 1 degree: 25.0. Common sky-zero uncertainty: 25.6 mag/arcsec². Regional ranges, not matched apertures."
+      },
+      {
+        "catalogueId": "iras-iris-100um-pleiades",
+        "url": "https://cade.irap.omp.eu/documents/Ancillary/4Aladin/IRIS_04/properties",
+        "label": "IRIS IRAS 100 µm numeric HiPS cutout around the Pleiades",
+        "checked": "2026-10-25",
+        "locator": "ivo://ov-gso/P/IRIS/4; 10 degree TAN field, 512 × 512 pixels, RA 56.68°, Dec 24.108°. MJy/sr from provider properties; 4.3 arcmin beam. Relative beam-scale structure only; no supplied quality or uncertainty arrays."
       }
     ]
   },
   "datasets": {
     "members": {
-      "title": "Hunt & Reffert 2023 members",
+      "title": "Pleiades stars and dust",
       "detail": "1,020 stars",
-      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "summary": "Gaia and Hipparcos stars with an infrared dust model. Depth is inferred; light stays fixed to Earth's view.",
       "sources": [
         {
           "catalogueId": "hunt-reffert-2023-open-clusters",
@@ -37,6 +79,48 @@
           "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Melotte_22: members inside the tidal radius (inrt) with a Gaia DR3 color",
           "checked": "2026-10-10",
           "locator": "Melotte_22, inrt = True"
+        },
+        {
+          "catalogueId": "edenhofer-2024-dust-map",
+          "url": "https://zenodo.org/records/10658339",
+          "label": "Edenhofer et al. (2024), A&A 685, A82: Galactic 3D dust map",
+          "checked": "2026-10-27",
+          "locator": "Dataset v1.0.2; native HEALPix density and radial profiles constrain broad structure and depth. Profile widths include reconstruction uncertainty."
+        },
+        {
+          "catalogueId": "draine-2021-mmmp-isrf",
+          "url": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz",
+          "label": "Modified MMP solar-neighborhood interstellar radiation field, U = 1",
+          "checked": "2026-10-25",
+          "locator": "Draine et al. (2021), ApJ 917, 3, section 2.1; unreddened U = 1 table, 2,500 wavelengths; λuλ in erg/cm³; optical I/V/B mean intensities sampled without amplitude fitting."
+        },
+        {
+          "catalogueId": "allwise-pleiades-infrared",
+          "url": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/",
+          "label": "AllWISE Atlas W3/W4 imaging of the Pleiades",
+          "checked": "2026-10-25",
+          "locator": "Tiles 0561p242_ac51 and 0577p242_ac51; intensity, uncertainty and coverage, processed at a common 18 arcsec resolution."
+        },
+        {
+          "catalogueId": "spitzer-mips-pleiades-58",
+          "url": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/",
+          "label": "Spitzer MIPS Pleiades program 58, AORs 8798976 and 8798720",
+          "checked": "2026-10-25",
+          "locator": "MIPS 24/70 µm PBCD intensity, uncertainty and coverage; 70 µm scan stripes excluded from fine column inference."
+        },
+        {
+          "catalogueId": "gibson-nordsieck-2003-pleiades-photometry",
+          "url": "https://doi.org/10.1086/374589",
+          "label": "Gibson & Nordsieck (2003), Pleiades wide-field optical photometry",
+          "checked": "2026-10-25",
+          "locator": "Section 3.4, Figures 7–9; 5 × 1.7 degree BJ mosaic, centered at 4,400 Å. General nebula: 22.1–22.9 B mag/arcsec²; surrounding structures: 24.2–25.4; near 1 degree: 25.0. Common sky-zero uncertainty: 25.6 mag/arcsec². Regional ranges, not matched apertures."
+        },
+        {
+          "catalogueId": "iras-iris-100um-pleiades",
+          "url": "https://cade.irap.omp.eu/documents/Ancillary/4Aladin/IRIS_04/properties",
+          "label": "IRIS IRAS 100 µm numeric HiPS cutout around the Pleiades",
+          "checked": "2026-10-25",
+          "locator": "ivo://ov-gso/P/IRIS/4; 10 degree TAN field, 512 × 512 pixels, RA 56.68°, Dec 24.108°. MJy/sr from provider properties; 4.3 arcmin beam. Relative beam-scale structure only; no supplied quality or uncertainty arrays."
         }
       ]
     }
