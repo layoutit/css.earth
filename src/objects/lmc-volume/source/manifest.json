@@ -5445,6 +5445,26 @@
         "kind": "local",
         "reason": "128 px near compression pilot compared with matched installed Milky Way views. No installation or publication."
       }
+    },
+    {
+      "id": "l36-delivery-acceptance",
+      "path": "src/objects/lmc-volume/source/preparation/l36/delivery-acceptance.json",
+      "bytes": 1907,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/accepted-delivery.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Owner acceptance of the measured native near pilot, retaining its absolute residuals as known problems."
+      }
+    },
+    {
+      "id": "l36-full-native",
+      "path": "src/objects/lmc-volume/source/preparation/l36/full-native.json",
+      "bytes": 24219,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/record-full-native.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "2048 px native slab bank with frozen accepted pilot encoding. Local output only."
+      }
     }
   ]
 }

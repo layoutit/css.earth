@@ -20,8 +20,8 @@ export function localScene(scene:CatalogueScene,domain:GalaxySlabDomain):Catalog
   out.oldPopulation={...scene.oldPopulation,points:{count:indices.length,positions,rgb,components}};
  }return out;
 }
-export function projectLmcSlab(source:Awaited<ReturnType<typeof approvedScene>>,domain:GalaxySlabDomain,camera:Parameters<typeof projectCatalogue>[1],native=false){
- const{scene,amplitudes,grade}=source,local=localScene(scene,domain),projection=projectCatalogue(local,camera,native?.015:REFERENCE_STEP_KPC,undefined,domain,native?{objectSubpixels:4,cacheFinishedDust:true,gaussianTailSigma:10}:undefined),basis=catalogueBasis(projection,local,amplitudes),rgb=gradedPrediction(basis,grade);need(projection.transmittance,'The local transfer must return its own dust transmittance');const tau=Float64Array.from(projection.transmittance[0],(_,p)=>-Math.log(Math.max(1e-30,Math.max(...projection.transmittance!.map(a=>a[p])))));return{rgb,tau};
+export function projectLmcSlab(source:Pick<Awaited<ReturnType<typeof approvedScene>>,'scene'|'amplitudes'|'grade'>,domain:GalaxySlabDomain,camera:Parameters<typeof projectCatalogue>[1],native=false,pixels?:Uint8Array){
+ const{scene,amplitudes,grade}=source,local=localScene(scene,domain),projection=projectCatalogue(local,camera,native ? .015 : REFERENCE_STEP_KPC,pixels,domain,native?{objectSubpixels:4,cacheFinishedDust:true,gaussianTailSigma:10}:undefined),basis=catalogueBasis(projection,local,amplitudes),rgb=gradedPrediction(basis,grade);need(projection.transmittance,'The local transfer must return its own dust transmittance');const tau=Float64Array.from(projection.transmittance[0],(_,p)=>-Math.log(Math.max(1e-30,Math.max(...projection.transmittance!.map(a=>a[p])))));return{rgb,tau};
 }
 export async function lmcSlabProjections(directory:string,spec:GalaxyBankSpec):Promise<GalaxyPlane[]>{
  await mkdir(directory,{recursive:true});const {scene,amplitudes,grade}=await approvedScene(),started=performance.now();
