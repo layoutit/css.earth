@@ -1,0 +1,423 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/starless.jpg",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_clear-f444w_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+      "title": "Cas A, Webb NIRCam mosaic of 2025 October 25, colors fitted to weic2330a, stars removed",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 7934 (PI R. A. Fesen); colors fitted to ESA/Webb weic2330a (NASA, ESA, CSA, STScI, D. Milisavljevic, T. Temim, I. De Looze)",
+      "displayCredit": "Webb",
+      "acquisition": "The picture built here (original) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/cassiopeia-a-2025-layers --from=source.jpg --star-red-over-blue=0.8 --spike-lines=4`, as for the 2022 bank. Restored from the source cache; not tracked. A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-7934-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          },
+          {
+            "catalogueId": "mast-jwst-1947-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          },
+          {
+            "catalogueId": "esawebb-weic2330a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "original"
+      ],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "original",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/source.jpg",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_clear-f444w_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+      "title": "Cas A, Webb NIRCam mosaic of 2025 October 25, colors fitted to weic2330a (with its stars)",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 7934 (PI R. A. Fesen); colors fitted to ESA/Webb weic2330a (NASA, ESA, CSA, STScI, D. Milisavljevic, T. Temim, I. De Looze)",
+      "displayCredit": "Webb",
+      "acquisition": "Built by packages/bake/authoring/cassiopeia-a/nircam-2025-picture.mts on the pixels of ESA/Webb’s weic2330a publication JPEG: red from F444W (R² 0.929), green from F356W (0.886), blue from F162M and F356W (0.890), fitted to that picture against the 2022 mosaics and applied to the 2025 ones. Restored from the source cache; not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-7934-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          },
+          {
+            "catalogueId": "mast-jwst-1947-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          },
+          {
+            "catalogueId": "esawebb-weic2330a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "jw01947-o013-t001-nircam-f150w2-f162m",
+        "jw01947-o013-t001-nircam-clear-f356w",
+        "jw01947-o013-t001-nircam-clear-f444w",
+        "jw07934-o001-t001-nircam-f150w2-f162m",
+        "jw07934-o001-t001-nircam-clear-f356w",
+        "jw07934-o001-t001-nircam-clear-f444w",
+        "picture-2022"
+      ],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+          }
+        ]
+      },
+      "generator": "packages/bake/authoring/cassiopeia-a/nircam-2025-picture.mts"
+    },
+    {
+      "id": "picture-2022",
+      "path": "src/objects/cassiopeia-a-layers/source/source.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2330a.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2330a/",
+      "title": "Cas A (NIRCam image) (as published, with its stars)",
+      "credit": "NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The 2022 bank’s picture as published, read for its colors; owned by that bank (src/objects/cassiopeia-a-layers/source/manifest.json).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2330a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2330a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jw01947-o013-t001-nircam-f150w2-f162m",
+      "path": "src/objects/cassiopeia-a-2025-layers/.local/nircam/jw01947-o013_t001_nircam_f150w2-f162m_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01947-o013_t001_nircam_f150w2-f162m_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=1947",
+      "title": "JWST program 1947, NIRCam level-3 mosaic of Cas A in F162M: primary and science units",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 1947 (PI D. Milisavljevic)",
+      "displayCredit": "Webb",
+      "acquisition": "The first 685290676 bytes of jw01947-o013_t001_nircam_f150w2-f162m_i2d.fits from MAST (one byte-range request: the primary header unit and the science unit, the flux in MJy/sr); the error and other units are not fetched. A scratch input of the picture’s generator, kept under .local/ and not restored.",
+      "range": {
+        "offset": 0,
+        "length": 685290676
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-1947-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Public NASA mission data (MAST)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=1947"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jw01947-o013-t001-nircam-clear-f356w",
+      "path": "src/objects/cassiopeia-a-2025-layers/.local/nircam/jw01947-o013_t001_nircam_clear-f356w_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01947-o013_t001_nircam_clear-f356w_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=1947",
+      "title": "JWST program 1947, NIRCam level-3 mosaic of Cas A in F356W: primary and science units",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 1947 (PI D. Milisavljevic)",
+      "displayCredit": "Webb",
+      "acquisition": "The first 165151800 bytes of jw01947-o013_t001_nircam_clear-f356w_i2d.fits from MAST (one byte-range request: the primary header unit and the science unit, the flux in MJy/sr); the error and other units are not fetched. A scratch input of the picture’s generator, kept under .local/ and not restored.",
+      "range": {
+        "offset": 0,
+        "length": 165151800
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-1947-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Public NASA mission data (MAST)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=1947"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jw01947-o013-t001-nircam-clear-f444w",
+      "path": "src/objects/cassiopeia-a-2025-layers/.local/nircam/jw01947-o013_t001_nircam_clear-f444w_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01947-o013_t001_nircam_clear-f444w_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=1947",
+      "title": "JWST program 1947, NIRCam level-3 mosaic of Cas A in F444W: primary and science units",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 1947 (PI D. Milisavljevic)",
+      "displayCredit": "Webb",
+      "acquisition": "The first 165102984 bytes of jw01947-o013_t001_nircam_clear-f444w_i2d.fits from MAST (one byte-range request: the primary header unit and the science unit, the flux in MJy/sr); the error and other units are not fetched. A scratch input of the picture’s generator, kept under .local/ and not restored.",
+      "range": {
+        "offset": 0,
+        "length": 165102984
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-1947-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Public NASA mission data (MAST)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=1947"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jw07934-o001-t001-nircam-f150w2-f162m",
+      "path": "src/objects/cassiopeia-a-2025-layers/.local/nircam/jw07934-o001_t001_nircam_f150w2-f162m_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_f150w2-f162m_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+      "title": "JWST program 7934, NIRCam level-3 mosaic of Cas A in F162M: primary and science units",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 7934 (PI R. A. Fesen)",
+      "displayCredit": "Webb",
+      "acquisition": "The first 684926400 bytes of jw07934-o001_t001_nircam_f150w2-f162m_i2d.fits from MAST (one byte-range request: the primary header unit and the science unit, the flux in MJy/sr); the error and other units are not fetched. A scratch input of the picture’s generator, kept under .local/ and not restored.",
+      "range": {
+        "offset": 0,
+        "length": 684926400
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-7934-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Public NASA mission data (MAST)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jw07934-o001-t001-nircam-clear-f356w",
+      "path": "src/objects/cassiopeia-a-2025-layers/.local/nircam/jw07934-o001_t001_nircam_clear-f356w_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_clear-f356w_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+      "title": "JWST program 7934, NIRCam level-3 mosaic of Cas A in F356W: primary and science units",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 7934 (PI R. A. Fesen)",
+      "displayCredit": "Webb",
+      "acquisition": "The first 165024480 bytes of jw07934-o001_t001_nircam_clear-f356w_i2d.fits from MAST (one byte-range request: the primary header unit and the science unit, the flux in MJy/sr); the error and other units are not fetched. A scratch input of the picture’s generator, kept under .local/ and not restored.",
+      "range": {
+        "offset": 0,
+        "length": 165024480
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-7934-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Public NASA mission data (MAST)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jw07934-o001-t001-nircam-clear-f444w",
+      "path": "src/objects/cassiopeia-a-2025-layers/.local/nircam/jw07934-o001_t001_nircam_clear-f444w_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_clear-f444w_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+      "title": "JWST program 7934, NIRCam level-3 mosaic of Cas A in F444W: primary and science units",
+      "credit": "NASA, ESA, CSA, STScI; JWST program 7934 (PI R. A. Fesen)",
+      "displayCredit": "Webb",
+      "acquisition": "The first 164975680 bytes of jw07934-o001_t001_nircam_clear-f444w_i2d.fits from MAST (one byte-range request: the primary header unit and the science unit, the flux in MJy/sr); the error and other units are not fetched. A scratch input of the picture’s generator, kept under .local/ and not restored.",
+      "range": {
+        "offset": 0,
+        "length": 164975680
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-jwst-7934-nircam-cassiopeia-a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Public NASA mission data (MAST)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+          }
+        ]
+      }
+    },
+    {
+      "id": "measured-depths",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/ejecta-speeds.dat",
+      "origin": "https://chandra.harvard.edu/graphics/resources/illustrations/3d_files/CasA_supernova_remnant-ascii_vtks.zip",
+      "sourceUrl": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+      "title": "The [Ar II] ejecta of Cassiopeia A, 10632 cells of the model of DeLaney et al. (2010) as places and speeds, with its outer optical knots (2036 cells) and jets (955 cells) beyond the forward shock",
+      "credit": "NASA/CXC/SAO; DeLaney et al. (2010)",
+      "displayCredit": "DeLaney et al. (2010)",
+      "acquisition": "Built from the Chandra X-ray Center's zip of the model's ASCII VTK files by the generator, which downloads the zip, reads newar-ascii.vtk, and newopt-ascii.vtk and newjets-ascii.vtk beyond the forward shock grown by free expansion to this bank's picture's epoch, 2025 October 25 (`--bank=cassiopeia-a-2025-layers`), and writes each cell of one model unit as a row. Restored from the source cache; not tracked.",
+      "generator": "packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-cassiopeia-a-3d-model",
+            "role": "material",
+            "evidence": "https://chandra.harvard.edu/resources/illustrations/3d_files.html"
+          },
+          {
+            "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1011.3858"
+          }
+        ]
+      },
+      "license": "NASA material, free to use with the credit NASA/CXC/SAO.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "spitzer",
+            "evidence": "https://arxiv.org/abs/1011.3858"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "css.earth project-authored record",
+      "credit": "css.earth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

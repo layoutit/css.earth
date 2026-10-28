@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "cassiopeia-a-2025-layers",
+  "name": "Cassiopeia A",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/cassiopeia-a-2025-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/cassiopeia-a-2025-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared 2025",
+      "title": "Cassiopeia A in the near infrared, 2025",
+      "description": "Webb’s NIRCam mosaic of 2025 October 25, at 1.62, 3.56 and 4.44 µm, three years after the picture of 2022, in colors fitted to ESA’s 2022 picture: a fit, not ESA’s own processing. The picture lies on the same shell as the 2022 one: fine detail at the depths the measured speeds of the [Ar II] ejecta give, smooth light on the forward shock’s sphere.",
+      "summary": "Webb’s 2025 mosaic in colors fitted to ESA’s 2022 picture, on the same shell as the 2022 dataset.",
+      "detail": "3493 × 4000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "1.62, 3.56 and 4.44 µm"
+        },
+        {
+          "id": "date",
+          "label": "Taken",
+          "value": "2025 October 25"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3493 × 4000"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.09 × 6.97 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/cassiopeia-a-2025-layers/source/starless.jpg",
+        "url": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+      }
+    }
+  ]
+}

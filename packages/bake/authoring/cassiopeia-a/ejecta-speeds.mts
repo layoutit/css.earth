@@ -50,8 +50,9 @@ const EPOCHS = { explosion: 1671.3, webb: 2022.85 } as const;
 const SURFACES = [{ file: 'newar', name: 'argon', year: 2005.03, outside: false }, { file: 'newopt', name: 'optical-knots', year: 1992, outside: true }, { file: 'newjets', name: 'jets', year: 2004.3, outside: true }] as const;
 /** Years. Each bank's picture: the NIRCam one, 2022 November 5, which `MODEL_UNIT_ARCSEC` was measured on; the MIRI
  * one, whose mosaic was taken on 2022 August 4 and 5 and its gaps filled on 2022 October 22 (Milisavljevic et al.
- * 2024, Table 1 and Sect. 2): 2022 August 5, the mosaic's. */
-const PICTURES: Record<string, number> = { 'cassiopeia-a-layers': EPOCHS.webb, 'cassiopeia-a-miri-layers': 2022.59 };
+ * 2024, Table 1 and Sect. 2): 2022 August 5, the mosaic's; and the NIRCam mosaic of program 7934, taken on 2025 October 25
+ * (its files' DATE-BEG, 09:06 UTC). */
+const PICTURES: Record<string, number> = { 'cassiopeia-a-layers': EPOCHS.webb, 'cassiopeia-a-miri-layers': 2022.59, 'cassiopeia-a-2025-layers': 2025.814 };
 const bank = process.argv.find(argument => argument.startsWith('--bank='))?.slice('--bank='.length) ?? 'cassiopeia-a-layers', picture = PICTURES[bank];
 if (picture === undefined) throw new TypeError(`--bank names a Cassiopeia A bank: ${Object.keys(PICTURES).join(' or ')}; got ${JSON.stringify(bank)}.`);
 /** How much a surface's places and depths are grown to sit with the [Ar II] surface on the bank's picture: from its own

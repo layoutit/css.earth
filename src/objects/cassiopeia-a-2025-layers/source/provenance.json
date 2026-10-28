@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Cas A, Webb NIRCam mosaic of 2025 October 25 (program 7934), in colors fitted to weic2330a",
+  "publisher": "STScI (MAST)",
+  "sourceId": "jw07934-o001_t001_nircam",
+  "sourcePage": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+  "download": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_clear-f444w_i2d.fits",
+  "credit": "NASA, ESA, CSA, STScI; JWST program 7934 (PI R. A. Fesen); colors fitted to ESA/Webb weic2330a (NASA, ESA, CSA, STScI, D. Milisavljevic, T. Temim, I. De Looze)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      3493,
+      4000
+    ],
+    "bands": [
+      "Webb",
+      "NIRCam",
+      "1.62 µm",
+      "3.56 µm",
+      "4.44 µm"
+    ],
+    "fieldOfViewDeg": [
+      0.1014261,
+      0.1161534
+    ]
+  },
+  "checkedSource": {
+    "kind": "Picture built here from the level-3 mosaics",
+    "dimensions": [
+      3493,
+      4000
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.008361,
+    "lineOfNodesPaDeg": 9.165,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 30.1 arcsec from the expansion centre, which is the whole of the recipe's inclination. Not a measured orientation of the remnant."
+  },
+  "registration": {
+    "method": "The 2022 picture’s pixels: the picture is drawn on the pixels of ESA/Webb’s weic2330a publication JPEG, whose embedded sky tags give 0.1045 arcsec per pixel, north 27.16° right of vertical, the frame’s centre at 350.8497673°, 58.815054°. The mosaics are sampled 2.25 and 0.25 pixels right of and below where those tags put each pixel, the offset at which the 2022 picture’s red follows F444W most closely.",
+    "pixelArcsec": 0.1045,
+    "northClockwiseDeg": 27.16
+  },
+  "displayModel": "The picture's smooth light, the picture blurred over 4.6 arcsec, lies on the forward shock, a sphere of 153 arcsec about the expansion centre. One picture cannot tell the sphere's two halves apart, and two copies of one picture come apart from any camera nearer than the Sun: so the halves share only the light's broad part, the picture blurred over 37 arcsec, half each, and the half behind the picture's plane holds the rest. The plane faces the Sun through the centre of the shell DeLaney et al. (2010) fit to the [Ar II] ejecta. Where that paper's model has [Ar II] ejecta within about 9 arcsec, the picture's fine detail lies on two surfaces of its own: one in front of the plane at the depth of the approaching ejecta there, one behind it at the depth of the receding ones, each taking the share of the detail that the measurements on its side hold. A depth is a speed times 0.022 arcsec per km/s. The fine detail nothing measures stays on the plane. The surfaces are meshes of flat patches.",
+  "coverage": "The published frame inside a circle about the expansion centre: the picture fades out between 147 and 153 arcsec, the largest circle the frame holds, so no straight edge shows. The circle is the forward shock's outline (DeLaney et al. 2010, Sect. IV.1); the north-east jet beyond it is not drawn. Its stars are removed before the bake by NOX, which predicts the light under a star and does not measure it; the brightest stars stay, with their spikes. Where any of the three 2025 mosaics holds no data (detector gaps, the mosaic’s edge, saturated star cores) the picture is black: 8.5% of its pixels.",
+  "acquisition": {
+    "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_clear-f444w_i2d.fits",
+    "dimensions": [
+      3493,
+      4000
+    ],
+    "operation": "Built by packages/bake/authoring/cassiopeia-a/nircam-2025-picture.mts from the science units of the three NIRCam level-3 mosaics of programs 1947 and 7934, read by byte range from MAST: each filter’s flux turned into a color level by curves fitted to the 2022 picture against the 2022 mosaics (red from F444W (R² 0.929), green from F356W (0.886), blue from F162M and F356W (0.890)). Stars removed by NOX, the remnant’s knots kept by their color."
+  }
+}

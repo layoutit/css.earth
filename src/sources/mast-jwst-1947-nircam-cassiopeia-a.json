@@ -1,0 +1,34 @@
+{
+  "id": "mast-jwst-1947-nircam-cassiopeia-a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "JWST program 1947 NIRCam level-3 mosaics of Cassiopeia A (F150W2-F162M, F356W, F444W): JWST Survey of the Prototypical Core-collapse Supernova Remnant Cassiopeia A",
+  "identifiers": [
+    {
+      "type": "JWST program",
+      "value": "1947"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.stsci.edu/jwst/science-execution/program-information?id=1947",
+      "label": "JWST program 1947"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/cassiopeia-a-2025-layers/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI; JWST program 1947, PI D. Milisavljevic",
+      "scope": "citation",
+      "evidence": "The mosaics’ primary headers (PROGRAM, PI_NAME, TITLE)."
+    }
+  ]
+}

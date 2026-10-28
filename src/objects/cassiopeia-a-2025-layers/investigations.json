@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "cassiopeia-a-2025-layers",
+  "entries": [
+    {
+      "id": "program-7934",
+      "subject": "JWST program 7934, NIRCam mosaic of Cas A, 2025 October 25",
+      "status": "included",
+      "finding": "Level-3 mosaics jw07934-o001_t001_nircam in F070W, F150W2-F162M, F356W and F444W, made public on MAST on 2026-10-26 (PI R. A. Fesen). The three filters ESA/Webb's 2022 picture uses are read: F162M, F356W and F444W, the same filters as program 1947's mosaics of 2022 November 5. F070W has no color in that picture and is not used.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+        "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw07934-o001_t001_nircam_clear-f444w_i2d.fits"
+      ]
+    },
+    {
+      "id": "colors",
+      "subject": "The colors, fitted to ESA/Webb's 2022 picture",
+      "status": "included",
+      "finding": "No published picture of the 2025 mosaic exists. ESA/Webb's weic2330a states its filters' colors (1.62 µm blue, 3.56 µm green, 4.44 µm red) but not how each filter's flux became a level, so nircam-2025-picture.mts fits that against program 1947's mosaics: red from F444W explains 92.9% of the red channel's variance, green from F356W 88.6%, blue from F162M and F356W 89.0%. Blue takes F356W too because the picture's blue follows F356W more closely than F162M alone (R² 0.86 against 0.77 on a 0.25-arcsec grid). The rest is processing a curve does not hold, so the colors are a fit, not ESA's own for 2025.",
+      "evidence": [
+        "https://esawebb.org/images/weic2330a/",
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=1947"
+      ]
+    },
+    {
+      "id": "registration",
+      "subject": "Where the picture's pixels are",
+      "status": "included",
+      "finding": "The 2025 picture is drawn on the pixels of the 2022 one, so it lies on the 2022 bank's geometry. The 2022 picture's sky tags are 2.25 and 0.25 px (0.24 arcsec) from where its red follows F444W most closely (R² 0.927); the mosaics are sampled with that offset.",
+      "evidence": [
+        "https://esawebb.org/images/weic2330a/"
+      ]
+    },
+    {
+      "id": "gaps",
+      "subject": "Places the 2025 mosaics do not hold",
+      "status": "included",
+      "finding": "8.5% of the picture's pixels lack one of the three filters: strips at the frame's edges, a few detector gaps and saturated star cores. They are black. No other mosaic's light fills them.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "mast-jwst-7934-nircam-cassiopeia-a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "JWST program 7934 NIRCam level-3 mosaics of Cassiopeia A (F150W2-F162M, F356W, F444W): A Deep, High Resolution NIRCam Mosaic of Cas A: Keeping Up with its Rapidly Evolving Structure",
+  "identifiers": [
+    {
+      "type": "JWST program",
+      "value": "7934"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+      "label": "JWST program 7934"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/cassiopeia-a-2025-layers/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI; JWST program 7934, PI R. A. Fesen",
+      "scope": "citation",
+      "evidence": "The mosaics’ primary headers (PROGRAM, PI_NAME, TITLE)."
+    }
+  ]
+}

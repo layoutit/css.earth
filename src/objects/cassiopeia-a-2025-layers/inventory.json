@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/optical.webp",
+      "bytes": 13352,
+      "sha256": "e3642569838dc78e607a97735555a1f08e1251062c5786543764c1083552397b"
+    },
+    {
+      "location": "prepared",
+      "filename": "backing.json",
+      "bytes": 1281,
+      "sha256": "a815a6372858384ee27bd4861ea1474038581555032476cb731f627fb0c4fe5b"
+    },
+    {
+      "location": "prepared",
+      "filename": "backing/backing.webp",
+      "bytes": 17502,
+      "sha256": "5bcf4601187620c009c28d6b075d330293340d4c37005ced7652c2f6adcaf273"
+    },
+    {
+      "location": "prepared",
+      "filename": "image-layers.json",
+      "bytes": 3149518,
+      "sha256": "cde5e486d61fd6ef7556909bbd3424bed24adf1e17ee8494090ce03f45e5bc63"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-0.webp",
+      "bytes": 1487400,
+      "sha256": "bfd0a4ad15ece50353d36b9d0a28fd969f066e06e2e302f73560573d729de8c5"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-1.webp",
+      "bytes": 1735214,
+      "sha256": "3801731960348dc306b4fa0b03bf5469ca945738f5c9b5d283f843df547b2931"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-2.webp",
+      "bytes": 1662654,
+      "sha256": "05e792d34a7c3fcd88cbc57b22b94d7b27130049b525913298fbc8a1f063121f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-3.webp",
+      "bytes": 1251806,
+      "sha256": "e0470976cb6763ba7b8e2d4fa74fd49968e43e707d6b794a276ee2783fa6e8a6"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-4.webp",
+      "bytes": 496944,
+      "sha256": "e814f5fcd854fe412f00a1776a8f63779881eda08be21a071909ecd6aecb3f1e"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/z-detail.webp",
+      "bytes": 940488,
+      "sha256": "9285d304a9e2ba67a3e33717d194acac54e8f4159470b1afbe0b5e4fcbc505f3"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 1806,
+      "sha256": "462ffcd98658482febf20b9b03a61e730bfb2c3fa99a2bcfbc766740f632989a"
+    }
+  ]
+}

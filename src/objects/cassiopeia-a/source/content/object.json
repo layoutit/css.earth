@@ -84,6 +84,22 @@
         "falseColor": true
       },
       {
+        "id": "near-infrared-2025",
+        "label": "Webb · near infrared 2025",
+        "thumbnail": "cassiopeia-a-dataset-near-infrared-2025.webp",
+        "volume": {
+          "objectId": "cassiopeia-a-2025-layers",
+          "datasetId": "optical",
+          "surface": "near-infrared-2025"
+        },
+        "source": {
+          "id": "cassiopeia-a-2025-layers-optical",
+          "path": "../../cassiopeia-a-2025-layers/source/manifest.json",
+          "url": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934"
+        },
+        "falseColor": true
+      },
+      {
         "id": "mid-infrared",
         "label": "Webb · mid infrared",
         "thumbnail": "cassiopeia-a-dataset-mid-infrared.webp",
