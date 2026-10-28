@@ -132,6 +132,41 @@
           "locator": "Abstract: every Green Monster spectrum is blueshifted by about 2,300 km/s, so the structure is on the near side"
         }
       ]
+    },
+    "near-infrared-2025": {
+      "title": "Cassiopeia A in the near infrared, 2025",
+      "detail": "3493 × 4000 px",
+      "summary": "Webb’s 2025 mosaic in colors fitted to ESA’s 2022 picture, on the same shell as the 2022 dataset.",
+      "sources": [
+        {
+          "catalogueId": "mast-jwst-7934-nircam-cassiopeia-a",
+          "url": "https://www.stsci.edu/jwst/science-execution/program-information?id=7934",
+          "label": "JWST program 7934 (PI R. A. Fesen): NIRCam mosaic of Cas A, 2025 October 25",
+          "checked": "2026-10-28",
+          "locator": "Level-3 mosaics jw07934-o001_t001_nircam, F150W2-F162M, F356W and F444W"
+        },
+        {
+          "catalogueId": "esawebb-weic2330a",
+          "url": "https://esawebb.org/images/weic2330a/",
+          "label": "ESA/Webb weic2330a, the 2022 picture whose colors are fitted",
+          "checked": "2026-10-28",
+          "locator": "Colours & filters: 1.62 µm blue, 3.56 µm green, 4.44 µm red"
+        },
+        {
+          "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
+          "url": "https://arxiv.org/abs/1011.3858",
+          "label": "DeLaney et al. (2010), ApJ 725, 2038: the three-dimensional structure of Cassiopeia A",
+          "checked": "2026-10-04",
+          "locator": "Sect. IV.1: the shell fit that turns a Doppler speed into a depth"
+        },
+        {
+          "catalogueId": "chandra-cassiopeia-a-3d-model",
+          "url": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+          "label": "Chandra X-ray Center: Cassiopeia A in 3D, ASCII VTK files created from telescope data (NASA/CXC/SAO)",
+          "checked": "2026-10-04",
+          "locator": "newar-ascii.vtk: the [Ar II] surface of the paper's model"
+        }
+      ]
     }
   }
 }
