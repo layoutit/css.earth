@@ -45,8 +45,11 @@ Whole-frame and tiled model projections agree byte for byte at the pilot cameras
 
 The [phone availability check](source/preparation/l36/phone-qualification.json) found no connected Android device. S23 drag, coast and far/near traces were skipped. Phone performance remains unqualified.
 
+The [128 px cropped-piece experiment](source/preparation/l36/piece-pilot.json) was rejected. Its 33-layer allocation split smooth light and dust into hard boxes, producing visible rectangular patches in the real site. Face-on effective alpha losses were 0.743% for the background, 51.923% for Thirty Doradus and 25.946% for N44G; these are not luminosity losses. The accepted bank, inventory and generated context asset table were restored byte for byte. Two remaining reference views were stopped after the visual failure.
+
 ## Known problems
 
+- A real-site X/Y handoff diagnostic measured 27.77% more linear light with transparent completed groups than with the Milky Way opaque completion. The proposed shared correction is unapplied and awaits approval.
 - Scalar RGBA slabs approximate spectral extinction, display grading after integration and emitter positions inside thick intervals. Absolute light, radial-profile and color limits are not all met. These remain known problems under the owner's accepted comparison standard.
 - A far picture is exact, to its recorded 8-bit encoding, at its prepared direction and 49.59 kpc camera distance. Angular interpolation and other far distances approximate changes in depth projection. The universe's fixed backing foreshortens away from the Sun direction.
 - The optical photograph constrains one direction. Unobserved depth remains conditional on the adopted disc, warp, bar and finite-object geometry. Catalogue and Hα coverage limitations remain those of the approved model.

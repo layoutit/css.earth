@@ -1,0 +1,10 @@
+import { writeFile, mkdir } from 'node:fs/promises';import { pathToFileURL } from 'node:url';import sharp from 'sharp';
+import { pilotSource, PILOT_DIR } from './source.mts';import { pilotCamera, regionCameras } from './cameras.mts';
+import { projectPiece } from './project.mts';
+import { need, json, rec } from '../inputs.mts';
+export async function references(firstOnly=false){const source=await pilotSource(),directory=PILOT_DIR+'reference/';await mkdir(directory,{recursive:true});
+ if(!firstOnly)need(rec(await json(directory+'timing.json')).complete===true,'The exact one-camera timing pilot must precede the regional batch');
+ const cameras=firstOnly?[pilotCamera('seam-45',128,[0,0,0],10,90,45)]:source.regions.flatMap(r=>regionCameras(r.id,r.box));const rows=[];
+ for(const c of cameras){const cached=await json(directory+c.name+'.json').catch(e=>{if(e&&typeof e==='object'&&'code'in e&&e.code==='ENOENT')return null;throw e;});if(cached){need(rec(cached).complete===true,'Incomplete physical reference');rows.push(rec(cached));continue;}const start=performance.now(),rgb=projectPiece(source,c).rgb;need(rgb.every(v=>Number.isFinite(v)&&v>=0),'Invalid physical reference');await writeFile(directory+c.name+'.f64le',Buffer.from(rgb.buffer));const rgba=Uint8Array.from(rgb,v=>{const x=Math.max(0,Math.min(1,v));return Math.round(255*(x<=.0031308?12.92*x:1.055*x**(1/2.4)-.055));});await sharp(rgba,{raw:{width:128,height:128,channels:3}}).png().toFile(directory+c.name+'.png');let light=0;for(let p=0;p<rgb.length;p+=3)for(let a=0;a<3;a++)light+=Math.min(1,rgb[p+a]!)*[.2126,.7152,.0722][a]!;const row={name:c.name,seconds:(performance.now()-start)/1000,linearLight:light};await writeFile(directory+c.name+'.json',JSON.stringify({complete:true,...row})+'\n');rows.push(row);console.log('PIECE_REFERENCE_COMPLETE '+JSON.stringify(row));}
+ await writeFile(directory+(firstOnly?'timing.json':'result.json'),JSON.stringify({complete:true,size:128,rows},null,2)+'\n');}
+if(process.argv[1]&&pathToFileURL(process.argv[1]).href===import.meta.url)await references(process.argv.includes('--pilot'));
