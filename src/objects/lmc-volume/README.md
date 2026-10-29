@@ -47,6 +47,10 @@ The [phone availability check](source/preparation/l36/phone-qualification.json) 
 
 The [128 px cropped-piece experiment](source/preparation/l36/piece-pilot.json) was rejected. Its 33-layer allocation split smooth light and dust into hard boxes, producing visible rectangular patches in the real site. Face-on effective alpha losses were 0.743% for the background, 51.923% for Thirty Doradus and 25.946% for N44G; these are not luminosity losses. The accepted bank, inventory and generated context asset table were restored byte for byte. Two remaining reference views were stopped after the visual failure.
 
+The [finite emitting-shape prototype](source/preparation/l36/finite-shapes.json) isolates N44G's 30 gas primitives and Thirty Doradus's 2,039 cloud, shell and filament primitives. It preserves their l36 geometry and luminosity. Only those emitters leave the continuous background; all stars, diffuse gas and physical dust remain there. Seven actual-site views per object verify independent local bounds and physical scale. The shared compiler's small-quad guard is conditioned in parsecs and rebased to the common kiloparsec frame, with a regression test.
+
+This 128 px prototype is not promoted. The individual shapes retain depth, but face-on emission shifts toward orange and some views gain light. A combined bank would also impose the galaxy's thin-disc direction rule on every shape. The allocated background and two shapes use 11 optical layers each; their face-on effective alpha losses are 29.668%, 23.474% and 22.863%, respectively, not luminosity losses. The installed bank, inventory, descriptor and generated resource table were restored exactly. No shared source was changed and no full-resolution shape bake ran.
+
 ## Known problems
 
 - A real-site X/Y handoff diagnostic measured 27.77% more linear light with transparent completed groups than with the Milky Way opaque completion. The proposed shared correction is unapplied and awaits approval.
