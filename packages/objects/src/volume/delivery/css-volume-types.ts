@@ -59,6 +59,8 @@ export interface PreparedCssVolume {
   readonly components?: readonly PreparedVolumeComponent[];
   /** Transparent completed groups use normalized shares, rather than opaque backdrop compensation. */
   readonly stackCompositing?: 'transparent-normalized';
+  /** Opt-in: cloud-point banks (prepared files beside the volume, cloud-points.ts) drawn with its detail presentation. */
+  readonly pointOverlays?: readonly string[];
   readonly resources: readonly { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }[];
   /** How the volume was made. A bake writes both; in the file a page fetches both are absent (volume-dataset-bank-files.ts). */
   readonly provenance: unknown;

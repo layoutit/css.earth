@@ -21,7 +21,8 @@ export function trustPreparedCssVolume(volume: PreparedCssVolume): PreparedCssVo
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   if (typeof input === 'object' && input !== null && validated.has(input)) return input as PreparedCssVolume;
   const value = record(input, 'prepared CSS volume');
-  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation', 'components', 'stackCompositing'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : [])], 'prepared CSS volume');
+  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation', 'components', 'stackCompositing', 'pointOverlays'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : [])], 'prepared CSS volume');
+  if (value.pointOverlays !== undefined && (!Array.isArray(value.pointOverlays) || !value.pointOverlays.length || !value.pointOverlays.every(path => typeof path === 'string' && /^[a-z0-9][a-z0-9.-]*\.bin$/u.test(path)))) throw new TypeError('Volume point overlays are prepared bank files.');
   if (value.stackCompositing !== undefined && value.stackCompositing !== 'transparent-normalized') throw new TypeError('Unknown volume stack compositing.');
   if (Object.hasOwn(value, 'mergedOpticalCopies') && value.mergedOpticalCopies !== 3) throw new TypeError('Prepared CSS volume merges exactly three optical copies.');
   if (value.schema !== PREPARED_CSS_VOLUME_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
@@ -81,7 +82,7 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   const volume = Object.freeze({ schema: value.schema, id: value.id, frame,
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
-    ...(components ? { components } : {}), ...(value.stackCompositing ? { stackCompositing: 'transparent-normalized' as const } : {}),
+    ...(components ? { components } : {}), ...(value.stackCompositing ? { stackCompositing: 'transparent-normalized' as const } : {}), ...(value.pointOverlays ? { pointOverlays: Object.freeze([...value.pointOverlays as string[]]) } : {}),
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}), ...(Object.hasOwn(value, 'approximation') ? { approximation: value.approximation } : {}),
     ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}), ...(value.mergedOpticalCopies === 3 ? { mergedOpticalCopies: 3 as const } : {}) }) as PreparedCssVolume;
   validated.add(volume);

@@ -14,6 +14,7 @@ import { projectedVolumeOpacity, projectedVolumeRadiusPixels } from './projected
 import { nativeProjectedFade } from '../rendering/view/native-projection.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
+import { mountCloudOverlay } from '../universe/cloud-points.js';
 
 export interface PreparedVolumeDatasetState {
   readonly id: string;
@@ -193,6 +194,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       const families: { datasets: readonly MountedDataset[]; active: { dataset: MountedDataset }; surface: HTMLElement;
         runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null, starsFor: string | null = null;
+      let pointOverlays: ReturnType<typeof mountCloudOverlay>[] | null = null;
       const mountStars = () => {
         starsFor = selected;
         stars = mountPreparedCataloguePoints({ host: root, before: end, payload: datasetById.get(selected)!.stars, createElement: create, nativeFocalCss });
@@ -205,7 +207,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       const destroy = () => {
         if (destroyed) return; destroyed = true; latest = null; listeners.clear();
         for (const family of families) family.runtime.destroy();
-        stars?.destroy(); root.remove(); frontRoot?.remove();
+        stars?.destroy(); for (const overlay of pointOverlays ?? []) overlay.destroy(); root.remove(); frontRoot?.remove();
       };
       const countDescendants = (node: Element): number => [...node.children]
         .reduce((count, child) => count + 1 + countDescendants(child), 0);
@@ -266,6 +268,12 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         const opacity = volumeDatasetCompositeOpacity(stackShares(bank.runtime.roots), dataset.brightness, dataset.volume.stackCompositing);
         // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
         writeStyle(bank.surface, 'opacity', dataset.volume.impostors ? '1' : String(opacity));
+        // Opt-in overlay: it carries light the slabs no longer hold, so it shows exactly as much as they do.
+        if (dataset.volume.pointOverlays) {
+          pointOverlays ??= dataset.volume.pointOverlays.map(path => mountCloudOverlay({ host: root, before: end, behind: () => bank.surface, url: resolveResource(path), resolveResource }));
+          const projection = dataset.volume.impostors ? projectVolumeImpostors(publication, dataset.volume.frame, dataset.volume.impostors) : null;
+          for (const overlay of pointOverlays) { overlay.setCoasting(holdMembership); overlay.publish(publication, projection ? (projection.visible ? projection.volumeMix : 0) : 1); }
+        }
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, dataset.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);
         const showPoints = starsVisible && source.stars(selected) !== undefined && (nativeFocalCss !== undefined || pointOpacity > 0);
