@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { validatePreparedCssVolume, type PreparedCssVolume, type VolumeVector } from '@cssearth/objects';
-import { mountPreparedCssVolume } from './prepared-volume-runtime.ts';
+import { mountPreparedCssVolume, transparentStackOpacities, completedStackOpacities } from './prepared-volume-runtime.ts';
 import type { VolumeCameraPublication } from './types.ts';
 
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
@@ -54,6 +54,31 @@ function publication(direction: VolumeVector, position: VolumeVector = [0, 0, 10
   return { world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: position, orientationXyzw: quaternion } }, viewport: { focalPixels: 600, principalOffsetPixels: [17, -11] } };
 }
 afterEach(() => unstubAllGlobals());
+
+test('a finite cloud keeps local axis mixing when its parent is a thin galaxy', () => {
+  const base = payload(), cloud = payload(), composite = validatePreparedCssVolume({ ...base,
+    frame: { ...base.frame, boundsUnits: { min: [-3, -3, -.1], max: [3, 3, .1] } }, stackCompositing: 'transparent-normalized',
+    components: [{ id: 'cloud', boundsUnits: cloud.frame.boundsUnits, stacks: cloud.stacks.map(s => ({ ...s, leaves: s.leaves.map(l => ({ ...l, id: 'cloud-' + l.id })) })) }] });
+  const { runtime, roots, document } = mount(composite, true);
+  assert.equal(roots.length, 6, 'Finite geometry must mount beside the continuous galaxy');
+  runtime.publish(publication([0, 1, 1]));
+  assert.ok(Number(roots[2]!.style.opacity) > .99);
+  assert.ok(Number(roots[4]!.style.opacity) > .4 && Number(roots[5]!.style.opacity) > .4, 'Local clouds must not inherit the thin-disc direction selector');
+  assert.ok(roots.slice(3).reduce((sum, r) => sum + Number(r.style.opacity), 0) <= .999001, 'Transparent shares must not use opaque completion');
+  assert.ok(roots.every(r => r.style.background === 'transparent'));
+  const count = document.count, nodes = [...roots]; runtime.publish(publication([1, 1, 1]));
+  assert.equal(document.count, count); assert.deepEqual(runtime.roots, nodes);
+  runtime.destroy(); assert.ok(roots.every(r => r.parentNode === null));
+});
+
+test('normalized transparent overlap cannot exceed the weighted completed emission', () => {
+  for (const weights of [[1, 1, 0], [1, 1, 1], [1, .2, .6]]) for (const alpha of [.05, .5, 1]) {
+    const opacities = transparentStackOpacities(weights); let actual = 0, ceiling = 0;
+    for (let i = 0; i < 3; i++) { const emission = [.2, .7, .4][i]! * alpha, share = opacities[i]!; actual = emission * share + actual * (1 - alpha * share); ceiling += emission * share; }
+    assert.ok(actual <= ceiling + 1e-14); assert.ok(opacities.reduce((s, v) => s + v, 0) <= .999001);
+  }
+  assert.notDeepEqual(transparentStackOpacities([1, 1, 0]), completedStackOpacities([1, 1, 0]), 'Opaque compensation is invalid for a transparent footprint');
+});
 
 function copyOpacity(copy: FakeElement): number {
   return copy.style.opacity === undefined ? 1 : Number(copy.style.opacity);

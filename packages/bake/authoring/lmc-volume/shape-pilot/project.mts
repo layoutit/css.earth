@@ -7,7 +7,7 @@ import { normalize } from '../geometry.mts';
 import { need } from '../inputs.mts';
 import type { Shape } from './source.mts';
 
-export function finiteEmission(shape: Shape, camera: Camera, grade: Grade, domain?: GalaxySlabDomain) {
+export function finiteEmission(shape: Pick<Shape, 'emitters'>, camera: Camera, grade: Grade, domain?: GalaxySlabDomain) {
   const linear = new Float64Array(camera.width * camera.height * 3);
   for (const { object, amplitude } of shape.emitters) for (const pixel of projectObject(object, camera, 4)) {
     let fraction = 1;

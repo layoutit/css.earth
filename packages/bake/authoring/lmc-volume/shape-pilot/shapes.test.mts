@@ -12,6 +12,7 @@ import { finiteEmission } from './project.mts';
 import { shapeSpec, backgroundSpec, mergeVolumes } from './build.mts';
 import { PREPARED_CSS_VOLUME_SCHEMA, validatePreparedCssVolume } from '@cssearth/objects';
 import { slabDomain } from '../../milky-way-dust/galaxy-slab-domain.mts';
+import { allFiniteRegions, continuousWithoutFiniteGas } from './all-source.mts';
 
 const object = (id = 'gas', kind: 'ball' | 'shell' = 'ball') => volumeObject({ id, owner: id, component: 4, kind, center: [0, 0, 0], axes: [.12, .12, .12], basis: planarBasis(0), inner: kind === 'shell' ? .72 : 0, color: [1, .3, .5], weight: .001, source: 'Numerical fixture' });
 const shape = (kind: 'ball' | 'shell' = 'ball'): Shape => ({ id: 'cloud', label: 'Numerical fixture', box: { min: [-.15, -.15, -.15], max: [.15, .15, .15] }, emitters: [{ object: object('gas', kind), amplitude: 1 }] });
@@ -65,4 +66,14 @@ test('a standalone cloud keeps its local bounds and does not inherit the galaxy 
   const local = { min: [-.15, -.15, -.15] as [number, number, number], max: [.15, .15, .15] as [number, number, number] };
   const volume = validatePreparedCssVolume({ schema: PREPARED_CSS_VOLUME_SCHEMA, id: 'lmc-volume', frame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: local }, anchors: [], stacks: [{ axis: 'x', leaves: [] }, { axis: 'y', leaves: [] }, { axis: 'z', leaves: [] }], resources: [] });
   assert.deepEqual(mergeVolumes([{ id: 'cloud', volume }]).frame.boundsUnits, local);
+});
+
+test('all finite gas regions leave the diffuse field exactly once, while stellar and dust ownership stay intact', () => {
+  const map = makeRaster(4, 10), gas = object(), star = volumeObject({ ...object('star'), component: 3 });
+  const scene: CatalogueScene = { objects: [gas, star], dust: [object('dust')], owners: [{ id: 'gas', kind: 'region', component: 4, prior: 1, maximum: 2, measuredAge: false, logAge: null, aliases: [] }],
+    sources: { warp: map, dust: map, young: [map, map, map], youngCoverage: map, youngFraction: 0, oldColor: [1, 1, 1], gas: map, metadata: {} }, colors: [], dustArea: 1, molecularFraction: .2, metadata: {} };
+  const regions = allFiniteRegions(scene, Float64Array.from([.8])), background = continuousWithoutFiniteGas(scene);
+  assert.equal(regions.length, 1); assert.equal(regions[0]!.id, 'region-gas'); assert.strictEqual(regions[0]!.emitters[0]!.object, gas);
+  assert.deepEqual(background.objects, [star]); assert.strictEqual(background.dust, scene.dust); assert.strictEqual(background.sources, scene.sources);
+  assert.equal(background.objects.length + regions.reduce((n, r) => n + r.emitters.length, 0), scene.objects.length);
 });

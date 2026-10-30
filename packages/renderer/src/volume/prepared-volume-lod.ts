@@ -5,6 +5,7 @@ import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPub
 import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/view/native-projection.js';
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS, mountPreparedCssVolume } from './prepared-volume-runtime.js';
+import { preparedVolumeParts } from './prepared-volume-components.js';
 
 const AXES = ['x', 'y', 'z'] as const;
 
@@ -19,12 +20,12 @@ export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
 /** Retain the full geometry, but publish it only when depth can occupy visible screen pixels. */
 export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, completedOpacity: (runtime: PreparedVolumeRuntime) => number): PreparedVolumeLodRuntime {
   const initial = validatePreparedCssVolume(options.payload), bank = initial.impostors;
-  const materials = (payload: PreparedVolumeMountOptions['payload']) => AXES.flatMap(axis =>
-    payload.stacks.find(stack => stack.axis === axis)!.leaves.map(leaf => ({
+  const materials = (payload: PreparedVolumeMountOptions['payload']) => preparedVolumeParts(payload).flatMap(part => AXES.flatMap(axis =>
+    part.stacks.find(stack => stack.axis === axis)!.leaves.map(leaf => ({
       textureUrl: options.resolveResource(leaf.texturePath),
       backgroundSize: leaf.style.backgroundSize,
       backgroundPosition: leaf.style.backgroundPosition,
-    })));
+    }))));
   if (!bank) {
     // Without impostors the full volume is the only presentation; it is built on the first publication, which a
     // bank sends only while it is visible.
@@ -116,7 +117,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const impostorsVisible = visible && (!detailAllowed || Number.isNaN(mix) || mix < 1);
     // Switching on, the slices wait for their large images to decode off the main thread: M31's 3,700 px detail slice
     // decoded inside one 169 ms paint each time it came back into view on the iPad (2026-09-30).
-    if (detailVisible && !fullShown) revealLayer(full, presentation.stacks.flatMap(stack => stack.leaves)
+    if (detailVisible && !fullShown) revealLayer(full, preparedVolumeParts(presentation).flatMap(part => part.stacks.flatMap(stack => stack.leaves))
       .filter(leaf => leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS).map(leaf => options.resolveResource(leaf.texturePath)));
     writeStyle(full, 'display', detailVisible ? 'block' : 'none'); fullShown = detailVisible;
     writeStyle(distant, 'display', impostorsVisible ? 'block' : 'none');

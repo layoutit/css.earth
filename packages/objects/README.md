@@ -84,6 +84,8 @@ application renderer. Earth is a future consumer, outside this migration's scope
 
 Prepared volume scene contracts and their pure validators/helpers live in `src/volume/`, exported by `@cssearth/objects`. This includes volume and sampled recipes, emission-fit settings, slice data and layer validation, compiler controls and star inputs, joint parameters, authored shape settings, observation photo data, observation mappings, simulation depth-prior and structural cancellation interfaces, and prepared catalogue stars. Writers and readers import the same contracts here. Baking, fitting, sampling, cancellation and I/O remain in `@cssearth/bake`.
 
+A prepared CSS volume may declare finite `components`, each with local bounds and three prepared axis stacks in the parent's physical frame. These require `stackCompositing: 'transparent-normalized'`. Component leaf ids are unique across the volume, materials remain in its shared resource list, and local bounds and geometry participate in topology equality. Banks without these fields retain their existing contract.
+
 The browser-safe main entry exports `PREPARED_CSS_OBJECT_FORMAT`, `expandWorldContextSummary()` and
 `expandWorldSystem()` from `src/prepared-data/`. The decoders expand compact body columns, shared tables,
 billboards and orbit centres before validation. Full world-context validation, world-camera frame and presentation data, system views, orbit centres and

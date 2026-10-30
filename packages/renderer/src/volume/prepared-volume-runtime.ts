@@ -6,6 +6,7 @@ import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, VolumeC
 
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { createSettlePacer } from '../rendering/loading/settle-pacer.js';
+import { mountPreparedVolumeComponents, preparedVolumeParts } from './prepared-volume-components.js';
 
 /** A leaf image this large decodes off the main thread before it shows again (layer-reveal.ts). */
 export const LARGE_IMAGE_PIXELS = 1 << 20;
@@ -27,6 +28,7 @@ const JOIN_UNITS = 2, JOIN_SLICES = 8;
 /** Mounts fixed projective slice geometry. It owns DOM transforms only; all geometry and pixels are prepared. */
 export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): PreparedMaterialVolumeRuntime {
   const payload = validatePreparedCssVolume(options.payload);
+  if (payload.components) return mountPreparedVolumeComponents({ ...options, payload }, mountPreparedCssVolume);
   if (options.host?.nodeType !== 1 || options.before?.nodeType !== 1 || options.before.ownerDocument !== options.host.ownerDocument || typeof options.resolveResource !== 'function') {
     throw new TypeError('Prepared CSS volume mount needs a host, insertion point and resource resolver.');
   }
@@ -71,6 +73,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     scene.style.willChange = 'transform';
     mesh.className = 'css-volume-mesh';
     root.style.opacity = '0';
+    if (payload.stackCompositing === 'transparent-normalized') root.style.background = 'transparent';
     // A stack that has never been published, or one whose axis carries no weight, stays out of the layer tree. Hidden
     // is not free: on an iPhone each unpublished stack kept its slices composited, and the compositor re-committed
     // them on every camera change.
@@ -249,7 +252,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     previousOrientation = [...world.pose.orientationXyzw];
     retire.published();
 
-    const opacities = completedStackOpacities(strengths.map(value => value.weight));
+    const opacities = payload.stackCompositing === 'transparent-normalized'
+      ? transparentStackOpacities(strengths.map(value => value.weight)) : completedStackOpacities(strengths.map(value => value.weight));
     for (let index = 0; index < roots.length; index++) {
       const root = roots[index]!;
       const { weight, opticalGain } = strengths[index]!;
@@ -385,6 +389,7 @@ function cameraView(camera: VolumeLocalCamera): readonly number[] {
 
 /** Texture demand uses the same axis weights and prepared frustum bounds as publication. */
 export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publication: VolumeCameraPublication): readonly string[] {
+  if (payload.components) return [...new Set(preparedVolumeParts(payload).flatMap(part => preparedVolumeTexturePaths(part, publication)))];
   const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
   const transform = preparedVolumeCameraTransform(publication, payload.frame, 50);
   const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, publication.viewport);
@@ -453,6 +458,12 @@ export function completedStackOpacities(weights: readonly number[]): readonly nu
     front += share;
   }
   return result;
+}
+
+/** Source-over of transparent groups is bounded by their normalized weighted sum, for every pixel alpha. */
+export function transparentStackOpacities(weights: readonly number[]): readonly number[] {
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  return weights.map(weight => total > 0 ? STACK_OPACITY_CEILING * weight / total : 0);
 }
 
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }

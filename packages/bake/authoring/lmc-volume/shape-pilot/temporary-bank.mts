@@ -8,6 +8,7 @@ import { readVolumeDatasetBank, writeVolumeDatasetBank, inventoryPreparedAssets 
 import { prepareCatalog } from '../../../../../site/build/prepare/catalog/prepare-catalog.mts';
 import { need } from '../inputs.mts';
 import { SHAPE_DIR } from './source.mts';
+import { withPreviewLease } from './preview-lease.mts';
 
 const object = 'src/objects/lmc-volume/', prepared = object + 'prepared', backup = SHAPE_DIR + 'accepted-backup', stage = SHAPE_DIR + 'site-stage';
 async function exists(path: string) { try { await access(path); return true; } catch (e) { if (e && typeof e === 'object' && 'code' in e && e.code === 'ENOENT') return false; throw e; } }
@@ -22,7 +23,13 @@ async function restore() {
 }
 
 export async function withTemporaryBank(input: PreparedCssVolume, capture: (origin: string) => Promise<void>, interrupt = false, componentOnly = false) {
+  await mkdir(SHAPE_DIR, { recursive: true });
+  return withPreviewLease(SHAPE_DIR + 'preview.lease', () => temporaryBank(input, capture, interrupt, componentOnly));
+}
+async function temporaryBank(input: PreparedCssVolume, capture: (origin: string) => Promise<void>, interrupt: boolean, componentOnly: boolean) {
   if (await exists(backup)) await restore();
+  // The generated resource table must describe the restored inventory before it is saved as the baseline.
+  await prepareCatalog();
   const original = await readVolumeDatasetBank(prepared), native = original.datasets[0]!.volume;
   need(native.impostors, 'Preserve the installed near/far rendering path');
   // The body's existing distant backing also reads the Sun-facing picture, independently of volume impostors.

@@ -51,6 +51,8 @@ The [finite emitting-shape prototype](source/preparation/l36/finite-shapes.json)
 
 This 128 px prototype is not promoted. The individual shapes retain depth, but face-on emission shifts toward orange and some views gain light. A combined bank would also impose the galaxy's thin-disc direction rule on every shape. The allocated background and two shapes use 11 optical layers each; their face-on effective alpha losses are 29.668%, 23.474% and 22.863%, respectively, not luminosity losses. The installed bank, inventory, descriptor and generated resource table were restored exactly. No shared source was changed and no full-resolution shape bake ran.
 
+The later [independent-component integration](source/preparation/l36/components.json) adds opt-in shared runtime support for local axis selection and normalized transparent blending. Its tiny whole-galaxy preview contains two separate nebular components plus the background, still 33 optical layers in total. Four galaxy views and six close views passed actual-site loading and axis-share checks. This is an integration demonstration; the other 407 catalogue gas regions remain in the background and no all-region bake is claimed. The fresh default Milky Way production replay preserved every slab, sky face and inventory byte. Competing preview transactions are refused, and the accepted LMC was restored after capture.
+
 ## Known problems
 
 - A real-site X/Y handoff diagnostic measured 27.77% more linear light with transparent completed groups than with the Milky Way opaque completion. The proposed shared correction is unapplied and awaits approval.

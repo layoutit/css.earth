@@ -110,7 +110,7 @@ export type { PreparedCubicSkyPlan, PreparedDirectionalSunPlan } from './prepare
 export { DIRECTIONAL_SUN_PRESENTATION_STANDARD_SCHEMA } from './prepared-data/camera/runtime-camera-types.js';
 export { validatePreparedCubicSky, validateDirectionalSunPlan } from './prepared-data/sky/sky-contract.js';
 
-export type { VolumeAxis, VolumeOpticalRole, PreparedVolumeLeaf, PreparedVolumeStack, PreparedVolumeImpostors, PreparedCssVolume } from './volume/delivery/css-volume-types.js';
+export type { VolumeAxis, VolumeOpticalRole, PreparedVolumeLeaf, PreparedVolumeStack, PreparedVolumeComponent, PreparedVolumeImpostors, PreparedCssVolume } from './volume/delivery/css-volume-types.js';
 export { validatePreparedCssVolume, trustPreparedCssVolume } from './volume/delivery/css-volume-validation.js';
 export { validateVolumeImpostors } from './volume/delivery/volume-impostor-validation.js';
 export { validatePreparedCataloguePoints, trustPreparedCataloguePoints } from './volume/catalogue/prepared-catalogue-points.js';

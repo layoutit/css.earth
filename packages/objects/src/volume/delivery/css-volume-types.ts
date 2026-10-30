@@ -25,6 +25,14 @@ export interface PreparedVolumeStack {
   readonly leaves: readonly PreparedVolumeLeaf[];
 }
 
+/** A finite emitter keeps its own direction-selection bounds inside the shared physical frame. */
+export interface PreparedVolumeComponent {
+  readonly id: string;
+  readonly boundsUnits: DensityVolumeFrame['boundsUnits'];
+  readonly stacks: readonly PreparedVolumeStack[];
+  readonly mergedOpticalCopies?: 3;
+}
+
 /** Offline projections of the same cloud, with its saved optical presentation. */
 export interface PreparedVolumeImpostors {
   readonly schema: typeof PREPARED_VOLUME_IMPOSTORS_SCHEMA;
@@ -48,6 +56,9 @@ export interface PreparedCssVolume {
   readonly frame: DensityVolumeFrame;
   readonly anchors?: readonly { readonly id: string; readonly positionUnits: VolumeVector }[];
   readonly stacks: readonly PreparedVolumeStack[];
+  readonly components?: readonly PreparedVolumeComponent[];
+  /** Transparent completed groups use normalized shares, rather than opaque backdrop compensation. */
+  readonly stackCompositing?: 'transparent-normalized';
   readonly resources: readonly { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }[];
   /** How the volume was made. A bake writes both; in the file a page fetches both are absent (volume-dataset-bank-files.ts). */
   readonly provenance: unknown;

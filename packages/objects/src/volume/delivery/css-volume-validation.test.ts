@@ -23,6 +23,28 @@ test('accepts the direct prepared CSS volume payload and all three stacks', () =
   assert.equal(validatePreparedCssVolume(valid()).stacks.length, 3);
 });
 
+function finite(): PreparedCssVolume {
+  const base = valid(), component = valid();
+  return { ...base, stackCompositing: 'transparent-normalized', components: [{ id: 'cloud', boundsUnits: { min: [-.2, -.2, -.2], max: [.2, .2, .2] },
+    stacks: component.stacks.map(s => ({ ...s, leaves: s.leaves.map(l => ({ ...l, id: 'cloud-' + l.id })) })) }] };
+}
+test('finite components preserve local bounds and own validated leaves', () => {
+  const parsed = validatePreparedCssVolume(finite());
+  assert.equal(parsed.components?.[0]?.stacks.length, 3);
+  assert.equal(parsed.components?.[0]?.boundsUnits.max[2], .2);
+  assert.throws(() => validatePreparedCssVolume({ ...finite(), stackCompositing: undefined }), /normalized compositing/);
+  const duplicate = finite(); Object.assign(duplicate.components![0]!.stacks[0]!.leaves[0]!, { id: 'x-0' });
+  assert.throws(() => validatePreparedCssVolume(duplicate), /distinct leaf ids/);
+  assert.throws(() => validatePreparedCssVolume({ ...finite(), components: [{ ...finite().components![0], boundsUnits: { min: [0, 0, 0], max: [0, 0, 0] } }] }));
+});
+test('finite geometry and local bounds participate in topology equality', async () => {
+  const { samePreparedVolumeTopology } = await import('./prepared-volume-topology.js');
+  assert.equal(samePreparedVolumeTopology(finite(), finite()), true);
+  const moved = finite(); Object.assign(moved.components![0], { boundsUnits: { min: [-.3, -.3, -.3], max: [.3, .3, .3] } });
+  assert.equal(samePreparedVolumeTopology(finite(), moved), false);
+  assert.equal(samePreparedVolumeTopology(finite(), { ...valid(), stackCompositing: 'transparent-normalized' }), false);
+});
+
 test('rejects a runtime URL in authored leaf style', () => {
   const value = valid();
   Object.assign(value.stacks[0]!.leaves[0]!, { style: { ...value.stacks[0]!.leaves[0]!.style, transform: 'url(/runtime.png)' } });

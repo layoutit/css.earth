@@ -99,7 +99,12 @@ export async function loadPreparedVolumeDatasets(input: unknown, transport: Prep
 
 /** Same completed-image attenuation as Nebula Lab cloudCompositeOpacity; never attenuate individual slabs. */
 export function volumeDatasetCompositeOpacity(banks: readonly { axis: VolumeAxis; opacity: number; visible: boolean }[],
-  brightness: PreparedVolumeDatasetBrightness): number {
+  brightness: PreparedVolumeDatasetBrightness, compositing?: PreparedCssVolume['stackCompositing']): number {
+  if (compositing === 'transparent-normalized') {
+    const total = banks.reduce((sum, bank) => sum + (bank.visible ? bank.opacity : 0), 0);
+    // A parent may hold only finite components: its empty base stacks must not hide the children.
+    return total > 0 ? brightness.overall * banks.reduce((sum, bank) => sum + (bank.visible ? bank.opacity * brightness[bank.axis] : 0), 0) / total : brightness.overall;
+  }
   let transmission = 1, gain = 0;
   for (let i = banks.length - 1; i >= 0; i--) {
     const bank = banks[i], alpha = bank.visible ? Math.max(0, Math.min(1, bank.opacity)) : 0;
@@ -113,7 +118,7 @@ export function volumeDatasetCompositeOpacity(banks: readonly { axis: VolumeAxis
  * share for a stack that carries no weight. Whether the root is displayed yet is not read. A stack the camera turns to is
  * displayed by a paced join on a later frame (prepared-volume-runtime.ts), and with the camera still nothing weighed the
  * cloud again: the Pleiades, opened on a dataset link, stayed at opacity 0 in 5 of 12 loads (2026-10-07). */
-const stackShares = (roots: readonly HTMLElement[]) => roots.map((axisRoot, index) => {
+const stackShares = (roots: readonly HTMLElement[]) => roots.slice(0, 3).map((axisRoot, index) => {
   const opacity = Number(axisRoot.style.opacity);
   return { axis: (['x', 'y', 'z'] as const)[index], opacity, visible: opacity > 0 };
 });
@@ -220,7 +225,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         const marker = create('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
         const active = { dataset };
         const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: dataset.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss, lazyDetail: lazy },
-          detail => volumeDatasetCompositeOpacity(stackShares(detail.roots), active.dataset.brightness));
+          detail => volumeDatasetCompositeOpacity(stackShares(detail.roots), active.dataset.brightness, active.dataset.volume.stackCompositing));
         for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
         const family = { datasets: Object.freeze(datasets), active, surface, runtime };
         families.push(family);
@@ -258,7 +263,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
           for (const axisRoot of bank.runtime.roots.slice(builtRoots)) axisRoot.style.background = 'transparent';
           updateResidencyMetadata();
         }
-        const opacity = volumeDatasetCompositeOpacity(stackShares(bank.runtime.roots), dataset.brightness);
+        const opacity = volumeDatasetCompositeOpacity(stackShares(bank.runtime.roots), dataset.brightness, dataset.volume.stackCompositing);
         // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
         writeStyle(bank.surface, 'opacity', dataset.volume.impostors ? '1' : String(opacity));
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, dataset.volume.frame,

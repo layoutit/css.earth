@@ -18,7 +18,7 @@ import { readShapeSource, SHAPE_DIR, type Shape } from './source.mts';
 import { json, need, rec } from '../inputs.mts';
 
 export const backgroundBox = { min: [-10, -10, -2.1] as [number, number, number], max: [10, 10, 2.1] as [number, number, number] };
-export function shapeSpec(shape: Shape, size = 128): GalaxyBankSpec {
+export function shapeSpec(shape: Pick<Shape, 'box'> & { id: string }, size = 128): GalaxyBankSpec {
   need(size === 128, 'Show the tiny shape pilot before any increase in resolution');
   return bankSpec({ box: shape.box, counts: [3, 3, 2], size, record: 'source/preparation/l36/fit.json', texturePrefix: 'l36-shape-' + shape.id, hybrid: { densePerAxis: [1, 1, 1] } });
 }
