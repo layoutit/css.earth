@@ -1,4 +1,4 @@
-/** Every lit catalogue gas owner as cloud points, each with at least one billboard. Owners with zero l36 amplitude carry no light and need none. */
+/** All catalogue gas as cloud points. Billboards split wherever the flat cell error is largest, so a large region's parts sit at their own 3D places. Owners with zero l36 amplitude carry no light. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
@@ -7,26 +7,57 @@ import { packPreparedBinary } from '@cssearth/objects/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { siteWorld } from '../delivery/site-views.mts';
-import { normalize, type V3 } from '../geometry.mts';
-import { CELL, boardOf, clusterDots, drawCell, randomStream, regionDots, regionLight, type Board, type Dot, type RegionLight } from './dots.mts';
+import { dot as dot3, normalize, type V3 } from '../geometry.mts';
+import { CELL, dotShape, boardOf, clusterDots, drawCell, randomStream, regionDots, regionLight, type Board, type Dot, type RegionLight } from './dots.mts';
 import { L37_DIR, allGasSource, type GasRegion } from './regions.mts';
 
 export const ALL_DIR = L37_DIR + 'dots-all/';
 /** Billboards in all: the 61 other retained elements and these stay under 500. */
-export const BOARDS = 430, START_GAIN = 1.2;
-const DOTS_PER_BOARD = 40;
+export const BOARDS = 439, GAS_BOARDS = 300, DUST_BOARDS = BOARDS - GAS_BOARDS, START_GAIN = .9;
 
-interface Group { id: string; owners: GasRegion[]; light: number; box: { min: V3; max: V3 }; }
+const DOTS_PER_BOARD = 60;
+
 const lightOf = (r: GasRegion) => r.emitters.reduce((n, e) => n + e.object.weight * e.amplitude, 0);
-const centerOf = (g: Group) => g.box.min.map((v, k) => (v + g.box.max[k]!) / 2) as V3;
-const extentOf = (g: Group) => Math.hypot(...g.box.max.map((v, k) => v - g.box.min[k]!));
+const dotLight = (d: Dot) => d.light[0] + d.light[1] + d.light[2];
+interface Cluster { dots: (Dot & { owner: string })[]; board: Board; light: number; }
+const clusterOf = (dots: Cluster['dots']): Cluster => ({ dots, board: boardOf(dots), light: dots.reduce((n, d) => n + dotLight(d), 0) });
+/** The billboard to split next: a wide one's error is its width, and a faint one matters a little less. */
+const score = (c: Cluster) => c.dots.length < 2 ? -1 : c.board.half * c.light ** .15;
 
-export const groupRegions = (regions: readonly GasRegion[]): Group[] => regions.map(r => ({ id: r.id, owners: [r], light: lightOf(r), box: { min: [...r.box.min] as V3, max: [...r.box.max] as V3 } }));
-export function allocate(groups: readonly Group[], total: number): number[] {
-  const weights = groups.map(g => g.light ** .75 * Math.max(extentOf(g), .05) ** .25), sum = weights.reduce((a, b) => a + b, 0), spare = total - groups.length;
-  const shares = weights.map(w => w / sum * spare), counts = shares.map(s => 1 + Math.floor(s)); let left = total - counts.reduce((a, b) => a + b, 0);
-  for (const i of shares.map((s, i) => [s - Math.floor(s), i] as const).sort((a, b) => b[0] - a[0]).map(v => v[1])) { if (left-- <= 0) break; counts[i]!++; }
-  return counts;
+export function splitClusters(dots: Cluster['dots'], total: number): Cluster[] {
+  const clusters = [clusterOf(dots)];
+  while (clusters.length < total) {
+    let worst = 0; clusters.forEach((c, i) => { if (score(c) > score(clusters[worst]!)) worst = i; });
+    const [a, b] = clusterDots(clusters[worst]!.dots, 2, randomStream(clusters.length * 31 + 5)) as [Cluster['dots'], Cluster['dots'] | undefined]; if (!b) break;
+    clusters.splice(worst, 1, clusterOf(a), clusterOf(b));
+  }
+  return clusters;
+}
+/**
+ * The model's discrete dust as flat dark patches in the disc plane. Each cell is the clouds' own optical depth, as the Homunculus
+ * draws dust: an absorbing color and an opacity. Its alpha is the V-band absorption of that column; the color is what the model's
+ * extinction curve lets through, so the dust reddens slightly. One gain (`adjust.dust`) accounts for the disc light in front of a
+ * mid-plane cloud, measured against the accepted delivery's total darkening.
+ */
+function dustPatches(clouds: readonly { center: V3; axes: V3; weight: number }[], strength: number, total: number) {
+  const dots: (Dot & { tau: number })[] = clouds.map(c => { const tau = c.weight * strength; return { at: c.center, radius: Math.max(.006, Math.cbrt(c.axes[0] * c.axes[1] * c.axes[2])), light: [tau, 0, 0] as V3, tau }; });
+  const split = (list: typeof dots): typeof dots[] => clusterDots(list, 2, randomStream(list.length + 3)) as typeof dots[];
+  let patches: { list: typeof dots; half: number }[] = [{ list: dots, half: Infinity }];
+  const extent = (list: typeof dots) => { let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity; for (const d of list) { x0 = Math.min(x0, d.at[0] - d.radius); x1 = Math.max(x1, d.at[0] + d.radius); y0 = Math.min(y0, d.at[1] - d.radius); y1 = Math.max(y1, d.at[1] + d.radius); } return { cx: (x0 + x1) / 2, cy: (y0 + y1) / 2, half: Math.max(x1 - x0, y1 - y0) / 2 * 1.02 }; };
+  patches[0]!.half = extent(dots).half;
+  while (patches.length < total) { let worst = 0; patches.forEach((p, i) => { if (p.half > patches[worst]!.half && p.list.length > 1) worst = i; }); const parts = split(patches[worst]!.list); if (parts.length < 2) break; patches = [...patches.slice(0, worst), ...parts.map(list => ({ list, half: extent(list).half })), ...patches.slice(worst + 1)]; }
+  return patches.map(p => { const e = extent(p.list), z = p.list.reduce((n, d) => n + d.at[2] * d.tau, 0) / p.list.reduce((n, d) => n + d.tau, 0); return { center: [e.cx, e.cy, z] as V3, half: e.half, list: p.list }; });
+}
+function drawDustCell(patch: { center: V3; half: number; list: readonly (Dot & { tau: number })[] }, extinction: readonly number[], gain: number) {
+  const tau = new Float64Array(CELL * CELL), texel = 2 * patch.half / CELL;
+  for (const d of patch.list) {
+    const u = (d.at[0] - patch.center[0] + patch.half) / texel, v = (patch.half - (d.at[1] - patch.center[1])) / texel, r = Math.max(d.radius / texel, .75), weights: [number, number][] = []; let sum = 0;
+    for (let y = Math.max(0, Math.floor(v - r)); y < Math.min(CELL, Math.ceil(v + r)); y++) for (let x = Math.max(0, Math.floor(u - r)); x < Math.min(CELL, Math.ceil(u + r)); x++) { const w = dotShape(Math.hypot(x + .5 - u, y + .5 - v) / r); if (w > 0) { weights.push([y * CELL + x, w]); sum += w; } }
+    if (sum > 0) for (const [p, w] of weights) tau[p]! += d.tau * w / sum / (texel * texel);
+  }
+  const rgba = new Float64Array(CELL * CELL * 4), through = extinction.map(e => .1 * Math.exp(-e));
+  for (let p = 0; p < tau.length; p++) { rgba[p * 4] = through[0]!; rgba[p * 4 + 1] = through[1]!; rgba[p * 4 + 2] = through[2]!; rgba[p * 4 + 3] = 1 - Math.exp(-tau[p]! * gain); }
+  return rgba;
 }
 /** The cell axes: the real Earth view, in the frame. */
 export function earthAxes(frame: DensityVolumeFrame) {
@@ -36,30 +67,37 @@ export function earthAxes(frame: DensityVolumeFrame) {
 }
 
 export async function buildAll() {
-  const { source, regions: every } = await allGasSource(), regions = every.filter(r => lightOf(r) > 0), grade = source.grade;
-  console.log('GAS_OWNERS_WITHOUT_LIGHT ' + (every.length - regions.length)); await mkdir(ALL_DIR, { recursive: true });
+  const { source, regions: every } = await allGasSource(), regions = every.filter(r => lightOf(r) > 0), grade = source.grade; await mkdir(ALL_DIR, { recursive: true });
   const installed = JSON.parse(await readFile('src/objects/lmc-volume/prepared/horalek-widefield/volume.json', 'utf8')) as { frame?: unknown; data?: { frame?: unknown } }, frame = parseDensityVolumeFrame(installed.data?.frame ?? installed.frame);
   const adjust = await readFile(ALL_DIR + 'adjust.json', 'utf8').then(t => JSON.parse(t) as Record<string, number>, () => ({} as Record<string, number>));
-  const groups = groupRegions(regions), counts = allocate(groups, BOARDS), axes = earthAxes(frame), all: { group: string; board: Board; gain: number; whole: RegionLight }[] = [], report = [];
-  for (const [i, group] of groups.entries()) {
-    const n = counts[i]!, dots: Dot[] = group.owners.flatMap(r => regionDots(r, grade, Math.max(1, Math.round(n * DOTS_PER_BOARD * lightOf(r) / group.light))));
-    const boards = clusterDots(dots, n, randomStream(i * 101 + 7)).map(boardOf), width = 1.4 * extentOf(group), whole = regionLight(dots, centerOf(group), width, axes), gain = START_GAIN * (adjust[group.id] ?? 1);
-    for (const board of boards) all.push({ group: group.id, board, gain, whole });
-    report.push({ id: group.id, owners: group.owners.map(o => o.label), light: group.light, boards: boards.length, dots: dots.length, gain, extentKpc: extentOf(group) });
-  }
-  const across = Math.ceil(Math.sqrt(all.length)), atlas = new Uint8Array((across * CELL) ** 2 * 4), positions = new Float64Array(all.length * 3), diameters = new Float32Array(all.length), cells = new Uint16Array(all.length * 2);
+  const axes = earthAxes(frame), total = regions.reduce((n, r) => n + lightOf(r), 0);
+  const dots: Cluster['dots'] = regions.flatMap(r => regionDots(r, grade, Math.max(1, Math.round(BOARDS * DOTS_PER_BOARD * lightOf(r) / total))).map(d => ({ ...d, owner: r.id })));
+  const clusters = splitClusters(dots, GAS_BOARDS), reach = 2 * dots.reduce((most, d) => Math.max(most, Math.abs(dot3(d.at, axes.right)), Math.abs(dot3(d.at, axes.up))), 0) + 1, whole = regionLight(dots, [0, 0, 0], reach, axes, 3072);
+  const owned = new Set<string>(), all: { group: string; board: Board; gain: number; whole: RegionLight }[] = clusters.map(c => {
+    const share = new Map<string, number>(); for (const d of c.dots) share.set(d.owner, (share.get(d.owner) ?? 0) + dotLight(d));
+    const group = [...share].sort((x, y) => y[1] - x[1])[0]![0]; owned.add(group);
+    return { group, board: c.board, gain: START_GAIN * (adjust['*'] ?? 1) * (adjust[group] ?? 1), whole };
+  });
+  const groups = regions.map(r => ({ id: r.id })), report = clusters.map((c, i) => ({ id: all[i]!.group, boards: 1, dots: c.dots.length, gain: all[i]!.gain, halfKpc: c.board.half }));
+  const halves = clusters.map(c => c.board.half).sort((x, y) => y - x);
+  const layer = source.scene.dustLayer!, patches = dustPatches((layer.clouds ?? []) as unknown as { center: V3; axes: V3; weight: number }[], layer.strength, DUST_BOARDS), dustGain = adjust.dust ?? 1;
+  const count = all.length + patches.length, across = Math.ceil(Math.sqrt(count)), atlas = new Uint8Array((across * CELL) ** 2 * 4), positions = new Float64Array(count * 3), diameters = new Float32Array(count), cells = new Uint16Array(count * 2);
   all.forEach(({ board, gain, whole }, j) => {
     const rgba = drawCell(board, axes, grade, gain, whole), cx = (j % across) * CELL, cy = Math.floor(j / across) * CELL;
     for (let y = 0; y < CELL; y++) for (let x = 0; x < CELL; x++) { const k = (y * CELL + x) * 4, o = ((cy + y) * across * CELL + cx + x) * 4; for (let c = 0; c < 4; c++) atlas[o + c] = Math.round(rgba[k + c]! * 255); }
     positions.set(board.center, j * 3); diameters[j] = 2 * board.half; cells.set([cx, cy], j * 2);
   });
+  patches.forEach((patch, i) => {
+    const j = all.length + i, rgba = drawDustCell(patch, layer.extinctionRgb ?? [1, 1, 1], dustGain), cx = (j % across) * CELL, cy = Math.floor(j / across) * CELL;
+    for (let y = 0; y < CELL; y++) for (let x = 0; x < CELL; x++) { const k = (y * CELL + x) * 4, o = ((cy + y) * across * CELL + cx + x) * 4; for (let c = 0; c < 4; c++) atlas[o + c] = Math.round(rgba[k + c]! * 255); }
+    positions.set(patch.center, j * 3); diameters[j] = 2 * patch.half; cells.set([cx, cy], j * 2);
+  });
   const atlasBytes = await writeLossyWebp(sharp(atlas, { raw: { width: across * CELL, height: across * CELL, channels: 4 } }), ALL_DIR + 'gas-dots-atlas.webp', { alphaQuality: 100 });
-  const encoded = encodeCloudPoints({ id: 'gas-dots', frame, count: all.length, positions, diameters, cells, atlas: 'gas-dots-atlas.webp', cellTexels: CELL, occluder: [], cellAxesUnits: axes });
+  const encoded = encodeCloudPoints({ id: 'gas-dots', frame, count, positions, diameters, cells, atlas: 'gas-dots-atlas.webp', cellTexels: CELL, occluder: [], cellAxesUnits: axes, planarCells: { from: all.length, right: [1, 0, 0], up: [0, 1, 0] } });
   readCloudPoints(encoded, 'gas dots'); const bank = encodePreparedBank(encoded, 'gas dots');
   await writeFile(ALL_DIR + 'gas-dots.bin', packPreparedBinary(bank.bytes, bank.regions, 'gas dots'));
-  const shared = groups.filter(g => g.owners.length > 1).reduce((n, g) => n + g.owners.length, 0);
-  await writeFile(ALL_DIR + 'result.json', JSON.stringify({ complete: true, owners: every.length, lit: regions.length, groups: groups.length, ownersInSharedGroups: shared, boards: all.length, atlasBytes: atlasBytes.length, groupIds: all.map(b => b.group), report }, null, 1) + '\n');
-  console.log('GAS_ALL_DOTS ' + JSON.stringify({ owners: regions.length, groups: groups.length, shared, boards: all.length, atlasBytes: atlasBytes.length, maxBoards: Math.max(...counts), dor30: report.find(r => r.owners.includes('DEM263'))?.boards }));
+  await writeFile(ALL_DIR + 'result.json', JSON.stringify({ complete: true, owners: every.length, lit: regions.length, ownersWithOwnBillboard: owned.size, boards: all.length, dustPatches: patches.length, dustClouds: (layer.clouds ?? []).length, dustHalfKpc: [patches.reduce((n, p) => Math.max(n, p.half), 0), patches.map(p => p.half).sort((a, b) => a - b)[patches.length >> 1]], atlasBytes: atlasBytes.length, largestHalfKpc: halves[0], medianHalfKpc: halves[Math.floor(halves.length / 2)], groupIds: all.map(b => b.group), report }, null, 1) + '\n');
+  console.log('GAS_ALL_DOTS ' + JSON.stringify({ lit: regions.length, ownersWithOwnBillboard: owned.size, boards: all.length, dust: patches.length, atlasBytes: atlasBytes.length, largestHalfKpc: halves[0], medianHalfKpc: halves[Math.floor(halves.length / 2)], dots: dots.length }));
   return { groups, all, axes, frame, grade };
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) await buildAll();

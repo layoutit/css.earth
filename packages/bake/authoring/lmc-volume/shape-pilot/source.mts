@@ -26,7 +26,7 @@ export function shapeBounds(objects: readonly VolumeObject[]): RegionBox {
   return { min, max };
 }
 
-export function partitionEmitters(scene: CatalogueScene, shapes: readonly Shape[]): CatalogueScene {
+export function partitionEmitters(scene: CatalogueScene, shapes: readonly Pick<Shape, 'emitters'>[]): CatalogueScene {
   const ids = shapes.flatMap(s => s.emitters.map(e => e.object.id));
   need(new Set(ids).size === ids.length, 'An emitter must have exactly one owner');
   const chosen = new Set(ids), present = new Set(scene.objects.map(o => o.id));

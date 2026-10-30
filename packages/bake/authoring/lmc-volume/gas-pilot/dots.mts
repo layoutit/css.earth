@@ -26,7 +26,7 @@ const DOTS_PER_BOARD = 40, DOT_SPREAD = 1.5, ITERATIONS = 30;
 /** The smallest dot radius, a share of its region's width: a clump smaller than this reads as a spark, not as gas. */
 const SOFTEST = 1 / 45;
 /** The Homunculus dot profile. */
-const dotShape = (r: number) => r >= 1 ? 0 : Math.exp(-r * r / (2 * .397 * .397)) * Math.min(1, (1 - r) / .15);
+export const dotShape = (r: number) => r >= 1 ? 0 : Math.exp(-r * r / (2 * .397 * .397)) * Math.min(1, (1 - r) / .15);
 const srgb = (x: number) => { const v = Math.min(1, Math.max(0, x)); return v <= .0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - .055; };
 const linear = (v: number) => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4;
 const luma = (r: number, g: number, b: number) => .2126 * r + .7152 * g + .0722 * b;
@@ -68,7 +68,7 @@ export function clusterDots(dots: readonly Dot[], wanted: number, random: () => 
 }
 
 export interface Board { center: V3; half: number; dots: Dot[]; }
-export const boardOf = (list: Dot[]): Board => { const center = [0, 1, 2].map(k => list.reduce((a, d) => a + d.at[k]!, 0) / list.length) as V3; return { center, dots: list, half: 1.02 * Math.max(...list.map(d => Math.hypot(d.at[0] - center[0], d.at[1] - center[1], d.at[2] - center[2]) + d.radius)) }; };
+export const boardOf = (list: Dot[]): Board => { const center = [0, 1, 2].map(k => list.reduce((a, d) => a + d.at[k]!, 0) / list.length) as V3; return { center, dots: list, half: 1.02 * list.reduce((most, d) => Math.max(most, Math.hypot(d.at[0] - center[0], d.at[1] - center[1], d.at[2] - center[2]) + d.radius), 0) }; };
 
 /** A dot's surface brightness over the texels it reaches. */
 function deposit(light: Float64Array, side: number, d: Dot, u: number, v: number, r: number, area: number) {
@@ -78,8 +78,8 @@ function deposit(light: Float64Array, side: number, d: Dot, u: number, v: number
 }
 /** The whole region's light as the camera's axes see it. A cell takes its share of this one toned picture, so billboards add up to the model's brightness instead of each reaching its own plateau. */
 export interface RegionLight { light: Float64Array; side: number; texel: number; center: V3; }
-export function regionLight(dots: readonly Dot[], center: V3, width: number, c: Pick<PilotCamera, 'right' | 'up'>): RegionLight {
-  const side = 512, texel = width / side, light = new Float64Array(side * side * 3);
+export function regionLight(dots: readonly Dot[], center: V3, width: number, c: Pick<PilotCamera, 'right' | 'up'>, side = 512): RegionLight {
+  const texel = width / side, light = new Float64Array(side * side * 3);
   for (const d of dots) { const off = add(d.at, mul(center, -1)); deposit(light, side, d, (dot3(off, c.right) + width / 2) / texel, (width / 2 - dot3(off, c.up)) / texel, Math.max(d.radius / texel, .75), texel * texel); }
   return { light, side, texel, center };
 }

@@ -118,7 +118,10 @@ export function createCloudPoints({ host, cloud, resolveResource }: { host: HTML
         const depth = -(r[2] * x + r[5] * y + r[8] * z); board.depth = depth;
         if (depth <= 0) { board.style.opacity('0'); continue; }
         const sx = focal * (r[0] * x + r[3] * y + r[6] * z) / depth + ox + w, sy = focal * (r[1] * x + r[4] * y + r[7] * z) / depth + oy + h;
-        board.style.transform(`translate3d(${(sx - cell / 2).toFixed(1)}px,${(sy - cell / 2).toFixed(1)}px,0) scale(${(cloud.diameters[i]! * focal / depth / cell).toFixed(4)})${roll}`);
+        const size = cloud.diameters[i]! * focal / depth / cell, planar = cloud.planarCells && i >= cloud.planarCells.from ? cloud.planarCells : null;
+        // A flat cell's edges as this camera sees them: exact for a patch in the plane, up to perspective across the patch.
+        const shape = planar ? `matrix(${[r[0] * planar.right[0] + r[3] * planar.right[1] + r[6] * planar.right[2], r[1] * planar.right[0] + r[4] * planar.right[1] + r[7] * planar.right[2], -(r[0] * planar.up[0] + r[3] * planar.up[1] + r[6] * planar.up[2]), -(r[1] * planar.up[0] + r[4] * planar.up[1] + r[7] * planar.up[2])].map(v => (v * size).toFixed(4)).join()},0,0)` : `scale(${size.toFixed(4)})${roll}`;
+        board.style.transform(`translate3d(${(sx - cell / 2).toFixed(1)}px,${(sy - cell / 2).toFixed(1)}px,0) ${shape}`);
         board.style.opacity((1 - (1 - OCCLUDED_FLOOR) * depthThrough(px, py, pz, x, y, z)).toFixed(3));
       }
     },

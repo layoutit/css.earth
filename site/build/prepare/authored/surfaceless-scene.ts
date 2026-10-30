@@ -12,7 +12,7 @@ import { prepareSolarSystemScene } from '@cssearth/bake/objects/scene';
 
 type SolarGeometry = Parameters<typeof prepareSolarSystemScene>[0];
 export interface SurfacelessSource { readonly bodyId: string; readonly bodyRadiusUnits: number; readonly bodyRadiusKilometers: number;
-  readonly defaultZoom?: number; readonly geometryScale?: number; readonly maximumZoom?: number }
+  readonly defaultZoom?: number; readonly geometryScale?: number; readonly maximumZoom?: number; readonly openingDirection?: readonly [number, number, number] }
 
 export async function prepareSurfacelessScene({ source, controls, solarGeometry }: { source: SurfacelessSource; controls: { datasets: { controls: readonly { id: string }[] } | null; settings: unknown }; solarGeometry: SolarGeometry }) {
   const id = source.bodyId;
