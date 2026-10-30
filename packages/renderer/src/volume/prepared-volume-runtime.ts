@@ -232,7 +232,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       }
     }
     const localCamera = presentPhysicalPoseInVolume(world.pose, payload.frame);
-    const strengths = axisWeights(localCamera, payload.stacks, payload.frame.boundsUnits);
+    const strengths = axisWeights(localCamera, payload.stacks, payload.frame.boundsUnits, payload.thinHandoverCosines);
     for (const [axis, pending] of pendingTextures.entries()) {
       if (!options.residentStacks && strengths[axis]!.weight <= 0) continue;
       for (const [leaf, url] of pending) {
@@ -390,7 +390,7 @@ function cameraView(camera: VolumeLocalCamera): readonly number[] {
 /** Texture demand uses the same axis weights and prepared frustum bounds as publication. */
 export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publication: VolumeCameraPublication): readonly string[] {
   if (payload.components) return [...new Set(preparedVolumeParts(payload).flatMap(part => preparedVolumeTexturePaths(part, publication)))];
-  const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
+  const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits, payload.thinHandoverCosines);
   const transform = preparedVolumeCameraTransform(publication, payload.frame, 50);
   const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, publication.viewport);
   const paths = new Set<string>();
@@ -404,7 +404,7 @@ export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publicati
 }
 
 export function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks'],
-  bounds: PreparedCssVolume['frame']['boundsUnits']): readonly { weight: number; opticalGain: number }[] {
+  bounds: PreparedCssVolume['frame']['boundsUnits'], thinHandover?: PreparedCssVolume['thinHandoverCosines']): readonly { weight: number; opticalGain: number }[] {
   const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
   const back: VolumeVector = [matrix[2]!, matrix[5]!, matrix[8]!];
   const length = Math.hypot(...back);
@@ -432,7 +432,8 @@ export function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume
     const approach = Math.max(0, Math.min(1, 1 - distance / Math.max(...extents)));
     const proximity = approach * approach * (3 - 2 * approach);
     const edge = Math.max(.02, aspect) + .4 * proximity;
-    const t = Math.max(0, Math.min(1, (cosines[thin]! - edge * .5) / (edge * .5)));
+    const t = thinHandover ? Math.max(0, Math.min(1, (cosines[thin]! - thinHandover[0]) / (thinHandover[1] - thinHandover[0])))
+      : Math.max(0, Math.min(1, (cosines[thin]! - edge * .5) / (edge * .5)));
     const face = t * t * (3 - 2 * t);
     weights = AXES.map((_, index) => index === thin ? face : (1 - face) * sideWeights[index]! / sideTotal);
   } else {

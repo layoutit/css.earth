@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {axisWeights,completedStackOpacities,STACK_OPACITY_CEILING} from './prepared-volume-runtime.ts';
+import {axisWeights,completedStackOpacities,transparentStackOpacities,STACK_OPACITY_CEILING} from './prepared-volume-runtime.ts';
 import type {PreparedCssVolume} from '@cssearth/objects';
 const leaf:PreparedCssVolume['stacks'][number]['leaves'][number]={id:'sample',texturePath:'sample.png',widthPx:1,heightPx:1,centerUnits:[0,0,0],style:{width:'1px',height:'1px',transform:'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',backgroundSize:'1px 1px',backgroundPosition:'0px 0px'}};
 const stacks:PreparedCssVolume['stacks']=['x','y','z'].map(axis=>({axis:axis as 'x'|'y'|'z',leaves:[leaf]}));
@@ -47,4 +47,19 @@ test('distance-driven three-stack handover preserves completed-image light at al
   const o=completedStackOpacities(w.map(v=>v.weight));let light=0;for(const alpha of o)light=.37*alpha+light*(1-alpha);
   assert.ok(Number.isFinite(light)&&Math.abs(light-.37*STACK_OPACITY_CEILING)<1e-12);
  }
+});
+
+test('an opt-in thin handover is wide and continuous, and leaves every other volume alone',()=>{
+ const at=(elevation:number,handover?:readonly [number,number])=>{const t=(Math.PI/2-elevation*Math.PI/180)/2,z=15*Math.PI/360;return axisWeights({positionUnits:[0,-90,0],orientationXyzw:[Math.cos(z)*Math.sin(t),Math.sin(z)*Math.sin(t),Math.sin(z)*Math.cos(t),Math.cos(z)*Math.cos(t)]},stacks,{min:[-10,-10,-2.1],max:[10,10,2.1]},handover).map(w=>w.weight);};
+ const wide=[.15,.65] as const,z=(cos:number,h?:readonly [number,number])=>at(Math.asin(cos)*180/Math.PI,h)[2]!;
+ assert.equal(z(.6614,wide),1,'A stays on the thin stack alone');
+ assert.ok(z(.4551,wide)>.5&&z(.4551,wide)<.8,'B shows both');
+ assert.ok(z(.2492,wide)<.2,'C is mostly side stacks');
+ assert.equal(z(.1,wide),0);
+ for(const cos of [.6614,.4551,.2492])assert.equal(z(cos),1,'without the option the accepted rule holds');
+ // Under the transparent rule a side stack's own opacity is its share: it rises from zero with the blend, instead of reaching one beneath the thin stack.
+ let side=0;for(let e=52;e>=0;e-=.25){const o=transparentStackOpacities(at(e,wide));const next=o[0]!+o[1]!;assert.ok(next>=side-1e-9&&next-side<.02,'side fades in at '+e);side=next;}
+ assert.ok(side>.99);
+ let prior=at(0,wide);
+ for(let e=.05;e<=50;e+=.05){const next=at(e,wide);assert.ok(Math.abs(next.reduce((n,v)=>n+v,0)-1)<1e-12,'shares stay whole');assert.ok(next.every((v,i)=>Math.abs(v-prior[i]!)<.004),'no jump at '+e);prior=next;}
 });

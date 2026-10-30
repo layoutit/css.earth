@@ -27,11 +27,13 @@ export interface PreparedCloudPoints {
   /** The body that hides what is behind it: none, or its ellipsoids. */
   readonly occluder: readonly CloudPointEllipsoid[];
   /** Opt-in: a thin disc the billboards lie in. Seen along it, one beyond its centre is drawn behind the volume at rest. */
+  /** Opt-in: the frame directions of a cell's right and up, so a billboard can keep its drawing's roll on screen. */
+  readonly cellAxesUnits?: { readonly right: readonly [number, number, number]; readonly up: readonly [number, number, number] };
   readonly behindPlane?: { readonly pointUnits: readonly [number, number, number]; readonly normalUnits: readonly [number, number, number] };
 }
 
 export function encodeCloudPoints(cloud: PreparedCloudPoints): PreparedBank {
-  return { schema: PREPARED_CLOUD_POINTS_SCHEMA, fields: { id: cloud.id, frame: cloud.frame, count: cloud.count, atlas: cloud.atlas, cellTexels: cloud.cellTexels, occluder: cloud.occluder, ...(cloud.behindPlane ? { behindPlane: cloud.behindPlane } : {}) },
+  return { schema: PREPARED_CLOUD_POINTS_SCHEMA, fields: { id: cloud.id, frame: cloud.frame, count: cloud.count, atlas: cloud.atlas, cellTexels: cloud.cellTexels, occluder: cloud.occluder, ...(cloud.behindPlane ? { behindPlane: cloud.behindPlane } : {}), ...(cloud.cellAxesUnits ? { cellAxesUnits: cloud.cellAxesUnits } : {}) },
     columns: { position: cloud.positions, diameter: cloud.diameters, cell: cloud.cells } };
 }
 
@@ -40,7 +42,7 @@ const vector = (value: unknown): value is [number, number, number] => Array.isAr
 /** A fetched bank, checked: its frame, a finite place and a positive size for every billboard, and well-formed ellipsoids. */
 export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): PreparedCloudPoints {
   if (bank.schema !== PREPARED_CLOUD_POINTS_SCHEMA) throw new TypeError(`${at}: expected ${PREPARED_CLOUD_POINTS_SCHEMA}, got ${bank.schema}.`);
-  const { id, frame, count, atlas, cellTexels, occluder, behindPlane } = bank.fields as { id?: unknown; frame?: unknown; count?: unknown; atlas?: unknown; cellTexels?: unknown; occluder?: unknown; behindPlane?: { pointUnits?: unknown; normalUnits?: unknown } };
+  const { id, frame, count, atlas, cellTexels, occluder, behindPlane, cellAxesUnits } = bank.fields as { cellAxesUnits?: { right?: unknown; up?: unknown }; id?: unknown; frame?: unknown; count?: unknown; atlas?: unknown; cellTexels?: unknown; occluder?: unknown; behindPlane?: { pointUnits?: unknown; normalUnits?: unknown } };
   if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${at}: its id is a bank id, got ${JSON.stringify(id ?? null)}.`);
   if (!Number.isSafeInteger(count) || (count as number) < 0) throw new TypeError(`${at}: count is a count, got ${JSON.stringify(count ?? null)}.`);
   if (typeof atlas !== 'string' || !/^[a-z0-9][a-z0-9.-]*$/u.test(atlas)) throw new TypeError(`${at}: atlas is a prepared file name, got ${JSON.stringify(atlas ?? null)}.`);
@@ -53,5 +55,6 @@ export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): Prepar
     Array.isArray((e as CloudPointEllipsoid).axesUnits) && (e as CloudPointEllipsoid).axesUnits.length === 3 && (e as CloudPointEllipsoid).axesUnits.every(vector)))
     throw new TypeError(`${at}: occluder is a list of ellipsoids, each a centre and three axes.`);
   if (behindPlane !== undefined && !(vector(behindPlane?.pointUnits) && vector(behindPlane?.normalUnits))) throw new TypeError(`${at}: behindPlane is a point and a normal.`);
-  return { ...(behindPlane ? { behindPlane: behindPlane as PreparedCloudPoints['behindPlane'] } : {}), id, frame: parseDensityVolumeFrame(frame), count: n, positions, diameters, cells, atlas, cellTexels: cellTexels as number, occluder: occluder as CloudPointEllipsoid[] };
+  if (cellAxesUnits !== undefined && !(vector(cellAxesUnits?.right) && vector(cellAxesUnits?.up))) throw new TypeError(`${at}: cellAxesUnits is a right and an up.`);
+  return { ...(cellAxesUnits ? { cellAxesUnits: cellAxesUnits as PreparedCloudPoints['cellAxesUnits'] } : {}), ...(behindPlane ? { behindPlane: behindPlane as PreparedCloudPoints['behindPlane'] } : {}), id, frame: parseDensityVolumeFrame(frame), count: n, positions, diameters, cells, atlas, cellTexels: cellTexels as number, occluder: occluder as CloudPointEllipsoid[] };
 }

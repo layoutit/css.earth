@@ -31,19 +31,18 @@ const srgb = (x: number) => { const v = Math.min(1, Math.max(0, x)); return v <=
 const linear = (v: number) => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4;
 const luma = (r: number, g: number, b: number) => .2126 * r + .7152 * g + .0722 * b;
 
-function randomStream(start: number) { let seed = start; return () => { seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
-interface Dot { at: V3; radius: number; light: V3; }
+export function randomStream(start: number) { let seed = start; return () => { seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+export interface Dot { at: V3; radius: number; light: V3; }
 
-/** A point of an emitter's unit-integral density, by rejection in its own ellipsoid. */
+/** A point of an emitter's unit-integral density, by rejection in its own ellipsoid. A half shell's peak is on its kept side. */
 function samplePoint(o: VolumeObject, random: () => number): V3 {
-  const peak = density(o, o.center) || density(o, add(o.center, mul(o.basis[0], o.axes[0] * (o.inner + (1 - o.inner) / 2))));
-  for (let tries = 0; tries < 400; tries++) {
-    const u = [random() * 2 - 1, random() * 2 - 1, random() * 2 - 1]; if (u[0]! ** 2 + u[1]! ** 2 + u[2]! ** 2 > 1) continue;
-    let p: V3 = o.center; for (let k = 0; k < 3; k++) p = add(p, mul(o.basis[k]!, u[k]! * o.axes[k]!));
-    if (random() * peak <= density(o, p)) return p;
-  }
-  return o.center;
+  const point = () => { let u = [0, 0, 0]; do u = [random() * 2 - 1, random() * 2 - 1, random() * 2 - 1]; while (u[0]! ** 2 + u[1]! ** 2 + u[2]! ** 2 > 1); let p: V3 = o.center; for (let k = 0; k < 3; k++) p = add(p, mul(o.basis[k]!, u[k]! * o.axes[k]!)); return p; };
+  let peak = density(o, o.center); for (let i = 0; i < 64; i++) peak = Math.max(peak, density(o, point()));
+  need(peak > 0, 'An emitter with no density: ' + o.id);
+  for (let tries = 0; tries < 4000; tries++) { const p = point(), d = density(o, p); if (d > 0 && random() * peak <= d) return p; }
+  throw Error('No point found inside ' + o.id);
 }
+export { samplePoint };
 
 export function regionDots(region: GasRegion, grade: Grade, count: number): Dot[] {
   const random = randomStream(region.id.length * 7919 + 13), floor = SOFTEST * Math.hypot(...region.box.max.map((v, a) => v - region.box.min[a]!)), total = region.emitters.reduce((n, e) => n + e.object.weight * e.amplitude, 0), dots: Dot[] = [];
@@ -68,8 +67,8 @@ export function clusterDots(dots: readonly Dot[], wanted: number, random: () => 
   return centres.map((_, m) => dots.filter((__, j) => label[j] === m)).filter(list => list.length);
 }
 
-interface Board { center: V3; half: number; dots: Dot[]; }
-const boardOf = (list: Dot[]): Board => { const center = [0, 1, 2].map(k => list.reduce((a, d) => a + d.at[k]!, 0) / list.length) as V3; return { center, dots: list, half: 1.02 * Math.max(...list.map(d => Math.hypot(d.at[0] - center[0], d.at[1] - center[1], d.at[2] - center[2]) + d.radius)) }; };
+export interface Board { center: V3; half: number; dots: Dot[]; }
+export const boardOf = (list: Dot[]): Board => { const center = [0, 1, 2].map(k => list.reduce((a, d) => a + d.at[k]!, 0) / list.length) as V3; return { center, dots: list, half: 1.02 * Math.max(...list.map(d => Math.hypot(d.at[0] - center[0], d.at[1] - center[1], d.at[2] - center[2]) + d.radius)) }; };
 
 /** A dot's surface brightness over the texels it reaches. */
 function deposit(light: Float64Array, side: number, d: Dot, u: number, v: number, r: number, area: number) {
@@ -78,14 +77,14 @@ function deposit(light: Float64Array, side: number, d: Dot, u: number, v: number
   if (sum > 0) for (const [o, w] of weights) for (let k = 0; k < 3; k++) light[o + k]! += d.light[k]! * w / sum / area;
 }
 /** The whole region's light as the camera's axes see it. A cell takes its share of this one toned picture, so billboards add up to the model's brightness instead of each reaching its own plateau. */
-interface RegionLight { light: Float64Array; side: number; texel: number; center: V3; }
-function regionLight(dots: readonly Dot[], center: V3, width: number, c: Pick<PilotCamera, 'right' | 'up'>): RegionLight {
+export interface RegionLight { light: Float64Array; side: number; texel: number; center: V3; }
+export function regionLight(dots: readonly Dot[], center: V3, width: number, c: Pick<PilotCamera, 'right' | 'up'>): RegionLight {
   const side = 512, texel = width / side, light = new Float64Array(side * side * 3);
   for (const d of dots) { const off = add(d.at, mul(center, -1)); deposit(light, side, d, (dot3(off, c.right) + width / 2) / texel, (width / 2 - dot3(off, c.up)) / texel, Math.max(d.radius / texel, .75), texel * texel); }
   return { light, side, texel, center };
 }
 /** A billboard's cell: its share of the region's toned emission, as straight RGBA. */
-function drawCell(board: Board, c: Pick<PilotCamera, 'right' | 'up'>, grade: Grade, gain: number, whole: RegionLight): Float64Array {
+export function drawCell(board: Board, c: Pick<PilotCamera, 'right' | 'up'>, grade: Grade, gain: number, whole: RegionLight): Float64Array {
   const light = new Float64Array(CELL * CELL * 3), texel = 2 * board.half / CELL, area = texel * texel, origin = add(board.center, mul(whole.center, -1)), ox = dot3(origin, c.right), oy = dot3(origin, c.up);
   for (const d of board.dots) { const off = add(d.at, mul(board.center, -1)); deposit(light, CELL, d, (dot3(off, c.right) + board.half) / texel, (board.half - dot3(off, c.up)) / texel, Math.max(d.radius / texel, .75), area); }
   const rgba = new Float64Array(CELL * CELL * 4), width = whole.side * whole.texel;

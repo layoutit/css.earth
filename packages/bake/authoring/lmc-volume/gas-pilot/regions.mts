@@ -30,3 +30,11 @@ export async function pilotSource() {
   });
   return { source, regions, background: partitionEmitters(scene, regions) };
 }
+
+/** Every catalogue gas owner, and the scene without any of them: slabs then hold only smooth light, stars and dust. */
+export async function allGasSource() {
+  const source = await approvedScene(), { scene } = source, byOwner = new Map<string, Emitter[]>(), index = new Map(scene.owners.map((o, i) => [o.id, i] as const));
+  for (const object of scene.objects) { if (object.component !== 4) continue; const i = index.get(object.owner); need(i !== undefined && scene.owners[i]!.component === 4, 'A gas object without a gas owner: ' + object.id); const list = byOwner.get(object.owner) ?? []; list.push({ object, amplitude: source.amplitudes[i!]! * (scene.ionizedGain ?? 1) }); byOwner.set(object.owner, list); }
+  const regions: GasRegion[] = [...byOwner].map(([id, emitters]) => ({ id: id.toLowerCase().replace(/[^a-z0-9]+/gu, '-'), label: id, box: shapeBounds(emitters.map(e => e.object)), emitters }));
+  return { source, regions, background: { ...scene, objects: scene.objects.filter(o => o.component !== 4) } };
+}

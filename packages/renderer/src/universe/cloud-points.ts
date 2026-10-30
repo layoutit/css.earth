@@ -111,12 +111,14 @@ export function createCloudPoints({ host, cloud, resolveResource }: { host: HTML
       const local = presentPhysicalPoseInVolume(publication.world.pose, cloud.frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
       eye = local.positionUnits as readonly [number, number, number]; const [px, py, pz] = local.positionUnits, focal = publication.viewport.focalPixels, [ox, oy] = publication.viewport.principalOffsetPixels;
       const w = (publication.viewport.widthPixels ?? host.clientWidth) / 2, h = (publication.viewport.heightPixels ?? host.clientHeight) / 2;
+      // A cell keeps the roll it was drawn with: its right axis as this camera sees it.
+      const a = cloud.cellAxesUnits?.right, roll = a ? ` rotate(${(Math.atan2(r[1] * a[0] + r[4] * a[1] + r[7] * a[2], r[0] * a[0] + r[3] * a[1] + r[6] * a[2]) * 180 / Math.PI).toFixed(2)}deg)` : '';
       for (const board of boards) {
         const i = board.index, x = cloud.positions[i * 3]! - px, y = cloud.positions[i * 3 + 1]! - py, z = cloud.positions[i * 3 + 2]! - pz;
         const depth = -(r[2] * x + r[5] * y + r[8] * z); board.depth = depth;
         if (depth <= 0) { board.style.opacity('0'); continue; }
         const sx = focal * (r[0] * x + r[3] * y + r[6] * z) / depth + ox + w, sy = focal * (r[1] * x + r[4] * y + r[7] * z) / depth + oy + h;
-        board.style.transform(`translate3d(${(sx - cell / 2).toFixed(1)}px,${(sy - cell / 2).toFixed(1)}px,0) scale(${(cloud.diameters[i]! * focal / depth / cell).toFixed(4)})`);
+        board.style.transform(`translate3d(${(sx - cell / 2).toFixed(1)}px,${(sy - cell / 2).toFixed(1)}px,0) scale(${(cloud.diameters[i]! * focal / depth / cell).toFixed(4)})${roll}`);
         board.style.opacity((1 - (1 - OCCLUDED_FLOOR) * depthThrough(px, py, pz, x, y, z)).toFixed(3));
       }
     },
