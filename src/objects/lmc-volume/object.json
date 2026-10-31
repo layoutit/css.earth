@@ -34,7 +34,8 @@
     "preparation": {
       "source": "source/delivery.json"
     },
-    "host": "lmc"
+    "host": "lmc",
+    "opensOnBody": true
   },
   "prepared": {
     "format": "cssearth-volume-dataset-index@1",

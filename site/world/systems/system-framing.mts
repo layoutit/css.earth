@@ -89,11 +89,11 @@ export function loadSystemView(id: string, read?: (id: string) => Promise<unknow
 }
 /** Volumes a body shows through one of its datasets, by volume id, each with the object it is the extent of when it
  * names one (site/build/prepare/catalog/prepare-catalog.mts). */
-export const DATASET_VOLUMES: ReadonlyMap<string, { readonly frame: DensityVolumeFrame; readonly host?: string }> = new Map(
+export const DATASET_VOLUMES: ReadonlyMap<string, { readonly frame: DensityVolumeFrame; readonly host?: string; /** Opt-in: a page opens on its body's own framing, when the prepared bounds reach well past the visible object. */ readonly opensOnBody?: true }> = new Map(
   Object.entries(datasetVolumes).map(([id, bank]) => {
-    const host: unknown = 'host' in bank ? bank.host : undefined;
+    const host: unknown = 'host' in bank ? bank.host : undefined, opensOnBody = 'opensOnBody' in bank && bank.opensOnBody === true;
     if (host !== undefined && typeof host !== 'string') throw new TypeError(`site/prepared/prepared-dataset-volumes.json: ${id}.host must be an object id.`);
-    return [id, { frame: parseDensityVolumeFrame(bank.frame), ...(host === undefined ? {} : { host }) }];
+    return [id, { frame: parseDensityVolumeFrame(bank.frame), ...(host === undefined ? {} : { host }), ...(opensOnBody ? { opensOnBody: true as const } : {}) }];
   }));
 
 /** The box each overview whose `zoom.frame` is {fit: drawn-galaxies} fits in view, by object id: the galaxies inside it,

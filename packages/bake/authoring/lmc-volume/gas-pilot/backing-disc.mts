@@ -16,7 +16,7 @@ export function discBacking(record: BackingRecord): BackingRecord {
   void c1; void c2; void earth;
   const right = mul(S(pz.right), k), down = mul(S(pz.down), k), normal: V3 = [0, 0, -1], t = mul(add(right, down), -side / 2), next = [right[0], right[1], right[2], 0, down[0], down[1], down[2], 0, normal[0], normal[1], normal[2], 0, t[0], t[1], t[2], 1];
   void m;
-  return { ...record, leaf: { ...record.leaf, texturePath: pz.texturePath.replace(/^.*l36-far/u, 'l36-far'), style: { ...record.leaf.style, transform: 'matrix3d(' + next.map(v => +v.toFixed(6)).join(',') + ')' } }, datasets: Object.fromEntries(Object.keys(record.datasets).map(key => [key, 'l36-far/pz.png'])),
+  return { ...record, discNormalUnits: [0, 0, 1], leaf: { ...record.leaf, texturePath: pz.texturePath.replace(/^.*l36-far/u, 'l36-far'), style: { ...record.leaf.style, transform: 'matrix3d(' + next.map(v => +v.toFixed(6)).join(',') + ')' } }, datasets: Object.fromEntries(Object.keys(record.datasets).map(key => [key, 'l36-far/pz.png'])),
     meaning: 'The approved l36 face-on model picture, laid in the disc plane through its centre, so it foreshortens with the disc from every direction. Not a second light source: it gives way to the volume.' };
 }
 /** Screen error of disc-rim points between the old Sun-facing plane and their true place, at a far camera. */
