@@ -25,14 +25,14 @@
       "id": "horalek-widefield",
       "label": "Horálek · optical",
       "title": "The LMC in visible light",
-      "description": "Stars, gas and dust are placed from catalogues on the LMC’s measured warped disc, with colors graded to Petr Horálek’s optical photograph. The photograph constrains one viewing direction; the depths of individual objects are adopted, not measured.",
-      "summary": "Stars, gas and dust placed from catalogues on the measured disc, with colors graded to Petr Horálek’s photograph.",
+      "description": "A photograph by Petr Horálek, made with a wide-aperture telephoto lens on a commercial camera, about four hours over three nights on Cerro Pachón, Chile. Its colors are a display choice, not calibrated measurements. Stars, gas and dust are placed from catalogues on the LMC’s measured warped disc, and the model is calibrated to this photograph. The photograph constrains one viewing direction; the depths of individual objects are adopted, not measured.",
+      "summary": "A photograph, not telescope data; its colors are a display choice, not measurements. The model is calibrated to it.",
       "detail": "354 gas regions",
       "facts": [
         {
           "id": "bands",
-          "label": "Bands",
-          "value": "Visible light"
+          "label": "Light",
+          "value": "Visible light; colors are a display choice"
         },
         {
           "id": "depth",

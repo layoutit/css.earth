@@ -55,7 +55,7 @@ The later [independent-component integration](source/preparation/l36/components.
 
 ## Datasets
 
-Three datasets show one model. Horálek · optical is the calibration image. DECam · optical ([noirlab2030a](https://noirlab.edu/public/images/noirlab2030a/), CTIO/NOIRLab/NSF/AURA/SMASH, CC BY 4.0) and VISTA · near infrared ([eso1914a](https://www.eso.org/public/images/eso1914a/), ESO/VMC Survey) are graded to their images with one gain per component and one global tint; they are not reconstructed from them. 68 of the 354 lit gas regions lie outside the DECam frame and 3 outside the VISTA frame; they take the same global colors. Far pictures carry only a global color gain. The three-dataset bank is local and unpublished.
+Three datasets show one model. Horálek · optical is the calibration image: a [photograph by Petr Horálek](https://noirlab.edu/public/images/iotw2547a/), made with a wide-aperture telephoto lens on a commercial camera, about four hours over three nights on Cerro Pachón, Chile. Its colors are a display choice, not calibrated measurements, and no camera or lens model or filters are published. DECam · optical ([noirlab2030a](https://noirlab.edu/public/images/noirlab2030a/), CTIO/NOIRLab/NSF/AURA/SMASH, CC BY 4.0) and VISTA · near infrared ([eso1914a](https://www.eso.org/public/images/eso1914a/), ESO/VMC Survey) are graded to their images with one gain per component and one global tint; they are not reconstructed from them. 68 of the 354 lit gas regions lie outside the DECam frame and 3 outside the VISTA frame; they take the same global colors. Far pictures carry only a global color gain. The three-dataset bank is local and unpublished.
 
 ## Known problems
 
