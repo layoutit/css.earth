@@ -11,7 +11,8 @@ import { dot as dot3, normalize, type V3 } from '../geometry.mts';
 import { CELL, dotShape, boardOf, clusterDots, drawCell, randomStream, regionDots, regionLight, type Board, type Dot, type RegionLight } from './dots.mts';
 import { L37_DIR, allGasSource, type GasRegion } from './regions.mts';
 
-export const ALL_DIR = L37_DIR + 'dots-all/';
+const ARM = process.env.GRADE_ARM;
+export const ALL_DIR = L37_DIR + (ARM ? 'dots-' + ARM + '/' : 'dots-all/');
 /** Billboards in all: the 61 other retained elements and these stay under 500. */
 export const BOARDS = 439, GAS_BOARDS = 300, DUST_BOARDS = BOARDS - GAS_BOARDS, START_GAIN = .9;
 
@@ -67,9 +68,9 @@ export function earthAxes(frame: DensityVolumeFrame) {
 }
 
 export async function buildAll() {
-  const { source, regions: every } = await allGasSource(), regions = every.filter(r => lightOf(r) > 0), grade = source.grade; await mkdir(ALL_DIR, { recursive: true });
+  const { source, regions: every } = await allGasSource(), regions = every.filter(r => lightOf(r) > 0), grade = ARM ? (JSON.parse(await readFile(L37_DIR + 'grades/' + ARM + '.json', 'utf8')) as { grade: typeof source.grade }).grade : source.grade; await mkdir(ALL_DIR, { recursive: true });
   const installed = JSON.parse(await readFile('src/objects/lmc-volume/prepared/horalek-widefield/volume.json', 'utf8')) as { frame?: unknown; data?: { frame?: unknown } }, frame = parseDensityVolumeFrame(installed.data?.frame ?? installed.frame);
-  const adjust = await readFile(ALL_DIR + 'adjust.json', 'utf8').then(t => JSON.parse(t) as Record<string, number>, () => ({} as Record<string, number>));
+  const adjust = await readFile(L37_DIR + 'dots-all/adjust.json', 'utf8').then(t => JSON.parse(t) as Record<string, number>, () => ({} as Record<string, number>));
   const axes = earthAxes(frame), total = regions.reduce((n, r) => n + lightOf(r), 0);
   const dots: Cluster['dots'] = regions.flatMap(r => regionDots(r, grade, Math.max(1, Math.round(BOARDS * DOTS_PER_BOARD * lightOf(r) / total))).map(d => ({ ...d, owner: r.id })));
   const clusters = splitClusters(dots, GAS_BOARDS), reach = 2 * dots.reduce((most, d) => Math.max(most, Math.abs(dot3(d.at, axes.right)), Math.abs(dot3(d.at, axes.up))), 0) + 1, whole = regionLight(dots, [0, 0, 0], reach, axes, 3072);

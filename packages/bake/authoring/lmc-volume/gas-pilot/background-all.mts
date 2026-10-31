@@ -13,10 +13,10 @@ import { L37_DIR, allGasSource } from './regions.mts';
 
 export const ALL_BACKGROUND_DIR = L37_DIR + 'background-all/', SMOOTH_BACKGROUND_DIR = L37_DIR + 'background-smooth/';
 /** Without its discrete dust clouds a slab holds only the smooth column; the clouds move to dark dots. */
-const SMOOTH = process.argv.includes('--smooth'), OUT_DIR = SMOOTH ? SMOOTH_BACKGROUND_DIR : ALL_BACKGROUND_DIR;
+const ARM = process.env.GRADE_ARM, SMOOTH = process.argv.includes('--smooth') || Boolean(ARM), OUT_DIR = ARM ? L37_DIR + 'background-' + ARM + '/' : SMOOTH ? SMOOTH_BACKGROUND_DIR : ALL_BACKGROUND_DIR;
 const STRIP = 256;
 async function plane(i: number) {
-  const { source, regions, background: gasFree } = await allGasSource(), background = SMOOTH ? { ...gasFree, dustLayer: { ...gasFree.dustLayer!, clouds: [] } } : gasFree, spec = nativeBankSpec(2048); await refineFields(source.scene);
+  const { source, regions, background: gasFree } = await allGasSource(), background = SMOOTH ? { ...gasFree, dustLayer: { ...gasFree.dustLayer!, clouds: [] } } : gasFree, spec = nativeBankSpec(2048); await refineFields(source.scene); const grade = ARM ? (rec(await json(L37_DIR + 'grades/' + ARM + '.json')).grade as typeof source.grade) : source.grade;
   const layout = fullDescriptors()[i]!, stem = `local-${layout.axis}-${layout.index}`, t = performance.now(), camera = planeCamera(spec, layout), mask = new Uint8Array(layout.width * layout.height);
   if (SMOOTH) mask.fill(1); else for (const r of regions) for (const e of r.emitters) if (intersectsSlab(e.object, layout.domain)) for (const p of projectObject(e.object, camera, 4)) mask[p.pixel] = 1;
   // A clump smaller than a few texels is drawn by a kernel wider than its footprint, so the mask reaches two texels past it.
@@ -26,7 +26,7 @@ async function plane(i: number) {
     const part = new Uint8Array(mask.length); let any = false;
     for (let y = 0; y < layout.height; y++) for (let x = left; x < Math.min(layout.width, left + STRIP); x++) if (mask[y * layout.width + x]) { part[y * layout.width + x] = 1; any = true; }
     if (!any) continue;
-    const fresh = projectLmcSlab({ ...source, scene: background }, layout.domain, camera, true, part);
+    const fresh = projectLmcSlab({ ...source, grade, scene: background }, layout.domain, camera, true, part);
     for (let p = 0; p < part.length; p++) if (part[p]) { rgb[p * 3] = fresh.rgb[p * 3]!; rgb[p * 3 + 1] = fresh.rgb[p * 3 + 1]!; rgb[p * 3 + 2] = fresh.rgb[p * 3 + 2]!; tau[p] = fresh.tau[p]!; }
   }
   await writeFile(OUT_DIR + stem + '-rgb.f64le', Buffer.from(rgb.buffer)); await writeFile(OUT_DIR + stem + '-tau.f64le', Buffer.from(tau.buffer));
