@@ -1,5 +1,6 @@
 import { presentPhysicalPoseInVolume, cssCameraAxesFromOrientation } from '@cssearth/engine';
-import { type DensityVolumeFrame, type VolumeVector } from '@cssearth/objects';
+import { type DensityVolumeFrame, type VolumeVector, type PreparedPointTransmission } from '@cssearth/objects';
+import { pointTransmissionAt, transmissionPaints, transmissionLookup } from './prepared-transmission.js';
 import type { VolumeCameraPublication } from '../../volume/types.js';
 
 import { DOT_SLOTS, SPLIT_POINTS, mountPointPaths, type PointPaintSlots } from './point-paths.js';
@@ -186,6 +187,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // The dots of the last paint of each slot, in the view and drawn: a paint of some slots recounts only those.
     const visibleOf = new Int32Array(DOT_SLOTS), candidatesOf = new Int32Array(DOT_SLOTS);
     const part = { points, cells, drawnCount, keepFraction, hidden, paint, positions, paths, occludedPaths, margins, ranks, slotOf, visibleOf, candidatesOf, cellCount, cellStart, order,
+      transmission: null as PreparedPointTransmission | null, transmissionPaths: [] as Int32Array[],
       boxes: cells?.boxes ?? new Float64Array(6), widestMargin: 0, culled: new Int32Array(cellCount), ready: false,
       /** Resolve up to `limit` more of the part's points, in order; the last slice orders them by cell and readies the part.
        * A whole number of them, and one or more: the pacer's budget is halved after a slow frame, and half a point left
@@ -226,7 +228,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     if (!deferFill) part.resolve(Infinity);
     return part;
   });
-  const residentElements = 1 + [...paints.values()].reduce((sum, paint) => sum + paint.residentElements, 0);
+  let residentElements = 1 + [...paints.values()].reduce((sum, paint) => sum + paint.residentElements, 0);
   // The last full paint: the camera's position and everything else it depended on, how many points each part drew and
   // the nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
@@ -292,6 +294,42 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     latest = publication;
     if(world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Point camera frame mismatch');
     const local = presentPhysicalPoseInVolume(world.pose,frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
+    const wantedField = pointTransmissionAt('layer' in host ? host.layer.root : host);
+    const materialPending = parts.some(part => part.ready && part.transmission !== wantedField) && Boolean(painted) && !exact;
+    // Keep projecting through the resident material while a new palette waits for the settled paint.
+    const field = materialPending ? parts.find(part => part.ready)?.transmission ?? null : wantedField;
+    const changed = !materialPending && parts.some(part => part.ready && part.transmission !== field);
+    if (materialPending) { owed = true;settleAfterPause(); }
+    if (changed) for (const [partIndex, part] of parts.entries()) {
+      if (!part.ready || part.transmission === field) continue;
+      part.transmission = field;part.transmissionPaths = [];
+      if (!field) continue;
+      const { styles, styleOf } = columns[partIndex]!;
+      const byStyle = new Map<number, number[]>();
+      for (let index = 0; index < part.points.length; index++) {
+        const original = part.paths[index]!;if (original < 0) continue;
+        const styleIndex = styleOf ? styleOf[index]! : 0;
+        let variants = byStyle.get(styleIndex);
+        if (!variants) {
+          const style = styles[styleIndex]!;
+          if (!style) continue;
+          variants = transmissionPaints(field, pointPaint(style)).map((paint, level) => {
+            const key = `${paint}|transmission-${styleIndex}-${level}`;
+            part.paint.prepare(key, original);return part.paint.entry(key, style.radiusPx);
+          });
+          byStyle.set(styleIndex, variants);
+        }
+        variants.forEach((path, level) => {
+          part.transmissionPaths[level] ??= new Int32Array(part.points.length);
+          part.transmissionPaths[level]![index] = part.paint.split(path) ? path + part.slotOf[index]! : path;
+        });
+      }
+    }
+    if (changed) {
+      residentElements = 1 + [...paints.values()].reduce((sum, paint) => sum + paint.residentElements, 0);
+      root.setAttribute('data-point-transmission', field ? 'prepared' : 'none');
+    }
+    const extinction = field && parts.some(part => part.transmission === field) ? transmissionLookup(field, world, frame) : null;
     const keeps = parts.map(part => part.keepFraction ? Math.max(0, Math.min(1, part.keepFraction())) : 1);
     const hiddens = parts.map(part => part.hidden ? part.hidden() : null);
     // The camera's turn and lens; the kept shares are part of the paint too (`same` below): a new share repaints at rest.
@@ -314,9 +352,9 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       unchanged = still && same && !turned;
       // A paint without its margin is kept like any other; only the pause's exact paint replaces it. The slots a paint
       // left behind follow through the pacer.
-      if (held && still && same && !turned && !(exact && painted.overscan < OVERSCAN) && units === null) {
+      if (!changed && held && still && same && !turned && !(exact && painted.overscan < OVERSCAN) && units === null) {
         if (behind > 0) { arriving = true; arrivals.request(true); }
-        layer.unwarp(); owed = false; return;
+        layer.unwarp(); owed = materialPending; return;
       }
       // The camera moved (or the paint changed) since the pause's pass began: what it completes is no longer at rest.
       if (units === null && forced === null) resting = false;
@@ -338,8 +376,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // slow zoom the margin was a third of the dots written; without it 690 frames had 19 to 24 over 20 ms at the nearby
     // universe against 57 to 81, and 42 to 47 at the Milky Way against 105 to 121 (interleaved runs, 2026-10-03).
     const overscan = travelling && !coherent ? 0 : OVERSCAN;
-    owed = false; written = 0;
-    if (travelling) settleAfterPause(); else if (settle !== null) { clearTimeout(settle); settle = null; }
+    owed = materialPending; written = 0;
+    if (travelling || materialPending) settleAfterPause(); else if (settle !== null) { clearTimeout(settle); settle = null; }
     let nearestSquared = Infinity;
     const [px, py, pz] = local.positionUnits, focal = viewport.focalPixels, [ox, oy] = viewport.principalOffsetPixels;
     const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
@@ -427,6 +465,10 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           if (inView) candidatesOf[slot]!++;
           if (keep < 1 && ranks[index]! >= keep) continue;
           let target = path;
+          if (extinction && part.transmission === field) {
+            const level = extinction([positions[o]!, positions[o + 1]!, positions[o + 2]!]);
+            target = part.transmissionPaths[level]?.[index] ?? path;
+          }
           if (occluder) {
             const along = onx * x + ony * y + onz * z, t = along === 0 ? -1 : side / along;
             if (t > 0 && t < 1) {

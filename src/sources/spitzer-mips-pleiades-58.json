@@ -1,0 +1,31 @@
+{
+  "id": "spitzer-mips-pleiades-58",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spitzer MIPS Pleiades program 58, AORs 8798976 and 8798720",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/",
+      "label": "Primary data and documentation"
+    }
+  ],
+  "publisher": "NASA/IPAC IRSA",
+  "relations": [],
+  "evidence": [
+    {
+      "url": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/",
+      "checkedOn": "2026-10-25",
+      "locator": "MIPS 24/70 µm PBCD intensity, uncertainty and coverage; 70 µm scan stripes excluded from fine column inference."
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech; Spitzer program 58, PI Rieke.",
+      "scope": "Pleiades dust model",
+      "evidence": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/"
+    }
+  ]
+}

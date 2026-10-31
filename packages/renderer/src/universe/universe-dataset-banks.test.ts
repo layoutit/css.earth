@@ -6,6 +6,19 @@ import { createSceneLifetime } from '@cssearth/engine';
 import type { PreparedVolumeDatasets } from '@cssearth/objects';
 
 const decode = { ready: true, pending: new Set<string>(), undrawn: 0 };
+const overlays: { url: string; opacity: number; publications: number; coasting: boolean; retired: boolean; destroyed: boolean; resolveResource(path: string): string }[] = [];
+mock.module('./clouds/cloud-points.js', { namedExports: {
+  mountCloudOverlay: ({ url, resolveResource }: { url: string; resolveResource(path: string): string }) => {
+    const overlay = { url, resolveResource, opacity: 0, publications: 0, coasting: false, retired: false, destroyed: false };
+    overlays.push(overlay);
+    return {
+      publish(_publication: unknown, opacity: number) { overlay.opacity = opacity; overlay.publications++; },
+      setCoasting(active: boolean) { overlay.coasting = active; if (!active && overlay.retired) overlay.destroyed = true; },
+      retire() { overlay.retired = true; if (!overlay.coasting) overlay.destroyed = true; },
+      destroy() { overlay.destroyed = true; },
+    };
+  },
+} });
 mock.module('../volume/volume-texture-readiness.js', { namedExports: {
   createVolumeTextureReadiness: () => ({ ready: (urls: readonly string[]) => decode.ready && urls.every(url => !decode.pending.has(url)),
     decoded: (url: string) => decode.ready && !decode.pending.has(url), undrawn() { decode.undrawn++; }, destroy() {} }),
@@ -25,7 +38,7 @@ mock.module('../volume/prepared-volume-datasets.js', { namedExports: {
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { createUniverseDatasetBanks } = await import('./universe-dataset-banks.js');
-afterEach(() => { decode.ready = true; decode.pending.clear(); decode.undrawn = 0; });
+afterEach(() => { decode.ready = true; decode.pending.clear(); decode.undrawn = 0; overlays.length = 0; });
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const,
   localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: 1,
   boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
@@ -34,13 +47,19 @@ const payload: PreparedVolumeDatasets = { schema: 'cssearth-volume-datasets@1', 
   framingRadiusUnits: 1, pointVisibility: visibility, datasets: [{ id: 'optical', label: 'Optical', title: 'Optical',
     stars: { frame, points: [] }, description: 'Fixture', sourceUrl: 'https://example.org', brightness: { overall: 1, x: 1, y: 1, z: 1 },
     volume: { schema: 'cssearth-css-volume@1', id: 'fixture', frame, stacks: [], resources: [], provenance: {}, approximation: {} } }] };
-async function fixture(attached = false, hidden: (id: string) => boolean = () => false) {
+async function fixture(attached = false, hidden: (id: string) => boolean = () => false,
+  overlayUrls?: Readonly<Record<string, readonly string[]>>, warmDomNodeBudget = 10000) {
   const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
   const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!;
   const lifetime = createSceneLifetime();
   const banks = createUniverseDatasetBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
     hidden, lifetime, declarations: [{ id: 'fixture', frame }], facts: [{ id: 'fixture', contextVisibility: 'independent', attached }],
-    frame, visibility, warmDomNodeBudget: 10000, load: async () => ({ payload, resolveResource: path => path }) });
+    frame, visibility, warmDomNodeBudget, load: async () => ({
+      payload: overlayUrls ? { ...payload, datasets: [...new Set(['optical', ...Object.keys(overlayUrls)])].map(id => ({ ...payload.datasets[0]!, id })) } : payload,
+      overlayUrls, resolveResource: path => `/bank-assets/${path}` }) });
+  if (warmDomNodeBudget === 0) banks.publish({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1);
   await banks.focusBank('fixture')!.load();
   const targets = [root.firstElementChild!, frontRoot.firstElementChild!] as HTMLElement[];
   if (attached) banks.setEnabled('fixture', true);
@@ -49,6 +68,53 @@ async function fixture(attached = false, hidden: (id: string) => boolean = () =>
     { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1, detailedObjectId, bodyContextOpacity, undefined, flight);
   return { banks, targets, publish, lifetime };
 }
+
+test('volume datasets reuse the declared cloud renderer, fade with their bank, and release it with the scene', async () => {
+  const f = await fixture(false, undefined, { optical: ['/bank-assets/cloud.bin'] });
+  assert.equal(overlays.length, 0, 'loading the bank does not fetch an unshown cloud');
+  f.publish();
+  assert.equal(overlays.length, 1);
+  assert.equal(overlays[0]!.url, '/bank-assets/cloud.bin');
+  assert.equal(overlays[0]!.resolveResource('atlas.webp'), '/bank-assets/atlas.webp');
+  assert.equal(overlays[0]!.opacity, 1);
+  f.publish(.5);
+  assert.equal(overlays[0]!.opacity, .5);
+  f.banks.setCoasting(true); f.publish(0);
+  assert.equal(overlays[0]!.opacity, 0);
+  assert.equal(overlays[0]!.coasting, true);
+  assert.equal(overlays[0]!.destroyed, false, 'the retained layer fades during inertia');
+  f.lifetime.destroy();
+  assert.equal(overlays[0]!.destroyed, true);
+});
+
+test('volume cloud overlays follow the displayed dataset after decoding and coasting, then retire the old cloud', async () => {
+  const f = await fixture(false, undefined, { optical: ['/optical.bin'], dust: ['/dust.bin'] });
+  f.publish();
+  const optical = overlays[0]!;
+  decode.pending.add('/dust.webp'); f.banks.select('fixture', 'dust'); f.publish();
+  assert.equal(overlays.length, 1, 'the staged dataset is not the displayed dataset');
+  decode.pending.clear(); f.banks.setCoasting(true); f.publish();
+  assert.equal(overlays.length, 1, 'the image and cloud swap wait for inertia');
+  f.banks.setCoasting(false); f.publish();
+  assert.equal(overlays.length, 2);
+  assert.equal(optical.retired, true);
+  assert.equal(optical.destroyed, true);
+  assert.equal(overlays[1]!.url, '/dust.bin');
+  assert.equal(overlays[1]!.opacity, 1);
+  f.lifetime.destroy();
+});
+
+test('warm bank eviction waits for the coast to stop and releases its cloud with it', async () => {
+  const f = await fixture(false, undefined, { optical: ['/cloud.bin'] }, 0);
+  f.publish();
+  f.banks.setCoasting(true); f.publish(0);
+  assert.equal(f.targets[0]!.isConnected, true);
+  assert.equal(overlays[0]!.destroyed, false);
+  f.banks.setCoasting(false);
+  assert.equal(f.targets[0]!.isConnected, false);
+  assert.equal(overlays[0]!.destroyed, true);
+  f.lifetime.destroy();
+});
 
 for (const stillCoasting of [true, false]) test(`a resident bank recovers after a decode gap; still coasting=${stillCoasting}`, async () => {
   const f = await fixture();

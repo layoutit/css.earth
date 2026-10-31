@@ -24,12 +24,15 @@ export interface PreparedCloudPoints {
   /** The atlas (a prepared file beside the bank) and the side of its square cells, in texels. */
   readonly atlas: string;
   readonly cellTexels: number;
+  /** Opt-in viewport paint group, keeping moving prepared boards in 2D instead of requesting one promoted layer each. */
+  readonly compositing?: 'grouped';
   /** The body that hides what is behind it: none, or its ellipsoids. */
   readonly occluder: readonly CloudPointEllipsoid[];
 }
 
 export function encodeCloudPoints(cloud: PreparedCloudPoints): PreparedBank {
-  return { schema: PREPARED_CLOUD_POINTS_SCHEMA, fields: { id: cloud.id, frame: cloud.frame, count: cloud.count, atlas: cloud.atlas, cellTexels: cloud.cellTexels, occluder: cloud.occluder },
+  return { schema: PREPARED_CLOUD_POINTS_SCHEMA, fields: { id: cloud.id, frame: cloud.frame, count: cloud.count, atlas: cloud.atlas, cellTexels: cloud.cellTexels, occluder: cloud.occluder,
+    ...(cloud.compositing ? { compositing: cloud.compositing } : {}) },
     columns: { position: cloud.positions, diameter: cloud.diameters, cell: cloud.cells } };
 }
 
@@ -43,6 +46,8 @@ export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): Prepar
   if (!Number.isSafeInteger(count) || (count as number) < 0) throw new TypeError(`${at}: count is a count, got ${JSON.stringify(count ?? null)}.`);
   if (typeof atlas !== 'string' || !/^[a-z0-9][a-z0-9.-]*$/u.test(atlas)) throw new TypeError(`${at}: atlas is a prepared file name, got ${JSON.stringify(atlas ?? null)}.`);
   if (!Number.isSafeInteger(cellTexels) || (cellTexels as number) < 1) throw new TypeError(`${at}: cellTexels is a texel count, got ${JSON.stringify(cellTexels ?? null)}.`);
+  const compositing = bank.fields.compositing;
+  if (compositing !== undefined && compositing !== 'grouped') throw new TypeError(`${at}: compositing is absent or grouped.`);
   const n = count as number, positions = preparedBankColumn(bank, 'position', 'f64', n * 3, at) as Float64Array;
   const diameters = preparedBankColumn(bank, 'diameter', 'f32', n, at) as Float32Array, cells = preparedBankColumn(bank, 'cell', 'u16', n * 2, at) as Uint16Array;
   if (positions.some(value => !Number.isFinite(value))) throw new TypeError(`${at}: every billboard has a finite place.`);
@@ -50,5 +55,9 @@ export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): Prepar
   if (!Array.isArray(occluder) || !occluder.every(e => e && typeof e === 'object' && vector((e as CloudPointEllipsoid).centreUnits) &&
     Array.isArray((e as CloudPointEllipsoid).axesUnits) && (e as CloudPointEllipsoid).axesUnits.length === 3 && (e as CloudPointEllipsoid).axesUnits.every(vector)))
     throw new TypeError(`${at}: occluder is a list of ellipsoids, each a centre and three axes.`);
-  return { id, frame: parseDensityVolumeFrame(frame), count: n, positions, diameters, cells, atlas, cellTexels: cellTexels as number, occluder: occluder as CloudPointEllipsoid[] };
+  if (bank.fields.directional !== undefined || bank.fields.views !== undefined ||
+    ['backCell', 'directionalAxis', 'viewCell', 'viewDiameter', 'viewTexels'].some(key => bank.columns[key] !== undefined))
+    throw new TypeError(`${at}: cloud points use one fixed atlas cell per billboard.`);
+  return { id, frame: parseDensityVolumeFrame(frame), count: n, positions, diameters, cells, atlas, cellTexels: cellTexels as number, occluder: occluder as CloudPointEllipsoid[],
+    ...(compositing ? { compositing } : {}) };
 }

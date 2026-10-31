@@ -8,6 +8,8 @@ export interface PreparedVolumeLeafStyle {
   readonly transform: string;
   readonly backgroundSize: string;
   readonly backgroundPosition: string;
+  /** A prepared front/back pair carries directional radiance on opposite faces. */
+  readonly backfaceVisibility?: 'hidden';
 }
 
 export function validatePreparedLeafBounds(value: unknown): void {

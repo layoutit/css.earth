@@ -34,12 +34,17 @@ export function mountCloudOverlay({ host, before, url, resolveResource }: { host
     read().then(data => {
       loading = false;
       if (destroyed) return;
+      const frame = data.kind === 'points' ? data.points.frame : data.lines.frame, world = latest?.publication.world;
+      if (world && (frame.referenceFrame !== world.referenceFrame || frame.epochJdTt !== world.epochJdTt))
+        throw new TypeError('Prepared cloud and world camera use different reference frames.');
       layer = data.kind === 'points' ? createCloudPoints({ host, cloud: data.points, resolveResource }) : createCloudSegments({ host, lines: data.lines });
       rootStyle = retainedStyle(layer.root);
       apply();
-    }, (error: unknown) => {
+    }).catch((error: unknown) => {
+      if (destroyed) return;
+      layer?.root.remove(); layer = null; rootStyle = null; attached = false;
       loading = false; failures++; retryAt = Date.now() + RETRY_MS * 2 ** (failures - 1);
-      console.warn(`Overlay ${url} could not be read (attempt ${failures} of ${RETRIES}).`, error);
+      console.warn(`Overlay ${url} could not be installed (attempt ${failures} of ${RETRIES}).`, error);
     });
   }
   function settle() {
@@ -77,41 +82,51 @@ export function mountCloudOverlay({ host, before, url, resolveResource }: { host
 }
 
 /**
- * Cloud points (@cssearth/objects cloud-points.ts) as billboards: one element a cluster, its atlas cell (a prepared file
+ * Cloud points (@cssearth/objects cloud-points.ts) as billboards: one fixed atlas cell per cluster.
+ * No light is calculated at runtime. Its atlas cell (a prepared file
  * found through `resolveResource`, as every published asset has its own address) as its background, placed each
  * publication at its centre's place on screen, as wide as its cluster at that distance, and dimmed by how deep its sight
  * line passes through the occluder's ellipsoids. Placing writes only transform and opacity, and only when they change;
  * the order, far to near, is set once the camera rests (`atRest`).
  */
 export function createCloudPoints({ host, cloud, resolveResource }: { host: HTMLElement; cloud: PreparedCloudPoints; resolveResource(path: string): string }): CloudOverlayLayer {
-  const doc = host.ownerDocument, depthThrough = occluderDepth(cloud.occluder), cell = cloud.cellTexels;
+  const doc = host.ownerDocument, depthThrough = occluderDepth(cloud.occluder), cell = cloud.cellTexels, grouped = cloud.compositing === 'grouped';
   const root = doc.createElement('div'); root.className = 'prepared-cloud-points'; root.setAttribute('aria-hidden', 'true');
   root.style.cssText = 'position:absolute;inset:0;overflow:hidden;pointer-events:none';
+  if (grouped) { root.style.willChange = 'transform'; root.style.transform = 'translateZ(0)'; root.style.contain = 'paint'; }
   root.dataset.cloudPoints = String(cloud.count);
+  root.dataset.cloudFrames = '1';
   const atlas = resolveResource(cloud.atlas);
   let order = '';
   const boards = Array.from({ length: cloud.count }, (_, index) => {
-    const el = doc.createElement('div');
-    el.style.cssText = `position:absolute;left:0;top:0;width:${cell}px;height:${cell}px;background:url("${atlas}") -${cloud.cells[index * 2]}px -${cloud.cells[index * 2 + 1]}px no-repeat;transform-origin:50% 50%;will-change:transform,opacity`;
-    root.append(el); return { el, style: retainedStyle(el), index, depth: 0 };
+    const el = doc.createElement('div'), offset = index * 2;
+    el.style.cssText = `position:absolute;left:0;top:0;width:${cell}px;height:${cell}px;background:url("${atlas}") -${cloud.cells[offset]}px -${cloud.cells[offset + 1]}px no-repeat;transform-origin:50% 50%;${grouped ? '' : 'will-change:transform,opacity'}`;
+    el.dataset.cloudCluster = String(index); el.dataset.cloudFrame = 'forward';
+    root.append(el); return { el, style: retainedStyle(el), index, key: `${index}:forward`, depth: 0 };
   });
   return {
     root,
     place(publication) {
+      if (publication.world.referenceFrame !== cloud.frame.referenceFrame || publication.world.epochJdTt !== cloud.frame.epochJdTt)
+        throw new TypeError('Prepared cloud and world camera use different reference frames.');
       const local = presentPhysicalPoseInVolume(publication.world.pose, cloud.frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
       const [px, py, pz] = local.positionUnits, focal = publication.viewport.focalPixels, [ox, oy] = publication.viewport.principalOffsetPixels;
       const w = (publication.viewport.widthPixels ?? host.clientWidth) / 2, h = (publication.viewport.heightPixels ?? host.clientHeight) / 2;
       for (const board of boards) {
-        const i = board.index, x = cloud.positions[i * 3]! - px, y = cloud.positions[i * 3 + 1]! - py, z = cloud.positions[i * 3 + 2]! - pz;
-        const depth = -(r[2] * x + r[5] * y + r[8] * z); board.depth = depth;
+        const i = board.index;
+        const x = cloud.positions[i * 3]! - px, y = cloud.positions[i * 3 + 1]! - py, z = cloud.positions[i * 3 + 2]! - pz;
+        const depth = -(r[2] * x + r[5] * y + r[8] * z);
+        board.depth = depth;
         if (depth <= 0) { board.style.opacity('0'); continue; }
         const sx = focal * (r[0] * x + r[3] * y + r[6] * z) / depth + ox + w, sy = focal * (r[1] * x + r[4] * y + r[7] * z) / depth + oy + h;
-        board.style.transform(`translate3d(${(sx - cell / 2).toFixed(1)}px,${(sy - cell / 2).toFixed(1)}px,0) scale(${(cloud.diameters[i]! * focal / depth / cell).toFixed(4)})`);
-        board.style.opacity((1 - (1 - OCCLUDED_FLOOR) * depthThrough(px, py, pz, x, y, z)).toFixed(3));
+        const transform = `${grouped ? 'translate' : 'translate3d'}(${(sx - cell / 2).toFixed(1)}px,${(sy - cell / 2).toFixed(1)}px${grouped ? '' : ',0'}) scale(${(cloud.diameters[i]! * focal / depth / cell).toFixed(4)})`;
+        const occlusion = 1 - (1 - OCCLUDED_FLOOR) * depthThrough(px, py, pz, x, y, z);
+        board.style.transform(transform);
+        board.style.opacity(occlusion.toFixed(3));
       }
     },
     atRest() {
-      const sorted = [...boards].sort((a, b) => b.depth - a.depth), key = sorted.map(board => board.index).join();
+      const sorted = [...boards].sort((a, b) => b.depth - a.depth || a.index - b.index), key = sorted.map(board => board.key).join();
       if (key !== order) { order = key; for (const board of sorted) root.append(board.el); }
     },
   };

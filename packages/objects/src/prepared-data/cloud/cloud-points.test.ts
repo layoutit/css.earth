@@ -22,6 +22,22 @@ test('cloud points travel through a bank file and read back to every billboard, 
   assert.equal(read.positions[0], .1, 'a place keeps every digit');
 });
 
+test('grouped compositing is opt-in prepared policy and every other value is refused', () => {
+  const data: PreparedCloudPoints = { ...cloud(), compositing: 'grouped' };
+  assert.equal(readCloudPoints(travel(encodeCloudPoints(data))).compositing, 'grouped');
+  const bank = encodeCloudPoints(cloud()); assert.equal(readCloudPoints(bank).compositing, undefined);
+  for (const compositing of [null, false, '', 'layered', 1])
+    assert.throws(() => readCloudPoints({ ...bank, fields: { ...bank.fields, compositing } }), /compositing/u);
+});
+
+test('cloud points refuse additional directional cells and view selectors', () => {
+  const bank = encodeCloudPoints(cloud());
+  for (const key of ['directional', 'views'])
+    assert.throws(() => readCloudPoints({ ...bank, fields: { ...bank.fields, [key]: {} } }), /one fixed atlas cell/u);
+  for (const key of ['backCell', 'directionalAxis', 'viewCell', 'viewDiameter', 'viewTexels'])
+    assert.throws(() => readCloudPoints({ ...bank, columns: { ...bank.columns, [key]: new Uint16Array(4) } }), /one fixed atlas cell/u);
+});
+
 test('a bank that is not cloud points, or whose billboards, atlas or occluder are malformed, is refused by name', () => {
   const bank = encodeCloudPoints(cloud());
   const fields = (patch: Record<string, unknown>) => ({ ...bank, fields: { ...bank.fields, ...patch } });

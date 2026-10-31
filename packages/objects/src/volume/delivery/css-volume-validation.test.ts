@@ -23,6 +23,16 @@ test('accepts the direct prepared CSS volume payload and all three stacks', () =
   assert.equal(validatePreparedCssVolume(valid()).stacks.length, 3);
 });
 
+test('directional faces hide their backs and cannot reuse a double-sided topology', async () => {
+  const value = valid();
+  Object.assign(value.stacks[0]!.leaves[0]!.style, { backfaceVisibility: 'hidden' });
+  assert.equal(validatePreparedCssVolume(value).stacks[0]!.leaves[0]!.style.backfaceVisibility, 'hidden');
+  const { samePreparedVolumeTopology } = await import('./prepared-volume-topology.js');
+  assert.equal(samePreparedVolumeTopology(value, valid()), false);
+  Object.assign(value.stacks[0]!.leaves[0]!.style, { backfaceVisibility: 'visible' });
+  assert.throws(() => validatePreparedCssVolume(value), /hide its backface/);
+});
+
 test('rejects a runtime URL in authored leaf style', () => {
   const value = valid();
   Object.assign(value.stacks[0]!.leaves[0]!, { style: { ...value.stacks[0]!.leaves[0]!.style, transform: 'url(/runtime.png)' } });
@@ -49,6 +59,23 @@ test('merged and unmerged copies of the same geometry are different topology', a
   assert.equal(samePreparedVolumeTopology(valid(), valid()), true);
   assert.equal(samePreparedVolumeTopology(valid(), { ...valid(), mergedOpticalCopies: 3 }), false);
   assert.equal(samePreparedVolumeTopology({ ...valid(), mergedOpticalCopies: 3 }, { ...valid(), mergedOpticalCopies: 3 }), true);
+});
+
+test('fixed images preserve their explicit single-stack mode and reject ambiguous image policies', async () => {
+  const source = valid(), fixed = { ...source, fixedImages: true as const,
+    stacks: source.stacks.map(stack => stack.axis === 'z' ? stack : { ...stack, leaves: [] }) };
+  const parsed = validatePreparedCssVolume(JSON.parse(JSON.stringify(fixed)));
+  assert.equal(parsed.fixedImages, true);
+  assert.equal(validatePreparedCssVolume(valid()).fixedImages, undefined);
+  for (const invalid of [false, null, 1, 'true']) assert.throws(() => validatePreparedCssVolume({ ...fixed, fixedImages: invalid }), /must be true/);
+  for (const incompatible of [{ mergedOpticalCopies: 3 }, { impostors: {} }, { farPlanes: {} }])
+    assert.throws(() => validatePreparedCssVolume({ ...fixed, ...incompatible }), /exactly one populated stack/);
+  assert.throws(() => validatePreparedCssVolume({ ...source, fixedImages: true }), /exactly one populated stack/);
+  assert.throws(() => validatePreparedCssVolume({ ...fixed, stacks: fixed.stacks.map(stack => ({ ...stack, leaves: [] })) }), /exactly one populated stack/);
+  const { samePreparedVolumeTopology } = await import('./prepared-volume-topology.js');
+  const { fixedImages: _, ...optical } = fixed;
+  assert.equal(samePreparedVolumeTopology(fixed, optical), false);
+  assert.equal(samePreparedVolumeTopology(fixed, parsed), true);
 });
 
 const withFarPlanes = (): PreparedCssVolume => {

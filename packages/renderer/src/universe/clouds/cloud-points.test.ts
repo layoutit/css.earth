@@ -78,6 +78,37 @@ test('billboards are built off the page, placed by transform and opacity only, d
   assert.deepEqual(order(layer.root), ['0', '1']);
 });
 
+const frameOrder = (root: HTMLElement) => [...root.children].map(board => {
+  const node = board as HTMLElement; return `${node.dataset.cloudCluster}:${node.dataset.cloudFrame}`;
+});
+const orbitAt = (degree: number) => {
+  const a = degree * Math.PI / 180;
+  return { ...at(10), world: { ...at(10).world, pose: { positionM: [10 * Math.sin(a), 0, 10 * Math.cos(a)] as const,
+    orientationXyzw: [0, Math.sin(a / 2), 0, Math.cos(a / 2)] as const } } };
+};
+test('grouped compositing requests one static paint group and 2D boards with unchanged geometry, alpha and order', () => {
+  const { host } = page(), ordinary = createCloudPoints({ host, cloud, resolveResource });
+  const grouped = createCloudPoints({ host, cloud: { ...cloud, compositing: 'grouped' }, resolveResource });
+  assert.equal(grouped.root.style.willChange, 'transform'); assert.equal(grouped.root.style.transform, 'translateZ(0)');
+  assert.equal(grouped.root.style.contain, 'paint'); assert.equal(grouped.root.style.overflow, 'hidden');
+  assert.ok(!ordinary.root.style.willChange && !ordinary.root.style.transform && !ordinary.root.style.contain);
+  const groupedNodes = [...grouped.root.children] as HTMLElement[], ordinaryNodes = [...ordinary.root.children] as HTMLElement[];
+  groupedNodes.forEach((node, i) => { assert.ok(!node.style.willChange); assert.equal(ordinaryNodes[i]!.style.willChange, 'transform,opacity');
+    assert.equal(node.style.width, ordinaryNodes[i]!.style.width); assert.equal(node.style.background, ordinaryNodes[i]!.style.background); });
+  const writes = recordWrites(grouped.root), initial = [...grouped.root.children];
+  for (const degree of [0, 45, 90, 180, 270]) {
+    ordinary.place(orbitAt(degree)); grouped.place(orbitAt(degree));
+    groupedNodes.forEach((node, i) => { assert.match(node.style.transform, /^translate\(/u); assert.match(ordinaryNodes[i]!.style.transform, /^translate3d\(/u);
+      assert.equal(node.style.transform, ordinaryNodes[i]!.style.transform.replace('translate3d(', 'translate(').replace(',0) scale', ') scale'));
+      assert.equal(node.style.opacity, ordinaryNodes[i]!.style.opacity); });
+    assert.ok(initial.every((node, i) => grouped.root.children[i] === node));
+  }
+  assert.deepEqual([...new Set(writes)].sort(), ['opacity', 'transform']);
+  writes.length = 0; grouped.place(orbitAt(270)); assert.deepEqual(writes, []);
+  ordinary.atRest!(); grouped.atRest!(); assert.deepEqual(frameOrder(grouped.root), frameOrder(ordinary.root));
+  assert.equal(grouped.root.style.transform, 'translateZ(0)', 'the paint-group transform remains static');
+});
+
 /** A page whose fetch answers each address with a bank, or fails while `failing` says so. */
 function fetching(banks: Record<string, PreparedBank>, delayTurns = 0) {
   const { window, host } = page(), asked: string[] = [];
@@ -188,6 +219,39 @@ test('an overlay taken away before its bank arrives never mounts', async t => {
   overlay.destroy();
   await settleRead();
   assert.equal(host.children.length, 0);
+});
+
+test('cloud frame and epoch mismatches fail before any publication writes', () => {
+  const { host } = page(), layer = createCloudPoints({ host, cloud, resolveResource }), writes = recordWrites(layer.root);
+  const publication = at(10);
+  for (const world of [{ ...publication.world, referenceFrame: 'other' }, { ...publication.world, epochJdTt: 2 }])
+    assert.throws(() => layer.place({ ...publication, world }), /different reference frames/u);
+  assert.deepEqual(writes, []);
+});
+
+test('construction errors use the same bounded retry path as failed reads', async t => {
+  const settle = mocked(t), warned = t.mock.method(console, 'warn', () => {});
+  const { host, asked } = fetching({ '/points.bin': encodeCloudPoints(cloud) });
+  const overlay = mountCloudOverlay({ host, url: '/points.bin', resolveResource() { throw new Error('unavailable atlas'); } });
+  for (let attempt = 0; attempt < 4; attempt++) {
+    if (attempt) t.mock.timers.tick(2000 * 2 ** (attempt - 1));
+    overlay.publish(at(10), 1); await settle();
+    assert.deepEqual([asked.length, warned.mock.callCount(), host.children.length], [attempt + 1, attempt + 1, 0]);
+    for (let frame = 0; frame < 20; frame++) overlay.publish(at(10), 1);
+    assert.equal(asked.length, attempt + 1, 'failed construction does not re-fetch every frame');
+  }
+  t.mock.timers.tick(60_000); overlay.publish(at(10), 1); await settle();
+  assert.equal(asked.length, 4); overlay.destroy();
+});
+
+test('an overlay in the wrong frame is rejected before attachment and uses retry backoff', async t => {
+  const settle = mocked(t), warned = t.mock.method(console, 'warn', () => {});
+  const { host, asked } = fetching({ '/points.bin': encodeCloudPoints({ ...cloud, frame: { ...cloud.frame, epochJdTt: 2 } }) });
+  const overlay = mountCloudOverlay({ host, url: '/points.bin', resolveResource });
+  overlay.publish(at(10), 1); await settle();
+  assert.deepEqual([asked.length, warned.mock.callCount(), host.children.length], [1, 1, 0]);
+  assert.match(String(warned.mock.calls[0]!.arguments[1]), /different reference frames/u);
+  overlay.publish(at(10), 1); await settle(); assert.equal(asked.length, 1); overlay.destroy();
 });
 
 test('a failed read is tried again on a later publication, waiting twice as long each time, at most four times', async t => {

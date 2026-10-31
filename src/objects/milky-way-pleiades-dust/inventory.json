@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "dust-preview.png",
+      "bytes": 20924,
+      "sha256": "3ecf947bd0ef347d8d6ae2479cd174dd03b3596910cb65818bfaa853a66c3ca6"
+    },
+    {
+      "location": "prepared",
+      "filename": "cirrus/nx.webp",
+      "bytes": 6642,
+      "sha256": "aa67c1828ca4b800f4253faa44de43c77139948e32094c1ec57774077b41db40"
+    },
+    {
+      "location": "prepared",
+      "filename": "cirrus/ny.webp",
+      "bytes": 9034,
+      "sha256": "40b087a3945844470dc08c5bd72791445d0f3e8b21eea02ff92225e1a7913c20"
+    },
+    {
+      "location": "prepared",
+      "filename": "cirrus/nz.webp",
+      "bytes": 5272,
+      "sha256": "1481f9ff11e2ceb1947fecee372ad4139c524019bf8350d93cc4d807541261c9"
+    },
+    {
+      "location": "prepared",
+      "filename": "cirrus/px.webp",
+      "bytes": 12112,
+      "sha256": "eb026610b6014715c116b705c16221fc4bfc9bc5d3a1ae17054310b67104cf16"
+    },
+    {
+      "location": "prepared",
+      "filename": "cirrus/py.webp",
+      "bytes": 11770,
+      "sha256": "c7453577c1be89b2bfc45b98bfebcf8af75cc48e1fc94b4fdd117aa0103811fd"
+    },
+    {
+      "location": "prepared",
+      "filename": "cirrus/pz.webp",
+      "bytes": 17496,
+      "sha256": "fd0ef7dbbe726f5fc29de36a9c4be9dd882b3cf2bbd0a1c410f1796e4e92dabc"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 1232,
+      "sha256": "411cbfa3a388f2f68ddbfc9fed4b596b38be7a08dd9d335ed2221c1a43b14733"
+    },
+    {
+      "location": "prepared",
+      "filename": "foreground-cloud-atlas.webp",
+      "bytes": 303784,
+      "sha256": "0518744e9ab98e806938079d9cb033dea362c8fd0abb779534e06e30b73f03e7"
+    },
+    {
+      "location": "prepared",
+      "filename": "foreground-cloud.bin",
+      "bytes": 3219,
+      "sha256": "dfb9593f8ceb57a906a4539a961029639ca5dc2b7fe1e20ecc06534e45258e99"
+    },
+    {
+      "location": "prepared",
+      "filename": "point-transmission.bin",
+      "bytes": 8030181,
+      "sha256": "78fbd10af57e95ae72358c2913d11a194714a404b33d2ddaa9ef7b8b27969012"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 768,
+      "sha256": "44f451f37dbc06c64b3273d4bd46b6a0cf245b6986dbbacd61a8cd4521f53b68"
+    },
+    {
+      "location": "prepared",
+      "filename": "smooth-dust/volume.json",
+      "bytes": 3731,
+      "sha256": "e23474d72a80f5e5db880addee183e613fed8b54fac094d2898808c6fe02869f"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 438,
+      "sha256": "eb8cdb543e984af443348e3f1c50fdf7c4e78c29ef6f4a8f4f180ebafd411a2d"
+    }
+  ]
+}

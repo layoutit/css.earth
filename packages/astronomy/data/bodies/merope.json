@@ -1,30 +1,30 @@
 {
- "id": "merope",
- "classification": "star",
- "order": 5617,
- "physical": {
-  "name": "Merope",
-  "horizonsCode": null,
-  "meanRadiusKm": 6235559.1,
-  "gravitationalParameterKm3PerS2": 0,
-  "parent": null,
-  "effectiveTemperatureK": 7913
- },
- "physicalNotes": "Radius 8.963 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: radius 7.747 solar radii, implied by the fitted luminosity 211.434 solar luminosities (fractional uncertainty 0.783) and temperature; scaled from the paper's distance, 116.55 pc, to the cluster's, 134.84 pc: at a fixed temperature the radius grows with the distance, so 7.747 x 134.84/116.55 = 8.963 solar radii (luminosity 283.0) (https://doi.org/10.1093/mnras/stx1433): 6,235,559 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 7913 +/- 3358 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: effective temperature 7913 +/- 3358 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.448) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
- "star": {
-  "rightAscensionDegrees": 56.58167144917715,
-  "declinationDegrees": 23.94814381017594,
-  "positionEpochJulianYear": 2016,
-  "distanceParsecs": 134.84134308,
-  "properMotionRaMasPerYear": 13.075219935615861,
-  "properMotionDecMasPerYear": -48.403789627642766,
-  "radialVelocityKmPerS": 6.2,
-  "presentationUp": "display-axis",
-  "sources": {
-   "position": "Gaia DR3 source 65205373152172032 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/merope/source/photometry/gaia-dr3-source.csv; cross-identification HD 23480, HR 1156, HIP 17608: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+65205373152172032",
-   "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Merope is a member; its own parallax (McDonald, Zijlstra & Watson 2017 adopt 116.55 pc from Gaia DR1 or the Hipparcos reduction of van Leeuwen 2007) is less certain than the cluster's depth (half its members within 2.70 pc of the centre), and the Hipparcos-era parallaxes of the bright Pleiades are the ones the cluster's distance controversy showed biased (https://doi.org/10.1051/0004-6361/202346285): 134.84134308 +/- 2.7 pc; Gaia DR3 parallax 7.0670 +/- 0.2862 mas (same row, RUWE 2.33), 24.7 standard errors, is not used",
-   "properMotion": "Gaia DR3 (same row): 13.075, -48.404 mas/yr",
-   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 65205373152172032 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract)"
+  "id": "merope",
+  "classification": "star",
+  "order": 5617,
+  "physical": {
+    "name": "Merope",
+    "horizonsCode": null,
+    "meanRadiusKm": 6235559.1,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null,
+    "effectiveTemperatureK": 7913
+  },
+  "physicalNotes": "Radius 8.963 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: radius 7.747 solar radii, implied by the fitted luminosity 211.434 solar luminosities (fractional uncertainty 0.783) and temperature; scaled from the paper's distance, 116.55 pc, to the cluster's, 134.84 pc: at a fixed temperature the radius grows with the distance, so 7.747 x 134.84/116.55 = 8.963 solar radii (luminosity 283.0) (https://doi.org/10.1093/mnras/stx1433): 6,235,559 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 7913 +/- 3358 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: effective temperature 7913 +/- 3358 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.448) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "star": {
+    "rightAscensionDegrees": 56.58167144917715,
+    "declinationDegrees": 23.94814381017594,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 136.70070226971004,
+    "properMotionRaMasPerYear": 13.075219935615861,
+    "properMotionDecMasPerYear": -48.403789627642766,
+    "radialVelocityKmPerS": 6.2,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "Gaia DR3 source 65205373152172032 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/merope/source/photometry/gaia-dr3-source.csv; cross-identification HD 23480, HR 1156, HIP 17608: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+65205373152172032",
+      "distance": "Adopted Pleiades model geometry: normal depth 136.7 pc, 0.7 pc beyond the dust model's normal-depth reference of 136.0 pc along ICRS RA 56.67978318 deg, Dec 24.10845447 deg. Individual bright-star depths and their common plane are assumptions; measured sky positions, observed photometry and published parallax/facts remain separate. Published cluster reference distance and original photometric radius calibration remain in src/objects/merope/source/measurements.json.",
+      "properMotion": "Gaia DR3 (same row): 13.075, -48.404 mas/yr",
+      "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 65205373152172032 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract)"
+    }
   }
- }
 }

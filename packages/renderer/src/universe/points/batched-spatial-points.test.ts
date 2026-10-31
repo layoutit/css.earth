@@ -7,6 +7,23 @@ import { parseHTML } from 'linkedom';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { reservePointLayer } from './point-layer.js';
 import { DOT_SLOTS } from './point-paths.js';
+import { setPointTransmission } from './prepared-transmission.js';
+import { parsePointTransmission, PREPARED_POINT_TRANSMISSION_SCHEMA } from '@cssearth/objects';
+
+test('a dust palette arriving during travel never freezes point projection or joins paths mid-motion',async()=>{
+  const {document}=parseHTML('<div id="host"></div>'),host=document.getElementById('host')!;
+  const frame={referenceFrame:'sun-icrf',epochJdTt:2451545,originM:[0,0,0] as const,localToReferenceXyzw:[0,0,0,1] as const,metersPerUnit:1,boundsUnits:{min:[-20,-20,-20] as const,max:[20,20,20] as const}};
+  const field=mountBatchedSpatialPoints({host,frame,points:[{positionUnits:[1,0,-10] as const}],className:'test-points',stylePoint:()=>({colorCss:'#ffffff',opacity:1,radiusPx:1}),paintPalette:['#ffffffff@1']});
+  const viewport={focalPixels:100,principalOffsetPixels:[0,0] as const,widthPixels:1000,heightPixels:800};
+  const at=(x:number)=>({world:{referenceFrame:frame.referenceFrame,epochJdTt:frame.epochJdTt,pose:{positionM:[x,0,0] as const,orientationXyzw:[0,0,0,1] as const}},viewport});
+  field.publish(at(0));const path=field.root.querySelector('path')!,before=path.getAttribute('d'),owner={};
+  const colors=new Uint8Array(1536);for(let level=0;level<2;level++)for(let band=0;band<3;band++)for(let value=0;value<256;value++)colors[(level*3+band)*256+value]=level?Math.round(value/(band+2)):value;
+  setPointTransmission(host,owner,parsePointTransmission({schema:PREPARED_POINT_TRANSMISSION_SCHEMA,fields:{frame,targetAxes:[[-20,20],[-20,20],[-20,20]],observerAxes:[[-20,20],[-20,20],[-20,20]],thresholds:[.5]},columns:{tau:new Uint16Array(64).fill(1000),colors}}));
+  field.publish(at(1));assert.notEqual(path.getAttribute('d'),before,'motion continues while material waits');assert.equal(field.root.querySelectorAll('path').length,1);
+  await new Promise(resolve=>setTimeout(resolve,200));assert.equal(field.root.querySelectorAll('path').length,3);assert.equal(field.root.getAttribute('data-point-transmission'),'prepared');
+  assert(field.root.querySelector('[stroke="#805540ff"]')?.getAttribute('d'));
+  field.publish(at(2));assert.equal(field.root.querySelectorAll('path').length,3);setPointTransmission(host,owner,null);field.destroy();
+});
 
 test('a spatial point field reprojects through one retained SVG path per paint color', () => {
   const {document}=parseHTML('<div id="host"><b></b></div>'),host=document.getElementById('host')!,before=host.firstElementChild!;

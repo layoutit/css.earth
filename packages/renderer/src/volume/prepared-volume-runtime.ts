@@ -57,7 +57,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[]; wanted: boolean[]; shown: number[] }[] = [];
   // A bank whose images hold their three copies (mergedOpticalCopies) draws one layer a slice, at opacity gain / 3: on a
   // phone the 52/52/26 bank's 390 layers outran Chrome's 256 MB tile budget and drew empty in 248 frames of an 8 s turn.
-  const merged = payload.mergedOpticalCopies === 3, copiesPerLeaf = merged ? 1 : 3;
+  const fixed = payload.fixedImages === true;
+  const merged = payload.mergedOpticalCopies === 3, copiesPerLeaf = merged || fixed ? 1 : 3;
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
@@ -104,7 +105,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     scene.append(mesh);
     camera.append(scene);
     root.append(camera);
-    options.host.insertBefore(root, options.before);
+    // Fixed images never select their empty axes. Keep their logical slots for axis-indexed state, but leave
+    // those perspective/transform subtrees unattached, including when a bank requests resident stacks.
+    if (!fixed || stack.leaves.length) options.host.insertBefore(root, options.before);
     roots.push(root); cameras.push(camera); scenes.push(scene);
   }
   let destroyed = false;
@@ -228,8 +231,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         leaf.hidden = false;
       }
     }
-    const localCamera = presentPhysicalPoseInVolume(world.pose, payload.frame);
-    const strengths = axisWeights(localCamera, payload.stacks, payload.frame.boundsUnits);
+    const strengths = fixed ? fixedImageStrengths(payload) : axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
     for (const [axis, pending] of pendingTextures.entries()) {
       if (!options.residentStacks && strengths[axis]!.weight <= 0) continue;
       for (const [leaf, url] of pending) {
@@ -261,6 +263,11 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
       // Integer gains are exact; the fractional step linearly approximates alpha.
       const copies = opticalCopies[index]!;
+      if (fixed) {
+        if (copies.alpha[0] !== 1) { copies.alpha[0] = 1; for (const node of copies.nodes[0]!) node.style.opacity = '1'; }
+        if (visible !== copies.wanted[0]) { copies.wanted[0] = visible; if (visible) join.request(); else retire.request(); }
+        continue;
+      }
       // A shown copy keeps an 8-bit step of alpha inside [0.001, 0.999] and stays joined while its stack is visible, so a
       // turn never crosses opacity 0 or 1 and never changes the layer tree; each frame stays within 1/510 alpha of exact.
       // Copies crossing 0/1 and leaving or joining mid-turn made WebKit recomposite for 25-37 ms. iPad drag at the stripe
@@ -339,11 +346,13 @@ function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolum
   node.style.transform = leaf.style.transform;
   node.style.backgroundSize = leaf.style.backgroundSize;
   node.style.backgroundPosition = leaf.style.backgroundPosition;
+  if (leaf.style.backfaceVisibility) node.style.backfaceVisibility = leaf.style.backfaceVisibility;
   return node;
 }
 
 /** Texture demand uses the same axis weights and prepared frustum bounds as publication. */
 export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publication: VolumeCameraPublication): readonly string[] {
+  if (payload.fixedImages) return [...new Set(payload.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.texturePath)))];
   const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
   const transform = preparedVolumeCameraTransform(publication, payload.frame, 50);
   const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, publication.viewport);
@@ -355,6 +364,10 @@ export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publicati
     }
   }
   return [...paths];
+}
+
+function fixedImageStrengths(payload: PreparedCssVolume): ReturnType<typeof axisWeights> {
+  return AXES.map(axis => ({ weight: payload.stacks.find(stack => stack.axis === axis)!.leaves.length ? 1 : 0, opticalGain: 1 }));
 }
 
 /** Opaque completed images, in DOM back-to-front order. Their total contribution is always the ceiling. */

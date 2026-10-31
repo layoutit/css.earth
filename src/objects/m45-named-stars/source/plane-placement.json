@@ -1,0 +1,69 @@
+{
+  "generator": ".local/pleiades-star-placement.mts",
+  "kind": "adopted-plane",
+  "referenceDirectionIcrsDegrees": [
+    56.67978318,
+    24.10845447
+  ],
+  "dustNormalDepthPc": 136,
+  "starNormalDepthPc": 136.7,
+  "originalTable": "source/dots/table.csv",
+  "modeledTable": "source/dots/modeled-table.csv",
+  "basis": "Adopted Pleiades model geometry: normal depth 136.7 pc, 0.7 pc beyond the dust model's normal-depth reference of 136.0 pc along ICRS RA 56.67978318 deg, Dec 24.10845447 deg. Individual bright-star depths and their common plane are assumptions; measured sky positions, observed photometry and published parallax/facts remain separate.",
+  "stars": [
+    {
+      "hip": 17702,
+      "raDeg": 56.87110081,
+      "decDeg": 24.10524179,
+      "radialPc": 136.70063516878986
+    },
+    {
+      "hip": 17847,
+      "raDeg": 57.29054699,
+      "decDeg": 24.05352413,
+      "radialPc": 136.7065367711441
+    },
+    {
+      "hip": 17499,
+      "raDeg": 56.21884818,
+      "decDeg": 24.1134484,
+      "radialPc": 136.70368597750354
+    },
+    {
+      "hip": 17573,
+      "raDeg": 56.45663811,
+      "decDeg": 24.36785797,
+      "radialPc": 136.70226305939224
+    },
+    {
+      "hip": 17608,
+      "raDeg": 56.58150148,
+      "decDeg": 23.94846199,
+      "radialPc": 136.700700727146
+    },
+    {
+      "hip": 17531,
+      "raDeg": 56.30200903,
+      "decDeg": 24.46737906,
+      "radialPc": 136.7051510615877
+    },
+    {
+      "hip": 17851,
+      "raDeg": 57.29668416,
+      "decDeg": 24.13682556,
+      "radialPc": 136.70661717319712
+    },
+    {
+      "hip": 17489,
+      "raDeg": 56.20084225,
+      "decDeg": 24.28957701,
+      "radialPc": 136.70465660224318
+    },
+    {
+      "hip": 17579,
+      "raDeg": 56.4769331,
+      "decDeg": 24.55462133,
+      "radialPc": 136.7048560812914
+    }
+  ]
+}

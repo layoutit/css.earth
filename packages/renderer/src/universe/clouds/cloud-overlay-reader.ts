@@ -15,6 +15,7 @@ export const cloudOverlayReader = preparedReader<CloudOverlayData>('cloud-overla
   // an occluder dims what is behind it only if its axes span space: a flat or zero axis has no inside (cloud-occluder.ts)
   const occluder = value.kind === 'points' ? value.points.occluder : value.lines.occluder;
   if (!occluder.every(e => basisSpansSpace(e.axesUnits))) throw new TypeError(`${url}: every occluder's axes span space.`);
-  const columns = value.kind === 'points' ? [value.points.positions, value.points.diameters, value.points.cells] : [value.lines.from, value.lines.to, value.lines.rgba, value.lines.heads];
+  const columns = value.kind === 'points' ? [value.points.positions, value.points.diameters, value.points.cells]
+    : [value.lines.from, value.lines.to, value.lines.rgba, value.lines.heads];
   return { value, transfer: [...new Set(columns.map(column => column.buffer as ArrayBuffer))] };
 });

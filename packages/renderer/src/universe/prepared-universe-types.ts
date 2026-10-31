@@ -88,7 +88,11 @@ export interface PreparedUniverseOptions {
    * first time the bank shows from afar. */
   loadBacking?(id: string): Promise<{ payload: PreparedGalaxyBacking; resolveResource(path: string): string }>;
   /** A bank's payload, and any published catalogue points drawn with it (M87's globular clusters). */
-  loadVolumeDataset?(id: string): Promise<Parameters<typeof createPreparedVolumeDatasets>[0] & { cataloguePointUrls?: readonly string[] }>;
+  loadVolumeDataset?(id: string): Promise<Parameters<typeof createPreparedVolumeDatasets>[0] & {
+    cataloguePointUrls?: readonly string[]; pointTransmission?: import('@cssearth/objects').PreparedPointTransmission;
+    /** Existing cloud point/segment banks selected with the volume dataset, using the image-layer overlay contract. */
+    overlayUrls?: Readonly<Record<string, readonly string[]>>;
+  }>;
   /** Testable cap for hidden banks with no active navigation subscriber. */
   warmVolumeDatasetDomNodeBudget?: number;
   catalog?: PreparedCatalogBank;

@@ -560,3 +560,6 @@ src/objects/proxima-centauri-b/source/science/del-genio-2019/18_Day-Land_ANN1490
 
 # Compressed accepted pre-slice galaxy inputs are restored from the source cache.
 /src/objects/milky-way-volume/source/b30-inputs/
+
+# Numerical Pleiades model inputs restored from the declared source mirror.
+/src/objects/milky-way-pleiades-dust/source/inputs/

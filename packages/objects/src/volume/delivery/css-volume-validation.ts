@@ -21,7 +21,8 @@ export function trustPreparedCssVolume(volume: PreparedCssVolume): PreparedCssVo
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   if (typeof input === 'object' && input !== null && validated.has(input)) return input as PreparedCssVolume;
   const value = record(input, 'prepared CSS volume');
-  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'farPlanes') ? ['farPlanes'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : [])], 'prepared CSS volume');
+  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'farPlanes') ? ['farPlanes'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : []), ...(Object.hasOwn(value, 'fixedImages') ? ['fixedImages'] : [])], 'prepared CSS volume');
+  if (Object.hasOwn(value, 'fixedImages') && value.fixedImages !== true) throw new TypeError('Prepared CSS volume fixedImages must be true when declared.');
   if (Object.hasOwn(value, 'mergedOpticalCopies') && value.mergedOpticalCopies !== 3) throw new TypeError('Prepared CSS volume merges exactly three optical copies.');
   if (value.schema !== PREPARED_CSS_VOLUME_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
     throw new TypeError('Prepared CSS volume identity is invalid.');
@@ -44,6 +45,9 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   }
   const leafIds = new Set<string>();
   for (const stackInput of stacks) validateStack(record(stackInput, 'volume stack'), resources, leafIds);
+  if (value.fixedImages === true && (stacks.filter(stack => stack.leaves.length > 0).length !== 1 ||
+      Object.hasOwn(value, 'mergedOpticalCopies') || Object.hasOwn(value, 'impostors') || Object.hasOwn(value, 'farPlanes')))
+    throw new TypeError('Fixed images need exactly one populated stack and no optical copies or alternative views.');
   const normals = stacks.map((stack, index) => stack.normalUnits ?? AXES.map(axis => axis === stack.axis ? 1 : 0));
   for (let i = 0; i < normals.length; i++) for (let j = 0; j < i; j++)
     if (Math.abs(normals[i].reduce((sum: number, value: number, k: number) => sum + value * normals[j][k], 0)) > 1e-8)
@@ -68,7 +72,8 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}), ...(Object.hasOwn(value, 'approximation') ? { approximation: value.approximation } : {}),
-    ...(farPlanes ? { farPlanes } : {}), ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}), ...(value.mergedOpticalCopies === 3 ? { mergedOpticalCopies: 3 as const } : {}) }) as PreparedCssVolume;
+    ...(farPlanes ? { farPlanes } : {}), ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}), ...(value.mergedOpticalCopies === 3 ? { mergedOpticalCopies: 3 as const } : {}),
+    ...(value.fixedImages === true ? { fixedImages: true as const } : {}) }) as PreparedCssVolume;
   validated.add(volume);
   return volume;
 }
@@ -179,7 +184,10 @@ function validateStack(stack: Record<string, unknown>, resources: Set<string>, l
 }
 
 function validateStyle(style: Record<string, unknown>): void {
-  exactKeys(style, ['width', 'height', 'transform', 'backgroundSize', 'backgroundPosition'], 'volume leaf style');
+  exactKeys(style, ['width', 'height', 'transform', 'backgroundSize', 'backgroundPosition',
+    ...(Object.hasOwn(style, 'backfaceVisibility') ? ['backfaceVisibility'] : [])], 'volume leaf style');
+  if (Object.hasOwn(style, 'backfaceVisibility') && style.backfaceVisibility !== 'hidden')
+    throw new TypeError('A directional volume face must hide its backface.');
   if (typeof style.width !== 'string' || typeof style.height !== 'string' || typeof style.transform !== 'string' ||
       typeof style.backgroundSize !== 'string' || typeof style.backgroundPosition !== 'string' ||
       !dimensions(style.width, 1) || !dimensions(style.height, 1) || !matrix(style.transform) ||
