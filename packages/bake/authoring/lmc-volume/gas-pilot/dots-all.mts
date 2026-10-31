@@ -11,7 +11,7 @@ import { dot as dot3, normalize, type V3 } from '../geometry.mts';
 import { CELL, dotShape, boardOf, clusterDots, drawCell, randomStream, regionDots, regionLight, type Board, type Dot, type RegionLight } from './dots.mts';
 import { L37_DIR, allGasSource, type GasRegion } from './regions.mts';
 
-const ARM = process.env.GRADE_ARM;
+const ARM = process.env.GRADE_ARM, BANK_ID = ARM ? 'gas-dots-' + ARM : 'gas-dots', ATLAS = BANK_ID + '-atlas.webp';
 export const ALL_DIR = L37_DIR + (ARM ? 'dots-' + ARM + '/' : 'dots-all/');
 /** Billboards in all: the 61 other retained elements and these stay under 500. */
 export const BOARDS = 439, GAS_BOARDS = 300, DUST_BOARDS = BOARDS - GAS_BOARDS, START_GAIN = .9;
@@ -93,10 +93,10 @@ export async function buildAll() {
     for (let y = 0; y < CELL; y++) for (let x = 0; x < CELL; x++) { const k = (y * CELL + x) * 4, o = ((cy + y) * across * CELL + cx + x) * 4; for (let c = 0; c < 4; c++) atlas[o + c] = Math.round(rgba[k + c]! * 255); }
     positions.set(patch.center, j * 3); diameters[j] = 2 * patch.half; cells.set([cx, cy], j * 2);
   });
-  const atlasBytes = await writeLossyWebp(sharp(atlas, { raw: { width: across * CELL, height: across * CELL, channels: 4 } }), ALL_DIR + 'gas-dots-atlas.webp', { alphaQuality: 100 });
-  const encoded = encodeCloudPoints({ id: 'gas-dots', frame, count, positions, diameters, cells, atlas: 'gas-dots-atlas.webp', cellTexels: CELL, occluder: [], cellAxesUnits: axes, planarCells: { from: all.length, right: [1, 0, 0], up: [0, 1, 0] } });
+  const atlasBytes = await writeLossyWebp(sharp(atlas, { raw: { width: across * CELL, height: across * CELL, channels: 4 } }), ALL_DIR + ATLAS, { alphaQuality: 100 });
+  const encoded = encodeCloudPoints({ id: BANK_ID, frame, count, positions, diameters, cells, atlas: ATLAS, cellTexels: CELL, occluder: [], cellAxesUnits: axes, planarCells: { from: all.length, right: [1, 0, 0], up: [0, 1, 0] } });
   readCloudPoints(encoded, 'gas dots'); const bank = encodePreparedBank(encoded, 'gas dots');
-  await writeFile(ALL_DIR + 'gas-dots.bin', packPreparedBinary(bank.bytes, bank.regions, 'gas dots'));
+  await writeFile(ALL_DIR + BANK_ID + '.bin', packPreparedBinary(bank.bytes, bank.regions, 'gas dots'));
   await writeFile(ALL_DIR + 'result.json', JSON.stringify({ complete: true, owners: every.length, lit: regions.length, ownersWithOwnBillboard: owned.size, boards: all.length, dustPatches: patches.length, dustClouds: (layer.clouds ?? []).length, dustHalfKpc: [patches.reduce((n, p) => Math.max(n, p.half), 0), patches.map(p => p.half).sort((a, b) => a - b)[patches.length >> 1]], atlasBytes: atlasBytes.length, largestHalfKpc: halves[0], medianHalfKpc: halves[Math.floor(halves.length / 2)], groupIds: all.map(b => b.group), report }, null, 1) + '\n');
   console.log('GAS_ALL_DOTS ' + JSON.stringify({ lit: regions.length, ownersWithOwnBillboard: owned.size, boards: all.length, dust: patches.length, atlasBytes: atlasBytes.length, largestHalfKpc: halves[0], medianHalfKpc: halves[Math.floor(halves.length / 2)], dots: dots.length }));
   return { groups, all, axes, frame, grade };

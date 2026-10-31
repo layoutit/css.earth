@@ -194,7 +194,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       const families: { datasets: readonly MountedDataset[]; active: { dataset: MountedDataset }; surface: HTMLElement;
         runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null, starsFor: string | null = null;
-      let pointOverlays: ReturnType<typeof mountCloudOverlay>[] | null = null;
+      let pointOverlays: ReturnType<typeof mountCloudOverlay>[] | null = null, overlaysFor: string | null = null, retiringOverlays: ReturnType<typeof mountCloudOverlay>[] = [];
       const mountStars = () => {
         starsFor = selected;
         stars = mountPreparedCataloguePoints({ host: root, before: end, payload: datasetById.get(selected)!.stars, createElement: create, nativeFocalCss });
@@ -207,7 +207,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       const destroy = () => {
         if (destroyed) return; destroyed = true; latest = null; listeners.clear();
         for (const family of families) family.runtime.destroy();
-        stars?.destroy(); for (const overlay of pointOverlays ?? []) overlay.destroy(); root.remove(); frontRoot?.remove();
+        stars?.destroy(); for (const overlay of [...pointOverlays ?? [], ...retiringOverlays]) overlay.destroy(); root.remove(); frontRoot?.remove();
       };
       const countDescendants = (node: Element): number => [...node.children]
         .reduce((count, child) => count + 1 + countDescendants(child), 0);
@@ -269,8 +269,14 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
         writeStyle(bank.surface, 'opacity', dataset.volume.impostors ? '1' : String(opacity));
         // Opt-in overlay: it carries light the slabs no longer hold, so it shows exactly as much as they do.
-        if (dataset.volume.pointOverlays) {
-          pointOverlays ??= dataset.volume.pointOverlays.map(path => mountCloudOverlay({ host: root, before: end, behind: () => bank.surface, url: resolveResource(path), resolveResource }));
+        // Mounted only for the dataset that shows: another dataset's billboards leave as it gives way, even mid-coast.
+        if (overlaysFor !== dataset.id && (pointOverlays || dataset.volume.pointOverlays)) {
+          for (const overlay of pointOverlays ?? []) { overlay.retire(); retiringOverlays.push(overlay); }
+          pointOverlays = dataset.volume.pointOverlays?.map(path => mountCloudOverlay({ host: root, before: end, behind: () => bank.surface, url: resolveResource(path), resolveResource })) ?? null; overlaysFor = dataset.id;
+        }
+        for (const overlay of retiringOverlays) overlay.setCoasting(holdMembership);
+        if (!holdMembership) retiringOverlays = [];
+        if (pointOverlays) {
           const projection = dataset.volume.impostors ? projectVolumeImpostors(publication, dataset.volume.frame, dataset.volume.impostors) : null;
           for (const overlay of pointOverlays) { overlay.setCoasting(holdMembership); overlay.publish(publication, projection ? (projection.visible ? projection.volumeMix : 0) : 1); }
         }

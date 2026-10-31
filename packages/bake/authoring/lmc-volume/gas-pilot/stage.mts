@@ -1,6 +1,7 @@
 /** One arm in the real site: a data-only swap of the installed bank, with the accepted bank restored byte for byte afterwards. */
 import { access, cp, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
+import { openSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
@@ -28,9 +29,56 @@ const OWNER_VIEWS = { A: 'UYNDKid65ZoPsMM7jkKo0rK7w8M2LdAC0JFBQsczQAAAAEAYLePdTs
 export const STOP_FILE = L37_DIR + 'stop-live', ORIGIN = 'http://127.0.0.1:4313';
 const object = 'src/objects/lmc-volume/', prepared = object + 'prepared', backup = L37_DIR + 'accepted-backup', stage = L37_DIR + 'site-stage', original = L37_DIR + 'original/';
 const exists = (path: string) => access(path).then(() => true, () => false);
-const CONTEXT = 'site/prepared/prepared-context-bank-assets.json';
-
+const CONTEXT = 'site/prepared/prepared-context-bank-assets.json', HOST = 'src/objects/lmc/', HOST_BACKUP = L37_DIR + 'host-backup', FACILITIES = 'site/prepared/prepared-facilities.json';
+type DatasetText = { label: string; title: string; detail: string; summary: string; description: string; credit: string; url: string; source: string; facility: string; reason: string; arm?: 'decam' | 'vista' };
+const DATASET_TEXT: Record<string, DatasetText> = {
+  'horalek-widefield': { label: 'Horálek optical', title: 'Approved LMC physical model', detail: 'Native l36 optical model', summary: 'Catalogue populations and dust in a warped disc, calibrated against the optical photograph.', description: 'Published geometry and catalogue populations, calibrated against the Horálek optical photograph. Finite objects have adopted depths; the photograph constrains one viewing direction. The reference thumbnail shows the calibration photograph.', credit: 'NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)', url: 'https://noirlab.edu/public/images/iotw2547a/', source: 'noirlab-iotw2547a', facility: 'Petr Horálek', reason: 'The photograph credits Petr Horálek but does not identify the individual camera.' },
+  'decam-smash': { arm: 'decam', label: 'DECam SMASH', title: 'LMC graded to the DECam SMASH image', detail: 'Blanco 4 m DECam · graded model', summary: 'The same l36 model graded to the SMASH image, not reconstructed from it. Some regions lie outside its frame.', description: 'The same l36 model and geometry with its component colors graded to the Blanco 4 m DECam SMASH image (NOIRLab noirlab2030a). It is graded to that image, not reconstructed from it: nothing in the shape, gas or dust comes from these pixels. 68 of the 354 lit catalogue gas regions lie outside the image frame; they take the same global colors. Far pictures carry only a global color gain, so the far handoff may not match exactly.', credit: 'CTIO/NOIRLab/NSF/AURA/SMASH, CC BY 4.0', url: 'https://noirlab.edu/public/images/noirlab2030a/', source: 'noirlab-noirlab2030a', facility: 'Blanco 4 m · DECam', reason: 'SMASH survey image from the Dark Energy Camera on the Blanco 4 m telescope. Credit: CTIO/NOIRLab/NSF/AURA/SMASH, CC BY 4.0.' },
+  'vista-vmc': { arm: 'vista', label: 'VISTA VMC', title: 'LMC graded to the VISTA VMC image', detail: 'ESO VISTA · near infrared · graded model', summary: 'The same l36 model graded to the near-infrared VMC image, not reconstructed from it. Gas is weak in this band.', description: 'The same l36 model and geometry with its component colors graded to ESO’s VISTA VMC near-infrared image (eso1914a; Y, J and Ks). It is graded to that image, not reconstructed from it: nothing in the shape, gas or dust comes from these pixels. Ionized gas is weak in the near infrared, so it is not forced red here. Far pictures carry only a global color gain, so the far handoff may not match exactly.', credit: 'ESO/VMC Survey', url: 'https://www.eso.org/public/images/eso1914a/', source: 'eso-eso1914a', facility: 'VISTA', reason: 'ESO VMC survey image from the VISTA telescope. Credit: ESO/VMC Survey.' },
+};
+const GRADE_IMAGES = { 'decam-smash': 'src/objects/lmc-volume/.local/image-options/decam-smash.jpg', 'vista-vmc': 'src/objects/lmc-volume/.local/image-options/vista-vmc.jpg' } as const;
+/** A graded dataset is the same volume on its own textures, gas dots and far pictures, so the shared topology swaps them on one surface. */
+async function gradedDatasets(first: Awaited<ReturnType<typeof readVolumeDatasetBank>>['datasets'][number], stageDir: string) {
+  const out = [];
+  for (const id of ['decam-smash', 'vista-vmc'] as const) {
+    const text = DATASET_TEXT[id]!, arm = text.arm!, near = L37_DIR + 'background-' + arm + '/bank/', far = L37_DIR + 'grades/' + arm + '-far/', dots = L37_DIR + 'dots-' + arm + '/', rename = (path: string) => path.replace(/^l36-near\//u, arm + '-near/').replace(/^l36-far\//u, arm + '-far/');
+    const resources = await Promise.all(first.volume.resources.map(async r => { const next = rename(r.path), from = r.path.startsWith('l36-near/') ? near + r.path.slice(9) : far + r.path.slice(8); await mkdir(dirname(stageDir + '/' + next), { recursive: true }); await writeFile(stageDir + '/' + next, await readFile(from)); return { ...r, path: next, bytes: (await stat(from)).size }; }));
+    for (const name of ['gas-dots-' + arm + '.bin', 'gas-dots-' + arm + '-atlas.webp']) await writeFile(stageDir + '/' + name, await readFile(dots + name));
+    const swap = <T extends { texturePath: string }>(leaf: T) => ({ ...leaf, texturePath: rename(leaf.texturePath) });
+    const volume = validatePreparedCssVolume({ ...first.volume, pointOverlays: ['gas-dots-' + arm + '.bin'], resources, stacks: first.volume.stacks.map(s => ({ ...s, leaves: s.leaves.map(swap) })), impostors: { ...first.volume.impostors!, views: first.volume.impostors!.views.map(swap) } });
+    out.push({ ...first, id, label: text.label, title: text.title, description: text.description, sourceUrl: text.url, volume });
+  }
+  return out;
+}
+/** The host's prepared records name each dataset for the sidebar. Temporary, like the bank, until an install. */
+async function patchHost(stageDir: string) {
+  await writeFile(original + 'host-inventory.json', await readFile(HOST + 'inventory.json')); await cp(HOST + 'prepared', HOST_BACKUP, { recursive: true });
+  const read = async (path: string) => JSON.parse(await readFile(path, 'utf8')) as Record<string, any>, ids = Object.keys(DATASET_TEXT);
+  const manifestPath = object + 'source/manifest.json', manifestText = await readFile(manifestPath, 'utf8'), manifest = JSON.parse(manifestText) as Record<string, any>; await writeFile(original + 'volume-manifest.json', manifestText);
+  const own = (manifest.inputs as Record<string, any>[]).find(input => input.id === 'horalek-widefield')!;
+  for (const [id, path] of Object.entries(GRADE_IMAGES)) { const t = DATASET_TEXT[id]!; (manifest.inputs as Record<string, any>[]).push({ ...own, id, path, origin: t.url, sourceUrl: t.url, title: 'Large Magellanic Cloud · ' + t.source, credit: t.credit, displayCredit: t.credit, datasetId: id, capture: { attributions: [{ kind: 'unresolved', label: t.facility, evidence: t.url, reason: t.reason }] }, sourceBinding: { kind: 'catalogued', references: [{ ...own.sourceBinding.references[0], catalogueId: t.source }] } }); }
+  await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+  const controlsOf = (source: Record<string, any>) => { const list = source.controls as Record<string, any>[], base = list[0]!; return ids.map(id => ({ ...base, id, label: DATASET_TEXT[id]!.label, thumbnailUrl: '/scenes/lmc/lmc-dataset-' + id + '.webp', volume: { objectId: 'lmc-volume', datasetId: id, surface: id } })); };
+  const controls = await read(HOST + 'prepared/controls.json'); controls.datasets.controls = controlsOf(controls.datasets); await writeFile(HOST + 'prepared/controls.json', JSON.stringify(controls));
+  const datasets = await read(HOST + 'prepared/datasets.json'); datasets.controls = controlsOf(datasets); await writeFile(HOST + 'prepared/datasets.json', JSON.stringify(datasets));
+  const runtime = await read(HOST + 'prepared/runtime.json'); runtime.controls.datasets.controls = controlsOf(runtime.controls.datasets); runtime.variants = ids.map(id => ({ ...runtime.variants[0], when: { datasetId: id } })); await writeFile(HOST + 'prepared/runtime.json', JSON.stringify(runtime));
+  const text = await read(HOST + 'prepared/text.json'); for (const id of ids) { const t = DATASET_TEXT[id]!; text.datasets[id] = { title: t.title, detail: t.detail, summary: t.summary, sources: [{ catalogueId: t.source, url: t.url, label: 'Large Magellanic Cloud · ' + t.credit, checked: '2026-10-31', locator: 'Large Magellanic Cloud · ' + t.source }] }; } await writeFile(HOST + 'prepared/text.json', JSON.stringify(text));
+  const presentation = await read(stageDir + '/presentation.json'), base = (presentation.controls as Record<string, any>[])[0]!;
+  presentation.controls = ids.map(id => { const t = DATASET_TEXT[id]!, url = '/scenes/lmc-volume/datasets/' + id + '.webp'; return { ...base, id, label: t.label, title: t.title, thumbnailUrl: id === 'horalek-widefield' ? base.thumbnailUrl : url, texture: { ...base.texture, url: id === 'horalek-widefield' ? base.texture.url : url, attribution: { label: t.credit, url: t.url } }, description: t.description, summary: t.summary, detail: t.detail }; });
+  await writeFile(stageDir + '/presentation.json', JSON.stringify(presentation));
+  for (const [id, path] of Object.entries(GRADE_IMAGES)) { const bytes = await sharp(path, { limitInputPixels: false }).resize(600, 400, { fit: 'cover' }).webp({ quality: 80 }).toBuffer(); await writeFile('site/public/scenes/lmc-volume/datasets/' + id + '.webp', bytes); await writeFile('site/public/scenes/lmc/lmc-dataset-' + id + '.webp', bytes); }
+}
+/** The sidebar's credit rail reads the facility graph: each graded dataset names its own. */
+async function patchFacilities() {
+  const raw = await readFile(FACILITIES, 'utf8'); await writeFile(original + 'facilities.json', raw); const data = JSON.parse(raw) as Record<string, any>, graph = data.graph as Record<string, any>;
+  const edge = (graph.edges as Record<string, any>[]).find(e => e.productId === 'horalek-widefield')!, view = (graph.datasets as Record<string, any>[]).find(v => v.objectId === 'lmc-volume' && v.datasetId === 'horalek-widefield')!;
+  for (const id of ['decam-smash', 'vista-vmc']) { const t = DATASET_TEXT[id]!; graph.edges.push({ ...edge, productId: id, sourceId: id, datasetIds: [id], attribution: { ...edge.attribution, label: t.facility, evidence: t.url, reason: t.reason } }); graph.datasets.push({ ...view, datasetId: id, label: t.label, href: '/lmc/?dataset=' + id, host: { objectId: 'lmc', datasetId: id } }); }
+  view.label = DATASET_TEXT['horalek-widefield']!.label;
+  const by = graph.byObject as Record<string, number[]> | undefined; if (by && by['lmc-volume']) by['lmc-volume'] = [...by['lmc-volume'], graph.edges.length - 2, graph.edges.length - 1];
+  await writeFile(FACILITIES, JSON.stringify(data));
+}
 export async function restoreAccepted() {
+  if (await exists(HOST_BACKUP)) { await rm(HOST + 'prepared', { recursive: true, force: true }); await rename(HOST_BACKUP, HOST + 'prepared'); await writeFile(HOST + 'inventory.json', await readFile(original + 'host-inventory.json')); for (const id of ['decam-smash', 'vista-vmc']) { await rm('site/public/scenes/lmc-volume/datasets/' + id + '.webp', { force: true }); await rm('site/public/scenes/lmc/lmc-dataset-' + id + '.webp', { force: true }); } if (await exists(original + 'facilities.json')) await writeFile(FACILITIES, await readFile(original + 'facilities.json')); await writeFile(object + 'source/manifest.json', await readFile(original + 'volume-manifest.json')); }
   if (!await exists(backup)) return;
   const inventory = await readFile(original + 'inventory.json'), context = await readFile(original + 'context.json'), descriptor = await readFile(original + 'object.json');
   await rm(prepared, { recursive: true, force: true }); await rename(backup, prepared); await writeFile(object + 'inventory.json', inventory); await writeFile(object + 'object.json', descriptor); await prepareCatalog();
@@ -38,17 +86,18 @@ export async function restoreAccepted() {
   console.log('GAS_ACCEPTED_BANK_RESTORED');
 }
 
-type Arm = 'accepted' | 'dots' | 'sprites' | 'all' | 'gasfree' | 'align' | 'decam' | 'vista';
-const graded = (arm: Arm) => arm === 'decam' || arm === 'vista', dotted = (arm: Arm) => arm === 'all' || graded(arm);
+type Arm = 'accepted' | 'dots' | 'sprites' | 'all' | 'gasfree' | 'align' | 'decam' | 'vista' | 'datasets';
+const graded = (arm: Arm) => arm === 'decam' || arm === 'vista', dotted = (arm: Arm) => arm === 'all' || graded(arm) || arm === 'datasets';
 const HANDOVER = [.15, .65] as const, DISC_PLANE = { right: [1, 0, 0] as [number, number, number], up: [0, 1, 0] as [number, number, number] };
 async function armVolume(arm: Arm, native: PreparedCssVolume): Promise<{ volume: PreparedCssVolume; copies: [string, string][] }> {
   if (arm === 'accepted') return { volume: native, copies: [] };
   // Geometry only: the accepted slabs and pictures hold one model, and the pictures stay mounted at any size.
   if (arm === 'align') return { volume: validatePreparedCssVolume({ ...native, impostors: { ...native.impostors!, discPlane: DISC_PLANE, fullBelowDiameterPixels: 1, volumeAboveDiameterPixels: 20000 } }), copies: [] };
   const copies: [string, string][] = [];
-  const resources = await Promise.all(native.resources.map(async r => { if (graded(arm) && r.path.startsWith('l36-far/')) return { ...r, bytes: (await stat(L37_DIR + 'grades/' + arm + '-far/' + r.path.slice('l36-far/'.length))).size }; if (!r.path.startsWith('l36-near/')) return r; const from = (graded(arm) ? L37_DIR + 'background-' + arm + '/' : arm === 'all' ? SMOOTH_BACKGROUND_DIR : arm === 'gasfree' ? ALL_BACKGROUND_DIR : BACKGROUND_DIR) + 'bank/' + r.path.slice('l36-near/'.length); copies.push([from, r.path]); return { ...r, bytes: (await stat(from)).size }; }));
+  const resources = await Promise.all(native.resources.map(async r => { if (graded(arm) && r.path.startsWith('l36-far/')) return { ...r, bytes: (await stat(L37_DIR + 'grades/' + arm + '-far/' + r.path.slice('l36-far/'.length))).size }; if (!r.path.startsWith('l36-near/')) return r; const from = (arm === 'datasets' ? SMOOTH_BACKGROUND_DIR : graded(arm) ? L37_DIR + 'background-' + arm + '/' : arm === 'all' ? SMOOTH_BACKGROUND_DIR : arm === 'gasfree' ? ALL_BACKGROUND_DIR : BACKGROUND_DIR) + 'bank/' + r.path.slice('l36-near/'.length); copies.push([from, r.path]); return { ...r, bytes: (await stat(from)).size }; }));
   const background = validatePreparedCssVolume({ ...native, resources });
   if (arm === 'gasfree') return { volume: background, copies };
+  if (arm === 'datasets') { for (const name of ['gas-dots.bin', 'gas-dots-atlas.webp']) copies.push([L37_DIR + 'dots-all/' + name, name]); return { volume: validatePreparedCssVolume({ ...background, pointOverlays: ['gas-dots.bin'], thinHandoverCosines: HANDOVER, stackCompositing: 'transparent-normalized', impostors: { ...background.impostors!, discPlane: DISC_PLANE } }), copies }; }
   if (dotted(arm)) { if (graded(arm)) for (const r of native.resources) if (r.path.startsWith('l36-far/')) copies.push([L37_DIR + 'grades/' + arm + '-far/' + r.path.slice('l36-far/'.length), r.path]); for (const name of ['gas-dots.bin', 'gas-dots-atlas.webp']) copies.push([ALL_DIR + name, name]); return { volume: validatePreparedCssVolume({ ...background, pointOverlays: ['gas-dots.bin'], thinHandoverCosines: HANDOVER, stackCompositing: 'transparent-normalized', impostors: { ...background.impostors!, discPlane: DISC_PLANE } }), copies }; }
   if (arm === 'dots') { for (const name of ['gas-dots.bin', 'gas-dots-atlas.webp']) copies.push([DOTS_DIR + name, name]); return { volume: validatePreparedCssVolume({ ...background, pointOverlays: ['gas-dots.bin'] }), copies }; }
   const parts = await Promise.all(PILOT_REGIONS.map(async r => ({ id: r.id, volume: validatePreparedCssVolume(await json(SPRITES_DIR + r.id + '/volume.json')) })));
@@ -108,6 +157,22 @@ async function imageLight(page: import('playwright').Page, arm: Arm) {
   console.log('GRADE_LIGHT ' + JSON.stringify({ arm, siteOverImage: +(site / image).toFixed(3) }));
 }
 
+/** Each dataset clicked in the real sidebar, there and back, with its own textures and nobody else's. */
+async function datasetChecks() {
+  const browser = await chromium.launch({ headless: true, executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' }), errors: string[] = [], rows: Record<string, unknown>[] = [];
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 }); page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(r.status() + ' ' + r.url()); });
+    await page.goto(ORIGIN + '/lmc/', { waitUntil: 'domcontentloaded', timeout: 180000 }); await page.waitForFunction(() => document.documentElement.dataset.ready === 'true', {}, { timeout: 90000 }).catch(() => console.log('GAS_DATASET_NOT_READY errors ' + errors.slice(0, 6).join(' | ').slice(0, 900))); await page.waitForFunction(() => document.querySelectorAll('.prepared-cloud-points > div').length > 0, {}, { timeout: 60000 }).catch(async () => { console.log('GAS_DATASET_NO_BOARDS ' + JSON.stringify(await page.evaluate(() => { const b = document.querySelector<HTMLElement>('[data-volume-dataset-object="lmc-volume"]'); return { ready: document.documentElement.dataset.ready, bank: b && getComputedStyle(b).display + ' ' + getComputedStyle(b).opacity, selected: b?.dataset.selectedDataset, layers: b?.querySelectorAll('.css-volume-detail s').length, loading: document.querySelector<HTMLElement>('.object-datasets')?.dataset.datasetLoading, text: document.querySelector('.object-datasets')?.textContent?.slice(0, 200) }; })) + ' errors ' + errors.slice(0, 6).join(' | ').slice(0, 900)); }); await page.waitForTimeout(1500);
+    if (!await page.evaluate(() => document.querySelector('[data-volume-dataset-object="lmc-volume"]') !== null)) { errors.push('The bank never mounted: ' + JSON.stringify(await page.evaluate(() => Reflect.get(window, '__CSSEARTH_CONTEXT_AVAILABILITY__')))); return; }
+    const read = () => page.evaluate(() => { const bank = document.querySelector<HTMLElement>('[data-volume-dataset-object="lmc-volume"]')!, urls = [...bank.querySelectorAll<HTMLElement>('.css-volume-detail s')].flatMap(n => [...getComputedStyle(n).backgroundImage.matchAll(/url\("?([^"\)]+)"?\)/gu)].map(m => m[1]!)), boards = [...document.querySelectorAll<HTMLElement>('.prepared-cloud-points > div')], atlas = [...new Set(boards.map(n => getComputedStyle(n).backgroundImage))], view = (Reflect.get(Reflect.get(window, '__lmc') as object, 'runtime') as { view(): { worldCamera: { pose: { orientationXyzw: number[]; positionM: number[] } } } }).view().worldCamera.pose, active = document.querySelector<HTMLElement>('.object-dataset-picker [aria-current], .object-dataset-picker [aria-pressed="true"], .object-dataset-picker [aria-checked="true"], .object-dataset-picker input:checked')?.closest('[data-dataset-option]'); return { url: location.pathname + location.search, selected: bank.dataset.selectedDataset, sets: [...new Set(urls.map(u => /(l36|decam|vista)-near/u.exec(u)?.[1] ?? 'other'))], layers: urls.length, overlays: document.querySelectorAll('.prepared-cloud-points').length, boards: boards.length, atlas: atlas.map(a => /gas-dots[a-z-]*-atlas/u.exec(a)?.[0] ?? a.slice(0, 60)), retained: bank.querySelectorAll('*').length, pose: [...view.orientationXyzw, ...view.positionM], option: active?.textContent?.slice(0, 60), sidebar: document.querySelector('.object-datasets')?.textContent?.slice(0, 240), rail: [...document.querySelectorAll<HTMLElement>('.object-dataset-context-rail')].map(n => n.textContent?.slice(0, 200)).join(' | ') }; });
+    const labels = ['DECam SMASH', 'VISTA VMC', 'Horálek optical', 'VISTA VMC', 'DECam SMASH', 'Horálek optical', 'DECam SMASH']; let pose: number[] | null = null;
+    console.log('GAS_DATASET_START ' + JSON.stringify(await read()));
+    for (const label of labels) { await page.locator('.object-dataset-picker').getByText(label, { exact: true }).first().click(); await page.waitForTimeout(3500); const s = await read(); if (!pose) pose = s.pose; const moved = Math.max(...s.pose.map((v, i) => Math.abs(v - pose![i]!) / Math.max(1, Math.abs(pose![i]!)))); const hasText = (s.sidebar ?? '').includes(label); rows.push({ label, ...s, pose: undefined, moved, hasText }); console.log('GAS_DATASET ' + JSON.stringify({ label, ...s, pose: undefined, moved })); }
+    await page.waitForTimeout(500);
+  } finally { await browser.close(); }
+  await writeFile(L37_DIR + 'datasets.json', JSON.stringify({ errors, rows }, null, 1) + '\n'); console.log('GAS_DATASETS_DONE errors=' + errors.length + ' ' + errors.slice(0, 4).join(' | '));
+}
+
 /** Both entries, by state: opening /lmc/ and clicking it from the Milky Way's page, and where the Milky Way's centre falls. */
 async function entryPoses(page: import('playwright').Page, errors: string[]) {
   const read = () => page.evaluate(() => { const bank = document.querySelector<HTMLElement>('[data-volume-dataset-object="lmc-volume"]'), roots = bank ? [...bank.querySelectorAll<HTMLElement>('.css-volume-projection')].slice(0, 3).map(n => +Number(getComputedStyle(n).opacity).toFixed(3)) : []; const volume = { layers: bank?.querySelectorAll('.css-volume-detail s').length ?? 0, boards: document.querySelectorAll('.prepared-cloud-points > div').length, bank: bank && getComputedStyle(bank).display + ' ' + getComputedStyle(bank).opacity, axes: roots, backing: [...document.querySelectorAll<HTMLElement>('[data-galaxy-backing="lmc-volume"]')].map(n => getComputedStyle(n).display + ' ' + (+getComputedStyle(n).opacity).toFixed(2)).join() }; for (const key of Object.keys(window)) if (key.startsWith('__')) { const api = Reflect.get(window, key) as { runtime?: { view?: () => { worldCamera: unknown; stageViewport: unknown } } } | null, view = api?.runtime?.view?.(); if (view) return { key, volume, world: view.worldCamera, viewport: view.stageViewport, href: location.pathname }; } return null; }) as Promise<{ key: string; volume: Record<string, unknown>; world: { pose: { positionM: [number, number, number]; orientationXyzw: [number, number, number, number]; focusOffset?: { offsetM: number[] } } }; viewport: { focalPixels: number; widthPixels: number; heightPixels: number }; href: string } | null>;
@@ -147,6 +212,7 @@ async function dragPath(page: import('playwright').Page, errors: string[]) {
 
 async function capture(arm: Arm, name: string, shots = true) {
   if (arm === 'align') { await alignmentReport(ORIGIN); return; }
+  if (arm === 'datasets') { await datasetChecks(); return; }
   const directory = L37_DIR + name + '/'; await mkdir(directory, { recursive: true });
   const views = (await siteViewLinks(ORIGIN)).map(v => ({ id: v.id, url: v.url + '&embed' }));
   if (dotted(arm)) {
@@ -195,13 +261,15 @@ export async function runArm(arm: Arm, name: string, stay: boolean) {
     await rm(stage, { recursive: true, force: true }); await cp(prepared, stage, { recursive: true });
     for (const [from, to] of copies) { await mkdir(dirname(stage + '/' + to), { recursive: true }); await writeFile(stage + '/' + to, await readFile(from)); }
     if (dotted(arm)) { const path = stage + '/backing.json'; await writeFile(path, JSON.stringify(discBacking(JSON.parse(await readFile(path, 'utf8')) as BackingRecord)) + '\n'); }
-    await writeVolumeDatasetBank(stage, { ...bank, datasets: [{ ...bank.datasets[0]!, volume, stars: { ...bank.datasets[0]!.stars, frame: volume.frame } }] });
+    const first = { ...bank.datasets[0]!, volume, stars: { ...bank.datasets[0]!.stars, frame: volume.frame } }, extra = arm === 'datasets' ? await gradedDatasets(first, stage) : [];
+    await writeVolumeDatasetBank(stage, { ...bank, datasets: [arm === 'datasets' ? { ...first, label: DATASET_TEXT['horalek-widefield'].label } : first, ...extra] });
+    if (arm === 'datasets') await patchHost(stage);
     let server: ReturnType<typeof spawn> | undefined;
     try {
       await rename(prepared, backup); await rename(stage, prepared);
-      await inventoryPreparedAssets({ objectId: 'lmc-volume', objectDirectory: object }); await prepareCatalog();
+      await inventoryPreparedAssets({ objectId: 'lmc-volume', objectDirectory: object }); if (arm === 'datasets') await inventoryPreparedAssets({ objectId: 'lmc', objectDirectory: HOST }); await prepareCatalog(); if (arm === 'datasets') await patchFacilities();
       let occupied = false; try { occupied = (await fetch(ORIGIN)).ok; } catch {} need(!occupied, 'The pilot port is already occupied');
-      server = spawn('pnpm', ['exec', 'astro', 'dev', '--config', 'site/astro.config.mts', '--host', '127.0.0.1', '--port', '4313', '--ignore-lock'], { detached: true, stdio: ['ignore', 'ignore', 'ignore'], env: { ...process.env, ASTRO_DEV_BACKGROUND: '1' } });
+      server = spawn('pnpm', ['exec', 'astro', 'dev', '--config', 'site/astro.config.mts', '--host', '127.0.0.1', '--port', '4313', '--ignore-lock'], { detached: true, stdio: ['ignore', openSync(L37_DIR + 'server.log', 'w'), openSync(L37_DIR + 'server.log', 'a')], env: { ...process.env, ASTRO_DEV_BACKGROUND: '1' } });
       const deadline = Date.now() + 180000;
       while (true) { need(server.exitCode === null, 'The candidate site exited'); try { if ((await fetch(ORIGIN + '/lmc/')).ok) break; } catch {} need(Date.now() < deadline, 'The candidate site did not start'); await new Promise(r => setTimeout(r, 500)); }
       await capture(arm, name, !process.argv.includes('--state-only'));
@@ -216,6 +284,6 @@ export async function runArm(arm: Arm, name: string, stay: boolean) {
   });
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
-  const arm = process.argv[2]; need(arm === 'accepted' || arm === 'dots' || arm === 'sprites' || arm === 'all' || arm === 'gasfree' || arm === 'align' || arm === 'decam' || arm === 'vista', 'Choose an arm');
+  const arm = process.argv[2]; need(arm === 'accepted' || arm === 'dots' || arm === 'sprites' || arm === 'all' || arm === 'gasfree' || arm === 'align' || arm === 'decam' || arm === 'vista' || arm === 'datasets', 'Choose an arm');
   await runArm(arm, process.argv[3] ?? arm, process.argv.includes('--stay'));
 }
