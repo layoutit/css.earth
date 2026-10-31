@@ -37,8 +37,9 @@ export async function install() {
   await writeVolumeDatasetBank(STAGE, { ...bank, datasets });
   const backing = STAGE + '/backing.json'; await writeFile(backing, JSON.stringify(discBacking(await json(backing) as BackingRecord)) + '\n');
   await rm(PREPARED, { recursive: true, force: true }); await rename(STAGE, PREPARED);
+  await rm('src/objects/lmc/prepared/text.json', { force: true });
   for (const args of [['site/build/prepare/catalog/prepare-volume-presentation.mts', '--object=lmc-volume'], ['site/build/prepare/authored/prepare-authored.ts', 'lmc', '--write', '--full'], ['site/build/prepare/authored/prepare-text.mts', 'lmc'], ['site/build/prepare/authored/prepare-object-json.mts', 'lmc'], ['packages/bake/cli/prepare-dataset-sprites.mts'], ['site/build/prepare/catalog/prepare-facilities.mts', '--catalog-only']]) execFileSync(process.execPath, args, { stdio: 'inherit' });
-  await inventoryPreparedAssets({ objectId: 'lmc-volume', objectDirectory: OBJECT }); await prepareCatalog();
+  await inventoryPreparedAssets({ objectId: 'lmc', objectDirectory: 'src/objects/lmc/' }); await inventoryPreparedAssets({ objectId: 'lmc-volume', objectDirectory: OBJECT }); await prepareCatalog();
   console.log('LMC_DATASETS_INSTALLED');
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) await install();
