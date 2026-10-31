@@ -20,6 +20,8 @@ import { ALL_BACKGROUND_DIR, SMOOTH_BACKGROUND_DIR } from './background-all.mts'
 import { L37_DIR, PILOT_REGIONS } from './regions.mts';
 import { SPRITES_DIR } from './sprites.mts';
 import { milkyWayOnScreen } from './opening-view.mts';
+import { alignmentReport, backingReport } from './alignment.mts';
+import { discBacking, type BackingRecord } from './backing-disc.mts';
 
 const OWNER_VIEWS = { A: 'UYNDKid65ZoPsMM7jkKo0rK7w8M2LdAC0JFBQsczQAAAAEAYLePdTsc_v-SEPg9eQck_xhiBrVRtdb-y9jlCd__kAAA', B: 'UYNDKid65ZoPsMM7jkKo0rK7w8M2LdAC0JFBQsczQAAAAEAYLePdTsc_v-SKn2nq6Q0_tAI9Dr8Hnz95Xl0j650cAAA', C: 'UYNDKid65ZoPsMM7jkKo0rK7w8M2LdAC0JFBQsczQAAAAEAYLePdTsc_v-QgFFSGD4y_eediPfXx6D-zirDngHj0AAA' };
 export const STOP_FILE = L37_DIR + 'stop-live', ORIGIN = 'http://127.0.0.1:4313';
@@ -35,15 +37,17 @@ export async function restoreAccepted() {
   console.log('GAS_ACCEPTED_BANK_RESTORED');
 }
 
-type Arm = 'accepted' | 'dots' | 'sprites' | 'all' | 'gasfree';
-const HANDOVER = [.15, .65] as const;
+type Arm = 'accepted' | 'dots' | 'sprites' | 'all' | 'gasfree' | 'align';
+const HANDOVER = [.15, .65] as const, DISC_PLANE = { right: [1, 0, 0] as [number, number, number], up: [0, 1, 0] as [number, number, number] };
 async function armVolume(arm: Arm, native: PreparedCssVolume): Promise<{ volume: PreparedCssVolume; copies: [string, string][] }> {
   if (arm === 'accepted') return { volume: native, copies: [] };
+  // Geometry only: the accepted slabs and pictures hold one model, and the pictures stay mounted at any size.
+  if (arm === 'align') return { volume: validatePreparedCssVolume({ ...native, impostors: { ...native.impostors!, discPlane: DISC_PLANE, fullBelowDiameterPixels: 1, volumeAboveDiameterPixels: 20000 } }), copies: [] };
   const copies: [string, string][] = [];
   const resources = await Promise.all(native.resources.map(async r => { if (!r.path.startsWith('l36-near/')) return r; const from = (arm === 'all' ? SMOOTH_BACKGROUND_DIR : arm === 'gasfree' ? ALL_BACKGROUND_DIR : BACKGROUND_DIR) + 'bank/' + r.path.slice('l36-near/'.length); copies.push([from, r.path]); return { ...r, bytes: (await stat(from)).size }; }));
   const background = validatePreparedCssVolume({ ...native, resources });
   if (arm === 'gasfree') return { volume: background, copies };
-  if (arm === 'all') { for (const name of ['gas-dots.bin', 'gas-dots-atlas.webp']) copies.push([ALL_DIR + name, name]); return { volume: validatePreparedCssVolume({ ...background, pointOverlays: ['gas-dots.bin'], thinHandoverCosines: HANDOVER, stackCompositing: 'transparent-normalized' }), copies }; }
+  if (arm === 'all') { for (const name of ['gas-dots.bin', 'gas-dots-atlas.webp']) copies.push([ALL_DIR + name, name]); return { volume: validatePreparedCssVolume({ ...background, pointOverlays: ['gas-dots.bin'], thinHandoverCosines: HANDOVER, stackCompositing: 'transparent-normalized', impostors: { ...background.impostors!, discPlane: DISC_PLANE } }), copies }; }
   if (arm === 'dots') { for (const name of ['gas-dots.bin', 'gas-dots-atlas.webp']) copies.push([DOTS_DIR + name, name]); return { volume: validatePreparedCssVolume({ ...background, pointOverlays: ['gas-dots.bin'] }), copies }; }
   const parts = await Promise.all(PILOT_REGIONS.map(async r => ({ id: r.id, volume: validatePreparedCssVolume(await json(SPRITES_DIR + r.id + '/volume.json')) })));
   for (const part of parts) for (const res of part.volume.resources) copies.push([SPRITES_DIR + part.id + '/' + res.path.slice(res.path.indexOf('/') + 1), res.path]);
@@ -62,6 +66,22 @@ async function measureLight(id: string, withGas: Buffer, dustOnly: Buffer, witho
   const whole = [0, 0, w, h], all = sum(G, whole), ref = sum(R, whole, F);
   const dark = sum(W, whole, B), darkRef = sum(W, whole, F);
   return { id, added: all, referenceAdded: ref, ratio: all / ref, groups, darkening: dark, referenceDarkening: darkRef, darkeningRatio: dark / darkRef };
+}
+
+/** A real wheel zoom out through the handoff in one page: the bright centroid on screen against where the frame's centre should be. */
+async function zoomPath(page: import('playwright').Page, errors: string[]) {
+  await page.goto(ORIGIN + '/lmc/', { waitUntil: 'domcontentloaded', timeout: 180000 }); await page.waitForFunction(() => document.documentElement.dataset.ready === 'true', {}, { timeout: 180000 }); await page.waitForTimeout(2500);
+  const rows: { diameter: number; mix: string; x: number; y: number; expected: [number, number]; light: number }[] = []; await page.mouse.move(512, 384);
+  for (let i = 0; i < 45; i++) {
+    await page.mouse.wheel(0, -24); await page.waitForTimeout(600);
+    const state = await page.evaluate(() => { const bank = document.querySelector<HTMLElement>('[data-volume-dataset-object="lmc-volume"]'), k = document.querySelector<HTMLElement>('[data-galaxy-backing="lmc-volume"]'), rect = k?.querySelector('img')?.getBoundingClientRect(), view = Reflect.get(Reflect.get(window, '__lmc') as object, 'runtime') as { view(): { zoom: number } }; return { diameter: rect ? rect.width : 0, centre: rect ? [(rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2] : null, zoom: view.view().zoom, detailOpacity: 'bank ' + (bank ? getComputedStyle(bank).display + ' ' + (+getComputedStyle(bank).opacity).toFixed(2) : '') + ' backing ' + (k ? getComputedStyle(k).display + ' ' + (+getComputedStyle(k).opacity).toFixed(2) : '') + ' ' + location.pathname }; });
+    const { data, info } = await sharp(await page.screenshot()).removeAlpha().resize(256).greyscale().blur(2).raw().toBuffer({ resolveWithObject: true }); let sum = 0, sx = 0, sy = 0; for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) { const v = data[y * info.width + x]!; if (v > 18) { sum += v; sx += v * x; sy += v * y; } }
+    rows.push({ light: sum, diameter: state.zoom * 1000, mix: state.detailOpacity, x: sum ? sx / sum * 1024 / 256 : 0, y: sum ? sy / sum * 1024 / 256 : 0, expected: (state.centre ?? [0, 0]) as [number, number] });
+  }
+  const shown = rows.filter(r => r.diameter > 0), step = (a: (r: typeof rows[number]) => [number, number]) => Math.max(0, ...shown.slice(1).map((r, i) => Math.hypot(a(r)[0] - a(shown[i]!)[0], a(r)[1] - a(shown[i]!)[1])));
+  const step0 = (list: typeof rows) => Math.max(0, ...list.slice(1).map((r, i) => Math.hypot(r.expected[0] - list[i]!.expected[0], r.expected[1] - list[i]!.expected[1])));
+  const through = rows.filter(r => /bank block 0\.[1-9]/u.test(r.mix)).length, result = { samples: rows.length, samplesWithBillboard: shown.length, samplesInHandoff: through, diameters: [shown[0]?.diameter, shown.at(-1)?.diameter], largestCentreStepPx: step0(rows.filter(r => r.expected[0] !== 0)), largestLightCentroidStepPx: step(r => [r.x, r.y]), surfaceBrightnessAboveAndBelowHandoff: [shown.filter(r => r.diameter >= 256).at(-1), shown.find(r => r.diameter <= 128)].map(r => r ? r.light / r.diameter ** 2 : null), rows: rows.map(r => [Math.round(r.diameter), r.mix, Math.round(r.x), Math.round(r.y), Math.round(r.expected[0]), Math.round(r.expected[1]), Math.round(r.light)]) };
+  await writeFile(ALL_DIR + 'zoom.json', JSON.stringify(result) + '\n'); console.log('GAS_ZOOM ' + JSON.stringify({ ...result, rows: undefined })); if (!rows.some(r => /bank block 0\.[1-9]/u.test(r.mix))) errors.push('The zoom did not cross the handoff');
 }
 
 /** Both entries, by state: opening /lmc/ and clicking it from the Milky Way's page, and where the Milky Way's centre falls. */
@@ -102,6 +122,7 @@ async function dragPath(page: import('playwright').Page, errors: string[]) {
 }
 
 async function capture(arm: Arm, name: string, shots = true) {
+  if (arm === 'align') { await alignmentReport(ORIGIN); return; }
   const directory = L37_DIR + name + '/'; await mkdir(directory, { recursive: true });
   const views = (await siteViewLinks(ORIGIN)).map(v => ({ id: v.id, url: v.url + '&embed' }));
   if (arm === 'all') {
@@ -133,7 +154,7 @@ async function capture(arm: Arm, name: string, shots = true) {
       if (shots && arm === 'dots') { await page.addStyleTag({ content: '.prepared-cloud-points{display:none!important}' }); await new Promise(r => setTimeout(r, 200)); await page.screenshot({ path: directory + view.id + '-background.png' }); }
       rows.push({ ...view, ...state }); console.log('GAS_SITE_VIEW ' + JSON.stringify({ arm, id: view.id, layers: state.layers, front: state.front, behind: state.behind, retained: state.retained, detail: state.detailOpacity, far: state.far, axes: state.axes, errors: errors.length }));
     }
-    if (arm === 'all') { await dragPath(page, errors); await entryPoses(page, errors); }
+    if (arm === 'all') { await dragPath(page, errors); await entryPoses(page, errors); await zoomPath(page, errors); await backingReport(page, ORIGIN, errors); }
   } finally { await browser.close(); }
   if (arm === 'all') { await writeFile(ALL_DIR + 'light.json', JSON.stringify(measures) + '\n'); await writeFile(ALL_DIR + 'site-cameras.json', JSON.stringify(cameras) + '\n'); }
   await writeFile(directory + (arm === 'dots' || arm === 'all' ? 'site-result.json' : 'result.json'), JSON.stringify({ arm, complete: errors.length === 0, errors, rows }, null, 2) + '\n');
@@ -149,6 +170,7 @@ export async function runArm(arm: Arm, name: string, stay: boolean) {
     for (const [from, to] of [[object + 'inventory.json', 'inventory.json'], [object + 'object.json', 'object.json'], [CONTEXT, 'context.json']] as const) await writeFile(original + to, await readFile(from));
     await rm(stage, { recursive: true, force: true }); await cp(prepared, stage, { recursive: true });
     for (const [from, to] of copies) { await mkdir(dirname(stage + '/' + to), { recursive: true }); await writeFile(stage + '/' + to, await readFile(from)); }
+    if (arm === 'all') { const path = stage + '/backing.json'; await writeFile(path, JSON.stringify(discBacking(JSON.parse(await readFile(path, 'utf8')) as BackingRecord)) + '\n'); }
     await writeVolumeDatasetBank(stage, { ...bank, datasets: [{ ...bank.datasets[0]!, volume, stars: { ...bank.datasets[0]!.stars, frame: volume.frame } }] });
     let server: ReturnType<typeof spawn> | undefined;
     try {
@@ -170,6 +192,6 @@ export async function runArm(arm: Arm, name: string, stay: boolean) {
   });
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
-  const arm = process.argv[2]; need(arm === 'accepted' || arm === 'dots' || arm === 'sprites' || arm === 'all' || arm === 'gasfree', 'Choose an arm');
+  const arm = process.argv[2]; need(arm === 'accepted' || arm === 'dots' || arm === 'sprites' || arm === 'all' || arm === 'gasfree' || arm === 'align', 'Choose an arm');
   await runArm(arm, process.argv[3] ?? arm, process.argv.includes('--stay'));
 }

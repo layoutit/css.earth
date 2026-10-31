@@ -108,3 +108,19 @@ test('magnification does not turn a distant prepared model picture into slabs',(
  assert.equal(projectVolumeImpostors(publication(27.5,10000),frame,distanceBank).volumeMix,.5);
  assert.equal(projectVolumeImpostors(publication(49.59,10000),frame,bank).volumeMix,1,'Old size-only delivery remains unchanged');
 });
+
+test('an opt-in disc plane lays a picture on the disc as the camera sees it, and edge-on pictures leave smoothly', () => {
+  const plane = { right: [1, 0, 0] as VolumeVector, up: [0, 1, 0] as VolumeVector };
+  const lattice: PreparedVolumeImpostors = { ...bank, discPlane: plane, views: [
+    { id: 'top', back: [0, 0, 1], right: [1, 0, 0], down: [0, -1, 0], texturePath: 'top.png' },
+    { id: 'side', back: [0, -1, 0], right: [1, 0, 0], down: [0, 0, -1], texturePath: 'side.png' },
+  ] };
+  const at = (tilt: number) => { const t = tilt * Math.PI / 180, h = t / 2; return projectVolumeImpostors({ ...publication(), world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, -10 * Math.sin(t), 10 * Math.cos(t)], orientationXyzw: [Math.sin(h), 0, 0, Math.cos(h)] } } }, frame, lattice, true); };
+  const top = at(60).views.find(view => view.id === 'top')!;
+  assert.ok(Math.abs(top.matrix[0] - 1) < 1e-9, 'its right is unchanged');
+  assert.ok(Math.abs(top.matrix[3] - Math.cos(60 * Math.PI / 180)) < 1e-9, 'the disc foreshortens as the tilt does');
+  assert.ok(!at(45).views.some(view => view.id === 'side' && view.weight > .001), 'an open view holds no edge-on picture');
+  let prior = at(0).views.find(view => view.id === 'side')?.weight ?? 0;
+  for (let tilt = 1; tilt <= 90; tilt++) { const now = at(tilt).views.find(view => view.id === 'side')?.weight ?? 0; assert.ok(Math.abs(now - prior) < .12, 'no pop at ' + tilt); prior = now; }
+  assert.ok(prior > .99);
+});

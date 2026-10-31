@@ -40,6 +40,8 @@ export interface PreparedVolumeImpostors {
   readonly fullBelowDiameterPixels: number;
   readonly volumeAboveDiameterPixels: number;
   /** Optional physical distance window; distant pictures remain authoritative while zooming from afar. */
+  /** Opt-in: a thin disc's plane. A picture is laid on that plane as the camera sees it, and an edge-on picture leaves as the view opens. */
+  readonly discPlane?: { readonly right: VolumeVector; readonly up: VolumeVector };
   readonly distanceFade?: { readonly detailBelowUnits: number; readonly impostorAboveUnits: number };
   readonly views: readonly {
     readonly id: string;
