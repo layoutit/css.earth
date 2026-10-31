@@ -12,7 +12,7 @@ import { loadVoInputs } from './vo/bridge.mts';
 import { binaryTableHdu, primaryHdu } from '@cssearth/bake/objects/raster';
 import { executeFamilyOperation } from './family-operation.mts';
 import { acquisitionName, planAccess, type AcquisitionSpec } from './vo/access.mts';
-import { formatExploration, artifactScreen, formatArtifact } from './cli-format.mts';
+import { formatExploration, artifactScreen, formatArtifact } from './cli/cli-format.mts';
 import { saveExploration, getSession, type SessionServices } from './session.mts';
 import { loadQualifiedObservations } from './qualification/qualified-observations.mts';
 import { listArtifactOutputs } from './delivery/artifact-outputs.mts';

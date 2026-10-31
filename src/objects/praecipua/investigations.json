@@ -28,7 +28,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 738259665062428416, through the CIE 1931 2-degree observer: #fff3db. Routes tried in order: stis-ngsl: HD 94264 is not in the library; pulkovo: HR 4247 is not in the catalogue; kiehling: HR 4247 is not among its 60 stars; kharitonov: HR 4247 is not in the catalogue; burnashev: BS 4247 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=738259665062428416&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=738259665062428416&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

@@ -13,8 +13,8 @@
  * Each row: x, y (grid pixel of the tile's centre), vx, vy (pixels a year), sigma (pixels a year), epochs, span (years),
  * rms (pixels), as fit.npy holds them.
  */
-import { gaussianFilter } from './ndimage.mts';
-import { median, std } from './numpy-statistics.mts';
+import { gaussianFilter } from './python-ports/ndimage.mts';
+import { median, std } from './python-ports/numpy-statistics.mts';
 import { matchTemplate } from './registration.mts';
 import { HALF, PIX, SIDE } from './sky-grid.mts';
 import type { GridImage } from './hubble-epochs.mts';

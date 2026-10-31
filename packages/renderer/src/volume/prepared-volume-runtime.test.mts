@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { validatePreparedCssVolume, type PreparedCssVolume, type VolumeVector } from '@cssearth/objects';
-import { mountPreparedCssVolume, transparentStackOpacities, completedStackOpacities } from './prepared-volume-runtime.ts';
+import { mountPreparedCssVolume, preparedVolumeTexturePaths, STACK_OPACITY_CEILING, transparentStackOpacities, completedStackOpacities } from './prepared-volume-runtime.ts';
 import type { VolumeCameraPublication } from './types.ts';
 
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
@@ -62,6 +62,41 @@ test('normalized transparent overlap cannot exceed the weighted completed emissi
     assert.ok(actual <= ceiling + 1e-14); assert.ok(opacities.reduce((s, v) => s + v, 0) <= .999001);
   }
   assert.notDeepEqual(transparentStackOpacities([1, 1, 0]), completedStackOpacities([1, 1, 0]), 'Opaque compensation is invalid for a transparent footprint');
+});
+
+test('fixed images keep one full-opacity prepared quad per leaf for every direction and camera distance', () => {
+  const source = payload(6), fixed = { ...source, fixedImages: true as const,
+    stacks: source.stacks.map(stack => stack.axis === 'z' ? stack : { ...stack, leaves: [] }) };
+  const { runtime, roots, meshes, document, host, before } = mount(fixed, true);
+  assert.deepEqual(host.children, [roots[2], before], 'only the populated fixed-image axis enters layout and compositing');
+  assert.equal(roots[0]!.parentNode, null); assert.equal(roots[1]!.parentNode, null);
+  assert.deepEqual(meshes.map(mesh => mesh.children.length), [0, 0, 6]);
+  const nodes = roots.flatMap((root, index) => [root, ...meshes[index]!.children]), quads = [...meshes[2]!.children], count = document.count;
+  runtime.publish(publication([0, 0, 1]));
+  const fixedStyles = quads.map(node => ({ ...node.style }));
+  for (const direction of [[0, 0, 1], [1, 0, 0], [0, 0, -1], [-1, .3, .1], [1, 1, 1]] as const) for (const position of [[0, 0, 10], [100, 0, -2], [0, 0, .1]] as const) {
+    for (const node of nodes) node.propertyWrites.length = 0;
+    runtime.publish(publication(direction, position));
+    assert.deepEqual(roots.map(root => Number(root.style.opacity)), [0, 0, STACK_OPACITY_CEILING]);
+    assert.deepEqual(quads.map(node => node.style.opacity), Array(6).fill('1'));
+    assert.deepEqual(quads.map(node => ({ ...node.style })), fixedStyles, 'prepared image, UV, geometry and lighting are fixed');
+    assert.equal(document.count, count); assert.deepEqual(meshes[2]!.children, quads);
+    assert.deepEqual(host.children, [roots[2], before], 'rotating and coasting never mount empty axis subtrees');
+    assert.ok(nodes.flatMap(node => node.propertyWrites).every(key => key === 'transform'), 'resident fixed images never change opacity during rotation');
+    assert.deepEqual(preparedVolumeTexturePaths(fixed, publication(direction, position)), ['z.png'], 'even edge-on/offscreen images stay resident and ready');
+  }
+  for (const node of nodes) node.propertyWrites.length = 0;
+  runtime.publish(publication([1, 1, 1], [0, 0, .1]));
+  assert.deepEqual(nodes.flatMap(node => node.propertyWrites), []);
+  runtime.destroy();
+});
+
+test('prepared directional faces retain baked backface culling on every optical copy', () => {
+  const data = payload(1);
+  for (const stack of data.stacks) for (const leaf of stack.leaves) Object.assign(leaf.style, { backfaceVisibility: 'hidden' });
+  const { meshes, runtime } = mount(data);
+  for (const mesh of meshes) for (const node of mesh.children) assert.equal(node.style.backfaceVisibility, 'hidden');
+  runtime.destroy();
 });
 
 function copyOpacity(copy: FakeElement): number {

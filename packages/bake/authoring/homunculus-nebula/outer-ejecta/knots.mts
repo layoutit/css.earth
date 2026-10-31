@@ -15,9 +15,9 @@
  *
  * Each row: east, north, depth (arcsec), v_los (km/s), v_tan (km/s), ejection year, number of peaks (knots3d.npy).
  */
-import { curveFit } from './least-squares.mts';
-import { exp, uniformFilter } from './ndimage.mts';
-import { median } from './numpy-statistics.mts';
+import { curveFit } from './python-ports/least-squares.mts';
+import { exp, uniformFilter } from './python-ports/ndimage.mts';
+import { median } from './python-ports/numpy-statistics.mts';
 import { narrowLine, spaxelOffsets, type HbetaCube } from './muse-hbeta.mts';
 import { HALF, PIX } from './sky-grid.mts';
 

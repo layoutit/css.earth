@@ -15,7 +15,14 @@ export async function prunePreparedExtras(root: string): Promise<string[]> {
       if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
       throw error;
     });
-    if (inventory === undefined || !(await stat(join(directory, 'prepared')).catch(() => undefined))?.isDirectory()) continue;
+    // A folder holding nothing but the ignored prepared output is a retired object the cache still carries: a clean
+    // checkout has no such folder, so its preparation inputs must not be requested (abundantia, 2026-10-23).
+    if (inventory === undefined) {
+      const entries = await readdir(directory);
+      if (entries.length > 0 && entries.every(name => name === 'prepared')) { await rm(directory, { recursive: true, force: true }); removed.push(`${entry.name}/`); }
+      continue;
+    }
+    if (!(await stat(join(directory, 'prepared')).catch(() => undefined))?.isDirectory()) continue;
     const published = new Set(array(record(JSON.parse(inventory)).assets).map(record).filter(asset => asset.location === 'prepared').map(asset => string(asset.filename)));
     for (const path of await files(join(directory, 'prepared'))) if (!published.has(path)) {
       await rm(join(directory, 'prepared', path)); removed.push(`${entry.name}/prepared/${path}`);

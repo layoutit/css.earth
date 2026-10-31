@@ -1,8 +1,12 @@
 import {hybridOpticalOpacity} from '@cssearth/core';
+import { axisWeights, preparedVolumeCameraTransform } from './prepared-volume-projection.js';
+export { axisWeights, preparedVolumeCameraTransform } from './prepared-volume-projection.js';
+import { mergedOpticalOpacity } from './optical-opacity.js';
+export { mergedOpticalOpacity } from './optical-opacity.js';
 import { type PreparedLeafBounds, type PreparedCssVolume, type VolumeVector, type VolumeOpticalRole, validatePreparedCssVolume } from '@cssearth/objects';
 import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../rendering/culling/prepared-leaf-frustum.js';
-import { presentPhysicalPoseInVolume, cssViewFromOrientation, worldRotationFromQuaternion, worldRotationCss } from '@cssearth/engine';
-import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, VolumeCameraPublication, VolumeLocalCamera, PreparedVolumeCameraTransform } from './types.js';
+import { presentPhysicalPoseInVolume, worldRotationCss } from '@cssearth/engine';
+import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, VolumeCameraPublication } from './types.js';
 
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { createSettlePacer } from '../rendering/loading/settle-pacer.js';
@@ -55,7 +59,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   const hybridNodes: { node: HTMLElement; role: VolumeOpticalRole; opacity: number }[][] = [];
   // A bank whose images hold their three copies (mergedOpticalCopies) draws one layer a slice, at opacity gain / 3: on a
   // phone the 52/52/26 bank's 390 layers outran Chrome's 256 MB tile budget and drew empty in 248 frames of an 8 s turn.
-  const merged = payload.mergedOpticalCopies === 3, copiesPerLeaf = merged ? 1 : 3;
+  const fixed = payload.fixedImages === true;
+  const merged = payload.mergedOpticalCopies === 3, copiesPerLeaf = merged || fixed ? 1 : 3;
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
@@ -105,7 +110,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     scene.append(mesh);
     camera.append(scene);
     root.append(camera);
-    options.host.insertBefore(root, options.before);
+    // Fixed images never select their empty axes. Keep their logical slots for axis-indexed state, but leave
+    // those perspective/transform subtrees unattached, including when a bank requests resident stacks.
+    if (!fixed || stack.leaves.length) options.host.insertBefore(root, options.before);
     roots.push(root); cameras.push(camera); scenes.push(scene);
   }
   let destroyed = false;
@@ -229,8 +236,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         leaf.hidden = false;
       }
     }
-    const localCamera = presentPhysicalPoseInVolume(world.pose, payload.frame);
-    const strengths = axisWeights(localCamera, payload.stacks, payload.frame.boundsUnits, payload.thinHandoverCosines);
+    const strengths = fixed ? fixedImageStrengths(payload) : axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits, payload.thinHandoverCosines);
     for (const [axis, pending] of pendingTextures.entries()) {
       if (!options.residentStacks && strengths[axis]!.weight <= 0) continue;
       for (const [leaf, url] of pending) {
@@ -263,6 +269,11 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
       // Integer gains are exact; the fractional step linearly approximates alpha.
       const copies = opticalCopies[index]!;
+      if (fixed) {
+        if (copies.alpha[0] !== 1) { copies.alpha[0] = 1; for (const node of copies.nodes[0]!) node.style.opacity = '1'; }
+        if (visible !== copies.wanted[0]) { copies.wanted[0] = visible; if (visible) join.request(); else retire.request(); }
+        continue;
+      }
       // A shown copy keeps an 8-bit step of alpha inside [0.001, 0.999] and stays joined while its stack is visible, so a
       // turn never crosses opacity 0 or 1 and never changes the layer tree; each frame stays within 1/510 alpha of exact.
       // Copies crossing 0/1 and leaving or joining mid-turn made WebKit recomposite for 25-37 ms. iPad drag at the stripe
@@ -278,7 +289,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
           continue;
         }
         // The image is three copies at alpha 1 - (1 - a)^3; gain / 3 of it stands for `gain` copies (exact where faint).
-        const alpha = visible ? Math.min(0.999, Math.max(0.001, Math.round(Math.min(3, opticalGain) / 3 * 255) / 255)) : 0;
+        const alpha = visible ? mergedOpticalOpacity(opticalGain) : 0;
         if (alpha !== copies.alpha[0]) { copies.alpha[0] = alpha; const value = String(alpha); for (const node of copies.nodes[0]!) node.style.opacity = value; }
         if (visible !== copies.wanted[0]) { copies.wanted[0] = visible; if (visible) join.request(); else retire.request(); }
         continue;
@@ -338,28 +349,6 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   }});
 }
 
-export function preparedVolumeCameraTransform(publication: VolumeCameraPublication, frame: PreparedCssVolume['frame'], unitScale = 50): PreparedVolumeCameraTransform {
-  if (publication.world.referenceFrame !== frame.referenceFrame || publication.world.epochJdTt !== frame.epochJdTt) {
-    throw new TypeError('Prepared volume and world camera use different reference frames.');
-  }
-  const { viewport } = publication;
-  if (!(unitScale > 0) || !Number.isFinite(unitScale) || !(viewport.focalPixels > 0) ||
-      viewport.principalOffsetPixels.length !== 2 || !viewport.principalOffsetPixels.every(Number.isFinite)) {
-    throw new TypeError('Prepared volume camera transform inputs are invalid.');
-  }
-  const local = presentPhysicalPoseInVolume(publication.world.pose, frame);
-  const view = cameraView(local);
-  const [px, py, pz] = local.positionUnits;
-  const [ox, oy] = viewport.principalOffsetPixels;
-  const rotation = cssVolumeRotation(local);
-  return Object.freeze({ rotation: Object.freeze([...rotation]),
-    translationCssPixels: Object.freeze([
-      ox - dot(view, 0, [px, py, pz]) * unitScale,
-      oy - dot(view, 3, [px, py, pz]) * unitScale,
-      viewport.focalPixels - dot(view, 6, [px, py, pz]) * unitScale,
-    ] as [number, number, number]), focalPixels: viewport.focalPixels });
-}
-
 function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], copy: number): HTMLElement {
   const node = create('s');
   // A slice is out of layout and compositing until its stack is turned to and it joins (`join`); a zero-alpha optical
@@ -371,22 +360,13 @@ function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolum
   node.style.transform = leaf.style.transform;
   node.style.backgroundSize = leaf.style.backgroundSize;
   node.style.backgroundPosition = leaf.style.backgroundPosition;
+  if (leaf.style.backfaceVisibility) node.style.backfaceVisibility = leaf.style.backfaceVisibility;
   return node;
-}
-
-function cssVolumeRotation(camera: VolumeLocalCamera): readonly number[] {
-  const view = cameraView(camera);
-  // PolyCSS receives prepared vertices in [y,x,z] order. This is the single
-  // renderer-owned CSS reflection; the physical quaternion remains proper.
-  return [view[1]!, view[0]!, view[2]!, view[4]!, view[3]!, view[5]!, view[7]!, view[6]!, view[8]!];
-}
-
-function cameraView(camera: VolumeLocalCamera): readonly number[] {
-  return cssViewFromOrientation(camera.orientationXyzw);
 }
 
 /** Texture demand uses the same axis weights and prepared frustum bounds as publication. */
 export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publication: VolumeCameraPublication): readonly string[] {
+  if (payload.fixedImages) return [...new Set(payload.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.texturePath)))];
   const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits, payload.thinHandoverCosines);
   const transform = preparedVolumeCameraTransform(publication, payload.frame, 50);
   const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, publication.viewport);
@@ -400,49 +380,8 @@ export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publicati
   return [...paths];
 }
 
-export function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks'],
-  bounds: PreparedCssVolume['frame']['boundsUnits'], thinHandover?: PreparedCssVolume['thinHandoverCosines']): readonly { weight: number; opticalGain: number }[] {
-  const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
-  const back: VolumeVector = [matrix[2]!, matrix[5]!, matrix[8]!];
-  const length = Math.hypot(...back);
-  const cosines = AXES.map((axis, index) => {
-    const normal = stacks.find(stack => stack.axis === axis)?.normalUnits;
-    return Math.abs(normal ? normal.reduce((sum, value, i) => sum + value * back[i]!, 0) : back[index]!) / length;
-  });
-  const extents = AXES.map((_, index) => bounds.max[index]! - bounds.min[index]!), thinnest = Math.min(...extents);
-  const thin = extents.indexOf(thinnest), aspect = thinnest / Math.max(...extents);
-  let weights: number[];
-  const drawn = AXES.map(axis => (stacks.find(stack => stack.axis === axis)?.leaves.length ?? 0) > 0);
-  if (aspect < .5 && drawn.every(Boolean)) {
-    // The thin stack owns oblique views. At shallow angles, dissolve side banks
-    // across their azimuth bisector too: an argmax there swaps whole images at 45 degrees.
-    const sideMaximum = Math.max(...cosines.filter((_, index) => index !== thin));
-    const sideWeights = cosines.map((cosine, index) => {
-      const t = index === thin ? 0 : Math.max(0, Math.min(1, (cosine - sideMaximum + .16) / .16));
-      return t * t * (3 - 2 * t);
-    });
-    const sideTotal = sideWeights.reduce((sum, weight) => sum + weight, 0);
-    // Perspective spreads local sight angles across a nearby thin volume. Keep
-    // the side bank longer there; outside one long frame extent the accepted
-    // far-view window is unchanged. Smoothstep gives zero slope at both ends.
-    const distance = Math.hypot(...camera.positionUnits.map((value, index) => value - (bounds.min[index]! + bounds.max[index]!) / 2));
-    const approach = Math.max(0, Math.min(1, 1 - distance / Math.max(...extents)));
-    const proximity = approach * approach * (3 - 2 * approach);
-    const edge = Math.max(.02, aspect) + .4 * proximity;
-    const t = thinHandover ? Math.max(0, Math.min(1, (cosines[thin]! - thinHandover[0]) / (thinHandover[1] - thinHandover[0])))
-      : Math.max(0, Math.min(1, (cosines[thin]! - edge * .5) / (edge * .5)));
-    const face = t * t * (3 - 2 * t);
-    weights = AXES.map((_, index) => index === thin ? face : (1 - face) * sideWeights[index]! / sideTotal);
-  } else {
-    const strengths = cosines.map((value, index) => drawn[index] ? value * Math.sqrt(thinnest / extents[index]!) : 0);
-    const maximum = Math.max(...strengths);
-    weights = strengths.map((value, index) => {
-      if (!drawn[index]) return 0;
-      const t = Math.max(0, Math.min(1, (value - maximum + .16) / .16));
-      return t * t * (3 - 2 * t);
-    });
-  }
-  return weights.map((weight, index) => ({ weight, opticalGain: weight > 0 ? Math.max(1, 1 / cosines[index]!) : 1 }));
+function fixedImageStrengths(payload: PreparedCssVolume): ReturnType<typeof axisWeights> {
+  return AXES.map(axis => ({ weight: payload.stacks.find(stack => stack.axis === axis)!.leaves.length ? 1 : 0, opticalGain: 1 }));
 }
 
 /** Opaque completed images, in DOM back-to-front order. Their total contribution is always the ceiling. */
@@ -466,6 +405,3 @@ export function transparentStackOpacities(weights: readonly number[]): readonly 
 
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(6)).toString(); }
-function dot(matrix: readonly number[], offset: number, point: VolumeVector): number {
-  return matrix[offset]! * point[0] + matrix[offset + 1]! * point[1] + matrix[offset + 2]! * point[2];
-}

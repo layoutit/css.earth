@@ -48,7 +48,7 @@
         "source": {
           "id": "gw-orionis-stellar-color",
           "path": "../manifest.json",
-          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3340856533286969600&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3340856533286969600&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. No limb darkening is drawn: The sphere stands for the unresolved light of three stars. No resolved photosphere or applicable measured limb law is claimed.. The spin axis's direction on the sky is a display convention."

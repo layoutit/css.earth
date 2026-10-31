@@ -26,7 +26,7 @@ import { publicationRecord } from './publication-record.mts';
 import { gaiaCepheidForm, installLightCurve } from './light-curve.mts';
 import type { SolarEpoch } from './solar-epoch.mts';
 import { gaiaCepheidClass } from '@cssearth/bake/photometry';
-import { CEPHEID_GRAVITIES } from './archives/cepheids.mts';
+import { CEPHEID_GRAVITIES } from './archives/cepheids/cepheids.mts';
 import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
 import { ensureHostSystems, packageParent, withParent } from './package-parent.mts';

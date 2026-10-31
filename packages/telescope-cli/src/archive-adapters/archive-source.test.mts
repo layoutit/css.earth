@@ -17,7 +17,7 @@ import { openFitsSource } from './fits-source.mts';
 import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
 import { openPdsSource, preparePdsSource } from './pds-source.mts';
 import { main } from '../cli.mts';
-import { parseCli } from '../cli-arguments.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
 import { readSourceQuestion } from '../products/source-relevance.mts';
 import { withTransferConsent } from '@cssearth/telescope-core/node';

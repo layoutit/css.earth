@@ -25,7 +25,7 @@
       },
       {
         "catalogueId": "source-wasp-103-gaia-xp",
-        "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4439085988769170432&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4439085988769170432&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
         "label": "Gaia DR3 sampled XP spectrum",
         "checked": "2026-09-27",
         "locator": "source_id 4439085988769170432; sampled flux integrated through CIE color matching functions."

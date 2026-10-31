@@ -1,7 +1,7 @@
 export type { JsonValue, JsonRecord, ObjectDescriptor, PreparedAssetReference, PreparedObject } from './descriptor.js';
 export { parseObjectDescriptor } from './parse.js';
 export { objectPageCss } from './page-style.js';
-export { bankCataloguePoints, parseImageLayerBankDescriptor } from './image-layer-bank.js';
+export { bankCataloguePoints, bankOverlays, parseImageLayerBankDescriptor } from './image-layer-bank.js';
 export type { ImageLayerBankDescriptor } from './image-layer-bank.js';
 export { parseCataloguePointBankDescriptor } from './catalogue-point-bank.js';
 export type { CataloguePointBankDescriptor } from './catalogue-point-bank.js';
@@ -19,6 +19,7 @@ export * from './registry/index.js';
 export { PREPARED_BINARY_MAGIC, shufflePreparedBinary, unshufflePreparedBinary } from './prepared-binary.js';
 export type { PreparedBinaryRegion } from './prepared-binary.js';
 export { PREPARED_BANK_MAGIC, encodePreparedBank, decodePreparedBank, preparedBankColumn } from './prepared-bank.js';
+export { PREPARED_POINT_TRANSMISSION_SCHEMA, parsePointTransmission, type PreparedPointTransmission } from './prepared-data/catalogue/point-transmission.js';
 export type { PreparedBank, PreparedBankColumn, PreparedBankColumnType } from './prepared-bank.js';
 export * from './volume/emission/cloud-density-filter.js';
 export * from './volume/compiler/compiler-bake.js';

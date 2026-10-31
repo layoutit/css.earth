@@ -15,7 +15,7 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   // A Kepler-field giant weighed by its oscillations, from APOKASC-3 (apokasc.mts).
   apokasc: { names: 'KIC', draft: async (names, { archive }) => (await import('./archives/apokasc.mts')).draftsFromApokasc(names, archive) },
   // A Cepheid's Baade-Wesselink radius and distance from Groenewegen (2013) (cepheids.mts).
-  cepheids: { names: 'NAME', draft: async (names, { archive }) => (await import('./archives/cepheids.mts')).draftsFromCepheids(names, archive) },
+  cepheids: { names: 'NAME', draft: async (names, { archive }) => (await import('./archives/cepheids/cepheids.mts')).draftsFromCepheids(names, archive) },
   // A K2-field giant, far above or below the Galactic plane, weighed by its oscillations, from Khan et al. (2023) (k2.mts).
   k2: { names: 'EPIC', draft: async (names, { archive }) => (await import('./archives/k2.mts')).draftsFromK2(names, archive) },
   // A giant near the ecliptic poles, from the same paper's TESS + APOGEE table (k2.mts).
@@ -35,11 +35,11 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   // A hot star whose disc the Narrabri intensity interferometer measured (Hanbury Brown et al. 1974), with the temperature Code et al. (1976) derived from it (narrabri.mts).
   narrabri: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/narrabri.mts')).draftsFromNarrabri(names, archive) },
   // A Cepheid Hubble found in another galaxy (Hoffmann et al. 2016), placed by its catalogue row: HOST (N4536) or HOST/ID (sh0es.mts).
-  sh0es: { names: 'HOST[/ID]', draft: async (names, { archive }) => (await import('./archives/sh0es.mts')).draftsFromSh0es(names, archive) },
+  sh0es: { names: 'HOST[/ID]', draft: async (names, { archive }) => (await import('./archives/cepheids/sh0es.mts')).draftsFromSh0es(names, archive) },
   // A Cepheid in the Andromeda Galaxy: Hubble's V1, or those Hubble measured for its distance (Li et al. 2021) (m31-cepheids.mts).
-  m31cepheids: { names: 'all | V1 | ID', draft: async (names, { archive, root }) => (await import('./archives/m31-cepheids.mts')).draftsFromM31Cepheids(names, archive, root) },
+  m31cepheids: { names: 'all | V1 | ID', draft: async (names, { archive, root }) => (await import('./archives/cepheids/m31-cepheids.mts')).draftsFromM31Cepheids(names, archive, root) },
   // A Cepheid of the Triangulum Galaxy that Hubble measured for its distance (Breuval et al. 2023) (m33-cepheids.mts).
-  m33cepheids: { names: 'all | ID', draft: async (names, { archive, root }) => (await import('./archives/m33-cepheids.mts')).draftsFromM33Cepheids(names, archive, root) },
+  m33cepheids: { names: 'all | ID', draft: async (names, { archive, root }) => (await import('./archives/cepheids/m33-cepheids.mts')).draftsFromM33Cepheids(names, archive, root) },
   // A star of another galaxy from any VizieR table that lists it with a position and a period (tables/table-stars.mts); `telescope stars GALAXY` finds the tables.
   table: { names: 'CLASS:GALAXY=TABLE[#ROW]', draft: async (names, { archive, root }) => (await import('./archives/tables/table-stars.mts')).draftsFromTable(names, archive, root) },
   // A picture ESA publishes for Hubble or Webb, as one more dataset of a page that shows a shaped layer bank (pictures/pictures.mts).

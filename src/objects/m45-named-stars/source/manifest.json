@@ -22,6 +22,22 @@
       },
       "dependencies": [],
       "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    },
+    {
+      "id": "modeled-named-star-depths",
+      "path": "src/objects/m45-named-stars/source/dots/modeled-table.csv",
+      "generator": "packages/bake/authoring/m45/dust/acquisition/named-star-table.mts",
+      "title": "Adopted bright-star depths behind the Pleiades dust plane",
+      "credit": "Hipparcos sky positions and photometry with adopted bright-star depths.",
+      "acquisition": "Derived from the preserved original table by the generator. Every bright star has adopted normal depth 136.7 pc, 0.7 pc beyond the 136.0 pc dust reference. This is not measured stellar depth.",
+      "dependencies": [
+        "named-stars"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Adopted Pleiades model geometry: normal depth 136.7 pc, 0.7 pc beyond the dust model's normal-depth reference of 136.0 pc along ICRS RA 56.67978318 deg, Dec 24.10845447 deg. Individual bright-star depths and their common plane are assumptions; measured sky positions, observed photometry and published parallax/facts remain separate."
+      },
+      "license": "Derived from the catalogue under its original terms; cite van Leeuwen (2007) and CDS/VizieR."
     }
   ],
   "documents": [
@@ -37,6 +53,13 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/m45-named-stars/source/plane-placement.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Adopted Pleiades model geometry: normal depth 136.7 pc, 0.7 pc beyond the dust model's normal-depth reference of 136.0 pc along ICRS RA 56.67978318 deg, Dec 24.10845447 deg. Individual bright-star depths and their common plane are assumptions; measured sky positions, observed photometry and published parallax/facts remain separate."
       }
     }
   ],

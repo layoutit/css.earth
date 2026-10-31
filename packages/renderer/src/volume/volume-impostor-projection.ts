@@ -9,31 +9,19 @@ export interface VolumeImpostorProjection {
   readonly y: number;
   readonly diameterPixels: number;
   readonly volumeMix: number;
-  readonly distanceMix: number;
   readonly visible: boolean;
   readonly views: readonly { readonly id: string; readonly weight: number; readonly matrix: readonly [number, number, number, number] }[];
 }
 
 /** Project a prepared bounding sphere through the same physical camera as the full volume. */
 export function projectVolumeImpostors(publication: VolumeCameraPublication, frame: PreparedCssVolume['frame'], bank: PreparedVolumeImpostors, includeFullViews = false): VolumeImpostorProjection {
-  const { world, viewport } = publication;
-  if (world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Volume impostor camera frame and epoch differ.');
-  if (!(viewport.focalPixels > 0) || !Number.isFinite(viewport.focalPixels) || !viewport.principalOffsetPixels.every(Number.isFinite)) {
-    throw new TypeError('Volume impostor camera viewport is invalid.');
-  }
-  const radius = bank.radiusUnits;
-  const { local, right, down, back, depth, distance, x, y, inside, visible } = projectVolumeSphere(world, viewport, frame, radius);
-  // In front of the sphere the projected size is unchanged; beside or behind it the tangent-cone size replaces the
-  // old infinite answer, so an off-axis cloud never switches to its full volume. Inside it the full volume draws and
-  // its physical leaf frustum does the culling.
-  const diameterPixels = inside ? Number.POSITIVE_INFINITY
-    : 2 * radius * viewport.focalPixels / (depth > radius ? depth : Math.sqrt(distance * distance - radius * radius));
-  const distanceMix=bank.distanceFade?smooth((bank.distanceFade.impostorAboveUnits-distance)/(bank.distanceFade.impostorAboveUnits-bank.distanceFade.detailBelowUnits)):1,volumeMix = distanceMix*smooth((diameterPixels - bank.fullBelowDiameterPixels) / (bank.volumeAboveDiameterPixels - bank.fullBelowDiameterPixels));
+  const { local, right, down, back, distance, x, y, visible, diameterPixels } = projectVolumeDiameter(publication, frame, bank.radiusUnits);
+  const volumeMix = smooth((diameterPixels - bank.fullBelowDiameterPixels) / (bank.volumeAboveDiameterPixels - bank.fullBelowDiameterPixels));
   // A baked view shows the volume from a direction, so the view follows where the camera is, not where it looks:
   // turning in place keeps the same views and only rotates their images.
   const toViewer: VolumeVector = distance > 0
     ? [local.positionUnits[0] / distance, local.positionUnits[1] / distance, local.positionUnits[2] / distance] : back;
-  return { x, y, diameterPixels, volumeMix, distanceMix, visible,
+  return { x, y, diameterPixels, volumeMix, visible,
     views: visible && (volumeMix < 1 || includeFullViews) ? (bank.discPlane ? discViews(bank, toViewer) : selectImpostorViews(bank.views, toViewer)).map(({ view, weight }) => {
       const onDisc = bank.discPlane && discMatrix(bank.discPlane, view, right, down);
       if (onDisc) return { id: view.id, weight, matrix: onDisc };
@@ -62,6 +50,20 @@ function discMatrix(plane: NonNullable<PreparedVolumeImpostors['discPlane']>, vi
   const p = dot(plane.right, right), q = dot(plane.up, right), r = dot(plane.right, down), s = dot(plane.up, down);
   // Screen = [p q; r s] · disc, picture = [a b; c d] · disc, so screen = [p q; r s] · [a b; c d]⁻¹ · picture.
   return [(p * d - q * c) / det, (r * d - s * c) / det, (q * a - p * b) / det, (s * a - r * b) / det];
+}
+
+/** Shared screen-size handover for fixed axis pictures and camera-facing views, including off-axis cameras. */
+export function projectVolumeDiameter(publication: VolumeCameraPublication, frame: PreparedCssVolume['frame'], radius: number) {
+  const { world, viewport } = publication;
+  if (world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Volume impostor camera frame and epoch differ.');
+  if (!(viewport.focalPixels > 0) || !Number.isFinite(viewport.focalPixels) || !viewport.principalOffsetPixels.every(Number.isFinite)) {
+    throw new TypeError('Volume impostor camera viewport is invalid.');
+  }
+  const sphere = projectVolumeSphere(publication.world, publication.viewport, frame, radius);
+  const { inside, depth, distance } = sphere;
+  const diameterPixels = inside ? Number.POSITIVE_INFINITY
+    : 2 * radius * publication.viewport.focalPixels / (depth > radius ? depth : Math.sqrt(distance * distance - radius * radius));
+  return { ...sphere, diameterPixels };
 }
 
 /** Compact nearest-view interpolation: the fourth neighbour has zero weight, so entering/leaving views do not pop. */

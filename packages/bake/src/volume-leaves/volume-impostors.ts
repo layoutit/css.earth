@@ -35,7 +35,6 @@ export async function prepareVolumeImpostors(options: {
   renderView?: (view: View, radiusUnits: number) => Promise<{ rgba: Uint8Array; size: number }>;
   views?: readonly View[];
   radiusUnits?: number;
-  distanceFade?: PreparedVolumeImpostors['distanceFade'];
 }): Promise<PreparedCssVolume> {
   const volume = validatePreparedCssVolume(options.volume);
   const { brightness, readResource, writeResource } = options;
@@ -52,7 +51,7 @@ export async function prepareVolumeImpostors(options: {
     Math.max(Math.abs(volume.frame.boundsUnits.min[axis]), Math.abs(volume.frame.boundsUnits.max[axis]))));
   if (!(radiusUnits > 0) || !Number.isFinite(radiusUnits)) throw new TypeError('Impostor radius must be finite and positive.');
   const views = options.views?[...options.views]:directions(prefix);
-  validateVolumeImpostors({schema:PREPARED_VOLUME_IMPOSTORS_SCHEMA,radiusUnits,fullBelowDiameterPixels:128,volumeAboveDiameterPixels:256,views,...(options.distanceFade?{distanceFade:options.distanceFade}:{})},new Set(views.map(v=>v.texturePath)));
+  validateVolumeImpostors({schema:PREPARED_VOLUME_IMPOSTORS_SCHEMA,radiusUnits,fullBelowDiameterPixels:128,volumeAboveDiameterPixels:256,views},new Set(views.map(v=>v.texturePath)));
   if (views.some(view => !view.texturePath.startsWith(prefix + '/') || view.texturePath.split('/').some(part => !part || part === '.' || part === '..') || /[\\\u0000-\u0020]/u.test(view.texturePath))) throw new TypeError('Model-picture output must stay inside its safe relative prefix.');
   const oldPaths = new Set(volume.impostors?.views.map(view => view.texturePath));
   const resources = volume.resources.filter(resource => !oldPaths.has(resource.path));
@@ -101,7 +100,7 @@ export async function prepareVolumeImpostors(options: {
   }
   return { ...volume, resources: [...resources, ...preparedResources], impostors: {
     schema: PREPARED_VOLUME_IMPOSTORS_SCHEMA, radiusUnits,
-    fullBelowDiameterPixels: 128, volumeAboveDiameterPixels: 256, views,...(options.distanceFade?{distanceFade:options.distanceFade}:{}),
+    fullBelowDiameterPixels: 128, volumeAboveDiameterPixels: 256, views,
   } };
 }
 

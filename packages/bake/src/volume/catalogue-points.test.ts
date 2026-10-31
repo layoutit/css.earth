@@ -74,7 +74,7 @@ test('the renderer culling fixture is the bake output for its rows, exactly', ()
     const clump = [[40, 0, -60], [-90, 30, 20], [5, -5, 5]][index % 3]!;
     return [clump[0]! + (random() - .5) * 30, clump[1]! + (random() - .5) * 30, clump[2]! + (random() - .5) * 30, index % 2];
   });
-  const frozen = JSON.parse(readFileSync(new URL('../../../renderer/src/universe/batched-spatial-points.cells.json', import.meta.url), 'utf8')) as { boxes: number[][]; of: number[] };
+  const frozen = JSON.parse(readFileSync(new URL('../../../renderer/src/universe/points/batched-spatial-points.cells.json', import.meta.url), 'utf8')) as { boxes: number[][]; of: number[] };
   const cells = catalogueCells(rows, undefined, 32);
   assert.deepEqual(cells.of, frozen.of);
   assert.deepEqual(cells.boxes, frozen.boxes);

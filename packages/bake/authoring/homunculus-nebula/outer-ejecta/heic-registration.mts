@@ -9,9 +9,9 @@
  * picture's middle; the best of the three is kept. Result: [arcsec per picture pixel, star column, star row].
  */
 import sharp from 'sharp';
-import { gaussianFilter, mapCoordinates } from './ndimage.mts';
-import { nelderMead } from './nelder-mead.mts';
-import { mean, pairwiseSum } from './numpy-statistics.mts';
+import { gaussianFilter, mapCoordinates } from './python-ports/ndimage.mts';
+import { nelderMead } from './python-ports/nelder-mead.mts';
+import { mean, pairwiseSum } from './python-ports/numpy-statistics.mts';
 import { HALF, PIX, SIDE } from './sky-grid.mts';
 import type { GridImage } from './hubble-epochs.mts';
 

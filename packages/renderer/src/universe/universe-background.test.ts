@@ -19,19 +19,20 @@ test('the galaxy background mounts all three accepted slab stacks, with one host
   try {
     background.mount();
     const host = root.querySelector<HTMLElement>('.prepared-volume-context')!;
-    const projections = [...host.querySelectorAll<HTMLElement>('.css-volume-projection')];
-    assert.equal(projections.length, 3);
-    assert.ok(projections.every(projection => projection.style.background !== 'transparent'), 'completed far stack mattes must remain opaque for a linear dissolve');
-    assert.equal(host.querySelectorAll('.css-volume-mesh s').length,
-      (payload.mergedOpticalCopies === 3 ? 1 : 3) * payload.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0),
-      'one layer a slice whose image holds its three optical copies, or the three copies themselves');
-    assert.ok(host.querySelectorAll('*').length <= 500, 'the installed far scene respects the whole-scene cap');
+    assert.equal(host.querySelectorAll('.css-volume-mesh s, img').length, payload.farPlanes ? 0 :
+      (payload.mergedOpticalCopies === 3 ? 1 : 3) * payload.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0));
     const publish = (zKpc: number) => background.publish({ referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,
       pose: cameraPoseToReferenceFrame({ positionM: [8.277 * payload.frame.metersPerUnit, 0, zKpc * payload.frame.metersPerUnit],
         orientationXyzw: [0, 0, 0, 1] }, payload.frame) },
     { focalPixels: 900, widthPixels: 1440, heightPixels: 900, principalOffsetPixels: [0, 0] },
     Math.abs(zKpc) * payload.frame.metersPerUnit, plan.focus.positionM, 1);
+    publish(200);
+    if (payload.farPlanes) {
+      assert.equal(host.querySelectorAll('img, [data-volume-side-plane]').length, 6); assert.equal(host.querySelectorAll('s').length, 0);
+    }
     publish(35);
+    assert.equal(host.querySelectorAll('img, [data-volume-side-plane]').length, 0);
+    assert.equal(host.querySelectorAll('s').length, 33);
     assert.equal(host.style.display, ''); assert.equal(host.style.opacity, '1');
     // A Sun-centred camera, independent of the volume's Galactic-centre footprint.
     background.publish({ referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,

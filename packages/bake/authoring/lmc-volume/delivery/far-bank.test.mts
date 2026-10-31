@@ -29,7 +29,6 @@ test('model pictures preserve 33 spatial X/Y/Z layers and cannot force a resolve
     assert.deepEqual(result.stacks, volume.stacks, 'Attaching distant pictures must preserve the actual slab geometry');
     assert.deepEqual(result.stacks.map(s => s.leaves.length), [12, 11, 10]);
     assert.deepEqual(result.stacks.map((s, axis) => new Set(s.leaves.map(l => l.centerUnits[axis])).size), [10, 9, 7]);
-    assert.equal(result.impostors?.distanceFade, undefined, 'Physical distance must not override resolved X/Y/Z layers');
     assert.equal(result.impostors?.fullBelowDiameterPixels, 128);
     assert.equal(result.impostors?.volumeAboveDiameterPixels, 256);
     assert.equal(written.size, 8);

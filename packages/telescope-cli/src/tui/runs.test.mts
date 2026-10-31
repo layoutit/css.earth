@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { main, type CliIo, type CliServices } from '../cli.mts';
-import { parseCli } from '../cli-arguments.mts';
+import { parseCli } from '../cli/cli-arguments.mts';
 import { helpText } from '../help.mts';
 import { VERSION } from '../version.mts';
 import { FakeTerminal } from './fake-terminal.mts';

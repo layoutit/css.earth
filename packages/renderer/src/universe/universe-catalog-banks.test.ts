@@ -24,7 +24,7 @@ mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
  * the last one's opacity, whether it was told the camera coasts, where it was told its files are, and whether it was
  * retired. As the real owner (cloud-points.ts) does, one retired mid-coast is taken away when the coast ends. */
 const overlays: { url: string; destroyed: boolean; published: number; opacity: number; coasting: boolean[]; retired: boolean; resolveResource(path: string): string }[] = [];
-mock.module('./cloud-points.js', { namedExports: {
+mock.module('./clouds/cloud-points.js', { namedExports: {
   mountCloudOverlay: ({ url, resolveResource }: { url: string; resolveResource(path: string): string }) => {
     const overlay = { url, destroyed: false, published: 0, opacity: NaN, coasting: [] as boolean[], retired: false, resolveResource };
     overlays.push(overlay);

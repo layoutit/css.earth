@@ -116,6 +116,7 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/fomalhaut-disc/source/previews/dust.png
 !src/objects/gw-orionis-disc/source/previews/dust.png
 !src/objects/hd-95086-disc/source/previews/dust.png
+!src/objects/hl-tauri-disc/source/previews/dust.png
 !src/objects/moth-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png
@@ -559,3 +560,6 @@ src/objects/proxima-centauri-b/source/science/del-genio-2019/18_Day-Land_ANN1490
 
 # Compressed accepted pre-slice galaxy inputs are restored from the source cache.
 /src/objects/milky-way-volume/source/b30-inputs/
+
+# Numerical Pleiades model inputs restored from the declared source mirror.
+/src/objects/milky-way-pleiades-dust/source/inputs/

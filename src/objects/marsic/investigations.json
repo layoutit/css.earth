@@ -27,7 +27,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 1198898034296727296, through the CIE 1931 2-degree observer: #ffe8d1. Routes tried in order: stis-ngsl: HD 145001 is not in the library; pulkovo: HR 6008 is not in the catalogue; kiehling: HR 6008 is not among its 60 stars; kharitonov: HR 6008 is not in the catalogue; burnashev: BS 6008 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1198898034296727296&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1198898034296727296&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

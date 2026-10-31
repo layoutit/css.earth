@@ -28,7 +28,7 @@
       "finding": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 26 (BS 963), cross-checked against Gaia DR3 XP spectrum, source 5059348952161258624 (20 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #fff7fc. Routes tried in order: stis-ngsl: HD 20010 is not in the library; pulkovo: HR 963 is not in the catalogue; kiehling: HR 963 is not among its 60 stars; kharitonov: HR 963 is not in the catalogue; burnashev: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5059348952161258624&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5059348952161258624&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

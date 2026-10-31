@@ -1,0 +1,36 @@
+{
+  "id": "draine-2021-mmmp-isrf",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Modified MMP solar-neighborhood interstellar radiation field, U = 1",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz",
+      "label": "Primary data and documentation"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/abff51",
+      "label": "Published field model"
+    }
+  ],
+  "publisher": "Princeton University",
+  "relations": [],
+  "evidence": [
+    {
+      "url": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz",
+      "checkedOn": "2026-10-25",
+      "locator": "Draine et al. (2021), ApJ 917, 3, section 2.1; unreddened U = 1 table, 2,500 wavelengths; λuλ in erg/cm³; optical I/V/B mean intensities sampled without amplitude fitting."
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Draine et al. (2021); author-hosted mMMP illuminating spectrum.",
+      "scope": "Pleiades dust model",
+      "evidence": "https://www.astro.princeton.edu/~draine/PAHspec/mMMP/isrf_mmpisrf_0.00.gz"
+    }
+  ]
+}

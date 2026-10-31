@@ -13,7 +13,7 @@ export function SiteSceneView({ object, dataset, view, hidden, name, onBridge }:
   const frame = useRef<HTMLIFrameElement>(null);
   // The link the frame opens on; later dataset and layer changes are commands, so they do not reload the page.
   const src = useMemo(() => siteSceneUrl(__CSSEARTH_SITE_ORIGIN__, location.origin, { object, ...(dataset ? { dataset } : {}), ...(view ? { view } : {}) }, hidden).href,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Only the object reloads the frame: `dataset`, `view` and `hidden` reach it later as commands.
     [object]);
   useEffect(() => {
     const bridge = connectSiteBridge({ windowTarget: window, frame: () => frame.current?.contentWindow ?? null, siteOrigin: new URL(__CSSEARTH_SITE_ORIGIN__).origin });

@@ -306,7 +306,7 @@
         "filter": "365 nm",
         "observationMiddle": "2023-08-30T10:04:46.033",
         "converterId": "7b81c2b8b5a5",
-        "gain": 5e-09,
+        "gain": 5e-9,
         "gamma": 2.2,
         "referenceRadiusMeters": 6051800,
         "outputLongitudeOrigin": 180
@@ -610,6 +610,67 @@
             "productId": "RS-DMOJ120P.A01"
           }
         }
+      }
+    },
+    {
+      "id": "cloud-top-temperature",
+      "output": "venus-surface-{id}{suffix}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
+      "source": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "cloud-top-temperature",
+        "label": "Cloud-top temperature",
+        "format": "netcdf-lonlat-field",
+        "path": "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.head.dat",
+        "parts": [
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at29158.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at1274343966.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at2398780638.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at3523203206.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at4647625774.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at4803812166.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at5772048342.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at6896470910.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at8020893478.dat",
+          "science/fujisawa-2026/alerav_v1.0.1_anal_mean_201809-201812.at9145316046.dat"
+        ],
+        "variable": "temp",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 243,
+          "plev": 35
+        },
+        "sourceUnits": "K",
+        "longitudeZeroAt": 0,
+        "mirrored": true,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "cloud-top-temperature-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 180,
+        "units": "K",
+        "minimum": 180,
+        "maximum": 220,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "180",
+          "200",
+          "220"
+        ],
+        "description": "Simulated air temperature at the cloud tops from the ALERA-V model, a published simulation and not a measurement. Gray caps: no released grid samples beyond 87.9° north or south.",
+        "title": "Cloud-top temperature · ALERA-V simulation",
+        "sourceUrl": "https://doi.org/10.1002/gdj3.70080"
       }
     }
   ],

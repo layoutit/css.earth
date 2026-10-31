@@ -17,14 +17,20 @@ Color dataset: The color of K2-18's LAMOST spectrum. The LAMOST survey telescope
 
 **Habitable zone dataset.** A dataset of the whole system: the star with its habitable zone as a green band in the plane of its planet' orbit. The band is its own package, a drawing of four distances the Habitable Zone Gallery calculates; its sources, processing and limits are in [its README](../k2-18-habitable-zone/README.md). It is a calculation, not an observation.
 
+**Brightness from K2.** The Color + brightness and Brightness map datasets are made in this project from the K2 mission's own light curve of campaign 1 (June to August 2014; its PDC-MAP flux, kept at [MAST](https://archive.stsci.edu/missions-and-data/k2)) ([source record](../../sources/mast-k2-light-curves.json)). It is among the light curves [Reinhold & Hekker (2020, A&A 635, A43)](https://arxiv.org/abs/2001.08214) searched for rotation, and the star's row in their table (VizieR J/A+A/635/A43/table2) is their verdict that it shows the star turning: the period is theirs and nothing is judged here, and starry (Luger et al. 2019) makes the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 Run of 2026-09-21 (this version):
 
 - [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #ffc796 is the color dataset's prepared color and that the limb-darkening law is read at the recorded temperature and gravity; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
 
+**Brightness from K2.** Reinhold & Hekker (2020, A&A 635, A43) ask the periodogram, the wavelet and the autocorrelation of a campaign's light to give periods within a day of each other under 10 days, two days to 20 and five beyond, with a periodogram peak over 0.3, a period between a day and half the light's span, and a variability range under 10%. Their table (VizieR J/A+A/635/A43/table2) gives a rotation period of 36.62 ± 15.65 d in campaign 1, with a periodogram peak of 0.72: the star's period is 36.62 d, as published, and no criteria were applied to it here. The light varies by 1.2% (the range between its 5th and 95th percentiles, as the table prints it (the mean of the campaigns' variability ranges)). Of the paper's stars observed in two campaigns, 75.7% gave periods within 20% of each other. The criteria of Reinhold & Hekker (2020, A&A 635, A43), applied here to the star's K2 light, are not met: The three methods of Reinhold & Hekker (2020) do not agree within the 5 d they allow at this period: 36.40 d (periodogram), 33.92 d (wavelet) and 39.25 d (autocorrelation). The criteria of Holcomb et al. (2022, ApJ 936, 138), applied here to the star's TESS light, are not met: A valid period is found in 0 of the star's 3 sectors, and Holcomb et al. (2022) ask for at least 2. The star's record holds 38.6 d from the catalogues. The map's light curve leaves a scatter of 0.18% about the light, whose own noise is 0.09%. Gaia DR3 lists no other star within 16 arcseconds.
+
 ## Known problems
 
 The radius comes from stellar characterisation, not from a resolved disc. No image of the surface exists. The star is drawn as a neutral sphere.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+
+- **Brightness from K2.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. No tilt of the axis is known, so the map is made at 60°, the middle tilt of axes that point at random. The map is of June to August 2014: spots come and go within weeks or months.

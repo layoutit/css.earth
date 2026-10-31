@@ -101,14 +101,6 @@ test('a volume far behind the camera is out of view however large it would proje
   assert.equal(projectVolumeSphere(inside.world, inside.viewport, frame, 1).visible, true);
 });
 
-test('magnification does not turn a distant prepared model picture into slabs',()=>{
- const distanceBank={...bank,distanceFade:{detailBelowUnits:20,impostorAboveUnits:35}};
- assert.equal(projectVolumeImpostors(publication(49.59,10000),frame,distanceBank).volumeMix,0);
- assert.equal(projectVolumeImpostors(publication(15,10000),frame,distanceBank).volumeMix,1);
- assert.equal(projectVolumeImpostors(publication(27.5,10000),frame,distanceBank).volumeMix,.5);
- assert.equal(projectVolumeImpostors(publication(49.59,10000),frame,bank).volumeMix,1,'Old size-only delivery remains unchanged');
-});
-
 test('an opt-in disc plane lays a picture on the disc as the camera sees it, and edge-on pictures leave smoothly', () => {
   const plane = { right: [1, 0, 0] as VolumeVector, up: [0, 1, 0] as VolumeVector };
   const lattice: PreparedVolumeImpostors = { ...bank, discPlane: plane, views: [

@@ -4,7 +4,7 @@ import { loadSourceProducts } from '../products/source-products.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { rememberQualification } from './qualified-observations.mts';
+import { parseProductFacts, rememberQualification } from './qualified-observations.mts';
 import { readProductScience } from './product-science.mts';
 import { acquisitionDirectory, pdsPackages, readProductRecord, sameRun, requireWorkspace } from '@cssearth/telescope-core/node';
 import { measureCubeResolution } from '../archives/jwst/cubes/resolution.mts';
@@ -33,7 +33,6 @@ import { loadQueryInputs, queryCapabilities } from '../observation-query/query.m
 import { qualificationConfigurationFromArguments, qualificationPrerequisite, supportsQualificationRoute, type QualificationConfiguration } from './qualification-routes.mts';
 import { inputPath } from '../paths.mts';
 import { sourceReceipt } from '../products/source-product-contract.mts';
-import { parseProductFacts } from './qualified-observations.mts';
 
 const qualificationWork = (root: string, archive: string, id: string) => acquisitionDirectory() ? resolve(acquisitionDirectory()!, archive, id) : resolve(root, 'output', archive, id);
 

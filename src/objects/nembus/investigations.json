@@ -29,7 +29,7 @@
       "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 81: HR 464; VizieR III/202, cross-checked against Gaia DR3 XP spectrum, source 399402894487590144 (27 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffddac. Routes tried in order: stis-ngsl: HD 9927 is not in the library; pulkovo: HR 464 is not in the catalogue; kiehling: HR 464 is not among its 60 stars; burnashev: BS 464 is not in part2; kharitonov: used.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=399402894487590144&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=399402894487590144&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {

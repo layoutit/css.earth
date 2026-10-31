@@ -30,17 +30,25 @@ export function bankCataloguePoints(descriptor: ObjectDescriptor): readonly stri
   return Object.freeze([...cataloguePoints as string[]]);
 }
 
+/** Dataset-selected cloud overlay banks, shared by image and volume banks. Each id resolves to `prepared/<id>.bin`.
+ * Absence means no overlays; a declared map is nonempty and retains its dataset order. */
+export function bankOverlays(descriptor: ObjectDescriptor): Readonly<Record<string, readonly string[]>> {
+  const overlays = descriptor.properties.overlays;
+  if (overlays === undefined) return Object.freeze({});
+  const id = (value: unknown) => typeof value === 'string' && /^[a-z][a-z0-9-]*$/u.test(value);
+  if (!overlays || typeof overlays !== 'object' || Array.isArray(overlays) || !Object.keys(overlays).length ||
+    !Object.entries(overlays).every(([dataset, banks]) => id(dataset) && Array.isArray(banks) && banks.every(id) && new Set(banks).size === banks.length))
+    throw new TypeError(`src/objects/${descriptor.id}/object.json properties.overlays maps dataset ids to distinct bank ids, not ${JSON.stringify(overlays)}.`);
+  return Object.freeze(Object.fromEntries(Object.entries(overlays as Record<string, string[]>).map(([dataset, banks]) => [dataset, Object.freeze([...banks])])));
+}
+
 export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDescriptor {
   const descriptor = parseObjectDescriptor(input);
   if (descriptor.type !== 'image-layer-bank') throw new TypeError('Object is not an image-layer bank.');
   const properties = descriptor.properties;
   const unknown = Object.keys(properties).filter(key => !['frame', 'preparation', 'cataloguePoints', 'overlays', 'host', 'surrounds'].includes(key));
   if (unknown.length) throw new TypeError(`Unknown image-layer property: ${unknown.join(', ')}.`);
-  const cataloguePoints = bankCataloguePoints(descriptor), overlays = properties.overlays === undefined ? { optical: [] } : properties.overlays;
-  const id = (value: unknown) => typeof value === 'string' && /^[a-z][a-z0-9-]*$/u.test(value);
-  if (!overlays || typeof overlays !== 'object' || Array.isArray(overlays) || !Object.keys(overlays).length ||
-    !Object.entries(overlays).every(([dataset, banks]) => id(dataset) && Array.isArray(banks) && banks.every(id) && new Set(banks).size === banks.length))
-    throw new TypeError(`src/objects/${descriptor.id}/object.json properties.overlays maps dataset ids to distinct bank ids, not ${JSON.stringify(overlays)}.`);
+  const cataloguePoints = bankCataloguePoints(descriptor), overlays = properties.overlays === undefined ? Object.freeze({ optical: Object.freeze([]) }) : bankOverlays(descriptor);
   if (properties.surrounds !== undefined && properties.surrounds !== true) throw new TypeError(`src/objects/${descriptor.id}/object.json properties.surrounds is true or absent, not ${JSON.stringify(properties.surrounds)}.`);
   if (properties.host !== undefined && (typeof properties.host !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(properties.host))) throw new TypeError(`src/objects/${descriptor.id}/object.json properties.host is an object id or absent, not ${JSON.stringify(properties.host)}.`);
   const frame = parseDensityVolumeFrame(properties.frame);
@@ -53,6 +61,6 @@ export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDes
     throw new TypeError('Image-layer preparation must be a contained source.');
   }
   return Object.freeze({ ...descriptor, type: 'image-layer-bank', frame,
-    preparation: Object.freeze({ source: reference.source }), cataloguePoints, overlays: Object.freeze(Object.fromEntries(Object.entries(overlays as Record<string, string[]>).map(([dataset, banks]) => [dataset, Object.freeze([...banks])]))), surrounds: properties.surrounds === true,
+    preparation: Object.freeze({ source: reference.source }), cataloguePoints, overlays, surrounds: properties.surrounds === true,
     host: typeof properties.host === 'string' ? properties.host : undefined });
 }

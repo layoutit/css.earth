@@ -1,0 +1,40 @@
+{
+  "id": "source-venus-cloud-top-temperature-simulation-part-10",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Venus · venus cloud top temperature simulation part 10",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/23383461",
+      "label": "Source page"
+    },
+    {
+      "role": "original",
+      "url": "https://zenodo.org/records/23383461/files/alerav_v1.0.1_anal_mean_201809-201812.nc?download=1",
+      "label": "Source file"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/inputs/43"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fujisawa et al. (2026); ALERA-V simulation",
+      "scope": "The venus cloud top temperature simulation part 10 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

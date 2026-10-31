@@ -115,7 +115,7 @@
     {
       "id": "capability:runtimeMount",
       "kind": "capability",
-      "source": "packages/renderer/src/universe/catalogue-points.ts:274"
+      "source": "packages/renderer/src/universe/points/catalogue-points.ts:274"
     },
     {
       "id": "capability:serverAdoption",

@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { catalogueRowForm, catalogueRowUrl, parseCatalogueRow, rowArchive, sexagesimal, SIMBAD_TAP, VIZIER_ASU, type Archive } from '../archives.mts';
-import { relationCepheidDraft } from '../sh0es.mts';
+import { relationCepheidDraft } from '../cepheids/sh0es.mts';
 import { loadSolarEpoch } from '../../solar-epoch.mts';
 import { citedRow } from '../../names/identity.mts';
 import { parseStarSpec } from '../../spec.mts';

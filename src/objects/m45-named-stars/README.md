@@ -1,6 +1,6 @@
 # Pleiades named stars
 
-The nine stars of the Pleiades the IAU names, one bright dot each, drawn while the cluster is selected. Each sits where its label stands: Alcyone, Merope, Celaeno and Pleione have star objects of their own at the cluster's distance, and their dots sit at the same places. The cluster's other members are the [Pleiades members](../m45-members/README.md) bank's.
+The nine stars of the Pleiades the IAU names, one bright dot each, drawn while the cluster is selected. The dust model places them at an **adopted normal depth of 136.7 pc**, 0.7 pc beyond the 136.0 pc dust reference. Their individual depths are not measured. Alcyone, Merope, Celaeno and Pleione's object placements use the same adopted plane so their labels and navigation remain with the stars. The cluster's other members are the [Pleiades members](../m45-members/README.md) bank's.
 
 ## Sources
 
@@ -11,8 +11,9 @@ The nine stars of the Pleiades the IAU names, one bright dot each, drawn while t
 
 ## Processing
 
-1. The table is a CDS TAP query (`source/dots/points.json`, `table.origin`; not tracked): the nine Hipparcos rows, with the cluster's distance written into each.
-2. `node packages/bake/cli/prepare-catalogue-points.mts src/objects/m45-named-stars dots` places each star at its position and the cluster's distance, colors it by its B-V and tones it by its Hp magnitude on the member bank's scale, at the member bank's largest dot size ([recipe](source/dots/points.json)): 9 dots.
+1. The original CDS TAP table (`source/dots/table.csv`; restored from the origin in the manifest) is preserved. It holds nine Hipparcos rows with the cluster's reference distance.
+2. The [table generator](../../../packages/bake/authoring/m45/dust/acquisition/named-star-table.mts) derives `source/dots/modeled-table.csv`: radial distance = 136.7 pc divided by the star's sight-line cosine to the adopted plane normal. Measured RA, Dec, Hp and B−V remain unchanged. [plane-placement.json](source/plane-placement.json) states the reference direction and assumption.
+3. Catalogue preparation retains photometric styles and writes geometry in local parsecs, at 0.0001 pc precision. The shared world-navigation preparation places the four star objects on the same adopted plane. Their published parallax and photometric-reference records remain separate, unchanged facts.
 
 Gaia DR3's member list leaves the brightest of them out (Alcyone, Merope, Taygeta) or outside its tidal-radius selection (Atlas, Electra, Pleione), so without this bank the cluster's brightest stars would not be drawn. The member bank leaves out the three it keeps, so none is drawn twice.
 
@@ -21,10 +22,11 @@ Gaia DR3's member list leaves the brightest of them out (Alcyone, Merope, Tayget
 | Value | Kind |
 | --- | --- |
 | Positions, Hp and B-V | Measured: van Leeuwen (2007), Hipparcos |
-| Distance 134.8 pc for each | Chosen: the cluster's measured distance (Hunt & Reffert 2023). No star's own parallax places it within the cluster better than the cluster's depth |
+| Cluster reference distance 134.8 pc | Measured cluster statistic: Hunt & Reffert (2023), not an individual star depth |
+| Normal depth 136.7 pc for every bright star | Adopted model assumption: 0.7 pc beyond the 136.0 pc dust reference. Radial distances differ slightly with sky position |
 | Color fit, tone scale, dot size | Presentation: the app's catalogue star color; the member bank's tone scale and largest size |
 
 ## Known problems
 
-- Each star's depth within the cluster is chosen, not measured.
+- Each star's depth within the cluster is chosen, not measured. The adopted geometry is not a fit of the bright-star parallaxes.
 - Atlas, Electra, Maia, Taygeta and Asterope have no star object, so they are drawn but not named.

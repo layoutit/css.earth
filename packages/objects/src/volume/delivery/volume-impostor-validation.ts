@@ -6,11 +6,10 @@ import type { VolumeVector } from '../../density-volume.js';
 export function validateVolumeImpostors(input: unknown, resources: ReadonlySet<string>): PreparedVolumeImpostors {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Invalid prepared volume impostors.');
   const value = input as Record<string, unknown>;
-  if (Object.keys(value).sort().join(',') !== [...['fullBelowDiameterPixels','radiusUnits','schema','views','volumeAboveDiameterPixels'],...(Object.hasOwn(value,'discPlane')?['discPlane']:[]),...(Object.hasOwn(value,'distanceFade')?['distanceFade']:[])].sort().join(',') ||
+  if (Object.keys(value).sort().join(',') !== [...['fullBelowDiameterPixels','radiusUnits','schema','views','volumeAboveDiameterPixels'],...(Object.hasOwn(value,'discPlane')?['discPlane']:[])].sort().join(',') ||
       value.schema !== PREPARED_VOLUME_IMPOSTORS_SCHEMA || !positive(value.radiusUnits) || !positive(value.fullBelowDiameterPixels) ||
       !positive(value.volumeAboveDiameterPixels) || value.volumeAboveDiameterPixels <= value.fullBelowDiameterPixels ||
       !Array.isArray(value.views) || value.views.length < 4) throw new TypeError('Invalid prepared volume impostor bank or screen thresholds.');
-  let distanceFade: PreparedVolumeImpostors['distanceFade'];if(Object.hasOwn(value,'distanceFade')){const f=value.distanceFade;if(!f||typeof f!=='object'||Array.isArray(f)||Object.keys(f).sort().join(',')!=='detailBelowUnits,impostorAboveUnits')throw new TypeError('Invalid impostor distance fade');const detail:unknown=Reflect.get(f,'detailBelowUnits'),far:unknown=Reflect.get(f,'impostorAboveUnits');if(!positive(detail)||!positive(far)||far<=detail)throw new TypeError('Impostor distance fade must increase from detail to distant');distanceFade={detailBelowUnits:detail,impostorAboveUnits:far};}
   const ids = new Set<string>();
   const views = value.views.map((input: unknown) => {
     if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Invalid volume impostor view.');
@@ -27,7 +26,7 @@ export function validateVolumeImpostors(input: unknown, resources: ReadonlySet<s
     return { id: view.id, texturePath: view.texturePath, back: view.back, right: view.right, down: view.down };
   });
   return { schema: value.schema, radiusUnits: value.radiusUnits, fullBelowDiameterPixels: value.fullBelowDiameterPixels,
-    volumeAboveDiameterPixels: value.volumeAboveDiameterPixels, views, ...(Object.hasOwn(value,'discPlane')?(()=>{const d=value.discPlane as {right?:unknown;up?:unknown}|undefined;if(!d||!unit(d.right)||!unit(d.up))throw new TypeError('A disc plane is two unit vectors.');return{discPlane:{right:d.right,up:d.up}};})():{}), ...(distanceFade?{distanceFade}:{}) };
+    volumeAboveDiameterPixels: value.volumeAboveDiameterPixels, views, ...(Object.hasOwn(value,'discPlane')?(()=>{const d=value.discPlane as {right?:unknown;up?:unknown}|undefined;if(!d||!unit(d.right)||!unit(d.up))throw new TypeError('A disc plane is two unit vectors.');return{discPlane:{right:d.right,up:d.up}};})():{}) };
 }
 function positive(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value) && value > 0; }
 function unit(value: unknown): value is VolumeVector {

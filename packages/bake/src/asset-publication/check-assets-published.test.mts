@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { promisify } from 'node:util';
-import { addedAssetKeys, checkAssetsPublished, createHeadFetcher, gateVerdict, lastGreenMainSha, MAX_CONNECTIONS, type CheckAssetsPublishedResult, type HeadFetcher } from '@cssearth/bake/asset-publication';
+import { addedAssetKeys, assetShard, checkAssetsPublished, createHeadFetcher, gateVerdict, lastGreenMainSha, MAX_CONNECTIONS, type CheckAssetsPublishedResult, type HeadFetcher } from '@cssearth/bake/asset-publication';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 
 const execFileAsync = promisify(execFile);
@@ -334,4 +334,21 @@ test('a push to main never fails on assets: real 404s and unverified keys become
 test('a clean result says every checked file is published', () => {
   assert.deepEqual(gateVerdict(gateResult({})), { exitCode: 0,
     report: 'Checked 3 of 9 inventoried file(s) against https://earth-assets.lowpoly.cc: keys added since origin/main.\n\nEvery checked file is published.' });
+});
+
+test('four shards check every key exactly once between them, and a shard requests only its own keys', async t => {
+  const extra = Array.from({ length: 30 }, (_, index) => `extra-${index}.json`);
+  const root = await fixtureRoot(extra);
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const requested: string[][] = [];
+  for (let index = 0; index < 4; index++) {
+    const urls: string[] = [];
+    const result = await checkAssetsPublished(['--object=fixture-body'], { root, shard: { index, count: 4 }, fetcher: async url => { urls.push(String(url)); return ok(); } });
+    assert.equal(result.checked, urls.length);
+    assert.ok(urls.every(url => assetShard(new URL(url).pathname.slice(1), 4) === index), `shard ${index} requested another shard's key`);
+    requested.push(urls);
+  }
+  const all = requested.flat();
+  assert.equal(all.length, 32); assert.equal(new Set(all).size, 32);
+  assert.ok(requested.every(urls => urls.length > 0), 'every shard gets a part of 32 keys');
 });

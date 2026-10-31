@@ -4,7 +4,7 @@ import { requestTransferConsent, reportToolchainProgress } from '@cssearth/teles
 import * as toolchains from './toolchains/astronomy-toolchains.mts';
 import * as sessions from './session.mts';
 import { FakeTerminal } from './tui/fake-terminal.mts';
-import type { CliIo } from './cli-io.mts';
+import type { CliIo } from './cli/cli-io.mts';
 
 let installs = 0;
 async function install(): Promise<string> {

@@ -194,6 +194,61 @@ test('two range requests bring the header with the coordinates and the selected 
   } finally { await rm(sourceRoot, { recursive: true, force: true }); }
 });
 
+test('a NetCDF-4 release is kept as the byte ranges its reader reads, and a mirrored grid is read the other way round', async () => {
+  // The chunked fixture stands in for ALERA-V: a variable with an unlimited time dimension, one record per chunk.
+  const chunked = resolve(requireWorkspace(), 'packages/bake/src/objects/raster/netcdf/fixtures/field-nc4-chunked.nc');
+  const sourceRoot = await mkdtemp(resolve(tmpdir(), 'simulation-nc4-')), bytes = await readFile(chunked);
+  const change = { file: 'field-nc4-chunked.nc', path: 'science/fixture/field-nc4-chunked.nc', variable: 'T', select: { time: 65 }, longitudeZeroAt: 0, mirrored: true };
+  const entry = entryOf(change), paths = simulationPaths(entry);
+  try {
+    const release = await simulationRelease(archive(await record(exocam => { exocam.files = [{ key: 'field-nc4-chunked.nc', size: bytes.length }, ...exocam.files]; })), id, ['TRAPPIST-1f'], entry);
+    const kept = await restoreSimulationField(sourceRoot, id, entry, release, serving(bytes));
+    assert.ok('parts' in kept);
+    const parts = kept.parts, held = parts.reduce((sum, part) => sum + part.range.length, 0);
+    assert.deepEqual([parts[0]!.path, parts[0]!.range.offset], [paths.head, 0]);
+    assert.ok(held < bytes.length, `${held} bytes kept of ${bytes.length}: the release is never kept whole`);
+    for (const part of parts) assert.deepEqual(await readFile(resolve(sourceRoot, part.path)), bytes.subarray(part.range.offset, part.range.offset + part.range.length), `${part.path} is exact bytes of the release`);
+    const declared = new Map(parts.map(part => [part.path, part.range] as const)), recipe = simulationRecipe(entry, parts.slice(1).map(part => part.path));
+    assert.equal(recipe.mirrored, true);
+    // Body longitude 22.5 east is the grid's 337.5, its last column: T at record 65, latitude 22.5 (row 2), column 7.
+    assert.equal((await loadNetcdfLonLatField(sourceRoot, recipe, declared)).sample(22.5, 22.5), 65027);
+    assert.equal((await loadNetcdfLonLatField(sourceRoot, simulationRecipe(entryOf({ ...change, mirrored: undefined }), parts.slice(1).map(part => part.path)), declared)).sample(22.5, 22.5), 65020);
+    assert.equal((await restoreSimulationField(sourceRoot, id, entry, release, serving(bytes))).fetched, 0, 'parts already there at their length are not asked for again');
+    // Without one of its parts the reader is refused, never answered from anything but the release's bytes.
+    await assert.rejects(loadNetcdfLonLatField(sourceRoot, { ...recipe, parts: parts.slice(1, -1).map(part => part.path) }, declared), /which no kept part holds/u);
+    assert.throws(() => entryOf({ ...change, mirrored: false }), /mirrored is true, or left out for a grid whose longitudes run east/u);
+  } finally { await rm(sourceRoot, { recursive: true, force: true }); }
+});
+
+test('the steps of one NetCDF-4 run share the structure they read, each keeps its own grid, and they make one stepper', async () => {
+  const chunked = resolve(requireWorkspace(), 'packages/bake/src/objects/raster/netcdf/fixtures/field-nc4-chunked.nc');
+  const sourceRoot = await mkdtemp(resolve(tmpdir(), 'simulation-steps-')), bytes = await readFile(chunked);
+  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(requireWorkspace(), o, path), 'utf8')] as const)));
+  const step = (record: number) => entryOf({ dataset: `day-${record}`, label: 'Model days', file: 'field-nc4-chunked.nc', path: 'science/fixture/field-nc4-chunked.nc', variable: 'T',
+    select: { time: record }, longitudeZeroAt: 0, range: [0, 80000], step: { group: 'model-days', label: `Day ${record}` } });
+  try {
+    const release = await simulationRelease(archive(await record(exocam => { exocam.files = [{ key: 'field-nc4-chunked.nc', size: bytes.length }, ...exocam.files]; })), id, ['TRAPPIST-1f'], step(65));
+    const fields: string[] = [];
+    for (const record of [65, 66]) {
+      const entry = step(record), kept = await restoreSimulationField(sourceRoot, id, entry, release, serving(bytes));
+      assert.ok('parts' in kept);
+      const declared = new Map(kept.parts.map(part => [part.path, part.range] as const));
+      const field = await loadNetcdfLonLatField(sourceRoot, simulationRecipe(entry, kept.parts.slice(1).map(part => part.path)), declared);
+      installSimulationDataset(files, id, 'TRAPPIST-1f', entry, release, field.report, kept);
+      fields.push(kept.parts.at(-1)!.path);
+    }
+    const manifest = JSON.parse(String(files.get(`${o}/source/manifest.json`))) as { inputs: { id: string; path: string; consumers: string[] }[] };
+    const mine = manifest.inputs.filter(input => input.path.startsWith('science/fixture/'));
+    // Each kept range is declared once: the structure both steps read names both as its readers, each grid only its own.
+    assert.equal(new Set(mine.map(input => input.path)).size, mine.length);
+    assert.notEqual(fields[0], fields[1]);
+    for (const input of mine) assert.deepEqual(input.consumers, fields.includes(input.path) ? [`day-${fields.indexOf(input.path) + 65}-simulation`] : ['day-65-simulation', 'day-66-simulation'], input.path);
+    const controls = (JSON.parse(String(files.get(`${o}/source/content/object.json`))) as { datasets: { controls: { id: string; label: string; step?: unknown }[] } }).datasets.controls.slice(-2);
+    assert.deepEqual(controls.map(control => [control.id, control.label, control.step]), [['day-65', 'Model days', { group: 'model-days', label: 'Day 65' }], ['day-66', 'Model days', { group: 'model-days', label: 'Day 66' }]]);
+    assert.throws(() => entryOf({ step: { group: 'Model Days', label: 'Day 1' } }), /step is \{ group, label \}/u);
+  } finally { await rm(sourceRoot, { recursive: true, force: true }); }
+});
+
 test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field can be read at one pressure', async () => {
   // The reference library's NetCDF-4 fixture stands in for the model file, zipped as a release zips one.
   const netcdf4 = resolve(fixture, '../field-nc4.nc'), member = { file: 'release.zip', member: 'run/field-nc4.nc', path: 'science/wolf-2022/field-nc4.nc', variable: 'T', select: { time: 0 },
@@ -222,7 +277,7 @@ test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field ca
     const field = await loadNetcdfLonLatField(sourceRoot, simulationRecipe(entry), new Map());
     // T = 1000 + 10 i + j on the first level and 100 K less on the second; 150 Pa lies between them where the first holds 1000 Pa.
     assert.ok(Math.abs(field.sample(22.5 - 180, -67.5)! - (1000 - 100 * Math.log(0.15) / Math.log(0.1))) < 1e-9);
-    assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1f', entry, release, field.report, RANGES), /a classic release is installed with the ranges of its two kept parts, a ZIP member without/u);
+    assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1f', entry, release, field.report, RANGES), /a release read by range is installed with its kept parts, a ZIP member without/u);
     installSimulationDataset(files, id, 'TRAPPIST-1f', entry, release, field.report);
     const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>, surface = after('source/preparation/raster.json').surfaces.at(-1);
     assert.deepEqual([surface.source, surface.science.path, surface.science.field, surface.science.isobar], ['science/wolf-2022/field-nc4.nc', 'science/wolf-2022/field-nc4.nc', undefined, member.isobar]);

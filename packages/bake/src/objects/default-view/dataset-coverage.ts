@@ -8,6 +8,7 @@ import type { Vector3 } from '@cssearth/engine';
 import { detectMissingCoverage } from '../../raster/index.ts';
 import { isRecord } from '@cssearth/core';
 import { readPreparedControls } from '@cssearth/objects/node';
+import { SYNCHRONOUS_ROTATION_SCHEMA } from '@cssearth/objects';
 
 const DEGREE = Math.PI / 180;
 export interface DatasetCoverage { readonly dataset: string; readonly missing: Uint8Array; readonly width: number; readonly height: number;
@@ -17,16 +18,32 @@ export interface DatasetCoverage { readonly dataset: string; readonly missing: U
 const absent = (error: unknown): undefined => { if (isRecord(error) && error.code === 'ENOENT') return undefined; throw error; };
 const optionalJson = (path: string): Promise<unknown> => readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, absent);
 
+/** The body longitude a minimap is centred on: its framing record's (`source/presentation/minimap.json`); else 0 for a planet
+ * locked to its star, whose longitude 0 faces the star (`cssearth-synchronous-rotation@1`), so its day side is one disc in the
+ * middle and not split across both edges; else none, and the minimap starts where its map does. */
+export async function readMinimapCenter(objectDirectory: string): Promise<number | undefined> {
+  const framing = await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
+  const center = isRecord(framing) ? framing.centerLongitudeDegrees : undefined;
+  if (center !== undefined) {
+    if (typeof center !== 'number' || !Number.isFinite(center)) throw new TypeError(`${objectDirectory}: minimap framing centerLongitudeDegrees is ${String(center)}, not a number.`);
+    return center;
+  }
+  const descriptor = await optionalJson(resolve(objectDirectory, 'object.json'));
+  const recipe = isRecord(descriptor) && isRecord(descriptor.properties) ? descriptor.properties.recipe : undefined;
+  const rotation = isRecord(recipe) && Array.isArray(recipe.sources) ? recipe.sources.find(entry => isRecord(entry) && entry.id === 'rotation') : undefined;
+  if (!isRecord(rotation) || typeof rotation.path !== 'string') return undefined;
+  const source = await optionalJson(resolve(objectDirectory, rotation.path));
+  return isRecord(source) && source.schema === SYNCHRONOUS_ROTATION_SCHEMA ? 0 : undefined;
+}
+
 /** The default dataset's coverage, or none for a body without prepared datasets or a minimap of its default dataset. */
 export async function readDefaultDatasetCoverage(objectDirectory: string, mapLeftEdgeLongitudeDeg: number): Promise<DatasetCoverage | undefined> {
-  const [controls, minimaps, framing] = await Promise.all([readPreparedControls(resolve(objectDirectory, 'prepared')).catch(absent),
-    optionalJson(resolve(objectDirectory, 'prepared/minimaps.json')), optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'))]);
+  const [controls, minimaps, center] = await Promise.all([readPreparedControls(resolve(objectDirectory, 'prepared')).catch(absent),
+    optionalJson(resolve(objectDirectory, 'prepared/minimaps.json')), readMinimapCenter(objectDirectory)]);
   const dataset = isRecord(controls) && isRecord(controls.datasets) && typeof controls.datasets.defaultDataset === 'string' ? controls.datasets.defaultDataset : undefined;
   const image = dataset && isRecord(minimaps) && Array.isArray(minimaps.images) ? minimaps.images.find(entry => isRecord(entry) && entry.id === dataset) : undefined;
   if (!dataset || !isRecord(image)) return undefined;
   if (typeof image.path !== 'string') throw new TypeError(`${objectDirectory}: minimap ${dataset} has no path.`);
-  const center = isRecord(framing) ? framing.centerLongitudeDegrees : undefined;
-  if (center !== undefined && typeof center !== 'number') throw new TypeError(`${objectDirectory}: minimap framing centerLongitudeDegrees is ${String(center)}, not a number.`);
   // prepare-surface-minimaps rolls a framed map so its left edge is map longitude (center - 180).
   const offset = center === undefined ? 0 : ((center - 180) % 360 + 360) % 360;
   const { data, info } = await sharp(resolve(objectDirectory, 'prepared', image.path)).removeAlpha().raw().toBuffer({ resolveWithObject: true });

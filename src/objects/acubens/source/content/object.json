@@ -61,7 +61,7 @@
         "source": {
           "id": "acubens-stellar-color",
           "path": "../manifest.json",
-          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=604789257076233728&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=604789257076233728&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The spin axis's direction on the sky is a display convention."

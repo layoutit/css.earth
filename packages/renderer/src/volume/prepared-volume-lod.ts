@@ -1,30 +1,26 @@
 import { samePreparedVolumeTopology, validatePreparedCssVolume } from '@cssearth/objects';
 import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
+import { mountPreparedVolumeFarPlanes } from './prepared-volume-far-planes.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
-import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
+import type { PreparedVolumeLodRuntime, PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
+export type { PreparedVolumeLodRuntime } from './types.js';
 import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/view/native-projection.js';
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS, mountPreparedCssVolume } from './prepared-volume-runtime.js';
 
 const AXES = ['x', 'y', 'z'] as const;
 
-export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
-  /** Replace prepared pixels and atlas sampling on one retained spatial topology. */
-  setPresentation(payload: PreparedVolumeMountOptions['payload']): void;
-  /** Whether the slice stack may present at all. Denied, the billboard views carry the cloud at every size; the
-   * universe denies its unselected galaxy, whose slices are for the observer who selected it. */
-  setDetail(allowed: boolean): void;
-}
 
 /** Retain the full geometry, but publish it only when depth can occupy visible screen pixels. */
 export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, completedOpacity: (runtime: PreparedVolumeRuntime) => number): PreparedVolumeLodRuntime {
   const initial = validatePreparedCssVolume(options.payload), bank = initial.impostors;
-  const materials = (payload: PreparedVolumeMountOptions['payload']) => [payload].flatMap(part => AXES.flatMap(axis =>
-    part.stacks.find(stack => stack.axis === axis)!.leaves.map(leaf => ({
+  if (initial.farPlanes) return mountPreparedVolumeFarPlanes(options, completedOpacity);
+  const materials = (payload: PreparedVolumeMountOptions['payload']) => AXES.flatMap(axis =>
+    payload.stacks.find(stack => stack.axis === axis)!.leaves.map(leaf => ({
       textureUrl: options.resolveResource(leaf.texturePath),
       backgroundSize: leaf.style.backgroundSize,
       backgroundPosition: leaf.style.backgroundPosition,
-    }))));
+    })));
   if (!bank) {
     // Without impostors the full volume is the only presentation; it is built on the first publication, which a
     // bank sends only while it is visible.
@@ -103,14 +99,14 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     if (destroyed) return;
     const projection = projectVolumeImpostors(publication, options.payload.frame, bank,
       !detailAllowed || options.nativeFocalCss !== undefined);
-    const { visible, volumeMix, distanceMix, diameterPixels, x, y } = projection;
+    const { visible, volumeMix, diameterPixels, x, y } = projection;
     const responsive = options.nativeFocalCss !== undefined && Number.isFinite(diameterPixels);
     // A presentation faded to zero still rasterises every node it keeps displayed: on an iPhone the full slice
     // volume cost hundreds of milliseconds a frame while its CSS opacity was 0. An impostor-sized cloud now leaves
     // rendering and its billboard views carry it. An unresolvable focal length keeps the earlier always-on behaviour.
     const nativeMix = responsive ? nativeProjectedMix(diameterPixels, publication.viewport.focalPixels,
       resolveFocalPixels(publication.viewport), bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : Number.NaN;
-    const mix = distanceMix===0?0:Number.isFinite(nativeMix) ? nativeMix*distanceMix : responsive ? Number.NaN : volumeMix;
+    const mix = Number.isFinite(nativeMix) ? nativeMix : responsive ? Number.NaN : volumeMix;
     // With detail denied the billboard is the whole presentation, at full weight, whatever the projected size.
     const detailVisible = detailAllowed && visible && (Number.isNaN(mix) || mix > 0);
     const impostorsVisible = visible && (!detailAllowed || Number.isNaN(mix) || mix < 1);
@@ -121,8 +117,8 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     writeStyle(full, 'display', detailVisible ? 'block' : 'none'); fullShown = detailVisible;
     writeStyle(distant, 'display', impostorsVisible ? 'block' : 'none');
     // The responsive fade is a CSS expression of the viewport; each presentation's opacity states it in full.
-    const rawFade = responsive ? nativeProjectedFade(diameterPixels,
-      publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : '',fade=distanceMix===1?rawFade:`(${rawFade} * ${distanceMix})`;
+    const fade = responsive ? nativeProjectedFade(diameterPixels,
+      publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : '';
     if (detailVisible) {
       const volume = detail();
       volume.publish(publication);

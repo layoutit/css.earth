@@ -21,8 +21,3 @@ test('prepared impostors require thresholds, declared textures and orthonormal c
   assert.throws(() => validateVolumeImpostors({ ...bank, views: [{ ...bank.views[0], right: [2, 0, 0] }, ...bank.views.slice(1)] }, resources), /orthonormal/);
 });
 
-test('physical distance handoff is optional, bounded and ordered',()=>{
- const resources=new Set(bank.views.map(v=>v.texturePath)),distanceFade={detailBelowUnits:20,impostorAboveUnits:35};
- assert.deepEqual(validateVolumeImpostors({...bank,distanceFade},resources).distanceFade,distanceFade);
- for(const invalid of[{detailBelowUnits:0,impostorAboveUnits:35},{detailBelowUnits:35,impostorAboveUnits:20},{detailBelowUnits:20,impostorAboveUnits:Infinity},{...distanceFade,extra:1}])assert.throws(()=>validateVolumeImpostors({...bank,distanceFade:invalid},resources));
-});

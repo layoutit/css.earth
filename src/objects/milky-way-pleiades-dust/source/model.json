@@ -1,0 +1,8 @@
+{
+  "schema": "cssearth-volume-dataset-manifest@1",
+  "outputs": {
+    "smooth-dust": {
+      "volume": "prepared/smooth-dust/volume.json"
+    }
+  }
+}

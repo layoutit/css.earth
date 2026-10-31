@@ -346,8 +346,9 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
     for (const path of DATASET_REBUILD_FILES) files.set(`src/objects/${id}/${path}`, await readFile(resolve(o, path), 'utf8'));
     const before = new Map(files);
     const descriptor = JSON.parse(String(files.get(`src/objects/${id}/source/content/object.json`))) as { displayName: string }, body = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8')) as { physical?: { parent?: string; meanRadiusKm?: number }; hostedOrbit?: { eccentricity?: number; semiMajorAxisStellarRadii?: number; sources?: { shape?: string } } };
-    const raster = JSON.parse(String(files.get(`src/objects/${id}/source/preparation/raster.json`))) as { emission?: unknown; surfaces: { science: { kind: string; hostLight?: unknown } }[] };
-    const kind = raster.surfaces[0]?.science.kind;
+    const raster = JSON.parse(String(files.get(`src/objects/${id}/source/preparation/raster.json`))) as { emission?: unknown; surfaces: { science?: { kind: string; hostLight?: unknown } }[] };
+    // A solar-system planet's first surface can be a photograph, which has no science record.
+    const kind = raster.surfaces[0]?.science?.kind;
     // A self-luminous body (an imaged young planet, drawn emissive) shines with its own heat; no starlight to tint.
     if (mode === 'host-light' && raster.emission !== undefined) { lines.push(`${id}: self-luminous, no starlight on it`); progress(lines.at(-1)!); continue; }
     // Whatever the mode, a lit shape planet gets its own stylesheet if it never had one (the lighting frame is 0×0 without it).
@@ -371,13 +372,16 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       let promoted = false;
       for (const entry of simulations.get(id) ?? []) {
         const release = await simulationRelease(archive, id, names, entry);
-        // A classic release is kept as two of its byte ranges; a NetCDF-4 file inside a ZIP release is kept whole.
+        // A classic release is kept as two of its byte ranges, a NetCDF-4 release as the ranges its reader reads; a file inside a ZIP release is kept whole.
         const ranges = entry.member === undefined ? await restoreSimulationField(resolve(o, 'source'), id, entry, release, fetcher) : undefined, paths = simulationPaths(entry);
         const fetched = ranges ? ranges.fetched : await restoreSimulationMember(files, id, resolve(o, 'source'), entry, release, fetcher);
         if (fetched) progress(entry.member === undefined ? `${id}: ${fetched.toLocaleString('en-US')} bytes of ${entry.file} fetched from Zenodo record ${release.doi}`
           : `${id}: ${entry.member} (${fetched.toLocaleString('en-US')} bytes) restored out of ${entry.file}, Zenodo record ${release.doi}`);
+        // A NetCDF-4 release read by range is kept as the parts its reader read; a classic one as its head and field.
+        const parts = ranges && 'parts' in ranges ? ranges.parts : undefined;
         const field = entry.path.endsWith('.npy') ? await loadNpyLonLatField(resolve(o, 'source'), simulationRecipe(entry))
-          : await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry), new Map(ranges ? [[paths.head, ranges.head], [paths.field, ranges.field]] : []));
+          : await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry, parts?.slice(1).map(part => part.path)),
+            new Map(parts ? parts.map(part => [part.path, part.range] as const) : ranges && 'head' in ranges ? [[paths.head, ranges.head], [paths.field, ranges.field]] : []));
         // A classic or NumPy member is kept whole because it came out of an archive, not for its format.
         const installed = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report, ranges, ranges ? undefined : await memberFormat(resolve(o, 'source', entry.path)));
         promoted ||= installed.promoted;
@@ -447,7 +451,7 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       say(isMeasured(chosen) ? `${id}: thermal glow ${hex} at ${chosen.temperatureK} K (${measuredWhere(chosen)}, ${chosen.facility})` : `${id}: expected glow ${hex} at ${chosen.temperatureK} K, an estimate${chosen.rock ? ' for a bare rock' : ''} (${chosen.source})`);
     } else {
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} dataset`); continue; }
-      if (raster.surfaces[0]!.science.hostLight !== undefined) { lines.push(`${id}: already lit by its host`); if ([...files].some(([path, value]) => before.get(path) !== value)) for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } continue; }
+      if (raster.surfaces[0]!.science?.hostLight !== undefined) { lines.push(`${id}: already lit by its host`); if ([...files].some(([path, value]) => before.get(path) !== value)) for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } continue; }
       const host = body.physical?.parent;
       if (!host) { lines.push(`${id}: no host in its astronomy record`); continue; }
       const light = await hostLightOf(root, host);

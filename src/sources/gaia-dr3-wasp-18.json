@@ -28,7 +28,7 @@
       "locator": "gaiadr3.gaia_source at epoch 2016.0: parallax 8.14429 +/- 0.01156 mas, pmra 25.404, pmdec 20.479 mas/yr, radial_velocity 3.47 +/- 0.34 km/s, has_xp_sampled true"
     },
     {
-      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4955371367334610048&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4955371367334610048&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
       "checkedOn": "2026-09-23",
       "locator": "XP sampled mean spectrum: 343 fluxes from 336 to 1020 nm in 2 nm steps, W m^-2 nm^-1"
     }

@@ -162,6 +162,10 @@ star passes behind the Sun, the one-turn limit, and the light's swing, which is 
 northern paper (Newton et al. 2016) is not wired: its one rotator among the stars with a page is flagged for a bright
 contaminant.
 
+Reinhold & Hekker's own K2 catalogue is a table entry of the same kind (`tess/reinhold-hekker-table.mts`): asked after
+the TESS papers for a star no method gives a rotation, found by the EPIC place it prints, and judged by the paper's rule
+for a star seen in several campaigns. Their method, run here, can refuse a star their run accepted.
+
 A star whose rotation only a paper about that one star measured, and prints in its text, is the fourth kind of entry
 (`tess/one-star.mts`, its entries in `tess/one-star.json`): the quoted sentence, the K2 target's number and place, the
 campaign and the file the paper measured, which MAST serves (today the EVEREST light curve, read as lightkurve reads that

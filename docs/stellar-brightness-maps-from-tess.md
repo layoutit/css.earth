@@ -87,6 +87,7 @@ given no verdict, and is not fetched.
 | Kind of star and light curve | Method | State |
 | --- | --- | --- |
 | Between 3250 and 6250 K with log g over 4.2; the K2 mission's PDC-MAP light curve of a campaign, campaigns 0 to 18 without 9 | Reinhold & Hekker (2020, A&A 635, A43) | Wired |
+| A star in the paper's catalogue of rotation periods; the K2 mission's PDC-MAP light curve of each campaign it lists | Reinhold & Hekker (2020, A&A 635, A43): the paper's own verdict, read from its catalogue (VizieR J/A+A/635/A43) | Wired, for a star no method and no TESS paper gives a rotation |
 | A dwarf by the cuts of Ciardi et al. (2011); the TESS mission's 2-minute PDC-MAP light curve of a sector | Holcomb et al. (2022, ApJ 936, 138) | Wired |
 | A target in the paper's catalogue of rotators; the TESS mission's 2-minute light curve of a sector, sectors 1 to 26 | Colman et al. (2024, AJ 167, 189): the paper's own verdict, read from its table | Wired, for a star Holcomb et al.'s method refuses |
 | A TESS Object of Interest in the paper's table of unambiguous rotation periods; the TESS mission's 2-minute light curves of its sectors among 1 to 22 | Canto Martins et al. (2020, ApJS 250, 20): the paper's own verdict, read from its tables | Wired, for a star Holcomb et al.'s method refuses |
@@ -616,6 +617,26 @@ arcseconds of 359 of the 786 stars, and a KELT one of 129. What is missing for t
 light, star by star: the rotation of a planet's host is mostly a sentence in the planet's own paper, on seasons the
 public release does not always hold. That is a lead, not followed here.
 
+### K2: the verdict Reinhold & Hekker (2020) published
+
+Their method is wired and run here on the K2 light MAST serves now, and it can refuse a star their own run accepted: on
+2026-10-19, 12 of the 38 stars with a page that their catalogue lists had no map, because the peak came out under 0.3
+here, the three periods a little further apart, or the star's record put it outside their temperature and gravity
+ranges, which they took from the EPIC catalogue. Their catalogue (VizieR J/A+A/635/A43, table2: one row a star and a
+campaign, with the period, its error, the peak and the variability range) is their verdict, and
+[`reinhold-hekker-table.mts`](../packages/telescope-cli/src/archives/tess/reinhold-hekker-table.mts) reads it as a table
+entry, asked after the TESS papers. A star is found by its place, within K2's 4 arcseconds, from the EPIC positions the
+table prints. Three things are this repository's reading: a star with rows of several campaigns takes the paper's own
+rule for its method (the mean, and no verdict past 20% apart; K2-95, 23.85 and 11.38 d, gets none); every campaign the
+table lists must be among the star's light curves at MAST; and campaigns 10 and 11 are read as their second, longer
+parts. The swing is the table's, the mean of the campaigns' variability ranges. Of the 12, 11 have a map.
+
+![The 11 stars' pages as they open on Color + brightness](images/k2-catalogue-brightness-maps.webp)
+
+Each star's page as it opens in the dev server on 2026-10-23, at 800 px wide, cropped to the card and the star: HD 73344,
+K2-105, K2-117, K2-152 (top row), K2-162, K2-174, K2-18, K2-31, K2-33, K2-90 and WASP-157. The darker patches are drawn far
+stronger than the real contrast, on each map's own scale.
+
 ### K2: a one-star paper's own verdict
 
 Some stars' rotation was measured only in a paper about that one star, which prints the period in its text and keeps no
@@ -912,8 +933,10 @@ the flat **Color** the star had.
 The contrast is drawn stronger because the measured one cannot be seen. AU Microscopii is among the most spotted stars
 here: its darkest longitude gives 21% less light than its brightest, which is one tenth on a display, and most stars swing by
 1 or 2%. Two weaker stretches were tried on the page and were still faint, and a scale that ran toward black read as shadow
-on the star. So the darkest part is drawn as a darker, richer step of the star's own hue (0.4 lower in lightness and 0.12
-higher in chroma, in OKLCH), chosen by eye from sheets of options. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
+on the star. So the darkest part is drawn as a darker, richer step of the star's own hue (0.4 lower in lightness and 2.2
+times its chroma, in OKLCH), chosen by eye from sheets of options. The chroma is a multiple of the star's own, so a nearly
+white star's darker parts stay nearly neutral: a fixed step of 0.12 drew the faint violet of HD 73344's Gaia color ten
+times stronger than the color holds it. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
 values on its scale. Every star's scale is its own, so a faintly spotted star is drawn as strongly as a heavily spotted one;
 the scale's ends and the text tell them apart.
 

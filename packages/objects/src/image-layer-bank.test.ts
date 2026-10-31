@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parseImageLayerBankDescriptor } from './image-layer-bank.js';
+import { bankOverlays, parseImageLayerBankDescriptor } from './image-layer-bank.js';
+import { parseObjectDescriptor } from './parse.js';
 
 function descriptor() {
   return { schema: 'cssearth-object@2', id: 'cloud', type: 'image-layer-bank', properties: {
@@ -34,4 +35,18 @@ test('a bank names its datasets and what each draws over its layers, the first t
     assert.throws(() => parseImageLayerBankDescriptor(withOverlays(overlays)), /src\/objects\/cloud\/object\.json properties\.overlays maps dataset ids to distinct bank ids/u, JSON.stringify(overlays));
   assert.throws(() => parseImageLayerBankDescriptor({ ...descriptor(), properties: { ...descriptor().properties, cloudPoints: ['outer-ejecta'] } }), /Unknown image-layer property: cloudPoints/u,
     'the overlays replaced cloudPoints: a descriptor that still names it is refused');
+});
+
+test('volume banks use the same contained dataset-overlay references; undeclared overlays draw nothing', () => {
+  const volume = (overlays?: unknown) => parseObjectDescriptor({ ...descriptor(), type: 'volume-dataset-bank', properties: {
+    ...descriptor().properties, ...(overlays === undefined ? {} : { overlays }) } });
+  assert.deepEqual(bankOverlays(volume()), {});
+  const source = { optical: ['dust', 'gas'], model: [] };
+  const parsed = bankOverlays(volume(source));
+  assert.deepEqual(parsed, source);
+  assert.ok(Object.isFrozen(parsed) && Object.isFrozen(parsed.optical));
+  source.optical.push('later');
+  assert.deepEqual(parsed.optical, ['dust', 'gas'], 'the validated record owns its arrays');
+  for (const overlays of [null, [], {}, { optical: ['../cloud'] }, { optical: ['cloud.bin'] }, { optical: ['a', 'a'] }])
+    assert.throws(() => bankOverlays(volume(overlays)), /properties.overlays maps dataset ids to distinct bank ids/u);
 });

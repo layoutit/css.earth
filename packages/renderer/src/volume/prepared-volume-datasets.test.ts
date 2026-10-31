@@ -571,11 +571,15 @@ test('a hidden star presentation can switch datasets before its next stellar fil
  assert.equal(runtime.state().starsVisible,true);assert.ok(source.stars('second'));runtime.destroy();
 });
 
-test('distance-based far pictures stay selected under native CSS magnification',()=>{
- for(const responsive of[false,true]){const f=dom(),base=budgetPayload(1,0).datasets[0]!.volume,old=base.impostors!;
- const cloud={...base,impostors:{...old,distanceFade:{detailBelowUnits:20,impostorAboveUnits:35}}};
- const lod=mountPreparedVolumeLod({...f.options,payload:cloud,lazyDetail:true,resolveResource:path=>path,...(responsive?{nativeFocalCss:'10000px'}:{})},()=>1);
- const detail=f.host.children.find(n=>n.className==='css-volume-detail')!,distant=f.host.children.find(n=>n.className==='css-volume-impostors')!;
- const far=publication(49.59);far.viewport={...far.viewport,focalPixels:10000};lod.publish(far);assert.equal(detail.style.display,'none');assert.equal(distant.style.display,'block');assert.equal(lod.roots.length,0,'Far view never constructs hidden slabs');
- const near=publication(15);near.viewport={...near.viewport,focalPixels:10000};lod.publish(near);assert.equal(detail.style.display,'block');assert.ok(lod.roots.length>0);lod.destroy();}
+test('an explicitly resident bank retains every axis through a coasting direction change',()=>{
+ const f=dom(),data={...payload(),starsEnabled:false};
+ const runtime=createPreparedVolumeDatasets({payload:data,resolveResource:path=>`/prepared/${path}`,residentStacks:true}).mount(f.options);
+ runtime.publish(publication());
+ const root=runtime.root as unknown as FakeElement,initial=descendants(root),axes=initial.filter(node=>node.className==='css-volume-projection');
+ assert.equal(axes.length,3);assert.ok(axes.every(node=>node.style.display==='block'&&node.style.visibility==='visible'));
+ const leaves=initial.filter(node=>node.parentNode?.className==='css-volume-mesh');assert.equal(leaves.length,9);
+ runtime.publish(publication(4,[1,0,0]),true,true);
+ assert.deepEqual(descendants(root),initial);assert.ok(axes.every(node=>node.style.display==='block'&&node.style.visibility==='visible'));
+ assert.ok(leaves.every(node=>node.style.display!=='none'&&node.style.visibility!=='hidden'));
+ runtime.publish(publication(4,[1,0,0]),true,false);runtime.destroy();
 });

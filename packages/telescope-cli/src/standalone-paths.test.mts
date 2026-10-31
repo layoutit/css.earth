@@ -63,7 +63,7 @@ test('runs stay in cwd; archive answers and every toolchain stay central without
     assert.equal(run.startsWith(resolve(process.cwd(), 'telescope-runs') + '/'), true);
     assert.equal(run.startsWith(core.USER_ROOT + '/'), false);
     assert.equal(run.startsWith(${JSON.stringify(checkout)} + '/'), false);
-    const cliArguments = await import(${url('packages/telescope-cli/src/cli-arguments.mts')});
+    const cliArguments = await import(${url('packages/telescope-cli/src/cli/cli-arguments.mts')});
     for (const name of ['chandra', 'spitzer', 'hst', 'gemini', 'keck', 'naco', 'tess', 'mearth', 'espadons']) {
       assert.throws(() => core.assertInstalledMarker('/missing', { ...pins, id: name }, name,
         'node packages/telescope-cli/src/archives/' + name + '/toolchain.mts install'), error => {

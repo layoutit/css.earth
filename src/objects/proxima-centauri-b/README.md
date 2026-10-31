@@ -33,9 +33,15 @@ The four temperature maps, the Climate model's included, share one false-color s
 
 **Averaging and limits.** The file is a released mean with the filename interval `ANN3900-3999`; its `fromto` attribute reports 100.00 model days. These labels are preserved without turning them into Earth calendar dates or a number of orbital periods. The field ranges from -63.2461 to 3.2427 °C with no missing cells. Table 5 rounds the paper’s control summary to -59 to 3 °C: its minimum differs from this released surface-air field, so this view does not claim to reproduce that table exactly. Other published atmosphere, salinity and rotation scenarios have different climates; they are not averaged into this one. With Shadows on, lighting darkens the night half visually.
 
+**The clouds' weather.** The Met Office Unified Model runs of Cohen et al. (2023, PSJ 4, 68, [doi:10.3847/PSJ/acc9c4](https://doi.org/10.3847/psj/acc9c4)), released under CC BY 4.0 as [Zenodo record 7752337](https://zenodo.org/records/7752337), keep 200 daily snapshots instead of a mean. The "Starlight on the ground" stepper shows `surface_net_downward_shortwave_flux` of the control run (`controlprox.nc`) every 10 days from day 0 to day 150, one cycle of the clouds: the paper's Table 3 gives 157.5 days for this run, in which the Rossby gyres travel east and west and carry the day side's clouds to and from the eastern terminator. The run assumes a moist nitrogen atmosphere with 378 ppm of carbon dioxide over a slab ocean 2.4 m deep and 881.7 W/m² from the star (the paper's Table 1); the paper puts the star overhead at longitude 0, as this page does. Each step is the release's own instant, on its 144 × 90 grid, on one scale from 0 to 600 W/m², kept as the bytes of that day's grid plus the file structure every step shares (26 byte ranges, 1.7 MB of the 10.1 GB file). Over the 200 days the field runs from 0 to 544.6 W/m²; on the day side, a cell changes by a median 91 W/m² across the 16 steps. It is a second model beside Del Genio et al.'s, of a different air and ocean. The warm run (the planet moved to the inner edge of the habitable zone) is not shown.
+
 **Charts.** The orbits of Proxima Centauri's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
 
 ## Evidence
+
+![Proxima Centauri b with the Starlight on the ground stepper selected on its first step, day 0, 26 October 2026](evidence/2026-10-26/um-starlight.webp)
+
+The stepper selected on the dev server, after the page reported ready and the dataset's button reported pressed; the sidebar map has longitude 0, the point under the star, at its edges.
 
 Generated 2026-10-10 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/proxima-centauri-b.json).
 

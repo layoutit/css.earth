@@ -34,7 +34,7 @@ import { preferredName, simbadIdentifiers } from '../../names/display-name.mts';
 import { slug } from '../../names/identity.mts';
 import type { CataloguePosition } from '../../spec-types.mts';
 import { fetchImagePixel } from '../images/image-pixel.mts';
-import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from '../sh0es.mts';
+import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from '../cepheids/sh0es.mts';
 import { simbadAt, simbadQuoted, simbadRows } from './simbad-tap.mts';
 import { catalogueOf, DECIMAL_POSITION, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl, vizierTables, type StarColumns } from './vizier-tables.mts';
 

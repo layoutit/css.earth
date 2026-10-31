@@ -1,4 +1,4 @@
-import { cliWorkspaceArguments } from './cli-workspace.mts';
+import { cliWorkspaceArguments } from './cli/cli-workspace.mts';
 import { existsSync, readdirSync } from 'node:fs';
 import { delimiter, dirname, resolve } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';

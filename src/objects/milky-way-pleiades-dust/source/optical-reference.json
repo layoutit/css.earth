@@ -1,0 +1,103 @@
+{
+  "source": {
+    "doi": "https://doi.org/10.1086/374589",
+    "authorPDF": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_phot_color.pdf",
+    "section": "3.4, author preprint pages8–9; Figures7–9",
+    "passband": "Burrell Schmidt BJ, central4400Angstrom; broad3600–5200Angstrom",
+    "extentDegrees": [
+      5,
+      1.7
+    ]
+  },
+  "measurement": "Published regional surface-brightness ranges, converted algebraically; not new aperture photometry or a recovered native FITS.",
+  "intensities": [
+    {
+      "name": "generalCoreBright",
+      "muBMagPerArcsec2": 22.1,
+      "radianceWm2SrNm": 3.880165647233386e-09,
+      "modelRadianceUnits": 0.38801656472333856
+    },
+    {
+      "name": "generalCoreFaint",
+      "muBMagPerArcsec2": 22.9,
+      "radianceWm2SrNm": 1.8571640419624494e-09,
+      "modelRadianceUnits": 0.18571640419624494
+    },
+    {
+      "name": "oneDegreeCirrus",
+      "muBMagPerArcsec2": 25,
+      "radianceWm2SrNm": 2.684418767051779e-10,
+      "modelRadianceUnits": 0.02684418767051779
+    },
+    {
+      "name": "surroundBright",
+      "muBMagPerArcsec2": 24.2,
+      "radianceWm2SrNm": 5.608545743593257e-10,
+      "modelRadianceUnits": 0.056085457435932566
+    },
+    {
+      "name": "surroundFaint",
+      "muBMagPerArcsec2": 25.4,
+      "radianceWm2SrNm": 1.8571640419624493e-10,
+      "modelRadianceUnits": 0.018571640419624492
+    },
+    {
+      "name": "skyZeroCheck1sigma",
+      "muBMagPerArcsec2": 25.6,
+      "radianceWm2SrNm": 1.5447217670989612e-10,
+      "modelRadianceUnits": 0.015447217670989612
+    },
+    {
+      "name": "binned5sigmaSensitivityNotCirrus",
+      "muBMagPerArcsec2": 27.6,
+      "radianceWm2SrNm": 2.448219012921646e-11,
+      "modelRadianceUnits": 0.0024482190129216457
+    }
+  ],
+  "ratios": {
+    "generalCoreOverOneDegreeCirrus": [
+      6.918309709189375,
+      14.454397707459258
+    ],
+    "oneDegreeCirrusOverGeneralCore": [
+      0.06918309709189373,
+      0.14454397707459254
+    ],
+    "generalCoreOverSurroundBroad": [
+      3.3113112148259134,
+      20.892961308540343
+    ]
+  },
+  "uncertainties": {
+    "absoluteCalibrationPercent": 8,
+    "airmassExtinctionAdditionalPercent": [
+      6,
+      10
+    ],
+    "frameRelativePercentLessThan": 5,
+    "globalSkyZeroApprox1sigmaMagPerArcsec2": 25.6,
+    "largeScaleFieldArtifactMagPerArcsec2": [
+      25,
+      26
+    ],
+    "oneDegreeCirrusAdditiveZeroFraction": 0.5754399373371559,
+    "zeroShiftIllustrationCoreOverCirrus": [
+      4.756607642683374,
+      32.690210386424894
+    ],
+    "zeroShiftIllustrationNature": "Conservative common additive +/-published1sigma sky-level illustration, not statistical confidence interval; spatial gradients add further uncertainty."
+  },
+  "comparison": {
+    "core": "General nebula inside Electra–Maia–Merope–Alcyone quadrilateral, avoiding stars and innermostfewarcmin PSF residuals.",
+    "cirrus": "Around1degree from Merope/cluster; other surrounding structures span24.2–25.4.",
+    "modelPassband": "Use prepared blue440nm/BJ approximation and label finite-bandpass mismatch; do not use RGB luma.",
+    "reject": "If physical model ratio misses broad data range, report geometry/column/illumination mismatch; exposure cannot change a radiance ratio.",
+    "appliedCalibration": "Physical core and surrounding radiance compared before display encoding, without local gain, illumination, column or sky-offset fitting. The display uses channel gains and uniform exponential exposure 10. The source ranges check broad regional consistency, not an exact aperture ratio."
+  },
+  "limits": [
+    "Faintest supposedlyblank areas set tozero; emission larger than mosaic is removed.",
+    "At27.6mag sensitivity refers to small-scale contrast after30arcsec binning, not absolute surrounding nebula brightness.",
+    "Brightstarzones cancontainPSF residuals; do not use IC349 or saturatedcores to normalize generalnebula.",
+    "PaperI primary text recovered; native calibrated FITS not found in bounded search."
+  ]
+}

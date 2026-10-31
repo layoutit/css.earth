@@ -291,6 +291,1246 @@
           }
         ]
       }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at808711027-19206.dat",
+      "range": {
+        "offset": 808711027,
+        "length": 19206
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 808,711,027 to 808,730,232 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 19,206 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-2",
+      "path": "science/cohen-2023/controltrap.at1617434254-2925.dat",
+      "range": {
+        "offset": 1617434254,
+        "length": 2925
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 1,617,434,254 to 1,617,437,178 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 2,925 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-2",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-3",
+      "path": "science/cohen-2023/controltrap.at3234845187-518.dat",
+      "range": {
+        "offset": 3234845187,
+        "length": 518
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 3,234,845,187 to 3,234,845,704 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 518 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-3",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-4",
+      "path": "science/cohen-2023/controltrap.at4043549721-1011.dat",
+      "range": {
+        "offset": 4043549721,
+        "length": 1011
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,043,549,721 to 4,043,550,731 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 1,011 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-4",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-5",
+      "path": "science/cohen-2023/controltrap.at4064286760-6645.dat",
+      "range": {
+        "offset": 4064286760,
+        "length": 6645
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,064,286,760 to 4,064,293,404 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 6,645 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-5",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-6",
+      "path": "science/cohen-2023/controltrap.at4085031024-866.dat",
+      "range": {
+        "offset": 4085031024,
+        "length": 866
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,085,031,024 to 4,085,031,889 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 866 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-6",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-7",
+      "path": "science/cohen-2023/controltrap.at4893735899-1439.dat",
+      "range": {
+        "offset": 4893735899,
+        "length": 1439
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,893,735,899 to 4,893,737,337 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 1,439 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-7",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-8",
+      "path": "science/cohen-2023/controltrap.at5681705342-8719.dat",
+      "range": {
+        "offset": 5681705342,
+        "length": 8719
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 5,681,705,342 to 5,681,714,060 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 8,719 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-8",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-9",
+      "path": "science/cohen-2023/controltrap.at6478437269-880.dat",
+      "range": {
+        "offset": 6478437269,
+        "length": 880
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 6,478,437,269 to 6,478,438,148 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 880 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-9",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-part-10",
+      "path": "science/cohen-2023/controltrap.at4043550756-103680.dat",
+      "range": {
+        "offset": 4043550756,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,043,550,756 to 4,043,654,435 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 0",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 0, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-part-10",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-1-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4043654436-103680.dat",
+      "range": {
+        "offset": 4043654436,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,043,654,436 to 4,043,758,115 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 1",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 1, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-1-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-1-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-2-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4043758116-103680.dat",
+      "range": {
+        "offset": 4043758116,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,043,758,116 to 4,043,861,795 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 2",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 2, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-2-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-2-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-3-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4043861796-103680.dat",
+      "range": {
+        "offset": 4043861796,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,043,861,796 to 4,043,965,475 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 3",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 3, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-3-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-3-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-4-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4043965476-103680.dat",
+      "range": {
+        "offset": 4043965476,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,043,965,476 to 4,044,069,155 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 4",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 4, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-4-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-4-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-5-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044069156-103680.dat",
+      "range": {
+        "offset": 4044069156,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,069,156 to 4,044,172,835 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 5",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 5, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-5-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-5-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-6-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044172836-103680.dat",
+      "range": {
+        "offset": 4044172836,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,172,836 to 4,044,276,515 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 6",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 6, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-6-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-6-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-7-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044276516-103680.dat",
+      "range": {
+        "offset": 4044276516,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,276,516 to 4,044,380,195 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 7",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 7, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-7-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-7-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-8-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044380196-103680.dat",
+      "range": {
+        "offset": 4044380196,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,380,196 to 4,044,483,875 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 8",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 8, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-8-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-8-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-9-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044483876-103680.dat",
+      "range": {
+        "offset": 4044483876,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,483,876 to 4,044,587,555 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 9",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 9, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-9-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-9-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-10-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044587556-103680.dat",
+      "range": {
+        "offset": 4044587556,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,587,556 to 4,044,691,235 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 10",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 10, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-10-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-10-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-11-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044691236-103680.dat",
+      "range": {
+        "offset": 4044691236,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,691,236 to 4,044,794,915 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 11",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 11, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-11-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-11-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-12-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044794916-103680.dat",
+      "range": {
+        "offset": 4044794916,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,794,916 to 4,044,898,595 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 12",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 12, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-12-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-12-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-13-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4044898596-103680.dat",
+      "range": {
+        "offset": 4044898596,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,044,898,596 to 4,045,002,275 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 13",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 13, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-13-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-13-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-14-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4045002276-103680.dat",
+      "range": {
+        "offset": 4045002276,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,045,002,276 to 4,045,105,955 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 14",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 14, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-14-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-14-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-15-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4045105956-103680.dat",
+      "range": {
+        "offset": 4045105956,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,045,105,956 to 4,045,209,635 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 15",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 15, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-15-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-15-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-16-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4045209636-103680.dat",
+      "range": {
+        "offset": 4045209636,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,045,209,636 to 4,045,313,315 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 16",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 16, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-16-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-16-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-17-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4045313316-103680.dat",
+      "range": {
+        "offset": 4045313316,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,045,313,316 to 4,045,416,995 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 17",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 17, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-17-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-17-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-18-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4045416996-103680.dat",
+      "range": {
+        "offset": 4045416996,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,045,416,996 to 4,045,520,675 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 18",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 18, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-18-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-18-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-19-simulation-part-1",
+      "path": "science/cohen-2023/controltrap.at4045520676-103680.dat",
+      "range": {
+        "offset": 4045520676,
+        "length": 103680
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Bytes 4,045,520,676 to 4,045,624,355 of controltrap.nc, read to take surface_net_downward_shortwave_flux at time_0 index 19",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: 103,680 bytes of controltrap.nc the field reader reads to take surface_net_downward_shortwave_flux at time_0 index 19, its structure or its values. The 6.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-19-simulation-part-1",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-um-starlight-day-0-simulation-grid",
+      "path": "science/cohen-2023/controltrap.head.dat",
+      "range": {
+        "offset": 0,
+        "length": 6973
+      },
+      "origin": "https://zenodo.org/records/7752337/files/controltrap.nc?download=1",
+      "productId": "controltrap.nc",
+      "version": "10.5281/zenodo.7752337",
+      "sourceUrl": "https://zenodo.org/records/7752337",
+      "credit": "Cohen et al. (2023); Met Office Unified Model simulation",
+      "displayCredit": "Cohen et al. (2023) · Met Office Unified Model",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/7752337",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "First 6,973 bytes of controltrap.nc, the Met Office Unified Model simulation of TRAPPIST-1e: its superblock, structure and coordinate variables",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.7752337: the first 6,973 bytes of controltrap.nc, the NetCDF-4 structure the reader starts from.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "um-starlight-day-0-simulation",
+        "um-starlight-day-1-simulation",
+        "um-starlight-day-2-simulation",
+        "um-starlight-day-3-simulation",
+        "um-starlight-day-4-simulation",
+        "um-starlight-day-5-simulation",
+        "um-starlight-day-6-simulation",
+        "um-starlight-day-7-simulation",
+        "um-starlight-day-8-simulation",
+        "um-starlight-day-9-simulation",
+        "um-starlight-day-10-simulation",
+        "um-starlight-day-11-simulation",
+        "um-starlight-day-12-simulation",
+        "um-starlight-day-13-simulation",
+        "um-starlight-day-14-simulation",
+        "um-starlight-day-15-simulation",
+        "um-starlight-day-16-simulation",
+        "um-starlight-day-17-simulation",
+        "um-starlight-day-18-simulation",
+        "um-starlight-day-19-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-um-starlight-day-0-simulation-grid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -1,6 +1,6 @@
 # Venus sources
 
-Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, five radar maps from before Magellan, elevation, microwave and gravity displays, and modeled atmosphere charts. The cloud map is the default view. Rotation is accelerated, and the camera is illustrative rather than an observer ephemeris. The [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the scene's illumination.
+Venus shows a cloud map, one Akatsuki ultraviolet exposure, the temperature at the cloud tops from an analysis steered by Akatsuki's winds, Magellan radar, five radar maps from before Magellan, elevation, microwave and gravity displays, and modeled atmosphere charts. The cloud map is the default view. Rotation is accelerated, and the camera is illustrative rather than an observer ephemeris. The [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the scene's illumination.
 
 ## Sources
 
@@ -8,6 +8,7 @@ Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, five
 | --- | --- |
 | Clouds | [A map of Venus](https://bjj.mmedia.is/data/venus/venus.html) by Björn Jónsson, from 21 Galileo images of the February 1990 flyby; free to use with credit ([his terms](https://bjj.mmedia.is/data/planetary_maps.html)) |
 | Ultraviolet | Akatsuki UVI Level 3b, [vco_uvi_l3 v1.1](https://doi.org/10.17597/isas.darts/vco-00016), CC BY 4.0 under the [ISAS/JAXA data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/) |
+| Cloud-top temperature | [ALERA-V v1.0.1](https://doi.org/10.5281/zenodo.23383461), Fujisawa et al. (2026), CC BY 4.0: the ensemble mean of the AFES-Venus model with Akatsuki's winds assimilated, September to December 2018 ([data paper](https://doi.org/10.1002/gdj3.70080)) |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
 | Radar | [USGS Magellan C3-MDIR synthetic color mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m), the 4,641 m GeoTIFF as published |
 | Early radar | Five maps from [Venus Geospatial Raster Datasets](https://zenodo.org/records/18176179), T. Austin et al. (2026), CC BY 4.0: Haystack 1967, Goldstone 1969–1972, Arecibo 1975–1977, Pioneer Venus 1978–1981, Arecibo 1983 |
@@ -37,6 +38,8 @@ The Venera surface photographs from the [NASA PDS Geosciences Node](https://pds-
 **Limb halo.** [acquire-psg-limb-table.mts](../../../packages/bake/cli/acquire-psg-limb-table.mts) runs PSG's Venus template (VIRA-45 with Vandaele et al. 2020, Bierson et al. 2019 and Ehrenreich et al. 2012, and its sulfuric acid haze). Each value is the radiance along a line of sight grazing the planet, divided by the disc-centre radiance, in red, green and blue bands. The halo starts at the 75 km cloud top, where it is 0.039, 0.068 and 0.110 of the disc centre, and falls below one ten-thousandth above 100 km.
 
 **Ultraviolet.** Product `uvi_20230830_100446_365_l3b_v21` is one 365 nm exposure from orbit 257 at 2023-08-30T10:04:46.033 UTC. JAXA's Level 3b fits the limb to correct pointing and projects radiance onto a longitude-latitude grid for a 70 km cloud top ([Ogohara et al. 2017](https://doi.org/10.1186/s40623-017-0749-5)). Of 34 exposures measured it lights the most of the globe: 48.54 %, at 3.65° phase, where one look can show at most 49.18 %. `packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts` reads it with h5wasm and box-integrates it to 2048 × 1024. Brightness is `(radiance × 5 × 10⁻⁹) ^ (1 / 2.2)`, with nothing clipped and no contrast enhancement or sharpening. 48.62 % of cells carry an observation; the rest use the shared gray graticule, and nothing is filled.
+
+**Cloud-top temperature.** ALERA-V is an objective analysis: the AFES-Venus circulation model steered by the cloud-top winds Akatsuki's ultraviolet camera measured from 1 September to 31 December 2018, assimilated at 70 km by the ALEDAS-V ensemble ([Fujisawa et al. 2022](https://doi.org/10.1038/s41598-022-18634-6)). The release holds the ensemble mean of temperature, winds and heights every six hours on a 128 × 64 grid and 60 pressure levels, in one 9.6 GB NetCDF-4 file. The map is the temperature on the 1,840 Pa level at 00:00 UT on 1 November 2018: the level the file's own geopotential height puts at 70.5 km, where the winds were assimilated, at an instant inside the two months the paper analyses. It is kept as the 11 byte ranges of the file the reader reads (116 kB), exact bytes each declared with its range in the [manifest](source/manifest.json), and drawn in false color from 180 to 220 K; the released values run from 182.3 to 212.2 K. The model writes Venus in the convention of geophysical fluid dynamics, turning the other way: the step of the release that read Akatsuki's winds in (`01obsmake/01uvigrdmake_norotate.rb` in [its code](https://doi.org/10.5281/zenodo.23386505)) reverses their longitude axis and the sign of their zonal wind, so the map is laid on Venus's longitudes as 360° minus the model's.
 
 **Early radar.** Five rescued maps show what radar saw before Magellan, as one stepper in date order. Three are scans of printed figures (Haystack 1967, [Ingalls et al. 1968](https://doi.org/10.21236/AD0681467); Goldstone 1969–1972, [Saunders and Malin 1977](https://doi.org/10.1029/GL004i011p00547); Arecibo 1975–1977, [Campbell and Burns 1980](https://doi.org/10.1029/JA085iA13p08271)) and two are archive mosaics (Pioneer Venus 1978–1981, [Pettengill et al. 1980](https://doi.org/10.1029/JA085iA13p08261); Arecibo 1983, [Campbell et al. 1984](https://doi.org/10.1126/science.226.4671.167)). The depositor fitted each to Magellan's map on a 6,051 km sphere. Each 8-bit GeoTIFF is read as deposited and drawn in gray, brightness 0 to 255, with bilinear sampling; its zero cells and everything outside its frame are missing and show the shared gray grid. Nothing is cleaned: the Goldstone figure keeps its authors' dashed box and letters, and the Arecibo 1975–1977 map its grid lines.
 
@@ -69,9 +72,15 @@ The roughness label's 0.005 multiplier conflicts with the [PDS GSDR specificatio
 
 Headless Chrome captures of the default view, each after the page reported ready.
 
+![Venus on css.earth with the cloud-top temperature dataset selected, 2026-10-20](evidence/2026-10-20/cloud-top-temperature.webp)
+
+The cloud-top temperature dataset selected on the dev server, after the page reported ready and the dataset's button reported pressed.
+
 - Cloud map identity: the file OpenSpace distributes as `venus_clouds.jpg` and Björn Jónsson's `venus.jpg` are the same 66,303 bytes (compared on 2026-10-07). The prepared atlas's mean color is (221, 201, 159), the map's own (221, 201, 159); with the removed curve it was (237, 235, 182).
 - The Sun direction fitted from the ultraviolet file's incidence grid puts the sub-solar point at 206.1913° E, 2.4897° N; JPL Horizons gives 206.179102° E, 2.490460° N.
 - Radar: the published map has no empty cell. Its most common color (183, 78, 39) covers 0.38% of the globe and 31% of the band south of 80° S, a flat tone where the mosaic holds no radar image.
+- Cloud-top temperature, the mirror: the poleward wind at 70 km, which Fujisawa et al. (2022) find centred around local noon, peaks at model longitude 309.4° on 1 October and 222.3° on 1 November 2018 (00:00 UT), moving west 2.8° a day. JPL Horizons puts the sub-solar point at 73.03° E and 168.35° E those days, moving east 3.1° a day: mirrored, 286.97° and 191.65°, 22° and 31° before the noon peaks. Not mirrored, the gaps would be 236° and 54°.
+- Cloud-top temperature, the level: the file's geopotential height on the 1,840 Pa level averages 70.48 km (69.22 to 71.55 km) at its first time, 06:00 UT on 1 September 2018; the levels either side average 68.46 and 72.54 km.
 - Gravity: a sum of the model's coefficients reproduces the free-air grid to 0.004 mGal with this cell placement (ledger entry `magellan-gravity-maps`).
 
 ## Known problems
@@ -80,6 +89,7 @@ Headless Chrome captures of the default view, each after the page reported ready
 - The radar map's orange is synthetic: it follows radar brightness and is not surface color. The product states no brightness scale. A flat tone near the south pole stands in for ground the mosaic does not show.
 - The cloud map's color is added by its author, who says Venus in visible light is almost white with little contrast. The clouds move, so the map's longitudes mark no place on the planet. He replaces his maps with improved versions; `acquire venus --refresh` downloads the current file.
 - The ultraviolet image is one instant of clouds that move with a four-day super-rotation. It already carries the Sun, so illumination is counted twice near the limb.
+- The cloud-top temperature is a model analysis at one instant. Akatsuki's winds cover only the day side, from about 7 to 15 h local time and within 50° of the equator; elsewhere the map is the model's. The atmosphere turns in about four days, so its longitudes hold for that instant only. The grid's last rows are at 87.9°, so the poles are gray.
 - The halo is a PSG single-scattering model ([handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96) with the Sun one degree above the horizon, so the real halo may be brighter. Its one color per pixel is approximate for the radar and elevation datasets.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
 - Emissivity is not corrected for emission angle, roughness or tilt, and is not temperature or evidence of volcanism.

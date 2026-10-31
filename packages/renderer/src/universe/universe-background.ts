@@ -1,4 +1,4 @@
-import { catalogueDiscOpacity, catalogueLevelOpacity } from './catalogue-proximity.js';
+import { catalogueDiscOpacity, catalogueLevelOpacity } from './points/catalogue-proximity.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 import { ALL_WORLD_LAYERS_SHOWN, type WorldLayerVisibility } from './world-layers.js';
 import { writeData } from '../rendering/dom/retained-write.js';
@@ -6,16 +6,17 @@ import { eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCssVolume, PreparedWorldContext } from '@cssearth/objects';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
+import type { VolumeCameraPublication } from '../volume/types.js';
 import { mountPreparedVolumeLod } from '../volume/prepared-volume-lod.js';
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/loading/prepared-prefetch.js';
-import { mountCataloguePoints } from './catalogue-points.js';
-import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
+import { mountCataloguePoints } from './points/catalogue-points.js';
+import { fetchPreparedCatalogueBank } from './points/catalogue-point-transport.js';
 import { catalogueDotsOpacity, galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
-import { mountGalaxyStations, type GalaxyStationBackgroundOptions } from './galaxy-stations.js';
+import { mountGalaxyStations, type GalaxyStationBackgroundOptions } from './galaxy-stations/galaxy-stations.js';
 import { starFieldAroundPicture } from './context-presentation-policy.js';
-import { galaxyAutoExposure } from './galaxy-auto-exposure.js';
+import { galaxyAutoExposure } from './galaxy/galaxy-auto-exposure.js';
 
 /** Retained sky and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
@@ -56,6 +57,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   lifetime.onDispose(() => prefetchAbort.abort());
   let galaxyPrefetched = false;
   let coasting = false;
+  let lastVolumePublication: VolumeCameraPublication | null = null;
   const stationHost = document.createElement('div');
   stationHost.className = 'prepared-galaxy-stations';
   stationHost.style.cssText = 'position:absolute;inset:0;transform-style:flat;pointer-events:none';
@@ -69,7 +71,10 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
 
   return {
     dotOpacity(world: WorldCameraPose) { return catalogueProximity ? catalogueDiscOpacity(catalogueProximity.plan,world) : 1; },
-    setCoasting(value: boolean) { coasting = value; },
+    setCoasting(value: boolean) {
+      const settled = coasting && !value; coasting = value;
+      if (settled && lastVolumePublication) volumeLayer?.publish(lastVolumePublication);
+    },
     stationStats() { return stationLayer?.stats() ?? null; },
     inspect() { return lastView ? {...lastView} : null; },
     // Separate host placement from layer mounting to retain startup and DOM order.
@@ -79,7 +84,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
         lifetime.onDispose(() => skyLayer?.destroy());
       }
       // The prepared XYZ slabs carry the outside view; the host fades them out as the inside banks take over.
-      volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource, residentStacks: true }, () => 1);
+      volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource, residentStacks: true, coasting: () => coasting }, () => 1);
       // Completed stack images keep their opaque mattes: cumulative source-over then dissolves light linearly.
       lifetime.onDispose(() => volumeLayer?.destroy());
       // Their own layer over the galaxy's: the dots show from just past the Solar System, where the galaxy volume is still clear.
@@ -162,7 +167,8 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       // A sky turned off leaves the layout, as a hidden volume host does; it is not published until it is back.
       skyLayer?.publish(world, viewport, completedContribution < 1);
-      if (volumeVisible && volumeSize > 0) volumeLayer?.publish({ world, viewport });
+      lastVolumePublication = volumeVisible && volumeSize > 0 ? { world, viewport } : null;
+      if (lastVolumePublication) volumeLayer?.publish(lastVolumePublication);
       // The catalogue dots are the stars around the Solar System (starFieldFade), whole before the host stars give way to
       // them past the system (world-context-planner.ts); measured like them from the selected body. A detailed focus (a
       // nebula's or a galaxy's picture) keeps them, as it keeps the stars' markers: they are the sky around it.

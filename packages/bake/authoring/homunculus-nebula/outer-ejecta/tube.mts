@@ -15,7 +15,7 @@
  * -5, 0, 5 toward four directions) about the pole's position angle less 10 degrees (Mehner et al.) and 41 degrees of
  * tilt; the lowest cost wins, its bend written positive. Unseen wall costs nothing: only points pull on it.
  */
-import { leastSquares } from './least-squares.mts';
+import { leastSquares } from './python-ports/least-squares.mts';
 import { MOTION_EPOCH } from './knots.mts';
 import { HALF, PIX } from './sky-grid.mts';
 

@@ -1,0 +1,36 @@
+{
+  "id": "gibson-nordsieck-2003-pleiades-photometry",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The Pleiades Reflection Nebula I: calibrated wide-field optical photometry",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "archive",
+      "url": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_phot_color.pdf",
+      "label": "Primary measurement and documentation"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/374589",
+      "label": "Published method"
+    }
+  ],
+  "publisher": "American Astronomical Society; author offprint at Western Kentucky University",
+  "relations": [],
+  "evidence": [
+    {
+      "url": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_phot_color.pdf",
+      "checkedOn": "2026-10-25",
+      "locator": "Section 3.4, Figures 7–9; 5 × 1.7 degree BJ mosaic, centered at 4,400 Å. General nebula: 22.1–22.9 B mag/arcsec²; surrounding structures: 24.2–25.4; near 1 degree: 25.0. Common sky-zero uncertainty: 25.6 mag/arcsec². Regional ranges, not matched apertures."
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Steven J. Gibson and Kenneth H. Nordsieck (2003). Optical data constrain brightness only, never dust geometry or local texture.",
+      "scope": "Pleiades dust model",
+      "evidence": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_phot_color.pdf"
+    }
+  ]
+}

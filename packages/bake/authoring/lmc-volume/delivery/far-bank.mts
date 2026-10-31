@@ -45,7 +45,6 @@ export async function prepareFarBank(pilot = false) {
     await mkdir(dirname(outputDirectory + path), { recursive: true });
     await writeFile(outputDirectory + path, bytes);
   });
-  need(result.impostors?.distanceFade === undefined, 'Resolved LMC views must retain their X/Y/Z slabs');
   await writeFile(outputDirectory + 'volume.json', JSON.stringify(result) + '\n');
   await writeFile(outputDirectory + 'complete.json', JSON.stringify({ complete: true, pilot, size, views: result.impostors!.views.length, metersPerUnit: result.frame.metersPerUnit }) + '\n');
   console.log('FAR_BANK_COMPLETE ' + result.impostors!.views.length + ' ' + size);

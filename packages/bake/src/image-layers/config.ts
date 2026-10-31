@@ -25,7 +25,7 @@ export interface ImageLayerRecipe {
      * `NASA-SAO` is the Chandra X-ray Center's terms: no copyright asserted on Chandra content, acknowledgement requested.
      * `NASA-STScI` is the Space Telescope Science Institute's: material may be used as in the public domain, acknowledgement requested. */
     license: 'CC-BY-4.0' | 'CC-BY' | 'NASA-SAO' | 'NASA-STScI';
-    /** Milky Way stars in front of the galaxy, removed from the photograph before its layers are cut (./foreground.ts). */
+    /** Milky Way stars in front of the galaxy, removed from the photograph before its layers are cut (./face/foreground.ts). */
     foregroundStars?: { path: string; raDegColumn: string; decDegColumn: string; gMagColumn: string; source: string; basis: string };
     /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
      * Database's columns: ra, dec (deg), rhalf (arcmin), position_angle (deg), ellipticity. */
@@ -84,7 +84,7 @@ export interface ImageLayerRecipe {
      * position angle `polarLeansToPaDeg`. `envelope` is a filled sphere around it, the nebula's outline. `cavities` are regions along the pole that emit `emission` of the body's emissivity, each about
      * `sizeArcsec` across; they lie behind the star between the position angles `farBetweenPaDeg` and in front of it
      * elsewhere. Every value is one a paper prints or states. */
-    /** A nebula's published rings (./rings.ts): a filled disc and the ring around it, circles of `radiusArcsec` in two
+    /** A nebula's published rings (./rings/rings.ts): a filled disc and the ring around it, circles of `radiusArcsec` in two
      * planes through the star, each tilted its own way: the axis `tiltDeg` from the sight line, its far end leaning to
      * position angle `farAxisPaDeg`. With `lineOfSightThicknessArcsec` each has that much depth along the sight line.
      * Every value is one a paper prints. */
@@ -100,23 +100,23 @@ export interface ImageLayerRecipe {
     streams?: { source: string; basis: string; dispersion: number;
       streams: { id: string; semiMajorArcsec: number; eccentricity: number; ascendingNodeDeg: number; argumentOfPerifocusDeg: number; inclinationDeg: number; trueAnomalyDeg: [number, number];
         surface?: { source: string; basis: string; path: string; cellArcsec: number; centreCell: [number, number] } }[] };
-    /** A nebula's published surface (./surface.ts): a closed mesh a paper made from spectra (`path`, a binary STL whose z
+    /** A nebula's published surface (./surface/surface.ts): a closed mesh a paper made from spectra (`path`, a binary STL whose z
      * axis is the nebula's pole), placed on the sky. `arcsecPerUnit` is the file's unit on the sky and `originUnits` the
      * star in the file's units. `pole.tiltDeg` is the pole's angle from the sight line, `pole.paDeg` the position angle
      * its receding end points to, `pole.rollDeg` the file's turn about the pole and `pole.receding` the end of the file's
      * z axis that recedes. The picture's light inside the surface's outline lies on the side that faces the Sun.
      * `starRadiusArcsec` is how far the central star's own light reaches in the picture: that light stays at the star,
      * on no surface. `fitArcsec` is how closely the drawn patches follow the surface: presentation. With `edgeFit` the
-     * surface's outline is fitted to the picture's lobe edge, direction by direction about the star (./surface.ts
+     * surface's outline is fitted to the picture's lobe edge, direction by direction about the star (./surface/surface.ts
      * `surfaceEdgeStretch`). With `closedMesh` the surface is drawn as its own closed mesh with the picture painted on it
-     * (./surface-mesh.ts), its dark lanes from the filament map at `filaments.path` drawn `filaments.darkness` dark, and
+     * (./surface/surface-mesh.ts), its dark lanes from the filament map at `filaments.path` drawn `filaments.darkness` dark, and
      * the star's glare given the ultraviolet detail at `filaments.detailPath`; both maps are built beside the recipe by
      * the body's authoring script. With `skirt` the picture outside the lobes, out to `skirt.reachArcsec` from the star, lies
-     * on a thin disc in the plane through the star across the pole (./surface-skirt.ts); with `skirt.regionsPath` the
+     * on a thin disc in the plane through the star across the pole (./surface/surface-skirt.ts); with `skirt.regionsPath` the
      * picture inside the regions drawn there whose names start with "skirt", over the lobes too, and the lobes under them
      * are filled; with `skirt.layers` and `skirt.openingDeg` the skirt is that many sheets fanning out that far either
      * side of the plane, a thickness the bake models (the papers find the skirt thin and planar). With `star` the central
-     * star is a glow inside the shell (./surface-star.ts). */
+     * star is a glow inside the shell (./surface/surface-star.ts). */
     surface?: { source: string; basis: string; path: string; arcsecPerUnit: number; originUnits: [number, number, number];
       pole: { tiltDeg: number; paDeg: number; rollDeg: number; receding: '+z' | '-z' }; starRadiusArcsec?: number; fitArcsec: number;
       edgeFit?: { maxStretch: number; smoothDeg: number }; closedMesh?: true; filaments?: { path: string; darkness: number; detailPath?: string };
@@ -131,14 +131,14 @@ export interface ImageLayerRecipe {
      * how far the central star's own light reaches in the picture: that light stays at the star. */
     densityGrid?: { source: string; basis: string; path: string; cells: number; cellArcsec: number; toward: 'high' | 'low'; secondAxisPaDeg: number; thirdAxisPaDeg: number;
       centreArcsec?: [number, number]; smoothPixels: number; starRadiusArcsec?: number };
-    /** A cluster merger's hot gas and mass (./collision.ts). The X-ray papers take the gas as round about the line the
+    /** A cluster merger's hot gas and mass (./collision/collision.ts). The X-ray papers take the gas as round about the line the
      * subcluster moves along; the lensing papers fit the mass with two round halos, round together about the line through
      * them. `gas` and `mass` each have a picture of their own on the photograph's frame (`path`), added to it by a screen,
      * and a line on the sky: the published places of their two concentrations, `from` the main cluster's and `to` the
      * subcluster's. `tiltDeg` is the lines' angle from the plane of the sky, the `to` end the farther; 0 where no paper says which end is. The photograph stays
      * on its plane; each picture's light is spread along each sight line through the body of revolution that adds up to it. */
     collision?: { source: string; basis: string; tiltDeg: number; gas: CollisionBody; mass?: CollisionBody };
-    /** A relaxed cluster's hot gas and mass (./collision.ts), where X-ray, Sunyaev-Zel'dovich and lensing measurements
+    /** A relaxed cluster's hot gas and mass (./collision/collision.ts), where X-ray, Sunyaev-Zel'dovich and lensing measurements
      * are fitted together with ellipsoidal shells: the X-ray picture and the mass map give the shells' ellipse on the
      * sky, and the gas's X-ray brightness against its pressure gives how long they are along the sight line. `gas` and
      * `mass` each have a picture of their own on the photograph's frame, as a collision's do. The photograph stays on
@@ -146,7 +146,7 @@ export interface ImageLayerRecipe {
      * largest shell the frame holds whole. The shells' long axis is drawn on the sight line: a fit gives its angle from
      * it, but no measurement tells the near end from the far one. */
     ellipsoid?: { source: string; basis: string; gas: EllipsoidBody; mass?: EllipsoidBody;
-      /** The photograph's galaxies in depth (./galaxies.ts): each at a depth drawn from the mass's shells (the gas's
+      /** The photograph's galaxies in depth (./collision/galaxies.ts): each at a depth drawn from the mass's shells (the gas's
        * without a mass), with the photograph's light nearest to it. Light narrower than `widthArcsec` is a galaxy's
        * compact light, a blob in the views from the side; the rest is spread through the shells there. Nothing
        * measures a galaxy's depth. */

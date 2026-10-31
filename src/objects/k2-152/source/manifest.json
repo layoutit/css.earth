@@ -86,7 +86,7 @@
     {
       "id": "k2-152-gaia-xp",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3596508242468505216&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3596508242468505216&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
       "licenseEvidence": [
@@ -112,7 +112,7 @@
     {
       "id": "k2-152-stellar-color",
       "path": "photometry/stellar-color.json",
-      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3596508242468505216&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3596508242468505216&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Authored method record: names the archived spectrum, how it is read and the color computation applied",
@@ -182,7 +182,7 @@
     {
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3596508242468505216&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3596508242468505216&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3",
       "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
@@ -201,6 +201,51 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+      }
+    },
+    {
+      "id": "k2-152-k2-map-brightness-campaign-102",
+      "path": "science/k2/pdcsap/k2-152-c102.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/k2",
+      "productId": "Brightness map of K2-152 from its light in K2 campaign 102",
+      "title": "Brightness map of K2-152 from its light curve in K2 campaign 102, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2",
+      "credit": "NASA K2 mission light curve (PDC-MAP), campaign 102, from MAST; its rotation and period as published by Reinhold & Hekker (2020, A&A 635, A43); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the K2 mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA K2 · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the campaign published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the campaign's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public K2 data, reduced here.",
+      "consumers": [
+        "k2-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-k2-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/k2"
+          },
+          {
+            "catalogueId": "arxiv-2001-08214",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2001.08214"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
       }
     }
   ],

@@ -12,7 +12,7 @@
  * Both compute in double precision. scikit-image given the chain's single-precision arrays works in single
  * precision, so the two agree to that precision, not bit for bit: the tests state the measured agreement.
  */
-import { fft2, ifft2, transformColumnsThenRows, transformRowsThenColumns, type Complex } from './fft.mts';
+import { fft2, ifft2, transformColumnsThenRows, transformRowsThenColumns, type Complex } from './python-ports/fft.mts';
 
 /** Single precision's machine epsilon: below it, skimage leaves a window's correlation at zero (match_template on float32). */
 export const FLOAT32_EPSILON = 2 ** -23;

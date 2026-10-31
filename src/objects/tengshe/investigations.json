@@ -28,7 +28,7 @@
       "status": "included",
       "finding": "Gaia DR3 XP spectrum, source 1985889115564260224, through the CIE 1931 2-degree observer: #ffc074. Routes tried in order: stis-ngsl: HD 216946 is not in the library; pulkovo: HR 8726 is not in the catalogue; kiehling: HR 8726 is not among its 60 stars; kharitonov: HR 8726 is not in the catalogue; burnashev: BS 8726 is not in part2; gaia-xp: used.",
       "evidence": [
-        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1985889115564260224&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1985889115564260224&FORMAT=csv&DATA_STRUCTURE=DATAMODEL_GAIA&RELEASE=Gaia+DR3"
       ]
     },
     {
