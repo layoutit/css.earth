@@ -43,7 +43,7 @@ function stacksEqual(left: PreparedCssVolume['stacks'], right: PreparedCssVolume
       if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
           x.opticalSlab?.id !== y.opticalSlab?.id || x.opticalSlab?.role !== y.opticalSlab?.role ||
           !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
-          prepared.transform !== other.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
+          prepared.transform !== other.transform || prepared.backfaceVisibility !== other.backfaceVisibility || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
     }
   }
   return true;
