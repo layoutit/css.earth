@@ -53,6 +53,10 @@ This 128 px prototype is not promoted. The individual shapes retain depth, but f
 
 The later [independent-component integration](source/preparation/l36/components.json) adds opt-in shared runtime support for local axis selection and normalized transparent blending. Its tiny whole-galaxy preview contains two separate nebular components plus the background, still 33 optical layers in total. Four galaxy views and six close views passed actual-site loading and axis-share checks. This is an integration demonstration; the other 407 catalogue gas regions remain in the background and no all-region bake is claimed. The fresh default Milky Way production replay preserved every slab, sky face and inventory byte. Competing preview transactions are refused, and the accepted LMC was restored after capture.
 
+## Datasets
+
+Three datasets show one model. Horálek · optical is the calibration image. DECam · optical ([noirlab2030a](https://noirlab.edu/public/images/noirlab2030a/), CTIO/NOIRLab/NSF/AURA/SMASH, CC BY 4.0) and VISTA · near infrared ([eso1914a](https://www.eso.org/public/images/eso1914a/), ESO/VMC Survey) are graded to their images with one gain per component and one global tint; they are not reconstructed from them. 68 of the 354 lit gas regions lie outside the DECam frame and 3 outside the VISTA frame; they take the same global colors. Far pictures carry only a global color gain. The three-dataset bank is local and unpublished.
+
 ## Known problems
 
 - A real-site X/Y handoff diagnostic measured 27.77% more linear light with transparent completed groups than with the Milky Way opaque completion. The proposed shared correction is unapplied and awaits approval.

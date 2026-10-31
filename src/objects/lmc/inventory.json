@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lmc-dataset-decam-smash.webp",
+      "bytes": 19774,
+      "sha256": "d6a55b82bd931b14685d6cab9807c9cbd6257961dfd55f5bf04d2a72b0138a34"
+    },
+    {
+      "location": "public",
       "filename": "lmc-dataset-horalek-widefield.webp",
       "bytes": 17694,
       "sha256": "be44190a4331e8adca4916cc65b5e915fbd4da9ca57fc01600a9eaaf7ec97437"
+    },
+    {
+      "location": "public",
+      "filename": "lmc-dataset-vista-vmc.webp",
+      "bytes": 24458,
+      "sha256": "87376c1febee3174fe8e42cab35f636c40c0337286b4d16ff1eddb0f9440cb6a"
     },
     {
       "location": "prepared",
@@ -16,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 599,
-      "sha256": "803bcb82a1cf366f8c5ebe23cdbf10813c6ef6de9cd6cd428cdd3bb665b388b8"
+      "bytes": 1296,
+      "sha256": "721757660c28deafe86bcebb55278c68428091647aa1b34cd5321b793f12d105"
     },
     {
       "location": "prepared",
@@ -40,14 +52,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4712,
-      "sha256": "7120c800854b0dccf1b10c7fa1240be0cf1965837ff82e0218d1f16da348d7ff"
+      "bytes": 5244,
+      "sha256": "f4cf3f9dea104f9d4f9d87a626b8518288f584224a4fc361fb309729a0b12602"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1322,
-      "sha256": "2164419b5f40d87ab1422efdcbc267aadc07ac97755f2d099ba9d9714a11547a"
+      "bytes": 5493,
+      "sha256": "1602dd03211d0a58f6a82e0b46c6d0ac4af90064d45209547d4f1536c82f7c32"
     }
   ]
 }

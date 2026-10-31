@@ -2,41 +2,146 @@
   "schema": "cssearth-object-text@1",
   "objectId": "lmc",
   "card": {
-    "text": "A galaxy 49,591 parsecs away.",
+    "text": "The Large Magellanic Cloud is a dwarf galaxy orbiting the Milky Way, about 49,600 parsecs away.",
     "sources": [
       {
         "catalogueId": "publication-pietrzynski2019natur-567-200p",
         "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
-        "label": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent",
+        "label": "Pietrzyński et al. (2019), Nature 567, 200: a distance to the Large Magellanic Cloud that is precise to one per cent",
         "checked": "2026-10-01",
-        "locator": "distance: 49.59 kpc (−545.1 / +551.1 pc)"
+        "locator": "Distance: 49.59 kpc"
       }
     ]
   },
   "introduction": {
-    "text": "A galaxy 49,591 parsecs away.",
+    "text": "Its stars, gas and dust are placed from catalogues on its measured warped disc, and their colors are graded to the image you select.",
     "sources": [
       {
-        "catalogueId": "publication-pietrzynski2019natur-567-200p",
-        "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
-        "label": "Pietrzynski2019Natur.567..200P: A distance to the Large Magellanic Cloud that is precise to one per cent",
-        "checked": "2026-10-01",
-        "locator": "distance: 49.59 kpc (−545.1 / +551.1 pc)"
+        "catalogueId": "publication-choi2018apj-869-125c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...869..125C",
+        "label": "Choi et al. (2018), ApJ 869, 125: SMASHing the LMC, its warped disc and stellar substructure",
+        "checked": "2026-10-31",
+        "locator": "The disc plane the model uses"
+      },
+      {
+        "catalogueId": "zaritsky-2004-lmc-photometry",
+        "url": "https://arxiv.org/abs/astro-ph/0407006",
+        "label": "The Magellanic Clouds Photometric Survey: The Large Magellanic Cloud Stellar Catalog and Extinction Map",
+        "checked": "2026-10-31",
+        "locator": "The hot stars the young population uses"
       }
     ]
   },
   "datasets": {
     "horalek-widefield": {
-      "title": "Approved LMC physical model",
-      "detail": "Native l36 optical model",
-      "summary": "Catalogue populations and dust in a warped disc, calibrated against the optical photograph.",
+      "title": "The LMC in visible light",
+      "detail": "354 gas regions",
+      "summary": "Stars, gas and dust placed from catalogues on the measured disc, with colors graded to Petr Horálek’s photograph.",
       "sources": [
         {
           "catalogueId": "noirlab-iotw2547a",
           "url": "https://noirlab.edu/public/images/iotw2547a/",
           "label": "Large Magellanic Cloud · NOIRLab iotw2547a; NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
-          "checked": "2026-10-01",
+          "checked": "2026-10-31",
           "locator": "Large Magellanic Cloud · NOIRLab iotw2547a"
+        },
+        {
+          "catalogueId": "publication-pietrzynski2019natur-567-200p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
+          "label": "Pietrzyński et al. (2019), Nature 567, 200: a distance to the Large Magellanic Cloud that is precise to one per cent",
+          "checked": "2026-10-31",
+          "locator": "Distance: 49.59 kpc"
+        },
+        {
+          "catalogueId": "publication-choi2018apj-869-125c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...869..125C",
+          "label": "Choi et al. (2018), ApJ 869, 125: SMASHing the LMC, its warped disc and stellar substructure",
+          "checked": "2026-10-31",
+          "locator": "The disc plane the model uses"
+        },
+        {
+          "catalogueId": "zaritsky-2004-lmc-photometry",
+          "url": "https://arxiv.org/abs/astro-ph/0407006",
+          "label": "The Magellanic Clouds Photometric Survey: The Large Magellanic Cloud Stellar Catalog and Extinction Map",
+          "checked": "2026-10-31",
+          "locator": "The hot stars the young population uses"
+        }
+      ]
+    },
+    "decam-smash": {
+      "title": "The LMC in the DECam survey",
+      "detail": "354 gas regions",
+      "summary": "The same model graded to the DECam image, not reconstructed from it. Some gas regions lie outside its frame.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-noirlab2030a",
+          "url": "https://noirlab.edu/public/images/noirlab2030a/",
+          "label": "LMC SMASH mosaic · NOIRLab noirlab2030a; CTIO/NOIRLab/NSF/AURA/SMASH, CC BY 4.0",
+          "checked": "2026-10-31",
+          "locator": "Blanco 4 m telescope, DECam"
+        },
+        {
+          "catalogueId": "publication-pietrzynski2019natur-567-200p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
+          "label": "Pietrzyński et al. (2019), Nature 567, 200: a distance to the Large Magellanic Cloud that is precise to one per cent",
+          "checked": "2026-10-31",
+          "locator": "Distance: 49.59 kpc"
+        },
+        {
+          "catalogueId": "publication-choi2018apj-869-125c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...869..125C",
+          "label": "Choi et al. (2018), ApJ 869, 125: SMASHing the LMC, its warped disc and stellar substructure",
+          "checked": "2026-10-31",
+          "locator": "The disc plane the model uses"
+        },
+        {
+          "catalogueId": "zaritsky-2004-lmc-photometry",
+          "url": "https://arxiv.org/abs/astro-ph/0407006",
+          "label": "The Magellanic Clouds Photometric Survey: The Large Magellanic Cloud Stellar Catalog and Extinction Map",
+          "checked": "2026-10-31",
+          "locator": "The hot stars the young population uses"
+        },
+        {
+          "catalogueId": "nidever-2019-lmc-smash",
+          "url": "https://arxiv.org/abs/1805.02671",
+          "label": "Exploring the Very Extended Low-surface-brightness Stellar Populations of the Large Magellanic Cloud with SMASH",
+          "checked": "2026-10-31",
+          "locator": "The SMASH survey behind the image"
+        }
+      ]
+    },
+    "vista-vmc": {
+      "title": "The LMC in near infrared",
+      "detail": "354 gas regions",
+      "summary": "The same model graded to the VISTA image, not reconstructed from it. Gas is faint in this light.",
+      "sources": [
+        {
+          "catalogueId": "eso-eso1914a",
+          "url": "https://www.eso.org/public/images/eso1914a/",
+          "label": "Large Magellanic Cloud · ESO eso1914a; ESO/VMC Survey",
+          "checked": "2026-10-31",
+          "locator": "VISTA, VIRCAM, Y, J and Ks"
+        },
+        {
+          "catalogueId": "publication-pietrzynski2019natur-567-200p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019Natur.567..200P",
+          "label": "Pietrzyński et al. (2019), Nature 567, 200: a distance to the Large Magellanic Cloud that is precise to one per cent",
+          "checked": "2026-10-31",
+          "locator": "Distance: 49.59 kpc"
+        },
+        {
+          "catalogueId": "publication-choi2018apj-869-125c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...869..125C",
+          "label": "Choi et al. (2018), ApJ 869, 125: SMASHing the LMC, its warped disc and stellar substructure",
+          "checked": "2026-10-31",
+          "locator": "The disc plane the model uses"
+        },
+        {
+          "catalogueId": "zaritsky-2004-lmc-photometry",
+          "url": "https://arxiv.org/abs/astro-ph/0407006",
+          "label": "The Magellanic Clouds Photometric Survey: The Large Magellanic Cloud Stellar Catalog and Extinction Map",
+          "checked": "2026-10-31",
+          "locator": "The hot stars the young population uses"
         }
       ]
     }

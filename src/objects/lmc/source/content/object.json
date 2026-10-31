@@ -58,7 +58,7 @@
     "controls": [
       {
         "id": "horalek-widefield",
-        "label": "LMC l36 optical model",
+        "label": "Horálek · optical",
         "thumbnail": "lmc-dataset-horalek-widefield.webp",
         "volume": {
           "objectId": "lmc-volume",
@@ -71,6 +71,38 @@
           "url": "https://noirlab.edu/public/images/iotw2547a/"
         },
         "falseColor": false
+      },
+      {
+        "id": "decam-smash",
+        "label": "DECam · optical",
+        "thumbnail": "lmc-dataset-decam-smash.webp",
+        "volume": {
+          "objectId": "lmc-volume",
+          "datasetId": "decam-smash",
+          "surface": "decam-smash"
+        },
+        "source": {
+          "id": "lmc-volume-decam-smash",
+          "path": "../../lmc-volume/source/manifest.json",
+          "url": "https://noirlab.edu/public/images/noirlab2030a/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "vista-vmc",
+        "label": "VISTA · near infrared",
+        "thumbnail": "lmc-dataset-vista-vmc.webp",
+        "volume": {
+          "objectId": "lmc-volume",
+          "datasetId": "vista-vmc",
+          "surface": "vista-vmc"
+        },
+        "source": {
+          "id": "lmc-volume-vista-vmc",
+          "path": "../../lmc-volume/source/manifest.json",
+          "url": "https://www.eso.org/public/images/eso1914a/"
+        },
+        "falseColor": true
       }
     ]
   },
