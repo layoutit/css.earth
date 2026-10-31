@@ -264,3 +264,14 @@ test('a host layer switch fades the selected bank and retains coast membership, 
   for (const root of f.targets) assert.equal(root.style.opacity, '0.999');
   f.lifetime.destroy();
 });
+
+test('a bank whose backing lies in a disc stays on screen where that plane has no width', async () => {
+  const { edgeOnVisibility } = await import('./universe-dataset-banks.js');
+  const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
+  const gate = { hiddenBelowRadiusPixels: 64, fullAboveRadiusPixels: 128 }, world = (sine: number) => ({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [Math.sqrt(1 - sine * sine) * 10, 0, sine * 10] as [number, number, number], orientationXyzw: [0, 0, 0, 1] as [number, number, number, number] } });
+  assert.deepEqual(edgeOnVisibility(undefined, world(0) as never, frame as never, gate), gate, 'without a disc nothing changes');
+  assert.deepEqual(edgeOnVisibility([0, 0, 1], world(.5) as never, frame as never, gate), gate, 'an open view keeps the shared gate');
+  assert.deepEqual(edgeOnVisibility([0, 0, 1], world(0) as never, frame as never, gate), { hiddenBelowRadiusPixels: 2, fullAboveRadiusPixels: 24 }, 'edge-on the bank holds its own gate');
+  let prior = edgeOnVisibility([0, 0, 1], world(0) as never, frame as never, gate).hiddenBelowRadiusPixels;
+  for (let sine = .005; sine <= .3; sine += .005) { const next = edgeOnVisibility([0, 0, 1], world(sine) as never, frame as never, gate).hiddenBelowRadiusPixels; assert.ok(next >= prior - 1e-9 && next - prior < 6, 'the gate moves without a step at ' + sine); prior = next; }
+});
