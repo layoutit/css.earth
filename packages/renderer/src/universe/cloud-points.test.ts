@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { encodeCloudPoints, encodeCloudSegments, type PreparedBank, type PreparedCloudPoints, type PreparedCloudSegments } from '@cssearth/objects';
 import { packPreparedBank } from '@cssearth/objects/node';
-import { cellRollDegrees, createCloudPoints, mountCloudOverlay } from './cloud-points.js';
+import { createCloudPoints, mountCloudOverlay } from './cloud-points.js';
 import { retainedStyle } from './cloud-overlay-layer.js';
 import { readPreparedHere } from '../prepared-data/readers.js';
 import { cloudOverlayReader, type CloudOverlayData } from './cloud-overlay-reader.js';
@@ -243,18 +243,4 @@ test('the overlay reader refuses an occluder whose axes do not span space: it ha
     const fetcher = (async (url: string) => new Response(new Uint8Array(packPreparedBank(flat, url)))) as unknown as typeof fetch;
     await assert.rejects(readPreparedHere('cloud-overlay', '/flat.bin', fetcher), /\/flat\.bin: every occluder's axes span space/u, JSON.stringify(axesUnits));
   }
-});
-
-test('a billboard\'s roll is its twist: a spin turns it, an orbit past the drawn axis does not', () => {
-  // The camera's axes as rows: right, down, back, written in the frame's columns.
-  const axes = (right: number[], down: number[], back: number[]) => [right[0]!, down[0]!, back[0]!, right[1]!, down[1]!, back[1]!, right[2]!, down[2]!, back[2]!];
-  const drawnRight = [1, 0, 0] as const, drawnUp = [0, 1, 0] as const, unit = (v: number[]) => { const n = Math.hypot(...v); return v.map(x => x / n); }, cross = (a: number[], b: number[]) => [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
-  for (const spin of [0, 30, 90, 170]) { const t = spin * Math.PI / 180, c = Math.cos(t), s = Math.sin(t); assert.ok(Math.abs(cellRollDegrees(drawnRight, drawnUp, axes([c, s, 0], [s, -c, 0], [0, 0, 1]))! - spin) < 1e-9, 'spin ' + spin); }
-  // An orbit whose view direction passes close by the drawn right axis, with the camera's up held on the frame's z: the old projection of that axis swings here.
-  const old = (r: number[]) => Math.atan2(r[1]!, r[0]!) * 180 / Math.PI, wrap = (d: number) => Math.abs(((d + 540) % 360) - 180);
-  let worst = 0, worstOld = 0, prior: number | null = null, priorOld = 0;
-  for (let degree = 70; degree <= 110; degree += .5) { const a = degree * Math.PI / 180, back = unit([Math.sin(a), .03, Math.cos(a)]), right = unit(cross([0, 1, 0], back)), down = cross(back, right), r = axes(right, down, back), now = cellRollDegrees(drawnRight, drawnUp, r)!, was = old(r); if (prior !== null) { worst = Math.max(worst, wrap(now - prior) / .5); worstOld = Math.max(worstOld, wrap(was - priorOld) / .5); } prior = now; priorOld = was; }
-  assert.ok(worst < 1, 'the twist stays bounded: ' + worst);
-  assert.ok(worstOld > 3, 'this path does trouble the projection of the axis: ' + worstOld);
-  assert.equal(cellRollDegrees(drawnRight, drawnUp, axes([-1, 0, 0], [0, 1, 0], [0, 0, -1])), null, 'opposite the drawn direction it has no answer');
 });

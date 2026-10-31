@@ -94,10 +94,10 @@ export async function buildAll() {
     positions.set(patch.center, j * 3); diameters[j] = 2 * patch.half; cells.set([cx, cy], j * 2);
   });
   const atlasBytes = await writeLossyWebp(sharp(atlas, { raw: { width: across * CELL, height: across * CELL, channels: 4 } }), ALL_DIR + ATLAS, { alphaQuality: 100 });
-  const encoded = encodeCloudPoints({ id: BANK_ID, frame, count, positions, diameters, cells, atlas: ATLAS, cellTexels: CELL, occluder: [], cellAxesUnits: axes, planarCells: { from: all.length, right: [1, 0, 0], up: [0, 1, 0] } });
+  const encoded = encodeCloudPoints({ id: BANK_ID, frame, count, positions, diameters, cells, atlas: ATLAS, cellTexels: CELL, occluder: [], planarCells: { from: all.length, right: [1, 0, 0], up: [0, 1, 0] } });
   readCloudPoints(encoded, 'gas dots'); const bank = encodePreparedBank(encoded, 'gas dots');
   await writeFile(ALL_DIR + BANK_ID + '.bin', packPreparedBinary(bank.bytes, bank.regions, 'gas dots'));
-  await writeFile(ALL_DIR + 'result.json', JSON.stringify({ complete: true, owners: every.length, lit: regions.length, ownersWithOwnBillboard: owned.size, boards: all.length, dustPatches: patches.length, dustClouds: (layer.clouds ?? []).length, dustHalfKpc: [patches.reduce((n, p) => Math.max(n, p.half), 0), patches.map(p => p.half).sort((a, b) => a - b)[patches.length >> 1]], atlasBytes: atlasBytes.length, largestHalfKpc: halves[0], medianHalfKpc: halves[Math.floor(halves.length / 2)], groupIds: all.map(b => b.group), report }, null, 1) + '\n');
+  await writeFile(ALL_DIR + 'result.json', JSON.stringify({ complete: true, owners: every.length, lit: regions.length, ownersWithOwnBillboard: owned.size, boards: all.length, dustPatches: patches.length, dustClouds: (layer.clouds ?? []).length, dustHalfKpc: [patches.reduce((n, p) => Math.max(n, p.half), 0), patches.map(p => p.half).sort((a, b) => a - b)[patches.length >> 1]], atlasBytes: atlasBytes.length, largestHalfKpc: halves[0], medianHalfKpc: halves[Math.floor(halves.length / 2)], groupIds: all.map(b => b.group), centres: all.map(b => b.board.center), report }, null, 1) + '\n');
   console.log('GAS_ALL_DOTS ' + JSON.stringify({ lit: regions.length, ownersWithOwnBillboard: owned.size, boards: all.length, dust: patches.length, atlasBytes: atlasBytes.length, largestHalfKpc: halves[0], medianHalfKpc: halves[Math.floor(halves.length / 2)], dots: dots.length }));
   return { groups, all, axes, frame, grade };
 }
