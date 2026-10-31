@@ -62,7 +62,7 @@
             "kind": "unresolved",
             "label": "Petr Horálek",
             "evidence": "https://noirlab.edu/public/images/iotw2547a/",
-            "reason": "The photograph credits Petr Horálek but does not identify the individual camera."
+            "reason": "A photograph made with a wide-aperture telephoto lens on a commercial camera, about four hours over three nights on Cerro Pachón, Chile. No camera or lens model is published."
           }
         ]
       }
@@ -183,6 +183,83 @@
         ]
       },
       "dependencies": []
+    },
+    {
+      "id": "approved-l36-model",
+      "path": "src/objects/lmc-volume/source/preparation/l36/lineage.json",
+      "bytes": 12032,
+      "credit": "The LMC model: published geometry with Gaia, MCPS, Bica, Hα, HERITAGE, Bell and OGLE records",
+      "dependencies": [
+        "sky-registration"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The physical model. This lineage points to the model recipe, published source records and version history."
+      }
+    },
+    {
+      "id": "decam-smash",
+      "path": "src/objects/lmc-volume/.local/image-options/decam-smash.jpg",
+      "origin": "https://noirlab.edu/public/images/noirlab2030a/",
+      "sourceUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "title": "LMC SMASH mosaic · NOIRLab noirlab2030a",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+      "displayCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "role": "material",
+            "evidence": "src/objects/lmc-volume/source/presentation.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "decam-smash",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "blanco-4m",
+            "evidence": "https://noirlab.edu/public/images/noirlab2030a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vista-vmc",
+      "path": "src/objects/lmc-volume/.local/image-options/vista-vmc.jpg",
+      "origin": "https://www.eso.org/public/images/eso1914a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1914a/",
+      "title": "Large Magellanic Cloud · ESO eso1914a",
+      "credit": "ESO/VMC Survey",
+      "displayCredit": "ESO/VMC Survey",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1914a",
+            "role": "material",
+            "evidence": "src/objects/lmc-volume/source/image-candidates.json#/targets/0/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "vista-vmc",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1914a/"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -260,7 +337,7 @@
     },
     {
       "id": "retained-evidence-23",
-      "path": "src/objects/lmc-volume/source/compact-delivery.json",
+      "path": "src/objects/lmc-volume/source/legacy/compact-delivery.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -3168,7 +3245,8 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
-      }
+      },
+      "bytes": 1725
     },
     {
       "id": "retained-evidence-22",
@@ -3235,5 +3313,16 @@
       }
     }
   ],
-  "generatedIntermediates": []
+  "generatedIntermediates": [
+    {
+      "id": "l36-delivery-acceptance",
+      "path": "src/objects/lmc-volume/source/preparation/l36/delivery-acceptance.json",
+      "bytes": 1907,
+      "generator": "packages/bake/authoring/lmc-volume/delivery/accepted-delivery.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Owner acceptance of the measured native near pilot, retaining its absolute residuals as known problems."
+      }
+    }
+  ]
 }

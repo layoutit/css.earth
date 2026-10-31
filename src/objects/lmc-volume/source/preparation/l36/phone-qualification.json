@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-lmc-phone-qualification@1",
+  "status": "skipped",
+  "qualified": false,
+  "generator": "packages/bake/authoring/lmc-volume/delivery/phone-availability.mts",
+  "checkedAtUtc": "2026-10-27T04:47:23.253Z",
+  "connectionCheck": "adb devices -l",
+  "detectedDeviceCount": 0,
+  "states": [],
+  "reason": "No Android device is connected. The owner reported the S23 disconnected; the live ADB check confirms no available phone.",
+  "traceScenarios": [
+    "drag",
+    "coast",
+    "far/near"
+  ],
+  "traces": [],
+  "comparison": null,
+  "milkyWayReference": {
+    "source": "src/objects/milky-way-volume/README.md",
+    "date": "2026-10-22",
+    "scenario": "Eight-second turn with the shipped 33-layer bank",
+    "ranOutTileAssignments": 0,
+    "totalTileAssignments": 541,
+    "lateTileFrames": {
+      "min": 3,
+      "max": 7
+    }
+  },
+  "limitation": "The LMC has not been measured on the S23. Browser screenshots and its 33-layer budget do not establish phone performance parity."
+}

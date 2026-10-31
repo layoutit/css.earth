@@ -1,0 +1,481 @@
+{
+  "schema": "cssearth-lmc-far-native@1",
+  "complete": true,
+  "model": 36,
+  "approvedCommit": "e4ebd6c94263f73dc020ad0d1443901182310329",
+  "generator": "packages/bake/authoring/lmc-volume/delivery/far-run.mts",
+  "configuration": {
+    "approvedCommit": "e4ebd6c94263f73dc020ad0d1443901182310329",
+    "size": 3072,
+    "radiusUnits": 14.297202523570824,
+    "tile": 256,
+    "stepPc": 15,
+    "objectSubpixels": 4,
+    "populationCells": 2048,
+    "gaussianCutoffSigma": 10,
+    "views": [
+      {
+        "id": "px",
+        "back": [
+          1,
+          0,
+          0
+        ],
+        "right": [
+          0,
+          -1,
+          0
+        ],
+        "down": [
+          0,
+          0,
+          1
+        ],
+        "texturePath": "l36-far/px.png"
+      },
+      {
+        "id": "nx",
+        "back": [
+          -1,
+          0,
+          0
+        ],
+        "right": [
+          0,
+          1,
+          0
+        ],
+        "down": [
+          0,
+          0,
+          1
+        ],
+        "texturePath": "l36-far/nx.png"
+      },
+      {
+        "id": "py",
+        "back": [
+          0,
+          1,
+          0
+        ],
+        "right": [
+          1,
+          0,
+          0
+        ],
+        "down": [
+          0,
+          0,
+          1
+        ],
+        "texturePath": "l36-far/py.png"
+      },
+      {
+        "id": "ny",
+        "back": [
+          0,
+          -1,
+          0
+        ],
+        "right": [
+          -1,
+          0,
+          0
+        ],
+        "down": [
+          0,
+          0,
+          1
+        ],
+        "texturePath": "l36-far/ny.png"
+      },
+      {
+        "id": "pz",
+        "back": [
+          0,
+          0,
+          1
+        ],
+        "right": [
+          1,
+          0,
+          0
+        ],
+        "down": [
+          0,
+          -1,
+          0
+        ],
+        "texturePath": "l36-far/pz.png"
+      },
+      {
+        "id": "nz",
+        "back": [
+          0,
+          0,
+          -1
+        ],
+        "right": [
+          -1,
+          0,
+          0
+        ],
+        "down": [
+          0,
+          -1,
+          0
+        ],
+        "texturePath": "l36-far/nz.png"
+      },
+      {
+        "id": "tilt45",
+        "back": [
+          0,
+          0.7071067811865476,
+          0.7071067811865476
+        ],
+        "right": [
+          1,
+          0,
+          0
+        ],
+        "down": [
+          0,
+          -0.7071067811865476,
+          0.7071067811865476
+        ],
+        "texturePath": "l36-far/tilt45.png"
+      },
+      {
+        "id": "earth",
+        "back": [
+          0.004455592871328158,
+          -0.42433852005395156,
+          0.905492665950745
+        ],
+        "right": [
+          0.9999900737968177,
+          0.0018906984524393225,
+          -0.004034546715180511
+        ],
+        "down": [
+          2.168404344971009e-19,
+          -0.9055016541441459,
+          -0.42434273216613
+        ],
+        "texturePath": "l36-far/earth.png"
+      }
+    ]
+  },
+  "texturePitchPc": 9.308074559616422,
+  "parametersFitted": 0,
+  "source": "Approved physical model with 2048-cell measured population fields, 15 pc rays and 4 by 4 finite-object sampling. No photograph or completed slab image is an input.",
+  "encoding": "Lossless PNG. Alpha is the maximum displayed RGB byte. Straight RGB reconstructs each model reference channel exactly after 8-bit source-over on black, at the prepared camera. Subpixel image sampling and angular interpolation are separate approximations.",
+  "replay": {
+    "size": 128,
+    "decodedFloatBytesIdentical": true,
+    "rows": [
+      {
+        "view": "px",
+        "seconds": 37.635492709,
+        "decodedFloatBytesIdentical": true
+      },
+      {
+        "view": "nx",
+        "seconds": 42.771310167,
+        "decodedFloatBytesIdentical": true
+      },
+      {
+        "view": "py",
+        "seconds": 43.683021124999996,
+        "decodedFloatBytesIdentical": true
+      },
+      {
+        "view": "ny",
+        "seconds": 40.720524625,
+        "decodedFloatBytesIdentical": true
+      },
+      {
+        "view": "pz",
+        "seconds": 37.62171895899999,
+        "decodedFloatBytesIdentical": true
+      },
+      {
+        "view": "nz",
+        "seconds": 30.74429795799998,
+        "decodedFloatBytesIdentical": true
+      },
+      {
+        "view": "tilt45",
+        "seconds": 34.188027958999996,
+        "decodedFloatBytesIdentical": true
+      },
+      {
+        "view": "earth",
+        "seconds": 32.355619999999995,
+        "decodedFloatBytesIdentical": true
+      }
+    ]
+  },
+  "batch": {
+    "complete": true,
+    "configuration": {
+      "approvedCommit": "e4ebd6c94263f73dc020ad0d1443901182310329",
+      "size": 3072,
+      "radiusUnits": 14.297202523570824,
+      "tile": 256,
+      "stepPc": 15,
+      "objectSubpixels": 4,
+      "populationCells": 2048,
+      "gaussianCutoffSigma": 10,
+      "views": [
+        {
+          "id": "px",
+          "back": [
+            1,
+            0,
+            0
+          ],
+          "right": [
+            0,
+            -1,
+            0
+          ],
+          "down": [
+            0,
+            0,
+            1
+          ],
+          "texturePath": "l36-far/px.png"
+        },
+        {
+          "id": "nx",
+          "back": [
+            -1,
+            0,
+            0
+          ],
+          "right": [
+            0,
+            1,
+            0
+          ],
+          "down": [
+            0,
+            0,
+            1
+          ],
+          "texturePath": "l36-far/nx.png"
+        },
+        {
+          "id": "py",
+          "back": [
+            0,
+            1,
+            0
+          ],
+          "right": [
+            1,
+            0,
+            0
+          ],
+          "down": [
+            0,
+            0,
+            1
+          ],
+          "texturePath": "l36-far/py.png"
+        },
+        {
+          "id": "ny",
+          "back": [
+            0,
+            -1,
+            0
+          ],
+          "right": [
+            -1,
+            0,
+            0
+          ],
+          "down": [
+            0,
+            0,
+            1
+          ],
+          "texturePath": "l36-far/ny.png"
+        },
+        {
+          "id": "pz",
+          "back": [
+            0,
+            0,
+            1
+          ],
+          "right": [
+            1,
+            0,
+            0
+          ],
+          "down": [
+            0,
+            -1,
+            0
+          ],
+          "texturePath": "l36-far/pz.png"
+        },
+        {
+          "id": "nz",
+          "back": [
+            0,
+            0,
+            -1
+          ],
+          "right": [
+            -1,
+            0,
+            0
+          ],
+          "down": [
+            0,
+            -1,
+            0
+          ],
+          "texturePath": "l36-far/nz.png"
+        },
+        {
+          "id": "tilt45",
+          "back": [
+            0,
+            0.7071067811865476,
+            0.7071067811865476
+          ],
+          "right": [
+            1,
+            0,
+            0
+          ],
+          "down": [
+            0,
+            -0.7071067811865476,
+            0.7071067811865476
+          ],
+          "texturePath": "l36-far/tilt45.png"
+        },
+        {
+          "id": "earth",
+          "back": [
+            0.004455592871328158,
+            -0.42433852005395156,
+            0.905492665950745
+          ],
+          "right": [
+            0.9999900737968177,
+            0.0018906984524393225,
+            -0.004034546715180511
+          ],
+          "down": [
+            2.168404344971009e-19,
+            -0.9055016541441459,
+            -0.42434273216613
+          ],
+          "texturePath": "l36-far/earth.png"
+        }
+      ]
+    },
+    "workers": 6,
+    "tiles": 1152,
+    "seconds": 4802.606216708
+  },
+  "files": [
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/px.png",
+      "bytes": 1007509,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 736713,
+      "maximumFractionalPremultiplicationError": 0.4941176470588289
+    },
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/nx.png",
+      "bytes": 1019177,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 753519,
+      "maximumFractionalPremultiplicationError": 0.4941176470588289
+    },
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/py.png",
+      "bytes": 1034412,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 816115,
+      "maximumFractionalPremultiplicationError": 0.4941176470588289
+    },
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/ny.png",
+      "bytes": 998888,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 710399,
+      "maximumFractionalPremultiplicationError": 0.4941176470588289
+    },
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/pz.png",
+      "bytes": 3131847,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 2267107,
+      "maximumFractionalPremultiplicationError": 0.4980392156862763
+    },
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/nz.png",
+      "bytes": 3185014,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 2432849,
+      "maximumFractionalPremultiplicationError": 0.4941176470588289
+    },
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/tilt45.png",
+      "bytes": 2475221,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 1812588,
+      "maximumFractionalPremultiplicationError": 0.4941176470588289
+    },
+    {
+      "maximumReferenceCodeError": 0,
+      "path": "l36-far/earth.png",
+      "bytes": 2767194,
+      "width": 3072,
+      "height": 3072,
+      "litPixels": 2010777,
+      "maximumFractionalPremultiplicationError": 0.4941176470588289
+    }
+  ],
+  "encodedPngBytes": 15619262,
+  "decodedRgbaBytes": 301989888,
+  "handoff": {
+    "selection": "projected diameter",
+    "pictureOnlyBelowPixels": 128,
+    "slabsOnlyAbovePixels": 256,
+    "physicalDistanceOverride": false
+  },
+  "milkyWayReplay": "The default installed Milky Way pipeline replays its 33 PNGs, six sky faces and inventory byte for byte after the shared far-picture extension.",
+  "knownProblems": [
+    "Only eight far directions at the recorded 49.59 kpc distance are exact; angular interpolation and other far distances approximate depth projection.",
+    "The far plane used by the universe is fixed and foreshortens away from the Sun direction.",
+    "The native slab absolute-gate failures remain known problems under the owner-approved Milky Way comparison standard.",
+    "This is a local unpublished delivery; a fresh checkout needs these local checkpoints until assets are published."
+  ],
+  "evidenceDirectory": "src/objects/lmc-volume/.local/versions/l36/delivery/far-model/"
+}

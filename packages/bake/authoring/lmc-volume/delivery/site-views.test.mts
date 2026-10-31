@@ -1,0 +1,2 @@
+import test from'node:test';import assert from'node:assert/strict';import{siteWorld}from'./site-views.mts';
+test('the Earth view sits at the physical observer and every view keeps a unit orientation',()=>{assert.deepEqual(siteWorld('earth').pose.positionM,[0,0,0]);for(const id of['earth','pz','tilt45','py']){const q=siteWorld(id).pose.orientationXyzw;assert.ok(Math.abs(Math.hypot(...q)-1)<1e-12);}assert.throws(()=>siteWorld('missing'));});

@@ -1,3 +1,4 @@
+import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { writeStyle } from '../rendering/dom/retained-write.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 import type { PreparedFocusBank } from './prepared-focus-bank.js';
@@ -48,6 +49,16 @@ interface DatasetBank {
 }
 
 /** One stable record owns each declared bank through load, publication and eviction. */
+/** Sines of the elevation above a backing's disc between which its plane loses its width and the volume's own gate falls to its prepared one. */
+const DISC_EDGE_ON = [.08, .22] as const, EDGE_ON_GATE = { hiddenBelowRadiusPixels: 2, fullAboveRadiusPixels: 24 } as const;
+/** Opt-in: a plane in a disc has no width edge-on, so the bank's own pictures stand in as the view reaches its edge. */
+export function edgeOnVisibility(normal: readonly [number, number, number] | undefined, world: WorldCameraPose, frame: DensityVolumeFrame, visibility: PreparedPointVisibility): PreparedPointVisibility {
+  if (!normal) return visibility;
+  const { positionUnits: p } = presentPhysicalPoseInVolume(world.pose, frame), length = Math.hypot(p[0], p[1], p[2]), sine = length > 0 ? Math.abs(p[0] * normal[0] + p[1] * normal[1] + p[2] * normal[2]) / length : 1;
+  const t = Math.max(0, Math.min(1, (DISC_EDGE_ON[1] - sine) / (DISC_EDGE_ON[1] - DISC_EDGE_ON[0]))), held = t * t * (3 - 2 * t);
+  return { hiddenBelowRadiusPixels: visibility.hiddenBelowRadiusPixels + (EDGE_ON_GATE.hiddenBelowRadiusPixels - visibility.hiddenBelowRadiusPixels) * held, fullAboveRadiusPixels: visibility.fullAboveRadiusPixels + (EDGE_ON_GATE.fullAboveRadiusPixels - visibility.fullAboveRadiusPixels) * held };
+}
+
 export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime, declarations, facts, frame, visibility,
   billboards: preparedBillboards, load, loadBacking, warmDomNodeBudget, requestPublication, prepareBillboardImage, hidden = () => false }: {
   root: HTMLElement; end: Element; frontRoot: HTMLElement; frontEnd: Element; lifetime: SceneLifetime;
@@ -340,7 +351,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const whole = !hidden(bank.id) && (bank.enabled || detailed) ? presentationOpacity * contextOpacity : 0;
         const shown = whole > 0 && detailed && flight
           ? whole * flight.closeUp * (volumeHolds(frame, radiusUnits, flight.toM) ? enteredVolumeOpacity(world, frame, radiusUnits) : 1) : whole;
-        const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+        const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, edgeOnVisibility(bank.far?.loaded?.payload.discNormalUnits, world, frame, visibility));
         setPointTransmission(root, bank, requestedOpacity > 0 ? bank.transmission ?? null : null);
         const incoming = bank.id === detailedObjectId;
         const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming, requestedOpacity > 0);

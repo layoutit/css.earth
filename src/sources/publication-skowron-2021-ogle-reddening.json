@@ -1,0 +1,45 @@
+{
+  "id": "publication-skowron-2021-ogle-reddening",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "OGLE-ing the Magellanic System: Optical Reddening Maps of the Large and Small Magellanic Cloud from Red Clump Stars",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4365/abcb81"
+    },
+    {
+      "type": "arxiv",
+      "value": "2006.02448"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2006.02448",
+      "label": "arXiv:2006.02448"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/1538-4365/abcb81",
+      "label": "DOI 10.3847/1538-4365/abcb81"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2006.02448",
+      "checkedOn": "2026-10-31",
+      "locator": "Abstract; used in the LMC model: the regional foreground fractions of the dust"
+    }
+  ],
+  "creators": [
+    "D. M. Skowron",
+    "J. Skowron",
+    "A. Udalski",
+    "M. K. Szymański",
+    "et al."
+  ],
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": []
+}

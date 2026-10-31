@@ -1,0 +1,8 @@
+/** Matched dimensionless near stations for galaxy compression qualification. No model-specific orientation. */
+export type V3=[number,number,number];
+const dot=(a:V3,b:V3)=>a.reduce((s,v,i)=>s+v*b[i]!,0),scale=(v:V3,a:number):V3=>[v[0]*a,v[1]*a,v[2]*a],add=(a:V3,b:V3):V3=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+export function galaxyNearCamera(tilt:number,azimuth:number,size:number,halfExtent:number,center:V3=[0,0,0]){
+ const t=tilt*Math.PI/180,a=azimuth*Math.PI/180,rotate=([x,y,z]:V3):V3=>[x*Math.cos(a)-y*Math.sin(a),x*Math.sin(a)+y*Math.cos(a),z],right=rotate([1,0,0]),up=rotate([0,Math.cos(t),-Math.sin(t)]),back=rotate([0,Math.sin(t),Math.cos(t)]),distance=1.5*halfExtent,widthKpc=halfExtent,eye=add(center,scale(back,distance)),focal=size*distance/widthKpc;
+ return{name:`near-${tilt}-${azimuth}`,width:size,height:size,foreground:false,right,up,back,eye,focal,widthKpc,distance,ray(x:number,y:number){const v=add(scale(back,-focal),add(scale(right,x-size/2),scale(up,size/2-y))),norm=Math.hypot(...v);return{origin:eye,direction:scale(v,1/norm)};},pixelOf(p:V3):[number,number]|null{const v=add(p,scale(eye,-1)),depth=-dot(v,back);return depth>0?[size/2+dot(v,right)*focal/depth,size/2-dot(v,up)*focal/depth]:null;},areaAt(p:V3){const v=add(p,scale(eye,-1)),depth=-dot(v,back);return(depth/focal)**2;}};
+}
+export function galaxyNearStations(size:number,halfExtent:number,center:V3=[0,0,0]){return[0,22.5,45,67.5,90].flatMap(tilt=>[0,90,180,270].map(azimuth=>({camera:galaxyNearCamera(tilt,azimuth,size,halfExtent,center),axis:tilt===90?(azimuth===90||azimuth===270?0 as const:1 as const):2 as const})));}

@@ -21,8 +21,11 @@ export function trustPreparedCssVolume(volume: PreparedCssVolume): PreparedCssVo
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   if (typeof input === 'object' && input !== null && validated.has(input)) return input as PreparedCssVolume;
   const value = record(input, 'prepared CSS volume');
-  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'farPlanes') ? ['farPlanes'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : []), ...(Object.hasOwn(value, 'fixedImages') ? ['fixedImages'] : [])], 'prepared CSS volume');
+  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation', 'stackCompositing', 'pointOverlays', 'thinHandoverCosines'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'farPlanes') ? ['farPlanes'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : []), ...(Object.hasOwn(value, 'fixedImages') ? ['fixedImages'] : [])], 'prepared CSS volume');
   if (Object.hasOwn(value, 'fixedImages') && value.fixedImages !== true) throw new TypeError('Prepared CSS volume fixedImages must be true when declared.');
+  if (value.thinHandoverCosines !== undefined && !(Array.isArray(value.thinHandoverCosines) && value.thinHandoverCosines.length === 2 && value.thinHandoverCosines[0] > 0 && value.thinHandoverCosines[0] < value.thinHandoverCosines[1] && value.thinHandoverCosines[1] <= 1)) throw new TypeError('A thin handover is two increasing cosines.');
+  if (value.pointOverlays !== undefined && (!Array.isArray(value.pointOverlays) || !value.pointOverlays.length || !value.pointOverlays.every(path => typeof path === 'string' && /^[a-z0-9][a-z0-9.-]*\.bin$/u.test(path)))) throw new TypeError('Volume point overlays are prepared bank files.');
+  if (value.stackCompositing !== undefined && value.stackCompositing !== 'transparent-normalized') throw new TypeError('Unknown volume stack compositing.');
   if (Object.hasOwn(value, 'mergedOpticalCopies') && value.mergedOpticalCopies !== 3) throw new TypeError('Prepared CSS volume merges exactly three optical copies.');
   if (value.schema !== PREPARED_CSS_VOLUME_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
     throw new TypeError('Prepared CSS volume identity is invalid.');
@@ -45,6 +48,7 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   }
   const leafIds = new Set<string>();
   for (const stackInput of stacks) validateStack(record(stackInput, 'volume stack'), resources, leafIds);
+  validateOpticalSlabs(stacks, value.mergedOpticalCopies);
   if (value.fixedImages === true && (stacks.filter(stack => stack.leaves.length > 0).length !== 1 ||
       Object.hasOwn(value, 'mergedOpticalCopies') || Object.hasOwn(value, 'impostors') || Object.hasOwn(value, 'farPlanes')))
     throw new TypeError('Fixed images need exactly one populated stack and no optical copies or alternative views.');
@@ -71,6 +75,7 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   const volume = Object.freeze({ schema: value.schema, id: value.id, frame,
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
+    ...(value.stackCompositing ? { stackCompositing: 'transparent-normalized' as const } : {}), ...(value.thinHandoverCosines ? { thinHandoverCosines: Object.freeze([...value.thinHandoverCosines as [number, number]]) as unknown as readonly [number, number] } : {}), ...(value.pointOverlays ? { pointOverlays: Object.freeze([...value.pointOverlays as string[]]) } : {}),
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}), ...(Object.hasOwn(value, 'approximation') ? { approximation: value.approximation } : {}),
     ...(farPlanes ? { farPlanes } : {}), ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}), ...(value.mergedOpticalCopies === 3 ? { mergedOpticalCopies: 3 as const } : {}),
     ...(value.fixedImages === true ? { fixedImages: true as const } : {}) }) as PreparedCssVolume;
@@ -173,13 +178,34 @@ function validateStack(stack: Record<string, unknown>, resources: Set<string>, l
     throw new TypeError('Volume stack normal must be a finite unit vector.');
   for (const leafInput of stack.leaves) {
     const leaf = record(leafInput, 'volume leaf');
-    exactKeys(leaf, ['id', 'centerUnits', 'texturePath', 'widthPx', 'heightPx', 'style', ...(Object.hasOwn(leaf, 'boundsCssPixels') ? ['boundsCssPixels'] : [])], 'volume leaf');
+    exactKeys(leaf, ['id', 'centerUnits', 'texturePath', 'widthPx', 'heightPx', 'style', ...(Object.hasOwn(leaf, 'boundsCssPixels') ? ['boundsCssPixels'] : []), ...(Object.hasOwn(leaf, 'opticalSlab') ? ['opticalSlab'] : [])], 'volume leaf');
+    if (Object.hasOwn(leaf, 'opticalSlab')) {
+      const optical = record(leaf.opticalSlab, 'optical slab'); exactKeys(optical, ['id', 'role'], 'optical slab');
+      if (typeof optical.id !== 'string' || !optical.id || typeof optical.role !== 'string' || !['merged-three', 'single', 'merged-two'].includes(optical.role)) throw new TypeError('Invalid optical slab identity or role.');
+    }
     if (leaf.boundsCssPixels !== undefined) validatePreparedLeafBounds(leaf.boundsCssPixels);
     if (typeof leaf.id !== 'string' || !leaf.id || leafIds.has(leaf.id) || typeof leaf.texturePath !== 'string' ||
         !resources.has(leaf.texturePath) || !positiveInteger(leaf.widthPx) || !positiveInteger(leaf.heightPx) ||
         !finiteVector(leaf.centerUnits)) throw new TypeError('Prepared CSS volume leaf metadata is invalid.');
     validateStyle(record(leaf.style, 'volume leaf style'));
     leafIds.add(leaf.id);
+  }
+}
+
+function validateOpticalSlabs(stacks: readonly unknown[], merged: unknown): void {
+  const leaves = stacks.flatMap(value => { const stack = record(value, 'stack'); return (stack.leaves as unknown[]).map(value => ({ axis: stack.axis, leaf: record(value, 'leaf') })); });
+  if (!leaves.some(({ leaf }) => Object.hasOwn(leaf, 'opticalSlab'))) return;
+  if (merged !== 3 || leaves.length > 33 || leaves.some(({ leaf }) => !Object.hasOwn(leaf, 'opticalSlab'))) throw new TypeError('Hybrid optical slabs require explicit roles, three-copy encoding and at most 33 layers.');
+  const groups = new Map<string, typeof leaves>();
+  for (const entry of leaves) { const optical = record(entry.leaf.opticalSlab, 'optical slab'), id = String(optical.id), group = groups.get(id) ?? []; group.push(entry); groups.set(id, group); }
+  for (const group of groups.values()) {
+    const roles = group.map(({ leaf }) => String(record(leaf.opticalSlab, 'optical slab').role)).sort();
+    if (roles.length === 1 && roles[0] === 'merged-three') continue;
+    if (roles.join(',') !== 'merged-two,single') throw new TypeError('A dense optical slab requires exactly an original and a merged pair.');
+    const [a, b] = group;
+    if (a!.axis !== b!.axis || JSON.stringify(a!.leaf.centerUnits) !== JSON.stringify(b!.leaf.centerUnits) ||
+        a!.leaf.widthPx !== b!.leaf.widthPx || a!.leaf.heightPx !== b!.leaf.heightPx ||
+        JSON.stringify(a!.leaf.style) !== JSON.stringify(b!.leaf.style) || JSON.stringify(a!.leaf.boundsCssPixels) !== JSON.stringify(b!.leaf.boundsCssPixels)) throw new TypeError('Optical slab images must be coincident with identical geometry.');
   }
 }
 

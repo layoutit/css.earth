@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-lmc-delivery-acceptance@1",
+  "ownerAccepted": true,
+  "approvedCommit": "e4ebd6c94263f73dc020ad0d1443901182310329",
+  "pilotCommit": "f88a36f2ff",
+  "standard": "The owner accepts the near bake against the shipped Milky Way approximation. Absolute photometric gates are known problems and do not block delivery.",
+  "selectedViews": [
+    {
+      "name": "near-0-0",
+      "lmcEncodedRelativeL1": 0.08831342077710298,
+      "milkyWayEncodedRelativeL1": 0.21672005975869438
+    },
+    {
+      "name": "near-45-0",
+      "lmcEncodedRelativeL1": 0.12142282818666872,
+      "milkyWayEncodedRelativeL1": 0.14126660352903328
+    },
+    {
+      "name": "near-90-0",
+      "lmcEncodedRelativeL1": 0.09647263795413812,
+      "milkyWayEncodedRelativeL1": 0.10909241066602597
+    }
+  ],
+  "allCameraComparison": {
+    "views": 20,
+    "noWorseThanMatchedMilkyWay": 18,
+    "note": "The three owner-reviewed views are below the shipped Milky Way errors. Two other sampled directions exceed their individually matched Milky Way error. This diagnostic remains recorded; the explicit owner acceptance admits delivery."
+  },
+  "knownProblems": {
+    "lightRangePercent": [
+      -5.6296789277520904,
+      2.809454583506721
+    ],
+    "imageErrorFailures": 2,
+    "positiveLightFailures": 1,
+    "negativeLightFailures": 0,
+    "radialFailures": 6,
+    "colorFailures": 18,
+    "maximumAbsoluteColorErrorPercentagePoints": 8.48354358104395,
+    "maximumAbsoluteRadialErrorPercent": 25.2894596731267
+  },
+  "mergedAlphaFaceOnLossFraction": 0.0025531198574936242,
+  "nextStages": [
+    "Same native slab projection and frozen pilot encoding at 2048 px.",
+    "Prepared model pictures for far views.",
+    "Install and inspect the real local site.",
+    "Phone traces only when the phone is connected."
+  ],
+  "restrictions": "Local commits only. No push, PR, remote asset publication or messages."
+}

@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {prepareGalaxyCompositor}from'./galaxy-compositor-cache.mts';import {compositeGalaxyStack,type GalaxyDecodedPlane}from'./galaxy-fitted-bank.mts';import {galaxyNearCamera}from'./galaxy-near-cameras.mts';
+test('cached intersections preserve exact 8-bit premultiplied sampling and hybrid source-over',()=>{
+ const box={min:[-10,-10,-2] as [number,number,number],max:[10,10,2] as [number,number,number]},planes:GalaxyDecodedPlane[]=Array.from({length:5},(_,i)=>({axis:2,index:i,center:(i-2)*.5,width:32,height:32,rgba:Uint8Array.from({length:32*32*4},(_,n)=>(n*19+i*37)%256),opticalRole:i===1?'single':i===2?'merged-two':'merged-three',border:i===4?3:0}));
+ for(const tilt of[0,22.5,45,67.5])for(const az of[0,90,180,270]){const c=galaxyNearCamera(tilt,az,24,10),cached=prepareGalaxyCompositor(planes,box,c,2);assert.deepEqual(cached(planes),compositeGalaxyStack(planes,box,c,2));const changed=planes.map(p=>({...p,rgba:Uint8Array.from(p.rgba,v=>255-v)}));assert.deepEqual(cached(changed),compositeGalaxyStack(changed,box,c,2));assert.throws(()=>cached(planes.map(p=>({...p,center:p.center+.1}))));}
+});

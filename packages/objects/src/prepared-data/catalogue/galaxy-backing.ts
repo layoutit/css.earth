@@ -17,12 +17,14 @@ export interface PreparedGalaxyBacking {
   /** A volume bank's plane pictures the dataset that is selected: each dataset's image by its id, all drawn by the one
    * leaf, so every image fills the leaf's box. The leaf's own image is the bank's default dataset's. */
   readonly datasets?: ReadonlyMap<string, string>;
+  /** Opt-in: this plane lies in a thin disc with this frame normal, so it has no width edge-on, where its volume must stay on screen. */
+  readonly discNormalUnits?: readonly [number, number, number];
 }
 
 /** A `cssearth-galaxy-backing@1` bank (packages/bake/cli/prepare-galaxy-backing.mts): one face-on image plane in a galaxy's frame. */
 export function parseGalaxyBacking(value: unknown, at = 'galaxy backing'): PreparedGalaxyBacking {
   const data = value as { schema?: unknown; id?: unknown; frame?: unknown; leaf?: { texturePath?: unknown; style?: Record<string, unknown> };
-    nearFade?: unknown; centreFadeM?: unknown; sections?: unknown; datasets?: unknown } | null;
+    nearFade?: unknown; centreFadeM?: unknown; sections?: unknown; datasets?: unknown; discNormalUnits?: unknown } | null;
   if (!data || data.schema !== GALAXY_BACKING_SCHEMA || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a ${GALAXY_BACKING_SCHEMA} bank with an id.`);
   const leaf = data.leaf;
   if (!leaf || typeof leaf.texturePath !== 'string' || !/^[a-z0-9-]+(\/[a-z0-9.-]+)+$/u.test(leaf.texturePath) ||
@@ -59,7 +61,9 @@ export function parseGalaxyBacking(value: unknown, at = 'galaxy backing'): Prepa
     }
     datasets = new Map(entries as [string, string][]);
   }
-  return Object.freeze({ id: data.id, frame: parseDensityVolumeFrame(data.frame), leaf: Object.freeze({ texturePath: leaf.texturePath,
+  const disc = data.discNormalUnits;
+  if (disc !== undefined && !(Array.isArray(disc) && disc.length === 3 && disc.every(Number.isFinite))) throw new TypeError(`${data.id}: discNormalUnits is a vector.`);
+  return Object.freeze({ ...(disc ? { discNormalUnits: Object.freeze([...disc]) as unknown as readonly [number, number, number] } : {}), id: data.id, frame: parseDensityVolumeFrame(data.frame), leaf: Object.freeze({ texturePath: leaf.texturePath,
     style: Object.freeze(Object.fromEntries(LEAF_STYLE.map(key => [key, leaf.style![key] as string]))) as PreparedGalaxyBacking['leaf']['style'] }),
     ...(data.nearFade === undefined ? {} : { nearFade: nearFade(data.nearFade, 'backing nearFade') }),
     ...(centreFade === undefined ? {} : { centreFadeM: Object.freeze([centreFade[0], centreFade[1]]) as unknown as readonly [number, number] }),

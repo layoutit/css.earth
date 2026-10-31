@@ -1,0 +1,415 @@
+{
+  "schema": "cssearth-lmc-real-site@1",
+  "complete": true,
+  "generator": "packages/bake/authoring/lmc-volume/delivery/site-capture.mts",
+  "model": "l36",
+  "viewport": {
+    "width": 1024,
+    "height": 768,
+    "dpr": 1
+  },
+  "physicalWidthKpc": 9.472846397112237,
+  "pcPerPixel": 9.250826559679918,
+  "nearObserverDistanceKpc": 15,
+  "earthObserverDistanceKpc": 49.59,
+  "unresolvedContext": {
+    "url": "http://127.0.0.1:4312/lmc/?v=UUPDQ2P0xK3Rd8NXPbsREejIw7U7dZlx2bBBQsczQAAAAD_DV-l92J9mv94kqwweyFm_35NNRkHGcT_gHCUqn7VJAAA&embed",
+    "samePhysicalObserver": true,
+    "projectionScaleRatio": 0.025,
+    "state": {
+      "ready": "true",
+      "host": [
+        {
+          "display": "none",
+          "opacity": "0"
+        }
+      ],
+      "detail": [
+        {
+          "display": "none",
+          "opacity": "1",
+          "leaves": 0,
+          "stacks": []
+        }
+      ],
+      "far": [
+        {
+          "display": "none",
+          "opacity": "1",
+          "views": []
+        }
+      ]
+    }
+  },
+  "views": [
+    {
+      "id": "earth",
+      "url": "http://127.0.0.1:4312/lmc/?v=UUPDQ2P0xK3Rd8NXPbsREejIw7U7dZlx2bBBQsczQAAAAEAYLePdTsc_v94kqwweyFm_35NNRkHGcT_gHCUqn7VJAAA",
+      "captureUrl": "http://127.0.0.1:4312/lmc/?v=UUPDQ2P0xK3Rd8NXPbsREejIw7U7dZlx2bBBQsczQAAAAEAYLePdTsc_v94kqwweyFm_35NNRkHGcT_gHCUqn7VJAAA&embed",
+      "state": {
+        "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
+        "detail": [
+          {
+            "display": "block",
+            "opacity": "0.999",
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "none",
+                "opacity": "0",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
+          }
+        ],
+        "far": [
+          {
+            "display": "none",
+            "opacity": "0",
+            "views": []
+          }
+        ]
+      },
+      "optics": {
+        "focalPixels": 5360.601988000662,
+        "principalOffsetPixels": [
+          0,
+          0
+        ],
+        "physicalWidthKpc": 9.472846541054185,
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              77529088,
+              -753205248,
+              -273154048
+            ],
+            "orientationXyzw": [
+              0.09929425735232444,
+              0.15239466193202483,
+              -0.8926681564796161,
+              0.41238341368047027
+            ],
+            "focusOffset": {
+              "originM": [
+                105965323959178080000,
+                533210010179926950000,
+                -1.430383327971761e+21
+              ],
+              "offsetM": [
+                -105965323959100560000,
+                -533210010180680160000,
+                1.4303833279714878e+21
+              ]
+            }
+          },
+          "projectionScale": 6.044814546521422
+        }
+      },
+      "loadSeconds": 4.462568375
+    },
+    {
+      "id": "pz",
+      "url": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-GGsNU73okLWqdw5kP_GOG-HNBQsczQAAAAD_9QUe8AcYrP-I9NoSTPuS_2lq5LoS3Sr_YzuGDvcAAAAA",
+      "captureUrl": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-GGsNU73okLWqdw5kP_GOG-HNBQsczQAAAAD_9QUe8AcYrP-I9NoSTPuS_2lq5LoS3Sr_YzuGDvcAAAAA&embed",
+      "state": {
+        "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
+        "detail": [
+          {
+            "display": "block",
+            "opacity": "0.999",
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "none",
+                "opacity": "0",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
+          }
+        ],
+        "far": [
+          {
+            "display": "none",
+            "opacity": "0",
+            "views": []
+          }
+        ]
+      },
+      "optics": {
+        "focalPixels": 1621.4767053843498,
+        "principalOffsetPixels": [
+          0,
+          0
+        ],
+        "physicalWidthKpc": 9.472846541053913,
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              209056737441049280000,
+              274124556780292930000,
+              -1.0743493281625394e+21
+            ],
+            "orientationXyzw": [
+              -0.0052658678918609675,
+              -0.34193948975446775,
+              0.838611767422071,
+              -0.42400466922314667
+            ],
+            "focusOffset": {
+              "originM": [
+                105965323959178080000,
+                533210010179926950000,
+                -1.430383327971761e+21
+              ],
+              "offsetM": [
+                103091413481871210000,
+                -259085453399634020000,
+                356033999809221400000
+              ]
+            }
+          },
+          "projectionScale": 1.8284375518818574
+        }
+      },
+      "loadSeconds": 2.6051426660000008
+    },
+    {
+      "id": "tilt45",
+      "url": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-Fu8M-qM9r7cXRw5hScJB_tApBQsczQAAAAD_9QUe8AcYrP-WY-o7Dsd-_w3-lpXl4TL_B65N1w779AAA",
+      "captureUrl": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-Fu8M-qM9r7cXRw5hScJB_tApBQsczQAAAAD_9QUe8AcYrP-WY-o7Dsd-_w3-lpXl4TL_B65N1w779AAA&embed",
+      "state": {
+        "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
+        "detail": [
+          {
+            "display": "block",
+            "opacity": "0.999",
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "none",
+                "opacity": "0",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
+          }
+        ],
+        "far": [
+          {
+            "display": "none",
+            "opacity": "0",
+            "views": []
+          }
+        ]
+      },
+      "optics": {
+        "focalPixels": 1621.4767053843498,
+        "principalOffsetPixels": [
+          0,
+          0
+        ],
+        "physicalWidthKpc": 9.472846541054171,
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              404872177314921050000,
+              219405692195942700000,
+              -1.3644461179828156e+21
+            ],
+            "orientationXyzw": [
+              0.15739453459107616,
+              -0.6368337255205294,
+              0.643921670043762,
+              -0.3937443959836814
+            ],
+            "focusOffset": {
+              "originM": [
+                105965323959178080000,
+                533210010179926950000,
+                -1.430383327971761e+21
+              ],
+              "offsetM": [
+                298906853355742950000,
+                -313804317983984250000,
+                65937209988945270000
+              ]
+            }
+          },
+          "projectionScale": 1.8284375518818574
+        }
+      },
+      "loadSeconds": 0.7732495419999995
+    },
+    {
+      "id": "py",
+      "url": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-F4UNEMQHdV5buw5hijNAu3oJBQsczQAAAAD_9QUe8AcYrP-WrAfPvSY4_wK4V7CcjAz_AgQbTai6tAAA",
+      "captureUrl": "http://127.0.0.1:4312/lmc/?v=UYPDQ2Nqxz-F4UNEMQHdV5buw5hijNAu3oJBQsczQAAAAD_9QUe8AcYrP-WrAfPvSY4_wK4V7CcjAz_AgQbTai6tAAA&embed",
+      "state": {
+        "ready": "true",
+        "host": [
+          {
+            "display": "block",
+            "opacity": "0.999"
+          }
+        ],
+        "detail": [
+          {
+            "display": "block",
+            "opacity": "0.999",
+            "leaves": 33,
+            "stacks": [
+              {
+                "axis": "x",
+                "display": "none",
+                "opacity": "0",
+                "layers": 12,
+                "distinctTransforms": 10
+              },
+              {
+                "axis": "y",
+                "display": "block",
+                "opacity": "0.999",
+                "layers": 11,
+                "distinctTransforms": 9
+              },
+              {
+                "axis": "z",
+                "display": "none",
+                "opacity": "0",
+                "layers": 10,
+                "distinctTransforms": 7
+              }
+            ]
+          }
+        ],
+        "far": [
+          {
+            "display": "none",
+            "opacity": "0",
+            "views": []
+          }
+        ]
+      },
+      "optics": {
+        "focalPixels": 1621.4767053843498,
+        "principalOffsetPixels": [
+          0,
+          0
+        ],
+        "physicalWidthKpc": 9.472846541054242,
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              409756605343921300000,
+              353447891340959940000,
+              -1.6923223435760556e+21
+            ],
+            "orientationXyzw": [
+              0.2960930459672941,
+              -0.8347757994878299,
+              0.3512003355661407,
+              -0.3035401077575983
+            ],
+            "focusOffset": {
+              "originM": [
+                105965323959178080000,
+                533210010179926950000,
+                -1.430383327971761e+21
+              ],
+              "offsetM": [
+                303791281384743200000,
+                -179762118838967000000,
+                -261939015604294650000
+              ]
+            }
+          },
+          "projectionScale": 1.8284375518818574
+        }
+      },
+      "loadSeconds": 0.6781271670000005
+    }
+  ],
+  "checks": [
+    "The published physical observer and orientation agree with each saved world-camera URL.",
+    "All four actual CSS cameras show the same 9.47 kpc horizontal width.",
+    "Earth, face-on, 45 degrees and edge-on each select 33 actual X/Y/Z slab layers with the billboard hidden. The same physical Earth observer at 2.5 percent magnification retires its slab bank to the shared unresolved context.",
+    "Every visible LMC image is decoded before capture. No browser page errors were reported."
+  ],
+  "comparison": "Horálek is reprojected using its recorded astrometric registration. The physical camera remains right-handed. The photograph includes its display sky; galaxy textures do not bake that background into the model.",
+  "evidenceDirectory": "src/objects/lmc-volume/.local/versions/l36/delivery/far-model/site/",
+  "phone": "Not qualified by this browser capture. Device qualification is a separate conditional step."
+}

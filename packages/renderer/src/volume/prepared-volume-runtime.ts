@@ -1,8 +1,9 @@
+import {hybridOpticalOpacity} from '@cssearth/core';
 import { axisWeights, preparedVolumeCameraTransform } from './prepared-volume-projection.js';
 export { axisWeights, preparedVolumeCameraTransform } from './prepared-volume-projection.js';
 import { mergedOpticalOpacity } from './optical-opacity.js';
 export { mergedOpticalOpacity } from './optical-opacity.js';
-import { type PreparedLeafBounds, type PreparedCssVolume, type VolumeVector, validatePreparedCssVolume } from '@cssearth/objects';
+import { type PreparedLeafBounds, type PreparedCssVolume, type VolumeVector, type VolumeOpticalRole, validatePreparedCssVolume } from '@cssearth/objects';
 import { createPreparedLeafFrustum, preparedLeafMayContribute } from '../rendering/culling/prepared-leaf-frustum.js';
 import { presentPhysicalPoseInVolume, worldRotationCss } from '@cssearth/engine';
 import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, VolumeCameraPublication } from './types.js';
@@ -55,6 +56,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // An axis stack's nodes by optical copy (0 is the slice itself), in the order they join; the `alpha` of copies 1 and 2;
   // whether each copy is `wanted`; and `shown`, how many of a copy's nodes are displayed: its first ones.
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[]; wanted: boolean[]; shown: number[] }[] = [];
+  const hybridNodes: { node: HTMLElement; role: VolumeOpticalRole; opacity: number }[][] = [];
   // A bank whose images hold their three copies (mergedOpticalCopies) draws one layer a slice, at opacity gain / 3: on a
   // phone the 52/52/26 bank's 390 layers outran Chrome's 256 MB tile budget and drew empty in 248 frames of an 8 s turn.
   const fixed = payload.fixedImages === true;
@@ -74,6 +76,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     scene.style.willChange = 'transform';
     mesh.className = 'css-volume-mesh';
     root.style.opacity = '0';
+    if (payload.stackCompositing === 'transparent-normalized') root.style.background = 'transparent';
     // A stack that has never been published, or one whose axis carries no weight, stays out of the layer tree. Hidden
     // is not free: on an iPhone each unpublished stack kept its slices composited, and the compositor re-committed
     // them on every camera change.
@@ -84,6 +87,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     const place = new Map(joining.map((order, position) => [stack.leaves[order]!, position]));
     const copies = { nodes: [[], [], []] as HTMLElement[][], alpha: [NaN, NaN], wanted: [false, false, false], shown: [0, 0, 0] };
     opticalCopies.push(copies);
+    const hybrid: typeof hybridNodes[number] = []; hybridNodes.push(hybrid);
     for (const leaf of stack.leaves) {
       const textureUrl = options.resolveResource(leaf.texturePath);
       const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels ?? frameBounds, shown: null as boolean | null, hidden: false,
@@ -99,6 +103,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         mesh.append(node);
         bounded.nodes.push(node);
         copies.nodes[copy]![place.get(leaf)!] = node;
+        if (leaf.opticalSlab) hybrid.push({ node, role: leaf.opticalSlab.role, opacity: NaN });
       }
 
     }
@@ -231,7 +236,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         leaf.hidden = false;
       }
     }
-    const strengths = fixed ? fixedImageStrengths(payload) : axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
+    const strengths = fixed ? fixedImageStrengths(payload) : axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits, payload.thinHandoverCosines);
     for (const [axis, pending] of pendingTextures.entries()) {
       if (!options.residentStacks && strengths[axis]!.weight <= 0) continue;
       for (const [leaf, url] of pending) {
@@ -251,7 +256,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     previousOrientation = [...world.pose.orientationXyzw];
     retire.published();
 
-    const opacities = completedStackOpacities(strengths.map(value => value.weight));
+    const opacities = payload.stackCompositing === 'transparent-normalized'
+      ? transparentStackOpacities(strengths.map(value => value.weight)) : completedStackOpacities(strengths.map(value => value.weight));
     for (let index = 0; index < roots.length; index++) {
       const root = roots[index]!;
       const { weight, opticalGain } = strengths[index]!;
@@ -274,6 +280,14 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // view, 390 frames, interleaved (2026-10-19): frames over 20 ms 7/5/6 against 12/13/27, over 33 ms 1/1/1 against
       // 5/6/13. A hidden stack's copies follow the exact value and retire as before.
       if (merged) {
+        if (hybridNodes[index]!.length) {
+          for (const entry of hybridNodes[index]!) {
+            const alpha = visible ? hybridOpticalOpacity(entry.role, opticalGain) : 0;
+            if (alpha !== entry.opacity) { entry.opacity = alpha; entry.node.style.opacity = String(alpha); }
+          }
+          if (visible !== copies.wanted[0]) { copies.wanted[0] = visible; if (visible) join.request(); else retire.request(); }
+          continue;
+        }
         // The image is three copies at alpha 1 - (1 - a)^3; gain / 3 of it stands for `gain` copies (exact where faint).
         const alpha = visible ? mergedOpticalOpacity(opticalGain) : 0;
         if (alpha !== copies.alpha[0]) { copies.alpha[0] = alpha; const value = String(alpha); for (const node of copies.nodes[0]!) node.style.opacity = value; }
@@ -353,7 +367,7 @@ function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolum
 /** Texture demand uses the same axis weights and prepared frustum bounds as publication. */
 export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publication: VolumeCameraPublication): readonly string[] {
   if (payload.fixedImages) return [...new Set(payload.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.texturePath)))];
-  const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
+  const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits, payload.thinHandoverCosines);
   const transform = preparedVolumeCameraTransform(publication, payload.frame, 50);
   const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, publication.viewport);
   const paths = new Set<string>();
@@ -381,6 +395,12 @@ export function completedStackOpacities(weights: readonly number[]): readonly nu
     front += share;
   }
   return result;
+}
+
+/** Source-over of transparent groups is bounded by their normalized weighted sum, for every pixel alpha. */
+export function transparentStackOpacities(weights: readonly number[]): readonly number[] {
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  return weights.map(weight => total > 0 ? STACK_OPACITY_CEILING * weight / total : 0);
 }
 
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }

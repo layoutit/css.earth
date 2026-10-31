@@ -61,6 +61,28 @@ test('merged and unmerged copies of the same geometry are different topology', a
   assert.equal(samePreparedVolumeTopology({ ...valid(), mergedOpticalCopies: 3 }, { ...valid(), mergedOpticalCopies: 3 }), true);
 });
 
+function hybrid(): PreparedCssVolume {
+  const source=valid();
+  const stacks=source.stacks.map(stack=>({...stack,leaves:stack.leaves.map(leaf=>({...leaf,opticalSlab:{id:leaf.id,role:'merged-three' as const}}))}));
+  const z=stacks[2]!,base=z.leaves[0]!;
+  const leaves:PreparedCssVolume['stacks'][number]['leaves']=[{...base,opticalSlab:{id:base.id,role:'single'}},{...base,id:'z-pair',texturePath:'slices/z/pair.png',opticalSlab:{id:base.id,role:'merged-two'}}];
+  return{...source,mergedOpticalCopies:3,stacks:[stacks[0]!,stacks[1]!,{...z,leaves}],resources:[...source.resources,{path:'slices/z/pair.png',bytes:2,width:2,height:2}]};
+}
+test('hybrid optics require complete coincident slab groups and a declared layer budget',()=>{
+  assert.equal(validatePreparedCssVolume(hybrid()).stacks[2]!.leaves.length,2);
+  for(const corrupt of [
+    (v:PreparedCssVolume)=>Object.assign(v,{mergedOpticalCopies:undefined}),
+    (v:PreparedCssVolume)=>Object.assign(v.stacks[2]!.leaves[1]!,{centerUnits:[1,0,0]}),
+    (v:PreparedCssVolume)=>Object.assign(v.stacks[2]!.leaves[1]!,{opticalSlab:{id:'other',role:'merged-two'}}),
+    (v:PreparedCssVolume)=>Object.assign(v.stacks[2]!.leaves[1]!,{opticalSlab:{id:'z-0',role:'unknown'}}),
+  ]){const value=hybrid();corrupt(value);assert.throws(()=>validatePreparedCssVolume(value));}
+});
+test('changing an optical role changes topology even when geometry is identical',async()=>{
+  const {samePreparedVolumeTopology}=await import('./prepared-volume-topology.js'),a=hybrid(),b=hybrid();
+  Object.assign(b.stacks[2]!.leaves[0]!,{opticalSlab:{id:'z-0',role:'merged-two'}});Object.assign(b.stacks[2]!.leaves[1]!,{opticalSlab:{id:'z-0',role:'single'}});
+  assert.equal(samePreparedVolumeTopology(a,b),false);
+});
+
 test('fixed images preserve their explicit single-stack mode and reject ambiguous image policies', async () => {
   const source = valid(), fixed = { ...source, fixedImages: true as const,
     stacks: source.stacks.map(stack => stack.axis === 'z' ? stack : { ...stack, leaves: [] }) };

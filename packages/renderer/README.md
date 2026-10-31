@@ -123,5 +123,7 @@ Contract tests use node:test in the packages lane.
 
 Shared prepared resource addresses, texture tile styles, silhouette thresholds, shell material addresses, feature-bank addresses, marker validation, volume topology equality live in `@cssearth/objects`. Numeric camera orientation and solar geometry live in `@cssearth/engine`.
 
+Opt-in finite volume components retain separate local direction selection inside one physical frame. Their prepared nodes share the existing camera, texture demand and retained material updates. Transparent completed axis groups use normalized opacity shares; applying the opaque completion formula to them would brighten overlaps. The ordinary volume path remains unchanged. Component groups composite in prepared order over the parent field, so this representation does not provide arbitrary interleaving of a cloud with individual stellar or dust layers.
+
 Presentation-to-world conversion, camera pose/viewport shapes, default-view rotation, silhouette walking and
 surface fly-to calibration belong to `@cssearth/engine`. Renderer extends the engine viewport with layout fields. Runtime viewport/layout and world-to-presentation projection stay here.
