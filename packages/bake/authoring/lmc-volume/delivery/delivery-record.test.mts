@@ -1,0 +1,2 @@
+import test from'node:test';import assert from'node:assert/strict';import{readFile}from'node:fs/promises';import{readVolumeAttachment}from'@cssearth/objects';import{applicationDeliveryKind}from'@cssearth/bake/nebula';
+test('the installed source uses the existing hosted-bank contract and cannot trigger the retired nebula bake',async()=>{const record:unknown=JSON.parse(await readFile('src/objects/lmc-volume/source/delivery.json','utf8'));assert.equal(readVolumeAttachment(record).attachedTo,'lmc');assert.equal(applicationDeliveryKind('delivery.json',record),null);});

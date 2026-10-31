@@ -5,7 +5,6 @@ import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { validatePreparedCssVolume } from '@cssearth/objects';
 import { inventoryPreparedAssets, readVolumeDatasetBank, writeVolumeDatasetBank } from '@cssearth/objects/node';
-import { prepareCatalog } from '../../../../../site/build/prepare/catalog/prepare-catalog.mts';
 import { json, need } from '../inputs.mts';
 import { discBacking, type BackingRecord } from './backing-disc.mts';
 import { SMOOTH_BACKGROUND_DIR } from './background-all.mts';
@@ -39,7 +38,7 @@ export async function install() {
   await rm(PREPARED, { recursive: true, force: true }); await rename(STAGE, PREPARED);
   await rm('src/objects/lmc/prepared/text.json', { force: true });
   for (const args of [['site/build/prepare/catalog/prepare-volume-presentation.mts', '--object=lmc-volume'], ['site/build/prepare/authored/prepare-authored.ts', 'lmc', '--write', '--full'], ['site/build/prepare/authored/prepare-text.mts', 'lmc'], ['site/build/prepare/authored/prepare-object-json.mts', 'lmc'], ['packages/bake/cli/prepare-dataset-sprites.mts'], ['site/build/prepare/catalog/prepare-facilities.mts', '--catalog-only']]) execFileSync(process.execPath, args, { stdio: 'inherit' });
-  await inventoryPreparedAssets({ objectId: 'lmc', objectDirectory: 'src/objects/lmc/' }); await inventoryPreparedAssets({ objectId: 'lmc-volume', objectDirectory: OBJECT }); await prepareCatalog();
+  await inventoryPreparedAssets({ objectId: 'lmc', objectDirectory: 'src/objects/lmc/' }); await inventoryPreparedAssets({ objectId: 'lmc-volume', objectDirectory: OBJECT }); execFileSync(process.execPath, ['site/build/prepare/catalog/prepare-catalog.mts'], { stdio: 'inherit' });
   console.log('LMC_DATASETS_INSTALLED');
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) await install();

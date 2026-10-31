@@ -1,17 +1,18 @@
 /** HERITAGE supplies relative columns; Bell fixes their one global optical-depth budget. */
 import {writeFile} from 'node:fs/promises';
 import {loadHeritage,L19} from './heritage-input.mts';
-import {at,makeRaster,need,type Raster} from './inputs.mts';
+import {at,makeRaster,need,type Raster,type Sources} from './inputs.mts';
 import {bodyToIcrs,skyOf,DEG} from './geometry.mts';
 import {discSurface} from './model.mts';
 import {blur} from './young-density.mts';
 import {chord,column} from './catalogue-volume.mts';
-import type {CatalogueScene} from './catalogue-scene.mts';
 import type {VolumeObject} from './catalogue-volume.mts';
+/** The parts of a catalogue scene the dust layer reads and updates. */
+type HeritageScene={dust:VolumeObject[];dustArea:number;molecularFraction:number;sources:Sources};
 export interface DustLayer {column:Raster;strength:number;retainMolecular?:boolean;clouds?:VolumeObject[];cloudExtinctionRgb?:Float32Array;extinctionRgb?:readonly[number,number,number];}
 export function sampleDensity(values:Float64Array,width:number,height:number,x:number,y:number){const i=Math.floor(x),j=Math.floor(y),u=x-i,v=y-j;let mass=0,coverage=0;for(let b=0;b<2;b++)for(let a=0;a<2;a++){if(i+a<0||j+b<0||i+a>=width||j+b>=height)continue;const log=values[(j+b)*width+i+a],w=(a?u:1-u)*(b?v:1-v);if(Number.isFinite(log)){need(log> -10&&log<3,'Implausible HERITAGE log density');mass+=10**log*w;coverage+=w;}}return{value:coverage>0?mass/coverage:0,coverage};}
 export function normalizeToBell(map:Raster,bell:Raster){let measured=0,model=0,n=0;for(let y=0;y<bell.n;y+=2)for(let x=0;x<bell.n;x+=2){const i=y*bell.n+x;if(!bell.mask[i])continue;const px=((x+.5)/bell.n*2-1)*bell.half,py=((y+.5)/bell.n*2-1)*bell.half;if(Math.abs(px)>=map.half||Math.abs(py)>=map.half)continue;measured+=bell.values[i];model+=at(map,px,py);n++;}need(n>100&&model>0,'No Bell/HERITAGE calibration overlap');const factor=measured/model;for(let i=0;i<map.values.length;i++)map.values[i]*=factor;return{samples:n,factor,bellMeanFaceOnTauV:measured/n,beforeMeanFaceOnTauV:model/n,afterMeanFaceOnTauV:measured/n};}
-export async function makeHeritageLayer(scene:CatalogueScene){
+export async function makeHeritageLayer(scene:HeritageScene){
  const {image,wcs,summary}=await loadHeritage(),map=makeRaster(2048,10),molecular=makeRaster(map.n,map.half),coverage=makeRaster(map.n,map.half),cell=2*map.half/map.n,cos=Math.cos(25.86*DEG);map.mask.fill(1);molecular.mask.fill(1);coverage.mask.fill(1);
  const nativeWeights=Float64Array.from(image.values,v=>Number.isFinite(v)?1:0),nativeMass=Float64Array.from(image.values,v=>Number.isFinite(v)?10**v:0),sigma=5*60/56/2.354820045,broadMass=blur(nativeMass,image.width,image.height,sigma),broadWeight=blur(nativeWeights,image.width,image.height,sigma),broadLogs=Float64Array.from(broadMass,(v,i)=>broadWeight[i]>.05&&v>0?Math.log10(v/broadWeight[i]):NaN);
  const sample=(x:number,y:number)=>{const [ra,dec]=skyOf(bodyToIcrs([x,y,at(scene.sources.warp,x,y)])),p=wcs.pixelOf(ra,dec);if(!p)return{value:0,coverage:0,relativeFine:1};const fine=sampleDensity(image.values,image.width,image.height,p[0],p[1]),broad=sampleDensity(broadLogs,image.width,image.height,p[0],p[1]);return{...fine,relativeFine:broad.value>0?fine.value/broad.value:1};};

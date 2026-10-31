@@ -9,7 +9,9 @@ import {normalFromId,foregroundFraction} from './native.mts';
 import {rayInBody,unit,add,mul,bodyToSky,type V3} from './geometry.mts';
 import {gaussian,EXTINCTION_RGB,FOREGROUND_EBV,smoothstep} from './model.mts';
 import {normalizeToBell} from './heritage-layer.mts';
-import type {CatalogueScene} from './catalogue-scene.mts';
+import type {BarGeometry} from './bar-geometry.mts';import type {DustLayer} from './heritage-layer.mts';
+/** The parts of a catalogue scene the old population reads. */
+type OldPopulationScene={sources:Sources;colors:V3[];barGeometry?:BarGeometry;innerDiscColor?:V3;dustLayer?:DustLayer};
 export interface GaiaPointField {count:number;positions:Float64Array;rgb:Float32Array;components:Uint8Array;}
 export interface OldPopulation {disc:Raster;bar:Raster;points:GaiaPointField;oldFraction:number;youngFraction:number;}
 export async function saveGaiaPoints(directory:string,points:GaiaPointField){await writeFile(directory+'points-positions.f64le',Buffer.from(points.positions.buffer,points.positions.byteOffset,points.positions.byteLength));await writeFile(directory+'points-rgb.f32le',Buffer.from(points.rgb.buffer,points.rgb.byteOffset,points.rgb.byteLength));await writeFile(directory+'points-components.u8',Buffer.from(points.components));}
@@ -24,7 +26,7 @@ export function splitOldDensity(total:Raster){const disc=makeRaster(total.n,tota
  for(let y=0;y<total.n;y++)for(let x=0;x<total.n;x++){const i=y*total.n+x,r=Math.hypot(((x+.5)/total.n*2-1)*total.half,((y+.5)/total.n*2-1)*total.half),base=radial[Math.min(radial.length-1,Math.floor(r/.1))],excess=Math.max(0,total.values[i]-base)*(1-smoothstep((r-3)/1));bar.values[i]=excess;disc.values[i]=total.values[i]-excess;barMass+=excess*cell*cell;discMass+=disc.values[i]*cell*cell;}
  return{disc,bar,barMass,discMass};}
 export function densityMoments(map:Raster){let w=0,x=0,y=0,xx=0,yy=0,xy=0;for(let j=0;j<map.n;j++)for(let i=0;i<map.n;i++){const a=((i+.5)/map.n*2-1)*map.half,b=((j+.5)/map.n*2-1)*map.half,p=bodyToSky([a,b,0]),v=map.values[j*map.n+i];w+=v;x+=v*p[0];y+=v*p[1];xx+=v*p[0]**2;yy+=v*p[1]**2;xy+=v*p[0]*p[1];}x/=w;y/=w;xx=xx/w-x*x;yy=yy/w-y*y;xy=xy/w-x*y;const d=Math.hypot(xx-yy,2*xy),angle=.5*Math.atan2(2*xy,xx-yy);return{skyCenterWestNorthKpc:[x,y],paDegrees:(Math.atan2(-Math.cos(angle),Math.sin(angle))*180/Math.PI+360)%180,sigmaMajorKpc:Math.sqrt((xx+yy+d)/2),axisRatio:Math.sqrt((xx+yy-d)/(xx+yy+d))};}
-export async function buildOldPopulation(scene:CatalogueScene){
+export async function buildOldPopulation(scene:OldPopulationScene){
  const old=await loadOld(),young=await loadGaiaSample(false,L20),tracers=[...old.points,...old.density.filter(s=>s.g>=18)],fluxWeights=Float64Array.from(tracers,s=>10**(-.4*(s.g-20))*(s.g<18?1:18.11709771)),total=densityFromMembers(tracers,scene.sources,512,10,undefined,.1,fluxWeights),split=splitOldDensity(total);scene.colors[0]=[0,0,0];scene.colors[1]=[0,0,0];const colorSums=[[0,0,0],[0,0,0]],weights=[0,0],placement={bracketed:0,multipleIntersections:0,maximumResidualKpc:0,finiteLayerAnchors:0,maximumFiniteLayerOffsetKpc:0},locate=gaiaWarpLocator(scene.sources,placement);
  for(const s of old.density){const p=locate(s.ra,s.dec),v=at(total,p[0],p[1]),b=v>0?at(split.bar,p[0],p[1])/v:0,color=gaiaColor(s),flux=10**(-.4*(s.g-20));for(let k=0;k<2;k++){const weight=flux*(k?b:1-b);weights[k]+=weight;for(let c=0;c<3;c++)colorSums[k][c]+=color[c]*weight;}}
  for(let k=0;k<2;k++){need(weights[k]>0,'Missing old population color');scene.colors[k]=colorSums[k].map(v=>v/weights[k]) as V3;}scene.innerDiscColor=[...scene.colors[0]];

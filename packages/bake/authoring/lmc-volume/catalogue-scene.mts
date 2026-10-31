@@ -10,11 +10,8 @@ import {readHaGeometry,skyOffset,type HaGeometry} from './catalogue-ha.mts';
 import {planarBasis,volumeObject,tube,type VolumeObject,type Component} from './catalogue-volume.mts';
 export interface Owner {id:string;kind:string;component:Component;prior:number;maximum:number;measuredAge:boolean;logAge:number|null;aliases:string[];}
 export interface CatalogueScene {objects:VolumeObject[];dust:VolumeObject[];owners:Owner[];sources:Sources;colors:V3[];dustArea:number;molecularFraction:number;metadata:Record<string,unknown>;barGeometry?:BarGeometry;innerDiscColor?:V3;oldPopulation?:OldPopulation;photometryMaterial?:PhotometryMaterial;dustLayer?:DustLayer;youngDensity?:Raster;youngOwner?:string;youngTint?:V3;outskirtsGain?:number;separateOutskirts?:boolean;outskirtsTransitionKpc?:readonly[number,number];innerDiscGain?:number;barGain?:number;diffuseGas?:Raster;diffuseGasGain?:number;ionizedGain?:number;}
-export function locate(ra:number,dec:number,sources:Sources,height=0):V3 {
- const r=rayInBody(unit(ra,dec));let p=add(r.origin,mul(r.direction,-r.origin[2]/r.direction[2]));
- for(let i=0;i<32;i++){const z=at(sources.warp,p[0],p[1])+height,q=add(r.origin,mul(r.direction,(z-r.origin[2])/r.direction[2]));if(Math.hypot(...add(q,mul(p,-1)))<1e-7)return q;p=q;}
- need(Math.abs(p[2]-at(sources.warp,p[0],p[1])-height)<.005,'Catalogue centre failed its warped-plane anchor');return p;
-}
+import {locate} from './gaia-plane.mts';
+export {locate};
 function depthDraw(id:string,sigma:number):number {let seed=0;for(let i=0;i<id.length;i++)seed=(seed*31+id.charCodeAt(i))%1000003;const f=(n:number)=>{const x=Math.sin(seed*12.9898+n*78.233)*43758.5453;return x-Math.floor(x);};return Math.max(-2.5,Math.min(2.5,Math.sqrt(-2*Math.log(Math.max(1e-6,f(1))))*Math.cos(2*Math.PI*f(2))))*sigma;}
 function physicalShape(r:CatalogueRow,sources:Sources):{axes:V3;angle:number} {
  const p=locate(r.ra,r.dec,sources),a=locate(...skyOffset(r,1,0),sources),b=locate(...skyOffset(r,0,1),sources),u=add(a,mul(p,-1)),v=add(b,mul(p,-1)),xx=u[0]**2+v[0]**2,yy=u[1]**2+v[1]**2,xy=u[0]*u[1]+v[0]*v[1],d=Math.hypot(xx-yy,2*xy),major=Math.sqrt(Math.max(1e-8,(xx+yy+d)/2)),minor=Math.sqrt(Math.max(1e-8,(xx+yy-d)/2));

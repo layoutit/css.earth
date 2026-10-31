@@ -1,6 +1,8 @@
 /** Compact 3D linear-interpolation kernels for the released HERITAGE pixels. */
 import {add,mul,dot,type V3} from '../geometry.mts';
-import type {VolumeObject,Chord} from '../catalogue-volume.mts';
+export type Component=0|1|2|3|4;
+export interface VolumeObject {id:string;owner:string;kind:'ball'|'shell'|'filament'|'dust'|'dust-tent';component:Component;center:V3;basis:[V3,V3,V3];axes:V3;inner:number;color:V3;weight:number;source:string;halfSpace?:V3;}
+export interface Chord {center:number;half:number;q:number;a:number;normalization:number;clipLo:number;clipHi:number;tent?:TentIntegral;}
 export interface TentSegment {lo:number;hi:number;start:number;coeff:number[];}
 export interface TentIntegral {segments:TentSegment[];total:number;}
 function primitive(c:number[],x:number){return x*(c[0]+x*(c[1]/2+x*(c[2]/3+x*c[3]/4)));}

@@ -1,7 +1,12 @@
 /** Gaia ray intersections with the unchanged, piecewise-bilinear l12 warp. */
 import {at,need,type Sources} from './inputs.mts';
-import {locate} from './catalogue-scene.mts';
 import {rayInBody,unit,add,mul,type V3} from './geometry.mts';
+/** The point where a sky direction meets the warped disc, raised by a height in kpc. */
+export function locate(ra:number,dec:number,sources:Sources,height=0):V3 {
+ const r=rayInBody(unit(ra,dec));let p=add(r.origin,mul(r.direction,-r.origin[2]/r.direction[2]));
+ for(let i=0;i<32;i++){const z=at(sources.warp,p[0],p[1])+height,q=add(r.origin,mul(r.direction,(z-r.origin[2])/r.direction[2]));if(Math.hypot(...add(q,mul(p,-1)))<1e-7)return q;p=q;}
+ need(Math.abs(p[2]-at(sources.warp,p[0],p[1])-height)<.005,'Catalogue centre failed its warped-plane anchor');return p;
+}
 export interface WarpPlacement {bracketed:number;multipleIntersections:number;maximumResidualKpc:number;finiteLayerAnchors?:number;maximumFiniteLayerOffsetKpc?:number;}
 export function gaiaWarpLocator(sources:Sources,stats:WarpPlacement={bracketed:0,multipleIntersections:0,maximumResidualKpc:0}){
  const map=sources.warp;let minimum=0,maximum=0;for(const z of map.values){minimum=Math.min(minimum,z);maximum=Math.max(maximum,z);}

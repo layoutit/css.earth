@@ -1,10 +1,8 @@
 /** Canonical positive three-dimensional objects. Density has no observer or image input. */
 import {dot,add,mul,normalize,cross,type V3} from './geometry.mts';
 import {need} from './inputs.mts';
-import {tentDensity,tentChord,tentColumnTo,type TentIntegral} from './dust-native/tent.mts';
-export type Component=0|1|2|3|4;
-export interface VolumeObject {id:string;owner:string;kind:'ball'|'shell'|'filament'|'dust'|'dust-tent';component:Component;center:V3;basis:[V3,V3,V3];axes:V3;inner:number;color:V3;weight:number;source:string;halfSpace?:V3;}
-export interface Chord {center:number;half:number;q:number;a:number;normalization:number;clipLo:number;clipHi:number;tent?:TentIntegral;}
+import {tentDensity,tentChord,tentColumnTo,type Chord,type VolumeObject} from './dust-native/tent.mts';
+export type {Component,VolumeObject,Chord} from './dust-native/tent.mts';
 export function volumeObject(v:VolumeObject):VolumeObject {
  need(v.axes.every(a=>Number.isFinite(a)&&a>0)&&v.center.every(Number.isFinite)&&v.weight>=0&&Number.isFinite(v.weight),'Invalid finite object');
  for(let k=0;k<3;k++){need(Math.abs(dot(v.basis[k],v.basis[k])-1)<1e-6,'Object basis is not normalized');for(let j=0;j<k;j++)need(Math.abs(dot(v.basis[k],v.basis[j]))<1e-6,'Object basis is not orthogonal');}
