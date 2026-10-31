@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-galaxy-backing-source@1",
   "id": "backing",
-  "view": "sun-facing-impostor",
+  "view": "face-on-in-disc-plane",
   "source": "lmc-approved-l36-model-picture",
-  "meaning": "The approved l36 model rendered from the Sun, placed in its measured ICRF frame through the disc centre. This is the same prepared model picture used by the far-view mechanism, with no photograph or slab re-rendering. The fixed plane is foreshortened from other directions."
+  "meaning": "The approved model picture from face-on, laid in the disc plane through its centre, so it foreshortens with the disc. Edge-on the bank’s own edge-on picture stands in."
 }

@@ -12,8 +12,6 @@ import { OCCLUDED_FLOOR, occluderDepth } from './cloud-occluder.js';
 const REST_MS = 350;
 /** A failed overlay read is tried again on a later publication, waiting RETRY_MS, then twice as long, up to RETRIES times. */
 const RETRY_MS = 2000, RETRIES = 4;
-/** The sine of the angle above a disc below which a view runs along it. */
-const GRAZING = .35;
 
 /**
  * A dataset's overlay bank (`prepared/<id>.bin`, read by the data worker: cloud-overlay-reader.ts), drawn over its image
@@ -22,12 +20,12 @@ const GRAZING = .35;
  * happens while the camera coasts (`setCoasting`): only transform and opacity change then, and membership waits for the
  * coast to end. A read that fails is tried again; destroyed before its bank arrives, it never mounts.
  */
-export function mountCloudOverlay({ host, before, behind, url, resolveResource }: { host: HTMLElement; before?: Node | null; /** Where billboards behind a bank's `behindPlane` are drawn. */ behind?: () => Node | null; url: string; resolveResource(path: string): string }) {
+export function mountCloudOverlay({ host, before, url, resolveResource }: { host: HTMLElement; before?: Node | null; url: string; resolveResource(path: string): string }) {
   const doc = host.ownerDocument, window = doc.defaultView!;
-  let layer: CloudOverlayLayer | null = null, rootStyle: ReturnType<typeof retainedStyle> | null = null, backStyle: ReturnType<typeof retainedStyle> | null = null, attached = false, coasting = false, destroyed = false;
+  let layer: CloudOverlayLayer | null = null, rootStyle: ReturnType<typeof retainedStyle> | null = null, attached = false, coasting = false, destroyed = false;
   let latest: { publication: VolumeCameraPublication; opacity: number } | null = null, loading = false, failures = 0, retryAt = 0;
   let rest: ReturnType<typeof setTimeout> | null = null, retiring = false;
-  function destroy() { destroyed = true; if (rest) clearTimeout(rest); layer?.root.remove(); layer?.backRoot?.remove(); attached = false; layer = null; }
+  function destroy() { destroyed = true; if (rest) clearTimeout(rest); layer?.root.remove(); attached = false; layer = null; }
   const read = (): Promise<CloudOverlayData> => typeof Worker === 'undefined'
     ? readPreparedHere(cloudOverlayReader.kind, url, (input, init) => window.fetch(input, init)).then(reading => reading.value as CloudOverlayData)
     : readPrepared<CloudOverlayData>(cloudOverlayReader.kind, url);
@@ -37,7 +35,7 @@ export function mountCloudOverlay({ host, before, behind, url, resolveResource }
       loading = false;
       if (destroyed) return;
       layer = data.kind === 'points' ? createCloudPoints({ host, cloud: data.points, resolveResource }) : createCloudSegments({ host, lines: data.lines });
-      rootStyle = retainedStyle(layer.root); backStyle = layer.backRoot ? retainedStyle(layer.backRoot) : null;
+      rootStyle = retainedStyle(layer.root);
       apply();
     }, (error: unknown) => {
       loading = false; failures++; retryAt = Date.now() + RETRY_MS * 2 ** (failures - 1);
@@ -51,14 +49,14 @@ export function mountCloudOverlay({ host, before, behind, url, resolveResource }
   function apply() {
     if (destroyed || !layer || !latest) return;
     if (latest.opacity > 0) {
-      if (!attached) { if (coasting) return; host.insertBefore(layer.root, before ?? null); if (layer.backRoot) host.insertBefore(layer.backRoot, behind?.() ?? null); attached = true; }
+      if (!attached) { if (coasting) return; host.insertBefore(layer.root, before ?? null); attached = true; }
       // the layer's opacity in steps of 1/64: a fading bank writes it each frame otherwise
-      rootStyle!.opacity(String(Math.round(Math.min(1, latest.opacity) * 64) / 64)); backStyle?.opacity(String(Math.round(Math.min(1, latest.opacity) * 64) / 64));
+      rootStyle!.opacity(String(Math.round(Math.min(1, latest.opacity) * 64) / 64));
       layer.place(latest.publication);
       settle();
     } else if (attached) {
-      if (coasting) { rootStyle!.opacity('0'); backStyle?.opacity('0'); return; }
-      layer.root.remove(); layer.backRoot?.remove(); attached = false;
+      if (coasting) { rootStyle!.opacity('0'); return; }
+      layer.root.remove(); attached = false;
     }
   }
   return {
@@ -73,7 +71,7 @@ export function mountCloudOverlay({ host, before, behind, url, resolveResource }
     setCoasting(active: boolean) { coasting = active; if (!active) { if (retiring) destroy(); else apply(); } },
     /** Taken away as its dataset gives way to another: at once, or, while the camera coasts, cleared to opacity 0 and
      * taken away when the coast ends. */
-    retire() { if (coasting && attached) { retiring = true; rootStyle!.opacity('0'); backStyle?.opacity('0'); } else destroy(); },
+    retire() { if (coasting && attached) { retiring = true; rootStyle!.opacity('0'); } else destroy(); },
     destroy,
   };
 }
@@ -91,25 +89,17 @@ export function createCloudPoints({ host, cloud, resolveResource }: { host: HTML
   root.style.cssText = 'position:absolute;inset:0;overflow:hidden;pointer-events:none';
   root.dataset.cloudPoints = String(cloud.count);
   const atlas = resolveResource(cloud.atlas);
-  const plane = cloud.behindPlane, backRoot = plane ? root.cloneNode(false) as HTMLElement : undefined;
-  if (backRoot) { backRoot.className += ' prepared-cloud-points-behind'; }
-  let order = '', eye: readonly [number, number, number] = [0, 0, 0];
+  let order = '';
   const boards = Array.from({ length: cloud.count }, (_, index) => {
     const el = doc.createElement('div');
     el.style.cssText = `position:absolute;left:0;top:0;width:${cell}px;height:${cell}px;background:url("${atlas}") -${cloud.cells[index * 2]}px -${cloud.cells[index * 2 + 1]}px no-repeat;transform-origin:50% 50%;will-change:transform,opacity`;
     root.append(el); return { el, style: retainedStyle(el), index, depth: 0 };
   });
-  /** Seen along a thin disc, its far half lies behind the near half: there a billboard beyond the disc's centre is drawn behind the volume. */
-  const isBehind = (i: number) => {
-    const to = [eye[0] - plane!.pointUnits[0], eye[1] - plane!.pointUnits[1], eye[2] - plane!.pointUnits[2]], length = Math.hypot(to[0]!, to[1]!, to[2]!), n = plane!.normalUnits;
-    if (Math.abs(to[0]! * n[0] + to[1]! * n[1] + to[2]! * n[2]) / length > GRAZING) return false;
-    return (cloud.positions[i * 3]! - plane!.pointUnits[0]) * to[0]! + (cloud.positions[i * 3 + 1]! - plane!.pointUnits[1]) * to[1]! + (cloud.positions[i * 3 + 2]! - plane!.pointUnits[2]) * to[2]! < 0;
-  };
   return {
-    root, ...(backRoot ? { backRoot } : {}),
+    root,
     place(publication) {
       const local = presentPhysicalPoseInVolume(publication.world.pose, cloud.frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
-      eye = local.positionUnits as readonly [number, number, number]; const [px, py, pz] = local.positionUnits, focal = publication.viewport.focalPixels, [ox, oy] = publication.viewport.principalOffsetPixels;
+      const [px, py, pz] = local.positionUnits, focal = publication.viewport.focalPixels, [ox, oy] = publication.viewport.principalOffsetPixels;
       const w = (publication.viewport.widthPixels ?? host.clientWidth) / 2, h = (publication.viewport.heightPixels ?? host.clientHeight) / 2;
       for (const board of boards) {
         const i = board.index, x = cloud.positions[i * 3]! - px, y = cloud.positions[i * 3 + 1]! - py, z = cloud.positions[i * 3 + 2]! - pz;
@@ -124,8 +114,8 @@ export function createCloudPoints({ host, cloud, resolveResource }: { host: HTML
       }
     },
     atRest() {
-      const sorted = [...boards].sort((a, b) => b.depth - a.depth), key = sorted.map(board => plane && isBehind(board.index) ? '-' + board.index : board.index).join();
-      if (key !== order) { order = key; for (const board of sorted) (plane && isBehind(board.index) ? backRoot! : root).append(board.el); }
+      const sorted = [...boards].sort((a, b) => b.depth - a.depth), key = sorted.map(board => board.index).join();
+      if (key !== order) { order = key; for (const board of sorted) root.append(board.el); }
     },
   };
 }

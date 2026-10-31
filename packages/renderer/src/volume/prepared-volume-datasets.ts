@@ -272,7 +272,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         // Mounted only for the dataset that shows: another dataset's billboards leave as it gives way, even mid-coast.
         if (overlaysFor !== dataset.id && (pointOverlays || dataset.volume.pointOverlays)) {
           for (const overlay of pointOverlays ?? []) { overlay.retire(); retiringOverlays.push(overlay); }
-          pointOverlays = dataset.volume.pointOverlays?.map(path => mountCloudOverlay({ host: root, before: end, behind: () => bank.surface, url: resolveResource(path), resolveResource })) ?? null; overlaysFor = dataset.id;
+          pointOverlays = dataset.volume.pointOverlays?.map(path => mountCloudOverlay({ host: root, before: end, url: resolveResource(path), resolveResource })) ?? null; overlaysFor = dataset.id;
         }
         for (const overlay of retiringOverlays) overlay.setCoasting(holdMembership);
         if (!holdMembership) retiringOverlays = [];

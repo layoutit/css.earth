@@ -9,9 +9,6 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
   // Merged copies retain one node a slice where unmerged ones retain three: the encodings are different DOM.
   if (left.mergedOpticalCopies !== right.mergedOpticalCopies) return false;
   if (left.stackCompositing !== right.stackCompositing || !stacksEqual(left.stacks, right.stacks)) return false;
-  const lc = left.components ?? [], rc = right.components ?? [];
-  if (lc.length !== rc.length || lc.some((part, i) => part.id !== rc[i]!.id || part.mergedOpticalCopies !== rc[i]!.mergedOpticalCopies ||
-    !boundsEqual(part.boundsUnits, rc[i]!.boundsUnits) || !stacksEqual(part.stacks, rc[i]!.stacks))) return false;
   const a = left.impostors, b = right.impostors;
   if (!a || !b) return a === b;
   if (a.radiusUnits !== b.radiusUnits || a.fullBelowDiameterPixels !== b.fullBelowDiameterPixels ||

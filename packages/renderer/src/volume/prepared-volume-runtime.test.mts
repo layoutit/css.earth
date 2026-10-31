@@ -55,22 +55,6 @@ function publication(direction: VolumeVector, position: VolumeVector = [0, 0, 10
 }
 afterEach(() => unstubAllGlobals());
 
-test('a finite cloud keeps local axis mixing when its parent is a thin galaxy', () => {
-  const base = payload(), cloud = payload(), composite = validatePreparedCssVolume({ ...base,
-    frame: { ...base.frame, boundsUnits: { min: [-3, -3, -.1], max: [3, 3, .1] } }, stackCompositing: 'transparent-normalized',
-    components: [{ id: 'cloud', boundsUnits: cloud.frame.boundsUnits, stacks: cloud.stacks.map(s => ({ ...s, leaves: s.leaves.map(l => ({ ...l, id: 'cloud-' + l.id })) })) }] });
-  const { runtime, roots, document } = mount(composite, true);
-  assert.equal(roots.length, 6, 'Finite geometry must mount beside the continuous galaxy');
-  runtime.publish(publication([0, 1, 1]));
-  assert.ok(Number(roots[2]!.style.opacity) > .99);
-  assert.ok(Number(roots[4]!.style.opacity) > .4 && Number(roots[5]!.style.opacity) > .4, 'Local clouds must not inherit the thin-disc direction selector');
-  assert.ok(roots.slice(3).reduce((sum, r) => sum + Number(r.style.opacity), 0) <= .999001, 'Transparent shares must not use opaque completion');
-  assert.ok(roots.every(r => r.style.background === 'transparent'));
-  const count = document.count, nodes = [...roots]; runtime.publish(publication([1, 1, 1]));
-  assert.equal(document.count, count); assert.deepEqual(runtime.roots, nodes);
-  runtime.destroy(); assert.ok(roots.every(r => r.parentNode === null));
-});
-
 test('normalized transparent overlap cannot exceed the weighted completed emission', () => {
   for (const weights of [[1, 1, 0], [1, 1, 1], [1, .2, .6]]) for (const alpha of [.05, .5, 1]) {
     const opacities = transparentStackOpacities(weights); let actual = 0, ceiling = 0;

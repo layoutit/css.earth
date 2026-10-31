@@ -3,7 +3,7 @@ import type { VolumeVector } from '../../density-volume.js';
 import { validatePreparedLeafBounds } from '../../prepared-data/presentation/prepared-leaf-bounds.js';
 import { parseDensityVolumeFrame } from '../../density-volume.js';
 import { validatePreparedCssSky } from '../../prepared-data/sky/css-sky-validation.js';
-import type { PreparedCssVolume, PreparedVolumeComponent, VolumeAxis } from './css-volume-types.js';
+import type { PreparedCssVolume, VolumeAxis } from './css-volume-types.js';
 import { validateVolumeImpostors } from './volume-impostor-validation.js';
 
 const AXES: readonly VolumeAxis[] = ['x', 'y', 'z'];
@@ -21,7 +21,7 @@ export function trustPreparedCssVolume(volume: PreparedCssVolume): PreparedCssVo
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   if (typeof input === 'object' && input !== null && validated.has(input)) return input as PreparedCssVolume;
   const value = record(input, 'prepared CSS volume');
-  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation', 'components', 'stackCompositing', 'pointOverlays', 'thinHandoverCosines'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : [])], 'prepared CSS volume');
+  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation', 'stackCompositing', 'pointOverlays', 'thinHandoverCosines'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : []), ...(Object.hasOwn(value, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : [])], 'prepared CSS volume');
   if (value.thinHandoverCosines !== undefined && !(Array.isArray(value.thinHandoverCosines) && value.thinHandoverCosines.length === 2 && value.thinHandoverCosines[0] > 0 && value.thinHandoverCosines[0] < value.thinHandoverCosines[1] && value.thinHandoverCosines[1] <= 1)) throw new TypeError('A thin handover is two increasing cosines.');
   if (value.pointOverlays !== undefined && (!Array.isArray(value.pointOverlays) || !value.pointOverlays.length || !value.pointOverlays.every(path => typeof path === 'string' && /^[a-z0-9][a-z0-9.-]*\.bin$/u.test(path)))) throw new TypeError('Volume point overlays are prepared bank files.');
   if (value.stackCompositing !== undefined && value.stackCompositing !== 'transparent-normalized') throw new TypeError('Unknown volume stack compositing.');
@@ -63,27 +63,13 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
     }
   }
   const frame = parseDensityVolumeFrame(value.frame);
-  const components: PreparedVolumeComponent[] | undefined = value.components === undefined ? undefined : (() => {
-    if (value.stackCompositing !== 'transparent-normalized' || !Array.isArray(value.components) || !value.components.length || value.components.length > 1024) throw new TypeError('Finite components require transparent normalized compositing and a bounded nonempty array.');
-    const ids = new Set<string>();
-    return value.components.map(input => {
-      const component = record(input, 'finite volume component');
-      exactKeys(component, ['id', 'boundsUnits', 'stacks', ...(Object.hasOwn(component, 'mergedOpticalCopies') ? ['mergedOpticalCopies'] : [])], 'finite volume component');
-      if (typeof component.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(component.id) || ids.has(component.id)) throw new TypeError('Invalid or duplicate finite component identity.');
-      ids.add(component.id);
-      const child = validatePreparedCssVolume({ schema: value.schema, id: value.id, frame: { ...frame, boundsUnits: component.boundsUnits }, anchors: [], stacks: component.stacks, resources: resourcesInput,
-        ...(component.mergedOpticalCopies === undefined ? {} : { mergedOpticalCopies: component.mergedOpticalCopies }) });
-      for (const stack of child.stacks) for (const leaf of stack.leaves) { if (leafIds.has(leaf.id)) throw new TypeError('Finite components must own distinct leaf ids.'); leafIds.add(leaf.id); }
-      return { id: component.id, boundsUnits: child.frame.boundsUnits, stacks: child.stacks, ...(child.mergedOpticalCopies ? { mergedOpticalCopies: child.mergedOpticalCopies } : {}) };
-    });
-  })();
   const impostors = Object.hasOwn(value, 'impostors') ? validateVolumeImpostors(value.impostors, resources) : undefined;
   const sky = Object.hasOwn(value, 'sky') ? validatePreparedCssSky(value.sky, resourcesInput as PreparedCssVolume['resources']) : undefined;
   if (sky && (sky.referenceFrame !== frame.referenceFrame || sky.epochJdTt !== frame.epochJdTt)) throw new TypeError('Prepared sky and volume must share their reference frame and epoch.');
   const volume = Object.freeze({ schema: value.schema, id: value.id, frame,
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
-    ...(components ? { components } : {}), ...(value.stackCompositing ? { stackCompositing: 'transparent-normalized' as const } : {}), ...(value.thinHandoverCosines ? { thinHandoverCosines: Object.freeze([...value.thinHandoverCosines as [number, number]]) as unknown as readonly [number, number] } : {}), ...(value.pointOverlays ? { pointOverlays: Object.freeze([...value.pointOverlays as string[]]) } : {}),
+    ...(value.stackCompositing ? { stackCompositing: 'transparent-normalized' as const } : {}), ...(value.thinHandoverCosines ? { thinHandoverCosines: Object.freeze([...value.thinHandoverCosines as [number, number]]) as unknown as readonly [number, number] } : {}), ...(value.pointOverlays ? { pointOverlays: Object.freeze([...value.pointOverlays as string[]]) } : {}),
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}), ...(Object.hasOwn(value, 'approximation') ? { approximation: value.approximation } : {}),
     ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}), ...(value.mergedOpticalCopies === 3 ? { mergedOpticalCopies: 3 as const } : {}) }) as PreparedCssVolume;
   validated.add(volume);

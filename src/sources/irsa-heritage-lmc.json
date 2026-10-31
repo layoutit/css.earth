@@ -1,0 +1,28 @@
+{
+  "id": "irsa-heritage-lmc",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HERITAGE: the Herschel Inventory of the Agents of Galaxy Evolution, Magellanic Clouds products at IRSA",
+  "identifiers": [
+    {
+      "type": "IRSA collection",
+      "value": "HERITAGE"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://irsa.ipac.caltech.edu/data/Herschel/HERITAGE/",
+      "label": "IRSA HERITAGE"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://irsa.ipac.caltech.edu/data/Herschel/HERITAGE/",
+      "checkedOn": "2026-10-31",
+      "locator": "Far-infrared maps the LMC model takes its dust fine structure from"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

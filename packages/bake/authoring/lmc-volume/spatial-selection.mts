@@ -1,5 +1,5 @@
 /** Disjoint spatial ownership. Endpoint flags preserve XYZ min-inclusive/max-exclusive faces for either ray direction. */
-import { need } from '../inputs.mts';import type { V3 } from '../geometry.mts';
+import { need } from './inputs.mts';import type { V3 } from './geometry.mts';
 export interface RegionBox { min: V3; max: V3; }
 export interface SpatialSelection { include?: RegionBox; exclude?: readonly RegionBox[]; }
 export type Interval = readonly [number,number,boolean?,boolean?];

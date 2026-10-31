@@ -10,13 +10,14 @@ import { intersectsSlab, projectLmcSlab, readLocalPlanes } from '../delivery/sla
 import { projectObject } from '../catalogue-render.mts';
 import { array, json, need, num, numbers, rec } from '../inputs.mts';
 import { L37_DIR, allGasSource } from './regions.mts';
+import { readArmGrade } from './dots-all.mts';
 
 export const ALL_BACKGROUND_DIR = L37_DIR + 'background-all/', SMOOTH_BACKGROUND_DIR = L37_DIR + 'background-smooth/';
 /** Without its discrete dust clouds a slab holds only the smooth column; the clouds move to dark dots. */
 const ARM = process.env.GRADE_ARM, SMOOTH = process.argv.includes('--smooth') || Boolean(ARM), OUT_DIR = ARM ? L37_DIR + 'background-' + ARM + '/' : SMOOTH ? SMOOTH_BACKGROUND_DIR : ALL_BACKGROUND_DIR;
 const STRIP = 256;
 async function plane(i: number) {
-  const { source, regions, background: gasFree } = await allGasSource(), background = SMOOTH ? { ...gasFree, dustLayer: { ...gasFree.dustLayer!, clouds: [] } } : gasFree, spec = nativeBankSpec(2048); await refineFields(source.scene); const grade = ARM ? (rec(await json(L37_DIR + 'grades/' + ARM + '.json')).grade as typeof source.grade) : source.grade;
+  const { source, regions, background: gasFree } = await allGasSource(), background = SMOOTH ? { ...gasFree, dustLayer: { ...gasFree.dustLayer!, clouds: [] } } : gasFree, spec = nativeBankSpec(2048); await refineFields(source.scene); const grade = ARM ? readArmGrade(ARM) : source.grade;
   const layout = fullDescriptors()[i]!, stem = `local-${layout.axis}-${layout.index}`, t = performance.now(), camera = planeCamera(spec, layout), mask = new Uint8Array(layout.width * layout.height);
   if (SMOOTH) mask.fill(1); else for (const r of regions) for (const e of r.emitters) if (intersectsSlab(e.object, layout.domain)) for (const p of projectObject(e.object, camera, 4)) mask[p.pixel] = 1;
   // A clump smaller than a few texels is drawn by a kernel wider than its footprint, so the mask reaches two texels past it.

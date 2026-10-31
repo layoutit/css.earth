@@ -1,0 +1,45 @@
+{
+  "id": "publication-bell-2022-lmc-reddening",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The intrinsic reddening of the Magellanic Clouds as traced by background galaxies -- III. The Large Magellanic Cloud",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/stac1545"
+    },
+    {
+      "type": "arxiv",
+      "value": "2205.04406"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2205.04406",
+      "label": "arXiv:2205.04406"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1093/mnras/stac1545",
+      "label": "DOI 10.1093/mnras/stac1545"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2205.04406",
+      "checkedOn": "2026-10-31",
+      "locator": "Abstract; used in the LMC model: the large-scale column calibration of the dust"
+    }
+  ],
+  "creators": [
+    "Cameron P. M. Bell",
+    "Maria-Rosa L. Cioni",
+    "Angus H. Wright",
+    "David L. Nidever",
+    "et al."
+  ],
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": []
+}

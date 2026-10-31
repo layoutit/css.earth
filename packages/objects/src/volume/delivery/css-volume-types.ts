@@ -26,12 +26,6 @@ export interface PreparedVolumeStack {
 }
 
 /** A finite emitter keeps its own direction-selection bounds inside the shared physical frame. */
-export interface PreparedVolumeComponent {
-  readonly id: string;
-  readonly boundsUnits: DensityVolumeFrame['boundsUnits'];
-  readonly stacks: readonly PreparedVolumeStack[];
-  readonly mergedOpticalCopies?: 3;
-}
 
 /** Offline projections of the same cloud, with its saved optical presentation. */
 export interface PreparedVolumeImpostors {
@@ -58,7 +52,6 @@ export interface PreparedCssVolume {
   readonly frame: DensityVolumeFrame;
   readonly anchors?: readonly { readonly id: string; readonly positionUnits: VolumeVector }[];
   readonly stacks: readonly PreparedVolumeStack[];
-  readonly components?: readonly PreparedVolumeComponent[];
   /** Transparent completed groups use normalized shares, rather than opaque backdrop compensation. */
   readonly stackCompositing?: 'transparent-normalized';
   /** Opt-in: the sight-line cosines to a thin volume's normal between which its thin stack hands over to the side stacks: side stacks only at the first and below, thin stack only at the second and above. */

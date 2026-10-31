@@ -1,4 +1,4 @@
-import { spatialIntervals, coveredLength, containsEvent, type SpatialSelection } from './piece-pilot/regions.mts';
+import { spatialIntervals, coveredLength, containsEvent, type SpatialSelection } from './spatial-selection.mts';
 import {gaussianRunRange} from './delivery/gaussian-runs.mts';
 /** Project canonical 3D objects and smooth published components. No image is sampled here. */
 import {barSurfaceFor} from './bar-geometry.mts';

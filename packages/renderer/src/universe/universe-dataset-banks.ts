@@ -48,7 +48,7 @@ interface DatasetBank {
 /** Sines of the elevation above a backing's disc between which its plane loses its width and the volume's own gate falls to its prepared one. */
 const DISC_EDGE_ON = [.08, .22] as const, EDGE_ON_GATE = { hiddenBelowRadiusPixels: 2, fullAboveRadiusPixels: 24 } as const;
 /** Opt-in: a plane in a disc has no width edge-on, so the bank's own pictures stand in as the view reaches its edge. */
-function edgeOnVisibility(normal: readonly [number, number, number] | undefined, world: WorldCameraPose, frame: DensityVolumeFrame, visibility: PreparedPointVisibility): PreparedPointVisibility {
+export function edgeOnVisibility(normal: readonly [number, number, number] | undefined, world: WorldCameraPose, frame: DensityVolumeFrame, visibility: PreparedPointVisibility): PreparedPointVisibility {
   if (!normal) return visibility;
   const { positionUnits: p } = presentPhysicalPoseInVolume(world.pose, frame), length = Math.hypot(p[0], p[1], p[2]), sine = length > 0 ? Math.abs(p[0] * normal[0] + p[1] * normal[1] + p[2] * normal[2]) / length : 1;
   const t = Math.max(0, Math.min(1, (DISC_EDGE_ON[1] - sine) / (DISC_EDGE_ON[1] - DISC_EDGE_ON[0]))), held = t * t * (3 - 2 * t);

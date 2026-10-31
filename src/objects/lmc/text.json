@@ -65,6 +65,55 @@
           "label": "The Magellanic Clouds Photometric Survey: The Large Magellanic Cloud Stellar Catalog and Extinction Map",
           "checked": "2026-10-31",
           "locator": "The hot stars the young population uses"
+        },
+        {
+          "catalogueId": "publication-oden-2026-magellanic-red-clump",
+          "url": "https://arxiv.org/abs/2512.04200",
+          "label": "Oden et al. (2026): Warped & Hooked, mapping the Magellanic Clouds in 3D using red clump stars",
+          "checked": "2026-10-31",
+          "locator": "The LMC distance surface the model uses"
+        },
+        {
+          "catalogueId": "publication-rathore-2025-lmc-bar",
+          "url": "https://arxiv.org/abs/2410.18182",
+          "label": "Rathore et al. (2025): precise measurements of the LMC bar's geometry with Gaia DR3",
+          "checked": "2026-10-31",
+          "locator": "The bar placement the model uses"
+        },
+        {
+          "catalogueId": "publication-bica-2008-magellanic-catalogue",
+          "url": "https://arxiv.org/abs/0806.3049",
+          "label": "Bica et al. (2008): a general catalogue of extended objects in the Magellanic System",
+          "checked": "2026-10-31",
+          "locator": "The clusters and associations the model places"
+        },
+        {
+          "catalogueId": "publication-skowron-2021-ogle-reddening",
+          "url": "https://arxiv.org/abs/2006.02448",
+          "label": "Skowron et al. (2021): OGLE reddening maps of the Magellanic Clouds from red clump stars",
+          "checked": "2026-10-31",
+          "locator": "The regional foreground fractions of the dust"
+        },
+        {
+          "catalogueId": "publication-bell-2022-lmc-reddening",
+          "url": "https://arxiv.org/abs/2205.04406",
+          "label": "Bell et al. (2022): the intrinsic reddening of the LMC traced by background galaxies",
+          "checked": "2026-10-31",
+          "locator": "The large-scale column calibration of the dust"
+        },
+        {
+          "catalogueId": "irsa-heritage-lmc",
+          "url": "https://irsa.ipac.caltech.edu/data/Herschel/HERITAGE/",
+          "label": "HERITAGE far-infrared maps of the Magellanic Clouds at IRSA",
+          "checked": "2026-10-31",
+          "locator": "The fine structure of the dust"
+        },
+        {
+          "catalogueId": "gaia-2023-dr3",
+          "url": "https://doi.org/10.1051/0004-6361/202243940",
+          "label": "Gaia Data Release 3: Summary of the content and survey properties",
+          "checked": "2026-10-31",
+          "locator": "The red giant, red clump and young stars the model counts"
         }
       ]
     },
@@ -76,7 +125,7 @@
         {
           "catalogueId": "noirlab-noirlab2030a",
           "url": "https://noirlab.edu/public/images/noirlab2030a/",
-          "label": "LMC SMASH mosaic · NOIRLab noirlab2030a; CTIO/NOIRLab/NSF/AURA/SMASH, CC BY 4.0",
+          "label": "LMC SMASH mosaic · NOIRLab noirlab2030a; CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
           "checked": "2026-10-31",
           "locator": "Blanco 4 m telescope, DECam"
         },
@@ -107,6 +156,55 @@
           "label": "Exploring the Very Extended Low-surface-brightness Stellar Populations of the Large Magellanic Cloud with SMASH",
           "checked": "2026-10-31",
           "locator": "The SMASH survey behind the image"
+        },
+        {
+          "catalogueId": "publication-oden-2026-magellanic-red-clump",
+          "url": "https://arxiv.org/abs/2512.04200",
+          "label": "Oden et al. (2026): Warped & Hooked, mapping the Magellanic Clouds in 3D using red clump stars",
+          "checked": "2026-10-31",
+          "locator": "The LMC distance surface the model uses"
+        },
+        {
+          "catalogueId": "publication-rathore-2025-lmc-bar",
+          "url": "https://arxiv.org/abs/2410.18182",
+          "label": "Rathore et al. (2025): precise measurements of the LMC bar's geometry with Gaia DR3",
+          "checked": "2026-10-31",
+          "locator": "The bar placement the model uses"
+        },
+        {
+          "catalogueId": "publication-bica-2008-magellanic-catalogue",
+          "url": "https://arxiv.org/abs/0806.3049",
+          "label": "Bica et al. (2008): a general catalogue of extended objects in the Magellanic System",
+          "checked": "2026-10-31",
+          "locator": "The clusters and associations the model places"
+        },
+        {
+          "catalogueId": "publication-skowron-2021-ogle-reddening",
+          "url": "https://arxiv.org/abs/2006.02448",
+          "label": "Skowron et al. (2021): OGLE reddening maps of the Magellanic Clouds from red clump stars",
+          "checked": "2026-10-31",
+          "locator": "The regional foreground fractions of the dust"
+        },
+        {
+          "catalogueId": "publication-bell-2022-lmc-reddening",
+          "url": "https://arxiv.org/abs/2205.04406",
+          "label": "Bell et al. (2022): the intrinsic reddening of the LMC traced by background galaxies",
+          "checked": "2026-10-31",
+          "locator": "The large-scale column calibration of the dust"
+        },
+        {
+          "catalogueId": "irsa-heritage-lmc",
+          "url": "https://irsa.ipac.caltech.edu/data/Herschel/HERITAGE/",
+          "label": "HERITAGE far-infrared maps of the Magellanic Clouds at IRSA",
+          "checked": "2026-10-31",
+          "locator": "The fine structure of the dust"
+        },
+        {
+          "catalogueId": "gaia-2023-dr3",
+          "url": "https://doi.org/10.1051/0004-6361/202243940",
+          "label": "Gaia Data Release 3: Summary of the content and survey properties",
+          "checked": "2026-10-31",
+          "locator": "The red giant, red clump and young stars the model counts"
         }
       ]
     },
@@ -142,6 +240,55 @@
           "label": "The Magellanic Clouds Photometric Survey: The Large Magellanic Cloud Stellar Catalog and Extinction Map",
           "checked": "2026-10-31",
           "locator": "The hot stars the young population uses"
+        },
+        {
+          "catalogueId": "publication-oden-2026-magellanic-red-clump",
+          "url": "https://arxiv.org/abs/2512.04200",
+          "label": "Oden et al. (2026): Warped & Hooked, mapping the Magellanic Clouds in 3D using red clump stars",
+          "checked": "2026-10-31",
+          "locator": "The LMC distance surface the model uses"
+        },
+        {
+          "catalogueId": "publication-rathore-2025-lmc-bar",
+          "url": "https://arxiv.org/abs/2410.18182",
+          "label": "Rathore et al. (2025): precise measurements of the LMC bar's geometry with Gaia DR3",
+          "checked": "2026-10-31",
+          "locator": "The bar placement the model uses"
+        },
+        {
+          "catalogueId": "publication-bica-2008-magellanic-catalogue",
+          "url": "https://arxiv.org/abs/0806.3049",
+          "label": "Bica et al. (2008): a general catalogue of extended objects in the Magellanic System",
+          "checked": "2026-10-31",
+          "locator": "The clusters and associations the model places"
+        },
+        {
+          "catalogueId": "publication-skowron-2021-ogle-reddening",
+          "url": "https://arxiv.org/abs/2006.02448",
+          "label": "Skowron et al. (2021): OGLE reddening maps of the Magellanic Clouds from red clump stars",
+          "checked": "2026-10-31",
+          "locator": "The regional foreground fractions of the dust"
+        },
+        {
+          "catalogueId": "publication-bell-2022-lmc-reddening",
+          "url": "https://arxiv.org/abs/2205.04406",
+          "label": "Bell et al. (2022): the intrinsic reddening of the LMC traced by background galaxies",
+          "checked": "2026-10-31",
+          "locator": "The large-scale column calibration of the dust"
+        },
+        {
+          "catalogueId": "irsa-heritage-lmc",
+          "url": "https://irsa.ipac.caltech.edu/data/Herschel/HERITAGE/",
+          "label": "HERITAGE far-infrared maps of the Magellanic Clouds at IRSA",
+          "checked": "2026-10-31",
+          "locator": "The fine structure of the dust"
+        },
+        {
+          "catalogueId": "gaia-2023-dr3",
+          "url": "https://doi.org/10.1051/0004-6361/202243940",
+          "label": "Gaia Data Release 3: Summary of the content and survey properties",
+          "checked": "2026-10-31",
+          "locator": "The red giant, red clump and young stars the model counts"
         }
       ]
     }
