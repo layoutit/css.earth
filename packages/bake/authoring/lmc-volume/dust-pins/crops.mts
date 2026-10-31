@@ -1,9 +1,0 @@
-/** Enlarged owner-pin evidence uses actual completed Earth PNG pixels only. */
-import sharp from 'sharp';import {readFile,writeFile} from 'node:fs/promises';import {LOCAL} from '../inputs.mts';import {PINS,L28,pngRgb,measure,WINDOW,CORE} from './measure.mts';
-const out=L28+(process.argv.includes('--preview')?'preview/':''),sources=[{name:'Horálek',path:LOCAL+'versions/l25/horalek.png'},{name:'l25 · accepted base',path:LOCAL+'versions/l25/earth.png'},{name:'l28 · owner-pin calibration',path:out+'earth.png'}];
-for(const pin of PINS){
- const panels=await Promise.all(sources.map(s=>sharp(s.path).extract({left:pin.x-15,top:pin.y-15,width:31,height:31}).resize(310,310,{kernel:'nearest'}).png().toBuffer())),heading=Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="930" height="420"><rect width="100%" height="100%" fill="#101216"/><g fill="white" font-family="Arial"><text x="12" y="26" font-size="21">'+pin.id+' ('+pin.x+', '+pin.y+') · '+(pin.calibrate?'calibration pin':'excluded from calibration')+'</text>'+sources.map((s,i)=>'<text x="'+(12+i*310)+'" y="55" font-size="18">'+s.name+'</text>').join('')+'<text x="12" y="404" font-size="14">31 × 31 native pixels enlarged 10×. Measurement: central 5 × 5, surrounding ring at 5–7 pixels.</text></g></svg>');
- await sharp(heading).composite(panels.map((input,i)=>({input,left:i*310,top:70}))).png().toFile(out+'pin-'+pin.id+'.png');
-}
-const photo=measure(await pngRgb(sources[0].path)),l25=measure(await pngRgb(sources[1].path)),l28=measure(await pngRgb(sources[2].path));await writeFile(out+'pin-png-measurements.json',JSON.stringify({photo,l25,l28,window:WINDOW,excludedCore:CORE},null,2)+'\n');
-await sharp({create:{width:930,height:1260,channels:3,background:'#101216'}}).composite(await Promise.all(PINS.map(async(p,i)=>({input:await readFile(out+'pin-'+p.id+'.png'),left:0,top:i*420})))).png().toFile(out+'pins-all.png');console.log('L28_PIN_CROPS_READY');

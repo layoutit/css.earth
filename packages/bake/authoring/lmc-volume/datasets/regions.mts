@@ -10,6 +10,7 @@ export interface Emitter { object: VolumeObject; amplitude: number; }
 function shapeBounds(objects: readonly VolumeObject[]): RegionBox {
   const min: V3 = [Infinity, Infinity, Infinity], max: V3 = [-Infinity, -Infinity, -Infinity];
   for (const o of objects) for (let a = 0; a < 3; a++) { const radius = Math.sqrt(o.axes.reduce((n, r, k) => n + (r * o.basis[k]![a]!) ** 2, 0)); min[a] = Math.min(min[a]!, o.center[a]! - radius); max[a] = Math.max(max[a]!, o.center[a]! + radius); }
+  for (let a = 0; a < 3; a++) { const guard = Math.max(.00025, (max[a]! - min[a]!) * .03); min[a]! -= guard; max[a]! += guard; }
   return { min, max };
 }
 export interface GasRegion { id: string; label: string; box: RegionBox; emitters: Emitter[]; }

@@ -1,5 +1,0 @@
-/** Archive pixels are resampled by their actual celestial WCS, never assumed co-registered. */
-import type {SkyProjection} from '@cssearth/fits';import {need} from '../inputs.mts';
-export interface SurveyImage {width:number;height:number;values:ArrayLike<number>;}
-export function bilinear(image:SurveyImage,x:number,y:number){const i=Math.floor(x),j=Math.floor(y);if(i<0||j<0||i+1>=image.width||j+1>=image.height)return NaN;const u=x-i,v=y-j,a=[image.values[j*image.width+i],image.values[j*image.width+i+1],image.values[(j+1)*image.width+i],image.values[(j+1)*image.width+i+1]];if(!a.every(Number.isFinite))return NaN;return(a[0]*(1-u)+a[1]*u)*(1-v)+(a[2]*(1-u)+a[3]*u)*v;}
-export function reprojectSurvey(source:SurveyImage,from:SkyProjection,target:{width:number;height:number},to:SkyProjection){need(source.values.length===source.width*source.height,'Invalid source image');const out=new Float32Array(target.width*target.height).fill(NaN);for(let y=0;y<target.height;y++)for(let x=0;x<target.width;x++){const p=from.pixelOf(...to.skyOf(x,y));if(p)out[y*target.width+x]=bilinear(source,...p);}return out;}

@@ -1,3 +1,0 @@
-/** Bounded MCPS discovery through the telescope's qualified TAP client. */
-import {mkdir,writeFile} from 'node:fs/promises';import {tapRows} from '@cssearth/telescope-core/node';import {LOCAL} from '../inputs.mts';
-const directory=LOCAL+'versions/l23/inputs/';await mkdir(directory,{recursive:true});const service='https://tapvizier.cds.unistra.fr/TAPVizieR/tap',query="SELECT table_name,column_name,datatype,unit FROM TAP_SCHEMA.columns WHERE table_name LIKE '%128/1606%'";const started=performance.now(),rows=await tapRows(service,query,100);await writeFile(directory+'tap-schema.json',JSON.stringify({service,query,rows,seconds:(performance.now()-started)/1000},null,2)+'\n');console.log(JSON.stringify({sentinel:'L23_MCPS_SCHEMA',rows}));
