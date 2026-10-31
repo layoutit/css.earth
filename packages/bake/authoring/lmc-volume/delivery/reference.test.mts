@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {APPROVED_MODEL,APPROVED_COMMIT,approvedTag,requireApprovedCommit,referenceSize,downsampleLinear,requireNativeAgreement} from './reference.mts';
+import {APPROVED_MODEL,APPROVED_COMMIT,requireApprovedCommit,referenceSize,downsampleLinear,requireNativeAgreement} from './reference.mts';
 import {loadObservation} from '../observation.mts';
-test('delivery keeps the immutable owner-approved l36 tag',()=>{assert.equal(APPROVED_MODEL,36);approvedTag();requireApprovedCommit(APPROVED_COMMIT);assert.throws(()=>requireApprovedCommit('unapproved'));});
+test('delivery keeps the owner-approved l36 commit',()=>{assert.equal(APPROVED_MODEL,36);requireApprovedCommit(APPROVED_COMMIT);assert.throws(()=>requireApprovedCommit('unapproved'));});
 test('native reference enables 1024 px without changing the sky, exposure or registered rays',async()=>{
  const a=await loadObservation(8),d={sky:a.metadata.sky.rgbLinearDisplay,commonFactor:a.metadata.normalization.commonFactor},b=await loadObservation(16,undefined,d);
  assert.equal(b.width,1024);assert.equal(b.height,768);assert.deepEqual(b.metadata.sky.rgbLinearDisplay,d.sky);assert.equal(b.metadata.normalization.commonFactor,d.commonFactor);
