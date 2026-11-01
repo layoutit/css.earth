@@ -27,7 +27,7 @@ import { allGasSource, type GasRegion } from './regions.mts';
 /** A dataset's dots: its bank name and where the bake leaves them. */
 export const dotsBank = (arm: DatasetArm) => (arm === 'horalek' ? 'gas-dots' : 'gas-dots-' + arm);
 export const dotsDir = (arm: DatasetArm) => BAKE_DIR + 'dots-' + arm + '/';
-/** Billboards in all: the 61 other retained elements and these stay under 500. */
+/** Billboards in all; they share one grouped layer. */
 export const BOARDS = 439,
   GAS_BOARDS = 300,
   DUST_BOARDS = BOARDS - GAS_BOARDS,
