@@ -25,15 +25,12 @@ export interface PreparedVolumeStack {
   readonly leaves: readonly PreparedVolumeLeaf[];
 }
 
-/** A finite emitter keeps its own direction-selection bounds inside the shared physical frame. */
-
 /** Offline projections of the same cloud, with its saved optical presentation. */
 export interface PreparedVolumeImpostors {
   readonly schema: typeof PREPARED_VOLUME_IMPOSTORS_SCHEMA;
   readonly radiusUnits: number;
   readonly fullBelowDiameterPixels: number;
   readonly volumeAboveDiameterPixels: number;
-  /** Optional physical distance window; distant pictures remain authoritative while zooming from afar. */
   /** Opt-in: a thin disc's plane. A picture is laid on that plane as the camera sees it, and an edge-on picture leaves as the view opens. */
   readonly discPlane?: { readonly right: VolumeVector; readonly up: VolumeVector };
   readonly views: readonly {

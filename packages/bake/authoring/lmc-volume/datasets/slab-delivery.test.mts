@@ -3,9 +3,27 @@ import { test } from 'node:test';
 import type { PreparedCssVolume } from '@cssearth/objects';
 import { slabLeaf, SLAB_BOX_DIVISOR, SLAB_IMAGE_DIVISOR } from './slab-delivery.mts';
 
-const leaf = { id: 'x-5', centerUnits: [1, 0, 0], texturePath: 'l36-near/x/005.png', widthPx: 2054, heightPx: 436, boundsCssPixels: { min: [0, 0, 0], max: [1, 1, 1] },
-  style: { width: '1027px', height: '218px', transform: 'matrix3d(0.97773,0,0,0,0,0,-0.982248,0,0,-1,0,0,-502.064844,50,107.065116,1)', backgroundSize: '1027px 218px', backgroundPosition: '0px 0px' } } as unknown as PreparedCssVolume['stacks'][number]['leaves'][number];
-const corner = (s: { width: string; height: string; transform: string }) => { const m = s.transform.slice(9, -1).split(',').map(Number), w = parseFloat(s.width), h = parseFloat(s.height); return [0, 1, 2].map(i => m[12 + i]! + w * m[i]! + h * m[4 + i]!); };
+const leaf = {
+  id: 'x-5',
+  centerUnits: [1, 0, 0],
+  texturePath: 'l36-near/x/005.png',
+  widthPx: 2054,
+  heightPx: 436,
+  boundsCssPixels: { min: [0, 0, 0], max: [1, 1, 1] },
+  style: {
+    width: '1027px',
+    height: '218px',
+    transform: 'matrix3d(0.97773,0,0,0,0,0,-0.982248,0,0,-1,0,0,-502.064844,50,107.065116,1)',
+    backgroundSize: '1027px 218px',
+    backgroundPosition: '0px 0px',
+  },
+} as unknown as PreparedCssVolume['stacks'][number]['leaves'][number];
+const corner = (s: { width: string; height: string; transform: string }) => {
+  const m = s.transform.slice(9, -1).split(',').map(Number),
+    w = parseFloat(s.width),
+    h = parseFloat(s.height);
+  return [0, 1, 2].map(i => m[12 + i]! + w * m[i]! + h * m[4 + i]!);
+};
 
 const SOURCE = { width: 2054, height: 436 };
 

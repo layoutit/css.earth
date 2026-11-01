@@ -563,3 +563,6 @@ src/objects/proxima-centauri-b/source/science/del-genio-2019/18_Day-Land_ANN1490
 
 # Numerical Pleiades model inputs restored from the declared source mirror.
 /src/objects/milky-way-pleiades-dust/source/inputs/
+
+# The accepted LMC model arrays (534 MB); restored from the source mirror (src/objects/lmc-volume/source/manifest.json).
+/src/objects/lmc-volume/source/model/
