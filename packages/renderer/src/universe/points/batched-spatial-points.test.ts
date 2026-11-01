@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { parseCatalogueCells } from '@cssearth/objects';
+import { parseCatalogueCells, parsePointTransmission, PREPARED_POINT_TRANSMISSION_SCHEMA } from '@cssearth/objects';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
@@ -8,7 +8,6 @@ import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.
 import { reservePointLayer } from './point-layer.js';
 import { DOT_SLOTS } from './point-paths.js';
 import { setPointTransmission } from './prepared-transmission.js';
-import { parsePointTransmission, PREPARED_POINT_TRANSMISSION_SCHEMA } from '@cssearth/objects';
 
 test('a dust palette arriving during travel never freezes point projection or joins paths mid-motion',async()=>{
   const {document}=parseHTML('<div id="host"></div>'),host=document.getElementById('host')!;

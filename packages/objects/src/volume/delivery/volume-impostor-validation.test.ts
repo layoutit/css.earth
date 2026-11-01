@@ -20,4 +20,3 @@ test('prepared impostors require thresholds, declared textures and orthonormal c
   assert.throws(() => validateVolumeImpostors(bank, new Set()), /declared/);
   assert.throws(() => validateVolumeImpostors({ ...bank, views: [{ ...bank.views[0], right: [2, 0, 0] }, ...bank.views.slice(1)] }, resources), /orthonormal/);
 });
-
