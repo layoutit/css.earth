@@ -25,3 +25,10 @@ test('a shape body lists no material, and a solid sphere keeps its own', () => {
   assert.deepEqual(refusedPreparedRows('eros', inventory('surfaces.json', 'material.json'), shape), ['eros/prepared/material.json: a working record']);
   assert.deepEqual(refusedPreparedRows('io', inventory('surfaces.json', 'material.json'), { properties: { recipe: { shape: { kind: 'sphere' }, sources: [{ id: 'terrestrial' }] } } }), []);
 });
+
+test('a volume bank must list its record; a body with a dataset index has none', () => {
+  const bank = { type: 'volume-dataset-bank' };
+  assert.deepEqual(refusedPreparedRows('m1', inventory('datasets.json', 'record.json', 'stars.bin'), bank), []);
+  assert.deepEqual(refusedPreparedRows('m1', inventory('datasets.json', 'stars.bin'), bank), ['m1/prepared/record.json: missing, and a volume bank is read with it']);
+  assert.deepEqual(refusedPreparedRows('vega', inventory('runtime.json', 'datasets.json'), sphere), []);
+});

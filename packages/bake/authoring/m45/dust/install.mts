@@ -24,7 +24,7 @@ if(pilot){const destination=resolve('.local/pleiades-dust/install-pilot');await 
  const object=await json(resolve(directory,'object.json'));const properties=requireRecord(object.properties);properties.preparation={source:'source/model.json'};properties.overlays={'smooth-dust':['foreground-cloud']};
  const records=resolve('.local/pleiades-dust/install-records');await mkdir(records,{recursive:true});
  await writeFile(resolve(records,'object.json'),JSON.stringify(object,null,2)+'\n');await copyFile(resolve(directory,'inventory.json'),resolve(records,'inventory.json'));
- await inventoryPreparedAssets({objectId:id,objectDirectory:records,preparedRoot:stage,filenames:['datasets.json','presentation.json','stars.bin','smooth-dust/volume.json','point-transmission.bin','foreground-cloud.bin','foreground-cloud-atlas.webp',...bank.datasets[0]!.volume.resources.map(r=>r.path)]});
+ await inventoryPreparedAssets({objectId:id,objectDirectory:records,preparedRoot:stage,filenames:['datasets.json','record.json','presentation.json','stars.bin','smooth-dust/volume.json','point-transmission.bin','foreground-cloud.bin','foreground-cloud-atlas.webp',...bank.datasets[0]!.volume.resources.map(r=>r.path)]});
  await installPreparedBank({live,stage,backup:resolve('.local/pleiades-dust/prepared-before-install'),object:resolve(directory,'object.json'),inventory:resolve(directory,'inventory.json'),stagedObject:resolve(records,'object.json'),stagedInventory:resolve(records,'inventory.json')});
 }
 console.log('PLEIADES_DUST_INSTALLED',JSON.stringify({pilot,count:cloud.count,faces:bank.datasets[0]!.volume.resources.length}));
