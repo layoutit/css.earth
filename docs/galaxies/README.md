@@ -25,7 +25,7 @@ The [source recipe](../../src/objects/lmc-volume/source/image-candidates.json) r
 | Point stars | [Bonanos et al. (2009)](https://arxiv.org/abs/0905.1328), [CDS J/AJ/138/1003](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | 943 stars with measured sky positions and photometry. Depths are assigned from the density. All three datasets use identical positions. |
 | Surface color | The three registered observations above | Native star removal, then color sampling onto the fixed density. Uncovered density keeps neutral color. |
 
-The [accepted bake recipe](../../src/objects/lmc-volume/source/bake.json) pins image placement and color settings; the [app settings](../../src/objects/lmc-volume/README.md#evidence) retain cloud and star display. Switching datasets changes the material while retaining the cloud, stars and camera.
+The [accepted bake recipe](../../src/objects/lmc-volume/source/bake.json) pins image placement and color settings; the [app settings](../../src/objects/lmc-volume/README.md#preparation-and-delivery) retain cloud and star display. Switching datasets changes the material while retaining the cloud, stars and camera.
 
 ## Extragalactic datasets
 

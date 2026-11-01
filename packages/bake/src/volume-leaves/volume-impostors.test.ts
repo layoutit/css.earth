@@ -278,4 +278,3 @@ test('a volume with one drawn stack keeps its whole weight at every view, and dr
   const edgeOn = await baked.image([1, 0, 0]);
   assert.ok(edgeOn.data.every(value => value === 0), 'a sheet has no area seen edge-on');
 });
-
