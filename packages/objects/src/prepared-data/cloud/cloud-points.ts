@@ -26,6 +26,8 @@ export interface PreparedCloudPoints {
   readonly cellTexels: number;
   /** Opt-in viewport paint group, keeping moving prepared boards in 2D instead of requesting one promoted layer each. */
   readonly compositing?: 'grouped';
+  /** Opt-in, with the paint group: while the camera moves the group keeps its last paint under one transform, and repaints as that paint grows stale. */
+  readonly warpInMotion?: true;
   /** The body that hides what is behind it: none, or its ellipsoids. */
   readonly occluder: readonly CloudPointEllipsoid[];
   /** Opt-in: a thin disc the billboards lie in. Seen along it, one beyond its centre is drawn behind the volume at rest. */
@@ -35,7 +37,7 @@ export interface PreparedCloudPoints {
 
 export function encodeCloudPoints(cloud: PreparedCloudPoints): PreparedBank {
   return { schema: PREPARED_CLOUD_POINTS_SCHEMA, fields: { id: cloud.id, frame: cloud.frame, count: cloud.count, atlas: cloud.atlas, cellTexels: cloud.cellTexels, occluder: cloud.occluder,
-    ...(cloud.planarCells ? { planarCells: cloud.planarCells } : {}), ...(cloud.compositing ? { compositing: cloud.compositing } : {}) },
+    ...(cloud.planarCells ? { planarCells: cloud.planarCells } : {}), ...(cloud.compositing ? { compositing: cloud.compositing } : {}), ...(cloud.warpInMotion ? { warpInMotion: true } : {}) },
     columns: { position: cloud.positions, diameter: cloud.diameters, cell: cloud.cells } };
 }
 
@@ -51,6 +53,8 @@ export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): Prepar
   if (!Number.isSafeInteger(cellTexels) || (cellTexels as number) < 1) throw new TypeError(`${at}: cellTexels is a texel count, got ${JSON.stringify(cellTexels ?? null)}.`);
   const compositing = bank.fields.compositing;
   if (compositing !== undefined && compositing !== 'grouped') throw new TypeError(`${at}: compositing is absent or grouped.`);
+  const warpInMotion = bank.fields.warpInMotion;
+  if (warpInMotion !== undefined && (warpInMotion !== true || compositing !== 'grouped')) throw new TypeError(`${at}: warpInMotion is absent, or true on a grouped bank.`);
   const n = count as number, positions = preparedBankColumn(bank, 'position', 'f64', n * 3, at) as Float64Array;
   const diameters = preparedBankColumn(bank, 'diameter', 'f32', n, at) as Float32Array, cells = preparedBankColumn(bank, 'cell', 'u16', n * 2, at) as Uint16Array;
   if (positions.some(value => !Number.isFinite(value))) throw new TypeError(`${at}: every billboard has a finite place.`);
@@ -63,5 +67,5 @@ export function readCloudPoints(bank: PreparedBank, at = 'cloud points'): Prepar
     ['backCell', 'directionalAxis', 'viewCell', 'viewDiameter', 'viewTexels'].some(key => bank.columns[key] !== undefined))
     throw new TypeError(`${at}: cloud points use one fixed atlas cell per billboard.`);
   return { ...(planarCells ? { planarCells: planarCells as PreparedCloudPoints['planarCells'] } : {}), id, frame: parseDensityVolumeFrame(frame), count: n, positions, diameters, cells, atlas, cellTexels: cellTexels as number, occluder: occluder as CloudPointEllipsoid[],
-    ...(compositing ? { compositing } : {}) };
+    ...(compositing ? { compositing } : {}), ...(warpInMotion ? { warpInMotion } : {}) };
 }

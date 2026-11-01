@@ -8,6 +8,7 @@ import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { createPreparedVolumeDatasets, type PreparedVolumeDatasetSource } from '../volume/prepared-volume-datasets.js';
 import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
+import { leanMotion } from './clouds/lean-motion.js';
 import { enteredVolumeOpacity, projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits, volumeHolds } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
@@ -390,7 +391,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         for (const target of [bank.mounted.root, bank.mounted.frontRoot]) {
           if (!target) continue;
           if (coasting && target.style.display === 'none') continue;
-          writeStyle(target, 'opacity', String(Math.min(STACK_OPACITY_CEILING, opacity)));
+          writeStyle(target, 'opacity', String(leanMotion(target.ownerDocument) ? opacity : Math.min(STACK_OPACITY_CEILING, opacity)));
           if (!coasting) {
             const display = opacity > 0 ? 'block' : 'none';
             if (target.style.display !== display) {

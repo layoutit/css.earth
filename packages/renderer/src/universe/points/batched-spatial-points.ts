@@ -1,3 +1,4 @@
+import { leanMotion } from '../clouds/lean-motion.js';
 import { presentPhysicalPoseInVolume, cssCameraAxesFromOrientation } from '@cssearth/engine';
 import { type DensityVolumeFrame, type VolumeVector, type PreparedPointTransmission } from '@cssearth/objects';
 import { pointTransmissionAt, transmissionPaints, transmissionLookup } from './prepared-transmission.js';
@@ -21,6 +22,8 @@ export const pointPaint = (style: BatchedSpatialPointStyle) =>
  * points of the list. */
 /** Below this a point's move on screen is invisible, so a paint is kept. */
 const MAX_PARALLAX_PIXELS = .25;
+/** In lean motion (lean-motion.ts) a travelling camera keeps a paint this many frames before the dots catch up with its travel, or until the camera pauses. */
+const LEAN_TRAVEL_FRAMES = 6;
 /** Dots are painted this share of the view beyond each edge: a turn warps them into view before the exact repaint, so a
  * drag shows no hole at its leading edge (content is resident a margin before it enters the view,
  * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. A travelling camera repaints
@@ -245,7 +248,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // 120 Hz frames under 60 Hz pointer input do every other frame) is not a rest: restarting the share there wrote one slot
   // in eight of the next frame and left the rest a few frames behind, so a drag around the Milky Way, whose near stars
   // sweep several pixels a frame, shook every star by up to 50 px (Chrome, 2026-10-11).
-  let behind = 0, unpainted = true, started = 0, turn = 0, resting = false;
+  let behind = 0, unpainted = true, started = 0, turn = 0, resting = false, framesKept = 0;
+  const document = ('layer' in host ? host.layer.root : host).ownerDocument;
   const slotsDue = new Uint8Array(DOT_SLOTS);
   // The nearest point each slot's last paint visited, squared: the nearest of them all bounds how far the camera may
   // move before a dot does (parallaxPixels).
@@ -343,7 +347,11 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     let unchanged = false;
     if (painted) {
       const shift = Math.hypot(...local.positionUnits.map((value, axis) => value - painted!.position[axis]!));
-      const still = shift === 0 || parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) < MAX_PARALLAX_PIXELS;
+      const lean = !forced && !exact && units === null && leanMotion(document);
+      if (lean) framesKept++;
+      const parallaxKept = shift > 0 && parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) >= MAX_PARALLAX_PIXELS;
+      const still = !parallaxKept || (lean && framesKept < LEAN_TRAVEL_FRAMES);
+      if (still && parallaxKept) { owed = true; settleAfterPause(); }
       const same = counts.every((count, index) => count === painted!.counts[index]) && keeps.every((keep, index) => keep === painted!.keeps[index])
         && hiddens.every((hidden, index) => hidden === painted!.hiddens[index]);
       const turned = !sameRest(rest, painted.rest);
@@ -354,7 +362,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       // left behind follow through the pacer.
       if (!changed && held && still && same && !turned && !(exact && painted.overscan < OVERSCAN) && units === null) {
         if (behind > 0) { arriving = true; arrivals.request(true); }
-        layer.unwarp(); owed = materialPending; return;
+        layer.unwarp(); owed = owed && parallaxKept || materialPending; return;
       }
       // The camera moved (or the paint changed) since the pause's pass began: what it completes is no longer at rest.
       if (units === null && forced === null) resting = false;
@@ -370,12 +378,16 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
         // Dots the zoom adds, and the slots a paint left behind, come through the pacer while the warp holds.
         if (behind > 0 || counts.some((count, index) => count > painted!.counts[index]!) || keeps.some((keep, index) => keep > painted!.keeps[index]!)) { arriving = true; arrivals.request(true); }
         if (layer.warpTo(publication)) { owed = true; settleAfterPause(); return; }
+        // In lean motion a turn past the warp's reach keeps its last warp until the frames are up.
+        if (lean && framesKept < LEAN_TRAVEL_FRAMES) { owed = true; settleAfterPause(); return; }
       }
     }
     // No warp slides a travelling camera's paint (the next frame repaints), so it paints the view alone. On the iPad's
     // slow zoom the margin was a third of the dots written; without it 690 frames had 19 to 24 over 20 ms at the nearby
     // universe against 57 to 81, and 42 to 47 at the Milky Way against 105 to 121 (interleaved runs, 2026-10-03).
-    const overscan = travelling && !coherent ? 0 : OVERSCAN;
+    const whole = units === null && leanMotion(document);
+    if (whole) framesKept = 0;
+    const overscan = travelling && !coherent && !whole ? 0 : OVERSCAN;
     owed = materialPending; written = 0;
     if (travelling || materialPending) settleAfterPause(); else if (settle !== null) { clearTimeout(settle); settle = null; }
     let nearestSquared = Infinity;
@@ -394,7 +406,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     // the frames after it took 2 ms and 6 to 11 (iPad, 2026-10-04). A field within the pacer's starting budget, the
     // first paint, and a paint asked for outright are written whole.
     let due: Uint8Array | null = null;
-    if (!coherent && !unpainted && (units !== null || (travelling && !exact))) {
+    if (!coherent && !whole && !unpainted && (units !== null || (travelling && !exact))) {
       const wanted = [...paints.values()].reduce((sum, paint) => sum + paint.dots(), 0) / DOTS_PER_PACER_UNIT;
       const share = !(wanted > 0) ? 1 : units !== null ? units / wanted : arrivals.take(wanted) / wanted;
       const slots = Math.max(1, Math.min(Math.floor(DOT_SLOTS * Math.min(1, share) + 1e-9), wanted > arrivals.startUnits ? 2 ** started : DOT_SLOTS));
