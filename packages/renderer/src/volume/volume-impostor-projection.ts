@@ -22,10 +22,34 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
   const toViewer: VolumeVector = distance > 0
     ? [local.positionUnits[0] / distance, local.positionUnits[1] / distance, local.positionUnits[2] / distance] : back;
   return { x, y, diameterPixels, volumeMix, visible,
-    views: visible && (volumeMix < 1 || includeFullViews) ? selectImpostorViews(bank.views, toViewer).map(({ view, weight }) => {
+    views: visible && (volumeMix < 1 || includeFullViews) ? (bank.discPlane ? discViews(bank, toViewer) : selectImpostorViews(bank.views, toViewer)).map(({ view, weight }) => {
+      const onDisc = bank.discPlane && discMatrix(bank.discPlane, view, right, down);
+      if (onDisc) return { id: view.id, weight, matrix: onDisc };
       const imageRight = transport(view.right, view.back, toViewer), imageDown = transport(view.down, view.back, toViewer);
       return { id: view.id, weight, matrix: [dot(imageRight, right), dot(imageRight, down), dot(imageDown, right), dot(imageDown, down)] };
     }) : [] };
+}
+
+/** How open a picture must be, as the sine of its elevation above the disc, before its disc can be laid on the camera's view. */
+const OPEN_PICTURE = .3;
+/** Pictures that see the disc edge-on hold nothing to lay on it: they carry only views along the disc, and fade out between these sines. */
+const EDGE_VIEWS_LEAVE = [.22, .5] as const;
+const discNormal = (plane: NonNullable<PreparedVolumeImpostors['discPlane']>) => cross(plane.right, plane.up);
+function discViews(bank: PreparedVolumeImpostors, toViewer: VolumeVector) {
+  const normal = discNormal(bank.discPlane!), edge = smooth((EDGE_VIEWS_LEAVE[1] - Math.abs(dot(normal, toViewer))) / (EDGE_VIEWS_LEAVE[1] - EDGE_VIEWS_LEAVE[0]));
+  const open = (view: View) => Math.abs(dot(normal, view.back)) >= OPEN_PICTURE;
+  const sides = selectImpostorViews(bank.views, toViewer).filter(entry => !open(entry.view)).map(entry => ({ ...entry, weight: entry.weight * edge }));
+  const left = 1 - sides.reduce((sum, entry) => sum + entry.weight, 0);
+  // What the edge-on pictures give up goes to the open pictures alone, so a weight follows the camera without a step.
+  return [...sides, ...selectImpostorViews(bank.views.filter(open), toViewer).map(entry => ({ ...entry, weight: entry.weight * left }))].filter(entry => entry.weight > 0);
+}
+/** The picture's axes on screen such that every point of the disc plane lands where the camera sees it. Null for an edge-on picture. */
+function discMatrix(plane: NonNullable<PreparedVolumeImpostors['discPlane']>, view: View, right: VolumeVector, down: VolumeVector): readonly [number, number, number, number] | null {
+  if (Math.abs(dot(discNormal(plane), view.back)) < OPEN_PICTURE) return null;
+  const a = dot(plane.right, view.right), b = dot(plane.up, view.right), c = dot(plane.right, view.down), d = dot(plane.up, view.down), det = a * d - b * c;
+  const p = dot(plane.right, right), q = dot(plane.up, right), r = dot(plane.right, down), s = dot(plane.up, down);
+  // Screen = [p q; r s] · disc, picture = [a b; c d] · disc, so screen = [p q; r s] · [a b; c d]⁻¹ · picture.
+  return [(p * d - q * c) / det, (r * d - s * c) / det, (q * a - p * b) / det, (s * a - r * b) / det];
 }
 
 /** Shared screen-size handover for fixed axis pictures and camera-facing views, including off-axis cameras. */

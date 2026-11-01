@@ -3,7 +3,12 @@
   "bodyId": "lmc",
   "displayName": "Large Magellanic Cloud",
   "bodyRadiusUnits": 248,
-  "bodyRadiusKilometers": 1.542838790745684e+17,
+  "bodyRadiusKilometers": 154283879074568400,
   "defaultZoom": 1.25,
-  "geometryScale": 1.25
+  "geometryScale": 1.25,
+  "openingDirection": [
+    -0.56697,
+    -0.637898,
+    0.521183
+  ]
 }

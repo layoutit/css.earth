@@ -194,6 +194,10 @@ test('a magnified dataset fits through normal optics and refuses another host', 
     f.set({ ...f.navigation.capture(), projectionScale: 1, pose: { positionM: [0, 0, 100000], orientationXyzw: [0, 0, 0, 1] } });
     assert.equal(f.service.datasetVolumeTarget({ objectId: '0', volumeId: 'fixture-volume', mount: f.mount }), null);
     assert.ok(f.service.datasetVolumeTarget({ objectId: '0', volumeId: 'fixture-volume', mount: f.mount, always: true }), 'the host Fit can zoom in to a volume already held');
+    banks.set('fixture-body', { frame: volume, host: '0', opensOnBody: true } as never);
+    f.set({ ...f.navigation.capture(), projectionScale: 4 });
+    assert.equal(f.service.datasetVolumeTarget({ objectId: '0', volumeId: 'fixture-body', mount: f.mount }), null, 'a bank that opens on its body does not pull the page back to its bounds');
+    assert.ok(f.service.datasetVolumeTarget({ objectId: '0', volumeId: 'fixture-body', mount: f.mount, always: true }), 'the host Fit still reaches its whole volume');
 
-  } finally { banks.delete('fixture-volume'); f.service.destroy(); }
+  } finally { banks.delete('fixture-volume'); banks.delete('fixture-body'); f.service.destroy(); }
 });

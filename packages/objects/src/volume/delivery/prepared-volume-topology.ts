@@ -8,16 +8,7 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
   if (!frameEquals(left.frame, right.frame) || !anchorsEqual(left.anchors, right.anchors)) return false;
   // Merged copies retain one node a slice where unmerged ones retain three: the encodings are different DOM.
   if (left.mergedOpticalCopies !== right.mergedOpticalCopies || left.fixedImages !== right.fixedImages) return false;
-  for (const axis of AXES) {
-    const a = left.stacks.find(stack => stack.axis === axis), b = right.stacks.find(stack => stack.axis === axis);
-    if (!a || !b || !vectorEquals(a.normalUnits, b.normalUnits) || a.leaves.length !== b.leaves.length) return false;
-    for (let index = 0; index < a.leaves.length; index++) {
-      const x = a.leaves[index]!, y = b.leaves[index]!, prepared = x.style, other = y.style;
-      if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
-          !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
-          prepared.transform !== other.transform || prepared.backfaceVisibility !== other.backfaceVisibility || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
-    }
-  }
+  if (left.stackCompositing !== right.stackCompositing || !stacksEqual(left.stacks, right.stacks)) return false;
   const far = left.farPlanes, otherFar = right.farPlanes;
   if (far === undefined || otherFar === undefined) { if (far !== otherFar) return false; }
   else {
@@ -41,6 +32,21 @@ export function samePreparedVolumeTopology(leftInput: PreparedCssVolume, rightIn
     const other = b.views[index]!;
     return view.id === other.id && vectorEquals(view.back, other.back) && vectorEquals(view.right, other.right) && vectorEquals(view.down, other.down);
   });
+}
+
+function stacksEqual(left: PreparedCssVolume['stacks'], right: PreparedCssVolume['stacks']): boolean {
+  for (const axis of AXES) {
+    const a = left.find(stack => stack.axis === axis), b = right.find(stack => stack.axis === axis);
+    if (!a || !b || !vectorEquals(a.normalUnits, b.normalUnits) || a.leaves.length !== b.leaves.length) return false;
+    for (let index = 0; index < a.leaves.length; index++) {
+      const x = a.leaves[index]!, y = b.leaves[index]!, prepared = x.style, other = y.style;
+      if (x.id !== y.id || x.widthPx !== y.widthPx || x.heightPx !== y.heightPx ||
+          x.opticalSlab?.id !== y.opticalSlab?.id || x.opticalSlab?.role !== y.opticalSlab?.role ||
+          !vectorEquals(x.centerUnits, y.centerUnits) || prepared.width !== other.width || prepared.height !== other.height ||
+          prepared.transform !== other.transform || prepared.backfaceVisibility !== other.backfaceVisibility || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
+    }
+  }
+  return true;
 }
 
 function frameEquals(left: PreparedCssVolume['frame'], right: PreparedCssVolume['frame']): boolean {

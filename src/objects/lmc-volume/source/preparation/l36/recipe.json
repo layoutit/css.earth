@@ -1,0 +1,38 @@
+{
+  "meaning": "The accepted LMC model's fitted global values. The bake reads them with the restored arrays under source/model/; nothing is refitted.",
+  "colors": [
+    [
+      1.6301947998682782,
+      1,
+      0.6402197834147627
+    ],
+    [
+      1.7293316530795357,
+      1,
+      0.6590930564825427
+    ],
+    [
+      0.697668943523474,
+      1,
+      1.4665042485559485
+    ],
+    [
+      2.08,
+      1,
+      1.06
+    ]
+  ],
+  "innerDiscColor": [
+    1.6301947998682782,
+    1,
+    0.6402197834147627
+  ],
+  "barSigmaZ": 0.36656497062880344,
+  "dustStrength": 1.0919999999999999,
+  "dustExtinctionRgb": [
+    0.25,
+    1,
+    1.879765395894428
+  ],
+  "oldPoints": 1091462
+}

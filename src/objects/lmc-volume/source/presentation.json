@@ -8,58 +8,36 @@
   },
   "recipes": [
     {
-      "id": "recipe-1",
-      "path": "src/objects/lmc-volume/source/lenses.json"
+      "id": "accepted-model",
+      "path": "src/objects/lmc-volume/source/preparation/l36/recipe.json"
     },
     {
-      "id": "recipe-2",
-      "path": "src/objects/lmc-volume/source/evidence/lmc/envelope/emission-envelope.json"
-    },
-    {
-      "id": "recipe-3",
-      "path": "src/objects/lmc-volume/source/evidence/lmc/envelope/finite-lenses.json"
-    },
-    {
-      "id": "recipe-4",
-      "path": "src/objects/lmc-volume/source/compact/prior/volume.json"
-    },
-    {
-      "id": "recipe-5",
-      "path": "src/objects/lmc-volume/source/evidence/lmc/candidates/source/alignment-report.json"
-    },
-    {
-      "id": "recipe-6",
-      "path": "src/objects/lmc-volume/source/lens-settings-evidence.json"
+      "id": "local-delivery",
+      "path": "src/objects/lmc-volume/source/delivery.json"
     }
   ],
   "sharedInputs": [
-    "density-prior",
-    "catalogue-stars",
+    "approved-l36-model",
     "sky-registration"
   ],
   "datasets": [
     {
       "id": "horalek-widefield",
-      "label": "Horálek optical",
-      "title": "Petr Horálek’s visible-light LMC",
-      "description": "Optical photograph colors are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "Optical photograph colors on an image-fitted emission model; gas and dust depth are not measured.",
-      "detail": "6582 × 4388 px",
+      "label": "Horálek · optical",
+      "title": "The LMC in visible light",
+      "description": "A photograph by Petr Horálek, made with a wide-aperture telephoto lens on a commercial camera, about four hours over three nights on Cerro Pachón, Chile. Its colors are a display choice, not calibrated measurements. Stars, gas and dust are placed from catalogues on the LMC’s measured warped disc, and the model is calibrated to this photograph. The photograph constrains one viewing direction; the depths of individual objects are adopted, not measured.",
+      "summary": "A photograph, not telescope data; its colors are a display choice, not measurements. The model is calibrated to it.",
+      "detail": "354 gas regions",
       "facts": [
         {
           "id": "bands",
-          "label": "Bands",
-          "value": "Visible-light photograph"
-        },
-        {
-          "id": "source-pixels",
-          "label": "Source pixels",
-          "value": "6582 × 4388"
+          "label": "Light",
+          "value": "Visible light; colors are a display choice"
         },
         {
           "id": "depth",
           "label": "Depth",
-          "value": "Image-fitted emission on a simulated stellar-density envelope"
+          "value": "Published disc and warp; adopted thicknesses and object depths"
         }
       ],
       "input": "horalek-widefield",
@@ -69,64 +47,60 @@
       }
     },
     {
-      "id": "vista-infrared",
-      "label": "ESO VISTA",
-      "title": "LMC in near infrared",
-      "description": "Near-infrared colors from ESO's VISTA survey are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All datasets share one opacity, so this dataset renders brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "Near-infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
-      "detail": "8954 × 10000 px",
+      "id": "decam-smash",
+      "label": "DECam · optical",
+      "title": "The LMC in the DECam survey",
+      "description": "The same stars, gas and dust, with colors graded to the DECam image from the SMASH survey, not reconstructed from it: no shape, gas or dust comes from that image. 68 of the 354 gas regions lie outside its frame and keep the same colors. The picture shown from far away carries only an overall color change.",
+      "summary": "The same model graded to the DECam image, not reconstructed from it. Some gas regions lie outside its frame.",
+      "detail": "354 gas regions",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared · Y / J / Ks"
+          "value": "Visible light"
         },
         {
-          "id": "source-pixels",
-          "label": "Source pixels",
-          "value": "8954 × 10000"
+          "id": "frame",
+          "label": "Outside the frame",
+          "value": "68 of 354 gas regions"
         },
         {
           "id": "depth",
           "label": "Depth",
-          "value": "Image-fitted emission on a simulated stellar-density envelope"
+          "value": "Published disc and warp; adopted thicknesses and object depths"
         }
       ],
-      "input": "vista-infrared",
+      "input": "decam-smash",
       "preview": {
-        "path": ".local/nebula-presentation/lmc-vista-infrared.jpg",
-        "url": "https://cdn.eso.org/images/screen/eso1914a.jpg"
+        "path": "src/objects/lmc-volume/.local/image-options/decam-smash.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/noirlab2030a.jpg"
       }
     },
     {
-      "id": "wise-wide-infrared",
-      "label": "NASA AllWISE",
-      "title": "LMC in WISE infrared",
-      "description": "Infrared colors from the NASA/IPAC AllWISE mosaic are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All datasets share one opacity, so this dataset renders much brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
-      "summary": "AllWISE infrared false color on an image-fitted emission model; gas and dust depth are not measured.",
-      "detail": "6000 × 6000 px",
+      "id": "vista-vmc",
+      "label": "VISTA · near infrared",
+      "title": "The LMC in near infrared",
+      "description": "The same stars, gas and dust, with colors graded to the VISTA near-infrared image from the VMC survey, not reconstructed from it: no shape, gas or dust comes from that image. Glowing gas is faint at these wavelengths, so it is not forced red. The picture shown from far away carries only an overall color change.",
+      "summary": "The same model graded to the VISTA image, not reconstructed from it. Gas is faint in this light.",
+      "detail": "354 gas regions",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Infrared display color · W4 / W2 / W1"
-        },
-        {
-          "id": "source-pixels",
-          "label": "Source pixels",
-          "value": "6000 × 6000"
+          "value": "Near infrared · Y / J / Ks"
         },
         {
           "id": "depth",
           "label": "Depth",
-          "value": "Image-fitted emission on a simulated stellar-density envelope"
+          "value": "Published disc and warp; adopted thicknesses and object depths"
         }
       ],
-      "input": "wise-wide-infrared",
+      "input": "vista-vmc",
       "preview": {
-        "path": "src/objects/lmc-volume/.local/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
-        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg"
+        "path": "src/objects/lmc-volume/.local/image-options/vista-vmc-preview.jpg",
+        "url": "https://cdn.eso.org/images/publicationjpg/eso1914a.jpg"
       }
     }
-  ]
+  ],
+  "inputEvidence": []
 }

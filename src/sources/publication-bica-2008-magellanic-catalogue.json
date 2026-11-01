@@ -1,0 +1,45 @@
+{
+  "id": "publication-bica-2008-magellanic-catalogue",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A general catalogue of extended objects in the Magellanic System",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1111/j.1365-2966.2008.13612.x"
+    },
+    {
+      "type": "arxiv",
+      "value": "0806.3049"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0806.3049",
+      "label": "arXiv:0806.3049"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1111/j.1365-2966.2008.13612.x",
+      "label": "DOI 10.1111/j.1365-2966.2008.13612.x"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0806.3049",
+      "checkedOn": "2026-10-31",
+      "locator": "Abstract; used in the LMC model: the clusters and associations the model places"
+    }
+  ],
+  "creators": [
+    "Eduardo Bica",
+    "Charles Bonatto",
+    "Carlos Dutra",
+    "Joao F. C. Santos",
+    "et al."
+  ],
+  "publicationDate": "2008",
+  "relations": [],
+  "statements": []
+}

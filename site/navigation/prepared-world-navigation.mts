@@ -147,7 +147,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const bank = DATASET_VOLUMES.get(volumeId), volume = !bank || (bank.host !== undefined && bank.host !== objectId) ? undefined : bank.frame;
       const frame = frames.get(objectId), owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, current = owner?.optics() ?? lastOptics;
-      if (!volume || !frame || !from || !current) return null;
+      if (!volume || !frame || !from || !current || bank?.opensOnBody && !always) return null;
       // The fitted camera carries no magnification, so the fit is made through the normal projection, like an overview's. An
       // arrival holds its close-up's magnification (3.76 on a phone): fitted through it, M 31 reached from another body
       // ended that many times farther out than its own page opens, about 20 px wide (2026-10-02).

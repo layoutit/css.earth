@@ -67,7 +67,7 @@ function cameraView(camera: ScaledCameraPose): readonly number[] {
 }
 
 export function axisWeights(camera: ScaledCameraPose, stacks: readonly WeightedVolumeStack[],
-  bounds: AxisAlignedBounds): readonly { weight: number; opticalGain: number }[] {
+  bounds: AxisAlignedBounds, thinHandover?: readonly [number, number]): readonly { weight: number; opticalGain: number }[] {
   const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
   const back: Vector = [matrix[2]!, matrix[5]!, matrix[8]!];
   const length = Math.hypot(...back);
@@ -95,7 +95,8 @@ export function axisWeights(camera: ScaledCameraPose, stacks: readonly WeightedV
     const approach = Math.max(0, Math.min(1, 1 - distance / Math.max(...extents)));
     const proximity = approach * approach * (3 - 2 * approach);
     const edge = Math.max(.02, aspect) + .4 * proximity;
-    const t = Math.max(0, Math.min(1, (cosines[thin]! - edge * .5) / (edge * .5)));
+    const t = thinHandover ? Math.max(0, Math.min(1, (cosines[thin]! - thinHandover[0]) / (thinHandover[1] - thinHandover[0])))
+      : Math.max(0, Math.min(1, (cosines[thin]! - edge * .5) / (edge * .5)));
     const face = t * t * (3 - 2 * t);
     weights = AXES.map((_, index) => index === thin ? face : (1 - face) * sideWeights[index]! / sideTotal);
   } else {

@@ -5,7 +5,7 @@ interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProje
   /** The closest framing, in the default framing's units (4 unless the body says otherwise). A black hole stops at its
    * default framing: closer, its shadow fills the view and the ring around it leaves the frame. */
   maximumZoom?:number;}
-interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'initialScenePitchDegrees'|'defaultControlYawDegrees'> {bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan;
+interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'initialScenePitchDegrees'|'defaultControlYawDegrees'> {/** Opt-in: the body-fixed direction the opening view looks from, when facing the Sun would be wrong for this object. */openingDirection?:Vector3;bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan;
   /** What lights the body's map: the Sun, the body itself (a placed star) or its host star (a planet of another star). */
   light?:'sun'|'self'|'host';}
 // Shared preparation of the physical camera and its sky/body reference frame.
@@ -109,9 +109,9 @@ function unitVector(direction: readonly number[]): Vector3 {
 
 export async function prepareSolarSystemScene(solarGeometry: SolarGeometry, options:SolarSceneOptions) {
   refuseAuthoredCameraAngles(options);
-  const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, geometryScale = 1, light = 'sun', maximumZoom } = options;
+  const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, geometryScale = 1, light = 'sun', maximumZoom, openingDirection } = options;
   const frame = prepareEclipticPresentationFrame(solarGeometry, bodyId);
-  const { initialScenePitchDegrees, defaultControlYawDegrees } = prepareDefaultCameraAngles(solarGeometry, bodyId, { light });
+  const { initialScenePitchDegrees, defaultControlYawDegrees } = prepareDefaultCameraAngles(solarGeometry, bodyId, { light, ...(openingDirection ? { observation: [openingDirection] } : {}) });
   const registration = prepareAstrometricSkySceneRegistration(solarGeometry, bodyId);
   if(!starfield.projection)throw new TypeError("Physical sky requires its prepared projection.");
   const camera = prepareSolarSystemCamera({ bodyRadiusUnits, defaultZoom, geometryScale, maximumZoom,

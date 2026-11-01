@@ -1,0 +1,45 @@
+{
+  "id": "publication-rathore-2025-lmc-bar",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Precise Measurements of the LMC Bar's Geometry With Gaia DR3 and a Novel Solution to Crowding Induced Incompleteness in Star Counting",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/ad93ae"
+    },
+    {
+      "type": "arxiv",
+      "value": "2410.18182"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2410.18182",
+      "label": "arXiv:2410.18182"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/1538-4357/ad93ae",
+      "label": "DOI 10.3847/1538-4357/ad93ae"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2410.18182",
+      "checkedOn": "2026-10-31",
+      "locator": "Abstract; used in the LMC model: the bar placement the model uses"
+    }
+  ],
+  "creators": [
+    "Himansh Rathore",
+    "Yumi Choi",
+    "Knut A. G. Olsen",
+    "Gurtina Besla",
+    "et al."
+  ],
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": []
+}

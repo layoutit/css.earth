@@ -1,0 +1,45 @@
+{
+  "id": "publication-oden-2026-magellanic-red-clump",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Warped & Hooked: Mapping the Magellanic Clouds in 3D using Red Clump stars",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/ae5c9e"
+    },
+    {
+      "type": "arxiv",
+      "value": "2512.04200"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2512.04200",
+      "label": "arXiv:2512.04200"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/1538-4357/ae5c9e",
+      "label": "DOI 10.3847/1538-4357/ae5c9e"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2512.04200",
+      "checkedOn": "2026-10-31",
+      "locator": "Abstract; used in the LMC model: the lmc distance surface the model uses"
+    }
+  ],
+  "creators": [
+    "Slater J. Oden",
+    "David L. Nidever",
+    "Joshua Povick",
+    "Pol Massana",
+    "et al."
+  ],
+  "publicationDate": "2026",
+  "relations": [],
+  "statements": []
+}

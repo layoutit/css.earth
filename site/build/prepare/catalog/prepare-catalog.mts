@@ -159,9 +159,9 @@ async function readDatasetVolumes(datasetBanks: readonly (readonly [string, stri
     if (!isRecord(descriptor) || !isRecord(descriptor.properties)) throw new TypeError(`src/objects/${volumeId}/object.json: the bank ${id} shows has no properties.`);
     // A bank of catalogue dots declares no frame: its object's own radius frames it.
     // A bank that names a host is that object's own extent (a galaxy's volume); another body may show it around itself.
-    const { frame, host } = descriptor.properties;
+    const { frame, host, opensOnBody } = descriptor.properties;
     if (host !== undefined && typeof host !== 'string') throw new TypeError(`src/objects/${volumeId}/object.json: properties.host must be an object id.`);
-    if (isRecord(frame)) volumes[volumeId] = { frame, ...(host === undefined ? {} : { host }) };
+    if (isRecord(frame)) volumes[volumeId] = { frame, ...(host === undefined ? {} : { host }), ...(opensOnBody === true ? { opensOnBody } : {}) };
   }
   return volumes;
 }

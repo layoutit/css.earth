@@ -62,7 +62,7 @@
             "kind": "unresolved",
             "label": "Petr Horálek",
             "evidence": "https://noirlab.edu/public/images/iotw2547a/",
-            "reason": "The photograph credits Petr Horálek but does not identify the individual camera."
+            "reason": "A photograph made with a wide-aperture telephoto lens on a commercial camera, about four hours over three nights on Cerro Pachón, Chile. No camera or lens model is published."
           }
         ]
       }
@@ -183,6 +183,279 @@
         ]
       },
       "dependencies": []
+    },
+    {
+      "id": "approved-l36-model",
+      "path": "src/objects/lmc-volume/source/preparation/l36/recipe.json",
+      "bytes": 682,
+      "credit": "The LMC model: published geometry with Gaia, MCPS, Bica, Hα, HERITAGE, Bell and OGLE records",
+      "dependencies": [
+        "sky-registration"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The accepted physical model, one fixed set of values and arrays. Its fitted values are in source/preparation/l36/ and its arrays under source/model/."
+      }
+    },
+    {
+      "id": "decam-smash",
+      "path": "src/objects/lmc-volume/.local/image-options/decam-smash.jpg",
+      "origin": "https://noirlab.edu/public/images/noirlab2030a/",
+      "sourceUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "title": "LMC SMASH mosaic · NOIRLab noirlab2030a",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+      "displayCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "role": "material",
+            "evidence": "src/objects/lmc-volume/source/presentation.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "decam-smash",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "blanco-4m",
+            "evidence": "https://noirlab.edu/public/images/noirlab2030a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vista-vmc",
+      "path": "src/objects/lmc-volume/.local/image-options/vista-vmc.jpg",
+      "origin": "https://www.eso.org/public/images/eso1914a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1914a/",
+      "title": "Large Magellanic Cloud · ESO eso1914a",
+      "credit": "ESO/VMC Survey",
+      "displayCredit": "ESO/VMC Survey",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1914a",
+            "role": "material",
+            "evidence": "src/objects/lmc-volume/source/image-candidates.json#/targets/0/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "vista-vmc",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1914a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "model-structure",
+      "path": "src/objects/lmc-volume/source/model/structure.json",
+      "bytes": 160563845,
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/389/678",
+      "title": "LMC model: 199,974 catalogue primitives and their owners",
+      "credit": "Bica et al. (2008) and companion catalogues, shaped by DeMCELS",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-owner-amplitudes",
+      "path": "src/objects/lmc-volume/source/model/owner-amplitudes.json",
+      "bytes": 1838487,
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/389/678",
+      "title": "LMC model: Fitted light of each catalogue owner",
+      "credit": "Fitted against the Horálek photograph",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-dust-clouds",
+      "path": "src/objects/lmc-volume/source/model/dust-clouds.json",
+      "bytes": 290465261,
+      "origin": "https://karllark.github.io/data_magclouds_dustmaps.html",
+      "title": "LMC model: 433,450 discrete dust clouds",
+      "credit": "Gordon et al. (2014) HERITAGE, foreground-scaled with Skowron et al. (2021) OGLE reddening",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-dust-column",
+      "path": "src/objects/lmc-volume/source/model/dust-column.f32le",
+      "bytes": 16777216,
+      "origin": "https://karllark.github.io/data_magclouds_dustmaps.html",
+      "title": "LMC model: Smooth dust column, 2,048 cells across 20 kpc",
+      "credit": "Gordon et al. (2014) HERITAGE",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-old-points-positions",
+      "path": "src/objects/lmc-volume/source/model/old-points-positions.f64le",
+      "bytes": 26195088,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: 1,091,462 resolved star positions",
+      "credit": "Gaia DR3",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-old-points-rgb",
+      "path": "src/objects/lmc-volume/source/model/old-points-rgb.f32le",
+      "bytes": 13097544,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Resolved star colors",
+      "credit": "Gaia DR3",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-old-points-components",
+      "path": "src/objects/lmc-volume/source/model/old-points-components.u8",
+      "bytes": 1091462,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Resolved star populations",
+      "credit": "Gaia DR3",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-field-disc",
+      "path": "src/objects/lmc-volume/source/model/field-disc.f32le",
+      "bytes": 16777216,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Disc density for far pictures, 2,048 cells",
+      "credit": "Gaia DR3 old members",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-field-bar",
+      "path": "src/objects/lmc-volume/source/model/field-bar.f32le",
+      "bytes": 16777216,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Bar density for far pictures, 2,048 cells",
+      "credit": "Gaia DR3 old members",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-field-young",
+      "path": "src/objects/lmc-volume/source/model/field-young.f32le",
+      "bytes": 16777216,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Young density for far pictures, 2,048 cells",
+      "credit": "Gaia DR3 and MCPS hot stars",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-slab-disc",
+      "path": "src/objects/lmc-volume/source/model/slab-disc.f32le",
+      "bytes": 1048576,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Disc density for near slabs, 512 cells",
+      "credit": "Gaia DR3 old members",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-slab-bar",
+      "path": "src/objects/lmc-volume/source/model/slab-bar.f32le",
+      "bytes": 1048576,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Bar density for near slabs, 512 cells",
+      "credit": "Gaia DR3 old members",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-slab-young",
+      "path": "src/objects/lmc-volume/source/model/slab-young.f32le",
+      "bytes": 4194304,
+      "origin": "https://gea.esac.esa.int/archive/",
+      "title": "LMC model: Young density for near slabs, 1,024 cells",
+      "credit": "Gaia DR3 and MCPS hot stars",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
+    },
+    {
+      "id": "model-oden-surface",
+      "path": "src/objects/lmc-volume/source/model/oden-surface.json",
+      "bytes": 74881,
+      "origin": "https://arxiv.org/abs/2512.04200",
+      "title": "LMC model: The published distance surface the warp is read from",
+      "credit": "Oden et al. (2026) red clump",
+      "acquisition": "The accepted model's own output, not a publisher file: it is restored only from the source mirror. Rebuilding it from the origin would mean repeating the owner-reviewed fitting rounds, whose code is in Git history and is not part of this bake.",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Output of the accepted model's fitting rounds, kept as the bake's input."
+      }
     }
   ],
   "documents": [
@@ -3168,7 +3441,8 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
-      }
+      },
+      "bytes": 1725
     },
     {
       "id": "retained-evidence-22",
@@ -3234,6 +3508,5 @@
         ]
       }
     }
-  ],
-  "generatedIntermediates": []
+  ]
 }

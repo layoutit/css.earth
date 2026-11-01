@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { validatePreparedCssVolume, type PreparedCssVolume, type VolumeVector } from '@cssearth/objects';
-import { mountPreparedCssVolume, preparedVolumeTexturePaths, STACK_OPACITY_CEILING } from './prepared-volume-runtime.ts';
+import { mountPreparedCssVolume, preparedVolumeTexturePaths, STACK_OPACITY_CEILING, transparentStackOpacities, completedStackOpacities } from './prepared-volume-runtime.ts';
 import type { VolumeCameraPublication } from './types.ts';
 
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
@@ -55,6 +55,15 @@ function publication(direction: VolumeVector, position: VolumeVector = [0, 0, 10
 }
 afterEach(() => unstubAllGlobals());
 
+test('normalized transparent overlap cannot exceed the weighted completed emission', () => {
+  for (const weights of [[1, 1, 0], [1, 1, 1], [1, .2, .6]]) for (const alpha of [.05, .5, 1]) {
+    const opacities = transparentStackOpacities(weights); let actual = 0, ceiling = 0;
+    for (let i = 0; i < 3; i++) { const emission = [.2, .7, .4][i]! * alpha, share = opacities[i]!; actual = emission * share + actual * (1 - alpha * share); ceiling += emission * share; }
+    assert.ok(actual <= ceiling + 1e-14); assert.ok(opacities.reduce((s, v) => s + v, 0) <= .999001);
+  }
+  assert.notDeepEqual(transparentStackOpacities([1, 1, 0]), completedStackOpacities([1, 1, 0]), 'Opaque compensation is invalid for a transparent footprint');
+});
+
 test('fixed images keep one full-opacity prepared quad per leaf for every direction and camera distance', () => {
   const source = payload(6), fixed = { ...source, fixedImages: true as const,
     stacks: source.stacks.map(stack => stack.axis === 'z' ? stack : { ...stack, leaves: [] }) };
@@ -100,6 +109,16 @@ function opticalGain(root: FakeElement): number {
   return root.children[0]!.children[0]!.children[0]!.children.slice(0, 3)
     .reduce((sum, copy) => sum + copyOpacity(copy), 0);
 }
+
+test('hybrid slabs publish two dense optical layers and keep the retained geometry stable',()=>{
+  const original=payload(),stacks=original.stacks.map(stack=>({...stack,leaves:stack.leaves.map(leaf=>({...leaf,opticalSlab:{id:leaf.id,role:'merged-three' as const}}))})),base=stacks[2]!.leaves[0]!;
+  const data:PreparedCssVolume={...original,mergedOpticalCopies:3,frame:{...original.frame,boundsUnits:{min:[-1,-1,-.1],max:[1,1,.1]}},stacks:[stacks[0]!,stacks[1]!,{axis:'z',leaves:[{...base,opticalSlab:{id:base.id,role:'single'}},{...base,id:'z-pair',opticalSlab:{id:base.id,role:'merged-two'}}]}]};
+  const {runtime,meshes,document}=mount(data,true),nodes=meshes.flatMap(m=>m.children),count=document.count;
+  runtime.publish(publication([0,0,1]));assert.equal(copyOpacity(meshes[2]!.children[0]!),.998);assert.equal(copyOpacity(meshes[2]!.children[1]!),.001);
+  runtime.publish(publication([0,Math.sqrt(3),1]));assert.equal(copyOpacity(meshes[2]!.children[0]!),.998);assert.equal(copyOpacity(meshes[2]!.children[1]!),127/255);
+  assert.equal(nodes.length,4);assert.equal(document.count,count);assert.deepEqual(meshes.flatMap(m=>m.children),nodes);
+  for(const node of nodes)node.propertyWrites.length=0;runtime.publish(publication([0,Math.sqrt(3),1]));assert.deepEqual(nodes.flatMap(n=>n.propertyWrites),[]);
+});
 
 test('optical copies reuse canonical textures and transforms inside isolated unflattened axis cameras', () => {
   const { data, runtime, roots, meshes, resolver } = mount(payload(3)); runtime.publish(publication([1, 1, 1]));

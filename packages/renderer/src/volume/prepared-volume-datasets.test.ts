@@ -256,6 +256,13 @@ test('a cloud has its strength from the publication that turns to a stack, befor
   runtime.destroy();
 });
 
+test('finite-only transparent volumes keep their exposure when the parent has no slab leaves', () => {
+  const brightness = { overall: .8, x: 1, y: 1, z: 1 };
+  assert.equal(volumeDatasetCompositeOpacity([], brightness, 'transparent-normalized'), .8);
+  assert.equal(volumeDatasetCompositeOpacity([{ axis: 'z', opacity: 0, visible: false }], brightness, 'transparent-normalized'), .8);
+  assert.equal(volumeDatasetCompositeOpacity([{ axis: 'y', opacity: .4995, visible: true }, { axis: 'z', opacity: .4995, visible: true }], brightness, 'transparent-normalized'), .8);
+});
+
 test('axis brightness matches the lab completed-image oracle through handoffs and stays outside cloud geometry', () => {
   const f = dom(), data = payload(), runtime = createPreparedVolumeDatasets({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
   const root = runtime.root as unknown as FakeElement;

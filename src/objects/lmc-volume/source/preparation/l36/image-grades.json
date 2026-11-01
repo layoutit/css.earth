@@ -1,0 +1,241 @@
+{
+ "decam": {
+  "spectral": "optical",
+  "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+  "placement": {
+   "dxArcmin": 0,
+   "dyArcmin": -0.25,
+   "rotDeg": 0,
+   "scale": 0.999375,
+   "north": 376.91999999999996,
+   "mirror": 1
+  },
+  "correlation": 0.935,
+  "residualsArcmin": {
+   "30 Doradus": 0.31,
+   "N11": 0.9,
+   "N44": 2.11,
+   "N119": 0.1,
+   "N206": 3.11,
+   "N79": 0.28,
+   "NGC 1850": 0.86,
+   "NGC 2100": 0.25
+  },
+  "worstResidualArcmin": 3.11,
+  "trainShare": 0.671,
+  "lit": 354,
+  "outside": [
+   "DEM42",
+   "DEM44",
+   "DEM46",
+   "DEM47",
+   "DEM61",
+   "DEM72",
+   "DEM116",
+   "DEM118",
+   "DEM125",
+   "DEM136",
+   "DEM138",
+   "DEM139",
+   "DEM142",
+   "DEM154",
+   "DEM155a",
+   "DEM161",
+   "DEM162",
+   "DEM175",
+   "DEM175a",
+   "DEM181",
+   "DEM182",
+   "DEM183",
+   "DEM185",
+   "DEM189",
+   "DEM189a",
+   "DEM189b",
+   "DEM190",
+   "DEM191",
+   "DEM195",
+   "DEM204",
+   "DEM214",
+   "DEM220",
+   "DEM228",
+   "DEM228a",
+   "DEM228b",
+   "DEM235",
+   "DEM237",
+   "DEM239",
+   "DEM243",
+   "DEM244",
+   "DEM247",
+   "DEM251",
+   "DEM252",
+   "DEM253",
+   "DEM254",
+   "DEM255",
+   "DEM256",
+   "DEM257",
+   "DEM264",
+   "DEM270",
+   "DEM286",
+   "DEM296",
+   "DEM303",
+   "DEM305",
+   "DEM306",
+   "DEM308",
+   "DEM309",
+   "KDS-SGS14",
+   "DEM28",
+   "DEM35",
+   "DEM43",
+   "DEM48",
+   "DEM126",
+   "DEM137",
+   "DEM137a",
+   "DEM155",
+   "KDS-SGS3",
+   "KDS-SGS6"
+  ],
+  "wholeLightModelOverImage": 0.948,
+  "wholeLightHoralekOverImage": 1.017,
+  "channelGains": [
+   0.8342131345053005,
+   0.9545816144155935,
+   1.0554310972552845
+  ],
+  "fitValues": {
+   "disc": 2.0943218923146736,
+   "bar": 1.0609,
+   "young": 0.6239976788218499,
+   "gas": 0.4174829191749999,
+   "redTint": 0.6832726414499999,
+   "blueTint": 1.5790117330000004
+  },
+  "grade": {
+   "coefficients": [
+    [
+     0.4281314173658439,
+     0.23636296460807776,
+     0.0033069588406436337
+    ],
+    [
+     0.8575513942157548,
+     1.9546075542742558,
+     2.6627200800844326
+    ],
+    [
+     0.04888228303254743,
+     0.15639033179729442,
+     0.5081983081010809
+    ],
+    [
+     0.7698215933175241,
+     0.12807854731516496,
+     0.10362252575433274
+    ]
+   ],
+   "dustStrength": 1.0919999999999999,
+   "dustTint": [
+    1,
+    1,
+    1
+   ],
+   "stretch": 20,
+   "saturation": 0.5,
+   "score": 0.30010069453056615,
+   "youngColor": {
+    "tint": [
+     0.6297925322169808,
+     1,
+     1.0728934527324216
+    ],
+    "saturation": 1.2169717439475625
+   }
+  }
+ },
+ "vista": {
+  "spectral": "near infrared",
+  "credit": "ESO/VMC survey",
+  "placement": {
+   "dxArcmin": 4,
+   "dyArcmin": 0,
+   "rotDeg": 0.25,
+   "scale": 0.9775,
+   "north": 2.4,
+   "mirror": 1
+  },
+  "correlation": 0.769,
+  "residualsArcmin": {
+   "30 Doradus": 1.87,
+   "N11": 2.98,
+   "N44": 3.86,
+   "N119": 1.2,
+   "N206": 3.27,
+   "N79": 1.26,
+   "NGC 1850": 3.5,
+   "NGC 2100": 2.31
+  },
+  "worstResidualArcmin": 3.86,
+  "trainShare": 0.679,
+  "lit": 354,
+  "outside": [
+   "DEM137",
+   "DEM137a",
+   "KDS-SGS6"
+  ],
+  "wholeLightModelOverImage": 1.01,
+  "wholeLightHoralekOverImage": 3.205,
+  "channelGains": [
+   0.29636744933329756,
+   0.3245947506593975,
+   0.29303048967522466
+  ],
+  "fitValues": {
+   "disc": 0.39009740754762556,
+   "bar": 0.3711380049999998,
+   "young": 0.1546375447714337,
+   "gas": 0.1546375447714337,
+   "redTint": 0.8004771638499999,
+   "blueTint": 1.2120266882194912
+  },
+  "grade": {
+   "coefficients": [
+    [
+     0.09342468567665559,
+     0.04402598285976781,
+     0.00047280846895295786
+    ],
+    [
+     0.35146011917014675,
+     0.6837865475080368,
+     0.7150119804188932
+    ],
+    [
+     0.01419182894231688,
+     0.03875626105017599,
+     0.0966700653376163
+    ],
+    [
+     0.33405750872605394,
+     0.04744086808113667,
+     0.029461661388242008
+    ]
+   ],
+   "dustStrength": 1.0919999999999999,
+   "dustTint": [
+    1,
+    1,
+    1
+   ],
+   "stretch": 20,
+   "saturation": 0.5,
+   "score": 0.48422559871788773,
+   "youngColor": {
+    "tint": [
+     0.6297925322169808,
+     1,
+     1.0728934527324216
+    ],
+    "saturation": 1.2169717439475625
+   }
+  }
+ }
+}

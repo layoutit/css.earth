@@ -1,7 +1,7 @@
 /** Grow prepared image leaves in the accepted leaf's affine/raster calibration. */
 import {compileCssVolume} from '@cssearth/bake/volume-leaves';
-import {validatePreparedCssVolume,type PreparedCssVolume} from '@cssearth/objects';
-import {galaxySlices,record} from './galaxy-slices.mts';
+import {validatePreparedCssVolume,type PreparedCssVolume,type PreparedVolumeLeaf} from '@cssearth/objects';
+import {galaxySlices,record,type GalaxyModelBinding} from './galaxy-slices.mts';
 
 function numeric(value:unknown):number{
  if(typeof value!=='number'||!Number.isFinite(value))throw new TypeError('Expected finite image calibration.');return value;
@@ -12,9 +12,15 @@ function px(text:string):number{
 function vector(input:unknown,length:number):number[]{
  if(!Array.isArray(input)||input.length!==length)throw new TypeError('Invalid image crop.');return input.map(numeric);
 }
-export function compileGalaxySliceVolume(input:unknown,physicalFrame:unknown,directory:string,id:string):PreparedCssVolume{
- const data=record(input),prepared=galaxySlices(data,physicalFrame,directory);
- const compiled=compileCssVolume({id,frame:prepared.frame,slices:prepared.slices,recipe:{anchors:[]}});
+export function compileGalaxySliceVolume(input:unknown,physicalFrame:unknown,directory:string,id:string,model?:GalaxyModelBinding):PreparedCssVolume{
+ const data=record(input),prepared=galaxySlices(data,physicalFrame,directory,model);
+ const initial=compileCssVolume({id,frame:prepared.frame,slices:prepared.slices,recipe:{anchors:[]}});
+ const compiled=model?validatePreparedCssVolume({...initial,mergedOpticalCopies:3,stacks:initial.stacks.map(stack=>({...stack,leaves:stack.leaves.map(leaf=>{
+  const source=Array.isArray(data.leaves)?data.leaves.map(record).find(v=>`${model.texturePrefix}/${String(v.texturePath)}`===leaf.texturePath):undefined;
+  if(!source?.opticalSlab)return leaf;const optical=record(source.opticalSlab),role=optical.role;
+  if(typeof optical.id!=='string'||(role!=='single'&&role!=='merged-two'&&role!=='merged-three'))throw new TypeError('Invalid hybrid optical role');
+  const result:PreparedVolumeLeaf={...leaf,opticalSlab:{id:optical.id,role}};return result;
+ })}))}):initial;
  if(!record(data.bakeControls??{}).inPlaneField)return compiled;
  if(!Array.isArray(data.leaves))throw new TypeError('Missing extended image leaves.');
  const inputs=data.leaves.map(record);
@@ -23,10 +29,10 @@ export function compileGalaxySliceVolume(input:unknown,physicalFrame:unknown,dir
   const crop=vector(leaf.canonicalCrop,4),a='xyz'.indexOf(String(leaf.axis)),h=a===0?1:0,v=a===2?1:2;
   if(!crop.every(n=>Number.isInteger(n)&&n>=0)||crop[2]!==dims[h]||crop[3]!==dims[v]||crop[0]!+crop[2]!>numeric(leaf.width)||crop[1]!+crop[3]!>numeric(leaf.height))throw new TypeError('Invalid canonical image crop.');
   return {...leaf,imageBounds:undefined,width:crop[2],height:crop[3]};
- })},physicalFrame,directory);
+ })},physicalFrame,directory,model);
  const base=compileCssVolume({id,frame:canonical.frame,slices:canonical.slices,recipe:{anchors:[]}});
  return validatePreparedCssVolume({...compiled,stacks:compiled.stacks.map((stack,i)=>({...stack,leaves:stack.leaves.map(leaf=>{
-  const previous=base.stacks[i]!.leaves.find(l=>l.id===leaf.id),source=inputs.find(l=>`b30-slices/${String(l.texturePath)}`===leaf.texturePath);
+  const previous=base.stacks[i]!.leaves.find(l=>l.id===leaf.id),source=inputs.find(l=>`${model?.texturePrefix??'b30-slices'}/${String(l.texturePath)}`===leaf.texturePath);
   if(!previous||!source)throw new TypeError('Missing canonical image calibration.');
   const [x,y,w,h]=vector(source.canonicalCrop,4);
   const text=previous.style.transform;
