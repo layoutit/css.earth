@@ -9,6 +9,7 @@ import { json, need } from '../inputs.mts';
 import { discBacking, type BackingRecord } from './backing-disc.mts';
 import { SMOOTH_BACKGROUND_DIR } from './background-all.mts';
 import { L37_DIR } from './regions.mts';
+import { slabImage, slabLeaf } from './slab-delivery.mts';
 
 const OBJECT = 'src/objects/lmc-volume/', PREPARED = OBJECT + 'prepared', STAGE = L37_DIR + 'install-stage', ARMS = { 'decam-smash': 'decam', 'vista-vmc': 'vista' } as const;
 /** The sight-line cosines between which the thin stack hands over to the side stacks. */
@@ -22,13 +23,14 @@ export async function install() {
   const sourceUrl = (input: string) => { const url = manifest.inputs.find(i => i.id === input)?.sourceUrl; need(url, 'A dataset input has no source URL: ' + input); return url!; };
   await rm(STAGE, { recursive: true, force: true }); await cp(PREPARED, STAGE, { recursive: true });
   const put = async (from: string, to: string) => { await mkdir(dirname(STAGE + '/' + to), { recursive: true }); await writeFile(STAGE + '/' + to, await readFile(from)); return (await stat(from)).size; };
-  const resources = await Promise.all(native.resources.map(async r => r.path.startsWith('l36-near/') ? { ...r, bytes: await put(SMOOTH_BACKGROUND_DIR + 'bank/' + r.path.slice(9), r.path) } : r));
+  const putSlab = async (from: string, to: string) => { const { bytes, width, height } = await slabImage(from); await mkdir(dirname(STAGE + '/' + to), { recursive: true }); await writeFile(STAGE + '/' + to, bytes); return { bytes: bytes.length, width, height }; };
+  const resources = await Promise.all(native.resources.map(async r => r.path.startsWith('l36-near/') ? { ...r, ...await putSlab(SMOOTH_BACKGROUND_DIR + 'bank/' + r.path.slice(9), r.path) } : r));
   for (const name of ['gas-dots.bin', 'gas-dots-atlas.webp']) await put(L37_DIR + 'dots-all/' + name, name);
-  const first = validatePreparedCssVolume({ ...native, resources, pointOverlays: ['gas-dots.bin'], thinHandoverCosines: HANDOVER, stackCompositing: 'transparent-normalized', impostors: { ...native.impostors!, discPlane: DISC_PLANE } });
+  const first = validatePreparedCssVolume({ ...native, resources, stacks: native.stacks.map(s => ({ ...s, leaves: s.leaves.map(slabLeaf) })), pointOverlays: ['gas-dots.bin'], thinHandoverCosines: HANDOVER, stackCompositing: 'transparent-normalized', impostors: { ...native.impostors!, discPlane: DISC_PLANE } });
   const text = (id: string) => { const r = presented.find(d => d.id === id); need(r, 'No presentation record for ' + id); return r!; }, datasets = [{ ...base, volume: first, stars: { ...base.stars, frame: first.frame }, label: text(base.id).label, title: text(base.id).title, description: text(base.id).description, sourceUrl: sourceUrl(text(base.id).input) }];
   for (const [id, arm] of Object.entries(ARMS)) {
     const rename = (path: string) => path.replace(/^l36-near\//u, arm + '-near/').replace(/^l36-far\//u, arm + '-far/'), swap = <T extends { texturePath: string }>(leaf: T) => ({ ...leaf, texturePath: rename(leaf.texturePath) });
-    const own = await Promise.all(first.resources.map(async r => { const from = r.path.startsWith('l36-near/') ? L37_DIR + 'background-' + arm + '/bank/' + r.path.slice(9) : L37_DIR + 'grades/' + arm + '-far/' + r.path.slice(8); return { ...r, path: rename(r.path), bytes: await put(from, rename(r.path)) }; }));
+    const own = await Promise.all(first.resources.map(async r => { if (r.path.startsWith('l36-near/')) return { ...r, path: rename(r.path), ...await putSlab(L37_DIR + 'background-' + arm + '/bank/' + r.path.slice(9), rename(r.path)) }; return { ...r, path: rename(r.path), bytes: await put(L37_DIR + 'grades/' + arm + '-far/' + r.path.slice(8), rename(r.path)) }; }));
     for (const name of ['gas-dots-' + arm + '.bin', 'gas-dots-' + arm + '-atlas.webp']) await put(L37_DIR + 'dots-' + arm + '/' + name, name);
     const volume = validatePreparedCssVolume({ ...first, pointOverlays: ['gas-dots-' + arm + '.bin'], resources: own, stacks: first.stacks.map(s => ({ ...s, leaves: s.leaves.map(swap) })), impostors: { ...first.impostors!, views: first.impostors!.views.map(swap) } });
     datasets.push({ ...datasets[0]!, id, label: text(id).label, title: text(id).title, description: text(id).description, sourceUrl: sourceUrl(text(id).input), volume });
