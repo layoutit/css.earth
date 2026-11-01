@@ -238,7 +238,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource, residen
       };
       /** `holdMembership`: the camera coasts, so the surface keeps the root it is in until the coast stops
        * (motion-freezes-membership.md). */
-      const publish = (publication: VolumeCameraPublication, visible = true, holdMembership = false, fade = 1) => {
+      const publish = (publication: VolumeCameraPublication, visible = true, holdMembership = false) => {
         if (destroyed) return;
         // A hidden bank must forget its last near camera; otherwise selecting a
         // dataset while zoomed out could load detail using that stale publication.
@@ -261,7 +261,6 @@ export function createPreparedVolumeDatasets({ payload, resolveResource, residen
           if (bank.surface.parentNode !== target && !holdMembership) target.insertBefore(bank.surface, marker);
         }
         const builtRoots = bank.runtime.roots.length;
-        bank.runtime.setFade(fade);
         bank.runtime.publish(publication);
         // The slice renderer is built on the first close publication; the bank's resident count follows it.
         if (bank.runtime.roots.length !== builtRoots) {
@@ -281,7 +280,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource, residen
         if (!holdMembership) retiringOverlays = [];
         if (pointOverlays) {
           const projection = dataset.volume.impostors ? projectVolumeImpostors(publication, dataset.volume.frame, dataset.volume.impostors) : null;
-          for (const overlay of pointOverlays) { overlay.setCoasting(holdMembership); overlay.publish(publication, fade * (projection ? (projection.visible ? projection.volumeMix : 0) : 1)); }
+          for (const overlay of pointOverlays) { overlay.setCoasting(holdMembership); overlay.publish(publication, projection ? (projection.visible ? projection.volumeMix : 0) : 1); }
         }
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, dataset.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);

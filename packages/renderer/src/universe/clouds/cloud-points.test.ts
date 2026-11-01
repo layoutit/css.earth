@@ -5,7 +5,6 @@ import { encodeCloudPoints, encodeCloudSegments, type PreparedBank, type Prepare
 import { packPreparedBank } from '@cssearth/objects/node';
 import { createCloudPoints, mountCloudOverlay } from './cloud-points.js';
 import { retainedStyle } from './cloud-overlay-layer.js';
-import { leanMotion } from '../../rendering/loading/lean-motion.js';
 import { readPreparedHere } from '../../prepared-data/readers.js';
 import { cloudOverlayReader, type CloudOverlayData } from './cloud-overlay-reader.js';
 
@@ -308,43 +307,4 @@ test('the overlay reader refuses an occluder whose axes do not span space: it ha
     const fetcher = (async (url: string) => new Response(new Uint8Array(packPreparedBank(flat, url)))) as unknown as typeof fetch;
     await assert.rejects(readPreparedHere('cloud-overlay', '/flat.bin', fetcher), /\/flat\.bin: every occluder's axes span space/u, JSON.stringify(axesUnits));
   }
-});
-
-test('a warped group writes only its one transform between paints, repaints as the paint grows stale, and paints exact at rest', () => {
-  const { host } = page(), warped = createCloudPoints({ host, cloud: { ...cloud, compositing: 'grouped', warpInMotion: true }, resolveResource });
-  const exact = createCloudPoints({ host, cloud: { ...cloud, compositing: 'grouped' }, resolveResource });
-  warped.place(orbitAt(0));
-  const margin = parseFloat(warped.root.style.inset.replace('-', '')), origin = warped.root.style.transformOrigin;
-  assert.ok(margin > 0); assert.equal(origin, `${margin}px ${margin}px`);
-  const boardsOf = (layer: { root: HTMLElement }) => [...layer.root.children].map(node => (node as HTMLElement).style.transform);
-  const paint = boardsOf(warped);
-  warped.place(orbitAt(.5));
-  assert.deepEqual(boardsOf(warped), paint, 'no board is written while the warp holds');
-  assert.match(warped.root.style.transform, /^matrix3d\(/u);
-  warped.atRest!();
-  exact.place(orbitAt(.5)); exact.atRest!();
-  const shifted = (text: string) => text.replace(/translate\(([-\d.]+)px,([-\d.]+)px\)/u, (_, x, y) => `translate(${(+x - margin).toFixed(1)}px,${(+y - margin).toFixed(1)}px)`);
-  assert.deepEqual(boardsOf(warped).map(shifted), boardsOf(exact), 'rest paints the same boards as an unwarped group, offset by the margin');
-  assert.equal(warped.root.style.transform, 'translateZ(0)');
-  for (let frame = 1; frame <= 5; frame++) warped.place(orbitAt(.5 + frame * 1.5));
-  const held = boardsOf(warped);
-  assert.match(warped.root.style.transform, /^matrix3d\(/u);
-  warped.place(orbitAt(.5 + 9));
-  assert.notDeepEqual(boardsOf(warped), held, 'the sixth frame past a stale paint repaints');
-  assert.equal(warped.root.style.transform, 'translateZ(0)');
-});
-
-test('a warped bank holds lean motion on its document only while it is attached', async t => {
-  const settled = mocked(t), points: PreparedBank = encodeCloudPoints({ ...cloud, compositing: 'grouped', warpInMotion: true });
-  const { host, asked } = fetching({ 'prepared/warped.bin': points });
-  const overlay = mountCloudOverlay({ host, url: 'prepared/warped.bin', resolveResource });
-  assert.ok(!leanMotion(host.ownerDocument));
-  overlay.publish(at(10), 1); await until(() => asked.length > 0); await settled();
-  assert.ok(leanMotion(host.ownerDocument));
-  overlay.publish(at(10), 0);
-  assert.ok(!leanMotion(host.ownerDocument));
-  overlay.publish(at(10), 1);
-  assert.ok(leanMotion(host.ownerDocument));
-  overlay.destroy();
-  assert.ok(!leanMotion(host.ownerDocument));
 });

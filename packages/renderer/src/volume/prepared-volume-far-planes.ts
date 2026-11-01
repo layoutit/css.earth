@@ -177,7 +177,7 @@ export function mountPreparedVolumeFarPlanes(options: PreparedVolumeMountOptions
       layer.setTexture(index === 2 ? bank.stacks[0]!.leaves[level]!.texturePath : level ? bank.side.highTexturePath : bank.side.leaf.texturePath);
     }
   }
-  const runtime: PreparedVolumeLodRuntime = Object.freeze({ roots, publish, setFade() {},
+  const runtime: PreparedVolumeLodRuntime = Object.freeze({ roots, publish,
     setDetail(value: boolean) { allowed = value; },
     setPresentation(payload: PreparedVolumeMountOptions['payload']) {
       const next = validatePreparedCssVolume(payload);

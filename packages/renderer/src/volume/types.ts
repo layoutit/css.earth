@@ -34,8 +34,6 @@ export interface PreparedVolumeRuntime {
 
 /** Material changes apply to full-resolution slices; impostor banks remain separate. */
 export interface PreparedMaterialVolumeRuntime extends PreparedVolumeRuntime {
-  /** A fade on the stacks' own opacity in place of a surface round them. Takes effect with the next publication. */
-  setCompletedGain(gain: number): void;
   setTextures(urls: readonly string[]): void;
   setTexture(index: number, url: string): void;
   /** Replace every slice material while retaining the prepared geometry nodes. */
@@ -54,8 +52,6 @@ export interface VolumeLocalCamera {
 }
 
 export interface PreparedVolumeLodRuntime extends PreparedVolumeRuntime {
-  /** In lean motion, the bank's fade carried here instead of on a surface round the presentation. */
-  setFade(fade: number): void;
   /** Replace prepared pixels and atlas sampling on one retained spatial topology. */
   setPresentation(payload: PreparedVolumeMountOptions['payload']): void;
   /** Whether the slice stack may present at all. Denied, the billboard views carry the cloud at every size; the

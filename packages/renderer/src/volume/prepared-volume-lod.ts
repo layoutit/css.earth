@@ -1,4 +1,3 @@
-import { leanMotion } from '../rendering/loading/lean-motion.js';
 import { samePreparedVolumeTopology, validatePreparedCssVolume } from '@cssearth/objects';
 import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
 import { mountPreparedVolumeFarPlanes } from './prepared-volume-far-planes.js';
@@ -29,7 +28,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const roots: HTMLElement[] = [];
     const build = () => { runtime = mountPreparedCssVolume({ ...options, payload: current }); roots.push(...runtime.roots); return runtime; };
     if (!options.lazyDetail) build();
-    return Object.freeze({ roots, setFade() {}, publish(publication: VolumeCameraPublication) {
+    return Object.freeze({ roots, publish(publication: VolumeCameraPublication) {
       if (destroyed) return;
       (runtime ?? build()).publish(publication);
     }, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
@@ -95,7 +94,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
   }));
   let destroyed = false, active: readonly string[] = [...views.keys()], detailAllowed = true;
   // What this view last wrote: the full presentation starts hidden, and none of it is read back from the page.
-  let fullShown = false, fade = 1;
+  let fullShown = false;
   const publish = (publication: VolumeCameraPublication) => {
     if (destroyed) return;
     const projection = projectVolumeImpostors(publication, options.payload.frame, bank,
@@ -118,17 +117,14 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     writeStyle(full, 'display', detailVisible ? 'block' : 'none'); fullShown = detailVisible;
     writeStyle(distant, 'display', impostorsVisible ? 'block' : 'none');
     // The responsive fade is a CSS expression of the viewport; each presentation's opacity states it in full.
-    const nativeFade = responsive ? nativeProjectedFade(diameterPixels,
+    const fade = responsive ? nativeProjectedFade(diameterPixels,
       publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : '';
     if (detailVisible) {
       const volume = detail();
-      // In lean motion the fade goes on the stacks: a surface round their surfaces stalled the phone's GPU thread for 14 to 36 ms a pass through a crossfade.
-      const lean = !responsive && leanMotion(full.ownerDocument);
-      volume.setCompletedGain(lean ? fade * volumeMix * completedOpacity(volume) : 1);
       volume.publish(publication);
-      writeStyle(full, 'opacity', lean ? '1' : responsive ? `calc(${nativeFade} * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume)));
+      writeStyle(full, 'opacity', responsive ? `calc(${fade} * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume)));
     }
-    writeStyle(distant, 'opacity', !detailAllowed ? '' : responsive ? `calc(1 - ${nativeFade})` : String(fade * (1 - volumeMix)));
+    writeStyle(distant, 'opacity', !detailAllowed ? '' : responsive ? `calc(1 - ${fade})` : String(1 - volumeMix));
     const next = projection.views.map(view => view.id);
     for (const id of active) if (!next.includes(id)) writeStyle(views.get(id)!, 'display', 'none');
     // Only the few contributing projections receive screen transforms. Textures and cloud geometry stay fixed.
@@ -147,7 +143,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     active = next;
     writeData(distant, 'activeViews', String(next.length));
   };
-  return Object.freeze({ roots, publish, setFade(value: number) { fade = value; }, setDetail(allowed: boolean) { detailAllowed = allowed; }, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
+  return Object.freeze({ roots, publish, setDetail(allowed: boolean) { detailAllowed = allowed; }, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
     const next = validatePreparedCssVolume(payload);
     if (!samePreparedVolumeTopology(initial, next)) throw new TypeError('Prepared volume presentation has a different topology.');
     presentation = next;
