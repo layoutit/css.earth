@@ -26,7 +26,7 @@ The adopted Gaussian thicknesses remain 410 pc for the old disc, 367 pc for the 
 3. **Slab delivery.** Each image is rendered at 2,054 px and ships at half that, 1,027 px across 20 kpc (19.5 pc per texel), in a box a third of its width and scaled back up. [Phone measurements](../../../packages/bake/authoring/lmc-volume/datasets/slab-delivery.mts) set this form.
 4. **Far pictures.** Eight 3,072 px model pictures (9.31 pc per texel at the disc centre) on 9.77 pc population grids, including the Sun direction, face-on, 45 degrees and edge-on. Pictures alone carry projected diameters below 128 px and slabs alone carry diameters above 256 px, with a blend between. The universe backing is the face-on picture laid in the disc plane.
 5. **Dots.** 354 lit gas regions become 300 billboards, and the discrete dust clouds become 139 flat patches. Each dataset's dots share one grouped layer. Their [gains](source/preparation/l36/gas-dot-gains.json) were measured once against the slab delivery the gas came from.
-6. **Install.** The last stage writes the three-dataset bank and the object text and inventories. A rerun from the same inputs reproduces the published files byte for byte.
+6. **Install.** The last stage writes the three-dataset bank and the object text and inventories. Rerun from the existing slab banks and far pictures, it reproduces both inventories byte for byte.
 
 The full bake takes about 20 minutes for the slabs and 80 for the far pictures, on six workers of an M5 Pro. Run one stage on a small slice first (`slabs horalek --planes=22`).
 
@@ -38,7 +38,7 @@ The DECam and VISTA [grades](source/preparation/l36/image-grades.json) are recor
 
 ## Validation
 
-- A rebake from the restored model reproduces every published file of this object and of `lmc`, and the two inventories, byte for byte.
+- Installing from the existing slab banks and far pictures reproduces every published file of this object and of `lmc`, and the two inventories, byte for byte. A full rebake from a clean checkout has not been completed: a slab plane and a far tile matched the published bytes, but the run was stopped before far-bank, grades, dots and install.
 - Slab and far-picture tests hold the interval, strip and shortcut rules: a slab holds only its own interval, strips join to the whole plane, and the far-picture shortcuts change no pixel of a finite nebula.
 - Earlier comparisons against the physical reference measured the first slab form, not the shipped gas-free, half-resolution one. They are in Git history and are not claimed here.
 
