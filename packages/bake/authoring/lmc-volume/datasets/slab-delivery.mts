@@ -12,19 +12,20 @@ import type { PreparedCssVolume } from '@cssearth/objects';
 export const SLAB_IMAGE_DIVISOR = 2, SLAB_BOX_DIVISOR = 3;
 type Leaf = PreparedCssVolume['stacks'][number]['leaves'][number];
 
-/** The same rectangle on screen from a smaller box: the matrix's two edge columns grow by what the box lost. */
-export function slabLeaf(leaf: Leaf): Leaf {
+/** The same rectangle on screen from a smaller box: the matrix's two edge columns grow by what the box lost. The sizes
+ * follow from the source image, whose full box is half its pixels, so a bank that already ships this form installs unchanged. */
+export function slabLeaf(leaf: Leaf, source: { width: number; height: number }): Leaf {
   const { style } = leaf, width = parseFloat(style.width), height = parseFloat(style.height);
-  const boxWidth = Math.round(width / SLAB_BOX_DIVISOR), boxHeight = Math.round(height / SLAB_BOX_DIVISOR), matrix = /^matrix3d\((.*)\)$/u.exec(style.transform);
+  const boxWidth = Math.round(source.width / 2 / SLAB_BOX_DIVISOR), boxHeight = Math.round(source.height / 2 / SLAB_BOX_DIVISOR), matrix = /^matrix3d\((.*)\)$/u.exec(style.transform);
   if (!matrix) throw new TypeError(`Slab ${leaf.id} has no matrix3d.`);
   const m = matrix[1]!.split(',').map(Number);
   for (let i = 0; i < 4; i++) { m[i] = +(m[i]! * width / boxWidth).toFixed(6); m[i + 4] = +(m[i + 4]! * height / boxHeight).toFixed(6); }
-  return { ...leaf, widthPx: Math.round(leaf.widthPx / SLAB_IMAGE_DIVISOR), heightPx: Math.round(leaf.heightPx / SLAB_IMAGE_DIVISOR),
+  return { ...leaf, widthPx: Math.round(source.width / SLAB_IMAGE_DIVISOR), heightPx: Math.round(source.height / SLAB_IMAGE_DIVISOR),
     style: { ...style, width: `${boxWidth}px`, height: `${boxHeight}px`, backgroundSize: `${boxWidth}px ${boxHeight}px`, transform: `matrix3d(${m.join(',')})` } };
 }
 
 /** A slab image at its delivered size. */
-export async function slabImage(file: string): Promise<{ bytes: Buffer; width: number; height: number }> {
+export async function slabImage(file: string): Promise<{ bytes: Buffer; width: number; height: number; source: { width: number; height: number } }> {
   const { width, height } = await sharp(file).metadata(), size = { width: Math.round(width! / SLAB_IMAGE_DIVISOR), height: Math.round(height! / SLAB_IMAGE_DIVISOR) };
-  return { bytes: await sharp(file).resize(size.width, size.height, { kernel: 'lanczos3' }).png({ compressionLevel: 9 }).toBuffer(), ...size };
+  return { bytes: await sharp(file).resize(size.width, size.height, { kernel: 'lanczos3' }).png({ compressionLevel: 9 }).toBuffer(), ...size, source: { width: width!, height: height! } };
 }
