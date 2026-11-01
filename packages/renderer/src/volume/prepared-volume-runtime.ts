@@ -118,6 +118,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   let destroyed = false;
   let previousPerspective = '', previousOrigin = '', previousTransform = '';
   let previousClipView = '';
+  // What the presentation's fade weighs each stack by, when its owner fades the stacks instead of a surface round them.
+  let completedGain = 1, previousGain = 1;
   let previousStrengths: ReturnType<typeof axisWeights> | null = null;
   let previousOrientation: readonly number[] | null = null;
   const rootVisible: (boolean | null)[] = roots.map(() => null), rootOpacity = roots.map(() => '');
@@ -249,10 +251,10 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     // Optical length depends on direction; thin-volume mixing also follows
     // distance. Compare their values so pure zoom can update the handover while
     // unchanged coefficients still leave retained optical copies untouched.
-    if (previousOrientation?.every((value, index) => value === world.pose.orientationXyzw[index]) &&
+    if (completedGain === previousGain && previousOrientation?.every((value, index) => value === world.pose.orientationXyzw[index]) &&
       previousStrengths && previousStrengths.every((value, index) =>
       value.weight === strengths[index]!.weight && value.opticalGain === strengths[index]!.opticalGain)) return;
-    previousStrengths = strengths;
+    previousStrengths = strengths; previousGain = completedGain;
     previousOrientation = [...world.pose.orientationXyzw];
     retire.published();
 
@@ -261,7 +263,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     for (let index = 0; index < roots.length; index++) {
       const root = roots[index]!;
       const { weight, opticalGain } = strengths[index]!;
-      const visible = weight > 0, opacity = String(opacities[index]);
+      const visible = weight > 0, opacity = String(opacities[index]! * completedGain);
       // A stack turned to is displayed by the join, with its first slices.
       if (rootVisible[index] !== visible) rootVisible[index] = visible;
       if (rootOpacity[index] !== opacity) { root.style.opacity = opacity; rootOpacity[index] = opacity; }
@@ -320,7 +322,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     if (pendingTextures[axis]!.has(leaf)) pendingTextures[axis]!.set(leaf, url);
     else for (const node of leaf.nodes) node.style.backgroundImage = `url("${escapeUrl(url)}")`;
   };
-  return Object.freeze({ publish, setTexture, setTextures(urls: readonly string[]) {
+  return Object.freeze({ publish, setCompletedGain(gain: number) { completedGain = gain; }, setTexture, setTextures(urls: readonly string[]) {
     if (urls.length !== materialLeaves.length || urls.some(url => typeof url !== 'string' || !url))
       throw new TypeError('Prepared material texture count or URL is invalid.');
     urls.forEach((url, index) => setTexture(index, url));

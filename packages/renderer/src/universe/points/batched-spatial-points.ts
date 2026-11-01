@@ -1,4 +1,4 @@
-import { leanMotion } from '../clouds/lean-motion.js';
+import { leanMotion } from '../../rendering/loading/lean-motion.js';
 import { presentPhysicalPoseInVolume, cssCameraAxesFromOrientation } from '@cssearth/engine';
 import { type DensityVolumeFrame, type VolumeVector, type PreparedPointTransmission } from '@cssearth/objects';
 import { pointTransmissionAt, transmissionPaints, transmissionLookup } from './prepared-transmission.js';

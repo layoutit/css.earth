@@ -5,7 +5,7 @@ import { encodeCloudPoints, encodeCloudSegments, type PreparedBank, type Prepare
 import { packPreparedBank } from '@cssearth/objects/node';
 import { createCloudPoints, mountCloudOverlay } from './cloud-points.js';
 import { retainedStyle } from './cloud-overlay-layer.js';
-import { leanMotion } from './lean-motion.js';
+import { leanMotion } from '../../rendering/loading/lean-motion.js';
 import { readPreparedHere } from '../../prepared-data/readers.js';
 import { cloudOverlayReader, type CloudOverlayData } from './cloud-overlay-reader.js';
 
