@@ -532,6 +532,14 @@
       }
     },
     {
+      "id": "retained-evidence-23",
+      "path": "src/objects/lmc-volume/source/compact-delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
       "id": "document-29",
       "path": "src/objects/lmc-volume/source/compact/emission-field.json.gz",
       "sourceBinding": {
