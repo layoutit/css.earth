@@ -326,10 +326,10 @@ test('a warped group writes only its one transform between paints, repaints as t
   const shifted = (text: string) => text.replace(/translate\(([-\d.]+)px,([-\d.]+)px\)/u, (_, x, y) => `translate(${(+x - margin).toFixed(1)}px,${(+y - margin).toFixed(1)}px)`);
   assert.deepEqual(boardsOf(warped).map(shifted), boardsOf(exact), 'rest paints the same boards as an unwarped group, offset by the margin');
   assert.equal(warped.root.style.transform, 'translateZ(0)');
-  for (let frame = 1; frame <= 5; frame++) warped.place(orbitAt(.5 + frame));
+  for (let frame = 1; frame <= 5; frame++) warped.place(orbitAt(.5 + frame * 1.5));
   const held = boardsOf(warped);
   assert.match(warped.root.style.transform, /^matrix3d\(/u);
-  warped.place(orbitAt(.5 + 6));
+  warped.place(orbitAt(.5 + 9));
   assert.notDeepEqual(boardsOf(warped), held, 'the sixth frame past a stale paint repaints');
   assert.equal(warped.root.style.transform, 'translateZ(0)');
 });

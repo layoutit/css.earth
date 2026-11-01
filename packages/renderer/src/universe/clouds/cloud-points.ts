@@ -20,7 +20,7 @@ const RETRY_MS = 2000, RETRIES = 4;
  * or a scale past DEGENERATE_SCALE. The paint margin keeps a turn's edge in paint until then, as a share of the viewport
  * width on each side. A plane seen more steeply than EDGE_ON_COSINE warps as a plane facing the camera instead.
  */
-const STALE_RADIANS = 4 * Math.PI / 180, STALE_SCALE = 1.15, DEGENERATE_SCALE = 2, MIN_PAINT_FRAMES = 6, PAINT_MARGIN = .125, EDGE_ON_COSINE = .35;
+const STALE_RADIANS = 6 * Math.PI / 180, STALE_SCALE = 1.15, DEGENERATE_SCALE = 2, MIN_PAINT_FRAMES = 6, PAINT_MARGIN = .125, EDGE_ON_COSINE = .35;
 
 /**
  * A dataset's overlay bank (`prepared/<id>.bin`, read by the data worker: cloud-overlay-reader.ts), drawn over its image

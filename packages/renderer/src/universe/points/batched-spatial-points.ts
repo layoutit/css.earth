@@ -22,8 +22,8 @@ export const pointPaint = (style: BatchedSpatialPointStyle) =>
  * points of the list. */
 /** Below this a point's move on screen is invisible, so a paint is kept. */
 const MAX_PARALLAX_PIXELS = .25;
-/** In lean motion (lean-motion.ts) a travelling camera keeps a paint this many frames before the dots catch up with its travel, or until the camera pauses. */
-const LEAN_TRAVEL_FRAMES = 6;
+/** In lean motion (lean-motion.ts) a travelling camera keeps a paint at least this many frames, and until the dots are this far behind its travel, or the camera pauses. */
+const LEAN_TRAVEL_FRAMES = 6, LEAN_TRAVEL_PIXELS = 6;
 /** Dots are painted this share of the view beyond each edge: a turn warps them into view before the exact repaint, so a
  * drag shows no hole at its leading edge (content is resident a margin before it enters the view,
  * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. A travelling camera repaints
@@ -349,8 +349,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       const shift = Math.hypot(...local.positionUnits.map((value, axis) => value - painted!.position[axis]!));
       const lean = !forced && !exact && units === null && leanMotion(document);
       if (lean) framesKept++;
-      const parallaxKept = shift > 0 && parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) >= MAX_PARALLAX_PIXELS;
-      const still = !parallaxKept || (lean && framesKept < LEAN_TRAVEL_FRAMES);
+      const parallax = shift > 0 ? parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) : 0, parallaxKept = parallax >= MAX_PARALLAX_PIXELS;
+      const still = !parallaxKept || (lean && (framesKept < LEAN_TRAVEL_FRAMES || parallax < LEAN_TRAVEL_PIXELS));
       if (still && parallaxKept) { owed = true; settleAfterPause(); }
       const same = counts.every((count, index) => count === painted!.counts[index]) && keeps.every((keep, index) => keep === painted!.keeps[index])
         && hiddens.every((hidden, index) => hidden === painted!.hiddens[index]);
