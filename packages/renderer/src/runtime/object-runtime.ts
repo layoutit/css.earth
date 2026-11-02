@@ -384,7 +384,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           return committed;
         }, onError: error => datasetEffects ? datasetEffects.error(error) : console.error(error),
         // A failed early read is read again, and reported, when the dataset is selected.
-        onIntent: datasetId => { loadPreparedDataset(definition, datasetId).catch(() => {}); } });
+        onIntent: datasetId => { loadPreparedDataset(definition, datasetId).catch(() => {}); },
+        onAhead: datasetId => selection?.warmAhead(datasetId) });
       context.own(() => controls?.destroy({ preserveControls }));
       // A claimed preflight bank already completed and released default startup.
       // Re-running it would pin obsolete lighting rows beside the incoming view.

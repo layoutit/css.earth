@@ -42,6 +42,8 @@ export function createPreparedResidency({
   const images = createPreparedImageStore({ pools: assets.pools, ...(createImage ? { createImage } : {}) });
   const cache = new Map<string, CacheEntry>(), mount = new Set<string>(), warmed = new Set<string>(), tickets = new WeakMap<PreparedResidencyTicket, TicketState>();
   let committed = new Set<string>(), used = new Set<string>(), startup = new Set<string>(), warm: string[] = [];
+  /** Optional, like `warm`: what the selection expects to ask for next (`warmAhead`). The next demand drops it. */
+  let ahead: string[] = [];
   let pending: TicketState | null = null, destroyed = false, frameReads: Set<string> | null = null, sequence = 0, decodes = 0, paintDecodeChecks = 0;
 
   function assetFor(key: string): PreparedResourceEntry {
@@ -145,7 +147,7 @@ export function createPreparedResidency({
   function reconcileDemand(stabilize: boolean) {
     const protectedSet = protectedKeys();
     requireCapacity(protectedSet);
-    const desired = new Set([...protectedSet, ...warm]);
+    const desired = new Set([...protectedSet, ...warm, ...ahead]);
     const errors = [];
     for (const [key, entry] of cache) {
       // Cache completed datasets, not abandoned native decode jobs. A newer
@@ -162,7 +164,7 @@ export function createPreparedResidency({
         // Retain the published and requested materials. Optional prewarm is
         // lower priority than required demand, including pending native work.
         const victims = [...cache.values()].filter(entry => assetFor(entry.key).pool === asset.pool &&
-          !protectedSet.has(entry.key) && (!warm.includes(entry.key) || protectedSet.has(key)))
+          !protectedSet.has(entry.key) && (!(warm.includes(entry.key) || ahead.includes(entry.key)) || protectedSet.has(key)))
           .sort((a, b) => a.order - b.order);
         for (const victim of victims) {
           try { release(victim.key); } catch (error) { errors.push(error); }
@@ -237,6 +239,15 @@ export function createPreparedResidency({
         if (asset) published.prefetch(key, asset.url);
       }
     },
+    /** Loads what the next demand is expected to require while the committed one stays on screen: the next date of a
+     * playing sequence. Optional, like prewarm: it never evicts protected or prewarmed resources, a key beyond a pool's
+     * capacity or decoded-byte budget is left for its own demand, and the next `request` drops the set, so that demand's
+     * required keys load first. Keys already loading for it carry on; an empty list drops the set. */
+    warmAhead(keys: readonly string[]) {
+      if (destroyed) return;
+      ahead = [...requireKeys(keys)];
+      reconcile();
+    },
     finishStartup() {
       warm = [...startup].filter(key => policyFor(assetFor(key).pool).retention !== "warm");
       try { releaseWarmed(startup); } finally { startup.clear(); }
@@ -258,6 +269,7 @@ export function createPreparedResidency({
       const resident = idle.filter(key => !warmed.delete(key));
       requireCapacity(protectedKeys(required));
       retirePending();
+      ahead = [];
       let resolveState!: TicketState["resolve"];
       const promise = new Promise<PreparedResidencyTicket | null>(resolve => { resolveState = resolve; });
       const state: TicketState = { required, prewarm, ready: false, retired: false, resolve: resolveState };
@@ -323,7 +335,7 @@ export function createPreparedResidency({
     stats() {
       return Object.freeze({ decodes, paintDecodeChecks, committed: Object.freeze([...committed]),
         pending: Object.freeze([...(pending?.required ?? [])]), used: Object.freeze([...used]),
-        warmed: Object.freeze([...warmed]),
+        warmed: Object.freeze([...warmed]), ahead: Object.freeze([...ahead]),
         pools: Object.freeze([...policies.values()].map(policy => Object.freeze({
           ...policy, keys: Object.freeze([...cache.keys()].filter(key => assetFor(key).pool === policy.id)),
           resident: urls(cache.keys(), policy.id).size,
@@ -344,7 +356,7 @@ export function createPreparedResidency({
         }
       });
       try { images.destroy(); } catch (error) { errors.push(error); }
-      startup.clear(); committed.clear(); used.clear(); mount.clear(); warmed.clear();
+      startup.clear(); committed.clear(); used.clear(); mount.clear(); warmed.clear(); ahead = [];
       if (errors.length) throw new AggregateError(errors, "Prepared residency cleanup failed.");
     },
   });

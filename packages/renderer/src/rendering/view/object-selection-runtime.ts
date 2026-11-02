@@ -71,7 +71,7 @@ export function createObjectSelectionRuntime({
   /** The one request in flight; a newer request supersedes it. */
   let active: SelectionRequest | null = null, destroyed = false, started = false, error: string | null = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;
-  let presentationHolds = 0;
+  let presentationHolds = 0, aheadRequests = 0;
   let resumed = Promise.resolve(), resumePresentation = () => {};
   const live = () => !destroyed && !lifetime.disposed;
   const state = (): Readonly<ObjectSelectionState> => Object.freeze({ desired, committed, plan: committedPlan, committedBy,
@@ -295,8 +295,26 @@ export function createObjectSelectionRuntime({
         run(committed, "frame").catch(failure => { if (live()) onMaterialError(failure); });
       } catch (failure) { if (live()) onFatalError(failure); throw failure; }
     },
+    /** Loads the images a step to `datasetId` would require, resolved at the committed view, while the committed selection
+     * stays on screen: the next date of a playing sequence. It reads the dataset's tables first when they travel apart.
+     * Optional work: an active request or a later call supersedes it, the step's own request drops it
+     * (`residency.warmAhead`), and a failure only leaves that step to load when it is selected. `null` drops it. */
+    warmAhead(datasetId: string | null) {
+      const call = ++aheadRequests;
+      if (!live()) return;
+      if (datasetId === null || !committed) { residency.warmAhead([]); return; }
+      const next = reduceObjectSelection(committed, requireObjectAction(definition.controls, { kind: 'dataset', id: datasetId }));
+      void (async () => {
+        if (preparedDatasetPending(definition, next)) {
+          if (!readDatasetTables) return;
+          await readDatasetTables(datasetId);
+        }
+        if (!live() || call !== aheadRequests || active || !view) return;
+        residency.warmAhead(resolvePreparedPresentation(definition, { selection: next, view, previousPlan: committedPlan }).required);
+      })().catch(failure => { if (live()) onMaterialError(failure); });
+    },
     state,
-    stats: () => Object.freeze({ ...state(), requests, passes, commits, framePublications, presentationHolds, destroyed }),
+    stats: () => Object.freeze({ ...state(), requests, passes, commits, framePublications, presentationHolds, aheadRequests, destroyed }),
     destroy() {
       if (destroyed) return;
       destroyed = true;
