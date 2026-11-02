@@ -65,7 +65,7 @@ function sequence(autoplay = true) {
   Object.defineProperty(form, 'elements', { value: [...form.querySelectorAll('button')] });
   let state: ObjectSelectionState = { desired: { datasetId: 'last' }, committed: { datasetId: 'last' }, committedBy: null,
     plan: null, pending: false, loadingMaterial: false, ready: true, error: null, viewRevision: null };
-  const actions: string[] = [], framed: boolean[] = [];
+  const actions: string[] = [], framed: boolean[] = [], ahead: (string | null)[] = [];
   const binding = createObjectControlBinding({ stage: document.querySelector('main')!,
     controls: { datasets: { defaultDataset: 'last', controls: ids.map(id => ({ id, label: id })) }, settings: null },
     initialSelection: state.desired, getState: () => state,
@@ -74,10 +74,10 @@ function sequence(autoplay = true) {
       actions.push(action.id); framed.push(options?.frameCamera ?? true);
       state = { ...state, desired: { datasetId: action.id }, pending: true };
       binding.publish();
-    }, onError: error => { throw error; } });
+    }, onAhead: datasetId => ahead.push(datasetId), onError: error => { throw error; } });
   binding.setReady();
   const click = (selector: string) => document.querySelector(selector)!.dispatchEvent(new Event('click', { cancelable: true }));
-  return { binding, document, actions, framed, click,
+  return { binding, document, actions, framed, ahead, click,
     commit() { state = { ...state, committed: state.desired, pending: false }; binding.publish(); },
     hide() { Object.defineProperty(document, 'hidden', { value: true }); document.dispatchEvent(new Event('visibilitychange')); } };
 }
@@ -110,6 +110,35 @@ test('sequence playback wraps, waits for the pending map, and pauses without ano
   h.click('[value="last"]'); h.commit();
   mock.timers.tick(1500);
   assert.deepEqual(h.actions, ['first', 'last', 'other', 'last']);
+  h.binding.destroy();
+});
+
+test('a playing sequence names the step it shows next while the current one holds, and drops it when it pauses', () => {
+  mock.timers.enable({ apis: ['setTimeout', 'setInterval', 'setImmediate', 'Date'] });
+  const h = sequence();
+  h.binding.publish();
+  assert.deepEqual(h.ahead, []);
+  h.click('#details-last [data-dataset-play]');
+  // The hold starts with the press, and the step after the last wraps to the first.
+  assert.deepEqual(h.ahead, ['first']);
+  mock.timers.tick(1500);
+  h.binding.publish();
+  assert.deepEqual(h.ahead, ['first']);
+  h.commit();
+  assert.deepEqual(h.ahead, ['first', 'last']);
+  h.click('#details-first [data-dataset-play]');
+  assert.deepEqual(h.ahead, ['first', 'last', null]);
+  h.binding.destroy();
+});
+
+for (const reason of ['manual', 'hidden', 'unready'] as const) test(`stopping on ${reason} drops the step warmed ahead`, () => {
+  mock.timers.enable({ apis: ['setTimeout', 'setInterval', 'setImmediate', 'Date'] });
+  const h = sequence();
+  h.click('#details-last [data-dataset-play]');
+  if (reason === 'manual') { h.click('[value="other"]'); h.commit(); }
+  if (reason === 'hidden') h.hide();
+  if (reason === 'unready') h.binding.setReady(false);
+  assert.deepEqual(h.ahead, ['first', null]);
   h.binding.destroy();
 });
 

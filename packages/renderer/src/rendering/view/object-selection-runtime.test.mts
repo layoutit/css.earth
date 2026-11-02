@@ -155,6 +155,24 @@ test("A/B/A dataset races retain the real active page group and only the latest 
   assert.equal(h.commits.some(value => value.selection.datasetId === "topography"), false);
   obsolete.reject(new Error("late")); await flush(); assert.deepEqual(h.fatal, []);
 });
+test("a step warmed ahead loads its pages while the committed dataset stays on screen, and its selection loads none again", async t => {
+  const h = harness(); t.after(h.restore); await h.ready();
+  const before = h.atmosphereTarget().style.backgroundImage, committedPlan = h.coordinator.state().plan;
+  h.coordinator.warmAhead("topography"); await h.resolveJobs();
+  assert.equal(h.coordinator.state().committed?.datasetId, "normal");
+  assert.equal(h.coordinator.state().plan, committedPlan);
+  assert.equal(h.atmosphereTarget().style.backgroundImage, before);
+  const ahead = h.resources.stats().ahead;
+  assert.ok(ahead.length > 0 && ahead.every(key => h.resources.resources.has(key)));
+  const loaded = new Set(h.jobs.map(job => job.url)), count = h.jobs.length;
+  const request = h.dataset("topography"); await h.resolveJobs(); assert.equal(await request, true);
+  assert.deepEqual(h.resources.stats().ahead, []);
+  // The selection decodes its resident pages once more off the paint, and loads no page it warmed.
+  assert.ok(h.jobs.slice(count).every(job => loaded.has(job.url)));
+  const plan = h.coordinator.state().plan; assert.ok(plan);
+  assert.ok(ahead.every(key => plan.required.includes(key)));
+  h.coordinator.warmAhead(null); assert.deepEqual(h.resources.stats().ahead, []);
+});
 test("view changes during pending dataset decoding publish current registration and commit current material demand", async t => {
   const h = harness(); t.after(h.restore); await h.ready();
   const before = h.atmosphereTarget().style.backgroundImage, frames = h.frameCount();

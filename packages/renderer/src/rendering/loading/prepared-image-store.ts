@@ -19,6 +19,8 @@ interface PoolState extends PreparedImagePool { active: number; pending: number;
 interface ImageSlot { image: PreparedImage; entry: ImageEntry | null; }
 interface ImageReceipt { entry: ImageEntry; pool: PoolState; promise: Promise<PreparedImage | null>; resolve(value: PreparedImage | null): void; reject(reason: unknown): void; }
 interface ImageEntry { url: string; pool: PoolState; owners: Map<PreparedImageLease, ImageReceipt>; started: boolean; ready: boolean; retired: boolean; slot: ImageSlot | null; loaded?: boolean; stopLoading?: () => void; handedOff?: boolean; }
+/** The downloads a pool keeps in flight, decoded or waiting to decode, when its decode concurrency is lower. */
+export const DOWNLOAD_WINDOW = 24;
 
 /** `retry`: whether a failed decode is still wanted, and so tried once more. */
 export async function decodePreparedImage(image: PreparedImage, selectedUrl: string, retry: () => boolean = () => false) {
@@ -126,9 +128,15 @@ export function createPreparedImageStore({
     settle(entry, error);
   }
 
-  // A small window overlaps transport with decoding without accumulating every
-  // requested image. Pool capacity and decode concurrency remain authoritative.
-  const downloadLimit = (pool: PoolState) => Math.min(pool.capacity, Math.max(6, pool.concurrency));
+  // A window overlaps transport with decoding without accumulating every
+  // requested image. Pool capacity and decode concurrency remain authoritative,
+  // and a decoded-byte budget is held by residency before a load is asked for.
+  // The asset host speaks HTTP/2, so the window, not the browser, paced a step of
+  // Earth's ENSO sequence: its 72 pages came in waves of six, about 2.5 s on
+  // css.earth. Fetched from Cloudflare's cache, the same 72 took 442 ms six at a
+  // time, 167 to 191 ms 24 at a time and 153 to 159 ms all at once (Chrome,
+  // 2026-11-02).
+  const downloadLimit = (pool: PoolState) => Math.min(pool.capacity, Math.max(DOWNLOAD_WINDOW, pool.concurrency));
 
   function startDownload(entry: ImageEntry, image: PreparedImage) {
     // Decode-only image adapters have no separate load notification.

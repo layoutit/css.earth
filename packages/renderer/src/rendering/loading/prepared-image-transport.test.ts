@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createPreparedImageStore, type PreparedImage } from './prepared-image-store.js';
+import { DOWNLOAD_WINDOW, createPreparedImageStore, type PreparedImage } from './prepared-image-store.js';
 
 class NetworkImage implements PreparedImage {
   src = '';
@@ -20,14 +20,14 @@ const flush = async () => { for (let i = 0; i < 8; i++) await Promise.resolve();
 function harness() {
   const images: NetworkImage[] = [];
   const store = createPreparedImageStore({ createImage: () => { const image = new NetworkImage(); images.push(image); return image; },
-    pools: [{ id: 'pages', capacity: 20, concurrency: 2, reuse: true }] });
+    pools: [{ id: 'pages', capacity: DOWNLOAD_WINDOW + 16, concurrency: 2, reuse: true }] });
   return { images, store, lease: store.createLease() };
 }
 
 test('downloads overlap while explicit decoding and pending work remain bounded', async () => {
   const { images, store, lease } = harness();
-  const requests = Array.from({ length: 9 }, (_, i) => lease.load(`/${i}.webp`, { pool: 'pages' }));
-  assert.equal(images.length, 6);
+  const requests = Array.from({ length: DOWNLOAD_WINDOW + 3 }, (_, i) => lease.load(`/${i}.webp`, { pool: 'pages' }));
+  assert.equal(images.length, DOWNLOAD_WINDOW);
   assert.equal(images.reduce((sum, image) => sum + image.decodeCalls, 0), 0);
   // A slow first request cannot hold a decode slot away from later downloads.
   images[1].emit('load'); images[2].emit('load'); images[3].emit('load');
@@ -35,9 +35,9 @@ test('downloads overlap while explicit decoding and pending work remain bounded'
   assert.equal(images[1].decodeCalls, 1); assert.equal(images[2].decodeCalls, 1);
   assert.equal(images[3].decodeCalls, 0);
   images[1].completeDecode(); await flush();
-  assert.equal(images.length, 7);
+  assert.equal(images.length, DOWNLOAD_WINDOW + 1);
   assert.equal(images[3].decodeCalls, 1);
-  assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { active: 2, pending: 6 });
+  assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { active: 2, pending: DOWNLOAD_WINDOW });
   store.destroy();
   assert.equal((await Promise.all(requests)).filter(Boolean).length, 1);
   assert.equal(images.every(image => image.src === ''), true);
@@ -73,11 +73,11 @@ test('a network failure releases its pending slot and rejects every owner', asyn
 test('budgeted pools overlap admitted downloads without raising explicit decode concurrency', () => {
   const images: NetworkImage[] = [];
   const store = createPreparedImageStore({ createImage: () => { const image = new NetworkImage(); images.push(image); return image; },
-    pools: [{ id: 'large', capacity: 20, concurrency: 2, reuse: true, maximumDecodedBytes: 1024 }] });
+    pools: [{ id: 'large', capacity: DOWNLOAD_WINDOW + 16, concurrency: 2, reuse: true, maximumDecodedBytes: 1024 }] });
   const lease = store.createLease();
-  for (let i = 0; i < 9; i++) void lease.load(`/${i}.webp`, { pool: 'large' });
-  assert.equal(images.length, 6);
+  for (let i = 0; i < DOWNLOAD_WINDOW + 3; i++) void lease.load(`/${i}.webp`, { pool: 'large' });
+  assert.equal(images.length, DOWNLOAD_WINDOW);
   for (const image of images) image.emit('load');
-  assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { pending: 6, active: 2 });
+  assert.partialDeepStrictEqual(store.ownershipStats().pools[0], { pending: DOWNLOAD_WINDOW, active: 2 });
   store.destroy();
 });

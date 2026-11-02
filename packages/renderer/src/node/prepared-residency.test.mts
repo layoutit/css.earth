@@ -112,6 +112,45 @@ test('decoded byte budget evicts completed pages before admitting an atomic repl
   assert.throws(() => manager.request({ required: ['0', '1', '2'] }), /capacity/);
   manager.destroy();
 });
+test('a step warmed ahead loads within the decoded budget, serves its own demand and yields to any other', async () => {
+  // Three dates of two pages each, and room for two dates, as a paged body's sequence has.
+  const assets = catalog(['/d1-a.webp', '/d1-b.webp', '/d2-a.webp', '/d2-b.webp', '/d3-a.webp', '/d3-b.webp'], { capacity: 6, eviction: 'capacity' });
+  assets.pools[0].maximumDecodedBytes = 16;
+  assets.entries.forEach(entry => { entry.decodedBytes = 4; });
+  const { manager, commit, complete, images } = harness(assets);
+  await commit(['0', '1']);
+  manager.warmAhead(['2', '3']);
+  await complete();
+  assert.equal(manager.resources.has('2') && manager.resources.has('3'), true);
+  assert.deepEqual(manager.stats().ahead, ['2', '3']);
+  const loaded = images.length;
+  await commit(['2', '3']);
+  assert.equal(images.length, loaded, 'The step it warmed loads nothing again');
+  assert.deepEqual(manager.stats().ahead, [], 'and its demand drops the set');
+  // The next date evicts the date before, never the one on screen.
+  manager.warmAhead(['4', '5']);
+  assert.equal(manager.resources.has('0'), false);
+  assert.deepEqual(manager.stats().pools[0].keys, ['2', '3', '4', '5']);
+  // A reader choosing another date drops the unfinished warm-up before their date loads.
+  const chosen = manager.request({ required: ['0', '1'] });
+  assert.deepEqual(manager.stats().ahead, []);
+  await complete();
+  assert.equal(await chosen.ready, chosen);
+  assert.equal(manager.resources.has('4') || manager.resources.has('5'), false);
+  manager.destroy();
+});
+test('a step warmed ahead never evicts the committed one to fit', async () => {
+  const assets = catalog(['/d1.webp', '/d2.webp'], { capacity: 2, eviction: 'capacity' });
+  assets.pools[0].maximumDecodedBytes = 4;
+  assets.entries.forEach(entry => { entry.decodedBytes = 4; });
+  const { manager, commit, complete } = harness(assets);
+  await commit(['0']);
+  manager.warmAhead(['1']);
+  await complete();
+  assert.equal(manager.resources.has('0'), true);
+  assert.equal(manager.resources.has('1'), false, 'Over the budget, the next date waits for its own demand');
+  manager.destroy();
+});
 // Mars's lighting track is the atmospheric single-sheet bank (authored atmosphere, predating the
 // #294/#297 frame refactors): it carries no rows, so it gets its own residency case below instead.
 // Mercury's is the sphere lane's one sheet (below): it carries no rows either.

@@ -11,6 +11,8 @@ export interface ObjectControlBindingOptions {
   onAction(action: ObjectAction, options?: { frameCamera: boolean }): unknown; onError(error: unknown): void;
   /** The reader points at, touches or focuses a dataset's control: its tables may start loading before the click. */
   onIntent?(datasetId: string): void;
+  /** A playing sequence holds a step: the step it shows next may load meanwhile. `null` when playback stops. */
+  onAhead?(datasetId: string | null): void;
 }
 type SettingInput = HTMLInputElement | HTMLButtonElement;
 const isInput = (element: SettingInput): element is HTMLInputElement => element.tagName === "INPUT";
@@ -92,7 +94,7 @@ export function publishDatasetSelection(buttons: readonly HTMLButtonElement[], d
 
 import { requireObjectAction } from '../../runtime/object-contract.js';
 
-export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, onIntent }: ObjectControlBindingOptions) {
+export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, onIntent, onAhead }: ObjectControlBindingOptions) {
   requireObjectControls(controls);
   if (!stage?.ownerDocument || [getState, onAction, onError].some(callback => typeof callback !== "function")) {
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
@@ -170,13 +172,18 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   let ready = false, destroyed = false, lastState: Readonly<ObjectSelectionState> | null = null, actions = 0;
   let revealedDataset: HTMLButtonElement | null = null;
-  let playing: string | null = null, currentGroup: string | null = null;
+  let playing: string | null = null, currentGroup: string | null = null, ahead: string | null = null;
   let playTimer: ReturnType<typeof setTimeout> | null = null;
   function clearPlayTimer() {
     if (playTimer !== null) clearTimeout(playTimer);
     playTimer = null;
   }
-  function stopPlayback() { playing = null; clearPlayTimer(); }
+  function warmAhead(datasetId: string | null) {
+    if (datasetId === ahead) return;
+    ahead = datasetId;
+    onAhead?.(datasetId);
+  }
+  function stopPlayback() { playing = null; clearPlayTimer(); warmAhead(null); }
   function publishPlayback(next: Readonly<ObjectSelectionState>) {
     const step = datasetInputs.find(input => input.value === next.desired.datasetId)
       ?.closest<HTMLElement>('[data-step-group]');
@@ -196,6 +203,10 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
         if (index < 0) { stopPlayback(); publish(); return; }
         act({ kind: 'dataset', id: members[(index + 1) % members.length] });
       }, SEQUENCE_HOLD_MS);
+      // The next step loads while this one holds. Played one after the other, each new date of Earth's ENSO sequence
+      // started loading only when the hold ended and took 0.6 to 5 s more, about 3.3 s a step (css.earth, 2026-11-02).
+      const index = members.indexOf(next.committed?.datasetId ?? '');
+      if (index >= 0) warmAhead(members[(index + 1) % members.length]!);
     }
     for (const input of playInputs) {
       const active = playing === input.dataset.datasetPlay;
